@@ -753,118 +753,11 @@ class FinalModelFlagsEmpty(fbe.FinalModel):
 
 @functools.total_ordering
 class StructSimple(object):
-    __slots__ = "id", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", "f11", "f12", "f13", "f14", "f15", "f16", "f17", "f18", "f19", "f20", "f21", "f22", "f23", "f24", "f25", "f26", "f27", "f28", "f29", "f30", "f31", "f32", "f33", "f34", "f35", "f36", "f37", "f38", "f39", "f40", "f41", "f42", "f43", "f44", 
-
-    def __init__(self, id=0, f1=False, f2=True, f3=0, f4=255, f5='\0', f6='!', f7='\0', f8=chr(0x0444), f9=0, f10=127, f11=0, f12=255, f13=0, f14=32767, f15=0, f16=65535, f17=0, f18=2147483647, f19=0, f20=4294967295, f21=0, f22=9223372036854775807, f23=0, f24=18446744073709551615, f25=0.0, f26=float(123.456), f27=0.0, f28=float(-123.456e+123), f29=decimal.Decimal(0), f30=decimal.Decimal("123456.123456"), f31="", f32="Initial string!", f33=fbe.epoch(), f34=fbe.epoch(), f35=fbe.utc(), f36=uuid.UUID(int=0), f37=uuid.uuid1(), f38=uuid.UUID("123e4567-e89b-12d3-a456-426655440000"), f39=None, f40=None, f41=None, f42=None, f43=None, f44=None):
-        if f29 is None:
-            f29 = decimal.Decimal(0)
-        if f36 is None:
-            f36 = uuid.UUID(int=0)
-        if f39 is None:
-            f39 = proto.OrderSide()
-        if f40 is None:
-            f40 = proto.OrderType()
-        if f41 is None:
-            f41 = proto.Order()
-        if f42 is None:
-            f42 = proto.Balance()
-        if f43 is None:
-            f43 = proto.State()
-        if f44 is None:
-            f44 = proto.Account()
-        self.id = id
-        self.f1 = f1
-        self.f2 = f2
-        self.f3 = f3
-        self.f4 = f4
-        self.f5 = f5
-        self.f6 = f6
-        self.f7 = f7
-        self.f8 = f8
-        self.f9 = f9
-        self.f10 = f10
-        self.f11 = f11
-        self.f12 = f12
-        self.f13 = f13
-        self.f14 = f14
-        self.f15 = f15
-        self.f16 = f16
-        self.f17 = f17
-        self.f18 = f18
-        self.f19 = f19
-        self.f20 = f20
-        self.f21 = f21
-        self.f22 = f22
-        self.f23 = f23
-        self.f24 = f24
-        self.f25 = f25
-        self.f26 = f26
-        self.f27 = f27
-        self.f28 = f28
-        self.f29 = f29
-        self.f30 = f30
-        self.f31 = f31
-        self.f32 = f32
-        self.f33 = f33
-        self.f34 = f34
-        self.f35 = f35
-        self.f36 = f36
-        self.f37 = f37
-        self.f38 = f38
-        self.f39 = f39
-        self.f40 = f40
-        self.f41 = f41
-        self.f42 = f42
-        self.f43 = f43
-        self.f44 = f44
+    def __init__(self):
+        pass
 
     # Struct shallow copy
     def copy(self, other):
-        self.id = other.id
-        self.f1 = other.f1
-        self.f2 = other.f2
-        self.f3 = other.f3
-        self.f4 = other.f4
-        self.f5 = other.f5
-        self.f6 = other.f6
-        self.f7 = other.f7
-        self.f8 = other.f8
-        self.f9 = other.f9
-        self.f10 = other.f10
-        self.f11 = other.f11
-        self.f12 = other.f12
-        self.f13 = other.f13
-        self.f14 = other.f14
-        self.f15 = other.f15
-        self.f16 = other.f16
-        self.f17 = other.f17
-        self.f18 = other.f18
-        self.f19 = other.f19
-        self.f20 = other.f20
-        self.f21 = other.f21
-        self.f22 = other.f22
-        self.f23 = other.f23
-        self.f24 = other.f24
-        self.f25 = other.f25
-        self.f26 = other.f26
-        self.f27 = other.f27
-        self.f28 = other.f28
-        self.f29 = other.f29
-        self.f30 = other.f30
-        self.f31 = other.f31
-        self.f32 = other.f32
-        self.f33 = other.f33
-        self.f34 = other.f34
-        self.f35 = other.f35
-        self.f36 = other.f36
-        self.f37 = other.f37
-        self.f38 = other.f38
-        self.f39 = other.f39
-        self.f40 = other.f40
-        self.f41 = other.f41
-        self.f42 = other.f42
-        self.f43 = other.f43
-        self.f44 = other.f44
         return self
 
     # Struct deep clone
@@ -881,22 +774,16 @@ class StructSimple(object):
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
             return NotImplemented
-        if not self.id == other.id:
-            return False
         return True
 
     def __lt__(self, other):
         if not isinstance(self, other.__class__):
             return NotImplemented
-        if self.id < other.id:
-            return True
-        if self.id == other.id:
-            return False
         return False
 
     @property
     def __key__(self):
-        return self.id, 
+        return ()
 
     def __hash__(self):
         return hash(self.__key__)
@@ -907,126 +794,6 @@ class StructSimple(object):
     def __str__(self):
         sb = list()
         sb.append("StructSimple(")
-        sb.append("id=")
-        sb.append(str(self.id))
-        sb.append(",f1=")
-        sb.append("true" if self.f1 else "false")
-        sb.append(",f2=")
-        sb.append("true" if self.f2 else "false")
-        sb.append(",f3=")
-        sb.append(str(self.f3))
-        sb.append(",f4=")
-        sb.append(str(self.f4))
-        sb.append(",f5=")
-        sb.append("'" + str(self.f5) + "'")
-        sb.append(",f6=")
-        sb.append("'" + str(self.f6) + "'")
-        sb.append(",f7=")
-        sb.append("'" + str(self.f7) + "'")
-        sb.append(",f8=")
-        sb.append("'" + str(self.f8) + "'")
-        sb.append(",f9=")
-        sb.append(str(self.f9))
-        sb.append(",f10=")
-        sb.append(str(self.f10))
-        sb.append(",f11=")
-        sb.append(str(self.f11))
-        sb.append(",f12=")
-        sb.append(str(self.f12))
-        sb.append(",f13=")
-        sb.append(str(self.f13))
-        sb.append(",f14=")
-        sb.append(str(self.f14))
-        sb.append(",f15=")
-        sb.append(str(self.f15))
-        sb.append(",f16=")
-        sb.append(str(self.f16))
-        sb.append(",f17=")
-        sb.append(str(self.f17))
-        sb.append(",f18=")
-        sb.append(str(self.f18))
-        sb.append(",f19=")
-        sb.append(str(self.f19))
-        sb.append(",f20=")
-        sb.append(str(self.f20))
-        sb.append(",f21=")
-        sb.append(str(self.f21))
-        sb.append(",f22=")
-        sb.append(str(self.f22))
-        sb.append(",f23=")
-        sb.append(str(self.f23))
-        sb.append(",f24=")
-        sb.append(str(self.f24))
-        sb.append(",f25=")
-        sb.append(str(self.f25))
-        sb.append(",f26=")
-        sb.append(str(self.f26))
-        sb.append(",f27=")
-        sb.append(str(self.f27))
-        sb.append(",f28=")
-        sb.append(str(self.f28))
-        sb.append(",f29=")
-        if self.f29 is not None:
-            sb.append(str(self.f29))
-        else:
-            sb.append("null")
-        sb.append(",f30=")
-        if self.f30 is not None:
-            sb.append(str(self.f30))
-        else:
-            sb.append("null")
-        sb.append(",f31=")
-        if self.f31 is not None:
-            sb.append("\"" + str(self.f31) + "\"")
-        else:
-            sb.append("null")
-        sb.append(",f32=")
-        if self.f32 is not None:
-            sb.append("\"" + str(self.f32) + "\"")
-        else:
-            sb.append("null")
-        sb.append(",f33=")
-        if self.f33 is not None:
-            sb.append(str(self.f33))
-        else:
-            sb.append("null")
-        sb.append(",f34=")
-        if self.f34 is not None:
-            sb.append(str(self.f34))
-        else:
-            sb.append("null")
-        sb.append(",f35=")
-        if self.f35 is not None:
-            sb.append(str(self.f35))
-        else:
-            sb.append("null")
-        sb.append(",f36=")
-        if self.f36 is not None:
-            sb.append("\"" + str(self.f36) + "\"")
-        else:
-            sb.append("null")
-        sb.append(",f37=")
-        if self.f37 is not None:
-            sb.append("\"" + str(self.f37) + "\"")
-        else:
-            sb.append("null")
-        sb.append(",f38=")
-        if self.f38 is not None:
-            sb.append("\"" + str(self.f38) + "\"")
-        else:
-            sb.append("null")
-        sb.append(",f39=")
-        sb.append(str(self.f39))
-        sb.append(",f40=")
-        sb.append(str(self.f40))
-        sb.append(",f41=")
-        sb.append(str(self.f41))
-        sb.append(",f42=")
-        sb.append(str(self.f42))
-        sb.append(",f43=")
-        sb.append(str(self.f43))
-        sb.append(",f44=")
-        sb.append(str(self.f44))
         sb.append(")")
         return "".join(sb)
 
@@ -1036,53 +803,6 @@ class StructSimple(object):
 
     def __to_json__(self):
         result = dict()
-        result.update(dict(
-            id=self.id, 
-            f1=self.f1, 
-            f2=self.f2, 
-            f3=self.f3, 
-            f4=self.f4, 
-            f5=None if self.f5 is None else ord(self.f5), 
-            f6=None if self.f6 is None else ord(self.f6), 
-            f7=None if self.f7 is None else ord(self.f7), 
-            f8=None if self.f8 is None else ord(self.f8), 
-            f9=self.f9, 
-            f10=self.f10, 
-            f11=self.f11, 
-            f12=self.f12, 
-            f13=self.f13, 
-            f14=self.f14, 
-            f15=self.f15, 
-            f16=self.f16, 
-            f17=self.f17, 
-            f18=self.f18, 
-            f19=self.f19, 
-            f20=self.f20, 
-            f21=self.f21, 
-            f22=self.f22, 
-            f23=self.f23, 
-            f24=self.f24, 
-            f25=self.f25, 
-            f26=self.f26, 
-            f27=self.f27, 
-            f28=self.f28, 
-            f29=self.f29, 
-            f30=self.f30, 
-            f31=self.f31, 
-            f32=self.f32, 
-            f33=self.f33, 
-            f34=self.f34, 
-            f35=self.f35, 
-            f36=self.f36, 
-            f37=self.f37, 
-            f38=self.f38, 
-            f39=self.f39, 
-            f40=self.f40, 
-            f41=self.f41, 
-            f42=self.f42, 
-            f43=self.f43, 
-            f44=self.f44, 
-        ))
         return result
 
     # Create struct from JSON value
@@ -1095,284 +815,12 @@ class StructSimple(object):
         if fields is None:
             return None
         return StructSimple(
-            None if "id" not in fields else fields["id"],
-            None if "f1" not in fields else fields["f1"],
-            None if "f2" not in fields else fields["f2"],
-            None if "f3" not in fields else fields["f3"],
-            None if "f4" not in fields else fields["f4"],
-            None if "f5" not in fields else None if fields["f5"] is None else chr(fields["f5"]),
-            None if "f6" not in fields else None if fields["f6"] is None else chr(fields["f6"]),
-            None if "f7" not in fields else None if fields["f7"] is None else chr(fields["f7"]),
-            None if "f8" not in fields else None if fields["f8"] is None else chr(fields["f8"]),
-            None if "f9" not in fields else fields["f9"],
-            None if "f10" not in fields else fields["f10"],
-            None if "f11" not in fields else fields["f11"],
-            None if "f12" not in fields else fields["f12"],
-            None if "f13" not in fields else fields["f13"],
-            None if "f14" not in fields else fields["f14"],
-            None if "f15" not in fields else fields["f15"],
-            None if "f16" not in fields else fields["f16"],
-            None if "f17" not in fields else fields["f17"],
-            None if "f18" not in fields else fields["f18"],
-            None if "f19" not in fields else fields["f19"],
-            None if "f20" not in fields else fields["f20"],
-            None if "f21" not in fields else fields["f21"],
-            None if "f22" not in fields else fields["f22"],
-            None if "f23" not in fields else fields["f23"],
-            None if "f24" not in fields else fields["f24"],
-            None if "f25" not in fields else fields["f25"],
-            None if "f26" not in fields else fields["f26"],
-            None if "f27" not in fields else fields["f27"],
-            None if "f28" not in fields else fields["f28"],
-            None if "f29" not in fields else None if fields["f29"] is None else decimal.Decimal(fields["f29"]),
-            None if "f30" not in fields else None if fields["f30"] is None else decimal.Decimal(fields["f30"]),
-            None if "f31" not in fields else fields["f31"],
-            None if "f32" not in fields else fields["f32"],
-            None if "f33" not in fields else fields["f33"],
-            None if "f34" not in fields else fields["f34"],
-            None if "f35" not in fields else fields["f35"],
-            None if "f36" not in fields else None if fields["f36"] is None else uuid.UUID(fields["f36"]),
-            None if "f37" not in fields else None if fields["f37"] is None else uuid.UUID(fields["f37"]),
-            None if "f38" not in fields else None if fields["f38"] is None else uuid.UUID(fields["f38"]),
-            None if "f39" not in fields else proto.OrderSide.__from_json__(fields["f39"]),
-            None if "f40" not in fields else proto.OrderType.__from_json__(fields["f40"]),
-            None if "f41" not in fields else proto.Order.__from_json__(fields["f41"]),
-            None if "f42" not in fields else proto.Balance.__from_json__(fields["f42"]),
-            None if "f43" not in fields else proto.State.__from_json__(fields["f43"]),
-            None if "f44" not in fields else proto.Account.__from_json__(fields["f44"]),
         )
 
 
 class FieldModelStructSimple(fbe.FieldModel):
-    __slots__ = "_id", "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", "_f11", "_f12", "_f13", "_f14", "_f15", "_f16", "_f17", "_f18", "_f19", "_f20", "_f21", "_f22", "_f23", "_f24", "_f25", "_f26", "_f27", "_f28", "_f29", "_f30", "_f31", "_f32", "_f33", "_f34", "_f35", "_f36", "_f37", "_f38", "_f39", "_f40", "_f41", "_f42", "_f43", "_f44", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._id = fbe.FieldModelInt32(buffer, 4 + 4)
-        self._f1 = fbe.FieldModelBool(buffer, self._id.fbe_offset + self._id.fbe_size)
-        self._f2 = fbe.FieldModelBool(buffer, self._f1.fbe_offset + self._f1.fbe_size)
-        self._f3 = fbe.FieldModelByte(buffer, self._f2.fbe_offset + self._f2.fbe_size)
-        self._f4 = fbe.FieldModelByte(buffer, self._f3.fbe_offset + self._f3.fbe_size)
-        self._f5 = fbe.FieldModelChar(buffer, self._f4.fbe_offset + self._f4.fbe_size)
-        self._f6 = fbe.FieldModelChar(buffer, self._f5.fbe_offset + self._f5.fbe_size)
-        self._f7 = fbe.FieldModelWChar(buffer, self._f6.fbe_offset + self._f6.fbe_size)
-        self._f8 = fbe.FieldModelWChar(buffer, self._f7.fbe_offset + self._f7.fbe_size)
-        self._f9 = fbe.FieldModelInt8(buffer, self._f8.fbe_offset + self._f8.fbe_size)
-        self._f10 = fbe.FieldModelInt8(buffer, self._f9.fbe_offset + self._f9.fbe_size)
-        self._f11 = fbe.FieldModelUInt8(buffer, self._f10.fbe_offset + self._f10.fbe_size)
-        self._f12 = fbe.FieldModelUInt8(buffer, self._f11.fbe_offset + self._f11.fbe_size)
-        self._f13 = fbe.FieldModelInt16(buffer, self._f12.fbe_offset + self._f12.fbe_size)
-        self._f14 = fbe.FieldModelInt16(buffer, self._f13.fbe_offset + self._f13.fbe_size)
-        self._f15 = fbe.FieldModelUInt16(buffer, self._f14.fbe_offset + self._f14.fbe_size)
-        self._f16 = fbe.FieldModelUInt16(buffer, self._f15.fbe_offset + self._f15.fbe_size)
-        self._f17 = fbe.FieldModelInt32(buffer, self._f16.fbe_offset + self._f16.fbe_size)
-        self._f18 = fbe.FieldModelInt32(buffer, self._f17.fbe_offset + self._f17.fbe_size)
-        self._f19 = fbe.FieldModelUInt32(buffer, self._f18.fbe_offset + self._f18.fbe_size)
-        self._f20 = fbe.FieldModelUInt32(buffer, self._f19.fbe_offset + self._f19.fbe_size)
-        self._f21 = fbe.FieldModelInt64(buffer, self._f20.fbe_offset + self._f20.fbe_size)
-        self._f22 = fbe.FieldModelInt64(buffer, self._f21.fbe_offset + self._f21.fbe_size)
-        self._f23 = fbe.FieldModelUInt64(buffer, self._f22.fbe_offset + self._f22.fbe_size)
-        self._f24 = fbe.FieldModelUInt64(buffer, self._f23.fbe_offset + self._f23.fbe_size)
-        self._f25 = fbe.FieldModelFloat(buffer, self._f24.fbe_offset + self._f24.fbe_size)
-        self._f26 = fbe.FieldModelFloat(buffer, self._f25.fbe_offset + self._f25.fbe_size)
-        self._f27 = fbe.FieldModelDouble(buffer, self._f26.fbe_offset + self._f26.fbe_size)
-        self._f28 = fbe.FieldModelDouble(buffer, self._f27.fbe_offset + self._f27.fbe_size)
-        self._f29 = fbe.FieldModelDecimal(buffer, self._f28.fbe_offset + self._f28.fbe_size)
-        self._f30 = fbe.FieldModelDecimal(buffer, self._f29.fbe_offset + self._f29.fbe_size)
-        self._f31 = fbe.FieldModelString(buffer, self._f30.fbe_offset + self._f30.fbe_size)
-        self._f32 = fbe.FieldModelString(buffer, self._f31.fbe_offset + self._f31.fbe_size)
-        self._f33 = fbe.FieldModelTimestamp(buffer, self._f32.fbe_offset + self._f32.fbe_size)
-        self._f34 = fbe.FieldModelTimestamp(buffer, self._f33.fbe_offset + self._f33.fbe_size)
-        self._f35 = fbe.FieldModelTimestamp(buffer, self._f34.fbe_offset + self._f34.fbe_size)
-        self._f36 = fbe.FieldModelUUID(buffer, self._f35.fbe_offset + self._f35.fbe_size)
-        self._f37 = fbe.FieldModelUUID(buffer, self._f36.fbe_offset + self._f36.fbe_size)
-        self._f38 = fbe.FieldModelUUID(buffer, self._f37.fbe_offset + self._f37.fbe_size)
-        self._f39 = proto.FieldModelOrderSide(buffer, self._f38.fbe_offset + self._f38.fbe_size)
-        self._f40 = proto.FieldModelOrderType(buffer, self._f39.fbe_offset + self._f39.fbe_size)
-        self._f41 = proto.FieldModelOrder(buffer, self._f40.fbe_offset + self._f40.fbe_size)
-        self._f42 = proto.FieldModelBalance(buffer, self._f41.fbe_offset + self._f41.fbe_size)
-        self._f43 = proto.FieldModelState(buffer, self._f42.fbe_offset + self._f42.fbe_size)
-        self._f44 = proto.FieldModelAccount(buffer, self._f43.fbe_offset + self._f43.fbe_size)
-
-    @property
-    def id(self):
-        return self._id
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
-
-    @property
-    def f4(self):
-        return self._f4
-
-    @property
-    def f5(self):
-        return self._f5
-
-    @property
-    def f6(self):
-        return self._f6
-
-    @property
-    def f7(self):
-        return self._f7
-
-    @property
-    def f8(self):
-        return self._f8
-
-    @property
-    def f9(self):
-        return self._f9
-
-    @property
-    def f10(self):
-        return self._f10
-
-    @property
-    def f11(self):
-        return self._f11
-
-    @property
-    def f12(self):
-        return self._f12
-
-    @property
-    def f13(self):
-        return self._f13
-
-    @property
-    def f14(self):
-        return self._f14
-
-    @property
-    def f15(self):
-        return self._f15
-
-    @property
-    def f16(self):
-        return self._f16
-
-    @property
-    def f17(self):
-        return self._f17
-
-    @property
-    def f18(self):
-        return self._f18
-
-    @property
-    def f19(self):
-        return self._f19
-
-    @property
-    def f20(self):
-        return self._f20
-
-    @property
-    def f21(self):
-        return self._f21
-
-    @property
-    def f22(self):
-        return self._f22
-
-    @property
-    def f23(self):
-        return self._f23
-
-    @property
-    def f24(self):
-        return self._f24
-
-    @property
-    def f25(self):
-        return self._f25
-
-    @property
-    def f26(self):
-        return self._f26
-
-    @property
-    def f27(self):
-        return self._f27
-
-    @property
-    def f28(self):
-        return self._f28
-
-    @property
-    def f29(self):
-        return self._f29
-
-    @property
-    def f30(self):
-        return self._f30
-
-    @property
-    def f31(self):
-        return self._f31
-
-    @property
-    def f32(self):
-        return self._f32
-
-    @property
-    def f33(self):
-        return self._f33
-
-    @property
-    def f34(self):
-        return self._f34
-
-    @property
-    def f35(self):
-        return self._f35
-
-    @property
-    def f36(self):
-        return self._f36
-
-    @property
-    def f37(self):
-        return self._f37
-
-    @property
-    def f38(self):
-        return self._f38
-
-    @property
-    def f39(self):
-        return self._f39
-
-    @property
-    def f40(self):
-        return self._f40
-
-    @property
-    def f41(self):
-        return self._f41
-
-    @property
-    def f42(self):
-        return self._f42
-
-    @property
-    def f43(self):
-        return self._f43
-
-    @property
-    def f44(self):
-        return self._f44
 
     # Get the field size
     @property
@@ -1383,51 +831,6 @@ class FieldModelStructSimple(fbe.FieldModel):
     @property
     def fbe_body(self):
         fbe_result = 4 + 4 \
-            + self.id.fbe_size \
-            + self.f1.fbe_size \
-            + self.f2.fbe_size \
-            + self.f3.fbe_size \
-            + self.f4.fbe_size \
-            + self.f5.fbe_size \
-            + self.f6.fbe_size \
-            + self.f7.fbe_size \
-            + self.f8.fbe_size \
-            + self.f9.fbe_size \
-            + self.f10.fbe_size \
-            + self.f11.fbe_size \
-            + self.f12.fbe_size \
-            + self.f13.fbe_size \
-            + self.f14.fbe_size \
-            + self.f15.fbe_size \
-            + self.f16.fbe_size \
-            + self.f17.fbe_size \
-            + self.f18.fbe_size \
-            + self.f19.fbe_size \
-            + self.f20.fbe_size \
-            + self.f21.fbe_size \
-            + self.f22.fbe_size \
-            + self.f23.fbe_size \
-            + self.f24.fbe_size \
-            + self.f25.fbe_size \
-            + self.f26.fbe_size \
-            + self.f27.fbe_size \
-            + self.f28.fbe_size \
-            + self.f29.fbe_size \
-            + self.f30.fbe_size \
-            + self.f31.fbe_size \
-            + self.f32.fbe_size \
-            + self.f33.fbe_size \
-            + self.f34.fbe_size \
-            + self.f35.fbe_size \
-            + self.f36.fbe_size \
-            + self.f37.fbe_size \
-            + self.f38.fbe_size \
-            + self.f39.fbe_size \
-            + self.f40.fbe_size \
-            + self.f41.fbe_size \
-            + self.f42.fbe_size \
-            + self.f43.fbe_size \
-            + self.f44.fbe_size \
 
         return fbe_result
 
@@ -1444,51 +847,6 @@ class FieldModelStructSimple(fbe.FieldModel):
         self._buffer.shift(fbe_struct_offset)
 
         fbe_result = self.fbe_body \
-            + self.id.fbe_extra \
-            + self.f1.fbe_extra \
-            + self.f2.fbe_extra \
-            + self.f3.fbe_extra \
-            + self.f4.fbe_extra \
-            + self.f5.fbe_extra \
-            + self.f6.fbe_extra \
-            + self.f7.fbe_extra \
-            + self.f8.fbe_extra \
-            + self.f9.fbe_extra \
-            + self.f10.fbe_extra \
-            + self.f11.fbe_extra \
-            + self.f12.fbe_extra \
-            + self.f13.fbe_extra \
-            + self.f14.fbe_extra \
-            + self.f15.fbe_extra \
-            + self.f16.fbe_extra \
-            + self.f17.fbe_extra \
-            + self.f18.fbe_extra \
-            + self.f19.fbe_extra \
-            + self.f20.fbe_extra \
-            + self.f21.fbe_extra \
-            + self.f22.fbe_extra \
-            + self.f23.fbe_extra \
-            + self.f24.fbe_extra \
-            + self.f25.fbe_extra \
-            + self.f26.fbe_extra \
-            + self.f27.fbe_extra \
-            + self.f28.fbe_extra \
-            + self.f29.fbe_extra \
-            + self.f30.fbe_extra \
-            + self.f31.fbe_extra \
-            + self.f32.fbe_extra \
-            + self.f33.fbe_extra \
-            + self.f34.fbe_extra \
-            + self.f35.fbe_extra \
-            + self.f36.fbe_extra \
-            + self.f37.fbe_extra \
-            + self.f38.fbe_extra \
-            + self.f39.fbe_extra \
-            + self.f40.fbe_extra \
-            + self.f41.fbe_extra \
-            + self.f42.fbe_extra \
-            + self.f43.fbe_extra \
-            + self.f44.fbe_extra \
 
         self._buffer.unshift(fbe_struct_offset)
 
@@ -1525,278 +883,6 @@ class FieldModelStructSimple(fbe.FieldModel):
 
     # Check if the struct fields are valid
     def verify_fields(self, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.id.fbe_size) > fbe_struct_size:
-            return True
-        if not self.id.verify():
-            return False
-        fbe_current_size += self.id.fbe_size
-
-        if (fbe_current_size + self.f1.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1.verify():
-            return False
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f2.verify():
-            return False
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f3.verify():
-            return False
-        fbe_current_size += self.f3.fbe_size
-
-        if (fbe_current_size + self.f4.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f4.verify():
-            return False
-        fbe_current_size += self.f4.fbe_size
-
-        if (fbe_current_size + self.f5.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f5.verify():
-            return False
-        fbe_current_size += self.f5.fbe_size
-
-        if (fbe_current_size + self.f6.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f6.verify():
-            return False
-        fbe_current_size += self.f6.fbe_size
-
-        if (fbe_current_size + self.f7.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f7.verify():
-            return False
-        fbe_current_size += self.f7.fbe_size
-
-        if (fbe_current_size + self.f8.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f8.verify():
-            return False
-        fbe_current_size += self.f8.fbe_size
-
-        if (fbe_current_size + self.f9.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f9.verify():
-            return False
-        fbe_current_size += self.f9.fbe_size
-
-        if (fbe_current_size + self.f10.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f10.verify():
-            return False
-        fbe_current_size += self.f10.fbe_size
-
-        if (fbe_current_size + self.f11.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f11.verify():
-            return False
-        fbe_current_size += self.f11.fbe_size
-
-        if (fbe_current_size + self.f12.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f12.verify():
-            return False
-        fbe_current_size += self.f12.fbe_size
-
-        if (fbe_current_size + self.f13.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f13.verify():
-            return False
-        fbe_current_size += self.f13.fbe_size
-
-        if (fbe_current_size + self.f14.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f14.verify():
-            return False
-        fbe_current_size += self.f14.fbe_size
-
-        if (fbe_current_size + self.f15.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f15.verify():
-            return False
-        fbe_current_size += self.f15.fbe_size
-
-        if (fbe_current_size + self.f16.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f16.verify():
-            return False
-        fbe_current_size += self.f16.fbe_size
-
-        if (fbe_current_size + self.f17.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f17.verify():
-            return False
-        fbe_current_size += self.f17.fbe_size
-
-        if (fbe_current_size + self.f18.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f18.verify():
-            return False
-        fbe_current_size += self.f18.fbe_size
-
-        if (fbe_current_size + self.f19.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f19.verify():
-            return False
-        fbe_current_size += self.f19.fbe_size
-
-        if (fbe_current_size + self.f20.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f20.verify():
-            return False
-        fbe_current_size += self.f20.fbe_size
-
-        if (fbe_current_size + self.f21.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f21.verify():
-            return False
-        fbe_current_size += self.f21.fbe_size
-
-        if (fbe_current_size + self.f22.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f22.verify():
-            return False
-        fbe_current_size += self.f22.fbe_size
-
-        if (fbe_current_size + self.f23.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f23.verify():
-            return False
-        fbe_current_size += self.f23.fbe_size
-
-        if (fbe_current_size + self.f24.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f24.verify():
-            return False
-        fbe_current_size += self.f24.fbe_size
-
-        if (fbe_current_size + self.f25.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f25.verify():
-            return False
-        fbe_current_size += self.f25.fbe_size
-
-        if (fbe_current_size + self.f26.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f26.verify():
-            return False
-        fbe_current_size += self.f26.fbe_size
-
-        if (fbe_current_size + self.f27.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f27.verify():
-            return False
-        fbe_current_size += self.f27.fbe_size
-
-        if (fbe_current_size + self.f28.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f28.verify():
-            return False
-        fbe_current_size += self.f28.fbe_size
-
-        if (fbe_current_size + self.f29.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f29.verify():
-            return False
-        fbe_current_size += self.f29.fbe_size
-
-        if (fbe_current_size + self.f30.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f30.verify():
-            return False
-        fbe_current_size += self.f30.fbe_size
-
-        if (fbe_current_size + self.f31.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f31.verify():
-            return False
-        fbe_current_size += self.f31.fbe_size
-
-        if (fbe_current_size + self.f32.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f32.verify():
-            return False
-        fbe_current_size += self.f32.fbe_size
-
-        if (fbe_current_size + self.f33.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f33.verify():
-            return False
-        fbe_current_size += self.f33.fbe_size
-
-        if (fbe_current_size + self.f34.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f34.verify():
-            return False
-        fbe_current_size += self.f34.fbe_size
-
-        if (fbe_current_size + self.f35.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f35.verify():
-            return False
-        fbe_current_size += self.f35.fbe_size
-
-        if (fbe_current_size + self.f36.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f36.verify():
-            return False
-        fbe_current_size += self.f36.fbe_size
-
-        if (fbe_current_size + self.f37.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f37.verify():
-            return False
-        fbe_current_size += self.f37.fbe_size
-
-        if (fbe_current_size + self.f38.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f38.verify():
-            return False
-        fbe_current_size += self.f38.fbe_size
-
-        if (fbe_current_size + self.f39.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f39.verify():
-            return False
-        fbe_current_size += self.f39.fbe_size
-
-        if (fbe_current_size + self.f40.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f40.verify():
-            return False
-        fbe_current_size += self.f40.fbe_size
-
-        if (fbe_current_size + self.f41.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f41.verify():
-            return False
-        fbe_current_size += self.f41.fbe_size
-
-        if (fbe_current_size + self.f42.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f42.verify():
-            return False
-        fbe_current_size += self.f42.fbe_size
-
-        if (fbe_current_size + self.f43.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f43.verify():
-            return False
-        fbe_current_size += self.f43.fbe_size
-
-        if (fbe_current_size + self.f44.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f44.verify():
-            return False
-        fbe_current_size += self.f44.fbe_size
-
         return True
 
     # Get the struct value (begin phase)
@@ -1837,277 +923,7 @@ class FieldModelStructSimple(fbe.FieldModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.id.fbe_size) <= fbe_struct_size:
-            fbe_value.id = self.id.get()
-        else:
-            fbe_value.id = 0
-        fbe_current_size += self.id.fbe_size
-
-        if (fbe_current_size + self.f1.fbe_size) <= fbe_struct_size:
-            fbe_value.f1 = self.f1.get()
-        else:
-            fbe_value.f1 = False
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) <= fbe_struct_size:
-            fbe_value.f2 = self.f2.get(True)
-        else:
-            fbe_value.f2 = True
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) <= fbe_struct_size:
-            fbe_value.f3 = self.f3.get()
-        else:
-            fbe_value.f3 = 0
-        fbe_current_size += self.f3.fbe_size
-
-        if (fbe_current_size + self.f4.fbe_size) <= fbe_struct_size:
-            fbe_value.f4 = self.f4.get(255)
-        else:
-            fbe_value.f4 = 255
-        fbe_current_size += self.f4.fbe_size
-
-        if (fbe_current_size + self.f5.fbe_size) <= fbe_struct_size:
-            fbe_value.f5 = self.f5.get()
-        else:
-            fbe_value.f5 = '\0'
-        fbe_current_size += self.f5.fbe_size
-
-        if (fbe_current_size + self.f6.fbe_size) <= fbe_struct_size:
-            fbe_value.f6 = self.f6.get('!')
-        else:
-            fbe_value.f6 = '!'
-        fbe_current_size += self.f6.fbe_size
-
-        if (fbe_current_size + self.f7.fbe_size) <= fbe_struct_size:
-            fbe_value.f7 = self.f7.get()
-        else:
-            fbe_value.f7 = '\0'
-        fbe_current_size += self.f7.fbe_size
-
-        if (fbe_current_size + self.f8.fbe_size) <= fbe_struct_size:
-            fbe_value.f8 = self.f8.get(chr(0x0444))
-        else:
-            fbe_value.f8 = chr(0x0444)
-        fbe_current_size += self.f8.fbe_size
-
-        if (fbe_current_size + self.f9.fbe_size) <= fbe_struct_size:
-            fbe_value.f9 = self.f9.get()
-        else:
-            fbe_value.f9 = 0
-        fbe_current_size += self.f9.fbe_size
-
-        if (fbe_current_size + self.f10.fbe_size) <= fbe_struct_size:
-            fbe_value.f10 = self.f10.get(127)
-        else:
-            fbe_value.f10 = 127
-        fbe_current_size += self.f10.fbe_size
-
-        if (fbe_current_size + self.f11.fbe_size) <= fbe_struct_size:
-            fbe_value.f11 = self.f11.get(0)
-        else:
-            fbe_value.f11 = 0
-        fbe_current_size += self.f11.fbe_size
-
-        if (fbe_current_size + self.f12.fbe_size) <= fbe_struct_size:
-            fbe_value.f12 = self.f12.get(255)
-        else:
-            fbe_value.f12 = 255
-        fbe_current_size += self.f12.fbe_size
-
-        if (fbe_current_size + self.f13.fbe_size) <= fbe_struct_size:
-            fbe_value.f13 = self.f13.get()
-        else:
-            fbe_value.f13 = 0
-        fbe_current_size += self.f13.fbe_size
-
-        if (fbe_current_size + self.f14.fbe_size) <= fbe_struct_size:
-            fbe_value.f14 = self.f14.get(32767)
-        else:
-            fbe_value.f14 = 32767
-        fbe_current_size += self.f14.fbe_size
-
-        if (fbe_current_size + self.f15.fbe_size) <= fbe_struct_size:
-            fbe_value.f15 = self.f15.get(0)
-        else:
-            fbe_value.f15 = 0
-        fbe_current_size += self.f15.fbe_size
-
-        if (fbe_current_size + self.f16.fbe_size) <= fbe_struct_size:
-            fbe_value.f16 = self.f16.get(65535)
-        else:
-            fbe_value.f16 = 65535
-        fbe_current_size += self.f16.fbe_size
-
-        if (fbe_current_size + self.f17.fbe_size) <= fbe_struct_size:
-            fbe_value.f17 = self.f17.get()
-        else:
-            fbe_value.f17 = 0
-        fbe_current_size += self.f17.fbe_size
-
-        if (fbe_current_size + self.f18.fbe_size) <= fbe_struct_size:
-            fbe_value.f18 = self.f18.get(2147483647)
-        else:
-            fbe_value.f18 = 2147483647
-        fbe_current_size += self.f18.fbe_size
-
-        if (fbe_current_size + self.f19.fbe_size) <= fbe_struct_size:
-            fbe_value.f19 = self.f19.get(0)
-        else:
-            fbe_value.f19 = 0
-        fbe_current_size += self.f19.fbe_size
-
-        if (fbe_current_size + self.f20.fbe_size) <= fbe_struct_size:
-            fbe_value.f20 = self.f20.get(4294967295)
-        else:
-            fbe_value.f20 = 4294967295
-        fbe_current_size += self.f20.fbe_size
-
-        if (fbe_current_size + self.f21.fbe_size) <= fbe_struct_size:
-            fbe_value.f21 = self.f21.get()
-        else:
-            fbe_value.f21 = 0
-        fbe_current_size += self.f21.fbe_size
-
-        if (fbe_current_size + self.f22.fbe_size) <= fbe_struct_size:
-            fbe_value.f22 = self.f22.get(9223372036854775807)
-        else:
-            fbe_value.f22 = 9223372036854775807
-        fbe_current_size += self.f22.fbe_size
-
-        if (fbe_current_size + self.f23.fbe_size) <= fbe_struct_size:
-            fbe_value.f23 = self.f23.get(0)
-        else:
-            fbe_value.f23 = 0
-        fbe_current_size += self.f23.fbe_size
-
-        if (fbe_current_size + self.f24.fbe_size) <= fbe_struct_size:
-            fbe_value.f24 = self.f24.get(18446744073709551615)
-        else:
-            fbe_value.f24 = 18446744073709551615
-        fbe_current_size += self.f24.fbe_size
-
-        if (fbe_current_size + self.f25.fbe_size) <= fbe_struct_size:
-            fbe_value.f25 = self.f25.get()
-        else:
-            fbe_value.f25 = 0.0
-        fbe_current_size += self.f25.fbe_size
-
-        if (fbe_current_size + self.f26.fbe_size) <= fbe_struct_size:
-            fbe_value.f26 = self.f26.get(float(123.456))
-        else:
-            fbe_value.f26 = float(123.456)
-        fbe_current_size += self.f26.fbe_size
-
-        if (fbe_current_size + self.f27.fbe_size) <= fbe_struct_size:
-            fbe_value.f27 = self.f27.get()
-        else:
-            fbe_value.f27 = 0.0
-        fbe_current_size += self.f27.fbe_size
-
-        if (fbe_current_size + self.f28.fbe_size) <= fbe_struct_size:
-            fbe_value.f28 = self.f28.get(float(-123.456e+123))
-        else:
-            fbe_value.f28 = float(-123.456e+123)
-        fbe_current_size += self.f28.fbe_size
-
-        if (fbe_current_size + self.f29.fbe_size) <= fbe_struct_size:
-            fbe_value.f29 = self.f29.get()
-        else:
-            fbe_value.f29 = decimal.Decimal(0)
-        fbe_current_size += self.f29.fbe_size
-
-        if (fbe_current_size + self.f30.fbe_size) <= fbe_struct_size:
-            fbe_value.f30 = self.f30.get(decimal.Decimal("123456.123456"))
-        else:
-            fbe_value.f30 = decimal.Decimal("123456.123456")
-        fbe_current_size += self.f30.fbe_size
-
-        if (fbe_current_size + self.f31.fbe_size) <= fbe_struct_size:
-            fbe_value.f31 = self.f31.get()
-        else:
-            fbe_value.f31 = ""
-        fbe_current_size += self.f31.fbe_size
-
-        if (fbe_current_size + self.f32.fbe_size) <= fbe_struct_size:
-            fbe_value.f32 = self.f32.get("Initial string!")
-        else:
-            fbe_value.f32 = "Initial string!"
-        fbe_current_size += self.f32.fbe_size
-
-        if (fbe_current_size + self.f33.fbe_size) <= fbe_struct_size:
-            fbe_value.f33 = self.f33.get()
-        else:
-            fbe_value.f33 = fbe.epoch()
-        fbe_current_size += self.f33.fbe_size
-
-        if (fbe_current_size + self.f34.fbe_size) <= fbe_struct_size:
-            fbe_value.f34 = self.f34.get(fbe.epoch())
-        else:
-            fbe_value.f34 = fbe.epoch()
-        fbe_current_size += self.f34.fbe_size
-
-        if (fbe_current_size + self.f35.fbe_size) <= fbe_struct_size:
-            fbe_value.f35 = self.f35.get(fbe.utc())
-        else:
-            fbe_value.f35 = fbe.utc()
-        fbe_current_size += self.f35.fbe_size
-
-        if (fbe_current_size + self.f36.fbe_size) <= fbe_struct_size:
-            fbe_value.f36 = self.f36.get()
-        else:
-            fbe_value.f36 = uuid.UUID(int=0)
-        fbe_current_size += self.f36.fbe_size
-
-        if (fbe_current_size + self.f37.fbe_size) <= fbe_struct_size:
-            fbe_value.f37 = self.f37.get(uuid.uuid1())
-        else:
-            fbe_value.f37 = uuid.uuid1()
-        fbe_current_size += self.f37.fbe_size
-
-        if (fbe_current_size + self.f38.fbe_size) <= fbe_struct_size:
-            fbe_value.f38 = self.f38.get(uuid.UUID("123e4567-e89b-12d3-a456-426655440000"))
-        else:
-            fbe_value.f38 = uuid.UUID("123e4567-e89b-12d3-a456-426655440000")
-        fbe_current_size += self.f38.fbe_size
-
-        if (fbe_current_size + self.f39.fbe_size) <= fbe_struct_size:
-            fbe_value.f39 = self.f39.get()
-        else:
-            fbe_value.f39 = proto.OrderSide()
-        fbe_current_size += self.f39.fbe_size
-
-        if (fbe_current_size + self.f40.fbe_size) <= fbe_struct_size:
-            fbe_value.f40 = self.f40.get()
-        else:
-            fbe_value.f40 = proto.OrderType()
-        fbe_current_size += self.f40.fbe_size
-
-        if (fbe_current_size + self.f41.fbe_size) <= fbe_struct_size:
-            fbe_value.f41 = self.f41.get()
-        else:
-            fbe_value.f41 = proto.Order()
-        fbe_current_size += self.f41.fbe_size
-
-        if (fbe_current_size + self.f42.fbe_size) <= fbe_struct_size:
-            fbe_value.f42 = self.f42.get()
-        else:
-            fbe_value.f42 = proto.Balance()
-        fbe_current_size += self.f42.fbe_size
-
-        if (fbe_current_size + self.f43.fbe_size) <= fbe_struct_size:
-            fbe_value.f43 = self.f43.get()
-        else:
-            fbe_value.f43 = proto.State()
-        fbe_current_size += self.f43.fbe_size
-
-        if (fbe_current_size + self.f44.fbe_size) <= fbe_struct_size:
-            fbe_value.f44 = self.f44.get()
-        else:
-            fbe_value.f44 = proto.Account()
-        fbe_current_size += self.f44.fbe_size
+        pass
 
     # Set the struct value (begin phase)
     def set_begin(self):
@@ -2143,51 +959,7 @@ class FieldModelStructSimple(fbe.FieldModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        self.id.set(fbe_value.id)
-        self.f1.set(fbe_value.f1)
-        self.f2.set(fbe_value.f2)
-        self.f3.set(fbe_value.f3)
-        self.f4.set(fbe_value.f4)
-        self.f5.set(fbe_value.f5)
-        self.f6.set(fbe_value.f6)
-        self.f7.set(fbe_value.f7)
-        self.f8.set(fbe_value.f8)
-        self.f9.set(fbe_value.f9)
-        self.f10.set(fbe_value.f10)
-        self.f11.set(fbe_value.f11)
-        self.f12.set(fbe_value.f12)
-        self.f13.set(fbe_value.f13)
-        self.f14.set(fbe_value.f14)
-        self.f15.set(fbe_value.f15)
-        self.f16.set(fbe_value.f16)
-        self.f17.set(fbe_value.f17)
-        self.f18.set(fbe_value.f18)
-        self.f19.set(fbe_value.f19)
-        self.f20.set(fbe_value.f20)
-        self.f21.set(fbe_value.f21)
-        self.f22.set(fbe_value.f22)
-        self.f23.set(fbe_value.f23)
-        self.f24.set(fbe_value.f24)
-        self.f25.set(fbe_value.f25)
-        self.f26.set(fbe_value.f26)
-        self.f27.set(fbe_value.f27)
-        self.f28.set(fbe_value.f28)
-        self.f29.set(fbe_value.f29)
-        self.f30.set(fbe_value.f30)
-        self.f31.set(fbe_value.f31)
-        self.f32.set(fbe_value.f32)
-        self.f33.set(fbe_value.f33)
-        self.f34.set(fbe_value.f34)
-        self.f35.set(fbe_value.f35)
-        self.f36.set(fbe_value.f36)
-        self.f37.set(fbe_value.f37)
-        self.f38.set(fbe_value.f38)
-        self.f39.set(fbe_value.f39)
-        self.f40.set(fbe_value.f40)
-        self.f41.set(fbe_value.f41)
-        self.f42.set(fbe_value.f42)
-        self.f43.set(fbe_value.f43)
-        self.f44.set(fbe_value.f44)
+        pass
 
 
 # Fast Binary Encoding StructSimple model
@@ -2266,284 +1038,12 @@ class StructSimpleModel(fbe.Model):
 
 
 class FinalModelStructSimple(fbe.FinalModel):
-    __slots__ = "_id", "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", "_f11", "_f12", "_f13", "_f14", "_f15", "_f16", "_f17", "_f18", "_f19", "_f20", "_f21", "_f22", "_f23", "_f24", "_f25", "_f26", "_f27", "_f28", "_f29", "_f30", "_f31", "_f32", "_f33", "_f34", "_f35", "_f36", "_f37", "_f38", "_f39", "_f40", "_f41", "_f42", "_f43", "_f44", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._id = fbe.FinalModelInt32(buffer, 0)
-        self._f1 = fbe.FinalModelBool(buffer, 0)
-        self._f2 = fbe.FinalModelBool(buffer, 0)
-        self._f3 = fbe.FinalModelByte(buffer, 0)
-        self._f4 = fbe.FinalModelByte(buffer, 0)
-        self._f5 = fbe.FinalModelChar(buffer, 0)
-        self._f6 = fbe.FinalModelChar(buffer, 0)
-        self._f7 = fbe.FinalModelWChar(buffer, 0)
-        self._f8 = fbe.FinalModelWChar(buffer, 0)
-        self._f9 = fbe.FinalModelInt8(buffer, 0)
-        self._f10 = fbe.FinalModelInt8(buffer, 0)
-        self._f11 = fbe.FinalModelUInt8(buffer, 0)
-        self._f12 = fbe.FinalModelUInt8(buffer, 0)
-        self._f13 = fbe.FinalModelInt16(buffer, 0)
-        self._f14 = fbe.FinalModelInt16(buffer, 0)
-        self._f15 = fbe.FinalModelUInt16(buffer, 0)
-        self._f16 = fbe.FinalModelUInt16(buffer, 0)
-        self._f17 = fbe.FinalModelInt32(buffer, 0)
-        self._f18 = fbe.FinalModelInt32(buffer, 0)
-        self._f19 = fbe.FinalModelUInt32(buffer, 0)
-        self._f20 = fbe.FinalModelUInt32(buffer, 0)
-        self._f21 = fbe.FinalModelInt64(buffer, 0)
-        self._f22 = fbe.FinalModelInt64(buffer, 0)
-        self._f23 = fbe.FinalModelUInt64(buffer, 0)
-        self._f24 = fbe.FinalModelUInt64(buffer, 0)
-        self._f25 = fbe.FinalModelFloat(buffer, 0)
-        self._f26 = fbe.FinalModelFloat(buffer, 0)
-        self._f27 = fbe.FinalModelDouble(buffer, 0)
-        self._f28 = fbe.FinalModelDouble(buffer, 0)
-        self._f29 = fbe.FinalModelDecimal(buffer, 0)
-        self._f30 = fbe.FinalModelDecimal(buffer, 0)
-        self._f31 = fbe.FinalModelString(buffer, 0)
-        self._f32 = fbe.FinalModelString(buffer, 0)
-        self._f33 = fbe.FinalModelTimestamp(buffer, 0)
-        self._f34 = fbe.FinalModelTimestamp(buffer, 0)
-        self._f35 = fbe.FinalModelTimestamp(buffer, 0)
-        self._f36 = fbe.FinalModelUUID(buffer, 0)
-        self._f37 = fbe.FinalModelUUID(buffer, 0)
-        self._f38 = fbe.FinalModelUUID(buffer, 0)
-        self._f39 = proto.FinalModelOrderSide(buffer, 0)
-        self._f40 = proto.FinalModelOrderType(buffer, 0)
-        self._f41 = proto.FinalModelOrder(buffer, 0)
-        self._f42 = proto.FinalModelBalance(buffer, 0)
-        self._f43 = proto.FinalModelState(buffer, 0)
-        self._f44 = proto.FinalModelAccount(buffer, 0)
-
-    @property
-    def id(self):
-        return self._id
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
-
-    @property
-    def f4(self):
-        return self._f4
-
-    @property
-    def f5(self):
-        return self._f5
-
-    @property
-    def f6(self):
-        return self._f6
-
-    @property
-    def f7(self):
-        return self._f7
-
-    @property
-    def f8(self):
-        return self._f8
-
-    @property
-    def f9(self):
-        return self._f9
-
-    @property
-    def f10(self):
-        return self._f10
-
-    @property
-    def f11(self):
-        return self._f11
-
-    @property
-    def f12(self):
-        return self._f12
-
-    @property
-    def f13(self):
-        return self._f13
-
-    @property
-    def f14(self):
-        return self._f14
-
-    @property
-    def f15(self):
-        return self._f15
-
-    @property
-    def f16(self):
-        return self._f16
-
-    @property
-    def f17(self):
-        return self._f17
-
-    @property
-    def f18(self):
-        return self._f18
-
-    @property
-    def f19(self):
-        return self._f19
-
-    @property
-    def f20(self):
-        return self._f20
-
-    @property
-    def f21(self):
-        return self._f21
-
-    @property
-    def f22(self):
-        return self._f22
-
-    @property
-    def f23(self):
-        return self._f23
-
-    @property
-    def f24(self):
-        return self._f24
-
-    @property
-    def f25(self):
-        return self._f25
-
-    @property
-    def f26(self):
-        return self._f26
-
-    @property
-    def f27(self):
-        return self._f27
-
-    @property
-    def f28(self):
-        return self._f28
-
-    @property
-    def f29(self):
-        return self._f29
-
-    @property
-    def f30(self):
-        return self._f30
-
-    @property
-    def f31(self):
-        return self._f31
-
-    @property
-    def f32(self):
-        return self._f32
-
-    @property
-    def f33(self):
-        return self._f33
-
-    @property
-    def f34(self):
-        return self._f34
-
-    @property
-    def f35(self):
-        return self._f35
-
-    @property
-    def f36(self):
-        return self._f36
-
-    @property
-    def f37(self):
-        return self._f37
-
-    @property
-    def f38(self):
-        return self._f38
-
-    @property
-    def f39(self):
-        return self._f39
-
-    @property
-    def f40(self):
-        return self._f40
-
-    @property
-    def f41(self):
-        return self._f41
-
-    @property
-    def f42(self):
-        return self._f42
-
-    @property
-    def f43(self):
-        return self._f43
-
-    @property
-    def f44(self):
-        return self._f44
 
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
-            + self.id.fbe_allocation_size(fbe_value.id) \
-            + self.f1.fbe_allocation_size(fbe_value.f1) \
-            + self.f2.fbe_allocation_size(fbe_value.f2) \
-            + self.f3.fbe_allocation_size(fbe_value.f3) \
-            + self.f4.fbe_allocation_size(fbe_value.f4) \
-            + self.f5.fbe_allocation_size(fbe_value.f5) \
-            + self.f6.fbe_allocation_size(fbe_value.f6) \
-            + self.f7.fbe_allocation_size(fbe_value.f7) \
-            + self.f8.fbe_allocation_size(fbe_value.f8) \
-            + self.f9.fbe_allocation_size(fbe_value.f9) \
-            + self.f10.fbe_allocation_size(fbe_value.f10) \
-            + self.f11.fbe_allocation_size(fbe_value.f11) \
-            + self.f12.fbe_allocation_size(fbe_value.f12) \
-            + self.f13.fbe_allocation_size(fbe_value.f13) \
-            + self.f14.fbe_allocation_size(fbe_value.f14) \
-            + self.f15.fbe_allocation_size(fbe_value.f15) \
-            + self.f16.fbe_allocation_size(fbe_value.f16) \
-            + self.f17.fbe_allocation_size(fbe_value.f17) \
-            + self.f18.fbe_allocation_size(fbe_value.f18) \
-            + self.f19.fbe_allocation_size(fbe_value.f19) \
-            + self.f20.fbe_allocation_size(fbe_value.f20) \
-            + self.f21.fbe_allocation_size(fbe_value.f21) \
-            + self.f22.fbe_allocation_size(fbe_value.f22) \
-            + self.f23.fbe_allocation_size(fbe_value.f23) \
-            + self.f24.fbe_allocation_size(fbe_value.f24) \
-            + self.f25.fbe_allocation_size(fbe_value.f25) \
-            + self.f26.fbe_allocation_size(fbe_value.f26) \
-            + self.f27.fbe_allocation_size(fbe_value.f27) \
-            + self.f28.fbe_allocation_size(fbe_value.f28) \
-            + self.f29.fbe_allocation_size(fbe_value.f29) \
-            + self.f30.fbe_allocation_size(fbe_value.f30) \
-            + self.f31.fbe_allocation_size(fbe_value.f31) \
-            + self.f32.fbe_allocation_size(fbe_value.f32) \
-            + self.f33.fbe_allocation_size(fbe_value.f33) \
-            + self.f34.fbe_allocation_size(fbe_value.f34) \
-            + self.f35.fbe_allocation_size(fbe_value.f35) \
-            + self.f36.fbe_allocation_size(fbe_value.f36) \
-            + self.f37.fbe_allocation_size(fbe_value.f37) \
-            + self.f38.fbe_allocation_size(fbe_value.f38) \
-            + self.f39.fbe_allocation_size(fbe_value.f39) \
-            + self.f40.fbe_allocation_size(fbe_value.f40) \
-            + self.f41.fbe_allocation_size(fbe_value.f41) \
-            + self.f42.fbe_allocation_size(fbe_value.f42) \
-            + self.f43.fbe_allocation_size(fbe_value.f43) \
-            + self.f44.fbe_allocation_size(fbe_value.f44) \
 
         return fbe_result
 
@@ -2563,279 +1063,7 @@ class FinalModelStructSimple(fbe.FinalModel):
 
     # Check if the struct fields are valid
     def verify_fields(self):
-        fbe_current_offset = 0
-
-        self.id.fbe_offset = fbe_current_offset
-        fbe_field_size = self.id.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f4.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f5.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f6.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f7.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f8.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f9.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f10.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f11.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f11.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f12.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f12.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f13.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f13.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f14.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f14.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f15.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f15.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f16.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f16.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f17.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f17.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f18.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f18.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f19.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f19.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f20.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f20.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f21.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f21.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f22.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f22.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f23.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f23.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f24.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f24.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f25.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f25.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f26.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f26.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f27.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f27.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f28.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f28.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f29.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f29.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f30.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f30.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f31.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f31.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f32.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f32.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f33.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f33.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f34.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f34.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f35.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f35.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f36.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f36.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f37.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f37.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f38.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f38.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f39.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f39.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f40.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f40.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f41.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f41.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f42.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f42.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f43.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f43.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f44.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f44.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        return fbe_current_offset
+        return 0
 
     # Get the struct value
     def get(self, fbe_value=None):
@@ -2849,280 +1077,7 @@ class FinalModelStructSimple(fbe.FinalModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.id.fbe_offset = fbe_current_offset
-        fbe_result = self.id.get()
-        fbe_value.id = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_result = self.f1.get()
-        fbe_value.f1 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_result = self.f2.get()
-        fbe_value.f2 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_result = self.f3.get()
-        fbe_value.f3 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_result = self.f4.get()
-        fbe_value.f4 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_result = self.f5.get()
-        fbe_value.f5 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_result = self.f6.get()
-        fbe_value.f6 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_result = self.f7.get()
-        fbe_value.f7 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_result = self.f8.get()
-        fbe_value.f8 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_result = self.f9.get()
-        fbe_value.f9 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_result = self.f10.get()
-        fbe_value.f10 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f11.fbe_offset = fbe_current_offset
-        fbe_result = self.f11.get()
-        fbe_value.f11 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f12.fbe_offset = fbe_current_offset
-        fbe_result = self.f12.get()
-        fbe_value.f12 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f13.fbe_offset = fbe_current_offset
-        fbe_result = self.f13.get()
-        fbe_value.f13 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f14.fbe_offset = fbe_current_offset
-        fbe_result = self.f14.get()
-        fbe_value.f14 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f15.fbe_offset = fbe_current_offset
-        fbe_result = self.f15.get()
-        fbe_value.f15 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f16.fbe_offset = fbe_current_offset
-        fbe_result = self.f16.get()
-        fbe_value.f16 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f17.fbe_offset = fbe_current_offset
-        fbe_result = self.f17.get()
-        fbe_value.f17 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f18.fbe_offset = fbe_current_offset
-        fbe_result = self.f18.get()
-        fbe_value.f18 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f19.fbe_offset = fbe_current_offset
-        fbe_result = self.f19.get()
-        fbe_value.f19 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f20.fbe_offset = fbe_current_offset
-        fbe_result = self.f20.get()
-        fbe_value.f20 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f21.fbe_offset = fbe_current_offset
-        fbe_result = self.f21.get()
-        fbe_value.f21 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f22.fbe_offset = fbe_current_offset
-        fbe_result = self.f22.get()
-        fbe_value.f22 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f23.fbe_offset = fbe_current_offset
-        fbe_result = self.f23.get()
-        fbe_value.f23 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f24.fbe_offset = fbe_current_offset
-        fbe_result = self.f24.get()
-        fbe_value.f24 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f25.fbe_offset = fbe_current_offset
-        fbe_result = self.f25.get()
-        fbe_value.f25 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f26.fbe_offset = fbe_current_offset
-        fbe_result = self.f26.get()
-        fbe_value.f26 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f27.fbe_offset = fbe_current_offset
-        fbe_result = self.f27.get()
-        fbe_value.f27 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f28.fbe_offset = fbe_current_offset
-        fbe_result = self.f28.get()
-        fbe_value.f28 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f29.fbe_offset = fbe_current_offset
-        fbe_result = self.f29.get()
-        fbe_value.f29 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f30.fbe_offset = fbe_current_offset
-        fbe_result = self.f30.get()
-        fbe_value.f30 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f31.fbe_offset = fbe_current_offset
-        fbe_result = self.f31.get()
-        fbe_value.f31 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f32.fbe_offset = fbe_current_offset
-        fbe_result = self.f32.get()
-        fbe_value.f32 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f33.fbe_offset = fbe_current_offset
-        fbe_result = self.f33.get()
-        fbe_value.f33 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f34.fbe_offset = fbe_current_offset
-        fbe_result = self.f34.get()
-        fbe_value.f34 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f35.fbe_offset = fbe_current_offset
-        fbe_result = self.f35.get()
-        fbe_value.f35 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f36.fbe_offset = fbe_current_offset
-        fbe_result = self.f36.get()
-        fbe_value.f36 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f37.fbe_offset = fbe_current_offset
-        fbe_result = self.f37.get()
-        fbe_value.f37 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f38.fbe_offset = fbe_current_offset
-        fbe_result = self.f38.get()
-        fbe_value.f38 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f39.fbe_offset = fbe_current_offset
-        fbe_result = self.f39.get()
-        fbe_value.f39 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f40.fbe_offset = fbe_current_offset
-        fbe_result = self.f40.get()
-        fbe_value.f40 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f41.fbe_offset = fbe_current_offset
-        fbe_result = self.f41.get()
-        fbe_value.f41 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f42.fbe_offset = fbe_current_offset
-        fbe_result = self.f42.get()
-        fbe_value.f42 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f43.fbe_offset = fbe_current_offset
-        fbe_result = self.f43.get()
-        fbe_value.f43 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f44.fbe_offset = fbe_current_offset
-        fbe_result = self.f44.get()
-        fbe_value.f44 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        return fbe_current_size
+        return 0
 
     # Set the struct value
     def set(self, fbe_value):
@@ -3133,235 +1088,7 @@ class FinalModelStructSimple(fbe.FinalModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.id.fbe_offset = fbe_current_offset
-        fbe_field_size = self.id.set(fbe_value.id)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.set(fbe_value.f1)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.set(fbe_value.f2)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.set(fbe_value.f3)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f4.set(fbe_value.f4)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f5.set(fbe_value.f5)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f6.set(fbe_value.f6)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f7.set(fbe_value.f7)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f8.set(fbe_value.f8)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f9.set(fbe_value.f9)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f10.set(fbe_value.f10)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f11.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f11.set(fbe_value.f11)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f12.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f12.set(fbe_value.f12)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f13.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f13.set(fbe_value.f13)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f14.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f14.set(fbe_value.f14)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f15.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f15.set(fbe_value.f15)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f16.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f16.set(fbe_value.f16)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f17.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f17.set(fbe_value.f17)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f18.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f18.set(fbe_value.f18)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f19.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f19.set(fbe_value.f19)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f20.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f20.set(fbe_value.f20)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f21.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f21.set(fbe_value.f21)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f22.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f22.set(fbe_value.f22)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f23.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f23.set(fbe_value.f23)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f24.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f24.set(fbe_value.f24)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f25.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f25.set(fbe_value.f25)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f26.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f26.set(fbe_value.f26)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f27.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f27.set(fbe_value.f27)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f28.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f28.set(fbe_value.f28)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f29.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f29.set(fbe_value.f29)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f30.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f30.set(fbe_value.f30)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f31.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f31.set(fbe_value.f31)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f32.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f32.set(fbe_value.f32)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f33.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f33.set(fbe_value.f33)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f34.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f34.set(fbe_value.f34)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f35.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f35.set(fbe_value.f35)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f36.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f36.set(fbe_value.f36)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f37.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f37.set(fbe_value.f37)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f38.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f38.set(fbe_value.f38)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f39.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f39.set(fbe_value.f39)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f40.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f40.set(fbe_value.f40)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f41.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f41.set(fbe_value.f41)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f42.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f42.set(fbe_value.f42)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f43.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f43.set(fbe_value.f43)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f44.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f44.set(fbe_value.f44)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        return fbe_current_size
+        return 0
 
 
 # Fast Binary Encoding StructSimple final model
@@ -3435,149 +1162,15 @@ class StructSimpleFinalModel(fbe.Model):
 
 @functools.total_ordering
 class StructOptional(StructSimple):
-    __slots__ = "f100", "f101", "f102", "f103", "f104", "f105", "f106", "f107", "f108", "f109", "f110", "f111", "f112", "f113", "f114", "f115", "f116", "f117", "f118", "f119", "f120", "f121", "f122", "f123", "f124", "f125", "f126", "f127", "f128", "f129", "f130", "f131", "f132", "f133", "f134", "f135", "f136", "f137", "f138", "f139", "f140", "f141", "f142", "f143", "f144", "f145", "f146", "f147", "f148", "f149", "f150", "f151", "f152", "f153", "f154", "f155", "f156", "f157", "f158", "f159", "f160", "f161", "f162", "f163", "f164", "f165", 
-
-    def __init__(self, parent=None, f100=None, f101=True, f102=None, f103=None, f104=255, f105=None, f106=None, f107='!', f108=None, f109=None, f110=chr(0x0444), f111=None, f112=None, f113=127, f114=None, f115=None, f116=255, f117=None, f118=None, f119=32767, f120=None, f121=None, f122=65535, f123=None, f124=None, f125=2147483647, f126=None, f127=None, f128=4294967295, f129=None, f130=None, f131=9223372036854775807, f132=None, f133=None, f134=18446744073709551615, f135=None, f136=None, f137=float(123.456), f138=None, f139=None, f140=float(-123.456e+123), f141=None, f142=None, f143=decimal.Decimal("123456.123456"), f144=None, f145=None, f146="Initial string!", f147=None, f148=None, f149=fbe.utc(), f150=None, f151=None, f152=uuid.UUID("123e4567-e89b-12d3-a456-426655440000"), f153=None, f154=None, f155=None, f156=None, f157=None, f158=None, f159=None, f160=None, f161=None, f162=None, f163=None, f164=None, f165=None):
+    def __init__(self, parent=None):
         super().__init__()
         if parent is None:
             parent = StructSimple()
         super().copy(parent)
-        self.f100 = f100
-        self.f101 = f101
-        self.f102 = f102
-        self.f103 = f103
-        self.f104 = f104
-        self.f105 = f105
-        self.f106 = f106
-        self.f107 = f107
-        self.f108 = f108
-        self.f109 = f109
-        self.f110 = f110
-        self.f111 = f111
-        self.f112 = f112
-        self.f113 = f113
-        self.f114 = f114
-        self.f115 = f115
-        self.f116 = f116
-        self.f117 = f117
-        self.f118 = f118
-        self.f119 = f119
-        self.f120 = f120
-        self.f121 = f121
-        self.f122 = f122
-        self.f123 = f123
-        self.f124 = f124
-        self.f125 = f125
-        self.f126 = f126
-        self.f127 = f127
-        self.f128 = f128
-        self.f129 = f129
-        self.f130 = f130
-        self.f131 = f131
-        self.f132 = f132
-        self.f133 = f133
-        self.f134 = f134
-        self.f135 = f135
-        self.f136 = f136
-        self.f137 = f137
-        self.f138 = f138
-        self.f139 = f139
-        self.f140 = f140
-        self.f141 = f141
-        self.f142 = f142
-        self.f143 = f143
-        self.f144 = f144
-        self.f145 = f145
-        self.f146 = f146
-        self.f147 = f147
-        self.f148 = f148
-        self.f149 = f149
-        self.f150 = f150
-        self.f151 = f151
-        self.f152 = f152
-        self.f153 = f153
-        self.f154 = f154
-        self.f155 = f155
-        self.f156 = f156
-        self.f157 = f157
-        self.f158 = f158
-        self.f159 = f159
-        self.f160 = f160
-        self.f161 = f161
-        self.f162 = f162
-        self.f163 = f163
-        self.f164 = f164
-        self.f165 = f165
 
     # Struct shallow copy
     def copy(self, other):
         super().copy(other)
-        self.f100 = other.f100
-        self.f101 = other.f101
-        self.f102 = other.f102
-        self.f103 = other.f103
-        self.f104 = other.f104
-        self.f105 = other.f105
-        self.f106 = other.f106
-        self.f107 = other.f107
-        self.f108 = other.f108
-        self.f109 = other.f109
-        self.f110 = other.f110
-        self.f111 = other.f111
-        self.f112 = other.f112
-        self.f113 = other.f113
-        self.f114 = other.f114
-        self.f115 = other.f115
-        self.f116 = other.f116
-        self.f117 = other.f117
-        self.f118 = other.f118
-        self.f119 = other.f119
-        self.f120 = other.f120
-        self.f121 = other.f121
-        self.f122 = other.f122
-        self.f123 = other.f123
-        self.f124 = other.f124
-        self.f125 = other.f125
-        self.f126 = other.f126
-        self.f127 = other.f127
-        self.f128 = other.f128
-        self.f129 = other.f129
-        self.f130 = other.f130
-        self.f131 = other.f131
-        self.f132 = other.f132
-        self.f133 = other.f133
-        self.f134 = other.f134
-        self.f135 = other.f135
-        self.f136 = other.f136
-        self.f137 = other.f137
-        self.f138 = other.f138
-        self.f139 = other.f139
-        self.f140 = other.f140
-        self.f141 = other.f141
-        self.f142 = other.f142
-        self.f143 = other.f143
-        self.f144 = other.f144
-        self.f145 = other.f145
-        self.f146 = other.f146
-        self.f147 = other.f147
-        self.f148 = other.f148
-        self.f149 = other.f149
-        self.f150 = other.f150
-        self.f151 = other.f151
-        self.f152 = other.f152
-        self.f153 = other.f153
-        self.f154 = other.f154
-        self.f155 = other.f155
-        self.f156 = other.f156
-        self.f157 = other.f157
-        self.f158 = other.f158
-        self.f159 = other.f159
-        self.f160 = other.f160
-        self.f161 = other.f161
-        self.f162 = other.f162
-        self.f163 = other.f163
-        self.f164 = other.f164
-        self.f165 = other.f165
         return self
 
     # Struct deep clone
@@ -3621,336 +1214,6 @@ class StructOptional(StructSimple):
         sb = list()
         sb.append("StructOptional(")
         sb.append(StructSimple.__str__(self))
-        sb.append(",f100=")
-        if self.f100 is not None:
-            sb.append("true" if self.f100 else "false")
-        else:
-            sb.append("null")
-        sb.append(",f101=")
-        if self.f101 is not None:
-            sb.append("true" if self.f101 else "false")
-        else:
-            sb.append("null")
-        sb.append(",f102=")
-        if self.f102 is not None:
-            sb.append("true" if self.f102 else "false")
-        else:
-            sb.append("null")
-        sb.append(",f103=")
-        if self.f103 is not None:
-            sb.append(str(self.f103))
-        else:
-            sb.append("null")
-        sb.append(",f104=")
-        if self.f104 is not None:
-            sb.append(str(self.f104))
-        else:
-            sb.append("null")
-        sb.append(",f105=")
-        if self.f105 is not None:
-            sb.append(str(self.f105))
-        else:
-            sb.append("null")
-        sb.append(",f106=")
-        if self.f106 is not None:
-            sb.append("'" + str(self.f106) + "'")
-        else:
-            sb.append("null")
-        sb.append(",f107=")
-        if self.f107 is not None:
-            sb.append("'" + str(self.f107) + "'")
-        else:
-            sb.append("null")
-        sb.append(",f108=")
-        if self.f108 is not None:
-            sb.append("'" + str(self.f108) + "'")
-        else:
-            sb.append("null")
-        sb.append(",f109=")
-        if self.f109 is not None:
-            sb.append("'" + str(self.f109) + "'")
-        else:
-            sb.append("null")
-        sb.append(",f110=")
-        if self.f110 is not None:
-            sb.append("'" + str(self.f110) + "'")
-        else:
-            sb.append("null")
-        sb.append(",f111=")
-        if self.f111 is not None:
-            sb.append("'" + str(self.f111) + "'")
-        else:
-            sb.append("null")
-        sb.append(",f112=")
-        if self.f112 is not None:
-            sb.append(str(self.f112))
-        else:
-            sb.append("null")
-        sb.append(",f113=")
-        if self.f113 is not None:
-            sb.append(str(self.f113))
-        else:
-            sb.append("null")
-        sb.append(",f114=")
-        if self.f114 is not None:
-            sb.append(str(self.f114))
-        else:
-            sb.append("null")
-        sb.append(",f115=")
-        if self.f115 is not None:
-            sb.append(str(self.f115))
-        else:
-            sb.append("null")
-        sb.append(",f116=")
-        if self.f116 is not None:
-            sb.append(str(self.f116))
-        else:
-            sb.append("null")
-        sb.append(",f117=")
-        if self.f117 is not None:
-            sb.append(str(self.f117))
-        else:
-            sb.append("null")
-        sb.append(",f118=")
-        if self.f118 is not None:
-            sb.append(str(self.f118))
-        else:
-            sb.append("null")
-        sb.append(",f119=")
-        if self.f119 is not None:
-            sb.append(str(self.f119))
-        else:
-            sb.append("null")
-        sb.append(",f120=")
-        if self.f120 is not None:
-            sb.append(str(self.f120))
-        else:
-            sb.append("null")
-        sb.append(",f121=")
-        if self.f121 is not None:
-            sb.append(str(self.f121))
-        else:
-            sb.append("null")
-        sb.append(",f122=")
-        if self.f122 is not None:
-            sb.append(str(self.f122))
-        else:
-            sb.append("null")
-        sb.append(",f123=")
-        if self.f123 is not None:
-            sb.append(str(self.f123))
-        else:
-            sb.append("null")
-        sb.append(",f124=")
-        if self.f124 is not None:
-            sb.append(str(self.f124))
-        else:
-            sb.append("null")
-        sb.append(",f125=")
-        if self.f125 is not None:
-            sb.append(str(self.f125))
-        else:
-            sb.append("null")
-        sb.append(",f126=")
-        if self.f126 is not None:
-            sb.append(str(self.f126))
-        else:
-            sb.append("null")
-        sb.append(",f127=")
-        if self.f127 is not None:
-            sb.append(str(self.f127))
-        else:
-            sb.append("null")
-        sb.append(",f128=")
-        if self.f128 is not None:
-            sb.append(str(self.f128))
-        else:
-            sb.append("null")
-        sb.append(",f129=")
-        if self.f129 is not None:
-            sb.append(str(self.f129))
-        else:
-            sb.append("null")
-        sb.append(",f130=")
-        if self.f130 is not None:
-            sb.append(str(self.f130))
-        else:
-            sb.append("null")
-        sb.append(",f131=")
-        if self.f131 is not None:
-            sb.append(str(self.f131))
-        else:
-            sb.append("null")
-        sb.append(",f132=")
-        if self.f132 is not None:
-            sb.append(str(self.f132))
-        else:
-            sb.append("null")
-        sb.append(",f133=")
-        if self.f133 is not None:
-            sb.append(str(self.f133))
-        else:
-            sb.append("null")
-        sb.append(",f134=")
-        if self.f134 is not None:
-            sb.append(str(self.f134))
-        else:
-            sb.append("null")
-        sb.append(",f135=")
-        if self.f135 is not None:
-            sb.append(str(self.f135))
-        else:
-            sb.append("null")
-        sb.append(",f136=")
-        if self.f136 is not None:
-            sb.append(str(self.f136))
-        else:
-            sb.append("null")
-        sb.append(",f137=")
-        if self.f137 is not None:
-            sb.append(str(self.f137))
-        else:
-            sb.append("null")
-        sb.append(",f138=")
-        if self.f138 is not None:
-            sb.append(str(self.f138))
-        else:
-            sb.append("null")
-        sb.append(",f139=")
-        if self.f139 is not None:
-            sb.append(str(self.f139))
-        else:
-            sb.append("null")
-        sb.append(",f140=")
-        if self.f140 is not None:
-            sb.append(str(self.f140))
-        else:
-            sb.append("null")
-        sb.append(",f141=")
-        if self.f141 is not None:
-            sb.append(str(self.f141))
-        else:
-            sb.append("null")
-        sb.append(",f142=")
-        if self.f142 is not None:
-            sb.append(str(self.f142))
-        else:
-            sb.append("null")
-        sb.append(",f143=")
-        if self.f143 is not None:
-            sb.append(str(self.f143))
-        else:
-            sb.append("null")
-        sb.append(",f144=")
-        if self.f144 is not None:
-            sb.append(str(self.f144))
-        else:
-            sb.append("null")
-        sb.append(",f145=")
-        if self.f145 is not None:
-            sb.append("\"" + str(self.f145) + "\"")
-        else:
-            sb.append("null")
-        sb.append(",f146=")
-        if self.f146 is not None:
-            sb.append("\"" + str(self.f146) + "\"")
-        else:
-            sb.append("null")
-        sb.append(",f147=")
-        if self.f147 is not None:
-            sb.append("\"" + str(self.f147) + "\"")
-        else:
-            sb.append("null")
-        sb.append(",f148=")
-        if self.f148 is not None:
-            sb.append(str(self.f148))
-        else:
-            sb.append("null")
-        sb.append(",f149=")
-        if self.f149 is not None:
-            sb.append(str(self.f149))
-        else:
-            sb.append("null")
-        sb.append(",f150=")
-        if self.f150 is not None:
-            sb.append(str(self.f150))
-        else:
-            sb.append("null")
-        sb.append(",f151=")
-        if self.f151 is not None:
-            sb.append("\"" + str(self.f151) + "\"")
-        else:
-            sb.append("null")
-        sb.append(",f152=")
-        if self.f152 is not None:
-            sb.append("\"" + str(self.f152) + "\"")
-        else:
-            sb.append("null")
-        sb.append(",f153=")
-        if self.f153 is not None:
-            sb.append("\"" + str(self.f153) + "\"")
-        else:
-            sb.append("null")
-        sb.append(",f154=")
-        if self.f154 is not None:
-            sb.append(str(self.f154))
-        else:
-            sb.append("null")
-        sb.append(",f155=")
-        if self.f155 is not None:
-            sb.append(str(self.f155))
-        else:
-            sb.append("null")
-        sb.append(",f156=")
-        if self.f156 is not None:
-            sb.append(str(self.f156))
-        else:
-            sb.append("null")
-        sb.append(",f157=")
-        if self.f157 is not None:
-            sb.append(str(self.f157))
-        else:
-            sb.append("null")
-        sb.append(",f158=")
-        if self.f158 is not None:
-            sb.append(str(self.f158))
-        else:
-            sb.append("null")
-        sb.append(",f159=")
-        if self.f159 is not None:
-            sb.append(str(self.f159))
-        else:
-            sb.append("null")
-        sb.append(",f160=")
-        if self.f160 is not None:
-            sb.append(str(self.f160))
-        else:
-            sb.append("null")
-        sb.append(",f161=")
-        if self.f161 is not None:
-            sb.append(str(self.f161))
-        else:
-            sb.append("null")
-        sb.append(",f162=")
-        if self.f162 is not None:
-            sb.append(str(self.f162))
-        else:
-            sb.append("null")
-        sb.append(",f163=")
-        if self.f163 is not None:
-            sb.append(str(self.f163))
-        else:
-            sb.append("null")
-        sb.append(",f164=")
-        if self.f164 is not None:
-            sb.append(str(self.f164))
-        else:
-            sb.append("null")
-        sb.append(",f165=")
-        if self.f165 is not None:
-            sb.append(str(self.f165))
-        else:
-            sb.append("null")
         sb.append(")")
         return "".join(sb)
 
@@ -3961,74 +1224,6 @@ class StructOptional(StructSimple):
     def __to_json__(self):
         result = dict()
         result.update(super().__to_json__())
-        result.update(dict(
-            f100=self.f100, 
-            f101=self.f101, 
-            f102=self.f102, 
-            f103=self.f103, 
-            f104=self.f104, 
-            f105=self.f105, 
-            f106=None if self.f106 is None else ord(self.f106), 
-            f107=None if self.f107 is None else ord(self.f107), 
-            f108=None if self.f108 is None else ord(self.f108), 
-            f109=None if self.f109 is None else ord(self.f109), 
-            f110=None if self.f110 is None else ord(self.f110), 
-            f111=None if self.f111 is None else ord(self.f111), 
-            f112=self.f112, 
-            f113=self.f113, 
-            f114=self.f114, 
-            f115=self.f115, 
-            f116=self.f116, 
-            f117=self.f117, 
-            f118=self.f118, 
-            f119=self.f119, 
-            f120=self.f120, 
-            f121=self.f121, 
-            f122=self.f122, 
-            f123=self.f123, 
-            f124=self.f124, 
-            f125=self.f125, 
-            f126=self.f126, 
-            f127=self.f127, 
-            f128=self.f128, 
-            f129=self.f129, 
-            f130=self.f130, 
-            f131=self.f131, 
-            f132=self.f132, 
-            f133=self.f133, 
-            f134=self.f134, 
-            f135=self.f135, 
-            f136=self.f136, 
-            f137=self.f137, 
-            f138=self.f138, 
-            f139=self.f139, 
-            f140=self.f140, 
-            f141=self.f141, 
-            f142=self.f142, 
-            f143=self.f143, 
-            f144=self.f144, 
-            f145=self.f145, 
-            f146=self.f146, 
-            f147=self.f147, 
-            f148=self.f148, 
-            f149=self.f149, 
-            f150=self.f150, 
-            f151=self.f151, 
-            f152=self.f152, 
-            f153=self.f153, 
-            f154=self.f154, 
-            f155=self.f155, 
-            f156=self.f156, 
-            f157=self.f157, 
-            f158=self.f158, 
-            f159=self.f159, 
-            f160=self.f160, 
-            f161=self.f161, 
-            f162=self.f162, 
-            f163=self.f163, 
-            f164=self.f164, 
-            f165=self.f165, 
-        ))
         return result
 
     # Create struct from JSON value
@@ -4042,415 +1237,19 @@ class StructOptional(StructSimple):
             return None
         return StructOptional(
             StructSimple.__from_json__(fields),
-            None if "f100" not in fields else fields["f100"],
-            None if "f101" not in fields else fields["f101"],
-            None if "f102" not in fields else fields["f102"],
-            None if "f103" not in fields else fields["f103"],
-            None if "f104" not in fields else fields["f104"],
-            None if "f105" not in fields else fields["f105"],
-            None if "f106" not in fields else None if fields["f106"] is None else chr(fields["f106"]),
-            None if "f107" not in fields else None if fields["f107"] is None else chr(fields["f107"]),
-            None if "f108" not in fields else None if fields["f108"] is None else chr(fields["f108"]),
-            None if "f109" not in fields else None if fields["f109"] is None else chr(fields["f109"]),
-            None if "f110" not in fields else None if fields["f110"] is None else chr(fields["f110"]),
-            None if "f111" not in fields else None if fields["f111"] is None else chr(fields["f111"]),
-            None if "f112" not in fields else fields["f112"],
-            None if "f113" not in fields else fields["f113"],
-            None if "f114" not in fields else fields["f114"],
-            None if "f115" not in fields else fields["f115"],
-            None if "f116" not in fields else fields["f116"],
-            None if "f117" not in fields else fields["f117"],
-            None if "f118" not in fields else fields["f118"],
-            None if "f119" not in fields else fields["f119"],
-            None if "f120" not in fields else fields["f120"],
-            None if "f121" not in fields else fields["f121"],
-            None if "f122" not in fields else fields["f122"],
-            None if "f123" not in fields else fields["f123"],
-            None if "f124" not in fields else fields["f124"],
-            None if "f125" not in fields else fields["f125"],
-            None if "f126" not in fields else fields["f126"],
-            None if "f127" not in fields else fields["f127"],
-            None if "f128" not in fields else fields["f128"],
-            None if "f129" not in fields else fields["f129"],
-            None if "f130" not in fields else fields["f130"],
-            None if "f131" not in fields else fields["f131"],
-            None if "f132" not in fields else fields["f132"],
-            None if "f133" not in fields else fields["f133"],
-            None if "f134" not in fields else fields["f134"],
-            None if "f135" not in fields else fields["f135"],
-            None if "f136" not in fields else fields["f136"],
-            None if "f137" not in fields else fields["f137"],
-            None if "f138" not in fields else fields["f138"],
-            None if "f139" not in fields else fields["f139"],
-            None if "f140" not in fields else fields["f140"],
-            None if "f141" not in fields else fields["f141"],
-            None if "f142" not in fields else None if fields["f142"] is None else decimal.Decimal(fields["f142"]),
-            None if "f143" not in fields else None if fields["f143"] is None else decimal.Decimal(fields["f143"]),
-            None if "f144" not in fields else None if fields["f144"] is None else decimal.Decimal(fields["f144"]),
-            None if "f145" not in fields else fields["f145"],
-            None if "f146" not in fields else fields["f146"],
-            None if "f147" not in fields else fields["f147"],
-            None if "f148" not in fields else fields["f148"],
-            None if "f149" not in fields else fields["f149"],
-            None if "f150" not in fields else fields["f150"],
-            None if "f151" not in fields else None if fields["f151"] is None else uuid.UUID(fields["f151"]),
-            None if "f152" not in fields else None if fields["f152"] is None else uuid.UUID(fields["f152"]),
-            None if "f153" not in fields else None if fields["f153"] is None else uuid.UUID(fields["f153"]),
-            None if "f154" not in fields else proto.OrderSide.__from_json__(fields["f154"]),
-            None if "f155" not in fields else proto.OrderSide.__from_json__(fields["f155"]),
-            None if "f156" not in fields else proto.OrderType.__from_json__(fields["f156"]),
-            None if "f157" not in fields else proto.OrderType.__from_json__(fields["f157"]),
-            None if "f158" not in fields else proto.Order.__from_json__(fields["f158"]),
-            None if "f159" not in fields else proto.Order.__from_json__(fields["f159"]),
-            None if "f160" not in fields else proto.Balance.__from_json__(fields["f160"]),
-            None if "f161" not in fields else proto.Balance.__from_json__(fields["f161"]),
-            None if "f162" not in fields else proto.State.__from_json__(fields["f162"]),
-            None if "f163" not in fields else proto.State.__from_json__(fields["f163"]),
-            None if "f164" not in fields else proto.Account.__from_json__(fields["f164"]),
-            None if "f165" not in fields else proto.Account.__from_json__(fields["f165"]),
         )
 
 
 class FieldModelStructOptional(fbe.FieldModel):
-    __slots__ = "_parent", "_f100", "_f101", "_f102", "_f103", "_f104", "_f105", "_f106", "_f107", "_f108", "_f109", "_f110", "_f111", "_f112", "_f113", "_f114", "_f115", "_f116", "_f117", "_f118", "_f119", "_f120", "_f121", "_f122", "_f123", "_f124", "_f125", "_f126", "_f127", "_f128", "_f129", "_f130", "_f131", "_f132", "_f133", "_f134", "_f135", "_f136", "_f137", "_f138", "_f139", "_f140", "_f141", "_f142", "_f143", "_f144", "_f145", "_f146", "_f147", "_f148", "_f149", "_f150", "_f151", "_f152", "_f153", "_f154", "_f155", "_f156", "_f157", "_f158", "_f159", "_f160", "_f161", "_f162", "_f163", "_f164", "_f165", 
+    __slots__ = "_parent", 
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._parent = FieldModelStructSimple(buffer, 4 + 4)
-        self._f100 = fbe.FieldModelOptional(fbe.FieldModelBool(buffer, self._parent.fbe_offset + self._parent.fbe_body - 4 - 4), buffer, self._parent.fbe_offset + self._parent.fbe_body - 4 - 4)
-        self._f101 = fbe.FieldModelOptional(fbe.FieldModelBool(buffer, self._f100.fbe_offset + self._f100.fbe_size), buffer, self._f100.fbe_offset + self._f100.fbe_size)
-        self._f102 = fbe.FieldModelOptional(fbe.FieldModelBool(buffer, self._f101.fbe_offset + self._f101.fbe_size), buffer, self._f101.fbe_offset + self._f101.fbe_size)
-        self._f103 = fbe.FieldModelOptional(fbe.FieldModelByte(buffer, self._f102.fbe_offset + self._f102.fbe_size), buffer, self._f102.fbe_offset + self._f102.fbe_size)
-        self._f104 = fbe.FieldModelOptional(fbe.FieldModelByte(buffer, self._f103.fbe_offset + self._f103.fbe_size), buffer, self._f103.fbe_offset + self._f103.fbe_size)
-        self._f105 = fbe.FieldModelOptional(fbe.FieldModelByte(buffer, self._f104.fbe_offset + self._f104.fbe_size), buffer, self._f104.fbe_offset + self._f104.fbe_size)
-        self._f106 = fbe.FieldModelOptional(fbe.FieldModelChar(buffer, self._f105.fbe_offset + self._f105.fbe_size), buffer, self._f105.fbe_offset + self._f105.fbe_size)
-        self._f107 = fbe.FieldModelOptional(fbe.FieldModelChar(buffer, self._f106.fbe_offset + self._f106.fbe_size), buffer, self._f106.fbe_offset + self._f106.fbe_size)
-        self._f108 = fbe.FieldModelOptional(fbe.FieldModelChar(buffer, self._f107.fbe_offset + self._f107.fbe_size), buffer, self._f107.fbe_offset + self._f107.fbe_size)
-        self._f109 = fbe.FieldModelOptional(fbe.FieldModelWChar(buffer, self._f108.fbe_offset + self._f108.fbe_size), buffer, self._f108.fbe_offset + self._f108.fbe_size)
-        self._f110 = fbe.FieldModelOptional(fbe.FieldModelWChar(buffer, self._f109.fbe_offset + self._f109.fbe_size), buffer, self._f109.fbe_offset + self._f109.fbe_size)
-        self._f111 = fbe.FieldModelOptional(fbe.FieldModelWChar(buffer, self._f110.fbe_offset + self._f110.fbe_size), buffer, self._f110.fbe_offset + self._f110.fbe_size)
-        self._f112 = fbe.FieldModelOptional(fbe.FieldModelInt8(buffer, self._f111.fbe_offset + self._f111.fbe_size), buffer, self._f111.fbe_offset + self._f111.fbe_size)
-        self._f113 = fbe.FieldModelOptional(fbe.FieldModelInt8(buffer, self._f112.fbe_offset + self._f112.fbe_size), buffer, self._f112.fbe_offset + self._f112.fbe_size)
-        self._f114 = fbe.FieldModelOptional(fbe.FieldModelInt8(buffer, self._f113.fbe_offset + self._f113.fbe_size), buffer, self._f113.fbe_offset + self._f113.fbe_size)
-        self._f115 = fbe.FieldModelOptional(fbe.FieldModelUInt8(buffer, self._f114.fbe_offset + self._f114.fbe_size), buffer, self._f114.fbe_offset + self._f114.fbe_size)
-        self._f116 = fbe.FieldModelOptional(fbe.FieldModelUInt8(buffer, self._f115.fbe_offset + self._f115.fbe_size), buffer, self._f115.fbe_offset + self._f115.fbe_size)
-        self._f117 = fbe.FieldModelOptional(fbe.FieldModelUInt8(buffer, self._f116.fbe_offset + self._f116.fbe_size), buffer, self._f116.fbe_offset + self._f116.fbe_size)
-        self._f118 = fbe.FieldModelOptional(fbe.FieldModelInt16(buffer, self._f117.fbe_offset + self._f117.fbe_size), buffer, self._f117.fbe_offset + self._f117.fbe_size)
-        self._f119 = fbe.FieldModelOptional(fbe.FieldModelInt16(buffer, self._f118.fbe_offset + self._f118.fbe_size), buffer, self._f118.fbe_offset + self._f118.fbe_size)
-        self._f120 = fbe.FieldModelOptional(fbe.FieldModelInt16(buffer, self._f119.fbe_offset + self._f119.fbe_size), buffer, self._f119.fbe_offset + self._f119.fbe_size)
-        self._f121 = fbe.FieldModelOptional(fbe.FieldModelUInt16(buffer, self._f120.fbe_offset + self._f120.fbe_size), buffer, self._f120.fbe_offset + self._f120.fbe_size)
-        self._f122 = fbe.FieldModelOptional(fbe.FieldModelUInt16(buffer, self._f121.fbe_offset + self._f121.fbe_size), buffer, self._f121.fbe_offset + self._f121.fbe_size)
-        self._f123 = fbe.FieldModelOptional(fbe.FieldModelUInt16(buffer, self._f122.fbe_offset + self._f122.fbe_size), buffer, self._f122.fbe_offset + self._f122.fbe_size)
-        self._f124 = fbe.FieldModelOptional(fbe.FieldModelInt32(buffer, self._f123.fbe_offset + self._f123.fbe_size), buffer, self._f123.fbe_offset + self._f123.fbe_size)
-        self._f125 = fbe.FieldModelOptional(fbe.FieldModelInt32(buffer, self._f124.fbe_offset + self._f124.fbe_size), buffer, self._f124.fbe_offset + self._f124.fbe_size)
-        self._f126 = fbe.FieldModelOptional(fbe.FieldModelInt32(buffer, self._f125.fbe_offset + self._f125.fbe_size), buffer, self._f125.fbe_offset + self._f125.fbe_size)
-        self._f127 = fbe.FieldModelOptional(fbe.FieldModelUInt32(buffer, self._f126.fbe_offset + self._f126.fbe_size), buffer, self._f126.fbe_offset + self._f126.fbe_size)
-        self._f128 = fbe.FieldModelOptional(fbe.FieldModelUInt32(buffer, self._f127.fbe_offset + self._f127.fbe_size), buffer, self._f127.fbe_offset + self._f127.fbe_size)
-        self._f129 = fbe.FieldModelOptional(fbe.FieldModelUInt32(buffer, self._f128.fbe_offset + self._f128.fbe_size), buffer, self._f128.fbe_offset + self._f128.fbe_size)
-        self._f130 = fbe.FieldModelOptional(fbe.FieldModelInt64(buffer, self._f129.fbe_offset + self._f129.fbe_size), buffer, self._f129.fbe_offset + self._f129.fbe_size)
-        self._f131 = fbe.FieldModelOptional(fbe.FieldModelInt64(buffer, self._f130.fbe_offset + self._f130.fbe_size), buffer, self._f130.fbe_offset + self._f130.fbe_size)
-        self._f132 = fbe.FieldModelOptional(fbe.FieldModelInt64(buffer, self._f131.fbe_offset + self._f131.fbe_size), buffer, self._f131.fbe_offset + self._f131.fbe_size)
-        self._f133 = fbe.FieldModelOptional(fbe.FieldModelUInt64(buffer, self._f132.fbe_offset + self._f132.fbe_size), buffer, self._f132.fbe_offset + self._f132.fbe_size)
-        self._f134 = fbe.FieldModelOptional(fbe.FieldModelUInt64(buffer, self._f133.fbe_offset + self._f133.fbe_size), buffer, self._f133.fbe_offset + self._f133.fbe_size)
-        self._f135 = fbe.FieldModelOptional(fbe.FieldModelUInt64(buffer, self._f134.fbe_offset + self._f134.fbe_size), buffer, self._f134.fbe_offset + self._f134.fbe_size)
-        self._f136 = fbe.FieldModelOptional(fbe.FieldModelFloat(buffer, self._f135.fbe_offset + self._f135.fbe_size), buffer, self._f135.fbe_offset + self._f135.fbe_size)
-        self._f137 = fbe.FieldModelOptional(fbe.FieldModelFloat(buffer, self._f136.fbe_offset + self._f136.fbe_size), buffer, self._f136.fbe_offset + self._f136.fbe_size)
-        self._f138 = fbe.FieldModelOptional(fbe.FieldModelFloat(buffer, self._f137.fbe_offset + self._f137.fbe_size), buffer, self._f137.fbe_offset + self._f137.fbe_size)
-        self._f139 = fbe.FieldModelOptional(fbe.FieldModelDouble(buffer, self._f138.fbe_offset + self._f138.fbe_size), buffer, self._f138.fbe_offset + self._f138.fbe_size)
-        self._f140 = fbe.FieldModelOptional(fbe.FieldModelDouble(buffer, self._f139.fbe_offset + self._f139.fbe_size), buffer, self._f139.fbe_offset + self._f139.fbe_size)
-        self._f141 = fbe.FieldModelOptional(fbe.FieldModelDouble(buffer, self._f140.fbe_offset + self._f140.fbe_size), buffer, self._f140.fbe_offset + self._f140.fbe_size)
-        self._f142 = fbe.FieldModelOptional(fbe.FieldModelDecimal(buffer, self._f141.fbe_offset + self._f141.fbe_size), buffer, self._f141.fbe_offset + self._f141.fbe_size)
-        self._f143 = fbe.FieldModelOptional(fbe.FieldModelDecimal(buffer, self._f142.fbe_offset + self._f142.fbe_size), buffer, self._f142.fbe_offset + self._f142.fbe_size)
-        self._f144 = fbe.FieldModelOptional(fbe.FieldModelDecimal(buffer, self._f143.fbe_offset + self._f143.fbe_size), buffer, self._f143.fbe_offset + self._f143.fbe_size)
-        self._f145 = fbe.FieldModelOptional(fbe.FieldModelString(buffer, self._f144.fbe_offset + self._f144.fbe_size), buffer, self._f144.fbe_offset + self._f144.fbe_size)
-        self._f146 = fbe.FieldModelOptional(fbe.FieldModelString(buffer, self._f145.fbe_offset + self._f145.fbe_size), buffer, self._f145.fbe_offset + self._f145.fbe_size)
-        self._f147 = fbe.FieldModelOptional(fbe.FieldModelString(buffer, self._f146.fbe_offset + self._f146.fbe_size), buffer, self._f146.fbe_offset + self._f146.fbe_size)
-        self._f148 = fbe.FieldModelOptional(fbe.FieldModelTimestamp(buffer, self._f147.fbe_offset + self._f147.fbe_size), buffer, self._f147.fbe_offset + self._f147.fbe_size)
-        self._f149 = fbe.FieldModelOptional(fbe.FieldModelTimestamp(buffer, self._f148.fbe_offset + self._f148.fbe_size), buffer, self._f148.fbe_offset + self._f148.fbe_size)
-        self._f150 = fbe.FieldModelOptional(fbe.FieldModelTimestamp(buffer, self._f149.fbe_offset + self._f149.fbe_size), buffer, self._f149.fbe_offset + self._f149.fbe_size)
-        self._f151 = fbe.FieldModelOptional(fbe.FieldModelUUID(buffer, self._f150.fbe_offset + self._f150.fbe_size), buffer, self._f150.fbe_offset + self._f150.fbe_size)
-        self._f152 = fbe.FieldModelOptional(fbe.FieldModelUUID(buffer, self._f151.fbe_offset + self._f151.fbe_size), buffer, self._f151.fbe_offset + self._f151.fbe_size)
-        self._f153 = fbe.FieldModelOptional(fbe.FieldModelUUID(buffer, self._f152.fbe_offset + self._f152.fbe_size), buffer, self._f152.fbe_offset + self._f152.fbe_size)
-        self._f154 = fbe.FieldModelOptional(proto.FieldModelOrderSide(buffer, self._f153.fbe_offset + self._f153.fbe_size), buffer, self._f153.fbe_offset + self._f153.fbe_size)
-        self._f155 = fbe.FieldModelOptional(proto.FieldModelOrderSide(buffer, self._f154.fbe_offset + self._f154.fbe_size), buffer, self._f154.fbe_offset + self._f154.fbe_size)
-        self._f156 = fbe.FieldModelOptional(proto.FieldModelOrderType(buffer, self._f155.fbe_offset + self._f155.fbe_size), buffer, self._f155.fbe_offset + self._f155.fbe_size)
-        self._f157 = fbe.FieldModelOptional(proto.FieldModelOrderType(buffer, self._f156.fbe_offset + self._f156.fbe_size), buffer, self._f156.fbe_offset + self._f156.fbe_size)
-        self._f158 = fbe.FieldModelOptional(proto.FieldModelOrder(buffer, self._f157.fbe_offset + self._f157.fbe_size), buffer, self._f157.fbe_offset + self._f157.fbe_size)
-        self._f159 = fbe.FieldModelOptional(proto.FieldModelOrder(buffer, self._f158.fbe_offset + self._f158.fbe_size), buffer, self._f158.fbe_offset + self._f158.fbe_size)
-        self._f160 = fbe.FieldModelOptional(proto.FieldModelBalance(buffer, self._f159.fbe_offset + self._f159.fbe_size), buffer, self._f159.fbe_offset + self._f159.fbe_size)
-        self._f161 = fbe.FieldModelOptional(proto.FieldModelBalance(buffer, self._f160.fbe_offset + self._f160.fbe_size), buffer, self._f160.fbe_offset + self._f160.fbe_size)
-        self._f162 = fbe.FieldModelOptional(proto.FieldModelState(buffer, self._f161.fbe_offset + self._f161.fbe_size), buffer, self._f161.fbe_offset + self._f161.fbe_size)
-        self._f163 = fbe.FieldModelOptional(proto.FieldModelState(buffer, self._f162.fbe_offset + self._f162.fbe_size), buffer, self._f162.fbe_offset + self._f162.fbe_size)
-        self._f164 = fbe.FieldModelOptional(proto.FieldModelAccount(buffer, self._f163.fbe_offset + self._f163.fbe_size), buffer, self._f163.fbe_offset + self._f163.fbe_size)
-        self._f165 = fbe.FieldModelOptional(proto.FieldModelAccount(buffer, self._f164.fbe_offset + self._f164.fbe_size), buffer, self._f164.fbe_offset + self._f164.fbe_size)
 
     @property
     def parent(self):
         return self._parent
-
-    @property
-    def f100(self):
-        return self._f100
-
-    @property
-    def f101(self):
-        return self._f101
-
-    @property
-    def f102(self):
-        return self._f102
-
-    @property
-    def f103(self):
-        return self._f103
-
-    @property
-    def f104(self):
-        return self._f104
-
-    @property
-    def f105(self):
-        return self._f105
-
-    @property
-    def f106(self):
-        return self._f106
-
-    @property
-    def f107(self):
-        return self._f107
-
-    @property
-    def f108(self):
-        return self._f108
-
-    @property
-    def f109(self):
-        return self._f109
-
-    @property
-    def f110(self):
-        return self._f110
-
-    @property
-    def f111(self):
-        return self._f111
-
-    @property
-    def f112(self):
-        return self._f112
-
-    @property
-    def f113(self):
-        return self._f113
-
-    @property
-    def f114(self):
-        return self._f114
-
-    @property
-    def f115(self):
-        return self._f115
-
-    @property
-    def f116(self):
-        return self._f116
-
-    @property
-    def f117(self):
-        return self._f117
-
-    @property
-    def f118(self):
-        return self._f118
-
-    @property
-    def f119(self):
-        return self._f119
-
-    @property
-    def f120(self):
-        return self._f120
-
-    @property
-    def f121(self):
-        return self._f121
-
-    @property
-    def f122(self):
-        return self._f122
-
-    @property
-    def f123(self):
-        return self._f123
-
-    @property
-    def f124(self):
-        return self._f124
-
-    @property
-    def f125(self):
-        return self._f125
-
-    @property
-    def f126(self):
-        return self._f126
-
-    @property
-    def f127(self):
-        return self._f127
-
-    @property
-    def f128(self):
-        return self._f128
-
-    @property
-    def f129(self):
-        return self._f129
-
-    @property
-    def f130(self):
-        return self._f130
-
-    @property
-    def f131(self):
-        return self._f131
-
-    @property
-    def f132(self):
-        return self._f132
-
-    @property
-    def f133(self):
-        return self._f133
-
-    @property
-    def f134(self):
-        return self._f134
-
-    @property
-    def f135(self):
-        return self._f135
-
-    @property
-    def f136(self):
-        return self._f136
-
-    @property
-    def f137(self):
-        return self._f137
-
-    @property
-    def f138(self):
-        return self._f138
-
-    @property
-    def f139(self):
-        return self._f139
-
-    @property
-    def f140(self):
-        return self._f140
-
-    @property
-    def f141(self):
-        return self._f141
-
-    @property
-    def f142(self):
-        return self._f142
-
-    @property
-    def f143(self):
-        return self._f143
-
-    @property
-    def f144(self):
-        return self._f144
-
-    @property
-    def f145(self):
-        return self._f145
-
-    @property
-    def f146(self):
-        return self._f146
-
-    @property
-    def f147(self):
-        return self._f147
-
-    @property
-    def f148(self):
-        return self._f148
-
-    @property
-    def f149(self):
-        return self._f149
-
-    @property
-    def f150(self):
-        return self._f150
-
-    @property
-    def f151(self):
-        return self._f151
-
-    @property
-    def f152(self):
-        return self._f152
-
-    @property
-    def f153(self):
-        return self._f153
-
-    @property
-    def f154(self):
-        return self._f154
-
-    @property
-    def f155(self):
-        return self._f155
-
-    @property
-    def f156(self):
-        return self._f156
-
-    @property
-    def f157(self):
-        return self._f157
-
-    @property
-    def f158(self):
-        return self._f158
-
-    @property
-    def f159(self):
-        return self._f159
-
-    @property
-    def f160(self):
-        return self._f160
-
-    @property
-    def f161(self):
-        return self._f161
-
-    @property
-    def f162(self):
-        return self._f162
-
-    @property
-    def f163(self):
-        return self._f163
-
-    @property
-    def f164(self):
-        return self._f164
-
-    @property
-    def f165(self):
-        return self._f165
 
     # Get the field size
     @property
@@ -4462,72 +1261,6 @@ class FieldModelStructOptional(fbe.FieldModel):
     def fbe_body(self):
         fbe_result = 4 + 4 \
             + self.parent.fbe_body - 4 - 4 \
-            + self.f100.fbe_size \
-            + self.f101.fbe_size \
-            + self.f102.fbe_size \
-            + self.f103.fbe_size \
-            + self.f104.fbe_size \
-            + self.f105.fbe_size \
-            + self.f106.fbe_size \
-            + self.f107.fbe_size \
-            + self.f108.fbe_size \
-            + self.f109.fbe_size \
-            + self.f110.fbe_size \
-            + self.f111.fbe_size \
-            + self.f112.fbe_size \
-            + self.f113.fbe_size \
-            + self.f114.fbe_size \
-            + self.f115.fbe_size \
-            + self.f116.fbe_size \
-            + self.f117.fbe_size \
-            + self.f118.fbe_size \
-            + self.f119.fbe_size \
-            + self.f120.fbe_size \
-            + self.f121.fbe_size \
-            + self.f122.fbe_size \
-            + self.f123.fbe_size \
-            + self.f124.fbe_size \
-            + self.f125.fbe_size \
-            + self.f126.fbe_size \
-            + self.f127.fbe_size \
-            + self.f128.fbe_size \
-            + self.f129.fbe_size \
-            + self.f130.fbe_size \
-            + self.f131.fbe_size \
-            + self.f132.fbe_size \
-            + self.f133.fbe_size \
-            + self.f134.fbe_size \
-            + self.f135.fbe_size \
-            + self.f136.fbe_size \
-            + self.f137.fbe_size \
-            + self.f138.fbe_size \
-            + self.f139.fbe_size \
-            + self.f140.fbe_size \
-            + self.f141.fbe_size \
-            + self.f142.fbe_size \
-            + self.f143.fbe_size \
-            + self.f144.fbe_size \
-            + self.f145.fbe_size \
-            + self.f146.fbe_size \
-            + self.f147.fbe_size \
-            + self.f148.fbe_size \
-            + self.f149.fbe_size \
-            + self.f150.fbe_size \
-            + self.f151.fbe_size \
-            + self.f152.fbe_size \
-            + self.f153.fbe_size \
-            + self.f154.fbe_size \
-            + self.f155.fbe_size \
-            + self.f156.fbe_size \
-            + self.f157.fbe_size \
-            + self.f158.fbe_size \
-            + self.f159.fbe_size \
-            + self.f160.fbe_size \
-            + self.f161.fbe_size \
-            + self.f162.fbe_size \
-            + self.f163.fbe_size \
-            + self.f164.fbe_size \
-            + self.f165.fbe_size \
 
         return fbe_result
 
@@ -4545,72 +1278,6 @@ class FieldModelStructOptional(fbe.FieldModel):
 
         fbe_result = self.fbe_body \
             + self.parent.fbe_extra \
-            + self.f100.fbe_extra \
-            + self.f101.fbe_extra \
-            + self.f102.fbe_extra \
-            + self.f103.fbe_extra \
-            + self.f104.fbe_extra \
-            + self.f105.fbe_extra \
-            + self.f106.fbe_extra \
-            + self.f107.fbe_extra \
-            + self.f108.fbe_extra \
-            + self.f109.fbe_extra \
-            + self.f110.fbe_extra \
-            + self.f111.fbe_extra \
-            + self.f112.fbe_extra \
-            + self.f113.fbe_extra \
-            + self.f114.fbe_extra \
-            + self.f115.fbe_extra \
-            + self.f116.fbe_extra \
-            + self.f117.fbe_extra \
-            + self.f118.fbe_extra \
-            + self.f119.fbe_extra \
-            + self.f120.fbe_extra \
-            + self.f121.fbe_extra \
-            + self.f122.fbe_extra \
-            + self.f123.fbe_extra \
-            + self.f124.fbe_extra \
-            + self.f125.fbe_extra \
-            + self.f126.fbe_extra \
-            + self.f127.fbe_extra \
-            + self.f128.fbe_extra \
-            + self.f129.fbe_extra \
-            + self.f130.fbe_extra \
-            + self.f131.fbe_extra \
-            + self.f132.fbe_extra \
-            + self.f133.fbe_extra \
-            + self.f134.fbe_extra \
-            + self.f135.fbe_extra \
-            + self.f136.fbe_extra \
-            + self.f137.fbe_extra \
-            + self.f138.fbe_extra \
-            + self.f139.fbe_extra \
-            + self.f140.fbe_extra \
-            + self.f141.fbe_extra \
-            + self.f142.fbe_extra \
-            + self.f143.fbe_extra \
-            + self.f144.fbe_extra \
-            + self.f145.fbe_extra \
-            + self.f146.fbe_extra \
-            + self.f147.fbe_extra \
-            + self.f148.fbe_extra \
-            + self.f149.fbe_extra \
-            + self.f150.fbe_extra \
-            + self.f151.fbe_extra \
-            + self.f152.fbe_extra \
-            + self.f153.fbe_extra \
-            + self.f154.fbe_extra \
-            + self.f155.fbe_extra \
-            + self.f156.fbe_extra \
-            + self.f157.fbe_extra \
-            + self.f158.fbe_extra \
-            + self.f159.fbe_extra \
-            + self.f160.fbe_extra \
-            + self.f161.fbe_extra \
-            + self.f162.fbe_extra \
-            + self.f163.fbe_extra \
-            + self.f164.fbe_extra \
-            + self.f165.fbe_extra \
 
         self._buffer.unshift(fbe_struct_offset)
 
@@ -4654,402 +1321,6 @@ class FieldModelStructOptional(fbe.FieldModel):
         if not self.parent.verify_fields(fbe_struct_size):
             return False
         fbe_current_size += self.parent.fbe_body - 4 - 4
-
-        if (fbe_current_size + self.f100.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f100.verify():
-            return False
-        fbe_current_size += self.f100.fbe_size
-
-        if (fbe_current_size + self.f101.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f101.verify():
-            return False
-        fbe_current_size += self.f101.fbe_size
-
-        if (fbe_current_size + self.f102.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f102.verify():
-            return False
-        fbe_current_size += self.f102.fbe_size
-
-        if (fbe_current_size + self.f103.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f103.verify():
-            return False
-        fbe_current_size += self.f103.fbe_size
-
-        if (fbe_current_size + self.f104.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f104.verify():
-            return False
-        fbe_current_size += self.f104.fbe_size
-
-        if (fbe_current_size + self.f105.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f105.verify():
-            return False
-        fbe_current_size += self.f105.fbe_size
-
-        if (fbe_current_size + self.f106.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f106.verify():
-            return False
-        fbe_current_size += self.f106.fbe_size
-
-        if (fbe_current_size + self.f107.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f107.verify():
-            return False
-        fbe_current_size += self.f107.fbe_size
-
-        if (fbe_current_size + self.f108.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f108.verify():
-            return False
-        fbe_current_size += self.f108.fbe_size
-
-        if (fbe_current_size + self.f109.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f109.verify():
-            return False
-        fbe_current_size += self.f109.fbe_size
-
-        if (fbe_current_size + self.f110.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f110.verify():
-            return False
-        fbe_current_size += self.f110.fbe_size
-
-        if (fbe_current_size + self.f111.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f111.verify():
-            return False
-        fbe_current_size += self.f111.fbe_size
-
-        if (fbe_current_size + self.f112.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f112.verify():
-            return False
-        fbe_current_size += self.f112.fbe_size
-
-        if (fbe_current_size + self.f113.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f113.verify():
-            return False
-        fbe_current_size += self.f113.fbe_size
-
-        if (fbe_current_size + self.f114.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f114.verify():
-            return False
-        fbe_current_size += self.f114.fbe_size
-
-        if (fbe_current_size + self.f115.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f115.verify():
-            return False
-        fbe_current_size += self.f115.fbe_size
-
-        if (fbe_current_size + self.f116.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f116.verify():
-            return False
-        fbe_current_size += self.f116.fbe_size
-
-        if (fbe_current_size + self.f117.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f117.verify():
-            return False
-        fbe_current_size += self.f117.fbe_size
-
-        if (fbe_current_size + self.f118.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f118.verify():
-            return False
-        fbe_current_size += self.f118.fbe_size
-
-        if (fbe_current_size + self.f119.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f119.verify():
-            return False
-        fbe_current_size += self.f119.fbe_size
-
-        if (fbe_current_size + self.f120.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f120.verify():
-            return False
-        fbe_current_size += self.f120.fbe_size
-
-        if (fbe_current_size + self.f121.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f121.verify():
-            return False
-        fbe_current_size += self.f121.fbe_size
-
-        if (fbe_current_size + self.f122.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f122.verify():
-            return False
-        fbe_current_size += self.f122.fbe_size
-
-        if (fbe_current_size + self.f123.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f123.verify():
-            return False
-        fbe_current_size += self.f123.fbe_size
-
-        if (fbe_current_size + self.f124.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f124.verify():
-            return False
-        fbe_current_size += self.f124.fbe_size
-
-        if (fbe_current_size + self.f125.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f125.verify():
-            return False
-        fbe_current_size += self.f125.fbe_size
-
-        if (fbe_current_size + self.f126.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f126.verify():
-            return False
-        fbe_current_size += self.f126.fbe_size
-
-        if (fbe_current_size + self.f127.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f127.verify():
-            return False
-        fbe_current_size += self.f127.fbe_size
-
-        if (fbe_current_size + self.f128.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f128.verify():
-            return False
-        fbe_current_size += self.f128.fbe_size
-
-        if (fbe_current_size + self.f129.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f129.verify():
-            return False
-        fbe_current_size += self.f129.fbe_size
-
-        if (fbe_current_size + self.f130.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f130.verify():
-            return False
-        fbe_current_size += self.f130.fbe_size
-
-        if (fbe_current_size + self.f131.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f131.verify():
-            return False
-        fbe_current_size += self.f131.fbe_size
-
-        if (fbe_current_size + self.f132.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f132.verify():
-            return False
-        fbe_current_size += self.f132.fbe_size
-
-        if (fbe_current_size + self.f133.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f133.verify():
-            return False
-        fbe_current_size += self.f133.fbe_size
-
-        if (fbe_current_size + self.f134.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f134.verify():
-            return False
-        fbe_current_size += self.f134.fbe_size
-
-        if (fbe_current_size + self.f135.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f135.verify():
-            return False
-        fbe_current_size += self.f135.fbe_size
-
-        if (fbe_current_size + self.f136.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f136.verify():
-            return False
-        fbe_current_size += self.f136.fbe_size
-
-        if (fbe_current_size + self.f137.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f137.verify():
-            return False
-        fbe_current_size += self.f137.fbe_size
-
-        if (fbe_current_size + self.f138.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f138.verify():
-            return False
-        fbe_current_size += self.f138.fbe_size
-
-        if (fbe_current_size + self.f139.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f139.verify():
-            return False
-        fbe_current_size += self.f139.fbe_size
-
-        if (fbe_current_size + self.f140.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f140.verify():
-            return False
-        fbe_current_size += self.f140.fbe_size
-
-        if (fbe_current_size + self.f141.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f141.verify():
-            return False
-        fbe_current_size += self.f141.fbe_size
-
-        if (fbe_current_size + self.f142.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f142.verify():
-            return False
-        fbe_current_size += self.f142.fbe_size
-
-        if (fbe_current_size + self.f143.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f143.verify():
-            return False
-        fbe_current_size += self.f143.fbe_size
-
-        if (fbe_current_size + self.f144.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f144.verify():
-            return False
-        fbe_current_size += self.f144.fbe_size
-
-        if (fbe_current_size + self.f145.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f145.verify():
-            return False
-        fbe_current_size += self.f145.fbe_size
-
-        if (fbe_current_size + self.f146.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f146.verify():
-            return False
-        fbe_current_size += self.f146.fbe_size
-
-        if (fbe_current_size + self.f147.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f147.verify():
-            return False
-        fbe_current_size += self.f147.fbe_size
-
-        if (fbe_current_size + self.f148.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f148.verify():
-            return False
-        fbe_current_size += self.f148.fbe_size
-
-        if (fbe_current_size + self.f149.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f149.verify():
-            return False
-        fbe_current_size += self.f149.fbe_size
-
-        if (fbe_current_size + self.f150.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f150.verify():
-            return False
-        fbe_current_size += self.f150.fbe_size
-
-        if (fbe_current_size + self.f151.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f151.verify():
-            return False
-        fbe_current_size += self.f151.fbe_size
-
-        if (fbe_current_size + self.f152.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f152.verify():
-            return False
-        fbe_current_size += self.f152.fbe_size
-
-        if (fbe_current_size + self.f153.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f153.verify():
-            return False
-        fbe_current_size += self.f153.fbe_size
-
-        if (fbe_current_size + self.f154.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f154.verify():
-            return False
-        fbe_current_size += self.f154.fbe_size
-
-        if (fbe_current_size + self.f155.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f155.verify():
-            return False
-        fbe_current_size += self.f155.fbe_size
-
-        if (fbe_current_size + self.f156.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f156.verify():
-            return False
-        fbe_current_size += self.f156.fbe_size
-
-        if (fbe_current_size + self.f157.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f157.verify():
-            return False
-        fbe_current_size += self.f157.fbe_size
-
-        if (fbe_current_size + self.f158.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f158.verify():
-            return False
-        fbe_current_size += self.f158.fbe_size
-
-        if (fbe_current_size + self.f159.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f159.verify():
-            return False
-        fbe_current_size += self.f159.fbe_size
-
-        if (fbe_current_size + self.f160.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f160.verify():
-            return False
-        fbe_current_size += self.f160.fbe_size
-
-        if (fbe_current_size + self.f161.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f161.verify():
-            return False
-        fbe_current_size += self.f161.fbe_size
-
-        if (fbe_current_size + self.f162.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f162.verify():
-            return False
-        fbe_current_size += self.f162.fbe_size
-
-        if (fbe_current_size + self.f163.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f163.verify():
-            return False
-        fbe_current_size += self.f163.fbe_size
-
-        if (fbe_current_size + self.f164.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f164.verify():
-            return False
-        fbe_current_size += self.f164.fbe_size
-
-        if (fbe_current_size + self.f165.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f165.verify():
-            return False
-        fbe_current_size += self.f165.fbe_size
 
         return True
 
@@ -5097,402 +1368,6 @@ class FieldModelStructOptional(fbe.FieldModel):
             self.parent.get_fields(fbe_value, fbe_struct_size)
         fbe_current_size += self.parent.fbe_body - 4 - 4
 
-        if (fbe_current_size + self.f100.fbe_size) <= fbe_struct_size:
-            fbe_value.f100 = self.f100.get()
-        else:
-            fbe_value.f100 = None
-        fbe_current_size += self.f100.fbe_size
-
-        if (fbe_current_size + self.f101.fbe_size) <= fbe_struct_size:
-            fbe_value.f101 = self.f101.get(True)
-        else:
-            fbe_value.f101 = True
-        fbe_current_size += self.f101.fbe_size
-
-        if (fbe_current_size + self.f102.fbe_size) <= fbe_struct_size:
-            fbe_value.f102 = self.f102.get(None)
-        else:
-            fbe_value.f102 = None
-        fbe_current_size += self.f102.fbe_size
-
-        if (fbe_current_size + self.f103.fbe_size) <= fbe_struct_size:
-            fbe_value.f103 = self.f103.get()
-        else:
-            fbe_value.f103 = None
-        fbe_current_size += self.f103.fbe_size
-
-        if (fbe_current_size + self.f104.fbe_size) <= fbe_struct_size:
-            fbe_value.f104 = self.f104.get(255)
-        else:
-            fbe_value.f104 = 255
-        fbe_current_size += self.f104.fbe_size
-
-        if (fbe_current_size + self.f105.fbe_size) <= fbe_struct_size:
-            fbe_value.f105 = self.f105.get(None)
-        else:
-            fbe_value.f105 = None
-        fbe_current_size += self.f105.fbe_size
-
-        if (fbe_current_size + self.f106.fbe_size) <= fbe_struct_size:
-            fbe_value.f106 = self.f106.get()
-        else:
-            fbe_value.f106 = None
-        fbe_current_size += self.f106.fbe_size
-
-        if (fbe_current_size + self.f107.fbe_size) <= fbe_struct_size:
-            fbe_value.f107 = self.f107.get('!')
-        else:
-            fbe_value.f107 = '!'
-        fbe_current_size += self.f107.fbe_size
-
-        if (fbe_current_size + self.f108.fbe_size) <= fbe_struct_size:
-            fbe_value.f108 = self.f108.get(None)
-        else:
-            fbe_value.f108 = None
-        fbe_current_size += self.f108.fbe_size
-
-        if (fbe_current_size + self.f109.fbe_size) <= fbe_struct_size:
-            fbe_value.f109 = self.f109.get()
-        else:
-            fbe_value.f109 = None
-        fbe_current_size += self.f109.fbe_size
-
-        if (fbe_current_size + self.f110.fbe_size) <= fbe_struct_size:
-            fbe_value.f110 = self.f110.get(chr(0x0444))
-        else:
-            fbe_value.f110 = chr(0x0444)
-        fbe_current_size += self.f110.fbe_size
-
-        if (fbe_current_size + self.f111.fbe_size) <= fbe_struct_size:
-            fbe_value.f111 = self.f111.get(None)
-        else:
-            fbe_value.f111 = None
-        fbe_current_size += self.f111.fbe_size
-
-        if (fbe_current_size + self.f112.fbe_size) <= fbe_struct_size:
-            fbe_value.f112 = self.f112.get()
-        else:
-            fbe_value.f112 = None
-        fbe_current_size += self.f112.fbe_size
-
-        if (fbe_current_size + self.f113.fbe_size) <= fbe_struct_size:
-            fbe_value.f113 = self.f113.get(127)
-        else:
-            fbe_value.f113 = 127
-        fbe_current_size += self.f113.fbe_size
-
-        if (fbe_current_size + self.f114.fbe_size) <= fbe_struct_size:
-            fbe_value.f114 = self.f114.get(None)
-        else:
-            fbe_value.f114 = None
-        fbe_current_size += self.f114.fbe_size
-
-        if (fbe_current_size + self.f115.fbe_size) <= fbe_struct_size:
-            fbe_value.f115 = self.f115.get()
-        else:
-            fbe_value.f115 = None
-        fbe_current_size += self.f115.fbe_size
-
-        if (fbe_current_size + self.f116.fbe_size) <= fbe_struct_size:
-            fbe_value.f116 = self.f116.get(255)
-        else:
-            fbe_value.f116 = 255
-        fbe_current_size += self.f116.fbe_size
-
-        if (fbe_current_size + self.f117.fbe_size) <= fbe_struct_size:
-            fbe_value.f117 = self.f117.get(None)
-        else:
-            fbe_value.f117 = None
-        fbe_current_size += self.f117.fbe_size
-
-        if (fbe_current_size + self.f118.fbe_size) <= fbe_struct_size:
-            fbe_value.f118 = self.f118.get()
-        else:
-            fbe_value.f118 = None
-        fbe_current_size += self.f118.fbe_size
-
-        if (fbe_current_size + self.f119.fbe_size) <= fbe_struct_size:
-            fbe_value.f119 = self.f119.get(32767)
-        else:
-            fbe_value.f119 = 32767
-        fbe_current_size += self.f119.fbe_size
-
-        if (fbe_current_size + self.f120.fbe_size) <= fbe_struct_size:
-            fbe_value.f120 = self.f120.get(None)
-        else:
-            fbe_value.f120 = None
-        fbe_current_size += self.f120.fbe_size
-
-        if (fbe_current_size + self.f121.fbe_size) <= fbe_struct_size:
-            fbe_value.f121 = self.f121.get()
-        else:
-            fbe_value.f121 = None
-        fbe_current_size += self.f121.fbe_size
-
-        if (fbe_current_size + self.f122.fbe_size) <= fbe_struct_size:
-            fbe_value.f122 = self.f122.get(65535)
-        else:
-            fbe_value.f122 = 65535
-        fbe_current_size += self.f122.fbe_size
-
-        if (fbe_current_size + self.f123.fbe_size) <= fbe_struct_size:
-            fbe_value.f123 = self.f123.get(None)
-        else:
-            fbe_value.f123 = None
-        fbe_current_size += self.f123.fbe_size
-
-        if (fbe_current_size + self.f124.fbe_size) <= fbe_struct_size:
-            fbe_value.f124 = self.f124.get()
-        else:
-            fbe_value.f124 = None
-        fbe_current_size += self.f124.fbe_size
-
-        if (fbe_current_size + self.f125.fbe_size) <= fbe_struct_size:
-            fbe_value.f125 = self.f125.get(2147483647)
-        else:
-            fbe_value.f125 = 2147483647
-        fbe_current_size += self.f125.fbe_size
-
-        if (fbe_current_size + self.f126.fbe_size) <= fbe_struct_size:
-            fbe_value.f126 = self.f126.get(None)
-        else:
-            fbe_value.f126 = None
-        fbe_current_size += self.f126.fbe_size
-
-        if (fbe_current_size + self.f127.fbe_size) <= fbe_struct_size:
-            fbe_value.f127 = self.f127.get()
-        else:
-            fbe_value.f127 = None
-        fbe_current_size += self.f127.fbe_size
-
-        if (fbe_current_size + self.f128.fbe_size) <= fbe_struct_size:
-            fbe_value.f128 = self.f128.get(4294967295)
-        else:
-            fbe_value.f128 = 4294967295
-        fbe_current_size += self.f128.fbe_size
-
-        if (fbe_current_size + self.f129.fbe_size) <= fbe_struct_size:
-            fbe_value.f129 = self.f129.get(None)
-        else:
-            fbe_value.f129 = None
-        fbe_current_size += self.f129.fbe_size
-
-        if (fbe_current_size + self.f130.fbe_size) <= fbe_struct_size:
-            fbe_value.f130 = self.f130.get()
-        else:
-            fbe_value.f130 = None
-        fbe_current_size += self.f130.fbe_size
-
-        if (fbe_current_size + self.f131.fbe_size) <= fbe_struct_size:
-            fbe_value.f131 = self.f131.get(9223372036854775807)
-        else:
-            fbe_value.f131 = 9223372036854775807
-        fbe_current_size += self.f131.fbe_size
-
-        if (fbe_current_size + self.f132.fbe_size) <= fbe_struct_size:
-            fbe_value.f132 = self.f132.get(None)
-        else:
-            fbe_value.f132 = None
-        fbe_current_size += self.f132.fbe_size
-
-        if (fbe_current_size + self.f133.fbe_size) <= fbe_struct_size:
-            fbe_value.f133 = self.f133.get()
-        else:
-            fbe_value.f133 = None
-        fbe_current_size += self.f133.fbe_size
-
-        if (fbe_current_size + self.f134.fbe_size) <= fbe_struct_size:
-            fbe_value.f134 = self.f134.get(18446744073709551615)
-        else:
-            fbe_value.f134 = 18446744073709551615
-        fbe_current_size += self.f134.fbe_size
-
-        if (fbe_current_size + self.f135.fbe_size) <= fbe_struct_size:
-            fbe_value.f135 = self.f135.get(None)
-        else:
-            fbe_value.f135 = None
-        fbe_current_size += self.f135.fbe_size
-
-        if (fbe_current_size + self.f136.fbe_size) <= fbe_struct_size:
-            fbe_value.f136 = self.f136.get()
-        else:
-            fbe_value.f136 = None
-        fbe_current_size += self.f136.fbe_size
-
-        if (fbe_current_size + self.f137.fbe_size) <= fbe_struct_size:
-            fbe_value.f137 = self.f137.get(float(123.456))
-        else:
-            fbe_value.f137 = float(123.456)
-        fbe_current_size += self.f137.fbe_size
-
-        if (fbe_current_size + self.f138.fbe_size) <= fbe_struct_size:
-            fbe_value.f138 = self.f138.get(None)
-        else:
-            fbe_value.f138 = None
-        fbe_current_size += self.f138.fbe_size
-
-        if (fbe_current_size + self.f139.fbe_size) <= fbe_struct_size:
-            fbe_value.f139 = self.f139.get()
-        else:
-            fbe_value.f139 = None
-        fbe_current_size += self.f139.fbe_size
-
-        if (fbe_current_size + self.f140.fbe_size) <= fbe_struct_size:
-            fbe_value.f140 = self.f140.get(float(-123.456e+123))
-        else:
-            fbe_value.f140 = float(-123.456e+123)
-        fbe_current_size += self.f140.fbe_size
-
-        if (fbe_current_size + self.f141.fbe_size) <= fbe_struct_size:
-            fbe_value.f141 = self.f141.get(None)
-        else:
-            fbe_value.f141 = None
-        fbe_current_size += self.f141.fbe_size
-
-        if (fbe_current_size + self.f142.fbe_size) <= fbe_struct_size:
-            fbe_value.f142 = self.f142.get()
-        else:
-            fbe_value.f142 = None
-        fbe_current_size += self.f142.fbe_size
-
-        if (fbe_current_size + self.f143.fbe_size) <= fbe_struct_size:
-            fbe_value.f143 = self.f143.get(decimal.Decimal("123456.123456"))
-        else:
-            fbe_value.f143 = decimal.Decimal("123456.123456")
-        fbe_current_size += self.f143.fbe_size
-
-        if (fbe_current_size + self.f144.fbe_size) <= fbe_struct_size:
-            fbe_value.f144 = self.f144.get(None)
-        else:
-            fbe_value.f144 = None
-        fbe_current_size += self.f144.fbe_size
-
-        if (fbe_current_size + self.f145.fbe_size) <= fbe_struct_size:
-            fbe_value.f145 = self.f145.get()
-        else:
-            fbe_value.f145 = None
-        fbe_current_size += self.f145.fbe_size
-
-        if (fbe_current_size + self.f146.fbe_size) <= fbe_struct_size:
-            fbe_value.f146 = self.f146.get("Initial string!")
-        else:
-            fbe_value.f146 = "Initial string!"
-        fbe_current_size += self.f146.fbe_size
-
-        if (fbe_current_size + self.f147.fbe_size) <= fbe_struct_size:
-            fbe_value.f147 = self.f147.get(None)
-        else:
-            fbe_value.f147 = None
-        fbe_current_size += self.f147.fbe_size
-
-        if (fbe_current_size + self.f148.fbe_size) <= fbe_struct_size:
-            fbe_value.f148 = self.f148.get()
-        else:
-            fbe_value.f148 = None
-        fbe_current_size += self.f148.fbe_size
-
-        if (fbe_current_size + self.f149.fbe_size) <= fbe_struct_size:
-            fbe_value.f149 = self.f149.get(fbe.utc())
-        else:
-            fbe_value.f149 = fbe.utc()
-        fbe_current_size += self.f149.fbe_size
-
-        if (fbe_current_size + self.f150.fbe_size) <= fbe_struct_size:
-            fbe_value.f150 = self.f150.get(None)
-        else:
-            fbe_value.f150 = None
-        fbe_current_size += self.f150.fbe_size
-
-        if (fbe_current_size + self.f151.fbe_size) <= fbe_struct_size:
-            fbe_value.f151 = self.f151.get()
-        else:
-            fbe_value.f151 = None
-        fbe_current_size += self.f151.fbe_size
-
-        if (fbe_current_size + self.f152.fbe_size) <= fbe_struct_size:
-            fbe_value.f152 = self.f152.get(uuid.UUID("123e4567-e89b-12d3-a456-426655440000"))
-        else:
-            fbe_value.f152 = uuid.UUID("123e4567-e89b-12d3-a456-426655440000")
-        fbe_current_size += self.f152.fbe_size
-
-        if (fbe_current_size + self.f153.fbe_size) <= fbe_struct_size:
-            fbe_value.f153 = self.f153.get(None)
-        else:
-            fbe_value.f153 = None
-        fbe_current_size += self.f153.fbe_size
-
-        if (fbe_current_size + self.f154.fbe_size) <= fbe_struct_size:
-            fbe_value.f154 = self.f154.get()
-        else:
-            fbe_value.f154 = None
-        fbe_current_size += self.f154.fbe_size
-
-        if (fbe_current_size + self.f155.fbe_size) <= fbe_struct_size:
-            fbe_value.f155 = self.f155.get(None)
-        else:
-            fbe_value.f155 = None
-        fbe_current_size += self.f155.fbe_size
-
-        if (fbe_current_size + self.f156.fbe_size) <= fbe_struct_size:
-            fbe_value.f156 = self.f156.get()
-        else:
-            fbe_value.f156 = None
-        fbe_current_size += self.f156.fbe_size
-
-        if (fbe_current_size + self.f157.fbe_size) <= fbe_struct_size:
-            fbe_value.f157 = self.f157.get(None)
-        else:
-            fbe_value.f157 = None
-        fbe_current_size += self.f157.fbe_size
-
-        if (fbe_current_size + self.f158.fbe_size) <= fbe_struct_size:
-            fbe_value.f158 = self.f158.get()
-        else:
-            fbe_value.f158 = None
-        fbe_current_size += self.f158.fbe_size
-
-        if (fbe_current_size + self.f159.fbe_size) <= fbe_struct_size:
-            fbe_value.f159 = self.f159.get(None)
-        else:
-            fbe_value.f159 = None
-        fbe_current_size += self.f159.fbe_size
-
-        if (fbe_current_size + self.f160.fbe_size) <= fbe_struct_size:
-            fbe_value.f160 = self.f160.get()
-        else:
-            fbe_value.f160 = None
-        fbe_current_size += self.f160.fbe_size
-
-        if (fbe_current_size + self.f161.fbe_size) <= fbe_struct_size:
-            fbe_value.f161 = self.f161.get(None)
-        else:
-            fbe_value.f161 = None
-        fbe_current_size += self.f161.fbe_size
-
-        if (fbe_current_size + self.f162.fbe_size) <= fbe_struct_size:
-            fbe_value.f162 = self.f162.get()
-        else:
-            fbe_value.f162 = None
-        fbe_current_size += self.f162.fbe_size
-
-        if (fbe_current_size + self.f163.fbe_size) <= fbe_struct_size:
-            fbe_value.f163 = self.f163.get(None)
-        else:
-            fbe_value.f163 = None
-        fbe_current_size += self.f163.fbe_size
-
-        if (fbe_current_size + self.f164.fbe_size) <= fbe_struct_size:
-            fbe_value.f164 = self.f164.get()
-        else:
-            fbe_value.f164 = None
-        fbe_current_size += self.f164.fbe_size
-
-        if (fbe_current_size + self.f165.fbe_size) <= fbe_struct_size:
-            fbe_value.f165 = self.f165.get(None)
-        else:
-            fbe_value.f165 = None
-        fbe_current_size += self.f165.fbe_size
-
     # Set the struct value (begin phase)
     def set_begin(self):
         assert (self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size, "Model is broken!"
@@ -5528,72 +1403,6 @@ class FieldModelStructOptional(fbe.FieldModel):
     # Set the struct fields values
     def set_fields(self, fbe_value):
         self.parent.set_fields(fbe_value)
-        self.f100.set(fbe_value.f100)
-        self.f101.set(fbe_value.f101)
-        self.f102.set(fbe_value.f102)
-        self.f103.set(fbe_value.f103)
-        self.f104.set(fbe_value.f104)
-        self.f105.set(fbe_value.f105)
-        self.f106.set(fbe_value.f106)
-        self.f107.set(fbe_value.f107)
-        self.f108.set(fbe_value.f108)
-        self.f109.set(fbe_value.f109)
-        self.f110.set(fbe_value.f110)
-        self.f111.set(fbe_value.f111)
-        self.f112.set(fbe_value.f112)
-        self.f113.set(fbe_value.f113)
-        self.f114.set(fbe_value.f114)
-        self.f115.set(fbe_value.f115)
-        self.f116.set(fbe_value.f116)
-        self.f117.set(fbe_value.f117)
-        self.f118.set(fbe_value.f118)
-        self.f119.set(fbe_value.f119)
-        self.f120.set(fbe_value.f120)
-        self.f121.set(fbe_value.f121)
-        self.f122.set(fbe_value.f122)
-        self.f123.set(fbe_value.f123)
-        self.f124.set(fbe_value.f124)
-        self.f125.set(fbe_value.f125)
-        self.f126.set(fbe_value.f126)
-        self.f127.set(fbe_value.f127)
-        self.f128.set(fbe_value.f128)
-        self.f129.set(fbe_value.f129)
-        self.f130.set(fbe_value.f130)
-        self.f131.set(fbe_value.f131)
-        self.f132.set(fbe_value.f132)
-        self.f133.set(fbe_value.f133)
-        self.f134.set(fbe_value.f134)
-        self.f135.set(fbe_value.f135)
-        self.f136.set(fbe_value.f136)
-        self.f137.set(fbe_value.f137)
-        self.f138.set(fbe_value.f138)
-        self.f139.set(fbe_value.f139)
-        self.f140.set(fbe_value.f140)
-        self.f141.set(fbe_value.f141)
-        self.f142.set(fbe_value.f142)
-        self.f143.set(fbe_value.f143)
-        self.f144.set(fbe_value.f144)
-        self.f145.set(fbe_value.f145)
-        self.f146.set(fbe_value.f146)
-        self.f147.set(fbe_value.f147)
-        self.f148.set(fbe_value.f148)
-        self.f149.set(fbe_value.f149)
-        self.f150.set(fbe_value.f150)
-        self.f151.set(fbe_value.f151)
-        self.f152.set(fbe_value.f152)
-        self.f153.set(fbe_value.f153)
-        self.f154.set(fbe_value.f154)
-        self.f155.set(fbe_value.f155)
-        self.f156.set(fbe_value.f156)
-        self.f157.set(fbe_value.f157)
-        self.f158.set(fbe_value.f158)
-        self.f159.set(fbe_value.f159)
-        self.f160.set(fbe_value.f160)
-        self.f161.set(fbe_value.f161)
-        self.f162.set(fbe_value.f162)
-        self.f163.set(fbe_value.f163)
-        self.f164.set(fbe_value.f164)
-        self.f165.set(fbe_value.f165)
 
 
 # Fast Binary Encoding StructOptional model
@@ -5672,416 +1481,20 @@ class StructOptionalModel(fbe.Model):
 
 
 class FinalModelStructOptional(fbe.FinalModel):
-    __slots__ = "_parent", "_f100", "_f101", "_f102", "_f103", "_f104", "_f105", "_f106", "_f107", "_f108", "_f109", "_f110", "_f111", "_f112", "_f113", "_f114", "_f115", "_f116", "_f117", "_f118", "_f119", "_f120", "_f121", "_f122", "_f123", "_f124", "_f125", "_f126", "_f127", "_f128", "_f129", "_f130", "_f131", "_f132", "_f133", "_f134", "_f135", "_f136", "_f137", "_f138", "_f139", "_f140", "_f141", "_f142", "_f143", "_f144", "_f145", "_f146", "_f147", "_f148", "_f149", "_f150", "_f151", "_f152", "_f153", "_f154", "_f155", "_f156", "_f157", "_f158", "_f159", "_f160", "_f161", "_f162", "_f163", "_f164", "_f165", 
+    __slots__ = "_parent", 
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._parent = FinalModelStructSimple(buffer, 0)
-        self._f100 = fbe.FinalModelOptional(fbe.FinalModelBool(buffer, 0), buffer, 0)
-        self._f101 = fbe.FinalModelOptional(fbe.FinalModelBool(buffer, 0), buffer, 0)
-        self._f102 = fbe.FinalModelOptional(fbe.FinalModelBool(buffer, 0), buffer, 0)
-        self._f103 = fbe.FinalModelOptional(fbe.FinalModelByte(buffer, 0), buffer, 0)
-        self._f104 = fbe.FinalModelOptional(fbe.FinalModelByte(buffer, 0), buffer, 0)
-        self._f105 = fbe.FinalModelOptional(fbe.FinalModelByte(buffer, 0), buffer, 0)
-        self._f106 = fbe.FinalModelOptional(fbe.FinalModelChar(buffer, 0), buffer, 0)
-        self._f107 = fbe.FinalModelOptional(fbe.FinalModelChar(buffer, 0), buffer, 0)
-        self._f108 = fbe.FinalModelOptional(fbe.FinalModelChar(buffer, 0), buffer, 0)
-        self._f109 = fbe.FinalModelOptional(fbe.FinalModelWChar(buffer, 0), buffer, 0)
-        self._f110 = fbe.FinalModelOptional(fbe.FinalModelWChar(buffer, 0), buffer, 0)
-        self._f111 = fbe.FinalModelOptional(fbe.FinalModelWChar(buffer, 0), buffer, 0)
-        self._f112 = fbe.FinalModelOptional(fbe.FinalModelInt8(buffer, 0), buffer, 0)
-        self._f113 = fbe.FinalModelOptional(fbe.FinalModelInt8(buffer, 0), buffer, 0)
-        self._f114 = fbe.FinalModelOptional(fbe.FinalModelInt8(buffer, 0), buffer, 0)
-        self._f115 = fbe.FinalModelOptional(fbe.FinalModelUInt8(buffer, 0), buffer, 0)
-        self._f116 = fbe.FinalModelOptional(fbe.FinalModelUInt8(buffer, 0), buffer, 0)
-        self._f117 = fbe.FinalModelOptional(fbe.FinalModelUInt8(buffer, 0), buffer, 0)
-        self._f118 = fbe.FinalModelOptional(fbe.FinalModelInt16(buffer, 0), buffer, 0)
-        self._f119 = fbe.FinalModelOptional(fbe.FinalModelInt16(buffer, 0), buffer, 0)
-        self._f120 = fbe.FinalModelOptional(fbe.FinalModelInt16(buffer, 0), buffer, 0)
-        self._f121 = fbe.FinalModelOptional(fbe.FinalModelUInt16(buffer, 0), buffer, 0)
-        self._f122 = fbe.FinalModelOptional(fbe.FinalModelUInt16(buffer, 0), buffer, 0)
-        self._f123 = fbe.FinalModelOptional(fbe.FinalModelUInt16(buffer, 0), buffer, 0)
-        self._f124 = fbe.FinalModelOptional(fbe.FinalModelInt32(buffer, 0), buffer, 0)
-        self._f125 = fbe.FinalModelOptional(fbe.FinalModelInt32(buffer, 0), buffer, 0)
-        self._f126 = fbe.FinalModelOptional(fbe.FinalModelInt32(buffer, 0), buffer, 0)
-        self._f127 = fbe.FinalModelOptional(fbe.FinalModelUInt32(buffer, 0), buffer, 0)
-        self._f128 = fbe.FinalModelOptional(fbe.FinalModelUInt32(buffer, 0), buffer, 0)
-        self._f129 = fbe.FinalModelOptional(fbe.FinalModelUInt32(buffer, 0), buffer, 0)
-        self._f130 = fbe.FinalModelOptional(fbe.FinalModelInt64(buffer, 0), buffer, 0)
-        self._f131 = fbe.FinalModelOptional(fbe.FinalModelInt64(buffer, 0), buffer, 0)
-        self._f132 = fbe.FinalModelOptional(fbe.FinalModelInt64(buffer, 0), buffer, 0)
-        self._f133 = fbe.FinalModelOptional(fbe.FinalModelUInt64(buffer, 0), buffer, 0)
-        self._f134 = fbe.FinalModelOptional(fbe.FinalModelUInt64(buffer, 0), buffer, 0)
-        self._f135 = fbe.FinalModelOptional(fbe.FinalModelUInt64(buffer, 0), buffer, 0)
-        self._f136 = fbe.FinalModelOptional(fbe.FinalModelFloat(buffer, 0), buffer, 0)
-        self._f137 = fbe.FinalModelOptional(fbe.FinalModelFloat(buffer, 0), buffer, 0)
-        self._f138 = fbe.FinalModelOptional(fbe.FinalModelFloat(buffer, 0), buffer, 0)
-        self._f139 = fbe.FinalModelOptional(fbe.FinalModelDouble(buffer, 0), buffer, 0)
-        self._f140 = fbe.FinalModelOptional(fbe.FinalModelDouble(buffer, 0), buffer, 0)
-        self._f141 = fbe.FinalModelOptional(fbe.FinalModelDouble(buffer, 0), buffer, 0)
-        self._f142 = fbe.FinalModelOptional(fbe.FinalModelDecimal(buffer, 0), buffer, 0)
-        self._f143 = fbe.FinalModelOptional(fbe.FinalModelDecimal(buffer, 0), buffer, 0)
-        self._f144 = fbe.FinalModelOptional(fbe.FinalModelDecimal(buffer, 0), buffer, 0)
-        self._f145 = fbe.FinalModelOptional(fbe.FinalModelString(buffer, 0), buffer, 0)
-        self._f146 = fbe.FinalModelOptional(fbe.FinalModelString(buffer, 0), buffer, 0)
-        self._f147 = fbe.FinalModelOptional(fbe.FinalModelString(buffer, 0), buffer, 0)
-        self._f148 = fbe.FinalModelOptional(fbe.FinalModelTimestamp(buffer, 0), buffer, 0)
-        self._f149 = fbe.FinalModelOptional(fbe.FinalModelTimestamp(buffer, 0), buffer, 0)
-        self._f150 = fbe.FinalModelOptional(fbe.FinalModelTimestamp(buffer, 0), buffer, 0)
-        self._f151 = fbe.FinalModelOptional(fbe.FinalModelUUID(buffer, 0), buffer, 0)
-        self._f152 = fbe.FinalModelOptional(fbe.FinalModelUUID(buffer, 0), buffer, 0)
-        self._f153 = fbe.FinalModelOptional(fbe.FinalModelUUID(buffer, 0), buffer, 0)
-        self._f154 = fbe.FinalModelOptional(proto.FinalModelOrderSide(buffer, 0), buffer, 0)
-        self._f155 = fbe.FinalModelOptional(proto.FinalModelOrderSide(buffer, 0), buffer, 0)
-        self._f156 = fbe.FinalModelOptional(proto.FinalModelOrderType(buffer, 0), buffer, 0)
-        self._f157 = fbe.FinalModelOptional(proto.FinalModelOrderType(buffer, 0), buffer, 0)
-        self._f158 = fbe.FinalModelOptional(proto.FinalModelOrder(buffer, 0), buffer, 0)
-        self._f159 = fbe.FinalModelOptional(proto.FinalModelOrder(buffer, 0), buffer, 0)
-        self._f160 = fbe.FinalModelOptional(proto.FinalModelBalance(buffer, 0), buffer, 0)
-        self._f161 = fbe.FinalModelOptional(proto.FinalModelBalance(buffer, 0), buffer, 0)
-        self._f162 = fbe.FinalModelOptional(proto.FinalModelState(buffer, 0), buffer, 0)
-        self._f163 = fbe.FinalModelOptional(proto.FinalModelState(buffer, 0), buffer, 0)
-        self._f164 = fbe.FinalModelOptional(proto.FinalModelAccount(buffer, 0), buffer, 0)
-        self._f165 = fbe.FinalModelOptional(proto.FinalModelAccount(buffer, 0), buffer, 0)
 
     @property
     def parent(self):
         return self._parent
 
-    @property
-    def f100(self):
-        return self._f100
-
-    @property
-    def f101(self):
-        return self._f101
-
-    @property
-    def f102(self):
-        return self._f102
-
-    @property
-    def f103(self):
-        return self._f103
-
-    @property
-    def f104(self):
-        return self._f104
-
-    @property
-    def f105(self):
-        return self._f105
-
-    @property
-    def f106(self):
-        return self._f106
-
-    @property
-    def f107(self):
-        return self._f107
-
-    @property
-    def f108(self):
-        return self._f108
-
-    @property
-    def f109(self):
-        return self._f109
-
-    @property
-    def f110(self):
-        return self._f110
-
-    @property
-    def f111(self):
-        return self._f111
-
-    @property
-    def f112(self):
-        return self._f112
-
-    @property
-    def f113(self):
-        return self._f113
-
-    @property
-    def f114(self):
-        return self._f114
-
-    @property
-    def f115(self):
-        return self._f115
-
-    @property
-    def f116(self):
-        return self._f116
-
-    @property
-    def f117(self):
-        return self._f117
-
-    @property
-    def f118(self):
-        return self._f118
-
-    @property
-    def f119(self):
-        return self._f119
-
-    @property
-    def f120(self):
-        return self._f120
-
-    @property
-    def f121(self):
-        return self._f121
-
-    @property
-    def f122(self):
-        return self._f122
-
-    @property
-    def f123(self):
-        return self._f123
-
-    @property
-    def f124(self):
-        return self._f124
-
-    @property
-    def f125(self):
-        return self._f125
-
-    @property
-    def f126(self):
-        return self._f126
-
-    @property
-    def f127(self):
-        return self._f127
-
-    @property
-    def f128(self):
-        return self._f128
-
-    @property
-    def f129(self):
-        return self._f129
-
-    @property
-    def f130(self):
-        return self._f130
-
-    @property
-    def f131(self):
-        return self._f131
-
-    @property
-    def f132(self):
-        return self._f132
-
-    @property
-    def f133(self):
-        return self._f133
-
-    @property
-    def f134(self):
-        return self._f134
-
-    @property
-    def f135(self):
-        return self._f135
-
-    @property
-    def f136(self):
-        return self._f136
-
-    @property
-    def f137(self):
-        return self._f137
-
-    @property
-    def f138(self):
-        return self._f138
-
-    @property
-    def f139(self):
-        return self._f139
-
-    @property
-    def f140(self):
-        return self._f140
-
-    @property
-    def f141(self):
-        return self._f141
-
-    @property
-    def f142(self):
-        return self._f142
-
-    @property
-    def f143(self):
-        return self._f143
-
-    @property
-    def f144(self):
-        return self._f144
-
-    @property
-    def f145(self):
-        return self._f145
-
-    @property
-    def f146(self):
-        return self._f146
-
-    @property
-    def f147(self):
-        return self._f147
-
-    @property
-    def f148(self):
-        return self._f148
-
-    @property
-    def f149(self):
-        return self._f149
-
-    @property
-    def f150(self):
-        return self._f150
-
-    @property
-    def f151(self):
-        return self._f151
-
-    @property
-    def f152(self):
-        return self._f152
-
-    @property
-    def f153(self):
-        return self._f153
-
-    @property
-    def f154(self):
-        return self._f154
-
-    @property
-    def f155(self):
-        return self._f155
-
-    @property
-    def f156(self):
-        return self._f156
-
-    @property
-    def f157(self):
-        return self._f157
-
-    @property
-    def f158(self):
-        return self._f158
-
-    @property
-    def f159(self):
-        return self._f159
-
-    @property
-    def f160(self):
-        return self._f160
-
-    @property
-    def f161(self):
-        return self._f161
-
-    @property
-    def f162(self):
-        return self._f162
-
-    @property
-    def f163(self):
-        return self._f163
-
-    @property
-    def f164(self):
-        return self._f164
-
-    @property
-    def f165(self):
-        return self._f165
-
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
             + self.parent.fbe_allocation_size(fbe_value) \
-            + self.f100.fbe_allocation_size(fbe_value.f100) \
-            + self.f101.fbe_allocation_size(fbe_value.f101) \
-            + self.f102.fbe_allocation_size(fbe_value.f102) \
-            + self.f103.fbe_allocation_size(fbe_value.f103) \
-            + self.f104.fbe_allocation_size(fbe_value.f104) \
-            + self.f105.fbe_allocation_size(fbe_value.f105) \
-            + self.f106.fbe_allocation_size(fbe_value.f106) \
-            + self.f107.fbe_allocation_size(fbe_value.f107) \
-            + self.f108.fbe_allocation_size(fbe_value.f108) \
-            + self.f109.fbe_allocation_size(fbe_value.f109) \
-            + self.f110.fbe_allocation_size(fbe_value.f110) \
-            + self.f111.fbe_allocation_size(fbe_value.f111) \
-            + self.f112.fbe_allocation_size(fbe_value.f112) \
-            + self.f113.fbe_allocation_size(fbe_value.f113) \
-            + self.f114.fbe_allocation_size(fbe_value.f114) \
-            + self.f115.fbe_allocation_size(fbe_value.f115) \
-            + self.f116.fbe_allocation_size(fbe_value.f116) \
-            + self.f117.fbe_allocation_size(fbe_value.f117) \
-            + self.f118.fbe_allocation_size(fbe_value.f118) \
-            + self.f119.fbe_allocation_size(fbe_value.f119) \
-            + self.f120.fbe_allocation_size(fbe_value.f120) \
-            + self.f121.fbe_allocation_size(fbe_value.f121) \
-            + self.f122.fbe_allocation_size(fbe_value.f122) \
-            + self.f123.fbe_allocation_size(fbe_value.f123) \
-            + self.f124.fbe_allocation_size(fbe_value.f124) \
-            + self.f125.fbe_allocation_size(fbe_value.f125) \
-            + self.f126.fbe_allocation_size(fbe_value.f126) \
-            + self.f127.fbe_allocation_size(fbe_value.f127) \
-            + self.f128.fbe_allocation_size(fbe_value.f128) \
-            + self.f129.fbe_allocation_size(fbe_value.f129) \
-            + self.f130.fbe_allocation_size(fbe_value.f130) \
-            + self.f131.fbe_allocation_size(fbe_value.f131) \
-            + self.f132.fbe_allocation_size(fbe_value.f132) \
-            + self.f133.fbe_allocation_size(fbe_value.f133) \
-            + self.f134.fbe_allocation_size(fbe_value.f134) \
-            + self.f135.fbe_allocation_size(fbe_value.f135) \
-            + self.f136.fbe_allocation_size(fbe_value.f136) \
-            + self.f137.fbe_allocation_size(fbe_value.f137) \
-            + self.f138.fbe_allocation_size(fbe_value.f138) \
-            + self.f139.fbe_allocation_size(fbe_value.f139) \
-            + self.f140.fbe_allocation_size(fbe_value.f140) \
-            + self.f141.fbe_allocation_size(fbe_value.f141) \
-            + self.f142.fbe_allocation_size(fbe_value.f142) \
-            + self.f143.fbe_allocation_size(fbe_value.f143) \
-            + self.f144.fbe_allocation_size(fbe_value.f144) \
-            + self.f145.fbe_allocation_size(fbe_value.f145) \
-            + self.f146.fbe_allocation_size(fbe_value.f146) \
-            + self.f147.fbe_allocation_size(fbe_value.f147) \
-            + self.f148.fbe_allocation_size(fbe_value.f148) \
-            + self.f149.fbe_allocation_size(fbe_value.f149) \
-            + self.f150.fbe_allocation_size(fbe_value.f150) \
-            + self.f151.fbe_allocation_size(fbe_value.f151) \
-            + self.f152.fbe_allocation_size(fbe_value.f152) \
-            + self.f153.fbe_allocation_size(fbe_value.f153) \
-            + self.f154.fbe_allocation_size(fbe_value.f154) \
-            + self.f155.fbe_allocation_size(fbe_value.f155) \
-            + self.f156.fbe_allocation_size(fbe_value.f156) \
-            + self.f157.fbe_allocation_size(fbe_value.f157) \
-            + self.f158.fbe_allocation_size(fbe_value.f158) \
-            + self.f159.fbe_allocation_size(fbe_value.f159) \
-            + self.f160.fbe_allocation_size(fbe_value.f160) \
-            + self.f161.fbe_allocation_size(fbe_value.f161) \
-            + self.f162.fbe_allocation_size(fbe_value.f162) \
-            + self.f163.fbe_allocation_size(fbe_value.f163) \
-            + self.f164.fbe_allocation_size(fbe_value.f164) \
-            + self.f165.fbe_allocation_size(fbe_value.f165) \
 
         return fbe_result
 
@@ -6109,402 +1522,6 @@ class FinalModelStructOptional(fbe.FinalModel):
             return sys.maxsize
         fbe_current_offset += fbe_field_size
 
-        self.f100.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f100.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f101.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f101.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f102.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f102.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f103.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f103.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f104.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f104.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f105.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f105.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f106.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f106.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f107.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f107.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f108.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f108.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f109.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f109.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f110.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f110.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f111.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f111.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f112.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f112.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f113.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f113.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f114.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f114.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f115.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f115.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f116.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f116.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f117.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f117.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f118.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f118.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f119.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f119.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f120.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f120.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f121.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f121.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f122.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f122.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f123.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f123.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f124.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f124.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f125.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f125.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f126.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f126.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f127.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f127.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f128.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f128.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f129.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f129.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f130.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f130.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f131.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f131.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f132.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f132.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f133.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f133.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f134.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f134.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f135.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f135.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f136.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f136.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f137.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f137.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f138.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f138.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f139.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f139.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f140.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f140.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f141.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f141.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f142.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f142.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f143.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f143.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f144.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f144.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f145.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f145.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f146.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f146.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f147.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f147.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f148.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f148.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f149.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f149.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f150.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f150.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f151.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f151.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f152.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f152.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f153.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f153.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f154.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f154.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f155.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f155.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f156.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f156.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f157.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f157.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f158.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f158.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f159.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f159.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f160.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f160.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f161.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f161.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f162.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f162.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f163.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f163.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f164.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f164.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f165.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f165.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
         return fbe_current_offset
 
     # Get the struct value
@@ -6527,402 +1544,6 @@ class FinalModelStructOptional(fbe.FinalModel):
         fbe_current_offset += fbe_result
         fbe_current_size += fbe_result
 
-        self.f100.fbe_offset = fbe_current_offset
-        fbe_result = self.f100.get()
-        fbe_value.f100 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f101.fbe_offset = fbe_current_offset
-        fbe_result = self.f101.get()
-        fbe_value.f101 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f102.fbe_offset = fbe_current_offset
-        fbe_result = self.f102.get()
-        fbe_value.f102 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f103.fbe_offset = fbe_current_offset
-        fbe_result = self.f103.get()
-        fbe_value.f103 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f104.fbe_offset = fbe_current_offset
-        fbe_result = self.f104.get()
-        fbe_value.f104 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f105.fbe_offset = fbe_current_offset
-        fbe_result = self.f105.get()
-        fbe_value.f105 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f106.fbe_offset = fbe_current_offset
-        fbe_result = self.f106.get()
-        fbe_value.f106 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f107.fbe_offset = fbe_current_offset
-        fbe_result = self.f107.get()
-        fbe_value.f107 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f108.fbe_offset = fbe_current_offset
-        fbe_result = self.f108.get()
-        fbe_value.f108 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f109.fbe_offset = fbe_current_offset
-        fbe_result = self.f109.get()
-        fbe_value.f109 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f110.fbe_offset = fbe_current_offset
-        fbe_result = self.f110.get()
-        fbe_value.f110 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f111.fbe_offset = fbe_current_offset
-        fbe_result = self.f111.get()
-        fbe_value.f111 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f112.fbe_offset = fbe_current_offset
-        fbe_result = self.f112.get()
-        fbe_value.f112 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f113.fbe_offset = fbe_current_offset
-        fbe_result = self.f113.get()
-        fbe_value.f113 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f114.fbe_offset = fbe_current_offset
-        fbe_result = self.f114.get()
-        fbe_value.f114 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f115.fbe_offset = fbe_current_offset
-        fbe_result = self.f115.get()
-        fbe_value.f115 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f116.fbe_offset = fbe_current_offset
-        fbe_result = self.f116.get()
-        fbe_value.f116 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f117.fbe_offset = fbe_current_offset
-        fbe_result = self.f117.get()
-        fbe_value.f117 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f118.fbe_offset = fbe_current_offset
-        fbe_result = self.f118.get()
-        fbe_value.f118 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f119.fbe_offset = fbe_current_offset
-        fbe_result = self.f119.get()
-        fbe_value.f119 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f120.fbe_offset = fbe_current_offset
-        fbe_result = self.f120.get()
-        fbe_value.f120 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f121.fbe_offset = fbe_current_offset
-        fbe_result = self.f121.get()
-        fbe_value.f121 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f122.fbe_offset = fbe_current_offset
-        fbe_result = self.f122.get()
-        fbe_value.f122 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f123.fbe_offset = fbe_current_offset
-        fbe_result = self.f123.get()
-        fbe_value.f123 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f124.fbe_offset = fbe_current_offset
-        fbe_result = self.f124.get()
-        fbe_value.f124 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f125.fbe_offset = fbe_current_offset
-        fbe_result = self.f125.get()
-        fbe_value.f125 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f126.fbe_offset = fbe_current_offset
-        fbe_result = self.f126.get()
-        fbe_value.f126 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f127.fbe_offset = fbe_current_offset
-        fbe_result = self.f127.get()
-        fbe_value.f127 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f128.fbe_offset = fbe_current_offset
-        fbe_result = self.f128.get()
-        fbe_value.f128 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f129.fbe_offset = fbe_current_offset
-        fbe_result = self.f129.get()
-        fbe_value.f129 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f130.fbe_offset = fbe_current_offset
-        fbe_result = self.f130.get()
-        fbe_value.f130 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f131.fbe_offset = fbe_current_offset
-        fbe_result = self.f131.get()
-        fbe_value.f131 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f132.fbe_offset = fbe_current_offset
-        fbe_result = self.f132.get()
-        fbe_value.f132 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f133.fbe_offset = fbe_current_offset
-        fbe_result = self.f133.get()
-        fbe_value.f133 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f134.fbe_offset = fbe_current_offset
-        fbe_result = self.f134.get()
-        fbe_value.f134 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f135.fbe_offset = fbe_current_offset
-        fbe_result = self.f135.get()
-        fbe_value.f135 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f136.fbe_offset = fbe_current_offset
-        fbe_result = self.f136.get()
-        fbe_value.f136 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f137.fbe_offset = fbe_current_offset
-        fbe_result = self.f137.get()
-        fbe_value.f137 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f138.fbe_offset = fbe_current_offset
-        fbe_result = self.f138.get()
-        fbe_value.f138 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f139.fbe_offset = fbe_current_offset
-        fbe_result = self.f139.get()
-        fbe_value.f139 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f140.fbe_offset = fbe_current_offset
-        fbe_result = self.f140.get()
-        fbe_value.f140 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f141.fbe_offset = fbe_current_offset
-        fbe_result = self.f141.get()
-        fbe_value.f141 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f142.fbe_offset = fbe_current_offset
-        fbe_result = self.f142.get()
-        fbe_value.f142 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f143.fbe_offset = fbe_current_offset
-        fbe_result = self.f143.get()
-        fbe_value.f143 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f144.fbe_offset = fbe_current_offset
-        fbe_result = self.f144.get()
-        fbe_value.f144 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f145.fbe_offset = fbe_current_offset
-        fbe_result = self.f145.get()
-        fbe_value.f145 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f146.fbe_offset = fbe_current_offset
-        fbe_result = self.f146.get()
-        fbe_value.f146 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f147.fbe_offset = fbe_current_offset
-        fbe_result = self.f147.get()
-        fbe_value.f147 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f148.fbe_offset = fbe_current_offset
-        fbe_result = self.f148.get()
-        fbe_value.f148 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f149.fbe_offset = fbe_current_offset
-        fbe_result = self.f149.get()
-        fbe_value.f149 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f150.fbe_offset = fbe_current_offset
-        fbe_result = self.f150.get()
-        fbe_value.f150 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f151.fbe_offset = fbe_current_offset
-        fbe_result = self.f151.get()
-        fbe_value.f151 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f152.fbe_offset = fbe_current_offset
-        fbe_result = self.f152.get()
-        fbe_value.f152 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f153.fbe_offset = fbe_current_offset
-        fbe_result = self.f153.get()
-        fbe_value.f153 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f154.fbe_offset = fbe_current_offset
-        fbe_result = self.f154.get()
-        fbe_value.f154 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f155.fbe_offset = fbe_current_offset
-        fbe_result = self.f155.get()
-        fbe_value.f155 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f156.fbe_offset = fbe_current_offset
-        fbe_result = self.f156.get()
-        fbe_value.f156 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f157.fbe_offset = fbe_current_offset
-        fbe_result = self.f157.get()
-        fbe_value.f157 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f158.fbe_offset = fbe_current_offset
-        fbe_result = self.f158.get()
-        fbe_value.f158 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f159.fbe_offset = fbe_current_offset
-        fbe_result = self.f159.get()
-        fbe_value.f159 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f160.fbe_offset = fbe_current_offset
-        fbe_result = self.f160.get()
-        fbe_value.f160 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f161.fbe_offset = fbe_current_offset
-        fbe_result = self.f161.get()
-        fbe_value.f161 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f162.fbe_offset = fbe_current_offset
-        fbe_result = self.f162.get()
-        fbe_value.f162 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f163.fbe_offset = fbe_current_offset
-        fbe_result = self.f163.get()
-        fbe_value.f163 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f164.fbe_offset = fbe_current_offset
-        fbe_result = self.f164.get()
-        fbe_value.f164 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f165.fbe_offset = fbe_current_offset
-        fbe_result = self.f165.get()
-        fbe_value.f165 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
         return fbe_current_size
 
     # Set the struct value
@@ -6939,336 +1560,6 @@ class FinalModelStructOptional(fbe.FinalModel):
 
         self.parent.fbe_offset = fbe_current_offset
         fbe_field_size = self.parent.set_fields(fbe_value)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f100.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f100.set(fbe_value.f100)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f101.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f101.set(fbe_value.f101)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f102.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f102.set(fbe_value.f102)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f103.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f103.set(fbe_value.f103)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f104.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f104.set(fbe_value.f104)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f105.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f105.set(fbe_value.f105)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f106.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f106.set(fbe_value.f106)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f107.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f107.set(fbe_value.f107)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f108.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f108.set(fbe_value.f108)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f109.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f109.set(fbe_value.f109)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f110.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f110.set(fbe_value.f110)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f111.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f111.set(fbe_value.f111)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f112.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f112.set(fbe_value.f112)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f113.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f113.set(fbe_value.f113)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f114.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f114.set(fbe_value.f114)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f115.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f115.set(fbe_value.f115)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f116.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f116.set(fbe_value.f116)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f117.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f117.set(fbe_value.f117)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f118.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f118.set(fbe_value.f118)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f119.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f119.set(fbe_value.f119)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f120.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f120.set(fbe_value.f120)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f121.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f121.set(fbe_value.f121)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f122.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f122.set(fbe_value.f122)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f123.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f123.set(fbe_value.f123)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f124.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f124.set(fbe_value.f124)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f125.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f125.set(fbe_value.f125)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f126.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f126.set(fbe_value.f126)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f127.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f127.set(fbe_value.f127)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f128.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f128.set(fbe_value.f128)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f129.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f129.set(fbe_value.f129)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f130.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f130.set(fbe_value.f130)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f131.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f131.set(fbe_value.f131)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f132.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f132.set(fbe_value.f132)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f133.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f133.set(fbe_value.f133)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f134.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f134.set(fbe_value.f134)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f135.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f135.set(fbe_value.f135)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f136.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f136.set(fbe_value.f136)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f137.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f137.set(fbe_value.f137)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f138.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f138.set(fbe_value.f138)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f139.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f139.set(fbe_value.f139)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f140.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f140.set(fbe_value.f140)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f141.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f141.set(fbe_value.f141)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f142.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f142.set(fbe_value.f142)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f143.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f143.set(fbe_value.f143)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f144.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f144.set(fbe_value.f144)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f145.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f145.set(fbe_value.f145)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f146.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f146.set(fbe_value.f146)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f147.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f147.set(fbe_value.f147)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f148.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f148.set(fbe_value.f148)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f149.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f149.set(fbe_value.f149)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f150.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f150.set(fbe_value.f150)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f151.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f151.set(fbe_value.f151)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f152.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f152.set(fbe_value.f152)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f153.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f153.set(fbe_value.f153)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f154.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f154.set(fbe_value.f154)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f155.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f155.set(fbe_value.f155)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f156.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f156.set(fbe_value.f156)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f157.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f157.set(fbe_value.f157)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f158.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f158.set(fbe_value.f158)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f159.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f159.set(fbe_value.f159)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f160.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f160.set(fbe_value.f160)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f161.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f161.set(fbe_value.f161)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f162.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f162.set(fbe_value.f162)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f163.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f163.set(fbe_value.f163)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f164.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f164.set(fbe_value.f164)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f165.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f165.set(fbe_value.f165)
         fbe_current_offset += fbe_field_size
         fbe_current_size += fbe_field_size
 
@@ -7346,49 +1637,15 @@ class StructOptionalFinalModel(fbe.Model):
 
 @functools.total_ordering
 class StructNested(StructOptional):
-    __slots__ = "f1000", "f1001", "f1002", "f1003", "f1004", "f1005", "f1006", "f1007", "f1008", "f1009", "f1010", "f1011", 
-
-    def __init__(self, parent=None, f1000=None, f1001=None, f1002=EnumTyped.ENUM_VALUE_2, f1003=None, f1004=None, f1005=None, f1006=FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6, f1007=None, f1008=None, f1009=None, f1010=None, f1011=None):
+    def __init__(self, parent=None):
         super().__init__()
         if parent is None:
             parent = StructOptional()
         super().copy(parent)
-        if f1000 is None:
-            f1000 = EnumSimple()
-        if f1004 is None:
-            f1004 = FlagsSimple()
-        if f1008 is None:
-            f1008 = StructSimple()
-        if f1010 is None:
-            f1010 = StructOptional()
-        self.f1000 = f1000
-        self.f1001 = f1001
-        self.f1002 = f1002
-        self.f1003 = f1003
-        self.f1004 = f1004
-        self.f1005 = f1005
-        self.f1006 = f1006
-        self.f1007 = f1007
-        self.f1008 = f1008
-        self.f1009 = f1009
-        self.f1010 = f1010
-        self.f1011 = f1011
 
     # Struct shallow copy
     def copy(self, other):
         super().copy(other)
-        self.f1000 = other.f1000
-        self.f1001 = other.f1001
-        self.f1002 = other.f1002
-        self.f1003 = other.f1003
-        self.f1004 = other.f1004
-        self.f1005 = other.f1005
-        self.f1006 = other.f1006
-        self.f1007 = other.f1007
-        self.f1008 = other.f1008
-        self.f1009 = other.f1009
-        self.f1010 = other.f1010
-        self.f1011 = other.f1011
         return self
 
     # Struct deep clone
@@ -7432,48 +1689,6 @@ class StructNested(StructOptional):
         sb = list()
         sb.append("StructNested(")
         sb.append(StructOptional.__str__(self))
-        sb.append(",f1000=")
-        sb.append(str(self.f1000))
-        sb.append(",f1001=")
-        if self.f1001 is not None:
-            sb.append(str(self.f1001))
-        else:
-            sb.append("null")
-        sb.append(",f1002=")
-        sb.append(str(self.f1002))
-        sb.append(",f1003=")
-        if self.f1003 is not None:
-            sb.append(str(self.f1003))
-        else:
-            sb.append("null")
-        sb.append(",f1004=")
-        sb.append(str(self.f1004))
-        sb.append(",f1005=")
-        if self.f1005 is not None:
-            sb.append(str(self.f1005))
-        else:
-            sb.append("null")
-        sb.append(",f1006=")
-        sb.append(str(self.f1006))
-        sb.append(",f1007=")
-        if self.f1007 is not None:
-            sb.append(str(self.f1007))
-        else:
-            sb.append("null")
-        sb.append(",f1008=")
-        sb.append(str(self.f1008))
-        sb.append(",f1009=")
-        if self.f1009 is not None:
-            sb.append(str(self.f1009))
-        else:
-            sb.append("null")
-        sb.append(",f1010=")
-        sb.append(str(self.f1010))
-        sb.append(",f1011=")
-        if self.f1011 is not None:
-            sb.append(str(self.f1011))
-        else:
-            sb.append("null")
         sb.append(")")
         return "".join(sb)
 
@@ -7484,20 +1699,6 @@ class StructNested(StructOptional):
     def __to_json__(self):
         result = dict()
         result.update(super().__to_json__())
-        result.update(dict(
-            f1000=self.f1000, 
-            f1001=self.f1001, 
-            f1002=self.f1002, 
-            f1003=self.f1003, 
-            f1004=self.f1004, 
-            f1005=self.f1005, 
-            f1006=self.f1006, 
-            f1007=self.f1007, 
-            f1008=self.f1008, 
-            f1009=self.f1009, 
-            f1010=self.f1010, 
-            f1011=self.f1011, 
-        ))
         return result
 
     # Create struct from JSON value
@@ -7511,91 +1712,19 @@ class StructNested(StructOptional):
             return None
         return StructNested(
             StructOptional.__from_json__(fields),
-            None if "f1000" not in fields else EnumSimple.__from_json__(fields["f1000"]),
-            None if "f1001" not in fields else EnumSimple.__from_json__(fields["f1001"]),
-            None if "f1002" not in fields else EnumTyped.__from_json__(fields["f1002"]),
-            None if "f1003" not in fields else EnumTyped.__from_json__(fields["f1003"]),
-            None if "f1004" not in fields else FlagsSimple.__from_json__(fields["f1004"]),
-            None if "f1005" not in fields else FlagsSimple.__from_json__(fields["f1005"]),
-            None if "f1006" not in fields else FlagsTyped.__from_json__(fields["f1006"]),
-            None if "f1007" not in fields else FlagsTyped.__from_json__(fields["f1007"]),
-            None if "f1008" not in fields else StructSimple.__from_json__(fields["f1008"]),
-            None if "f1009" not in fields else StructSimple.__from_json__(fields["f1009"]),
-            None if "f1010" not in fields else StructOptional.__from_json__(fields["f1010"]),
-            None if "f1011" not in fields else StructOptional.__from_json__(fields["f1011"]),
         )
 
 
 class FieldModelStructNested(fbe.FieldModel):
-    __slots__ = "_parent", "_f1000", "_f1001", "_f1002", "_f1003", "_f1004", "_f1005", "_f1006", "_f1007", "_f1008", "_f1009", "_f1010", "_f1011", 
+    __slots__ = "_parent", 
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._parent = FieldModelStructOptional(buffer, 4 + 4)
-        self._f1000 = FieldModelEnumSimple(buffer, self._parent.fbe_offset + self._parent.fbe_body - 4 - 4)
-        self._f1001 = fbe.FieldModelOptional(FieldModelEnumSimple(buffer, self._f1000.fbe_offset + self._f1000.fbe_size), buffer, self._f1000.fbe_offset + self._f1000.fbe_size)
-        self._f1002 = FieldModelEnumTyped(buffer, self._f1001.fbe_offset + self._f1001.fbe_size)
-        self._f1003 = fbe.FieldModelOptional(FieldModelEnumTyped(buffer, self._f1002.fbe_offset + self._f1002.fbe_size), buffer, self._f1002.fbe_offset + self._f1002.fbe_size)
-        self._f1004 = FieldModelFlagsSimple(buffer, self._f1003.fbe_offset + self._f1003.fbe_size)
-        self._f1005 = fbe.FieldModelOptional(FieldModelFlagsSimple(buffer, self._f1004.fbe_offset + self._f1004.fbe_size), buffer, self._f1004.fbe_offset + self._f1004.fbe_size)
-        self._f1006 = FieldModelFlagsTyped(buffer, self._f1005.fbe_offset + self._f1005.fbe_size)
-        self._f1007 = fbe.FieldModelOptional(FieldModelFlagsTyped(buffer, self._f1006.fbe_offset + self._f1006.fbe_size), buffer, self._f1006.fbe_offset + self._f1006.fbe_size)
-        self._f1008 = FieldModelStructSimple(buffer, self._f1007.fbe_offset + self._f1007.fbe_size)
-        self._f1009 = fbe.FieldModelOptional(FieldModelStructSimple(buffer, self._f1008.fbe_offset + self._f1008.fbe_size), buffer, self._f1008.fbe_offset + self._f1008.fbe_size)
-        self._f1010 = FieldModelStructOptional(buffer, self._f1009.fbe_offset + self._f1009.fbe_size)
-        self._f1011 = fbe.FieldModelOptional(FieldModelStructOptional(buffer, self._f1010.fbe_offset + self._f1010.fbe_size), buffer, self._f1010.fbe_offset + self._f1010.fbe_size)
 
     @property
     def parent(self):
         return self._parent
-
-    @property
-    def f1000(self):
-        return self._f1000
-
-    @property
-    def f1001(self):
-        return self._f1001
-
-    @property
-    def f1002(self):
-        return self._f1002
-
-    @property
-    def f1003(self):
-        return self._f1003
-
-    @property
-    def f1004(self):
-        return self._f1004
-
-    @property
-    def f1005(self):
-        return self._f1005
-
-    @property
-    def f1006(self):
-        return self._f1006
-
-    @property
-    def f1007(self):
-        return self._f1007
-
-    @property
-    def f1008(self):
-        return self._f1008
-
-    @property
-    def f1009(self):
-        return self._f1009
-
-    @property
-    def f1010(self):
-        return self._f1010
-
-    @property
-    def f1011(self):
-        return self._f1011
 
     # Get the field size
     @property
@@ -7607,18 +1736,6 @@ class FieldModelStructNested(fbe.FieldModel):
     def fbe_body(self):
         fbe_result = 4 + 4 \
             + self.parent.fbe_body - 4 - 4 \
-            + self.f1000.fbe_size \
-            + self.f1001.fbe_size \
-            + self.f1002.fbe_size \
-            + self.f1003.fbe_size \
-            + self.f1004.fbe_size \
-            + self.f1005.fbe_size \
-            + self.f1006.fbe_size \
-            + self.f1007.fbe_size \
-            + self.f1008.fbe_size \
-            + self.f1009.fbe_size \
-            + self.f1010.fbe_size \
-            + self.f1011.fbe_size \
 
         return fbe_result
 
@@ -7636,18 +1753,6 @@ class FieldModelStructNested(fbe.FieldModel):
 
         fbe_result = self.fbe_body \
             + self.parent.fbe_extra \
-            + self.f1000.fbe_extra \
-            + self.f1001.fbe_extra \
-            + self.f1002.fbe_extra \
-            + self.f1003.fbe_extra \
-            + self.f1004.fbe_extra \
-            + self.f1005.fbe_extra \
-            + self.f1006.fbe_extra \
-            + self.f1007.fbe_extra \
-            + self.f1008.fbe_extra \
-            + self.f1009.fbe_extra \
-            + self.f1010.fbe_extra \
-            + self.f1011.fbe_extra \
 
         self._buffer.unshift(fbe_struct_offset)
 
@@ -7691,78 +1796,6 @@ class FieldModelStructNested(fbe.FieldModel):
         if not self.parent.verify_fields(fbe_struct_size):
             return False
         fbe_current_size += self.parent.fbe_body - 4 - 4
-
-        if (fbe_current_size + self.f1000.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1000.verify():
-            return False
-        fbe_current_size += self.f1000.fbe_size
-
-        if (fbe_current_size + self.f1001.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1001.verify():
-            return False
-        fbe_current_size += self.f1001.fbe_size
-
-        if (fbe_current_size + self.f1002.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1002.verify():
-            return False
-        fbe_current_size += self.f1002.fbe_size
-
-        if (fbe_current_size + self.f1003.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1003.verify():
-            return False
-        fbe_current_size += self.f1003.fbe_size
-
-        if (fbe_current_size + self.f1004.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1004.verify():
-            return False
-        fbe_current_size += self.f1004.fbe_size
-
-        if (fbe_current_size + self.f1005.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1005.verify():
-            return False
-        fbe_current_size += self.f1005.fbe_size
-
-        if (fbe_current_size + self.f1006.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1006.verify():
-            return False
-        fbe_current_size += self.f1006.fbe_size
-
-        if (fbe_current_size + self.f1007.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1007.verify():
-            return False
-        fbe_current_size += self.f1007.fbe_size
-
-        if (fbe_current_size + self.f1008.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1008.verify():
-            return False
-        fbe_current_size += self.f1008.fbe_size
-
-        if (fbe_current_size + self.f1009.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1009.verify():
-            return False
-        fbe_current_size += self.f1009.fbe_size
-
-        if (fbe_current_size + self.f1010.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1010.verify():
-            return False
-        fbe_current_size += self.f1010.fbe_size
-
-        if (fbe_current_size + self.f1011.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1011.verify():
-            return False
-        fbe_current_size += self.f1011.fbe_size
 
         return True
 
@@ -7810,78 +1843,6 @@ class FieldModelStructNested(fbe.FieldModel):
             self.parent.get_fields(fbe_value, fbe_struct_size)
         fbe_current_size += self.parent.fbe_body - 4 - 4
 
-        if (fbe_current_size + self.f1000.fbe_size) <= fbe_struct_size:
-            fbe_value.f1000 = self.f1000.get()
-        else:
-            fbe_value.f1000 = EnumSimple()
-        fbe_current_size += self.f1000.fbe_size
-
-        if (fbe_current_size + self.f1001.fbe_size) <= fbe_struct_size:
-            fbe_value.f1001 = self.f1001.get()
-        else:
-            fbe_value.f1001 = None
-        fbe_current_size += self.f1001.fbe_size
-
-        if (fbe_current_size + self.f1002.fbe_size) <= fbe_struct_size:
-            fbe_value.f1002 = self.f1002.get(EnumTyped.ENUM_VALUE_2)
-        else:
-            fbe_value.f1002 = EnumTyped.ENUM_VALUE_2
-        fbe_current_size += self.f1002.fbe_size
-
-        if (fbe_current_size + self.f1003.fbe_size) <= fbe_struct_size:
-            fbe_value.f1003 = self.f1003.get(None)
-        else:
-            fbe_value.f1003 = None
-        fbe_current_size += self.f1003.fbe_size
-
-        if (fbe_current_size + self.f1004.fbe_size) <= fbe_struct_size:
-            fbe_value.f1004 = self.f1004.get()
-        else:
-            fbe_value.f1004 = FlagsSimple()
-        fbe_current_size += self.f1004.fbe_size
-
-        if (fbe_current_size + self.f1005.fbe_size) <= fbe_struct_size:
-            fbe_value.f1005 = self.f1005.get()
-        else:
-            fbe_value.f1005 = None
-        fbe_current_size += self.f1005.fbe_size
-
-        if (fbe_current_size + self.f1006.fbe_size) <= fbe_struct_size:
-            fbe_value.f1006 = self.f1006.get(FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6)
-        else:
-            fbe_value.f1006 = FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6
-        fbe_current_size += self.f1006.fbe_size
-
-        if (fbe_current_size + self.f1007.fbe_size) <= fbe_struct_size:
-            fbe_value.f1007 = self.f1007.get(None)
-        else:
-            fbe_value.f1007 = None
-        fbe_current_size += self.f1007.fbe_size
-
-        if (fbe_current_size + self.f1008.fbe_size) <= fbe_struct_size:
-            fbe_value.f1008 = self.f1008.get()
-        else:
-            fbe_value.f1008 = StructSimple()
-        fbe_current_size += self.f1008.fbe_size
-
-        if (fbe_current_size + self.f1009.fbe_size) <= fbe_struct_size:
-            fbe_value.f1009 = self.f1009.get()
-        else:
-            fbe_value.f1009 = None
-        fbe_current_size += self.f1009.fbe_size
-
-        if (fbe_current_size + self.f1010.fbe_size) <= fbe_struct_size:
-            fbe_value.f1010 = self.f1010.get()
-        else:
-            fbe_value.f1010 = StructOptional()
-        fbe_current_size += self.f1010.fbe_size
-
-        if (fbe_current_size + self.f1011.fbe_size) <= fbe_struct_size:
-            fbe_value.f1011 = self.f1011.get(None)
-        else:
-            fbe_value.f1011 = None
-        fbe_current_size += self.f1011.fbe_size
-
     # Set the struct value (begin phase)
     def set_begin(self):
         assert (self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size, "Model is broken!"
@@ -7917,18 +1878,6 @@ class FieldModelStructNested(fbe.FieldModel):
     # Set the struct fields values
     def set_fields(self, fbe_value):
         self.parent.set_fields(fbe_value)
-        self.f1000.set(fbe_value.f1000)
-        self.f1001.set(fbe_value.f1001)
-        self.f1002.set(fbe_value.f1002)
-        self.f1003.set(fbe_value.f1003)
-        self.f1004.set(fbe_value.f1004)
-        self.f1005.set(fbe_value.f1005)
-        self.f1006.set(fbe_value.f1006)
-        self.f1007.set(fbe_value.f1007)
-        self.f1008.set(fbe_value.f1008)
-        self.f1009.set(fbe_value.f1009)
-        self.f1010.set(fbe_value.f1010)
-        self.f1011.set(fbe_value.f1011)
 
 
 # Fast Binary Encoding StructNested model
@@ -8007,92 +1956,20 @@ class StructNestedModel(fbe.Model):
 
 
 class FinalModelStructNested(fbe.FinalModel):
-    __slots__ = "_parent", "_f1000", "_f1001", "_f1002", "_f1003", "_f1004", "_f1005", "_f1006", "_f1007", "_f1008", "_f1009", "_f1010", "_f1011", 
+    __slots__ = "_parent", 
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._parent = FinalModelStructOptional(buffer, 0)
-        self._f1000 = FinalModelEnumSimple(buffer, 0)
-        self._f1001 = fbe.FinalModelOptional(FinalModelEnumSimple(buffer, 0), buffer, 0)
-        self._f1002 = FinalModelEnumTyped(buffer, 0)
-        self._f1003 = fbe.FinalModelOptional(FinalModelEnumTyped(buffer, 0), buffer, 0)
-        self._f1004 = FinalModelFlagsSimple(buffer, 0)
-        self._f1005 = fbe.FinalModelOptional(FinalModelFlagsSimple(buffer, 0), buffer, 0)
-        self._f1006 = FinalModelFlagsTyped(buffer, 0)
-        self._f1007 = fbe.FinalModelOptional(FinalModelFlagsTyped(buffer, 0), buffer, 0)
-        self._f1008 = FinalModelStructSimple(buffer, 0)
-        self._f1009 = fbe.FinalModelOptional(FinalModelStructSimple(buffer, 0), buffer, 0)
-        self._f1010 = FinalModelStructOptional(buffer, 0)
-        self._f1011 = fbe.FinalModelOptional(FinalModelStructOptional(buffer, 0), buffer, 0)
 
     @property
     def parent(self):
         return self._parent
 
-    @property
-    def f1000(self):
-        return self._f1000
-
-    @property
-    def f1001(self):
-        return self._f1001
-
-    @property
-    def f1002(self):
-        return self._f1002
-
-    @property
-    def f1003(self):
-        return self._f1003
-
-    @property
-    def f1004(self):
-        return self._f1004
-
-    @property
-    def f1005(self):
-        return self._f1005
-
-    @property
-    def f1006(self):
-        return self._f1006
-
-    @property
-    def f1007(self):
-        return self._f1007
-
-    @property
-    def f1008(self):
-        return self._f1008
-
-    @property
-    def f1009(self):
-        return self._f1009
-
-    @property
-    def f1010(self):
-        return self._f1010
-
-    @property
-    def f1011(self):
-        return self._f1011
-
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
             + self.parent.fbe_allocation_size(fbe_value) \
-            + self.f1000.fbe_allocation_size(fbe_value.f1000) \
-            + self.f1001.fbe_allocation_size(fbe_value.f1001) \
-            + self.f1002.fbe_allocation_size(fbe_value.f1002) \
-            + self.f1003.fbe_allocation_size(fbe_value.f1003) \
-            + self.f1004.fbe_allocation_size(fbe_value.f1004) \
-            + self.f1005.fbe_allocation_size(fbe_value.f1005) \
-            + self.f1006.fbe_allocation_size(fbe_value.f1006) \
-            + self.f1007.fbe_allocation_size(fbe_value.f1007) \
-            + self.f1008.fbe_allocation_size(fbe_value.f1008) \
-            + self.f1009.fbe_allocation_size(fbe_value.f1009) \
-            + self.f1010.fbe_allocation_size(fbe_value.f1010) \
-            + self.f1011.fbe_allocation_size(fbe_value.f1011) \
 
         return fbe_result
 
@@ -8120,78 +1997,6 @@ class FinalModelStructNested(fbe.FinalModel):
             return sys.maxsize
         fbe_current_offset += fbe_field_size
 
-        self.f1000.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1000.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f1001.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1001.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f1002.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1002.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f1003.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1003.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f1004.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1004.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f1005.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1005.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f1006.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1006.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f1007.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1007.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f1008.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1008.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f1009.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1009.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f1010.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1010.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f1011.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1011.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
         return fbe_current_offset
 
     # Get the struct value
@@ -8214,78 +2019,6 @@ class FinalModelStructNested(fbe.FinalModel):
         fbe_current_offset += fbe_result
         fbe_current_size += fbe_result
 
-        self.f1000.fbe_offset = fbe_current_offset
-        fbe_result = self.f1000.get()
-        fbe_value.f1000 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f1001.fbe_offset = fbe_current_offset
-        fbe_result = self.f1001.get()
-        fbe_value.f1001 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f1002.fbe_offset = fbe_current_offset
-        fbe_result = self.f1002.get()
-        fbe_value.f1002 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f1003.fbe_offset = fbe_current_offset
-        fbe_result = self.f1003.get()
-        fbe_value.f1003 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f1004.fbe_offset = fbe_current_offset
-        fbe_result = self.f1004.get()
-        fbe_value.f1004 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f1005.fbe_offset = fbe_current_offset
-        fbe_result = self.f1005.get()
-        fbe_value.f1005 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f1006.fbe_offset = fbe_current_offset
-        fbe_result = self.f1006.get()
-        fbe_value.f1006 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f1007.fbe_offset = fbe_current_offset
-        fbe_result = self.f1007.get()
-        fbe_value.f1007 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f1008.fbe_offset = fbe_current_offset
-        fbe_result = self.f1008.get()
-        fbe_value.f1008 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f1009.fbe_offset = fbe_current_offset
-        fbe_result = self.f1009.get()
-        fbe_value.f1009 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f1010.fbe_offset = fbe_current_offset
-        fbe_result = self.f1010.get()
-        fbe_value.f1010 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f1011.fbe_offset = fbe_current_offset
-        fbe_result = self.f1011.get()
-        fbe_value.f1011 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
         return fbe_current_size
 
     # Set the struct value
@@ -8302,66 +2035,6 @@ class FinalModelStructNested(fbe.FinalModel):
 
         self.parent.fbe_offset = fbe_current_offset
         fbe_field_size = self.parent.set_fields(fbe_value)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f1000.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1000.set(fbe_value.f1000)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f1001.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1001.set(fbe_value.f1001)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f1002.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1002.set(fbe_value.f1002)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f1003.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1003.set(fbe_value.f1003)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f1004.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1004.set(fbe_value.f1004)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f1005.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1005.set(fbe_value.f1005)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f1006.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1006.set(fbe_value.f1006)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f1007.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1007.set(fbe_value.f1007)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f1008.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1008.set(fbe_value.f1008)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f1009.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1009.set(fbe_value.f1009)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f1010.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1010.set(fbe_value.f1010)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f1011.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1011.set(fbe_value.f1011)
         fbe_current_offset += fbe_field_size
         fbe_current_size += fbe_field_size
 
@@ -8439,20 +2112,11 @@ class StructNestedFinalModel(fbe.Model):
 
 @functools.total_ordering
 class StructBytes(object):
-    __slots__ = "f1", "f2", "f3", 
-
-    def __init__(self, f1=None, f2=None, f3=None):
-        if f1 is None:
-            f1 = bytearray()
-        self.f1 = f1
-        self.f2 = f2
-        self.f3 = f3
+    def __init__(self):
+        pass
 
     # Struct shallow copy
     def copy(self, other):
-        self.f1 = other.f1
-        self.f2 = other.f2
-        self.f3 = other.f3
         return self
 
     # Struct deep clone
@@ -8489,21 +2153,6 @@ class StructBytes(object):
     def __str__(self):
         sb = list()
         sb.append("StructBytes(")
-        sb.append("f1=")
-        if self.f1 is not None:
-            sb.append("bytes[" + str(len(self.f1)) + "]")
-        else:
-            sb.append("null")
-        sb.append(",f2=")
-        if self.f2 is not None:
-            sb.append("bytes[" + str(len(self.f2)) + "]")
-        else:
-            sb.append("null")
-        sb.append(",f3=")
-        if self.f3 is not None:
-            sb.append("bytes[" + str(len(self.f3)) + "]")
-        else:
-            sb.append("null")
         sb.append(")")
         return "".join(sb)
 
@@ -8513,11 +2162,6 @@ class StructBytes(object):
 
     def __to_json__(self):
         result = dict()
-        result.update(dict(
-            f1=self.f1, 
-            f2=self.f2, 
-            f3=self.f3, 
-        ))
         return result
 
     # Create struct from JSON value
@@ -8530,32 +2174,12 @@ class StructBytes(object):
         if fields is None:
             return None
         return StructBytes(
-            None if "f1" not in fields else None if fields["f1"] is None else base64.b64decode(fields["f1"].encode('ascii')),
-            None if "f2" not in fields else None if fields["f2"] is None else base64.b64decode(fields["f2"].encode('ascii')),
-            None if "f3" not in fields else None if fields["f3"] is None else base64.b64decode(fields["f3"].encode('ascii')),
         )
 
 
 class FieldModelStructBytes(fbe.FieldModel):
-    __slots__ = "_f1", "_f2", "_f3", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FieldModelBytes(buffer, 4 + 4)
-        self._f2 = fbe.FieldModelOptional(fbe.FieldModelBytes(buffer, self._f1.fbe_offset + self._f1.fbe_size), buffer, self._f1.fbe_offset + self._f1.fbe_size)
-        self._f3 = fbe.FieldModelOptional(fbe.FieldModelBytes(buffer, self._f2.fbe_offset + self._f2.fbe_size), buffer, self._f2.fbe_offset + self._f2.fbe_size)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
 
     # Get the field size
     @property
@@ -8566,9 +2190,6 @@ class FieldModelStructBytes(fbe.FieldModel):
     @property
     def fbe_body(self):
         fbe_result = 4 + 4 \
-            + self.f1.fbe_size \
-            + self.f2.fbe_size \
-            + self.f3.fbe_size \
 
         return fbe_result
 
@@ -8585,9 +2206,6 @@ class FieldModelStructBytes(fbe.FieldModel):
         self._buffer.shift(fbe_struct_offset)
 
         fbe_result = self.fbe_body \
-            + self.f1.fbe_extra \
-            + self.f2.fbe_extra \
-            + self.f3.fbe_extra \
 
         self._buffer.unshift(fbe_struct_offset)
 
@@ -8624,26 +2242,6 @@ class FieldModelStructBytes(fbe.FieldModel):
 
     # Check if the struct fields are valid
     def verify_fields(self, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1.verify():
-            return False
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f2.verify():
-            return False
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f3.verify():
-            return False
-        fbe_current_size += self.f3.fbe_size
-
         return True
 
     # Get the struct value (begin phase)
@@ -8684,25 +2282,7 @@ class FieldModelStructBytes(fbe.FieldModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) <= fbe_struct_size:
-            fbe_value.f1 = self.f1.get()
-        else:
-            fbe_value.f1 = bytearray()
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) <= fbe_struct_size:
-            fbe_value.f2 = self.f2.get()
-        else:
-            fbe_value.f2 = None
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) <= fbe_struct_size:
-            fbe_value.f3 = self.f3.get(None)
-        else:
-            fbe_value.f3 = None
-        fbe_current_size += self.f3.fbe_size
+        pass
 
     # Set the struct value (begin phase)
     def set_begin(self):
@@ -8738,9 +2318,7 @@ class FieldModelStructBytes(fbe.FieldModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        self.f1.set(fbe_value.f1)
-        self.f2.set(fbe_value.f2)
-        self.f3.set(fbe_value.f3)
+        pass
 
 
 # Fast Binary Encoding StructBytes model
@@ -8819,32 +2397,12 @@ class StructBytesModel(fbe.Model):
 
 
 class FinalModelStructBytes(fbe.FinalModel):
-    __slots__ = "_f1", "_f2", "_f3", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FinalModelBytes(buffer, 0)
-        self._f2 = fbe.FinalModelOptional(fbe.FinalModelBytes(buffer, 0), buffer, 0)
-        self._f3 = fbe.FinalModelOptional(fbe.FinalModelBytes(buffer, 0), buffer, 0)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
 
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
-            + self.f1.fbe_allocation_size(fbe_value.f1) \
-            + self.f2.fbe_allocation_size(fbe_value.f2) \
-            + self.f3.fbe_allocation_size(fbe_value.f3) \
 
         return fbe_result
 
@@ -8864,27 +2422,7 @@ class FinalModelStructBytes(fbe.FinalModel):
 
     # Check if the struct fields are valid
     def verify_fields(self):
-        fbe_current_offset = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        return fbe_current_offset
+        return 0
 
     # Get the struct value
     def get(self, fbe_value=None):
@@ -8898,28 +2436,7 @@ class FinalModelStructBytes(fbe.FinalModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_result = self.f1.get()
-        fbe_value.f1 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_result = self.f2.get()
-        fbe_value.f2 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_result = self.f3.get()
-        fbe_value.f3 = fbe_result[0]
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        return fbe_current_size
+        return 0
 
     # Set the struct value
     def set(self, fbe_value):
@@ -8930,25 +2447,7 @@ class FinalModelStructBytes(fbe.FinalModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.set(fbe_value.f1)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.set(fbe_value.f2)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.set(fbe_value.f3)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        return fbe_current_size
+        return 0
 
 
 # Fast Binary Encoding StructBytes final model
@@ -9022,52 +2521,11 @@ class StructBytesFinalModel(fbe.Model):
 
 @functools.total_ordering
 class StructArray(object):
-    __slots__ = "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", 
-
-    def __init__(self, f1=None, f2=None, f3=None, f4=None, f5=None, f6=None, f7=None, f8=None, f9=None, f10=None):
-        if f1 is None:
-            f1 = [0]*2
-        if f2 is None:
-            f2 = [None]*2
-        if f3 is None:
-            f3 = [bytearray()]*2
-        if f4 is None:
-            f4 = [None]*2
-        if f5 is None:
-            f5 = [EnumSimple()]*2
-        if f6 is None:
-            f6 = [None]*2
-        if f7 is None:
-            f7 = [FlagsSimple()]*2
-        if f8 is None:
-            f8 = [None]*2
-        if f9 is None:
-            f9 = [StructSimple()]*2
-        if f10 is None:
-            f10 = [None]*2
-        self.f1 = f1
-        self.f2 = f2
-        self.f3 = f3
-        self.f4 = f4
-        self.f5 = f5
-        self.f6 = f6
-        self.f7 = f7
-        self.f8 = f8
-        self.f9 = f9
-        self.f10 = f10
+    def __init__(self):
+        pass
 
     # Struct shallow copy
     def copy(self, other):
-        self.f1 = other.f1
-        self.f2 = other.f2
-        self.f3 = other.f3
-        self.f4 = other.f4
-        self.f5 = other.f5
-        self.f6 = other.f6
-        self.f7 = other.f7
-        self.f8 = other.f8
-        self.f9 = other.f9
-        self.f10 = other.f10
         return self
 
     # Struct deep clone
@@ -9104,140 +2562,6 @@ class StructArray(object):
     def __str__(self):
         sb = list()
         sb.append("StructArray(")
-        sb.append("f1=")
-        if self.f1 is not None:
-            first = True
-            sb.append("[" + str(len(self.f1)) + "][")
-            for item in self.f1:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f2=")
-        if self.f2 is not None:
-            first = True
-            sb.append("[" + str(len(self.f2)) + "][")
-            for item in self.f2:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append(str(item))
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f3=")
-        if self.f3 is not None:
-            first = True
-            sb.append("[" + str(len(self.f3)) + "][")
-            for item in self.f3:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append("bytes[" + str(len(item)) + "]")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f4=")
-        if self.f4 is not None:
-            first = True
-            sb.append("[" + str(len(self.f4)) + "][")
-            for item in self.f4:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append("bytes[" + str(len(item)) + "]")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f5=")
-        if self.f5 is not None:
-            first = True
-            sb.append("[" + str(len(self.f5)) + "][")
-            for item in self.f5:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f6=")
-        if self.f6 is not None:
-            first = True
-            sb.append("[" + str(len(self.f6)) + "][")
-            for item in self.f6:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append(str(item))
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f7=")
-        if self.f7 is not None:
-            first = True
-            sb.append("[" + str(len(self.f7)) + "][")
-            for item in self.f7:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f8=")
-        if self.f8 is not None:
-            first = True
-            sb.append("[" + str(len(self.f8)) + "][")
-            for item in self.f8:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append(str(item))
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f9=")
-        if self.f9 is not None:
-            first = True
-            sb.append("[" + str(len(self.f9)) + "][")
-            for item in self.f9:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f10=")
-        if self.f10 is not None:
-            first = True
-            sb.append("[" + str(len(self.f10)) + "][")
-            for item in self.f10:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append(str(item))
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
         sb.append(")")
         return "".join(sb)
 
@@ -9247,18 +2571,6 @@ class StructArray(object):
 
     def __to_json__(self):
         result = dict()
-        result.update(dict(
-            f1=self.f1, 
-            f2=self.f2, 
-            f3=self.f3, 
-            f4=self.f4, 
-            f5=self.f5, 
-            f6=self.f6, 
-            f7=self.f7, 
-            f8=self.f8, 
-            f9=self.f9, 
-            f10=self.f10, 
-        ))
         return result
 
     # Create struct from JSON value
@@ -9271,74 +2583,12 @@ class StructArray(object):
         if fields is None:
             return None
         return StructArray(
-            None if "f1" not in fields else [value for value in fields["f1"]],
-            None if "f2" not in fields else [value for value in fields["f2"]],
-            None if "f3" not in fields else [None if value is None else base64.b64decode(value.encode('ascii')) for value in fields["f3"]],
-            None if "f4" not in fields else [None if value is None else base64.b64decode(value.encode('ascii')) for value in fields["f4"]],
-            None if "f5" not in fields else [EnumSimple.__from_json__(value) for value in fields["f5"]],
-            None if "f6" not in fields else [EnumSimple.__from_json__(value) for value in fields["f6"]],
-            None if "f7" not in fields else [FlagsSimple.__from_json__(value) for value in fields["f7"]],
-            None if "f8" not in fields else [FlagsSimple.__from_json__(value) for value in fields["f8"]],
-            None if "f9" not in fields else [StructSimple.__from_json__(value) for value in fields["f9"]],
-            None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
 
 
 class FieldModelStructArray(fbe.FieldModel):
-    __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FieldModelArray(fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4, 2)
-        self._f2 = fbe.FieldModelArray(fbe.FieldModelOptional(fbe.FieldModelByte(buffer, self._f1.fbe_offset + self._f1.fbe_size), buffer, self._f1.fbe_offset + self._f1.fbe_size), buffer, self._f1.fbe_offset + self._f1.fbe_size, 2)
-        self._f3 = fbe.FieldModelArray(fbe.FieldModelBytes(buffer, self._f2.fbe_offset + self._f2.fbe_size), buffer, self._f2.fbe_offset + self._f2.fbe_size, 2)
-        self._f4 = fbe.FieldModelArray(fbe.FieldModelOptional(fbe.FieldModelBytes(buffer, self._f3.fbe_offset + self._f3.fbe_size), buffer, self._f3.fbe_offset + self._f3.fbe_size), buffer, self._f3.fbe_offset + self._f3.fbe_size, 2)
-        self._f5 = fbe.FieldModelArray(FieldModelEnumSimple(buffer, self._f4.fbe_offset + self._f4.fbe_size), buffer, self._f4.fbe_offset + self._f4.fbe_size, 2)
-        self._f6 = fbe.FieldModelArray(fbe.FieldModelOptional(FieldModelEnumSimple(buffer, self._f5.fbe_offset + self._f5.fbe_size), buffer, self._f5.fbe_offset + self._f5.fbe_size), buffer, self._f5.fbe_offset + self._f5.fbe_size, 2)
-        self._f7 = fbe.FieldModelArray(FieldModelFlagsSimple(buffer, self._f6.fbe_offset + self._f6.fbe_size), buffer, self._f6.fbe_offset + self._f6.fbe_size, 2)
-        self._f8 = fbe.FieldModelArray(fbe.FieldModelOptional(FieldModelFlagsSimple(buffer, self._f7.fbe_offset + self._f7.fbe_size), buffer, self._f7.fbe_offset + self._f7.fbe_size), buffer, self._f7.fbe_offset + self._f7.fbe_size, 2)
-        self._f9 = fbe.FieldModelArray(FieldModelStructSimple(buffer, self._f8.fbe_offset + self._f8.fbe_size), buffer, self._f8.fbe_offset + self._f8.fbe_size, 2)
-        self._f10 = fbe.FieldModelArray(fbe.FieldModelOptional(FieldModelStructSimple(buffer, self._f9.fbe_offset + self._f9.fbe_size), buffer, self._f9.fbe_offset + self._f9.fbe_size), buffer, self._f9.fbe_offset + self._f9.fbe_size, 2)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
-
-    @property
-    def f4(self):
-        return self._f4
-
-    @property
-    def f5(self):
-        return self._f5
-
-    @property
-    def f6(self):
-        return self._f6
-
-    @property
-    def f7(self):
-        return self._f7
-
-    @property
-    def f8(self):
-        return self._f8
-
-    @property
-    def f9(self):
-        return self._f9
-
-    @property
-    def f10(self):
-        return self._f10
 
     # Get the field size
     @property
@@ -9349,16 +2599,6 @@ class FieldModelStructArray(fbe.FieldModel):
     @property
     def fbe_body(self):
         fbe_result = 4 + 4 \
-            + self.f1.fbe_size \
-            + self.f2.fbe_size \
-            + self.f3.fbe_size \
-            + self.f4.fbe_size \
-            + self.f5.fbe_size \
-            + self.f6.fbe_size \
-            + self.f7.fbe_size \
-            + self.f8.fbe_size \
-            + self.f9.fbe_size \
-            + self.f10.fbe_size \
 
         return fbe_result
 
@@ -9375,16 +2615,6 @@ class FieldModelStructArray(fbe.FieldModel):
         self._buffer.shift(fbe_struct_offset)
 
         fbe_result = self.fbe_body \
-            + self.f1.fbe_extra \
-            + self.f2.fbe_extra \
-            + self.f3.fbe_extra \
-            + self.f4.fbe_extra \
-            + self.f5.fbe_extra \
-            + self.f6.fbe_extra \
-            + self.f7.fbe_extra \
-            + self.f8.fbe_extra \
-            + self.f9.fbe_extra \
-            + self.f10.fbe_extra \
 
         self._buffer.unshift(fbe_struct_offset)
 
@@ -9421,68 +2651,6 @@ class FieldModelStructArray(fbe.FieldModel):
 
     # Check if the struct fields are valid
     def verify_fields(self, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1.verify():
-            return False
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f2.verify():
-            return False
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f3.verify():
-            return False
-        fbe_current_size += self.f3.fbe_size
-
-        if (fbe_current_size + self.f4.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f4.verify():
-            return False
-        fbe_current_size += self.f4.fbe_size
-
-        if (fbe_current_size + self.f5.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f5.verify():
-            return False
-        fbe_current_size += self.f5.fbe_size
-
-        if (fbe_current_size + self.f6.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f6.verify():
-            return False
-        fbe_current_size += self.f6.fbe_size
-
-        if (fbe_current_size + self.f7.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f7.verify():
-            return False
-        fbe_current_size += self.f7.fbe_size
-
-        if (fbe_current_size + self.f8.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f8.verify():
-            return False
-        fbe_current_size += self.f8.fbe_size
-
-        if (fbe_current_size + self.f9.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f9.verify():
-            return False
-        fbe_current_size += self.f9.fbe_size
-
-        if (fbe_current_size + self.f10.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f10.verify():
-            return False
-        fbe_current_size += self.f10.fbe_size
-
         return True
 
     # Get the struct value (begin phase)
@@ -9523,67 +2691,7 @@ class FieldModelStructArray(fbe.FieldModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) <= fbe_struct_size:
-            self.f1.get(fbe_value.f1)
-        else:
-            fbe_value.f1.clear()
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) <= fbe_struct_size:
-            self.f2.get(fbe_value.f2)
-        else:
-            fbe_value.f2.clear()
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) <= fbe_struct_size:
-            self.f3.get(fbe_value.f3)
-        else:
-            fbe_value.f3.clear()
-        fbe_current_size += self.f3.fbe_size
-
-        if (fbe_current_size + self.f4.fbe_size) <= fbe_struct_size:
-            self.f4.get(fbe_value.f4)
-        else:
-            fbe_value.f4.clear()
-        fbe_current_size += self.f4.fbe_size
-
-        if (fbe_current_size + self.f5.fbe_size) <= fbe_struct_size:
-            self.f5.get(fbe_value.f5)
-        else:
-            fbe_value.f5.clear()
-        fbe_current_size += self.f5.fbe_size
-
-        if (fbe_current_size + self.f6.fbe_size) <= fbe_struct_size:
-            self.f6.get(fbe_value.f6)
-        else:
-            fbe_value.f6.clear()
-        fbe_current_size += self.f6.fbe_size
-
-        if (fbe_current_size + self.f7.fbe_size) <= fbe_struct_size:
-            self.f7.get(fbe_value.f7)
-        else:
-            fbe_value.f7.clear()
-        fbe_current_size += self.f7.fbe_size
-
-        if (fbe_current_size + self.f8.fbe_size) <= fbe_struct_size:
-            self.f8.get(fbe_value.f8)
-        else:
-            fbe_value.f8.clear()
-        fbe_current_size += self.f8.fbe_size
-
-        if (fbe_current_size + self.f9.fbe_size) <= fbe_struct_size:
-            self.f9.get(fbe_value.f9)
-        else:
-            fbe_value.f9.clear()
-        fbe_current_size += self.f9.fbe_size
-
-        if (fbe_current_size + self.f10.fbe_size) <= fbe_struct_size:
-            self.f10.get(fbe_value.f10)
-        else:
-            fbe_value.f10.clear()
-        fbe_current_size += self.f10.fbe_size
+        pass
 
     # Set the struct value (begin phase)
     def set_begin(self):
@@ -9619,16 +2727,7 @@ class FieldModelStructArray(fbe.FieldModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        self.f1.set(fbe_value.f1)
-        self.f2.set(fbe_value.f2)
-        self.f3.set(fbe_value.f3)
-        self.f4.set(fbe_value.f4)
-        self.f5.set(fbe_value.f5)
-        self.f6.set(fbe_value.f6)
-        self.f7.set(fbe_value.f7)
-        self.f8.set(fbe_value.f8)
-        self.f9.set(fbe_value.f9)
-        self.f10.set(fbe_value.f10)
+        pass
 
 
 # Fast Binary Encoding StructArray model
@@ -9707,74 +2806,12 @@ class StructArrayModel(fbe.Model):
 
 
 class FinalModelStructArray(fbe.FinalModel):
-    __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FinalModelArray(fbe.FinalModelByte(buffer, 0), buffer, 0, 2)
-        self._f2 = fbe.FinalModelArray(fbe.FinalModelOptional(fbe.FinalModelByte(buffer, 0), buffer, 0), buffer, 0, 2)
-        self._f3 = fbe.FinalModelArray(fbe.FinalModelBytes(buffer, 0), buffer, 0, 2)
-        self._f4 = fbe.FinalModelArray(fbe.FinalModelOptional(fbe.FinalModelBytes(buffer, 0), buffer, 0), buffer, 0, 2)
-        self._f5 = fbe.FinalModelArray(FinalModelEnumSimple(buffer, 0), buffer, 0, 2)
-        self._f6 = fbe.FinalModelArray(fbe.FinalModelOptional(FinalModelEnumSimple(buffer, 0), buffer, 0), buffer, 0, 2)
-        self._f7 = fbe.FinalModelArray(FinalModelFlagsSimple(buffer, 0), buffer, 0, 2)
-        self._f8 = fbe.FinalModelArray(fbe.FinalModelOptional(FinalModelFlagsSimple(buffer, 0), buffer, 0), buffer, 0, 2)
-        self._f9 = fbe.FinalModelArray(FinalModelStructSimple(buffer, 0), buffer, 0, 2)
-        self._f10 = fbe.FinalModelArray(fbe.FinalModelOptional(FinalModelStructSimple(buffer, 0), buffer, 0), buffer, 0, 2)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
-
-    @property
-    def f4(self):
-        return self._f4
-
-    @property
-    def f5(self):
-        return self._f5
-
-    @property
-    def f6(self):
-        return self._f6
-
-    @property
-    def f7(self):
-        return self._f7
-
-    @property
-    def f8(self):
-        return self._f8
-
-    @property
-    def f9(self):
-        return self._f9
-
-    @property
-    def f10(self):
-        return self._f10
 
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
-            + self.f1.fbe_allocation_size(fbe_value.f1) \
-            + self.f2.fbe_allocation_size(fbe_value.f2) \
-            + self.f3.fbe_allocation_size(fbe_value.f3) \
-            + self.f4.fbe_allocation_size(fbe_value.f4) \
-            + self.f5.fbe_allocation_size(fbe_value.f5) \
-            + self.f6.fbe_allocation_size(fbe_value.f6) \
-            + self.f7.fbe_allocation_size(fbe_value.f7) \
-            + self.f8.fbe_allocation_size(fbe_value.f8) \
-            + self.f9.fbe_allocation_size(fbe_value.f9) \
-            + self.f10.fbe_allocation_size(fbe_value.f10) \
 
         return fbe_result
 
@@ -9794,69 +2831,7 @@ class FinalModelStructArray(fbe.FinalModel):
 
     # Check if the struct fields are valid
     def verify_fields(self):
-        fbe_current_offset = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f4.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f5.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f6.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f7.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f8.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f9.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f10.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        return fbe_current_offset
+        return 0
 
     # Get the struct value
     def get(self, fbe_value=None):
@@ -9870,60 +2845,7 @@ class FinalModelStructArray(fbe.FinalModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_result = self.f1.get(fbe_value.f1)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_result = self.f2.get(fbe_value.f2)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_result = self.f3.get(fbe_value.f3)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_result = self.f4.get(fbe_value.f4)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_result = self.f5.get(fbe_value.f5)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_result = self.f6.get(fbe_value.f6)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_result = self.f7.get(fbe_value.f7)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_result = self.f8.get(fbe_value.f8)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_result = self.f9.get(fbe_value.f9)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_result = self.f10.get(fbe_value.f10)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        return fbe_current_size
+        return 0
 
     # Set the struct value
     def set(self, fbe_value):
@@ -9934,60 +2856,7 @@ class FinalModelStructArray(fbe.FinalModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.set(fbe_value.f1)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.set(fbe_value.f2)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.set(fbe_value.f3)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f4.set(fbe_value.f4)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f5.set(fbe_value.f5)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f6.set(fbe_value.f6)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f7.set(fbe_value.f7)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f8.set(fbe_value.f8)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f9.set(fbe_value.f9)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f10.set(fbe_value.f10)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        return fbe_current_size
+        return 0
 
 
 # Fast Binary Encoding StructArray final model
@@ -10061,52 +2930,11 @@ class StructArrayFinalModel(fbe.Model):
 
 @functools.total_ordering
 class StructVector(object):
-    __slots__ = "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", 
-
-    def __init__(self, f1=None, f2=None, f3=None, f4=None, f5=None, f6=None, f7=None, f8=None, f9=None, f10=None):
-        if f1 is None:
-            f1 = list()
-        if f2 is None:
-            f2 = list()
-        if f3 is None:
-            f3 = list()
-        if f4 is None:
-            f4 = list()
-        if f5 is None:
-            f5 = list()
-        if f6 is None:
-            f6 = list()
-        if f7 is None:
-            f7 = list()
-        if f8 is None:
-            f8 = list()
-        if f9 is None:
-            f9 = list()
-        if f10 is None:
-            f10 = list()
-        self.f1 = f1
-        self.f2 = f2
-        self.f3 = f3
-        self.f4 = f4
-        self.f5 = f5
-        self.f6 = f6
-        self.f7 = f7
-        self.f8 = f8
-        self.f9 = f9
-        self.f10 = f10
+    def __init__(self):
+        pass
 
     # Struct shallow copy
     def copy(self, other):
-        self.f1 = other.f1
-        self.f2 = other.f2
-        self.f3 = other.f3
-        self.f4 = other.f4
-        self.f5 = other.f5
-        self.f6 = other.f6
-        self.f7 = other.f7
-        self.f8 = other.f8
-        self.f9 = other.f9
-        self.f10 = other.f10
         return self
 
     # Struct deep clone
@@ -10143,140 +2971,6 @@ class StructVector(object):
     def __str__(self):
         sb = list()
         sb.append("StructVector(")
-        sb.append("f1=")
-        if self.f1 is not None:
-            first = True
-            sb.append("[" + str(len(self.f1)) + "][")
-            for item in self.f1:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f2=")
-        if self.f2 is not None:
-            first = True
-            sb.append("[" + str(len(self.f2)) + "][")
-            for item in self.f2:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append(str(item))
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f3=")
-        if self.f3 is not None:
-            first = True
-            sb.append("[" + str(len(self.f3)) + "][")
-            for item in self.f3:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append("bytes[" + str(len(item)) + "]")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f4=")
-        if self.f4 is not None:
-            first = True
-            sb.append("[" + str(len(self.f4)) + "][")
-            for item in self.f4:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append("bytes[" + str(len(item)) + "]")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f5=")
-        if self.f5 is not None:
-            first = True
-            sb.append("[" + str(len(self.f5)) + "][")
-            for item in self.f5:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f6=")
-        if self.f6 is not None:
-            first = True
-            sb.append("[" + str(len(self.f6)) + "][")
-            for item in self.f6:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append(str(item))
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f7=")
-        if self.f7 is not None:
-            first = True
-            sb.append("[" + str(len(self.f7)) + "][")
-            for item in self.f7:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f8=")
-        if self.f8 is not None:
-            first = True
-            sb.append("[" + str(len(self.f8)) + "][")
-            for item in self.f8:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append(str(item))
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f9=")
-        if self.f9 is not None:
-            first = True
-            sb.append("[" + str(len(self.f9)) + "][")
-            for item in self.f9:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
-        sb.append(",f10=")
-        if self.f10 is not None:
-            first = True
-            sb.append("[" + str(len(self.f10)) + "][")
-            for item in self.f10:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append(str(item))
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append("]")
-        else:
-            sb.append("[0][]")
         sb.append(")")
         return "".join(sb)
 
@@ -10286,18 +2980,6 @@ class StructVector(object):
 
     def __to_json__(self):
         result = dict()
-        result.update(dict(
-            f1=self.f1, 
-            f2=self.f2, 
-            f3=self.f3, 
-            f4=self.f4, 
-            f5=self.f5, 
-            f6=self.f6, 
-            f7=self.f7, 
-            f8=self.f8, 
-            f9=self.f9, 
-            f10=self.f10, 
-        ))
         return result
 
     # Create struct from JSON value
@@ -10310,74 +2992,12 @@ class StructVector(object):
         if fields is None:
             return None
         return StructVector(
-            None if "f1" not in fields else [value for value in fields["f1"]],
-            None if "f2" not in fields else [value for value in fields["f2"]],
-            None if "f3" not in fields else [None if value is None else base64.b64decode(value.encode('ascii')) for value in fields["f3"]],
-            None if "f4" not in fields else [None if value is None else base64.b64decode(value.encode('ascii')) for value in fields["f4"]],
-            None if "f5" not in fields else [EnumSimple.__from_json__(value) for value in fields["f5"]],
-            None if "f6" not in fields else [EnumSimple.__from_json__(value) for value in fields["f6"]],
-            None if "f7" not in fields else [FlagsSimple.__from_json__(value) for value in fields["f7"]],
-            None if "f8" not in fields else [FlagsSimple.__from_json__(value) for value in fields["f8"]],
-            None if "f9" not in fields else [StructSimple.__from_json__(value) for value in fields["f9"]],
-            None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
 
 
 class FieldModelStructVector(fbe.FieldModel):
-    __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FieldModelVector(fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
-        self._f2 = fbe.FieldModelVector(fbe.FieldModelOptional(fbe.FieldModelByte(buffer, self._f1.fbe_offset + self._f1.fbe_size), buffer, self._f1.fbe_offset + self._f1.fbe_size), buffer, self._f1.fbe_offset + self._f1.fbe_size)
-        self._f3 = fbe.FieldModelVector(fbe.FieldModelBytes(buffer, self._f2.fbe_offset + self._f2.fbe_size), buffer, self._f2.fbe_offset + self._f2.fbe_size)
-        self._f4 = fbe.FieldModelVector(fbe.FieldModelOptional(fbe.FieldModelBytes(buffer, self._f3.fbe_offset + self._f3.fbe_size), buffer, self._f3.fbe_offset + self._f3.fbe_size), buffer, self._f3.fbe_offset + self._f3.fbe_size)
-        self._f5 = fbe.FieldModelVector(FieldModelEnumSimple(buffer, self._f4.fbe_offset + self._f4.fbe_size), buffer, self._f4.fbe_offset + self._f4.fbe_size)
-        self._f6 = fbe.FieldModelVector(fbe.FieldModelOptional(FieldModelEnumSimple(buffer, self._f5.fbe_offset + self._f5.fbe_size), buffer, self._f5.fbe_offset + self._f5.fbe_size), buffer, self._f5.fbe_offset + self._f5.fbe_size)
-        self._f7 = fbe.FieldModelVector(FieldModelFlagsSimple(buffer, self._f6.fbe_offset + self._f6.fbe_size), buffer, self._f6.fbe_offset + self._f6.fbe_size)
-        self._f8 = fbe.FieldModelVector(fbe.FieldModelOptional(FieldModelFlagsSimple(buffer, self._f7.fbe_offset + self._f7.fbe_size), buffer, self._f7.fbe_offset + self._f7.fbe_size), buffer, self._f7.fbe_offset + self._f7.fbe_size)
-        self._f9 = fbe.FieldModelVector(FieldModelStructSimple(buffer, self._f8.fbe_offset + self._f8.fbe_size), buffer, self._f8.fbe_offset + self._f8.fbe_size)
-        self._f10 = fbe.FieldModelVector(fbe.FieldModelOptional(FieldModelStructSimple(buffer, self._f9.fbe_offset + self._f9.fbe_size), buffer, self._f9.fbe_offset + self._f9.fbe_size), buffer, self._f9.fbe_offset + self._f9.fbe_size)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
-
-    @property
-    def f4(self):
-        return self._f4
-
-    @property
-    def f5(self):
-        return self._f5
-
-    @property
-    def f6(self):
-        return self._f6
-
-    @property
-    def f7(self):
-        return self._f7
-
-    @property
-    def f8(self):
-        return self._f8
-
-    @property
-    def f9(self):
-        return self._f9
-
-    @property
-    def f10(self):
-        return self._f10
 
     # Get the field size
     @property
@@ -10388,16 +3008,6 @@ class FieldModelStructVector(fbe.FieldModel):
     @property
     def fbe_body(self):
         fbe_result = 4 + 4 \
-            + self.f1.fbe_size \
-            + self.f2.fbe_size \
-            + self.f3.fbe_size \
-            + self.f4.fbe_size \
-            + self.f5.fbe_size \
-            + self.f6.fbe_size \
-            + self.f7.fbe_size \
-            + self.f8.fbe_size \
-            + self.f9.fbe_size \
-            + self.f10.fbe_size \
 
         return fbe_result
 
@@ -10414,16 +3024,6 @@ class FieldModelStructVector(fbe.FieldModel):
         self._buffer.shift(fbe_struct_offset)
 
         fbe_result = self.fbe_body \
-            + self.f1.fbe_extra \
-            + self.f2.fbe_extra \
-            + self.f3.fbe_extra \
-            + self.f4.fbe_extra \
-            + self.f5.fbe_extra \
-            + self.f6.fbe_extra \
-            + self.f7.fbe_extra \
-            + self.f8.fbe_extra \
-            + self.f9.fbe_extra \
-            + self.f10.fbe_extra \
 
         self._buffer.unshift(fbe_struct_offset)
 
@@ -10460,68 +3060,6 @@ class FieldModelStructVector(fbe.FieldModel):
 
     # Check if the struct fields are valid
     def verify_fields(self, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1.verify():
-            return False
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f2.verify():
-            return False
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f3.verify():
-            return False
-        fbe_current_size += self.f3.fbe_size
-
-        if (fbe_current_size + self.f4.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f4.verify():
-            return False
-        fbe_current_size += self.f4.fbe_size
-
-        if (fbe_current_size + self.f5.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f5.verify():
-            return False
-        fbe_current_size += self.f5.fbe_size
-
-        if (fbe_current_size + self.f6.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f6.verify():
-            return False
-        fbe_current_size += self.f6.fbe_size
-
-        if (fbe_current_size + self.f7.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f7.verify():
-            return False
-        fbe_current_size += self.f7.fbe_size
-
-        if (fbe_current_size + self.f8.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f8.verify():
-            return False
-        fbe_current_size += self.f8.fbe_size
-
-        if (fbe_current_size + self.f9.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f9.verify():
-            return False
-        fbe_current_size += self.f9.fbe_size
-
-        if (fbe_current_size + self.f10.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f10.verify():
-            return False
-        fbe_current_size += self.f10.fbe_size
-
         return True
 
     # Get the struct value (begin phase)
@@ -10562,67 +3100,7 @@ class FieldModelStructVector(fbe.FieldModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) <= fbe_struct_size:
-            self.f1.get(fbe_value.f1)
-        else:
-            fbe_value.f1.clear()
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) <= fbe_struct_size:
-            self.f2.get(fbe_value.f2)
-        else:
-            fbe_value.f2.clear()
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) <= fbe_struct_size:
-            self.f3.get(fbe_value.f3)
-        else:
-            fbe_value.f3.clear()
-        fbe_current_size += self.f3.fbe_size
-
-        if (fbe_current_size + self.f4.fbe_size) <= fbe_struct_size:
-            self.f4.get(fbe_value.f4)
-        else:
-            fbe_value.f4.clear()
-        fbe_current_size += self.f4.fbe_size
-
-        if (fbe_current_size + self.f5.fbe_size) <= fbe_struct_size:
-            self.f5.get(fbe_value.f5)
-        else:
-            fbe_value.f5.clear()
-        fbe_current_size += self.f5.fbe_size
-
-        if (fbe_current_size + self.f6.fbe_size) <= fbe_struct_size:
-            self.f6.get(fbe_value.f6)
-        else:
-            fbe_value.f6.clear()
-        fbe_current_size += self.f6.fbe_size
-
-        if (fbe_current_size + self.f7.fbe_size) <= fbe_struct_size:
-            self.f7.get(fbe_value.f7)
-        else:
-            fbe_value.f7.clear()
-        fbe_current_size += self.f7.fbe_size
-
-        if (fbe_current_size + self.f8.fbe_size) <= fbe_struct_size:
-            self.f8.get(fbe_value.f8)
-        else:
-            fbe_value.f8.clear()
-        fbe_current_size += self.f8.fbe_size
-
-        if (fbe_current_size + self.f9.fbe_size) <= fbe_struct_size:
-            self.f9.get(fbe_value.f9)
-        else:
-            fbe_value.f9.clear()
-        fbe_current_size += self.f9.fbe_size
-
-        if (fbe_current_size + self.f10.fbe_size) <= fbe_struct_size:
-            self.f10.get(fbe_value.f10)
-        else:
-            fbe_value.f10.clear()
-        fbe_current_size += self.f10.fbe_size
+        pass
 
     # Set the struct value (begin phase)
     def set_begin(self):
@@ -10658,16 +3136,7 @@ class FieldModelStructVector(fbe.FieldModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        self.f1.set(fbe_value.f1)
-        self.f2.set(fbe_value.f2)
-        self.f3.set(fbe_value.f3)
-        self.f4.set(fbe_value.f4)
-        self.f5.set(fbe_value.f5)
-        self.f6.set(fbe_value.f6)
-        self.f7.set(fbe_value.f7)
-        self.f8.set(fbe_value.f8)
-        self.f9.set(fbe_value.f9)
-        self.f10.set(fbe_value.f10)
+        pass
 
 
 # Fast Binary Encoding StructVector model
@@ -10746,74 +3215,12 @@ class StructVectorModel(fbe.Model):
 
 
 class FinalModelStructVector(fbe.FinalModel):
-    __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FinalModelVector(fbe.FinalModelByte(buffer, 0), buffer, 0)
-        self._f2 = fbe.FinalModelVector(fbe.FinalModelOptional(fbe.FinalModelByte(buffer, 0), buffer, 0), buffer, 0)
-        self._f3 = fbe.FinalModelVector(fbe.FinalModelBytes(buffer, 0), buffer, 0)
-        self._f4 = fbe.FinalModelVector(fbe.FinalModelOptional(fbe.FinalModelBytes(buffer, 0), buffer, 0), buffer, 0)
-        self._f5 = fbe.FinalModelVector(FinalModelEnumSimple(buffer, 0), buffer, 0)
-        self._f6 = fbe.FinalModelVector(fbe.FinalModelOptional(FinalModelEnumSimple(buffer, 0), buffer, 0), buffer, 0)
-        self._f7 = fbe.FinalModelVector(FinalModelFlagsSimple(buffer, 0), buffer, 0)
-        self._f8 = fbe.FinalModelVector(fbe.FinalModelOptional(FinalModelFlagsSimple(buffer, 0), buffer, 0), buffer, 0)
-        self._f9 = fbe.FinalModelVector(FinalModelStructSimple(buffer, 0), buffer, 0)
-        self._f10 = fbe.FinalModelVector(fbe.FinalModelOptional(FinalModelStructSimple(buffer, 0), buffer, 0), buffer, 0)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
-
-    @property
-    def f4(self):
-        return self._f4
-
-    @property
-    def f5(self):
-        return self._f5
-
-    @property
-    def f6(self):
-        return self._f6
-
-    @property
-    def f7(self):
-        return self._f7
-
-    @property
-    def f8(self):
-        return self._f8
-
-    @property
-    def f9(self):
-        return self._f9
-
-    @property
-    def f10(self):
-        return self._f10
 
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
-            + self.f1.fbe_allocation_size(fbe_value.f1) \
-            + self.f2.fbe_allocation_size(fbe_value.f2) \
-            + self.f3.fbe_allocation_size(fbe_value.f3) \
-            + self.f4.fbe_allocation_size(fbe_value.f4) \
-            + self.f5.fbe_allocation_size(fbe_value.f5) \
-            + self.f6.fbe_allocation_size(fbe_value.f6) \
-            + self.f7.fbe_allocation_size(fbe_value.f7) \
-            + self.f8.fbe_allocation_size(fbe_value.f8) \
-            + self.f9.fbe_allocation_size(fbe_value.f9) \
-            + self.f10.fbe_allocation_size(fbe_value.f10) \
 
         return fbe_result
 
@@ -10833,69 +3240,7 @@ class FinalModelStructVector(fbe.FinalModel):
 
     # Check if the struct fields are valid
     def verify_fields(self):
-        fbe_current_offset = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f4.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f5.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f6.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f7.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f8.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f9.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f10.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        return fbe_current_offset
+        return 0
 
     # Get the struct value
     def get(self, fbe_value=None):
@@ -10909,60 +3254,7 @@ class FinalModelStructVector(fbe.FinalModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_result = self.f1.get(fbe_value.f1)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_result = self.f2.get(fbe_value.f2)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_result = self.f3.get(fbe_value.f3)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_result = self.f4.get(fbe_value.f4)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_result = self.f5.get(fbe_value.f5)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_result = self.f6.get(fbe_value.f6)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_result = self.f7.get(fbe_value.f7)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_result = self.f8.get(fbe_value.f8)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_result = self.f9.get(fbe_value.f9)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_result = self.f10.get(fbe_value.f10)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        return fbe_current_size
+        return 0
 
     # Set the struct value
     def set(self, fbe_value):
@@ -10973,60 +3265,7 @@ class FinalModelStructVector(fbe.FinalModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.set(fbe_value.f1)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.set(fbe_value.f2)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.set(fbe_value.f3)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f4.set(fbe_value.f4)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f5.set(fbe_value.f5)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f6.set(fbe_value.f6)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f7.set(fbe_value.f7)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f8.set(fbe_value.f8)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f9.set(fbe_value.f9)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f10.set(fbe_value.f10)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        return fbe_current_size
+        return 0
 
 
 # Fast Binary Encoding StructVector final model
@@ -11100,52 +3339,11 @@ class StructVectorFinalModel(fbe.Model):
 
 @functools.total_ordering
 class StructList(object):
-    __slots__ = "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", 
-
-    def __init__(self, f1=None, f2=None, f3=None, f4=None, f5=None, f6=None, f7=None, f8=None, f9=None, f10=None):
-        if f1 is None:
-            f1 = list()
-        if f2 is None:
-            f2 = list()
-        if f3 is None:
-            f3 = list()
-        if f4 is None:
-            f4 = list()
-        if f5 is None:
-            f5 = list()
-        if f6 is None:
-            f6 = list()
-        if f7 is None:
-            f7 = list()
-        if f8 is None:
-            f8 = list()
-        if f9 is None:
-            f9 = list()
-        if f10 is None:
-            f10 = list()
-        self.f1 = f1
-        self.f2 = f2
-        self.f3 = f3
-        self.f4 = f4
-        self.f5 = f5
-        self.f6 = f6
-        self.f7 = f7
-        self.f8 = f8
-        self.f9 = f9
-        self.f10 = f10
+    def __init__(self):
+        pass
 
     # Struct shallow copy
     def copy(self, other):
-        self.f1 = other.f1
-        self.f2 = other.f2
-        self.f3 = other.f3
-        self.f4 = other.f4
-        self.f5 = other.f5
-        self.f6 = other.f6
-        self.f7 = other.f7
-        self.f8 = other.f8
-        self.f9 = other.f9
-        self.f10 = other.f10
         return self
 
     # Struct deep clone
@@ -11182,140 +3380,6 @@ class StructList(object):
     def __str__(self):
         sb = list()
         sb.append("StructList(")
-        sb.append("f1=")
-        if self.f1 is not None:
-            first = True
-            sb.append("[" + str(len(self.f1)) + "]<")
-            for item in self.f1:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append(">")
-        else:
-            sb.append("[0]<>")
-        sb.append(",f2=")
-        if self.f2 is not None:
-            first = True
-            sb.append("[" + str(len(self.f2)) + "]<")
-            for item in self.f2:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append(str(item))
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append(">")
-        else:
-            sb.append("[0]<>")
-        sb.append(",f3=")
-        if self.f3 is not None:
-            first = True
-            sb.append("[" + str(len(self.f3)) + "]<")
-            for item in self.f3:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append("bytes[" + str(len(item)) + "]")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append(">")
-        else:
-            sb.append("[0]<>")
-        sb.append(",f4=")
-        if self.f4 is not None:
-            first = True
-            sb.append("[" + str(len(self.f4)) + "]<")
-            for item in self.f4:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append("bytes[" + str(len(item)) + "]")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append(">")
-        else:
-            sb.append("[0]<>")
-        sb.append(",f5=")
-        if self.f5 is not None:
-            first = True
-            sb.append("[" + str(len(self.f5)) + "]<")
-            for item in self.f5:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append(">")
-        else:
-            sb.append("[0]<>")
-        sb.append(",f6=")
-        if self.f6 is not None:
-            first = True
-            sb.append("[" + str(len(self.f6)) + "]<")
-            for item in self.f6:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append(str(item))
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append(">")
-        else:
-            sb.append("[0]<>")
-        sb.append(",f7=")
-        if self.f7 is not None:
-            first = True
-            sb.append("[" + str(len(self.f7)) + "]<")
-            for item in self.f7:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append(">")
-        else:
-            sb.append("[0]<>")
-        sb.append(",f8=")
-        if self.f8 is not None:
-            first = True
-            sb.append("[" + str(len(self.f8)) + "]<")
-            for item in self.f8:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append(str(item))
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append(">")
-        else:
-            sb.append("[0]<>")
-        sb.append(",f9=")
-        if self.f9 is not None:
-            first = True
-            sb.append("[" + str(len(self.f9)) + "]<")
-            for item in self.f9:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append(">")
-        else:
-            sb.append("[0]<>")
-        sb.append(",f10=")
-        if self.f10 is not None:
-            first = True
-            sb.append("[" + str(len(self.f10)) + "]<")
-            for item in self.f10:
-                if item is not None:
-                    sb.append("" if first else ",")
-                    sb.append(str(item))
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                first = False
-            sb.append(">")
-        else:
-            sb.append("[0]<>")
         sb.append(")")
         return "".join(sb)
 
@@ -11325,18 +3389,6 @@ class StructList(object):
 
     def __to_json__(self):
         result = dict()
-        result.update(dict(
-            f1=self.f1, 
-            f2=self.f2, 
-            f3=self.f3, 
-            f4=self.f4, 
-            f5=self.f5, 
-            f6=self.f6, 
-            f7=self.f7, 
-            f8=self.f8, 
-            f9=self.f9, 
-            f10=self.f10, 
-        ))
         return result
 
     # Create struct from JSON value
@@ -11349,74 +3401,12 @@ class StructList(object):
         if fields is None:
             return None
         return StructList(
-            None if "f1" not in fields else [value for value in fields["f1"]],
-            None if "f2" not in fields else [value for value in fields["f2"]],
-            None if "f3" not in fields else [None if value is None else base64.b64decode(value.encode('ascii')) for value in fields["f3"]],
-            None if "f4" not in fields else [None if value is None else base64.b64decode(value.encode('ascii')) for value in fields["f4"]],
-            None if "f5" not in fields else [EnumSimple.__from_json__(value) for value in fields["f5"]],
-            None if "f6" not in fields else [EnumSimple.__from_json__(value) for value in fields["f6"]],
-            None if "f7" not in fields else [FlagsSimple.__from_json__(value) for value in fields["f7"]],
-            None if "f8" not in fields else [FlagsSimple.__from_json__(value) for value in fields["f8"]],
-            None if "f9" not in fields else [StructSimple.__from_json__(value) for value in fields["f9"]],
-            None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
 
 
 class FieldModelStructList(fbe.FieldModel):
-    __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FieldModelVector(fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
-        self._f2 = fbe.FieldModelVector(fbe.FieldModelOptional(fbe.FieldModelByte(buffer, self._f1.fbe_offset + self._f1.fbe_size), buffer, self._f1.fbe_offset + self._f1.fbe_size), buffer, self._f1.fbe_offset + self._f1.fbe_size)
-        self._f3 = fbe.FieldModelVector(fbe.FieldModelBytes(buffer, self._f2.fbe_offset + self._f2.fbe_size), buffer, self._f2.fbe_offset + self._f2.fbe_size)
-        self._f4 = fbe.FieldModelVector(fbe.FieldModelOptional(fbe.FieldModelBytes(buffer, self._f3.fbe_offset + self._f3.fbe_size), buffer, self._f3.fbe_offset + self._f3.fbe_size), buffer, self._f3.fbe_offset + self._f3.fbe_size)
-        self._f5 = fbe.FieldModelVector(FieldModelEnumSimple(buffer, self._f4.fbe_offset + self._f4.fbe_size), buffer, self._f4.fbe_offset + self._f4.fbe_size)
-        self._f6 = fbe.FieldModelVector(fbe.FieldModelOptional(FieldModelEnumSimple(buffer, self._f5.fbe_offset + self._f5.fbe_size), buffer, self._f5.fbe_offset + self._f5.fbe_size), buffer, self._f5.fbe_offset + self._f5.fbe_size)
-        self._f7 = fbe.FieldModelVector(FieldModelFlagsSimple(buffer, self._f6.fbe_offset + self._f6.fbe_size), buffer, self._f6.fbe_offset + self._f6.fbe_size)
-        self._f8 = fbe.FieldModelVector(fbe.FieldModelOptional(FieldModelFlagsSimple(buffer, self._f7.fbe_offset + self._f7.fbe_size), buffer, self._f7.fbe_offset + self._f7.fbe_size), buffer, self._f7.fbe_offset + self._f7.fbe_size)
-        self._f9 = fbe.FieldModelVector(FieldModelStructSimple(buffer, self._f8.fbe_offset + self._f8.fbe_size), buffer, self._f8.fbe_offset + self._f8.fbe_size)
-        self._f10 = fbe.FieldModelVector(fbe.FieldModelOptional(FieldModelStructSimple(buffer, self._f9.fbe_offset + self._f9.fbe_size), buffer, self._f9.fbe_offset + self._f9.fbe_size), buffer, self._f9.fbe_offset + self._f9.fbe_size)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
-
-    @property
-    def f4(self):
-        return self._f4
-
-    @property
-    def f5(self):
-        return self._f5
-
-    @property
-    def f6(self):
-        return self._f6
-
-    @property
-    def f7(self):
-        return self._f7
-
-    @property
-    def f8(self):
-        return self._f8
-
-    @property
-    def f9(self):
-        return self._f9
-
-    @property
-    def f10(self):
-        return self._f10
 
     # Get the field size
     @property
@@ -11427,16 +3417,6 @@ class FieldModelStructList(fbe.FieldModel):
     @property
     def fbe_body(self):
         fbe_result = 4 + 4 \
-            + self.f1.fbe_size \
-            + self.f2.fbe_size \
-            + self.f3.fbe_size \
-            + self.f4.fbe_size \
-            + self.f5.fbe_size \
-            + self.f6.fbe_size \
-            + self.f7.fbe_size \
-            + self.f8.fbe_size \
-            + self.f9.fbe_size \
-            + self.f10.fbe_size \
 
         return fbe_result
 
@@ -11453,16 +3433,6 @@ class FieldModelStructList(fbe.FieldModel):
         self._buffer.shift(fbe_struct_offset)
 
         fbe_result = self.fbe_body \
-            + self.f1.fbe_extra \
-            + self.f2.fbe_extra \
-            + self.f3.fbe_extra \
-            + self.f4.fbe_extra \
-            + self.f5.fbe_extra \
-            + self.f6.fbe_extra \
-            + self.f7.fbe_extra \
-            + self.f8.fbe_extra \
-            + self.f9.fbe_extra \
-            + self.f10.fbe_extra \
 
         self._buffer.unshift(fbe_struct_offset)
 
@@ -11499,68 +3469,6 @@ class FieldModelStructList(fbe.FieldModel):
 
     # Check if the struct fields are valid
     def verify_fields(self, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1.verify():
-            return False
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f2.verify():
-            return False
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f3.verify():
-            return False
-        fbe_current_size += self.f3.fbe_size
-
-        if (fbe_current_size + self.f4.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f4.verify():
-            return False
-        fbe_current_size += self.f4.fbe_size
-
-        if (fbe_current_size + self.f5.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f5.verify():
-            return False
-        fbe_current_size += self.f5.fbe_size
-
-        if (fbe_current_size + self.f6.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f6.verify():
-            return False
-        fbe_current_size += self.f6.fbe_size
-
-        if (fbe_current_size + self.f7.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f7.verify():
-            return False
-        fbe_current_size += self.f7.fbe_size
-
-        if (fbe_current_size + self.f8.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f8.verify():
-            return False
-        fbe_current_size += self.f8.fbe_size
-
-        if (fbe_current_size + self.f9.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f9.verify():
-            return False
-        fbe_current_size += self.f9.fbe_size
-
-        if (fbe_current_size + self.f10.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f10.verify():
-            return False
-        fbe_current_size += self.f10.fbe_size
-
         return True
 
     # Get the struct value (begin phase)
@@ -11601,67 +3509,7 @@ class FieldModelStructList(fbe.FieldModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) <= fbe_struct_size:
-            self.f1.get(fbe_value.f1)
-        else:
-            fbe_value.f1.clear()
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) <= fbe_struct_size:
-            self.f2.get(fbe_value.f2)
-        else:
-            fbe_value.f2.clear()
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) <= fbe_struct_size:
-            self.f3.get(fbe_value.f3)
-        else:
-            fbe_value.f3.clear()
-        fbe_current_size += self.f3.fbe_size
-
-        if (fbe_current_size + self.f4.fbe_size) <= fbe_struct_size:
-            self.f4.get(fbe_value.f4)
-        else:
-            fbe_value.f4.clear()
-        fbe_current_size += self.f4.fbe_size
-
-        if (fbe_current_size + self.f5.fbe_size) <= fbe_struct_size:
-            self.f5.get(fbe_value.f5)
-        else:
-            fbe_value.f5.clear()
-        fbe_current_size += self.f5.fbe_size
-
-        if (fbe_current_size + self.f6.fbe_size) <= fbe_struct_size:
-            self.f6.get(fbe_value.f6)
-        else:
-            fbe_value.f6.clear()
-        fbe_current_size += self.f6.fbe_size
-
-        if (fbe_current_size + self.f7.fbe_size) <= fbe_struct_size:
-            self.f7.get(fbe_value.f7)
-        else:
-            fbe_value.f7.clear()
-        fbe_current_size += self.f7.fbe_size
-
-        if (fbe_current_size + self.f8.fbe_size) <= fbe_struct_size:
-            self.f8.get(fbe_value.f8)
-        else:
-            fbe_value.f8.clear()
-        fbe_current_size += self.f8.fbe_size
-
-        if (fbe_current_size + self.f9.fbe_size) <= fbe_struct_size:
-            self.f9.get(fbe_value.f9)
-        else:
-            fbe_value.f9.clear()
-        fbe_current_size += self.f9.fbe_size
-
-        if (fbe_current_size + self.f10.fbe_size) <= fbe_struct_size:
-            self.f10.get(fbe_value.f10)
-        else:
-            fbe_value.f10.clear()
-        fbe_current_size += self.f10.fbe_size
+        pass
 
     # Set the struct value (begin phase)
     def set_begin(self):
@@ -11697,16 +3545,7 @@ class FieldModelStructList(fbe.FieldModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        self.f1.set(fbe_value.f1)
-        self.f2.set(fbe_value.f2)
-        self.f3.set(fbe_value.f3)
-        self.f4.set(fbe_value.f4)
-        self.f5.set(fbe_value.f5)
-        self.f6.set(fbe_value.f6)
-        self.f7.set(fbe_value.f7)
-        self.f8.set(fbe_value.f8)
-        self.f9.set(fbe_value.f9)
-        self.f10.set(fbe_value.f10)
+        pass
 
 
 # Fast Binary Encoding StructList model
@@ -11785,74 +3624,12 @@ class StructListModel(fbe.Model):
 
 
 class FinalModelStructList(fbe.FinalModel):
-    __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FinalModelVector(fbe.FinalModelByte(buffer, 0), buffer, 0)
-        self._f2 = fbe.FinalModelVector(fbe.FinalModelOptional(fbe.FinalModelByte(buffer, 0), buffer, 0), buffer, 0)
-        self._f3 = fbe.FinalModelVector(fbe.FinalModelBytes(buffer, 0), buffer, 0)
-        self._f4 = fbe.FinalModelVector(fbe.FinalModelOptional(fbe.FinalModelBytes(buffer, 0), buffer, 0), buffer, 0)
-        self._f5 = fbe.FinalModelVector(FinalModelEnumSimple(buffer, 0), buffer, 0)
-        self._f6 = fbe.FinalModelVector(fbe.FinalModelOptional(FinalModelEnumSimple(buffer, 0), buffer, 0), buffer, 0)
-        self._f7 = fbe.FinalModelVector(FinalModelFlagsSimple(buffer, 0), buffer, 0)
-        self._f8 = fbe.FinalModelVector(fbe.FinalModelOptional(FinalModelFlagsSimple(buffer, 0), buffer, 0), buffer, 0)
-        self._f9 = fbe.FinalModelVector(FinalModelStructSimple(buffer, 0), buffer, 0)
-        self._f10 = fbe.FinalModelVector(fbe.FinalModelOptional(FinalModelStructSimple(buffer, 0), buffer, 0), buffer, 0)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
-
-    @property
-    def f4(self):
-        return self._f4
-
-    @property
-    def f5(self):
-        return self._f5
-
-    @property
-    def f6(self):
-        return self._f6
-
-    @property
-    def f7(self):
-        return self._f7
-
-    @property
-    def f8(self):
-        return self._f8
-
-    @property
-    def f9(self):
-        return self._f9
-
-    @property
-    def f10(self):
-        return self._f10
 
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
-            + self.f1.fbe_allocation_size(fbe_value.f1) \
-            + self.f2.fbe_allocation_size(fbe_value.f2) \
-            + self.f3.fbe_allocation_size(fbe_value.f3) \
-            + self.f4.fbe_allocation_size(fbe_value.f4) \
-            + self.f5.fbe_allocation_size(fbe_value.f5) \
-            + self.f6.fbe_allocation_size(fbe_value.f6) \
-            + self.f7.fbe_allocation_size(fbe_value.f7) \
-            + self.f8.fbe_allocation_size(fbe_value.f8) \
-            + self.f9.fbe_allocation_size(fbe_value.f9) \
-            + self.f10.fbe_allocation_size(fbe_value.f10) \
 
         return fbe_result
 
@@ -11872,69 +3649,7 @@ class FinalModelStructList(fbe.FinalModel):
 
     # Check if the struct fields are valid
     def verify_fields(self):
-        fbe_current_offset = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f4.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f5.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f6.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f7.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f8.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f9.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f10.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        return fbe_current_offset
+        return 0
 
     # Get the struct value
     def get(self, fbe_value=None):
@@ -11948,60 +3663,7 @@ class FinalModelStructList(fbe.FinalModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_result = self.f1.get(fbe_value.f1)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_result = self.f2.get(fbe_value.f2)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_result = self.f3.get(fbe_value.f3)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_result = self.f4.get(fbe_value.f4)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_result = self.f5.get(fbe_value.f5)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_result = self.f6.get(fbe_value.f6)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_result = self.f7.get(fbe_value.f7)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_result = self.f8.get(fbe_value.f8)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_result = self.f9.get(fbe_value.f9)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_result = self.f10.get(fbe_value.f10)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        return fbe_current_size
+        return 0
 
     # Set the struct value
     def set(self, fbe_value):
@@ -12012,60 +3674,7 @@ class FinalModelStructList(fbe.FinalModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.set(fbe_value.f1)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.set(fbe_value.f2)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.set(fbe_value.f3)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f4.set(fbe_value.f4)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f5.set(fbe_value.f5)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f6.set(fbe_value.f6)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f7.set(fbe_value.f7)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f8.set(fbe_value.f8)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f9.set(fbe_value.f9)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f10.set(fbe_value.f10)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        return fbe_current_size
+        return 0
 
 
 # Fast Binary Encoding StructList final model
@@ -12139,28 +3748,11 @@ class StructListFinalModel(fbe.Model):
 
 @functools.total_ordering
 class StructSet(object):
-    __slots__ = "f1", "f2", "f3", "f4", 
-
-    def __init__(self, f1=None, f2=None, f3=None, f4=None):
-        if f1 is None:
-            f1 = set()
-        if f2 is None:
-            f2 = set()
-        if f3 is None:
-            f3 = set()
-        if f4 is None:
-            f4 = set()
-        self.f1 = f1
-        self.f2 = f2
-        self.f3 = f3
-        self.f4 = f4
+    def __init__(self):
+        pass
 
     # Struct shallow copy
     def copy(self, other):
-        self.f1 = other.f1
-        self.f2 = other.f2
-        self.f3 = other.f3
-        self.f4 = other.f4
         return self
 
     # Struct deep clone
@@ -12197,50 +3789,6 @@ class StructSet(object):
     def __str__(self):
         sb = list()
         sb.append("StructSet(")
-        sb.append("f1=")
-        if self.f1 is not None:
-            first = True
-            sb.append("[" + str(len(self.f1)) + "]{")
-            for item in self.f1:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append("}")
-        else:
-            sb.append("[0]{}")
-        sb.append(",f2=")
-        if self.f2 is not None:
-            first = True
-            sb.append("[" + str(len(self.f2)) + "]{")
-            for item in self.f2:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append("}")
-        else:
-            sb.append("[0]{}")
-        sb.append(",f3=")
-        if self.f3 is not None:
-            first = True
-            sb.append("[" + str(len(self.f3)) + "]{")
-            for item in self.f3:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append("}")
-        else:
-            sb.append("[0]{}")
-        sb.append(",f4=")
-        if self.f4 is not None:
-            first = True
-            sb.append("[" + str(len(self.f4)) + "]{")
-            for item in self.f4:
-                sb.append("" if first else ",")
-                sb.append(str(item))
-                first = False
-            sb.append("}")
-        else:
-            sb.append("[0]{}")
         sb.append(")")
         return "".join(sb)
 
@@ -12250,12 +3798,6 @@ class StructSet(object):
 
     def __to_json__(self):
         result = dict()
-        result.update(dict(
-            f1=self.f1, 
-            f2=self.f2, 
-            f3=self.f3, 
-            f4=self.f4, 
-        ))
         return result
 
     # Create struct from JSON value
@@ -12268,38 +3810,12 @@ class StructSet(object):
         if fields is None:
             return None
         return StructSet(
-            None if "f1" not in fields else {value for value in fields["f1"]},
-            None if "f2" not in fields else {EnumSimple.__from_json__(value) for value in fields["f2"]},
-            None if "f3" not in fields else {FlagsSimple.__from_json__(value) for value in fields["f3"]},
-            None if "f4" not in fields else {StructSimple.__from_json__(value) for value in fields["f4"]},
         )
 
 
 class FieldModelStructSet(fbe.FieldModel):
-    __slots__ = "_f1", "_f2", "_f3", "_f4", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FieldModelSet(fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
-        self._f2 = fbe.FieldModelSet(FieldModelEnumSimple(buffer, self._f1.fbe_offset + self._f1.fbe_size), buffer, self._f1.fbe_offset + self._f1.fbe_size)
-        self._f3 = fbe.FieldModelSet(FieldModelFlagsSimple(buffer, self._f2.fbe_offset + self._f2.fbe_size), buffer, self._f2.fbe_offset + self._f2.fbe_size)
-        self._f4 = fbe.FieldModelSet(FieldModelStructSimple(buffer, self._f3.fbe_offset + self._f3.fbe_size), buffer, self._f3.fbe_offset + self._f3.fbe_size)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
-
-    @property
-    def f4(self):
-        return self._f4
 
     # Get the field size
     @property
@@ -12310,10 +3826,6 @@ class FieldModelStructSet(fbe.FieldModel):
     @property
     def fbe_body(self):
         fbe_result = 4 + 4 \
-            + self.f1.fbe_size \
-            + self.f2.fbe_size \
-            + self.f3.fbe_size \
-            + self.f4.fbe_size \
 
         return fbe_result
 
@@ -12330,10 +3842,6 @@ class FieldModelStructSet(fbe.FieldModel):
         self._buffer.shift(fbe_struct_offset)
 
         fbe_result = self.fbe_body \
-            + self.f1.fbe_extra \
-            + self.f2.fbe_extra \
-            + self.f3.fbe_extra \
-            + self.f4.fbe_extra \
 
         self._buffer.unshift(fbe_struct_offset)
 
@@ -12370,32 +3878,6 @@ class FieldModelStructSet(fbe.FieldModel):
 
     # Check if the struct fields are valid
     def verify_fields(self, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1.verify():
-            return False
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f2.verify():
-            return False
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f3.verify():
-            return False
-        fbe_current_size += self.f3.fbe_size
-
-        if (fbe_current_size + self.f4.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f4.verify():
-            return False
-        fbe_current_size += self.f4.fbe_size
-
         return True
 
     # Get the struct value (begin phase)
@@ -12436,31 +3918,7 @@ class FieldModelStructSet(fbe.FieldModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) <= fbe_struct_size:
-            self.f1.get(fbe_value.f1)
-        else:
-            fbe_value.f1.clear()
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) <= fbe_struct_size:
-            self.f2.get(fbe_value.f2)
-        else:
-            fbe_value.f2.clear()
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) <= fbe_struct_size:
-            self.f3.get(fbe_value.f3)
-        else:
-            fbe_value.f3.clear()
-        fbe_current_size += self.f3.fbe_size
-
-        if (fbe_current_size + self.f4.fbe_size) <= fbe_struct_size:
-            self.f4.get(fbe_value.f4)
-        else:
-            fbe_value.f4.clear()
-        fbe_current_size += self.f4.fbe_size
+        pass
 
     # Set the struct value (begin phase)
     def set_begin(self):
@@ -12496,10 +3954,7 @@ class FieldModelStructSet(fbe.FieldModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        self.f1.set(fbe_value.f1)
-        self.f2.set(fbe_value.f2)
-        self.f3.set(fbe_value.f3)
-        self.f4.set(fbe_value.f4)
+        pass
 
 
 # Fast Binary Encoding StructSet model
@@ -12578,38 +4033,12 @@ class StructSetModel(fbe.Model):
 
 
 class FinalModelStructSet(fbe.FinalModel):
-    __slots__ = "_f1", "_f2", "_f3", "_f4", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FinalModelSet(fbe.FinalModelByte(buffer, 0), buffer, 0)
-        self._f2 = fbe.FinalModelSet(FinalModelEnumSimple(buffer, 0), buffer, 0)
-        self._f3 = fbe.FinalModelSet(FinalModelFlagsSimple(buffer, 0), buffer, 0)
-        self._f4 = fbe.FinalModelSet(FinalModelStructSimple(buffer, 0), buffer, 0)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
-
-    @property
-    def f4(self):
-        return self._f4
 
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
-            + self.f1.fbe_allocation_size(fbe_value.f1) \
-            + self.f2.fbe_allocation_size(fbe_value.f2) \
-            + self.f3.fbe_allocation_size(fbe_value.f3) \
-            + self.f4.fbe_allocation_size(fbe_value.f4) \
 
         return fbe_result
 
@@ -12629,33 +4058,7 @@ class FinalModelStructSet(fbe.FinalModel):
 
     # Check if the struct fields are valid
     def verify_fields(self):
-        fbe_current_offset = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f4.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        return fbe_current_offset
+        return 0
 
     # Get the struct value
     def get(self, fbe_value=None):
@@ -12669,30 +4072,7 @@ class FinalModelStructSet(fbe.FinalModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_result = self.f1.get(fbe_value.f1)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_result = self.f2.get(fbe_value.f2)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_result = self.f3.get(fbe_value.f3)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_result = self.f4.get(fbe_value.f4)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        return fbe_current_size
+        return 0
 
     # Set the struct value
     def set(self, fbe_value):
@@ -12703,30 +4083,7 @@ class FinalModelStructSet(fbe.FinalModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.set(fbe_value.f1)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.set(fbe_value.f2)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.set(fbe_value.f3)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f4.set(fbe_value.f4)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        return fbe_current_size
+        return 0
 
 
 # Fast Binary Encoding StructSet final model
@@ -12800,52 +4157,11 @@ class StructSetFinalModel(fbe.Model):
 
 @functools.total_ordering
 class StructMap(object):
-    __slots__ = "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", 
-
-    def __init__(self, f1=None, f2=None, f3=None, f4=None, f5=None, f6=None, f7=None, f8=None, f9=None, f10=None):
-        if f1 is None:
-            f1 = dict()
-        if f2 is None:
-            f2 = dict()
-        if f3 is None:
-            f3 = dict()
-        if f4 is None:
-            f4 = dict()
-        if f5 is None:
-            f5 = dict()
-        if f6 is None:
-            f6 = dict()
-        if f7 is None:
-            f7 = dict()
-        if f8 is None:
-            f8 = dict()
-        if f9 is None:
-            f9 = dict()
-        if f10 is None:
-            f10 = dict()
-        self.f1 = f1
-        self.f2 = f2
-        self.f3 = f3
-        self.f4 = f4
-        self.f5 = f5
-        self.f6 = f6
-        self.f7 = f7
-        self.f8 = f8
-        self.f9 = f9
-        self.f10 = f10
+    def __init__(self):
+        pass
 
     # Struct shallow copy
     def copy(self, other):
-        self.f1 = other.f1
-        self.f2 = other.f2
-        self.f3 = other.f3
-        self.f4 = other.f4
-        self.f5 = other.f5
-        self.f6 = other.f6
-        self.f7 = other.f7
-        self.f8 = other.f8
-        self.f9 = other.f9
-        self.f10 = other.f10
         return self
 
     # Struct deep clone
@@ -12882,154 +4198,6 @@ class StructMap(object):
     def __str__(self):
         sb = list()
         sb.append("StructMap(")
-        sb.append("f1=")
-        if self.f1 is not None:
-            first = True
-            sb.append("[" + str(len(self.f1)) + "]<{")
-            for key, value in self.f1.items():
-                sb.append("" if first else ",")
-                sb.append(str(key))
-                sb.append("->")
-                sb.append(str(value))
-                first = False
-            sb.append("}>")
-        else:
-            sb.append("[0]<{}>")
-        sb.append(",f2=")
-        if self.f2 is not None:
-            first = True
-            sb.append("[" + str(len(self.f2)) + "]<{")
-            for key, value in self.f2.items():
-                sb.append("" if first else ",")
-                sb.append(str(key))
-                sb.append("->")
-                if value is not None:
-                    sb.append(str(value))
-                else:
-                    sb.append("null")
-                first = False
-            sb.append("}>")
-        else:
-            sb.append("[0]<{}>")
-        sb.append(",f3=")
-        if self.f3 is not None:
-            first = True
-            sb.append("[" + str(len(self.f3)) + "]<{")
-            for key, value in self.f3.items():
-                sb.append("" if first else ",")
-                sb.append(str(key))
-                sb.append("->")
-                if value is not None:
-                    sb.append("bytes[" + str(len(value)) + "]")
-                else:
-                    sb.append("null")
-                first = False
-            sb.append("}>")
-        else:
-            sb.append("[0]<{}>")
-        sb.append(",f4=")
-        if self.f4 is not None:
-            first = True
-            sb.append("[" + str(len(self.f4)) + "]<{")
-            for key, value in self.f4.items():
-                sb.append("" if first else ",")
-                sb.append(str(key))
-                sb.append("->")
-                if value is not None:
-                    sb.append("bytes[" + str(len(value)) + "]")
-                else:
-                    sb.append("null")
-                first = False
-            sb.append("}>")
-        else:
-            sb.append("[0]<{}>")
-        sb.append(",f5=")
-        if self.f5 is not None:
-            first = True
-            sb.append("[" + str(len(self.f5)) + "]<{")
-            for key, value in self.f5.items():
-                sb.append("" if first else ",")
-                sb.append(str(key))
-                sb.append("->")
-                sb.append(str(value))
-                first = False
-            sb.append("}>")
-        else:
-            sb.append("[0]<{}>")
-        sb.append(",f6=")
-        if self.f6 is not None:
-            first = True
-            sb.append("[" + str(len(self.f6)) + "]<{")
-            for key, value in self.f6.items():
-                sb.append("" if first else ",")
-                sb.append(str(key))
-                sb.append("->")
-                if value is not None:
-                    sb.append(str(value))
-                else:
-                    sb.append("null")
-                first = False
-            sb.append("}>")
-        else:
-            sb.append("[0]<{}>")
-        sb.append(",f7=")
-        if self.f7 is not None:
-            first = True
-            sb.append("[" + str(len(self.f7)) + "]<{")
-            for key, value in self.f7.items():
-                sb.append("" if first else ",")
-                sb.append(str(key))
-                sb.append("->")
-                sb.append(str(value))
-                first = False
-            sb.append("}>")
-        else:
-            sb.append("[0]<{}>")
-        sb.append(",f8=")
-        if self.f8 is not None:
-            first = True
-            sb.append("[" + str(len(self.f8)) + "]<{")
-            for key, value in self.f8.items():
-                sb.append("" if first else ",")
-                sb.append(str(key))
-                sb.append("->")
-                if value is not None:
-                    sb.append(str(value))
-                else:
-                    sb.append("null")
-                first = False
-            sb.append("}>")
-        else:
-            sb.append("[0]<{}>")
-        sb.append(",f9=")
-        if self.f9 is not None:
-            first = True
-            sb.append("[" + str(len(self.f9)) + "]<{")
-            for key, value in self.f9.items():
-                sb.append("" if first else ",")
-                sb.append(str(key))
-                sb.append("->")
-                sb.append(str(value))
-                first = False
-            sb.append("}>")
-        else:
-            sb.append("[0]<{}>")
-        sb.append(",f10=")
-        if self.f10 is not None:
-            first = True
-            sb.append("[" + str(len(self.f10)) + "]<{")
-            for key, value in self.f10.items():
-                sb.append("" if first else ",")
-                sb.append(str(key))
-                sb.append("->")
-                if value is not None:
-                    sb.append(str(value))
-                else:
-                    sb.append("null")
-                first = False
-            sb.append("}>")
-        else:
-            sb.append("[0]<{}>")
         sb.append(")")
         return "".join(sb)
 
@@ -13039,18 +4207,6 @@ class StructMap(object):
 
     def __to_json__(self):
         result = dict()
-        result.update(dict(
-            f1=self.f1, 
-            f2=self.f2, 
-            f3=self.f3, 
-            f4=self.f4, 
-            f5=self.f5, 
-            f6=self.f6, 
-            f7=self.f7, 
-            f8=self.f8, 
-            f9=self.f9, 
-            f10=self.f10, 
-        ))
         return result
 
     # Create struct from JSON value
@@ -13063,74 +4219,12 @@ class StructMap(object):
         if fields is None:
             return None
         return StructMap(
-            None if "f1" not in fields else {key: value for key, value in fields["f1"].items()},
-            None if "f2" not in fields else {key: value for key, value in fields["f2"].items()},
-            None if "f3" not in fields else {key: None if value is None else base64.b64decode(value.encode('ascii')) for key, value in fields["f3"].items()},
-            None if "f4" not in fields else {key: None if value is None else base64.b64decode(value.encode('ascii')) for key, value in fields["f4"].items()},
-            None if "f5" not in fields else {key: EnumSimple.__from_json__(value) for key, value in fields["f5"].items()},
-            None if "f6" not in fields else {key: EnumSimple.__from_json__(value) for key, value in fields["f6"].items()},
-            None if "f7" not in fields else {key: FlagsSimple.__from_json__(value) for key, value in fields["f7"].items()},
-            None if "f8" not in fields else {key: FlagsSimple.__from_json__(value) for key, value in fields["f8"].items()},
-            None if "f9" not in fields else {key: StructSimple.__from_json__(value) for key, value in fields["f9"].items()},
-            None if "f10" not in fields else {key: StructSimple.__from_json__(value) for key, value in fields["f10"].items()},
         )
 
 
 class FieldModelStructMap(fbe.FieldModel):
-    __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FieldModelMap(fbe.FieldModelInt32(buffer, 4 + 4), fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
-        self._f2 = fbe.FieldModelMap(fbe.FieldModelInt32(buffer, self._f1.fbe_offset + self._f1.fbe_size), fbe.FieldModelOptional(fbe.FieldModelByte(buffer, self._f1.fbe_offset + self._f1.fbe_size), buffer, self._f1.fbe_offset + self._f1.fbe_size), buffer, self._f1.fbe_offset + self._f1.fbe_size)
-        self._f3 = fbe.FieldModelMap(fbe.FieldModelInt32(buffer, self._f2.fbe_offset + self._f2.fbe_size), fbe.FieldModelBytes(buffer, self._f2.fbe_offset + self._f2.fbe_size), buffer, self._f2.fbe_offset + self._f2.fbe_size)
-        self._f4 = fbe.FieldModelMap(fbe.FieldModelInt32(buffer, self._f3.fbe_offset + self._f3.fbe_size), fbe.FieldModelOptional(fbe.FieldModelBytes(buffer, self._f3.fbe_offset + self._f3.fbe_size), buffer, self._f3.fbe_offset + self._f3.fbe_size), buffer, self._f3.fbe_offset + self._f3.fbe_size)
-        self._f5 = fbe.FieldModelMap(fbe.FieldModelInt32(buffer, self._f4.fbe_offset + self._f4.fbe_size), FieldModelEnumSimple(buffer, self._f4.fbe_offset + self._f4.fbe_size), buffer, self._f4.fbe_offset + self._f4.fbe_size)
-        self._f6 = fbe.FieldModelMap(fbe.FieldModelInt32(buffer, self._f5.fbe_offset + self._f5.fbe_size), fbe.FieldModelOptional(FieldModelEnumSimple(buffer, self._f5.fbe_offset + self._f5.fbe_size), buffer, self._f5.fbe_offset + self._f5.fbe_size), buffer, self._f5.fbe_offset + self._f5.fbe_size)
-        self._f7 = fbe.FieldModelMap(fbe.FieldModelInt32(buffer, self._f6.fbe_offset + self._f6.fbe_size), FieldModelFlagsSimple(buffer, self._f6.fbe_offset + self._f6.fbe_size), buffer, self._f6.fbe_offset + self._f6.fbe_size)
-        self._f8 = fbe.FieldModelMap(fbe.FieldModelInt32(buffer, self._f7.fbe_offset + self._f7.fbe_size), fbe.FieldModelOptional(FieldModelFlagsSimple(buffer, self._f7.fbe_offset + self._f7.fbe_size), buffer, self._f7.fbe_offset + self._f7.fbe_size), buffer, self._f7.fbe_offset + self._f7.fbe_size)
-        self._f9 = fbe.FieldModelMap(fbe.FieldModelInt32(buffer, self._f8.fbe_offset + self._f8.fbe_size), FieldModelStructSimple(buffer, self._f8.fbe_offset + self._f8.fbe_size), buffer, self._f8.fbe_offset + self._f8.fbe_size)
-        self._f10 = fbe.FieldModelMap(fbe.FieldModelInt32(buffer, self._f9.fbe_offset + self._f9.fbe_size), fbe.FieldModelOptional(FieldModelStructSimple(buffer, self._f9.fbe_offset + self._f9.fbe_size), buffer, self._f9.fbe_offset + self._f9.fbe_size), buffer, self._f9.fbe_offset + self._f9.fbe_size)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
-
-    @property
-    def f4(self):
-        return self._f4
-
-    @property
-    def f5(self):
-        return self._f5
-
-    @property
-    def f6(self):
-        return self._f6
-
-    @property
-    def f7(self):
-        return self._f7
-
-    @property
-    def f8(self):
-        return self._f8
-
-    @property
-    def f9(self):
-        return self._f9
-
-    @property
-    def f10(self):
-        return self._f10
 
     # Get the field size
     @property
@@ -13141,16 +4235,6 @@ class FieldModelStructMap(fbe.FieldModel):
     @property
     def fbe_body(self):
         fbe_result = 4 + 4 \
-            + self.f1.fbe_size \
-            + self.f2.fbe_size \
-            + self.f3.fbe_size \
-            + self.f4.fbe_size \
-            + self.f5.fbe_size \
-            + self.f6.fbe_size \
-            + self.f7.fbe_size \
-            + self.f8.fbe_size \
-            + self.f9.fbe_size \
-            + self.f10.fbe_size \
 
         return fbe_result
 
@@ -13167,16 +4251,6 @@ class FieldModelStructMap(fbe.FieldModel):
         self._buffer.shift(fbe_struct_offset)
 
         fbe_result = self.fbe_body \
-            + self.f1.fbe_extra \
-            + self.f2.fbe_extra \
-            + self.f3.fbe_extra \
-            + self.f4.fbe_extra \
-            + self.f5.fbe_extra \
-            + self.f6.fbe_extra \
-            + self.f7.fbe_extra \
-            + self.f8.fbe_extra \
-            + self.f9.fbe_extra \
-            + self.f10.fbe_extra \
 
         self._buffer.unshift(fbe_struct_offset)
 
@@ -13213,68 +4287,6 @@ class FieldModelStructMap(fbe.FieldModel):
 
     # Check if the struct fields are valid
     def verify_fields(self, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1.verify():
-            return False
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f2.verify():
-            return False
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f3.verify():
-            return False
-        fbe_current_size += self.f3.fbe_size
-
-        if (fbe_current_size + self.f4.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f4.verify():
-            return False
-        fbe_current_size += self.f4.fbe_size
-
-        if (fbe_current_size + self.f5.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f5.verify():
-            return False
-        fbe_current_size += self.f5.fbe_size
-
-        if (fbe_current_size + self.f6.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f6.verify():
-            return False
-        fbe_current_size += self.f6.fbe_size
-
-        if (fbe_current_size + self.f7.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f7.verify():
-            return False
-        fbe_current_size += self.f7.fbe_size
-
-        if (fbe_current_size + self.f8.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f8.verify():
-            return False
-        fbe_current_size += self.f8.fbe_size
-
-        if (fbe_current_size + self.f9.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f9.verify():
-            return False
-        fbe_current_size += self.f9.fbe_size
-
-        if (fbe_current_size + self.f10.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f10.verify():
-            return False
-        fbe_current_size += self.f10.fbe_size
-
         return True
 
     # Get the struct value (begin phase)
@@ -13315,67 +4327,7 @@ class FieldModelStructMap(fbe.FieldModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) <= fbe_struct_size:
-            self.f1.get(fbe_value.f1)
-        else:
-            fbe_value.f1.clear()
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) <= fbe_struct_size:
-            self.f2.get(fbe_value.f2)
-        else:
-            fbe_value.f2.clear()
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) <= fbe_struct_size:
-            self.f3.get(fbe_value.f3)
-        else:
-            fbe_value.f3.clear()
-        fbe_current_size += self.f3.fbe_size
-
-        if (fbe_current_size + self.f4.fbe_size) <= fbe_struct_size:
-            self.f4.get(fbe_value.f4)
-        else:
-            fbe_value.f4.clear()
-        fbe_current_size += self.f4.fbe_size
-
-        if (fbe_current_size + self.f5.fbe_size) <= fbe_struct_size:
-            self.f5.get(fbe_value.f5)
-        else:
-            fbe_value.f5.clear()
-        fbe_current_size += self.f5.fbe_size
-
-        if (fbe_current_size + self.f6.fbe_size) <= fbe_struct_size:
-            self.f6.get(fbe_value.f6)
-        else:
-            fbe_value.f6.clear()
-        fbe_current_size += self.f6.fbe_size
-
-        if (fbe_current_size + self.f7.fbe_size) <= fbe_struct_size:
-            self.f7.get(fbe_value.f7)
-        else:
-            fbe_value.f7.clear()
-        fbe_current_size += self.f7.fbe_size
-
-        if (fbe_current_size + self.f8.fbe_size) <= fbe_struct_size:
-            self.f8.get(fbe_value.f8)
-        else:
-            fbe_value.f8.clear()
-        fbe_current_size += self.f8.fbe_size
-
-        if (fbe_current_size + self.f9.fbe_size) <= fbe_struct_size:
-            self.f9.get(fbe_value.f9)
-        else:
-            fbe_value.f9.clear()
-        fbe_current_size += self.f9.fbe_size
-
-        if (fbe_current_size + self.f10.fbe_size) <= fbe_struct_size:
-            self.f10.get(fbe_value.f10)
-        else:
-            fbe_value.f10.clear()
-        fbe_current_size += self.f10.fbe_size
+        pass
 
     # Set the struct value (begin phase)
     def set_begin(self):
@@ -13411,16 +4363,7 @@ class FieldModelStructMap(fbe.FieldModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        self.f1.set(fbe_value.f1)
-        self.f2.set(fbe_value.f2)
-        self.f3.set(fbe_value.f3)
-        self.f4.set(fbe_value.f4)
-        self.f5.set(fbe_value.f5)
-        self.f6.set(fbe_value.f6)
-        self.f7.set(fbe_value.f7)
-        self.f8.set(fbe_value.f8)
-        self.f9.set(fbe_value.f9)
-        self.f10.set(fbe_value.f10)
+        pass
 
 
 # Fast Binary Encoding StructMap model
@@ -13499,74 +4442,12 @@ class StructMapModel(fbe.Model):
 
 
 class FinalModelStructMap(fbe.FinalModel):
-    __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FinalModelMap(fbe.FinalModelInt32(buffer, 0), fbe.FinalModelByte(buffer, 0), buffer, 0)
-        self._f2 = fbe.FinalModelMap(fbe.FinalModelInt32(buffer, 0), fbe.FinalModelOptional(fbe.FinalModelByte(buffer, 0), buffer, 0), buffer, 0)
-        self._f3 = fbe.FinalModelMap(fbe.FinalModelInt32(buffer, 0), fbe.FinalModelBytes(buffer, 0), buffer, 0)
-        self._f4 = fbe.FinalModelMap(fbe.FinalModelInt32(buffer, 0), fbe.FinalModelOptional(fbe.FinalModelBytes(buffer, 0), buffer, 0), buffer, 0)
-        self._f5 = fbe.FinalModelMap(fbe.FinalModelInt32(buffer, 0), FinalModelEnumSimple(buffer, 0), buffer, 0)
-        self._f6 = fbe.FinalModelMap(fbe.FinalModelInt32(buffer, 0), fbe.FinalModelOptional(FinalModelEnumSimple(buffer, 0), buffer, 0), buffer, 0)
-        self._f7 = fbe.FinalModelMap(fbe.FinalModelInt32(buffer, 0), FinalModelFlagsSimple(buffer, 0), buffer, 0)
-        self._f8 = fbe.FinalModelMap(fbe.FinalModelInt32(buffer, 0), fbe.FinalModelOptional(FinalModelFlagsSimple(buffer, 0), buffer, 0), buffer, 0)
-        self._f9 = fbe.FinalModelMap(fbe.FinalModelInt32(buffer, 0), FinalModelStructSimple(buffer, 0), buffer, 0)
-        self._f10 = fbe.FinalModelMap(fbe.FinalModelInt32(buffer, 0), fbe.FinalModelOptional(FinalModelStructSimple(buffer, 0), buffer, 0), buffer, 0)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
-
-    @property
-    def f4(self):
-        return self._f4
-
-    @property
-    def f5(self):
-        return self._f5
-
-    @property
-    def f6(self):
-        return self._f6
-
-    @property
-    def f7(self):
-        return self._f7
-
-    @property
-    def f8(self):
-        return self._f8
-
-    @property
-    def f9(self):
-        return self._f9
-
-    @property
-    def f10(self):
-        return self._f10
 
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
-            + self.f1.fbe_allocation_size(fbe_value.f1) \
-            + self.f2.fbe_allocation_size(fbe_value.f2) \
-            + self.f3.fbe_allocation_size(fbe_value.f3) \
-            + self.f4.fbe_allocation_size(fbe_value.f4) \
-            + self.f5.fbe_allocation_size(fbe_value.f5) \
-            + self.f6.fbe_allocation_size(fbe_value.f6) \
-            + self.f7.fbe_allocation_size(fbe_value.f7) \
-            + self.f8.fbe_allocation_size(fbe_value.f8) \
-            + self.f9.fbe_allocation_size(fbe_value.f9) \
-            + self.f10.fbe_allocation_size(fbe_value.f10) \
 
         return fbe_result
 
@@ -13586,69 +4467,7 @@ class FinalModelStructMap(fbe.FinalModel):
 
     # Check if the struct fields are valid
     def verify_fields(self):
-        fbe_current_offset = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f4.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f5.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f6.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f7.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f8.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f9.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f10.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        return fbe_current_offset
+        return 0
 
     # Get the struct value
     def get(self, fbe_value=None):
@@ -13662,60 +4481,7 @@ class FinalModelStructMap(fbe.FinalModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_result = self.f1.get(fbe_value.f1)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_result = self.f2.get(fbe_value.f2)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_result = self.f3.get(fbe_value.f3)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_result = self.f4.get(fbe_value.f4)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_result = self.f5.get(fbe_value.f5)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_result = self.f6.get(fbe_value.f6)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_result = self.f7.get(fbe_value.f7)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_result = self.f8.get(fbe_value.f8)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_result = self.f9.get(fbe_value.f9)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_result = self.f10.get(fbe_value.f10)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        return fbe_current_size
+        return 0
 
     # Set the struct value
     def set(self, fbe_value):
@@ -13726,60 +4492,7 @@ class FinalModelStructMap(fbe.FinalModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.set(fbe_value.f1)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.set(fbe_value.f2)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.set(fbe_value.f3)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f4.set(fbe_value.f4)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f5.set(fbe_value.f5)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f6.set(fbe_value.f6)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f7.set(fbe_value.f7)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f8.set(fbe_value.f8)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f9.set(fbe_value.f9)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f10.set(fbe_value.f10)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        return fbe_current_size
+        return 0
 
 
 # Fast Binary Encoding StructMap final model
@@ -13853,52 +4566,11 @@ class StructMapFinalModel(fbe.Model):
 
 @functools.total_ordering
 class StructHash(object):
-    __slots__ = "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", 
-
-    def __init__(self, f1=None, f2=None, f3=None, f4=None, f5=None, f6=None, f7=None, f8=None, f9=None, f10=None):
-        if f1 is None:
-            f1 = dict()
-        if f2 is None:
-            f2 = dict()
-        if f3 is None:
-            f3 = dict()
-        if f4 is None:
-            f4 = dict()
-        if f5 is None:
-            f5 = dict()
-        if f6 is None:
-            f6 = dict()
-        if f7 is None:
-            f7 = dict()
-        if f8 is None:
-            f8 = dict()
-        if f9 is None:
-            f9 = dict()
-        if f10 is None:
-            f10 = dict()
-        self.f1 = f1
-        self.f2 = f2
-        self.f3 = f3
-        self.f4 = f4
-        self.f5 = f5
-        self.f6 = f6
-        self.f7 = f7
-        self.f8 = f8
-        self.f9 = f9
-        self.f10 = f10
+    def __init__(self):
+        pass
 
     # Struct shallow copy
     def copy(self, other):
-        self.f1 = other.f1
-        self.f2 = other.f2
-        self.f3 = other.f3
-        self.f4 = other.f4
-        self.f5 = other.f5
-        self.f6 = other.f6
-        self.f7 = other.f7
-        self.f8 = other.f8
-        self.f9 = other.f9
-        self.f10 = other.f10
         return self
 
     # Struct deep clone
@@ -13935,194 +4607,6 @@ class StructHash(object):
     def __str__(self):
         sb = list()
         sb.append("StructHash(")
-        sb.append("f1=")
-        if self.f1 is not None:
-            first = True
-            sb.append("[" + str(len(self.f1)) + "][{")
-            for key, value in self.f1.items():
-                if key is not None:
-                    sb.append("" if first else ",")
-                    sb.append("\"" + str(key) + "\"")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                sb.append("->")
-                sb.append(str(value))
-                first = False
-            sb.append("}]")
-        else:
-            sb.append("[0][{}]")
-        sb.append(",f2=")
-        if self.f2 is not None:
-            first = True
-            sb.append("[" + str(len(self.f2)) + "][{")
-            for key, value in self.f2.items():
-                if key is not None:
-                    sb.append("" if first else ",")
-                    sb.append("\"" + str(key) + "\"")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                sb.append("->")
-                if value is not None:
-                    sb.append(str(value))
-                else:
-                    sb.append("null")
-                first = False
-            sb.append("}]")
-        else:
-            sb.append("[0][{}]")
-        sb.append(",f3=")
-        if self.f3 is not None:
-            first = True
-            sb.append("[" + str(len(self.f3)) + "][{")
-            for key, value in self.f3.items():
-                if key is not None:
-                    sb.append("" if first else ",")
-                    sb.append("\"" + str(key) + "\"")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                sb.append("->")
-                if value is not None:
-                    sb.append("bytes[" + str(len(value)) + "]")
-                else:
-                    sb.append("null")
-                first = False
-            sb.append("}]")
-        else:
-            sb.append("[0][{}]")
-        sb.append(",f4=")
-        if self.f4 is not None:
-            first = True
-            sb.append("[" + str(len(self.f4)) + "][{")
-            for key, value in self.f4.items():
-                if key is not None:
-                    sb.append("" if first else ",")
-                    sb.append("\"" + str(key) + "\"")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                sb.append("->")
-                if value is not None:
-                    sb.append("bytes[" + str(len(value)) + "]")
-                else:
-                    sb.append("null")
-                first = False
-            sb.append("}]")
-        else:
-            sb.append("[0][{}]")
-        sb.append(",f5=")
-        if self.f5 is not None:
-            first = True
-            sb.append("[" + str(len(self.f5)) + "][{")
-            for key, value in self.f5.items():
-                if key is not None:
-                    sb.append("" if first else ",")
-                    sb.append("\"" + str(key) + "\"")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                sb.append("->")
-                sb.append(str(value))
-                first = False
-            sb.append("}]")
-        else:
-            sb.append("[0][{}]")
-        sb.append(",f6=")
-        if self.f6 is not None:
-            first = True
-            sb.append("[" + str(len(self.f6)) + "][{")
-            for key, value in self.f6.items():
-                if key is not None:
-                    sb.append("" if first else ",")
-                    sb.append("\"" + str(key) + "\"")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                sb.append("->")
-                if value is not None:
-                    sb.append(str(value))
-                else:
-                    sb.append("null")
-                first = False
-            sb.append("}]")
-        else:
-            sb.append("[0][{}]")
-        sb.append(",f7=")
-        if self.f7 is not None:
-            first = True
-            sb.append("[" + str(len(self.f7)) + "][{")
-            for key, value in self.f7.items():
-                if key is not None:
-                    sb.append("" if first else ",")
-                    sb.append("\"" + str(key) + "\"")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                sb.append("->")
-                sb.append(str(value))
-                first = False
-            sb.append("}]")
-        else:
-            sb.append("[0][{}]")
-        sb.append(",f8=")
-        if self.f8 is not None:
-            first = True
-            sb.append("[" + str(len(self.f8)) + "][{")
-            for key, value in self.f8.items():
-                if key is not None:
-                    sb.append("" if first else ",")
-                    sb.append("\"" + str(key) + "\"")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                sb.append("->")
-                if value is not None:
-                    sb.append(str(value))
-                else:
-                    sb.append("null")
-                first = False
-            sb.append("}]")
-        else:
-            sb.append("[0][{}]")
-        sb.append(",f9=")
-        if self.f9 is not None:
-            first = True
-            sb.append("[" + str(len(self.f9)) + "][{")
-            for key, value in self.f9.items():
-                if key is not None:
-                    sb.append("" if first else ",")
-                    sb.append("\"" + str(key) + "\"")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                sb.append("->")
-                sb.append(str(value))
-                first = False
-            sb.append("}]")
-        else:
-            sb.append("[0][{}]")
-        sb.append(",f10=")
-        if self.f10 is not None:
-            first = True
-            sb.append("[" + str(len(self.f10)) + "][{")
-            for key, value in self.f10.items():
-                if key is not None:
-                    sb.append("" if first else ",")
-                    sb.append("\"" + str(key) + "\"")
-                else:
-                    sb.append("" if first else ",")
-                    sb.append("null")
-                sb.append("->")
-                if value is not None:
-                    sb.append(str(value))
-                else:
-                    sb.append("null")
-                first = False
-            sb.append("}]")
-        else:
-            sb.append("[0][{}]")
         sb.append(")")
         return "".join(sb)
 
@@ -14132,18 +4616,6 @@ class StructHash(object):
 
     def __to_json__(self):
         result = dict()
-        result.update(dict(
-            f1=self.f1, 
-            f2=self.f2, 
-            f3=self.f3, 
-            f4=self.f4, 
-            f5=self.f5, 
-            f6=self.f6, 
-            f7=self.f7, 
-            f8=self.f8, 
-            f9=self.f9, 
-            f10=self.f10, 
-        ))
         return result
 
     # Create struct from JSON value
@@ -14156,74 +4628,12 @@ class StructHash(object):
         if fields is None:
             return None
         return StructHash(
-            None if "f1" not in fields else {key: value for key, value in fields["f1"].items()},
-            None if "f2" not in fields else {key: value for key, value in fields["f2"].items()},
-            None if "f3" not in fields else {key: None if value is None else base64.b64decode(value.encode('ascii')) for key, value in fields["f3"].items()},
-            None if "f4" not in fields else {key: None if value is None else base64.b64decode(value.encode('ascii')) for key, value in fields["f4"].items()},
-            None if "f5" not in fields else {key: EnumSimple.__from_json__(value) for key, value in fields["f5"].items()},
-            None if "f6" not in fields else {key: EnumSimple.__from_json__(value) for key, value in fields["f6"].items()},
-            None if "f7" not in fields else {key: FlagsSimple.__from_json__(value) for key, value in fields["f7"].items()},
-            None if "f8" not in fields else {key: FlagsSimple.__from_json__(value) for key, value in fields["f8"].items()},
-            None if "f9" not in fields else {key: StructSimple.__from_json__(value) for key, value in fields["f9"].items()},
-            None if "f10" not in fields else {key: StructSimple.__from_json__(value) for key, value in fields["f10"].items()},
         )
 
 
 class FieldModelStructHash(fbe.FieldModel):
-    __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FieldModelMap(fbe.FieldModelString(buffer, 4 + 4), fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
-        self._f2 = fbe.FieldModelMap(fbe.FieldModelString(buffer, self._f1.fbe_offset + self._f1.fbe_size), fbe.FieldModelOptional(fbe.FieldModelByte(buffer, self._f1.fbe_offset + self._f1.fbe_size), buffer, self._f1.fbe_offset + self._f1.fbe_size), buffer, self._f1.fbe_offset + self._f1.fbe_size)
-        self._f3 = fbe.FieldModelMap(fbe.FieldModelString(buffer, self._f2.fbe_offset + self._f2.fbe_size), fbe.FieldModelBytes(buffer, self._f2.fbe_offset + self._f2.fbe_size), buffer, self._f2.fbe_offset + self._f2.fbe_size)
-        self._f4 = fbe.FieldModelMap(fbe.FieldModelString(buffer, self._f3.fbe_offset + self._f3.fbe_size), fbe.FieldModelOptional(fbe.FieldModelBytes(buffer, self._f3.fbe_offset + self._f3.fbe_size), buffer, self._f3.fbe_offset + self._f3.fbe_size), buffer, self._f3.fbe_offset + self._f3.fbe_size)
-        self._f5 = fbe.FieldModelMap(fbe.FieldModelString(buffer, self._f4.fbe_offset + self._f4.fbe_size), FieldModelEnumSimple(buffer, self._f4.fbe_offset + self._f4.fbe_size), buffer, self._f4.fbe_offset + self._f4.fbe_size)
-        self._f6 = fbe.FieldModelMap(fbe.FieldModelString(buffer, self._f5.fbe_offset + self._f5.fbe_size), fbe.FieldModelOptional(FieldModelEnumSimple(buffer, self._f5.fbe_offset + self._f5.fbe_size), buffer, self._f5.fbe_offset + self._f5.fbe_size), buffer, self._f5.fbe_offset + self._f5.fbe_size)
-        self._f7 = fbe.FieldModelMap(fbe.FieldModelString(buffer, self._f6.fbe_offset + self._f6.fbe_size), FieldModelFlagsSimple(buffer, self._f6.fbe_offset + self._f6.fbe_size), buffer, self._f6.fbe_offset + self._f6.fbe_size)
-        self._f8 = fbe.FieldModelMap(fbe.FieldModelString(buffer, self._f7.fbe_offset + self._f7.fbe_size), fbe.FieldModelOptional(FieldModelFlagsSimple(buffer, self._f7.fbe_offset + self._f7.fbe_size), buffer, self._f7.fbe_offset + self._f7.fbe_size), buffer, self._f7.fbe_offset + self._f7.fbe_size)
-        self._f9 = fbe.FieldModelMap(fbe.FieldModelString(buffer, self._f8.fbe_offset + self._f8.fbe_size), FieldModelStructSimple(buffer, self._f8.fbe_offset + self._f8.fbe_size), buffer, self._f8.fbe_offset + self._f8.fbe_size)
-        self._f10 = fbe.FieldModelMap(fbe.FieldModelString(buffer, self._f9.fbe_offset + self._f9.fbe_size), fbe.FieldModelOptional(FieldModelStructSimple(buffer, self._f9.fbe_offset + self._f9.fbe_size), buffer, self._f9.fbe_offset + self._f9.fbe_size), buffer, self._f9.fbe_offset + self._f9.fbe_size)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
-
-    @property
-    def f4(self):
-        return self._f4
-
-    @property
-    def f5(self):
-        return self._f5
-
-    @property
-    def f6(self):
-        return self._f6
-
-    @property
-    def f7(self):
-        return self._f7
-
-    @property
-    def f8(self):
-        return self._f8
-
-    @property
-    def f9(self):
-        return self._f9
-
-    @property
-    def f10(self):
-        return self._f10
 
     # Get the field size
     @property
@@ -14234,16 +4644,6 @@ class FieldModelStructHash(fbe.FieldModel):
     @property
     def fbe_body(self):
         fbe_result = 4 + 4 \
-            + self.f1.fbe_size \
-            + self.f2.fbe_size \
-            + self.f3.fbe_size \
-            + self.f4.fbe_size \
-            + self.f5.fbe_size \
-            + self.f6.fbe_size \
-            + self.f7.fbe_size \
-            + self.f8.fbe_size \
-            + self.f9.fbe_size \
-            + self.f10.fbe_size \
 
         return fbe_result
 
@@ -14260,16 +4660,6 @@ class FieldModelStructHash(fbe.FieldModel):
         self._buffer.shift(fbe_struct_offset)
 
         fbe_result = self.fbe_body \
-            + self.f1.fbe_extra \
-            + self.f2.fbe_extra \
-            + self.f3.fbe_extra \
-            + self.f4.fbe_extra \
-            + self.f5.fbe_extra \
-            + self.f6.fbe_extra \
-            + self.f7.fbe_extra \
-            + self.f8.fbe_extra \
-            + self.f9.fbe_extra \
-            + self.f10.fbe_extra \
 
         self._buffer.unshift(fbe_struct_offset)
 
@@ -14306,68 +4696,6 @@ class FieldModelStructHash(fbe.FieldModel):
 
     # Check if the struct fields are valid
     def verify_fields(self, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1.verify():
-            return False
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f2.verify():
-            return False
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f3.verify():
-            return False
-        fbe_current_size += self.f3.fbe_size
-
-        if (fbe_current_size + self.f4.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f4.verify():
-            return False
-        fbe_current_size += self.f4.fbe_size
-
-        if (fbe_current_size + self.f5.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f5.verify():
-            return False
-        fbe_current_size += self.f5.fbe_size
-
-        if (fbe_current_size + self.f6.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f6.verify():
-            return False
-        fbe_current_size += self.f6.fbe_size
-
-        if (fbe_current_size + self.f7.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f7.verify():
-            return False
-        fbe_current_size += self.f7.fbe_size
-
-        if (fbe_current_size + self.f8.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f8.verify():
-            return False
-        fbe_current_size += self.f8.fbe_size
-
-        if (fbe_current_size + self.f9.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f9.verify():
-            return False
-        fbe_current_size += self.f9.fbe_size
-
-        if (fbe_current_size + self.f10.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f10.verify():
-            return False
-        fbe_current_size += self.f10.fbe_size
-
         return True
 
     # Get the struct value (begin phase)
@@ -14408,67 +4736,7 @@ class FieldModelStructHash(fbe.FieldModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) <= fbe_struct_size:
-            self.f1.get(fbe_value.f1)
-        else:
-            fbe_value.f1.clear()
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) <= fbe_struct_size:
-            self.f2.get(fbe_value.f2)
-        else:
-            fbe_value.f2.clear()
-        fbe_current_size += self.f2.fbe_size
-
-        if (fbe_current_size + self.f3.fbe_size) <= fbe_struct_size:
-            self.f3.get(fbe_value.f3)
-        else:
-            fbe_value.f3.clear()
-        fbe_current_size += self.f3.fbe_size
-
-        if (fbe_current_size + self.f4.fbe_size) <= fbe_struct_size:
-            self.f4.get(fbe_value.f4)
-        else:
-            fbe_value.f4.clear()
-        fbe_current_size += self.f4.fbe_size
-
-        if (fbe_current_size + self.f5.fbe_size) <= fbe_struct_size:
-            self.f5.get(fbe_value.f5)
-        else:
-            fbe_value.f5.clear()
-        fbe_current_size += self.f5.fbe_size
-
-        if (fbe_current_size + self.f6.fbe_size) <= fbe_struct_size:
-            self.f6.get(fbe_value.f6)
-        else:
-            fbe_value.f6.clear()
-        fbe_current_size += self.f6.fbe_size
-
-        if (fbe_current_size + self.f7.fbe_size) <= fbe_struct_size:
-            self.f7.get(fbe_value.f7)
-        else:
-            fbe_value.f7.clear()
-        fbe_current_size += self.f7.fbe_size
-
-        if (fbe_current_size + self.f8.fbe_size) <= fbe_struct_size:
-            self.f8.get(fbe_value.f8)
-        else:
-            fbe_value.f8.clear()
-        fbe_current_size += self.f8.fbe_size
-
-        if (fbe_current_size + self.f9.fbe_size) <= fbe_struct_size:
-            self.f9.get(fbe_value.f9)
-        else:
-            fbe_value.f9.clear()
-        fbe_current_size += self.f9.fbe_size
-
-        if (fbe_current_size + self.f10.fbe_size) <= fbe_struct_size:
-            self.f10.get(fbe_value.f10)
-        else:
-            fbe_value.f10.clear()
-        fbe_current_size += self.f10.fbe_size
+        pass
 
     # Set the struct value (begin phase)
     def set_begin(self):
@@ -14504,16 +4772,7 @@ class FieldModelStructHash(fbe.FieldModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        self.f1.set(fbe_value.f1)
-        self.f2.set(fbe_value.f2)
-        self.f3.set(fbe_value.f3)
-        self.f4.set(fbe_value.f4)
-        self.f5.set(fbe_value.f5)
-        self.f6.set(fbe_value.f6)
-        self.f7.set(fbe_value.f7)
-        self.f8.set(fbe_value.f8)
-        self.f9.set(fbe_value.f9)
-        self.f10.set(fbe_value.f10)
+        pass
 
 
 # Fast Binary Encoding StructHash model
@@ -14592,74 +4851,12 @@ class StructHashModel(fbe.Model):
 
 
 class FinalModelStructHash(fbe.FinalModel):
-    __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FinalModelMap(fbe.FinalModelString(buffer, 0), fbe.FinalModelByte(buffer, 0), buffer, 0)
-        self._f2 = fbe.FinalModelMap(fbe.FinalModelString(buffer, 0), fbe.FinalModelOptional(fbe.FinalModelByte(buffer, 0), buffer, 0), buffer, 0)
-        self._f3 = fbe.FinalModelMap(fbe.FinalModelString(buffer, 0), fbe.FinalModelBytes(buffer, 0), buffer, 0)
-        self._f4 = fbe.FinalModelMap(fbe.FinalModelString(buffer, 0), fbe.FinalModelOptional(fbe.FinalModelBytes(buffer, 0), buffer, 0), buffer, 0)
-        self._f5 = fbe.FinalModelMap(fbe.FinalModelString(buffer, 0), FinalModelEnumSimple(buffer, 0), buffer, 0)
-        self._f6 = fbe.FinalModelMap(fbe.FinalModelString(buffer, 0), fbe.FinalModelOptional(FinalModelEnumSimple(buffer, 0), buffer, 0), buffer, 0)
-        self._f7 = fbe.FinalModelMap(fbe.FinalModelString(buffer, 0), FinalModelFlagsSimple(buffer, 0), buffer, 0)
-        self._f8 = fbe.FinalModelMap(fbe.FinalModelString(buffer, 0), fbe.FinalModelOptional(FinalModelFlagsSimple(buffer, 0), buffer, 0), buffer, 0)
-        self._f9 = fbe.FinalModelMap(fbe.FinalModelString(buffer, 0), FinalModelStructSimple(buffer, 0), buffer, 0)
-        self._f10 = fbe.FinalModelMap(fbe.FinalModelString(buffer, 0), fbe.FinalModelOptional(FinalModelStructSimple(buffer, 0), buffer, 0), buffer, 0)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
-
-    @property
-    def f3(self):
-        return self._f3
-
-    @property
-    def f4(self):
-        return self._f4
-
-    @property
-    def f5(self):
-        return self._f5
-
-    @property
-    def f6(self):
-        return self._f6
-
-    @property
-    def f7(self):
-        return self._f7
-
-    @property
-    def f8(self):
-        return self._f8
-
-    @property
-    def f9(self):
-        return self._f9
-
-    @property
-    def f10(self):
-        return self._f10
 
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
-            + self.f1.fbe_allocation_size(fbe_value.f1) \
-            + self.f2.fbe_allocation_size(fbe_value.f2) \
-            + self.f3.fbe_allocation_size(fbe_value.f3) \
-            + self.f4.fbe_allocation_size(fbe_value.f4) \
-            + self.f5.fbe_allocation_size(fbe_value.f5) \
-            + self.f6.fbe_allocation_size(fbe_value.f6) \
-            + self.f7.fbe_allocation_size(fbe_value.f7) \
-            + self.f8.fbe_allocation_size(fbe_value.f8) \
-            + self.f9.fbe_allocation_size(fbe_value.f9) \
-            + self.f10.fbe_allocation_size(fbe_value.f10) \
 
         return fbe_result
 
@@ -14679,69 +4876,7 @@ class FinalModelStructHash(fbe.FinalModel):
 
     # Check if the struct fields are valid
     def verify_fields(self):
-        fbe_current_offset = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f4.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f5.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f6.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f7.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f8.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f9.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f10.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        return fbe_current_offset
+        return 0
 
     # Get the struct value
     def get(self, fbe_value=None):
@@ -14755,60 +4890,7 @@ class FinalModelStructHash(fbe.FinalModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_result = self.f1.get(fbe_value.f1)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_result = self.f2.get(fbe_value.f2)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_result = self.f3.get(fbe_value.f3)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_result = self.f4.get(fbe_value.f4)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_result = self.f5.get(fbe_value.f5)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_result = self.f6.get(fbe_value.f6)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_result = self.f7.get(fbe_value.f7)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_result = self.f8.get(fbe_value.f8)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_result = self.f9.get(fbe_value.f9)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_result = self.f10.get(fbe_value.f10)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        return fbe_current_size
+        return 0
 
     # Set the struct value
     def set(self, fbe_value):
@@ -14819,60 +4901,7 @@ class FinalModelStructHash(fbe.FinalModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.set(fbe_value.f1)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.set(fbe_value.f2)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f3.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f3.set(fbe_value.f3)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f4.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f4.set(fbe_value.f4)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f5.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f5.set(fbe_value.f5)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f6.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f6.set(fbe_value.f6)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f7.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f7.set(fbe_value.f7)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f8.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f8.set(fbe_value.f8)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f9.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f9.set(fbe_value.f9)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f10.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f10.set(fbe_value.f10)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        return fbe_current_size
+        return 0
 
 
 # Fast Binary Encoding StructHash final model
@@ -14946,20 +4975,11 @@ class StructHashFinalModel(fbe.Model):
 
 @functools.total_ordering
 class StructHashEx(object):
-    __slots__ = "f1", "f2", 
-
-    def __init__(self, f1=None, f2=None):
-        if f1 is None:
-            f1 = dict()
-        if f2 is None:
-            f2 = dict()
-        self.f1 = f1
-        self.f2 = f2
+    def __init__(self):
+        pass
 
     # Struct shallow copy
     def copy(self, other):
-        self.f1 = other.f1
-        self.f2 = other.f2
         return self
 
     # Struct deep clone
@@ -14996,35 +5016,6 @@ class StructHashEx(object):
     def __str__(self):
         sb = list()
         sb.append("StructHashEx(")
-        sb.append("f1=")
-        if self.f1 is not None:
-            first = True
-            sb.append("[" + str(len(self.f1)) + "][{")
-            for key, value in self.f1.items():
-                sb.append("" if first else ",")
-                sb.append(str(key))
-                sb.append("->")
-                sb.append(str(value))
-                first = False
-            sb.append("}]")
-        else:
-            sb.append("[0][{}]")
-        sb.append(",f2=")
-        if self.f2 is not None:
-            first = True
-            sb.append("[" + str(len(self.f2)) + "][{")
-            for key, value in self.f2.items():
-                sb.append("" if first else ",")
-                sb.append(str(key))
-                sb.append("->")
-                if value is not None:
-                    sb.append(str(value))
-                else:
-                    sb.append("null")
-                first = False
-            sb.append("}]")
-        else:
-            sb.append("[0][{}]")
         sb.append(")")
         return "".join(sb)
 
@@ -15034,10 +5025,6 @@ class StructHashEx(object):
 
     def __to_json__(self):
         result = dict()
-        result.update(dict(
-            f1=self.f1, 
-            f2=self.f2, 
-        ))
         return result
 
     # Create struct from JSON value
@@ -15050,26 +5037,12 @@ class StructHashEx(object):
         if fields is None:
             return None
         return StructHashEx(
-            None if "f1" not in fields else {StructSimple.__from_json__(key): StructNested.__from_json__(value) for key, value in fields["f1"].items()},
-            None if "f2" not in fields else {StructSimple.__from_json__(key): StructNested.__from_json__(value) for key, value in fields["f2"].items()},
         )
 
 
 class FieldModelStructHashEx(fbe.FieldModel):
-    __slots__ = "_f1", "_f2", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FieldModelMap(FieldModelStructSimple(buffer, 4 + 4), FieldModelStructNested(buffer, 4 + 4), buffer, 4 + 4)
-        self._f2 = fbe.FieldModelMap(FieldModelStructSimple(buffer, self._f1.fbe_offset + self._f1.fbe_size), fbe.FieldModelOptional(FieldModelStructNested(buffer, self._f1.fbe_offset + self._f1.fbe_size), buffer, self._f1.fbe_offset + self._f1.fbe_size), buffer, self._f1.fbe_offset + self._f1.fbe_size)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
 
     # Get the field size
     @property
@@ -15080,8 +5053,6 @@ class FieldModelStructHashEx(fbe.FieldModel):
     @property
     def fbe_body(self):
         fbe_result = 4 + 4 \
-            + self.f1.fbe_size \
-            + self.f2.fbe_size \
 
         return fbe_result
 
@@ -15098,8 +5069,6 @@ class FieldModelStructHashEx(fbe.FieldModel):
         self._buffer.shift(fbe_struct_offset)
 
         fbe_result = self.fbe_body \
-            + self.f1.fbe_extra \
-            + self.f2.fbe_extra \
 
         self._buffer.unshift(fbe_struct_offset)
 
@@ -15136,20 +5105,6 @@ class FieldModelStructHashEx(fbe.FieldModel):
 
     # Check if the struct fields are valid
     def verify_fields(self, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f1.verify():
-            return False
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) > fbe_struct_size:
-            return True
-        if not self.f2.verify():
-            return False
-        fbe_current_size += self.f2.fbe_size
-
         return True
 
     # Get the struct value (begin phase)
@@ -15190,19 +5145,7 @@ class FieldModelStructHashEx(fbe.FieldModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value, fbe_struct_size):
-        fbe_current_size = 4 + 4
-
-        if (fbe_current_size + self.f1.fbe_size) <= fbe_struct_size:
-            self.f1.get(fbe_value.f1)
-        else:
-            fbe_value.f1.clear()
-        fbe_current_size += self.f1.fbe_size
-
-        if (fbe_current_size + self.f2.fbe_size) <= fbe_struct_size:
-            self.f2.get(fbe_value.f2)
-        else:
-            fbe_value.f2.clear()
-        fbe_current_size += self.f2.fbe_size
+        pass
 
     # Set the struct value (begin phase)
     def set_begin(self):
@@ -15238,8 +5181,7 @@ class FieldModelStructHashEx(fbe.FieldModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        self.f1.set(fbe_value.f1)
-        self.f2.set(fbe_value.f2)
+        pass
 
 
 # Fast Binary Encoding StructHashEx model
@@ -15318,26 +5260,12 @@ class StructHashExModel(fbe.Model):
 
 
 class FinalModelStructHashEx(fbe.FinalModel):
-    __slots__ = "_f1", "_f2", 
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._f1 = fbe.FinalModelMap(FinalModelStructSimple(buffer, 0), FinalModelStructNested(buffer, 0), buffer, 0)
-        self._f2 = fbe.FinalModelMap(FinalModelStructSimple(buffer, 0), fbe.FinalModelOptional(FinalModelStructNested(buffer, 0), buffer, 0), buffer, 0)
-
-    @property
-    def f1(self):
-        return self._f1
-
-    @property
-    def f2(self):
-        return self._f2
 
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
-            + self.f1.fbe_allocation_size(fbe_value.f1) \
-            + self.f2.fbe_allocation_size(fbe_value.f2) \
 
         return fbe_result
 
@@ -15357,21 +5285,7 @@ class FinalModelStructHashEx(fbe.FinalModel):
 
     # Check if the struct fields are valid
     def verify_fields(self):
-        fbe_current_offset = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.verify()
-        if fbe_field_size == sys.maxsize:
-            return sys.maxsize
-        fbe_current_offset += fbe_field_size
-
-        return fbe_current_offset
+        return 0
 
     # Get the struct value
     def get(self, fbe_value=None):
@@ -15385,20 +5299,7 @@ class FinalModelStructHashEx(fbe.FinalModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_result = self.f1.get(fbe_value.f1)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_result = self.f2.get(fbe_value.f2)
-        fbe_current_offset += fbe_result[1]
-        fbe_current_size += fbe_result[1]
-
-        return fbe_current_size
+        return 0
 
     # Set the struct value
     def set(self, fbe_value):
@@ -15409,20 +5310,7 @@ class FinalModelStructHashEx(fbe.FinalModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        fbe_current_offset = 0
-        fbe_current_size = 0
-
-        self.f1.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f1.set(fbe_value.f1)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        self.f2.fbe_offset = fbe_current_offset
-        fbe_field_size = self.f2.set(fbe_value.f2)
-        fbe_current_offset += fbe_field_size
-        fbe_current_size += fbe_field_size
-
-        return fbe_current_size
+        return 0
 
 
 # Fast Binary Encoding StructHashEx final model
@@ -15546,8 +5434,6 @@ class StructEmpty(object):
 
     def __to_json__(self):
         result = dict()
-        result.update(dict(
-        ))
         return result
 
     # Create struct from JSON value

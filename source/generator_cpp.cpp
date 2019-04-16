@@ -8277,6 +8277,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         Indent(1);
         if (p->body)
         {
+            std::set<std::string> responses;
             for (const auto& s : p->body->structs)
             {
                 if (s->request)
@@ -8286,10 +8287,11 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     std::string response_field = (s->response) ? *s->response->response : "";
                     CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
-                    if (!response_name.empty())
+                    if (!response_name.empty() && !response_field.empty() && (responses.find(response_field) == responses.end()))
                     {
                         WriteLineIndent("std::unordered_map<FBE::uuid_t, std::pair<uint64_t, std::promise<" + response_name + ">>> _requests_by_id_" + response_field + ";");
                         WriteLineIndent("std::map<uint64_t, FBE::uuid_t> _requests_by_timestamp_" + response_field + ";");
+                        responses.insert(response_field);
                     }
                 }
             }
