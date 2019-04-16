@@ -8146,6 +8146,10 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     WriteLineIndent("void reset() noexcept");
     WriteLineIndent("{");
     Indent(1);
+    WriteLineIndent("std::lock_guard<std::mutex> locker(_lock);");
+    WriteLine();
+    WriteLineIndent("reset_requests();");
+    WriteLine();
     WriteLineIndent("Sender<TBuffer>::reset();");
     WriteLineIndent("Receiver<TBuffer>::reset();");
     Indent(-1);
@@ -8243,8 +8247,8 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         Indent(1);
         if (!p->import)
         {
-            WriteLineIndent("uint64_t _timestamp{0};");
             WriteLineIndent("std::mutex _lock;");
+            WriteLineIndent("uint64_t _timestamp{0};");
             first = false;
         }
 
@@ -8368,6 +8372,22 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     }
                 }
             }
+
+            WriteLine();
+            WriteLineIndent("void reset_requests()");
+            WriteLineIndent("{");
+            Indent(1);
+            for (const auto& response_field : response_fields)
+            {
+                WriteLineIndent("for (const auto& request : _requests_by_id_" + response_field + ")");
+                Indent(1);
+                WriteLineIndent("request.second.second.set_exception(std::make_exception_ptr(std::exception("Reset client!")));");
+                Indent(-1);
+                WriteLineIndent("_requests_by_id_" + response_field + ".clear();");
+                WriteLineIndent("_requests_by_timestamp_" + response_field + ".clear();");
+            }
+            Indent(-1);
+            WriteLineIndent("}");
         }
     }
 
