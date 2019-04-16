@@ -8211,6 +8211,8 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 WriteLineIndent(receiver + "::onReceive(value);");
                 first_inner = false;
             }
+
+            std::set<std::string> responses;
             for (const auto& s : p->body->structs)
             {
                 if (s->request)
@@ -8219,7 +8221,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     std::string response_field = (s->response) ? *s->response->response : "";
                     CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
-                    if (response.first == response_name)
+                    if ((response.first == response_name) && !response_field.empty() && (responses.find(response_field) == responses.end()))
                     {
                         if (!first_inner)
                             WriteLine();
@@ -8233,6 +8235,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                         WriteLineIndent("promise.set_value(value);");
                         WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
                         WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
+                        responses.insert(response_field);
                         Indent(-1);
                         WriteLineIndent("}");
                     }
@@ -8242,7 +8245,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                         for (const auto& reject : s->rejects->rejects)
                         {
                             std::string reject_name = ConvertTypeName(*p->name, *reject, false);
-                            if (response.first == reject_name)
+                            if ((response.first == reject_name) && !response_field.empty() && (responses.find(response_field) == responses.end()))
                             {
                                 if (!first_inner)
                                     WriteLine();
@@ -8256,6 +8259,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                                 WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::exception(value.string().c_str())));");
                                 WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
                                 WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
+                                responses.insert(response_field);
                                 Indent(-1);
                                 WriteLineIndent("}");
                             }
