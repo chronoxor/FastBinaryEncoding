@@ -8310,7 +8310,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                                     Indent(1);
                                     WriteLineIndent("auto timestamp = it_" + response_field + "->second.first;");
                                     WriteLineIndent("auto& promise = it_" + response_field + "->second.second;");
-                                    WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::exception(value.string().c_str())));");
+                                    WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(value.string())));");
                                     WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
                                     WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
                                     response_fields.insert(response_field);
