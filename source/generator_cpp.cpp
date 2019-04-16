@@ -8095,7 +8095,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     else
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " client");
     WriteLineIndent("template <class TBuffer>");
-    WriteLineIndent("class " + client + " : protected " + sender + "<TBuffer>, protected " + receiver + "<TBuffer>");
+    WriteLineIndent("class " + client + " : public virtual FBE::Sender<TBuffer>, public virtual FBE::Receiver<TBuffer>, protected virtual " + sender + "<TBuffer>, protected virtual" + receiver + "<TBuffer>");
     if (p->import)
     {
         Indent(1);
