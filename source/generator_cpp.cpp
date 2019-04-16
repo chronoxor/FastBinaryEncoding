@@ -6223,8 +6223,8 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
         bool imported = CppCommon::StringUtils::ReplaceAll(response, ".", "");
         if (!imported)
         {
-            WriteLineIndent("struct " + response + ";");
             WriteLine();
+            WriteLineIndent("struct " + response + ";");
         }
     }
 
