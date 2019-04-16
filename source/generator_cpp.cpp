@@ -8292,7 +8292,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = "::" + *p->name + "::" + *s->name;
-            if (responses.find(struct_name) == response_fields.end())
+            if (responses.find(struct_name) == responses.end())
                 WriteLineIndent("void onReceive(const " + struct_name + "& value) override { Receiver::onReceive(value); }");
         }
     }
