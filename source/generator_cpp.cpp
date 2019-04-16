@@ -8194,7 +8194,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("uint64_t current = CppCommon::Timestamp::utc();");
                     WriteLine();
                     WriteLineIndent("// Calculate unique timestamp");
-                    WriteLineIndent("_timestamp = (current <= _timestamp) ? _timestamp + 1 : current;");
+                    WriteLineIndent("this->_timestamp = (current <= this->_timestamp) ? this->_timestamp + 1 : current;");
                     WriteLine();
                     WriteLineIndent("// Send the request message");
                     WriteLineIndent("size_t serialized = Sender<TBuffer>::send(value);");
@@ -8203,7 +8203,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     Indent(1);
                     WriteLineIndent("// Register the request");
                     WriteLineIndent("_requests_by_id_" + response_field + ".insert(std::make_pair(value.id, std::make_pair(current, std::move(promise))));");
-                    WriteLineIndent("_requests_by_timestamp_" + response_field + ".insert(std::make_pair(_timestamp, value.id));");
+                    WriteLineIndent("_requests_by_timestamp_" + response_field + ".insert(std::make_pair(this->_timestamp, value.id));");
                     Indent(-1);
                     WriteLineIndent("}");
                     WriteLineIndent("else");
