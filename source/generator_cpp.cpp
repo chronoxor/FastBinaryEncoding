@@ -6223,8 +6223,8 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
         bool imported = CppCommon::StringUtils::ReplaceAll(response, ".", "");
         if (!imported)
         {
+            WriteLineIndent("struct " + response + ";");
             WriteLine();
-            WriteIndent("struct " + response + ";");
         }
     }
 
@@ -6242,7 +6242,7 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
     {
         std::string response = *s->response->response;
         CppCommon::StringUtils::ReplaceAll(response, ".", "::");
-        WriteIndent("typedef " + response + " Response;");
+        WriteLineIndent("typedef " + response + " Response;");
         WriteLine();
     }
 
