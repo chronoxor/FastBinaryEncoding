@@ -8146,7 +8146,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     WriteLineIndent("void reset()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("std::lock_guard<std::mutex> locker(_lock);");
+    WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
     WriteLineIndent("reset_requests();");
     Indent(-1);
     WriteLineIndent("}");
@@ -8199,7 +8199,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("if (serialized > 0)");
                     WriteLineIndent("{");
                     Indent(1);
-                    WriteLineIndent("std::lock_guard<std::mutex> locker(_lock);");
+                    WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
                     WriteLine();
                     WriteLineIndent("// Calculate unique timestamp");
                     WriteLineIndent("this->_timestamp = (current <= this->_timestamp) ? this->_timestamp + 1 : current;");
@@ -8266,7 +8266,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 WriteLineIndent(receiver + "<TBuffer>::onReceive(value);");
             }
 
-            WriteLineIndent("std::lock_guard<std::mutex> locker(_lock);");
+            WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
 
             std::set<std::string> response_fields;
             if (p->body)
