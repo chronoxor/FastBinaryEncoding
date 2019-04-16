@@ -8117,6 +8117,15 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     WriteLineIndent(client + "& operator=(const " + client + "&) = default;");
     WriteLineIndent(client + "& operator=(" + client + "&&) noexcept = default;");
 
+    // Generate imported clients accessors
+    if (p->import)
+    {
+        WriteLine();
+        WriteLineIndent("// Imported clients");
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(*import + "::" + client + "<TBuffer>& " + *import + "_client() noexcept { return *this; }");
+    }
+
     // Generate sender accessor
     WriteLine();
     WriteLineIndent("// Asynchronous sender");
