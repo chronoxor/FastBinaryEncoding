@@ -60,6 +60,7 @@ void GeneratorCpp::GenerateImports()
 #include <list>
 #include <map>
 #include <memory>
+#include <mutex>
 #include <optional>
 #include <set>
 #include <sstream>
@@ -8193,14 +8194,16 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLine();
                     WriteLineIndent("uint64_t current = CppCommon::Timestamp::utc();");
                     WriteLine();
-                    WriteLineIndent("// Calculate unique timestamp");
-                    WriteLineIndent("this->_timestamp = (current <= this->_timestamp) ? this->_timestamp + 1 : current;");
-                    WriteLine();
                     WriteLineIndent("// Send the request message");
                     WriteLineIndent("size_t serialized = Sender<TBuffer>::send(value);");
                     WriteLineIndent("if (serialized > 0)");
                     WriteLineIndent("{");
                     Indent(1);
+                    WriteLineIndent("std::lock_guard<std::mutex> locker(_lock);");
+                    WriteLine();
+                    WriteLineIndent("// Calculate unique timestamp");
+                    WriteLineIndent("this->_timestamp = (current <= this->_timestamp) ? this->_timestamp + 1 : current;");
+                    WriteLine();
                     WriteLineIndent("// Register the request");
                     WriteLineIndent("_requests_by_id_" + response_field + ".insert(std::make_pair(value.id, std::make_pair(current, std::move(promise))));");
                     WriteLineIndent("_requests_by_timestamp_" + response_field + ".insert(std::make_pair(this->_timestamp, value.id));");
@@ -8241,6 +8244,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         if (!p->import)
         {
             WriteLineIndent("uint64_t _timestamp{0};");
+            WriteLineIndent("std::mutex _lock;");
             first = false;
         }
 
@@ -8256,13 +8260,13 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             WriteLineIndent("void onReceive(const " + response.first + "& value) override");
             WriteLineIndent("{");
             Indent(1);
-            bool first_inner = true;
             if (response.second)
             {
                 WriteLineIndent("// Call the base imported handler");
                 WriteLineIndent(receiver + "<TBuffer>::onReceive(value);");
-                first_inner = false;
             }
+
+            WriteLineIndent("std::lock_guard<std::mutex> locker(_lock);");
 
             std::set<std::string> response_fields;
             if (p->body)
@@ -8277,9 +8281,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
 
                         if ((response.first == response_name) && !response_field.empty() && (response_fields.find(response_field) == response_fields.end()))
                         {
-                            if (!first_inner)
-                                WriteLine();
-                            first_inner = false;
+                            WriteLine();
                             WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".find(value.id);");
                             WriteLineIndent("if (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
                             WriteLineIndent("{");
@@ -8301,9 +8303,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                                 std::string reject_name = ConvertTypeName(*p->name, *reject, false);
                                 if ((response.first == reject_name) && !response_field.empty() && (response_fields.find(response_field) == response_fields.end()))
                                 {
-                                    if (!first_inner)
-                                        WriteLine();
-                                    first_inner = false;
+                                    WriteLine();
                                     WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".find(value.id);");
                                     WriteLineIndent("if (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
                                     WriteLineIndent("{");
