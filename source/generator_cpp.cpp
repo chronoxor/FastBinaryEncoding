@@ -8104,6 +8104,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         Indent(-1);
     }
     WriteLineIndent("{");
+    WriteLineIndent("public:");
     if (p->import)
     {
         Indent(1);
@@ -8112,7 +8113,6 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         Indent(-1);
         WriteLine();
     }
-    WriteLineIndent("public:");
     Indent(1);
 
     // Generate client constructors
