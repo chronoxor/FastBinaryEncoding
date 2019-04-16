@@ -8145,8 +8145,8 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     WriteLineIndent("void reset() noexcept");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("Sender::reset();");
-    WriteLineIndent("Receiver::reset();");
+    WriteLineIndent("Sender<TBuffer>::reset();");
+    WriteLineIndent("Receiver<TBuffer>::reset();");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -8171,7 +8171,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("// Send the request message");
-                    WriteLineIndent("size_t serialized = Sender::send(value);");
+                    WriteLineIndent("size_t serialized = Sender<TBuffer>::send(value);");
                     WriteLineIndent("if (serialized > 0)");
                     Indent(1);
                     WriteLineIndent("return;");
@@ -8197,7 +8197,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("_timestamp = (current <= _timestamp) ? _timestamp + 1 : current;");
                     WriteLine();
                     WriteLineIndent("// Send the request message");
-                    WriteLineIndent("size_t serialized = Sender::send(value);");
+                    WriteLineIndent("size_t serialized = Sender<TBuffer>::send(value);");
                     WriteLineIndent("if (serialized > 0)");
                     WriteLineIndent("{");
                     Indent(1);
@@ -8260,7 +8260,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             if (response.second)
             {
                 WriteLineIndent("// Call the base imported handler");
-                WriteLineIndent(receiver + "::onReceive(value);");
+                WriteLineIndent(receiver + "<TBuffer>::onReceive(value);");
                 first_inner = false;
             }
 
@@ -8336,7 +8336,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 if (first)
                     WriteLine();
                 first = false;
-                WriteLineIndent("void onReceive(const " + struct_name + "& value) override { Receiver::onReceive(value); }");
+                WriteLineIndent("void onReceive(const " + struct_name + "& value) override { Receiver<TBuffer>::onReceive(value); }");
             }
         }
     }
