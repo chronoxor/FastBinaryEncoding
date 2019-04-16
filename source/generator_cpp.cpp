@@ -8179,7 +8179,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     Indent(-1);
                     WriteLineIndent("else");
                     Indent(1);
-                    WriteLineIndent("throw std::exception(\"Serialization failed!\");");
+                    WriteLineIndent("throw std::runtime_error(\"Serialization failed!\");");
                     Indent(-1);
                     Indent(-1);
                     WriteLineIndent("}");
@@ -8211,7 +8211,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("}");
                     WriteLineIndent("else");
                     Indent(1);
-                    WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::exception(\"Serialization failed!\")));");
+                    WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(\"Serialization failed!\")));");
                     Indent(-1);
                     WriteLine();
                     WriteLineIndent("return future;");
@@ -8395,7 +8395,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         WriteLine();
         WriteLineIndent("for (auto& request : _requests_by_id_" + response_field + ")");
         Indent(1);
-        WriteLineIndent("request.second.second.set_exception(std::make_exception_ptr(std::exception(\"Reset client!\")));");
+        WriteLineIndent("request.second.second.set_exception(std::make_exception_ptr(std::runtime_error(\"Reset client!\")));");
         Indent(-1);
         WriteLineIndent("_requests_by_id_" + response_field + ".clear();");
         WriteLineIndent("_requests_by_timestamp_" + response_field + ".clear();");
