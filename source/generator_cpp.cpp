@@ -8143,7 +8143,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     // Generate client reset method
     WriteLine();
     WriteLineIndent("// Reset client buffers");
-    WriteLineIndent("void reset() noexcept");
+    WriteLineIndent("void reset()");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("std::lock_guard<std::mutex> locker(_lock);");
@@ -8372,11 +8372,17 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 }
             }
 
+            Indent(-1);
             WriteLine();
+            WriteLineIndent("protected:");
+            Indent(1);
             bool first = true;
-            WriteLineIndent("void reset_requests()");
+            WriteLineIndent("virtual void reset_requests()");
             WriteLineIndent("{");
             Indent(1);
+            if (p->import)
+                for (const auto& import : p->import->imports)
+                    WriteLineIndent(*import + "::" + client + "<TBuffer>::reset_requests();");
             for (const auto& response_field : response_fields)
             {
                 if (!first)
