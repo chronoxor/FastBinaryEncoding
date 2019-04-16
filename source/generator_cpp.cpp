@@ -8226,12 +8226,12 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                         if (!first_inner)
                             WriteLine();
                         first_inner = false;
-                        WriteLineIndent("auto it = _requests_by_id_" + response_field + ".find(value.id);");
-                        WriteLineIndent("if (it != _requests_by_id_" + response_field + ".end())");
+                        WriteLineIndent("auto it" + response_field + " = _requests_by_id_" + response_field + ".find(value.id);");
+                        WriteLineIndent("if (it" + response_field + " != _requests_by_id_" + response_field + ".end())");
                         WriteLineIndent("{");
                         Indent(1);
-                        WriteLineIndent("auto timestamp = it->second.first;");
-                        WriteLineIndent("auto& promise = it->second.second;");
+                        WriteLineIndent("auto timestamp = it" + response_field + "->second.first;");
+                        WriteLineIndent("auto& promise = it" + response_field + "->second.second;");
                         WriteLineIndent("promise.set_value(value);");
                         WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
                         WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
@@ -8250,12 +8250,12 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                                 if (!first_inner)
                                     WriteLine();
                                 first_inner = false;
-                                WriteLineIndent("auto it = _requests_by_id_" + response_field + ".find(value.id);");
-                                WriteLineIndent("if (it != _requests_by_id_" + response_field + ".end())");
+                                WriteLineIndent("auto it" + response_field + " = _requests_by_id_" + response_field + ".find(value.id);");
+                                WriteLineIndent("if (it" + response_field + " != _requests_by_id_" + response_field + ".end())");
                                 WriteLineIndent("{");
                                 Indent(1);
-                                WriteLineIndent("auto timestamp = it->second.first;");
-                                WriteLineIndent("auto& promise = it->second.second;");
+                                WriteLineIndent("auto timestamp = it" + response_field + "->second.first;");
+                                WriteLineIndent("auto& promise = it" + response_field + "->second.second;");
                                 WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::exception(value.string().c_str())));");
                                 WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
                                 WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
