@@ -8147,10 +8147,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("std::lock_guard<std::mutex> locker(_lock);");
-    WriteLine();
     WriteLineIndent("reset_requests();");
-    WriteLineIndent("Sender<TBuffer>::reset();");
-    WriteLineIndent("Receiver<TBuffer>::reset();");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -8344,6 +8341,8 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         }
     }
 
+    std::set<std::string> response_fields;
+
     // Generate client private fields
     if (!received.empty())
     {
@@ -8353,7 +8352,6 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         Indent(1);
         if (p->body)
         {
-            std::set<std::string> response_fields;
             for (const auto& s : p->body->structs)
             {
                 if (s->request)
@@ -8371,34 +8369,39 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     }
                 }
             }
-
-            Indent(-1);
-            WriteLine();
-            WriteLineIndent("protected:");
-            Indent(1);
-            bool first = true;
-            WriteLineIndent("virtual void reset_requests()");
-            WriteLineIndent("{");
-            Indent(1);
-            if (p->import)
-                for (const auto& import : p->import->imports)
-                    WriteLineIndent(*import + "::" + client + "<TBuffer>::reset_requests();");
-            for (const auto& response_field : response_fields)
-            {
-                if (!first)
-                    WriteLine();
-                first = false;
-                WriteLineIndent("for (const auto& request : _requests_by_id_" + response_field + ")");
-                Indent(1);
-                WriteLineIndent("request.second.second.set_exception(std::make_exception_ptr(std::exception(\"Reset client!\")));");
-                Indent(-1);
-                WriteLineIndent("_requests_by_id_" + response_field + ".clear();");
-                WriteLineIndent("_requests_by_timestamp_" + response_field + ".clear();");
-            }
-            Indent(-1);
-            WriteLineIndent("}");
         }
     }
+
+    // Generate reset requests method
+    Indent(-1);
+    WriteLine();
+    WriteLineIndent("protected:");
+    Indent(1);
+    WriteLineIndent("virtual void reset_requests()");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(*import + "::" + client + "<TBuffer>::reset_requests();");
+    }
+    else
+    {
+        WriteLineIndent("Sender<TBuffer>::reset();");
+        WriteLineIndent("Receiver<TBuffer>::reset();");
+    }
+    for (const auto& response_field : response_fields)
+    {
+        WriteLine();
+        WriteLineIndent("for (const auto& request : _requests_by_id_" + response_field + ")");
+        Indent(1);
+        WriteLineIndent("request.second.second.set_exception(std::make_exception_ptr(std::exception(\"Reset client!\")));");
+        Indent(-1);
+        WriteLineIndent("_requests_by_id_" + response_field + ".clear();");
+        WriteLineIndent("_requests_by_timestamp_" + response_field + ".clear();");
+    }
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate client end
     Indent(-1);
