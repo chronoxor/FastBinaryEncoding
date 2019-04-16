@@ -8206,12 +8206,15 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             first = false;
         }
 
+        std::set<std::string> responses;
+
         // Generate received client handlers
         for (const auto& response : received)
         {
             if (!first)
                 WriteLine();
             first = false;
+            responses.insert(response.first);
             WriteLineIndent("void onReceive(const " + response.first + "& value) override");
             WriteLineIndent("{");
             Indent(1);
@@ -8223,7 +8226,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 first_inner = false;
             }
 
-            std::set<std::string> responses;
+            std::set<std::string> response_fields;
             if (p->body)
             {
                 for (const auto& s : p->body->structs)
@@ -8234,7 +8237,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                         std::string response_field = (s->response) ? *s->response->response : "";
                         CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
-                        if ((response.first == response_name) && !response_field.empty() && (responses.find(response_field) == responses.end()))
+                        if ((response.first == response_name) && !response_field.empty() && (response_fields.find(response_field) == response_fields.end()))
                         {
                             if (!first_inner)
                                 WriteLine();
@@ -8248,7 +8251,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                             WriteLineIndent("promise.set_value(value);");
                             WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
                             WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
-                            responses.insert(response_field);
+                            response_fields.insert(response_field);
                             Indent(-1);
                             WriteLineIndent("}");
                         }
@@ -8258,7 +8261,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                             for (const auto& reject : s->rejects->rejects)
                             {
                                 std::string reject_name = ConvertTypeName(*p->name, *reject, false);
-                                if ((response.first == reject_name) && !response_field.empty() && (responses.find(response_field) == responses.end()))
+                                if ((response.first == reject_name) && !response_field.empty() && (response_fields.find(response_field) == response_fields.end()))
                                 {
                                     if (!first_inner)
                                         WriteLine();
@@ -8272,25 +8275,25 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                                     WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::exception(value.string().c_str())));");
                                     WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
                                     WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
-                                    responses.insert(response_field);
+                                    response_fields.insert(response_field);
                                     Indent(-1);
                                     WriteLineIndent("}");
                                 }
                             }
                         }
                     }
-                    else
-                    {
-                        std::string struct_name = "::" + *p->name + "::" + *s->name;
-                        if (!first_inner)
-                            WriteLine();
-                        first_inner = false;
-                        WriteLineIndent("void onReceive(const " + struct_name + "& value) override { Receiver::onReceive(value); }");
-                    }
                 }
             }
             Indent(-1);
             WriteLineIndent("}");
+        }
+
+        // Generate remaining client handlers
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = "::" + *p->name + "::" + *s->name;
+            if (responses.find(struct_name) == response_fields.end())
+                WriteLineIndent("void onReceive(const " + struct_name + "& value) override { Receiver::onReceive(value); }");
         }
     }
 
@@ -8303,7 +8306,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         Indent(1);
         if (p->body)
         {
-            std::set<std::string> responses;
+            std::set<std::string> response_fields;
             for (const auto& s : p->body->structs)
             {
                 if (s->request)
@@ -8313,11 +8316,11 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     std::string response_field = (s->response) ? *s->response->response : "";
                     CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
-                    if (!response_name.empty() && !response_field.empty() && (responses.find(response_field) == responses.end()))
+                    if (!response_name.empty() && !response_field.empty() && (response_fields.find(response_field) == response_fields.end()))
                     {
                         WriteLineIndent("std::unordered_map<FBE::uuid_t, std::pair<uint64_t, std::promise<" + response_name + ">>> _requests_by_id_" + response_field + ";");
                         WriteLineIndent("std::map<uint64_t, FBE::uuid_t> _requests_by_timestamp_" + response_field + ";");
-                        responses.insert(response_field);
+                        response_fields.insert(response_field);
                     }
                 }
             }
