@@ -8284,7 +8284,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                         WriteLineIndent("{");
                         Indent(1);
                         WriteLineIndent("auto timestamp = std::get<0>(it_" + struct_response_field + "->second);");
-                        WriteLineIndent("auto timeout = std::get<1>(it_" + struct_response_field + "->second);");
+                        WriteLineIndent("[[maybe_unused]] auto timeout = std::get<1>(it_" + struct_response_field + "->second);");
                         WriteLineIndent("auto& promise = std::get<2>(it_" + struct_response_field + "->second);");
                         WriteLineIndent("promise.set_value(response);");
                         WriteLineIndent("_requests_by_id_" + struct_response_field + ".erase(response.id);");
@@ -8377,7 +8377,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                             WriteLineIndent("{");
                             Indent(1);
                             WriteLineIndent("auto timestamp = std::get<0>(it_" + struct_response_field + "->second);");
-                            WriteLineIndent("auto timeout = std::get<1>(it_" + struct_response_field + "->second);");
+                            WriteLineIndent("[[maybe_unused]] auto timeout = std::get<1>(it_" + struct_response_field + "->second);");
                             WriteLineIndent("auto& promise = std::get<2>(it_" + struct_response_field + "->second);");
                             WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(reject.string())));");
                             WriteLineIndent("_requests_by_id_" + struct_response_field + ".erase(reject.id);");
