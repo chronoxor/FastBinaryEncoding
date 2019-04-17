@@ -8250,6 +8250,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             WriteLineIndent("virtual bool onResponse(const " + response_name + "& response)");
         WriteLineIndent("{");
         Indent(1);
+        bool first = true;
         if (imported)
         {
             std::string ns = "";
@@ -8267,6 +8268,8 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
+
+            first = false;
         }
         if (p->body)
         {
@@ -8281,7 +8284,9 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
 
                     if ((struct_response_name == response_name) && (cache.find(struct_response_name) == cache.end()))
                     {
-                        WriteLine();
+                        if (!first)
+                            WriteLine();
+                        first = false;
                         WriteLineIndent("auto it_" + struct_response_field + " = _requests_by_id_" + struct_response_field + ".find(response.id);");
                         WriteLineIndent("if (it_" + struct_response_field + " != _requests_by_id_" + struct_response_field + ".end())");
                         WriteLineIndent("{");
@@ -8306,14 +8311,6 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             WriteLine();
             WriteLineIndent("void onReceive(const " + response_name + "& value) override { onResponse(value); }");
         }
-
-        WriteLine();
-        WriteLineIndent("for (auto& request : _requests_by_id_" + response_field + ")");
-        Indent(1);
-        WriteLineIndent("std::get<2>(request.second).set_exception(std::make_exception_ptr(std::runtime_error(\"Reset client!\")));");
-        Indent(-1);
-        WriteLineIndent("_requests_by_id_" + response_field + ".clear();");
-        WriteLineIndent("_requests_by_timestamp_" + response_field + ".clear();");
     }
 
 
