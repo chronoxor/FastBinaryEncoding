@@ -8371,14 +8371,14 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
 
                         if ((struct_reject_name == reject_name) && (cache.find(struct_response_field) == cache.end()))
                         {
-                            WriteLineIndent("auto it_" + struct_response_field + " = _requests_by_id_" + struct_response_field + ".find(response.id);");
+                            WriteLineIndent("auto it_" + struct_response_field + " = _requests_by_id_" + struct_response_field + ".find(reject.id);");
                             WriteLineIndent("if (it_" + struct_response_field + " != _requests_by_id_" + struct_response_field + ".end())");
                             WriteLineIndent("{");
                             Indent(1);
                             WriteLineIndent("auto timestamp = it_" + struct_response_field + "->second.first;");
                             WriteLineIndent("auto& promise = it_" + struct_response_field + "->second.second;");
-                            WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(response.string())));");
-                            WriteLineIndent("_requests_by_id_" + struct_response_field + ".erase(response.id);");
+                            WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(reject.string())));");
+                            WriteLineIndent("_requests_by_id_" + struct_response_field + ".erase(reject.id);");
                             WriteLineIndent("_requests_by_timestamp_" + struct_response_field + ".erase(timestamp);");
                             WriteLineIndent("return true;");
                             cache.insert(struct_response_field);
