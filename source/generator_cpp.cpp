@@ -8265,8 +8265,10 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             Indent(1);
             if (response.second)
             {
+                std::string type = response.first;
+
                 std::string ns = "";
-                std::string t = response.first;
+                std::string t = type;
 
                 size_t pos = type.find_last_of('.');
                 if (pos != std::string::npos)
