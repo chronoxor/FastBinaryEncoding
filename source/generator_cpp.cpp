@@ -8244,10 +8244,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         std::string response_field = response;
         bool imported = CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
-        if (imported)
-            WriteLineIndent("bool onReceiveResponse(const " + response_name + "& response) override");
-        else
-            WriteLineIndent("virtual bool onReceiveResponse(const " + response_name + "& response)");
+        WriteLineIndent("virtual bool onReceiveResponse(const " + response_name + "& response)");
         WriteLineIndent("{");
         Indent(1);
         if (imported)
@@ -8259,11 +8256,11 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             size_t pos = type.find_last_of('.');
             if (pos != std::string::npos)
             {
-                ns.assign(type, 0, pos + 1);
+                ns.assign(type, 0, pos);
                 t.assign(type, pos + 1, type.size() - pos);
             }
 
-            WriteLineIndent("if (" + ns + "client::onReceiveResponse(response))");
+            WriteLineIndent("if (" + ns + client + "::onReceiveResponse(response))");
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
@@ -8304,11 +8301,6 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         Indent(-1);
         WriteLineIndent("}");
         WriteLine();
-        if (!imported)
-        {
-            WriteLineIndent("void onReceive(const " + response_name + "& value) override { onReceiveResponse(value); }");
-            WriteLine();
-        }
     }
 
     // Generate reject handlers
@@ -8318,10 +8310,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         std::string reject_field = reject;
         bool imported = CppCommon::StringUtils::ReplaceAll(reject_field, ".", "");
 
-        if (imported)
-            WriteLineIndent("bool onReceiveReject(const " + reject_name + "& reject) override");
-        else
-            WriteLineIndent("virtual bool onReceiveReject(const " + reject_name + "& reject)");
+        WriteLineIndent("virtual bool onReceiveReject(const " + reject_name + "& reject)");
         WriteLineIndent("{");
         Indent(1);
         if (imported)
@@ -8333,11 +8322,11 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             size_t pos = type.find_last_of('.');
             if (pos != std::string::npos)
             {
-                ns.assign(type, 0, pos + 1);
+                ns.assign(type, 0, pos);
                 t.assign(type, pos + 1, type.size() - pos);
             }
 
-            WriteLineIndent("if (" + ns + "client::onReceiveReject(reject))");
+            WriteLineIndent("if (" + ns + client + "::onReceiveReject(reject))");
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
@@ -8381,11 +8370,6 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         Indent(-1);
         WriteLineIndent("}");
         WriteLine();
-        if (!imported)
-        {
-            WriteLineIndent("void onReceive(const " + reject_name + "& value) override { onReceiveReject(value); }");
-            WriteLine();
-        }
     }
 
     // Generate reset requests method
