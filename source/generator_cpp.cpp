@@ -66,6 +66,7 @@ void GeneratorCpp::GenerateImports()
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <tuple>
 #include <type_traits>
 #include <unordered_map>
 #include <vector>
@@ -8169,7 +8170,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 WriteLine();
                 if (response_name.empty())
                 {
-                    WriteLineIndent("void send(const " + request_name + "& value)");
+                    WriteLineIndent("void send(const " + request_name + "& value, size_t timeout = 0)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("// Send the request message");
@@ -8206,7 +8207,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("this->_timestamp = (current <= this->_timestamp) ? this->_timestamp + 1 : current;");
                     WriteLine();
                     WriteLineIndent("// Register the request");
-                    WriteLineIndent("_requests_by_id_" + response_field + ".insert(std::make_pair(value.id, std::make_pair(current, std::move(promise))));");
+                    WriteLineIndent("_requests_by_id_" + response_field + ".insert(std::make_pair(value.id, std::make_tuple(current, timeout, std::move(promise))));");
                     WriteLineIndent("_requests_by_timestamp_" + response_field + ".insert(std::make_pair(this->_timestamp, value.id));");
                     Indent(-1);
                     WriteLineIndent("}");
@@ -8219,16 +8220,11 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     Indent(-1);
                     WriteLineIndent("}");
 
-                    // Update received map
+                    // Update responses and rejects cache
                     responses.insert(*s->response->response);
                     if (s->rejects)
-                    {
                         for (const auto& reject : s->rejects->rejects)
-                        {
-                            std::string reject_name = ConvertTypeName(*p->name, *reject, false);
                             rejects.insert(*reject);
-                        }
-                    }
                 }
             }
         }
@@ -8290,7 +8286,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             std::string response_field = response;
             CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
-            WriteLineIndent("std::unordered_map<FBE::uuid_t, std::pair<uint64_t, std::promise<" + response_name + ">>> _requests_by_id_" + response_field + ";");
+            WriteLineIndent("std::unordered_map<FBE::uuid_t, std::tuple<uint64_t, size_t, std::promise<" + response_name + ">>> _requests_by_id_" + response_field + ";");
             WriteLineIndent("std::map<uint64_t, FBE::uuid_t> _requests_by_timestamp_" + response_field + ";");
         }
     }
