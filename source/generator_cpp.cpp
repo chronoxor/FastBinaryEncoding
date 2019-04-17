@@ -8417,6 +8417,46 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             WriteLine();
     }
 
+    // Generate notify handlers
+    if (p->body)
+    {
+        bool found = false;
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
+            std::string struct_response_field = *s->name;
+            if (cache.find(struct_response_name) == cache.end())
+            {
+                WriteLineIndent("virtual void onReceiveNotify(const " + struct_response_name + "& notify) {}");
+                cache.insert(struct_response_name);
+                found = true;
+            }
+        }
+        if (found)
+            WriteLine();
+    }
+
+    // Generate receive handlers
+    if (p->body)
+    {
+        bool found = false;
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
+            std::string struct_response_field = *s->name;
+            if (cache.find(struct_response_name) == cache.end())
+            {
+                WriteLineIndent("virtual void onReceive(const " + struct_response_name + "& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }");
+                cache.insert(struct_response_name);
+                found = true;
+            }
+        }
+        if (found)
+            WriteLine();
+    }
+
     // Generate reset requests method
     WriteLineIndent("// Reset client requests");
     WriteLineIndent("virtual void reset_requests()");
