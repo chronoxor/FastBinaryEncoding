@@ -8269,6 +8269,8 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         if (p->body)
         {
             std::set<std::string> cache;
+            WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
+            WriteLine();
             for (const auto& s : p->body->structs)
             {
                 if (s->response)
@@ -8356,6 +8358,8 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         if (p->body)
         {
             std::set<std::string> cache;
+            WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
+            WriteLine();
             for (const auto& s : p->body->structs)
             {
                 if (s->response && s->rejects)
