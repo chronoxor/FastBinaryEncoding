@@ -8301,7 +8301,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         }
         Indent(-1);
         WriteLineIndent("}");
-        if (!import)
+        if (!imported)
         {
             WriteLine();
             WriteLineIndent("void onReceive(const " + response_name + "& value) override { onResponse(value); }");
