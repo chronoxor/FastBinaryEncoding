@@ -8186,8 +8186,6 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("std::future<" + response_name + "> send(const " + request_name + "& value, size_t timeout = 0)");
                     WriteLineIndent("{");
                     Indent(1);
-                    WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
-                    WriteLine();
                     WriteLineIndent("std::promise<" + response_name + "> promise;");
                     WriteLineIndent("std::future<" + response_name + "> future = promise.get_future();");
                     WriteLine();
@@ -8198,6 +8196,8 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("if (serialized > 0)");
                     WriteLineIndent("{");
                     Indent(1);
+                    WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
+                    WriteLine();
                     WriteLineIndent("// Calculate unique timestamp");
                     WriteLineIndent("this->_timestamp = (current <= this->_timestamp) ? this->_timestamp + 1 : current;");
                     WriteLine();
