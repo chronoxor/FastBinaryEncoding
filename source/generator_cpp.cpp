@@ -8151,7 +8151,8 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     Indent(-1);
     WriteLineIndent("}");
 
-    std::map<std::string, bool> received;
+    std::set<std::string> responses;
+    std::set<std::string> rejects;
 
     // Generate send() methods
     if (p->body)
@@ -8163,7 +8164,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 std::string request_name = "::" + *p->name + "::" + *s->name;
                 std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
                 std::string response_field = (s->response) ? *s->response->response : "";
-                bool imported = CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+                CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
                 WriteLine();
                 if (response_name.empty())
@@ -8219,13 +8220,13 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("}");
 
                     // Update received map
-                    received[response_name] = imported;
+                    responses.insert(*s->response->response);
                     if (s->rejects)
                     {
                         for (const auto& reject : s->rejects->rejects)
                         {
                             std::string reject_name = ConvertTypeName(*p->name, *reject, false);
-                            received[reject_name] = imported;
+                            rejects.insert(*reject);
                         }
                     }
                 }
@@ -8234,149 +8235,18 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     }
 
     // Generate client protected fields
-    if (!p->import || !received.empty())
-    {
-        bool first = true;
-        Indent(-1);
-        WriteLine();
-        WriteLineIndent("protected:");
-        Indent(1);
-        if (!p->import)
-        {
-            WriteLineIndent("std::mutex _lock;");
-            WriteLineIndent("uint64_t _timestamp{0};");
-            first = false;
-        }
-
-        std::set<std::string> responses;
-
-        // Generate received client handlers
-        for (const auto& response : received)
-        {
-            if (!first)
-                WriteLine();
-            first = false;
-            responses.insert(response.first);
-            WriteLineIndent("void onReceive(const " + response.first + "& value) override");
-            WriteLineIndent("{");
-            Indent(1);
-            if (response.second)
-            {
-                WriteLineIndent("// Call the base imported handler");
-                WriteLineIndent(receiver + "<TBuffer>::onReceive(value);");
-            }
-
-            WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
-
-            std::set<std::string> response_fields;
-            if (p->body)
-            {
-                for (const auto& s : p->body->structs)
-                {
-                    if (s->request)
-                    {
-                        std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
-                        std::string response_field = (s->response) ? *s->response->response : "";
-                        CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
-
-                        if ((response.first == response_name) && !response_field.empty() && (response_fields.find(response_field) == response_fields.end()))
-                        {
-                            WriteLine();
-                            WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".find(value.id);");
-                            WriteLineIndent("if (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
-                            WriteLineIndent("{");
-                            Indent(1);
-                            WriteLineIndent("auto timestamp = it_" + response_field + "->second.first;");
-                            WriteLineIndent("auto& promise = it_" + response_field + "->second.second;");
-                            WriteLineIndent("promise.set_value(value);");
-                            WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
-                            WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
-                            response_fields.insert(response_field);
-                            Indent(-1);
-                            WriteLineIndent("}");
-                        }
-
-                        if (s->rejects)
-                        {
-                            for (const auto& reject : s->rejects->rejects)
-                            {
-                                std::string reject_name = ConvertTypeName(*p->name, *reject, false);
-                                if ((response.first == reject_name) && !response_field.empty() && (response_fields.find(response_field) == response_fields.end()))
-                                {
-                                    WriteLine();
-                                    WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".find(value.id);");
-                                    WriteLineIndent("if (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
-                                    WriteLineIndent("{");
-                                    Indent(1);
-                                    WriteLineIndent("auto timestamp = it_" + response_field + "->second.first;");
-                                    WriteLineIndent("auto& promise = it_" + response_field + "->second.second;");
-                                    WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(value.string())));");
-                                    WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
-                                    WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
-                                    response_fields.insert(response_field);
-                                    Indent(-1);
-                                    WriteLineIndent("}");
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            Indent(-1);
-            WriteLineIndent("}");
-        }
-
-        // Generate remaining client handlers
-        first = true;
-        for (const auto& s : p->body->structs)
-        {
-            std::string struct_name = "::" + *p->name + "::" + *s->name;
-            if (responses.find(struct_name) == responses.end())
-            {
-                if (first)
-                    WriteLine();
-                first = false;
-                WriteLineIndent("void onReceive(const " + struct_name + "& value) override { Receiver<TBuffer>::onReceive(value); }");
-            }
-        }
-    }
-
-    std::set<std::string> response_fields;
-
-    // Generate client private fields
-    if (!received.empty())
-    {
-        Indent(-1);
-        WriteLine();
-        WriteLineIndent("private:");
-        Indent(1);
-        if (p->body)
-        {
-            for (const auto& s : p->body->structs)
-            {
-                if (s->request)
-                {
-                    std::string request_name = "::" + *p->name + "::" + *s->name;
-                    std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
-                    std::string response_field = (s->response) ? *s->response->response : "";
-                    CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
-
-                    if (!response_name.empty() && !response_field.empty() && (response_fields.find(response_field) == response_fields.end()))
-                    {
-                        WriteLineIndent("std::unordered_map<FBE::uuid_t, std::pair<uint64_t, std::promise<" + response_name + ">>> _requests_by_id_" + response_field + ";");
-                        WriteLineIndent("std::map<uint64_t, FBE::uuid_t> _requests_by_timestamp_" + response_field + ";");
-                        response_fields.insert(response_field);
-                    }
-                }
-            }
-        }
-    }
-
-    // Generate reset requests method
     Indent(-1);
     WriteLine();
     WriteLineIndent("protected:");
     Indent(1);
+    if (!p->import)
+    {
+        WriteLineIndent("std::mutex _lock;");
+        WriteLineIndent("uint64_t _timestamp{0};");
+        WriteLine();
+    }
+
+    // Generate reset requests method
     WriteLineIndent("virtual void reset_requests()");
     WriteLineIndent("{");
     Indent(1);
@@ -8390,8 +8260,12 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         WriteLineIndent("Sender<TBuffer>::reset();");
         WriteLineIndent("Receiver<TBuffer>::reset();");
     }
-    for (const auto& response_field : response_fields)
+    for (const auto& response : responses)
     {
+        std::string response_name = ConvertTypeName(*p->name, response, false);
+        std::string response_field = response;
+        CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
         WriteLine();
         WriteLineIndent("for (auto& request : _requests_by_id_" + response_field + ")");
         Indent(1);
@@ -8402,6 +8276,24 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     }
     Indent(-1);
     WriteLineIndent("}");
+
+    // Generate client private fields
+    if (!responses.empty())
+    {
+        Indent(-1);
+        WriteLine();
+        WriteLineIndent("private:");
+        Indent(1);
+        for (const auto& response : responses)
+        {
+            std::string response_name = ConvertTypeName(*p->name, response, false);
+            std::string response_field = response;
+            CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+            WriteLineIndent("std::unordered_map<FBE::uuid_t, std::pair<uint64_t, std::promise<" + response_name + ">>> _requests_by_id_" + response_field + ";");
+            WriteLineIndent("std::map<uint64_t, FBE::uuid_t> _requests_by_timestamp_" + response_field + ";");
+        }
+    }
 
     // Generate client end
     Indent(-1);
