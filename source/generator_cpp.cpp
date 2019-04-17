@@ -8257,13 +8257,29 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 WriteLine();
             first = false;
             responses.insert(response.first);
-            WriteLineIndent("void onReceive(const " + response.first + "& value) override");
+            if (response.second)
+                WriteLineIndent("bool onResponse(const " + response.first + "& response) override");
+            else
+                WriteLineIndent("virtual bool onResponse(const " + response.first + "& response)");
             WriteLineIndent("{");
             Indent(1);
             if (response.second)
             {
-                WriteLineIndent("// Call the base imported handler");
-                WriteLineIndent(receiver + "<TBuffer>::onReceive(value);");
+                std::string ns = "";
+                std::string t = response.first;
+
+                size_t pos = type.find_last_of('.');
+                if (pos != std::string::npos)
+                {
+                    ns.assign(type, 0, pos + 1);
+                    t.assign(type, pos + 1, type.size() - pos);
+                }
+
+                WriteLineIndent("// Call the base response handler");
+                WriteLineIndent("if (" + ns + "::" + client + "<TBuffer>::onResponse(response))");
+                Indent(1);
+                WriteLineIndent("return true;");
+                Indent(-1);
             }
 
             WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
@@ -8282,15 +8298,16 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                         if ((response.first == response_name) && !response_field.empty() && (response_fields.find(response_field) == response_fields.end()))
                         {
                             WriteLine();
-                            WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".find(value.id);");
+                            WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".find(response.id);");
                             WriteLineIndent("if (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
                             WriteLineIndent("{");
                             Indent(1);
                             WriteLineIndent("auto timestamp = it_" + response_field + "->second.first;");
                             WriteLineIndent("auto& promise = it_" + response_field + "->second.second;");
-                            WriteLineIndent("promise.set_value(value);");
-                            WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
+                            WriteLineIndent("promise.set_value(response);");
+                            WriteLineIndent("_requests_by_id_" + response_field + ".erase(response.id);");
                             WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
+                            WriteLineIndent("return true;");
                             response_fields.insert(response_field);
                             Indent(-1);
                             WriteLineIndent("}");
@@ -8304,15 +8321,16 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                                 if ((response.first == reject_name) && !response_field.empty() && (response_fields.find(response_field) == response_fields.end()))
                                 {
                                     WriteLine();
-                                    WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".find(value.id);");
+                                    WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".find(response.id);");
                                     WriteLineIndent("if (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
                                     WriteLineIndent("{");
                                     Indent(1);
                                     WriteLineIndent("auto timestamp = it_" + response_field + "->second.first;");
                                     WriteLineIndent("auto& promise = it_" + response_field + "->second.second;");
-                                    WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(value.string())));");
-                                    WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
+                                    WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(response.string())));");
+                                    WriteLineIndent("_requests_by_id_" + response_field + ".erase(response.id);");
                                     WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
+                                    WriteLineIndent("return true;");
                                     response_fields.insert(response_field);
                                     Indent(-1);
                                     WriteLineIndent("}");
@@ -8322,6 +8340,8 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     }
                 }
             }
+            WriteLine();
+            WriteLineIndent("return false;");
             Indent(-1);
             WriteLineIndent("}");
         }
@@ -8336,7 +8356,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 if (first)
                     WriteLine();
                 first = false;
-                WriteLineIndent("void onReceive(const " + struct_name + "& value) override { Receiver<TBuffer>::onReceive(value); }");
+                WriteLineIndent("virtual bool onResponse(const " + struct_name + "& response) { return false; }");
             }
         }
     }
