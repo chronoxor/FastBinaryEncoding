@@ -8136,11 +8136,6 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             WriteLineIndent(*import + "::" + client + "<TBuffer>& " + *import + "_client() noexcept { return *this; }");
     }
 
-    // Generate sender accessor
-    WriteLine();
-    WriteLineIndent("// Asynchronous sender");
-    WriteLineIndent(sender + "<TBuffer>& sender() noexcept { return *this; }");
-
     // Generate client reset method
     WriteLine();
     WriteLineIndent("// Reset client buffers");
@@ -8170,7 +8165,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 WriteLine();
                 if (response_name.empty())
                 {
-                    WriteLineIndent("void send(const " + request_name + "& value, size_t timeout = 0)");
+                    WriteLineIndent("void send(const " + request_name + "& value)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("// Send the request message");
@@ -8188,7 +8183,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 }
                 else
                 {
-                    WriteLineIndent("std::future<" + response_name + "> send(const " + request_name + "& value)");
+                    WriteLineIndent("std::future<" + response_name + "> send(const " + request_name + "& value, size_t timeout = 0)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("std::promise<" + response_name + "> promise;");
