@@ -8189,7 +8189,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("std::promise<" + response_name + "> promise;");
                     WriteLineIndent("std::future<" + response_name + "> future = promise.get_future();");
                     WriteLine();
-                    WriteLineIndent("uint64_t current = CppCommon::Timestamp::utc();");
+                    WriteLineIndent("uint64_t current = utc();");
                     WriteLine();
                     WriteLineIndent("// Send the request message");
                     WriteLineIndent("size_t serialized = Sender<TBuffer>::send(value);");
@@ -8224,6 +8224,46 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             }
         }
     }
+
+    // Generate watchdog method
+    WriteLine();
+    WriteLineIndent("// Watchdog for timeouts");
+    WriteLineIndent("virtual void watchdog(uint64_t utc)");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(*import + "::" + client + "<TBuffer>::watchdog(utc);");
+        WriteLine();
+    }
+    for (const auto& response : responses)
+    {
+        std::string response_name = ConvertTypeName(*p->name, response, false);
+        std::string response_field = response;
+        CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+        WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".begin();");
+        WriteLineIndent("if (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
+        WriteLineIndent("{");
+        Indent(1);
+        WriteLineIndent("auto timestamp = std::get<0>(it_" + response_field + "->second);");
+        WriteLineIndent("auto timeout = std::get<1>(it_" + response_field + "->second);");
+        WriteLineIndent("auto& promise = std::get<2>(it_" + response_field + "->second);");
+        WriteLineIndent("if ((timestamp + (timeout * 1000000)) <= utc)");
+        WriteLineIndent("{");
+        Indent(1);
+        WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(\"Timeout!\")));");
+        WriteLineIndent("_requests_by_id_" + response_field + ".erase(response.id);");
+        WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
+        Indent(-1);
+        WriteLineIndent("}");
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLine();
+    }
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate client protected fields
     Indent(-1);
