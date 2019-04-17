@@ -8245,9 +8245,9 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         bool imported = CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
         if (imported)
-            WriteLineIndent("bool onResponse(const " + response_name + "& response) override");
+            WriteLineIndent("bool onReceiveResponse(const " + response_name + "& response) override");
         else
-            WriteLineIndent("virtual bool onResponse(const " + response_name + "& response)");
+            WriteLineIndent("virtual bool onReceiveResponse(const " + response_name + "& response)");
         WriteLineIndent("{");
         Indent(1);
         if (imported)
@@ -8263,7 +8263,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 t.assign(type, pos + 1, type.size() - pos);
             }
 
-            WriteLineIndent("if (" + ns + "client::onResponse(response))");
+            WriteLineIndent("if (" + ns + "client::onReceiveResponse(response))");
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
@@ -8306,13 +8306,90 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         WriteLine();
         if (!imported)
         {
-            WriteLineIndent("void onReceive(const " + response_name + "& value) override { onResponse(value); }");
+            WriteLineIndent("void onReceive(const " + response_name + "& value) override { onReceiveResponse(value); }");
             WriteLine();
         }
     }
 
+    // Generate reject handlers
+    for (const auto& reject : rejects)
+    {
+        std::string reject_name = ConvertTypeName(*p->name, reject, false);
+        std::string reject_field = reject;
+        bool imported = CppCommon::StringUtils::ReplaceAll(reject_field, ".", "");
+
+        if (imported)
+            WriteLineIndent("bool onReceiveReject(const " + reject_name + "& reject) override");
+        else
+            WriteLineIndent("virtual bool onReceiveReject(const " + reject_name + "& reject)");
+        WriteLineIndent("{");
+        Indent(1);
+        if (imported)
+        {
+            std::string ns = "";
+            std::string t = reject;
+            std::string type = reject;
+
+            size_t pos = type.find_last_of('.');
+            if (pos != std::string::npos)
+            {
+                ns.assign(type, 0, pos + 1);
+                t.assign(type, pos + 1, type.size() - pos);
+            }
+
+            WriteLineIndent("if (" + ns + "client::onReceiveReject(reject))");
+            Indent(1);
+            WriteLineIndent("return true;");
+            Indent(-1);
+            WriteLine();
+        }
+        if (p->body)
+        {
+            std::set<std::string> cache;
+            for (const auto& s : p->body->structs)
+            {
+                if (s->rejects)
+                {
+                    for (const auto& r : s->rejects->rejects)
+                    {
+                        std::string struct_reject_name = ConvertTypeName(*p->name, *r, false);
+                        std::string struct_reject_field = *r;
+                        CppCommon::StringUtils::ReplaceAll(struct_reject_field, ".", "");
+
+                        if ((struct_reject_name == reject_name) && (cache.find(struct_reject_name) == cache.end()))
+                        {
+                            WriteLineIndent("auto it_" + struct_reject_field + " = _requests_by_id_" + struct_reject_field + ".find(response.id);");
+                            WriteLineIndent("if (it_" + struct_reject_field + " != _requests_by_id_" + struct_reject_field + ".end())");
+                            WriteLineIndent("{");
+                            Indent(1);
+                            WriteLineIndent("auto timestamp = it_" + struct_reject_field + "->second.first;");
+                            WriteLineIndent("auto& promise = it_" + struct_reject_field + "->second.second;");
+                            WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(response.string())));");
+                            WriteLineIndent("_requests_by_id_" + struct_reject_field + ".erase(response.id);");
+                            WriteLineIndent("_requests_by_timestamp_" + struct_reject_field + ".erase(timestamp);");
+                            WriteLineIndent("return true;");
+                            cache.insert(struct_reject_name);
+                            Indent(-1);
+                            WriteLineIndent("}");
+                            WriteLine();
+                        }
+                    }
+                }
+            }
+        }
+        WriteLineIndent("return false;");
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLine();
+        if (!imported)
+        {
+            WriteLineIndent("void onReceive(const " + reject_name + "& value) override { onReceiveReject(value); }");
+            WriteLine();
+        }
+    }
 
     // Generate reset requests method
+    WriteLineIndent("// Reset client requests");
     WriteLineIndent("virtual void reset_requests()");
     WriteLineIndent("{");
     Indent(1);
