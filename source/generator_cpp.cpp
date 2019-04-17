@@ -8310,16 +8310,13 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         std::set<std::string> cache;
         for (const auto& s : p->body->structs)
         {
-            if (s->response)
+            std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
+            std::string struct_response_field = *s->name;
+            if ((responses.find(*s->response->response) == responses.end()) && (cache.find(struct_response_name) == cache.end()))
             {
-                std::string struct_response_name = ConvertTypeName(*p->name, *s->response->response, false);
-                std::string struct_response_field = *s->response->response;
-                if ((responses.find(*s->response->response) == responses.end()) && (cache.find(struct_response_name) == cache.end()))
-                {
-                    WriteLineIndent("virtual bool onReceiveResponse(const " + struct_response_name + "& response) { return false; }");
-                    cache.insert(struct_response_name);
-                    found = true;
-                }
+                WriteLineIndent("virtual bool onReceiveResponse(const " + struct_response_name + "& response) { return false; }");
+                cache.insert(struct_response_name);
+                found = true;
             }
         }
         if (found)
@@ -8402,18 +8399,12 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         std::set<std::string> cache;
         for (const auto& s : p->body->structs)
         {
-            if (s->rejects)
+            std::string struct_reject_name = ConvertTypeName(*p->name, *s->name, false);
+            if ((rejects.find(*s->name) == rejects.end()) && (cache.find(struct_reject_name) == cache.end()))
             {
-                for (const auto& r : s->rejects->rejects)
-                {
-                    std::string struct_reject_name = ConvertTypeName(*p->name, *r, false);
-                    if ((rejects.find(*r) == rejects.end()) && (cache.find(struct_reject_name) == cache.end()))
-                    {
-                        WriteLineIndent("virtual bool onReceiveReject(const " + struct_reject_name + "& reject) { return false; }");
-                        cache.insert(struct_reject_name);
-                        found = true;
-                    }
-                }
+                WriteLineIndent("virtual bool onReceiveReject(const " + struct_reject_name + "& reject) { return false; }");
+                cache.insert(struct_reject_name);
+                found = true;
             }
         }
         if (found)
