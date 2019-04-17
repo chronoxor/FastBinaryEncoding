@@ -8237,6 +8237,86 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         WriteLine();
     }
 
+    // Generate response handlers
+    for (const auto& response : responses)
+    {
+        std::string response_name = ConvertTypeName(*p->name, response, false);
+        std::string response_field = response;
+        bool imported = CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+        if (imported)
+            WriteLineIndent("bool onResponse(const " + response_name + "& response) override");
+        else
+            WriteLineIndent("virtual bool onResponse(const " + response_name + "& response)");
+        WriteLineIndent("{");
+        Indent(1);
+        if (imported)
+        {
+            std::string ns = "";
+            std::string t = response;
+            std::string type = response;
+
+            size_t pos = type.find_last_of('.');
+            if (pos != std::string::npos)
+            {
+                ns.assign(type, 0, pos + 1);
+                t.assign(type, pos + 1, type.size() - pos);
+            }
+
+            WriteLineIndent("if (" + ns + "client::onResponse(response))");
+            Indent(1);
+            WriteLineIndent("return true;");
+            Indent(-1);
+        }
+        if (p->body)
+        {
+            std::set<std::string> cache;
+            for (const auto& s : p->body->structs)
+            {
+                if (s->response)
+                {
+                    std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
+                    std::string response_field = (s->response) ? *s->response->response : "";
+                    CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+                    if ((response_name == response) && (cache.find(response_name) == cache.end()))
+                    {
+                        WriteLine();
+                        WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".find(response.id);");
+                        WriteLineIndent("if (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
+                        WriteLineIndent("{");
+                        Indent(1);
+                        WriteLineIndent("auto timestamp = it_" + response_field + "->second.first;");
+                        WriteLineIndent("auto& promise = it_" + response_field + "->second.second;");
+                        WriteLineIndent("promise.set_value(response);");
+                        WriteLineIndent("_requests_by_id_" + response_field + ".erase(response.id);");
+                        WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
+                        WriteLineIndent("return true;");
+                        cache.insert(response_name);
+                        Indent(-1);
+                        WriteLineIndent("}");
+                    }
+                }
+            }
+        }
+        Indent(-1);
+        WriteLineIndent("}");
+        if (!import)
+        {
+            WriteLine();
+            WriteLineIndent("void onReceive(const " + response_name + "& value) override { onResponse(value); }");
+        }
+
+        WriteLine();
+        WriteLineIndent("for (auto& request : _requests_by_id_" + response_field + ")");
+        Indent(1);
+        WriteLineIndent("std::get<2>(request.second).set_exception(std::make_exception_ptr(std::runtime_error(\"Reset client!\")));");
+        Indent(-1);
+        WriteLineIndent("_requests_by_id_" + response_field + ".clear();");
+        WriteLineIndent("_requests_by_timestamp_" + response_field + ".clear();");
+    }
+
+
     // Generate reset requests method
     WriteLineIndent("virtual void reset_requests()");
     WriteLineIndent("{");
