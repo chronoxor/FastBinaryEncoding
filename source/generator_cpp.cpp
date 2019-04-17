@@ -8303,6 +8303,29 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         WriteLine();
     }
 
+    // Generate remaining response handlers
+    if (p->body)
+    {
+        bool found = false;
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            if (s->response)
+            {
+                std::string struct_response_name = ConvertTypeName(*p->name, *s->response->response, false);
+                std::string struct_response_field = *s->response->response;
+                if ((responses.find(*s->response->response) == responses.end()) && (cache.find(struct_response_name) == cache.end()))
+                {
+                    WriteLineIndent("virtual bool onReceiveResponse(const " + struct_response_name + "& response) { return false; }");
+                    cache.insert(struct_response_name);
+                    found = true;
+                }
+            }
+        }
+        if (found)
+            WriteLine();
+    }
+
     // Generate reject handlers
     for (const auto& reject : rejects)
     {
@@ -8370,6 +8393,31 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         Indent(-1);
         WriteLineIndent("}");
         WriteLine();
+    }
+
+    // Generate remaining reject handlers
+    if (p->body)
+    {
+        bool found = false;
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            if (s->rejects)
+            {
+                for (const auto& r : s->rejects->rejects)
+                {
+                    std::string struct_reject_name = ConvertTypeName(*p->name, *r, false);
+                    if ((rejects.find(*r) == rejects.end()) && (cache.find(struct_reject_name) == cache.end()))
+                    {
+                        WriteLineIndent("virtual bool onReceiveReject(const " + struct_reject_name + "& reject) { return false; }");
+                        cache.insert(struct_reject_name);
+                        found = true;
+                    }
+                }
+            }
+        }
+        if (found)
+            WriteLine();
     }
 
     // Generate reset requests method
