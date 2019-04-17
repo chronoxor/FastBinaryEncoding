@@ -8357,27 +8357,31 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             std::set<std::string> cache;
             for (const auto& s : p->body->structs)
             {
-                if (s->rejects)
+                if (s->response && s->rejects)
                 {
                     for (const auto& r : s->rejects->rejects)
                     {
+                        std::string struct_response_name = ConvertTypeName(*p->name, *s->response->response, false);
+                        std::string struct_response_field = *s->response->response;
+                        CppCommon::StringUtils::ReplaceAll(struct_response_field, ".", "");
+
                         std::string struct_reject_name = ConvertTypeName(*p->name, *r, false);
                         std::string struct_reject_field = *r;
                         CppCommon::StringUtils::ReplaceAll(struct_reject_field, ".", "");
 
-                        if ((struct_reject_name == reject_name) && (cache.find(struct_reject_name) == cache.end()))
+                        if ((struct_reject_name == reject_name) && (cache.find(struct_response_field) == cache.end()))
                         {
-                            WriteLineIndent("auto it_" + struct_reject_field + " = _requests_by_id_" + struct_reject_field + ".find(response.id);");
-                            WriteLineIndent("if (it_" + struct_reject_field + " != _requests_by_id_" + struct_reject_field + ".end())");
+                            WriteLineIndent("auto it_" + struct_response_field + " = _requests_by_id_" + struct_response_field + ".find(response.id);");
+                            WriteLineIndent("if (it_" + struct_response_field + " != _requests_by_id_" + struct_response_field + ".end())");
                             WriteLineIndent("{");
                             Indent(1);
-                            WriteLineIndent("auto timestamp = it_" + struct_reject_field + "->second.first;");
-                            WriteLineIndent("auto& promise = it_" + struct_reject_field + "->second.second;");
+                            WriteLineIndent("auto timestamp = it_" + struct_response_field + "->second.first;");
+                            WriteLineIndent("auto& promise = it_" + struct_response_field + "->second.second;");
                             WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(response.string())));");
-                            WriteLineIndent("_requests_by_id_" + struct_reject_field + ".erase(response.id);");
-                            WriteLineIndent("_requests_by_timestamp_" + struct_reject_field + ".erase(timestamp);");
+                            WriteLineIndent("_requests_by_id_" + struct_response_field + ".erase(response.id);");
+                            WriteLineIndent("_requests_by_timestamp_" + struct_response_field + ".erase(timestamp);");
                             WriteLineIndent("return true;");
-                            cache.insert(struct_reject_name);
+                            cache.insert(struct_response_field);
                             Indent(-1);
                             WriteLineIndent("}");
                             WriteLine();
