@@ -8250,7 +8250,6 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             WriteLineIndent("virtual bool onResponse(const " + response_name + "& response)");
         WriteLineIndent("{");
         Indent(1);
-        bool first = true;
         if (imported)
         {
             std::string ns = "";
@@ -8268,8 +8267,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
-
-            first = false;
+            WriteLine();
         }
         if (p->body)
         {
@@ -8284,9 +8282,6 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
 
                     if ((struct_response_name == response_name) && (cache.find(struct_response_name) == cache.end()))
                     {
-                        if (!first)
-                            WriteLine();
-                        first = false;
                         WriteLineIndent("auto it_" + struct_response_field + " = _requests_by_id_" + struct_response_field + ".find(response.id);");
                         WriteLineIndent("if (it_" + struct_response_field + " != _requests_by_id_" + struct_response_field + ".end())");
                         WriteLineIndent("{");
@@ -8300,16 +8295,19 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                         cache.insert(struct_response_name);
                         Indent(-1);
                         WriteLineIndent("}");
+                        WriteLine();
                     }
                 }
             }
         }
+        WriteLineIndent("return false;");
         Indent(-1);
         WriteLineIndent("}");
+        WriteLine();
         if (!imported)
         {
-            WriteLine();
             WriteLineIndent("void onReceive(const " + response_name + "& value) override { onResponse(value); }");
+            WriteLine();
         }
     }
 
