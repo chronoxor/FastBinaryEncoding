@@ -8275,24 +8275,24 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             {
                 if (s->response)
                 {
-                    std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
-                    std::string response_field = (s->response) ? *s->response->response : "";
-                    CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+                    std::string struct_response_name = ConvertTypeName(*p->name, *s->response->response, false);
+                    std::string struct_response_field = *s->response->response;
+                    CppCommon::StringUtils::ReplaceAll(struct_response_field, ".", "");
 
-                    if ((response_name == response) && (cache.find(response_name) == cache.end()))
+                    if ((struct_response_name == response_name) && (cache.find(struct_response_name) == cache.end()))
                     {
                         WriteLine();
-                        WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".find(response.id);");
-                        WriteLineIndent("if (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
+                        WriteLineIndent("auto it_" + struct_response_field + " = _requests_by_id_" + struct_response_field + ".find(response.id);");
+                        WriteLineIndent("if (it_" + struct_response_field + " != _requests_by_id_" + struct_response_field + ".end())");
                         WriteLineIndent("{");
                         Indent(1);
-                        WriteLineIndent("auto timestamp = it_" + response_field + "->second.first;");
-                        WriteLineIndent("auto& promise = it_" + response_field + "->second.second;");
+                        WriteLineIndent("auto timestamp = it_" + struct_response_field + "->second.first;");
+                        WriteLineIndent("auto& promise = it_" + struct_response_field + "->second.second;");
                         WriteLineIndent("promise.set_value(response);");
-                        WriteLineIndent("_requests_by_id_" + response_field + ".erase(response.id);");
-                        WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
+                        WriteLineIndent("_requests_by_id_" + struct_response_field + ".erase(response.id);");
+                        WriteLineIndent("_requests_by_timestamp_" + struct_response_field + ".erase(timestamp);");
                         WriteLineIndent("return true;");
-                        cache.insert(response_name);
+                        cache.insert(struct_response_name);
                         Indent(-1);
                         WriteLineIndent("}");
                     }
