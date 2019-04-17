@@ -8513,7 +8513,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "::" + client + "<TBuffer>::watchdog(utc);");
+            WriteLineIndent(*import + "::" + client + "<TBuffer>::watchdog_requests(utc);");
         WriteLine();
     }
     for (const auto& response : responses)
