@@ -8197,6 +8197,8 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("std::future<" + response_name + "> send(const " + request_name + "& value, size_t timeout = 0)");
                     WriteLineIndent("{");
                     Indent(1);
+                    WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
+                    WriteLine();
                     WriteLineIndent("std::promise<" + response_name + "> promise;");
                     WriteLineIndent("std::future<" + response_name + "> future = promise.get_future();");
                     WriteLine();
@@ -8207,8 +8209,6 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("if (serialized > 0)");
                     WriteLineIndent("{");
                     Indent(1);
-                    WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
-                    WriteLine();
                     WriteLineIndent("// Calculate unique timestamp");
                     WriteLineIndent("this->_timestamp = (current <= this->_timestamp) ? this->_timestamp + 1 : current;");
                     WriteLine();
@@ -8523,7 +8523,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
         WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".begin();");
-        WriteLineIndent("if (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
+        WriteLineIndent("while (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
         WriteLineIndent("{");
         Indent(1);
         WriteLineIndent("auto id = it_" + response_field + "->first;");
@@ -8536,8 +8536,14 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(\"Timeout!\")));");
         WriteLineIndent("_requests_by_id_" + response_field + ".erase(id);");
         WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
+        WriteLineIndent("it_" + response_field + " = _requests_by_id_" + response_field + ".begin();");
+        WriteLineIndent("continue;");
         Indent(-1);
         WriteLineIndent("}");
+        WriteLineIndent("else");
+        Indent(1);
+        WriteLineIndent("break;");
+        Indent(-1);
         Indent(-1);
         WriteLineIndent("}");
         WriteLine();
