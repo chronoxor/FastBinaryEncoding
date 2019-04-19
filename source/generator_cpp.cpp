@@ -8142,7 +8142,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     WriteLineIndent("void reset()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
+    WriteLineIndent("std::scoped_lock locker(this->_lock);");
     WriteLineIndent("reset_requests();");
     Indent(-1);
     WriteLineIndent("}");
@@ -8153,7 +8153,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     WriteLineIndent("void watchdog(uint64_t utc)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
+    WriteLineIndent("std::scoped_lock locker(this->_lock);");
     WriteLineIndent("watchdog_requests(utc);");
     Indent(-1);
     WriteLineIndent("}");
@@ -8197,7 +8197,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("std::future<" + response_name + "> send(const " + request_name + "& value, size_t timeout = 0)");
                     WriteLineIndent("{");
                     Indent(1);
-                    WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
+                    WriteLineIndent("std::scoped_lock locker(this->_lock);");
                     WriteLine();
                     WriteLineIndent("std::promise<" + response_name + "> promise;");
                     WriteLineIndent("std::future<" + response_name + "> future = promise.get_future();");
@@ -8280,7 +8280,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         if (p->body)
         {
             std::set<std::string> cache;
-            WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
+            WriteLineIndent("std::scoped_lock locker(this->_lock);");
             WriteLine();
             for (const auto& s : p->body->structs)
             {
@@ -8369,7 +8369,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         if (p->body)
         {
             std::set<std::string> cache;
-            WriteLineIndent("std::lock_guard<std::mutex> locker(this->_lock);");
+            WriteLineIndent("std::scoped_lock locker(this->_lock);");
             WriteLine();
             for (const auto& s : p->body->structs)
             {

@@ -4548,7 +4548,7 @@ namespace enums {
 
 // Fast Binary Encoding enums client
 template <class TBuffer>
-class Client : protected Sender<TBuffer>, protected Receiver<TBuffer>
+class Client : public virtual Sender<TBuffer>, protected virtual Receiver<TBuffer>
 {
 public:
     Client() = default;
@@ -4559,11 +4559,43 @@ public:
     Client& operator=(const Client&) = default;
     Client& operator=(Client&&) noexcept = default;
 
-    // Asynchronous sender
-    Sender<TBuffer>& sender() noexcept { return *this; }
+    // Reset client buffers
+    void reset()
+    {
+        std::scoped_lock locker(this->_lock);
+        reset_requests();
+    }
+
+    // Watchdog for timeouts
+    void watchdog(uint64_t utc)
+    {
+        std::scoped_lock locker(this->_lock);
+        watchdog_requests(utc);
+    }
 
 protected:
+    std::mutex _lock;
     uint64_t _timestamp{0};
+
+    virtual bool onReceiveResponse(const ::enums::Enums& response) { return false; }
+
+    virtual bool onReceiveReject(const ::enums::Enums& reject) { return false; }
+
+    virtual void onReceiveNotify(const ::enums::Enums& notify) {}
+
+    virtual void onReceive(const ::enums::Enums& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+
+    // Reset client requests
+    virtual void reset_requests()
+    {
+        Sender<TBuffer>::reset();
+        Receiver<TBuffer>::reset();
+    }
+
+    // Watchdog client requests for timeouts
+    virtual void watchdog_requests(uint64_t utc)
+    {
+    }
 };
 
 } // namespace enums
@@ -4730,7 +4762,7 @@ namespace enums {
 
 // Fast Binary Encoding enums final client
 template <class TBuffer>
-class FinalClient : protected FinalSender<TBuffer>, protected FinalReceiver<TBuffer>
+class FinalClient : public virtual FinalSender<TBuffer>, protected virtual FinalReceiver<TBuffer>
 {
 public:
     FinalClient() = default;
@@ -4741,11 +4773,43 @@ public:
     FinalClient& operator=(const FinalClient&) = default;
     FinalClient& operator=(FinalClient&&) noexcept = default;
 
-    // Asynchronous sender
-    FinalSender<TBuffer>& sender() noexcept { return *this; }
+    // Reset client buffers
+    void reset()
+    {
+        std::scoped_lock locker(this->_lock);
+        reset_requests();
+    }
+
+    // Watchdog for timeouts
+    void watchdog(uint64_t utc)
+    {
+        std::scoped_lock locker(this->_lock);
+        watchdog_requests(utc);
+    }
 
 protected:
+    std::mutex _lock;
     uint64_t _timestamp{0};
+
+    virtual bool onReceiveResponse(const ::enums::Enums& response) { return false; }
+
+    virtual bool onReceiveReject(const ::enums::Enums& reject) { return false; }
+
+    virtual void onReceiveNotify(const ::enums::Enums& notify) {}
+
+    virtual void onReceive(const ::enums::Enums& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+
+    // Reset client requests
+    virtual void reset_requests()
+    {
+        Sender<TBuffer>::reset();
+        Receiver<TBuffer>::reset();
+    }
+
+    // Watchdog client requests for timeouts
+    virtual void watchdog_requests(uint64_t utc)
+    {
+    }
 };
 
 } // namespace enums

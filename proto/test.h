@@ -16489,10 +16489,12 @@ namespace test {
 
 // Fast Binary Encoding test client
 template <class TBuffer>
-class Client : protected Sender<TBuffer>, protected Receiver<TBuffer>
+class Client : public virtual Sender<TBuffer>, protected virtual Receiver<TBuffer>
     , public virtual proto::Client<TBuffer>
 {
 public:
+    typedef proto::Client<TBuffer> protoClient;
+
     Client() = default;
     Client(const Client&) = default;
     Client(Client&&) noexcept = default;
@@ -16501,8 +16503,88 @@ public:
     Client& operator=(const Client&) = default;
     Client& operator=(Client&&) noexcept = default;
 
-    // Asynchronous sender
-    Sender<TBuffer>& sender() noexcept { return *this; }
+    // Imported clients
+    proto::Client<TBuffer>& proto_client() noexcept { return *this; }
+
+    // Reset client buffers
+    void reset()
+    {
+        std::scoped_lock locker(this->_lock);
+        reset_requests();
+    }
+
+    // Watchdog for timeouts
+    void watchdog(uint64_t utc)
+    {
+        std::scoped_lock locker(this->_lock);
+        watchdog_requests(utc);
+    }
+
+protected:
+    virtual bool onReceiveResponse(const ::test::StructSimple& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructOptional& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructNested& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructBytes& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructArray& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructVector& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructList& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructSet& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructMap& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructHash& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructHashEx& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructEmpty& response) { return false; }
+
+    virtual bool onReceiveReject(const ::test::StructSimple& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructOptional& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructNested& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructBytes& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructArray& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructVector& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructList& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructSet& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructMap& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructHash& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructHashEx& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructEmpty& reject) { return false; }
+
+    virtual void onReceiveNotify(const ::test::StructSimple& notify) {}
+    virtual void onReceiveNotify(const ::test::StructOptional& notify) {}
+    virtual void onReceiveNotify(const ::test::StructNested& notify) {}
+    virtual void onReceiveNotify(const ::test::StructBytes& notify) {}
+    virtual void onReceiveNotify(const ::test::StructArray& notify) {}
+    virtual void onReceiveNotify(const ::test::StructVector& notify) {}
+    virtual void onReceiveNotify(const ::test::StructList& notify) {}
+    virtual void onReceiveNotify(const ::test::StructSet& notify) {}
+    virtual void onReceiveNotify(const ::test::StructMap& notify) {}
+    virtual void onReceiveNotify(const ::test::StructHash& notify) {}
+    virtual void onReceiveNotify(const ::test::StructHashEx& notify) {}
+    virtual void onReceiveNotify(const ::test::StructEmpty& notify) {}
+
+    virtual void onReceive(const ::test::StructSimple& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructOptional& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructNested& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructBytes& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructArray& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructVector& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructList& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructSet& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructMap& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructHash& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructHashEx& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructEmpty& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+
+    // Reset client requests
+    virtual void reset_requests()
+    {
+        proto::Client<TBuffer>::reset_requests();
+    }
+
+    // Watchdog client requests for timeouts
+    virtual void watchdog_requests(uint64_t utc)
+    {
+        proto::Client<TBuffer>::watchdog_requests(utc);
+
+    }
 };
 
 } // namespace test
@@ -17319,10 +17401,12 @@ namespace test {
 
 // Fast Binary Encoding test final client
 template <class TBuffer>
-class FinalClient : protected FinalSender<TBuffer>, protected FinalReceiver<TBuffer>
+class FinalClient : public virtual FinalSender<TBuffer>, protected virtual FinalReceiver<TBuffer>
     , public virtual proto::FinalClient<TBuffer>
 {
 public:
+    typedef proto::FinalClient<TBuffer> protoFinalClient;
+
     FinalClient() = default;
     FinalClient(const FinalClient&) = default;
     FinalClient(FinalClient&&) noexcept = default;
@@ -17331,8 +17415,88 @@ public:
     FinalClient& operator=(const FinalClient&) = default;
     FinalClient& operator=(FinalClient&&) noexcept = default;
 
-    // Asynchronous sender
-    FinalSender<TBuffer>& sender() noexcept { return *this; }
+    // Imported clients
+    proto::FinalClient<TBuffer>& proto_client() noexcept { return *this; }
+
+    // Reset client buffers
+    void reset()
+    {
+        std::scoped_lock locker(this->_lock);
+        reset_requests();
+    }
+
+    // Watchdog for timeouts
+    void watchdog(uint64_t utc)
+    {
+        std::scoped_lock locker(this->_lock);
+        watchdog_requests(utc);
+    }
+
+protected:
+    virtual bool onReceiveResponse(const ::test::StructSimple& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructOptional& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructNested& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructBytes& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructArray& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructVector& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructList& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructSet& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructMap& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructHash& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructHashEx& response) { return false; }
+    virtual bool onReceiveResponse(const ::test::StructEmpty& response) { return false; }
+
+    virtual bool onReceiveReject(const ::test::StructSimple& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructOptional& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructNested& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructBytes& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructArray& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructVector& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructList& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructSet& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructMap& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructHash& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructHashEx& reject) { return false; }
+    virtual bool onReceiveReject(const ::test::StructEmpty& reject) { return false; }
+
+    virtual void onReceiveNotify(const ::test::StructSimple& notify) {}
+    virtual void onReceiveNotify(const ::test::StructOptional& notify) {}
+    virtual void onReceiveNotify(const ::test::StructNested& notify) {}
+    virtual void onReceiveNotify(const ::test::StructBytes& notify) {}
+    virtual void onReceiveNotify(const ::test::StructArray& notify) {}
+    virtual void onReceiveNotify(const ::test::StructVector& notify) {}
+    virtual void onReceiveNotify(const ::test::StructList& notify) {}
+    virtual void onReceiveNotify(const ::test::StructSet& notify) {}
+    virtual void onReceiveNotify(const ::test::StructMap& notify) {}
+    virtual void onReceiveNotify(const ::test::StructHash& notify) {}
+    virtual void onReceiveNotify(const ::test::StructHashEx& notify) {}
+    virtual void onReceiveNotify(const ::test::StructEmpty& notify) {}
+
+    virtual void onReceive(const ::test::StructSimple& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructOptional& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructNested& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructBytes& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructArray& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructVector& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructList& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructSet& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructMap& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructHash& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructHashEx& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::test::StructEmpty& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+
+    // Reset client requests
+    virtual void reset_requests()
+    {
+        proto::FinalClient<TBuffer>::reset_requests();
+    }
+
+    // Watchdog client requests for timeouts
+    virtual void watchdog_requests(uint64_t utc)
+    {
+        proto::FinalClient<TBuffer>::watchdog_requests(utc);
+
+    }
 };
 
 } // namespace test
