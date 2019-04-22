@@ -59,7 +59,7 @@ void StructBody::AddField(StructField* f)
     fields.push_back(std::shared_ptr<StructField>(f));
 }
 
-void StructRejects::AddReject(std::string* r)
+void StructRejects::AddReject(std::string* r, bool g)
 {
     if (r == nullptr)
         yyerror("Reject is null!");
@@ -67,11 +67,11 @@ void StructRejects::AddReject(std::string* r)
         yyerror("Reject is invalid!");
 
     // Check for duplicates
-    auto it = std::find_if(rejects.begin(), rejects.end(), [r](auto item)->bool { return *item.get() == *r; });
+    auto it = std::find_if(rejects.begin(), rejects.end(), [r](auto item)->bool { return *item.reject.get() == *r; });
     if (it != rejects.end())
         yyerror("Duplicate reject " + *r);
 
-    rejects.push_back(std::shared_ptr<std::string>(r));
+    rejects.push_back({ std::shared_ptr<std::string>(r), g });
 }
 
 int StructType::stype = 0;

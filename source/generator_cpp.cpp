@@ -8230,7 +8230,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     responses.insert(*s->response->response);
                     if (s->rejects)
                         for (const auto& reject : s->rejects->rejects)
-                            rejects.insert(*reject);
+                            rejects.insert((reject.global ? "*" : "") + *reject.reject);
                 }
             }
         }
@@ -8253,13 +8253,13 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     {
         std::string response_name = ConvertTypeName(*p->name, response, false);
         std::string response_field = response;
-        bool all = CppCommon::StringUtils::ReplaceAll(response_field, "*", "");
+        bool global = CppCommon::StringUtils::ReplaceAll(response_field, "*", "");
         bool imported = CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
         WriteLineIndent("virtual bool onReceiveResponse(const " + response_name + "& response)");
         WriteLineIndent("{");
         Indent(1);
-        if (all)
+        if (global)
         {
             if (p->import)
             {
@@ -8357,13 +8357,13 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     {
         std::string reject_name = ConvertTypeName(*p->name, reject, false);
         std::string reject_field = reject;
-        bool all = CppCommon::StringUtils::ReplaceAll(reject_field, "*", "");
+        bool global = CppCommon::StringUtils::ReplaceAll(reject_field, "*", "");
         bool imported = CppCommon::StringUtils::ReplaceAll(reject_field, ".", "");
 
         WriteLineIndent("virtual bool onReceiveReject(const " + reject_name + "& reject)");
         WriteLineIndent("{");
         Indent(1);
-        if (all)
+        if (global)
         {
             if (p->import)
             {
@@ -8411,8 +8411,8 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                         std::string struct_response_field = *s->response->response;
                         CppCommon::StringUtils::ReplaceAll(struct_response_field, ".", "");
 
-                        std::string struct_reject_name = ConvertTypeName(*p->name, *r, false);
-                        std::string struct_reject_field = *r;
+                        std::string struct_reject_name = ConvertTypeName(*p->name, *r.reject, false);
+                        std::string struct_reject_field = *r.reject;
                         CppCommon::StringUtils::ReplaceAll(struct_reject_field, ".", "");
 
                         if ((struct_reject_name == reject_name) && (cache.find(struct_response_field) == cache.end()))
