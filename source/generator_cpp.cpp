@@ -8253,7 +8253,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     {
         std::string response_name = ConvertTypeName(*p->name, response, false);
         std::string response_field = response;
-        bool all = CppCommon::StringUtils::ReplaceAll(response_field, "*.", "");
+        bool all = CppCommon::StringUtils::ReplaceAll(response_field, "*", "");
         bool imported = CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
         WriteLineIndent("virtual bool onReceiveResponse(const " + response_name + "& response)");
@@ -8357,7 +8357,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     {
         std::string reject_name = ConvertTypeName(*p->name, reject, false);
         std::string reject_field = reject;
-        bool all = CppCommon::StringUtils::ReplaceAll(reject_field, "*.", "");
+        bool all = CppCommon::StringUtils::ReplaceAll(reject_field, "*", "");
         bool imported = CppCommon::StringUtils::ReplaceAll(reject_field, ".", "");
 
         WriteLineIndent("virtual bool onReceiveReject(const " + reject_name + "& reject)");
