@@ -195,6 +195,7 @@ struct_rejects
 
 struct_reject
     : type_name                                                                 { $$ = new FBE::StructRejects(); $$->AddReject($1); }
+    | '*' '.' IDENTIFIER                                                        { $$ = new FBE::StructRejects(); *$1.insert(0, "*."); $$->AddReject($1); }
     | struct_reject ',' type_name                                               { $$ = $1; $$->AddReject($3); }
     ;
 

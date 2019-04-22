@@ -95,6 +95,7 @@ int yyerror(const std::string& msg);
 ":"                     { yycount(); return yychar(':'); }
 ";"                     { yycount(); return yychar(';'); }
 "+"                     { yycount(); return yychar('+'); }
+"*"                     { yycount(); return yychar('*'); }
 "="                     { yycount(); return yychar('='); }
 "|"                     { yycount(); return yychar('|'); }
 "!"                     { yycount(); return yychar('!'); }
