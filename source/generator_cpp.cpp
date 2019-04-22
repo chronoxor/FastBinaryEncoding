@@ -8252,29 +8252,18 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     for (const auto& response : responses)
     {
         std::string response_name = ConvertTypeName(*p->name, response, false);
-        std::string response_field = response;
-        bool imported = CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
-
         WriteLineIndent("virtual bool onReceiveResponse(const " + response_name + "& response)");
         WriteLineIndent("{");
         Indent(1);
-        if (imported)
+        if (p->import)
         {
-            std::string ns = "";
-            std::string t = response;
-            std::string type = response;
-
-            size_t pos = type.find_last_of('.');
-            if (pos != std::string::npos)
+            for (const auto& import : p->import->imports)
             {
-                ns.assign(type, 0, pos);
-                t.assign(type, pos + 1, type.size() - pos);
+                WriteLineIndent("if (" + *import + client + "::onReceiveResponse(response))");
+                Indent(1);
+                WriteLineIndent("return true;");
+                Indent(-1);
             }
-
-            WriteLineIndent("if (" + ns + client + "::onReceiveResponse(response))");
-            Indent(1);
-            WriteLineIndent("return true;");
-            Indent(-1);
             WriteLine();
         }
         if (p->body)
@@ -8341,29 +8330,18 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     for (const auto& reject : rejects)
     {
         std::string reject_name = ConvertTypeName(*p->name, reject, false);
-        std::string reject_field = reject;
-        bool imported = CppCommon::StringUtils::ReplaceAll(reject_field, ".", "");
-
         WriteLineIndent("virtual bool onReceiveReject(const " + reject_name + "& reject)");
         WriteLineIndent("{");
         Indent(1);
-        if (imported)
+        if (p->import)
         {
-            std::string ns = "";
-            std::string t = reject;
-            std::string type = reject;
-
-            size_t pos = type.find_last_of('.');
-            if (pos != std::string::npos)
+            for (const auto& import : p->import->imports)
             {
-                ns.assign(type, 0, pos);
-                t.assign(type, pos + 1, type.size() - pos);
+                WriteLineIndent("if (" + *import + client + "::onReceiveReject(reject))");
+                Indent(1);
+                WriteLineIndent("return true;");
+                Indent(-1);
             }
-
-            WriteLineIndent("if (" + ns + client + "::onReceiveReject(reject))");
-            Indent(1);
-            WriteLineIndent("return true;");
-            Indent(-1);
             WriteLine();
         }
         if (p->body)
