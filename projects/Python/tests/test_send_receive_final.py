@@ -35,7 +35,7 @@ class MyFinalReceiver(protoex.FinalReceiver):
 class TestSendReceiveFinal(TestCase):
 
     @staticmethod
-    def send_and_receive_final(index):
+    def send_and_receive_final(index1, index2):
         sender = MyFinalSender()
 
         # Create and send a new order
@@ -56,11 +56,15 @@ class TestSendReceiveFinal(TestCase):
         receiver = MyFinalReceiver()
 
         # Receive data from the sender
-        index %= sender.buffer.size
-        receiver.receive(sender.buffer, 0, index)
-        receiver.receive(sender.buffer, index, sender.buffer.size - index)
+        index1 %= sender.buffer.size
+        index2 %= sender.buffer.size
+        index2 = max(index1, index2)
+        receiver.receive(sender.buffer, 0, index1)
+        receiver.receive(sender.buffer, index1, index2 - index1)
+        receiver.receive(sender.buffer, index2, sender.buffer.size - index2)
         return receiver.check()
 
     def test_send_and_receive_final(self):
         for i in range(1000):
-            self.assertTrue(self.send_and_receive_final(i))
+            for j in range(1000):
+                self.assertTrue(self.send_and_receive_final(i, j))

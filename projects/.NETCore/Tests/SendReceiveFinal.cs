@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Tests
 {
@@ -26,7 +27,7 @@ namespace Tests
 
     public class SendReceiveFinal
     {
-        private static bool SendAndReceiveFinal(long index)
+        private static bool SendAndReceiveFinal(long index1, long index2)
         {
             var sender = new MyFinalSender();
 
@@ -54,9 +55,12 @@ namespace Tests
             var receiver = new MyFinalReceiver();
 
             // Receive data from the sender
-            index %= sender.Buffer.Size;
-            receiver.Receive(sender.Buffer.Data, 0, index);
-            receiver.Receive(sender.Buffer.Data, index, sender.Buffer.Size - index);
+            index1 %= sender.Buffer.Size;
+            index2 %= sender.Buffer.Size;
+            index2 = Math.Max(index1, index2);
+            receiver.Receive(sender.Buffer.Data, 0, index1);
+            receiver.Receive(sender.Buffer.Data, index1, index2 - index1);
+            receiver.Receive(sender.Buffer.Data, index2, sender.Buffer.Size - index2);
             return receiver.Check();
         }
 
@@ -64,7 +68,8 @@ namespace Tests
         public void SendAndReceiveFinalTest()
         {
             for (long i = 0; i < 1000; ++i)
-                Assert.True(SendAndReceiveFinal(i));
+                for (long j = 0; j < 1000; ++j)
+                    Assert.True(SendAndReceiveFinal(i, j));
         }
     }
 }

@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="783b2918-92f4-46d2-9a41-0a253625844f" name="Default" comment="" />
+    <list default="true" id="783b2918-92f4-46d2-9a41-0a253625844f" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SendReceive.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SendReceiveFinal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/tests/send_receive_final_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/send_receive_final_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/tests/send_receive_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/send_receive_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_testng_testng_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_testng_testng_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/FastBinaryEncoding.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSendReceive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSendReceive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_send_receive.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_send_receive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_send_receive_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_send_receive_final.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/libraries/org_testng_testng_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/libraries/org_testng_testng_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/tests/TestSendReceive.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/tests/TestSendReceive.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/tests/TestSendReceiveFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/tests/TestSendReceiveFinal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/tests/test_send_receive.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_send_receive.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/tests/test_send_receive_final.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_send_receive_final.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_send_receive.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_send_receive.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_send_receive_final.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_send_receive_final.rb" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +54,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/proto/proto/fbe/OrderModel.java" />
         <option value="$PROJECT_DIR$/src/proto/proto/fbe/Receiver.java" />
-        <option value="$PROJECT_DIR$/src/tests/TestSendReceive.java" />
         <option value="$PROJECT_DIR$/src/proto/fbe/Json.java" />
         <option value="$PROJECT_DIR$/src/tests/TestSerialization.java" />
         <option value="$PROJECT_DIR$/src/tests/TestSerializationFinal.java" />
@@ -30,8 +63,9 @@
         <option value="$PROJECT_DIR$/src/tests/TestEnums.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/proto/proto/fbe/Proxy.java" />
-        <option value="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.java" />
         <option value="$PROJECT_DIR$/src/proto/fbe/Receiver.java" />
+        <option value="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.java" />
+        <option value="$PROJECT_DIR$/src/tests/TestSendReceive.java" />
       </list>
     </option>
   </component>
@@ -43,8 +77,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="340" />
-    <option name="y" value="250" />
+    <option name="x" value="324" />
+    <option name="y" value="272" />
     <option name="width" value="2010" />
     <option name="height" value="930" />
   </component>
@@ -66,6 +100,12 @@
               <item name="Java" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -75,9 +115,13 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553282028499" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556502538089" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
@@ -254,13 +298,11 @@
       <workItem from="1552521273036" duration="64000" />
       <workItem from="1553270349258" duration="112000" />
       <workItem from="1553281977582" duration="70000" />
+      <workItem from="1556501488162" duration="1097000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="_default_ - 2019.03.02 at 19h 36m 28s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
     <history-entry file="_default_ - 2019.03.02 at 19h 37m 13s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
@@ -288,14 +330,17 @@
     <history-entry file="_default_ - 2019.03.22 at 22h 13m 53s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
+    <history-entry file="_default_ - 2019.04.29 at 04h 44m 31s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19576000" />
+    <option name="totallyTimeSpent" value="20673000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="340" y="250" width="2010" height="930" extended-state="0" />
+    <frame x="324" y="272" width="2010" height="930" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.34461537" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34820512" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -304,7 +349,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.47897437" weight="0.35884568" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.47846153" weight="0.35884568" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49691993" weight="0.39964476" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -313,8 +358,8 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="JProfiler" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4996968" weight="0.32891247" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.52102566" side_tool="true" visible="true" weight="0.35884568" />
-      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.48449612" weight="0.3251634" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.52153844" side_tool="true" visible="true" weight="0.32496864" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.47846153" visible="true" weight="0.32496864" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -332,20 +377,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/examples/SerializationFinal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/examples/SerializationJson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/examples/SendReceive.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -357,13 +388,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="952">
           <caret line="57" selection-start-line="57" selection-end-line="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1071">
-          <caret line="65" column="26" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -581,27 +605,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/proto/enums/EnumUInt32Enum.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="41">
           <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceiveFinal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -651,6 +658,45 @@
             <element signature="e#685#686#0" expanded="true" />
             <element signature="e#714#715#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceiveFinal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="65" column="5" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="31" column="21" lean-forward="true" selection-start-line="26" selection-end-line="31" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FastBinaryEncoding.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-629" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/proto/test/EnumEmptyEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="38" column="75" selection-start-line="38" selection-start-column="75" selection-end-line="38" selection-end-column="75" />
         </state>
       </provider>
     </entry>
@@ -711,6 +757,7 @@
             <option name="proportions">
               <list>
                 <option value="0.31074765" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -718,7 +765,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.3.11</last-edited>
+          <last-edited>com.google.code.gson:gson:Latest</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

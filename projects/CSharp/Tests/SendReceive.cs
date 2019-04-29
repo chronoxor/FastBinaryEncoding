@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace Tests
 {
@@ -27,7 +28,7 @@ namespace Tests
     [TestFixture]
     public class SendReceive
     {
-        private static bool SendAndReceive(long index)
+        private static bool SendAndReceive(long index1, long index2)
         {
             var sender = new MySender();
 
@@ -55,9 +56,12 @@ namespace Tests
             var receiver = new MyReceiver();
 
             // Receive data from the sender
-            index %= sender.Buffer.Size;
-            receiver.Receive(sender.Buffer.Data, 0, index);
-            receiver.Receive(sender.Buffer.Data, index, sender.Buffer.Size - index);
+            index1 %= sender.Buffer.Size;
+            index2 %= sender.Buffer.Size;
+            index2 = Math.Max(index1, index2);
+            receiver.Receive(sender.Buffer.Data, 0, index1);
+            receiver.Receive(sender.Buffer.Data, index1, index2 - index1);
+            receiver.Receive(sender.Buffer.Data, index2, sender.Buffer.Size - index2);
             return receiver.Check();
         }
 
@@ -65,7 +69,8 @@ namespace Tests
         public void SendAndReceiveTest()
         {
             for (long i = 0; i < 1000; ++i)
-                Assert.That(SendAndReceive(i));
+                for (long j = 0; j < 1000; ++j)
+                    Assert.True(SendAndReceive(i, j));
         }
     }
 }

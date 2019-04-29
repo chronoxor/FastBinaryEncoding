@@ -32,7 +32,7 @@ class MyReceiver extends proto.fbe.Receiver
 
 public class TestSendReceive
 {
-    public static boolean sendAndReceive(long index)
+    public static boolean sendAndReceive(long index1, long index2)
     {
         var sender = new MySender();
 
@@ -54,9 +54,12 @@ public class TestSendReceive
         var receiver = new MyReceiver();
 
         // Receive data from the sender
-        index %= sender.getBuffer().getSize();
-        receiver.receive(sender.getBuffer().getData(), 0, index);
-        receiver.receive(sender.getBuffer().getData(), index, sender.getBuffer().getSize() - index);
+        index1 %= sender.getBuffer().getSize();
+        index2 %= sender.getBuffer().getSize();
+        index2 = Math.max(index1, index2);
+        receiver.receive(sender.getBuffer().getData(), 0, index1);
+        receiver.receive(sender.getBuffer().getData(), index1, index2 - index1);
+        receiver.receive(sender.getBuffer().getData(), index2, sender.getBuffer().getSize() - index2);
         return receiver.check();
     }
 
@@ -64,6 +67,7 @@ public class TestSendReceive
     public void sendAndReceive()
     {
         for (long i = 0; i < 1000; ++i)
-            Assert.assertTrue(sendAndReceive(i));
+            for (long j = 0; j < 1000; ++j)
+                Assert.assertTrue(sendAndReceive(i, j));
     }
 }

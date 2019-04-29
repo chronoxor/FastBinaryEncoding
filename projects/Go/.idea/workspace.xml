@@ -4,37 +4,15 @@
     <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SendReceive.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SendReceiveFinal.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test/FieldModelStructOptional.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/FieldModelStructOptional.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test/FieldModelStructSimple.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/FieldModelStructSimple.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test/StructOptional.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/StructOptional.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test/StructSimple.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/StructSimple.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructOptional.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructOptional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructSimple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructOptional.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructOptional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructSimple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructOptional.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructOptional.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructSimple.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/fbe/FieldModelStructOptional.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/fbe/FieldModelStructOptional.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/fbe/FieldModelStructSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/fbe/FieldModelStructSimple.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/test.fbe" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test.fbe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/test.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/send_receive_final_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/send_receive_final_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/send_receive_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/send_receive_test.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +37,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/examples/serialization_final.go" />
         <option value="$PROJECT_DIR$/examples/serialization.go" />
         <option value="$PROJECT_DIR$/examples/create.go" />
         <option value="$PROJECT_DIR$/proto/proto/Order.go" />
@@ -106,16 +83,17 @@
         <option value="$PROJECT_DIR$/proto/protoex/Receiver.go" />
         <option value="$PROJECT_DIR$/proto/proto/Proxy.go" />
         <option value="$PROJECT_DIR$/proto/proto/FinalProxy.go" />
-        <option value="$PROJECT_DIR$/tests/send_receive_final_test.go" />
         <option value="$PROJECT_DIR$/proto/proto/Account.go" />
         <option value="$PROJECT_DIR$/proto/test/StructNested.go" />
         <option value="$PROJECT_DIR$/proto/protoex/Balance.go" />
+        <option value="$PROJECT_DIR$/tests/send_receive_test.go" />
+        <option value="$PROJECT_DIR$/tests/send_receive_final_test.go" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="517" />
-    <option name="y" value="90" />
+    <option name="x" value="432" />
+    <option name="y" value="186" />
     <option name="width" value="1600" />
     <option name="height" value="1195" />
   </component>
@@ -145,6 +123,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -161,7 +140,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -271,9 +249,6 @@
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="go_test_tests - 2019.03.14 at 02h 51m 16s.xml">
-      <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
-    </history-entry>
     <history-entry file="go_test_tests - 2019.03.14 at 03h 16m 54s.xml">
       <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
     </history-entry>
@@ -301,16 +276,19 @@
     <history-entry file="go_test_tests - 2019.03.22 at 18h 46m 53s.xml">
       <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
     </history-entry>
+    <history-entry file="go_test_tests - 2019.04.29 at 04h 10m 30s.xml">
+      <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="414" y="72" width="1280" height="956" extended-state="0" />
+    <frame x="432" y="186" width="1600" height="1195" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.40081966" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18376623" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4977109" weight="0.49029127" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4977109" weight="0.48964217" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3971698" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -475,11 +453,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/send_receive_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proto/fbe/Sender.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
@@ -631,16 +604,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/send_receive_final_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="e#15#104#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/extending_test.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="406">
@@ -754,6 +717,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1479">
           <caret line="178" selection-start-line="178" selection-end-line="178" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/send_receive_final_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="78" column="46" selection-start-line="78" selection-start-column="46" selection-end-line="78" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/send_receive_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="875">
+          <caret line="79" column="5" lean-forward="true" selection-start-line="75" selection-end-line="79" selection-end-column="5" />
         </state>
       </provider>
     </entry>

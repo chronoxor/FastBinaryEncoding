@@ -35,7 +35,7 @@ class MyReceiver < Proto::Receiver
 end
 
 class TestSendReceive < Test::Unit::TestCase
-  def send_and_receive(index)
+  def send_and_receive(index1, index2)
     sender = MySender.new
 
     # Create and send a new order
@@ -56,15 +56,20 @@ class TestSendReceive < Test::Unit::TestCase
     receiver = MyReceiver.new
 
     # Receive data from the sender
-    index %= sender.buffer.size
-    receiver.receive(sender.buffer, 0, index)
-    receiver.receive(sender.buffer, index, sender.buffer.size - index)
+    index1 %= sender.buffer.size
+    index2 %= sender.buffer.size
+    index2 = [index1, index2].max
+    receiver.receive(sender.buffer, 0, index1)
+    receiver.receive(sender.buffer, index1, index2 - index1)
+    receiver.receive(sender.buffer, index2, sender.buffer.size - index2)
     receiver.check
   end
 
   def test_send_and_receive
     1000.times do |i|
-      assert_true(send_and_receive(i))
+      1000.times do |j|  
+        assert_true(send_and_receive(i, j))
+      end
     end
   end
 end

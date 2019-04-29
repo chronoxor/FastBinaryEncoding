@@ -32,7 +32,7 @@ class MyReceiver extends proto.Receiver {
   onReceive_account (value) { this._account = true } // eslint-disable-line
 }
 
-function sendAndReceive (index) {
+function sendAndReceive (index1, index2) {
   let sender = new MySender()
 
   // Create and send a new order
@@ -53,15 +53,20 @@ function sendAndReceive (index) {
   let receiver = new MyReceiver()
 
   // Receive data from the sender
-  index %= sender.buffer.size
-  receiver.receive(sender.buffer, 0, index)
-  receiver.receive(sender.buffer, index, sender.buffer.size - index)
+  index1 %= sender.buffer.size
+  index2 %= sender.buffer.size
+  index2 = Math.max(index1, index2)
+  receiver.receive(sender.buffer, 0, index1)
+  receiver.receive(sender.buffer, index1, index2 - index1)
+  receiver.receive(sender.buffer, index2, sender.buffer.size - index2)
   return receiver.check()
 }
 
 test('Send & Receive', function (t) {
   for (let i = 0; i < 1000; i++) {
-    t.true(sendAndReceive(i))
+    for (let j = 0; j < 1000; j++) {
+      t.true(sendAndReceive(i, j))
+    }
   }
   t.end()
 })

@@ -40,7 +40,7 @@ func (r *MyReceiver) OnReceiveOrder(value *proto.Order) { r.order = true }
 func (r *MyReceiver) OnReceiveBalance(value *proto.Balance) { r.balance = true }
 func (r *MyReceiver) OnReceiveAccount(value *proto.Account) { r.account = true }
 
-func SendAndReceive(index int) bool {
+func SendAndReceive(index1 int, index2 int) bool {
 	sender := NewMySender()
 
 	// Create and send a new order
@@ -61,14 +61,21 @@ func SendAndReceive(index int) bool {
 	receiver := NewMyReceiver()
 
 	// Receive data from the sender
-	index %= sender.Buffer().Size()
-	_ = receiver.Receive(sender.Buffer().Data()[:index])
-	_ = receiver.Receive(sender.Buffer().Data()[index:])
+	index1 %= sender.Buffer().Size()
+	index2 %= sender.Buffer().Size()
+	if index2 < index1 {
+		index2 = index1
+	}
+	_ = receiver.Receive(sender.Buffer().Data()[:index1])
+	_ = receiver.Receive(sender.Buffer().Data()[index1:index2])
+	_ = receiver.Receive(sender.Buffer().Data()[index2:])
 	return receiver.Check()
 }
 
 func TestSendAndReceive(t *testing.T) {
 	for i := 0; i < 1000; i++ {
-		assert.True(t, SendAndReceive(i))
+		for j := 0; j < 1000; j++ {
+			assert.True(t, SendAndReceive(i, j))
+		}
 	}
 }

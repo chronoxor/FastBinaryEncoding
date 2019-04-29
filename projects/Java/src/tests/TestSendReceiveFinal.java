@@ -32,7 +32,7 @@ class MyFinalReceiver extends protoex.fbe.FinalReceiver
 
 public class TestSendReceiveFinal
 {
-    public static boolean sendAndReceiveFinal(long index)
+    public static boolean sendAndReceiveFinal(long index1, long index2)
     {
         var sender = new MyFinalSender();
 
@@ -54,9 +54,12 @@ public class TestSendReceiveFinal
         var receiver = new MyFinalReceiver();
 
         // Receive data from the sender
-        index %= sender.getBuffer().getSize();
-        receiver.receive(sender.getBuffer().getData(), 0, index);
-        receiver.receive(sender.getBuffer().getData(), index, sender.getBuffer().getSize() - index);
+        index1 %= sender.getBuffer().getSize();
+        index2 %= sender.getBuffer().getSize();
+        index2 = Math.max(index1, index2);
+        receiver.receive(sender.getBuffer().getData(), 0, index1);
+        receiver.receive(sender.getBuffer().getData(), index1, index2 - index1);
+        receiver.receive(sender.getBuffer().getData(), index2, sender.getBuffer().getSize() - index2);
         return receiver.check();
     }
 
@@ -64,6 +67,7 @@ public class TestSendReceiveFinal
     public void sendAndReceiveFinal()
     {
         for (long i = 0; i < 1000; ++i)
-            Assert.assertTrue(sendAndReceiveFinal(i));
+            for (long j = 0; j < 1000; ++j)
+                Assert.assertTrue(sendAndReceiveFinal(i, j));
     }
 }

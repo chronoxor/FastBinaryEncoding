@@ -1,6 +1,7 @@
 package tests
 
 import java.util.*
+import kotlin.math.*
 import kotlin.test.*
 import org.testng.annotations.*
 
@@ -28,7 +29,7 @@ internal class MyFinalReceiver : protoex.fbe.FinalReceiver()
 
 class TestSendReceiveFinal
 {
-    private fun sendAndReceiveFinal(i: Long): Boolean
+    private fun sendAndReceiveFinal(i: Long, j: Long): Boolean
     {
         val sender = MyFinalSender()
 
@@ -50,9 +51,12 @@ class TestSendReceiveFinal
         val receiver = MyFinalReceiver()
 
         // Receive data from the sender
-        val index = i % sender.buffer.size
-        receiver.receive(sender.buffer.data, 0, index)
-        receiver.receive(sender.buffer.data, index, sender.buffer.size - index)
+        val index1 = i % sender.buffer.size
+        var index2 = j % sender.buffer.size
+        index2 = max(index1, index2)
+        receiver.receive(sender.buffer.data, 0, index1)
+        receiver.receive(sender.buffer.data, index1, index2 - index1)
+        receiver.receive(sender.buffer.data, index2, sender.buffer.size - index2)
         return receiver.check
     }
 
@@ -60,6 +64,7 @@ class TestSendReceiveFinal
     fun sendAndReceiveFinal()
     {
         for (i in 0..999)
-            assertTrue(sendAndReceiveFinal(i.toLong()))
+            for (j in 0..999)
+                assertTrue(sendAndReceiveFinal(i.toLong(), j.toLong()))
     }
 }

@@ -33,7 +33,7 @@ class MyFinalReceiver extends protoex.FinalReceiver {
   onReceive_account (value) { this._account = true } // eslint-disable-line
 }
 
-function sendAndReceiveFinal (index) {
+function sendAndReceiveFinal (index1, index2) {
   let sender = new MyFinalSender()
 
   // Create and send a new order
@@ -54,15 +54,20 @@ function sendAndReceiveFinal (index) {
   let receiver = new MyFinalReceiver()
 
   // Receive data from the sender
-  index %= sender.buffer.size
-  receiver.receive(sender.buffer, 0, index)
-  receiver.receive(sender.buffer, index, sender.buffer.size - index)
+  index1 %= sender.buffer.size
+  index2 %= sender.buffer.size
+  index2 = Math.max(index1, index2)
+  receiver.receive(sender.buffer, 0, index1)
+  receiver.receive(sender.buffer, index1, index2 - index1)
+  receiver.receive(sender.buffer, index2, sender.buffer.size - index2)
   return receiver.check()
 }
 
 test('Send & Receive (Final)', function (t) {
   for (let i = 0; i < 1000; i++) {
-    t.true(sendAndReceiveFinal(i))
+    for (let j = 0; j < 1000; j++) {
+      t.true(sendAndReceiveFinal(i, j))
+    }
   }
   t.end()
 })

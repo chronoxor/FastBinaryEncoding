@@ -1,6 +1,7 @@
 package tests
 
 import java.util.*
+import kotlin.math.*
 import kotlin.test.*
 import org.testng.annotations.*
 
@@ -28,7 +29,7 @@ internal class MyReceiver : proto.fbe.Receiver()
 
 class TestSendReceive
 {
-    private fun sendAndReceive(i: Long): Boolean
+    private fun sendAndReceive(i: Long, j: Long): Boolean
     {
         val sender = MySender()
 
@@ -50,9 +51,12 @@ class TestSendReceive
         val receiver = MyReceiver()
 
         // Receive data from the sender
-        val index = i % sender.buffer.size
-        receiver.receive(sender.buffer.data, 0, index)
-        receiver.receive(sender.buffer.data, index, sender.buffer.size - index)
+        val index1 = i % sender.buffer.size
+        var index2 = j % sender.buffer.size
+        index2 = max(index1, index2)
+        receiver.receive(sender.buffer.data, 0, index1)
+        receiver.receive(sender.buffer.data, index1, index2 - index1)
+        receiver.receive(sender.buffer.data, index2, sender.buffer.size - index2)
         return receiver.check
     }
 
@@ -60,6 +64,7 @@ class TestSendReceive
     fun sendAndReceive()
     {
         for (i in 0..999)
-            assertTrue(sendAndReceive(i.toLong()))
+            for (j in 0..999)
+                assertTrue(sendAndReceive(i.toLong(), j.toLong()))
     }
 }

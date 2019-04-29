@@ -4,10 +4,9 @@
     <list default="true" id="edfd070c-0d53-4afa-88cb-34dff2e2435b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/Benchmarks.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SendReceive.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SendReceiveFinal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,16 +22,18 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Examples/Print/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Benchmarks/Serialization.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Proto/protoex.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Proto/fbe.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Serialization.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/SendReceive.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/SerializationJson.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Proto/test.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/SendReceiveFinal.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Proto/enums.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Enums.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Proto/proto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Examples/PrintJson/Program.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Benchmarks/Serialization.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Proto/protoex.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Proto/fbe.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -42,12 +43,14 @@
         <option value="$PROJECT_DIR$/Examples/Print/Program.cs" />
         <option value="$PROJECT_DIR$/Proto/proto.cs" />
         <option value="$PROJECT_DIR$/Tests/Enums.cs" />
+        <option value="$PROJECT_DIR$/Tests/SendReceive.cs" />
+        <option value="$PROJECT_DIR$/Tests/SendReceiveFinal.cs" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="262" />
-    <option name="y" value="191" />
+    <option name="x" value="242" />
+    <option name="y" value="244" />
     <option name="width" value="1995" />
     <option name="height" value="990" />
   </component>
@@ -64,6 +67,17 @@
               <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
               <item name="FastBinaryEncoding" type="24d0babc:SolutionExplorerModelNode" />
             </path>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="FastBinaryEncoding" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Tests" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="FastBinaryEncoding" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Tests" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Tests" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -78,6 +92,7 @@
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Proto/lib/Utf8Json.dll" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -255,11 +270,12 @@
       <workItem from="1554679030670" duration="74000" />
       <workItem from="1554722792898" duration="54000" />
       <workItem from="1554723081081" duration="45000" />
+      <workItem from="1556499383395" duration="338000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11463000" />
+    <option name="totallyTimeSpent" value="11801000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -271,9 +287,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="210" y="153" width="1596" height="792" extended-state="0" />
+    <frame x="242" y="244" width="1995" height="990" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24609375" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24857882" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -288,11 +304,11 @@
       <window_info anchor="bottom" id="NuGet" order="7" weight="0.3287879" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Unit Tests" order="10" visible="true" weight="0.41666666" />
+      <window_info active="true" anchor="bottom" id="Unit Tests" order="10" visible="true" weight="0.41656944" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="13" />
-      <window_info anchor="bottom" id="Build" order="14" weight="0.3242424" />
+      <window_info anchor="bottom" id="Build" order="14" weight="0.32322055" />
       <window_info anchor="bottom" id="Performance Profiler" order="15" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -740,6 +756,40 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="4052" column="15" selection-start-line="4052" selection-start-column="15" selection-end-line="4052" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/SendReceive.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="71" column="54" lean-forward="true" selection-start-line="69" selection-end-line="71" selection-end-column="54" />
+          <folding>
+            <marker date="1556499524194" expanded="true" signature="6:26" ph="..." />
+            <marker date="1556499524194" expanded="true" signature="43:2742" ph="{...}" />
+            <marker date="1556499524194" expanded="true" signature="90:253" ph="{...}" />
+            <marker date="1556499524194" expanded="true" signature="174:247" ph="{...}" />
+            <marker date="1556499524194" expanded="true" signature="303:727" ph="{...}" />
+            <marker date="1556499524194" expanded="true" signature="757:2740" ph="{...}" />
+            <marker date="1556499524194" expanded="true" signature="832:2478" ph="{...}" />
+            <marker date="1556499524194" expanded="true" signature="2567:2734" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/SendReceiveFinal.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="71" column="51" selection-start-line="71" selection-start-column="51" selection-end-line="71" selection-end-column="51" />
+          <folding>
+            <marker date="1556499664429" expanded="true" signature="6:26" ph="..." />
+            <marker date="1556499664429" expanded="true" signature="43:2950" ph="{...}" />
+            <marker date="1556499664429" expanded="true" signature="102:265" ph="{...}" />
+            <marker date="1556499664429" expanded="true" signature="186:259" ph="{...}" />
+            <marker date="1556499664429" expanded="true" signature="327:757" ph="{...}" />
+            <marker date="1556499664429" expanded="true" signature="792:2948" ph="{...}" />
+            <marker date="1556499664429" expanded="true" signature="872:2668" ph="{...}" />
+            <marker date="1556499664429" expanded="true" signature="2770:2942" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>

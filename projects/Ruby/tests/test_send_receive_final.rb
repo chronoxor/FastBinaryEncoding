@@ -35,7 +35,7 @@ class MyFinalReceiver < Protoex::FinalReceiver
 end
 
 class TestSendReceiveFinal < Test::Unit::TestCase
-  def send_and_receive_final(index)
+  def send_and_receive_final(index1, index2)
     sender = MyFinalSender.new
 
     # Create and send a new order
@@ -56,15 +56,20 @@ class TestSendReceiveFinal < Test::Unit::TestCase
     receiver = MyFinalReceiver.new
 
     # Receive data from the sender
-    index %= sender.buffer.size
-    receiver.receive(sender.buffer, 0, index)
-    receiver.receive(sender.buffer, index, sender.buffer.size - index)
+    index1 %= sender.buffer.size
+    index2 %= sender.buffer.size
+    index2 = [index1, index2].max
+    receiver.receive(sender.buffer, 0, index1)
+    receiver.receive(sender.buffer, index1, index2 - index1)
+    receiver.receive(sender.buffer, index2, sender.buffer.size - index2)
     receiver.check
   end
 
   def test_send_and_receive_final
     1000.times do |i|
-      assert_true(send_and_receive_final(i))
+      1000.times do |j|
+        assert_true(send_and_receive_final(i, j))
+      end
     end
   end
 end
