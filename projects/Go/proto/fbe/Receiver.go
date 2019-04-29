@@ -289,7 +289,8 @@ func (r *Receiver) Receive(buffer []byte) error {
         r.buffer.Reset()
 
         // Refresh the storage buffer
-        offset1 = r.buffer.offset
+        offset0 = r.buffer.offset
+        offset1 = r.buffer.size
         size1 = r.buffer.size
     }
     return nil

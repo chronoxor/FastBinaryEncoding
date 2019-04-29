@@ -3442,7 +3442,8 @@ void GeneratorCSharp::GenerateFBEReceiver()
                 Buffer.Reset();
 
                 // Refresh the storage buffer
-                offset1 = Buffer.Offset;
+                offset0 = Buffer.Offset;
+                offset1 = Buffer.Size;
                 size1 = Buffer.Size;
             }
         }

@@ -7947,7 +7947,8 @@ class Receiver {
       this._buffer.reset()
 
       // Refresh the storage buffer
-      offset1 = this._buffer.offset
+      offset0 = this._buffer.offset
+      offset1 = this._buffer.size
       size1 = this._buffer.size
     }
   }

@@ -3338,7 +3338,8 @@ class Receiver(object):
             self._buffer.reset()
 
             # Refresh the storage buffer
-            offset1 = self._buffer.offset
+            offset0 = self._buffer.offset
+            offset1 = self._buffer.size
             size1 = self._buffer.size
 
     # Receive message handler

@@ -3834,7 +3834,8 @@ abstract class Receiver
             this.buffer.reset()
 
             // Refresh the storage buffer
-            offset1 = this.buffer.offset
+            offset0 = this.buffer.offset
+            offset1 = this.buffer.size
             size1 = this.buffer.size
         }
     }

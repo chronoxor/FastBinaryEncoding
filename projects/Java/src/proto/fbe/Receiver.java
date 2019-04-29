@@ -276,7 +276,8 @@ public abstract class Receiver
             _buffer.reset();
 
             // Refresh the storage buffer
-            offset1 = _buffer.getOffset();
+            offset0 = _buffer.getOffset();
+            offset1 = _buffer.getSize();
             size1 = _buffer.getSize();
         }
     }

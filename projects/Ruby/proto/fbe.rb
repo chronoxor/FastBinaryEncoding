@@ -4122,7 +4122,8 @@ module FBE
         @_buffer.reset
 
         # Refresh the storage buffer
-        offset1 = @_buffer.offset
+        offset0 = @_buffer.offset
+        offset1 = @_buffer.size
         size1 = @_buffer.size
       end
     end

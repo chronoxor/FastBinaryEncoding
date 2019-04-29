@@ -35,7 +35,7 @@ private:
     bool _account;
 };
 
-bool SendAndReceive(size_t index)
+bool SendAndReceive(size_t index1, size_t index2)
 {
     MySender sender;
 
@@ -57,14 +57,20 @@ bool SendAndReceive(size_t index)
     MyReceiver receiver;
 
     // Receive data from the sender
-    index %= sender.buffer().size();
-    receiver.receive(sender.buffer().data(), index);
-    receiver.receive(sender.buffer().data() + index, sender.buffer().size() - index);
+    index1 %= sender.buffer().size();
+    index2 %= sender.buffer().size();
+    index2 = std::max(index1, index2);
+    receiver.receive(sender.buffer().data(), index1);
+    receiver.receive(sender.buffer().data() + index1, index2 - index1);
+    receiver.receive(sender.buffer().data() + index2, sender.buffer().size() - index2);
     return receiver.check();
 }
 
 TEST_CASE("Send & Receive", "[FBE]")
 {
+    SendAndReceive(1, 56);
+
     for (size_t i = 0; i < 1000; ++i)
-        REQUIRE(SendAndReceive(i));
+        for (size_t j = i; j < 1000; ++j)
+            REQUIRE(SendAndReceive(i, j));
 }

@@ -4257,7 +4257,8 @@ public:
 
             // Refresh the storage buffer
             buffer1 = _buffer->data();
-            offset1 = _buffer->offset();
+            offset0 = _buffer->offset();
+            offset1 = _buffer->size();
             size1 = _buffer->size();
         }
     }
