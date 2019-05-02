@@ -43,6 +43,7 @@
 #include <windows.h>
 #undef DELETE
 #undef ERROR
+#undef HOST_NOT_FOUND
 #undef Yield
 #undef min
 #undef max
