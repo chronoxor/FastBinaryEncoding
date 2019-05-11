@@ -16497,11 +16497,11 @@ public:
 
     Client() = default;
     Client(const Client&) = default;
-    Client(Client&&) noexcept = default;
+    Client(Client&&) = default;
     virtual ~Client() = default;
 
     Client& operator=(const Client&) = default;
-    Client& operator=(Client&&) noexcept = default;
+    Client& operator=(Client&&) = default;
 
     // Imported clients
     proto::Client<TBuffer>& proto_client() noexcept { return *this; }
@@ -17409,11 +17409,11 @@ public:
 
     FinalClient() = default;
     FinalClient(const FinalClient&) = default;
-    FinalClient(FinalClient&&) noexcept = default;
+    FinalClient(FinalClient&&) = default;
     virtual ~FinalClient() = default;
 
     FinalClient& operator=(const FinalClient&) = default;
-    FinalClient& operator=(FinalClient&&) noexcept = default;
+    FinalClient& operator=(FinalClient&&) = default;
 
     // Imported clients
     proto::FinalClient<TBuffer>& proto_client() noexcept { return *this; }

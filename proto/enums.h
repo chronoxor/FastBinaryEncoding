@@ -4553,11 +4553,11 @@ class Client : public virtual Sender<TBuffer>, protected virtual Receiver<TBuffe
 public:
     Client() = default;
     Client(const Client&) = default;
-    Client(Client&&) noexcept = default;
+    Client(Client&&) = default;
     virtual ~Client() = default;
 
     Client& operator=(const Client&) = default;
-    Client& operator=(Client&&) noexcept = default;
+    Client& operator=(Client&&) = default;
 
     // Reset client buffers
     void reset()
@@ -4767,11 +4767,11 @@ class FinalClient : public virtual FinalSender<TBuffer>, protected virtual Final
 public:
     FinalClient() = default;
     FinalClient(const FinalClient&) = default;
-    FinalClient(FinalClient&&) noexcept = default;
+    FinalClient(FinalClient&&) = default;
     virtual ~FinalClient() = default;
 
     FinalClient& operator=(const FinalClient&) = default;
-    FinalClient& operator=(FinalClient&&) noexcept = default;
+    FinalClient& operator=(FinalClient&&) = default;
 
     // Reset client buffers
     void reset()

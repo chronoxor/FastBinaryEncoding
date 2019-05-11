@@ -8122,13 +8122,13 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     // Generate client constructors
     WriteLineIndent(client + "() = default;");
     WriteLineIndent(client + "(const " + client + "&) = default;");
-    WriteLineIndent(client + "(" + client + "&&) noexcept = default;");
+    WriteLineIndent(client + "(" + client + "&&) = default;");
     WriteLineIndent("virtual ~" + client + "() = default;");
 
     // Generate client operators
     WriteLine();
     WriteLineIndent(client + "& operator=(const " + client + "&) = default;");
-    WriteLineIndent(client + "& operator=(" + client + "&&) noexcept = default;");
+    WriteLineIndent(client + "& operator=(" + client + "&&) = default;");
 
     // Generate imported clients accessors
     if (p->import)
