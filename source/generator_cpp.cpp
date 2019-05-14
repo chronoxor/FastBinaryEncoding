@@ -8524,7 +8524,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         WriteLineIndent("while (it_by_timestamp_" + response_field + " != _requests_by_timestamp_" + response_field + ".end())");
         WriteLineIndent("{");
         Indent(1);
-        WriteLineIndent("auto it_by_id_" + response_field + " = _requests_by_id_" + response_field + ".find(it_by_timestamp_" + response_field + ".second);");
+        WriteLineIndent("auto it_by_id_" + response_field + " = _requests_by_id_" + response_field + ".find(it_by_timestamp_" + response_field + "->second);");
         WriteLineIndent("auto id = it_by_id_" + response_field + "->first;");
         WriteLineIndent("auto timestamp = std::get<0>(it_by_id_" + response_field + "->second);");
         WriteLineIndent("auto timeout = std::get<1>(it_by_id_" + response_field + "->second);");
