@@ -8215,7 +8215,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("this->_timestamp = (current <= this->_timestamp) ? this->_timestamp + 1 : current;");
                     WriteLine();
                     WriteLineIndent("// Register the request");
-                    WriteLineIndent("_promice_by_id_" + response_field + ".insert(std::make_pair(value.id, std::move(promise)));");
+                    WriteLineIndent("_promise_by_id_" + response_field + ".insert(std::make_pair(value.id, std::move(promise)));");
                     WriteLineIndent("_request_by_id_" + response_field + ".insert(std::make_pair(value.id, std::make_pair(current, timeout)));");
                     WriteLineIndent("_request_by_timestamp_" + response_field + ".insert(std::make_pair(this->_timestamp, value.id));");
                     Indent(-1);
@@ -8281,7 +8281,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                         Indent(1);
                         WriteLineIndent("auto timestamp = it_" + struct_response_field + "->second.first;");
                         WriteLineIndent("[[maybe_unused]] auto timeout = it_" + struct_response_field + "->second.second;");
-                        WriteLineIndent("auto promise = std::move(_request_by_id_" + struct_response_field + "[response.id]);");
+                        WriteLineIndent("auto promise = std::move(_promise_by_id_" + struct_response_field + "[response.id]);");
                         WriteLineIndent("promise.set_value(response);");
                         WriteLineIndent("_promise_by_id_" + struct_response_field + ".erase(response.id);");
                         WriteLineIndent("_request_by_id_" + struct_response_field + ".erase(response.id);");
