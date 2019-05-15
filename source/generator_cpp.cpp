@@ -66,7 +66,6 @@ void GeneratorCpp::GenerateImports()
 #include <sstream>
 #include <stdexcept>
 #include <string>
-#include <tuple>
 #include <type_traits>
 #include <unordered_map>
 #include <vector>
@@ -8216,8 +8215,9 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("this->_timestamp = (current <= this->_timestamp) ? this->_timestamp + 1 : current;");
                     WriteLine();
                     WriteLineIndent("// Register the request");
-                    WriteLineIndent("_requests_by_id_" + response_field + ".insert(std::make_pair(value.id, std::make_tuple(current, timeout, std::move(promise))));");
-                    WriteLineIndent("_requests_by_timestamp_" + response_field + ".insert(std::make_pair(this->_timestamp, value.id));");
+                    WriteLineIndent("_promice_by_id_" + response_field + ".insert(std::make_pair(value.id, std::move(promise)));");
+                    WriteLineIndent("_request_by_id_" + response_field + ".insert(std::make_pair(value.id, std::make_pair(current, timeout)));");
+                    WriteLineIndent("_request_by_timestamp_" + response_field + ".insert(std::make_pair(this->_timestamp, value.id));");
                     Indent(-1);
                     WriteLineIndent("}");
                     WriteLineIndent("else");
@@ -8275,16 +8275,17 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
 
                     if ((struct_response_name == response_name) && (cache.find(struct_response_name) == cache.end()))
                     {
-                        WriteLineIndent("auto it_" + struct_response_field + " = _requests_by_id_" + struct_response_field + ".find(response.id);");
-                        WriteLineIndent("if (it_" + struct_response_field + " != _requests_by_id_" + struct_response_field + ".end())");
+                        WriteLineIndent("auto it_" + struct_response_field + " = _request_by_id_" + struct_response_field + ".find(response.id);");
+                        WriteLineIndent("if (it_" + struct_response_field + " != _request_by_id_" + struct_response_field + ".end())");
                         WriteLineIndent("{");
                         Indent(1);
-                        WriteLineIndent("auto timestamp = std::get<0>(it_" + struct_response_field + "->second);");
-                        WriteLineIndent("[[maybe_unused]] auto timeout = std::get<1>(it_" + struct_response_field + "->second);");
-                        WriteLineIndent("auto promise = std::move(std::get<2>(it_" + struct_response_field + "->second));");
+                        WriteLineIndent("auto timestamp = it_" + struct_response_field + "->second.first;");
+                        WriteLineIndent("[[maybe_unused]] auto timeout = it_" + struct_response_field + "->second.second;");
+                        WriteLineIndent("auto promise = std::move(_request_by_id_" + struct_response_field + "[response.id]);");
                         WriteLineIndent("promise.set_value(response);");
-                        WriteLineIndent("_requests_by_id_" + struct_response_field + ".erase(response.id);");
-                        WriteLineIndent("_requests_by_timestamp_" + struct_response_field + ".erase(timestamp);");
+                        WriteLineIndent("_promise_by_id_" + struct_response_field + ".erase(response.id);");
+                        WriteLineIndent("_request_by_id_" + struct_response_field + ".erase(response.id);");
+                        WriteLineIndent("_request_by_timestamp_" + struct_response_field + ".erase(timestamp);");
                         WriteLineIndent("return true;");
                         cache.insert(struct_response_name);
                         Indent(-1);
@@ -8385,16 +8386,17 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
 
                         if ((struct_reject_name == reject_name) && (cache.find(struct_response_field) == cache.end()))
                         {
-                            WriteLineIndent("auto it_" + struct_response_field + " = _requests_by_id_" + struct_response_field + ".find(reject.id);");
-                            WriteLineIndent("if (it_" + struct_response_field + " != _requests_by_id_" + struct_response_field + ".end())");
+                            WriteLineIndent("auto it_" + struct_response_field + " = _request_by_id_" + struct_response_field + ".find(reject.id);");
+                            WriteLineIndent("if (it_" + struct_response_field + " != _request_by_id_" + struct_response_field + ".end())");
                             WriteLineIndent("{");
                             Indent(1);
-                            WriteLineIndent("auto timestamp = std::get<0>(it_" + struct_response_field + "->second);");
-                            WriteLineIndent("[[maybe_unused]] auto timeout = std::get<1>(it_" + struct_response_field + "->second);");
-                            WriteLineIndent("auto promise = std::move(std::get<2>(it_" + struct_response_field + "->second));");
+                            WriteLineIndent("auto timestamp = it_" + struct_response_field + "->second.first;");
+                            WriteLineIndent("[[maybe_unused]] auto timeout = it_" + struct_response_field + "->second.second;");
+                            WriteLineIndent("auto promise = std::move(_promise_by_id_" + struct_response_field + "[reject.id]);");
                             WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(reject.string())));");
-                            WriteLineIndent("_requests_by_id_" + struct_response_field + ".erase(reject.id);");
-                            WriteLineIndent("_requests_by_timestamp_" + struct_response_field + ".erase(timestamp);");
+                            WriteLineIndent("_promise_by_id_" + struct_response_field + ".erase(reject.id);");
+                            WriteLineIndent("_request_by_id_" + struct_response_field + ".erase(reject.id);");
+                            WriteLineIndent("_request_by_timestamp_" + struct_response_field + ".erase(timestamp);");
                             WriteLineIndent("return true;");
                             cache.insert(struct_response_field);
                             Indent(-1);
@@ -8492,12 +8494,13 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
         WriteLine();
-        WriteLineIndent("for (auto& request : _requests_by_id_" + response_field + ")");
+        WriteLineIndent("for (auto& promise : _promise_by_id_" + response_field + ")");
         Indent(1);
-        WriteLineIndent("std::get<2>(request.second).set_exception(std::make_exception_ptr(std::runtime_error(\"Reset client!\")));");
+        WriteLineIndent("promise.second.set_exception(std::make_exception_ptr(std::runtime_error(\"Reset client!\")));");
         Indent(-1);
-        WriteLineIndent("_requests_by_id_" + response_field + ".clear();");
-        WriteLineIndent("_requests_by_timestamp_" + response_field + ".clear();");
+        WriteLineIndent("_promise_by_id_" + response_field + ".clear();");
+        WriteLineIndent("_request_by_id_" + response_field + ".clear();");
+        WriteLineIndent("_request_by_timestamp_" + response_field + ".clear();");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -8520,21 +8523,22 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         std::string response_field = response;
         CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
-        WriteLineIndent("auto it_by_timestamp_" + response_field + " = _requests_by_timestamp_" + response_field + ".begin();");
-        WriteLineIndent("while (it_by_timestamp_" + response_field + " != _requests_by_timestamp_" + response_field + ".end())");
+        WriteLineIndent("auto it_by_timestamp_" + response_field + " = _request_by_timestamp_" + response_field + ".begin();");
+        WriteLineIndent("while (it_by_timestamp_" + response_field + " != _request_by_timestamp_" + response_field + ".end())");
         WriteLineIndent("{");
         Indent(1);
-        WriteLineIndent("auto it_by_id_" + response_field + " = _requests_by_id_" + response_field + ".find(it_by_timestamp_" + response_field + "->second);");
+        WriteLineIndent("auto it_by_id_" + response_field + " = _request_by_id_" + response_field + ".find(it_by_timestamp_" + response_field + "->second);");
         WriteLineIndent("auto id = it_by_id_" + response_field + "->first;");
-        WriteLineIndent("auto timestamp = std::get<0>(it_by_id_" + response_field + "->second);");
-        WriteLineIndent("auto timeout = std::get<1>(it_by_id_" + response_field + "->second);");
+        WriteLineIndent("auto timestamp = it_by_id_" + response_field + "->second.first;");
+        WriteLineIndent("auto timeout = it_by_id_" + response_field + "->second.second;");
         WriteLineIndent("if ((timestamp + (timeout * 1000000)) <= utc)");
         WriteLineIndent("{");
         Indent(1);
-        WriteLineIndent("auto promise = std::move(std::get<2>(it_by_id_" + response_field + "->second));");
+        WriteLineIndent("auto promise = std::move(_promise_by_id_" + response_field + "[it_by_timestamp_" + response_field + "->second]);");
         WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(\"Timeout!\")));");
-        WriteLineIndent("_requests_by_id_" + response_field + ".erase(id);");
-        WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
+        WriteLineIndent("_promise_by_id_" + response_field + ".erase(id);");
+        WriteLineIndent("_request_by_id_" + response_field + ".erase(id);");
+        WriteLineIndent("_request_by_timestamp_" + response_field + ".erase(timestamp);");
         WriteLineIndent("it_by_timestamp_" + response_field + " = _requests_by_timestamp_" + response_field + ".begin();");
         WriteLineIndent("continue;");
         Indent(-1);
@@ -8563,8 +8567,9 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             std::string response_field = response;
             CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
-            WriteLineIndent("std::unordered_map<FBE::uuid_t, std::tuple<uint64_t, size_t, std::promise<" + response_name + ">>> _requests_by_id_" + response_field + ";");
-            WriteLineIndent("std::map<uint64_t, FBE::uuid_t> _requests_by_timestamp_" + response_field + ";");
+            WriteLineIndent("std::unordered_map<FBE::uuid_t, std::promise<" + response_name + ">> _promise_by_id_" + response_field + ";");
+            WriteLineIndent("std::unordered_map<FBE::uuid_t, std::pair<uint64_t, size_t>> _request_by_id_" + response_field + ";");
+            WriteLineIndent("std::map<uint64_t, FBE::uuid_t> _request_by_timestamp_" + response_field + ";");
         }
     }
 
