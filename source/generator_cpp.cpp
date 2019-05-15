@@ -8525,13 +8525,13 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         WriteLineIndent("{");
         Indent(1);
         WriteLineIndent("auto& it_by_id_" + response_field + " = _requests_by_id_" + response_field + "[it_by_timestamp_" + response_field + "->second];");
-        WriteLineIndent("auto id = it_by_id_" + response_field + "->first;");
-        WriteLineIndent("auto timestamp = std::get<0>(it_by_id_" + response_field + "->second);");
-        WriteLineIndent("auto timeout = std::get<1>(it_by_id_" + response_field + "->second);");
+        WriteLineIndent("auto id = it_by_id_" + response_field + ".first;");
+        WriteLineIndent("auto timestamp = std::get<0>(it_by_id_" + response_field + ".second);");
+        WriteLineIndent("auto timeout = std::get<1>(it_by_id_" + response_field + ".second);");
         WriteLineIndent("if ((timestamp + (timeout * 1000000)) <= utc)");
         WriteLineIndent("{");
         Indent(1);
-        WriteLineIndent("auto& promise = std::get<2>(it_by_id_" + response_field + "->second);");
+        WriteLineIndent("auto& promise = std::get<2>(it_by_id_" + response_field + ".second);");
         WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(\"Timeout!\")));");
         WriteLineIndent("_requests_by_id_" + response_field + ".erase(id);");
         WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
