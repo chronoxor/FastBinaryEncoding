@@ -256,7 +256,7 @@ Options:
 
 # Build domain model
 Generated domain model is represented with source code for the particular language.
-Just add it to your project and build it. 
+Just add it to your project and build it.
 There are several issues and dependencies that should be mentioned:
 
 ### C++
@@ -327,7 +327,7 @@ Follow the steps below in order to deserialize any domain object:
 
 Here is an exmple of FBE serialization in C++ language:
 ```c++
-#include "../proto/proto.h"
+#include "../proto/proto_models.h"
 
 #include <iostream>
 
@@ -407,7 +407,7 @@ Follow the steps below in order to deserialize any domain object:
 
 Here is an exmple of FBE final serialization in C++ language:
 ```c++
-#include "../proto/proto.h"
+#include "../proto/proto_models.h"
 
 #include <iostream>
 
@@ -863,7 +863,7 @@ pipe, etc.
 
 Here is an exmple of using Sender/Receiver communication protocol in C++ language:
 ```c++
-#include "../proto/proto.h"
+#include "../proto/proto_protocol.h"
 
 #include <iostream>
 

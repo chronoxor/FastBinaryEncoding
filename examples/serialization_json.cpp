@@ -6,7 +6,7 @@
     \copyright MIT License
 */
 
-#include "../proto/proto_models.h"
+#include "../proto/proto.h"
 
 #include <iostream>
 
