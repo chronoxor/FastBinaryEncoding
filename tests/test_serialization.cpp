@@ -4,8 +4,8 @@
 
 #include "test.h"
 
-#include "../proto/proto.h"
-#include "../proto/test.h"
+#include "../proto/proto_models.h"
+#include "../proto/test_models.h"
 
 TEST_CASE("Serialization: domain", "[FBE]")
 {

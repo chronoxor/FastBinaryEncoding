@@ -4,8 +4,8 @@
 
 #include "test.h"
 
-#include "../proto/protoex.h"
-#include "../proto/test.h"
+#include "../proto/protoex_protocol.h"
+#include "../proto/test_protocol.h"
 
 class MyFinalSender : public FBE::protoex::FinalSender<FBE::WriteBuffer>
 {

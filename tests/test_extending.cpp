@@ -4,8 +4,8 @@
 
 #include "test.h"
 
-#include "../proto/proto.h"
-#include "../proto/protoex.h"
+#include "../proto/proto_models.h"
+#include "../proto/protoex_models.h"
 
 TEST_CASE("Extending: old -> new", "[FBE]")
 {

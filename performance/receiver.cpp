@@ -4,7 +4,7 @@
 
 #include "benchmark/cppbenchmark.h"
 
-#include "../proto/proto.h"
+#include "../proto/proto_protocol.h"
 
 class MySender : public FBE::proto::Sender<FBE::WriteBuffer>
 {

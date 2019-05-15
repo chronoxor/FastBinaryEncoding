@@ -46,6 +46,8 @@ private:
     void GenerateFooter();
     void GenerateImports();
     void GenerateImports(const std::shared_ptr<Package>& p);
+    void GenerateImportsModels(const std::shared_ptr<Package>& p);
+    void GenerateImportsProtocol(const std::shared_ptr<Package>& p);
     void GenerateBufferWrapper();
     void GenerateDecimalWrapper();
     void GenerateFlagsWrapper();
@@ -78,6 +80,8 @@ private:
     void GenerateFBE(const CppCommon::Path& path);
 
     void GeneratePackage(const std::shared_ptr<Package>& p);
+    void GeneratePackageModels(const std::shared_ptr<Package>& p);
+    void GeneratePackageProtocol(const std::shared_ptr<Package>& p);
     void GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e);
     void GenerateEnumOutputStream(const std::shared_ptr<EnumType>& e);
     void GenerateEnumLoggingStream(const std::shared_ptr<EnumType>& e);

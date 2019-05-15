@@ -13,6 +13,9 @@ namespace FBE {
 void GeneratorCpp::Generate(const std::shared_ptr<Package>& package)
 {
     GeneratePackage(package);
+    GeneratePackageModels(package);
+    if (Sender())
+        GeneratePackageProtocol(package);
 }
 
 void GeneratorCpp::GenerateHeader(const std::string& source)
@@ -140,6 +143,36 @@ void GeneratorCpp::GenerateImports(const std::shared_ptr<Package>& p)
     WriteLineIndent("namespace FBE {");
     WriteLineIndent("using namespace ::" + *p->name + ";");
     WriteLineIndent("} // namespace FBE");
+}
+
+void GeneratorCpp::GenerateImportsModels(const std::shared_ptr<Package>& p)
+{
+    // Generate common imports
+    WriteLine();
+    WriteLineIndent("#include \"" + *p->name + ".h\"");
+
+    // Generate packages import
+    if (p->import)
+    {
+        WriteLine();
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("#include \"" + *import + "_models.h\"");
+    }
+}
+
+void GeneratorCpp::GenerateImportsProtocol(const std::shared_ptr<Package>& p)
+{
+    // Generate common imports
+    WriteLine();
+    WriteLineIndent("#include \"" + *p->name + "_models.h\"");
+
+    // Generate packages import
+    if (p->import)
+    {
+        WriteLine();
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("#include \"" + *import + "_protocol.h\"");
+    }
 }
 
 void GeneratorCpp::GenerateBufferWrapper()
@@ -5724,19 +5757,107 @@ void GeneratorCpp::GeneratePackage(const std::shared_ptr<Package>& p)
             GenerateStruct(p, child_s);
     }
 
-    // Generate sender & receiver
-    if (Sender())
+    // Generate package footer
+    GenerateFooter();
+
+    // Close the output file
+    Close();
+}
+
+void GeneratorCpp::GeneratePackageModels(const std::shared_ptr<Package>& p)
+{
+    CppCommon::Path output = _output;
+
+    // Create package path
+    CppCommon::Directory::CreateTree(output);
+
+    // Generate common files
+    GenerateFBE(output);
+
+    // Open the output file
+    output /= *p->name + "_models.h";
+    Open(output);
+
+    // Generate package header
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImportsModels(p);
+
+    // Generate namespace body
+    if (p->body)
     {
-        GenerateSender(p, false);
-        GenerateReceiver(p, false);
-        GenerateClient(p, false);
-        GenerateProxy(p, false);
-        if (Final())
+        // Generate child enums
+        for (const auto& child_e : p->body->enums)
         {
-            GenerateSender(p, true);
-            GenerateReceiver(p, true);
-            GenerateClient(p, true);
+            // Generate enum field model
+            GenerateEnumFieldModel(p, child_e);
+
+            // Generate enum final model
+            if (Final())
+                GenerateEnumFinalModel(p, child_e);
         }
+
+        // Generate child flags
+        for (const auto& child_f : p->body->flags)
+        {
+            // Generate flags field model
+            GenerateFlagsFieldModel(p, child_f);
+
+            // Generate flags final model
+            if (Final())
+                GenerateFlagsFinalModel(p, child_f);
+        }
+
+        // Generate child structs
+        for (const auto& child_s : p->body->structs)
+        {
+            // Generate struct field models
+            GenerateStructFieldModel(p, child_s);
+            GenerateStructModel(p, child_s);
+
+            // Generate struct final models
+            if (Final())
+            {
+                GenerateStructFinalModel(p, child_s);
+                GenerateStructModelFinal(p, child_s);
+            }
+        }
+    }
+
+    // Generate package footer
+    GenerateFooter();
+
+    // Close the output file
+    Close();
+}
+
+void GeneratorCpp::GeneratePackageProtocol(const std::shared_ptr<Package>& p)
+{
+    CppCommon::Path output = _output;
+
+    // Create package path
+    CppCommon::Directory::CreateTree(output);
+
+    // Generate common files
+    GenerateFBE(output);
+
+    // Open the output file
+    output /= *p->name + "_protocol.h";
+    Open(output);
+
+    // Generate package header
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImportsProtocol(p);
+
+    // Generate sender & receiver
+    GenerateSender(p, false);
+    GenerateReceiver(p, false);
+    GenerateClient(p, false);
+    GenerateProxy(p, false);
+    if (Final())
+    {
+        GenerateSender(p, true);
+        GenerateReceiver(p, true);
+        GenerateClient(p, true);
     }
 
     // Generate package footer
@@ -5798,13 +5919,6 @@ void GeneratorCpp::GenerateEnum(const std::shared_ptr<Package>& p, const std::sh
     // Generate enum JSON
     if (JSON())
         GenerateEnumJson(p, e);
-
-    // Generate enum field model
-    GenerateEnumFieldModel(p, e);
-
-    // Generate enum final model
-    if (Final())
-        GenerateEnumFinalModel(p, e);
 }
 
 void GeneratorCpp::GenerateEnumOutputStream(const std::shared_ptr<EnumType>& e)
@@ -6024,13 +6138,6 @@ void GeneratorCpp::GenerateFlags(const std::shared_ptr<Package>& p, const std::s
     // Generate flags JSON
     if (JSON())
         GenerateFlagsJson(p, f);
-
-    // Generate flags field model
-    GenerateFlagsFieldModel(p, f);
-
-    // Generate flags final model
-    if (Final())
-        GenerateFlagsFinalModel(p, f);
 }
 
 void GeneratorCpp::GenerateFlagsOutputStream(const std::shared_ptr<FlagsType>& f)
@@ -6467,17 +6574,6 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
     // Generate struct JSON
     if (JSON())
         GenerateStructJson(p, s);
-
-    // Generate struct field models
-    GenerateStructFieldModel(p, s);
-    GenerateStructModel(p, s);
-
-    // Generate struct final models
-    if (Final())
-    {
-        GenerateStructFinalModel(p, s);
-        GenerateStructModelFinal(p, s);
-    }
 }
 
 void GeneratorCpp::GenerateStructOutputStream(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)

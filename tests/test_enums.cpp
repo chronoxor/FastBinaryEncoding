@@ -4,7 +4,7 @@
 
 #include "test.h"
 
-#include "../proto/enums.h"
+#include "../proto/enums_models.h"
 
 TEST_CASE("Serialization: enums", "[FBE]")
 {

@@ -4,7 +4,7 @@
 
 #include "test.h"
 
-#include "../proto/test.h"
+#include "../proto/test_models.h"
 
 bool Compare(FBE::decimal_t value1, double value2)
 {
