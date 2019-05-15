@@ -8539,7 +8539,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         WriteLineIndent("_promise_by_id_" + response_field + ".erase(id);");
         WriteLineIndent("_request_by_id_" + response_field + ".erase(id);");
         WriteLineIndent("_request_by_timestamp_" + response_field + ".erase(timestamp);");
-        WriteLineIndent("it_by_timestamp_" + response_field + " = _requests_by_timestamp_" + response_field + ".begin();");
+        WriteLineIndent("it_by_timestamp_" + response_field + " = _request_by_timestamp_" + response_field + ".begin();");
         WriteLineIndent("continue;");
         Indent(-1);
         WriteLineIndent("}");
