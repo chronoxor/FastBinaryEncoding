@@ -101,7 +101,7 @@ void GeneratorCpp::GenerateImports()
         WriteLine();
         WriteLineIndent("#define RAPIDJSON_HAS_STDSTRING 1");
         WriteLineIndent("#include <rapidjson/document.h>");
-        WriteLineIndent("#include <rapidjson/writer.h>");
+        WriteLineIndent("#include <rapidjson/prettywriter.h>");
     }
 
     // Generate logging protocol definitions
