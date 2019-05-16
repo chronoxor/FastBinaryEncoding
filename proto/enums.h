@@ -54,10 +54,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::enums::EnumByte>
+template <class TWriter>
+struct ValueWriter<TWriter, ::enums::EnumByte>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::enums::EnumByte& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::enums::EnumByte& value, bool scope = true)
     {
         return FBE::JSON::to_json(writer, (uint8_t)value);
     }
@@ -112,10 +112,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::enums::EnumChar>
+template <class TWriter>
+struct ValueWriter<TWriter, ::enums::EnumChar>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::enums::EnumChar& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::enums::EnumChar& value, bool scope = true)
     {
         return FBE::JSON::to_json(writer, (uint8_t)value);
     }
@@ -170,10 +170,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::enums::EnumWChar>
+template <class TWriter>
+struct ValueWriter<TWriter, ::enums::EnumWChar>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::enums::EnumWChar& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::enums::EnumWChar& value, bool scope = true)
     {
         return FBE::JSON::to_json(writer, (uint32_t)value);
     }
@@ -228,10 +228,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::enums::EnumInt8>
+template <class TWriter>
+struct ValueWriter<TWriter, ::enums::EnumInt8>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::enums::EnumInt8& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::enums::EnumInt8& value, bool scope = true)
     {
         return FBE::JSON::to_json(writer, (int8_t)value);
     }
@@ -286,10 +286,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::enums::EnumUInt8>
+template <class TWriter>
+struct ValueWriter<TWriter, ::enums::EnumUInt8>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::enums::EnumUInt8& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::enums::EnumUInt8& value, bool scope = true)
     {
         return FBE::JSON::to_json(writer, (uint8_t)value);
     }
@@ -344,10 +344,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::enums::EnumInt16>
+template <class TWriter>
+struct ValueWriter<TWriter, ::enums::EnumInt16>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::enums::EnumInt16& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::enums::EnumInt16& value, bool scope = true)
     {
         return FBE::JSON::to_json(writer, (int16_t)value);
     }
@@ -402,10 +402,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::enums::EnumUInt16>
+template <class TWriter>
+struct ValueWriter<TWriter, ::enums::EnumUInt16>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::enums::EnumUInt16& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::enums::EnumUInt16& value, bool scope = true)
     {
         return FBE::JSON::to_json(writer, (uint16_t)value);
     }
@@ -460,10 +460,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::enums::EnumInt32>
+template <class TWriter>
+struct ValueWriter<TWriter, ::enums::EnumInt32>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::enums::EnumInt32& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::enums::EnumInt32& value, bool scope = true)
     {
         return FBE::JSON::to_json(writer, (int32_t)value);
     }
@@ -518,10 +518,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::enums::EnumUInt32>
+template <class TWriter>
+struct ValueWriter<TWriter, ::enums::EnumUInt32>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::enums::EnumUInt32& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::enums::EnumUInt32& value, bool scope = true)
     {
         return FBE::JSON::to_json(writer, (uint32_t)value);
     }
@@ -576,10 +576,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::enums::EnumInt64>
+template <class TWriter>
+struct ValueWriter<TWriter, ::enums::EnumInt64>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::enums::EnumInt64& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::enums::EnumInt64& value, bool scope = true)
     {
         return FBE::JSON::to_json(writer, (int64_t)value);
     }
@@ -634,10 +634,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::enums::EnumUInt64>
+template <class TWriter>
+struct ValueWriter<TWriter, ::enums::EnumUInt64>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::enums::EnumUInt64& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::enums::EnumUInt64& value, bool scope = true)
     {
         return FBE::JSON::to_json(writer, (uint64_t)value);
     }
@@ -1074,10 +1074,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::enums::Enums>
+template <class TWriter>
+struct ValueWriter<TWriter, ::enums::Enums>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::enums::Enums& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::enums::Enums& value, bool scope = true)
     {
         if (scope)
             if (!writer.StartObject())

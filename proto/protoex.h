@@ -51,10 +51,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::protoex::OrderSide>
+template <class TWriter>
+struct ValueWriter<TWriter, ::protoex::OrderSide>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::protoex::OrderSide& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::protoex::OrderSide& value, bool scope = true)
     {
         return FBE::JSON::to_json(writer, (uint8_t)value);
     }
@@ -105,10 +105,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::protoex::OrderType>
+template <class TWriter>
+struct ValueWriter<TWriter, ::protoex::OrderType>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::protoex::OrderType& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::protoex::OrderType& value, bool scope = true)
     {
         return FBE::JSON::to_json(writer, (uint8_t)value);
     }
@@ -206,10 +206,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::protoex::StateEx>
+template <class TWriter>
+struct ValueWriter<TWriter, ::protoex::StateEx>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::protoex::StateEx& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::protoex::StateEx& value, bool scope = true)
     {
         return FBE::JSON::to_json(writer, (uint8_t)value);
     }
@@ -361,10 +361,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::protoex::Order>
+template <class TWriter>
+struct ValueWriter<TWriter, ::protoex::Order>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::protoex::Order& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::protoex::Order& value, bool scope = true)
     {
         if (scope)
             if (!writer.StartObject())
@@ -521,10 +521,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::protoex::Balance>
+template <class TWriter>
+struct ValueWriter<TWriter, ::protoex::Balance>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::protoex::Balance& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::protoex::Balance& value, bool scope = true)
     {
         if (scope)
             if (!writer.StartObject())
@@ -686,10 +686,10 @@ namespace FBE {
 
 namespace JSON {
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, ::protoex::Account>
+template <class TWriter>
+struct ValueWriter<TWriter, ::protoex::Account>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::protoex::Account& value, bool scope = true)
+    static bool to_json(TWriter& writer, const ::protoex::Account& value, bool scope = true)
     {
         if (scope)
             if (!writer.StartObject())

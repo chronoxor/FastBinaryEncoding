@@ -4285,278 +4285,264 @@ protected:
 
 namespace JSON {
 
-template <class TOutputStream, typename T>
+template <class TWriter, typename T>
 struct KeyWriter
 {
-    static bool to_json_key(rapidjson::Writer<TOutputStream>& writer, const T& key)
+    static bool to_json_key(TWriter& writer, const T& key)
     {
         return writer.Key(std::to_string(key));
     }
 };
 
-template <class TOutputStream, typename T>
-bool to_json_key(rapidjson::Writer<TOutputStream>& writer, const T& key)
+template <class TWriter, typename T>
+bool to_json_key(TWriter& writer, const T& key)
 {
-    return KeyWriter<TOutputStream, T>::to_json_key(writer, key);
+    return KeyWriter<TWriter, T>::to_json_key(writer, key);
 }
 
-template <class TOutputStream>
-struct KeyWriter<TOutputStream, FBE::decimal_t>
+template <class TWriter>
+struct KeyWriter<TWriter, FBE::decimal_t>
 {
-    static bool to_json_key(rapidjson::Writer<TOutputStream>& writer, const FBE::decimal_t& key)
+    static bool to_json_key(TWriter& writer, const FBE::decimal_t& key)
     {
         return writer.Key(key.string());
     }
 };
 
-template <class TOutputStream>
-struct KeyWriter<TOutputStream, FBE::uuid_t>
+template <class TWriter>
+struct KeyWriter<TWriter, FBE::uuid_t>
 {
-    static bool to_json_key(rapidjson::Writer<TOutputStream>& writer, const FBE::uuid_t& key)
+    static bool to_json_key(TWriter& writer, const FBE::uuid_t& key)
     {
         return writer.Key(key.string());
     }
 };
 
-template <class TOutputStream>
-struct KeyWriter<TOutputStream, std::string>
+template <class TWriter>
+struct KeyWriter<TWriter, std::string>
 {
-    static bool to_json_key(rapidjson::Writer<TOutputStream>& writer, const std::string& key)
+    static bool to_json_key(TWriter& writer, const std::string& key)
     {
         return writer.Key(key);
     }
 };
 
-template <class TOutputStream, size_t N>
-struct KeyWriter<TOutputStream, char[N]>
+template <class TWriter, size_t N>
+struct KeyWriter<TWriter, char[N]>
 {
-    static bool to_json_key(rapidjson::Writer<TOutputStream>& writer, const char (&key)[N])
+    static bool to_json_key(TWriter& writer, const char (&key)[N])
     {
         return writer.Key(key, N - 1);
     }
 };
 
-template <class TOutputStream, typename T>
+template <class TWriter, typename T>
 struct ValueWriter
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const T& value, bool scope = true)
+    static bool to_json(TWriter& writer, const T& value, bool scope = true)
     {
         throw std::logic_error("Not implemented!");
     }
 };
 
-template <class TOutputStream, typename T>
-bool to_json(rapidjson::Writer<TOutputStream>& writer, const T& value, bool scope = true)
+template <class TWriter, typename T>
+bool to_json(TWriter& writer, const T& value, bool scope = true)
 {
-    return ValueWriter<TOutputStream, T>::to_json(writer, value, scope);
+    return ValueWriter<TWriter, T>::to_json(writer, value, scope);
 }
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, bool>
+template <class TWriter>
+struct ValueWriter<TWriter, bool>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const bool& value, bool scope = true)
+    static bool to_json(TWriter& writer, const bool& value, bool scope = true)
     {
         return writer.Bool(value);
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, char>
+template <class TWriter>
+struct ValueWriter<TWriter, char>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const char& value, bool scope = true)
+    static bool to_json(TWriter& writer, const char& value, bool scope = true)
     {
         return writer.Uint(value);
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, wchar_t>
+template <class TWriter>
+struct ValueWriter<TWriter, wchar_t>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const wchar_t& value, bool scope = true)
+    static bool to_json(TWriter& writer, const wchar_t& value, bool scope = true)
     {
         return writer.Uint(value);
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, int8_t>
+template <class TWriter>
+struct ValueWriter<TWriter, int8_t>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const int8_t& value, bool scope = true)
+    static bool to_json(TWriter& writer, const int8_t& value, bool scope = true)
     {
         return writer.Int(value);
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, uint8_t>
+template <class TWriter>
+struct ValueWriter<TWriter, uint8_t>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const uint8_t& value, bool scope = true)
+    static bool to_json(TWriter& writer, const uint8_t& value, bool scope = true)
     {
         return writer.Uint(value);
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, int16_t>
+template <class TWriter>
+struct ValueWriter<TWriter, int16_t>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const int16_t& value, bool scope = true)
+    static bool to_json(TWriter& writer, const int16_t& value, bool scope = true)
     {
         return writer.Int(value);
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, uint16_t>
+template <class TWriter>
+struct ValueWriter<TWriter, uint16_t>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const uint16_t& value, bool scope = true)
+    static bool to_json(TWriter& writer, const uint16_t& value, bool scope = true)
     {
         return writer.Uint(value);
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, int32_t>
+template <class TWriter>
+struct ValueWriter<TWriter, int32_t>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const int32_t& value, bool scope = true)
+    static bool to_json(TWriter& writer, const int32_t& value, bool scope = true)
     {
         return writer.Int(value);
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, uint32_t>
+template <class TWriter>
+struct ValueWriter<TWriter, uint32_t>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const uint32_t& value, bool scope = true)
+    static bool to_json(TWriter& writer, const uint32_t& value, bool scope = true)
     {
         return writer.Uint(value);
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, int64_t>
+template <class TWriter>
+struct ValueWriter<TWriter, int64_t>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const int64_t& value, bool scope = true)
+    static bool to_json(TWriter& writer, const int64_t& value, bool scope = true)
     {
         return writer.Int64(value);
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, uint64_t>
+template <class TWriter>
+struct ValueWriter<TWriter, uint64_t>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const uint64_t& value, bool scope = true)
+    static bool to_json(TWriter& writer, const uint64_t& value, bool scope = true)
     {
         return writer.Uint64(value);
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, float>
+template <class TWriter>
+struct ValueWriter<TWriter, float>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const float& value, bool scope = true)
+    static bool to_json(TWriter& writer, const float& value, bool scope = true)
     {
         return writer.Double(value);
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, double>
+template <class TWriter>
+struct ValueWriter<TWriter, double>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const double& value, bool scope = true)
+    static bool to_json(TWriter& writer, const double& value, bool scope = true)
     {
         return writer.Double(value);
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, FBE::decimal_t>
+template <class TWriter>
+struct ValueWriter<TWriter, FBE::decimal_t>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const FBE::decimal_t& value, bool scope = true)
+    static bool to_json(TWriter& writer, const FBE::decimal_t& value, bool scope = true)
     {
         return writer.String(value.string());
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, FBE::uuid_t>
+template <class TWriter>
+struct ValueWriter<TWriter, FBE::uuid_t>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const FBE::uuid_t& value, bool scope = true)
+    static bool to_json(TWriter& writer, const FBE::uuid_t& value, bool scope = true)
     {
         return writer.String(value.string());
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, std::string>
+template <class TWriter>
+struct ValueWriter<TWriter, std::string>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::string& value, bool scope = true)
+    static bool to_json(TWriter& writer, const std::string& value, bool scope = true)
     {
         return writer.String(value);
     }
 };
 
-template <class TOutputStream, std::size_t N>
-struct ValueWriter<TOutputStream, char[N]>
+template <class TWriter, std::size_t N>
+struct ValueWriter<TWriter, char[N]>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const char (&value)[N], bool scope = true)
+    static bool to_json(TWriter& writer, const char (&value)[N], bool scope = true)
     {
         return writer.String(value, N);
     }
 };
 
-template <class TOutputStream, typename T>
-struct ValueWriter<TOutputStream, std::optional<T>>
+template <class TWriter, typename T>
+struct ValueWriter<TWriter, std::optional<T>>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::optional<T>& value, bool scope = true)
+    static bool to_json(TWriter& writer, const std::optional<T>& value, bool scope = true)
     {
         if (value.has_value())
-            return ValueWriter<TOutputStream, T>::to_json(writer, value.value(), true);
+            return ValueWriter<TWriter, T>::to_json(writer, value.value(), true);
         else
             return writer.Null();
     }
 };
 
-template <class TOutputStream>
-struct ValueWriter<TOutputStream, buffer_t>
+template <class TWriter>
+struct ValueWriter<TWriter, buffer_t>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const buffer_t& values, bool scope = true)
+    static bool to_json(TWriter& writer, const buffer_t& values, bool scope = true)
     {
         return writer.String(values.base64encode());
     }
 };
 
-template <class TOutputStream, typename T, size_t N>
-struct ValueWriter<TOutputStream, std::array<T, N>>
+template <class TWriter, typename T, size_t N>
+struct ValueWriter<TWriter, std::array<T, N>>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::array<T, N>& values, bool scope = true)
+    static bool to_json(TWriter& writer, const std::array<T, N>& values, bool scope = true)
     {
         writer.StartArray();
         for (const auto& value : values)
-            if (!ValueWriter<TOutputStream, T>::to_json(writer, value, true))
+            if (!ValueWriter<TWriter, T>::to_json(writer, value, true))
                 return false;
         writer.EndArray();
         return true;
     }
 };
 
-template <class TOutputStream, typename T>
-struct ValueWriter<TOutputStream, std::vector<T>>
+template <class TWriter, typename T>
+struct ValueWriter<TWriter, std::vector<T>>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::vector<T>& values, bool scope = true)
-    {
-        writer.StartArray();
-        for (const auto& value : values)
-            if (!FBE::JSON::to_json(writer, value, true))
-                return false;
-        writer.EndArray();
-        return true;
-    }
-};
-
-template <class TOutputStream, typename T>
-struct ValueWriter<TOutputStream, std::list<T>>
-{
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::list<T>& values, bool scope = true)
+    static bool to_json(TWriter& writer, const std::vector<T>& values, bool scope = true)
     {
         writer.StartArray();
         for (const auto& value : values)
@@ -4567,10 +4553,10 @@ struct ValueWriter<TOutputStream, std::list<T>>
     }
 };
 
-template <class TOutputStream, typename T>
-struct ValueWriter<TOutputStream, std::set<T>>
+template <class TWriter, typename T>
+struct ValueWriter<TWriter, std::list<T>>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::set<T>& values, bool scope = true)
+    static bool to_json(TWriter& writer, const std::list<T>& values, bool scope = true)
     {
         writer.StartArray();
         for (const auto& value : values)
@@ -4581,10 +4567,24 @@ struct ValueWriter<TOutputStream, std::set<T>>
     }
 };
 
-template <class TOutputStream, typename TKey, typename TValue>
-struct ValueWriter<TOutputStream, std::map<TKey, TValue>>
+template <class TWriter, typename T>
+struct ValueWriter<TWriter, std::set<T>>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::map<TKey, TValue>& values, bool scope = true)
+    static bool to_json(TWriter& writer, const std::set<T>& values, bool scope = true)
+    {
+        writer.StartArray();
+        for (const auto& value : values)
+            if (!FBE::JSON::to_json(writer, value, true))
+                return false;
+        writer.EndArray();
+        return true;
+    }
+};
+
+template <class TWriter, typename TKey, typename TValue>
+struct ValueWriter<TWriter, std::map<TKey, TValue>>
+{
+    static bool to_json(TWriter& writer, const std::map<TKey, TValue>& values, bool scope = true)
     {
         writer.StartObject();
         for (const auto& value : values)
@@ -4599,10 +4599,10 @@ struct ValueWriter<TOutputStream, std::map<TKey, TValue>>
     }
 };
 
-template <class TOutputStream, typename TKey, typename TValue>
-struct ValueWriter<TOutputStream, std::unordered_map<TKey, TValue>>
+template <class TWriter, typename TKey, typename TValue>
+struct ValueWriter<TWriter, std::unordered_map<TKey, TValue>>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::unordered_map<TKey, TValue>& values, bool scope = true)
+    static bool to_json(TWriter& writer, const std::unordered_map<TKey, TValue>& values, bool scope = true)
     {
         writer.StartObject();
         for (const auto& value : values)
