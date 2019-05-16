@@ -8588,7 +8588,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         WriteLine();
         WriteLineIndent("for (auto& request : _requests_by_id_" + response_field + ")");
         Indent(1);
-        WriteLineIndent("std::get<2>(request.second).set_exception(std::make_exception_ptr(std::runtime_error(\"Reset client!\")));");
+        WriteLineIndent("std::get<1>(request.second).set_exception(std::make_exception_ptr(std::runtime_error(\"Reset client!\")));");
         Indent(-1);
         WriteLineIndent("_requests_by_id_" + response_field + ".clear();");
         WriteLineIndent("_requests_by_timeout_" + response_field + ".clear();");
