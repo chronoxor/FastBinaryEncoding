@@ -199,7 +199,7 @@ inline buffer_t buffer_t::base64decode(const std::string& str)
     buffer_t result;
 
     std::vector<int> pattern(256, -1);
-    for (int i=0; i < 64; ++i)
+    for (int i = 0; i < 64; ++i)
         pattern[base64[i]] = i;
 
     int val = 0;
