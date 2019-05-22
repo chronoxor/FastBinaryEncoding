@@ -289,6 +289,7 @@ private:
 
 inline std::string buffer_t::base64encode() const
 {
+    const char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
     std::string result;
 
     int val = 0;
@@ -299,13 +300,13 @@ inline std::string buffer_t::base64encode() const
         valb += 8;
         while (valb >= 0)
         {
-            result.push_back("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"[(val >> valb) & 0x3F]);
+            result.push_back(base64[(val >> valb) & 0x3F]);
             valb -= 6;
         }
     }
 
     if (valb > -6)
-        result.push_back("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"[((val << 8) >> (valb + 8)) & 0x3F]);
+        result.push_back(base64[((val << 8) >> (valb + 8)) & 0x3F]);
 
     while (result.size() % 4)
         result.push_back('=');
@@ -315,20 +316,21 @@ inline std::string buffer_t::base64encode() const
 
 inline buffer_t buffer_t::base64decode(const std::string& str)
 {
+    const char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
     buffer_t result;
 
-    std::vector<int> T(256,-1);
+    std::vector<int> pattern(256, -1);
     for (int i=0; i < 64; ++i)
-        T["ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"[i]] = i;
+        pattern[base64[i]] = i;
 
     int val = 0;
     int valb = -8;
     for (auto c : str)
     {
-        if (T[c] == -1)
+        if (pattern[c] == -1)
             break;
 
-        val = (val << 6) + T[c];
+        val = (val << 6) + pattern[c];
         valb += 6;
 
         if (valb >= 0)
