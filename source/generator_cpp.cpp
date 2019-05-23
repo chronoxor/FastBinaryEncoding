@@ -4415,11 +4415,11 @@ public:
     // Receive data
     void receive(const void* data, size_t size)
     {
-        assert((data != nullptr) && "Invalid buffer!");
-        if (data == nullptr)
+        if (size == 0)
             return;
 
-        if (size == 0)
+        assert((data != nullptr) && "Invalid buffer!");
+        if (data == nullptr)
             return;
 
         // Storage buffer
