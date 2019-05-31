@@ -8314,7 +8314,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("this->_timestamp = (current <= this->_timestamp) ? this->_timestamp + 1 : current;");
                     WriteLine();
                     WriteLineIndent("// Register the request");
-                    WriteLineIndent("_requests_by_id_" + response_field + ".insert(std::make_pair(value.id, std::make_tuple(this->_timestamp, timeout, std::move(promise))));");
+                    WriteLineIndent("_requests_by_id_" + response_field + ".insert(std::make_pair(value.id, std::make_tuple(this->_timestamp, timeout * 1000000, std::move(promise))));");
                     WriteLineIndent("_requests_by_timestamp_" + response_field + ".insert(std::make_pair(this->_timestamp, value.id));");
                     Indent(-1);
                     WriteLineIndent("}");
@@ -8661,7 +8661,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             std::string response_field = response;
             CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
-            WriteLineIndent("std::unordered_map<FBE::uuid_t, std::tuple<uint64_t, size_t, std::promise<" + response_name + ">>> _requests_by_id_" + response_field + ";");
+            WriteLineIndent("std::unordered_map<FBE::uuid_t, std::tuple<uint64_t, uint64_t, std::promise<" + response_name + ">>> _requests_by_id_" + response_field + ";");
             WriteLineIndent("std::map<uint64_t, FBE::uuid_t> _requests_by_timestamp_" + response_field + ";");
         }
     }
