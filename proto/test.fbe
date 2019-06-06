@@ -2,6 +2,9 @@
    Test protocol
 */
 
+// Domain declaration
+domain com.chronoxor
+
 // Package declaration
 package test offset 100
 

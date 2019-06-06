@@ -2,6 +2,9 @@
    Extended protocol description
 */
 
+// Domain declaration
+domain com.chronoxor
+
 // Package declaration
 package protoex offset 10
 

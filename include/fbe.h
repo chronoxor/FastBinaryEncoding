@@ -180,6 +180,7 @@ struct Import
 struct Package
 {
     int offset;
+    std::shared_ptr<std::string> domain;
     std::shared_ptr<std::string> name;
     std::shared_ptr<Import> import;
     std::shared_ptr<Statements> body;

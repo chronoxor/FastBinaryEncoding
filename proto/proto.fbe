@@ -2,6 +2,9 @@
    Protocol description
 */
 
+// Domain declaration
+domain com.chronoxor
+
 // Package declaration
 package proto
 

@@ -37,11 +37,12 @@ int yyerror(const std::string& msg);
 }
 
 // Define our terminal symbols (tokens)
-%token <token>  PACKAGE OFFSET IMPORT ENUM FLAGS STRUCT BASE ID KEY REQ RES REJ
+%token <token>  PDOMAIN PACKAGE OFFSET IMPORT ENUM FLAGS STRUCT BASE ID KEY REQ RES REJ
 %token <string> BOOL BYTE BYTES CHAR WCHAR INT8 UINT8 INT16 UINT16 INT32 UINT32 INT64 UINT64 FLOAT DOUBLE DECIMAL STRING USTRING TIMESTAMP UUID
 %token <string> CONST_TRUE CONST_FALSE CONST_NULL CONST_EPOCH CONST_UTC CONST_UUID0 CONST_UUID1 CONST_UUID4 CONST_CHAR CONST_INT CONST_FLOAT CONST_STRING
 %token <string> IDENTIFIER
 
+%type <string> domain
 %type <package> package
 %type <import> import
 %type <string> package_name
@@ -81,8 +82,13 @@ int yyerror(const std::string& msg);
 %%
 
 fbe
-    : package statements                                                        { FBE::Package::root.reset($1); FBE::Package::root->body.reset($2); FBE::Package::root->initialize(); }
-    | package import statements                                                 { FBE::Package::root.reset($1); FBE::Package::root->import.reset($2); FBE::Package::root->body.reset($3); FBE::Package::root->initialize(); }
+    : domain package statements                                                 { FBE::Package::root.reset($2); FBE::Package::root->domain.reset($1); FBE::Package::root->body.reset($3); FBE::Package::root->initialize(); }
+    | domain package import statements                                          { FBE::Package::root.reset($2); FBE::Package::root->domain.reset($1); FBE::Package::root->import.reset($3); FBE::Package::root->body.reset($4); FBE::Package::root->initialize(); }
+    ;
+
+domain
+    :                                                                           { $$ = new std::string(); }
+    | PDOMAIN type_name                                                         { $$ = $2; }
     ;
 
 package

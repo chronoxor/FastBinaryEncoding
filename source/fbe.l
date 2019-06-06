@@ -37,6 +37,7 @@ int yyerror(const std::string& msg);
 "//"[^\n]*              { /* Single line comment */ }
 "/*"[^*]*|[*]*"*/"      { /* Multilines comment */ }
 
+"domain"                { yycount(); return yytoken(PDOMAIN); }
 "package"               { yycount(); return yytoken(PACKAGE); }
 "offset"                { yycount(); return yytoken(OFFSET); }
 "import"                { yycount(); return yytoken(IMPORT); }

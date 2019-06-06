@@ -2,6 +2,9 @@
    Enums protocol
 */
 
+// Domain declaration
+domain com.chronoxor
+
 // Package declaration
 package enums
 
