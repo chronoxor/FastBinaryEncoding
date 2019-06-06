@@ -366,19 +366,14 @@ struct ValueReader<TJson, ::proto::Order>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.id, "id"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.symbol, "symbol"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.side, "side"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.type, "type"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.price, "price"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.volume, "volume"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.id, "id");
+        result &= FBE::JSON::from_json(json, value.symbol, "symbol");
+        result &= FBE::JSON::from_json(json, value.side, "side");
+        result &= FBE::JSON::from_json(json, value.type, "type");
+        result &= FBE::JSON::from_json(json, value.price, "price");
+        result &= FBE::JSON::from_json(json, value.volume, "volume");
+        return result;
     }
 };
 
@@ -510,11 +505,10 @@ struct ValueReader<TJson, ::proto::Balance>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.currency, "currency"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.amount, "amount"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.currency, "currency");
+        result &= FBE::JSON::from_json(json, value.amount, "amount");
+        return result;
     }
 };
 
@@ -683,19 +677,14 @@ struct ValueReader<TJson, ::proto::Account>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.id, "id"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.name, "name"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.state, "state"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.wallet, "wallet"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.asset, "asset"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.orders, "orders"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.id, "id");
+        result &= FBE::JSON::from_json(json, value.name, "name");
+        result &= FBE::JSON::from_json(json, value.state, "state");
+        result &= FBE::JSON::from_json(json, value.wallet, "wallet");
+        result &= FBE::JSON::from_json(json, value.asset, "asset");
+        result &= FBE::JSON::from_json(json, value.orders, "orders");
+        return result;
     }
 };
 

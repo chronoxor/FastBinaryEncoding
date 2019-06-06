@@ -399,23 +399,16 @@ struct ValueReader<TJson, ::protoex::Order>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.id, "id"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.symbol, "symbol"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.side, "side"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.type, "type"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.price, "price"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.volume, "volume"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.tp, "tp"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.sl, "sl"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.id, "id");
+        result &= FBE::JSON::from_json(json, value.symbol, "symbol");
+        result &= FBE::JSON::from_json(json, value.side, "side");
+        result &= FBE::JSON::from_json(json, value.type, "type");
+        result &= FBE::JSON::from_json(json, value.price, "price");
+        result &= FBE::JSON::from_json(json, value.volume, "volume");
+        result &= FBE::JSON::from_json(json, value.tp, "tp");
+        result &= FBE::JSON::from_json(json, value.sl, "sl");
+        return result;
     }
 };
 
@@ -547,11 +540,10 @@ struct ValueReader<TJson, ::protoex::Balance>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, (::proto::Balance&)value))
-            return false;
-        if (!FBE::JSON::from_json(json, value.locked, "locked"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, (::proto::Balance&)value);
+        result &= FBE::JSON::from_json(json, value.locked, "locked");
+        return result;
     }
 };
 
@@ -720,19 +712,14 @@ struct ValueReader<TJson, ::protoex::Account>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.id, "id"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.name, "name"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.state, "state"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.wallet, "wallet"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.asset, "asset"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.orders, "orders"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.id, "id");
+        result &= FBE::JSON::from_json(json, value.name, "name");
+        result &= FBE::JSON::from_json(json, value.state, "state");
+        result &= FBE::JSON::from_json(json, value.wallet, "wallet");
+        result &= FBE::JSON::from_json(json, value.asset, "asset");
+        result &= FBE::JSON::from_json(json, value.orders, "orders");
+        return result;
     }
 };
 

@@ -850,97 +850,53 @@ struct ValueReader<TJson, ::test::StructSimple>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.id, "id"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f1, "f1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f2, "f2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f3, "f3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f4, "f4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f5, "f5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f6, "f6"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f7, "f7"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f8, "f8"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f9, "f9"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f10, "f10"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f11, "f11"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f12, "f12"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f13, "f13"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f14, "f14"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f15, "f15"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f16, "f16"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f17, "f17"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f18, "f18"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f19, "f19"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f20, "f20"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f21, "f21"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f22, "f22"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f23, "f23"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f24, "f24"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f25, "f25"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f26, "f26"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f27, "f27"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f28, "f28"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f29, "f29"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f30, "f30"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f31, "f31"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f32, "f32"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f33, "f33"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f34, "f34"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f35, "f35"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f36, "f36"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f37, "f37"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f38, "f38"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f39, "f39"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f40, "f40"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f41, "f41"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f42, "f42"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f43, "f43"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f44, "f44"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.id, "id");
+        result &= FBE::JSON::from_json(json, value.f1, "f1");
+        result &= FBE::JSON::from_json(json, value.f2, "f2");
+        result &= FBE::JSON::from_json(json, value.f3, "f3");
+        result &= FBE::JSON::from_json(json, value.f4, "f4");
+        result &= FBE::JSON::from_json(json, value.f5, "f5");
+        result &= FBE::JSON::from_json(json, value.f6, "f6");
+        result &= FBE::JSON::from_json(json, value.f7, "f7");
+        result &= FBE::JSON::from_json(json, value.f8, "f8");
+        result &= FBE::JSON::from_json(json, value.f9, "f9");
+        result &= FBE::JSON::from_json(json, value.f10, "f10");
+        result &= FBE::JSON::from_json(json, value.f11, "f11");
+        result &= FBE::JSON::from_json(json, value.f12, "f12");
+        result &= FBE::JSON::from_json(json, value.f13, "f13");
+        result &= FBE::JSON::from_json(json, value.f14, "f14");
+        result &= FBE::JSON::from_json(json, value.f15, "f15");
+        result &= FBE::JSON::from_json(json, value.f16, "f16");
+        result &= FBE::JSON::from_json(json, value.f17, "f17");
+        result &= FBE::JSON::from_json(json, value.f18, "f18");
+        result &= FBE::JSON::from_json(json, value.f19, "f19");
+        result &= FBE::JSON::from_json(json, value.f20, "f20");
+        result &= FBE::JSON::from_json(json, value.f21, "f21");
+        result &= FBE::JSON::from_json(json, value.f22, "f22");
+        result &= FBE::JSON::from_json(json, value.f23, "f23");
+        result &= FBE::JSON::from_json(json, value.f24, "f24");
+        result &= FBE::JSON::from_json(json, value.f25, "f25");
+        result &= FBE::JSON::from_json(json, value.f26, "f26");
+        result &= FBE::JSON::from_json(json, value.f27, "f27");
+        result &= FBE::JSON::from_json(json, value.f28, "f28");
+        result &= FBE::JSON::from_json(json, value.f29, "f29");
+        result &= FBE::JSON::from_json(json, value.f30, "f30");
+        result &= FBE::JSON::from_json(json, value.f31, "f31");
+        result &= FBE::JSON::from_json(json, value.f32, "f32");
+        result &= FBE::JSON::from_json(json, value.f33, "f33");
+        result &= FBE::JSON::from_json(json, value.f34, "f34");
+        result &= FBE::JSON::from_json(json, value.f35, "f35");
+        result &= FBE::JSON::from_json(json, value.f36, "f36");
+        result &= FBE::JSON::from_json(json, value.f37, "f37");
+        result &= FBE::JSON::from_json(json, value.f38, "f38");
+        result &= FBE::JSON::from_json(json, value.f39, "f39");
+        result &= FBE::JSON::from_json(json, value.f40, "f40");
+        result &= FBE::JSON::from_json(json, value.f41, "f41");
+        result &= FBE::JSON::from_json(json, value.f42, "f42");
+        result &= FBE::JSON::from_json(json, value.f43, "f43");
+        result &= FBE::JSON::from_json(json, value.f44, "f44");
+        return result;
     }
 };
 
@@ -1527,141 +1483,75 @@ struct ValueReader<TJson, ::test::StructOptional>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, (::test::StructSimple&)value))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f100, "f100"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f101, "f101"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f102, "f102"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f103, "f103"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f104, "f104"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f105, "f105"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f106, "f106"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f107, "f107"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f108, "f108"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f109, "f109"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f110, "f110"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f111, "f111"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f112, "f112"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f113, "f113"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f114, "f114"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f115, "f115"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f116, "f116"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f117, "f117"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f118, "f118"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f119, "f119"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f120, "f120"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f121, "f121"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f122, "f122"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f123, "f123"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f124, "f124"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f125, "f125"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f126, "f126"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f127, "f127"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f128, "f128"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f129, "f129"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f130, "f130"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f131, "f131"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f132, "f132"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f133, "f133"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f134, "f134"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f135, "f135"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f136, "f136"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f137, "f137"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f138, "f138"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f139, "f139"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f140, "f140"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f141, "f141"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f142, "f142"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f143, "f143"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f144, "f144"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f145, "f145"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f146, "f146"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f147, "f147"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f148, "f148"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f149, "f149"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f150, "f150"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f151, "f151"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f152, "f152"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f153, "f153"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f154, "f154"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f155, "f155"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f156, "f156"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f157, "f157"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f158, "f158"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f159, "f159"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f160, "f160"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f161, "f161"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f162, "f162"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f163, "f163"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f164, "f164"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f165, "f165"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, (::test::StructSimple&)value);
+        result &= FBE::JSON::from_json(json, value.f100, "f100");
+        result &= FBE::JSON::from_json(json, value.f101, "f101");
+        result &= FBE::JSON::from_json(json, value.f102, "f102");
+        result &= FBE::JSON::from_json(json, value.f103, "f103");
+        result &= FBE::JSON::from_json(json, value.f104, "f104");
+        result &= FBE::JSON::from_json(json, value.f105, "f105");
+        result &= FBE::JSON::from_json(json, value.f106, "f106");
+        result &= FBE::JSON::from_json(json, value.f107, "f107");
+        result &= FBE::JSON::from_json(json, value.f108, "f108");
+        result &= FBE::JSON::from_json(json, value.f109, "f109");
+        result &= FBE::JSON::from_json(json, value.f110, "f110");
+        result &= FBE::JSON::from_json(json, value.f111, "f111");
+        result &= FBE::JSON::from_json(json, value.f112, "f112");
+        result &= FBE::JSON::from_json(json, value.f113, "f113");
+        result &= FBE::JSON::from_json(json, value.f114, "f114");
+        result &= FBE::JSON::from_json(json, value.f115, "f115");
+        result &= FBE::JSON::from_json(json, value.f116, "f116");
+        result &= FBE::JSON::from_json(json, value.f117, "f117");
+        result &= FBE::JSON::from_json(json, value.f118, "f118");
+        result &= FBE::JSON::from_json(json, value.f119, "f119");
+        result &= FBE::JSON::from_json(json, value.f120, "f120");
+        result &= FBE::JSON::from_json(json, value.f121, "f121");
+        result &= FBE::JSON::from_json(json, value.f122, "f122");
+        result &= FBE::JSON::from_json(json, value.f123, "f123");
+        result &= FBE::JSON::from_json(json, value.f124, "f124");
+        result &= FBE::JSON::from_json(json, value.f125, "f125");
+        result &= FBE::JSON::from_json(json, value.f126, "f126");
+        result &= FBE::JSON::from_json(json, value.f127, "f127");
+        result &= FBE::JSON::from_json(json, value.f128, "f128");
+        result &= FBE::JSON::from_json(json, value.f129, "f129");
+        result &= FBE::JSON::from_json(json, value.f130, "f130");
+        result &= FBE::JSON::from_json(json, value.f131, "f131");
+        result &= FBE::JSON::from_json(json, value.f132, "f132");
+        result &= FBE::JSON::from_json(json, value.f133, "f133");
+        result &= FBE::JSON::from_json(json, value.f134, "f134");
+        result &= FBE::JSON::from_json(json, value.f135, "f135");
+        result &= FBE::JSON::from_json(json, value.f136, "f136");
+        result &= FBE::JSON::from_json(json, value.f137, "f137");
+        result &= FBE::JSON::from_json(json, value.f138, "f138");
+        result &= FBE::JSON::from_json(json, value.f139, "f139");
+        result &= FBE::JSON::from_json(json, value.f140, "f140");
+        result &= FBE::JSON::from_json(json, value.f141, "f141");
+        result &= FBE::JSON::from_json(json, value.f142, "f142");
+        result &= FBE::JSON::from_json(json, value.f143, "f143");
+        result &= FBE::JSON::from_json(json, value.f144, "f144");
+        result &= FBE::JSON::from_json(json, value.f145, "f145");
+        result &= FBE::JSON::from_json(json, value.f146, "f146");
+        result &= FBE::JSON::from_json(json, value.f147, "f147");
+        result &= FBE::JSON::from_json(json, value.f148, "f148");
+        result &= FBE::JSON::from_json(json, value.f149, "f149");
+        result &= FBE::JSON::from_json(json, value.f150, "f150");
+        result &= FBE::JSON::from_json(json, value.f151, "f151");
+        result &= FBE::JSON::from_json(json, value.f152, "f152");
+        result &= FBE::JSON::from_json(json, value.f153, "f153");
+        result &= FBE::JSON::from_json(json, value.f154, "f154");
+        result &= FBE::JSON::from_json(json, value.f155, "f155");
+        result &= FBE::JSON::from_json(json, value.f156, "f156");
+        result &= FBE::JSON::from_json(json, value.f157, "f157");
+        result &= FBE::JSON::from_json(json, value.f158, "f158");
+        result &= FBE::JSON::from_json(json, value.f159, "f159");
+        result &= FBE::JSON::from_json(json, value.f160, "f160");
+        result &= FBE::JSON::from_json(json, value.f161, "f161");
+        result &= FBE::JSON::from_json(json, value.f162, "f162");
+        result &= FBE::JSON::from_json(json, value.f163, "f163");
+        result &= FBE::JSON::from_json(json, value.f164, "f164");
+        result &= FBE::JSON::from_json(json, value.f165, "f165");
+        return result;
     }
 };
 
@@ -1870,33 +1760,21 @@ struct ValueReader<TJson, ::test::StructNested>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, (::test::StructOptional&)value))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f1000, "f1000"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f1001, "f1001"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f1002, "f1002"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f1003, "f1003"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f1004, "f1004"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f1005, "f1005"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f1006, "f1006"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f1007, "f1007"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f1008, "f1008"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f1009, "f1009"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f1010, "f1010"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f1011, "f1011"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, (::test::StructOptional&)value);
+        result &= FBE::JSON::from_json(json, value.f1000, "f1000");
+        result &= FBE::JSON::from_json(json, value.f1001, "f1001");
+        result &= FBE::JSON::from_json(json, value.f1002, "f1002");
+        result &= FBE::JSON::from_json(json, value.f1003, "f1003");
+        result &= FBE::JSON::from_json(json, value.f1004, "f1004");
+        result &= FBE::JSON::from_json(json, value.f1005, "f1005");
+        result &= FBE::JSON::from_json(json, value.f1006, "f1006");
+        result &= FBE::JSON::from_json(json, value.f1007, "f1007");
+        result &= FBE::JSON::from_json(json, value.f1008, "f1008");
+        result &= FBE::JSON::from_json(json, value.f1009, "f1009");
+        result &= FBE::JSON::from_json(json, value.f1010, "f1010");
+        result &= FBE::JSON::from_json(json, value.f1011, "f1011");
+        return result;
     }
 };
 
@@ -2030,13 +1908,11 @@ struct ValueReader<TJson, ::test::StructBytes>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.f1, "f1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f2, "f2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f3, "f3"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.f1, "f1");
+        result &= FBE::JSON::from_json(json, value.f2, "f2");
+        result &= FBE::JSON::from_json(json, value.f3, "f3");
+        return result;
     }
 };
 
@@ -2309,27 +2185,18 @@ struct ValueReader<TJson, ::test::StructArray>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.f1, "f1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f2, "f2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f3, "f3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f4, "f4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f5, "f5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f6, "f6"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f7, "f7"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f8, "f8"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f9, "f9"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f10, "f10"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.f1, "f1");
+        result &= FBE::JSON::from_json(json, value.f2, "f2");
+        result &= FBE::JSON::from_json(json, value.f3, "f3");
+        result &= FBE::JSON::from_json(json, value.f4, "f4");
+        result &= FBE::JSON::from_json(json, value.f5, "f5");
+        result &= FBE::JSON::from_json(json, value.f6, "f6");
+        result &= FBE::JSON::from_json(json, value.f7, "f7");
+        result &= FBE::JSON::from_json(json, value.f8, "f8");
+        result &= FBE::JSON::from_json(json, value.f9, "f9");
+        result &= FBE::JSON::from_json(json, value.f10, "f10");
+        return result;
     }
 };
 
@@ -2602,27 +2469,18 @@ struct ValueReader<TJson, ::test::StructVector>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.f1, "f1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f2, "f2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f3, "f3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f4, "f4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f5, "f5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f6, "f6"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f7, "f7"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f8, "f8"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f9, "f9"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f10, "f10"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.f1, "f1");
+        result &= FBE::JSON::from_json(json, value.f2, "f2");
+        result &= FBE::JSON::from_json(json, value.f3, "f3");
+        result &= FBE::JSON::from_json(json, value.f4, "f4");
+        result &= FBE::JSON::from_json(json, value.f5, "f5");
+        result &= FBE::JSON::from_json(json, value.f6, "f6");
+        result &= FBE::JSON::from_json(json, value.f7, "f7");
+        result &= FBE::JSON::from_json(json, value.f8, "f8");
+        result &= FBE::JSON::from_json(json, value.f9, "f9");
+        result &= FBE::JSON::from_json(json, value.f10, "f10");
+        return result;
     }
 };
 
@@ -2895,27 +2753,18 @@ struct ValueReader<TJson, ::test::StructList>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.f1, "f1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f2, "f2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f3, "f3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f4, "f4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f5, "f5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f6, "f6"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f7, "f7"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f8, "f8"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f9, "f9"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f10, "f10"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.f1, "f1");
+        result &= FBE::JSON::from_json(json, value.f2, "f2");
+        result &= FBE::JSON::from_json(json, value.f3, "f3");
+        result &= FBE::JSON::from_json(json, value.f4, "f4");
+        result &= FBE::JSON::from_json(json, value.f5, "f5");
+        result &= FBE::JSON::from_json(json, value.f6, "f6");
+        result &= FBE::JSON::from_json(json, value.f7, "f7");
+        result &= FBE::JSON::from_json(json, value.f8, "f8");
+        result &= FBE::JSON::from_json(json, value.f9, "f9");
+        result &= FBE::JSON::from_json(json, value.f10, "f10");
+        return result;
     }
 };
 
@@ -3092,15 +2941,12 @@ struct ValueReader<TJson, ::test::StructSet>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.f1, "f1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f2, "f2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f3, "f3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f4, "f4"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.f1, "f1");
+        result &= FBE::JSON::from_json(json, value.f2, "f2");
+        result &= FBE::JSON::from_json(json, value.f3, "f3");
+        result &= FBE::JSON::from_json(json, value.f4, "f4");
+        return result;
     }
 };
 
@@ -3393,27 +3239,18 @@ struct ValueReader<TJson, ::test::StructMap>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.f1, "f1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f2, "f2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f3, "f3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f4, "f4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f5, "f5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f6, "f6"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f7, "f7"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f8, "f8"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f9, "f9"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f10, "f10"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.f1, "f1");
+        result &= FBE::JSON::from_json(json, value.f2, "f2");
+        result &= FBE::JSON::from_json(json, value.f3, "f3");
+        result &= FBE::JSON::from_json(json, value.f4, "f4");
+        result &= FBE::JSON::from_json(json, value.f5, "f5");
+        result &= FBE::JSON::from_json(json, value.f6, "f6");
+        result &= FBE::JSON::from_json(json, value.f7, "f7");
+        result &= FBE::JSON::from_json(json, value.f8, "f8");
+        result &= FBE::JSON::from_json(json, value.f9, "f9");
+        result &= FBE::JSON::from_json(json, value.f10, "f10");
+        return result;
     }
 };
 
@@ -3706,27 +3543,18 @@ struct ValueReader<TJson, ::test::StructHash>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.f1, "f1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f2, "f2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f3, "f3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f4, "f4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f5, "f5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f6, "f6"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f7, "f7"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f8, "f8"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f9, "f9"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f10, "f10"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.f1, "f1");
+        result &= FBE::JSON::from_json(json, value.f2, "f2");
+        result &= FBE::JSON::from_json(json, value.f3, "f3");
+        result &= FBE::JSON::from_json(json, value.f4, "f4");
+        result &= FBE::JSON::from_json(json, value.f5, "f5");
+        result &= FBE::JSON::from_json(json, value.f6, "f6");
+        result &= FBE::JSON::from_json(json, value.f7, "f7");
+        result &= FBE::JSON::from_json(json, value.f8, "f8");
+        result &= FBE::JSON::from_json(json, value.f9, "f9");
+        result &= FBE::JSON::from_json(json, value.f10, "f10");
+        return result;
     }
 };
 
@@ -3875,11 +3703,10 @@ struct ValueReader<TJson, ::test::StructHashEx>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.f1, "f1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.f2, "f2"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.f1, "f1");
+        result &= FBE::JSON::from_json(json, value.f2, "f2");
+        return result;
     }
 };
 
@@ -3990,7 +3817,8 @@ struct ValueReader<TJson, ::test::StructEmpty>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        return true;
+        bool result = true;
+        return result;
     }
 };
 

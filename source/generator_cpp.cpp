@@ -6969,24 +6969,13 @@ void GeneratorCpp::GenerateStructJson(const std::shared_ptr<Package>& p, const s
     Indent(1);
     WriteLineIndent("return FBE::JSON::from_json_child(json, value, key);");
     Indent(-1);
+    WriteLineIndent("bool result = true;");
     if (s->base && !s->base->empty())
-    {
-        WriteLineIndent("if (!FBE::JSON::from_json(json, (" + ConvertTypeName(*p->name, *s->base, false) + "&)value))");
-        Indent(1);
-        WriteLineIndent("return false;");
-        Indent(-1);
-    }
+        WriteLineIndent("result &= FBE::JSON::from_json(json, (" + ConvertTypeName(*p->name, *s->base, false) + "&)value);");
     if (s->body)
-    {
         for (const auto& field : s->body->fields)
-        {
-            WriteLineIndent("if (!FBE::JSON::from_json(json, value." + *field->name + ", \"" + *field->name + "\"))");
-            Indent(1);
-            WriteLineIndent("return false;");
-            Indent(-1);
-        }
-    }
-    WriteLineIndent("return true;");
+            WriteLineIndent("result &= FBE::JSON::from_json(json, value." + *field->name + ", \"" + *field->name + "\");");
+    WriteLineIndent("return result;");
     Indent(-1);
     WriteLineIndent("}");
     Indent(-1);

@@ -1228,139 +1228,74 @@ struct ValueReader<TJson, ::enums::Enums>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.byte0, "byte0"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.byte1, "byte1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.byte2, "byte2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.byte3, "byte3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.byte4, "byte4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.byte5, "byte5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.char0, "char0"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.char1, "char1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.char2, "char2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.char3, "char3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.char4, "char4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.char5, "char5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.wchar0, "wchar0"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.wchar1, "wchar1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.wchar2, "wchar2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.wchar3, "wchar3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.wchar4, "wchar4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.wchar5, "wchar5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int8b0, "int8b0"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int8b1, "int8b1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int8b2, "int8b2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int8b3, "int8b3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int8b4, "int8b4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int8b5, "int8b5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint8b0, "uint8b0"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint8b1, "uint8b1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint8b2, "uint8b2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint8b3, "uint8b3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint8b4, "uint8b4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint8b5, "uint8b5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int16b0, "int16b0"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int16b1, "int16b1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int16b2, "int16b2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int16b3, "int16b3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int16b4, "int16b4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int16b5, "int16b5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint16b0, "uint16b0"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint16b1, "uint16b1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint16b2, "uint16b2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint16b3, "uint16b3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint16b4, "uint16b4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint16b5, "uint16b5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int32b0, "int32b0"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int32b1, "int32b1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int32b2, "int32b2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int32b3, "int32b3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int32b4, "int32b4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int32b5, "int32b5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint32b0, "uint32b0"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint32b1, "uint32b1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint32b2, "uint32b2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint32b3, "uint32b3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint32b4, "uint32b4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint32b5, "uint32b5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int64b0, "int64b0"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int64b1, "int64b1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int64b2, "int64b2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int64b3, "int64b3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int64b4, "int64b4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.int64b5, "int64b5"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint64b0, "uint64b0"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint64b1, "uint64b1"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint64b2, "uint64b2"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint64b3, "uint64b3"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint64b4, "uint64b4"))
-            return false;
-        if (!FBE::JSON::from_json(json, value.uint64b5, "uint64b5"))
-            return false;
-        return true;
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.byte0, "byte0");
+        result &= FBE::JSON::from_json(json, value.byte1, "byte1");
+        result &= FBE::JSON::from_json(json, value.byte2, "byte2");
+        result &= FBE::JSON::from_json(json, value.byte3, "byte3");
+        result &= FBE::JSON::from_json(json, value.byte4, "byte4");
+        result &= FBE::JSON::from_json(json, value.byte5, "byte5");
+        result &= FBE::JSON::from_json(json, value.char0, "char0");
+        result &= FBE::JSON::from_json(json, value.char1, "char1");
+        result &= FBE::JSON::from_json(json, value.char2, "char2");
+        result &= FBE::JSON::from_json(json, value.char3, "char3");
+        result &= FBE::JSON::from_json(json, value.char4, "char4");
+        result &= FBE::JSON::from_json(json, value.char5, "char5");
+        result &= FBE::JSON::from_json(json, value.wchar0, "wchar0");
+        result &= FBE::JSON::from_json(json, value.wchar1, "wchar1");
+        result &= FBE::JSON::from_json(json, value.wchar2, "wchar2");
+        result &= FBE::JSON::from_json(json, value.wchar3, "wchar3");
+        result &= FBE::JSON::from_json(json, value.wchar4, "wchar4");
+        result &= FBE::JSON::from_json(json, value.wchar5, "wchar5");
+        result &= FBE::JSON::from_json(json, value.int8b0, "int8b0");
+        result &= FBE::JSON::from_json(json, value.int8b1, "int8b1");
+        result &= FBE::JSON::from_json(json, value.int8b2, "int8b2");
+        result &= FBE::JSON::from_json(json, value.int8b3, "int8b3");
+        result &= FBE::JSON::from_json(json, value.int8b4, "int8b4");
+        result &= FBE::JSON::from_json(json, value.int8b5, "int8b5");
+        result &= FBE::JSON::from_json(json, value.uint8b0, "uint8b0");
+        result &= FBE::JSON::from_json(json, value.uint8b1, "uint8b1");
+        result &= FBE::JSON::from_json(json, value.uint8b2, "uint8b2");
+        result &= FBE::JSON::from_json(json, value.uint8b3, "uint8b3");
+        result &= FBE::JSON::from_json(json, value.uint8b4, "uint8b4");
+        result &= FBE::JSON::from_json(json, value.uint8b5, "uint8b5");
+        result &= FBE::JSON::from_json(json, value.int16b0, "int16b0");
+        result &= FBE::JSON::from_json(json, value.int16b1, "int16b1");
+        result &= FBE::JSON::from_json(json, value.int16b2, "int16b2");
+        result &= FBE::JSON::from_json(json, value.int16b3, "int16b3");
+        result &= FBE::JSON::from_json(json, value.int16b4, "int16b4");
+        result &= FBE::JSON::from_json(json, value.int16b5, "int16b5");
+        result &= FBE::JSON::from_json(json, value.uint16b0, "uint16b0");
+        result &= FBE::JSON::from_json(json, value.uint16b1, "uint16b1");
+        result &= FBE::JSON::from_json(json, value.uint16b2, "uint16b2");
+        result &= FBE::JSON::from_json(json, value.uint16b3, "uint16b3");
+        result &= FBE::JSON::from_json(json, value.uint16b4, "uint16b4");
+        result &= FBE::JSON::from_json(json, value.uint16b5, "uint16b5");
+        result &= FBE::JSON::from_json(json, value.int32b0, "int32b0");
+        result &= FBE::JSON::from_json(json, value.int32b1, "int32b1");
+        result &= FBE::JSON::from_json(json, value.int32b2, "int32b2");
+        result &= FBE::JSON::from_json(json, value.int32b3, "int32b3");
+        result &= FBE::JSON::from_json(json, value.int32b4, "int32b4");
+        result &= FBE::JSON::from_json(json, value.int32b5, "int32b5");
+        result &= FBE::JSON::from_json(json, value.uint32b0, "uint32b0");
+        result &= FBE::JSON::from_json(json, value.uint32b1, "uint32b1");
+        result &= FBE::JSON::from_json(json, value.uint32b2, "uint32b2");
+        result &= FBE::JSON::from_json(json, value.uint32b3, "uint32b3");
+        result &= FBE::JSON::from_json(json, value.uint32b4, "uint32b4");
+        result &= FBE::JSON::from_json(json, value.uint32b5, "uint32b5");
+        result &= FBE::JSON::from_json(json, value.int64b0, "int64b0");
+        result &= FBE::JSON::from_json(json, value.int64b1, "int64b1");
+        result &= FBE::JSON::from_json(json, value.int64b2, "int64b2");
+        result &= FBE::JSON::from_json(json, value.int64b3, "int64b3");
+        result &= FBE::JSON::from_json(json, value.int64b4, "int64b4");
+        result &= FBE::JSON::from_json(json, value.int64b5, "int64b5");
+        result &= FBE::JSON::from_json(json, value.uint64b0, "uint64b0");
+        result &= FBE::JSON::from_json(json, value.uint64b1, "uint64b1");
+        result &= FBE::JSON::from_json(json, value.uint64b2, "uint64b2");
+        result &= FBE::JSON::from_json(json, value.uint64b3, "uint64b3");
+        result &= FBE::JSON::from_json(json, value.uint64b4, "uint64b4");
+        result &= FBE::JSON::from_json(json, value.uint64b5, "uint64b5");
+        return result;
     }
 };
 
