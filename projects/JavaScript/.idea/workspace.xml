@@ -2,29 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SendReceive.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SendReceiveFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/send_receive_final_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/send_receive_final_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/send_receive_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/send_receive_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_send_receive.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_send_receive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_send_receive_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_send_receive_final.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/tests/test_send_receive.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_send_receive.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/tests/test_send_receive_final.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_send_receive_final.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_send_receive.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_send_receive.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_send_receive_final.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_send_receive_final.rb" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -61,8 +41,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="350" />
-    <option name="y" value="151" />
+    <option name="x" value="346" />
+    <option name="y" value="206" />
     <option name="width" value="1830" />
     <option name="height" value="1034" />
   </component>
@@ -72,7 +52,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -80,15 +59,11 @@
               <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
               <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -162,9 +137,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.tests-browser-local" />
         <item itemvalue="npm.tests-node" />
         <item itemvalue="npm.tests-standard" />
-        <item itemvalue="npm.tests-browser-local" />
         <item itemvalue="Node.js.test_send_receive_final.js" />
         <item itemvalue="Node.js.serialization_json.js" />
       </list>
@@ -204,18 +179,20 @@
       <workItem from="1551894148947" duration="1324000" />
       <workItem from="1553269335013" duration="316000" />
       <workItem from="1556500864750" duration="272000" />
+      <workItem from="1559781837842" duration="269000" />
+      <workItem from="1559782261337" duration="115000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19645000" />
+    <option name="totallyTimeSpent" value="20029000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="350" y="151" width="1830" height="1034" extended-state="0" />
+    <frame x="346" y="206" width="1830" height="1034" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5849057" visible="true" weight="0.27455357" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5826859" visible="true" weight="0.27455357" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" id="npm" order="2" sideWeight="0.41509435" side_tool="true" visible="true" weight="0.27455357" />
+      <window_info id="npm" order="2" sideWeight="0.41731408" side_tool="true" visible="true" weight="0.27455357" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
