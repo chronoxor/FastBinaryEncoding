@@ -2,18 +2,21 @@ package examples;
 
 import java.util.*;
 
+import com.chronoxor.proto.*;
+import com.chronoxor.proto.fbe.*;
+
 public class Serialization
 {
     public static void main(String[] args)
     {
         // Create a new account with some orders
-        var account = new proto.Account(1, "Test", proto.State.good, new proto.Balance("USD", 1000.0), new proto.Balance("EUR", 100.0), new ArrayList<proto.Order>());
-        account.orders.add(new proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0));
-        account.orders.add(new proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0));
-        account.orders.add(new proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0));
+        var account = new Account(1, "Test", State.good, new Balance("USD", 1000.0), new Balance("EUR", 100.0), new ArrayList<Order>());
+        account.orders.add(new Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0));
+        account.orders.add(new Order(2, "EURUSD", OrderSide.sell, OrderType.limit, 1.0, 100.0));
+        account.orders.add(new Order(3, "EURUSD", OrderSide.buy, OrderType.stop, 1.5, 10.0));
 
         // Serialize the account to the FBE stream
-        var writer = new proto.fbe.AccountModel();
+        var writer = new AccountModel();
         writer.serialize(account);
         assert writer.verify();
 
@@ -21,7 +24,7 @@ public class Serialization
         System.out.println("FBE size: " + writer.getBuffer().getSize());
 
         // Deserialize the account from the FBE stream
-        var reader = new proto.fbe.AccountModel();
+        var reader = new AccountModel();
         reader.attach(writer.getBuffer());
         assert reader.verify();
         reader.deserialize(account);

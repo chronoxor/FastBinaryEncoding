@@ -10,51 +10,22 @@
       </list>
     </option>
   </component>
-  <component name="FacetManager">
-    <facet type="kotlin-language" name="Kotlin">
-      <configuration version="3" platform="JVM 1.8" useProjectSettings="false">
-        <compilerSettings />
-        <compilerArguments>
-          <option name="jvmTarget" value="1.8" />
-          <option name="languageVersion" value="1.3" />
-          <option name="apiVersion" value="1.3" />
-          <option name="pluginOptions">
-            <array />
-          </option>
-          <option name="pluginClasspaths">
-            <array />
-          </option>
-          <option name="errors">
-            <ArgumentParseErrors />
-          </option>
-        </compilerArguments>
-      </configuration>
-    </facet>
-  </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/tests" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/proto/enums/fbe" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/benchmarks" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/examples" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/proto" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/benchmarks" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/com" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="org.testng:testng:Latest" level="project" />
     <orderEntry type="library" exported="" name="com.google.code.gson:gson:Latest" level="project" />
     <orderEntry type="library" exported="" name="org.openjdk.jmh:jmh-core:Latest" level="project" />
     <orderEntry type="library" exported="" name="org.openjdk.jmh:jmh-generator-annprocess:Latest" level="project" />
-    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.11" level="project" />
-    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.3.11" level="project" />
-    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.3.11" level="project" />
-    <orderEntry type="library" name="Maven: org.jetbrains:annotations:13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.11" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.jetbrains.kotlin:kotlin-test:1.3.11" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.jetbrains.kotlin:kotlin-test-common:1.3.11" level="project" />
+    <orderEntry type="library" exported="" name="org.testng:testng:6.14.3" level="project" />
   </component>
 </module>

@@ -2,38 +2,430 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SendReceive.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SendReceiveFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/send_receive_final_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/send_receive_final_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/send_receive_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/send_receive_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/libraries/org_testng_testng_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/libraries/org_testng_testng_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/tests/TestSendReceive.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/tests/TestSendReceive.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/tests/TestSendReceiveFinal.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/tests/TestSendReceiveFinal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_send_receive.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_send_receive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_send_receive_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_send_receive_final.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_testng_testng_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_testng_testng_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/TestSendReceive.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSendReceive.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/tests/test_send_receive.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_send_receive.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/tests/test_send_receive_final.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_send_receive_final.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_send_receive.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_send_receive.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_send_receive_final.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_send_receive_final.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_java.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_java.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumByteEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumCharEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt16Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt32Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt64Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt8Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt16Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt32Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt64Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt8Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumWChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumWCharEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/Enums.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/EnumByteJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/EnumCharJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/EnumInt16Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/EnumInt32Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/EnumInt64Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/EnumInt8Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/EnumUInt16Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/EnumUInt32Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/EnumUInt64Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/EnumUInt8Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/EnumWCharJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/EnumsFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/EnumsModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FieldModelEnumByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FieldModelEnumChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FieldModelEnumInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FieldModelEnumInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FieldModelEnumInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FieldModelEnumInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FieldModelEnumUInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FieldModelEnumUInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FieldModelEnumUInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FieldModelEnumUInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FieldModelEnumWChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FieldModelEnums.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalModelEnumByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalModelEnumChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalModelEnumInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalModelEnumInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalModelEnumInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalModelEnumInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalModelEnumUInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalModelEnumUInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalModelEnumUInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalModelEnumUInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalModelEnumWChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalModelEnums.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalReceiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalSender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/Proxy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/Receiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/Sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/Buffer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelBoolean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelDecimal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelDouble.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelFloat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelTimestamp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelUUID.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelWChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelBoolean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelDecimal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelDouble.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelFloat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelTimestamp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelUUID.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelWChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/Model.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/Pair.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/Receiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/Sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/Size.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/UUIDGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/Balance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/OrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/OrderSideEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/OrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/OrderTypeEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/State.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/StateEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/AccountFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/AccountModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/BalanceFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/BalanceModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelOptionalBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelOrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelOrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelVectorOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelOptionalBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelOrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelOrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelVectorOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalReceiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalSender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/OrderFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/OrderModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/OrderSideJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/OrderTypeJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/Proxy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/Receiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/Sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/StateJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/Balance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/OrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/OrderSideEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/OrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/OrderTypeEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/StateEx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/StateExEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/AccountFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/AccountModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/BalanceFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/BalanceModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelOptionalBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelOrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelOrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelStateEx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelVectorOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelOptionalBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelOrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelOrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelStateEx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelVectorOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalReceiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalSender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/OrderFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/OrderModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/OrderSideJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/OrderTypeJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/Proxy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/Receiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/Sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/StateExJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/EnumEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/EnumEmptyEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/EnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/EnumSimpleEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/EnumTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/EnumTypedEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/FlagsEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/FlagsEmptyEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/FlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/FlagsSimpleEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/FlagsTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/FlagsTypedEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructArray.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructHash.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructHashEx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructMap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructOptional.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructSet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructVector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/EnumEmptyJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/EnumSimpleJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/EnumTypedJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelArrayByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelArrayBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelArrayEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelArrayFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelArrayOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelArrayOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelArrayOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelArrayOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelArrayOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelArrayStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelEnumEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelEnumTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelFlagsEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelFlagsTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapInt32Byte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapInt32Bytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapInt32EnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapInt32FlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapInt32OptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapInt32OptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapInt32OptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapInt32OptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapInt32OptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapInt32StructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapStringByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapStringBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapStringEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapStringFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapStringOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapStringOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapStringOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapStringOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapStringOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapStringStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapStructSimpleOptionalStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelMapStructSimpleStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalBoolean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalDecimal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalDouble.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalEnumTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalFlagsTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalFloat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalStructOptional.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalTimestamp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalUUID.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalWChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalprotoAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalprotoBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalprotoOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalprotoOrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalprotoOrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelOptionalprotoState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructArray.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructHash.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructHashEx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructMap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructOptional.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructSet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructVector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelVectorByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelVectorBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelVectorEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelVectorFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelVectorOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelVectorOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelVectorOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelVectorOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelVectorOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelVectorStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelArrayByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelArrayBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelArrayEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelArrayFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelArrayOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelArrayOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelArrayOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelArrayOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelArrayOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelArrayStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelEnumEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelEnumTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelFlagsEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelFlagsTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapInt32Byte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapInt32Bytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapInt32EnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapInt32FlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapInt32OptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapInt32OptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapInt32OptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapInt32OptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapInt32OptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapInt32StructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapStringByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapStringBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapStringEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapStringFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapStringOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapStringOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapStringOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapStringOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapStringOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapStringStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapStructSimpleOptionalStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelMapStructSimpleStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalBoolean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalDecimal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalDouble.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalEnumTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalFlagsTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalFloat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalStructOptional.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalTimestamp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalUUID.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalWChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalprotoAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalprotoBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalprotoOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalprotoOrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalprotoOrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelOptionalprotoState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructArray.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructHash.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructHashEx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructMap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructOptional.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructSet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructVector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelVectorByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelVectorBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelVectorEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelVectorFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelVectorOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelVectorOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelVectorOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelVectorOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelVectorOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelVectorStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalReceiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalSender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FlagsEmptyJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FlagsSimpleJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FlagsTypedJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/Proxy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/Receiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/Sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructArrayFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructArrayModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructBytesFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructBytesModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructEmptyFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructEmptyModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructHashExFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructHashExModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructHashFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructHashModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructListFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructListModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructMapFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructMapModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructNestedFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructNestedModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructOptionalFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructOptionalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructSetFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructSetModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructSimpleFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructSimpleModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructVectorFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/StructVectorModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_java.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_java.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -131,6 +523,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -147,7 +540,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -337,6 +729,7 @@
       <workItem from="1553282052087" duration="1977000" />
       <workItem from="1556501217750" duration="267000" />
       <workItem from="1556502608845" duration="332000" />
+      <workItem from="1559812857223" duration="5000" />
     </task>
     <servers />
   </component>
@@ -373,7 +766,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86450000" />
+    <option name="totallyTimeSpent" value="86455000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -385,9 +778,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="470" y="225" width="1565" height="945" extended-state="0" />
+    <frame x="376" y="180" width="1252" height="756" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29036546" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.295302" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -403,7 +796,7 @@
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49909034" weight="0.32891247" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32891247" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.6079734" side_tool="true" visible="true" weight="0.3460591" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.6079734" side_tool="true" visible="true" weight="0.3445513" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="JProfiler" order="11" />
       <window_info active="true" anchor="bottom" id="Messages" order="12" sideWeight="0.39202657" visible="true" weight="0.3460591" />

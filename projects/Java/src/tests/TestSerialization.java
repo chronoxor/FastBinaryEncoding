@@ -6,19 +6,24 @@ import java.util.*;
 import org.testng.*;
 import org.testng.annotations.*;
 
+import com.chronoxor.proto.*;
+import com.chronoxor.proto.fbe.*;
+import com.chronoxor.test.*;
+import com.chronoxor.test.fbe.*;
+
 public class TestSerialization
 {
     @Test()
     public void serializationDomain()
     {
         // Create a new account with some orders
-        var account1 = new proto.Account(1, "Test", proto.State.good, new proto.Balance("USD", 1000.0), new proto.Balance("EUR", 100.0), new ArrayList<proto.Order>());
-        account1.orders.add(new proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0));
-        account1.orders.add(new proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0));
-        account1.orders.add(new proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0));
+        var account1 = new Account(1, "Test", State.good, new Balance("USD", 1000.0), new Balance("EUR", 100.0), new ArrayList<Order>());
+        account1.orders.add(new Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0));
+        account1.orders.add(new Order(2, "EURUSD", OrderSide.sell, OrderType.limit, 1.0, 100.0));
+        account1.orders.add(new Order(3, "EURUSD", OrderSide.buy, OrderType.stop, 1.5, 10.0));
 
         // Serialize the account to the FBE stream
-        var writer = new proto.fbe.AccountModel();
+        var writer = new AccountModel();
         Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(account1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
@@ -30,8 +35,8 @@ public class TestSerialization
         Assert.assertEquals(writer.getBuffer().getSize(), 252);
 
         // Deserialize the account from the FBE stream
-        var account2 = new proto.Account();
-        var reader = new proto.fbe.AccountModel();
+        var account2 = new Account();
+        var reader = new AccountModel();
         Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
@@ -42,7 +47,7 @@ public class TestSerialization
 
         Assert.assertEquals(account2.id, 1);
         Assert.assertEquals(account2.name, "Test");
-        Assert.assertTrue(account2.state.hasFlags(proto.State.good));
+        Assert.assertTrue(account2.state.hasFlags(State.good));
         Assert.assertEquals(account2.wallet.currency, "USD");
         Assert.assertEquals(account2.wallet.amount, 1000.0);
         Assert.assertNotEquals(account2.asset, null);
@@ -51,20 +56,20 @@ public class TestSerialization
         Assert.assertEquals(account2.orders.size(), 3);
         Assert.assertEquals(account2.orders.get(0).id, 1);
         Assert.assertEquals(account2.orders.get(0).symbol, "EURUSD");
-        Assert.assertEquals(account2.orders.get(0).side, proto.OrderSide.buy);
-        Assert.assertEquals(account2.orders.get(0).type, proto.OrderType.market);
+        Assert.assertEquals(account2.orders.get(0).side, OrderSide.buy);
+        Assert.assertEquals(account2.orders.get(0).type, OrderType.market);
         Assert.assertEquals(account2.orders.get(0).price, 1.23456);
         Assert.assertEquals(account2.orders.get(0).volume, 1000.0);
         Assert.assertEquals(account2.orders.get(1).id, 2);
         Assert.assertEquals(account2.orders.get(1).symbol, "EURUSD");
-        Assert.assertEquals(account2.orders.get(1).side, proto.OrderSide.sell);
-        Assert.assertEquals(account2.orders.get(1).type, proto.OrderType.limit);
+        Assert.assertEquals(account2.orders.get(1).side, OrderSide.sell);
+        Assert.assertEquals(account2.orders.get(1).type, OrderType.limit);
         Assert.assertEquals(account2.orders.get(1).price, 1.0);
         Assert.assertEquals(account2.orders.get(1).volume, 100.0);
         Assert.assertEquals(account2.orders.get(2).id, 3);
         Assert.assertEquals(account2.orders.get(2).symbol, "EURUSD");
-        Assert.assertEquals(account2.orders.get(2).side, proto.OrderSide.buy);
-        Assert.assertEquals(account2.orders.get(2).type, proto.OrderType.stop);
+        Assert.assertEquals(account2.orders.get(2).side, OrderSide.buy);
+        Assert.assertEquals(account2.orders.get(2).type, OrderType.stop);
         Assert.assertEquals(account2.orders.get(2).price, 1.5);
         Assert.assertEquals(account2.orders.get(2).volume, 10.0);
     }
@@ -73,10 +78,10 @@ public class TestSerialization
     public void serializationStructSimple()
     {
         // Create a new struct
-        var struct1 = new test.StructSimple();
+        var struct1 = new StructSimple();
 
         // Serialize the struct to the FBE stream
-        var writer = new test.fbe.StructSimpleModel();
+        var writer = new StructSimpleModel();
         Assert.assertEquals(writer.model.fbeType(), 110);
         Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
@@ -89,8 +94,8 @@ public class TestSerialization
         Assert.assertEquals(writer.getBuffer().getSize(), 392);
 
         // Deserialize the struct from the FBE stream
-        var struct2 = new test.StructSimple();
-        var reader = new test.fbe.StructSimpleModel();
+        var struct2 = new StructSimple();
+        var reader = new StructSimpleModel();
         Assert.assertEquals(reader.model.fbeType(), 110);
         Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
@@ -185,10 +190,10 @@ public class TestSerialization
     public void serializationStructOptional()
     {
         // Create a new struct
-        var struct1 = new test.StructOptional();
+        var struct1 = new StructOptional();
 
         // Serialize the struct to the FBE stream
-        var writer = new test.fbe.StructOptionalModel();
+        var writer = new StructOptionalModel();
         Assert.assertEquals(writer.model.fbeType(), 111);
         Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
@@ -201,8 +206,8 @@ public class TestSerialization
         Assert.assertEquals(writer.getBuffer().getSize(), 834);
 
         // Deserialize the struct from the FBE stream
-        var struct2 = new test.StructOptional();
-        var reader = new test.fbe.StructOptionalModel();
+        var struct2 = new StructOptional();
+        var reader = new StructOptionalModel();
         Assert.assertEquals(reader.model.fbeType(), 111);
         Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
@@ -441,10 +446,10 @@ public class TestSerialization
     public void serializationStructNested()
     {
         // Create a new struct
-        var struct1 = new test.StructNested();
+        var struct1 = new StructNested();
 
         // Serialize the struct to the FBE stream
-        var writer = new test.fbe.StructNestedModel();
+        var writer = new StructNestedModel();
         Assert.assertEquals(writer.model.fbeType(), 112);
         Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
@@ -457,8 +462,8 @@ public class TestSerialization
         Assert.assertEquals(writer.getBuffer().getSize(), 2099);
 
         // Deserialize the struct from the FBE stream
-        var struct2 = new test.StructNested();
-        var reader = new test.fbe.StructNestedModel();
+        var struct2 = new StructNested();
+        var reader = new StructNestedModel();
         Assert.assertEquals(reader.model.fbeType(), 112);
         Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
@@ -592,13 +597,13 @@ public class TestSerialization
         Assert.assertEquals(struct2.f164, null);
         Assert.assertEquals(struct2.f165, null);
 
-        Assert.assertEquals(struct2.f1000, test.EnumSimple.ENUM_VALUE_0);
+        Assert.assertEquals(struct2.f1000, EnumSimple.ENUM_VALUE_0);
         Assert.assertEquals(struct2.f1001, null);
-        Assert.assertEquals(struct2.f1002, test.EnumTyped.ENUM_VALUE_2);
+        Assert.assertEquals(struct2.f1002, EnumTyped.ENUM_VALUE_2);
         Assert.assertEquals(struct2.f1003, null);
-        Assert.assertEquals(struct2.f1004, test.FlagsSimple.FLAG_VALUE_0);
+        Assert.assertEquals(struct2.f1004, FlagsSimple.FLAG_VALUE_0);
         Assert.assertEquals(struct2.f1005, null);
-        Assert.assertEquals(struct2.f1006, test.FlagsTyped.fromSet(EnumSet.of(test.FlagsTyped.FLAG_VALUE_2.getEnum(), test.FlagsTyped.FLAG_VALUE_4.getEnum(), test.FlagsTyped.FLAG_VALUE_6.getEnum())));
+        Assert.assertEquals(struct2.f1006, FlagsTyped.fromSet(EnumSet.of(FlagsTyped.FLAG_VALUE_2.getEnum(), FlagsTyped.FLAG_VALUE_4.getEnum(), FlagsTyped.FLAG_VALUE_6.getEnum())));
         Assert.assertEquals(struct2.f1007, null);
         Assert.assertEquals(struct2.f1009, null);
         Assert.assertEquals(struct2.f1011, null);
@@ -717,12 +722,12 @@ public class TestSerialization
     public void serializationStructBytes()
     {
         // Create a new struct
-        var struct1 = new test.StructBytes();
+        var struct1 = new StructBytes();
         struct1.f1 = ByteBuffer.wrap("ABC".getBytes());
         struct1.f2 = ByteBuffer.wrap("test".getBytes());
 
         // Serialize the struct to the FBE stream
-        var writer = new test.fbe.StructBytesModel();
+        var writer = new StructBytesModel();
         Assert.assertEquals(writer.model.fbeType(), 120);
         Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
@@ -735,8 +740,8 @@ public class TestSerialization
         Assert.assertEquals(writer.getBuffer().getSize(), 49);
 
         // Deserialize the struct from the FBE stream
-        var struct2 = new test.StructBytes();
-        var reader = new test.fbe.StructBytesModel();
+        var struct2 = new StructBytes();
+        var reader = new StructBytesModel();
         Assert.assertEquals(reader.model.fbeType(), 120);
         Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
@@ -763,7 +768,7 @@ public class TestSerialization
     public void serializationStructArray()
     {
         // Create a new struct
-        var struct1 = new test.StructArray();
+        var struct1 = new StructArray();
         struct1.f1[0] = 48;
         struct1.f1[1] = 65;
         struct1.f2[0] = 97;
@@ -772,21 +777,21 @@ public class TestSerialization
         struct1.f3[1] = ByteBuffer.wrap("AAA".getBytes());
         struct1.f4[0] = ByteBuffer.wrap("aaa".getBytes());
         struct1.f4[1] = null;
-        struct1.f5[0] = test.EnumSimple.ENUM_VALUE_1;
-        struct1.f5[1] = test.EnumSimple.ENUM_VALUE_2;
-        struct1.f6[0] = test.EnumSimple.ENUM_VALUE_1;
+        struct1.f5[0] = EnumSimple.ENUM_VALUE_1;
+        struct1.f5[1] = EnumSimple.ENUM_VALUE_2;
+        struct1.f6[0] = EnumSimple.ENUM_VALUE_1;
         struct1.f6[1] = null;
-        struct1.f7[0] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum()));
-        struct1.f7[1] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum()));
-        struct1.f8[0] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum()));
+        struct1.f7[0] = FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum()));
+        struct1.f7[1] = FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum(), FlagsSimple.FLAG_VALUE_3.getEnum()));
+        struct1.f8[0] = FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum()));
         struct1.f8[1] = null;
-        struct1.f9[0] = new test.StructSimple();
-        struct1.f9[1] = new test.StructSimple();
-        struct1.f10[0] = new test.StructSimple();
+        struct1.f9[0] = new StructSimple();
+        struct1.f9[1] = new StructSimple();
+        struct1.f10[0] = new StructSimple();
         struct1.f10[1] = null;
 
         // Serialize the struct to the FBE stream
-        var writer = new test.fbe.StructArrayModel();
+        var writer = new StructArrayModel();
         Assert.assertEquals(writer.model.fbeType(), 125);
         Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
@@ -799,8 +804,8 @@ public class TestSerialization
         Assert.assertEquals(writer.getBuffer().getSize(), 1290);
 
         // Deserialize the struct from the FBE stream
-        var struct2 = new test.StructArray();
-        var reader = new test.fbe.StructArrayModel();
+        var struct2 = new StructArray();
+        var reader = new StructArrayModel();
         Assert.assertEquals(reader.model.fbeType(), 125);
         Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
@@ -833,16 +838,16 @@ public class TestSerialization
         Assert.assertEquals(struct2.f4[0].array()[2], 97);
         Assert.assertEquals(struct2.f4[1], null);
         Assert.assertEquals(struct2.f5.length, 2);
-        Assert.assertEquals(struct2.f5[0], test.EnumSimple.ENUM_VALUE_1);
-        Assert.assertEquals(struct2.f5[1], test.EnumSimple.ENUM_VALUE_2);
+        Assert.assertEquals(struct2.f5[0], EnumSimple.ENUM_VALUE_1);
+        Assert.assertEquals(struct2.f5[1], EnumSimple.ENUM_VALUE_2);
         Assert.assertEquals(struct2.f6.length, 2);
-        Assert.assertEquals(struct2.f6[0], test.EnumSimple.ENUM_VALUE_1);
+        Assert.assertEquals(struct2.f6[0], EnumSimple.ENUM_VALUE_1);
         Assert.assertEquals(struct2.f6[1], null);
         Assert.assertEquals(struct2.f7.length, 2);
-        Assert.assertEquals(struct2.f7[0], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        Assert.assertEquals(struct2.f7[1], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
+        Assert.assertEquals(struct2.f7[0], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
+        Assert.assertEquals(struct2.f7[1], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum(), FlagsSimple.FLAG_VALUE_3.getEnum())));
         Assert.assertEquals(struct2.f8.length, 2);
-        Assert.assertEquals(struct2.f8[0], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
+        Assert.assertEquals(struct2.f8[0], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
         Assert.assertEquals(struct2.f8[1], null);
         Assert.assertEquals(struct2.f9.length, 2);
         Assert.assertEquals(struct2.f9[0].f2, true);
@@ -863,7 +868,7 @@ public class TestSerialization
     public void serializationStructVector()
     {
         // Create a new struct
-        var struct1 = new test.StructVector();
+        var struct1 = new StructVector();
         struct1.f1.add((byte)48);
         struct1.f1.add((byte)65);
         struct1.f2.add((byte)97);
@@ -872,21 +877,21 @@ public class TestSerialization
         struct1.f3.add(ByteBuffer.wrap("AAA".getBytes()));
         struct1.f4.add(ByteBuffer.wrap("aaa".getBytes()));
         struct1.f4.add(null);
-        struct1.f5.add(test.EnumSimple.ENUM_VALUE_1);
-        struct1.f5.add(test.EnumSimple.ENUM_VALUE_2);
-        struct1.f6.add(test.EnumSimple.ENUM_VALUE_1);
+        struct1.f5.add(EnumSimple.ENUM_VALUE_1);
+        struct1.f5.add(EnumSimple.ENUM_VALUE_2);
+        struct1.f6.add(EnumSimple.ENUM_VALUE_1);
         struct1.f6.add(null);
-        struct1.f7.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        struct1.f7.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
-        struct1.f8.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
+        struct1.f7.add(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
+        struct1.f7.add(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum(), FlagsSimple.FLAG_VALUE_3.getEnum())));
+        struct1.f8.add(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
         struct1.f8.add(null);
-        struct1.f9.add(new test.StructSimple());
-        struct1.f9.add(new test.StructSimple());
-        struct1.f10.add(new test.StructSimple());
+        struct1.f9.add(new StructSimple());
+        struct1.f9.add(new StructSimple());
+        struct1.f10.add(new StructSimple());
         struct1.f10.add(null);
 
         // Serialize the struct to the FBE stream
-        var writer = new test.fbe.StructVectorModel();
+        var writer = new StructVectorModel();
         Assert.assertEquals(writer.model.fbeType(), 130);
         Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
@@ -899,8 +904,8 @@ public class TestSerialization
         Assert.assertEquals(writer.getBuffer().getSize(), 1370);
 
         // Deserialize the struct from the FBE stream
-        var struct2 = new test.StructVector();
-        var reader = new test.fbe.StructVectorModel();
+        var struct2 = new StructVector();
+        var reader = new StructVectorModel();
         Assert.assertEquals(reader.model.fbeType(), 130);
         Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
@@ -933,16 +938,16 @@ public class TestSerialization
         Assert.assertEquals(struct2.f4.get(0).array()[2], 97);
         Assert.assertEquals(struct2.f4.get(1), null);
         Assert.assertEquals(struct2.f5.size(), 2);
-        Assert.assertEquals(struct2.f5.get(0), test.EnumSimple.ENUM_VALUE_1);
-        Assert.assertEquals(struct2.f5.get(1), test.EnumSimple.ENUM_VALUE_2);
+        Assert.assertEquals(struct2.f5.get(0), EnumSimple.ENUM_VALUE_1);
+        Assert.assertEquals(struct2.f5.get(1), EnumSimple.ENUM_VALUE_2);
         Assert.assertEquals(struct2.f6.size(), 2);
-        Assert.assertEquals(struct2.f6.get(0), test.EnumSimple.ENUM_VALUE_1);
+        Assert.assertEquals(struct2.f6.get(0), EnumSimple.ENUM_VALUE_1);
         Assert.assertEquals(struct2.f6.get(1), null);
         Assert.assertEquals(struct2.f7.size(), 2);
-        Assert.assertEquals(struct2.f7.get(0), test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        Assert.assertEquals(struct2.f7.get(1), test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
+        Assert.assertEquals(struct2.f7.get(0), FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
+        Assert.assertEquals(struct2.f7.get(1), FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum(), FlagsSimple.FLAG_VALUE_3.getEnum())));
         Assert.assertEquals(struct2.f8.size(), 2);
-        Assert.assertEquals(struct2.f8.get(0), test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
+        Assert.assertEquals(struct2.f8.get(0), FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
         Assert.assertEquals(struct2.f8.get(1), null);
         Assert.assertEquals(struct2.f9.size(), 2);
         Assert.assertEquals(struct2.f9.get(0).f2, true);
@@ -963,7 +968,7 @@ public class TestSerialization
     public void serializationStructList()
     {
         // Create a new struct
-        var struct1 = new test.StructList();
+        var struct1 = new StructList();
         struct1.f1.addLast((byte)48);
         struct1.f1.addLast((byte)65);
         struct1.f2.addLast((byte)97);
@@ -972,21 +977,21 @@ public class TestSerialization
         struct1.f3.addLast(ByteBuffer.wrap("AAA".getBytes()));
         struct1.f4.addLast(ByteBuffer.wrap("aaa".getBytes()));
         struct1.f4.addLast(null);
-        struct1.f5.addLast(test.EnumSimple.ENUM_VALUE_1);
-        struct1.f5.addLast(test.EnumSimple.ENUM_VALUE_2);
-        struct1.f6.addLast(test.EnumSimple.ENUM_VALUE_1);
+        struct1.f5.addLast(EnumSimple.ENUM_VALUE_1);
+        struct1.f5.addLast(EnumSimple.ENUM_VALUE_2);
+        struct1.f6.addLast(EnumSimple.ENUM_VALUE_1);
         struct1.f6.addLast(null);
-        struct1.f7.addLast(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        struct1.f7.addLast(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
-        struct1.f8.addLast(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
+        struct1.f7.addLast(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
+        struct1.f7.addLast(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum(), FlagsSimple.FLAG_VALUE_3.getEnum())));
+        struct1.f8.addLast(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
         struct1.f8.addLast(null);
-        struct1.f9.addLast(new test.StructSimple());
-        struct1.f9.addLast(new test.StructSimple());
-        struct1.f10.addLast(new test.StructSimple());
+        struct1.f9.addLast(new StructSimple());
+        struct1.f9.addLast(new StructSimple());
+        struct1.f10.addLast(new StructSimple());
         struct1.f10.addLast(null);
 
         // Serialize the struct to the FBE stream
-        var writer = new test.fbe.StructListModel();
+        var writer = new StructListModel();
         Assert.assertEquals(writer.model.fbeType(), 131);
         Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
@@ -999,8 +1004,8 @@ public class TestSerialization
         Assert.assertEquals(writer.getBuffer().getSize(), 1370);
 
         // Deserialize the struct from the FBE stream
-        var struct2 = new test.StructList();
-        var reader = new test.fbe.StructListModel();
+        var struct2 = new StructList();
+        var reader = new StructListModel();
         Assert.assertEquals(reader.model.fbeType(), 131);
         Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
@@ -1033,16 +1038,16 @@ public class TestSerialization
         Assert.assertEquals(struct2.f4.getFirst().array()[2], 97);
         Assert.assertEquals(struct2.f4.getLast(), null);
         Assert.assertEquals(struct2.f5.size(), 2);
-        Assert.assertEquals(struct2.f5.getFirst(), test.EnumSimple.ENUM_VALUE_1);
-        Assert.assertEquals(struct2.f5.getLast(), test.EnumSimple.ENUM_VALUE_2);
+        Assert.assertEquals(struct2.f5.getFirst(), EnumSimple.ENUM_VALUE_1);
+        Assert.assertEquals(struct2.f5.getLast(), EnumSimple.ENUM_VALUE_2);
         Assert.assertEquals(struct2.f6.size(), 2);
-        Assert.assertEquals(struct2.f6.getFirst(), test.EnumSimple.ENUM_VALUE_1);
+        Assert.assertEquals(struct2.f6.getFirst(), EnumSimple.ENUM_VALUE_1);
         Assert.assertEquals(struct2.f6.getLast(), null);
         Assert.assertEquals(struct2.f7.size(), 2);
-        Assert.assertEquals(struct2.f7.getFirst(), test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        Assert.assertEquals(struct2.f7.getLast(), test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
+        Assert.assertEquals(struct2.f7.getFirst(), FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
+        Assert.assertEquals(struct2.f7.getLast(), FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum(), FlagsSimple.FLAG_VALUE_3.getEnum())));
         Assert.assertEquals(struct2.f8.size(), 2);
-        Assert.assertEquals(struct2.f8.getFirst(), test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
+        Assert.assertEquals(struct2.f8.getFirst(), FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
         Assert.assertEquals(struct2.f8.getLast(), null);
         Assert.assertEquals(struct2.f9.size(), 2);
         Assert.assertEquals(struct2.f9.getFirst().f2, true);
@@ -1063,23 +1068,23 @@ public class TestSerialization
     public void serializationStructSet()
     {
         // Create a new struct
-        var struct1 = new test.StructSet();
+        var struct1 = new StructSet();
         struct1.f1.add((byte)48);
         struct1.f1.add((byte)65);
         struct1.f1.add((byte)97);
-        struct1.f2.add(test.EnumSimple.ENUM_VALUE_1);
-        struct1.f2.add(test.EnumSimple.ENUM_VALUE_2);
-        struct1.f3.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        struct1.f3.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
-        var s1 = new test.StructSimple();
+        struct1.f2.add(EnumSimple.ENUM_VALUE_1);
+        struct1.f2.add(EnumSimple.ENUM_VALUE_2);
+        struct1.f3.add(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
+        struct1.f3.add(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum(), FlagsSimple.FLAG_VALUE_3.getEnum())));
+        var s1 = new StructSimple();
         s1.id = 48;
         struct1.f4.add(s1);
-        var s2 = new test.StructSimple();
+        var s2 = new StructSimple();
         s2.id = 65;
         struct1.f4.add(s2);
 
         // Serialize the struct to the FBE stream
-        var writer = new test.fbe.StructSetModel();
+        var writer = new StructSetModel();
         Assert.assertEquals(writer.model.fbeType(), 132);
         Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
@@ -1092,8 +1097,8 @@ public class TestSerialization
         Assert.assertEquals(writer.getBuffer().getSize(), 843);
 
         // Deserialize the struct from the FBE stream
-        var struct2 = new test.StructSet();
-        var reader = new test.fbe.StructSetModel();
+        var struct2 = new StructSet();
+        var reader = new StructSetModel();
         Assert.assertEquals(reader.model.fbeType(), 132);
         Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
@@ -1108,11 +1113,11 @@ public class TestSerialization
         Assert.assertTrue(struct2.f1.contains((byte)65));
         Assert.assertTrue(struct2.f1.contains((byte)97));
         Assert.assertEquals(struct2.f2.size(), 2);
-        Assert.assertTrue(struct2.f2.contains(test.EnumSimple.ENUM_VALUE_1));
-        Assert.assertTrue(struct2.f2.contains(test.EnumSimple.ENUM_VALUE_2));
+        Assert.assertTrue(struct2.f2.contains(EnumSimple.ENUM_VALUE_1));
+        Assert.assertTrue(struct2.f2.contains(EnumSimple.ENUM_VALUE_2));
         Assert.assertEquals(struct2.f3.size(), 2);
-        Assert.assertTrue(struct2.f3.contains(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum()))));
-        Assert.assertTrue(struct2.f3.contains(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum()))));
+        Assert.assertTrue(struct2.f3.contains(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum()))));
+        Assert.assertTrue(struct2.f3.contains(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum(), FlagsSimple.FLAG_VALUE_3.getEnum()))));
         Assert.assertEquals(struct2.f4.size(), 2);
         Assert.assertTrue(struct2.f4.contains(s1));
         Assert.assertTrue(struct2.f4.contains(s2));
@@ -1122,7 +1127,7 @@ public class TestSerialization
     public void serializationStructMap()
     {
         // Create a new struct
-        var struct1 = new test.StructMap();
+        var struct1 = new StructMap();
         struct1.f1.put(10, (byte)48);
         struct1.f1.put(20, (byte)65);
         struct1.f2.put(10, (byte)97);
@@ -1131,25 +1136,25 @@ public class TestSerialization
         struct1.f3.put(20, ByteBuffer.wrap("AAA".getBytes()));
         struct1.f4.put(10, ByteBuffer.wrap("aaa".getBytes()));
         struct1.f4.put(20, null);
-        struct1.f5.put(10, test.EnumSimple.ENUM_VALUE_1);
-        struct1.f5.put(20, test.EnumSimple.ENUM_VALUE_2);
-        struct1.f6.put(10, test.EnumSimple.ENUM_VALUE_1);
+        struct1.f5.put(10, EnumSimple.ENUM_VALUE_1);
+        struct1.f5.put(20, EnumSimple.ENUM_VALUE_2);
+        struct1.f6.put(10, EnumSimple.ENUM_VALUE_1);
         struct1.f6.put(20, null);
-        struct1.f7.put(10, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        struct1.f7.put(20, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
-        struct1.f8.put(10, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
+        struct1.f7.put(10, FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
+        struct1.f7.put(20, FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum(), FlagsSimple.FLAG_VALUE_3.getEnum())));
+        struct1.f8.put(10, FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
         struct1.f8.put(20, null);
-        var s1 = new test.StructSimple();
+        var s1 = new StructSimple();
         s1.id = 48;
         struct1.f9.put(10, s1);
-        var s2 = new test.StructSimple();
+        var s2 = new StructSimple();
         s2.id = 65;
         struct1.f9.put(20, s2);
         struct1.f10.put(10, s1);
         struct1.f10.put(20, null);
 
         // Serialize the struct to the FBE stream
-        var writer = new test.fbe.StructMapModel();
+        var writer = new StructMapModel();
         Assert.assertEquals(writer.model.fbeType(), 140);
         Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
@@ -1162,8 +1167,8 @@ public class TestSerialization
         Assert.assertEquals(writer.getBuffer().getSize(), 1450);
 
         // Deserialize the struct from the FBE stream
-        var struct2 = new test.StructMap();
-        var reader = new test.fbe.StructMapModel();
+        var struct2 = new StructMap();
+        var reader = new StructMapModel();
         Assert.assertEquals(reader.model.fbeType(), 140);
         Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
@@ -1186,16 +1191,16 @@ public class TestSerialization
         Assert.assertEquals(struct2.f4.get(10).array().length, 3);
         Assert.assertEquals(struct2.f4.get(20), null);
         Assert.assertEquals(struct2.f5.size(), 2);
-        Assert.assertEquals(struct2.f5.get(10), test.EnumSimple.ENUM_VALUE_1);
-        Assert.assertEquals(struct2.f5.get(20), test.EnumSimple.ENUM_VALUE_2);
+        Assert.assertEquals(struct2.f5.get(10), EnumSimple.ENUM_VALUE_1);
+        Assert.assertEquals(struct2.f5.get(20), EnumSimple.ENUM_VALUE_2);
         Assert.assertEquals(struct2.f6.size(), 2);
-        Assert.assertEquals(struct2.f6.get(10), test.EnumSimple.ENUM_VALUE_1);
+        Assert.assertEquals(struct2.f6.get(10), EnumSimple.ENUM_VALUE_1);
         Assert.assertEquals(struct2.f6.get(20), null);
         Assert.assertEquals(struct2.f7.size(), 2);
-        Assert.assertEquals(struct2.f7.get(10), test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        Assert.assertEquals(struct2.f7.get(20), test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
+        Assert.assertEquals(struct2.f7.get(10), FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
+        Assert.assertEquals(struct2.f7.get(20), FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum(), FlagsSimple.FLAG_VALUE_3.getEnum())));
         Assert.assertEquals(struct2.f8.size(), 2);
-        Assert.assertEquals(struct2.f8.get(10), test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
+        Assert.assertEquals(struct2.f8.get(10), FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
         Assert.assertEquals(struct2.f8.get(20), null);
         Assert.assertEquals(struct2.f9.size(), 2);
         Assert.assertEquals(struct2.f9.get(10).id, 48);
@@ -1209,7 +1214,7 @@ public class TestSerialization
     public void serializationStructHash()
     {
         // Create a new struct
-        var struct1 = new test.StructHash();
+        var struct1 = new StructHash();
         struct1.f1.put("10", (byte)48);
         struct1.f1.put("20", (byte)65);
         struct1.f2.put("10", (byte)97);
@@ -1218,25 +1223,25 @@ public class TestSerialization
         struct1.f3.put("20", ByteBuffer.wrap("AAA".getBytes()));
         struct1.f4.put("10", ByteBuffer.wrap("aaa".getBytes()));
         struct1.f4.put("20", null);
-        struct1.f5.put("10", test.EnumSimple.ENUM_VALUE_1);
-        struct1.f5.put("20", test.EnumSimple.ENUM_VALUE_2);
-        struct1.f6.put("10", test.EnumSimple.ENUM_VALUE_1);
+        struct1.f5.put("10", EnumSimple.ENUM_VALUE_1);
+        struct1.f5.put("20", EnumSimple.ENUM_VALUE_2);
+        struct1.f6.put("10", EnumSimple.ENUM_VALUE_1);
         struct1.f6.put("20", null);
-        struct1.f7.put("10", test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        struct1.f7.put("20", test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
-        struct1.f8.put("10", test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
+        struct1.f7.put("10", FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
+        struct1.f7.put("20", FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum(), FlagsSimple.FLAG_VALUE_3.getEnum())));
+        struct1.f8.put("10", FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
         struct1.f8.put("20", null);
-        var s1 = new test.StructSimple();
+        var s1 = new StructSimple();
         s1.id = 48;
         struct1.f9.put("10", s1);
-        var s2 = new test.StructSimple();
+        var s2 = new StructSimple();
         s2.id = 65;
         struct1.f9.put("20", s2);
         struct1.f10.put("10", s1);
         struct1.f10.put("20", null);
 
         // Serialize the struct to the FBE stream
-        var writer = new test.fbe.StructHashModel();
+        var writer = new StructHashModel();
         Assert.assertEquals(writer.model.fbeType(), 141);
         Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
@@ -1249,8 +1254,8 @@ public class TestSerialization
         Assert.assertEquals(writer.getBuffer().getSize(), 1570);
 
         // Deserialize the struct from the FBE stream
-        var struct2 = new test.StructHash();
-        var reader = new test.fbe.StructHashModel();
+        var struct2 = new StructHash();
+        var reader = new StructHashModel();
         Assert.assertEquals(reader.model.fbeType(), 141);
         Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
@@ -1273,16 +1278,16 @@ public class TestSerialization
         Assert.assertEquals(struct2.f4.get("10").array().length, 3);
         Assert.assertEquals(struct2.f4.get("20"), null);
         Assert.assertEquals(struct2.f5.size(), 2);
-        Assert.assertEquals(struct2.f5.get("10"), test.EnumSimple.ENUM_VALUE_1);
-        Assert.assertEquals(struct2.f5.get("20"), test.EnumSimple.ENUM_VALUE_2);
+        Assert.assertEquals(struct2.f5.get("10"), EnumSimple.ENUM_VALUE_1);
+        Assert.assertEquals(struct2.f5.get("20"), EnumSimple.ENUM_VALUE_2);
         Assert.assertEquals(struct2.f6.size(), 2);
-        Assert.assertEquals(struct2.f6.get("10"), test.EnumSimple.ENUM_VALUE_1);
+        Assert.assertEquals(struct2.f6.get("10"), EnumSimple.ENUM_VALUE_1);
         Assert.assertEquals(struct2.f6.get("20"), null);
         Assert.assertEquals(struct2.f7.size(), 2);
-        Assert.assertEquals(struct2.f7.get("10"), test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        Assert.assertEquals(struct2.f7.get("20"), test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
+        Assert.assertEquals(struct2.f7.get("10"), FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
+        Assert.assertEquals(struct2.f7.get("20"), FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum(), FlagsSimple.FLAG_VALUE_3.getEnum())));
         Assert.assertEquals(struct2.f8.size(), 2);
-        Assert.assertEquals(struct2.f8.get("10"), test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
+        Assert.assertEquals(struct2.f8.get("10"), FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.getEnum(), FlagsSimple.FLAG_VALUE_2.getEnum())));
         Assert.assertEquals(struct2.f8.get("20"), null);
         Assert.assertEquals(struct2.f9.size(), 2);
         Assert.assertEquals(struct2.f9.get("10").id, 48);
@@ -1296,18 +1301,18 @@ public class TestSerialization
     public void serializationStructHashExtended()
     {
         // Create a new struct
-        var struct1 = new test.StructHashEx();
-        var s1 = new test.StructSimple();
+        var struct1 = new StructHashEx();
+        var s1 = new StructSimple();
         s1.id = 48;
-        struct1.f1.put(s1, new test.StructNested());
-        var s2 = new test.StructSimple();
+        struct1.f1.put(s1, new StructNested());
+        var s2 = new StructSimple();
         s2.id = 65;
-        struct1.f1.put(s2, new test.StructNested());
-        struct1.f2.put(s1, new test.StructNested());
+        struct1.f1.put(s2, new StructNested());
+        struct1.f2.put(s1, new StructNested());
         struct1.f2.put(s2, null);
 
         // Serialize the struct to the FBE stream
-        var writer = new test.fbe.StructHashExModel();
+        var writer = new StructHashExModel();
         Assert.assertEquals(writer.model.fbeType(), 142);
         Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
@@ -1320,8 +1325,8 @@ public class TestSerialization
         Assert.assertEquals(writer.getBuffer().getSize(), 7879);
 
         // Deserialize the struct from the FBE stream
-        var struct2 = new test.StructHashEx();
-        var reader = new test.fbe.StructHashExModel();
+        var struct2 = new StructHashEx();
+        var reader = new StructHashExModel();
         Assert.assertEquals(reader.model.fbeType(), 142);
         Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
@@ -1332,10 +1337,10 @@ public class TestSerialization
         Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(struct2.f1.size(), 2);
-        Assert.assertEquals(struct2.f1.get(s1).f1002, test.EnumTyped.ENUM_VALUE_2);
-        Assert.assertEquals(struct2.f1.get(s2).f1002, test.EnumTyped.ENUM_VALUE_2);
+        Assert.assertEquals(struct2.f1.get(s1).f1002, EnumTyped.ENUM_VALUE_2);
+        Assert.assertEquals(struct2.f1.get(s2).f1002, EnumTyped.ENUM_VALUE_2);
         Assert.assertEquals(struct2.f2.size(), 2);
-        Assert.assertEquals(struct2.f2.get(s1).f1002, test.EnumTyped.ENUM_VALUE_2);
+        Assert.assertEquals(struct2.f2.get(s1).f1002, EnumTyped.ENUM_VALUE_2);
         Assert.assertEquals(struct2.f2.get(s2), null);
     }
 }

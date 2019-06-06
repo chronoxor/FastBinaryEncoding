@@ -1,16 +1,19 @@
 package examples;
 
+import com.chronoxor.proto.*;
+import com.chronoxor.proto.fbe.*;
+
 public class Create
 {
     public static void main(String[] args)
     {
         // Create a new account using FBE model
-        var account = new proto.fbe.AccountModel();
+        var account = new AccountModel();
         long modelBegin = account.createBegin();
         long accountBegin = account.model.setBegin();
         account.model.id.set(1);
         account.model.name.set("Test");
-        account.model.state.set(proto.State.good);
+        account.model.state.set(State.good);
         long walletBegin = account.model.wallet.setBegin();
         account.model.wallet.currency.set("USD");
         account.model.wallet.amount.set(1000.0);
@@ -23,13 +26,13 @@ public class Create
         System.out.println("FBE size: " + account.getBuffer().getSize());
 
         // Access the account using the FBE model
-        var access = new proto.fbe.AccountModel();
+        var access = new AccountModel();
         access.attach(account.getBuffer());
         assert access.verify();
 
         int id;
         String name;
-        proto.State state;
+        State state;
         String walletCurrency;
         double walletAmount;
 

@@ -12,54 +12,56 @@ namespace FBE {
 
 void GeneratorJava::Generate(const std::shared_ptr<Package>& package)
 {
-    GenerateFBEPackage("fbe");
-    GenerateFBEPair("fbe");
-    GenerateFBEUUIDGenerator("fbe");
-    GenerateFBEBuffer("fbe");
-    GenerateFBEModel("fbe");
-    GenerateFBEFieldModel("fbe");
-    GenerateFBEFieldModel("fbe", "Boolean", "boolean", "", "1", "false");
-    GenerateFBEFieldModel("fbe", "Byte", "byte", "", "1", "(byte)0");
-    GenerateFBEFieldModel("fbe", "Char", "char", "(byte)", "1", "'\\u0000'");
-    GenerateFBEFieldModel("fbe", "WChar", "char", "(int)", "4", "'\\u0000'");
-    GenerateFBEFieldModel("fbe", "Int8", "byte", "", "1", "(byte)0");
-    GenerateFBEFieldModel("fbe", "Int16", "short", "", "2", "(short)0");
-    GenerateFBEFieldModel("fbe", "Int32", "int", "", "4", "0");
-    GenerateFBEFieldModel("fbe", "Int64", "long", "", "8", "0l");
-    GenerateFBEFieldModel("fbe", "Float", "float", "", "4", "0.0f");
-    GenerateFBEFieldModel("fbe", "Double", "double", "", "8", "0.0d");
-    GenerateFBEFieldModel("fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
-    GenerateFBEFieldModelDecimal("fbe");
-    GenerateFBEFieldModelTimestamp("fbe");
-    GenerateFBEFieldModelBytes("fbe");
-    GenerateFBEFieldModelString("fbe");
+    std::string domain = (package->domain && !package->domain->empty()) ? (*package->domain + ".") : "";
+
+    GenerateFBEPackage(domain, "fbe");
+    GenerateFBEPair(domain, "fbe");
+    GenerateFBEUUIDGenerator(domain, "fbe");
+    GenerateFBEBuffer(domain, "fbe");
+    GenerateFBEModel(domain, "fbe");
+    GenerateFBEFieldModel(domain, "fbe");
+    GenerateFBEFieldModel(domain, "fbe", "Boolean", "boolean", "", "1", "false");
+    GenerateFBEFieldModel(domain, "fbe", "Byte", "byte", "", "1", "(byte)0");
+    GenerateFBEFieldModel(domain, "fbe", "Char", "char", "(byte)", "1", "'\\u0000'");
+    GenerateFBEFieldModel(domain, "fbe", "WChar", "char", "(int)", "4", "'\\u0000'");
+    GenerateFBEFieldModel(domain, "fbe", "Int8", "byte", "", "1", "(byte)0");
+    GenerateFBEFieldModel(domain, "fbe", "Int16", "short", "", "2", "(short)0");
+    GenerateFBEFieldModel(domain, "fbe", "Int32", "int", "", "4", "0");
+    GenerateFBEFieldModel(domain, "fbe", "Int64", "long", "", "8", "0l");
+    GenerateFBEFieldModel(domain, "fbe", "Float", "float", "", "4", "0.0f");
+    GenerateFBEFieldModel(domain, "fbe", "Double", "double", "", "8", "0.0d");
+    GenerateFBEFieldModel(domain, "fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
+    GenerateFBEFieldModelDecimal(domain, "fbe");
+    GenerateFBEFieldModelTimestamp(domain, "fbe");
+    GenerateFBEFieldModelBytes(domain, "fbe");
+    GenerateFBEFieldModelString(domain, "fbe");
     if (Final())
     {
-        GenerateFBESize("fbe");
-        GenerateFBEFinalModel("fbe");
-        GenerateFBEFinalModel("fbe", "Boolean", "boolean", "", "1", "false");
-        GenerateFBEFinalModel("fbe", "Byte", "byte", "", "1", "(byte)0");
-        GenerateFBEFinalModel("fbe", "Char", "char", "(byte)", "1", "'\\u0000'");
-        GenerateFBEFinalModel("fbe", "WChar", "char", "(int)", "4", "'\\u0000'");
-        GenerateFBEFinalModel("fbe", "Int8", "byte", "", "1", "(byte)0");
-        GenerateFBEFinalModel("fbe", "Int16", "short", "", "2", "(short)0");
-        GenerateFBEFinalModel("fbe", "Int32", "int", "", "4", "0");
-        GenerateFBEFinalModel("fbe", "Int64", "long", "", "8", "0l");
-        GenerateFBEFinalModel("fbe", "Float", "float", "", "4", "0.0f");
-        GenerateFBEFinalModel("fbe", "Double", "double", "", "8", "0.0d");
-        GenerateFBEFinalModel("fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
-        GenerateFBEFinalModelDecimal("fbe");
-        GenerateFBEFinalModelTimestamp("fbe");
-        GenerateFBEFinalModelBytes("fbe");
-        GenerateFBEFinalModelString("fbe");
+        GenerateFBESize(domain, "fbe");
+        GenerateFBEFinalModel(domain, "fbe");
+        GenerateFBEFinalModel(domain, "fbe", "Boolean", "boolean", "", "1", "false");
+        GenerateFBEFinalModel(domain, "fbe", "Byte", "byte", "", "1", "(byte)0");
+        GenerateFBEFinalModel(domain, "fbe", "Char", "char", "(byte)", "1", "'\\u0000'");
+        GenerateFBEFinalModel(domain, "fbe", "WChar", "char", "(int)", "4", "'\\u0000'");
+        GenerateFBEFinalModel(domain, "fbe", "Int8", "byte", "", "1", "(byte)0");
+        GenerateFBEFinalModel(domain, "fbe", "Int16", "short", "", "2", "(short)0");
+        GenerateFBEFinalModel(domain, "fbe", "Int32", "int", "", "4", "0");
+        GenerateFBEFinalModel(domain, "fbe", "Int64", "long", "", "8", "0l");
+        GenerateFBEFinalModel(domain, "fbe", "Float", "float", "", "4", "0.0f");
+        GenerateFBEFinalModel(domain, "fbe", "Double", "double", "", "8", "0.0d");
+        GenerateFBEFinalModel(domain, "fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
+        GenerateFBEFinalModelDecimal(domain, "fbe");
+        GenerateFBEFinalModelTimestamp(domain, "fbe");
+        GenerateFBEFinalModelBytes(domain, "fbe");
+        GenerateFBEFinalModelString(domain, "fbe");
     }
     if (Sender())
     {
-        GenerateFBESender("fbe");
-        GenerateFBEReceiver("fbe");
+        GenerateFBESender(domain, "fbe");
+        GenerateFBEReceiver(domain, "fbe");
     }
     if (JSON())
-        GenerateFBEJson("fbe");
+        GenerateFBEJson(domain, "fbe");
 
     GeneratePackage(package);
 }
@@ -84,11 +86,11 @@ void GeneratorJava::GenerateFooter()
 {
 }
 
-void GeneratorJava::GenerateImports(const std::string& package)
+void GeneratorJava::GenerateImports(const std::string& domain, const std::string& package)
 {
     // Generate package name
     WriteLine();
-    WriteLineIndent("package " + package + ";");
+    WriteLineIndent("package " + domain + package + ";");
 
     // Generate common import
     WriteLine();
@@ -104,30 +106,32 @@ void GeneratorJava::GenerateImports(const std::string& package)
 
 void GeneratorJava::GenerateImports(const std::shared_ptr<Package>& p)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+
     // Generate common import
-    GenerateImports(*p->name);
+    GenerateImports(domain, *p->name);
 
     // Generate FBE import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
 
     // Generate packages import
     if (p->import)
         for (const auto& import : p->import->imports)
-            WriteLineIndent("import " + *import + ".*;");
+            WriteLineIndent("import " + domain + *import + ".*;");
 }
 
-void GeneratorJava::GenerateFBEPackage(const std::string& package)
+void GeneratorJava::GenerateFBEPackage(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Create FBE package path
     CppCommon::Directory::CreateTree(path);
 }
 
-void GeneratorJava::GenerateFBEPair(const std::string& package)
+void GeneratorJava::GenerateFBEPair(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "Pair.java";
@@ -135,7 +139,7 @@ void GeneratorJava::GenerateFBEPair(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding pair wrapper
@@ -173,9 +177,9 @@ public final class Pair<K, V>
     Close();
 }
 
-void GeneratorJava::GenerateFBEUUIDGenerator(const std::string& package)
+void GeneratorJava::GenerateFBEUUIDGenerator(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "UUIDGenerator.java";
@@ -183,7 +187,7 @@ void GeneratorJava::GenerateFBEUUIDGenerator(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding UUID generator
@@ -267,9 +271,9 @@ public final class UUIDGenerator
     Close();
 }
 
-void GeneratorJava::GenerateFBEBuffer(const std::string& package)
+void GeneratorJava::GenerateFBEBuffer(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "Buffer.java";
@@ -277,7 +281,7 @@ void GeneratorJava::GenerateFBEBuffer(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding buffer based on dynamic byte array
@@ -585,9 +589,9 @@ public class Buffer
     Close();
 }
 
-void GeneratorJava::GenerateFBEModel(const std::string& package)
+void GeneratorJava::GenerateFBEModel(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "Model.java";
@@ -595,7 +599,7 @@ void GeneratorJava::GenerateFBEModel(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding base model
@@ -646,9 +650,9 @@ public class Model
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModel(const std::string& package)
+void GeneratorJava::GenerateFBEFieldModel(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FieldModel.java";
@@ -656,7 +660,7 @@ void GeneratorJava::GenerateFBEFieldModel(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding base field model
@@ -730,9 +734,9 @@ public abstract class FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModel(const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
+void GeneratorJava::GenerateFBEFieldModel(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / ("FieldModel" + name + ".java");
@@ -740,7 +744,7 @@ void GeneratorJava::GenerateFBEFieldModel(const std::string& package, const std:
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding _TYPE_ field model
@@ -791,9 +795,9 @@ public final class FieldModel_NAME_ extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelDecimal(const std::string& package)
+void GeneratorJava::GenerateFBEFieldModelDecimal(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FieldModelDecimal.java";
@@ -801,7 +805,7 @@ void GeneratorJava::GenerateFBEFieldModelDecimal(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding decimal field model
@@ -904,9 +908,9 @@ public final class FieldModelDecimal extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelTimestamp(const std::string& package)
+void GeneratorJava::GenerateFBEFieldModelTimestamp(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FieldModelTimestamp.java";
@@ -914,7 +918,7 @@ void GeneratorJava::GenerateFBEFieldModelTimestamp(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding timestamp field model
@@ -970,9 +974,9 @@ public final class FieldModelTimestamp extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelBytes(const std::string& package)
+void GeneratorJava::GenerateFBEFieldModelBytes(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FieldModelBytes.java";
@@ -980,7 +984,7 @@ void GeneratorJava::GenerateFBEFieldModelBytes(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding bytes field model
@@ -1090,9 +1094,9 @@ public final class FieldModelBytes extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelString(const std::string& package)
+void GeneratorJava::GenerateFBEFieldModelString(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FieldModelString.java";
@@ -1100,7 +1104,7 @@ void GeneratorJava::GenerateFBEFieldModelString(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding string field model
@@ -1212,9 +1216,9 @@ public final class FieldModelString extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelOptional(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorJava::GenerateFBEFieldModelOptional(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -1225,12 +1229,12 @@ void GeneratorJava::GenerateFBEFieldModelOptional(const std::string& package, co
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     std::string code = R"CODE(
 // Fast Binary Encoding optional _NAME_ field model
@@ -1388,9 +1392,9 @@ public final class FieldModelOptional_NAME_ extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& model, bool bytes)
+void GeneratorJava::GenerateFBEFieldModelArray(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model, bool bytes)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -1401,12 +1405,12 @@ void GeneratorJava::GenerateFBEFieldModelArray(const std::string& package, const
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array field model
@@ -1568,9 +1572,9 @@ public final class FieldModelArray_NAME_ extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelVector(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorJava::GenerateFBEFieldModelVector(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -1581,12 +1585,12 @@ void GeneratorJava::GenerateFBEFieldModelVector(const std::string& package, cons
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ vector field model
@@ -1850,9 +1854,9 @@ public final class FieldModelVector_NAME_ extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelMap(const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
+void GeneratorJava::GenerateFBEFieldModelMap(const std::string& domain, const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -1863,12 +1867,12 @@ void GeneratorJava::GenerateFBEFieldModelMap(const std::string& package, const s
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map field model
@@ -2113,9 +2117,9 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelEnumFlags(const std::string& package, const std::string& name, const std::string& type)
+void GeneratorJava::GenerateFBEFieldModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -2126,12 +2130,12 @@ void GeneratorJava::GenerateFBEFieldModelEnumFlags(const std::string& package, c
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ field model
@@ -2180,9 +2184,9 @@ public final class FieldModel_NAME_ extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBESize(const std::string& package)
+void GeneratorJava::GenerateFBESize(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "Size.java";
@@ -2190,7 +2194,7 @@ void GeneratorJava::GenerateFBESize(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding size
@@ -2216,9 +2220,9 @@ public class Size
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModel(const std::string& package)
+void GeneratorJava::GenerateFBEFinalModel(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FinalModel.java";
@@ -2226,7 +2230,7 @@ void GeneratorJava::GenerateFBEFinalModel(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding base final model
@@ -2300,9 +2304,9 @@ public abstract class FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModel(const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
+void GeneratorJava::GenerateFBEFinalModel(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / ("FinalModel" + name + ".java");
@@ -2310,7 +2314,7 @@ void GeneratorJava::GenerateFBEFinalModel(const std::string& package, const std:
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding _TYPE_ final model
@@ -2375,9 +2379,9 @@ public final class FinalModel_NAME_ extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelDecimal(const std::string& package)
+void GeneratorJava::GenerateFBEFinalModelDecimal(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FinalModelDecimal.java";
@@ -2385,7 +2389,7 @@ void GeneratorJava::GenerateFBEFinalModelDecimal(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding decimal final model
@@ -2494,9 +2498,9 @@ public final class FinalModelDecimal extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelTimestamp(const std::string& package)
+void GeneratorJava::GenerateFBEFinalModelTimestamp(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FinalModelTimestamp.java";
@@ -2504,7 +2508,7 @@ void GeneratorJava::GenerateFBEFinalModelTimestamp(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding timestamp final model
@@ -2566,9 +2570,9 @@ public final class FinalModelTimestamp extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelBytes(const std::string& package)
+void GeneratorJava::GenerateFBEFinalModelBytes(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FinalModelBytes.java";
@@ -2576,7 +2580,7 @@ void GeneratorJava::GenerateFBEFinalModelBytes(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding bytes final model
@@ -2657,9 +2661,9 @@ public final class FinalModelBytes extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelString(const std::string& package)
+void GeneratorJava::GenerateFBEFinalModelString(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FinalModelString.java";
@@ -2667,7 +2671,7 @@ void GeneratorJava::GenerateFBEFinalModelString(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding string final model
@@ -2750,9 +2754,9 @@ public final class FinalModelString extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelOptional(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorJava::GenerateFBEFinalModelOptional(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -2763,12 +2767,12 @@ void GeneratorJava::GenerateFBEFinalModelOptional(const std::string& package, co
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     std::string code = R"CODE(
 // Fast Binary Encoding optional _NAME_ final model
@@ -2871,9 +2875,9 @@ public final class FinalModelOptional_NAME_ extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& model, bool bytes)
+void GeneratorJava::GenerateFBEFinalModelArray(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model, bool bytes)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -2884,12 +2888,12 @@ void GeneratorJava::GenerateFBEFinalModelArray(const std::string& package, const
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array final model
@@ -3082,9 +3086,9 @@ public final class FinalModelArray_NAME_ extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelVector(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorJava::GenerateFBEFinalModelVector(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -3095,12 +3099,12 @@ void GeneratorJava::GenerateFBEFinalModelVector(const std::string& package, cons
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ vector final model
@@ -3350,9 +3354,9 @@ public final class FinalModelVector_NAME_ extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelMap(const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
+void GeneratorJava::GenerateFBEFinalModelMap(const std::string& domain, const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -3363,12 +3367,12 @@ void GeneratorJava::GenerateFBEFinalModelMap(const std::string& package, const s
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map final model
@@ -3591,9 +3595,9 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& type)
+void GeneratorJava::GenerateFBEFinalModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -3604,12 +3608,12 @@ void GeneratorJava::GenerateFBEFinalModelEnumFlags(const std::string& package, c
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ final model
@@ -3672,9 +3676,9 @@ public final class FinalModel_NAME_ extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBESender(const std::string& package)
+void GeneratorJava::GenerateFBESender(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "Sender.java";
@@ -3682,7 +3686,7 @@ void GeneratorJava::GenerateFBESender(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding base sender
@@ -3746,9 +3750,9 @@ public abstract class Sender
     Close();
 }
 
-void GeneratorJava::GenerateFBEReceiver(const std::string& package)
+void GeneratorJava::GenerateFBEReceiver(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "Receiver.java";
@@ -3756,7 +3760,7 @@ void GeneratorJava::GenerateFBEReceiver(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding base receiver
@@ -4046,9 +4050,9 @@ public abstract class Receiver
     Close();
 }
 
-void GeneratorJava::GenerateFBEJson(const std::string& package)
+void GeneratorJava::GenerateFBEJson(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "Json.java";
@@ -4056,7 +4060,7 @@ void GeneratorJava::GenerateFBEJson(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     // Generate custom import
     WriteLine();
@@ -4183,7 +4187,8 @@ public final class Json
 
 void GeneratorJava::GenerateContainers(const std::shared_ptr<Package>& p, bool final)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / *p->name;
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, *p->name);
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -4201,30 +4206,30 @@ void GeneratorJava::GenerateContainers(const std::shared_ptr<Package>& p, bool f
                     if (field->array)
                     {
                         if (final)
-                            GenerateFBEFinalModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final), ((*field->type == "byte") && !field->optional));
+                            GenerateFBEFinalModelArray(domain, *p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final), ((*field->type == "byte") && !field->optional));
                         else
-                            GenerateFBEFieldModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final), ((*field->type == "byte") && !field->optional));
+                            GenerateFBEFieldModelArray(domain, *p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final), ((*field->type == "byte") && !field->optional));
                     }
                     if (field->vector || field->list || field->set)
                     {
                         if (final)
-                            GenerateFBEFinalModelVector(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                            GenerateFBEFinalModelVector(domain, *p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                         else
-                            GenerateFBEFieldModelVector(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                            GenerateFBEFieldModelVector(domain, *p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                     }
                     if (field->map || field->hash)
                     {
                         if (final)
-                            GenerateFBEFinalModelMap(*p->name, ConvertTypeFieldName(*field->key), ConvertTypeFieldType(*field->key, false), ConvertTypeFieldDeclaration(*field->key, false, final), (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                            GenerateFBEFinalModelMap(domain, *p->name, ConvertTypeFieldName(*field->key), ConvertTypeFieldType(domain, *field->key, false), ConvertTypeFieldDeclaration(domain, *field->key, false, final), (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                         else
-                            GenerateFBEFieldModelMap(*p->name, ConvertTypeFieldName(*field->key), ConvertTypeFieldType(*field->key, false), ConvertTypeFieldDeclaration(*field->key, false, final), (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                            GenerateFBEFieldModelMap(domain, *p->name, ConvertTypeFieldName(*field->key), ConvertTypeFieldType(domain, *field->key, false), ConvertTypeFieldDeclaration(domain, *field->key, false, final), (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                     }
                     if (field->optional)
                     {
                         if (final)
-                            GenerateFBEFinalModelOptional(*p->name, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, false, final));
+                            GenerateFBEFinalModelOptional(domain, *p->name, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, false, final));
                         else
-                            GenerateFBEFieldModelOptional(*p->name, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, false, final));
+                            GenerateFBEFieldModelOptional(domain, *p->name, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, false, final));
                     }
                 }
             }
@@ -4234,7 +4239,8 @@ void GeneratorJava::GenerateContainers(const std::shared_ptr<Package>& p, bool f
 
 void GeneratorJava::GeneratePackage(const std::shared_ptr<Package>& p)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / *p->name;
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, *p->name);
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -4394,12 +4400,14 @@ void GeneratorJava::GenerateEnum(const std::shared_ptr<Package>& p, const std::s
     if (JSON())
         GenerateEnumJson(p, e);
 
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+
     // Generate enum field model
-    GenerateFBEFieldModelEnumFlags(*p->name, *e->name, enum_type);
+    GenerateFBEFieldModelEnumFlags(domain, *p->name, *e->name, enum_type);
 
     // Generate enum final model
     if (Final())
-        GenerateFBEFinalModelEnumFlags(*p->name, *e->name, enum_type);
+        GenerateFBEFinalModelEnumFlags(domain, *p->name, *e->name, enum_type);
 }
 
 void GeneratorJava::GenerateEnumClass(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path)
@@ -4532,9 +4540,10 @@ void GeneratorJava::GenerateEnumClass(const std::shared_ptr<Package>& p, const s
 
 void GeneratorJava::GenerateEnumJson(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -4548,12 +4557,12 @@ void GeneratorJava::GenerateEnumJson(const std::shared_ptr<Package>& p, const st
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe;");
+    GenerateImports(domain, package + ".fbe;");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     // Generate custom import
     WriteLine();
@@ -4740,12 +4749,14 @@ void GeneratorJava::GenerateFlags(const std::shared_ptr<Package>& p, const std::
     if (JSON())
         GenerateFlagsJson(p, f);
 
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+
     // Generate flags field model
-    GenerateFBEFieldModelEnumFlags(*p->name, *f->name, flags_type);
+    GenerateFBEFieldModelEnumFlags(domain, *p->name, *f->name, flags_type);
 
     // Generate flags final model
     if (Final())
-        GenerateFBEFinalModelEnumFlags(*p->name, *f->name, flags_type);
+        GenerateFBEFinalModelEnumFlags(domain, *p->name, *f->name, flags_type);
 }
 
 void GeneratorJava::GenerateFlagsClass(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path)
@@ -4935,9 +4946,10 @@ void GeneratorJava::GenerateFlagsClass(const std::shared_ptr<Package>& p, const 
 
 void GeneratorJava::GenerateFlagsJson(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -4951,12 +4963,12 @@ void GeneratorJava::GenerateFlagsJson(const std::shared_ptr<Package>& p, const s
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe;");
+    GenerateImports(domain, package + ".fbe;");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     // Generate custom import
     WriteLine();
@@ -5004,6 +5016,8 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
 {
     bool first;
 
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+
     // Open the output file
     CppCommon::Path output = path / (*s->name + ".java");
     Open(output);
@@ -5016,7 +5030,7 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     WriteLine();
     WriteIndent("public class " + *s->name);
     if (s->base && !s->base->empty())
-        Write(" extends " + ConvertTypeName(*s->base, false));
+        Write(" extends " + ConvertTypeName(domain, *s->base, false));
     else
         Write(" implements Comparable<Object>");
     WriteLine();
@@ -5027,7 +5041,7 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     if (s->body && !s->body->fields.empty())
     {
         for (const auto& field : s->body->fields)
-            WriteLineIndent("public " + ConvertTypeName(*field) + " " + *field->name + " = " + ConvertDefault(*field) + ";");
+            WriteLineIndent("public " + ConvertTypeName(domain, *field) + " " + *field->name + " = " + ConvertDefault(domain, *field) + ";");
         WriteLine();
     }
 
@@ -5042,14 +5056,14 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
         WriteIndent("public " + *s->name + "(");
         if (s->base && !s->base->empty())
         {
-            Write(ConvertTypeName(*s->base, false) + " parent");
+            Write(ConvertTypeName(domain, *s->base, false) + " parent");
             first = false;
         }
         if (s->body)
         {
             for (const auto& field : s->body->fields)
             {
-                Write(std::string(first ? "" : ", ") + ConvertTypeName(*field) + " " + *field->name);
+                Write(std::string(first ? "" : ", ") + ConvertTypeName(domain, *field) + " " + *field->name);
                 first = false;
             }
         }
@@ -5084,11 +5098,11 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("// Serialize the struct to the FBE stream");
-    WriteLineIndent("var writer = new " + *p->name + ".fbe." + *s->name + "Model();");
+    WriteLineIndent("var writer = new " + domain + *p->name + ".fbe." + *s->name + "Model();");
     WriteLineIndent("writer.serialize(this);");
     WriteLine();
     WriteLineIndent("// Deserialize the struct from the FBE stream");
-    WriteLineIndent("var reader = new " + *p->name + ".fbe." + *s->name + "Model();");
+    WriteLineIndent("var reader = new " + domain + *p->name + ".fbe." + *s->name + "Model();");
     WriteLineIndent("reader.attach(writer.getBuffer());");
     WriteLineIndent("return reader.deserialize();");
     Indent(-1);
@@ -5381,8 +5395,8 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     if (JSON())
     {
         WriteLine();
-        WriteLineIndent("public String toJson() { return " + *p->name + ".fbe.Json.getEngine().toJson(this); }");
-        WriteLineIndent("public static " + *s->name + " fromJson(String json) { return " + *p->name + ".fbe.Json.getEngine().fromJson(json, " + *s->name + ".class); }");
+        WriteLineIndent("public String toJson() { return " + domain + *p->name + ".fbe.Json.getEngine().toJson(this); }");
+        WriteLineIndent("public static " + *s->name + " fromJson(String json) { return " + domain + *p->name + ".fbe.Json.getEngine().fromJson(json, " + *s->name + ".class); }");
     }
 
     // Generate struct end
@@ -5409,9 +5423,10 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
 
 void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -5422,12 +5437,12 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     // Generate struct field model begin
     WriteLine();
@@ -5438,10 +5453,10 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
 
     // Generate struct field model accessors
     if (s->base && !s->base->empty())
-        WriteLineIndent("public final " + ConvertBaseFieldName(*s->base, false) + " parent;");
+        WriteLineIndent("public final " + ConvertBaseFieldName(domain, *s->base, false) + " parent;");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("public final " + ConvertTypeFieldDeclaration(*field, false) + " " + *field->name + ";");
+            WriteLineIndent("public final " + ConvertTypeFieldDeclaration(domain, *field, false) + " " + *field->name + ";");
 
     // Generate struct field model constructor
     WriteLine();
@@ -5453,7 +5468,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     std::string prev_size("4");
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("parent = new " + ConvertBaseFieldName(*s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ");");
+        WriteLineIndent("parent = new " + ConvertBaseFieldName(domain, *s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ");");
         prev_offset = "parent.fbeOffset()";
         prev_size = "parent.fbeBody() - 4 - 4";
     }
@@ -5461,7 +5476,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLineIndent(*field->name + " = " + ConvertTypeFieldInitialization(*field, prev_offset + " + " + prev_size, false) + ";");
+            WriteLineIndent(*field->name + " = " + ConvertTypeFieldInitialization(domain, *field, prev_offset + " + " + prev_size, false) + ";");
             prev_offset = *field->name + ".fbeOffset()";
             prev_size = *field->name + ".fbeSize()";
         }
@@ -5525,7 +5540,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("}");
     WriteLineIndent("// Get the field type");
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("public static final long fbeTypeConst = " + ConvertBaseFieldName(*s->base, false) + ".fbeTypeConst;");
+        WriteLineIndent("public static final long fbeTypeConst = " + ConvertBaseFieldName(domain, *s->base, false) + ".fbeTypeConst;");
     else
         WriteLineIndent("public static final long fbeTypeConst = " + std::to_string(s->type) + ";");
     WriteLineIndent("public long fbeType() { return fbeTypeConst; }");
@@ -5700,14 +5715,14 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
                 if (field->array || field->vector || field->list || field->set || field->map || field->hash)
                     WriteLineIndent(*field->name + ".get(fbeValue." + *field->name + ");");
                 else
-                    WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? ConvertConstant(*field->type, *field->value, field->optional) : "") + ");");
+                    WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? ConvertConstant(domain, *field->type, *field->value, field->optional) : "") + ");");
                 Indent(-1);
                 WriteLineIndent("else");
                 Indent(1);
                 if (field->vector || field->list || field->set || field->map || field->hash)
                     WriteLineIndent("fbeValue." + *field->name + ".clear();");
                 else
-                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field) + ";");
+                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(domain, *field) + ";");
                 Indent(-1);
                 WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize();");
             }
@@ -5802,9 +5817,10 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
 
 void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -5815,12 +5831,12 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     // Generate struct model begin
     WriteLine();
@@ -5956,9 +5972,10 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
 
 void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -5969,12 +5986,12 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     // Generate struct final model begin
     WriteLine();
@@ -5985,10 +6002,10 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
 
     // Generate struct final model accessors
     if (s->base && !s->base->empty())
-        WriteLineIndent("public final " + ConvertBaseFieldName(*s->base, true) + " parent;");
+        WriteLineIndent("public final " + ConvertBaseFieldName(domain, *s->base, true) + " parent;");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("public final " + ConvertTypeFieldDeclaration(*field, true) + " " + *field->name + ";");
+            WriteLineIndent("public final " + ConvertTypeFieldDeclaration(domain, *field, true) + " " + *field->name + ";");
 
     // Generate struct final model constructor
     WriteLine();
@@ -5997,10 +6014,10 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     Indent(1);
     WriteLineIndent("super(buffer, offset);");
     if (s->base && !s->base->empty())
-        WriteLineIndent("parent = new " + ConvertBaseFieldName(*s->base, true) + "(buffer, 0);");
+        WriteLineIndent("parent = new " + ConvertBaseFieldName(domain, *s->base, true) + "(buffer, 0);");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent(*field->name + " = " + ConvertTypeFieldInitialization(*field, "0", true) + ";");
+            WriteLineIndent(*field->name + " = " + ConvertTypeFieldInitialization(domain, *field, "0", true) + ";");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6025,7 +6042,7 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     WriteLine();
     WriteLineIndent("// Get the final type");
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("public static final long fbeTypeConst = " + ConvertBaseFieldName(*s->base, true) + ".fbeTypeConst;");
+        WriteLineIndent("public static final long fbeTypeConst = " + ConvertBaseFieldName(domain, *s->base, true) + ".fbeTypeConst;");
     else
         WriteLineIndent("public static final long fbeTypeConst = " + std::to_string(s->type) + ";");
     WriteLineIndent("public long fbeType() { return fbeTypeConst; }");
@@ -6206,9 +6223,10 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
 
 void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6219,12 +6237,12 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     // Generate struct model final begin
     WriteLine();
@@ -6346,9 +6364,10 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
 
 void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6362,20 +6381,20 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     // Generate sender begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final sender");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender");
-    WriteLineIndent("public class " + sender + " extends fbe.Sender");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " sender");
+    WriteLineIndent("public class " + sender + " extends " + domain + "fbe.Sender");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6384,7 +6403,7 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     {
         WriteLineIndent("// Imported senders");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("public final " + *import + ".fbe." + sender + " " + *import + "Sender;");
+            WriteLineIndent("public final " + domain + *import + ".fbe." + sender + " " + *import + "Sender;");
         WriteLine();
     }
 
@@ -6405,7 +6424,7 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Sender = new " + *import + ".fbe." + sender + "(getBuffer());");
+            WriteLineIndent(*import + "Sender = new " + domain + *import + ".fbe." + sender + "(getBuffer());");
     }
     if (p->body)
     {
@@ -6421,7 +6440,7 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Sender = new " + *import + ".fbe." + sender + "(getBuffer());");
+            WriteLineIndent(*import + "Sender = new " + domain + *import + ".fbe." + sender + "(getBuffer());");
     }
     if (p->body)
     {
@@ -6437,7 +6456,7 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + *p->name + "." + *s->name;
             WriteLineIndent("public long send(" + struct_name + " value)");
             WriteLineIndent("{");
             Indent(1);
@@ -6466,7 +6485,7 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     WriteLine();
     WriteLineIndent("// Send message handler");
     WriteLineIndent("@Override");
-    WriteLineIndent("protected long onSend(byte[] buffer, long offset, long size) { throw new UnsupportedOperationException(\"" + *p->name + ".fbe.Sender.onSend() not implemented!\"); }");
+    WriteLineIndent("protected long onSend(byte[] buffer, long offset, long size) { throw new UnsupportedOperationException(\"" + domain + *p->name + ".fbe.Sender.onSend() not implemented!\"); }");
 
     // Generate sender end
     Indent(-1);
@@ -6481,9 +6500,10 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
 
 void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool final)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6497,20 +6517,20 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     // Generate receiver begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final receiver");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver");
-    WriteLineIndent("public class " + receiver + " extends fbe.Receiver");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " receiver");
+    WriteLineIndent("public class " + receiver + " extends " + domain + "fbe.Receiver");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6519,7 +6539,7 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     {
         WriteLineIndent("// Imported receivers");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("public " + *import + ".fbe." + receiver + " " + *import + "Receiver;");
+            WriteLineIndent("public " + domain + *import + ".fbe." + receiver + " " + *import + "Receiver;");
         WriteLine();
     }
 
@@ -6529,7 +6549,7 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("// Receiver values accessors");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + *p->name + "." + *s->name;
             WriteLineIndent("private final " + struct_name + " " + *s->name + "Value;");
         }
         WriteLine();
@@ -6547,13 +6567,13 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Receiver = new " + *import + ".fbe." + receiver + "(getBuffer());");
+            WriteLineIndent(*import + "Receiver = new " + domain + *import + ".fbe." + receiver + "(getBuffer());");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + *p->name + "." + *s->name;
             WriteLineIndent(*s->name + "Value = new " + struct_name + "();");
             WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
         }
@@ -6567,13 +6587,13 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Receiver = new " + *import + ".fbe." + receiver + "(getBuffer());");
+            WriteLineIndent(*import + "Receiver = new " + domain + *import + ".fbe." + receiver + "(getBuffer());");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + *p->name + "." + *s->name;
             WriteLineIndent(*s->name + "Value = new " + struct_name + "();");
             WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
         }
@@ -6588,7 +6608,7 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("// Receive handlers");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + *p->name + "." + *s->name;
             WriteLineIndent("protected void onReceive(" + struct_name + " value) {}");
         }
         WriteLine();
@@ -6606,7 +6626,7 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case (int)" + package + ".fbe." + *s->name + model + ".fbeTypeConst:");
+            WriteLineIndent("case (int)" + domain + package + ".fbe." + *s->name + model + ".fbeTypeConst:");
             WriteLineIndent("{");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");
@@ -6662,9 +6682,10 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
 
 void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6678,20 +6699,20 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
 
     // Generate proxy begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final proxy");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final proxy");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " proxy");
-    WriteLineIndent("public class " + proxy + " extends fbe.Receiver");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " proxy");
+    WriteLineIndent("public class " + proxy + " extends " + domain + "fbe.Receiver");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6700,7 +6721,7 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
     {
         WriteLineIndent("// Imported proxy");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("public " + *import + ".fbe." + proxy + " " + *import + "Proxy;");
+            WriteLineIndent("public " + domain + *import + ".fbe." + proxy + " " + *import + "Proxy;");
         WriteLine();
     }
 
@@ -6721,7 +6742,7 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Proxy = new " + *import + ".fbe." + proxy + "(getBuffer());");
+            WriteLineIndent(*import + "Proxy = new " + domain + *import + ".fbe." + proxy + "(getBuffer());");
     }
     if (p->body)
     {
@@ -6737,7 +6758,7 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Proxy = new " + *import + ".fbe." + proxy + "(getBuffer());");
+            WriteLineIndent(*import + "Proxy = new " + domain + *import + ".fbe." + proxy + "(getBuffer());");
     }
     if (p->body)
     {
@@ -6772,7 +6793,7 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case (int)" + package + ".fbe." + *s->name + model + ".fbeTypeConst:");
+            WriteLineIndent("case (int)" + domain + package + ".fbe." + *s->name + model + ".fbeTypeConst:");
             WriteLineIndent("{");
             Indent(1);
             WriteLineIndent("// Attach the FBE stream to the proxy model");
@@ -6823,9 +6844,10 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
 
 void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6836,12 +6858,12 @@ void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*;");
-    WriteLineIndent("import " + package + ".*;");
+    WriteLineIndent("import " + domain + "fbe.*;");
+    WriteLineIndent("import " + domain + package + ".*;");
     WriteLine();
     WriteLineIndent("import com.google.gson.*;");
 
@@ -6875,11 +6897,11 @@ void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
     WriteLineIndent("public static GsonBuilder register(GsonBuilder builder)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("fbe.Json.register(builder);");
+    WriteLineIndent(domain + "fbe.Json.register(builder);");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + ".fbe.Json.register(builder);");
+            WriteLineIndent(domain + *import + ".fbe.Json.register(builder);");
     }
     if (p->body)
     {
@@ -6929,6 +6951,13 @@ bool GeneratorJava::IsPrimitiveType(const std::string& type, bool optional)
             (type == "int32") || (type == "uint32") ||
             (type == "int64") || (type == "uint64") ||
             (type == "float") || (type == "double"));
+}
+
+std::string GeneratorJava::CreatePackagePath(const std::string& domain, const std::string& package)
+{
+    std::string result = domain;
+    CppCommon::StringUtils::ReplaceAll(result, ".", std::string(1, CppCommon::Path::separator()));
+    return result + CppCommon::Path::separator() + package;
 }
 
 std::string GeneratorJava::ConvertEnumBase(const std::string& type)
@@ -7171,7 +7200,7 @@ std::string GeneratorJava::ConvertPrimitiveTypeName(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertTypeName(const std::string& type, bool optional)
+std::string GeneratorJava::ConvertTypeName(const std::string& domain, const std::string& type, bool optional)
 {
     if (optional)
     {
@@ -7244,28 +7273,39 @@ std::string GeneratorJava::ConvertTypeName(const std::string& type, bool optiona
     else if (type == "uuid")
         return "UUID";
 
-    return type;
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        ns = domain + ns;
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    return ns + t;
 }
 
-std::string GeneratorJava::ConvertTypeName(const StructField& field)
+std::string GeneratorJava::ConvertTypeName(const std::string& domain, const StructField& field)
 {
     if (field.array)
-        return ConvertTypeName(*field.type, field.optional) + "[]";
+        return ConvertTypeName(domain, *field.type, field.optional) + "[]";
     else if (field.vector)
-        return "ArrayList<" + ConvertTypeName(*field.type, true) + ">";
+        return "ArrayList<" + ConvertTypeName(domain, *field.type, true) + ">";
     else if (field.list)
-        return "LinkedList<" + ConvertTypeName(*field.type, true) + ">";
+        return "LinkedList<" + ConvertTypeName(domain, *field.type, true) + ">";
     else if (field.set)
-        return "HashSet<" + ConvertTypeName(*field.key, true) + ">";
+        return "HashSet<" + ConvertTypeName(domain, *field.key, true) + ">";
     else if (field.map)
-        return "TreeMap<" + ConvertTypeName(*field.key, true) + ", " + ConvertTypeName(*field.type, true) +">";
+        return "TreeMap<" + ConvertTypeName(domain, *field.key, true) + ", " + ConvertTypeName(domain, *field.type, true) +">";
     else if (field.hash)
-        return "HashMap<" + ConvertTypeName(*field.key, true) + ", " + ConvertTypeName(*field.type, true) +">";
+        return "HashMap<" + ConvertTypeName(domain, *field.key, true) + ", " + ConvertTypeName(domain, *field.type, true) +">";
 
-    return ConvertTypeName(*field.type, field.optional);
+    return ConvertTypeName(domain, *field.type, field.optional);
 }
 
-std::string GeneratorJava::ConvertBaseFieldName(const std::string& type, bool final)
+std::string GeneratorJava::ConvertBaseFieldName(const std::string& domain, const std::string& type, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
 
@@ -7277,6 +7317,7 @@ std::string GeneratorJava::ConvertBaseFieldName(const std::string& type, bool fi
     {
         ns.assign(type, 0, pos + 1);
         ns.append("fbe.");
+        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
 
@@ -7329,7 +7370,7 @@ std::string GeneratorJava::ConvertTypeFieldName(const std::string& type)
     return result;
 }
 
-std::string GeneratorJava::ConvertTypeFieldType(const std::string& type, bool optional)
+std::string GeneratorJava::ConvertTypeFieldType(const std::string& domain, const std::string& type, bool optional)
 {
     if (type == "bool")
         return "Boolean";
@@ -7377,13 +7418,14 @@ std::string GeneratorJava::ConvertTypeFieldType(const std::string& type, bool op
     if (pos != std::string::npos)
     {
         ns.assign(type, 0, pos + 1);
+        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
 
     return ns + t;
 }
 
-std::string GeneratorJava::ConvertTypeFieldDeclaration(const std::string& type, bool optional, bool final)
+std::string GeneratorJava::ConvertTypeFieldDeclaration(const std::string& domain, const std::string& type, bool optional, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
 
@@ -7396,13 +7438,14 @@ std::string GeneratorJava::ConvertTypeFieldDeclaration(const std::string& type, 
     {
         ns.assign(type, 0, pos + 1);
         ns.append("fbe.");
+        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
 
     return ns + modelType + "Model" + opt + ConvertTypeFieldName(t);
 }
 
-std::string GeneratorJava::ConvertTypeFieldDeclaration(const StructField& field, bool final)
+std::string GeneratorJava::ConvertTypeFieldDeclaration(const std::string& domain, const StructField& field, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
 
@@ -7415,10 +7458,10 @@ std::string GeneratorJava::ConvertTypeFieldDeclaration(const StructField& field,
     else if (field.optional)
         return modelType + "ModelOptional" + ConvertTypeFieldName(*field.type);
 
-    return ConvertTypeFieldDeclaration(*field.type, field.optional, final);
+    return ConvertTypeFieldDeclaration(domain, *field.type, field.optional, final);
 }
 
-std::string GeneratorJava::ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final)
+std::string GeneratorJava::ConvertTypeFieldInitialization(const std::string& domain, const StructField& field, const std::string& offset, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
 
@@ -7440,13 +7483,14 @@ std::string GeneratorJava::ConvertTypeFieldInitialization(const StructField& fie
     {
         ns.assign(type, 0, pos + 1);
         ns.append("fbe.");
+        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
 
     return "new " + ns + modelType + "Model" + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
 }
 
-std::string GeneratorJava::ConvertConstant(const std::string& type, const std::string& value, bool optional)
+std::string GeneratorJava::ConvertConstant(const std::string& domain, const std::string& type, const std::string& value, bool optional)
 {
     if (value == "true")
         return "true";
@@ -7499,11 +7543,11 @@ std::string GeneratorJava::ConvertConstant(const std::string& type, const std::s
     else if (value == "utc")
         return "Instant.now()";
     else if (value == "uuid0")
-        return "fbe.UUIDGenerator.nil()";
+        return domain + "fbe.UUIDGenerator.nil()";
     else if (value == "uuid1")
-        return "fbe.UUIDGenerator.sequential()";
+        return domain + "fbe.UUIDGenerator.sequential()";
     else if (value == "uuid4")
-        return "fbe.UUIDGenerator.random()";
+        return domain + "fbe.UUIDGenerator.random()";
 
     std::string result = value;
 
@@ -7583,7 +7627,7 @@ std::string GeneratorJava::ConvertConstantSuffix(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertDefault(const std::string& type)
+std::string GeneratorJava::ConvertDefault(const std::string& domain, const std::string& type)
 {
     if (type == "bool")
         return "false";
@@ -7612,26 +7656,26 @@ std::string GeneratorJava::ConvertDefault(const std::string& type)
     else if (type == "timestamp")
         return "Instant.EPOCH";
     else if (type == "uuid")
-        return "fbe.UUIDGenerator.nil()";
+        return domain + "fbe.UUIDGenerator.nil()";
 
     return "new " + type + "()";
 }
 
-std::string GeneratorJava::ConvertDefault(const StructField& field)
+std::string GeneratorJava::ConvertDefault(const std::string& domain, const StructField& field)
 {
     if (field.value)
-        return ConvertConstant(*field.type, *field.value, field.optional);
+        return ConvertConstant(domain, *field.type, *field.value, field.optional);
 
     if (field.array)
-        return "new " + ConvertTypeName(*field.type, field.optional) + "[" + std::to_string(field.N) + "]";
+        return "new " + ConvertTypeName(domain, *field.type, field.optional) + "[" + std::to_string(field.N) + "]";
     else if (field.vector || field.list || field.set || field.map || field.hash)
-        return "new " + ConvertTypeName(field) + "()";
+        return "new " + ConvertTypeName(domain, field) + "()";
     else if (field.optional)
         return "null";
     else if (!IsKnownType(*field.type))
-        return "new " + ConvertTypeName(field) + "()";
+        return "new " + ConvertTypeName(domain, field) + "()";
 
-    return ConvertDefault(*field.type);
+    return ConvertDefault(domain, *field.type);
 }
 
 std::string GeneratorJava::ConvertOutputStreamType(const std::string& type, const std::string& name, bool optional)

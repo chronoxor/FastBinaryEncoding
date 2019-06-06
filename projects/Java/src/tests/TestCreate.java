@@ -3,19 +3,22 @@ package tests;
 import org.testng.*;
 import org.testng.annotations.*;
 
+import com.chronoxor.proto.*;
+import com.chronoxor.proto.fbe.*;
+
 public class TestCreate
 {
     @Test()
     public void createAndAccess()
     {
         // Create a new account using FBE model into the FBE stream
-        var writer = new proto.fbe.AccountModel();
+        var writer = new AccountModel();
         Assert.assertEquals(writer.model.fbeOffset(), 4);
         long modelBegin = writer.createBegin();
         long accountBegin = writer.model.setBegin();
         writer.model.id.set(1);
         writer.model.name.set("Test");
-        writer.model.state.set(proto.State.good);
+        writer.model.state.set(State.good);
         long walletBegin = writer.model.wallet.setBegin();
         writer.model.wallet.currency.set("USD");
         writer.model.wallet.amount.set(1000.0);
@@ -30,8 +33,8 @@ public class TestCreate
         long orderBegin = order.setBegin();
         order.id.set(1);
         order.symbol.set("EURUSD");
-        order.side.set(proto.OrderSide.buy);
-        order.type.set(proto.OrderType.market);
+        order.side.set(OrderSide.buy);
+        order.type.set(OrderType.market);
         order.price.set(1.23456);
         order.volume.set(1000.0);
         order.setEnd(orderBegin);
@@ -39,8 +42,8 @@ public class TestCreate
         orderBegin = order.setBegin();
         order.id.set(2);
         order.symbol.set("EURUSD");
-        order.side.set(proto.OrderSide.sell);
-        order.type.set(proto.OrderType.limit);
+        order.side.set(OrderSide.sell);
+        order.type.set(OrderType.limit);
         order.price.set(1.0);
         order.volume.set(100.0);
         order.setEnd(orderBegin);
@@ -48,8 +51,8 @@ public class TestCreate
         orderBegin = order.setBegin();
         order.id.set(3);
         order.symbol.set("EURUSD");
-        order.side.set(proto.OrderSide.buy);
-        order.type.set(proto.OrderType.stop);
+        order.side.set(OrderSide.buy);
+        order.type.set(OrderType.stop);
         order.price.set(1.5);
         order.volume.set(10.0);
         order.setEnd(orderBegin);
@@ -65,14 +68,14 @@ public class TestCreate
         Assert.assertEquals(writer.getBuffer().getSize(), 252);
 
         // Access the account model in the FBE stream
-        var reader = new proto.fbe.AccountModel();
+        var reader = new AccountModel();
         Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
 
         int id;
         String name;
-        proto.State state;
+        State state;
         String walletCurrency;
         double walletAmount;
         String assetWalletCurrency;
@@ -84,7 +87,7 @@ public class TestCreate
         name = reader.model.name.get();
         Assert.assertEquals(name, "Test");
         state = reader.model.state.get();
-        Assert.assertTrue(state.hasFlags(proto.State.good));
+        Assert.assertTrue(state.hasFlags(State.good));
 
         walletBegin = reader.model.wallet.getBegin();
         walletCurrency = reader.model.wallet.currency.get();
@@ -107,8 +110,8 @@ public class TestCreate
 
         int orderId;
         String orderSymbol;
-        proto.OrderSide orderSide;
-        proto.OrderType orderType;
+        OrderSide orderSide;
+        OrderType orderType;
         double orderPrice;
         double orderVolume;
 
@@ -119,9 +122,9 @@ public class TestCreate
         orderSymbol = o1.symbol.get();
         Assert.assertEquals(orderSymbol, "EURUSD");
         orderSide = o1.side.get();
-        Assert.assertEquals(orderSide, proto.OrderSide.buy);
+        Assert.assertEquals(orderSide, OrderSide.buy);
         orderType = o1.type.get();
-        Assert.assertEquals(orderType, proto.OrderType.market);
+        Assert.assertEquals(orderType, OrderType.market);
         orderPrice = o1.price.get();
         Assert.assertEquals(orderPrice, 1.23456);
         orderVolume = o1.volume.get();
@@ -135,9 +138,9 @@ public class TestCreate
         orderSymbol = o2.symbol.get();
         Assert.assertEquals(orderSymbol, "EURUSD");
         orderSide = o2.side.get();
-        Assert.assertEquals(orderSide, proto.OrderSide.sell);
+        Assert.assertEquals(orderSide, OrderSide.sell);
         orderType = o2.type.get();
-        Assert.assertEquals(orderType, proto.OrderType.limit);
+        Assert.assertEquals(orderType, OrderType.limit);
         orderPrice = o2.price.get();
         Assert.assertEquals(orderPrice, 1.0);
         orderVolume = o2.volume.get();
@@ -151,9 +154,9 @@ public class TestCreate
         orderSymbol = o3.symbol.get();
         Assert.assertEquals(orderSymbol, "EURUSD");
         orderSide = o3.side.get();
-        Assert.assertEquals(orderSide, proto.OrderSide.buy);
+        Assert.assertEquals(orderSide, OrderSide.buy);
         orderType = o3.type.get();
-        Assert.assertEquals(orderType, proto.OrderType.stop);
+        Assert.assertEquals(orderType, OrderType.stop);
         orderPrice = o3.price.get();
         Assert.assertEquals(orderPrice, 1.5);
         orderVolume = o3.volume.get();

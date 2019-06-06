@@ -4,6 +4,8 @@ import java.math.*;
 import org.testng.*;
 import org.testng.annotations.*;
 
+import com.chronoxor.fbe.*;
+
 public class TestDecimal
 {
     private BigDecimal verifyDecimal(int low, int mid, int high, boolean negative, byte scale) throws Exception
@@ -11,28 +13,28 @@ public class TestDecimal
         int flags = negative ? ((scale << 16) | 0x80000000) : (scale << 16);
 
         var buffer = new byte[16];
-        fbe.Buffer.write(buffer, 0, low);
-        fbe.Buffer.write(buffer, 4, mid);
-        fbe.Buffer.write(buffer, 8, high);
-        fbe.Buffer.write(buffer, 12, flags);
+        Buffer.write(buffer, 0, low);
+        Buffer.write(buffer, 4, mid);
+        Buffer.write(buffer, 8, high);
+        Buffer.write(buffer, 12, flags);
 
-        var model = new fbe.FieldModelDecimal(new fbe.Buffer(buffer), 0);
+        var model = new FieldModelDecimal(new Buffer(buffer), 0);
         BigDecimal value1 = model.get();
         model.set(value1);
-        if ((fbe.Buffer.readInt32(buffer, 0) != low) ||
-            (fbe.Buffer.readInt32(buffer, 4) != mid) ||
-            (fbe.Buffer.readInt32(buffer, 8) != high) ||
-            (fbe.Buffer.readInt32(buffer, 12) != flags))
+        if ((Buffer.readInt32(buffer, 0) != low) ||
+            (Buffer.readInt32(buffer, 4) != mid) ||
+            (Buffer.readInt32(buffer, 8) != high) ||
+            (Buffer.readInt32(buffer, 12) != flags))
             throw new Exception("Invalid decimal serialization!");
 
-        var finalModel = new fbe.FinalModelDecimal(new fbe.Buffer(buffer), 0);
-        var size = new fbe.Size();
+        var finalModel = new FinalModelDecimal(new Buffer(buffer), 0);
+        var size = new Size();
         BigDecimal value2 = finalModel.get(size);
         finalModel.set(value2);
-        if ((fbe.Buffer.readInt32(buffer, 0) != low) ||
-            (fbe.Buffer.readInt32(buffer, 4) != mid) ||
-            (fbe.Buffer.readInt32(buffer, 8) != high) ||
-            (fbe.Buffer.readInt32(buffer, 12) != flags) ||
+        if ((Buffer.readInt32(buffer, 0) != low) ||
+            (Buffer.readInt32(buffer, 4) != mid) ||
+            (Buffer.readInt32(buffer, 8) != high) ||
+            (Buffer.readInt32(buffer, 12) != flags) ||
             (size.value != 16) || (value1.compareTo(value2) != 0))
             throw new Exception("Invalid decimal final serialization!");
 

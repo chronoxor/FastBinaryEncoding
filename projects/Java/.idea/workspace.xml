@@ -2,39 +2,464 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="783b2918-92f4-46d2-9a41-0a253625844f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SendReceive.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SendReceiveFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/send_receive_final_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/send_receive_final_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/send_receive_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/send_receive_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_testng_testng_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_testng_testng_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_java.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_java.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_13_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_1_3_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_common_1_3_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_3_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk8_1_3_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_test_1_3_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_test_common_1_3_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_testng_testng_Latest.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/FastBinaryEncoding.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Create.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/Create.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Print.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/Print.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/PrintJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/PrintJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/SendReceive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/SendReceive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Serialization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/Serialization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/SerializationFinal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/SerializationFinal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/SerializationJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/SerializationJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumByteEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumCharEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt16Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt32Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt64Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt8Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt16Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt32Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt64Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt8Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumWChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumWCharEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/Enums.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumByteJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumCharJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumInt16Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumInt32Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumInt64Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumInt8Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumUInt16Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumUInt32Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumUInt64Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumUInt8Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumWCharJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumsFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumsModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumUInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumUInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumUInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumUInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumWChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnums.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumUInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumUInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumUInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumUInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumWChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnums.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalReceiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalSender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/Proxy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/Receiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/Sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Buffer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelBoolean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelDecimal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelDouble.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelFloat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelTimestamp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelUUID.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelWChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelBoolean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelDecimal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelDouble.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelFloat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelTimestamp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelUUID.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelWChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Model.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Pair.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Receiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Size.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/UUIDGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/Balance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/OrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/OrderSideEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/OrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/OrderTypeEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/State.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/StateEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/AccountFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/AccountModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/BalanceFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/BalanceModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelOptionalBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelOrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelOrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelVectorOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelOptionalBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelOrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelOrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelVectorOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalReceiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalSender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/OrderFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/OrderModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/OrderSideJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/OrderTypeJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/Proxy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/Receiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/Sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/StateJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/Balance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/OrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/OrderSideEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/OrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/OrderTypeEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/StateEx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/StateExEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/AccountFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/AccountModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/BalanceFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/BalanceModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelOptionalBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelOrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelOrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelStateEx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelVectorOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelOptionalBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelOrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelOrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelStateEx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelVectorOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalReceiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalSender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/OrderFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/OrderModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/OrderSideJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/OrderTypeJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/Proxy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/Receiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/Sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/StateExJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/EnumEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/EnumEmptyEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/EnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/EnumSimpleEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/EnumTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/EnumTypedEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/FlagsEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/FlagsEmptyEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/FlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/FlagsSimpleEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/FlagsTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/FlagsTypedEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructArray.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructHash.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructHashEx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructMap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructOptional.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructSet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructVector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/EnumEmptyJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/EnumSimpleJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/EnumTypedJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelEnumEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelEnumTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelFlagsEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelFlagsTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32Byte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32Bytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32EnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32FlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32OptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32OptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32OptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32OptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32OptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32StructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStructSimpleOptionalStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStructSimpleStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalBoolean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalDecimal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalDouble.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalEnumTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalFlagsTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalFloat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalStructOptional.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalTimestamp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalUUID.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalWChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalprotoAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalprotoBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalprotoOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalprotoOrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalprotoOrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalprotoState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructArray.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructHash.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructHashEx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructMap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructOptional.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructSet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructVector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelEnumEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelEnumTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelFlagsEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelFlagsTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32Byte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32Bytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32EnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32FlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32OptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32OptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32OptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32OptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32OptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32StructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStructSimpleOptionalStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStructSimpleStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalBoolean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalDecimal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalDouble.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalEnumTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalFlagsTyped.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalFloat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalInt16.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalInt32.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalInt64.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalInt8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalStructOptional.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalTimestamp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalUUID.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalWChar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalprotoAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalprotoBalance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalprotoOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalprotoOrderSide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalprotoOrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalprotoState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructArray.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructEmpty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructHash.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructHashEx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructMap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructOptional.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructSet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructVector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorOptionalByte.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorOptionalBytes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorOptionalEnumSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorOptionalFlagsSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorOptionalStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorStructSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalReceiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalSender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FlagsEmptyJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FlagsSimpleJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FlagsTypedJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/Json.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/Proxy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/Receiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/Sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructArrayFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructArrayModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructBytesFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructBytesModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructEmptyFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructEmptyModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructHashExFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructHashExModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructHashFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructHashModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructListFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructListModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructMapFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructMapModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructNestedFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructNestedModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructOptionalFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructOptionalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructSetFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructSetModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructSimpleFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructSimpleModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructVectorFinalModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructVectorModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestClone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestClone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestCreate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestCreate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestDecimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestDecimal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestEnums.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestEnums.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestExtending.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestExtending.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tests/TestSendReceive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSendReceive.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_send_receive.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_send_receive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_send_receive_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_send_receive_final.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/libraries/org_testng_testng_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/libraries/org_testng_testng_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSerialization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerialization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationFinal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationFinal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationJson.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/tests/TestSendReceive.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/tests/TestSendReceive.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/tests/TestSendReceiveFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/tests/TestSendReceiveFinal.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/tests/test_send_receive.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_send_receive.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/tests/test_send_receive_final.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_send_receive_final.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_send_receive.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_send_receive.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_send_receive_final.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_send_receive_final.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_java.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_java.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,7 +469,119 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceiveFinal.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="680">
+              <caret line="40" column="49" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationFinal.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7378">
+              <caret line="434" column="5" selection-start-line="434" selection-start-column="5" selection-end-line="434" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tests/TestSerialization.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/chronoxor/enums/EnumInt64Enum.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="646">
+              <caret line="50" column="72" selection-start-line="50" selection-start-column="72" selection-end-line="50" selection-end-column="72" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceive.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -55,17 +592,35 @@
         <option value="$PROJECT_DIR$/src/proto/proto/fbe/OrderModel.java" />
         <option value="$PROJECT_DIR$/src/proto/proto/fbe/Receiver.java" />
         <option value="$PROJECT_DIR$/src/proto/fbe/Json.java" />
-        <option value="$PROJECT_DIR$/src/tests/TestSerialization.java" />
-        <option value="$PROJECT_DIR$/src/tests/TestSerializationFinal.java" />
-        <option value="$PROJECT_DIR$/src/tests/TestSerializationJson.java" />
         <option value="$PROJECT_DIR$/src/proto/test/StructVector.java" />
-        <option value="$PROJECT_DIR$/src/examples/Print.java" />
-        <option value="$PROJECT_DIR$/src/tests/TestEnums.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/proto/proto/fbe/Proxy.java" />
         <option value="$PROJECT_DIR$/src/proto/fbe/Receiver.java" />
-        <option value="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.java" />
+        <option value="$PROJECT_DIR$/src/proto/com/chronoxor/test/StructOptional.java" />
+        <option value="$PROJECT_DIR$/src/proto/com/chronoxor/enums/fbe/Proxy.java" />
+        <option value="$PROJECT_DIR$/src/com/chronoxor/benchmarks/BenchmarkSerializationJson.java" />
+        <option value="$PROJECT_DIR$/src/com/chronoxor/examples/SendReceive.java" />
+        <option value="$PROJECT_DIR$/src/com/chronoxor/benchmarks/BenchmarkSendReceive.java" />
+        <option value="$PROJECT_DIR$/src/examples/SendReceive.java" />
+        <option value="$PROJECT_DIR$/src/examples/SerializationFinal.java" />
+        <option value="$PROJECT_DIR$/src/examples/PrintJson.java" />
+        <option value="$PROJECT_DIR$/src/examples/Serialization.java" />
+        <option value="$PROJECT_DIR$/src/examples/Create.java" />
+        <option value="$PROJECT_DIR$/src/examples/SerializationJson.java" />
+        <option value="$PROJECT_DIR$/src/examples/Print.java" />
         <option value="$PROJECT_DIR$/src/tests/TestSendReceive.java" />
+        <option value="$PROJECT_DIR$/src/tests/TestDecimal.java" />
+        <option value="$PROJECT_DIR$/src/tests/TestClone.java" />
+        <option value="$PROJECT_DIR$/src/tests/TestCreate.java" />
+        <option value="$PROJECT_DIR$/src/tests/TestSerializationFinal.java" />
+        <option value="$PROJECT_DIR$/src/tests/TestEnums.java" />
+        <option value="$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.java" />
+        <option value="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.java" />
+        <option value="$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.java" />
+        <option value="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.java" />
+        <option value="$PROJECT_DIR$/src/tests/TestSerializationJson.java" />
+        <option value="$PROJECT_DIR$/src/tests/TestSerialization.java" />
+        <option value="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.java" />
       </list>
     </option>
   </component>
@@ -77,10 +632,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="324" />
-    <option name="y" value="272" />
+    <option name="x" value="270" />
+    <option name="y" value="70" />
     <option name="width" value="2010" />
-    <option name="height" value="930" />
+    <option name="height" value="1250" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -88,6 +643,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -100,33 +657,26 @@
               <item name="Java" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Java" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556502538089" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559829965738" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.31074765" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -141,50 +691,8 @@
     </option>
   </component>
   <component name="RunManager" selected="TestNG.&lt;default&gt;">
-    <configuration name="Print" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="examples.Print" />
-      <module name="FastBinaryEncoding" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="examples.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PrintJson" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="examples.PrintJson" />
-      <module name="FastBinaryEncoding" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="examples.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SerializationFinal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="examples.SerializationFinal" />
-      <module name="FastBinaryEncoding" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="examples.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SerializationJson" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="examples.SerializationJson" />
+    <configuration name="Create" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="examples.Create" />
       <module name="FastBinaryEncoding" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
@@ -212,9 +720,16 @@
     </configuration>
     <configuration name="&lt;default&gt;" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
+      <option name="SUITE_NAME" value="" />
       <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="GROUP_NAME" value="" />
       <option name="TEST_OBJECT" value="PACKAGE" />
+      <option name="PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" value="" />
+      <option name="PROPERTIES_FILE" value="" />
       <properties />
       <listeners />
       <method v="2">
@@ -229,20 +744,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Application.SerializationFinal" />
-      <item itemvalue="Application.SerializationJson" />
-      <item itemvalue="Application.Print" />
-      <item itemvalue="Application.PrintJson" />
-      <item itemvalue="TestNG.&lt;default&gt;" />
-    </list>
     <recent_temporary>
       <list>
         <item itemvalue="TestNG.&lt;default&gt;" />
-        <item itemvalue="Application.PrintJson" />
-        <item itemvalue="Application.Print" />
-        <item itemvalue="Application.SerializationJson" />
-        <item itemvalue="Application.SerializationFinal" />
+        <item itemvalue="Application.Create" />
       </list>
     </recent_temporary>
   </component>
@@ -299,48 +804,55 @@
       <workItem from="1553270349258" duration="112000" />
       <workItem from="1553281977582" duration="70000" />
       <workItem from="1556501488162" duration="1097000" />
+      <workItem from="1559812865479" duration="6012000" />
+      <workItem from="1559819284503" duration="4807000" />
+      <workItem from="1559824100635" duration="393000" />
+      <workItem from="1559824496498" duration="741000" />
+      <workItem from="1559825318754" duration="4505000" />
+      <workItem from="1559829834492" duration="344000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="_default_ - 2019.03.02 at 19h 37m 13s.xml">
+    <history-entry file="_default_ - 2019.06.06 at 15h 13m 52s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2019.03.05 at 19h 24m 29s.xml">
+    <history-entry file="_default_ - 2019.06.06 at 15h 16m 44s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2019.03.05 at 20h 34m 06s.xml">
+    <history-entry file="_default_ - 2019.06.06 at 15h 19m 05s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2019.03.06 at 15h 20m 05s.xml">
+    <history-entry file="TestClone - 2019.06.06 at 15h 19m 26s.xml">
+      <configuration name="TestClone" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="TestClone - 2019.06.06 at 15h 19m 30s.xml">
+      <configuration name="TestClone" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="TestClone - 2019.06.06 at 15h 24m 18s.xml">
+      <configuration name="TestClone" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="_default_ - 2019.06.06 at 15h 25m 07s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2019.03.06 at 21h 14m 07s.xml">
+    <history-entry file="_default_ - 2019.06.06 at 16h 06m 57s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2019.03.06 at 21h 14m 17s.xml">
+    <history-entry file="_default_ - 2019.06.06 at 16h 39m 53s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2019.03.14 at 02h 55m 08s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="_default_ - 2019.03.22 at 19h 00m 54s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="_default_ - 2019.03.22 at 22h 13m 53s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="_default_ - 2019.04.29 at 04h 44m 31s.xml">
+    <history-entry file="_default_ - 2019.06.06 at 17h 04m 59s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20673000" />
+    <option name="totallyTimeSpent" value="37475000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="324" y="272" width="2010" height="930" extended-state="0" />
+    <frame x="216" y="56" width="1608" height="1000" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34820512" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.37919897" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -349,8 +861,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.47846153" weight="0.35884568" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49691993" weight="0.39964476" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.58914727" weight="0.35829493" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49547803" weight="0.39907727" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -358,8 +870,8 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="JProfiler" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4996968" weight="0.32891247" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.52153844" side_tool="true" visible="true" weight="0.32496864" />
-      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.47846153" visible="true" weight="0.32496864" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.4108527" side_tool="true" visible="true" weight="0.35829493" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.38501292" weight="0.28341013" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -377,113 +889,161 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/examples/SendReceive.java">
+    <entry file="file://$PROJECT_DIR$/src/proto/proto/fbe/OrderModel.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/protoex/Balance.java" />
+    <entry file="file://$PROJECT_DIR$/FastBinaryEncoding.iml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
-        </state>
+        <state relative-caret-position="-629" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.java">
+    <entry file="file://$PROJECT_DIR$/src/proto/test/EnumEmptyEnum.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/com/chronoxor/test/fbe/FieldModelVectorEnumSimple.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/com/chronoxor/enums/EnumByte.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/com/chronoxor/test/fbe/FinalModelOptionalprotoOrderType.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/com/chronoxor/enums/fbe/FinalModelEnums.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/com/chronoxor/test/StructSimple.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/com/chronoxor/test/StructOptional.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/com/chronoxor/test/fbe/FinalSender.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/com/chronoxor/test/fbe/Proxy.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/com/chronoxor/enums/fbe/FinalSender.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/com/chronoxor/protoex/fbe/Sender.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/com/chronoxor/proto/fbe/Receiver.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/com/chronoxor/enums/fbe/Proxy.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/com/chronoxor/test/fbe/FinalReceiver.java" />
+    <entry file="file://$PROJECT_DIR$/src/proto/com/chronoxor/proto/fbe/FinalReceiver.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/benchmarks/BenchmarkSerializationJson.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/examples/SendReceive.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/benchmarks/BenchmarkSendReceive.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/proto/Account.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="57" selection-start-line="57" selection-end-line="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/examples/Serialization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="42" column="20" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
+        <state>
           <folding>
+            <element signature="e#0#3653#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/fbe/FieldModelBytes.java">
+    <entry file="file://$PROJECT_DIR$/src/examples/SendReceive.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1259">
-          <caret line="107" selection-start-line="107" selection-end-line="107" />
+        <state relative-caret-position="408">
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/TypeAdapter.class" />
-    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/JsonDeserializer.class" />
-    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/internal/bind/TypeAdapters.class" />
-    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/GsonBuilder.class" />
-    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/internal/bind/TreeTypeAdapter.class" />
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/test/StructHash.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="65" column="33" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/enums/Enums.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Receiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="63" column="31" selection-start-line="63" selection-start-column="31" selection-end-line="63" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/proto/Order.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="119" column="78" selection-start-line="119" selection-start-column="78" selection-end-line="119" selection-end-column="78" />
+          <folding>
+            <element signature="e#0#3163#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/test/StructSimple.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="57" column="25" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/test/fbe/FieldModelStructSimple.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="823" column="40" selection-start-line="823" selection-start-column="40" selection-end-line="823" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/examples/SerializationFinal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/examples/PrintJson.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="29" selection-start-line="6" selection-end-line="7" selection-end-column="29" />
+        <state relative-caret-position="204">
+          <caret line="12" column="31" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/testng-7.0.0-beta1.jar!/org/testng/internal/Invoker.class" />
-    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/Gson.class" />
-    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/internal/bind/ReflectiveTypeAdapterFactory.class" />
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructSimple.java">
+    <entry file="file://$PROJECT_DIR$/src/examples/Serialization.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4471">
-          <caret line="276" selection-start-line="276" selection-end-line="276" />
+        <state relative-caret-position="257">
+          <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/fbe/Json.java">
+    <entry file="file://$PROJECT_DIR$/src/examples/Create.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+        <state relative-caret-position="187">
+          <caret line="11" column="39" lean-forward="true" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-11/lib/src.zip!/java.base/java/nio/Buffer.java" />
-    <entry file="file://$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumUInt32.java">
+    <entry file="file://$PROJECT_DIR$/src/examples/SerializationJson.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+          <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestSerialization.java">
+    <entry file="file://$PROJECT_DIR$/src/examples/Print.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13022">
-          <caret line="770" column="38" selection-start-line="770" selection-start-column="38" selection-end-line="770" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationFinal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13668">
-          <caret line="808" column="49" selection-start-line="808" selection-start-column="49" selection-end-line="808" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestClone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="151" selection-start-line="12" selection-start-column="151" selection-end-line="12" selection-end-column="151" />
+        <state relative-caret-position="240">
+          <caret line="173" column="8" selection-start-line="173" selection-start-column="8" selection-end-line="173" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tests/TestCreate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
+        <state relative-caret-position="2618">
+          <caret line="155" column="53" selection-start-line="155" selection-start-column="53" selection-end-line="155" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/TestEnums.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/TestExtending.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/TestClone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -492,211 +1052,106 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tests/TestDecimal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestExtending.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/proto/Account.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1768">
-          <caret line="116" column="48" selection-start-line="116" selection-start-column="48" selection-end-line="116" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructVector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2363">
-          <caret line="152" column="12" selection-start-line="152" selection-start-column="12" selection-end-line="152" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2550">
-          <caret line="163" column="27" selection-start-line="163" selection-start-column="27" selection-end-line="163" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/fbe/Buffer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="35" column="27" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/fbe/FieldModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/enums/EnumByte.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/examples/Create.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructBytes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/examples/Print.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="184" selection-start-line="184" selection-end-line="184" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/protoex/OrderTypeEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16694">
-          <caret line="986" selection-start-line="986" selection-end-line="986" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestEnums.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="220" selection-start-line="220" selection-end-line="220" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/fbe/Sender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/proto/fbe/Sender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/enums/EnumUInt32Enum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/enums/EnumInt32Enum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="49" column="75" selection-start-line="49" selection-start-column="75" selection-end-line="49" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructEmpty.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-941">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/fbe/Receiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="38" column="4" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/proto/fbe/Proxy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/proto/fbe/OrderModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-238">
-          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/protoex/Balance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="e#685#686#0" expanded="true" />
-            <element signature="e#714#715#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceiveFinal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="65" column="5" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="544">
+          <caret line="34" column="27" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="31" column="21" lean-forward="true" selection-start-line="26" selection-end-line="31" selection-end-column="21" />
+        <state relative-caret-position="357">
+          <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FastBinaryEncoding.iml">
+    <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceiveFinal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-629" />
+        <state relative-caret-position="357">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/EnumEmptyEnum.java">
+    <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="38" column="75" selection-start-line="38" selection-start-column="75" selection-end-line="38" selection-end-column="75" />
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="49" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationFinal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7378">
+          <caret line="434" column="5" selection-start-line="434" selection-start-column="5" selection-end-line="434" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/TestSerialization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/enums/EnumInt64Enum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="50" column="72" selection-start-line="50" selection-start-column="72" selection-end-line="50" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -717,7 +1172,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Kotlin (FastBinaryEncoding)|Kotlin</last-edited>
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -757,7 +1212,6 @@
             <option name="proportions">
               <list>
                 <option value="0.31074765" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -765,7 +1219,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>com.google.code.gson:gson:Latest</last-edited>
+          <last-edited>org.testng:testng:6.14.3</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

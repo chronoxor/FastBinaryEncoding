@@ -3,7 +3,7 @@ package benchmarks;
 import java.util.*;
 import org.openjdk.jmh.annotations.*;
 
-class MySender1 extends proto.fbe.Sender
+class MySender1 extends com.chronoxor.proto.fbe.Sender
 {
     private long _size;
     private long _logSize;
@@ -17,7 +17,7 @@ class MySender1 extends proto.fbe.Sender
     protected void onSendLog(String message) { _logSize += message.length(); }
 }
 
-class MySender2 extends proto.fbe.Sender
+class MySender2 extends com.chronoxor.proto.fbe.Sender
 {
     private long _size;
     private long _logSize;
@@ -31,18 +31,18 @@ class MySender2 extends proto.fbe.Sender
     protected void onSendLog(String message) { _logSize += message.length(); }
 }
 
-class MyReceiver extends proto.fbe.Receiver
+class MyReceiver extends com.chronoxor.proto.fbe.Receiver
 {
     private long _logSize;
 
     public long getLogSize() { return _logSize; }
 
     @Override
-    protected void onReceive(proto.Order value) {}
+    protected void onReceive(com.chronoxor.proto.Order value) {}
     @Override
-    protected void onReceive(proto.Balance value) {}
+    protected void onReceive(com.chronoxor.proto.Balance value) {}
     @Override
-    protected void onReceive(proto.Account value) {}
+    protected void onReceive(com.chronoxor.proto.Account value) {}
 
     @Override
     protected void onReceiveLog(String message) { _logSize += message.length(); }
@@ -51,7 +51,7 @@ class MyReceiver extends proto.fbe.Receiver
 @State(Scope.Benchmark)
 public class BenchmarkSendReceive
 {
-    private final proto.Account _account;
+    private final com.chronoxor.proto.Account _account;
     private final MySender1 _sender1;
     private final MySender2 _sender2;
     private final MyReceiver _receiver;
@@ -59,10 +59,10 @@ public class BenchmarkSendReceive
     public BenchmarkSendReceive()
     {
         // Create a new account with some orders
-        _account = new proto.Account(1, "Test", proto.State.good, new proto.Balance("USD", 1000.0), new proto.Balance("EUR", 100.0), new ArrayList<proto.Order>());
-        _account.orders.add(new proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0));
-        _account.orders.add(new proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0));
-        _account.orders.add(new proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0));
+        _account = new com.chronoxor.proto.Account(1, "Test", com.chronoxor.proto.State.good, new com.chronoxor.proto.Balance("USD", 1000.0), new com.chronoxor.proto.Balance("EUR", 100.0), new ArrayList<com.chronoxor.proto.Order>());
+        _account.orders.add(new com.chronoxor.proto.Order(1, "EURUSD", com.chronoxor.proto.OrderSide.buy, com.chronoxor.proto.OrderType.market, 1.23456, 1000.0));
+        _account.orders.add(new com.chronoxor.proto.Order(2, "EURUSD", com.chronoxor.proto.OrderSide.sell, com.chronoxor.proto.OrderType.limit, 1.0, 100.0));
+        _account.orders.add(new com.chronoxor.proto.Order(3, "EURUSD", com.chronoxor.proto.OrderSide.buy, com.chronoxor.proto.OrderType.stop, 1.5, 10.0));
 
         _sender1 = new MySender1();
         _sender1.send(_account);

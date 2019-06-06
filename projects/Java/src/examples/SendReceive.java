@@ -2,7 +2,10 @@ package examples;
 
 import java.util.*;
 
-class MySender extends proto.fbe.Sender
+import com.chronoxor.proto.*;
+import com.chronoxor.proto.fbe.*;
+
+class MySender extends Sender
 {
     @Override
     protected long onSend(byte[] buffer, long offset, long size)
@@ -18,14 +21,14 @@ class MySender extends proto.fbe.Sender
     }
 }
 
-class MyReceiver extends proto.fbe.Receiver
+class MyReceiver extends Receiver
 {
     @Override
-    protected void onReceive(proto.Order value) {}
+    protected void onReceive(Order value) {}
     @Override
-    protected void onReceive(proto.Balance value) {}
+    protected void onReceive(Balance value) {}
     @Override
-    protected void onReceive(proto.Account value) {}
+    protected void onReceive(Account value) {}
 
     @Override
     protected void onReceiveLog(String message)
@@ -44,18 +47,18 @@ public class SendReceive
         sender.setLogging(true);
 
         // Create and send a new order
-        var order = new proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0);
+        var order = new Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0);
         sender.send(order);
 
         // Create and send a new balance wallet
-        var balance = new proto.Balance("USD", 1000.0);
+        var balance = new Balance("USD", 1000.0);
         sender.send(balance);
 
         // Create and send a new account with some orders
-        var account = new proto.Account(1, "Test", proto.State.good, new proto.Balance("USD", 1000.0), new proto.Balance("EUR", 100.0), new ArrayList<proto.Order>());
-        account.orders.add(new proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0));
-        account.orders.add(new proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0));
-        account.orders.add(new proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0));
+        var account = new Account(1, "Test", State.good, new Balance("USD", 1000.0), new Balance("EUR", 100.0), new ArrayList<Order>());
+        account.orders.add(new Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0));
+        account.orders.add(new Order(2, "EURUSD", OrderSide.sell, OrderType.limit, 1.0, 100.0));
+        account.orders.add(new Order(3, "EURUSD", OrderSide.buy, OrderType.stop, 1.5, 10.0));
         sender.send(account);
 
         var receiver = new MyReceiver();
