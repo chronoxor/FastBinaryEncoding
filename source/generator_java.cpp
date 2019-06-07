@@ -30,7 +30,7 @@ void GeneratorJava::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel(domain, "fbe", "Int64", "long", "", "8", "0l");
     GenerateFBEFieldModel(domain, "fbe", "Float", "float", "", "4", "0.0f");
     GenerateFBEFieldModel(domain, "fbe", "Double", "double", "", "8", "0.0d");
-    GenerateFBEFieldModel(domain, "fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
+    GenerateFBEFieldModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
     GenerateFBEFieldModelDecimal(domain, "fbe");
     GenerateFBEFieldModelTimestamp(domain, "fbe");
     GenerateFBEFieldModelBytes(domain, "fbe");
@@ -49,7 +49,7 @@ void GeneratorJava::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel(domain, "fbe", "Int64", "long", "", "8", "0l");
         GenerateFBEFinalModel(domain, "fbe", "Float", "float", "", "4", "0.0f");
         GenerateFBEFinalModel(domain, "fbe", "Double", "double", "", "8", "0.0d");
-        GenerateFBEFinalModel(domain, "fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
+        GenerateFBEFinalModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
         GenerateFBEFinalModelDecimal(domain, "fbe");
         GenerateFBEFinalModelTimestamp(domain, "fbe");
         GenerateFBEFinalModelBytes(domain, "fbe");
@@ -91,17 +91,6 @@ void GeneratorJava::GenerateImports(const std::string& domain, const std::string
     // Generate package name
     WriteLine();
     WriteLineIndent("package " + domain + package + ";");
-
-    // Generate common import
-    WriteLine();
-    WriteLineIndent("import java.io.*;");
-    WriteLineIndent("import java.lang.*;");
-    WriteLineIndent("import java.lang.reflect.*;");
-    WriteLineIndent("import java.math.*;");
-    WriteLineIndent("import java.nio.ByteBuffer;");
-    WriteLineIndent("import java.nio.charset.*;");
-    WriteLineIndent("import java.time.*;");
-    WriteLineIndent("import java.util.*;");
 }
 
 void GeneratorJava::GenerateImports(const std::shared_ptr<Package>& p)
@@ -110,15 +99,6 @@ void GeneratorJava::GenerateImports(const std::shared_ptr<Package>& p)
 
     // Generate common import
     GenerateImports(domain, *p->name);
-
-    // Generate FBE import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-
-    // Generate packages import
-    if (p->import)
-        for (const auto& import : p->import->imports)
-            WriteLineIndent("import " + domain + *import + ".*;");
 }
 
 void GeneratorJava::GenerateFBEPackage(const std::string& domain, const std::string& package)
@@ -198,7 +178,7 @@ public final class UUIDGenerator
 
     // Lock and random generator
     private static final Object _lock = new Object();
-    private static final Random _generator = new Random();
+    private static final java.util.Random _generator = new java.util.Random();
 
     // Node & clock sequence bytes
     private static long _node = makeNode();
@@ -227,10 +207,10 @@ public final class UUIDGenerator
     }
 
     // Generate nil UUID0 (all bits set to zero)
-    public static UUID nil() { return new UUID(0, 0); }
+    public static java.util.UUID nil() { return new java.util.UUID(0, 0); }
 
     // Generate sequential UUID1 (time based version)
-    public static UUID sequential()
+    public static java.util.UUID sequential()
     {
         long now = System.currentTimeMillis();
 
@@ -251,11 +231,11 @@ public final class UUIDGenerator
         // Sets the version to 1
         msb |= 0x0000000000001000L;
 
-        return new UUID(msb, _nodeAndClockSequence);
+        return new java.util.UUID(msb, _nodeAndClockSequence);
     }
 
     // Generate random UUID4 (randomly or pseudo-randomly generated version)
-    public static UUID random() { return UUID.randomUUID(); }
+    public static java.util.UUID random() { return java.util.UUID.randomUUID(); }
 }
 )CODE";
 
@@ -485,12 +465,12 @@ public class Buffer
 
     public static String readString(byte[] buffer, long offset, long size)
     {
-        return new String(buffer, (int)offset, (int)size, StandardCharsets.UTF_8);
+        return new String(buffer, (int)offset, (int)size, java.nio.charset.StandardCharsets.UTF_8);
     }
 
-    public static UUID readUUID(byte[] buffer, long offset)
+    public static java.util.UUID readUUID(byte[] buffer, long offset)
     {
-        return new UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8));
+        return new java.util.UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8));
     }
 
     public static void write(byte[] buffer, long offset, boolean value)
@@ -569,7 +549,7 @@ public class Buffer
             buffer[(int)(offset + i)] = value;
     }
 
-    public static void write(byte[] buffer, long offset, UUID value)
+    public static void write(byte[] buffer, long offset, java.util.UUID value)
     {
         writeBE(buffer, offset, value.getMostSignificantBits());
         writeBE(buffer, offset + 8, value.getLeastSignificantBits());
@@ -707,7 +687,7 @@ public abstract class FieldModel
     protected double readDouble(long offset) { return Buffer.readDouble(_buffer.getData(), _buffer.getOffset() + offset); }
     protected byte[] readBytes(long offset, long size) { return Buffer.readBytes(_buffer.getData(), _buffer.getOffset() + offset, size); }
     protected String readString(long offset, long size) { return Buffer.readString(_buffer.getData(), _buffer.getOffset() + offset, size); }
-    protected UUID readUUID(long offset) { return Buffer.readUUID(_buffer.getData(), _buffer.getOffset() + offset); }
+    protected java.util.UUID readUUID(long offset) { return Buffer.readUUID(_buffer.getData(), _buffer.getOffset() + offset); }
     protected void write(long offset, boolean value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
     protected void write(long offset, byte value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
     protected void write(long offset, short value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
@@ -718,7 +698,7 @@ public abstract class FieldModel
     protected void write(long offset, byte[] value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
     protected void write(long offset, byte[] value, long valueOffset, long valueSize) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value, valueOffset, valueSize); }
     protected void write(long offset, byte value, long valueCount) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value, valueCount); }
-    protected void write(long offset, UUID value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
+    protected void write(long offset, java.util.UUID value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
 }
 )CODE";
 
@@ -818,8 +798,8 @@ public final class FieldModelDecimal extends FieldModel
     public long fbeSize() { return 16; }
 
     // Get the decimal value
-    public BigDecimal get() { return get(BigDecimal.valueOf(0L)); }
-    public BigDecimal get(BigDecimal defaults)
+    public java.math.BigDecimal get() { return get(java.math.BigDecimal.valueOf(0L)); }
+    public java.math.BigDecimal get(java.math.BigDecimal defaults)
     {
         assert (defaults != null) : "Invalid default decimal value!";
         if (defaults == null)
@@ -840,13 +820,13 @@ public final class FieldModelDecimal extends FieldModel
             magnitude[magnitude.length - i - 1] = temp;
         }
 
-        var unscaled = new BigInteger(signum, magnitude);
+        var unscaled = new java.math.BigInteger(signum, magnitude);
 
-        return new BigDecimal(unscaled, scale);
+        return new java.math.BigDecimal(unscaled, scale);
     }
 
     // Set the decimal value
-    public void set(BigDecimal value)
+    public void set(java.math.BigDecimal value)
     {
         assert (value != null) : "Invalid decimal value!";
         if (value == null)
@@ -857,7 +837,7 @@ public final class FieldModelDecimal extends FieldModel
             return;
 
         // Get unscaled absolute value
-        BigInteger unscaled = value.abs().unscaledValue();
+        java.math.BigInteger unscaled = value.abs().unscaledValue();
         int bitLength = unscaled.bitLength();
         if ((bitLength < 0) || (bitLength > 96))
         {
@@ -931,8 +911,8 @@ public final class FieldModelTimestamp extends FieldModel
     public long fbeSize() { return 8; }
 
     // Get the timestamp value
-    public Instant get() { return get(Instant.EPOCH); }
-    public Instant get(Instant defaults)
+    public java.time.Instant get() { return get(java.time.Instant.EPOCH); }
+    public java.time.Instant get(java.time.Instant defaults)
     {
         assert (defaults != null) : "Invalid default timestamp value!";
         if (defaults == null)
@@ -942,11 +922,11 @@ public final class FieldModelTimestamp extends FieldModel
             return defaults;
 
         long nanoseconds = readInt64(fbeOffset());
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
+        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
     }
 
     // Set the timestamp value
-    public void set(Instant value)
+    public void set(java.time.Instant value)
     {
         assert (value != null) : "Invalid timestamp value!";
         if (value == null)
@@ -1032,8 +1012,8 @@ public final class FieldModelBytes extends FieldModel
     }
 
     // Get the bytes value
-    public ByteBuffer get() { return get(ByteBuffer.allocate(0)); }
-    public ByteBuffer get(ByteBuffer defaults)
+    public java.nio.ByteBuffer get() { return get(java.nio.ByteBuffer.allocate(0)); }
+    public java.nio.ByteBuffer get(java.nio.ByteBuffer defaults)
     {
         assert (defaults != null) : "Invalid default bytes value!";
         if (defaults == null)
@@ -1055,11 +1035,11 @@ public final class FieldModelBytes extends FieldModel
         if ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.getSize())
             return defaults;
 
-        return ByteBuffer.wrap(readBytes(fbeBytesOffset + 4, fbeBytesSize));
+        return java.nio.ByteBuffer.wrap(readBytes(fbeBytesOffset + 4, fbeBytesSize));
     }
 
     // Set the bytes value
-    public void set(ByteBuffer value)
+    public void set(java.nio.ByteBuffer value)
     {
         assert (value != null) : "Invalid bytes value!";
         if (value == null)
@@ -1189,7 +1169,7 @@ public final class FieldModelString extends FieldModel
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
+        byte[] bytes = value.getBytes(java.nio.charset.StandardCharsets.UTF_8);
 
         int fbeStringSize = bytes.length;
         int fbeStringOffset = (int)(_buffer.allocate(4 + fbeStringSize) - _buffer.getOffset());
@@ -1231,16 +1211,11 @@ void GeneratorJava::GenerateFBEFieldModelOptional(const std::string& domain, con
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     std::string code = R"CODE(
 // Fast Binary Encoding optional _NAME_ field model
-public final class FieldModelOptional_NAME_ extends FieldModel
+public final class FieldModelOptional_NAME_ extends _DOMAIN_fbe.FieldModel
 {
-    public FieldModelOptional_NAME_(Buffer buffer, long offset)
+    public FieldModelOptional_NAME_(_DOMAIN_fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         value = new _MODEL_(buffer, 0);
@@ -1378,8 +1353,9 @@ public final class FieldModelOptional_NAME_ extends FieldModel
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), domain + package + "." + type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -1407,19 +1383,14 @@ void GeneratorJava::GenerateFBEFieldModelArray(const std::string& domain, const 
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array field model
-public final class FieldModelArray_NAME_ extends FieldModel
+public final class FieldModelArray_NAME_ extends _DOMAIN_fbe.FieldModel
 {
     private final _MODEL_ _model;
     private final long _size;
 
-    public FieldModelArray_NAME_(Buffer buffer, long offset, long size)
+    public FieldModelArray_NAME_(_DOMAIN_fbe.Buffer buffer, long offset, long size)
     {
         super(buffer, offset);
         _model = new _MODEL_(buffer, offset);
@@ -1496,8 +1467,8 @@ public final class FieldModelArray_NAME_ extends FieldModel
         }
     }
 
-    // Get the array as ArrayList
-    public void get(ArrayList<_TYPE_> values)
+    // Get the array as java.util.ArrayList
+    public void get(java.util.ArrayList<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -1534,8 +1505,8 @@ public final class FieldModelArray_NAME_ extends FieldModel
         }
     }
 
-    // Set the array as List
-    public void set(ArrayList<_TYPE_> values)
+    // Set the array as java.util.ArrayList
+    public void set(java.util.ArrayList<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -1556,11 +1527,12 @@ public final class FieldModelArray_NAME_ extends FieldModel
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), domain + package + "." + type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_ARRAY_"), (bytes ? "byte" : type) + "[]");
-    code = std::regex_replace(code, std::regex("_INIT_"), ((type != "byte[]") ? ("new " + (bytes ? "byte" : type) + "[(int)_size]") : "new byte[(int)_size][]"));
+    code = std::regex_replace(code, std::regex("_ARRAY_"), (bytes ? "byte" : (domain + package + "." + type)) + "[]");
+    code = std::regex_replace(code, std::regex("_INIT_"), ((type != "byte[]") ? ("new " + (bytes ? "byte" : (domain + package + "." + type)) + "[(int)_size]") : "new byte[(int)_size][]"));
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -1587,18 +1559,13 @@ void GeneratorJava::GenerateFBEFieldModelVector(const std::string& domain, const
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ vector field model
-public final class FieldModelVector_NAME_ extends FieldModel
+public final class FieldModelVector_NAME_ extends _DOMAIN_fbe.FieldModel
 {
     private final _MODEL_ _model;
 
-    public FieldModelVector_NAME_(Buffer buffer, long offset)
+    public FieldModelVector_NAME_(_DOMAIN_fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         _model = new _MODEL_(buffer, offset);
@@ -1712,8 +1679,8 @@ public final class FieldModelVector_NAME_ extends FieldModel
         return true;
     }
 
-    // Get the vector as ArrayList
-    public void get(ArrayList<_TYPE_> values)
+    // Get the vector as java.util.ArrayList
+    public void get(java.util.ArrayList<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -1736,8 +1703,8 @@ public final class FieldModelVector_NAME_ extends FieldModel
         }
     }
 
-    // Get the vector as LinkedList
-    public void get(LinkedList<_TYPE_> values)
+    // Get the vector as java.util.LinkedList
+    public void get(java.util.LinkedList<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -1758,8 +1725,8 @@ public final class FieldModelVector_NAME_ extends FieldModel
         }
     }
 
-    // Get the vector as HashSet
-    public void get(HashSet<_TYPE_> values)
+    // Get the vector as java.util.HashSet
+    public void get(java.util.HashSet<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -1780,8 +1747,8 @@ public final class FieldModelVector_NAME_ extends FieldModel
         }
     }
 
-    // Set the vector as ArrayList
-    public void set(ArrayList<_TYPE_> values)
+    // Set the vector as java.util.ArrayList
+    public void set(java.util.ArrayList<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -1799,8 +1766,8 @@ public final class FieldModelVector_NAME_ extends FieldModel
         }
     }
 
-    // Set the vector as LinkedList
-    public void set(LinkedList<_TYPE_> values)
+    // Set the vector as java.util.LinkedList
+    public void set(java.util.LinkedList<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -1818,8 +1785,8 @@ public final class FieldModelVector_NAME_ extends FieldModel
         }
     }
 
-    // Set the vector as HashSet
-    public void set(HashSet<_TYPE_> values)
+    // Set the vector as java.util.HashSet
+    public void set(java.util.HashSet<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -1840,8 +1807,9 @@ public final class FieldModelVector_NAME_ extends FieldModel
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), domain + package + "." + type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -1869,19 +1837,14 @@ void GeneratorJava::GenerateFBEFieldModelMap(const std::string& domain, const st
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map field model
-public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
+public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends _DOMAIN_fbe.FieldModel
 {
     private final _KEY_MODEL_ _modelKey;
     private final _VALUE_MODEL_ _modelValue;
 
-    public FieldModelMap_KEY_NAME__VALUE_NAME_(Buffer buffer, long offset)
+    public FieldModelMap_KEY_NAME__VALUE_NAME_(_DOMAIN_fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         _modelKey = new _KEY_MODEL_(buffer, offset);
@@ -2007,8 +1970,8 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
         return true;
     }
 
-    // Get the map as TreeMap
-    public void get(TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
+    // Get the map as java.util.TreeMap
+    public void get(java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -2031,8 +1994,8 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
         }
     }
 
-    // Get the map as HashMap
-    public void get(HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
+    // Get the map as java.util.HashMap
+    public void get(java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -2055,8 +2018,8 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
         }
     }
 
-    // Set the map as TreeMap
-    public void set(TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
+    // Set the map as java.util.TreeMap
+    public void set(java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -2076,8 +2039,8 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
         }
     }
 
-    // Set the map as HashMap
-    public void set(HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
+    // Set the map as java.util.HashMap
+    public void set(java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -2100,11 +2063,12 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_KEY_NAME_"), key_name);
-    code = std::regex_replace(code, std::regex("_KEY_TYPE_"), key_type);
+    code = std::regex_replace(code, std::regex("_KEY_TYPE_"), domain + package + "." + key_type);
     code = std::regex_replace(code, std::regex("_KEY_MODEL_"), key_model);
     code = std::regex_replace(code, std::regex("_VALUE_NAME_"), value_name);
-    code = std::regex_replace(code, std::regex("_VALUE_TYPE_"), value_type);
+    code = std::regex_replace(code, std::regex("_VALUE_TYPE_"), domain + package + "." + value_type);
     code = std::regex_replace(code, std::regex("_VALUE_MODEL_"), value_model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -2132,16 +2096,11 @@ void GeneratorJava::GenerateFBEFieldModelEnumFlags(const std::string& domain, co
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ field model
-public final class FieldModel_NAME_ extends FieldModel
+public final class FieldModel_NAME_ extends _DOMAIN_fbe.FieldModel
 {
-    public FieldModel_NAME_(Buffer buffer, long offset) { super(buffer, offset); }
+    public FieldModel_NAME_(_DOMAIN_fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the field size
     @Override
@@ -2170,6 +2129,7 @@ public final class FieldModel_NAME_ extends FieldModel
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_SIZE_"), ConvertEnumSize(type));
     code = std::regex_replace(code, std::regex("_READ_"), ConvertEnumRead(type));
@@ -2277,7 +2237,7 @@ public abstract class FinalModel
     protected double readDouble(long offset) { return Buffer.readDouble(_buffer.getData(), _buffer.getOffset() + offset); }
     protected byte[] readBytes(long offset, long size) { return Buffer.readBytes(_buffer.getData(), _buffer.getOffset() + offset, size); }
     protected String readString(long offset, long size) { return Buffer.readString(_buffer.getData(), _buffer.getOffset() + offset, size); }
-    protected UUID readUUID(long offset) { return Buffer.readUUID(_buffer.getData(), _buffer.getOffset() + offset); }
+    protected java.util.UUID readUUID(long offset) { return Buffer.readUUID(_buffer.getData(), _buffer.getOffset() + offset); }
     protected void write(long offset, boolean value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
     protected void write(long offset, byte value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
     protected void write(long offset, short value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
@@ -2288,7 +2248,7 @@ public abstract class FinalModel
     protected void write(long offset, byte[] value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
     protected void write(long offset, byte[] value, long valueOffset, long valueSize) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value, valueOffset, valueSize); }
     protected void write(long offset, byte value, long valueCount) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value, valueCount); }
-    protected void write(long offset, UUID value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
+    protected void write(long offset, java.util.UUID value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
 }
 )CODE";
 
@@ -2398,7 +2358,7 @@ public final class FinalModelDecimal extends FinalModel
     public FinalModelDecimal(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(BigDecimal value) { return fbeSize(); }
+    public long fbeAllocationSize(java.math.BigDecimal value) { return fbeSize(); }
 
     // Get the final size
     @Override
@@ -2415,10 +2375,10 @@ public final class FinalModelDecimal extends FinalModel
     }
 
     // Get the decimal value
-    public BigDecimal get(Size size)
+    public java.math.BigDecimal get(Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
-            return BigDecimal.valueOf(0L);
+            return java.math.BigDecimal.valueOf(0L);
 
         byte[] magnitude = readBytes(fbeOffset(), 12);
         int scale = readByte(fbeOffset() + 14);
@@ -2432,21 +2392,21 @@ public final class FinalModelDecimal extends FinalModel
             magnitude[magnitude.length - i - 1] = temp;
         }
 
-        var unscaled = new BigInteger(signum, magnitude);
+        var unscaled = new java.math.BigInteger(signum, magnitude);
 
         size.value = fbeSize();
-        return new BigDecimal(unscaled, scale);
+        return new java.math.BigDecimal(unscaled, scale);
     }
 
     // Set the decimal value
-    public long set(BigDecimal value)
+    public long set(java.math.BigDecimal value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
         // Get unscaled absolute value
-        BigInteger unscaled = value.abs().unscaledValue();
+        java.math.BigInteger unscaled = value.abs().unscaledValue();
         int bitLength = unscaled.bitLength();
         if ((bitLength < 0) || (bitLength > 96))
         {
@@ -2517,7 +2477,7 @@ public final class FinalModelTimestamp extends FinalModel
     public FinalModelTimestamp(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(Instant value) { return fbeSize(); }
+    public long fbeAllocationSize(java.time.Instant value) { return fbeSize(); }
 
     // Get the final size
     @Override
@@ -2534,18 +2494,18 @@ public final class FinalModelTimestamp extends FinalModel
     }
 
     // Get the timestamp value
-    public Instant get(Size size)
+    public java.time.Instant get(Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
-            return Instant.EPOCH;
+            return java.time.Instant.EPOCH;
 
         size.value = fbeSize();
         long nanoseconds = readInt64(fbeOffset());
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
+        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
     }
 
     // Set the timestamp value
-    public long set(Instant value)
+    public long set(java.time.Instant value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
@@ -2589,7 +2549,7 @@ public final class FinalModelBytes extends FinalModel
     public FinalModelBytes(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(ByteBuffer value) { return 4 + value.array().length; }
+    public long fbeAllocationSize(java.nio.ByteBuffer value) { return 4 + value.array().length; }
 
     // Check if the bytes value is valid
     @Override
@@ -2606,12 +2566,12 @@ public final class FinalModelBytes extends FinalModel
     }
 
     // Get the bytes value
-    public ByteBuffer get(Size size)
+    public java.nio.ByteBuffer get(Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
         {
             size.value = 0;
-            return ByteBuffer.allocate(0);
+            return java.nio.ByteBuffer.allocate(0);
         }
 
         int fbeBytesSize = readInt32(fbeOffset());
@@ -2619,15 +2579,15 @@ public final class FinalModelBytes extends FinalModel
         if ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) > _buffer.getSize())
         {
             size.value = 4;
-            return ByteBuffer.allocate(0);
+            return java.nio.ByteBuffer.allocate(0);
         }
 
         size.value = 4 + fbeBytesSize;
-        return ByteBuffer.wrap(readBytes(fbeOffset() + 4, fbeBytesSize));
+        return java.nio.ByteBuffer.wrap(readBytes(fbeOffset() + 4, fbeBytesSize));
     }
 
     // Set the bytes value
-    public long set(ByteBuffer value)
+    public long set(java.nio.ByteBuffer value)
     {
         assert (value != null) : "Invalid bytes value!";
         if (value == null)
@@ -2728,7 +2688,7 @@ public final class FinalModelString extends FinalModel
         if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
+        byte[] bytes = value.getBytes(java.nio.charset.StandardCharsets.UTF_8);
 
         int fbeStringSize = bytes.length;
         assert ((_buffer.getOffset() + fbeOffset() + 4 + fbeStringSize) <= _buffer.getSize()) : "Model is broken!";
@@ -2769,16 +2729,11 @@ void GeneratorJava::GenerateFBEFinalModelOptional(const std::string& domain, con
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     std::string code = R"CODE(
 // Fast Binary Encoding optional _NAME_ final model
-public final class FinalModelOptional_NAME_ extends FinalModel
+public final class FinalModelOptional_NAME_ extends _DOMAIN_fbe.FinalModel
 {
-    public FinalModelOptional_NAME_(Buffer buffer, long offset)
+    public FinalModelOptional_NAME_(_DOMAIN_fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         value = new _MODEL_(buffer, 0);
@@ -2818,7 +2773,7 @@ public final class FinalModelOptional_NAME_ extends FinalModel
     }
 
     // Get the optional value
-    public _TYPE_ get(Size size)
+    public _TYPE_ get(_DOMAIN_fbe.Size size)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())
@@ -2861,8 +2816,9 @@ public final class FinalModelOptional_NAME_ extends FinalModel
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), domain + package + "." + type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -2890,19 +2846,14 @@ void GeneratorJava::GenerateFBEFinalModelArray(const std::string& domain, const 
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array final model
-public final class FinalModelArray_NAME_ extends FinalModel
+public final class FinalModelArray_NAME_ extends _DOMAIN_fbe.FinalModel
 {
     private final _MODEL_ _model;
     private final long _size;
 
-    public FinalModelArray_NAME_(Buffer buffer, long offset, long size)
+    public FinalModelArray_NAME_(_DOMAIN_fbe.Buffer buffer, long offset, long size)
     {
         super(buffer, offset);
         _model = new _MODEL_(buffer, offset);
@@ -2917,7 +2868,7 @@ public final class FinalModelArray_NAME_ extends FinalModel
             size += _model.fbeAllocationSize(values[(int)i]);
         return size;
     }
-    public long fbeAllocationSize(ArrayList<_TYPE_> values)
+    public long fbeAllocationSize(java.util.ArrayList<_TYPE_> values)
     {
         long size = 0;
         for (long i = 0; (i < values.size()) && (i < _size); i++)
@@ -2946,7 +2897,7 @@ public final class FinalModelArray_NAME_ extends FinalModel
     }
 
     // Get the array
-    public _ARRAY_ get(Size size)
+    public _ARRAY_ get(_DOMAIN_fbe.Size size)
     {
         var values = _INIT_;
 
@@ -2994,8 +2945,8 @@ public final class FinalModelArray_NAME_ extends FinalModel
         return size;
     }
 
-    // Get the array as ArrayList
-    public long get(ArrayList<_TYPE_> values)
+    // Get the array as java.util.ArrayList
+    public long get(java.util.ArrayList<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -3045,8 +2996,8 @@ public final class FinalModelArray_NAME_ extends FinalModel
         return size;
     }
 
-    // Set the array as List
-    public long set(ArrayList<_TYPE_> values)
+    // Set the array as java.util.ArrayList
+    public long set(java.util.ArrayList<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -3070,11 +3021,12 @@ public final class FinalModelArray_NAME_ extends FinalModel
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), domain + package + "." + type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_ARRAY_"), (bytes ? "byte" : type) + "[]");
-    code = std::regex_replace(code, std::regex("_INIT_"), ((type != "byte[]") ? ("new " + (bytes ? "byte" : type) + "[(int)_size]") : "new byte[(int)_size][]"));
+    code = std::regex_replace(code, std::regex("_ARRAY_"), (bytes ? "byte" : (domain + package + "." + type)) + "[]");
+    code = std::regex_replace(code, std::regex("_INIT_"), ((type != "byte[]") ? ("new " + (bytes ? "byte" : (domain + package + "." + type)) + "[(int)_size]") : "new byte[(int)_size][]"));
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -3101,18 +3053,13 @@ void GeneratorJava::GenerateFBEFinalModelVector(const std::string& domain, const
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ vector final model
-public final class FinalModelVector_NAME_ extends FinalModel
+public final class FinalModelVector_NAME_ extends _DOMAIN_fbe.FinalModel
 {
     private final _MODEL_ _model;
 
-    public FinalModelVector_NAME_(Buffer buffer, long offset)
+    public FinalModelVector_NAME_(_DOMAIN_fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         _model = new _MODEL_(buffer, offset);
@@ -3126,21 +3073,21 @@ public final class FinalModelVector_NAME_ extends FinalModel
             size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long fbeAllocationSize(ArrayList<_TYPE_> values)
+    public long fbeAllocationSize(java.util.ArrayList<_TYPE_> values)
     {
         long size = 4;
         for (var value : values)
             size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long fbeAllocationSize(LinkedList<_TYPE_> values)
+    public long fbeAllocationSize(java.util.LinkedList<_TYPE_> values)
     {
         long size = 4;
         for (var value : values)
             size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long fbeAllocationSize(HashSet<_TYPE_> values)
+    public long fbeAllocationSize(java.util.HashSet<_TYPE_> values)
     {
         long size = 4;
         for (var value : values)
@@ -3170,8 +3117,8 @@ public final class FinalModelVector_NAME_ extends FinalModel
         return size;
     }
 
-    // Get the vector as ArrayList
-    public long get(ArrayList<_TYPE_> values)
+    // Get the vector as java.util.ArrayList
+    public long get(java.util.ArrayList<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -3203,8 +3150,8 @@ public final class FinalModelVector_NAME_ extends FinalModel
         return size;
     }
 
-    // Get the vector as LinkedList
-    public long get(LinkedList<_TYPE_> values)
+    // Get the vector as java.util.LinkedList
+    public long get(java.util.LinkedList<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -3234,8 +3181,8 @@ public final class FinalModelVector_NAME_ extends FinalModel
         return size;
     }
 
-    // Get the vector as HashSet
-    public long get(HashSet<_TYPE_> values)
+    // Get the vector as java.util.HashSet
+    public long get(java.util.HashSet<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -3265,8 +3212,8 @@ public final class FinalModelVector_NAME_ extends FinalModel
         return size;
     }
 
-    // Set the vector as ArrayList
-    public long set(ArrayList<_TYPE_> values)
+    // Set the vector as java.util.ArrayList
+    public long set(java.util.ArrayList<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -3289,8 +3236,8 @@ public final class FinalModelVector_NAME_ extends FinalModel
         return size;
     }
 
-    // Set the vector as LinkedList
-    public long set(LinkedList<_TYPE_> values)
+    // Set the vector as java.util.LinkedList
+    public long set(java.util.LinkedList<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -3313,8 +3260,8 @@ public final class FinalModelVector_NAME_ extends FinalModel
         return size;
     }
 
-    // Set the vector as HashSet
-    public long set(HashSet<_TYPE_> values)
+    // Set the vector as java.util.HashSet
+    public long set(java.util.HashSet<_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -3340,8 +3287,9 @@ public final class FinalModelVector_NAME_ extends FinalModel
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), domain + package + "." + type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -3369,19 +3317,14 @@ void GeneratorJava::GenerateFBEFinalModelMap(const std::string& domain, const st
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map final model
-public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
+public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends _DOMAIN_fbe.FinalModel
 {
     private final _KEY_MODEL_ _modelKey;
     private final _VALUE_MODEL_ _modelValue;
 
-    public FinalModelMap_KEY_NAME__VALUE_NAME_(Buffer buffer, long offset)
+    public FinalModelMap_KEY_NAME__VALUE_NAME_(_DOMAIN_fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         _modelKey = new _KEY_MODEL_(buffer, offset);
@@ -3389,7 +3332,7 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
+    public long fbeAllocationSize(java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
     {
         long size = 4;
         for (var value : values.entrySet())
@@ -3399,7 +3342,7 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
         }
         return size;
     }
-    public long fbeAllocationSize(HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
+    public long fbeAllocationSize(java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
     {
         long size = 4;
         for (var value : values.entrySet())
@@ -3440,8 +3383,8 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
         return size;
     }
 
-    // Get the map as TreeMap
-    public long get(TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
+    // Get the map as java.util.TreeMap
+    public long get(java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -3478,8 +3421,8 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
         return size;
     }
 
-    // Get the map as HashMap
-    public long get(HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
+    // Get the map as java.util.HashMap
+    public long get(java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -3517,8 +3460,8 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
         return size;
     }
 
-    // Set the map as TreeMap
-    public long set(TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
+    // Set the map as java.util.TreeMap
+    public long set(java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -3546,8 +3489,8 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
         return size;
     }
 
-    // Set the map as HashMap
-    public long set(HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
+    // Set the map as java.util.HashMap
+    public long set(java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -3578,11 +3521,12 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_KEY_NAME_"), key_name);
-    code = std::regex_replace(code, std::regex("_KEY_TYPE_"), key_type);
+    code = std::regex_replace(code, std::regex("_KEY_TYPE_"), domain + package + "." + key_type);
     code = std::regex_replace(code, std::regex("_KEY_MODEL_"), key_model);
     code = std::regex_replace(code, std::regex("_VALUE_NAME_"), value_name);
-    code = std::regex_replace(code, std::regex("_VALUE_TYPE_"), value_type);
+    code = std::regex_replace(code, std::regex("_VALUE_TYPE_"), domain + package + "." + value_type);
     code = std::regex_replace(code, std::regex("_VALUE_MODEL_"), value_model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -3610,16 +3554,11 @@ void GeneratorJava::GenerateFBEFinalModelEnumFlags(const std::string& domain, co
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ final model
-public final class FinalModel_NAME_ extends FinalModel
+public final class FinalModel_NAME_ extends _DOMAIN_fbe.FinalModel
 {
-    public FinalModel_NAME_(Buffer buffer, long offset) { super(buffer, offset); }
+    public FinalModel_NAME_(_DOMAIN_fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
     public long fbeAllocationSize(_NAME_ value) { return fbeSize(); }
@@ -3639,7 +3578,7 @@ public final class FinalModel_NAME_ extends FinalModel
     }
 
     // Get the value
-    public _NAME_ get(Size size)
+    public _NAME_ get(_DOMAIN_fbe.Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return new _NAME_();
@@ -3662,6 +3601,7 @@ public final class FinalModel_NAME_ extends FinalModel
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_SIZE_"), ConvertEnumSize(type));
     code = std::regex_replace(code, std::regex("_READ_"), ConvertEnumRead(type));
@@ -4062,112 +4002,108 @@ void GeneratorJava::GenerateFBEJson(const std::string& domain, const std::string
     GenerateHeader("fbe");
     GenerateImports(domain, package);
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import com.google.gson.*;");
-
     std::string code = R"CODE(
-final class ByteBufferJson implements JsonSerializer<ByteBuffer>, JsonDeserializer<ByteBuffer>
+final class ByteBufferJson implements com.google.gson.JsonSerializer<java.nio.ByteBuffer>, com.google.gson.JsonDeserializer<java.nio.ByteBuffer>
 {
     @Override
-    public JsonElement serialize(ByteBuffer src, Type typeOfSrc, JsonSerializationContext context)
+    public com.google.gson.JsonElement serialize(java.nio.ByteBuffer src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
-        return new JsonPrimitive(Base64.getEncoder().encodeToString(src.array()));
+        return new com.google.gson.JsonPrimitive(java.util.Base64.getEncoder().encodeToString(src.array()));
     }
 
     @Override
-    public ByteBuffer deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public java.nio.ByteBuffer deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
     {
-        return ByteBuffer.wrap(Base64.getDecoder().decode(json.getAsString()));
+        return java.nio.ByteBuffer.wrap(java.util.Base64.getDecoder().decode(json.getAsString()));
     }
 }
 
-final class CharacterJson implements JsonSerializer<Character>, JsonDeserializer<Character>
+final class CharacterJson implements com.google.gson.JsonSerializer<Character>, com.google.gson.JsonDeserializer<Character>
 {
     @Override
-    public JsonElement serialize(Character src, Type typeOfSrc, JsonSerializationContext context)
+    public com.google.gson.JsonElement serialize(Character src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
-        return new JsonPrimitive((long)src);
+        return new com.google.gson.JsonPrimitive((long)src);
     }
 
     @Override
-    public Character deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public Character deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
     {
         return (char)json.getAsLong();
     }
 }
 
-final class InstantJson implements JsonSerializer<Instant>, JsonDeserializer<Instant>
+final class InstantJson implements com.google.gson.JsonSerializer<java.time.Instant>, com.google.gson.JsonDeserializer<java.time.Instant>
 {
     @Override
-    public JsonElement serialize(Instant src, Type typeOfSrc, JsonSerializationContext context)
+    public com.google.gson.JsonElement serialize(java.time.Instant src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
         long nanoseconds = src.getEpochSecond() * 1000000000 + src.getNano();
-        return new JsonPrimitive(nanoseconds);
+        return new com.google.gson.JsonPrimitive(nanoseconds);
     }
 
     @Override
-    public Instant deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public java.time.Instant deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
     {
         long nanoseconds = json.getAsJsonPrimitive().getAsLong();
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
+        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
     }
 }
 
-final class BigDecimalJson implements JsonSerializer<BigDecimal>, JsonDeserializer<BigDecimal>
+final class BigDecimalJson implements com.google.gson.JsonSerializer<java.math.BigDecimal>, com.google.gson.JsonDeserializer<java.math.BigDecimal>
 {
     @Override
-    public JsonElement serialize(BigDecimal src, Type typeOfSrc, JsonSerializationContext context)
+    public com.google.gson.JsonElement serialize(java.math.BigDecimal src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
-        return new JsonPrimitive(src.toPlainString());
+        return new com.google.gson.JsonPrimitive(src.toPlainString());
     }
 
     @Override
-    public BigDecimal deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public java.math.BigDecimal deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
     {
-        return new BigDecimal(json.getAsJsonPrimitive().getAsString());
+        return new java.math.BigDecimal(json.getAsJsonPrimitive().getAsString());
     }
 }
 
-final class UUIDJson implements JsonSerializer<UUID>, JsonDeserializer<UUID>
+final class UUIDJson implements com.google.gson.JsonSerializer<java.util.UUID>, com.google.gson.JsonDeserializer<java.util.UUID>
 {
     @Override
-    public JsonElement serialize(UUID src, Type typeOfSrc, JsonSerializationContext context)
+    public com.google.gson.JsonElement serialize(java.util.UUID src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
-        return new JsonPrimitive(src.toString());
+        return new com.google.gson.JsonPrimitive(src.toString());
     }
 
     @Override
-    public UUID deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public java.util.UUID deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
     {
-        return UUID.fromString(json.getAsJsonPrimitive().getAsString());
+        return java.util.UUID.fromString(json.getAsJsonPrimitive().getAsString());
     }
 }
 
 // Fast Binary Encoding base JSON engine
 public final class Json
 {
-    private static final Gson _engine;
+    private static final com.google.gson.Gson _engine;
 
     // Get the JSON engine
-    public static Gson getEngine() { return _engine; }
+    public static com.google.gson.Gson getEngine() { return _engine; }
 
     static
     {
-        _engine = register(new GsonBuilder()).create();
+        _engine = register(new com.google.gson.GsonBuilder()).create();
     }
 
     private Json() {}
 
-    public static GsonBuilder register(GsonBuilder builder)
+    public static com.google.gson.GsonBuilder register(com.google.gson.GsonBuilder builder)
     {
         builder.serializeNulls();
-        builder.registerTypeAdapter(ByteBuffer.class, new ByteBufferJson());
+        builder.registerTypeAdapter(java.nio.ByteBuffer.class, new ByteBufferJson());
         builder.registerTypeAdapter(char.class, new CharacterJson());
         builder.registerTypeAdapter(Character.class, new CharacterJson());
-        builder.registerTypeAdapter(Instant.class, new InstantJson());
-        builder.registerTypeAdapter(BigDecimal.class, new BigDecimalJson());
-        builder.registerTypeAdapter(UUID.class, new UUIDJson());
+        builder.registerTypeAdapter(java.time.Instant.class, new InstantJson());
+        builder.registerTypeAdapter(java.math.BigDecimal.class, new BigDecimalJson());
+        builder.registerTypeAdapter(java.util.UUID.class, new UUIDJson());
         return builder;
     }
 }
@@ -4373,7 +4309,7 @@ void GeneratorJava::GenerateEnum(const std::shared_ptr<Package>& p, const std::s
 
     // Generate enum mapping
     WriteLine();
-    WriteLineIndent("private static final Map<" + enum_mapping_type + ", " + enum_name + "> mapping = new HashMap<>();");
+    WriteLineIndent("private static final java.util.Map<" + enum_mapping_type + ", " + enum_name + "> mapping = new java.util.HashMap<>();");
     WriteLineIndent("static");
     WriteLineIndent("{");
     Indent(1);
@@ -4559,36 +4495,27 @@ void GeneratorJava::GenerateEnumJson(const std::shared_ptr<Package>& p, const st
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe;");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import com.google.gson.*;");
-
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
 
     // Generate JSON adapter body
     WriteLine();
-    WriteLineIndent("public final class " + adapter_name + " implements JsonSerializer<" + enum_name + ">, JsonDeserializer<" + enum_name + ">");
+    WriteLineIndent("public final class " + adapter_name + " implements com.google.gson.JsonSerializer<" + enum_name + ">, com.google.gson.JsonDeserializer<" + enum_name + ">");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate JSON adapter serialize() method
     WriteLineIndent("@Override");
-    WriteLineIndent("public JsonElement serialize(" + enum_name + " src, Type typeOfSrc, JsonSerializationContext context)");
+    WriteLineIndent("public com.google.gson.JsonElement serialize(" + enum_name + " src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("return new JsonPrimitive(src.getRaw());");
+    WriteLineIndent("return new com.google.gson.JsonPrimitive(src.getRaw());");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate JSON adapter deserialize() method
     WriteLine();
     WriteLineIndent("@Override");
-    WriteLineIndent("public " + enum_name + " deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException");
+    WriteLineIndent("public " + enum_name + " deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("return new " + enum_name + "(json.getAsJsonPrimitive()." + ConvertEnumGet(enum_type) + "());");
@@ -4722,7 +4649,7 @@ void GeneratorJava::GenerateFlags(const std::shared_ptr<Package>& p, const std::
 
     // Generate flags mapping
     WriteLine();
-    WriteLineIndent("private static final Map<" + flags_mapping_type + ", " + flags_name + "> mapping = new HashMap<>();");
+    WriteLineIndent("private static final java.util.Map<" + flags_mapping_type + ", " + flags_name + "> mapping = new java.util.HashMap<>();");
     WriteLineIndent("static");
     WriteLineIndent("{");
     Indent(1);
@@ -4965,37 +4892,28 @@ void GeneratorJava::GenerateFlagsJson(const std::shared_ptr<Package>& p, const s
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe;");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import com.google.gson.*;");
-
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
 
     // Generate JSON adapter body
     WriteLine();
-    WriteLineIndent("public final class " + adapter_name + " implements JsonSerializer<" + flags_name + ">, JsonDeserializer<" + flags_name + ">");
+    WriteLineIndent("public final class " + adapter_name + " implements com.google.gson.JsonSerializer<" + flags_name + ">, com.google.gson.JsonDeserializer<" + flags_name + ">");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate JSON adapter serialize() method
     WriteLine();
     WriteLineIndent("@Override");
-    WriteLineIndent("public JsonElement serialize(" + flags_name + " src, Type typeOfSrc, JsonSerializationContext context)");
+    WriteLineIndent("public com.google.gson.JsonElement serialize(" + flags_name + " src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("return new JsonPrimitive(src.getRaw());");
+    WriteLineIndent("return new com.google.gson.JsonPrimitive(src.getRaw());");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate JSON adapter deserialize() method
     WriteLine();
     WriteLineIndent("@Override");
-    WriteLineIndent("public " + flags_name + " deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException");
+    WriteLineIndent("public " + flags_name + " deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("return new " + flags_name + "(json.getAsJsonPrimitive()." + ConvertEnumGet(flags_type) + "());");
@@ -5438,15 +5356,10 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     // Generate struct field model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " field model");
-    WriteLineIndent("public final class FieldModel" + *s->name + " extends FieldModel");
+    WriteLineIndent("public final class FieldModel" + *s->name + " extends " + domain + "fbe.FieldModel");
     WriteLineIndent("{");
     Indent(1);
 
@@ -5459,7 +5372,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
 
     // Generate struct field model constructor
     WriteLine();
-    WriteLineIndent("public FieldModel" + *s->name + "(Buffer buffer, long offset)");
+    WriteLineIndent("public FieldModel" + *s->name + "(" + domain + "fbe.Buffer buffer, long offset)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("super(buffer, offset);");
@@ -5818,6 +5731,7 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
 {
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
+    std::string struct_name = domain + package + "." + *s->name;
 
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
@@ -5832,15 +5746,10 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     // Generate struct model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " model");
-    WriteLineIndent("public final class " + *s->name + "Model extends Model");
+    WriteLineIndent("public final class " + *s->name + "Model extends " + domain + "fbe." + "Model");
     WriteLineIndent("{");
     Indent(1);
 
@@ -5850,7 +5759,7 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     // Generate struct model constructors
     WriteLine();
     WriteLineIndent("public " + *s->name + "Model() { model = new FieldModel" + *s->name + "(getBuffer(), 4); }");
-    WriteLineIndent("public " + *s->name + "Model(Buffer buffer) { super(buffer); model = new FieldModel" + *s->name + "(getBuffer(), 4); }");
+    WriteLineIndent("public " + *s->name + "Model(" + domain + "fbe.Buffer buffer) { super(buffer); model = new FieldModel" + *s->name + "(getBuffer(), 4); }");
 
     // Generate struct model FBE properties
     WriteLine();
@@ -5908,7 +5817,7 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     // Generate struct model serialize() method
     WriteLine();
     WriteLineIndent("// Serialize the struct value");
-    WriteLineIndent("public long serialize(" + *s->name + " value)");
+    WriteLineIndent("public long serialize(" + struct_name + " value)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("long fbeBegin = createBegin();");
@@ -5921,14 +5830,14 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     // Generate struct model deserialize() methods
     WriteLine();
     WriteLineIndent("// Deserialize the struct value");
-    WriteLineIndent("public " + *s->name + " deserialize() { var value = new " + *s->name + "(); deserialize(value); return value; }");
-    WriteLineIndent("public long deserialize(" + *s->name + " value)");
+    WriteLineIndent("public " + struct_name + " deserialize() { var value = new " + struct_name + "(); deserialize(value); return value; }");
+    WriteLineIndent("public long deserialize(" + struct_name + " value)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("value = new " + *s->name + "();");
+    WriteLineIndent("value = new " + struct_name + "();");
     WriteLineIndent("return 0;");
     Indent(-1);
     WriteLineIndent("}");
@@ -5938,7 +5847,7 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     WriteLineIndent("if (fbeFullSize < model.fbeSize())");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("value = new " + *s->name + "();");
+    WriteLineIndent("value = new " + struct_name + "();");
     WriteLineIndent("return 0;");
     Indent(-1);
     WriteLineIndent("}");
@@ -5987,15 +5896,10 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     // Generate struct final model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model");
-    WriteLineIndent("public final class FinalModel" + *s->name + " extends FinalModel");
+    WriteLineIndent("public final class FinalModel" + *s->name + " extends " + domain + "fbe." + "FinalModel");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6008,7 +5912,7 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
 
     // Generate struct final model constructor
     WriteLine();
-    WriteLineIndent("public FinalModel" + *s->name + "(Buffer buffer, long offset)");
+    WriteLineIndent("public FinalModel" + *s->name + "(" + domain + "fbe.Buffer buffer, long offset)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("super(buffer, offset);");
@@ -6106,8 +6010,8 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     // Generate struct final model get() methods
     WriteLine();
     WriteLineIndent("// Get the struct value");
-    WriteLineIndent("public " + *s->name + " get(Size fbeSize) { return get(fbeSize, new " + *s->name + "()); }");
-    WriteLineIndent("public " + *s->name + " get(Size fbeSize, " + *s->name + " fbeValue)");
+    WriteLineIndent("public " + *s->name + " get(" + domain + "fbe.Size fbeSize) { return get(fbeSize, new " + *s->name + "()); }");
+    WriteLineIndent("public " + *s->name + " get(" + domain + "fbe.Size fbeSize, " + *s->name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("_buffer.shift(fbeOffset());");
@@ -6224,6 +6128,7 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
 {
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
+    std::string struct_name = domain + package + "." + *s->name;
 
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
@@ -6238,15 +6143,10 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     // Generate struct model final begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model");
-    WriteLineIndent("public final class " + *s->name + "FinalModel extends Model");
+    WriteLineIndent("public final class " + *s->name + "FinalModel extends " + domain + "fbe." + "Model");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6256,7 +6156,7 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     // Generate struct model final constructors
     WriteLine();
     WriteLineIndent("public " + *s->name + "FinalModel() { _model = new FinalModel" + *s->name + "(getBuffer(), 8); }");
-    WriteLineIndent("public " + *s->name + "FinalModel(Buffer buffer) { super(buffer); _model = new FinalModel" + *s->name + "(getBuffer(), 8); }");
+    WriteLineIndent("public " + *s->name + "FinalModel(" + domain + "fbe.Buffer buffer) { super(buffer); _model = new FinalModel" + *s->name + "(getBuffer(), 8); }");
 
     // Generate struct model final FBE properties
     WriteLine();
@@ -6289,7 +6189,7 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     // Generate struct model final serialize() method
     WriteLine();
     WriteLineIndent("// Serialize the struct value");
-    WriteLineIndent("public long serialize(" + *s->name + " value)");
+    WriteLineIndent("public long serialize(" + struct_name + " value)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("long fbeInitialSize = getBuffer().getSize();");
@@ -6316,8 +6216,8 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     // Generate struct model final deserialize() methods
     WriteLine();
     WriteLineIndent("// Deserialize the struct value");
-    WriteLineIndent("public " + *s->name + " deserialize() { var value = new " + *s->name + "(); deserialize(value); return value; }");
-    WriteLineIndent("public long deserialize(" + *s->name + " value)");
+    WriteLineIndent("public " + struct_name + " deserialize() { var value = new " + struct_name + "(); deserialize(value); return value; }");
+    WriteLineIndent("public long deserialize(" + struct_name + " value)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("assert ((getBuffer().getOffset() + _model.fbeOffset()) <= getBuffer().getSize()) : \"Model is broken!\";");
@@ -6382,11 +6282,6 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     // Generate sender begin
     WriteLine();
     if (final)
@@ -6432,7 +6327,7 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     }
     Indent(-1);
     WriteLineIndent("}");
-    WriteLineIndent("public " + sender + "(Buffer buffer)");
+    WriteLineIndent("public " + sender + "(" + domain + "fbe.Buffer buffer)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("super(buffer, " + std::string(final ? "true" : "false") + ");");
@@ -6518,11 +6413,6 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     // Generate receiver begin
     WriteLine();
     if (final)
@@ -6579,7 +6469,7 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     }
     Indent(-1);
     WriteLineIndent("}");
-    WriteLineIndent("public " + receiver + "(Buffer buffer)");
+    WriteLineIndent("public " + receiver + "(" + domain + "fbe.Buffer buffer)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("super(buffer, " + std::string(final ? "true" : "false") + ");");
@@ -6700,11 +6590,6 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-
     // Generate proxy begin
     WriteLine();
     if (final)
@@ -6750,7 +6635,7 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
     }
     Indent(-1);
     WriteLineIndent("}");
-    WriteLineIndent("public " + proxy + "(Buffer buffer)");
+    WriteLineIndent("public " + proxy + "(" + domain + "fbe.Buffer buffer)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("super(buffer, " + std::string(final ? "true" : "false") + ");");
@@ -6859,13 +6744,6 @@ void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*;");
-    WriteLineIndent("import " + domain + package + ".*;");
-    WriteLine();
-    WriteLineIndent("import com.google.gson.*;");
-
     // Generate JSON engine begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *p->name + " JSON engine");
@@ -6873,17 +6751,17 @@ void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
     WriteLineIndent("{");
     Indent(1);
 
-    WriteLineIndent("private static final Gson _engine;");
+    WriteLineIndent("private static final com.google.gson.Gson _engine;");
     WriteLine();
     WriteLineIndent("// Get the JSON engine");
-    WriteLineIndent("public static Gson getEngine() { return _engine; }");
+    WriteLineIndent("public static com.google.gson.Gson getEngine() { return _engine; }");
     WriteLine();
 
     // Generate JSON engine static initialization
     WriteLineIndent("static");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("_engine = register(new GsonBuilder()).create();");
+    WriteLineIndent("_engine = register(new com.google.gson.GsonBuilder()).create();");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
@@ -6893,7 +6771,7 @@ void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
     WriteLine();
 
     // Generate JSON engine Register() method
-    WriteLineIndent("public static GsonBuilder register(GsonBuilder builder)");
+    WriteLineIndent("public static com.google.gson.GsonBuilder register(com.google.gson.GsonBuilder builder)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent(domain + "fbe.Json.register(builder);");
@@ -7238,7 +7116,7 @@ std::string GeneratorJava::ConvertTypeName(const std::string& domain, const std:
     else if (type == "byte")
         return "byte";
     else if (type == "bytes")
-        return "ByteBuffer";
+        return "java.nio.ByteBuffer";
     else if (type == "char")
         return "char";
     else if (type == "wchar")
@@ -7264,13 +7142,13 @@ std::string GeneratorJava::ConvertTypeName(const std::string& domain, const std:
     else if (type == "double")
         return "double";
     else if (type == "decimal")
-        return "BigDecimal";
+        return "java.math.BigDecimal";
     else if (type == "string")
         return "String";
     else if (type == "timestamp")
-        return "Instant";
+        return "java.time.Instant";
     else if (type == "uuid")
-        return "UUID";
+        return "java.util.UUID";
 
     std::string ns = "";
     std::string t = type;
@@ -7291,15 +7169,15 @@ std::string GeneratorJava::ConvertTypeName(const std::string& domain, const Stru
     if (field.array)
         return ConvertTypeName(domain, *field.type, field.optional) + "[]";
     else if (field.vector)
-        return "ArrayList<" + ConvertTypeName(domain, *field.type, true) + ">";
+        return "java.util.ArrayList<" + ConvertTypeName(domain, *field.type, true) + ">";
     else if (field.list)
-        return "LinkedList<" + ConvertTypeName(domain, *field.type, true) + ">";
+        return "java.util.LinkedList<" + ConvertTypeName(domain, *field.type, true) + ">";
     else if (field.set)
-        return "HashSet<" + ConvertTypeName(domain, *field.key, true) + ">";
+        return "java.util.HashSet<" + ConvertTypeName(domain, *field.key, true) + ">";
     else if (field.map)
-        return "TreeMap<" + ConvertTypeName(domain, *field.key, true) + ", " + ConvertTypeName(domain, *field.type, true) +">";
+        return "java.util.TreeMap<" + ConvertTypeName(domain, *field.key, true) + ", " + ConvertTypeName(domain, *field.type, true) +">";
     else if (field.hash)
-        return "HashMap<" + ConvertTypeName(domain, *field.key, true) + ", " + ConvertTypeName(domain, *field.type, true) +">";
+        return "java.util.HashMap<" + ConvertTypeName(domain, *field.key, true) + ", " + ConvertTypeName(domain, *field.type, true) +">";
 
     return ConvertTypeName(domain, *field.type, field.optional);
 }
@@ -7376,7 +7254,7 @@ std::string GeneratorJava::ConvertTypeFieldType(const std::string& domain, const
     else if (type == "byte")
         return "Byte";
     else if (type == "bytes")
-        return "ByteBuffer";
+        return "java.nio.ByteBuffer";
     else if (type == "char")
         return "Character";
     else if (type == "wchar")
@@ -7402,13 +7280,13 @@ std::string GeneratorJava::ConvertTypeFieldType(const std::string& domain, const
     else if (type == "double")
         return "Double";
     else if (type == "decimal")
-        return "BigDecimal";
+        return "java.math.BigDecimal";
     else if (type == "string")
         return "String";
     else if (type == "timestamp")
-        return "Instant";
+        return "java.time.Instant";
     else if (type == "uuid")
-        return "UUID";
+        return "java.util.UUID";
 
     std::string ns = "";
     std::string t = type;
@@ -7538,9 +7416,9 @@ std::string GeneratorJava::ConvertConstant(const std::string& domain, const std:
         return "";
     }
     else if (value == "epoch")
-        return "Instant.EPOCH";
+        return "java.time.Instant.EPOCH";
     else if (value == "utc")
-        return "Instant.now()";
+        return "java.time.Instant.now()";
     else if (value == "uuid0")
         return domain + "fbe.UUIDGenerator.nil()";
     else if (value == "uuid1")
@@ -7603,9 +7481,9 @@ std::string GeneratorJava::ConvertConstantPrefix(const std::string& type)
     else if (type == "double")
         return "(double)";
     else if (type == "decimal")
-        return "BigDecimal.valueOf(";
+        return "java.math.BigDecimal.valueOf(";
     else if (type == "uuid")
-        return "UUID.fromString(";
+        return "java.util.UUID.fromString(";
 
     return "";
 }
@@ -7633,7 +7511,7 @@ std::string GeneratorJava::ConvertDefault(const std::string& domain, const std::
     else if (type == "byte")
         return "(byte)0";
     else if (type == "bytes")
-        return "ByteBuffer.allocate(0)";
+        return "java.nio.ByteBuffer.allocate(0)";
     else if ((type == "char") || (type == "wchar"))
         return "'\\0'";
     else if ((type == "int8") || (type == "uint8"))
@@ -7649,11 +7527,11 @@ std::string GeneratorJava::ConvertDefault(const std::string& domain, const std::
     else if (type == "double")
         return "0.0d";
     else if (type == "decimal")
-        return "BigDecimal.valueOf(0L)";
+        return "java.math.BigDecimal.valueOf(0L)";
     else if (type == "string")
         return "\"\"";
     else if (type == "timestamp")
-        return "Instant.EPOCH";
+        return "java.time.Instant.EPOCH";
     else if (type == "uuid")
         return domain + "fbe.UUIDGenerator.nil()";
 

@@ -33,7 +33,7 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel(domain, "fbe", "UInt64", "ULong", "", "8", "0uL");
     GenerateFBEFieldModel(domain, "fbe", "Float", "Float", "", "4", "0.0f");
     GenerateFBEFieldModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
-    GenerateFBEFieldModel(domain, "fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
+    GenerateFBEFieldModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
     GenerateFBEFieldModelDecimal(domain, "fbe");
     GenerateFBEFieldModelTimestamp(domain, "fbe");
     GenerateFBEFieldModelBytes(domain, "fbe");
@@ -56,7 +56,7 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel(domain, "fbe", "UInt64", "ULong", "", "8", "0uL");
         GenerateFBEFinalModel(domain, "fbe", "Float", "Float", "", "4", "0.0f");
         GenerateFBEFinalModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
-        GenerateFBEFinalModel(domain, "fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
+        GenerateFBEFinalModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
         GenerateFBEFinalModelDecimal(domain, "fbe");
         GenerateFBEFinalModelTimestamp(domain, "fbe");
         GenerateFBEFinalModelBytes(domain, "fbe");
@@ -100,16 +100,6 @@ void GeneratorKotlin::GenerateImports(const std::string& domain, const std::stri
     // Generate package name
     WriteLine();
     WriteLineIndent("package " + domain + package);
-
-    // Generate common import
-    WriteLine();
-    WriteLineIndent("import java.io.*");
-    WriteLineIndent("import java.lang.*");
-    WriteLineIndent("import java.lang.reflect.*");
-    WriteLineIndent("import java.math.*");
-    WriteLineIndent("import java.nio.charset.*");
-    WriteLineIndent("import java.time.*");
-    WriteLineIndent("import java.util.*");
 }
 
 void GeneratorKotlin::GenerateImports(const std::shared_ptr<Package>& p)
@@ -118,15 +108,6 @@ void GeneratorKotlin::GenerateImports(const std::shared_ptr<Package>& p)
 
     // Generate common import
     GenerateImports(domain, *p->name);
-
-    // Generate FBE import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-
-    // Generate packages import
-    if (p->import)
-        for (const auto& import : p->import->imports)
-            WriteLineIndent("import " + domain + *import + ".*");
 }
 
 void GeneratorKotlin::GenerateFBEPackage(const std::string& domain, const std::string& package)
@@ -164,7 +145,7 @@ object UUIDGenerator
 
     // Lock and random generator
     private val lock = Object()
-    private val generator = Random()
+    private val generator = java.util.Random()
 
     // Node & clock sequence bytes
     private val node = makeNode()
@@ -190,10 +171,10 @@ object UUIDGenerator
     }
 
     // Generate nil UUID0 (all bits set to zero)
-    fun nil(): UUID = UUID(0, 0)
+    fun nil(): java.util.UUID = java.util.UUID(0, 0)
 
     // Generate sequential UUID1 (time based version)
-    fun sequential(): UUID
+    fun sequential(): java.util.UUID
     {
         val now = System.currentTimeMillis().toULong()
 
@@ -214,11 +195,11 @@ object UUIDGenerator
         // Sets the version to 1
         msb = msb or 0x0000000000001000uL
 
-        return UUID(msb.toLong(), nodeAndClockSequence.toLong())
+        return java.util.UUID(msb.toLong(), nodeAndClockSequence.toLong())
     }
 
     // Generate random UUID4 (randomly or pseudo-randomly generated version)
-    fun random(): UUID = UUID.randomUUID()
+    fun random(): java.util.UUID = java.util.UUID.randomUUID()
 }
 )CODE";
 
@@ -494,12 +475,12 @@ class Buffer
 
         fun readString(buffer: ByteArray, offset: Long, size: Long): String
         {
-            return kotlin.text.String(buffer, offset.toInt(), size.toInt(), StandardCharsets.UTF_8)
+            return kotlin.text.String(buffer, offset.toInt(), size.toInt(), java.nio.charset.StandardCharsets.UTF_8)
         }
 
-        fun readUUID(buffer: ByteArray, offset: Long): UUID
+        fun readUUID(buffer: ByteArray, offset: Long): java.util.UUID
         {
-            return UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8))
+            return java.util.UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8))
         }
 
         fun write(buffer: ByteArray, offset: Long, value: Boolean)
@@ -609,7 +590,7 @@ class Buffer
                 buffer[(offset + i).toInt()] = value
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: UUID)
+        fun write(buffer: ByteArray, offset: Long, value: java.util.UUID)
         {
             writeBE(buffer, offset, value.mostSignificantBits)
             writeBE(buffer, offset + 8, value.leastSignificantBits)
@@ -741,7 +722,7 @@ abstract class FieldModel protected constructor(protected var _buffer: Buffer, p
     protected fun readDouble(offset: Long): Double { return Buffer.readDouble(_buffer.data, _buffer.offset + offset) }
     protected fun readBytes(offset: Long, size: Long): ByteArray { return Buffer.readBytes(_buffer.data, _buffer.offset + offset, size) }
     protected fun readString(offset: Long, size: Long): String { return Buffer.readString(_buffer.data, _buffer.offset + offset, size) }
-    protected fun readUUID(offset: Long): UUID { return Buffer.readUUID(_buffer.data, _buffer.offset + offset) }
+    protected fun readUUID(offset: Long): java.util.UUID { return Buffer.readUUID(_buffer.data, _buffer.offset + offset) }
     protected fun write(offset: Long, value: Boolean) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Byte) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: UByte) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
@@ -756,7 +737,7 @@ abstract class FieldModel protected constructor(protected var _buffer: Buffer, p
     protected fun write(offset: Long, value: ByteArray) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: ByteArray, valueOffset: Long, valueSize: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value, valueOffset, valueSize) }
     protected fun write(offset: Long, value: Byte, valueCount: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value, valueCount) }
-    protected fun write(offset: Long, value: UUID) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: java.util.UUID) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
 }
 )CODE";
 
@@ -849,7 +830,7 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     override val fbeSize: Long = 16
 
     // Get the decimal value
-    fun get(defaults: BigDecimal = BigDecimal.valueOf(0L)): BigDecimal
+    fun get(defaults: java.math.BigDecimal = java.math.BigDecimal.valueOf(0L)): java.math.BigDecimal
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
@@ -866,13 +847,13 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
             magnitude[magnitude.size - i - 1] = temp
         }
 
-        val unscaled = BigInteger(signum, magnitude)
+        val unscaled = java.math.BigInteger(signum, magnitude)
 
-        return BigDecimal(unscaled, scale)
+        return java.math.BigDecimal(unscaled, scale)
     }
 
     // Set the decimal value
-    fun set(value: BigDecimal)
+    fun set(value: java.math.BigDecimal)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -958,17 +939,17 @@ class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     override val fbeSize: Long = 8
 
     // Get the timestamp value
-    fun get(defaults: Instant = Instant.EPOCH): Instant
+    fun get(defaults: java.time.Instant = java.time.Instant.EPOCH): java.time.Instant
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
         val nanoseconds = readInt64(fbeOffset)
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
+        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
     }
 
     // Set the timestamp value
-    fun set(value: Instant)
+    fun set(value: java.time.Instant)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -1181,7 +1162,7 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
-        val bytes = value.toByteArray(StandardCharsets.UTF_8)
+        val bytes = value.toByteArray(java.nio.charset.StandardCharsets.UTF_8)
 
         val fbeStringSize = bytes.size.toLong()
         val fbeStringOffset = _buffer.allocate(4 + fbeStringSize) - _buffer.offset
@@ -1223,14 +1204,9 @@ void GeneratorKotlin::GenerateFBEFieldModelOptional(const std::string& domain, c
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     std::string code = R"CODE(
 // Fast Binary Encoding optional _NAME_ field model
-class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelOptional_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.FieldModel(buffer, offset)
 {
     // Field size
     override val fbeSize: Long = 1 + 4
@@ -1361,6 +1337,7 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
@@ -1390,14 +1367,9 @@ void GeneratorKotlin::GenerateFBEFieldModelArray(const std::string& domain, cons
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array field model
-class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : FieldModel(buffer, offset)
+class FieldModelArray_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long, val size: Long) : _DOMAIN_fbe.FieldModel(buffer, offset)
 {
     private val _model = _MODEL_(buffer, offset)
 
@@ -1466,8 +1438,8 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
         }
     }
 
-    // Get the array as ArrayList
-    fun get(values: ArrayList<_TYPE_>)
+    // Get the array as java.util.ArrayList
+    fun get(values: java.util.ArrayList<_TYPE_>)
     {
         values.clear()
         values.ensureCapacity(size.toInt())
@@ -1499,8 +1471,8 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
         }
     }
 
-    // Set the array as List
-    fun set(values: ArrayList<_TYPE_>)
+    // Set the array as java.util.ArrayList
+    fun set(values: java.util.ArrayList<_TYPE_>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -1519,6 +1491,7 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
@@ -1553,14 +1526,9 @@ void GeneratorKotlin::GenerateFBEFieldModelVector(const std::string& domain, con
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ vector field model
-class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelVector_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.FieldModel(buffer, offset)
 {
     private val _model = _MODEL_(buffer, offset)
 
@@ -1670,8 +1638,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         return true
     }
 
-    // Get the vector as ArrayList
-    operator fun get(values: ArrayList<_TYPE_>)
+    // Get the vector as java.util.ArrayList
+    operator fun get(values: java.util.ArrayList<_TYPE_>)
     {
         values.clear()
 
@@ -1691,8 +1659,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         }
     }
 
-    // Get the vector as LinkedList
-    operator fun get(values: LinkedList<_TYPE_>)
+    // Get the vector as java.util.LinkedList
+    operator fun get(values: java.util.LinkedList<_TYPE_>)
     {
         values.clear()
 
@@ -1710,8 +1678,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         }
     }
 
-    // Get the vector as HashSet
-    operator fun get(values: HashSet<_TYPE_>)
+    // Get the vector as java.util.HashSet
+    operator fun get(values: java.util.HashSet<_TYPE_>)
     {
         values.clear()
 
@@ -1729,8 +1697,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         }
     }
 
-    // Set the vector as ArrayList
-    fun set(values: ArrayList<_TYPE_>)
+    // Set the vector as java.util.ArrayList
+    fun set(values: java.util.ArrayList<_TYPE_>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -1744,8 +1712,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         }
     }
 
-    // Set the vector as LinkedList
-    fun set(values: LinkedList<_TYPE_>)
+    // Set the vector as java.util.LinkedList
+    fun set(values: java.util.LinkedList<_TYPE_>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -1759,8 +1727,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         }
     }
 
-    // Set the vector as HashSet
-    fun set(values: HashSet<_TYPE_>)
+    // Set the vector as java.util.HashSet
+    fun set(values: java.util.HashSet<_TYPE_>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -1777,6 +1745,7 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
@@ -1806,14 +1775,9 @@ void GeneratorKotlin::GenerateFBEFieldModelMap(const std::string& domain, const 
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map field model
-class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.FieldModel(buffer, offset)
 {
     private val _modelKey = _KEY_MODEL_(buffer, offset)
     private val _modelValue = _VALUE_MODEL_(buffer, offset)
@@ -1935,8 +1899,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
         return true
     }
 
-    // Get the map as TreeMap
-    fun get(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>)
+    // Get the map as java.util.TreeMap
+    fun get(values: java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_>)
     {
         values.clear()
 
@@ -1956,8 +1920,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
         }
     }
 
-    // Get the map as HashMap
-    fun get(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>)
+    // Get the map as java.util.HashMap
+    fun get(values: java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_>)
     {
         values.clear()
 
@@ -1977,8 +1941,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
         }
     }
 
-    // Set the map as TreeMap
-    fun set(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>)
+    // Set the map as java.util.TreeMap
+    fun set(values: java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -1994,8 +1958,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
         }
     }
 
-    // Set the map as HashMap
-    fun set(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>)
+    // Set the map as java.util.HashMap
+    fun set(values: java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -2014,6 +1978,7 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_KEY_NAME_"), key_name);
     code = std::regex_replace(code, std::regex("_KEY_TYPE_"), key_type);
     code = std::regex_replace(code, std::regex("_KEY_MODEL_"), key_model);
@@ -2045,11 +2010,6 @@ void GeneratorKotlin::GenerateFBEFieldModelEnumFlags(const std::string& domain, 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
-
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ field model
@@ -2181,7 +2141,7 @@ abstract class FinalModel protected constructor(protected var _buffer: Buffer, p
     protected fun readDouble(offset: Long): Double { return Buffer.readDouble(_buffer.data, _buffer.offset + offset) }
     protected fun readBytes(offset: Long, size: Long): ByteArray { return Buffer.readBytes(_buffer.data, _buffer.offset + offset, size) }
     protected fun readString(offset: Long, size: Long): String { return Buffer.readString(_buffer.data, _buffer.offset + offset, size) }
-    protected fun readUUID(offset: Long): UUID { return Buffer.readUUID(_buffer.data, _buffer.offset + offset) }
+    protected fun readUUID(offset: Long): java.util.UUID { return Buffer.readUUID(_buffer.data, _buffer.offset + offset) }
     protected fun write(offset: Long, value: Boolean) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Byte) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: UByte) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
@@ -2196,7 +2156,7 @@ abstract class FinalModel protected constructor(protected var _buffer: Buffer, p
     protected fun write(offset: Long, value: ByteArray) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: ByteArray, valueOffset: Long, valueSize: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value, valueOffset, valueSize) }
     protected fun write(offset: Long, value: Byte, valueCount: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value, valueCount) }
-    protected fun write(offset: Long, value: UUID) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: java.util.UUID) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
 }
 )CODE";
 
@@ -2302,7 +2262,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(value: BigDecimal): Long = fbeSize
+    fun fbeAllocationSize(value: java.math.BigDecimal): Long = fbeSize
 
     // Final size
     override val fbeSize: Long = 16
@@ -2317,10 +2277,10 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Get the decimal value
-    fun get(size: Size): BigDecimal
+    fun get(size: Size): java.math.BigDecimal
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return BigDecimal.valueOf(0L)
+            return java.math.BigDecimal.valueOf(0L)
 
         val magnitude = readBytes(fbeOffset, 12)
         val scale = readByte(fbeOffset + 14).toInt()
@@ -2334,14 +2294,14 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
             magnitude[magnitude.size - i - 1] = temp
         }
 
-        val unscaled = BigInteger(signum, magnitude)
+        val unscaled = java.math.BigInteger(signum, magnitude)
 
         size.value = fbeSize
-        return BigDecimal(unscaled, scale)
+        return java.math.BigDecimal(unscaled, scale)
     }
 
     // Set the decimal value
-    fun set(value: BigDecimal): Long
+    fun set(value: java.math.BigDecimal): Long
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -2426,7 +2386,7 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(value: Instant): Long = fbeSize
+    fun fbeAllocationSize(value: java.time.Instant): Long = fbeSize
 
     // Final size
     override val fbeSize: Long = 8
@@ -2441,18 +2401,18 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     }
 
     // Get the timestamp value
-    fun get(size: Size): Instant
+    fun get(size: Size): java.time.Instant
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return Instant.EPOCH
+            return java.time.Instant.EPOCH
 
         size.value = fbeSize
         val nanoseconds = readInt64(fbeOffset)
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
+        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
     }
 
     // Set the timestamp value
-    fun set(value: Instant): Long
+    fun set(value: java.time.Instant): Long
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -2621,7 +2581,7 @@ class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        val bytes = value.toByteArray(StandardCharsets.UTF_8)
+        val bytes = value.toByteArray(java.nio.charset.StandardCharsets.UTF_8)
 
         val fbeStringSize = bytes.size.toLong()
         assert((_buffer.offset + fbeOffset + 4 + fbeStringSize) <= _buffer.size) { "Model is broken!" }
@@ -2662,14 +2622,9 @@ void GeneratorKotlin::GenerateFBEFinalModelOptional(const std::string& domain, c
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     std::string code = R"CODE(
 // Fast Binary Encoding optional _NAME_ final model
-class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelOptional_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.FinalModel(buffer, offset)
 {
     // Get the allocation size
     fun fbeAllocationSize(optional: _TYPE_): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
@@ -2704,7 +2659,7 @@ class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer
     }
 
     // Get the optional value
-    fun get(size: Size): _TYPE_
+    fun get(size: _DOMAIN_fbe.Size): _TYPE_
     {
         assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 1) > _buffer.size)
@@ -2747,6 +2702,7 @@ class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
@@ -2776,14 +2732,9 @@ void GeneratorKotlin::GenerateFBEFinalModelArray(const std::string& domain, cons
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array final model
-class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Long) : FinalModel(buffer, offset)
+class FinalModelArray_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long, private val _size: Long) : _DOMAIN_fbe.FinalModel(buffer, offset)
 {
     private val _model = _MODEL_(buffer, offset)
 
@@ -2799,7 +2750,7 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
         }
         return size
     }
-    fun fbeAllocationSize(values: ArrayList<_TYPE_>): Long
+    fun fbeAllocationSize(values: java.util.ArrayList<_TYPE_>): Long
     {
         var size: Long = 0
         var i: Long = 0
@@ -2832,7 +2783,7 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     }
 
     // Get the array
-    fun get(size: Size): _ARRAY_
+    fun get(size: _DOMAIN_fbe.Size): _ARRAY_
     {
         val values = _INIT_
 
@@ -2878,8 +2829,8 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
         return size
     }
 
-    // Get the array as ArrayList
-    fun get(values: ArrayList<_TYPE_>): Long
+    // Get the array as java.util.ArrayList
+    fun get(values: java.util.ArrayList<_TYPE_>): Long
     {
         values.clear()
 
@@ -2924,8 +2875,8 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
         return size
     }
 
-    // Set the array as List
-    fun set(values: ArrayList<_TYPE_>): Long
+    // Set the array as java.util.ArrayList
+    fun set(values: java.util.ArrayList<_TYPE_>): Long
     {
         assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset) > _buffer.size)
@@ -2947,6 +2898,7 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
@@ -2981,33 +2933,28 @@ void GeneratorKotlin::GenerateFBEFinalModelVector(const std::string& domain, con
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ vector final model
-class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelVector_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.FinalModel(buffer, offset)
 {
     private val _model = _MODEL_(buffer, offset)
 
     // Get the allocation size
-    fun fbeAllocationSize(values: ArrayList<_TYPE_>): Long
+    fun fbeAllocationSize(values: java.util.ArrayList<_TYPE_>): Long
     {
         var size: Long = 4
         for (value in values)
             size += _model.fbeAllocationSize(value)
         return size
     }
-    fun fbeAllocationSize(values: LinkedList<_TYPE_>): Long
+    fun fbeAllocationSize(values: java.util.LinkedList<_TYPE_>): Long
     {
         var size: Long = 4
         for (value in values)
             size += _model.fbeAllocationSize(value)
         return size
     }
-    fun fbeAllocationSize(values: HashSet<_TYPE_>): Long
+    fun fbeAllocationSize(values: java.util.HashSet<_TYPE_>): Long
     {
         var size: Long = 4
         for (value in values)
@@ -3037,8 +2984,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
         return size
     }
 
-    // Get the vector as ArrayList
-    fun get(values: ArrayList<_TYPE_>): Long
+    // Get the vector as java.util.ArrayList
+    fun get(values: java.util.ArrayList<_TYPE_>): Long
     {
         values.clear()
 
@@ -3066,8 +3013,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
         return size
     }
 
-    // Get the vector as LinkedList
-    fun get(values: LinkedList<_TYPE_>): Long
+    // Get the vector as java.util.LinkedList
+    fun get(values: java.util.LinkedList<_TYPE_>): Long
     {
         values.clear()
 
@@ -3093,8 +3040,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
         return size
     }
 
-    // Get the vector as HashSet
-    fun get(values: HashSet<_TYPE_>): Long
+    // Get the vector as java.util.HashSet
+    fun get(values: java.util.HashSet<_TYPE_>): Long
     {
         values.clear()
 
@@ -3120,8 +3067,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
         return size
     }
 
-    // Set the vector as ArrayList
-    fun set(values: ArrayList<_TYPE_>): Long
+    // Set the vector as java.util.ArrayList
+    fun set(values: java.util.ArrayList<_TYPE_>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
@@ -3140,8 +3087,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
         return size
     }
 
-    // Set the vector as LinkedList
-    fun set(values: LinkedList<_TYPE_>): Long
+    // Set the vector as java.util.LinkedList
+    fun set(values: java.util.LinkedList<_TYPE_>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
@@ -3160,8 +3107,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
         return size
     }
 
-    // Set the vector as HashSet
-    fun set(values: HashSet<_TYPE_>): Long
+    // Set the vector as java.util.HashSet
+    fun set(values: java.util.HashSet<_TYPE_>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
@@ -3183,6 +3130,7 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
@@ -3212,20 +3160,15 @@ void GeneratorKotlin::GenerateFBEFinalModelMap(const std::string& domain, const 
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map final model
-class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.FinalModel(buffer, offset)
 {
     private val _modelKey = _KEY_MODEL_(buffer, offset)
     private val _modelValue = _VALUE_MODEL_(buffer, offset)
 
     // Get the allocation size
-    fun fbeAllocationSize(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
+    fun fbeAllocationSize(values: java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
     {
         var size: Long = 4
         for ((key, value1) in values)
@@ -3235,7 +3178,7 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
         }
         return size
     }
-    fun fbeAllocationSize(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
+    fun fbeAllocationSize(values: java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
     {
         var size: Long = 4
         for ((key, value1) in values)
@@ -3276,8 +3219,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
         return size
     }
 
-    // Get the map as TreeMap
-    fun get(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
+    // Get the map as java.util.TreeMap
+    fun get(values: java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
     {
         values.clear()
 
@@ -3311,8 +3254,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
         return size
     }
 
-    // Get the map as HashMap
-    fun get(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
+    // Get the map as java.util.HashMap
+    fun get(values: java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
     {
         values.clear()
 
@@ -3347,8 +3290,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
         return size
     }
 
-    // Set the map as TreeMap
-    fun set(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
+    // Set the map as java.util.TreeMap
+    fun set(values: java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
@@ -3372,8 +3315,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
         return size
     }
 
-    // Set the map as HashMap
-    fun set(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
+    // Set the map as java.util.HashMap
+    fun set(values: java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
@@ -3400,6 +3343,7 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_KEY_NAME_"), key_name);
     code = std::regex_replace(code, std::regex("_KEY_TYPE_"), key_type);
     code = std::regex_replace(code, std::regex("_KEY_MODEL_"), key_model);
@@ -3432,14 +3376,9 @@ void GeneratorKotlin::GenerateFBEFinalModelEnumFlags(const std::string& domain, 
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ final model
-class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModel_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.FinalModel(buffer, offset)
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
@@ -3458,7 +3397,7 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     }
 
     // Get the value
-    fun get(size: Size): _NAME_
+    fun get(size: _DOMAIN_fbe.Size): _NAME_
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return _NAME_()
@@ -3481,6 +3420,7 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_SIZE_"), ConvertEnumSize(type));
     code = std::regex_replace(code, std::regex("_READ_"), ConvertEnumRead(type));
@@ -3877,94 +3817,90 @@ void GeneratorKotlin::GenerateFBEJson(const std::string& domain, const std::stri
     GenerateHeader("fbe");
     GenerateImports(domain, package);
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import com.google.gson.*");
-
     std::string code = R"CODE(
-internal class BytesJson : JsonSerializer<ByteArray>, JsonDeserializer<ByteArray>
+internal class BytesJson : com.google.gson.JsonSerializer<ByteArray>, com.google.gson.JsonDeserializer<ByteArray>
 {
-    override fun serialize(src: ByteArray, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: ByteArray, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(Base64.getEncoder().encodeToString(src))
+        return com.google.gson.JsonPrimitive(java.util.Base64.getEncoder().encodeToString(src))
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): ByteArray
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): ByteArray
     {
-        return Base64.getDecoder().decode(json.asString)
+        return java.util.Base64.getDecoder().decode(json.asString)
     }
 }
 
-internal class CharacterJson : JsonSerializer<Char>, JsonDeserializer<Char>
+internal class CharacterJson : com.google.gson.JsonSerializer<Char>, com.google.gson.JsonDeserializer<Char>
 {
-    override fun serialize(src: Char, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: Char, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(src.toLong())
+        return com.google.gson.JsonPrimitive(src.toLong())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): Char
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): Char
     {
         return json.asLong.toChar()
     }
 }
 
-internal class InstantJson : JsonSerializer<Instant>, JsonDeserializer<Instant>
+internal class InstantJson : com.google.gson.JsonSerializer<java.time.Instant>, com.google.gson.JsonDeserializer<java.time.Instant>
 {
-    override fun serialize(src: Instant, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: java.time.Instant, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         val nanoseconds = src.epochSecond * 1000000000 + src.nano
-        return JsonPrimitive(nanoseconds)
+        return com.google.gson.JsonPrimitive(nanoseconds)
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): Instant
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): java.time.Instant
     {
-        val nanoseconds = json.asJsonPrimitive.asLong
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
+        val nanoseconds = json.ascom.google.gson.JsonPrimitive.asLong
+        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
     }
 }
 
-internal class BigDecimalJson : JsonSerializer<BigDecimal>, JsonDeserializer<BigDecimal>
+internal class BigDecimalJson : com.google.gson.JsonSerializer<java.math.BigDecimal>, com.google.gson.JsonDeserializer<java.math.BigDecimal>
 {
-    override fun serialize(src: BigDecimal, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: java.math.BigDecimal, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(src.toPlainString())
+        return com.google.gson.JsonPrimitive(src.toPlainString())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): BigDecimal
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): java.math.BigDecimal
     {
-        return BigDecimal(json.asJsonPrimitive.asString)
+        return java.math.BigDecimal(json.ascom.google.gson.JsonPrimitive.asString)
     }
 }
 
-internal class UUIDJson : JsonSerializer<UUID>, JsonDeserializer<UUID>
+internal class UUIDJson : com.google.gson.JsonSerializer<java.util.UUID>, com.google.gson.JsonDeserializer<java.util.UUID>
 {
-    override fun serialize(src: UUID, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: java.util.UUID, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(src.toString())
+        return com.google.gson.JsonPrimitive(src.toString())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): UUID {
-        return UUID.fromString(json.asJsonPrimitive.asString)
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): java.util.UUID {
+        return java.util.UUID.fromString(json.ascom.google.gson.JsonPrimitive.asString)
     }
 }
 
-internal class UByteNullableJson : JsonSerializer<UByte?>, JsonDeserializer<UByte?>
+internal class UByteNullableJson : com.google.gson.JsonSerializer<UByte?>, com.google.gson.JsonDeserializer<UByte?>
 {
-    override fun serialize(src: UByte?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: UByte?, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         if (src == null)
             return JsonNull.INSTANCE
 
-        return JsonPrimitive(src.toLong())
+        return com.google.gson.JsonPrimitive(src.toLong())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): UByte?
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): UByte?
     {
         if (json.isJsonNull)
             return null
@@ -3973,18 +3909,18 @@ internal class UByteNullableJson : JsonSerializer<UByte?>, JsonDeserializer<UByt
     }
 }
 
-internal class UShortNullableJson : JsonSerializer<UShort?>, JsonDeserializer<UShort?>
+internal class UShortNullableJson : com.google.gson.JsonSerializer<UShort?>, com.google.gson.JsonDeserializer<UShort?>
 {
-    override fun serialize(src: UShort?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: UShort?, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         if (src == null)
             return JsonNull.INSTANCE
 
-        return JsonPrimitive(src.toLong())
+        return com.google.gson.JsonPrimitive(src.toLong())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): UShort?
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): UShort?
     {
         if (json.isJsonNull)
             return null
@@ -3993,18 +3929,18 @@ internal class UShortNullableJson : JsonSerializer<UShort?>, JsonDeserializer<US
     }
 }
 
-internal class UIntNullableJson : JsonSerializer<UInt?>, JsonDeserializer<UInt?>
+internal class UIntNullableJson : com.google.gson.JsonSerializer<UInt?>, com.google.gson.JsonDeserializer<UInt?>
 {
-    override fun serialize(src: UInt?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: UInt?, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         if (src == null)
             return JsonNull.INSTANCE
 
-        return JsonPrimitive(src.toLong())
+        return com.google.gson.JsonPrimitive(src.toLong())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): UInt?
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): UInt?
     {
         if (json.isJsonNull)
             return null
@@ -4013,18 +3949,18 @@ internal class UIntNullableJson : JsonSerializer<UInt?>, JsonDeserializer<UInt?>
     }
 }
 
-internal class ULongNullableJson : JsonSerializer<ULong?>, JsonDeserializer<ULong?>
+internal class ULongNullableJson : com.google.gson.JsonSerializer<ULong?>, com.google.gson.JsonDeserializer<ULong?>
 {
-    override fun serialize(src: ULong?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: ULong?, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         if (src == null)
             return JsonNull.INSTANCE
 
-        return JsonPrimitive(src.toLong())
+        return com.google.gson.JsonPrimitive(src.toLong())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): ULong?
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): ULong?
     {
         if (json.isJsonNull)
             return null
@@ -4038,17 +3974,17 @@ internal class ULongNullableJson : JsonSerializer<ULong?>, JsonDeserializer<ULon
 object Json
 {
     // Get the JSON engine
-    val engine: Gson = register(GsonBuilder()).create()
+    val engine: com.google.gson.Gson = register(com.google.gson.GsonBuilder()).create()
 
-    fun register(builder: GsonBuilder): GsonBuilder
+    fun register(builder: com.google.gson.GsonBuilder): com.google.gson.GsonBuilder
     {
         builder.serializeNulls()
         builder.registerTypeAdapter(ByteArray::class.java, BytesJson())
         builder.registerTypeAdapter(Char::class.java, CharacterJson())
         builder.registerTypeAdapter(Character::class.java, CharacterJson())
-        builder.registerTypeAdapter(Instant::class.java, InstantJson())
-        builder.registerTypeAdapter(BigDecimal::class.java, BigDecimalJson())
-        builder.registerTypeAdapter(UUID::class.java, UUIDJson())
+        builder.registerTypeAdapter(java.time.Instant::class.java, InstantJson())
+        builder.registerTypeAdapter(java.math.BigDecimal::class.java, BigDecimalJson())
+        builder.registerTypeAdapter(java.util.UUID::class.java, UUIDJson())
         builder.registerTypeAdapter(kotlin.UByte::class.java, UByteNullableJson())
         builder.registerTypeAdapter(kotlin.UShort::class.java, UShortNullableJson())
         builder.registerTypeAdapter(kotlin.UInt::class.java, UIntNullableJson())
@@ -4269,7 +4205,7 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     WriteLineIndent("companion object");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("private val mapping = HashMap<" + enum_mapping_type + ", " + enum_name + ">()");
+    WriteLineIndent("private val mapping = java.util.HashMap<" + enum_mapping_type + ", " + enum_name + ">()");
     WriteLine();
     WriteLineIndent("init");
     WriteLineIndent("{");
@@ -4476,38 +4412,29 @@ void GeneratorKotlin::GenerateEnumJson(const std::shared_ptr<Package>& p, const 
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import com.google.gson.*");
-
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
 
     // Generate JSON adapter body
     WriteLine();
-    WriteLineIndent("class " + adapter_name + " : JsonSerializer<" + enum_name + ">, JsonDeserializer<" + enum_name + ">");
+    WriteLineIndent("class " + adapter_name + " : com.google.gson.JsonSerializer<" + enum_name + ">, com.google.gson.JsonDeserializer<" + enum_name + ">");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate JSON adapter serialize() method
-    WriteLineIndent("override fun serialize(src: " + enum_name + ", typeOfSrc: Type, context: JsonSerializationContext): JsonElement");
+    WriteLineIndent("override fun serialize(src: " + enum_name + ", typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("return JsonPrimitive(src.raw" + ConvertEnumFrom(enum_type) + ")");
+    WriteLineIndent("return com.google.gson.JsonPrimitive(src.raw" + ConvertEnumFrom(enum_type) + ")");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate JSON adapter deserialize() method
     WriteLine();
-    WriteLineIndent("@Throws(JsonParseException::class)");
-    WriteLineIndent("override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): " + enum_name);
+    WriteLineIndent("@Throws(com.google.gson.JsonParseException::class)");
+    WriteLineIndent("override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): " + enum_name);
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("return " + enum_name + "(json.asJsonPrimitive." + ConvertEnumGet(enum_type) + ")");
+    WriteLineIndent("return " + enum_name + "(json.ascom.google.gson.JsonPrimitive." + ConvertEnumGet(enum_type) + ")");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4652,7 +4579,7 @@ void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std
     WriteLineIndent("companion object");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("private val mapping = HashMap<" + flags_mapping_type + ", " + flags_name + ">()");
+    WriteLineIndent("private val mapping = java.util.HashMap<" + flags_mapping_type + ", " + flags_name + ">()");
     WriteLine();
     WriteLineIndent("init");
     WriteLineIndent("{");
@@ -4919,40 +4846,31 @@ void GeneratorKotlin::GenerateFlagsJson(const std::shared_ptr<Package>& p, const
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import com.google.gson.*");
-
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
 
     // Generate JSON adapter body
     WriteLine();
-    WriteLineIndent("class " + adapter_name + " : JsonSerializer<" + flags_name + ">, JsonDeserializer<" + flags_name + ">");
+    WriteLineIndent("class " + adapter_name + " : com.google.gson.JsonSerializer<" + flags_name + ">, com.google.gson.JsonDeserializer<" + flags_name + ">");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate JSON adapter serialize() method
     WriteLine();
     WriteLineIndent("@Override");
-    WriteLineIndent("override fun serialize(src: " + flags_name + ", typeOfSrc: Type, context: JsonSerializationContext): JsonElement");
+    WriteLineIndent("override fun serialize(src: " + flags_name + ", typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("return JsonPrimitive(src.raw" + ConvertEnumFrom(flags_type) + ")");
+    WriteLineIndent("return com.google.gson.JsonPrimitive(src.raw" + ConvertEnumFrom(flags_type) + ")");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate JSON adapter deserialize() method
     WriteLine();
-    WriteLineIndent("@Throws(JsonParseException::class)");
-    WriteLineIndent("override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext):" + flags_name);
+    WriteLineIndent("@Throws(com.google.gson.JsonParseException::class)");
+    WriteLineIndent("override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext):" + flags_name);
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("return " + flags_name + "(json.asJsonPrimitive." + ConvertEnumGet(flags_type) + ")");
+    WriteLineIndent("return " + flags_name + "(json.ascom.google.gson.JsonPrimitive." + ConvertEnumGet(flags_type) + ")");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5360,16 +5278,11 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     // Generate struct field model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " field model");
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"RemoveRedundantCallsOfConversionMethods\", \"ReplaceGetOrSet\")");
-    WriteLineIndent("class FieldModel" + *s->name + "(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)");
+    WriteLineIndent("class FieldModel" + *s->name + "(buffer: " + domain + "fbe.Buffer, offset: Long) : " + domain + "fbe.FieldModel(buffer, offset)");
     WriteLineIndent("{");
     Indent(1);
 
@@ -5742,11 +5655,6 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     // Generate struct model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " model");
@@ -5760,7 +5668,7 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
     // Generate struct model constructors
     WriteLine();
     WriteLineIndent("constructor() { model = FieldModel" + *s->name + "(buffer, 4) }");
-    WriteLineIndent("constructor(buffer: Buffer) : super(buffer) { model = FieldModel" + *s->name + "(buffer, 4) }");
+    WriteLineIndent("constructor(buffer: " + domain + "fbe.Buffer) : super(buffer) { model = FieldModel" + *s->name + "(buffer, 4) }");
 
     // Generate struct model FBE properties
     WriteLine();
@@ -5904,16 +5812,11 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     // Generate struct final model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model");
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"RemoveRedundantCallsOfConversionMethods\", \"ReplaceGetOrSet\")");
-    WriteLineIndent("class FinalModel" + *s->name + "(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)");
+    WriteLineIndent("class FinalModel" + *s->name + "(buffer: " + domain + "fbe.Buffer, offset: Long) : " + domain + "fbe.FinalModel(buffer, offset)");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6011,7 +5914,7 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     // Generate struct final model get() methods
     WriteLine();
     WriteLineIndent("// Get the struct value");
-    WriteLineIndent("fun get(fbeSize: Size, fbeValue: " + *s->name + " = " + *s->name + "()): " + *s->name);
+    WriteLineIndent("fun get(fbeSize: " + domain + "fbe.Size, fbeValue: " + *s->name + " = " + *s->name + "()): " + *s->name);
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("_buffer.shift(fbeOffset)");
@@ -6144,15 +6047,10 @@ void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     // Generate struct model final begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model");
-    WriteLineIndent("class " + *s->name + "FinalModel : Model");
+    WriteLineIndent("class " + *s->name + "FinalModel : " + domain + "fbe.Model");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6162,7 +6060,7 @@ void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p
     // Generate struct model final constructors
     WriteLine();
     WriteLineIndent("constructor() { _model = FinalModel" + *s->name + "(buffer, 8) }");
-    WriteLineIndent("constructor(buffer: Buffer) : super(buffer) { _model = FinalModel" + *s->name + "(buffer, 8) }");
+    WriteLineIndent("constructor(buffer: " + domain + "fbe.Buffer) : super(buffer) { _model = FinalModel" + *s->name + "(buffer, 8) }");
 
     // Generate struct model final FBE properties
     WriteLine();
@@ -6297,11 +6195,6 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     // Generate sender begin
     WriteLine();
     if (final)
@@ -6348,7 +6241,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("constructor(buffer: Buffer) : super(buffer, " + std::string(final ? "true" : "false") + ")");
+    WriteLineIndent("constructor(buffer: " + domain + "fbe.Buffer) : super(buffer, " + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
     if (p->import)
@@ -6432,11 +6325,6 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     // Generate receiver begin
     WriteLine();
     if (final)
@@ -6494,7 +6382,7 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("constructor(buffer: Buffer) : super(buffer, " + std::string(final ? "true" : "false") + ")");
+    WriteLineIndent("constructor(buffer: " + domain + "fbe.Buffer) : super(buffer, " + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
     if (p->import)
@@ -6613,11 +6501,6 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-
     // Generate proxy begin
     WriteLine();
     if (final)
@@ -6664,7 +6547,7 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("constructor(buffer: Buffer) : super(buffer, " + std::string(final ? "true" : "false") + ")");
+    WriteLineIndent("constructor(buffer: " + domain + "fbe.Buffer) : super(buffer, " + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
     if (p->import)
@@ -6771,13 +6654,6 @@ void GeneratorKotlin::GenerateJson(const std::shared_ptr<Package>& p)
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports(domain, package + ".fbe");
 
-    // Generate custom import
-    WriteLine();
-    WriteLineIndent("import " + domain + "fbe.*");
-    WriteLineIndent("import " + domain + package + ".*");
-    WriteLine();
-    WriteLineIndent("import com.google.gson.*");
-
     // Generate JSON engine begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *p->name + " JSON engine");
@@ -6786,12 +6662,12 @@ void GeneratorKotlin::GenerateJson(const std::shared_ptr<Package>& p)
     Indent(1);
 
     WriteLineIndent("// Get the JSON engine");
-    WriteLineIndent("val engine: Gson = register(GsonBuilder()).create()");
+    WriteLineIndent("val engine: com.google.gson.Gson = register(com.google.gson.GsonBuilder()).create()");
     WriteLine();
 
     // Generate JSON engine Register() method
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\")");
-    WriteLineIndent("fun register(builder: GsonBuilder): GsonBuilder");
+    WriteLineIndent("fun register(builder: com.google.gson.GsonBuilder): com.google.gson.GsonBuilder");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent(domain + "fbe.Json.register(builder)");
@@ -7184,13 +7060,13 @@ std::string GeneratorKotlin::ConvertTypeName(const std::string& domain, const st
     else if (type == "double")
         return "Double" + opt;
     else if (type == "decimal")
-        return "BigDecimal" + opt;
+        return "java.math.BigDecimal" + opt;
     else if (type == "string")
         return "String" + opt;
     else if (type == "timestamp")
-        return "Instant" + opt;
+        return "java.time.Instant" + opt;
     else if (type == "uuid")
-        return "UUID" + opt;
+        return "java.util.UUID" + opt;
 
     std::string ns = "";
     std::string t = type;
@@ -7211,15 +7087,15 @@ std::string GeneratorKotlin::ConvertTypeName(const std::string& domain, const St
     if (field.array)
         return "Array" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.type, field.optional) + ">"));
     else if (field.vector)
-        return "ArrayList" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.type, field.optional) + ">"));
+        return "java.util.ArrayList" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.type, field.optional) + ">"));
     else if (field.list)
-        return "LinkedList" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.type, field.optional) + ">"));
+        return "java.util.LinkedList" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.type, field.optional) + ">"));
     else if (field.set)
-        return "HashSet" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.key, field.optional) + ">"));
+        return "java.util.HashSet" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.key, field.optional) + ">"));
     else if (field.map)
-        return "TreeMap" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.key, false) + ", " + ConvertTypeName(domain, *field.type, field.optional) +">"));
+        return "java.util.TreeMap" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.key, false) + ", " + ConvertTypeName(domain, *field.type, field.optional) +">"));
     else if (field.hash)
-        return "HashMap" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.key, false) + ", " + ConvertTypeName(domain, *field.type, field.optional) +">"));
+        return "java.util.HashMap" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.key, false) + ", " + ConvertTypeName(domain, *field.type, field.optional) +">"));
 
     return ConvertTypeName(domain, *field.type, field.optional);
 }
@@ -7282,7 +7158,7 @@ std::string GeneratorKotlin::ConvertTypeFieldName(const std::string& type)
     else if (type == "timestamp")
         return "Timestamp";
     else if (type == "uuid")
-        return "UUID";
+        return "java.util.UUID";
 
     std::string result = type;
     CppCommon::StringUtils::ReplaceAll(result, ".", "");
@@ -7324,13 +7200,13 @@ std::string GeneratorKotlin::ConvertTypeFieldType(const std::string& domain, con
     else if (type == "double")
         return "Double" + opt;
     else if (type == "decimal")
-        return "BigDecimal" + opt;
+        return "java.math.BigDecimal" + opt;
     else if (type == "string")
         return "String" + opt;
     else if (type == "timestamp")
-        return "Instant" + opt;
+        return "java.time.Instant" + opt;
     else if (type == "uuid")
-        return "UUID" + opt;
+        return "java.util.UUID" + opt;
 
     std::string ns = "";
     std::string t = type;
@@ -7468,9 +7344,9 @@ std::string GeneratorKotlin::ConvertConstant(const std::string& domain, const st
         return "";
     }
     else if (value == "epoch")
-        return "Instant.EPOCH";
+        return "java.time.Instant.EPOCH";
     else if (value == "utc")
-        return "Instant.now()";
+        return "java.time.Instant.now()";
     else if (value == "uuid0")
         return domain + "fbe.UUIDGenerator.nil()";
     else if (value == "uuid1")
@@ -7505,9 +7381,9 @@ std::string GeneratorKotlin::ConvertConstant(const std::string& domain, const st
 std::string GeneratorKotlin::ConvertConstantPrefix(const std::string& type)
 {
     if (type == "decimal")
-        return "BigDecimal.valueOf(";
+        return "java.math.BigDecimal.valueOf(";
     if (type == "uuid")
-        return "UUID.fromString(";
+        return "java.util.UUID.fromString(";
 
     return "";
 }
@@ -7564,11 +7440,11 @@ std::string GeneratorKotlin::ConvertDefault(const std::string& domain, const std
     else if (type == "double")
         return "0.0";
     else if (type == "decimal")
-        return "BigDecimal.valueOf(0L)";
+        return "java.math.BigDecimal.valueOf(0L)";
     else if (type == "string")
         return "\"\"";
     else if (type == "timestamp")
-        return "Instant.EPOCH";
+        return "java.time.Instant.EPOCH";
     else if (type == "uuid")
         return domain + "fbe.UUIDGenerator.nil()";
 
