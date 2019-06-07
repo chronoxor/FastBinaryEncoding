@@ -2,6 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Java/.idea/FastBinaryEncoding.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/FastBinaryEncoding.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -89,8 +95,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="285" />
-    <option name="y" value="30" />
+    <option name="x" value="259" />
+    <option name="y" value="106" />
     <option name="width" value="2135" />
     <option name="height" value="1305" />
   </component>
@@ -121,21 +127,21 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559904210986" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559931579264" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2838785" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -253,16 +259,12 @@
       <workItem from="1559900994808" duration="671000" />
       <workItem from="1559901678622" duration="2440000" />
       <workItem from="1559904124070" duration="103000" />
+      <workItem from="1559930567040" duration="500000" />
+      <workItem from="1559931463762" duration="140000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="_default_ - 2019.03.22 at 22h 37m 01s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="_default_ - 2019.06.07 at 11h 57m 08s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
     <history-entry file="_default_ - 2019.06.07 at 11h 57m 40s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
@@ -287,9 +289,15 @@
     <history-entry file="_default_ - 2019.06.07 at 13h 43m 38s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
+    <history-entry file="_default_ - 2019.06.07 at 21h 07m 31s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="_default_ - 2019.06.07 at 21h 19m 53s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91122000" />
+    <option name="totallyTimeSpent" value="91762000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -301,9 +309,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="228" y="24" width="1708" height="1044" extended-state="0" />
+    <frame x="259" y="106" width="2135" height="1305" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23847087" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2433735" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -312,14 +320,14 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.55218446" weight="0.28289473" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5513253" weight="0.2824232" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49089807" weight="0.39692983" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49909034" weight="0.32891247" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32891247" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.44781554" side_tool="true" visible="true" weight="0.28289473" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.4486747" side_tool="true" visible="true" weight="0.2824232" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="JProfiler" order="11" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.38410193" weight="0.34539473" />
@@ -566,6 +574,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2838785" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -573,7 +582,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>com.google.code.gson:gson:Latest</last-edited>
+          <last-edited>org.testng:testng:6.14.3</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
