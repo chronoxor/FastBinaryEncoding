@@ -65,5 +65,6 @@ fabric.properties
 .idea/httpRequests
 
 # Ignore lib & target directories
+classes
 lib
 target
