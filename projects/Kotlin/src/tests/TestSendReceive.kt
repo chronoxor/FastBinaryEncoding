@@ -5,7 +5,10 @@ import kotlin.math.*
 import kotlin.test.*
 import org.testng.annotations.*
 
-internal class MySender : proto.fbe.Sender()
+import com.chronoxor.proto.*
+import com.chronoxor.proto.fbe.*
+
+internal class MySender : Sender()
 {
     override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long
     {
@@ -14,7 +17,7 @@ internal class MySender : proto.fbe.Sender()
     }
 }
 
-internal class MyReceiver : proto.fbe.Receiver()
+internal class MyReceiver : Receiver()
 {
     private var _order: Boolean = false
     private var _balance: Boolean = false
@@ -22,9 +25,9 @@ internal class MyReceiver : proto.fbe.Receiver()
 
     val check: Boolean get() = _order && _balance && _account
 
-    override fun onReceive(value: proto.Order) { _order = true }
-    override fun onReceive(value: proto.Balance) { _balance = true }
-    override fun onReceive(value: proto.Account) { _account = true }
+    override fun onReceive(value: Order) { _order = true }
+    override fun onReceive(value: Balance) { _balance = true }
+    override fun onReceive(value: Account) { _account = true }
 }
 
 class TestSendReceive
@@ -34,18 +37,18 @@ class TestSendReceive
         val sender = MySender()
 
         // Create and send a new order
-        val order = proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0)
+        val order = Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0)
         sender.send(order)
 
         // Create and send a new balance wallet
-        val balance = proto.Balance("USD", 1000.0)
+        val balance = Balance("USD", 1000.0)
         sender.send(balance)
 
         // Create and send a new account with some orders
-        val account = proto.Account(1, "Test", proto.State.good, proto.Balance("USD", 1000.0), proto.Balance("EUR", 100.0), ArrayList())
-        account.orders.add(proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))
-        account.orders.add(proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0))
-        account.orders.add(proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0))
+        val account = Account(1, "Test", State.good, Balance("USD", 1000.0), Balance("EUR", 100.0), ArrayList())
+        account.orders.add(Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0))
+        account.orders.add(Order(2, "EURUSD", OrderSide.sell, OrderType.limit, 1.0, 100.0))
+        account.orders.add(Order(3, "EURUSD", OrderSide.buy, OrderType.stop, 1.5, 10.0))
         sender.send(account)
 
         val receiver = MyReceiver()

@@ -5,6 +5,9 @@ import java.util.*
 import kotlin.test.*
 import org.testng.annotations.*
 
+import com.chronoxor.proto.*
+import com.chronoxor.test.*
+
 @Suppress("ReplaceAssertBooleanWithAssertEquality")
 class TestSerializationJson
 {
@@ -15,7 +18,7 @@ class TestSerializationJson
         var json = """{"id":1,"name":"Test","state":6,"wallet":{"currency":"USD","amount":1000.0},"asset":{"currency":"EUR","amount":100.0},"orders":[{"id":1,"symbol":"EURUSD","side":0,"type":0,"price":1.23456,"volume":1000.0},{"id":2,"symbol":"EURUSD","side":1,"type":1,"price":1.0,"volume":100.0},{"id":3,"symbol":"EURUSD","side":0,"type":2,"price":1.5,"volume":10.0}]}"""
 
         // Create a new account from the source JSON string
-        val account1 = proto.Account.fromJson(json)
+        val account1 = Account.fromJson(json)
 
         // Serialize the account to the JSON string
         json = account1.toJson()
@@ -24,11 +27,11 @@ class TestSerializationJson
         assertTrue(json.isNotEmpty())
 
         // Deserialize the account from the JSON string
-        val account2 = proto.Account.fromJson(json)
+        val account2 = Account.fromJson(json)
 
         assertEquals(account2.id, 1)
         assertEquals(account2.name, "Test")
-        assertTrue(account2.state.hasFlags(proto.State.good))
+        assertTrue(account2.state.hasFlags(State.good))
         assertEquals(account2.wallet.currency, "USD")
         assertEquals(account2.wallet.amount, 1000.0)
         assertNotEquals(account2.asset, null)
@@ -37,20 +40,20 @@ class TestSerializationJson
         assertEquals(account2.orders.size, 3)
         assertEquals(account2.orders[0].id, 1)
         assertEquals(account2.orders[0].symbol, "EURUSD")
-        assertEquals(account2.orders[0].side, proto.OrderSide.buy)
-        assertEquals(account2.orders[0].type, proto.OrderType.market)
+        assertEquals(account2.orders[0].side, OrderSide.buy)
+        assertEquals(account2.orders[0].type, OrderType.market)
         assertEquals(account2.orders[0].price, 1.23456)
         assertEquals(account2.orders[0].volume, 1000.0)
         assertEquals(account2.orders[1].id, 2)
         assertEquals(account2.orders[1].symbol, "EURUSD")
-        assertEquals(account2.orders[1].side, proto.OrderSide.sell)
-        assertEquals(account2.orders[1].type, proto.OrderType.limit)
+        assertEquals(account2.orders[1].side, OrderSide.sell)
+        assertEquals(account2.orders[1].type, OrderType.limit)
         assertEquals(account2.orders[1].price, 1.0)
         assertEquals(account2.orders[1].volume, 100.0)
         assertEquals(account2.orders[2].id, 3)
         assertEquals(account2.orders[2].symbol, "EURUSD")
-        assertEquals(account2.orders[2].side, proto.OrderSide.buy)
-        assertEquals(account2.orders[2].type, proto.OrderType.stop)
+        assertEquals(account2.orders[2].side, OrderSide.buy)
+        assertEquals(account2.orders[2].type, OrderType.stop)
         assertEquals(account2.orders[2].price, 1.5)
         assertEquals(account2.orders[2].volume, 10.0)
     }
@@ -62,7 +65,7 @@ class TestSerializationJson
         var json = """{"id":0,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145597933463000,"f36":"00000000-0000-0000-0000-000000000000","f37":"e7854072-f0a5-11e8-8f69-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}"""
 
         // Create a new struct from the source JSON string
-        val struct1 = test.StructSimple.fromJson(json)
+        val struct1 = StructSimple.fromJson(json)
 
         // Serialize the struct to the JSON string
         json = struct1.toJson()
@@ -71,7 +74,7 @@ class TestSerializationJson
         assertTrue(json.isNotEmpty())
 
         // Deserialize the struct from the JSON string
-        val struct2 = test.StructSimple.fromJson(json)
+        val struct2 = StructSimple.fromJson(json)
 
         assertEquals(struct2.f1, false)
         assertEquals(struct2.f2, true)
@@ -161,7 +164,7 @@ class TestSerializationJson
         var json = """{"id":0,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145860677797000,"f36":"00000000-0000-0000-0000-000000000000","f37":"8420d1c6-f0a6-11e8-80fc-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]},"f100":null,"f101":true,"f102":null,"f103":null,"f104":-1,"f105":null,"f106":null,"f107":33,"f108":null,"f109":null,"f110":1092,"f111":null,"f112":null,"f113":127,"f114":null,"f115":null,"f116":-1,"f117":null,"f118":null,"f119":32767,"f120":null,"f121":null,"f122":-1,"f123":null,"f124":null,"f125":2147483647,"f126":null,"f127":null,"f128":-1,"f129":null,"f130":null,"f131":9223372036854775807,"f132":null,"f133":null,"f134":-1,"f135":null,"f136":null,"f137":123.456,"f138":null,"f139":null,"f140":-1.23456e+125,"f141":null,"f142":null,"f143":"123456.123456","f144":null,"f145":null,"f146":"Initial string!","f147":null,"f148":null,"f149":1543145860678429000,"f150":null,"f151":null,"f152":"123e4567-e89b-12d3-a456-426655440000","f153":null,"f154":null,"f155":null,"f156":null,"f157":null,"f158":null,"f159":null,"f160":null,"f161":null,"f162":null,"f163":null,"f164":null,"f165":null}"""
 
         // Create a new struct from the source JSON string
-        val struct1 = test.StructOptional.fromJson(json)
+        val struct1 = StructOptional.fromJson(json)
 
         // Serialize the struct to the JSON string
         json = struct1.toJson()
@@ -170,7 +173,7 @@ class TestSerializationJson
         assertTrue(json.isNotEmpty())
 
         // Deserialize the struct from the JSON string
-        val struct2 = test.StructOptional.fromJson(json)
+        val struct2 = StructOptional.fromJson(json)
 
         assertEquals(struct2.f1, false)
         assertEquals(struct2.f2, true)
@@ -404,7 +407,7 @@ class TestSerializationJson
         var json = """{"id":0,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145901646321000,"f36":"00000000-0000-0000-0000-000000000000","f37":"9c8c268e-f0a6-11e8-a777-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]},"f100":null,"f101":true,"f102":null,"f103":null,"f104":-1,"f105":null,"f106":null,"f107":33,"f108":null,"f109":null,"f110":1092,"f111":null,"f112":null,"f113":127,"f114":null,"f115":null,"f116":-1,"f117":null,"f118":null,"f119":32767,"f120":null,"f121":null,"f122":-1,"f123":null,"f124":null,"f125":2147483647,"f126":null,"f127":null,"f128":-1,"f129":null,"f130":null,"f131":9223372036854775807,"f132":null,"f133":null,"f134":-1,"f135":null,"f136":null,"f137":123.456,"f138":null,"f139":null,"f140":-1.23456e+125,"f141":null,"f142":null,"f143":"123456.123456","f144":null,"f145":null,"f146":"Initial string!","f147":null,"f148":null,"f149":1543145901647155000,"f150":null,"f151":null,"f152":"123e4567-e89b-12d3-a456-426655440000","f153":null,"f154":null,"f155":null,"f156":null,"f157":null,"f158":null,"f159":null,"f160":null,"f161":null,"f162":null,"f163":null,"f164":null,"f165":null,"f1000":0,"f1001":null,"f1002":50,"f1003":null,"f1004":0,"f1005":null,"f1006":42,"f1007":null,"f1008":{"id":0,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145901647367000,"f36":"00000000-0000-0000-0000-000000000000","f37":"9c8c54c4-f0a6-11e8-a777-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"f1009":null,"f1010":{"id":0,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145901648310000,"f36":"00000000-0000-0000-0000-000000000000","f37":"9c8c6b76-f0a6-11e8-a777-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]},"f100":null,"f101":true,"f102":null,"f103":null,"f104":-1,"f105":null,"f106":null,"f107":33,"f108":null,"f109":null,"f110":1092,"f111":null,"f112":null,"f113":127,"f114":null,"f115":null,"f116":-1,"f117":null,"f118":null,"f119":32767,"f120":null,"f121":null,"f122":-1,"f123":null,"f124":null,"f125":2147483647,"f126":null,"f127":null,"f128":-1,"f129":null,"f130":null,"f131":9223372036854775807,"f132":null,"f133":null,"f134":-1,"f135":null,"f136":null,"f137":123.456,"f138":null,"f139":null,"f140":-1.23456e+125,"f141":null,"f142":null,"f143":"123456.123456","f144":null,"f145":null,"f146":"Initial string!","f147":null,"f148":null,"f149":1543145901648871000,"f150":null,"f151":null,"f152":"123e4567-e89b-12d3-a456-426655440000","f153":null,"f154":null,"f155":null,"f156":null,"f157":null,"f158":null,"f159":null,"f160":null,"f161":null,"f162":null,"f163":null,"f164":null,"f165":null},"f1011":null}"""
 
         // Create a new struct from the source JSON string
-        val struct1 = test.StructNested.fromJson(json)
+        val struct1 = StructNested.fromJson(json)
 
         // Serialize the struct to the JSON string
         json = struct1.toJson()
@@ -413,7 +416,7 @@ class TestSerializationJson
         assertTrue(json.isNotEmpty())
 
         // Deserialize the struct from the JSON string
-        val struct2 = test.StructNested.fromJson(json)
+        val struct2 = StructNested.fromJson(json)
 
         assertEquals(struct2.f1, false)
         assertEquals(struct2.f2, true)
@@ -539,13 +542,13 @@ class TestSerializationJson
         assertEquals(struct2.f164, null)
         assertEquals(struct2.f165, null)
 
-        assertEquals(struct2.f1000, test.EnumSimple.ENUM_VALUE_0)
+        assertEquals(struct2.f1000, EnumSimple.ENUM_VALUE_0)
         assertEquals(struct2.f1001, null)
-        assertEquals(struct2.f1002, test.EnumTyped.ENUM_VALUE_2)
+        assertEquals(struct2.f1002, EnumTyped.ENUM_VALUE_2)
         assertEquals(struct2.f1003, null)
-        assertEquals(struct2.f1004, test.FlagsSimple.FLAG_VALUE_0)
+        assertEquals(struct2.f1004, FlagsSimple.FLAG_VALUE_0)
         assertEquals(struct2.f1005, null)
-        assertEquals(struct2.f1006, test.FlagsTyped.fromSet(EnumSet.of(test.FlagsTyped.FLAG_VALUE_2.value, test.FlagsTyped.FLAG_VALUE_4.value, test.FlagsTyped.FLAG_VALUE_6.value)))
+        assertEquals(struct2.f1006, FlagsTyped.fromSet(EnumSet.of(FlagsTyped.FLAG_VALUE_2.value, FlagsTyped.FLAG_VALUE_4.value, FlagsTyped.FLAG_VALUE_6.value)))
         assertEquals(struct2.f1007, null)
         assertEquals(struct2.f1009, null)
         assertEquals(struct2.f1011, null)
@@ -667,7 +670,7 @@ class TestSerializationJson
         var json = """{"f1":"QUJD","f2":"dGVzdA==","f3":null}"""
 
         // Create a new struct from the source JSON string
-        val struct1 = test.StructBytes.fromJson(json)
+        val struct1 = StructBytes.fromJson(json)
 
         // Serialize the struct to the JSON string
         json = struct1.toJson()
@@ -676,7 +679,7 @@ class TestSerializationJson
         assertTrue(json.isNotEmpty())
 
         // Deserialize the struct from the JSON string
-        val struct2 = test.StructBytes.fromJson(json)
+        val struct2 = StructBytes.fromJson(json)
 
         assertEquals(struct2.f1.size, 3)
         assertEquals(struct2.f1[0], 'A'.toByte())
@@ -698,7 +701,7 @@ class TestSerializationJson
         var json = """{"f1":[48,65],"f2":[97,null],"f3":["MDAw","QUFB"],"f4":["YWFh",null],"f5":[1,2],"f6":[1,null],"f7":[3,7],"f8":[3,null],"f9":[{"id":0,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986060361000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcad98-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"id":0,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986060910000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcc274-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}],"f10":[{"id":0,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986061436000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcd714-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},null]}"""
 
         // Create a new struct from the source JSON string
-        val struct1 = test.StructArray.fromJson(json)
+        val struct1 = StructArray.fromJson(json)
 
         // Serialize the struct to the JSON string
         json = struct1.toJson()
@@ -707,7 +710,7 @@ class TestSerializationJson
         assertTrue(json.isNotEmpty())
 
         // Deserialize the struct from the JSON string
-        val struct2 = test.StructArray.fromJson(json)
+        val struct2 = StructArray.fromJson(json)
 
         assertEquals(struct2.f1.size, 2)
         assertEquals(struct2.f1[0], 48)
@@ -732,16 +735,16 @@ class TestSerializationJson
         assertEquals(struct2.f4[0]!![2].toInt(), 97)
         assertEquals(struct2.f4[1], null)
         assertEquals(struct2.f5.size, 2)
-        assertEquals(struct2.f5[0], test.EnumSimple.ENUM_VALUE_1)
-        assertEquals(struct2.f5[1], test.EnumSimple.ENUM_VALUE_2)
+        assertEquals(struct2.f5[0], EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f5[1], EnumSimple.ENUM_VALUE_2)
         assertEquals(struct2.f6.size, 2)
-        assertEquals(struct2.f6[0], test.EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f6[0], EnumSimple.ENUM_VALUE_1)
         assertEquals(struct2.f6[1], null)
         assertEquals(struct2.f7.size, 2)
-        assertEquals(struct2.f7[0], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
-        assertEquals(struct2.f7[1], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
+        assertEquals(struct2.f7[0], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f7[1], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value)))
         assertEquals(struct2.f8.size, 2)
-        assertEquals(struct2.f8[0], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f8[0], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
         assertEquals(struct2.f8[1], null)
         assertEquals(struct2.f9.size, 2)
         assertEquals(struct2.f9[0].f2, true)
@@ -765,7 +768,7 @@ class TestSerializationJson
         var json = """{"f1":[48,65],"f2":[97,null],"f3":["MDAw","QUFB"],"f4":["YWFh",null],"f5":[1,2],"f6":[1,null],"f7":[3,7],"f8":[3,null],"f9":[{"id":0,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146157127964000,"f36":"00000000-0000-0000-0000-000000000000","f37":"34d38702-f0a7-11e8-b30e-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"id":0,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146157128572000,"f36":"00000000-0000-0000-0000-000000000000","f37":"34d39c88-f0a7-11e8-b30e-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}],"f10":[{"id":0,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146157129063000,"f36":"00000000-0000-0000-0000-000000000000","f37":"34d3b038-f0a7-11e8-b30e-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},null]}"""
 
         // Create a new struct from the source JSON string
-        val struct1 = test.StructVector.fromJson(json)
+        val struct1 = StructVector.fromJson(json)
 
         // Serialize the struct to the JSON string
         json = struct1.toJson()
@@ -774,7 +777,7 @@ class TestSerializationJson
         assertTrue(json.isNotEmpty())
 
         // Deserialize the struct from the JSON string
-        val struct2 = test.StructVector.fromJson(json)
+        val struct2 = StructVector.fromJson(json)
 
         assertEquals(struct2.f1.size, 2)
         assertEquals(struct2.f1[0].toInt(), 48)
@@ -799,16 +802,16 @@ class TestSerializationJson
         assertEquals(struct2.f4[0]!![2].toInt(), 97)
         assertEquals(struct2.f4[1], null)
         assertEquals(struct2.f5.size, 2)
-        assertEquals(struct2.f5[0], test.EnumSimple.ENUM_VALUE_1)
-        assertEquals(struct2.f5[1], test.EnumSimple.ENUM_VALUE_2)
+        assertEquals(struct2.f5[0], EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f5[1], EnumSimple.ENUM_VALUE_2)
         assertEquals(struct2.f6.size, 2)
-        assertEquals(struct2.f6[0], test.EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f6[0], EnumSimple.ENUM_VALUE_1)
         assertEquals(struct2.f6[1], null)
         assertEquals(struct2.f7.size, 2)
-        assertEquals(struct2.f7[0], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
-        assertEquals(struct2.f7[1], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
+        assertEquals(struct2.f7[0], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f7[1], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value)))
         assertEquals(struct2.f8.size, 2)
-        assertEquals(struct2.f8[0], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f8[0], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
         assertEquals(struct2.f8[1], null)
         assertEquals(struct2.f9.size, 2)
         assertEquals(struct2.f9[0].f2, true)
@@ -832,7 +835,7 @@ class TestSerializationJson
         var json = """{"f1":[48,65],"f2":[97,null],"f3":["MDAw","QUFB"],"f4":["YWFh",null],"f5":[1,2],"f6":[1,null],"f7":[3,7],"f8":[3,null],"f9":[{"id":0,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146220253760000,"f36":"00000000-0000-0000-0000-000000000000","f37":"5a73e7fe-f0a7-11e8-89e6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"id":0,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146220255725000,"f36":"00000000-0000-0000-0000-000000000000","f37":"5a741990-f0a7-11e8-89e6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}],"f10":[{"id":0,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146220256802000,"f36":"00000000-0000-0000-0000-000000000000","f37":"5a74e4b0-f0a7-11e8-89e6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},null]}"""
 
         // Create a new struct from the source JSON string
-        val struct1 = test.StructList.fromJson(json)
+        val struct1 = StructList.fromJson(json)
 
         // Serialize the struct to the JSON string
         json = struct1.toJson()
@@ -841,7 +844,7 @@ class TestSerializationJson
         assertTrue(json.isNotEmpty())
 
         // Deserialize the struct from the JSON string
-        val struct2 = test.StructList.fromJson(json)
+        val struct2 = StructList.fromJson(json)
 
         assertEquals(struct2.f1.size, 2)
         assertEquals(struct2.f1.first.toByte().toInt(), 48)
@@ -866,16 +869,16 @@ class TestSerializationJson
         assertEquals(struct2.f4.first!![2].toInt(), 97)
         assertEquals(struct2.f4.last, null)
         assertEquals(struct2.f5.size, 2)
-        assertEquals(struct2.f5.first, test.EnumSimple.ENUM_VALUE_1)
-        assertEquals(struct2.f5.last, test.EnumSimple.ENUM_VALUE_2)
+        assertEquals(struct2.f5.first, EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f5.last, EnumSimple.ENUM_VALUE_2)
         assertEquals(struct2.f6.size, 2)
-        assertEquals(struct2.f6.first, test.EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f6.first, EnumSimple.ENUM_VALUE_1)
         assertEquals(struct2.f6.last, null)
         assertEquals(struct2.f7.size, 2)
-        assertEquals(struct2.f7.first, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
-        assertEquals(struct2.f7.last, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
+        assertEquals(struct2.f7.first, FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f7.last, FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value)))
         assertEquals(struct2.f8.size, 2)
-        assertEquals(struct2.f8.first, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f8.first, FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
         assertEquals(struct2.f8.last, null)
         assertEquals(struct2.f9.size, 2)
         assertEquals(struct2.f9.first.f2, true)
@@ -899,7 +902,7 @@ class TestSerializationJson
         var json = """{"f1":[48,65,97],"f2":[1,2],"f3":[3,7],"f4":[{"id":48,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146299848353000,"f36":"00000000-0000-0000-0000-000000000000","f37":"89e4edd0-f0a7-11e8-9dde-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"id":65,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146299848966000,"f36":"00000000-0000-0000-0000-000000000000","f37":"89e503f6-f0a7-11e8-9dde-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}]}"""
 
         // Create a new struct from the source JSON string
-        val struct1 = test.StructSet.fromJson(json)
+        val struct1 = StructSet.fromJson(json)
 
         // Serialize the struct to the JSON string
         json = struct1.toJson()
@@ -908,23 +911,23 @@ class TestSerializationJson
         assertTrue(json.isNotEmpty())
 
         // Deserialize the struct from the JSON string
-        val struct2 = test.StructSet.fromJson(json)
+        val struct2 = StructSet.fromJson(json)
 
         assertEquals(struct2.f1.size, 3)
         assertTrue(struct2.f1.contains(48.toByte()))
         assertTrue(struct2.f1.contains(65.toByte()))
         assertTrue(struct2.f1.contains(97.toByte()))
         assertEquals(struct2.f2.size, 2)
-        assertTrue(struct2.f2.contains(test.EnumSimple.ENUM_VALUE_1))
-        assertTrue(struct2.f2.contains(test.EnumSimple.ENUM_VALUE_2))
+        assertTrue(struct2.f2.contains(EnumSimple.ENUM_VALUE_1))
+        assertTrue(struct2.f2.contains(EnumSimple.ENUM_VALUE_2))
         assertEquals(struct2.f3.size, 2)
-        assertTrue(struct2.f3.contains(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value))))
-        assertTrue(struct2.f3.contains(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value))))
+        assertTrue(struct2.f3.contains(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value))))
+        assertTrue(struct2.f3.contains(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value))))
         assertEquals(struct2.f4.size, 2)
-        val s1 = test.StructSimple()
+        val s1 = StructSimple()
         s1.id = 48
         assertTrue(struct2.f4.contains(s1))
-        val s2 = test.StructSimple()
+        val s2 = StructSimple()
         s2.id = 65
         assertTrue(struct2.f4.contains(s2))
     }
@@ -936,7 +939,7 @@ class TestSerializationJson
         var json = """{"f1":{"10":48,"20":65},"f2":{"10":97,"20":null},"f3":{"10":"MDAw","20":"QUFB"},"f4":{"10":"YWFh","20":null},"f5":{"10":1,"20":2},"f6":{"10":1,"20":null},"f7":{"10":3,"20":7},"f8":{"10":3,"20":null},"f9":{"10":{"id":48,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345803483000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a549215e-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":{"id":65,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345804184000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a54942ce-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}},"f10":{"10":{"id":48,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345803483000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a549215e-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":null}}"""
 
         // Create a new struct from the source JSON string
-        val struct1 = test.StructMap.fromJson(json)
+        val struct1 = StructMap.fromJson(json)
 
         // Serialize the struct to the JSON string
         json = struct1.toJson()
@@ -945,7 +948,7 @@ class TestSerializationJson
         assertTrue(json.isNotEmpty())
 
         // Deserialize the struct from the JSON string
-        val struct2 = test.StructMap.fromJson(json)
+        val struct2 = StructMap.fromJson(json)
 
         assertEquals(struct2.f1.size, 2)
         assertEquals(struct2.f1[10]!!.toByte().toInt(), 48)
@@ -960,16 +963,16 @@ class TestSerializationJson
         assertEquals(struct2.f4[10]!!.size, 3)
         assertEquals(struct2.f4[20], null)
         assertEquals(struct2.f5.size, 2)
-        assertEquals(struct2.f5[10], test.EnumSimple.ENUM_VALUE_1)
-        assertEquals(struct2.f5[20], test.EnumSimple.ENUM_VALUE_2)
+        assertEquals(struct2.f5[10], EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f5[20], EnumSimple.ENUM_VALUE_2)
         assertEquals(struct2.f6.size, 2)
-        assertEquals(struct2.f6[10], test.EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f6[10], EnumSimple.ENUM_VALUE_1)
         assertEquals(struct2.f6[20], null)
         assertEquals(struct2.f7.size, 2)
-        assertEquals(struct2.f7[10], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
-        assertEquals(struct2.f7[20], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
+        assertEquals(struct2.f7[10], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f7[20], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value)))
         assertEquals(struct2.f8.size, 2)
-        assertEquals(struct2.f8[10], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f8[10], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
         assertEquals(struct2.f8[20], null)
         assertEquals(struct2.f9.size, 2)
         assertEquals(struct2.f9[10]!!.id, 48)
@@ -986,7 +989,7 @@ class TestSerializationJson
         var json = """{"f1":{"10":48,"20":65},"f2":{"10":97,"20":null},"f3":{"10":"MDAw","20":"QUFB"},"f4":{"10":"YWFh","20":null},"f5":{"10":1,"20":2},"f6":{"10":1,"20":null},"f7":{"10":3,"20":7},"f8":{"10":3,"20":null},"f9":{"10":{"id":48,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146381450913000,"f36":"00000000-0000-0000-0000-000000000000","f37":"ba8885d2-f0a7-11e8-81fa-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":{"id":65,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146381452825000,"f36":"00000000-0000-0000-0000-000000000000","f37":"ba88ced4-f0a7-11e8-81fa-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}},"f10":{"10":{"id":48,"f1":false,"f2":true,"f3":0,"f4":-1,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":-1,"f13":0,"f14":32767,"f15":0,"f16":-1,"f17":0,"f18":2147483647,"f19":0,"f20":-1,"f21":0,"f22":9223372036854775807,"f23":0,"f24":-1,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146381450913000,"f36":"00000000-0000-0000-0000-000000000000","f37":"ba8885d2-f0a7-11e8-81fa-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"id":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"id":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":null}}"""
 
         // Create a new struct from the source JSON string
-        val struct1 = test.StructHash.fromJson(json)
+        val struct1 = StructHash.fromJson(json)
 
         // Serialize the struct to the JSON string
         json = struct1.toJson()
@@ -995,7 +998,7 @@ class TestSerializationJson
         assertTrue(json.isNotEmpty())
 
         // Deserialize the struct from the JSON string
-        val struct2 = test.StructHash.fromJson(json)
+        val struct2 = StructHash.fromJson(json)
 
         assertEquals(struct2.f1.size, 2)
         assertEquals(struct2.f1["10"]!!.toByte().toInt(), 48)
@@ -1010,16 +1013,16 @@ class TestSerializationJson
         assertEquals(struct2.f4["10"]!!.size, 3)
         assertEquals(struct2.f4["20"], null)
         assertEquals(struct2.f5.size, 2)
-        assertEquals(struct2.f5["10"], test.EnumSimple.ENUM_VALUE_1)
-        assertEquals(struct2.f5["20"], test.EnumSimple.ENUM_VALUE_2)
+        assertEquals(struct2.f5["10"], EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f5["20"], EnumSimple.ENUM_VALUE_2)
         assertEquals(struct2.f6.size, 2)
-        assertEquals(struct2.f6["10"], test.EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f6["10"], EnumSimple.ENUM_VALUE_1)
         assertEquals(struct2.f6["20"], null)
         assertEquals(struct2.f7.size, 2)
-        assertEquals(struct2.f7["10"], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
-        assertEquals(struct2.f7["20"], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
+        assertEquals(struct2.f7["10"], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f7["20"], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value)))
         assertEquals(struct2.f8.size, 2)
-        assertEquals(struct2.f8["10"], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f8["10"], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
         assertEquals(struct2.f8["20"], null)
         assertEquals(struct2.f9.size, 2)
         assertEquals(struct2.f9["10"]!!.id, 48)

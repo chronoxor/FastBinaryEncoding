@@ -2,14 +2,479 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/libraries/com_google_code_gson_gson_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/libraries/com_google_code_gson_gson_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_kotlin.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_kotlin.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/FastBinaryEncoding.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/enums/fbe/FinalSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/enums/fbe/FinalSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/enums/fbe/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/enums/fbe/Sender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/proto/fbe/FinalSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/proto/fbe/FinalSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/proto/fbe/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/proto/fbe/Sender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/protoex/fbe/FinalSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/protoex/fbe/FinalSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/protoex/fbe/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/protoex/fbe/Sender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/test/fbe/FinalSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/test/fbe/FinalSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/test/fbe/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/test/fbe/Sender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_testng_testng_Latest.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Create.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/Create.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Print.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/Print.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/PrintJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/PrintJson.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/SendReceive.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/SendReceive.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Serialization.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/Serialization.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/SerializationFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/SerializationFinal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/SerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/SerializationJson.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumByteEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumChar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumCharEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt16.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt16Enum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt32.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt32Enum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt64.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt64Enum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumInt8Enum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt16.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt16Enum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt32.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt32Enum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt64.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt64Enum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumUInt8Enum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumWChar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/EnumWCharEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/Enums.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumByteJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumCharJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumInt16Json.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumInt32Json.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumInt64Json.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumInt8Json.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumUInt16Json.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumUInt32Json.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumUInt64Json.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumUInt8Json.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumWCharJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumsFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/EnumsModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumChar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumInt16.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumInt32.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumInt64.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumInt8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumUInt16.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumUInt32.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumUInt64.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumUInt8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnumWChar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FieldModelEnums.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumChar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumInt16.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumInt32.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumInt64.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumInt8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumUInt16.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumUInt32.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumUInt64.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumUInt8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnumWChar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalModelEnums.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalReceiver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalSender.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/Json.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/Proxy.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/Receiver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/Sender.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Buffer.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelBoolean.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelChar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelDecimal.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelDouble.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelFloat.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelInt16.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelInt32.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelInt64.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelInt8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelString.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelTimestamp.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelUInt16.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelUInt32.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelUInt64.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelUInt8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelUUID.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelWChar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelBoolean.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelChar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelDecimal.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelDouble.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelFloat.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelInt16.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelInt32.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelInt64.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelInt8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelString.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelTimestamp.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelUInt16.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelUInt32.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelUInt64.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelUInt8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelUUID.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FinalModelWChar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Json.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Model.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Receiver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Sender.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Size.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/UUIDGenerator.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/Account.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/Balance.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/Order.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/OrderSide.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/OrderSideEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/OrderType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/OrderTypeEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/State.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/StateEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/AccountFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/AccountModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/BalanceFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/BalanceModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelAccount.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelBalance.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelOptionalBalance.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelOrder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelOrderSide.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelOrderType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelVectorOrder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelAccount.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelBalance.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelOptionalBalance.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelOrder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelOrderSide.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelOrderType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelVectorOrder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalReceiver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalSender.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/Json.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/OrderFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/OrderModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/OrderSideJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/OrderTypeJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/Proxy.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/Receiver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/Sender.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/StateJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/Account.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/Balance.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/Order.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/OrderSide.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/OrderSideEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/OrderType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/OrderTypeEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/StateEx.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/StateExEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/AccountFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/AccountModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/BalanceFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/BalanceModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelAccount.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelBalance.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelOptionalBalance.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelOrder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelOrderSide.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelOrderType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelStateEx.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FieldModelVectorOrder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelAccount.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelBalance.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelOptionalBalance.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelOrder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelOrderSide.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelOrderType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelStateEx.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalModelVectorOrder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalReceiver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalSender.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/Json.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/OrderFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/OrderModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/OrderSideJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/OrderTypeJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/Proxy.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/Receiver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/Sender.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/StateExJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/EnumEmpty.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/EnumEmptyEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/EnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/EnumSimpleEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/EnumTyped.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/EnumTypedEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/FlagsEmpty.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/FlagsEmptyEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/FlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/FlagsSimpleEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/FlagsTyped.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/FlagsTypedEnum.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructArray.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructEmpty.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructHash.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructHashEx.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructList.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructMap.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructNested.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructOptional.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructSet.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructVector.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/EnumEmptyJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/EnumSimpleJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/EnumTypedJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayOptionalByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayOptionalBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayOptionalEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayOptionalFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayOptionalStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelEnumEmpty.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelEnumTyped.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelFlagsEmpty.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelFlagsTyped.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32Byte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32Bytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32EnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32FlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32OptionalByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32OptionalBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32OptionalEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32OptionalFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32OptionalStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapInt32StructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringOptionalByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringOptionalBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringOptionalEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringOptionalFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringOptionalStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStringStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStructSimpleOptionalStructNested.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelMapStructSimpleStructNested.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalBoolean.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalChar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalDecimal.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalDouble.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalEnumTyped.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalFlagsTyped.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalFloat.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalInt16.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalInt32.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalInt64.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalInt8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalString.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalStructNested.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalStructOptional.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalTimestamp.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalUInt16.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalUInt32.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalUInt64.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalUInt8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalUUID.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalWChar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalprotoAccount.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalprotoBalance.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalprotoOrder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalprotoOrderSide.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalprotoOrderType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelOptionalprotoState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructArray.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructEmpty.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructHash.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructHashEx.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructList.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructMap.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructNested.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructOptional.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructSet.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructVector.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorOptionalByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorOptionalBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorOptionalEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorOptionalFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorOptionalStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FieldModelVectorStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayOptionalByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayOptionalBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayOptionalEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayOptionalFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayOptionalStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelEnumEmpty.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelEnumTyped.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelFlagsEmpty.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelFlagsTyped.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32Byte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32Bytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32EnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32FlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32OptionalByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32OptionalBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32OptionalEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32OptionalFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32OptionalStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapInt32StructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringOptionalByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringOptionalBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringOptionalEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringOptionalFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringOptionalStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStringStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStructSimpleOptionalStructNested.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelMapStructSimpleStructNested.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalBoolean.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalChar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalDecimal.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalDouble.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalEnumTyped.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalFlagsTyped.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalFloat.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalInt16.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalInt32.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalInt64.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalInt8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalString.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalStructNested.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalStructOptional.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalTimestamp.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalUInt16.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalUInt32.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalUInt64.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalUInt8.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalUUID.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalWChar.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalprotoAccount.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalprotoBalance.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalprotoOrder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalprotoOrderSide.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalprotoOrderType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelOptionalprotoState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructArray.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructEmpty.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructHash.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructHashEx.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructList.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructMap.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructNested.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructOptional.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructSet.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructVector.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorOptionalByte.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorOptionalBytes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorOptionalEnumSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorOptionalFlagsSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorOptionalStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalModelVectorStructSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalReceiver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalSender.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FlagsEmptyJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FlagsSimpleJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FlagsTypedJson.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/Json.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/Proxy.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/Receiver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/Sender.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructArrayFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructArrayModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructBytesFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructBytesModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructEmptyFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructEmptyModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructHashExFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructHashExModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructHashFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructHashModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructListFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructListModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructMapFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructMapModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructNestedFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructNestedModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructOptionalFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructOptionalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructSetFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructSetModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructSimpleFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructSimpleModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructVectorFinalModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/StructVectorModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestClone.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestClone.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestCreate.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestCreate.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestDecimal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestDecimal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestEnums.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestEnums.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestExtending.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestExtending.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSendReceive.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSendReceive.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSerialization.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerialization.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationFinal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_java.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_java.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,7 +483,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -41,9 +506,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/proto/fbe/FieldModelString.kt" />
-        <option value="$PROJECT_DIR$/src/proto/fbe/FinalModelBytes.kt" />
-        <option value="$PROJECT_DIR$/src/proto/fbe/Receiver.kt" />
         <option value="$PROJECT_DIR$/src/proto/proto/fbe/FieldModelOrder.kt" />
         <option value="$PROJECT_DIR$/src/proto/proto/fbe/OrderModel.kt" />
         <option value="$PROJECT_DIR$/src/proto/proto/fbe/FinalModelOrder.java" />
@@ -69,16 +531,10 @@
         <option value="$PROJECT_DIR$/src/examples/SerializationJson.kt" />
         <option value="$PROJECT_DIR$/src/proto/proto/Balance.kt" />
         <option value="$PROJECT_DIR$/src/proto/protoex/Balance.kt" />
-        <option value="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.kt" />
-        <option value="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.kt" />
-        <option value="$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.kt" />
-        <option value="$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.kt" />
         <option value="$PROJECT_DIR$/src/examples/Test.kt" />
         <option value="$PROJECT_DIR$/src/proto/test/StructBytes.kt" />
         <option value="$PROJECT_DIR$/src/proto/test/StructHash.kt" />
         <option value="$PROJECT_DIR$/src/proto/proto/Account.kt" />
-        <option value="$PROJECT_DIR$/src/examples/Print.kt" />
-        <option value="$PROJECT_DIR$/src/tests/TestEnums.kt" />
         <option value="$PROJECT_DIR$/src/proto/fbe/Sender.kt" />
         <option value="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" />
         <option value="$PROJECT_DIR$/src/examples/PrintJson.kt" />
@@ -89,9 +545,18 @@
         <option value="$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructEmpty.kt" />
         <option value="$PROJECT_DIR$/src/proto/test/StructOptional.kt" />
         <option value="$PROJECT_DIR$/src/proto/test/StructSimple.kt" />
-        <option value="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.kt" />
         <option value="$PROJECT_DIR$/src/tests/TestSendReceive.kt" />
         <option value="$PROJECT_DIR$/src/tests/TestClone.kt" />
+        <option value="$PROJECT_DIR$/src/com/chronoxor/test/StructOptional.kt" />
+        <option value="$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.kt" />
+        <option value="$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.kt" />
+        <option value="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.kt" />
+        <option value="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.kt" />
+        <option value="$PROJECT_DIR$/src/examples/Create.kt" />
+        <option value="$PROJECT_DIR$/src/examples/Print.kt" />
+        <option value="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.kt" />
+        <option value="$PROJECT_DIR$/src/tests/TestEnums.kt" />
+        <option value="$PROJECT_DIR$/src/tests/TestExtending.kt" />
       </list>
     </option>
   </component>
@@ -107,6 +572,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -119,12 +585,17 @@
               <item name="Kotlin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Kotlin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -134,15 +605,15 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559898203750" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559904183041" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2838785" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -156,59 +627,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.&lt;default&gt;">
-    <configuration name="examples.Print" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" value="examples.Print" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="examples.PrintJson" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" value="examples.PrintJson" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="examples.SerializationFinal" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" value="examples.SerializationFinal" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="examples.SerializationJson" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" value="examples.SerializationJson" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="&lt;default&gt;" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
       <option name="PACKAGE_NAME" value="" />
@@ -219,20 +638,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Kotlin.examples.SerializationFinal" />
-      <item itemvalue="Kotlin.examples.SerializationJson" />
-      <item itemvalue="Kotlin.examples.Print" />
-      <item itemvalue="Kotlin.examples.PrintJson" />
-      <item itemvalue="TestNG.&lt;default&gt;" />
-    </list>
     <recent_temporary>
       <list>
         <item itemvalue="TestNG.&lt;default&gt;" />
-        <item itemvalue="Kotlin.examples.PrintJson" />
-        <item itemvalue="Kotlin.examples.Print" />
-        <item itemvalue="Kotlin.examples.SerializationJson" />
-        <item itemvalue="Kotlin.examples.SerializationFinal" />
       </list>
     </recent_temporary>
   </component>
@@ -319,22 +727,13 @@
       <workItem from="1559898082992" duration="21000" />
       <workItem from="1559898138963" duration="96000" />
       <workItem from="1559898411377" duration="43000" />
+      <workItem from="1559898534758" duration="604000" />
+      <workItem from="1559900994808" duration="671000" />
+      <workItem from="1559901678622" duration="2440000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="_default_ - 2019.03.06 at 15h 21m 58s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="_default_ - 2019.03.06 at 15h 22m 09s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="_default_ - 2019.03.06 at 21h 20m 05s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="_default_ - 2019.03.14 at 02h 58m 33s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
     <history-entry file="_default_ - 2019.03.22 at 19h 02m 27s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
@@ -353,9 +752,21 @@
     <history-entry file="_default_ - 2019.06.07 at 12h 03m 32s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
+    <history-entry file="_default_ - 2019.06.07 at 13h 37m 45s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="_default_ - 2019.06.07 at 13h 38m 08s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="_default_ - 2019.06.07 at 13h 40m 54s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="_default_ - 2019.06.07 at 13h 41m 34s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87304000" />
+    <option name="totallyTimeSpent" value="91019000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -369,7 +780,7 @@
   <component name="ToolWindowManager">
     <frame x="228" y="24" width="1708" height="1044" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22633494" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23543689" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -378,17 +789,17 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5546116" weight="0.28289473" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4912068" weight="0.39711663" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.55279124" weight="0.28289473" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49089807" weight="0.39692983" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49909034" weight="0.32891247" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32891247" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.44538835" side_tool="true" visible="true" weight="0.28289473" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.44720873" side_tool="true" visible="true" weight="0.28289473" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="JProfiler" order="11" />
-      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.39202657" weight="0.3460591" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.38410193" weight="0.34539473" />
       <window_info anchor="bottom" id="Inspection Results" order="13" sideWeight="0.49727106" weight="0.3294025" />
       <window_info anchor="bottom" id="Docker" order="14" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -407,139 +818,17 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/proto/proto/Balance.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="769">
-          <caret line="102" selection-start-line="102" selection-end-line="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/proto/Order.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/protoex/Account.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/protoex/Balance.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="68" column="12" selection-start-line="68" selection-start-column="12" selection-end-line="68" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/protoex/Order.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-510">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructArray.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructNested.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructBytes.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructList.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3247">
-          <caret line="200" column="9" selection-start-line="200" selection-start-column="9" selection-end-line="200" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructVector.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2890">
-          <caret line="179" column="9" selection-start-line="179" selection-start-column="9" selection-end-line="179" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructSet.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructMap.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3961">
-          <caret line="242" column="9" selection-start-line="242" selection-start-column="9" selection-end-line="242" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructHash.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructHashEx.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="81" selection-start-line="81" selection-end-line="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestEnums.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="234" selection-start-line="234" selection-end-line="234" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/fbe/Sender.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/fbe/Receiver.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/proto/fbe/Sender.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/proto/fbe/FinalSender.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/proto/test/StructBytes.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/test/StructList.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/test/StructVector.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/test/StructSet.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/test/StructMap.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/test/StructHash.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/test/StructHashEx.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/fbe/Sender.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/fbe/Receiver.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/proto/fbe/Sender.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/proto/fbe/FinalSender.kt" />
     <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/GsonBuilder.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="532">
@@ -557,20 +846,6 @@
     <entry file="jar://$MAVEN_REPOSITORY$/org/testng/testng/7.0.0-beta1/testng-7.0.0-beta1.jar!/org/testng/internal/Invoker.class" />
     <entry file="jar://C:/Program Files/Java/jdk-11/lib/src.zip!/java.base/java/util/Optional.java" />
     <entry file="jar://$PROJECT_DIR$/lib/kotlin-stdlib-sources.jar!/common/kotlin/UInt.kt" />
-    <entry file="file://$PROJECT_DIR$/src/examples/Print.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3060">
-          <caret line="180" column="28" selection-start-line="180" selection-start-column="28" selection-end-line="180" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/examples/Create.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/Gson.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8245">
@@ -579,53 +854,13 @@
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk-11/lib/src.zip!/java.base/java/lang/reflect/Field.java" />
-    <entry file="file://$PROJECT_DIR$/src/proto/proto/Account.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2142">
-          <caret line="134" selection-start-line="134" selection-end-line="134" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/proto/proto/Account.kt" />
     <entry file="jar://C:/Program Files/Java/jdk-11/lib/src.zip!/java.base/jdk/internal/reflect/UnsafeIntegerFieldAccessorImpl.java" />
     <entry file="jar://C:/Program Files/Java/jdk-11/lib/src.zip!/java.base/jdk/internal/reflect/UnsafeFieldAccessorImpl.java" />
-    <entry file="file://$PROJECT_DIR$/src/examples/PrintJson.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2720">
-          <caret line="163" column="35" selection-start-line="163" selection-start-column="35" selection-end-line="163" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/fbe/Json.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="179" column="29" selection-start-line="179" selection-start-column="29" selection-end-line="179" selection-end-column="29" />
-          <folding>
-            <element signature="e#222#393#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/proto/fbe/Proxy.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-629">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/examples/PrintJson.kt" />
+    <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/fbe/Json.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/proto/fbe/Proxy.kt" />
     <entry file="file://$PROJECT_DIR$/src/proto/enums/fbe/FinalProxy.kt" />
     <entry file="file://$PROJECT_DIR$/src/proto/test/FlagsEmpty.kt" />
     <entry file="file://$PROJECT_DIR$/src/proto/test/StructEmpty.kt" />
@@ -633,67 +868,120 @@
     <entry file="file://$PROJECT_DIR$/src/proto/test/FlagsEmptyEnum.kt" />
     <entry file="file://$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructEmpty.kt" />
     <entry file="file://$PROJECT_DIR$/src/proto/test/fbe/FinalModelStructEmpty.kt" />
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructOptional.kt">
+    <entry file="file://$PROJECT_DIR$/src/proto/test/StructOptional.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructOptional.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructSimple.kt" />
+    <entry file="file://$PROJECT_DIR$/src/tests/TestSerialization.kt" />
+    <entry file="file://$PROJECT_DIR$/src/proto/test/StructSimple.kt" />
+    <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceive.kt" />
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/enums/Enums.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+        <state relative-caret-position="3995">
+          <caret line="243" selection-start-line="243" selection-end-line="243" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructOptional.kt">
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/test/StructOptional.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="770" column="37" selection-start-line="770" selection-start-column="37" selection-end-line="770" selection-end-column="37" />
+        <state relative-caret-position="340">
+          <caret line="86" column="42" selection-start-line="86" selection-start-column="42" selection-end-line="86" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructSimple.kt">
+    <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="568" column="35" selection-start-line="568" selection-start-column="35" selection-end-line="568" selection-end-column="35" />
+        <state relative-caret-position="221">
+          <caret line="73" column="39" selection-start-line="73" selection-start-column="39" selection-end-line="73" selection-end-column="39" />
+          <folding>
+            <element signature="e#20#75#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestSerialization.kt">
+    <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="105" column="30" selection-start-line="105" selection-start-column="30" selection-end-line="105" selection-end-column="30" />
+        <state relative-caret-position="-318">
+          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructSimple.kt">
+    <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+        <state relative-caret-position="136">
+          <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceiveFinal.kt">
+    <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="67" column="16" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="16" />
+        <state relative-caret-position="119">
+          <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/examples/Print.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#18#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/examples/Create.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="32" lean-forward="true" selection-start-line="2" selection-end-line="3" selection-end-column="32" />
+          <folding>
+            <element signature="e#18#73#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/test/fbe/FinalModelStructOptional.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="906" column="24" selection-start-line="906" selection-start-column="24" selection-end-line="906" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/TestEnums.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="229" selection-start-line="229" selection-end-line="229" />
+          <folding>
+            <element signature="e#15#130#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/TestExtending.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-646">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
           <folding>
             <element signature="e#15#86#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceive.kt">
+    <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceiveFinal.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="67" column="16" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="16" />
+        <state relative-caret-position="250">
+          <caret line="47" column="137" selection-start-line="47" selection-start-column="137" selection-end-line="47" selection-end-column="137" />
           <folding>
-            <element signature="e#15#86#0" expanded="true" />
+            <element signature="e#15#174#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tests/TestClone.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
           <folding>
-            <element signature="e#15#86#0" expanded="true" />
+            <element signature="e#15#116#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -755,7 +1043,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2838785" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

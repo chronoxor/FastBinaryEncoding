@@ -5,6 +5,11 @@ import java.util.*
 import kotlin.test.*
 import org.testng.annotations.*
 
+import com.chronoxor.proto.*
+import com.chronoxor.proto.fbe.*
+import com.chronoxor.test.*
+import com.chronoxor.test.fbe.*
+
 @Suppress("ReplaceAssertBooleanWithAssertEquality")
 class TestSerialization
 {
@@ -12,13 +17,13 @@ class TestSerialization
     fun serializationDomain()
     {
         // Create a new account with some orders
-        val account1 = proto.Account(1, "Test", proto.State.good, proto.Balance("USD", 1000.0), proto.Balance("EUR", 100.0), ArrayList())
-        account1.orders.add(proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))
-        account1.orders.add(proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0))
-        account1.orders.add(proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0))
+        val account1 = Account(1, "Test", State.good, Balance("USD", 1000.0), Balance("EUR", 100.0), ArrayList())
+        account1.orders.add(Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0))
+        account1.orders.add(Order(2, "EURUSD", OrderSide.sell, OrderType.limit, 1.0, 100.0))
+        account1.orders.add(Order(3, "EURUSD", OrderSide.buy, OrderType.stop, 1.5, 10.0))
 
         // Serialize the account to the FBE stream
-        val writer = proto.fbe.AccountModel()
+        val writer = AccountModel()
         assertEquals(writer.model.fbeOffset, 4)
         val serialized = writer.serialize(account1)
         assertEquals(serialized, writer.buffer.size)
@@ -30,8 +35,8 @@ class TestSerialization
         assertEquals(writer.buffer.size, 252)
 
         // Deserialize the account from the FBE stream
-        val account2 = proto.Account()
-        val reader = proto.fbe.AccountModel()
+        val account2 = Account()
+        val reader = AccountModel()
         assertEquals(reader.model.fbeOffset, 4)
         reader.attach(writer.buffer)
         assertTrue(reader.verify())
@@ -42,7 +47,7 @@ class TestSerialization
 
         assertEquals(account2.id, 1)
         assertEquals(account2.name, "Test")
-        assertTrue(account2.state.hasFlags(proto.State.good))
+        assertTrue(account2.state.hasFlags(State.good))
         assertEquals(account2.wallet.currency, "USD")
         assertEquals(account2.wallet.amount, 1000.0)
         assertNotEquals(account2.asset, null)
@@ -51,20 +56,20 @@ class TestSerialization
         assertEquals(account2.orders.size, 3)
         assertEquals(account2.orders[0].id, 1)
         assertEquals(account2.orders[0].symbol, "EURUSD")
-        assertEquals(account2.orders[0].side, proto.OrderSide.buy)
-        assertEquals(account2.orders[0].type, proto.OrderType.market)
+        assertEquals(account2.orders[0].side, OrderSide.buy)
+        assertEquals(account2.orders[0].type, OrderType.market)
         assertEquals(account2.orders[0].price, 1.23456)
         assertEquals(account2.orders[0].volume, 1000.0)
         assertEquals(account2.orders[1].id, 2)
         assertEquals(account2.orders[1].symbol, "EURUSD")
-        assertEquals(account2.orders[1].side, proto.OrderSide.sell)
-        assertEquals(account2.orders[1].type, proto.OrderType.limit)
+        assertEquals(account2.orders[1].side, OrderSide.sell)
+        assertEquals(account2.orders[1].type, OrderType.limit)
         assertEquals(account2.orders[1].price, 1.0)
         assertEquals(account2.orders[1].volume, 100.0)
         assertEquals(account2.orders[2].id, 3)
         assertEquals(account2.orders[2].symbol, "EURUSD")
-        assertEquals(account2.orders[2].side, proto.OrderSide.buy)
-        assertEquals(account2.orders[2].type, proto.OrderType.stop)
+        assertEquals(account2.orders[2].side, OrderSide.buy)
+        assertEquals(account2.orders[2].type, OrderType.stop)
         assertEquals(account2.orders[2].price, 1.5)
         assertEquals(account2.orders[2].volume, 10.0)
     }
@@ -73,10 +78,10 @@ class TestSerialization
     fun serializationStructSimple()
     {
         // Create a new struct
-        val struct1 = test.StructSimple()
+        val struct1 = StructSimple()
 
         // Serialize the struct to the FBE stream
-        val writer = test.fbe.StructSimpleModel()
+        val writer = StructSimpleModel()
         assertEquals(writer.model.fbeType, 110)
         assertEquals(writer.model.fbeOffset, 4)
         val serialized = writer.serialize(struct1)
@@ -89,8 +94,8 @@ class TestSerialization
         assertEquals(writer.buffer.size, 392)
 
         // Deserialize the struct from the FBE stream
-        val struct2 = test.StructSimple()
-        val reader = test.fbe.StructSimpleModel()
+        val struct2 = StructSimple()
+        val reader = StructSimpleModel()
         assertEquals(reader.model.fbeType, 110)
         assertEquals(reader.model.fbeOffset, 4)
         reader.attach(writer.buffer)
@@ -185,10 +190,10 @@ class TestSerialization
     fun serializationStructOptional()
     {
         // Create a new struct
-        val struct1 = test.StructOptional()
+        val struct1 = StructOptional()
 
         // Serialize the struct to the FBE stream
-        val writer = test.fbe.StructOptionalModel()
+        val writer = StructOptionalModel()
         assertEquals(writer.model.fbeType, 111)
         assertEquals(writer.model.fbeOffset, 4)
         val serialized = writer.serialize(struct1)
@@ -201,8 +206,8 @@ class TestSerialization
         assertEquals(writer.buffer.size, 834)
 
         // Deserialize the struct from the FBE stream
-        val struct2 = test.StructOptional()
-        val reader = test.fbe.StructOptionalModel()
+        val struct2 = StructOptional()
+        val reader = StructOptionalModel()
         assertEquals(reader.model.fbeType, 111)
         assertEquals(reader.model.fbeOffset, 4)
         reader.attach(writer.buffer)
@@ -441,10 +446,10 @@ class TestSerialization
     fun serializationStructNested()
     {
         // Create a new struct
-        val struct1 = test.StructNested()
+        val struct1 = StructNested()
 
         // Serialize the struct to the FBE stream
-        val writer = test.fbe.StructNestedModel()
+        val writer = StructNestedModel()
         assertEquals(writer.model.fbeType, 112)
         assertEquals(writer.model.fbeOffset, 4)
         val serialized = writer.serialize(struct1)
@@ -457,8 +462,8 @@ class TestSerialization
         assertEquals(writer.buffer.size, 2099)
 
         // Deserialize the struct from the FBE stream
-        val struct2 = test.StructNested()
-        val reader = test.fbe.StructNestedModel()
+        val struct2 = StructNested()
+        val reader = StructNestedModel()
         assertEquals(reader.model.fbeType, 112)
         assertEquals(reader.model.fbeOffset, 4)
         reader.attach(writer.buffer)
@@ -592,13 +597,13 @@ class TestSerialization
         assertEquals(struct2.f164, null)
         assertEquals(struct2.f165, null)
 
-        assertEquals(struct2.f1000, test.EnumSimple.ENUM_VALUE_0)
+        assertEquals(struct2.f1000, EnumSimple.ENUM_VALUE_0)
         assertEquals(struct2.f1001, null)
-        assertEquals(struct2.f1002, test.EnumTyped.ENUM_VALUE_2)
+        assertEquals(struct2.f1002, EnumTyped.ENUM_VALUE_2)
         assertEquals(struct2.f1003, null)
-        assertEquals(struct2.f1004, test.FlagsSimple.FLAG_VALUE_0)
+        assertEquals(struct2.f1004, FlagsSimple.FLAG_VALUE_0)
         assertEquals(struct2.f1005, null)
-        assertEquals(struct2.f1006, test.FlagsTyped.fromSet(EnumSet.of(test.FlagsTyped.FLAG_VALUE_2.value, test.FlagsTyped.FLAG_VALUE_4.value, test.FlagsTyped.FLAG_VALUE_6.value)))
+        assertEquals(struct2.f1006, FlagsTyped.fromSet(EnumSet.of(FlagsTyped.FLAG_VALUE_2.value, FlagsTyped.FLAG_VALUE_4.value, FlagsTyped.FLAG_VALUE_6.value)))
         assertEquals(struct2.f1007, null)
         assertEquals(struct2.f1009, null)
         assertEquals(struct2.f1011, null)
@@ -717,12 +722,12 @@ class TestSerialization
     fun serializationStructBytes()
     {
         // Create a new struct
-        val struct1 = test.StructBytes()
+        val struct1 = StructBytes()
         struct1.f1 = "ABC".toByteArray()
         struct1.f2 = "test".toByteArray()
 
         // Serialize the struct to the FBE stream
-        val writer = test.fbe.StructBytesModel()
+        val writer = StructBytesModel()
         assertEquals(writer.model.fbeType, 120)
         assertEquals(writer.model.fbeOffset, 4)
         val serialized = writer.serialize(struct1)
@@ -735,8 +740,8 @@ class TestSerialization
         assertEquals(writer.buffer.size, 49)
 
         // Deserialize the struct from the FBE stream
-        val struct2 = test.StructBytes()
-        val reader = test.fbe.StructBytesModel()
+        val struct2 = StructBytes()
+        val reader = StructBytesModel()
         assertEquals(reader.model.fbeType, 120)
         assertEquals(reader.model.fbeOffset, 4)
         reader.attach(writer.buffer)
@@ -763,7 +768,7 @@ class TestSerialization
     fun serializationStructArray()
     {
         // Create a new struct
-        val struct1 = test.StructArray()
+        val struct1 = StructArray()
         struct1.f1[0] = 48
         struct1.f1[1] = 65
         struct1.f2[0] = 97
@@ -772,21 +777,21 @@ class TestSerialization
         struct1.f3[1] = "AAA".toByteArray()
         struct1.f4[0] = "aaa".toByteArray()
         struct1.f4[1] = null
-        struct1.f5[0] = test.EnumSimple.ENUM_VALUE_1
-        struct1.f5[1] = test.EnumSimple.ENUM_VALUE_2
-        struct1.f6[0] = test.EnumSimple.ENUM_VALUE_1
+        struct1.f5[0] = EnumSimple.ENUM_VALUE_1
+        struct1.f5[1] = EnumSimple.ENUM_VALUE_2
+        struct1.f6[0] = EnumSimple.ENUM_VALUE_1
         struct1.f6[1] = null
-        struct1.f7[0] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value))
-        struct1.f7[1] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value))
-        struct1.f8[0] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value))
+        struct1.f7[0] = FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value))
+        struct1.f7[1] = FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value))
+        struct1.f8[0] = FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value))
         struct1.f8[1] = null
-        struct1.f9[0] = test.StructSimple()
-        struct1.f9[1] = test.StructSimple()
-        struct1.f10[0] = test.StructSimple()
+        struct1.f9[0] = StructSimple()
+        struct1.f9[1] = StructSimple()
+        struct1.f10[0] = StructSimple()
         struct1.f10[1] = null
 
         // Serialize the struct to the FBE stream
-        val writer = test.fbe.StructArrayModel()
+        val writer = StructArrayModel()
         assertEquals(writer.model.fbeType, 125)
         assertEquals(writer.model.fbeOffset, 4)
         val serialized = writer.serialize(struct1)
@@ -799,8 +804,8 @@ class TestSerialization
         assertEquals(writer.buffer.size, 1290)
 
         // Deserialize the struct from the FBE stream
-        val struct2 = test.StructArray()
-        val reader = test.fbe.StructArrayModel()
+        val struct2 = StructArray()
+        val reader = StructArrayModel()
         assertEquals(reader.model.fbeType, 125)
         assertEquals(reader.model.fbeOffset, 4)
         reader.attach(writer.buffer)
@@ -833,16 +838,16 @@ class TestSerialization
         assertEquals(struct2.f4[0]!![2].toInt(), 97)
         assertEquals(struct2.f4[1], null)
         assertEquals(struct2.f5.size, 2)
-        assertEquals(struct2.f5[0], test.EnumSimple.ENUM_VALUE_1)
-        assertEquals(struct2.f5[1], test.EnumSimple.ENUM_VALUE_2)
+        assertEquals(struct2.f5[0], EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f5[1], EnumSimple.ENUM_VALUE_2)
         assertEquals(struct2.f6.size, 2)
-        assertEquals(struct2.f6[0], test.EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f6[0], EnumSimple.ENUM_VALUE_1)
         assertEquals(struct2.f6[1], null)
         assertEquals(struct2.f7.size, 2)
-        assertEquals(struct2.f7[0], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
-        assertEquals(struct2.f7[1], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
+        assertEquals(struct2.f7[0], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f7[1], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value)))
         assertEquals(struct2.f8.size, 2)
-        assertEquals(struct2.f8[0], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f8[0], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
         assertEquals(struct2.f8[1], null)
         assertEquals(struct2.f9.size, 2)
         assertEquals(struct2.f9[0].f2, true)
@@ -863,7 +868,7 @@ class TestSerialization
     fun serializationStructVector()
     {
         // Create a new struct
-        val struct1 = test.StructVector()
+        val struct1 = StructVector()
         struct1.f1.add(48.toByte())
         struct1.f1.add(65.toByte())
         struct1.f2.add(97.toByte())
@@ -872,21 +877,21 @@ class TestSerialization
         struct1.f3.add("AAA".toByteArray())
         struct1.f4.add("aaa".toByteArray())
         struct1.f4.add(null)
-        struct1.f5.add(test.EnumSimple.ENUM_VALUE_1)
-        struct1.f5.add(test.EnumSimple.ENUM_VALUE_2)
-        struct1.f6.add(test.EnumSimple.ENUM_VALUE_1)
+        struct1.f5.add(EnumSimple.ENUM_VALUE_1)
+        struct1.f5.add(EnumSimple.ENUM_VALUE_2)
+        struct1.f6.add(EnumSimple.ENUM_VALUE_1)
         struct1.f6.add(null)
-        struct1.f7.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
-        struct1.f7.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
-        struct1.f8.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
+        struct1.f7.add(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
+        struct1.f7.add(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value)))
+        struct1.f8.add(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
         struct1.f8.add(null)
-        struct1.f9.add(test.StructSimple())
-        struct1.f9.add(test.StructSimple())
-        struct1.f10.add(test.StructSimple())
+        struct1.f9.add(StructSimple())
+        struct1.f9.add(StructSimple())
+        struct1.f10.add(StructSimple())
         struct1.f10.add(null)
 
         // Serialize the struct to the FBE stream
-        val writer = test.fbe.StructVectorModel()
+        val writer = StructVectorModel()
         assertEquals(writer.model.fbeType, 130)
         assertEquals(writer.model.fbeOffset, 4)
         val serialized = writer.serialize(struct1)
@@ -899,8 +904,8 @@ class TestSerialization
         assertEquals(writer.buffer.size, 1370)
 
         // Deserialize the struct from the FBE stream
-        val struct2 = test.StructVector()
-        val reader = test.fbe.StructVectorModel()
+        val struct2 = StructVector()
+        val reader = StructVectorModel()
         assertEquals(reader.model.fbeType, 130)
         assertEquals(reader.model.fbeOffset, 4)
         reader.attach(writer.buffer)
@@ -933,16 +938,16 @@ class TestSerialization
         assertEquals(struct2.f4[0]!![2].toInt(), 97)
         assertEquals(struct2.f4[1], null)
         assertEquals(struct2.f5.size, 2)
-        assertEquals(struct2.f5[0], test.EnumSimple.ENUM_VALUE_1)
-        assertEquals(struct2.f5[1], test.EnumSimple.ENUM_VALUE_2)
+        assertEquals(struct2.f5[0], EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f5[1], EnumSimple.ENUM_VALUE_2)
         assertEquals(struct2.f6.size, 2)
-        assertEquals(struct2.f6[0], test.EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f6[0], EnumSimple.ENUM_VALUE_1)
         assertEquals(struct2.f6[1], null)
         assertEquals(struct2.f7.size, 2)
-        assertEquals(struct2.f7[0], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
-        assertEquals(struct2.f7[1], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
+        assertEquals(struct2.f7[0], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f7[1], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value)))
         assertEquals(struct2.f8.size, 2)
-        assertEquals(struct2.f8[0], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f8[0], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
         assertEquals(struct2.f8[1], null)
         assertEquals(struct2.f9.size, 2)
         assertEquals(struct2.f9[0].f2, true)
@@ -963,7 +968,7 @@ class TestSerialization
     fun serializationStructList()
     {
         // Create a new struct
-        val struct1 = test.StructList()
+        val struct1 = StructList()
         struct1.f1.addLast(48.toByte())
         struct1.f1.addLast(65.toByte())
         struct1.f2.addLast(97.toByte())
@@ -972,21 +977,21 @@ class TestSerialization
         struct1.f3.addLast("AAA".toByteArray())
         struct1.f4.addLast("aaa".toByteArray())
         struct1.f4.addLast(null)
-        struct1.f5.addLast(test.EnumSimple.ENUM_VALUE_1)
-        struct1.f5.addLast(test.EnumSimple.ENUM_VALUE_2)
-        struct1.f6.addLast(test.EnumSimple.ENUM_VALUE_1)
+        struct1.f5.addLast(EnumSimple.ENUM_VALUE_1)
+        struct1.f5.addLast(EnumSimple.ENUM_VALUE_2)
+        struct1.f6.addLast(EnumSimple.ENUM_VALUE_1)
         struct1.f6.addLast(null)
-        struct1.f7.addLast(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
-        struct1.f7.addLast(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
-        struct1.f8.addLast(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
+        struct1.f7.addLast(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
+        struct1.f7.addLast(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value)))
+        struct1.f8.addLast(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
         struct1.f8.addLast(null)
-        struct1.f9.addLast(test.StructSimple())
-        struct1.f9.addLast(test.StructSimple())
-        struct1.f10.addLast(test.StructSimple())
+        struct1.f9.addLast(StructSimple())
+        struct1.f9.addLast(StructSimple())
+        struct1.f10.addLast(StructSimple())
         struct1.f10.addLast(null)
 
         // Serialize the struct to the FBE stream
-        val writer = test.fbe.StructListModel()
+        val writer = StructListModel()
         assertEquals(writer.model.fbeType, 131)
         assertEquals(writer.model.fbeOffset, 4)
         val serialized = writer.serialize(struct1)
@@ -999,8 +1004,8 @@ class TestSerialization
         assertEquals(writer.buffer.size, 1370)
 
         // Deserialize the struct from the FBE stream
-        val struct2 = test.StructList()
-        val reader = test.fbe.StructListModel()
+        val struct2 = StructList()
+        val reader = StructListModel()
         assertEquals(reader.model.fbeType, 131)
         assertEquals(reader.model.fbeOffset, 4)
         reader.attach(writer.buffer)
@@ -1033,16 +1038,16 @@ class TestSerialization
         assertEquals(struct2.f4.first!![2].toInt(), 97)
         assertEquals(struct2.f4.last, null)
         assertEquals(struct2.f5.size, 2)
-        assertEquals(struct2.f5.first, test.EnumSimple.ENUM_VALUE_1)
-        assertEquals(struct2.f5.last, test.EnumSimple.ENUM_VALUE_2)
+        assertEquals(struct2.f5.first, EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f5.last, EnumSimple.ENUM_VALUE_2)
         assertEquals(struct2.f6.size, 2)
-        assertEquals(struct2.f6.first, test.EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f6.first, EnumSimple.ENUM_VALUE_1)
         assertEquals(struct2.f6.last, null)
         assertEquals(struct2.f7.size, 2)
-        assertEquals(struct2.f7.first, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
-        assertEquals(struct2.f7.last, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
+        assertEquals(struct2.f7.first, FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f7.last, FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value)))
         assertEquals(struct2.f8.size, 2)
-        assertEquals(struct2.f8.first, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f8.first, FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
         assertEquals(struct2.f8.last, null)
         assertEquals(struct2.f9.size, 2)
         assertEquals(struct2.f9.first.f2, true)
@@ -1063,23 +1068,23 @@ class TestSerialization
     fun serializationStructSet()
     {
         // Create a new struct
-        val struct1 = test.StructSet()
+        val struct1 = StructSet()
         struct1.f1.add(48.toByte())
         struct1.f1.add(65.toByte())
         struct1.f1.add(97.toByte())
-        struct1.f2.add(test.EnumSimple.ENUM_VALUE_1)
-        struct1.f2.add(test.EnumSimple.ENUM_VALUE_2)
-        struct1.f3.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
-        struct1.f3.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
-        val s1 = test.StructSimple()
+        struct1.f2.add(EnumSimple.ENUM_VALUE_1)
+        struct1.f2.add(EnumSimple.ENUM_VALUE_2)
+        struct1.f3.add(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
+        struct1.f3.add(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value)))
+        val s1 = StructSimple()
         s1.id = 48
         struct1.f4.add(s1)
-        val s2 = test.StructSimple()
+        val s2 = StructSimple()
         s2.id = 65
         struct1.f4.add(s2)
 
         // Serialize the struct to the FBE stream
-        val writer = test.fbe.StructSetModel()
+        val writer = StructSetModel()
         assertEquals(writer.model.fbeType, 132)
         assertEquals(writer.model.fbeOffset, 4)
         val serialized = writer.serialize(struct1)
@@ -1092,8 +1097,8 @@ class TestSerialization
         assertEquals(writer.buffer.size, 843)
 
         // Deserialize the struct from the FBE stream
-        val struct2 = test.StructSet()
-        val reader = test.fbe.StructSetModel()
+        val struct2 = StructSet()
+        val reader = StructSetModel()
         assertEquals(reader.model.fbeType, 132)
         assertEquals(reader.model.fbeOffset, 4)
         reader.attach(writer.buffer)
@@ -1108,11 +1113,11 @@ class TestSerialization
         assertTrue(struct2.f1.contains(65.toByte()))
         assertTrue(struct2.f1.contains(97.toByte()))
         assertEquals(struct2.f2.size, 2)
-        assertTrue(struct2.f2.contains(test.EnumSimple.ENUM_VALUE_1))
-        assertTrue(struct2.f2.contains(test.EnumSimple.ENUM_VALUE_2))
+        assertTrue(struct2.f2.contains(EnumSimple.ENUM_VALUE_1))
+        assertTrue(struct2.f2.contains(EnumSimple.ENUM_VALUE_2))
         assertEquals(struct2.f3.size, 2)
-        assertTrue(struct2.f3.contains(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value))))
-        assertTrue(struct2.f3.contains(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value))))
+        assertTrue(struct2.f3.contains(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value))))
+        assertTrue(struct2.f3.contains(FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value))))
         assertEquals(struct2.f4.size, 2)
         assertTrue(struct2.f4.contains(s1))
         assertTrue(struct2.f4.contains(s2))
@@ -1122,7 +1127,7 @@ class TestSerialization
     fun serializationStructMap()
     {
         // Create a new struct
-        val struct1 = test.StructMap()
+        val struct1 = StructMap()
         struct1.f1[10] = 48.toByte()
         struct1.f1[20] = 65.toByte()
         struct1.f2[10] = 97.toByte()
@@ -1131,25 +1136,25 @@ class TestSerialization
         struct1.f3[20] = "AAA".toByteArray()
         struct1.f4[10] = "aaa".toByteArray()
         struct1.f4[20] = null
-        struct1.f5[10] = test.EnumSimple.ENUM_VALUE_1
-        struct1.f5[20] = test.EnumSimple.ENUM_VALUE_2
-        struct1.f6[10] = test.EnumSimple.ENUM_VALUE_1
+        struct1.f5[10] = EnumSimple.ENUM_VALUE_1
+        struct1.f5[20] = EnumSimple.ENUM_VALUE_2
+        struct1.f6[10] = EnumSimple.ENUM_VALUE_1
         struct1.f6[20] = null
-        struct1.f7[10] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value))
-        struct1.f7[20] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value))
-        struct1.f8[10] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value))
+        struct1.f7[10] = FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value))
+        struct1.f7[20] = FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value))
+        struct1.f8[10] = FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value))
         struct1.f8[20] = null
-        val s1 = test.StructSimple()
+        val s1 = StructSimple()
         s1.id = 48
         struct1.f9[10] = s1
-        val s2 = test.StructSimple()
+        val s2 = StructSimple()
         s2.id = 65
         struct1.f9[20] = s2
         struct1.f10[10] = s1
         struct1.f10[20] = null
 
         // Serialize the struct to the FBE stream
-        val writer = test.fbe.StructMapModel()
+        val writer = StructMapModel()
         assertEquals(writer.model.fbeType, 140)
         assertEquals(writer.model.fbeOffset, 4)
         val serialized = writer.serialize(struct1)
@@ -1162,8 +1167,8 @@ class TestSerialization
         assertEquals(writer.buffer.size, 1450)
 
         // Deserialize the struct from the FBE stream
-        val struct2 = test.StructMap()
-        val reader = test.fbe.StructMapModel()
+        val struct2 = StructMap()
+        val reader = StructMapModel()
         assertEquals(reader.model.fbeType, 140)
         assertEquals(reader.model.fbeOffset, 4)
         reader.attach(writer.buffer)
@@ -1186,16 +1191,16 @@ class TestSerialization
         assertEquals(struct2.f4[10]!!.size, 3)
         assertEquals(struct2.f4[20], null)
         assertEquals(struct2.f5.size, 2)
-        assertEquals(struct2.f5[10], test.EnumSimple.ENUM_VALUE_1)
-        assertEquals(struct2.f5[20], test.EnumSimple.ENUM_VALUE_2)
+        assertEquals(struct2.f5[10], EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f5[20], EnumSimple.ENUM_VALUE_2)
         assertEquals(struct2.f6.size, 2)
-        assertEquals(struct2.f6[10], test.EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f6[10], EnumSimple.ENUM_VALUE_1)
         assertEquals(struct2.f6[20], null)
         assertEquals(struct2.f7.size, 2)
-        assertEquals(struct2.f7[10], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
-        assertEquals(struct2.f7[20], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
+        assertEquals(struct2.f7[10], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f7[20], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value)))
         assertEquals(struct2.f8.size, 2)
-        assertEquals(struct2.f8[10], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f8[10], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
         assertEquals(struct2.f8[20], null)
         assertEquals(struct2.f9.size, 2)
         assertEquals(struct2.f9[10]!!.id, 48)
@@ -1209,7 +1214,7 @@ class TestSerialization
     fun serializationStructHash()
     {
         // Create a new struct
-        val struct1 = test.StructHash()
+        val struct1 = StructHash()
         struct1.f1["10"] = 48.toByte()
         struct1.f1["20"] = 65.toByte()
         struct1.f2["10"] = 97.toByte()
@@ -1218,25 +1223,25 @@ class TestSerialization
         struct1.f3["20"] = "AAA".toByteArray()
         struct1.f4["10"] = "aaa".toByteArray()
         struct1.f4["20"] = null
-        struct1.f5["10"] = test.EnumSimple.ENUM_VALUE_1
-        struct1.f5["20"] = test.EnumSimple.ENUM_VALUE_2
-        struct1.f6["10"] = test.EnumSimple.ENUM_VALUE_1
+        struct1.f5["10"] = EnumSimple.ENUM_VALUE_1
+        struct1.f5["20"] = EnumSimple.ENUM_VALUE_2
+        struct1.f6["10"] = EnumSimple.ENUM_VALUE_1
         struct1.f6["20"] = null
-        struct1.f7["10"] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value))
-        struct1.f7["20"] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value))
-        struct1.f8["10"] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value))
+        struct1.f7["10"] = FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value))
+        struct1.f7["20"] = FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value))
+        struct1.f8["10"] = FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value))
         struct1.f8["20"] = null
-        val s1 = test.StructSimple()
+        val s1 = StructSimple()
         s1.id = 48
         struct1.f9["10"] = s1
-        val s2 = test.StructSimple()
+        val s2 = StructSimple()
         s2.id = 65
         struct1.f9["20"] = s2
         struct1.f10["10"] = s1
         struct1.f10["20"] = null
 
         // Serialize the struct to the FBE stream
-        val writer = test.fbe.StructHashModel()
+        val writer = StructHashModel()
         assertEquals(writer.model.fbeType, 141)
         assertEquals(writer.model.fbeOffset, 4)
         val serialized = writer.serialize(struct1)
@@ -1249,8 +1254,8 @@ class TestSerialization
         assertEquals(writer.buffer.size, 1570)
 
         // Deserialize the struct from the FBE stream
-        val struct2 = test.StructHash()
-        val reader = test.fbe.StructHashModel()
+        val struct2 = StructHash()
+        val reader = StructHashModel()
         assertEquals(reader.model.fbeType, 141)
         assertEquals(reader.model.fbeOffset, 4)
         reader.attach(writer.buffer)
@@ -1273,16 +1278,16 @@ class TestSerialization
         assertEquals(struct2.f4["10"]!!.size, 3)
         assertEquals(struct2.f4["20"], null)
         assertEquals(struct2.f5.size, 2)
-        assertEquals(struct2.f5["10"], test.EnumSimple.ENUM_VALUE_1)
-        assertEquals(struct2.f5["20"], test.EnumSimple.ENUM_VALUE_2)
+        assertEquals(struct2.f5["10"], EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f5["20"], EnumSimple.ENUM_VALUE_2)
         assertEquals(struct2.f6.size, 2)
-        assertEquals(struct2.f6["10"], test.EnumSimple.ENUM_VALUE_1)
+        assertEquals(struct2.f6["10"], EnumSimple.ENUM_VALUE_1)
         assertEquals(struct2.f6["20"], null)
         assertEquals(struct2.f7.size, 2)
-        assertEquals(struct2.f7["10"], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
-        assertEquals(struct2.f7["20"], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
+        assertEquals(struct2.f7["10"], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f7["20"], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value, FlagsSimple.FLAG_VALUE_3.value)))
         assertEquals(struct2.f8.size, 2)
-        assertEquals(struct2.f8["10"], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
+        assertEquals(struct2.f8["10"], FlagsSimple.fromSet(EnumSet.of(FlagsSimple.FLAG_VALUE_1.value, FlagsSimple.FLAG_VALUE_2.value)))
         assertEquals(struct2.f8["20"], null)
         assertEquals(struct2.f9.size, 2)
         assertEquals(struct2.f9["10"]!!.id, 48)
@@ -1296,18 +1301,18 @@ class TestSerialization
     fun serializationStructHashExtended()
     {
         // Create a new struct
-        val struct1 = test.StructHashEx()
-        val s1 = test.StructSimple()
+        val struct1 = StructHashEx()
+        val s1 = StructSimple()
         s1.id = 48
-        struct1.f1[s1] = test.StructNested()
-        val s2 = test.StructSimple()
+        struct1.f1[s1] = StructNested()
+        val s2 = StructSimple()
         s2.id = 65
-        struct1.f1[s2] = test.StructNested()
-        struct1.f2[s1] = test.StructNested()
+        struct1.f1[s2] = StructNested()
+        struct1.f2[s1] = StructNested()
         struct1.f2[s2] = null
 
         // Serialize the struct to the FBE stream
-        val writer = test.fbe.StructHashExModel()
+        val writer = StructHashExModel()
         assertEquals(writer.model.fbeType, 142)
         assertEquals(writer.model.fbeOffset, 4)
         val serialized = writer.serialize(struct1)
@@ -1320,8 +1325,8 @@ class TestSerialization
         assertEquals(writer.buffer.size, 7879)
 
         // Deserialize the struct from the FBE stream
-        val struct2 = test.StructHashEx()
-        val reader = test.fbe.StructHashExModel()
+        val struct2 = StructHashEx()
+        val reader = StructHashExModel()
         assertEquals(reader.model.fbeType, 142)
         assertEquals(reader.model.fbeOffset, 4)
         reader.attach(writer.buffer)
@@ -1332,10 +1337,10 @@ class TestSerialization
         assertEquals(reader.model.fbeOffset, 4 + reader.buffer.size)
 
         assertEquals(struct2.f1.size, 2)
-        assertEquals(struct2.f1[s1]!!.f1002, test.EnumTyped.ENUM_VALUE_2)
-        assertEquals(struct2.f1[s2]!!.f1002, test.EnumTyped.ENUM_VALUE_2)
+        assertEquals(struct2.f1[s1]!!.f1002, EnumTyped.ENUM_VALUE_2)
+        assertEquals(struct2.f1[s2]!!.f1002, EnumTyped.ENUM_VALUE_2)
         assertEquals(struct2.f2.size, 2)
-        assertEquals(struct2.f2[s1]!!.f1002, test.EnumTyped.ENUM_VALUE_2)
+        assertEquals(struct2.f2[s1]!!.f1002, EnumTyped.ENUM_VALUE_2)
         assertEquals(struct2.f2[s2], null)
     }
 }

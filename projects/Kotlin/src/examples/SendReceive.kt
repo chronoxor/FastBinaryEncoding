@@ -2,7 +2,10 @@ package examples
 
 import java.util.*
 
-internal class MySender : proto.fbe.Sender()
+import com.chronoxor.proto.*
+import com.chronoxor.proto.fbe.*
+
+internal class MySender : Sender()
 {
     override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long
     {
@@ -16,11 +19,11 @@ internal class MySender : proto.fbe.Sender()
     }
 }
 
-internal class MyReceiver : proto.fbe.Receiver()
+internal class MyReceiver : Receiver()
 {
-    override fun onReceive(value: proto.Order) {}
-    override fun onReceive(value: proto.Balance) {}
-    override fun onReceive(value: proto.Account) {}
+    override fun onReceive(value: Order) {}
+    override fun onReceive(value: Balance) {}
+    override fun onReceive(value: Account) {}
 
     override fun onReceiveLog(message: String)
     {
@@ -39,18 +42,18 @@ object SendReceive
         sender.logging = true
 
         // Create and send a new order
-        val order = proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0)
+        val order = Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0)
         sender.send(order)
 
         // Create and send a new balance wallet
-        val balance = proto.Balance("USD", 1000.0)
+        val balance = Balance("USD", 1000.0)
         sender.send(balance)
 
         // Create and send a new account with some orders
-        val account = proto.Account(1, "Test", proto.State.good, proto.Balance("USD", 1000.0), proto.Balance("EUR", 100.0), ArrayList())
-        account.orders.add(proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))
-        account.orders.add(proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0))
-        account.orders.add(proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0))
+        val account = Account(1, "Test", State.good, Balance("USD", 1000.0), Balance("EUR", 100.0), ArrayList())
+        account.orders.add(Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0))
+        account.orders.add(Order(2, "EURUSD", OrderSide.sell, OrderType.limit, 1.0, 100.0))
+        account.orders.add(Order(3, "EURUSD", OrderSide.buy, OrderType.stop, 1.5, 10.0))
         sender.send(account)
 
         val receiver = MyReceiver()

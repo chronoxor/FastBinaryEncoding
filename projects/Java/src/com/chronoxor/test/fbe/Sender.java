@@ -76,8 +76,8 @@ public class Sender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = StructSimpleModel.serialize(value);
-        assert (serialized > 0) : "test.StructSimple serialization failed!";
-        assert StructSimpleModel.verify() : "test.StructSimple validation failed!";
+        assert (serialized > 0) : "com.chronoxor.test.StructSimple serialization failed!";
+        assert StructSimpleModel.verify() : "com.chronoxor.test.StructSimple validation failed!";
 
         // Log the value
         if (getLogging())
@@ -93,8 +93,8 @@ public class Sender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = StructOptionalModel.serialize(value);
-        assert (serialized > 0) : "test.StructOptional serialization failed!";
-        assert StructOptionalModel.verify() : "test.StructOptional validation failed!";
+        assert (serialized > 0) : "com.chronoxor.test.StructOptional serialization failed!";
+        assert StructOptionalModel.verify() : "com.chronoxor.test.StructOptional validation failed!";
 
         // Log the value
         if (getLogging())
@@ -110,8 +110,8 @@ public class Sender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = StructNestedModel.serialize(value);
-        assert (serialized > 0) : "test.StructNested serialization failed!";
-        assert StructNestedModel.verify() : "test.StructNested validation failed!";
+        assert (serialized > 0) : "com.chronoxor.test.StructNested serialization failed!";
+        assert StructNestedModel.verify() : "com.chronoxor.test.StructNested validation failed!";
 
         // Log the value
         if (getLogging())
@@ -127,8 +127,8 @@ public class Sender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = StructBytesModel.serialize(value);
-        assert (serialized > 0) : "test.StructBytes serialization failed!";
-        assert StructBytesModel.verify() : "test.StructBytes validation failed!";
+        assert (serialized > 0) : "com.chronoxor.test.StructBytes serialization failed!";
+        assert StructBytesModel.verify() : "com.chronoxor.test.StructBytes validation failed!";
 
         // Log the value
         if (getLogging())
@@ -144,8 +144,8 @@ public class Sender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = StructArrayModel.serialize(value);
-        assert (serialized > 0) : "test.StructArray serialization failed!";
-        assert StructArrayModel.verify() : "test.StructArray validation failed!";
+        assert (serialized > 0) : "com.chronoxor.test.StructArray serialization failed!";
+        assert StructArrayModel.verify() : "com.chronoxor.test.StructArray validation failed!";
 
         // Log the value
         if (getLogging())
@@ -161,8 +161,8 @@ public class Sender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = StructVectorModel.serialize(value);
-        assert (serialized > 0) : "test.StructVector serialization failed!";
-        assert StructVectorModel.verify() : "test.StructVector validation failed!";
+        assert (serialized > 0) : "com.chronoxor.test.StructVector serialization failed!";
+        assert StructVectorModel.verify() : "com.chronoxor.test.StructVector validation failed!";
 
         // Log the value
         if (getLogging())
@@ -178,8 +178,8 @@ public class Sender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = StructListModel.serialize(value);
-        assert (serialized > 0) : "test.StructList serialization failed!";
-        assert StructListModel.verify() : "test.StructList validation failed!";
+        assert (serialized > 0) : "com.chronoxor.test.StructList serialization failed!";
+        assert StructListModel.verify() : "com.chronoxor.test.StructList validation failed!";
 
         // Log the value
         if (getLogging())
@@ -195,8 +195,8 @@ public class Sender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = StructSetModel.serialize(value);
-        assert (serialized > 0) : "test.StructSet serialization failed!";
-        assert StructSetModel.verify() : "test.StructSet validation failed!";
+        assert (serialized > 0) : "com.chronoxor.test.StructSet serialization failed!";
+        assert StructSetModel.verify() : "com.chronoxor.test.StructSet validation failed!";
 
         // Log the value
         if (getLogging())
@@ -212,8 +212,8 @@ public class Sender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = StructMapModel.serialize(value);
-        assert (serialized > 0) : "test.StructMap serialization failed!";
-        assert StructMapModel.verify() : "test.StructMap validation failed!";
+        assert (serialized > 0) : "com.chronoxor.test.StructMap serialization failed!";
+        assert StructMapModel.verify() : "com.chronoxor.test.StructMap validation failed!";
 
         // Log the value
         if (getLogging())
@@ -229,8 +229,8 @@ public class Sender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = StructHashModel.serialize(value);
-        assert (serialized > 0) : "test.StructHash serialization failed!";
-        assert StructHashModel.verify() : "test.StructHash validation failed!";
+        assert (serialized > 0) : "com.chronoxor.test.StructHash serialization failed!";
+        assert StructHashModel.verify() : "com.chronoxor.test.StructHash validation failed!";
 
         // Log the value
         if (getLogging())
@@ -246,8 +246,8 @@ public class Sender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = StructHashExModel.serialize(value);
-        assert (serialized > 0) : "test.StructHashEx serialization failed!";
-        assert StructHashExModel.verify() : "test.StructHashEx validation failed!";
+        assert (serialized > 0) : "com.chronoxor.test.StructHashEx serialization failed!";
+        assert StructHashExModel.verify() : "com.chronoxor.test.StructHashEx validation failed!";
 
         // Log the value
         if (getLogging())
@@ -263,8 +263,8 @@ public class Sender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = StructEmptyModel.serialize(value);
-        assert (serialized > 0) : "test.StructEmpty serialization failed!";
-        assert StructEmptyModel.verify() : "test.StructEmpty validation failed!";
+        assert (serialized > 0) : "com.chronoxor.test.StructEmpty serialization failed!";
+        assert StructEmptyModel.verify() : "com.chronoxor.test.StructEmpty validation failed!";
 
         // Log the value
         if (getLogging())

@@ -38,8 +38,8 @@ public class Sender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = EnumsModel.serialize(value);
-        assert (serialized > 0) : "enums.Enums serialization failed!";
-        assert EnumsModel.verify() : "enums.Enums validation failed!";
+        assert (serialized > 0) : "com.chronoxor.enums.Enums serialization failed!";
+        assert EnumsModel.verify() : "com.chronoxor.enums.Enums validation failed!";
 
         // Log the value
         if (getLogging())

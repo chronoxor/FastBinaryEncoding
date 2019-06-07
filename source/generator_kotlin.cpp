@@ -12,61 +12,63 @@ namespace FBE {
 
 void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
 {
-    GenerateFBEPackage("fbe");
-    GenerateFBEUUIDGenerator("fbe");
-    GenerateFBEBuffer("fbe");
-    GenerateFBEModel("fbe");
-    GenerateFBEFieldModel("fbe");
-    GenerateFBEFieldModel("fbe", "Boolean", "Boolean", "", "1", "false");
-    GenerateFBEFieldModel("fbe", "Byte", "Byte", "", "1", "0.toByte()");
-    GenerateFBEFieldModel("fbe", "Char", "Char", ".toByte()", "1", "'\\u0000'");
-    GenerateFBEFieldModel("fbe", "WChar", "Char", ".toInt()", "4", "'\\u0000'");
-    GenerateFBEFieldModel("fbe", "Int8", "Byte", "", "1", "0.toByte()");
-    GenerateFBEFieldModel("fbe", "UInt8", "UByte", "", "1", "0.toUByte()");
-    GenerateFBEFieldModel("fbe", "Int16", "Short", "", "2", "0.toShort()");
-    GenerateFBEFieldModel("fbe", "UInt16", "UShort", "", "2", "0.toUShort()");
-    GenerateFBEFieldModel("fbe", "Int32", "Int", "", "4", "0");
-    GenerateFBEFieldModel("fbe", "UInt32", "UInt", "", "4", "0u");
-    GenerateFBEFieldModel("fbe", "Int64", "Long", "", "8", "0L");
-    GenerateFBEFieldModel("fbe", "UInt64", "ULong", "", "8", "0uL");
-    GenerateFBEFieldModel("fbe", "Float", "Float", "", "4", "0.0f");
-    GenerateFBEFieldModel("fbe", "Double", "Double", "", "8", "0.0");
-    GenerateFBEFieldModel("fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
-    GenerateFBEFieldModelDecimal("fbe");
-    GenerateFBEFieldModelTimestamp("fbe");
-    GenerateFBEFieldModelBytes("fbe");
-    GenerateFBEFieldModelString("fbe");
+    std::string domain = (package->domain && !package->domain->empty()) ? (*package->domain + ".") : "";
+
+    GenerateFBEPackage(domain, "fbe");
+    GenerateFBEUUIDGenerator(domain, "fbe");
+    GenerateFBEBuffer(domain, "fbe");
+    GenerateFBEModel(domain, "fbe");
+    GenerateFBEFieldModel(domain, "fbe");
+    GenerateFBEFieldModel(domain, "fbe", "Boolean", "Boolean", "", "1", "false");
+    GenerateFBEFieldModel(domain, "fbe", "Byte", "Byte", "", "1", "0.toByte()");
+    GenerateFBEFieldModel(domain, "fbe", "Char", "Char", ".toByte()", "1", "'\\u0000'");
+    GenerateFBEFieldModel(domain, "fbe", "WChar", "Char", ".toInt()", "4", "'\\u0000'");
+    GenerateFBEFieldModel(domain, "fbe", "Int8", "Byte", "", "1", "0.toByte()");
+    GenerateFBEFieldModel(domain, "fbe", "UInt8", "UByte", "", "1", "0.toUByte()");
+    GenerateFBEFieldModel(domain, "fbe", "Int16", "Short", "", "2", "0.toShort()");
+    GenerateFBEFieldModel(domain, "fbe", "UInt16", "UShort", "", "2", "0.toUShort()");
+    GenerateFBEFieldModel(domain, "fbe", "Int32", "Int", "", "4", "0");
+    GenerateFBEFieldModel(domain, "fbe", "UInt32", "UInt", "", "4", "0u");
+    GenerateFBEFieldModel(domain, "fbe", "Int64", "Long", "", "8", "0L");
+    GenerateFBEFieldModel(domain, "fbe", "UInt64", "ULong", "", "8", "0uL");
+    GenerateFBEFieldModel(domain, "fbe", "Float", "Float", "", "4", "0.0f");
+    GenerateFBEFieldModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
+    GenerateFBEFieldModel(domain, "fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
+    GenerateFBEFieldModelDecimal(domain, "fbe");
+    GenerateFBEFieldModelTimestamp(domain, "fbe");
+    GenerateFBEFieldModelBytes(domain, "fbe");
+    GenerateFBEFieldModelString(domain, "fbe");
     if (Final())
     {
-        GenerateFBESize("fbe");
-        GenerateFBEFinalModel("fbe");
-        GenerateFBEFinalModel("fbe", "Boolean", "Boolean", "", "1", "false");
-        GenerateFBEFinalModel("fbe", "Byte", "Byte", "", "1", "0.toByte()");
-        GenerateFBEFinalModel("fbe", "Char", "Char", ".toByte()", "1", "'\\u0000'");
-        GenerateFBEFinalModel("fbe", "WChar", "Char", ".toInt()", "4", "'\\u0000'");
-        GenerateFBEFinalModel("fbe", "Int8", "Byte", "", "1", "0.toByte()");
-        GenerateFBEFinalModel("fbe", "UInt8", "UByte", "", "1", "0.toUByte()");
-        GenerateFBEFinalModel("fbe", "Int16", "Short", "", "2", "0.toShort()");
-        GenerateFBEFinalModel("fbe", "UInt16", "UShort", "", "2", "0.toUShort()");
-        GenerateFBEFinalModel("fbe", "Int32", "Int", "", "4", "0");
-        GenerateFBEFinalModel("fbe", "UInt32", "UInt", "", "4", "0u");
-        GenerateFBEFinalModel("fbe", "Int64", "Long", "", "8", "0L");
-        GenerateFBEFinalModel("fbe", "UInt64", "ULong", "", "8", "0uL");
-        GenerateFBEFinalModel("fbe", "Float", "Float", "", "4", "0.0f");
-        GenerateFBEFinalModel("fbe", "Double", "Double", "", "8", "0.0");
-        GenerateFBEFinalModel("fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
-        GenerateFBEFinalModelDecimal("fbe");
-        GenerateFBEFinalModelTimestamp("fbe");
-        GenerateFBEFinalModelBytes("fbe");
-        GenerateFBEFinalModelString("fbe");
+        GenerateFBESize(domain, "fbe");
+        GenerateFBEFinalModel(domain, "fbe");
+        GenerateFBEFinalModel(domain, "fbe", "Boolean", "Boolean", "", "1", "false");
+        GenerateFBEFinalModel(domain, "fbe", "Byte", "Byte", "", "1", "0.toByte()");
+        GenerateFBEFinalModel(domain, "fbe", "Char", "Char", ".toByte()", "1", "'\\u0000'");
+        GenerateFBEFinalModel(domain, "fbe", "WChar", "Char", ".toInt()", "4", "'\\u0000'");
+        GenerateFBEFinalModel(domain, "fbe", "Int8", "Byte", "", "1", "0.toByte()");
+        GenerateFBEFinalModel(domain, "fbe", "UInt8", "UByte", "", "1", "0.toUByte()");
+        GenerateFBEFinalModel(domain, "fbe", "Int16", "Short", "", "2", "0.toShort()");
+        GenerateFBEFinalModel(domain, "fbe", "UInt16", "UShort", "", "2", "0.toUShort()");
+        GenerateFBEFinalModel(domain, "fbe", "Int32", "Int", "", "4", "0");
+        GenerateFBEFinalModel(domain, "fbe", "UInt32", "UInt", "", "4", "0u");
+        GenerateFBEFinalModel(domain, "fbe", "Int64", "Long", "", "8", "0L");
+        GenerateFBEFinalModel(domain, "fbe", "UInt64", "ULong", "", "8", "0uL");
+        GenerateFBEFinalModel(domain, "fbe", "Float", "Float", "", "4", "0.0f");
+        GenerateFBEFinalModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
+        GenerateFBEFinalModel(domain, "fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
+        GenerateFBEFinalModelDecimal(domain, "fbe");
+        GenerateFBEFinalModelTimestamp(domain, "fbe");
+        GenerateFBEFinalModelBytes(domain, "fbe");
+        GenerateFBEFinalModelString(domain, "fbe");
     }
     if (Sender())
     {
-        GenerateFBESender("fbe");
-        GenerateFBEReceiver("fbe");
+        GenerateFBESender(domain, "fbe");
+        GenerateFBEReceiver(domain, "fbe");
     }
     if (JSON())
-        GenerateFBEJson("fbe");
+        GenerateFBEJson(domain, "fbe");
 
     GeneratePackage(package);
 }
@@ -93,11 +95,11 @@ void GeneratorKotlin::GenerateFooter()
 {
 }
 
-void GeneratorKotlin::GenerateImports(const std::string& package)
+void GeneratorKotlin::GenerateImports(const std::string& domain, const std::string& package)
 {
     // Generate package name
     WriteLine();
-    WriteLineIndent("package " + package);
+    WriteLineIndent("package " + domain + package);
 
     // Generate common import
     WriteLine();
@@ -112,30 +114,32 @@ void GeneratorKotlin::GenerateImports(const std::string& package)
 
 void GeneratorKotlin::GenerateImports(const std::shared_ptr<Package>& p)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+
     // Generate common import
-    GenerateImports(*p->name);
+    GenerateImports(domain, *p->name);
 
     // Generate FBE import
     WriteLine();
-    WriteLineIndent("import fbe.*");
+    WriteLineIndent("import " + domain + "fbe.*");
 
     // Generate packages import
     if (p->import)
         for (const auto& import : p->import->imports)
-            WriteLineIndent("import " + *import + ".*");
+            WriteLineIndent("import " + domain + *import + ".*");
 }
 
-void GeneratorKotlin::GenerateFBEPackage(const std::string& package)
+void GeneratorKotlin::GenerateFBEPackage(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Create FBE package path
     CppCommon::Directory::CreateTree(path);
 }
 
-void GeneratorKotlin::GenerateFBEUUIDGenerator(const std::string& package)
+void GeneratorKotlin::GenerateFBEUUIDGenerator(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "UUIDGenerator.kt";
@@ -143,7 +147,7 @@ void GeneratorKotlin::GenerateFBEUUIDGenerator(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding UUID generator
@@ -230,9 +234,9 @@ object UUIDGenerator
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEBuffer(const std::string& package)
+void GeneratorKotlin::GenerateFBEBuffer(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "Buffer.kt";
@@ -240,7 +244,7 @@ void GeneratorKotlin::GenerateFBEBuffer(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding buffer based on dynamic byte array
@@ -626,9 +630,9 @@ class Buffer
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEModel(const std::string& package)
+void GeneratorKotlin::GenerateFBEModel(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "Model.kt";
@@ -636,7 +640,7 @@ void GeneratorKotlin::GenerateFBEModel(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding base model
@@ -686,9 +690,9 @@ open class Model
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFieldModel(const std::string& package)
+void GeneratorKotlin::GenerateFBEFieldModel(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FieldModel.kt";
@@ -696,7 +700,7 @@ void GeneratorKotlin::GenerateFBEFieldModel(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding base field model
@@ -768,9 +772,9 @@ abstract class FieldModel protected constructor(protected var _buffer: Buffer, p
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFieldModel(const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
+void GeneratorKotlin::GenerateFBEFieldModel(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / ("FieldModel" + name + ".kt");
@@ -778,7 +782,7 @@ void GeneratorKotlin::GenerateFBEFieldModel(const std::string& package, const st
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding _TYPE_ field model
@@ -825,9 +829,9 @@ class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFieldModelDecimal(const std::string& package)
+void GeneratorKotlin::GenerateFBEFieldModelDecimal(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FieldModelDecimal.kt";
@@ -835,7 +839,7 @@ void GeneratorKotlin::GenerateFBEFieldModelDecimal(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding decimal field model
@@ -934,9 +938,9 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFieldModelTimestamp(const std::string& package)
+void GeneratorKotlin::GenerateFBEFieldModelTimestamp(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FieldModelTimestamp.kt";
@@ -944,7 +948,7 @@ void GeneratorKotlin::GenerateFBEFieldModelTimestamp(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding timestamp field model
@@ -988,9 +992,9 @@ class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFieldModelBytes(const std::string& package)
+void GeneratorKotlin::GenerateFBEFieldModelBytes(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FieldModelBytes.kt";
@@ -998,7 +1002,7 @@ void GeneratorKotlin::GenerateFBEFieldModelBytes(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding bytes field model
@@ -1095,9 +1099,9 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFieldModelString(const std::string& package)
+void GeneratorKotlin::GenerateFBEFieldModelString(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FieldModelString.kt";
@@ -1105,7 +1109,7 @@ void GeneratorKotlin::GenerateFBEFieldModelString(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding string field model
@@ -1204,9 +1208,9 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFieldModelOptional(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorKotlin::GenerateFBEFieldModelOptional(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -1217,12 +1221,12 @@ void GeneratorKotlin::GenerateFBEFieldModelOptional(const std::string& package, 
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     std::string code = R"CODE(
 // Fast Binary Encoding optional _NAME_ field model
@@ -1371,9 +1375,9 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFieldModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
+void GeneratorKotlin::GenerateFBEFieldModelArray(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -1384,12 +1388,12 @@ void GeneratorKotlin::GenerateFBEFieldModelArray(const std::string& package, con
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array field model
@@ -1522,7 +1526,7 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     if (optional)
         code = std::regex_replace(code, std::regex("_INIT_"), "arrayOfNulls<" + type + ">(size.toInt())");
     else
-        code = std::regex_replace(code, std::regex("_INIT_"), "Array(size.toInt()) { " + ConvertDefault(base) + " }");
+        code = std::regex_replace(code, std::regex("_INIT_"), "Array(size.toInt()) { " + ConvertDefault(domain, base) + " }");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -1534,9 +1538,9 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFieldModelVector(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorKotlin::GenerateFBEFieldModelVector(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -1547,12 +1551,12 @@ void GeneratorKotlin::GenerateFBEFieldModelVector(const std::string& package, co
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ vector field model
@@ -1787,9 +1791,9 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFieldModelMap(const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
+void GeneratorKotlin::GenerateFBEFieldModelMap(const std::string& domain, const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -1800,12 +1804,12 @@ void GeneratorKotlin::GenerateFBEFieldModelMap(const std::string& package, const
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map field model
@@ -2027,9 +2031,9 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFieldModelEnumFlags(const std::string& package, const std::string& name, const std::string& type)
+void GeneratorKotlin::GenerateFBEFieldModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -2040,12 +2044,12 @@ void GeneratorKotlin::GenerateFBEFieldModelEnumFlags(const std::string& package,
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ field model
@@ -2090,9 +2094,9 @@ class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     Close();
 }
 
-void GeneratorKotlin::GenerateFBESize(const std::string& package)
+void GeneratorKotlin::GenerateFBESize(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "Size.kt";
@@ -2100,7 +2104,7 @@ void GeneratorKotlin::GenerateFBESize(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding size
@@ -2126,9 +2130,9 @@ class Size
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFinalModel(const std::string& package)
+void GeneratorKotlin::GenerateFBEFinalModel(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FinalModel.kt";
@@ -2136,7 +2140,7 @@ void GeneratorKotlin::GenerateFBEFinalModel(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding base final model
@@ -2208,9 +2212,9 @@ abstract class FinalModel protected constructor(protected var _buffer: Buffer, p
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFinalModel(const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
+void GeneratorKotlin::GenerateFBEFinalModel(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / ("FinalModel" + name + ".kt");
@@ -2218,7 +2222,7 @@ void GeneratorKotlin::GenerateFBEFinalModel(const std::string& package, const st
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding _TYPE_ final model
@@ -2280,9 +2284,9 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFinalModelDecimal(const std::string& package)
+void GeneratorKotlin::GenerateFBEFinalModelDecimal(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FinalModelDecimal.kt";
@@ -2290,7 +2294,7 @@ void GeneratorKotlin::GenerateFBEFinalModelDecimal(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding decimal final model
@@ -2404,9 +2408,9 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFinalModelTimestamp(const std::string& package)
+void GeneratorKotlin::GenerateFBEFinalModelTimestamp(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FinalModelTimestamp.kt";
@@ -2414,7 +2418,7 @@ void GeneratorKotlin::GenerateFBEFinalModelTimestamp(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding timestamp final model
@@ -2473,9 +2477,9 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFinalModelBytes(const std::string& package)
+void GeneratorKotlin::GenerateFBEFinalModelBytes(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FinalModelBytes.kt";
@@ -2483,7 +2487,7 @@ void GeneratorKotlin::GenerateFBEFinalModelBytes(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding bytes final model
@@ -2557,9 +2561,9 @@ class FinalModelBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFinalModelString(const std::string& package)
+void GeneratorKotlin::GenerateFBEFinalModelString(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "FinalModelString.kt";
@@ -2567,7 +2571,7 @@ void GeneratorKotlin::GenerateFBEFinalModelString(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding string final model
@@ -2643,9 +2647,9 @@ class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFinalModelOptional(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorKotlin::GenerateFBEFinalModelOptional(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -2656,12 +2660,12 @@ void GeneratorKotlin::GenerateFBEFinalModelOptional(const std::string& package, 
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     std::string code = R"CODE(
 // Fast Binary Encoding optional _NAME_ final model
@@ -2757,9 +2761,9 @@ class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFinalModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
+void GeneratorKotlin::GenerateFBEFinalModelArray(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -2770,12 +2774,12 @@ void GeneratorKotlin::GenerateFBEFinalModelArray(const std::string& package, con
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array final model
@@ -2950,7 +2954,7 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     if (optional)
         code = std::regex_replace(code, std::regex("_INIT_"), "arrayOfNulls<" + type + ">(_size.toInt())");
     else
-        code = std::regex_replace(code, std::regex("_INIT_"), "Array(_size.toInt()) { " + ConvertDefault(base) + " }");
+        code = std::regex_replace(code, std::regex("_INIT_"), "Array(_size.toInt()) { " + ConvertDefault(domain, base) + " }");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -2962,9 +2966,9 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFinalModelVector(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorKotlin::GenerateFBEFinalModelVector(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -2975,12 +2979,12 @@ void GeneratorKotlin::GenerateFBEFinalModelVector(const std::string& package, co
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ vector final model
@@ -3193,9 +3197,9 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFinalModelMap(const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
+void GeneratorKotlin::GenerateFBEFinalModelMap(const std::string& domain, const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -3206,12 +3210,12 @@ void GeneratorKotlin::GenerateFBEFinalModelMap(const std::string& package, const
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map final model
@@ -3413,9 +3417,9 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& type)
+void GeneratorKotlin::GenerateFBEFinalModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -3426,12 +3430,12 @@ void GeneratorKotlin::GenerateFBEFinalModelEnumFlags(const std::string& package,
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ final model
@@ -3491,9 +3495,9 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     Close();
 }
 
-void GeneratorKotlin::GenerateFBESender(const std::string& package)
+void GeneratorKotlin::GenerateFBESender(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "Sender.kt";
@@ -3501,7 +3505,7 @@ void GeneratorKotlin::GenerateFBESender(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding base sender
@@ -3562,9 +3566,9 @@ abstract class Sender
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEReceiver(const std::string& package)
+void GeneratorKotlin::GenerateFBEReceiver(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "Receiver.kt";
@@ -3572,7 +3576,7 @@ void GeneratorKotlin::GenerateFBEReceiver(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding base receiver
@@ -3861,9 +3865,9 @@ abstract class Receiver
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEJson(const std::string& package)
+void GeneratorKotlin::GenerateFBEJson(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / package;
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
     CppCommon::Path file = path / "Json.kt";
@@ -3871,7 +3875,7 @@ void GeneratorKotlin::GenerateFBEJson(const std::string& package)
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(package);
+    GenerateImports(domain, package);
 
     // Generate custom import
     WriteLine();
@@ -4068,7 +4072,8 @@ object Json
 
 void GeneratorKotlin::GenerateContainers(const std::shared_ptr<Package>& p, bool final)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / *p->name;
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, *p->name);
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -4086,30 +4091,30 @@ void GeneratorKotlin::GenerateContainers(const std::shared_ptr<Package>& p, bool
                     if (field->array)
                     {
                         if (final)
-                            GenerateFBEFinalModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), *field->type, field->optional, ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                            GenerateFBEFinalModelArray(domain, *p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), *field->type, field->optional, ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                         else
-                            GenerateFBEFieldModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), *field->type, field->optional, ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                            GenerateFBEFieldModelArray(domain, *p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), *field->type, field->optional, ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                     }
                     if (field->vector || field->list || field->set)
                     {
                         if (final)
-                            GenerateFBEFinalModelVector(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                            GenerateFBEFinalModelVector(domain, *p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                         else
-                            GenerateFBEFieldModelVector(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                            GenerateFBEFieldModelVector(domain, *p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                     }
                     if (field->map || field->hash)
                     {
                         if (final)
-                            GenerateFBEFinalModelMap(*p->name, ConvertTypeFieldName(*field->key), ConvertTypeFieldType(*field->key, false), ConvertTypeFieldDeclaration(*field->key, false, final), (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                            GenerateFBEFinalModelMap(domain, *p->name, ConvertTypeFieldName(*field->key), ConvertTypeFieldType(domain, *field->key, false), ConvertTypeFieldDeclaration(domain, *field->key, false, final), (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                         else
-                            GenerateFBEFieldModelMap(*p->name, ConvertTypeFieldName(*field->key), ConvertTypeFieldType(*field->key, false), ConvertTypeFieldDeclaration(*field->key, false, final), (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                            GenerateFBEFieldModelMap(domain, *p->name, ConvertTypeFieldName(*field->key), ConvertTypeFieldType(domain, *field->key, false), ConvertTypeFieldDeclaration(domain, *field->key, false, final), (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                     }
                     if (field->optional)
                     {
                         if (final)
-                            GenerateFBEFinalModelOptional(*p->name, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, false, final));
+                            GenerateFBEFinalModelOptional(domain, *p->name, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, false, final));
                         else
-                            GenerateFBEFieldModelOptional(*p->name, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, false, final));
+                            GenerateFBEFieldModelOptional(domain, *p->name, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, false, final));
                     }
                 }
             }
@@ -4119,7 +4124,8 @@ void GeneratorKotlin::GenerateContainers(const std::shared_ptr<Package>& p, bool
 
 void GeneratorKotlin::GeneratePackage(const std::shared_ptr<Package>& p)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / *p->name;
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, *p->name);
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -4298,12 +4304,14 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     if (JSON())
         GenerateEnumJson(p, e);
 
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+
     // Generate enum field model
-    GenerateFBEFieldModelEnumFlags(*p->name, *e->name, enum_type);
+    GenerateFBEFieldModelEnumFlags(domain, *p->name, *e->name, enum_type);
 
     // Generate enum final model
     if (Final())
-        GenerateFBEFinalModelEnumFlags(*p->name, *e->name, enum_type);
+        GenerateFBEFinalModelEnumFlags(domain, *p->name, *e->name, enum_type);
 }
 
 void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path)
@@ -4449,9 +4457,10 @@ void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const
 
 void GeneratorKotlin::GenerateEnumJson(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -4465,12 +4474,12 @@ void GeneratorKotlin::GenerateEnumJson(const std::shared_ptr<Package>& p, const 
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     // Generate custom import
     WriteLine();
@@ -4678,12 +4687,14 @@ void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std
     if (JSON())
         GenerateFlagsJson(p, f);
 
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+
     // Generate flags field model
-    GenerateFBEFieldModelEnumFlags(*p->name, *f->name, flags_type);
+    GenerateFBEFieldModelEnumFlags(domain, *p->name, *f->name, flags_type);
 
     // Generate flags final model
     if (Final())
-        GenerateFBEFinalModelEnumFlags(*p->name, *f->name, flags_type);
+        GenerateFBEFinalModelEnumFlags(domain, *p->name, *f->name, flags_type);
 }
 
 void GeneratorKotlin::GenerateFlagsClass(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path)
@@ -4889,9 +4900,10 @@ void GeneratorKotlin::GenerateFlagsClass(const std::shared_ptr<Package>& p, cons
 
 void GeneratorKotlin::GenerateFlagsJson(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -4905,12 +4917,12 @@ void GeneratorKotlin::GenerateFlagsJson(const std::shared_ptr<Package>& p, const
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     // Generate custom import
     WriteLine();
@@ -4956,6 +4968,7 @@ void GeneratorKotlin::GenerateFlagsJson(const std::shared_ptr<Package>& p, const
 
 void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     bool first;
 
     // Open the output file
@@ -4971,7 +4984,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"RemoveRedundantCallsOfConversionMethods\")");
     WriteIndent("open class " + *s->name);
     if (s->base && !s->base->empty())
-        Write(" : " + ConvertTypeName(*s->base, false));
+        Write(" : " + ConvertTypeName(domain, *s->base, false));
     else
         Write(" : Comparable<Any?>");
     WriteLine();
@@ -4982,7 +4995,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     if (s->body && !s->body->fields.empty())
     {
         for (const auto& field : s->body->fields)
-            WriteLineIndent("var " + *field->name + ": " + ConvertTypeName(*field, false) + " = " + ConvertDefault(*field));
+            WriteLineIndent("var " + *field->name + ": " + ConvertTypeName(domain, *field, false) + " = " + ConvertDefault(domain, *field));
         WriteLine();
     }
 
@@ -4997,14 +5010,14 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
         WriteIndent("constructor(");
         if (s->base && !s->base->empty())
         {
-            Write("parent: " + ConvertTypeName(*s->base, false));
+            Write("parent: " + ConvertTypeName(domain, *s->base, false));
             first = false;
         }
         if (s->body)
         {
             for (const auto& field : s->body->fields)
             {
-                Write(std::string(first ? "" : ", ") + *field->name + ": " + ConvertTypeName(*field, false));
+                Write(std::string(first ? "" : ", ") + *field->name + ": " + ConvertTypeName(domain, *field, false));
                 first = false;
             }
         }
@@ -5047,11 +5060,11 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("// Serialize the struct to the FBE stream");
-    WriteLineIndent("val writer = " + *p->name + ".fbe." + *s->name + "Model()");
+    WriteLineIndent("val writer = " + domain + *p->name + ".fbe." + *s->name + "Model()");
     WriteLineIndent("writer.serialize(this)");
     WriteLine();
     WriteLineIndent("// Deserialize the struct from the FBE stream");
-    WriteLineIndent("val reader = " + *p->name + ".fbe." + *s->name + "Model()");
+    WriteLineIndent("val reader = " + domain + *p->name + ".fbe." + *s->name + "Model()");
     WriteLineIndent("reader.attach(writer.buffer)");
     WriteLineIndent("return reader.deserialize()");
     Indent(-1);
@@ -5297,12 +5310,12 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     if (JSON())
     {
         WriteLine();
-        WriteIndent(std::string((s->base && !s->base->empty()) ? "override" : "open") + " fun toJson(): String = " + *p->name + ".fbe.Json.engine.toJson(this)");
+        WriteIndent(std::string((s->base && !s->base->empty()) ? "override" : "open") + " fun toJson(): String = " + domain + *p->name + ".fbe.Json.engine.toJson(this)");
         WriteLine();
         WriteLineIndent("companion object");
         WriteLineIndent("{");
         Indent(1);
-        WriteLineIndent("fun fromJson(json: String): " + *s->name + " = " + *p->name + ".fbe.Json.engine.fromJson(json, " + *s->name + "::class.java)");
+        WriteLineIndent("fun fromJson(json: String): " + *s->name + " = " + domain + *p->name + ".fbe.Json.engine.fromJson(json, " + *s->name + "::class.java)");
         Indent(-1);
         WriteLineIndent("}");
     }
@@ -5331,9 +5344,10 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
 
 void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -5344,12 +5358,12 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     // Generate struct field model begin
     WriteLine();
@@ -5364,7 +5378,7 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     std::string prev_size("4");
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("val parent: " + ConvertBaseFieldName(*s->base, false) + " = " + ConvertBaseFieldName(*s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ")");
+        WriteLineIndent("val parent: " + ConvertBaseFieldName(domain, *s->base, false) + " = " + ConvertBaseFieldName(domain, *s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ")");
         prev_offset = "parent.fbeOffset";
         prev_size = "parent.fbeBody - 4 - 4";
     }
@@ -5372,7 +5386,7 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLineIndent("val " + *field->name + ": " + ConvertTypeFieldDeclaration(*field, false) + " = " + ConvertTypeFieldInitialization(*field, prev_offset + " + " + prev_size, false));
+            WriteLineIndent("val " + *field->name + ": " + ConvertTypeFieldDeclaration(domain, *field, false) + " = " + ConvertTypeFieldInitialization(domain, *field, prev_offset + " + " + prev_size, false));
             prev_offset = *field->name + ".fbeOffset";
             prev_size = *field->name + ".fbeSize";
         }
@@ -5434,7 +5448,7 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     WriteLineIndent("{");
     Indent(1);
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("const val fbeTypeConst: Long = " + ConvertBaseFieldName(*s->base, false) + ".fbeTypeConst");
+        WriteLineIndent("const val fbeTypeConst: Long = " + ConvertBaseFieldName(domain, *s->base, false) + ".fbeTypeConst");
     else
         WriteLineIndent("const val fbeTypeConst: Long = " + std::to_string(s->type));
     Indent(-1);
@@ -5609,14 +5623,14 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
                 if (field->array || field->vector || field->list || field->set || field->map || field->hash)
                     WriteLineIndent(*field->name + ".get(fbeValue." + *field->name + ")");
                 else
-                    WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? ConvertConstant(*field->type, *field->value, field->optional) : "") + ")");
+                    WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? ConvertConstant(domain, *field->type, *field->value, field->optional) : "") + ")");
                 Indent(-1);
                 WriteLineIndent("else");
                 Indent(1);
                 if (field->vector || field->list || field->set || field->map || field->hash)
                     WriteLineIndent("fbeValue." + *field->name + ".clear()");
                 else
-                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field));
+                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(domain, *field));
                 Indent(-1);
                 WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize");
             }
@@ -5712,9 +5726,10 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
 
 void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -5725,12 +5740,12 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     // Generate struct model begin
     WriteLine();
@@ -5873,9 +5888,10 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
 
 void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -5886,12 +5902,12 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     // Generate struct final model begin
     WriteLine();
@@ -5903,10 +5919,10 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
 
     // Generate struct final model accessors
     if (s->base && !s->base->empty())
-        WriteLineIndent("val parent: " + ConvertBaseFieldName(*s->base, true) + " = " + ConvertBaseFieldName(*s->base, true) + "(buffer, 0)");
+        WriteLineIndent("val parent: " + ConvertBaseFieldName(domain, *s->base, true) + " = " + ConvertBaseFieldName(domain, *s->base, true) + "(buffer, 0)");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("val " + *field->name + ": " + ConvertTypeFieldDeclaration(*field, true) + " = " + ConvertTypeFieldInitialization(*field, "0", true));
+            WriteLineIndent("val " + *field->name + ": " + ConvertTypeFieldDeclaration(domain, *field, true) + " = " + ConvertTypeFieldInitialization(domain, *field, "0", true));
 
     // Generate struct final model FBE properties
     WriteLine();
@@ -5929,7 +5945,7 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     WriteLineIndent("{");
     Indent(1);
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("const val fbeTypeConst: Long = " + ConvertBaseFieldName(*s->base, true) + ".fbeTypeConst");
+        WriteLineIndent("const val fbeTypeConst: Long = " + ConvertBaseFieldName(domain, *s->base, true) + ".fbeTypeConst");
     else
         WriteLineIndent("const val fbeTypeConst: Long = " + std::to_string(s->type));
     Indent(-1);
@@ -6112,9 +6128,10 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
 
 void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6125,12 +6142,12 @@ void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     // Generate struct model final begin
     WriteLine();
@@ -6261,9 +6278,10 @@ void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p
 
 void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool final)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6277,21 +6295,21 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     // Generate sender begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final sender");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " sender");
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"PropertyName\")");
-    WriteLineIndent("open class " + sender + " : fbe.Sender");
+    WriteLineIndent("open class " + sender + " : " + domain + "fbe.Sender");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6300,7 +6318,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     {
         WriteLineIndent("// Imported senders");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("val " + *import + "Sender: " + *import + ".fbe." + sender);
+            WriteLineIndent("val " + *import + "Sender: " + domain + *import + ".fbe." + sender);
         WriteLine();
     }
 
@@ -6320,7 +6338,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Sender = " + *import + ".fbe." + sender + "(buffer)");
+            WriteLineIndent(*import + "Sender = " + domain + *import + ".fbe." + sender + "(buffer)");
     }
     if (p->body)
     {
@@ -6336,7 +6354,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Sender = " + *import + ".fbe." + sender + "(buffer)");
+            WriteLineIndent(*import + "Sender = " + domain + *import + ".fbe." + sender + "(buffer)");
     }
     if (p->body)
     {
@@ -6352,14 +6370,14 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + *p->name + "." + *s->name;
             WriteLineIndent("fun send(value: " + struct_name + "): Long");
             WriteLineIndent("{");
             Indent(1);
             WriteLineIndent("// Serialize the value into the FBE stream");
             WriteLineIndent("val serialized = " + *s->name + "Model.serialize(value)");
-            WriteLineIndent("assert(serialized > 0) { \"" + *p->name + "." + *s->name + " serialization failed!\" }");
-            WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + *p->name + "." + *s->name + " validation failed!\" }");
+            WriteLineIndent("assert(serialized > 0) { \"" + struct_name + " serialization failed!\" }");
+            WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + struct_name + " validation failed!\" }");
             WriteLine();
             WriteLineIndent("// Log the value");
             WriteLineIndent("if (logging)");
@@ -6380,7 +6398,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     // Generate sender message handler
     WriteLine();
     WriteLineIndent("// Send message handler");
-    WriteLineIndent("override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException(\"" + *p->name + ".fbe.Sender.onSend() not implemented!\") }");
+    WriteLineIndent("override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException(\"" + domain + *p->name + ".fbe.Sender.onSend() not implemented!\") }");
 
     // Generate sender end
     Indent(-1);
@@ -6395,9 +6413,10 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
 
 void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool final)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6411,21 +6430,21 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     // Generate receiver begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final receiver");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " receiver");
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"PrivatePropertyName\", \"UNUSED_PARAMETER\")");
-    WriteLineIndent("open class " + receiver + " : fbe.Receiver");
+    WriteLineIndent("open class " + receiver + " : " + domain + "fbe.Receiver");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6434,7 +6453,7 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     {
         WriteLineIndent("// Imported receivers");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("var " + *import + "Receiver: " + *import + ".fbe." + receiver + "? = null");
+            WriteLineIndent("var " + *import + "Receiver: " + domain + *import + ".fbe." + receiver + "? = null");
         WriteLine();
     }
 
@@ -6444,7 +6463,7 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         WriteLineIndent("// Receiver values accessors");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + *p->name + "." + *s->name;
             WriteLineIndent("private val " + *s->name + "Value: " + struct_name);
         }
         WriteLine();
@@ -6461,13 +6480,13 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Receiver = " + *import + ".fbe." + receiver + "(buffer)");
+            WriteLineIndent(*import + "Receiver = " + domain + *import + ".fbe." + receiver + "(buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + *p->name + "." + *s->name;
             WriteLineIndent(*s->name + "Value = " + struct_name + "()");
             WriteLineIndent(*s->name + "Model = " + *s->name + model + "()");
         }
@@ -6481,13 +6500,13 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Receiver = " + *import + ".fbe." + receiver + "(buffer)");
+            WriteLineIndent(*import + "Receiver = " + domain + *import + ".fbe." + receiver + "(buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + *p->name + "." + *s->name;
             WriteLineIndent(*s->name + "Value = " + struct_name + "()");
             WriteLineIndent(*s->name + "Model = " + *s->name + model + "()");
         }
@@ -6502,7 +6521,7 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         WriteLineIndent("// Receive handlers");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + *p->name + "." + *s->name;
             WriteLineIndent("protected open fun onReceive(value: " + struct_name + ") {}");
         }
         WriteLine();
@@ -6519,14 +6538,14 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent(package + ".fbe." + *s->name + model + ".fbeTypeConst ->");
+            WriteLineIndent(domain + package + ".fbe." + *s->name + model + ".fbeTypeConst ->");
             WriteLineIndent("{");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");
             WriteLineIndent(*s->name + "Model.attach(buffer, offset)");
-            WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + *p->name + "." + *s->name + " validation failed!\" }");
+            WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
             WriteLineIndent("val deserialized = " + *s->name + "Model.deserialize(" + *s->name + "Value)");
-            WriteLineIndent("assert(deserialized > 0) { \"" + *p->name + "." + *s->name + " deserialization failed!\" }");
+            WriteLineIndent("assert(deserialized > 0) { \"" + domain + *p->name + "." + *s->name + " deserialization failed!\" }");
             WriteLine();
             WriteLineIndent("// Log the value");
             WriteLineIndent("if (logging)");
@@ -6575,9 +6594,10 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
 
 void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6591,21 +6611,21 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
 
     // Generate proxy begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final proxy");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final proxy");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " proxy");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " proxy");
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"PrivatePropertyName\", \"UNUSED_PARAMETER\")");
-    WriteLineIndent("open class " + proxy + " : fbe.Receiver");
+    WriteLineIndent("open class " + proxy + " : " + domain + "fbe.Receiver");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6614,7 +6634,7 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     {
         WriteLineIndent("// Imported proxy");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("var " + *import + "Proxy: " + *import + ".fbe." + proxy + "? = null");
+            WriteLineIndent("var " + *import + "Proxy: " + domain + *import + ".fbe." + proxy + "? = null");
         WriteLine();
     }
 
@@ -6634,7 +6654,7 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Proxy = " + *import + ".fbe." + proxy + "(buffer)");
+            WriteLineIndent(*import + "Proxy = " + domain + *import + ".fbe." + proxy + "(buffer)");
     }
     if (p->body)
     {
@@ -6650,7 +6670,7 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Proxy = " + *import + ".fbe." + proxy + "(buffer)");
+            WriteLineIndent(*import + "Proxy = " + domain + *import + ".fbe." + proxy + "(buffer)");
     }
     if (p->body)
     {
@@ -6684,12 +6704,12 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent(package + ".fbe." + *s->name + model + ".fbeTypeConst ->");
+            WriteLineIndent(domain + package + ".fbe." + *s->name + model + ".fbeTypeConst ->");
             WriteLineIndent("{");
             Indent(1);
             WriteLineIndent("// Attach the FBE stream to the proxy model");
             WriteLineIndent(*s->name + "Model.attach(buffer, offset)");
-            WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + *p->name + "." + *s->name + " validation failed!\" }");
+            WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
             WriteLine();
             WriteLineIndent("val fbeBegin = " + *s->name + "Model.model.getBegin()");
             WriteLineIndent("if (fbeBegin == 0L)");
@@ -6735,9 +6755,10 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
 
 void GeneratorKotlin::GenerateJson(const std::shared_ptr<Package>& p)
 {
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6748,12 +6769,12 @@ void GeneratorKotlin::GenerateJson(const std::shared_ptr<Package>& p)
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(package + ".fbe");
+    GenerateImports(domain, package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import fbe.*");
-    WriteLineIndent("import " + package + ".*");
+    WriteLineIndent("import " + domain + "fbe.*");
+    WriteLineIndent("import " + domain + package + ".*");
     WriteLine();
     WriteLineIndent("import com.google.gson.*");
 
@@ -6773,11 +6794,11 @@ void GeneratorKotlin::GenerateJson(const std::shared_ptr<Package>& p)
     WriteLineIndent("fun register(builder: GsonBuilder): GsonBuilder");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("fbe.Json.register(builder)");
+    WriteLineIndent(domain + "fbe.Json.register(builder)");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + ".fbe.Json.register(builder)");
+            WriteLineIndent(domain + *import + ".fbe.Json.register(builder)");
     }
     if (p->body)
     {
@@ -6830,6 +6851,13 @@ bool GeneratorKotlin::IsPrimitiveType(const std::string& type, bool optional)
 bool GeneratorKotlin::IsUnsignedType(const std::string& type)
 {
     return ((type == "uint8") || (type == "uint16") || (type == "uint32") || (type == "uint64"));
+}
+
+std::string GeneratorKotlin::CreatePackagePath(const std::string& domain, const std::string& package)
+{
+    std::string result = domain;
+    CppCommon::StringUtils::ReplaceAll(result, ".", std::string(1, CppCommon::Path::separator()));
+    return result + CppCommon::Path::separator() + package;
 }
 
 std::string GeneratorKotlin::ConvertEnumBase(const std::string& type)
@@ -7121,7 +7149,7 @@ std::string GeneratorKotlin::ConvertPrimitiveTypeName(const std::string& type)
     return "";
 }
 
-std::string GeneratorKotlin::ConvertTypeName(const std::string& type, bool optional)
+std::string GeneratorKotlin::ConvertTypeName(const std::string& domain, const std::string& type, bool optional)
 {
     std::string opt = optional ? "?" : "";
 
@@ -7164,28 +7192,39 @@ std::string GeneratorKotlin::ConvertTypeName(const std::string& type, bool optio
     else if (type == "uuid")
         return "UUID" + opt;
 
-    return type + opt;
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        ns = domain + ns;
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    return ns + t + opt;
 }
 
-std::string GeneratorKotlin::ConvertTypeName(const StructField& field, bool typeless)
+std::string GeneratorKotlin::ConvertTypeName(const std::string& domain, const StructField& field, bool typeless)
 {
     if (field.array)
-        return "Array" + (typeless ? "" : ("<" + ConvertTypeName(*field.type, field.optional) + ">"));
+        return "Array" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.type, field.optional) + ">"));
     else if (field.vector)
-        return "ArrayList" + (typeless ? "" : ("<" + ConvertTypeName(*field.type, field.optional) + ">"));
+        return "ArrayList" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.type, field.optional) + ">"));
     else if (field.list)
-        return "LinkedList" + (typeless ? "" : ("<" + ConvertTypeName(*field.type, field.optional) + ">"));
+        return "LinkedList" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.type, field.optional) + ">"));
     else if (field.set)
-        return "HashSet" + (typeless ? "" : ("<" + ConvertTypeName(*field.key, field.optional) + ">"));
+        return "HashSet" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.key, field.optional) + ">"));
     else if (field.map)
-        return "TreeMap" + (typeless ? "" : ("<" + ConvertTypeName(*field.key, false) + ", " + ConvertTypeName(*field.type, field.optional) +">"));
+        return "TreeMap" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.key, false) + ", " + ConvertTypeName(domain, *field.type, field.optional) +">"));
     else if (field.hash)
-        return "HashMap" + (typeless ? "" : ("<" + ConvertTypeName(*field.key, false) + ", " + ConvertTypeName(*field.type, field.optional) +">"));
+        return "HashMap" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.key, false) + ", " + ConvertTypeName(domain, *field.type, field.optional) +">"));
 
-    return ConvertTypeName(*field.type, field.optional);
+    return ConvertTypeName(domain, *field.type, field.optional);
 }
 
-std::string GeneratorKotlin::ConvertBaseFieldName(const std::string& type, bool final)
+std::string GeneratorKotlin::ConvertBaseFieldName(const std::string& domain, const std::string& type, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
 
@@ -7197,6 +7236,7 @@ std::string GeneratorKotlin::ConvertBaseFieldName(const std::string& type, bool 
     {
         ns.assign(type, 0, pos + 1);
         ns.append("fbe.");
+        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
 
@@ -7249,7 +7289,7 @@ std::string GeneratorKotlin::ConvertTypeFieldName(const std::string& type)
     return result;
 }
 
-std::string GeneratorKotlin::ConvertTypeFieldType(const std::string& type, bool optional)
+std::string GeneratorKotlin::ConvertTypeFieldType(const std::string& domain, const std::string& type, bool optional)
 {
     std::string opt = optional ? "?" : "";
 
@@ -7299,13 +7339,14 @@ std::string GeneratorKotlin::ConvertTypeFieldType(const std::string& type, bool 
     if (pos != std::string::npos)
     {
         ns.assign(type, 0, pos + 1);
+        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
 
     return ns + t + opt;
 }
 
-std::string GeneratorKotlin::ConvertTypeFieldDeclaration(const std::string& type, bool optional, bool final)
+std::string GeneratorKotlin::ConvertTypeFieldDeclaration(const std::string& domain, const std::string& type, bool optional, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
 
@@ -7318,13 +7359,14 @@ std::string GeneratorKotlin::ConvertTypeFieldDeclaration(const std::string& type
     {
         ns.assign(type, 0, pos + 1);
         ns.append("fbe.");
+        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
 
     return ns + modelType + "Model" + opt + ConvertTypeFieldName(t);
 }
 
-std::string GeneratorKotlin::ConvertTypeFieldDeclaration(const StructField& field, bool final)
+std::string GeneratorKotlin::ConvertTypeFieldDeclaration(const std::string& domain, const StructField& field, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
 
@@ -7337,10 +7379,10 @@ std::string GeneratorKotlin::ConvertTypeFieldDeclaration(const StructField& fiel
     else if (field.optional)
         return modelType + "ModelOptional" + ConvertTypeFieldName(*field.type);
 
-    return ConvertTypeFieldDeclaration(*field.type, field.optional, final);
+    return ConvertTypeFieldDeclaration(domain, *field.type, field.optional, final);
 }
 
-std::string GeneratorKotlin::ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final)
+std::string GeneratorKotlin::ConvertTypeFieldInitialization(const std::string& domain, const StructField& field, const std::string& offset, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
 
@@ -7362,13 +7404,14 @@ std::string GeneratorKotlin::ConvertTypeFieldInitialization(const StructField& f
     {
         ns.assign(type, 0, pos + 1);
         ns.append("fbe.");
+        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
 
     return ns + modelType + "Model" + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
 }
 
-std::string GeneratorKotlin::ConvertConstant(const std::string& type, const std::string& value, bool optional)
+std::string GeneratorKotlin::ConvertConstant(const std::string& domain, const std::string& type, const std::string& value, bool optional)
 {
     if (value == "true")
         return "true";
@@ -7429,11 +7472,11 @@ std::string GeneratorKotlin::ConvertConstant(const std::string& type, const std:
     else if (value == "utc")
         return "Instant.now()";
     else if (value == "uuid0")
-        return "fbe.UUIDGenerator.nil()";
+        return domain + "fbe.UUIDGenerator.nil()";
     else if (value == "uuid1")
-        return "fbe.UUIDGenerator.sequential()";
+        return domain + "fbe.UUIDGenerator.sequential()";
     else if (value == "uuid4")
-        return "fbe.UUIDGenerator.random()";
+        return domain + "fbe.UUIDGenerator.random()";
 
     std::string result = value;
 
@@ -7490,7 +7533,7 @@ std::string GeneratorKotlin::ConvertConstantSuffix(const std::string& type)
     return "";
 }
 
-std::string GeneratorKotlin::ConvertDefault(const std::string& type)
+std::string GeneratorKotlin::ConvertDefault(const std::string& domain, const std::string& type)
 {
     if (type == "bool")
         return "false";
@@ -7527,29 +7570,29 @@ std::string GeneratorKotlin::ConvertDefault(const std::string& type)
     else if (type == "timestamp")
         return "Instant.EPOCH";
     else if (type == "uuid")
-        return "fbe.UUIDGenerator.nil()";
+        return domain + "fbe.UUIDGenerator.nil()";
 
     return type + "()";
 }
 
-std::string GeneratorKotlin::ConvertDefault(const StructField& field)
+std::string GeneratorKotlin::ConvertDefault(const std::string& domain, const StructField& field)
 {
     if (field.value)
-        return ConvertConstant(*field.type, *field.value, field.optional);
+        return ConvertConstant(domain, *field.type, *field.value, field.optional);
 
     if (field.array)
         if (field.optional)
-            return "arrayOfNulls<" + ConvertTypeName(*field.type, field.optional) + ">(" + std::to_string(field.N) + ")";
+            return "arrayOfNulls<" + ConvertTypeName(domain, *field.type, field.optional) + ">(" + std::to_string(field.N) + ")";
         else
-            return "Array(" + std::to_string(field.N) + ") { " + ConvertDefault(*field.type) + " }";
+            return "Array(" + std::to_string(field.N) + ") { " + ConvertDefault(domain, *field.type) + " }";
     else if (field.vector || field.list || field.set || field.map || field.hash)
-        return ConvertTypeName(field, true) + "()";
+        return ConvertTypeName(domain, field, true) + "()";
     else if (field.optional)
         return "null";
     else if (!IsKnownType(*field.type))
-        return ConvertTypeName(field, true) + "()";
+        return ConvertTypeName(domain, field, true) + "()";
 
-    return ConvertDefault(*field.type);
+    return ConvertDefault(domain, *field.type);
 }
 
 std::string GeneratorKotlin::ConvertOutputStreamType(const std::string& type, const std::string& name, bool optional)

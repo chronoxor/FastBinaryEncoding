@@ -5014,9 +5014,8 @@ void GeneratorJava::GenerateFlagsJson(const std::shared_ptr<Package>& p, const s
 
 void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
-    bool first;
-
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    bool first;
 
     // Open the output file
     CppCommon::Path output = path / (*s->name + ".java");
@@ -6462,8 +6461,8 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
             Indent(1);
             WriteLineIndent("// Serialize the value into the FBE stream");
             WriteLineIndent("long serialized = " + *s->name + "Model.serialize(value);");
-            WriteLineIndent("assert (serialized > 0) : \"" + *p->name + "." + *s->name + " serialization failed!\";");
-            WriteLineIndent("assert " + *s->name + "Model.verify() : \"" + *p->name + "." + *s->name + " validation failed!\";");
+            WriteLineIndent("assert (serialized > 0) : \"" + struct_name + " serialization failed!\";");
+            WriteLineIndent("assert " + *s->name + "Model.verify() : \"" + struct_name + " validation failed!\";");
             WriteLine();
             WriteLineIndent("// Log the value");
             WriteLineIndent("if (getLogging())");

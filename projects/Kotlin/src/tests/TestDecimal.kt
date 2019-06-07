@@ -4,6 +4,8 @@ import java.math.*
 import kotlin.test.*
 import org.testng.annotations.*
 
+import com.chronoxor.fbe.*
+
 class TestDecimal
 {
     private val _sign = java.lang.Integer.parseUnsignedInt("80000000", 16)
@@ -13,28 +15,28 @@ class TestDecimal
         val flags = if (negative) ((scale.toInt() shl 16) or _sign) else (scale.toInt() shl 16)
 
         val buffer = ByteArray(16)
-        fbe.Buffer.write(buffer, 0, low)
-        fbe.Buffer.write(buffer, 4, mid)
-        fbe.Buffer.write(buffer, 8, high)
-        fbe.Buffer.write(buffer, 12, flags)
+        Buffer.write(buffer, 0, low)
+        Buffer.write(buffer, 4, mid)
+        Buffer.write(buffer, 8, high)
+        Buffer.write(buffer, 12, flags)
 
-        val model = fbe.FieldModelDecimal(fbe.Buffer(buffer), 0)
+        val model = FieldModelDecimal(Buffer(buffer), 0)
         val value1 = model.get()
         model.set(value1)
-        if ((fbe.Buffer.readInt32(buffer, 0) != low) ||
-            (fbe.Buffer.readInt32(buffer, 4) != mid) ||
-            (fbe.Buffer.readInt32(buffer, 8) != high) ||
-            (fbe.Buffer.readInt32(buffer, 12) != flags))
+        if ((Buffer.readInt32(buffer, 0) != low) ||
+            (Buffer.readInt32(buffer, 4) != mid) ||
+            (Buffer.readInt32(buffer, 8) != high) ||
+            (Buffer.readInt32(buffer, 12) != flags))
             throw Exception("Invalid decimal serialization!")
 
-        val finalModel = fbe.FinalModelDecimal(fbe.Buffer(buffer), 0)
-        val size = fbe.Size()
+        val finalModel = FinalModelDecimal(Buffer(buffer), 0)
+        val size = Size()
         val value2 = finalModel.get(size)
         finalModel.set(value2)
-        if ((fbe.Buffer.readInt32(buffer, 0) != low) ||
-            (fbe.Buffer.readInt32(buffer, 4) != mid) ||
-            (fbe.Buffer.readInt32(buffer, 8) != high) ||
-            (fbe.Buffer.readInt32(buffer, 12) != flags) ||
+        if ((Buffer.readInt32(buffer, 0) != low) ||
+            (Buffer.readInt32(buffer, 4) != mid) ||
+            (Buffer.readInt32(buffer, 8) != high) ||
+            (Buffer.readInt32(buffer, 12) != flags) ||
             (size.value != 16L) || (value1.compareTo(value2) != 0))
             throw Exception("Invalid decimal final serialization!")
 

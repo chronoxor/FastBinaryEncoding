@@ -3,19 +3,22 @@ package tests
 import kotlin.test.*
 import org.testng.annotations.*
 
+import com.chronoxor.proto.*
+import com.chronoxor.proto.fbe.*
+
 class TestCreate
 {
     @Test
     fun createAndAccess()
     {
         // Create a new account using FBE model into the FBE stream
-        val writer = proto.fbe.AccountModel()
+        val writer = AccountModel()
         assertEquals(writer.model.fbeOffset, 4)
         val modelBegin = writer.createBegin()
         var accountBegin = writer.model.setBegin()
         writer.model.id.set(1)
         writer.model.name.set("Test")
-        writer.model.state.set(proto.State.good)
+        writer.model.state.set(State.good)
         var walletBegin = writer.model.wallet.setBegin()
         writer.model.wallet.currency.set("USD")
         writer.model.wallet.amount.set(1000.0)
@@ -30,8 +33,8 @@ class TestCreate
         var orderBegin = order.setBegin()
         order.id.set(1)
         order.symbol.set("EURUSD")
-        order.side.set(proto.OrderSide.buy)
-        order.type.set(proto.OrderType.market)
+        order.side.set(OrderSide.buy)
+        order.type.set(OrderType.market)
         order.price.set(1.23456)
         order.volume.set(1000.0)
         order.setEnd(orderBegin)
@@ -39,8 +42,8 @@ class TestCreate
         orderBegin = order.setBegin()
         order.id.set(2)
         order.symbol.set("EURUSD")
-        order.side.set(proto.OrderSide.sell)
-        order.type.set(proto.OrderType.limit)
+        order.side.set(OrderSide.sell)
+        order.type.set(OrderType.limit)
         order.price.set(1.0)
         order.volume.set(100.0)
         order.setEnd(orderBegin)
@@ -48,8 +51,8 @@ class TestCreate
         orderBegin = order.setBegin()
         order.id.set(3)
         order.symbol.set("EURUSD")
-        order.side.set(proto.OrderSide.buy)
-        order.type.set(proto.OrderType.stop)
+        order.side.set(OrderSide.buy)
+        order.type.set(OrderType.stop)
         order.price.set(1.5)
         order.volume.set(10.0)
         order.setEnd(orderBegin)
@@ -65,14 +68,14 @@ class TestCreate
         assertEquals(writer.buffer.size, 252)
 
         // Access the account model in the FBE stream
-        val reader = proto.fbe.AccountModel()
+        val reader = AccountModel()
         assertEquals(reader.model.fbeOffset, 4)
         reader.attach(writer.buffer)
         assertTrue(reader.verify())
 
         val id: Int
         val name: String
-        val state: proto.State
+        val state: State
         val walletCurrency: String
         val walletAmount: Double
         val assetWalletCurrency: String
@@ -84,7 +87,7 @@ class TestCreate
         name = reader.model.name.get()
         assertEquals(name, "Test")
         state = reader.model.state.get()
-        assertTrue(state.hasFlags(proto.State.good))
+        assertTrue(state.hasFlags(State.good))
 
         walletBegin = reader.model.wallet.getBegin()
         walletCurrency = reader.model.wallet.currency.get()
@@ -107,8 +110,8 @@ class TestCreate
 
         var orderId: Int
         var orderSymbol: String
-        var orderSide: proto.OrderSide
-        var orderType: proto.OrderType
+        var orderSide: OrderSide
+        var orderType: OrderType
         var orderPrice: Double
         var orderVolume: Double
 
@@ -119,9 +122,9 @@ class TestCreate
         orderSymbol = o1.symbol.get()
         assertEquals(orderSymbol, "EURUSD")
         orderSide = o1.side.get()
-        assertEquals(orderSide, proto.OrderSide.buy)
+        assertEquals(orderSide, OrderSide.buy)
         orderType = o1.type.get()
-        assertEquals(orderType, proto.OrderType.market)
+        assertEquals(orderType, OrderType.market)
         orderPrice = o1.price.get()
         assertEquals(orderPrice, 1.23456)
         orderVolume = o1.volume.get()
@@ -135,9 +138,9 @@ class TestCreate
         orderSymbol = o2.symbol.get()
         assertEquals(orderSymbol, "EURUSD")
         orderSide = o2.side.get()
-        assertEquals(orderSide, proto.OrderSide.sell)
+        assertEquals(orderSide, OrderSide.sell)
         orderType = o2.type.get()
-        assertEquals(orderType, proto.OrderType.limit)
+        assertEquals(orderType, OrderType.limit)
         orderPrice = o2.price.get()
         assertEquals(orderPrice, 1.0)
         orderVolume = o2.volume.get()
@@ -151,9 +154,9 @@ class TestCreate
         orderSymbol = o3.symbol.get()
         assertEquals(orderSymbol, "EURUSD")
         orderSide = o3.side.get()
-        assertEquals(orderSide, proto.OrderSide.buy)
+        assertEquals(orderSide, OrderSide.buy)
         orderType = o3.type.get()
-        assertEquals(orderType, proto.OrderType.stop)
+        assertEquals(orderType, OrderType.stop)
         orderPrice = o3.price.get()
         assertEquals(orderPrice, 1.5)
         orderVolume = o3.volume.get()

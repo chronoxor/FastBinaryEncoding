@@ -1,17 +1,20 @@
 package examples
 
+import com.chronoxor.proto.*
+import com.chronoxor.proto.fbe.*
+
 object Create
 {
     @JvmStatic
     fun main(args: Array<String>)
     {
         // Create a new account using FBE model
-        val account = proto.fbe.AccountModel()
+        val account = AccountModel()
         val modelBegin = account.createBegin()
         var accountBegin = account.model.setBegin()
         account.model.id.set(1)
         account.model.name.set("Test")
-        account.model.state.set(proto.State.good)
+        account.model.state.set(State.good)
         var walletBegin = account.model.wallet.setBegin()
         account.model.wallet.currency.set("USD")
         account.model.wallet.amount.set(1000.0)
@@ -24,13 +27,13 @@ object Create
         println("FBE size: " + account.buffer.size)
 
         // Access the account using the FBE model
-        val access = proto.fbe.AccountModel()
+        val access = AccountModel()
         access.attach(account.buffer)
         assert(access.verify())
 
         val id: Int
         val name: String
-        val state: proto.State
+        val state: State
         val walletCurrency: String
         val walletAmount: Double
 

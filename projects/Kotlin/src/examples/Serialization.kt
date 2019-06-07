@@ -2,19 +2,22 @@ package examples
 
 import java.util.*
 
+import com.chronoxor.proto.*
+import com.chronoxor.proto.fbe.*
+
 object Serialization
 {
     @JvmStatic
     fun main(args: Array<String>)
     {
         // Create a new account with some orders
-        val account = proto.Account(1, "Test", proto.State.good, proto.Balance("USD", 1000.0), proto.Balance("EUR", 100.0), ArrayList())
-        account.orders.add(proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))
-        account.orders.add(proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0))
-        account.orders.add(proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0))
+        val account = Account(1, "Test", State.good, Balance("USD", 1000.0), Balance("EUR", 100.0), ArrayList())
+        account.orders.add(Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0))
+        account.orders.add(Order(2, "EURUSD", OrderSide.sell, OrderType.limit, 1.0, 100.0))
+        account.orders.add(Order(3, "EURUSD", OrderSide.buy, OrderType.stop, 1.5, 10.0))
 
         // Serialize the account to the FBE stream
-        val writer = proto.fbe.AccountModel()
+        val writer = AccountModel()
         writer.serialize(account)
         assert(writer.verify())
 
@@ -22,7 +25,7 @@ object Serialization
         println("FBE size: " + writer.buffer.size)
 
         // Deserialize the account from the FBE stream
-        val reader = proto.fbe.AccountModel()
+        val reader = AccountModel()
         reader.attach(writer.buffer)
         assert(reader.verify())
         reader.deserialize(account)

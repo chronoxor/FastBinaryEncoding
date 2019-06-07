@@ -44,8 +44,8 @@ public class FinalSender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = OrderModel.serialize(value);
-        assert (serialized > 0) : "proto.Order serialization failed!";
-        assert OrderModel.verify() : "proto.Order validation failed!";
+        assert (serialized > 0) : "com.chronoxor.proto.Order serialization failed!";
+        assert OrderModel.verify() : "com.chronoxor.proto.Order validation failed!";
 
         // Log the value
         if (getLogging())
@@ -61,8 +61,8 @@ public class FinalSender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = BalanceModel.serialize(value);
-        assert (serialized > 0) : "proto.Balance serialization failed!";
-        assert BalanceModel.verify() : "proto.Balance validation failed!";
+        assert (serialized > 0) : "com.chronoxor.proto.Balance serialization failed!";
+        assert BalanceModel.verify() : "com.chronoxor.proto.Balance validation failed!";
 
         // Log the value
         if (getLogging())
@@ -78,8 +78,8 @@ public class FinalSender extends com.chronoxor.fbe.Sender
     {
         // Serialize the value into the FBE stream
         long serialized = AccountModel.serialize(value);
-        assert (serialized > 0) : "proto.Account serialization failed!";
-        assert AccountModel.verify() : "proto.Account validation failed!";
+        assert (serialized > 0) : "com.chronoxor.proto.Account serialization failed!";
+        assert AccountModel.verify() : "com.chronoxor.proto.Account validation failed!";
 
         // Log the value
         if (getLogging())
