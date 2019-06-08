@@ -5,39 +5,27 @@
 
 package com.chronoxor.enums.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.enums.*;
-
 // Fast Binary Encoding EnumWChar field model
-public final class FieldModelEnumWChar extends FieldModel
+public final class FieldModelEnumWChar extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelEnumWChar(Buffer buffer, long offset) { super(buffer, offset); }
+    public FieldModelEnumWChar(com.chronoxor.fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the field size
     @Override
     public long fbeSize() { return 4; }
 
     // Get the value
-    public EnumWChar get() { return get(new EnumWChar()); }
-    public EnumWChar get(EnumWChar defaults)
+    public com.chronoxor.enums.EnumWChar get() { return get(new com.chronoxor.enums.EnumWChar()); }
+    public com.chronoxor.enums.EnumWChar get(com.chronoxor.enums.EnumWChar defaults)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return new EnumWChar(readInt32(fbeOffset()));
+        return new com.chronoxor.enums.EnumWChar(readInt32(fbeOffset()));
     }
 
     // Set the value
-    public void set(EnumWChar value)
+    public void set(com.chronoxor.enums.EnumWChar value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

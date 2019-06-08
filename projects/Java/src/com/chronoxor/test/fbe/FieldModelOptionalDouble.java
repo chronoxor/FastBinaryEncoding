@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional Double field model
-public final class FieldModelOptionalDouble extends FieldModel
+public final class FieldModelOptionalDouble extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelOptionalDouble(Buffer buffer, long offset)
+    public FieldModelOptionalDouble(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        value = new FieldModelDouble(buffer, 0);
+        value = new com.chronoxor.fbe.FieldModelDouble(buffer, 0);
     }
 
     // Get the field size
@@ -57,7 +45,7 @@ public final class FieldModelOptionalDouble extends FieldModel
     }
 
     // Base field model value
-    public final FieldModelDouble value;
+    public final com.chronoxor.fbe.FieldModelDouble value;
 
     // Check if the optional value is valid
     @Override

@@ -5,39 +5,27 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding EnumEmpty field model
-public final class FieldModelEnumEmpty extends FieldModel
+public final class FieldModelEnumEmpty extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelEnumEmpty(Buffer buffer, long offset) { super(buffer, offset); }
+    public FieldModelEnumEmpty(com.chronoxor.fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the field size
     @Override
     public long fbeSize() { return 4; }
 
     // Get the value
-    public EnumEmpty get() { return get(new EnumEmpty()); }
-    public EnumEmpty get(EnumEmpty defaults)
+    public com.chronoxor.test.EnumEmpty get() { return get(new com.chronoxor.test.EnumEmpty()); }
+    public com.chronoxor.test.EnumEmpty get(com.chronoxor.test.EnumEmpty defaults)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return new EnumEmpty(readInt32(fbeOffset()));
+        return new com.chronoxor.test.EnumEmpty(readInt32(fbeOffset()));
     }
 
     // Set the value
-    public void set(EnumEmpty value)
+    public void set(com.chronoxor.test.EnumEmpty value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

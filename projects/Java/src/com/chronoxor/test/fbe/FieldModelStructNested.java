@@ -5,20 +5,8 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructNested field model
-public final class FieldModelStructNested extends FieldModel
+public final class FieldModelStructNested extends com.chronoxor.fbe.FieldModel
 {
     public final FieldModelStructOptional parent;
     public final FieldModelEnumSimple f1000;
@@ -34,7 +22,7 @@ public final class FieldModelStructNested extends FieldModel
     public final FieldModelStructOptional f1010;
     public final FieldModelOptionalStructOptional f1011;
 
-    public FieldModelStructNested(Buffer buffer, long offset)
+    public FieldModelStructNested(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         parent = new FieldModelStructOptional(buffer, 4 + 4);
@@ -251,8 +239,8 @@ public final class FieldModelStructNested extends FieldModel
     }
 
     // Get the struct value
-    public StructNested get() { return get(new StructNested()); }
-    public StructNested get(StructNested fbeValue)
+    public com.chronoxor.test.StructNested get() { return get(new com.chronoxor.test.StructNested()); }
+    public com.chronoxor.test.StructNested get(com.chronoxor.test.StructNested fbeValue)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
@@ -265,7 +253,7 @@ public final class FieldModelStructNested extends FieldModel
     }
 
     // Get the struct fields values
-    public void getFields(StructNested fbeValue, long fbeStructSize)
+    public void getFields(com.chronoxor.test.StructNested fbeValue, long fbeStructSize)
     {
         long fbeCurrentSize = 4 + 4;
 
@@ -276,7 +264,7 @@ public final class FieldModelStructNested extends FieldModel
         if ((fbeCurrentSize + f1000.fbeSize()) <= fbeStructSize)
             fbeValue.f1000 = f1000.get();
         else
-            fbeValue.f1000 = new EnumSimple();
+            fbeValue.f1000 = new com.chronoxor.test.EnumSimple();
         fbeCurrentSize += f1000.fbeSize();
 
         if ((fbeCurrentSize + f1001.fbeSize()) <= fbeStructSize)
@@ -286,9 +274,9 @@ public final class FieldModelStructNested extends FieldModel
         fbeCurrentSize += f1001.fbeSize();
 
         if ((fbeCurrentSize + f1002.fbeSize()) <= fbeStructSize)
-            fbeValue.f1002 = f1002.get(EnumTyped.ENUM_VALUE_2);
+            fbeValue.f1002 = f1002.get(com.chronoxor.test.EnumTyped.ENUM_VALUE_2);
         else
-            fbeValue.f1002 = EnumTyped.ENUM_VALUE_2;
+            fbeValue.f1002 = com.chronoxor.test.EnumTyped.ENUM_VALUE_2;
         fbeCurrentSize += f1002.fbeSize();
 
         if ((fbeCurrentSize + f1003.fbeSize()) <= fbeStructSize)
@@ -300,7 +288,7 @@ public final class FieldModelStructNested extends FieldModel
         if ((fbeCurrentSize + f1004.fbeSize()) <= fbeStructSize)
             fbeValue.f1004 = f1004.get();
         else
-            fbeValue.f1004 = new FlagsSimple();
+            fbeValue.f1004 = new com.chronoxor.test.FlagsSimple();
         fbeCurrentSize += f1004.fbeSize();
 
         if ((fbeCurrentSize + f1005.fbeSize()) <= fbeStructSize)
@@ -310,9 +298,9 @@ public final class FieldModelStructNested extends FieldModel
         fbeCurrentSize += f1005.fbeSize();
 
         if ((fbeCurrentSize + f1006.fbeSize()) <= fbeStructSize)
-            fbeValue.f1006 = f1006.get(FlagsTyped.fromSet(EnumSet.of(FlagsTyped.FLAG_VALUE_2.getEnum(), FlagsTyped.FLAG_VALUE_4.getEnum(), FlagsTyped.FLAG_VALUE_6.getEnum())));
+            fbeValue.f1006 = f1006.get(com.chronoxor.test.FlagsTyped.fromSet(java.util.EnumSet.of(com.chronoxor.test.FlagsTyped.FLAG_VALUE_2.getEnum(), com.chronoxor.test.FlagsTyped.FLAG_VALUE_4.getEnum(), com.chronoxor.test.FlagsTyped.FLAG_VALUE_6.getEnum())));
         else
-            fbeValue.f1006 = FlagsTyped.fromSet(EnumSet.of(FlagsTyped.FLAG_VALUE_2.getEnum(), FlagsTyped.FLAG_VALUE_4.getEnum(), FlagsTyped.FLAG_VALUE_6.getEnum()));
+            fbeValue.f1006 = com.chronoxor.test.FlagsTyped.fromSet(java.util.EnumSet.of(com.chronoxor.test.FlagsTyped.FLAG_VALUE_2.getEnum(), com.chronoxor.test.FlagsTyped.FLAG_VALUE_4.getEnum(), com.chronoxor.test.FlagsTyped.FLAG_VALUE_6.getEnum()));
         fbeCurrentSize += f1006.fbeSize();
 
         if ((fbeCurrentSize + f1007.fbeSize()) <= fbeStructSize)
@@ -324,7 +312,7 @@ public final class FieldModelStructNested extends FieldModel
         if ((fbeCurrentSize + f1008.fbeSize()) <= fbeStructSize)
             fbeValue.f1008 = f1008.get();
         else
-            fbeValue.f1008 = new StructSimple();
+            fbeValue.f1008 = new com.chronoxor.test.StructSimple();
         fbeCurrentSize += f1008.fbeSize();
 
         if ((fbeCurrentSize + f1009.fbeSize()) <= fbeStructSize)
@@ -336,7 +324,7 @@ public final class FieldModelStructNested extends FieldModel
         if ((fbeCurrentSize + f1010.fbeSize()) <= fbeStructSize)
             fbeValue.f1010 = f1010.get();
         else
-            fbeValue.f1010 = new StructOptional();
+            fbeValue.f1010 = new com.chronoxor.test.StructOptional();
         fbeCurrentSize += f1010.fbeSize();
 
         if ((fbeCurrentSize + f1011.fbeSize()) <= fbeStructSize)
@@ -374,7 +362,7 @@ public final class FieldModelStructNested extends FieldModel
     }
 
     // Set the struct value
-    public void set(StructNested fbeValue)
+    public void set(com.chronoxor.test.StructNested fbeValue)
     {
         long fbeBegin = setBegin();
         if (fbeBegin == 0)
@@ -385,7 +373,7 @@ public final class FieldModelStructNested extends FieldModel
     }
 
     // Set the struct fields values
-    public void setFields(StructNested fbeValue)
+    public void setFields(com.chronoxor.test.StructNested fbeValue)
     {
         parent.setFields(fbeValue);
         f1000.set(fbeValue.f1000);

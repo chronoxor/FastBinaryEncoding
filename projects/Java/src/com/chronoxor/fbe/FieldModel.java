@@ -5,15 +5,6 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
 // Fast Binary Encoding base field model
 public abstract class FieldModel
 {
@@ -58,7 +49,7 @@ public abstract class FieldModel
     protected double readDouble(long offset) { return Buffer.readDouble(_buffer.getData(), _buffer.getOffset() + offset); }
     protected byte[] readBytes(long offset, long size) { return Buffer.readBytes(_buffer.getData(), _buffer.getOffset() + offset, size); }
     protected String readString(long offset, long size) { return Buffer.readString(_buffer.getData(), _buffer.getOffset() + offset, size); }
-    protected UUID readUUID(long offset) { return Buffer.readUUID(_buffer.getData(), _buffer.getOffset() + offset); }
+    protected java.util.UUID readUUID(long offset) { return Buffer.readUUID(_buffer.getData(), _buffer.getOffset() + offset); }
     protected void write(long offset, boolean value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
     protected void write(long offset, byte value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
     protected void write(long offset, short value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
@@ -69,5 +60,5 @@ public abstract class FieldModel
     protected void write(long offset, byte[] value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
     protected void write(long offset, byte[] value, long valueOffset, long valueSize) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value, valueOffset, valueSize); }
     protected void write(long offset, byte value, long valueCount) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value, valueCount); }
-    protected void write(long offset, UUID value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
+    protected void write(long offset, java.util.UUID value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
 }

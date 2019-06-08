@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructSimple model
-public final class StructSimpleModel extends Model
+public final class StructSimpleModel extends com.chronoxor.fbe.Model
 {
     public final FieldModelStructSimple model;
 
     public StructSimpleModel() { model = new FieldModelStructSimple(getBuffer(), 4); }
-    public StructSimpleModel(Buffer buffer) { super(buffer); model = new FieldModelStructSimple(getBuffer(), 4); }
+    public StructSimpleModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); model = new FieldModelStructSimple(getBuffer(), 4); }
 
     // Get the model size
     public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }
@@ -61,7 +49,7 @@ public final class StructSimpleModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(StructSimple value)
+    public long serialize(com.chronoxor.test.StructSimple value)
     {
         long fbeBegin = createBegin();
         model.set(value);
@@ -70,12 +58,12 @@ public final class StructSimpleModel extends Model
     }
 
     // Deserialize the struct value
-    public StructSimple deserialize() { var value = new StructSimple(); deserialize(value); return value; }
-    public long deserialize(StructSimple value)
+    public com.chronoxor.test.StructSimple deserialize() { var value = new com.chronoxor.test.StructSimple(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.test.StructSimple value)
     {
         if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())
         {
-            value = new StructSimple();
+            value = new com.chronoxor.test.StructSimple();
             return 0;
         }
 
@@ -83,7 +71,7 @@ public final class StructSimpleModel extends Model
         assert (fbeFullSize >= model.fbeSize()) : "Model is broken!";
         if (fbeFullSize < model.fbeSize())
         {
-            value = new StructSimple();
+            value = new com.chronoxor.test.StructSimple();
             return 0;
         }
 

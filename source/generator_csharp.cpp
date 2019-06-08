@@ -6772,7 +6772,7 @@ std::string GeneratorCSharp::ConvertTypeName(const StructField& field)
 
 std::string GeneratorCSharp::ConvertTypeFieldName(const std::string& type, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     std::string ns = "";
     std::string t = type;
@@ -6789,7 +6789,7 @@ std::string GeneratorCSharp::ConvertTypeFieldName(const std::string& type, bool 
 
 std::string GeneratorCSharp::ConvertTypeFieldDeclaration(const StructField& field, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (field.array)
     {
@@ -6850,7 +6850,7 @@ std::string GeneratorCSharp::ConvertTypeFieldDeclaration(const StructField& fiel
 
 std::string GeneratorCSharp::ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (field.array)
     {

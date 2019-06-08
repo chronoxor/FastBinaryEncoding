@@ -7,14 +7,6 @@
 
 package com.chronoxor.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
 // Fast Binary Encoding string final model
 class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
@@ -62,7 +54,7 @@ class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        val bytes = value.toByteArray(StandardCharsets.UTF_8)
+        val bytes = value.toByteArray(java.nio.charset.StandardCharsets.UTF_8)
 
         val fbeStringSize = bytes.size.toLong()
         assert((_buffer.offset + fbeOffset + 4 + fbeStringSize) <= _buffer.size) { "Model is broken!" }

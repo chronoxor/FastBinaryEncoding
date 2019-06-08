@@ -5,18 +5,6 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public class StructNested extends StructOptional
 {
     public EnumSimple f1000 = new EnumSimple();
@@ -25,7 +13,7 @@ public class StructNested extends StructOptional
     public EnumTyped f1003 = null;
     public FlagsSimple f1004 = new FlagsSimple();
     public FlagsSimple f1005 = null;
-    public FlagsTyped f1006 = FlagsTyped.fromSet(EnumSet.of(FlagsTyped.FLAG_VALUE_2.getEnum(), FlagsTyped.FLAG_VALUE_4.getEnum(), FlagsTyped.FLAG_VALUE_6.getEnum()));
+    public FlagsTyped f1006 = FlagsTyped.fromSet(java.util.EnumSet.of(FlagsTyped.FLAG_VALUE_2.getEnum(), FlagsTyped.FLAG_VALUE_4.getEnum(), FlagsTyped.FLAG_VALUE_6.getEnum()));
     public FlagsTyped f1007 = null;
     public StructSimple f1008 = new StructSimple();
     public StructSimple f1009 = null;

@@ -7,60 +7,49 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructSimple field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelStructSimple(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
-    val id: FieldModelInt32 = FieldModelInt32(buffer, 4 + 4)
-    val f1: FieldModelBoolean = FieldModelBoolean(buffer, id.fbeOffset + id.fbeSize)
-    val f2: FieldModelBoolean = FieldModelBoolean(buffer, f1.fbeOffset + f1.fbeSize)
-    val f3: FieldModelByte = FieldModelByte(buffer, f2.fbeOffset + f2.fbeSize)
-    val f4: FieldModelByte = FieldModelByte(buffer, f3.fbeOffset + f3.fbeSize)
-    val f5: FieldModelChar = FieldModelChar(buffer, f4.fbeOffset + f4.fbeSize)
-    val f6: FieldModelChar = FieldModelChar(buffer, f5.fbeOffset + f5.fbeSize)
-    val f7: FieldModelWChar = FieldModelWChar(buffer, f6.fbeOffset + f6.fbeSize)
-    val f8: FieldModelWChar = FieldModelWChar(buffer, f7.fbeOffset + f7.fbeSize)
-    val f9: FieldModelInt8 = FieldModelInt8(buffer, f8.fbeOffset + f8.fbeSize)
-    val f10: FieldModelInt8 = FieldModelInt8(buffer, f9.fbeOffset + f9.fbeSize)
-    val f11: FieldModelUInt8 = FieldModelUInt8(buffer, f10.fbeOffset + f10.fbeSize)
-    val f12: FieldModelUInt8 = FieldModelUInt8(buffer, f11.fbeOffset + f11.fbeSize)
-    val f13: FieldModelInt16 = FieldModelInt16(buffer, f12.fbeOffset + f12.fbeSize)
-    val f14: FieldModelInt16 = FieldModelInt16(buffer, f13.fbeOffset + f13.fbeSize)
-    val f15: FieldModelUInt16 = FieldModelUInt16(buffer, f14.fbeOffset + f14.fbeSize)
-    val f16: FieldModelUInt16 = FieldModelUInt16(buffer, f15.fbeOffset + f15.fbeSize)
-    val f17: FieldModelInt32 = FieldModelInt32(buffer, f16.fbeOffset + f16.fbeSize)
-    val f18: FieldModelInt32 = FieldModelInt32(buffer, f17.fbeOffset + f17.fbeSize)
-    val f19: FieldModelUInt32 = FieldModelUInt32(buffer, f18.fbeOffset + f18.fbeSize)
-    val f20: FieldModelUInt32 = FieldModelUInt32(buffer, f19.fbeOffset + f19.fbeSize)
-    val f21: FieldModelInt64 = FieldModelInt64(buffer, f20.fbeOffset + f20.fbeSize)
-    val f22: FieldModelInt64 = FieldModelInt64(buffer, f21.fbeOffset + f21.fbeSize)
-    val f23: FieldModelUInt64 = FieldModelUInt64(buffer, f22.fbeOffset + f22.fbeSize)
-    val f24: FieldModelUInt64 = FieldModelUInt64(buffer, f23.fbeOffset + f23.fbeSize)
-    val f25: FieldModelFloat = FieldModelFloat(buffer, f24.fbeOffset + f24.fbeSize)
-    val f26: FieldModelFloat = FieldModelFloat(buffer, f25.fbeOffset + f25.fbeSize)
-    val f27: FieldModelDouble = FieldModelDouble(buffer, f26.fbeOffset + f26.fbeSize)
-    val f28: FieldModelDouble = FieldModelDouble(buffer, f27.fbeOffset + f27.fbeSize)
-    val f29: FieldModelDecimal = FieldModelDecimal(buffer, f28.fbeOffset + f28.fbeSize)
-    val f30: FieldModelDecimal = FieldModelDecimal(buffer, f29.fbeOffset + f29.fbeSize)
-    val f31: FieldModelString = FieldModelString(buffer, f30.fbeOffset + f30.fbeSize)
-    val f32: FieldModelString = FieldModelString(buffer, f31.fbeOffset + f31.fbeSize)
-    val f33: FieldModelTimestamp = FieldModelTimestamp(buffer, f32.fbeOffset + f32.fbeSize)
-    val f34: FieldModelTimestamp = FieldModelTimestamp(buffer, f33.fbeOffset + f33.fbeSize)
-    val f35: FieldModelTimestamp = FieldModelTimestamp(buffer, f34.fbeOffset + f34.fbeSize)
-    val f36: FieldModelUUID = FieldModelUUID(buffer, f35.fbeOffset + f35.fbeSize)
-    val f37: FieldModelUUID = FieldModelUUID(buffer, f36.fbeOffset + f36.fbeSize)
-    val f38: FieldModelUUID = FieldModelUUID(buffer, f37.fbeOffset + f37.fbeSize)
+    val id: com.chronoxor.fbe.FieldModelInt32 = com.chronoxor.fbe.FieldModelInt32(buffer, 4 + 4)
+    val f1: com.chronoxor.fbe.FieldModelBoolean = com.chronoxor.fbe.FieldModelBoolean(buffer, id.fbeOffset + id.fbeSize)
+    val f2: com.chronoxor.fbe.FieldModelBoolean = com.chronoxor.fbe.FieldModelBoolean(buffer, f1.fbeOffset + f1.fbeSize)
+    val f3: com.chronoxor.fbe.FieldModelByte = com.chronoxor.fbe.FieldModelByte(buffer, f2.fbeOffset + f2.fbeSize)
+    val f4: com.chronoxor.fbe.FieldModelByte = com.chronoxor.fbe.FieldModelByte(buffer, f3.fbeOffset + f3.fbeSize)
+    val f5: com.chronoxor.fbe.FieldModelChar = com.chronoxor.fbe.FieldModelChar(buffer, f4.fbeOffset + f4.fbeSize)
+    val f6: com.chronoxor.fbe.FieldModelChar = com.chronoxor.fbe.FieldModelChar(buffer, f5.fbeOffset + f5.fbeSize)
+    val f7: com.chronoxor.fbe.FieldModelWChar = com.chronoxor.fbe.FieldModelWChar(buffer, f6.fbeOffset + f6.fbeSize)
+    val f8: com.chronoxor.fbe.FieldModelWChar = com.chronoxor.fbe.FieldModelWChar(buffer, f7.fbeOffset + f7.fbeSize)
+    val f9: com.chronoxor.fbe.FieldModelInt8 = com.chronoxor.fbe.FieldModelInt8(buffer, f8.fbeOffset + f8.fbeSize)
+    val f10: com.chronoxor.fbe.FieldModelInt8 = com.chronoxor.fbe.FieldModelInt8(buffer, f9.fbeOffset + f9.fbeSize)
+    val f11: com.chronoxor.fbe.FieldModelUInt8 = com.chronoxor.fbe.FieldModelUInt8(buffer, f10.fbeOffset + f10.fbeSize)
+    val f12: com.chronoxor.fbe.FieldModelUInt8 = com.chronoxor.fbe.FieldModelUInt8(buffer, f11.fbeOffset + f11.fbeSize)
+    val f13: com.chronoxor.fbe.FieldModelInt16 = com.chronoxor.fbe.FieldModelInt16(buffer, f12.fbeOffset + f12.fbeSize)
+    val f14: com.chronoxor.fbe.FieldModelInt16 = com.chronoxor.fbe.FieldModelInt16(buffer, f13.fbeOffset + f13.fbeSize)
+    val f15: com.chronoxor.fbe.FieldModelUInt16 = com.chronoxor.fbe.FieldModelUInt16(buffer, f14.fbeOffset + f14.fbeSize)
+    val f16: com.chronoxor.fbe.FieldModelUInt16 = com.chronoxor.fbe.FieldModelUInt16(buffer, f15.fbeOffset + f15.fbeSize)
+    val f17: com.chronoxor.fbe.FieldModelInt32 = com.chronoxor.fbe.FieldModelInt32(buffer, f16.fbeOffset + f16.fbeSize)
+    val f18: com.chronoxor.fbe.FieldModelInt32 = com.chronoxor.fbe.FieldModelInt32(buffer, f17.fbeOffset + f17.fbeSize)
+    val f19: com.chronoxor.fbe.FieldModelUInt32 = com.chronoxor.fbe.FieldModelUInt32(buffer, f18.fbeOffset + f18.fbeSize)
+    val f20: com.chronoxor.fbe.FieldModelUInt32 = com.chronoxor.fbe.FieldModelUInt32(buffer, f19.fbeOffset + f19.fbeSize)
+    val f21: com.chronoxor.fbe.FieldModelInt64 = com.chronoxor.fbe.FieldModelInt64(buffer, f20.fbeOffset + f20.fbeSize)
+    val f22: com.chronoxor.fbe.FieldModelInt64 = com.chronoxor.fbe.FieldModelInt64(buffer, f21.fbeOffset + f21.fbeSize)
+    val f23: com.chronoxor.fbe.FieldModelUInt64 = com.chronoxor.fbe.FieldModelUInt64(buffer, f22.fbeOffset + f22.fbeSize)
+    val f24: com.chronoxor.fbe.FieldModelUInt64 = com.chronoxor.fbe.FieldModelUInt64(buffer, f23.fbeOffset + f23.fbeSize)
+    val f25: com.chronoxor.fbe.FieldModelFloat = com.chronoxor.fbe.FieldModelFloat(buffer, f24.fbeOffset + f24.fbeSize)
+    val f26: com.chronoxor.fbe.FieldModelFloat = com.chronoxor.fbe.FieldModelFloat(buffer, f25.fbeOffset + f25.fbeSize)
+    val f27: com.chronoxor.fbe.FieldModelDouble = com.chronoxor.fbe.FieldModelDouble(buffer, f26.fbeOffset + f26.fbeSize)
+    val f28: com.chronoxor.fbe.FieldModelDouble = com.chronoxor.fbe.FieldModelDouble(buffer, f27.fbeOffset + f27.fbeSize)
+    val f29: com.chronoxor.fbe.FieldModelDecimal = com.chronoxor.fbe.FieldModelDecimal(buffer, f28.fbeOffset + f28.fbeSize)
+    val f30: com.chronoxor.fbe.FieldModelDecimal = com.chronoxor.fbe.FieldModelDecimal(buffer, f29.fbeOffset + f29.fbeSize)
+    val f31: com.chronoxor.fbe.FieldModelString = com.chronoxor.fbe.FieldModelString(buffer, f30.fbeOffset + f30.fbeSize)
+    val f32: com.chronoxor.fbe.FieldModelString = com.chronoxor.fbe.FieldModelString(buffer, f31.fbeOffset + f31.fbeSize)
+    val f33: com.chronoxor.fbe.FieldModelTimestamp = com.chronoxor.fbe.FieldModelTimestamp(buffer, f32.fbeOffset + f32.fbeSize)
+    val f34: com.chronoxor.fbe.FieldModelTimestamp = com.chronoxor.fbe.FieldModelTimestamp(buffer, f33.fbeOffset + f33.fbeSize)
+    val f35: com.chronoxor.fbe.FieldModelTimestamp = com.chronoxor.fbe.FieldModelTimestamp(buffer, f34.fbeOffset + f34.fbeSize)
+    val f36: com.chronoxor.fbe.FieldModelUUID = com.chronoxor.fbe.FieldModelUUID(buffer, f35.fbeOffset + f35.fbeSize)
+    val f37: com.chronoxor.fbe.FieldModelUUID = com.chronoxor.fbe.FieldModelUUID(buffer, f36.fbeOffset + f36.fbeSize)
+    val f38: com.chronoxor.fbe.FieldModelUUID = com.chronoxor.fbe.FieldModelUUID(buffer, f37.fbeOffset + f37.fbeSize)
     val f39: com.chronoxor.proto.fbe.FieldModelOrderSide = com.chronoxor.proto.fbe.FieldModelOrderSide(buffer, f38.fbeOffset + f38.fbeSize)
     val f40: com.chronoxor.proto.fbe.FieldModelOrderType = com.chronoxor.proto.fbe.FieldModelOrderType(buffer, f39.fbeOffset + f39.fbeSize)
     val f41: com.chronoxor.proto.fbe.FieldModelOrder = com.chronoxor.proto.fbe.FieldModelOrder(buffer, f40.fbeOffset + f40.fbeSize)
@@ -523,7 +512,7 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Get the struct value
-    fun get(fbeValue: StructSimple = StructSimple()): StructSimple
+    fun get(fbeValue: com.chronoxor.test.StructSimple = com.chronoxor.test.StructSimple()): com.chronoxor.test.StructSimple
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -537,7 +526,7 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructSimple, fbeStructSize: Long)
+    fun getFields(fbeValue: com.chronoxor.test.StructSimple, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
 
@@ -718,13 +707,13 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         if ((fbeCurrentSize + f29.fbeSize) <= fbeStructSize)
             fbeValue.f29 = f29.get()
         else
-            fbeValue.f29 = BigDecimal.valueOf(0L)
+            fbeValue.f29 = java.math.BigDecimal.valueOf(0L)
         fbeCurrentSize += f29.fbeSize
 
         if ((fbeCurrentSize + f30.fbeSize) <= fbeStructSize)
-            fbeValue.f30 = f30.get(BigDecimal.valueOf(123456.123456))
+            fbeValue.f30 = f30.get(java.math.BigDecimal.valueOf(123456.123456))
         else
-            fbeValue.f30 = BigDecimal.valueOf(123456.123456)
+            fbeValue.f30 = java.math.BigDecimal.valueOf(123456.123456)
         fbeCurrentSize += f30.fbeSize
 
         if ((fbeCurrentSize + f31.fbeSize) <= fbeStructSize)
@@ -742,19 +731,19 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         if ((fbeCurrentSize + f33.fbeSize) <= fbeStructSize)
             fbeValue.f33 = f33.get()
         else
-            fbeValue.f33 = Instant.EPOCH
+            fbeValue.f33 = java.time.Instant.EPOCH
         fbeCurrentSize += f33.fbeSize
 
         if ((fbeCurrentSize + f34.fbeSize) <= fbeStructSize)
-            fbeValue.f34 = f34.get(Instant.EPOCH)
+            fbeValue.f34 = f34.get(java.time.Instant.EPOCH)
         else
-            fbeValue.f34 = Instant.EPOCH
+            fbeValue.f34 = java.time.Instant.EPOCH
         fbeCurrentSize += f34.fbeSize
 
         if ((fbeCurrentSize + f35.fbeSize) <= fbeStructSize)
-            fbeValue.f35 = f35.get(Instant.now())
+            fbeValue.f35 = f35.get(java.time.Instant.now())
         else
-            fbeValue.f35 = Instant.now()
+            fbeValue.f35 = java.time.Instant.now()
         fbeCurrentSize += f35.fbeSize
 
         if ((fbeCurrentSize + f36.fbeSize) <= fbeStructSize)
@@ -770,9 +759,9 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         fbeCurrentSize += f37.fbeSize
 
         if ((fbeCurrentSize + f38.fbeSize) <= fbeStructSize)
-            fbeValue.f38 = f38.get(UUID.fromString("123e4567-e89b-12d3-a456-426655440000"))
+            fbeValue.f38 = f38.get(java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000"))
         else
-            fbeValue.f38 = UUID.fromString("123e4567-e89b-12d3-a456-426655440000")
+            fbeValue.f38 = java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000")
         fbeCurrentSize += f38.fbeSize
 
         if ((fbeCurrentSize + f39.fbeSize) <= fbeStructSize)
@@ -840,7 +829,7 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Set the struct value
-    fun set(fbeValue: StructSimple)
+    fun set(fbeValue: com.chronoxor.test.StructSimple)
     {
         val fbeBegin = setBegin()
         if (fbeBegin == 0L)
@@ -852,7 +841,7 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructSimple)
+    fun setFields(fbeValue: com.chronoxor.test.StructSimple)
     {
         id.set(fbeValue.id)
         f1.set(fbeValue.f1)

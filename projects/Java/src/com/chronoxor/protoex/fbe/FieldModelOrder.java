@@ -5,41 +5,29 @@
 
 package com.chronoxor.protoex.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.protoex.*;
-
 // Fast Binary Encoding Order field model
-public final class FieldModelOrder extends FieldModel
+public final class FieldModelOrder extends com.chronoxor.fbe.FieldModel
 {
-    public final FieldModelInt32 id;
-    public final FieldModelString symbol;
+    public final com.chronoxor.fbe.FieldModelInt32 id;
+    public final com.chronoxor.fbe.FieldModelString symbol;
     public final FieldModelOrderSide side;
     public final FieldModelOrderType type;
-    public final FieldModelDouble price;
-    public final FieldModelDouble volume;
-    public final FieldModelDouble tp;
-    public final FieldModelDouble sl;
+    public final com.chronoxor.fbe.FieldModelDouble price;
+    public final com.chronoxor.fbe.FieldModelDouble volume;
+    public final com.chronoxor.fbe.FieldModelDouble tp;
+    public final com.chronoxor.fbe.FieldModelDouble sl;
 
-    public FieldModelOrder(Buffer buffer, long offset)
+    public FieldModelOrder(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        id = new FieldModelInt32(buffer, 4 + 4);
-        symbol = new FieldModelString(buffer, id.fbeOffset() + id.fbeSize());
+        id = new com.chronoxor.fbe.FieldModelInt32(buffer, 4 + 4);
+        symbol = new com.chronoxor.fbe.FieldModelString(buffer, id.fbeOffset() + id.fbeSize());
         side = new FieldModelOrderSide(buffer, symbol.fbeOffset() + symbol.fbeSize());
         type = new FieldModelOrderType(buffer, side.fbeOffset() + side.fbeSize());
-        price = new FieldModelDouble(buffer, type.fbeOffset() + type.fbeSize());
-        volume = new FieldModelDouble(buffer, price.fbeOffset() + price.fbeSize());
-        tp = new FieldModelDouble(buffer, volume.fbeOffset() + volume.fbeSize());
-        sl = new FieldModelDouble(buffer, tp.fbeOffset() + tp.fbeSize());
+        price = new com.chronoxor.fbe.FieldModelDouble(buffer, type.fbeOffset() + type.fbeSize());
+        volume = new com.chronoxor.fbe.FieldModelDouble(buffer, price.fbeOffset() + price.fbeSize());
+        tp = new com.chronoxor.fbe.FieldModelDouble(buffer, volume.fbeOffset() + volume.fbeSize());
+        sl = new com.chronoxor.fbe.FieldModelDouble(buffer, tp.fbeOffset() + tp.fbeSize());
     }
 
     // Get the field size
@@ -201,8 +189,8 @@ public final class FieldModelOrder extends FieldModel
     }
 
     // Get the struct value
-    public Order get() { return get(new Order()); }
-    public Order get(Order fbeValue)
+    public com.chronoxor.protoex.Order get() { return get(new com.chronoxor.protoex.Order()); }
+    public com.chronoxor.protoex.Order get(com.chronoxor.protoex.Order fbeValue)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
@@ -215,7 +203,7 @@ public final class FieldModelOrder extends FieldModel
     }
 
     // Get the struct fields values
-    public void getFields(Order fbeValue, long fbeStructSize)
+    public void getFields(com.chronoxor.protoex.Order fbeValue, long fbeStructSize)
     {
         long fbeCurrentSize = 4 + 4;
 
@@ -234,13 +222,13 @@ public final class FieldModelOrder extends FieldModel
         if ((fbeCurrentSize + side.fbeSize()) <= fbeStructSize)
             fbeValue.side = side.get();
         else
-            fbeValue.side = new OrderSide();
+            fbeValue.side = new com.chronoxor.protoex.OrderSide();
         fbeCurrentSize += side.fbeSize();
 
         if ((fbeCurrentSize + type.fbeSize()) <= fbeStructSize)
             fbeValue.type = type.get();
         else
-            fbeValue.type = new OrderType();
+            fbeValue.type = new com.chronoxor.protoex.OrderType();
         fbeCurrentSize += type.fbeSize();
 
         if ((fbeCurrentSize + price.fbeSize()) <= fbeStructSize)
@@ -296,7 +284,7 @@ public final class FieldModelOrder extends FieldModel
     }
 
     // Set the struct value
-    public void set(Order fbeValue)
+    public void set(com.chronoxor.protoex.Order fbeValue)
     {
         long fbeBegin = setBegin();
         if (fbeBegin == 0)
@@ -307,7 +295,7 @@ public final class FieldModelOrder extends FieldModel
     }
 
     // Set the struct fields values
-    public void setFields(Order fbeValue)
+    public void setFields(com.chronoxor.protoex.Order fbeValue)
     {
         id.set(fbeValue.id);
         symbol.set(fbeValue.symbol);

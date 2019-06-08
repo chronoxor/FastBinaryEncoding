@@ -7,31 +7,18 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
-import com.google.gson.*
-
-class FlagsTypedJson : JsonSerializer<FlagsTyped>, JsonDeserializer<FlagsTyped>
+class FlagsTypedJson : com.google.gson.JsonSerializer<com.chronoxor.test.FlagsTyped>, com.google.gson.JsonDeserializer<com.chronoxor.test.FlagsTyped>
 {
 
     @Override
-    override fun serialize(src: FlagsTyped, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: com.chronoxor.test.FlagsTyped, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(src.raw.toLong())
+        return com.google.gson.JsonPrimitive(src.raw.toLong())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext):FlagsTyped
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext):com.chronoxor.test.FlagsTyped
     {
-        return FlagsTyped(json.asJsonPrimitive.asLong.toULong())
+        return com.chronoxor.test.FlagsTyped(json.asJsonPrimitive.asLong.toULong())
     }
 }

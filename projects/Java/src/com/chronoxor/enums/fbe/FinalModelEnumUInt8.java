@@ -5,25 +5,13 @@
 
 package com.chronoxor.enums.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.enums.*;
-
 // Fast Binary Encoding EnumUInt8 final model
-public final class FinalModelEnumUInt8 extends FinalModel
+public final class FinalModelEnumUInt8 extends com.chronoxor.fbe.FinalModel
 {
-    public FinalModelEnumUInt8(Buffer buffer, long offset) { super(buffer, offset); }
+    public FinalModelEnumUInt8(com.chronoxor.fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(EnumUInt8 value) { return fbeSize(); }
+    public long fbeAllocationSize(com.chronoxor.enums.EnumUInt8 value) { return fbeSize(); }
 
     // Get the final size
     @Override
@@ -40,17 +28,17 @@ public final class FinalModelEnumUInt8 extends FinalModel
     }
 
     // Get the value
-    public EnumUInt8 get(Size size)
+    public com.chronoxor.enums.EnumUInt8 get(com.chronoxor.fbe.Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
-            return new EnumUInt8();
+            return new com.chronoxor.enums.EnumUInt8();
 
         size.value = fbeSize();
-        return new EnumUInt8(readInt8(fbeOffset()));
+        return new com.chronoxor.enums.EnumUInt8(readInt8(fbeOffset()));
     }
 
     // Set the value
-    public long set(EnumUInt8 value)
+    public long set(com.chronoxor.enums.EnumUInt8 value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

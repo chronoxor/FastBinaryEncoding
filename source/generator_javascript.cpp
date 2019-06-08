@@ -11216,7 +11216,7 @@ std::string GeneratorJavaScript::ConvertTypeName(const StructField& field)
 
 std::string GeneratorJavaScript::ConvertTypeFieldName(const std::string& type, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (type == "bool")
         return "fbe." + modelType + "ModelBool";
@@ -11272,7 +11272,7 @@ std::string GeneratorJavaScript::ConvertTypeFieldName(const std::string& type, b
 
 std::string GeneratorJavaScript::ConvertTypeFieldDeclaration(const StructField& field, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (field.array)
         return "fbe." + modelType + "ModelArray";
@@ -11290,7 +11290,7 @@ std::string GeneratorJavaScript::ConvertTypeFieldDeclaration(const StructField& 
 
 std::string GeneratorJavaScript::ConvertTypeFieldInitialization(const std::string& type, bool optional, const std::string& offset, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (optional)
         return "fbe." + modelType + "ModelOptional(new " + ConvertTypeFieldInitialization(type, false, offset, final)+ ", buffer, " + offset + ")";
@@ -11300,7 +11300,7 @@ std::string GeneratorJavaScript::ConvertTypeFieldInitialization(const std::strin
 
 std::string GeneratorJavaScript::ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (field.array)
         return "fbe." + modelType + "ModelArray(new " + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", buffer, " + offset + ", " + std::to_string(field.N) + ")";

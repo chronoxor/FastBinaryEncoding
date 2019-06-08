@@ -7,19 +7,8 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding optional protoState field model
-class FieldModelOptionalprotoState(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelOptionalprotoState(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     // Field size
     override val fbeSize: Long = 1 + 4

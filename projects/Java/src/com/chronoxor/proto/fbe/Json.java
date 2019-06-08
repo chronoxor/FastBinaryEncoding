@@ -5,41 +5,27 @@
 
 package com.chronoxor.proto.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
-import com.google.gson.*;
-
 // Fast Binary Encoding proto JSON engine
 public final class Json
 {
-    private static final Gson _engine;
+    private static final com.google.gson.Gson _engine;
 
     // Get the JSON engine
-    public static Gson getEngine() { return _engine; }
+    public static com.google.gson.Gson getEngine() { return _engine; }
 
     static
     {
-        _engine = register(new GsonBuilder()).create();
+        _engine = register(new com.google.gson.GsonBuilder()).create();
     }
 
     private Json() {}
 
-    public static GsonBuilder register(GsonBuilder builder)
+    public static com.google.gson.GsonBuilder register(com.google.gson.GsonBuilder builder)
     {
         com.chronoxor.fbe.Json.register(builder);
-        builder.registerTypeAdapter(OrderSide.class, new OrderSideJson());
-        builder.registerTypeAdapter(OrderType.class, new OrderTypeJson());
-        builder.registerTypeAdapter(State.class, new StateJson());
+        builder.registerTypeAdapter(com.chronoxor.proto.OrderSide.class, new OrderSideJson());
+        builder.registerTypeAdapter(com.chronoxor.proto.OrderType.class, new OrderTypeJson());
+        builder.registerTypeAdapter(com.chronoxor.proto.State.class, new StateJson());
         return builder;
     }
 }

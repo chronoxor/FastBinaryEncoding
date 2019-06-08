@@ -5127,7 +5127,7 @@ std::string GeneratorPython::ConvertTypeName(const StructField& field)
 
 std::string GeneratorPython::ConvertTypeFieldName(const std::string& type, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (type == "bool")
         return "fbe." + modelType + "ModelBool";
@@ -5183,7 +5183,7 @@ std::string GeneratorPython::ConvertTypeFieldName(const std::string& type, bool 
 
 std::string GeneratorPython::ConvertTypeFieldInitialization(const std::string& type, bool optional, const std::string& offset, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (optional)
         return "fbe." + modelType + "ModelOptional(" + ConvertTypeFieldInitialization(type, false, offset, final)+ ", buffer, " + offset + ")";
@@ -5193,7 +5193,7 @@ std::string GeneratorPython::ConvertTypeFieldInitialization(const std::string& t
 
 std::string GeneratorPython::ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (field.array)
         return "fbe." + modelType + "ModelArray(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", buffer, " + offset + ", " + std::to_string(field.N) + ")";

@@ -7,21 +7,10 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding Byte vector field model
-class FieldModelVectorByte(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelVectorByte(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
-    private val _model = FieldModelByte(buffer, offset)
+    private val _model = com.chronoxor.fbe.FieldModelByte(buffer, offset)
 
     // Field size
     override val fbeSize: Long = 4
@@ -72,7 +61,7 @@ class FieldModelVectorByte(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     }
 
     // Vector index operator
-    fun getItem(index: Long): FieldModelByte
+    fun getItem(index: Long): com.chronoxor.fbe.FieldModelByte
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
 
@@ -88,7 +77,7 @@ class FieldModelVectorByte(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     }
 
     // Resize the vector and get its first model
-    fun resize(size: Long): FieldModelByte
+    fun resize(size: Long): com.chronoxor.fbe.FieldModelByte
     {
         val fbeVectorSize = size * _model.fbeSize
         val fbeVectorOffset = _buffer.allocate(4 + fbeVectorSize) - _buffer.offset
@@ -129,8 +118,8 @@ class FieldModelVectorByte(buffer: Buffer, offset: Long) : FieldModel(buffer, of
         return true
     }
 
-    // Get the vector as ArrayList
-    operator fun get(values: ArrayList<Byte>)
+    // Get the vector as java.util.ArrayList
+    operator fun get(values: java.util.ArrayList<Byte>)
     {
         values.clear()
 
@@ -150,8 +139,8 @@ class FieldModelVectorByte(buffer: Buffer, offset: Long) : FieldModel(buffer, of
         }
     }
 
-    // Get the vector as LinkedList
-    operator fun get(values: LinkedList<Byte>)
+    // Get the vector as java.util.LinkedList
+    operator fun get(values: java.util.LinkedList<Byte>)
     {
         values.clear()
 
@@ -169,8 +158,8 @@ class FieldModelVectorByte(buffer: Buffer, offset: Long) : FieldModel(buffer, of
         }
     }
 
-    // Get the vector as HashSet
-    operator fun get(values: HashSet<Byte>)
+    // Get the vector as java.util.HashSet
+    operator fun get(values: java.util.HashSet<Byte>)
     {
         values.clear()
 
@@ -188,8 +177,8 @@ class FieldModelVectorByte(buffer: Buffer, offset: Long) : FieldModel(buffer, of
         }
     }
 
-    // Set the vector as ArrayList
-    fun set(values: ArrayList<Byte>)
+    // Set the vector as java.util.ArrayList
+    fun set(values: java.util.ArrayList<Byte>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -203,8 +192,8 @@ class FieldModelVectorByte(buffer: Buffer, offset: Long) : FieldModel(buffer, of
         }
     }
 
-    // Set the vector as LinkedList
-    fun set(values: LinkedList<Byte>)
+    // Set the vector as java.util.LinkedList
+    fun set(values: java.util.LinkedList<Byte>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -218,8 +207,8 @@ class FieldModelVectorByte(buffer: Buffer, offset: Long) : FieldModel(buffer, of
         }
     }
 
-    // Set the vector as HashSet
-    fun set(values: HashSet<Byte>)
+    // Set the vector as java.util.HashSet
+    fun set(values: java.util.HashSet<Byte>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

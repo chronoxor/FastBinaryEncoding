@@ -7,22 +7,14 @@
 
 package com.chronoxor.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-// Fast Binary Encoding UUID field model
+// Fast Binary Encoding java.util.UUID field model
 class FieldModelUUID(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size
     override val fbeSize: Long = 16
 
     // Get the value
-    fun get(defaults: UUID = UUIDGenerator.nil()): UUID
+    fun get(defaults: java.util.UUID = UUIDGenerator.nil()): java.util.UUID
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
@@ -31,7 +23,7 @@ class FieldModelUUID(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Set the value
-    fun set(value: UUID)
+    fun set(value: java.util.UUID)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

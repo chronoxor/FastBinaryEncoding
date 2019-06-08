@@ -5,20 +5,8 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructOptional final model
-public final class FinalModelStructOptional extends FinalModel
+public final class FinalModelStructOptional extends com.chronoxor.fbe.FinalModel
 {
     public final FinalModelStructSimple parent;
     public final FinalModelOptionalBoolean f100;
@@ -88,7 +76,7 @@ public final class FinalModelStructOptional extends FinalModel
     public final FinalModelOptionalprotoAccount f164;
     public final FinalModelOptionalprotoAccount f165;
 
-    public FinalModelStructOptional(Buffer buffer, long offset)
+    public FinalModelStructOptional(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         parent = new FinalModelStructSimple(buffer, 0);
@@ -161,7 +149,7 @@ public final class FinalModelStructOptional extends FinalModel
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(StructOptional fbeValue)
+    public long fbeAllocationSize(com.chronoxor.test.StructOptional fbeValue)
     {
         long fbeResult = 0
             + parent.fbeAllocationSize(fbeValue)
@@ -661,8 +649,8 @@ public final class FinalModelStructOptional extends FinalModel
     }
 
     // Get the struct value
-    public StructOptional get(Size fbeSize) { return get(fbeSize, new StructOptional()); }
-    public StructOptional get(Size fbeSize, StructOptional fbeValue)
+    public com.chronoxor.test.StructOptional get(com.chronoxor.fbe.Size fbeSize) { return get(fbeSize, new com.chronoxor.test.StructOptional()); }
+    public com.chronoxor.test.StructOptional get(com.chronoxor.fbe.Size fbeSize, com.chronoxor.test.StructOptional fbeValue)
     {
         _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
@@ -671,11 +659,11 @@ public final class FinalModelStructOptional extends FinalModel
     }
 
     // Get the struct fields values
-    public long getFields(StructOptional fbeValue)
+    public long getFields(com.chronoxor.test.StructOptional fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size(0);
 
         parent.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = parent.getFields(fbeValue);
@@ -1016,7 +1004,7 @@ public final class FinalModelStructOptional extends FinalModel
     }
 
     // Set the struct value
-    public long set(StructOptional fbeValue)
+    public long set(com.chronoxor.test.StructOptional fbeValue)
     {
         _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
@@ -1025,11 +1013,11 @@ public final class FinalModelStructOptional extends FinalModel
     }
 
     // Set the struct fields values
-    public long setFields(StructOptional fbeValue)
+    public long setFields(com.chronoxor.test.StructOptional fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size();
 
         parent.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = parent.setFields(fbeValue);

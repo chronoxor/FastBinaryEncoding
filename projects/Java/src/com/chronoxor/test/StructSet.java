@@ -5,28 +5,16 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public class StructSet implements Comparable<Object>
 {
-    public HashSet<Byte> f1 = new HashSet<Byte>();
-    public HashSet<EnumSimple> f2 = new HashSet<EnumSimple>();
-    public HashSet<FlagsSimple> f3 = new HashSet<FlagsSimple>();
-    public HashSet<StructSimple> f4 = new HashSet<StructSimple>();
+    public java.util.HashSet<Byte> f1 = new java.util.HashSet<Byte>();
+    public java.util.HashSet<EnumSimple> f2 = new java.util.HashSet<EnumSimple>();
+    public java.util.HashSet<FlagsSimple> f3 = new java.util.HashSet<FlagsSimple>();
+    public java.util.HashSet<StructSimple> f4 = new java.util.HashSet<StructSimple>();
 
     public StructSet() {}
 
-    public StructSet(HashSet<Byte> f1, HashSet<EnumSimple> f2, HashSet<FlagsSimple> f3, HashSet<StructSimple> f4)
+    public StructSet(java.util.HashSet<Byte> f1, java.util.HashSet<EnumSimple> f2, java.util.HashSet<FlagsSimple> f3, java.util.HashSet<StructSimple> f4)
     {
         this.f1 = f1;
         this.f2 = f2;

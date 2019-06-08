@@ -5,39 +5,27 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding FlagsEmpty field model
-public final class FieldModelFlagsEmpty extends FieldModel
+public final class FieldModelFlagsEmpty extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelFlagsEmpty(Buffer buffer, long offset) { super(buffer, offset); }
+    public FieldModelFlagsEmpty(com.chronoxor.fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the field size
     @Override
     public long fbeSize() { return 4; }
 
     // Get the value
-    public FlagsEmpty get() { return get(new FlagsEmpty()); }
-    public FlagsEmpty get(FlagsEmpty defaults)
+    public com.chronoxor.test.FlagsEmpty get() { return get(new com.chronoxor.test.FlagsEmpty()); }
+    public com.chronoxor.test.FlagsEmpty get(com.chronoxor.test.FlagsEmpty defaults)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return new FlagsEmpty(readInt32(fbeOffset()));
+        return new com.chronoxor.test.FlagsEmpty(readInt32(fbeOffset()));
     }
 
     // Set the value
-    public void set(FlagsEmpty value)
+    public void set(com.chronoxor.test.FlagsEmpty value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

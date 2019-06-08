@@ -7,19 +7,8 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding optional Decimal field model
-class FieldModelOptionalDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelOptionalDecimal(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     // Field size
     override val fbeSize: Long = 1 + 4
@@ -51,7 +40,7 @@ class FieldModelOptionalDecimal(buffer: Buffer, offset: Long) : FieldModel(buffe
     }
 
     // Base field model value
-    val value = FieldModelDecimal(buffer, 0)
+    val value = com.chronoxor.fbe.FieldModelDecimal(buffer, 0)
 
     // Check if the optional value is valid
     override fun verify(): Boolean
@@ -95,7 +84,7 @@ class FieldModelOptionalDecimal(buffer: Buffer, offset: Long) : FieldModel(buffe
     }
 
     // Get the optional value
-    fun get(defaults: BigDecimal? = null): BigDecimal?
+    fun get(defaults: java.math.BigDecimal? = null): java.math.BigDecimal?
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -137,7 +126,7 @@ class FieldModelOptionalDecimal(buffer: Buffer, offset: Long) : FieldModel(buffe
     }
 
     // Set the optional value
-    fun set(optional: BigDecimal?)
+    fun set(optional: java.math.BigDecimal?)
     {
         val fbeBegin = setBegin(optional != null)
         if (fbeBegin == 0L)

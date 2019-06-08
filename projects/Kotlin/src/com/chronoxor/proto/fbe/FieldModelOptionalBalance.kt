@@ -7,19 +7,8 @@
 
 package com.chronoxor.proto.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 // Fast Binary Encoding optional Balance field model
-class FieldModelOptionalBalance(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelOptionalBalance(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     // Field size
     override val fbeSize: Long = 1 + 4
@@ -95,7 +84,7 @@ class FieldModelOptionalBalance(buffer: Buffer, offset: Long) : FieldModel(buffe
     }
 
     // Get the optional value
-    fun get(defaults: Balance? = null): Balance?
+    fun get(defaults: com.chronoxor.proto.Balance? = null): com.chronoxor.proto.Balance?
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -137,7 +126,7 @@ class FieldModelOptionalBalance(buffer: Buffer, offset: Long) : FieldModel(buffe
     }
 
     // Set the optional value
-    fun set(optional: Balance?)
+    fun set(optional: com.chronoxor.proto.Balance?)
     {
         val fbeBegin = setBegin(optional != null)
         if (fbeBegin == 0L)

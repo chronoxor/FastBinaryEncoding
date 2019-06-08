@@ -7,38 +7,27 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding Bytes vector final model
-class FinalModelVectorBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelVectorBytes(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
-    private val _model = FinalModelBytes(buffer, offset)
+    private val _model = com.chronoxor.fbe.FinalModelBytes(buffer, offset)
 
     // Get the allocation size
-    fun fbeAllocationSize(values: ArrayList<ByteArray>): Long
+    fun fbeAllocationSize(values: java.util.ArrayList<ByteArray>): Long
     {
         var size: Long = 4
         for (value in values)
             size += _model.fbeAllocationSize(value)
         return size
     }
-    fun fbeAllocationSize(values: LinkedList<ByteArray>): Long
+    fun fbeAllocationSize(values: java.util.LinkedList<ByteArray>): Long
     {
         var size: Long = 4
         for (value in values)
             size += _model.fbeAllocationSize(value)
         return size
     }
-    fun fbeAllocationSize(values: HashSet<ByteArray>): Long
+    fun fbeAllocationSize(values: java.util.HashSet<ByteArray>): Long
     {
         var size: Long = 4
         for (value in values)
@@ -68,8 +57,8 @@ class FinalModelVectorBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, o
         return size
     }
 
-    // Get the vector as ArrayList
-    fun get(values: ArrayList<ByteArray>): Long
+    // Get the vector as java.util.ArrayList
+    fun get(values: java.util.ArrayList<ByteArray>): Long
     {
         values.clear()
 
@@ -84,7 +73,7 @@ class FinalModelVectorBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, o
         values.ensureCapacity(fbeVectorSize.toInt())
 
         var size: Long = 4
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _model.fbeOffset = fbeOffset + 4
         for (i in 0 until fbeVectorSize)
         {
@@ -97,8 +86,8 @@ class FinalModelVectorBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, o
         return size
     }
 
-    // Get the vector as LinkedList
-    fun get(values: LinkedList<ByteArray>): Long
+    // Get the vector as java.util.LinkedList
+    fun get(values: java.util.LinkedList<ByteArray>): Long
     {
         values.clear()
 
@@ -111,7 +100,7 @@ class FinalModelVectorBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, o
             return 4
 
         var size: Long = 4
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _model.fbeOffset = fbeOffset + 4
         for (i in 0 until fbeVectorSize)
         {
@@ -124,8 +113,8 @@ class FinalModelVectorBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, o
         return size
     }
 
-    // Get the vector as HashSet
-    fun get(values: HashSet<ByteArray>): Long
+    // Get the vector as java.util.HashSet
+    fun get(values: java.util.HashSet<ByteArray>): Long
     {
         values.clear()
 
@@ -138,7 +127,7 @@ class FinalModelVectorBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, o
             return 4
 
         var size: Long = 4
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _model.fbeOffset = fbeOffset + 4
         for (i in 0 until fbeVectorSize)
         {
@@ -151,8 +140,8 @@ class FinalModelVectorBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, o
         return size
     }
 
-    // Set the vector as ArrayList
-    fun set(values: ArrayList<ByteArray>): Long
+    // Set the vector as java.util.ArrayList
+    fun set(values: java.util.ArrayList<ByteArray>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
@@ -171,8 +160,8 @@ class FinalModelVectorBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, o
         return size
     }
 
-    // Set the vector as LinkedList
-    fun set(values: LinkedList<ByteArray>): Long
+    // Set the vector as java.util.LinkedList
+    fun set(values: java.util.LinkedList<ByteArray>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
@@ -191,8 +180,8 @@ class FinalModelVectorBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, o
         return size
     }
 
-    // Set the vector as HashSet
-    fun set(values: HashSet<ByteArray>): Long
+    // Set the vector as java.util.HashSet
+    fun set(values: java.util.HashSet<ByteArray>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)

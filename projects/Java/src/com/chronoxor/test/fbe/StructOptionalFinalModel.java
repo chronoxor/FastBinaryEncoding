@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructOptional final model
-public final class StructOptionalFinalModel extends Model
+public final class StructOptionalFinalModel extends com.chronoxor.fbe.Model
 {
     private final FinalModelStructOptional _model;
 
     public StructOptionalFinalModel() { _model = new FinalModelStructOptional(getBuffer(), 8); }
-    public StructOptionalFinalModel(Buffer buffer) { super(buffer); _model = new FinalModelStructOptional(getBuffer(), 8); }
+    public StructOptionalFinalModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); _model = new FinalModelStructOptional(getBuffer(), 8); }
 
     // Get the model type
     public static final long fbeTypeConst = FinalModelStructOptional.fbeTypeConst;
@@ -44,7 +32,7 @@ public final class StructOptionalFinalModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(StructOptional value)
+    public long serialize(com.chronoxor.test.StructOptional value)
     {
         long fbeInitialSize = getBuffer().getSize();
 
@@ -65,8 +53,8 @@ public final class StructOptionalFinalModel extends Model
     }
 
     // Deserialize the struct value
-    public StructOptional deserialize() { var value = new StructOptional(); deserialize(value); return value; }
-    public long deserialize(StructOptional value)
+    public com.chronoxor.test.StructOptional deserialize() { var value = new com.chronoxor.test.StructOptional(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.test.StructOptional value)
     {
         assert ((getBuffer().getOffset() + _model.fbeOffset()) <= getBuffer().getSize()) : "Model is broken!";
         if ((getBuffer().getOffset() + _model.fbeOffset()) > getBuffer().getSize())
@@ -78,7 +66,7 @@ public final class StructOptionalFinalModel extends Model
         if ((fbeStructSize <= 0) || (fbeStructType != fbeType()))
             return 8;
 
-        var fbeSize = new Size(0);
+        var fbeSize = new com.chronoxor.fbe.Size();
         value = _model.get(fbeSize, value);
         return 8 + fbeSize.value;
     }

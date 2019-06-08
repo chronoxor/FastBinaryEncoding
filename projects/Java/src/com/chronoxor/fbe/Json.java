@@ -5,118 +5,107 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.google.gson.*;
-
-final class ByteBufferJson implements JsonSerializer<ByteBuffer>, JsonDeserializer<ByteBuffer>
+final class ByteBufferJson implements com.google.gson.JsonSerializer<java.nio.ByteBuffer>, com.google.gson.JsonDeserializer<java.nio.ByteBuffer>
 {
     @Override
-    public JsonElement serialize(ByteBuffer src, Type typeOfSrc, JsonSerializationContext context)
+    public com.google.gson.JsonElement serialize(java.nio.ByteBuffer src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
-        return new JsonPrimitive(Base64.getEncoder().encodeToString(src.array()));
+        return new com.google.gson.JsonPrimitive(java.util.Base64.getEncoder().encodeToString(src.array()));
     }
 
     @Override
-    public ByteBuffer deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public java.nio.ByteBuffer deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
     {
-        return ByteBuffer.wrap(Base64.getDecoder().decode(json.getAsString()));
+        return java.nio.ByteBuffer.wrap(java.util.Base64.getDecoder().decode(json.getAsString()));
     }
 }
 
-final class CharacterJson implements JsonSerializer<Character>, JsonDeserializer<Character>
+final class CharacterJson implements com.google.gson.JsonSerializer<Character>, com.google.gson.JsonDeserializer<Character>
 {
     @Override
-    public JsonElement serialize(Character src, Type typeOfSrc, JsonSerializationContext context)
+    public com.google.gson.JsonElement serialize(Character src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
-        return new JsonPrimitive((long)src);
+        return new com.google.gson.JsonPrimitive((long)src);
     }
 
     @Override
-    public Character deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public Character deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
     {
         return (char)json.getAsLong();
     }
 }
 
-final class InstantJson implements JsonSerializer<Instant>, JsonDeserializer<Instant>
+final class InstantJson implements com.google.gson.JsonSerializer<java.time.Instant>, com.google.gson.JsonDeserializer<java.time.Instant>
 {
     @Override
-    public JsonElement serialize(Instant src, Type typeOfSrc, JsonSerializationContext context)
+    public com.google.gson.JsonElement serialize(java.time.Instant src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
         long nanoseconds = src.getEpochSecond() * 1000000000 + src.getNano();
-        return new JsonPrimitive(nanoseconds);
+        return new com.google.gson.JsonPrimitive(nanoseconds);
     }
 
     @Override
-    public Instant deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public java.time.Instant deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
     {
         long nanoseconds = json.getAsJsonPrimitive().getAsLong();
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
+        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
     }
 }
 
-final class BigDecimalJson implements JsonSerializer<BigDecimal>, JsonDeserializer<BigDecimal>
+final class BigDecimalJson implements com.google.gson.JsonSerializer<java.math.BigDecimal>, com.google.gson.JsonDeserializer<java.math.BigDecimal>
 {
     @Override
-    public JsonElement serialize(BigDecimal src, Type typeOfSrc, JsonSerializationContext context)
+    public com.google.gson.JsonElement serialize(java.math.BigDecimal src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
-        return new JsonPrimitive(src.toPlainString());
+        return new com.google.gson.JsonPrimitive(src.toPlainString());
     }
 
     @Override
-    public BigDecimal deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public java.math.BigDecimal deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
     {
-        return new BigDecimal(json.getAsJsonPrimitive().getAsString());
+        return new java.math.BigDecimal(json.getAsJsonPrimitive().getAsString());
     }
 }
 
-final class UUIDJson implements JsonSerializer<UUID>, JsonDeserializer<UUID>
+final class UUIDJson implements com.google.gson.JsonSerializer<java.util.UUID>, com.google.gson.JsonDeserializer<java.util.UUID>
 {
     @Override
-    public JsonElement serialize(UUID src, Type typeOfSrc, JsonSerializationContext context)
+    public com.google.gson.JsonElement serialize(java.util.UUID src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
-        return new JsonPrimitive(src.toString());
+        return new com.google.gson.JsonPrimitive(src.toString());
     }
 
     @Override
-    public UUID deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public java.util.UUID deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
     {
-        return UUID.fromString(json.getAsJsonPrimitive().getAsString());
+        return java.util.UUID.fromString(json.getAsJsonPrimitive().getAsString());
     }
 }
 
 // Fast Binary Encoding base JSON engine
 public final class Json
 {
-    private static final Gson _engine;
+    private static final com.google.gson.Gson _engine;
 
     // Get the JSON engine
-    public static Gson getEngine() { return _engine; }
+    public static com.google.gson.Gson getEngine() { return _engine; }
 
     static
     {
-        _engine = register(new GsonBuilder()).create();
+        _engine = register(new com.google.gson.GsonBuilder()).create();
     }
 
     private Json() {}
 
-    public static GsonBuilder register(GsonBuilder builder)
+    public static com.google.gson.GsonBuilder register(com.google.gson.GsonBuilder builder)
     {
         builder.serializeNulls();
-        builder.registerTypeAdapter(ByteBuffer.class, new ByteBufferJson());
+        builder.registerTypeAdapter(java.nio.ByteBuffer.class, new ByteBufferJson());
         builder.registerTypeAdapter(char.class, new CharacterJson());
         builder.registerTypeAdapter(Character.class, new CharacterJson());
-        builder.registerTypeAdapter(Instant.class, new InstantJson());
-        builder.registerTypeAdapter(BigDecimal.class, new BigDecimalJson());
-        builder.registerTypeAdapter(UUID.class, new UUIDJson());
+        builder.registerTypeAdapter(java.time.Instant.class, new InstantJson());
+        builder.registerTypeAdapter(java.math.BigDecimal.class, new BigDecimalJson());
+        builder.registerTypeAdapter(java.util.UUID.class, new UUIDJson());
         return builder;
     }
 }

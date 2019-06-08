@@ -7,20 +7,12 @@
 
 package com.chronoxor.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
 // Fast Binary Encoding decimal final model
 class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(value: BigDecimal): Long = fbeSize
+    fun fbeAllocationSize(value: java.math.BigDecimal): Long = fbeSize
 
     // Final size
     override val fbeSize: Long = 16
@@ -35,10 +27,10 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Get the decimal value
-    fun get(size: Size): BigDecimal
+    fun get(size: Size): java.math.BigDecimal
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return BigDecimal.valueOf(0L)
+            return java.math.BigDecimal.valueOf(0L)
 
         val magnitude = readBytes(fbeOffset, 12)
         val scale = readByte(fbeOffset + 14).toInt()
@@ -52,14 +44,14 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
             magnitude[magnitude.size - i - 1] = temp
         }
 
-        val unscaled = BigInteger(signum, magnitude)
+        val unscaled = java.math.BigInteger(signum, magnitude)
 
         size.value = fbeSize
-        return BigDecimal(unscaled, scale)
+        return java.math.BigDecimal(unscaled, scale)
     }
 
     // Set the decimal value
-    fun set(value: BigDecimal): Long
+    fun set(value: java.math.BigDecimal): Long
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

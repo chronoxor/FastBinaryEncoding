@@ -5,18 +5,6 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public final class FlagsEmpty implements Comparable<FlagsEmpty>
 {
 
@@ -26,7 +14,7 @@ public final class FlagsEmpty implements Comparable<FlagsEmpty>
     public FlagsEmpty() {}
     public FlagsEmpty(int value) { setEnum(value); }
     public FlagsEmpty(FlagsEmptyEnum value) { setEnum(value); }
-    public FlagsEmpty(EnumSet<FlagsEmptyEnum> value) { setEnum(value); }
+    public FlagsEmpty(java.util.EnumSet<FlagsEmptyEnum> value) { setEnum(value); }
     public FlagsEmpty(FlagsEmpty value) { setEnum(value); }
 
     public FlagsEmptyEnum getEnum() { return value; }
@@ -36,7 +24,7 @@ public final class FlagsEmpty implements Comparable<FlagsEmpty>
 
     public void setEnum(int value) { this.flags = value; this.value = FlagsEmptyEnum.mapValue(value); }
     public void setEnum(FlagsEmptyEnum value) { this.value = value; this.flags = value.getRaw(); }
-    public void setEnum(EnumSet<FlagsEmptyEnum> value) { setEnum(FlagsEmpty.fromSet(value)); }
+    public void setEnum(java.util.EnumSet<FlagsEmptyEnum> value) { setEnum(FlagsEmpty.fromSet(value)); }
     public void setEnum(FlagsEmpty value) { this.value = value.value; this.flags = value.flags; }
 
     public boolean hasFlags(int flags) { return (((this.flags & flags) != 0) && ((this.flags & flags) == flags)); }
@@ -51,11 +39,11 @@ public final class FlagsEmpty implements Comparable<FlagsEmpty>
     public FlagsEmpty removeFlags(FlagsEmptyEnum flags) { removeFlags(flags.getRaw()); return this; }
     public FlagsEmpty removeFlags(FlagsEmpty flags) { removeFlags(flags.flags); return this; }
 
-    public EnumSet<FlagsEmptyEnum> getAllSet() { return value.getAllSet(); }
-    public EnumSet<FlagsEmptyEnum> getNoneSet() { return value.getNoneSet(); }
-    public EnumSet<FlagsEmptyEnum> getCurrentSet() { return value.getCurrentSet(); }
+    public java.util.EnumSet<FlagsEmptyEnum> getAllSet() { return value.getAllSet(); }
+    public java.util.EnumSet<FlagsEmptyEnum> getNoneSet() { return value.getNoneSet(); }
+    public java.util.EnumSet<FlagsEmptyEnum> getCurrentSet() { return value.getCurrentSet(); }
 
-    public static FlagsEmpty fromSet(EnumSet<FlagsEmptyEnum> set)
+    public static FlagsEmpty fromSet(java.util.EnumSet<FlagsEmptyEnum> set)
     {
         int result = 0;
         return new FlagsEmpty(result);

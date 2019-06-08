@@ -5,28 +5,16 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding Bytes array field model
-public final class FieldModelArrayBytes extends FieldModel
+public final class FieldModelArrayBytes extends com.chronoxor.fbe.FieldModel
 {
-    private final FieldModelBytes _model;
+    private final com.chronoxor.fbe.FieldModelBytes _model;
     private final long _size;
 
-    public FieldModelArrayBytes(Buffer buffer, long offset, long size)
+    public FieldModelArrayBytes(com.chronoxor.fbe.Buffer buffer, long offset, long size)
     {
         super(buffer, offset);
-        _model = new FieldModelBytes(buffer, offset);
+        _model = new com.chronoxor.fbe.FieldModelBytes(buffer, offset);
         _size = size;
     }
 
@@ -43,7 +31,7 @@ public final class FieldModelArrayBytes extends FieldModel
     public long getSize() { return _size; }
 
     // Array index operator
-    public FieldModelBytes getItem(long index)
+    public com.chronoxor.fbe.FieldModelBytes getItem(long index)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         assert (index < _size) : "Index is out of bounds!";
@@ -72,9 +60,9 @@ public final class FieldModelArrayBytes extends FieldModel
     }
 
     // Get the array
-    public ByteBuffer[] get()
+    public java.nio.ByteBuffer[] get()
     {
-        var values = new ByteBuffer[(int)_size];
+        var values = new java.nio.ByteBuffer[(int)_size];
 
         var fbeModel = getItem(0);
         for (long i = 0; i < _size; i++)
@@ -86,7 +74,7 @@ public final class FieldModelArrayBytes extends FieldModel
     }
 
     // Get the array
-    public void get(ByteBuffer[] values)
+    public void get(java.nio.ByteBuffer[] values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -100,8 +88,8 @@ public final class FieldModelArrayBytes extends FieldModel
         }
     }
 
-    // Get the array as ArrayList
-    public void get(ArrayList<ByteBuffer> values)
+    // Get the array as java.util.ArrayList
+    public void get(java.util.ArrayList<java.nio.ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -113,14 +101,14 @@ public final class FieldModelArrayBytes extends FieldModel
         var fbeModel = getItem(0);
         for (long i = _size; i-- > 0;)
         {
-            ByteBuffer value = fbeModel.get();
+            java.nio.ByteBuffer value = fbeModel.get();
             values.add(value);
             fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
     // Set the array
-    public void set(ByteBuffer[] values)
+    public void set(java.nio.ByteBuffer[] values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -138,8 +126,8 @@ public final class FieldModelArrayBytes extends FieldModel
         }
     }
 
-    // Set the array as List
-    public void set(ArrayList<ByteBuffer> values)
+    // Set the array as java.util.ArrayList
+    public void set(java.util.ArrayList<java.nio.ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

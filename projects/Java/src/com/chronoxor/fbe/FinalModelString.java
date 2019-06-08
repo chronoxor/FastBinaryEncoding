@@ -5,15 +5,6 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
 // Fast Binary Encoding string final model
 public final class FinalModelString extends FinalModel
 {
@@ -68,7 +59,7 @@ public final class FinalModelString extends FinalModel
         if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
+        byte[] bytes = value.getBytes(java.nio.charset.StandardCharsets.UTF_8);
 
         int fbeStringSize = bytes.length;
         assert ((_buffer.getOffset() + fbeOffset() + 4 + fbeStringSize) <= _buffer.getSize()) : "Model is broken!";

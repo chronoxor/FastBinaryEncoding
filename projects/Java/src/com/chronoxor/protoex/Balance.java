@@ -5,18 +5,6 @@
 
 package com.chronoxor.protoex;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public class Balance extends com.chronoxor.proto.Balance
 {
     public double locked = (double)0.0d;

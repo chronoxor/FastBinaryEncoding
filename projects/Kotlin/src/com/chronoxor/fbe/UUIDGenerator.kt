@@ -7,14 +7,6 @@
 
 package com.chronoxor.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
 // Fast Binary Encoding UUID generator
 object UUIDGenerator
 {
@@ -29,7 +21,7 @@ object UUIDGenerator
 
     // Lock and random generator
     private val lock = Object()
-    private val generator = Random()
+    private val generator = java.util.Random()
 
     // Node & clock sequence bytes
     private val node = makeNode()
@@ -55,10 +47,10 @@ object UUIDGenerator
     }
 
     // Generate nil UUID0 (all bits set to zero)
-    fun nil(): UUID = UUID(0, 0)
+    fun nil(): java.util.UUID = java.util.UUID(0, 0)
 
     // Generate sequential UUID1 (time based version)
-    fun sequential(): UUID
+    fun sequential(): java.util.UUID
     {
         val now = System.currentTimeMillis().toULong()
 
@@ -79,9 +71,9 @@ object UUIDGenerator
         // Sets the version to 1
         msb = msb or 0x0000000000001000uL
 
-        return UUID(msb.toLong(), nodeAndClockSequence.toLong())
+        return java.util.UUID(msb.toLong(), nodeAndClockSequence.toLong())
     }
 
     // Generate random UUID4 (randomly or pseudo-randomly generated version)
-    fun random(): UUID = UUID.randomUUID()
+    fun random(): java.util.UUID = java.util.UUID.randomUUID()
 }

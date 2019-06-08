@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional WChar final model
-public final class FinalModelOptionalWChar extends FinalModel
+public final class FinalModelOptionalWChar extends com.chronoxor.fbe.FinalModel
 {
-    public FinalModelOptionalWChar(Buffer buffer, long offset)
+    public FinalModelOptionalWChar(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        value = new FinalModelWChar(buffer, 0);
+        value = new com.chronoxor.fbe.FinalModelWChar(buffer, 0);
     }
 
     // Get the allocation size
@@ -40,7 +28,7 @@ public final class FinalModelOptionalWChar extends FinalModel
     }
 
     // Base final model value
-    public final FinalModelWChar value;
+    public final com.chronoxor.fbe.FinalModelWChar value;
 
     // Check if the optional value is valid
     @Override
@@ -60,7 +48,7 @@ public final class FinalModelOptionalWChar extends FinalModel
     }
 
     // Get the optional value
-    public Character get(Size size)
+    public Character get(com.chronoxor.fbe.Size size)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())

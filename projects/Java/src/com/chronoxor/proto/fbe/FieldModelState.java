@@ -5,39 +5,27 @@
 
 package com.chronoxor.proto.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 // Fast Binary Encoding State field model
-public final class FieldModelState extends FieldModel
+public final class FieldModelState extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelState(Buffer buffer, long offset) { super(buffer, offset); }
+    public FieldModelState(com.chronoxor.fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the field size
     @Override
     public long fbeSize() { return 1; }
 
     // Get the value
-    public State get() { return get(new State()); }
-    public State get(State defaults)
+    public com.chronoxor.proto.State get() { return get(new com.chronoxor.proto.State()); }
+    public com.chronoxor.proto.State get(com.chronoxor.proto.State defaults)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return new State(readByte(fbeOffset()));
+        return new com.chronoxor.proto.State(readByte(fbeOffset()));
     }
 
     // Set the value
-    public void set(State value)
+    public void set(com.chronoxor.proto.State value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

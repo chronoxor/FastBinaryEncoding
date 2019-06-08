@@ -5,22 +5,13 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
 // Fast Binary Encoding timestamp final model
 public final class FinalModelTimestamp extends FinalModel
 {
     public FinalModelTimestamp(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(Instant value) { return fbeSize(); }
+    public long fbeAllocationSize(java.time.Instant value) { return fbeSize(); }
 
     // Get the final size
     @Override
@@ -37,18 +28,18 @@ public final class FinalModelTimestamp extends FinalModel
     }
 
     // Get the timestamp value
-    public Instant get(Size size)
+    public java.time.Instant get(Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
-            return Instant.EPOCH;
+            return java.time.Instant.EPOCH;
 
         size.value = fbeSize();
         long nanoseconds = readInt64(fbeOffset());
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
+        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
     }
 
     // Set the timestamp value
-    public long set(Instant value)
+    public long set(java.time.Instant value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

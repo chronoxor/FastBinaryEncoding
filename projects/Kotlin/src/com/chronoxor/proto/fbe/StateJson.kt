@@ -7,31 +7,18 @@
 
 package com.chronoxor.proto.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
-import com.google.gson.*
-
-class StateJson : JsonSerializer<State>, JsonDeserializer<State>
+class StateJson : com.google.gson.JsonSerializer<com.chronoxor.proto.State>, com.google.gson.JsonDeserializer<com.chronoxor.proto.State>
 {
 
     @Override
-    override fun serialize(src: State, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: com.chronoxor.proto.State, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(src.raw)
+        return com.google.gson.JsonPrimitive(src.raw)
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext):State
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext):com.chronoxor.proto.State
     {
-        return State(json.asJsonPrimitive.asByte)
+        return com.chronoxor.proto.State(json.asJsonPrimitive.asByte)
     }
 }

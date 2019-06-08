@@ -5,15 +5,6 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
 // Fast Binary Encoding double final model
 public final class FinalModelDouble extends FinalModel
 {

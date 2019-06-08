@@ -5,17 +5,6 @@
 
 package com.chronoxor.proto;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-
 public final class State implements Comparable<State>
 {
     public static final State unknown = new State(StateEnum.unknown);
@@ -32,7 +21,7 @@ public final class State implements Comparable<State>
     public State() {}
     public State(byte value) { setEnum(value); }
     public State(StateEnum value) { setEnum(value); }
-    public State(EnumSet<StateEnum> value) { setEnum(value); }
+    public State(java.util.EnumSet<StateEnum> value) { setEnum(value); }
     public State(State value) { setEnum(value); }
 
     public StateEnum getEnum() { return value; }
@@ -42,7 +31,7 @@ public final class State implements Comparable<State>
 
     public void setEnum(byte value) { this.flags = value; this.value = StateEnum.mapValue(value); }
     public void setEnum(StateEnum value) { this.value = value; this.flags = value.getRaw(); }
-    public void setEnum(EnumSet<StateEnum> value) { setEnum(State.fromSet(value)); }
+    public void setEnum(java.util.EnumSet<StateEnum> value) { setEnum(State.fromSet(value)); }
     public void setEnum(State value) { this.value = value.value; this.flags = value.flags; }
 
     public boolean hasFlags(byte flags) { return (((this.flags & flags) != 0) && ((this.flags & flags) == flags)); }
@@ -57,11 +46,11 @@ public final class State implements Comparable<State>
     public State removeFlags(StateEnum flags) { removeFlags(flags.getRaw()); return this; }
     public State removeFlags(State flags) { removeFlags(flags.flags); return this; }
 
-    public EnumSet<StateEnum> getAllSet() { return value.getAllSet(); }
-    public EnumSet<StateEnum> getNoneSet() { return value.getNoneSet(); }
-    public EnumSet<StateEnum> getCurrentSet() { return value.getCurrentSet(); }
+    public java.util.EnumSet<StateEnum> getAllSet() { return value.getAllSet(); }
+    public java.util.EnumSet<StateEnum> getNoneSet() { return value.getNoneSet(); }
+    public java.util.EnumSet<StateEnum> getCurrentSet() { return value.getCurrentSet(); }
 
-    public static State fromSet(EnumSet<StateEnum> set)
+    public static State fromSet(java.util.EnumSet<StateEnum> set)
     {
         byte result = 0;
         if (set.contains(unknown.getEnum()))

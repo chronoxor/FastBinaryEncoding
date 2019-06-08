@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructMap model
-public final class StructMapModel extends Model
+public final class StructMapModel extends com.chronoxor.fbe.Model
 {
     public final FieldModelStructMap model;
 
     public StructMapModel() { model = new FieldModelStructMap(getBuffer(), 4); }
-    public StructMapModel(Buffer buffer) { super(buffer); model = new FieldModelStructMap(getBuffer(), 4); }
+    public StructMapModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); model = new FieldModelStructMap(getBuffer(), 4); }
 
     // Get the model size
     public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }
@@ -61,7 +49,7 @@ public final class StructMapModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(StructMap value)
+    public long serialize(com.chronoxor.test.StructMap value)
     {
         long fbeBegin = createBegin();
         model.set(value);
@@ -70,12 +58,12 @@ public final class StructMapModel extends Model
     }
 
     // Deserialize the struct value
-    public StructMap deserialize() { var value = new StructMap(); deserialize(value); return value; }
-    public long deserialize(StructMap value)
+    public com.chronoxor.test.StructMap deserialize() { var value = new com.chronoxor.test.StructMap(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.test.StructMap value)
     {
         if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())
         {
-            value = new StructMap();
+            value = new com.chronoxor.test.StructMap();
             return 0;
         }
 
@@ -83,7 +71,7 @@ public final class StructMapModel extends Model
         assert (fbeFullSize >= model.fbeSize()) : "Model is broken!";
         if (fbeFullSize < model.fbeSize())
         {
-            value = new StructMap();
+            value = new com.chronoxor.test.StructMap();
             return 0;
         }
 

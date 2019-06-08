@@ -5,22 +5,10 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional protoBalance final model
-public final class FinalModelOptionalprotoBalance extends FinalModel
+public final class FinalModelOptionalprotoBalance extends com.chronoxor.fbe.FinalModel
 {
-    public FinalModelOptionalprotoBalance(Buffer buffer, long offset)
+    public FinalModelOptionalprotoBalance(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         value = new com.chronoxor.proto.fbe.FinalModelBalance(buffer, 0);
@@ -60,7 +48,7 @@ public final class FinalModelOptionalprotoBalance extends FinalModel
     }
 
     // Get the optional value
-    public com.chronoxor.proto.Balance get(Size size)
+    public com.chronoxor.proto.Balance get(com.chronoxor.fbe.Size size)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())

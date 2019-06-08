@@ -7,36 +7,23 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
-import com.google.gson.*
-
 // Fast Binary Encoding test JSON engine
 object Json
 {
     // Get the JSON engine
-    val engine: Gson = register(GsonBuilder()).create()
+    val engine: com.google.gson.Gson = register(com.google.gson.GsonBuilder()).create()
 
     @Suppress("MemberVisibilityCanBePrivate")
-    fun register(builder: GsonBuilder): GsonBuilder
+    fun register(builder: com.google.gson.GsonBuilder): com.google.gson.GsonBuilder
     {
         com.chronoxor.fbe.Json.register(builder)
         com.chronoxor.proto.fbe.Json.register(builder)
-        builder.registerTypeAdapter(EnumSimple::class.java, EnumSimpleJson())
-        builder.registerTypeAdapter(EnumTyped::class.java, EnumTypedJson())
-        builder.registerTypeAdapter(EnumEmpty::class.java, EnumEmptyJson())
-        builder.registerTypeAdapter(FlagsSimple::class.java, FlagsSimpleJson())
-        builder.registerTypeAdapter(FlagsTyped::class.java, FlagsTypedJson())
-        builder.registerTypeAdapter(FlagsEmpty::class.java, FlagsEmptyJson())
+        builder.registerTypeAdapter(com.chronoxor.test.EnumSimple::class.java, EnumSimpleJson())
+        builder.registerTypeAdapter(com.chronoxor.test.EnumTyped::class.java, EnumTypedJson())
+        builder.registerTypeAdapter(com.chronoxor.test.EnumEmpty::class.java, EnumEmptyJson())
+        builder.registerTypeAdapter(com.chronoxor.test.FlagsSimple::class.java, FlagsSimpleJson())
+        builder.registerTypeAdapter(com.chronoxor.test.FlagsTyped::class.java, FlagsTypedJson())
+        builder.registerTypeAdapter(com.chronoxor.test.FlagsEmpty::class.java, FlagsEmptyJson())
         return builder
     }
 }

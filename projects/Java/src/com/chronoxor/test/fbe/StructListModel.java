@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructList model
-public final class StructListModel extends Model
+public final class StructListModel extends com.chronoxor.fbe.Model
 {
     public final FieldModelStructList model;
 
     public StructListModel() { model = new FieldModelStructList(getBuffer(), 4); }
-    public StructListModel(Buffer buffer) { super(buffer); model = new FieldModelStructList(getBuffer(), 4); }
+    public StructListModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); model = new FieldModelStructList(getBuffer(), 4); }
 
     // Get the model size
     public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }
@@ -61,7 +49,7 @@ public final class StructListModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(StructList value)
+    public long serialize(com.chronoxor.test.StructList value)
     {
         long fbeBegin = createBegin();
         model.set(value);
@@ -70,12 +58,12 @@ public final class StructListModel extends Model
     }
 
     // Deserialize the struct value
-    public StructList deserialize() { var value = new StructList(); deserialize(value); return value; }
-    public long deserialize(StructList value)
+    public com.chronoxor.test.StructList deserialize() { var value = new com.chronoxor.test.StructList(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.test.StructList value)
     {
         if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())
         {
-            value = new StructList();
+            value = new com.chronoxor.test.StructList();
             return 0;
         }
 
@@ -83,7 +71,7 @@ public final class StructListModel extends Model
         assert (fbeFullSize >= model.fbeSize()) : "Model is broken!";
         if (fbeFullSize < model.fbeSize())
         {
-            value = new StructList();
+            value = new com.chronoxor.test.StructList();
             return 0;
         }
 

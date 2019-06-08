@@ -7,34 +7,23 @@
 
 package com.chronoxor.test
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructList : Comparable<Any?>
 {
-    var f1: LinkedList<Byte> = LinkedList()
-    var f2: LinkedList<Byte?> = LinkedList()
-    var f3: LinkedList<ByteArray> = LinkedList()
-    var f4: LinkedList<ByteArray?> = LinkedList()
-    var f5: LinkedList<EnumSimple> = LinkedList()
-    var f6: LinkedList<EnumSimple?> = LinkedList()
-    var f7: LinkedList<FlagsSimple> = LinkedList()
-    var f8: LinkedList<FlagsSimple?> = LinkedList()
-    var f9: LinkedList<StructSimple> = LinkedList()
-    var f10: LinkedList<StructSimple?> = LinkedList()
+    var f1: java.util.LinkedList<Byte> = java.util.LinkedList()
+    var f2: java.util.LinkedList<Byte?> = java.util.LinkedList()
+    var f3: java.util.LinkedList<ByteArray> = java.util.LinkedList()
+    var f4: java.util.LinkedList<ByteArray?> = java.util.LinkedList()
+    var f5: java.util.LinkedList<EnumSimple> = java.util.LinkedList()
+    var f6: java.util.LinkedList<EnumSimple?> = java.util.LinkedList()
+    var f7: java.util.LinkedList<FlagsSimple> = java.util.LinkedList()
+    var f8: java.util.LinkedList<FlagsSimple?> = java.util.LinkedList()
+    var f9: java.util.LinkedList<StructSimple> = java.util.LinkedList()
+    var f10: java.util.LinkedList<StructSimple?> = java.util.LinkedList()
 
     constructor()
 
-    constructor(f1: LinkedList<Byte>, f2: LinkedList<Byte?>, f3: LinkedList<ByteArray>, f4: LinkedList<ByteArray?>, f5: LinkedList<EnumSimple>, f6: LinkedList<EnumSimple?>, f7: LinkedList<FlagsSimple>, f8: LinkedList<FlagsSimple?>, f9: LinkedList<StructSimple>, f10: LinkedList<StructSimple?>)
+    constructor(f1: java.util.LinkedList<Byte>, f2: java.util.LinkedList<Byte?>, f3: java.util.LinkedList<ByteArray>, f4: java.util.LinkedList<ByteArray?>, f5: java.util.LinkedList<EnumSimple>, f6: java.util.LinkedList<EnumSimple?>, f7: java.util.LinkedList<FlagsSimple>, f8: java.util.LinkedList<FlagsSimple?>, f9: java.util.LinkedList<StructSimple>, f10: java.util.LinkedList<StructSimple?>)
     {
         this.f1 = f1
         this.f2 = f2

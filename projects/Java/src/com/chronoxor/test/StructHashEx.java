@@ -5,26 +5,14 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public class StructHashEx implements Comparable<Object>
 {
-    public HashMap<StructSimple, StructNested> f1 = new HashMap<StructSimple, StructNested>();
-    public HashMap<StructSimple, StructNested> f2 = new HashMap<StructSimple, StructNested>();
+    public java.util.HashMap<StructSimple, StructNested> f1 = new java.util.HashMap<StructSimple, StructNested>();
+    public java.util.HashMap<StructSimple, StructNested> f2 = new java.util.HashMap<StructSimple, StructNested>();
 
     public StructHashEx() {}
 
-    public StructHashEx(HashMap<StructSimple, StructNested> f1, HashMap<StructSimple, StructNested> f2)
+    public StructHashEx(java.util.HashMap<StructSimple, StructNested> f1, java.util.HashMap<StructSimple, StructNested> f2)
     {
         this.f1 = f1;
         this.f2 = f2;

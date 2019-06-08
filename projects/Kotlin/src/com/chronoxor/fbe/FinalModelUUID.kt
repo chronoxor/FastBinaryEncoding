@@ -7,20 +7,12 @@
 
 package com.chronoxor.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-// Fast Binary Encoding UUID final model
+// Fast Binary Encoding java.util.UUID final model
 class FinalModelUUID(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(value: UUID): Long = fbeSize
+    fun fbeAllocationSize(value: java.util.UUID): Long = fbeSize
 
     // Final size
     override val fbeSize: Long = 16
@@ -35,7 +27,7 @@ class FinalModelUUID(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Get the value
-    fun get(size: Size): UUID
+    fun get(size: Size): java.util.UUID
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return UUIDGenerator.nil()
@@ -45,7 +37,7 @@ class FinalModelUUID(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Set the value
-    fun set(value: UUID): Long
+    fun set(value: java.util.UUID): Long
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

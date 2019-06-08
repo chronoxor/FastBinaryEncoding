@@ -5,18 +5,6 @@
 
 package com.chronoxor.protoex;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public class Order implements Comparable<Object>
 {
     public int id = 0;

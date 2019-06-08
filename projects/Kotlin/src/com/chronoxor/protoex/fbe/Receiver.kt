@@ -7,17 +7,6 @@
 
 package com.chronoxor.protoex.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.protoex.*
-
 // Fast Binary Encoding com.chronoxor.protoex receiver
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
 open class Receiver : com.chronoxor.fbe.Receiver
@@ -46,7 +35,7 @@ open class Receiver : com.chronoxor.fbe.Receiver
         AccountModel = AccountModel()
     }
 
-    constructor(buffer: Buffer) : super(buffer, false)
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer, false)
     {
         protoReceiver = com.chronoxor.proto.fbe.Receiver(buffer)
         OrderValue = com.chronoxor.protoex.Order()

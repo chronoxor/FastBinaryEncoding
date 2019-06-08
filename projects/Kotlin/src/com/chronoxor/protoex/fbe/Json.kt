@@ -7,33 +7,20 @@
 
 package com.chronoxor.protoex.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.protoex.*
-
-import com.google.gson.*
-
 // Fast Binary Encoding protoex JSON engine
 object Json
 {
     // Get the JSON engine
-    val engine: Gson = register(GsonBuilder()).create()
+    val engine: com.google.gson.Gson = register(com.google.gson.GsonBuilder()).create()
 
     @Suppress("MemberVisibilityCanBePrivate")
-    fun register(builder: GsonBuilder): GsonBuilder
+    fun register(builder: com.google.gson.GsonBuilder): com.google.gson.GsonBuilder
     {
         com.chronoxor.fbe.Json.register(builder)
         com.chronoxor.proto.fbe.Json.register(builder)
-        builder.registerTypeAdapter(OrderSide::class.java, OrderSideJson())
-        builder.registerTypeAdapter(OrderType::class.java, OrderTypeJson())
-        builder.registerTypeAdapter(StateEx::class.java, StateExJson())
+        builder.registerTypeAdapter(com.chronoxor.protoex.OrderSide::class.java, OrderSideJson())
+        builder.registerTypeAdapter(com.chronoxor.protoex.OrderType::class.java, OrderTypeJson())
+        builder.registerTypeAdapter(com.chronoxor.protoex.StateEx::class.java, StateExJson())
         return builder
     }
 }

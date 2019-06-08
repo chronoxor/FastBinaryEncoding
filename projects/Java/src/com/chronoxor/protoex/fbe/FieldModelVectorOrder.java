@@ -5,24 +5,12 @@
 
 package com.chronoxor.protoex.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.protoex.*;
-
 // Fast Binary Encoding Order vector field model
-public final class FieldModelVectorOrder extends FieldModel
+public final class FieldModelVectorOrder extends com.chronoxor.fbe.FieldModel
 {
     private final FieldModelOrder _model;
 
-    public FieldModelVectorOrder(Buffer buffer, long offset)
+    public FieldModelVectorOrder(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         _model = new FieldModelOrder(buffer, offset);
@@ -136,8 +124,8 @@ public final class FieldModelVectorOrder extends FieldModel
         return true;
     }
 
-    // Get the vector as ArrayList
-    public void get(ArrayList<Order> values)
+    // Get the vector as java.util.ArrayList
+    public void get(java.util.ArrayList<com.chronoxor.protoex.Order> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -154,14 +142,14 @@ public final class FieldModelVectorOrder extends FieldModel
         var fbeModel = getItem(0);
         for (long i = fbeVectorSize; i-- > 0;)
         {
-            Order value = fbeModel.get();
+            com.chronoxor.protoex.Order value = fbeModel.get();
             values.add(value);
             fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
-    // Get the vector as LinkedList
-    public void get(LinkedList<Order> values)
+    // Get the vector as java.util.LinkedList
+    public void get(java.util.LinkedList<com.chronoxor.protoex.Order> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -176,14 +164,14 @@ public final class FieldModelVectorOrder extends FieldModel
         var fbeModel = getItem(0);
         for (long i = fbeVectorSize; i-- > 0;)
         {
-            Order value = fbeModel.get();
+            com.chronoxor.protoex.Order value = fbeModel.get();
             values.add(value);
             fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
-    // Get the vector as HashSet
-    public void get(HashSet<Order> values)
+    // Get the vector as java.util.HashSet
+    public void get(java.util.HashSet<com.chronoxor.protoex.Order> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -198,14 +186,14 @@ public final class FieldModelVectorOrder extends FieldModel
         var fbeModel = getItem(0);
         for (long i = fbeVectorSize; i-- > 0;)
         {
-            Order value = fbeModel.get();
+            com.chronoxor.protoex.Order value = fbeModel.get();
             values.add(value);
             fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
-    // Set the vector as ArrayList
-    public void set(ArrayList<Order> values)
+    // Set the vector as java.util.ArrayList
+    public void set(java.util.ArrayList<com.chronoxor.protoex.Order> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -223,8 +211,8 @@ public final class FieldModelVectorOrder extends FieldModel
         }
     }
 
-    // Set the vector as LinkedList
-    public void set(LinkedList<Order> values)
+    // Set the vector as java.util.LinkedList
+    public void set(java.util.LinkedList<com.chronoxor.protoex.Order> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -242,8 +230,8 @@ public final class FieldModelVectorOrder extends FieldModel
         }
     }
 
-    // Set the vector as HashSet
-    public void set(HashSet<Order> values)
+    // Set the vector as java.util.HashSet
+    public void set(java.util.HashSet<com.chronoxor.protoex.Order> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

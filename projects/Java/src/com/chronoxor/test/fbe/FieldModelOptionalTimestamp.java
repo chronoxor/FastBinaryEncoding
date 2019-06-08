@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional Timestamp field model
-public final class FieldModelOptionalTimestamp extends FieldModel
+public final class FieldModelOptionalTimestamp extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelOptionalTimestamp(Buffer buffer, long offset)
+    public FieldModelOptionalTimestamp(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        value = new FieldModelTimestamp(buffer, 0);
+        value = new com.chronoxor.fbe.FieldModelTimestamp(buffer, 0);
     }
 
     // Get the field size
@@ -57,7 +45,7 @@ public final class FieldModelOptionalTimestamp extends FieldModel
     }
 
     // Base field model value
-    public final FieldModelTimestamp value;
+    public final com.chronoxor.fbe.FieldModelTimestamp value;
 
     // Check if the optional value is valid
     @Override
@@ -102,14 +90,14 @@ public final class FieldModelOptionalTimestamp extends FieldModel
     }
 
     // Get the optional value
-    public Instant get() { return get(null); }
-    public Instant get(Instant defaults)
+    public java.time.Instant get() { return get(null); }
+    public java.time.Instant get(java.time.Instant defaults)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
             return defaults;
 
-        Instant optional = value.get();
+        java.time.Instant optional = value.get();
         getEnd(fbeBegin);
         return optional;
     }
@@ -145,7 +133,7 @@ public final class FieldModelOptionalTimestamp extends FieldModel
     }
 
     // Set the optional value
-    public void set(Instant optional)
+    public void set(java.time.Instant optional)
     {
         long fbeBegin = setBegin(optional != null);
         if (fbeBegin == 0)

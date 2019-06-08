@@ -7,19 +7,8 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding optional Timestamp field model
-class FieldModelOptionalTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelOptionalTimestamp(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     // Field size
     override val fbeSize: Long = 1 + 4
@@ -51,7 +40,7 @@ class FieldModelOptionalTimestamp(buffer: Buffer, offset: Long) : FieldModel(buf
     }
 
     // Base field model value
-    val value = FieldModelTimestamp(buffer, 0)
+    val value = com.chronoxor.fbe.FieldModelTimestamp(buffer, 0)
 
     // Check if the optional value is valid
     override fun verify(): Boolean
@@ -95,7 +84,7 @@ class FieldModelOptionalTimestamp(buffer: Buffer, offset: Long) : FieldModel(buf
     }
 
     // Get the optional value
-    fun get(defaults: Instant? = null): Instant?
+    fun get(defaults: java.time.Instant? = null): java.time.Instant?
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -137,7 +126,7 @@ class FieldModelOptionalTimestamp(buffer: Buffer, offset: Long) : FieldModel(buf
     }
 
     // Set the optional value
-    fun set(optional: Instant?)
+    fun set(optional: java.time.Instant?)
     {
         val fbeBegin = setBegin(optional != null)
         if (fbeBegin == 0L)

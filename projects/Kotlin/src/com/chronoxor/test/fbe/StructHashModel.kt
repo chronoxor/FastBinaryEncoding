@@ -7,24 +7,13 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructHash model
-class StructHashModel : Model
+class StructHashModel : com.chronoxor.fbe.Model
 {
     val model: FieldModelStructHash
 
     constructor() { model = FieldModelStructHash(buffer, 4) }
-    constructor(buffer: Buffer) : super(buffer) { model = FieldModelStructHash(buffer, 4) }
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer) { model = FieldModelStructHash(buffer, 4) }
 
     // Model size
     fun fbeSize(): Long = model.fbeSize + model.fbeExtra
@@ -65,7 +54,7 @@ class StructHashModel : Model
     }
 
     // Serialize the struct value
-    fun serialize(value: StructHash): Long
+    fun serialize(value: com.chronoxor.test.StructHash): Long
     {
         val fbeBegin = createBegin()
         model.set(value)
@@ -73,15 +62,15 @@ class StructHashModel : Model
     }
 
     // Deserialize the struct value
-    fun deserialize(): StructHash { val value = StructHash(); deserialize(value); return value }
+    fun deserialize(): com.chronoxor.test.StructHash { val value = com.chronoxor.test.StructHash(); deserialize(value); return value }
     @Suppress("UNUSED_VALUE")
-    fun deserialize(value: StructHash): Long
+    fun deserialize(value: com.chronoxor.test.StructHash): Long
     {
         var valueRef = value
 
         if ((buffer.offset + model.fbeOffset - 4) > buffer.size)
         {
-            valueRef = StructHash()
+            valueRef = com.chronoxor.test.StructHash()
             return 0
         }
 
@@ -89,7 +78,7 @@ class StructHashModel : Model
         assert(fbeFullSize >= model.fbeSize) { "Model is broken!" }
         if (fbeFullSize < model.fbeSize)
         {
-            valueRef = StructHash()
+            valueRef = com.chronoxor.test.StructHash()
             return 0
         }
 

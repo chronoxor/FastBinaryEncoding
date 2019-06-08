@@ -7,22 +7,11 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding optional StructOptional final model
-class FinalModelOptionalStructOptional(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelOptionalStructOptional(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun fbeAllocationSize(optional: StructOptional?): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
+    fun fbeAllocationSize(optional: com.chronoxor.test.StructOptional?): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
 
     // Checks if the object contains a value
     fun hasValue(): Boolean
@@ -54,7 +43,7 @@ class FinalModelOptionalStructOptional(buffer: Buffer, offset: Long) : FinalMode
     }
 
     // Get the optional value
-    fun get(size: Size): StructOptional?
+    fun get(size: com.chronoxor.fbe.Size): com.chronoxor.test.StructOptional?
     {
         assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 1) > _buffer.size)
@@ -77,7 +66,7 @@ class FinalModelOptionalStructOptional(buffer: Buffer, offset: Long) : FinalMode
     }
 
     // Set the optional value
-    fun set(optional: StructOptional?): Long
+    fun set(optional: com.chronoxor.test.StructOptional?): Long
     {
         assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 1) > _buffer.size)

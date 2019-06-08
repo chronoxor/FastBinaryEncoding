@@ -7,22 +7,11 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructBytes field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FieldModelStructBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelStructBytes(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
-    val f1: FieldModelBytes = FieldModelBytes(buffer, 4 + 4)
+    val f1: com.chronoxor.fbe.FieldModelBytes = com.chronoxor.fbe.FieldModelBytes(buffer, 4 + 4)
     val f2: FieldModelOptionalBytes = FieldModelOptionalBytes(buffer, f1.fbeOffset + f1.fbeSize)
     val f3: FieldModelOptionalBytes = FieldModelOptionalBytes(buffer, f2.fbeOffset + f2.fbeSize)
 
@@ -145,7 +134,7 @@ class FieldModelStructBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, o
     }
 
     // Get the struct value
-    fun get(fbeValue: StructBytes = StructBytes()): StructBytes
+    fun get(fbeValue: com.chronoxor.test.StructBytes = com.chronoxor.test.StructBytes()): com.chronoxor.test.StructBytes
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -159,7 +148,7 @@ class FieldModelStructBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, o
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructBytes, fbeStructSize: Long)
+    fun getFields(fbeValue: com.chronoxor.test.StructBytes, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
 
@@ -210,7 +199,7 @@ class FieldModelStructBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, o
     }
 
     // Set the struct value
-    fun set(fbeValue: StructBytes)
+    fun set(fbeValue: com.chronoxor.test.StructBytes)
     {
         val fbeBegin = setBegin()
         if (fbeBegin == 0L)
@@ -222,7 +211,7 @@ class FieldModelStructBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, o
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructBytes)
+    fun setFields(fbeValue: com.chronoxor.test.StructBytes)
     {
         f1.set(fbeValue.f1)
         f2.set(fbeValue.f2)

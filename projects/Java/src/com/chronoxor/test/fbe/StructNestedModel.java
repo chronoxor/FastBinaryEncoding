@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructNested model
-public final class StructNestedModel extends Model
+public final class StructNestedModel extends com.chronoxor.fbe.Model
 {
     public final FieldModelStructNested model;
 
     public StructNestedModel() { model = new FieldModelStructNested(getBuffer(), 4); }
-    public StructNestedModel(Buffer buffer) { super(buffer); model = new FieldModelStructNested(getBuffer(), 4); }
+    public StructNestedModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); model = new FieldModelStructNested(getBuffer(), 4); }
 
     // Get the model size
     public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }
@@ -61,7 +49,7 @@ public final class StructNestedModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(StructNested value)
+    public long serialize(com.chronoxor.test.StructNested value)
     {
         long fbeBegin = createBegin();
         model.set(value);
@@ -70,12 +58,12 @@ public final class StructNestedModel extends Model
     }
 
     // Deserialize the struct value
-    public StructNested deserialize() { var value = new StructNested(); deserialize(value); return value; }
-    public long deserialize(StructNested value)
+    public com.chronoxor.test.StructNested deserialize() { var value = new com.chronoxor.test.StructNested(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.test.StructNested value)
     {
         if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())
         {
-            value = new StructNested();
+            value = new com.chronoxor.test.StructNested();
             return 0;
         }
 
@@ -83,7 +71,7 @@ public final class StructNestedModel extends Model
         assert (fbeFullSize >= model.fbeSize()) : "Model is broken!";
         if (fbeFullSize < model.fbeSize())
         {
-            value = new StructNested();
+            value = new com.chronoxor.test.StructNested();
             return 0;
         }
 

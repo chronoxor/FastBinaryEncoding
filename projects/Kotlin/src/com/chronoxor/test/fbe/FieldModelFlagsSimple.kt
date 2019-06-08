@@ -7,34 +7,23 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding FlagsSimple field model
-class FieldModelFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelFlagsSimple(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     // Field size
     override val fbeSize: Long = 4
 
     // Get the value
-    fun get(defaults: FlagsSimple = FlagsSimple()): FlagsSimple
+    fun get(defaults: com.chronoxor.test.FlagsSimple = com.chronoxor.test.FlagsSimple()): com.chronoxor.test.FlagsSimple
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
-        return FlagsSimple(readInt32(fbeOffset))
+        return com.chronoxor.test.FlagsSimple(readInt32(fbeOffset))
     }
 
     // Set the value
-    fun set(value: FlagsSimple)
+    fun set(value: com.chronoxor.test.FlagsSimple)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

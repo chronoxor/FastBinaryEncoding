@@ -5,20 +5,8 @@
 
 package com.chronoxor.enums.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.enums.*;
-
 // Fast Binary Encoding Enums field model
-public final class FieldModelEnums extends FieldModel
+public final class FieldModelEnums extends com.chronoxor.fbe.FieldModel
 {
     public final FieldModelEnumByte byte0;
     public final FieldModelEnumByte byte1;
@@ -87,7 +75,7 @@ public final class FieldModelEnums extends FieldModel
     public final FieldModelEnumUInt64 uint64b4;
     public final FieldModelEnumUInt64 uint64b5;
 
-    public FieldModelEnums(Buffer buffer, long offset)
+    public FieldModelEnums(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         byte0 = new FieldModelEnumByte(buffer, 4 + 4);
@@ -781,8 +769,8 @@ public final class FieldModelEnums extends FieldModel
     }
 
     // Get the struct value
-    public Enums get() { return get(new Enums()); }
-    public Enums get(Enums fbeValue)
+    public com.chronoxor.enums.Enums get() { return get(new com.chronoxor.enums.Enums()); }
+    public com.chronoxor.enums.Enums get(com.chronoxor.enums.Enums fbeValue)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
@@ -795,404 +783,404 @@ public final class FieldModelEnums extends FieldModel
     }
 
     // Get the struct fields values
-    public void getFields(Enums fbeValue, long fbeStructSize)
+    public void getFields(com.chronoxor.enums.Enums fbeValue, long fbeStructSize)
     {
         long fbeCurrentSize = 4 + 4;
 
         if ((fbeCurrentSize + byte0.fbeSize()) <= fbeStructSize)
-            fbeValue.byte0 = byte0.get(EnumByte.ENUM_VALUE_0);
+            fbeValue.byte0 = byte0.get(com.chronoxor.enums.EnumByte.ENUM_VALUE_0);
         else
-            fbeValue.byte0 = EnumByte.ENUM_VALUE_0;
+            fbeValue.byte0 = com.chronoxor.enums.EnumByte.ENUM_VALUE_0;
         fbeCurrentSize += byte0.fbeSize();
 
         if ((fbeCurrentSize + byte1.fbeSize()) <= fbeStructSize)
-            fbeValue.byte1 = byte1.get(EnumByte.ENUM_VALUE_1);
+            fbeValue.byte1 = byte1.get(com.chronoxor.enums.EnumByte.ENUM_VALUE_1);
         else
-            fbeValue.byte1 = EnumByte.ENUM_VALUE_1;
+            fbeValue.byte1 = com.chronoxor.enums.EnumByte.ENUM_VALUE_1;
         fbeCurrentSize += byte1.fbeSize();
 
         if ((fbeCurrentSize + byte2.fbeSize()) <= fbeStructSize)
-            fbeValue.byte2 = byte2.get(EnumByte.ENUM_VALUE_2);
+            fbeValue.byte2 = byte2.get(com.chronoxor.enums.EnumByte.ENUM_VALUE_2);
         else
-            fbeValue.byte2 = EnumByte.ENUM_VALUE_2;
+            fbeValue.byte2 = com.chronoxor.enums.EnumByte.ENUM_VALUE_2;
         fbeCurrentSize += byte2.fbeSize();
 
         if ((fbeCurrentSize + byte3.fbeSize()) <= fbeStructSize)
-            fbeValue.byte3 = byte3.get(EnumByte.ENUM_VALUE_3);
+            fbeValue.byte3 = byte3.get(com.chronoxor.enums.EnumByte.ENUM_VALUE_3);
         else
-            fbeValue.byte3 = EnumByte.ENUM_VALUE_3;
+            fbeValue.byte3 = com.chronoxor.enums.EnumByte.ENUM_VALUE_3;
         fbeCurrentSize += byte3.fbeSize();
 
         if ((fbeCurrentSize + byte4.fbeSize()) <= fbeStructSize)
-            fbeValue.byte4 = byte4.get(EnumByte.ENUM_VALUE_4);
+            fbeValue.byte4 = byte4.get(com.chronoxor.enums.EnumByte.ENUM_VALUE_4);
         else
-            fbeValue.byte4 = EnumByte.ENUM_VALUE_4;
+            fbeValue.byte4 = com.chronoxor.enums.EnumByte.ENUM_VALUE_4;
         fbeCurrentSize += byte4.fbeSize();
 
         if ((fbeCurrentSize + byte5.fbeSize()) <= fbeStructSize)
-            fbeValue.byte5 = byte5.get(EnumByte.ENUM_VALUE_5);
+            fbeValue.byte5 = byte5.get(com.chronoxor.enums.EnumByte.ENUM_VALUE_5);
         else
-            fbeValue.byte5 = EnumByte.ENUM_VALUE_5;
+            fbeValue.byte5 = com.chronoxor.enums.EnumByte.ENUM_VALUE_5;
         fbeCurrentSize += byte5.fbeSize();
 
         if ((fbeCurrentSize + char0.fbeSize()) <= fbeStructSize)
-            fbeValue.char0 = char0.get(EnumChar.ENUM_VALUE_0);
+            fbeValue.char0 = char0.get(com.chronoxor.enums.EnumChar.ENUM_VALUE_0);
         else
-            fbeValue.char0 = EnumChar.ENUM_VALUE_0;
+            fbeValue.char0 = com.chronoxor.enums.EnumChar.ENUM_VALUE_0;
         fbeCurrentSize += char0.fbeSize();
 
         if ((fbeCurrentSize + char1.fbeSize()) <= fbeStructSize)
-            fbeValue.char1 = char1.get(EnumChar.ENUM_VALUE_1);
+            fbeValue.char1 = char1.get(com.chronoxor.enums.EnumChar.ENUM_VALUE_1);
         else
-            fbeValue.char1 = EnumChar.ENUM_VALUE_1;
+            fbeValue.char1 = com.chronoxor.enums.EnumChar.ENUM_VALUE_1;
         fbeCurrentSize += char1.fbeSize();
 
         if ((fbeCurrentSize + char2.fbeSize()) <= fbeStructSize)
-            fbeValue.char2 = char2.get(EnumChar.ENUM_VALUE_2);
+            fbeValue.char2 = char2.get(com.chronoxor.enums.EnumChar.ENUM_VALUE_2);
         else
-            fbeValue.char2 = EnumChar.ENUM_VALUE_2;
+            fbeValue.char2 = com.chronoxor.enums.EnumChar.ENUM_VALUE_2;
         fbeCurrentSize += char2.fbeSize();
 
         if ((fbeCurrentSize + char3.fbeSize()) <= fbeStructSize)
-            fbeValue.char3 = char3.get(EnumChar.ENUM_VALUE_3);
+            fbeValue.char3 = char3.get(com.chronoxor.enums.EnumChar.ENUM_VALUE_3);
         else
-            fbeValue.char3 = EnumChar.ENUM_VALUE_3;
+            fbeValue.char3 = com.chronoxor.enums.EnumChar.ENUM_VALUE_3;
         fbeCurrentSize += char3.fbeSize();
 
         if ((fbeCurrentSize + char4.fbeSize()) <= fbeStructSize)
-            fbeValue.char4 = char4.get(EnumChar.ENUM_VALUE_4);
+            fbeValue.char4 = char4.get(com.chronoxor.enums.EnumChar.ENUM_VALUE_4);
         else
-            fbeValue.char4 = EnumChar.ENUM_VALUE_4;
+            fbeValue.char4 = com.chronoxor.enums.EnumChar.ENUM_VALUE_4;
         fbeCurrentSize += char4.fbeSize();
 
         if ((fbeCurrentSize + char5.fbeSize()) <= fbeStructSize)
-            fbeValue.char5 = char5.get(EnumChar.ENUM_VALUE_5);
+            fbeValue.char5 = char5.get(com.chronoxor.enums.EnumChar.ENUM_VALUE_5);
         else
-            fbeValue.char5 = EnumChar.ENUM_VALUE_5;
+            fbeValue.char5 = com.chronoxor.enums.EnumChar.ENUM_VALUE_5;
         fbeCurrentSize += char5.fbeSize();
 
         if ((fbeCurrentSize + wchar0.fbeSize()) <= fbeStructSize)
-            fbeValue.wchar0 = wchar0.get(EnumWChar.ENUM_VALUE_0);
+            fbeValue.wchar0 = wchar0.get(com.chronoxor.enums.EnumWChar.ENUM_VALUE_0);
         else
-            fbeValue.wchar0 = EnumWChar.ENUM_VALUE_0;
+            fbeValue.wchar0 = com.chronoxor.enums.EnumWChar.ENUM_VALUE_0;
         fbeCurrentSize += wchar0.fbeSize();
 
         if ((fbeCurrentSize + wchar1.fbeSize()) <= fbeStructSize)
-            fbeValue.wchar1 = wchar1.get(EnumWChar.ENUM_VALUE_1);
+            fbeValue.wchar1 = wchar1.get(com.chronoxor.enums.EnumWChar.ENUM_VALUE_1);
         else
-            fbeValue.wchar1 = EnumWChar.ENUM_VALUE_1;
+            fbeValue.wchar1 = com.chronoxor.enums.EnumWChar.ENUM_VALUE_1;
         fbeCurrentSize += wchar1.fbeSize();
 
         if ((fbeCurrentSize + wchar2.fbeSize()) <= fbeStructSize)
-            fbeValue.wchar2 = wchar2.get(EnumWChar.ENUM_VALUE_2);
+            fbeValue.wchar2 = wchar2.get(com.chronoxor.enums.EnumWChar.ENUM_VALUE_2);
         else
-            fbeValue.wchar2 = EnumWChar.ENUM_VALUE_2;
+            fbeValue.wchar2 = com.chronoxor.enums.EnumWChar.ENUM_VALUE_2;
         fbeCurrentSize += wchar2.fbeSize();
 
         if ((fbeCurrentSize + wchar3.fbeSize()) <= fbeStructSize)
-            fbeValue.wchar3 = wchar3.get(EnumWChar.ENUM_VALUE_3);
+            fbeValue.wchar3 = wchar3.get(com.chronoxor.enums.EnumWChar.ENUM_VALUE_3);
         else
-            fbeValue.wchar3 = EnumWChar.ENUM_VALUE_3;
+            fbeValue.wchar3 = com.chronoxor.enums.EnumWChar.ENUM_VALUE_3;
         fbeCurrentSize += wchar3.fbeSize();
 
         if ((fbeCurrentSize + wchar4.fbeSize()) <= fbeStructSize)
-            fbeValue.wchar4 = wchar4.get(EnumWChar.ENUM_VALUE_4);
+            fbeValue.wchar4 = wchar4.get(com.chronoxor.enums.EnumWChar.ENUM_VALUE_4);
         else
-            fbeValue.wchar4 = EnumWChar.ENUM_VALUE_4;
+            fbeValue.wchar4 = com.chronoxor.enums.EnumWChar.ENUM_VALUE_4;
         fbeCurrentSize += wchar4.fbeSize();
 
         if ((fbeCurrentSize + wchar5.fbeSize()) <= fbeStructSize)
-            fbeValue.wchar5 = wchar5.get(EnumWChar.ENUM_VALUE_5);
+            fbeValue.wchar5 = wchar5.get(com.chronoxor.enums.EnumWChar.ENUM_VALUE_5);
         else
-            fbeValue.wchar5 = EnumWChar.ENUM_VALUE_5;
+            fbeValue.wchar5 = com.chronoxor.enums.EnumWChar.ENUM_VALUE_5;
         fbeCurrentSize += wchar5.fbeSize();
 
         if ((fbeCurrentSize + int8b0.fbeSize()) <= fbeStructSize)
-            fbeValue.int8b0 = int8b0.get(EnumInt8.ENUM_VALUE_0);
+            fbeValue.int8b0 = int8b0.get(com.chronoxor.enums.EnumInt8.ENUM_VALUE_0);
         else
-            fbeValue.int8b0 = EnumInt8.ENUM_VALUE_0;
+            fbeValue.int8b0 = com.chronoxor.enums.EnumInt8.ENUM_VALUE_0;
         fbeCurrentSize += int8b0.fbeSize();
 
         if ((fbeCurrentSize + int8b1.fbeSize()) <= fbeStructSize)
-            fbeValue.int8b1 = int8b1.get(EnumInt8.ENUM_VALUE_1);
+            fbeValue.int8b1 = int8b1.get(com.chronoxor.enums.EnumInt8.ENUM_VALUE_1);
         else
-            fbeValue.int8b1 = EnumInt8.ENUM_VALUE_1;
+            fbeValue.int8b1 = com.chronoxor.enums.EnumInt8.ENUM_VALUE_1;
         fbeCurrentSize += int8b1.fbeSize();
 
         if ((fbeCurrentSize + int8b2.fbeSize()) <= fbeStructSize)
-            fbeValue.int8b2 = int8b2.get(EnumInt8.ENUM_VALUE_2);
+            fbeValue.int8b2 = int8b2.get(com.chronoxor.enums.EnumInt8.ENUM_VALUE_2);
         else
-            fbeValue.int8b2 = EnumInt8.ENUM_VALUE_2;
+            fbeValue.int8b2 = com.chronoxor.enums.EnumInt8.ENUM_VALUE_2;
         fbeCurrentSize += int8b2.fbeSize();
 
         if ((fbeCurrentSize + int8b3.fbeSize()) <= fbeStructSize)
-            fbeValue.int8b3 = int8b3.get(EnumInt8.ENUM_VALUE_3);
+            fbeValue.int8b3 = int8b3.get(com.chronoxor.enums.EnumInt8.ENUM_VALUE_3);
         else
-            fbeValue.int8b3 = EnumInt8.ENUM_VALUE_3;
+            fbeValue.int8b3 = com.chronoxor.enums.EnumInt8.ENUM_VALUE_3;
         fbeCurrentSize += int8b3.fbeSize();
 
         if ((fbeCurrentSize + int8b4.fbeSize()) <= fbeStructSize)
-            fbeValue.int8b4 = int8b4.get(EnumInt8.ENUM_VALUE_4);
+            fbeValue.int8b4 = int8b4.get(com.chronoxor.enums.EnumInt8.ENUM_VALUE_4);
         else
-            fbeValue.int8b4 = EnumInt8.ENUM_VALUE_4;
+            fbeValue.int8b4 = com.chronoxor.enums.EnumInt8.ENUM_VALUE_4;
         fbeCurrentSize += int8b4.fbeSize();
 
         if ((fbeCurrentSize + int8b5.fbeSize()) <= fbeStructSize)
-            fbeValue.int8b5 = int8b5.get(EnumInt8.ENUM_VALUE_5);
+            fbeValue.int8b5 = int8b5.get(com.chronoxor.enums.EnumInt8.ENUM_VALUE_5);
         else
-            fbeValue.int8b5 = EnumInt8.ENUM_VALUE_5;
+            fbeValue.int8b5 = com.chronoxor.enums.EnumInt8.ENUM_VALUE_5;
         fbeCurrentSize += int8b5.fbeSize();
 
         if ((fbeCurrentSize + uint8b0.fbeSize()) <= fbeStructSize)
-            fbeValue.uint8b0 = uint8b0.get(EnumUInt8.ENUM_VALUE_0);
+            fbeValue.uint8b0 = uint8b0.get(com.chronoxor.enums.EnumUInt8.ENUM_VALUE_0);
         else
-            fbeValue.uint8b0 = EnumUInt8.ENUM_VALUE_0;
+            fbeValue.uint8b0 = com.chronoxor.enums.EnumUInt8.ENUM_VALUE_0;
         fbeCurrentSize += uint8b0.fbeSize();
 
         if ((fbeCurrentSize + uint8b1.fbeSize()) <= fbeStructSize)
-            fbeValue.uint8b1 = uint8b1.get(EnumUInt8.ENUM_VALUE_1);
+            fbeValue.uint8b1 = uint8b1.get(com.chronoxor.enums.EnumUInt8.ENUM_VALUE_1);
         else
-            fbeValue.uint8b1 = EnumUInt8.ENUM_VALUE_1;
+            fbeValue.uint8b1 = com.chronoxor.enums.EnumUInt8.ENUM_VALUE_1;
         fbeCurrentSize += uint8b1.fbeSize();
 
         if ((fbeCurrentSize + uint8b2.fbeSize()) <= fbeStructSize)
-            fbeValue.uint8b2 = uint8b2.get(EnumUInt8.ENUM_VALUE_2);
+            fbeValue.uint8b2 = uint8b2.get(com.chronoxor.enums.EnumUInt8.ENUM_VALUE_2);
         else
-            fbeValue.uint8b2 = EnumUInt8.ENUM_VALUE_2;
+            fbeValue.uint8b2 = com.chronoxor.enums.EnumUInt8.ENUM_VALUE_2;
         fbeCurrentSize += uint8b2.fbeSize();
 
         if ((fbeCurrentSize + uint8b3.fbeSize()) <= fbeStructSize)
-            fbeValue.uint8b3 = uint8b3.get(EnumUInt8.ENUM_VALUE_3);
+            fbeValue.uint8b3 = uint8b3.get(com.chronoxor.enums.EnumUInt8.ENUM_VALUE_3);
         else
-            fbeValue.uint8b3 = EnumUInt8.ENUM_VALUE_3;
+            fbeValue.uint8b3 = com.chronoxor.enums.EnumUInt8.ENUM_VALUE_3;
         fbeCurrentSize += uint8b3.fbeSize();
 
         if ((fbeCurrentSize + uint8b4.fbeSize()) <= fbeStructSize)
-            fbeValue.uint8b4 = uint8b4.get(EnumUInt8.ENUM_VALUE_4);
+            fbeValue.uint8b4 = uint8b4.get(com.chronoxor.enums.EnumUInt8.ENUM_VALUE_4);
         else
-            fbeValue.uint8b4 = EnumUInt8.ENUM_VALUE_4;
+            fbeValue.uint8b4 = com.chronoxor.enums.EnumUInt8.ENUM_VALUE_4;
         fbeCurrentSize += uint8b4.fbeSize();
 
         if ((fbeCurrentSize + uint8b5.fbeSize()) <= fbeStructSize)
-            fbeValue.uint8b5 = uint8b5.get(EnumUInt8.ENUM_VALUE_5);
+            fbeValue.uint8b5 = uint8b5.get(com.chronoxor.enums.EnumUInt8.ENUM_VALUE_5);
         else
-            fbeValue.uint8b5 = EnumUInt8.ENUM_VALUE_5;
+            fbeValue.uint8b5 = com.chronoxor.enums.EnumUInt8.ENUM_VALUE_5;
         fbeCurrentSize += uint8b5.fbeSize();
 
         if ((fbeCurrentSize + int16b0.fbeSize()) <= fbeStructSize)
-            fbeValue.int16b0 = int16b0.get(EnumInt16.ENUM_VALUE_0);
+            fbeValue.int16b0 = int16b0.get(com.chronoxor.enums.EnumInt16.ENUM_VALUE_0);
         else
-            fbeValue.int16b0 = EnumInt16.ENUM_VALUE_0;
+            fbeValue.int16b0 = com.chronoxor.enums.EnumInt16.ENUM_VALUE_0;
         fbeCurrentSize += int16b0.fbeSize();
 
         if ((fbeCurrentSize + int16b1.fbeSize()) <= fbeStructSize)
-            fbeValue.int16b1 = int16b1.get(EnumInt16.ENUM_VALUE_1);
+            fbeValue.int16b1 = int16b1.get(com.chronoxor.enums.EnumInt16.ENUM_VALUE_1);
         else
-            fbeValue.int16b1 = EnumInt16.ENUM_VALUE_1;
+            fbeValue.int16b1 = com.chronoxor.enums.EnumInt16.ENUM_VALUE_1;
         fbeCurrentSize += int16b1.fbeSize();
 
         if ((fbeCurrentSize + int16b2.fbeSize()) <= fbeStructSize)
-            fbeValue.int16b2 = int16b2.get(EnumInt16.ENUM_VALUE_2);
+            fbeValue.int16b2 = int16b2.get(com.chronoxor.enums.EnumInt16.ENUM_VALUE_2);
         else
-            fbeValue.int16b2 = EnumInt16.ENUM_VALUE_2;
+            fbeValue.int16b2 = com.chronoxor.enums.EnumInt16.ENUM_VALUE_2;
         fbeCurrentSize += int16b2.fbeSize();
 
         if ((fbeCurrentSize + int16b3.fbeSize()) <= fbeStructSize)
-            fbeValue.int16b3 = int16b3.get(EnumInt16.ENUM_VALUE_3);
+            fbeValue.int16b3 = int16b3.get(com.chronoxor.enums.EnumInt16.ENUM_VALUE_3);
         else
-            fbeValue.int16b3 = EnumInt16.ENUM_VALUE_3;
+            fbeValue.int16b3 = com.chronoxor.enums.EnumInt16.ENUM_VALUE_3;
         fbeCurrentSize += int16b3.fbeSize();
 
         if ((fbeCurrentSize + int16b4.fbeSize()) <= fbeStructSize)
-            fbeValue.int16b4 = int16b4.get(EnumInt16.ENUM_VALUE_4);
+            fbeValue.int16b4 = int16b4.get(com.chronoxor.enums.EnumInt16.ENUM_VALUE_4);
         else
-            fbeValue.int16b4 = EnumInt16.ENUM_VALUE_4;
+            fbeValue.int16b4 = com.chronoxor.enums.EnumInt16.ENUM_VALUE_4;
         fbeCurrentSize += int16b4.fbeSize();
 
         if ((fbeCurrentSize + int16b5.fbeSize()) <= fbeStructSize)
-            fbeValue.int16b5 = int16b5.get(EnumInt16.ENUM_VALUE_5);
+            fbeValue.int16b5 = int16b5.get(com.chronoxor.enums.EnumInt16.ENUM_VALUE_5);
         else
-            fbeValue.int16b5 = EnumInt16.ENUM_VALUE_5;
+            fbeValue.int16b5 = com.chronoxor.enums.EnumInt16.ENUM_VALUE_5;
         fbeCurrentSize += int16b5.fbeSize();
 
         if ((fbeCurrentSize + uint16b0.fbeSize()) <= fbeStructSize)
-            fbeValue.uint16b0 = uint16b0.get(EnumUInt16.ENUM_VALUE_0);
+            fbeValue.uint16b0 = uint16b0.get(com.chronoxor.enums.EnumUInt16.ENUM_VALUE_0);
         else
-            fbeValue.uint16b0 = EnumUInt16.ENUM_VALUE_0;
+            fbeValue.uint16b0 = com.chronoxor.enums.EnumUInt16.ENUM_VALUE_0;
         fbeCurrentSize += uint16b0.fbeSize();
 
         if ((fbeCurrentSize + uint16b1.fbeSize()) <= fbeStructSize)
-            fbeValue.uint16b1 = uint16b1.get(EnumUInt16.ENUM_VALUE_1);
+            fbeValue.uint16b1 = uint16b1.get(com.chronoxor.enums.EnumUInt16.ENUM_VALUE_1);
         else
-            fbeValue.uint16b1 = EnumUInt16.ENUM_VALUE_1;
+            fbeValue.uint16b1 = com.chronoxor.enums.EnumUInt16.ENUM_VALUE_1;
         fbeCurrentSize += uint16b1.fbeSize();
 
         if ((fbeCurrentSize + uint16b2.fbeSize()) <= fbeStructSize)
-            fbeValue.uint16b2 = uint16b2.get(EnumUInt16.ENUM_VALUE_2);
+            fbeValue.uint16b2 = uint16b2.get(com.chronoxor.enums.EnumUInt16.ENUM_VALUE_2);
         else
-            fbeValue.uint16b2 = EnumUInt16.ENUM_VALUE_2;
+            fbeValue.uint16b2 = com.chronoxor.enums.EnumUInt16.ENUM_VALUE_2;
         fbeCurrentSize += uint16b2.fbeSize();
 
         if ((fbeCurrentSize + uint16b3.fbeSize()) <= fbeStructSize)
-            fbeValue.uint16b3 = uint16b3.get(EnumUInt16.ENUM_VALUE_3);
+            fbeValue.uint16b3 = uint16b3.get(com.chronoxor.enums.EnumUInt16.ENUM_VALUE_3);
         else
-            fbeValue.uint16b3 = EnumUInt16.ENUM_VALUE_3;
+            fbeValue.uint16b3 = com.chronoxor.enums.EnumUInt16.ENUM_VALUE_3;
         fbeCurrentSize += uint16b3.fbeSize();
 
         if ((fbeCurrentSize + uint16b4.fbeSize()) <= fbeStructSize)
-            fbeValue.uint16b4 = uint16b4.get(EnumUInt16.ENUM_VALUE_4);
+            fbeValue.uint16b4 = uint16b4.get(com.chronoxor.enums.EnumUInt16.ENUM_VALUE_4);
         else
-            fbeValue.uint16b4 = EnumUInt16.ENUM_VALUE_4;
+            fbeValue.uint16b4 = com.chronoxor.enums.EnumUInt16.ENUM_VALUE_4;
         fbeCurrentSize += uint16b4.fbeSize();
 
         if ((fbeCurrentSize + uint16b5.fbeSize()) <= fbeStructSize)
-            fbeValue.uint16b5 = uint16b5.get(EnumUInt16.ENUM_VALUE_5);
+            fbeValue.uint16b5 = uint16b5.get(com.chronoxor.enums.EnumUInt16.ENUM_VALUE_5);
         else
-            fbeValue.uint16b5 = EnumUInt16.ENUM_VALUE_5;
+            fbeValue.uint16b5 = com.chronoxor.enums.EnumUInt16.ENUM_VALUE_5;
         fbeCurrentSize += uint16b5.fbeSize();
 
         if ((fbeCurrentSize + int32b0.fbeSize()) <= fbeStructSize)
-            fbeValue.int32b0 = int32b0.get(EnumInt32.ENUM_VALUE_0);
+            fbeValue.int32b0 = int32b0.get(com.chronoxor.enums.EnumInt32.ENUM_VALUE_0);
         else
-            fbeValue.int32b0 = EnumInt32.ENUM_VALUE_0;
+            fbeValue.int32b0 = com.chronoxor.enums.EnumInt32.ENUM_VALUE_0;
         fbeCurrentSize += int32b0.fbeSize();
 
         if ((fbeCurrentSize + int32b1.fbeSize()) <= fbeStructSize)
-            fbeValue.int32b1 = int32b1.get(EnumInt32.ENUM_VALUE_1);
+            fbeValue.int32b1 = int32b1.get(com.chronoxor.enums.EnumInt32.ENUM_VALUE_1);
         else
-            fbeValue.int32b1 = EnumInt32.ENUM_VALUE_1;
+            fbeValue.int32b1 = com.chronoxor.enums.EnumInt32.ENUM_VALUE_1;
         fbeCurrentSize += int32b1.fbeSize();
 
         if ((fbeCurrentSize + int32b2.fbeSize()) <= fbeStructSize)
-            fbeValue.int32b2 = int32b2.get(EnumInt32.ENUM_VALUE_2);
+            fbeValue.int32b2 = int32b2.get(com.chronoxor.enums.EnumInt32.ENUM_VALUE_2);
         else
-            fbeValue.int32b2 = EnumInt32.ENUM_VALUE_2;
+            fbeValue.int32b2 = com.chronoxor.enums.EnumInt32.ENUM_VALUE_2;
         fbeCurrentSize += int32b2.fbeSize();
 
         if ((fbeCurrentSize + int32b3.fbeSize()) <= fbeStructSize)
-            fbeValue.int32b3 = int32b3.get(EnumInt32.ENUM_VALUE_3);
+            fbeValue.int32b3 = int32b3.get(com.chronoxor.enums.EnumInt32.ENUM_VALUE_3);
         else
-            fbeValue.int32b3 = EnumInt32.ENUM_VALUE_3;
+            fbeValue.int32b3 = com.chronoxor.enums.EnumInt32.ENUM_VALUE_3;
         fbeCurrentSize += int32b3.fbeSize();
 
         if ((fbeCurrentSize + int32b4.fbeSize()) <= fbeStructSize)
-            fbeValue.int32b4 = int32b4.get(EnumInt32.ENUM_VALUE_4);
+            fbeValue.int32b4 = int32b4.get(com.chronoxor.enums.EnumInt32.ENUM_VALUE_4);
         else
-            fbeValue.int32b4 = EnumInt32.ENUM_VALUE_4;
+            fbeValue.int32b4 = com.chronoxor.enums.EnumInt32.ENUM_VALUE_4;
         fbeCurrentSize += int32b4.fbeSize();
 
         if ((fbeCurrentSize + int32b5.fbeSize()) <= fbeStructSize)
-            fbeValue.int32b5 = int32b5.get(EnumInt32.ENUM_VALUE_5);
+            fbeValue.int32b5 = int32b5.get(com.chronoxor.enums.EnumInt32.ENUM_VALUE_5);
         else
-            fbeValue.int32b5 = EnumInt32.ENUM_VALUE_5;
+            fbeValue.int32b5 = com.chronoxor.enums.EnumInt32.ENUM_VALUE_5;
         fbeCurrentSize += int32b5.fbeSize();
 
         if ((fbeCurrentSize + uint32b0.fbeSize()) <= fbeStructSize)
-            fbeValue.uint32b0 = uint32b0.get(EnumUInt32.ENUM_VALUE_0);
+            fbeValue.uint32b0 = uint32b0.get(com.chronoxor.enums.EnumUInt32.ENUM_VALUE_0);
         else
-            fbeValue.uint32b0 = EnumUInt32.ENUM_VALUE_0;
+            fbeValue.uint32b0 = com.chronoxor.enums.EnumUInt32.ENUM_VALUE_0;
         fbeCurrentSize += uint32b0.fbeSize();
 
         if ((fbeCurrentSize + uint32b1.fbeSize()) <= fbeStructSize)
-            fbeValue.uint32b1 = uint32b1.get(EnumUInt32.ENUM_VALUE_1);
+            fbeValue.uint32b1 = uint32b1.get(com.chronoxor.enums.EnumUInt32.ENUM_VALUE_1);
         else
-            fbeValue.uint32b1 = EnumUInt32.ENUM_VALUE_1;
+            fbeValue.uint32b1 = com.chronoxor.enums.EnumUInt32.ENUM_VALUE_1;
         fbeCurrentSize += uint32b1.fbeSize();
 
         if ((fbeCurrentSize + uint32b2.fbeSize()) <= fbeStructSize)
-            fbeValue.uint32b2 = uint32b2.get(EnumUInt32.ENUM_VALUE_2);
+            fbeValue.uint32b2 = uint32b2.get(com.chronoxor.enums.EnumUInt32.ENUM_VALUE_2);
         else
-            fbeValue.uint32b2 = EnumUInt32.ENUM_VALUE_2;
+            fbeValue.uint32b2 = com.chronoxor.enums.EnumUInt32.ENUM_VALUE_2;
         fbeCurrentSize += uint32b2.fbeSize();
 
         if ((fbeCurrentSize + uint32b3.fbeSize()) <= fbeStructSize)
-            fbeValue.uint32b3 = uint32b3.get(EnumUInt32.ENUM_VALUE_3);
+            fbeValue.uint32b3 = uint32b3.get(com.chronoxor.enums.EnumUInt32.ENUM_VALUE_3);
         else
-            fbeValue.uint32b3 = EnumUInt32.ENUM_VALUE_3;
+            fbeValue.uint32b3 = com.chronoxor.enums.EnumUInt32.ENUM_VALUE_3;
         fbeCurrentSize += uint32b3.fbeSize();
 
         if ((fbeCurrentSize + uint32b4.fbeSize()) <= fbeStructSize)
-            fbeValue.uint32b4 = uint32b4.get(EnumUInt32.ENUM_VALUE_4);
+            fbeValue.uint32b4 = uint32b4.get(com.chronoxor.enums.EnumUInt32.ENUM_VALUE_4);
         else
-            fbeValue.uint32b4 = EnumUInt32.ENUM_VALUE_4;
+            fbeValue.uint32b4 = com.chronoxor.enums.EnumUInt32.ENUM_VALUE_4;
         fbeCurrentSize += uint32b4.fbeSize();
 
         if ((fbeCurrentSize + uint32b5.fbeSize()) <= fbeStructSize)
-            fbeValue.uint32b5 = uint32b5.get(EnumUInt32.ENUM_VALUE_5);
+            fbeValue.uint32b5 = uint32b5.get(com.chronoxor.enums.EnumUInt32.ENUM_VALUE_5);
         else
-            fbeValue.uint32b5 = EnumUInt32.ENUM_VALUE_5;
+            fbeValue.uint32b5 = com.chronoxor.enums.EnumUInt32.ENUM_VALUE_5;
         fbeCurrentSize += uint32b5.fbeSize();
 
         if ((fbeCurrentSize + int64b0.fbeSize()) <= fbeStructSize)
-            fbeValue.int64b0 = int64b0.get(EnumInt64.ENUM_VALUE_0);
+            fbeValue.int64b0 = int64b0.get(com.chronoxor.enums.EnumInt64.ENUM_VALUE_0);
         else
-            fbeValue.int64b0 = EnumInt64.ENUM_VALUE_0;
+            fbeValue.int64b0 = com.chronoxor.enums.EnumInt64.ENUM_VALUE_0;
         fbeCurrentSize += int64b0.fbeSize();
 
         if ((fbeCurrentSize + int64b1.fbeSize()) <= fbeStructSize)
-            fbeValue.int64b1 = int64b1.get(EnumInt64.ENUM_VALUE_1);
+            fbeValue.int64b1 = int64b1.get(com.chronoxor.enums.EnumInt64.ENUM_VALUE_1);
         else
-            fbeValue.int64b1 = EnumInt64.ENUM_VALUE_1;
+            fbeValue.int64b1 = com.chronoxor.enums.EnumInt64.ENUM_VALUE_1;
         fbeCurrentSize += int64b1.fbeSize();
 
         if ((fbeCurrentSize + int64b2.fbeSize()) <= fbeStructSize)
-            fbeValue.int64b2 = int64b2.get(EnumInt64.ENUM_VALUE_2);
+            fbeValue.int64b2 = int64b2.get(com.chronoxor.enums.EnumInt64.ENUM_VALUE_2);
         else
-            fbeValue.int64b2 = EnumInt64.ENUM_VALUE_2;
+            fbeValue.int64b2 = com.chronoxor.enums.EnumInt64.ENUM_VALUE_2;
         fbeCurrentSize += int64b2.fbeSize();
 
         if ((fbeCurrentSize + int64b3.fbeSize()) <= fbeStructSize)
-            fbeValue.int64b3 = int64b3.get(EnumInt64.ENUM_VALUE_3);
+            fbeValue.int64b3 = int64b3.get(com.chronoxor.enums.EnumInt64.ENUM_VALUE_3);
         else
-            fbeValue.int64b3 = EnumInt64.ENUM_VALUE_3;
+            fbeValue.int64b3 = com.chronoxor.enums.EnumInt64.ENUM_VALUE_3;
         fbeCurrentSize += int64b3.fbeSize();
 
         if ((fbeCurrentSize + int64b4.fbeSize()) <= fbeStructSize)
-            fbeValue.int64b4 = int64b4.get(EnumInt64.ENUM_VALUE_4);
+            fbeValue.int64b4 = int64b4.get(com.chronoxor.enums.EnumInt64.ENUM_VALUE_4);
         else
-            fbeValue.int64b4 = EnumInt64.ENUM_VALUE_4;
+            fbeValue.int64b4 = com.chronoxor.enums.EnumInt64.ENUM_VALUE_4;
         fbeCurrentSize += int64b4.fbeSize();
 
         if ((fbeCurrentSize + int64b5.fbeSize()) <= fbeStructSize)
-            fbeValue.int64b5 = int64b5.get(EnumInt64.ENUM_VALUE_5);
+            fbeValue.int64b5 = int64b5.get(com.chronoxor.enums.EnumInt64.ENUM_VALUE_5);
         else
-            fbeValue.int64b5 = EnumInt64.ENUM_VALUE_5;
+            fbeValue.int64b5 = com.chronoxor.enums.EnumInt64.ENUM_VALUE_5;
         fbeCurrentSize += int64b5.fbeSize();
 
         if ((fbeCurrentSize + uint64b0.fbeSize()) <= fbeStructSize)
-            fbeValue.uint64b0 = uint64b0.get(EnumUInt64.ENUM_VALUE_0);
+            fbeValue.uint64b0 = uint64b0.get(com.chronoxor.enums.EnumUInt64.ENUM_VALUE_0);
         else
-            fbeValue.uint64b0 = EnumUInt64.ENUM_VALUE_0;
+            fbeValue.uint64b0 = com.chronoxor.enums.EnumUInt64.ENUM_VALUE_0;
         fbeCurrentSize += uint64b0.fbeSize();
 
         if ((fbeCurrentSize + uint64b1.fbeSize()) <= fbeStructSize)
-            fbeValue.uint64b1 = uint64b1.get(EnumUInt64.ENUM_VALUE_1);
+            fbeValue.uint64b1 = uint64b1.get(com.chronoxor.enums.EnumUInt64.ENUM_VALUE_1);
         else
-            fbeValue.uint64b1 = EnumUInt64.ENUM_VALUE_1;
+            fbeValue.uint64b1 = com.chronoxor.enums.EnumUInt64.ENUM_VALUE_1;
         fbeCurrentSize += uint64b1.fbeSize();
 
         if ((fbeCurrentSize + uint64b2.fbeSize()) <= fbeStructSize)
-            fbeValue.uint64b2 = uint64b2.get(EnumUInt64.ENUM_VALUE_2);
+            fbeValue.uint64b2 = uint64b2.get(com.chronoxor.enums.EnumUInt64.ENUM_VALUE_2);
         else
-            fbeValue.uint64b2 = EnumUInt64.ENUM_VALUE_2;
+            fbeValue.uint64b2 = com.chronoxor.enums.EnumUInt64.ENUM_VALUE_2;
         fbeCurrentSize += uint64b2.fbeSize();
 
         if ((fbeCurrentSize + uint64b3.fbeSize()) <= fbeStructSize)
-            fbeValue.uint64b3 = uint64b3.get(EnumUInt64.ENUM_VALUE_3);
+            fbeValue.uint64b3 = uint64b3.get(com.chronoxor.enums.EnumUInt64.ENUM_VALUE_3);
         else
-            fbeValue.uint64b3 = EnumUInt64.ENUM_VALUE_3;
+            fbeValue.uint64b3 = com.chronoxor.enums.EnumUInt64.ENUM_VALUE_3;
         fbeCurrentSize += uint64b3.fbeSize();
 
         if ((fbeCurrentSize + uint64b4.fbeSize()) <= fbeStructSize)
-            fbeValue.uint64b4 = uint64b4.get(EnumUInt64.ENUM_VALUE_4);
+            fbeValue.uint64b4 = uint64b4.get(com.chronoxor.enums.EnumUInt64.ENUM_VALUE_4);
         else
-            fbeValue.uint64b4 = EnumUInt64.ENUM_VALUE_4;
+            fbeValue.uint64b4 = com.chronoxor.enums.EnumUInt64.ENUM_VALUE_4;
         fbeCurrentSize += uint64b4.fbeSize();
 
         if ((fbeCurrentSize + uint64b5.fbeSize()) <= fbeStructSize)
-            fbeValue.uint64b5 = uint64b5.get(EnumUInt64.ENUM_VALUE_5);
+            fbeValue.uint64b5 = uint64b5.get(com.chronoxor.enums.EnumUInt64.ENUM_VALUE_5);
         else
-            fbeValue.uint64b5 = EnumUInt64.ENUM_VALUE_5;
+            fbeValue.uint64b5 = com.chronoxor.enums.EnumUInt64.ENUM_VALUE_5;
         fbeCurrentSize += uint64b5.fbeSize();
     }
 
@@ -1224,7 +1212,7 @@ public final class FieldModelEnums extends FieldModel
     }
 
     // Set the struct value
-    public void set(Enums fbeValue)
+    public void set(com.chronoxor.enums.Enums fbeValue)
     {
         long fbeBegin = setBegin();
         if (fbeBegin == 0)
@@ -1235,7 +1223,7 @@ public final class FieldModelEnums extends FieldModel
     }
 
     // Set the struct fields values
-    public void setFields(Enums fbeValue)
+    public void setFields(com.chronoxor.enums.Enums fbeValue)
     {
         byte0.set(fbeValue.byte0);
         byte1.set(fbeValue.byte1);

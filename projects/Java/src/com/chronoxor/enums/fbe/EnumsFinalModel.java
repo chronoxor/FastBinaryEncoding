@@ -5,25 +5,13 @@
 
 package com.chronoxor.enums.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.enums.*;
-
 // Fast Binary Encoding Enums final model
-public final class EnumsFinalModel extends Model
+public final class EnumsFinalModel extends com.chronoxor.fbe.Model
 {
     private final FinalModelEnums _model;
 
     public EnumsFinalModel() { _model = new FinalModelEnums(getBuffer(), 8); }
-    public EnumsFinalModel(Buffer buffer) { super(buffer); _model = new FinalModelEnums(getBuffer(), 8); }
+    public EnumsFinalModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); _model = new FinalModelEnums(getBuffer(), 8); }
 
     // Get the model type
     public static final long fbeTypeConst = FinalModelEnums.fbeTypeConst;
@@ -44,7 +32,7 @@ public final class EnumsFinalModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(Enums value)
+    public long serialize(com.chronoxor.enums.Enums value)
     {
         long fbeInitialSize = getBuffer().getSize();
 
@@ -65,8 +53,8 @@ public final class EnumsFinalModel extends Model
     }
 
     // Deserialize the struct value
-    public Enums deserialize() { var value = new Enums(); deserialize(value); return value; }
-    public long deserialize(Enums value)
+    public com.chronoxor.enums.Enums deserialize() { var value = new com.chronoxor.enums.Enums(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.enums.Enums value)
     {
         assert ((getBuffer().getOffset() + _model.fbeOffset()) <= getBuffer().getSize()) : "Model is broken!";
         if ((getBuffer().getOffset() + _model.fbeOffset()) > getBuffer().getSize())
@@ -78,7 +66,7 @@ public final class EnumsFinalModel extends Model
         if ((fbeStructSize <= 0) || (fbeStructType != fbeType()))
             return 8;
 
-        var fbeSize = new Size(0);
+        var fbeSize = new com.chronoxor.fbe.Size();
         value = _model.get(fbeSize, value);
         return 8 + fbeSize.value;
     }

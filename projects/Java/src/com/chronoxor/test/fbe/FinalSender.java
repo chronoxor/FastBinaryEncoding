@@ -5,18 +5,6 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding com.chronoxor.test final sender
 public class FinalSender extends com.chronoxor.fbe.Sender
 {
@@ -54,7 +42,7 @@ public class FinalSender extends com.chronoxor.fbe.Sender
         StructHashExModel = new StructHashExFinalModel(getBuffer());
         StructEmptyModel = new StructEmptyFinalModel(getBuffer());
     }
-    public FinalSender(Buffer buffer)
+    public FinalSender(com.chronoxor.fbe.Buffer buffer)
     {
         super(buffer, true);
         protoSender = new com.chronoxor.proto.fbe.FinalSender(getBuffer());

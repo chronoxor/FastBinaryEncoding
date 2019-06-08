@@ -5,15 +5,6 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
 // Fast Binary Encoding bytes field model
 public final class FieldModelBytes extends FieldModel
 {
@@ -59,8 +50,8 @@ public final class FieldModelBytes extends FieldModel
     }
 
     // Get the bytes value
-    public ByteBuffer get() { return get(ByteBuffer.allocate(0)); }
-    public ByteBuffer get(ByteBuffer defaults)
+    public java.nio.ByteBuffer get() { return get(java.nio.ByteBuffer.allocate(0)); }
+    public java.nio.ByteBuffer get(java.nio.ByteBuffer defaults)
     {
         assert (defaults != null) : "Invalid default bytes value!";
         if (defaults == null)
@@ -82,11 +73,11 @@ public final class FieldModelBytes extends FieldModel
         if ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.getSize())
             return defaults;
 
-        return ByteBuffer.wrap(readBytes(fbeBytesOffset + 4, fbeBytesSize));
+        return java.nio.ByteBuffer.wrap(readBytes(fbeBytesOffset + 4, fbeBytesSize));
     }
 
     // Set the bytes value
-    public void set(ByteBuffer value)
+    public void set(java.nio.ByteBuffer value)
     {
         assert (value != null) : "Invalid bytes value!";
         if (value == null)

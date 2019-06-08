@@ -7,20 +7,9 @@
 
 package com.chronoxor.enums.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.enums.*
-
 // Fast Binary Encoding Enums final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FinalModelEnums(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelEnums(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     val byte0: FinalModelEnumByte = FinalModelEnumByte(buffer, 0)
     val byte1: FinalModelEnumByte = FinalModelEnumByte(buffer, 0)
@@ -91,7 +80,7 @@ class FinalModelEnums(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(fbeValue: Enums): Long = (0
+    fun fbeAllocationSize(fbeValue: com.chronoxor.enums.Enums): Long = (0
         + byte0.fbeAllocationSize(fbeValue.byte0)
         + byte1.fbeAllocationSize(fbeValue.byte1)
         + byte2.fbeAllocationSize(fbeValue.byte2)
@@ -584,7 +573,7 @@ class FinalModelEnums(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Get the struct value
-    fun get(fbeSize: Size, fbeValue: Enums = Enums()): Enums
+    fun get(fbeSize: com.chronoxor.fbe.Size, fbeValue: com.chronoxor.enums.Enums = com.chronoxor.enums.Enums()): com.chronoxor.enums.Enums
     {
         _buffer.shift(fbeOffset)
         fbeSize.value = getFields(fbeValue)
@@ -594,11 +583,11 @@ class FinalModelEnums(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: Enums): Long
+    fun getFields(fbeValue: com.chronoxor.enums.Enums): Long
     {
         var fbeCurrentOffset = 0L
         var fbeCurrentSize = 0L
-        val fbeFieldSize = Size(0)
+        val fbeFieldSize = com.chronoxor.fbe.Size()
 
         byte0.fbeOffset = fbeCurrentOffset
         fbeValue.byte0 = byte0.get(fbeFieldSize)
@@ -934,7 +923,7 @@ class FinalModelEnums(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Set the struct value
-    fun set(fbeValue: Enums): Long
+    fun set(fbeValue: com.chronoxor.enums.Enums): Long
     {
         _buffer.shift(fbeOffset)
         val fbeSize = setFields(fbeValue)
@@ -944,11 +933,11 @@ class FinalModelEnums(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: Enums): Long
+    fun setFields(fbeValue: com.chronoxor.enums.Enums): Long
     {
         var fbeCurrentOffset = 0L
         var fbeCurrentSize = 0L
-        val fbeFieldSize = Size(0)
+        val fbeFieldSize = com.chronoxor.fbe.Size()
 
         byte0.fbeOffset = fbeCurrentOffset
         fbeFieldSize.value = byte0.set(fbeValue.byte0)

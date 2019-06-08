@@ -5,20 +5,8 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructMap final model
-public final class FinalModelStructMap extends FinalModel
+public final class FinalModelStructMap extends com.chronoxor.fbe.FinalModel
 {
     public final FinalModelMapInt32Byte f1;
     public final FinalModelMapInt32OptionalByte f2;
@@ -31,7 +19,7 @@ public final class FinalModelStructMap extends FinalModel
     public final FinalModelMapInt32StructSimple f9;
     public final FinalModelMapInt32OptionalStructSimple f10;
 
-    public FinalModelStructMap(Buffer buffer, long offset)
+    public FinalModelStructMap(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         f1 = new FinalModelMapInt32Byte(buffer, 0);
@@ -47,7 +35,7 @@ public final class FinalModelStructMap extends FinalModel
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(StructMap fbeValue)
+    public long fbeAllocationSize(com.chronoxor.test.StructMap fbeValue)
     {
         long fbeResult = 0
             + f1.fbeAllocationSize(fbeValue.f1)
@@ -148,8 +136,8 @@ public final class FinalModelStructMap extends FinalModel
     }
 
     // Get the struct value
-    public StructMap get(Size fbeSize) { return get(fbeSize, new StructMap()); }
-    public StructMap get(Size fbeSize, StructMap fbeValue)
+    public com.chronoxor.test.StructMap get(com.chronoxor.fbe.Size fbeSize) { return get(fbeSize, new com.chronoxor.test.StructMap()); }
+    public com.chronoxor.test.StructMap get(com.chronoxor.fbe.Size fbeSize, com.chronoxor.test.StructMap fbeValue)
     {
         _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
@@ -158,11 +146,11 @@ public final class FinalModelStructMap extends FinalModel
     }
 
     // Get the struct fields values
-    public long getFields(StructMap fbeValue)
+    public long getFields(com.chronoxor.test.StructMap fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size(0);
 
         f1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = f1.get(fbeValue.f1);
@@ -218,7 +206,7 @@ public final class FinalModelStructMap extends FinalModel
     }
 
     // Set the struct value
-    public long set(StructMap fbeValue)
+    public long set(com.chronoxor.test.StructMap fbeValue)
     {
         _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
@@ -227,11 +215,11 @@ public final class FinalModelStructMap extends FinalModel
     }
 
     // Set the struct fields values
-    public long setFields(StructMap fbeValue)
+    public long setFields(com.chronoxor.test.StructMap fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size();
 
         f1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = f1.set(fbeValue.f1);

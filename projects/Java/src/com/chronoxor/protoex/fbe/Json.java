@@ -5,42 +5,28 @@
 
 package com.chronoxor.protoex.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.protoex.*;
-
-import com.google.gson.*;
-
 // Fast Binary Encoding protoex JSON engine
 public final class Json
 {
-    private static final Gson _engine;
+    private static final com.google.gson.Gson _engine;
 
     // Get the JSON engine
-    public static Gson getEngine() { return _engine; }
+    public static com.google.gson.Gson getEngine() { return _engine; }
 
     static
     {
-        _engine = register(new GsonBuilder()).create();
+        _engine = register(new com.google.gson.GsonBuilder()).create();
     }
 
     private Json() {}
 
-    public static GsonBuilder register(GsonBuilder builder)
+    public static com.google.gson.GsonBuilder register(com.google.gson.GsonBuilder builder)
     {
         com.chronoxor.fbe.Json.register(builder);
         com.chronoxor.proto.fbe.Json.register(builder);
-        builder.registerTypeAdapter(OrderSide.class, new OrderSideJson());
-        builder.registerTypeAdapter(OrderType.class, new OrderTypeJson());
-        builder.registerTypeAdapter(StateEx.class, new StateExJson());
+        builder.registerTypeAdapter(com.chronoxor.protoex.OrderSide.class, new OrderSideJson());
+        builder.registerTypeAdapter(com.chronoxor.protoex.OrderType.class, new OrderTypeJson());
+        builder.registerTypeAdapter(com.chronoxor.protoex.StateEx.class, new StateExJson());
         return builder;
     }
 }

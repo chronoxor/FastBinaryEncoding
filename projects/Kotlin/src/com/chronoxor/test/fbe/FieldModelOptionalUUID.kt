@@ -7,19 +7,8 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding optional UUID field model
-class FieldModelOptionalUUID(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelOptionalUUID(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     // Field size
     override val fbeSize: Long = 1 + 4
@@ -51,7 +40,7 @@ class FieldModelOptionalUUID(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Base field model value
-    val value = FieldModelUUID(buffer, 0)
+    val value = com.chronoxor.fbe.FieldModelUUID(buffer, 0)
 
     // Check if the optional value is valid
     override fun verify(): Boolean
@@ -95,7 +84,7 @@ class FieldModelOptionalUUID(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Get the optional value
-    fun get(defaults: UUID? = null): UUID?
+    fun get(defaults: java.util.UUID? = null): java.util.UUID?
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -137,7 +126,7 @@ class FieldModelOptionalUUID(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Set the optional value
-    fun set(optional: UUID?)
+    fun set(optional: java.util.UUID?)
     {
         val fbeBegin = setBegin(optional != null)
         if (fbeBegin == 0L)

@@ -5,27 +5,15 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding Byte vector field model
-public final class FieldModelVectorByte extends FieldModel
+public final class FieldModelVectorByte extends com.chronoxor.fbe.FieldModel
 {
-    private final FieldModelByte _model;
+    private final com.chronoxor.fbe.FieldModelByte _model;
 
-    public FieldModelVectorByte(Buffer buffer, long offset)
+    public FieldModelVectorByte(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        _model = new FieldModelByte(buffer, offset);
+        _model = new com.chronoxor.fbe.FieldModelByte(buffer, offset);
     }
 
     // Get the field size
@@ -79,7 +67,7 @@ public final class FieldModelVectorByte extends FieldModel
     }
 
     // Vector index operator
-    public FieldModelByte getItem(long index)
+    public com.chronoxor.fbe.FieldModelByte getItem(long index)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
 
@@ -95,7 +83,7 @@ public final class FieldModelVectorByte extends FieldModel
     }
 
     // Resize the vector and get its first model
-    public FieldModelByte resize(long size)
+    public com.chronoxor.fbe.FieldModelByte resize(long size)
     {
         int fbeVectorSize = (int)(size * _model.fbeSize());
         int fbeVectorOffset = (int)(_buffer.allocate(4 + fbeVectorSize) - _buffer.getOffset());
@@ -136,8 +124,8 @@ public final class FieldModelVectorByte extends FieldModel
         return true;
     }
 
-    // Get the vector as ArrayList
-    public void get(ArrayList<Byte> values)
+    // Get the vector as java.util.ArrayList
+    public void get(java.util.ArrayList<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -160,8 +148,8 @@ public final class FieldModelVectorByte extends FieldModel
         }
     }
 
-    // Get the vector as LinkedList
-    public void get(LinkedList<Byte> values)
+    // Get the vector as java.util.LinkedList
+    public void get(java.util.LinkedList<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -182,8 +170,8 @@ public final class FieldModelVectorByte extends FieldModel
         }
     }
 
-    // Get the vector as HashSet
-    public void get(HashSet<Byte> values)
+    // Get the vector as java.util.HashSet
+    public void get(java.util.HashSet<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -204,8 +192,8 @@ public final class FieldModelVectorByte extends FieldModel
         }
     }
 
-    // Set the vector as ArrayList
-    public void set(ArrayList<Byte> values)
+    // Set the vector as java.util.ArrayList
+    public void set(java.util.ArrayList<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -223,8 +211,8 @@ public final class FieldModelVectorByte extends FieldModel
         }
     }
 
-    // Set the vector as LinkedList
-    public void set(LinkedList<Byte> values)
+    // Set the vector as java.util.LinkedList
+    public void set(java.util.LinkedList<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -242,8 +230,8 @@ public final class FieldModelVectorByte extends FieldModel
         }
     }
 
-    // Set the vector as HashSet
-    public void set(HashSet<Byte> values)
+    // Set the vector as java.util.HashSet
+    public void set(java.util.HashSet<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

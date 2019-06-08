@@ -5,28 +5,16 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding Int32->OptionalByte map field model
-public final class FieldModelMapInt32OptionalByte extends FieldModel
+public final class FieldModelMapInt32OptionalByte extends com.chronoxor.fbe.FieldModel
 {
-    private final FieldModelInt32 _modelKey;
+    private final com.chronoxor.fbe.FieldModelInt32 _modelKey;
     private final FieldModelOptionalByte _modelValue;
 
-    public FieldModelMapInt32OptionalByte(Buffer buffer, long offset)
+    public FieldModelMapInt32OptionalByte(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        _modelKey = new FieldModelInt32(buffer, offset);
+        _modelKey = new com.chronoxor.fbe.FieldModelInt32(buffer, offset);
         _modelValue = new FieldModelOptionalByte(buffer, offset);
     }
 
@@ -85,7 +73,7 @@ public final class FieldModelMapInt32OptionalByte extends FieldModel
     }
 
     // Map index operator
-    public Pair<FieldModelInt32, FieldModelOptionalByte> getItem(long index)
+    public com.chronoxor.fbe.Pair<com.chronoxor.fbe.FieldModelInt32, FieldModelOptionalByte> getItem(long index)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
 
@@ -99,11 +87,11 @@ public final class FieldModelMapInt32OptionalByte extends FieldModel
         _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
         _modelKey.fbeShift(index * (_modelKey.fbeSize() + _modelValue.fbeSize()));
         _modelValue.fbeShift(index * (_modelKey.fbeSize() + _modelValue.fbeSize()));
-        return Pair.create(_modelKey, _modelValue);
+        return com.chronoxor.fbe.Pair.create(_modelKey, _modelValue);
     }
 
     // Resize the map and get its first model
-    public Pair<FieldModelInt32, FieldModelOptionalByte> resize(long size)
+    public com.chronoxor.fbe.Pair<com.chronoxor.fbe.FieldModelInt32, FieldModelOptionalByte> resize(long size)
     {
         int fbeMapSize = (int)(size * (_modelKey.fbeSize() + _modelValue.fbeSize()));
         int fbeMapOffset = (int)(_buffer.allocate(4 + fbeMapSize) - _buffer.getOffset());
@@ -115,7 +103,7 @@ public final class FieldModelMapInt32OptionalByte extends FieldModel
 
         _modelKey.fbeOffset(fbeMapOffset + 4);
         _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
-        return Pair.create(_modelKey, _modelValue);
+        return com.chronoxor.fbe.Pair.create(_modelKey, _modelValue);
     }
 
     // Check if the map is valid
@@ -149,8 +137,8 @@ public final class FieldModelMapInt32OptionalByte extends FieldModel
         return true;
     }
 
-    // Get the map as TreeMap
-    public void get(TreeMap<Integer, Byte> values)
+    // Get the map as java.util.TreeMap
+    public void get(java.util.TreeMap<Integer, Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -173,8 +161,8 @@ public final class FieldModelMapInt32OptionalByte extends FieldModel
         }
     }
 
-    // Get the map as HashMap
-    public void get(HashMap<Integer, Byte> values)
+    // Get the map as java.util.HashMap
+    public void get(java.util.HashMap<Integer, Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -197,8 +185,8 @@ public final class FieldModelMapInt32OptionalByte extends FieldModel
         }
     }
 
-    // Set the map as TreeMap
-    public void set(TreeMap<Integer, Byte> values)
+    // Set the map as java.util.TreeMap
+    public void set(java.util.TreeMap<Integer, Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -218,8 +206,8 @@ public final class FieldModelMapInt32OptionalByte extends FieldModel
         }
     }
 
-    // Set the map as HashMap
-    public void set(HashMap<Integer, Byte> values)
+    // Set the map as java.util.HashMap
+    public void set(java.util.HashMap<Integer, Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

@@ -7,16 +7,6 @@
 
 package com.chronoxor.proto
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-
 @Suppress("EnumEntryName", "MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 enum class StateEnum
 {
@@ -41,11 +31,11 @@ enum class StateEnum
     fun hasFlags(flags: Byte): Boolean = ((raw.toInt() and flags.toInt()) != 0) && ((raw.toInt() and flags.toInt()) == flags.toInt())
     fun hasFlags(flags: StateEnum): Boolean = hasFlags(flags.raw)
 
-    val allSet: EnumSet<StateEnum> get() = EnumSet.allOf(StateEnum::class.java)
-    val noneSet: EnumSet<StateEnum> get() = EnumSet.noneOf(StateEnum::class.java)
-    val currentSet: EnumSet<StateEnum> get()
+    val allSet: java.util.EnumSet<StateEnum> get() = java.util.EnumSet.allOf(StateEnum::class.java)
+    val noneSet: java.util.EnumSet<StateEnum> get() = java.util.EnumSet.noneOf(StateEnum::class.java)
+    val currentSet: java.util.EnumSet<StateEnum> get()
     {
-        val result = EnumSet.noneOf(StateEnum::class.java)
+        val result = java.util.EnumSet.noneOf(StateEnum::class.java)
         if ((raw.toInt() and unknown.raw.toInt()) != 0)
         {
             result.add(unknown)
@@ -128,7 +118,7 @@ enum class StateEnum
 
     companion object
     {
-        private val mapping = HashMap<Byte, StateEnum>()
+        private val mapping = java.util.HashMap<Byte, StateEnum>()
 
         init
         {

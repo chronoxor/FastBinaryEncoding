@@ -5,25 +5,13 @@
 
 package com.chronoxor.enums.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.enums.*;
-
 // Fast Binary Encoding EnumInt32 final model
-public final class FinalModelEnumInt32 extends FinalModel
+public final class FinalModelEnumInt32 extends com.chronoxor.fbe.FinalModel
 {
-    public FinalModelEnumInt32(Buffer buffer, long offset) { super(buffer, offset); }
+    public FinalModelEnumInt32(com.chronoxor.fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(EnumInt32 value) { return fbeSize(); }
+    public long fbeAllocationSize(com.chronoxor.enums.EnumInt32 value) { return fbeSize(); }
 
     // Get the final size
     @Override
@@ -40,17 +28,17 @@ public final class FinalModelEnumInt32 extends FinalModel
     }
 
     // Get the value
-    public EnumInt32 get(Size size)
+    public com.chronoxor.enums.EnumInt32 get(com.chronoxor.fbe.Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
-            return new EnumInt32();
+            return new com.chronoxor.enums.EnumInt32();
 
         size.value = fbeSize();
-        return new EnumInt32(readInt32(fbeOffset()));
+        return new com.chronoxor.enums.EnumInt32(readInt32(fbeOffset()));
     }
 
     // Set the value
-    public long set(EnumInt32 value)
+    public long set(com.chronoxor.enums.EnumInt32 value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional Boolean field model
-public final class FieldModelOptionalBoolean extends FieldModel
+public final class FieldModelOptionalBoolean extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelOptionalBoolean(Buffer buffer, long offset)
+    public FieldModelOptionalBoolean(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        value = new FieldModelBoolean(buffer, 0);
+        value = new com.chronoxor.fbe.FieldModelBoolean(buffer, 0);
     }
 
     // Get the field size
@@ -57,7 +45,7 @@ public final class FieldModelOptionalBoolean extends FieldModel
     }
 
     // Base field model value
-    public final FieldModelBoolean value;
+    public final com.chronoxor.fbe.FieldModelBoolean value;
 
     // Check if the optional value is valid
     @Override

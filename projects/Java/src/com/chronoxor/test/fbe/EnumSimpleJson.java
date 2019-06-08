@@ -5,31 +5,17 @@
 
 package com.chronoxor.test.fbe;;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
-import com.google.gson.*;
-
-public final class EnumSimpleJson implements JsonSerializer<EnumSimple>, JsonDeserializer<EnumSimple>
+public final class EnumSimpleJson implements com.google.gson.JsonSerializer<com.chronoxor.test.EnumSimple>, com.google.gson.JsonDeserializer<com.chronoxor.test.EnumSimple>
 {
     @Override
-    public JsonElement serialize(EnumSimple src, Type typeOfSrc, JsonSerializationContext context)
+    public com.google.gson.JsonElement serialize(com.chronoxor.test.EnumSimple src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
-        return new JsonPrimitive(src.getRaw());
+        return new com.google.gson.JsonPrimitive(src.getRaw());
     }
 
     @Override
-    public EnumSimple deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public com.chronoxor.test.EnumSimple deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
     {
-        return new EnumSimple(json.getAsJsonPrimitive().getAsInt());
+        return new com.chronoxor.test.EnumSimple(json.getAsJsonPrimitive().getAsInt());
     }
 }

@@ -5,24 +5,12 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructSimple vector field model
-public final class FieldModelVectorStructSimple extends FieldModel
+public final class FieldModelVectorStructSimple extends com.chronoxor.fbe.FieldModel
 {
     private final FieldModelStructSimple _model;
 
-    public FieldModelVectorStructSimple(Buffer buffer, long offset)
+    public FieldModelVectorStructSimple(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         _model = new FieldModelStructSimple(buffer, offset);
@@ -136,8 +124,8 @@ public final class FieldModelVectorStructSimple extends FieldModel
         return true;
     }
 
-    // Get the vector as ArrayList
-    public void get(ArrayList<StructSimple> values)
+    // Get the vector as java.util.ArrayList
+    public void get(java.util.ArrayList<com.chronoxor.test.StructSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -154,14 +142,14 @@ public final class FieldModelVectorStructSimple extends FieldModel
         var fbeModel = getItem(0);
         for (long i = fbeVectorSize; i-- > 0;)
         {
-            StructSimple value = fbeModel.get();
+            com.chronoxor.test.StructSimple value = fbeModel.get();
             values.add(value);
             fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
-    // Get the vector as LinkedList
-    public void get(LinkedList<StructSimple> values)
+    // Get the vector as java.util.LinkedList
+    public void get(java.util.LinkedList<com.chronoxor.test.StructSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -176,14 +164,14 @@ public final class FieldModelVectorStructSimple extends FieldModel
         var fbeModel = getItem(0);
         for (long i = fbeVectorSize; i-- > 0;)
         {
-            StructSimple value = fbeModel.get();
+            com.chronoxor.test.StructSimple value = fbeModel.get();
             values.add(value);
             fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
-    // Get the vector as HashSet
-    public void get(HashSet<StructSimple> values)
+    // Get the vector as java.util.HashSet
+    public void get(java.util.HashSet<com.chronoxor.test.StructSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -198,14 +186,14 @@ public final class FieldModelVectorStructSimple extends FieldModel
         var fbeModel = getItem(0);
         for (long i = fbeVectorSize; i-- > 0;)
         {
-            StructSimple value = fbeModel.get();
+            com.chronoxor.test.StructSimple value = fbeModel.get();
             values.add(value);
             fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
-    // Set the vector as ArrayList
-    public void set(ArrayList<StructSimple> values)
+    // Set the vector as java.util.ArrayList
+    public void set(java.util.ArrayList<com.chronoxor.test.StructSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -223,8 +211,8 @@ public final class FieldModelVectorStructSimple extends FieldModel
         }
     }
 
-    // Set the vector as LinkedList
-    public void set(LinkedList<StructSimple> values)
+    // Set the vector as java.util.LinkedList
+    public void set(java.util.LinkedList<com.chronoxor.test.StructSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -242,8 +230,8 @@ public final class FieldModelVectorStructSimple extends FieldModel
         }
     }
 
-    // Set the vector as HashSet
-    public void set(HashSet<StructSimple> values)
+    // Set the vector as java.util.HashSet
+    public void set(java.util.HashSet<com.chronoxor.test.StructSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

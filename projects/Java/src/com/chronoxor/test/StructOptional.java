@@ -5,18 +5,6 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public class StructOptional extends StructSimple
 {
     public Boolean f100 = null;
@@ -61,18 +49,18 @@ public class StructOptional extends StructSimple
     public Double f139 = null;
     public Double f140 = (double)-123.456e+123d;
     public Double f141 = null;
-    public BigDecimal f142 = null;
-    public BigDecimal f143 = BigDecimal.valueOf(123456.123456d);
-    public BigDecimal f144 = null;
+    public java.math.BigDecimal f142 = null;
+    public java.math.BigDecimal f143 = java.math.BigDecimal.valueOf(123456.123456d);
+    public java.math.BigDecimal f144 = null;
     public String f145 = null;
     public String f146 = "Initial string!";
     public String f147 = null;
-    public Instant f148 = null;
-    public Instant f149 = Instant.now();
-    public Instant f150 = null;
-    public UUID f151 = null;
-    public UUID f152 = UUID.fromString("123e4567-e89b-12d3-a456-426655440000");
-    public UUID f153 = null;
+    public java.time.Instant f148 = null;
+    public java.time.Instant f149 = java.time.Instant.now();
+    public java.time.Instant f150 = null;
+    public java.util.UUID f151 = null;
+    public java.util.UUID f152 = java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000");
+    public java.util.UUID f153 = null;
     public com.chronoxor.proto.OrderSide f154 = null;
     public com.chronoxor.proto.OrderSide f155 = null;
     public com.chronoxor.proto.OrderType f156 = null;
@@ -88,7 +76,7 @@ public class StructOptional extends StructSimple
 
     public StructOptional() {}
 
-    public StructOptional(StructSimple parent, Boolean f100, Boolean f101, Boolean f102, Byte f103, Byte f104, Byte f105, Character f106, Character f107, Character f108, Character f109, Character f110, Character f111, Byte f112, Byte f113, Byte f114, Byte f115, Byte f116, Byte f117, Short f118, Short f119, Short f120, Short f121, Short f122, Short f123, Integer f124, Integer f125, Integer f126, Integer f127, Integer f128, Integer f129, Long f130, Long f131, Long f132, Long f133, Long f134, Long f135, Float f136, Float f137, Float f138, Double f139, Double f140, Double f141, BigDecimal f142, BigDecimal f143, BigDecimal f144, String f145, String f146, String f147, Instant f148, Instant f149, Instant f150, UUID f151, UUID f152, UUID f153, com.chronoxor.proto.OrderSide f154, com.chronoxor.proto.OrderSide f155, com.chronoxor.proto.OrderType f156, com.chronoxor.proto.OrderType f157, com.chronoxor.proto.Order f158, com.chronoxor.proto.Order f159, com.chronoxor.proto.Balance f160, com.chronoxor.proto.Balance f161, com.chronoxor.proto.State f162, com.chronoxor.proto.State f163, com.chronoxor.proto.Account f164, com.chronoxor.proto.Account f165)
+    public StructOptional(StructSimple parent, Boolean f100, Boolean f101, Boolean f102, Byte f103, Byte f104, Byte f105, Character f106, Character f107, Character f108, Character f109, Character f110, Character f111, Byte f112, Byte f113, Byte f114, Byte f115, Byte f116, Byte f117, Short f118, Short f119, Short f120, Short f121, Short f122, Short f123, Integer f124, Integer f125, Integer f126, Integer f127, Integer f128, Integer f129, Long f130, Long f131, Long f132, Long f133, Long f134, Long f135, Float f136, Float f137, Float f138, Double f139, Double f140, Double f141, java.math.BigDecimal f142, java.math.BigDecimal f143, java.math.BigDecimal f144, String f145, String f146, String f147, java.time.Instant f148, java.time.Instant f149, java.time.Instant f150, java.util.UUID f151, java.util.UUID f152, java.util.UUID f153, com.chronoxor.proto.OrderSide f154, com.chronoxor.proto.OrderSide f155, com.chronoxor.proto.OrderType f156, com.chronoxor.proto.OrderType f157, com.chronoxor.proto.Order f158, com.chronoxor.proto.Order f159, com.chronoxor.proto.Balance f160, com.chronoxor.proto.Balance f161, com.chronoxor.proto.State f162, com.chronoxor.proto.State f163, com.chronoxor.proto.Account f164, com.chronoxor.proto.Account f165)
     {
         super(parent);
         this.f100 = f100;

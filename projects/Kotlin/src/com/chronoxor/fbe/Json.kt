@@ -7,99 +7,89 @@
 
 package com.chronoxor.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.google.gson.*
-
-internal class BytesJson : JsonSerializer<ByteArray>, JsonDeserializer<ByteArray>
+internal class BytesJson : com.google.gson.JsonSerializer<ByteArray>, com.google.gson.JsonDeserializer<ByteArray>
 {
-    override fun serialize(src: ByteArray, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: ByteArray, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(Base64.getEncoder().encodeToString(src))
+        return com.google.gson.JsonPrimitive(java.util.Base64.getEncoder().encodeToString(src))
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): ByteArray
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): ByteArray
     {
-        return Base64.getDecoder().decode(json.asString)
+        return java.util.Base64.getDecoder().decode(json.asString)
     }
 }
 
-internal class CharacterJson : JsonSerializer<Char>, JsonDeserializer<Char>
+internal class CharacterJson : com.google.gson.JsonSerializer<Char>, com.google.gson.JsonDeserializer<Char>
 {
-    override fun serialize(src: Char, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: Char, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(src.toLong())
+        return com.google.gson.JsonPrimitive(src.toLong())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): Char
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): Char
     {
         return json.asLong.toChar()
     }
 }
 
-internal class InstantJson : JsonSerializer<Instant>, JsonDeserializer<Instant>
+internal class InstantJson : com.google.gson.JsonSerializer<java.time.Instant>, com.google.gson.JsonDeserializer<java.time.Instant>
 {
-    override fun serialize(src: Instant, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: java.time.Instant, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         val nanoseconds = src.epochSecond * 1000000000 + src.nano
-        return JsonPrimitive(nanoseconds)
+        return com.google.gson.JsonPrimitive(nanoseconds)
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): Instant
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.time.Instant
     {
         val nanoseconds = json.asJsonPrimitive.asLong
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
+        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
     }
 }
 
-internal class BigDecimalJson : JsonSerializer<BigDecimal>, JsonDeserializer<BigDecimal>
+internal class BigDecimalJson : com.google.gson.JsonSerializer<java.math.BigDecimal>, com.google.gson.JsonDeserializer<java.math.BigDecimal>
 {
-    override fun serialize(src: BigDecimal, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: java.math.BigDecimal, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(src.toPlainString())
+        return com.google.gson.JsonPrimitive(src.toPlainString())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): BigDecimal
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.math.BigDecimal
     {
-        return BigDecimal(json.asJsonPrimitive.asString)
+        return java.math.BigDecimal(json.asJsonPrimitive.asString)
     }
 }
 
-internal class UUIDJson : JsonSerializer<UUID>, JsonDeserializer<UUID>
+internal class UUIDJson : com.google.gson.JsonSerializer<java.util.UUID>, com.google.gson.JsonDeserializer<java.util.UUID>
 {
-    override fun serialize(src: UUID, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: java.util.UUID, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(src.toString())
+        return com.google.gson.JsonPrimitive(src.toString())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): UUID {
-        return UUID.fromString(json.asJsonPrimitive.asString)
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.util.UUID {
+        return java.util.UUID.fromString(json.asJsonPrimitive.asString)
     }
 }
 
-internal class UByteNullableJson : JsonSerializer<UByte?>, JsonDeserializer<UByte?>
+internal class UByteNullableJson : com.google.gson.JsonSerializer<UByte?>, com.google.gson.JsonDeserializer<UByte?>
 {
-    override fun serialize(src: UByte?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: UByte?, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         if (src == null)
-            return JsonNull.INSTANCE
+            return com.google.gson.JsonNull.INSTANCE
 
-        return JsonPrimitive(src.toLong())
+        return com.google.gson.JsonPrimitive(src.toLong())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): UByte?
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): UByte?
     {
         if (json.isJsonNull)
             return null
@@ -108,18 +98,18 @@ internal class UByteNullableJson : JsonSerializer<UByte?>, JsonDeserializer<UByt
     }
 }
 
-internal class UShortNullableJson : JsonSerializer<UShort?>, JsonDeserializer<UShort?>
+internal class UShortNullableJson : com.google.gson.JsonSerializer<UShort?>, com.google.gson.JsonDeserializer<UShort?>
 {
-    override fun serialize(src: UShort?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: UShort?, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         if (src == null)
-            return JsonNull.INSTANCE
+            return com.google.gson.JsonNull.INSTANCE
 
-        return JsonPrimitive(src.toLong())
+        return com.google.gson.JsonPrimitive(src.toLong())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): UShort?
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): UShort?
     {
         if (json.isJsonNull)
             return null
@@ -128,18 +118,18 @@ internal class UShortNullableJson : JsonSerializer<UShort?>, JsonDeserializer<US
     }
 }
 
-internal class UIntNullableJson : JsonSerializer<UInt?>, JsonDeserializer<UInt?>
+internal class UIntNullableJson : com.google.gson.JsonSerializer<UInt?>, com.google.gson.JsonDeserializer<UInt?>
 {
-    override fun serialize(src: UInt?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: UInt?, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         if (src == null)
-            return JsonNull.INSTANCE
+            return com.google.gson.JsonNull.INSTANCE
 
-        return JsonPrimitive(src.toLong())
+        return com.google.gson.JsonPrimitive(src.toLong())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): UInt?
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): UInt?
     {
         if (json.isJsonNull)
             return null
@@ -148,18 +138,18 @@ internal class UIntNullableJson : JsonSerializer<UInt?>, JsonDeserializer<UInt?>
     }
 }
 
-internal class ULongNullableJson : JsonSerializer<ULong?>, JsonDeserializer<ULong?>
+internal class ULongNullableJson : com.google.gson.JsonSerializer<ULong?>, com.google.gson.JsonDeserializer<ULong?>
 {
-    override fun serialize(src: ULong?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: ULong?, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         if (src == null)
-            return JsonNull.INSTANCE
+            return com.google.gson.JsonNull.INSTANCE
 
-        return JsonPrimitive(src.toLong())
+        return com.google.gson.JsonPrimitive(src.toLong())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): ULong?
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): ULong?
     {
         if (json.isJsonNull)
             return null
@@ -173,17 +163,17 @@ internal class ULongNullableJson : JsonSerializer<ULong?>, JsonDeserializer<ULon
 object Json
 {
     // Get the JSON engine
-    val engine: Gson = register(GsonBuilder()).create()
+    val engine: com.google.gson.Gson = register(com.google.gson.GsonBuilder()).create()
 
-    fun register(builder: GsonBuilder): GsonBuilder
+    fun register(builder: com.google.gson.GsonBuilder): com.google.gson.GsonBuilder
     {
         builder.serializeNulls()
         builder.registerTypeAdapter(ByteArray::class.java, BytesJson())
         builder.registerTypeAdapter(Char::class.java, CharacterJson())
         builder.registerTypeAdapter(Character::class.java, CharacterJson())
-        builder.registerTypeAdapter(Instant::class.java, InstantJson())
-        builder.registerTypeAdapter(BigDecimal::class.java, BigDecimalJson())
-        builder.registerTypeAdapter(UUID::class.java, UUIDJson())
+        builder.registerTypeAdapter(java.time.Instant::class.java, InstantJson())
+        builder.registerTypeAdapter(java.math.BigDecimal::class.java, BigDecimalJson())
+        builder.registerTypeAdapter(java.util.UUID::class.java, UUIDJson())
         builder.registerTypeAdapter(kotlin.UByte::class.java, UByteNullableJson())
         builder.registerTypeAdapter(kotlin.UShort::class.java, UShortNullableJson())
         builder.registerTypeAdapter(kotlin.UInt::class.java, UIntNullableJson())

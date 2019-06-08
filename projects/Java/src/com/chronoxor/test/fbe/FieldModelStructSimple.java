@@ -5,60 +5,48 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructSimple field model
-public final class FieldModelStructSimple extends FieldModel
+public final class FieldModelStructSimple extends com.chronoxor.fbe.FieldModel
 {
-    public final FieldModelInt32 id;
-    public final FieldModelBoolean f1;
-    public final FieldModelBoolean f2;
-    public final FieldModelByte f3;
-    public final FieldModelByte f4;
-    public final FieldModelChar f5;
-    public final FieldModelChar f6;
-    public final FieldModelWChar f7;
-    public final FieldModelWChar f8;
-    public final FieldModelInt8 f9;
-    public final FieldModelInt8 f10;
-    public final FieldModelInt8 f11;
-    public final FieldModelInt8 f12;
-    public final FieldModelInt16 f13;
-    public final FieldModelInt16 f14;
-    public final FieldModelInt16 f15;
-    public final FieldModelInt16 f16;
-    public final FieldModelInt32 f17;
-    public final FieldModelInt32 f18;
-    public final FieldModelInt32 f19;
-    public final FieldModelInt32 f20;
-    public final FieldModelInt64 f21;
-    public final FieldModelInt64 f22;
-    public final FieldModelInt64 f23;
-    public final FieldModelInt64 f24;
-    public final FieldModelFloat f25;
-    public final FieldModelFloat f26;
-    public final FieldModelDouble f27;
-    public final FieldModelDouble f28;
-    public final FieldModelDecimal f29;
-    public final FieldModelDecimal f30;
-    public final FieldModelString f31;
-    public final FieldModelString f32;
-    public final FieldModelTimestamp f33;
-    public final FieldModelTimestamp f34;
-    public final FieldModelTimestamp f35;
-    public final FieldModelUUID f36;
-    public final FieldModelUUID f37;
-    public final FieldModelUUID f38;
+    public final com.chronoxor.fbe.FieldModelInt32 id;
+    public final com.chronoxor.fbe.FieldModelBoolean f1;
+    public final com.chronoxor.fbe.FieldModelBoolean f2;
+    public final com.chronoxor.fbe.FieldModelByte f3;
+    public final com.chronoxor.fbe.FieldModelByte f4;
+    public final com.chronoxor.fbe.FieldModelChar f5;
+    public final com.chronoxor.fbe.FieldModelChar f6;
+    public final com.chronoxor.fbe.FieldModelWChar f7;
+    public final com.chronoxor.fbe.FieldModelWChar f8;
+    public final com.chronoxor.fbe.FieldModelInt8 f9;
+    public final com.chronoxor.fbe.FieldModelInt8 f10;
+    public final com.chronoxor.fbe.FieldModelInt8 f11;
+    public final com.chronoxor.fbe.FieldModelInt8 f12;
+    public final com.chronoxor.fbe.FieldModelInt16 f13;
+    public final com.chronoxor.fbe.FieldModelInt16 f14;
+    public final com.chronoxor.fbe.FieldModelInt16 f15;
+    public final com.chronoxor.fbe.FieldModelInt16 f16;
+    public final com.chronoxor.fbe.FieldModelInt32 f17;
+    public final com.chronoxor.fbe.FieldModelInt32 f18;
+    public final com.chronoxor.fbe.FieldModelInt32 f19;
+    public final com.chronoxor.fbe.FieldModelInt32 f20;
+    public final com.chronoxor.fbe.FieldModelInt64 f21;
+    public final com.chronoxor.fbe.FieldModelInt64 f22;
+    public final com.chronoxor.fbe.FieldModelInt64 f23;
+    public final com.chronoxor.fbe.FieldModelInt64 f24;
+    public final com.chronoxor.fbe.FieldModelFloat f25;
+    public final com.chronoxor.fbe.FieldModelFloat f26;
+    public final com.chronoxor.fbe.FieldModelDouble f27;
+    public final com.chronoxor.fbe.FieldModelDouble f28;
+    public final com.chronoxor.fbe.FieldModelDecimal f29;
+    public final com.chronoxor.fbe.FieldModelDecimal f30;
+    public final com.chronoxor.fbe.FieldModelString f31;
+    public final com.chronoxor.fbe.FieldModelString f32;
+    public final com.chronoxor.fbe.FieldModelTimestamp f33;
+    public final com.chronoxor.fbe.FieldModelTimestamp f34;
+    public final com.chronoxor.fbe.FieldModelTimestamp f35;
+    public final com.chronoxor.fbe.FieldModelUUID f36;
+    public final com.chronoxor.fbe.FieldModelUUID f37;
+    public final com.chronoxor.fbe.FieldModelUUID f38;
     public final com.chronoxor.proto.fbe.FieldModelOrderSide f39;
     public final com.chronoxor.proto.fbe.FieldModelOrderType f40;
     public final com.chronoxor.proto.fbe.FieldModelOrder f41;
@@ -66,48 +54,48 @@ public final class FieldModelStructSimple extends FieldModel
     public final com.chronoxor.proto.fbe.FieldModelState f43;
     public final com.chronoxor.proto.fbe.FieldModelAccount f44;
 
-    public FieldModelStructSimple(Buffer buffer, long offset)
+    public FieldModelStructSimple(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        id = new FieldModelInt32(buffer, 4 + 4);
-        f1 = new FieldModelBoolean(buffer, id.fbeOffset() + id.fbeSize());
-        f2 = new FieldModelBoolean(buffer, f1.fbeOffset() + f1.fbeSize());
-        f3 = new FieldModelByte(buffer, f2.fbeOffset() + f2.fbeSize());
-        f4 = new FieldModelByte(buffer, f3.fbeOffset() + f3.fbeSize());
-        f5 = new FieldModelChar(buffer, f4.fbeOffset() + f4.fbeSize());
-        f6 = new FieldModelChar(buffer, f5.fbeOffset() + f5.fbeSize());
-        f7 = new FieldModelWChar(buffer, f6.fbeOffset() + f6.fbeSize());
-        f8 = new FieldModelWChar(buffer, f7.fbeOffset() + f7.fbeSize());
-        f9 = new FieldModelInt8(buffer, f8.fbeOffset() + f8.fbeSize());
-        f10 = new FieldModelInt8(buffer, f9.fbeOffset() + f9.fbeSize());
-        f11 = new FieldModelInt8(buffer, f10.fbeOffset() + f10.fbeSize());
-        f12 = new FieldModelInt8(buffer, f11.fbeOffset() + f11.fbeSize());
-        f13 = new FieldModelInt16(buffer, f12.fbeOffset() + f12.fbeSize());
-        f14 = new FieldModelInt16(buffer, f13.fbeOffset() + f13.fbeSize());
-        f15 = new FieldModelInt16(buffer, f14.fbeOffset() + f14.fbeSize());
-        f16 = new FieldModelInt16(buffer, f15.fbeOffset() + f15.fbeSize());
-        f17 = new FieldModelInt32(buffer, f16.fbeOffset() + f16.fbeSize());
-        f18 = new FieldModelInt32(buffer, f17.fbeOffset() + f17.fbeSize());
-        f19 = new FieldModelInt32(buffer, f18.fbeOffset() + f18.fbeSize());
-        f20 = new FieldModelInt32(buffer, f19.fbeOffset() + f19.fbeSize());
-        f21 = new FieldModelInt64(buffer, f20.fbeOffset() + f20.fbeSize());
-        f22 = new FieldModelInt64(buffer, f21.fbeOffset() + f21.fbeSize());
-        f23 = new FieldModelInt64(buffer, f22.fbeOffset() + f22.fbeSize());
-        f24 = new FieldModelInt64(buffer, f23.fbeOffset() + f23.fbeSize());
-        f25 = new FieldModelFloat(buffer, f24.fbeOffset() + f24.fbeSize());
-        f26 = new FieldModelFloat(buffer, f25.fbeOffset() + f25.fbeSize());
-        f27 = new FieldModelDouble(buffer, f26.fbeOffset() + f26.fbeSize());
-        f28 = new FieldModelDouble(buffer, f27.fbeOffset() + f27.fbeSize());
-        f29 = new FieldModelDecimal(buffer, f28.fbeOffset() + f28.fbeSize());
-        f30 = new FieldModelDecimal(buffer, f29.fbeOffset() + f29.fbeSize());
-        f31 = new FieldModelString(buffer, f30.fbeOffset() + f30.fbeSize());
-        f32 = new FieldModelString(buffer, f31.fbeOffset() + f31.fbeSize());
-        f33 = new FieldModelTimestamp(buffer, f32.fbeOffset() + f32.fbeSize());
-        f34 = new FieldModelTimestamp(buffer, f33.fbeOffset() + f33.fbeSize());
-        f35 = new FieldModelTimestamp(buffer, f34.fbeOffset() + f34.fbeSize());
-        f36 = new FieldModelUUID(buffer, f35.fbeOffset() + f35.fbeSize());
-        f37 = new FieldModelUUID(buffer, f36.fbeOffset() + f36.fbeSize());
-        f38 = new FieldModelUUID(buffer, f37.fbeOffset() + f37.fbeSize());
+        id = new com.chronoxor.fbe.FieldModelInt32(buffer, 4 + 4);
+        f1 = new com.chronoxor.fbe.FieldModelBoolean(buffer, id.fbeOffset() + id.fbeSize());
+        f2 = new com.chronoxor.fbe.FieldModelBoolean(buffer, f1.fbeOffset() + f1.fbeSize());
+        f3 = new com.chronoxor.fbe.FieldModelByte(buffer, f2.fbeOffset() + f2.fbeSize());
+        f4 = new com.chronoxor.fbe.FieldModelByte(buffer, f3.fbeOffset() + f3.fbeSize());
+        f5 = new com.chronoxor.fbe.FieldModelChar(buffer, f4.fbeOffset() + f4.fbeSize());
+        f6 = new com.chronoxor.fbe.FieldModelChar(buffer, f5.fbeOffset() + f5.fbeSize());
+        f7 = new com.chronoxor.fbe.FieldModelWChar(buffer, f6.fbeOffset() + f6.fbeSize());
+        f8 = new com.chronoxor.fbe.FieldModelWChar(buffer, f7.fbeOffset() + f7.fbeSize());
+        f9 = new com.chronoxor.fbe.FieldModelInt8(buffer, f8.fbeOffset() + f8.fbeSize());
+        f10 = new com.chronoxor.fbe.FieldModelInt8(buffer, f9.fbeOffset() + f9.fbeSize());
+        f11 = new com.chronoxor.fbe.FieldModelInt8(buffer, f10.fbeOffset() + f10.fbeSize());
+        f12 = new com.chronoxor.fbe.FieldModelInt8(buffer, f11.fbeOffset() + f11.fbeSize());
+        f13 = new com.chronoxor.fbe.FieldModelInt16(buffer, f12.fbeOffset() + f12.fbeSize());
+        f14 = new com.chronoxor.fbe.FieldModelInt16(buffer, f13.fbeOffset() + f13.fbeSize());
+        f15 = new com.chronoxor.fbe.FieldModelInt16(buffer, f14.fbeOffset() + f14.fbeSize());
+        f16 = new com.chronoxor.fbe.FieldModelInt16(buffer, f15.fbeOffset() + f15.fbeSize());
+        f17 = new com.chronoxor.fbe.FieldModelInt32(buffer, f16.fbeOffset() + f16.fbeSize());
+        f18 = new com.chronoxor.fbe.FieldModelInt32(buffer, f17.fbeOffset() + f17.fbeSize());
+        f19 = new com.chronoxor.fbe.FieldModelInt32(buffer, f18.fbeOffset() + f18.fbeSize());
+        f20 = new com.chronoxor.fbe.FieldModelInt32(buffer, f19.fbeOffset() + f19.fbeSize());
+        f21 = new com.chronoxor.fbe.FieldModelInt64(buffer, f20.fbeOffset() + f20.fbeSize());
+        f22 = new com.chronoxor.fbe.FieldModelInt64(buffer, f21.fbeOffset() + f21.fbeSize());
+        f23 = new com.chronoxor.fbe.FieldModelInt64(buffer, f22.fbeOffset() + f22.fbeSize());
+        f24 = new com.chronoxor.fbe.FieldModelInt64(buffer, f23.fbeOffset() + f23.fbeSize());
+        f25 = new com.chronoxor.fbe.FieldModelFloat(buffer, f24.fbeOffset() + f24.fbeSize());
+        f26 = new com.chronoxor.fbe.FieldModelFloat(buffer, f25.fbeOffset() + f25.fbeSize());
+        f27 = new com.chronoxor.fbe.FieldModelDouble(buffer, f26.fbeOffset() + f26.fbeSize());
+        f28 = new com.chronoxor.fbe.FieldModelDouble(buffer, f27.fbeOffset() + f27.fbeSize());
+        f29 = new com.chronoxor.fbe.FieldModelDecimal(buffer, f28.fbeOffset() + f28.fbeSize());
+        f30 = new com.chronoxor.fbe.FieldModelDecimal(buffer, f29.fbeOffset() + f29.fbeSize());
+        f31 = new com.chronoxor.fbe.FieldModelString(buffer, f30.fbeOffset() + f30.fbeSize());
+        f32 = new com.chronoxor.fbe.FieldModelString(buffer, f31.fbeOffset() + f31.fbeSize());
+        f33 = new com.chronoxor.fbe.FieldModelTimestamp(buffer, f32.fbeOffset() + f32.fbeSize());
+        f34 = new com.chronoxor.fbe.FieldModelTimestamp(buffer, f33.fbeOffset() + f33.fbeSize());
+        f35 = new com.chronoxor.fbe.FieldModelTimestamp(buffer, f34.fbeOffset() + f34.fbeSize());
+        f36 = new com.chronoxor.fbe.FieldModelUUID(buffer, f35.fbeOffset() + f35.fbeSize());
+        f37 = new com.chronoxor.fbe.FieldModelUUID(buffer, f36.fbeOffset() + f36.fbeSize());
+        f38 = new com.chronoxor.fbe.FieldModelUUID(buffer, f37.fbeOffset() + f37.fbeSize());
         f39 = new com.chronoxor.proto.fbe.FieldModelOrderSide(buffer, f38.fbeOffset() + f38.fbeSize());
         f40 = new com.chronoxor.proto.fbe.FieldModelOrderType(buffer, f39.fbeOffset() + f39.fbeSize());
         f41 = new com.chronoxor.proto.fbe.FieldModelOrder(buffer, f40.fbeOffset() + f40.fbeSize());
@@ -571,8 +559,8 @@ public final class FieldModelStructSimple extends FieldModel
     }
 
     // Get the struct value
-    public StructSimple get() { return get(new StructSimple()); }
-    public StructSimple get(StructSimple fbeValue)
+    public com.chronoxor.test.StructSimple get() { return get(new com.chronoxor.test.StructSimple()); }
+    public com.chronoxor.test.StructSimple get(com.chronoxor.test.StructSimple fbeValue)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
@@ -585,7 +573,7 @@ public final class FieldModelStructSimple extends FieldModel
     }
 
     // Get the struct fields values
-    public void getFields(StructSimple fbeValue, long fbeStructSize)
+    public void getFields(com.chronoxor.test.StructSimple fbeValue, long fbeStructSize)
     {
         long fbeCurrentSize = 4 + 4;
 
@@ -766,13 +754,13 @@ public final class FieldModelStructSimple extends FieldModel
         if ((fbeCurrentSize + f29.fbeSize()) <= fbeStructSize)
             fbeValue.f29 = f29.get();
         else
-            fbeValue.f29 = BigDecimal.valueOf(0L);
+            fbeValue.f29 = java.math.BigDecimal.valueOf(0L);
         fbeCurrentSize += f29.fbeSize();
 
         if ((fbeCurrentSize + f30.fbeSize()) <= fbeStructSize)
-            fbeValue.f30 = f30.get(BigDecimal.valueOf(123456.123456d));
+            fbeValue.f30 = f30.get(java.math.BigDecimal.valueOf(123456.123456d));
         else
-            fbeValue.f30 = BigDecimal.valueOf(123456.123456d);
+            fbeValue.f30 = java.math.BigDecimal.valueOf(123456.123456d);
         fbeCurrentSize += f30.fbeSize();
 
         if ((fbeCurrentSize + f31.fbeSize()) <= fbeStructSize)
@@ -790,19 +778,19 @@ public final class FieldModelStructSimple extends FieldModel
         if ((fbeCurrentSize + f33.fbeSize()) <= fbeStructSize)
             fbeValue.f33 = f33.get();
         else
-            fbeValue.f33 = Instant.EPOCH;
+            fbeValue.f33 = java.time.Instant.EPOCH;
         fbeCurrentSize += f33.fbeSize();
 
         if ((fbeCurrentSize + f34.fbeSize()) <= fbeStructSize)
-            fbeValue.f34 = f34.get(Instant.EPOCH);
+            fbeValue.f34 = f34.get(java.time.Instant.EPOCH);
         else
-            fbeValue.f34 = Instant.EPOCH;
+            fbeValue.f34 = java.time.Instant.EPOCH;
         fbeCurrentSize += f34.fbeSize();
 
         if ((fbeCurrentSize + f35.fbeSize()) <= fbeStructSize)
-            fbeValue.f35 = f35.get(Instant.now());
+            fbeValue.f35 = f35.get(java.time.Instant.now());
         else
-            fbeValue.f35 = Instant.now();
+            fbeValue.f35 = java.time.Instant.now();
         fbeCurrentSize += f35.fbeSize();
 
         if ((fbeCurrentSize + f36.fbeSize()) <= fbeStructSize)
@@ -818,9 +806,9 @@ public final class FieldModelStructSimple extends FieldModel
         fbeCurrentSize += f37.fbeSize();
 
         if ((fbeCurrentSize + f38.fbeSize()) <= fbeStructSize)
-            fbeValue.f38 = f38.get(UUID.fromString("123e4567-e89b-12d3-a456-426655440000"));
+            fbeValue.f38 = f38.get(java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000"));
         else
-            fbeValue.f38 = UUID.fromString("123e4567-e89b-12d3-a456-426655440000");
+            fbeValue.f38 = java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000");
         fbeCurrentSize += f38.fbeSize();
 
         if ((fbeCurrentSize + f39.fbeSize()) <= fbeStructSize)
@@ -888,7 +876,7 @@ public final class FieldModelStructSimple extends FieldModel
     }
 
     // Set the struct value
-    public void set(StructSimple fbeValue)
+    public void set(com.chronoxor.test.StructSimple fbeValue)
     {
         long fbeBegin = setBegin();
         if (fbeBegin == 0)
@@ -899,7 +887,7 @@ public final class FieldModelStructSimple extends FieldModel
     }
 
     // Set the struct fields values
-    public void setFields(StructSimple fbeValue)
+    public void setFields(com.chronoxor.test.StructSimple fbeValue)
     {
         id.set(fbeValue.id);
         f1.set(fbeValue.f1);

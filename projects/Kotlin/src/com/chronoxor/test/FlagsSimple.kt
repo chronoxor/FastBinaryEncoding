@@ -7,17 +7,6 @@
 
 package com.chronoxor.test
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 class FlagsSimple : Comparable<FlagsSimple>
 {
@@ -30,7 +19,7 @@ class FlagsSimple : Comparable<FlagsSimple>
         val FLAG_VALUE_4 = FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_4)
         val FLAG_VALUE_5 = FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_5)
 
-        fun fromSet(set: EnumSet<FlagsSimpleEnum>): FlagsSimple
+        fun fromSet(set: java.util.EnumSet<FlagsSimpleEnum>): FlagsSimple
         {
             @Suppress("CanBeVal")
             var result = 0
@@ -71,14 +60,14 @@ class FlagsSimple : Comparable<FlagsSimple>
     constructor()
     constructor(value: Int) { setEnum(value) }
     constructor(value: FlagsSimpleEnum) { setEnum(value) }
-    constructor(value: EnumSet<FlagsSimpleEnum>) { setEnum(value) }
+    constructor(value: java.util.EnumSet<FlagsSimpleEnum>) { setEnum(value) }
     constructor(value: FlagsSimple) { setEnum(value) }
 
     fun setDefault() { setEnum(0.toInt()) }
 
     fun setEnum(value: Int) { this.raw = value; this.value = FlagsSimpleEnum.mapValue(value) }
     fun setEnum(value: FlagsSimpleEnum) { this.value = value; this.raw = value.raw; }
-    fun setEnum(value: EnumSet<FlagsSimpleEnum>) { setEnum(FlagsSimple.fromSet(value)) }
+    fun setEnum(value: java.util.EnumSet<FlagsSimpleEnum>) { setEnum(FlagsSimple.fromSet(value)) }
     fun setEnum(value: FlagsSimple) { this.value = value.value; this.raw = value.raw }
 
     fun hasFlags(flags: Int): Boolean = ((raw.toInt() and flags.toInt()) != 0) && ((raw.toInt() and flags.toInt()) == flags.toInt())
@@ -93,9 +82,9 @@ class FlagsSimple : Comparable<FlagsSimple>
     fun removeFlags(flags: FlagsSimpleEnum): FlagsSimple { removeFlags(flags.raw); return this }
     fun removeFlags(flags: FlagsSimple): FlagsSimple { removeFlags(flags.raw); return this }
 
-    val allSet: EnumSet<FlagsSimpleEnum> get() = value!!.allSet
-    val noneSet: EnumSet<FlagsSimpleEnum> get() = value!!.noneSet
-    val currentSet: EnumSet<FlagsSimpleEnum> get() = value!!.currentSet
+    val allSet: java.util.EnumSet<FlagsSimpleEnum> get() = value!!.allSet
+    val noneSet: java.util.EnumSet<FlagsSimpleEnum> get() = value!!.noneSet
+    val currentSet: java.util.EnumSet<FlagsSimpleEnum> get() = value!!.currentSet
 
     override fun compareTo(other: FlagsSimple): Int
     {

@@ -7,19 +7,8 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding optional StructOptional field model
-class FieldModelOptionalStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelOptionalStructOptional(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     // Field size
     override val fbeSize: Long = 1 + 4
@@ -95,7 +84,7 @@ class FieldModelOptionalStructOptional(buffer: Buffer, offset: Long) : FieldMode
     }
 
     // Get the optional value
-    fun get(defaults: StructOptional? = null): StructOptional?
+    fun get(defaults: com.chronoxor.test.StructOptional? = null): com.chronoxor.test.StructOptional?
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -137,7 +126,7 @@ class FieldModelOptionalStructOptional(buffer: Buffer, offset: Long) : FieldMode
     }
 
     // Set the optional value
-    fun set(optional: StructOptional?)
+    fun set(optional: com.chronoxor.test.StructOptional?)
     {
         val fbeBegin = setBegin(optional != null)
         if (fbeBegin == 0L)

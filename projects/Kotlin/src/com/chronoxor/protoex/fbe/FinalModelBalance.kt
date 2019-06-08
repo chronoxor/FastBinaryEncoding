@@ -7,27 +7,16 @@
 
 package com.chronoxor.protoex.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.protoex.*
-
 // Fast Binary Encoding Balance final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FinalModelBalance(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelBalance(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     val parent: com.chronoxor.proto.fbe.FinalModelBalance = com.chronoxor.proto.fbe.FinalModelBalance(buffer, 0)
-    val locked: FinalModelDouble = FinalModelDouble(buffer, 0)
+    val locked: com.chronoxor.fbe.FinalModelDouble = com.chronoxor.fbe.FinalModelDouble(buffer, 0)
 
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(fbeValue: Balance): Long = (0
+    fun fbeAllocationSize(fbeValue: com.chronoxor.protoex.Balance): Long = (0
         + parent.fbeAllocationSize(fbeValue)
         + locked.fbeAllocationSize(fbeValue.locked)
         )
@@ -72,7 +61,7 @@ class FinalModelBalance(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Get the struct value
-    fun get(fbeSize: Size, fbeValue: Balance = Balance()): Balance
+    fun get(fbeSize: com.chronoxor.fbe.Size, fbeValue: com.chronoxor.protoex.Balance = com.chronoxor.protoex.Balance()): com.chronoxor.protoex.Balance
     {
         _buffer.shift(fbeOffset)
         fbeSize.value = getFields(fbeValue)
@@ -82,11 +71,11 @@ class FinalModelBalance(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: Balance): Long
+    fun getFields(fbeValue: com.chronoxor.protoex.Balance): Long
     {
         var fbeCurrentOffset = 0L
         var fbeCurrentSize = 0L
-        val fbeFieldSize = Size(0)
+        val fbeFieldSize = com.chronoxor.fbe.Size()
 
         parent.fbeOffset = fbeCurrentOffset
         fbeFieldSize.value = parent.getFields(fbeValue)
@@ -102,7 +91,7 @@ class FinalModelBalance(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Set the struct value
-    fun set(fbeValue: Balance): Long
+    fun set(fbeValue: com.chronoxor.protoex.Balance): Long
     {
         _buffer.shift(fbeOffset)
         val fbeSize = setFields(fbeValue)
@@ -112,11 +101,11 @@ class FinalModelBalance(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: Balance): Long
+    fun setFields(fbeValue: com.chronoxor.protoex.Balance): Long
     {
         var fbeCurrentOffset = 0L
         var fbeCurrentSize = 0L
-        val fbeFieldSize = Size(0)
+        val fbeFieldSize = com.chronoxor.fbe.Size()
 
         parent.fbeOffset = fbeCurrentOffset
         fbeFieldSize.value = parent.setFields(fbeValue)

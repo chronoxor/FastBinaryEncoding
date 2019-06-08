@@ -5,18 +5,6 @@
 
 package com.chronoxor.protoex;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public enum StateExEnum
 {
     unknown((byte)0x00)
@@ -43,11 +31,11 @@ public enum StateExEnum
     public boolean hasFlags(byte flags) { return (((value & flags) != 0) && ((value & flags) == flags)); }
     public boolean hasFlags(StateExEnum flags) { return hasFlags(flags.value); }
 
-    public EnumSet<StateExEnum> getAllSet() { return EnumSet.allOf(StateExEnum.class); }
-    public EnumSet<StateExEnum> getNoneSet() { return EnumSet.noneOf(StateExEnum.class); }
-    public EnumSet<StateExEnum> getCurrentSet()
+    public java.util.EnumSet<StateExEnum> getAllSet() { return java.util.EnumSet.allOf(StateExEnum.class); }
+    public java.util.EnumSet<StateExEnum> getNoneSet() { return java.util.EnumSet.noneOf(StateExEnum.class); }
+    public java.util.EnumSet<StateExEnum> getCurrentSet()
     {
-        EnumSet<StateExEnum> result = EnumSet.noneOf(StateExEnum.class);
+        java.util.EnumSet<StateExEnum> result = java.util.EnumSet.noneOf(StateExEnum.class);
         if ((value & unknown.getRaw()) != 0)
         {
             result.add(unknown);
@@ -140,7 +128,7 @@ public enum StateExEnum
         return sb.toString();
     }
 
-    private static final Map<Byte, StateExEnum> mapping = new HashMap<>();
+    private static final java.util.Map<Byte, StateExEnum> mapping = new java.util.HashMap<>();
     static
     {
         for (var value : StateExEnum.values())

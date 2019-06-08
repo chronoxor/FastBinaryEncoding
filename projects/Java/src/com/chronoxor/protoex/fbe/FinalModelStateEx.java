@@ -5,25 +5,13 @@
 
 package com.chronoxor.protoex.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.protoex.*;
-
 // Fast Binary Encoding StateEx final model
-public final class FinalModelStateEx extends FinalModel
+public final class FinalModelStateEx extends com.chronoxor.fbe.FinalModel
 {
-    public FinalModelStateEx(Buffer buffer, long offset) { super(buffer, offset); }
+    public FinalModelStateEx(com.chronoxor.fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(StateEx value) { return fbeSize(); }
+    public long fbeAllocationSize(com.chronoxor.protoex.StateEx value) { return fbeSize(); }
 
     // Get the final size
     @Override
@@ -40,17 +28,17 @@ public final class FinalModelStateEx extends FinalModel
     }
 
     // Get the value
-    public StateEx get(Size size)
+    public com.chronoxor.protoex.StateEx get(com.chronoxor.fbe.Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
-            return new StateEx();
+            return new com.chronoxor.protoex.StateEx();
 
         size.value = fbeSize();
-        return new StateEx(readByte(fbeOffset()));
+        return new com.chronoxor.protoex.StateEx(readByte(fbeOffset()));
     }
 
     // Set the value
-    public long set(StateEx value)
+    public long set(com.chronoxor.protoex.StateEx value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

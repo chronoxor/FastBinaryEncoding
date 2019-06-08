@@ -7,17 +7,6 @@
 
 package com.chronoxor.test
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 @Suppress("EnumEntryName", "MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 enum class EnumEmptyEnum
 {
@@ -39,7 +28,7 @@ enum class EnumEmptyEnum
 
     companion object
     {
-        private val mapping = HashMap<Int, EnumEmptyEnum>()
+        private val mapping = java.util.HashMap<Int, EnumEmptyEnum>()
 
         init
         {

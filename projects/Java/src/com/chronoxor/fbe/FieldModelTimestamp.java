@@ -5,15 +5,6 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
 // Fast Binary Encoding timestamp field model
 public final class FieldModelTimestamp extends FieldModel
 {
@@ -24,8 +15,8 @@ public final class FieldModelTimestamp extends FieldModel
     public long fbeSize() { return 8; }
 
     // Get the timestamp value
-    public Instant get() { return get(Instant.EPOCH); }
-    public Instant get(Instant defaults)
+    public java.time.Instant get() { return get(java.time.Instant.EPOCH); }
+    public java.time.Instant get(java.time.Instant defaults)
     {
         assert (defaults != null) : "Invalid default timestamp value!";
         if (defaults == null)
@@ -35,11 +26,11 @@ public final class FieldModelTimestamp extends FieldModel
             return defaults;
 
         long nanoseconds = readInt64(fbeOffset());
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
+        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
     }
 
     // Set the timestamp value
-    public void set(Instant value)
+    public void set(java.time.Instant value)
     {
         assert (value != null) : "Invalid timestamp value!";
         if (value == null)

@@ -7,14 +7,6 @@
 
 package com.chronoxor.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
 // Fast Binary Encoding bytes field model
 class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {

@@ -5,18 +5,6 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public enum FlagsTypedEnum
 {
     FLAG_VALUE_0((long)0x00L)
@@ -44,11 +32,11 @@ public enum FlagsTypedEnum
     public boolean hasFlags(long flags) { return (((value & flags) != 0) && ((value & flags) == flags)); }
     public boolean hasFlags(FlagsTypedEnum flags) { return hasFlags(flags.value); }
 
-    public EnumSet<FlagsTypedEnum> getAllSet() { return EnumSet.allOf(FlagsTypedEnum.class); }
-    public EnumSet<FlagsTypedEnum> getNoneSet() { return EnumSet.noneOf(FlagsTypedEnum.class); }
-    public EnumSet<FlagsTypedEnum> getCurrentSet()
+    public java.util.EnumSet<FlagsTypedEnum> getAllSet() { return java.util.EnumSet.allOf(FlagsTypedEnum.class); }
+    public java.util.EnumSet<FlagsTypedEnum> getNoneSet() { return java.util.EnumSet.noneOf(FlagsTypedEnum.class); }
+    public java.util.EnumSet<FlagsTypedEnum> getCurrentSet()
     {
-        EnumSet<FlagsTypedEnum> result = EnumSet.noneOf(FlagsTypedEnum.class);
+        java.util.EnumSet<FlagsTypedEnum> result = java.util.EnumSet.noneOf(FlagsTypedEnum.class);
         if ((value & FLAG_VALUE_0.getRaw()) != 0)
         {
             result.add(FLAG_VALUE_0);
@@ -150,7 +138,7 @@ public enum FlagsTypedEnum
         return sb.toString();
     }
 
-    private static final Map<Long, FlagsTypedEnum> mapping = new HashMap<>();
+    private static final java.util.Map<Long, FlagsTypedEnum> mapping = new java.util.HashMap<>();
     static
     {
         for (var value : FlagsTypedEnum.values())

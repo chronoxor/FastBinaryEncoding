@@ -7,34 +7,23 @@
 
 package com.chronoxor.proto.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 // Fast Binary Encoding OrderType field model
-class FieldModelOrderType(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelOrderType(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     // Field size
     override val fbeSize: Long = 1
 
     // Get the value
-    fun get(defaults: OrderType = OrderType()): OrderType
+    fun get(defaults: com.chronoxor.proto.OrderType = com.chronoxor.proto.OrderType()): com.chronoxor.proto.OrderType
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
-        return OrderType(readByte(fbeOffset))
+        return com.chronoxor.proto.OrderType(readByte(fbeOffset))
     }
 
     // Set the value
-    fun set(value: OrderType)
+    fun set(value: com.chronoxor.proto.OrderType)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

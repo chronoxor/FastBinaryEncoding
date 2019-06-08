@@ -5,29 +5,17 @@
 
 package com.chronoxor.proto.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 // Fast Binary Encoding Balance field model
-public final class FieldModelBalance extends FieldModel
+public final class FieldModelBalance extends com.chronoxor.fbe.FieldModel
 {
-    public final FieldModelString currency;
-    public final FieldModelDouble amount;
+    public final com.chronoxor.fbe.FieldModelString currency;
+    public final com.chronoxor.fbe.FieldModelDouble amount;
 
-    public FieldModelBalance(Buffer buffer, long offset)
+    public FieldModelBalance(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        currency = new FieldModelString(buffer, 4 + 4);
-        amount = new FieldModelDouble(buffer, currency.fbeOffset() + currency.fbeSize());
+        currency = new com.chronoxor.fbe.FieldModelString(buffer, 4 + 4);
+        amount = new com.chronoxor.fbe.FieldModelDouble(buffer, currency.fbeOffset() + currency.fbeSize());
     }
 
     // Get the field size
@@ -141,8 +129,8 @@ public final class FieldModelBalance extends FieldModel
     }
 
     // Get the struct value
-    public Balance get() { return get(new Balance()); }
-    public Balance get(Balance fbeValue)
+    public com.chronoxor.proto.Balance get() { return get(new com.chronoxor.proto.Balance()); }
+    public com.chronoxor.proto.Balance get(com.chronoxor.proto.Balance fbeValue)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
@@ -155,7 +143,7 @@ public final class FieldModelBalance extends FieldModel
     }
 
     // Get the struct fields values
-    public void getFields(Balance fbeValue, long fbeStructSize)
+    public void getFields(com.chronoxor.proto.Balance fbeValue, long fbeStructSize)
     {
         long fbeCurrentSize = 4 + 4;
 
@@ -200,7 +188,7 @@ public final class FieldModelBalance extends FieldModel
     }
 
     // Set the struct value
-    public void set(Balance fbeValue)
+    public void set(com.chronoxor.proto.Balance fbeValue)
     {
         long fbeBegin = setBegin();
         if (fbeBegin == 0)
@@ -211,7 +199,7 @@ public final class FieldModelBalance extends FieldModel
     }
 
     // Set the struct fields values
-    public void setFields(Balance fbeValue)
+    public void setFields(com.chronoxor.proto.Balance fbeValue)
     {
         currency.set(fbeValue.currency);
         amount.set(fbeValue.amount);

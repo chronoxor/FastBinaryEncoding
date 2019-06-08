@@ -5,27 +5,15 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding Byte vector final model
-public final class FinalModelVectorByte extends FinalModel
+public final class FinalModelVectorByte extends com.chronoxor.fbe.FinalModel
 {
-    private final FinalModelByte _model;
+    private final com.chronoxor.fbe.FinalModelByte _model;
 
-    public FinalModelVectorByte(Buffer buffer, long offset)
+    public FinalModelVectorByte(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        _model = new FinalModelByte(buffer, offset);
+        _model = new com.chronoxor.fbe.FinalModelByte(buffer, offset);
     }
 
     // Get the allocation size
@@ -36,21 +24,21 @@ public final class FinalModelVectorByte extends FinalModel
             size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long fbeAllocationSize(ArrayList<Byte> values)
+    public long fbeAllocationSize(java.util.ArrayList<Byte> values)
     {
         long size = 4;
         for (var value : values)
             size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long fbeAllocationSize(LinkedList<Byte> values)
+    public long fbeAllocationSize(java.util.LinkedList<Byte> values)
     {
         long size = 4;
         for (var value : values)
             size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long fbeAllocationSize(HashSet<Byte> values)
+    public long fbeAllocationSize(java.util.HashSet<Byte> values)
     {
         long size = 4;
         for (var value : values)
@@ -80,8 +68,8 @@ public final class FinalModelVectorByte extends FinalModel
         return size;
     }
 
-    // Get the vector as ArrayList
-    public long get(ArrayList<Byte> values)
+    // Get the vector as java.util.ArrayList
+    public long get(java.util.ArrayList<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -100,7 +88,7 @@ public final class FinalModelVectorByte extends FinalModel
         values.ensureCapacity((int)fbeVectorSize);
 
         long size = 4;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
@@ -113,8 +101,8 @@ public final class FinalModelVectorByte extends FinalModel
         return size;
     }
 
-    // Get the vector as LinkedList
-    public long get(LinkedList<Byte> values)
+    // Get the vector as java.util.LinkedList
+    public long get(java.util.LinkedList<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -131,7 +119,7 @@ public final class FinalModelVectorByte extends FinalModel
             return 4;
 
         long size = 4;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
@@ -144,8 +132,8 @@ public final class FinalModelVectorByte extends FinalModel
         return size;
     }
 
-    // Get the vector as HashSet
-    public long get(HashSet<Byte> values)
+    // Get the vector as java.util.HashSet
+    public long get(java.util.HashSet<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -162,7 +150,7 @@ public final class FinalModelVectorByte extends FinalModel
             return 4;
 
         long size = 4;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
@@ -175,8 +163,8 @@ public final class FinalModelVectorByte extends FinalModel
         return size;
     }
 
-    // Set the vector as ArrayList
-    public long set(ArrayList<Byte> values)
+    // Set the vector as java.util.ArrayList
+    public long set(java.util.ArrayList<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -199,8 +187,8 @@ public final class FinalModelVectorByte extends FinalModel
         return size;
     }
 
-    // Set the vector as LinkedList
-    public long set(LinkedList<Byte> values)
+    // Set the vector as java.util.LinkedList
+    public long set(java.util.LinkedList<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -223,8 +211,8 @@ public final class FinalModelVectorByte extends FinalModel
         return size;
     }
 
-    // Set the vector as HashSet
-    public long set(HashSet<Byte> values)
+    // Set the vector as java.util.HashSet
+    public long set(java.util.HashSet<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

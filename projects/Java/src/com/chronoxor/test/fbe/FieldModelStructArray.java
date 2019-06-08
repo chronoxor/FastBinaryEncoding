@@ -5,20 +5,8 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructArray field model
-public final class FieldModelStructArray extends FieldModel
+public final class FieldModelStructArray extends com.chronoxor.fbe.FieldModel
 {
     public final FieldModelArrayByte f1;
     public final FieldModelArrayOptionalByte f2;
@@ -31,7 +19,7 @@ public final class FieldModelStructArray extends FieldModel
     public final FieldModelArrayStructSimple f9;
     public final FieldModelArrayOptionalStructSimple f10;
 
-    public FieldModelStructArray(Buffer buffer, long offset)
+    public FieldModelStructArray(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         f1 = new FieldModelArrayByte(buffer, 4 + 4, 2);
@@ -221,8 +209,8 @@ public final class FieldModelStructArray extends FieldModel
     }
 
     // Get the struct value
-    public StructArray get() { return get(new StructArray()); }
-    public StructArray get(StructArray fbeValue)
+    public com.chronoxor.test.StructArray get() { return get(new com.chronoxor.test.StructArray()); }
+    public com.chronoxor.test.StructArray get(com.chronoxor.test.StructArray fbeValue)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
@@ -235,7 +223,7 @@ public final class FieldModelStructArray extends FieldModel
     }
 
     // Get the struct fields values
-    public void getFields(StructArray fbeValue, long fbeStructSize)
+    public void getFields(com.chronoxor.test.StructArray fbeValue, long fbeStructSize)
     {
         long fbeCurrentSize = 4 + 4;
 
@@ -254,49 +242,49 @@ public final class FieldModelStructArray extends FieldModel
         if ((fbeCurrentSize + f3.fbeSize()) <= fbeStructSize)
             f3.get(fbeValue.f3);
         else
-            fbeValue.f3 = new ByteBuffer[2];
+            fbeValue.f3 = new java.nio.ByteBuffer[2];
         fbeCurrentSize += f3.fbeSize();
 
         if ((fbeCurrentSize + f4.fbeSize()) <= fbeStructSize)
             f4.get(fbeValue.f4);
         else
-            fbeValue.f4 = new ByteBuffer[2];
+            fbeValue.f4 = new java.nio.ByteBuffer[2];
         fbeCurrentSize += f4.fbeSize();
 
         if ((fbeCurrentSize + f5.fbeSize()) <= fbeStructSize)
             f5.get(fbeValue.f5);
         else
-            fbeValue.f5 = new EnumSimple[2];
+            fbeValue.f5 = new com.chronoxor.test.EnumSimple[2];
         fbeCurrentSize += f5.fbeSize();
 
         if ((fbeCurrentSize + f6.fbeSize()) <= fbeStructSize)
             f6.get(fbeValue.f6);
         else
-            fbeValue.f6 = new EnumSimple[2];
+            fbeValue.f6 = new com.chronoxor.test.EnumSimple[2];
         fbeCurrentSize += f6.fbeSize();
 
         if ((fbeCurrentSize + f7.fbeSize()) <= fbeStructSize)
             f7.get(fbeValue.f7);
         else
-            fbeValue.f7 = new FlagsSimple[2];
+            fbeValue.f7 = new com.chronoxor.test.FlagsSimple[2];
         fbeCurrentSize += f7.fbeSize();
 
         if ((fbeCurrentSize + f8.fbeSize()) <= fbeStructSize)
             f8.get(fbeValue.f8);
         else
-            fbeValue.f8 = new FlagsSimple[2];
+            fbeValue.f8 = new com.chronoxor.test.FlagsSimple[2];
         fbeCurrentSize += f8.fbeSize();
 
         if ((fbeCurrentSize + f9.fbeSize()) <= fbeStructSize)
             f9.get(fbeValue.f9);
         else
-            fbeValue.f9 = new StructSimple[2];
+            fbeValue.f9 = new com.chronoxor.test.StructSimple[2];
         fbeCurrentSize += f9.fbeSize();
 
         if ((fbeCurrentSize + f10.fbeSize()) <= fbeStructSize)
             f10.get(fbeValue.f10);
         else
-            fbeValue.f10 = new StructSimple[2];
+            fbeValue.f10 = new com.chronoxor.test.StructSimple[2];
         fbeCurrentSize += f10.fbeSize();
     }
 
@@ -328,7 +316,7 @@ public final class FieldModelStructArray extends FieldModel
     }
 
     // Set the struct value
-    public void set(StructArray fbeValue)
+    public void set(com.chronoxor.test.StructArray fbeValue)
     {
         long fbeBegin = setBegin();
         if (fbeBegin == 0)
@@ -339,7 +327,7 @@ public final class FieldModelStructArray extends FieldModel
     }
 
     // Set the struct fields values
-    public void setFields(StructArray fbeValue)
+    public void setFields(com.chronoxor.test.StructArray fbeValue)
     {
         f1.set(fbeValue.f1);
         f2.set(fbeValue.f2);

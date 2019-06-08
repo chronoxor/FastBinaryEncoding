@@ -7,20 +7,12 @@
 
 package com.chronoxor.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
 // Fast Binary Encoding timestamp final model
 class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(value: Instant): Long = fbeSize
+    fun fbeAllocationSize(value: java.time.Instant): Long = fbeSize
 
     // Final size
     override val fbeSize: Long = 8
@@ -35,18 +27,18 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     }
 
     // Get the timestamp value
-    fun get(size: Size): Instant
+    fun get(size: Size): java.time.Instant
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return Instant.EPOCH
+            return java.time.Instant.EPOCH
 
         size.value = fbeSize
         val nanoseconds = readInt64(fbeOffset)
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
+        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
     }
 
     // Set the timestamp value
-    fun set(value: Instant): Long
+    fun set(value: java.time.Instant): Long
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

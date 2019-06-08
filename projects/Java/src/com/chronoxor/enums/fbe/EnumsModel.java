@@ -5,25 +5,13 @@
 
 package com.chronoxor.enums.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.enums.*;
-
 // Fast Binary Encoding Enums model
-public final class EnumsModel extends Model
+public final class EnumsModel extends com.chronoxor.fbe.Model
 {
     public final FieldModelEnums model;
 
     public EnumsModel() { model = new FieldModelEnums(getBuffer(), 4); }
-    public EnumsModel(Buffer buffer) { super(buffer); model = new FieldModelEnums(getBuffer(), 4); }
+    public EnumsModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); model = new FieldModelEnums(getBuffer(), 4); }
 
     // Get the model size
     public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }
@@ -61,7 +49,7 @@ public final class EnumsModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(Enums value)
+    public long serialize(com.chronoxor.enums.Enums value)
     {
         long fbeBegin = createBegin();
         model.set(value);
@@ -70,12 +58,12 @@ public final class EnumsModel extends Model
     }
 
     // Deserialize the struct value
-    public Enums deserialize() { var value = new Enums(); deserialize(value); return value; }
-    public long deserialize(Enums value)
+    public com.chronoxor.enums.Enums deserialize() { var value = new com.chronoxor.enums.Enums(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.enums.Enums value)
     {
         if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())
         {
-            value = new Enums();
+            value = new com.chronoxor.enums.Enums();
             return 0;
         }
 
@@ -83,7 +71,7 @@ public final class EnumsModel extends Model
         assert (fbeFullSize >= model.fbeSize()) : "Model is broken!";
         if (fbeFullSize < model.fbeSize())
         {
-            value = new Enums();
+            value = new com.chronoxor.enums.Enums();
             return 0;
         }
 

@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructHashEx model
-public final class StructHashExModel extends Model
+public final class StructHashExModel extends com.chronoxor.fbe.Model
 {
     public final FieldModelStructHashEx model;
 
     public StructHashExModel() { model = new FieldModelStructHashEx(getBuffer(), 4); }
-    public StructHashExModel(Buffer buffer) { super(buffer); model = new FieldModelStructHashEx(getBuffer(), 4); }
+    public StructHashExModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); model = new FieldModelStructHashEx(getBuffer(), 4); }
 
     // Get the model size
     public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }
@@ -61,7 +49,7 @@ public final class StructHashExModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(StructHashEx value)
+    public long serialize(com.chronoxor.test.StructHashEx value)
     {
         long fbeBegin = createBegin();
         model.set(value);
@@ -70,12 +58,12 @@ public final class StructHashExModel extends Model
     }
 
     // Deserialize the struct value
-    public StructHashEx deserialize() { var value = new StructHashEx(); deserialize(value); return value; }
-    public long deserialize(StructHashEx value)
+    public com.chronoxor.test.StructHashEx deserialize() { var value = new com.chronoxor.test.StructHashEx(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.test.StructHashEx value)
     {
         if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())
         {
-            value = new StructHashEx();
+            value = new com.chronoxor.test.StructHashEx();
             return 0;
         }
 
@@ -83,7 +71,7 @@ public final class StructHashExModel extends Model
         assert (fbeFullSize >= model.fbeSize()) : "Model is broken!";
         if (fbeFullSize < model.fbeSize())
         {
-            value = new StructHashEx();
+            value = new com.chronoxor.test.StructHashEx();
             return 0;
         }
 

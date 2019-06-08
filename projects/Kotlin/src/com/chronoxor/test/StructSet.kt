@@ -7,28 +7,17 @@
 
 package com.chronoxor.test
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructSet : Comparable<Any?>
 {
-    var f1: HashSet<Byte> = HashSet()
-    var f2: HashSet<EnumSimple> = HashSet()
-    var f3: HashSet<FlagsSimple> = HashSet()
-    var f4: HashSet<StructSimple> = HashSet()
+    var f1: java.util.HashSet<Byte> = java.util.HashSet()
+    var f2: java.util.HashSet<EnumSimple> = java.util.HashSet()
+    var f3: java.util.HashSet<FlagsSimple> = java.util.HashSet()
+    var f4: java.util.HashSet<StructSimple> = java.util.HashSet()
 
     constructor()
 
-    constructor(f1: HashSet<Byte>, f2: HashSet<EnumSimple>, f3: HashSet<FlagsSimple>, f4: HashSet<StructSimple>)
+    constructor(f1: java.util.HashSet<Byte>, f2: java.util.HashSet<EnumSimple>, f3: java.util.HashSet<FlagsSimple>, f4: java.util.HashSet<StructSimple>)
     {
         this.f1 = f1
         this.f2 = f2

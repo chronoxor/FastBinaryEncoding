@@ -5,22 +5,10 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional FlagsTyped field model
-public final class FieldModelOptionalFlagsTyped extends FieldModel
+public final class FieldModelOptionalFlagsTyped extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelOptionalFlagsTyped(Buffer buffer, long offset)
+    public FieldModelOptionalFlagsTyped(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         value = new FieldModelFlagsTyped(buffer, 0);
@@ -102,14 +90,14 @@ public final class FieldModelOptionalFlagsTyped extends FieldModel
     }
 
     // Get the optional value
-    public FlagsTyped get() { return get(null); }
-    public FlagsTyped get(FlagsTyped defaults)
+    public com.chronoxor.test.FlagsTyped get() { return get(null); }
+    public com.chronoxor.test.FlagsTyped get(com.chronoxor.test.FlagsTyped defaults)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
             return defaults;
 
-        FlagsTyped optional = value.get();
+        com.chronoxor.test.FlagsTyped optional = value.get();
         getEnd(fbeBegin);
         return optional;
     }
@@ -145,7 +133,7 @@ public final class FieldModelOptionalFlagsTyped extends FieldModel
     }
 
     // Set the optional value
-    public void set(FlagsTyped optional)
+    public void set(com.chronoxor.test.FlagsTyped optional)
     {
         long fbeBegin = setBegin(optional != null);
         if (fbeBegin == 0)

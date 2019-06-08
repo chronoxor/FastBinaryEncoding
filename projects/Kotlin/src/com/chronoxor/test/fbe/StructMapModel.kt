@@ -7,24 +7,13 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructMap model
-class StructMapModel : Model
+class StructMapModel : com.chronoxor.fbe.Model
 {
     val model: FieldModelStructMap
 
     constructor() { model = FieldModelStructMap(buffer, 4) }
-    constructor(buffer: Buffer) : super(buffer) { model = FieldModelStructMap(buffer, 4) }
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer) { model = FieldModelStructMap(buffer, 4) }
 
     // Model size
     fun fbeSize(): Long = model.fbeSize + model.fbeExtra
@@ -65,7 +54,7 @@ class StructMapModel : Model
     }
 
     // Serialize the struct value
-    fun serialize(value: StructMap): Long
+    fun serialize(value: com.chronoxor.test.StructMap): Long
     {
         val fbeBegin = createBegin()
         model.set(value)
@@ -73,15 +62,15 @@ class StructMapModel : Model
     }
 
     // Deserialize the struct value
-    fun deserialize(): StructMap { val value = StructMap(); deserialize(value); return value }
+    fun deserialize(): com.chronoxor.test.StructMap { val value = com.chronoxor.test.StructMap(); deserialize(value); return value }
     @Suppress("UNUSED_VALUE")
-    fun deserialize(value: StructMap): Long
+    fun deserialize(value: com.chronoxor.test.StructMap): Long
     {
         var valueRef = value
 
         if ((buffer.offset + model.fbeOffset - 4) > buffer.size)
         {
-            valueRef = StructMap()
+            valueRef = com.chronoxor.test.StructMap()
             return 0
         }
 
@@ -89,7 +78,7 @@ class StructMapModel : Model
         assert(fbeFullSize >= model.fbeSize) { "Model is broken!" }
         if (fbeFullSize < model.fbeSize)
         {
-            valueRef = StructMap()
+            valueRef = com.chronoxor.test.StructMap()
             return 0
         }
 

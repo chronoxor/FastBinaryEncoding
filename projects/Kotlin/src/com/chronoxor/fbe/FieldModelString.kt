@@ -7,14 +7,6 @@
 
 package com.chronoxor.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
 // Fast Binary Encoding string field model
 class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
@@ -84,7 +76,7 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
-        val bytes = value.toByteArray(StandardCharsets.UTF_8)
+        val bytes = value.toByteArray(java.nio.charset.StandardCharsets.UTF_8)
 
         val fbeStringSize = bytes.size.toLong()
         val fbeStringOffset = _buffer.allocate(4 + fbeStringSize) - _buffer.offset

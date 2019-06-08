@@ -5,22 +5,13 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-// Fast Binary Encoding UUID final model
+// Fast Binary Encoding java.util.UUID final model
 public final class FinalModelUUID extends FinalModel
 {
     public FinalModelUUID(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(UUID value) { return fbeSize(); }
+    public long fbeAllocationSize(java.util.UUID value) { return fbeSize(); }
 
     // Get the final size
     @Override
@@ -37,7 +28,7 @@ public final class FinalModelUUID extends FinalModel
     }
 
     // Get the value
-    public UUID get(Size size)
+    public java.util.UUID get(Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return UUIDGenerator.nil();
@@ -47,7 +38,7 @@ public final class FinalModelUUID extends FinalModel
     }
 
     // Set the value
-    public long set(UUID value)
+    public long set(java.util.UUID value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

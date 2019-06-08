@@ -5,22 +5,10 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional StructOptional field model
-public final class FieldModelOptionalStructOptional extends FieldModel
+public final class FieldModelOptionalStructOptional extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelOptionalStructOptional(Buffer buffer, long offset)
+    public FieldModelOptionalStructOptional(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         value = new FieldModelStructOptional(buffer, 0);
@@ -102,14 +90,14 @@ public final class FieldModelOptionalStructOptional extends FieldModel
     }
 
     // Get the optional value
-    public StructOptional get() { return get(null); }
-    public StructOptional get(StructOptional defaults)
+    public com.chronoxor.test.StructOptional get() { return get(null); }
+    public com.chronoxor.test.StructOptional get(com.chronoxor.test.StructOptional defaults)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
             return defaults;
 
-        StructOptional optional = value.get();
+        com.chronoxor.test.StructOptional optional = value.get();
         getEnd(fbeBegin);
         return optional;
     }
@@ -145,7 +133,7 @@ public final class FieldModelOptionalStructOptional extends FieldModel
     }
 
     // Set the optional value
-    public void set(StructOptional optional)
+    public void set(com.chronoxor.test.StructOptional optional)
     {
         long fbeBegin = setBegin(optional != null);
         if (fbeBegin == 0)

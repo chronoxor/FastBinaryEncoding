@@ -7,23 +7,12 @@
 
 package com.chronoxor.proto.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 // Fast Binary Encoding Account final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FinalModelAccount(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelAccount(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
-    val id: FinalModelInt32 = FinalModelInt32(buffer, 0)
-    val name: FinalModelString = FinalModelString(buffer, 0)
+    val id: com.chronoxor.fbe.FinalModelInt32 = com.chronoxor.fbe.FinalModelInt32(buffer, 0)
+    val name: com.chronoxor.fbe.FinalModelString = com.chronoxor.fbe.FinalModelString(buffer, 0)
     val state: FinalModelState = FinalModelState(buffer, 0)
     val wallet: FinalModelBalance = FinalModelBalance(buffer, 0)
     val asset: FinalModelOptionalBalance = FinalModelOptionalBalance(buffer, 0)
@@ -31,7 +20,7 @@ class FinalModelAccount(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
 
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(fbeValue: Account): Long = (0
+    fun fbeAllocationSize(fbeValue: com.chronoxor.proto.Account): Long = (0
         + id.fbeAllocationSize(fbeValue.id)
         + name.fbeAllocationSize(fbeValue.name)
         + state.fbeAllocationSize(fbeValue.state)
@@ -104,7 +93,7 @@ class FinalModelAccount(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Get the struct value
-    fun get(fbeSize: Size, fbeValue: Account = Account()): Account
+    fun get(fbeSize: com.chronoxor.fbe.Size, fbeValue: com.chronoxor.proto.Account = com.chronoxor.proto.Account()): com.chronoxor.proto.Account
     {
         _buffer.shift(fbeOffset)
         fbeSize.value = getFields(fbeValue)
@@ -114,11 +103,11 @@ class FinalModelAccount(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: Account): Long
+    fun getFields(fbeValue: com.chronoxor.proto.Account): Long
     {
         var fbeCurrentOffset = 0L
         var fbeCurrentSize = 0L
-        val fbeFieldSize = Size(0)
+        val fbeFieldSize = com.chronoxor.fbe.Size()
 
         id.fbeOffset = fbeCurrentOffset
         fbeValue.id = id.get(fbeFieldSize)
@@ -154,7 +143,7 @@ class FinalModelAccount(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Set the struct value
-    fun set(fbeValue: Account): Long
+    fun set(fbeValue: com.chronoxor.proto.Account): Long
     {
         _buffer.shift(fbeOffset)
         val fbeSize = setFields(fbeValue)
@@ -164,11 +153,11 @@ class FinalModelAccount(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: Account): Long
+    fun setFields(fbeValue: com.chronoxor.proto.Account): Long
     {
         var fbeCurrentOffset = 0L
         var fbeCurrentSize = 0L
-        val fbeFieldSize = Size(0)
+        val fbeFieldSize = com.chronoxor.fbe.Size()
 
         id.fbeOffset = fbeCurrentOffset
         fbeFieldSize.value = id.set(fbeValue.id)

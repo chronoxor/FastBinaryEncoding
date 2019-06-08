@@ -7,30 +7,19 @@
 
 package com.chronoxor.protoex
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class Account : Comparable<Any?>
 {
     var id: Int = 0
     var name: String = ""
-    var state: StateEx = StateEx.fromSet(EnumSet.of(StateEx.initialized.value, StateEx.bad.value, StateEx.sad.value))
+    var state: StateEx = StateEx.fromSet(java.util.EnumSet.of(StateEx.initialized.value, StateEx.bad.value, StateEx.sad.value))
     var wallet: Balance = Balance()
     var asset: Balance? = null
-    var orders: ArrayList<Order> = ArrayList()
+    var orders: java.util.ArrayList<Order> = java.util.ArrayList()
 
     constructor()
 
-    constructor(id: Int, name: String, state: StateEx, wallet: Balance, asset: Balance?, orders: ArrayList<Order>)
+    constructor(id: Int, name: String, state: StateEx, wallet: Balance, asset: Balance?, orders: java.util.ArrayList<Order>)
     {
         this.id = id
         this.name = name

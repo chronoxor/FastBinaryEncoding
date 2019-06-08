@@ -7,21 +7,10 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding Bytes array field model
-class FieldModelArrayBytes(buffer: Buffer, offset: Long, val size: Long) : FieldModel(buffer, offset)
+class FieldModelArrayBytes(buffer: com.chronoxor.fbe.Buffer, offset: Long, val size: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
-    private val _model = FieldModelBytes(buffer, offset)
+    private val _model = com.chronoxor.fbe.FieldModelBytes(buffer, offset)
 
     // Field size
     override val fbeSize: Long = size * _model.fbeSize
@@ -33,7 +22,7 @@ class FieldModelArrayBytes(buffer: Buffer, offset: Long, val size: Long) : Field
     val offset: Long get() = 0
 
     // Array index operator
-    fun getItem(index: Long): FieldModelBytes
+    fun getItem(index: Long): com.chronoxor.fbe.FieldModelBytes
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         assert(index < size) { "Index is out of bounds!" }
@@ -88,8 +77,8 @@ class FieldModelArrayBytes(buffer: Buffer, offset: Long, val size: Long) : Field
         }
     }
 
-    // Get the array as ArrayList
-    fun get(values: ArrayList<ByteArray>)
+    // Get the array as java.util.ArrayList
+    fun get(values: java.util.ArrayList<ByteArray>)
     {
         values.clear()
         values.ensureCapacity(size.toInt())
@@ -121,8 +110,8 @@ class FieldModelArrayBytes(buffer: Buffer, offset: Long, val size: Long) : Field
         }
     }
 
-    // Set the array as List
-    fun set(values: ArrayList<ByteArray>)
+    // Set the array as java.util.ArrayList
+    fun set(values: java.util.ArrayList<ByteArray>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

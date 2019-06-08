@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructVector model
-public final class StructVectorModel extends Model
+public final class StructVectorModel extends com.chronoxor.fbe.Model
 {
     public final FieldModelStructVector model;
 
     public StructVectorModel() { model = new FieldModelStructVector(getBuffer(), 4); }
-    public StructVectorModel(Buffer buffer) { super(buffer); model = new FieldModelStructVector(getBuffer(), 4); }
+    public StructVectorModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); model = new FieldModelStructVector(getBuffer(), 4); }
 
     // Get the model size
     public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }
@@ -61,7 +49,7 @@ public final class StructVectorModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(StructVector value)
+    public long serialize(com.chronoxor.test.StructVector value)
     {
         long fbeBegin = createBegin();
         model.set(value);
@@ -70,12 +58,12 @@ public final class StructVectorModel extends Model
     }
 
     // Deserialize the struct value
-    public StructVector deserialize() { var value = new StructVector(); deserialize(value); return value; }
-    public long deserialize(StructVector value)
+    public com.chronoxor.test.StructVector deserialize() { var value = new com.chronoxor.test.StructVector(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.test.StructVector value)
     {
         if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())
         {
-            value = new StructVector();
+            value = new com.chronoxor.test.StructVector();
             return 0;
         }
 
@@ -83,7 +71,7 @@ public final class StructVectorModel extends Model
         assert (fbeFullSize >= model.fbeSize()) : "Model is broken!";
         if (fbeFullSize < model.fbeSize())
         {
-            value = new StructVector();
+            value = new com.chronoxor.test.StructVector();
             return 0;
         }
 

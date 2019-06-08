@@ -7,19 +7,8 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructSimple->OptionalStructNested map field model
-class FieldModelMapStructSimpleOptionalStructNested(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelMapStructSimpleOptionalStructNested(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     private val _modelKey = FieldModelStructSimple(buffer, offset)
     private val _modelValue = FieldModelOptionalStructNested(buffer, offset)
@@ -141,8 +130,8 @@ class FieldModelMapStructSimpleOptionalStructNested(buffer: Buffer, offset: Long
         return true
     }
 
-    // Get the map as TreeMap
-    fun get(values: TreeMap<StructSimple, StructNested?>)
+    // Get the map as java.util.TreeMap
+    fun get(values: java.util.TreeMap<com.chronoxor.test.StructSimple, com.chronoxor.test.StructNested?>)
     {
         values.clear()
 
@@ -162,8 +151,8 @@ class FieldModelMapStructSimpleOptionalStructNested(buffer: Buffer, offset: Long
         }
     }
 
-    // Get the map as HashMap
-    fun get(values: HashMap<StructSimple, StructNested?>)
+    // Get the map as java.util.HashMap
+    fun get(values: java.util.HashMap<com.chronoxor.test.StructSimple, com.chronoxor.test.StructNested?>)
     {
         values.clear()
 
@@ -183,8 +172,8 @@ class FieldModelMapStructSimpleOptionalStructNested(buffer: Buffer, offset: Long
         }
     }
 
-    // Set the map as TreeMap
-    fun set(values: TreeMap<StructSimple, StructNested?>)
+    // Set the map as java.util.TreeMap
+    fun set(values: java.util.TreeMap<com.chronoxor.test.StructSimple, com.chronoxor.test.StructNested?>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -200,8 +189,8 @@ class FieldModelMapStructSimpleOptionalStructNested(buffer: Buffer, offset: Long
         }
     }
 
-    // Set the map as HashMap
-    fun set(values: HashMap<StructSimple, StructNested?>)
+    // Set the map as java.util.HashMap
+    fun set(values: java.util.HashMap<com.chronoxor.test.StructSimple, com.chronoxor.test.StructNested?>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

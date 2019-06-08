@@ -5,24 +5,12 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public class StructArray implements Comparable<Object>
 {
     public byte[] f1 = new byte[2];
     public Byte[] f2 = new Byte[2];
-    public ByteBuffer[] f3 = new ByteBuffer[2];
-    public ByteBuffer[] f4 = new ByteBuffer[2];
+    public java.nio.ByteBuffer[] f3 = new java.nio.ByteBuffer[2];
+    public java.nio.ByteBuffer[] f4 = new java.nio.ByteBuffer[2];
     public EnumSimple[] f5 = new EnumSimple[2];
     public EnumSimple[] f6 = new EnumSimple[2];
     public FlagsSimple[] f7 = new FlagsSimple[2];
@@ -32,7 +20,7 @@ public class StructArray implements Comparable<Object>
 
     public StructArray() {}
 
-    public StructArray(byte[] f1, Byte[] f2, ByteBuffer[] f3, ByteBuffer[] f4, EnumSimple[] f5, EnumSimple[] f6, FlagsSimple[] f7, FlagsSimple[] f8, StructSimple[] f9, StructSimple[] f10)
+    public StructArray(byte[] f1, Byte[] f2, java.nio.ByteBuffer[] f3, java.nio.ByteBuffer[] f4, EnumSimple[] f5, EnumSimple[] f6, FlagsSimple[] f7, FlagsSimple[] f8, StructSimple[] f9, StructSimple[] f10)
     {
         this.f1 = f1;
         this.f2 = f2;

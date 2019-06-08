@@ -7,19 +7,8 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding OptionalByte array field model
-class FieldModelArrayOptionalByte(buffer: Buffer, offset: Long, val size: Long) : FieldModel(buffer, offset)
+class FieldModelArrayOptionalByte(buffer: com.chronoxor.fbe.Buffer, offset: Long, val size: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     private val _model = FieldModelOptionalByte(buffer, offset)
 
@@ -88,8 +77,8 @@ class FieldModelArrayOptionalByte(buffer: Buffer, offset: Long, val size: Long) 
         }
     }
 
-    // Get the array as ArrayList
-    fun get(values: ArrayList<Byte?>)
+    // Get the array as java.util.ArrayList
+    fun get(values: java.util.ArrayList<Byte?>)
     {
         values.clear()
         values.ensureCapacity(size.toInt())
@@ -121,8 +110,8 @@ class FieldModelArrayOptionalByte(buffer: Buffer, offset: Long, val size: Long) 
         }
     }
 
-    // Set the array as List
-    fun set(values: ArrayList<Byte?>)
+    // Set the array as java.util.ArrayList
+    fun set(values: java.util.ArrayList<Byte?>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

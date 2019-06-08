@@ -5,15 +5,6 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
 // Fast Binary Encoding UUID generator
 public final class UUIDGenerator
 {
@@ -22,7 +13,7 @@ public final class UUIDGenerator
 
     // Lock and random generator
     private static final Object _lock = new Object();
-    private static final Random _generator = new Random();
+    private static final java.util.Random _generator = new java.util.Random();
 
     // Node & clock sequence bytes
     private static long _node = makeNode();
@@ -51,10 +42,10 @@ public final class UUIDGenerator
     }
 
     // Generate nil UUID0 (all bits set to zero)
-    public static UUID nil() { return new UUID(0, 0); }
+    public static java.util.UUID nil() { return new java.util.UUID(0, 0); }
 
     // Generate sequential UUID1 (time based version)
-    public static UUID sequential()
+    public static java.util.UUID sequential()
     {
         long now = System.currentTimeMillis();
 
@@ -75,9 +66,9 @@ public final class UUIDGenerator
         // Sets the version to 1
         msb |= 0x0000000000001000L;
 
-        return new UUID(msb, _nodeAndClockSequence);
+        return new java.util.UUID(msb, _nodeAndClockSequence);
     }
 
     // Generate random UUID4 (randomly or pseudo-randomly generated version)
-    public static UUID random() { return UUID.randomUUID(); }
+    public static java.util.UUID random() { return java.util.UUID.randomUUID(); }
 }

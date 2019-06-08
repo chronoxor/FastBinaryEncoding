@@ -7,25 +7,14 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructEmpty final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FinalModelStructEmpty(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelStructEmpty(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
 
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(fbeValue: StructEmpty): Long = (0
+    fun fbeAllocationSize(fbeValue: com.chronoxor.test.StructEmpty): Long = (0
         )
 
     // Field type
@@ -52,7 +41,7 @@ class FinalModelStructEmpty(buffer: Buffer, offset: Long) : FinalModel(buffer, o
     }
 
     // Get the struct value
-    fun get(fbeSize: Size, fbeValue: StructEmpty = StructEmpty()): StructEmpty
+    fun get(fbeSize: com.chronoxor.fbe.Size, fbeValue: com.chronoxor.test.StructEmpty = com.chronoxor.test.StructEmpty()): com.chronoxor.test.StructEmpty
     {
         _buffer.shift(fbeOffset)
         fbeSize.value = getFields(fbeValue)
@@ -62,13 +51,13 @@ class FinalModelStructEmpty(buffer: Buffer, offset: Long) : FinalModel(buffer, o
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructEmpty): Long
+    fun getFields(fbeValue: com.chronoxor.test.StructEmpty): Long
     {
         return 0L
     }
 
     // Set the struct value
-    fun set(fbeValue: StructEmpty): Long
+    fun set(fbeValue: com.chronoxor.test.StructEmpty): Long
     {
         _buffer.shift(fbeOffset)
         val fbeSize = setFields(fbeValue)
@@ -78,7 +67,7 @@ class FinalModelStructEmpty(buffer: Buffer, offset: Long) : FinalModel(buffer, o
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructEmpty): Long
+    fun setFields(fbeValue: com.chronoxor.test.StructEmpty): Long
     {
         return 0L
     }

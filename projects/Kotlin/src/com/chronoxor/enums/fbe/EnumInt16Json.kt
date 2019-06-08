@@ -7,29 +7,16 @@
 
 package com.chronoxor.enums.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.enums.*
-
-import com.google.gson.*
-
-class EnumInt16Json : JsonSerializer<EnumInt16>, JsonDeserializer<EnumInt16>
+class EnumInt16Json : com.google.gson.JsonSerializer<com.chronoxor.enums.EnumInt16>, com.google.gson.JsonDeserializer<com.chronoxor.enums.EnumInt16>
 {
-    override fun serialize(src: EnumInt16, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: com.chronoxor.enums.EnumInt16, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(src.raw)
+        return com.google.gson.JsonPrimitive(src.raw)
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): EnumInt16
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): com.chronoxor.enums.EnumInt16
     {
-        return EnumInt16(json.asJsonPrimitive.asShort)
+        return com.chronoxor.enums.EnumInt16(json.asJsonPrimitive.asShort)
     }
 }

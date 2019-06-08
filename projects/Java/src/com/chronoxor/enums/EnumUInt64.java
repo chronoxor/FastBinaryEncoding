@@ -5,17 +5,6 @@
 
 package com.chronoxor.enums;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-
 public final class EnumUInt64 implements Comparable<EnumUInt64>
 {
     public static final EnumUInt64 ENUM_VALUE_0 = new EnumUInt64(EnumUInt64Enum.ENUM_VALUE_0);

@@ -5,29 +5,17 @@
 
 package com.chronoxor.protoex.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.protoex.*;
-
 // Fast Binary Encoding optional Balance final model
-public final class FinalModelOptionalBalance extends FinalModel
+public final class FinalModelOptionalBalance extends com.chronoxor.fbe.FinalModel
 {
-    public FinalModelOptionalBalance(Buffer buffer, long offset)
+    public FinalModelOptionalBalance(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         value = new FinalModelBalance(buffer, 0);
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(Balance optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
+    public long fbeAllocationSize(com.chronoxor.protoex.Balance optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
 
     // Checks if the object contains a value
     public boolean hasValue()
@@ -60,7 +48,7 @@ public final class FinalModelOptionalBalance extends FinalModel
     }
 
     // Get the optional value
-    public Balance get(Size size)
+    public com.chronoxor.protoex.Balance get(com.chronoxor.fbe.Size size)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())
@@ -76,14 +64,14 @@ public final class FinalModelOptionalBalance extends FinalModel
         }
 
         _buffer.shift(fbeOffset() + 1);
-        Balance optional = value.get(size);
+        com.chronoxor.protoex.Balance optional = value.get(size);
         _buffer.unshift(fbeOffset() + 1);
         size.value += 1;
         return optional;
     }
 
     // Set the optional value
-    public long set(Balance optional)
+    public long set(com.chronoxor.protoex.Balance optional)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())

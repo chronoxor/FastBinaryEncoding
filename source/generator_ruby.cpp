@@ -5960,7 +5960,7 @@ std::string GeneratorRuby::ConvertTypeName(const StructField& field)
 
 std::string GeneratorRuby::ConvertTypeFieldName(const std::string& type, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (type == "bool")
         return "FBE::" + modelType + "ModelBool";
@@ -6016,7 +6016,7 @@ std::string GeneratorRuby::ConvertTypeFieldName(const std::string& type, bool fi
 
 std::string GeneratorRuby::ConvertTypeFieldInitialization(const std::string& type, bool optional, const std::string& offset, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (optional)
         return "FBE::" + modelType + "ModelOptional.new(" + ConvertTypeFieldInitialization(type, false, offset, final)+ ", self.buffer, " + offset + ")";
@@ -6026,7 +6026,7 @@ std::string GeneratorRuby::ConvertTypeFieldInitialization(const std::string& typ
 
 std::string GeneratorRuby::ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (field.array)
         return "FBE::" + modelType + "ModelArray.new(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", self.buffer, " + offset + ", " + std::to_string(field.N) + ")";

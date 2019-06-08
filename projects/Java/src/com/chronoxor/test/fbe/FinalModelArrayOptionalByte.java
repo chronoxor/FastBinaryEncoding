@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding OptionalByte array final model
-public final class FinalModelArrayOptionalByte extends FinalModel
+public final class FinalModelArrayOptionalByte extends com.chronoxor.fbe.FinalModel
 {
     private final FinalModelOptionalByte _model;
     private final long _size;
 
-    public FinalModelArrayOptionalByte(Buffer buffer, long offset, long size)
+    public FinalModelArrayOptionalByte(com.chronoxor.fbe.Buffer buffer, long offset, long size)
     {
         super(buffer, offset);
         _model = new FinalModelOptionalByte(buffer, offset);
@@ -38,7 +26,7 @@ public final class FinalModelArrayOptionalByte extends FinalModel
             size += _model.fbeAllocationSize(values[(int)i]);
         return size;
     }
-    public long fbeAllocationSize(ArrayList<Byte> values)
+    public long fbeAllocationSize(java.util.ArrayList<Byte> values)
     {
         long size = 0;
         for (long i = 0; (i < values.size()) && (i < _size); i++)
@@ -67,7 +55,7 @@ public final class FinalModelArrayOptionalByte extends FinalModel
     }
 
     // Get the array
-    public Byte[] get(Size size)
+    public Byte[] get(com.chronoxor.fbe.Size size)
     {
         var values = new Byte[(int)_size];
 
@@ -79,7 +67,7 @@ public final class FinalModelArrayOptionalByte extends FinalModel
         }
 
         size.value = 0;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset());
         for (long i = 0; i < _size; i++)
         {
@@ -103,7 +91,7 @@ public final class FinalModelArrayOptionalByte extends FinalModel
             return 0;
 
         long size = 0;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset());
         for (long i = 0; (i < values.length) && (i < _size); i++)
         {
@@ -115,8 +103,8 @@ public final class FinalModelArrayOptionalByte extends FinalModel
         return size;
     }
 
-    // Get the array as ArrayList
-    public long get(ArrayList<Byte> values)
+    // Get the array as java.util.ArrayList
+    public long get(java.util.ArrayList<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -131,7 +119,7 @@ public final class FinalModelArrayOptionalByte extends FinalModel
         values.ensureCapacity((int)_size);
 
         long size = 0;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset());
         for (long i = _size; i-- > 0;)
         {
@@ -166,8 +154,8 @@ public final class FinalModelArrayOptionalByte extends FinalModel
         return size;
     }
 
-    // Set the array as List
-    public long set(ArrayList<Byte> values)
+    // Set the array as java.util.ArrayList
+    public long set(java.util.ArrayList<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

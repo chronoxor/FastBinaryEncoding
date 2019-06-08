@@ -5,17 +5,6 @@
 
 package com.chronoxor.enums;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-
 public enum EnumUInt32Enum
 {
     ENUM_VALUE_0((int)0 + 0)
@@ -47,7 +36,7 @@ public enum EnumUInt32Enum
         return "<unknown>";
     }
 
-    private static final Map<Integer, EnumUInt32Enum> mapping = new HashMap<>();
+    private static final java.util.Map<Integer, EnumUInt32Enum> mapping = new java.util.HashMap<>();
     static
     {
         for (var value : EnumUInt32Enum.values())

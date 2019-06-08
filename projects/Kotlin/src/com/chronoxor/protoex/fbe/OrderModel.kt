@@ -7,24 +7,13 @@
 
 package com.chronoxor.protoex.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.protoex.*
-
 // Fast Binary Encoding Order model
-class OrderModel : Model
+class OrderModel : com.chronoxor.fbe.Model
 {
     val model: FieldModelOrder
 
     constructor() { model = FieldModelOrder(buffer, 4) }
-    constructor(buffer: Buffer) : super(buffer) { model = FieldModelOrder(buffer, 4) }
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer) { model = FieldModelOrder(buffer, 4) }
 
     // Model size
     fun fbeSize(): Long = model.fbeSize + model.fbeExtra
@@ -65,7 +54,7 @@ class OrderModel : Model
     }
 
     // Serialize the struct value
-    fun serialize(value: Order): Long
+    fun serialize(value: com.chronoxor.protoex.Order): Long
     {
         val fbeBegin = createBegin()
         model.set(value)
@@ -73,15 +62,15 @@ class OrderModel : Model
     }
 
     // Deserialize the struct value
-    fun deserialize(): Order { val value = Order(); deserialize(value); return value }
+    fun deserialize(): com.chronoxor.protoex.Order { val value = com.chronoxor.protoex.Order(); deserialize(value); return value }
     @Suppress("UNUSED_VALUE")
-    fun deserialize(value: Order): Long
+    fun deserialize(value: com.chronoxor.protoex.Order): Long
     {
         var valueRef = value
 
         if ((buffer.offset + model.fbeOffset - 4) > buffer.size)
         {
-            valueRef = Order()
+            valueRef = com.chronoxor.protoex.Order()
             return 0
         }
 
@@ -89,7 +78,7 @@ class OrderModel : Model
         assert(fbeFullSize >= model.fbeSize) { "Model is broken!" }
         if (fbeFullSize < model.fbeSize)
         {
-            valueRef = Order()
+            valueRef = com.chronoxor.protoex.Order()
             return 0
         }
 

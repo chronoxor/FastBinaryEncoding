@@ -5,23 +5,11 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructEmpty field model
-public final class FieldModelStructEmpty extends FieldModel
+public final class FieldModelStructEmpty extends com.chronoxor.fbe.FieldModel
 {
 
-    public FieldModelStructEmpty(Buffer buffer, long offset)
+    public FieldModelStructEmpty(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
     }
@@ -119,8 +107,8 @@ public final class FieldModelStructEmpty extends FieldModel
     }
 
     // Get the struct value
-    public StructEmpty get() { return get(new StructEmpty()); }
-    public StructEmpty get(StructEmpty fbeValue)
+    public com.chronoxor.test.StructEmpty get() { return get(new com.chronoxor.test.StructEmpty()); }
+    public com.chronoxor.test.StructEmpty get(com.chronoxor.test.StructEmpty fbeValue)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
@@ -133,7 +121,7 @@ public final class FieldModelStructEmpty extends FieldModel
     }
 
     // Get the struct fields values
-    public void getFields(StructEmpty fbeValue, long fbeStructSize)
+    public void getFields(com.chronoxor.test.StructEmpty fbeValue, long fbeStructSize)
     {
     }
 
@@ -165,7 +153,7 @@ public final class FieldModelStructEmpty extends FieldModel
     }
 
     // Set the struct value
-    public void set(StructEmpty fbeValue)
+    public void set(com.chronoxor.test.StructEmpty fbeValue)
     {
         long fbeBegin = setBegin();
         if (fbeBegin == 0)
@@ -176,7 +164,7 @@ public final class FieldModelStructEmpty extends FieldModel
     }
 
     // Set the struct fields values
-    public void setFields(StructEmpty fbeValue)
+    public void setFields(com.chronoxor.test.StructEmpty fbeValue)
     {
     }
 }

@@ -5,49 +5,35 @@
 
 package com.chronoxor.enums.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.enums.*;
-
-import com.google.gson.*;
-
 // Fast Binary Encoding enums JSON engine
 public final class Json
 {
-    private static final Gson _engine;
+    private static final com.google.gson.Gson _engine;
 
     // Get the JSON engine
-    public static Gson getEngine() { return _engine; }
+    public static com.google.gson.Gson getEngine() { return _engine; }
 
     static
     {
-        _engine = register(new GsonBuilder()).create();
+        _engine = register(new com.google.gson.GsonBuilder()).create();
     }
 
     private Json() {}
 
-    public static GsonBuilder register(GsonBuilder builder)
+    public static com.google.gson.GsonBuilder register(com.google.gson.GsonBuilder builder)
     {
         com.chronoxor.fbe.Json.register(builder);
-        builder.registerTypeAdapter(EnumByte.class, new EnumByteJson());
-        builder.registerTypeAdapter(EnumChar.class, new EnumCharJson());
-        builder.registerTypeAdapter(EnumWChar.class, new EnumWCharJson());
-        builder.registerTypeAdapter(EnumInt8.class, new EnumInt8Json());
-        builder.registerTypeAdapter(EnumUInt8.class, new EnumUInt8Json());
-        builder.registerTypeAdapter(EnumInt16.class, new EnumInt16Json());
-        builder.registerTypeAdapter(EnumUInt16.class, new EnumUInt16Json());
-        builder.registerTypeAdapter(EnumInt32.class, new EnumInt32Json());
-        builder.registerTypeAdapter(EnumUInt32.class, new EnumUInt32Json());
-        builder.registerTypeAdapter(EnumInt64.class, new EnumInt64Json());
-        builder.registerTypeAdapter(EnumUInt64.class, new EnumUInt64Json());
+        builder.registerTypeAdapter(com.chronoxor.enums.EnumByte.class, new EnumByteJson());
+        builder.registerTypeAdapter(com.chronoxor.enums.EnumChar.class, new EnumCharJson());
+        builder.registerTypeAdapter(com.chronoxor.enums.EnumWChar.class, new EnumWCharJson());
+        builder.registerTypeAdapter(com.chronoxor.enums.EnumInt8.class, new EnumInt8Json());
+        builder.registerTypeAdapter(com.chronoxor.enums.EnumUInt8.class, new EnumUInt8Json());
+        builder.registerTypeAdapter(com.chronoxor.enums.EnumInt16.class, new EnumInt16Json());
+        builder.registerTypeAdapter(com.chronoxor.enums.EnumUInt16.class, new EnumUInt16Json());
+        builder.registerTypeAdapter(com.chronoxor.enums.EnumInt32.class, new EnumInt32Json());
+        builder.registerTypeAdapter(com.chronoxor.enums.EnumUInt32.class, new EnumUInt32Json());
+        builder.registerTypeAdapter(com.chronoxor.enums.EnumInt64.class, new EnumInt64Json());
+        builder.registerTypeAdapter(com.chronoxor.enums.EnumUInt64.class, new EnumUInt64Json());
         return builder;
     }
 }

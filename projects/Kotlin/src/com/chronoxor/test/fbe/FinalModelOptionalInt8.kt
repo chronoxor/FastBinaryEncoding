@@ -7,19 +7,8 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding optional Int8 final model
-class FinalModelOptionalInt8(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelOptionalInt8(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     // Get the allocation size
     fun fbeAllocationSize(optional: Byte?): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
@@ -35,7 +24,7 @@ class FinalModelOptionalInt8(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Base final model value
-    val value = FinalModelInt8(buffer, 0)
+    val value = com.chronoxor.fbe.FinalModelInt8(buffer, 0)
 
     // Check if the optional value is valid
     override fun verify(): Long
@@ -54,7 +43,7 @@ class FinalModelOptionalInt8(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Get the optional value
-    fun get(size: Size): Byte?
+    fun get(size: com.chronoxor.fbe.Size): Byte?
     {
         assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 1) > _buffer.size)

@@ -5,29 +5,17 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructEmpty final model
-public final class FinalModelStructEmpty extends FinalModel
+public final class FinalModelStructEmpty extends com.chronoxor.fbe.FinalModel
 {
 
-    public FinalModelStructEmpty(Buffer buffer, long offset)
+    public FinalModelStructEmpty(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(StructEmpty fbeValue)
+    public long fbeAllocationSize(com.chronoxor.test.StructEmpty fbeValue)
     {
         long fbeResult = 0
             ;
@@ -55,8 +43,8 @@ public final class FinalModelStructEmpty extends FinalModel
     }
 
     // Get the struct value
-    public StructEmpty get(Size fbeSize) { return get(fbeSize, new StructEmpty()); }
-    public StructEmpty get(Size fbeSize, StructEmpty fbeValue)
+    public com.chronoxor.test.StructEmpty get(com.chronoxor.fbe.Size fbeSize) { return get(fbeSize, new com.chronoxor.test.StructEmpty()); }
+    public com.chronoxor.test.StructEmpty get(com.chronoxor.fbe.Size fbeSize, com.chronoxor.test.StructEmpty fbeValue)
     {
         _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
@@ -65,13 +53,13 @@ public final class FinalModelStructEmpty extends FinalModel
     }
 
     // Get the struct fields values
-    public long getFields(StructEmpty fbeValue)
+    public long getFields(com.chronoxor.test.StructEmpty fbeValue)
     {
         return 0;
     }
 
     // Set the struct value
-    public long set(StructEmpty fbeValue)
+    public long set(com.chronoxor.test.StructEmpty fbeValue)
     {
         _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
@@ -80,7 +68,7 @@ public final class FinalModelStructEmpty extends FinalModel
     }
 
     // Set the struct fields values
-    public long setFields(StructEmpty fbeValue)
+    public long setFields(com.chronoxor.test.StructEmpty fbeValue)
     {
         return 0;
     }

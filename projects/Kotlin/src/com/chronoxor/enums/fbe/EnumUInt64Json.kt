@@ -7,29 +7,16 @@
 
 package com.chronoxor.enums.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.enums.*
-
-import com.google.gson.*
-
-class EnumUInt64Json : JsonSerializer<EnumUInt64>, JsonDeserializer<EnumUInt64>
+class EnumUInt64Json : com.google.gson.JsonSerializer<com.chronoxor.enums.EnumUInt64>, com.google.gson.JsonDeserializer<com.chronoxor.enums.EnumUInt64>
 {
-    override fun serialize(src: EnumUInt64, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: com.chronoxor.enums.EnumUInt64, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(src.raw.toLong())
+        return com.google.gson.JsonPrimitive(src.raw.toLong())
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): EnumUInt64
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): com.chronoxor.enums.EnumUInt64
     {
-        return EnumUInt64(json.asJsonPrimitive.asLong.toULong())
+        return com.chronoxor.enums.EnumUInt64(json.asJsonPrimitive.asLong.toULong())
     }
 }

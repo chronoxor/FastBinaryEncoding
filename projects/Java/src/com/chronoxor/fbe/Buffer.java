@@ -5,15 +5,6 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
 // Fast Binary Encoding buffer based on dynamic byte array
 public class Buffer
 {
@@ -215,12 +206,12 @@ public class Buffer
 
     public static String readString(byte[] buffer, long offset, long size)
     {
-        return new String(buffer, (int)offset, (int)size, StandardCharsets.UTF_8);
+        return new String(buffer, (int)offset, (int)size, java.nio.charset.StandardCharsets.UTF_8);
     }
 
-    public static UUID readUUID(byte[] buffer, long offset)
+    public static java.util.UUID readUUID(byte[] buffer, long offset)
     {
-        return new UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8));
+        return new java.util.UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8));
     }
 
     public static void write(byte[] buffer, long offset, boolean value)
@@ -299,7 +290,7 @@ public class Buffer
             buffer[(int)(offset + i)] = value;
     }
 
-    public static void write(byte[] buffer, long offset, UUID value)
+    public static void write(byte[] buffer, long offset, java.util.UUID value)
     {
         writeBE(buffer, offset, value.getMostSignificantBits());
         writeBE(buffer, offset + 8, value.getLeastSignificantBits());

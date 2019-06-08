@@ -5,28 +5,16 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding String->OptionalStructSimple map field model
-public final class FieldModelMapStringOptionalStructSimple extends FieldModel
+public final class FieldModelMapStringOptionalStructSimple extends com.chronoxor.fbe.FieldModel
 {
-    private final FieldModelString _modelKey;
+    private final com.chronoxor.fbe.FieldModelString _modelKey;
     private final FieldModelOptionalStructSimple _modelValue;
 
-    public FieldModelMapStringOptionalStructSimple(Buffer buffer, long offset)
+    public FieldModelMapStringOptionalStructSimple(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        _modelKey = new FieldModelString(buffer, offset);
+        _modelKey = new com.chronoxor.fbe.FieldModelString(buffer, offset);
         _modelValue = new FieldModelOptionalStructSimple(buffer, offset);
     }
 
@@ -85,7 +73,7 @@ public final class FieldModelMapStringOptionalStructSimple extends FieldModel
     }
 
     // Map index operator
-    public Pair<FieldModelString, FieldModelOptionalStructSimple> getItem(long index)
+    public com.chronoxor.fbe.Pair<com.chronoxor.fbe.FieldModelString, FieldModelOptionalStructSimple> getItem(long index)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
 
@@ -99,11 +87,11 @@ public final class FieldModelMapStringOptionalStructSimple extends FieldModel
         _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
         _modelKey.fbeShift(index * (_modelKey.fbeSize() + _modelValue.fbeSize()));
         _modelValue.fbeShift(index * (_modelKey.fbeSize() + _modelValue.fbeSize()));
-        return Pair.create(_modelKey, _modelValue);
+        return com.chronoxor.fbe.Pair.create(_modelKey, _modelValue);
     }
 
     // Resize the map and get its first model
-    public Pair<FieldModelString, FieldModelOptionalStructSimple> resize(long size)
+    public com.chronoxor.fbe.Pair<com.chronoxor.fbe.FieldModelString, FieldModelOptionalStructSimple> resize(long size)
     {
         int fbeMapSize = (int)(size * (_modelKey.fbeSize() + _modelValue.fbeSize()));
         int fbeMapOffset = (int)(_buffer.allocate(4 + fbeMapSize) - _buffer.getOffset());
@@ -115,7 +103,7 @@ public final class FieldModelMapStringOptionalStructSimple extends FieldModel
 
         _modelKey.fbeOffset(fbeMapOffset + 4);
         _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
-        return Pair.create(_modelKey, _modelValue);
+        return com.chronoxor.fbe.Pair.create(_modelKey, _modelValue);
     }
 
     // Check if the map is valid
@@ -149,8 +137,8 @@ public final class FieldModelMapStringOptionalStructSimple extends FieldModel
         return true;
     }
 
-    // Get the map as TreeMap
-    public void get(TreeMap<String, StructSimple> values)
+    // Get the map as java.util.TreeMap
+    public void get(java.util.TreeMap<String, com.chronoxor.test.StructSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -166,15 +154,15 @@ public final class FieldModelMapStringOptionalStructSimple extends FieldModel
         for (long i = fbeMapSize; i-- > 0;)
         {
             String key = fbeModel.getKey().get();
-            StructSimple value = fbeModel.getValue().get();
+            com.chronoxor.test.StructSimple value = fbeModel.getValue().get();
             values.put(key, value);
             fbeModel.getKey().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
             fbeModel.getValue().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
         }
     }
 
-    // Get the map as HashMap
-    public void get(HashMap<String, StructSimple> values)
+    // Get the map as java.util.HashMap
+    public void get(java.util.HashMap<String, com.chronoxor.test.StructSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -190,15 +178,15 @@ public final class FieldModelMapStringOptionalStructSimple extends FieldModel
         for (long i = fbeMapSize; i-- > 0;)
         {
             String key = fbeModel.getKey().get();
-            StructSimple value = fbeModel.getValue().get();
+            com.chronoxor.test.StructSimple value = fbeModel.getValue().get();
             values.put(key, value);
             fbeModel.getKey().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
             fbeModel.getValue().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
         }
     }
 
-    // Set the map as TreeMap
-    public void set(TreeMap<String, StructSimple> values)
+    // Set the map as java.util.TreeMap
+    public void set(java.util.TreeMap<String, com.chronoxor.test.StructSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -218,8 +206,8 @@ public final class FieldModelMapStringOptionalStructSimple extends FieldModel
         }
     }
 
-    // Set the map as HashMap
-    public void set(HashMap<String, StructSimple> values)
+    // Set the map as java.util.HashMap
+    public void set(java.util.HashMap<String, com.chronoxor.test.StructSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

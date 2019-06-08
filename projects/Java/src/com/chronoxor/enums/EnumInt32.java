@@ -5,17 +5,6 @@
 
 package com.chronoxor.enums;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-
 public final class EnumInt32 implements Comparable<EnumInt32>
 {
     public static final EnumInt32 ENUM_VALUE_0 = new EnumInt32(EnumInt32Enum.ENUM_VALUE_0);

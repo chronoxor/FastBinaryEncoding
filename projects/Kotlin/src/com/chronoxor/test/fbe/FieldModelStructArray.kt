@@ -7,20 +7,9 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructArray field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FieldModelStructArray(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelStructArray(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     val f1: FieldModelArrayByte = FieldModelArrayByte(buffer, 4 + 4, 2)
     val f2: FieldModelArrayOptionalByte = FieldModelArrayOptionalByte(buffer, f1.fbeOffset + f1.fbeSize, 2)
@@ -208,7 +197,7 @@ class FieldModelStructArray(buffer: Buffer, offset: Long) : FieldModel(buffer, o
     }
 
     // Get the struct value
-    fun get(fbeValue: StructArray = StructArray()): StructArray
+    fun get(fbeValue: com.chronoxor.test.StructArray = com.chronoxor.test.StructArray()): com.chronoxor.test.StructArray
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -222,7 +211,7 @@ class FieldModelStructArray(buffer: Buffer, offset: Long) : FieldModel(buffer, o
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructArray, fbeStructSize: Long)
+    fun getFields(fbeValue: com.chronoxor.test.StructArray, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
 
@@ -253,37 +242,37 @@ class FieldModelStructArray(buffer: Buffer, offset: Long) : FieldModel(buffer, o
         if ((fbeCurrentSize + f5.fbeSize) <= fbeStructSize)
             f5.get(fbeValue.f5)
         else
-            fbeValue.f5 = Array(2) { EnumSimple() }
+            fbeValue.f5 = Array(2) { com.chronoxor.test.EnumSimple() }
         fbeCurrentSize += f5.fbeSize
 
         if ((fbeCurrentSize + f6.fbeSize) <= fbeStructSize)
             f6.get(fbeValue.f6)
         else
-            fbeValue.f6 = arrayOfNulls<EnumSimple?>(2)
+            fbeValue.f6 = arrayOfNulls<com.chronoxor.test.EnumSimple?>(2)
         fbeCurrentSize += f6.fbeSize
 
         if ((fbeCurrentSize + f7.fbeSize) <= fbeStructSize)
             f7.get(fbeValue.f7)
         else
-            fbeValue.f7 = Array(2) { FlagsSimple() }
+            fbeValue.f7 = Array(2) { com.chronoxor.test.FlagsSimple() }
         fbeCurrentSize += f7.fbeSize
 
         if ((fbeCurrentSize + f8.fbeSize) <= fbeStructSize)
             f8.get(fbeValue.f8)
         else
-            fbeValue.f8 = arrayOfNulls<FlagsSimple?>(2)
+            fbeValue.f8 = arrayOfNulls<com.chronoxor.test.FlagsSimple?>(2)
         fbeCurrentSize += f8.fbeSize
 
         if ((fbeCurrentSize + f9.fbeSize) <= fbeStructSize)
             f9.get(fbeValue.f9)
         else
-            fbeValue.f9 = Array(2) { StructSimple() }
+            fbeValue.f9 = Array(2) { com.chronoxor.test.StructSimple() }
         fbeCurrentSize += f9.fbeSize
 
         if ((fbeCurrentSize + f10.fbeSize) <= fbeStructSize)
             f10.get(fbeValue.f10)
         else
-            fbeValue.f10 = arrayOfNulls<StructSimple?>(2)
+            fbeValue.f10 = arrayOfNulls<com.chronoxor.test.StructSimple?>(2)
         fbeCurrentSize += f10.fbeSize
     }
 
@@ -315,7 +304,7 @@ class FieldModelStructArray(buffer: Buffer, offset: Long) : FieldModel(buffer, o
     }
 
     // Set the struct value
-    fun set(fbeValue: StructArray)
+    fun set(fbeValue: com.chronoxor.test.StructArray)
     {
         val fbeBegin = setBegin()
         if (fbeBegin == 0L)
@@ -327,7 +316,7 @@ class FieldModelStructArray(buffer: Buffer, offset: Long) : FieldModel(buffer, o
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructArray)
+    fun setFields(fbeValue: com.chronoxor.test.StructArray)
     {
         f1.set(fbeValue.f1)
         f2.set(fbeValue.f2)

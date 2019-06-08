@@ -7,14 +7,6 @@
 
 package com.chronoxor.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
 // Fast Binary Encoding base final model
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class FinalModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long)
@@ -53,7 +45,7 @@ abstract class FinalModel protected constructor(protected var _buffer: Buffer, p
     protected fun readDouble(offset: Long): Double { return Buffer.readDouble(_buffer.data, _buffer.offset + offset) }
     protected fun readBytes(offset: Long, size: Long): ByteArray { return Buffer.readBytes(_buffer.data, _buffer.offset + offset, size) }
     protected fun readString(offset: Long, size: Long): String { return Buffer.readString(_buffer.data, _buffer.offset + offset, size) }
-    protected fun readUUID(offset: Long): UUID { return Buffer.readUUID(_buffer.data, _buffer.offset + offset) }
+    protected fun readUUID(offset: Long): java.util.UUID { return Buffer.readUUID(_buffer.data, _buffer.offset + offset) }
     protected fun write(offset: Long, value: Boolean) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Byte) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: UByte) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
@@ -68,5 +60,5 @@ abstract class FinalModel protected constructor(protected var _buffer: Buffer, p
     protected fun write(offset: Long, value: ByteArray) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: ByteArray, valueOffset: Long, valueSize: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value, valueOffset, valueSize) }
     protected fun write(offset: Long, value: Byte, valueCount: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value, valueCount) }
-    protected fun write(offset: Long, value: UUID) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: java.util.UUID) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
 }

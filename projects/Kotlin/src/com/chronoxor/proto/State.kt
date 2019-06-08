@@ -7,16 +7,6 @@
 
 package com.chronoxor.proto
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 class State : Comparable<State>
 {
@@ -30,7 +20,7 @@ class State : Comparable<State>
         val good = State(StateEnum.good)
         val bad = State(StateEnum.bad)
 
-        fun fromSet(set: EnumSet<StateEnum>): State
+        fun fromSet(set: java.util.EnumSet<StateEnum>): State
         {
             @Suppress("CanBeVal")
             var result = 0
@@ -75,14 +65,14 @@ class State : Comparable<State>
     constructor()
     constructor(value: Byte) { setEnum(value) }
     constructor(value: StateEnum) { setEnum(value) }
-    constructor(value: EnumSet<StateEnum>) { setEnum(value) }
+    constructor(value: java.util.EnumSet<StateEnum>) { setEnum(value) }
     constructor(value: State) { setEnum(value) }
 
     fun setDefault() { setEnum(0.toByte()) }
 
     fun setEnum(value: Byte) { this.raw = value; this.value = StateEnum.mapValue(value) }
     fun setEnum(value: StateEnum) { this.value = value; this.raw = value.raw; }
-    fun setEnum(value: EnumSet<StateEnum>) { setEnum(State.fromSet(value)) }
+    fun setEnum(value: java.util.EnumSet<StateEnum>) { setEnum(State.fromSet(value)) }
     fun setEnum(value: State) { this.value = value.value; this.raw = value.raw }
 
     fun hasFlags(flags: Byte): Boolean = ((raw.toInt() and flags.toInt()) != 0) && ((raw.toInt() and flags.toInt()) == flags.toInt())
@@ -97,9 +87,9 @@ class State : Comparable<State>
     fun removeFlags(flags: StateEnum): State { removeFlags(flags.raw); return this }
     fun removeFlags(flags: State): State { removeFlags(flags.raw); return this }
 
-    val allSet: EnumSet<StateEnum> get() = value!!.allSet
-    val noneSet: EnumSet<StateEnum> get() = value!!.noneSet
-    val currentSet: EnumSet<StateEnum> get() = value!!.currentSet
+    val allSet: java.util.EnumSet<StateEnum> get() = value!!.allSet
+    val noneSet: java.util.EnumSet<StateEnum> get() = value!!.noneSet
+    val currentSet: java.util.EnumSet<StateEnum> get() = value!!.currentSet
 
     override fun compareTo(other: State): Int
     {

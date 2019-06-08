@@ -5,39 +5,27 @@
 
 package com.chronoxor.enums.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.enums.*;
-
 // Fast Binary Encoding EnumInt32 field model
-public final class FieldModelEnumInt32 extends FieldModel
+public final class FieldModelEnumInt32 extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelEnumInt32(Buffer buffer, long offset) { super(buffer, offset); }
+    public FieldModelEnumInt32(com.chronoxor.fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the field size
     @Override
     public long fbeSize() { return 4; }
 
     // Get the value
-    public EnumInt32 get() { return get(new EnumInt32()); }
-    public EnumInt32 get(EnumInt32 defaults)
+    public com.chronoxor.enums.EnumInt32 get() { return get(new com.chronoxor.enums.EnumInt32()); }
+    public com.chronoxor.enums.EnumInt32 get(com.chronoxor.enums.EnumInt32 defaults)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return new EnumInt32(readInt32(fbeOffset()));
+        return new com.chronoxor.enums.EnumInt32(readInt32(fbeOffset()));
     }
 
     // Set the value
-    public void set(EnumInt32 value)
+    public void set(com.chronoxor.enums.EnumInt32 value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

@@ -5,20 +5,8 @@
 
 package com.chronoxor.enums.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.enums.*;
-
 // Fast Binary Encoding Enums final model
-public final class FinalModelEnums extends FinalModel
+public final class FinalModelEnums extends com.chronoxor.fbe.FinalModel
 {
     public final FinalModelEnumByte byte0;
     public final FinalModelEnumByte byte1;
@@ -87,7 +75,7 @@ public final class FinalModelEnums extends FinalModel
     public final FinalModelEnumUInt64 uint64b4;
     public final FinalModelEnumUInt64 uint64b5;
 
-    public FinalModelEnums(Buffer buffer, long offset)
+    public FinalModelEnums(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         byte0 = new FinalModelEnumByte(buffer, 0);
@@ -159,7 +147,7 @@ public final class FinalModelEnums extends FinalModel
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(Enums fbeValue)
+    public long fbeAllocationSize(com.chronoxor.enums.Enums fbeValue)
     {
         long fbeResult = 0
             + byte0.fbeAllocationSize(fbeValue.byte0)
@@ -652,8 +640,8 @@ public final class FinalModelEnums extends FinalModel
     }
 
     // Get the struct value
-    public Enums get(Size fbeSize) { return get(fbeSize, new Enums()); }
-    public Enums get(Size fbeSize, Enums fbeValue)
+    public com.chronoxor.enums.Enums get(com.chronoxor.fbe.Size fbeSize) { return get(fbeSize, new com.chronoxor.enums.Enums()); }
+    public com.chronoxor.enums.Enums get(com.chronoxor.fbe.Size fbeSize, com.chronoxor.enums.Enums fbeValue)
     {
         _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
@@ -662,11 +650,11 @@ public final class FinalModelEnums extends FinalModel
     }
 
     // Get the struct fields values
-    public long getFields(Enums fbeValue)
+    public long getFields(com.chronoxor.enums.Enums fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size(0);
 
         byte0.fbeOffset(fbeCurrentOffset);
         fbeValue.byte0 = byte0.get(fbeFieldSize);
@@ -1002,7 +990,7 @@ public final class FinalModelEnums extends FinalModel
     }
 
     // Set the struct value
-    public long set(Enums fbeValue)
+    public long set(com.chronoxor.enums.Enums fbeValue)
     {
         _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
@@ -1011,11 +999,11 @@ public final class FinalModelEnums extends FinalModel
     }
 
     // Set the struct fields values
-    public long setFields(Enums fbeValue)
+    public long setFields(com.chronoxor.enums.Enums fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size();
 
         byte0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = byte0.set(fbeValue.byte0);

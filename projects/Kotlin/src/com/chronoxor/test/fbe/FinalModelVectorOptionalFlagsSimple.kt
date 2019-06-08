@@ -7,38 +7,27 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding OptionalFlagsSimple vector final model
-class FinalModelVectorOptionalFlagsSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelVectorOptionalFlagsSimple(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     private val _model = FinalModelOptionalFlagsSimple(buffer, offset)
 
     // Get the allocation size
-    fun fbeAllocationSize(values: ArrayList<FlagsSimple?>): Long
+    fun fbeAllocationSize(values: java.util.ArrayList<com.chronoxor.test.FlagsSimple?>): Long
     {
         var size: Long = 4
         for (value in values)
             size += _model.fbeAllocationSize(value)
         return size
     }
-    fun fbeAllocationSize(values: LinkedList<FlagsSimple?>): Long
+    fun fbeAllocationSize(values: java.util.LinkedList<com.chronoxor.test.FlagsSimple?>): Long
     {
         var size: Long = 4
         for (value in values)
             size += _model.fbeAllocationSize(value)
         return size
     }
-    fun fbeAllocationSize(values: HashSet<FlagsSimple?>): Long
+    fun fbeAllocationSize(values: java.util.HashSet<com.chronoxor.test.FlagsSimple?>): Long
     {
         var size: Long = 4
         for (value in values)
@@ -68,8 +57,8 @@ class FinalModelVectorOptionalFlagsSimple(buffer: Buffer, offset: Long) : FinalM
         return size
     }
 
-    // Get the vector as ArrayList
-    fun get(values: ArrayList<FlagsSimple?>): Long
+    // Get the vector as java.util.ArrayList
+    fun get(values: java.util.ArrayList<com.chronoxor.test.FlagsSimple?>): Long
     {
         values.clear()
 
@@ -84,7 +73,7 @@ class FinalModelVectorOptionalFlagsSimple(buffer: Buffer, offset: Long) : FinalM
         values.ensureCapacity(fbeVectorSize.toInt())
 
         var size: Long = 4
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _model.fbeOffset = fbeOffset + 4
         for (i in 0 until fbeVectorSize)
         {
@@ -97,8 +86,8 @@ class FinalModelVectorOptionalFlagsSimple(buffer: Buffer, offset: Long) : FinalM
         return size
     }
 
-    // Get the vector as LinkedList
-    fun get(values: LinkedList<FlagsSimple?>): Long
+    // Get the vector as java.util.LinkedList
+    fun get(values: java.util.LinkedList<com.chronoxor.test.FlagsSimple?>): Long
     {
         values.clear()
 
@@ -111,7 +100,7 @@ class FinalModelVectorOptionalFlagsSimple(buffer: Buffer, offset: Long) : FinalM
             return 4
 
         var size: Long = 4
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _model.fbeOffset = fbeOffset + 4
         for (i in 0 until fbeVectorSize)
         {
@@ -124,8 +113,8 @@ class FinalModelVectorOptionalFlagsSimple(buffer: Buffer, offset: Long) : FinalM
         return size
     }
 
-    // Get the vector as HashSet
-    fun get(values: HashSet<FlagsSimple?>): Long
+    // Get the vector as java.util.HashSet
+    fun get(values: java.util.HashSet<com.chronoxor.test.FlagsSimple?>): Long
     {
         values.clear()
 
@@ -138,7 +127,7 @@ class FinalModelVectorOptionalFlagsSimple(buffer: Buffer, offset: Long) : FinalM
             return 4
 
         var size: Long = 4
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _model.fbeOffset = fbeOffset + 4
         for (i in 0 until fbeVectorSize)
         {
@@ -151,8 +140,8 @@ class FinalModelVectorOptionalFlagsSimple(buffer: Buffer, offset: Long) : FinalM
         return size
     }
 
-    // Set the vector as ArrayList
-    fun set(values: ArrayList<FlagsSimple?>): Long
+    // Set the vector as java.util.ArrayList
+    fun set(values: java.util.ArrayList<com.chronoxor.test.FlagsSimple?>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
@@ -171,8 +160,8 @@ class FinalModelVectorOptionalFlagsSimple(buffer: Buffer, offset: Long) : FinalM
         return size
     }
 
-    // Set the vector as LinkedList
-    fun set(values: LinkedList<FlagsSimple?>): Long
+    // Set the vector as java.util.LinkedList
+    fun set(values: java.util.LinkedList<com.chronoxor.test.FlagsSimple?>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
@@ -191,8 +180,8 @@ class FinalModelVectorOptionalFlagsSimple(buffer: Buffer, offset: Long) : FinalM
         return size
     }
 
-    // Set the vector as HashSet
-    fun set(values: HashSet<FlagsSimple?>): Long
+    // Set the vector as java.util.HashSet
+    fun set(values: java.util.HashSet<com.chronoxor.test.FlagsSimple?>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)

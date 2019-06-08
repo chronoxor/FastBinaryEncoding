@@ -5,20 +5,8 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructArray final model
-public final class FinalModelStructArray extends FinalModel
+public final class FinalModelStructArray extends com.chronoxor.fbe.FinalModel
 {
     public final FinalModelArrayByte f1;
     public final FinalModelArrayOptionalByte f2;
@@ -31,7 +19,7 @@ public final class FinalModelStructArray extends FinalModel
     public final FinalModelArrayStructSimple f9;
     public final FinalModelArrayOptionalStructSimple f10;
 
-    public FinalModelStructArray(Buffer buffer, long offset)
+    public FinalModelStructArray(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         f1 = new FinalModelArrayByte(buffer, 0, 2);
@@ -47,7 +35,7 @@ public final class FinalModelStructArray extends FinalModel
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(StructArray fbeValue)
+    public long fbeAllocationSize(com.chronoxor.test.StructArray fbeValue)
     {
         long fbeResult = 0
             + f1.fbeAllocationSize(fbeValue.f1)
@@ -148,8 +136,8 @@ public final class FinalModelStructArray extends FinalModel
     }
 
     // Get the struct value
-    public StructArray get(Size fbeSize) { return get(fbeSize, new StructArray()); }
-    public StructArray get(Size fbeSize, StructArray fbeValue)
+    public com.chronoxor.test.StructArray get(com.chronoxor.fbe.Size fbeSize) { return get(fbeSize, new com.chronoxor.test.StructArray()); }
+    public com.chronoxor.test.StructArray get(com.chronoxor.fbe.Size fbeSize, com.chronoxor.test.StructArray fbeValue)
     {
         _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
@@ -158,11 +146,11 @@ public final class FinalModelStructArray extends FinalModel
     }
 
     // Get the struct fields values
-    public long getFields(StructArray fbeValue)
+    public long getFields(com.chronoxor.test.StructArray fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size(0);
 
         f1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = f1.get(fbeValue.f1);
@@ -218,7 +206,7 @@ public final class FinalModelStructArray extends FinalModel
     }
 
     // Set the struct value
-    public long set(StructArray fbeValue)
+    public long set(com.chronoxor.test.StructArray fbeValue)
     {
         _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
@@ -227,11 +215,11 @@ public final class FinalModelStructArray extends FinalModel
     }
 
     // Set the struct fields values
-    public long setFields(StructArray fbeValue)
+    public long setFields(com.chronoxor.test.StructArray fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size();
 
         f1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = f1.set(fbeValue.f1);

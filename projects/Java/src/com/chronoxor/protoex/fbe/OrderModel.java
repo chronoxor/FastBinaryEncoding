@@ -5,25 +5,13 @@
 
 package com.chronoxor.protoex.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.protoex.*;
-
 // Fast Binary Encoding Order model
-public final class OrderModel extends Model
+public final class OrderModel extends com.chronoxor.fbe.Model
 {
     public final FieldModelOrder model;
 
     public OrderModel() { model = new FieldModelOrder(getBuffer(), 4); }
-    public OrderModel(Buffer buffer) { super(buffer); model = new FieldModelOrder(getBuffer(), 4); }
+    public OrderModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); model = new FieldModelOrder(getBuffer(), 4); }
 
     // Get the model size
     public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }
@@ -61,7 +49,7 @@ public final class OrderModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(Order value)
+    public long serialize(com.chronoxor.protoex.Order value)
     {
         long fbeBegin = createBegin();
         model.set(value);
@@ -70,12 +58,12 @@ public final class OrderModel extends Model
     }
 
     // Deserialize the struct value
-    public Order deserialize() { var value = new Order(); deserialize(value); return value; }
-    public long deserialize(Order value)
+    public com.chronoxor.protoex.Order deserialize() { var value = new com.chronoxor.protoex.Order(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.protoex.Order value)
     {
         if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())
         {
-            value = new Order();
+            value = new com.chronoxor.protoex.Order();
             return 0;
         }
 
@@ -83,7 +71,7 @@ public final class OrderModel extends Model
         assert (fbeFullSize >= model.fbeSize()) : "Model is broken!";
         if (fbeFullSize < model.fbeSize())
         {
-            value = new Order();
+            value = new com.chronoxor.protoex.Order();
             return 0;
         }
 

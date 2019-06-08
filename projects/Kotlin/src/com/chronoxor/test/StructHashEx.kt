@@ -7,26 +7,15 @@
 
 package com.chronoxor.test
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructHashEx : Comparable<Any?>
 {
-    var f1: HashMap<StructSimple, StructNested> = HashMap()
-    var f2: HashMap<StructSimple, StructNested?> = HashMap()
+    var f1: java.util.HashMap<StructSimple, StructNested> = java.util.HashMap()
+    var f2: java.util.HashMap<StructSimple, StructNested?> = java.util.HashMap()
 
     constructor()
 
-    constructor(f1: HashMap<StructSimple, StructNested>, f2: HashMap<StructSimple, StructNested?>)
+    constructor(f1: java.util.HashMap<StructSimple, StructNested>, f2: java.util.HashMap<StructSimple, StructNested?>)
     {
         this.f1 = f1
         this.f2 = f2

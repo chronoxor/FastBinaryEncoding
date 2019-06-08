@@ -5,34 +5,22 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public class StructVector implements Comparable<Object>
 {
-    public ArrayList<Byte> f1 = new ArrayList<Byte>();
-    public ArrayList<Byte> f2 = new ArrayList<Byte>();
-    public ArrayList<ByteBuffer> f3 = new ArrayList<ByteBuffer>();
-    public ArrayList<ByteBuffer> f4 = new ArrayList<ByteBuffer>();
-    public ArrayList<EnumSimple> f5 = new ArrayList<EnumSimple>();
-    public ArrayList<EnumSimple> f6 = new ArrayList<EnumSimple>();
-    public ArrayList<FlagsSimple> f7 = new ArrayList<FlagsSimple>();
-    public ArrayList<FlagsSimple> f8 = new ArrayList<FlagsSimple>();
-    public ArrayList<StructSimple> f9 = new ArrayList<StructSimple>();
-    public ArrayList<StructSimple> f10 = new ArrayList<StructSimple>();
+    public java.util.ArrayList<Byte> f1 = new java.util.ArrayList<Byte>();
+    public java.util.ArrayList<Byte> f2 = new java.util.ArrayList<Byte>();
+    public java.util.ArrayList<java.nio.ByteBuffer> f3 = new java.util.ArrayList<java.nio.ByteBuffer>();
+    public java.util.ArrayList<java.nio.ByteBuffer> f4 = new java.util.ArrayList<java.nio.ByteBuffer>();
+    public java.util.ArrayList<EnumSimple> f5 = new java.util.ArrayList<EnumSimple>();
+    public java.util.ArrayList<EnumSimple> f6 = new java.util.ArrayList<EnumSimple>();
+    public java.util.ArrayList<FlagsSimple> f7 = new java.util.ArrayList<FlagsSimple>();
+    public java.util.ArrayList<FlagsSimple> f8 = new java.util.ArrayList<FlagsSimple>();
+    public java.util.ArrayList<StructSimple> f9 = new java.util.ArrayList<StructSimple>();
+    public java.util.ArrayList<StructSimple> f10 = new java.util.ArrayList<StructSimple>();
 
     public StructVector() {}
 
-    public StructVector(ArrayList<Byte> f1, ArrayList<Byte> f2, ArrayList<ByteBuffer> f3, ArrayList<ByteBuffer> f4, ArrayList<EnumSimple> f5, ArrayList<EnumSimple> f6, ArrayList<FlagsSimple> f7, ArrayList<FlagsSimple> f8, ArrayList<StructSimple> f9, ArrayList<StructSimple> f10)
+    public StructVector(java.util.ArrayList<Byte> f1, java.util.ArrayList<Byte> f2, java.util.ArrayList<java.nio.ByteBuffer> f3, java.util.ArrayList<java.nio.ByteBuffer> f4, java.util.ArrayList<EnumSimple> f5, java.util.ArrayList<EnumSimple> f6, java.util.ArrayList<FlagsSimple> f7, java.util.ArrayList<FlagsSimple> f8, java.util.ArrayList<StructSimple> f9, java.util.ArrayList<StructSimple> f10)
     {
         this.f1 = f1;
         this.f2 = f2;

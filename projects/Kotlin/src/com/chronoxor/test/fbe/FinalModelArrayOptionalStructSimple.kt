@@ -7,24 +7,13 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding OptionalStructSimple array final model
-class FinalModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, private val _size: Long) : FinalModel(buffer, offset)
+class FinalModelArrayOptionalStructSimple(buffer: com.chronoxor.fbe.Buffer, offset: Long, private val _size: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     private val _model = FinalModelOptionalStructSimple(buffer, offset)
 
     // Get the allocation size
-    fun fbeAllocationSize(values: Array<StructSimple?>): Long
+    fun fbeAllocationSize(values: Array<com.chronoxor.test.StructSimple?>): Long
     {
         var size: Long = 0
         var i: Long = 0
@@ -35,7 +24,7 @@ class FinalModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, private 
         }
         return size
     }
-    fun fbeAllocationSize(values: ArrayList<StructSimple?>): Long
+    fun fbeAllocationSize(values: java.util.ArrayList<com.chronoxor.test.StructSimple?>): Long
     {
         var size: Long = 0
         var i: Long = 0
@@ -68,9 +57,9 @@ class FinalModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, private 
     }
 
     // Get the array
-    fun get(size: Size): Array<StructSimple?>
+    fun get(size: com.chronoxor.fbe.Size): Array<com.chronoxor.test.StructSimple?>
     {
-        val values = arrayOfNulls<StructSimple?>(_size.toInt())
+        val values = arrayOfNulls<com.chronoxor.test.StructSimple?>(_size.toInt())
 
         assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset) > _buffer.size)
@@ -80,7 +69,7 @@ class FinalModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, private 
         }
 
         size.value = 0
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _model.fbeOffset = fbeOffset
         for (i in 0 until _size)
         {
@@ -93,14 +82,14 @@ class FinalModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, private 
     }
 
     // Get the array
-    fun get(values: Array<StructSimple?>): Long
+    fun get(values: Array<com.chronoxor.test.StructSimple?>): Long
     {
         assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset) > _buffer.size)
             return 0
 
         var size: Long = 0
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _model.fbeOffset = fbeOffset
         var i: Long = 0
         while ((i < values.size) && (i < _size))
@@ -114,8 +103,8 @@ class FinalModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, private 
         return size
     }
 
-    // Get the array as ArrayList
-    fun get(values: ArrayList<StructSimple?>): Long
+    // Get the array as java.util.ArrayList
+    fun get(values: java.util.ArrayList<com.chronoxor.test.StructSimple?>): Long
     {
         values.clear()
 
@@ -126,7 +115,7 @@ class FinalModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, private 
         values.ensureCapacity(_size.toInt())
 
         var size: Long = 0
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _model.fbeOffset = fbeOffset
         var i = _size
         while (i-- > 0)
@@ -141,7 +130,7 @@ class FinalModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, private 
     }
 
     // Set the array
-    fun set(values: Array<StructSimple?>): Long
+    fun set(values: Array<com.chronoxor.test.StructSimple?>): Long
     {
         assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset) > _buffer.size)
@@ -160,8 +149,8 @@ class FinalModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, private 
         return size
     }
 
-    // Set the array as List
-    fun set(values: ArrayList<StructSimple?>): Long
+    // Set the array as java.util.ArrayList
+    fun set(values: java.util.ArrayList<com.chronoxor.test.StructSimple?>): Long
     {
         assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset) > _buffer.size)

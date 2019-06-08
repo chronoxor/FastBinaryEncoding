@@ -7,20 +7,9 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructMap field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FieldModelStructMap(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelStructMap(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     val f1: FieldModelMapInt32Byte = FieldModelMapInt32Byte(buffer, 4 + 4)
     val f2: FieldModelMapInt32OptionalByte = FieldModelMapInt32OptionalByte(buffer, f1.fbeOffset + f1.fbeSize)
@@ -208,7 +197,7 @@ class FieldModelStructMap(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     }
 
     // Get the struct value
-    fun get(fbeValue: StructMap = StructMap()): StructMap
+    fun get(fbeValue: com.chronoxor.test.StructMap = com.chronoxor.test.StructMap()): com.chronoxor.test.StructMap
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -222,7 +211,7 @@ class FieldModelStructMap(buffer: Buffer, offset: Long) : FieldModel(buffer, off
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructMap, fbeStructSize: Long)
+    fun getFields(fbeValue: com.chronoxor.test.StructMap, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
 
@@ -315,7 +304,7 @@ class FieldModelStructMap(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     }
 
     // Set the struct value
-    fun set(fbeValue: StructMap)
+    fun set(fbeValue: com.chronoxor.test.StructMap)
     {
         val fbeBegin = setBegin()
         if (fbeBegin == 0L)
@@ -327,7 +316,7 @@ class FieldModelStructMap(buffer: Buffer, offset: Long) : FieldModel(buffer, off
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructMap)
+    fun setFields(fbeValue: com.chronoxor.test.StructMap)
     {
         f1.set(fbeValue.f1)
         f2.set(fbeValue.f2)

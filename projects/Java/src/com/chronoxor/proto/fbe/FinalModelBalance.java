@@ -5,33 +5,21 @@
 
 package com.chronoxor.proto.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 // Fast Binary Encoding Balance final model
-public final class FinalModelBalance extends FinalModel
+public final class FinalModelBalance extends com.chronoxor.fbe.FinalModel
 {
-    public final FinalModelString currency;
-    public final FinalModelDouble amount;
+    public final com.chronoxor.fbe.FinalModelString currency;
+    public final com.chronoxor.fbe.FinalModelDouble amount;
 
-    public FinalModelBalance(Buffer buffer, long offset)
+    public FinalModelBalance(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        currency = new FinalModelString(buffer, 0);
-        amount = new FinalModelDouble(buffer, 0);
+        currency = new com.chronoxor.fbe.FinalModelString(buffer, 0);
+        amount = new com.chronoxor.fbe.FinalModelDouble(buffer, 0);
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(Balance fbeValue)
+    public long fbeAllocationSize(com.chronoxor.proto.Balance fbeValue)
     {
         long fbeResult = 0
             + currency.fbeAllocationSize(fbeValue.currency)
@@ -76,8 +64,8 @@ public final class FinalModelBalance extends FinalModel
     }
 
     // Get the struct value
-    public Balance get(Size fbeSize) { return get(fbeSize, new Balance()); }
-    public Balance get(Size fbeSize, Balance fbeValue)
+    public com.chronoxor.proto.Balance get(com.chronoxor.fbe.Size fbeSize) { return get(fbeSize, new com.chronoxor.proto.Balance()); }
+    public com.chronoxor.proto.Balance get(com.chronoxor.fbe.Size fbeSize, com.chronoxor.proto.Balance fbeValue)
     {
         _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
@@ -86,11 +74,11 @@ public final class FinalModelBalance extends FinalModel
     }
 
     // Get the struct fields values
-    public long getFields(Balance fbeValue)
+    public long getFields(com.chronoxor.proto.Balance fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size(0);
 
         currency.fbeOffset(fbeCurrentOffset);
         fbeValue.currency = currency.get(fbeFieldSize);
@@ -106,7 +94,7 @@ public final class FinalModelBalance extends FinalModel
     }
 
     // Set the struct value
-    public long set(Balance fbeValue)
+    public long set(com.chronoxor.proto.Balance fbeValue)
     {
         _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
@@ -115,11 +103,11 @@ public final class FinalModelBalance extends FinalModel
     }
 
     // Set the struct fields values
-    public long setFields(Balance fbeValue)
+    public long setFields(com.chronoxor.proto.Balance fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size();
 
         currency.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = currency.set(fbeValue.currency);

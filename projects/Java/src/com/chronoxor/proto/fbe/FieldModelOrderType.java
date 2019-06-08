@@ -5,39 +5,27 @@
 
 package com.chronoxor.proto.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 // Fast Binary Encoding OrderType field model
-public final class FieldModelOrderType extends FieldModel
+public final class FieldModelOrderType extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelOrderType(Buffer buffer, long offset) { super(buffer, offset); }
+    public FieldModelOrderType(com.chronoxor.fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the field size
     @Override
     public long fbeSize() { return 1; }
 
     // Get the value
-    public OrderType get() { return get(new OrderType()); }
-    public OrderType get(OrderType defaults)
+    public com.chronoxor.proto.OrderType get() { return get(new com.chronoxor.proto.OrderType()); }
+    public com.chronoxor.proto.OrderType get(com.chronoxor.proto.OrderType defaults)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return new OrderType(readByte(fbeOffset()));
+        return new com.chronoxor.proto.OrderType(readByte(fbeOffset()));
     }
 
     // Set the value
-    public void set(OrderType value)
+    public void set(com.chronoxor.proto.OrderType value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

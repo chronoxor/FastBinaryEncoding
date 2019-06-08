@@ -5,25 +5,13 @@
 
 package com.chronoxor.protoex.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.protoex.*;
-
 // Fast Binary Encoding Balance model
-public final class BalanceModel extends Model
+public final class BalanceModel extends com.chronoxor.fbe.Model
 {
     public final FieldModelBalance model;
 
     public BalanceModel() { model = new FieldModelBalance(getBuffer(), 4); }
-    public BalanceModel(Buffer buffer) { super(buffer); model = new FieldModelBalance(getBuffer(), 4); }
+    public BalanceModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); model = new FieldModelBalance(getBuffer(), 4); }
 
     // Get the model size
     public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }
@@ -61,7 +49,7 @@ public final class BalanceModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(Balance value)
+    public long serialize(com.chronoxor.protoex.Balance value)
     {
         long fbeBegin = createBegin();
         model.set(value);
@@ -70,12 +58,12 @@ public final class BalanceModel extends Model
     }
 
     // Deserialize the struct value
-    public Balance deserialize() { var value = new Balance(); deserialize(value); return value; }
-    public long deserialize(Balance value)
+    public com.chronoxor.protoex.Balance deserialize() { var value = new com.chronoxor.protoex.Balance(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.protoex.Balance value)
     {
         if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())
         {
-            value = new Balance();
+            value = new com.chronoxor.protoex.Balance();
             return 0;
         }
 
@@ -83,7 +71,7 @@ public final class BalanceModel extends Model
         assert (fbeFullSize >= model.fbeSize()) : "Model is broken!";
         if (fbeFullSize < model.fbeSize())
         {
-            value = new Balance();
+            value = new com.chronoxor.protoex.Balance();
             return 0;
         }
 

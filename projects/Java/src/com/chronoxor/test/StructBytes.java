@@ -5,27 +5,15 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public class StructBytes implements Comparable<Object>
 {
-    public ByteBuffer f1 = ByteBuffer.allocate(0);
-    public ByteBuffer f2 = null;
-    public ByteBuffer f3 = null;
+    public java.nio.ByteBuffer f1 = java.nio.ByteBuffer.allocate(0);
+    public java.nio.ByteBuffer f2 = null;
+    public java.nio.ByteBuffer f3 = null;
 
     public StructBytes() {}
 
-    public StructBytes(ByteBuffer f1, ByteBuffer f2, ByteBuffer f3)
+    public StructBytes(java.nio.ByteBuffer f1, java.nio.ByteBuffer f2, java.nio.ByteBuffer f3)
     {
         this.f1 = f1;
         this.f2 = f2;

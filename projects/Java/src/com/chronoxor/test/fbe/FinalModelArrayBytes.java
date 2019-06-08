@@ -5,40 +5,28 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding Bytes array final model
-public final class FinalModelArrayBytes extends FinalModel
+public final class FinalModelArrayBytes extends com.chronoxor.fbe.FinalModel
 {
-    private final FinalModelBytes _model;
+    private final com.chronoxor.fbe.FinalModelBytes _model;
     private final long _size;
 
-    public FinalModelArrayBytes(Buffer buffer, long offset, long size)
+    public FinalModelArrayBytes(com.chronoxor.fbe.Buffer buffer, long offset, long size)
     {
         super(buffer, offset);
-        _model = new FinalModelBytes(buffer, offset);
+        _model = new com.chronoxor.fbe.FinalModelBytes(buffer, offset);
         _size = size;
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(ByteBuffer[] values)
+    public long fbeAllocationSize(java.nio.ByteBuffer[] values)
     {
         long size = 0;
         for (long i = 0; (i < values.length) && (i < _size); i++)
             size += _model.fbeAllocationSize(values[(int)i]);
         return size;
     }
-    public long fbeAllocationSize(ArrayList<ByteBuffer> values)
+    public long fbeAllocationSize(java.util.ArrayList<java.nio.ByteBuffer> values)
     {
         long size = 0;
         for (long i = 0; (i < values.size()) && (i < _size); i++)
@@ -67,9 +55,9 @@ public final class FinalModelArrayBytes extends FinalModel
     }
 
     // Get the array
-    public ByteBuffer[] get(Size size)
+    public java.nio.ByteBuffer[] get(com.chronoxor.fbe.Size size)
     {
-        var values = new ByteBuffer[(int)_size];
+        var values = new java.nio.ByteBuffer[(int)_size];
 
         assert ((_buffer.getOffset() + fbeOffset()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
@@ -79,7 +67,7 @@ public final class FinalModelArrayBytes extends FinalModel
         }
 
         size.value = 0;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset());
         for (long i = 0; i < _size; i++)
         {
@@ -92,7 +80,7 @@ public final class FinalModelArrayBytes extends FinalModel
     }
 
     // Get the array
-    public long get(ByteBuffer[] values)
+    public long get(java.nio.ByteBuffer[] values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -103,7 +91,7 @@ public final class FinalModelArrayBytes extends FinalModel
             return 0;
 
         long size = 0;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset());
         for (long i = 0; (i < values.length) && (i < _size); i++)
         {
@@ -115,8 +103,8 @@ public final class FinalModelArrayBytes extends FinalModel
         return size;
     }
 
-    // Get the array as ArrayList
-    public long get(ArrayList<ByteBuffer> values)
+    // Get the array as java.util.ArrayList
+    public long get(java.util.ArrayList<java.nio.ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -131,12 +119,12 @@ public final class FinalModelArrayBytes extends FinalModel
         values.ensureCapacity((int)_size);
 
         long size = 0;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset());
         for (long i = _size; i-- > 0;)
         {
             offset.value = 0;
-            ByteBuffer value = _model.get(offset);
+            java.nio.ByteBuffer value = _model.get(offset);
             values.add(value);
             _model.fbeShift(offset.value);
             size += offset.value;
@@ -145,7 +133,7 @@ public final class FinalModelArrayBytes extends FinalModel
     }
 
     // Set the array
-    public long set(ByteBuffer[] values)
+    public long set(java.nio.ByteBuffer[] values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -166,8 +154,8 @@ public final class FinalModelArrayBytes extends FinalModel
         return size;
     }
 
-    // Set the array as List
-    public long set(ArrayList<ByteBuffer> values)
+    // Set the array as java.util.ArrayList
+    public long set(java.util.ArrayList<java.nio.ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

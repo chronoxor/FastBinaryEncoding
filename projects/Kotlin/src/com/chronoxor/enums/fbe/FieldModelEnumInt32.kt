@@ -7,34 +7,23 @@
 
 package com.chronoxor.enums.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.enums.*
-
 // Fast Binary Encoding EnumInt32 field model
-class FieldModelEnumInt32(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelEnumInt32(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     // Field size
     override val fbeSize: Long = 4
 
     // Get the value
-    fun get(defaults: EnumInt32 = EnumInt32()): EnumInt32
+    fun get(defaults: com.chronoxor.enums.EnumInt32 = com.chronoxor.enums.EnumInt32()): com.chronoxor.enums.EnumInt32
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
-        return EnumInt32(readInt32(fbeOffset))
+        return com.chronoxor.enums.EnumInt32(readInt32(fbeOffset))
     }
 
     // Set the value
-    fun set(value: EnumInt32)
+    fun set(value: com.chronoxor.enums.EnumInt32)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

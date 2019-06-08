@@ -7,24 +7,13 @@
 
 package com.chronoxor.enums.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.enums.*
-
 // Fast Binary Encoding Enums final model
-class EnumsFinalModel : Model
+class EnumsFinalModel : com.chronoxor.fbe.Model
 {
     private val _model: FinalModelEnums
 
     constructor() { _model = FinalModelEnums(buffer, 8) }
-    constructor(buffer: Buffer) : super(buffer) { _model = FinalModelEnums(buffer, 8) }
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer) { _model = FinalModelEnums(buffer, 8) }
 
     // Model type
     var fbeType: Long = fbeTypeConst
@@ -49,7 +38,7 @@ class EnumsFinalModel : Model
     }
 
     // Serialize the struct value
-    fun serialize(value: Enums): Long
+    fun serialize(value: com.chronoxor.enums.Enums): Long
     {
         val fbeInitialSize = buffer.size
 
@@ -70,9 +59,9 @@ class EnumsFinalModel : Model
     }
 
     // Deserialize the struct value
-    fun deserialize(): Enums { val value = Enums(); deserialize(value); return value }
+    fun deserialize(): com.chronoxor.enums.Enums { val value = com.chronoxor.enums.Enums(); deserialize(value); return value }
     @Suppress("UNUSED_VALUE")
-    fun deserialize(value: Enums): Long
+    fun deserialize(value: com.chronoxor.enums.Enums): Long
     {
         var valueRef = value
 
@@ -86,7 +75,7 @@ class EnumsFinalModel : Model
         if ((fbeStructSize <= 0) || (fbeStructType != fbeType))
             return 8
 
-        val fbeSize = Size(0)
+        val fbeSize = com.chronoxor.fbe.Size()
         valueRef = _model.get(fbeSize, valueRef)
         return 8 + fbeSize.value
     }

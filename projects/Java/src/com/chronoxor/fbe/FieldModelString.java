@@ -5,15 +5,6 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
 // Fast Binary Encoding string field model
 public final class FieldModelString extends FieldModel
 {
@@ -96,7 +87,7 @@ public final class FieldModelString extends FieldModel
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
+        byte[] bytes = value.getBytes(java.nio.charset.StandardCharsets.UTF_8);
 
         int fbeStringSize = bytes.length;
         int fbeStringOffset = (int)(_buffer.allocate(4 + fbeStringSize) - _buffer.getOffset());

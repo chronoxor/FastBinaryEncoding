@@ -5,29 +5,17 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional EnumSimple final model
-public final class FinalModelOptionalEnumSimple extends FinalModel
+public final class FinalModelOptionalEnumSimple extends com.chronoxor.fbe.FinalModel
 {
-    public FinalModelOptionalEnumSimple(Buffer buffer, long offset)
+    public FinalModelOptionalEnumSimple(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         value = new FinalModelEnumSimple(buffer, 0);
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(EnumSimple optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
+    public long fbeAllocationSize(com.chronoxor.test.EnumSimple optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
 
     // Checks if the object contains a value
     public boolean hasValue()
@@ -60,7 +48,7 @@ public final class FinalModelOptionalEnumSimple extends FinalModel
     }
 
     // Get the optional value
-    public EnumSimple get(Size size)
+    public com.chronoxor.test.EnumSimple get(com.chronoxor.fbe.Size size)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())
@@ -76,14 +64,14 @@ public final class FinalModelOptionalEnumSimple extends FinalModel
         }
 
         _buffer.shift(fbeOffset() + 1);
-        EnumSimple optional = value.get(size);
+        com.chronoxor.test.EnumSimple optional = value.get(size);
         _buffer.unshift(fbeOffset() + 1);
         size.value += 1;
         return optional;
     }
 
     // Set the optional value
-    public long set(EnumSimple optional)
+    public long set(com.chronoxor.test.EnumSimple optional)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())

@@ -7,19 +7,8 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding OptionalStructSimple array field model
-class FieldModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, val size: Long) : FieldModel(buffer, offset)
+class FieldModelArrayOptionalStructSimple(buffer: com.chronoxor.fbe.Buffer, offset: Long, val size: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     private val _model = FieldModelOptionalStructSimple(buffer, offset)
 
@@ -62,9 +51,9 @@ class FieldModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, val size
     }
 
     // Get the array
-    fun get(): Array<StructSimple?>
+    fun get(): Array<com.chronoxor.test.StructSimple?>
     {
-        val values = arrayOfNulls<StructSimple?>(size.toInt())
+        val values = arrayOfNulls<com.chronoxor.test.StructSimple?>(size.toInt())
 
         val fbeModel = getItem(0)
         for (i in 0 until size)
@@ -76,7 +65,7 @@ class FieldModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, val size
     }
 
     // Get the array
-    fun get(values: Array<StructSimple?>)
+    fun get(values: Array<com.chronoxor.test.StructSimple?>)
     {
         val fbeModel = getItem(0)
         var i: Long = 0
@@ -88,8 +77,8 @@ class FieldModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, val size
         }
     }
 
-    // Get the array as ArrayList
-    fun get(values: ArrayList<StructSimple?>)
+    // Get the array as java.util.ArrayList
+    fun get(values: java.util.ArrayList<com.chronoxor.test.StructSimple?>)
     {
         values.clear()
         values.ensureCapacity(size.toInt())
@@ -105,7 +94,7 @@ class FieldModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, val size
     }
 
     // Set the array
-    fun set(values: Array<StructSimple?>)
+    fun set(values: Array<com.chronoxor.test.StructSimple?>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -121,8 +110,8 @@ class FieldModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, val size
         }
     }
 
-    // Set the array as List
-    fun set(values: ArrayList<StructSimple?>)
+    // Set the array as java.util.ArrayList
+    fun set(values: java.util.ArrayList<com.chronoxor.test.StructSimple?>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

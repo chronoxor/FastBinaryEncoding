@@ -5,29 +5,17 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional Bytes final model
-public final class FinalModelOptionalBytes extends FinalModel
+public final class FinalModelOptionalBytes extends com.chronoxor.fbe.FinalModel
 {
-    public FinalModelOptionalBytes(Buffer buffer, long offset)
+    public FinalModelOptionalBytes(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        value = new FinalModelBytes(buffer, 0);
+        value = new com.chronoxor.fbe.FinalModelBytes(buffer, 0);
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(ByteBuffer optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
+    public long fbeAllocationSize(java.nio.ByteBuffer optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
 
     // Checks if the object contains a value
     public boolean hasValue()
@@ -40,7 +28,7 @@ public final class FinalModelOptionalBytes extends FinalModel
     }
 
     // Base final model value
-    public final FinalModelBytes value;
+    public final com.chronoxor.fbe.FinalModelBytes value;
 
     // Check if the optional value is valid
     @Override
@@ -60,7 +48,7 @@ public final class FinalModelOptionalBytes extends FinalModel
     }
 
     // Get the optional value
-    public ByteBuffer get(Size size)
+    public java.nio.ByteBuffer get(com.chronoxor.fbe.Size size)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())
@@ -76,14 +64,14 @@ public final class FinalModelOptionalBytes extends FinalModel
         }
 
         _buffer.shift(fbeOffset() + 1);
-        ByteBuffer optional = value.get(size);
+        java.nio.ByteBuffer optional = value.get(size);
         _buffer.unshift(fbeOffset() + 1);
         size.value += 1;
         return optional;
     }
 
     // Set the optional value
-    public long set(ByteBuffer optional)
+    public long set(java.nio.ByteBuffer optional)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())

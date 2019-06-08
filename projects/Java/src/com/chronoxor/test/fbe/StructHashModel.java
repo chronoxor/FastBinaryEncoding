@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructHash model
-public final class StructHashModel extends Model
+public final class StructHashModel extends com.chronoxor.fbe.Model
 {
     public final FieldModelStructHash model;
 
     public StructHashModel() { model = new FieldModelStructHash(getBuffer(), 4); }
-    public StructHashModel(Buffer buffer) { super(buffer); model = new FieldModelStructHash(getBuffer(), 4); }
+    public StructHashModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); model = new FieldModelStructHash(getBuffer(), 4); }
 
     // Get the model size
     public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }
@@ -61,7 +49,7 @@ public final class StructHashModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(StructHash value)
+    public long serialize(com.chronoxor.test.StructHash value)
     {
         long fbeBegin = createBegin();
         model.set(value);
@@ -70,12 +58,12 @@ public final class StructHashModel extends Model
     }
 
     // Deserialize the struct value
-    public StructHash deserialize() { var value = new StructHash(); deserialize(value); return value; }
-    public long deserialize(StructHash value)
+    public com.chronoxor.test.StructHash deserialize() { var value = new com.chronoxor.test.StructHash(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.test.StructHash value)
     {
         if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())
         {
-            value = new StructHash();
+            value = new com.chronoxor.test.StructHash();
             return 0;
         }
 
@@ -83,7 +71,7 @@ public final class StructHashModel extends Model
         assert (fbeFullSize >= model.fbeSize()) : "Model is broken!";
         if (fbeFullSize < model.fbeSize())
         {
-            value = new StructHash();
+            value = new com.chronoxor.test.StructHash();
             return 0;
         }
 

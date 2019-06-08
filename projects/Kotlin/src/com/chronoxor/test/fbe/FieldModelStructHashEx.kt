@@ -7,20 +7,9 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructHashEx field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FieldModelStructHashEx(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelStructHashEx(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     val f1: FieldModelMapStructSimpleStructNested = FieldModelMapStructSimpleStructNested(buffer, 4 + 4)
     val f2: FieldModelMapStructSimpleOptionalStructNested = FieldModelMapStructSimpleOptionalStructNested(buffer, f1.fbeOffset + f1.fbeSize)
@@ -136,7 +125,7 @@ class FieldModelStructHashEx(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Get the struct value
-    fun get(fbeValue: StructHashEx = StructHashEx()): StructHashEx
+    fun get(fbeValue: com.chronoxor.test.StructHashEx = com.chronoxor.test.StructHashEx()): com.chronoxor.test.StructHashEx
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -150,7 +139,7 @@ class FieldModelStructHashEx(buffer: Buffer, offset: Long) : FieldModel(buffer, 
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructHashEx, fbeStructSize: Long)
+    fun getFields(fbeValue: com.chronoxor.test.StructHashEx, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
 
@@ -195,7 +184,7 @@ class FieldModelStructHashEx(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Set the struct value
-    fun set(fbeValue: StructHashEx)
+    fun set(fbeValue: com.chronoxor.test.StructHashEx)
     {
         val fbeBegin = setBegin()
         if (fbeBegin == 0L)
@@ -207,7 +196,7 @@ class FieldModelStructHashEx(buffer: Buffer, offset: Long) : FieldModel(buffer, 
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructHashEx)
+    fun setFields(fbeValue: com.chronoxor.test.StructHashEx)
     {
         f1.set(fbeValue.f1)
         f2.set(fbeValue.f2)

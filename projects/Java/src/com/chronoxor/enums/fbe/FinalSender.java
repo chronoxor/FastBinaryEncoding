@@ -5,18 +5,6 @@
 
 package com.chronoxor.enums.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.enums.*;
-
 // Fast Binary Encoding com.chronoxor.enums final sender
 public class FinalSender extends com.chronoxor.fbe.Sender
 {
@@ -28,7 +16,7 @@ public class FinalSender extends com.chronoxor.fbe.Sender
         super(true);
         EnumsModel = new EnumsFinalModel(getBuffer());
     }
-    public FinalSender(Buffer buffer)
+    public FinalSender(com.chronoxor.fbe.Buffer buffer)
     {
         super(buffer, true);
         EnumsModel = new EnumsFinalModel(getBuffer());

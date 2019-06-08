@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding OptionalByte array field model
-public final class FieldModelArrayOptionalByte extends FieldModel
+public final class FieldModelArrayOptionalByte extends com.chronoxor.fbe.FieldModel
 {
     private final FieldModelOptionalByte _model;
     private final long _size;
 
-    public FieldModelArrayOptionalByte(Buffer buffer, long offset, long size)
+    public FieldModelArrayOptionalByte(com.chronoxor.fbe.Buffer buffer, long offset, long size)
     {
         super(buffer, offset);
         _model = new FieldModelOptionalByte(buffer, offset);
@@ -100,8 +88,8 @@ public final class FieldModelArrayOptionalByte extends FieldModel
         }
     }
 
-    // Get the array as ArrayList
-    public void get(ArrayList<Byte> values)
+    // Get the array as java.util.ArrayList
+    public void get(java.util.ArrayList<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -138,8 +126,8 @@ public final class FieldModelArrayOptionalByte extends FieldModel
         }
     }
 
-    // Set the array as List
-    public void set(ArrayList<Byte> values)
+    // Set the array as java.util.ArrayList
+    public void set(java.util.ArrayList<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

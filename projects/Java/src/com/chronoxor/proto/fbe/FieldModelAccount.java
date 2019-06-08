@@ -5,33 +5,21 @@
 
 package com.chronoxor.proto.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 // Fast Binary Encoding Account field model
-public final class FieldModelAccount extends FieldModel
+public final class FieldModelAccount extends com.chronoxor.fbe.FieldModel
 {
-    public final FieldModelInt32 id;
-    public final FieldModelString name;
+    public final com.chronoxor.fbe.FieldModelInt32 id;
+    public final com.chronoxor.fbe.FieldModelString name;
     public final FieldModelState state;
     public final FieldModelBalance wallet;
     public final FieldModelOptionalBalance asset;
     public final FieldModelVectorOrder orders;
 
-    public FieldModelAccount(Buffer buffer, long offset)
+    public FieldModelAccount(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        id = new FieldModelInt32(buffer, 4 + 4);
-        name = new FieldModelString(buffer, id.fbeOffset() + id.fbeSize());
+        id = new com.chronoxor.fbe.FieldModelInt32(buffer, 4 + 4);
+        name = new com.chronoxor.fbe.FieldModelString(buffer, id.fbeOffset() + id.fbeSize());
         state = new FieldModelState(buffer, name.fbeOffset() + name.fbeSize());
         wallet = new FieldModelBalance(buffer, state.fbeOffset() + state.fbeSize());
         asset = new FieldModelOptionalBalance(buffer, wallet.fbeOffset() + wallet.fbeSize());
@@ -181,8 +169,8 @@ public final class FieldModelAccount extends FieldModel
     }
 
     // Get the struct value
-    public Account get() { return get(new Account()); }
-    public Account get(Account fbeValue)
+    public com.chronoxor.proto.Account get() { return get(new com.chronoxor.proto.Account()); }
+    public com.chronoxor.proto.Account get(com.chronoxor.proto.Account fbeValue)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
@@ -195,7 +183,7 @@ public final class FieldModelAccount extends FieldModel
     }
 
     // Get the struct fields values
-    public void getFields(Account fbeValue, long fbeStructSize)
+    public void getFields(com.chronoxor.proto.Account fbeValue, long fbeStructSize)
     {
         long fbeCurrentSize = 4 + 4;
 
@@ -212,15 +200,15 @@ public final class FieldModelAccount extends FieldModel
         fbeCurrentSize += name.fbeSize();
 
         if ((fbeCurrentSize + state.fbeSize()) <= fbeStructSize)
-            fbeValue.state = state.get(State.fromSet(EnumSet.of(State.initialized.getEnum(), State.bad.getEnum())));
+            fbeValue.state = state.get(com.chronoxor.proto.State.fromSet(java.util.EnumSet.of(com.chronoxor.proto.State.initialized.getEnum(), com.chronoxor.proto.State.bad.getEnum())));
         else
-            fbeValue.state = State.fromSet(EnumSet.of(State.initialized.getEnum(), State.bad.getEnum()));
+            fbeValue.state = com.chronoxor.proto.State.fromSet(java.util.EnumSet.of(com.chronoxor.proto.State.initialized.getEnum(), com.chronoxor.proto.State.bad.getEnum()));
         fbeCurrentSize += state.fbeSize();
 
         if ((fbeCurrentSize + wallet.fbeSize()) <= fbeStructSize)
             fbeValue.wallet = wallet.get();
         else
-            fbeValue.wallet = new Balance();
+            fbeValue.wallet = new com.chronoxor.proto.Balance();
         fbeCurrentSize += wallet.fbeSize();
 
         if ((fbeCurrentSize + asset.fbeSize()) <= fbeStructSize)
@@ -264,7 +252,7 @@ public final class FieldModelAccount extends FieldModel
     }
 
     // Set the struct value
-    public void set(Account fbeValue)
+    public void set(com.chronoxor.proto.Account fbeValue)
     {
         long fbeBegin = setBegin();
         if (fbeBegin == 0)
@@ -275,7 +263,7 @@ public final class FieldModelAccount extends FieldModel
     }
 
     // Set the struct fields values
-    public void setFields(Account fbeValue)
+    public void setFields(com.chronoxor.proto.Account fbeValue)
     {
         id.set(fbeValue.id);
         name.set(fbeValue.name);

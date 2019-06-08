@@ -5,30 +5,18 @@
 
 package com.chronoxor.protoex;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public class Account implements Comparable<Object>
 {
     public int id = 0;
     public String name = "";
-    public StateEx state = StateEx.fromSet(EnumSet.of(StateEx.initialized.getEnum(), StateEx.bad.getEnum(), StateEx.sad.getEnum()));
+    public StateEx state = StateEx.fromSet(java.util.EnumSet.of(StateEx.initialized.getEnum(), StateEx.bad.getEnum(), StateEx.sad.getEnum()));
     public Balance wallet = new Balance();
     public Balance asset = null;
-    public ArrayList<Order> orders = new ArrayList<Order>();
+    public java.util.ArrayList<Order> orders = new java.util.ArrayList<Order>();
 
     public Account() {}
 
-    public Account(int id, String name, StateEx state, Balance wallet, Balance asset, ArrayList<Order> orders)
+    public Account(int id, String name, StateEx state, Balance wallet, Balance asset, java.util.ArrayList<Order> orders)
     {
         this.id = id;
         this.name = name;

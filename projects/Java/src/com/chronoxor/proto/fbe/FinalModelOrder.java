@@ -5,41 +5,29 @@
 
 package com.chronoxor.proto.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 // Fast Binary Encoding Order final model
-public final class FinalModelOrder extends FinalModel
+public final class FinalModelOrder extends com.chronoxor.fbe.FinalModel
 {
-    public final FinalModelInt32 id;
-    public final FinalModelString symbol;
+    public final com.chronoxor.fbe.FinalModelInt32 id;
+    public final com.chronoxor.fbe.FinalModelString symbol;
     public final FinalModelOrderSide side;
     public final FinalModelOrderType type;
-    public final FinalModelDouble price;
-    public final FinalModelDouble volume;
+    public final com.chronoxor.fbe.FinalModelDouble price;
+    public final com.chronoxor.fbe.FinalModelDouble volume;
 
-    public FinalModelOrder(Buffer buffer, long offset)
+    public FinalModelOrder(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        id = new FinalModelInt32(buffer, 0);
-        symbol = new FinalModelString(buffer, 0);
+        id = new com.chronoxor.fbe.FinalModelInt32(buffer, 0);
+        symbol = new com.chronoxor.fbe.FinalModelString(buffer, 0);
         side = new FinalModelOrderSide(buffer, 0);
         type = new FinalModelOrderType(buffer, 0);
-        price = new FinalModelDouble(buffer, 0);
-        volume = new FinalModelDouble(buffer, 0);
+        price = new com.chronoxor.fbe.FinalModelDouble(buffer, 0);
+        volume = new com.chronoxor.fbe.FinalModelDouble(buffer, 0);
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(Order fbeValue)
+    public long fbeAllocationSize(com.chronoxor.proto.Order fbeValue)
     {
         long fbeResult = 0
             + id.fbeAllocationSize(fbeValue.id)
@@ -112,8 +100,8 @@ public final class FinalModelOrder extends FinalModel
     }
 
     // Get the struct value
-    public Order get(Size fbeSize) { return get(fbeSize, new Order()); }
-    public Order get(Size fbeSize, Order fbeValue)
+    public com.chronoxor.proto.Order get(com.chronoxor.fbe.Size fbeSize) { return get(fbeSize, new com.chronoxor.proto.Order()); }
+    public com.chronoxor.proto.Order get(com.chronoxor.fbe.Size fbeSize, com.chronoxor.proto.Order fbeValue)
     {
         _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
@@ -122,11 +110,11 @@ public final class FinalModelOrder extends FinalModel
     }
 
     // Get the struct fields values
-    public long getFields(Order fbeValue)
+    public long getFields(com.chronoxor.proto.Order fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size(0);
 
         id.fbeOffset(fbeCurrentOffset);
         fbeValue.id = id.get(fbeFieldSize);
@@ -162,7 +150,7 @@ public final class FinalModelOrder extends FinalModel
     }
 
     // Set the struct value
-    public long set(Order fbeValue)
+    public long set(com.chronoxor.proto.Order fbeValue)
     {
         _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
@@ -171,11 +159,11 @@ public final class FinalModelOrder extends FinalModel
     }
 
     // Set the struct fields values
-    public long setFields(Order fbeValue)
+    public long setFields(com.chronoxor.proto.Order fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size();
 
         id.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = id.set(fbeValue.id);

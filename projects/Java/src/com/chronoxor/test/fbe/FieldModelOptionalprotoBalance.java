@@ -5,22 +5,10 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional protoBalance field model
-public final class FieldModelOptionalprotoBalance extends FieldModel
+public final class FieldModelOptionalprotoBalance extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelOptionalprotoBalance(Buffer buffer, long offset)
+    public FieldModelOptionalprotoBalance(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         value = new com.chronoxor.proto.fbe.FieldModelBalance(buffer, 0);

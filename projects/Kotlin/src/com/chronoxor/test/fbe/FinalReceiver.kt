@@ -7,17 +7,6 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding com.chronoxor.test final receiver
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
 open class FinalReceiver : com.chronoxor.fbe.Receiver
@@ -82,7 +71,7 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver
         StructEmptyModel = StructEmptyFinalModel()
     }
 
-    constructor(buffer: Buffer) : super(buffer, true)
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer, true)
     {
         protoReceiver = com.chronoxor.proto.fbe.FinalReceiver(buffer)
         StructSimpleValue = com.chronoxor.test.StructSimple()

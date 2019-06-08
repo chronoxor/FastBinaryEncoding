@@ -5,22 +5,10 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional protoOrder field model
-public final class FieldModelOptionalprotoOrder extends FieldModel
+public final class FieldModelOptionalprotoOrder extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelOptionalprotoOrder(Buffer buffer, long offset)
+    public FieldModelOptionalprotoOrder(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         value = new com.chronoxor.proto.fbe.FieldModelOrder(buffer, 0);

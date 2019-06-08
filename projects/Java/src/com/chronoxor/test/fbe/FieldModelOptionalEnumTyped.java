@@ -5,22 +5,10 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional EnumTyped field model
-public final class FieldModelOptionalEnumTyped extends FieldModel
+public final class FieldModelOptionalEnumTyped extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelOptionalEnumTyped(Buffer buffer, long offset)
+    public FieldModelOptionalEnumTyped(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         value = new FieldModelEnumTyped(buffer, 0);
@@ -102,14 +90,14 @@ public final class FieldModelOptionalEnumTyped extends FieldModel
     }
 
     // Get the optional value
-    public EnumTyped get() { return get(null); }
-    public EnumTyped get(EnumTyped defaults)
+    public com.chronoxor.test.EnumTyped get() { return get(null); }
+    public com.chronoxor.test.EnumTyped get(com.chronoxor.test.EnumTyped defaults)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
             return defaults;
 
-        EnumTyped optional = value.get();
+        com.chronoxor.test.EnumTyped optional = value.get();
         getEnd(fbeBegin);
         return optional;
     }
@@ -145,7 +133,7 @@ public final class FieldModelOptionalEnumTyped extends FieldModel
     }
 
     // Set the optional value
-    public void set(EnumTyped optional)
+    public void set(com.chronoxor.test.EnumTyped optional)
     {
         long fbeBegin = setBegin(optional != null);
         if (fbeBegin == 0)

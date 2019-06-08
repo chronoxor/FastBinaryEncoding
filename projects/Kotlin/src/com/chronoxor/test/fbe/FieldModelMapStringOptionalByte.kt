@@ -7,21 +7,10 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding String->OptionalByte map field model
-class FieldModelMapStringOptionalByte(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelMapStringOptionalByte(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
-    private val _modelKey = FieldModelString(buffer, offset)
+    private val _modelKey = com.chronoxor.fbe.FieldModelString(buffer, offset)
     private val _modelValue = FieldModelOptionalByte(buffer, offset)
 
     // Field size
@@ -77,7 +66,7 @@ class FieldModelMapStringOptionalByte(buffer: Buffer, offset: Long) : FieldModel
     }
 
     // Map index operator
-    fun getItem(index: Long): Pair<FieldModelString, FieldModelOptionalByte>
+    fun getItem(index: Long): Pair<com.chronoxor.fbe.FieldModelString, FieldModelOptionalByte>
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
 
@@ -95,7 +84,7 @@ class FieldModelMapStringOptionalByte(buffer: Buffer, offset: Long) : FieldModel
     }
 
     // Resize the map and get its first model
-    fun resize(size: Long): Pair<FieldModelString, FieldModelOptionalByte>
+    fun resize(size: Long): Pair<com.chronoxor.fbe.FieldModelString, FieldModelOptionalByte>
     {
         val fbeMapSize = size * (_modelKey.fbeSize + _modelValue.fbeSize)
         val fbeMapOffset = _buffer.allocate(4 + fbeMapSize) - _buffer.offset
@@ -141,8 +130,8 @@ class FieldModelMapStringOptionalByte(buffer: Buffer, offset: Long) : FieldModel
         return true
     }
 
-    // Get the map as TreeMap
-    fun get(values: TreeMap<String, Byte?>)
+    // Get the map as java.util.TreeMap
+    fun get(values: java.util.TreeMap<String, Byte?>)
     {
         values.clear()
 
@@ -162,8 +151,8 @@ class FieldModelMapStringOptionalByte(buffer: Buffer, offset: Long) : FieldModel
         }
     }
 
-    // Get the map as HashMap
-    fun get(values: HashMap<String, Byte?>)
+    // Get the map as java.util.HashMap
+    fun get(values: java.util.HashMap<String, Byte?>)
     {
         values.clear()
 
@@ -183,8 +172,8 @@ class FieldModelMapStringOptionalByte(buffer: Buffer, offset: Long) : FieldModel
         }
     }
 
-    // Set the map as TreeMap
-    fun set(values: TreeMap<String, Byte?>)
+    // Set the map as java.util.TreeMap
+    fun set(values: java.util.TreeMap<String, Byte?>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -200,8 +189,8 @@ class FieldModelMapStringOptionalByte(buffer: Buffer, offset: Long) : FieldModel
         }
     }
 
-    // Set the map as HashMap
-    fun set(values: HashMap<String, Byte?>)
+    // Set the map as java.util.HashMap
+    fun set(values: java.util.HashMap<String, Byte?>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

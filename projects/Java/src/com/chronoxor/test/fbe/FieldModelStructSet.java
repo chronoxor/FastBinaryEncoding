@@ -5,27 +5,15 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructSet field model
-public final class FieldModelStructSet extends FieldModel
+public final class FieldModelStructSet extends com.chronoxor.fbe.FieldModel
 {
     public final FieldModelVectorByte f1;
     public final FieldModelVectorEnumSimple f2;
     public final FieldModelVectorFlagsSimple f3;
     public final FieldModelVectorStructSimple f4;
 
-    public FieldModelStructSet(Buffer buffer, long offset)
+    public FieldModelStructSet(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         f1 = new FieldModelVectorByte(buffer, 4 + 4);
@@ -161,8 +149,8 @@ public final class FieldModelStructSet extends FieldModel
     }
 
     // Get the struct value
-    public StructSet get() { return get(new StructSet()); }
-    public StructSet get(StructSet fbeValue)
+    public com.chronoxor.test.StructSet get() { return get(new com.chronoxor.test.StructSet()); }
+    public com.chronoxor.test.StructSet get(com.chronoxor.test.StructSet fbeValue)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
@@ -175,7 +163,7 @@ public final class FieldModelStructSet extends FieldModel
     }
 
     // Get the struct fields values
-    public void getFields(StructSet fbeValue, long fbeStructSize)
+    public void getFields(com.chronoxor.test.StructSet fbeValue, long fbeStructSize)
     {
         long fbeCurrentSize = 4 + 4;
 
@@ -232,7 +220,7 @@ public final class FieldModelStructSet extends FieldModel
     }
 
     // Set the struct value
-    public void set(StructSet fbeValue)
+    public void set(com.chronoxor.test.StructSet fbeValue)
     {
         long fbeBegin = setBegin();
         if (fbeBegin == 0)
@@ -243,7 +231,7 @@ public final class FieldModelStructSet extends FieldModel
     }
 
     // Set the struct fields values
-    public void setFields(StructSet fbeValue)
+    public void setFields(com.chronoxor.test.StructSet fbeValue)
     {
         f1.set(fbeValue.f1);
         f2.set(fbeValue.f2);

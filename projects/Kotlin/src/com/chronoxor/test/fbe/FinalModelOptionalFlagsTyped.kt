@@ -7,22 +7,11 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding optional FlagsTyped final model
-class FinalModelOptionalFlagsTyped(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelOptionalFlagsTyped(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun fbeAllocationSize(optional: FlagsTyped?): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
+    fun fbeAllocationSize(optional: com.chronoxor.test.FlagsTyped?): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
 
     // Checks if the object contains a value
     fun hasValue(): Boolean
@@ -54,7 +43,7 @@ class FinalModelOptionalFlagsTyped(buffer: Buffer, offset: Long) : FinalModel(bu
     }
 
     // Get the optional value
-    fun get(size: Size): FlagsTyped?
+    fun get(size: com.chronoxor.fbe.Size): com.chronoxor.test.FlagsTyped?
     {
         assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 1) > _buffer.size)
@@ -77,7 +66,7 @@ class FinalModelOptionalFlagsTyped(buffer: Buffer, offset: Long) : FinalModel(bu
     }
 
     // Set the optional value
-    fun set(optional: FlagsTyped?): Long
+    fun set(optional: com.chronoxor.test.FlagsTyped?): Long
     {
         assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 1) > _buffer.size)

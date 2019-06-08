@@ -7,14 +7,6 @@
 
 package com.chronoxor.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
 // Fast Binary Encoding decimal field model
 class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
@@ -22,7 +14,7 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     override val fbeSize: Long = 16
 
     // Get the decimal value
-    fun get(defaults: BigDecimal = BigDecimal.valueOf(0L)): BigDecimal
+    fun get(defaults: java.math.BigDecimal = java.math.BigDecimal.valueOf(0L)): java.math.BigDecimal
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
@@ -39,13 +31,13 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
             magnitude[magnitude.size - i - 1] = temp
         }
 
-        val unscaled = BigInteger(signum, magnitude)
+        val unscaled = java.math.BigInteger(signum, magnitude)
 
-        return BigDecimal(unscaled, scale)
+        return java.math.BigDecimal(unscaled, scale)
     }
 
     // Set the decimal value
-    fun set(value: BigDecimal)
+    fun set(value: java.math.BigDecimal)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

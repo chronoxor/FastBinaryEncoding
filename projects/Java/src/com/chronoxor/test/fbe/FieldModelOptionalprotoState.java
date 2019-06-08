@@ -5,22 +5,10 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional protoState field model
-public final class FieldModelOptionalprotoState extends FieldModel
+public final class FieldModelOptionalprotoState extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelOptionalprotoState(Buffer buffer, long offset)
+    public FieldModelOptionalprotoState(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         value = new com.chronoxor.proto.fbe.FieldModelState(buffer, 0);

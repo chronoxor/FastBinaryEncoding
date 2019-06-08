@@ -7,17 +7,6 @@
 
 package com.chronoxor.enums.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.enums.*
-
 // Fast Binary Encoding com.chronoxor.enums receiver
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
 open class Receiver : com.chronoxor.fbe.Receiver
@@ -34,7 +23,7 @@ open class Receiver : com.chronoxor.fbe.Receiver
         EnumsModel = EnumsModel()
     }
 
-    constructor(buffer: Buffer) : super(buffer, false)
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer, false)
     {
         EnumsValue = com.chronoxor.enums.Enums()
         EnumsModel = EnumsModel()

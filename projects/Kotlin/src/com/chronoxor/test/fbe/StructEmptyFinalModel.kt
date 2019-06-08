@@ -7,24 +7,13 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructEmpty final model
-class StructEmptyFinalModel : Model
+class StructEmptyFinalModel : com.chronoxor.fbe.Model
 {
     private val _model: FinalModelStructEmpty
 
     constructor() { _model = FinalModelStructEmpty(buffer, 8) }
-    constructor(buffer: Buffer) : super(buffer) { _model = FinalModelStructEmpty(buffer, 8) }
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer) { _model = FinalModelStructEmpty(buffer, 8) }
 
     // Model type
     var fbeType: Long = fbeTypeConst
@@ -49,7 +38,7 @@ class StructEmptyFinalModel : Model
     }
 
     // Serialize the struct value
-    fun serialize(value: StructEmpty): Long
+    fun serialize(value: com.chronoxor.test.StructEmpty): Long
     {
         val fbeInitialSize = buffer.size
 
@@ -70,9 +59,9 @@ class StructEmptyFinalModel : Model
     }
 
     // Deserialize the struct value
-    fun deserialize(): StructEmpty { val value = StructEmpty(); deserialize(value); return value }
+    fun deserialize(): com.chronoxor.test.StructEmpty { val value = com.chronoxor.test.StructEmpty(); deserialize(value); return value }
     @Suppress("UNUSED_VALUE")
-    fun deserialize(value: StructEmpty): Long
+    fun deserialize(value: com.chronoxor.test.StructEmpty): Long
     {
         var valueRef = value
 
@@ -86,7 +75,7 @@ class StructEmptyFinalModel : Model
         if ((fbeStructSize <= 0) || (fbeStructType != fbeType))
             return 8
 
-        val fbeSize = Size(0)
+        val fbeSize = com.chronoxor.fbe.Size()
         valueRef = _model.get(fbeSize, valueRef)
         return 8 + fbeSize.value
     }

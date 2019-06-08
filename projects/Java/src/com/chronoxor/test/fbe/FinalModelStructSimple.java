@@ -5,60 +5,48 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructSimple final model
-public final class FinalModelStructSimple extends FinalModel
+public final class FinalModelStructSimple extends com.chronoxor.fbe.FinalModel
 {
-    public final FinalModelInt32 id;
-    public final FinalModelBoolean f1;
-    public final FinalModelBoolean f2;
-    public final FinalModelByte f3;
-    public final FinalModelByte f4;
-    public final FinalModelChar f5;
-    public final FinalModelChar f6;
-    public final FinalModelWChar f7;
-    public final FinalModelWChar f8;
-    public final FinalModelInt8 f9;
-    public final FinalModelInt8 f10;
-    public final FinalModelInt8 f11;
-    public final FinalModelInt8 f12;
-    public final FinalModelInt16 f13;
-    public final FinalModelInt16 f14;
-    public final FinalModelInt16 f15;
-    public final FinalModelInt16 f16;
-    public final FinalModelInt32 f17;
-    public final FinalModelInt32 f18;
-    public final FinalModelInt32 f19;
-    public final FinalModelInt32 f20;
-    public final FinalModelInt64 f21;
-    public final FinalModelInt64 f22;
-    public final FinalModelInt64 f23;
-    public final FinalModelInt64 f24;
-    public final FinalModelFloat f25;
-    public final FinalModelFloat f26;
-    public final FinalModelDouble f27;
-    public final FinalModelDouble f28;
-    public final FinalModelDecimal f29;
-    public final FinalModelDecimal f30;
-    public final FinalModelString f31;
-    public final FinalModelString f32;
-    public final FinalModelTimestamp f33;
-    public final FinalModelTimestamp f34;
-    public final FinalModelTimestamp f35;
-    public final FinalModelUUID f36;
-    public final FinalModelUUID f37;
-    public final FinalModelUUID f38;
+    public final com.chronoxor.fbe.FinalModelInt32 id;
+    public final com.chronoxor.fbe.FinalModelBoolean f1;
+    public final com.chronoxor.fbe.FinalModelBoolean f2;
+    public final com.chronoxor.fbe.FinalModelByte f3;
+    public final com.chronoxor.fbe.FinalModelByte f4;
+    public final com.chronoxor.fbe.FinalModelChar f5;
+    public final com.chronoxor.fbe.FinalModelChar f6;
+    public final com.chronoxor.fbe.FinalModelWChar f7;
+    public final com.chronoxor.fbe.FinalModelWChar f8;
+    public final com.chronoxor.fbe.FinalModelInt8 f9;
+    public final com.chronoxor.fbe.FinalModelInt8 f10;
+    public final com.chronoxor.fbe.FinalModelInt8 f11;
+    public final com.chronoxor.fbe.FinalModelInt8 f12;
+    public final com.chronoxor.fbe.FinalModelInt16 f13;
+    public final com.chronoxor.fbe.FinalModelInt16 f14;
+    public final com.chronoxor.fbe.FinalModelInt16 f15;
+    public final com.chronoxor.fbe.FinalModelInt16 f16;
+    public final com.chronoxor.fbe.FinalModelInt32 f17;
+    public final com.chronoxor.fbe.FinalModelInt32 f18;
+    public final com.chronoxor.fbe.FinalModelInt32 f19;
+    public final com.chronoxor.fbe.FinalModelInt32 f20;
+    public final com.chronoxor.fbe.FinalModelInt64 f21;
+    public final com.chronoxor.fbe.FinalModelInt64 f22;
+    public final com.chronoxor.fbe.FinalModelInt64 f23;
+    public final com.chronoxor.fbe.FinalModelInt64 f24;
+    public final com.chronoxor.fbe.FinalModelFloat f25;
+    public final com.chronoxor.fbe.FinalModelFloat f26;
+    public final com.chronoxor.fbe.FinalModelDouble f27;
+    public final com.chronoxor.fbe.FinalModelDouble f28;
+    public final com.chronoxor.fbe.FinalModelDecimal f29;
+    public final com.chronoxor.fbe.FinalModelDecimal f30;
+    public final com.chronoxor.fbe.FinalModelString f31;
+    public final com.chronoxor.fbe.FinalModelString f32;
+    public final com.chronoxor.fbe.FinalModelTimestamp f33;
+    public final com.chronoxor.fbe.FinalModelTimestamp f34;
+    public final com.chronoxor.fbe.FinalModelTimestamp f35;
+    public final com.chronoxor.fbe.FinalModelUUID f36;
+    public final com.chronoxor.fbe.FinalModelUUID f37;
+    public final com.chronoxor.fbe.FinalModelUUID f38;
     public final com.chronoxor.proto.fbe.FinalModelOrderSide f39;
     public final com.chronoxor.proto.fbe.FinalModelOrderType f40;
     public final com.chronoxor.proto.fbe.FinalModelOrder f41;
@@ -66,48 +54,48 @@ public final class FinalModelStructSimple extends FinalModel
     public final com.chronoxor.proto.fbe.FinalModelState f43;
     public final com.chronoxor.proto.fbe.FinalModelAccount f44;
 
-    public FinalModelStructSimple(Buffer buffer, long offset)
+    public FinalModelStructSimple(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        id = new FinalModelInt32(buffer, 0);
-        f1 = new FinalModelBoolean(buffer, 0);
-        f2 = new FinalModelBoolean(buffer, 0);
-        f3 = new FinalModelByte(buffer, 0);
-        f4 = new FinalModelByte(buffer, 0);
-        f5 = new FinalModelChar(buffer, 0);
-        f6 = new FinalModelChar(buffer, 0);
-        f7 = new FinalModelWChar(buffer, 0);
-        f8 = new FinalModelWChar(buffer, 0);
-        f9 = new FinalModelInt8(buffer, 0);
-        f10 = new FinalModelInt8(buffer, 0);
-        f11 = new FinalModelInt8(buffer, 0);
-        f12 = new FinalModelInt8(buffer, 0);
-        f13 = new FinalModelInt16(buffer, 0);
-        f14 = new FinalModelInt16(buffer, 0);
-        f15 = new FinalModelInt16(buffer, 0);
-        f16 = new FinalModelInt16(buffer, 0);
-        f17 = new FinalModelInt32(buffer, 0);
-        f18 = new FinalModelInt32(buffer, 0);
-        f19 = new FinalModelInt32(buffer, 0);
-        f20 = new FinalModelInt32(buffer, 0);
-        f21 = new FinalModelInt64(buffer, 0);
-        f22 = new FinalModelInt64(buffer, 0);
-        f23 = new FinalModelInt64(buffer, 0);
-        f24 = new FinalModelInt64(buffer, 0);
-        f25 = new FinalModelFloat(buffer, 0);
-        f26 = new FinalModelFloat(buffer, 0);
-        f27 = new FinalModelDouble(buffer, 0);
-        f28 = new FinalModelDouble(buffer, 0);
-        f29 = new FinalModelDecimal(buffer, 0);
-        f30 = new FinalModelDecimal(buffer, 0);
-        f31 = new FinalModelString(buffer, 0);
-        f32 = new FinalModelString(buffer, 0);
-        f33 = new FinalModelTimestamp(buffer, 0);
-        f34 = new FinalModelTimestamp(buffer, 0);
-        f35 = new FinalModelTimestamp(buffer, 0);
-        f36 = new FinalModelUUID(buffer, 0);
-        f37 = new FinalModelUUID(buffer, 0);
-        f38 = new FinalModelUUID(buffer, 0);
+        id = new com.chronoxor.fbe.FinalModelInt32(buffer, 0);
+        f1 = new com.chronoxor.fbe.FinalModelBoolean(buffer, 0);
+        f2 = new com.chronoxor.fbe.FinalModelBoolean(buffer, 0);
+        f3 = new com.chronoxor.fbe.FinalModelByte(buffer, 0);
+        f4 = new com.chronoxor.fbe.FinalModelByte(buffer, 0);
+        f5 = new com.chronoxor.fbe.FinalModelChar(buffer, 0);
+        f6 = new com.chronoxor.fbe.FinalModelChar(buffer, 0);
+        f7 = new com.chronoxor.fbe.FinalModelWChar(buffer, 0);
+        f8 = new com.chronoxor.fbe.FinalModelWChar(buffer, 0);
+        f9 = new com.chronoxor.fbe.FinalModelInt8(buffer, 0);
+        f10 = new com.chronoxor.fbe.FinalModelInt8(buffer, 0);
+        f11 = new com.chronoxor.fbe.FinalModelInt8(buffer, 0);
+        f12 = new com.chronoxor.fbe.FinalModelInt8(buffer, 0);
+        f13 = new com.chronoxor.fbe.FinalModelInt16(buffer, 0);
+        f14 = new com.chronoxor.fbe.FinalModelInt16(buffer, 0);
+        f15 = new com.chronoxor.fbe.FinalModelInt16(buffer, 0);
+        f16 = new com.chronoxor.fbe.FinalModelInt16(buffer, 0);
+        f17 = new com.chronoxor.fbe.FinalModelInt32(buffer, 0);
+        f18 = new com.chronoxor.fbe.FinalModelInt32(buffer, 0);
+        f19 = new com.chronoxor.fbe.FinalModelInt32(buffer, 0);
+        f20 = new com.chronoxor.fbe.FinalModelInt32(buffer, 0);
+        f21 = new com.chronoxor.fbe.FinalModelInt64(buffer, 0);
+        f22 = new com.chronoxor.fbe.FinalModelInt64(buffer, 0);
+        f23 = new com.chronoxor.fbe.FinalModelInt64(buffer, 0);
+        f24 = new com.chronoxor.fbe.FinalModelInt64(buffer, 0);
+        f25 = new com.chronoxor.fbe.FinalModelFloat(buffer, 0);
+        f26 = new com.chronoxor.fbe.FinalModelFloat(buffer, 0);
+        f27 = new com.chronoxor.fbe.FinalModelDouble(buffer, 0);
+        f28 = new com.chronoxor.fbe.FinalModelDouble(buffer, 0);
+        f29 = new com.chronoxor.fbe.FinalModelDecimal(buffer, 0);
+        f30 = new com.chronoxor.fbe.FinalModelDecimal(buffer, 0);
+        f31 = new com.chronoxor.fbe.FinalModelString(buffer, 0);
+        f32 = new com.chronoxor.fbe.FinalModelString(buffer, 0);
+        f33 = new com.chronoxor.fbe.FinalModelTimestamp(buffer, 0);
+        f34 = new com.chronoxor.fbe.FinalModelTimestamp(buffer, 0);
+        f35 = new com.chronoxor.fbe.FinalModelTimestamp(buffer, 0);
+        f36 = new com.chronoxor.fbe.FinalModelUUID(buffer, 0);
+        f37 = new com.chronoxor.fbe.FinalModelUUID(buffer, 0);
+        f38 = new com.chronoxor.fbe.FinalModelUUID(buffer, 0);
         f39 = new com.chronoxor.proto.fbe.FinalModelOrderSide(buffer, 0);
         f40 = new com.chronoxor.proto.fbe.FinalModelOrderType(buffer, 0);
         f41 = new com.chronoxor.proto.fbe.FinalModelOrder(buffer, 0);
@@ -117,7 +105,7 @@ public final class FinalModelStructSimple extends FinalModel
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(StructSimple fbeValue)
+    public long fbeAllocationSize(com.chronoxor.test.StructSimple fbeValue)
     {
         long fbeResult = 0
             + id.fbeAllocationSize(fbeValue.id)
@@ -463,8 +451,8 @@ public final class FinalModelStructSimple extends FinalModel
     }
 
     // Get the struct value
-    public StructSimple get(Size fbeSize) { return get(fbeSize, new StructSimple()); }
-    public StructSimple get(Size fbeSize, StructSimple fbeValue)
+    public com.chronoxor.test.StructSimple get(com.chronoxor.fbe.Size fbeSize) { return get(fbeSize, new com.chronoxor.test.StructSimple()); }
+    public com.chronoxor.test.StructSimple get(com.chronoxor.fbe.Size fbeSize, com.chronoxor.test.StructSimple fbeValue)
     {
         _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
@@ -473,11 +461,11 @@ public final class FinalModelStructSimple extends FinalModel
     }
 
     // Get the struct fields values
-    public long getFields(StructSimple fbeValue)
+    public long getFields(com.chronoxor.test.StructSimple fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size(0);
 
         id.fbeOffset(fbeCurrentOffset);
         fbeValue.id = id.get(fbeFieldSize);
@@ -708,7 +696,7 @@ public final class FinalModelStructSimple extends FinalModel
     }
 
     // Set the struct value
-    public long set(StructSimple fbeValue)
+    public long set(com.chronoxor.test.StructSimple fbeValue)
     {
         _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
@@ -717,11 +705,11 @@ public final class FinalModelStructSimple extends FinalModel
     }
 
     // Set the struct fields values
-    public long setFields(StructSimple fbeValue)
+    public long setFields(com.chronoxor.test.StructSimple fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size();
 
         id.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = id.set(fbeValue.id);

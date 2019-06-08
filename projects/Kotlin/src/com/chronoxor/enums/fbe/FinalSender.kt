@@ -7,17 +7,6 @@
 
 package com.chronoxor.enums.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.enums.*
-
 // Fast Binary Encoding com.chronoxor.enums final sender
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
 open class FinalSender : com.chronoxor.fbe.Sender
@@ -30,7 +19,7 @@ open class FinalSender : com.chronoxor.fbe.Sender
         EnumsModel = EnumsFinalModel(buffer)
     }
 
-    constructor(buffer: Buffer) : super(buffer, true)
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer, true)
     {
         EnumsModel = EnumsFinalModel(buffer)
     }

@@ -7,16 +7,6 @@
 
 package com.chronoxor.enums
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-
 @Suppress("EnumEntryName", "MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 enum class EnumUInt16Enum
 {
@@ -50,7 +40,7 @@ enum class EnumUInt16Enum
 
     companion object
     {
-        private val mapping = HashMap<UShort, EnumUInt16Enum>()
+        private val mapping = java.util.HashMap<UShort, EnumUInt16Enum>()
 
         init
         {

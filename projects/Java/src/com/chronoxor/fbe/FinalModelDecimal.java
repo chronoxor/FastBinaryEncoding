@@ -5,22 +5,13 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
 // Fast Binary Encoding decimal final model
 public final class FinalModelDecimal extends FinalModel
 {
     public FinalModelDecimal(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(BigDecimal value) { return fbeSize(); }
+    public long fbeAllocationSize(java.math.BigDecimal value) { return fbeSize(); }
 
     // Get the final size
     @Override
@@ -37,10 +28,10 @@ public final class FinalModelDecimal extends FinalModel
     }
 
     // Get the decimal value
-    public BigDecimal get(Size size)
+    public java.math.BigDecimal get(Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
-            return BigDecimal.valueOf(0L);
+            return java.math.BigDecimal.valueOf(0L);
 
         byte[] magnitude = readBytes(fbeOffset(), 12);
         int scale = readByte(fbeOffset() + 14);
@@ -54,21 +45,21 @@ public final class FinalModelDecimal extends FinalModel
             magnitude[magnitude.length - i - 1] = temp;
         }
 
-        var unscaled = new BigInteger(signum, magnitude);
+        var unscaled = new java.math.BigInteger(signum, magnitude);
 
         size.value = fbeSize();
-        return new BigDecimal(unscaled, scale);
+        return new java.math.BigDecimal(unscaled, scale);
     }
 
     // Set the decimal value
-    public long set(BigDecimal value)
+    public long set(java.math.BigDecimal value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
         // Get unscaled absolute value
-        BigInteger unscaled = value.abs().unscaledValue();
+        java.math.BigInteger unscaled = value.abs().unscaledValue();
         int bitLength = unscaled.bitLength();
         if ((bitLength < 0) || (bitLength > 96))
         {

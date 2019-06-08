@@ -5,31 +5,17 @@
 
 package com.chronoxor.enums.fbe;;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.enums.*;
-
-import com.google.gson.*;
-
-public final class EnumUInt16Json implements JsonSerializer<EnumUInt16>, JsonDeserializer<EnumUInt16>
+public final class EnumUInt16Json implements com.google.gson.JsonSerializer<com.chronoxor.enums.EnumUInt16>, com.google.gson.JsonDeserializer<com.chronoxor.enums.EnumUInt16>
 {
     @Override
-    public JsonElement serialize(EnumUInt16 src, Type typeOfSrc, JsonSerializationContext context)
+    public com.google.gson.JsonElement serialize(com.chronoxor.enums.EnumUInt16 src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
-        return new JsonPrimitive(src.getRaw());
+        return new com.google.gson.JsonPrimitive(src.getRaw());
     }
 
     @Override
-    public EnumUInt16 deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public com.chronoxor.enums.EnumUInt16 deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
     {
-        return new EnumUInt16(json.getAsJsonPrimitive().getAsShort());
+        return new com.chronoxor.enums.EnumUInt16(json.getAsJsonPrimitive().getAsShort());
     }
 }

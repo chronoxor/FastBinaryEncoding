@@ -5,25 +5,13 @@
 
 package com.chronoxor.proto.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 // Fast Binary Encoding OrderSide final model
-public final class FinalModelOrderSide extends FinalModel
+public final class FinalModelOrderSide extends com.chronoxor.fbe.FinalModel
 {
-    public FinalModelOrderSide(Buffer buffer, long offset) { super(buffer, offset); }
+    public FinalModelOrderSide(com.chronoxor.fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(OrderSide value) { return fbeSize(); }
+    public long fbeAllocationSize(com.chronoxor.proto.OrderSide value) { return fbeSize(); }
 
     // Get the final size
     @Override
@@ -40,17 +28,17 @@ public final class FinalModelOrderSide extends FinalModel
     }
 
     // Get the value
-    public OrderSide get(Size size)
+    public com.chronoxor.proto.OrderSide get(com.chronoxor.fbe.Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
-            return new OrderSide();
+            return new com.chronoxor.proto.OrderSide();
 
         size.value = fbeSize();
-        return new OrderSide(readByte(fbeOffset()));
+        return new com.chronoxor.proto.OrderSide(readByte(fbeOffset()));
     }
 
     // Set the value
-    public long set(OrderSide value)
+    public long set(com.chronoxor.proto.OrderSide value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

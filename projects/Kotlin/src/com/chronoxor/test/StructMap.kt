@@ -7,34 +7,23 @@
 
 package com.chronoxor.test
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructMap : Comparable<Any?>
 {
-    var f1: TreeMap<Int, Byte> = TreeMap()
-    var f2: TreeMap<Int, Byte?> = TreeMap()
-    var f3: TreeMap<Int, ByteArray> = TreeMap()
-    var f4: TreeMap<Int, ByteArray?> = TreeMap()
-    var f5: TreeMap<Int, EnumSimple> = TreeMap()
-    var f6: TreeMap<Int, EnumSimple?> = TreeMap()
-    var f7: TreeMap<Int, FlagsSimple> = TreeMap()
-    var f8: TreeMap<Int, FlagsSimple?> = TreeMap()
-    var f9: TreeMap<Int, StructSimple> = TreeMap()
-    var f10: TreeMap<Int, StructSimple?> = TreeMap()
+    var f1: java.util.TreeMap<Int, Byte> = java.util.TreeMap()
+    var f2: java.util.TreeMap<Int, Byte?> = java.util.TreeMap()
+    var f3: java.util.TreeMap<Int, ByteArray> = java.util.TreeMap()
+    var f4: java.util.TreeMap<Int, ByteArray?> = java.util.TreeMap()
+    var f5: java.util.TreeMap<Int, EnumSimple> = java.util.TreeMap()
+    var f6: java.util.TreeMap<Int, EnumSimple?> = java.util.TreeMap()
+    var f7: java.util.TreeMap<Int, FlagsSimple> = java.util.TreeMap()
+    var f8: java.util.TreeMap<Int, FlagsSimple?> = java.util.TreeMap()
+    var f9: java.util.TreeMap<Int, StructSimple> = java.util.TreeMap()
+    var f10: java.util.TreeMap<Int, StructSimple?> = java.util.TreeMap()
 
     constructor()
 
-    constructor(f1: TreeMap<Int, Byte>, f2: TreeMap<Int, Byte?>, f3: TreeMap<Int, ByteArray>, f4: TreeMap<Int, ByteArray?>, f5: TreeMap<Int, EnumSimple>, f6: TreeMap<Int, EnumSimple?>, f7: TreeMap<Int, FlagsSimple>, f8: TreeMap<Int, FlagsSimple?>, f9: TreeMap<Int, StructSimple>, f10: TreeMap<Int, StructSimple?>)
+    constructor(f1: java.util.TreeMap<Int, Byte>, f2: java.util.TreeMap<Int, Byte?>, f3: java.util.TreeMap<Int, ByteArray>, f4: java.util.TreeMap<Int, ByteArray?>, f5: java.util.TreeMap<Int, EnumSimple>, f6: java.util.TreeMap<Int, EnumSimple?>, f7: java.util.TreeMap<Int, FlagsSimple>, f8: java.util.TreeMap<Int, FlagsSimple?>, f9: java.util.TreeMap<Int, StructSimple>, f10: java.util.TreeMap<Int, StructSimple?>)
     {
         this.f1 = f1
         this.f2 = f2

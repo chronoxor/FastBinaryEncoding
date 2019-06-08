@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructSet final model
-public final class StructSetFinalModel extends Model
+public final class StructSetFinalModel extends com.chronoxor.fbe.Model
 {
     private final FinalModelStructSet _model;
 
     public StructSetFinalModel() { _model = new FinalModelStructSet(getBuffer(), 8); }
-    public StructSetFinalModel(Buffer buffer) { super(buffer); _model = new FinalModelStructSet(getBuffer(), 8); }
+    public StructSetFinalModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); _model = new FinalModelStructSet(getBuffer(), 8); }
 
     // Get the model type
     public static final long fbeTypeConst = FinalModelStructSet.fbeTypeConst;
@@ -44,7 +32,7 @@ public final class StructSetFinalModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(StructSet value)
+    public long serialize(com.chronoxor.test.StructSet value)
     {
         long fbeInitialSize = getBuffer().getSize();
 
@@ -65,8 +53,8 @@ public final class StructSetFinalModel extends Model
     }
 
     // Deserialize the struct value
-    public StructSet deserialize() { var value = new StructSet(); deserialize(value); return value; }
-    public long deserialize(StructSet value)
+    public com.chronoxor.test.StructSet deserialize() { var value = new com.chronoxor.test.StructSet(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.test.StructSet value)
     {
         assert ((getBuffer().getOffset() + _model.fbeOffset()) <= getBuffer().getSize()) : "Model is broken!";
         if ((getBuffer().getOffset() + _model.fbeOffset()) > getBuffer().getSize())
@@ -78,7 +66,7 @@ public final class StructSetFinalModel extends Model
         if ((fbeStructSize <= 0) || (fbeStructType != fbeType()))
             return 8;
 
-        var fbeSize = new Size(0);
+        var fbeSize = new com.chronoxor.fbe.Size();
         value = _model.get(fbeSize, value);
         return 8 + fbeSize.value;
     }

@@ -5,34 +5,22 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public class StructMap implements Comparable<Object>
 {
-    public TreeMap<Integer, Byte> f1 = new TreeMap<Integer, Byte>();
-    public TreeMap<Integer, Byte> f2 = new TreeMap<Integer, Byte>();
-    public TreeMap<Integer, ByteBuffer> f3 = new TreeMap<Integer, ByteBuffer>();
-    public TreeMap<Integer, ByteBuffer> f4 = new TreeMap<Integer, ByteBuffer>();
-    public TreeMap<Integer, EnumSimple> f5 = new TreeMap<Integer, EnumSimple>();
-    public TreeMap<Integer, EnumSimple> f6 = new TreeMap<Integer, EnumSimple>();
-    public TreeMap<Integer, FlagsSimple> f7 = new TreeMap<Integer, FlagsSimple>();
-    public TreeMap<Integer, FlagsSimple> f8 = new TreeMap<Integer, FlagsSimple>();
-    public TreeMap<Integer, StructSimple> f9 = new TreeMap<Integer, StructSimple>();
-    public TreeMap<Integer, StructSimple> f10 = new TreeMap<Integer, StructSimple>();
+    public java.util.TreeMap<Integer, Byte> f1 = new java.util.TreeMap<Integer, Byte>();
+    public java.util.TreeMap<Integer, Byte> f2 = new java.util.TreeMap<Integer, Byte>();
+    public java.util.TreeMap<Integer, java.nio.ByteBuffer> f3 = new java.util.TreeMap<Integer, java.nio.ByteBuffer>();
+    public java.util.TreeMap<Integer, java.nio.ByteBuffer> f4 = new java.util.TreeMap<Integer, java.nio.ByteBuffer>();
+    public java.util.TreeMap<Integer, EnumSimple> f5 = new java.util.TreeMap<Integer, EnumSimple>();
+    public java.util.TreeMap<Integer, EnumSimple> f6 = new java.util.TreeMap<Integer, EnumSimple>();
+    public java.util.TreeMap<Integer, FlagsSimple> f7 = new java.util.TreeMap<Integer, FlagsSimple>();
+    public java.util.TreeMap<Integer, FlagsSimple> f8 = new java.util.TreeMap<Integer, FlagsSimple>();
+    public java.util.TreeMap<Integer, StructSimple> f9 = new java.util.TreeMap<Integer, StructSimple>();
+    public java.util.TreeMap<Integer, StructSimple> f10 = new java.util.TreeMap<Integer, StructSimple>();
 
     public StructMap() {}
 
-    public StructMap(TreeMap<Integer, Byte> f1, TreeMap<Integer, Byte> f2, TreeMap<Integer, ByteBuffer> f3, TreeMap<Integer, ByteBuffer> f4, TreeMap<Integer, EnumSimple> f5, TreeMap<Integer, EnumSimple> f6, TreeMap<Integer, FlagsSimple> f7, TreeMap<Integer, FlagsSimple> f8, TreeMap<Integer, StructSimple> f9, TreeMap<Integer, StructSimple> f10)
+    public StructMap(java.util.TreeMap<Integer, Byte> f1, java.util.TreeMap<Integer, Byte> f2, java.util.TreeMap<Integer, java.nio.ByteBuffer> f3, java.util.TreeMap<Integer, java.nio.ByteBuffer> f4, java.util.TreeMap<Integer, EnumSimple> f5, java.util.TreeMap<Integer, EnumSimple> f6, java.util.TreeMap<Integer, FlagsSimple> f7, java.util.TreeMap<Integer, FlagsSimple> f8, java.util.TreeMap<Integer, StructSimple> f9, java.util.TreeMap<Integer, StructSimple> f10)
     {
         this.f1 = f1;
         this.f2 = f2;

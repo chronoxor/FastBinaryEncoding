@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructVector final model
-public final class StructVectorFinalModel extends Model
+public final class StructVectorFinalModel extends com.chronoxor.fbe.Model
 {
     private final FinalModelStructVector _model;
 
     public StructVectorFinalModel() { _model = new FinalModelStructVector(getBuffer(), 8); }
-    public StructVectorFinalModel(Buffer buffer) { super(buffer); _model = new FinalModelStructVector(getBuffer(), 8); }
+    public StructVectorFinalModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); _model = new FinalModelStructVector(getBuffer(), 8); }
 
     // Get the model type
     public static final long fbeTypeConst = FinalModelStructVector.fbeTypeConst;
@@ -44,7 +32,7 @@ public final class StructVectorFinalModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(StructVector value)
+    public long serialize(com.chronoxor.test.StructVector value)
     {
         long fbeInitialSize = getBuffer().getSize();
 
@@ -65,8 +53,8 @@ public final class StructVectorFinalModel extends Model
     }
 
     // Deserialize the struct value
-    public StructVector deserialize() { var value = new StructVector(); deserialize(value); return value; }
-    public long deserialize(StructVector value)
+    public com.chronoxor.test.StructVector deserialize() { var value = new com.chronoxor.test.StructVector(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.test.StructVector value)
     {
         assert ((getBuffer().getOffset() + _model.fbeOffset()) <= getBuffer().getSize()) : "Model is broken!";
         if ((getBuffer().getOffset() + _model.fbeOffset()) > getBuffer().getSize())
@@ -78,7 +66,7 @@ public final class StructVectorFinalModel extends Model
         if ((fbeStructSize <= 0) || (fbeStructType != fbeType()))
             return 8;
 
-        var fbeSize = new Size(0);
+        var fbeSize = new com.chronoxor.fbe.Size();
         value = _model.get(fbeSize, value);
         return 8 + fbeSize.value;
     }

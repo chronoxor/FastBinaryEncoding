@@ -5,52 +5,40 @@
 
 package com.chronoxor.proto.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 // Fast Binary Encoding Order vector final model
-public final class FinalModelVectorOrder extends FinalModel
+public final class FinalModelVectorOrder extends com.chronoxor.fbe.FinalModel
 {
     private final FinalModelOrder _model;
 
-    public FinalModelVectorOrder(Buffer buffer, long offset)
+    public FinalModelVectorOrder(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         _model = new FinalModelOrder(buffer, offset);
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(Order[] values)
+    public long fbeAllocationSize(com.chronoxor.proto.Order[] values)
     {
         long size = 4;
         for (var value : values)
             size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long fbeAllocationSize(ArrayList<Order> values)
+    public long fbeAllocationSize(java.util.ArrayList<com.chronoxor.proto.Order> values)
     {
         long size = 4;
         for (var value : values)
             size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long fbeAllocationSize(LinkedList<Order> values)
+    public long fbeAllocationSize(java.util.LinkedList<com.chronoxor.proto.Order> values)
     {
         long size = 4;
         for (var value : values)
             size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long fbeAllocationSize(HashSet<Order> values)
+    public long fbeAllocationSize(java.util.HashSet<com.chronoxor.proto.Order> values)
     {
         long size = 4;
         for (var value : values)
@@ -80,8 +68,8 @@ public final class FinalModelVectorOrder extends FinalModel
         return size;
     }
 
-    // Get the vector as ArrayList
-    public long get(ArrayList<Order> values)
+    // Get the vector as java.util.ArrayList
+    public long get(java.util.ArrayList<com.chronoxor.proto.Order> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -100,12 +88,12 @@ public final class FinalModelVectorOrder extends FinalModel
         values.ensureCapacity((int)fbeVectorSize);
 
         long size = 4;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
             offset.value = 0;
-            Order value = _model.get(offset);
+            com.chronoxor.proto.Order value = _model.get(offset);
             values.add(value);
             _model.fbeShift(offset.value);
             size += offset.value;
@@ -113,8 +101,8 @@ public final class FinalModelVectorOrder extends FinalModel
         return size;
     }
 
-    // Get the vector as LinkedList
-    public long get(LinkedList<Order> values)
+    // Get the vector as java.util.LinkedList
+    public long get(java.util.LinkedList<com.chronoxor.proto.Order> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -131,12 +119,12 @@ public final class FinalModelVectorOrder extends FinalModel
             return 4;
 
         long size = 4;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
             offset.value = 0;
-            Order value = _model.get(offset);
+            com.chronoxor.proto.Order value = _model.get(offset);
             values.add(value);
             _model.fbeShift(offset.value);
             size += offset.value;
@@ -144,8 +132,8 @@ public final class FinalModelVectorOrder extends FinalModel
         return size;
     }
 
-    // Get the vector as HashSet
-    public long get(HashSet<Order> values)
+    // Get the vector as java.util.HashSet
+    public long get(java.util.HashSet<com.chronoxor.proto.Order> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -162,12 +150,12 @@ public final class FinalModelVectorOrder extends FinalModel
             return 4;
 
         long size = 4;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
             offset.value = 0;
-            Order value = _model.get(offset);
+            com.chronoxor.proto.Order value = _model.get(offset);
             values.add(value);
             _model.fbeShift(offset.value);
             size += offset.value;
@@ -175,8 +163,8 @@ public final class FinalModelVectorOrder extends FinalModel
         return size;
     }
 
-    // Set the vector as ArrayList
-    public long set(ArrayList<Order> values)
+    // Set the vector as java.util.ArrayList
+    public long set(java.util.ArrayList<com.chronoxor.proto.Order> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -199,8 +187,8 @@ public final class FinalModelVectorOrder extends FinalModel
         return size;
     }
 
-    // Set the vector as LinkedList
-    public long set(LinkedList<Order> values)
+    // Set the vector as java.util.LinkedList
+    public long set(java.util.LinkedList<com.chronoxor.proto.Order> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -223,8 +211,8 @@ public final class FinalModelVectorOrder extends FinalModel
         return size;
     }
 
-    // Set the vector as HashSet
-    public long set(HashSet<Order> values)
+    // Set the vector as java.util.HashSet
+    public long set(java.util.HashSet<com.chronoxor.proto.Order> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

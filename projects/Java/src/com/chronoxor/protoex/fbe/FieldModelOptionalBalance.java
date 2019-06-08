@@ -5,22 +5,10 @@
 
 package com.chronoxor.protoex.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.protoex.*;
-
 // Fast Binary Encoding optional Balance field model
-public final class FieldModelOptionalBalance extends FieldModel
+public final class FieldModelOptionalBalance extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelOptionalBalance(Buffer buffer, long offset)
+    public FieldModelOptionalBalance(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         value = new FieldModelBalance(buffer, 0);
@@ -102,14 +90,14 @@ public final class FieldModelOptionalBalance extends FieldModel
     }
 
     // Get the optional value
-    public Balance get() { return get(null); }
-    public Balance get(Balance defaults)
+    public com.chronoxor.protoex.Balance get() { return get(null); }
+    public com.chronoxor.protoex.Balance get(com.chronoxor.protoex.Balance defaults)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
             return defaults;
 
-        Balance optional = value.get();
+        com.chronoxor.protoex.Balance optional = value.get();
         getEnd(fbeBegin);
         return optional;
     }
@@ -145,7 +133,7 @@ public final class FieldModelOptionalBalance extends FieldModel
     }
 
     // Set the optional value
-    public void set(Balance optional)
+    public void set(com.chronoxor.protoex.Balance optional)
     {
         long fbeBegin = setBegin(optional != null);
         if (fbeBegin == 0)

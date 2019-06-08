@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional Decimal field model
-public final class FieldModelOptionalDecimal extends FieldModel
+public final class FieldModelOptionalDecimal extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelOptionalDecimal(Buffer buffer, long offset)
+    public FieldModelOptionalDecimal(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        value = new FieldModelDecimal(buffer, 0);
+        value = new com.chronoxor.fbe.FieldModelDecimal(buffer, 0);
     }
 
     // Get the field size
@@ -57,7 +45,7 @@ public final class FieldModelOptionalDecimal extends FieldModel
     }
 
     // Base field model value
-    public final FieldModelDecimal value;
+    public final com.chronoxor.fbe.FieldModelDecimal value;
 
     // Check if the optional value is valid
     @Override
@@ -102,14 +90,14 @@ public final class FieldModelOptionalDecimal extends FieldModel
     }
 
     // Get the optional value
-    public BigDecimal get() { return get(null); }
-    public BigDecimal get(BigDecimal defaults)
+    public java.math.BigDecimal get() { return get(null); }
+    public java.math.BigDecimal get(java.math.BigDecimal defaults)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
             return defaults;
 
-        BigDecimal optional = value.get();
+        java.math.BigDecimal optional = value.get();
         getEnd(fbeBegin);
         return optional;
     }
@@ -145,7 +133,7 @@ public final class FieldModelOptionalDecimal extends FieldModel
     }
 
     // Set the optional value
-    public void set(BigDecimal optional)
+    public void set(java.math.BigDecimal optional)
     {
         long fbeBegin = setBegin(optional != null);
         if (fbeBegin == 0)

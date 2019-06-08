@@ -5,18 +5,6 @@
 
 package com.chronoxor.protoex;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public enum OrderSideEnum
 {
     buy((byte)0 + 0)
@@ -43,7 +31,7 @@ public enum OrderSideEnum
         return "<unknown>";
     }
 
-    private static final Map<Byte, OrderSideEnum> mapping = new HashMap<>();
+    private static final java.util.Map<Byte, OrderSideEnum> mapping = new java.util.HashMap<>();
     static
     {
         for (var value : OrderSideEnum.values())

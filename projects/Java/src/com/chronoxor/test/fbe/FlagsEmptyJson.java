@@ -5,32 +5,18 @@
 
 package com.chronoxor.test.fbe;;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
-import com.google.gson.*;
-
-public final class FlagsEmptyJson implements JsonSerializer<FlagsEmpty>, JsonDeserializer<FlagsEmpty>
+public final class FlagsEmptyJson implements com.google.gson.JsonSerializer<com.chronoxor.test.FlagsEmpty>, com.google.gson.JsonDeserializer<com.chronoxor.test.FlagsEmpty>
 {
 
     @Override
-    public JsonElement serialize(FlagsEmpty src, Type typeOfSrc, JsonSerializationContext context)
+    public com.google.gson.JsonElement serialize(com.chronoxor.test.FlagsEmpty src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
-        return new JsonPrimitive(src.getRaw());
+        return new com.google.gson.JsonPrimitive(src.getRaw());
     }
 
     @Override
-    public FlagsEmpty deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public com.chronoxor.test.FlagsEmpty deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
     {
-        return new FlagsEmpty(json.getAsJsonPrimitive().getAsInt());
+        return new com.chronoxor.test.FlagsEmpty(json.getAsJsonPrimitive().getAsInt());
     }
 }

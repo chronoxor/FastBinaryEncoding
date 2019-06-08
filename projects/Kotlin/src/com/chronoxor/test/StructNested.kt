@@ -7,17 +7,6 @@
 
 package com.chronoxor.test
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructNested : StructOptional
 {
@@ -27,7 +16,7 @@ open class StructNested : StructOptional
     var f1003: EnumTyped? = null
     var f1004: FlagsSimple = FlagsSimple()
     var f1005: FlagsSimple? = null
-    var f1006: FlagsTyped = FlagsTyped.fromSet(EnumSet.of(FlagsTyped.FLAG_VALUE_2.value, FlagsTyped.FLAG_VALUE_4.value, FlagsTyped.FLAG_VALUE_6.value))
+    var f1006: FlagsTyped = FlagsTyped.fromSet(java.util.EnumSet.of(FlagsTyped.FLAG_VALUE_2.value, FlagsTyped.FLAG_VALUE_4.value, FlagsTyped.FLAG_VALUE_6.value))
     var f1007: FlagsTyped? = null
     var f1008: StructSimple = StructSimple()
     var f1009: StructSimple? = null

@@ -7,29 +7,16 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
-import com.google.gson.*
-
-class EnumSimpleJson : JsonSerializer<EnumSimple>, JsonDeserializer<EnumSimple>
+class EnumSimpleJson : com.google.gson.JsonSerializer<com.chronoxor.test.EnumSimple>, com.google.gson.JsonDeserializer<com.chronoxor.test.EnumSimple>
 {
-    override fun serialize(src: EnumSimple, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: com.chronoxor.test.EnumSimple, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(src.raw)
+        return com.google.gson.JsonPrimitive(src.raw)
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): EnumSimple
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): com.chronoxor.test.EnumSimple
     {
-        return EnumSimple(json.asJsonPrimitive.asInt)
+        return com.chronoxor.test.EnumSimple(json.asJsonPrimitive.asInt)
     }
 }

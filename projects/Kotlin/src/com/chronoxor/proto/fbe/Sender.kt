@@ -7,17 +7,6 @@
 
 package com.chronoxor.proto.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 // Fast Binary Encoding com.chronoxor.proto sender
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
 open class Sender : com.chronoxor.fbe.Sender
@@ -34,7 +23,7 @@ open class Sender : com.chronoxor.fbe.Sender
         AccountModel = AccountModel(buffer)
     }
 
-    constructor(buffer: Buffer) : super(buffer, false)
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer, false)
     {
         OrderModel = OrderModel(buffer)
         BalanceModel = BalanceModel(buffer)

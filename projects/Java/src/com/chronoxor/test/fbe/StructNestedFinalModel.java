@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructNested final model
-public final class StructNestedFinalModel extends Model
+public final class StructNestedFinalModel extends com.chronoxor.fbe.Model
 {
     private final FinalModelStructNested _model;
 
     public StructNestedFinalModel() { _model = new FinalModelStructNested(getBuffer(), 8); }
-    public StructNestedFinalModel(Buffer buffer) { super(buffer); _model = new FinalModelStructNested(getBuffer(), 8); }
+    public StructNestedFinalModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); _model = new FinalModelStructNested(getBuffer(), 8); }
 
     // Get the model type
     public static final long fbeTypeConst = FinalModelStructNested.fbeTypeConst;
@@ -44,7 +32,7 @@ public final class StructNestedFinalModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(StructNested value)
+    public long serialize(com.chronoxor.test.StructNested value)
     {
         long fbeInitialSize = getBuffer().getSize();
 
@@ -65,8 +53,8 @@ public final class StructNestedFinalModel extends Model
     }
 
     // Deserialize the struct value
-    public StructNested deserialize() { var value = new StructNested(); deserialize(value); return value; }
-    public long deserialize(StructNested value)
+    public com.chronoxor.test.StructNested deserialize() { var value = new com.chronoxor.test.StructNested(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.test.StructNested value)
     {
         assert ((getBuffer().getOffset() + _model.fbeOffset()) <= getBuffer().getSize()) : "Model is broken!";
         if ((getBuffer().getOffset() + _model.fbeOffset()) > getBuffer().getSize())
@@ -78,7 +66,7 @@ public final class StructNestedFinalModel extends Model
         if ((fbeStructSize <= 0) || (fbeStructType != fbeType()))
             return 8;
 
-        var fbeSize = new Size(0);
+        var fbeSize = new com.chronoxor.fbe.Size();
         value = _model.get(fbeSize, value);
         return 8 + fbeSize.value;
     }

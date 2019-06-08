@@ -5,18 +5,6 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public class StructSimple implements Comparable<Object>
 {
     public int id = 0;
@@ -48,16 +36,16 @@ public class StructSimple implements Comparable<Object>
     public float f26 = (float)123.456f;
     public double f27 = 0.0d;
     public double f28 = (double)-123.456e+123d;
-    public BigDecimal f29 = BigDecimal.valueOf(0L);
-    public BigDecimal f30 = BigDecimal.valueOf(123456.123456d);
+    public java.math.BigDecimal f29 = java.math.BigDecimal.valueOf(0L);
+    public java.math.BigDecimal f30 = java.math.BigDecimal.valueOf(123456.123456d);
     public String f31 = "";
     public String f32 = "Initial string!";
-    public Instant f33 = Instant.EPOCH;
-    public Instant f34 = Instant.EPOCH;
-    public Instant f35 = Instant.now();
-    public UUID f36 = com.chronoxor.fbe.UUIDGenerator.nil();
-    public UUID f37 = com.chronoxor.fbe.UUIDGenerator.sequential();
-    public UUID f38 = UUID.fromString("123e4567-e89b-12d3-a456-426655440000");
+    public java.time.Instant f33 = java.time.Instant.EPOCH;
+    public java.time.Instant f34 = java.time.Instant.EPOCH;
+    public java.time.Instant f35 = java.time.Instant.now();
+    public java.util.UUID f36 = com.chronoxor.fbe.UUIDGenerator.nil();
+    public java.util.UUID f37 = com.chronoxor.fbe.UUIDGenerator.sequential();
+    public java.util.UUID f38 = java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000");
     public com.chronoxor.proto.OrderSide f39 = new com.chronoxor.proto.OrderSide();
     public com.chronoxor.proto.OrderType f40 = new com.chronoxor.proto.OrderType();
     public com.chronoxor.proto.Order f41 = new com.chronoxor.proto.Order();
@@ -67,7 +55,7 @@ public class StructSimple implements Comparable<Object>
 
     public StructSimple() {}
 
-    public StructSimple(int id, boolean f1, boolean f2, byte f3, byte f4, char f5, char f6, char f7, char f8, byte f9, byte f10, byte f11, byte f12, short f13, short f14, short f15, short f16, int f17, int f18, int f19, int f20, long f21, long f22, long f23, long f24, float f25, float f26, double f27, double f28, BigDecimal f29, BigDecimal f30, String f31, String f32, Instant f33, Instant f34, Instant f35, UUID f36, UUID f37, UUID f38, com.chronoxor.proto.OrderSide f39, com.chronoxor.proto.OrderType f40, com.chronoxor.proto.Order f41, com.chronoxor.proto.Balance f42, com.chronoxor.proto.State f43, com.chronoxor.proto.Account f44)
+    public StructSimple(int id, boolean f1, boolean f2, byte f3, byte f4, char f5, char f6, char f7, char f8, byte f9, byte f10, byte f11, byte f12, short f13, short f14, short f15, short f16, int f17, int f18, int f19, int f20, long f21, long f22, long f23, long f24, float f25, float f26, double f27, double f28, java.math.BigDecimal f29, java.math.BigDecimal f30, String f31, String f32, java.time.Instant f33, java.time.Instant f34, java.time.Instant f35, java.util.UUID f36, java.util.UUID f37, java.util.UUID f38, com.chronoxor.proto.OrderSide f39, com.chronoxor.proto.OrderType f40, com.chronoxor.proto.Order f41, com.chronoxor.proto.Balance f42, com.chronoxor.proto.State f43, com.chronoxor.proto.Account f44)
     {
         this.id = id;
         this.f1 = f1;

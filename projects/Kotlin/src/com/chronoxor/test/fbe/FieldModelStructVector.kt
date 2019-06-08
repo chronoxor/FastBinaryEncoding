@@ -7,20 +7,9 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructVector field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FieldModelStructVector(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelStructVector(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     val f1: FieldModelVectorByte = FieldModelVectorByte(buffer, 4 + 4)
     val f2: FieldModelVectorOptionalByte = FieldModelVectorOptionalByte(buffer, f1.fbeOffset + f1.fbeSize)
@@ -208,7 +197,7 @@ class FieldModelStructVector(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Get the struct value
-    fun get(fbeValue: StructVector = StructVector()): StructVector
+    fun get(fbeValue: com.chronoxor.test.StructVector = com.chronoxor.test.StructVector()): com.chronoxor.test.StructVector
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -222,7 +211,7 @@ class FieldModelStructVector(buffer: Buffer, offset: Long) : FieldModel(buffer, 
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructVector, fbeStructSize: Long)
+    fun getFields(fbeValue: com.chronoxor.test.StructVector, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
 
@@ -315,7 +304,7 @@ class FieldModelStructVector(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Set the struct value
-    fun set(fbeValue: StructVector)
+    fun set(fbeValue: com.chronoxor.test.StructVector)
     {
         val fbeBegin = setBegin()
         if (fbeBegin == 0L)
@@ -327,7 +316,7 @@ class FieldModelStructVector(buffer: Buffer, offset: Long) : FieldModel(buffer, 
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructVector)
+    fun setFields(fbeValue: com.chronoxor.test.StructVector)
     {
         f1.set(fbeValue.f1)
         f2.set(fbeValue.f2)

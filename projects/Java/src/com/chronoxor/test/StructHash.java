@@ -5,34 +5,22 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public class StructHash implements Comparable<Object>
 {
-    public HashMap<String, Byte> f1 = new HashMap<String, Byte>();
-    public HashMap<String, Byte> f2 = new HashMap<String, Byte>();
-    public HashMap<String, ByteBuffer> f3 = new HashMap<String, ByteBuffer>();
-    public HashMap<String, ByteBuffer> f4 = new HashMap<String, ByteBuffer>();
-    public HashMap<String, EnumSimple> f5 = new HashMap<String, EnumSimple>();
-    public HashMap<String, EnumSimple> f6 = new HashMap<String, EnumSimple>();
-    public HashMap<String, FlagsSimple> f7 = new HashMap<String, FlagsSimple>();
-    public HashMap<String, FlagsSimple> f8 = new HashMap<String, FlagsSimple>();
-    public HashMap<String, StructSimple> f9 = new HashMap<String, StructSimple>();
-    public HashMap<String, StructSimple> f10 = new HashMap<String, StructSimple>();
+    public java.util.HashMap<String, Byte> f1 = new java.util.HashMap<String, Byte>();
+    public java.util.HashMap<String, Byte> f2 = new java.util.HashMap<String, Byte>();
+    public java.util.HashMap<String, java.nio.ByteBuffer> f3 = new java.util.HashMap<String, java.nio.ByteBuffer>();
+    public java.util.HashMap<String, java.nio.ByteBuffer> f4 = new java.util.HashMap<String, java.nio.ByteBuffer>();
+    public java.util.HashMap<String, EnumSimple> f5 = new java.util.HashMap<String, EnumSimple>();
+    public java.util.HashMap<String, EnumSimple> f6 = new java.util.HashMap<String, EnumSimple>();
+    public java.util.HashMap<String, FlagsSimple> f7 = new java.util.HashMap<String, FlagsSimple>();
+    public java.util.HashMap<String, FlagsSimple> f8 = new java.util.HashMap<String, FlagsSimple>();
+    public java.util.HashMap<String, StructSimple> f9 = new java.util.HashMap<String, StructSimple>();
+    public java.util.HashMap<String, StructSimple> f10 = new java.util.HashMap<String, StructSimple>();
 
     public StructHash() {}
 
-    public StructHash(HashMap<String, Byte> f1, HashMap<String, Byte> f2, HashMap<String, ByteBuffer> f3, HashMap<String, ByteBuffer> f4, HashMap<String, EnumSimple> f5, HashMap<String, EnumSimple> f6, HashMap<String, FlagsSimple> f7, HashMap<String, FlagsSimple> f8, HashMap<String, StructSimple> f9, HashMap<String, StructSimple> f10)
+    public StructHash(java.util.HashMap<String, Byte> f1, java.util.HashMap<String, Byte> f2, java.util.HashMap<String, java.nio.ByteBuffer> f3, java.util.HashMap<String, java.nio.ByteBuffer> f4, java.util.HashMap<String, EnumSimple> f5, java.util.HashMap<String, EnumSimple> f6, java.util.HashMap<String, FlagsSimple> f7, java.util.HashMap<String, FlagsSimple> f8, java.util.HashMap<String, StructSimple> f9, java.util.HashMap<String, StructSimple> f10)
     {
         this.f1 = f1;
         this.f2 = f2;

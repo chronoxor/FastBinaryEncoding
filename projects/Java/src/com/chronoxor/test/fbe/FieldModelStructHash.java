@@ -5,20 +5,8 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructHash field model
-public final class FieldModelStructHash extends FieldModel
+public final class FieldModelStructHash extends com.chronoxor.fbe.FieldModel
 {
     public final FieldModelMapStringByte f1;
     public final FieldModelMapStringOptionalByte f2;
@@ -31,7 +19,7 @@ public final class FieldModelStructHash extends FieldModel
     public final FieldModelMapStringStructSimple f9;
     public final FieldModelMapStringOptionalStructSimple f10;
 
-    public FieldModelStructHash(Buffer buffer, long offset)
+    public FieldModelStructHash(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         f1 = new FieldModelMapStringByte(buffer, 4 + 4);
@@ -221,8 +209,8 @@ public final class FieldModelStructHash extends FieldModel
     }
 
     // Get the struct value
-    public StructHash get() { return get(new StructHash()); }
-    public StructHash get(StructHash fbeValue)
+    public com.chronoxor.test.StructHash get() { return get(new com.chronoxor.test.StructHash()); }
+    public com.chronoxor.test.StructHash get(com.chronoxor.test.StructHash fbeValue)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
@@ -235,7 +223,7 @@ public final class FieldModelStructHash extends FieldModel
     }
 
     // Get the struct fields values
-    public void getFields(StructHash fbeValue, long fbeStructSize)
+    public void getFields(com.chronoxor.test.StructHash fbeValue, long fbeStructSize)
     {
         long fbeCurrentSize = 4 + 4;
 
@@ -328,7 +316,7 @@ public final class FieldModelStructHash extends FieldModel
     }
 
     // Set the struct value
-    public void set(StructHash fbeValue)
+    public void set(com.chronoxor.test.StructHash fbeValue)
     {
         long fbeBegin = setBegin();
         if (fbeBegin == 0)
@@ -339,7 +327,7 @@ public final class FieldModelStructHash extends FieldModel
     }
 
     // Set the struct fields values
-    public void setFields(StructHash fbeValue)
+    public void setFields(com.chronoxor.test.StructHash fbeValue)
     {
         f1.set(fbeValue.f1);
         f2.set(fbeValue.f2);

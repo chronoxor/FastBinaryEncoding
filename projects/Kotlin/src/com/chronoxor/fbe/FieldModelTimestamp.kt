@@ -7,14 +7,6 @@
 
 package com.chronoxor.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
 // Fast Binary Encoding timestamp field model
 class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
@@ -22,17 +14,17 @@ class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     override val fbeSize: Long = 8
 
     // Get the timestamp value
-    fun get(defaults: Instant = Instant.EPOCH): Instant
+    fun get(defaults: java.time.Instant = java.time.Instant.EPOCH): java.time.Instant
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
         val nanoseconds = readInt64(fbeOffset)
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
+        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
     }
 
     // Set the timestamp value
-    fun set(value: Instant)
+    fun set(value: java.time.Instant)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

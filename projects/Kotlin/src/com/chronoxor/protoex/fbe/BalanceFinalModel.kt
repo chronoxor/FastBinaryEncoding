@@ -7,24 +7,13 @@
 
 package com.chronoxor.protoex.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.protoex.*
-
 // Fast Binary Encoding Balance final model
-class BalanceFinalModel : Model
+class BalanceFinalModel : com.chronoxor.fbe.Model
 {
     private val _model: FinalModelBalance
 
     constructor() { _model = FinalModelBalance(buffer, 8) }
-    constructor(buffer: Buffer) : super(buffer) { _model = FinalModelBalance(buffer, 8) }
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer) { _model = FinalModelBalance(buffer, 8) }
 
     // Model type
     var fbeType: Long = fbeTypeConst
@@ -49,7 +38,7 @@ class BalanceFinalModel : Model
     }
 
     // Serialize the struct value
-    fun serialize(value: Balance): Long
+    fun serialize(value: com.chronoxor.protoex.Balance): Long
     {
         val fbeInitialSize = buffer.size
 
@@ -70,9 +59,9 @@ class BalanceFinalModel : Model
     }
 
     // Deserialize the struct value
-    fun deserialize(): Balance { val value = Balance(); deserialize(value); return value }
+    fun deserialize(): com.chronoxor.protoex.Balance { val value = com.chronoxor.protoex.Balance(); deserialize(value); return value }
     @Suppress("UNUSED_VALUE")
-    fun deserialize(value: Balance): Long
+    fun deserialize(value: com.chronoxor.protoex.Balance): Long
     {
         var valueRef = value
 
@@ -86,7 +75,7 @@ class BalanceFinalModel : Model
         if ((fbeStructSize <= 0) || (fbeStructType != fbeType))
             return 8
 
-        val fbeSize = Size(0)
+        val fbeSize = com.chronoxor.fbe.Size()
         valueRef = _model.get(fbeSize, valueRef)
         return 8 + fbeSize.value
     }

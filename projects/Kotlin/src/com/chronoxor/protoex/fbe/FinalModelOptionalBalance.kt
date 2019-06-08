@@ -7,22 +7,11 @@
 
 package com.chronoxor.protoex.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.protoex.*
-
 // Fast Binary Encoding optional Balance final model
-class FinalModelOptionalBalance(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelOptionalBalance(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun fbeAllocationSize(optional: Balance?): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
+    fun fbeAllocationSize(optional: com.chronoxor.protoex.Balance?): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
 
     // Checks if the object contains a value
     fun hasValue(): Boolean
@@ -54,7 +43,7 @@ class FinalModelOptionalBalance(buffer: Buffer, offset: Long) : FinalModel(buffe
     }
 
     // Get the optional value
-    fun get(size: Size): Balance?
+    fun get(size: com.chronoxor.fbe.Size): com.chronoxor.protoex.Balance?
     {
         assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 1) > _buffer.size)
@@ -77,7 +66,7 @@ class FinalModelOptionalBalance(buffer: Buffer, offset: Long) : FinalModel(buffe
     }
 
     // Set the optional value
-    fun set(optional: Balance?): Long
+    fun set(optional: com.chronoxor.protoex.Balance?): Long
     {
         assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 1) > _buffer.size)

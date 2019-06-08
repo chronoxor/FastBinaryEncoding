@@ -5,29 +5,17 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructBytes field model
-public final class FieldModelStructBytes extends FieldModel
+public final class FieldModelStructBytes extends com.chronoxor.fbe.FieldModel
 {
-    public final FieldModelBytes f1;
+    public final com.chronoxor.fbe.FieldModelBytes f1;
     public final FieldModelOptionalBytes f2;
     public final FieldModelOptionalBytes f3;
 
-    public FieldModelStructBytes(Buffer buffer, long offset)
+    public FieldModelStructBytes(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        f1 = new FieldModelBytes(buffer, 4 + 4);
+        f1 = new com.chronoxor.fbe.FieldModelBytes(buffer, 4 + 4);
         f2 = new FieldModelOptionalBytes(buffer, f1.fbeOffset() + f1.fbeSize());
         f3 = new FieldModelOptionalBytes(buffer, f2.fbeOffset() + f2.fbeSize());
     }
@@ -151,8 +139,8 @@ public final class FieldModelStructBytes extends FieldModel
     }
 
     // Get the struct value
-    public StructBytes get() { return get(new StructBytes()); }
-    public StructBytes get(StructBytes fbeValue)
+    public com.chronoxor.test.StructBytes get() { return get(new com.chronoxor.test.StructBytes()); }
+    public com.chronoxor.test.StructBytes get(com.chronoxor.test.StructBytes fbeValue)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
@@ -165,14 +153,14 @@ public final class FieldModelStructBytes extends FieldModel
     }
 
     // Get the struct fields values
-    public void getFields(StructBytes fbeValue, long fbeStructSize)
+    public void getFields(com.chronoxor.test.StructBytes fbeValue, long fbeStructSize)
     {
         long fbeCurrentSize = 4 + 4;
 
         if ((fbeCurrentSize + f1.fbeSize()) <= fbeStructSize)
             fbeValue.f1 = f1.get();
         else
-            fbeValue.f1 = ByteBuffer.allocate(0);
+            fbeValue.f1 = java.nio.ByteBuffer.allocate(0);
         fbeCurrentSize += f1.fbeSize();
 
         if ((fbeCurrentSize + f2.fbeSize()) <= fbeStructSize)
@@ -216,7 +204,7 @@ public final class FieldModelStructBytes extends FieldModel
     }
 
     // Set the struct value
-    public void set(StructBytes fbeValue)
+    public void set(com.chronoxor.test.StructBytes fbeValue)
     {
         long fbeBegin = setBegin();
         if (fbeBegin == 0)
@@ -227,7 +215,7 @@ public final class FieldModelStructBytes extends FieldModel
     }
 
     // Set the struct fields values
-    public void setFields(StructBytes fbeValue)
+    public void setFields(com.chronoxor.test.StructBytes fbeValue)
     {
         f1.set(fbeValue.f1);
         f2.set(fbeValue.f2);

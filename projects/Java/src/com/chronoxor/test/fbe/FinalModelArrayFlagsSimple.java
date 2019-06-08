@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding FlagsSimple array final model
-public final class FinalModelArrayFlagsSimple extends FinalModel
+public final class FinalModelArrayFlagsSimple extends com.chronoxor.fbe.FinalModel
 {
     private final FinalModelFlagsSimple _model;
     private final long _size;
 
-    public FinalModelArrayFlagsSimple(Buffer buffer, long offset, long size)
+    public FinalModelArrayFlagsSimple(com.chronoxor.fbe.Buffer buffer, long offset, long size)
     {
         super(buffer, offset);
         _model = new FinalModelFlagsSimple(buffer, offset);
@@ -31,14 +19,14 @@ public final class FinalModelArrayFlagsSimple extends FinalModel
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(FlagsSimple[] values)
+    public long fbeAllocationSize(com.chronoxor.test.FlagsSimple[] values)
     {
         long size = 0;
         for (long i = 0; (i < values.length) && (i < _size); i++)
             size += _model.fbeAllocationSize(values[(int)i]);
         return size;
     }
-    public long fbeAllocationSize(ArrayList<FlagsSimple> values)
+    public long fbeAllocationSize(java.util.ArrayList<com.chronoxor.test.FlagsSimple> values)
     {
         long size = 0;
         for (long i = 0; (i < values.size()) && (i < _size); i++)
@@ -67,9 +55,9 @@ public final class FinalModelArrayFlagsSimple extends FinalModel
     }
 
     // Get the array
-    public FlagsSimple[] get(Size size)
+    public com.chronoxor.test.FlagsSimple[] get(com.chronoxor.fbe.Size size)
     {
-        var values = new FlagsSimple[(int)_size];
+        var values = new com.chronoxor.test.FlagsSimple[(int)_size];
 
         assert ((_buffer.getOffset() + fbeOffset()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
@@ -79,7 +67,7 @@ public final class FinalModelArrayFlagsSimple extends FinalModel
         }
 
         size.value = 0;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset());
         for (long i = 0; i < _size; i++)
         {
@@ -92,7 +80,7 @@ public final class FinalModelArrayFlagsSimple extends FinalModel
     }
 
     // Get the array
-    public long get(FlagsSimple[] values)
+    public long get(com.chronoxor.test.FlagsSimple[] values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -103,7 +91,7 @@ public final class FinalModelArrayFlagsSimple extends FinalModel
             return 0;
 
         long size = 0;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset());
         for (long i = 0; (i < values.length) && (i < _size); i++)
         {
@@ -115,8 +103,8 @@ public final class FinalModelArrayFlagsSimple extends FinalModel
         return size;
     }
 
-    // Get the array as ArrayList
-    public long get(ArrayList<FlagsSimple> values)
+    // Get the array as java.util.ArrayList
+    public long get(java.util.ArrayList<com.chronoxor.test.FlagsSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -131,12 +119,12 @@ public final class FinalModelArrayFlagsSimple extends FinalModel
         values.ensureCapacity((int)_size);
 
         long size = 0;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _model.fbeOffset(fbeOffset());
         for (long i = _size; i-- > 0;)
         {
             offset.value = 0;
-            FlagsSimple value = _model.get(offset);
+            com.chronoxor.test.FlagsSimple value = _model.get(offset);
             values.add(value);
             _model.fbeShift(offset.value);
             size += offset.value;
@@ -145,7 +133,7 @@ public final class FinalModelArrayFlagsSimple extends FinalModel
     }
 
     // Set the array
-    public long set(FlagsSimple[] values)
+    public long set(com.chronoxor.test.FlagsSimple[] values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -166,8 +154,8 @@ public final class FinalModelArrayFlagsSimple extends FinalModel
         return size;
     }
 
-    // Set the array as List
-    public long set(ArrayList<FlagsSimple> values)
+    // Set the array as java.util.ArrayList
+    public long set(java.util.ArrayList<com.chronoxor.test.FlagsSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

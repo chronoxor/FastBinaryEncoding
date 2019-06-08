@@ -5,18 +5,6 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public enum EnumEmptyEnum
 {
     ;
@@ -36,7 +24,7 @@ public enum EnumEmptyEnum
         return "<unknown>";
     }
 
-    private static final Map<Integer, EnumEmptyEnum> mapping = new HashMap<>();
+    private static final java.util.Map<Integer, EnumEmptyEnum> mapping = new java.util.HashMap<>();
     static
     {
         for (var value : EnumEmptyEnum.values())

@@ -5,29 +5,17 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional Timestamp final model
-public final class FinalModelOptionalTimestamp extends FinalModel
+public final class FinalModelOptionalTimestamp extends com.chronoxor.fbe.FinalModel
 {
-    public FinalModelOptionalTimestamp(Buffer buffer, long offset)
+    public FinalModelOptionalTimestamp(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        value = new FinalModelTimestamp(buffer, 0);
+        value = new com.chronoxor.fbe.FinalModelTimestamp(buffer, 0);
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(Instant optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
+    public long fbeAllocationSize(java.time.Instant optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
 
     // Checks if the object contains a value
     public boolean hasValue()
@@ -40,7 +28,7 @@ public final class FinalModelOptionalTimestamp extends FinalModel
     }
 
     // Base final model value
-    public final FinalModelTimestamp value;
+    public final com.chronoxor.fbe.FinalModelTimestamp value;
 
     // Check if the optional value is valid
     @Override
@@ -60,7 +48,7 @@ public final class FinalModelOptionalTimestamp extends FinalModel
     }
 
     // Get the optional value
-    public Instant get(Size size)
+    public java.time.Instant get(com.chronoxor.fbe.Size size)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())
@@ -76,14 +64,14 @@ public final class FinalModelOptionalTimestamp extends FinalModel
         }
 
         _buffer.shift(fbeOffset() + 1);
-        Instant optional = value.get(size);
+        java.time.Instant optional = value.get(size);
         _buffer.unshift(fbeOffset() + 1);
         size.value += 1;
         return optional;
     }
 
     // Set the optional value
-    public long set(Instant optional)
+    public long set(java.time.Instant optional)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())

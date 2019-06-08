@@ -7,23 +7,12 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding FlagsEmpty final model
-class FinalModelFlagsEmpty(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelFlagsEmpty(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(value: FlagsEmpty): Long = fbeSize
+    fun fbeAllocationSize(value: com.chronoxor.test.FlagsEmpty): Long = fbeSize
 
     // Final size
     override val fbeSize: Long = 4
@@ -38,17 +27,17 @@ class FinalModelFlagsEmpty(buffer: Buffer, offset: Long) : FinalModel(buffer, of
     }
 
     // Get the value
-    fun get(size: Size): FlagsEmpty
+    fun get(size: com.chronoxor.fbe.Size): com.chronoxor.test.FlagsEmpty
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return FlagsEmpty()
+            return com.chronoxor.test.FlagsEmpty()
 
         size.value = fbeSize
-        return FlagsEmpty(readInt32(fbeOffset))
+        return com.chronoxor.test.FlagsEmpty(readInt32(fbeOffset))
     }
 
     // Set the value
-    fun set(value: FlagsEmpty): Long
+    fun set(value: com.chronoxor.test.FlagsEmpty): Long
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

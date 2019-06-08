@@ -7,14 +7,6 @@
 
 package com.chronoxor.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
 // Fast Binary Encoding buffer based on dynamic byte array
 class Buffer
 {
@@ -262,12 +254,12 @@ class Buffer
 
         fun readString(buffer: ByteArray, offset: Long, size: Long): String
         {
-            return kotlin.text.String(buffer, offset.toInt(), size.toInt(), StandardCharsets.UTF_8)
+            return kotlin.text.String(buffer, offset.toInt(), size.toInt(), java.nio.charset.StandardCharsets.UTF_8)
         }
 
-        fun readUUID(buffer: ByteArray, offset: Long): UUID
+        fun readUUID(buffer: ByteArray, offset: Long): java.util.UUID
         {
-            return UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8))
+            return java.util.UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8))
         }
 
         fun write(buffer: ByteArray, offset: Long, value: Boolean)
@@ -377,7 +369,7 @@ class Buffer
                 buffer[(offset + i).toInt()] = value
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: UUID)
+        fun write(buffer: ByteArray, offset: Long, value: java.util.UUID)
         {
             writeBE(buffer, offset, value.mostSignificantBits)
             writeBE(buffer, offset + 8, value.leastSignificantBits)

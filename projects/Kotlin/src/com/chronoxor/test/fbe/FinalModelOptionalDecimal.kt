@@ -7,22 +7,11 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding optional Decimal final model
-class FinalModelOptionalDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelOptionalDecimal(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun fbeAllocationSize(optional: BigDecimal?): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
+    fun fbeAllocationSize(optional: java.math.BigDecimal?): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
 
     // Checks if the object contains a value
     fun hasValue(): Boolean
@@ -35,7 +24,7 @@ class FinalModelOptionalDecimal(buffer: Buffer, offset: Long) : FinalModel(buffe
     }
 
     // Base final model value
-    val value = FinalModelDecimal(buffer, 0)
+    val value = com.chronoxor.fbe.FinalModelDecimal(buffer, 0)
 
     // Check if the optional value is valid
     override fun verify(): Long
@@ -54,7 +43,7 @@ class FinalModelOptionalDecimal(buffer: Buffer, offset: Long) : FinalModel(buffe
     }
 
     // Get the optional value
-    fun get(size: Size): BigDecimal?
+    fun get(size: com.chronoxor.fbe.Size): java.math.BigDecimal?
     {
         assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 1) > _buffer.size)
@@ -77,7 +66,7 @@ class FinalModelOptionalDecimal(buffer: Buffer, offset: Long) : FinalModel(buffe
     }
 
     // Set the optional value
-    fun set(optional: BigDecimal?): Long
+    fun set(optional: java.math.BigDecimal?): Long
     {
         assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 1) > _buffer.size)

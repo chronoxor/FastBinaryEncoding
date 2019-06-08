@@ -5,22 +5,13 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
 // Fast Binary Encoding bytes final model
 public final class FinalModelBytes extends FinalModel
 {
     public FinalModelBytes(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(ByteBuffer value) { return 4 + value.array().length; }
+    public long fbeAllocationSize(java.nio.ByteBuffer value) { return 4 + value.array().length; }
 
     // Check if the bytes value is valid
     @Override
@@ -37,12 +28,12 @@ public final class FinalModelBytes extends FinalModel
     }
 
     // Get the bytes value
-    public ByteBuffer get(Size size)
+    public java.nio.ByteBuffer get(Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
         {
             size.value = 0;
-            return ByteBuffer.allocate(0);
+            return java.nio.ByteBuffer.allocate(0);
         }
 
         int fbeBytesSize = readInt32(fbeOffset());
@@ -50,15 +41,15 @@ public final class FinalModelBytes extends FinalModel
         if ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) > _buffer.getSize())
         {
             size.value = 4;
-            return ByteBuffer.allocate(0);
+            return java.nio.ByteBuffer.allocate(0);
         }
 
         size.value = 4 + fbeBytesSize;
-        return ByteBuffer.wrap(readBytes(fbeOffset() + 4, fbeBytesSize));
+        return java.nio.ByteBuffer.wrap(readBytes(fbeOffset() + 4, fbeBytesSize));
     }
 
     // Set the bytes value
-    public long set(ByteBuffer value)
+    public long set(java.nio.ByteBuffer value)
     {
         assert (value != null) : "Invalid bytes value!";
         if (value == null)

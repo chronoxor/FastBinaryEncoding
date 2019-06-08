@@ -7,24 +7,13 @@
 
 package com.chronoxor.enums.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.enums.*
-
 // Fast Binary Encoding Enums model
-class EnumsModel : Model
+class EnumsModel : com.chronoxor.fbe.Model
 {
     val model: FieldModelEnums
 
     constructor() { model = FieldModelEnums(buffer, 4) }
-    constructor(buffer: Buffer) : super(buffer) { model = FieldModelEnums(buffer, 4) }
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer) { model = FieldModelEnums(buffer, 4) }
 
     // Model size
     fun fbeSize(): Long = model.fbeSize + model.fbeExtra
@@ -65,7 +54,7 @@ class EnumsModel : Model
     }
 
     // Serialize the struct value
-    fun serialize(value: Enums): Long
+    fun serialize(value: com.chronoxor.enums.Enums): Long
     {
         val fbeBegin = createBegin()
         model.set(value)
@@ -73,15 +62,15 @@ class EnumsModel : Model
     }
 
     // Deserialize the struct value
-    fun deserialize(): Enums { val value = Enums(); deserialize(value); return value }
+    fun deserialize(): com.chronoxor.enums.Enums { val value = com.chronoxor.enums.Enums(); deserialize(value); return value }
     @Suppress("UNUSED_VALUE")
-    fun deserialize(value: Enums): Long
+    fun deserialize(value: com.chronoxor.enums.Enums): Long
     {
         var valueRef = value
 
         if ((buffer.offset + model.fbeOffset - 4) > buffer.size)
         {
-            valueRef = Enums()
+            valueRef = com.chronoxor.enums.Enums()
             return 0
         }
 
@@ -89,7 +78,7 @@ class EnumsModel : Model
         assert(fbeFullSize >= model.fbeSize) { "Model is broken!" }
         if (fbeFullSize < model.fbeSize)
         {
-            valueRef = Enums()
+            valueRef = com.chronoxor.enums.Enums()
             return 0
         }
 

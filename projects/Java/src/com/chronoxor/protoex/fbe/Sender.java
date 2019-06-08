@@ -5,18 +5,6 @@
 
 package com.chronoxor.protoex.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.protoex.*;
-
 // Fast Binary Encoding com.chronoxor.protoex sender
 public class Sender extends com.chronoxor.fbe.Sender
 {
@@ -36,7 +24,7 @@ public class Sender extends com.chronoxor.fbe.Sender
         BalanceModel = new BalanceModel(getBuffer());
         AccountModel = new AccountModel(getBuffer());
     }
-    public Sender(Buffer buffer)
+    public Sender(com.chronoxor.fbe.Buffer buffer)
     {
         super(buffer, false);
         protoSender = new com.chronoxor.proto.fbe.Sender(getBuffer());

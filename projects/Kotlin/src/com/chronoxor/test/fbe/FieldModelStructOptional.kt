@@ -7,20 +7,9 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructOptional field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelStructOptional(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     val parent: FieldModelStructSimple = FieldModelStructSimple(buffer, 4 + 4)
     val f100: FieldModelOptionalBoolean = FieldModelOptionalBoolean(buffer, parent.fbeOffset + parent.fbeBody - 4 - 4)
@@ -721,7 +710,7 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
     }
 
     // Get the struct value
-    fun get(fbeValue: StructOptional = StructOptional()): StructOptional
+    fun get(fbeValue: com.chronoxor.test.StructOptional = com.chronoxor.test.StructOptional()): com.chronoxor.test.StructOptional
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -735,7 +724,7 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructOptional, fbeStructSize: Long)
+    fun getFields(fbeValue: com.chronoxor.test.StructOptional, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
 
@@ -1002,9 +991,9 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
         fbeCurrentSize += f142.fbeSize
 
         if ((fbeCurrentSize + f143.fbeSize) <= fbeStructSize)
-            fbeValue.f143 = f143.get(BigDecimal.valueOf(123456.123456))
+            fbeValue.f143 = f143.get(java.math.BigDecimal.valueOf(123456.123456))
         else
-            fbeValue.f143 = BigDecimal.valueOf(123456.123456)
+            fbeValue.f143 = java.math.BigDecimal.valueOf(123456.123456)
         fbeCurrentSize += f143.fbeSize
 
         if ((fbeCurrentSize + f144.fbeSize) <= fbeStructSize)
@@ -1038,9 +1027,9 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
         fbeCurrentSize += f148.fbeSize
 
         if ((fbeCurrentSize + f149.fbeSize) <= fbeStructSize)
-            fbeValue.f149 = f149.get(Instant.now())
+            fbeValue.f149 = f149.get(java.time.Instant.now())
         else
-            fbeValue.f149 = Instant.now()
+            fbeValue.f149 = java.time.Instant.now()
         fbeCurrentSize += f149.fbeSize
 
         if ((fbeCurrentSize + f150.fbeSize) <= fbeStructSize)
@@ -1056,9 +1045,9 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
         fbeCurrentSize += f151.fbeSize
 
         if ((fbeCurrentSize + f152.fbeSize) <= fbeStructSize)
-            fbeValue.f152 = f152.get(UUID.fromString("123e4567-e89b-12d3-a456-426655440000"))
+            fbeValue.f152 = f152.get(java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000"))
         else
-            fbeValue.f152 = UUID.fromString("123e4567-e89b-12d3-a456-426655440000")
+            fbeValue.f152 = java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000")
         fbeCurrentSize += f152.fbeSize
 
         if ((fbeCurrentSize + f153.fbeSize) <= fbeStructSize)
@@ -1168,7 +1157,7 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
     }
 
     // Set the struct value
-    fun set(fbeValue: StructOptional)
+    fun set(fbeValue: com.chronoxor.test.StructOptional)
     {
         val fbeBegin = setBegin()
         if (fbeBegin == 0L)
@@ -1180,7 +1169,7 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructOptional)
+    fun setFields(fbeValue: com.chronoxor.test.StructOptional)
     {
         parent.setFields(fbeValue)
         f100.set(fbeValue.f100)

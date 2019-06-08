@@ -7,19 +7,8 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding optional protoAccount final model
-class FinalModelOptionalprotoAccount(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelOptionalprotoAccount(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     // Get the allocation size
     fun fbeAllocationSize(optional: com.chronoxor.proto.Account?): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
@@ -54,7 +43,7 @@ class FinalModelOptionalprotoAccount(buffer: Buffer, offset: Long) : FinalModel(
     }
 
     // Get the optional value
-    fun get(size: Size): com.chronoxor.proto.Account?
+    fun get(size: com.chronoxor.fbe.Size): com.chronoxor.proto.Account?
     {
         assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 1) > _buffer.size)

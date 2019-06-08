@@ -7,23 +7,12 @@
 
 package com.chronoxor.protoex.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.protoex.*
-
 // Fast Binary Encoding OrderSide final model
-class FinalModelOrderSide(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelOrderSide(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(value: OrderSide): Long = fbeSize
+    fun fbeAllocationSize(value: com.chronoxor.protoex.OrderSide): Long = fbeSize
 
     // Final size
     override val fbeSize: Long = 1
@@ -38,17 +27,17 @@ class FinalModelOrderSide(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     }
 
     // Get the value
-    fun get(size: Size): OrderSide
+    fun get(size: com.chronoxor.fbe.Size): com.chronoxor.protoex.OrderSide
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return OrderSide()
+            return com.chronoxor.protoex.OrderSide()
 
         size.value = fbeSize
-        return OrderSide(readByte(fbeOffset))
+        return com.chronoxor.protoex.OrderSide(readByte(fbeOffset))
     }
 
     // Set the value
-    fun set(value: OrderSide): Long
+    fun set(value: com.chronoxor.protoex.OrderSide): Long
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

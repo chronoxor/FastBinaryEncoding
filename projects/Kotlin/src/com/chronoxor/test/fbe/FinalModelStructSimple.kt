@@ -7,60 +7,49 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructSimple final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FinalModelStructSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelStructSimple(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
-    val id: FinalModelInt32 = FinalModelInt32(buffer, 0)
-    val f1: FinalModelBoolean = FinalModelBoolean(buffer, 0)
-    val f2: FinalModelBoolean = FinalModelBoolean(buffer, 0)
-    val f3: FinalModelByte = FinalModelByte(buffer, 0)
-    val f4: FinalModelByte = FinalModelByte(buffer, 0)
-    val f5: FinalModelChar = FinalModelChar(buffer, 0)
-    val f6: FinalModelChar = FinalModelChar(buffer, 0)
-    val f7: FinalModelWChar = FinalModelWChar(buffer, 0)
-    val f8: FinalModelWChar = FinalModelWChar(buffer, 0)
-    val f9: FinalModelInt8 = FinalModelInt8(buffer, 0)
-    val f10: FinalModelInt8 = FinalModelInt8(buffer, 0)
-    val f11: FinalModelUInt8 = FinalModelUInt8(buffer, 0)
-    val f12: FinalModelUInt8 = FinalModelUInt8(buffer, 0)
-    val f13: FinalModelInt16 = FinalModelInt16(buffer, 0)
-    val f14: FinalModelInt16 = FinalModelInt16(buffer, 0)
-    val f15: FinalModelUInt16 = FinalModelUInt16(buffer, 0)
-    val f16: FinalModelUInt16 = FinalModelUInt16(buffer, 0)
-    val f17: FinalModelInt32 = FinalModelInt32(buffer, 0)
-    val f18: FinalModelInt32 = FinalModelInt32(buffer, 0)
-    val f19: FinalModelUInt32 = FinalModelUInt32(buffer, 0)
-    val f20: FinalModelUInt32 = FinalModelUInt32(buffer, 0)
-    val f21: FinalModelInt64 = FinalModelInt64(buffer, 0)
-    val f22: FinalModelInt64 = FinalModelInt64(buffer, 0)
-    val f23: FinalModelUInt64 = FinalModelUInt64(buffer, 0)
-    val f24: FinalModelUInt64 = FinalModelUInt64(buffer, 0)
-    val f25: FinalModelFloat = FinalModelFloat(buffer, 0)
-    val f26: FinalModelFloat = FinalModelFloat(buffer, 0)
-    val f27: FinalModelDouble = FinalModelDouble(buffer, 0)
-    val f28: FinalModelDouble = FinalModelDouble(buffer, 0)
-    val f29: FinalModelDecimal = FinalModelDecimal(buffer, 0)
-    val f30: FinalModelDecimal = FinalModelDecimal(buffer, 0)
-    val f31: FinalModelString = FinalModelString(buffer, 0)
-    val f32: FinalModelString = FinalModelString(buffer, 0)
-    val f33: FinalModelTimestamp = FinalModelTimestamp(buffer, 0)
-    val f34: FinalModelTimestamp = FinalModelTimestamp(buffer, 0)
-    val f35: FinalModelTimestamp = FinalModelTimestamp(buffer, 0)
-    val f36: FinalModelUUID = FinalModelUUID(buffer, 0)
-    val f37: FinalModelUUID = FinalModelUUID(buffer, 0)
-    val f38: FinalModelUUID = FinalModelUUID(buffer, 0)
+    val id: com.chronoxor.fbe.FinalModelInt32 = com.chronoxor.fbe.FinalModelInt32(buffer, 0)
+    val f1: com.chronoxor.fbe.FinalModelBoolean = com.chronoxor.fbe.FinalModelBoolean(buffer, 0)
+    val f2: com.chronoxor.fbe.FinalModelBoolean = com.chronoxor.fbe.FinalModelBoolean(buffer, 0)
+    val f3: com.chronoxor.fbe.FinalModelByte = com.chronoxor.fbe.FinalModelByte(buffer, 0)
+    val f4: com.chronoxor.fbe.FinalModelByte = com.chronoxor.fbe.FinalModelByte(buffer, 0)
+    val f5: com.chronoxor.fbe.FinalModelChar = com.chronoxor.fbe.FinalModelChar(buffer, 0)
+    val f6: com.chronoxor.fbe.FinalModelChar = com.chronoxor.fbe.FinalModelChar(buffer, 0)
+    val f7: com.chronoxor.fbe.FinalModelWChar = com.chronoxor.fbe.FinalModelWChar(buffer, 0)
+    val f8: com.chronoxor.fbe.FinalModelWChar = com.chronoxor.fbe.FinalModelWChar(buffer, 0)
+    val f9: com.chronoxor.fbe.FinalModelInt8 = com.chronoxor.fbe.FinalModelInt8(buffer, 0)
+    val f10: com.chronoxor.fbe.FinalModelInt8 = com.chronoxor.fbe.FinalModelInt8(buffer, 0)
+    val f11: com.chronoxor.fbe.FinalModelUInt8 = com.chronoxor.fbe.FinalModelUInt8(buffer, 0)
+    val f12: com.chronoxor.fbe.FinalModelUInt8 = com.chronoxor.fbe.FinalModelUInt8(buffer, 0)
+    val f13: com.chronoxor.fbe.FinalModelInt16 = com.chronoxor.fbe.FinalModelInt16(buffer, 0)
+    val f14: com.chronoxor.fbe.FinalModelInt16 = com.chronoxor.fbe.FinalModelInt16(buffer, 0)
+    val f15: com.chronoxor.fbe.FinalModelUInt16 = com.chronoxor.fbe.FinalModelUInt16(buffer, 0)
+    val f16: com.chronoxor.fbe.FinalModelUInt16 = com.chronoxor.fbe.FinalModelUInt16(buffer, 0)
+    val f17: com.chronoxor.fbe.FinalModelInt32 = com.chronoxor.fbe.FinalModelInt32(buffer, 0)
+    val f18: com.chronoxor.fbe.FinalModelInt32 = com.chronoxor.fbe.FinalModelInt32(buffer, 0)
+    val f19: com.chronoxor.fbe.FinalModelUInt32 = com.chronoxor.fbe.FinalModelUInt32(buffer, 0)
+    val f20: com.chronoxor.fbe.FinalModelUInt32 = com.chronoxor.fbe.FinalModelUInt32(buffer, 0)
+    val f21: com.chronoxor.fbe.FinalModelInt64 = com.chronoxor.fbe.FinalModelInt64(buffer, 0)
+    val f22: com.chronoxor.fbe.FinalModelInt64 = com.chronoxor.fbe.FinalModelInt64(buffer, 0)
+    val f23: com.chronoxor.fbe.FinalModelUInt64 = com.chronoxor.fbe.FinalModelUInt64(buffer, 0)
+    val f24: com.chronoxor.fbe.FinalModelUInt64 = com.chronoxor.fbe.FinalModelUInt64(buffer, 0)
+    val f25: com.chronoxor.fbe.FinalModelFloat = com.chronoxor.fbe.FinalModelFloat(buffer, 0)
+    val f26: com.chronoxor.fbe.FinalModelFloat = com.chronoxor.fbe.FinalModelFloat(buffer, 0)
+    val f27: com.chronoxor.fbe.FinalModelDouble = com.chronoxor.fbe.FinalModelDouble(buffer, 0)
+    val f28: com.chronoxor.fbe.FinalModelDouble = com.chronoxor.fbe.FinalModelDouble(buffer, 0)
+    val f29: com.chronoxor.fbe.FinalModelDecimal = com.chronoxor.fbe.FinalModelDecimal(buffer, 0)
+    val f30: com.chronoxor.fbe.FinalModelDecimal = com.chronoxor.fbe.FinalModelDecimal(buffer, 0)
+    val f31: com.chronoxor.fbe.FinalModelString = com.chronoxor.fbe.FinalModelString(buffer, 0)
+    val f32: com.chronoxor.fbe.FinalModelString = com.chronoxor.fbe.FinalModelString(buffer, 0)
+    val f33: com.chronoxor.fbe.FinalModelTimestamp = com.chronoxor.fbe.FinalModelTimestamp(buffer, 0)
+    val f34: com.chronoxor.fbe.FinalModelTimestamp = com.chronoxor.fbe.FinalModelTimestamp(buffer, 0)
+    val f35: com.chronoxor.fbe.FinalModelTimestamp = com.chronoxor.fbe.FinalModelTimestamp(buffer, 0)
+    val f36: com.chronoxor.fbe.FinalModelUUID = com.chronoxor.fbe.FinalModelUUID(buffer, 0)
+    val f37: com.chronoxor.fbe.FinalModelUUID = com.chronoxor.fbe.FinalModelUUID(buffer, 0)
+    val f38: com.chronoxor.fbe.FinalModelUUID = com.chronoxor.fbe.FinalModelUUID(buffer, 0)
     val f39: com.chronoxor.proto.fbe.FinalModelOrderSide = com.chronoxor.proto.fbe.FinalModelOrderSide(buffer, 0)
     val f40: com.chronoxor.proto.fbe.FinalModelOrderType = com.chronoxor.proto.fbe.FinalModelOrderType(buffer, 0)
     val f41: com.chronoxor.proto.fbe.FinalModelOrder = com.chronoxor.proto.fbe.FinalModelOrder(buffer, 0)
@@ -70,7 +59,7 @@ class FinalModelStructSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, 
 
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(fbeValue: StructSimple): Long = (0
+    fun fbeAllocationSize(fbeValue: com.chronoxor.test.StructSimple): Long = (0
         + id.fbeAllocationSize(fbeValue.id)
         + f1.fbeAllocationSize(fbeValue.f1)
         + f2.fbeAllocationSize(fbeValue.f2)
@@ -416,7 +405,7 @@ class FinalModelStructSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Get the struct value
-    fun get(fbeSize: Size, fbeValue: StructSimple = StructSimple()): StructSimple
+    fun get(fbeSize: com.chronoxor.fbe.Size, fbeValue: com.chronoxor.test.StructSimple = com.chronoxor.test.StructSimple()): com.chronoxor.test.StructSimple
     {
         _buffer.shift(fbeOffset)
         fbeSize.value = getFields(fbeValue)
@@ -426,11 +415,11 @@ class FinalModelStructSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, 
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructSimple): Long
+    fun getFields(fbeValue: com.chronoxor.test.StructSimple): Long
     {
         var fbeCurrentOffset = 0L
         var fbeCurrentSize = 0L
-        val fbeFieldSize = Size(0)
+        val fbeFieldSize = com.chronoxor.fbe.Size()
 
         id.fbeOffset = fbeCurrentOffset
         fbeValue.id = id.get(fbeFieldSize)
@@ -661,7 +650,7 @@ class FinalModelStructSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Set the struct value
-    fun set(fbeValue: StructSimple): Long
+    fun set(fbeValue: com.chronoxor.test.StructSimple): Long
     {
         _buffer.shift(fbeOffset)
         val fbeSize = setFields(fbeValue)
@@ -671,11 +660,11 @@ class FinalModelStructSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, 
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructSimple): Long
+    fun setFields(fbeValue: com.chronoxor.test.StructSimple): Long
     {
         var fbeCurrentOffset = 0L
         var fbeCurrentSize = 0L
-        val fbeFieldSize = Size(0)
+        val fbeFieldSize = com.chronoxor.fbe.Size()
 
         id.fbeOffset = fbeCurrentOffset
         fbeFieldSize.value = id.set(fbeValue.id)

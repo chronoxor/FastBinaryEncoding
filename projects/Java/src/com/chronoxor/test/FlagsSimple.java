@@ -5,18 +5,6 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public final class FlagsSimple implements Comparable<FlagsSimple>
 {
     public static final FlagsSimple FLAG_VALUE_0 = new FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_0);
@@ -32,7 +20,7 @@ public final class FlagsSimple implements Comparable<FlagsSimple>
     public FlagsSimple() {}
     public FlagsSimple(int value) { setEnum(value); }
     public FlagsSimple(FlagsSimpleEnum value) { setEnum(value); }
-    public FlagsSimple(EnumSet<FlagsSimpleEnum> value) { setEnum(value); }
+    public FlagsSimple(java.util.EnumSet<FlagsSimpleEnum> value) { setEnum(value); }
     public FlagsSimple(FlagsSimple value) { setEnum(value); }
 
     public FlagsSimpleEnum getEnum() { return value; }
@@ -42,7 +30,7 @@ public final class FlagsSimple implements Comparable<FlagsSimple>
 
     public void setEnum(int value) { this.flags = value; this.value = FlagsSimpleEnum.mapValue(value); }
     public void setEnum(FlagsSimpleEnum value) { this.value = value; this.flags = value.getRaw(); }
-    public void setEnum(EnumSet<FlagsSimpleEnum> value) { setEnum(FlagsSimple.fromSet(value)); }
+    public void setEnum(java.util.EnumSet<FlagsSimpleEnum> value) { setEnum(FlagsSimple.fromSet(value)); }
     public void setEnum(FlagsSimple value) { this.value = value.value; this.flags = value.flags; }
 
     public boolean hasFlags(int flags) { return (((this.flags & flags) != 0) && ((this.flags & flags) == flags)); }
@@ -57,11 +45,11 @@ public final class FlagsSimple implements Comparable<FlagsSimple>
     public FlagsSimple removeFlags(FlagsSimpleEnum flags) { removeFlags(flags.getRaw()); return this; }
     public FlagsSimple removeFlags(FlagsSimple flags) { removeFlags(flags.flags); return this; }
 
-    public EnumSet<FlagsSimpleEnum> getAllSet() { return value.getAllSet(); }
-    public EnumSet<FlagsSimpleEnum> getNoneSet() { return value.getNoneSet(); }
-    public EnumSet<FlagsSimpleEnum> getCurrentSet() { return value.getCurrentSet(); }
+    public java.util.EnumSet<FlagsSimpleEnum> getAllSet() { return value.getAllSet(); }
+    public java.util.EnumSet<FlagsSimpleEnum> getNoneSet() { return value.getNoneSet(); }
+    public java.util.EnumSet<FlagsSimpleEnum> getCurrentSet() { return value.getCurrentSet(); }
 
-    public static FlagsSimple fromSet(EnumSet<FlagsSimpleEnum> set)
+    public static FlagsSimple fromSet(java.util.EnumSet<FlagsSimpleEnum> set)
     {
         int result = 0;
         if (set.contains(FLAG_VALUE_0.getEnum()))

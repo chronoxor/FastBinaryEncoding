@@ -7,24 +7,13 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructSimple model
-class StructSimpleModel : Model
+class StructSimpleModel : com.chronoxor.fbe.Model
 {
     val model: FieldModelStructSimple
 
     constructor() { model = FieldModelStructSimple(buffer, 4) }
-    constructor(buffer: Buffer) : super(buffer) { model = FieldModelStructSimple(buffer, 4) }
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer) { model = FieldModelStructSimple(buffer, 4) }
 
     // Model size
     fun fbeSize(): Long = model.fbeSize + model.fbeExtra
@@ -65,7 +54,7 @@ class StructSimpleModel : Model
     }
 
     // Serialize the struct value
-    fun serialize(value: StructSimple): Long
+    fun serialize(value: com.chronoxor.test.StructSimple): Long
     {
         val fbeBegin = createBegin()
         model.set(value)
@@ -73,15 +62,15 @@ class StructSimpleModel : Model
     }
 
     // Deserialize the struct value
-    fun deserialize(): StructSimple { val value = StructSimple(); deserialize(value); return value }
+    fun deserialize(): com.chronoxor.test.StructSimple { val value = com.chronoxor.test.StructSimple(); deserialize(value); return value }
     @Suppress("UNUSED_VALUE")
-    fun deserialize(value: StructSimple): Long
+    fun deserialize(value: com.chronoxor.test.StructSimple): Long
     {
         var valueRef = value
 
         if ((buffer.offset + model.fbeOffset - 4) > buffer.size)
         {
-            valueRef = StructSimple()
+            valueRef = com.chronoxor.test.StructSimple()
             return 0
         }
 
@@ -89,7 +78,7 @@ class StructSimpleModel : Model
         assert(fbeFullSize >= model.fbeSize) { "Model is broken!" }
         if (fbeFullSize < model.fbeSize)
         {
-            valueRef = StructSimple()
+            valueRef = com.chronoxor.test.StructSimple()
             return 0
         }
 

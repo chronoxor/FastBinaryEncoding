@@ -7,24 +7,13 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructSet model
-class StructSetModel : Model
+class StructSetModel : com.chronoxor.fbe.Model
 {
     val model: FieldModelStructSet
 
     constructor() { model = FieldModelStructSet(buffer, 4) }
-    constructor(buffer: Buffer) : super(buffer) { model = FieldModelStructSet(buffer, 4) }
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer) { model = FieldModelStructSet(buffer, 4) }
 
     // Model size
     fun fbeSize(): Long = model.fbeSize + model.fbeExtra
@@ -65,7 +54,7 @@ class StructSetModel : Model
     }
 
     // Serialize the struct value
-    fun serialize(value: StructSet): Long
+    fun serialize(value: com.chronoxor.test.StructSet): Long
     {
         val fbeBegin = createBegin()
         model.set(value)
@@ -73,15 +62,15 @@ class StructSetModel : Model
     }
 
     // Deserialize the struct value
-    fun deserialize(): StructSet { val value = StructSet(); deserialize(value); return value }
+    fun deserialize(): com.chronoxor.test.StructSet { val value = com.chronoxor.test.StructSet(); deserialize(value); return value }
     @Suppress("UNUSED_VALUE")
-    fun deserialize(value: StructSet): Long
+    fun deserialize(value: com.chronoxor.test.StructSet): Long
     {
         var valueRef = value
 
         if ((buffer.offset + model.fbeOffset - 4) > buffer.size)
         {
-            valueRef = StructSet()
+            valueRef = com.chronoxor.test.StructSet()
             return 0
         }
 
@@ -89,7 +78,7 @@ class StructSetModel : Model
         assert(fbeFullSize >= model.fbeSize) { "Model is broken!" }
         if (fbeFullSize < model.fbeSize)
         {
-            valueRef = StructSet()
+            valueRef = com.chronoxor.test.StructSet()
             return 0
         }
 

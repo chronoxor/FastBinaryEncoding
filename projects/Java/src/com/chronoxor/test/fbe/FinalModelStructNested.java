@@ -5,20 +5,8 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructNested final model
-public final class FinalModelStructNested extends FinalModel
+public final class FinalModelStructNested extends com.chronoxor.fbe.FinalModel
 {
     public final FinalModelStructOptional parent;
     public final FinalModelEnumSimple f1000;
@@ -34,7 +22,7 @@ public final class FinalModelStructNested extends FinalModel
     public final FinalModelStructOptional f1010;
     public final FinalModelOptionalStructOptional f1011;
 
-    public FinalModelStructNested(Buffer buffer, long offset)
+    public FinalModelStructNested(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         parent = new FinalModelStructOptional(buffer, 0);
@@ -53,7 +41,7 @@ public final class FinalModelStructNested extends FinalModel
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(StructNested fbeValue)
+    public long fbeAllocationSize(com.chronoxor.test.StructNested fbeValue)
     {
         long fbeResult = 0
             + parent.fbeAllocationSize(fbeValue)
@@ -175,8 +163,8 @@ public final class FinalModelStructNested extends FinalModel
     }
 
     // Get the struct value
-    public StructNested get(Size fbeSize) { return get(fbeSize, new StructNested()); }
-    public StructNested get(Size fbeSize, StructNested fbeValue)
+    public com.chronoxor.test.StructNested get(com.chronoxor.fbe.Size fbeSize) { return get(fbeSize, new com.chronoxor.test.StructNested()); }
+    public com.chronoxor.test.StructNested get(com.chronoxor.fbe.Size fbeSize, com.chronoxor.test.StructNested fbeValue)
     {
         _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
@@ -185,11 +173,11 @@ public final class FinalModelStructNested extends FinalModel
     }
 
     // Get the struct fields values
-    public long getFields(StructNested fbeValue)
+    public long getFields(com.chronoxor.test.StructNested fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size(0);
 
         parent.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = parent.getFields(fbeValue);
@@ -260,7 +248,7 @@ public final class FinalModelStructNested extends FinalModel
     }
 
     // Set the struct value
-    public long set(StructNested fbeValue)
+    public long set(com.chronoxor.test.StructNested fbeValue)
     {
         _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
@@ -269,11 +257,11 @@ public final class FinalModelStructNested extends FinalModel
     }
 
     // Set the struct fields values
-    public long setFields(StructNested fbeValue)
+    public long setFields(com.chronoxor.test.StructNested fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size();
 
         parent.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = parent.setFields(fbeValue);

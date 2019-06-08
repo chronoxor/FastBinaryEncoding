@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructSimple->OptionalStructNested map field model
-public final class FieldModelMapStructSimpleOptionalStructNested extends FieldModel
+public final class FieldModelMapStructSimpleOptionalStructNested extends com.chronoxor.fbe.FieldModel
 {
     private final FieldModelStructSimple _modelKey;
     private final FieldModelOptionalStructNested _modelValue;
 
-    public FieldModelMapStructSimpleOptionalStructNested(Buffer buffer, long offset)
+    public FieldModelMapStructSimpleOptionalStructNested(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         _modelKey = new FieldModelStructSimple(buffer, offset);
@@ -85,7 +73,7 @@ public final class FieldModelMapStructSimpleOptionalStructNested extends FieldMo
     }
 
     // Map index operator
-    public Pair<FieldModelStructSimple, FieldModelOptionalStructNested> getItem(long index)
+    public com.chronoxor.fbe.Pair<FieldModelStructSimple, FieldModelOptionalStructNested> getItem(long index)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
 
@@ -99,11 +87,11 @@ public final class FieldModelMapStructSimpleOptionalStructNested extends FieldMo
         _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
         _modelKey.fbeShift(index * (_modelKey.fbeSize() + _modelValue.fbeSize()));
         _modelValue.fbeShift(index * (_modelKey.fbeSize() + _modelValue.fbeSize()));
-        return Pair.create(_modelKey, _modelValue);
+        return com.chronoxor.fbe.Pair.create(_modelKey, _modelValue);
     }
 
     // Resize the map and get its first model
-    public Pair<FieldModelStructSimple, FieldModelOptionalStructNested> resize(long size)
+    public com.chronoxor.fbe.Pair<FieldModelStructSimple, FieldModelOptionalStructNested> resize(long size)
     {
         int fbeMapSize = (int)(size * (_modelKey.fbeSize() + _modelValue.fbeSize()));
         int fbeMapOffset = (int)(_buffer.allocate(4 + fbeMapSize) - _buffer.getOffset());
@@ -115,7 +103,7 @@ public final class FieldModelMapStructSimpleOptionalStructNested extends FieldMo
 
         _modelKey.fbeOffset(fbeMapOffset + 4);
         _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
-        return Pair.create(_modelKey, _modelValue);
+        return com.chronoxor.fbe.Pair.create(_modelKey, _modelValue);
     }
 
     // Check if the map is valid
@@ -149,8 +137,8 @@ public final class FieldModelMapStructSimpleOptionalStructNested extends FieldMo
         return true;
     }
 
-    // Get the map as TreeMap
-    public void get(TreeMap<StructSimple, StructNested> values)
+    // Get the map as java.util.TreeMap
+    public void get(java.util.TreeMap<com.chronoxor.test.StructSimple, com.chronoxor.test.StructNested> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -165,16 +153,16 @@ public final class FieldModelMapStructSimpleOptionalStructNested extends FieldMo
         var fbeModel = getItem(0);
         for (long i = fbeMapSize; i-- > 0;)
         {
-            StructSimple key = fbeModel.getKey().get();
-            StructNested value = fbeModel.getValue().get();
+            com.chronoxor.test.StructSimple key = fbeModel.getKey().get();
+            com.chronoxor.test.StructNested value = fbeModel.getValue().get();
             values.put(key, value);
             fbeModel.getKey().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
             fbeModel.getValue().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
         }
     }
 
-    // Get the map as HashMap
-    public void get(HashMap<StructSimple, StructNested> values)
+    // Get the map as java.util.HashMap
+    public void get(java.util.HashMap<com.chronoxor.test.StructSimple, com.chronoxor.test.StructNested> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -189,16 +177,16 @@ public final class FieldModelMapStructSimpleOptionalStructNested extends FieldMo
         var fbeModel = getItem(0);
         for (long i = fbeMapSize; i-- > 0;)
         {
-            StructSimple key = fbeModel.getKey().get();
-            StructNested value = fbeModel.getValue().get();
+            com.chronoxor.test.StructSimple key = fbeModel.getKey().get();
+            com.chronoxor.test.StructNested value = fbeModel.getValue().get();
             values.put(key, value);
             fbeModel.getKey().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
             fbeModel.getValue().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
         }
     }
 
-    // Set the map as TreeMap
-    public void set(TreeMap<StructSimple, StructNested> values)
+    // Set the map as java.util.TreeMap
+    public void set(java.util.TreeMap<com.chronoxor.test.StructSimple, com.chronoxor.test.StructNested> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -218,8 +206,8 @@ public final class FieldModelMapStructSimpleOptionalStructNested extends FieldMo
         }
     }
 
-    // Set the map as HashMap
-    public void set(HashMap<StructSimple, StructNested> values)
+    // Set the map as java.util.HashMap
+    public void set(java.util.HashMap<com.chronoxor.test.StructSimple, com.chronoxor.test.StructNested> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

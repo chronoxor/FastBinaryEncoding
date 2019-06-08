@@ -5,16 +5,7 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-// Fast Binary Encoding UUID field model
+// Fast Binary Encoding java.util.UUID field model
 public final class FieldModelUUID extends FieldModel
 {
     public FieldModelUUID(Buffer buffer, long offset) { super(buffer, offset); }
@@ -24,8 +15,8 @@ public final class FieldModelUUID extends FieldModel
     public long fbeSize() { return 16; }
 
     // Get the value
-    public UUID get() { return get(UUIDGenerator.nil()); }
-    public UUID get(UUID defaults)
+    public java.util.UUID get() { return get(UUIDGenerator.nil()); }
+    public java.util.UUID get(java.util.UUID defaults)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
@@ -34,7 +25,7 @@ public final class FieldModelUUID extends FieldModel
     }
 
     // Set the value
-    public void set(UUID value)
+    public void set(java.util.UUID value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

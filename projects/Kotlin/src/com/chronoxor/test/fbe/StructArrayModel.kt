@@ -7,24 +7,13 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructArray model
-class StructArrayModel : Model
+class StructArrayModel : com.chronoxor.fbe.Model
 {
     val model: FieldModelStructArray
 
     constructor() { model = FieldModelStructArray(buffer, 4) }
-    constructor(buffer: Buffer) : super(buffer) { model = FieldModelStructArray(buffer, 4) }
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer) { model = FieldModelStructArray(buffer, 4) }
 
     // Model size
     fun fbeSize(): Long = model.fbeSize + model.fbeExtra
@@ -65,7 +54,7 @@ class StructArrayModel : Model
     }
 
     // Serialize the struct value
-    fun serialize(value: StructArray): Long
+    fun serialize(value: com.chronoxor.test.StructArray): Long
     {
         val fbeBegin = createBegin()
         model.set(value)
@@ -73,15 +62,15 @@ class StructArrayModel : Model
     }
 
     // Deserialize the struct value
-    fun deserialize(): StructArray { val value = StructArray(); deserialize(value); return value }
+    fun deserialize(): com.chronoxor.test.StructArray { val value = com.chronoxor.test.StructArray(); deserialize(value); return value }
     @Suppress("UNUSED_VALUE")
-    fun deserialize(value: StructArray): Long
+    fun deserialize(value: com.chronoxor.test.StructArray): Long
     {
         var valueRef = value
 
         if ((buffer.offset + model.fbeOffset - 4) > buffer.size)
         {
-            valueRef = StructArray()
+            valueRef = com.chronoxor.test.StructArray()
             return 0
         }
 
@@ -89,7 +78,7 @@ class StructArrayModel : Model
         assert(fbeFullSize >= model.fbeSize) { "Model is broken!" }
         if (fbeFullSize < model.fbeSize)
         {
-            valueRef = StructArray()
+            valueRef = com.chronoxor.test.StructArray()
             return 0
         }
 

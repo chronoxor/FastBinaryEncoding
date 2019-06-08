@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructSimple array field model
-public final class FieldModelArrayStructSimple extends FieldModel
+public final class FieldModelArrayStructSimple extends com.chronoxor.fbe.FieldModel
 {
     private final FieldModelStructSimple _model;
     private final long _size;
 
-    public FieldModelArrayStructSimple(Buffer buffer, long offset, long size)
+    public FieldModelArrayStructSimple(com.chronoxor.fbe.Buffer buffer, long offset, long size)
     {
         super(buffer, offset);
         _model = new FieldModelStructSimple(buffer, offset);
@@ -72,9 +60,9 @@ public final class FieldModelArrayStructSimple extends FieldModel
     }
 
     // Get the array
-    public StructSimple[] get()
+    public com.chronoxor.test.StructSimple[] get()
     {
-        var values = new StructSimple[(int)_size];
+        var values = new com.chronoxor.test.StructSimple[(int)_size];
 
         var fbeModel = getItem(0);
         for (long i = 0; i < _size; i++)
@@ -86,7 +74,7 @@ public final class FieldModelArrayStructSimple extends FieldModel
     }
 
     // Get the array
-    public void get(StructSimple[] values)
+    public void get(com.chronoxor.test.StructSimple[] values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -100,8 +88,8 @@ public final class FieldModelArrayStructSimple extends FieldModel
         }
     }
 
-    // Get the array as ArrayList
-    public void get(ArrayList<StructSimple> values)
+    // Get the array as java.util.ArrayList
+    public void get(java.util.ArrayList<com.chronoxor.test.StructSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -113,14 +101,14 @@ public final class FieldModelArrayStructSimple extends FieldModel
         var fbeModel = getItem(0);
         for (long i = _size; i-- > 0;)
         {
-            StructSimple value = fbeModel.get();
+            com.chronoxor.test.StructSimple value = fbeModel.get();
             values.add(value);
             fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
     // Set the array
-    public void set(StructSimple[] values)
+    public void set(com.chronoxor.test.StructSimple[] values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -138,8 +126,8 @@ public final class FieldModelArrayStructSimple extends FieldModel
         }
     }
 
-    // Set the array as List
-    public void set(ArrayList<StructSimple> values)
+    // Set the array as java.util.ArrayList
+    public void set(java.util.ArrayList<com.chronoxor.test.StructSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

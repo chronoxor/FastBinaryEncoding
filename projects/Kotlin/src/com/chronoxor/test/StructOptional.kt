@@ -7,17 +7,6 @@
 
 package com.chronoxor.test
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructOptional : StructSimple
 {
@@ -63,18 +52,18 @@ open class StructOptional : StructSimple
     var f139: Double? = null
     var f140: Double? = -123.456e+123
     var f141: Double? = null
-    var f142: BigDecimal? = null
-    var f143: BigDecimal? = BigDecimal.valueOf(123456.123456)
-    var f144: BigDecimal? = null
+    var f142: java.math.BigDecimal? = null
+    var f143: java.math.BigDecimal? = java.math.BigDecimal.valueOf(123456.123456)
+    var f144: java.math.BigDecimal? = null
     var f145: String? = null
     var f146: String? = "Initial string!"
     var f147: String? = null
-    var f148: Instant? = null
-    var f149: Instant? = Instant.now()
-    var f150: Instant? = null
-    var f151: UUID? = null
-    var f152: UUID? = UUID.fromString("123e4567-e89b-12d3-a456-426655440000")
-    var f153: UUID? = null
+    var f148: java.time.Instant? = null
+    var f149: java.time.Instant? = java.time.Instant.now()
+    var f150: java.time.Instant? = null
+    var f151: java.util.UUID? = null
+    var f152: java.util.UUID? = java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000")
+    var f153: java.util.UUID? = null
     var f154: com.chronoxor.proto.OrderSide? = null
     var f155: com.chronoxor.proto.OrderSide? = null
     var f156: com.chronoxor.proto.OrderType? = null
@@ -90,7 +79,7 @@ open class StructOptional : StructSimple
 
     constructor()
 
-    constructor(parent: StructSimple, f100: Boolean?, f101: Boolean?, f102: Boolean?, f103: Byte?, f104: Byte?, f105: Byte?, f106: Char?, f107: Char?, f108: Char?, f109: Char?, f110: Char?, f111: Char?, f112: Byte?, f113: Byte?, f114: Byte?, f115: UByte?, f116: UByte?, f117: UByte?, f118: Short?, f119: Short?, f120: Short?, f121: UShort?, f122: UShort?, f123: UShort?, f124: Int?, f125: Int?, f126: Int?, f127: UInt?, f128: UInt?, f129: UInt?, f130: Long?, f131: Long?, f132: Long?, f133: ULong?, f134: ULong?, f135: ULong?, f136: Float?, f137: Float?, f138: Float?, f139: Double?, f140: Double?, f141: Double?, f142: BigDecimal?, f143: BigDecimal?, f144: BigDecimal?, f145: String?, f146: String?, f147: String?, f148: Instant?, f149: Instant?, f150: Instant?, f151: UUID?, f152: UUID?, f153: UUID?, f154: com.chronoxor.proto.OrderSide?, f155: com.chronoxor.proto.OrderSide?, f156: com.chronoxor.proto.OrderType?, f157: com.chronoxor.proto.OrderType?, f158: com.chronoxor.proto.Order?, f159: com.chronoxor.proto.Order?, f160: com.chronoxor.proto.Balance?, f161: com.chronoxor.proto.Balance?, f162: com.chronoxor.proto.State?, f163: com.chronoxor.proto.State?, f164: com.chronoxor.proto.Account?, f165: com.chronoxor.proto.Account?): super(parent)
+    constructor(parent: StructSimple, f100: Boolean?, f101: Boolean?, f102: Boolean?, f103: Byte?, f104: Byte?, f105: Byte?, f106: Char?, f107: Char?, f108: Char?, f109: Char?, f110: Char?, f111: Char?, f112: Byte?, f113: Byte?, f114: Byte?, f115: UByte?, f116: UByte?, f117: UByte?, f118: Short?, f119: Short?, f120: Short?, f121: UShort?, f122: UShort?, f123: UShort?, f124: Int?, f125: Int?, f126: Int?, f127: UInt?, f128: UInt?, f129: UInt?, f130: Long?, f131: Long?, f132: Long?, f133: ULong?, f134: ULong?, f135: ULong?, f136: Float?, f137: Float?, f138: Float?, f139: Double?, f140: Double?, f141: Double?, f142: java.math.BigDecimal?, f143: java.math.BigDecimal?, f144: java.math.BigDecimal?, f145: String?, f146: String?, f147: String?, f148: java.time.Instant?, f149: java.time.Instant?, f150: java.time.Instant?, f151: java.util.UUID?, f152: java.util.UUID?, f153: java.util.UUID?, f154: com.chronoxor.proto.OrderSide?, f155: com.chronoxor.proto.OrderSide?, f156: com.chronoxor.proto.OrderType?, f157: com.chronoxor.proto.OrderType?, f158: com.chronoxor.proto.Order?, f159: com.chronoxor.proto.Order?, f160: com.chronoxor.proto.Balance?, f161: com.chronoxor.proto.Balance?, f162: com.chronoxor.proto.State?, f163: com.chronoxor.proto.State?, f164: com.chronoxor.proto.Account?, f165: com.chronoxor.proto.Account?): super(parent)
     {
         this.f100 = f100
         this.f101 = f101

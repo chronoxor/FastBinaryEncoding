@@ -5,33 +5,21 @@
 
 package com.chronoxor.proto.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 // Fast Binary Encoding Account final model
-public final class FinalModelAccount extends FinalModel
+public final class FinalModelAccount extends com.chronoxor.fbe.FinalModel
 {
-    public final FinalModelInt32 id;
-    public final FinalModelString name;
+    public final com.chronoxor.fbe.FinalModelInt32 id;
+    public final com.chronoxor.fbe.FinalModelString name;
     public final FinalModelState state;
     public final FinalModelBalance wallet;
     public final FinalModelOptionalBalance asset;
     public final FinalModelVectorOrder orders;
 
-    public FinalModelAccount(Buffer buffer, long offset)
+    public FinalModelAccount(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        id = new FinalModelInt32(buffer, 0);
-        name = new FinalModelString(buffer, 0);
+        id = new com.chronoxor.fbe.FinalModelInt32(buffer, 0);
+        name = new com.chronoxor.fbe.FinalModelString(buffer, 0);
         state = new FinalModelState(buffer, 0);
         wallet = new FinalModelBalance(buffer, 0);
         asset = new FinalModelOptionalBalance(buffer, 0);
@@ -39,7 +27,7 @@ public final class FinalModelAccount extends FinalModel
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(Account fbeValue)
+    public long fbeAllocationSize(com.chronoxor.proto.Account fbeValue)
     {
         long fbeResult = 0
             + id.fbeAllocationSize(fbeValue.id)
@@ -112,8 +100,8 @@ public final class FinalModelAccount extends FinalModel
     }
 
     // Get the struct value
-    public Account get(Size fbeSize) { return get(fbeSize, new Account()); }
-    public Account get(Size fbeSize, Account fbeValue)
+    public com.chronoxor.proto.Account get(com.chronoxor.fbe.Size fbeSize) { return get(fbeSize, new com.chronoxor.proto.Account()); }
+    public com.chronoxor.proto.Account get(com.chronoxor.fbe.Size fbeSize, com.chronoxor.proto.Account fbeValue)
     {
         _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
@@ -122,11 +110,11 @@ public final class FinalModelAccount extends FinalModel
     }
 
     // Get the struct fields values
-    public long getFields(Account fbeValue)
+    public long getFields(com.chronoxor.proto.Account fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size(0);
 
         id.fbeOffset(fbeCurrentOffset);
         fbeValue.id = id.get(fbeFieldSize);
@@ -162,7 +150,7 @@ public final class FinalModelAccount extends FinalModel
     }
 
     // Set the struct value
-    public long set(Account fbeValue)
+    public long set(com.chronoxor.proto.Account fbeValue)
     {
         _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
@@ -171,11 +159,11 @@ public final class FinalModelAccount extends FinalModel
     }
 
     // Set the struct fields values
-    public long setFields(Account fbeValue)
+    public long setFields(com.chronoxor.proto.Account fbeValue)
     {
         long fbeCurrentOffset = 0;
         long fbeCurrentSize = 0;
-        var fbeFieldSize = new Size(0);
+        var fbeFieldSize = new com.chronoxor.fbe.Size();
 
         id.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = id.set(fbeValue.id);

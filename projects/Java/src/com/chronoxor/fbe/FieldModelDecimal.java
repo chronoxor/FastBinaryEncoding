@@ -5,15 +5,6 @@
 
 package com.chronoxor.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
 // Fast Binary Encoding decimal field model
 public final class FieldModelDecimal extends FieldModel
 {
@@ -24,8 +15,8 @@ public final class FieldModelDecimal extends FieldModel
     public long fbeSize() { return 16; }
 
     // Get the decimal value
-    public BigDecimal get() { return get(BigDecimal.valueOf(0L)); }
-    public BigDecimal get(BigDecimal defaults)
+    public java.math.BigDecimal get() { return get(java.math.BigDecimal.valueOf(0L)); }
+    public java.math.BigDecimal get(java.math.BigDecimal defaults)
     {
         assert (defaults != null) : "Invalid default decimal value!";
         if (defaults == null)
@@ -46,13 +37,13 @@ public final class FieldModelDecimal extends FieldModel
             magnitude[magnitude.length - i - 1] = temp;
         }
 
-        var unscaled = new BigInteger(signum, magnitude);
+        var unscaled = new java.math.BigInteger(signum, magnitude);
 
-        return new BigDecimal(unscaled, scale);
+        return new java.math.BigDecimal(unscaled, scale);
     }
 
     // Set the decimal value
-    public void set(BigDecimal value)
+    public void set(java.math.BigDecimal value)
     {
         assert (value != null) : "Invalid decimal value!";
         if (value == null)
@@ -63,7 +54,7 @@ public final class FieldModelDecimal extends FieldModel
             return;
 
         // Get unscaled absolute value
-        BigInteger unscaled = value.abs().unscaledValue();
+        java.math.BigInteger unscaled = value.abs().unscaledValue();
         int bitLength = unscaled.bitLength();
         if ((bitLength < 0) || (bitLength > 96))
         {

@@ -7,23 +7,12 @@
 
 package com.chronoxor.enums.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.enums.*
-
 // Fast Binary Encoding EnumWChar final model
-class FinalModelEnumWChar(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelEnumWChar(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(value: EnumWChar): Long = fbeSize
+    fun fbeAllocationSize(value: com.chronoxor.enums.EnumWChar): Long = fbeSize
 
     // Final size
     override val fbeSize: Long = 4
@@ -38,17 +27,17 @@ class FinalModelEnumWChar(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     }
 
     // Get the value
-    fun get(size: Size): EnumWChar
+    fun get(size: com.chronoxor.fbe.Size): com.chronoxor.enums.EnumWChar
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return EnumWChar()
+            return com.chronoxor.enums.EnumWChar()
 
         size.value = fbeSize
-        return EnumWChar(readInt32(fbeOffset))
+        return com.chronoxor.enums.EnumWChar(readInt32(fbeOffset))
     }
 
     // Set the value
-    fun set(value: EnumWChar): Long
+    fun set(value: com.chronoxor.enums.EnumWChar): Long
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

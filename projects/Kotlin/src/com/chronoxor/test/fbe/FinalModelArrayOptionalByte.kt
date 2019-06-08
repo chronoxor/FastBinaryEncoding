@@ -7,19 +7,8 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding OptionalByte array final model
-class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _size: Long) : FinalModel(buffer, offset)
+class FinalModelArrayOptionalByte(buffer: com.chronoxor.fbe.Buffer, offset: Long, private val _size: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     private val _model = FinalModelOptionalByte(buffer, offset)
 
@@ -35,7 +24,7 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
         }
         return size
     }
-    fun fbeAllocationSize(values: ArrayList<Byte?>): Long
+    fun fbeAllocationSize(values: java.util.ArrayList<Byte?>): Long
     {
         var size: Long = 0
         var i: Long = 0
@@ -68,7 +57,7 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
     }
 
     // Get the array
-    fun get(size: Size): Array<Byte?>
+    fun get(size: com.chronoxor.fbe.Size): Array<Byte?>
     {
         val values = arrayOfNulls<Byte?>(_size.toInt())
 
@@ -80,7 +69,7 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
         }
 
         size.value = 0
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _model.fbeOffset = fbeOffset
         for (i in 0 until _size)
         {
@@ -100,7 +89,7 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
             return 0
 
         var size: Long = 0
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _model.fbeOffset = fbeOffset
         var i: Long = 0
         while ((i < values.size) && (i < _size))
@@ -114,8 +103,8 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
         return size
     }
 
-    // Get the array as ArrayList
-    fun get(values: ArrayList<Byte?>): Long
+    // Get the array as java.util.ArrayList
+    fun get(values: java.util.ArrayList<Byte?>): Long
     {
         values.clear()
 
@@ -126,7 +115,7 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
         values.ensureCapacity(_size.toInt())
 
         var size: Long = 0
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _model.fbeOffset = fbeOffset
         var i = _size
         while (i-- > 0)
@@ -160,8 +149,8 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
         return size
     }
 
-    // Set the array as List
-    fun set(values: ArrayList<Byte?>): Long
+    // Set the array as java.util.ArrayList
+    fun set(values: java.util.ArrayList<Byte?>): Long
     {
         assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset) > _buffer.size)

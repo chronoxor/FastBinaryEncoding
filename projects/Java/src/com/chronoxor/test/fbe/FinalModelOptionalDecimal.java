@@ -5,29 +5,17 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional Decimal final model
-public final class FinalModelOptionalDecimal extends FinalModel
+public final class FinalModelOptionalDecimal extends com.chronoxor.fbe.FinalModel
 {
-    public FinalModelOptionalDecimal(Buffer buffer, long offset)
+    public FinalModelOptionalDecimal(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        value = new FinalModelDecimal(buffer, 0);
+        value = new com.chronoxor.fbe.FinalModelDecimal(buffer, 0);
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(BigDecimal optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
+    public long fbeAllocationSize(java.math.BigDecimal optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
 
     // Checks if the object contains a value
     public boolean hasValue()
@@ -40,7 +28,7 @@ public final class FinalModelOptionalDecimal extends FinalModel
     }
 
     // Base final model value
-    public final FinalModelDecimal value;
+    public final com.chronoxor.fbe.FinalModelDecimal value;
 
     // Check if the optional value is valid
     @Override
@@ -60,7 +48,7 @@ public final class FinalModelOptionalDecimal extends FinalModel
     }
 
     // Get the optional value
-    public BigDecimal get(Size size)
+    public java.math.BigDecimal get(com.chronoxor.fbe.Size size)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())
@@ -76,14 +64,14 @@ public final class FinalModelOptionalDecimal extends FinalModel
         }
 
         _buffer.shift(fbeOffset() + 1);
-        BigDecimal optional = value.get(size);
+        java.math.BigDecimal optional = value.get(size);
         _buffer.unshift(fbeOffset() + 1);
         size.value += 1;
         return optional;
     }
 
     // Set the optional value
-    public long set(BigDecimal optional)
+    public long set(java.math.BigDecimal optional)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())

@@ -1336,10 +1336,12 @@ class FieldModelOptional_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMA
 }
 )CODE";
 
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -1490,16 +1492,18 @@ class FieldModelArray_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long, val size: 
 }
 )CODE";
 
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type + ">");
+    code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type_name + ">");
     if (optional)
-        code = std::regex_replace(code, std::regex("_INIT_"), "arrayOfNulls<" + type + ">(size.toInt())");
+        code = std::regex_replace(code, std::regex("_INIT_"), "arrayOfNulls<" + type_name + ">(size.toInt())");
     else
-        code = std::regex_replace(code, std::regex("_INIT_"), "Array(size.toInt()) { " + ConvertDefault(domain, base) + " }");
+        code = std::regex_replace(code, std::regex("_INIT_"), "Array(size.toInt()) { " + ConvertDefault(domain, package, base) + " }");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -1744,10 +1748,12 @@ class FieldModelVector_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN
 }
 )CODE";
 
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -1977,13 +1983,16 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Lo
 }
 )CODE";
 
+    std::string key_type_name = IsPackageType(key_type) ? key_type : (domain + package + "." + key_type);
+    std::string value_type_name = IsPackageType(value_type) ? value_type : (domain + package + "." + value_type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_KEY_NAME_"), key_name);
-    code = std::regex_replace(code, std::regex("_KEY_TYPE_"), key_type);
+    code = std::regex_replace(code, std::regex("_KEY_TYPE_"), key_type_name);
     code = std::regex_replace(code, std::regex("_KEY_MODEL_"), key_model);
     code = std::regex_replace(code, std::regex("_VALUE_NAME_"), value_name);
-    code = std::regex_replace(code, std::regex("_VALUE_TYPE_"), value_type);
+    code = std::regex_replace(code, std::regex("_VALUE_TYPE_"), value_type_name);
     code = std::regex_replace(code, std::regex("_VALUE_MODEL_"), value_model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -2013,22 +2022,22 @@ void GeneratorKotlin::GenerateFBEFieldModelEnumFlags(const std::string& domain, 
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ field model
-class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModel_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.FieldModel(buffer, offset)
 {
     // Field size
     override val fbeSize: Long = _SIZE_
 
     // Get the value
-    fun get(defaults: _NAME_ = _NAME_()): _NAME_
+    fun get(defaults: _DOMAIN__PACKAGE_._NAME_ = _DOMAIN__PACKAGE_._NAME_()): _DOMAIN__PACKAGE_._NAME_
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
-        return _NAME_(_READ_(fbeOffset))
+        return _DOMAIN__PACKAGE_._NAME_(_READ_(fbeOffset))
     }
 
     // Set the value
-    fun set(value: _NAME_)
+    fun set(value: _DOMAIN__PACKAGE_._NAME_)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -2040,6 +2049,8 @@ class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
+    code = std::regex_replace(code, std::regex("_PACKAGE_"), package);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_SIZE_"), ConvertEnumSize(type));
     code = std::regex_replace(code, std::regex("_READ_"), ConvertEnumRead(type));
@@ -2701,10 +2712,12 @@ class FinalModelOptional_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMA
 }
 )CODE";
 
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -2795,7 +2808,7 @@ class FinalModelArray_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long, private va
         }
 
         size.value = 0
-        val offset = Size()
+        val offset = _DOMAIN_fbe.Size()
         _model.fbeOffset = fbeOffset
         for (i in 0 until _size)
         {
@@ -2815,7 +2828,7 @@ class FinalModelArray_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long, private va
             return 0
 
         var size: Long = 0
-        val offset = Size()
+        val offset = _DOMAIN_fbe.Size()
         _model.fbeOffset = fbeOffset
         var i: Long = 0
         while ((i < values.size) && (i < _size))
@@ -2841,7 +2854,7 @@ class FinalModelArray_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long, private va
         values.ensureCapacity(_size.toInt())
 
         var size: Long = 0
-        val offset = Size()
+        val offset = _DOMAIN_fbe.Size()
         _model.fbeOffset = fbeOffset
         var i = _size
         while (i-- > 0)
@@ -2897,16 +2910,18 @@ class FinalModelArray_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long, private va
 }
 )CODE";
 
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type + ">");
+    code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type_name + ">");
     if (optional)
-        code = std::regex_replace(code, std::regex("_INIT_"), "arrayOfNulls<" + type + ">(_size.toInt())");
+        code = std::regex_replace(code, std::regex("_INIT_"), "arrayOfNulls<" + type_name + ">(_size.toInt())");
     else
-        code = std::regex_replace(code, std::regex("_INIT_"), "Array(_size.toInt()) { " + ConvertDefault(domain, base) + " }");
+        code = std::regex_replace(code, std::regex("_INIT_"), "Array(_size.toInt()) { " + ConvertDefault(domain, package, base) + " }");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -3000,7 +3015,7 @@ class FinalModelVector_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN
         values.ensureCapacity(fbeVectorSize.toInt())
 
         var size: Long = 4
-        val offset = Size()
+        val offset = _DOMAIN_fbe.Size()
         _model.fbeOffset = fbeOffset + 4
         for (i in 0 until fbeVectorSize)
         {
@@ -3027,7 +3042,7 @@ class FinalModelVector_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN
             return 4
 
         var size: Long = 4
-        val offset = Size()
+        val offset = _DOMAIN_fbe.Size()
         _model.fbeOffset = fbeOffset + 4
         for (i in 0 until fbeVectorSize)
         {
@@ -3054,7 +3069,7 @@ class FinalModelVector_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN
             return 4
 
         var size: Long = 4
-        val offset = Size()
+        val offset = _DOMAIN_fbe.Size()
         _model.fbeOffset = fbeOffset + 4
         for (i in 0 until fbeVectorSize)
         {
@@ -3129,10 +3144,12 @@ class FinalModelVector_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN
 }
 )CODE";
 
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -3233,7 +3250,7 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Lo
             return 4
 
         var size: Long = 4
-        val offset = Size()
+        val offset = _DOMAIN_fbe.Size()
         _modelKey.fbeOffset = fbeOffset + 4
         _modelValue.fbeOffset = fbeOffset + 4
         var i = fbeMapSize
@@ -3268,7 +3285,7 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Lo
             return 4
 
         var size: Long = 4
-        val offset = Size()
+        val offset = _DOMAIN_fbe.Size()
         _modelKey.fbeOffset = fbeOffset + 4
         _modelValue.fbeOffset = fbeOffset + 4
         var i = fbeMapSize
@@ -3342,13 +3359,16 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Lo
 }
 )CODE";
 
+    std::string key_type_name = IsPackageType(key_type) ? key_type : (domain + package + "." + key_type);
+    std::string value_type_name = IsPackageType(value_type) ? value_type : (domain + package + "." + value_type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_KEY_NAME_"), key_name);
-    code = std::regex_replace(code, std::regex("_KEY_TYPE_"), key_type);
+    code = std::regex_replace(code, std::regex("_KEY_TYPE_"), key_type_name);
     code = std::regex_replace(code, std::regex("_KEY_MODEL_"), key_model);
     code = std::regex_replace(code, std::regex("_VALUE_NAME_"), value_name);
-    code = std::regex_replace(code, std::regex("_VALUE_TYPE_"), value_type);
+    code = std::regex_replace(code, std::regex("_VALUE_TYPE_"), value_type_name);
     code = std::regex_replace(code, std::regex("_VALUE_MODEL_"), value_model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -3382,7 +3402,7 @@ class FinalModel_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.F
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(value: _NAME_): Long = fbeSize
+    fun fbeAllocationSize(value: _DOMAIN__PACKAGE_._NAME_): Long = fbeSize
 
     // Final size
     override val fbeSize: Long = _SIZE_
@@ -3397,17 +3417,17 @@ class FinalModel_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.F
     }
 
     // Get the value
-    fun get(size: _DOMAIN_fbe.Size): _NAME_
+    fun get(size: _DOMAIN_fbe.Size): _DOMAIN__PACKAGE_._NAME_
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return _NAME_()
+            return _DOMAIN__PACKAGE_._NAME_()
 
         size.value = fbeSize
-        return _NAME_(_READ_(fbeOffset))
+        return _DOMAIN__PACKAGE_._NAME_(_READ_(fbeOffset))
     }
 
     // Set the value
-    fun set(value: _NAME_): Long
+    fun set(value: _DOMAIN__PACKAGE_._NAME_): Long
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -3421,6 +3441,7 @@ class FinalModel_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.F
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
+    code = std::regex_replace(code, std::regex("_PACKAGE_"), package);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_SIZE_"), ConvertEnumSize(type));
     code = std::regex_replace(code, std::regex("_READ_"), ConvertEnumRead(type));
@@ -3820,13 +3841,13 @@ void GeneratorKotlin::GenerateFBEJson(const std::string& domain, const std::stri
     std::string code = R"CODE(
 internal class BytesJson : com.google.gson.JsonSerializer<ByteArray>, com.google.gson.JsonDeserializer<ByteArray>
 {
-    override fun serialize(src: ByteArray, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    override fun serialize(src: ByteArray, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         return com.google.gson.JsonPrimitive(java.util.Base64.getEncoder().encodeToString(src))
     }
 
     @Throws(com.google.gson.JsonParseException::class)
-    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): ByteArray
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): ByteArray
     {
         return java.util.Base64.getDecoder().decode(json.asString)
     }
@@ -3834,13 +3855,13 @@ internal class BytesJson : com.google.gson.JsonSerializer<ByteArray>, com.google
 
 internal class CharacterJson : com.google.gson.JsonSerializer<Char>, com.google.gson.JsonDeserializer<Char>
 {
-    override fun serialize(src: Char, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    override fun serialize(src: Char, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         return com.google.gson.JsonPrimitive(src.toLong())
     }
 
     @Throws(com.google.gson.JsonParseException::class)
-    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): Char
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): Char
     {
         return json.asLong.toChar()
     }
@@ -3848,59 +3869,59 @@ internal class CharacterJson : com.google.gson.JsonSerializer<Char>, com.google.
 
 internal class InstantJson : com.google.gson.JsonSerializer<java.time.Instant>, com.google.gson.JsonDeserializer<java.time.Instant>
 {
-    override fun serialize(src: java.time.Instant, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    override fun serialize(src: java.time.Instant, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         val nanoseconds = src.epochSecond * 1000000000 + src.nano
         return com.google.gson.JsonPrimitive(nanoseconds)
     }
 
     @Throws(com.google.gson.JsonParseException::class)
-    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): java.time.Instant
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.time.Instant
     {
-        val nanoseconds = json.ascom.google.gson.JsonPrimitive.asLong
+        val nanoseconds = json.asJsonPrimitive.asLong
         return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
     }
 }
 
 internal class BigDecimalJson : com.google.gson.JsonSerializer<java.math.BigDecimal>, com.google.gson.JsonDeserializer<java.math.BigDecimal>
 {
-    override fun serialize(src: java.math.BigDecimal, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    override fun serialize(src: java.math.BigDecimal, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         return com.google.gson.JsonPrimitive(src.toPlainString())
     }
 
     @Throws(com.google.gson.JsonParseException::class)
-    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): java.math.BigDecimal
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.math.BigDecimal
     {
-        return java.math.BigDecimal(json.ascom.google.gson.JsonPrimitive.asString)
+        return java.math.BigDecimal(json.asJsonPrimitive.asString)
     }
 }
 
 internal class UUIDJson : com.google.gson.JsonSerializer<java.util.UUID>, com.google.gson.JsonDeserializer<java.util.UUID>
 {
-    override fun serialize(src: java.util.UUID, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    override fun serialize(src: java.util.UUID, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         return com.google.gson.JsonPrimitive(src.toString())
     }
 
     @Throws(com.google.gson.JsonParseException::class)
-    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): java.util.UUID {
-        return java.util.UUID.fromString(json.ascom.google.gson.JsonPrimitive.asString)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.util.UUID {
+        return java.util.UUID.fromString(json.asJsonPrimitive.asString)
     }
 }
 
 internal class UByteNullableJson : com.google.gson.JsonSerializer<UByte?>, com.google.gson.JsonDeserializer<UByte?>
 {
-    override fun serialize(src: UByte?, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    override fun serialize(src: UByte?, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         if (src == null)
-            return JsonNull.INSTANCE
+            return com.google.gson.JsonNull.INSTANCE
 
         return com.google.gson.JsonPrimitive(src.toLong())
     }
 
     @Throws(com.google.gson.JsonParseException::class)
-    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): UByte?
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): UByte?
     {
         if (json.isJsonNull)
             return null
@@ -3911,16 +3932,16 @@ internal class UByteNullableJson : com.google.gson.JsonSerializer<UByte?>, com.g
 
 internal class UShortNullableJson : com.google.gson.JsonSerializer<UShort?>, com.google.gson.JsonDeserializer<UShort?>
 {
-    override fun serialize(src: UShort?, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    override fun serialize(src: UShort?, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         if (src == null)
-            return JsonNull.INSTANCE
+            return com.google.gson.JsonNull.INSTANCE
 
         return com.google.gson.JsonPrimitive(src.toLong())
     }
 
     @Throws(com.google.gson.JsonParseException::class)
-    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): UShort?
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): UShort?
     {
         if (json.isJsonNull)
             return null
@@ -3931,16 +3952,16 @@ internal class UShortNullableJson : com.google.gson.JsonSerializer<UShort?>, com
 
 internal class UIntNullableJson : com.google.gson.JsonSerializer<UInt?>, com.google.gson.JsonDeserializer<UInt?>
 {
-    override fun serialize(src: UInt?, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    override fun serialize(src: UInt?, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         if (src == null)
-            return JsonNull.INSTANCE
+            return com.google.gson.JsonNull.INSTANCE
 
         return com.google.gson.JsonPrimitive(src.toLong())
     }
 
     @Throws(com.google.gson.JsonParseException::class)
-    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): UInt?
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): UInt?
     {
         if (json.isJsonNull)
             return null
@@ -3951,16 +3972,16 @@ internal class UIntNullableJson : com.google.gson.JsonSerializer<UInt?>, com.goo
 
 internal class ULongNullableJson : com.google.gson.JsonSerializer<ULong?>, com.google.gson.JsonDeserializer<ULong?>
 {
-    override fun serialize(src: ULong?, typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    override fun serialize(src: ULong?, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
         if (src == null)
-            return JsonNull.INSTANCE
+            return com.google.gson.JsonNull.INSTANCE
 
         return com.google.gson.JsonPrimitive(src.toLong())
     }
 
     @Throws(com.google.gson.JsonParseException::class)
-    override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): ULong?
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): ULong?
     {
         if (json.isJsonNull)
             return null
@@ -4395,14 +4416,13 @@ void GeneratorKotlin::GenerateEnumJson(const std::shared_ptr<Package>& p, const 
 {
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
+    std::string enum_name = domain + package + "." + *e->name;
+    std::string adapter_name = *e->name + "Json";
 
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
-
-    std::string enum_name = *e->name;
-    std::string adapter_name = *e->name + "Json";
 
     // Open the output file
     CppCommon::Path output = path / (adapter_name + ".kt");
@@ -4421,7 +4441,7 @@ void GeneratorKotlin::GenerateEnumJson(const std::shared_ptr<Package>& p, const 
     Indent(1);
 
     // Generate JSON adapter serialize() method
-    WriteLineIndent("override fun serialize(src: " + enum_name + ", typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement");
+    WriteLineIndent("override fun serialize(src: " + enum_name + ", typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("return com.google.gson.JsonPrimitive(src.raw" + ConvertEnumFrom(enum_type) + ")");
@@ -4431,10 +4451,10 @@ void GeneratorKotlin::GenerateEnumJson(const std::shared_ptr<Package>& p, const 
     // Generate JSON adapter deserialize() method
     WriteLine();
     WriteLineIndent("@Throws(com.google.gson.JsonParseException::class)");
-    WriteLineIndent("override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext): " + enum_name);
+    WriteLineIndent("override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): " + enum_name);
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("return " + enum_name + "(json.ascom.google.gson.JsonPrimitive." + ConvertEnumGet(enum_type) + ")");
+    WriteLineIndent("return " + enum_name + "(json.asJsonPrimitive." + ConvertEnumGet(enum_type) + ")");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4527,12 +4547,12 @@ void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std
 
     // Generate flags getAllSet(), getNoneSet(), getCurrentSet() methods
     WriteLine();
-    WriteLineIndent("val allSet: EnumSet<" + flags_name + "> get() = EnumSet.allOf(" + flags_name + "::class.java)");
-    WriteLineIndent("val noneSet: EnumSet<" + flags_name + "> get() = EnumSet.noneOf(" + flags_name + "::class.java)");
-    WriteLineIndent("val currentSet: EnumSet<" + flags_name + "> get()");
+    WriteLineIndent("val allSet: java.util.EnumSet<" + flags_name + "> get() = java.util.EnumSet.allOf(" + flags_name + "::class.java)");
+    WriteLineIndent("val noneSet: java.util.EnumSet<" + flags_name + "> get() = java.util.EnumSet.noneOf(" + flags_name + "::class.java)");
+    WriteLineIndent("val currentSet: java.util.EnumSet<" + flags_name + "> get()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("val result = EnumSet.noneOf(" + flags_name + "::class.java)");
+    WriteLineIndent("val result = java.util.EnumSet.noneOf(" + flags_name + "::class.java)");
     if (f->body)
     {
         for (const auto& value : f->body->values)
@@ -4663,7 +4683,7 @@ void GeneratorKotlin::GenerateFlagsClass(const std::shared_ptr<Package>& p, cons
         // Generate flags class fromSet() method
         if (f->body->values.empty())
             WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
-        WriteLineIndent("fun fromSet(set: EnumSet<" + flags_type_name + ">): " + flags_name);
+        WriteLineIndent("fun fromSet(set: java.util.EnumSet<" + flags_type_name + ">): " + flags_name);
         WriteLineIndent("{");
         Indent(1);
         WriteLineIndent("@Suppress(\"CanBeVal\")");
@@ -4707,7 +4727,7 @@ void GeneratorKotlin::GenerateFlagsClass(const std::shared_ptr<Package>& p, cons
     WriteLineIndent("constructor()");
     WriteLineIndent("constructor(value: " + flags_base_type + ") { setEnum(value) }");
     WriteLineIndent("constructor(value: " + flags_type_name + ") { setEnum(value) }");
-    WriteLineIndent("constructor(value: EnumSet<" + flags_type_name + ">) { setEnum(value) }");
+    WriteLineIndent("constructor(value: java.util.EnumSet<" + flags_type_name + ">) { setEnum(value) }");
     WriteLineIndent("constructor(value: " + flags_name + ") { setEnum(value) }");
     WriteLine();
 
@@ -4718,7 +4738,7 @@ void GeneratorKotlin::GenerateFlagsClass(const std::shared_ptr<Package>& p, cons
     // Generate flags class setEnum() methods
     WriteLineIndent("fun setEnum(value: " + flags_base_type + ") { this.raw = value; this.value = " + flags_type_name + ".mapValue(value) }");
     WriteLineIndent("fun setEnum(value: " + flags_type_name + ") { this.value = value; this.raw = value.raw; }");
-    WriteLineIndent("fun setEnum(value: EnumSet<" + flags_type_name + ">) { setEnum(" + flags_name + ".fromSet(value)) }");
+    WriteLineIndent("fun setEnum(value: java.util.EnumSet<" + flags_type_name + ">) { setEnum(" + flags_name + ".fromSet(value)) }");
     WriteLineIndent("fun setEnum(value: " + flags_name + ") { this.value = value.value; this.raw = value.raw }");
 
     // Generate flags class hasFlags() methods
@@ -4741,9 +4761,9 @@ void GeneratorKotlin::GenerateFlagsClass(const std::shared_ptr<Package>& p, cons
 
     // Generate flags class getAllSet(), getNoneSet() and getCurrentSet() methods
     WriteLine();
-    WriteLineIndent("val allSet: EnumSet<" + flags_type_name + "> get() = value!!.allSet");
-    WriteLineIndent("val noneSet: EnumSet<" + flags_type_name + "> get() = value!!.noneSet");
-    WriteLineIndent("val currentSet: EnumSet<" + flags_type_name + "> get() = value!!.currentSet");
+    WriteLineIndent("val allSet: java.util.EnumSet<" + flags_type_name + "> get() = value!!.allSet");
+    WriteLineIndent("val noneSet: java.util.EnumSet<" + flags_type_name + "> get() = value!!.noneSet");
+    WriteLineIndent("val currentSet: java.util.EnumSet<" + flags_type_name + "> get() = value!!.currentSet");
 
     // Generate flags class compareTo() method
     WriteLine();
@@ -4829,14 +4849,13 @@ void GeneratorKotlin::GenerateFlagsJson(const std::shared_ptr<Package>& p, const
 {
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
+    std::string flags_name = domain + package + "." + *f->name;
+    std::string adapter_name = *f->name + "Json";
 
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
-
-    std::string flags_name = *f->name;
-    std::string adapter_name = *f->name + "Json";
 
     // Open the output file
     CppCommon::Path output = path / (adapter_name + ".kt");
@@ -4857,7 +4876,7 @@ void GeneratorKotlin::GenerateFlagsJson(const std::shared_ptr<Package>& p, const
     // Generate JSON adapter serialize() method
     WriteLine();
     WriteLineIndent("@Override");
-    WriteLineIndent("override fun serialize(src: " + flags_name + ", typeOfSrc: Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement");
+    WriteLineIndent("override fun serialize(src: " + flags_name + ", typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("return com.google.gson.JsonPrimitive(src.raw" + ConvertEnumFrom(flags_type) + ")");
@@ -4867,10 +4886,10 @@ void GeneratorKotlin::GenerateFlagsJson(const std::shared_ptr<Package>& p, const
     // Generate JSON adapter deserialize() method
     WriteLine();
     WriteLineIndent("@Throws(com.google.gson.JsonParseException::class)");
-    WriteLineIndent("override fun deserialize(json: com.google.gson.JsonElement, type: Type, context: com.google.gson.JsonDeserializationContext):" + flags_name);
+    WriteLineIndent("override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext):" + flags_name);
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("return " + flags_name + "(json.ascom.google.gson.JsonPrimitive." + ConvertEnumGet(flags_type) + ")");
+    WriteLineIndent("return " + flags_name + "(json.asJsonPrimitive." + ConvertEnumGet(flags_type) + ")");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4902,7 +4921,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"RemoveRedundantCallsOfConversionMethods\")");
     WriteIndent("open class " + *s->name);
     if (s->base && !s->base->empty())
-        Write(" : " + ConvertTypeName(domain, *s->base, false));
+        Write(" : " + ConvertTypeName(domain, "", *s->base, false));
     else
         Write(" : Comparable<Any?>");
     WriteLine();
@@ -4913,7 +4932,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     if (s->body && !s->body->fields.empty())
     {
         for (const auto& field : s->body->fields)
-            WriteLineIndent("var " + *field->name + ": " + ConvertTypeName(domain, *field, false) + " = " + ConvertDefault(domain, *field));
+            WriteLineIndent("var " + *field->name + ": " + ConvertTypeName(domain, "", *field, false) + " = " + ConvertDefault(domain, "", *field));
         WriteLine();
     }
 
@@ -4928,14 +4947,14 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
         WriteIndent("constructor(");
         if (s->base && !s->base->empty())
         {
-            Write("parent: " + ConvertTypeName(domain, *s->base, false));
+            Write("parent: " + ConvertTypeName(domain, "", *s->base, false));
             first = false;
         }
         if (s->body)
         {
             for (const auto& field : s->body->fields)
             {
-                Write(std::string(first ? "" : ", ") + *field->name + ": " + ConvertTypeName(domain, *field, false));
+                Write(std::string(first ? "" : ", ") + *field->name + ": " + ConvertTypeName(domain, "", *field, false));
                 first = false;
             }
         }
@@ -5264,6 +5283,7 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
 {
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
+    std::string struct_name = domain + package + "." + *s->name;
 
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
@@ -5491,7 +5511,7 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     // Generate struct field model get() methods
     WriteLine();
     WriteLineIndent("// Get the struct value");
-    WriteLineIndent("fun get(fbeValue: " + *s->name + " = " + *s->name + "()): " + *s->name);
+    WriteLineIndent("fun get(fbeValue: " + struct_name + " = " + struct_name + "()): " + struct_name);
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("val fbeBegin = getBegin()");
@@ -5511,7 +5531,7 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     WriteLine();
     WriteLineIndent("// Get the struct fields values");
     WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
-    WriteLineIndent("fun getFields(fbeValue: " + *s->name + ", fbeStructSize: Long)");
+    WriteLineIndent("fun getFields(fbeValue: " + struct_name + ", fbeStructSize: Long)");
     WriteLineIndent("{");
     Indent(1);
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
@@ -5536,14 +5556,14 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
                 if (field->array || field->vector || field->list || field->set || field->map || field->hash)
                     WriteLineIndent(*field->name + ".get(fbeValue." + *field->name + ")");
                 else
-                    WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? ConvertConstant(domain, *field->type, *field->value, field->optional) : "") + ")");
+                    WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? ConvertConstant(domain, package, *field->type, *field->value, field->optional) : "") + ")");
                 Indent(-1);
                 WriteLineIndent("else");
                 Indent(1);
                 if (field->vector || field->list || field->set || field->map || field->hash)
                     WriteLineIndent("fbeValue." + *field->name + ".clear()");
                 else
-                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(domain, *field));
+                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(domain, package, *field));
                 Indent(-1);
                 WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize");
             }
@@ -5594,7 +5614,7 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     // Generate struct field model set() method
     WriteLine();
     WriteLineIndent("// Set the struct value");
-    WriteLineIndent("fun set(fbeValue: " + *s->name + ")");
+    WriteLineIndent("fun set(fbeValue: " + struct_name + ")");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("val fbeBegin = setBegin()");
@@ -5612,7 +5632,7 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     WriteLine();
     WriteLineIndent("// Set the struct fields values");
     WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
-    WriteLineIndent("fun setFields(fbeValue: " + *s->name + ")");
+    WriteLineIndent("fun setFields(fbeValue: " + struct_name + ")");
     WriteLineIndent("{");
     Indent(1);
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
@@ -5641,6 +5661,7 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
 {
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
+    std::string struct_name = domain + package + "." + *s->name;
 
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
@@ -5658,7 +5679,7 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
     // Generate struct model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " model");
-    WriteLineIndent("class " + *s->name + "Model : Model");
+    WriteLineIndent("class " + *s->name + "Model : " + domain + "fbe.Model");
     WriteLineIndent("{");
     Indent(1);
 
@@ -5731,7 +5752,7 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
     // Generate struct model serialize() method
     WriteLine();
     WriteLineIndent("// Serialize the struct value");
-    WriteLineIndent("fun serialize(value: " + *s->name + "): Long");
+    WriteLineIndent("fun serialize(value: " + struct_name + "): Long");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("val fbeBegin = createBegin()");
@@ -5743,9 +5764,9 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
     // Generate struct model deserialize() methods
     WriteLine();
     WriteLineIndent("// Deserialize the struct value");
-    WriteLineIndent("fun deserialize(): " + *s->name + " { val value = " + *s->name + "(); deserialize(value); return value }");
+    WriteLineIndent("fun deserialize(): " + struct_name + " { val value = " + struct_name + "(); deserialize(value); return value }");
     WriteLineIndent("@Suppress(\"UNUSED_VALUE\")");
-    WriteLineIndent("fun deserialize(value: " + *s->name + "): Long");
+    WriteLineIndent("fun deserialize(value: " + struct_name + "): Long");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("var valueRef = value");
@@ -5753,7 +5774,7 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
     WriteLineIndent("if ((buffer.offset + model.fbeOffset - 4) > buffer.size)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("valueRef = " + *s->name + "()");
+    WriteLineIndent("valueRef = " + struct_name + "()");
     WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
@@ -5763,7 +5784,7 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
     WriteLineIndent("if (fbeFullSize < model.fbeSize)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("valueRef = " + *s->name + "()");
+    WriteLineIndent("valueRef = " + struct_name + "()");
     WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
@@ -5798,6 +5819,7 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
 {
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
+    std::string struct_name = domain + package + "." + *s->name;
 
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
@@ -5831,7 +5853,7 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     WriteLine();
     WriteLineIndent("// Get the allocation size");
     WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
-    WriteLineIndent("fun fbeAllocationSize(fbeValue: " + *s->name + "): Long = (0");
+    WriteLineIndent("fun fbeAllocationSize(fbeValue: " + struct_name + "): Long = (0");
     Indent(1);
     if (s->base && !s->base->empty())
         WriteLineIndent("+ parent.fbeAllocationSize(fbeValue)");
@@ -5914,7 +5936,7 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     // Generate struct final model get() methods
     WriteLine();
     WriteLineIndent("// Get the struct value");
-    WriteLineIndent("fun get(fbeSize: " + domain + "fbe.Size, fbeValue: " + *s->name + " = " + *s->name + "()): " + *s->name);
+    WriteLineIndent("fun get(fbeSize: " + domain + "fbe.Size, fbeValue: " + struct_name + " = " + struct_name + "()): " + struct_name);
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("_buffer.shift(fbeOffset)");
@@ -5928,14 +5950,14 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     WriteLine();
     WriteLineIndent("// Get the struct fields values");
     WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
-    WriteLineIndent("fun getFields(fbeValue: " + *s->name + "): Long");
+    WriteLineIndent("fun getFields(fbeValue: " + struct_name + "): Long");
     WriteLineIndent("{");
     Indent(1);
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
         WriteLineIndent("var fbeCurrentOffset = 0L");
         WriteLineIndent("var fbeCurrentSize = 0L");
-        WriteLineIndent("val fbeFieldSize = Size(0)");
+        WriteLineIndent("val fbeFieldSize = " + domain + "fbe.Size()");
         if (s->base && !s->base->empty())
         {
             WriteLine();
@@ -5969,7 +5991,7 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     // Generate struct final model set() method
     WriteLine();
     WriteLineIndent("// Set the struct value");
-    WriteLineIndent("fun set(fbeValue: " + *s->name + "): Long");
+    WriteLineIndent("fun set(fbeValue: " + struct_name + "): Long");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("_buffer.shift(fbeOffset)");
@@ -5983,14 +6005,14 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     WriteLine();
     WriteLineIndent("// Set the struct fields values");
     WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
-    WriteLineIndent("fun setFields(fbeValue: " + *s->name + "): Long");
+    WriteLineIndent("fun setFields(fbeValue: " + struct_name + "): Long");
     WriteLineIndent("{");
     Indent(1);
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
         WriteLineIndent("var fbeCurrentOffset = 0L");
         WriteLineIndent("var fbeCurrentSize = 0L");
-        WriteLineIndent("val fbeFieldSize = Size(0)");
+        WriteLineIndent("val fbeFieldSize = " + domain + "fbe.Size()");
         if (s->base && !s->base->empty())
         {
             WriteLine();
@@ -6033,6 +6055,7 @@ void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p
 {
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
+    std::string struct_name = domain + package + "." + *s->name;
 
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
@@ -6099,7 +6122,7 @@ void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p
     // Generate struct model final serialize() method
     WriteLine();
     WriteLineIndent("// Serialize the struct value");
-    WriteLineIndent("fun serialize(value: " + *s->name + "): Long");
+    WriteLineIndent("fun serialize(value: " + struct_name + "): Long");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("val fbeInitialSize = buffer.size");
@@ -6126,9 +6149,9 @@ void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p
     // Generate struct model final deserialize() methods
     WriteLine();
     WriteLineIndent("// Deserialize the struct value");
-    WriteLineIndent("fun deserialize(): " + *s->name + " { val value = " + *s->name + "(); deserialize(value); return value }");
+    WriteLineIndent("fun deserialize(): " + struct_name + " { val value = " + struct_name + "(); deserialize(value); return value }");
     WriteLineIndent("@Suppress(\"UNUSED_VALUE\")");
-    WriteLineIndent("fun deserialize(value: " + *s->name + "): Long");
+    WriteLineIndent("fun deserialize(value: " + struct_name + "): Long");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("var valueRef = value");
@@ -6147,7 +6170,7 @@ void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p
     WriteLineIndent("return 8");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("val fbeSize = Size(0)");
+    WriteLineIndent("val fbeSize = " + domain + "fbe.Size()");
     WriteLineIndent("valueRef = _model.get(fbeSize, valueRef)");
     WriteLineIndent("return 8 + fbeSize.value");
     Indent(-1);
@@ -6679,9 +6702,9 @@ void GeneratorKotlin::GenerateJson(const std::shared_ptr<Package>& p)
     if (p->body)
     {
         for (const auto& e : p->body->enums)
-            WriteLineIndent("builder.registerTypeAdapter(" + *e->name + "::class.java, " + *e->name + "Json())");
+            WriteLineIndent("builder.registerTypeAdapter(" + domain + package + "." + *e->name + "::class.java, " + *e->name + "Json())");
         for (const auto& f : p->body->flags)
-            WriteLineIndent("builder.registerTypeAdapter(" + *f->name + "::class.java, " + *f->name + "Json())");
+            WriteLineIndent("builder.registerTypeAdapter(" + domain + package + "." + *f->name + "::class.java, " + *f->name + "Json())");
     }
     WriteLineIndent("return builder");
     Indent(-1);
@@ -6710,6 +6733,29 @@ bool GeneratorKotlin::IsKnownType(const std::string& type)
             (type == "float") || (type == "double") ||
             (type == "decimal") || (type == "string") ||
             (type == "timestamp") || (type == "uuid"));
+}
+
+bool GeneratorKotlin::IsImportedType(const std::string& type)
+{
+    size_t pos = type.find_last_of('.');
+    return (pos != std::string::npos);
+}
+
+bool GeneratorKotlin::IsPackageType(const std::string& type)
+{
+    if (IsKnownType(type) || IsImportedType(type))
+        return true;
+
+    return ((type == "Boolean") || (type == "Boolean?") ||
+            (type == "Byte") || (type == "Byte?") || (type == "ByteArray") || (type == "ByteArray?") ||
+            (type == "Char") || (type == "Char?") ||
+            (type == "Byte") || (type == "Byte?") || (type == "UByte") || (type == "UByte?") ||
+            (type == "Short") || (type == "Short?") || (type == "UShort") || (type == "UShort?") ||
+            (type == "Int") || (type == "Int?") || (type == "UInt") || (type == "UInt?") ||
+            (type == "Long") || (type == "Long?") || (type == "ULong") || (type == "ULong?") ||
+            (type == "Float") || (type == "Float?") || (type == "Double") || (type == "Double?") ||
+            (type == "java.math.BigDecimal") || (type == "java.math.BigDecimal?") || (type == "java.math.BigInteger") || (type == "java.math.BigInteger?") ||
+            (type == "String") || (type == "String?") || (type == "java.time.Instant") || (type == "java.time.Instant?") || (type == "java.util.UUID") || (type == "java.util.UUID?"));
 }
 
 bool GeneratorKotlin::IsPrimitiveType(const std::string& type, bool optional)
@@ -7025,7 +7071,7 @@ std::string GeneratorKotlin::ConvertPrimitiveTypeName(const std::string& type)
     return "";
 }
 
-std::string GeneratorKotlin::ConvertTypeName(const std::string& domain, const std::string& type, bool optional)
+std::string GeneratorKotlin::ConvertTypeName(const std::string& domain, const std::string& package, const std::string& type, bool optional)
 {
     std::string opt = optional ? "?" : "";
 
@@ -7078,31 +7124,33 @@ std::string GeneratorKotlin::ConvertTypeName(const std::string& domain, const st
         ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
+    else if (!package.empty())
+        ns = domain + package + ".";
 
     return ns + t + opt;
 }
 
-std::string GeneratorKotlin::ConvertTypeName(const std::string& domain, const StructField& field, bool typeless)
+std::string GeneratorKotlin::ConvertTypeName(const std::string& domain, const std::string& package, const StructField& field, bool typeless)
 {
     if (field.array)
-        return "Array" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.type, field.optional) + ">"));
+        return "Array" + (typeless ? "" : ("<" + ConvertTypeName(domain, package, *field.type, field.optional) + ">"));
     else if (field.vector)
-        return "java.util.ArrayList" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.type, field.optional) + ">"));
+        return "java.util.ArrayList" + (typeless ? "" : ("<" + ConvertTypeName(domain, package, *field.type, field.optional) + ">"));
     else if (field.list)
-        return "java.util.LinkedList" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.type, field.optional) + ">"));
+        return "java.util.LinkedList" + (typeless ? "" : ("<" + ConvertTypeName(domain, package, *field.type, field.optional) + ">"));
     else if (field.set)
-        return "java.util.HashSet" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.key, field.optional) + ">"));
+        return "java.util.HashSet" + (typeless ? "" : ("<" + ConvertTypeName(domain, package, *field.key, field.optional) + ">"));
     else if (field.map)
-        return "java.util.TreeMap" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.key, false) + ", " + ConvertTypeName(domain, *field.type, field.optional) +">"));
+        return "java.util.TreeMap" + (typeless ? "" : ("<" + ConvertTypeName(domain, package, *field.key, false) + ", " + ConvertTypeName(domain, package, *field.type, field.optional) +">"));
     else if (field.hash)
-        return "java.util.HashMap" + (typeless ? "" : ("<" + ConvertTypeName(domain, *field.key, false) + ", " + ConvertTypeName(domain, *field.type, field.optional) +">"));
+        return "java.util.HashMap" + (typeless ? "" : ("<" + ConvertTypeName(domain, package, *field.key, false) + ", " + ConvertTypeName(domain, package, *field.type, field.optional) +">"));
 
-    return ConvertTypeName(domain, *field.type, field.optional);
+    return ConvertTypeName(domain, package, *field.type, field.optional);
 }
 
 std::string GeneratorKotlin::ConvertBaseFieldName(const std::string& domain, const std::string& type, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     std::string ns = "";
     std::string t = type;
@@ -7158,7 +7206,7 @@ std::string GeneratorKotlin::ConvertTypeFieldName(const std::string& type)
     else if (type == "timestamp")
         return "Timestamp";
     else if (type == "uuid")
-        return "java.util.UUID";
+        return "UUID";
 
     std::string result = type;
     CppCommon::StringUtils::ReplaceAll(result, ".", "");
@@ -7224,7 +7272,7 @@ std::string GeneratorKotlin::ConvertTypeFieldType(const std::string& domain, con
 
 std::string GeneratorKotlin::ConvertTypeFieldDeclaration(const std::string& domain, const std::string& type, bool optional, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     std::string ns = "";
     std::string opt = optional ? "Optional" : "";
@@ -7238,13 +7286,15 @@ std::string GeneratorKotlin::ConvertTypeFieldDeclaration(const std::string& doma
         ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
+    else
+        ns = (IsKnownType(type) && !optional) ? (domain + "fbe.") : "";
 
     return ns + modelType + "Model" + opt + ConvertTypeFieldName(t);
 }
 
 std::string GeneratorKotlin::ConvertTypeFieldDeclaration(const std::string& domain, const StructField& field, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (field.array)
         return modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type);
@@ -7260,7 +7310,7 @@ std::string GeneratorKotlin::ConvertTypeFieldDeclaration(const std::string& doma
 
 std::string GeneratorKotlin::ConvertTypeFieldInitialization(const std::string& domain, const StructField& field, const std::string& offset, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (field.array)
         return modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ", " + std::to_string(field.N) + ")";
@@ -7283,11 +7333,13 @@ std::string GeneratorKotlin::ConvertTypeFieldInitialization(const std::string& d
         ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
+    else
+        ns = IsKnownType(type) ? (domain + "fbe.") : "";
 
     return ns + modelType + "Model" + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
 }
 
-std::string GeneratorKotlin::ConvertConstant(const std::string& domain, const std::string& type, const std::string& value, bool optional)
+std::string GeneratorKotlin::ConvertConstant(const std::string& domain, const std::string& package, const std::string& type, const std::string& value, bool optional)
 {
     if (value == "true")
         return "true";
@@ -7368,10 +7420,20 @@ std::string GeneratorKotlin::ConvertConstant(const std::string& domain, const st
             bool first = true;
             for (const auto& it : flags)
             {
-                result += (first ? "" : ", ") + CppCommon::StringUtils::ToTrim(it) + ".value";
+                std::string flag = CppCommon::StringUtils::ToTrim(it);
+                size_t pos = flag.find_last_of('.');
+                if (pos != std::string::npos)
+                    flag = (package.empty() ? "" : (domain + package + ".")) + flag;
+                result += (first ? "" : ", ") + flag + ".value";
                 first = false;
             }
-            result = type + ".fromSet(EnumSet.of(" + result + "))";
+            result = (package.empty() ? "" : (domain + package + ".")) + type + ".fromSet(java.util.EnumSet.of(" + result + "))";
+        }
+        else
+        {
+            size_t pos = result.find_last_of('.');
+            if (pos != std::string::npos)
+                result = (package.empty() ? "" : (domain + package + ".")) + result;
         }
     }
 
@@ -7409,7 +7471,7 @@ std::string GeneratorKotlin::ConvertConstantSuffix(const std::string& type)
     return "";
 }
 
-std::string GeneratorKotlin::ConvertDefault(const std::string& domain, const std::string& type)
+std::string GeneratorKotlin::ConvertDefault(const std::string& domain, const std::string& package, const std::string& type)
 {
     if (type == "bool")
         return "false";
@@ -7448,27 +7510,40 @@ std::string GeneratorKotlin::ConvertDefault(const std::string& domain, const std
     else if (type == "uuid")
         return domain + "fbe.UUIDGenerator.nil()";
 
-    return type + "()";
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        ns = domain + ns;
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+    else if (!package.empty())
+        ns = domain + package + ".";
+
+    return ns + t + "()";
 }
 
-std::string GeneratorKotlin::ConvertDefault(const std::string& domain, const StructField& field)
+std::string GeneratorKotlin::ConvertDefault(const std::string& domain, const std::string& package, const StructField& field)
 {
     if (field.value)
-        return ConvertConstant(domain, *field.type, *field.value, field.optional);
+        return ConvertConstant(domain, package, *field.type, *field.value, field.optional);
 
     if (field.array)
         if (field.optional)
-            return "arrayOfNulls<" + ConvertTypeName(domain, *field.type, field.optional) + ">(" + std::to_string(field.N) + ")";
+            return "arrayOfNulls<" + ConvertTypeName(domain, package, *field.type, field.optional) + ">(" + std::to_string(field.N) + ")";
         else
-            return "Array(" + std::to_string(field.N) + ") { " + ConvertDefault(domain, *field.type) + " }";
+            return "Array(" + std::to_string(field.N) + ") { " + ConvertDefault(domain, package, *field.type) + " }";
     else if (field.vector || field.list || field.set || field.map || field.hash)
-        return ConvertTypeName(domain, field, true) + "()";
+        return ConvertTypeName(domain, package, field, true) + "()";
     else if (field.optional)
         return "null";
-    else if (!IsKnownType(*field.type))
-        return ConvertTypeName(domain, field, true) + "()";
+    else if (!IsPackageType(*field.type))
+        return ConvertTypeName(domain, package, field, true) + "()";
 
-    return ConvertDefault(domain, *field.type);
+    return ConvertDefault(domain, package, *field.type);
 }
 
 std::string GeneratorKotlin::ConvertOutputStreamType(const std::string& type, const std::string& name, bool optional)

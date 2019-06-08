@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding OptionalFlagsSimple array field model
-public final class FieldModelArrayOptionalFlagsSimple extends FieldModel
+public final class FieldModelArrayOptionalFlagsSimple extends com.chronoxor.fbe.FieldModel
 {
     private final FieldModelOptionalFlagsSimple _model;
     private final long _size;
 
-    public FieldModelArrayOptionalFlagsSimple(Buffer buffer, long offset, long size)
+    public FieldModelArrayOptionalFlagsSimple(com.chronoxor.fbe.Buffer buffer, long offset, long size)
     {
         super(buffer, offset);
         _model = new FieldModelOptionalFlagsSimple(buffer, offset);
@@ -72,9 +60,9 @@ public final class FieldModelArrayOptionalFlagsSimple extends FieldModel
     }
 
     // Get the array
-    public FlagsSimple[] get()
+    public com.chronoxor.test.FlagsSimple[] get()
     {
-        var values = new FlagsSimple[(int)_size];
+        var values = new com.chronoxor.test.FlagsSimple[(int)_size];
 
         var fbeModel = getItem(0);
         for (long i = 0; i < _size; i++)
@@ -86,7 +74,7 @@ public final class FieldModelArrayOptionalFlagsSimple extends FieldModel
     }
 
     // Get the array
-    public void get(FlagsSimple[] values)
+    public void get(com.chronoxor.test.FlagsSimple[] values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -100,8 +88,8 @@ public final class FieldModelArrayOptionalFlagsSimple extends FieldModel
         }
     }
 
-    // Get the array as ArrayList
-    public void get(ArrayList<FlagsSimple> values)
+    // Get the array as java.util.ArrayList
+    public void get(java.util.ArrayList<com.chronoxor.test.FlagsSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -113,14 +101,14 @@ public final class FieldModelArrayOptionalFlagsSimple extends FieldModel
         var fbeModel = getItem(0);
         for (long i = _size; i-- > 0;)
         {
-            FlagsSimple value = fbeModel.get();
+            com.chronoxor.test.FlagsSimple value = fbeModel.get();
             values.add(value);
             fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
     // Set the array
-    public void set(FlagsSimple[] values)
+    public void set(com.chronoxor.test.FlagsSimple[] values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -138,8 +126,8 @@ public final class FieldModelArrayOptionalFlagsSimple extends FieldModel
         }
     }
 
-    // Set the array as List
-    public void set(ArrayList<FlagsSimple> values)
+    // Set the array as java.util.ArrayList
+    public void set(java.util.ArrayList<com.chronoxor.test.FlagsSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

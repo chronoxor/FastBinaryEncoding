@@ -5,27 +5,15 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding Bytes vector field model
-public final class FieldModelVectorBytes extends FieldModel
+public final class FieldModelVectorBytes extends com.chronoxor.fbe.FieldModel
 {
-    private final FieldModelBytes _model;
+    private final com.chronoxor.fbe.FieldModelBytes _model;
 
-    public FieldModelVectorBytes(Buffer buffer, long offset)
+    public FieldModelVectorBytes(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        _model = new FieldModelBytes(buffer, offset);
+        _model = new com.chronoxor.fbe.FieldModelBytes(buffer, offset);
     }
 
     // Get the field size
@@ -79,7 +67,7 @@ public final class FieldModelVectorBytes extends FieldModel
     }
 
     // Vector index operator
-    public FieldModelBytes getItem(long index)
+    public com.chronoxor.fbe.FieldModelBytes getItem(long index)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
 
@@ -95,7 +83,7 @@ public final class FieldModelVectorBytes extends FieldModel
     }
 
     // Resize the vector and get its first model
-    public FieldModelBytes resize(long size)
+    public com.chronoxor.fbe.FieldModelBytes resize(long size)
     {
         int fbeVectorSize = (int)(size * _model.fbeSize());
         int fbeVectorOffset = (int)(_buffer.allocate(4 + fbeVectorSize) - _buffer.getOffset());
@@ -136,8 +124,8 @@ public final class FieldModelVectorBytes extends FieldModel
         return true;
     }
 
-    // Get the vector as ArrayList
-    public void get(ArrayList<ByteBuffer> values)
+    // Get the vector as java.util.ArrayList
+    public void get(java.util.ArrayList<java.nio.ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -154,14 +142,14 @@ public final class FieldModelVectorBytes extends FieldModel
         var fbeModel = getItem(0);
         for (long i = fbeVectorSize; i-- > 0;)
         {
-            ByteBuffer value = fbeModel.get();
+            java.nio.ByteBuffer value = fbeModel.get();
             values.add(value);
             fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
-    // Get the vector as LinkedList
-    public void get(LinkedList<ByteBuffer> values)
+    // Get the vector as java.util.LinkedList
+    public void get(java.util.LinkedList<java.nio.ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -176,14 +164,14 @@ public final class FieldModelVectorBytes extends FieldModel
         var fbeModel = getItem(0);
         for (long i = fbeVectorSize; i-- > 0;)
         {
-            ByteBuffer value = fbeModel.get();
+            java.nio.ByteBuffer value = fbeModel.get();
             values.add(value);
             fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
-    // Get the vector as HashSet
-    public void get(HashSet<ByteBuffer> values)
+    // Get the vector as java.util.HashSet
+    public void get(java.util.HashSet<java.nio.ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -198,14 +186,14 @@ public final class FieldModelVectorBytes extends FieldModel
         var fbeModel = getItem(0);
         for (long i = fbeVectorSize; i-- > 0;)
         {
-            ByteBuffer value = fbeModel.get();
+            java.nio.ByteBuffer value = fbeModel.get();
             values.add(value);
             fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
-    // Set the vector as ArrayList
-    public void set(ArrayList<ByteBuffer> values)
+    // Set the vector as java.util.ArrayList
+    public void set(java.util.ArrayList<java.nio.ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -223,8 +211,8 @@ public final class FieldModelVectorBytes extends FieldModel
         }
     }
 
-    // Set the vector as LinkedList
-    public void set(LinkedList<ByteBuffer> values)
+    // Set the vector as java.util.LinkedList
+    public void set(java.util.LinkedList<java.nio.ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -242,8 +230,8 @@ public final class FieldModelVectorBytes extends FieldModel
         }
     }
 
-    // Set the vector as HashSet
-    public void set(HashSet<ByteBuffer> values)
+    // Set the vector as java.util.HashSet
+    public void set(java.util.HashSet<java.nio.ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

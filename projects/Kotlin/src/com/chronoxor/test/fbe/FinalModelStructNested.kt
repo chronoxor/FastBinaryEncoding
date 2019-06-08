@@ -7,20 +7,9 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructNested final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FinalModelStructNested(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelStructNested(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     val parent: FinalModelStructOptional = FinalModelStructOptional(buffer, 0)
     val f1000: FinalModelEnumSimple = FinalModelEnumSimple(buffer, 0)
@@ -38,7 +27,7 @@ class FinalModelStructNested(buffer: Buffer, offset: Long) : FinalModel(buffer, 
 
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(fbeValue: StructNested): Long = (0
+    fun fbeAllocationSize(fbeValue: com.chronoxor.test.StructNested): Long = (0
         + parent.fbeAllocationSize(fbeValue)
         + f1000.fbeAllocationSize(fbeValue.f1000)
         + f1001.fbeAllocationSize(fbeValue.f1001)
@@ -160,7 +149,7 @@ class FinalModelStructNested(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Get the struct value
-    fun get(fbeSize: Size, fbeValue: StructNested = StructNested()): StructNested
+    fun get(fbeSize: com.chronoxor.fbe.Size, fbeValue: com.chronoxor.test.StructNested = com.chronoxor.test.StructNested()): com.chronoxor.test.StructNested
     {
         _buffer.shift(fbeOffset)
         fbeSize.value = getFields(fbeValue)
@@ -170,11 +159,11 @@ class FinalModelStructNested(buffer: Buffer, offset: Long) : FinalModel(buffer, 
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructNested): Long
+    fun getFields(fbeValue: com.chronoxor.test.StructNested): Long
     {
         var fbeCurrentOffset = 0L
         var fbeCurrentSize = 0L
-        val fbeFieldSize = Size(0)
+        val fbeFieldSize = com.chronoxor.fbe.Size()
 
         parent.fbeOffset = fbeCurrentOffset
         fbeFieldSize.value = parent.getFields(fbeValue)
@@ -245,7 +234,7 @@ class FinalModelStructNested(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Set the struct value
-    fun set(fbeValue: StructNested): Long
+    fun set(fbeValue: com.chronoxor.test.StructNested): Long
     {
         _buffer.shift(fbeOffset)
         val fbeSize = setFields(fbeValue)
@@ -255,11 +244,11 @@ class FinalModelStructNested(buffer: Buffer, offset: Long) : FinalModel(buffer, 
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructNested): Long
+    fun setFields(fbeValue: com.chronoxor.test.StructNested): Long
     {
         var fbeCurrentOffset = 0L
         var fbeCurrentSize = 0L
-        val fbeFieldSize = Size(0)
+        val fbeFieldSize = com.chronoxor.fbe.Size()
 
         parent.fbeOffset = fbeCurrentOffset
         fbeFieldSize.value = parent.setFields(fbeValue)

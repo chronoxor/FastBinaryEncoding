@@ -8215,7 +8215,7 @@ std::string GeneratorGo::ConvertTypeFieldType(const std::string& type, bool opti
 
 std::string GeneratorGo::ConvertTypeFieldDeclaration(const std::string& type, bool optional, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (IsGoType(type) && !optional)
         return "fbe." + modelType + "Model" + ConvertTypeFieldName(type);
@@ -8236,7 +8236,7 @@ std::string GeneratorGo::ConvertTypeFieldDeclaration(const std::string& type, bo
 
 std::string GeneratorGo::ConvertTypeFieldDeclaration(const StructField& field, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (field.array)
         return modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type);
@@ -8254,7 +8254,7 @@ std::string GeneratorGo::ConvertTypeFieldDeclaration(const StructField& field, b
 
 std::string GeneratorGo::ConvertTypeFieldInitialization(const std::string& type, bool optional, const std::string& offset, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (IsGoType(type))
         return "fbe.New" + modelType + "Model" + ConvertTypeFieldName(type) + "(buffer, " + offset + ")";
@@ -8274,7 +8274,7 @@ std::string GeneratorGo::ConvertTypeFieldInitialization(const std::string& type,
 
 std::string GeneratorGo::ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (field.array)
         return "New" + modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ", " + std::to_string(field.N) + ")";

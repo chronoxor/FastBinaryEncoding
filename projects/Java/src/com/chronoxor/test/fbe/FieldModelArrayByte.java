@@ -5,28 +5,16 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding Byte array field model
-public final class FieldModelArrayByte extends FieldModel
+public final class FieldModelArrayByte extends com.chronoxor.fbe.FieldModel
 {
-    private final FieldModelByte _model;
+    private final com.chronoxor.fbe.FieldModelByte _model;
     private final long _size;
 
-    public FieldModelArrayByte(Buffer buffer, long offset, long size)
+    public FieldModelArrayByte(com.chronoxor.fbe.Buffer buffer, long offset, long size)
     {
         super(buffer, offset);
-        _model = new FieldModelByte(buffer, offset);
+        _model = new com.chronoxor.fbe.FieldModelByte(buffer, offset);
         _size = size;
     }
 
@@ -43,7 +31,7 @@ public final class FieldModelArrayByte extends FieldModel
     public long getSize() { return _size; }
 
     // Array index operator
-    public FieldModelByte getItem(long index)
+    public com.chronoxor.fbe.FieldModelByte getItem(long index)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         assert (index < _size) : "Index is out of bounds!";
@@ -100,8 +88,8 @@ public final class FieldModelArrayByte extends FieldModel
         }
     }
 
-    // Get the array as ArrayList
-    public void get(ArrayList<Byte> values)
+    // Get the array as java.util.ArrayList
+    public void get(java.util.ArrayList<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -138,8 +126,8 @@ public final class FieldModelArrayByte extends FieldModel
         }
     }
 
-    // Set the array as List
-    public void set(ArrayList<Byte> values)
+    // Set the array as java.util.ArrayList
+    public void set(java.util.ArrayList<Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

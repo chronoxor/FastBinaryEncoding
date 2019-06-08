@@ -7,19 +7,8 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding optional EnumSimple field model
-class FieldModelOptionalEnumSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelOptionalEnumSimple(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     // Field size
     override val fbeSize: Long = 1 + 4
@@ -95,7 +84,7 @@ class FieldModelOptionalEnumSimple(buffer: Buffer, offset: Long) : FieldModel(bu
     }
 
     // Get the optional value
-    fun get(defaults: EnumSimple? = null): EnumSimple?
+    fun get(defaults: com.chronoxor.test.EnumSimple? = null): com.chronoxor.test.EnumSimple?
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -137,7 +126,7 @@ class FieldModelOptionalEnumSimple(buffer: Buffer, offset: Long) : FieldModel(bu
     }
 
     // Set the optional value
-    fun set(optional: EnumSimple?)
+    fun set(optional: com.chronoxor.test.EnumSimple?)
     {
         val fbeBegin = setBegin(optional != null)
         if (fbeBegin == 0L)

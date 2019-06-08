@@ -7,25 +7,14 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding Int32->StructSimple map final model
-class FinalModelMapInt32StructSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelMapInt32StructSimple(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
-    private val _modelKey = FinalModelInt32(buffer, offset)
+    private val _modelKey = com.chronoxor.fbe.FinalModelInt32(buffer, offset)
     private val _modelValue = FinalModelStructSimple(buffer, offset)
 
     // Get the allocation size
-    fun fbeAllocationSize(values: TreeMap<Int, StructSimple>): Long
+    fun fbeAllocationSize(values: java.util.TreeMap<Int, com.chronoxor.test.StructSimple>): Long
     {
         var size: Long = 4
         for ((key, value1) in values)
@@ -35,7 +24,7 @@ class FinalModelMapInt32StructSimple(buffer: Buffer, offset: Long) : FinalModel(
         }
         return size
     }
-    fun fbeAllocationSize(values: HashMap<Int, StructSimple>): Long
+    fun fbeAllocationSize(values: java.util.HashMap<Int, com.chronoxor.test.StructSimple>): Long
     {
         var size: Long = 4
         for ((key, value1) in values)
@@ -76,8 +65,8 @@ class FinalModelMapInt32StructSimple(buffer: Buffer, offset: Long) : FinalModel(
         return size
     }
 
-    // Get the map as TreeMap
-    fun get(values: TreeMap<Int, StructSimple>): Long
+    // Get the map as java.util.TreeMap
+    fun get(values: java.util.TreeMap<Int, com.chronoxor.test.StructSimple>): Long
     {
         values.clear()
 
@@ -90,7 +79,7 @@ class FinalModelMapInt32StructSimple(buffer: Buffer, offset: Long) : FinalModel(
             return 4
 
         var size: Long = 4
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _modelKey.fbeOffset = fbeOffset + 4
         _modelValue.fbeOffset = fbeOffset + 4
         var i = fbeMapSize
@@ -111,8 +100,8 @@ class FinalModelMapInt32StructSimple(buffer: Buffer, offset: Long) : FinalModel(
         return size
     }
 
-    // Get the map as HashMap
-    fun get(values: HashMap<Int, StructSimple>): Long
+    // Get the map as java.util.HashMap
+    fun get(values: java.util.HashMap<Int, com.chronoxor.test.StructSimple>): Long
     {
         values.clear()
 
@@ -125,7 +114,7 @@ class FinalModelMapInt32StructSimple(buffer: Buffer, offset: Long) : FinalModel(
             return 4
 
         var size: Long = 4
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _modelKey.fbeOffset = fbeOffset + 4
         _modelValue.fbeOffset = fbeOffset + 4
         var i = fbeMapSize
@@ -147,8 +136,8 @@ class FinalModelMapInt32StructSimple(buffer: Buffer, offset: Long) : FinalModel(
         return size
     }
 
-    // Set the map as TreeMap
-    fun set(values: TreeMap<Int, StructSimple>): Long
+    // Set the map as java.util.TreeMap
+    fun set(values: java.util.TreeMap<Int, com.chronoxor.test.StructSimple>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
@@ -172,8 +161,8 @@ class FinalModelMapInt32StructSimple(buffer: Buffer, offset: Long) : FinalModel(
         return size
     }
 
-    // Set the map as HashMap
-    fun set(values: HashMap<Int, StructSimple>): Long
+    // Set the map as java.util.HashMap
+    fun set(values: java.util.HashMap<Int, com.chronoxor.test.StructSimple>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)

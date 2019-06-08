@@ -7,20 +7,9 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructHash field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FieldModelStructHash(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelStructHash(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     val f1: FieldModelMapStringByte = FieldModelMapStringByte(buffer, 4 + 4)
     val f2: FieldModelMapStringOptionalByte = FieldModelMapStringOptionalByte(buffer, f1.fbeOffset + f1.fbeSize)
@@ -208,7 +197,7 @@ class FieldModelStructHash(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     }
 
     // Get the struct value
-    fun get(fbeValue: StructHash = StructHash()): StructHash
+    fun get(fbeValue: com.chronoxor.test.StructHash = com.chronoxor.test.StructHash()): com.chronoxor.test.StructHash
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -222,7 +211,7 @@ class FieldModelStructHash(buffer: Buffer, offset: Long) : FieldModel(buffer, of
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructHash, fbeStructSize: Long)
+    fun getFields(fbeValue: com.chronoxor.test.StructHash, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
 
@@ -315,7 +304,7 @@ class FieldModelStructHash(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     }
 
     // Set the struct value
-    fun set(fbeValue: StructHash)
+    fun set(fbeValue: com.chronoxor.test.StructHash)
     {
         val fbeBegin = setBegin()
         if (fbeBegin == 0L)
@@ -327,7 +316,7 @@ class FieldModelStructHash(buffer: Buffer, offset: Long) : FieldModel(buffer, of
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructHash)
+    fun setFields(fbeValue: com.chronoxor.test.StructHash)
     {
         f1.set(fbeValue.f1)
         f2.set(fbeValue.f2)

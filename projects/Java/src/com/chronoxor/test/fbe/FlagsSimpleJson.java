@@ -5,32 +5,18 @@
 
 package com.chronoxor.test.fbe;;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
-import com.google.gson.*;
-
-public final class FlagsSimpleJson implements JsonSerializer<FlagsSimple>, JsonDeserializer<FlagsSimple>
+public final class FlagsSimpleJson implements com.google.gson.JsonSerializer<com.chronoxor.test.FlagsSimple>, com.google.gson.JsonDeserializer<com.chronoxor.test.FlagsSimple>
 {
 
     @Override
-    public JsonElement serialize(FlagsSimple src, Type typeOfSrc, JsonSerializationContext context)
+    public com.google.gson.JsonElement serialize(com.chronoxor.test.FlagsSimple src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
-        return new JsonPrimitive(src.getRaw());
+        return new com.google.gson.JsonPrimitive(src.getRaw());
     }
 
     @Override
-    public FlagsSimple deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public com.chronoxor.test.FlagsSimple deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
     {
-        return new FlagsSimple(json.getAsJsonPrimitive().getAsInt());
+        return new com.chronoxor.test.FlagsSimple(json.getAsJsonPrimitive().getAsInt());
     }
 }

@@ -7,22 +7,11 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding String->Bytes map field model
-class FieldModelMapStringBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelMapStringBytes(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
-    private val _modelKey = FieldModelString(buffer, offset)
-    private val _modelValue = FieldModelBytes(buffer, offset)
+    private val _modelKey = com.chronoxor.fbe.FieldModelString(buffer, offset)
+    private val _modelValue = com.chronoxor.fbe.FieldModelBytes(buffer, offset)
 
     // Field size
     override val fbeSize: Long = 4
@@ -77,7 +66,7 @@ class FieldModelMapStringBytes(buffer: Buffer, offset: Long) : FieldModel(buffer
     }
 
     // Map index operator
-    fun getItem(index: Long): Pair<FieldModelString, FieldModelBytes>
+    fun getItem(index: Long): Pair<com.chronoxor.fbe.FieldModelString, com.chronoxor.fbe.FieldModelBytes>
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
 
@@ -95,7 +84,7 @@ class FieldModelMapStringBytes(buffer: Buffer, offset: Long) : FieldModel(buffer
     }
 
     // Resize the map and get its first model
-    fun resize(size: Long): Pair<FieldModelString, FieldModelBytes>
+    fun resize(size: Long): Pair<com.chronoxor.fbe.FieldModelString, com.chronoxor.fbe.FieldModelBytes>
     {
         val fbeMapSize = size * (_modelKey.fbeSize + _modelValue.fbeSize)
         val fbeMapOffset = _buffer.allocate(4 + fbeMapSize) - _buffer.offset
@@ -141,8 +130,8 @@ class FieldModelMapStringBytes(buffer: Buffer, offset: Long) : FieldModel(buffer
         return true
     }
 
-    // Get the map as TreeMap
-    fun get(values: TreeMap<String, ByteArray>)
+    // Get the map as java.util.TreeMap
+    fun get(values: java.util.TreeMap<String, ByteArray>)
     {
         values.clear()
 
@@ -162,8 +151,8 @@ class FieldModelMapStringBytes(buffer: Buffer, offset: Long) : FieldModel(buffer
         }
     }
 
-    // Get the map as HashMap
-    fun get(values: HashMap<String, ByteArray>)
+    // Get the map as java.util.HashMap
+    fun get(values: java.util.HashMap<String, ByteArray>)
     {
         values.clear()
 
@@ -183,8 +172,8 @@ class FieldModelMapStringBytes(buffer: Buffer, offset: Long) : FieldModel(buffer
         }
     }
 
-    // Set the map as TreeMap
-    fun set(values: TreeMap<String, ByteArray>)
+    // Set the map as java.util.TreeMap
+    fun set(values: java.util.TreeMap<String, ByteArray>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -200,8 +189,8 @@ class FieldModelMapStringBytes(buffer: Buffer, offset: Long) : FieldModel(buffer
         }
     }
 
-    // Set the map as HashMap
-    fun set(values: HashMap<String, ByteArray>)
+    // Set the map as java.util.HashMap
+    fun set(values: java.util.HashMap<String, ByteArray>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

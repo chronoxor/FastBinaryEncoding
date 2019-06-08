@@ -7,19 +7,8 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding FlagsSimple array field model
-class FieldModelArrayFlagsSimple(buffer: Buffer, offset: Long, val size: Long) : FieldModel(buffer, offset)
+class FieldModelArrayFlagsSimple(buffer: com.chronoxor.fbe.Buffer, offset: Long, val size: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     private val _model = FieldModelFlagsSimple(buffer, offset)
 
@@ -62,9 +51,9 @@ class FieldModelArrayFlagsSimple(buffer: Buffer, offset: Long, val size: Long) :
     }
 
     // Get the array
-    fun get(): Array<FlagsSimple>
+    fun get(): Array<com.chronoxor.test.FlagsSimple>
     {
-        val values = Array(size.toInt()) { FlagsSimple() }
+        val values = Array(size.toInt()) { com.chronoxor.test.FlagsSimple() }
 
         val fbeModel = getItem(0)
         for (i in 0 until size)
@@ -76,7 +65,7 @@ class FieldModelArrayFlagsSimple(buffer: Buffer, offset: Long, val size: Long) :
     }
 
     // Get the array
-    fun get(values: Array<FlagsSimple>)
+    fun get(values: Array<com.chronoxor.test.FlagsSimple>)
     {
         val fbeModel = getItem(0)
         var i: Long = 0
@@ -88,8 +77,8 @@ class FieldModelArrayFlagsSimple(buffer: Buffer, offset: Long, val size: Long) :
         }
     }
 
-    // Get the array as ArrayList
-    fun get(values: ArrayList<FlagsSimple>)
+    // Get the array as java.util.ArrayList
+    fun get(values: java.util.ArrayList<com.chronoxor.test.FlagsSimple>)
     {
         values.clear()
         values.ensureCapacity(size.toInt())
@@ -105,7 +94,7 @@ class FieldModelArrayFlagsSimple(buffer: Buffer, offset: Long, val size: Long) :
     }
 
     // Set the array
-    fun set(values: Array<FlagsSimple>)
+    fun set(values: Array<com.chronoxor.test.FlagsSimple>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -121,8 +110,8 @@ class FieldModelArrayFlagsSimple(buffer: Buffer, offset: Long, val size: Long) :
         }
     }
 
-    // Set the array as List
-    fun set(values: ArrayList<FlagsSimple>)
+    // Set the array as java.util.ArrayList
+    fun set(values: java.util.ArrayList<com.chronoxor.test.FlagsSimple>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)

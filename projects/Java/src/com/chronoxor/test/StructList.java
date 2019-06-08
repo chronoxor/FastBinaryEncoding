@@ -5,34 +5,22 @@
 
 package com.chronoxor.test;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 public class StructList implements Comparable<Object>
 {
-    public LinkedList<Byte> f1 = new LinkedList<Byte>();
-    public LinkedList<Byte> f2 = new LinkedList<Byte>();
-    public LinkedList<ByteBuffer> f3 = new LinkedList<ByteBuffer>();
-    public LinkedList<ByteBuffer> f4 = new LinkedList<ByteBuffer>();
-    public LinkedList<EnumSimple> f5 = new LinkedList<EnumSimple>();
-    public LinkedList<EnumSimple> f6 = new LinkedList<EnumSimple>();
-    public LinkedList<FlagsSimple> f7 = new LinkedList<FlagsSimple>();
-    public LinkedList<FlagsSimple> f8 = new LinkedList<FlagsSimple>();
-    public LinkedList<StructSimple> f9 = new LinkedList<StructSimple>();
-    public LinkedList<StructSimple> f10 = new LinkedList<StructSimple>();
+    public java.util.LinkedList<Byte> f1 = new java.util.LinkedList<Byte>();
+    public java.util.LinkedList<Byte> f2 = new java.util.LinkedList<Byte>();
+    public java.util.LinkedList<java.nio.ByteBuffer> f3 = new java.util.LinkedList<java.nio.ByteBuffer>();
+    public java.util.LinkedList<java.nio.ByteBuffer> f4 = new java.util.LinkedList<java.nio.ByteBuffer>();
+    public java.util.LinkedList<EnumSimple> f5 = new java.util.LinkedList<EnumSimple>();
+    public java.util.LinkedList<EnumSimple> f6 = new java.util.LinkedList<EnumSimple>();
+    public java.util.LinkedList<FlagsSimple> f7 = new java.util.LinkedList<FlagsSimple>();
+    public java.util.LinkedList<FlagsSimple> f8 = new java.util.LinkedList<FlagsSimple>();
+    public java.util.LinkedList<StructSimple> f9 = new java.util.LinkedList<StructSimple>();
+    public java.util.LinkedList<StructSimple> f10 = new java.util.LinkedList<StructSimple>();
 
     public StructList() {}
 
-    public StructList(LinkedList<Byte> f1, LinkedList<Byte> f2, LinkedList<ByteBuffer> f3, LinkedList<ByteBuffer> f4, LinkedList<EnumSimple> f5, LinkedList<EnumSimple> f6, LinkedList<FlagsSimple> f7, LinkedList<FlagsSimple> f8, LinkedList<StructSimple> f9, LinkedList<StructSimple> f10)
+    public StructList(java.util.LinkedList<Byte> f1, java.util.LinkedList<Byte> f2, java.util.LinkedList<java.nio.ByteBuffer> f3, java.util.LinkedList<java.nio.ByteBuffer> f4, java.util.LinkedList<EnumSimple> f5, java.util.LinkedList<EnumSimple> f6, java.util.LinkedList<FlagsSimple> f7, java.util.LinkedList<FlagsSimple> f8, java.util.LinkedList<StructSimple> f9, java.util.LinkedList<StructSimple> f10)
     {
         this.f1 = f1;
         this.f2 = f2;

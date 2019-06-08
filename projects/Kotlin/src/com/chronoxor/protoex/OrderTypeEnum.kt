@@ -7,17 +7,6 @@
 
 package com.chronoxor.protoex
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 @Suppress("EnumEntryName", "MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 enum class OrderTypeEnum
 {
@@ -47,7 +36,7 @@ enum class OrderTypeEnum
 
     companion object
     {
-        private val mapping = HashMap<Byte, OrderTypeEnum>()
+        private val mapping = java.util.HashMap<Byte, OrderTypeEnum>()
 
         init
         {

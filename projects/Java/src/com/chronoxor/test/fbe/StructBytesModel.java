@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructBytes model
-public final class StructBytesModel extends Model
+public final class StructBytesModel extends com.chronoxor.fbe.Model
 {
     public final FieldModelStructBytes model;
 
     public StructBytesModel() { model = new FieldModelStructBytes(getBuffer(), 4); }
-    public StructBytesModel(Buffer buffer) { super(buffer); model = new FieldModelStructBytes(getBuffer(), 4); }
+    public StructBytesModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); model = new FieldModelStructBytes(getBuffer(), 4); }
 
     // Get the model size
     public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }
@@ -61,7 +49,7 @@ public final class StructBytesModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(StructBytes value)
+    public long serialize(com.chronoxor.test.StructBytes value)
     {
         long fbeBegin = createBegin();
         model.set(value);
@@ -70,12 +58,12 @@ public final class StructBytesModel extends Model
     }
 
     // Deserialize the struct value
-    public StructBytes deserialize() { var value = new StructBytes(); deserialize(value); return value; }
-    public long deserialize(StructBytes value)
+    public com.chronoxor.test.StructBytes deserialize() { var value = new com.chronoxor.test.StructBytes(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.test.StructBytes value)
     {
         if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())
         {
-            value = new StructBytes();
+            value = new com.chronoxor.test.StructBytes();
             return 0;
         }
 
@@ -83,7 +71,7 @@ public final class StructBytesModel extends Model
         assert (fbeFullSize >= model.fbeSize()) : "Model is broken!";
         if (fbeFullSize < model.fbeSize())
         {
-            value = new StructBytes();
+            value = new com.chronoxor.test.StructBytes();
             return 0;
         }
 

@@ -5,18 +5,6 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding com.chronoxor.test receiver
 public class Receiver extends com.chronoxor.fbe.Receiver
 {
@@ -80,7 +68,7 @@ public class Receiver extends com.chronoxor.fbe.Receiver
         StructEmptyValue = new com.chronoxor.test.StructEmpty();
         StructEmptyModel = new StructEmptyModel();
     }
-    public Receiver(Buffer buffer)
+    public Receiver(com.chronoxor.fbe.Buffer buffer)
     {
         super(buffer, false);
         protoReceiver = new com.chronoxor.proto.fbe.Receiver(getBuffer());

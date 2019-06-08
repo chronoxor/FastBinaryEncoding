@@ -7,20 +7,9 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructEmpty field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FieldModelStructEmpty(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelStructEmpty(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
 
     // Field size
@@ -116,7 +105,7 @@ class FieldModelStructEmpty(buffer: Buffer, offset: Long) : FieldModel(buffer, o
     }
 
     // Get the struct value
-    fun get(fbeValue: StructEmpty = StructEmpty()): StructEmpty
+    fun get(fbeValue: com.chronoxor.test.StructEmpty = com.chronoxor.test.StructEmpty()): com.chronoxor.test.StructEmpty
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -130,7 +119,7 @@ class FieldModelStructEmpty(buffer: Buffer, offset: Long) : FieldModel(buffer, o
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructEmpty, fbeStructSize: Long)
+    fun getFields(fbeValue: com.chronoxor.test.StructEmpty, fbeStructSize: Long)
     {
     }
 
@@ -162,7 +151,7 @@ class FieldModelStructEmpty(buffer: Buffer, offset: Long) : FieldModel(buffer, o
     }
 
     // Set the struct value
-    fun set(fbeValue: StructEmpty)
+    fun set(fbeValue: com.chronoxor.test.StructEmpty)
     {
         val fbeBegin = setBegin()
         if (fbeBegin == 0L)
@@ -174,7 +163,7 @@ class FieldModelStructEmpty(buffer: Buffer, offset: Long) : FieldModel(buffer, o
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructEmpty)
+    fun setFields(fbeValue: com.chronoxor.test.StructEmpty)
     {
     }
 }

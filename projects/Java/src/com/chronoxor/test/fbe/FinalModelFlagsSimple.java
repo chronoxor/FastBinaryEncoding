@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding FlagsSimple final model
-public final class FinalModelFlagsSimple extends FinalModel
+public final class FinalModelFlagsSimple extends com.chronoxor.fbe.FinalModel
 {
-    public FinalModelFlagsSimple(Buffer buffer, long offset) { super(buffer, offset); }
+    public FinalModelFlagsSimple(com.chronoxor.fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(FlagsSimple value) { return fbeSize(); }
+    public long fbeAllocationSize(com.chronoxor.test.FlagsSimple value) { return fbeSize(); }
 
     // Get the final size
     @Override
@@ -40,17 +28,17 @@ public final class FinalModelFlagsSimple extends FinalModel
     }
 
     // Get the value
-    public FlagsSimple get(Size size)
+    public com.chronoxor.test.FlagsSimple get(com.chronoxor.fbe.Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
-            return new FlagsSimple();
+            return new com.chronoxor.test.FlagsSimple();
 
         size.value = fbeSize();
-        return new FlagsSimple(readInt32(fbeOffset()));
+        return new com.chronoxor.test.FlagsSimple(readInt32(fbeOffset()));
     }
 
     // Set the value
-    public long set(FlagsSimple value)
+    public long set(com.chronoxor.test.FlagsSimple value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

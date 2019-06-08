@@ -5,45 +5,31 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
-import com.google.gson.*;
-
 // Fast Binary Encoding test JSON engine
 public final class Json
 {
-    private static final Gson _engine;
+    private static final com.google.gson.Gson _engine;
 
     // Get the JSON engine
-    public static Gson getEngine() { return _engine; }
+    public static com.google.gson.Gson getEngine() { return _engine; }
 
     static
     {
-        _engine = register(new GsonBuilder()).create();
+        _engine = register(new com.google.gson.GsonBuilder()).create();
     }
 
     private Json() {}
 
-    public static GsonBuilder register(GsonBuilder builder)
+    public static com.google.gson.GsonBuilder register(com.google.gson.GsonBuilder builder)
     {
         com.chronoxor.fbe.Json.register(builder);
         com.chronoxor.proto.fbe.Json.register(builder);
-        builder.registerTypeAdapter(EnumSimple.class, new EnumSimpleJson());
-        builder.registerTypeAdapter(EnumTyped.class, new EnumTypedJson());
-        builder.registerTypeAdapter(EnumEmpty.class, new EnumEmptyJson());
-        builder.registerTypeAdapter(FlagsSimple.class, new FlagsSimpleJson());
-        builder.registerTypeAdapter(FlagsTyped.class, new FlagsTypedJson());
-        builder.registerTypeAdapter(FlagsEmpty.class, new FlagsEmptyJson());
+        builder.registerTypeAdapter(com.chronoxor.test.EnumSimple.class, new EnumSimpleJson());
+        builder.registerTypeAdapter(com.chronoxor.test.EnumTyped.class, new EnumTypedJson());
+        builder.registerTypeAdapter(com.chronoxor.test.EnumEmpty.class, new EnumEmptyJson());
+        builder.registerTypeAdapter(com.chronoxor.test.FlagsSimple.class, new FlagsSimpleJson());
+        builder.registerTypeAdapter(com.chronoxor.test.FlagsTyped.class, new FlagsTypedJson());
+        builder.registerTypeAdapter(com.chronoxor.test.FlagsEmpty.class, new FlagsEmptyJson());
         return builder;
     }
 }

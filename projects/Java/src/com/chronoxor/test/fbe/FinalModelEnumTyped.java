@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding EnumTyped final model
-public final class FinalModelEnumTyped extends FinalModel
+public final class FinalModelEnumTyped extends com.chronoxor.fbe.FinalModel
 {
-    public FinalModelEnumTyped(Buffer buffer, long offset) { super(buffer, offset); }
+    public FinalModelEnumTyped(com.chronoxor.fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(EnumTyped value) { return fbeSize(); }
+    public long fbeAllocationSize(com.chronoxor.test.EnumTyped value) { return fbeSize(); }
 
     // Get the final size
     @Override
@@ -40,17 +28,17 @@ public final class FinalModelEnumTyped extends FinalModel
     }
 
     // Get the value
-    public EnumTyped get(Size size)
+    public com.chronoxor.test.EnumTyped get(com.chronoxor.fbe.Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
-            return new EnumTyped();
+            return new com.chronoxor.test.EnumTyped();
 
         size.value = fbeSize();
-        return new EnumTyped(readInt8(fbeOffset()));
+        return new com.chronoxor.test.EnumTyped(readInt8(fbeOffset()));
     }
 
     // Set the value
-    public long set(EnumTyped value)
+    public long set(com.chronoxor.test.EnumTyped value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())

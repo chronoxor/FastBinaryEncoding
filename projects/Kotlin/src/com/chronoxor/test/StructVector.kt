@@ -7,34 +7,23 @@
 
 package com.chronoxor.test
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructVector : Comparable<Any?>
 {
-    var f1: ArrayList<Byte> = ArrayList()
-    var f2: ArrayList<Byte?> = ArrayList()
-    var f3: ArrayList<ByteArray> = ArrayList()
-    var f4: ArrayList<ByteArray?> = ArrayList()
-    var f5: ArrayList<EnumSimple> = ArrayList()
-    var f6: ArrayList<EnumSimple?> = ArrayList()
-    var f7: ArrayList<FlagsSimple> = ArrayList()
-    var f8: ArrayList<FlagsSimple?> = ArrayList()
-    var f9: ArrayList<StructSimple> = ArrayList()
-    var f10: ArrayList<StructSimple?> = ArrayList()
+    var f1: java.util.ArrayList<Byte> = java.util.ArrayList()
+    var f2: java.util.ArrayList<Byte?> = java.util.ArrayList()
+    var f3: java.util.ArrayList<ByteArray> = java.util.ArrayList()
+    var f4: java.util.ArrayList<ByteArray?> = java.util.ArrayList()
+    var f5: java.util.ArrayList<EnumSimple> = java.util.ArrayList()
+    var f6: java.util.ArrayList<EnumSimple?> = java.util.ArrayList()
+    var f7: java.util.ArrayList<FlagsSimple> = java.util.ArrayList()
+    var f8: java.util.ArrayList<FlagsSimple?> = java.util.ArrayList()
+    var f9: java.util.ArrayList<StructSimple> = java.util.ArrayList()
+    var f10: java.util.ArrayList<StructSimple?> = java.util.ArrayList()
 
     constructor()
 
-    constructor(f1: ArrayList<Byte>, f2: ArrayList<Byte?>, f3: ArrayList<ByteArray>, f4: ArrayList<ByteArray?>, f5: ArrayList<EnumSimple>, f6: ArrayList<EnumSimple?>, f7: ArrayList<FlagsSimple>, f8: ArrayList<FlagsSimple?>, f9: ArrayList<StructSimple>, f10: ArrayList<StructSimple?>)
+    constructor(f1: java.util.ArrayList<Byte>, f2: java.util.ArrayList<Byte?>, f3: java.util.ArrayList<ByteArray>, f4: java.util.ArrayList<ByteArray?>, f5: java.util.ArrayList<EnumSimple>, f6: java.util.ArrayList<EnumSimple?>, f7: java.util.ArrayList<FlagsSimple>, f8: java.util.ArrayList<FlagsSimple?>, f9: java.util.ArrayList<StructSimple>, f10: java.util.ArrayList<StructSimple?>)
     {
         this.f1 = f1
         this.f2 = f2

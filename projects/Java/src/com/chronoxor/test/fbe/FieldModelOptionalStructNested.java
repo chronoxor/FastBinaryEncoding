@@ -5,22 +5,10 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional StructNested field model
-public final class FieldModelOptionalStructNested extends FieldModel
+public final class FieldModelOptionalStructNested extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelOptionalStructNested(Buffer buffer, long offset)
+    public FieldModelOptionalStructNested(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         value = new FieldModelStructNested(buffer, 0);
@@ -102,14 +90,14 @@ public final class FieldModelOptionalStructNested extends FieldModel
     }
 
     // Get the optional value
-    public StructNested get() { return get(null); }
-    public StructNested get(StructNested defaults)
+    public com.chronoxor.test.StructNested get() { return get(null); }
+    public com.chronoxor.test.StructNested get(com.chronoxor.test.StructNested defaults)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
             return defaults;
 
-        StructNested optional = value.get();
+        com.chronoxor.test.StructNested optional = value.get();
         getEnd(fbeBegin);
         return optional;
     }
@@ -145,7 +133,7 @@ public final class FieldModelOptionalStructNested extends FieldModel
     }
 
     // Set the optional value
-    public void set(StructNested optional)
+    public void set(com.chronoxor.test.StructNested optional)
     {
         long fbeBegin = setBegin(optional != null);
         if (fbeBegin == 0)

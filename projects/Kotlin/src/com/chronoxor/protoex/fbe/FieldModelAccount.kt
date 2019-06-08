@@ -7,23 +7,12 @@
 
 package com.chronoxor.protoex.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.protoex.*
-
 // Fast Binary Encoding Account field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FieldModelAccount(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelAccount(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
-    val id: FieldModelInt32 = FieldModelInt32(buffer, 4 + 4)
-    val name: FieldModelString = FieldModelString(buffer, id.fbeOffset + id.fbeSize)
+    val id: com.chronoxor.fbe.FieldModelInt32 = com.chronoxor.fbe.FieldModelInt32(buffer, 4 + 4)
+    val name: com.chronoxor.fbe.FieldModelString = com.chronoxor.fbe.FieldModelString(buffer, id.fbeOffset + id.fbeSize)
     val state: FieldModelStateEx = FieldModelStateEx(buffer, name.fbeOffset + name.fbeSize)
     val wallet: FieldModelBalance = FieldModelBalance(buffer, state.fbeOffset + state.fbeSize)
     val asset: FieldModelOptionalBalance = FieldModelOptionalBalance(buffer, wallet.fbeOffset + wallet.fbeSize)
@@ -172,7 +161,7 @@ class FieldModelAccount(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     }
 
     // Get the struct value
-    fun get(fbeValue: Account = Account()): Account
+    fun get(fbeValue: com.chronoxor.protoex.Account = com.chronoxor.protoex.Account()): com.chronoxor.protoex.Account
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -186,7 +175,7 @@ class FieldModelAccount(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: Account, fbeStructSize: Long)
+    fun getFields(fbeValue: com.chronoxor.protoex.Account, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
 
@@ -203,15 +192,15 @@ class FieldModelAccount(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
         fbeCurrentSize += name.fbeSize
 
         if ((fbeCurrentSize + state.fbeSize) <= fbeStructSize)
-            fbeValue.state = state.get(StateEx.fromSet(EnumSet.of(StateEx.initialized.value, StateEx.bad.value, StateEx.sad.value)))
+            fbeValue.state = state.get(com.chronoxor.protoex.StateEx.fromSet(java.util.EnumSet.of(com.chronoxor.protoex.StateEx.initialized.value, com.chronoxor.protoex.StateEx.bad.value, com.chronoxor.protoex.StateEx.sad.value)))
         else
-            fbeValue.state = StateEx.fromSet(EnumSet.of(StateEx.initialized.value, StateEx.bad.value, StateEx.sad.value))
+            fbeValue.state = com.chronoxor.protoex.StateEx.fromSet(java.util.EnumSet.of(com.chronoxor.protoex.StateEx.initialized.value, com.chronoxor.protoex.StateEx.bad.value, com.chronoxor.protoex.StateEx.sad.value))
         fbeCurrentSize += state.fbeSize
 
         if ((fbeCurrentSize + wallet.fbeSize) <= fbeStructSize)
             fbeValue.wallet = wallet.get()
         else
-            fbeValue.wallet = Balance()
+            fbeValue.wallet = com.chronoxor.protoex.Balance()
         fbeCurrentSize += wallet.fbeSize
 
         if ((fbeCurrentSize + asset.fbeSize) <= fbeStructSize)
@@ -255,7 +244,7 @@ class FieldModelAccount(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     }
 
     // Set the struct value
-    fun set(fbeValue: Account)
+    fun set(fbeValue: com.chronoxor.protoex.Account)
     {
         val fbeBegin = setBegin()
         if (fbeBegin == 0L)
@@ -267,7 +256,7 @@ class FieldModelAccount(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: Account)
+    fun setFields(fbeValue: com.chronoxor.protoex.Account)
     {
         id.set(fbeValue.id)
         name.set(fbeValue.name)

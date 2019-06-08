@@ -5,20 +5,8 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructOptional field model
-public final class FieldModelStructOptional extends FieldModel
+public final class FieldModelStructOptional extends com.chronoxor.fbe.FieldModel
 {
     public final FieldModelStructSimple parent;
     public final FieldModelOptionalBoolean f100;
@@ -88,7 +76,7 @@ public final class FieldModelStructOptional extends FieldModel
     public final FieldModelOptionalprotoAccount f164;
     public final FieldModelOptionalprotoAccount f165;
 
-    public FieldModelStructOptional(Buffer buffer, long offset)
+    public FieldModelStructOptional(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         parent = new FieldModelStructSimple(buffer, 4 + 4);
@@ -791,8 +779,8 @@ public final class FieldModelStructOptional extends FieldModel
     }
 
     // Get the struct value
-    public StructOptional get() { return get(new StructOptional()); }
-    public StructOptional get(StructOptional fbeValue)
+    public com.chronoxor.test.StructOptional get() { return get(new com.chronoxor.test.StructOptional()); }
+    public com.chronoxor.test.StructOptional get(com.chronoxor.test.StructOptional fbeValue)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
@@ -805,7 +793,7 @@ public final class FieldModelStructOptional extends FieldModel
     }
 
     // Get the struct fields values
-    public void getFields(StructOptional fbeValue, long fbeStructSize)
+    public void getFields(com.chronoxor.test.StructOptional fbeValue, long fbeStructSize)
     {
         long fbeCurrentSize = 4 + 4;
 
@@ -1072,9 +1060,9 @@ public final class FieldModelStructOptional extends FieldModel
         fbeCurrentSize += f142.fbeSize();
 
         if ((fbeCurrentSize + f143.fbeSize()) <= fbeStructSize)
-            fbeValue.f143 = f143.get(BigDecimal.valueOf(123456.123456d));
+            fbeValue.f143 = f143.get(java.math.BigDecimal.valueOf(123456.123456d));
         else
-            fbeValue.f143 = BigDecimal.valueOf(123456.123456d);
+            fbeValue.f143 = java.math.BigDecimal.valueOf(123456.123456d);
         fbeCurrentSize += f143.fbeSize();
 
         if ((fbeCurrentSize + f144.fbeSize()) <= fbeStructSize)
@@ -1108,9 +1096,9 @@ public final class FieldModelStructOptional extends FieldModel
         fbeCurrentSize += f148.fbeSize();
 
         if ((fbeCurrentSize + f149.fbeSize()) <= fbeStructSize)
-            fbeValue.f149 = f149.get(Instant.now());
+            fbeValue.f149 = f149.get(java.time.Instant.now());
         else
-            fbeValue.f149 = Instant.now();
+            fbeValue.f149 = java.time.Instant.now();
         fbeCurrentSize += f149.fbeSize();
 
         if ((fbeCurrentSize + f150.fbeSize()) <= fbeStructSize)
@@ -1126,9 +1114,9 @@ public final class FieldModelStructOptional extends FieldModel
         fbeCurrentSize += f151.fbeSize();
 
         if ((fbeCurrentSize + f152.fbeSize()) <= fbeStructSize)
-            fbeValue.f152 = f152.get(UUID.fromString("123e4567-e89b-12d3-a456-426655440000"));
+            fbeValue.f152 = f152.get(java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000"));
         else
-            fbeValue.f152 = UUID.fromString("123e4567-e89b-12d3-a456-426655440000");
+            fbeValue.f152 = java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000");
         fbeCurrentSize += f152.fbeSize();
 
         if ((fbeCurrentSize + f153.fbeSize()) <= fbeStructSize)
@@ -1238,7 +1226,7 @@ public final class FieldModelStructOptional extends FieldModel
     }
 
     // Set the struct value
-    public void set(StructOptional fbeValue)
+    public void set(com.chronoxor.test.StructOptional fbeValue)
     {
         long fbeBegin = setBegin();
         if (fbeBegin == 0)
@@ -1249,7 +1237,7 @@ public final class FieldModelStructOptional extends FieldModel
     }
 
     // Set the struct fields values
-    public void setFields(StructOptional fbeValue)
+    public void setFields(com.chronoxor.test.StructOptional fbeValue)
     {
         parent.setFields(fbeValue);
         f100.set(fbeValue.f100);

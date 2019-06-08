@@ -7,24 +7,13 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructHashEx model
-class StructHashExModel : Model
+class StructHashExModel : com.chronoxor.fbe.Model
 {
     val model: FieldModelStructHashEx
 
     constructor() { model = FieldModelStructHashEx(buffer, 4) }
-    constructor(buffer: Buffer) : super(buffer) { model = FieldModelStructHashEx(buffer, 4) }
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer) { model = FieldModelStructHashEx(buffer, 4) }
 
     // Model size
     fun fbeSize(): Long = model.fbeSize + model.fbeExtra
@@ -65,7 +54,7 @@ class StructHashExModel : Model
     }
 
     // Serialize the struct value
-    fun serialize(value: StructHashEx): Long
+    fun serialize(value: com.chronoxor.test.StructHashEx): Long
     {
         val fbeBegin = createBegin()
         model.set(value)
@@ -73,15 +62,15 @@ class StructHashExModel : Model
     }
 
     // Deserialize the struct value
-    fun deserialize(): StructHashEx { val value = StructHashEx(); deserialize(value); return value }
+    fun deserialize(): com.chronoxor.test.StructHashEx { val value = com.chronoxor.test.StructHashEx(); deserialize(value); return value }
     @Suppress("UNUSED_VALUE")
-    fun deserialize(value: StructHashEx): Long
+    fun deserialize(value: com.chronoxor.test.StructHashEx): Long
     {
         var valueRef = value
 
         if ((buffer.offset + model.fbeOffset - 4) > buffer.size)
         {
-            valueRef = StructHashEx()
+            valueRef = com.chronoxor.test.StructHashEx()
             return 0
         }
 
@@ -89,7 +78,7 @@ class StructHashExModel : Model
         assert(fbeFullSize >= model.fbeSize) { "Model is broken!" }
         if (fbeFullSize < model.fbeSize)
         {
-            valueRef = StructHashEx()
+            valueRef = com.chronoxor.test.StructHashEx()
             return 0
         }
 

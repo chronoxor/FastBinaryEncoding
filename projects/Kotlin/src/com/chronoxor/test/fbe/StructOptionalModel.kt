@@ -7,24 +7,13 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructOptional model
-class StructOptionalModel : Model
+class StructOptionalModel : com.chronoxor.fbe.Model
 {
     val model: FieldModelStructOptional
 
     constructor() { model = FieldModelStructOptional(buffer, 4) }
-    constructor(buffer: Buffer) : super(buffer) { model = FieldModelStructOptional(buffer, 4) }
+    constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer) { model = FieldModelStructOptional(buffer, 4) }
 
     // Model size
     fun fbeSize(): Long = model.fbeSize + model.fbeExtra
@@ -65,7 +54,7 @@ class StructOptionalModel : Model
     }
 
     // Serialize the struct value
-    fun serialize(value: StructOptional): Long
+    fun serialize(value: com.chronoxor.test.StructOptional): Long
     {
         val fbeBegin = createBegin()
         model.set(value)
@@ -73,15 +62,15 @@ class StructOptionalModel : Model
     }
 
     // Deserialize the struct value
-    fun deserialize(): StructOptional { val value = StructOptional(); deserialize(value); return value }
+    fun deserialize(): com.chronoxor.test.StructOptional { val value = com.chronoxor.test.StructOptional(); deserialize(value); return value }
     @Suppress("UNUSED_VALUE")
-    fun deserialize(value: StructOptional): Long
+    fun deserialize(value: com.chronoxor.test.StructOptional): Long
     {
         var valueRef = value
 
         if ((buffer.offset + model.fbeOffset - 4) > buffer.size)
         {
-            valueRef = StructOptional()
+            valueRef = com.chronoxor.test.StructOptional()
             return 0
         }
 
@@ -89,7 +78,7 @@ class StructOptionalModel : Model
         assert(fbeFullSize >= model.fbeSize) { "Model is broken!" }
         if (fbeFullSize < model.fbeSize)
         {
-            valueRef = StructOptional()
+            valueRef = com.chronoxor.test.StructOptional()
             return 0
         }
 

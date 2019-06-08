@@ -1352,10 +1352,12 @@ public final class FieldModelOptional_NAME_ extends _DOMAIN_fbe.FieldModel
 }
 )CODE";
 
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), domain + package + "." + type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -1526,13 +1528,15 @@ public final class FieldModelArray_NAME_ extends _DOMAIN_fbe.FieldModel
 }
 )CODE";
 
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), domain + package + "." + type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_ARRAY_"), (bytes ? "byte" : (domain + package + "." + type)) + "[]");
-    code = std::regex_replace(code, std::regex("_INIT_"), ((type != "byte[]") ? ("new " + (bytes ? "byte" : (domain + package + "." + type)) + "[(int)_size]") : "new byte[(int)_size][]"));
+    code = std::regex_replace(code, std::regex("_ARRAY_"), (bytes ? "byte" : type_name) + "[]");
+    code = std::regex_replace(code, std::regex("_INIT_"), ((type != "byte[]") ? ("new " + (bytes ? "byte" : type_name) + "[(int)_size]") : "new byte[(int)_size][]"));
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -1806,10 +1810,12 @@ public final class FieldModelVector_NAME_ extends _DOMAIN_fbe.FieldModel
 }
 )CODE";
 
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), domain + package + "." + type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -1906,7 +1912,7 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends _DOMAIN_fbe.Field
     }
 
     // Map index operator
-    public Pair<_KEY_MODEL_, _VALUE_MODEL_> getItem(long index)
+    public _DOMAIN_fbe.Pair<_KEY_MODEL_, _VALUE_MODEL_> getItem(long index)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
 
@@ -1920,11 +1926,11 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends _DOMAIN_fbe.Field
         _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
         _modelKey.fbeShift(index * (_modelKey.fbeSize() + _modelValue.fbeSize()));
         _modelValue.fbeShift(index * (_modelKey.fbeSize() + _modelValue.fbeSize()));
-        return Pair.create(_modelKey, _modelValue);
+        return _DOMAIN_fbe.Pair.create(_modelKey, _modelValue);
     }
 
     // Resize the map and get its first model
-    public Pair<_KEY_MODEL_, _VALUE_MODEL_> resize(long size)
+    public _DOMAIN_fbe.Pair<_KEY_MODEL_, _VALUE_MODEL_> resize(long size)
     {
         int fbeMapSize = (int)(size * (_modelKey.fbeSize() + _modelValue.fbeSize()));
         int fbeMapOffset = (int)(_buffer.allocate(4 + fbeMapSize) - _buffer.getOffset());
@@ -1936,7 +1942,7 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends _DOMAIN_fbe.Field
 
         _modelKey.fbeOffset(fbeMapOffset + 4);
         _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
-        return Pair.create(_modelKey, _modelValue);
+        return _DOMAIN_fbe.Pair.create(_modelKey, _modelValue);
     }
 
     // Check if the map is valid
@@ -2062,13 +2068,16 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends _DOMAIN_fbe.Field
 }
 )CODE";
 
+    std::string key_type_name = IsPackageType(key_type) ? key_type : (domain + package + "." + key_type);
+    std::string value_type_name = IsPackageType(value_type) ? value_type : (domain + package + "." + value_type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_KEY_NAME_"), key_name);
-    code = std::regex_replace(code, std::regex("_KEY_TYPE_"), domain + package + "." + key_type);
+    code = std::regex_replace(code, std::regex("_KEY_TYPE_"), key_type_name);
     code = std::regex_replace(code, std::regex("_KEY_MODEL_"), key_model);
     code = std::regex_replace(code, std::regex("_VALUE_NAME_"), value_name);
-    code = std::regex_replace(code, std::regex("_VALUE_TYPE_"), domain + package + "." + value_type);
+    code = std::regex_replace(code, std::regex("_VALUE_TYPE_"), value_type_name);
     code = std::regex_replace(code, std::regex("_VALUE_MODEL_"), value_model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -2107,17 +2116,17 @@ public final class FieldModel_NAME_ extends _DOMAIN_fbe.FieldModel
     public long fbeSize() { return _SIZE_; }
 
     // Get the value
-    public _NAME_ get() { return get(new _NAME_()); }
-    public _NAME_ get(_NAME_ defaults)
+    public _DOMAIN__PACKAGE_._NAME_ get() { return get(new _DOMAIN__PACKAGE_._NAME_()); }
+    public _DOMAIN__PACKAGE_._NAME_ get(_DOMAIN__PACKAGE_._NAME_ defaults)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return new _NAME_(_READ_(fbeOffset()));
+        return new _DOMAIN__PACKAGE_._NAME_(_READ_(fbeOffset()));
     }
 
     // Set the value
-    public void set(_NAME_ value)
+    public void set(_DOMAIN__PACKAGE_._NAME_ value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
@@ -2130,6 +2139,7 @@ public final class FieldModel_NAME_ extends _DOMAIN_fbe.FieldModel
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
+    code = std::regex_replace(code, std::regex("_PACKAGE_"), package);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_SIZE_"), ConvertEnumSize(type));
     code = std::regex_replace(code, std::regex("_READ_"), ConvertEnumRead(type));
@@ -2815,10 +2825,12 @@ public final class FinalModelOptional_NAME_ extends _DOMAIN_fbe.FinalModel
 }
 )CODE";
 
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), domain + package + "." + type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -2909,7 +2921,7 @@ public final class FinalModelArray_NAME_ extends _DOMAIN_fbe.FinalModel
         }
 
         size.value = 0;
-        var offset = new Size();
+        var offset = new _DOMAIN_fbe.Size();
         _model.fbeOffset(fbeOffset());
         for (long i = 0; i < _size; i++)
         {
@@ -2933,7 +2945,7 @@ public final class FinalModelArray_NAME_ extends _DOMAIN_fbe.FinalModel
             return 0;
 
         long size = 0;
-        var offset = new Size();
+        var offset = new _DOMAIN_fbe.Size();
         _model.fbeOffset(fbeOffset());
         for (long i = 0; (i < values.length) && (i < _size); i++)
         {
@@ -2961,7 +2973,7 @@ public final class FinalModelArray_NAME_ extends _DOMAIN_fbe.FinalModel
         values.ensureCapacity((int)_size);
 
         long size = 0;
-        var offset = new Size();
+        var offset = new _DOMAIN_fbe.Size();
         _model.fbeOffset(fbeOffset());
         for (long i = _size; i-- > 0;)
         {
@@ -3020,13 +3032,15 @@ public final class FinalModelArray_NAME_ extends _DOMAIN_fbe.FinalModel
 }
 )CODE";
 
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), domain + package + "." + type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_ARRAY_"), (bytes ? "byte" : (domain + package + "." + type)) + "[]");
-    code = std::regex_replace(code, std::regex("_INIT_"), ((type != "byte[]") ? ("new " + (bytes ? "byte" : (domain + package + "." + type)) + "[(int)_size]") : "new byte[(int)_size][]"));
+    code = std::regex_replace(code, std::regex("_ARRAY_"), (bytes ? "byte" : type_name) + "[]");
+    code = std::regex_replace(code, std::regex("_INIT_"), ((type != "byte[]") ? ("new " + (bytes ? "byte" : type_name) + "[(int)_size]") : "new byte[(int)_size][]"));
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -3137,7 +3151,7 @@ public final class FinalModelVector_NAME_ extends _DOMAIN_fbe.FinalModel
         values.ensureCapacity((int)fbeVectorSize);
 
         long size = 4;
-        var offset = new Size();
+        var offset = new _DOMAIN_fbe.Size();
         _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
@@ -3168,7 +3182,7 @@ public final class FinalModelVector_NAME_ extends _DOMAIN_fbe.FinalModel
             return 4;
 
         long size = 4;
-        var offset = new Size();
+        var offset = new _DOMAIN_fbe.Size();
         _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
@@ -3199,7 +3213,7 @@ public final class FinalModelVector_NAME_ extends _DOMAIN_fbe.FinalModel
             return 4;
 
         long size = 4;
-        var offset = new Size();
+        var offset = new _DOMAIN_fbe.Size();
         _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
@@ -3286,10 +3300,12 @@ public final class FinalModelVector_NAME_ extends _DOMAIN_fbe.FinalModel
 }
 )CODE";
 
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_"), domain + package + "." + type);
+    code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -3401,7 +3417,7 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends _DOMAIN_fbe.Final
             return 4;
 
         long size = 4;
-        var offset = new Size();
+        var offset = new _DOMAIN_fbe.Size();
         _modelKey.fbeOffset(fbeOffset() + 4);
         _modelValue.fbeOffset(fbeOffset() + 4);
         for (long i = fbeMapSize; i-- > 0;)
@@ -3439,7 +3455,7 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends _DOMAIN_fbe.Final
             return 4;
 
         long size = 4;
-        var offset = new Size();
+        var offset = new _DOMAIN_fbe.Size();
         _modelKey.fbeOffset(fbeOffset() + 4);
         _modelValue.fbeOffset(fbeOffset() + 4);
         for (long i = fbeMapSize; i-- > 0;)
@@ -3520,13 +3536,16 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends _DOMAIN_fbe.Final
 }
 )CODE";
 
+    std::string key_type_name = IsPackageType(key_type) ? key_type : (domain + package + "." + key_type);
+    std::string value_type_name = IsPackageType(value_type) ? value_type : (domain + package + "." + value_type);
+
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_KEY_NAME_"), key_name);
-    code = std::regex_replace(code, std::regex("_KEY_TYPE_"), domain + package + "." + key_type);
+    code = std::regex_replace(code, std::regex("_KEY_TYPE_"), key_type_name);
     code = std::regex_replace(code, std::regex("_KEY_MODEL_"), key_model);
     code = std::regex_replace(code, std::regex("_VALUE_NAME_"), value_name);
-    code = std::regex_replace(code, std::regex("_VALUE_TYPE_"), domain + package + "." + value_type);
+    code = std::regex_replace(code, std::regex("_VALUE_TYPE_"), value_type_name);
     code = std::regex_replace(code, std::regex("_VALUE_MODEL_"), value_model);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
@@ -3561,7 +3580,7 @@ public final class FinalModel_NAME_ extends _DOMAIN_fbe.FinalModel
     public FinalModel_NAME_(_DOMAIN_fbe.Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(_NAME_ value) { return fbeSize(); }
+    public long fbeAllocationSize(_DOMAIN__PACKAGE_._NAME_ value) { return fbeSize(); }
 
     // Get the final size
     @Override
@@ -3578,17 +3597,17 @@ public final class FinalModel_NAME_ extends _DOMAIN_fbe.FinalModel
     }
 
     // Get the value
-    public _NAME_ get(_DOMAIN_fbe.Size size)
+    public _DOMAIN__PACKAGE_._NAME_ get(_DOMAIN_fbe.Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
-            return new _NAME_();
+            return new _DOMAIN__PACKAGE_._NAME_();
 
         size.value = fbeSize();
-        return new _NAME_(_READ_(fbeOffset()));
+        return new _DOMAIN__PACKAGE_._NAME_(_READ_(fbeOffset()));
     }
 
     // Set the value
-    public long set(_NAME_ value)
+    public long set(_DOMAIN__PACKAGE_._NAME_ value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
@@ -3602,6 +3621,7 @@ public final class FinalModel_NAME_ extends _DOMAIN_fbe.FinalModel
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
+    code = std::regex_replace(code, std::regex("_PACKAGE_"), package);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_SIZE_"), ConvertEnumSize(type));
     code = std::regex_replace(code, std::regex("_READ_"), ConvertEnumRead(type));
@@ -4478,14 +4498,13 @@ void GeneratorJava::GenerateEnumJson(const std::shared_ptr<Package>& p, const st
 {
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
+    std::string enum_name = domain + package + "." + *e->name;
+    std::string adapter_name = *e->name + "Json";
 
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
-
-    std::string enum_name = *e->name;
-    std::string adapter_name = *e->name + "Json";
 
     // Open the output file
     CppCommon::Path output = path / (adapter_name + ".java");
@@ -4600,12 +4619,12 @@ void GeneratorJava::GenerateFlags(const std::shared_ptr<Package>& p, const std::
 
     // Generate flags getAllSet(), getNoneSet(), getCurrentSet() methods
     WriteLine();
-    WriteLineIndent("public EnumSet<" + flags_name + "> getAllSet() { return EnumSet.allOf(" + flags_name + ".class); }");
-    WriteLineIndent("public EnumSet<" + flags_name + "> getNoneSet() { return EnumSet.noneOf(" + flags_name + ".class); }");
-    WriteLineIndent("public EnumSet<" + flags_name + "> getCurrentSet()");
+    WriteLineIndent("public java.util.EnumSet<" + flags_name + "> getAllSet() { return java.util.EnumSet.allOf(" + flags_name + ".class); }");
+    WriteLineIndent("public java.util.EnumSet<" + flags_name + "> getNoneSet() { return java.util.EnumSet.noneOf(" + flags_name + ".class); }");
+    WriteLineIndent("public java.util.EnumSet<" + flags_name + "> getCurrentSet()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("EnumSet<" + flags_name + "> result = EnumSet.noneOf(" + flags_name + ".class);");
+    WriteLineIndent("java.util.EnumSet<" + flags_name + "> result = java.util.EnumSet.noneOf(" + flags_name + ".class);");
     if (f->body)
     {
         for (const auto& value : f->body->values)
@@ -4723,7 +4742,7 @@ void GeneratorJava::GenerateFlagsClass(const std::shared_ptr<Package>& p, const 
     WriteLineIndent("public " + flags_name + "() {}");
     WriteLineIndent("public " + flags_name + "(" + flags_base_type + " value) { setEnum(value); }");
     WriteLineIndent("public " + flags_name + "(" + flags_type_name + " value) { setEnum(value); }");
-    WriteLineIndent("public " + flags_name + "(EnumSet<" + flags_type_name + "> value) { setEnum(value); }");
+    WriteLineIndent("public " + flags_name + "(java.util.EnumSet<" + flags_type_name + "> value) { setEnum(value); }");
     WriteLineIndent("public " + flags_name + "(" + flags_name + " value) { setEnum(value); }");
 
     // Generate flags class getEnum() and getRaw() methods
@@ -4739,7 +4758,7 @@ void GeneratorJava::GenerateFlagsClass(const std::shared_ptr<Package>& p, const 
     WriteLine();
     WriteLineIndent("public void setEnum(" + flags_base_type + " value) { this.flags = value; this.value = " + flags_type_name + ".mapValue(value); }");
     WriteLineIndent("public void setEnum(" + flags_type_name + " value) { this.value = value; this.flags = value.getRaw(); }");
-    WriteLineIndent("public void setEnum(EnumSet<" + flags_type_name + "> value) { setEnum(" + flags_name + ".fromSet(value)); }");
+    WriteLineIndent("public void setEnum(java.util.EnumSet<" + flags_type_name + "> value) { setEnum(" + flags_name + ".fromSet(value)); }");
     WriteLineIndent("public void setEnum(" + flags_name + " value) { this.value = value.value; this.flags = value.flags; }");
 
     // Generate flags class hasFlags() methods
@@ -4762,13 +4781,13 @@ void GeneratorJava::GenerateFlagsClass(const std::shared_ptr<Package>& p, const 
 
     // Generate flags class getAllSet(), getNoneSet() and getCurrentSet() methods
     WriteLine();
-    WriteLineIndent("public EnumSet<" + flags_type_name + "> getAllSet() { return value.getAllSet(); }");
-    WriteLineIndent("public EnumSet<" + flags_type_name + "> getNoneSet() { return value.getNoneSet(); }");
-    WriteLineIndent("public EnumSet<" + flags_type_name + "> getCurrentSet() { return value.getCurrentSet(); }");
+    WriteLineIndent("public java.util.EnumSet<" + flags_type_name + "> getAllSet() { return value.getAllSet(); }");
+    WriteLineIndent("public java.util.EnumSet<" + flags_type_name + "> getNoneSet() { return value.getNoneSet(); }");
+    WriteLineIndent("public java.util.EnumSet<" + flags_type_name + "> getCurrentSet() { return value.getCurrentSet(); }");
 
     // Generate flags class fromSet() method
     WriteLine();
-    WriteLineIndent("public static " + flags_name + " fromSet(EnumSet<" + flags_type_name + "> set)");
+    WriteLineIndent("public static " + flags_name + " fromSet(java.util.EnumSet<" + flags_type_name + "> set)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent(flags_base_type + " result = 0;");
@@ -4875,14 +4894,13 @@ void GeneratorJava::GenerateFlagsJson(const std::shared_ptr<Package>& p, const s
 {
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
+    std::string flags_name = domain + package + "." + *f->name;
+    std::string adapter_name = *f->name + "Json";
 
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
-
-    std::string flags_name = *f->name;
-    std::string adapter_name = *f->name + "Json";
 
     // Open the output file
     CppCommon::Path output = path / (adapter_name + ".java");
@@ -4947,7 +4965,7 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     WriteLine();
     WriteIndent("public class " + *s->name);
     if (s->base && !s->base->empty())
-        Write(" extends " + ConvertTypeName(domain, *s->base, false));
+        Write(" extends " + ConvertTypeName(domain, "", *s->base, false));
     else
         Write(" implements Comparable<Object>");
     WriteLine();
@@ -4958,7 +4976,7 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     if (s->body && !s->body->fields.empty())
     {
         for (const auto& field : s->body->fields)
-            WriteLineIndent("public " + ConvertTypeName(domain, *field) + " " + *field->name + " = " + ConvertDefault(domain, *field) + ";");
+            WriteLineIndent("public " + ConvertTypeName(domain, "", *field) + " " + *field->name + " = " + ConvertDefault(domain, "", *field) + ";");
         WriteLine();
     }
 
@@ -4973,14 +4991,14 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
         WriteIndent("public " + *s->name + "(");
         if (s->base && !s->base->empty())
         {
-            Write(ConvertTypeName(domain, *s->base, false) + " parent");
+            Write(ConvertTypeName(domain, "", *s->base, false) + " parent");
             first = false;
         }
         if (s->body)
         {
             for (const auto& field : s->body->fields)
             {
-                Write(std::string(first ? "" : ", ") + ConvertTypeName(domain, *field) + " " + *field->name);
+                Write(std::string(first ? "" : ", ") + ConvertTypeName(domain, "", *field) + " " + *field->name);
                 first = false;
             }
         }
@@ -5342,6 +5360,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
 {
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
+    std::string struct_name = domain + *p->name + "." + *s->name;
 
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
@@ -5582,8 +5601,8 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     // Generate struct field model get() methods
     WriteLine();
     WriteLineIndent("// Get the struct value");
-    WriteLineIndent("public " + *s->name + " get() { return get(new " + *s->name + "()); }");
-    WriteLineIndent("public " + *s->name + " get(" + *s->name + " fbeValue)");
+    WriteLineIndent("public " + struct_name + " get() { return get(new " + struct_name + "()); }");
+    WriteLineIndent("public " + struct_name + " get(" + struct_name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("long fbeBegin = getBegin();");
@@ -5602,7 +5621,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     // Generate struct field model getFields() method
     WriteLine();
     WriteLineIndent("// Get the struct fields values");
-    WriteLineIndent("public void getFields(" + *s->name + " fbeValue, long fbeStructSize)");
+    WriteLineIndent("public void getFields(" + struct_name + " fbeValue, long fbeStructSize)");
     WriteLineIndent("{");
     Indent(1);
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
@@ -5627,14 +5646,14 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
                 if (field->array || field->vector || field->list || field->set || field->map || field->hash)
                     WriteLineIndent(*field->name + ".get(fbeValue." + *field->name + ");");
                 else
-                    WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? ConvertConstant(domain, *field->type, *field->value, field->optional) : "") + ");");
+                    WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? ConvertConstant(domain, package, *field->type, *field->value, field->optional) : "") + ");");
                 Indent(-1);
                 WriteLineIndent("else");
                 Indent(1);
                 if (field->vector || field->list || field->set || field->map || field->hash)
                     WriteLineIndent("fbeValue." + *field->name + ".clear();");
                 else
-                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(domain, *field) + ";");
+                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(domain, package, *field) + ";");
                 Indent(-1);
                 WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize();");
             }
@@ -5685,7 +5704,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     // Generate struct field model set() method
     WriteLine();
     WriteLineIndent("// Set the struct value");
-    WriteLineIndent("public void set(" + *s->name + " fbeValue)");
+    WriteLineIndent("public void set(" + struct_name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("long fbeBegin = setBegin();");
@@ -5702,7 +5721,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     // Generate struct field model setFields() method
     WriteLine();
     WriteLineIndent("// Set the struct fields values");
-    WriteLineIndent("public void setFields(" + *s->name + " fbeValue)");
+    WriteLineIndent("public void setFields(" + struct_name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
@@ -5882,6 +5901,7 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
 {
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     std::string package = *p->name;
+    std::string struct_name = domain + *p->name + "." + *s->name;
 
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
@@ -5927,7 +5947,7 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     // Generate struct final model FBE properties
     WriteLine();
     WriteLineIndent("// Get the allocation size");
-    WriteLineIndent("public long fbeAllocationSize(" + *s->name + " fbeValue)");
+    WriteLineIndent("public long fbeAllocationSize(" + struct_name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("long fbeResult = 0");
@@ -6010,8 +6030,8 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     // Generate struct final model get() methods
     WriteLine();
     WriteLineIndent("// Get the struct value");
-    WriteLineIndent("public " + *s->name + " get(" + domain + "fbe.Size fbeSize) { return get(fbeSize, new " + *s->name + "()); }");
-    WriteLineIndent("public " + *s->name + " get(" + domain + "fbe.Size fbeSize, " + *s->name + " fbeValue)");
+    WriteLineIndent("public " + struct_name + " get(" + domain + "fbe.Size fbeSize) { return get(fbeSize, new " + struct_name + "()); }");
+    WriteLineIndent("public " + struct_name + " get(" + domain + "fbe.Size fbeSize, " + struct_name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("_buffer.shift(fbeOffset());");
@@ -6024,14 +6044,14 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     // Generate struct final model getFields() method
     WriteLine();
     WriteLineIndent("// Get the struct fields values");
-    WriteLineIndent("public long getFields(" + *s->name + " fbeValue)");
+    WriteLineIndent("public long getFields(" + struct_name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
         WriteLineIndent("long fbeCurrentOffset = 0;");
         WriteLineIndent("long fbeCurrentSize = 0;");
-        WriteLineIndent("var fbeFieldSize = new Size(0);");
+        WriteLineIndent("var fbeFieldSize = new " + domain + "fbe.Size(0);");
         if (s->base && !s->base->empty())
         {
             WriteLine();
@@ -6065,7 +6085,7 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     // Generate struct final model set() method
     WriteLine();
     WriteLineIndent("// Set the struct value");
-    WriteLineIndent("public long set(" + *s->name + " fbeValue)");
+    WriteLineIndent("public long set(" + struct_name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("_buffer.shift(fbeOffset());");
@@ -6078,14 +6098,14 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     // Generate struct final model setFields() method
     WriteLine();
     WriteLineIndent("// Set the struct fields values");
-    WriteLineIndent("public long setFields(" + *s->name + " fbeValue)");
+    WriteLineIndent("public long setFields(" + struct_name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
         WriteLineIndent("long fbeCurrentOffset = 0;");
         WriteLineIndent("long fbeCurrentSize = 0;");
-        WriteLineIndent("var fbeFieldSize = new Size(0);");
+        WriteLineIndent("var fbeFieldSize = new " + domain + "fbe.Size();");
         if (s->base && !s->base->empty())
         {
             WriteLine();
@@ -6234,7 +6254,7 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     WriteLineIndent("return 8;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("var fbeSize = new Size(0);");
+    WriteLineIndent("var fbeSize = new " + domain + "fbe.Size();");
     WriteLineIndent("value = _model.get(fbeSize, value);");
     WriteLineIndent("return 8 + fbeSize.value;");
     Indent(-1);
@@ -6783,9 +6803,9 @@ void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
     if (p->body)
     {
         for (const auto& e : p->body->enums)
-            WriteLineIndent("builder.registerTypeAdapter(" + *e->name + ".class, new " + *e->name + "Json());");
+            WriteLineIndent("builder.registerTypeAdapter(" + domain + package + "." + *e->name + ".class, new " + *e->name + "Json());");
         for (const auto& f : p->body->flags)
-            WriteLineIndent("builder.registerTypeAdapter(" + *f->name + ".class, new " + *f->name + "Json());");
+            WriteLineIndent("builder.registerTypeAdapter(" + domain + package + "." + *f->name + ".class, new " + *f->name + "Json());");
     }
     WriteLineIndent("return builder;");
     Indent(-1);
@@ -6814,6 +6834,29 @@ bool GeneratorJava::IsKnownType(const std::string& type)
             (type == "float") || (type == "double") ||
             (type == "decimal") || (type == "string") ||
             (type == "timestamp") || (type == "uuid"));
+}
+
+bool GeneratorJava::IsImportedType(const std::string& type)
+{
+    size_t pos = type.find_last_of('.');
+    return (pos != std::string::npos);
+}
+
+bool GeneratorJava::IsPackageType(const std::string& type)
+{
+    if (IsKnownType(type) || IsImportedType(type))
+        return true;
+
+    return ((type == "Boolean") ||
+            (type == "Byte") || (type == "java.nio.ByteBuffer") ||
+            (type == "Character") ||
+            (type == "Byte") || (type == "UByte") ||
+            (type == "Short") || (type == "UShort") ||
+            (type == "Integer") || (type == "UInteger") ||
+            (type == "Long") || (type == "ULong") ||
+            (type == "Float") || (type == "Double") ||
+            (type == "java.math.BigDecimal") || (type == "java.math.BigInteger") ||
+            (type == "String") || (type == "java.time.Instant") || (type == "java.util.UUID"));
 }
 
 bool GeneratorJava::IsPrimitiveType(const std::string& type, bool optional)
@@ -7077,7 +7120,7 @@ std::string GeneratorJava::ConvertPrimitiveTypeName(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertTypeName(const std::string& domain, const std::string& type, bool optional)
+std::string GeneratorJava::ConvertTypeName(const std::string& domain, const std::string& package, const std::string& type, bool optional)
 {
     if (optional)
     {
@@ -7160,31 +7203,33 @@ std::string GeneratorJava::ConvertTypeName(const std::string& domain, const std:
         ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
+    else if (!package.empty())
+        ns = domain + package + ".";
 
     return ns + t;
 }
 
-std::string GeneratorJava::ConvertTypeName(const std::string& domain, const StructField& field)
+std::string GeneratorJava::ConvertTypeName(const std::string& domain, const std::string& package, const StructField& field)
 {
     if (field.array)
-        return ConvertTypeName(domain, *field.type, field.optional) + "[]";
+        return ConvertTypeName(domain, package, *field.type, field.optional) + "[]";
     else if (field.vector)
-        return "java.util.ArrayList<" + ConvertTypeName(domain, *field.type, true) + ">";
+        return "java.util.ArrayList<" + ConvertTypeName(domain, package, *field.type, true) + ">";
     else if (field.list)
-        return "java.util.LinkedList<" + ConvertTypeName(domain, *field.type, true) + ">";
+        return "java.util.LinkedList<" + ConvertTypeName(domain, package, *field.type, true) + ">";
     else if (field.set)
-        return "java.util.HashSet<" + ConvertTypeName(domain, *field.key, true) + ">";
+        return "java.util.HashSet<" + ConvertTypeName(domain, package, *field.key, true) + ">";
     else if (field.map)
-        return "java.util.TreeMap<" + ConvertTypeName(domain, *field.key, true) + ", " + ConvertTypeName(domain, *field.type, true) +">";
+        return "java.util.TreeMap<" + ConvertTypeName(domain, package, *field.key, true) + ", " + ConvertTypeName(domain, package, *field.type, true) +">";
     else if (field.hash)
-        return "java.util.HashMap<" + ConvertTypeName(domain, *field.key, true) + ", " + ConvertTypeName(domain, *field.type, true) +">";
+        return "java.util.HashMap<" + ConvertTypeName(domain, package, *field.key, true) + ", " + ConvertTypeName(domain, package, *field.type, true) +">";
 
-    return ConvertTypeName(domain, *field.type, field.optional);
+    return ConvertTypeName(domain, package, *field.type, field.optional);
 }
 
 std::string GeneratorJava::ConvertBaseFieldName(const std::string& domain, const std::string& type, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     std::string ns = "";
     std::string t = type;
@@ -7304,7 +7349,7 @@ std::string GeneratorJava::ConvertTypeFieldType(const std::string& domain, const
 
 std::string GeneratorJava::ConvertTypeFieldDeclaration(const std::string& domain, const std::string& type, bool optional, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     std::string ns = "";
     std::string opt = optional ? "Optional" : "";
@@ -7318,13 +7363,15 @@ std::string GeneratorJava::ConvertTypeFieldDeclaration(const std::string& domain
         ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
+    else
+        ns = (IsKnownType(type) && !optional) ? (domain + "fbe.") : "";
 
     return ns + modelType + "Model" + opt + ConvertTypeFieldName(t);
 }
 
 std::string GeneratorJava::ConvertTypeFieldDeclaration(const std::string& domain, const StructField& field, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (field.array)
         return modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type);
@@ -7340,7 +7387,7 @@ std::string GeneratorJava::ConvertTypeFieldDeclaration(const std::string& domain
 
 std::string GeneratorJava::ConvertTypeFieldInitialization(const std::string& domain, const StructField& field, const std::string& offset, bool final)
 {
-    std::string modelType = (final ? "Final" : "Field");
+    std::string modelType = final ? "Final" : "Field";
 
     if (field.array)
         return "new " + modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ", " + std::to_string(field.N) + ")";
@@ -7363,11 +7410,13 @@ std::string GeneratorJava::ConvertTypeFieldInitialization(const std::string& dom
         ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
+    else
+        ns = IsKnownType(type) ? (domain + "fbe.") : "";
 
     return "new " + ns + modelType + "Model" + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
 }
 
-std::string GeneratorJava::ConvertConstant(const std::string& domain, const std::string& type, const std::string& value, bool optional)
+std::string GeneratorJava::ConvertConstant(const std::string& domain, const std::string& package, const std::string& type, const std::string& value, bool optional)
 {
     if (value == "true")
         return "true";
@@ -7440,10 +7489,20 @@ std::string GeneratorJava::ConvertConstant(const std::string& domain, const std:
             bool first = true;
             for (const auto& it : flags)
             {
-                result += (first ? "" : ", ") + CppCommon::StringUtils::ToTrim(it) + ".getEnum()";
+                std::string flag = CppCommon::StringUtils::ToTrim(it);
+                size_t pos = flag.find_last_of('.');
+                if (pos != std::string::npos)
+                    flag = (package.empty() ? "" : (domain + package + ".")) + flag;
+                result += (first ? "" : ", ") + flag + ".getEnum()";
                 first = false;
             }
-            result = type + ".fromSet(EnumSet.of(" + result + "))";
+            result = (package.empty() ? "" : (domain + package + ".")) + type + ".fromSet(java.util.EnumSet.of(" + result + "))";
+        }
+        else
+        {
+            size_t pos = result.find_last_of('.');
+            if (pos != std::string::npos)
+                result = (package.empty() ? "" : (domain + package + ".")) + result;
         }
     }
 
@@ -7504,7 +7563,7 @@ std::string GeneratorJava::ConvertConstantSuffix(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertDefault(const std::string& domain, const std::string& type)
+std::string GeneratorJava::ConvertDefault(const std::string& domain, const std::string& package, const std::string& type)
 {
     if (type == "bool")
         return "false";
@@ -7535,24 +7594,37 @@ std::string GeneratorJava::ConvertDefault(const std::string& domain, const std::
     else if (type == "uuid")
         return domain + "fbe.UUIDGenerator.nil()";
 
-    return "new " + type + "()";
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        ns = domain + ns;
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+    else if (!package.empty())
+        ns = domain + package + ".";
+
+    return "new " + ns + t + "()";
 }
 
-std::string GeneratorJava::ConvertDefault(const std::string& domain, const StructField& field)
+std::string GeneratorJava::ConvertDefault(const std::string& domain, const std::string& package, const StructField& field)
 {
     if (field.value)
-        return ConvertConstant(domain, *field.type, *field.value, field.optional);
+        return ConvertConstant(domain, package, *field.type, *field.value, field.optional);
 
     if (field.array)
-        return "new " + ConvertTypeName(domain, *field.type, field.optional) + "[" + std::to_string(field.N) + "]";
+        return "new " + ConvertTypeName(domain, package, *field.type, field.optional) + "[" + std::to_string(field.N) + "]";
     else if (field.vector || field.list || field.set || field.map || field.hash)
-        return "new " + ConvertTypeName(domain, field) + "()";
+        return "new " + ConvertTypeName(domain, package, field) + "()";
     else if (field.optional)
         return "null";
-    else if (!IsKnownType(*field.type))
-        return "new " + ConvertTypeName(domain, field) + "()";
+    else if (!IsPackageType(*field.type))
+        return "new " + ConvertTypeName(domain, package, field) + "()";
 
-    return ConvertDefault(domain, *field.type);
+    return ConvertDefault(domain, package, *field.type);
 }
 
 std::string GeneratorJava::ConvertOutputStreamType(const std::string& type, const std::string& name, bool optional)

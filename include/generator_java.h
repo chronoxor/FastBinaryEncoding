@@ -93,6 +93,8 @@ private:
     void GenerateJson(const std::shared_ptr<Package>& p);
 
     bool IsKnownType(const std::string& type);
+    bool IsImportedType(const std::string& type);
+    bool IsPackageType(const std::string& type);
     bool IsPrimitiveType(const std::string& type, bool optional);
 
     std::string CreatePackagePath(const std::string& domain, const std::string& package);
@@ -106,19 +108,19 @@ private:
     std::string ConvertEnumConstantPrefix(const std::string& type);
     std::string ConvertEnumConstantSuffix(const std::string& type);
     std::string ConvertPrimitiveTypeName(const std::string& type);
-    std::string ConvertTypeName(const std::string& domain, const std::string& type, bool optional);
-    std::string ConvertTypeName(const std::string& domain, const StructField& field);
+    std::string ConvertTypeName(const std::string& domain, const std::string& package, const std::string& type, bool optional);
+    std::string ConvertTypeName(const std::string& domain, const std::string& package, const StructField& field);
     std::string ConvertBaseFieldName(const std::string& domain, const std::string& type, bool final);
     std::string ConvertTypeFieldName(const std::string& type);
     std::string ConvertTypeFieldType(const std::string& domain, const std::string& type, bool optional);
     std::string ConvertTypeFieldDeclaration(const std::string& domain, const std::string& type, bool optional, bool final);
     std::string ConvertTypeFieldDeclaration(const std::string& domain, const StructField& field, bool final);
     std::string ConvertTypeFieldInitialization(const std::string& domain, const StructField& field, const std::string& offset, bool final);
-    std::string ConvertConstant(const std::string& domain, const std::string& type, const std::string& value, bool optional);
+    std::string ConvertConstant(const std::string& domain, const std::string& package, const std::string& type, const std::string& value, bool optional);
     std::string ConvertConstantPrefix(const std::string& type);
     std::string ConvertConstantSuffix(const std::string& type);
-    std::string ConvertDefault(const std::string& domain, const std::string& type);
-    std::string ConvertDefault(const std::string& domain, const StructField& field);
+    std::string ConvertDefault(const std::string& domain, const std::string& package, const std::string& type);
+    std::string ConvertDefault(const std::string& domain, const std::string& package, const StructField& field);
 
     std::string ConvertOutputStreamType(const std::string& type, const std::string& name, bool optional);
     std::string ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate);

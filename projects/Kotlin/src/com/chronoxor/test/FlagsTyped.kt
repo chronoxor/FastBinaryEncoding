@@ -7,17 +7,6 @@
 
 package com.chronoxor.test
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 class FlagsTyped : Comparable<FlagsTyped>
 {
@@ -34,7 +23,7 @@ class FlagsTyped : Comparable<FlagsTyped>
         val FLAG_VALUE_8 = FlagsTyped(FlagsTypedEnum.FLAG_VALUE_8)
         val FLAG_VALUE_9 = FlagsTyped(FlagsTypedEnum.FLAG_VALUE_9)
 
-        fun fromSet(set: EnumSet<FlagsTypedEnum>): FlagsTyped
+        fun fromSet(set: java.util.EnumSet<FlagsTypedEnum>): FlagsTyped
         {
             @Suppress("CanBeVal")
             var result = 0uL
@@ -91,14 +80,14 @@ class FlagsTyped : Comparable<FlagsTyped>
     constructor()
     constructor(value: ULong) { setEnum(value) }
     constructor(value: FlagsTypedEnum) { setEnum(value) }
-    constructor(value: EnumSet<FlagsTypedEnum>) { setEnum(value) }
+    constructor(value: java.util.EnumSet<FlagsTypedEnum>) { setEnum(value) }
     constructor(value: FlagsTyped) { setEnum(value) }
 
     fun setDefault() { setEnum(0.toULong()) }
 
     fun setEnum(value: ULong) { this.raw = value; this.value = FlagsTypedEnum.mapValue(value) }
     fun setEnum(value: FlagsTypedEnum) { this.value = value; this.raw = value.raw; }
-    fun setEnum(value: EnumSet<FlagsTypedEnum>) { setEnum(FlagsTyped.fromSet(value)) }
+    fun setEnum(value: java.util.EnumSet<FlagsTypedEnum>) { setEnum(FlagsTyped.fromSet(value)) }
     fun setEnum(value: FlagsTyped) { this.value = value.value; this.raw = value.raw }
 
     fun hasFlags(flags: ULong): Boolean = ((raw.toULong() and flags.toULong()) != 0uL) && ((raw.toULong() and flags.toULong()) == flags.toULong())
@@ -113,9 +102,9 @@ class FlagsTyped : Comparable<FlagsTyped>
     fun removeFlags(flags: FlagsTypedEnum): FlagsTyped { removeFlags(flags.raw); return this }
     fun removeFlags(flags: FlagsTyped): FlagsTyped { removeFlags(flags.raw); return this }
 
-    val allSet: EnumSet<FlagsTypedEnum> get() = value!!.allSet
-    val noneSet: EnumSet<FlagsTypedEnum> get() = value!!.noneSet
-    val currentSet: EnumSet<FlagsTypedEnum> get() = value!!.currentSet
+    val allSet: java.util.EnumSet<FlagsTypedEnum> get() = value!!.allSet
+    val noneSet: java.util.EnumSet<FlagsTypedEnum> get() = value!!.noneSet
+    val currentSet: java.util.EnumSet<FlagsTypedEnum> get() = value!!.currentSet
 
     override fun compareTo(other: FlagsTyped): Int
     {

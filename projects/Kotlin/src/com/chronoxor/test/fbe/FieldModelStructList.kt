@@ -7,20 +7,9 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructList field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FieldModelStructList(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelStructList(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     val f1: FieldModelVectorByte = FieldModelVectorByte(buffer, 4 + 4)
     val f2: FieldModelVectorOptionalByte = FieldModelVectorOptionalByte(buffer, f1.fbeOffset + f1.fbeSize)
@@ -208,7 +197,7 @@ class FieldModelStructList(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     }
 
     // Get the struct value
-    fun get(fbeValue: StructList = StructList()): StructList
+    fun get(fbeValue: com.chronoxor.test.StructList = com.chronoxor.test.StructList()): com.chronoxor.test.StructList
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -222,7 +211,7 @@ class FieldModelStructList(buffer: Buffer, offset: Long) : FieldModel(buffer, of
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructList, fbeStructSize: Long)
+    fun getFields(fbeValue: com.chronoxor.test.StructList, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
 
@@ -315,7 +304,7 @@ class FieldModelStructList(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     }
 
     // Set the struct value
-    fun set(fbeValue: StructList)
+    fun set(fbeValue: com.chronoxor.test.StructList)
     {
         val fbeBegin = setBegin()
         if (fbeBegin == 0L)
@@ -327,7 +316,7 @@ class FieldModelStructList(buffer: Buffer, offset: Long) : FieldModel(buffer, of
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructList)
+    fun setFields(fbeValue: com.chronoxor.test.StructList)
     {
         f1.set(fbeValue.f1)
         f2.set(fbeValue.f2)

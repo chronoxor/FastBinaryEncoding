@@ -5,25 +5,13 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding optional Bytes field model
-public final class FieldModelOptionalBytes extends FieldModel
+public final class FieldModelOptionalBytes extends com.chronoxor.fbe.FieldModel
 {
-    public FieldModelOptionalBytes(Buffer buffer, long offset)
+    public FieldModelOptionalBytes(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        value = new FieldModelBytes(buffer, 0);
+        value = new com.chronoxor.fbe.FieldModelBytes(buffer, 0);
     }
 
     // Get the field size
@@ -57,7 +45,7 @@ public final class FieldModelOptionalBytes extends FieldModel
     }
 
     // Base field model value
-    public final FieldModelBytes value;
+    public final com.chronoxor.fbe.FieldModelBytes value;
 
     // Check if the optional value is valid
     @Override
@@ -102,14 +90,14 @@ public final class FieldModelOptionalBytes extends FieldModel
     }
 
     // Get the optional value
-    public ByteBuffer get() { return get(null); }
-    public ByteBuffer get(ByteBuffer defaults)
+    public java.nio.ByteBuffer get() { return get(null); }
+    public java.nio.ByteBuffer get(java.nio.ByteBuffer defaults)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
             return defaults;
 
-        ByteBuffer optional = value.get();
+        java.nio.ByteBuffer optional = value.get();
         getEnd(fbeBegin);
         return optional;
     }
@@ -145,7 +133,7 @@ public final class FieldModelOptionalBytes extends FieldModel
     }
 
     // Set the optional value
-    public void set(ByteBuffer optional)
+    public void set(java.nio.ByteBuffer optional)
     {
         long fbeBegin = setBegin(optional != null);
         if (fbeBegin == 0)

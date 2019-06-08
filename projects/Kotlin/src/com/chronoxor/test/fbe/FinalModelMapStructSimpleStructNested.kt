@@ -7,25 +7,14 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructSimple->StructNested map final model
-class FinalModelMapStructSimpleStructNested(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelMapStructSimpleStructNested(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     private val _modelKey = FinalModelStructSimple(buffer, offset)
     private val _modelValue = FinalModelStructNested(buffer, offset)
 
     // Get the allocation size
-    fun fbeAllocationSize(values: TreeMap<StructSimple, StructNested>): Long
+    fun fbeAllocationSize(values: java.util.TreeMap<com.chronoxor.test.StructSimple, com.chronoxor.test.StructNested>): Long
     {
         var size: Long = 4
         for ((key, value1) in values)
@@ -35,7 +24,7 @@ class FinalModelMapStructSimpleStructNested(buffer: Buffer, offset: Long) : Fina
         }
         return size
     }
-    fun fbeAllocationSize(values: HashMap<StructSimple, StructNested>): Long
+    fun fbeAllocationSize(values: java.util.HashMap<com.chronoxor.test.StructSimple, com.chronoxor.test.StructNested>): Long
     {
         var size: Long = 4
         for ((key, value1) in values)
@@ -76,8 +65,8 @@ class FinalModelMapStructSimpleStructNested(buffer: Buffer, offset: Long) : Fina
         return size
     }
 
-    // Get the map as TreeMap
-    fun get(values: TreeMap<StructSimple, StructNested>): Long
+    // Get the map as java.util.TreeMap
+    fun get(values: java.util.TreeMap<com.chronoxor.test.StructSimple, com.chronoxor.test.StructNested>): Long
     {
         values.clear()
 
@@ -90,7 +79,7 @@ class FinalModelMapStructSimpleStructNested(buffer: Buffer, offset: Long) : Fina
             return 4
 
         var size: Long = 4
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _modelKey.fbeOffset = fbeOffset + 4
         _modelValue.fbeOffset = fbeOffset + 4
         var i = fbeMapSize
@@ -111,8 +100,8 @@ class FinalModelMapStructSimpleStructNested(buffer: Buffer, offset: Long) : Fina
         return size
     }
 
-    // Get the map as HashMap
-    fun get(values: HashMap<StructSimple, StructNested>): Long
+    // Get the map as java.util.HashMap
+    fun get(values: java.util.HashMap<com.chronoxor.test.StructSimple, com.chronoxor.test.StructNested>): Long
     {
         values.clear()
 
@@ -125,7 +114,7 @@ class FinalModelMapStructSimpleStructNested(buffer: Buffer, offset: Long) : Fina
             return 4
 
         var size: Long = 4
-        val offset = Size()
+        val offset = com.chronoxor.fbe.Size()
         _modelKey.fbeOffset = fbeOffset + 4
         _modelValue.fbeOffset = fbeOffset + 4
         var i = fbeMapSize
@@ -147,8 +136,8 @@ class FinalModelMapStructSimpleStructNested(buffer: Buffer, offset: Long) : Fina
         return size
     }
 
-    // Set the map as TreeMap
-    fun set(values: TreeMap<StructSimple, StructNested>): Long
+    // Set the map as java.util.TreeMap
+    fun set(values: java.util.TreeMap<com.chronoxor.test.StructSimple, com.chronoxor.test.StructNested>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
@@ -172,8 +161,8 @@ class FinalModelMapStructSimpleStructNested(buffer: Buffer, offset: Long) : Fina
         return size
     }
 
-    // Set the map as HashMap
-    fun set(values: HashMap<StructSimple, StructNested>): Long
+    // Set the map as java.util.HashMap
+    fun set(values: java.util.HashMap<com.chronoxor.test.StructSimple, com.chronoxor.test.StructNested>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size)

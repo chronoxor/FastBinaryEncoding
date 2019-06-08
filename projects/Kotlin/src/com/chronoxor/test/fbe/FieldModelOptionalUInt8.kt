@@ -7,19 +7,8 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding optional UInt8 field model
-class FieldModelOptionalUInt8(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelOptionalUInt8(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     // Field size
     override val fbeSize: Long = 1 + 4
@@ -51,7 +40,7 @@ class FieldModelOptionalUInt8(buffer: Buffer, offset: Long) : FieldModel(buffer,
     }
 
     // Base field model value
-    val value = FieldModelUInt8(buffer, 0)
+    val value = com.chronoxor.fbe.FieldModelUInt8(buffer, 0)
 
     // Check if the optional value is valid
     override fun verify(): Boolean

@@ -5,33 +5,21 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding String->FlagsSimple map final model
-public final class FinalModelMapStringFlagsSimple extends FinalModel
+public final class FinalModelMapStringFlagsSimple extends com.chronoxor.fbe.FinalModel
 {
-    private final FinalModelString _modelKey;
+    private final com.chronoxor.fbe.FinalModelString _modelKey;
     private final FinalModelFlagsSimple _modelValue;
 
-    public FinalModelMapStringFlagsSimple(Buffer buffer, long offset)
+    public FinalModelMapStringFlagsSimple(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        _modelKey = new FinalModelString(buffer, offset);
+        _modelKey = new com.chronoxor.fbe.FinalModelString(buffer, offset);
         _modelValue = new FinalModelFlagsSimple(buffer, offset);
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(TreeMap<String, FlagsSimple> values)
+    public long fbeAllocationSize(java.util.TreeMap<String, com.chronoxor.test.FlagsSimple> values)
     {
         long size = 4;
         for (var value : values.entrySet())
@@ -41,7 +29,7 @@ public final class FinalModelMapStringFlagsSimple extends FinalModel
         }
         return size;
     }
-    public long fbeAllocationSize(HashMap<String, FlagsSimple> values)
+    public long fbeAllocationSize(java.util.HashMap<String, com.chronoxor.test.FlagsSimple> values)
     {
         long size = 4;
         for (var value : values.entrySet())
@@ -82,8 +70,8 @@ public final class FinalModelMapStringFlagsSimple extends FinalModel
         return size;
     }
 
-    // Get the map as TreeMap
-    public long get(TreeMap<String, FlagsSimple> values)
+    // Get the map as java.util.TreeMap
+    public long get(java.util.TreeMap<String, com.chronoxor.test.FlagsSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -100,7 +88,7 @@ public final class FinalModelMapStringFlagsSimple extends FinalModel
             return 4;
 
         long size = 4;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _modelKey.fbeOffset(fbeOffset() + 4);
         _modelValue.fbeOffset(fbeOffset() + 4);
         for (long i = fbeMapSize; i-- > 0;)
@@ -111,7 +99,7 @@ public final class FinalModelMapStringFlagsSimple extends FinalModel
             _modelValue.fbeShift(offset.value);
             size += offset.value;
             offset.value = 0;
-            FlagsSimple value = _modelValue.get(offset);
+            com.chronoxor.test.FlagsSimple value = _modelValue.get(offset);
             _modelKey.fbeShift(offset.value);
             _modelValue.fbeShift(offset.value);
             size += offset.value;
@@ -120,8 +108,8 @@ public final class FinalModelMapStringFlagsSimple extends FinalModel
         return size;
     }
 
-    // Get the map as HashMap
-    public long get(HashMap<String, FlagsSimple> values)
+    // Get the map as java.util.HashMap
+    public long get(java.util.HashMap<String, com.chronoxor.test.FlagsSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -138,7 +126,7 @@ public final class FinalModelMapStringFlagsSimple extends FinalModel
             return 4;
 
         long size = 4;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _modelKey.fbeOffset(fbeOffset() + 4);
         _modelValue.fbeOffset(fbeOffset() + 4);
         for (long i = fbeMapSize; i-- > 0;)
@@ -149,7 +137,7 @@ public final class FinalModelMapStringFlagsSimple extends FinalModel
             _modelValue.fbeShift(offset.value);
             size += offset.value;
             offset.value = 0;
-            FlagsSimple value = _modelValue.get(offset);
+            com.chronoxor.test.FlagsSimple value = _modelValue.get(offset);
             _modelKey.fbeShift(offset.value);
             _modelValue.fbeShift(offset.value);
             size += offset.value;
@@ -159,8 +147,8 @@ public final class FinalModelMapStringFlagsSimple extends FinalModel
         return size;
     }
 
-    // Set the map as TreeMap
-    public long set(TreeMap<String, FlagsSimple> values)
+    // Set the map as java.util.TreeMap
+    public long set(java.util.TreeMap<String, com.chronoxor.test.FlagsSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -188,8 +176,8 @@ public final class FinalModelMapStringFlagsSimple extends FinalModel
         return size;
     }
 
-    // Set the map as HashMap
-    public long set(HashMap<String, FlagsSimple> values)
+    // Set the map as java.util.HashMap
+    public long set(java.util.HashMap<String, com.chronoxor.test.FlagsSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

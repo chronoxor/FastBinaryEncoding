@@ -7,17 +7,6 @@
 
 package com.chronoxor.test
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 @Suppress("EnumEntryName", "MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 enum class FlagsTypedEnum
 {
@@ -45,11 +34,11 @@ enum class FlagsTypedEnum
     fun hasFlags(flags: ULong): Boolean = ((raw.toULong() and flags.toULong()) != 0uL) && ((raw.toULong() and flags.toULong()) == flags.toULong())
     fun hasFlags(flags: FlagsTypedEnum): Boolean = hasFlags(flags.raw)
 
-    val allSet: EnumSet<FlagsTypedEnum> get() = EnumSet.allOf(FlagsTypedEnum::class.java)
-    val noneSet: EnumSet<FlagsTypedEnum> get() = EnumSet.noneOf(FlagsTypedEnum::class.java)
-    val currentSet: EnumSet<FlagsTypedEnum> get()
+    val allSet: java.util.EnumSet<FlagsTypedEnum> get() = java.util.EnumSet.allOf(FlagsTypedEnum::class.java)
+    val noneSet: java.util.EnumSet<FlagsTypedEnum> get() = java.util.EnumSet.noneOf(FlagsTypedEnum::class.java)
+    val currentSet: java.util.EnumSet<FlagsTypedEnum> get()
     {
-        val result = EnumSet.noneOf(FlagsTypedEnum::class.java)
+        val result = java.util.EnumSet.noneOf(FlagsTypedEnum::class.java)
         if ((raw.toULong() and FLAG_VALUE_0.raw.toULong()) != 0uL)
         {
             result.add(FLAG_VALUE_0)
@@ -162,7 +151,7 @@ enum class FlagsTypedEnum
 
     companion object
     {
-        private val mapping = HashMap<ULong, FlagsTypedEnum>()
+        private val mapping = java.util.HashMap<ULong, FlagsTypedEnum>()
 
         init
         {

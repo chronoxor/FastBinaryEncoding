@@ -7,20 +7,9 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructSet final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FinalModelStructSet(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+class FinalModelStructSet(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FinalModel(buffer, offset)
 {
     val f1: FinalModelVectorByte = FinalModelVectorByte(buffer, 0)
     val f2: FinalModelVectorEnumSimple = FinalModelVectorEnumSimple(buffer, 0)
@@ -29,7 +18,7 @@ class FinalModelStructSet(buffer: Buffer, offset: Long) : FinalModel(buffer, off
 
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(fbeValue: StructSet): Long = (0
+    fun fbeAllocationSize(fbeValue: com.chronoxor.test.StructSet): Long = (0
         + f1.fbeAllocationSize(fbeValue.f1)
         + f2.fbeAllocationSize(fbeValue.f2)
         + f3.fbeAllocationSize(fbeValue.f3)
@@ -88,7 +77,7 @@ class FinalModelStructSet(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     }
 
     // Get the struct value
-    fun get(fbeSize: Size, fbeValue: StructSet = StructSet()): StructSet
+    fun get(fbeSize: com.chronoxor.fbe.Size, fbeValue: com.chronoxor.test.StructSet = com.chronoxor.test.StructSet()): com.chronoxor.test.StructSet
     {
         _buffer.shift(fbeOffset)
         fbeSize.value = getFields(fbeValue)
@@ -98,11 +87,11 @@ class FinalModelStructSet(buffer: Buffer, offset: Long) : FinalModel(buffer, off
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructSet): Long
+    fun getFields(fbeValue: com.chronoxor.test.StructSet): Long
     {
         var fbeCurrentOffset = 0L
         var fbeCurrentSize = 0L
-        val fbeFieldSize = Size(0)
+        val fbeFieldSize = com.chronoxor.fbe.Size()
 
         f1.fbeOffset = fbeCurrentOffset
         fbeFieldSize.value = f1.get(fbeValue.f1)
@@ -128,7 +117,7 @@ class FinalModelStructSet(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     }
 
     // Set the struct value
-    fun set(fbeValue: StructSet): Long
+    fun set(fbeValue: com.chronoxor.test.StructSet): Long
     {
         _buffer.shift(fbeOffset)
         val fbeSize = setFields(fbeValue)
@@ -138,11 +127,11 @@ class FinalModelStructSet(buffer: Buffer, offset: Long) : FinalModel(buffer, off
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructSet): Long
+    fun setFields(fbeValue: com.chronoxor.test.StructSet): Long
     {
         var fbeCurrentOffset = 0L
         var fbeCurrentSize = 0L
-        val fbeFieldSize = Size(0)
+        val fbeFieldSize = com.chronoxor.fbe.Size()
 
         f1.fbeOffset = fbeCurrentOffset
         fbeFieldSize.value = f1.set(fbeValue.f1)

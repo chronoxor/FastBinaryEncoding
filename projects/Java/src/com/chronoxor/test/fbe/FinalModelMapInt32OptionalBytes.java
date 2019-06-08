@@ -5,33 +5,21 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding Int32->OptionalBytes map final model
-public final class FinalModelMapInt32OptionalBytes extends FinalModel
+public final class FinalModelMapInt32OptionalBytes extends com.chronoxor.fbe.FinalModel
 {
-    private final FinalModelInt32 _modelKey;
+    private final com.chronoxor.fbe.FinalModelInt32 _modelKey;
     private final FinalModelOptionalBytes _modelValue;
 
-    public FinalModelMapInt32OptionalBytes(Buffer buffer, long offset)
+    public FinalModelMapInt32OptionalBytes(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
-        _modelKey = new FinalModelInt32(buffer, offset);
+        _modelKey = new com.chronoxor.fbe.FinalModelInt32(buffer, offset);
         _modelValue = new FinalModelOptionalBytes(buffer, offset);
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(TreeMap<Integer, ByteBuffer> values)
+    public long fbeAllocationSize(java.util.TreeMap<Integer, java.nio.ByteBuffer> values)
     {
         long size = 4;
         for (var value : values.entrySet())
@@ -41,7 +29,7 @@ public final class FinalModelMapInt32OptionalBytes extends FinalModel
         }
         return size;
     }
-    public long fbeAllocationSize(HashMap<Integer, ByteBuffer> values)
+    public long fbeAllocationSize(java.util.HashMap<Integer, java.nio.ByteBuffer> values)
     {
         long size = 4;
         for (var value : values.entrySet())
@@ -82,8 +70,8 @@ public final class FinalModelMapInt32OptionalBytes extends FinalModel
         return size;
     }
 
-    // Get the map as TreeMap
-    public long get(TreeMap<Integer, ByteBuffer> values)
+    // Get the map as java.util.TreeMap
+    public long get(java.util.TreeMap<Integer, java.nio.ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -100,7 +88,7 @@ public final class FinalModelMapInt32OptionalBytes extends FinalModel
             return 4;
 
         long size = 4;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _modelKey.fbeOffset(fbeOffset() + 4);
         _modelValue.fbeOffset(fbeOffset() + 4);
         for (long i = fbeMapSize; i-- > 0;)
@@ -111,7 +99,7 @@ public final class FinalModelMapInt32OptionalBytes extends FinalModel
             _modelValue.fbeShift(offset.value);
             size += offset.value;
             offset.value = 0;
-            ByteBuffer value = _modelValue.get(offset);
+            java.nio.ByteBuffer value = _modelValue.get(offset);
             _modelKey.fbeShift(offset.value);
             _modelValue.fbeShift(offset.value);
             size += offset.value;
@@ -120,8 +108,8 @@ public final class FinalModelMapInt32OptionalBytes extends FinalModel
         return size;
     }
 
-    // Get the map as HashMap
-    public long get(HashMap<Integer, ByteBuffer> values)
+    // Get the map as java.util.HashMap
+    public long get(java.util.HashMap<Integer, java.nio.ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -138,7 +126,7 @@ public final class FinalModelMapInt32OptionalBytes extends FinalModel
             return 4;
 
         long size = 4;
-        var offset = new Size();
+        var offset = new com.chronoxor.fbe.Size();
         _modelKey.fbeOffset(fbeOffset() + 4);
         _modelValue.fbeOffset(fbeOffset() + 4);
         for (long i = fbeMapSize; i-- > 0;)
@@ -149,7 +137,7 @@ public final class FinalModelMapInt32OptionalBytes extends FinalModel
             _modelValue.fbeShift(offset.value);
             size += offset.value;
             offset.value = 0;
-            ByteBuffer value = _modelValue.get(offset);
+            java.nio.ByteBuffer value = _modelValue.get(offset);
             _modelKey.fbeShift(offset.value);
             _modelValue.fbeShift(offset.value);
             size += offset.value;
@@ -159,8 +147,8 @@ public final class FinalModelMapInt32OptionalBytes extends FinalModel
         return size;
     }
 
-    // Set the map as TreeMap
-    public long set(TreeMap<Integer, ByteBuffer> values)
+    // Set the map as java.util.TreeMap
+    public long set(java.util.TreeMap<Integer, java.nio.ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -188,8 +176,8 @@ public final class FinalModelMapInt32OptionalBytes extends FinalModel
         return size;
     }
 
-    // Set the map as HashMap
-    public long set(HashMap<Integer, ByteBuffer> values)
+    // Set the map as java.util.HashMap
+    public long set(java.util.HashMap<Integer, java.nio.ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

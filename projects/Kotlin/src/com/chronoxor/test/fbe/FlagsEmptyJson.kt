@@ -7,31 +7,18 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
-import com.google.gson.*
-
-class FlagsEmptyJson : JsonSerializer<FlagsEmpty>, JsonDeserializer<FlagsEmpty>
+class FlagsEmptyJson : com.google.gson.JsonSerializer<com.chronoxor.test.FlagsEmpty>, com.google.gson.JsonDeserializer<com.chronoxor.test.FlagsEmpty>
 {
 
     @Override
-    override fun serialize(src: FlagsEmpty, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: com.chronoxor.test.FlagsEmpty, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(src.raw)
+        return com.google.gson.JsonPrimitive(src.raw)
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext):FlagsEmpty
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext):com.chronoxor.test.FlagsEmpty
     {
-        return FlagsEmpty(json.asJsonPrimitive.asInt)
+        return com.chronoxor.test.FlagsEmpty(json.asJsonPrimitive.asInt)
     }
 }

@@ -7,29 +7,16 @@
 
 package com.chronoxor.protoex.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.protoex.*
-
-import com.google.gson.*
-
-class OrderSideJson : JsonSerializer<OrderSide>, JsonDeserializer<OrderSide>
+class OrderSideJson : com.google.gson.JsonSerializer<com.chronoxor.protoex.OrderSide>, com.google.gson.JsonDeserializer<com.chronoxor.protoex.OrderSide>
 {
-    override fun serialize(src: OrderSide, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    override fun serialize(src: com.chronoxor.protoex.OrderSide, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return JsonPrimitive(src.raw)
+        return com.google.gson.JsonPrimitive(src.raw)
     }
 
-    @Throws(JsonParseException::class)
-    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): OrderSide
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): com.chronoxor.protoex.OrderSide
     {
-        return OrderSide(json.asJsonPrimitive.asByte)
+        return com.chronoxor.protoex.OrderSide(json.asJsonPrimitive.asByte)
     }
 }

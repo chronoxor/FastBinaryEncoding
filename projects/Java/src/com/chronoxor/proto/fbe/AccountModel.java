@@ -5,25 +5,13 @@
 
 package com.chronoxor.proto.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.proto.*;
-
 // Fast Binary Encoding Account model
-public final class AccountModel extends Model
+public final class AccountModel extends com.chronoxor.fbe.Model
 {
     public final FieldModelAccount model;
 
     public AccountModel() { model = new FieldModelAccount(getBuffer(), 4); }
-    public AccountModel(Buffer buffer) { super(buffer); model = new FieldModelAccount(getBuffer(), 4); }
+    public AccountModel(com.chronoxor.fbe.Buffer buffer) { super(buffer); model = new FieldModelAccount(getBuffer(), 4); }
 
     // Get the model size
     public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }
@@ -61,7 +49,7 @@ public final class AccountModel extends Model
     }
 
     // Serialize the struct value
-    public long serialize(Account value)
+    public long serialize(com.chronoxor.proto.Account value)
     {
         long fbeBegin = createBegin();
         model.set(value);
@@ -70,12 +58,12 @@ public final class AccountModel extends Model
     }
 
     // Deserialize the struct value
-    public Account deserialize() { var value = new Account(); deserialize(value); return value; }
-    public long deserialize(Account value)
+    public com.chronoxor.proto.Account deserialize() { var value = new com.chronoxor.proto.Account(); deserialize(value); return value; }
+    public long deserialize(com.chronoxor.proto.Account value)
     {
         if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())
         {
-            value = new Account();
+            value = new com.chronoxor.proto.Account();
             return 0;
         }
 
@@ -83,7 +71,7 @@ public final class AccountModel extends Model
         assert (fbeFullSize >= model.fbeSize()) : "Model is broken!";
         if (fbeFullSize < model.fbeSize())
         {
-            value = new Account();
+            value = new com.chronoxor.proto.Account();
             return 0;
         }
 

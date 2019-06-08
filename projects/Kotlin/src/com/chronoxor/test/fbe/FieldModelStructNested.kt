@@ -7,20 +7,9 @@
 
 package com.chronoxor.test.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.test.*
-
 // Fast Binary Encoding StructNested field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FieldModelStructNested(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelStructNested(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
     val parent: FieldModelStructOptional = FieldModelStructOptional(buffer, 4 + 4)
     val f1000: FieldModelEnumSimple = FieldModelEnumSimple(buffer, parent.fbeOffset + parent.fbeBody - 4 - 4)
@@ -235,7 +224,7 @@ class FieldModelStructNested(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Get the struct value
-    fun get(fbeValue: StructNested = StructNested()): StructNested
+    fun get(fbeValue: com.chronoxor.test.StructNested = com.chronoxor.test.StructNested()): com.chronoxor.test.StructNested
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -249,7 +238,7 @@ class FieldModelStructNested(buffer: Buffer, offset: Long) : FieldModel(buffer, 
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: StructNested, fbeStructSize: Long)
+    fun getFields(fbeValue: com.chronoxor.test.StructNested, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
 
@@ -260,7 +249,7 @@ class FieldModelStructNested(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         if ((fbeCurrentSize + f1000.fbeSize) <= fbeStructSize)
             fbeValue.f1000 = f1000.get()
         else
-            fbeValue.f1000 = EnumSimple()
+            fbeValue.f1000 = com.chronoxor.test.EnumSimple()
         fbeCurrentSize += f1000.fbeSize
 
         if ((fbeCurrentSize + f1001.fbeSize) <= fbeStructSize)
@@ -270,9 +259,9 @@ class FieldModelStructNested(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         fbeCurrentSize += f1001.fbeSize
 
         if ((fbeCurrentSize + f1002.fbeSize) <= fbeStructSize)
-            fbeValue.f1002 = f1002.get(EnumTyped.ENUM_VALUE_2)
+            fbeValue.f1002 = f1002.get(com.chronoxor.test.EnumTyped.ENUM_VALUE_2)
         else
-            fbeValue.f1002 = EnumTyped.ENUM_VALUE_2
+            fbeValue.f1002 = com.chronoxor.test.EnumTyped.ENUM_VALUE_2
         fbeCurrentSize += f1002.fbeSize
 
         if ((fbeCurrentSize + f1003.fbeSize) <= fbeStructSize)
@@ -284,7 +273,7 @@ class FieldModelStructNested(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         if ((fbeCurrentSize + f1004.fbeSize) <= fbeStructSize)
             fbeValue.f1004 = f1004.get()
         else
-            fbeValue.f1004 = FlagsSimple()
+            fbeValue.f1004 = com.chronoxor.test.FlagsSimple()
         fbeCurrentSize += f1004.fbeSize
 
         if ((fbeCurrentSize + f1005.fbeSize) <= fbeStructSize)
@@ -294,9 +283,9 @@ class FieldModelStructNested(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         fbeCurrentSize += f1005.fbeSize
 
         if ((fbeCurrentSize + f1006.fbeSize) <= fbeStructSize)
-            fbeValue.f1006 = f1006.get(FlagsTyped.fromSet(EnumSet.of(FlagsTyped.FLAG_VALUE_2.value, FlagsTyped.FLAG_VALUE_4.value, FlagsTyped.FLAG_VALUE_6.value)))
+            fbeValue.f1006 = f1006.get(com.chronoxor.test.FlagsTyped.fromSet(java.util.EnumSet.of(com.chronoxor.test.FlagsTyped.FLAG_VALUE_2.value, com.chronoxor.test.FlagsTyped.FLAG_VALUE_4.value, com.chronoxor.test.FlagsTyped.FLAG_VALUE_6.value)))
         else
-            fbeValue.f1006 = FlagsTyped.fromSet(EnumSet.of(FlagsTyped.FLAG_VALUE_2.value, FlagsTyped.FLAG_VALUE_4.value, FlagsTyped.FLAG_VALUE_6.value))
+            fbeValue.f1006 = com.chronoxor.test.FlagsTyped.fromSet(java.util.EnumSet.of(com.chronoxor.test.FlagsTyped.FLAG_VALUE_2.value, com.chronoxor.test.FlagsTyped.FLAG_VALUE_4.value, com.chronoxor.test.FlagsTyped.FLAG_VALUE_6.value))
         fbeCurrentSize += f1006.fbeSize
 
         if ((fbeCurrentSize + f1007.fbeSize) <= fbeStructSize)
@@ -308,7 +297,7 @@ class FieldModelStructNested(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         if ((fbeCurrentSize + f1008.fbeSize) <= fbeStructSize)
             fbeValue.f1008 = f1008.get()
         else
-            fbeValue.f1008 = StructSimple()
+            fbeValue.f1008 = com.chronoxor.test.StructSimple()
         fbeCurrentSize += f1008.fbeSize
 
         if ((fbeCurrentSize + f1009.fbeSize) <= fbeStructSize)
@@ -320,7 +309,7 @@ class FieldModelStructNested(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         if ((fbeCurrentSize + f1010.fbeSize) <= fbeStructSize)
             fbeValue.f1010 = f1010.get()
         else
-            fbeValue.f1010 = StructOptional()
+            fbeValue.f1010 = com.chronoxor.test.StructOptional()
         fbeCurrentSize += f1010.fbeSize
 
         if ((fbeCurrentSize + f1011.fbeSize) <= fbeStructSize)
@@ -358,7 +347,7 @@ class FieldModelStructNested(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Set the struct value
-    fun set(fbeValue: StructNested)
+    fun set(fbeValue: com.chronoxor.test.StructNested)
     {
         val fbeBegin = setBegin()
         if (fbeBegin == 0L)
@@ -370,7 +359,7 @@ class FieldModelStructNested(buffer: Buffer, offset: Long) : FieldModel(buffer, 
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: StructNested)
+    fun setFields(fbeValue: com.chronoxor.test.StructNested)
     {
         parent.setFields(fbeValue)
         f1000.set(fbeValue.f1000)

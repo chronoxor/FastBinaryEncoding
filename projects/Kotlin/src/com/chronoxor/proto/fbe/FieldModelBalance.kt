@@ -7,23 +7,12 @@
 
 package com.chronoxor.proto.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.proto.*
-
 // Fast Binary Encoding Balance field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FieldModelBalance(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelBalance(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
-    val currency: FieldModelString = FieldModelString(buffer, 4 + 4)
-    val amount: FieldModelDouble = FieldModelDouble(buffer, currency.fbeOffset + currency.fbeSize)
+    val currency: com.chronoxor.fbe.FieldModelString = com.chronoxor.fbe.FieldModelString(buffer, 4 + 4)
+    val amount: com.chronoxor.fbe.FieldModelDouble = com.chronoxor.fbe.FieldModelDouble(buffer, currency.fbeOffset + currency.fbeSize)
 
     // Field size
     override val fbeSize: Long = 4
@@ -136,7 +125,7 @@ class FieldModelBalance(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     }
 
     // Get the struct value
-    fun get(fbeValue: Balance = Balance()): Balance
+    fun get(fbeValue: com.chronoxor.proto.Balance = com.chronoxor.proto.Balance()): com.chronoxor.proto.Balance
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -150,7 +139,7 @@ class FieldModelBalance(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: Balance, fbeStructSize: Long)
+    fun getFields(fbeValue: com.chronoxor.proto.Balance, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
 
@@ -195,7 +184,7 @@ class FieldModelBalance(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     }
 
     // Set the struct value
-    fun set(fbeValue: Balance)
+    fun set(fbeValue: com.chronoxor.proto.Balance)
     {
         val fbeBegin = setBegin()
         if (fbeBegin == 0L)
@@ -207,7 +196,7 @@ class FieldModelBalance(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: Balance)
+    fun setFields(fbeValue: com.chronoxor.proto.Balance)
     {
         currency.set(fbeValue.currency)
         amount.set(fbeValue.amount)

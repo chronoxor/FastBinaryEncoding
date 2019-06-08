@@ -5,20 +5,8 @@
 
 package com.chronoxor.test.fbe;
 
-import java.io.*;
-import java.lang.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.*;
-import java.time.*;
-import java.util.*;
-
-import com.chronoxor.fbe.*;
-import com.chronoxor.test.*;
-
 // Fast Binary Encoding StructList field model
-public final class FieldModelStructList extends FieldModel
+public final class FieldModelStructList extends com.chronoxor.fbe.FieldModel
 {
     public final FieldModelVectorByte f1;
     public final FieldModelVectorOptionalByte f2;
@@ -31,7 +19,7 @@ public final class FieldModelStructList extends FieldModel
     public final FieldModelVectorStructSimple f9;
     public final FieldModelVectorOptionalStructSimple f10;
 
-    public FieldModelStructList(Buffer buffer, long offset)
+    public FieldModelStructList(com.chronoxor.fbe.Buffer buffer, long offset)
     {
         super(buffer, offset);
         f1 = new FieldModelVectorByte(buffer, 4 + 4);
@@ -221,8 +209,8 @@ public final class FieldModelStructList extends FieldModel
     }
 
     // Get the struct value
-    public StructList get() { return get(new StructList()); }
-    public StructList get(StructList fbeValue)
+    public com.chronoxor.test.StructList get() { return get(new com.chronoxor.test.StructList()); }
+    public com.chronoxor.test.StructList get(com.chronoxor.test.StructList fbeValue)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
@@ -235,7 +223,7 @@ public final class FieldModelStructList extends FieldModel
     }
 
     // Get the struct fields values
-    public void getFields(StructList fbeValue, long fbeStructSize)
+    public void getFields(com.chronoxor.test.StructList fbeValue, long fbeStructSize)
     {
         long fbeCurrentSize = 4 + 4;
 
@@ -328,7 +316,7 @@ public final class FieldModelStructList extends FieldModel
     }
 
     // Set the struct value
-    public void set(StructList fbeValue)
+    public void set(com.chronoxor.test.StructList fbeValue)
     {
         long fbeBegin = setBegin();
         if (fbeBegin == 0)
@@ -339,7 +327,7 @@ public final class FieldModelStructList extends FieldModel
     }
 
     // Set the struct fields values
-    public void setFields(StructList fbeValue)
+    public void setFields(com.chronoxor.test.StructList fbeValue)
     {
         f1.set(fbeValue.f1);
         f2.set(fbeValue.f2);

@@ -7,29 +7,18 @@
 
 package com.chronoxor.protoex.fbe
 
-import java.io.*
-import java.lang.*
-import java.lang.reflect.*
-import java.math.*
-import java.nio.charset.*
-import java.time.*
-import java.util.*
-
-import com.chronoxor.fbe.*
-import com.chronoxor.protoex.*
-
 // Fast Binary Encoding Order field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
-class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+class FieldModelOrder(buffer: com.chronoxor.fbe.Buffer, offset: Long) : com.chronoxor.fbe.FieldModel(buffer, offset)
 {
-    val id: FieldModelInt32 = FieldModelInt32(buffer, 4 + 4)
-    val symbol: FieldModelString = FieldModelString(buffer, id.fbeOffset + id.fbeSize)
+    val id: com.chronoxor.fbe.FieldModelInt32 = com.chronoxor.fbe.FieldModelInt32(buffer, 4 + 4)
+    val symbol: com.chronoxor.fbe.FieldModelString = com.chronoxor.fbe.FieldModelString(buffer, id.fbeOffset + id.fbeSize)
     val side: FieldModelOrderSide = FieldModelOrderSide(buffer, symbol.fbeOffset + symbol.fbeSize)
     val type: FieldModelOrderType = FieldModelOrderType(buffer, side.fbeOffset + side.fbeSize)
-    val price: FieldModelDouble = FieldModelDouble(buffer, type.fbeOffset + type.fbeSize)
-    val volume: FieldModelDouble = FieldModelDouble(buffer, price.fbeOffset + price.fbeSize)
-    val tp: FieldModelDouble = FieldModelDouble(buffer, volume.fbeOffset + volume.fbeSize)
-    val sl: FieldModelDouble = FieldModelDouble(buffer, tp.fbeOffset + tp.fbeSize)
+    val price: com.chronoxor.fbe.FieldModelDouble = com.chronoxor.fbe.FieldModelDouble(buffer, type.fbeOffset + type.fbeSize)
+    val volume: com.chronoxor.fbe.FieldModelDouble = com.chronoxor.fbe.FieldModelDouble(buffer, price.fbeOffset + price.fbeSize)
+    val tp: com.chronoxor.fbe.FieldModelDouble = com.chronoxor.fbe.FieldModelDouble(buffer, volume.fbeOffset + volume.fbeSize)
+    val sl: com.chronoxor.fbe.FieldModelDouble = com.chronoxor.fbe.FieldModelDouble(buffer, tp.fbeOffset + tp.fbeSize)
 
     // Field size
     override val fbeSize: Long = 4
@@ -190,7 +179,7 @@ class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Get the struct value
-    fun get(fbeValue: Order = Order()): Order
+    fun get(fbeValue: com.chronoxor.protoex.Order = com.chronoxor.protoex.Order()): com.chronoxor.protoex.Order
     {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -204,7 +193,7 @@ class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 
     // Get the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun getFields(fbeValue: Order, fbeStructSize: Long)
+    fun getFields(fbeValue: com.chronoxor.protoex.Order, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
 
@@ -223,13 +212,13 @@ class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
         if ((fbeCurrentSize + side.fbeSize) <= fbeStructSize)
             fbeValue.side = side.get()
         else
-            fbeValue.side = OrderSide()
+            fbeValue.side = com.chronoxor.protoex.OrderSide()
         fbeCurrentSize += side.fbeSize
 
         if ((fbeCurrentSize + type.fbeSize) <= fbeStructSize)
             fbeValue.type = type.get()
         else
-            fbeValue.type = OrderType()
+            fbeValue.type = com.chronoxor.protoex.OrderType()
         fbeCurrentSize += type.fbeSize
 
         if ((fbeCurrentSize + price.fbeSize) <= fbeStructSize)
@@ -285,7 +274,7 @@ class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Set the struct value
-    fun set(fbeValue: Order)
+    fun set(fbeValue: com.chronoxor.protoex.Order)
     {
         val fbeBegin = setBegin()
         if (fbeBegin == 0L)
@@ -297,7 +286,7 @@ class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 
     // Set the struct fields values
     @Suppress("UNUSED_PARAMETER")
-    fun setFields(fbeValue: Order)
+    fun setFields(fbeValue: com.chronoxor.protoex.Order)
     {
         id.set(fbeValue.id)
         symbol.set(fbeValue.symbol)
