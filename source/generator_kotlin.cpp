@@ -4113,11 +4113,14 @@ void GeneratorKotlin::GeneratePackage(const std::shared_ptr<Package>& p)
     {
         GenerateSender(p, false);
         GenerateReceiver(p, false);
+        GenerateReceiverListener(p, false);
         GenerateProxy(p, false);
+        GenerateProxyListener(p, false);
         if (Final())
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
+            GenerateReceiverListener(p, true);
         }
     }
 
@@ -6542,6 +6545,68 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     Close();
 }
 
+void GeneratorKotlin::GenerateReceiverListener(const std::shared_ptr<Package>& p, bool final)
+{
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    std::string package = *p->name;
+
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+
+    // Create package path
+    CppCommon::Directory::CreateTree(path);
+
+    std::string listener = (final ? "FinalReceiverListener" : "ReceiverListener");
+
+    // Open the file
+    CppCommon::Path file = path / (listener + ".kt");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports(domain, package + ".fbe");
+
+    // Generate receiver listener begin
+    WriteLine();
+    if (final)
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final receiver listener");
+    else
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " receiver listener");
+    WriteIndent("interface " + listener);
+    if (p->import)
+    {
+        bool first = true;
+        WriteIndent(" : ");
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent((first ? "" : ", ") + domain + *import + ".fbe." + listener);
+            first = false;
+        }
+    }
+    WriteLine();
+    WriteLineIndent("{");
+    Indent(1);
+
+    // Generate receiver listener handlers
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = domain + *p->name + "." + *s->name;
+            WriteLineIndent("fun onReceive(value: " + struct_name + ") {}");
+        }
+    }
+
+    // Generate receiver listener end
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
 void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
 {
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
@@ -6688,6 +6753,69 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("}");
 
     // Generate proxy end
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorKotlin::GenerateProxyListener(const std::shared_ptr<Package>& p, bool final)
+{
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    std::string package = *p->name;
+
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+
+    // Create package path
+    CppCommon::Directory::CreateTree(path);
+
+    std::string listener = (final ? "FinalProxyListener" : "ProxyListener");
+    std::string model = (final ? "FinalModel" : "Model");
+
+    // Open the file
+    CppCommon::Path file = path / (listener + ".kt");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports(domain, package + ".fbe");
+
+    // Generate proxy listener begin
+    WriteLine();
+    if (final)
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final proxy listener");
+    else
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " proxy listener");
+    WriteIndent("interface " + listener);
+    if (p->import)
+    {
+        bool first = true;
+        WriteIndent(" : ");
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent((first ? "" : ", ") + domain + *import + ".fbe." + listener);
+            first = false;
+        }
+    }
+    WriteLine();
+    WriteLineIndent("{");
+    Indent(1);
+
+    // Generate proxy listener handlers
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_model = *s->name + model;
+            WriteLineIndent("fun onProxy(model: " + struct_model + ", type: Long, buffer: ByteArray, offset: Long, size: Long) {}");
+        }
+    }
+
+    // Generate proxy listener end
     Indent(-1);
     WriteLineIndent("}");
 

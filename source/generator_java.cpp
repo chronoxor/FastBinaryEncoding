@@ -6384,7 +6384,6 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
         }
     }
     WriteLine();
-    WriteLine();
     if (p->import)
     {
         WriteLineIndent("// Try to send using imported senders");

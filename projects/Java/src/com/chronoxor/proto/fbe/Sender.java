@@ -46,7 +46,6 @@ public class Sender extends com.chronoxor.fbe.Sender
             return send(value);
         }
 
-
         return 0;
     }
 

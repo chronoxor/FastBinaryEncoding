@@ -123,7 +123,6 @@ public class Sender extends com.chronoxor.fbe.Sender
             return send(value);
         }
 
-
         // Try to send using imported senders
         long result = 0;
         result = protoSender.send(obj);
