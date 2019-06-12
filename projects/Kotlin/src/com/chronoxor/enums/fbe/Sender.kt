@@ -24,6 +24,17 @@ open class Sender : com.chronoxor.fbe.Sender
         EnumsModel = EnumsModel(buffer)
     }
 
+    @Suppress("JoinDeclarationAndAssignment")
+    fun send(obj: Any): Long
+    {
+        when (obj)
+        {
+            is com.chronoxor.enums.Enums -> return send(obj)
+        }
+
+        return 0
+    }
+
     fun send(value: com.chronoxor.enums.Enums): Long
     {
         // Serialize the value into the FBE stream

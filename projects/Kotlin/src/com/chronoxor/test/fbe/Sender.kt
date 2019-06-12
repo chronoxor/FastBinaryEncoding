@@ -62,6 +62,35 @@ open class Sender : com.chronoxor.fbe.Sender
         StructEmptyModel = StructEmptyModel(buffer)
     }
 
+    @Suppress("JoinDeclarationAndAssignment")
+    fun send(obj: Any): Long
+    {
+        when (obj)
+        {
+            is com.chronoxor.test.StructSimple -> return send(obj)
+            is com.chronoxor.test.StructOptional -> return send(obj)
+            is com.chronoxor.test.StructNested -> return send(obj)
+            is com.chronoxor.test.StructBytes -> return send(obj)
+            is com.chronoxor.test.StructArray -> return send(obj)
+            is com.chronoxor.test.StructVector -> return send(obj)
+            is com.chronoxor.test.StructList -> return send(obj)
+            is com.chronoxor.test.StructSet -> return send(obj)
+            is com.chronoxor.test.StructMap -> return send(obj)
+            is com.chronoxor.test.StructHash -> return send(obj)
+            is com.chronoxor.test.StructHashEx -> return send(obj)
+            is com.chronoxor.test.StructEmpty -> return send(obj)
+        }
+
+        // Try to send using imported senders
+        @Suppress("CanBeVal")
+        var result: Long
+        result = protoSender.send(obj)
+        if (result > 0)
+            return result
+
+        return 0
+    }
+
     fun send(value: com.chronoxor.test.StructSimple): Long
     {
         // Serialize the value into the FBE stream

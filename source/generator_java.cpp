@@ -6365,6 +6365,45 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     WriteLineIndent("}");
     WriteLine();
 
+    // Generate generic sender method
+    WriteLineIndent("public long send(Object obj)");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = domain + *p->name + "." + *s->name;
+            WriteLineIndent("if (obj instanceof " + struct_name + ")");
+            WriteLineIndent("{");
+            Indent(1);
+            WriteLineIndent(struct_name + " value = (" + struct_name + ")obj;");
+            WriteLineIndent("return send(value);");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+    }
+    WriteLine();
+    WriteLine();
+    if (p->import)
+    {
+        WriteLineIndent("// Try to send using imported senders");
+        WriteLineIndent("long result = 0;");
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("result = " + *import + "Sender.send(obj);");
+            WriteLineIndent("if (result > 0)");
+            Indent(1);
+            WriteLineIndent("return result;");
+            Indent(-1);
+        }
+        WriteLine();
+    }
+    WriteLineIndent("return 0;");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+
     // Generate sender methods
     if (p->body)
     {

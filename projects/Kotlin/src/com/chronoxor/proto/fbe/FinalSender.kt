@@ -30,6 +30,19 @@ open class FinalSender : com.chronoxor.fbe.Sender
         AccountModel = AccountFinalModel(buffer)
     }
 
+    @Suppress("JoinDeclarationAndAssignment")
+    fun send(obj: Any): Long
+    {
+        when (obj)
+        {
+            is com.chronoxor.proto.Order -> return send(obj)
+            is com.chronoxor.proto.Balance -> return send(obj)
+            is com.chronoxor.proto.Account -> return send(obj)
+        }
+
+        return 0
+    }
+
     fun send(value: com.chronoxor.proto.Order): Long
     {
         // Serialize the value into the FBE stream

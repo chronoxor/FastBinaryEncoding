@@ -6281,6 +6281,45 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("}");
     WriteLine();
 
+    // Generate generic sender method
+    WriteLineIndent("@Suppress(\"JoinDeclarationAndAssignment\")");
+    WriteLineIndent("fun send(obj: Any): Long");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->body)
+    {
+        WriteLineIndent("when (obj)");
+        WriteLineIndent("{");
+        Indent(1);
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = domain + *p->name + "." + *s->name;
+            WriteLineIndent("is " + struct_name + " -> return send(obj)");
+        }
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+    WriteLine();
+    if (p->import)
+    {
+        WriteLineIndent("// Try to send using imported senders");
+        WriteLineIndent("@Suppress(\"CanBeVal\")");
+        WriteLineIndent("var result: Long");
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("result = " + *import + "Sender.send(obj)");
+            WriteLineIndent("if (result > 0)");
+            Indent(1);
+            WriteLineIndent("return result");
+            Indent(-1);
+        }
+        WriteLine();
+    }
+    WriteLineIndent("return 0");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+
     // Generate sender methods
     if (p->body)
     {

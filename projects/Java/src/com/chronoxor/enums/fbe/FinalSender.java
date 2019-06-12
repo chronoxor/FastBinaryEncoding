@@ -22,6 +22,18 @@ public class FinalSender extends com.chronoxor.fbe.Sender
         EnumsModel = new EnumsFinalModel(getBuffer());
     }
 
+    public long send(Object obj)
+    {
+        if (obj instanceof com.chronoxor.enums.Enums)
+        {
+            com.chronoxor.enums.Enums value = (com.chronoxor.enums.Enums)obj;
+            return send(value);
+        }
+
+
+        return 0;
+    }
+
     public long send(com.chronoxor.enums.Enums value)
     {
         // Serialize the value into the FBE stream

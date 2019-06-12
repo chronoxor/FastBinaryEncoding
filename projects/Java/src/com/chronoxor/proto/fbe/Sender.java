@@ -28,6 +28,28 @@ public class Sender extends com.chronoxor.fbe.Sender
         AccountModel = new AccountModel(getBuffer());
     }
 
+    public long send(Object obj)
+    {
+        if (obj instanceof com.chronoxor.proto.Order)
+        {
+            com.chronoxor.proto.Order value = (com.chronoxor.proto.Order)obj;
+            return send(value);
+        }
+        if (obj instanceof com.chronoxor.proto.Balance)
+        {
+            com.chronoxor.proto.Balance value = (com.chronoxor.proto.Balance)obj;
+            return send(value);
+        }
+        if (obj instanceof com.chronoxor.proto.Account)
+        {
+            com.chronoxor.proto.Account value = (com.chronoxor.proto.Account)obj;
+            return send(value);
+        }
+
+
+        return 0;
+    }
+
     public long send(com.chronoxor.proto.Order value)
     {
         // Serialize the value into the FBE stream

@@ -35,6 +35,26 @@ open class Sender : com.chronoxor.fbe.Sender
         AccountModel = AccountModel(buffer)
     }
 
+    @Suppress("JoinDeclarationAndAssignment")
+    fun send(obj: Any): Long
+    {
+        when (obj)
+        {
+            is com.chronoxor.protoex.Order -> return send(obj)
+            is com.chronoxor.protoex.Balance -> return send(obj)
+            is com.chronoxor.protoex.Account -> return send(obj)
+        }
+
+        // Try to send using imported senders
+        @Suppress("CanBeVal")
+        var result: Long
+        result = protoSender.send(obj)
+        if (result > 0)
+            return result
+
+        return 0
+    }
+
     fun send(value: com.chronoxor.protoex.Order): Long
     {
         // Serialize the value into the FBE stream
