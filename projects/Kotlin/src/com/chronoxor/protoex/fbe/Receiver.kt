@@ -9,7 +9,7 @@ package com.chronoxor.protoex.fbe
 
 // Fast Binary Encoding com.chronoxor.protoex receiver
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
-open class Receiver : com.chronoxor.fbe.Receiver
+open class Receiver : com.chronoxor.fbe.Receiver, ReceiverListener
 {
     // Imported receivers
     var protoReceiver: com.chronoxor.proto.fbe.Receiver? = null
@@ -46,12 +46,12 @@ open class Receiver : com.chronoxor.fbe.Receiver
         AccountModel = AccountModel()
     }
 
-    // Receive handlers
-    protected open fun onReceive(value: com.chronoxor.protoex.Order) {}
-    protected open fun onReceive(value: com.chronoxor.protoex.Balance) {}
-    protected open fun onReceive(value: com.chronoxor.protoex.Account) {}
-
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    {
+        return onReceiveListener(this, type, buffer, offset, size)
+    }
+
+    open fun onReceiveListener(listener: ReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         when (type)
         {
@@ -71,7 +71,7 @@ open class Receiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(OrderValue)
+                listener.onReceive(OrderValue)
                 return true
             }
             com.chronoxor.protoex.fbe.BalanceModel.fbeTypeConst ->
@@ -90,7 +90,7 @@ open class Receiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(BalanceValue)
+                listener.onReceive(BalanceValue)
                 return true
             }
             com.chronoxor.protoex.fbe.AccountModel.fbeTypeConst ->
@@ -109,12 +109,12 @@ open class Receiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(AccountValue)
+                listener.onReceive(AccountValue)
                 return true
             }
         }
 
-        if ((protoReceiver != null) && protoReceiver!!.onReceive(type, buffer, offset, size))
+        if ((protoReceiver != null) && protoReceiver!!.onReceiveListener(listener, type, buffer, offset, size))
             return true
 
         return false

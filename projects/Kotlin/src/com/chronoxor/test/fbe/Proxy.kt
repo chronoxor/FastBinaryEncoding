@@ -9,7 +9,7 @@ package com.chronoxor.test.fbe
 
 // Fast Binary Encoding com.chronoxor.test proxy
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
-open class Proxy : com.chronoxor.fbe.Receiver
+open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
 {
     // Imported proxy
     var protoProxy: com.chronoxor.proto.fbe.Proxy? = null
@@ -62,21 +62,12 @@ open class Proxy : com.chronoxor.fbe.Receiver
         StructEmptyModel = StructEmptyModel()
     }
 
-    // Proxy handlers
-    protected open fun onProxy(model: StructSimpleModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    protected open fun onProxy(model: StructOptionalModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    protected open fun onProxy(model: StructNestedModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    protected open fun onProxy(model: StructBytesModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    protected open fun onProxy(model: StructArrayModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    protected open fun onProxy(model: StructVectorModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    protected open fun onProxy(model: StructListModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    protected open fun onProxy(model: StructSetModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    protected open fun onProxy(model: StructMapModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    protected open fun onProxy(model: StructHashModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    protected open fun onProxy(model: StructHashExModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    protected open fun onProxy(model: StructEmptyModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    {
+        return onReceiveListener(this, type, buffer, offset, size)
+    }
+
+    open fun onReceiveListener(listener: ProxyListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         when (type)
         {
@@ -90,7 +81,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(StructSimpleModel, type, buffer, offset, size)
+                listener.onProxy(StructSimpleModel, type, buffer, offset, size)
                 StructSimpleModel.model.getEnd(fbeBegin)
                 return true
             }
@@ -104,7 +95,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(StructOptionalModel, type, buffer, offset, size)
+                listener.onProxy(StructOptionalModel, type, buffer, offset, size)
                 StructOptionalModel.model.getEnd(fbeBegin)
                 return true
             }
@@ -118,7 +109,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(StructNestedModel, type, buffer, offset, size)
+                listener.onProxy(StructNestedModel, type, buffer, offset, size)
                 StructNestedModel.model.getEnd(fbeBegin)
                 return true
             }
@@ -132,7 +123,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(StructBytesModel, type, buffer, offset, size)
+                listener.onProxy(StructBytesModel, type, buffer, offset, size)
                 StructBytesModel.model.getEnd(fbeBegin)
                 return true
             }
@@ -146,7 +137,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(StructArrayModel, type, buffer, offset, size)
+                listener.onProxy(StructArrayModel, type, buffer, offset, size)
                 StructArrayModel.model.getEnd(fbeBegin)
                 return true
             }
@@ -160,7 +151,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(StructVectorModel, type, buffer, offset, size)
+                listener.onProxy(StructVectorModel, type, buffer, offset, size)
                 StructVectorModel.model.getEnd(fbeBegin)
                 return true
             }
@@ -174,7 +165,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(StructListModel, type, buffer, offset, size)
+                listener.onProxy(StructListModel, type, buffer, offset, size)
                 StructListModel.model.getEnd(fbeBegin)
                 return true
             }
@@ -188,7 +179,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(StructSetModel, type, buffer, offset, size)
+                listener.onProxy(StructSetModel, type, buffer, offset, size)
                 StructSetModel.model.getEnd(fbeBegin)
                 return true
             }
@@ -202,7 +193,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(StructMapModel, type, buffer, offset, size)
+                listener.onProxy(StructMapModel, type, buffer, offset, size)
                 StructMapModel.model.getEnd(fbeBegin)
                 return true
             }
@@ -216,7 +207,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(StructHashModel, type, buffer, offset, size)
+                listener.onProxy(StructHashModel, type, buffer, offset, size)
                 StructHashModel.model.getEnd(fbeBegin)
                 return true
             }
@@ -230,7 +221,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(StructHashExModel, type, buffer, offset, size)
+                listener.onProxy(StructHashExModel, type, buffer, offset, size)
                 StructHashExModel.model.getEnd(fbeBegin)
                 return true
             }
@@ -244,13 +235,13 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(StructEmptyModel, type, buffer, offset, size)
+                listener.onProxy(StructEmptyModel, type, buffer, offset, size)
                 StructEmptyModel.model.getEnd(fbeBegin)
                 return true
             }
         }
 
-        if ((protoProxy != null) && protoProxy!!.onReceive(type, buffer, offset, size))
+        if ((protoProxy != null) && protoProxy!!.onReceiveListener(listener, type, buffer, offset, size))
             return true
 
         return false

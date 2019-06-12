@@ -9,7 +9,7 @@ package com.chronoxor.enums.fbe
 
 // Fast Binary Encoding com.chronoxor.enums proxy
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
-open class Proxy : com.chronoxor.fbe.Receiver
+open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
 {
     // Proxy models accessors
     private val EnumsModel: EnumsModel
@@ -24,10 +24,12 @@ open class Proxy : com.chronoxor.fbe.Receiver
         EnumsModel = EnumsModel()
     }
 
-    // Proxy handlers
-    protected open fun onProxy(model: EnumsModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    {
+        return onReceiveListener(this, type, buffer, offset, size)
+    }
+
+    open fun onReceiveListener(listener: ProxyListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         when (type)
         {
@@ -41,7 +43,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(EnumsModel, type, buffer, offset, size)
+                listener.onProxy(EnumsModel, type, buffer, offset, size)
                 EnumsModel.model.getEnd(fbeBegin)
                 return true
             }

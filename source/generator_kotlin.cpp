@@ -6379,6 +6379,7 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
+    std::string listener = (final ? "FinalReceiverListener" : "ReceiverListener");
     std::string receiver = (final ? "FinalReceiver" : "Receiver");
     std::string model = (final ? "FinalModel" : "Model");
 
@@ -6397,7 +6398,7 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     else
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " receiver");
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"PrivatePropertyName\", \"UNUSED_PARAMETER\")");
-    WriteLineIndent("open class " + receiver + " : " + domain + "fbe.Receiver");
+    WriteLineIndent("open class " + receiver + " : " + domain + "fbe.Receiver, " + listener);
     WriteLineIndent("{");
     Indent(1);
 
@@ -6468,20 +6469,15 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     WriteLineIndent("}");
     WriteLine();
 
-    // Generate receiver handlers
-    if (p->body)
-    {
-        WriteLineIndent("// Receive handlers");
-        for (const auto& s : p->body->structs)
-        {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent("protected open fun onReceive(value: " + struct_name + ") {}");
-        }
-        WriteLine();
-    }
-
     // Generate receiver message handler
     WriteLineIndent("override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("return onReceiveListener(this, type, buffer, offset, size)");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("open fun onReceiveListener(listener: " + listener + ", type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
     WriteLineIndent("{");
     Indent(1);
     if (p->body)
@@ -6510,7 +6506,7 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
             WriteLineIndent("}");
             WriteLine();
             WriteLineIndent("// Call receive handler with deserialized value");
-            WriteLineIndent("onReceive(" + *s->name + "Value)");
+            WriteLineIndent("listener.onReceive(" + *s->name + "Value)");
             WriteLineIndent("return true");
             Indent(-1);
             WriteLineIndent("}");
@@ -6523,7 +6519,7 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if ((" + *import + "Receiver != null) && " + *import + "Receiver!!.onReceive(type, buffer, offset, size))");
+            WriteLineIndent("if ((" + *import + "Receiver != null) && " + *import + "Receiver!!.onReceiveListener(listener, type, buffer, offset, size))");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
@@ -6617,6 +6613,7 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
+    std::string listener = (final ? "FinalProxyListener" : "ProxyListener");
     std::string proxy = (final ? "FinalProxy" : "Proxy");
     std::string model = (final ? "FinalModel" : "Model");
 
@@ -6635,7 +6632,7 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     else
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " proxy");
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"PrivatePropertyName\", \"UNUSED_PARAMETER\")");
-    WriteLineIndent("open class " + proxy + " : " + domain + "fbe.Receiver");
+    WriteLineIndent("open class " + proxy + " : " + domain + "fbe.Receiver, " + listener);
     WriteLineIndent("{");
     Indent(1);
 
@@ -6691,20 +6688,15 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("}");
     WriteLine();
 
-    // Generate proxy handlers
-    if (p->body)
-    {
-        WriteLineIndent("// Proxy handlers");
-        for (const auto& s : p->body->structs)
-        {
-            std::string struct_model = *s->name + model;
-            WriteLineIndent("protected open fun onProxy(model: " + struct_model + ", type: Long, buffer: ByteArray, offset: Long, size: Long) {}");
-        }
-        WriteLine();
-    }
-
     // Generate proxy message handler
     WriteLineIndent("override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("return onReceiveListener(this, type, buffer, offset, size)");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("open fun onReceiveListener(listener: " + listener + ", type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
     WriteLineIndent("{");
     Indent(1);
     if (p->body)
@@ -6727,7 +6719,7 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent("return false");
             Indent(-1);
             WriteLineIndent("// Call proxy handler");
-            WriteLineIndent("onProxy(" + *s->name + "Model, type, buffer, offset, size)");
+            WriteLineIndent("listener.onProxy(" + *s->name + "Model, type, buffer, offset, size)");
             WriteLineIndent(*s->name + "Model.model.getEnd(fbeBegin)");
             WriteLineIndent("return true");
             Indent(-1);
@@ -6741,7 +6733,7 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if ((" + *import + "Proxy != null) && " + *import + "Proxy!!.onReceive(type, buffer, offset, size))");
+            WriteLineIndent("if ((" + *import + "Proxy != null) && " + *import + "Proxy!!.onReceiveListener(listener, type, buffer, offset, size))");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);

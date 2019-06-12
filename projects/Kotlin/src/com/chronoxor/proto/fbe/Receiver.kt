@@ -9,7 +9,7 @@ package com.chronoxor.proto.fbe
 
 // Fast Binary Encoding com.chronoxor.proto receiver
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
-open class Receiver : com.chronoxor.fbe.Receiver
+open class Receiver : com.chronoxor.fbe.Receiver, ReceiverListener
 {
     // Receiver values accessors
     private val OrderValue: com.chronoxor.proto.Order
@@ -41,12 +41,12 @@ open class Receiver : com.chronoxor.fbe.Receiver
         AccountModel = AccountModel()
     }
 
-    // Receive handlers
-    protected open fun onReceive(value: com.chronoxor.proto.Order) {}
-    protected open fun onReceive(value: com.chronoxor.proto.Balance) {}
-    protected open fun onReceive(value: com.chronoxor.proto.Account) {}
-
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    {
+        return onReceiveListener(this, type, buffer, offset, size)
+    }
+
+    open fun onReceiveListener(listener: ReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         when (type)
         {
@@ -66,7 +66,7 @@ open class Receiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(OrderValue)
+                listener.onReceive(OrderValue)
                 return true
             }
             com.chronoxor.proto.fbe.BalanceModel.fbeTypeConst ->
@@ -85,7 +85,7 @@ open class Receiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(BalanceValue)
+                listener.onReceive(BalanceValue)
                 return true
             }
             com.chronoxor.proto.fbe.AccountModel.fbeTypeConst ->
@@ -104,7 +104,7 @@ open class Receiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(AccountValue)
+                listener.onReceive(AccountValue)
                 return true
             }
         }

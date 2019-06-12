@@ -9,7 +9,7 @@ package com.chronoxor.test.fbe
 
 // Fast Binary Encoding com.chronoxor.test final receiver
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
-open class FinalReceiver : com.chronoxor.fbe.Receiver
+open class FinalReceiver : com.chronoxor.fbe.Receiver, FinalReceiverListener
 {
     // Imported receivers
     var protoReceiver: com.chronoxor.proto.fbe.FinalReceiver? = null
@@ -100,21 +100,12 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver
         StructEmptyModel = StructEmptyFinalModel()
     }
 
-    // Receive handlers
-    protected open fun onReceive(value: com.chronoxor.test.StructSimple) {}
-    protected open fun onReceive(value: com.chronoxor.test.StructOptional) {}
-    protected open fun onReceive(value: com.chronoxor.test.StructNested) {}
-    protected open fun onReceive(value: com.chronoxor.test.StructBytes) {}
-    protected open fun onReceive(value: com.chronoxor.test.StructArray) {}
-    protected open fun onReceive(value: com.chronoxor.test.StructVector) {}
-    protected open fun onReceive(value: com.chronoxor.test.StructList) {}
-    protected open fun onReceive(value: com.chronoxor.test.StructSet) {}
-    protected open fun onReceive(value: com.chronoxor.test.StructMap) {}
-    protected open fun onReceive(value: com.chronoxor.test.StructHash) {}
-    protected open fun onReceive(value: com.chronoxor.test.StructHashEx) {}
-    protected open fun onReceive(value: com.chronoxor.test.StructEmpty) {}
-
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    {
+        return onReceiveListener(this, type, buffer, offset, size)
+    }
+
+    open fun onReceiveListener(listener: FinalReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         when (type)
         {
@@ -134,7 +125,7 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(StructSimpleValue)
+                listener.onReceive(StructSimpleValue)
                 return true
             }
             com.chronoxor.test.fbe.StructOptionalFinalModel.fbeTypeConst ->
@@ -153,7 +144,7 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(StructOptionalValue)
+                listener.onReceive(StructOptionalValue)
                 return true
             }
             com.chronoxor.test.fbe.StructNestedFinalModel.fbeTypeConst ->
@@ -172,7 +163,7 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(StructNestedValue)
+                listener.onReceive(StructNestedValue)
                 return true
             }
             com.chronoxor.test.fbe.StructBytesFinalModel.fbeTypeConst ->
@@ -191,7 +182,7 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(StructBytesValue)
+                listener.onReceive(StructBytesValue)
                 return true
             }
             com.chronoxor.test.fbe.StructArrayFinalModel.fbeTypeConst ->
@@ -210,7 +201,7 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(StructArrayValue)
+                listener.onReceive(StructArrayValue)
                 return true
             }
             com.chronoxor.test.fbe.StructVectorFinalModel.fbeTypeConst ->
@@ -229,7 +220,7 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(StructVectorValue)
+                listener.onReceive(StructVectorValue)
                 return true
             }
             com.chronoxor.test.fbe.StructListFinalModel.fbeTypeConst ->
@@ -248,7 +239,7 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(StructListValue)
+                listener.onReceive(StructListValue)
                 return true
             }
             com.chronoxor.test.fbe.StructSetFinalModel.fbeTypeConst ->
@@ -267,7 +258,7 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(StructSetValue)
+                listener.onReceive(StructSetValue)
                 return true
             }
             com.chronoxor.test.fbe.StructMapFinalModel.fbeTypeConst ->
@@ -286,7 +277,7 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(StructMapValue)
+                listener.onReceive(StructMapValue)
                 return true
             }
             com.chronoxor.test.fbe.StructHashFinalModel.fbeTypeConst ->
@@ -305,7 +296,7 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(StructHashValue)
+                listener.onReceive(StructHashValue)
                 return true
             }
             com.chronoxor.test.fbe.StructHashExFinalModel.fbeTypeConst ->
@@ -324,7 +315,7 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(StructHashExValue)
+                listener.onReceive(StructHashExValue)
                 return true
             }
             com.chronoxor.test.fbe.StructEmptyFinalModel.fbeTypeConst ->
@@ -343,12 +334,12 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(StructEmptyValue)
+                listener.onReceive(StructEmptyValue)
                 return true
             }
         }
 
-        if ((protoReceiver != null) && protoReceiver!!.onReceive(type, buffer, offset, size))
+        if ((protoReceiver != null) && protoReceiver!!.onReceiveListener(listener, type, buffer, offset, size))
             return true
 
         return false

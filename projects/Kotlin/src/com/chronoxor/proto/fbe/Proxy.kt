@@ -9,7 +9,7 @@ package com.chronoxor.proto.fbe
 
 // Fast Binary Encoding com.chronoxor.proto proxy
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
-open class Proxy : com.chronoxor.fbe.Receiver
+open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
 {
     // Proxy models accessors
     private val OrderModel: OrderModel
@@ -30,12 +30,12 @@ open class Proxy : com.chronoxor.fbe.Receiver
         AccountModel = AccountModel()
     }
 
-    // Proxy handlers
-    protected open fun onProxy(model: OrderModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    protected open fun onProxy(model: BalanceModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    protected open fun onProxy(model: AccountModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    {
+        return onReceiveListener(this, type, buffer, offset, size)
+    }
+
+    open fun onReceiveListener(listener: ProxyListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         when (type)
         {
@@ -49,7 +49,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(OrderModel, type, buffer, offset, size)
+                listener.onProxy(OrderModel, type, buffer, offset, size)
                 OrderModel.model.getEnd(fbeBegin)
                 return true
             }
@@ -63,7 +63,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(BalanceModel, type, buffer, offset, size)
+                listener.onProxy(BalanceModel, type, buffer, offset, size)
                 BalanceModel.model.getEnd(fbeBegin)
                 return true
             }
@@ -77,7 +77,7 @@ open class Proxy : com.chronoxor.fbe.Receiver
                 if (fbeBegin == 0L)
                     return false
                 // Call proxy handler
-                onProxy(AccountModel, type, buffer, offset, size)
+                listener.onProxy(AccountModel, type, buffer, offset, size)
                 AccountModel.model.getEnd(fbeBegin)
                 return true
             }
