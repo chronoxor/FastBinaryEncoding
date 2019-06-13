@@ -66,6 +66,7 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
     {
         GenerateFBESender(domain, "fbe");
         GenerateFBEReceiver(domain, "fbe");
+        GenerateFBEClient(domain, "fbe");
     }
     if (JSON())
         GenerateFBEJson(domain, "fbe");
@@ -3826,6 +3827,333 @@ abstract class Receiver
     Close();
 }
 
+void GeneratorKotlin::GenerateFBEClient(const std::string& domain, const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
+
+    // Open the file
+    CppCommon::Path file = path / "Client.kt";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+    GenerateImports(domain, package);
+
+    std::string code = R"CODE(
+// Fast Binary Encoding base client
+@Suppress("MemberVisibilityCanBePrivate")
+abstract class Client
+{
+    // Get the send bytes buffer
+    var sendBuffer: Buffer = Buffer()
+        private set
+    // Get the receive bytes buffer
+    var receiveBuffer: Buffer = Buffer()
+        private set
+    // Enable/Disable logging
+    var logging: Boolean = false
+    // Get the final protocol flag
+    var final: Boolean = false
+        private set
+
+    protected constructor(final: Boolean) { this.final = final }
+    protected constructor(receiveBuffer: Buffer, sendBuffer: Buffer, final: Boolean) { this.receiveBuffer = receiveBuffer; this.sendBuffer = sendBuffer; this.final = final }
+
+    // Reset the client buffers
+    fun reset() { receiveBuffer.reset(); sendBuffer.reset() }
+
+    // Send serialized buffer.
+    // Direct call of the method requires knowledge about internals of FBE models serialization.
+    // Use it with care!
+    fun sendSerialized(serialized: Long): Long
+    {
+        assert(serialized > 0) { "Invalid size of the serialized buffer!" }
+        if (serialized <= 0)
+            return 0
+
+        // Shift the send buffer
+        sendBuffer.shift(serialized)
+
+        // Send the value
+        val sent = onSend(sendBuffer.data, 0, sendBuffer.size)
+        sendBuffer.remove(0, sent)
+        return sent
+    }
+
+    // Send message handler
+    protected abstract fun onSend(buffer: ByteArray, offset: Long, size: Long): Long
+
+    // Send log message handler
+    @Suppress("UNUSED_PARAMETER")
+    protected open fun onSendLog(message: String) {}
+
+    // Receive data
+    fun receive(buffer: Buffer) { receive(buffer.data, 0, buffer.size) }
+    fun receive(buffer: ByteArray, offset: Long = 0, size: Long = buffer.size.toLong())
+    {
+        assert((offset + size) <= buffer.size) { "Invalid offset & size!" }
+        if ((offset + size) > buffer.size)
+            throw IllegalArgumentException("Invalid offset & size!")
+
+        if (size == 0L)
+            return
+
+        // Storage buffer
+        var offset0 = this.receiveBuffer.offset
+        var offset1 = this.receiveBuffer.size
+        var size1 = this.receiveBuffer.size
+
+        // Receive buffer
+        var offset2: Long = 0
+
+        // While receive buffer is available to handle...
+        while (offset2 < size)
+        {
+            var messageBuffer: ByteArray? = null
+            var messageOffset: Long = 0
+            var messageSize: Long = 0
+
+            // Try to receive message size
+            var messageSizeCopied = false
+            var messageSizeFound = false
+            while (!messageSizeFound)
+            {
+                // Look into the storage buffer
+                if (offset0 < size1)
+                {
+                    var count = Math.min(size1 - offset0, 4)
+                    if (count == 4L)
+                    {
+                        messageSizeCopied = true
+                        messageSizeFound = true
+                        messageSize = Buffer.readUInt32(this.receiveBuffer.data, offset0).toLong()
+                        offset0 += 4
+                        break
+                    }
+                    else
+                    {
+                        // Fill remaining data from the receive buffer
+                        if (offset2 < size)
+                        {
+                            count = Math.min(size - offset2, 4 - count)
+
+                            // Allocate and refresh the storage buffer
+                            this.receiveBuffer.allocate(count)
+                            size1 += count
+
+                            System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
+                            offset1 += count
+                            offset2 += count
+                            continue
+                        }
+                        else
+                            break
+                    }
+                }
+
+                // Look into the receive buffer
+                if (offset2 < size)
+                {
+                    val count = Math.min(size - offset2, 4)
+                    if (count == 4L)
+                    {
+                        messageSizeFound = true
+                        messageSize = Buffer.readUInt32(buffer, offset + offset2).toLong()
+                        offset2 += 4
+                        break
+                    }
+                    else
+                    {
+                        // Allocate and refresh the storage buffer
+                        this.receiveBuffer.allocate(count)
+                        size1 += count
+
+                        System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
+                        offset1 += count
+                        offset2 += count
+                        continue
+                    }
+                }
+                else
+                    break
+            }
+
+            if (!messageSizeFound)
+                return
+
+            // Check the message full size
+            assert(messageSize >= (4 + 4 + 4 + 4)) { "Invalid receive data!" }
+            if (messageSize < (4 + 4 + 4 + 4))
+                return
+
+            // Try to receive message body
+            var messageFound = false
+            while (!messageFound)
+            {
+                // Look into the storage buffer
+                if (offset0 < size1)
+                {
+                    var count = Math.min(size1 - offset0, messageSize - 4)
+                    if (count == (messageSize - 4))
+                    {
+                        messageFound = true
+                        messageBuffer = this.receiveBuffer.data
+                        messageOffset = offset0 - 4
+                        offset0 += messageSize - 4
+                        break
+                    }
+                    else
+                    {
+                        // Fill remaining data from the receive buffer
+                        if (offset2 < size)
+                        {
+                            // Copy message size into the storage buffer
+                            if (!messageSizeCopied)
+                            {
+                                // Allocate and refresh the storage buffer
+                                this.receiveBuffer.allocate(4)
+                                size1 += 4
+
+                                Buffer.write(this.receiveBuffer.data, offset0, messageSize.toUInt())
+                                offset0 += 4
+                                offset1 += 4
+
+                                messageSizeCopied = true
+                            }
+
+                            count = Math.min(size - offset2, messageSize - 4 - count)
+
+                            // Allocate and refresh the storage buffer
+                            this.receiveBuffer.allocate(count)
+                            size1 += count
+
+                            System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
+                            offset1 += count
+                            offset2 += count
+                            continue
+                        }
+                        else
+                            break
+                    }
+                }
+
+                // Look into the receive buffer
+                if (offset2 < size)
+                {
+                    val count = Math.min(size - offset2, messageSize - 4)
+                    if (!messageSizeCopied && (count == (messageSize - 4)))
+                    {
+                        messageFound = true
+                        messageBuffer = buffer
+                        messageOffset = offset + offset2 - 4
+                        offset2 += messageSize - 4
+                        break
+                    }
+                    else
+                    {
+                        // Copy message size into the storage buffer
+                        if (!messageSizeCopied)
+                        {
+                            // Allocate and refresh the storage buffer
+                            this.receiveBuffer.allocate(4)
+                            size1 += 4
+
+                            Buffer.write(this.receiveBuffer.data, offset0, messageSize.toUInt())
+                            offset0 += 4
+                            offset1 += 4
+
+                            messageSizeCopied = true
+                        }
+
+                        // Allocate and refresh the storage buffer
+                        this.receiveBuffer.allocate(count)
+                        size1 += count
+
+                        System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
+                        offset1 += count
+                        offset2 += count
+                        continue
+                    }
+                }
+                else
+                    break
+            }
+
+            if (!messageFound)
+            {
+                // Copy message size into the storage buffer
+                if (!messageSizeCopied)
+                {
+                    // Allocate and refresh the storage buffer
+                    this.receiveBuffer.allocate(4)
+                    size1 += 4
+
+                    Buffer.write(this.receiveBuffer.data, offset0, messageSize.toUInt())
+                    offset0 += 4
+                    offset1 += 4
+
+                    @Suppress("UNUSED_VALUE")
+                    messageSizeCopied = true
+                }
+                return
+            }
+
+            if (messageBuffer != null)
+            {
+                @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
+                val fbeStructSize: Long
+                val fbeStructType: Long
+
+                // Read the message parameters
+                if (final)
+                {
+                    @Suppress("UNUSED_VALUE")
+                    fbeStructSize = Buffer.readUInt32(messageBuffer, messageOffset).toLong()
+                    fbeStructType = Buffer.readUInt32(messageBuffer, messageOffset + 4).toLong()
+                }
+                else
+                {
+                    val fbeStructOffset = Buffer.readUInt32(messageBuffer, messageOffset + 4).toLong()
+                    @Suppress("UNUSED_VALUE")
+                    fbeStructSize = Buffer.readUInt32(messageBuffer, messageOffset + fbeStructOffset).toLong()
+                    fbeStructType = Buffer.readUInt32(messageBuffer, messageOffset + fbeStructOffset + 4).toLong()
+                }
+
+                // Handle the message
+                onReceive(fbeStructType, messageBuffer, messageOffset, messageSize)
+            }
+
+            // Reset the storage buffer
+            this.receiveBuffer.reset()
+
+            // Refresh the storage buffer
+            offset0 = this.receiveBuffer.offset
+            offset1 = this.receiveBuffer.size
+            size1 = this.receiveBuffer.size
+        }
+    }
+
+    // Receive message handler
+    abstract fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+
+    // Receive log message handler
+    @Suppress("UNUSED_PARAMETER")
+    protected open fun onReceiveLog(message: String) {}
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
 void GeneratorKotlin::GenerateFBEJson(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
@@ -4116,11 +4444,13 @@ void GeneratorKotlin::GeneratePackage(const std::shared_ptr<Package>& p)
         GenerateReceiverListener(p, false);
         GenerateProxy(p, false);
         GenerateProxyListener(p, false);
+        GenerateClient(p, false);
         if (Final())
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
             GenerateReceiverListener(p, true);
+            GenerateClient(p, true);
         }
     }
 
@@ -6808,6 +7138,278 @@ void GeneratorKotlin::GenerateProxyListener(const std::shared_ptr<Package>& p, b
     }
 
     // Generate proxy listener end
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool final)
+{
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    std::string package = *p->name;
+
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+
+    // Create package path
+    CppCommon::Directory::CreateTree(path);
+
+    std::string listener = (final ? "FinalReceiverListener" : "ReceiverListener");
+    std::string client = (final ? "FinalClient" : "Client");
+    std::string model = (final ? "FinalModel" : "Model");
+
+    // Open the file
+    CppCommon::Path file = path / (client + ".kt");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports(domain, package + ".fbe");
+
+    // Generate client begin
+    WriteLine();
+    if (final)
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final client");
+    else
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " client");
+    WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"PropertyName\")");
+    WriteLineIndent("open class " + client + " : " + domain + "fbe.Client, " + listener);
+    WriteLineIndent("{");
+    Indent(1);
+
+    // Generate imported senders accessors
+    if (p->import)
+    {
+        WriteLineIndent("// Imported senders");
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("val " + *import + "Sender: " + domain + *import + ".fbe." + client);
+        WriteLine();
+    }
+
+    // Generate imported receivers accessors
+    if (p->import)
+    {
+        WriteLineIndent("// Imported receivers");
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("var " + *import + "Receiver: " + domain + *import + ".fbe." + client + "? = null");
+        WriteLine();
+    }
+
+    // Generate client sender models accessors
+    if (p->body)
+    {
+        WriteLineIndent("// Client sender models accessors");
+        for (const auto& s : p->body->structs)
+            WriteLineIndent("val " + *s->name + "SenderModel: " + *s->name + model);
+        WriteLine();
+    }
+
+    // Generate client receiver models accessors
+    if (p->body)
+    {
+        WriteLineIndent("// Client receiver values accessors");
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = domain + *p->name + "." + *s->name;
+            WriteLineIndent("private val " + *s->name + "ReceiverValue: " + struct_name);
+        }
+        WriteLine();
+        WriteLineIndent("// Client receiver models accessors");
+        for (const auto& s : p->body->structs)
+            WriteLineIndent("private val " + *s->name + "ReceiverModel: " + *s->name + model);
+        WriteLine();
+    }
+
+    // Generate client constructors
+    WriteLineIndent("constructor() : super(" + std::string(final ? "true" : "false") + ")");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent(*import + "Sender = " + domain + *import + ".fbe." + client + "(sendBuffer, receiveBuffer)");
+            WriteLineIndent(*import + "Receiver = " + domain + *import + ".fbe." + client + "(sendBuffer, receiveBuffer)");
+        }
+    }
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = domain + *p->name + "." + *s->name;
+            WriteLineIndent(*s->name + "SenderModel = " + *s->name + model + "(sendBuffer)");
+            WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + "()");
+            WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
+        }
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("constructor(sendBuffer: " + domain + "fbe.Buffer, receiveBuffer: " + domain + "fbe.Buffer) : super(sendBuffer, receiveBuffer, " + std::string(final ? "true" : "false") + ")");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent(*import + "Sender = " + domain + *import + ".fbe." + client + "(sendBuffer, receiveBuffer)");
+            WriteLineIndent(*import + "Receiver = " + domain + *import + ".fbe." + client + "(sendBuffer, receiveBuffer)");
+        }
+    }
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = domain + *p->name + "." + *s->name;
+            WriteLineIndent(*s->name + "SenderModel = " + *s->name + model + "(sendBuffer)");
+            WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + "()");
+            WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
+        }
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+
+    // Generate generic client send method
+    WriteLineIndent("@Suppress(\"JoinDeclarationAndAssignment\")");
+    WriteLineIndent("fun send(obj: Any): Long");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->body)
+    {
+        WriteLineIndent("when (obj)");
+        WriteLineIndent("{");
+        Indent(1);
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = domain + *p->name + "." + *s->name;
+            WriteLineIndent("is " + struct_name + " -> return send(obj)");
+        }
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+    WriteLine();
+    if (p->import)
+    {
+        WriteLineIndent("// Try to send using imported clients");
+        WriteLineIndent("@Suppress(\"CanBeVal\")");
+        WriteLineIndent("var result: Long");
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("result = " + *import + "Sender.send(obj)");
+            WriteLineIndent("if (result > 0)");
+            Indent(1);
+            WriteLineIndent("return result");
+            Indent(-1);
+        }
+        WriteLine();
+    }
+    WriteLineIndent("return 0");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+
+    // Generate client send methods
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = domain + *p->name + "." + *s->name;
+            WriteLineIndent("fun send(value: " + struct_name + "): Long");
+            WriteLineIndent("{");
+            Indent(1);
+            WriteLineIndent("// Serialize the value into the FBE stream");
+            WriteLineIndent("val serialized = " + *s->name + "SenderModel.serialize(value)");
+            WriteLineIndent("assert(serialized > 0) { \"" + struct_name + " serialization failed!\" }");
+            WriteLineIndent("assert(" + *s->name + "SenderModel.verify()) { \"" + struct_name + " validation failed!\" }");
+            WriteLine();
+            WriteLineIndent("// Log the value");
+            WriteLineIndent("if (logging)");
+            WriteLineIndent("{");
+            Indent(1);
+            WriteLineIndent("val message = value.toString()");
+            WriteLineIndent("onSendLog(message)");
+            Indent(-1);
+            WriteLineIndent("}");
+            WriteLine();
+            WriteLineIndent("// Send the serialized value");
+            WriteLineIndent("return sendSerialized(serialized)");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+    }
+
+    // Generate client send message handler
+    WriteLine();
+    WriteLineIndent("// Send message handler");
+    WriteLineIndent("override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException(\"" + domain + *p->name + ".fbe.Client.onSend() not implemented!\") }");
+
+    // Generate client receive message handler
+    WriteLineIndent("override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("return onReceiveListener(this, type, buffer, offset, size)");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("open fun onReceiveListener(listener: " + listener + ", type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->body)
+    {
+        WriteLineIndent("when (type)");
+        WriteLineIndent("{");
+        Indent(1);
+        for (const auto& s : p->body->structs)
+        {
+            WriteLineIndent(domain + package + ".fbe." + *s->name + model + ".fbeTypeConst ->");
+            WriteLineIndent("{");
+            Indent(1);
+            WriteLineIndent("// Deserialize the value from the FBE stream");
+            WriteLineIndent(*s->name + "ReceiverModel.attach(buffer, offset)");
+            WriteLineIndent("assert(" + *s->name + "ReceiverModel.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
+            WriteLineIndent("val deserialized = " + *s->name + "ReceiverModel.deserialize(" + *s->name + "ReceiverValue)");
+            WriteLineIndent("assert(deserialized > 0) { \"" + domain + *p->name + "." + *s->name + " deserialization failed!\" }");
+            WriteLine();
+            WriteLineIndent("// Log the value");
+            WriteLineIndent("if (logging)");
+            WriteLineIndent("{");
+            Indent(1);
+            WriteLineIndent("val message = " + *s->name + "ReceiverValue.toString()");
+            WriteLineIndent("onReceiveLog(message)");
+            Indent(-1);
+            WriteLineIndent("}");
+            WriteLine();
+            WriteLineIndent("// Call receive handler with deserialized value");
+            WriteLineIndent("listener.onReceive(" + *s->name + "ReceiverValue)");
+            WriteLineIndent("return true");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+    if (p->import)
+    {
+        WriteLine();
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("if ((" + *import + "Receiver != null) && " + *import + "Receiver!!.onReceiveListener(listener, type, buffer, offset, size))");
+            Indent(1);
+            WriteLineIndent("return true");
+            Indent(-1);
+        }
+    }
+    WriteLine();
+    WriteLineIndent("return false");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate client end
     Indent(-1);
     WriteLineIndent("}");
 

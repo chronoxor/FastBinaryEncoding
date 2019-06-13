@@ -71,6 +71,7 @@ private:
     void GenerateFBEFinalModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type);
     void GenerateFBESender(const std::string& domain, const std::string& package);
     void GenerateFBEReceiver(const std::string& domain, const std::string& package);
+    void GenerateFBEClient(const std::string& domain, const std::string& package);
     void GenerateFBEJson(const std::string& domain, const std::string& package);
 
     void GenerateContainers(const std::shared_ptr<Package>& p, bool final);
@@ -91,6 +92,7 @@ private:
     void GenerateReceiverListener(const std::shared_ptr<Package>& p, bool final);
     void GenerateProxy(const std::shared_ptr<Package>& p, bool final);
     void GenerateProxyListener(const std::shared_ptr<Package>& p, bool final);
+    void GenerateClient(const std::shared_ptr<Package>& p, bool final);
     void GenerateJson(const std::shared_ptr<Package>& p);
 
     bool IsKnownType(const std::string& type);

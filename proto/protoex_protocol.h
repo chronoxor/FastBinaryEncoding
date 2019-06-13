@@ -216,76 +216,6 @@ private:
 namespace FBE {
 namespace protoex {
 
-// Fast Binary Encoding protoex client
-template <class TBuffer>
-class Client : public virtual Sender<TBuffer>, protected virtual Receiver<TBuffer>
-    , public virtual proto::Client<TBuffer>
-{
-public:
-    typedef proto::Client<TBuffer> protoClient;
-
-    Client() = default;
-    Client(const Client&) = default;
-    Client(Client&&) = default;
-    virtual ~Client() = default;
-
-    Client& operator=(const Client&) = default;
-    Client& operator=(Client&&) = default;
-
-    // Imported clients
-    proto::Client<TBuffer>& proto_client() noexcept { return *this; }
-
-    // Reset client buffers
-    void reset()
-    {
-        std::scoped_lock locker(this->_lock);
-        reset_requests();
-    }
-
-    // Watchdog for timeouts
-    void watchdog(uint64_t utc)
-    {
-        std::scoped_lock locker(this->_lock);
-        watchdog_requests(utc);
-    }
-
-protected:
-    virtual bool onReceiveResponse(const ::protoex::Order& response) { return false; }
-    virtual bool onReceiveResponse(const ::protoex::Balance& response) { return false; }
-    virtual bool onReceiveResponse(const ::protoex::Account& response) { return false; }
-
-    virtual bool onReceiveReject(const ::protoex::Order& reject) { return false; }
-    virtual bool onReceiveReject(const ::protoex::Balance& reject) { return false; }
-    virtual bool onReceiveReject(const ::protoex::Account& reject) { return false; }
-
-    virtual void onReceiveNotify(const ::protoex::Order& notify) {}
-    virtual void onReceiveNotify(const ::protoex::Balance& notify) {}
-    virtual void onReceiveNotify(const ::protoex::Account& notify) {}
-
-    virtual void onReceive(const ::protoex::Order& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
-    virtual void onReceive(const ::protoex::Balance& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
-    virtual void onReceive(const ::protoex::Account& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
-
-    // Reset client requests
-    virtual void reset_requests()
-    {
-        proto::Client<TBuffer>::reset_requests();
-    }
-
-    // Watchdog client requests for timeouts
-    virtual void watchdog_requests(uint64_t utc)
-    {
-        proto::Client<TBuffer>::watchdog_requests(utc);
-
-    }
-};
-
-} // namespace protoex
-} // namespace FBE
-
-namespace FBE {
-namespace protoex {
-
 // Fast Binary Encoding protoex proxy
 template <class TBuffer>
 class Proxy : public virtual FBE::Receiver<TBuffer>
@@ -366,6 +296,76 @@ private:
     FBE::protoex::OrderModel<ReadBuffer> OrderModel;
     FBE::protoex::BalanceModel<ReadBuffer> BalanceModel;
     FBE::protoex::AccountModel<ReadBuffer> AccountModel;
+};
+
+} // namespace protoex
+} // namespace FBE
+
+namespace FBE {
+namespace protoex {
+
+// Fast Binary Encoding protoex client
+template <class TBuffer>
+class Client : public virtual Sender<TBuffer>, protected virtual Receiver<TBuffer>
+    , public virtual proto::Client<TBuffer>
+{
+public:
+    typedef proto::Client<TBuffer> protoClient;
+
+    Client() = default;
+    Client(const Client&) = default;
+    Client(Client&&) = default;
+    virtual ~Client() = default;
+
+    Client& operator=(const Client&) = default;
+    Client& operator=(Client&&) = default;
+
+    // Imported clients
+    proto::Client<TBuffer>& proto_client() noexcept { return *this; }
+
+    // Reset client buffers
+    void reset()
+    {
+        std::scoped_lock locker(this->_lock);
+        reset_requests();
+    }
+
+    // Watchdog for timeouts
+    void watchdog(uint64_t utc)
+    {
+        std::scoped_lock locker(this->_lock);
+        watchdog_requests(utc);
+    }
+
+protected:
+    virtual bool onReceiveResponse(const ::protoex::Order& response) { return false; }
+    virtual bool onReceiveResponse(const ::protoex::Balance& response) { return false; }
+    virtual bool onReceiveResponse(const ::protoex::Account& response) { return false; }
+
+    virtual bool onReceiveReject(const ::protoex::Order& reject) { return false; }
+    virtual bool onReceiveReject(const ::protoex::Balance& reject) { return false; }
+    virtual bool onReceiveReject(const ::protoex::Account& reject) { return false; }
+
+    virtual void onReceiveNotify(const ::protoex::Order& notify) {}
+    virtual void onReceiveNotify(const ::protoex::Balance& notify) {}
+    virtual void onReceiveNotify(const ::protoex::Account& notify) {}
+
+    virtual void onReceive(const ::protoex::Order& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::protoex::Balance& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::protoex::Account& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+
+    // Reset client requests
+    virtual void reset_requests()
+    {
+        proto::Client<TBuffer>::reset_requests();
+    }
+
+    // Watchdog client requests for timeouts
+    virtual void watchdog_requests(uint64_t utc)
+    {
+        proto::Client<TBuffer>::watchdog_requests(utc);
+
+    }
 };
 
 } // namespace protoex

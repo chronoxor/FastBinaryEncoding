@@ -2,19 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../include/generator_cpp.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_cpp.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_kotlin.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_kotlin.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/FinalReceiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/FinalReceiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/FinalReceiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/FinalReceiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/Receiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/enums_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/enums_protocol.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/proto_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto_protocol.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/protoex_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/protoex_protocol.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/test_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test_protocol.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,7 +19,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -47,7 +42,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayBytes.kt" />
         <option value="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayBytes.kt" />
         <option value="$PROJECT_DIR$/src/proto/test/fbe/FieldModelArrayByte.kt" />
         <option value="$PROJECT_DIR$/src/proto/test/fbe/FinalModelArrayByte.kt" />
@@ -98,14 +92,15 @@
         <option value="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/ReceiverListener.kt" />
         <option value="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/Receiver.kt" />
         <option value="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Receiver.kt" />
+        <option value="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Client.kt" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="360" />
-    <option name="y" value="162" />
-    <option name="width" value="1799" />
-    <option name="height" value="1088" />
+    <option name="y" value="161" />
+    <option name="width" value="1800" />
+    <option name="height" value="1089" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -140,7 +135,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560351841429" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560415226984" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -273,13 +268,11 @@
       <workItem from="1560333392475" duration="2017000" />
       <workItem from="1560346370139" duration="1942000" />
       <workItem from="1560348471572" duration="2165000" />
+      <workItem from="1560413263664" duration="1933000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="_default_ - 2019.06.07 at 13h 40m 54s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
     <history-entry file="_default_ - 2019.06.07 at 13h 41m 34s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
@@ -307,9 +300,12 @@
     <history-entry file="_default_ - 2019.06.12 at 18h 04m 16s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
+    <history-entry file="_default_ - 2019.06.13 at 11h 40m 45s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="100860000" />
+    <option name="totallyTimeSpent" value="102793000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -321,9 +317,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="288" y="130" width="1439" height="870" extended-state="0" />
+    <frame x="288" y="129" width="1440" height="871" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3074692" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31231883" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -332,14 +328,14 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5489485" weight="0.3197832" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5485507" weight="0.31935048" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49089807" weight="0.39692983" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49909034" weight="0.32891247" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32891247" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.45105147" side_tool="true" visible="true" weight="0.3197832" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.45144928" side_tool="true" visible="true" weight="0.31935048" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="JProfiler" order="11" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.37763253" weight="0.34408602" />
@@ -361,8 +357,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/proto/test/fbe/FieldModelStructSimple.kt" />
-    <entry file="file://$PROJECT_DIR$/src/tests/TestSerialization.kt" />
     <entry file="file://$PROJECT_DIR$/src/proto/test/StructSimple.kt" />
     <entry file="file://$PROJECT_DIR$/src/tests/TestSendReceive.kt" />
     <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.kt">
@@ -700,6 +694,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="372">
           <caret line="58" column="13" lean-forward="true" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/fbe/Client.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5253">
+          <caret line="309" selection-start-line="309" selection-end-line="309" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Client.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-408">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>

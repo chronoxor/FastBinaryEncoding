@@ -105,8 +105,8 @@ private:
     void GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s);
     void GenerateSender(const std::shared_ptr<Package>& p, bool final);
     void GenerateReceiver(const std::shared_ptr<Package>& p, bool final);
-    void GenerateClient(const std::shared_ptr<Package>& p, bool final);
     void GenerateProxy(const std::shared_ptr<Package>& p, bool final);
+    void GenerateClient(const std::shared_ptr<Package>& p, bool final);
 
     bool IsKnownType(const std::string& type);
     bool IsPrimitiveType(const std::string& type, bool optional);
