@@ -1873,7 +1873,7 @@ class StructSimple {
       throw new TypeError('Instance of StructSimple is required!')
     }
     // noinspection RedundantIfStatementJS
-    if (this.id === other.id) {
+    if (this.id !== other.id) {
       return false
     }
     return true

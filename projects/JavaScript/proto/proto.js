@@ -803,7 +803,7 @@ class Order {
       throw new TypeError('Instance of Order is required!')
     }
     // noinspection RedundantIfStatementJS
-    if (this.id === other.id) {
+    if (this.id !== other.id) {
       return false
     }
     return true
@@ -1904,7 +1904,7 @@ class Balance {
       throw new TypeError('Instance of Balance is required!')
     }
     // noinspection RedundantIfStatementJS
-    if (this.currency === other.currency) {
+    if (this.currency !== other.currency) {
       return false
     }
     return true
@@ -2798,7 +2798,7 @@ class Account {
       throw new TypeError('Instance of Account is required!')
     }
     // noinspection RedundantIfStatementJS
-    if (this.id === other.id) {
+    if (this.id !== other.id) {
       return false
     }
     return true

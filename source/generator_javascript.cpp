@@ -9162,7 +9162,13 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
             {
                 WriteLineIndent("// noinspection RedundantIfStatementJS");
                 if (IsJavaScriptType(*field->type))
-                    WriteLineIndent("if (this." + *field->name + " === other." + *field->name + ") {");
+                {
+                    WriteLineIndent("if (this." + *field->name + " !== other." + *field->name + ") {");
+                    Indent(1);
+                    WriteLineIndent("return false");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                }
                 else
                 {
                     WriteLineIndent("if (this." + *field->name + " != null) {");
@@ -9179,10 +9185,6 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
                     Indent(-1);
                     WriteLineIndent("}");
                 }
-                Indent(1);
-                WriteLineIndent("return false");
-                Indent(-1);
-                WriteLineIndent("}");
             }
         }
     }

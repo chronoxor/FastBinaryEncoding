@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/protoex.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -182,18 +183,19 @@
       <workItem from="1559781837842" duration="269000" />
       <workItem from="1559782261337" duration="115000" />
       <workItem from="1559834655014" duration="849000" />
+      <workItem from="1560786262443" duration="100000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20878000" />
+    <option name="totallyTimeSpent" value="20978000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="276" y="164" width="1464" height="828" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5804598" visible="true" weight="0.2740014" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.579023" visible="true" weight="0.27259985" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" id="npm" order="2" sideWeight="0.41954023" side_tool="true" visible="true" weight="0.2740014" />
+      <window_info active="true" id="npm" order="2" sideWeight="0.42097703" side_tool="true" visible="true" weight="0.27259985" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
