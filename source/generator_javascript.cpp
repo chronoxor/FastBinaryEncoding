@@ -10688,7 +10688,8 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
     {
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("let result = this._" + CppCommon::StringUtils::ToLower(*import) + "Sender.send(value)");
+            WriteLineIndent("let result = 0");
+            WriteLineIndent("result = this._" + CppCommon::StringUtils::ToLower(*import) + "Sender.send(value)");
             WriteLineIndent("if (result > 0) {");
             Indent(1);
             WriteLineIndent("return result");

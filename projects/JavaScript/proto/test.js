@@ -24558,7 +24558,8 @@ class Sender extends fbe.Sender {
     if (value instanceof StructEmpty) {
       return this.send_structempty(value)
     }
-    let result = this._protoSender.send(value)
+    let result = 0
+    result = this._protoSender.send(value)
     if (result > 0) {
       return result
     }
@@ -25755,7 +25756,8 @@ class FinalSender extends fbe.Sender {
     if (value instanceof StructEmpty) {
       return this.send_structempty(value)
     }
-    let result = this._protoSender.send(value)
+    let result = 0
+    result = this._protoSender.send(value)
     if (result > 0) {
       return result
     }

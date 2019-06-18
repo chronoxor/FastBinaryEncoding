@@ -4077,7 +4077,8 @@ class Sender extends fbe.Sender {
     if (value instanceof Account) {
       return this.send_account(value)
     }
-    let result = this._protoSender.send(value)
+    let result = 0
+    result = this._protoSender.send(value)
     if (result > 0) {
       return result
     }
@@ -4509,7 +4510,8 @@ class FinalSender extends fbe.Sender {
     if (value instanceof Account) {
       return this.send_account(value)
     }
-    let result = this._protoSender.send(value)
+    let result = 0
+    result = this._protoSender.send(value)
     if (result > 0) {
       return result
     }
