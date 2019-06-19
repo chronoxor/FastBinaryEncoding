@@ -7873,6 +7873,156 @@ class Proxy extends fbe.Receiver {
 exports.Proxy = Proxy
 
 /**
+ * Fast Binary Encoding enums client
+ */
+class Client extends fbe.Client {
+  /**
+   * Initialize enums client with the given buffers
+   * @param {!fbe.WriteBuffer} sendBuffer Send buffer, defaults is new fbe.WriteBuffer()
+   * @param {!fbe.WriteBuffer} receiveBuffer Receive buffer, defaults is new fbe.WriteBuffer()
+   * @constructor
+   */
+  constructor (sendBuffer = new fbe.WriteBuffer(), receiveBuffer = new fbe.WriteBuffer()) {
+    super(sendBuffer, receiveBuffer, false)
+    this._enumsSenderModel = new EnumsModel(this.sendBuffer)
+    this._enumsReceiverValue = new Enums()
+    this._enumsReceiverModel = new EnumsModel()
+    this.onSendHandler = this.onSend
+    this.onSendLogHandler = this.onSendLog
+    this.onReceiveLogHandler = this.onReceiveLog
+  }
+
+  // Sender models accessors
+
+  /**
+   * Get Enums model
+   * @this {!Client}
+   * @returns {!EnumsModel} Enums sender model
+   */
+  get enumsSenderModel () {
+    return this._enumsSenderModel
+  }
+
+  // Send methods
+
+  /**
+   * Send value
+   * @this {!Client}
+   * @param {!object} value Value to send
+   * @returns {!number} Sent bytes
+   */
+  send (value) {
+    if (value instanceof Enums) {
+      return this.send_enums(value)
+    }
+    return 0
+  }
+
+  /**
+   * Send Enums value
+   * @this {!Client}
+   * @param {!Enums} value Enums value to send
+   * @returns {!number} Sent bytes
+   */
+  send_enums (value) { // eslint-disable-line
+    // Serialize the value into the FBE stream
+    let serialized = this.enumsSenderModel.serialize(value)
+    console.assert((serialized > 0), 'enums.Enums serialization failed!')
+    console.assert(this.enumsSenderModel.verify(), 'enums.Enums validation failed!')
+
+    // Log the value
+    if (this.logging) {
+      this.onSendLog(value.toString())
+    }
+
+    // Send the serialized value
+    return this.sendSerialized(serialized)
+  }
+
+  /**
+   * Send message handler
+   * @this {!Client}
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   */
+  onSend (buffer, offset, size) {
+    console.assert(true, 'enums.Client.onSend() not implemented!')
+    debugger // eslint-disable-line
+    return 0
+  }
+
+  /**
+   * Setup send message handler
+   * @this {!Client}
+   * @param {!function} handler Send message handler
+   */
+  set onSendHandler (handler) { // eslint-disable-line
+    this.onSend = handler
+  }
+
+  /**
+   * Setup send log message handler
+   * @this {!Client}
+   * @param {!function} handler Send log message handler
+   */
+  set onSendLogHandler (handler) { // eslint-disable-line
+    this.onSendLog = handler
+  }
+
+  // Receive handlers
+
+  /**
+   * Enums receive handler
+   * @this {!Client}
+   * @param {!Enums} value Enums received value
+   */
+  onReceive_enums (value) {}  // eslint-disable-line
+
+  /**
+   * enums receive message handler
+   * @this {!Client}
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   * @returns {!boolean} Success flag
+   */
+  onReceive (type, buffer, offset, size) {
+    switch (type) {
+      case EnumsModel.fbeType: {
+        // Deserialize the value from the FBE stream
+        this._enumsReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._enumsReceiverModel.verify(), 'enums.Enums validation failed!')
+        let deserialized = this._enumsReceiverModel.deserialize(this._enumsReceiverValue)
+        console.assert((deserialized.size > 0), 'enums.Enums deserialization failed!')
+
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._enumsReceiverValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_enums(this._enumsReceiverValue)
+        return true
+      }
+    }
+    return false
+  }
+
+  /**
+   * Setup receive log message handler
+   * @this {!Client}
+   * @param {!function} handler Receive log message handler
+   */
+  set onReceiveLogHandler (handler) { // eslint-disable-line
+    this.onReceiveLog = handler
+  }
+}
+
+exports.Client = Client
+
+/**
  * Fast Binary Encoding enums final sender
  */
 class FinalSender extends fbe.Sender {
@@ -8036,3 +8186,153 @@ class FinalReceiver extends fbe.Receiver {
 }
 
 exports.FinalReceiver = FinalReceiver
+
+/**
+ * Fast Binary Encoding enums final client
+ */
+class FinalClient extends fbe.Client {
+  /**
+   * Initialize enums client with the given buffers
+   * @param {!fbe.WriteBuffer} sendBuffer Send buffer, defaults is new fbe.WriteBuffer()
+   * @param {!fbe.WriteBuffer} receiveBuffer Receive buffer, defaults is new fbe.WriteBuffer()
+   * @constructor
+   */
+  constructor (sendBuffer = new fbe.WriteBuffer(), receiveBuffer = new fbe.WriteBuffer()) {
+    super(sendBuffer, receiveBuffer, true)
+    this._enumsSenderModel = new EnumsFinalModel(this.sendBuffer)
+    this._enumsReceiverValue = new Enums()
+    this._enumsReceiverModel = new EnumsFinalModel()
+    this.onSendHandler = this.onSend
+    this.onSendLogHandler = this.onSendLog
+    this.onReceiveLogHandler = this.onReceiveLog
+  }
+
+  // Sender models accessors
+
+  /**
+   * Get Enums model
+   * @this {!FinalClient}
+   * @returns {!EnumsModel} Enums sender model
+   */
+  get enumsSenderModel () {
+    return this._enumsSenderModel
+  }
+
+  // Send methods
+
+  /**
+   * Send value
+   * @this {!FinalClient}
+   * @param {!object} value Value to send
+   * @returns {!number} Sent bytes
+   */
+  send (value) {
+    if (value instanceof Enums) {
+      return this.send_enums(value)
+    }
+    return 0
+  }
+
+  /**
+   * Send Enums value
+   * @this {!FinalClient}
+   * @param {!Enums} value Enums value to send
+   * @returns {!number} Sent bytes
+   */
+  send_enums (value) { // eslint-disable-line
+    // Serialize the value into the FBE stream
+    let serialized = this.enumsSenderModel.serialize(value)
+    console.assert((serialized > 0), 'enums.Enums serialization failed!')
+    console.assert(this.enumsSenderModel.verify(), 'enums.Enums validation failed!')
+
+    // Log the value
+    if (this.logging) {
+      this.onSendLog(value.toString())
+    }
+
+    // Send the serialized value
+    return this.sendSerialized(serialized)
+  }
+
+  /**
+   * Send message handler
+   * @this {!FinalClient}
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   */
+  onSend (buffer, offset, size) {
+    console.assert(true, 'enums.Client.onSend() not implemented!')
+    debugger // eslint-disable-line
+    return 0
+  }
+
+  /**
+   * Setup send message handler
+   * @this {!FinalClient}
+   * @param {!function} handler Send message handler
+   */
+  set onSendHandler (handler) { // eslint-disable-line
+    this.onSend = handler
+  }
+
+  /**
+   * Setup send log message handler
+   * @this {!FinalClient}
+   * @param {!function} handler Send log message handler
+   */
+  set onSendLogHandler (handler) { // eslint-disable-line
+    this.onSendLog = handler
+  }
+
+  // Receive handlers
+
+  /**
+   * Enums receive handler
+   * @this {!FinalClient}
+   * @param {!Enums} value Enums received value
+   */
+  onReceive_enums (value) {}  // eslint-disable-line
+
+  /**
+   * enums receive message handler
+   * @this {!FinalClient}
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   * @returns {!boolean} Success flag
+   */
+  onReceive (type, buffer, offset, size) {
+    switch (type) {
+      case EnumsFinalModel.fbeType: {
+        // Deserialize the value from the FBE stream
+        this._enumsReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._enumsReceiverModel.verify(), 'enums.Enums validation failed!')
+        let deserialized = this._enumsReceiverModel.deserialize(this._enumsReceiverValue)
+        console.assert((deserialized.size > 0), 'enums.Enums deserialization failed!')
+
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._enumsReceiverValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_enums(this._enumsReceiverValue)
+        return true
+      }
+    }
+    return false
+  }
+
+  /**
+   * Setup receive log message handler
+   * @this {!FinalClient}
+   * @param {!function} handler Receive log message handler
+   */
+  set onReceiveLogHandler (handler) { // eslint-disable-line
+    this.onReceiveLog = handler
+  }
+}
+
+exports.FinalClient = FinalClient

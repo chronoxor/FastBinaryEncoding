@@ -3857,10 +3857,10 @@ abstract class Client
         private set
 
     protected constructor(final: Boolean) { this.final = final }
-    protected constructor(receiveBuffer: Buffer, sendBuffer: Buffer, final: Boolean) { this.receiveBuffer = receiveBuffer; this.sendBuffer = sendBuffer; this.final = final }
+    protected constructor(sendBuffer: Buffer, receiveBuffer: Buffer, final: Boolean) { this.sendBuffer = sendBuffer; this.receiveBuffer = receiveBuffer; this.final = final }
 
     // Reset the client buffers
-    fun reset() { receiveBuffer.reset(); sendBuffer.reset() }
+    fun reset() { sendBuffer.reset(); receiveBuffer.reset() }
 
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.

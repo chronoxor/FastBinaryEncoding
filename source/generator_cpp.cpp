@@ -8395,7 +8395,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 WriteLine();
                 if (response_name.empty())
                 {
-                    WriteLineIndent("void send(const " + request_name + "& value)");
+                    WriteLineIndent("void request(const " + request_name + "& value)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("// Send the request message");
@@ -8413,7 +8413,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 }
                 else
                 {
-                    WriteLineIndent("std::future<" + response_name + "> send(const " + request_name + "& value, size_t timeout = 0)");
+                    WriteLineIndent("std::future<" + response_name + "> request(const " + request_name + "& value, size_t timeout = 0)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("std::scoped_lock locker(this->_lock);");

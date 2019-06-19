@@ -4170,7 +4170,7 @@ class Sender extends fbe.Sender {
    */
   set onSendHandler (handler) { // eslint-disable-line
     this.onSend = handler
-    this._protoSender.onSend = handler
+    this._protoSender.onSendHandler = handler
   }
 
   /**
@@ -4471,6 +4471,300 @@ class Proxy extends fbe.Receiver {
 exports.Proxy = Proxy
 
 /**
+ * Fast Binary Encoding protoex client
+ */
+class Client extends fbe.Client {
+  /**
+   * Initialize protoex client with the given buffers
+   * @param {!fbe.WriteBuffer} sendBuffer Send buffer, defaults is new fbe.WriteBuffer()
+   * @param {!fbe.WriteBuffer} receiveBuffer Receive buffer, defaults is new fbe.WriteBuffer()
+   * @constructor
+   */
+  constructor (sendBuffer = new fbe.WriteBuffer(), receiveBuffer = new fbe.WriteBuffer()) {
+    super(sendBuffer, receiveBuffer, false)
+    this._protoClient = new proto.Client(this.sendBuffer, this.receiveBuffer)
+    this._orderSenderModel = new OrderModel(this.sendBuffer)
+    this._orderReceiverValue = new Order()
+    this._orderReceiverModel = new OrderModel()
+    this._balanceSenderModel = new BalanceModel(this.sendBuffer)
+    this._balanceReceiverValue = new Balance()
+    this._balanceReceiverModel = new BalanceModel()
+    this._accountSenderModel = new AccountModel(this.sendBuffer)
+    this._accountReceiverValue = new Account()
+    this._accountReceiverModel = new AccountModel()
+    this.onSendHandler = this.onSend
+    this.onSendLogHandler = this.onSendLog
+    this.onReceiveLogHandler = this.onReceiveLog
+  }
+
+  // Imported clients
+
+  /**
+   * Get imported proto client
+   * @this {!Client}
+   * @returns {!proto.Client} proto client
+   */
+  get protoClient () {
+    return this._protoClient
+  }
+
+  // Sender models accessors
+
+  /**
+   * Get Order model
+   * @this {!Client}
+   * @returns {!OrderModel} Order sender model
+   */
+  get orderSenderModel () {
+    return this._orderSenderModel
+  }
+
+  /**
+   * Get Balance model
+   * @this {!Client}
+   * @returns {!BalanceModel} Balance sender model
+   */
+  get balanceSenderModel () {
+    return this._balanceSenderModel
+  }
+
+  /**
+   * Get Account model
+   * @this {!Client}
+   * @returns {!AccountModel} Account sender model
+   */
+  get accountSenderModel () {
+    return this._accountSenderModel
+  }
+
+  // Send methods
+
+  /**
+   * Send value
+   * @this {!Client}
+   * @param {!object} value Value to send
+   * @returns {!number} Sent bytes
+   */
+  send (value) {
+    if (value instanceof Order) {
+      return this.send_order(value)
+    }
+    if (value instanceof Balance) {
+      return this.send_balance(value)
+    }
+    if (value instanceof Account) {
+      return this.send_account(value)
+    }
+    let result = 0
+    result = this._protoClient.send(value)
+    if (result > 0) {
+      return result
+    }
+    return 0
+  }
+
+  /**
+   * Send Order value
+   * @this {!Client}
+   * @param {!Order} value Order value to send
+   * @returns {!number} Sent bytes
+   */
+  send_order (value) { // eslint-disable-line
+    // Serialize the value into the FBE stream
+    let serialized = this.orderSenderModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.Order serialization failed!')
+    console.assert(this.orderSenderModel.verify(), 'protoex.Order validation failed!')
+
+    // Log the value
+    if (this.logging) {
+      this.onSendLog(value.toString())
+    }
+
+    // Send the serialized value
+    return this.sendSerialized(serialized)
+  }
+
+  /**
+   * Send Balance value
+   * @this {!Client}
+   * @param {!Balance} value Balance value to send
+   * @returns {!number} Sent bytes
+   */
+  send_balance (value) { // eslint-disable-line
+    // Serialize the value into the FBE stream
+    let serialized = this.balanceSenderModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.Balance serialization failed!')
+    console.assert(this.balanceSenderModel.verify(), 'protoex.Balance validation failed!')
+
+    // Log the value
+    if (this.logging) {
+      this.onSendLog(value.toString())
+    }
+
+    // Send the serialized value
+    return this.sendSerialized(serialized)
+  }
+
+  /**
+   * Send Account value
+   * @this {!Client}
+   * @param {!Account} value Account value to send
+   * @returns {!number} Sent bytes
+   */
+  send_account (value) { // eslint-disable-line
+    // Serialize the value into the FBE stream
+    let serialized = this.accountSenderModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.Account serialization failed!')
+    console.assert(this.accountSenderModel.verify(), 'protoex.Account validation failed!')
+
+    // Log the value
+    if (this.logging) {
+      this.onSendLog(value.toString())
+    }
+
+    // Send the serialized value
+    return this.sendSerialized(serialized)
+  }
+
+  /**
+   * Send message handler
+   * @this {!Client}
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   */
+  onSend (buffer, offset, size) {
+    console.assert(true, 'protoex.Client.onSend() not implemented!')
+    debugger // eslint-disable-line
+    return 0
+  }
+
+  /**
+   * Setup send message handler
+   * @this {!Client}
+   * @param {!function} handler Send message handler
+   */
+  set onSendHandler (handler) { // eslint-disable-line
+    this.onSend = handler
+    this._protoClient.onSendHandler = handler
+  }
+
+  /**
+   * Setup send log message handler
+   * @this {!Client}
+   * @param {!function} handler Send log message handler
+   */
+  set onSendLogHandler (handler) { // eslint-disable-line
+    this.onSendLog = handler
+    this._protoClient.onSendLogHandler = handler
+  }
+
+  // Receive handlers
+
+  /**
+   * Order receive handler
+   * @this {!Client}
+   * @param {!Order} value Order received value
+   */
+  onReceive_order (value) {}  // eslint-disable-line
+
+  /**
+   * Balance receive handler
+   * @this {!Client}
+   * @param {!Balance} value Balance received value
+   */
+  onReceive_balance (value) {}  // eslint-disable-line
+
+  /**
+   * Account receive handler
+   * @this {!Client}
+   * @param {!Account} value Account received value
+   */
+  onReceive_account (value) {}  // eslint-disable-line
+
+  /**
+   * protoex receive message handler
+   * @this {!Client}
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   * @returns {!boolean} Success flag
+   */
+  onReceive (type, buffer, offset, size) {
+    switch (type) {
+      case OrderModel.fbeType: {
+        // Deserialize the value from the FBE stream
+        this._orderReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._orderReceiverModel.verify(), 'protoex.Order validation failed!')
+        let deserialized = this._orderReceiverModel.deserialize(this._orderReceiverValue)
+        console.assert((deserialized.size > 0), 'protoex.Order deserialization failed!')
+
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._orderReceiverValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_order(this._orderReceiverValue)
+        return true
+      }
+      case BalanceModel.fbeType: {
+        // Deserialize the value from the FBE stream
+        this._balanceReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._balanceReceiverModel.verify(), 'protoex.Balance validation failed!')
+        let deserialized = this._balanceReceiverModel.deserialize(this._balanceReceiverValue)
+        console.assert((deserialized.size > 0), 'protoex.Balance deserialization failed!')
+
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._balanceReceiverValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_balance(this._balanceReceiverValue)
+        return true
+      }
+      case AccountModel.fbeType: {
+        // Deserialize the value from the FBE stream
+        this._accountReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._accountReceiverModel.verify(), 'protoex.Account validation failed!')
+        let deserialized = this._accountReceiverModel.deserialize(this._accountReceiverValue)
+        console.assert((deserialized.size > 0), 'protoex.Account deserialization failed!')
+
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._accountReceiverValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_account(this._accountReceiverValue)
+        return true
+      }
+    }
+
+    // noinspection RedundantIfStatementJS
+    if ((this.protoClient != null) && this.protoClient.onReceive(type, buffer, offset, size)) {
+      return true
+    }
+
+    return false
+  }
+
+  /**
+   * Setup receive log message handler
+   * @this {!Client}
+   * @param {!function} handler Receive log message handler
+   */
+  set onReceiveLogHandler (handler) { // eslint-disable-line
+    this.onReceiveLog = handler
+    this._protoClient.onReceiveLogHandler = handler
+  }
+}
+
+exports.Client = Client
+
+/**
  * Fast Binary Encoding protoex final sender
  */
 class FinalSender extends fbe.Sender {
@@ -4638,7 +4932,7 @@ class FinalSender extends fbe.Sender {
    */
   set onSendHandler (handler) { // eslint-disable-line
     this.onSend = handler
-    this._protoSender.onSend = handler
+    this._protoSender.onSendHandler = handler
   }
 
   /**
@@ -4799,3 +5093,297 @@ class FinalReceiver extends fbe.Receiver {
 }
 
 exports.FinalReceiver = FinalReceiver
+
+/**
+ * Fast Binary Encoding protoex final client
+ */
+class FinalClient extends fbe.Client {
+  /**
+   * Initialize protoex client with the given buffers
+   * @param {!fbe.WriteBuffer} sendBuffer Send buffer, defaults is new fbe.WriteBuffer()
+   * @param {!fbe.WriteBuffer} receiveBuffer Receive buffer, defaults is new fbe.WriteBuffer()
+   * @constructor
+   */
+  constructor (sendBuffer = new fbe.WriteBuffer(), receiveBuffer = new fbe.WriteBuffer()) {
+    super(sendBuffer, receiveBuffer, true)
+    this._protoClient = new proto.FinalClient(this.sendBuffer, this.receiveBuffer)
+    this._orderSenderModel = new OrderFinalModel(this.sendBuffer)
+    this._orderReceiverValue = new Order()
+    this._orderReceiverModel = new OrderFinalModel()
+    this._balanceSenderModel = new BalanceFinalModel(this.sendBuffer)
+    this._balanceReceiverValue = new Balance()
+    this._balanceReceiverModel = new BalanceFinalModel()
+    this._accountSenderModel = new AccountFinalModel(this.sendBuffer)
+    this._accountReceiverValue = new Account()
+    this._accountReceiverModel = new AccountFinalModel()
+    this.onSendHandler = this.onSend
+    this.onSendLogHandler = this.onSendLog
+    this.onReceiveLogHandler = this.onReceiveLog
+  }
+
+  // Imported clients
+
+  /**
+   * Get imported proto client
+   * @this {!FinalClient}
+   * @returns {!proto.FinalClient} proto client
+   */
+  get protoClient () {
+    return this._protoClient
+  }
+
+  // Sender models accessors
+
+  /**
+   * Get Order model
+   * @this {!FinalClient}
+   * @returns {!OrderModel} Order sender model
+   */
+  get orderSenderModel () {
+    return this._orderSenderModel
+  }
+
+  /**
+   * Get Balance model
+   * @this {!FinalClient}
+   * @returns {!BalanceModel} Balance sender model
+   */
+  get balanceSenderModel () {
+    return this._balanceSenderModel
+  }
+
+  /**
+   * Get Account model
+   * @this {!FinalClient}
+   * @returns {!AccountModel} Account sender model
+   */
+  get accountSenderModel () {
+    return this._accountSenderModel
+  }
+
+  // Send methods
+
+  /**
+   * Send value
+   * @this {!FinalClient}
+   * @param {!object} value Value to send
+   * @returns {!number} Sent bytes
+   */
+  send (value) {
+    if (value instanceof Order) {
+      return this.send_order(value)
+    }
+    if (value instanceof Balance) {
+      return this.send_balance(value)
+    }
+    if (value instanceof Account) {
+      return this.send_account(value)
+    }
+    let result = 0
+    result = this._protoClient.send(value)
+    if (result > 0) {
+      return result
+    }
+    return 0
+  }
+
+  /**
+   * Send Order value
+   * @this {!FinalClient}
+   * @param {!Order} value Order value to send
+   * @returns {!number} Sent bytes
+   */
+  send_order (value) { // eslint-disable-line
+    // Serialize the value into the FBE stream
+    let serialized = this.orderSenderModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.Order serialization failed!')
+    console.assert(this.orderSenderModel.verify(), 'protoex.Order validation failed!')
+
+    // Log the value
+    if (this.logging) {
+      this.onSendLog(value.toString())
+    }
+
+    // Send the serialized value
+    return this.sendSerialized(serialized)
+  }
+
+  /**
+   * Send Balance value
+   * @this {!FinalClient}
+   * @param {!Balance} value Balance value to send
+   * @returns {!number} Sent bytes
+   */
+  send_balance (value) { // eslint-disable-line
+    // Serialize the value into the FBE stream
+    let serialized = this.balanceSenderModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.Balance serialization failed!')
+    console.assert(this.balanceSenderModel.verify(), 'protoex.Balance validation failed!')
+
+    // Log the value
+    if (this.logging) {
+      this.onSendLog(value.toString())
+    }
+
+    // Send the serialized value
+    return this.sendSerialized(serialized)
+  }
+
+  /**
+   * Send Account value
+   * @this {!FinalClient}
+   * @param {!Account} value Account value to send
+   * @returns {!number} Sent bytes
+   */
+  send_account (value) { // eslint-disable-line
+    // Serialize the value into the FBE stream
+    let serialized = this.accountSenderModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.Account serialization failed!')
+    console.assert(this.accountSenderModel.verify(), 'protoex.Account validation failed!')
+
+    // Log the value
+    if (this.logging) {
+      this.onSendLog(value.toString())
+    }
+
+    // Send the serialized value
+    return this.sendSerialized(serialized)
+  }
+
+  /**
+   * Send message handler
+   * @this {!FinalClient}
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   */
+  onSend (buffer, offset, size) {
+    console.assert(true, 'protoex.Client.onSend() not implemented!')
+    debugger // eslint-disable-line
+    return 0
+  }
+
+  /**
+   * Setup send message handler
+   * @this {!FinalClient}
+   * @param {!function} handler Send message handler
+   */
+  set onSendHandler (handler) { // eslint-disable-line
+    this.onSend = handler
+    this._protoClient.onSendHandler = handler
+  }
+
+  /**
+   * Setup send log message handler
+   * @this {!FinalClient}
+   * @param {!function} handler Send log message handler
+   */
+  set onSendLogHandler (handler) { // eslint-disable-line
+    this.onSendLog = handler
+    this._protoClient.onSendLogHandler = handler
+  }
+
+  // Receive handlers
+
+  /**
+   * Order receive handler
+   * @this {!FinalClient}
+   * @param {!Order} value Order received value
+   */
+  onReceive_order (value) {}  // eslint-disable-line
+
+  /**
+   * Balance receive handler
+   * @this {!FinalClient}
+   * @param {!Balance} value Balance received value
+   */
+  onReceive_balance (value) {}  // eslint-disable-line
+
+  /**
+   * Account receive handler
+   * @this {!FinalClient}
+   * @param {!Account} value Account received value
+   */
+  onReceive_account (value) {}  // eslint-disable-line
+
+  /**
+   * protoex receive message handler
+   * @this {!FinalClient}
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   * @returns {!boolean} Success flag
+   */
+  onReceive (type, buffer, offset, size) {
+    switch (type) {
+      case OrderFinalModel.fbeType: {
+        // Deserialize the value from the FBE stream
+        this._orderReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._orderReceiverModel.verify(), 'protoex.Order validation failed!')
+        let deserialized = this._orderReceiverModel.deserialize(this._orderReceiverValue)
+        console.assert((deserialized.size > 0), 'protoex.Order deserialization failed!')
+
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._orderReceiverValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_order(this._orderReceiverValue)
+        return true
+      }
+      case BalanceFinalModel.fbeType: {
+        // Deserialize the value from the FBE stream
+        this._balanceReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._balanceReceiverModel.verify(), 'protoex.Balance validation failed!')
+        let deserialized = this._balanceReceiverModel.deserialize(this._balanceReceiverValue)
+        console.assert((deserialized.size > 0), 'protoex.Balance deserialization failed!')
+
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._balanceReceiverValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_balance(this._balanceReceiverValue)
+        return true
+      }
+      case AccountFinalModel.fbeType: {
+        // Deserialize the value from the FBE stream
+        this._accountReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._accountReceiverModel.verify(), 'protoex.Account validation failed!')
+        let deserialized = this._accountReceiverModel.deserialize(this._accountReceiverValue)
+        console.assert((deserialized.size > 0), 'protoex.Account deserialization failed!')
+
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._accountReceiverValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_account(this._accountReceiverValue)
+        return true
+      }
+    }
+
+    // noinspection RedundantIfStatementJS
+    if ((this.protoClient != null) && this.protoClient.onReceive(type, buffer, offset, size)) {
+      return true
+    }
+
+    return false
+  }
+
+  /**
+   * Setup receive log message handler
+   * @this {!FinalClient}
+   * @param {!function} handler Receive log message handler
+   */
+  set onReceiveLogHandler (handler) { // eslint-disable-line
+    this.onReceiveLog = handler
+    this._protoClient.onReceiveLogHandler = handler
+  }
+}
+
+exports.FinalClient = FinalClient

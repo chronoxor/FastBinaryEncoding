@@ -21,6 +21,29 @@ const utf8encode = utf8.utf8encode
 const utf8decode = utf8.utf8decode
 
 /**
+ * Fast Binary Encoding deferred promise
+ */
+class DeferredPromise {
+  /**
+   * Initialize buffer
+   * @constructor
+   */
+  constructor () {
+    this._promise = new Promise((resolve, reject) => {
+      // Assign the resolve and reject functions to `this` making them usable on the class instance
+      this.resolve = resolve
+      this.reject = reject
+    })
+    // Bind `then` and `catch` to implement the same interface as Promise
+    this.then = this._promise.then.bind(this._promise)
+    this.catch = this._promise.catch.bind(this._promise)
+    this[Symbol.toStringTag] = 'Promise'
+  }
+}
+
+exports.DeferredPromise = DeferredPromise
+
+/**
  * Fast Binary Encoding base buffer
  */
 class BaseBuffer {
@@ -5562,6 +5585,479 @@ class Receiver {
 }
 
 exports.Receiver = Receiver
+
+/**
+ * Fast Binary Encoding base client
+ */
+class Client {
+  /**
+   * Initialize client with the given buffers and logging flag
+   * @param {!WriteBuffer} sendBuffer Send buffer, defaults is new WriteBuffer()
+   * @param {!WriteBuffer} receiveBuffer Receive buffer, defaults is new WriteBuffer()
+   * @param {boolean=} final Final protocol flag, defaults is false
+   * @constructor
+   */
+  constructor (sendBuffer = new WriteBuffer(), receiveBuffer = new WriteBuffer(), final = false) {
+    this._sendBuffer = sendBuffer
+    this._receiveBuffer = receiveBuffer
+    this._logging = false
+    this._final = final
+  }
+
+  /**
+   * Get the send bytes buffer
+   * @this {!Sender}
+   * @returns {!WriteBuffer} Send bytes buffer
+   */
+  get sendBuffer () {
+    return this._sendBuffer
+  }
+
+  /**
+   * Get the receive bytes buffer
+   * @this {!Sender}
+   * @returns {!WriteBuffer} Receive bytes buffer
+   */
+  get receiveBuffer () {
+    return this._receiveBuffer
+  }
+
+  /**
+   * Get the final protocol flag
+   * @this {!Sender}
+   * @returns {!boolean} Final protocol flag
+   */
+  get final () {
+    return this._final
+  }
+
+  /**
+   * Get the logging flag
+   * @this {!Sender}
+   * @returns {!boolean} Logging flag
+   */
+  get logging () {
+    return this._logging
+  }
+
+  /**
+   * Set the logging flag
+   * @this {!Sender}
+   * @param {!boolean} logging Logging flag
+   */
+  set logging (logging) {
+    this._logging = logging
+  }
+
+  /**
+   * Reset the sender and receive buffers
+   * @this {!Sender}
+   */
+  reset () {
+    this._sendBuffer.reset()
+    this._receiveBuffer.reset()
+  }
+
+  /**
+   * Send serialized buffer.
+   * Direct call of the method requires knowledge about internals of FBE models serialization.
+   * Use it with care!
+   * @this {!Sender}
+   * @param {!number} serialized Serialized bytes
+   * @returns {!number} Sent bytes
+   */
+  sendSerialized (serialized) {
+    console.assert((serialized > 0), 'Invalid size of the serialized buffer!')
+    if (serialized <= 0) {
+      return 0
+    }
+
+    // Shift the send buffer
+    this._sendBuffer.shift(serialized)
+
+    // Send the value
+    let sent = this.onSend(this._sendBuffer.buffer, 0, this._sendBuffer.size)
+    this._sendBuffer.remove(0, sent)
+    return sent
+  }
+
+  /**
+   * Send message handler
+   * @this {!Sender}
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   */
+  onSend (buffer, offset, size) {
+    console.assert(true, 'Abstract method call!')
+    debugger // eslint-disable-line
+    return 0
+  }
+
+  /**
+   * Send log message handler
+   * @this {!Sender}
+   * @param {!string} message Log message
+   */
+  onSendLog (message) {}
+
+  /**
+   * Setup send message handler
+   * @this {!Sender}
+   * @param {!function} handler Send message handler
+   */
+  set onSendHandler (handler) { // eslint-disable-line
+    this.onSend = handler
+  }
+
+  /**
+   * Setup send log message handler
+   * @this {!Sender}
+   * @param {!function} handler Send log message handler
+   */
+  set onSendLogHandler (handler) { // eslint-disable-line
+    this.onSendLog = handler
+  }
+
+  /**
+   * Receive data
+   * @this {!Receiver}
+   * @param {!Uint8Array|!ReadBuffer|!WriteBuffer} buffer Buffer
+   * @param {number=} offset Buffer offset, defaulfs is 0
+   * @param {number=} size Buffer size, defaulfs is undefined
+   */
+  receive (buffer, offset = 0, size = undefined) {
+    if (size == null) {
+      size = buffer.length
+    }
+
+    console.assert(((offset + size) <= buffer.length), 'Invalid offset & size!')
+    if ((offset + size) > buffer.length) {
+      throw new Error('Invalid offset & size!')
+    }
+
+    if (size === 0) {
+      return
+    }
+
+    if ((buffer instanceof ReadBuffer) || (buffer instanceof WriteBuffer)) {
+      buffer = buffer.buffer
+    }
+
+    // Storage buffer
+    let offset0 = this._receiveBuffer.offset
+    let offset1 = this._receiveBuffer.size
+    let size1 = this._receiveBuffer.size
+
+    // Receive buffer
+    let offset2 = 0
+    let size2 = size
+
+    // While receive buffer is available to handle...
+    while (offset2 < size2) {
+      let messageBuffer = null
+      let messageOffset = 0
+      let messageSize = 0
+
+      // Try to receive message size
+      let messageSizeCopied = false
+      let messageSizeFound = false
+      while (!messageSizeFound) {
+        // Look into the storage buffer
+        if (offset0 < size1) {
+          let count = Math.min(size1 - offset0, 4)
+          if (count === 4) {
+            messageSizeCopied = true
+            messageSizeFound = true
+            messageSize = Receiver.readUInt32(this._receiveBuffer.buffer, this._receiveBuffer.offset + offset0)
+            offset0 += 4
+            break
+          } else {
+            // Fill remaining data from the receive buffer
+            if (offset2 < size2) {
+              count = Math.min(size2 - offset2, 4 - count)
+
+              // Allocate and refresh the storage buffer
+              this._receiveBuffer.allocate(count)
+              size1 += count
+
+              for (let i = 0; i < count; i++) {
+                this._receiveBuffer.buffer[offset1 + i] = buffer[offset + offset2 + i]
+              }
+              offset1 += count
+              offset2 += count
+              continue
+            } else {
+              break
+            }
+          }
+        }
+
+        // Look into the receive buffer
+        if (offset2 < size2) {
+          let count = Math.min(size2 - offset2, 4)
+          if (count === 4) {
+            messageSizeFound = true
+            messageSize = Receiver.readUInt32(buffer, offset + offset2)
+            offset2 += 4
+            break
+          } else {
+            // Allocate and refresh the storage buffer
+            this._receiveBuffer.allocate(count)
+            size1 += count
+
+            for (let i = 0; i < count; i++) {
+              this._receiveBuffer.buffer[offset1 + i] = buffer[offset + offset2 + i]
+            }
+            offset1 += count
+            offset2 += count
+            // noinspection UnnecessaryContinueJS
+            continue
+          }
+        } else {
+          break
+        }
+      }
+
+      if (!messageSizeFound) {
+        return
+      }
+
+      // Check the message full size
+      console.assert((messageSize >= (4 + 4 + 4 + 4)), 'Invalid receive data!')
+      if (messageSize < (4 + 4 + 4 + 4)) {
+        return
+      }
+
+      // Try to receive message body
+      let messageFound = false
+      while (!messageFound) {
+        // Look into the storage buffer
+        if (offset0 < size1) {
+          let count = Math.min(size1 - offset0, messageSize - 4)
+          if (count === (messageSize - 4)) {
+            messageFound = true
+            messageBuffer = this._receiveBuffer.buffer
+            messageOffset = offset0 - 4
+            offset0 += messageSize - 4
+            break
+          } else {
+            // Fill remaining data from the receive buffer
+            if (offset2 < size2) {
+              // Copy message size into the storage buffer
+              if (!messageSizeCopied) {
+                // Allocate and refresh the storage buffer
+                this._receiveBuffer.allocate(4)
+                size1 += 4
+
+                Receiver.writeUInt32(this._receiveBuffer.buffer, this._receiveBuffer.offset + offset0, messageSize)
+                offset0 += 4
+                offset1 += 4
+
+                messageSizeCopied = true
+              }
+
+              count = Math.min(size2 - offset2, messageSize - 4 - count)
+
+              // Allocate and refresh the storage buffer
+              this._receiveBuffer.allocate(count)
+              size1 += count
+
+              for (let i = 0; i < count; i++) {
+                this._receiveBuffer.buffer[offset1 + i] = buffer[offset + offset2 + i]
+              }
+              offset1 += count
+              offset2 += count
+              continue
+            } else {
+              break
+            }
+          }
+        }
+
+        // Look into the receive buffer
+        if (offset2 < size2) {
+          let count = Math.min(size2 - offset2, messageSize - 4)
+          if (!messageSizeCopied && (count === (messageSize - 4))) {
+            messageFound = true
+            messageBuffer = buffer
+            messageOffset = offset + offset2 - 4
+            offset2 += messageSize - 4
+            break
+          } else {
+            // Copy message size into the storage buffer
+            if (!messageSizeCopied) {
+              // Allocate and refresh the storage buffer
+              this._receiveBuffer.allocate(4)
+              size1 += 4
+
+              Receiver.writeUInt32(this._receiveBuffer.buffer, this._receiveBuffer.offset + offset0, messageSize)
+              offset0 += 4
+              offset1 += 4
+
+              messageSizeCopied = true
+            }
+
+            // Allocate and refresh the storage buffer
+            this._receiveBuffer.allocate(count)
+            size1 += count
+
+            for (let i = 0; i < count; i++) {
+              this._receiveBuffer.buffer[offset1 + i] = buffer[offset + offset2 + i]
+            }
+            offset1 += count
+            offset2 += count
+            // noinspection UnnecessaryContinueJS
+            continue
+          }
+        } else {
+          break
+        }
+      }
+
+      if (!messageFound) {
+        // Copy message size into the storage buffer
+        if (!messageSizeCopied) {
+          // Allocate and refresh the storage buffer
+          this._receiveBuffer.allocate(4)
+          size1 += 4
+
+          Receiver.writeUInt32(this._receiveBuffer.buffer, this._receiveBuffer.offset + offset0, messageSize)
+          offset0 += 4
+          offset1 += 4
+
+          messageSizeCopied = true
+        }
+        return
+      }
+
+      // noinspection JSUnusedLocalSymbols
+      let fbeStructSize // eslint-disable-line
+      let fbeStructType
+
+      // Read the message parameters
+      if (this._final) {
+        fbeStructSize = Receiver.readUInt32(messageBuffer, messageOffset)
+        fbeStructType = Receiver.readUInt32(messageBuffer, messageOffset + 4)
+      } else {
+        let fbeStructOffset = Receiver.readUInt32(messageBuffer, messageOffset + 4)
+        // noinspection JSUnusedLocalSymbols
+        fbeStructSize = Receiver.readUInt32(messageBuffer, messageOffset + fbeStructOffset) // eslint-disable-line
+        fbeStructType = Receiver.readUInt32(messageBuffer, messageOffset + fbeStructOffset + 4)
+      }
+
+      // Handle the message
+      this.onReceive(fbeStructType, messageBuffer, messageOffset, messageSize)
+
+      // Reset the storage buffer
+      this._receiveBuffer.reset()
+
+      // Refresh the storage buffer
+      offset0 = this._receiveBuffer.offset
+      offset1 = this._receiveBuffer.size
+      size1 = this._receiveBuffer.size
+    }
+  }
+
+  /**
+   * Receive message handler
+   * @this {!Receiver}
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   * @returns {!boolean} Success flag
+   */
+  onReceive (type, buffer, offset, size) {
+    console.assert(true, 'Abstract method call!')
+    debugger // eslint-disable-line
+    return false
+  }
+
+  /**
+   * Receive log message handler
+   * @this {!Receiver}
+   * @param {!string} message Log message
+   */
+  onReceiveLog (message) {}
+
+  /**
+   * Setup receive log message handler
+   * @this {!Receiver}
+   * @param {!function} handler Receive log message handler
+   */
+  set onReceiveLogHandler (handler) { // eslint-disable-line
+    this.onReceiveLog = handler
+  }
+
+  // Buffer I/O methods
+
+  /**
+   * Check the buffer offset bounds
+   * @param {!Uint8Array} buffer Buffer
+   * @param {!number} offset Offset
+   * @param {!number} size Size
+   */
+  static checkOffset (buffer, offset, size) {
+    if (((offset % 1) !== 0) || (offset < 0)) {
+      throw new RangeError('Invalid offset!')
+    }
+    if ((offset + size) > buffer.length) {
+      throw new RangeError('Out of bounds!')
+    }
+  }
+
+  /**
+   * Check the value range and its buffer offset bounds
+   * @param {!Uint8Array} buffer Buffer
+   * @param {!number} offset Offset
+   * @param {!number} size Size
+   * @param {!number} value Value
+   * @param {!number} min Min value
+   * @param {!number} max Max value
+   */
+  static checkValue (buffer, offset, size, value, min, max) {
+    this.checkOffset(buffer, offset, size)
+    if ((value < min) || (value > max)) {
+      throw new RangeError('Value is out of bounds!')
+    }
+  }
+
+  /**
+   * Read UInt32 value from the model buffer
+   * @this {!Model}
+   * @param {!Uint8Array} buffer Buffer
+   * @param {!number} offset Offset
+   * @returns {!number} UInt32 value
+   */
+  static readUInt32 (buffer, offset) {
+    offset = offset >>> 0
+    Receiver.checkOffset(buffer, offset, 4)
+    return (
+      (buffer[offset + 0] << 0) |
+      (buffer[offset + 1] << 8) |
+      (buffer[offset + 2] << 16)) +
+      (buffer[offset + 3] * 0x1000000)
+  }
+
+  /**
+   * Write UInt32 value into the model buffer
+   * @this {!Model}
+   * @param {!Uint8Array} buffer Buffer
+   * @param {!number} offset Offset
+   * @param {!number} value Value
+   */
+  static writeUInt32 (buffer, offset, value) {
+    value = +value
+    Receiver.checkValue(buffer, offset, 4, value, 0, 0xFFFFFFFF)
+    buffer[offset + 3] = (value >>> 24)
+    buffer[offset + 2] = (value >>> 16)
+    buffer[offset + 1] = (value >>> 8)
+    buffer[offset + 0] = (value & 0xFF)
+  }
+}
+
+exports.Client = Client
 
 /**
  * Converts Map instance to object datatype

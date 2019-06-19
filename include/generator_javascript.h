@@ -45,6 +45,7 @@ private:
     void GenerateIEEE754(const CppCommon::Path& path);
     void GenerateUTF8(const CppCommon::Path& path);
     void GenerateFBE(const CppCommon::Path& path);
+    void GenerateFBEDeferredPromise();
     void GenerateFBEBaseBuffer();
     void GenerateFBEWriteBuffer();
     void GenerateFBEReadBuffer();
@@ -76,6 +77,7 @@ private:
     void GenerateFBEFinalModelMap();
     void GenerateFBESender();
     void GenerateFBEReceiver();
+    void GenerateFBEClient();
     void GenerateFBEJson();
     void GenerateImports(const std::shared_ptr<Package>& p);
 
@@ -94,6 +96,7 @@ private:
     void GenerateSender(const std::shared_ptr<Package>& p, bool final);
     void GenerateReceiver(const std::shared_ptr<Package>& p, bool final);
     void GenerateProxy(const std::shared_ptr<Package>& p, bool final);
+    void GenerateClient(const std::shared_ptr<Package>& p, bool final);
 
     bool IsPrimitiveType(const std::string& type);
     bool IsJavaScriptType(const std::string& type);
