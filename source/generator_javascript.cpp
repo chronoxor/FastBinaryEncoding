@@ -7639,6 +7639,24 @@ class Sender {
    * @param {!string} message Log message
    */
   onSendLog (message) {}
+
+  /**
+   * Setup send message handler
+   * @this {!Sender}
+   * @param {!function} handler Send message handler
+   */
+  set onSendHandler (handler) { // eslint-disable-line
+    this.onSend = handler
+  }
+
+  /**
+   * Setup send log message handler
+   * @this {!Sender}
+   * @param {!function} handler Send log message handler
+   */
+  set onSendLogHandler (handler) { // eslint-disable-line
+    this.onSendLog = handler
+  }
 }
 
 exports.Sender = Sender
@@ -10616,6 +10634,8 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
         for (const auto& s : p->body->structs)
             WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model = new " + *s->name + "" + model + "(this.buffer)");
     }
+    WriteLineIndent("this.onSendHandler = this.onSend");
+    WriteLineIndent("this.onSendLogHandler = this.onSendLog");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -10746,6 +10766,42 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
     WriteLineIndent("console.assert(true, '" + *p->name + ".Sender.onSend() not implemented!')");
     WriteLineIndent("debugger // eslint-disable-line");
     WriteLineIndent("return 0");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate setup send message handler
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Setup send message handler");
+    WriteLineIndent(" * @this {!" + sender + "}");
+    WriteLineIndent(" * @param {!function} handler Send message handler");
+    WriteLineIndent(" */");
+    WriteLineIndent("set onSendHandler (handler) { // eslint-disable-line");
+    Indent(1);
+    WriteLineIndent("this.onSend = handler");
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Sender.onSend = handler");
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate setup send log message handler
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Setup send log message handler");
+    WriteLineIndent(" * @this {!" + sender + "}");
+    WriteLineIndent(" * @param {!function} handler Send log message handler");
+    WriteLineIndent(" */");
+    WriteLineIndent("set onSendLogHandler (handler) { // eslint-disable-line");
+    Indent(1);
+    WriteLineIndent("this.onSendLog = handler");
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Sender.onSendLog = handler");
+    }
     Indent(-1);
     WriteLineIndent("}");
 

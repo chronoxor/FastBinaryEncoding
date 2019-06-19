@@ -5141,6 +5141,24 @@ class Sender {
    * @param {!string} message Log message
    */
   onSendLog (message) {}
+
+  /**
+   * Setup send message handler
+   * @this {!Sender}
+   * @param {!function} handler Send message handler
+   */
+  set onSendHandler (handler) { // eslint-disable-line
+    this.onSend = handler
+  }
+
+  /**
+   * Setup send log message handler
+   * @this {!Sender}
+   * @param {!function} handler Send log message handler
+   */
+  set onSendLogHandler (handler) { // eslint-disable-line
+    this.onSendLog = handler
+  }
 }
 
 exports.Sender = Sender

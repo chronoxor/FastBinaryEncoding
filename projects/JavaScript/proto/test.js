@@ -24390,6 +24390,8 @@ class Sender extends fbe.Sender {
     this._structhashModel = new StructHashModel(this.buffer)
     this._structhashexModel = new StructHashExModel(this.buffer)
     this._structemptyModel = new StructEmptyModel(this.buffer)
+    this.onSendHandler = this.onSend
+    this.onSendLogHandler = this.onSendLog
   }
 
   // Imported senders
@@ -24829,6 +24831,26 @@ class Sender extends fbe.Sender {
     console.assert(true, 'test.Sender.onSend() not implemented!')
     debugger // eslint-disable-line
     return 0
+  }
+
+  /**
+   * Setup send message handler
+   * @this {!Sender}
+   * @param {!function} handler Send message handler
+   */
+  set onSendHandler (handler) { // eslint-disable-line
+    this.onSend = handler
+    this._protoSender.onSend = handler
+  }
+
+  /**
+   * Setup send log message handler
+   * @this {!Sender}
+   * @param {!function} handler Send log message handler
+   */
+  set onSendLogHandler (handler) { // eslint-disable-line
+    this.onSendLog = handler
+    this._protoSender.onSendLog = handler
   }
 }
 
@@ -25588,6 +25610,8 @@ class FinalSender extends fbe.Sender {
     this._structhashModel = new StructHashFinalModel(this.buffer)
     this._structhashexModel = new StructHashExFinalModel(this.buffer)
     this._structemptyModel = new StructEmptyFinalModel(this.buffer)
+    this.onSendHandler = this.onSend
+    this.onSendLogHandler = this.onSendLog
   }
 
   // Imported senders
@@ -26027,6 +26051,26 @@ class FinalSender extends fbe.Sender {
     console.assert(true, 'test.Sender.onSend() not implemented!')
     debugger // eslint-disable-line
     return 0
+  }
+
+  /**
+   * Setup send message handler
+   * @this {!FinalSender}
+   * @param {!function} handler Send message handler
+   */
+  set onSendHandler (handler) { // eslint-disable-line
+    this.onSend = handler
+    this._protoSender.onSend = handler
+  }
+
+  /**
+   * Setup send log message handler
+   * @this {!FinalSender}
+   * @param {!function} handler Send log message handler
+   */
+  set onSendLogHandler (handler) { // eslint-disable-line
+    this.onSendLog = handler
+    this._protoSender.onSendLog = handler
   }
 }
 

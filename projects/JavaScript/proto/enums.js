@@ -7660,6 +7660,8 @@ class Sender extends fbe.Sender {
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, false)
     this._enumsModel = new EnumsModel(this.buffer)
+    this.onSendHandler = this.onSend
+    this.onSendLogHandler = this.onSendLog
   }
 
   // Sender models accessors
@@ -7720,6 +7722,24 @@ class Sender extends fbe.Sender {
     console.assert(true, 'enums.Sender.onSend() not implemented!')
     debugger // eslint-disable-line
     return 0
+  }
+
+  /**
+   * Setup send message handler
+   * @this {!Sender}
+   * @param {!function} handler Send message handler
+   */
+  set onSendHandler (handler) { // eslint-disable-line
+    this.onSend = handler
+  }
+
+  /**
+   * Setup send log message handler
+   * @this {!Sender}
+   * @param {!function} handler Send log message handler
+   */
+  set onSendLogHandler (handler) { // eslint-disable-line
+    this.onSendLog = handler
   }
 }
 
@@ -7854,6 +7874,8 @@ class FinalSender extends fbe.Sender {
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, true)
     this._enumsModel = new EnumsFinalModel(this.buffer)
+    this.onSendHandler = this.onSend
+    this.onSendLogHandler = this.onSendLog
   }
 
   // Sender models accessors
@@ -7914,6 +7936,24 @@ class FinalSender extends fbe.Sender {
     console.assert(true, 'enums.Sender.onSend() not implemented!')
     debugger // eslint-disable-line
     return 0
+  }
+
+  /**
+   * Setup send message handler
+   * @this {!FinalSender}
+   * @param {!function} handler Send message handler
+   */
+  set onSendHandler (handler) { // eslint-disable-line
+    this.onSend = handler
+  }
+
+  /**
+   * Setup send log message handler
+   * @this {!FinalSender}
+   * @param {!function} handler Send log message handler
+   */
+  set onSendLogHandler (handler) { // eslint-disable-line
+    this.onSendLog = handler
   }
 }
 

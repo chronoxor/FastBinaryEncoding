@@ -3865,6 +3865,8 @@ class Sender extends fbe.Sender {
     this._orderModel = new OrderModel(this.buffer)
     this._balanceModel = new BalanceModel(this.buffer)
     this._accountModel = new AccountModel(this.buffer)
+    this.onSendHandler = this.onSend
+    this.onSendLogHandler = this.onSendLog
   }
 
   // Sender models accessors
@@ -3991,6 +3993,24 @@ class Sender extends fbe.Sender {
     console.assert(true, 'proto.Sender.onSend() not implemented!')
     debugger // eslint-disable-line
     return 0
+  }
+
+  /**
+   * Setup send message handler
+   * @this {!Sender}
+   * @param {!function} handler Send message handler
+   */
+  set onSendHandler (handler) { // eslint-disable-line
+    this.onSend = handler
+  }
+
+  /**
+   * Setup send log message handler
+   * @this {!Sender}
+   * @param {!function} handler Send log message handler
+   */
+  set onSendLogHandler (handler) { // eslint-disable-line
+    this.onSendLog = handler
   }
 }
 
@@ -4229,6 +4249,8 @@ class FinalSender extends fbe.Sender {
     this._orderModel = new OrderFinalModel(this.buffer)
     this._balanceModel = new BalanceFinalModel(this.buffer)
     this._accountModel = new AccountFinalModel(this.buffer)
+    this.onSendHandler = this.onSend
+    this.onSendLogHandler = this.onSendLog
   }
 
   // Sender models accessors
@@ -4355,6 +4377,24 @@ class FinalSender extends fbe.Sender {
     console.assert(true, 'proto.Sender.onSend() not implemented!')
     debugger // eslint-disable-line
     return 0
+  }
+
+  /**
+   * Setup send message handler
+   * @this {!FinalSender}
+   * @param {!function} handler Send message handler
+   */
+  set onSendHandler (handler) { // eslint-disable-line
+    this.onSend = handler
+  }
+
+  /**
+   * Setup send log message handler
+   * @this {!FinalSender}
+   * @param {!function} handler Send log message handler
+   */
+  set onSendLogHandler (handler) { // eslint-disable-line
+    this.onSendLog = handler
   }
 }
 
