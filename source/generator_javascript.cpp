@@ -7993,6 +7993,15 @@ class Receiver {
    */
   onReceiveLog (message) {}
 
+  /**
+   * Setup receive log message handler
+   * @this {!Receiver}
+   * @param {!function} handler Receive log message handler
+   */
+  set onReceiveLogHandler (handler) { // eslint-disable-line
+    this.onReceiveLog = handler
+  }
+
   // Buffer I/O methods
 
   /**
@@ -10800,7 +10809,7 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Sender.onSendLog = handler");
+            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Sender.onSendLogHandler = handler");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -10852,6 +10861,7 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
             WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model = new " + *s->name + model + "()");
         }
     }
+    WriteLineIndent("this.onReceiveLogHandler = this.onReceiveLog");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -10949,6 +10959,7 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
     }
     if (p->import)
     {
+        WriteLine();
         for (const auto& import : p->import->imports)
         {
             WriteLineIndent("// noinspection RedundantIfStatementJS");
@@ -10961,6 +10972,24 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
         WriteLine();
     }
     WriteLineIndent("return false");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate setup receive log message handler
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Setup receive log message handler");
+    WriteLineIndent(" * @this {!" + receiver + "}");
+    WriteLineIndent(" * @param {!function} handler Receive log message handler");
+    WriteLineIndent(" */");
+    WriteLineIndent("set onReceiveLogHandler (handler) { // eslint-disable-line");
+    Indent(1);
+    WriteLineIndent("this.onReceiveLog = handler");
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Receiver.onReceiveLogHandler = handler");
+    }
     Indent(-1);
     WriteLineIndent("}");
 
@@ -11107,6 +11136,7 @@ void GeneratorJavaScript::GenerateProxy(const std::shared_ptr<Package>& p, bool 
     }
     if (p->import)
     {
+        WriteLine();
         for (const auto& import : p->import->imports)
         {
             WriteLineIndent("// noinspection RedundantIfStatementJS");

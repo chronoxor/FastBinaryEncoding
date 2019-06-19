@@ -4033,6 +4033,7 @@ class Receiver extends fbe.Receiver {
     this._balanceModel = new BalanceModel()
     this._accountValue = new Account()
     this._accountModel = new AccountModel()
+    this.onReceiveLogHandler = this.onReceiveLog
   }
 
   // Receive handlers
@@ -4119,6 +4120,15 @@ class Receiver extends fbe.Receiver {
       }
     }
     return false
+  }
+
+  /**
+   * Setup receive log message handler
+   * @this {!Receiver}
+   * @param {!function} handler Receive log message handler
+   */
+  set onReceiveLogHandler (handler) { // eslint-disable-line
+    this.onReceiveLog = handler
   }
 }
 
@@ -4417,6 +4427,7 @@ class FinalReceiver extends fbe.Receiver {
     this._balanceModel = new BalanceFinalModel()
     this._accountValue = new Account()
     this._accountModel = new AccountFinalModel()
+    this.onReceiveLogHandler = this.onReceiveLog
   }
 
   // Receive handlers
@@ -4503,6 +4514,15 @@ class FinalReceiver extends fbe.Receiver {
       }
     }
     return false
+  }
+
+  /**
+   * Setup receive log message handler
+   * @this {!FinalReceiver}
+   * @param {!function} handler Receive log message handler
+   */
+  set onReceiveLogHandler (handler) { // eslint-disable-line
+    this.onReceiveLog = handler
   }
 }
 

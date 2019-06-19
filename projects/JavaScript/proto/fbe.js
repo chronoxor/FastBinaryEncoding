@@ -5485,6 +5485,15 @@ class Receiver {
    */
   onReceiveLog (message) {}
 
+  /**
+   * Setup receive log message handler
+   * @this {!Receiver}
+   * @param {!function} handler Receive log message handler
+   */
+  set onReceiveLogHandler (handler) { // eslint-disable-line
+    this.onReceiveLog = handler
+  }
+
   // Buffer I/O methods
 
   /**

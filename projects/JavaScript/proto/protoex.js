@@ -4180,7 +4180,7 @@ class Sender extends fbe.Sender {
    */
   set onSendLogHandler (handler) { // eslint-disable-line
     this.onSendLog = handler
-    this._protoSender.onSendLog = handler
+    this._protoSender.onSendLogHandler = handler
   }
 }
 
@@ -4204,6 +4204,7 @@ class Receiver extends fbe.Receiver {
     this._balanceModel = new BalanceModel()
     this._accountValue = new Account()
     this._accountModel = new AccountModel()
+    this.onReceiveLogHandler = this.onReceiveLog
   }
 
   // Imported receivers
@@ -4309,12 +4310,23 @@ class Receiver extends fbe.Receiver {
         return true
       }
     }
+
     // noinspection RedundantIfStatementJS
     if ((this.protoReceiver != null) && this.protoReceiver.onReceive(type, buffer, offset, size)) {
       return true
     }
 
     return false
+  }
+
+  /**
+   * Setup receive log message handler
+   * @this {!Receiver}
+   * @param {!function} handler Receive log message handler
+   */
+  set onReceiveLogHandler (handler) { // eslint-disable-line
+    this.onReceiveLog = handler
+    this._protoReceiver.onReceiveLogHandler = handler
   }
 }
 
@@ -4446,6 +4458,7 @@ class Proxy extends fbe.Receiver {
         return true
       }
     }
+
     // noinspection RedundantIfStatementJS
     if ((this.protoProxy != null) && this.protoProxy.onReceive(type, buffer, offset, size)) {
       return true
@@ -4635,7 +4648,7 @@ class FinalSender extends fbe.Sender {
    */
   set onSendLogHandler (handler) { // eslint-disable-line
     this.onSendLog = handler
-    this._protoSender.onSendLog = handler
+    this._protoSender.onSendLogHandler = handler
   }
 }
 
@@ -4659,6 +4672,7 @@ class FinalReceiver extends fbe.Receiver {
     this._balanceModel = new BalanceFinalModel()
     this._accountValue = new Account()
     this._accountModel = new AccountFinalModel()
+    this.onReceiveLogHandler = this.onReceiveLog
   }
 
   // Imported receivers
@@ -4764,12 +4778,23 @@ class FinalReceiver extends fbe.Receiver {
         return true
       }
     }
+
     // noinspection RedundantIfStatementJS
     if ((this.protoReceiver != null) && this.protoReceiver.onReceive(type, buffer, offset, size)) {
       return true
     }
 
     return false
+  }
+
+  /**
+   * Setup receive log message handler
+   * @this {!FinalReceiver}
+   * @param {!function} handler Receive log message handler
+   */
+  set onReceiveLogHandler (handler) { // eslint-disable-line
+    this.onReceiveLog = handler
+    this._protoReceiver.onReceiveLogHandler = handler
   }
 }
 

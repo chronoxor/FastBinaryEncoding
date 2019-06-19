@@ -7758,6 +7758,7 @@ class Receiver extends fbe.Receiver {
     super(buffer, false)
     this._enumsValue = new Enums()
     this._enumsModel = new EnumsModel()
+    this.onReceiveLogHandler = this.onReceiveLog
   }
 
   // Receive handlers
@@ -7798,6 +7799,15 @@ class Receiver extends fbe.Receiver {
       }
     }
     return false
+  }
+
+  /**
+   * Setup receive log message handler
+   * @this {!Receiver}
+   * @param {!function} handler Receive log message handler
+   */
+  set onReceiveLogHandler (handler) { // eslint-disable-line
+    this.onReceiveLog = handler
   }
 }
 
@@ -7972,6 +7982,7 @@ class FinalReceiver extends fbe.Receiver {
     super(buffer, true)
     this._enumsValue = new Enums()
     this._enumsModel = new EnumsFinalModel()
+    this.onReceiveLogHandler = this.onReceiveLog
   }
 
   // Receive handlers
@@ -8012,6 +8023,15 @@ class FinalReceiver extends fbe.Receiver {
       }
     }
     return false
+  }
+
+  /**
+   * Setup receive log message handler
+   * @this {!FinalReceiver}
+   * @param {!function} handler Receive log message handler
+   */
+  set onReceiveLogHandler (handler) { // eslint-disable-line
+    this.onReceiveLog = handler
   }
 }
 
