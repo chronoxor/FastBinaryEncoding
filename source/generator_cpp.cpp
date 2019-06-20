@@ -8379,7 +8379,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
 
     // Collect responses & rejects collections
     std::set<std::string> responses;
-    std::map<std::string, bool> rejects;
+    std::set<std::string> rejects;
     if (p->body)
     {
         for (const auto& s : p->body->structs)
@@ -8394,7 +8394,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     responses.insert(*s->response->response);
                     if (s->rejects)
                         for (const auto& reject : s->rejects->rejects)
-                            rejects[*reject.reject] = reject.global;
+                            rejects.insert(*reject.reject);
                 }
             }
         }
@@ -8561,47 +8561,13 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     // Generate reject handlers
     for (const auto& reject : rejects)
     {
-        std::string reject_name = ConvertTypeName(*p->name, reject.first, false);
-        std::string reject_field = reject.first;
-        bool global = reject.second;
+        std::string reject_name = ConvertTypeName(*p->name, reject, false);
+        std::string reject_field = reject;
         bool imported = CppCommon::StringUtils::ReplaceAll(reject_field, ".", "");
 
         WriteLineIndent("virtual bool onReceiveReject(const " + reject_name + "& reject)");
         WriteLineIndent("{");
         Indent(1);
-        if (global)
-        {
-            if (p->import)
-            {
-                for (const auto& import : p->import->imports)
-                {
-                    WriteLineIndent("if (" + *import + client + "::onReceiveReject(reject))");
-                    Indent(1);
-                    WriteLineIndent("return true;");
-                    Indent(-1);
-                }
-                WriteLine();
-            }
-        }
-        else if (imported)
-        {
-            std::string ns = "";
-            std::string t = reject.first;
-            std::string type = reject.first;
-
-            size_t pos = type.find_last_of('.');
-            if (pos != std::string::npos)
-            {
-                ns.assign(type, 0, pos);
-                t.assign(type, pos + 1, type.size() - pos);
-            }
-
-            WriteLineIndent("if (" + ns + client + "::onReceiveReject(reject))");
-            Indent(1);
-            WriteLineIndent("return true;");
-            Indent(-1);
-            WriteLine();
-        }
         if (p->body)
         {
             std::set<std::string> cache;
@@ -8641,6 +8607,21 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                         }
                     }
                 }
+            }
+        }
+        if (imported)
+        {
+            if (p->import)
+            {
+                WriteLine();
+                for (const auto& import : p->import->imports)
+                {
+                    WriteLineIndent("if (" + *import + client + "::onReceiveReject(reject))");
+                    Indent(1);
+                    WriteLineIndent("return true;");
+                    Indent(-1);
+                }
+                WriteLine();
             }
         }
         WriteLineIndent("return false;");

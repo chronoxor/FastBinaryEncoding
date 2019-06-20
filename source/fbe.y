@@ -200,9 +200,8 @@ struct_rejects
     ;
 
 struct_reject
-    : type_name                                                                 { $$ = new FBE::StructRejects(); $$->AddReject($1, false); }
-    | '*' type_name                                                             { $$ = new FBE::StructRejects(); $$->AddReject($2, true); }
-    | struct_reject ',' type_name                                               { $$ = $1; $$->AddReject($3, false); }
+    : type_name                                                                 { $$ = new FBE::StructRejects(); $$->AddReject($1); }
+    | struct_reject ',' type_name                                               { $$ = $1; $$->AddReject($3); }
     ;
 
 struct

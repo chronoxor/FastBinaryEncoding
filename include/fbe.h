@@ -122,14 +122,13 @@ struct StructResponse
 struct StructReject
 {
     std::shared_ptr<std::string> reject;
-    bool global;
 };
 
 struct StructRejects
 {
     std::vector<StructReject> rejects;
 
-    void AddReject(std::string* r, bool g);
+    void AddReject(std::string* r);
 };
 
 struct StructType
