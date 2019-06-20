@@ -8415,7 +8415,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 WriteLine();
                 if (response_name.empty())
                 {
-                    WriteLineIndent("std::future<void> request(const " + request_name + "& value)");
+                    WriteLineIndent("std::future<void> request(const " + request_name + "& value, size_t timeout = 0)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("std::promise<void> promise;");
