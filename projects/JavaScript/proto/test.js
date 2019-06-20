@@ -1535,7 +1535,7 @@ class StructSimple {
    * @param {!proto.Account=} f44
    * @constructor
    */
-  constructor (id = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = '\0', f6 = '!', f7 = '\0', f8 = String.fromCharCode(0x0444), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 4294967295, f21 = new Int64(0, 0), f22 = new Int64(4294967295, 2147483647), f23 = 0, f24 = new UInt64(4294967295, 4294967295), f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = new Big(0), f30 = new Big('123456.123456'), f31 = '', f32 = 'Initial string!', f33 = new Date(0), f34 = new Date(0), f35 = new Date(Date.now()), f36 = new UUID(), f37 = UUID.sequential(), f38 = new UUID('123e4567-e89b-12d3-a456-426655440000'), f39 = new proto.OrderSide(), f40 = new proto.OrderType(), f41 = new proto.Order(), f42 = new proto.Balance(), f43 = new proto.State(), f44 = new proto.Account()) {
+  constructor (id = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = '\0', f6 = '!', f7 = '\0', f8 = String.fromCharCode(0x0444), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 4294967295, f21 = new Int64(0, 0), f22 = new Int64(4294967295, 2147483647), f23 = new UInt64(0, 0), f24 = new UInt64(4294967295, 4294967295), f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = new Big(0), f30 = new Big('123456.123456'), f31 = '', f32 = 'Initial string!', f33 = new Date(0), f34 = new Date(0), f35 = new Date(Date.now()), f36 = new UUID(), f37 = UUID.sequential(), f38 = new UUID('123e4567-e89b-12d3-a456-426655440000'), f39 = new proto.OrderSide(), f40 = new proto.OrderType(), f41 = new proto.Order(), f42 = new proto.Balance(), f43 = new proto.State(), f44 = new proto.Account()) {
     this.id = id
     this.f1 = f1
     this.f2 = f2
@@ -3326,9 +3326,9 @@ class FieldModelStructSimple extends fbe.FieldModel {
     fbeCurrentSize += this.f22.fbeSize
 
     if ((fbeCurrentSize + this.f23.fbeSize) <= fbeStructSize) {
-      fbeValue.f23 = this.f23.get(0)
+      fbeValue.f23 = this.f23.get(new UInt64(0, 0))
     } else {
-      fbeValue.f23 = 0
+      fbeValue.f23 = new UInt64(0, 0)
     }
     // noinspection JSUnusedAssignment
     fbeCurrentSize += this.f23.fbeSize
@@ -24378,18 +24378,18 @@ class Sender extends fbe.Sender {
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, false)
     this._protoSender = new proto.Sender(this.buffer)
-    this._structsimpleModel = new StructSimpleModel(this.buffer)
-    this._structoptionalModel = new StructOptionalModel(this.buffer)
-    this._structnestedModel = new StructNestedModel(this.buffer)
-    this._structbytesModel = new StructBytesModel(this.buffer)
-    this._structarrayModel = new StructArrayModel(this.buffer)
-    this._structvectorModel = new StructVectorModel(this.buffer)
-    this._structlistModel = new StructListModel(this.buffer)
-    this._structsetModel = new StructSetModel(this.buffer)
-    this._structmapModel = new StructMapModel(this.buffer)
-    this._structhashModel = new StructHashModel(this.buffer)
-    this._structhashexModel = new StructHashExModel(this.buffer)
-    this._structemptyModel = new StructEmptyModel(this.buffer)
+    this._StructSimpleModel = new StructSimpleModel(this.buffer)
+    this._StructOptionalModel = new StructOptionalModel(this.buffer)
+    this._StructNestedModel = new StructNestedModel(this.buffer)
+    this._StructBytesModel = new StructBytesModel(this.buffer)
+    this._StructArrayModel = new StructArrayModel(this.buffer)
+    this._StructVectorModel = new StructVectorModel(this.buffer)
+    this._StructListModel = new StructListModel(this.buffer)
+    this._StructSetModel = new StructSetModel(this.buffer)
+    this._StructMapModel = new StructMapModel(this.buffer)
+    this._StructHashModel = new StructHashModel(this.buffer)
+    this._StructHashExModel = new StructHashExModel(this.buffer)
+    this._StructEmptyModel = new StructEmptyModel(this.buffer)
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
   }
@@ -24412,8 +24412,8 @@ class Sender extends fbe.Sender {
    * @this {!Sender}
    * @returns {!StructSimpleModel} StructSimple model
    */
-  get structsimpleModel () {
-    return this._structsimpleModel
+  get StructSimpleModel () {
+    return this._StructSimpleModel
   }
 
   /**
@@ -24421,8 +24421,8 @@ class Sender extends fbe.Sender {
    * @this {!Sender}
    * @returns {!StructOptionalModel} StructOptional model
    */
-  get structoptionalModel () {
-    return this._structoptionalModel
+  get StructOptionalModel () {
+    return this._StructOptionalModel
   }
 
   /**
@@ -24430,8 +24430,8 @@ class Sender extends fbe.Sender {
    * @this {!Sender}
    * @returns {!StructNestedModel} StructNested model
    */
-  get structnestedModel () {
-    return this._structnestedModel
+  get StructNestedModel () {
+    return this._StructNestedModel
   }
 
   /**
@@ -24439,8 +24439,8 @@ class Sender extends fbe.Sender {
    * @this {!Sender}
    * @returns {!StructBytesModel} StructBytes model
    */
-  get structbytesModel () {
-    return this._structbytesModel
+  get StructBytesModel () {
+    return this._StructBytesModel
   }
 
   /**
@@ -24448,8 +24448,8 @@ class Sender extends fbe.Sender {
    * @this {!Sender}
    * @returns {!StructArrayModel} StructArray model
    */
-  get structarrayModel () {
-    return this._structarrayModel
+  get StructArrayModel () {
+    return this._StructArrayModel
   }
 
   /**
@@ -24457,8 +24457,8 @@ class Sender extends fbe.Sender {
    * @this {!Sender}
    * @returns {!StructVectorModel} StructVector model
    */
-  get structvectorModel () {
-    return this._structvectorModel
+  get StructVectorModel () {
+    return this._StructVectorModel
   }
 
   /**
@@ -24466,8 +24466,8 @@ class Sender extends fbe.Sender {
    * @this {!Sender}
    * @returns {!StructListModel} StructList model
    */
-  get structlistModel () {
-    return this._structlistModel
+  get StructListModel () {
+    return this._StructListModel
   }
 
   /**
@@ -24475,8 +24475,8 @@ class Sender extends fbe.Sender {
    * @this {!Sender}
    * @returns {!StructSetModel} StructSet model
    */
-  get structsetModel () {
-    return this._structsetModel
+  get StructSetModel () {
+    return this._StructSetModel
   }
 
   /**
@@ -24484,8 +24484,8 @@ class Sender extends fbe.Sender {
    * @this {!Sender}
    * @returns {!StructMapModel} StructMap model
    */
-  get structmapModel () {
-    return this._structmapModel
+  get StructMapModel () {
+    return this._StructMapModel
   }
 
   /**
@@ -24493,8 +24493,8 @@ class Sender extends fbe.Sender {
    * @this {!Sender}
    * @returns {!StructHashModel} StructHash model
    */
-  get structhashModel () {
-    return this._structhashModel
+  get StructHashModel () {
+    return this._StructHashModel
   }
 
   /**
@@ -24502,8 +24502,8 @@ class Sender extends fbe.Sender {
    * @this {!Sender}
    * @returns {!StructHashExModel} StructHashEx model
    */
-  get structhashexModel () {
-    return this._structhashexModel
+  get StructHashExModel () {
+    return this._StructHashExModel
   }
 
   /**
@@ -24511,8 +24511,8 @@ class Sender extends fbe.Sender {
    * @this {!Sender}
    * @returns {!StructEmptyModel} StructEmpty model
    */
-  get structemptyModel () {
-    return this._structemptyModel
+  get StructEmptyModel () {
+    return this._StructEmptyModel
   }
 
   // Send methods
@@ -24525,40 +24525,40 @@ class Sender extends fbe.Sender {
    */
   send (value) {
     if (value instanceof StructSimple) {
-      return this.send_structsimple(value)
+      return this.send_StructSimple(value)
     }
     if (value instanceof StructOptional) {
-      return this.send_structoptional(value)
+      return this.send_StructOptional(value)
     }
     if (value instanceof StructNested) {
-      return this.send_structnested(value)
+      return this.send_StructNested(value)
     }
     if (value instanceof StructBytes) {
-      return this.send_structbytes(value)
+      return this.send_StructBytes(value)
     }
     if (value instanceof StructArray) {
-      return this.send_structarray(value)
+      return this.send_StructArray(value)
     }
     if (value instanceof StructVector) {
-      return this.send_structvector(value)
+      return this.send_StructVector(value)
     }
     if (value instanceof StructList) {
-      return this.send_structlist(value)
+      return this.send_StructList(value)
     }
     if (value instanceof StructSet) {
-      return this.send_structset(value)
+      return this.send_StructSet(value)
     }
     if (value instanceof StructMap) {
-      return this.send_structmap(value)
+      return this.send_StructMap(value)
     }
     if (value instanceof StructHash) {
-      return this.send_structhash(value)
+      return this.send_StructHash(value)
     }
     if (value instanceof StructHashEx) {
-      return this.send_structhashex(value)
+      return this.send_StructHashEx(value)
     }
     if (value instanceof StructEmpty) {
-      return this.send_structempty(value)
+      return this.send_StructEmpty(value)
     }
     let result = 0
     result = this._protoSender.send(value)
@@ -24574,11 +24574,11 @@ class Sender extends fbe.Sender {
    * @param {!StructSimple} value StructSimple value to send
    * @returns {!number} Sent bytes
    */
-  send_structsimple (value) { // eslint-disable-line
+  send_StructSimple (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structsimpleModel.serialize(value)
+    let serialized = this.StructSimpleModel.serialize(value)
     console.assert((serialized > 0), 'test.StructSimple serialization failed!')
-    console.assert(this.structsimpleModel.verify(), 'test.StructSimple validation failed!')
+    console.assert(this.StructSimpleModel.verify(), 'test.StructSimple validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -24595,11 +24595,11 @@ class Sender extends fbe.Sender {
    * @param {!StructOptional} value StructOptional value to send
    * @returns {!number} Sent bytes
    */
-  send_structoptional (value) { // eslint-disable-line
+  send_StructOptional (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structoptionalModel.serialize(value)
+    let serialized = this.StructOptionalModel.serialize(value)
     console.assert((serialized > 0), 'test.StructOptional serialization failed!')
-    console.assert(this.structoptionalModel.verify(), 'test.StructOptional validation failed!')
+    console.assert(this.StructOptionalModel.verify(), 'test.StructOptional validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -24616,11 +24616,11 @@ class Sender extends fbe.Sender {
    * @param {!StructNested} value StructNested value to send
    * @returns {!number} Sent bytes
    */
-  send_structnested (value) { // eslint-disable-line
+  send_StructNested (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structnestedModel.serialize(value)
+    let serialized = this.StructNestedModel.serialize(value)
     console.assert((serialized > 0), 'test.StructNested serialization failed!')
-    console.assert(this.structnestedModel.verify(), 'test.StructNested validation failed!')
+    console.assert(this.StructNestedModel.verify(), 'test.StructNested validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -24637,11 +24637,11 @@ class Sender extends fbe.Sender {
    * @param {!StructBytes} value StructBytes value to send
    * @returns {!number} Sent bytes
    */
-  send_structbytes (value) { // eslint-disable-line
+  send_StructBytes (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structbytesModel.serialize(value)
+    let serialized = this.StructBytesModel.serialize(value)
     console.assert((serialized > 0), 'test.StructBytes serialization failed!')
-    console.assert(this.structbytesModel.verify(), 'test.StructBytes validation failed!')
+    console.assert(this.StructBytesModel.verify(), 'test.StructBytes validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -24658,11 +24658,11 @@ class Sender extends fbe.Sender {
    * @param {!StructArray} value StructArray value to send
    * @returns {!number} Sent bytes
    */
-  send_structarray (value) { // eslint-disable-line
+  send_StructArray (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structarrayModel.serialize(value)
+    let serialized = this.StructArrayModel.serialize(value)
     console.assert((serialized > 0), 'test.StructArray serialization failed!')
-    console.assert(this.structarrayModel.verify(), 'test.StructArray validation failed!')
+    console.assert(this.StructArrayModel.verify(), 'test.StructArray validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -24679,11 +24679,11 @@ class Sender extends fbe.Sender {
    * @param {!StructVector} value StructVector value to send
    * @returns {!number} Sent bytes
    */
-  send_structvector (value) { // eslint-disable-line
+  send_StructVector (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structvectorModel.serialize(value)
+    let serialized = this.StructVectorModel.serialize(value)
     console.assert((serialized > 0), 'test.StructVector serialization failed!')
-    console.assert(this.structvectorModel.verify(), 'test.StructVector validation failed!')
+    console.assert(this.StructVectorModel.verify(), 'test.StructVector validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -24700,11 +24700,11 @@ class Sender extends fbe.Sender {
    * @param {!StructList} value StructList value to send
    * @returns {!number} Sent bytes
    */
-  send_structlist (value) { // eslint-disable-line
+  send_StructList (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structlistModel.serialize(value)
+    let serialized = this.StructListModel.serialize(value)
     console.assert((serialized > 0), 'test.StructList serialization failed!')
-    console.assert(this.structlistModel.verify(), 'test.StructList validation failed!')
+    console.assert(this.StructListModel.verify(), 'test.StructList validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -24721,11 +24721,11 @@ class Sender extends fbe.Sender {
    * @param {!StructSet} value StructSet value to send
    * @returns {!number} Sent bytes
    */
-  send_structset (value) { // eslint-disable-line
+  send_StructSet (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structsetModel.serialize(value)
+    let serialized = this.StructSetModel.serialize(value)
     console.assert((serialized > 0), 'test.StructSet serialization failed!')
-    console.assert(this.structsetModel.verify(), 'test.StructSet validation failed!')
+    console.assert(this.StructSetModel.verify(), 'test.StructSet validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -24742,11 +24742,11 @@ class Sender extends fbe.Sender {
    * @param {!StructMap} value StructMap value to send
    * @returns {!number} Sent bytes
    */
-  send_structmap (value) { // eslint-disable-line
+  send_StructMap (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structmapModel.serialize(value)
+    let serialized = this.StructMapModel.serialize(value)
     console.assert((serialized > 0), 'test.StructMap serialization failed!')
-    console.assert(this.structmapModel.verify(), 'test.StructMap validation failed!')
+    console.assert(this.StructMapModel.verify(), 'test.StructMap validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -24763,11 +24763,11 @@ class Sender extends fbe.Sender {
    * @param {!StructHash} value StructHash value to send
    * @returns {!number} Sent bytes
    */
-  send_structhash (value) { // eslint-disable-line
+  send_StructHash (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structhashModel.serialize(value)
+    let serialized = this.StructHashModel.serialize(value)
     console.assert((serialized > 0), 'test.StructHash serialization failed!')
-    console.assert(this.structhashModel.verify(), 'test.StructHash validation failed!')
+    console.assert(this.StructHashModel.verify(), 'test.StructHash validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -24784,11 +24784,11 @@ class Sender extends fbe.Sender {
    * @param {!StructHashEx} value StructHashEx value to send
    * @returns {!number} Sent bytes
    */
-  send_structhashex (value) { // eslint-disable-line
+  send_StructHashEx (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structhashexModel.serialize(value)
+    let serialized = this.StructHashExModel.serialize(value)
     console.assert((serialized > 0), 'test.StructHashEx serialization failed!')
-    console.assert(this.structhashexModel.verify(), 'test.StructHashEx validation failed!')
+    console.assert(this.StructHashExModel.verify(), 'test.StructHashEx validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -24805,11 +24805,11 @@ class Sender extends fbe.Sender {
    * @param {!StructEmpty} value StructEmpty value to send
    * @returns {!number} Sent bytes
    */
-  send_structempty (value) { // eslint-disable-line
+  send_StructEmpty (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structemptyModel.serialize(value)
+    let serialized = this.StructEmptyModel.serialize(value)
     console.assert((serialized > 0), 'test.StructEmpty serialization failed!')
-    console.assert(this.structemptyModel.verify(), 'test.StructEmpty validation failed!')
+    console.assert(this.StructEmptyModel.verify(), 'test.StructEmpty validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -24868,30 +24868,30 @@ class Receiver extends fbe.Receiver {
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, false)
     this._protoReceiver = new proto.Receiver(this.buffer)
-    this._structsimpleValue = new StructSimple()
-    this._structsimpleModel = new StructSimpleModel()
-    this._structoptionalValue = new StructOptional()
-    this._structoptionalModel = new StructOptionalModel()
-    this._structnestedValue = new StructNested()
-    this._structnestedModel = new StructNestedModel()
-    this._structbytesValue = new StructBytes()
-    this._structbytesModel = new StructBytesModel()
-    this._structarrayValue = new StructArray()
-    this._structarrayModel = new StructArrayModel()
-    this._structvectorValue = new StructVector()
-    this._structvectorModel = new StructVectorModel()
-    this._structlistValue = new StructList()
-    this._structlistModel = new StructListModel()
-    this._structsetValue = new StructSet()
-    this._structsetModel = new StructSetModel()
-    this._structmapValue = new StructMap()
-    this._structmapModel = new StructMapModel()
-    this._structhashValue = new StructHash()
-    this._structhashModel = new StructHashModel()
-    this._structhashexValue = new StructHashEx()
-    this._structhashexModel = new StructHashExModel()
-    this._structemptyValue = new StructEmpty()
-    this._structemptyModel = new StructEmptyModel()
+    this._StructSimpleValue = new StructSimple()
+    this._StructSimpleModel = new StructSimpleModel()
+    this._StructOptionalValue = new StructOptional()
+    this._StructOptionalModel = new StructOptionalModel()
+    this._StructNestedValue = new StructNested()
+    this._StructNestedModel = new StructNestedModel()
+    this._StructBytesValue = new StructBytes()
+    this._StructBytesModel = new StructBytesModel()
+    this._StructArrayValue = new StructArray()
+    this._StructArrayModel = new StructArrayModel()
+    this._StructVectorValue = new StructVector()
+    this._StructVectorModel = new StructVectorModel()
+    this._StructListValue = new StructList()
+    this._StructListModel = new StructListModel()
+    this._StructSetValue = new StructSet()
+    this._StructSetModel = new StructSetModel()
+    this._StructMapValue = new StructMap()
+    this._StructMapModel = new StructMapModel()
+    this._StructHashValue = new StructHash()
+    this._StructHashModel = new StructHashModel()
+    this._StructHashExValue = new StructHashEx()
+    this._StructHashExModel = new StructHashExModel()
+    this._StructEmptyValue = new StructEmpty()
+    this._StructEmptyModel = new StructEmptyModel()
     this.onReceiveLogHandler = this.onReceiveLog
   }
 
@@ -24922,84 +24922,84 @@ class Receiver extends fbe.Receiver {
    * @this {!Receiver}
    * @param {!StructSimple} value StructSimple received value
    */
-  onReceive_structsimple (value) {}  // eslint-disable-line
+  onReceive_StructSimple (value) {}  // eslint-disable-line
 
   /**
    * StructOptional receive handler
    * @this {!Receiver}
    * @param {!StructOptional} value StructOptional received value
    */
-  onReceive_structoptional (value) {}  // eslint-disable-line
+  onReceive_StructOptional (value) {}  // eslint-disable-line
 
   /**
    * StructNested receive handler
    * @this {!Receiver}
    * @param {!StructNested} value StructNested received value
    */
-  onReceive_structnested (value) {}  // eslint-disable-line
+  onReceive_StructNested (value) {}  // eslint-disable-line
 
   /**
    * StructBytes receive handler
    * @this {!Receiver}
    * @param {!StructBytes} value StructBytes received value
    */
-  onReceive_structbytes (value) {}  // eslint-disable-line
+  onReceive_StructBytes (value) {}  // eslint-disable-line
 
   /**
    * StructArray receive handler
    * @this {!Receiver}
    * @param {!StructArray} value StructArray received value
    */
-  onReceive_structarray (value) {}  // eslint-disable-line
+  onReceive_StructArray (value) {}  // eslint-disable-line
 
   /**
    * StructVector receive handler
    * @this {!Receiver}
    * @param {!StructVector} value StructVector received value
    */
-  onReceive_structvector (value) {}  // eslint-disable-line
+  onReceive_StructVector (value) {}  // eslint-disable-line
 
   /**
    * StructList receive handler
    * @this {!Receiver}
    * @param {!StructList} value StructList received value
    */
-  onReceive_structlist (value) {}  // eslint-disable-line
+  onReceive_StructList (value) {}  // eslint-disable-line
 
   /**
    * StructSet receive handler
    * @this {!Receiver}
    * @param {!StructSet} value StructSet received value
    */
-  onReceive_structset (value) {}  // eslint-disable-line
+  onReceive_StructSet (value) {}  // eslint-disable-line
 
   /**
    * StructMap receive handler
    * @this {!Receiver}
    * @param {!StructMap} value StructMap received value
    */
-  onReceive_structmap (value) {}  // eslint-disable-line
+  onReceive_StructMap (value) {}  // eslint-disable-line
 
   /**
    * StructHash receive handler
    * @this {!Receiver}
    * @param {!StructHash} value StructHash received value
    */
-  onReceive_structhash (value) {}  // eslint-disable-line
+  onReceive_StructHash (value) {}  // eslint-disable-line
 
   /**
    * StructHashEx receive handler
    * @this {!Receiver}
    * @param {!StructHashEx} value StructHashEx received value
    */
-  onReceive_structhashex (value) {}  // eslint-disable-line
+  onReceive_StructHashEx (value) {}  // eslint-disable-line
 
   /**
    * StructEmpty receive handler
    * @this {!Receiver}
    * @param {!StructEmpty} value StructEmpty received value
    */
-  onReceive_structempty (value) {}  // eslint-disable-line
+  onReceive_StructEmpty (value) {}  // eslint-disable-line
 
   /**
    * test receive message handler
@@ -25014,194 +25014,194 @@ class Receiver extends fbe.Receiver {
     switch (type) {
       case StructSimpleModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structsimpleModel.attachBuffer(buffer, offset)
-        console.assert(this._structsimpleModel.verify(), 'test.StructSimple validation failed!')
-        let deserialized = this._structsimpleModel.deserialize(this._structsimpleValue)
+        this._StructSimpleModel.attachBuffer(buffer, offset)
+        console.assert(this._StructSimpleModel.verify(), 'test.StructSimple validation failed!')
+        let deserialized = this._StructSimpleModel.deserialize(this._StructSimpleValue)
         console.assert((deserialized.size > 0), 'test.StructSimple deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structsimpleValue.toString())
+          this.onReceiveLog(this._StructSimpleValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structsimple(this._structsimpleValue)
+        this.onReceive_StructSimple(this._StructSimpleValue)
         return true
       }
       case StructOptionalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structoptionalModel.attachBuffer(buffer, offset)
-        console.assert(this._structoptionalModel.verify(), 'test.StructOptional validation failed!')
-        let deserialized = this._structoptionalModel.deserialize(this._structoptionalValue)
+        this._StructOptionalModel.attachBuffer(buffer, offset)
+        console.assert(this._StructOptionalModel.verify(), 'test.StructOptional validation failed!')
+        let deserialized = this._StructOptionalModel.deserialize(this._StructOptionalValue)
         console.assert((deserialized.size > 0), 'test.StructOptional deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structoptionalValue.toString())
+          this.onReceiveLog(this._StructOptionalValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structoptional(this._structoptionalValue)
+        this.onReceive_StructOptional(this._StructOptionalValue)
         return true
       }
       case StructNestedModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structnestedModel.attachBuffer(buffer, offset)
-        console.assert(this._structnestedModel.verify(), 'test.StructNested validation failed!')
-        let deserialized = this._structnestedModel.deserialize(this._structnestedValue)
+        this._StructNestedModel.attachBuffer(buffer, offset)
+        console.assert(this._StructNestedModel.verify(), 'test.StructNested validation failed!')
+        let deserialized = this._StructNestedModel.deserialize(this._StructNestedValue)
         console.assert((deserialized.size > 0), 'test.StructNested deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structnestedValue.toString())
+          this.onReceiveLog(this._StructNestedValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structnested(this._structnestedValue)
+        this.onReceive_StructNested(this._StructNestedValue)
         return true
       }
       case StructBytesModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structbytesModel.attachBuffer(buffer, offset)
-        console.assert(this._structbytesModel.verify(), 'test.StructBytes validation failed!')
-        let deserialized = this._structbytesModel.deserialize(this._structbytesValue)
+        this._StructBytesModel.attachBuffer(buffer, offset)
+        console.assert(this._StructBytesModel.verify(), 'test.StructBytes validation failed!')
+        let deserialized = this._StructBytesModel.deserialize(this._StructBytesValue)
         console.assert((deserialized.size > 0), 'test.StructBytes deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structbytesValue.toString())
+          this.onReceiveLog(this._StructBytesValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structbytes(this._structbytesValue)
+        this.onReceive_StructBytes(this._StructBytesValue)
         return true
       }
       case StructArrayModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structarrayModel.attachBuffer(buffer, offset)
-        console.assert(this._structarrayModel.verify(), 'test.StructArray validation failed!')
-        let deserialized = this._structarrayModel.deserialize(this._structarrayValue)
+        this._StructArrayModel.attachBuffer(buffer, offset)
+        console.assert(this._StructArrayModel.verify(), 'test.StructArray validation failed!')
+        let deserialized = this._StructArrayModel.deserialize(this._StructArrayValue)
         console.assert((deserialized.size > 0), 'test.StructArray deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structarrayValue.toString())
+          this.onReceiveLog(this._StructArrayValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structarray(this._structarrayValue)
+        this.onReceive_StructArray(this._StructArrayValue)
         return true
       }
       case StructVectorModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structvectorModel.attachBuffer(buffer, offset)
-        console.assert(this._structvectorModel.verify(), 'test.StructVector validation failed!')
-        let deserialized = this._structvectorModel.deserialize(this._structvectorValue)
+        this._StructVectorModel.attachBuffer(buffer, offset)
+        console.assert(this._StructVectorModel.verify(), 'test.StructVector validation failed!')
+        let deserialized = this._StructVectorModel.deserialize(this._StructVectorValue)
         console.assert((deserialized.size > 0), 'test.StructVector deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structvectorValue.toString())
+          this.onReceiveLog(this._StructVectorValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structvector(this._structvectorValue)
+        this.onReceive_StructVector(this._StructVectorValue)
         return true
       }
       case StructListModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structlistModel.attachBuffer(buffer, offset)
-        console.assert(this._structlistModel.verify(), 'test.StructList validation failed!')
-        let deserialized = this._structlistModel.deserialize(this._structlistValue)
+        this._StructListModel.attachBuffer(buffer, offset)
+        console.assert(this._StructListModel.verify(), 'test.StructList validation failed!')
+        let deserialized = this._StructListModel.deserialize(this._StructListValue)
         console.assert((deserialized.size > 0), 'test.StructList deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structlistValue.toString())
+          this.onReceiveLog(this._StructListValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structlist(this._structlistValue)
+        this.onReceive_StructList(this._StructListValue)
         return true
       }
       case StructSetModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structsetModel.attachBuffer(buffer, offset)
-        console.assert(this._structsetModel.verify(), 'test.StructSet validation failed!')
-        let deserialized = this._structsetModel.deserialize(this._structsetValue)
+        this._StructSetModel.attachBuffer(buffer, offset)
+        console.assert(this._StructSetModel.verify(), 'test.StructSet validation failed!')
+        let deserialized = this._StructSetModel.deserialize(this._StructSetValue)
         console.assert((deserialized.size > 0), 'test.StructSet deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structsetValue.toString())
+          this.onReceiveLog(this._StructSetValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structset(this._structsetValue)
+        this.onReceive_StructSet(this._StructSetValue)
         return true
       }
       case StructMapModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structmapModel.attachBuffer(buffer, offset)
-        console.assert(this._structmapModel.verify(), 'test.StructMap validation failed!')
-        let deserialized = this._structmapModel.deserialize(this._structmapValue)
+        this._StructMapModel.attachBuffer(buffer, offset)
+        console.assert(this._StructMapModel.verify(), 'test.StructMap validation failed!')
+        let deserialized = this._StructMapModel.deserialize(this._StructMapValue)
         console.assert((deserialized.size > 0), 'test.StructMap deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structmapValue.toString())
+          this.onReceiveLog(this._StructMapValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structmap(this._structmapValue)
+        this.onReceive_StructMap(this._StructMapValue)
         return true
       }
       case StructHashModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structhashModel.attachBuffer(buffer, offset)
-        console.assert(this._structhashModel.verify(), 'test.StructHash validation failed!')
-        let deserialized = this._structhashModel.deserialize(this._structhashValue)
+        this._StructHashModel.attachBuffer(buffer, offset)
+        console.assert(this._StructHashModel.verify(), 'test.StructHash validation failed!')
+        let deserialized = this._StructHashModel.deserialize(this._StructHashValue)
         console.assert((deserialized.size > 0), 'test.StructHash deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structhashValue.toString())
+          this.onReceiveLog(this._StructHashValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structhash(this._structhashValue)
+        this.onReceive_StructHash(this._StructHashValue)
         return true
       }
       case StructHashExModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structhashexModel.attachBuffer(buffer, offset)
-        console.assert(this._structhashexModel.verify(), 'test.StructHashEx validation failed!')
-        let deserialized = this._structhashexModel.deserialize(this._structhashexValue)
+        this._StructHashExModel.attachBuffer(buffer, offset)
+        console.assert(this._StructHashExModel.verify(), 'test.StructHashEx validation failed!')
+        let deserialized = this._StructHashExModel.deserialize(this._StructHashExValue)
         console.assert((deserialized.size > 0), 'test.StructHashEx deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structhashexValue.toString())
+          this.onReceiveLog(this._StructHashExValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structhashex(this._structhashexValue)
+        this.onReceive_StructHashEx(this._StructHashExValue)
         return true
       }
       case StructEmptyModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structemptyModel.attachBuffer(buffer, offset)
-        console.assert(this._structemptyModel.verify(), 'test.StructEmpty validation failed!')
-        let deserialized = this._structemptyModel.deserialize(this._structemptyValue)
+        this._StructEmptyModel.attachBuffer(buffer, offset)
+        console.assert(this._StructEmptyModel.verify(), 'test.StructEmpty validation failed!')
+        let deserialized = this._StructEmptyModel.deserialize(this._StructEmptyValue)
         console.assert((deserialized.size > 0), 'test.StructEmpty deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structemptyValue.toString())
+          this.onReceiveLog(this._StructEmptyValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structempty(this._structemptyValue)
+        this.onReceive_StructEmpty(this._StructEmptyValue)
         return true
       }
     }
@@ -25239,18 +25239,18 @@ class Proxy extends fbe.Receiver {
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, false)
     this._protoProxy = new proto.Proxy(this.buffer)
-    this._structsimpleModel = new StructSimpleModel()
-    this._structoptionalModel = new StructOptionalModel()
-    this._structnestedModel = new StructNestedModel()
-    this._structbytesModel = new StructBytesModel()
-    this._structarrayModel = new StructArrayModel()
-    this._structvectorModel = new StructVectorModel()
-    this._structlistModel = new StructListModel()
-    this._structsetModel = new StructSetModel()
-    this._structmapModel = new StructMapModel()
-    this._structhashModel = new StructHashModel()
-    this._structhashexModel = new StructHashExModel()
-    this._structemptyModel = new StructEmptyModel()
+    this._StructSimpleModel = new StructSimpleModel()
+    this._StructOptionalModel = new StructOptionalModel()
+    this._StructNestedModel = new StructNestedModel()
+    this._StructBytesModel = new StructBytesModel()
+    this._StructArrayModel = new StructArrayModel()
+    this._StructVectorModel = new StructVectorModel()
+    this._StructListModel = new StructListModel()
+    this._StructSetModel = new StructSetModel()
+    this._StructMapModel = new StructMapModel()
+    this._StructHashModel = new StructHashModel()
+    this._StructHashExModel = new StructHashExModel()
+    this._StructEmptyModel = new StructEmptyModel()
   }
 
   // Imported proxy
@@ -25284,7 +25284,7 @@ class Proxy extends fbe.Receiver {
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_structsimple (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_StructSimple (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
    * StructOptional proxy handler
@@ -25295,7 +25295,7 @@ class Proxy extends fbe.Receiver {
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_structoptional (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_StructOptional (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
    * StructNested proxy handler
@@ -25306,7 +25306,7 @@ class Proxy extends fbe.Receiver {
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_structnested (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_StructNested (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
    * StructBytes proxy handler
@@ -25317,7 +25317,7 @@ class Proxy extends fbe.Receiver {
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_structbytes (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_StructBytes (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
    * StructArray proxy handler
@@ -25328,7 +25328,7 @@ class Proxy extends fbe.Receiver {
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_structarray (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_StructArray (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
    * StructVector proxy handler
@@ -25339,7 +25339,7 @@ class Proxy extends fbe.Receiver {
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_structvector (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_StructVector (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
    * StructList proxy handler
@@ -25350,7 +25350,7 @@ class Proxy extends fbe.Receiver {
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_structlist (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_StructList (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
    * StructSet proxy handler
@@ -25361,7 +25361,7 @@ class Proxy extends fbe.Receiver {
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_structset (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_StructSet (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
    * StructMap proxy handler
@@ -25372,7 +25372,7 @@ class Proxy extends fbe.Receiver {
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_structmap (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_StructMap (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
    * StructHash proxy handler
@@ -25383,7 +25383,7 @@ class Proxy extends fbe.Receiver {
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_structhash (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_StructHash (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
    * StructHashEx proxy handler
@@ -25394,7 +25394,7 @@ class Proxy extends fbe.Receiver {
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_structhashex (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_StructHashEx (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
    * StructEmpty proxy handler
@@ -25405,7 +25405,7 @@ class Proxy extends fbe.Receiver {
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_structempty (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_StructEmpty (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
    * test receive message handler
@@ -25420,170 +25420,170 @@ class Proxy extends fbe.Receiver {
     switch (type) {
       case StructSimpleModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._structsimpleModel.attachBuffer(buffer, offset)
-        console.assert(this._structsimpleModel.verify(), 'test.StructSimple validation failed!')
+        this._StructSimpleModel.attachBuffer(buffer, offset)
+        console.assert(this._StructSimpleModel.verify(), 'test.StructSimple validation failed!')
 
-        let fbeBegin = this._structsimpleModel.model.getBegin()
+        let fbeBegin = this._StructSimpleModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_structsimple(this._structsimpleModel, type, buffer, offset, size)
-        this._structsimpleModel.model.getEnd(fbeBegin)
+        this.onProxy_StructSimple(this._StructSimpleModel, type, buffer, offset, size)
+        this._StructSimpleModel.model.getEnd(fbeBegin)
         return true
       }
       case StructOptionalModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._structoptionalModel.attachBuffer(buffer, offset)
-        console.assert(this._structoptionalModel.verify(), 'test.StructOptional validation failed!')
+        this._StructOptionalModel.attachBuffer(buffer, offset)
+        console.assert(this._StructOptionalModel.verify(), 'test.StructOptional validation failed!')
 
-        let fbeBegin = this._structoptionalModel.model.getBegin()
+        let fbeBegin = this._StructOptionalModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_structoptional(this._structoptionalModel, type, buffer, offset, size)
-        this._structoptionalModel.model.getEnd(fbeBegin)
+        this.onProxy_StructOptional(this._StructOptionalModel, type, buffer, offset, size)
+        this._StructOptionalModel.model.getEnd(fbeBegin)
         return true
       }
       case StructNestedModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._structnestedModel.attachBuffer(buffer, offset)
-        console.assert(this._structnestedModel.verify(), 'test.StructNested validation failed!')
+        this._StructNestedModel.attachBuffer(buffer, offset)
+        console.assert(this._StructNestedModel.verify(), 'test.StructNested validation failed!')
 
-        let fbeBegin = this._structnestedModel.model.getBegin()
+        let fbeBegin = this._StructNestedModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_structnested(this._structnestedModel, type, buffer, offset, size)
-        this._structnestedModel.model.getEnd(fbeBegin)
+        this.onProxy_StructNested(this._StructNestedModel, type, buffer, offset, size)
+        this._StructNestedModel.model.getEnd(fbeBegin)
         return true
       }
       case StructBytesModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._structbytesModel.attachBuffer(buffer, offset)
-        console.assert(this._structbytesModel.verify(), 'test.StructBytes validation failed!')
+        this._StructBytesModel.attachBuffer(buffer, offset)
+        console.assert(this._StructBytesModel.verify(), 'test.StructBytes validation failed!')
 
-        let fbeBegin = this._structbytesModel.model.getBegin()
+        let fbeBegin = this._StructBytesModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_structbytes(this._structbytesModel, type, buffer, offset, size)
-        this._structbytesModel.model.getEnd(fbeBegin)
+        this.onProxy_StructBytes(this._StructBytesModel, type, buffer, offset, size)
+        this._StructBytesModel.model.getEnd(fbeBegin)
         return true
       }
       case StructArrayModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._structarrayModel.attachBuffer(buffer, offset)
-        console.assert(this._structarrayModel.verify(), 'test.StructArray validation failed!')
+        this._StructArrayModel.attachBuffer(buffer, offset)
+        console.assert(this._StructArrayModel.verify(), 'test.StructArray validation failed!')
 
-        let fbeBegin = this._structarrayModel.model.getBegin()
+        let fbeBegin = this._StructArrayModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_structarray(this._structarrayModel, type, buffer, offset, size)
-        this._structarrayModel.model.getEnd(fbeBegin)
+        this.onProxy_StructArray(this._StructArrayModel, type, buffer, offset, size)
+        this._StructArrayModel.model.getEnd(fbeBegin)
         return true
       }
       case StructVectorModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._structvectorModel.attachBuffer(buffer, offset)
-        console.assert(this._structvectorModel.verify(), 'test.StructVector validation failed!')
+        this._StructVectorModel.attachBuffer(buffer, offset)
+        console.assert(this._StructVectorModel.verify(), 'test.StructVector validation failed!')
 
-        let fbeBegin = this._structvectorModel.model.getBegin()
+        let fbeBegin = this._StructVectorModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_structvector(this._structvectorModel, type, buffer, offset, size)
-        this._structvectorModel.model.getEnd(fbeBegin)
+        this.onProxy_StructVector(this._StructVectorModel, type, buffer, offset, size)
+        this._StructVectorModel.model.getEnd(fbeBegin)
         return true
       }
       case StructListModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._structlistModel.attachBuffer(buffer, offset)
-        console.assert(this._structlistModel.verify(), 'test.StructList validation failed!')
+        this._StructListModel.attachBuffer(buffer, offset)
+        console.assert(this._StructListModel.verify(), 'test.StructList validation failed!')
 
-        let fbeBegin = this._structlistModel.model.getBegin()
+        let fbeBegin = this._StructListModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_structlist(this._structlistModel, type, buffer, offset, size)
-        this._structlistModel.model.getEnd(fbeBegin)
+        this.onProxy_StructList(this._StructListModel, type, buffer, offset, size)
+        this._StructListModel.model.getEnd(fbeBegin)
         return true
       }
       case StructSetModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._structsetModel.attachBuffer(buffer, offset)
-        console.assert(this._structsetModel.verify(), 'test.StructSet validation failed!')
+        this._StructSetModel.attachBuffer(buffer, offset)
+        console.assert(this._StructSetModel.verify(), 'test.StructSet validation failed!')
 
-        let fbeBegin = this._structsetModel.model.getBegin()
+        let fbeBegin = this._StructSetModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_structset(this._structsetModel, type, buffer, offset, size)
-        this._structsetModel.model.getEnd(fbeBegin)
+        this.onProxy_StructSet(this._StructSetModel, type, buffer, offset, size)
+        this._StructSetModel.model.getEnd(fbeBegin)
         return true
       }
       case StructMapModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._structmapModel.attachBuffer(buffer, offset)
-        console.assert(this._structmapModel.verify(), 'test.StructMap validation failed!')
+        this._StructMapModel.attachBuffer(buffer, offset)
+        console.assert(this._StructMapModel.verify(), 'test.StructMap validation failed!')
 
-        let fbeBegin = this._structmapModel.model.getBegin()
+        let fbeBegin = this._StructMapModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_structmap(this._structmapModel, type, buffer, offset, size)
-        this._structmapModel.model.getEnd(fbeBegin)
+        this.onProxy_StructMap(this._StructMapModel, type, buffer, offset, size)
+        this._StructMapModel.model.getEnd(fbeBegin)
         return true
       }
       case StructHashModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._structhashModel.attachBuffer(buffer, offset)
-        console.assert(this._structhashModel.verify(), 'test.StructHash validation failed!')
+        this._StructHashModel.attachBuffer(buffer, offset)
+        console.assert(this._StructHashModel.verify(), 'test.StructHash validation failed!')
 
-        let fbeBegin = this._structhashModel.model.getBegin()
+        let fbeBegin = this._StructHashModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_structhash(this._structhashModel, type, buffer, offset, size)
-        this._structhashModel.model.getEnd(fbeBegin)
+        this.onProxy_StructHash(this._StructHashModel, type, buffer, offset, size)
+        this._StructHashModel.model.getEnd(fbeBegin)
         return true
       }
       case StructHashExModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._structhashexModel.attachBuffer(buffer, offset)
-        console.assert(this._structhashexModel.verify(), 'test.StructHashEx validation failed!')
+        this._StructHashExModel.attachBuffer(buffer, offset)
+        console.assert(this._StructHashExModel.verify(), 'test.StructHashEx validation failed!')
 
-        let fbeBegin = this._structhashexModel.model.getBegin()
+        let fbeBegin = this._StructHashExModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_structhashex(this._structhashexModel, type, buffer, offset, size)
-        this._structhashexModel.model.getEnd(fbeBegin)
+        this.onProxy_StructHashEx(this._StructHashExModel, type, buffer, offset, size)
+        this._StructHashExModel.model.getEnd(fbeBegin)
         return true
       }
       case StructEmptyModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._structemptyModel.attachBuffer(buffer, offset)
-        console.assert(this._structemptyModel.verify(), 'test.StructEmpty validation failed!')
+        this._StructEmptyModel.attachBuffer(buffer, offset)
+        console.assert(this._StructEmptyModel.verify(), 'test.StructEmpty validation failed!')
 
-        let fbeBegin = this._structemptyModel.model.getBegin()
+        let fbeBegin = this._StructEmptyModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_structempty(this._structemptyModel, type, buffer, offset, size)
-        this._structemptyModel.model.getEnd(fbeBegin)
+        this.onProxy_StructEmpty(this._StructEmptyModel, type, buffer, offset, size)
+        this._StructEmptyModel.model.getEnd(fbeBegin)
         return true
       }
     }
@@ -25612,43 +25612,42 @@ class Client extends fbe.Client {
   constructor (sendBuffer = new fbe.WriteBuffer(), receiveBuffer = new fbe.WriteBuffer()) {
     super(sendBuffer, receiveBuffer, false)
     this._protoClient = new proto.Client(this.sendBuffer, this.receiveBuffer)
-    this._structsimpleSenderModel = new StructSimpleModel(this.sendBuffer)
-    this._structsimpleReceiverValue = new StructSimple()
-    this._structsimpleReceiverModel = new StructSimpleModel()
-    this._structoptionalSenderModel = new StructOptionalModel(this.sendBuffer)
-    this._structoptionalReceiverValue = new StructOptional()
-    this._structoptionalReceiverModel = new StructOptionalModel()
-    this._structnestedSenderModel = new StructNestedModel(this.sendBuffer)
-    this._structnestedReceiverValue = new StructNested()
-    this._structnestedReceiverModel = new StructNestedModel()
-    this._structbytesSenderModel = new StructBytesModel(this.sendBuffer)
-    this._structbytesReceiverValue = new StructBytes()
-    this._structbytesReceiverModel = new StructBytesModel()
-    this._structarraySenderModel = new StructArrayModel(this.sendBuffer)
-    this._structarrayReceiverValue = new StructArray()
-    this._structarrayReceiverModel = new StructArrayModel()
-    this._structvectorSenderModel = new StructVectorModel(this.sendBuffer)
-    this._structvectorReceiverValue = new StructVector()
-    this._structvectorReceiverModel = new StructVectorModel()
-    this._structlistSenderModel = new StructListModel(this.sendBuffer)
-    this._structlistReceiverValue = new StructList()
-    this._structlistReceiverModel = new StructListModel()
-    this._structsetSenderModel = new StructSetModel(this.sendBuffer)
-    this._structsetReceiverValue = new StructSet()
-    this._structsetReceiverModel = new StructSetModel()
-    this._structmapSenderModel = new StructMapModel(this.sendBuffer)
-    this._structmapReceiverValue = new StructMap()
-    this._structmapReceiverModel = new StructMapModel()
-    this._structhashSenderModel = new StructHashModel(this.sendBuffer)
-    this._structhashReceiverValue = new StructHash()
-    this._structhashReceiverModel = new StructHashModel()
-    this._structhashexSenderModel = new StructHashExModel(this.sendBuffer)
-    this._structhashexReceiverValue = new StructHashEx()
-    this._structhashexReceiverModel = new StructHashExModel()
-    this._structemptySenderModel = new StructEmptyModel(this.sendBuffer)
-    this._structemptyReceiverValue = new StructEmpty()
-    this._structemptyReceiverModel = new StructEmptyModel()
-    this._timestamp = 0
+    this._StructSimpleSenderModel = new StructSimpleModel(this.sendBuffer)
+    this._StructSimpleReceiverValue = new StructSimple()
+    this._StructSimpleReceiverModel = new StructSimpleModel()
+    this._StructOptionalSenderModel = new StructOptionalModel(this.sendBuffer)
+    this._StructOptionalReceiverValue = new StructOptional()
+    this._StructOptionalReceiverModel = new StructOptionalModel()
+    this._StructNestedSenderModel = new StructNestedModel(this.sendBuffer)
+    this._StructNestedReceiverValue = new StructNested()
+    this._StructNestedReceiverModel = new StructNestedModel()
+    this._StructBytesSenderModel = new StructBytesModel(this.sendBuffer)
+    this._StructBytesReceiverValue = new StructBytes()
+    this._StructBytesReceiverModel = new StructBytesModel()
+    this._StructArraySenderModel = new StructArrayModel(this.sendBuffer)
+    this._StructArrayReceiverValue = new StructArray()
+    this._StructArrayReceiverModel = new StructArrayModel()
+    this._StructVectorSenderModel = new StructVectorModel(this.sendBuffer)
+    this._StructVectorReceiverValue = new StructVector()
+    this._StructVectorReceiverModel = new StructVectorModel()
+    this._StructListSenderModel = new StructListModel(this.sendBuffer)
+    this._StructListReceiverValue = new StructList()
+    this._StructListReceiverModel = new StructListModel()
+    this._StructSetSenderModel = new StructSetModel(this.sendBuffer)
+    this._StructSetReceiverValue = new StructSet()
+    this._StructSetReceiverModel = new StructSetModel()
+    this._StructMapSenderModel = new StructMapModel(this.sendBuffer)
+    this._StructMapReceiverValue = new StructMap()
+    this._StructMapReceiverModel = new StructMapModel()
+    this._StructHashSenderModel = new StructHashModel(this.sendBuffer)
+    this._StructHashReceiverValue = new StructHash()
+    this._StructHashReceiverModel = new StructHashModel()
+    this._StructHashExSenderModel = new StructHashExModel(this.sendBuffer)
+    this._StructHashExReceiverValue = new StructHashEx()
+    this._StructHashExReceiverModel = new StructHashExModel()
+    this._StructEmptySenderModel = new StructEmptyModel(this.sendBuffer)
+    this._StructEmptyReceiverValue = new StructEmpty()
+    this._StructEmptyReceiverModel = new StructEmptyModel()
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
     this.onReceiveLogHandler = this.onReceiveLog
@@ -25672,8 +25671,8 @@ class Client extends fbe.Client {
    * @this {!Client}
    * @returns {!StructSimpleModel} StructSimple sender model
    */
-  get structsimpleSenderModel () {
-    return this._structsimpleSenderModel
+  get StructSimpleSenderModel () {
+    return this._StructSimpleSenderModel
   }
 
   /**
@@ -25681,8 +25680,8 @@ class Client extends fbe.Client {
    * @this {!Client}
    * @returns {!StructOptionalModel} StructOptional sender model
    */
-  get structoptionalSenderModel () {
-    return this._structoptionalSenderModel
+  get StructOptionalSenderModel () {
+    return this._StructOptionalSenderModel
   }
 
   /**
@@ -25690,8 +25689,8 @@ class Client extends fbe.Client {
    * @this {!Client}
    * @returns {!StructNestedModel} StructNested sender model
    */
-  get structnestedSenderModel () {
-    return this._structnestedSenderModel
+  get StructNestedSenderModel () {
+    return this._StructNestedSenderModel
   }
 
   /**
@@ -25699,8 +25698,8 @@ class Client extends fbe.Client {
    * @this {!Client}
    * @returns {!StructBytesModel} StructBytes sender model
    */
-  get structbytesSenderModel () {
-    return this._structbytesSenderModel
+  get StructBytesSenderModel () {
+    return this._StructBytesSenderModel
   }
 
   /**
@@ -25708,8 +25707,8 @@ class Client extends fbe.Client {
    * @this {!Client}
    * @returns {!StructArrayModel} StructArray sender model
    */
-  get structarraySenderModel () {
-    return this._structarraySenderModel
+  get StructArraySenderModel () {
+    return this._StructArraySenderModel
   }
 
   /**
@@ -25717,8 +25716,8 @@ class Client extends fbe.Client {
    * @this {!Client}
    * @returns {!StructVectorModel} StructVector sender model
    */
-  get structvectorSenderModel () {
-    return this._structvectorSenderModel
+  get StructVectorSenderModel () {
+    return this._StructVectorSenderModel
   }
 
   /**
@@ -25726,8 +25725,8 @@ class Client extends fbe.Client {
    * @this {!Client}
    * @returns {!StructListModel} StructList sender model
    */
-  get structlistSenderModel () {
-    return this._structlistSenderModel
+  get StructListSenderModel () {
+    return this._StructListSenderModel
   }
 
   /**
@@ -25735,8 +25734,8 @@ class Client extends fbe.Client {
    * @this {!Client}
    * @returns {!StructSetModel} StructSet sender model
    */
-  get structsetSenderModel () {
-    return this._structsetSenderModel
+  get StructSetSenderModel () {
+    return this._StructSetSenderModel
   }
 
   /**
@@ -25744,8 +25743,8 @@ class Client extends fbe.Client {
    * @this {!Client}
    * @returns {!StructMapModel} StructMap sender model
    */
-  get structmapSenderModel () {
-    return this._structmapSenderModel
+  get StructMapSenderModel () {
+    return this._StructMapSenderModel
   }
 
   /**
@@ -25753,8 +25752,8 @@ class Client extends fbe.Client {
    * @this {!Client}
    * @returns {!StructHashModel} StructHash sender model
    */
-  get structhashSenderModel () {
-    return this._structhashSenderModel
+  get StructHashSenderModel () {
+    return this._StructHashSenderModel
   }
 
   /**
@@ -25762,8 +25761,8 @@ class Client extends fbe.Client {
    * @this {!Client}
    * @returns {!StructHashExModel} StructHashEx sender model
    */
-  get structhashexSenderModel () {
-    return this._structhashexSenderModel
+  get StructHashExSenderModel () {
+    return this._StructHashExSenderModel
   }
 
   /**
@@ -25771,54 +25770,8 @@ class Client extends fbe.Client {
    * @this {!Client}
    * @returns {!StructEmptyModel} StructEmpty sender model
    */
-  get structemptySenderModel () {
-    return this._structemptySenderModel
-  }
-
-  // Reset and watchdog methods
-
-  /**
-   * Reset the client
-   * @this {!Client}
-   */
-  reset () {
-    super.reset()
-    this.resetRequests()
-  }
-
-  /**
-   * Watchdog for timeouts
-   * @this {!Client}
-   * @param {!number} utc UTC timestamp
-   */
-  watchdog (utc) {
-    this.watchdogRequests(utc)
-  }
-
-  // Request methods
-
-  /**
-   * Request value
-   * @this {!Client}
-   * @param {!object} value Value to request
-   * @param {!number} timeout Timeout in milliseconds (default is 0)
-   * @returns {Promise} Response promise
-   */
-  request (value, timeout = 0) {
-    let result = null
-    result = this._protoClient.request(value, timeout)
-    if (result != null) {
-      return result
-    }
-    return null
-  }
-
-  /**
-   * Reset client requests
-   * @this {!Client}
-   */
-  resetRequests () {
-    this._protoClient.resetRequests()
+  get StructEmptySenderModel () {
+    return this._StructEmptySenderModel
   }
 
   // Send methods
@@ -25831,40 +25784,40 @@ class Client extends fbe.Client {
    */
   send (value) {
     if (value instanceof StructSimple) {
-      return this.send_structsimple(value)
+      return this.send_StructSimple(value)
     }
     if (value instanceof StructOptional) {
-      return this.send_structoptional(value)
+      return this.send_StructOptional(value)
     }
     if (value instanceof StructNested) {
-      return this.send_structnested(value)
+      return this.send_StructNested(value)
     }
     if (value instanceof StructBytes) {
-      return this.send_structbytes(value)
+      return this.send_StructBytes(value)
     }
     if (value instanceof StructArray) {
-      return this.send_structarray(value)
+      return this.send_StructArray(value)
     }
     if (value instanceof StructVector) {
-      return this.send_structvector(value)
+      return this.send_StructVector(value)
     }
     if (value instanceof StructList) {
-      return this.send_structlist(value)
+      return this.send_StructList(value)
     }
     if (value instanceof StructSet) {
-      return this.send_structset(value)
+      return this.send_StructSet(value)
     }
     if (value instanceof StructMap) {
-      return this.send_structmap(value)
+      return this.send_StructMap(value)
     }
     if (value instanceof StructHash) {
-      return this.send_structhash(value)
+      return this.send_StructHash(value)
     }
     if (value instanceof StructHashEx) {
-      return this.send_structhashex(value)
+      return this.send_StructHashEx(value)
     }
     if (value instanceof StructEmpty) {
-      return this.send_structempty(value)
+      return this.send_StructEmpty(value)
     }
     let result = 0
     result = this._protoClient.send(value)
@@ -25880,11 +25833,11 @@ class Client extends fbe.Client {
    * @param {!StructSimple} value StructSimple value to send
    * @returns {!number} Sent bytes
    */
-  send_structsimple (value) { // eslint-disable-line
+  send_StructSimple (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structsimpleSenderModel.serialize(value)
+    let serialized = this.StructSimpleSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructSimple serialization failed!')
-    console.assert(this.structsimpleSenderModel.verify(), 'test.StructSimple validation failed!')
+    console.assert(this.StructSimpleSenderModel.verify(), 'test.StructSimple validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -25901,11 +25854,11 @@ class Client extends fbe.Client {
    * @param {!StructOptional} value StructOptional value to send
    * @returns {!number} Sent bytes
    */
-  send_structoptional (value) { // eslint-disable-line
+  send_StructOptional (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structoptionalSenderModel.serialize(value)
+    let serialized = this.StructOptionalSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructOptional serialization failed!')
-    console.assert(this.structoptionalSenderModel.verify(), 'test.StructOptional validation failed!')
+    console.assert(this.StructOptionalSenderModel.verify(), 'test.StructOptional validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -25922,11 +25875,11 @@ class Client extends fbe.Client {
    * @param {!StructNested} value StructNested value to send
    * @returns {!number} Sent bytes
    */
-  send_structnested (value) { // eslint-disable-line
+  send_StructNested (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structnestedSenderModel.serialize(value)
+    let serialized = this.StructNestedSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructNested serialization failed!')
-    console.assert(this.structnestedSenderModel.verify(), 'test.StructNested validation failed!')
+    console.assert(this.StructNestedSenderModel.verify(), 'test.StructNested validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -25943,11 +25896,11 @@ class Client extends fbe.Client {
    * @param {!StructBytes} value StructBytes value to send
    * @returns {!number} Sent bytes
    */
-  send_structbytes (value) { // eslint-disable-line
+  send_StructBytes (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structbytesSenderModel.serialize(value)
+    let serialized = this.StructBytesSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructBytes serialization failed!')
-    console.assert(this.structbytesSenderModel.verify(), 'test.StructBytes validation failed!')
+    console.assert(this.StructBytesSenderModel.verify(), 'test.StructBytes validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -25964,11 +25917,11 @@ class Client extends fbe.Client {
    * @param {!StructArray} value StructArray value to send
    * @returns {!number} Sent bytes
    */
-  send_structarray (value) { // eslint-disable-line
+  send_StructArray (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structarraySenderModel.serialize(value)
+    let serialized = this.StructArraySenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructArray serialization failed!')
-    console.assert(this.structarraySenderModel.verify(), 'test.StructArray validation failed!')
+    console.assert(this.StructArraySenderModel.verify(), 'test.StructArray validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -25985,11 +25938,11 @@ class Client extends fbe.Client {
    * @param {!StructVector} value StructVector value to send
    * @returns {!number} Sent bytes
    */
-  send_structvector (value) { // eslint-disable-line
+  send_StructVector (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structvectorSenderModel.serialize(value)
+    let serialized = this.StructVectorSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructVector serialization failed!')
-    console.assert(this.structvectorSenderModel.verify(), 'test.StructVector validation failed!')
+    console.assert(this.StructVectorSenderModel.verify(), 'test.StructVector validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26006,11 +25959,11 @@ class Client extends fbe.Client {
    * @param {!StructList} value StructList value to send
    * @returns {!number} Sent bytes
    */
-  send_structlist (value) { // eslint-disable-line
+  send_StructList (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structlistSenderModel.serialize(value)
+    let serialized = this.StructListSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructList serialization failed!')
-    console.assert(this.structlistSenderModel.verify(), 'test.StructList validation failed!')
+    console.assert(this.StructListSenderModel.verify(), 'test.StructList validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26027,11 +25980,11 @@ class Client extends fbe.Client {
    * @param {!StructSet} value StructSet value to send
    * @returns {!number} Sent bytes
    */
-  send_structset (value) { // eslint-disable-line
+  send_StructSet (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structsetSenderModel.serialize(value)
+    let serialized = this.StructSetSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructSet serialization failed!')
-    console.assert(this.structsetSenderModel.verify(), 'test.StructSet validation failed!')
+    console.assert(this.StructSetSenderModel.verify(), 'test.StructSet validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26048,11 +26001,11 @@ class Client extends fbe.Client {
    * @param {!StructMap} value StructMap value to send
    * @returns {!number} Sent bytes
    */
-  send_structmap (value) { // eslint-disable-line
+  send_StructMap (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structmapSenderModel.serialize(value)
+    let serialized = this.StructMapSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructMap serialization failed!')
-    console.assert(this.structmapSenderModel.verify(), 'test.StructMap validation failed!')
+    console.assert(this.StructMapSenderModel.verify(), 'test.StructMap validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26069,11 +26022,11 @@ class Client extends fbe.Client {
    * @param {!StructHash} value StructHash value to send
    * @returns {!number} Sent bytes
    */
-  send_structhash (value) { // eslint-disable-line
+  send_StructHash (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structhashSenderModel.serialize(value)
+    let serialized = this.StructHashSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructHash serialization failed!')
-    console.assert(this.structhashSenderModel.verify(), 'test.StructHash validation failed!')
+    console.assert(this.StructHashSenderModel.verify(), 'test.StructHash validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26090,11 +26043,11 @@ class Client extends fbe.Client {
    * @param {!StructHashEx} value StructHashEx value to send
    * @returns {!number} Sent bytes
    */
-  send_structhashex (value) { // eslint-disable-line
+  send_StructHashEx (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structhashexSenderModel.serialize(value)
+    let serialized = this.StructHashExSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructHashEx serialization failed!')
-    console.assert(this.structhashexSenderModel.verify(), 'test.StructHashEx validation failed!')
+    console.assert(this.StructHashExSenderModel.verify(), 'test.StructHashEx validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26111,11 +26064,11 @@ class Client extends fbe.Client {
    * @param {!StructEmpty} value StructEmpty value to send
    * @returns {!number} Sent bytes
    */
-  send_structempty (value) { // eslint-disable-line
+  send_StructEmpty (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structemptySenderModel.serialize(value)
+    let serialized = this.StructEmptySenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructEmpty serialization failed!')
-    console.assert(this.structemptySenderModel.verify(), 'test.StructEmpty validation failed!')
+    console.assert(this.StructEmptySenderModel.verify(), 'test.StructEmpty validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26166,84 +26119,84 @@ class Client extends fbe.Client {
    * @this {!Client}
    * @param {!StructSimple} value StructSimple received value
    */
-  onReceive_structsimple (value) {}  // eslint-disable-line
+  onReceive_StructSimple (value) {}  // eslint-disable-line
 
   /**
    * StructOptional receive handler
    * @this {!Client}
    * @param {!StructOptional} value StructOptional received value
    */
-  onReceive_structoptional (value) {}  // eslint-disable-line
+  onReceive_StructOptional (value) {}  // eslint-disable-line
 
   /**
    * StructNested receive handler
    * @this {!Client}
    * @param {!StructNested} value StructNested received value
    */
-  onReceive_structnested (value) {}  // eslint-disable-line
+  onReceive_StructNested (value) {}  // eslint-disable-line
 
   /**
    * StructBytes receive handler
    * @this {!Client}
    * @param {!StructBytes} value StructBytes received value
    */
-  onReceive_structbytes (value) {}  // eslint-disable-line
+  onReceive_StructBytes (value) {}  // eslint-disable-line
 
   /**
    * StructArray receive handler
    * @this {!Client}
    * @param {!StructArray} value StructArray received value
    */
-  onReceive_structarray (value) {}  // eslint-disable-line
+  onReceive_StructArray (value) {}  // eslint-disable-line
 
   /**
    * StructVector receive handler
    * @this {!Client}
    * @param {!StructVector} value StructVector received value
    */
-  onReceive_structvector (value) {}  // eslint-disable-line
+  onReceive_StructVector (value) {}  // eslint-disable-line
 
   /**
    * StructList receive handler
    * @this {!Client}
    * @param {!StructList} value StructList received value
    */
-  onReceive_structlist (value) {}  // eslint-disable-line
+  onReceive_StructList (value) {}  // eslint-disable-line
 
   /**
    * StructSet receive handler
    * @this {!Client}
    * @param {!StructSet} value StructSet received value
    */
-  onReceive_structset (value) {}  // eslint-disable-line
+  onReceive_StructSet (value) {}  // eslint-disable-line
 
   /**
    * StructMap receive handler
    * @this {!Client}
    * @param {!StructMap} value StructMap received value
    */
-  onReceive_structmap (value) {}  // eslint-disable-line
+  onReceive_StructMap (value) {}  // eslint-disable-line
 
   /**
    * StructHash receive handler
    * @this {!Client}
    * @param {!StructHash} value StructHash received value
    */
-  onReceive_structhash (value) {}  // eslint-disable-line
+  onReceive_StructHash (value) {}  // eslint-disable-line
 
   /**
    * StructHashEx receive handler
    * @this {!Client}
    * @param {!StructHashEx} value StructHashEx received value
    */
-  onReceive_structhashex (value) {}  // eslint-disable-line
+  onReceive_StructHashEx (value) {}  // eslint-disable-line
 
   /**
    * StructEmpty receive handler
    * @this {!Client}
    * @param {!StructEmpty} value StructEmpty received value
    */
-  onReceive_structempty (value) {}  // eslint-disable-line
+  onReceive_StructEmpty (value) {}  // eslint-disable-line
 
   /**
    * test receive message handler
@@ -26258,194 +26211,194 @@ class Client extends fbe.Client {
     switch (type) {
       case StructSimpleModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structsimpleReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structsimpleReceiverModel.verify(), 'test.StructSimple validation failed!')
-        let deserialized = this._structsimpleReceiverModel.deserialize(this._structsimpleReceiverValue)
+        this._StructSimpleReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructSimpleReceiverModel.verify(), 'test.StructSimple validation failed!')
+        let deserialized = this._StructSimpleReceiverModel.deserialize(this._StructSimpleReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructSimple deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structsimpleReceiverValue.toString())
+          this.onReceiveLog(this._StructSimpleReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structsimple(this._structsimpleReceiverValue)
+        this.onReceive_StructSimple(this._StructSimpleReceiverValue)
         return true
       }
       case StructOptionalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structoptionalReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structoptionalReceiverModel.verify(), 'test.StructOptional validation failed!')
-        let deserialized = this._structoptionalReceiverModel.deserialize(this._structoptionalReceiverValue)
+        this._StructOptionalReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructOptionalReceiverModel.verify(), 'test.StructOptional validation failed!')
+        let deserialized = this._StructOptionalReceiverModel.deserialize(this._StructOptionalReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructOptional deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structoptionalReceiverValue.toString())
+          this.onReceiveLog(this._StructOptionalReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structoptional(this._structoptionalReceiverValue)
+        this.onReceive_StructOptional(this._StructOptionalReceiverValue)
         return true
       }
       case StructNestedModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structnestedReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structnestedReceiverModel.verify(), 'test.StructNested validation failed!')
-        let deserialized = this._structnestedReceiverModel.deserialize(this._structnestedReceiverValue)
+        this._StructNestedReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructNestedReceiverModel.verify(), 'test.StructNested validation failed!')
+        let deserialized = this._StructNestedReceiverModel.deserialize(this._StructNestedReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructNested deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structnestedReceiverValue.toString())
+          this.onReceiveLog(this._StructNestedReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structnested(this._structnestedReceiverValue)
+        this.onReceive_StructNested(this._StructNestedReceiverValue)
         return true
       }
       case StructBytesModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structbytesReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structbytesReceiverModel.verify(), 'test.StructBytes validation failed!')
-        let deserialized = this._structbytesReceiverModel.deserialize(this._structbytesReceiverValue)
+        this._StructBytesReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructBytesReceiverModel.verify(), 'test.StructBytes validation failed!')
+        let deserialized = this._StructBytesReceiverModel.deserialize(this._StructBytesReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructBytes deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structbytesReceiverValue.toString())
+          this.onReceiveLog(this._StructBytesReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structbytes(this._structbytesReceiverValue)
+        this.onReceive_StructBytes(this._StructBytesReceiverValue)
         return true
       }
       case StructArrayModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structarrayReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structarrayReceiverModel.verify(), 'test.StructArray validation failed!')
-        let deserialized = this._structarrayReceiverModel.deserialize(this._structarrayReceiverValue)
+        this._StructArrayReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructArrayReceiverModel.verify(), 'test.StructArray validation failed!')
+        let deserialized = this._StructArrayReceiverModel.deserialize(this._StructArrayReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructArray deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structarrayReceiverValue.toString())
+          this.onReceiveLog(this._StructArrayReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structarray(this._structarrayReceiverValue)
+        this.onReceive_StructArray(this._StructArrayReceiverValue)
         return true
       }
       case StructVectorModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structvectorReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structvectorReceiverModel.verify(), 'test.StructVector validation failed!')
-        let deserialized = this._structvectorReceiverModel.deserialize(this._structvectorReceiverValue)
+        this._StructVectorReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructVectorReceiverModel.verify(), 'test.StructVector validation failed!')
+        let deserialized = this._StructVectorReceiverModel.deserialize(this._StructVectorReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructVector deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structvectorReceiverValue.toString())
+          this.onReceiveLog(this._StructVectorReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structvector(this._structvectorReceiverValue)
+        this.onReceive_StructVector(this._StructVectorReceiverValue)
         return true
       }
       case StructListModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structlistReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structlistReceiverModel.verify(), 'test.StructList validation failed!')
-        let deserialized = this._structlistReceiverModel.deserialize(this._structlistReceiverValue)
+        this._StructListReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructListReceiverModel.verify(), 'test.StructList validation failed!')
+        let deserialized = this._StructListReceiverModel.deserialize(this._StructListReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructList deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structlistReceiverValue.toString())
+          this.onReceiveLog(this._StructListReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structlist(this._structlistReceiverValue)
+        this.onReceive_StructList(this._StructListReceiverValue)
         return true
       }
       case StructSetModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structsetReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structsetReceiverModel.verify(), 'test.StructSet validation failed!')
-        let deserialized = this._structsetReceiverModel.deserialize(this._structsetReceiverValue)
+        this._StructSetReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructSetReceiverModel.verify(), 'test.StructSet validation failed!')
+        let deserialized = this._StructSetReceiverModel.deserialize(this._StructSetReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructSet deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structsetReceiverValue.toString())
+          this.onReceiveLog(this._StructSetReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structset(this._structsetReceiverValue)
+        this.onReceive_StructSet(this._StructSetReceiverValue)
         return true
       }
       case StructMapModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structmapReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structmapReceiverModel.verify(), 'test.StructMap validation failed!')
-        let deserialized = this._structmapReceiverModel.deserialize(this._structmapReceiverValue)
+        this._StructMapReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructMapReceiverModel.verify(), 'test.StructMap validation failed!')
+        let deserialized = this._StructMapReceiverModel.deserialize(this._StructMapReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructMap deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structmapReceiverValue.toString())
+          this.onReceiveLog(this._StructMapReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structmap(this._structmapReceiverValue)
+        this.onReceive_StructMap(this._StructMapReceiverValue)
         return true
       }
       case StructHashModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structhashReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structhashReceiverModel.verify(), 'test.StructHash validation failed!')
-        let deserialized = this._structhashReceiverModel.deserialize(this._structhashReceiverValue)
+        this._StructHashReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructHashReceiverModel.verify(), 'test.StructHash validation failed!')
+        let deserialized = this._StructHashReceiverModel.deserialize(this._StructHashReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructHash deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structhashReceiverValue.toString())
+          this.onReceiveLog(this._StructHashReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structhash(this._structhashReceiverValue)
+        this.onReceive_StructHash(this._StructHashReceiverValue)
         return true
       }
       case StructHashExModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structhashexReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structhashexReceiverModel.verify(), 'test.StructHashEx validation failed!')
-        let deserialized = this._structhashexReceiverModel.deserialize(this._structhashexReceiverValue)
+        this._StructHashExReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructHashExReceiverModel.verify(), 'test.StructHashEx validation failed!')
+        let deserialized = this._StructHashExReceiverModel.deserialize(this._StructHashExReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructHashEx deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structhashexReceiverValue.toString())
+          this.onReceiveLog(this._StructHashExReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structhashex(this._structhashexReceiverValue)
+        this.onReceive_StructHashEx(this._StructHashExReceiverValue)
         return true
       }
       case StructEmptyModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structemptyReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structemptyReceiverModel.verify(), 'test.StructEmpty validation failed!')
-        let deserialized = this._structemptyReceiverModel.deserialize(this._structemptyReceiverValue)
+        this._StructEmptyReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructEmptyReceiverModel.verify(), 'test.StructEmpty validation failed!')
+        let deserialized = this._StructEmptyReceiverModel.deserialize(this._StructEmptyReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructEmpty deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structemptyReceiverValue.toString())
+          this.onReceiveLog(this._StructEmptyReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structempty(this._structemptyReceiverValue)
+        this.onReceive_StructEmpty(this._StructEmptyReceiverValue)
         return true
       }
     }
@@ -26483,18 +26436,18 @@ class FinalSender extends fbe.Sender {
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, true)
     this._protoSender = new proto.FinalSender(this.buffer)
-    this._structsimpleModel = new StructSimpleFinalModel(this.buffer)
-    this._structoptionalModel = new StructOptionalFinalModel(this.buffer)
-    this._structnestedModel = new StructNestedFinalModel(this.buffer)
-    this._structbytesModel = new StructBytesFinalModel(this.buffer)
-    this._structarrayModel = new StructArrayFinalModel(this.buffer)
-    this._structvectorModel = new StructVectorFinalModel(this.buffer)
-    this._structlistModel = new StructListFinalModel(this.buffer)
-    this._structsetModel = new StructSetFinalModel(this.buffer)
-    this._structmapModel = new StructMapFinalModel(this.buffer)
-    this._structhashModel = new StructHashFinalModel(this.buffer)
-    this._structhashexModel = new StructHashExFinalModel(this.buffer)
-    this._structemptyModel = new StructEmptyFinalModel(this.buffer)
+    this._StructSimpleModel = new StructSimpleFinalModel(this.buffer)
+    this._StructOptionalModel = new StructOptionalFinalModel(this.buffer)
+    this._StructNestedModel = new StructNestedFinalModel(this.buffer)
+    this._StructBytesModel = new StructBytesFinalModel(this.buffer)
+    this._StructArrayModel = new StructArrayFinalModel(this.buffer)
+    this._StructVectorModel = new StructVectorFinalModel(this.buffer)
+    this._StructListModel = new StructListFinalModel(this.buffer)
+    this._StructSetModel = new StructSetFinalModel(this.buffer)
+    this._StructMapModel = new StructMapFinalModel(this.buffer)
+    this._StructHashModel = new StructHashFinalModel(this.buffer)
+    this._StructHashExModel = new StructHashExFinalModel(this.buffer)
+    this._StructEmptyModel = new StructEmptyFinalModel(this.buffer)
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
   }
@@ -26517,8 +26470,8 @@ class FinalSender extends fbe.Sender {
    * @this {!FinalSender}
    * @returns {!StructSimpleModel} StructSimple model
    */
-  get structsimpleModel () {
-    return this._structsimpleModel
+  get StructSimpleModel () {
+    return this._StructSimpleModel
   }
 
   /**
@@ -26526,8 +26479,8 @@ class FinalSender extends fbe.Sender {
    * @this {!FinalSender}
    * @returns {!StructOptionalModel} StructOptional model
    */
-  get structoptionalModel () {
-    return this._structoptionalModel
+  get StructOptionalModel () {
+    return this._StructOptionalModel
   }
 
   /**
@@ -26535,8 +26488,8 @@ class FinalSender extends fbe.Sender {
    * @this {!FinalSender}
    * @returns {!StructNestedModel} StructNested model
    */
-  get structnestedModel () {
-    return this._structnestedModel
+  get StructNestedModel () {
+    return this._StructNestedModel
   }
 
   /**
@@ -26544,8 +26497,8 @@ class FinalSender extends fbe.Sender {
    * @this {!FinalSender}
    * @returns {!StructBytesModel} StructBytes model
    */
-  get structbytesModel () {
-    return this._structbytesModel
+  get StructBytesModel () {
+    return this._StructBytesModel
   }
 
   /**
@@ -26553,8 +26506,8 @@ class FinalSender extends fbe.Sender {
    * @this {!FinalSender}
    * @returns {!StructArrayModel} StructArray model
    */
-  get structarrayModel () {
-    return this._structarrayModel
+  get StructArrayModel () {
+    return this._StructArrayModel
   }
 
   /**
@@ -26562,8 +26515,8 @@ class FinalSender extends fbe.Sender {
    * @this {!FinalSender}
    * @returns {!StructVectorModel} StructVector model
    */
-  get structvectorModel () {
-    return this._structvectorModel
+  get StructVectorModel () {
+    return this._StructVectorModel
   }
 
   /**
@@ -26571,8 +26524,8 @@ class FinalSender extends fbe.Sender {
    * @this {!FinalSender}
    * @returns {!StructListModel} StructList model
    */
-  get structlistModel () {
-    return this._structlistModel
+  get StructListModel () {
+    return this._StructListModel
   }
 
   /**
@@ -26580,8 +26533,8 @@ class FinalSender extends fbe.Sender {
    * @this {!FinalSender}
    * @returns {!StructSetModel} StructSet model
    */
-  get structsetModel () {
-    return this._structsetModel
+  get StructSetModel () {
+    return this._StructSetModel
   }
 
   /**
@@ -26589,8 +26542,8 @@ class FinalSender extends fbe.Sender {
    * @this {!FinalSender}
    * @returns {!StructMapModel} StructMap model
    */
-  get structmapModel () {
-    return this._structmapModel
+  get StructMapModel () {
+    return this._StructMapModel
   }
 
   /**
@@ -26598,8 +26551,8 @@ class FinalSender extends fbe.Sender {
    * @this {!FinalSender}
    * @returns {!StructHashModel} StructHash model
    */
-  get structhashModel () {
-    return this._structhashModel
+  get StructHashModel () {
+    return this._StructHashModel
   }
 
   /**
@@ -26607,8 +26560,8 @@ class FinalSender extends fbe.Sender {
    * @this {!FinalSender}
    * @returns {!StructHashExModel} StructHashEx model
    */
-  get structhashexModel () {
-    return this._structhashexModel
+  get StructHashExModel () {
+    return this._StructHashExModel
   }
 
   /**
@@ -26616,8 +26569,8 @@ class FinalSender extends fbe.Sender {
    * @this {!FinalSender}
    * @returns {!StructEmptyModel} StructEmpty model
    */
-  get structemptyModel () {
-    return this._structemptyModel
+  get StructEmptyModel () {
+    return this._StructEmptyModel
   }
 
   // Send methods
@@ -26630,40 +26583,40 @@ class FinalSender extends fbe.Sender {
    */
   send (value) {
     if (value instanceof StructSimple) {
-      return this.send_structsimple(value)
+      return this.send_StructSimple(value)
     }
     if (value instanceof StructOptional) {
-      return this.send_structoptional(value)
+      return this.send_StructOptional(value)
     }
     if (value instanceof StructNested) {
-      return this.send_structnested(value)
+      return this.send_StructNested(value)
     }
     if (value instanceof StructBytes) {
-      return this.send_structbytes(value)
+      return this.send_StructBytes(value)
     }
     if (value instanceof StructArray) {
-      return this.send_structarray(value)
+      return this.send_StructArray(value)
     }
     if (value instanceof StructVector) {
-      return this.send_structvector(value)
+      return this.send_StructVector(value)
     }
     if (value instanceof StructList) {
-      return this.send_structlist(value)
+      return this.send_StructList(value)
     }
     if (value instanceof StructSet) {
-      return this.send_structset(value)
+      return this.send_StructSet(value)
     }
     if (value instanceof StructMap) {
-      return this.send_structmap(value)
+      return this.send_StructMap(value)
     }
     if (value instanceof StructHash) {
-      return this.send_structhash(value)
+      return this.send_StructHash(value)
     }
     if (value instanceof StructHashEx) {
-      return this.send_structhashex(value)
+      return this.send_StructHashEx(value)
     }
     if (value instanceof StructEmpty) {
-      return this.send_structempty(value)
+      return this.send_StructEmpty(value)
     }
     let result = 0
     result = this._protoSender.send(value)
@@ -26679,11 +26632,11 @@ class FinalSender extends fbe.Sender {
    * @param {!StructSimple} value StructSimple value to send
    * @returns {!number} Sent bytes
    */
-  send_structsimple (value) { // eslint-disable-line
+  send_StructSimple (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structsimpleModel.serialize(value)
+    let serialized = this.StructSimpleModel.serialize(value)
     console.assert((serialized > 0), 'test.StructSimple serialization failed!')
-    console.assert(this.structsimpleModel.verify(), 'test.StructSimple validation failed!')
+    console.assert(this.StructSimpleModel.verify(), 'test.StructSimple validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26700,11 +26653,11 @@ class FinalSender extends fbe.Sender {
    * @param {!StructOptional} value StructOptional value to send
    * @returns {!number} Sent bytes
    */
-  send_structoptional (value) { // eslint-disable-line
+  send_StructOptional (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structoptionalModel.serialize(value)
+    let serialized = this.StructOptionalModel.serialize(value)
     console.assert((serialized > 0), 'test.StructOptional serialization failed!')
-    console.assert(this.structoptionalModel.verify(), 'test.StructOptional validation failed!')
+    console.assert(this.StructOptionalModel.verify(), 'test.StructOptional validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26721,11 +26674,11 @@ class FinalSender extends fbe.Sender {
    * @param {!StructNested} value StructNested value to send
    * @returns {!number} Sent bytes
    */
-  send_structnested (value) { // eslint-disable-line
+  send_StructNested (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structnestedModel.serialize(value)
+    let serialized = this.StructNestedModel.serialize(value)
     console.assert((serialized > 0), 'test.StructNested serialization failed!')
-    console.assert(this.structnestedModel.verify(), 'test.StructNested validation failed!')
+    console.assert(this.StructNestedModel.verify(), 'test.StructNested validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26742,11 +26695,11 @@ class FinalSender extends fbe.Sender {
    * @param {!StructBytes} value StructBytes value to send
    * @returns {!number} Sent bytes
    */
-  send_structbytes (value) { // eslint-disable-line
+  send_StructBytes (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structbytesModel.serialize(value)
+    let serialized = this.StructBytesModel.serialize(value)
     console.assert((serialized > 0), 'test.StructBytes serialization failed!')
-    console.assert(this.structbytesModel.verify(), 'test.StructBytes validation failed!')
+    console.assert(this.StructBytesModel.verify(), 'test.StructBytes validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26763,11 +26716,11 @@ class FinalSender extends fbe.Sender {
    * @param {!StructArray} value StructArray value to send
    * @returns {!number} Sent bytes
    */
-  send_structarray (value) { // eslint-disable-line
+  send_StructArray (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structarrayModel.serialize(value)
+    let serialized = this.StructArrayModel.serialize(value)
     console.assert((serialized > 0), 'test.StructArray serialization failed!')
-    console.assert(this.structarrayModel.verify(), 'test.StructArray validation failed!')
+    console.assert(this.StructArrayModel.verify(), 'test.StructArray validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26784,11 +26737,11 @@ class FinalSender extends fbe.Sender {
    * @param {!StructVector} value StructVector value to send
    * @returns {!number} Sent bytes
    */
-  send_structvector (value) { // eslint-disable-line
+  send_StructVector (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structvectorModel.serialize(value)
+    let serialized = this.StructVectorModel.serialize(value)
     console.assert((serialized > 0), 'test.StructVector serialization failed!')
-    console.assert(this.structvectorModel.verify(), 'test.StructVector validation failed!')
+    console.assert(this.StructVectorModel.verify(), 'test.StructVector validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26805,11 +26758,11 @@ class FinalSender extends fbe.Sender {
    * @param {!StructList} value StructList value to send
    * @returns {!number} Sent bytes
    */
-  send_structlist (value) { // eslint-disable-line
+  send_StructList (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structlistModel.serialize(value)
+    let serialized = this.StructListModel.serialize(value)
     console.assert((serialized > 0), 'test.StructList serialization failed!')
-    console.assert(this.structlistModel.verify(), 'test.StructList validation failed!')
+    console.assert(this.StructListModel.verify(), 'test.StructList validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26826,11 +26779,11 @@ class FinalSender extends fbe.Sender {
    * @param {!StructSet} value StructSet value to send
    * @returns {!number} Sent bytes
    */
-  send_structset (value) { // eslint-disable-line
+  send_StructSet (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structsetModel.serialize(value)
+    let serialized = this.StructSetModel.serialize(value)
     console.assert((serialized > 0), 'test.StructSet serialization failed!')
-    console.assert(this.structsetModel.verify(), 'test.StructSet validation failed!')
+    console.assert(this.StructSetModel.verify(), 'test.StructSet validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26847,11 +26800,11 @@ class FinalSender extends fbe.Sender {
    * @param {!StructMap} value StructMap value to send
    * @returns {!number} Sent bytes
    */
-  send_structmap (value) { // eslint-disable-line
+  send_StructMap (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structmapModel.serialize(value)
+    let serialized = this.StructMapModel.serialize(value)
     console.assert((serialized > 0), 'test.StructMap serialization failed!')
-    console.assert(this.structmapModel.verify(), 'test.StructMap validation failed!')
+    console.assert(this.StructMapModel.verify(), 'test.StructMap validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26868,11 +26821,11 @@ class FinalSender extends fbe.Sender {
    * @param {!StructHash} value StructHash value to send
    * @returns {!number} Sent bytes
    */
-  send_structhash (value) { // eslint-disable-line
+  send_StructHash (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structhashModel.serialize(value)
+    let serialized = this.StructHashModel.serialize(value)
     console.assert((serialized > 0), 'test.StructHash serialization failed!')
-    console.assert(this.structhashModel.verify(), 'test.StructHash validation failed!')
+    console.assert(this.StructHashModel.verify(), 'test.StructHash validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26889,11 +26842,11 @@ class FinalSender extends fbe.Sender {
    * @param {!StructHashEx} value StructHashEx value to send
    * @returns {!number} Sent bytes
    */
-  send_structhashex (value) { // eslint-disable-line
+  send_StructHashEx (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structhashexModel.serialize(value)
+    let serialized = this.StructHashExModel.serialize(value)
     console.assert((serialized > 0), 'test.StructHashEx serialization failed!')
-    console.assert(this.structhashexModel.verify(), 'test.StructHashEx validation failed!')
+    console.assert(this.StructHashExModel.verify(), 'test.StructHashEx validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26910,11 +26863,11 @@ class FinalSender extends fbe.Sender {
    * @param {!StructEmpty} value StructEmpty value to send
    * @returns {!number} Sent bytes
    */
-  send_structempty (value) { // eslint-disable-line
+  send_StructEmpty (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structemptyModel.serialize(value)
+    let serialized = this.StructEmptyModel.serialize(value)
     console.assert((serialized > 0), 'test.StructEmpty serialization failed!')
-    console.assert(this.structemptyModel.verify(), 'test.StructEmpty validation failed!')
+    console.assert(this.StructEmptyModel.verify(), 'test.StructEmpty validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -26973,30 +26926,30 @@ class FinalReceiver extends fbe.Receiver {
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, true)
     this._protoReceiver = new proto.FinalReceiver(this.buffer)
-    this._structsimpleValue = new StructSimple()
-    this._structsimpleModel = new StructSimpleFinalModel()
-    this._structoptionalValue = new StructOptional()
-    this._structoptionalModel = new StructOptionalFinalModel()
-    this._structnestedValue = new StructNested()
-    this._structnestedModel = new StructNestedFinalModel()
-    this._structbytesValue = new StructBytes()
-    this._structbytesModel = new StructBytesFinalModel()
-    this._structarrayValue = new StructArray()
-    this._structarrayModel = new StructArrayFinalModel()
-    this._structvectorValue = new StructVector()
-    this._structvectorModel = new StructVectorFinalModel()
-    this._structlistValue = new StructList()
-    this._structlistModel = new StructListFinalModel()
-    this._structsetValue = new StructSet()
-    this._structsetModel = new StructSetFinalModel()
-    this._structmapValue = new StructMap()
-    this._structmapModel = new StructMapFinalModel()
-    this._structhashValue = new StructHash()
-    this._structhashModel = new StructHashFinalModel()
-    this._structhashexValue = new StructHashEx()
-    this._structhashexModel = new StructHashExFinalModel()
-    this._structemptyValue = new StructEmpty()
-    this._structemptyModel = new StructEmptyFinalModel()
+    this._StructSimpleValue = new StructSimple()
+    this._StructSimpleModel = new StructSimpleFinalModel()
+    this._StructOptionalValue = new StructOptional()
+    this._StructOptionalModel = new StructOptionalFinalModel()
+    this._StructNestedValue = new StructNested()
+    this._StructNestedModel = new StructNestedFinalModel()
+    this._StructBytesValue = new StructBytes()
+    this._StructBytesModel = new StructBytesFinalModel()
+    this._StructArrayValue = new StructArray()
+    this._StructArrayModel = new StructArrayFinalModel()
+    this._StructVectorValue = new StructVector()
+    this._StructVectorModel = new StructVectorFinalModel()
+    this._StructListValue = new StructList()
+    this._StructListModel = new StructListFinalModel()
+    this._StructSetValue = new StructSet()
+    this._StructSetModel = new StructSetFinalModel()
+    this._StructMapValue = new StructMap()
+    this._StructMapModel = new StructMapFinalModel()
+    this._StructHashValue = new StructHash()
+    this._StructHashModel = new StructHashFinalModel()
+    this._StructHashExValue = new StructHashEx()
+    this._StructHashExModel = new StructHashExFinalModel()
+    this._StructEmptyValue = new StructEmpty()
+    this._StructEmptyModel = new StructEmptyFinalModel()
     this.onReceiveLogHandler = this.onReceiveLog
   }
 
@@ -27027,84 +26980,84 @@ class FinalReceiver extends fbe.Receiver {
    * @this {!FinalReceiver}
    * @param {!StructSimple} value StructSimple received value
    */
-  onReceive_structsimple (value) {}  // eslint-disable-line
+  onReceive_StructSimple (value) {}  // eslint-disable-line
 
   /**
    * StructOptional receive handler
    * @this {!FinalReceiver}
    * @param {!StructOptional} value StructOptional received value
    */
-  onReceive_structoptional (value) {}  // eslint-disable-line
+  onReceive_StructOptional (value) {}  // eslint-disable-line
 
   /**
    * StructNested receive handler
    * @this {!FinalReceiver}
    * @param {!StructNested} value StructNested received value
    */
-  onReceive_structnested (value) {}  // eslint-disable-line
+  onReceive_StructNested (value) {}  // eslint-disable-line
 
   /**
    * StructBytes receive handler
    * @this {!FinalReceiver}
    * @param {!StructBytes} value StructBytes received value
    */
-  onReceive_structbytes (value) {}  // eslint-disable-line
+  onReceive_StructBytes (value) {}  // eslint-disable-line
 
   /**
    * StructArray receive handler
    * @this {!FinalReceiver}
    * @param {!StructArray} value StructArray received value
    */
-  onReceive_structarray (value) {}  // eslint-disable-line
+  onReceive_StructArray (value) {}  // eslint-disable-line
 
   /**
    * StructVector receive handler
    * @this {!FinalReceiver}
    * @param {!StructVector} value StructVector received value
    */
-  onReceive_structvector (value) {}  // eslint-disable-line
+  onReceive_StructVector (value) {}  // eslint-disable-line
 
   /**
    * StructList receive handler
    * @this {!FinalReceiver}
    * @param {!StructList} value StructList received value
    */
-  onReceive_structlist (value) {}  // eslint-disable-line
+  onReceive_StructList (value) {}  // eslint-disable-line
 
   /**
    * StructSet receive handler
    * @this {!FinalReceiver}
    * @param {!StructSet} value StructSet received value
    */
-  onReceive_structset (value) {}  // eslint-disable-line
+  onReceive_StructSet (value) {}  // eslint-disable-line
 
   /**
    * StructMap receive handler
    * @this {!FinalReceiver}
    * @param {!StructMap} value StructMap received value
    */
-  onReceive_structmap (value) {}  // eslint-disable-line
+  onReceive_StructMap (value) {}  // eslint-disable-line
 
   /**
    * StructHash receive handler
    * @this {!FinalReceiver}
    * @param {!StructHash} value StructHash received value
    */
-  onReceive_structhash (value) {}  // eslint-disable-line
+  onReceive_StructHash (value) {}  // eslint-disable-line
 
   /**
    * StructHashEx receive handler
    * @this {!FinalReceiver}
    * @param {!StructHashEx} value StructHashEx received value
    */
-  onReceive_structhashex (value) {}  // eslint-disable-line
+  onReceive_StructHashEx (value) {}  // eslint-disable-line
 
   /**
    * StructEmpty receive handler
    * @this {!FinalReceiver}
    * @param {!StructEmpty} value StructEmpty received value
    */
-  onReceive_structempty (value) {}  // eslint-disable-line
+  onReceive_StructEmpty (value) {}  // eslint-disable-line
 
   /**
    * test receive message handler
@@ -27119,194 +27072,194 @@ class FinalReceiver extends fbe.Receiver {
     switch (type) {
       case StructSimpleFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structsimpleModel.attachBuffer(buffer, offset)
-        console.assert(this._structsimpleModel.verify(), 'test.StructSimple validation failed!')
-        let deserialized = this._structsimpleModel.deserialize(this._structsimpleValue)
+        this._StructSimpleModel.attachBuffer(buffer, offset)
+        console.assert(this._StructSimpleModel.verify(), 'test.StructSimple validation failed!')
+        let deserialized = this._StructSimpleModel.deserialize(this._StructSimpleValue)
         console.assert((deserialized.size > 0), 'test.StructSimple deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structsimpleValue.toString())
+          this.onReceiveLog(this._StructSimpleValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structsimple(this._structsimpleValue)
+        this.onReceive_StructSimple(this._StructSimpleValue)
         return true
       }
       case StructOptionalFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structoptionalModel.attachBuffer(buffer, offset)
-        console.assert(this._structoptionalModel.verify(), 'test.StructOptional validation failed!')
-        let deserialized = this._structoptionalModel.deserialize(this._structoptionalValue)
+        this._StructOptionalModel.attachBuffer(buffer, offset)
+        console.assert(this._StructOptionalModel.verify(), 'test.StructOptional validation failed!')
+        let deserialized = this._StructOptionalModel.deserialize(this._StructOptionalValue)
         console.assert((deserialized.size > 0), 'test.StructOptional deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structoptionalValue.toString())
+          this.onReceiveLog(this._StructOptionalValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structoptional(this._structoptionalValue)
+        this.onReceive_StructOptional(this._StructOptionalValue)
         return true
       }
       case StructNestedFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structnestedModel.attachBuffer(buffer, offset)
-        console.assert(this._structnestedModel.verify(), 'test.StructNested validation failed!')
-        let deserialized = this._structnestedModel.deserialize(this._structnestedValue)
+        this._StructNestedModel.attachBuffer(buffer, offset)
+        console.assert(this._StructNestedModel.verify(), 'test.StructNested validation failed!')
+        let deserialized = this._StructNestedModel.deserialize(this._StructNestedValue)
         console.assert((deserialized.size > 0), 'test.StructNested deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structnestedValue.toString())
+          this.onReceiveLog(this._StructNestedValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structnested(this._structnestedValue)
+        this.onReceive_StructNested(this._StructNestedValue)
         return true
       }
       case StructBytesFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structbytesModel.attachBuffer(buffer, offset)
-        console.assert(this._structbytesModel.verify(), 'test.StructBytes validation failed!')
-        let deserialized = this._structbytesModel.deserialize(this._structbytesValue)
+        this._StructBytesModel.attachBuffer(buffer, offset)
+        console.assert(this._StructBytesModel.verify(), 'test.StructBytes validation failed!')
+        let deserialized = this._StructBytesModel.deserialize(this._StructBytesValue)
         console.assert((deserialized.size > 0), 'test.StructBytes deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structbytesValue.toString())
+          this.onReceiveLog(this._StructBytesValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structbytes(this._structbytesValue)
+        this.onReceive_StructBytes(this._StructBytesValue)
         return true
       }
       case StructArrayFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structarrayModel.attachBuffer(buffer, offset)
-        console.assert(this._structarrayModel.verify(), 'test.StructArray validation failed!')
-        let deserialized = this._structarrayModel.deserialize(this._structarrayValue)
+        this._StructArrayModel.attachBuffer(buffer, offset)
+        console.assert(this._StructArrayModel.verify(), 'test.StructArray validation failed!')
+        let deserialized = this._StructArrayModel.deserialize(this._StructArrayValue)
         console.assert((deserialized.size > 0), 'test.StructArray deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structarrayValue.toString())
+          this.onReceiveLog(this._StructArrayValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structarray(this._structarrayValue)
+        this.onReceive_StructArray(this._StructArrayValue)
         return true
       }
       case StructVectorFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structvectorModel.attachBuffer(buffer, offset)
-        console.assert(this._structvectorModel.verify(), 'test.StructVector validation failed!')
-        let deserialized = this._structvectorModel.deserialize(this._structvectorValue)
+        this._StructVectorModel.attachBuffer(buffer, offset)
+        console.assert(this._StructVectorModel.verify(), 'test.StructVector validation failed!')
+        let deserialized = this._StructVectorModel.deserialize(this._StructVectorValue)
         console.assert((deserialized.size > 0), 'test.StructVector deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structvectorValue.toString())
+          this.onReceiveLog(this._StructVectorValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structvector(this._structvectorValue)
+        this.onReceive_StructVector(this._StructVectorValue)
         return true
       }
       case StructListFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structlistModel.attachBuffer(buffer, offset)
-        console.assert(this._structlistModel.verify(), 'test.StructList validation failed!')
-        let deserialized = this._structlistModel.deserialize(this._structlistValue)
+        this._StructListModel.attachBuffer(buffer, offset)
+        console.assert(this._StructListModel.verify(), 'test.StructList validation failed!')
+        let deserialized = this._StructListModel.deserialize(this._StructListValue)
         console.assert((deserialized.size > 0), 'test.StructList deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structlistValue.toString())
+          this.onReceiveLog(this._StructListValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structlist(this._structlistValue)
+        this.onReceive_StructList(this._StructListValue)
         return true
       }
       case StructSetFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structsetModel.attachBuffer(buffer, offset)
-        console.assert(this._structsetModel.verify(), 'test.StructSet validation failed!')
-        let deserialized = this._structsetModel.deserialize(this._structsetValue)
+        this._StructSetModel.attachBuffer(buffer, offset)
+        console.assert(this._StructSetModel.verify(), 'test.StructSet validation failed!')
+        let deserialized = this._StructSetModel.deserialize(this._StructSetValue)
         console.assert((deserialized.size > 0), 'test.StructSet deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structsetValue.toString())
+          this.onReceiveLog(this._StructSetValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structset(this._structsetValue)
+        this.onReceive_StructSet(this._StructSetValue)
         return true
       }
       case StructMapFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structmapModel.attachBuffer(buffer, offset)
-        console.assert(this._structmapModel.verify(), 'test.StructMap validation failed!')
-        let deserialized = this._structmapModel.deserialize(this._structmapValue)
+        this._StructMapModel.attachBuffer(buffer, offset)
+        console.assert(this._StructMapModel.verify(), 'test.StructMap validation failed!')
+        let deserialized = this._StructMapModel.deserialize(this._StructMapValue)
         console.assert((deserialized.size > 0), 'test.StructMap deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structmapValue.toString())
+          this.onReceiveLog(this._StructMapValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structmap(this._structmapValue)
+        this.onReceive_StructMap(this._StructMapValue)
         return true
       }
       case StructHashFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structhashModel.attachBuffer(buffer, offset)
-        console.assert(this._structhashModel.verify(), 'test.StructHash validation failed!')
-        let deserialized = this._structhashModel.deserialize(this._structhashValue)
+        this._StructHashModel.attachBuffer(buffer, offset)
+        console.assert(this._StructHashModel.verify(), 'test.StructHash validation failed!')
+        let deserialized = this._StructHashModel.deserialize(this._StructHashValue)
         console.assert((deserialized.size > 0), 'test.StructHash deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structhashValue.toString())
+          this.onReceiveLog(this._StructHashValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structhash(this._structhashValue)
+        this.onReceive_StructHash(this._StructHashValue)
         return true
       }
       case StructHashExFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structhashexModel.attachBuffer(buffer, offset)
-        console.assert(this._structhashexModel.verify(), 'test.StructHashEx validation failed!')
-        let deserialized = this._structhashexModel.deserialize(this._structhashexValue)
+        this._StructHashExModel.attachBuffer(buffer, offset)
+        console.assert(this._StructHashExModel.verify(), 'test.StructHashEx validation failed!')
+        let deserialized = this._StructHashExModel.deserialize(this._StructHashExValue)
         console.assert((deserialized.size > 0), 'test.StructHashEx deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structhashexValue.toString())
+          this.onReceiveLog(this._StructHashExValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structhashex(this._structhashexValue)
+        this.onReceive_StructHashEx(this._StructHashExValue)
         return true
       }
       case StructEmptyFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structemptyModel.attachBuffer(buffer, offset)
-        console.assert(this._structemptyModel.verify(), 'test.StructEmpty validation failed!')
-        let deserialized = this._structemptyModel.deserialize(this._structemptyValue)
+        this._StructEmptyModel.attachBuffer(buffer, offset)
+        console.assert(this._StructEmptyModel.verify(), 'test.StructEmpty validation failed!')
+        let deserialized = this._StructEmptyModel.deserialize(this._StructEmptyValue)
         console.assert((deserialized.size > 0), 'test.StructEmpty deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structemptyValue.toString())
+          this.onReceiveLog(this._StructEmptyValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structempty(this._structemptyValue)
+        this.onReceive_StructEmpty(this._StructEmptyValue)
         return true
       }
     }
@@ -27345,43 +27298,42 @@ class FinalClient extends fbe.Client {
   constructor (sendBuffer = new fbe.WriteBuffer(), receiveBuffer = new fbe.WriteBuffer()) {
     super(sendBuffer, receiveBuffer, true)
     this._protoClient = new proto.FinalClient(this.sendBuffer, this.receiveBuffer)
-    this._structsimpleSenderModel = new StructSimpleFinalModel(this.sendBuffer)
-    this._structsimpleReceiverValue = new StructSimple()
-    this._structsimpleReceiverModel = new StructSimpleFinalModel()
-    this._structoptionalSenderModel = new StructOptionalFinalModel(this.sendBuffer)
-    this._structoptionalReceiverValue = new StructOptional()
-    this._structoptionalReceiverModel = new StructOptionalFinalModel()
-    this._structnestedSenderModel = new StructNestedFinalModel(this.sendBuffer)
-    this._structnestedReceiverValue = new StructNested()
-    this._structnestedReceiverModel = new StructNestedFinalModel()
-    this._structbytesSenderModel = new StructBytesFinalModel(this.sendBuffer)
-    this._structbytesReceiverValue = new StructBytes()
-    this._structbytesReceiverModel = new StructBytesFinalModel()
-    this._structarraySenderModel = new StructArrayFinalModel(this.sendBuffer)
-    this._structarrayReceiverValue = new StructArray()
-    this._structarrayReceiverModel = new StructArrayFinalModel()
-    this._structvectorSenderModel = new StructVectorFinalModel(this.sendBuffer)
-    this._structvectorReceiverValue = new StructVector()
-    this._structvectorReceiverModel = new StructVectorFinalModel()
-    this._structlistSenderModel = new StructListFinalModel(this.sendBuffer)
-    this._structlistReceiverValue = new StructList()
-    this._structlistReceiverModel = new StructListFinalModel()
-    this._structsetSenderModel = new StructSetFinalModel(this.sendBuffer)
-    this._structsetReceiverValue = new StructSet()
-    this._structsetReceiverModel = new StructSetFinalModel()
-    this._structmapSenderModel = new StructMapFinalModel(this.sendBuffer)
-    this._structmapReceiverValue = new StructMap()
-    this._structmapReceiverModel = new StructMapFinalModel()
-    this._structhashSenderModel = new StructHashFinalModel(this.sendBuffer)
-    this._structhashReceiverValue = new StructHash()
-    this._structhashReceiverModel = new StructHashFinalModel()
-    this._structhashexSenderModel = new StructHashExFinalModel(this.sendBuffer)
-    this._structhashexReceiverValue = new StructHashEx()
-    this._structhashexReceiverModel = new StructHashExFinalModel()
-    this._structemptySenderModel = new StructEmptyFinalModel(this.sendBuffer)
-    this._structemptyReceiverValue = new StructEmpty()
-    this._structemptyReceiverModel = new StructEmptyFinalModel()
-    this._timestamp = 0
+    this._StructSimpleSenderModel = new StructSimpleFinalModel(this.sendBuffer)
+    this._StructSimpleReceiverValue = new StructSimple()
+    this._StructSimpleReceiverModel = new StructSimpleFinalModel()
+    this._StructOptionalSenderModel = new StructOptionalFinalModel(this.sendBuffer)
+    this._StructOptionalReceiverValue = new StructOptional()
+    this._StructOptionalReceiverModel = new StructOptionalFinalModel()
+    this._StructNestedSenderModel = new StructNestedFinalModel(this.sendBuffer)
+    this._StructNestedReceiverValue = new StructNested()
+    this._StructNestedReceiverModel = new StructNestedFinalModel()
+    this._StructBytesSenderModel = new StructBytesFinalModel(this.sendBuffer)
+    this._StructBytesReceiverValue = new StructBytes()
+    this._StructBytesReceiverModel = new StructBytesFinalModel()
+    this._StructArraySenderModel = new StructArrayFinalModel(this.sendBuffer)
+    this._StructArrayReceiverValue = new StructArray()
+    this._StructArrayReceiverModel = new StructArrayFinalModel()
+    this._StructVectorSenderModel = new StructVectorFinalModel(this.sendBuffer)
+    this._StructVectorReceiverValue = new StructVector()
+    this._StructVectorReceiverModel = new StructVectorFinalModel()
+    this._StructListSenderModel = new StructListFinalModel(this.sendBuffer)
+    this._StructListReceiverValue = new StructList()
+    this._StructListReceiverModel = new StructListFinalModel()
+    this._StructSetSenderModel = new StructSetFinalModel(this.sendBuffer)
+    this._StructSetReceiverValue = new StructSet()
+    this._StructSetReceiverModel = new StructSetFinalModel()
+    this._StructMapSenderModel = new StructMapFinalModel(this.sendBuffer)
+    this._StructMapReceiverValue = new StructMap()
+    this._StructMapReceiverModel = new StructMapFinalModel()
+    this._StructHashSenderModel = new StructHashFinalModel(this.sendBuffer)
+    this._StructHashReceiverValue = new StructHash()
+    this._StructHashReceiverModel = new StructHashFinalModel()
+    this._StructHashExSenderModel = new StructHashExFinalModel(this.sendBuffer)
+    this._StructHashExReceiverValue = new StructHashEx()
+    this._StructHashExReceiverModel = new StructHashExFinalModel()
+    this._StructEmptySenderModel = new StructEmptyFinalModel(this.sendBuffer)
+    this._StructEmptyReceiverValue = new StructEmpty()
+    this._StructEmptyReceiverModel = new StructEmptyFinalModel()
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
     this.onReceiveLogHandler = this.onReceiveLog
@@ -27405,8 +27357,8 @@ class FinalClient extends fbe.Client {
    * @this {!FinalClient}
    * @returns {!StructSimpleModel} StructSimple sender model
    */
-  get structsimpleSenderModel () {
-    return this._structsimpleSenderModel
+  get StructSimpleSenderModel () {
+    return this._StructSimpleSenderModel
   }
 
   /**
@@ -27414,8 +27366,8 @@ class FinalClient extends fbe.Client {
    * @this {!FinalClient}
    * @returns {!StructOptionalModel} StructOptional sender model
    */
-  get structoptionalSenderModel () {
-    return this._structoptionalSenderModel
+  get StructOptionalSenderModel () {
+    return this._StructOptionalSenderModel
   }
 
   /**
@@ -27423,8 +27375,8 @@ class FinalClient extends fbe.Client {
    * @this {!FinalClient}
    * @returns {!StructNestedModel} StructNested sender model
    */
-  get structnestedSenderModel () {
-    return this._structnestedSenderModel
+  get StructNestedSenderModel () {
+    return this._StructNestedSenderModel
   }
 
   /**
@@ -27432,8 +27384,8 @@ class FinalClient extends fbe.Client {
    * @this {!FinalClient}
    * @returns {!StructBytesModel} StructBytes sender model
    */
-  get structbytesSenderModel () {
-    return this._structbytesSenderModel
+  get StructBytesSenderModel () {
+    return this._StructBytesSenderModel
   }
 
   /**
@@ -27441,8 +27393,8 @@ class FinalClient extends fbe.Client {
    * @this {!FinalClient}
    * @returns {!StructArrayModel} StructArray sender model
    */
-  get structarraySenderModel () {
-    return this._structarraySenderModel
+  get StructArraySenderModel () {
+    return this._StructArraySenderModel
   }
 
   /**
@@ -27450,8 +27402,8 @@ class FinalClient extends fbe.Client {
    * @this {!FinalClient}
    * @returns {!StructVectorModel} StructVector sender model
    */
-  get structvectorSenderModel () {
-    return this._structvectorSenderModel
+  get StructVectorSenderModel () {
+    return this._StructVectorSenderModel
   }
 
   /**
@@ -27459,8 +27411,8 @@ class FinalClient extends fbe.Client {
    * @this {!FinalClient}
    * @returns {!StructListModel} StructList sender model
    */
-  get structlistSenderModel () {
-    return this._structlistSenderModel
+  get StructListSenderModel () {
+    return this._StructListSenderModel
   }
 
   /**
@@ -27468,8 +27420,8 @@ class FinalClient extends fbe.Client {
    * @this {!FinalClient}
    * @returns {!StructSetModel} StructSet sender model
    */
-  get structsetSenderModel () {
-    return this._structsetSenderModel
+  get StructSetSenderModel () {
+    return this._StructSetSenderModel
   }
 
   /**
@@ -27477,8 +27429,8 @@ class FinalClient extends fbe.Client {
    * @this {!FinalClient}
    * @returns {!StructMapModel} StructMap sender model
    */
-  get structmapSenderModel () {
-    return this._structmapSenderModel
+  get StructMapSenderModel () {
+    return this._StructMapSenderModel
   }
 
   /**
@@ -27486,8 +27438,8 @@ class FinalClient extends fbe.Client {
    * @this {!FinalClient}
    * @returns {!StructHashModel} StructHash sender model
    */
-  get structhashSenderModel () {
-    return this._structhashSenderModel
+  get StructHashSenderModel () {
+    return this._StructHashSenderModel
   }
 
   /**
@@ -27495,8 +27447,8 @@ class FinalClient extends fbe.Client {
    * @this {!FinalClient}
    * @returns {!StructHashExModel} StructHashEx sender model
    */
-  get structhashexSenderModel () {
-    return this._structhashexSenderModel
+  get StructHashExSenderModel () {
+    return this._StructHashExSenderModel
   }
 
   /**
@@ -27504,54 +27456,8 @@ class FinalClient extends fbe.Client {
    * @this {!FinalClient}
    * @returns {!StructEmptyModel} StructEmpty sender model
    */
-  get structemptySenderModel () {
-    return this._structemptySenderModel
-  }
-
-  // Reset and watchdog methods
-
-  /**
-   * Reset the client
-   * @this {!FinalClient}
-   */
-  reset () {
-    super.reset()
-    this.resetRequests()
-  }
-
-  /**
-   * Watchdog for timeouts
-   * @this {!FinalClient}
-   * @param {!number} utc UTC timestamp
-   */
-  watchdog (utc) {
-    this.watchdogRequests(utc)
-  }
-
-  // Request methods
-
-  /**
-   * Request value
-   * @this {!FinalClient}
-   * @param {!object} value Value to request
-   * @param {!number} timeout Timeout in milliseconds (default is 0)
-   * @returns {Promise} Response promise
-   */
-  request (value, timeout = 0) {
-    let result = null
-    result = this._protoClient.request(value, timeout)
-    if (result != null) {
-      return result
-    }
-    return null
-  }
-
-  /**
-   * Reset client requests
-   * @this {!FinalClient}
-   */
-  resetRequests () {
-    this._protoClient.resetRequests()
+  get StructEmptySenderModel () {
+    return this._StructEmptySenderModel
   }
 
   // Send methods
@@ -27564,40 +27470,40 @@ class FinalClient extends fbe.Client {
    */
   send (value) {
     if (value instanceof StructSimple) {
-      return this.send_structsimple(value)
+      return this.send_StructSimple(value)
     }
     if (value instanceof StructOptional) {
-      return this.send_structoptional(value)
+      return this.send_StructOptional(value)
     }
     if (value instanceof StructNested) {
-      return this.send_structnested(value)
+      return this.send_StructNested(value)
     }
     if (value instanceof StructBytes) {
-      return this.send_structbytes(value)
+      return this.send_StructBytes(value)
     }
     if (value instanceof StructArray) {
-      return this.send_structarray(value)
+      return this.send_StructArray(value)
     }
     if (value instanceof StructVector) {
-      return this.send_structvector(value)
+      return this.send_StructVector(value)
     }
     if (value instanceof StructList) {
-      return this.send_structlist(value)
+      return this.send_StructList(value)
     }
     if (value instanceof StructSet) {
-      return this.send_structset(value)
+      return this.send_StructSet(value)
     }
     if (value instanceof StructMap) {
-      return this.send_structmap(value)
+      return this.send_StructMap(value)
     }
     if (value instanceof StructHash) {
-      return this.send_structhash(value)
+      return this.send_StructHash(value)
     }
     if (value instanceof StructHashEx) {
-      return this.send_structhashex(value)
+      return this.send_StructHashEx(value)
     }
     if (value instanceof StructEmpty) {
-      return this.send_structempty(value)
+      return this.send_StructEmpty(value)
     }
     let result = 0
     result = this._protoClient.send(value)
@@ -27613,11 +27519,11 @@ class FinalClient extends fbe.Client {
    * @param {!StructSimple} value StructSimple value to send
    * @returns {!number} Sent bytes
    */
-  send_structsimple (value) { // eslint-disable-line
+  send_StructSimple (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structsimpleSenderModel.serialize(value)
+    let serialized = this.StructSimpleSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructSimple serialization failed!')
-    console.assert(this.structsimpleSenderModel.verify(), 'test.StructSimple validation failed!')
+    console.assert(this.StructSimpleSenderModel.verify(), 'test.StructSimple validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -27634,11 +27540,11 @@ class FinalClient extends fbe.Client {
    * @param {!StructOptional} value StructOptional value to send
    * @returns {!number} Sent bytes
    */
-  send_structoptional (value) { // eslint-disable-line
+  send_StructOptional (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structoptionalSenderModel.serialize(value)
+    let serialized = this.StructOptionalSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructOptional serialization failed!')
-    console.assert(this.structoptionalSenderModel.verify(), 'test.StructOptional validation failed!')
+    console.assert(this.StructOptionalSenderModel.verify(), 'test.StructOptional validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -27655,11 +27561,11 @@ class FinalClient extends fbe.Client {
    * @param {!StructNested} value StructNested value to send
    * @returns {!number} Sent bytes
    */
-  send_structnested (value) { // eslint-disable-line
+  send_StructNested (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structnestedSenderModel.serialize(value)
+    let serialized = this.StructNestedSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructNested serialization failed!')
-    console.assert(this.structnestedSenderModel.verify(), 'test.StructNested validation failed!')
+    console.assert(this.StructNestedSenderModel.verify(), 'test.StructNested validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -27676,11 +27582,11 @@ class FinalClient extends fbe.Client {
    * @param {!StructBytes} value StructBytes value to send
    * @returns {!number} Sent bytes
    */
-  send_structbytes (value) { // eslint-disable-line
+  send_StructBytes (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structbytesSenderModel.serialize(value)
+    let serialized = this.StructBytesSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructBytes serialization failed!')
-    console.assert(this.structbytesSenderModel.verify(), 'test.StructBytes validation failed!')
+    console.assert(this.StructBytesSenderModel.verify(), 'test.StructBytes validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -27697,11 +27603,11 @@ class FinalClient extends fbe.Client {
    * @param {!StructArray} value StructArray value to send
    * @returns {!number} Sent bytes
    */
-  send_structarray (value) { // eslint-disable-line
+  send_StructArray (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structarraySenderModel.serialize(value)
+    let serialized = this.StructArraySenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructArray serialization failed!')
-    console.assert(this.structarraySenderModel.verify(), 'test.StructArray validation failed!')
+    console.assert(this.StructArraySenderModel.verify(), 'test.StructArray validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -27718,11 +27624,11 @@ class FinalClient extends fbe.Client {
    * @param {!StructVector} value StructVector value to send
    * @returns {!number} Sent bytes
    */
-  send_structvector (value) { // eslint-disable-line
+  send_StructVector (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structvectorSenderModel.serialize(value)
+    let serialized = this.StructVectorSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructVector serialization failed!')
-    console.assert(this.structvectorSenderModel.verify(), 'test.StructVector validation failed!')
+    console.assert(this.StructVectorSenderModel.verify(), 'test.StructVector validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -27739,11 +27645,11 @@ class FinalClient extends fbe.Client {
    * @param {!StructList} value StructList value to send
    * @returns {!number} Sent bytes
    */
-  send_structlist (value) { // eslint-disable-line
+  send_StructList (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structlistSenderModel.serialize(value)
+    let serialized = this.StructListSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructList serialization failed!')
-    console.assert(this.structlistSenderModel.verify(), 'test.StructList validation failed!')
+    console.assert(this.StructListSenderModel.verify(), 'test.StructList validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -27760,11 +27666,11 @@ class FinalClient extends fbe.Client {
    * @param {!StructSet} value StructSet value to send
    * @returns {!number} Sent bytes
    */
-  send_structset (value) { // eslint-disable-line
+  send_StructSet (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structsetSenderModel.serialize(value)
+    let serialized = this.StructSetSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructSet serialization failed!')
-    console.assert(this.structsetSenderModel.verify(), 'test.StructSet validation failed!')
+    console.assert(this.StructSetSenderModel.verify(), 'test.StructSet validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -27781,11 +27687,11 @@ class FinalClient extends fbe.Client {
    * @param {!StructMap} value StructMap value to send
    * @returns {!number} Sent bytes
    */
-  send_structmap (value) { // eslint-disable-line
+  send_StructMap (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structmapSenderModel.serialize(value)
+    let serialized = this.StructMapSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructMap serialization failed!')
-    console.assert(this.structmapSenderModel.verify(), 'test.StructMap validation failed!')
+    console.assert(this.StructMapSenderModel.verify(), 'test.StructMap validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -27802,11 +27708,11 @@ class FinalClient extends fbe.Client {
    * @param {!StructHash} value StructHash value to send
    * @returns {!number} Sent bytes
    */
-  send_structhash (value) { // eslint-disable-line
+  send_StructHash (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structhashSenderModel.serialize(value)
+    let serialized = this.StructHashSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructHash serialization failed!')
-    console.assert(this.structhashSenderModel.verify(), 'test.StructHash validation failed!')
+    console.assert(this.StructHashSenderModel.verify(), 'test.StructHash validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -27823,11 +27729,11 @@ class FinalClient extends fbe.Client {
    * @param {!StructHashEx} value StructHashEx value to send
    * @returns {!number} Sent bytes
    */
-  send_structhashex (value) { // eslint-disable-line
+  send_StructHashEx (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structhashexSenderModel.serialize(value)
+    let serialized = this.StructHashExSenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructHashEx serialization failed!')
-    console.assert(this.structhashexSenderModel.verify(), 'test.StructHashEx validation failed!')
+    console.assert(this.StructHashExSenderModel.verify(), 'test.StructHashEx validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -27844,11 +27750,11 @@ class FinalClient extends fbe.Client {
    * @param {!StructEmpty} value StructEmpty value to send
    * @returns {!number} Sent bytes
    */
-  send_structempty (value) { // eslint-disable-line
+  send_StructEmpty (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.structemptySenderModel.serialize(value)
+    let serialized = this.StructEmptySenderModel.serialize(value)
     console.assert((serialized > 0), 'test.StructEmpty serialization failed!')
-    console.assert(this.structemptySenderModel.verify(), 'test.StructEmpty validation failed!')
+    console.assert(this.StructEmptySenderModel.verify(), 'test.StructEmpty validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -27899,84 +27805,84 @@ class FinalClient extends fbe.Client {
    * @this {!FinalClient}
    * @param {!StructSimple} value StructSimple received value
    */
-  onReceive_structsimple (value) {}  // eslint-disable-line
+  onReceive_StructSimple (value) {}  // eslint-disable-line
 
   /**
    * StructOptional receive handler
    * @this {!FinalClient}
    * @param {!StructOptional} value StructOptional received value
    */
-  onReceive_structoptional (value) {}  // eslint-disable-line
+  onReceive_StructOptional (value) {}  // eslint-disable-line
 
   /**
    * StructNested receive handler
    * @this {!FinalClient}
    * @param {!StructNested} value StructNested received value
    */
-  onReceive_structnested (value) {}  // eslint-disable-line
+  onReceive_StructNested (value) {}  // eslint-disable-line
 
   /**
    * StructBytes receive handler
    * @this {!FinalClient}
    * @param {!StructBytes} value StructBytes received value
    */
-  onReceive_structbytes (value) {}  // eslint-disable-line
+  onReceive_StructBytes (value) {}  // eslint-disable-line
 
   /**
    * StructArray receive handler
    * @this {!FinalClient}
    * @param {!StructArray} value StructArray received value
    */
-  onReceive_structarray (value) {}  // eslint-disable-line
+  onReceive_StructArray (value) {}  // eslint-disable-line
 
   /**
    * StructVector receive handler
    * @this {!FinalClient}
    * @param {!StructVector} value StructVector received value
    */
-  onReceive_structvector (value) {}  // eslint-disable-line
+  onReceive_StructVector (value) {}  // eslint-disable-line
 
   /**
    * StructList receive handler
    * @this {!FinalClient}
    * @param {!StructList} value StructList received value
    */
-  onReceive_structlist (value) {}  // eslint-disable-line
+  onReceive_StructList (value) {}  // eslint-disable-line
 
   /**
    * StructSet receive handler
    * @this {!FinalClient}
    * @param {!StructSet} value StructSet received value
    */
-  onReceive_structset (value) {}  // eslint-disable-line
+  onReceive_StructSet (value) {}  // eslint-disable-line
 
   /**
    * StructMap receive handler
    * @this {!FinalClient}
    * @param {!StructMap} value StructMap received value
    */
-  onReceive_structmap (value) {}  // eslint-disable-line
+  onReceive_StructMap (value) {}  // eslint-disable-line
 
   /**
    * StructHash receive handler
    * @this {!FinalClient}
    * @param {!StructHash} value StructHash received value
    */
-  onReceive_structhash (value) {}  // eslint-disable-line
+  onReceive_StructHash (value) {}  // eslint-disable-line
 
   /**
    * StructHashEx receive handler
    * @this {!FinalClient}
    * @param {!StructHashEx} value StructHashEx received value
    */
-  onReceive_structhashex (value) {}  // eslint-disable-line
+  onReceive_StructHashEx (value) {}  // eslint-disable-line
 
   /**
    * StructEmpty receive handler
    * @this {!FinalClient}
    * @param {!StructEmpty} value StructEmpty received value
    */
-  onReceive_structempty (value) {}  // eslint-disable-line
+  onReceive_StructEmpty (value) {}  // eslint-disable-line
 
   /**
    * test receive message handler
@@ -27991,194 +27897,194 @@ class FinalClient extends fbe.Client {
     switch (type) {
       case StructSimpleFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structsimpleReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structsimpleReceiverModel.verify(), 'test.StructSimple validation failed!')
-        let deserialized = this._structsimpleReceiverModel.deserialize(this._structsimpleReceiverValue)
+        this._StructSimpleReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructSimpleReceiverModel.verify(), 'test.StructSimple validation failed!')
+        let deserialized = this._StructSimpleReceiverModel.deserialize(this._StructSimpleReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructSimple deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structsimpleReceiverValue.toString())
+          this.onReceiveLog(this._StructSimpleReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structsimple(this._structsimpleReceiverValue)
+        this.onReceive_StructSimple(this._StructSimpleReceiverValue)
         return true
       }
       case StructOptionalFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structoptionalReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structoptionalReceiverModel.verify(), 'test.StructOptional validation failed!')
-        let deserialized = this._structoptionalReceiverModel.deserialize(this._structoptionalReceiverValue)
+        this._StructOptionalReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructOptionalReceiverModel.verify(), 'test.StructOptional validation failed!')
+        let deserialized = this._StructOptionalReceiverModel.deserialize(this._StructOptionalReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructOptional deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structoptionalReceiverValue.toString())
+          this.onReceiveLog(this._StructOptionalReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structoptional(this._structoptionalReceiverValue)
+        this.onReceive_StructOptional(this._StructOptionalReceiverValue)
         return true
       }
       case StructNestedFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structnestedReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structnestedReceiverModel.verify(), 'test.StructNested validation failed!')
-        let deserialized = this._structnestedReceiverModel.deserialize(this._structnestedReceiverValue)
+        this._StructNestedReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructNestedReceiverModel.verify(), 'test.StructNested validation failed!')
+        let deserialized = this._StructNestedReceiverModel.deserialize(this._StructNestedReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructNested deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structnestedReceiverValue.toString())
+          this.onReceiveLog(this._StructNestedReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structnested(this._structnestedReceiverValue)
+        this.onReceive_StructNested(this._StructNestedReceiverValue)
         return true
       }
       case StructBytesFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structbytesReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structbytesReceiverModel.verify(), 'test.StructBytes validation failed!')
-        let deserialized = this._structbytesReceiverModel.deserialize(this._structbytesReceiverValue)
+        this._StructBytesReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructBytesReceiverModel.verify(), 'test.StructBytes validation failed!')
+        let deserialized = this._StructBytesReceiverModel.deserialize(this._StructBytesReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructBytes deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structbytesReceiverValue.toString())
+          this.onReceiveLog(this._StructBytesReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structbytes(this._structbytesReceiverValue)
+        this.onReceive_StructBytes(this._StructBytesReceiverValue)
         return true
       }
       case StructArrayFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structarrayReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structarrayReceiverModel.verify(), 'test.StructArray validation failed!')
-        let deserialized = this._structarrayReceiverModel.deserialize(this._structarrayReceiverValue)
+        this._StructArrayReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructArrayReceiverModel.verify(), 'test.StructArray validation failed!')
+        let deserialized = this._StructArrayReceiverModel.deserialize(this._StructArrayReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructArray deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structarrayReceiverValue.toString())
+          this.onReceiveLog(this._StructArrayReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structarray(this._structarrayReceiverValue)
+        this.onReceive_StructArray(this._StructArrayReceiverValue)
         return true
       }
       case StructVectorFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structvectorReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structvectorReceiverModel.verify(), 'test.StructVector validation failed!')
-        let deserialized = this._structvectorReceiverModel.deserialize(this._structvectorReceiverValue)
+        this._StructVectorReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructVectorReceiverModel.verify(), 'test.StructVector validation failed!')
+        let deserialized = this._StructVectorReceiverModel.deserialize(this._StructVectorReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructVector deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structvectorReceiverValue.toString())
+          this.onReceiveLog(this._StructVectorReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structvector(this._structvectorReceiverValue)
+        this.onReceive_StructVector(this._StructVectorReceiverValue)
         return true
       }
       case StructListFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structlistReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structlistReceiverModel.verify(), 'test.StructList validation failed!')
-        let deserialized = this._structlistReceiverModel.deserialize(this._structlistReceiverValue)
+        this._StructListReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructListReceiverModel.verify(), 'test.StructList validation failed!')
+        let deserialized = this._StructListReceiverModel.deserialize(this._StructListReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructList deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structlistReceiverValue.toString())
+          this.onReceiveLog(this._StructListReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structlist(this._structlistReceiverValue)
+        this.onReceive_StructList(this._StructListReceiverValue)
         return true
       }
       case StructSetFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structsetReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structsetReceiverModel.verify(), 'test.StructSet validation failed!')
-        let deserialized = this._structsetReceiverModel.deserialize(this._structsetReceiverValue)
+        this._StructSetReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructSetReceiverModel.verify(), 'test.StructSet validation failed!')
+        let deserialized = this._StructSetReceiverModel.deserialize(this._StructSetReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructSet deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structsetReceiverValue.toString())
+          this.onReceiveLog(this._StructSetReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structset(this._structsetReceiverValue)
+        this.onReceive_StructSet(this._StructSetReceiverValue)
         return true
       }
       case StructMapFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structmapReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structmapReceiverModel.verify(), 'test.StructMap validation failed!')
-        let deserialized = this._structmapReceiverModel.deserialize(this._structmapReceiverValue)
+        this._StructMapReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructMapReceiverModel.verify(), 'test.StructMap validation failed!')
+        let deserialized = this._StructMapReceiverModel.deserialize(this._StructMapReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructMap deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structmapReceiverValue.toString())
+          this.onReceiveLog(this._StructMapReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structmap(this._structmapReceiverValue)
+        this.onReceive_StructMap(this._StructMapReceiverValue)
         return true
       }
       case StructHashFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structhashReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structhashReceiverModel.verify(), 'test.StructHash validation failed!')
-        let deserialized = this._structhashReceiverModel.deserialize(this._structhashReceiverValue)
+        this._StructHashReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructHashReceiverModel.verify(), 'test.StructHash validation failed!')
+        let deserialized = this._StructHashReceiverModel.deserialize(this._StructHashReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructHash deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structhashReceiverValue.toString())
+          this.onReceiveLog(this._StructHashReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structhash(this._structhashReceiverValue)
+        this.onReceive_StructHash(this._StructHashReceiverValue)
         return true
       }
       case StructHashExFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structhashexReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structhashexReceiverModel.verify(), 'test.StructHashEx validation failed!')
-        let deserialized = this._structhashexReceiverModel.deserialize(this._structhashexReceiverValue)
+        this._StructHashExReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructHashExReceiverModel.verify(), 'test.StructHashEx validation failed!')
+        let deserialized = this._StructHashExReceiverModel.deserialize(this._StructHashExReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructHashEx deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structhashexReceiverValue.toString())
+          this.onReceiveLog(this._StructHashExReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structhashex(this._structhashexReceiverValue)
+        this.onReceive_StructHashEx(this._StructHashExReceiverValue)
         return true
       }
       case StructEmptyFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._structemptyReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._structemptyReceiverModel.verify(), 'test.StructEmpty validation failed!')
-        let deserialized = this._structemptyReceiverModel.deserialize(this._structemptyReceiverValue)
+        this._StructEmptyReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._StructEmptyReceiverModel.verify(), 'test.StructEmpty validation failed!')
+        let deserialized = this._StructEmptyReceiverModel.deserialize(this._StructEmptyReceiverValue)
         console.assert((deserialized.size > 0), 'test.StructEmpty deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._structemptyReceiverValue.toString())
+          this.onReceiveLog(this._StructEmptyReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_structempty(this._structemptyReceiverValue)
+        this.onReceive_StructEmpty(this._StructEmptyReceiverValue)
         return true
       }
     }

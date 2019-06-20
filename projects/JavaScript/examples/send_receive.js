@@ -15,9 +15,9 @@ class MySender extends proto.Sender {
 }
 
 class MyReceiver extends proto.Receiver {
-  onReceive_order (value) {} // eslint-disable-line
-  onReceive_balance (value) {} // eslint-disable-line
-  onReceive_account (value) {} // eslint-disable-line
+  onReceive_Order (value) {} // eslint-disable-line
+  onReceive_Balance (value) {} // eslint-disable-line
+  onReceive_Account (value) {} // eslint-disable-line
 
   onReceiveLog (message) {
     console.log(`onReceive: ${message}`)

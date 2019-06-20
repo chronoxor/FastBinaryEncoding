@@ -12216,7 +12216,7 @@ std::string GeneratorJavaScript::ConvertConstant(const std::string& type, const 
         return "undefined";
     else if (value == "min")
     {
-        if ((type == "byte") || (type == "uint8") || (type == "uint16") || (type == "uint32") || (type == "uint64"))
+        if ((type == "byte") || (type == "uint8") || (type == "uint16") || (type == "uint32"))
             return "0";
         else if (type == "int8")
             return "-128";
@@ -12226,6 +12226,8 @@ std::string GeneratorJavaScript::ConvertConstant(const std::string& type, const 
             return "-2147483648";
         else if (type == "int64")
             return ConvertConstantInt64("-9223372036854775808");
+        else if (type == "uint64")
+            return ConvertConstantUInt64("0");
 
         yyerror("Unsupported type " + type + " for 'min' constant");
         return "";

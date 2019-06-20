@@ -21,29 +21,6 @@ const utf8encode = utf8.utf8encode
 const utf8decode = utf8.utf8decode
 
 /**
- * Fast Binary Encoding deferred promise
- */
-class DeferredPromise {
-  /**
-   * Initialize buffer
-   * @constructor
-   */
-  constructor () {
-    this._promise = new Promise((resolve, reject) => {
-      // Assign the resolve and reject functions to `this` making them usable on the class instance
-      this.resolve = resolve
-      this.reject = reject
-    })
-    // Bind `then` and `catch` to implement the same interface as Promise
-    this.then = this._promise.then.bind(this._promise)
-    this.catch = this._promise.catch.bind(this._promise)
-    this[Symbol.toStringTag] = 'Promise'
-  }
-}
-
-exports.DeferredPromise = DeferredPromise
-
-/**
  * Fast Binary Encoding base buffer
  */
 class BaseBuffer {

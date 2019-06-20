@@ -25,11 +25,11 @@ class MyReceiver extends proto.Receiver {
   }
 
   // noinspection JSUnusedLocalSymbols
-  onReceive_order (value) { this._order = true } // eslint-disable-line
+  onReceive_Order (value) { this._order = true } // eslint-disable-line
   // noinspection JSUnusedLocalSymbols
-  onReceive_balance (value) { this._balance = true } // eslint-disable-line
+  onReceive_Balance (value) { this._balance = true } // eslint-disable-line
   // noinspection JSUnusedLocalSymbols
-  onReceive_account (value) { this._account = true } // eslint-disable-line
+  onReceive_Account (value) { this._account = true } // eslint-disable-line
 }
 
 function sendAndReceive (index1, index2) {

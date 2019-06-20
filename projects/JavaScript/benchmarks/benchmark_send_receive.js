@@ -66,9 +66,9 @@ class MyReceiver extends proto.Receiver {
     return this._log_size
   }
 
-  onReceive_order (value) {} // eslint-disable-line
-  onReceive_balance (value) {} // eslint-disable-line
-  onReceive_account (value) {} // eslint-disable-line
+  onReceive_Order (value) {} // eslint-disable-line
+  onReceive_Balance (value) {} // eslint-disable-line
+  onReceive_Account (value) {} // eslint-disable-line
 
   onReceiveLog (message) {
     this._log_size += message.length
