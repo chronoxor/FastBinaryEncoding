@@ -8458,7 +8458,10 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLine();
                     WriteLineIndent("// Register the request");
                     WriteLineIndent("_requests_by_id_" + response_field + ".insert(std::make_pair(value.id, std::make_tuple(this->_timestamp, timeout * 1000000, std::move(promise))));");
+                    WriteLineIndent("if (timeout > 0)");
+                    Indent(1);
                     WriteLineIndent("_requests_by_timestamp_" + response_field + ".insert(std::make_pair(this->_timestamp, value.id));");
+                    Indent(-1);
                     Indent(-1);
                     WriteLineIndent("}");
                     WriteLineIndent("else");

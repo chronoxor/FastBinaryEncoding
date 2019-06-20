@@ -25651,6 +25651,9 @@ class Client extends fbe.Client {
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
     this.onReceiveLogHandler = this.onReceiveLog
+    this._timestamp = 0
+    this._requests_by_id = new Map()
+    this._requests_by_timestamp = new Map()
   }
 
   // Imported clients
@@ -25772,6 +25775,26 @@ class Client extends fbe.Client {
    */
   get StructEmptySenderModel () {
     return this._StructEmptySenderModel
+  }
+
+  // Reset and watchdog methods
+
+  /**
+   * Reset the client
+   * @this {!Client}
+   */
+  reset () {
+    super.reset()
+    this.resetRequests()
+  }
+
+  /**
+   * Watchdog for timeouts
+   * @this {!Client}
+   * @param {!number} utc UTC timestamp
+   */
+  watchdog (utc) {
+    this.watchdogRequests(utc)
   }
 
   // Send methods
@@ -26419,6 +26442,123 @@ class Client extends fbe.Client {
   set onReceiveLogHandler (handler) { // eslint-disable-line
     this.onReceiveLog = handler
     this._protoClient.onReceiveLogHandler = handler
+  }
+
+  // Request methods
+
+  /**
+   * Request value
+   * @this {!Client}
+   * @param {!object} value Value to request
+   * @param {!number} timeout Timeout in milliseconds (default is 0)
+   * @returns {Promise} Response promise
+   */
+  request (value, timeout = 0) {
+    let promise = new fbe.DeferredPromise()
+    let current = Date.now()
+
+    // Send the request message
+    let serialized = this.send(value)
+    if (serialized > 0) {
+      // Calculate unique timestamp
+      this._timestamp = (current <= this._timestamp) ? this._timestamp + 1 : current
+
+      // Register the request
+      this._requests_by_id[value.id] = [this._timestamp, timeout * 1000000, promise]
+      if (timeout > 0) {
+        this._requests_by_timestamp[this._timestamp] = value.id
+      }
+    } else {
+      promise.reject(new Error('Serialization failed!'))
+    }
+
+    return promise
+  }
+
+  /**
+   * Response value
+   * @this {!Client}
+   * @param {!object} value Value to response
+   * @returns {!boolean} Response handle flag
+   */
+  response (value) {
+    let item = this._requests_by_id.get(value.id)
+    if (item != null) {
+      let timestamp = item[0]
+      let promise = item[2]
+      promise.resolve(value)
+      this._requests_by_id.delete(value.id)
+      this._requests_by_timestamp.delete(timestamp)
+      return true
+    }
+
+    // noinspection RedundantIfStatementJS
+    if (this._protoClient.response(value)) {
+      return true
+    }
+
+    return false
+  }
+
+  /**
+   * Reject value
+   * @this {!Client}
+   * @param {!object} value Value to reject
+   * @returns {!boolean} Reject handle flag
+   */
+  reject (value) {
+    let item = this._requests_by_id.get(value.id)
+    if (item != null) {
+      let timestamp = item[0]
+      let promise = item[2]
+      promise.reject(value)
+      this._requests_by_id.delete(value.id)
+      this._requests_by_timestamp.delete(timestamp)
+      return true
+    }
+
+    // noinspection RedundantIfStatementJS
+    if (this._protoClient.reject(value)) {
+      return true
+    }
+
+    return false
+  }
+
+  /**
+   * Reset client requests
+   * @this {!Client}
+   */
+  resetRequests () {
+    this._protoClient.resetRequests()
+
+    for (let [, value] of this._requests_by_id) {
+      value[2].reject(new Error('Reset client!'))
+    }
+    this._requests_by_id.clear()
+    this._requests_by_timestamp.clear()
+  }
+
+  /**
+   * Watchdog client requests for timeouts
+   * @this {!Client}
+   * @param {!number} utc UTC timestamp in milliseconds
+   */
+  watchdogRequests (utc) {
+    this._protoClient.watchdogRequests(utc)
+
+    for (let [, value] of this._requests_by_timestamp) {
+      let item = this._requests_by_id[value]
+      let id = value
+      let timestamp = item[0]
+      let timespan = item[1]
+      if ((timestamp + timespan) <= utc) {
+        let promise = item[2]
+        promise.reject(new Error('Timeout!'))
+        this._requests_by_id.delete(id)
+        this._requests_by_timestamp.delete(timestamp)
+      }
+    }
   }
 }
 
@@ -27337,6 +27477,9 @@ class FinalClient extends fbe.Client {
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
     this.onReceiveLogHandler = this.onReceiveLog
+    this._timestamp = 0
+    this._requests_by_id = new Map()
+    this._requests_by_timestamp = new Map()
   }
 
   // Imported clients
@@ -27458,6 +27601,26 @@ class FinalClient extends fbe.Client {
    */
   get StructEmptySenderModel () {
     return this._StructEmptySenderModel
+  }
+
+  // Reset and watchdog methods
+
+  /**
+   * Reset the client
+   * @this {!FinalClient}
+   */
+  reset () {
+    super.reset()
+    this.resetRequests()
+  }
+
+  /**
+   * Watchdog for timeouts
+   * @this {!FinalClient}
+   * @param {!number} utc UTC timestamp
+   */
+  watchdog (utc) {
+    this.watchdogRequests(utc)
   }
 
   // Send methods
@@ -28105,6 +28268,123 @@ class FinalClient extends fbe.Client {
   set onReceiveLogHandler (handler) { // eslint-disable-line
     this.onReceiveLog = handler
     this._protoClient.onReceiveLogHandler = handler
+  }
+
+  // Request methods
+
+  /**
+   * Request value
+   * @this {!FinalClient}
+   * @param {!object} value Value to request
+   * @param {!number} timeout Timeout in milliseconds (default is 0)
+   * @returns {Promise} Response promise
+   */
+  request (value, timeout = 0) {
+    let promise = new fbe.DeferredPromise()
+    let current = Date.now()
+
+    // Send the request message
+    let serialized = this.send(value)
+    if (serialized > 0) {
+      // Calculate unique timestamp
+      this._timestamp = (current <= this._timestamp) ? this._timestamp + 1 : current
+
+      // Register the request
+      this._requests_by_id[value.id] = [this._timestamp, timeout * 1000000, promise]
+      if (timeout > 0) {
+        this._requests_by_timestamp[this._timestamp] = value.id
+      }
+    } else {
+      promise.reject(new Error('Serialization failed!'))
+    }
+
+    return promise
+  }
+
+  /**
+   * Response value
+   * @this {!FinalClient}
+   * @param {!object} value Value to response
+   * @returns {!boolean} Response handle flag
+   */
+  response (value) {
+    let item = this._requests_by_id.get(value.id)
+    if (item != null) {
+      let timestamp = item[0]
+      let promise = item[2]
+      promise.resolve(value)
+      this._requests_by_id.delete(value.id)
+      this._requests_by_timestamp.delete(timestamp)
+      return true
+    }
+
+    // noinspection RedundantIfStatementJS
+    if (this._protoClient.response(value)) {
+      return true
+    }
+
+    return false
+  }
+
+  /**
+   * Reject value
+   * @this {!FinalClient}
+   * @param {!object} value Value to reject
+   * @returns {!boolean} Reject handle flag
+   */
+  reject (value) {
+    let item = this._requests_by_id.get(value.id)
+    if (item != null) {
+      let timestamp = item[0]
+      let promise = item[2]
+      promise.reject(value)
+      this._requests_by_id.delete(value.id)
+      this._requests_by_timestamp.delete(timestamp)
+      return true
+    }
+
+    // noinspection RedundantIfStatementJS
+    if (this._protoClient.reject(value)) {
+      return true
+    }
+
+    return false
+  }
+
+  /**
+   * Reset client requests
+   * @this {!FinalClient}
+   */
+  resetRequests () {
+    this._protoClient.resetRequests()
+
+    for (let [, value] of this._requests_by_id) {
+      value[2].reject(new Error('Reset client!'))
+    }
+    this._requests_by_id.clear()
+    this._requests_by_timestamp.clear()
+  }
+
+  /**
+   * Watchdog client requests for timeouts
+   * @this {!FinalClient}
+   * @param {!number} utc UTC timestamp in milliseconds
+   */
+  watchdogRequests (utc) {
+    this._protoClient.watchdogRequests(utc)
+
+    for (let [, value] of this._requests_by_timestamp) {
+      let item = this._requests_by_id[value]
+      let id = value
+      let timestamp = item[0]
+      let timespan = item[1]
+      if ((timestamp + timespan) <= utc) {
+        let promise = item[2]
+        promise.reject(new Error('Timeout!'))
+        this._requests_by_id.delete(id)
+        this._requests_by_timestamp.delete(timestamp)
+      }
+    }
   }
 }
 

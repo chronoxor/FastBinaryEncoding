@@ -45,6 +45,7 @@ private:
     void GenerateIEEE754(const CppCommon::Path& path);
     void GenerateUTF8(const CppCommon::Path& path);
     void GenerateFBE(const CppCommon::Path& path);
+    void GenerateFBEDeferredPromise();
     void GenerateFBEBaseBuffer();
     void GenerateFBEWriteBuffer();
     void GenerateFBEReadBuffer();

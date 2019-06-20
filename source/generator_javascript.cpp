@@ -3598,6 +3598,7 @@ const utf8decode = utf8.utf8decode
     Write(code);
 
     // Generate common models
+    GenerateFBEDeferredPromise();
     GenerateFBEBaseBuffer();
     GenerateFBEWriteBuffer();
     GenerateFBEReadBuffer();
@@ -3670,6 +3671,39 @@ const utf8decode = utf8.utf8decode
 
     // Close the common file
     Close();
+}
+
+void GeneratorJavaScript::GenerateFBEDeferredPromise()
+{
+    std::string code = R"CODE(
+/**
+ * Fast Binary Encoding deferred promise
+ */
+class DeferredPromise {
+  /**
+   * Initialize buffer
+   * @constructor
+   */
+  constructor () {
+    this._promise = new Promise((resolve, reject) => {
+      // Assign the resolve and reject functions to `this` making them usable on the class instance
+      this.resolve = resolve
+      this.reject = reject
+    })
+    // Bind `then` and `catch` to implement the same interface as Promise
+    this.then = this._promise.then.bind(this._promise)
+    this.catch = this._promise.catch.bind(this._promise)
+    this[Symbol.toStringTag] = 'Promise'
+  }
+}
+
+exports.DeferredPromise = DeferredPromise
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
 }
 
 void GeneratorJavaScript::GenerateFBEBaseBuffer()
@@ -11690,6 +11724,9 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     WriteLineIndent("this.onSendHandler = this.onSend");
     WriteLineIndent("this.onSendLogHandler = this.onSendLog");
     WriteLineIndent("this.onReceiveLogHandler = this.onReceiveLog");
+    WriteLineIndent("this._timestamp = 0");
+    WriteLineIndent("this._requests_by_id = new Map()");
+    WriteLineIndent("this._requests_by_timestamp = new Map()");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -11734,6 +11771,32 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
             WriteLineIndent("}");
         }
     }
+
+    // Generate reset and watchdog methods
+    WriteLine();
+    WriteLineIndent("// Reset and watchdog methods");
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Reset the client");
+    WriteLineIndent(" * @this {!" + client + "}");
+    WriteLineIndent(" */");
+    WriteLineIndent("reset () {");
+    Indent(1);
+    WriteLineIndent("super.reset()");
+    WriteLineIndent("this.resetRequests()");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Watchdog for timeouts");
+    WriteLineIndent(" * @this {!" + client + "}");
+    WriteLineIndent(" * @param {!number} utc UTC timestamp");
+    WriteLineIndent(" */");
+    WriteLineIndent("watchdog (utc) {");
+    Indent(1);
+    WriteLineIndent("this.watchdogRequests(utc)");
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate sender methods
     WriteLine();
@@ -11952,6 +12015,185 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
         for (const auto& import : p->import->imports)
             WriteLineIndent("this._" + *import + "Client.onReceiveLogHandler = handler");
     }
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate request methods
+    WriteLine();
+    WriteLineIndent("// Request methods");
+
+    // Generate request value method
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Request value");
+    WriteLineIndent(" * @this {!" + client + "}");
+    WriteLineIndent(" * @param {!object} value Value to request");
+    WriteLineIndent(" * @param {!number} timeout Timeout in milliseconds (default is 0)");
+    WriteLineIndent(" * @returns {Promise} Response promise");
+    WriteLineIndent(" */");
+    WriteLineIndent("request (value, timeout = 0) {");
+    Indent(1);
+    WriteLineIndent("let promise = new fbe.DeferredPromise()");
+    WriteLineIndent("let current = Date.now()");
+    WriteLine();
+    WriteLineIndent("// Send the request message");
+    WriteLineIndent("let serialized = this.send(value)");
+    WriteLineIndent("if (serialized > 0) {");
+    Indent(1);
+    WriteLineIndent("// Calculate unique timestamp");
+    WriteLineIndent("this._timestamp = (current <= this._timestamp) ? this._timestamp + 1 : current");
+    WriteLine();
+    WriteLineIndent("// Register the request");
+    WriteLineIndent("this._requests_by_id[value.id] = [this._timestamp, timeout * 1000000, promise]");
+    WriteLineIndent("if (timeout > 0) {");
+    Indent(1);
+    WriteLineIndent("this._requests_by_timestamp[this._timestamp] = value.id");
+    Indent(-1);
+    WriteLineIndent("}");
+    Indent(-1);
+    WriteLineIndent("} else {");
+    Indent(1);
+    WriteLineIndent("promise.reject(new Error('Serialization failed!'))");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("return promise");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate response value method
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Response value");
+    WriteLineIndent(" * @this {!" + client + "}");
+    WriteLineIndent(" * @param {!object} value Value to response");
+    WriteLineIndent(" * @returns {!boolean} Response handle flag");
+    WriteLineIndent(" */");
+    WriteLineIndent("response (value) {");
+    Indent(1);
+    WriteLineIndent("let item = this._requests_by_id.get(value.id)");
+    WriteLineIndent("if (item != null) {");
+    Indent(1);
+    WriteLineIndent("let timestamp = item[0]");
+    WriteLineIndent("let promise = item[2]");
+    WriteLineIndent("promise.resolve(value)");
+    WriteLineIndent("this._requests_by_id.delete(value.id)");
+    WriteLineIndent("this._requests_by_timestamp.delete(timestamp)");
+    WriteLineIndent("return true");
+    Indent(-1);
+    WriteLineIndent("}");
+    if (p->import)
+    {
+        WriteLine();
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("// noinspection RedundantIfStatementJS");
+            WriteLineIndent("if (this._" + *import + "Client.response(value)) {");
+            Indent(1);
+            WriteLineIndent("return true");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+        WriteLine();
+    }
+    WriteLineIndent("return false");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate reject value method
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Reject value");
+    WriteLineIndent(" * @this {!" + client + "}");
+    WriteLineIndent(" * @param {!object} value Value to reject");
+    WriteLineIndent(" * @returns {!boolean} Reject handle flag");
+    WriteLineIndent(" */");
+    WriteLineIndent("reject (value) {");
+    Indent(1);
+    WriteLineIndent("let item = this._requests_by_id.get(value.id)");
+    WriteLineIndent("if (item != null) {");
+    Indent(1);
+    WriteLineIndent("let timestamp = item[0]");
+    WriteLineIndent("let promise = item[2]");
+    WriteLineIndent("promise.reject(value)");
+    WriteLineIndent("this._requests_by_id.delete(value.id)");
+    WriteLineIndent("this._requests_by_timestamp.delete(timestamp)");
+    WriteLineIndent("return true");
+    Indent(-1);
+    WriteLineIndent("}");
+    if (p->import)
+    {
+        WriteLine();
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("// noinspection RedundantIfStatementJS");
+            WriteLineIndent("if (this._" + *import + "Client.reject(value)) {");
+            Indent(1);
+            WriteLineIndent("return true");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+        WriteLine();
+    }
+    WriteLineIndent("return false");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate reset client requests method
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Reset client requests");
+    WriteLineIndent(" * @this {!" + client + "}");
+    WriteLineIndent(" */");
+    WriteLineIndent("resetRequests () {");
+    Indent(1);
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("this._" + *import + "Client.resetRequests()");
+        WriteLine();
+    }
+    WriteLineIndent("for (let [, value] of this._requests_by_id) {");
+    Indent(1);
+    WriteLineIndent("value[2].reject(new Error('Reset client!'))");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLineIndent("this._requests_by_id.clear()");
+    WriteLineIndent("this._requests_by_timestamp.clear()");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate watchdog client requests method
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Watchdog client requests for timeouts");
+    WriteLineIndent(" * @this {!" + client + "}");
+    WriteLineIndent(" * @param {!number} utc UTC timestamp in milliseconds");
+    WriteLineIndent(" */");
+    WriteLineIndent("watchdogRequests (utc) {");
+    Indent(1);
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("this._" + *import + "Client.watchdogRequests(utc)");
+        WriteLine();
+    }
+    WriteLineIndent("for (let [, value] of this._requests_by_timestamp) {");
+    Indent(1);
+    WriteLineIndent("let item = this._requests_by_id[value]");
+    WriteLineIndent("let id = value");
+    WriteLineIndent("let timestamp = item[0]");
+    WriteLineIndent("let timespan = item[1]");
+    WriteLineIndent("if ((timestamp + timespan) <= utc) {");
+    Indent(1);
+    WriteLineIndent("let promise = item[2]");
+    WriteLineIndent("promise.reject(new Error('Timeout!'))");
+    WriteLineIndent("this._requests_by_id.delete(id)");
+    WriteLineIndent("this._requests_by_timestamp.delete(timestamp)");
+    Indent(-1);
+    WriteLineIndent("}");
+    Indent(-1);
+    WriteLineIndent("}");
     Indent(-1);
     WriteLineIndent("}");
 

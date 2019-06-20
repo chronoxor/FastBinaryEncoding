@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../../include/generator_javascript.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_javascript.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks/benchmark_send_receive.js" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks/benchmark_send_receive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/send_receive.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/send_receive.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/protoex.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_send_receive.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_send_receive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_send_receive_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_send_receive_final.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -43,10 +41,10 @@
         <option value="$PROJECT_DIR$/tests/test_enums.js" />
         <option value="$PROJECT_DIR$/tests/test_send_receive.js" />
         <option value="$PROJECT_DIR$/tests/test_send_receive_final.js" />
-        <option value="$PROJECT_DIR$/proto/protoex.js" />
         <option value="$PROJECT_DIR$/examples/send_receive.js" />
         <option value="$PROJECT_DIR$/proto/fbe.js" />
         <option value="$PROJECT_DIR$/proto/proto.js" />
+        <option value="$PROJECT_DIR$/proto/protoex.js" />
       </list>
     </option>
   </component>
@@ -62,7 +60,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -70,10 +67,16 @@
               <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
               <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
+              <item name="proto" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -135,9 +138,9 @@
     <list>
       <item itemvalue="Node.js.serialization_final.js" />
       <item itemvalue="Node.js.serialization_json.js" />
+      <item itemvalue="Node.js.test_send_receive_final.js" />
       <item itemvalue="npm.tests-node" />
       <item itemvalue="npm.tests-standard" />
-      <item itemvalue="Node.js.test_send_receive_final.js" />
     </list>
     <recent_temporary>
       <list>
@@ -189,18 +192,19 @@
       <workItem from="1560786262443" duration="100000" />
       <workItem from="1560932006388" duration="12081000" />
       <workItem from="1560979357860" duration="8972000" />
+      <workItem from="1561070503580" duration="2777000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42808000" />
+    <option name="totallyTimeSpent" value="45585000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="305" y="170" width="1464" height="824" extended-state="0" />
+    <frame x="397" y="213" width="1830" height="1029" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5736994" visible="true" weight="0.27049756" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.57254463" visible="true" weight="0.2700893" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" id="npm" order="2" sideWeight="0.4263006" side_tool="true" visible="true" weight="0.27049756" />
+      <window_info id="npm" order="2" sideWeight="0.42745537" side_tool="true" visible="true" weight="0.2700893" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -237,13 +241,11 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/proto/test.js</url>
           <line>2062</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/tests/test_send_receive_final.js</url>
           <line>59</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
@@ -329,27 +331,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/fbe.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-406">
-          <caret line="5585" selection-start-line="5585" selection-end-line="5585" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/proto.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="627">
-          <caret line="5111" selection-start-line="5111" selection-end-line="5111" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/protoex.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-807">
-          <caret line="5248" lean-forward="true" selection-start-line="5248" selection-end-line="5248" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/send_receive.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="799">
@@ -371,13 +352,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8027">
-          <caret line="2062" column="42" selection-start-line="2062" selection-start-column="42" selection-end-line="2062" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_send_receive_final.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="142">
@@ -389,6 +363,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="4584" selection-start-line="4584" selection-end-line="4584" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/protoex.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="5598" column="42" selection-start-line="5598" selection-start-column="42" selection-end-line="5598" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11660">
+          <caret line="28302" lean-forward="true" selection-start-line="28302" selection-end-line="28302" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
         </state>
       </provider>
     </entry>
