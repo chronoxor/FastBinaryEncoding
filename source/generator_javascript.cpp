@@ -11156,12 +11156,12 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Sender = new " + *import + "." + sender + "(this.buffer)");
+            WriteLineIndent("this._" + *import + "Sender = new " + *import + "." + sender + "(this.buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model = new " + *s->name + "" + model + "(this.buffer)");
+            WriteLineIndent("this._" + *s->name + "Model = new " + *s->name + "" + model + "(this.buffer)");
     }
     WriteLineIndent("this.onSendHandler = this.onSend");
     WriteLineIndent("this.onSendLogHandler = this.onSendLog");
@@ -11181,9 +11181,9 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
             WriteLineIndent(" * @this {!" + sender + "}");
             WriteLineIndent(" * @returns {!" + *import + "." + sender + "} " + *import + " sender");
             WriteLineIndent(" */");
-            WriteLineIndent("get " + CppCommon::StringUtils::ToLower(*import) + "Sender () {");
+            WriteLineIndent("get " + *import + "Sender () {");
             Indent(1);
-            WriteLineIndent("return this._" + CppCommon::StringUtils::ToLower(*import) + "Sender");
+            WriteLineIndent("return this._" + *import + "Sender");
             Indent(-1);
             WriteLineIndent("}");
         }
@@ -11202,9 +11202,9 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
             WriteLineIndent(" * @this {!" + sender + "}");
             WriteLineIndent(" * @returns {!" + *s->name + "Model} " + *s->name + " model");
             WriteLineIndent(" */");
-            WriteLineIndent("get " + CppCommon::StringUtils::ToLower(*s->name) + "Model () {");
+            WriteLineIndent("get " + *s->name + "Model () {");
             Indent(1);
-            WriteLineIndent("return this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model");
+            WriteLineIndent("return this._" + *s->name + "Model");
             Indent(-1);
             WriteLineIndent("}");
         }
@@ -11228,7 +11228,7 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
         {
             WriteLineIndent("if (value instanceof " + *s->name + ") {");
             Indent(1);
-            WriteLineIndent("return this.send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
+            WriteLineIndent("return this.send_" + *s->name + "(value)");
             Indent(-1);
             WriteLineIndent("}");
         }
@@ -11238,7 +11238,7 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
         WriteLineIndent("let result = 0");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("result = this._" + CppCommon::StringUtils::ToLower(*import) + "Sender.send(value)");
+            WriteLineIndent("result = this._" + *import + "Sender.send(value)");
             WriteLineIndent("if (result > 0) {");
             Indent(1);
             WriteLineIndent("return result");
@@ -11260,12 +11260,12 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
             WriteLineIndent(" * @param {!" + *s->name + "} value " + *s->name + " value to send");
             WriteLineIndent(" * @returns {!number} Sent bytes");
             WriteLineIndent(" */");
-            WriteLineIndent("send_" + CppCommon::StringUtils::ToLower(*s->name) + " (value) { // eslint-disable-line");
+            WriteLineIndent("send_" + *s->name + " (value) { // eslint-disable-line");
             Indent(1);
             WriteLineIndent("// Serialize the value into the FBE stream");
-            WriteLineIndent("let serialized = this." + CppCommon::StringUtils::ToLower(*s->name) + "Model.serialize(value)");
+            WriteLineIndent("let serialized = this." + *s->name + "Model.serialize(value)");
             WriteLineIndent("console.assert((serialized > 0), '" + *p->name + "." + *s->name + " serialization failed!')");
-            WriteLineIndent("console.assert(this." + CppCommon::StringUtils::ToLower(*s->name) + "Model.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
+            WriteLineIndent("console.assert(this." + *s->name + "Model.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
             WriteLine();
             WriteLineIndent("// Log the value");
             WriteLineIndent("if (this.logging) {");
@@ -11311,7 +11311,7 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Sender.onSendHandler = handler");
+            WriteLineIndent("this._" + *import + "Sender.onSendHandler = handler");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -11329,7 +11329,7 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Sender.onSendLogHandler = handler");
+            WriteLineIndent("this._" + *import + "Sender.onSendLogHandler = handler");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -11371,14 +11371,14 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Receiver = new " + *import + "." + receiver + "(this.buffer)");
+            WriteLineIndent("this._" + *import + "Receiver = new " + *import + "." + receiver + "(this.buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Value = new " + *s->name + "()");
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model = new " + *s->name + model + "()");
+            WriteLineIndent("this._" + *s->name + "Value = new " + *s->name + "()");
+            WriteLineIndent("this._" + *s->name + "Model = new " + *s->name + model + "()");
         }
     }
     WriteLineIndent("this.onReceiveLogHandler = this.onReceiveLog");
@@ -11398,9 +11398,9 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
             WriteLineIndent(" * @this {!" + receiver + "}");
             WriteLineIndent(" * @returns {" + receiver + "} " + *import + " receiver");
             WriteLineIndent(" */");
-            WriteLineIndent("get " + CppCommon::StringUtils::ToLower(*import) + "Receiver () {");
+            WriteLineIndent("get " + *import + "Receiver () {");
             Indent(1);
-            WriteLineIndent("return this._" + CppCommon::StringUtils::ToLower(*import) + "Receiver");
+            WriteLineIndent("return this._" + *import + "Receiver");
             Indent(-1);
             WriteLineIndent("}");
             WriteLine();
@@ -11409,9 +11409,9 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
             WriteLineIndent(" * @this {!" + receiver + "}");
             WriteLineIndent(" * @param {" + receiver + "} receiver " + *import + " receiver");
             WriteLineIndent(" */");
-            WriteLineIndent("set " + CppCommon::StringUtils::ToLower(*import) + "Receiver (receiver) {");
+            WriteLineIndent("set " + *import + "Receiver (receiver) {");
             Indent(1);
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Receiver = receiver");
+            WriteLineIndent("this._" + *import + "Receiver = receiver");
             Indent(-1);
             WriteLineIndent("}");
         }
@@ -11430,7 +11430,7 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
             WriteLineIndent(" * @this {!" + receiver + "}");
             WriteLineIndent(" * @param {!" + *s->name + "} value " + *s->name + " received value");
             WriteLineIndent(" */");
-            WriteLineIndent("onReceive_" + CppCommon::StringUtils::ToLower(*s->name) + " (value) {}  // eslint-disable-line");
+            WriteLineIndent("onReceive_" + *s->name + " (value) {}  // eslint-disable-line");
         }
         WriteLine();
     }
@@ -11456,20 +11456,20 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
             WriteLineIndent("case " + *s->name + model + ".fbeType: {");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.attachBuffer(buffer, offset)");
-            WriteLineIndent("console.assert(this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
-            WriteLineIndent("let deserialized = this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.deserialize(this._" + CppCommon::StringUtils::ToLower(*s->name) + "Value)");
+            WriteLineIndent("this._" + *s->name + "Model.attachBuffer(buffer, offset)");
+            WriteLineIndent("console.assert(this._" + *s->name + "Model.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
+            WriteLineIndent("let deserialized = this._" + *s->name + "Model.deserialize(this._" + *s->name + "Value)");
             WriteLineIndent("console.assert((deserialized.size > 0), '" + *p->name + "." + *s->name + " deserialization failed!')");
             WriteLine();
             WriteLineIndent("// Log the value");
             WriteLineIndent("if (this.logging) {");
             Indent(1);
-            WriteLineIndent("this.onReceiveLog(this._" + CppCommon::StringUtils::ToLower(*s->name) + "Value.toString())");
+            WriteLineIndent("this.onReceiveLog(this._" + *s->name + "Value.toString())");
             Indent(-1);
             WriteLineIndent("}");
             WriteLine();
             WriteLineIndent("// Call receive handler with deserialized value");
-            WriteLineIndent("this.onReceive_" + CppCommon::StringUtils::ToLower(*s->name) + "(this._" + CppCommon::StringUtils::ToLower(*s->name) + "Value)");
+            WriteLineIndent("this.onReceive_" + *s->name + "(this._" + *s->name + "Value)");
             WriteLineIndent("return true");
             Indent(-1);
             WriteLineIndent("}");
@@ -11483,7 +11483,7 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
         for (const auto& import : p->import->imports)
         {
             WriteLineIndent("// noinspection RedundantIfStatementJS");
-            WriteLineIndent("if ((this." + CppCommon::StringUtils::ToLower(*import) + "Receiver != null) && this." + CppCommon::StringUtils::ToLower(*import) + "Receiver.onReceive(type, buffer, offset, size)) {");
+            WriteLineIndent("if ((this." + *import + "Receiver != null) && this." + *import + "Receiver.onReceive(type, buffer, offset, size)) {");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
@@ -11508,7 +11508,7 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Receiver.onReceiveLogHandler = handler");
+            WriteLineIndent("this._" + *import + "Receiver.onReceiveLogHandler = handler");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -11550,12 +11550,12 @@ void GeneratorJavaScript::GenerateProxy(const std::shared_ptr<Package>& p, bool 
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Proxy = new " + *import + "." + proxy + "(this.buffer)");
+            WriteLineIndent("this._" + *import + "Proxy = new " + *import + "." + proxy + "(this.buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model = new " + *s->name + model + "()");
+            WriteLineIndent("this._" + *s->name + "Model = new " + *s->name + model + "()");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -11573,9 +11573,9 @@ void GeneratorJavaScript::GenerateProxy(const std::shared_ptr<Package>& p, bool 
             WriteLineIndent(" * @this {!" + proxy + "}");
             WriteLineIndent(" * @returns {" + proxy + "} " + *import + " proxy");
             WriteLineIndent(" */");
-            WriteLineIndent("get " + CppCommon::StringUtils::ToLower(*import) + "Proxy () {");
+            WriteLineIndent("get " + *import + "Proxy () {");
             Indent(1);
-            WriteLineIndent("return this._" + CppCommon::StringUtils::ToLower(*import) + "Proxy");
+            WriteLineIndent("return this._" + *import + "Proxy");
             Indent(-1);
             WriteLineIndent("}");
             WriteLine();
@@ -11584,9 +11584,9 @@ void GeneratorJavaScript::GenerateProxy(const std::shared_ptr<Package>& p, bool 
             WriteLineIndent(" * @this {!" + proxy + "}");
             WriteLineIndent(" * @param {" + proxy + "} proxy " + *import + " proxy");
             WriteLineIndent(" */");
-            WriteLineIndent("set " + CppCommon::StringUtils::ToLower(*import) + "Proxy (proxy) {");
+            WriteLineIndent("set " + *import + "Proxy (proxy) {");
             Indent(1);
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Proxy = proxy");
+            WriteLineIndent("this._" + *import + "Proxy = proxy");
             Indent(-1);
             WriteLineIndent("}");
         }
@@ -11609,7 +11609,7 @@ void GeneratorJavaScript::GenerateProxy(const std::shared_ptr<Package>& p, bool 
             WriteLineIndent(" * @param {!number} offset Buffer offset");
             WriteLineIndent(" * @param {!number} size Buffer size");
             WriteLineIndent(" */");
-            WriteLineIndent("onProxy_" + CppCommon::StringUtils::ToLower(*s->name) + " (model, type, buffer, offset, size) {}  // eslint-disable-line");
+            WriteLineIndent("onProxy_" + *s->name + " (model, type, buffer, offset, size) {}  // eslint-disable-line");
         }
         WriteLine();
     }
@@ -11635,18 +11635,18 @@ void GeneratorJavaScript::GenerateProxy(const std::shared_ptr<Package>& p, bool 
             WriteLineIndent("case " + *s->name + model + ".fbeType: {");
             Indent(1);
             WriteLineIndent("// Attach the FBE stream to the proxy model");
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.attachBuffer(buffer, offset)");
-            WriteLineIndent("console.assert(this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
+            WriteLineIndent("this._" + *s->name + "Model.attachBuffer(buffer, offset)");
+            WriteLineIndent("console.assert(this._" + *s->name + "Model.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
             WriteLine();
-            WriteLineIndent("let fbeBegin = this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.model.getBegin()");
+            WriteLineIndent("let fbeBegin = this._" + *s->name + "Model.model.getBegin()");
             WriteLineIndent("if (fbeBegin === 0) {");
             Indent(1);
             WriteLineIndent("return false");
             Indent(-1);
             WriteLineIndent("}");
             WriteLineIndent("// Call proxy handler");
-            WriteLineIndent("this.onProxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model, type, buffer, offset, size)");
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.model.getEnd(fbeBegin)");
+            WriteLineIndent("this.onProxy_" + *s->name + "(this._" + *s->name + "Model, type, buffer, offset, size)");
+            WriteLineIndent("this._" + *s->name + "Model.model.getEnd(fbeBegin)");
             WriteLineIndent("return true");
             Indent(-1);
             WriteLineIndent("}");
@@ -11660,7 +11660,7 @@ void GeneratorJavaScript::GenerateProxy(const std::shared_ptr<Package>& p, bool 
         for (const auto& import : p->import->imports)
         {
             WriteLineIndent("// noinspection RedundantIfStatementJS");
-            WriteLineIndent("if ((this." + CppCommon::StringUtils::ToLower(*import) + "Proxy != null) && this." + CppCommon::StringUtils::ToLower(*import) + "Proxy.onReceive(type, buffer, offset, size)) {");
+            WriteLineIndent("if ((this." + *import + "Proxy != null) && this." + *import + "Proxy.onReceive(type, buffer, offset, size)) {");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
@@ -11733,15 +11733,15 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Client = new " + *import + "." + client + "(this.sendBuffer, this.receiveBuffer)");
+            WriteLineIndent("this._" + *import + "Client = new " + *import + "." + client + "(this.sendBuffer, this.receiveBuffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "SenderModel = new " + *s->name + "" + model + "(this.sendBuffer)");
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "ReceiverValue = new " + *s->name + "()");
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "ReceiverModel = new " + *s->name + model + "()");
+            WriteLineIndent("this._" + *s->name + "SenderModel = new " + *s->name + "" + model + "(this.sendBuffer)");
+            WriteLineIndent("this._" + *s->name + "ReceiverValue = new " + *s->name + "()");
+            WriteLineIndent("this._" + *s->name + "ReceiverModel = new " + *s->name + model + "()");
         }
     }
     WriteLineIndent("this._timestamp = 0");
@@ -11776,9 +11776,9 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
             WriteLineIndent(" * @this {!" + client + "}");
             WriteLineIndent(" * @returns {!" + *import + "." + client + "} " + *import + " client");
             WriteLineIndent(" */");
-            WriteLineIndent("get " + CppCommon::StringUtils::ToLower(*import) + "Client () {");
+            WriteLineIndent("get " + *import + "Client () {");
             Indent(1);
-            WriteLineIndent("return this._" + CppCommon::StringUtils::ToLower(*import) + "Client");
+            WriteLineIndent("return this._" + *import + "Client");
             Indent(-1);
             WriteLineIndent("}");
         }
@@ -11797,9 +11797,9 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
             WriteLineIndent(" * @this {!" + client + "}");
             WriteLineIndent(" * @returns {!" + *s->name + "Model} " + *s->name + " sender model");
             WriteLineIndent(" */");
-            WriteLineIndent("get " + CppCommon::StringUtils::ToLower(*s->name) + "SenderModel () {");
+            WriteLineIndent("get " + *s->name + "SenderModel () {");
             Indent(1);
-            WriteLineIndent("return this._" + CppCommon::StringUtils::ToLower(*s->name) + "SenderModel");
+            WriteLineIndent("return this._" + *s->name + "SenderModel");
             Indent(-1);
             WriteLineIndent("}");
         }
@@ -11852,7 +11852,7 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
             {
                 WriteLineIndent("if (value instanceof " + *s->name + ") {");
                 Indent(1);
-                WriteLineIndent("return this.request_" + CppCommon::StringUtils::ToLower(*s->name) + "(value, timeout)");
+                WriteLineIndent("return this.request_" + *s->name + "(value, timeout)");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -11863,7 +11863,7 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
         WriteLineIndent("let result = null");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("result = this._" + CppCommon::StringUtils::ToLower(*import) + "Client.request(value, timeout)");
+            WriteLineIndent("result = this._" + *import + "Client.request(value, timeout)");
             WriteLineIndent("if (result != null) {");
             Indent(1);
             WriteLineIndent("return result");
@@ -11889,18 +11889,18 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
                 WriteLineIndent("/**");
                 WriteLineIndent(" * Request " + *s->name + " value");
                 WriteLineIndent(" * @this {!" + client + "}");
-                WriteLineIndent(" * @param {!" + *s->name + "} value " + *s->name + " value to request");
+                WriteLineIndent(" * @param {!" + *s->name + "} request " + *s->name + " request");
                 WriteLineIndent(" * @param {!number} timeout Timeout in milliseconds (default is 0)");
                 WriteLineIndent(" * @returns {!Promise} Response promise");
                 WriteLineIndent(" */");
-                WriteLineIndent("request_" + CppCommon::StringUtils::ToLower(*s->name) + " (value, timeout = 0) { // eslint-disable-line");
+                WriteLineIndent("request_" + *s->name + " (request, timeout = 0) { // eslint-disable-line");
                 Indent(1);
                 WriteLineIndent("let promise = new fbe.DeferredPromise()");
                 if (response_name.empty())
                 {
                     WriteLine();
                     WriteLineIndent("// Send the request message");
-                    WriteLineIndent("let serialized = this.send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
+                    WriteLineIndent("let serialized = this.send_" + *s->name + "(request)");
                     WriteLineIndent("if (serialized > 0) {");
                     Indent(1);
                     WriteLineIndent("promise.resolve()");
@@ -11916,15 +11916,15 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
                     WriteLineIndent("let current = Date.now()");
                     WriteLine();
                     WriteLineIndent("// Send the request message");
-                    WriteLineIndent("let serialized = this.send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
+                    WriteLineIndent("let serialized = this.send_" + *s->name + "(request)");
                     WriteLineIndent("if (serialized > 0) {");
                     Indent(1);
                     WriteLineIndent("// Calculate unique timestamp");
                     WriteLineIndent("this._timestamp = (current <= this._timestamp) ? this._timestamp + 1 : current");
                     WriteLine();
                     WriteLineIndent("// Register the request");
-                    WriteLineIndent("this._requests_by_id_" + response_field + "[value.id] = [this._timestamp, timeout * 1000000, promise]");
-                    WriteLineIndent("this._requests_by_timestamp_" + response_field + "[this._timestamp] = value.id");
+                    WriteLineIndent("this._requests_by_id_" + response_field + "[request.id] = [this._timestamp, timeout * 1000000, promise]");
+                    WriteLineIndent("this._requests_by_timestamp_" + response_field + "[this._timestamp] = request.id");
                     Indent(-1);
                     WriteLineIndent("} else {");
                     Indent(1);
@@ -11940,6 +11940,262 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
         }
     }
 
+    // Generate response handlers
+    for (const auto& response : responses)
+    {
+        std::string response_name = ConvertTypeName(response, false);
+        std::string response_field = response;
+
+        WriteLine();
+        WriteLineIndent("/**");
+        WriteLineIndent(" * " + response_name + " response handler");
+        WriteLineIndent(" * @this {!" + client + "}");
+        WriteLineIndent(" * @param {!" + response_name + "} response " + response_name + " response");
+        WriteLineIndent(" * @returns {!boolean} Response handle flag");
+        WriteLineIndent(" */");
+        WriteLineIndent("onReceiveResponse_" + response_name + " (response) { // eslint-disable-line");
+        Indent(1);
+        if (p->body)
+        {
+            std::set<std::string> cache;
+            for (const auto& s : p->body->structs)
+            {
+                if (s->response)
+                {
+                    std::string struct_response_name = ConvertTypeName(*s->response->response, false);
+                    std::string struct_response_field = *s->response->response;
+                    CppCommon::StringUtils::ReplaceAll(struct_response_field, ".", "");
+
+                    if ((struct_response_name == response_name) && (cache.find(struct_response_name) == cache.end()))
+                    {
+                        WriteLineIndent("let item" + struct_response_field + " = this._requests_by_id_" + struct_response_field + ".get(response.id)");
+                        WriteLineIndent("if (item" + struct_response_field + " != null) {");
+                        Indent(1);
+                        WriteLineIndent("let timestamp = item" + struct_response_field + "[0]");
+                        WriteLineIndent("let promise = item" + struct_response_field + "[2]");
+                        WriteLineIndent("promise.resolve(response)");
+                        WriteLineIndent("this._requests_by_id_" + struct_response_field + ".delete(response.id)");
+                        WriteLineIndent("this._requests_by_timestamp_" + struct_response_field + ".delete(timestamp)");
+                        WriteLineIndent("return true");
+                        cache.insert(struct_response_name);
+                        Indent(-1);
+                        WriteLineIndent("}");
+                        WriteLine();
+                    }
+                }
+            }
+        }
+        WriteLineIndent("return false");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+
+    // Generate remaining response handlers
+    if (p->body)
+    {
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_response_name = ConvertTypeName(*s->name, false);
+            std::string struct_response_field = *s->name;
+            if ((responses.find(*s->name) == responses.end()) && (cache.find(struct_response_name) == cache.end()))
+            {
+                WriteLine();
+                WriteLineIndent("/**");
+                WriteLineIndent(" * " + struct_response_name + " response handler");
+                WriteLineIndent(" * @this {!" + client + "}");
+                WriteLineIndent(" * @param {!" + struct_response_name + "} response " + struct_response_name + " response");
+                WriteLineIndent(" * @returns {!boolean} Response handle flag");
+                WriteLineIndent(" */");
+                WriteLineIndent("onReceiveResponse_" + struct_response_name + " (response) { // eslint-disable-line");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("}");
+                cache.insert(struct_response_name);
+            }
+        }
+    }
+
+    // Generate reject handlers
+    for (const auto& reject : rejects)
+    {
+        std::string reject_name = ConvertTypeName(reject.first, false);
+        std::string reject_field = reject.first;
+        bool global = reject.second;
+        bool imported = CppCommon::StringUtils::ReplaceAll(reject_field, ".", "");
+
+        WriteLine();
+        WriteLineIndent("/**");
+        WriteLineIndent(" * " + reject_name + " reject handler");
+        WriteLineIndent(" * @this {!" + client + "}");
+        WriteLineIndent(" * @param {!" + reject_name + "} reject " + reject_name + " reject");
+        WriteLineIndent(" * @returns {!boolean} Reject handle flag");
+        WriteLineIndent(" */");
+        WriteLineIndent("onReceiveReject_" + reject_name + " (reject) { // eslint-disable-line");
+        Indent(1);
+        if (global)
+        {
+            if (p->import)
+            {
+                for (const auto& import : p->import->imports)
+                {
+                    WriteLineIndent("if (" + *import + client + "::onReceiveReject(reject))");
+                    Indent(1);
+                    WriteLineIndent("return true;");
+                    Indent(-1);
+                }
+                WriteLine();
+            }
+        }
+        else if (imported)
+        {
+            std::string ns = "";
+            std::string t = reject.first;
+            std::string type = reject.first;
+
+            size_t pos = type.find_last_of('.');
+            if (pos != std::string::npos)
+            {
+                ns.assign(type, 0, pos);
+                t.assign(type, pos + 1, type.size() - pos);
+            }
+
+            WriteLineIndent("if (" + ns + client + "::onReceiveReject(reject))");
+            Indent(1);
+            WriteLineIndent("return true;");
+            Indent(-1);
+            WriteLine();
+        }
+        if (p->body)
+        {
+            std::set<std::string> cache;
+            WriteLineIndent("std::scoped_lock locker(this->_lock);");
+            WriteLine();
+            for (const auto& s : p->body->structs)
+            {
+                if (s->response && s->rejects)
+                {
+                    for (const auto& r : s->rejects->rejects)
+                    {
+                        std::string struct_response_name = ConvertTypeName(*s->response->response, false);
+                        std::string struct_response_field = *s->response->response;
+                        CppCommon::StringUtils::ReplaceAll(struct_response_field, ".", "");
+
+                        std::string struct_reject_name = ConvertTypeName(*r.reject, false);
+                        std::string struct_reject_field = *r.reject;
+                        CppCommon::StringUtils::ReplaceAll(struct_reject_field, ".", "");
+
+                        if ((struct_reject_name == reject_name) && (cache.find(struct_response_field) == cache.end()))
+                        {
+                            WriteLineIndent("auto it_" + struct_response_field + " = _requests_by_id_" + struct_response_field + ".find(reject.id);");
+                            WriteLineIndent("if (it_" + struct_response_field + " != _requests_by_id_" + struct_response_field + ".end())");
+                            WriteLineIndent("{");
+                            Indent(1);
+                            WriteLineIndent("auto timestamp = std::get<0>(it_" + struct_response_field + "->second);");
+                            WriteLineIndent("[[maybe_unused]] auto timespan = std::get<1>(it_" + struct_response_field + "->second);");
+                            WriteLineIndent("auto& promise = std::get<2>(it_" + struct_response_field + "->second);");
+                            WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(reject.string())));");
+                            WriteLineIndent("_requests_by_id_" + struct_response_field + ".erase(reject.id);");
+                            WriteLineIndent("_requests_by_timestamp_" + struct_response_field + ".erase(timestamp);");
+                            WriteLineIndent("return true;");
+                            cache.insert(struct_response_field);
+                            Indent(-1);
+                            WriteLineIndent("}");
+                            WriteLine();
+                        }
+                    }
+                }
+            }
+        }
+        WriteLineIndent("return false;");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+
+    // Generate remaining reject handlers
+    if (p->body)
+    {
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_reject_name = ConvertTypeName(*s->name, false);
+            if ((rejects.find(*s->name) == rejects.end()) && (cache.find(struct_reject_name) == cache.end()))
+            {
+                WriteLine();
+                WriteLineIndent("/**");
+                WriteLineIndent(" * " + struct_reject_name + " reject handler");
+                WriteLineIndent(" * @this {!" + client + "}");
+                WriteLineIndent(" * @param {!" + struct_reject_name + "} reject " + struct_reject_name + " reject");
+                WriteLineIndent(" * @returns {!boolean} Reject handle flag");
+                WriteLineIndent(" */");
+                WriteLineIndent("onReceiveReject_" + struct_reject_name + " (reject) { // eslint-disable-line");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("}");
+                cache.insert(struct_reject_name);
+            }
+        }
+    }
+
+    // Generate notify handlers
+    if (p->body)
+    {
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_notify_name = ConvertTypeName(*s->name, false);
+            std::string struct_notify_field = *s->name;
+            if (cache.find(struct_notify_name) == cache.end())
+            {
+                WriteLine();
+                WriteLineIndent("/**");
+                WriteLineIndent(" * " + struct_notify_name + " notify handler");
+                WriteLineIndent(" * @this {!" + client + "}");
+                WriteLineIndent(" * @param {!" + struct_notify_name + "} notify " + struct_notify_name + " notify");
+                WriteLineIndent(" * @returns {!boolean} Notify handle flag");
+                WriteLineIndent(" */");
+                WriteLineIndent("onReceiveNotify_" + struct_notify_name + " (notify) { // eslint-disable-line");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("}");
+                cache.insert(struct_notify_name);
+            }
+        }
+    }
+
+    // Generate receive handlers
+    if (p->body)
+    {
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_receive_name = ConvertTypeName(*s->name, false);
+            std::string struct_receive_field = *s->name;
+            if (cache.find(struct_receive_name) == cache.end())
+            {
+                WriteLine();
+                WriteLineIndent("/**");
+                WriteLineIndent(" * " + struct_receive_name + " receive handler");
+                WriteLineIndent(" * @this {!" + client + "}");
+                WriteLineIndent(" * @param {!" + struct_receive_name + "} value " + struct_receive_name + " received value");
+                WriteLineIndent(" */");
+                WriteLineIndent("onReceive_" + struct_receive_name + " (value) { // eslint-disable-line");
+                Indent(1);
+                WriteLineIndent("if (!this.onReceiveResponse_" + struct_receive_name + "(value) && !this.onReceiveReject_" + struct_receive_name + "(value)) {");
+                Indent(1);
+                WriteLineIndent("this.onReceiveNotify_" + struct_receive_name + "(value)");
+                Indent(-1);
+                WriteLineIndent("}");
+                Indent(-1);
+                WriteLineIndent("}");
+                cache.insert(struct_receive_name);
+            }
+        }
+    }
+
     // Generate reset client requests method
     WriteLine();
     WriteLineIndent("/**");
@@ -11950,7 +12206,7 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     Indent(1);
     if (p->import)
         for (const auto& import : p->import->imports)
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Client.resetRequests()");
+            WriteLineIndent("this._" + *import + "Client.resetRequests()");
     if (!responses.empty())
     {
         WriteLine();
@@ -11967,6 +12223,48 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
             WriteLineIndent("}");
             WriteLineIndent("this._requests_by_id_" + response_field + ".clear()");
             WriteLineIndent("this._requests_by_timestamp_" + response_field + ".clear()");
+        }
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate watchdog client requests method
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Watchdog client requests for timeouts");
+    WriteLineIndent(" * @this {!" + client + "}");
+    WriteLineIndent(" * @param {!number} utc UTC timestamp in milliseconds");
+    WriteLineIndent(" */");
+    WriteLineIndent("watchdogRequests (utc) {");
+    Indent(1);
+    if (p->import)
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("this._" + *import + "Client.watchdogRequests(utc)");
+    if (!responses.empty())
+    {
+        WriteLine();
+        for (const auto& response : responses)
+        {
+            std::string response_name = ConvertTypeName(response, false);
+            std::string response_field = response;
+            CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+            WriteLineIndent("for (let [, value] of this._requests_by_timestamp_" + response_field + ") {");
+            Indent(1);
+            WriteLineIndent("let item = this._requests_by_id_" + response_field + "[value]");
+            WriteLineIndent("let id = value");
+            WriteLineIndent("let timestamp = item[0]");
+            WriteLineIndent("let timespan = item[1]");
+            WriteLineIndent("if ((timestamp + timespan) <= utc) {");
+            Indent(1);
+            WriteLineIndent("let promise = item[2]");
+            WriteLineIndent("promise.reject(new Error('Timeout!'))");
+            WriteLineIndent("this._requests_by_id_" + response_field + ".delete(id)");
+            WriteLineIndent("this._requests_by_timestamp_" + response_field + ".delete(timestamp)");
+            Indent(-1);
+            WriteLineIndent("}");
+            Indent(-1);
+            WriteLineIndent("}");
         }
     }
     Indent(-1);
@@ -11990,7 +12288,7 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
         {
             WriteLineIndent("if (value instanceof " + *s->name + ") {");
             Indent(1);
-            WriteLineIndent("return this.send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
+            WriteLineIndent("return this.send_" + *s->name + "(value)");
             Indent(-1);
             WriteLineIndent("}");
         }
@@ -12000,7 +12298,7 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
         WriteLineIndent("let result = 0");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("result = this._" + CppCommon::StringUtils::ToLower(*import) + "Client.send(value)");
+            WriteLineIndent("result = this._" + *import + "Client.send(value)");
             WriteLineIndent("if (result > 0) {");
             Indent(1);
             WriteLineIndent("return result");
@@ -12022,12 +12320,12 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
             WriteLineIndent(" * @param {!" + *s->name + "} value " + *s->name + " value to send");
             WriteLineIndent(" * @returns {!number} Sent bytes");
             WriteLineIndent(" */");
-            WriteLineIndent("send_" + CppCommon::StringUtils::ToLower(*s->name) + " (value) { // eslint-disable-line");
+            WriteLineIndent("send_" + *s->name + " (value) { // eslint-disable-line");
             Indent(1);
             WriteLineIndent("// Serialize the value into the FBE stream");
-            WriteLineIndent("let serialized = this." + CppCommon::StringUtils::ToLower(*s->name) + "SenderModel.serialize(value)");
+            WriteLineIndent("let serialized = this." + *s->name + "SenderModel.serialize(value)");
             WriteLineIndent("console.assert((serialized > 0), '" + *p->name + "." + *s->name + " serialization failed!')");
-            WriteLineIndent("console.assert(this." + CppCommon::StringUtils::ToLower(*s->name) + "SenderModel.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
+            WriteLineIndent("console.assert(this." + *s->name + "SenderModel.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
             WriteLine();
             WriteLineIndent("// Log the value");
             WriteLineIndent("if (this.logging) {");
@@ -12073,7 +12371,7 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Client.onSendHandler = handler");
+            WriteLineIndent("this._" + *import + "Client.onSendHandler = handler");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -12091,7 +12389,7 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Client.onSendLogHandler = handler");
+            WriteLineIndent("this._" + *import + "Client.onSendLogHandler = handler");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -12109,7 +12407,7 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
             WriteLineIndent(" * @this {!" + client + "}");
             WriteLineIndent(" * @param {!" + *s->name + "} value " + *s->name + " received value");
             WriteLineIndent(" */");
-            WriteLineIndent("onReceive_" + CppCommon::StringUtils::ToLower(*s->name) + " (value) {}  // eslint-disable-line");
+            WriteLineIndent("onReceive_" + *s->name + " (value) {}  // eslint-disable-line");
         }
         WriteLine();
     }
@@ -12135,20 +12433,20 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
             WriteLineIndent("case " + *s->name + model + ".fbeType: {");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "ReceiverModel.attachBuffer(buffer, offset)");
-            WriteLineIndent("console.assert(this._" + CppCommon::StringUtils::ToLower(*s->name) + "ReceiverModel.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
-            WriteLineIndent("let deserialized = this._" + CppCommon::StringUtils::ToLower(*s->name) + "ReceiverModel.deserialize(this._" + CppCommon::StringUtils::ToLower(*s->name) + "ReceiverValue)");
+            WriteLineIndent("this._" + *s->name + "ReceiverModel.attachBuffer(buffer, offset)");
+            WriteLineIndent("console.assert(this._" + *s->name + "ReceiverModel.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
+            WriteLineIndent("let deserialized = this._" + *s->name + "ReceiverModel.deserialize(this._" + *s->name + "ReceiverValue)");
             WriteLineIndent("console.assert((deserialized.size > 0), '" + *p->name + "." + *s->name + " deserialization failed!')");
             WriteLine();
             WriteLineIndent("// Log the value");
             WriteLineIndent("if (this.logging) {");
             Indent(1);
-            WriteLineIndent("this.onReceiveLog(this._" + CppCommon::StringUtils::ToLower(*s->name) + "ReceiverValue.toString())");
+            WriteLineIndent("this.onReceiveLog(this._" + *s->name + "ReceiverValue.toString())");
             Indent(-1);
             WriteLineIndent("}");
             WriteLine();
             WriteLineIndent("// Call receive handler with deserialized value");
-            WriteLineIndent("this.onReceive_" + CppCommon::StringUtils::ToLower(*s->name) + "(this._" + CppCommon::StringUtils::ToLower(*s->name) + "ReceiverValue)");
+            WriteLineIndent("this.onReceive_" + *s->name + "(this._" + *s->name + "ReceiverValue)");
             WriteLineIndent("return true");
             Indent(-1);
             WriteLineIndent("}");
@@ -12162,7 +12460,7 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
         for (const auto& import : p->import->imports)
         {
             WriteLineIndent("// noinspection RedundantIfStatementJS");
-            WriteLineIndent("if ((this." + CppCommon::StringUtils::ToLower(*import) + "Client != null) && this." + CppCommon::StringUtils::ToLower(*import) + "Client.onReceive(type, buffer, offset, size)) {");
+            WriteLineIndent("if ((this." + *import + "Client != null) && this." + *import + "Client.onReceive(type, buffer, offset, size)) {");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
@@ -12187,7 +12485,7 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Client.onReceiveLogHandler = handler");
+            WriteLineIndent("this._" + *import + "Client.onReceiveLogHandler = handler");
     }
     Indent(-1);
     WriteLineIndent("}");

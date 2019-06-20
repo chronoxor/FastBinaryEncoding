@@ -8672,12 +8672,12 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         std::set<std::string> cache;
         for (const auto& s : p->body->structs)
         {
-            std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
-            std::string struct_response_field = *s->name;
-            if (cache.find(struct_response_name) == cache.end())
+            std::string struct_notify_name = ConvertTypeName(*p->name, *s->name, false);
+            std::string struct_notify_field = *s->name;
+            if (cache.find(struct_notify_name) == cache.end())
             {
-                WriteLineIndent("virtual void onReceiveNotify(const " + struct_response_name + "& notify) {}");
-                cache.insert(struct_response_name);
+                WriteLineIndent("virtual void onReceiveNotify(const " + struct_notify_name + "& notify) {}");
+                cache.insert(struct_notify_name);
                 found = true;
             }
         }
