@@ -7887,6 +7887,7 @@ class Client extends fbe.Client {
     this._enumsSenderModel = new EnumsModel(this.sendBuffer)
     this._enumsReceiverValue = new Enums()
     this._enumsReceiverModel = new EnumsModel()
+    this._timestamp = 0
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
     this.onReceiveLogHandler = this.onReceiveLog
@@ -7901,6 +7902,46 @@ class Client extends fbe.Client {
    */
   get enumsSenderModel () {
     return this._enumsSenderModel
+  }
+
+  // Reset and watchdog methods
+
+  /**
+   * Reset the client
+   * @this {!Client}
+   */
+  reset () {
+    super.reset()
+    this.resetRequests()
+  }
+
+  /**
+   * Watchdog for timeouts
+   * @this {!Client}
+   * @param {!number} utc UTC timestamp
+   */
+  watchdog (utc) {
+    this.watchdogRequests(utc)
+  }
+
+  // Request methods
+
+  /**
+   * Request value
+   * @this {!Client}
+   * @param {!object} value Value to request
+   * @param {!number} timeout Timeout in milliseconds (default is 0)
+   * @returns {Promise} Response promise
+   */
+  request (value, timeout = 0) {
+    return null
+  }
+
+  /**
+   * Reset client requests
+   * @this {!Client}
+   */
+  resetRequests () {
   }
 
   // Send methods
@@ -8202,6 +8243,7 @@ class FinalClient extends fbe.Client {
     this._enumsSenderModel = new EnumsFinalModel(this.sendBuffer)
     this._enumsReceiverValue = new Enums()
     this._enumsReceiverModel = new EnumsFinalModel()
+    this._timestamp = 0
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
     this.onReceiveLogHandler = this.onReceiveLog
@@ -8216,6 +8258,46 @@ class FinalClient extends fbe.Client {
    */
   get enumsSenderModel () {
     return this._enumsSenderModel
+  }
+
+  // Reset and watchdog methods
+
+  /**
+   * Reset the client
+   * @this {!FinalClient}
+   */
+  reset () {
+    super.reset()
+    this.resetRequests()
+  }
+
+  /**
+   * Watchdog for timeouts
+   * @this {!FinalClient}
+   * @param {!number} utc UTC timestamp
+   */
+  watchdog (utc) {
+    this.watchdogRequests(utc)
+  }
+
+  // Request methods
+
+  /**
+   * Request value
+   * @this {!FinalClient}
+   * @param {!object} value Value to request
+   * @param {!number} timeout Timeout in milliseconds (default is 0)
+   * @returns {Promise} Response promise
+   */
+  request (value, timeout = 0) {
+    return null
+  }
+
+  /**
+   * Reset client requests
+   * @this {!FinalClient}
+   */
+  resetRequests () {
   }
 
   // Send methods

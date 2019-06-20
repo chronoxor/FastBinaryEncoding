@@ -25648,6 +25648,7 @@ class Client extends fbe.Client {
     this._structemptySenderModel = new StructEmptyModel(this.sendBuffer)
     this._structemptyReceiverValue = new StructEmpty()
     this._structemptyReceiverModel = new StructEmptyModel()
+    this._timestamp = 0
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
     this.onReceiveLogHandler = this.onReceiveLog
@@ -25772,6 +25773,52 @@ class Client extends fbe.Client {
    */
   get structemptySenderModel () {
     return this._structemptySenderModel
+  }
+
+  // Reset and watchdog methods
+
+  /**
+   * Reset the client
+   * @this {!Client}
+   */
+  reset () {
+    super.reset()
+    this.resetRequests()
+  }
+
+  /**
+   * Watchdog for timeouts
+   * @this {!Client}
+   * @param {!number} utc UTC timestamp
+   */
+  watchdog (utc) {
+    this.watchdogRequests(utc)
+  }
+
+  // Request methods
+
+  /**
+   * Request value
+   * @this {!Client}
+   * @param {!object} value Value to request
+   * @param {!number} timeout Timeout in milliseconds (default is 0)
+   * @returns {Promise} Response promise
+   */
+  request (value, timeout = 0) {
+    let result = null
+    result = this._protoClient.request(value, timeout)
+    if (result != null) {
+      return result
+    }
+    return null
+  }
+
+  /**
+   * Reset client requests
+   * @this {!Client}
+   */
+  resetRequests () {
+    this._protoClient.resetRequests()
   }
 
   // Send methods
@@ -27334,6 +27381,7 @@ class FinalClient extends fbe.Client {
     this._structemptySenderModel = new StructEmptyFinalModel(this.sendBuffer)
     this._structemptyReceiverValue = new StructEmpty()
     this._structemptyReceiverModel = new StructEmptyFinalModel()
+    this._timestamp = 0
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
     this.onReceiveLogHandler = this.onReceiveLog
@@ -27458,6 +27506,52 @@ class FinalClient extends fbe.Client {
    */
   get structemptySenderModel () {
     return this._structemptySenderModel
+  }
+
+  // Reset and watchdog methods
+
+  /**
+   * Reset the client
+   * @this {!FinalClient}
+   */
+  reset () {
+    super.reset()
+    this.resetRequests()
+  }
+
+  /**
+   * Watchdog for timeouts
+   * @this {!FinalClient}
+   * @param {!number} utc UTC timestamp
+   */
+  watchdog (utc) {
+    this.watchdogRequests(utc)
+  }
+
+  // Request methods
+
+  /**
+   * Request value
+   * @this {!FinalClient}
+   * @param {!object} value Value to request
+   * @param {!number} timeout Timeout in milliseconds (default is 0)
+   * @returns {Promise} Response promise
+   */
+  request (value, timeout = 0) {
+    let result = null
+    result = this._protoClient.request(value, timeout)
+    if (result != null) {
+      return result
+    }
+    return null
+  }
+
+  /**
+   * Reset client requests
+   * @this {!FinalClient}
+   */
+  resetRequests () {
+    this._protoClient.resetRequests()
   }
 
   // Send methods

@@ -8377,8 +8377,28 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     Indent(-1);
     WriteLineIndent("}");
 
+    // Collect responses & rejects collections
     std::set<std::string> responses;
     std::map<std::string, bool> rejects;
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            if (s->request)
+            {
+                std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
+
+                if (!response_name.empty())
+                {
+                    // Update responses and rejects cache
+                    responses.insert(*s->response->response);
+                    if (s->rejects)
+                        for (const auto& reject : s->rejects->rejects)
+                            rejects[*reject.reject] = reject.global;
+                }
+            }
+        }
+    }
 
     // Generate send() methods
     if (p->body)
@@ -8395,19 +8415,24 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 WriteLine();
                 if (response_name.empty())
                 {
-                    WriteLineIndent("void request(const " + request_name + "& value)");
+                    WriteLineIndent("std::future<void> request(const " + request_name + "& value)");
                     WriteLineIndent("{");
                     Indent(1);
+                    WriteLineIndent("std::promise<void> promise;");
+                    WriteLineIndent("std::future<void> future = promise.get_future();");
+                    WriteLine();
                     WriteLineIndent("// Send the request message");
                     WriteLineIndent("size_t serialized = Sender<TBuffer>::send(value);");
                     WriteLineIndent("if (serialized > 0)");
                     Indent(1);
-                    WriteLineIndent("return;");
+                    WriteLineIndent("promise.set_value();");
                     Indent(-1);
                     WriteLineIndent("else");
                     Indent(1);
-                    WriteLineIndent("throw std::runtime_error(\"Serialization failed!\");");
+                    WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(\"Serialization failed!\")));");
                     Indent(-1);
+                    WriteLine();
+                    WriteLineIndent("return future;");
                     Indent(-1);
                     WriteLineIndent("}");
                 }
@@ -8444,12 +8469,6 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("return future;");
                     Indent(-1);
                     WriteLineIndent("}");
-
-                    // Update responses and rejects cache
-                    responses.insert(*s->response->response);
-                    if (s->rejects)
-                        for (const auto& reject : s->rejects->rejects)
-                            rejects[*reject.reject] = reject.global;
                 }
             }
         }

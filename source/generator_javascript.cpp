@@ -11697,6 +11697,29 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     WriteLineIndent("class " + client + " extends fbe.Client {");
     Indent(1);
 
+    // Collect responses & rejects collections
+    std::set<std::string> responses;
+    std::map<std::string, bool> rejects;
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            if (s->request)
+            {
+                std::string response_name = (s->response) ? ConvertTypeName(*s->response->response, false) : "";
+
+                if (!response_name.empty())
+                {
+                    // Update responses and rejects cache
+                    responses.insert(*s->response->response);
+                    if (s->rejects)
+                        for (const auto& reject : s->rejects->rejects)
+                            rejects[*reject.reject] = reject.global;
+                }
+            }
+        }
+    }
+
     // Generate sender constructor
     WriteLineIndent("/**");
     WriteLineIndent(" * Initialize " + *p->name + " client with the given buffers");
@@ -11719,6 +11742,19 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
             WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "SenderModel = new " + *s->name + "" + model + "(this.sendBuffer)");
             WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "ReceiverValue = new " + *s->name + "()");
             WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "ReceiverModel = new " + *s->name + model + "()");
+        }
+    }
+    WriteLineIndent("this._timestamp = 0");
+    if (!responses.empty())
+    {
+        for (const auto& response : responses)
+        {
+            std::string response_name = ConvertTypeName(response, false);
+            std::string response_field = response;
+            CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+            WriteLineIndent("this._requests_by_id_" + response_field + " = new Map()");
+            WriteLineIndent("this._requests_by_timestamp_" + response_field + " = new Map()");
         }
     }
     WriteLineIndent("this.onSendHandler = this.onSend");
@@ -11768,6 +11804,173 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
             WriteLineIndent("}");
         }
     }
+
+    // Generate reset and watchdog methods
+    WriteLine();
+    WriteLineIndent("// Reset and watchdog methods");
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Reset the client");
+    WriteLineIndent(" * @this {!" + client + "}");
+    WriteLineIndent(" */");
+    WriteLineIndent("reset () {");
+    Indent(1);
+    WriteLineIndent("super.reset()");
+    WriteLineIndent("this.resetRequests()");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Watchdog for timeouts");
+    WriteLineIndent(" * @this {!" + client + "}");
+    WriteLineIndent(" * @param {!number} utc UTC timestamp");
+    WriteLineIndent(" */");
+    WriteLineIndent("watchdog (utc) {");
+    Indent(1);
+    WriteLineIndent("this.watchdogRequests(utc)");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate request methods
+    WriteLine();
+    WriteLineIndent("// Request methods");
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Request value");
+    WriteLineIndent(" * @this {!" + client + "}");
+    WriteLineIndent(" * @param {!object} value Value to request");
+    WriteLineIndent(" * @param {!number} timeout Timeout in milliseconds (default is 0)");
+    WriteLineIndent(" * @returns {Promise} Response promise");
+    WriteLineIndent(" */");
+    WriteLineIndent("request (value, timeout = 0) {");
+    Indent(1);
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            if (s->request)
+            {
+                WriteLineIndent("if (value instanceof " + *s->name + ") {");
+                Indent(1);
+                WriteLineIndent("return this.request_" + CppCommon::StringUtils::ToLower(*s->name) + "(value, timeout)");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+        }
+    }
+    if (p->import)
+    {
+        WriteLineIndent("let result = null");
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("result = this._" + CppCommon::StringUtils::ToLower(*import) + "Client.request(value, timeout)");
+            WriteLineIndent("if (result != null) {");
+            Indent(1);
+            WriteLineIndent("return result");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+    }
+    WriteLineIndent("return null");
+    Indent(-1);
+    WriteLineIndent("}");
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            if (s->request)
+            {
+                std::string request_name = "::" + *p->name + "::" + *s->name;
+                std::string response_name = (s->response) ? ConvertTypeName(*s->response->response, false) : "";
+                std::string response_field = (s->response) ? *s->response->response : "";
+                CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+                WriteLine();
+                WriteLineIndent("/**");
+                WriteLineIndent(" * Request " + *s->name + " value");
+                WriteLineIndent(" * @this {!" + client + "}");
+                WriteLineIndent(" * @param {!" + *s->name + "} value " + *s->name + " value to request");
+                WriteLineIndent(" * @param {!number} timeout Timeout in milliseconds (default is 0)");
+                WriteLineIndent(" * @returns {!Promise} Response promise");
+                WriteLineIndent(" */");
+                WriteLineIndent("request_" + CppCommon::StringUtils::ToLower(*s->name) + " (value, timeout = 0) { // eslint-disable-line");
+                Indent(1);
+                WriteLineIndent("let promise = new fbe.DeferredPromise()");
+                if (response_name.empty())
+                {
+                    WriteLine();
+                    WriteLineIndent("// Send the request message");
+                    WriteLineIndent("let serialized = this.send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
+                    WriteLineIndent("if (serialized > 0) {");
+                    Indent(1);
+                    WriteLineIndent("promise.resolve()");
+                    Indent(-1);
+                    WriteLineIndent("} else {");
+                    Indent(1);
+                    WriteLineIndent("promise.reject(new Error('Serialization failed!'))");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                }
+                else
+                {
+                    WriteLineIndent("let current = Date.now()");
+                    WriteLine();
+                    WriteLineIndent("// Send the request message");
+                    WriteLineIndent("let serialized = this.send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
+                    WriteLineIndent("if (serialized > 0) {");
+                    Indent(1);
+                    WriteLineIndent("// Calculate unique timestamp");
+                    WriteLineIndent("this._timestamp = (current <= this._timestamp) ? this._timestamp + 1 : current");
+                    WriteLine();
+                    WriteLineIndent("// Register the request");
+                    WriteLineIndent("this._requests_by_id_" + response_field + "[value.id] = [this._timestamp, timeout * 1000000, promise]");
+                    WriteLineIndent("this._requests_by_timestamp_" + response_field + "[this._timestamp] = value.id");
+                    Indent(-1);
+                    WriteLineIndent("} else {");
+                    Indent(1);
+                    WriteLineIndent("promise.reject(new Error('Serialization failed!'))");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                }
+                WriteLine();
+                WriteLineIndent("return promise");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+        }
+    }
+
+    // Generate reset client requests method
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Reset client requests");
+    WriteLineIndent(" * @this {!" + client + "}");
+    WriteLineIndent(" */");
+    WriteLineIndent("resetRequests () {");
+    Indent(1);
+    if (p->import)
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Client.resetRequests()");
+    if (!responses.empty())
+    {
+        WriteLine();
+        for (const auto& response : responses)
+        {
+            std::string response_name = ConvertTypeName(response, false);
+            std::string response_field = response;
+            CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+            WriteLineIndent("for (let [, value] of this._requests_by_id_" + response_field + ") {");
+            Indent(1);
+            WriteLineIndent("value[2].reject(new Error('Reset client!'))");
+            Indent(-1);
+            WriteLineIndent("}");
+            WriteLineIndent("this._requests_by_id_" + response_field + ".clear()");
+            WriteLineIndent("this._requests_by_timestamp_" + response_field + ".clear()");
+        }
+    }
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate sender methods
     WriteLine();

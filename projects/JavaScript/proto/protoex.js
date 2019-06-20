@@ -4492,6 +4492,7 @@ class Client extends fbe.Client {
     this._accountSenderModel = new AccountModel(this.sendBuffer)
     this._accountReceiverValue = new Account()
     this._accountReceiverModel = new AccountModel()
+    this._timestamp = 0
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
     this.onReceiveLogHandler = this.onReceiveLog
@@ -4535,6 +4536,52 @@ class Client extends fbe.Client {
    */
   get accountSenderModel () {
     return this._accountSenderModel
+  }
+
+  // Reset and watchdog methods
+
+  /**
+   * Reset the client
+   * @this {!Client}
+   */
+  reset () {
+    super.reset()
+    this.resetRequests()
+  }
+
+  /**
+   * Watchdog for timeouts
+   * @this {!Client}
+   * @param {!number} utc UTC timestamp
+   */
+  watchdog (utc) {
+    this.watchdogRequests(utc)
+  }
+
+  // Request methods
+
+  /**
+   * Request value
+   * @this {!Client}
+   * @param {!object} value Value to request
+   * @param {!number} timeout Timeout in milliseconds (default is 0)
+   * @returns {Promise} Response promise
+   */
+  request (value, timeout = 0) {
+    let result = null
+    result = this._protoClient.request(value, timeout)
+    if (result != null) {
+      return result
+    }
+    return null
+  }
+
+  /**
+   * Reset client requests
+   * @this {!Client}
+   */
+  resetRequests () {
+    this._protoClient.resetRequests()
   }
 
   // Send methods
@@ -5116,6 +5163,7 @@ class FinalClient extends fbe.Client {
     this._accountSenderModel = new AccountFinalModel(this.sendBuffer)
     this._accountReceiverValue = new Account()
     this._accountReceiverModel = new AccountFinalModel()
+    this._timestamp = 0
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
     this.onReceiveLogHandler = this.onReceiveLog
@@ -5159,6 +5207,52 @@ class FinalClient extends fbe.Client {
    */
   get accountSenderModel () {
     return this._accountSenderModel
+  }
+
+  // Reset and watchdog methods
+
+  /**
+   * Reset the client
+   * @this {!FinalClient}
+   */
+  reset () {
+    super.reset()
+    this.resetRequests()
+  }
+
+  /**
+   * Watchdog for timeouts
+   * @this {!FinalClient}
+   * @param {!number} utc UTC timestamp
+   */
+  watchdog (utc) {
+    this.watchdogRequests(utc)
+  }
+
+  // Request methods
+
+  /**
+   * Request value
+   * @this {!FinalClient}
+   * @param {!object} value Value to request
+   * @param {!number} timeout Timeout in milliseconds (default is 0)
+   * @returns {Promise} Response promise
+   */
+  request (value, timeout = 0) {
+    let result = null
+    result = this._protoClient.request(value, timeout)
+    if (result != null) {
+      return result
+    }
+    return null
+  }
+
+  /**
+   * Reset client requests
+   * @this {!FinalClient}
+   */
+  resetRequests () {
+    this._protoClient.resetRequests()
   }
 
   // Send methods
