@@ -3998,7 +3998,8 @@ module FBE
         end
 
         # Check the message full size
-        if message_size < (4 + 4 + 4 + 4)
+        min_size = @_final ? (4 + 4) : (4 + 4 + 4 + 4)
+        if message_size < min_size
           return
         end
 

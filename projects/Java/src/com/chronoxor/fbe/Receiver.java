@@ -129,8 +129,9 @@ public abstract class Receiver
                 return;
 
             // Check the message full size
-            assert (messageSize >= (4 + 4 + 4 + 4)) : "Invalid receive data!";
-            if (messageSize < (4 + 4 + 4 + 4))
+            long minSize = _final ? (4 + 4) : (4 + 4 + 4 + 4);
+            assert (messageSize >= minSize) : "Invalid receive data!";
+            if (messageSize < minSize)
                 return;
 
             // Try to receive message body

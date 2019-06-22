@@ -4595,7 +4595,11 @@ func (r *Receiver) Receive(buffer []byte) error {
         }
 
         // Check the message full size
-        if messageSize < (4 + 4 + 4 + 4) {
+        minSize := 4 + 4 + 4 + 4
+        if r.final {
+            minSize = 4 + 4
+        }
+        if messageSize < minSize {
             return nil
         }
 

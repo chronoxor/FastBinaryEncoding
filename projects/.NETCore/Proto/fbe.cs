@@ -9706,8 +9706,9 @@ namespace FBE {
                     return;
 
                 // Check the message full size
-                Debug.Assert((messageSize >= (4 + 4 + 4 + 4)), "Invalid receive data!");
-                if (messageSize < (4 + 4 + 4 + 4))
+                long minSize = Final ? (4 + 4) : (4 + 4 + 4 + 4);
+                Debug.Assert((messageSize >= minSize), "Invalid receive data!");
+                if (messageSize < minSize)
                     return;
 
                 // Try to receive message body

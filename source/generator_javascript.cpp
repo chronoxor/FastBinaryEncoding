@@ -7871,8 +7871,9 @@ class Receiver {
       }
 
       // Check the message full size
-      console.assert((messageSize >= (4 + 4 + 4 + 4)), 'Invalid receive data!')
-      if (messageSize < (4 + 4 + 4 + 4)) {
+      let minSize = this._final ? (4 + 4) : (4 + 4 + 4 + 4)
+      console.assert((messageSize >= minSize), 'Invalid receive data!')
+      if (messageSize < minSize) {
         return
       }
 
@@ -8354,8 +8355,9 @@ class Client {
       }
 
       // Check the message full size
-      console.assert((messageSize >= (4 + 4 + 4 + 4)), 'Invalid receive data!')
-      if (messageSize < (4 + 4 + 4 + 4)) {
+      let minSize = this._final ? (4 + 4) : (4 + 4 + 4 + 4)
+      console.assert((messageSize >= minSize), 'Invalid receive data!')
+      if (messageSize < minSize) {
         return
       }
 

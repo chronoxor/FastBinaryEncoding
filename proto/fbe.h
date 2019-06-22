@@ -4119,8 +4119,9 @@ public:
                 return;
 
             // Check the message full size
-            assert((message_size >= (4 + 4 + 4 + 4)) && "Invalid receive data!");
-            if (message_size < (4 + 4 + 4 + 4))
+            size_t min_size = _final ? (4 + 4) : (4 + 4 + 4 + 4);
+            assert((message_size >= min_size) && "Invalid receive data!");
+            if (message_size < min_size)
                 return;
 
             // Try to receive message body
