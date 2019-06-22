@@ -284,7 +284,7 @@ class Buffer
             return offset
         }
 
-        val data = ByteArray(Math.max(total, 2L * this.data.size).toInt())
+        val data = ByteArray(kotlin.math.max(total, 2L * this.data.size).toInt())
         System.arraycopy(this.data, 0, data, 0, this.size.toInt())
         this.data = data
         this.size = total
@@ -319,7 +319,7 @@ class Buffer
 
         if (capacity > data.size)
         {
-            val data = ByteArray(Math.max(capacity, 2L * this.data.size).toInt())
+            val data = ByteArray(kotlin.math.max(capacity, 2L * this.data.size).toInt())
             System.arraycopy(this.data, 0, data, 0, size.toInt())
             this.data = data
         }
@@ -476,7 +476,7 @@ class Buffer
 
         fun readString(buffer: ByteArray, offset: Long, size: Long): String
         {
-            return kotlin.text.String(buffer, offset.toInt(), size.toInt(), java.nio.charset.StandardCharsets.UTF_8)
+            return String(buffer, offset.toInt(), size.toInt(), java.nio.charset.StandardCharsets.UTF_8)
         }
 
         fun readUUID(buffer: ByteArray, offset: Long): java.util.UUID
@@ -3594,7 +3594,7 @@ abstract class Receiver
                 // Look into the storage buffer
                 if (offset0 < size1)
                 {
-                    var count = Math.min(size1 - offset0, 4)
+                    var count = kotlin.math.min(size1 - offset0, 4)
                     if (count == 4L)
                     {
                         messageSizeCopied = true
@@ -3608,7 +3608,7 @@ abstract class Receiver
                         // Fill remaining data from the receive buffer
                         if (offset2 < size)
                         {
-                            count = Math.min(size - offset2, 4 - count)
+                            count = kotlin.math.min(size - offset2, 4 - count)
 
                             // Allocate and refresh the storage buffer
                             this.buffer.allocate(count)
@@ -3627,7 +3627,7 @@ abstract class Receiver
                 // Look into the receive buffer
                 if (offset2 < size)
                 {
-                    val count = Math.min(size - offset2, 4)
+                    val count = kotlin.math.min(size - offset2, 4)
                     if (count == 4L)
                     {
                         messageSizeFound = true
@@ -3655,7 +3655,7 @@ abstract class Receiver
                 return
 
             // Check the message full size
-            var minSize = final ? (4 + 4) : (4 + 4 + 4 + 4)
+            val minSize = if (final) (4 + 4) else (4 + 4 + 4 + 4)
             assert(messageSize >= minSize) { "Invalid receive data!" }
             if (messageSize < minSize)
                 return
@@ -3667,7 +3667,7 @@ abstract class Receiver
                 // Look into the storage buffer
                 if (offset0 < size1)
                 {
-                    var count = Math.min(size1 - offset0, messageSize - 4)
+                    var count = kotlin.math.min(size1 - offset0, messageSize - 4)
                     if (count == (messageSize - 4))
                     {
                         messageFound = true
@@ -3695,7 +3695,7 @@ abstract class Receiver
                                 messageSizeCopied = true
                             }
 
-                            count = Math.min(size - offset2, messageSize - 4 - count)
+                            count = kotlin.math.min(size - offset2, messageSize - 4 - count)
 
                             // Allocate and refresh the storage buffer
                             this.buffer.allocate(count)
@@ -3714,7 +3714,7 @@ abstract class Receiver
                 // Look into the receive buffer
                 if (offset2 < size)
                 {
-                    val count = Math.min(size - offset2, messageSize - 4)
+                    val count = kotlin.math.min(size - offset2, messageSize - 4)
                     if (!messageSizeCopied && (count == (messageSize - 4)))
                     {
                         messageFound = true
@@ -3922,7 +3922,7 @@ abstract class Client
                 // Look into the storage buffer
                 if (offset0 < size1)
                 {
-                    var count = Math.min(size1 - offset0, 4)
+                    var count = kotlin.math.min(size1 - offset0, 4)
                     if (count == 4L)
                     {
                         messageSizeCopied = true
@@ -3936,7 +3936,7 @@ abstract class Client
                         // Fill remaining data from the receive buffer
                         if (offset2 < size)
                         {
-                            count = Math.min(size - offset2, 4 - count)
+                            count = kotlin.math.min(size - offset2, 4 - count)
 
                             // Allocate and refresh the storage buffer
                             this.receiveBuffer.allocate(count)
@@ -3955,7 +3955,7 @@ abstract class Client
                 // Look into the receive buffer
                 if (offset2 < size)
                 {
-                    val count = Math.min(size - offset2, 4)
+                    val count = kotlin.math.min(size - offset2, 4)
                     if (count == 4L)
                     {
                         messageSizeFound = true
@@ -3983,7 +3983,7 @@ abstract class Client
                 return
 
             // Check the message full size
-            var minSize = final ? (4 + 4) : (4 + 4 + 4 + 4)
+            val minSize = if (final) (4 + 4) else (4 + 4 + 4 + 4)
             assert(messageSize >= minSize) { "Invalid receive data!" }
             if (messageSize < minSize)
                 return
@@ -3995,7 +3995,7 @@ abstract class Client
                 // Look into the storage buffer
                 if (offset0 < size1)
                 {
-                    var count = Math.min(size1 - offset0, messageSize - 4)
+                    var count = kotlin.math.min(size1 - offset0, messageSize - 4)
                     if (count == (messageSize - 4))
                     {
                         messageFound = true
@@ -4023,7 +4023,7 @@ abstract class Client
                                 messageSizeCopied = true
                             }
 
-                            count = Math.min(size - offset2, messageSize - 4 - count)
+                            count = kotlin.math.min(size - offset2, messageSize - 4 - count)
 
                             // Allocate and refresh the storage buffer
                             this.receiveBuffer.allocate(count)
@@ -4042,7 +4042,7 @@ abstract class Client
                 // Look into the receive buffer
                 if (offset2 < size)
                 {
-                    val count = Math.min(size - offset2, messageSize - 4)
+                    val count = kotlin.math.min(size - offset2, messageSize - 4)
                     if (!messageSizeCopied && (count == (messageSize - 4)))
                     {
                         messageFound = true

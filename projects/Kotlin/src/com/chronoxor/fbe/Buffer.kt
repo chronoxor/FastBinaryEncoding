@@ -62,7 +62,7 @@ class Buffer
             return offset
         }
 
-        val data = ByteArray(Math.max(total, 2L * this.data.size).toInt())
+        val data = ByteArray(kotlin.math.max(total, 2L * this.data.size).toInt())
         System.arraycopy(this.data, 0, data, 0, this.size.toInt())
         this.data = data
         this.size = total
@@ -97,7 +97,7 @@ class Buffer
 
         if (capacity > data.size)
         {
-            val data = ByteArray(Math.max(capacity, 2L * this.data.size).toInt())
+            val data = ByteArray(kotlin.math.max(capacity, 2L * this.data.size).toInt())
             System.arraycopy(this.data, 0, data, 0, size.toInt())
             this.data = data
         }
@@ -254,7 +254,7 @@ class Buffer
 
         fun readString(buffer: ByteArray, offset: Long, size: Long): String
         {
-            return kotlin.text.String(buffer, offset.toInt(), size.toInt(), java.nio.charset.StandardCharsets.UTF_8)
+            return String(buffer, offset.toInt(), size.toInt(), java.nio.charset.StandardCharsets.UTF_8)
         }
 
         fun readUUID(buffer: ByteArray, offset: Long): java.util.UUID

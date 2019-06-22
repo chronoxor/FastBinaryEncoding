@@ -159,6 +159,9 @@ platform:
 // Package declaration
 package proto
 
+// Domain declaration
+domain com.chronoxor
+
 // Order side declaration
 enum OrderSide : byte
 {
