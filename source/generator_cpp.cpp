@@ -8921,7 +8921,9 @@ std::string GeneratorCpp::ConvertTypeName(const std::string& package, const std:
 
     std::string result = type;
     bool pkg = !CppCommon::StringUtils::ReplaceAll(result, ".", "::");
-    return (pkg ? ("::" + package) : "") + "::" + result;
+    result = (pkg ? ("::" + package) : "") + "::" + result;
+
+    return result;
 }
 
 std::string GeneratorCpp::ConvertTypeName(const std::string& package, const StructField& field)
@@ -9016,7 +9018,9 @@ std::string GeneratorCpp::ConvertConstant(const std::string& type, const std::st
         return ConvertConstantPrefix(type) + value + ConvertConstantSuffix(type);
 
     std::string result = value;
+    bool pkg = (CppCommon::StringUtils::CountAll(result, ".") > 1);
     CppCommon::StringUtils::ReplaceAll(result, ".", "::");
+    result = (pkg ? "::" : "") + result;
 
     return result;
 }
@@ -9101,9 +9105,8 @@ std::string GeneratorCpp::ConvertDefault(const std::string& package, const std::
         return "FBE::uuid_t::nil()";
 
     std::string result = type + "()";
-    bool pfx = (CppCommon::StringUtils::CountAll(result, ".") > 1);
     bool pkg = !CppCommon::StringUtils::ReplaceAll(result, ".", "::");
-    return ((pfx || pkg) ? ("::" + package) : "") + "::" + result;
+    result = (pkg ? ("::" + package) : "") + "::" + result;
 
     return result;
 }
