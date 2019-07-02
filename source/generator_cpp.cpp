@@ -8921,9 +8921,7 @@ std::string GeneratorCpp::ConvertTypeName(const std::string& package, const std:
 
     std::string result = type;
     bool pkg = !CppCommon::StringUtils::ReplaceAll(result, ".", "::");
-    result = (pkg ? ("::" + package) : "") + "::" + result;
-
-    return result;
+    return (pkg ? ("::" + package) : "") + "::" + result;
 }
 
 std::string GeneratorCpp::ConvertTypeName(const std::string& package, const StructField& field)
@@ -9020,9 +9018,7 @@ std::string GeneratorCpp::ConvertConstant(const std::string& type, const std::st
     std::string result = value;
     bool pkg = (CppCommon::StringUtils::CountAll(result, ".") > 1);
     CppCommon::StringUtils::ReplaceAll(result, ".", "::");
-    result = (pkg ? "::" : "") + result;
-
-    return result;
+    return (pkg ? "::" : "") + result;
 }
 
 std::string GeneratorCpp::ConvertConstantPrefix(const std::string& type)
@@ -9106,9 +9102,7 @@ std::string GeneratorCpp::ConvertDefault(const std::string& package, const std::
 
     std::string result = type + "()";
     bool pkg = !CppCommon::StringUtils::ReplaceAll(result, ".", "::");
-    result = (pkg ? ("::" + package) : "") + "::" + result;
-
-    return result;
+    return (pkg ? ("::" + package) : "") + "::" + result;
 }
 
 std::string GeneratorCpp::ConvertDefault(const std::string& package, const StructField& field)
