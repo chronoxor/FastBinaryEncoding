@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['echo',['ECHO',['../fbe-lexer_8cpp.html#aad1dc60a04a1d8cfc8b3ded13601e361',1,'fbe-lexer.cpp']]],
-  ['enum',['ENUM',['../fbe-parser_8cpp.html#a378181c29a641d58f55d647b5a9599f2',1,'ENUM():&#160;fbe-parser.cpp'],['../fbe-parser_8hpp.html#a378181c29a641d58f55d647b5a9599f2',1,'ENUM():&#160;fbe-parser.hpp']]],
-  ['eob_5fact_5fcontinue_5fscan',['EOB_ACT_CONTINUE_SCAN',['../fbe-lexer_8cpp.html#adf4b0db227e07782e28ade353a7ba7a1',1,'fbe-lexer.cpp']]],
-  ['eob_5fact_5fend_5fof_5ffile',['EOB_ACT_END_OF_FILE',['../fbe-lexer_8cpp.html#a7f71d7fa2c403eb4b2f38cb9536f3c63',1,'fbe-lexer.cpp']]],
-  ['eob_5fact_5flast_5fmatch',['EOB_ACT_LAST_MATCH',['../fbe-lexer_8cpp.html#ad1a0b5ebcabffe388e9e9ebb2619c1fb',1,'fbe-lexer.cpp']]]
+  ['initial',['INITIAL',['../fbe-lexer_8cpp.html#aa3d063564f6ab16f6d408b8369d0e9ff',1,'fbe-lexer.cpp']]],
+  ['int16_5fmax',['INT16_MAX',['../fbe-lexer_8cpp.html#ac58f2c111cc9989c86db2a7dc4fd84ca',1,'fbe-lexer.cpp']]],
+  ['int16_5fmin',['INT16_MIN',['../fbe-lexer_8cpp.html#ad4e9955955b27624963643eac448118a',1,'fbe-lexer.cpp']]],
+  ['int32_5fmax',['INT32_MAX',['../fbe-lexer_8cpp.html#a181807730d4a375f848ba139813ce04f',1,'fbe-lexer.cpp']]],
+  ['int32_5fmin',['INT32_MIN',['../fbe-lexer_8cpp.html#a688eb21a22db27c2b2bd5836943cdcbe',1,'fbe-lexer.cpp']]],
+  ['int8_5fmax',['INT8_MAX',['../fbe-lexer_8cpp.html#aaf7f29f45f1a513b4748a4e5014ddf6a',1,'fbe-lexer.cpp']]],
+  ['int8_5fmin',['INT8_MIN',['../fbe-lexer_8cpp.html#aadcf2a81af243df333b31efa6461ab8e',1,'fbe-lexer.cpp']]]
 ];
