@@ -64,6 +64,7 @@ before_install:
   - if [ "$OS" == "osx" ]; then brew install doxygen; fi
   - if [ "$OS" == "osx" ]; then brew install graphviz; fi
   - if [ "$OS" == "osx" ]; then brew install flex bison; fi
+  - if [ "$OS" == "osx" ]; then export PATH="/usr/local/opt/flex/bin:/usr/local/opt/bison/bin:$PATH"; fi
   # cmake
   - cmake --version
   # doxygen support
