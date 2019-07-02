@@ -8188,7 +8188,7 @@ std::string GeneratorKotlin::ConvertConstant(const std::string& domain, const st
                 if (pos != std::string::npos)
                 {
                     if (CppCommon::StringUtils::CountAll(flag, ".") > 1)
-                        flag = domain + "." + flag;
+                        flag = domain + flag;
                     else
                         flag = (package.empty() ? "" : (domain + package + ".")) + flag;
                 }
@@ -8203,7 +8203,7 @@ std::string GeneratorKotlin::ConvertConstant(const std::string& domain, const st
             if (pos != std::string::npos)
             {
                 if (CppCommon::StringUtils::CountAll(result, ".") > 1)
-                    result = domain + "." + result;
+                    result = domain + result;
                 else
                     result = (package.empty() ? "" : (domain + package + ".")) + result;
             }
