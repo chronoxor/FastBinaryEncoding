@@ -134,8 +134,8 @@ enum class State : uint8_t
     initialized = (uint8_t)0x02u,
     calculated = (uint8_t)0x04u,
     broken = (uint8_t)0x08u,
-    good = initialized | calculated,
-    bad = unknown | invalid | broken,
+    good = initialized  |  calculated,
+    bad = unknown  |  invalid  |  broken,
 };
 FBE_ENUM_FLAGS(State)
 
@@ -530,7 +530,7 @@ struct Account
     Account()
         : id((int32_t)0ll)
         , name()
-        , state(State::initialized | State::bad)
+        , state(State::initialized  |  State::bad)
         , wallet()
         , asset()
         , orders()

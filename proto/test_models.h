@@ -5334,9 +5334,9 @@ public:
         fbe_current_size += f1005.fbe_size();
 
         if ((fbe_current_size + f1006.fbe_size()) <= fbe_struct_size)
-            f1006.get(fbe_value.f1006, FlagsTyped::FLAG_VALUE_2 | FlagsTyped::FLAG_VALUE_4 | FlagsTyped::FLAG_VALUE_6);
+            f1006.get(fbe_value.f1006, FlagsTyped::FLAG_VALUE_2  |  FlagsTyped::FLAG_VALUE_4  |  FlagsTyped::FLAG_VALUE_6);
         else
-            fbe_value.f1006 = FlagsTyped::FLAG_VALUE_2 | FlagsTyped::FLAG_VALUE_4 | FlagsTyped::FLAG_VALUE_6;
+            fbe_value.f1006 = FlagsTyped::FLAG_VALUE_2  |  FlagsTyped::FLAG_VALUE_4  |  FlagsTyped::FLAG_VALUE_6;
         fbe_current_size += f1006.fbe_size();
 
         if ((fbe_current_size + f1007.fbe_size()) <= fbe_struct_size)

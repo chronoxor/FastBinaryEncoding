@@ -197,7 +197,7 @@ enum class FlagsSimple
     FLAG_VALUE_2 = (int32_t)0x2ll,
     FLAG_VALUE_3 = (int32_t)0x4ll,
     FLAG_VALUE_4 = FLAG_VALUE_3,
-    FLAG_VALUE_5 = FLAG_VALUE_1 | FLAG_VALUE_3,
+    FLAG_VALUE_5 = FLAG_VALUE_1  |  FLAG_VALUE_3,
 };
 FBE_ENUM_FLAGS(FlagsSimple)
 
@@ -284,7 +284,7 @@ enum class FlagsTyped : uint64_t
     FLAG_VALUE_6 = (uint64_t)0x20ull,
     FLAG_VALUE_7 = (uint64_t)0x40ull,
     FLAG_VALUE_8 = FLAG_VALUE_7,
-    FLAG_VALUE_9 = FLAG_VALUE_2 | FLAG_VALUE_4 | FLAG_VALUE_6,
+    FLAG_VALUE_9 = FLAG_VALUE_2  |  FLAG_VALUE_4  |  FLAG_VALUE_6,
 };
 FBE_ENUM_FLAGS(FlagsTyped)
 
@@ -1584,7 +1584,7 @@ struct StructNested : public ::test::StructOptional
         , f1003(std::nullopt)
         , f1004()
         , f1005()
-        , f1006(FlagsTyped::FLAG_VALUE_2 | FlagsTyped::FLAG_VALUE_4 | FlagsTyped::FLAG_VALUE_6)
+        , f1006(FlagsTyped::FLAG_VALUE_2  |  FlagsTyped::FLAG_VALUE_4  |  FlagsTyped::FLAG_VALUE_6)
         , f1007(std::nullopt)
         , f1008()
         , f1009()

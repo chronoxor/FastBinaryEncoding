@@ -9015,10 +9015,19 @@ std::string GeneratorCpp::ConvertConstant(const std::string& type, const std::st
     if (IsKnownType(type))
         return ConvertConstantPrefix(type) + value + ConvertConstantSuffix(type);
 
-    std::string result = value;
-    bool pkg = (CppCommon::StringUtils::CountAll(result, ".") > 1);
-    CppCommon::StringUtils::ReplaceAll(result, ".", "::");
-    return (pkg ? "::" : "") + result;
+    bool first = true;
+    std::string result;
+    auto items = CppCommon::StringUtils::Split(value, "|");
+    for (auto& item : items)
+    {
+        bool pkg = (CppCommon::StringUtils::CountAll(item, ".") > 1);
+        CppCommon::StringUtils::ReplaceAll(item, ".", "::");
+        result += (!first ? " | " : "");
+        result += (pkg ? "::" : "") + item;
+        first = false;
+    }
+
+    return result;
 }
 
 std::string GeneratorCpp::ConvertConstantPrefix(const std::string& type)

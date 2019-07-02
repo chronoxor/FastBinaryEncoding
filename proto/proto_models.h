@@ -1427,9 +1427,9 @@ public:
         fbe_current_size += name.fbe_size();
 
         if ((fbe_current_size + state.fbe_size()) <= fbe_struct_size)
-            state.get(fbe_value.state, State::initialized | State::bad);
+            state.get(fbe_value.state, State::initialized  |  State::bad);
         else
-            fbe_value.state = State::initialized | State::bad;
+            fbe_value.state = State::initialized  |  State::bad;
         fbe_current_size += state.fbe_size();
 
         if ((fbe_current_size + wallet.fbe_size()) <= fbe_struct_size)
