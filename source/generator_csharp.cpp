@@ -4960,7 +4960,9 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     {
         for (const auto& field : s->body->fields)
         {
-            if (field->array)
+            if (field->attributes->hidden)
+                WriteLineIndent("sb.Append(\"" + std::string(first ? "" : ",") + *field->name + "=***\");");
+            else if (field->array)
             {
                 WriteLineIndent("if (" + *field->name + " != null)");
                 WriteLineIndent("{");

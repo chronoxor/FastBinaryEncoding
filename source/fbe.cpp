@@ -10,6 +10,12 @@
 
 namespace FBE {
 
+void Attributes::Merge(Attributes* attributes)
+{
+    deprecated |= attributes->deprecated;
+    hidden |= attributes->hidden;
+}
+
 void EnumBody::AddValue(EnumValue* v)
 {
     if (v == nullptr)

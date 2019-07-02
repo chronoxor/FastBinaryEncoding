@@ -2,35 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/fbe.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/fbe.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/Proto.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/Benchmarks.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/SerializationJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/SerializationJson.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/Proto.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/Receiver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Receiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/fbe.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/fbe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/fbe.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/fbe.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/proto/Account.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto/Account.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/proto/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/proto/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/proto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/Account.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/proto/proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/proto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/proto.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/proto.fbe" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.fbe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/proto.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/fbe.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/fbe.l" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.l" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/fbe.y" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.y" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
@@ -189,7 +178,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.go test tests">
+  <component name="RunManager" selected="Go Build.go build serialization.go">
     <configuration name="go build create.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -198,19 +187,19 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go build print.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <working_directory value="$PROJECT_DIR$/" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/examples/print.go" />
-      <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
     <configuration name="go build send_receive.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
       <working_directory value="$PROJECT_DIR$/" />
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/examples/send_receive.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build serialization.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="FastBinaryEncoding" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/examples/serialization.go" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
@@ -253,19 +242,19 @@
     </configuration>
     <list>
       <item itemvalue="Go Build.go build serialization_json.go" />
-      <item itemvalue="Go Build.go build print.go" />
       <item itemvalue="Go Build.go build send_receive.go" />
       <item itemvalue="Go Build.go build create.go" />
       <item itemvalue="Go Test.Tests" />
       <item itemvalue="Go Test.go test tests" />
+      <item itemvalue="Go Build.go build serialization.go" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build serialization.go" />
         <item itemvalue="Go Test.go test tests" />
         <item itemvalue="Go Build.go build send_receive.go" />
         <item itemvalue="Go Build.go build serialization_json.go" />
         <item itemvalue="Go Build.go build create.go" />
-        <item itemvalue="Go Build.go build print.go" />
       </list>
     </recent_temporary>
   </component>
@@ -304,7 +293,7 @@
   <component name="ToolWindowManager">
     <frame x="432" y="186" width="1600" height="1195" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18636364" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18896104" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -713,13 +702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/proto/Account.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proto/test/StructNested.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
@@ -752,6 +734,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="166" lean-forward="true" selection-start-line="166" selection-end-line="166" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto/Account.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="105" column="25" lean-forward="true" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
         </state>
       </provider>
     </entry>

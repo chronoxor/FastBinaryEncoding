@@ -2,37 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="783b2918-92f4-46d2-9a41-0a253625844f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/fbe.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/fbe.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/Proto.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/Benchmarks.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/SerializationJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/SerializationJson.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/Proto.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/packages.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/Receiver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/Receiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/fbe.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/fbe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/fbe.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/fbe.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Account.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Account.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/proto/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/proto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/Account.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/proto/proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/proto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/proto.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/proto.fbe" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.fbe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/proto.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/fbe.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/fbe.l" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.l" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/fbe.y" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.y" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
@@ -125,11 +112,6 @@
               <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
               <item name="Java" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Java" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -143,7 +125,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1561239635364" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562103512572" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
@@ -163,7 +145,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.&lt;default&gt;">
+  <component name="RunManager" selected="Application.Serialization">
     <configuration name="Create" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="examples.Create" />
       <module name="FastBinaryEncoding" />
@@ -180,6 +162,20 @@
     </configuration>
     <configuration name="SendReceive" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="examples.SendReceive" />
+      <module name="FastBinaryEncoding" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="examples.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Serialization" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="examples.Serialization" />
       <module name="FastBinaryEncoding" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
@@ -250,6 +246,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Serialization" />
         <item itemvalue="TestNG.&lt;default&gt;" />
         <item itemvalue="Application.SendReceive" />
         <item itemvalue="TestNG.com.chronoxor.protoex" />
@@ -330,6 +327,7 @@
       <workItem from="1560348316346" duration="152000" />
       <workItem from="1561239338850" duration="204000" />
       <workItem from="1561239591243" duration="58000" />
+      <workItem from="1562103468079" duration="72000" />
     </task>
     <servers />
   </component>
@@ -366,12 +364,12 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55857000" />
+    <option name="totallyTimeSpent" value="55929000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="306" y="211" width="2010" height="1090" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3748718" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27333334" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -380,7 +378,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5830769" weight="0.48066875" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5825641" weight="0.48066875" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49547803" weight="0.39907727" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -389,7 +387,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="JProfiler" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4996968" weight="0.32891247" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.41692308" side_tool="true" visible="true" weight="0.48066875" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.41743588" side_tool="true" visible="true" weight="0.48066875" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.3617571" weight="0.28243244" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="bottom" id="Duplicate detector" order="14" sideWeight="0.499354" weight="0.32972974" />
@@ -434,13 +432,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="22" column="55" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/proto/Account.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -767,6 +758,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="135" lean-forward="true" selection-start-line="135" selection-end-line="135" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/chronoxor/proto/Account.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1292">
+          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
         </state>
       </provider>
     </entry>

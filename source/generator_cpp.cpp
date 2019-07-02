@@ -5878,7 +5878,7 @@ void GeneratorCpp::GenerateEnum(const std::shared_ptr<Package>& p, const std::sh
 
     // Generate enum begin
     WriteLine();
-    WriteIndent("enum class " + *e->name);
+    WriteIndent("enum class " + std::string(e->attributes->deprecated ? "[[deprecated]] " : "") + *e->name);
     if (e->base && !e->base->empty())
         Write(" : " + ConvertEnumType(*e->base));
     WriteLine();
@@ -5893,6 +5893,8 @@ void GeneratorCpp::GenerateEnum(const std::shared_ptr<Package>& p, const std::sh
         for (const auto& value : e->body->values)
         {
             WriteIndent(*value->name);
+            if (value->attributes->deprecated)
+                Write(" [[deprecated]]");
             if (value->value)
             {
                 if (value->value->constant && !value->value->constant->empty())
@@ -6096,7 +6098,7 @@ void GeneratorCpp::GenerateFlags(const std::shared_ptr<Package>& p, const std::s
 
     // Generate flags begin
     WriteLine();
-    WriteIndent("enum class " + *f->name);
+    WriteIndent("enum class " + std::string(f->attributes->deprecated ? "[[deprecated]] " : "") + *f->name);
     if (f->base && !f->base->empty())
         Write(" : " + ConvertEnumType(*f->base));
     WriteLine();
@@ -6111,6 +6113,8 @@ void GeneratorCpp::GenerateFlags(const std::shared_ptr<Package>& p, const std::s
         for (const auto& value : f->body->values)
         {
             WriteIndent(*value->name);
+            if (value->attributes->deprecated)
+                Write(" [[deprecated]]");
             if (value->value)
             {
                 if (value->value->constant && !value->value->constant->empty())
@@ -6345,7 +6349,7 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
 
     // Generate struct begin
     WriteLine();
-    WriteIndent("struct " + *s->name);
+    WriteIndent("struct " + std::string(s->attributes->deprecated ? "[[deprecated]] " : "") + *s->name);
     if (s->base && !s->base->empty())
         Write(" : public " + ConvertTypeName(*p->name, *s->base, false));
     WriteLine();
@@ -6363,8 +6367,15 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
 
     // Generate struct body
     if (s->body)
+    {
         for (const auto& field : s->body->fields)
-            WriteLineIndent(ConvertTypeName(*p->name, *field) + " " + *field->name + ";");
+        {
+            WriteIndent();
+            if (field->attributes->deprecated)
+                Write("[[deprecated]] ");
+            WriteLine(ConvertTypeName(*p->name, *field) + " " + *field->name + ";");
+        }
+    }
 
     // Generate struct default constructor
     bool first = true;
@@ -6601,7 +6612,9 @@ void GeneratorCpp::GenerateStructOutputStream(const std::shared_ptr<Package>& p,
         // Generate fields output stream operator calls
         for (const auto& field : s->body->fields)
         {
-            if (field->array)
+            if (field->attributes->hidden)
+                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=***\";");
+            else if (field->array)
             {
                 WriteLineIndent("{");
                 Indent(1);
@@ -6743,7 +6756,9 @@ void GeneratorCpp::GenerateStructLoggingStream(const std::shared_ptr<Package>& p
         // Generate fields output stream operator calls
         for (const auto& field : s->body->fields)
         {
-            if (field->array)
+            if (field->attributes->hidden)
+                WriteLineIndent("record.StoreList(\"" + std::string(first ? "" : ",") + *field->name + "=***\");");
+            else if (field->array)
             {
                 WriteLineIndent("{");
                 Indent(1);

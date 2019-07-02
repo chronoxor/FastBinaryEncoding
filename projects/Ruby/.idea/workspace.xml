@@ -2,34 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28b38142-73b0-4ddb-b81e-352705299fce" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/fbe.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/fbe.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/Proto.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/Benchmarks.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/SerializationJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/SerializationJson.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/Proto.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/Receiver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Receiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Account.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Account.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/proto/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/proto/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/fbe.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/fbe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Ruby.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/fbe.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/fbe.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/proto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/Account.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/proto/proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/proto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/proto.fbe" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.fbe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/proto.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/fbe.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/fbe.l" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.l" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/fbe.y" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.y" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
@@ -66,8 +60,8 @@
     <SUITE FILE_PATH="coverage/FastBinaryEncoding@All_tests_in_tests__Ruby.rcov" NAME="All tests in tests: Ruby Coverage Results" MODIFIED="1561238568939" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@print.rcov" NAME="print Coverage Results" MODIFIED="1539969713993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/FastBinaryEncoding@create.rcov" NAME="create Coverage Results" MODIFIED="1550870767289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding@serialization.rcov" NAME="serialization Coverage Results" MODIFIED="1550870778287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@Run_test__test_decimal___Ruby.rcov" NAME="Run test 'test_decimal': Ruby Coverage Results" MODIFIED="1539867758133" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding@serialization.rcov" NAME="serialization Coverage Results" MODIFIED="1562103709637" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@Run_test__test_create___Ruby.rcov" NAME="Run test 'test_create': Ruby Coverage Results" MODIFIED="1539884441267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@serialization_final.rcov" NAME="serialization_final Coverage Results" MODIFIED="1539984743038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@benchmark_serialization_final.rcov" NAME="benchmark_serialization_final Coverage Results" MODIFIED="1539984610084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" MODULE_NAME="Ruby" />
@@ -160,17 +154,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ruby" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Tests'; set:Tests; class com.intellij.psi.search.scope.TestsScope">
           <expand>
@@ -182,6 +165,22 @@
               <item name="Ruby" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="tests" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Ruby" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Ruby" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -207,7 +206,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Ruby.send_receive">
+  <component name="RunManager" selected="Ruby.serialization">
     <configuration name="send_receive" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
       <module name="Ruby" />
       <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
@@ -298,11 +297,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Ruby.serialization" />
         <item itemvalue="Ruby.send_receive" />
         <item itemvalue="Test::Unit/Shoulda/Minitest.All tests in tests: Ruby" />
         <item itemvalue="Ruby.serialization_json" />
         <item itemvalue="Ruby.serialization_final" />
-        <item itemvalue="Ruby.serialization" />
       </list>
     </recent_temporary>
   </component>
@@ -349,6 +348,7 @@
       <workItem from="1553269446428" duration="285000" />
       <workItem from="1556500281954" duration="535000" />
       <workItem from="1561238499193" duration="384000" />
+      <workItem from="1562103669429" duration="44000" />
     </task>
     <servers />
   </component>
@@ -385,17 +385,17 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="138769000" />
+    <option name="totallyTimeSpent" value="138813000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="407" y="238" width="1639" height="1070" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3172894" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3210893" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4870171" weight="0.3906083" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4863838" weight="0.3906083" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49555838" weight="0.470651" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -404,7 +404,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32997987" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5129829" side_tool="true" visible="true" weight="0.3906083" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5136162" side_tool="true" visible="true" weight="0.3906083" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />

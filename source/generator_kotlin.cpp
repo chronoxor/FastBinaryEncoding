@@ -5469,7 +5469,9 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     {
         for (const auto& field : s->body->fields)
         {
-            if (field->array || field->vector)
+            if (field->attributes->hidden)
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=***\");");
+            else if (field->array || field->vector)
             {
                 WriteLineIndent("@Suppress(\"ConstantConditionIf\")");
                 WriteLineIndent("if (true)");

@@ -47,6 +47,8 @@ int yyerror(const std::string& msg);
 "base"                  { yycount(); return yytoken(BASE); }
 "[id]"                  { yycount(); return yytoken(ID); }
 "[key]"                 { yycount(); return yytoken(KEY); }
+"[hidden]"              { yycount(); return yytoken(HIDDEN); }
+"[deprecated]"          { yycount(); return yytoken(DEPRECATED); }
 "request"               { yycount(); return yytoken(REQ); }
 "response"              { yycount(); return yytoken(RES); }
 "reject"                { yycount(); return yytoken(REJ); }

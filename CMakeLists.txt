@@ -49,7 +49,7 @@ endif()
 if(APPLE)
   bison_target(parser "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe.y" "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe-parser.cpp")
 else()
-  bison_target(parser "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe.y" "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe-parser.cpp" COMPILE_FLAGS "-Wno-conflicts-sr")
+  bison_target(parser "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe.y" "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe-parser.cpp" COMPILE_FLAGS "-Wno-conflicts-rr -Wno-conflicts-sr")
 endif()
 add_flex_bison_dependency(lexer parser)
 

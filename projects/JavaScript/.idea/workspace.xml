@@ -2,34 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/fbe.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/fbe.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/Proto.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/Benchmarks.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/SerializationJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/SerializationJson.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/Proto.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/Receiver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Receiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/fbe.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/fbe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/fbe.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/fbe.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Account.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Account.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/proto/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/proto/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/Account.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/proto/proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/proto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/proto.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/proto.fbe" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.fbe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/proto.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/fbe.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/fbe.l" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.l" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/fbe.y" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.y" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
@@ -87,7 +80,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -95,10 +87,16 @@
               <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
               <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -127,11 +125,11 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.send_receive.js">
+  <component name="RunManager" selected="Node.js.serialization.js">
     <configuration name="send_receive.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/send_receive.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
-    <configuration name="serialization_json.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/serialization_json.js" working-dir="$PROJECT_DIR$">
+    <configuration name="serialization.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/serialization.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <configuration name="test_send_receive_final.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tests/test_send_receive_final.js" working-dir="$PROJECT_DIR$">
@@ -158,19 +156,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Node.js.serialization_json.js" />
       <item itemvalue="Node.js.test_send_receive_final.js" />
       <item itemvalue="Node.js.send_receive.js" />
       <item itemvalue="npm.tests-node" />
       <item itemvalue="npm.tests-standard" />
+      <item itemvalue="Node.js.serialization.js" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.serialization.js" />
         <item itemvalue="npm.tests-node" />
         <item itemvalue="Node.js.send_receive.js" />
         <item itemvalue="npm.tests-standard" />
         <item itemvalue="Node.js.test_send_receive_final.js" />
-        <item itemvalue="Node.js.serialization_json.js" />
       </list>
     </recent_temporary>
   </component>
@@ -218,18 +216,19 @@
       <workItem from="1561236861432" duration="364000" />
       <workItem from="1561238429073" duration="23000" />
       <workItem from="1561238786593" duration="6000" />
+      <workItem from="1562103674356" duration="28000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45978000" />
+    <option name="totallyTimeSpent" value="46006000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="320" y="242" width="1830" height="1029" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5691964" visible="true" weight="0.2700893" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.56808037" visible="true" weight="0.2700893" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="npm" order="2" sideWeight="0.43080357" side_tool="true" visible="true" weight="0.2700893" />
+      <window_info id="npm" order="2" sideWeight="0.43191963" side_tool="true" visible="true" weight="0.2700893" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />

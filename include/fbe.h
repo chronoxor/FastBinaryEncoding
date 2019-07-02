@@ -31,6 +31,14 @@ int yyerror(const std::string& msg);
 
 namespace FBE {
 
+struct Attributes
+{
+    bool deprecated{false};
+    bool hidden{false};
+
+    void Merge(Attributes* attributes);
+};
+
 struct EnumConst
 {
     std::shared_ptr<std::string> constant;
@@ -39,6 +47,7 @@ struct EnumConst
 
 struct EnumValue
 {
+    std::shared_ptr<Attributes> attributes;
     std::shared_ptr<std::string> name;
     std::shared_ptr<EnumConst> value;
 };
@@ -52,6 +61,7 @@ struct EnumBody
 
 struct EnumType
 {
+    std::shared_ptr<Attributes> attributes;
     std::shared_ptr<std::string> name;
     std::shared_ptr<std::string> base;
     std::shared_ptr<EnumBody> body;
@@ -65,6 +75,7 @@ struct FlagsConst
 
 struct FlagsValue
 {
+    std::shared_ptr<Attributes> attributes;
     std::shared_ptr<std::string> name;
     std::shared_ptr<FlagsConst> value;
 };
@@ -78,6 +89,7 @@ struct FlagsBody
 
 struct FlagsType
 {
+    std::shared_ptr<Attributes> attributes;
     std::shared_ptr<std::string> name;
     std::shared_ptr<std::string> base;
     std::shared_ptr<FlagsBody> body;
@@ -85,6 +97,7 @@ struct FlagsType
 
 struct StructField
 {
+    std::shared_ptr<Attributes> attributes;
     std::shared_ptr<std::string> name;
     std::shared_ptr<std::string> key;
     std::shared_ptr<std::string> type;
@@ -138,6 +151,7 @@ struct StructType
     bool fixed;
     bool id{false};
     bool keys{false};
+    std::shared_ptr<Attributes> attributes;
     std::shared_ptr<std::string> name;
     std::shared_ptr<std::string> base;
     std::shared_ptr<StructRequest> request;

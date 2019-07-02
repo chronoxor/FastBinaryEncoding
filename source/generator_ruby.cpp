@@ -4239,7 +4239,9 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
         for (const auto& field : s->body->fields)
         {
             WriteLineIndent("result << '" + std::string(first ? "" : ",") + *field->name + "='");
-            if (field->array || field->vector)
+            if (field->attributes->hidden)
+                WriteLineIndent("result << '***'");
+            else if (field->array || field->vector)
             {
                 WriteLineIndent("if @" + *field->name + ".nil?");
                 Indent(1);
