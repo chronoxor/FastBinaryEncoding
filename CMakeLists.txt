@@ -46,11 +46,7 @@ if(MINGW OR MSVC)
 else()
   flex_target(lexer "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe.l" "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe-lexer.cpp" COMPILE_FLAGS "--verbose --yylineno")
 endif()
-if(APPLE)
-  bison_target(parser "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe.y" "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe-parser.cpp")
-else()
-  bison_target(parser "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe.y" "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe-parser.cpp" COMPILE_FLAGS "-Wno-conflicts-rr -Wno-conflicts-sr")
-endif()
+bison_target(parser "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe.y" "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe-parser.cpp" COMPILE_FLAGS "-Wno-conflicts-rr -Wno-conflicts-sr")
 add_flex_bison_dependency(lexer parser)
 
 # Compiler

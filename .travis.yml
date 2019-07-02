@@ -63,6 +63,7 @@ before_install:
   - if [ "$OS" == "osx" ]; then brew update; fi
   - if [ "$OS" == "osx" ]; then brew install doxygen; fi
   - if [ "$OS" == "osx" ]; then brew install graphviz; fi
+  - if [ "$OS" == "osx" ]; then brew install flex bison; fi
   # cmake
   - cmake --version
   # doxygen support
