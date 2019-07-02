@@ -7531,7 +7531,12 @@ std::string GeneratorJava::ConvertConstant(const std::string& domain, const std:
                 std::string flag = CppCommon::StringUtils::ToTrim(it);
                 size_t pos = flag.find_last_of('.');
                 if (pos != std::string::npos)
-                    flag = (package.empty() ? "" : (domain + package + ".")) + flag;
+                {
+                    if (CppCommon::StringUtils::CountAll(flag, ".") > 1)
+                        flag = domain + "." + flag;
+                    else
+                        flag = (package.empty() ? "" : (domain + package + ".")) + flag;
+                }
                 result += (first ? "" : ", ") + flag + ".getEnum()";
                 first = false;
             }
@@ -7541,7 +7546,12 @@ std::string GeneratorJava::ConvertConstant(const std::string& domain, const std:
         {
             size_t pos = result.find_last_of('.');
             if (pos != std::string::npos)
-                result = (package.empty() ? "" : (domain + package + ".")) + result;
+            {
+                if (CppCommon::StringUtils::CountAll(result, ".") > 1)
+                    result = domain + "." + result;
+                else
+                    result = (package.empty() ? "" : (domain + package + ".")) + result;
+            }
         }
     }
 
