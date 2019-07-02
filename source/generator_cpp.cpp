@@ -9101,8 +9101,9 @@ std::string GeneratorCpp::ConvertDefault(const std::string& package, const std::
         return "FBE::uuid_t::nil()";
 
     std::string result = type + "()";
+    bool pfx = (CppCommon::StringUtils::CountAll(result, ".") > 1);
     bool pkg = !CppCommon::StringUtils::ReplaceAll(result, ".", "::");
-    return (pkg ? ("::" + package) : "") + "::" + result;
+    return ((pfx || pkg) ? ("::" + package) : "") + "::" + result;
 
     return result;
 }
