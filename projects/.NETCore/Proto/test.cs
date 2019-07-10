@@ -16102,6 +16102,19 @@ namespace test {
 namespace FBE {
 namespace test {
 
+    // Fast Binary Encoding test protocol version
+    public static class ProtocolVersion
+    {
+        public const int Major = 2;
+        public const int Minor = 3;
+    }
+
+} // namespace test
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
     // Fast Binary Encoding test sender
     public class Sender : FBE.Sender
     {

@@ -14,7 +14,7 @@ void GeneratorCpp::Generate(const std::shared_ptr<Package>& package)
 {
     GeneratePackage(package);
     GeneratePackageModels(package);
-    if (Sender())
+    if (Proto())
         GeneratePackageProtocol(package);
 }
 
@@ -5707,7 +5707,7 @@ void GeneratorCpp::GenerateFBE(const CppCommon::Path& path)
         GenerateFBEFinalModelVector();
         GenerateFBEFinalModelMap();
     }
-    if (Sender())
+    if (Proto())
     {
         GenerateFBESender();
         GenerateFBEReceiver();
@@ -5850,6 +5850,9 @@ void GeneratorCpp::GeneratePackageProtocol(const std::shared_ptr<Package>& p)
     // Generate package header
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImportsProtocol(p);
+
+    // Generate protocol version
+    GenerateProtocolVersion(p);
 
     // Generate sender & receiver
     GenerateSender(p, false);
@@ -7920,6 +7923,30 @@ void GeneratorCpp::GenerateStructModelFinal(const std::shared_ptr<Package>& p, c
     WriteLineIndent("FinalModel<TBuffer, " + struct_name + "> _model;");
 
     // Generate struct model final end
+    Indent(-1);
+    WriteLineIndent("};");
+
+    // Generate namespace end
+    WriteLine();
+    WriteLineIndent("} // namespace " + *p->name);
+    WriteLineIndent("} // namespace FBE");
+}
+
+void GeneratorCpp::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
+{
+    // Generate namespace begin
+    WriteLine();
+    WriteLineIndent("namespace FBE {");
+    WriteLineIndent("namespace " + *p->name + " {");
+
+    // Generate protocol version struct
+    WriteLine();
+    WriteLineIndent("// Fast Binary Encoding " + *p->name + " protocol version");
+    WriteLineIndent("struct ProtocolVersion");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("static const int major = " + std::to_string(p->version->major) + ";");
+    WriteLineIndent("static const int minor = " + std::to_string(p->version->minor) + ";");
     Indent(-1);
     WriteLineIndent("};");
 

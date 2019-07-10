@@ -3657,7 +3657,7 @@ const utf8decode = utf8.utf8decode
         GenerateFBEFinalModelSet();
         GenerateFBEFinalModelMap();
     }
-    if (Sender())
+    if (Proto())
     {
         GenerateFBESender();
         GenerateFBEReceiver();
@@ -8699,7 +8699,7 @@ void GeneratorJavaScript::GeneratePackage(const std::shared_ptr<Package>& p)
     }
 
     // Generate sender & receiver
-    if (Sender())
+    if (Proto())
     {
         GenerateSender(p, false);
         GenerateReceiver(p, false);

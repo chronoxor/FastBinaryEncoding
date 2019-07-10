@@ -62,7 +62,7 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModelBytes(domain, "fbe");
         GenerateFBEFinalModelString(domain, "fbe");
     }
-    if (Sender())
+    if (Proto())
     {
         GenerateFBESender(domain, "fbe");
         GenerateFBEReceiver(domain, "fbe");
@@ -4439,7 +4439,7 @@ void GeneratorKotlin::GeneratePackage(const std::shared_ptr<Package>& p)
         GenerateContainers(p, true);
 
     // Generate sender & receiver
-    if (Sender())
+    if (Proto())
     {
         GenerateSender(p, false);
         GenerateReceiver(p, false);

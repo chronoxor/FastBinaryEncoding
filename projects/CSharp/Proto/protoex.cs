@@ -3060,6 +3060,19 @@ namespace protoex {
 namespace FBE {
 namespace protoex {
 
+    // Fast Binary Encoding protoex protocol version
+    public static class ProtocolVersion
+    {
+        public const int Major = 1;
+        public const int Minor = 1;
+    }
+
+} // namespace protoex
+} // namespace FBE
+
+namespace FBE {
+namespace protoex {
+
     // Fast Binary Encoding protoex sender
     public class Sender : FBE.Sender
     {

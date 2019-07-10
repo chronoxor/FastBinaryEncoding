@@ -168,7 +168,7 @@ def utc():
         GenerateFBEFinalModelSet();
         GenerateFBEFinalModelMap();
     }
-    if (Sender())
+    if (Proto())
     {
         GenerateFBESender();
         GenerateFBEReceiver();
@@ -2807,7 +2807,7 @@ void GeneratorPython::GeneratePackage(const std::shared_ptr<Package>& p)
     }
 
     // Generate sender & receiver
-    if (Sender())
+    if (Proto())
     {
         GenerateSender(p, false);
         GenerateReceiver(p, false);

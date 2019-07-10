@@ -245,6 +245,7 @@ Options:
                         Format indent. Default: 0
   -t, --tabs            Format with tabs. Default: off
   --cpp                 Generate C++ code
+  --cpp-logging         Generate C++ logging code
   --csharp              Generate C# code
   --go                  Generate Go code
   --java                Generate Java code
@@ -254,7 +255,7 @@ Options:
   --ruby                Generate Ruby code
   --final               Generate Final serialization code
   --json                Generate JSON serialization code
-  --sender              Generate Sender/Receiver protocol code
+  --proto               Generate Sender/Receiver protocol code
 ```
 
 # Build domain model

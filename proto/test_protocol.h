@@ -20,6 +20,19 @@
 namespace FBE {
 namespace test {
 
+// Fast Binary Encoding test protocol version
+struct ProtocolVersion
+{
+    static const int major = 2;
+    static const int minor = 3;
+};
+
+} // namespace test
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
 // Fast Binary Encoding test sender
 template <class TBuffer>
 class Sender : public virtual FBE::Sender<TBuffer>

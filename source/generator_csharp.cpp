@@ -3900,7 +3900,7 @@ void GeneratorCSharp::GenerateFBE(const CppCommon::Path& path)
         GenerateFBEFinalModelMap(false, true, true);
         GenerateFBEFinalModelMap(false, false, true);
     }
-    if (Sender())
+    if (Proto())
     {
         GenerateFBESender();
         GenerateFBEReceiver();
@@ -3954,9 +3954,13 @@ void GeneratorCSharp::GeneratePackage(const std::shared_ptr<Package>& p)
             GenerateStruct(p, child_s);
     }
 
-    // Generate sender & receiver
-    if (Sender())
+    // Generate protocol
+    if (Proto())
     {
+        // Generate protocol version
+        GenerateProtocolVersion(p);
+
+        // Generate sender & receiver
         GenerateSender(p, false);
         GenerateReceiver(p, false);
         GenerateProxy(p, false);
@@ -6078,6 +6082,32 @@ void GeneratorCSharp::GenerateStructModelFinal(const std::shared_ptr<Package>& p
     WriteLineIndent("}");
 
     // Generate struct model final end
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate namespace end
+    Indent(-1);
+    WriteLine();
+    WriteLineIndent("} // namespace " + *p->name);
+    WriteLineIndent("} // namespace FBE");
+}
+
+void GeneratorCSharp::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
+{
+    // Generate namespace begin
+    WriteLine();
+    WriteLineIndent("namespace FBE {");
+    WriteLineIndent("namespace " + *p->name + " {");
+    Indent(1);
+
+    // Generate protocol version class
+    WriteLine();
+    WriteLineIndent("// Fast Binary Encoding " + *p->name + " protocol version");
+    WriteLineIndent("public static class ProtocolVersion");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("public const int Major = " + std::to_string(p->version->major) + ";");
+    WriteLineIndent("public const int Minor = " + std::to_string(p->version->minor) + ";");
     Indent(-1);
     WriteLineIndent("}");
 

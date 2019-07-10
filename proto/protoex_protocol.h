@@ -20,6 +20,19 @@
 namespace FBE {
 namespace protoex {
 
+// Fast Binary Encoding protoex protocol version
+struct ProtocolVersion
+{
+    static const int major = 1;
+    static const int minor = 1;
+};
+
+} // namespace protoex
+} // namespace FBE
+
+namespace FBE {
+namespace protoex {
+
 // Fast Binary Encoding protoex sender
 template <class TBuffer>
 class Sender : public virtual FBE::Sender<TBuffer>

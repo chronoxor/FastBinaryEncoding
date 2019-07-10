@@ -2956,6 +2956,19 @@ namespace proto {
 namespace FBE {
 namespace proto {
 
+    // Fast Binary Encoding proto protocol version
+    public static class ProtocolVersion
+    {
+        public const int Major = 1;
+        public const int Minor = 1;
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
     // Fast Binary Encoding proto sender
     public class Sender : FBE.Sender
     {

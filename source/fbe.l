@@ -185,7 +185,7 @@ int main(int argc, char** argv)
     parser.add_option("-n", "--indent").dest("indent").action("store").type("int").set_default(0).help("Format indent. Default: %default");
     parser.add_option("-t", "--tabs").dest("tabs").action("store_true").set_default(0).help("Format with tabs. Default: off");
     parser.add_option("--cpp").dest("cpp").action("store_true").set_default(0).help("Generate C++ code");
-    parser.add_option("--cpp-logging").dest("cpp-logging").action("store_true").set_default(0).help("Generate C++ logging protocol code");
+    parser.add_option("--cpp-logging").dest("cpp-logging").action("store_true").set_default(0).help("Generate C++ logging code");
     parser.add_option("--csharp").dest("csharp").action("store_true").set_default(0).help("Generate C# code");
     parser.add_option("--go").dest("go").action("store_true").set_default(0).help("Generate Go code");
     parser.add_option("--java").dest("java").action("store_true").set_default(0).help("Generate Java code");
@@ -193,9 +193,9 @@ int main(int argc, char** argv)
     parser.add_option("--kotlin").dest("kotlin").action("store_true").set_default(0).help("Generate Kotlin code");
     parser.add_option("--python").dest("python").action("store_true").set_default(0).help("Generate Python code");
     parser.add_option("--ruby").dest("ruby").action("store_true").set_default(0).help("Generate Ruby code");
-    parser.add_option("--final").dest("final").action("store_true").set_default(0).help("Generate Final protocol code");
-    parser.add_option("--json").dest("json").action("store_true").set_default(0).help("Generate JSON protocol code");
-    parser.add_option("--sender").dest("sender").action("store_true").set_default(0).help("Generate Sender/Receiver protocol code");
+    parser.add_option("--final").dest("final").action("store_true").set_default(0).help("Generate Final serialization code");
+    parser.add_option("--json").dest("json").action("store_true").set_default(0).help("Generate JSON serialization code");
+    parser.add_option("--proto").dest("proto").action("store_true").set_default(0).help("Generate Sender/Receiver protocol code");
 
     optparse::Values options = parser.parse_args(argc, argv);
 
@@ -224,7 +224,7 @@ int main(int argc, char** argv)
     bool ruby = options.get("ruby");
     bool final = options.get("final");
     bool json = options.get("json");
-    bool sender = options.get("sender");
+    bool proto = options.get("proto");
     char space = tabs ? '\t' : ' ';
 
     // Check for the input path
@@ -281,49 +281,49 @@ int main(int argc, char** argv)
     if (cpp)
     {
         if (!quiet) std::cout << "Generating C++ code...";
-        FBE::GeneratorCpp(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Logging(cpp_logging).Generate(FBE::Package::root);
+        FBE::GeneratorCpp(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Logging(cpp_logging).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (csharp)
     {
         if (!quiet) std::cout << "Generating C# code...";
-        FBE::GeneratorCSharp(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorCSharp(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (go)
     {
         if (!quiet) std::cout << "Generating Go code...";
-        FBE::GeneratorGo(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorGo(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (java)
     {
         if (!quiet) std::cout << "Generating Java code...";
-        FBE::GeneratorJava(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorJava(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (javascript)
     {
         if (!quiet) std::cout << "Generating JavaScript code...";
-        FBE::GeneratorJavaScript(input, output, (indent ? indent : 2), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorJavaScript(input, output, (indent ? indent : 2), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (kotlin)
     {
         if (!quiet) std::cout << "Generating Kotlin code...";
-        FBE::GeneratorKotlin(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorKotlin(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (python)
     {
         if (!quiet) std::cout << "Generating Python code...";
-        FBE::GeneratorPython(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorPython(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (ruby)
     {
         if (!quiet) std::cout << "Generating Ruby code...";
-        FBE::GeneratorRuby(input, output, (indent ? indent : 2), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorRuby(input, output, (indent ? indent : 2), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
 

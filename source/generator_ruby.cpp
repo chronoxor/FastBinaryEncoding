@@ -144,7 +144,7 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
         GenerateFBEFinalModelSet();
         GenerateFBEFinalModelMap();
     }
-    if (Sender())
+    if (Proto())
     {
         GenerateFBESender();
         GenerateFBEReceiver();
@@ -3435,7 +3435,7 @@ void GeneratorRuby::GeneratePackage(const std::shared_ptr<Package>& p)
     }
 
     // Generate sender & receiver
-    if (Sender())
+    if (Proto())
     {
         GenerateSender(p, false);
         GenerateReceiver(p, false);

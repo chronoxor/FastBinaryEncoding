@@ -27,15 +27,15 @@ public:
     GeneratorJavaScript& JSON(bool json) noexcept { _json = json; return *this; }
 
     // Sender/Receiver protocol code generation
-    bool Sender() const noexcept { return _sender; }
-    GeneratorJavaScript& Sender(bool sender) noexcept { _sender = sender; return *this; }
+    bool Proto() const noexcept { return _proto; }
+    GeneratorJavaScript& Proto(bool proto) noexcept { _proto = proto; return *this; }
 
     void Generate(const std::shared_ptr<Package>& package) override;
 
 private:
     bool _final{false};
     bool _json{false};
-    bool _sender{false};
+    bool _proto{false};
 
     void GenerateHeader(const std::string& source);
     void GenerateFooter();

@@ -27,15 +27,15 @@ public:
     GeneratorCSharp& JSON(bool json) noexcept { _json = json; return *this; }
 
     // Sender/Receiver protocol code generation
-    bool Sender() const noexcept { return _sender; }
-    GeneratorCSharp& Sender(bool sender) noexcept { _sender = sender; return *this; }
+    bool Proto() const noexcept { return _proto; }
+    GeneratorCSharp& Proto(bool proto) noexcept { _proto = proto; return *this; }
 
     void Generate(const std::shared_ptr<Package>& package) override;
 
 private:
     bool _final{false};
     bool _json{false};
-    bool _sender{false};
+    bool _proto{false};
 
     void GenerateHeader(const std::string& source);
     void GenerateFooter();
@@ -79,6 +79,7 @@ private:
     void GenerateStructModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s);
     void GenerateStructFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s);
     void GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s);
+    void GenerateProtocolVersion(const std::shared_ptr<Package>& p);
     void GenerateSender(const std::shared_ptr<Package>& p, bool final);
     void GenerateReceiver(const std::shared_ptr<Package>& p, bool final);
     void GenerateProxy(const std::shared_ptr<Package>& p, bool final);

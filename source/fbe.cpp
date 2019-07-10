@@ -196,7 +196,7 @@ Version::Version(const std::string& v)
     else
     {
         major = std::atoi(v.substr(0, pos).c_str());
-        minor = std::atoi(v.substr(pos).c_str());
+        minor = std::atoi(v.substr(pos + 1).c_str());
     }
 }
 

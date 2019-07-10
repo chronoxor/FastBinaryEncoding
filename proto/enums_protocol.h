@@ -18,6 +18,19 @@
 namespace FBE {
 namespace enums {
 
+// Fast Binary Encoding enums protocol version
+struct ProtocolVersion
+{
+    static const int major = 1;
+    static const int minor = 1;
+};
+
+} // namespace enums
+} // namespace FBE
+
+namespace FBE {
+namespace enums {
+
 // Fast Binary Encoding enums sender
 template <class TBuffer>
 class Sender : public virtual FBE::Sender<TBuffer>

@@ -60,7 +60,7 @@ void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModelBytes("fbe");
         GenerateFBEFinalModelString("fbe");
     }
-    if (Sender())
+    if (Proto())
     {
         GenerateFBESender("fbe");
         GenerateFBEReceiver("fbe");
@@ -4859,7 +4859,7 @@ void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
         GenerateContainers(p, path, true);
 
     // Generate sender & receiver
-    if (Sender())
+    if (Proto())
     {
         GenerateSender(p, path, false);
         GenerateReceiver(p, path, false);

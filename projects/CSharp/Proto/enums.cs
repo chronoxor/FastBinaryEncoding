@@ -5740,6 +5740,19 @@ namespace enums {
 namespace FBE {
 namespace enums {
 
+    // Fast Binary Encoding enums protocol version
+    public static class ProtocolVersion
+    {
+        public const int Major = 1;
+        public const int Minor = 1;
+    }
+
+} // namespace enums
+} // namespace FBE
+
+namespace FBE {
+namespace enums {
+
     // Fast Binary Encoding enums sender
     public class Sender : FBE.Sender
     {
