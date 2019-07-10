@@ -22,7 +22,6 @@ var searchData=
   ['flagsconst',['FlagsConst',['../struct_f_b_e_1_1_flags_const.html',1,'FBE']]],
   ['flagstype',['FlagsType',['../struct_f_b_e_1_1_flags_type.html',1,'FBE']]],
   ['flagsvalue',['FlagsValue',['../struct_f_b_e_1_1_flags_value.html',1,'FBE']]],
-  ['flex_5fbeta',['FLEX_BETA',['../fbe-lexer_8cpp.html#a9465c9986fdda27730c9dff8d16a0887',1,'fbe-lexer.cpp']]],
   ['flex_5fint16_5ft',['flex_int16_t',['../fbe-lexer_8cpp.html#a2e73b2c75126814585525fb2e9d51159',1,'fbe-lexer.cpp']]],
   ['flex_5fint32_5ft',['flex_int32_t',['../fbe-lexer_8cpp.html#a838ce943cf44ef7769480714fc6c3ba9',1,'fbe-lexer.cpp']]],
   ['flex_5fint8_5ft',['flex_int8_t',['../fbe-lexer_8cpp.html#a7b0840dff4a2ef1702118aa12264b2a7',1,'fbe-lexer.cpp']]],
