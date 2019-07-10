@@ -4858,9 +4858,13 @@ void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
     if (Final())
         GenerateContainers(p, path, true);
 
-    // Generate sender & receiver
+    // Generate protocol
     if (Proto())
     {
+        // Generate protocol version
+        GenerateProtocolVersion(p, path);
+
+        // Generate sender & receiver
         GenerateSender(p, path, false);
         GenerateReceiver(p, path, false);
         GenerateProxy(p, path, false);
@@ -7140,6 +7144,33 @@ void GeneratorGo::GenerateStructModelFinal(const std::shared_ptr<Package>& p, co
     WriteLineIndent("m.model.FBEShift(prev)");
     Indent(-1);
     WriteLineIndent("}");
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the output file
+    Close();
+}
+
+void GeneratorGo::GenerateProtocolVersion(const std::shared_ptr<Package>& p, const CppCommon::Path& path)
+{
+    // Open the output file
+    CppCommon::Path output = path / "ProtocolVersion.go";
+    Open(output);
+
+    // Generate header
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+
+    // Generate package
+    WriteLine();
+    WriteLineIndent("package " + *p->name);
+
+    // Generate protocol version constants
+    WriteLine();
+    WriteLineIndent("// Protocol major version");
+    WriteLineIndent("const ProtocolVersionMajor = " + std::to_string(p->version->major));
+    WriteLineIndent("// Protocol minor version");
+    WriteLineIndent("const ProtocolVersionMinor = " + std::to_string(p->version->minor));
 
     // Generate footer
     GenerateFooter();

@@ -2806,9 +2806,10 @@ void GeneratorPython::GeneratePackage(const std::shared_ptr<Package>& p)
             GenerateStruct(child_s);
     }
 
-    // Generate sender & receiver
+    // Generate protocol
     if (Proto())
     {
+        // Generate sender & receiver
         GenerateSender(p, false);
         GenerateReceiver(p, false);
         GenerateProxy(p, false);

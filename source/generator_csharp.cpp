@@ -6106,7 +6106,9 @@ void GeneratorCSharp::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
     WriteLineIndent("public static class ProtocolVersion");
     WriteLineIndent("{");
     Indent(1);
+    WriteLineIndent("// Protocol major version");
     WriteLineIndent("public const int Major = " + std::to_string(p->version->major) + ";");
+    WriteLineIndent("// Protocol minor version");
     WriteLineIndent("public const int Minor = " + std::to_string(p->version->minor) + ";");
     Indent(-1);
     WriteLineIndent("}");

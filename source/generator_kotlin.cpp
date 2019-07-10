@@ -4438,9 +4438,13 @@ void GeneratorKotlin::GeneratePackage(const std::shared_ptr<Package>& p)
     if (Final())
         GenerateContainers(p, true);
 
-    // Generate sender & receiver
+    // Generate protocol
     if (Proto())
     {
+        // Generate protocol version
+        GenerateProtocolVersion(p);
+
+        // Generate sender & receiver
         GenerateSender(p, false);
         GenerateReceiver(p, false);
         GenerateReceiverListener(p, false);
@@ -6524,6 +6528,44 @@ void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p
     WriteLineIndent("}");
 
     // Generate struct model final end
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorKotlin::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
+{
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    std::string package = *p->name;
+
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+
+    // Create package path
+    CppCommon::Directory::CreateTree(path);
+
+    // Open the file
+    CppCommon::Path file = path / ("ProtocolVersion.kt");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports(domain, package + ".fbe");
+
+    // Generate protocol version class
+    WriteLine();
+    WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " protocol version");
+    WriteLineIndent("object ProtocolVersion");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("// Protocol major version");
+    WriteLineIndent("const val Major = " + std::to_string(p->version->major));
+    WriteLineIndent("// Protocol minor version");
+    WriteLineIndent("const val Minor = " + std::to_string(p->version->minor));
     Indent(-1);
     WriteLineIndent("}");
 

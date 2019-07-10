@@ -16105,7 +16105,9 @@ namespace test {
     // Fast Binary Encoding test protocol version
     public static class ProtocolVersion
     {
+        // Protocol major version
         public const int Major = 2;
+        // Protocol minor version
         public const int Minor = 3;
     }
 

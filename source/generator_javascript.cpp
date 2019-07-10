@@ -8698,9 +8698,13 @@ void GeneratorJavaScript::GeneratePackage(const std::shared_ptr<Package>& p)
             GenerateStruct(child_s);
     }
 
-    // Generate sender & receiver
+    // Generate protocol
     if (Proto())
     {
+        // Generate protocol version
+        GenerateProtocolVersion(p);
+
+        // Generate sender & receiver
         GenerateSender(p, false);
         GenerateReceiver(p, false);
         GenerateProxy(p, false);
@@ -11130,6 +11134,21 @@ void GeneratorJavaScript::GenerateStructModelFinal(const std::shared_ptr<StructT
     // Generate struct model final exports
     WriteLine();
     WriteLineIndent("exports." + *s->name + "FinalModel = " + *s->name + "FinalModel");
+}
+
+void GeneratorJavaScript::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
+{
+    // Generate protocol version constants
+    WriteLine();
+    WriteLineIndent("// Protocol major version");
+    WriteLineIndent("const ProtocolVersionMajor = " + std::to_string(p->version->major));
+    WriteLineIndent("// Protocol minor version");
+    WriteLineIndent("const ProtocolVersionMinor = " + std::to_string(p->version->minor));
+
+    // Generate sender exports
+    WriteLine();
+    WriteLineIndent("exports.ProtocolVersionMajor = ProtocolVersionMajor");
+    WriteLineIndent("exports.ProtocolVersionMinor = ProtocolVersionMinor");
 }
 
 void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool final)

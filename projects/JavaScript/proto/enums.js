@@ -7648,6 +7648,14 @@ class EnumsFinalModel extends fbe.Model {
 
 exports.EnumsFinalModel = EnumsFinalModel
 
+// Protocol major version
+const ProtocolVersionMajor = 1
+// Protocol minor version
+const ProtocolVersionMinor = 1
+
+exports.ProtocolVersionMajor = ProtocolVersionMajor
+exports.ProtocolVersionMinor = ProtocolVersionMinor
+
 /**
  * Fast Binary Encoding enums sender
  */

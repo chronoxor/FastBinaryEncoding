@@ -4223,9 +4223,13 @@ void GeneratorJava::GeneratePackage(const std::shared_ptr<Package>& p)
     if (Final())
         GenerateContainers(p, true);
 
-    // Generate sender & receiver
+    // Generate protocol
     if (Proto())
     {
+        // Generate protocol version
+        GenerateProtocolVersion(p);
+
+        // Generate sender & receiver
         GenerateSender(p, false);
         GenerateReceiver(p, false);
         GenerateProxy(p, false);
@@ -6274,6 +6278,44 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     WriteLineIndent("}");
 
     // Generate struct model final end
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorJava::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
+{
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    std::string package = *p->name;
+
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+
+    // Create package path
+    CppCommon::Directory::CreateTree(path);
+
+    // Open the file
+    CppCommon::Path file = path / ("ProtocolVersion.java");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports(domain, package + ".fbe");
+
+    // Generate protocol version class
+    WriteLine();
+    WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " protocol version");
+    WriteLineIndent("public final class ProtocolVersion");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("// Protocol major version");
+    WriteLineIndent("public static final int Major = " + std::to_string(p->version->major) + ";");
+    WriteLineIndent("// Protocol minor version");
+    WriteLineIndent("public static final int Minor = " + std::to_string(p->version->minor) + ";");
     Indent(-1);
     WriteLineIndent("}");
 

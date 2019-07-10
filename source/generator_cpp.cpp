@@ -7945,7 +7945,9 @@ void GeneratorCpp::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
     WriteLineIndent("struct ProtocolVersion");
     WriteLineIndent("{");
     Indent(1);
+    WriteLineIndent("// Protocol major version");
     WriteLineIndent("static const int major = " + std::to_string(p->version->major) + ";");
+    WriteLineIndent("// Protocol minor version");
     WriteLineIndent("static const int minor = " + std::to_string(p->version->minor) + ";");
     Indent(-1);
     WriteLineIndent("};");

@@ -3851,6 +3851,14 @@ class AccountFinalModel extends fbe.Model {
 
 exports.AccountFinalModel = AccountFinalModel
 
+// Protocol major version
+const ProtocolVersionMajor = 1
+// Protocol minor version
+const ProtocolVersionMinor = 1
+
+exports.ProtocolVersionMajor = ProtocolVersionMajor
+exports.ProtocolVersionMinor = ProtocolVersionMinor
+
 /**
  * Fast Binary Encoding proto sender
  */

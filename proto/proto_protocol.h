@@ -21,7 +21,9 @@ namespace proto {
 // Fast Binary Encoding proto protocol version
 struct ProtocolVersion
 {
+    // Protocol major version
     static const int major = 1;
+    // Protocol minor version
     static const int minor = 1;
 };
 

@@ -24366,6 +24366,14 @@ class StructEmptyFinalModel extends fbe.Model {
 
 exports.StructEmptyFinalModel = StructEmptyFinalModel
 
+// Protocol major version
+const ProtocolVersionMajor = 2
+// Protocol minor version
+const ProtocolVersionMinor = 3
+
+exports.ProtocolVersionMajor = ProtocolVersionMajor
+exports.ProtocolVersionMinor = ProtocolVersionMinor
+
 /**
  * Fast Binary Encoding test sender
  */
