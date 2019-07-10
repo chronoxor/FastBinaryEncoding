@@ -191,12 +191,22 @@ struct Import
     void AddImport(std::string* i);
 };
 
+struct Version
+{
+    int major{1};
+    int minor{1};
+
+    Version() = default;
+    Version(const std::string& v);
+};
+
 struct Package
 {
     int offset;
     std::shared_ptr<std::string> domain;
     std::shared_ptr<std::string> name;
     std::shared_ptr<Import> import;
+    std::shared_ptr<Version> version;
     std::shared_ptr<Statements> body;
 
     static std::shared_ptr<Package> root;
@@ -207,7 +217,5 @@ struct Package
 };
 
 } // namespace FBE
-
-#include "fbe.inl"
 
 #endif // FBE_H

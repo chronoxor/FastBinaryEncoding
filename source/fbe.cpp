@@ -48,6 +48,14 @@ void FlagsBody::AddValue(FlagsValue* v)
     values.push_back(std::shared_ptr<FlagsValue>(v));
 }
 
+void StructField::SetArraySize(int size)
+{
+    if (size <= 0)
+        yyerror("Array size should be greater than zero!");
+
+    N = size;
+}
+
 void StructBody::AddField(StructField* f)
 {
     if (f == nullptr)
@@ -178,6 +186,18 @@ void Import::AddImport(std::string* i)
         yyerror("Duplicate import package " + *i);
 
     imports.push_back(std::shared_ptr<std::string>(i));
+}
+
+Version::Version(const std::string& v)
+{
+    auto pos = v.find('.');
+    if (pos == v.npos)
+        major = std::atoi(v.c_str());
+    else
+    {
+        major = std::atoi(v.substr(0, pos).c_str());
+        minor = std::atoi(v.substr(pos).c_str());
+    }
 }
 
 std::shared_ptr<Package> Package::root = std::make_shared<Package>(0);

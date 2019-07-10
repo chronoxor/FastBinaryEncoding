@@ -18,6 +18,7 @@ int yyerror(const std::string& msg);
     std::string* string;
     FBE::Package* package;
     FBE::Import* import;
+    FBE::Version* version;
     FBE::Attributes* attributes;
     FBE::Attributes* attribute;
     FBE::Statements* statements;
@@ -39,14 +40,16 @@ int yyerror(const std::string& msg);
 }
 
 // Define our terminal symbols (tokens)
-%token <token>  PDOMAIN PACKAGE OFFSET IMPORT ENUM FLAGS STRUCT BASE ID KEY HIDDEN DEPRECATED REQ RES REJ
+%token <token>  PDOMAIN PACKAGE OFFSET IMPORT VERSION ENUM FLAGS STRUCT BASE ID KEY HIDDEN DEPRECATED REQ RES REJ
 %token <string> BOOL BYTE BYTES CHAR WCHAR INT8 UINT8 INT16 UINT16 INT32 UINT32 INT64 UINT64 FLOAT DOUBLE DECIMAL STRING USTRING TIMESTAMP UUID
 %token <string> CONST_TRUE CONST_FALSE CONST_NULL CONST_EPOCH CONST_UTC CONST_UUID0 CONST_UUID1 CONST_UUID4 CONST_CHAR CONST_INT CONST_FLOAT CONST_STRING
 %token <string> IDENTIFIER
 
+%type <string> name
 %type <string> domain
 %type <package> package
 %type <import> import
+%type <version> version
 %type <string> package_name
 %type <attributes> attributes
 %type <attribute> attribute
@@ -86,8 +89,8 @@ int yyerror(const std::string& msg);
 %%
 
 fbe
-    : domain package statements                                                             { FBE::Package::root.reset($2); FBE::Package::root->domain.reset($1); FBE::Package::root->body.reset($3); FBE::Package::root->initialize(); }
-    | domain package import statements                                                      { FBE::Package::root.reset($2); FBE::Package::root->domain.reset($1); FBE::Package::root->import.reset($3); FBE::Package::root->body.reset($4); FBE::Package::root->initialize(); }
+    : domain package version statements                                                     { FBE::Package::root.reset($2); FBE::Package::root->domain.reset($1); FBE::Package::root->version.reset($3); FBE::Package::root->body.reset($4); FBE::Package::root->initialize(); }
+    | domain package version import statements                                              { FBE::Package::root.reset($2); FBE::Package::root->domain.reset($1); FBE::Package::root->version.reset($3); FBE::Package::root->import.reset($4); FBE::Package::root->body.reset($5); FBE::Package::root->initialize(); }
     ;
 
 domain
@@ -100,13 +103,18 @@ package
     | PACKAGE package_name OFFSET CONST_INT                                                 { $$ = new FBE::Package(std::stoi(*$4)); delete $4; $$->name.reset($2); }
     ;
 
+package_name
+    : name
+    ;
+
+version
+    :                                                                                       { $$ = new FBE::Version(); }
+    | VERSION CONST_FLOAT                                                                   { $$ = new FBE::Version(*$2); delete $2; }
+    ;
+
 import
     : IMPORT package_name                                                                   { $$ = new FBE::Import(); $$->AddImport($2); }
     | import IMPORT package_name                                                            { $$ = $1; $$->AddImport($3); }
-    ;
-
-package_name
-    : IDENTIFIER
     ;
 
 statements
@@ -133,8 +141,8 @@ attribute
     ;
 
 enum
-    : attributes ENUM IDENTIFIER '{' enum_body '}'                                          { $$ = new FBE::EnumType(); $$->attributes.reset($1); $$->name.reset($3); $$->body.reset($5); }
-    | attributes ENUM IDENTIFIER ':' enum_type '{' enum_body '}'                            { $$ = new FBE::EnumType(); $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($5); $$->body.reset($7); }
+    : attributes ENUM name '{' enum_body '}'                                                { $$ = new FBE::EnumType(); $$->attributes.reset($1); $$->name.reset($3); $$->body.reset($5); }
+    | attributes ENUM name ':' enum_type '{' enum_body '}'                                  { $$ = new FBE::EnumType(); $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($5); $$->body.reset($7); }
     ;
 
 enum_type
@@ -157,19 +165,19 @@ enum_body
     | enum_body enum_value                                                                  { $$ = $1; $$->AddValue($2); }
 
 enum_value
-    : attributes IDENTIFIER ';'                                                             { $$ = new FBE::EnumValue(); $$->attributes.reset($1); $$->name.reset($2); }
-    | attributes IDENTIFIER '=' enum_const ';'                                              { $$ = new FBE::EnumValue(); $$->attributes.reset($1); $$->name.reset($2); $$->value.reset($4); }
+    : attributes name ';'                                                                   { $$ = new FBE::EnumValue(); $$->attributes.reset($1); $$->name.reset($2); }
+    | attributes name '=' enum_const ';'                                                    { $$ = new FBE::EnumValue(); $$->attributes.reset($1); $$->name.reset($2); $$->value.reset($4); }
     ;
 
 enum_const
     : CONST_CHAR                                                                            { $$ = new FBE::EnumConst(); $$->constant.reset($1); }
     | CONST_INT                                                                             { $$ = new FBE::EnumConst(); $$->constant.reset($1); }
-    | IDENTIFIER                                                                            { $$ = new FBE::EnumConst(); $$->reference.reset($1); }
+    | name                                                                                  { $$ = new FBE::EnumConst(); $$->reference.reset($1); }
     ;
 
 flags
-    : attributes FLAGS IDENTIFIER '{' flags_body '}'                                        { $$ = new FBE::FlagsType(); $$->attributes.reset($1); $$->name.reset($3); $$->body.reset($5); }
-    | attributes FLAGS IDENTIFIER ':' flags_type '{' flags_body '}'                         { $$ = new FBE::FlagsType(); $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($5); $$->body.reset($7); }
+    : attributes FLAGS name '{' flags_body '}'                                              { $$ = new FBE::FlagsType(); $$->attributes.reset($1); $$->name.reset($3); $$->body.reset($5); }
+    | attributes FLAGS name ':' flags_type '{' flags_body '}'                               { $$ = new FBE::FlagsType(); $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($5); $$->body.reset($7); }
     ;
 
 flags_type
@@ -191,13 +199,13 @@ flags_body
     ;
 
 flags_value
-    : attributes IDENTIFIER '=' flags_const ';'                                             { $$ = new FBE::FlagsValue(); $$->attributes.reset($1); $$->name.reset($2); $$->value.reset($4); }
+    : attributes name '=' flags_const ';'                                                   { $$ = new FBE::FlagsValue(); $$->attributes.reset($1); $$->name.reset($2); $$->value.reset($4); }
     ;
 
 flags_const
     : CONST_INT                                                                             { $$ = new FBE::FlagsConst(); $$->constant.reset($1); }
-    | IDENTIFIER                                                                            { $$ = new FBE::FlagsConst(); $$->reference.reset($1); }
-    | IDENTIFIER '|' flags_const                                                            { $$ = $3; *$$->reference = *$1 + " | " + *$3->reference; delete $1; }
+    | name                                                                                  { $$ = new FBE::FlagsConst(); $$->reference.reset($1); }
+    | name '|' flags_const                                                                  { $$ = $3; *$$->reference = *$1 + " | " + *$3->reference; delete $1; }
     ;
 
 struct_request
@@ -221,13 +229,13 @@ struct_reject
     ;
 
 struct
-    : attributes STRUCT IDENTIFIER '{' struct_body '}'                                      { $$ = new FBE::StructType(0, false); $$->attributes.reset($1); $$->name.reset($3); $$->body.reset($5); }
-    | attributes STRUCT IDENTIFIER ':' type_name '{' struct_body '}'                        { $$ = new FBE::StructType(0, false); $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($5); $$->body.reset($7); }
-    | attributes STRUCT IDENTIFIER '(' '+' CONST_INT ')' '{' struct_body '}'                { $$ = new FBE::StructType(std::stoi(*$6), false); delete $6; $$->attributes.reset($1); $$->name.reset($3); $$->body.reset($9); }
-    | attributes STRUCT IDENTIFIER '(' '+' CONST_INT ')' ':' type_name '{' struct_body '}'  { $$ = new FBE::StructType(std::stoi(*$6), false); delete $6; $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($9); $$->body.reset($11); }
-    | attributes STRUCT IDENTIFIER '(' BASE ')' ':' type_name '{' struct_body '}'           { $$ = new FBE::StructType(0, true); $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($8); $$->body.reset($10); }
-    | attributes STRUCT IDENTIFIER '(' CONST_INT ')' '{' struct_body '}'                    { $$ = new FBE::StructType(std::stoi(*$5), true); delete $5; $$->attributes.reset($1); $$->name.reset($3); $$->body.reset($8); }
-    | attributes STRUCT IDENTIFIER '(' CONST_INT ')' ':' type_name '{' struct_body '}'      { $$ = new FBE::StructType(std::stoi(*$5), true); delete $5; $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($8); $$->body.reset($10); }
+    : attributes STRUCT name '{' struct_body '}'                                            { $$ = new FBE::StructType(0, false); $$->attributes.reset($1); $$->name.reset($3); $$->body.reset($5); }
+    | attributes STRUCT name ':' type_name '{' struct_body '}'                              { $$ = new FBE::StructType(0, false); $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($5); $$->body.reset($7); }
+    | attributes STRUCT name '(' '+' CONST_INT ')' '{' struct_body '}'                      { $$ = new FBE::StructType(std::stoi(*$6), false); delete $6; $$->attributes.reset($1); $$->name.reset($3); $$->body.reset($9); }
+    | attributes STRUCT name '(' '+' CONST_INT ')' ':' type_name '{' struct_body '}'        { $$ = new FBE::StructType(std::stoi(*$6), false); delete $6; $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($9); $$->body.reset($11); }
+    | attributes STRUCT name '(' BASE ')' ':' type_name '{' struct_body '}'                 { $$ = new FBE::StructType(0, true); $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($8); $$->body.reset($10); }
+    | attributes STRUCT name '(' CONST_INT ')' '{' struct_body '}'                          { $$ = new FBE::StructType(std::stoi(*$5), true); delete $5; $$->attributes.reset($1); $$->name.reset($3); $$->body.reset($8); }
+    | attributes STRUCT name '(' CONST_INT ')' ':' type_name '{' struct_body '}'            { $$ = new FBE::StructType(std::stoi(*$5), true); delete $5; $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($8); $$->body.reset($10); }
     ;
 
 struct_body
@@ -330,8 +338,20 @@ struct_field_value
     ;
 
 type_name
+    : name
+    | type_name '.' name                                                                    { *$$ = *$1 + "." + *$3; delete $3; }
+    ;
+
+name
     : IDENTIFIER
-    | type_name '.' IDENTIFIER                                                              { *$$ = *$1 + "." + *$3; delete $3; }
+    | PDOMAIN                                                                               { $$ = new std::string("domain"); }
+    | PACKAGE                                                                               { $$ = new std::string("package"); }
+    | OFFSET                                                                                { $$ = new std::string("offset"); }
+    | IMPORT                                                                                { $$ = new std::string("import"); }
+    | VERSION                                                                               { $$ = new std::string("version"); }
+    | REQ                                                                                   { $$ = new std::string("request"); }
+    | RES                                                                                   { $$ = new std::string("response"); }
+    | REJ                                                                                   { $$ = new std::string("reject"); }
     ;
 
 %%

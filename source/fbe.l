@@ -41,6 +41,7 @@ int yyerror(const std::string& msg);
 "package"               { yycount(); return yytoken(PACKAGE); }
 "offset"                { yycount(); return yytoken(OFFSET); }
 "import"                { yycount(); return yytoken(IMPORT); }
+"version"               { yycount(); return yytoken(VERSION); }
 "enum"                  { yycount(); return yytoken(ENUM); }
 "flags"                 { yycount(); return yytoken(FLAGS); }
 "struct"                { yycount(); return yytoken(STRUCT); }
