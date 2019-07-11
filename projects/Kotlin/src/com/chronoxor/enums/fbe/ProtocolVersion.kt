@@ -11,7 +11,7 @@ package com.chronoxor.enums.fbe
 object ProtocolVersion
 {
     // Protocol major version
-    const val Major = 1
+    const val Major = 0
     // Protocol minor version
-    const val Minor = 1
+    const val Minor = 0
 }

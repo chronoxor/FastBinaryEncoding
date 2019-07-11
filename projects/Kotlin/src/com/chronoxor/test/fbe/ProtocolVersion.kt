@@ -11,7 +11,7 @@ package com.chronoxor.test.fbe
 object ProtocolVersion
 {
     // Protocol major version
-    const val Major = 2
+    const val Major = 123
     // Protocol minor version
-    const val Minor = 3
+    const val Minor = 456
 }

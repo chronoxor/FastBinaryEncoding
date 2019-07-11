@@ -6,6 +6,6 @@
 package enums
 
 // Protocol major version
-const ProtocolVersionMajor = 1
+const ProtocolVersionMajor = 0
 // Protocol minor version
-const ProtocolVersionMinor = 1
+const ProtocolVersionMinor = 0

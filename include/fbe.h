@@ -193,8 +193,8 @@ struct Import
 
 struct Version
 {
-    int major{1};
-    int minor{1};
+    int major{0};
+    int minor{0};
 
     Version() = default;
     Version(const std::string& v);

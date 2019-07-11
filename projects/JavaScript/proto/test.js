@@ -24367,9 +24367,9 @@ class StructEmptyFinalModel extends fbe.Model {
 exports.StructEmptyFinalModel = StructEmptyFinalModel
 
 // Protocol major version
-const ProtocolVersionMajor = 2
+const ProtocolVersionMajor = 123
 // Protocol minor version
-const ProtocolVersionMinor = 3
+const ProtocolVersionMinor = 456
 
 exports.ProtocolVersionMajor = ProtocolVersionMajor
 exports.ProtocolVersionMinor = ProtocolVersionMinor

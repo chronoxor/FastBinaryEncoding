@@ -19839,9 +19839,9 @@ module Test
   # Fast Binary Encoding Test protocol version
   class ProtocolVersion
     # Protocol major version
-    MAJOR = 2
+    MAJOR = 123
     # Protocol minor version
-    MINOR = 3
+    MINOR = 456
   end
 
   # Fast Binary Encoding Test sender

@@ -16106,9 +16106,9 @@ namespace test {
     public static class ProtocolVersion
     {
         // Protocol major version
-        public const int Major = 2;
+        public const int Major = 123;
         // Protocol minor version
-        public const int Minor = 3;
+        public const int Minor = 456;
     }
 
 } // namespace test

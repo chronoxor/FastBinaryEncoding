@@ -9,7 +9,7 @@ domain com.chronoxor
 package test offset 100
 
 // Protocol version
-version 2.3
+version 123.456
 
 // Package imports
 import proto

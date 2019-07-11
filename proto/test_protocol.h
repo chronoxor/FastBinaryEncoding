@@ -24,9 +24,9 @@ namespace test {
 struct ProtocolVersion
 {
     // Protocol major version
-    static const int major = 2;
+    static const int major = 123;
     // Protocol minor version
-    static const int minor = 3;
+    static const int minor = 456;
 };
 
 } // namespace test

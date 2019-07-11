@@ -15908,9 +15908,9 @@ class StructEmptyFinalModel(fbe.Model):
 # Fast Binary Encoding test protocol version
 class ProtocolVersion(object):
     # Protocol major version
-    Major = 2
+    Major = 123
     # Protocol minor version
-    Minor = 3
+    Minor = 456
 
 
 # Fast Binary Encoding test sender

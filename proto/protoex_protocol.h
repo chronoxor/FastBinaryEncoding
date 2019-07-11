@@ -24,9 +24,9 @@ namespace protoex {
 struct ProtocolVersion
 {
     // Protocol major version
-    static const int major = 1;
+    static const int major = 0;
     // Protocol minor version
-    static const int minor = 1;
+    static const int minor = 0;
 };
 
 } // namespace protoex

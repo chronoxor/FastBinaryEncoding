@@ -9,7 +9,7 @@ package com.chronoxor.test.fbe;
 public final class ProtocolVersion
 {
     // Protocol major version
-    public static final int Major = 2;
+    public static final int Major = 123;
     // Protocol minor version
-    public static final int Minor = 3;
+    public static final int Minor = 456;
 }

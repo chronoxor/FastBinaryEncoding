@@ -192,7 +192,7 @@ Version::Version(const std::string& v)
 {
     auto pos = v.find('.');
     if (pos == v.npos)
-        major = std::atoi(v.c_str());
+        minor = std::atoi(v.c_str());
     else
     {
         major = std::atoi(v.substr(0, pos).c_str());

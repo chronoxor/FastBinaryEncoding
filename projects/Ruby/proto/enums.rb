@@ -6705,9 +6705,9 @@ module Enums
   # Fast Binary Encoding Enums protocol version
   class ProtocolVersion
     # Protocol major version
-    MAJOR = 1
+    MAJOR = 0
     # Protocol minor version
-    MINOR = 1
+    MINOR = 0
   end
 
   # Fast Binary Encoding Enums sender

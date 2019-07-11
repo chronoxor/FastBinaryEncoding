@@ -9,7 +9,7 @@ package com.chronoxor.enums.fbe;
 public final class ProtocolVersion
 {
     // Protocol major version
-    public static final int Major = 1;
+    public static final int Major = 0;
     // Protocol minor version
-    public static final int Minor = 1;
+    public static final int Minor = 0;
 }

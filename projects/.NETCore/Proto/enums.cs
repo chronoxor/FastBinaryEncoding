@@ -5744,9 +5744,9 @@ namespace enums {
     public static class ProtocolVersion
     {
         // Protocol major version
-        public const int Major = 1;
+        public const int Major = 0;
         // Protocol minor version
-        public const int Minor = 1;
+        public const int Minor = 0;
     }
 
 } // namespace enums
