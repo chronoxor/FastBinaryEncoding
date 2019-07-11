@@ -4861,6 +4861,14 @@ class EnumsFinalModel(fbe.Model):
         self._model.fbe_shift(prev)
 
 
+# Fast Binary Encoding enums protocol version
+class ProtocolVersion(object):
+    # Protocol major version
+    Major = 1
+    # Protocol minor version
+    Minor = 1
+
+
 # Fast Binary Encoding enums sender
 class Sender(fbe.Sender):
     __slots__ = "_enums_model", 

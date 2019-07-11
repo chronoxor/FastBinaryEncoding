@@ -2809,6 +2809,9 @@ void GeneratorPython::GeneratePackage(const std::shared_ptr<Package>& p)
     // Generate protocol
     if (Proto())
     {
+        // Generate protocol version
+        GenerateProtocolVersion(p);
+
         // Generate sender & receiver
         GenerateSender(p, false);
         GenerateReceiver(p, false);
@@ -4593,6 +4596,21 @@ void GeneratorPython::GenerateStructModelFinal(const std::shared_ptr<StructType>
     Indent(-1);
 
     // Generate struct model final end
+    Indent(-1);
+}
+
+void GeneratorPython::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
+{
+    // Generate protocol version class
+    WriteLine();
+    WriteLine();
+    WriteLineIndent("# Fast Binary Encoding " + *p->name + " protocol version");
+    WriteLineIndent("class ProtocolVersion(object):");
+    Indent(1);
+    WriteLineIndent("# Protocol major version");
+    WriteLineIndent("Major = " + std::to_string(p->version->major));
+    WriteLineIndent("# Protocol minor version");
+    WriteLineIndent("Minor = " + std::to_string(p->version->minor));
     Indent(-1);
 }
 

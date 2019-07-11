@@ -15905,6 +15905,14 @@ class StructEmptyFinalModel(fbe.Model):
         self._model.fbe_shift(prev)
 
 
+# Fast Binary Encoding test protocol version
+class ProtocolVersion(object):
+    # Protocol major version
+    Major = 2
+    # Protocol minor version
+    Minor = 3
+
+
 # Fast Binary Encoding test sender
 class Sender(fbe.Sender):
     __slots__ = "_proto_sender", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", "_structempty_model", 

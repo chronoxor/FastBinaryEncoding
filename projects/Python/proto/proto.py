@@ -2373,6 +2373,14 @@ class AccountFinalModel(fbe.Model):
         self._model.fbe_shift(prev)
 
 
+# Fast Binary Encoding proto protocol version
+class ProtocolVersion(object):
+    # Protocol major version
+    Major = 1
+    # Protocol minor version
+    Minor = 1
+
+
 # Fast Binary Encoding proto sender
 class Sender(fbe.Sender):
     __slots__ = "_order_model", "_balance_model", "_account_model", 

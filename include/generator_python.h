@@ -81,6 +81,7 @@ private:
     void GenerateStructModel(const std::shared_ptr<StructType>& s);
     void GenerateStructFinalModel(const std::shared_ptr<StructType>& s);
     void GenerateStructModelFinal(const std::shared_ptr<StructType>& s);
+    void GenerateProtocolVersion(const std::shared_ptr<Package>& p);
     void GenerateSender(const std::shared_ptr<Package>& p, bool final);
     void GenerateReceiver(const std::shared_ptr<Package>& p, bool final);
     void GenerateProxy(const std::shared_ptr<Package>& p, bool final);
