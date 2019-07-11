@@ -3156,6 +3156,14 @@ module Protoex
     end
   end
 
+  # Fast Binary Encoding Protoex protocol version
+  class ProtocolVersion
+    # Protocol major version
+    MAJOR = 1
+    # Protocol minor version
+    MINOR = 1
+  end
+
   # Fast Binary Encoding Protoex sender
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Sender < FBE::Sender

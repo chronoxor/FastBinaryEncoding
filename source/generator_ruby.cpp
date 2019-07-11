@@ -3437,6 +3437,9 @@ void GeneratorRuby::GeneratePackage(const std::shared_ptr<Package>& p)
     // Generate protocol
     if (Proto())
     {
+        // Generate protocol version
+        GenerateProtocolVersion(p);
+
         // Generate sender & receiver
         GenerateSender(p, false);
         GenerateReceiver(p, false);
@@ -5390,6 +5393,23 @@ void GeneratorRuby::GenerateStructModelFinal(const std::shared_ptr<StructType>& 
     WriteLineIndent("end");
 
     // Generate struct model final end
+    Indent(-1);
+    WriteLineIndent("end");
+}
+
+void GeneratorRuby::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
+{
+    std::string package = ConvertTitle(*p->name);
+
+    // Generate protocol version class
+    WriteLine();
+    WriteLineIndent("# Fast Binary Encoding " + package + " protocol version");
+    WriteLineIndent("class ProtocolVersion");
+    Indent(1);
+    WriteLineIndent("# Protocol major version");
+    WriteLineIndent("MAJOR = " + std::to_string(p->version->major));
+    WriteLineIndent("# Protocol minor version");
+    WriteLineIndent("MINOR = " + std::to_string(p->version->minor));
     Indent(-1);
     WriteLineIndent("end");
 }

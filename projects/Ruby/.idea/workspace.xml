@@ -2,35 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28b38142-73b0-4ddb-b81e-352705299fce" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/fbe.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/fbe.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Account.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Account.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/proto/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/proto/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/proto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/Account.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/proto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_ruby.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_ruby.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/enums.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/proto.fbe" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.fbe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/proto.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/fbe.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/fbe.l" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.l" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/fbe.y" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.y" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_java.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_java.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/protoex.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,11 +34,11 @@
     <SUITE FILE_PATH="coverage/Ruby@Run_test__test_extending___Ruby.rcov" NAME="Run test 'test_extending': Ruby Coverage Results" MODIFIED="1539898276638" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@Run_test__test_serialization_final___Ruby.rcov" NAME="Run test 'test_serialization_final': Ruby Coverage Results" MODIFIED="1539911380679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@Run_test__test_clone___Ruby.rcov" NAME="Run test 'test_clone': Ruby Coverage Results" MODIFIED="1539885792313" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding@All_tests_in_tests__Ruby.rcov" NAME="All tests in tests: Ruby Coverage Results" MODIFIED="1561238568939" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding@All_tests_in_tests__Ruby.rcov" NAME="All tests in tests: Ruby Coverage Results" MODIFIED="1562804324668" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@print.rcov" NAME="print Coverage Results" MODIFIED="1539969713993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/FastBinaryEncoding@create.rcov" NAME="create Coverage Results" MODIFIED="1550870767289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@Run_test__test_decimal___Ruby.rcov" NAME="Run test 'test_decimal': Ruby Coverage Results" MODIFIED="1539867758133" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding@serialization.rcov" NAME="serialization Coverage Results" MODIFIED="1562103709637" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding@serialization.rcov" NAME="serialization Coverage Results" MODIFIED="1562804311777" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@Run_test__test_create___Ruby.rcov" NAME="Run test 'test_create': Ruby Coverage Results" MODIFIED="1539884441267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@serialization_final.rcov" NAME="serialization_final Coverage Results" MODIFIED="1539984743038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@benchmark_serialization_final.rcov" NAME="benchmark_serialization_final Coverage Results" MODIFIED="1539984610084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" MODULE_NAME="Ruby" />
@@ -117,11 +94,11 @@
         <option value="$PROJECT_DIR$/benchmarks/benchmark_serialization.rb" />
         <option value="$PROJECT_DIR$/benchmarks/benchmark_send_receive.rb" />
         <option value="$PROJECT_DIR$/tests/test_enums.rb" />
-        <option value="$PROJECT_DIR$/proto/test.rb" />
         <option value="$PROJECT_DIR$/examples/print.rb" />
         <option value="$PROJECT_DIR$/proto/fbe.rb" />
         <option value="$PROJECT_DIR$/tests/test_send_receive.rb" />
         <option value="$PROJECT_DIR$/tests/test_send_receive_final.rb" />
+        <option value="$PROJECT_DIR$/proto/test.rb" />
       </list>
     </option>
   </component>
@@ -154,6 +131,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Ruby" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Tests'; set:Tests; class com.intellij.psi.search.scope.TestsScope">
           <expand>
@@ -165,22 +153,6 @@
               <item name="Ruby" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="tests" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ruby" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ruby" type="462c0819:PsiDirectoryNode" />
-              <item name="examples" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -206,7 +178,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Ruby.serialization">
+  <component name="RunManager" selected="Test::Unit/Shoulda/Minitest.All tests in tests: Ruby">
     <configuration name="send_receive" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
       <module name="Ruby" />
       <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
@@ -297,9 +269,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Test::Unit/Shoulda/Minitest.All tests in tests: Ruby" />
         <item itemvalue="Ruby.serialization" />
         <item itemvalue="Ruby.send_receive" />
-        <item itemvalue="Test::Unit/Shoulda/Minitest.All tests in tests: Ruby" />
         <item itemvalue="Ruby.serialization_json" />
         <item itemvalue="Ruby.serialization_final" />
       </list>
@@ -349,13 +321,11 @@
       <workItem from="1556500281954" duration="535000" />
       <workItem from="1561238499193" duration="384000" />
       <workItem from="1562103669429" duration="44000" />
+      <workItem from="1562803910007" duration="467000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_tests_in_tests__Ruby - 2019.03.05 at 21h 07m 11s.xml">
-      <configuration name="All tests in tests: Ruby" configurationId="TestUnitRunConfigurationType" />
-    </history-entry>
     <history-entry file="All_tests_in_tests__Ruby - 2019.03.05 at 21h 07m 58s.xml">
       <configuration name="All tests in tests: Ruby" configurationId="TestUnitRunConfigurationType" />
     </history-entry>
@@ -383,19 +353,22 @@
     <history-entry file="All_tests_in_tests__Ruby - 2019.06.23 at 00h 27m 47s.xml">
       <configuration name="All tests in tests: Ruby" configurationId="TestUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="All_tests_in_tests__Ruby - 2019.07.11 at 03h 19m 23s.xml">
+      <configuration name="All tests in tests: Ruby" configurationId="TestUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="138813000" />
+    <option name="totallyTimeSpent" value="139280000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="407" y="238" width="1639" height="1070" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3210893" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32552248" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4863838" weight="0.3906083" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48575047" weight="0.3906083" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49555838" weight="0.470651" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -404,7 +377,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32997987" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5136162" side_tool="true" visible="true" weight="0.3906083" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5142495" side_tool="true" visible="true" weight="0.3906083" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -424,12 +397,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/proto/protoex.rb</url>
-          <line>3642</line>
+          <line>3650</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/proto/protoex.rb</url>
-          <line>3662</line>
+          <line>3670</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
@@ -621,13 +594,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/protoex.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="3586" selection-start-line="3586" selection-end-line="3586" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_serialization.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
@@ -636,20 +602,6 @@
       </provider>
     </entry>
     <entry file="file://Y:/Soft/Development/Ruby/lib/ruby/gems/2.5.0/gems/test-unit-3.2.7/lib/test/unit/testcase.rb" />
-    <entry file="file://$PROJECT_DIR$/proto/test.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4197">
-          <caret line="19361" lean-forward="true" selection-start-line="19361" selection-end-line="19361" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/proto.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2059">
-          <caret line="3364" lean-forward="true" selection-start-line="3364" selection-end-line="3364" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_send_receive_final.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="319">
@@ -668,6 +620,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
           <caret line="49" column="28" lean-forward="true" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/test.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="19845" lean-forward="true" selection-start-line="19845" selection-end-line="19845" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/protoex.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="3586" selection-start-line="3586" selection-end-line="3586" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="3002" lean-forward="true" selection-start-line="3002" selection-end-line="3002" />
         </state>
       </provider>
     </entry>

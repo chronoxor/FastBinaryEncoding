@@ -6702,6 +6702,14 @@ module Enums
     end
   end
 
+  # Fast Binary Encoding Enums protocol version
+  class ProtocolVersion
+    # Protocol major version
+    MAJOR = 1
+    # Protocol minor version
+    MINOR = 1
+  end
+
   # Fast Binary Encoding Enums sender
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Sender < FBE::Sender
