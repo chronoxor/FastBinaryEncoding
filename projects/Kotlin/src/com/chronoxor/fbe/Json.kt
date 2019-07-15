@@ -35,6 +35,22 @@ internal class CharacterJson : com.google.gson.JsonSerializer<Char>, com.google.
     }
 }
 
+internal class DateJson : com.google.gson.JsonSerializer<java.util.Date>, com.google.gson.JsonDeserializer<java.util.Date>
+{
+    override fun serialize(src: java.util.Date, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    {
+        val nanoseconds = src.time * 1000000
+        return com.google.gson.JsonPrimitive(nanoseconds)
+    }
+
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.util.Date
+    {
+        val nanoseconds = json.asJsonPrimitive.asLong
+        return java.util.Date(nanoseconds / 1000000)
+    }
+}
+
 internal class InstantJson : com.google.gson.JsonSerializer<java.time.Instant>, com.google.gson.JsonDeserializer<java.time.Instant>
 {
     override fun serialize(src: java.time.Instant, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
@@ -171,6 +187,7 @@ object Json
         builder.registerTypeAdapter(ByteArray::class.java, BytesJson())
         builder.registerTypeAdapter(Char::class.java, CharacterJson())
         builder.registerTypeAdapter(Character::class.java, CharacterJson())
+        builder.registerTypeAdapter(java.util.Date::class.java, DateJson())
         builder.registerTypeAdapter(java.time.Instant::class.java, InstantJson())
         builder.registerTypeAdapter(java.math.BigDecimal::class.java, BigDecimalJson())
         builder.registerTypeAdapter(java.util.UUID::class.java, UUIDJson())

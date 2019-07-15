@@ -30,12 +30,17 @@ public:
     bool Proto() const noexcept { return _proto; }
     GeneratorJava& Proto(bool proto) noexcept { _proto = proto; return *this; }
 
+    // Java version
+    int Version() const noexcept { return _version; }
+    GeneratorJava& Version(int v) noexcept { _version = v; return *this; }
+
     void Generate(const std::shared_ptr<Package>& package) override;
 
 private:
     bool _final{false};
     bool _json{false};
     bool _proto{false};
+    int _version{8};
 
     void GenerateHeader(const std::string& source);
     void GenerateFooter();
@@ -51,6 +56,7 @@ private:
     void GenerateFBEFieldModel(const std::string& domain, const std::string& package);
     void GenerateFBEFieldModel(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults);
     void GenerateFBEFieldModelDecimal(const std::string& domain, const std::string& package);
+    void GenerateFBEFieldModelDate(const std::string& domain, const std::string& package);
     void GenerateFBEFieldModelTimestamp(const std::string& domain, const std::string& package);
     void GenerateFBEFieldModelBytes(const std::string& domain, const std::string& package);
     void GenerateFBEFieldModelString(const std::string& domain, const std::string& package);
@@ -62,6 +68,7 @@ private:
     void GenerateFBEFinalModel(const std::string& domain, const std::string& package);
     void GenerateFBEFinalModel(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults);
     void GenerateFBEFinalModelDecimal(const std::string& domain, const std::string& package);
+    void GenerateFBEFinalModelDate(const std::string& domain, const std::string& package);
     void GenerateFBEFinalModelTimestamp(const std::string& domain, const std::string& package);
     void GenerateFBEFinalModelBytes(const std::string& domain, const std::string& package);
     void GenerateFBEFinalModelString(const std::string& domain, const std::string& package);

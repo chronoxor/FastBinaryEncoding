@@ -188,8 +188,10 @@ int main(int argc, char** argv)
     parser.add_option("--cpp-logging").dest("cpp-logging").action("store_true").set_default(0).help("Generate C++ logging code");
     parser.add_option("--csharp").dest("csharp").action("store_true").set_default(0).help("Generate C# code");
     parser.add_option("--go").dest("go").action("store_true").set_default(0).help("Generate Go code");
+    parser.add_option("--java7").dest("java7").action("store_true").set_default(0).help("Generate Java code (old Java 7 for Android)");
     parser.add_option("--java").dest("java").action("store_true").set_default(0).help("Generate Java code");
     parser.add_option("--javascript").dest("javascript").action("store_true").set_default(0).help("Generate JavaScript code");
+    parser.add_option("--kotlin7").dest("kotlin7").action("store_true").set_default(0).help("Generate Kotlin code (old Java 7 for Android)");
     parser.add_option("--kotlin").dest("kotlin").action("store_true").set_default(0).help("Generate Kotlin code");
     parser.add_option("--python").dest("python").action("store_true").set_default(0).help("Generate Python code");
     parser.add_option("--ruby").dest("ruby").action("store_true").set_default(0).help("Generate Ruby code");
@@ -218,8 +220,10 @@ int main(int argc, char** argv)
     bool csharp = options.get("csharp");
     bool go = options.get("go");
     bool java = options.get("java");
+    bool java7 = options.get("java7");
     bool javascript = options.get("javascript");
     bool kotlin = options.get("kotlin");
+    bool kotlin7 = options.get("kotlin7");
     bool python = options.get("python");
     bool ruby = options.get("ruby");
     bool final = options.get("final");
@@ -296,10 +300,10 @@ int main(int argc, char** argv)
         FBE::GeneratorGo(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
-    if (java)
+    if (java || java7)
     {
         if (!quiet) std::cout << "Generating Java code...";
-        FBE::GeneratorJava(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
+        FBE::GeneratorJava(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Version(java7 ? 7 : 8).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (javascript)
@@ -308,10 +312,10 @@ int main(int argc, char** argv)
         FBE::GeneratorJavaScript(input, output, (indent ? indent : 2), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
-    if (kotlin)
+    if (kotlin || kotlin7)
     {
         if (!quiet) std::cout << "Generating Kotlin code...";
-        FBE::GeneratorKotlin(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
+        FBE::GeneratorKotlin(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Version(kotlin7 ? 7 : 8).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (python)

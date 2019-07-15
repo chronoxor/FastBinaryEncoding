@@ -35,6 +35,7 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
     GenerateFBEFieldModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
     GenerateFBEFieldModelDecimal(domain, "fbe");
+    GenerateFBEFieldModelDate(domain, "fbe");
     GenerateFBEFieldModelTimestamp(domain, "fbe");
     GenerateFBEFieldModelBytes(domain, "fbe");
     GenerateFBEFieldModelString(domain, "fbe");
@@ -58,6 +59,7 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
         GenerateFBEFinalModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
         GenerateFBEFinalModelDecimal(domain, "fbe");
+        GenerateFBEFinalModelDate(domain, "fbe");
         GenerateFBEFinalModelTimestamp(domain, "fbe");
         GenerateFBEFinalModelBytes(domain, "fbe");
         GenerateFBEFinalModelString(domain, "fbe");
@@ -904,6 +906,60 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
 
         // Write signum at byte 15
         write(fbeOffset + 15, (if (value.signum() < 0) -128 else 0).toByte())
+    }
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorKotlin::GenerateFBEFieldModelDate(const std::string& domain, const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
+
+    // Open the file
+    CppCommon::Path file = path / "FieldModelDate.kt";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+    GenerateImports(domain, package);
+
+    std::string code = R"CODE(
+// Fast Binary Encoding date field model
+class FieldModelDate(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
+{
+    // Field size
+    override val fbeSize: Long = 8
+
+    // Get the date value
+    fun get(defaults: java.util.Date = java.util.Date(0)): java.util.Date
+    {
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
+            return defaults
+
+        val nanoseconds = readInt64(fbeOffset)
+        return java.util.Date(nanoseconds / 1000000)
+    }
+
+    // Set the date value
+    fun set(value: java.util.Date)
+    {
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
+            return
+
+        val nanoseconds = value.time * 1000000
+        write(fbeOffset, nanoseconds.toULong())
     }
 }
 )CODE";
@@ -2363,6 +2419,75 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
 
         // Write signum at byte 15
         write(fbeOffset + 15, (if (value.signum() < 0) -128 else 0).toByte())
+        return fbeSize
+    }
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorKotlin::GenerateFBEFinalModelDate(const std::string& domain, const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
+
+    // Open the file
+    CppCommon::Path file = path / "FinalModelDate.kt";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+    GenerateImports(domain, package);
+
+    std::string code = R"CODE(
+// Fast Binary Encoding date final model
+class FinalModelDate(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
+{
+    // Get the allocation size
+    @Suppress("UNUSED_PARAMETER")
+    fun fbeAllocationSize(value: java.util.Date): Long = fbeSize
+
+    // Final size
+    override val fbeSize: Long = 8
+
+    // Check if the date value is valid
+    override fun verify(): Long
+    {
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
+            return Long.MAX_VALUE
+
+        return fbeSize
+    }
+
+    // Get the date value
+    fun get(size: Size): java.util.Date
+    {
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
+            return java.util.Date(0)
+
+        size.value = fbeSize
+        val nanoseconds = readInt64(fbeOffset)
+        return java.util.Date(nanoseconds / 1000000)
+    }
+
+    // Set the date value
+    fun set(value: java.util.Date): Long
+    {
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
+            return 0
+
+        val nanoseconds = value.time * 1000000
+        write(fbeOffset, nanoseconds.toULong())
         return fbeSize
     }
 }
@@ -4197,6 +4322,22 @@ internal class CharacterJson : com.google.gson.JsonSerializer<Char>, com.google.
     }
 }
 
+internal class DateJson : com.google.gson.JsonSerializer<java.util.Date>, com.google.gson.JsonDeserializer<java.util.Date>
+{
+    override fun serialize(src: java.util.Date, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    {
+        val nanoseconds = src.time * 1000000
+        return com.google.gson.JsonPrimitive(nanoseconds)
+    }
+
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.util.Date
+    {
+        val nanoseconds = json.asJsonPrimitive.asLong
+        return java.util.Date(nanoseconds / 1000000)
+    }
+}
+
 internal class InstantJson : com.google.gson.JsonSerializer<java.time.Instant>, com.google.gson.JsonDeserializer<java.time.Instant>
 {
     override fun serialize(src: java.time.Instant, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
@@ -4333,6 +4474,7 @@ object Json
         builder.registerTypeAdapter(ByteArray::class.java, BytesJson())
         builder.registerTypeAdapter(Char::class.java, CharacterJson())
         builder.registerTypeAdapter(Character::class.java, CharacterJson())
+        builder.registerTypeAdapter(java.util.Date::class.java, DateJson())
         builder.registerTypeAdapter(java.time.Instant::class.java, InstantJson())
         builder.registerTypeAdapter(java.math.BigDecimal::class.java, BigDecimalJson())
         builder.registerTypeAdapter(java.util.UUID::class.java, UUIDJson())
@@ -7562,7 +7704,7 @@ bool GeneratorKotlin::IsPackageType(const std::string& type)
             (type == "Long") || (type == "Long?") || (type == "ULong") || (type == "ULong?") ||
             (type == "Float") || (type == "Float?") || (type == "Double") || (type == "Double?") ||
             (type == "java.math.BigDecimal") || (type == "java.math.BigDecimal?") || (type == "java.math.BigInteger") || (type == "java.math.BigInteger?") ||
-            (type == "String") || (type == "String?") || (type == "java.time.Instant") || (type == "java.time.Instant?") || (type == "java.util.UUID") || (type == "java.util.UUID?"));
+            (type == "String") || (type == "String?") || (type == "java.util.Date") || (type == "java.util.Date?") || (type == "java.time.Instant") || (type == "java.time.Instant?") || (type == "java.util.UUID") || (type == "java.util.UUID?"));
 }
 
 bool GeneratorKotlin::IsPrimitiveType(const std::string& type, bool optional)
@@ -7917,7 +8059,7 @@ std::string GeneratorKotlin::ConvertTypeName(const std::string& domain, const st
     else if (type == "string")
         return "String" + opt;
     else if (type == "timestamp")
-        return "java.time.Instant" + opt;
+        return ((Version() < 8) ? "java.util.Date" : "java.time.Instant") + opt;
     else if (type == "uuid")
         return "java.util.UUID" + opt;
 
@@ -8011,7 +8153,7 @@ std::string GeneratorKotlin::ConvertTypeFieldName(const std::string& type)
     else if (type == "string")
         return "String";
     else if (type == "timestamp")
-        return "Timestamp";
+        return ((Version() < 8) ? "Date" : "Timestamp");
     else if (type == "uuid")
         return "UUID";
 
@@ -8059,7 +8201,7 @@ std::string GeneratorKotlin::ConvertTypeFieldType(const std::string& domain, con
     else if (type == "string")
         return "String" + opt;
     else if (type == "timestamp")
-        return "java.time.Instant" + opt;
+        return ((Version() < 8) ? "java.util.Date" : "java.time.Instant") + opt;
     else if (type == "uuid")
         return "java.util.UUID" + opt;
 
@@ -8203,9 +8345,9 @@ std::string GeneratorKotlin::ConvertConstant(const std::string& domain, const st
         return "";
     }
     else if (value == "epoch")
-        return "java.time.Instant.EPOCH";
+        return ((Version() < 8) ? "java.util.Date(0)" : "java.time.Instant.EPOCH");
     else if (value == "utc")
-        return "java.time.Instant.now()";
+        return ((Version() < 8) ? "java.util.Date(System.currentTimeMillis())" : "java.time.Instant.now()");
     else if (value == "uuid0")
         return domain + "fbe.UUIDGenerator.nil()";
     else if (value == "uuid1")
@@ -8323,7 +8465,7 @@ std::string GeneratorKotlin::ConvertDefault(const std::string& domain, const std
     else if (type == "string")
         return "\"\"";
     else if (type == "timestamp")
-        return "java.time.Instant.EPOCH";
+        return ((Version() < 8) ? "java.util.Date(0)" : "java.time.Instant.EPOCH");
     else if (type == "uuid")
         return domain + "fbe.UUIDGenerator.nil()";
 
@@ -8376,7 +8518,7 @@ std::string GeneratorKotlin::ConvertOutputStreamType(const std::string& type, co
     else if ((type == "string") || (type == "uuid"))
         return ".append(\"\\\"\").append(" + name + opt + ").append(\"\\\"\")";
     else if (type == "timestamp")
-        return ".append(" + name + opt + ".epochSecond * 1000000000 + " + name + opt + ".nano)";
+        return ((Version() < 8) ? ".append(" + name + opt + ".time * 1000000)" : ".append(" + name + opt + ".epochSecond * 1000000000 + " + name + opt + ".nano)");
     else
         return ".append(" + name + opt + ")";
 }

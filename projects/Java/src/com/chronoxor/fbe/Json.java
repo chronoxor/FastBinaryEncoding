@@ -35,6 +35,23 @@ final class CharacterJson implements com.google.gson.JsonSerializer<Character>, 
     }
 }
 
+final class DateJson implements com.google.gson.JsonSerializer<java.util.Date>, com.google.gson.JsonDeserializer<java.util.Date>
+{
+    @Override
+    public com.google.gson.JsonElement serialize(java.util.Date src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
+    {
+        long nanoseconds = src.getTime() * 1000;
+        return new com.google.gson.JsonPrimitive(nanoseconds);
+    }
+
+    @Override
+    public java.util.Date deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
+    {
+        long nanoseconds = json.getAsJsonPrimitive().getAsLong();
+        return new java.util.Date(nanoseconds / 1000000);
+    }
+}
+
 final class InstantJson implements com.google.gson.JsonSerializer<java.time.Instant>, com.google.gson.JsonDeserializer<java.time.Instant>
 {
     @Override
@@ -103,6 +120,7 @@ public final class Json
         builder.registerTypeAdapter(java.nio.ByteBuffer.class, new ByteBufferJson());
         builder.registerTypeAdapter(char.class, new CharacterJson());
         builder.registerTypeAdapter(Character.class, new CharacterJson());
+        builder.registerTypeAdapter(java.util.Date.class, new DateJson());
         builder.registerTypeAdapter(java.time.Instant.class, new InstantJson());
         builder.registerTypeAdapter(java.math.BigDecimal.class, new BigDecimalJson());
         builder.registerTypeAdapter(java.util.UUID.class, new UUIDJson());

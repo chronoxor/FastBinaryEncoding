@@ -32,6 +32,7 @@ void GeneratorJava::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel(domain, "fbe", "Double", "double", "", "8", "0.0d");
     GenerateFBEFieldModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
     GenerateFBEFieldModelDecimal(domain, "fbe");
+    GenerateFBEFieldModelDate(domain, "fbe");
     GenerateFBEFieldModelTimestamp(domain, "fbe");
     GenerateFBEFieldModelBytes(domain, "fbe");
     GenerateFBEFieldModelString(domain, "fbe");
@@ -51,6 +52,7 @@ void GeneratorJava::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel(domain, "fbe", "Double", "double", "", "8", "0.0d");
         GenerateFBEFinalModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
         GenerateFBEFinalModelDecimal(domain, "fbe");
+        GenerateFBEFinalModelDate(domain, "fbe");
         GenerateFBEFinalModelTimestamp(domain, "fbe");
         GenerateFBEFinalModelBytes(domain, "fbe");
         GenerateFBEFinalModelString(domain, "fbe");
@@ -872,6 +874,72 @@ public final class FieldModelDecimal extends FieldModel
 
         // Write signum at byte 15
         write(fbeOffset() + 15, (byte)((value.signum() < 0) ? -128 : 0));
+    }
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorJava::GenerateFBEFieldModelDate(const std::string& domain, const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
+
+    // Open the file
+    CppCommon::Path file = path / "FieldModelDate.java";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+    GenerateImports(domain, package);
+
+    std::string code = R"CODE(
+// Fast Binary Encoding date field model
+public final class FieldModelDate extends FieldModel
+{
+    public FieldModelDate(Buffer buffer, long offset) { super(buffer, offset); }
+
+    // Get the field size
+    @Override
+    public long fbeSize() { return 8; }
+
+    // Get the date value
+    public java.util.Date get() { return get(new java.util.Date(0)); }
+    public java.util.Date get(java.util.Date defaults)
+    {
+        assert (defaults != null) : "Invalid default date value!";
+        if (defaults == null)
+            throw new IllegalArgumentException("Invalid default date value!");
+
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
+            return defaults;
+
+        long nanoseconds = readInt64(fbeOffset());
+        return new java.util.Date(nanoseconds / 1000000);
+    }
+
+    // Set the date value
+    public void set(java.util.Date value)
+    {
+        assert (value != null) : "Invalid date value!";
+        if (value == null)
+            throw new IllegalArgumentException("Invalid date value!");
+
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
+            return;
+
+        long nanoseconds = value.getTime() * 1000;
+        write(fbeOffset(), nanoseconds);
     }
 }
 )CODE";
@@ -2451,6 +2519,78 @@ public final class FinalModelDecimal extends FinalModel
 
         // Write signum at byte 15
         write(fbeOffset() + 15, (byte)((value.signum() < 0) ? -128 : 0));
+        return fbeSize();
+    }
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorJava::GenerateFBEFinalModelDate(const std::string& domain, const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
+
+    // Open the file
+    CppCommon::Path file = path / "FinalModelDate.java";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+    GenerateImports(domain, package);
+
+    std::string code = R"CODE(
+// Fast Binary Encoding date final model
+public final class FinalModelDate extends FinalModel
+{
+    public FinalModelDate(Buffer buffer, long offset) { super(buffer, offset); }
+
+    // Get the allocation size
+    public long fbeAllocationSize(java.util.Date value) { return fbeSize(); }
+
+    // Get the final size
+    @Override
+    public long fbeSize() { return 8; }
+
+    // Check if the date value is valid
+    @Override
+    public long verify()
+    {
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
+            return Long.MAX_VALUE;
+
+        return fbeSize();
+    }
+
+    // Get the date value
+    public java.util.Date get(Size size)
+    {
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
+            return new java.util.Date(0);
+
+        size.value = fbeSize();
+        long nanoseconds = readInt64(fbeOffset());
+        return new java.util.Date(nanoseconds / 1000000);
+    }
+
+    // Set the date value
+    public long set(java.util.Date value)
+    {
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
+            return 0;
+
+        long nanoseconds = value.getTime() * 1000;
+        write(fbeOffset(), nanoseconds);
         return fbeSize();
     }
 }
@@ -4054,6 +4194,23 @@ final class CharacterJson implements com.google.gson.JsonSerializer<Character>, 
     }
 }
 
+final class DateJson implements com.google.gson.JsonSerializer<java.util.Date>, com.google.gson.JsonDeserializer<java.util.Date>
+{
+    @Override
+    public com.google.gson.JsonElement serialize(java.util.Date src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
+    {
+        long nanoseconds = src.getTime() * 1000;
+        return new com.google.gson.JsonPrimitive(nanoseconds);
+    }
+
+    @Override
+    public java.util.Date deserialize(com.google.gson.JsonElement json, java.lang.reflect.Type type, com.google.gson.JsonDeserializationContext context) throws com.google.gson.JsonParseException
+    {
+        long nanoseconds = json.getAsJsonPrimitive().getAsLong();
+        return new java.util.Date(nanoseconds / 1000000);
+    }
+}
+
 final class InstantJson implements com.google.gson.JsonSerializer<java.time.Instant>, com.google.gson.JsonDeserializer<java.time.Instant>
 {
     @Override
@@ -4122,6 +4279,7 @@ public final class Json
         builder.registerTypeAdapter(java.nio.ByteBuffer.class, new ByteBufferJson());
         builder.registerTypeAdapter(char.class, new CharacterJson());
         builder.registerTypeAdapter(Character.class, new CharacterJson());
+        builder.registerTypeAdapter(java.util.Date.class, new DateJson());
         builder.registerTypeAdapter(java.time.Instant.class, new InstantJson());
         builder.registerTypeAdapter(java.math.BigDecimal.class, new BigDecimalJson());
         builder.registerTypeAdapter(java.util.UUID.class, new UUIDJson());
@@ -6939,7 +7097,7 @@ bool GeneratorJava::IsPackageType(const std::string& type)
             (type == "Long") || (type == "ULong") ||
             (type == "Float") || (type == "Double") ||
             (type == "java.math.BigDecimal") || (type == "java.math.BigInteger") ||
-            (type == "String") || (type == "java.time.Instant") || (type == "java.util.UUID"));
+            (type == "String") || (type == "java.util.Date") || (type == "java.time.Instant") || (type == "java.util.UUID"));
 }
 
 bool GeneratorJava::IsPrimitiveType(const std::string& type, bool optional)
@@ -7272,7 +7430,7 @@ std::string GeneratorJava::ConvertTypeName(const std::string& domain, const std:
     else if (type == "string")
         return "String";
     else if (type == "timestamp")
-        return "java.time.Instant";
+        return ((Version() < 8) ? "java.util.Date" : "java.time.Instant");
     else if (type == "uuid")
         return "java.util.UUID";
 
@@ -7366,7 +7524,7 @@ std::string GeneratorJava::ConvertTypeFieldName(const std::string& type)
     else if (type == "string")
         return "String";
     else if (type == "timestamp")
-        return "Timestamp";
+        return ((Version() < 8) ? "Date" : "Timestamp");
     else if (type == "uuid")
         return "UUID";
 
@@ -7412,7 +7570,7 @@ std::string GeneratorJava::ConvertTypeFieldType(const std::string& domain, const
     else if (type == "string")
         return "String";
     else if (type == "timestamp")
-        return "java.time.Instant";
+        return ((Version() < 8) ? "java.util.Date" : "java.time.Instant");
     else if (type == "uuid")
         return "java.util.UUID";
 
@@ -7548,9 +7706,9 @@ std::string GeneratorJava::ConvertConstant(const std::string& domain, const std:
         return "";
     }
     else if (value == "epoch")
-        return "java.time.Instant.EPOCH";
+        return ((Version() < 8) ? "new java.util.Date(0)" : "java.time.Instant.EPOCH");
     else if (value == "utc")
-        return "java.time.Instant.now()";
+        return ((Version() < 8) ? "new java.util.Date(System.currentTimeMillis())" : "java.time.Instant.now()");
     else if (value == "uuid0")
         return domain + "fbe.UUIDGenerator.nil()";
     else if (value == "uuid1")
@@ -7683,7 +7841,7 @@ std::string GeneratorJava::ConvertDefault(const std::string& domain, const std::
     else if (type == "string")
         return "\"\"";
     else if (type == "timestamp")
-        return "java.time.Instant.EPOCH";
+        return ((Version() < 8) ? "new java.util.Date(0)" : "java.time.Instant.EPOCH");
     else if (type == "uuid")
         return domain + "fbe.UUIDGenerator.nil()";
 
@@ -7731,7 +7889,7 @@ std::string GeneratorJava::ConvertOutputStreamType(const std::string& type, cons
     else if ((type == "string") || (type == "uuid"))
         return ".append(\"\\\"\").append(" + name + ").append(\"\\\"\")";
     else if (type == "timestamp")
-        return ".append(" + name + ".getEpochSecond() * 1000000000 + " + name + ".getNano())";
+        return ((Version() < 8) ? ".append(" + name + ".getTime() * 1000)" : ".append(" + name + ".getEpochSecond() * 1000000000 + " + name + ".getNano())");
     else
         return ".append(" + name + ")";
 }
