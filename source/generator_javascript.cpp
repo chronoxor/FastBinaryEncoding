@@ -9550,7 +9550,7 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
         {
             for (const auto& field : s->body->fields)
             {
-                Write(std::string(first ? "" : ", ") + *field->name + " = " + ConvertDefault(*field));
+                Write(std::string(first ? "arg" : ", arg") + *field->name + " = " + ConvertDefault(*field));
                 first = false;
             }
         }
@@ -9563,7 +9563,7 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
         }
         if (s->body)
             for (const auto& field : s->body->fields)
-                WriteLineIndent("this." + *field->name + " = " + *field->name);
+                WriteLineIndent("this." + *field->name + " = arg" + *field->name);
         Indent(-1);
         WriteLineIndent("}");
         WriteLine();

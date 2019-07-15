@@ -1535,52 +1535,52 @@ class StructSimple {
    * @param {!proto.Account=} f44
    * @constructor
    */
-  constructor (id = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = '\0', f6 = '!', f7 = '\0', f8 = String.fromCharCode(0x0444), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 4294967295, f21 = new Int64(0, 0), f22 = new Int64(4294967295, 2147483647), f23 = new UInt64(0, 0), f24 = new UInt64(4294967295, 4294967295), f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = new Big(0), f30 = new Big('123456.123456'), f31 = '', f32 = 'Initial string!', f33 = new Date(0), f34 = new Date(0), f35 = new Date(Date.now()), f36 = new UUID(), f37 = UUID.sequential(), f38 = new UUID('123e4567-e89b-12d3-a456-426655440000'), f39 = new proto.OrderSide(), f40 = new proto.OrderType(), f41 = new proto.Order(), f42 = new proto.Balance(), f43 = new proto.State(), f44 = new proto.Account()) {
-    this.id = id
-    this.f1 = f1
-    this.f2 = f2
-    this.f3 = f3
-    this.f4 = f4
-    this.f5 = f5
-    this.f6 = f6
-    this.f7 = f7
-    this.f8 = f8
-    this.f9 = f9
-    this.f10 = f10
-    this.f11 = f11
-    this.f12 = f12
-    this.f13 = f13
-    this.f14 = f14
-    this.f15 = f15
-    this.f16 = f16
-    this.f17 = f17
-    this.f18 = f18
-    this.f19 = f19
-    this.f20 = f20
-    this.f21 = f21
-    this.f22 = f22
-    this.f23 = f23
-    this.f24 = f24
-    this.f25 = f25
-    this.f26 = f26
-    this.f27 = f27
-    this.f28 = f28
-    this.f29 = f29
-    this.f30 = f30
-    this.f31 = f31
-    this.f32 = f32
-    this.f33 = f33
-    this.f34 = f34
-    this.f35 = f35
-    this.f36 = f36
-    this.f37 = f37
-    this.f38 = f38
-    this.f39 = f39
-    this.f40 = f40
-    this.f41 = f41
-    this.f42 = f42
-    this.f43 = f43
-    this.f44 = f44
+  constructor (argid = 0, argf1 = false, argf2 = true, argf3 = 0, argf4 = 255, argf5 = '\0', argf6 = '!', argf7 = '\0', argf8 = String.fromCharCode(0x0444), argf9 = 0, argf10 = 127, argf11 = 0, argf12 = 255, argf13 = 0, argf14 = 32767, argf15 = 0, argf16 = 65535, argf17 = 0, argf18 = 2147483647, argf19 = 0, argf20 = 4294967295, argf21 = new Int64(0, 0), argf22 = new Int64(4294967295, 2147483647), argf23 = new UInt64(0, 0), argf24 = new UInt64(4294967295, 4294967295), argf25 = 0.0, argf26 = 123.456, argf27 = 0.0, argf28 = -123.456e+123, argf29 = new Big(0), argf30 = new Big('123456.123456'), argf31 = '', argf32 = 'Initial string!', argf33 = new Date(0), argf34 = new Date(0), argf35 = new Date(Date.now()), argf36 = new UUID(), argf37 = UUID.sequential(), argf38 = new UUID('123e4567-e89b-12d3-a456-426655440000'), argf39 = new proto.OrderSide(), argf40 = new proto.OrderType(), argf41 = new proto.Order(), argf42 = new proto.Balance(), argf43 = new proto.State(), argf44 = new proto.Account()) {
+    this.id = argid
+    this.f1 = argf1
+    this.f2 = argf2
+    this.f3 = argf3
+    this.f4 = argf4
+    this.f5 = argf5
+    this.f6 = argf6
+    this.f7 = argf7
+    this.f8 = argf8
+    this.f9 = argf9
+    this.f10 = argf10
+    this.f11 = argf11
+    this.f12 = argf12
+    this.f13 = argf13
+    this.f14 = argf14
+    this.f15 = argf15
+    this.f16 = argf16
+    this.f17 = argf17
+    this.f18 = argf18
+    this.f19 = argf19
+    this.f20 = argf20
+    this.f21 = argf21
+    this.f22 = argf22
+    this.f23 = argf23
+    this.f24 = argf24
+    this.f25 = argf25
+    this.f26 = argf26
+    this.f27 = argf27
+    this.f28 = argf28
+    this.f29 = argf29
+    this.f30 = argf30
+    this.f31 = argf31
+    this.f32 = argf32
+    this.f33 = argf33
+    this.f34 = argf34
+    this.f35 = argf35
+    this.f36 = argf36
+    this.f37 = argf37
+    this.f38 = argf38
+    this.f39 = argf39
+    this.f40 = argf40
+    this.f41 = argf41
+    this.f42 = argf42
+    this.f43 = argf43
+    this.f44 = argf44
   }
 
   /**
@@ -5402,75 +5402,75 @@ class StructOptional extends StructSimple {
    * @param {proto.Account=} f165
    * @constructor
    */
-  constructor (parent = new StructSimple(), f100 = undefined, f101 = true, f102 = undefined, f103 = undefined, f104 = 255, f105 = undefined, f106 = undefined, f107 = '!', f108 = undefined, f109 = undefined, f110 = String.fromCharCode(0x0444), f111 = undefined, f112 = undefined, f113 = 127, f114 = undefined, f115 = undefined, f116 = 255, f117 = undefined, f118 = undefined, f119 = 32767, f120 = undefined, f121 = undefined, f122 = 65535, f123 = undefined, f124 = undefined, f125 = 2147483647, f126 = undefined, f127 = undefined, f128 = 4294967295, f129 = undefined, f130 = undefined, f131 = new Int64(4294967295, 2147483647), f132 = undefined, f133 = undefined, f134 = new UInt64(4294967295, 4294967295), f135 = undefined, f136 = undefined, f137 = 123.456, f138 = undefined, f139 = undefined, f140 = -123.456e+123, f141 = undefined, f142 = undefined, f143 = new Big('123456.123456'), f144 = undefined, f145 = undefined, f146 = 'Initial string!', f147 = undefined, f148 = undefined, f149 = new Date(Date.now()), f150 = undefined, f151 = undefined, f152 = new UUID('123e4567-e89b-12d3-a456-426655440000'), f153 = undefined, f154 = undefined, f155 = undefined, f156 = undefined, f157 = undefined, f158 = undefined, f159 = undefined, f160 = undefined, f161 = undefined, f162 = undefined, f163 = undefined, f164 = undefined, f165 = undefined) {
+  constructor (parent = new StructSimple(), argf100 = undefined, argf101 = true, argf102 = undefined, argf103 = undefined, argf104 = 255, argf105 = undefined, argf106 = undefined, argf107 = '!', argf108 = undefined, argf109 = undefined, argf110 = String.fromCharCode(0x0444), argf111 = undefined, argf112 = undefined, argf113 = 127, argf114 = undefined, argf115 = undefined, argf116 = 255, argf117 = undefined, argf118 = undefined, argf119 = 32767, argf120 = undefined, argf121 = undefined, argf122 = 65535, argf123 = undefined, argf124 = undefined, argf125 = 2147483647, argf126 = undefined, argf127 = undefined, argf128 = 4294967295, argf129 = undefined, argf130 = undefined, argf131 = new Int64(4294967295, 2147483647), argf132 = undefined, argf133 = undefined, argf134 = new UInt64(4294967295, 4294967295), argf135 = undefined, argf136 = undefined, argf137 = 123.456, argf138 = undefined, argf139 = undefined, argf140 = -123.456e+123, argf141 = undefined, argf142 = undefined, argf143 = new Big('123456.123456'), argf144 = undefined, argf145 = undefined, argf146 = 'Initial string!', argf147 = undefined, argf148 = undefined, argf149 = new Date(Date.now()), argf150 = undefined, argf151 = undefined, argf152 = new UUID('123e4567-e89b-12d3-a456-426655440000'), argf153 = undefined, argf154 = undefined, argf155 = undefined, argf156 = undefined, argf157 = undefined, argf158 = undefined, argf159 = undefined, argf160 = undefined, argf161 = undefined, argf162 = undefined, argf163 = undefined, argf164 = undefined, argf165 = undefined) {
     super()
     super.copy(parent)
-    this.f100 = f100
-    this.f101 = f101
-    this.f102 = f102
-    this.f103 = f103
-    this.f104 = f104
-    this.f105 = f105
-    this.f106 = f106
-    this.f107 = f107
-    this.f108 = f108
-    this.f109 = f109
-    this.f110 = f110
-    this.f111 = f111
-    this.f112 = f112
-    this.f113 = f113
-    this.f114 = f114
-    this.f115 = f115
-    this.f116 = f116
-    this.f117 = f117
-    this.f118 = f118
-    this.f119 = f119
-    this.f120 = f120
-    this.f121 = f121
-    this.f122 = f122
-    this.f123 = f123
-    this.f124 = f124
-    this.f125 = f125
-    this.f126 = f126
-    this.f127 = f127
-    this.f128 = f128
-    this.f129 = f129
-    this.f130 = f130
-    this.f131 = f131
-    this.f132 = f132
-    this.f133 = f133
-    this.f134 = f134
-    this.f135 = f135
-    this.f136 = f136
-    this.f137 = f137
-    this.f138 = f138
-    this.f139 = f139
-    this.f140 = f140
-    this.f141 = f141
-    this.f142 = f142
-    this.f143 = f143
-    this.f144 = f144
-    this.f145 = f145
-    this.f146 = f146
-    this.f147 = f147
-    this.f148 = f148
-    this.f149 = f149
-    this.f150 = f150
-    this.f151 = f151
-    this.f152 = f152
-    this.f153 = f153
-    this.f154 = f154
-    this.f155 = f155
-    this.f156 = f156
-    this.f157 = f157
-    this.f158 = f158
-    this.f159 = f159
-    this.f160 = f160
-    this.f161 = f161
-    this.f162 = f162
-    this.f163 = f163
-    this.f164 = f164
-    this.f165 = f165
+    this.f100 = argf100
+    this.f101 = argf101
+    this.f102 = argf102
+    this.f103 = argf103
+    this.f104 = argf104
+    this.f105 = argf105
+    this.f106 = argf106
+    this.f107 = argf107
+    this.f108 = argf108
+    this.f109 = argf109
+    this.f110 = argf110
+    this.f111 = argf111
+    this.f112 = argf112
+    this.f113 = argf113
+    this.f114 = argf114
+    this.f115 = argf115
+    this.f116 = argf116
+    this.f117 = argf117
+    this.f118 = argf118
+    this.f119 = argf119
+    this.f120 = argf120
+    this.f121 = argf121
+    this.f122 = argf122
+    this.f123 = argf123
+    this.f124 = argf124
+    this.f125 = argf125
+    this.f126 = argf126
+    this.f127 = argf127
+    this.f128 = argf128
+    this.f129 = argf129
+    this.f130 = argf130
+    this.f131 = argf131
+    this.f132 = argf132
+    this.f133 = argf133
+    this.f134 = argf134
+    this.f135 = argf135
+    this.f136 = argf136
+    this.f137 = argf137
+    this.f138 = argf138
+    this.f139 = argf139
+    this.f140 = argf140
+    this.f141 = argf141
+    this.f142 = argf142
+    this.f143 = argf143
+    this.f144 = argf144
+    this.f145 = argf145
+    this.f146 = argf146
+    this.f147 = argf147
+    this.f148 = argf148
+    this.f149 = argf149
+    this.f150 = argf150
+    this.f151 = argf151
+    this.f152 = argf152
+    this.f153 = argf153
+    this.f154 = argf154
+    this.f155 = argf155
+    this.f156 = argf156
+    this.f157 = argf157
+    this.f158 = argf158
+    this.f159 = argf159
+    this.f160 = argf160
+    this.f161 = argf161
+    this.f162 = argf162
+    this.f163 = argf163
+    this.f164 = argf164
+    this.f165 = argf165
   }
 
   /**
@@ -10915,21 +10915,21 @@ class StructNested extends StructOptional {
    * @param {StructOptional=} f1011
    * @constructor
    */
-  constructor (parent = new StructOptional(), f1000 = new EnumSimple(), f1001 = undefined, f1002 = new EnumTyped(EnumTyped.ENUM_VALUE_2), f1003 = undefined, f1004 = new FlagsSimple(), f1005 = undefined, f1006 = new FlagsTyped(FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6), f1007 = undefined, f1008 = new StructSimple(), f1009 = undefined, f1010 = new StructOptional(), f1011 = undefined) {
+  constructor (parent = new StructOptional(), argf1000 = new EnumSimple(), argf1001 = undefined, argf1002 = new EnumTyped(EnumTyped.ENUM_VALUE_2), argf1003 = undefined, argf1004 = new FlagsSimple(), argf1005 = undefined, argf1006 = new FlagsTyped(FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6), argf1007 = undefined, argf1008 = new StructSimple(), argf1009 = undefined, argf1010 = new StructOptional(), argf1011 = undefined) {
     super()
     super.copy(parent)
-    this.f1000 = f1000
-    this.f1001 = f1001
-    this.f1002 = f1002
-    this.f1003 = f1003
-    this.f1004 = f1004
-    this.f1005 = f1005
-    this.f1006 = f1006
-    this.f1007 = f1007
-    this.f1008 = f1008
-    this.f1009 = f1009
-    this.f1010 = f1010
-    this.f1011 = f1011
+    this.f1000 = argf1000
+    this.f1001 = argf1001
+    this.f1002 = argf1002
+    this.f1003 = argf1003
+    this.f1004 = argf1004
+    this.f1005 = argf1005
+    this.f1006 = argf1006
+    this.f1007 = argf1007
+    this.f1008 = argf1008
+    this.f1009 = argf1009
+    this.f1010 = argf1010
+    this.f1011 = argf1011
   }
 
   /**
@@ -12524,10 +12524,10 @@ class StructBytes {
    * @param {Uint8Array=} f3
    * @constructor
    */
-  constructor (f1 = new Uint8Array(0), f2 = undefined, f3 = undefined) {
-    this.f1 = f1
-    this.f2 = f2
-    this.f3 = f3
+  constructor (argf1 = new Uint8Array(0), argf2 = undefined, argf3 = undefined) {
+    this.f1 = argf1
+    this.f2 = argf2
+    this.f3 = argf3
   }
 
   /**
@@ -13475,17 +13475,17 @@ class StructArray {
    * @param {Array=} f10
    * @constructor
    */
-  constructor (f1 = [], f2 = [], f3 = [], f4 = [], f5 = [], f6 = [], f7 = [], f8 = [], f9 = [], f10 = []) {
-    this.f1 = f1
-    this.f2 = f2
-    this.f3 = f3
-    this.f4 = f4
-    this.f5 = f5
-    this.f6 = f6
-    this.f7 = f7
-    this.f8 = f8
-    this.f9 = f9
-    this.f10 = f10
+  constructor (argf1 = [], argf2 = [], argf3 = [], argf4 = [], argf5 = [], argf6 = [], argf7 = [], argf8 = [], argf9 = [], argf10 = []) {
+    this.f1 = argf1
+    this.f2 = argf2
+    this.f3 = argf3
+    this.f4 = argf4
+    this.f5 = argf5
+    this.f6 = argf6
+    this.f7 = argf7
+    this.f8 = argf8
+    this.f9 = argf9
+    this.f10 = argf10
   }
 
   /**
@@ -15098,17 +15098,17 @@ class StructVector {
    * @param {Array=} f10
    * @constructor
    */
-  constructor (f1 = [], f2 = [], f3 = [], f4 = [], f5 = [], f6 = [], f7 = [], f8 = [], f9 = [], f10 = []) {
-    this.f1 = f1
-    this.f2 = f2
-    this.f3 = f3
-    this.f4 = f4
-    this.f5 = f5
-    this.f6 = f6
-    this.f7 = f7
-    this.f8 = f8
-    this.f9 = f9
-    this.f10 = f10
+  constructor (argf1 = [], argf2 = [], argf3 = [], argf4 = [], argf5 = [], argf6 = [], argf7 = [], argf8 = [], argf9 = [], argf10 = []) {
+    this.f1 = argf1
+    this.f2 = argf2
+    this.f3 = argf3
+    this.f4 = argf4
+    this.f5 = argf5
+    this.f6 = argf6
+    this.f7 = argf7
+    this.f8 = argf8
+    this.f9 = argf9
+    this.f10 = argf10
   }
 
   /**
@@ -16721,17 +16721,17 @@ class StructList {
    * @param {Array=} f10
    * @constructor
    */
-  constructor (f1 = [], f2 = [], f3 = [], f4 = [], f5 = [], f6 = [], f7 = [], f8 = [], f9 = [], f10 = []) {
-    this.f1 = f1
-    this.f2 = f2
-    this.f3 = f3
-    this.f4 = f4
-    this.f5 = f5
-    this.f6 = f6
-    this.f7 = f7
-    this.f8 = f8
-    this.f9 = f9
-    this.f10 = f10
+  constructor (argf1 = [], argf2 = [], argf3 = [], argf4 = [], argf5 = [], argf6 = [], argf7 = [], argf8 = [], argf9 = [], argf10 = []) {
+    this.f1 = argf1
+    this.f2 = argf2
+    this.f3 = argf3
+    this.f4 = argf4
+    this.f5 = argf5
+    this.f6 = argf6
+    this.f7 = argf7
+    this.f8 = argf8
+    this.f9 = argf9
+    this.f10 = argf10
   }
 
   /**
@@ -18338,11 +18338,11 @@ class StructSet {
    * @param {!Set=} f4
    * @constructor
    */
-  constructor (f1 = new Set(), f2 = new Set(), f3 = new Set(), f4 = new Set()) {
-    this.f1 = f1
-    this.f2 = f2
-    this.f3 = f3
-    this.f4 = f4
+  constructor (argf1 = new Set(), argf2 = new Set(), argf3 = new Set(), argf4 = new Set()) {
+    this.f1 = argf1
+    this.f2 = argf2
+    this.f3 = argf3
+    this.f4 = argf4
   }
 
   /**
@@ -19405,17 +19405,17 @@ class StructMap {
    * @param {Map=} f10
    * @constructor
    */
-  constructor (f1 = new Map(), f2 = new Map(), f3 = new Map(), f4 = new Map(), f5 = new Map(), f6 = new Map(), f7 = new Map(), f8 = new Map(), f9 = new Map(), f10 = new Map()) {
-    this.f1 = f1
-    this.f2 = f2
-    this.f3 = f3
-    this.f4 = f4
-    this.f5 = f5
-    this.f6 = f6
-    this.f7 = f7
-    this.f8 = f8
-    this.f9 = f9
-    this.f10 = f10
+  constructor (argf1 = new Map(), argf2 = new Map(), argf3 = new Map(), argf4 = new Map(), argf5 = new Map(), argf6 = new Map(), argf7 = new Map(), argf8 = new Map(), argf9 = new Map(), argf10 = new Map()) {
+    this.f1 = argf1
+    this.f2 = argf2
+    this.f3 = argf3
+    this.f4 = argf4
+    this.f5 = argf5
+    this.f6 = argf6
+    this.f7 = argf7
+    this.f8 = argf8
+    this.f9 = argf9
+    this.f10 = argf10
   }
 
   /**
@@ -21082,17 +21082,17 @@ class StructHash {
    * @param {Map=} f10
    * @constructor
    */
-  constructor (f1 = new Map(), f2 = new Map(), f3 = new Map(), f4 = new Map(), f5 = new Map(), f6 = new Map(), f7 = new Map(), f8 = new Map(), f9 = new Map(), f10 = new Map()) {
-    this.f1 = f1
-    this.f2 = f2
-    this.f3 = f3
-    this.f4 = f4
-    this.f5 = f5
-    this.f6 = f6
-    this.f7 = f7
-    this.f8 = f8
-    this.f9 = f9
-    this.f10 = f10
+  constructor (argf1 = new Map(), argf2 = new Map(), argf3 = new Map(), argf4 = new Map(), argf5 = new Map(), argf6 = new Map(), argf7 = new Map(), argf8 = new Map(), argf9 = new Map(), argf10 = new Map()) {
+    this.f1 = argf1
+    this.f2 = argf2
+    this.f3 = argf3
+    this.f4 = argf4
+    this.f5 = argf5
+    this.f6 = argf6
+    this.f7 = argf7
+    this.f8 = argf8
+    this.f9 = argf9
+    this.f10 = argf10
   }
 
   /**
@@ -22801,9 +22801,9 @@ class StructHashEx {
    * @param {Map=} f2
    * @constructor
    */
-  constructor (f1 = new Map(), f2 = new Map()) {
-    this.f1 = f1
-    this.f2 = f2
+  constructor (argf1 = new Map(), argf2 = new Map()) {
+    this.f1 = argf1
+    this.f2 = argf2
   }
 
   /**

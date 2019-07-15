@@ -727,13 +727,13 @@ class Order {
    * @param {!number=} volume
    * @constructor
    */
-  constructor (id = 0, symbol = '', side = new OrderSide(), type = new OrderType(), price = 0.0, volume = 0.0) {
-    this.id = id
-    this.symbol = symbol
-    this.side = side
-    this.type = type
-    this.price = price
-    this.volume = volume
+  constructor (argid = 0, argsymbol = '', argside = new OrderSide(), argtype = new OrderType(), argprice = 0.0, argvolume = 0.0) {
+    this.id = argid
+    this.symbol = argsymbol
+    this.side = argside
+    this.type = argtype
+    this.price = argprice
+    this.volume = argvolume
   }
 
   /**
@@ -1852,9 +1852,9 @@ class Balance {
    * @param {!number=} amount
    * @constructor
    */
-  constructor (currency = '', amount = 0.0) {
-    this.currency = currency
-    this.amount = amount
+  constructor (argcurrency = '', argamount = 0.0) {
+    this.currency = argcurrency
+    this.amount = argamount
   }
 
   /**
@@ -2713,13 +2713,13 @@ class Account {
    * @param {!Array=} orders
    * @constructor
    */
-  constructor (id = 0, name = '', state = new State(State.initialized | State.bad), wallet = new Balance(), asset = undefined, orders = []) {
-    this.id = id
-    this.name = name
-    this.state = state
-    this.wallet = wallet
-    this.asset = asset
-    this.orders = orders
+  constructor (argid = 0, argname = '', argstate = new State(State.initialized | State.bad), argwallet = new Balance(), argasset = undefined, argorders = []) {
+    this.id = argid
+    this.name = argname
+    this.state = argstate
+    this.wallet = argwallet
+    this.asset = argasset
+    this.orders = argorders
   }
 
   /**

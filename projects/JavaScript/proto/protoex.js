@@ -754,15 +754,15 @@ class Order {
    * @param {!number=} sl
    * @constructor
    */
-  constructor (id = 0, symbol = '', side = new OrderSide(), type = new OrderType(), price = 0.0, volume = 0.0, tp = 10.0, sl = -10.0) {
-    this.id = id
-    this.symbol = symbol
-    this.side = side
-    this.type = type
-    this.price = price
-    this.volume = volume
-    this.tp = tp
-    this.sl = sl
+  constructor (argid = 0, argsymbol = '', argside = new OrderSide(), argtype = new OrderType(), argprice = 0.0, argvolume = 0.0, argtp = 10.0, argsl = -10.0) {
+    this.id = argid
+    this.symbol = argsymbol
+    this.side = argside
+    this.type = argtype
+    this.price = argprice
+    this.volume = argvolume
+    this.tp = argtp
+    this.sl = argsl
   }
 
   /**
@@ -2013,10 +2013,10 @@ class Balance extends proto.Balance {
    * @param {!number=} locked
    * @constructor
    */
-  constructor (parent = new proto.Balance(), locked = 0.0) {
+  constructor (parent = new proto.Balance(), arglocked = 0.0) {
     super()
     super.copy(parent)
-    this.locked = locked
+    this.locked = arglocked
   }
 
   /**
@@ -2864,13 +2864,13 @@ class Account {
    * @param {!Array=} orders
    * @constructor
    */
-  constructor (id = 0, name = '', state = new StateEx(StateEx.initialized | StateEx.bad | StateEx.sad), wallet = new Balance(), asset = undefined, orders = []) {
-    this.id = id
-    this.name = name
-    this.state = state
-    this.wallet = wallet
-    this.asset = asset
-    this.orders = orders
+  constructor (argid = 0, argname = '', argstate = new StateEx(StateEx.initialized | StateEx.bad | StateEx.sad), argwallet = new Balance(), argasset = undefined, argorders = []) {
+    this.id = argid
+    this.name = argname
+    this.state = argstate
+    this.wallet = argwallet
+    this.asset = argasset
+    this.orders = argorders
   }
 
   /**
