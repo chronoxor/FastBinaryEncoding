@@ -2,38 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../../include/generator_go.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_go.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_java.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_java.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_javascript.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_javascript.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_kotlin.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_kotlin.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/protoex.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/enums_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/enums_protocol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/proto_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto_protocol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/protoex_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/protoex_protocol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/test_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test_protocol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_java.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_java.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -73,9 +44,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="320" />
-    <option name="y" value="242" />
+    <option name="y" value="241" />
     <option name="width" value="1830" />
-    <option name="height" value="1029" />
+    <option name="height" value="1030" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -154,17 +125,17 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Node.js.test_send_receive_final.js" />
       <item itemvalue="Node.js.send_receive.js" />
       <item itemvalue="Node.js.serialization.js" />
+      <item itemvalue="Node.js.test_send_receive_final.js" />
       <item itemvalue="npm.tests-node" />
       <item itemvalue="npm.tests-standard" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.serialization.js" />
         <item itemvalue="npm.tests-node" />
         <item itemvalue="npm.tests-standard" />
+        <item itemvalue="Node.js.serialization.js" />
         <item itemvalue="Node.js.send_receive.js" />
         <item itemvalue="Node.js.test_send_receive_final.js" />
       </list>
@@ -216,22 +187,23 @@
       <workItem from="1561238786593" duration="6000" />
       <workItem from="1562103674356" duration="28000" />
       <workItem from="1562802191199" duration="401000" />
+      <workItem from="1563285789821" duration="51000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46407000" />
+    <option name="totallyTimeSpent" value="46467000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="320" y="242" width="1830" height="1029" extended-state="0" />
+    <frame x="256" y="193" width="1464" height="824" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.56696427" visible="true" weight="0.2700893" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.56213874" visible="true" weight="0.2697968" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="npm" order="2" sideWeight="0.4330357" side_tool="true" visible="true" weight="0.2700893" />
+      <window_info active="true" id="npm" order="2" sideWeight="0.43786126" side_tool="true" visible="true" weight="0.2697968" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3091518" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.30780348" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39739883" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -354,13 +326,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/send_receive.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="47" selection-start-line="47" selection-end-line="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/tape/lib/results.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -405,8 +370,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/proto/fbe.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="5825" lean-forward="true" selection-start-line="5825" selection-end-line="5825" />
+        <state relative-caret-position="272">
+          <caret line="1012" column="2" selection-start-line="1012" selection-start-column="2" selection-end-line="1012" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -414,6 +379,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="412">
           <caret line="3860" selection-start-line="3860" selection-end-line="3860" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/send_receive.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
         </state>
       </provider>
     </entry>

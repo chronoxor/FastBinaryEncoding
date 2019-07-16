@@ -979,6 +979,7 @@ class FieldModelBase {
    * @param {!Int64} value Int64 value
    */
   writeInt64 (offset, value) {
+    value = Int64.fromValue(value)
     offset = offset >>> 0
     offset += this._buffer.offset
     this._buffer.checkOffset(offset, 8)
@@ -999,6 +1000,7 @@ class FieldModelBase {
    * @param {!UInt64} value UInt64 value
    */
   writeUInt64 (offset, value) {
+    value = UInt64.fromValue(value)
     offset = offset >>> 0
     offset += this._buffer.offset
     this._buffer.checkOffset(offset, 8)
