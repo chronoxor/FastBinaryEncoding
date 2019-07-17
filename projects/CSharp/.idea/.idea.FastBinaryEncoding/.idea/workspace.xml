@@ -2,39 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e46b070-39ae-4a9c-ad72-9d071bc18831" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_cpp.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_cpp.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_csharp.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_csharp.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_go.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_go.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_java.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_java.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_javascript.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_javascript.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_kotlin.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_kotlin.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_python.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_python.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_ruby.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_ruby.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/protoex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/enums_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/enums_protocol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/proto_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto_protocol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/protoex_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/protoex_protocol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/test_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test_protocol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/fbe.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/fbe.l" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.l" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_java.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_java.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Benchmarks/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Benchmarks/Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/Benchmarks.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Benchmarks/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/packages.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Create/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Create/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Create/Create.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Create/Create.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Print/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Print/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Print/Print.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Print/Print.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/PrintJson/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/PrintJson/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/PrintJson/PrintJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/PrintJson/PrintJson.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SendReceive/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SendReceive/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SendReceive/SendReceive.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SendReceive/SendReceive.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Serialization/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Serialization/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Serialization/Serialization.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Serialization/Serialization.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SerializationFinal/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SerializationFinal/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SerializationFinal/SerializationFinal.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SerializationFinal/SerializationFinal.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SerializationJson/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SerializationJson/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SerializationJson/SerializationJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SerializationJson/SerializationJson.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/Proto.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/app.config" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/app.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/app.config" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/app.config" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,15 +87,15 @@
         </subPane>
         <option name="show-all-files" value="false" />
       </pane>
-      <pane id="AssemblyExplorer" />
       <pane id="FileSystemExplorer" />
+      <pane id="AssemblyExplorer" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="RiderNuGetOptionsPageId" />
+    <property name="settings.editor.selected.configurable" value="RiderUnitTestingPageId" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -293,11 +282,14 @@
       <workItem from="1561238747960" duration="209000" />
       <workItem from="1562102805758" duration="26000" />
       <workItem from="1562797931991" duration="148000" />
+      <workItem from="1563399818012" duration="30000" />
+      <workItem from="1563400151953" duration="240000" />
+      <workItem from="1563401005543" duration="82000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23593000" />
+    <option name="totallyTimeSpent" value="23945000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -311,26 +303,26 @@
   <component name="ToolWindowManager">
     <frame x="371" y="185" width="1735" height="1160" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2238806" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23164178" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49014926" weight="0.3271665" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48955223" weight="0.3271665" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4877612" weight="0.39889196" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4997015" weight="0.32911393" />
-      <window_info anchor="bottom" id="NuGet" order="7" sideWeight="0.49253732" weight="0.32911393" />
+      <window_info anchor="bottom" id="NuGet" order="7" sideWeight="0.4919403" weight="0.32911393" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4997015" weight="0.32911393" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Unit Tests" order="11" sideWeight="0.63044775" visible="true" weight="0.44888023" />
+      <window_info active="true" anchor="bottom" id="Unit Tests" order="11" sideWeight="0.6268657" visible="true" weight="0.44888023" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4997015" weight="0.32911393" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.36955222" side_tool="true" visible="true" weight="0.44888023" />
-      <window_info anchor="bottom" id="Build" order="14" sideWeight="0.47522387" weight="0.32132426" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.37313432" side_tool="true" visible="true" weight="0.44888023" />
+      <window_info anchor="bottom" id="Build" order="14" sideWeight="0.4728358" weight="0.32132426" />
       <window_info anchor="bottom" id="Performance Profiler" order="15" sideWeight="0.4997015" weight="0.32911393" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />

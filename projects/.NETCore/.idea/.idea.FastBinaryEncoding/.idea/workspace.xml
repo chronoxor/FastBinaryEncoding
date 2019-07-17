@@ -2,39 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="edfd070c-0d53-4afa-88cb-34dff2e2435b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_cpp.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_cpp.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_csharp.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_csharp.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_go.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_go.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_java.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_java.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_javascript.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_javascript.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_kotlin.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_kotlin.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_python.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_python.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_ruby.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_ruby.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/protoex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/enums_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/enums_protocol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/proto_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto_protocol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/protoex_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/protoex_protocol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/test_protocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test_protocol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/fbe.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/fbe.l" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.l" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_java.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_java.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/Benchmarks.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/packages.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Create/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Create/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Create/Create.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Create/Create.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Print/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Print/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Print/Print.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Print/Print.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/PrintJson/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/PrintJson/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/PrintJson/PrintJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/PrintJson/PrintJson.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SendReceive/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SendReceive/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SendReceive/SendReceive.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SendReceive/SendReceive.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Serialization/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Serialization/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Serialization/Serialization.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Serialization/Serialization.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationFinal/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationFinal/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationFinal/SerializationFinal.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationFinal/SerializationFinal.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/SerializationJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/SerializationJson.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/Proto.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/app.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/app.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/app.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/app.config" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +81,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="FileSystemExplorer" />
       <pane id="AssemblyExplorer" />
       <pane id="SolutionExplorer">
         <subPane>
@@ -98,16 +89,12 @@
               <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
               <item name="FastBinaryEncoding" type="24d0babc:SolutionExplorerModelNode" />
             </path>
-            <path>
-              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="FastBinaryEncoding" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Proto" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
           </expand>
           <select />
         </subPane>
         <option name="show-all-files" value="false" />
       </pane>
+      <pane id="FileSystemExplorer" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -299,11 +286,12 @@
       <workItem from="1561236608783" duration="108000" />
       <workItem from="1562102761653" duration="41000" />
       <workItem from="1562796672868" duration="1245000" />
+      <workItem from="1563401440427" duration="89000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13310000" />
+    <option name="totallyTimeSpent" value="13399000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -317,7 +305,7 @@
   <component name="ToolWindowManager">
     <frame x="253" y="251" width="1995" height="990" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26149872" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2640827" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
