@@ -2,28 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e46b070-39ae-4a9c-ad72-9d071bc18831" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Benchmarks/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Benchmarks/Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/Benchmarks.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Benchmarks/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Create/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Create/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Create/Create.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Create/Create.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Print/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Print/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Print/Print.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Print/Print.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/PrintJson/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/PrintJson/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/PrintJson/PrintJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/PrintJson/PrintJson.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SendReceive/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SendReceive/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SendReceive/SendReceive.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SendReceive/SendReceive.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Serialization/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Serialization/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Serialization/Serialization.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Serialization/Serialization.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SerializationFinal/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SerializationFinal/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SerializationFinal/SerializationFinal.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SerializationFinal/SerializationFinal.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SerializationJson/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SerializationJson/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SerializationJson/SerializationJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SerializationJson/SerializationJson.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/Proto.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/app.config" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/app.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/app.config" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/app.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,8 +47,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="371" />
-    <option name="y" value="185" />
+    <option name="x" value="430" />
+    <option name="y" value="170" />
     <option name="width" value="1735" />
     <option name="height" value="1160" />
   </component>
@@ -75,11 +58,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AssemblyExplorer" />
+      <pane id="FileSystemExplorer" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
             <path>
-              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="" type="784c90a0:SolutionExplorerRootNode" />
               <item name="FastBinaryEncoding" type="24d0babc:SolutionExplorerModelNode" />
             </path>
           </expand>
@@ -87,13 +72,12 @@
         </subPane>
         <option name="show-all-files" value="false" />
       </pane>
-      <pane id="FileSystemExplorer" />
-      <pane id="AssemblyExplorer" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="RiderUnitTestingPageId" />
   </component>
@@ -109,7 +93,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected=".NET Project.Default">
+  <component name="RunManager" selected=".NET Project.Examples\SerializationJson">
     <configuration name="Default" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/Serialization/bin/Release/Serialization.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -124,6 +108,24 @@
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="Console" />
       <option name="PROJECT_TFM" value=".NETFramework,Version=v4.6" />
+      <method v="2">
+        <option name="Build" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Examples\Create" type="DotNetProject" factoryName=".NET Project" temporary="true">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/Create/bin/Debug/Create.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/Create/bin/Debug" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Examples/Create/Create.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="Console" />
+      <option name="PROJECT_TFM" value=".NETFramework,Version=v4.8" />
       <method v="2">
         <option name="Build" enabled="true" />
       </method>
@@ -155,24 +157,6 @@
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/Examples/PrintJson/PrintJson.csproj" />
-      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
-      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
-      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
-      <option name="PROJECT_KIND" value="Console" />
-      <option name="PROJECT_TFM" value=".NETFramework,Version=v4.6" />
-      <method v="2">
-        <option name="Build" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Examples\SendReceive" type="DotNetProject" factoryName=".NET Project" temporary="true">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/SendReceive/bin/Debug/SendReceive.exe" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/SendReceive/bin/Debug" />
-      <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <option name="USE_MONO" value="0" />
-      <option name="RUNTIME_ARGUMENTS" value="" />
-      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Examples/SendReceive/SendReceive.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
@@ -222,17 +206,17 @@
       <item itemvalue=".NET Project.Default" />
       <item itemvalue=".NET Project.Examples\PrintJson" />
       <item itemvalue=".NET Project.Examples\Print" />
-      <item itemvalue=".NET Project.Examples\SendReceive" />
       <item itemvalue=".NET Project.Examples\SerializationFinal" />
       <item itemvalue=".NET Project.Examples\SerializationJson" />
+      <item itemvalue=".NET Project.Examples\Create" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue=".NET Project.Examples\PrintJson" />
-        <item itemvalue=".NET Project.Examples\Print" />
         <item itemvalue=".NET Project.Examples\SerializationJson" />
         <item itemvalue=".NET Project.Examples\SerializationFinal" />
-        <item itemvalue=".NET Project.Examples\SendReceive" />
+        <item itemvalue=".NET Project.Examples\Create" />
+        <item itemvalue=".NET Project.Examples\PrintJson" />
+        <item itemvalue=".NET Project.Examples\Print" />
       </list>
     </recent_temporary>
   </component>
@@ -285,11 +269,12 @@
       <workItem from="1563399818012" duration="30000" />
       <workItem from="1563400151953" duration="240000" />
       <workItem from="1563401005543" duration="82000" />
+      <workItem from="1564356504765" duration="179000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23945000" />
+    <option name="totallyTimeSpent" value="24124000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -301,28 +286,28 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="371" y="185" width="1735" height="1160" extended-state="0" />
+    <frame x="430" y="170" width="1735" height="1160" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23164178" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23462686" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48955223" weight="0.3271665" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48716417" weight="0.3269781" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4877612" weight="0.39889196" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4997015" weight="0.32911393" />
-      <window_info anchor="bottom" id="NuGet" order="7" sideWeight="0.4919403" weight="0.32911393" />
+      <window_info anchor="bottom" id="NuGet" order="7" sideWeight="0.4913433" weight="0.32888466" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4997015" weight="0.32911393" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Unit Tests" order="11" sideWeight="0.6268657" visible="true" weight="0.44888023" />
+      <window_info anchor="bottom" id="Unit Tests" order="11" sideWeight="0.6256716" visible="true" weight="0.44804576" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4997015" weight="0.32911393" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.37313432" side_tool="true" visible="true" weight="0.44888023" />
-      <window_info anchor="bottom" id="Build" order="14" sideWeight="0.4728358" weight="0.32132426" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.37432835" side_tool="true" visible="true" weight="0.44804576" />
+      <window_info anchor="bottom" id="Build" order="14" sideWeight="0.47044775" weight="0.32125834" />
       <window_info anchor="bottom" id="Performance Profiler" order="15" sideWeight="0.4997015" weight="0.32911393" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />

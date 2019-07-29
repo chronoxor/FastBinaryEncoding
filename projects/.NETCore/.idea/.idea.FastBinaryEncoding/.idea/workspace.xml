@@ -2,31 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="edfd070c-0d53-4afa-88cb-34dff2e2435b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/Benchmarks.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Create/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Create/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Create/Create.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Create/Create.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Print/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Print/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Print/Print.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Print/Print.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/PrintJson/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/PrintJson/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/PrintJson/PrintJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/PrintJson/PrintJson.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SendReceive/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SendReceive/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SendReceive/SendReceive.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SendReceive/SendReceive.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Serialization/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Serialization/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Serialization/Serialization.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Serialization/Serialization.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationFinal/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationFinal/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationFinal/SerializationFinal.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationFinal/SerializationFinal.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/SerializationJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/SerializationJson.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/Proto.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/app.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/app.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/app.config" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/app.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,9 +48,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="253" />
-    <option name="y" value="251" />
-    <option name="width" value="1995" />
+    <option name="x" value="481" />
+    <option name="y" value="268" />
+    <option name="width" value="1531" />
     <option name="height" value="990" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -81,12 +59,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AssemblyExplorer" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
             <path>
-              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="" type="784c90a0:SolutionExplorerRootNode" />
               <item name="FastBinaryEncoding" type="24d0babc:SolutionExplorerModelNode" />
             </path>
           </expand>
@@ -95,11 +72,13 @@
         <option name="show-all-files" value="false" />
       </pane>
       <pane id="FileSystemExplorer" />
+      <pane id="AssemblyExplorer" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Proto/lib/Utf8Json.dll" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
@@ -116,7 +95,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected=".NET Project.Examples\Serialization">
+  <component name="RunManager" selected=".NET Project.Examples\SerializationJson">
     <configuration name="Default" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -135,20 +114,20 @@
         <option name="Build" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Examples\Print" type="DotNetProject" factoryName=".NET Project" temporary="true">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/Print/bin/Debug/netcoreapp2.0/Print.dll" />
+    <configuration name="Examples\Create" type="DotNetProject" factoryName=".NET Project" temporary="true">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/Create/bin/Debug/netcoreapp2.1/Create.dll" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/Print" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/Create" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
-      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Examples/Print/Print.csproj" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Examples/Create/Create.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="DotNetCore" />
-      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v2.0" />
+      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v2.1" />
       <method v="2">
         <option name="Build" enabled="true" />
       </method>
@@ -190,7 +169,7 @@
       </method>
     </configuration>
     <configuration name="Examples\SerializationFinal" type="DotNetProject" factoryName=".NET Project" temporary="true">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/SerializationFinal/bin/Debug/netcoreapp2.0/SerializationFinal.dll" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/SerializationFinal/bin/Debug/netcoreapp2.1/SerializationFinal.dll" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/SerializationFinal" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -202,13 +181,13 @@
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="DotNetCore" />
-      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v2.0" />
+      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v2.1" />
       <method v="2">
         <option name="Build" enabled="true" />
       </method>
     </configuration>
     <configuration name="Examples\SerializationJson" type="DotNetProject" factoryName=".NET Project" temporary="true">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/SerializationJson/bin/Debug/netcoreapp2.0/SerializationJson.dll" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/SerializationJson/bin/Debug/netcoreapp2.1/SerializationJson.dll" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/SerializationJson" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -220,7 +199,7 @@
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="DotNetCore" />
-      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v2.0" />
+      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v2.1" />
       <method v="2">
         <option name="Build" enabled="true" />
       </method>
@@ -228,18 +207,18 @@
     <list>
       <item itemvalue=".NET Project.Default" />
       <item itemvalue=".NET Project.Examples\Serialization" />
+      <item itemvalue=".NET Project.Examples\PrintJson" />
+      <item itemvalue=".NET Project.Examples\Create" />
       <item itemvalue=".NET Project.Examples\SerializationFinal" />
       <item itemvalue=".NET Project.Examples\SerializationJson" />
-      <item itemvalue=".NET Project.Examples\Print" />
-      <item itemvalue=".NET Project.Examples\PrintJson" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue=".NET Project.Examples\Serialization" />
-        <item itemvalue=".NET Project.Examples\PrintJson" />
-        <item itemvalue=".NET Project.Examples\Print" />
         <item itemvalue=".NET Project.Examples\SerializationJson" />
         <item itemvalue=".NET Project.Examples\SerializationFinal" />
+        <item itemvalue=".NET Project.Examples\Serialization" />
+        <item itemvalue=".NET Project.Examples\Create" />
+        <item itemvalue=".NET Project.Examples\PrintJson" />
       </list>
     </recent_temporary>
   </component>
@@ -287,11 +266,12 @@
       <workItem from="1562102761653" duration="41000" />
       <workItem from="1562796672868" duration="1245000" />
       <workItem from="1563401440427" duration="89000" />
+      <workItem from="1564356305501" duration="187000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13399000" />
+    <option name="totallyTimeSpent" value="13586000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -303,28 +283,28 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="253" y="251" width="1995" height="990" extended-state="0" />
+    <frame x="481" y="268" width="1531" height="990" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2640827" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.35078177" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32672113" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3265074" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39944905" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="NuGet" order="7" weight="0.32788798" />
+      <window_info anchor="bottom" id="NuGet" order="7" weight="0.32764506" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Unit Tests" order="10" visible="true" weight="0.41656944" />
+      <window_info active="true" anchor="bottom" id="Unit Tests" order="10" visible="true" weight="0.41638225" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="13" />
-      <window_info anchor="bottom" id="Build" order="14" weight="0.32322055" />
+      <window_info anchor="bottom" id="Build" order="14" weight="0.32309443" />
       <window_info anchor="bottom" id="Performance Profiler" order="15" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />

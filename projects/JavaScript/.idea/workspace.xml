@@ -2,9 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks/benchmark_send_receive.js" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks/benchmark_send_receive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks/benchmark_serialization.js" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks/benchmark_serialization.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks/benchmark_serialization_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks/benchmark_serialization_final.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks/benchmark_serialization_json.js" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks/benchmark_serialization_json.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/print.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/print.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/send_receive.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/send_receive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/serialization.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/serialization.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/serialization_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/serialization_final.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/serialization_json.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/serialization_json.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_clone.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_clone.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_create.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_decimal.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_decimal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_enums.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,7 +37,98 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/print.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/print_json.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/send_receive.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="41">
+              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/serialization.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/serialization_final.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/serialization_json.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_clone.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="344">
+              <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_create.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_decimal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/test_enums.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -31,23 +143,34 @@
         <option value="$PROJECT_DIR$/tests/test_send_seceive_final.js" />
         <option value="$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js" />
         <option value="$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_json.js" />
-        <option value="$PROJECT_DIR$/examples/print.js" />
-        <option value="$PROJECT_DIR$/tests/test_enums.js" />
         <option value="$PROJECT_DIR$/tests/test_send_receive.js" />
         <option value="$PROJECT_DIR$/tests/test_send_receive_final.js" />
-        <option value="$PROJECT_DIR$/examples/send_receive.js" />
         <option value="$PROJECT_DIR$/proto/fbe.js" />
         <option value="$PROJECT_DIR$/proto/proto.js" />
         <option value="$PROJECT_DIR$/proto/protoex.js" />
         <option value="$PROJECT_DIR$/tests/test_utf8.js" />
+        <option value="$PROJECT_DIR$/benchmarks/benchmark_send_receive.js" />
+        <option value="$PROJECT_DIR$/benchmarks/benchmark_serialization.js" />
+        <option value="$PROJECT_DIR$/benchmarks/benchmark_serialization_final.js" />
+        <option value="$PROJECT_DIR$/benchmarks/benchmark_serialization_json.js" />
+        <option value="$PROJECT_DIR$/examples/create.js" />
+        <option value="$PROJECT_DIR$/examples/print.js" />
+        <option value="$PROJECT_DIR$/examples/send_receive.js" />
+        <option value="$PROJECT_DIR$/examples/serialization.js" />
+        <option value="$PROJECT_DIR$/examples/serialization_final.js" />
+        <option value="$PROJECT_DIR$/examples/serialization_json.js" />
+        <option value="$PROJECT_DIR$/tests/test_clone.js" />
+        <option value="$PROJECT_DIR$/tests/test_create.js" />
+        <option value="$PROJECT_DIR$/tests/test_decimal.js" />
+        <option value="$PROJECT_DIR$/tests/test_enums.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="320" />
-    <option name="y" value="241" />
-    <option name="width" value="1830" />
-    <option name="height" value="1030" />
+    <option name="x" value="520" />
+    <option name="y" value="303" />
+    <option name="width" value="1501" />
+    <option name="height" value="871" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -70,6 +193,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -77,8 +201,8 @@
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.standard" value="project" />
-    <property name="node.js.selected.package.eslint" value="Y:\projects\Projects\FastBinaryEncoding\projects\JavaScript\node_modules\eslint" />
-    <property name="node.js.selected.package.standard" value="Z:\projects\Projects\FastBinaryEncoding\projects\JavaScript\node_modules\standard" />
+    <property name="node.js.selected.package.eslint" value="Y:/projects/Projects/FastBinaryEncoding/projects/JavaScript/node_modules/eslint" />
+    <property name="node.js.selected.package.standard" value="$PROJECT_DIR$/node_modules/standard" />
     <property name="nodejs_interpreter_path" value="Z:/soft/Development/NodeJS/bin/node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.nodejs" />
@@ -95,14 +219,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.serialization.js">
-    <configuration name="send_receive.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/send_receive.js" working-dir="$PROJECT_DIR$">
+  <component name="RunManager" selected="Node.js.serialization_json.js">
+    <configuration name="serialization_final.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="serialization_final.js" working-dir="$PROJECT_DIR$/examples">
       <method v="2" />
     </configuration>
     <configuration name="serialization.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/serialization.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
-    <configuration name="test_send_receive_final.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tests/test_send_receive_final.js" working-dir="$PROJECT_DIR$">
+    <configuration name="serialization_json.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="serialization_json.js" working-dir="$PROJECT_DIR$/examples">
       <method v="2" />
     </configuration>
     <configuration name="tests-node" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -126,19 +250,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Node.js.send_receive.js" />
       <item itemvalue="Node.js.serialization.js" />
-      <item itemvalue="Node.js.test_send_receive_final.js" />
       <item itemvalue="npm.tests-node" />
+      <item itemvalue="Node.js.serialization_final.js" />
+      <item itemvalue="Node.js.serialization_json.js" />
       <item itemvalue="npm.tests-standard" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.tests-node" />
         <item itemvalue="npm.tests-standard" />
+        <item itemvalue="npm.tests-node" />
+        <item itemvalue="Node.js.serialization_json.js" />
+        <item itemvalue="Node.js.serialization_final.js" />
         <item itemvalue="Node.js.serialization.js" />
-        <item itemvalue="Node.js.send_receive.js" />
-        <item itemvalue="Node.js.test_send_receive_final.js" />
       </list>
     </recent_temporary>
   </component>
@@ -190,22 +314,23 @@
       <workItem from="1562802191199" duration="401000" />
       <workItem from="1563285789821" duration="51000" />
       <workItem from="1564341650745" duration="1338000" />
+      <workItem from="1564358946977" duration="702000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47805000" />
+    <option name="totallyTimeSpent" value="48507000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="320" y="241" width="1830" height="1030" extended-state="0" />
+    <frame x="520" y="303" width="1501" height="871" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.56075805" visible="true" weight="0.26953125" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5596206" visible="true" weight="0.33014354" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" id="npm" order="2" sideWeight="0.43924192" side_tool="true" visible="true" weight="0.26953125" />
+      <window_info id="npm" order="2" sideWeight="0.4403794" side_tool="true" visible="true" weight="0.33014354" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.30769232" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.30758807" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39739883" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -276,55 +401,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_clone.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_create.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1105">
-          <caret line="65" column="38" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_json.js" />
     <entry file="file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js" />
     <entry file="file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/proto/test.js" />
-    <entry file="file://$PROJECT_DIR$/examples/print.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2822">
-          <caret line="166" selection-start-line="166" selection-end-line="166" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_enums.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="229" column="4" selection-start-line="229" selection-start-column="4" selection-end-line="229" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proto/enums.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="311">
           <caret line="7841" lean-forward="true" selection-start-line="7841" selection-end-line="7841" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_send_receive.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="60" column="70" selection-start-line="55" selection-end-line="60" selection-end-column="70" />
         </state>
       </provider>
     </entry>
@@ -349,24 +432,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/print_json.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proto/protoex.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="5598" column="42" selection-start-line="5598" selection-start-column="42" selection-end-line="5598" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11660">
-          <caret line="28302" lean-forward="true" selection-start-line="28302" selection-end-line="28302" />
         </state>
       </provider>
     </entry>
@@ -377,20 +446,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/send_receive.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="590">
-          <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_utf8.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proto/fbe.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -398,10 +453,136 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_send_receive.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="60" column="70" selection-start-line="55" selection-end-line="60" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_serialization_final.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="6309" column="8" selection-start-line="6309" selection-start-column="8" selection-end-line="6309" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_utf8.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="10" lean-forward="true" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_send_receive.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="11" selection-start-column="11" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization_final.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization_json.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/examples/create.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/print.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/print_json.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/send_receive.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="41">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/serialization.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/serialization_final.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/serialization_json.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_clone.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_create.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_decimal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_enums.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
         </state>
       </provider>
     </entry>
