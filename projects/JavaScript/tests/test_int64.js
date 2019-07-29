@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 'use strict'
 
 const test = require('tape')
@@ -17,11 +18,11 @@ test('Basic tests', function (t) {
 test('isInt64()/isUInt64()', function (t) {
   let value1 = new int64.Int64(0xFFFFFFFF, 0x7FFFFFFF)
   t.equal(int64.Int64.isInt64(value1), true)
-  let value2 = { '__isInt64__': true }
+  let value2 = { __isInt64__: true }
   t.equal(int64.Int64.isInt64(value2), true)
   let value3 = new int64.UInt64(0xFFFFFFFF, 0xFFFFFFFF)
   t.equal(int64.UInt64.isUInt64(value3), true)
-  let value4 = { '__isUInt64__': true }
+  let value4 = { __isUInt64__: true }
   t.equal(int64.UInt64.isUInt64(value4), true)
   t.end()
 })

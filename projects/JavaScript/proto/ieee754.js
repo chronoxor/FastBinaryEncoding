@@ -3,6 +3,9 @@
 // Source: fbe
 // Version: 1.3.0.0
 
+/* eslint-disable prefer-const */
+'use strict'
+
 /**
  * Read float/double value from the given buffer
  * @param {!Buffer|!Uint8Array} buffer Buffer to read

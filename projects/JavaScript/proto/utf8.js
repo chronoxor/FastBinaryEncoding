@@ -3,6 +3,9 @@
 // Source: fbe
 // Version: 1.3.0.0
 
+/* eslint-disable prefer-const */
+'use strict'
+
 /**
  * Get bytes count required for encode string to UTF-8 bytes array
  * @param {!string} str String value to encode

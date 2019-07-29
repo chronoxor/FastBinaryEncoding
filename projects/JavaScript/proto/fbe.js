@@ -2,6 +2,8 @@
 // https://github.com/chronoxor/FastBinaryEncoding
 // Source: fbe
 // Version: 1.3.0.0
+
+/* eslint-disable prefer-const */
 'use strict'
 
 const big = require('./big')

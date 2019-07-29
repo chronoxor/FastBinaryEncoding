@@ -3,6 +3,9 @@
 // Source: fbe
 // Version: 1.3.0.0
 
+/* eslint-disable prefer-const */
+'use strict'
+
 /**
  * Universally unique identifier (UUID)
  * A universally unique identifier (UUID) is an identifier standard used

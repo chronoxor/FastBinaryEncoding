@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 'use strict'
 
 const proto = require('../proto/proto')

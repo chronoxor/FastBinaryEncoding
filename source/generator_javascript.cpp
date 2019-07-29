@@ -1025,6 +1025,9 @@ void GeneratorJavaScript::GenerateInt64(const CppCommon::Path& path)
     GenerateHeader("fbe");
 
     std::string code = R"CODE(
+/* eslint-disable prefer-const */
+'use strict'
+
 /**
  * Signed 64-bit integer value
  */
@@ -2873,6 +2876,9 @@ void GeneratorJavaScript::GenerateUUID(const CppCommon::Path& path)
     GenerateHeader("fbe");
 
     std::string code = R"CODE(
+/* eslint-disable prefer-const */
+'use strict'
+
 /**
  * Universally unique identifier (UUID)
  * A universally unique identifier (UUID) is an identifier standard used
@@ -3196,6 +3202,9 @@ void GeneratorJavaScript::GenerateIEEE754(const CppCommon::Path& path)
     GenerateHeader("fbe");
 
     std::string code = R"CODE(
+/* eslint-disable prefer-const */
+'use strict'
+
 /**
  * Read float/double value from the given buffer
  * @param {!Buffer|!Uint8Array} buffer Buffer to read
@@ -3326,6 +3335,9 @@ void GeneratorJavaScript::GenerateUTF8(const CppCommon::Path& path)
     GenerateHeader("fbe");
 
     std::string code = R"CODE(
+/* eslint-disable prefer-const */
+'use strict'
+
 /**
  * Get bytes count required for encode string to UTF-8 bytes array
  * @param {!string} str String value to encode
@@ -3573,7 +3585,9 @@ void GeneratorJavaScript::GenerateFBE(const CppCommon::Path& path)
     // Generate common header
     GenerateHeader("fbe");
 
-    std::string code = R"CODE('use strict'
+    std::string code = R"CODE(
+/* eslint-disable prefer-const */
+'use strict'
 
 const big = require('./big')
 const int64 = require('./int64')
@@ -8682,6 +8696,13 @@ void GeneratorJavaScript::GeneratePackage(const std::shared_ptr<Package>& p)
 
     // Generate package header
     GenerateHeader(CppCommon::Path(_input).filename().string());
+
+    // Generate eslint deflations
+    WriteLine();
+    WriteLineIndent("/* eslint-disable prefer-const */");
+    WriteLineIndent("'use strict'");
+
+    // Generate package imports
     GenerateImports(p);
 
     // Generate namespace

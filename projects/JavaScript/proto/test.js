@@ -3,6 +3,9 @@
 // Source: test.fbe
 // Version: 1.3.0.0
 
+/* eslint-disable prefer-const */
+'use strict'
+
 const util = require('util')
 
 const big = require('./big')

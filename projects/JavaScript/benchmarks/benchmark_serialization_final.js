@@ -1,11 +1,11 @@
 'use strict'
 
-let benchmark = require('benchmark')
+const benchmark = require('benchmark')
 
 const fbe = require('../proto/fbe')
 const proto = require('../proto/proto')
 
-let suite = new benchmark.Suite('Serialization')
+const suite = new benchmark.Suite('Serialization')
 
 suite.on('start', function () {
   // Create a new account with some orders
@@ -48,4 +48,4 @@ suite.add('Verify (Final)', function () {
   suite.writer.verify()
 })
 
-suite.run({ 'async': true })
+suite.run({ async: true })
