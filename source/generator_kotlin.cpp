@@ -7095,8 +7095,9 @@ void GeneratorKotlin::GenerateReceiverListener(const std::shared_ptr<Package>& p
             WriteLineIndent((first ? "" : ", ") + domain + *import + ".fbe." + listener);
             first = false;
         }
-        WriteLine();
     }
+    else
+        WriteLine();
     WriteLineIndent("{");
     Indent(1);
 

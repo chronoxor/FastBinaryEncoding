@@ -9,7 +9,6 @@ package com.chronoxor.test.fbe
 
 // Fast Binary Encoding com.chronoxor.test receiver listener
 interface ReceiverListener : com.chronoxor.proto.fbe.ReceiverListener
-
 {
     fun onReceive(value: com.chronoxor.test.StructSimple) {}
     fun onReceive(value: com.chronoxor.test.StructOptional) {}

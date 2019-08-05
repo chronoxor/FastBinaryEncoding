@@ -467,6 +467,12 @@ public:
     // Convert to the enum value
     operator TEnum() const noexcept { return (TEnum)_value; }
 
+    //! Is any flag set?
+    bool set() const noexcept { return (_value != 0); }
+    //! Is the given flag set?
+    bool set(type value) const noexcept { return (_value & value) != 0; }
+    //! Is the given flag set?
+    bool set(TEnum value) const noexcept { return (_value & value._value) != 0; }
     // Get the enum value
     TEnum value() const noexcept { return (TEnum)_value; }
     // Get the underlying enum value
