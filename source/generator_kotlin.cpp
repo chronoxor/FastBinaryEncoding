@@ -423,8 +423,8 @@ class Buffer
             val index = offset.toInt()
             return ((buffer[index + 0].toLong() and 0xFF) shl  0) or
                    ((buffer[index + 1].toLong() and 0xFF) shl  8) or
-                   ((buffer[index + 3].toLong() and 0xFF) shl 24) or
                    ((buffer[index + 2].toLong() and 0xFF) shl 16) or
+                   ((buffer[index + 3].toLong() and 0xFF) shl 24) or
                    ((buffer[index + 4].toLong() and 0xFF) shl 32) or
                    ((buffer[index + 5].toLong() and 0xFF) shl 40) or
                    ((buffer[index + 6].toLong() and 0xFF) shl 48) or
@@ -436,8 +436,8 @@ class Buffer
             val index = offset.toInt()
             return ((buffer[index + 0].toULong() and 0xFFu) shl  0) or
                    ((buffer[index + 1].toULong() and 0xFFu) shl  8) or
-                   ((buffer[index + 3].toULong() and 0xFFu) shl 24) or
                    ((buffer[index + 2].toULong() and 0xFFu) shl 16) or
+                   ((buffer[index + 3].toULong() and 0xFFu) shl 24) or
                    ((buffer[index + 4].toULong() and 0xFFu) shl 32) or
                    ((buffer[index + 5].toULong() and 0xFFu) shl 40) or
                    ((buffer[index + 6].toULong() and 0xFFu) shl 48) or
@@ -7095,8 +7095,8 @@ void GeneratorKotlin::GenerateReceiverListener(const std::shared_ptr<Package>& p
             WriteLineIndent((first ? "" : ", ") + domain + *import + ".fbe." + listener);
             first = false;
         }
+        WriteLine();
     }
-    WriteLine();
     WriteLineIndent("{");
     Indent(1);
 
