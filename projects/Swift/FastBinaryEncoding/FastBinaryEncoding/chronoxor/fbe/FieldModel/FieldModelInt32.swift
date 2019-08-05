@@ -1,0 +1,41 @@
+//
+//  FieldModelInt32.swift
+//  fbe-example
+//
+//  Created by Andrey on 8/2/19.
+//  Copyright © 2019 Andrey. All rights reserved.
+//
+
+import Foundation
+
+class FieldModelInt32: FieldModel {
+    var _buffer = Buffer()
+    var _offset: Int = 0
+    
+    // Field size
+    let fbeSize: Int = 1
+    
+    required init() {
+        _buffer = Buffer()
+        _offset = 0
+    }
+    
+    // Get the value
+    func get(defaults: Int32 = 0) -> Int32 {
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+            return defaults
+        }
+        
+        return readInt32(offset: fbeOffset)
+    }
+    
+    // Set the value
+    func set(value: Int32) {
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+            return
+        }
+        
+        write(offset: fbeOffset, value: value)
+    }
+}
