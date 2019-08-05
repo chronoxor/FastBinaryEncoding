@@ -613,7 +613,7 @@ public:
     //! Is the given flag set?
     bool isset(type value) const noexcept { return (_value & value) != 0; }
     //! Is the given flag set?
-    bool isset(TEnum value) const noexcept { return (_value & value._value) != 0; }
+    bool isset(TEnum value) const noexcept { return (_value & (type)value) != 0; }
 
     // Get the enum value
     TEnum value() const noexcept { return (TEnum)_value; }
