@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Client: class {
+protocol ClientProtocol: class {
     
     // Get the send bytes buffer
     var sendBuffer: Buffer { get set }
@@ -23,7 +23,7 @@ protocol Client: class {
     var final: Bool { get set }
     
     // Send message handler
-    func onSend(buffer: Data, offset: Int, size: Int) -> Int
+    func onSend(buffer: Data, offset: Int, size: Int) throws -> Int
     // Send log message handler
     func onSendLog(message: String)
     
@@ -35,7 +35,7 @@ protocol Client: class {
 
 }
 
-extension Client {
+extension ClientProtocol {
     
      func build(with final: Bool) {
         self.final = final
@@ -66,7 +66,7 @@ extension Client {
         sendBuffer.shift(offset: serialized)
         
         // Send the value
-        let sent = onSend(buffer: sendBuffer.data, offset: 0, size: sendBuffer.size)
+        let sent = try onSend(buffer: sendBuffer.data, offset: 0, size: sendBuffer.size)
         try sendBuffer.remove(offset: 0, size: sent)
         return sent
     }
@@ -132,7 +132,7 @@ extension Client {
                             try _ = self.receiveBuffer.allocate(size: count)
                             size1 += count
                             
-                            self.receiveBuffer.data[offset1...] = buffer[(offset + offset2)...count]
+                            self.receiveBuffer.data[offset1...] = buffer[(offset + offset2)...(offset + offset2) + count]
                             //System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
                             offset1 += count
                             offset2 += count
@@ -161,7 +161,7 @@ extension Client {
                         try _ = self.receiveBuffer.allocate(size: count)
                         size1 += count
                         
-                        self.receiveBuffer.data[offset1...] = buffer[(offset + offset2)...count]
+                        self.receiveBuffer.data[offset1...] = buffer[(offset + offset2)...(offset + offset2) + count]
                         //System.arraycopy(buffer, (offset + offset2).toInt(), self.receiveBuffer.data, offset1.toInt(), count.toInt())
                         offset1 += count
                         offset2 += count
@@ -227,7 +227,7 @@ extension Client {
                             try _ = self.receiveBuffer.allocate(size: count)
                             size1 += count
                             
-                            self.receiveBuffer.data[offset1...] = buffer[(offset + offset2)...count]
+                            self.receiveBuffer.data[offset1...] = buffer[(offset + offset2)...(offset + offset2) + count]
                             // System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
                             offset1 += count
                             offset2 += count
@@ -270,7 +270,7 @@ extension Client {
                         try _ = self.receiveBuffer.allocate(size: count)
                         size1 += count
                         
-                        self.receiveBuffer.data[offset1...] = buffer[(offset + offset2)...count]
+                        self.receiveBuffer.data[offset1...] = buffer[(offset + offset2)...(offset + offset2) + count]
                         //System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
                         offset1 += count
                         offset2 += count

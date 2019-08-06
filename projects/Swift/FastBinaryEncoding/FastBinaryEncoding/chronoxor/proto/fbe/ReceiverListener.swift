@@ -10,8 +10,11 @@ import Foundation
 
 protocol ReceiverListener {
     func onReceive(value: Balance)
+    func onReceive(value: Enums)
+
 }
 
 extension ReceiverListener {
     func onReceive(value: Balance) { }
+    func onReceive(value: Enums) { }
 }

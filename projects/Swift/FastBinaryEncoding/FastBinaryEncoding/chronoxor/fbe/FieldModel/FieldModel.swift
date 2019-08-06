@@ -59,7 +59,7 @@ extension FieldModel {
     func readBoolean(offset: Int) -> Bool { return Buffer.readBoolean(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readByte(offset: Int) -> Data.Element { return Buffer.readByte(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readChar(offset: Int) -> CChar { return Buffer.readChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readWChar(offset: Int) -> CChar { return Buffer.readWChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
+    func readWChar(offset: Int) -> Int32 { return Buffer.readWChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readInt8(offset: Int) -> Int8 { return Buffer.readInt8(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readUInt8(offset: Int) -> UInt8 { return Buffer.readUInt8(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readInt16(offset: Int) -> Int16 { return Buffer.readInt16(buffer: _buffer.data, offset: _buffer.offset + offset) }

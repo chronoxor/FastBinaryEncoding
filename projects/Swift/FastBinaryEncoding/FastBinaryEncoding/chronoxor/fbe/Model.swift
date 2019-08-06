@@ -11,10 +11,10 @@ import Foundation
 class Model {
     
     // Get bytes buffer
-    private(set) var buffer = Buffer()
+    private(set) var buffer: Buffer
     
     // Initialize a new model
-    init(buffer: Buffer) {
+    init(buffer: Buffer = Buffer()) {
         self.buffer = buffer
     }
     

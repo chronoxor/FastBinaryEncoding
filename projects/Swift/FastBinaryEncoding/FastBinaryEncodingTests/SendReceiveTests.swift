@@ -28,7 +28,7 @@ class MyReceiver: Reciver {
     }
 }
 
-class FastBinaryEncodingTests: XCTestCase {
+class SendReceiveTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -39,8 +39,8 @@ class FastBinaryEncodingTests: XCTestCase {
     }
 
     func testExample() {
-        for i in 0...999 {
-            for j in 0...999 {
+        for i in 0...99 {
+            for j in 0...99 {
                 XCTAssertTrue(sendAndReceive(i: i, j: j))
             }
         }

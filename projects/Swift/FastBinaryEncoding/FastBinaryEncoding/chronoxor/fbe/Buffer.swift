@@ -170,13 +170,13 @@ extension Buffer {
         return Buffer.readInt8(buffer: buffer, offset: offset)
     }
 
-    class func readWChar(buffer: Data, offset: Int) -> CChar {
-        return CChar(Buffer.readInt32(buffer: buffer, offset: offset))
+    class func readWChar(buffer: Data, offset: Int) -> Int32 {
+        return Buffer.readInt32(buffer: buffer, offset: offset)
     }
     
     class func readInt8(buffer: Data, offset: Int) -> Int8 {
         let index = offset
-        return Int8(buffer[index])
+        return NSNumber(value: buffer[index]).int8Value
     }
     
     class func readUInt8(buffer: Data, offset: Int) -> UInt8 {
@@ -210,7 +210,7 @@ extension Buffer {
                         ((UInt32(buffer[index + 1]) & UInt32(0xFF)) <<  8)
         
         let secondPart = ((UInt32(buffer[index + 2]) & UInt32(0xFF)) <<  16) |
-                         ((UInt32(buffer[index + 3]) & UInt32(0xFF)) << 32)
+                         ((UInt32(buffer[index + 3]) & UInt32(0xFF)) << 24)
         return UInt32(firstPart | secondPart)
     }
     
@@ -274,7 +274,7 @@ extension Buffer {
     
     class func readBytes(buffer: Data, offset: Int, size: Int) -> Data {
         var result = Data(capacity: size)
-        result[0...] = buffer[offset...size]
+        result[0...] = buffer[offset...offset + size]
         return result
     }
     
@@ -291,7 +291,7 @@ extension Buffer {
     }
     
     class func write(buffer: inout Data, offset: Int, value: Int8) {
-        buffer[offset] = UInt8(value)
+        buffer[offset] = UInt8(truncating: NSNumber(value: value))
     }
     
     class func write(buffer: inout Data, offset: Int, value: Data.Element) {
@@ -304,33 +304,33 @@ extension Buffer {
     }
     
     class func write(buffer: inout Data, offset: Int, value: UInt16) {
-        buffer[offset + 0] = Data.Element(value >> 0)
-        buffer[offset + 1] = Data.Element(value >> 8)
+        buffer[offset + 0] = NSNumber(value: value >> 0).uint8Value
+        buffer[offset + 1] = NSNumber(value: value >> 8).uint8Value
     }
     
     class func write(buffer: inout Data, offset: Int, value: Int32) {
-        buffer[offset + 0] = Data.Element(value >> 0)
-        buffer[offset + 1] = Data.Element(value >>  8)
-        buffer[offset + 2] = Data.Element(value >> 16)
-        buffer[offset + 3] = Data.Element(value >> 24)
+        buffer[offset + 0] = NSNumber(value: value >>  0).uint8Value
+        buffer[offset + 1] = NSNumber(value: value >>  8).uint8Value
+        buffer[offset + 2] = NSNumber(value: value >> 16).uint8Value
+        buffer[offset + 3] = NSNumber(value: value >> 24).uint8Value
     }
     
     class func write(buffer: inout Data, offset: Int, value: UInt32) {
+        buffer[offset + 0] = NSNumber(value: value >>  0).uint8Value
+        buffer[offset + 1] = NSNumber(value: value >>  8).uint8Value
+        buffer[offset + 2] = NSNumber(value: value >> 16).uint8Value
+        buffer[offset + 3] = NSNumber(value: value >> 24).uint8Value
+    }
+    
+    class func write(buffer: inout Data, offset: Int, value: Int64) {
         buffer[offset + 0] = Data.Element(truncating: NSNumber(value: value >>  0))
         buffer[offset + 1] = Data.Element(truncating: NSNumber(value: value >>  8))
         buffer[offset + 2] = Data.Element(truncating: NSNumber(value: value >> 16))
         buffer[offset + 3] = Data.Element(truncating: NSNumber(value: value >> 24))
-    }
-    
-    class func write(buffer: inout Data, offset: Int, value: Int64) {
-        buffer[offset + 0] = Data.Element(value >> 0)
-        buffer[offset + 1] = Data.Element(value >>  8)
-        buffer[offset + 2] = Data.Element(value >> 16)
-        buffer[offset + 3] = Data.Element(value >> 24)
-        buffer[offset + 4] = Data.Element(value >> 32)
-        buffer[offset + 5] = Data.Element(value >> 40)
-        buffer[offset + 6] = Data.Element(value >> 48)
-        buffer[offset + 7] = Data.Element(value >> 56)
+        buffer[offset + 4] = Data.Element(truncating: NSNumber(value: value >> 32))
+        buffer[offset + 5] = Data.Element(truncating: NSNumber(value: value >> 40))
+        buffer[offset + 6] = Data.Element(truncating: NSNumber(value: value >> 48))
+        buffer[offset + 7] = Data.Element(truncating: NSNumber(value: value >> 56))
     }
     
     class func write(buffer: inout Data, offset: Int, value: UInt64) {
@@ -366,11 +366,11 @@ extension Buffer {
     }
     
     class func write(buffer: inout Data, offset: Int, value: Data) {
-        buffer[offset...] = value[0...value.count - 1]
+        buffer[offset...offset + value.count - 1] = value[0...value.count - 1]
     }
 
     class func write(buffer: inout Data, offset: Int, value: Data, valueOffset: Int, valueSize: Int) {
-        buffer[offset...] = value[valueOffset...valueSize]
+        buffer[offset...] = value[valueOffset...valueOffset + valueSize]
     }
     
     class func write(buffer: inout Data, offset: Int, value: Data.Element, valueCount: Int) {

@@ -96,7 +96,7 @@ extension ReceiverProtocol {
                             try _ = self.buffer.allocate(size: count)
                             size1 += count
                             
-                            self.buffer.data[offset1...] = self.buffer.data[(offset + offset2)...count]
+                            self.buffer.data[offset1...] = self.buffer.data[(offset + offset2)...(offset + offset2) + count]
                             //System.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                             offset1 += count
                             offset2 += count
@@ -125,7 +125,7 @@ extension ReceiverProtocol {
                         try _ = self.buffer.allocate(size: count)
                         size1 += count
                         
-                        self.buffer.data[offset1...] = buffer[(offset + offset2)...count]
+                        self.buffer.data[offset1...] = buffer[(offset + offset2)...(offset + offset2) + count]
                         //system.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                         offset1 += count
                         offset2 += count
@@ -191,7 +191,7 @@ extension ReceiverProtocol {
                             try _ = self.buffer.allocate(size: count)
                             size1 += count
                             
-                            self.buffer.data[offset1...] = buffer[(offset + offset2)...count]
+                            self.buffer.data[offset1...] = buffer[(offset + offset2)...(offset + offset2) + count]
                             //System.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                             offset1 += count
                             offset2 += count
