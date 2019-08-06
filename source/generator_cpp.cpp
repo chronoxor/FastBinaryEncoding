@@ -6372,6 +6372,8 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
         std::string response = *s->response->response;
         CppCommon::StringUtils::ReplaceAll(response, ".", "::");
         WriteLineIndent("typedef " + response + " Response;");
+        if (s->body && !s->body->fields.empty())
+            WriteLine();
     }
 
     // Generate struct body
