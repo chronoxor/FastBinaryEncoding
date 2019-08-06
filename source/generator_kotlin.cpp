@@ -7092,12 +7092,11 @@ void GeneratorKotlin::GenerateReceiverListener(const std::shared_ptr<Package>& p
         WriteIndent(" : ");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent((first ? "" : ", ") + domain + *import + ".fbe." + listener);
+            WriteIndent((first ? "" : ", ") + domain + *import + ".fbe." + listener);
             first = false;
         }
     }
-    else
-        WriteLine();
+    WriteLine();
     WriteLineIndent("{");
     Indent(1);
 
