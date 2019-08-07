@@ -1909,6 +1909,13 @@ module Test
       result.f44 = (value.nil? ? nil : Proto::Account.__from_json_map__(value))
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 110
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -5636,6 +5643,13 @@ module Test
       result.f165 = (value.nil? ? nil : Proto::Account.__from_json_map__(value))
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 111
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -9726,6 +9740,13 @@ module Test
       result.f1011 = (value.nil? ? nil : StructOptional.__from_json_map__(value))
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 112
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -10926,6 +10947,13 @@ module Test
       result.f3 = (value.nil? ? nil : Base64.decode64(value))
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 120
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -11837,6 +11865,13 @@ module Test
       result.f10 = value.map { |item| (item.nil? ? nil : StructSimple.__from_json_map__(item)) }
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 125
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -13095,6 +13130,13 @@ module Test
       result.f10 = value.map { |item| (item.nil? ? nil : StructSimple.__from_json_map__(item)) }
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 130
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -14353,6 +14395,13 @@ module Test
       result.f10 = value.map { |item| (item.nil? ? nil : StructSimple.__from_json_map__(item)) }
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 131
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -15455,6 +15504,13 @@ module Test
       result.f4 = (value.map { |item| (item.nil? ? nil : StructSimple.__from_json_map__(item)) }).to_set
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 132
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -16473,6 +16529,13 @@ module Test
       result.f10 = (value.map { |key, value| [key.to_i, (value.nil? ? nil : StructSimple.__from_json_map__(value))] }).to_h
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 140
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -17791,6 +17854,13 @@ module Test
       result.f10 = (value.map { |key, value| [key, (value.nil? ? nil : StructSimple.__from_json_map__(value))] }).to_h
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 141
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -18853,6 +18923,13 @@ module Test
       result.f2 = (value.map { |key, value| [key, (value.nil? ? nil : StructNested.__from_json_map__(value))] }).to_h
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 142
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -19449,6 +19526,13 @@ module Test
       result = StructEmpty.new
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 143
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -19923,40 +20007,40 @@ module Test
     # Send methods
 
     def send(value)
-      if value.is_a?(StructSimple)
+      if value.is_a?(StructSimple) && (value.fbe_type == structsimple_model.fbe_type)
         return send_structsimple(value)
       end
-      if value.is_a?(StructOptional)
+      if value.is_a?(StructOptional) && (value.fbe_type == structoptional_model.fbe_type)
         return send_structoptional(value)
       end
-      if value.is_a?(StructNested)
+      if value.is_a?(StructNested) && (value.fbe_type == structnested_model.fbe_type)
         return send_structnested(value)
       end
-      if value.is_a?(StructBytes)
+      if value.is_a?(StructBytes) && (value.fbe_type == structbytes_model.fbe_type)
         return send_structbytes(value)
       end
-      if value.is_a?(StructArray)
+      if value.is_a?(StructArray) && (value.fbe_type == structarray_model.fbe_type)
         return send_structarray(value)
       end
-      if value.is_a?(StructVector)
+      if value.is_a?(StructVector) && (value.fbe_type == structvector_model.fbe_type)
         return send_structvector(value)
       end
-      if value.is_a?(StructList)
+      if value.is_a?(StructList) && (value.fbe_type == structlist_model.fbe_type)
         return send_structlist(value)
       end
-      if value.is_a?(StructSet)
+      if value.is_a?(StructSet) && (value.fbe_type == structset_model.fbe_type)
         return send_structset(value)
       end
-      if value.is_a?(StructMap)
+      if value.is_a?(StructMap) && (value.fbe_type == structmap_model.fbe_type)
         return send_structmap(value)
       end
-      if value.is_a?(StructHash)
+      if value.is_a?(StructHash) && (value.fbe_type == structhash_model.fbe_type)
         return send_structhash(value)
       end
-      if value.is_a?(StructHashEx)
+      if value.is_a?(StructHashEx) && (value.fbe_type == structhashex_model.fbe_type)
         return send_structhashex(value)
       end
-      if value.is_a?(StructEmpty)
+      if value.is_a?(StructEmpty) && (value.fbe_type == structempty_model.fbe_type)
         return send_structempty(value)
       end
       result = @_proto_sender.send(value)
@@ -20873,40 +20957,40 @@ module Test
     # Send methods
 
     def send(value)
-      if value.is_a?(StructSimple)
+      if value.is_a?(StructSimple) && (value.fbe_type == structsimple_model.fbe_type)
         return send_structsimple(value)
       end
-      if value.is_a?(StructOptional)
+      if value.is_a?(StructOptional) && (value.fbe_type == structoptional_model.fbe_type)
         return send_structoptional(value)
       end
-      if value.is_a?(StructNested)
+      if value.is_a?(StructNested) && (value.fbe_type == structnested_model.fbe_type)
         return send_structnested(value)
       end
-      if value.is_a?(StructBytes)
+      if value.is_a?(StructBytes) && (value.fbe_type == structbytes_model.fbe_type)
         return send_structbytes(value)
       end
-      if value.is_a?(StructArray)
+      if value.is_a?(StructArray) && (value.fbe_type == structarray_model.fbe_type)
         return send_structarray(value)
       end
-      if value.is_a?(StructVector)
+      if value.is_a?(StructVector) && (value.fbe_type == structvector_model.fbe_type)
         return send_structvector(value)
       end
-      if value.is_a?(StructList)
+      if value.is_a?(StructList) && (value.fbe_type == structlist_model.fbe_type)
         return send_structlist(value)
       end
-      if value.is_a?(StructSet)
+      if value.is_a?(StructSet) && (value.fbe_type == structset_model.fbe_type)
         return send_structset(value)
       end
-      if value.is_a?(StructMap)
+      if value.is_a?(StructMap) && (value.fbe_type == structmap_model.fbe_type)
         return send_structmap(value)
       end
-      if value.is_a?(StructHash)
+      if value.is_a?(StructHash) && (value.fbe_type == structhash_model.fbe_type)
         return send_structhash(value)
       end
-      if value.is_a?(StructHashEx)
+      if value.is_a?(StructHashEx) && (value.fbe_type == structhashex_model.fbe_type)
         return send_structhashex(value)
       end
-      if value.is_a?(StructEmpty)
+      if value.is_a?(StructEmpty) && (value.fbe_type == structempty_model.fbe_type)
         return send_structempty(value)
       end
       result = @_proto_sender.send(value)

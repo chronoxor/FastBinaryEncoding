@@ -757,6 +757,13 @@ module Proto
       result.volume = (value.nil? ? nil : value)
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 1
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -1594,6 +1601,13 @@ module Proto
       result.amount = (value.nil? ? nil : value)
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 2
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -2295,6 +2309,13 @@ module Proto
       result.orders = value.map { |item| (item.nil? ? nil : Order.__from_json_map__(item)) }
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 3
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -3036,13 +3057,13 @@ module Proto
     # Send methods
 
     def send(value)
-      if value.is_a?(Order)
+      if value.is_a?(Order) && (value.fbe_type == order_model.fbe_type)
         return send_order(value)
       end
-      if value.is_a?(Balance)
+      if value.is_a?(Balance) && (value.fbe_type == balance_model.fbe_type)
         return send_balance(value)
       end
-      if value.is_a?(Account)
+      if value.is_a?(Account) && (value.fbe_type == account_model.fbe_type)
         return send_account(value)
       end
       0
@@ -3315,13 +3336,13 @@ module Proto
     # Send methods
 
     def send(value)
-      if value.is_a?(Order)
+      if value.is_a?(Order) && (value.fbe_type == order_model.fbe_type)
         return send_order(value)
       end
-      if value.is_a?(Balance)
+      if value.is_a?(Balance) && (value.fbe_type == balance_model.fbe_type)
         return send_balance(value)
       end
-      if value.is_a?(Account)
+      if value.is_a?(Account) && (value.fbe_type == account_model.fbe_type)
         return send_account(value)
       end
       0

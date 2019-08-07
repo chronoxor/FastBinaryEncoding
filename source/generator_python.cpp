@@ -3698,6 +3698,22 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
         Indent(-1);
     }
 
+    // Generate struct FBE type property
+    WriteLine();
+    WriteLineIndent("# Get the FBE type");
+    WriteLineIndent("@property");
+    WriteLineIndent("def fbe_type(self):");
+    Indent(1);
+    WriteLineIndent("return self.TYPE");
+    Indent(-1);
+
+    // Generate struct FBE type
+    WriteLine();
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("TYPE = " + base_type + ".TYPE");
+    else
+        WriteLineIndent("TYPE = " + std::to_string(s->type));
+
     // Generate struct end
     Indent(-1);
 
@@ -4132,12 +4148,14 @@ void GeneratorPython::GenerateStructModel(const std::shared_ptr<StructType>& s)
     // Generate struct model FBE properties
     WriteLine();
     WriteLineIndent("# Get the model size");
+    WriteLineIndent("@property");
     WriteLineIndent("def fbe_size(self):");
     Indent(1);
     WriteLineIndent("return self._model.fbe_size + self._model.fbe_extra");
     Indent(-1);
     WriteLine();
     WriteLineIndent("# Get the model type");
+    WriteLineIndent("@property");
     WriteLineIndent("def fbe_type(self):");
     Indent(1);
     WriteLineIndent("return self.TYPE");
@@ -4702,7 +4720,7 @@ void GeneratorPython::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("if isinstance(value, " + *s->name + "):");
+            WriteLineIndent("if isinstance(value, " + *s->name + ") and (value.fbe_type == self." + CppCommon::StringUtils::ToLower(*s->name) + "_model.fbe_type):");
             Indent(1);
             WriteLineIndent("return self.send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
             Indent(-1);

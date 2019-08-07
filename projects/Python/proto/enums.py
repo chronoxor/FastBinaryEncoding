@@ -1667,6 +1667,13 @@ class Enums(object):
             None if "uint64b5" not in fields else EnumUInt64.__from_json__(fields["uint64b5"]),
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 1
+
 
 class FieldModelEnums(fbe.FieldModel):
     __slots__ = "_byte0", "_byte1", "_byte2", "_byte3", "_byte4", "_byte5", "_char0", "_char1", "_char2", "_char3", "_char4", "_char5", "_wchar0", "_wchar1", "_wchar2", "_wchar3", "_wchar4", "_wchar5", "_int8b0", "_int8b1", "_int8b2", "_int8b3", "_int8b4", "_int8b5", "_uint8b0", "_uint8b1", "_uint8b2", "_uint8b3", "_uint8b4", "_uint8b5", "_int16b0", "_int16b1", "_int16b2", "_int16b3", "_int16b4", "_int16b5", "_uint16b0", "_uint16b1", "_uint16b2", "_uint16b3", "_uint16b4", "_uint16b5", "_int32b0", "_int32b1", "_int32b2", "_int32b3", "_int32b4", "_int32b5", "_uint32b0", "_uint32b1", "_uint32b2", "_uint32b3", "_uint32b4", "_uint32b5", "_int64b0", "_int64b1", "_int64b2", "_int64b3", "_int64b4", "_int64b5", "_uint64b0", "_uint64b1", "_uint64b2", "_uint64b3", "_uint64b4", "_uint64b5", 
@@ -3148,10 +3155,12 @@ class EnumsModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -4886,7 +4895,7 @@ class Sender(fbe.Sender):
     # Send methods
 
     def send(self, value):
-        if isinstance(value, Enums):
+        if isinstance(value, Enums) and (value.fbe_type == self.enums_model.fbe_type):
             return self.send_enums(value)
         return 0
 
@@ -4992,7 +5001,7 @@ class FinalSender(fbe.Sender):
     # Send methods
 
     def send(self, value):
-        if isinstance(value, Enums):
+        if isinstance(value, Enums) and (value.fbe_type == self.enums_model.fbe_type):
             return self.send_enums(value)
         return 0
 

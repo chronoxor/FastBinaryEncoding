@@ -65,6 +65,6 @@ class TestSendReceiveFinal(TestCase):
         return receiver.check()
 
     def test_send_and_receive_final(self):
-        for i in range(1000):
-            for j in range(1000):
+        for i in range(100):
+            for j in range(100):
                 self.assertTrue(self.send_and_receive_final(i, j))

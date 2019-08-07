@@ -1142,6 +1142,13 @@ class StructSimple(object):
             None if "f44" not in fields else proto.Account.__from_json__(fields["f44"]),
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 110
+
 
 class FieldModelStructSimple(fbe.FieldModel):
     __slots__ = "_id", "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", "_f11", "_f12", "_f13", "_f14", "_f15", "_f16", "_f17", "_f18", "_f19", "_f20", "_f21", "_f22", "_f23", "_f24", "_f25", "_f26", "_f27", "_f28", "_f29", "_f30", "_f31", "_f32", "_f33", "_f34", "_f35", "_f36", "_f37", "_f38", "_f39", "_f40", "_f41", "_f42", "_f43", "_f44", 
@@ -2203,10 +2210,12 @@ class StructSimpleModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -4110,6 +4119,13 @@ class StructOptional(StructSimple):
             None if "f165" not in fields else proto.Account.__from_json__(fields["f165"]),
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 111
+
 
 class FieldModelStructOptional(fbe.FieldModel):
     __slots__ = "_parent", "_f100", "_f101", "_f102", "_f103", "_f104", "_f105", "_f106", "_f107", "_f108", "_f109", "_f110", "_f111", "_f112", "_f113", "_f114", "_f115", "_f116", "_f117", "_f118", "_f119", "_f120", "_f121", "_f122", "_f123", "_f124", "_f125", "_f126", "_f127", "_f128", "_f129", "_f130", "_f131", "_f132", "_f133", "_f134", "_f135", "_f136", "_f137", "_f138", "_f139", "_f140", "_f141", "_f142", "_f143", "_f144", "_f145", "_f146", "_f147", "_f148", "_f149", "_f150", "_f151", "_f152", "_f153", "_f154", "_f155", "_f156", "_f157", "_f158", "_f159", "_f160", "_f161", "_f162", "_f163", "_f164", "_f165", 
@@ -5609,10 +5625,12 @@ class StructOptionalModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -7525,6 +7543,13 @@ class StructNested(StructOptional):
             None if "f1011" not in fields else StructOptional.__from_json__(fields["f1011"]),
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 112
+
 
 class FieldModelStructNested(fbe.FieldModel):
     __slots__ = "_parent", "_f1000", "_f1001", "_f1002", "_f1003", "_f1004", "_f1005", "_f1006", "_f1007", "_f1008", "_f1009", "_f1010", "_f1011", 
@@ -7944,10 +7969,12 @@ class StructNestedModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -8535,6 +8562,13 @@ class StructBytes(object):
             None if "f3" not in fields else None if fields["f3"] is None else base64.b64decode(fields["f3"].encode('ascii')),
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 120
+
 
 class FieldModelStructBytes(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", 
@@ -8756,10 +8790,12 @@ class StructBytesModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -9283,6 +9319,13 @@ class StructArray(object):
             None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 125
+
 
 class FieldModelStructArray(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
@@ -9644,10 +9687,12 @@ class StructArrayModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -10322,6 +10367,13 @@ class StructVector(object):
             None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 130
+
 
 class FieldModelStructVector(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
@@ -10683,10 +10735,12 @@ class StructVectorModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -11361,6 +11415,13 @@ class StructList(object):
             None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 131
+
 
 class FieldModelStructList(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
@@ -11722,10 +11783,12 @@ class StructListModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -12274,6 +12337,13 @@ class StructSet(object):
             None if "f4" not in fields else {StructSimple.__from_json__(value) for value in fields["f4"]},
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 132
+
 
 class FieldModelStructSet(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", 
@@ -12515,10 +12585,12 @@ class StructSetModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -13075,6 +13147,13 @@ class StructMap(object):
             None if "f10" not in fields else {key: StructSimple.__from_json__(value) for key, value in fields["f10"].items()},
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 140
+
 
 class FieldModelStructMap(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
@@ -13436,10 +13515,12 @@ class StructMapModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -14168,6 +14249,13 @@ class StructHash(object):
             None if "f10" not in fields else {key: StructSimple.__from_json__(value) for key, value in fields["f10"].items()},
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 141
+
 
 class FieldModelStructHash(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
@@ -14529,10 +14617,12 @@ class StructHashModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -15054,6 +15144,13 @@ class StructHashEx(object):
             None if "f2" not in fields else {StructSimple.__from_json__(key): StructNested.__from_json__(value) for key, value in fields["f2"].items()},
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 142
+
 
 class FieldModelStructHashEx(fbe.FieldModel):
     __slots__ = "_f1", "_f2", 
@@ -15255,10 +15352,12 @@ class StructHashExModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -15562,6 +15661,13 @@ class StructEmpty(object):
         return StructEmpty(
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 143
+
 
 class FieldModelStructEmpty(fbe.FieldModel):
     def __init__(self, buffer, offset):
@@ -15720,10 +15826,12 @@ class StructEmptyModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -15992,29 +16100,29 @@ class Sender(fbe.Sender):
     # Send methods
 
     def send(self, value):
-        if isinstance(value, StructSimple):
+        if isinstance(value, StructSimple) and (value.fbe_type == self.structsimple_model.fbe_type):
             return self.send_structsimple(value)
-        if isinstance(value, StructOptional):
+        if isinstance(value, StructOptional) and (value.fbe_type == self.structoptional_model.fbe_type):
             return self.send_structoptional(value)
-        if isinstance(value, StructNested):
+        if isinstance(value, StructNested) and (value.fbe_type == self.structnested_model.fbe_type):
             return self.send_structnested(value)
-        if isinstance(value, StructBytes):
+        if isinstance(value, StructBytes) and (value.fbe_type == self.structbytes_model.fbe_type):
             return self.send_structbytes(value)
-        if isinstance(value, StructArray):
+        if isinstance(value, StructArray) and (value.fbe_type == self.structarray_model.fbe_type):
             return self.send_structarray(value)
-        if isinstance(value, StructVector):
+        if isinstance(value, StructVector) and (value.fbe_type == self.structvector_model.fbe_type):
             return self.send_structvector(value)
-        if isinstance(value, StructList):
+        if isinstance(value, StructList) and (value.fbe_type == self.structlist_model.fbe_type):
             return self.send_structlist(value)
-        if isinstance(value, StructSet):
+        if isinstance(value, StructSet) and (value.fbe_type == self.structset_model.fbe_type):
             return self.send_structset(value)
-        if isinstance(value, StructMap):
+        if isinstance(value, StructMap) and (value.fbe_type == self.structmap_model.fbe_type):
             return self.send_structmap(value)
-        if isinstance(value, StructHash):
+        if isinstance(value, StructHash) and (value.fbe_type == self.structhash_model.fbe_type):
             return self.send_structhash(value)
-        if isinstance(value, StructHashEx):
+        if isinstance(value, StructHashEx) and (value.fbe_type == self.structhashex_model.fbe_type):
             return self.send_structhashex(value)
-        if isinstance(value, StructEmpty):
+        if isinstance(value, StructEmpty) and (value.fbe_type == self.structempty_model.fbe_type):
             return self.send_structempty(value)
         result = self._proto_sender.send(value)
         if result > 0:
@@ -16785,29 +16893,29 @@ class FinalSender(fbe.Sender):
     # Send methods
 
     def send(self, value):
-        if isinstance(value, StructSimple):
+        if isinstance(value, StructSimple) and (value.fbe_type == self.structsimple_model.fbe_type):
             return self.send_structsimple(value)
-        if isinstance(value, StructOptional):
+        if isinstance(value, StructOptional) and (value.fbe_type == self.structoptional_model.fbe_type):
             return self.send_structoptional(value)
-        if isinstance(value, StructNested):
+        if isinstance(value, StructNested) and (value.fbe_type == self.structnested_model.fbe_type):
             return self.send_structnested(value)
-        if isinstance(value, StructBytes):
+        if isinstance(value, StructBytes) and (value.fbe_type == self.structbytes_model.fbe_type):
             return self.send_structbytes(value)
-        if isinstance(value, StructArray):
+        if isinstance(value, StructArray) and (value.fbe_type == self.structarray_model.fbe_type):
             return self.send_structarray(value)
-        if isinstance(value, StructVector):
+        if isinstance(value, StructVector) and (value.fbe_type == self.structvector_model.fbe_type):
             return self.send_structvector(value)
-        if isinstance(value, StructList):
+        if isinstance(value, StructList) and (value.fbe_type == self.structlist_model.fbe_type):
             return self.send_structlist(value)
-        if isinstance(value, StructSet):
+        if isinstance(value, StructSet) and (value.fbe_type == self.structset_model.fbe_type):
             return self.send_structset(value)
-        if isinstance(value, StructMap):
+        if isinstance(value, StructMap) and (value.fbe_type == self.structmap_model.fbe_type):
             return self.send_structmap(value)
-        if isinstance(value, StructHash):
+        if isinstance(value, StructHash) and (value.fbe_type == self.structhash_model.fbe_type):
             return self.send_structhash(value)
-        if isinstance(value, StructHashEx):
+        if isinstance(value, StructHashEx) and (value.fbe_type == self.structhashex_model.fbe_type):
             return self.send_structhashex(value)
-        if isinstance(value, StructEmpty):
+        if isinstance(value, StructEmpty) and (value.fbe_type == self.structempty_model.fbe_type):
             return self.send_structempty(value)
         result = self._proto_sender.send(value)
         if result > 0:

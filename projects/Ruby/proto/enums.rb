@@ -2935,6 +2935,13 @@ module Enums
       result.uint64b5 = (value.nil? ? nil : EnumUInt64.__from_json_map__(value))
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 1
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -6727,7 +6734,7 @@ module Enums
     # Send methods
 
     def send(value)
-      if value.is_a?(Enums)
+      if value.is_a?(Enums) && (value.fbe_type == enums_model.fbe_type)
         return send_enums(value)
       end
       0
@@ -6866,7 +6873,7 @@ module Enums
     # Send methods
 
     def send(value)
-      if value.is_a?(Enums)
+      if value.is_a?(Enums) && (value.fbe_type == enums_model.fbe_type)
         return send_enums(value)
       end
       0

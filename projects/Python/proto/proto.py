@@ -484,6 +484,13 @@ class Order(object):
             None if "volume" not in fields else fields["volume"],
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 1
+
 
 class FieldModelOrder(fbe.FieldModel):
     __slots__ = "_id", "_symbol", "_side", "_type", "_price", "_volume", 
@@ -765,10 +772,12 @@ class OrderModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -1188,6 +1197,13 @@ class Balance(object):
             None if "amount" not in fields else fields["amount"],
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 2
+
 
 class FieldModelBalance(fbe.FieldModel):
     __slots__ = "_currency", "_amount", 
@@ -1389,10 +1405,12 @@ class BalanceModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -1760,6 +1778,13 @@ class Account(object):
             None if "orders" not in fields else [Order.__from_json__(value) for value in fields["orders"]],
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 3
+
 
 class FieldModelAccount(fbe.FieldModel):
     __slots__ = "_id", "_name", "_state", "_wallet", "_asset", "_orders", 
@@ -2041,10 +2066,12 @@ class AccountModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -2408,11 +2435,11 @@ class Sender(fbe.Sender):
     # Send methods
 
     def send(self, value):
-        if isinstance(value, Order):
+        if isinstance(value, Order) and (value.fbe_type == self.order_model.fbe_type):
             return self.send_order(value)
-        if isinstance(value, Balance):
+        if isinstance(value, Balance) and (value.fbe_type == self.balance_model.fbe_type):
             return self.send_balance(value)
-        if isinstance(value, Account):
+        if isinstance(value, Account) and (value.fbe_type == self.account_model.fbe_type):
             return self.send_account(value)
         return 0
 
@@ -2632,11 +2659,11 @@ class FinalSender(fbe.Sender):
     # Send methods
 
     def send(self, value):
-        if isinstance(value, Order):
+        if isinstance(value, Order) and (value.fbe_type == self.order_model.fbe_type):
             return self.send_order(value)
-        if isinstance(value, Balance):
+        if isinstance(value, Balance) and (value.fbe_type == self.balance_model.fbe_type):
             return self.send_balance(value)
-        if isinstance(value, Account):
+        if isinstance(value, Account) and (value.fbe_type == self.account_model.fbe_type):
             return self.send_account(value)
         return 0
 

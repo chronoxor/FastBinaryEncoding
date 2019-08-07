@@ -4455,6 +4455,22 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
         WriteLineIndent("end");
     }
 
+    // Generate struct FBE type property
+    WriteLine();
+    WriteLineIndent("# Get the FBE type");
+    WriteLineIndent("def fbe_type");
+    Indent(1);
+    WriteLineIndent("TYPE");
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate struct FBE type
+    WriteLine();
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("TYPE = " + base_type + "::TYPE");
+    else
+        WriteLineIndent("TYPE = " + std::to_string(s->type));
+
     // Generate struct end
     Indent(-1);
     WriteLineIndent("end");
@@ -5489,7 +5505,7 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("if value.is_a?(" + ConvertTitle(*s->name) + ")");
+            WriteLineIndent("if value.is_a?(" + ConvertTitle(*s->name) + ") && (value.fbe_type == " + CppCommon::StringUtils::ToLower(*s->name) + "_model.fbe_type)");
             Indent(1);
             WriteLineIndent("return send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
             Indent(-1);

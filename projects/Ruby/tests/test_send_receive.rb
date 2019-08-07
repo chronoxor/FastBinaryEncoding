@@ -66,8 +66,8 @@ class TestSendReceive < Test::Unit::TestCase
   end
 
   def test_send_and_receive
-    1000.times do |i|
-      1000.times do |j|  
+    100.times do |i|
+      100.times do |j|
         assert_true(send_and_receive(i, j))
       end
     end

@@ -65,8 +65,8 @@ function sendAndReceiveFinal (index1, index2) {
 }
 
 test('Send & Receive (Final)', function (t) {
-  for (let i = 0; i < 1000; i++) {
-    for (let j = 0; j < 1000; j++) {
+  for (let i = 0; i < 100; i++) {
+    for (let j = 0; j < 100; j++) {
       t.true(sendAndReceiveFinal(i, j))
     }
   }
