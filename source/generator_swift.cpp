@@ -19,19 +19,19 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEBuffer(domain, "fbe");
     GenerateFBEModel(domain, "fbe");
     GenerateFBEFieldModel(domain, "fbe");
-    GenerateFBEFieldModel(domain, "fbe", "Boolean", "Boolean", "", "1", "false");
-    GenerateFBEFieldModel(domain, "fbe", "Byte", "Byte", "", "1", "0.toByte()");
-    GenerateFBEFieldModel(domain, "fbe", "Char", "Char", ".toByte()", "1", "'\\u0000'");
-    GenerateFBEFieldModel(domain, "fbe", "WChar", "Char", ".toInt()", "4", "'\\u0000'");
-    GenerateFBEFieldModel(domain, "fbe", "Int8", "Byte", "", "1", "0.toByte()");
-    GenerateFBEFieldModel(domain, "fbe", "UInt8", "UByte", "", "1", "0.toUByte()");
-    GenerateFBEFieldModel(domain, "fbe", "Int16", "Short", "", "2", "0.toShort()");
-    GenerateFBEFieldModel(domain, "fbe", "UInt16", "UShort", "", "2", "0.toUShort()");
-    GenerateFBEFieldModel(domain, "fbe", "Int32", "Int", "", "4", "0");
-    GenerateFBEFieldModel(domain, "fbe", "UInt32", "UInt", "", "4", "0u");
-    GenerateFBEFieldModel(domain, "fbe", "Int64", "Long", "", "8", "0L");
-    GenerateFBEFieldModel(domain, "fbe", "UInt64", "ULong", "", "8", "0uL");
-    GenerateFBEFieldModel(domain, "fbe", "Float", "Float", "", "4", "0.0f");
+    GenerateFBEFieldModel(domain, "fbe", "Boolean", "Bool", "", "1", "false");
+    GenerateFBEFieldModel(domain, "fbe", "Byte", "UInt8", "", "1", "0");
+    GenerateFBEFieldModel(domain, "fbe", "Char", "CChar", "", "1", "0");
+    GenerateFBEFieldModel(domain, "fbe", "WChar", "Int32", "", "4", "0");
+    GenerateFBEFieldModel(domain, "fbe", "Int8", "Int8", "", "1", "0");
+    GenerateFBEFieldModel(domain, "fbe", "UInt8", "UInt8", "", "1", "0");
+    GenerateFBEFieldModel(domain, "fbe", "Int16", "Int16", "", "2", "0");
+    GenerateFBEFieldModel(domain, "fbe", "UInt16", "UInt16", "", "2", "0");
+    GenerateFBEFieldModel(domain, "fbe", "Int32", "Int32", "", "4", "0");
+    GenerateFBEFieldModel(domain, "fbe", "UInt32", "UInt32", "", "4", "0");
+    GenerateFBEFieldModel(domain, "fbe", "Int64", "Int64", "", "8", "0");
+    GenerateFBEFieldModel(domain, "fbe", "UInt64", "UInt64", "", "8", "0");
+    GenerateFBEFieldModel(domain, "fbe", "Float", "Float", "", "4", "0.0");
     GenerateFBEFieldModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
     GenerateFBEFieldModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
     //GenerateFBEFieldModelDecimal(domain, "fbe");
@@ -43,19 +43,19 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
     {
         GenerateFBESize(domain, "fbe");
         GenerateFBEFinalModel(domain, "fbe");
-        GenerateFBEFinalModel(domain, "fbe", "Boolean", "Boolean", "", "1", "false");
-        GenerateFBEFinalModel(domain, "fbe", "Byte", "Byte", "", "1", "0.toByte()");
-        GenerateFBEFinalModel(domain, "fbe", "Char", "Char", ".toByte()", "1", "'\\u0000'");
-        GenerateFBEFinalModel(domain, "fbe", "WChar", "WChar", ".toInt()", "4", "'\\u0000'");
-        GenerateFBEFinalModel(domain, "fbe", "Int8", "Int8", "", "1", "0.toByte()");
-        GenerateFBEFinalModel(domain, "fbe", "UInt8", "UInt8", "", "1", "0.toUByte()");
-        GenerateFBEFinalModel(domain, "fbe", "Int16", "Int16", "", "2", "0.toShort()");
-        GenerateFBEFinalModel(domain, "fbe", "UInt16", "UInt16", "", "2", "0.toUShort()");
+        GenerateFBEFinalModel(domain, "fbe", "Boolean", "Bool", "", "1", "false");
+        GenerateFBEFinalModel(domain, "fbe", "Byte", "UInt8", "", "1", "0");
+        GenerateFBEFinalModel(domain, "fbe", "Char", "CChar", "", "1", "0");
+        GenerateFBEFinalModel(domain, "fbe", "WChar", "Int32", "", "4", "0");
+        GenerateFBEFinalModel(domain, "fbe", "Int8", "Int8", "", "1", "0");
+        GenerateFBEFinalModel(domain, "fbe", "UInt8", "UInt8", "", "1", "0");
+        GenerateFBEFinalModel(domain, "fbe", "Int16", "Int16", "", "2", "0");
+        GenerateFBEFinalModel(domain, "fbe", "UInt16", "UInt16", "", "2", "0");
         GenerateFBEFinalModel(domain, "fbe", "Int32", "Int32", "", "4", "0");
-        GenerateFBEFinalModel(domain, "fbe", "UInt32", "UInt32", "", "4", "0u");
-        GenerateFBEFinalModel(domain, "fbe", "Int64", "Int64", "", "8", "0L");
-        GenerateFBEFinalModel(domain, "fbe", "UInt64", "UInt64", "", "8", "0uL");
-        GenerateFBEFinalModel(domain, "fbe", "Float", "Float", "", "4", "0.0f");
+        GenerateFBEFinalModel(domain, "fbe", "UInt32", "UInt32", "", "4", "0");
+        GenerateFBEFinalModel(domain, "fbe", "Int64", "Int64", "", "8", "0");
+        GenerateFBEFinalModel(domain, "fbe", "UInt64", "UInt64", "", "8", "0");
+        GenerateFBEFinalModel(domain, "fbe", "Float", "Float", "", "4", "0.0");
         GenerateFBEFinalModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
         //GenerateFBEFinalModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
         GenerateFBEFinalModelDecimal(domain, "fbe");
@@ -101,7 +101,7 @@ void GeneratorSwift::GenerateImports(const std::string& domain, const std::strin
 {
     // Generate package name
     WriteLine();
-    WriteLineIndent("package " + domain + package);
+    WriteLineIndent("import " + domain + package);
 }
 
 void GeneratorSwift::GenerateImports(const std::shared_ptr<Package>& p)
@@ -130,7 +130,6 @@ void GeneratorSwift::GenerateFBEUUIDGenerator(const std::string& domain, const s
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding UUID generator
@@ -501,7 +500,7 @@ void GeneratorSwift::GenerateFBEBuffer(const std::string& domain, const std::str
           }
 
           class func readString(buffer: Data, offset: Int, size: Int) -> String {
-              return String(bytes: buffer, encoding:.utf8) ?? "??"
+              return String(bytes: buffer.subdata(in: offset..<offset+size), encoding:.utf8) ?? "??"
           }
 
           class func readUUID(buffer: Data, offset: Int) -> UUID {
@@ -629,6 +628,7 @@ void GeneratorSwift::GenerateFBEModel(const std::string& domain, const std::stri
 
     // Generate headers
     GenerateHeader("fbe");
+    GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
 // Fast Binary Encoding base model
@@ -688,10 +688,10 @@ void GeneratorSwift::GenerateFBEFieldModel(const std::string& domain, const std:
 
     // Generate headers
     GenerateHeader("fbe");
+    GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
 // Fast Binary Encoding base field model
-@Suppress("MemberVisibilityCanBePrivate")
 protocol FieldModel: class {
     var _buffer: Buffer { get set }
     var _offset: Int { get set }
@@ -984,6 +984,7 @@ void GeneratorSwift::GenerateFBEFieldModelDate(const std::string& domain, const 
 
     // Generate headers
     GenerateHeader("fbe");
+    GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
 // Fast Binary Encoding date field model
@@ -1044,7 +1045,6 @@ void GeneratorSwift::GenerateFBEFieldModelTimestamp(const std::string& domain, c
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding timestamp field model
@@ -1098,7 +1098,7 @@ void GeneratorSwift::GenerateFBEFieldModelBytes(const std::string& domain, const
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(domain, package);
+    GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
 // Fast Binary Encoding bytes field model
@@ -1360,11 +1360,8 @@ class FieldModelOptional_NAME_: FieldModel {
     // Field size
     let fbeSize: Int = 1 + 4
 
-    // Field body size
-    let fbeBody: Int
-
     // Base field model value
-    let value: _MODEL_ = _MODEL_()
+    let value: _MODEL_
 
     var fbeExtra: Int {
         if (!hasValue()) {
@@ -1389,14 +1386,14 @@ class FieldModelOptional_NAME_: FieldModel {
         _buffer = buffer
         _offset = offset
 
-        value = FieldModelBalance(buffer: buffer, offset: offset)
+        value = FieldModel_NAME_(buffer: buffer, offset: 0)
     }
 
     required init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        value = FieldModelBalance(buffer: buffer, offset: offset)
+        value = FieldModel_NAME_(buffer: buffer, offset: 0)
     }
 
     func hasValue() -> Bool {
@@ -1493,13 +1490,13 @@ class FieldModelOptional_NAME_: FieldModel {
       }
 
       // Set the optional value
-      func set(optional: _TYPE_) throws {
+      func set(value optional: _TYPE_) throws {
         let fbeBegin = try setBegin(hasValue: optional != nil)
         if fbeBegin == 0 {
             return
         }
 
-        try value.set(fbeValue: optional!)
+        try value.set(value: optional!)
         setEnd(fbeBegin: fbeBegin)
     }
 }
@@ -1846,7 +1843,7 @@ class FieldModelVector_NAME_: FieldModel {
         }
     }
 
-    func set(values: Array<_TYPE_>) throws {
+    func set(value values: Array<_TYPE_>) throws {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return
@@ -1854,7 +1851,7 @@ class FieldModelVector_NAME_: FieldModel {
 
         let fbeModel = try resize(size: values.count)
         for value in values {
-            fbeModel.set(value: value)
+            try fbeModel.set(value: value)
             fbeModel.fbeShift(size: fbeModel.fbeSize)
         }
     }
@@ -2228,7 +2225,7 @@ void GeneratorSwift::GenerateFBEFinalModel(const std::string& domain, const std:
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(domain, package);
+    GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
 // Fast Binary Encoding base final model
@@ -2335,6 +2332,11 @@ class FinalModel_NAME_: FinalModel {
     var _buffer = Buffer()
     var _offset: Int = 0
 
+    init(buffer: Buffer, offset: Int) {
+        _buffer = buffer
+        _offset = offset
+    }
+
     // Get the allocation size
     func fbeAllocationSize(value: _TYPE_) -> Int {
         return fbeSize
@@ -2353,13 +2355,13 @@ class FinalModel_NAME_: FinalModel {
     }
 
     // Get the value
-    func get(size: Size) -> _TYPE_ {
+    func get(size: inout Size) -> _TYPE_ {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
-            return 0
+            return _DEFAULTS_
         }
 
         size.value = fbeSize
-        return readInt16(offset: fbeOffset)
+        return read_NAME_(offset: fbeOffset)
     }
 
     // Set the value
@@ -2402,6 +2404,7 @@ void GeneratorSwift::GenerateFBEFinalModelDecimal(const std::string& domain, con
 
     // Generate headers
     GenerateHeader("fbe");
+    GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
 // Fast Binary Encoding decimal final model
@@ -2425,7 +2428,7 @@ class FinalModelDecimal: FinalModel {
     }
 
     // Get the value
-    func get(size: Size) -> Decimal {
+    func get(size: inout Size) -> Decimal {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             return Decimal.zero
         }
@@ -2529,6 +2532,7 @@ void GeneratorSwift::GenerateFBEFinalModelDate(const std::string& domain, const 
 
     // Generate headers
     GenerateHeader("fbe");
+    GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
 // Fast Binary Encoding date final model
@@ -2552,7 +2556,7 @@ class FinalModelDate: FinalModel {
     }
 
     // Get the value
-    func get(size: Size) -> Date {
+    func get(size: inout Size) -> Date {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             return Date(timeIntervalSince1970: 0)
         }
@@ -2598,7 +2602,6 @@ void GeneratorSwift::GenerateFBEFinalModelTimestamp(const std::string& domain, c
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding timestamp final model
@@ -2667,46 +2670,66 @@ void GeneratorSwift::GenerateFBEFinalModelBytes(const std::string& domain, const
 
     // Generate headers
     GenerateHeader("fbe");
+    GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
 // Fast Binary Encoding bytes final model
-class FinalModelByte: FinalModel {
+class FinalModelBytes: FinalModel {
     var _buffer = Buffer()
     var _offset: Int = 0
 
-    // Get the allocation size
-    func fbeAllocationSize(value: UInt8) -> Int {
-        return fbeSize
+    func fbeAllocationSize(value: Data) -> Int {
+        return 4 + value.count
     }
 
-    // Check if the value is valid
     func verify() -> Int {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset) + 4 > _buffer.size {
             return Int.max
         }
 
-        return fbeSize
+        let fbeBytesSize = Int(readUInt32(offset: fbeOffset))
+        if (_buffer.offset + fbeOffset + 4 + fbeBytesSize) > _buffer.size {
+            return Int.max
+        }
+
+        return 4 + fbeBytesSize
     }
 
     // Get the value
-    func get(size: Size) -> UInt8 {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
-            return 0
+    func get(size: Size) -> Data {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
+            size.value = 0
+            return Data()
         }
 
-        size.value = fbeSize
-        return readByte(offset: fbeOffset)
+        let fbeBytesSize = Int(readUInt32(offset: fbeOffset))
+        assert((_buffer.offset + fbeOffset + 4 + fbeBytesSize) <= _buffer.size, "Model is broken!")
+        if ((_buffer.offset + fbeOffset + 4 + fbeBytesSize) > _buffer.size)
+        {
+            size.value = 4
+            return Data()
+        }
+
+        size.value = 4 + fbeBytesSize
+        return readBytes(offset: fbeOffset + 4, size: fbeBytesSize)
     }
 
     // Set the value
-    func set(value: Bool) -> Int {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+    func set(value: Data) throws -> Int {
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size, "Model is broken!")
+        if (_buffer.offset + fbeOffset + 4) > _buffer.size {
             return 0
         }
 
-        write(offset: fbeOffset, value: value)
-        return fbeSize
+        let fbeBytesSize = value.count
+        assert(_buffer.offset + fbeOffset + 4 + fbeBytesSize <= _buffer.size, "Model is broken!")
+        if _buffer.offset + fbeOffset + 4 + fbeBytesSize > _buffer.size {
+            return 4
+        }
+
+        write(offset: fbeOffset, value: UInt32(fbeBytesSize))
+        write(offset: fbeOffset + 4, value: value)
+        return 4 + fbeBytesSize
     }
 }
 )CODE";
@@ -2829,7 +2852,6 @@ void GeneratorSwift::GenerateFBEFinalModelOptional(const std::string& domain, co
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(domain, package + ".fbe");
 
     std::string code = R"CODE(
 // Fast Binary Encoding optional _NAME_ final model
@@ -2837,9 +2859,6 @@ class FinalModelOptional_NAME_: FinalModel {
 
     var _buffer: Buffer
     var _offset: Int
-
-    // Field body size
-    let fbeBody: Int
 
     // Base field model value
     let value: _MODEL_
@@ -2861,8 +2880,8 @@ class FinalModelOptional_NAME_: FinalModel {
         value = _MODEL_(buffer: buffer, offset: offset)
     }
 
-    func fbeAllocationSize(optional: _TYPE_) -> Int {
-        return 1 + (optional != nil ? value.fbeAllocationSize(fbeValue: optional!) : 0)
+    func fbeAllocationSize(value optional: _TYPE_) -> Int {
+        return 1 + (optional != nil ? value.fbeAllocationSize(value: optional!) : 0)
     }
 
 
@@ -2904,14 +2923,14 @@ class FinalModelOptional_NAME_: FinalModel {
         }
 
         _buffer.shift(offset: fbeOffset + 1)
-        let optional = value.get(fbeSize: &size)
+        let optional = value.get(size: &size)
         _buffer.unshift(offset: fbeOffset + 1)
         size.value += 1
         return optional
     }
 
     // Set the optional value
-    func set(optional: _TYPE_) throws -> Int {
+    func set(value optional: _TYPE_) throws -> Int {
        assert(_buffer.offset + fbeOffset + 1 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 1 > _buffer.size {
             return 0
@@ -2924,7 +2943,7 @@ class FinalModelOptional_NAME_: FinalModel {
         }
 
         _buffer.shift(offset: fbeOffset + 1)
-        let size = value.set(fbeValue: optional!)
+        let size = try value.set(value: optional!)
         _buffer.unshift(offset: fbeOffset + 1)
         return 1 + size
     }
@@ -2962,7 +2981,6 @@ void GeneratorSwift::GenerateFBEFinalModelArray(const std::string& domain, const
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(domain, package + ".fbe");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array final model
@@ -2971,7 +2989,7 @@ class FinalModelArray_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long, private va
     private val _model = _MODEL_(buffer, offset)
 
     // Get the allocation size
-    fun fbeAllocationSize(values: _ARRAY_): Long
+    fun fbeAllocationSize(value values: _ARRAY_): Long
     {
         var size: Long = 0
         var i: Long = 0
@@ -2982,7 +3000,7 @@ class FinalModelArray_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long, private va
         }
         return size
     }
-    fun fbeAllocationSize(values: java.util.ArrayList<_TYPE_>): Long
+    fun fbeAllocationSize(value values: java.util.ArrayList<_TYPE_>): Long
     {
         var size: Long = 0
         var i: Long = 0
@@ -3165,7 +3183,6 @@ void GeneratorSwift::GenerateFBEFinalModelVector(const std::string& domain, cons
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(domain, package + ".fbe");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ vector final model
@@ -3183,10 +3200,10 @@ class FinalModelVector_NAME_: FinalModel {
     }
 
     // Get the allocation size
-    func fbeAllocationSize(values: Array<_TYPE_>) -> Int {
+    func fbeAllocationSize(value values: Array<_TYPE_>) -> Int {
         var size: Int = 4
         for value in values {
-            size += _model.fbeAllocationSize(fbeValue: value)
+            size += _model.fbeAllocationSize(value: value)
         }
 
         return size
@@ -3233,7 +3250,7 @@ class FinalModelVector_NAME_: FinalModel {
         _model.fbeOffset = fbeOffset + 4
         for _ in [0...fbeVectorSize] {
             offset.value = 0
-            let value = _model.get(fbeSize: &offset)
+            let value = _model.get(size: &offset)
             values.append(value)
             _model.fbeShift(size: offset.value)
             size += offset.value
@@ -3241,7 +3258,7 @@ class FinalModelVector_NAME_: FinalModel {
         return size
     }
 
-    func set(values: Array<_TYPE_>) -> Int {
+    func set(value values: Array<_TYPE_>) throws -> Int {
         assert(_buffer.offset + fbeOffset + 4 > _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
             return 0
@@ -3252,7 +3269,7 @@ class FinalModelVector_NAME_: FinalModel {
         var size: Int = 4
         _model.fbeOffset = fbeOffset + 4
         for value in values {
-            let offset = _model.set(fbeValue: value)
+            let offset = try _model.set(value: value)
             _model.fbeShift(size: offset)
             size += offset
         }
@@ -3292,7 +3309,6 @@ void GeneratorSwift::GenerateFBEFinalModelMap(const std::string& domain, const s
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(domain, package + ".fbe");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map final model
@@ -3302,7 +3318,7 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Lo
     private val _modelValue = _VALUE_MODEL_(buffer, offset)
 
     // Get the allocation size
-    fun fbeAllocationSize(values: java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
+    fun fbeAllocationSize(value values: java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
     {
         var size: Long = 4
         for ((key, value1) in values)
@@ -3312,7 +3328,7 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Lo
         }
         return size
     }
-    fun fbeAllocationSize(values: java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
+    fun fbeAllocationSize(value values: java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
     {
         var size: Long = 4
         for ((key, value1) in values)
@@ -3506,51 +3522,57 @@ void GeneratorSwift::GenerateFBEFinalModelEnumFlags(const std::string& domain, c
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FinalModel" + name + ".kt");
+    CppCommon::Path file = path / ("FinalModel" + name + ".swift");
     Open(file);
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(domain, package + ".fbe");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ final model
-class FinalModel_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.FinalModel(buffer, offset)
-{
-    // Get the allocation size
-    @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(value: _DOMAIN__PACKAGE_._NAME_): Long = fbeSize
+class FinalModel_NAME_: FinalModel {
+
+    var _buffer: Buffer
+    var _offset: Int
+
 
     // Final size
-    override val fbeSize: Long = _SIZE_
+    let fbeSize: Int = _SIZE_
 
-    // Check if the value is valid
-    override fun verify(): Long
-    {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return Long.MAX_VALUE
+    init(buffer: Buffer = Buffer(), offset: Int = 0) {
+        _buffer = buffer
+        _offset = offset
+    }
+
+    // Get the allocation size
+    func fbeAllocationSize(value: _NAME_) -> Int { fbeSize }
+
+    func verify() -> Int  {
+        if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            return Int.max
+        }
 
         return fbeSize
     }
 
     // Get the value
-    fun get(size: _DOMAIN_fbe.Size): _DOMAIN__PACKAGE_._NAME_
-    {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return _DOMAIN__PACKAGE_._NAME_()
+    func get(size: inout Size) -> _NAME_ {
+        if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            return _NAME_()
+        }
 
         size.value = fbeSize
-        return _DOMAIN__PACKAGE_._NAME_(_READ_(fbeOffset))
+        return _NAME_(value: _READ_(offset: fbeOffset))
     }
 
     // Set the value
-    fun set(value: _DOMAIN__PACKAGE_._NAME_): Long
-    {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
+    func set(value: _NAME_) -> Int {
+        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
+        if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return 0
+        }
 
-        write(fbeOffset, value.raw)
+        write(offset: fbeOffset, value: value.raw)
         return fbeSize
     }
 }
@@ -3578,57 +3600,68 @@ void GeneratorSwift::GenerateFBESender(const std::string& domain, const std::str
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
-    CppCommon::Path file = path / "Sender.kt";
+    CppCommon::Path file = path / "SenderProtocol.swift";
     Open(file);
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding base sender
-@Suppress("MemberVisibilityCanBePrivate")
-abstract class Sender
-{
-    // Get the bytes buffer
-    var buffer: Buffer = Buffer()
-        private set
-    // Enable/Disable logging
-    var logging: Boolean = false
-    // Get the final protocol flag
-    var final: Boolean = false
-        private set
+protocol SenderProtocol: class {
 
-    protected constructor(final: Boolean) { this.final = final }
-    protected constructor(buffer: Buffer, final: Boolean) { this.buffer = buffer; this.final = final }
+    // Get the bytes buffer
+    var buffer: Buffer { get set }
+
+    // Enable/Disable logging
+    var logging: Bool { get set }
+
+    // Get the final protocol flag
+    var final: Bool { get set }
+
+
+    // Send message handler
+    func onSend(buffer: Data, offset: Int, size: Int) throws -> Int
+
+    // Send log message handler
+    func onSendLog(message: String)
+}
+
+extension SenderProtocol {
+
+    func build(with final: Bool) {
+        self.final = final
+    }
+
+    func build(with buffer: Buffer, final: Bool) {
+        self.buffer = buffer
+        self.final = final
+    }
 
     // Reset the sender buffer
-    fun reset() { buffer.reset() }
+    func reset() { buffer.reset() }
 
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!
-    fun sendSerialized(serialized: Long): Long
-    {
-        assert(serialized > 0) { "Invalid size of the serialized buffer!" }
-        if (serialized <= 0)
+    func sendSerialized(serialized: Int) throws -> Int {
+        assert(serialized > 0, "Invalid size of the serialized buffer!")
+        if (serialized <= 0) {
             return 0
+        }
 
         // Shift the send buffer
-        buffer.shift(serialized)
+        buffer.shift(offset: serialized)
 
         // Send the value
-        val sent = onSend(buffer.data, 0, buffer.size)
-        buffer.remove(0, sent)
+        let sent = try onSend(buffer: buffer.data, offset: 0, size: buffer.size)
+        try _ = buffer.remove(offset: 0, size: sent)
         return sent
     }
 
-    // Send message handler
-    protected abstract fun onSend(buffer: ByteArray, offset: Long, size: Long): Long
+    func onSendLog(message: String) {
 
-    // Send log message handler
-    @Suppress("UNUSED_PARAMETER")
-    protected open fun onSendLog(message: String) {}
+    }
 }
 )CODE";
 
@@ -3649,58 +3682,73 @@ void GeneratorSwift::GenerateFBEReceiver(const std::string& domain, const std::s
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
-    CppCommon::Path file = path / "Receiver.kt";
+    CppCommon::Path file = path / "ReceiverProtocol.swift";
     Open(file);
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding base receiver
-@Suppress("MemberVisibilityCanBePrivate")
-abstract class Receiver
-{
-    // Get the bytes buffer
-    var buffer: Buffer = Buffer()
-        private set
-    // Enable/Disable logging
-    var logging: Boolean = false
-    // Get the final protocol flag
-    var final: Boolean = false
-        private set
+protocol ReceiverProtocol: class {
 
-    protected constructor(final: Boolean) { this.final = final }
-    protected constructor(buffer: Buffer, final: Boolean) { this.buffer = buffer; this.final = final }
+    // Get the bytes buffer
+    var buffer: Buffer { get set }
+
+    // Enable/Disable logging
+    var logging: Bool { get set }
+
+    // Get the final protocol flag
+    var final: Bool { get set }
+
+    // Receive message handler
+    func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool
+
+    // Receive log message handler
+    func onReceiveLog(message: String)
+}
+
+extension ReceiverProtocol {
+
+    func build(final: Bool) {
+        self.final = final
+    }
+
+    func build(with buffer: Buffer, final: Bool) {
+        self.buffer = buffer
+        self.final = final
+    }
 
     // Reset the receiver buffer
-    fun reset() { buffer.reset() }
+    func reset() { buffer.reset() }
 
     // Receive data
-    fun receive(buffer: Buffer) { receive(buffer.data, 0, buffer.size) }
-    fun receive(buffer: ByteArray, offset: Long = 0, size: Long = buffer.size.toLong())
-    {
-        assert((offset + size) <= buffer.size) { "Invalid offset & size!" }
-        if ((offset + size) > buffer.size)
-            throw IllegalArgumentException("Invalid offset & size!")
+    func receive(buffer: Buffer) throws { try receive(buffer: buffer.data, offset: 0, size: buffer.size) }
 
-        if (size == 0L)
+    func receive(buffer: Data, offset: Int, size: Int) throws {
+        assert((offset + size) <= buffer.count, "Invalid offset & size!")
+        if ((offset + size) > buffer.count) {
+            throw NSError()
+        }
+
+        if (size == 0) {
             return
+        }
 
         // Storage buffer
-        var offset0 = this.buffer.offset
-        var offset1 = this.buffer.size
-        var size1 = this.buffer.size
+        var offset0 = self.buffer.offset
+        var offset1 = self.buffer.size
+        var size1 = self.buffer.size
 
         // Receive buffer
-        var offset2: Long = 0
+        var offset2: Int = 0
 
         // While receive buffer is available to handle...
         while (offset2 < size)
         {
-            var messageBuffer: ByteArray? = null
-            var messageOffset: Long = 0
-            var messageSize: Long = 0
+            var messageBuffer: Data? = nil
+            var messageOffset: Int = 0
+            var messageSize: Int = 0
 
             // Try to receive message size
             var messageSizeCopied = false
@@ -3710,12 +3758,12 @@ abstract class Receiver
                 // Look into the storage buffer
                 if (offset0 < size1)
                 {
-                    var count = kotlin.math.min(size1 - offset0, 4)
-                    if (count == 4L)
+                    var count = min(size1 - offset0, 4)
+                    if (count == 4)
                     {
                         messageSizeCopied = true
                         messageSizeFound = true
-                        messageSize = Buffer.readUInt32(this.buffer.data, offset0).toLong()
+                        messageSize = Int(Buffer.readUInt32(buffer: self.buffer.data, offset: offset0))
                         offset0 += 4
                         break
                     }
@@ -3724,57 +3772,65 @@ abstract class Receiver
                         // Fill remaining data from the receive buffer
                         if (offset2 < size)
                         {
-                            count = kotlin.math.min(size - offset2, 4 - count)
+                            count = min(size - offset2, 4 - count)
 
                             // Allocate and refresh the storage buffer
-                            this.buffer.allocate(count)
+                            try _ = self.buffer.allocate(size: count)
                             size1 += count
 
-                            System.arraycopy(buffer, (offset + offset2).toInt(), this.buffer.data, offset1.toInt(), count.toInt())
+                            self.buffer.data[offset1...] = self.buffer.data[(offset + offset2)...(offset + offset2) + count]
+                            //System.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                             offset1 += count
                             offset2 += count
                             continue
                         }
-                        else
+                        else {
                             break
+                        }
                     }
                 }
 
                 // Look into the receive buffer
                 if (offset2 < size)
                 {
-                    val count = kotlin.math.min(size - offset2, 4)
-                    if (count == 4L)
+                    let count = min(size - offset2, 4)
+                    if (count == 4)
                     {
                         messageSizeFound = true
-                        messageSize = Buffer.readUInt32(buffer, offset + offset2).toLong()
+                        messageSize = Int(Buffer.readUInt32(buffer: buffer, offset: offset + offset2))
                         offset2 += 4
                         break
                     }
                     else
                     {
                         // Allocate and refresh the storage buffer
-                        this.buffer.allocate(count)
+                        try _ = self.buffer.allocate(size: count)
                         size1 += count
 
-                        System.arraycopy(buffer, (offset + offset2).toInt(), this.buffer.data, offset1.toInt(), count.toInt())
+                        self.buffer.data[offset1...] = buffer[(offset + offset2)...(offset + offset2) + count]
+                        //system.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                         offset1 += count
                         offset2 += count
                         continue
                     }
                 }
-                else
+                else {
                     break
+                }
             }
 
-            if (!messageSizeFound)
+            if (!messageSizeFound) {
                 return
+            }
 
-            // Check the message full size
-            val minSize = if (final) (4 + 4) else (4 + 4 + 4 + 4)
-            assert(messageSize >= minSize) { "Invalid receive data!" }
-            if (messageSize < minSize)
+                // Check the message full size
+            let minSize = {
+                return final ? 4 + 4 : 4 + 4 + 4 + 4
+            }()
+            assert(messageSize >= minSize, "Invalid receive data!")
+            if (messageSize < minSize) {
                 return
+            }
 
             // Try to receive message body
             var messageFound = false
@@ -3783,11 +3839,11 @@ abstract class Receiver
                 // Look into the storage buffer
                 if (offset0 < size1)
                 {
-                    var count = kotlin.math.min(size1 - offset0, messageSize - 4)
+                    var count = min(size1 - offset0, messageSize - 4)
                     if (count == (messageSize - 4))
                     {
                         messageFound = true
-                        messageBuffer = this.buffer.data
+                        messageBuffer = self.buffer.data
                         messageOffset = offset0 - 4
                         offset0 += messageSize - 4
                         break
@@ -3801,36 +3857,39 @@ abstract class Receiver
                             if (!messageSizeCopied)
                             {
                                 // Allocate and refresh the storage buffer
-                                this.buffer.allocate(4)
+                                try _ = self.buffer.allocate(size: 4)
                                 size1 += 4
 
-                                Buffer.write(this.buffer.data, offset0, messageSize.toUInt())
+                                Buffer.write(buffer: &self.buffer.data, offset: offset0, value: UInt32(messageSize))
                                 offset0 += 4
                                 offset1 += 4
 
                                 messageSizeCopied = true
                             }
 
-                            count = kotlin.math.min(size - offset2, messageSize - 4 - count)
+                            count = min(size - offset2, messageSize - 4 - count)
 
                             // Allocate and refresh the storage buffer
-                            this.buffer.allocate(count)
+                            try _ = self.buffer.allocate(size: count)
                             size1 += count
 
-                            System.arraycopy(buffer, (offset + offset2).toInt(), this.buffer.data, offset1.toInt(), count.toInt())
+                            self.buffer.data[offset1...] = buffer[(offset + offset2)...(offset + offset2) + count]
+                            //System.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                             offset1 += count
                             offset2 += count
                             continue
                         }
-                        else
+                        else {
                             break
+                        }
+
                     }
                 }
 
                 // Look into the receive buffer
                 if (offset2 < size)
                 {
-                    val count = kotlin.math.min(size - offset2, messageSize - 4)
+                    let count = min(size - offset2, messageSize - 4)
                     if (!messageSizeCopied && (count == (messageSize - 4)))
                     {
                         messageFound = true
@@ -3845,10 +3904,10 @@ abstract class Receiver
                         if (!messageSizeCopied)
                         {
                             // Allocate and refresh the storage buffer
-                            this.buffer.allocate(4)
+                            try _ = self.buffer.allocate(size: 4)
                             size1 += 4
 
-                            Buffer.write(this.buffer.data, offset0, messageSize.toUInt())
+                            Buffer.write(buffer: &self.buffer.data, offset: offset0, value: UInt32(messageSize))
                             offset0 += 4
                             offset1 += 4
 
@@ -3856,17 +3915,18 @@ abstract class Receiver
                         }
 
                         // Allocate and refresh the storage buffer
-                        this.buffer.allocate(count)
+                        try _ = self.buffer.allocate(size: count)
                         size1 += count
-
-                        System.arraycopy(buffer, (offset + offset2).toInt(), this.buffer.data, offset1.toInt(), count.toInt())
+                        self.buffer.data[offset1...] = buffer[(offset + offset2)...(offset + offset2) + count]
+                        //System.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                         offset1 += count
                         offset2 += count
                         continue
                     }
                 }
-                else
+                else {
                     break
+                }
             }
 
             if (!messageFound)
@@ -3875,60 +3935,55 @@ abstract class Receiver
                 if (!messageSizeCopied)
                 {
                     // Allocate and refresh the storage buffer
-                    this.buffer.allocate(4)
+                    try _ = self.buffer.allocate(size: 4)
                     size1 += 4
 
-                    Buffer.write(this.buffer.data, offset0, messageSize.toUInt())
+                    Buffer.write(buffer: &self.buffer.data, offset: offset0, value: UInt32(messageSize))
                     offset0 += 4
                     offset1 += 4
 
-                    @Suppress("UNUSED_VALUE")
+                    //@Suppress("UNUSED_VALUE")
                     messageSizeCopied = true
                 }
                 return
             }
 
-            if (messageBuffer != null)
+            if let messageBuffer = messageBuffer
             {
-                @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
-                val fbeStructSize: Long
-                val fbeStructType: Long
+                //@Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
+                let fbeStructSize: Int
+                let fbeStructType: Int
 
                 // Read the message parameters
                 if (final)
                 {
-                    @Suppress("UNUSED_VALUE")
-                    fbeStructSize = Buffer.readUInt32(messageBuffer, messageOffset).toLong()
-                    fbeStructType = Buffer.readUInt32(messageBuffer, messageOffset + 4).toLong()
+                    //@Suppress("UNUSED_VALUE")
+                    fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset))
+                    fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + 4))
                 }
                 else
                 {
-                    val fbeStructOffset = Buffer.readUInt32(messageBuffer, messageOffset + 4).toLong()
-                    @Suppress("UNUSED_VALUE")
-                    fbeStructSize = Buffer.readUInt32(messageBuffer, messageOffset + fbeStructOffset).toLong()
-                    fbeStructType = Buffer.readUInt32(messageBuffer, messageOffset + fbeStructOffset + 4).toLong()
+                    let fbeStructOffset = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + 4))
+                    //@Suppress("UNUSED_VALUE")
+                    fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset))
+                    fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset + 4))
                 }
 
                 // Handle the message
-                onReceive(fbeStructType, messageBuffer, messageOffset, messageSize)
+                _ = onReceive(type: fbeStructType, buffer: messageBuffer, offset: messageOffset, size: messageSize)
             }
 
             // Reset the storage buffer
-            this.buffer.reset()
+            self.buffer.reset()
 
             // Refresh the storage buffer
-            offset0 = this.buffer.offset
-            offset1 = this.buffer.size
-            size1 = this.buffer.size
+            offset0 = self.buffer.offset
+            offset1 = self.buffer.size
+            size1 = self.buffer.size
         }
     }
 
-    // Receive message handler
-    abstract fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
-
-    // Receive log message handler
-    @Suppress("UNUSED_PARAMETER")
-    protected open fun onReceiveLog(message: String) {}
+    func onReceiveLog(message: String) { }
 }
 )CODE";
 
@@ -3949,86 +4004,109 @@ void GeneratorSwift::GenerateFBEClient(const std::string& domain, const std::str
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
-    CppCommon::Path file = path / "Client.kt";
+    CppCommon::Path file = path / "ClientProtocol.swift";
     Open(file);
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 // Fast Binary Encoding base client
-@Suppress("MemberVisibilityCanBePrivate")
-abstract class Client
-{
+protocol ClientProtocol: class {
+
     // Get the send bytes buffer
-    var sendBuffer: Buffer = Buffer()
-        private set
+    var sendBuffer: Buffer { get set }
+
     // Get the receive bytes buffer
-    var receiveBuffer: Buffer = Buffer()
-        private set
+    var receiveBuffer: Buffer { get set }
+
     // Enable/Disable logging
-    var logging: Boolean = false
+    var logging: Bool { get set }
+
     // Get the final protocol flag
-    var final: Boolean = false
-        private set
+    var final: Bool { get set }
 
-    protected constructor(final: Boolean) { this.final = final }
-    protected constructor(sendBuffer: Buffer, receiveBuffer: Buffer, final: Boolean) { this.sendBuffer = sendBuffer; this.receiveBuffer = receiveBuffer; this.final = final }
+    // Send message handler
+    func onSend(buffer: Data, offset: Int, size: Int) throws -> Int
+    // Send log message handler
+    func onSendLog(message: String)
 
-    // Reset the client buffers
-    fun reset() { sendBuffer.reset(); receiveBuffer.reset() }
+    // Receive message handler
+    func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool
+
+    // Receive log message handler
+    func onReceiveLog(message: String)
+
+}
+
+extension ClientProtocol {
+
+     func build(with final: Bool) {
+        self.final = final
+    }
+
+    func build(with sendBuffer: Buffer, receiveBuffer: Buffer, final: Bool) {
+        self.sendBuffer = sendBuffer
+        self.receiveBuffer = receiveBuffer
+        self.final = final
+    }
+
+    func reset() {
+        sendBuffer.reset()
+        receiveBuffer.reset()
+    }
 
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!
-    fun sendSerialized(serialized: Long): Long
-    {
-        assert(serialized > 0) { "Invalid size of the serialized buffer!" }
-        if (serialized <= 0)
+    func sendSerialized(serialized: Int) throws -> Int {
+        assert(serialized > 0, "Invalid size of the serialized buffer!")
+
+        if serialized <= 0 {
             return 0
+        }
 
         // Shift the send buffer
-        sendBuffer.shift(serialized)
+        sendBuffer.shift(offset: serialized)
 
         // Send the value
-        val sent = onSend(sendBuffer.data, 0, sendBuffer.size)
-        sendBuffer.remove(0, sent)
+        let sent = try onSend(buffer: sendBuffer.data, offset: 0, size: sendBuffer.size)
+        try sendBuffer.remove(offset: 0, size: sent)
         return sent
     }
 
-    // Send message handler
-    protected abstract fun onSend(buffer: ByteArray, offset: Long, size: Long): Long
-
-    // Send log message handler
-    @Suppress("UNUSED_PARAMETER")
-    protected open fun onSendLog(message: String) {}
+    func onSendLog(message: String) { }
 
     // Receive data
-    fun receive(buffer: Buffer) { receive(buffer.data, 0, buffer.size) }
-    fun receive(buffer: ByteArray, offset: Long = 0, size: Long = buffer.size.toLong())
-    {
-        assert((offset + size) <= buffer.size) { "Invalid offset & size!" }
-        if ((offset + size) > buffer.size)
-            throw IllegalArgumentException("Invalid offset & size!")
+    func receive(buffer: inout Data ) throws {
+        try receive(buffer: &buffer, offset: 0, size: buffer.count)
+    }
 
-        if (size == 0L)
+    func receive(buffer: inout Data , offset: Int, size: Int) throws {
+        assert((offset + size) <= buffer.count, "Invalid offset & size!")
+
+        if (offset + size) > buffer.count {
+            throw NSException(name: .invalidArgumentException, reason: "Invalid allocation size!") as! Error
+        }
+
+        if (size == 0) {
             return
+        }
 
         // Storage buffer
-        var offset0 = this.receiveBuffer.offset
-        var offset1 = this.receiveBuffer.size
-        var size1 = this.receiveBuffer.size
+        var offset0 = self.receiveBuffer.offset
+        var offset1 = self.receiveBuffer.size
+        var size1 = self.receiveBuffer.size
 
         // Receive buffer
-        var offset2: Long = 0
+        var offset2: Int = 0
 
         // While receive buffer is available to handle...
         while (offset2 < size)
         {
-            var messageBuffer: ByteArray? = null
-            var messageOffset: Long = 0
-            var messageSize: Long = 0
+            var messageBuffer: Data?
+            var messageOffset: Int = 0
+            var messageSize: Int = 0
 
             // Try to receive message size
             var messageSizeCopied = false
@@ -4038,12 +4116,12 @@ abstract class Client
                 // Look into the storage buffer
                 if (offset0 < size1)
                 {
-                    var count = kotlin.math.min(size1 - offset0, 4)
-                    if (count == 4L)
+                    var count = min(size1 - offset0, 4)
+                    if count == 4
                     {
                         messageSizeCopied = true
                         messageSizeFound = true
-                        messageSize = Buffer.readUInt32(this.receiveBuffer.data, offset0).toLong()
+                        messageSize = Int(Buffer.readUInt32(buffer: self.receiveBuffer.data, offset: offset0))
                         offset0 += 4
                         break
                     }
@@ -4052,57 +4130,66 @@ abstract class Client
                         // Fill remaining data from the receive buffer
                         if (offset2 < size)
                         {
-                            count = kotlin.math.min(size - offset2, 4 - count)
+                            count = min(size - offset2, 4 - count)
 
                             // Allocate and refresh the storage buffer
-                            this.receiveBuffer.allocate(count)
+                            try _ = self.receiveBuffer.allocate(size: count)
                             size1 += count
 
-                            System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
+                            self.receiveBuffer.data[offset1...] = buffer[(offset + offset2)...(offset + offset2) + count]
+                            //System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
                             offset1 += count
                             offset2 += count
                             continue
                         }
-                        else
+                        else {
                             break
+                        }
                     }
                 }
 
                 // Look into the receive buffer
                 if (offset2 < size)
                 {
-                    val count = kotlin.math.min(size - offset2, 4)
-                    if (count == 4L)
+                    let count = min(size - offset2, 4)
+                    if (count == 4)
                     {
                         messageSizeFound = true
-                        messageSize = Buffer.readUInt32(buffer, offset + offset2).toLong()
+                        messageSize = Int(Buffer.readUInt32(buffer: buffer, offset: offset + offset2))
                         offset2 += 4
                         break
                     }
                     else
                     {
                         // Allocate and refresh the storage buffer
-                        this.receiveBuffer.allocate(count)
+                        try _ = self.receiveBuffer.allocate(size: count)
                         size1 += count
 
-                        System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
+                        self.receiveBuffer.data[offset1...] = buffer[(offset + offset2)...(offset + offset2) + count]
+                        //System.arraycopy(buffer, (offset + offset2).toInt(), self.receiveBuffer.data, offset1.toInt(), count.toInt())
                         offset1 += count
                         offset2 += count
                         continue
                     }
-                }
-                else
+                } else {
                     break
+                }
+
             }
 
-            if (!messageSizeFound)
+            if (!messageSizeFound) {
                 return
+            }
 
             // Check the message full size
-            val minSize = if (final) (4 + 4) else (4 + 4 + 4 + 4)
-            assert(messageSize >= minSize) { "Invalid receive data!" }
-            if (messageSize < minSize)
+            let minSize: Int = {
+                if (final) { return 4 + 4 } else { return 4 + 4 + 4 + 4 }
+            }()
+
+            assert(messageSize >= minSize, "Invalid receive data!")
+            if (messageSize < minSize) {
                 return
+            }
 
             // Try to receive message body
             var messageFound = false
@@ -4111,11 +4198,11 @@ abstract class Client
                 // Look into the storage buffer
                 if (offset0 < size1)
                 {
-                    var count = kotlin.math.min(size1 - offset0, messageSize - 4)
+                    var count = min(size1 - offset0, messageSize - 4)
                     if (count == (messageSize - 4))
                     {
                         messageFound = true
-                        messageBuffer = this.receiveBuffer.data
+                        messageBuffer = self.receiveBuffer.data
                         messageOffset = offset0 - 4
                         offset0 += messageSize - 4
                         break
@@ -4129,36 +4216,36 @@ abstract class Client
                             if (!messageSizeCopied)
                             {
                                 // Allocate and refresh the storage buffer
-                                this.receiveBuffer.allocate(4)
+                                try _ = self.receiveBuffer.allocate(size: 4)
                                 size1 += 4
-
-                                Buffer.write(this.receiveBuffer.data, offset0, messageSize.toUInt())
+                                Buffer.write(buffer: &self.receiveBuffer.data, offset: offset0, value: UInt32(messageSize))
                                 offset0 += 4
                                 offset1 += 4
 
                                 messageSizeCopied = true
                             }
 
-                            count = kotlin.math.min(size - offset2, messageSize - 4 - count)
+                            count = min(size - offset2, messageSize - 4 - count)
 
                             // Allocate and refresh the storage buffer
-                            this.receiveBuffer.allocate(count)
+                            try _ = self.receiveBuffer.allocate(size: count)
                             size1 += count
 
-                            System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
+                            self.receiveBuffer.data[offset1...] = buffer[(offset + offset2)...(offset + offset2) + count]
+                            // System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
                             offset1 += count
                             offset2 += count
                             continue
-                        }
-                        else
+                        } else {
                             break
+                        }
                     }
                 }
 
                 // Look into the receive buffer
                 if (offset2 < size)
                 {
-                    val count = kotlin.math.min(size - offset2, messageSize - 4)
+                    let count = min(size - offset2, messageSize - 4)
                     if (!messageSizeCopied && (count == (messageSize - 4)))
                     {
                         messageFound = true
@@ -4173,10 +4260,10 @@ abstract class Client
                         if (!messageSizeCopied)
                         {
                             // Allocate and refresh the storage buffer
-                            this.receiveBuffer.allocate(4)
+                            try _ = self.receiveBuffer.allocate(size: 4)
                             size1 += 4
 
-                            Buffer.write(this.receiveBuffer.data, offset0, messageSize.toUInt())
+                            Buffer.write(buffer: &self.receiveBuffer.data, offset: offset0, value: UInt32(messageSize))
                             offset0 += 4
                             offset1 += 4
 
@@ -4184,17 +4271,19 @@ abstract class Client
                         }
 
                         // Allocate and refresh the storage buffer
-                        this.receiveBuffer.allocate(count)
+                        try _ = self.receiveBuffer.allocate(size: count)
                         size1 += count
 
-                        System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
+                        self.receiveBuffer.data[offset1...] = buffer[(offset + offset2)...(offset + offset2) + count]
+                        //System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
                         offset1 += count
                         offset2 += count
                         continue
                     }
                 }
-                else
+                else {
                     break
+                }
             }
 
             if (!messageFound)
@@ -4203,60 +4292,54 @@ abstract class Client
                 if (!messageSizeCopied)
                 {
                     // Allocate and refresh the storage buffer
-                    this.receiveBuffer.allocate(4)
+                    try _ = self.receiveBuffer.allocate(size: 4)
                     size1 += 4
 
-                    Buffer.write(this.receiveBuffer.data, offset0, messageSize.toUInt())
+                    Buffer.write(buffer: &self.receiveBuffer.data, offset: offset0, value: UInt32(messageSize))
                     offset0 += 4
                     offset1 += 4
 
-                    @Suppress("UNUSED_VALUE")
                     messageSizeCopied = true
                 }
                 return
             }
 
-            if (messageBuffer != null)
+            if let messageBuffer = messageBuffer
             {
-                @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
-                val fbeStructSize: Long
-                val fbeStructType: Long
+                //@Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
+                let fbeStructSize: Int
+                let fbeStructType: Int
 
                 // Read the message parameters
                 if (final)
                 {
-                    @Suppress("UNUSED_VALUE")
-                    fbeStructSize = Buffer.readUInt32(messageBuffer, messageOffset).toLong()
-                    fbeStructType = Buffer.readUInt32(messageBuffer, messageOffset + 4).toLong()
+                    //@Suppress("UNUSED_VALUE")
+                    fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset))
+                    fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + 4))
                 }
                 else
                 {
-                    val fbeStructOffset = Buffer.readUInt32(messageBuffer, messageOffset + 4).toLong()
-                    @Suppress("UNUSED_VALUE")
-                    fbeStructSize = Buffer.readUInt32(messageBuffer, messageOffset + fbeStructOffset).toLong()
-                    fbeStructType = Buffer.readUInt32(messageBuffer, messageOffset + fbeStructOffset + 4).toLong()
+                    let fbeStructOffset = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + 4))
+                    //@Suppress("UNUSED_VALUE")
+                    fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset))
+                    fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset + 4))
                 }
 
                 // Handle the message
-                onReceive(fbeStructType, messageBuffer, messageOffset, messageSize)
+                _ = onReceive(type: fbeStructType, buffer: messageBuffer, offset: messageOffset, size: messageSize)
             }
 
             // Reset the storage buffer
-            this.receiveBuffer.reset()
+            self.receiveBuffer.reset()
 
             // Refresh the storage buffer
-            offset0 = this.receiveBuffer.offset
-            offset1 = this.receiveBuffer.size
-            size1 = this.receiveBuffer.size
+            offset0 = self.receiveBuffer.offset
+            offset1 = self.receiveBuffer.size
+            size1 = self.receiveBuffer.size
         }
     }
 
-    // Receive message handler
-    abstract fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
-
-    // Receive log message handler
-    @Suppress("UNUSED_PARAMETER")
-    protected open fun onReceiveLog(message: String) {}
+    func onReceiveLog(message: String) { }
 }
 )CODE";
 
@@ -4282,7 +4365,6 @@ void GeneratorSwift::GenerateFBEJson(const std::string& domain, const std::strin
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports(domain, package);
 
     std::string code = R"CODE(
 internal class BytesJson : com.google.gson.JsonSerializer<ByteArray>, com.google.gson.JsonDeserializer<ByteArray>
@@ -4363,7 +4445,7 @@ internal class UUIDJson : com.google.gson.JsonSerializer<java.util.UUID>, com.go
 {
     override fun serialize(src: java.util.UUID, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return com.google.gson.JsonPrimitive(src.toString())
+        return com.google.gson.JsonPrimitive(src.description)
     }
 
     @Throws(com.google.gson.JsonParseException::class)
@@ -4603,12 +4685,12 @@ void GeneratorSwift::GenerateEnum(const std::shared_ptr<Package>& p, const std::
     std::string enum_name = *e->name + "Enum";
 
     // Open the output file
-    CppCommon::Path output = path / (enum_name + ".kt");
+    CppCommon::Path output = path / (enum_name + ".swift");
     Open(output);
 
     // Generate enum header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(p);
+    GenerateImports("", "Foundation");
 
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
     std::string enum_base_type = ConvertEnumType(enum_type);
@@ -4617,25 +4699,22 @@ void GeneratorSwift::GenerateEnum(const std::shared_ptr<Package>& p, const std::
 
     // Generate enum body
     WriteLine();
-    WriteLineIndent("@Suppress(\"EnumEntryName\", \"MemberVisibilityCanBePrivate\", \"RemoveRedundantCallsOfConversionMethods\")");
-    WriteLineIndent("enum class " + enum_name);
-    WriteLineIndent("{");
+    WriteLineIndent("enum " + enum_name + ": " + enum_mapping_type + " {");
     Indent(1);
     if (e->body)
     {
         int index = 0;
-        bool first = true;
         std::string last = ConvertEnumConstant(enum_type, enum_type, "0", false);
         for (const auto& value : e->body->values)
         {
-            WriteIndent(std::string(first ? "" : ", ") + *value->name + "(");
+            WriteIndent("case " + *value->name + " = ");
             if (value->value)
             {
                 if (value->value->constant && !value->value->constant->empty())
                 {
                     index = 0;
                     last = ConvertEnumConstant(enum_type, enum_type, *value->value->constant, false);
-                    Write(last + " + " + std::to_string(index++) + (IsUnsignedType(enum_type) ? "u" : ""));
+                    Write(last);//Write(last + " + " + std::to_string(index++));
                 }
                 else if (value->value->reference && !value->value->reference->empty())
                 {
@@ -4645,75 +4724,70 @@ void GeneratorSwift::GenerateEnum(const std::shared_ptr<Package>& p, const std::
                 }
             }
             else
-                Write(last + " + " + std::to_string(index++) + (IsUnsignedType(enum_type) ? "u" : ""));
-            WriteLine(")");
-            first = false;
+                Write(std::to_string(index++));
+            WriteLine();
         }
-        WriteLineIndent(";");
         WriteLine();
     }
-
-    // Generate enum value
-    WriteLineIndent("var raw: " + enum_mapping_type + " = " + ConvertEnumConstant(enum_type, enum_type, "0", false));
-    Indent(1);
-    WriteLineIndent("private set");
-    Indent(-1);
 
     // Generate enum constructors
     WriteLine();
     if ((enum_type == "char") || (enum_type == "wchar"))
-        WriteLineIndent("constructor(value: Char) { this.raw = value" + enum_to + " }");
+    WriteLineIndent("init(value: Char) { self = StateEnum(rawValue: NSNumber(value: value)" + enum_to + ")! }");
     if (IsUnsignedType(enum_type))
     {
-        WriteLineIndent("constructor(value: UByte) { this.raw = value" + enum_to + " }");
-        WriteLineIndent("constructor(value: UShort) { this.raw = value" + enum_to + " }");
-        WriteLineIndent("constructor(value: UInt) { this.raw = value" + enum_to + " }");
-        WriteLineIndent("constructor(value: ULong) { this.raw = value" + enum_to + " }");
+        WriteLineIndent("init(value: UInt8) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
+        WriteLineIndent("init(value: UInt16) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
+        WriteLineIndent("init(value: UInt32) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
+        WriteLineIndent("init(value: UInt64) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
     }
     else
     {
-        WriteLineIndent("constructor(value: Byte) { this.raw = value" + enum_to + " }");
-        WriteLineIndent("constructor(value: Short) { this.raw = value" + enum_to + " }");
-        WriteLineIndent("constructor(value: Int) { this.raw = value" + enum_to + " }");
-        WriteLineIndent("constructor(value: Long) { this.raw = value" + enum_to + " }");
+      WriteLineIndent("init(value: Int8) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
+      WriteLineIndent("init(value: Int16) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
+      WriteLineIndent("init(value: Int32) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
+      WriteLineIndent("init(value: Int64) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
     }
-    WriteLineIndent("constructor(value: " + enum_name + ") { this.raw = value.raw }");
+    WriteLineIndent("init(value: " + enum_name + ") { self = " + enum_name + "(rawValue: value.rawValue)! }");
 
-    // Generate enum toString() method
+    // Generate enum description method
     WriteLine();
-    WriteLineIndent("override fun toString(): String");
-    WriteLineIndent("{");
+    WriteLineIndent("var description: String {");
     Indent(1);
+    WriteLineIndent("switch self {");
     if (e->body)
     {
         for (const auto& value : e->body->values)
-            WriteLineIndent("if (this == " + *value->name + ")" + " return \"" + *value->name + "\"");
+            WriteLineIndent("case ." + *value->name + ":" + " return \"" + *value->name + "\"");
     }
-    WriteLineIndent("return \"<unknown>\"");
+    WriteLineIndent("default: return \"<unknown>\"");
+    WriteLineIndent("}");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    WriteLine();
+    WriteLineIndent("static func values() -> [" + enum_name + "] {");
+    Indent(1);
+    WriteLineIndent("return [");
+    Indent(1);
+    for (const auto& value : e->body->values)
+        WriteLineIndent(enum_name + "." + *value->name + ",");
+    Indent(-1);
+    WriteLineIndent("]");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate enum mapping
     WriteLine();
-    WriteLineIndent("companion object");
-    WriteLineIndent("{");
+    WriteLineIndent("static func mapValue(value: " + enum_mapping_type + ") -> " + enum_name + "? {");
     Indent(1);
-    WriteLineIndent("private val mapping = java.util.HashMap<" + enum_mapping_type + ", " + enum_name + ">()");
-    WriteLine();
-    WriteLineIndent("init");
-    WriteLineIndent("{");
+    WriteLineIndent("var mapping = Dictionary<" + enum_mapping_type + ", " + enum_name + ">()");
+    WriteLineIndent("for value in values() {");
     Indent(1);
-    WriteLineIndent("for (value in " + enum_name + ".values())");
-    Indent(1);
-    WriteLineIndent("mapping[value.raw] = value");
-    Indent(-1);
+    WriteLineIndent("mapping[value.rawValue] = value");
     Indent(-1);
     WriteLineIndent("}");
-
-    // Generate enum mapValue() method
-    WriteLine();
-    WriteLineIndent("fun mapValue(value: " + enum_mapping_type + "): " + enum_name + "?" +" { return mapping[value] }");
-
+    WriteLineIndent("return mapping[value]");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4749,12 +4823,12 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
     std::string enum_type_name = *e->name + "Enum";
 
     // Open the output file
-    CppCommon::Path output = path / (enum_name + ".kt");
+    CppCommon::Path output = path / (enum_name + ".swift");
     Open(output);
 
     // Generate enum class header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(p);
+    GenerateImports("", "Foundation");
 
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
     std::string enum_base_type = ConvertEnumType(enum_type);
@@ -4762,115 +4836,81 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
 
     // Generate enum class body
     WriteLine();
-    WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"RemoveRedundantCallsOfConversionMethods\")");
-    WriteLineIndent("class " + enum_name + " : Comparable<" + enum_name + ">");
-    WriteLineIndent("{");
+    WriteLineIndent("class " + enum_name + " : Comparable {");
     Indent(1);
     if (e->body)
     {
-        WriteLineIndent("companion object");
-        WriteLineIndent("{");
-        Indent(1);
         for (const auto& value : e->body->values)
-            WriteLineIndent("val " + *value->name + " = " + enum_name + "(" + enum_type_name + "." + *value->name + ")");
-        Indent(-1);
-        WriteLineIndent("}");
+            WriteLineIndent("static let " + *value->name + " = " + enum_name + "(value: " + enum_type_name + "." + *value->name + ")");
         WriteLine();
     }
 
     // Generate enum class value
-    WriteLineIndent("var value: " + enum_type_name + "?" + " = " + enum_type_name + ".values()[0]");
-    Indent(1);
-    WriteLineIndent("private set");
-    Indent(-1);
+    WriteLineIndent("var value: " + enum_type_name + "?" + " = " + enum_type_name + ".values().first");
     WriteLine();
 
     // Generate enum raw value
-    WriteLineIndent("val raw: " + enum_base_type);
-    Indent(1);
-    WriteLineIndent("get() = value!!.raw");
-    Indent(-1);
+    WriteLineIndent("var raw: " + enum_base_type + " { return value!.rawValue }");
     WriteLine();
 
     // Generate enum class constructors
-    WriteLineIndent("constructor()");
-    WriteLineIndent("constructor(value: " + enum_base_type + ") { setEnum(value) }");
-    WriteLineIndent("constructor(value: " + enum_type_name + ") { setEnum(value) }");
-    WriteLineIndent("constructor(value: " + enum_name + ") { setEnum(value) }");
+    WriteLineIndent("init() { }");
+    WriteLineIndent("init(value: " + enum_base_type + ") { setEnum(value: value) }");
+    WriteLineIndent("init(value: " + enum_type_name + ") { setEnum(value: value) }");
+    WriteLineIndent("init(value: " + enum_name + ") { setEnum(value: value) }");
     WriteLine();
 
     // Generate enum class setDefault() method
-    WriteLineIndent("fun setDefault() { setEnum(0" + enum_to + ") }");
+    WriteLineIndent("func setDefault() { setEnum(value: NSNumber(value: 0)" + enum_to + ") }");
     WriteLine();
 
     // Generate enum class setEnum() methods
-    WriteLineIndent("fun setEnum(value: " + enum_base_type + ") { this.value = " + enum_type_name + ".mapValue(value) }");
-    WriteLineIndent("fun setEnum(value: " + enum_type_name + ") { this.value = value }");
-    WriteLineIndent("fun setEnum(value: " + enum_name + ") { this.value = value.value }");
+    WriteLineIndent("func setEnum(value: " + enum_base_type + ") { self.value = " + enum_type_name + ".mapValue(value: value) }");
+    WriteLineIndent("func setEnum(value: " + enum_type_name + ") { self.value = value }");
+    WriteLineIndent("func setEnum(value: " + enum_name + ") { self.value = value.value }");
 
     // Generate enum class compareTo() method
     WriteLine();
-    WriteLineIndent("override fun compareTo(other: " + enum_name + "): Int");
-    WriteLineIndent("{");
+    WriteLineIndent("static func < (lhs: " + enum_name + ", rhs: " + enum_name + ") -> Bool {");
     Indent(1);
-    WriteLineIndent("if (value == null)");
+    WriteLineIndent("guard let lhsValue = lhs.value, let rhsValue = rhs.value else {");
     Indent(1);
-    WriteLineIndent("return -1");
+    WriteLineIndent("return false");
+    WriteLineIndent("}");
     Indent(-1);
-    WriteLineIndent("if (other.value == null)");
-    Indent(1);
-    WriteLineIndent("return 1");
-    Indent(-1);
-    WriteLineIndent("return (value!!.raw - other.value!!.raw).toInt()");
+    WriteLineIndent("return lhsValue.rawValue < rhsValue.rawValue");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate enum class equals() method
+    // Generate enum class compareTo() method
     WriteLine();
-    WriteLineIndent("override fun equals(other: Any?): Boolean");
-    WriteLineIndent("{");
+    WriteLineIndent("static func == (lhs: " + enum_name + ", rhs: " + enum_name + ") -> Bool {");
     Indent(1);
-    WriteLineIndent("if (other == null)");
+    WriteLineIndent("guard let lhsValue = lhs.value, let rhsValue = rhs.value else {");
     Indent(1);
     WriteLineIndent("return false");
+    WriteLineIndent("}");
     Indent(-1);
-    WriteLine();
-    WriteLineIndent("if (!" + enum_name + "::class.java.isAssignableFrom(other.javaClass))");
-    Indent(1);
-    WriteLineIndent("return false");
-    Indent(-1);
-    WriteLine();
-    WriteLineIndent("val enm = other as " + enum_name + "? ?: return false");
-    WriteLine();
-    WriteLineIndent("if (enm.value == null)");
-    Indent(1);
-    WriteLineIndent("return false");
-    Indent(-1);
-    WriteLineIndent("if (value!!.raw != enm.value!!.raw)");
-    Indent(1);
-    WriteLineIndent("return false");
-    Indent(-1);
-    WriteLineIndent("return true");
+    WriteLineIndent("return lhsValue == rhsValue");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate enum class hashCode() method
     WriteLine();
-    WriteLineIndent("override fun hashCode(): Int");
-    WriteLineIndent("{");
+    WriteLineIndent("func hashCode() -> Int {");
     Indent(1);
     WriteLineIndent("var hash = 17");
-    WriteLineIndent("hash = hash * 31 + if (value != null) value!!.hashCode() else 0");
+    WriteLineIndent("hash = hash * 31 + (value?.hashValue ?? 0)");
     WriteLineIndent("return hash");
     Indent(-1);
     WriteLineIndent("}");
 
-    // Generate enum class toString() method
+    // Generate enum class description method
     WriteLine();
-    WriteLineIndent("override fun toString(): String");
-    WriteLineIndent("{");
+    WriteLineIndent("var description: String {");
     Indent(1);
-    WriteLineIndent("return if (value != null) value!!.toString() else \"<unknown>\"");
+    WriteLineIndent("return value?.description ?? \"<unknown>\"");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4902,7 +4942,6 @@ void GeneratorSwift::GenerateEnumJson(const std::shared_ptr<Package>& p, const s
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(domain, package + ".fbe");
 
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
 
@@ -4945,12 +4984,12 @@ void GeneratorSwift::GenerateFlags(const std::shared_ptr<Package>& p, const std:
     std::string flags_name = *f->name + "Enum";
 
     // Open the output file
-    CppCommon::Path output = path / (flags_name + ".kt");
+    CppCommon::Path output = path / (flags_name + ".swift");
     Open(output);
 
     // Generate flags header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(p);
+    GenerateImports("", "Foundation");
 
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
     std::string flags_base_type = ConvertEnumType(flags_type);
@@ -4960,16 +4999,13 @@ void GeneratorSwift::GenerateFlags(const std::shared_ptr<Package>& p, const std:
 
     // Generate flags body
     WriteLine();
-    WriteLineIndent("@Suppress(\"EnumEntryName\", \"MemberVisibilityCanBePrivate\", \"RemoveRedundantCallsOfConversionMethods\")");
-    WriteLineIndent("enum class " + flags_name);
-    WriteLineIndent("{");
+    WriteLineIndent("struct " + flags_name + ": OptionSet {");
     Indent(1);
     if (f->body)
     {
-        bool first = true;
         for (const auto& value : f->body->values)
         {
-            WriteIndent(std::string(first ? "" : ", ") + *value->name + "(");
+            WriteIndent("static let " + *value->name + " = " + flags_name + "(rawValue: ");
             if (value->value)
             {
                 if (value->value->constant && !value->value->constant->empty())
@@ -4977,62 +5013,70 @@ void GeneratorSwift::GenerateFlags(const std::shared_ptr<Package>& p, const std:
                 else if (value->value->reference && !value->value->reference->empty())
                     Write(ConvertEnumConstant(flags_type, "", *value->value->reference, true));
             }
-            WriteLine(")");
-            first = false;
+            Write(")");
+            WriteLine();
         }
-        WriteLineIndent(";");
         WriteLine();
     }
     else
-        WriteIndent("unknown(0);");
+        WriteIndent("static let unknown = " + flags_name + "(rawValue: 0");
 
     // Generate flags class value
-    WriteLineIndent("var raw: " + flags_mapping_type + " = " + ConvertEnumConstant(flags_type, flags_type, "0", false));
-    Indent(1);
-    WriteLineIndent("private set");
-    Indent(-1);
+    WriteLineIndent("var rawValue: " + flags_mapping_type);
 
     // Generate flags class constructors
     WriteLine();
+    WriteLineIndent("init(rawValue: " + flags_mapping_type + ") { self.rawValue = rawValue }");
     if ((flags_type == "char") || (flags_type == "wchar"))
-        WriteLineIndent("constructor(value: Char) { this.raw = value" + flags_to + " }");
+        WriteLineIndent("init(value: Char) { self.rawValue = NSNumber(value: value)" + flags_to + " }");
     if (IsUnsignedType(flags_type))
     {
-        WriteLineIndent("constructor(value: UByte) { this.raw = value" + flags_to + " }");
-        WriteLineIndent("constructor(value: UShort) { this.raw = value" + flags_to + " }");
-        WriteLineIndent("constructor(value: UInt) { this.raw = value" + flags_to + " }");
-        WriteLineIndent("constructor(value: ULong) { this.raw = value" + flags_to + " }");
+        WriteLineIndent("init(value: UInt8) { self.rawValue = NSNumber(value: value)" + flags_to + " }");
+        WriteLineIndent("init(value: UInt16) { self.rawValue = NSNumber(value: value)" + flags_to + " }");
+        WriteLineIndent("init(value: UInt32) { self.rawValue = NSNumber(value: value)" + flags_to + " }");
+        WriteLineIndent("init(value: UInt64) { self.rawValue = NSNumber(value: value)" + flags_to + " }");
     }
     else
     {
-        WriteLineIndent("constructor(value: Byte) { this.raw = value" + flags_to + " }");
-        WriteLineIndent("constructor(value: Short) { this.raw = value" + flags_to + " }");
-        WriteLineIndent("constructor(value: Int) { this.raw = value" + flags_to + " }");
-        WriteLineIndent("constructor(value: Long) { this.raw = value" + flags_to + " }");
+      WriteLineIndent("init(value: Int8) { self.rawValue = NSNumber(value: value)" + flags_to + " }");
+      WriteLineIndent("init(value: Int16) { self.rawValue = NSNumber(value: value)" + flags_to + " }");
+      WriteLineIndent("init(value: Int32) { self.rawValue = NSNumber(value: value)" + flags_to + " }");
+      WriteLineIndent("init(value: Int64) { self.rawValue = NSNumber(value: value)" + flags_to + " }");
     }
-    WriteLineIndent("constructor(value: " + flags_name + ") { this.raw = value.raw }");
+    WriteLineIndent("init(value: " + flags_name + ") { self.rawValue = value.rawValue }");
 
     // Generate flags hasFlags() methods
     WriteLine();
-    WriteLineIndent("fun hasFlags(flags: " + flags_base_type + "): Boolean = ((raw" + flags_int + " and flags" + flags_int + ") != " + ConvertEnumConstant(flags_type, flags_type, "0", false) + ") && ((raw" + flags_int + " and flags" + flags_int + ") == flags" + flags_int + ")");
-    WriteLineIndent("fun hasFlags(flags: " + flags_name + "): Boolean = hasFlags(flags.raw)");
+    WriteLineIndent("func hasFlags(flags: " + flags_base_type + ") -> Bool { return ((NSNumber(value: rawValue)" + flags_int + " & NSNumber(value: flags)" + flags_int + ") != " + ConvertEnumConstant(flags_type, flags_type, "0", false) + ") && (NSNumber(value: rawValue)" + flags_int + " & NSNumber(value: flags)" + flags_int + " == NSNumber(value: flags)" + flags_int + ") }");
+    WriteLineIndent("func hasFlags(flags: " + flags_name + ") -> Bool { return hasFlags(flags: flags.rawValue) }");
 
     // Generate flags getAllSet(), getNoneSet(), getCurrentSet() methods
     WriteLine();
-    WriteLineIndent("val allSet: java.util.EnumSet<" + flags_name + "> get() = java.util.EnumSet.allOf(" + flags_name + "::class.java)");
-    WriteLineIndent("val noneSet: java.util.EnumSet<" + flags_name + "> get() = java.util.EnumSet.noneOf(" + flags_name + "::class.java)");
-    WriteLineIndent("val currentSet: java.util.EnumSet<" + flags_name + "> get()");
-    WriteLineIndent("{");
+    WriteLineIndent("static let allSet: " + flags_name + " = [");
     Indent(1);
-    WriteLineIndent("val result = java.util.EnumSet.noneOf(" + flags_name + "::class.java)");
     if (f->body)
     {
         for (const auto& value : f->body->values)
         {
-            WriteLineIndent("if ((raw" + flags_int + " and " + *value->name + ".raw" + flags_int + ") != " + ConvertEnumConstant(flags_type, flags_type, "0", false) + ")");
-            WriteLineIndent("{");
+            WriteIndent("." + *value->name + ",");
+            WriteLine();
+        }
+    }
+    else
+        WriteIndent(".unknown");
+    Indent(-1);
+    WriteLineIndent("]");
+    WriteLineIndent("static let noneSet: " + flags_name + " = []");
+    WriteLineIndent("var currentSet: " + flags_name + " {");
+    Indent(1);
+    WriteLineIndent("var result = StateEnum.noneSet");
+    if (f->body)
+    {
+        for (const auto& value : f->body->values)
+        {
+            WriteLineIndent("if (NSNumber(value: rawValue)" + flags_int + " & NSNumber(value: " + flags_name + "." + *value->name + ".rawValue)" + flags_int + ") != " + ConvertEnumConstant(flags_type, flags_type, "0", false) + " {");
             Indent(1);
-            WriteLineIndent("result.add(" + *value->name + ")");
+            WriteLineIndent("result = result.union(." + *value->name + ")");
             Indent(-1);
             WriteLineIndent("}");
         }
@@ -5041,52 +5085,60 @@ void GeneratorSwift::GenerateFlags(const std::shared_ptr<Package>& p, const std:
     Indent(-1);
     WriteLineIndent("}");
 
-    // Generate enum toString() method
+    // Generate enum description method
     WriteLine();
-    WriteLineIndent("override fun toString(): String");
-    WriteLineIndent("{");
+    WriteLineIndent("var description: String {");
     Indent(1);
-    WriteLineIndent("val sb = StringBuilder()");
+    WriteLineIndent("var sb = String()");
     if (f->body && !f->body->values.empty())
     {
         WriteLineIndent("var first = true");
         for (const auto& value : f->body->values)
         {
-            WriteLineIndent("if (hasFlags(" + *value->name + "))");
-            WriteLineIndent("{");
+            WriteLineIndent("if hasFlags(flags: ." + *value->name + ") {");
             Indent(1);
-            WriteLineIndent("sb.append(if (first) \"\" else \"|\").append(\"" + *value->name + "\")");
-            WriteLineIndent("@Suppress(\"UNUSED_VALUE\")");
+            WriteLineIndent("sb.append(first ? \"\" : \"|\"); sb.append(\"" + *value->name + "\")");
             WriteLineIndent("first = false");
             Indent(-1);
             WriteLineIndent("}");
         }
     }
-    WriteLineIndent("return sb.toString()");
+    WriteLineIndent("return sb");
     Indent(-1);
     WriteLineIndent("}");
 
-    // Generate flags mapping
+    // Generate flags values() method
     WriteLine();
-    WriteLineIndent("companion object");
-    WriteLineIndent("{");
+    WriteLineIndent("static func values() -> [" + flags_name + "] {");
     Indent(1);
-    WriteLineIndent("private val mapping = java.util.HashMap<" + flags_mapping_type + ", " + flags_name + ">()");
-    WriteLine();
-    WriteLineIndent("init");
-    WriteLineIndent("{");
+    WriteLineIndent("return [");
     Indent(1);
-    WriteLineIndent("for (value in " + flags_name + ".values())");
-    Indent(1);
-    WriteLineIndent("mapping[value.raw] = value");
+    if (f->body)
+    {
+        for (const auto& value : f->body->values)
+        {
+            WriteIndent("." + *value->name + ",");
+            WriteLine();
+        }
+    }
+    else
+        WriteIndent(".unknown");
     Indent(-1);
+    WriteLineIndent("]");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate flags mapValue() method
     WriteLine();
-    WriteLineIndent("fun mapValue(value: " + flags_mapping_type + "): " + flags_name + "?" +" { return mapping[value] }");
-
+    WriteLineIndent("static func mapValue(value: RawValue) -> " + flags_name + "? {");
+    Indent(1);
+    WriteLineIndent("var mapping = Dictionary<RawValue, " + flags_name + ">()");
+    WriteLineIndent("for value in values() {");
+    Indent(1);
+    WriteLineIndent("mapping[value.rawValue] = value");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLineIndent("return mapping[value]");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5122,12 +5174,12 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
     std::string flags_type_name = *f->name + "Enum";
 
     // Open the output file
-    CppCommon::Path output = path / (flags_name + ".kt");
+    CppCommon::Path output = path / (flags_name + ".swift");
     Open(output);
 
     // Generate flags class header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(p);
+    GenerateImports("", "Foundation");
 
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
     std::string flags_base_type = ConvertEnumType(flags_type);
@@ -5136,174 +5188,132 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
 
     // Generate flags class body
     WriteLine();
-    WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"RemoveRedundantCallsOfConversionMethods\")");
-    WriteLineIndent("class " + flags_name + " : Comparable<" + flags_name + ">");
-    WriteLineIndent("{");
+    WriteLineIndent("class " + flags_name + ": Comparable {");
     Indent(1);
     if (f->body)
     {
-        WriteLineIndent("companion object");
-        WriteLineIndent("{");
-        Indent(1);
         if (!f->body->values.empty())
         {
             for (const auto& value : f->body->values)
-                WriteLineIndent("val " + *value->name + " = " + flags_name + "(" + flags_type_name + "." + *value->name + ")");
+                WriteLineIndent("static let " + *value->name + " = " + flags_name + "(value: ." + *value->name + ")");
             WriteLine();
         }
 
         // Generate flags class fromSet() method
-        if (f->body->values.empty())
-            WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
-        WriteLineIndent("fun fromSet(set: java.util.EnumSet<" + flags_type_name + ">): " + flags_name);
-        WriteLineIndent("{");
+        WriteLineIndent("static func fromSet(set: " + flags_type_name + ") -> " + flags_name + " {");
         Indent(1);
-        WriteLineIndent("@Suppress(\"CanBeVal\")");
         WriteLineIndent("var result = " + ConvertEnumConstant(flags_type, flags_type, "0", false));
         if (f->body)
         {
             for (const auto& value : f->body->values)
             {
-                WriteLineIndent("if (set.contains(" + *value->name + ".value!!))");
-                WriteLineIndent("{");
+                WriteLineIndent("if set.contains(" + flags_name + "." + *value->name + ".value!) {");
                 Indent(1);
-                WriteLineIndent("result = result" + flags_int + " or " + *value->name + ".raw" + flags_int);
+                WriteLineIndent("result = NSNumber(value: result)" + flags_int + " | NSNumber(value: " +flags_name + "." + *value->name + ".raw)" + flags_int);
                 Indent(-1);
                 WriteLineIndent("}");
             }
         }
-        WriteLineIndent("return " + flags_name + "(result" + flags_to + ")");
+        WriteLineIndent("return " + flags_name + "(value:  NSNumber(value: result)" + flags_to + ")");
         Indent(-1);
         WriteLineIndent("}");
 
-        Indent(-1);
-        WriteLineIndent("}");
         WriteLine();
     }
 
     // Generate flags class value
-    WriteLineIndent("var value: " + flags_type_name + "?" + " = " + flags_type_name + ".values()[0]");
-    Indent(1);
-    WriteLineIndent("private set");
-    Indent(-1);
+    WriteLineIndent("private(set) var value: " + flags_type_name + "?" + " = " + flags_type_name + ".values().first ");
     WriteLine();
 
     // Generate flags raw value
-    WriteLineIndent("var raw: " + flags_base_type + " = value!!.raw");
-    Indent(1);
-    WriteLineIndent("private set");
-    Indent(-1);
+    WriteLineIndent("private(set) var raw: " + flags_base_type + " = 0");
     WriteLine();
 
     // Generate flags class constructors
-    WriteLineIndent("constructor()");
-    WriteLineIndent("constructor(value: " + flags_base_type + ") { setEnum(value) }");
-    WriteLineIndent("constructor(value: " + flags_type_name + ") { setEnum(value) }");
-    WriteLineIndent("constructor(value: java.util.EnumSet<" + flags_type_name + ">) { setEnum(value) }");
-    WriteLineIndent("constructor(value: " + flags_name + ") { setEnum(value) }");
+    WriteLineIndent("init() { raw = value!.rawValue }");
+    WriteLineIndent("init(value: " + flags_base_type + ") { setEnum(value: value) }");
+    WriteLineIndent("init(value: " + flags_type_name + ") { setEnum(value: value) }");
+    WriteLineIndent("init(value: " + flags_name + ") { setEnum(value: value) }");
     WriteLine();
 
     // Generate flags class setDefault() method
-    WriteLineIndent("fun setDefault() { setEnum(0" + flags_to + ") }");
+    WriteLineIndent("func setDefaults() { setEnum(value: 0) }");
     WriteLine();
 
     // Generate flags class setEnum() methods
-    WriteLineIndent("fun setEnum(value: " + flags_base_type + ") { this.raw = value; this.value = " + flags_type_name + ".mapValue(value) }");
-    WriteLineIndent("fun setEnum(value: " + flags_type_name + ") { this.value = value; this.raw = value.raw; }");
-    WriteLineIndent("fun setEnum(value: java.util.EnumSet<" + flags_type_name + ">) { setEnum(" + flags_name + ".fromSet(value)) }");
-    WriteLineIndent("fun setEnum(value: " + flags_name + ") { this.value = value.value; this.raw = value.raw }");
+    WriteLineIndent("func setEnum(value: " + flags_base_type + ") { self.raw = value; self.value = " + flags_type_name + ".mapValue(value: value) }");
+    WriteLineIndent("func setEnum(value: " + flags_type_name + ") { self.raw = value.rawValue; self.value = value }");
+    WriteLineIndent("func setEnum(value: " + flags_name + ") { self.raw = value.raw; self.value = value.value }");
 
     // Generate flags class hasFlags() methods
     WriteLine();
-    WriteLineIndent("fun hasFlags(flags: " + flags_base_type + "): Boolean = ((raw" + flags_int + " and flags" + flags_int + ") != " + ConvertEnumConstant(flags_type, flags_type, "0", false) + ") && ((raw" + flags_int + " and flags" + flags_int + ") == flags" + flags_int + ")");
-    WriteLineIndent("fun hasFlags(flags: " + flags_type_name + "): Boolean = hasFlags(flags.raw)");
-    WriteLineIndent("fun hasFlags(flags: " + flags_name + "): Boolean = hasFlags(flags.raw)");
+    WriteLineIndent("func hasFlags(flags: " + flags_base_type + ") -> Bool { return (NSNumber(value: raw)" + flags_int + " & NSNumber(value: flags)" + flags_int + " != " + ConvertEnumConstant(flags_type, flags_type, "0", false) + ") && ((NSNumber(value: raw)" + flags_int + " & NSNumber(value: flags)" + flags_int + ") == NSNumber(value: flags)" + flags_int + ") }");
+    WriteLineIndent("func hasFlags(flags: " + flags_type_name + ") -> Bool { return hasFlags(flags: flags.rawValue) }");
+    WriteLineIndent("func hasFlags(flags: " + flags_name + ") -> Bool { return hasFlags(flags: flags.raw) }");
 
     // Generate flags class setFlags() methods
     WriteLine();
-    WriteLineIndent("fun setFlags(flags: " + flags_base_type + "): " + flags_name + " { setEnum((raw" + flags_int + " or flags" + flags_int + ")" + flags_to + "); return this }");
-    WriteLineIndent("fun setFlags(flags: " + flags_type_name + "): " + flags_name + " { setFlags(flags.raw); return this }");
-    WriteLineIndent("fun setFlags(flags: " + flags_name + "): " + flags_name + " { setFlags(flags.raw); return this }");
+    WriteLineIndent("func setFlags(flags: " + flags_base_type + ") -> " + flags_name + " { setEnum(value: NSNumber(value: NSNumber(value: raw)" + flags_int + " | NSNumber(value: flags)" + flags_int + ")" + flags_to + "); return self }");
+    WriteLineIndent("func setFlags(flags: " + flags_type_name + ") -> " + flags_name + " { _ = setFlags(flags: flags.rawValue); return self }");
+    WriteLineIndent("func setFlags(flags: " + flags_name + ") -> " + flags_name + " { _ = setFlags(flags: flags.raw); return self }");
 
     // Generate flags class removeFlags() methods
     WriteLine();
-    WriteLineIndent("fun removeFlags(flags: " + flags_base_type + "): " + flags_name + " { setEnum((raw" + flags_int + " and flags" + flags_int + ".inv())" + flags_to + "); return this }");
-    WriteLineIndent("fun removeFlags(flags: " + flags_type_name + "): " + flags_name + " { removeFlags(flags.raw); return this }");
-    WriteLineIndent("fun removeFlags(flags: " + flags_name + "): " + flags_name + " { removeFlags(flags.raw); return this }");
+    WriteLineIndent("func removeFlags(flags: " + flags_base_type + ") -> " + flags_name + " { setEnum(value: NSNumber(value: NSNumber(value: raw)" + flags_int + " | NSNumber(value: flags)" + flags_int + ".byteSwapped)" + flags_to + "); return self }");
+    WriteLineIndent("func removeFlags(flags: " + flags_type_name + ") -> " + flags_name + " { _ = removeFlags(flags: flags.rawValue); return self }");
+    WriteLineIndent("func removeFlags(flags: " + flags_name + ") -> " + flags_name + " { _ = removeFlags(flags: flags.raw); return self }");
 
     // Generate flags class getAllSet(), getNoneSet() and getCurrentSet() methods
     WriteLine();
-    WriteLineIndent("val allSet: java.util.EnumSet<" + flags_type_name + "> get() = value!!.allSet");
-    WriteLineIndent("val noneSet: java.util.EnumSet<" + flags_type_name + "> get() = value!!.noneSet");
-    WriteLineIndent("val currentSet: java.util.EnumSet<" + flags_type_name + "> get() = value!!.currentSet");
+    WriteLineIndent("var allSet: " + flags_type_name + " { return .allSet }");
+    WriteLineIndent("var noneSet: " + flags_type_name + " { return .noneSet }");
+    WriteLineIndent("var currentSet: " + flags_type_name + " { return value!.currentSet }");
 
-    // Generate flags class compareTo() method
+    // Generate flags class < method
     WriteLine();
-    WriteLineIndent("override fun compareTo(other: " + flags_name + "): Int");
-    WriteLineIndent("{");
+    WriteLineIndent("static func < (lhs: " + flags_name + ", rhs: " + flags_name + ") -> Bool {");
     Indent(1);
-    WriteLineIndent("return (raw - other.raw).toInt()");
+    WriteLineIndent("return lhs.raw < rhs.raw");
     Indent(-1);
     WriteLineIndent("}");
 
-    // Generate flags class equals() method
+    // Generate flags class == method
     WriteLine();
-    WriteLineIndent("override fun equals(other: Any?): Boolean");
-    WriteLineIndent("{");
+    WriteLineIndent("static func == (lhs: " + flags_name + ", rhs: " + flags_name + ") -> Bool {");
     Indent(1);
-    WriteLineIndent("if (other == null)");
-    Indent(1);
-    WriteLineIndent("return false");
-    Indent(-1);
-    WriteLine();
-    WriteLineIndent("if (!" + flags_name + "::class.java.isAssignableFrom(other.javaClass))");
-    Indent(1);
-    WriteLineIndent("return false");
-    Indent(-1);
-    WriteLine();
-    WriteLineIndent("val flg = other as " + flags_name + "? ?: return false");
-    WriteLine();
-    WriteLineIndent("if (raw != flg.raw)");
-    Indent(1);
-    WriteLineIndent("return false");
-    Indent(-1);
-    WriteLineIndent("return true");
+    WriteLineIndent("return lhs.raw < rhs.raw");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate flags class hashCode() method
     WriteLine();
-    WriteLineIndent("override fun hashCode(): Int");
-    WriteLineIndent("{");
+    WriteLineIndent("func hashCode() -> Int {");
     Indent(1);
     WriteLineIndent("var hash = " + ConvertEnumConstant(flags_type, flags_type, "17", false));
-    WriteLineIndent("hash = hash * " + ConvertEnumConstant(flags_type, flags_type, "31", false) + " + raw" + flags_int);
-    WriteLineIndent("return hash.toInt()");
+    WriteLineIndent("hash = hash * " + ConvertEnumConstant(flags_type, flags_type, "31", false) + " + NSNumber(value: raw)" + flags_int);
+    WriteLineIndent("return Int(hash)");
     Indent(-1);
     WriteLineIndent("}");
 
-    // Generate flags class toString() method
+    // Generate flags class description method
     WriteLine();
-    WriteLineIndent("override fun toString(): String");
-    WriteLineIndent("{");
+    WriteLineIndent("var description: String {");
     Indent(1);
-    WriteLineIndent("val sb = StringBuilder()");
+    WriteLineIndent("var sb = String()");
     if (f->body && !f->body->values.empty())
     {
         WriteLineIndent("var first = true");
         for (const auto& value : f->body->values)
         {
-            WriteLineIndent("if (hasFlags(" + *value->name + ".raw))");
-            WriteLineIndent("{");
+            WriteLineIndent("if hasFlags(flags: " + flags_name + "." + *value->name + ".raw) {");
             Indent(1);
-            WriteLineIndent("sb.append(if (first) \"\" else \"|\").append(\"" + *value->name + "\")");
-            WriteLineIndent("@Suppress(\"UNUSED_VALUE\")");
+            WriteLineIndent("sb.append(first ? \"\" : \"|\"); sb.append(\"" + *value->name + "\")");
             WriteLineIndent("first = false");
             Indent(-1);
             WriteLineIndent("}");
         }
     }
-    WriteLineIndent("return sb.toString()");
+    WriteLineIndent("return sb");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5335,7 +5345,6 @@ void GeneratorSwift::GenerateFlagsJson(const std::shared_ptr<Package>& p, const 
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(domain, package + ".fbe");
 
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
 
@@ -5525,16 +5534,16 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     Indent(-1);
     WriteLineIndent("}");
 
-    // Generate struct toString() method
+    // Generate struct description method
     WriteLine();
-    WriteLineIndent("func toString() -> String {");
+    WriteLineIndent("var description: String {");
     Indent(1);
     WriteLineIndent("var sb = String()");
     WriteLineIndent("sb.append(\"" + *s->name + "(\")");
     first = true;
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("sb.append(super.toString())");
+        WriteLineIndent("sb.append(super.description)");
         first = false;
     }
     if (s->body)
@@ -5549,9 +5558,8 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("var first = true");
-                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\").append(" + *field->name + ".size" + ").append(\"][\")");
-                WriteLineIndent("for (item in " + *field->name + ")");
-                WriteLineIndent("{");
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\"); sb.append(\"\\(" + *field->name + ".count)\"" + "); sb.append(\"][\")");
+                WriteLineIndent("for item in " + *field->name + " {");
                 Indent(1);
                 WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true, false));
                 WriteLineIndent("first = false");
@@ -5568,8 +5576,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                 Indent(1);
                 WriteLineIndent("var first = true");
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\").append(" + *field->name + ".size" + ").append(\"]<\")");
-                WriteLineIndent("for (item in " + *field->name + ")");
-                WriteLineIndent("{");
+                WriteLineIndent("for item in " + *field->name + " {");
                 Indent(1);
                 WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true, false));
                 WriteLineIndent("first = false");
@@ -5586,8 +5593,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                 Indent(1);
                 WriteLineIndent("var first = true");
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\").append(" + *field->name + ".size" + ").append(\"]{\")");
-                WriteLineIndent("for (item in " + *field->name + ")");
-                WriteLineIndent("{");
+                WriteLineIndent("for item in " + *field->name + " {");
                 Indent(1);
                 WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true, false));
                 WriteLineIndent("first = false");
@@ -5986,7 +5992,15 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     // Generate struct field model get() methods
     WriteLine();
     WriteLineIndent("// Get the struct value");
-    WriteLineIndent("func get(fbeValue: " + struct_name + " = " + struct_name + "()) -> " + struct_name + " {");
+    WriteLineIndent("func get() -> " + struct_name + " {");
+    Indent(1);
+    WriteLineIndent("var fbeValue = " + struct_name+ "()");
+    WriteLineIndent("return get(fbeValue: &fbeValue)");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    WriteLine();
+    WriteLineIndent("func get(fbeValue: inout " + struct_name + ") -> " + struct_name + " {");
     Indent(1);
     WriteLineIndent("let fbeBegin = getBegin()");
     WriteLineIndent("if (fbeBegin == 0) {");
@@ -5996,7 +6010,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("let fbeStructSize = Int(readUInt32(offset: 0))");
-    WriteLineIndent("getFields(fbeValue: fbeValue, fbeStructSize: fbeStructSize)");
+    WriteLineIndent("getFields(fbeValue: &fbeValue, fbeStructSize: fbeStructSize)");
     WriteLineIndent("getEnd(fbeBegin: fbeBegin)");
     WriteLineIndent("return fbeValue");
     Indent(-1);
@@ -6005,8 +6019,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     // Generate struct field model getFields() method
     WriteLine();
     WriteLineIndent("// Get the struct fields values");
-    WriteLineIndent("func getFields(fbeValue: " + struct_name + ", fbeStructSize: Int)");
-    WriteLineIndent("{");
+    WriteLineIndent("func getFields(fbeValue: inout " + struct_name + ", fbeStructSize: Int) {");
     Indent(1);
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
@@ -6029,14 +6042,14 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
                 WriteLineIndent("if fbeCurrentSize + " + *field->name + ".fbeSize <= fbeStructSize {");
                 Indent(1);
                 if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                    WriteLineIndent(*field->name + ".get(fbeValue." + *field->name + ")");
+                    WriteLineIndent(*field->name + ".get(values: &fbeValue." + *field->name + ")");
                 else
                     WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? "defaults: " + ConvertConstant(domain, package, *field->type, *field->value, field->optional) : "") + ")");
                 Indent(-1);
                 WriteLineIndent("} else {");
                 Indent(1);
                 if (field->vector || field->list || field->set || field->map || field->hash)
-                    WriteLineIndent("fbeValue." + *field->name + ".clear()");
+                    WriteLineIndent("fbeValue." + *field->name + ".removeAll()");
                 else
                     WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(domain, package, *field));
                 Indent(-1);
@@ -6090,7 +6103,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     // Generate struct field model set() method
     WriteLine();
     WriteLineIndent("// Set the struct value");
-    WriteLineIndent("func set(fbeValue: " + struct_name + ") throws {");
+    WriteLineIndent("func set(value fbeValue: " + struct_name + ") throws {");
     Indent(1);
     WriteLineIndent("let fbeBegin = try setBegin()");
     WriteLineIndent("if fbeBegin == 0 {");
@@ -6224,7 +6237,7 @@ void GeneratorSwift::GenerateStructModel(const std::shared_ptr<Package>& p, cons
     WriteLineIndent("func serialize(value: " + struct_name + ") throws -> Int {");
     Indent(1);
     WriteLineIndent("let fbeBegin = try createBegin()");
-    WriteLineIndent("try model.set(fbeValue: value)");
+    WriteLineIndent("try model.set(value: value)");
     WriteLineIndent("return createEnd(fbeBegin: fbeBegin)");
     Indent(-1);
     WriteLineIndent("}");
@@ -6253,7 +6266,7 @@ void GeneratorSwift::GenerateStructModel(const std::shared_ptr<Package>& p, cons
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("valueRef = model.get(fbeValue: valueRef)");
+    WriteLineIndent("valueRef = model.get(fbeValue: &valueRef)");
     WriteLineIndent("return fbeFullSize");
     Indent(-1);
     WriteLineIndent("}");
@@ -6339,7 +6352,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
     // Generate struct final model FBE properties
     WriteLine();
     WriteLineIndent("// Get the allocation size");
-    WriteLineIndent("func fbeAllocationSize(fbeValue: " + struct_name + ") -> Int {");
+    WriteLineIndent("func fbeAllocationSize(value fbeValue: " + struct_name + ") -> Int {");
     Indent(1);
     WriteLineIndent("return 0");
     Indent(1);
@@ -6411,10 +6424,19 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
     // Generate struct final model get() methods
     WriteLine();
     WriteLineIndent("// Get the struct value");
-    WriteLineIndent("func get(fbeSize: inout Size, fbeValue: " + struct_name + " = " + struct_name + "()) -> " + struct_name + " {");
+    WriteLineIndent("func get(size: inout Size) -> " + struct_name + " {");
+    Indent(1);
+    WriteLineIndent("var fbeValue = " + struct_name + "()");
+    WriteLineIndent("return get(size: &size, fbeValue: &fbeValue)");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    WriteLine();
+    WriteLineIndent("// Get the struct value");
+    WriteLineIndent("func get(size: inout Size, fbeValue: inout " + struct_name + ") -> " + struct_name + " {");
     Indent(1);
     WriteLineIndent("_buffer.shift(offset: fbeOffset)");
-    WriteLineIndent("fbeSize.value = getFields(fbeValue: fbeValue)");
+    WriteLineIndent("size.value = getFields(fbeValue: &fbeValue)");
     WriteLineIndent("_buffer.unshift(offset: fbeOffset)");
     WriteLineIndent("return fbeValue");
     Indent(-1);
@@ -6423,7 +6445,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
     // Generate struct final model getFields() method
     WriteLine();
     WriteLineIndent("// Get the struct fields values");
-    WriteLineIndent("func getFields(fbeValue: " + struct_name + ") -> Int {");
+    WriteLineIndent("func getFields(fbeValue: inout " + struct_name + ") -> Int {");
     Indent(1);
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
@@ -6445,7 +6467,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
                 WriteLine();
                 WriteLineIndent(*field->name + ".fbeOffset = fbeCurrentOffset");
                 if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                    WriteLineIndent("fbeFieldSize.value = " + *field->name + ".get(size: &fbeValue." + *field->name + ")");
+                    WriteLineIndent("fbeFieldSize.value = " + *field->name + ".get(values: &fbeValue." + *field->name + ")");
                 else
                     WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(size: &fbeFieldSize)");
                 WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
@@ -6463,10 +6485,10 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
     // Generate struct final model set() method
     WriteLine();
     WriteLineIndent("// Set the struct value");
-    WriteLineIndent("func set(fbeValue: " + struct_name + ") -> Int {");
+    WriteLineIndent("func set(value fbeValue: " + struct_name + ") throws -> Int {");
     Indent(1);
     WriteLineIndent("_buffer.shift(offset: fbeOffset)");
-    WriteLineIndent("let fbeSize = setFields(fbeValue: fbeValue)");
+    WriteLineIndent("let fbeSize = try setFields(fbeValue: fbeValue)");
     WriteLineIndent("_buffer.unshift(offset: fbeOffset)");
     WriteLineIndent("return fbeSize");
     Indent(-1);
@@ -6475,7 +6497,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
     // Generate struct final model setFields() method
     WriteLine();
     WriteLineIndent("// Set the struct fields values");
-    WriteLineIndent("func setFields(fbeValue: " + struct_name + ") -> Int {");
+    WriteLineIndent("func setFields(fbeValue: " + struct_name + ") throws -> Int {");
     Indent(1);
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
@@ -6496,7 +6518,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
             {
                 WriteLine();
                 WriteLineIndent(*field->name + ".fbeOffset = fbeCurrentOffset");
-                WriteLineIndent("fbeFieldSize.value = " + *field->name + ".set(value: fbeValue." + *field->name + ")");
+                WriteLineIndent("fbeFieldSize.value = try " + *field->name + ".set(value: fbeValue." + *field->name + ")");
                 WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
                 WriteLineIndent("fbeCurrentSize += fbeFieldSize.value");
             }
@@ -6595,7 +6617,7 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
     WriteLineIndent("let fbeInitialSize = buffer.size");
     WriteLine();
     WriteLineIndent("let fbeStructType = fbeType");
-    WriteLineIndent("var fbeStructSize = 8 + _model.fbeAllocationSize(fbeValue: value)");
+    WriteLineIndent("var fbeStructSize = 8 + _model.fbeAllocationSize(value: value)");
     WriteLineIndent("let fbeStructOffset = try buffer.allocate(size: fbeStructSize) - buffer.offset");
     WriteLineIndent("assert(buffer.offset + fbeStructOffset + fbeStructSize <= buffer.size, \"Model is broken!\")");
     WriteLineIndent("if ((buffer.offset + fbeStructOffset + fbeStructSize) > buffer.size) {");
@@ -6604,7 +6626,7 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("fbeStructSize = 8 + _model.set(fbeValue: value)");
+    WriteLineIndent("fbeStructSize = try _model.set(value: value) + 8");
     WriteLineIndent("try buffer.resize(size: fbeInitialSize + fbeStructSize)");
     WriteLine();
     WriteLineIndent("write(offset: _model.fbeOffset - 8, value: UInt32(fbeStructSize))");
@@ -6640,7 +6662,7 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("var fbeSize = Size()");
-    WriteLineIndent("valueRef = _model.get(fbeSize: &fbeSize, fbeValue: valueRef)");
+    WriteLineIndent("valueRef = _model.get(size: &fbeSize, fbeValue: &valueRef)");
     WriteLineIndent("return 8 + fbeSize.value");
     Indent(-1);
     WriteLineIndent("}");
@@ -6844,7 +6866,7 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent("if (logging)");
             WriteLineIndent("{");
             Indent(1);
-            WriteLineIndent("val message = value.toString()");
+            WriteLineIndent("val message = value.description");
             WriteLineIndent("onSendLog(message)");
             Indent(-1);
             WriteLineIndent("}");
@@ -7003,7 +7025,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
             WriteLineIndent("if (logging)");
             WriteLineIndent("{");
             Indent(1);
-            WriteLineIndent("val message = " + *s->name + "Value.toString()");
+            WriteLineIndent("val message = " + *s->name + "Value.description");
             WriteLineIndent("onReceiveLog(message)");
             Indent(-1);
             WriteLineIndent("}");
@@ -7504,7 +7526,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent("if (logging)");
             WriteLineIndent("{");
             Indent(1);
-            WriteLineIndent("val message = value.toString()");
+            WriteLineIndent("val message = value.description");
             WriteLineIndent("onSendLog(message)");
             Indent(-1);
             WriteLineIndent("}");
@@ -7552,7 +7574,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent("if (logging)");
             WriteLineIndent("{");
             Indent(1);
-            WriteLineIndent("val message = " + *s->name + "ReceiverValue.toString()");
+            WriteLineIndent("val message = " + *s->name + "ReceiverValue.description");
             WriteLineIndent("onReceiveLog(message)");
             Indent(-1);
             WriteLineIndent("}");
@@ -7706,7 +7728,7 @@ bool GeneratorSwift::IsPrimitiveType(const std::string& type, bool optional)
 
 bool GeneratorSwift::IsUnsignedType(const std::string& type)
 {
-    return ((type == "uint8") || (type == "uint16") || (type == "uint32") || (type == "uint64"));
+    return ((type == "byte") || (type == "uint8") || (type == "uint16") || (type == "uint32") || (type == "uint64"));
 }
 
 std::string GeneratorSwift::CreatePackagePath(const std::string& domain, const std::string& package)
@@ -7719,27 +7741,27 @@ std::string GeneratorSwift::CreatePackagePath(const std::string& domain, const s
 std::string GeneratorSwift::ConvertEnumBase(const std::string& type)
 {
     if (type == "byte")
-        return "Byte";
+        return "UInt8";
     else if (type == "char")
-        return "Byte";
+        return "Int8";
     else if (type == "wchar")
-        return "Int";
+        return "Int32";
     else if (type == "int8")
-        return "Byte";
+        return "Int8";
     else if (type == "uint8")
-        return "UByte";
+        return "UInt8";
     else if (type == "int16")
-        return "Short";
+        return "Int16";
     else if (type == "uint16")
-        return "UShort";
+        return "UInt16";
     else if (type == "int32")
-        return "Int";
+        return "Int32";
     else if (type == "uint32")
-        return "UInt";
+        return "UInt32";
     else if (type == "int64")
-        return "Long";
+        return "Int64";
     else if (type == "uint64")
-        return "ULong";
+        return "UInt64";
 
     yyerror("Unsupported enum base type - " + type);
     return "";
@@ -7748,27 +7770,27 @@ std::string GeneratorSwift::ConvertEnumBase(const std::string& type)
 std::string GeneratorSwift::ConvertEnumType(const std::string& type)
 {
     if (type == "byte")
-        return "Byte";
+        return "UInt8";
     else if (type == "char")
-        return "Byte";
+        return "Int8";
     else if (type == "wchar")
-        return "Int";
+        return "Int32";
     else if (type == "int8")
-        return "Byte";
+        return "Int8";
     else if (type == "uint8")
-        return "UByte";
+        return "UInt8";
     else if (type == "int16")
-        return "Short";
+        return "Int16";
     else if (type == "uint16")
-        return "UShort";
+        return "UInt16";
     else if (type == "int32")
-        return "Int";
+        return "Int32";
     else if (type == "uint32")
-        return "UInt";
+        return "UInt32";
     else if (type == "int64")
-        return "Long";
+        return "Int64";
     else if (type == "uint64")
-        return "ULong";
+        return "UInt64";
 
     yyerror("Unsupported enum base type - " + type);
     return "";
@@ -7878,27 +7900,27 @@ std::string GeneratorSwift::ConvertEnumFrom(const std::string& type)
 std::string GeneratorSwift::ConvertEnumTo(const std::string& type)
 {
     if (type == "byte")
-        return ".toByte()";
+        return ".uint8Value";
     else if (type == "char")
-        return ".toByte()";
+        return ".int8Value";
     else if (type == "wchar")
-        return ".toInt()";
+        return ".int32Value";
     else if (type == "int8")
-        return ".toByte()";
+        return ".int8Value";
     else if (type == "uint8")
-        return ".toUByte()";
+        return ".uint8Value";
     else if (type == "int16")
-        return ".toShort()";
+        return ".int16Value";
     else if (type == "uint16")
-        return ".toUShort()";
+        return ".uint16Value";
     else if (type == "int32")
-        return ".toInt()";
+        return ".int32Value";
     else if (type == "uint32")
-        return ".toUInt()";
+        return ".uint32Value";
     else if (type == "int64")
-        return ".toLong()";
+        return ".int64Value";
     else if (type == "uint64")
-        return ".toULong()";
+        return ".uint64Value";
 
     yyerror("Unsupported enum base type - " + type);
     return "";
@@ -7907,23 +7929,23 @@ std::string GeneratorSwift::ConvertEnumTo(const std::string& type)
 std::string GeneratorSwift::ConvertEnumFlags(const std::string& type)
 {
     if (type == "byte")
-        return ".toInt()";
+        return ".intValue";
     else if (type == "int8")
-        return ".toInt()";
+        return ".intValue";
     else if (type == "uint8")
-        return ".toUInt()";
+        return ".uintValue";
     else if (type == "int16")
-        return ".toInt()";
+        return ".intValue";
     else if (type == "uint16")
-        return ".toUInt()";
+        return ".uintValue";
     else if (type == "int32")
-        return ".toInt()";
+        return ".intValue";
     else if (type == "uint32")
-        return ".toUInt()";
+        return ".uintValue";
     else if (type == "int64")
-        return ".toLong()";
+        return ".int64Value";
     else if (type == "uint64")
-        return ".toULong()";
+        return ".uint64Value";
 
     yyerror("Unsupported enum base type - " + type);
     return "";
@@ -7945,7 +7967,7 @@ std::string GeneratorSwift::ConvertEnumConstant(const std::string& base, const s
             bool first = true;
             for (const auto& it : flags)
             {
-                result += (first ? "" : " or ") + CppCommon::StringUtils::ToTrim(it) + ".raw" + (flag ? ConvertEnumFlags(base) : "");
+                result += std::string(first ? "" : " | ") + "" + CppCommon::StringUtils::ToTrim(it) + ".rawValue";
                 first = false;
             }
         }
@@ -7990,7 +8012,7 @@ std::string GeneratorSwift::ConvertPrimitiveTypeName(const std::string& type)
     else if (type == "uint16")
         return "UShort";
     else if (type == "int32")
-        return "Int";
+        return "Int32";
     else if (type == "uint32")
         return "UInt";
     else if (type == "int64")
@@ -8028,7 +8050,7 @@ std::string GeneratorSwift::ConvertTypeName(const std::string& domain, const std
     else if (type == "uint16")
         return "UShort" + opt;
     else if (type == "int32")
-        return "Int" + opt;
+        return "Int32" + opt;
     else if (type == "uint32")
         return "UInt" + opt;
     else if (type == "int64")
@@ -8061,7 +8083,7 @@ std::string GeneratorSwift::ConvertTypeName(const std::string& domain, const std
     else if (!package.empty())
         ns = domain + package + ".";
 
-    return ns + t + opt;
+    return t + opt;
 }
 
 std::string GeneratorSwift::ConvertTypeName(const std::string& domain, const std::string& package, const StructField& field, bool typeless)
@@ -8273,7 +8295,7 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
     else if (value == "false")
         return "false";
     else if (value == "null")
-        return "null";
+        return "nil";
     else if (value == "min")
     {
         if (type == "byte")
@@ -8348,29 +8370,14 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
             for (const auto& it : flags)
             {
                 std::string flag = CppCommon::StringUtils::ToTrim(it);
-                size_t pos = flag.find_last_of('.');
-                if (pos != std::string::npos)
-                {
-                    if (CppCommon::StringUtils::CountAll(flag, ".") > 1)
-                        flag = domain + flag;
-                    else
-                        flag = (package.empty() ? "" : (domain + package + ".")) + flag;
-                }
-                result += (first ? "" : ", ") + flag + ".value";
+                result += (first ? "" : ", ") + flag + ".value!";
                 first = false;
             }
-            result = (package.empty() ? "" : (domain + package + ".")) + type + ".fromSet(java.util.EnumSet.of(" + result + "))";
+            result = type + +".fromSet(set: [" + result + "])";
         }
         else
         {
-            size_t pos = result.find_last_of('.');
-            if (pos != std::string::npos)
-            {
-                if (CppCommon::StringUtils::CountAll(result, ".") > 1)
-                    result = domain + result;
-                else
-                    result = (package.empty() ? "" : (domain + package + ".")) + result;
-            }
+            result = result;
         }
     }
 
@@ -8413,29 +8420,29 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
     if (type == "bool")
         return "false";
     else if (type == "byte")
-        return "0.toByte()";
+        return "0";
     else if (type == "bytes")
-        return "ByteArray(0)";
+        return "Data()";
     else if ((type == "char") || (type == "wchar"))
-        return "'\\u0000'";
+        return "0";
     else if (type == "int8")
-        return "0.toByte()";
+        return "0";
     else if (type == "uint8")
-        return "0.toUByte()";
+        return "0";
     else if (type == "int16")
-        return "0.toShort()";
+        return "0";
     else if (type == "uint16")
-        return "0.toUShort()";
+        return "0";
     else if (type == "int32")
         return "0";
     else if (type == "uint32")
         return "0u";
     else if (type == "int64")
-        return "0L";
+        return "0";
     else if (type == "uint64")
-        return "0uL";
+        return "0";
     else if (type == "float")
-        return "0.0f";
+        return "0.0";
     else if (type == "double")
         return "0.0";
     else if (type == "decimal")
@@ -8460,7 +8467,7 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
     else if (!package.empty())
         ns = domain + package + ".";
 
-    return ns + t + "()";
+    return t + "()";
 }
 
 std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std::string& package, const StructField& field)
@@ -8476,7 +8483,7 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
     else if (field.vector || field.list || field.set || field.map || field.hash)
         return ConvertTypeName(domain, package, field, true) + "()";
     else if (field.optional)
-        return "null";
+        return "nil";
     else if (!IsPackageType(*field.type))
         return ConvertTypeName(domain, package, field, true) + "()";
 
@@ -8485,28 +8492,28 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
 
 std::string GeneratorSwift::ConvertOutputStreamType(const std::string& type, const std::string& name, bool optional)
 {
-    std::string opt = optional ? "!!" : "";
+    std::string opt = optional ? "!" : "";
 
     if (type == "bool")
-        return ".append(if (" + name + opt + ") \"true\" else \"false\")";
+        return ".append(" + name + opt + " ? \"true\" : \"false\")";
     else if (type == "bytes")
-        return ".append(\"bytes[\").append(" + name + opt + ".size).append(\"]\")";
+        return ".append(\"bytes[\"); sd.append(" + name + opt + ".size); sd.append(\"]\")";
     else if ((type == "char") || (type == "wchar"))
-        return ".append(\"'\").append(" + name + opt + ").append(\"'\")";
+        return ".append(\"'\"); sd.append(" + name + opt + "); sd.append(\"'\")";
     else if ((type == "string") || (type == "uuid"))
         return ".append(\"\\\"\"); sb.append(" + name + opt + "); sb.append(\"\\\"\")";
     else if (type == "timestamp")
-        return ((Version() < 8) ? ".append(" + name + opt + ".time * 1000000)" : ".append(" + name + opt + ".epochSecond * 1000000000 + " + name + opt + ".nano)");
+        return ((Version() < 8) ? "; sd.append(" + name + opt + ".time * 1000000)" : "; sd.append(" + name + opt + ".epochSecond * 1000000000 + " + name + opt + ".nano)");
     else
         return ".append(" + name + opt + ".description)";
 }
 
 std::string GeneratorSwift::ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate, bool nullable)
 {
-    std::string comma = separate ? ".append(if (first) \"\" else \",\")" : "";
+    std::string comma = separate ? ".append(first ? \"\" : \",\"); sb" : "";
 
     if (optional)
-        return "if (" + name + " != null) sb" + comma + ConvertOutputStreamType(type, name, nullable) + "; else sb" + comma + ".append(\"null\")";
+        return "" + name + " != nil ? sb" + comma + ConvertOutputStreamType(type, name, nullable) + " : sb" + comma + ".append(\"null\")";
     else
         return "sb" + comma + ConvertOutputStreamType(type, name, false);
 }
