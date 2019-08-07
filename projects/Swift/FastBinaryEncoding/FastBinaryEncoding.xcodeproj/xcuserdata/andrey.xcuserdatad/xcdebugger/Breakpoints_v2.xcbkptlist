@@ -160,23 +160,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3CCE1007-7A02-4E53-A832-6BCD70F913FD"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FastBinaryEncoding/chronoxor/proto/fbe/FinalModelBalance.swift"
-            timestampString = "586700908.581496"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "setFields(fbeValue:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "FCFF0EDF-015B-4ED6-9BC9-6E8EA606EBCF"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"

@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 // Fast Binary Encoding buffer based on dynamic byte array
 class Buffer {
     

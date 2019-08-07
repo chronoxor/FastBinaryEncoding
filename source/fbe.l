@@ -15,6 +15,7 @@ E [Ee][+-]?{D}+
 #include "generator_kotlin.h"
 #include "generator_python.h"
 #include "generator_ruby.h"
+#include "generator_swift.h"
 
 #include <OptionParser.h>
 
@@ -195,6 +196,7 @@ int main(int argc, char** argv)
     parser.add_option("--kotlin").dest("kotlin").action("store_true").set_default(0).help("Generate Kotlin code");
     parser.add_option("--python").dest("python").action("store_true").set_default(0).help("Generate Python code");
     parser.add_option("--ruby").dest("ruby").action("store_true").set_default(0).help("Generate Ruby code");
+    parser.add_option("--swift").dest("swift").action("store_true").set_default(0).help("Generate Swift code");
     parser.add_option("--final").dest("final").action("store_true").set_default(0).help("Generate Final serialization code");
     parser.add_option("--json").dest("json").action("store_true").set_default(0).help("Generate JSON serialization code");
     parser.add_option("--proto").dest("proto").action("store_true").set_default(0).help("Generate Sender/Receiver protocol code");
@@ -226,6 +228,7 @@ int main(int argc, char** argv)
     bool kotlin7 = options.get("kotlin7");
     bool python = options.get("python");
     bool ruby = options.get("ruby");
+    bool swift = options.get("swift");
     bool final = options.get("final");
     bool json = options.get("json");
     bool proto = options.get("proto");
@@ -329,6 +332,12 @@ int main(int argc, char** argv)
         if (!quiet) std::cout << "Generating Ruby code...";
         FBE::GeneratorRuby(input, output, (indent ? indent : 2), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
+    }
+    if (swift)
+    {
+        if (!quiet) std::cout << "Generating Swift code...";
+        FBE::GeneratorSwift(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
+        if (!quiet) std::cout << "Done! :)" << std::endl;
     }
 
     // Destroy the lexical parser

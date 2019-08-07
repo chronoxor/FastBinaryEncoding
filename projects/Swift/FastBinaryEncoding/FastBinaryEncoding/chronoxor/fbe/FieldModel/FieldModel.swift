@@ -88,5 +88,4 @@ extension FieldModel {
     func write(offset: Int, value: Data, valueOffset: Int, valueSize: Int) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value, valueOffset: valueOffset, valueSize: valueSize) }
     func write(offset: Int, value: Data.Element, valueCount: Int) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value, valueCount: valueCount) }
     func write(offset: Int, value: UUID) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-
 }

@@ -4,12 +4,17 @@
 // Version: 1.3.0.0
 
 
-// Fast Binary Encoding Balance model
-class BalanceModel: Model {
-    let model: FieldModelBalance
-    
+// Fast Binary Encoding Order model
+class OrderModel: Model {
+    let model: FieldModelOrder
+
+    override init(buffer: Buffer) {
+        model = FieldModelOrder(buffer: buffer, offset: 4)
+        super.init(buffer: buffer)
+    }
+
     override init(buffer: Buffer = Buffer()) {
-        model = FieldModelBalance(buffer: buffer, offset: 4)
+        model = FieldModelOrder(buffer: buffer, offset: 4)
         super.init(buffer: buffer)
     }
 
@@ -17,7 +22,7 @@ class BalanceModel: Model {
     func fbeSize() -> Int { model.fbeSize + model.fbeExtra }
     // Model type
     var fbeType: Int = fbeTypeConst
-    static let fbeTypeConst: Int = FieldModelBalance.fbeTypeConst
+    static let fbeTypeConst: Int = FieldModelOrder.fbeTypeConst
 
     // Check if the struct value is valid
     func verify() -> Bool {
@@ -47,26 +52,26 @@ class BalanceModel: Model {
     }
 
     // Serialize the struct value
-    func serialize(value: Balance) throws -> Int {
+    func serialize(value: Order) throws -> Int {
         let fbeBegin = try createBegin()
         try model.set(fbeValue: value)
         return createEnd(fbeBegin: fbeBegin)
     }
 
     // Deserialize the struct value
-    func deserialize() -> Balance { var value = Balance(); _ = deserialize(value: &value); return value }
-    func deserialize(value: inout Balance) -> Int {
+    func deserialize() -> Order { var value = Order(); _ = deserialize(value: &value); return value }
+    func deserialize(value: inout Order) -> Int {
         var valueRef = value
 
         if buffer.offset + model.fbeOffset - 4 > buffer.size {
-            valueRef = Balance()
+            valueRef = Order()
             return 0
         }
 
         let fbeFullSize = Int(readUInt32(offset: model.fbeOffset - 4))
         assert(fbeFullSize >= model.fbeSize, "Model is broken!")
         if (fbeFullSize < model.fbeSize) {
-            valueRef = Balance()
+            valueRef = Order()
             return 0
         }
 

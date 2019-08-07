@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		550E8A5C22FAC7DE003EE4C9 /* FieldModelOptionalBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550E8A5B22FAC7DE003EE4C9 /* FieldModelOptionalBalance.swift */; };
+		550E8A5E22FACFE2003EE4C9 /* FieldModelVectorOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550E8A5D22FACFE2003EE4C9 /* FieldModelVectorOrder.swift */; };
+		550E8A6022FAD58E003EE4C9 /* FieldModelOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550E8A5F22FAD58E003EE4C9 /* FieldModelOrder.swift */; };
+		550E8A6222FADFE3003EE4C9 /* FinalModelOptionalBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550E8A6122FADFE3003EE4C9 /* FinalModelOptionalBalance.swift */; };
+		550E8A6422FAE3AF003EE4C9 /* FinalModelVectorOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550E8A6322FAE3AF003EE4C9 /* FinalModelVectorOrder.swift */; };
+		550E8A6622FAE3F4003EE4C9 /* FinalModelOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550E8A6522FAE3F4003EE4C9 /* FinalModelOrder.swift */; };
 		5521615522F812E8009773A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5521615422F812E8009773A3 /* AppDelegate.swift */; };
 		5521615722F812E8009773A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5521615622F812E8009773A3 /* ViewController.swift */; };
 		5521615A22F812E8009773A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5521615822F812E8009773A3 /* Main.storyboard */; };
@@ -71,9 +77,15 @@
 		552162C322F962CD009773A3 /* ReceiverEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552162C222F962CD009773A3 /* ReceiverEnums.swift */; };
 		552162C522F9654D009773A3 /* SenderEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552162C422F9654D009773A3 /* SenderEnums.swift */; };
 		552162C722F967F9009773A3 /* FinalModelEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552162C622F967F9009773A3 /* FinalModelEnums.swift */; };
+		557ECCE622FAC2F60066B367 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557ECCE522FAC2F60066B367 /* Account.swift */; };
+		557ECCE922FAC30D0066B367 /* FieldModelAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557ECCE722FAC30D0066B367 /* FieldModelAccount.swift */; };
+		557ECCEC22FAC3A30066B367 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557ECCEB22FAC3A30066B367 /* Order.swift */; };
+		557ECCF022FAC3AF0066B367 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557ECCEE22FAC3AF0066B367 /* OrderModel.swift */; };
 		5593406622F9764B0039D35E /* FinalReceiverEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5593406522F9764B0039D35E /* FinalReceiverEnums.swift */; };
 		5593406822F9776B0039D35E /* EnumsFinalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5593406722F9776B0039D35E /* EnumsFinalModel.swift */; };
 		5593406A22F97DEF0039D35E /* FinalSenderEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5593406922F97DEF0039D35E /* FinalSenderEnums.swift */; };
+		5593406C22F98C770039D35E /* AccountFinalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5593406B22F98C770039D35E /* AccountFinalModel.swift */; };
+		5593406E22F98CAB0039D35E /* FinalModelAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5593406D22F98CAB0039D35E /* FinalModelAccount.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +99,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		550E8A5B22FAC7DE003EE4C9 /* FieldModelOptionalBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldModelOptionalBalance.swift; sourceTree = "<group>"; };
+		550E8A5D22FACFE2003EE4C9 /* FieldModelVectorOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldModelVectorOrder.swift; sourceTree = "<group>"; };
+		550E8A5F22FAD58E003EE4C9 /* FieldModelOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FieldModelOrder.swift; path = ../../../../../../../bin/com/chronoxor/proto/fbe/FieldModelOrder.swift; sourceTree = "<group>"; };
+		550E8A6122FADFE3003EE4C9 /* FinalModelOptionalBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalModelOptionalBalance.swift; sourceTree = "<group>"; };
+		550E8A6322FAE3AF003EE4C9 /* FinalModelVectorOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalModelVectorOrder.swift; sourceTree = "<group>"; };
+		550E8A6522FAE3F4003EE4C9 /* FinalModelOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinalModelOrder.swift; path = ../../../../../../../bin/com/chronoxor/proto/fbe/FinalModelOrder.swift; sourceTree = "<group>"; };
 		5521615122F812E8009773A3 /* FastBinaryEncoding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FastBinaryEncoding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5521615422F812E8009773A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5521615622F812E8009773A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -155,9 +173,15 @@
 		552162C222F962CD009773A3 /* ReceiverEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverEnums.swift; sourceTree = "<group>"; };
 		552162C422F9654D009773A3 /* SenderEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderEnums.swift; sourceTree = "<group>"; };
 		552162C622F967F9009773A3 /* FinalModelEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalModelEnums.swift; sourceTree = "<group>"; };
+		557ECCE522FAC2F60066B367 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		557ECCE722FAC30D0066B367 /* FieldModelAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FieldModelAccount.swift; path = ../../../../../../../bin/com/chronoxor/proto/fbe/FieldModelAccount.swift; sourceTree = "<group>"; };
+		557ECCEB22FAC3A30066B367 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		557ECCEE22FAC3AF0066B367 /* OrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrderModel.swift; path = FastBinaryEncoding/chronoxor/proto/OrderModel.swift; sourceTree = SOURCE_ROOT; };
 		5593406522F9764B0039D35E /* FinalReceiverEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalReceiverEnums.swift; sourceTree = "<group>"; };
 		5593406722F9776B0039D35E /* EnumsFinalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumsFinalModel.swift; sourceTree = "<group>"; };
 		5593406922F97DEF0039D35E /* FinalSenderEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalSenderEnums.swift; sourceTree = "<group>"; };
+		5593406B22F98C770039D35E /* AccountFinalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFinalModel.swift; sourceTree = "<group>"; };
+		5593406D22F98CAB0039D35E /* FinalModelAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalModelAccount.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +260,8 @@
 			children = (
 				5521624022F82E1B009773A3 /* fbe */,
 				5521624922F82E1B009773A3 /* Balance.swift */,
+				557ECCE522FAC2F60066B367 /* Account.swift */,
+				557ECCEB22FAC3A30066B367 /* Order.swift */,
 			);
 			path = proto;
 			sourceTree = "<group>";
@@ -243,8 +269,15 @@
 		5521624022F82E1B009773A3 /* fbe */ = {
 			isa = PBXGroup;
 			children = (
+				550E8A6522FAE3F4003EE4C9 /* FinalModelOrder.swift */,
+				557ECCE722FAC30D0066B367 /* FieldModelAccount.swift */,
+				5593406D22F98CAB0039D35E /* FinalModelAccount.swift */,
+				5593406B22F98C770039D35E /* AccountFinalModel.swift */,
 				5521624122F82E1B009773A3 /* BalanceModel.swift */,
 				5521624222F82E1B009773A3 /* FieldModelBalance.swift */,
+				550E8A5B22FAC7DE003EE4C9 /* FieldModelOptionalBalance.swift */,
+				550E8A5F22FAD58E003EE4C9 /* FieldModelOrder.swift */,
+				550E8A5D22FACFE2003EE4C9 /* FieldModelVectorOrder.swift */,
 				5521624622F82E1B009773A3 /* FinalModelBalance.swift */,
 				5521624522F82E1B009773A3 /* BalanceFinalModel.swift */,
 				5521624322F82E1B009773A3 /* Sender.swift */,
@@ -252,6 +285,9 @@
 				5521624722F82E1B009773A3 /* ReceiverListener.swift */,
 				5521624822F82E1B009773A3 /* Reciver.swift */,
 				5521624422F82E1B009773A3 /* FinalReceiver.swift */,
+				557ECCEE22FAC3AF0066B367 /* OrderModel.swift */,
+				550E8A6122FADFE3003EE4C9 /* FinalModelOptionalBalance.swift */,
+				550E8A6322FAE3AF003EE4C9 /* FinalModelVectorOrder.swift */,
 			);
 			path = fbe;
 			sourceTree = "<group>";
@@ -444,12 +480,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550E8A6422FAE3AF003EE4C9 /* FinalModelVectorOrder.swift in Sources */,
 				552162BB22F86C1A009773A3 /* EnumJson.swift in Sources */,
 				5521629922F82E1B009773A3 /* Size.swift in Sources */,
 				5593406622F9764B0039D35E /* FinalReceiverEnums.swift in Sources */,
 				5521627A22F82E1B009773A3 /* Reciver.swift in Sources */,
+				557ECCEC22FAC3A30066B367 /* Order.swift in Sources */,
 				552162BD22F86C34009773A3 /* EnumsModel.swift in Sources */,
 				5521615722F812E8009773A3 /* ViewController.swift in Sources */,
+				550E8A6222FADFE3003EE4C9 /* FinalModelOptionalBalance.swift in Sources */,
 				5521629A22F82E1B009773A3 /* FinalModelFloat.swift in Sources */,
 				5521629D22F82E1B009773A3 /* FinalModelChar.swift in Sources */,
 				5521628822F82E1B009773A3 /* FieldModelDate.swift in Sources */,
@@ -464,9 +503,12 @@
 				552162B222F849F7009773A3 /* FinalSender.swift in Sources */,
 				5521627F22F82E1B009773A3 /* ReceiverProtocol.swift in Sources */,
 				5521628422F82E1B009773A3 /* FieldModelUInt8.swift in Sources */,
+				550E8A6622FAE3F4003EE4C9 /* FinalModelOrder.swift in Sources */,
 				5521628322F82E1B009773A3 /* FieldModelString.swift in Sources */,
 				5521629822F82E1B009773A3 /* FinalModelInt8.swift in Sources */,
+				550E8A5C22FAC7DE003EE4C9 /* FieldModelOptionalBalance.swift in Sources */,
 				5521627322F82E1B009773A3 /* BalanceModel.swift in Sources */,
+				550E8A5E22FACFE2003EE4C9 /* FieldModelVectorOrder.swift in Sources */,
 				5521628E22F82E1B009773A3 /* FieldModelInt8.swift in Sources */,
 				5521627822F82E1B009773A3 /* FinalModelBalance.swift in Sources */,
 				5521629E22F82E1B009773A3 /* FinalModel.swift in Sources */,
@@ -475,11 +517,13 @@
 				5521629B22F82E1B009773A3 /* FinalModelBytes.swift in Sources */,
 				5521629222F82E1B009773A3 /* FinalModelByte.swift in Sources */,
 				5521628922F82E1B009773A3 /* FieldModelChar.swift in Sources */,
+				557ECCF022FAC3AF0066B367 /* OrderModel.swift in Sources */,
 				5521627622F82E1B009773A3 /* FinalReceiver.swift in Sources */,
 				5521629422F82E1B009773A3 /* FinalModelInt32.swift in Sources */,
 				5521628022F82E1B009773A3 /* FieldModelInt16.swift in Sources */,
 				5521629F22F82E1B009773A3 /* FinalModelDecimal.swift in Sources */,
 				5521628F22F82E1B009773A3 /* FieldModelByte.swift in Sources */,
+				550E8A6022FAD58E003EE4C9 /* FieldModelOrder.swift in Sources */,
 				5521629622F82E1B009773A3 /* FinalModelBoolean.swift in Sources */,
 				552162B422F8597A009773A3 /* Enums.swift in Sources */,
 				5521628D22F82E1B009773A3 /* FieldModelUnt16.swift in Sources */,
@@ -492,10 +536,13 @@
 				5521629C22F82E1B009773A3 /* FinalModelDate.swift in Sources */,
 				552162C322F962CD009773A3 /* ReceiverEnums.swift in Sources */,
 				5521627922F82E1B009773A3 /* ReceiverListener.swift in Sources */,
+				5593406C22F98C770039D35E /* AccountFinalModel.swift in Sources */,
 				5521627D22F82E1B009773A3 /* Buffer.swift in Sources */,
+				557ECCE922FAC30D0066B367 /* FieldModelAccount.swift in Sources */,
 				5521627B22F82E1B009773A3 /* Balance.swift in Sources */,
 				552162C522F9654D009773A3 /* SenderEnums.swift in Sources */,
 				5521615522F812E8009773A3 /* AppDelegate.swift in Sources */,
+				557ECCE622FAC2F60066B367 /* Account.swift in Sources */,
 				5521628622F82E1B009773A3 /* FieldModelDecimal.swift in Sources */,
 				5521627722F82E1B009773A3 /* BalanceFinalModel.swift in Sources */,
 				5521629322F82E1B009773A3 /* FinalModelInt16.swift in Sources */,
@@ -505,6 +552,7 @@
 				5521627522F82E1B009773A3 /* Sender.swift in Sources */,
 				552162B922F86C08009773A3 /* Client.swift in Sources */,
 				552162C722F967F9009773A3 /* FinalModelEnums.swift in Sources */,
+				5593406E22F98CAB0039D35E /* FinalModelAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

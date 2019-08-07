@@ -12,6 +12,11 @@ class FinalModelInt32: FinalModel {
     var _buffer = Buffer()
     var _offset: Int = 0
     
+    init(buffer: Buffer, offset: Int) {
+        _buffer = buffer
+        _offset = offset
+    }
+    
     func fbeAllocationSize(value: Int32) -> Int {
         return fbeSize
     }
