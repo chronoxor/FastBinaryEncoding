@@ -29,7 +29,7 @@ open class FinalSender : com.chronoxor.fbe.Sender
     {
         when (obj)
         {
-            is com.chronoxor.enums.Enums -> return send(obj)
+            is com.chronoxor.enums.Enums -> if (obj.fbeType == EnumsModel.fbeType) return send(obj)
         }
 
         return 0

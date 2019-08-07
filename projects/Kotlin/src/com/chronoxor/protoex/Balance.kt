@@ -12,6 +12,8 @@ open class Balance : com.chronoxor.proto.Balance
 {
     var locked: Double = 0.0
 
+    @Transient override var fbeType: Long = com.chronoxor.proto.Balance.fbeTypeConst
+
     constructor()
 
     constructor(parent: com.chronoxor.proto.Balance, locked: Double): super(parent)
@@ -91,6 +93,7 @@ open class Balance : com.chronoxor.proto.Balance
     }
 
     override fun toJson(): String = com.chronoxor.protoex.fbe.Json.engine.toJson(this)
+
     companion object
     {
         fun fromJson(json: String): Balance = com.chronoxor.protoex.fbe.Json.engine.fromJson(json, Balance::class.java)

@@ -21,6 +21,8 @@ open class StructList : Comparable<Any?>
     var f9: java.util.LinkedList<StructSimple> = java.util.LinkedList()
     var f10: java.util.LinkedList<StructSimple?> = java.util.LinkedList()
 
+    @Transient open var fbeType: Long = 131
+
     constructor()
 
     constructor(f1: java.util.LinkedList<Byte>, f2: java.util.LinkedList<Byte?>, f3: java.util.LinkedList<ByteArray>, f4: java.util.LinkedList<ByteArray?>, f5: java.util.LinkedList<EnumSimple>, f6: java.util.LinkedList<EnumSimple?>, f7: java.util.LinkedList<FlagsSimple>, f8: java.util.LinkedList<FlagsSimple?>, f9: java.util.LinkedList<StructSimple>, f10: java.util.LinkedList<StructSimple?>)
@@ -230,8 +232,10 @@ open class StructList : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 131
         fun fromJson(json: String): StructList = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructList::class.java)
     }
 }

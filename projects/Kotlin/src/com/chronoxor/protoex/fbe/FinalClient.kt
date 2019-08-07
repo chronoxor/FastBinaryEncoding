@@ -67,9 +67,9 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
     {
         when (obj)
         {
-            is com.chronoxor.protoex.Order -> return send(obj)
-            is com.chronoxor.protoex.Balance -> return send(obj)
-            is com.chronoxor.protoex.Account -> return send(obj)
+            is com.chronoxor.protoex.Order -> if (obj.fbeType == OrderSenderModel.fbeType) return send(obj)
+            is com.chronoxor.protoex.Balance -> if (obj.fbeType == BalanceSenderModel.fbeType) return send(obj)
+            is com.chronoxor.protoex.Account -> if (obj.fbeType == AccountSenderModel.fbeType) return send(obj)
         }
 
         // Try to send using imported clients

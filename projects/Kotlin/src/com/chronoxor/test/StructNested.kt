@@ -23,6 +23,8 @@ open class StructNested : StructOptional
     var f1010: StructOptional = StructOptional()
     var f1011: StructOptional? = null
 
+    @Transient override var fbeType: Long = 112
+
     constructor()
 
     constructor(parent: StructOptional, f1000: EnumSimple, f1001: EnumSimple?, f1002: EnumTyped, f1003: EnumTyped?, f1004: FlagsSimple, f1005: FlagsSimple?, f1006: FlagsTyped, f1007: FlagsTyped?, f1008: StructSimple, f1009: StructSimple?, f1010: StructOptional, f1011: StructOptional?): super(parent)
@@ -135,6 +137,7 @@ open class StructNested : StructOptional
     }
 
     override fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
         fun fromJson(json: String): StructNested = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructNested::class.java)

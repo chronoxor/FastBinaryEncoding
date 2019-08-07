@@ -57,9 +57,9 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
     {
         when (obj)
         {
-            is com.chronoxor.proto.Order -> return send(obj)
-            is com.chronoxor.proto.Balance -> return send(obj)
-            is com.chronoxor.proto.Account -> return send(obj)
+            is com.chronoxor.proto.Order -> if (obj.fbeType == OrderSenderModel.fbeType) return send(obj)
+            is com.chronoxor.proto.Balance -> if (obj.fbeType == BalanceSenderModel.fbeType) return send(obj)
+            is com.chronoxor.proto.Account -> if (obj.fbeType == AccountSenderModel.fbeType) return send(obj)
         }
 
         return 0

@@ -475,6 +475,8 @@ struct StructSimple
     ::proto::State f43;
     ::proto::Account f44;
 
+    size_t fbe_type() const noexcept { return 110; }
+
     StructSimple()
         : id((int32_t)0ll)
         , f1(false)
@@ -974,6 +976,8 @@ struct StructOptional : public ::test::StructSimple
     std::optional<::proto::State> f163;
     std::optional<::proto::Account> f164;
     std::optional<::proto::Account> f165;
+
+    size_t fbe_type() const noexcept { return 111; }
 
     StructOptional()
         : ::test::StructSimple()
@@ -1576,6 +1580,8 @@ struct StructNested : public ::test::StructOptional
     ::test::StructOptional f1010;
     std::optional<::test::StructOptional> f1011;
 
+    size_t fbe_type() const noexcept { return 112; }
+
     StructNested()
         : ::test::StructOptional()
         , f1000()
@@ -1790,6 +1796,8 @@ struct StructBytes
     std::optional<FBE::buffer_t> f2;
     std::optional<FBE::buffer_t> f3;
 
+    size_t fbe_type() const noexcept { return 120; }
+
     StructBytes()
         : f1()
         , f2()
@@ -1934,6 +1942,8 @@ struct StructArray
     std::array<std::optional<::test::FlagsSimple>, 2> f8;
     std::array<::test::StructSimple, 2> f9;
     std::array<std::optional<::test::StructSimple>, 2> f10;
+
+    size_t fbe_type() const noexcept { return 125; }
 
     StructArray()
         : f1()
@@ -2219,6 +2229,8 @@ struct StructVector
     std::vector<::test::StructSimple> f9;
     std::vector<std::optional<::test::StructSimple>> f10;
 
+    size_t fbe_type() const noexcept { return 130; }
+
     StructVector()
         : f1()
         , f2()
@@ -2503,6 +2515,8 @@ struct StructList
     std::list<::test::StructSimple> f9;
     std::list<std::optional<::test::StructSimple>> f10;
 
+    size_t fbe_type() const noexcept { return 131; }
+
     StructList()
         : f1()
         , f2()
@@ -2781,6 +2795,8 @@ struct StructSet
     std::set<::test::FlagsSimple> f3;
     std::set<::test::StructSimple> f4;
 
+    size_t fbe_type() const noexcept { return 132; }
+
     StructSet()
         : f1()
         , f2()
@@ -2968,6 +2984,8 @@ struct StructMap
     std::map<int32_t, std::optional<::test::FlagsSimple>> f8;
     std::map<int32_t, ::test::StructSimple> f9;
     std::map<int32_t, std::optional<::test::StructSimple>> f10;
+
+    size_t fbe_type() const noexcept { return 140; }
 
     StructMap()
         : f1()
@@ -3273,6 +3291,8 @@ struct StructHash
     std::unordered_map<std::string, ::test::StructSimple> f9;
     std::unordered_map<std::string, std::optional<::test::StructSimple>> f10;
 
+    size_t fbe_type() const noexcept { return 141; }
+
     StructHash()
         : f1()
         , f2()
@@ -3569,6 +3589,8 @@ struct StructHashEx
     std::unordered_map<::test::StructSimple, ::test::StructNested> f1;
     std::unordered_map<::test::StructSimple, std::optional<::test::StructNested>> f2;
 
+    size_t fbe_type() const noexcept { return 142; }
+
     StructHashEx()
         : f1()
         , f2()
@@ -3718,6 +3740,8 @@ namespace test {
 
 struct StructEmpty
 {
+
+    size_t fbe_type() const noexcept { return 143; }
 
     StructEmpty()
     {}

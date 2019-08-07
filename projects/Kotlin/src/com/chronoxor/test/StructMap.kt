@@ -21,6 +21,8 @@ open class StructMap : Comparable<Any?>
     var f9: java.util.TreeMap<Int, StructSimple> = java.util.TreeMap()
     var f10: java.util.TreeMap<Int, StructSimple?> = java.util.TreeMap()
 
+    @Transient open var fbeType: Long = 140
+
     constructor()
 
     constructor(f1: java.util.TreeMap<Int, Byte>, f2: java.util.TreeMap<Int, Byte?>, f3: java.util.TreeMap<Int, ByteArray>, f4: java.util.TreeMap<Int, ByteArray?>, f5: java.util.TreeMap<Int, EnumSimple>, f6: java.util.TreeMap<Int, EnumSimple?>, f7: java.util.TreeMap<Int, FlagsSimple>, f8: java.util.TreeMap<Int, FlagsSimple?>, f9: java.util.TreeMap<Int, StructSimple>, f10: java.util.TreeMap<Int, StructSimple?>)
@@ -250,8 +252,10 @@ open class StructMap : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 140
         fun fromJson(json: String): StructMap = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructMap::class.java)
     }
 }

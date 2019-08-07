@@ -21,6 +21,8 @@ open class StructHash : Comparable<Any?>
     var f9: java.util.HashMap<String, StructSimple> = java.util.HashMap()
     var f10: java.util.HashMap<String, StructSimple?> = java.util.HashMap()
 
+    @Transient open var fbeType: Long = 141
+
     constructor()
 
     constructor(f1: java.util.HashMap<String, Byte>, f2: java.util.HashMap<String, Byte?>, f3: java.util.HashMap<String, ByteArray>, f4: java.util.HashMap<String, ByteArray?>, f5: java.util.HashMap<String, EnumSimple>, f6: java.util.HashMap<String, EnumSimple?>, f7: java.util.HashMap<String, FlagsSimple>, f8: java.util.HashMap<String, FlagsSimple?>, f9: java.util.HashMap<String, StructSimple>, f10: java.util.HashMap<String, StructSimple?>)
@@ -250,8 +252,10 @@ open class StructHash : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 141
         fun fromJson(json: String): StructHash = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructHash::class.java)
     }
 }

@@ -17,6 +17,8 @@ open class Order : Comparable<Any?>
     var price: Double = 0.0
     var volume: Double = 0.0
 
+    @Transient open var fbeType: Long = 1
+
     constructor()
 
     constructor(id: Int, symbol: String, side: OrderSide, type: OrderType, price: Double, volume: Double)
@@ -110,8 +112,10 @@ open class Order : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.proto.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 1
         fun fromJson(json: String): Order = com.chronoxor.proto.fbe.Json.engine.fromJson(json, Order::class.java)
     }
 }

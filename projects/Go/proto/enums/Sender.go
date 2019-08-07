@@ -39,7 +39,9 @@ func (s *Sender) EnumsModel() *EnumsModel { return s.enumsModel }
 func (s *Sender) Send(value interface{}) (int, error) {
     switch value := value.(type) {
     case *Enums:
-        return s.SendEnums(value)
+        if value.FBEType() == s.enumsModel.FBEType() {
+            return s.SendEnums(value)
+        }
     }
     return 0, nil
 }

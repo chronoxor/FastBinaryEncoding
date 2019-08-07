@@ -179,6 +179,9 @@ func (s *StructSimple) Optional() *StructSimple {
     return s
 }
 
+// Get the FBE type
+func (s *StructSimple) FBEType() int { return 110 }
+
 // Convert struct to string
 func (s *StructSimple) String() string {
     var sb strings.Builder

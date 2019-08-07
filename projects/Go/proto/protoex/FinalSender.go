@@ -53,11 +53,17 @@ func (s *FinalSender) AccountModel() *AccountFinalModel { return s.accountModel 
 func (s *FinalSender) Send(value interface{}) (int, error) {
     switch value := value.(type) {
     case *Order:
-        return s.SendOrder(value)
+        if value.FBEType() == s.orderModel.FBEType() {
+            return s.SendOrder(value)
+        }
     case *Balance:
-        return s.SendBalance(value)
+        if value.FBEType() == s.balanceModel.FBEType() {
+            return s.SendBalance(value)
+        }
     case *Account:
-        return s.SendAccount(value)
+        if value.FBEType() == s.accountModel.FBEType() {
+            return s.SendAccount(value)
+        }
     }
     if result, err := s.protoSender.Send(value); (result > 0) || (err != nil) {
         return result, err

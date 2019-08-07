@@ -5618,6 +5618,14 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     Indent(-1);
     WriteLineIndent("}");
 
+    // Generate struct FBE type property
+    WriteLine();
+    WriteLineIndent("// Get the FBE type");
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("func (s *" + struct_name + ") FBEType() int { return s." + ConvertBaseName(base_type) + ".FBEType() }");
+    else
+        WriteLineIndent("func (s *" + struct_name + ") FBEType() int { return " + std::to_string(s->type) + " }");
+
     // Generate struct String() method
     WriteLine();
     WriteLineIndent("// Convert struct to string");
@@ -7275,7 +7283,11 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
         {
             WriteLineIndent("case *" + ConvertToUpper(*s->name) + ":");
             Indent(1);
+            WriteLineIndent("if value.FBEType() == s." + ConvertToLower(*s->name) + "Model.FBEType() {");
+            Indent(1);
             WriteLineIndent("return s.Send" + ConvertToUpper(*s->name) + "(value)");
+            Indent(-1);
+            WriteLineIndent("}");
             Indent(-1);
         }
         WriteLineIndent("}");

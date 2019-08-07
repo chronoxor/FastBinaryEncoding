@@ -99,6 +99,9 @@ func (s *Account) Optional() *Account {
     return s
 }
 
+// Get the FBE type
+func (s *Account) FBEType() int { return 3 }
+
 // Convert struct to string
 func (s *Account) String() string {
     var sb strings.Builder

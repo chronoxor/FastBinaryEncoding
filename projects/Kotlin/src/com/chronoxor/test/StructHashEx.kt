@@ -13,6 +13,8 @@ open class StructHashEx : Comparable<Any?>
     var f1: java.util.HashMap<StructSimple, StructNested> = java.util.HashMap()
     var f2: java.util.HashMap<StructSimple, StructNested?> = java.util.HashMap()
 
+    @Transient open var fbeType: Long = 142
+
     constructor()
 
     constructor(f1: java.util.HashMap<StructSimple, StructNested>, f2: java.util.HashMap<StructSimple, StructNested?>)
@@ -114,8 +116,10 @@ open class StructHashEx : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 142
         fun fromJson(json: String): StructHashEx = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructHashEx::class.java)
     }
 }

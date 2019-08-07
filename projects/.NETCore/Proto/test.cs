@@ -1614,6 +1614,14 @@ namespace test {
         public global::proto.State f43;
         public global::proto.Account f44;
 
+        public const long FBETypeConst = 110;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructSimple Default => new StructSimple
         {
             id = (int)0
@@ -3978,6 +3986,14 @@ namespace test {
         public global::proto.State? f163;
         public global::proto.Account? f164;
         public global::proto.Account? f165;
+
+        public const long FBETypeConst = 111;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
 
         public static StructOptional Default => new StructOptional
         {
@@ -7149,6 +7165,14 @@ namespace test {
         public StructOptional f1010;
         public StructOptional? f1011;
 
+        public const long FBETypeConst = 112;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructNested Default => new StructNested
         {
             parent = StructOptional.Default
@@ -8198,6 +8222,14 @@ namespace test {
         public MemoryStream f2;
         public MemoryStream f3;
 
+        public const long FBETypeConst = 120;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructBytes Default => new StructBytes
         {
             f1 = new MemoryStream(0)
@@ -8851,6 +8883,14 @@ namespace test {
         public FlagsSimple?[] f8;
         public StructSimple[] f9;
         public StructSimple?[] f10;
+
+        public const long FBETypeConst = 125;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
 
         public static StructArray Default => new StructArray
         {
@@ -9919,6 +9959,14 @@ namespace test {
         public List<StructSimple> f9;
         public List<StructSimple?> f10;
 
+        public const long FBETypeConst = 130;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructVector Default => new StructVector
         {
             f1 = new List<byte>()
@@ -10986,6 +11034,14 @@ namespace test {
         public LinkedList<StructSimple> f9;
         public LinkedList<StructSimple?> f10;
 
+        public const long FBETypeConst = 131;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructList Default => new StructList
         {
             f1 = new LinkedList<byte>()
@@ -12047,6 +12103,14 @@ namespace test {
         public HashSet<FlagsSimple> f3;
         public HashSet<StructSimple> f4;
 
+        public const long FBETypeConst = 132;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructSet Default => new StructSet
         {
             f1 = new HashSet<byte>()
@@ -12795,6 +12859,14 @@ namespace test {
         public SortedDictionary<int, FlagsSimple?> f8;
         public SortedDictionary<int, StructSimple> f9;
         public SortedDictionary<int, StructSimple?> f10;
+
+        public const long FBETypeConst = 140;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
 
         public static StructMap Default => new StructMap
         {
@@ -13883,6 +13955,14 @@ namespace test {
         public Dictionary<string, StructSimple> f9;
         public Dictionary<string, StructSimple?> f10;
 
+        public const long FBETypeConst = 141;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructHash Default => new StructHash
         {
             f1 = new Dictionary<string, byte>()
@@ -14962,6 +15042,14 @@ namespace test {
         public Dictionary<StructSimple, StructNested> f1;
         public Dictionary<StructSimple, StructNested?> f2;
 
+        public const long FBETypeConst = 142;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructHashEx Default => new StructHashEx
         {
             f1 = new Dictionary<StructSimple, StructNested>()
@@ -15598,6 +15686,14 @@ namespace test {
 
     public struct StructEmpty : IComparable, IComparable<StructEmpty>, IEquatable<StructEmpty>
     {
+
+        public const long FBETypeConst = 143;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
 
         public static StructEmpty Default => new StructEmpty
         {

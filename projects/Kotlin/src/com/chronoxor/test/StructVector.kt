@@ -21,6 +21,8 @@ open class StructVector : Comparable<Any?>
     var f9: java.util.ArrayList<StructSimple> = java.util.ArrayList()
     var f10: java.util.ArrayList<StructSimple?> = java.util.ArrayList()
 
+    @Transient open var fbeType: Long = 130
+
     constructor()
 
     constructor(f1: java.util.ArrayList<Byte>, f2: java.util.ArrayList<Byte?>, f3: java.util.ArrayList<ByteArray>, f4: java.util.ArrayList<ByteArray?>, f5: java.util.ArrayList<EnumSimple>, f6: java.util.ArrayList<EnumSimple?>, f7: java.util.ArrayList<FlagsSimple>, f8: java.util.ArrayList<FlagsSimple?>, f9: java.util.ArrayList<StructSimple>, f10: java.util.ArrayList<StructSimple?>)
@@ -230,8 +232,10 @@ open class StructVector : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 130
         fun fromJson(json: String): StructVector = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructVector::class.java)
     }
 }

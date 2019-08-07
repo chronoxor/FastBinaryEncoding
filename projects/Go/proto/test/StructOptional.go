@@ -222,6 +222,9 @@ func (s *StructOptional) Optional() *StructOptional {
     return s
 }
 
+// Get the FBE type
+func (s *StructOptional) FBEType() int { return 111 }
+
 // Convert struct to string
 func (s *StructOptional) String() string {
     var sb strings.Builder

@@ -105,6 +105,9 @@ func (s *StructArray) Optional() *StructArray {
     return s
 }
 
+// Get the FBE type
+func (s *StructArray) FBEType() int { return 125 }
+
 // Convert struct to string
 func (s *StructArray) String() string {
     var sb strings.Builder

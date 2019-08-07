@@ -7,6 +7,9 @@ package com.chronoxor.test;
 
 public class StructEmpty implements Comparable<Object>
 {
+    public static final long fbeTypeConst = 143;
+    public long fbeType() { return fbeTypeConst; }
+
     public StructEmpty() {}
 
     public StructEmpty(StructEmpty other)

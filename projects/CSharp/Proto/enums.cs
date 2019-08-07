@@ -2641,6 +2641,14 @@ namespace enums {
         public EnumUInt64 uint64b4;
         public EnumUInt64 uint64b5;
 
+        public const long FBETypeConst = 1;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static Enums Default => new Enums
         {
             byte0 = EnumByte.ENUM_VALUE_0

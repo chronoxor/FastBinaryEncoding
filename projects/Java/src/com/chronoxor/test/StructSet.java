@@ -12,6 +12,9 @@ public class StructSet implements Comparable<Object>
     public java.util.HashSet<FlagsSimple> f3 = new java.util.HashSet<FlagsSimple>();
     public java.util.HashSet<StructSimple> f4 = new java.util.HashSet<StructSimple>();
 
+    public static final long fbeTypeConst = 132;
+    public long fbeType() { return fbeTypeConst; }
+
     public StructSet() {}
 
     public StructSet(java.util.HashSet<Byte> f1, java.util.HashSet<EnumSimple> f2, java.util.HashSet<FlagsSimple> f3, java.util.HashSet<StructSimple> f4)

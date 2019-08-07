@@ -17,6 +17,8 @@ open class Account : Comparable<Any?>
     var asset: Balance? = null
     var orders: java.util.ArrayList<Order> = java.util.ArrayList()
 
+    @Transient open var fbeType: Long = 3
+
     constructor()
 
     constructor(id: Int, name: String, state: StateEx, wallet: Balance, asset: Balance?, orders: java.util.ArrayList<Order>)
@@ -121,8 +123,10 @@ open class Account : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.protoex.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 3
         fun fromJson(json: String): Account = com.chronoxor.protoex.fbe.Json.engine.fromJson(json, Account::class.java)
     }
 }

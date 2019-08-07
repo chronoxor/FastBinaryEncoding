@@ -38,17 +38,20 @@ public class Sender extends com.chronoxor.fbe.Sender
         if (obj instanceof com.chronoxor.protoex.Order)
         {
             com.chronoxor.protoex.Order value = (com.chronoxor.protoex.Order)obj;
-            return send(value);
+            if (value.fbeType() == OrderModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.protoex.Balance)
         {
             com.chronoxor.protoex.Balance value = (com.chronoxor.protoex.Balance)obj;
-            return send(value);
+            if (value.fbeType() == BalanceModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.protoex.Account)
         {
             com.chronoxor.protoex.Account value = (com.chronoxor.protoex.Account)obj;
-            return send(value);
+            if (value.fbeType() == AccountModel.fbeType())
+                return send(value);
         }
 
         // Try to send using imported senders

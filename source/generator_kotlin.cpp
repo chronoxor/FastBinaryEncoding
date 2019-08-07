@@ -5417,7 +5417,16 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
         WriteLine();
     }
 
+    // Generate struct FBE type property
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("@Transient override var fbeType: Long = " + ConvertTypeName(domain, "", *s->base, false) + ".fbeTypeConst");
+    else if (s->base && !s->base->empty())
+        WriteLineIndent("@Transient override var fbeType: Long = " + std::to_string(s->type));
+    else
+        WriteLineIndent("@Transient open var fbeType: Long = " + std::to_string(s->type));
+
     // Generate struct default constructor
+    WriteLine();
     WriteLineIndent("constructor()");
 
     // Generate struct initialization constructor
@@ -5730,15 +5739,20 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     if (JSON())
     {
         WriteLine();
-        WriteIndent(std::string((s->base && !s->base->empty()) ? "override" : "open") + " fun toJson(): String = " + domain + *p->name + ".fbe.Json.engine.toJson(this)");
-        WriteLine();
-        WriteLineIndent("companion object");
-        WriteLineIndent("{");
-        Indent(1);
-        WriteLineIndent("fun fromJson(json: String): " + *s->name + " = " + domain + *p->name + ".fbe.Json.engine.fromJson(json, " + *s->name + "::class.java)");
-        Indent(-1);
-        WriteLineIndent("}");
+        WriteLineIndent(std::string((s->base && !s->base->empty()) ? "override" : "open") + " fun toJson(): String = " + domain + *p->name + ".fbe.Json.engine.toJson(this)");
     }
+
+    // Generate struct companion object
+    WriteLine();
+    WriteLineIndent("companion object");
+    WriteLineIndent("{");
+    Indent(1);
+    if (!s->base || s->base->empty())
+        WriteLineIndent("const val fbeTypeConst: Long = " + std::to_string(s->type));
+    if (JSON())
+        WriteLineIndent("fun fromJson(json: String): " + *s->name + " = " + domain + *p->name + ".fbe.Json.engine.fromJson(json, " + *s->name + "::class.java)");
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate struct end
     Indent(-1);
@@ -6815,7 +6829,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent("is " + struct_name + " -> return send(obj)");
+            WriteLineIndent("is " + struct_name + " -> if (obj.fbeType == " + *s->name + "Model.fbeType) return send(obj)");
         }
         Indent(-1);
         WriteLineIndent("}");
@@ -7475,7 +7489,7 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent("is " + struct_name + " -> return send(obj)");
+            WriteLineIndent("is " + struct_name + " -> if (obj.fbeType == " + *s->name + "SenderModel.fbeType) return send(obj)");
         }
         Indent(-1);
         WriteLineIndent("}");

@@ -77,6 +77,8 @@ open class Enums : Comparable<Any?>
     var uint64b4: EnumUInt64 = EnumUInt64.ENUM_VALUE_4
     var uint64b5: EnumUInt64 = EnumUInt64.ENUM_VALUE_5
 
+    @Transient open var fbeType: Long = 1
+
     constructor()
 
     constructor(byte0: EnumByte, byte1: EnumByte, byte2: EnumByte, byte3: EnumByte, byte4: EnumByte, byte5: EnumByte, char0: EnumChar, char1: EnumChar, char2: EnumChar, char3: EnumChar, char4: EnumChar, char5: EnumChar, wchar0: EnumWChar, wchar1: EnumWChar, wchar2: EnumWChar, wchar3: EnumWChar, wchar4: EnumWChar, wchar5: EnumWChar, int8b0: EnumInt8, int8b1: EnumInt8, int8b2: EnumInt8, int8b3: EnumInt8, int8b4: EnumInt8, int8b5: EnumInt8, uint8b0: EnumUInt8, uint8b1: EnumUInt8, uint8b2: EnumUInt8, uint8b3: EnumUInt8, uint8b4: EnumUInt8, uint8b5: EnumUInt8, int16b0: EnumInt16, int16b1: EnumInt16, int16b2: EnumInt16, int16b3: EnumInt16, int16b4: EnumInt16, int16b5: EnumInt16, uint16b0: EnumUInt16, uint16b1: EnumUInt16, uint16b2: EnumUInt16, uint16b3: EnumUInt16, uint16b4: EnumUInt16, uint16b5: EnumUInt16, int32b0: EnumInt32, int32b1: EnumInt32, int32b2: EnumInt32, int32b3: EnumInt32, int32b4: EnumInt32, int32b5: EnumInt32, uint32b0: EnumUInt32, uint32b1: EnumUInt32, uint32b2: EnumUInt32, uint32b3: EnumUInt32, uint32b4: EnumUInt32, uint32b5: EnumUInt32, int64b0: EnumInt64, int64b1: EnumInt64, int64b2: EnumInt64, int64b3: EnumInt64, int64b4: EnumInt64, int64b5: EnumInt64, uint64b0: EnumUInt64, uint64b1: EnumUInt64, uint64b2: EnumUInt64, uint64b3: EnumUInt64, uint64b4: EnumUInt64, uint64b5: EnumUInt64)
@@ -344,8 +346,10 @@ open class Enums : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.enums.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 1
         fun fromJson(json: String): Enums = com.chronoxor.enums.fbe.Json.engine.fromJson(json, Enums::class.java)
     }
 }

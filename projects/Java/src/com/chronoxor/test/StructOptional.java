@@ -74,6 +74,9 @@ public class StructOptional extends StructSimple
     public com.chronoxor.proto.Account f164 = null;
     public com.chronoxor.proto.Account f165 = null;
 
+    public static final long fbeTypeConst = 111;
+    public long fbeType() { return fbeTypeConst; }
+
     public StructOptional() {}
 
     public StructOptional(StructSimple parent, Boolean f100, Boolean f101, Boolean f102, Byte f103, Byte f104, Byte f105, Character f106, Character f107, Character f108, Character f109, Character f110, Character f111, Byte f112, Byte f113, Byte f114, Byte f115, Byte f116, Byte f117, Short f118, Short f119, Short f120, Short f121, Short f122, Short f123, Integer f124, Integer f125, Integer f126, Integer f127, Integer f128, Integer f129, Long f130, Long f131, Long f132, Long f133, Long f134, Long f135, Float f136, Float f137, Float f138, Double f139, Double f140, Double f141, java.math.BigDecimal f142, java.math.BigDecimal f143, java.math.BigDecimal f144, String f145, String f146, String f147, java.time.Instant f148, java.time.Instant f149, java.time.Instant f150, java.util.UUID f151, java.util.UUID f152, java.util.UUID f153, com.chronoxor.proto.OrderSide f154, com.chronoxor.proto.OrderSide f155, com.chronoxor.proto.OrderType f156, com.chronoxor.proto.OrderType f157, com.chronoxor.proto.Order f158, com.chronoxor.proto.Order f159, com.chronoxor.proto.Balance f160, com.chronoxor.proto.Balance f161, com.chronoxor.proto.State f162, com.chronoxor.proto.State f163, com.chronoxor.proto.Account f164, com.chronoxor.proto.Account f165)

@@ -18,6 +18,9 @@ public class StructArray implements Comparable<Object>
     public StructSimple[] f9 = new StructSimple[2];
     public StructSimple[] f10 = new StructSimple[2];
 
+    public static final long fbeTypeConst = 125;
+    public long fbeType() { return fbeTypeConst; }
+
     public StructArray() {}
 
     public StructArray(byte[] f1, Byte[] f2, java.nio.ByteBuffer[] f3, java.nio.ByteBuffer[] f4, EnumSimple[] f5, EnumSimple[] f6, FlagsSimple[] f7, FlagsSimple[] f8, StructSimple[] f9, StructSimple[] f10)

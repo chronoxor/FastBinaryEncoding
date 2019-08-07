@@ -796,6 +796,14 @@ namespace protoex {
         public double tp;
         public double sl;
 
+        public const long FBETypeConst = 1;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static Order Default => new Order
         {
             id = (int)0
@@ -1653,6 +1661,14 @@ namespace protoex {
         public global::proto.Balance parent;
         public double locked;
 
+        public const long FBETypeConst = global::proto.Balance.FBETypeConst;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static Balance Default => new Balance
         {
             parent = global::proto.Balance.Default
@@ -2275,6 +2291,14 @@ namespace protoex {
         public Balance wallet;
         public Balance? asset;
         public List<Order> orders;
+
+        public const long FBETypeConst = 3;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
 
         public static Account Default => new Account
         {

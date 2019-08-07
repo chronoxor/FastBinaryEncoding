@@ -105,6 +105,9 @@ func (s *StructList) Optional() *StructList {
     return s
 }
 
+// Get the FBE type
+func (s *StructList) FBEType() int { return 131 }
+
 // Convert struct to string
 func (s *StructList) String() string {
     var sb strings.Builder

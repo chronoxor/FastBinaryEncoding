@@ -99,6 +99,9 @@ func (s *Order) Optional() *Order {
     return s
 }
 
+// Get the FBE type
+func (s *Order) FBEType() int { return 1 }
+
 // Convert struct to string
 func (s *Order) String() string {
     var sb strings.Builder

@@ -5143,7 +5143,15 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
         WriteLine();
     }
 
+    // Generate struct FBE type property
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("public static final long fbeTypeConst = " + ConvertTypeName(domain, "", *s->base, false) + ".fbeTypeConst;");
+    else
+        WriteLineIndent("public static final long fbeTypeConst = " + std::to_string(s->type) + ";");
+    WriteLineIndent("public long fbeType() { return fbeTypeConst; }");
+
     // Generate struct default constructor
+    WriteLine();
     WriteLineIndent("public " + *s->name + "() {}");
 
     // Generate struct initialization constructor
@@ -6581,7 +6589,10 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
             WriteLineIndent("{");
             Indent(1);
             WriteLineIndent(struct_name + " value = (" + struct_name + ")obj;");
+            WriteLineIndent("if (value.fbeType() == " + *s->name + "Model.fbeType())");
+            Indent(1);
             WriteLineIndent("return send(value);");
+            Indent(-1);
             Indent(-1);
             WriteLineIndent("}");
         }

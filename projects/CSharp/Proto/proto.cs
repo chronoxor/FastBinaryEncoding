@@ -776,6 +776,14 @@ namespace proto {
         public double price;
         public double volume;
 
+        public const long FBETypeConst = 1;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static Order Default => new Order
         {
             id = (int)0
@@ -1550,6 +1558,14 @@ namespace proto {
         public string currency;
         public double amount;
 
+        public const long FBETypeConst = 2;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static Balance Default => new Balance
         {
             currency = ""
@@ -2171,6 +2187,14 @@ namespace proto {
         public Balance wallet;
         public Balance? asset;
         public List<Order> orders;
+
+        public const long FBETypeConst = 3;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
 
         public static Account Default => new Account
         {

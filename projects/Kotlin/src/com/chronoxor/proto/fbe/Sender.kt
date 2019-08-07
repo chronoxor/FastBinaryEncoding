@@ -35,9 +35,9 @@ open class Sender : com.chronoxor.fbe.Sender
     {
         when (obj)
         {
-            is com.chronoxor.proto.Order -> return send(obj)
-            is com.chronoxor.proto.Balance -> return send(obj)
-            is com.chronoxor.proto.Account -> return send(obj)
+            is com.chronoxor.proto.Order -> if (obj.fbeType == OrderModel.fbeType) return send(obj)
+            is com.chronoxor.proto.Balance -> if (obj.fbeType == BalanceModel.fbeType) return send(obj)
+            is com.chronoxor.proto.Account -> if (obj.fbeType == AccountModel.fbeType) return send(obj)
         }
 
         return 0

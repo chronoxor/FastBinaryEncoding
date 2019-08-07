@@ -18,6 +18,9 @@ public class StructMap implements Comparable<Object>
     public java.util.TreeMap<Integer, StructSimple> f9 = new java.util.TreeMap<Integer, StructSimple>();
     public java.util.TreeMap<Integer, StructSimple> f10 = new java.util.TreeMap<Integer, StructSimple>();
 
+    public static final long fbeTypeConst = 140;
+    public long fbeType() { return fbeTypeConst; }
+
     public StructMap() {}
 
     public StructMap(java.util.TreeMap<Integer, Byte> f1, java.util.TreeMap<Integer, Byte> f2, java.util.TreeMap<Integer, java.nio.ByteBuffer> f3, java.util.TreeMap<Integer, java.nio.ByteBuffer> f4, java.util.TreeMap<Integer, EnumSimple> f5, java.util.TreeMap<Integer, EnumSimple> f6, java.util.TreeMap<Integer, FlagsSimple> f7, java.util.TreeMap<Integer, FlagsSimple> f8, java.util.TreeMap<Integer, StructSimple> f9, java.util.TreeMap<Integer, StructSimple> f10)

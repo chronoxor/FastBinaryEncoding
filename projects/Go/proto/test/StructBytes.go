@@ -91,6 +91,9 @@ func (s *StructBytes) Optional() *StructBytes {
     return s
 }
 
+// Get the FBE type
+func (s *StructBytes) FBEType() int { return 120 }
+
 // Convert struct to string
 func (s *StructBytes) String() string {
     var sb strings.Builder

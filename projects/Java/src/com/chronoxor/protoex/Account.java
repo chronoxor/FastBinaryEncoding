@@ -14,6 +14,9 @@ public class Account implements Comparable<Object>
     public Balance asset = null;
     public java.util.ArrayList<Order> orders = new java.util.ArrayList<Order>();
 
+    public static final long fbeTypeConst = 3;
+    public long fbeType() { return fbeTypeConst; }
+
     public Account() {}
 
     public Account(int id, String name, StateEx state, Balance wallet, Balance asset, java.util.ArrayList<Order> orders)

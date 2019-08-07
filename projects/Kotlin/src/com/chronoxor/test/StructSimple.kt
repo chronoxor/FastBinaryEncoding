@@ -56,6 +56,8 @@ open class StructSimple : Comparable<Any?>
     var f43: com.chronoxor.proto.State = com.chronoxor.proto.State()
     var f44: com.chronoxor.proto.Account = com.chronoxor.proto.Account()
 
+    @Transient open var fbeType: Long = 110
+
     constructor()
 
     constructor(id: Int, f1: Boolean, f2: Boolean, f3: Byte, f4: Byte, f5: Char, f6: Char, f7: Char, f8: Char, f9: Byte, f10: Byte, f11: UByte, f12: UByte, f13: Short, f14: Short, f15: UShort, f16: UShort, f17: Int, f18: Int, f19: UInt, f20: UInt, f21: Long, f22: Long, f23: ULong, f24: ULong, f25: Float, f26: Float, f27: Double, f28: Double, f29: java.math.BigDecimal, f30: java.math.BigDecimal, f31: String, f32: String, f33: java.time.Instant, f34: java.time.Instant, f35: java.time.Instant, f36: java.util.UUID, f37: java.util.UUID, f38: java.util.UUID, f39: com.chronoxor.proto.OrderSide, f40: com.chronoxor.proto.OrderType, f41: com.chronoxor.proto.Order, f42: com.chronoxor.proto.Balance, f43: com.chronoxor.proto.State, f44: com.chronoxor.proto.Account)
@@ -266,8 +268,10 @@ open class StructSimple : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 110
         fun fromJson(json: String): StructSimple = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructSimple::class.java)
     }
 }

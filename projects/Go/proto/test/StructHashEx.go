@@ -89,6 +89,9 @@ func (s *StructHashEx) Optional() *StructHashEx {
     return s
 }
 
+// Get the FBE type
+func (s *StructHashEx) FBEType() int { return 142 }
+
 // Convert struct to string
 func (s *StructHashEx) String() string {
     var sb strings.Builder

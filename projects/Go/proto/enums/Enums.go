@@ -215,6 +215,9 @@ func (s *Enums) Optional() *Enums {
     return s
 }
 
+// Get the FBE type
+func (s *Enums) FBEType() int { return 1 }
+
 // Convert struct to string
 func (s *Enums) String() string {
     var sb strings.Builder

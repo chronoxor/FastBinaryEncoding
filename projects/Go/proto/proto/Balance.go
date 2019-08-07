@@ -91,6 +91,9 @@ func (s *Balance) Optional() *Balance {
     return s
 }
 
+// Get the FBE type
+func (s *Balance) FBEType() int { return 2 }
+
 // Convert struct to string
 func (s *Balance) String() string {
     var sb strings.Builder

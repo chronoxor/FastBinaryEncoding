@@ -33,17 +33,20 @@ public class FinalSender extends com.chronoxor.fbe.Sender
         if (obj instanceof com.chronoxor.proto.Order)
         {
             com.chronoxor.proto.Order value = (com.chronoxor.proto.Order)obj;
-            return send(value);
+            if (value.fbeType() == OrderModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.proto.Balance)
         {
             com.chronoxor.proto.Balance value = (com.chronoxor.proto.Balance)obj;
-            return send(value);
+            if (value.fbeType() == BalanceModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.proto.Account)
         {
             com.chronoxor.proto.Account value = (com.chronoxor.proto.Account)obj;
-            return send(value);
+            if (value.fbeType() == AccountModel.fbeType())
+                return send(value);
         }
 
         return 0;

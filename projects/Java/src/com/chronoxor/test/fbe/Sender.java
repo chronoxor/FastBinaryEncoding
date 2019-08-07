@@ -65,62 +65,74 @@ public class Sender extends com.chronoxor.fbe.Sender
         if (obj instanceof com.chronoxor.test.StructSimple)
         {
             com.chronoxor.test.StructSimple value = (com.chronoxor.test.StructSimple)obj;
-            return send(value);
+            if (value.fbeType() == StructSimpleModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.test.StructOptional)
         {
             com.chronoxor.test.StructOptional value = (com.chronoxor.test.StructOptional)obj;
-            return send(value);
+            if (value.fbeType() == StructOptionalModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.test.StructNested)
         {
             com.chronoxor.test.StructNested value = (com.chronoxor.test.StructNested)obj;
-            return send(value);
+            if (value.fbeType() == StructNestedModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.test.StructBytes)
         {
             com.chronoxor.test.StructBytes value = (com.chronoxor.test.StructBytes)obj;
-            return send(value);
+            if (value.fbeType() == StructBytesModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.test.StructArray)
         {
             com.chronoxor.test.StructArray value = (com.chronoxor.test.StructArray)obj;
-            return send(value);
+            if (value.fbeType() == StructArrayModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.test.StructVector)
         {
             com.chronoxor.test.StructVector value = (com.chronoxor.test.StructVector)obj;
-            return send(value);
+            if (value.fbeType() == StructVectorModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.test.StructList)
         {
             com.chronoxor.test.StructList value = (com.chronoxor.test.StructList)obj;
-            return send(value);
+            if (value.fbeType() == StructListModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.test.StructSet)
         {
             com.chronoxor.test.StructSet value = (com.chronoxor.test.StructSet)obj;
-            return send(value);
+            if (value.fbeType() == StructSetModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.test.StructMap)
         {
             com.chronoxor.test.StructMap value = (com.chronoxor.test.StructMap)obj;
-            return send(value);
+            if (value.fbeType() == StructMapModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.test.StructHash)
         {
             com.chronoxor.test.StructHash value = (com.chronoxor.test.StructHash)obj;
-            return send(value);
+            if (value.fbeType() == StructHashModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.test.StructHashEx)
         {
             com.chronoxor.test.StructHashEx value = (com.chronoxor.test.StructHashEx)obj;
-            return send(value);
+            if (value.fbeType() == StructHashExModel.fbeType())
+                return send(value);
         }
         if (obj instanceof com.chronoxor.test.StructEmpty)
         {
             com.chronoxor.test.StructEmpty value = (com.chronoxor.test.StructEmpty)obj;
-            return send(value);
+            if (value.fbeType() == StructEmptyModel.fbeType())
+                return send(value);
         }
 
         // Try to send using imported senders

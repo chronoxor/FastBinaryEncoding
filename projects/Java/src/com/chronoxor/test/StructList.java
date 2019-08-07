@@ -18,6 +18,9 @@ public class StructList implements Comparable<Object>
     public java.util.LinkedList<StructSimple> f9 = new java.util.LinkedList<StructSimple>();
     public java.util.LinkedList<StructSimple> f10 = new java.util.LinkedList<StructSimple>();
 
+    public static final long fbeTypeConst = 131;
+    public long fbeType() { return fbeTypeConst; }
+
     public StructList() {}
 
     public StructList(java.util.LinkedList<Byte> f1, java.util.LinkedList<Byte> f2, java.util.LinkedList<java.nio.ByteBuffer> f3, java.util.LinkedList<java.nio.ByteBuffer> f4, java.util.LinkedList<EnumSimple> f5, java.util.LinkedList<EnumSimple> f6, java.util.LinkedList<FlagsSimple> f7, java.util.LinkedList<FlagsSimple> f8, java.util.LinkedList<StructSimple> f9, java.util.LinkedList<StructSimple> f10)

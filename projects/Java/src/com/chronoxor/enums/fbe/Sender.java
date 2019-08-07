@@ -27,7 +27,8 @@ public class Sender extends com.chronoxor.fbe.Sender
         if (obj instanceof com.chronoxor.enums.Enums)
         {
             com.chronoxor.enums.Enums value = (com.chronoxor.enums.Enums)obj;
-            return send(value);
+            if (value.fbeType() == EnumsModel.fbeType())
+                return send(value);
         }
 
         return 0;

@@ -6388,6 +6388,13 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
         }
     }
 
+    // Generate struct FBE type property
+    WriteLine();
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("size_t fbe_type() const noexcept { return " + ConvertTypeName(*p->name, *s->base, false) + "::fbe_type(); }");
+    else
+        WriteLineIndent("size_t fbe_type() const noexcept { return " + std::to_string(s->type) + "; }");
+
     // Generate struct default constructor
     bool first = true;
     WriteLine();

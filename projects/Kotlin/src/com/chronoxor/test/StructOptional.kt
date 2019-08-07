@@ -77,6 +77,8 @@ open class StructOptional : StructSimple
     var f164: com.chronoxor.proto.Account? = null
     var f165: com.chronoxor.proto.Account? = null
 
+    @Transient override var fbeType: Long = 111
+
     constructor()
 
     constructor(parent: StructSimple, f100: Boolean?, f101: Boolean?, f102: Boolean?, f103: Byte?, f104: Byte?, f105: Byte?, f106: Char?, f107: Char?, f108: Char?, f109: Char?, f110: Char?, f111: Char?, f112: Byte?, f113: Byte?, f114: Byte?, f115: UByte?, f116: UByte?, f117: UByte?, f118: Short?, f119: Short?, f120: Short?, f121: UShort?, f122: UShort?, f123: UShort?, f124: Int?, f125: Int?, f126: Int?, f127: UInt?, f128: UInt?, f129: UInt?, f130: Long?, f131: Long?, f132: Long?, f133: ULong?, f134: ULong?, f135: ULong?, f136: Float?, f137: Float?, f138: Float?, f139: Double?, f140: Double?, f141: Double?, f142: java.math.BigDecimal?, f143: java.math.BigDecimal?, f144: java.math.BigDecimal?, f145: String?, f146: String?, f147: String?, f148: java.time.Instant?, f149: java.time.Instant?, f150: java.time.Instant?, f151: java.util.UUID?, f152: java.util.UUID?, f153: java.util.UUID?, f154: com.chronoxor.proto.OrderSide?, f155: com.chronoxor.proto.OrderSide?, f156: com.chronoxor.proto.OrderType?, f157: com.chronoxor.proto.OrderType?, f158: com.chronoxor.proto.Order?, f159: com.chronoxor.proto.Order?, f160: com.chronoxor.proto.Balance?, f161: com.chronoxor.proto.Balance?, f162: com.chronoxor.proto.State?, f163: com.chronoxor.proto.State?, f164: com.chronoxor.proto.Account?, f165: com.chronoxor.proto.Account?): super(parent)
@@ -351,6 +353,7 @@ open class StructOptional : StructSimple
     }
 
     override fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
         fun fromJson(json: String): StructOptional = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructOptional::class.java)

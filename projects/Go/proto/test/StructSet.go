@@ -93,6 +93,9 @@ func (s *StructSet) Optional() *StructSet {
     return s
 }
 
+// Get the FBE type
+func (s *StructSet) FBEType() int { return 132 }
+
 // Convert struct to string
 func (s *StructSet) String() string {
     var sb strings.Builder

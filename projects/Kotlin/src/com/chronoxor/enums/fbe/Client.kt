@@ -39,7 +39,7 @@ open class Client : com.chronoxor.fbe.Client, ReceiverListener
     {
         when (obj)
         {
-            is com.chronoxor.enums.Enums -> return send(obj)
+            is com.chronoxor.enums.Enums -> if (obj.fbeType == EnumsSenderModel.fbeType) return send(obj)
         }
 
         return 0

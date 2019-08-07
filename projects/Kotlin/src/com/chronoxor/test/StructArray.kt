@@ -21,6 +21,8 @@ open class StructArray : Comparable<Any?>
     var f9: Array<StructSimple> = Array(2) { StructSimple() }
     var f10: Array<StructSimple?> = arrayOfNulls<StructSimple?>(2)
 
+    @Transient open var fbeType: Long = 125
+
     constructor()
 
     constructor(f1: Array<Byte>, f2: Array<Byte?>, f3: Array<ByteArray>, f4: Array<ByteArray?>, f5: Array<EnumSimple>, f6: Array<EnumSimple?>, f7: Array<FlagsSimple>, f8: Array<FlagsSimple?>, f9: Array<StructSimple>, f10: Array<StructSimple?>)
@@ -230,8 +232,10 @@ open class StructArray : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 125
         fun fromJson(json: String): StructArray = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructArray::class.java)
     }
 }

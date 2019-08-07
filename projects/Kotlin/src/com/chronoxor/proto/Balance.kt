@@ -13,6 +13,8 @@ open class Balance : Comparable<Any?>
     var currency: String = ""
     var amount: Double = 0.0
 
+    @Transient open var fbeType: Long = 2
+
     constructor()
 
     constructor(currency: String, amount: Double)
@@ -94,8 +96,10 @@ open class Balance : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.proto.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 2
         fun fromJson(json: String): Balance = com.chronoxor.proto.fbe.Json.engine.fromJson(json, Balance::class.java)
     }
 }

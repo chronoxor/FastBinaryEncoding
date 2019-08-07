@@ -80,29 +80,53 @@ func (s *FinalSender) StructEmptyModel() *StructEmptyFinalModel { return s.struc
 func (s *FinalSender) Send(value interface{}) (int, error) {
     switch value := value.(type) {
     case *StructSimple:
-        return s.SendStructSimple(value)
+        if value.FBEType() == s.structSimpleModel.FBEType() {
+            return s.SendStructSimple(value)
+        }
     case *StructOptional:
-        return s.SendStructOptional(value)
+        if value.FBEType() == s.structOptionalModel.FBEType() {
+            return s.SendStructOptional(value)
+        }
     case *StructNested:
-        return s.SendStructNested(value)
+        if value.FBEType() == s.structNestedModel.FBEType() {
+            return s.SendStructNested(value)
+        }
     case *StructBytes:
-        return s.SendStructBytes(value)
+        if value.FBEType() == s.structBytesModel.FBEType() {
+            return s.SendStructBytes(value)
+        }
     case *StructArray:
-        return s.SendStructArray(value)
+        if value.FBEType() == s.structArrayModel.FBEType() {
+            return s.SendStructArray(value)
+        }
     case *StructVector:
-        return s.SendStructVector(value)
+        if value.FBEType() == s.structVectorModel.FBEType() {
+            return s.SendStructVector(value)
+        }
     case *StructList:
-        return s.SendStructList(value)
+        if value.FBEType() == s.structListModel.FBEType() {
+            return s.SendStructList(value)
+        }
     case *StructSet:
-        return s.SendStructSet(value)
+        if value.FBEType() == s.structSetModel.FBEType() {
+            return s.SendStructSet(value)
+        }
     case *StructMap:
-        return s.SendStructMap(value)
+        if value.FBEType() == s.structMapModel.FBEType() {
+            return s.SendStructMap(value)
+        }
     case *StructHash:
-        return s.SendStructHash(value)
+        if value.FBEType() == s.structHashModel.FBEType() {
+            return s.SendStructHash(value)
+        }
     case *StructHashEx:
-        return s.SendStructHashEx(value)
+        if value.FBEType() == s.structHashExModel.FBEType() {
+            return s.SendStructHashEx(value)
+        }
     case *StructEmpty:
-        return s.SendStructEmpty(value)
+        if value.FBEType() == s.structEmptyModel.FBEType() {
+            return s.SendStructEmpty(value)
+        }
     }
     if result, err := s.protoSender.Send(value); (result > 0) || (err != nil) {
         return result, err

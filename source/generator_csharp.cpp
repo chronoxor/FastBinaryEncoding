@@ -4739,6 +4739,22 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
         for (const auto& field : s->body->fields)
             WriteLineIndent("public " + ConvertTypeName(*field) + " " + *field->name + ";");
 
+    // Generate struct FBE type property
+    WriteLine();
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("public const long FBETypeConst = " + ConvertTypeName(*s->base, false) + ".FBETypeConst;");
+    else
+        WriteLineIndent("public const long FBETypeConst = " + std::to_string(s->type) + ";");
+    if (JSON())
+    {
+        WriteLineIndent("#if UTF8JSON");
+        WriteLineIndent("[IgnoreDataMember]");
+        WriteLineIndent("#else");
+        WriteLineIndent("[JsonIgnore]");
+        WriteLineIndent("#endif");
+    }
+    WriteLineIndent("public long FBEType => FBETypeConst;");
+
     // Generate struct initialization property
     WriteLine();
     WriteLineIndent("public static " + *s->name + " Default => new " + *s->name);

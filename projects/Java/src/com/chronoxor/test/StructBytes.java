@@ -11,6 +11,9 @@ public class StructBytes implements Comparable<Object>
     public java.nio.ByteBuffer f2 = null;
     public java.nio.ByteBuffer f3 = null;
 
+    public static final long fbeTypeConst = 120;
+    public long fbeType() { return fbeTypeConst; }
+
     public StructBytes() {}
 
     public StructBytes(java.nio.ByteBuffer f1, java.nio.ByteBuffer f2, java.nio.ByteBuffer f3)

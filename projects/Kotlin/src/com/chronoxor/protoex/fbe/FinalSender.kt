@@ -40,9 +40,9 @@ open class FinalSender : com.chronoxor.fbe.Sender
     {
         when (obj)
         {
-            is com.chronoxor.protoex.Order -> return send(obj)
-            is com.chronoxor.protoex.Balance -> return send(obj)
-            is com.chronoxor.protoex.Account -> return send(obj)
+            is com.chronoxor.protoex.Order -> if (obj.fbeType == OrderModel.fbeType) return send(obj)
+            is com.chronoxor.protoex.Balance -> if (obj.fbeType == BalanceModel.fbeType) return send(obj)
+            is com.chronoxor.protoex.Account -> if (obj.fbeType == AccountModel.fbeType) return send(obj)
         }
 
         // Try to send using imported senders

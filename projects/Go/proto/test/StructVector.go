@@ -105,6 +105,9 @@ func (s *StructVector) Optional() *StructVector {
     return s
 }
 
+// Get the FBE type
+func (s *StructVector) FBEType() int { return 130 }
+
 // Convert struct to string
 func (s *StructVector) String() string {
     var sb strings.Builder

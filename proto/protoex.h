@@ -246,6 +246,8 @@ struct Order
     double tp;
     double sl;
 
+    size_t fbe_type() const noexcept { return 1; }
+
     Order()
         : id((int32_t)0ll)
         , symbol()
@@ -422,6 +424,8 @@ struct Balance : public ::proto::Balance
 {
     double locked;
 
+    size_t fbe_type() const noexcept { return ::proto::Balance::fbe_type(); }
+
     Balance()
         : ::proto::Balance()
         , locked((double)0.0)
@@ -561,6 +565,8 @@ struct Account
     ::protoex::Balance wallet;
     std::optional<::protoex::Balance> asset;
     std::vector<::protoex::Order> orders;
+
+    size_t fbe_type() const noexcept { return 3; }
 
     Account()
         : id((int32_t)0ll)

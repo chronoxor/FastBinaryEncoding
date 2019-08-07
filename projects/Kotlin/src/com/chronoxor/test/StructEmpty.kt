@@ -10,6 +10,8 @@ package com.chronoxor.test
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructEmpty : Comparable<Any?>
 {
+    @Transient open var fbeType: Long = 143
+
     constructor()
 
     @Suppress("UNUSED_PARAMETER")
@@ -75,8 +77,10 @@ open class StructEmpty : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 143
         fun fromJson(json: String): StructEmpty = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructEmpty::class.java)
     }
 }

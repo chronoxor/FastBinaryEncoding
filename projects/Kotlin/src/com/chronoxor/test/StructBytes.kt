@@ -14,6 +14,8 @@ open class StructBytes : Comparable<Any?>
     var f2: ByteArray? = null
     var f3: ByteArray? = null
 
+    @Transient open var fbeType: Long = 120
+
     constructor()
 
     constructor(f1: ByteArray, f2: ByteArray?, f3: ByteArray?)
@@ -92,8 +94,10 @@ open class StructBytes : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 120
         fun fromJson(json: String): StructBytes = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructBytes::class.java)
     }
 }

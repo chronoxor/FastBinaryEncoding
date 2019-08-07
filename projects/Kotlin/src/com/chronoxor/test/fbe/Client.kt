@@ -148,18 +148,18 @@ open class Client : com.chronoxor.fbe.Client, ReceiverListener
     {
         when (obj)
         {
-            is com.chronoxor.test.StructSimple -> return send(obj)
-            is com.chronoxor.test.StructOptional -> return send(obj)
-            is com.chronoxor.test.StructNested -> return send(obj)
-            is com.chronoxor.test.StructBytes -> return send(obj)
-            is com.chronoxor.test.StructArray -> return send(obj)
-            is com.chronoxor.test.StructVector -> return send(obj)
-            is com.chronoxor.test.StructList -> return send(obj)
-            is com.chronoxor.test.StructSet -> return send(obj)
-            is com.chronoxor.test.StructMap -> return send(obj)
-            is com.chronoxor.test.StructHash -> return send(obj)
-            is com.chronoxor.test.StructHashEx -> return send(obj)
-            is com.chronoxor.test.StructEmpty -> return send(obj)
+            is com.chronoxor.test.StructSimple -> if (obj.fbeType == StructSimpleSenderModel.fbeType) return send(obj)
+            is com.chronoxor.test.StructOptional -> if (obj.fbeType == StructOptionalSenderModel.fbeType) return send(obj)
+            is com.chronoxor.test.StructNested -> if (obj.fbeType == StructNestedSenderModel.fbeType) return send(obj)
+            is com.chronoxor.test.StructBytes -> if (obj.fbeType == StructBytesSenderModel.fbeType) return send(obj)
+            is com.chronoxor.test.StructArray -> if (obj.fbeType == StructArraySenderModel.fbeType) return send(obj)
+            is com.chronoxor.test.StructVector -> if (obj.fbeType == StructVectorSenderModel.fbeType) return send(obj)
+            is com.chronoxor.test.StructList -> if (obj.fbeType == StructListSenderModel.fbeType) return send(obj)
+            is com.chronoxor.test.StructSet -> if (obj.fbeType == StructSetSenderModel.fbeType) return send(obj)
+            is com.chronoxor.test.StructMap -> if (obj.fbeType == StructMapSenderModel.fbeType) return send(obj)
+            is com.chronoxor.test.StructHash -> if (obj.fbeType == StructHashSenderModel.fbeType) return send(obj)
+            is com.chronoxor.test.StructHashEx -> if (obj.fbeType == StructHashExSenderModel.fbeType) return send(obj)
+            is com.chronoxor.test.StructEmpty -> if (obj.fbeType == StructEmptySenderModel.fbeType) return send(obj)
         }
 
         // Try to send using imported clients

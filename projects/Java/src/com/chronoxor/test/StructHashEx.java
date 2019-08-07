@@ -10,6 +10,9 @@ public class StructHashEx implements Comparable<Object>
     public java.util.HashMap<StructSimple, StructNested> f1 = new java.util.HashMap<StructSimple, StructNested>();
     public java.util.HashMap<StructSimple, StructNested> f2 = new java.util.HashMap<StructSimple, StructNested>();
 
+    public static final long fbeTypeConst = 142;
+    public long fbeType() { return fbeTypeConst; }
+
     public StructHashEx() {}
 
     public StructHashEx(java.util.HashMap<StructSimple, StructNested> f1, java.util.HashMap<StructSimple, StructNested> f2)

@@ -732,6 +732,8 @@ struct Enums
     ::enums::EnumUInt64 uint64b4;
     ::enums::EnumUInt64 uint64b5;
 
+    size_t fbe_type() const noexcept { return 1; }
+
     Enums()
         : byte0(EnumByte::ENUM_VALUE_0)
         , byte1(EnumByte::ENUM_VALUE_1)

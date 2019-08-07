@@ -105,6 +105,9 @@ func (s *StructMap) Optional() *StructMap {
     return s
 }
 
+// Get the FBE type
+func (s *StructMap) FBEType() int { return 140 }
+
 // Convert struct to string
 func (s *StructMap) String() string {
     var sb strings.Builder

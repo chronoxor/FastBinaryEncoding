@@ -114,6 +114,9 @@ func (s *StructNested) Optional() *StructNested {
     return s
 }
 
+// Get the FBE type
+func (s *StructNested) FBEType() int { return 112 }
+
 // Convert struct to string
 func (s *StructNested) String() string {
     var sb strings.Builder

@@ -15,6 +15,8 @@ open class StructSet : Comparable<Any?>
     var f3: java.util.HashSet<FlagsSimple> = java.util.HashSet()
     var f4: java.util.HashSet<StructSimple> = java.util.HashSet()
 
+    @Transient open var fbeType: Long = 132
+
     constructor()
 
     constructor(f1: java.util.HashSet<Byte>, f2: java.util.HashSet<EnumSimple>, f3: java.util.HashSet<FlagsSimple>, f4: java.util.HashSet<StructSimple>)
@@ -140,8 +142,10 @@ open class StructSet : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 132
         fun fromJson(json: String): StructSet = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructSet::class.java)
     }
 }
