@@ -9984,6 +9984,33 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
     Indent(-1);
     WriteLineIndent("}");
 
+    // Generate struct FBE type property
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Get the FBE type");
+    WriteLineIndent(" * @this {!" + *s->name + "}");
+    WriteLineIndent(" * @returns {!number} FBE type");
+    WriteLineIndent(" */");
+    WriteLineIndent("get fbeType () {");
+    Indent(1);
+    WriteLineIndent("return " + *s->name + ".fbeType");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Get the FBE type (static)");
+    WriteLineIndent(" * @this {!" + *s->name + "}");
+    WriteLineIndent(" * @returns {!number} FBE type");
+    WriteLineIndent(" */");
+    WriteLineIndent("static get fbeType () {");
+    Indent(1);
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("return " + ConvertTypeName(*s->base, false) + ".fbeType");
+    else
+        WriteLineIndent("return " + std::to_string(s->type));
+    Indent(-1);
+    WriteLineIndent("}");
+
     // Generate struct end
     Indent(-1);
     WriteLineIndent("}");
@@ -11272,7 +11299,7 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("if (value instanceof " + *s->name + ") {");
+            WriteLineIndent("if ((value instanceof " + *s->name + ") && (value.fbeType === this." + *s->name + "Model.fbeType)) {");
             Indent(1);
             WriteLineIndent("return this.send_" + *s->name + "(value)");
             Indent(-1);
@@ -11860,7 +11887,7 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("if (value instanceof " + *s->name + ") {");
+            WriteLineIndent("if ((value instanceof " + *s->name + ") && (value.fbeType === this." + *s->name + "SenderModel.fbeType)) {");
             Indent(1);
             WriteLineIndent("return this.send_" + *s->name + "(value)");
             Indent(-1);

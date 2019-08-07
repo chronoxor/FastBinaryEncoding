@@ -927,6 +927,24 @@ class Order {
   static fromObject (other) {
     return new Order().copy(other)
   }
+
+  /**
+   * Get the FBE type
+   * @this {!Order}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return Order.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!Order}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 1
+  }
 }
 
 exports.Order = Order
@@ -2125,6 +2143,24 @@ class Balance extends proto.Balance {
   static fromObject (other) {
     return new Balance().copy(other)
   }
+
+  /**
+   * Get the FBE type
+   * @this {!Balance}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return Balance.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!Balance}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return proto.Balance.fbeType
+  }
 }
 
 exports.Balance = Balance
@@ -3042,6 +3078,24 @@ class Account {
    */
   static fromObject (other) {
     return new Account().copy(other)
+  }
+
+  /**
+   * Get the FBE type
+   * @this {!Account}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return Account.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!Account}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 3
   }
 }
 
@@ -4081,13 +4135,13 @@ class Sender extends fbe.Sender {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof Order) {
+    if ((value instanceof Order) && (value.fbeType === this.OrderModel.fbeType)) {
       return this.send_Order(value)
     }
-    if (value instanceof Balance) {
+    if ((value instanceof Balance) && (value.fbeType === this.BalanceModel.fbeType)) {
       return this.send_Balance(value)
     }
-    if (value instanceof Account) {
+    if ((value instanceof Account) && (value.fbeType === this.AccountModel.fbeType)) {
       return this.send_Account(value)
     }
     let result = 0
@@ -4580,13 +4634,13 @@ class Client extends fbe.Client {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof Order) {
+    if ((value instanceof Order) && (value.fbeType === this.OrderSenderModel.fbeType)) {
       return this.send_Order(value)
     }
-    if (value instanceof Balance) {
+    if ((value instanceof Balance) && (value.fbeType === this.BalanceSenderModel.fbeType)) {
       return this.send_Balance(value)
     }
-    if (value instanceof Account) {
+    if ((value instanceof Account) && (value.fbeType === this.AccountSenderModel.fbeType)) {
       return this.send_Account(value)
     }
     let result = 0
@@ -4983,13 +5037,13 @@ class FinalSender extends fbe.Sender {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof Order) {
+    if ((value instanceof Order) && (value.fbeType === this.OrderModel.fbeType)) {
       return this.send_Order(value)
     }
-    if (value instanceof Balance) {
+    if ((value instanceof Balance) && (value.fbeType === this.BalanceModel.fbeType)) {
       return this.send_Balance(value)
     }
-    if (value instanceof Account) {
+    if ((value instanceof Account) && (value.fbeType === this.AccountModel.fbeType)) {
       return this.send_Account(value)
     }
     let result = 0
@@ -5344,13 +5398,13 @@ class FinalClient extends fbe.Client {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof Order) {
+    if ((value instanceof Order) && (value.fbeType === this.OrderSenderModel.fbeType)) {
       return this.send_Order(value)
     }
-    if (value instanceof Balance) {
+    if ((value instanceof Balance) && (value.fbeType === this.BalanceSenderModel.fbeType)) {
       return this.send_Balance(value)
     }
-    if (value instanceof Account) {
+    if ((value instanceof Account) && (value.fbeType === this.AccountSenderModel.fbeType)) {
       return this.send_Account(value)
     }
     let result = 0

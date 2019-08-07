@@ -3208,6 +3208,24 @@ class Enums {
   static fromObject (other) {
     return new Enums().copy(other)
   }
+
+  /**
+   * Get the FBE type
+   * @this {!Enums}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return Enums.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!Enums}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 1
+  }
 }
 
 exports.Enums = Enums
@@ -7695,7 +7713,7 @@ class Sender extends fbe.Sender {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof Enums) {
+    if ((value instanceof Enums) && (value.fbeType === this.EnumsModel.fbeType)) {
       return this.send_Enums(value)
     }
     return 0
@@ -7946,7 +7964,7 @@ class Client extends fbe.Client {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof Enums) {
+    if ((value instanceof Enums) && (value.fbeType === this.EnumsSenderModel.fbeType)) {
       return this.send_Enums(value)
     }
     return 0
@@ -8193,7 +8211,7 @@ class FinalSender extends fbe.Sender {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof Enums) {
+    if ((value instanceof Enums) && (value.fbeType === this.EnumsModel.fbeType)) {
       return this.send_Enums(value)
     }
     return 0
@@ -8385,7 +8403,7 @@ class FinalClient extends fbe.Client {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof Enums) {
+    if ((value instanceof Enums) && (value.fbeType === this.EnumsSenderModel.fbeType)) {
       return this.send_Enums(value)
     }
     return 0

@@ -2105,6 +2105,24 @@ class StructSimple {
   static fromObject (other) {
     return new StructSimple().copy(other)
   }
+
+  /**
+   * Get the FBE type
+   * @this {!StructSimple}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return StructSimple.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!StructSimple}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 110
+  }
 }
 
 exports.StructSimple = StructSimple
@@ -6398,6 +6416,24 @@ class StructOptional extends StructSimple {
    */
   static fromObject (other) {
     return new StructOptional().copy(other)
+  }
+
+  /**
+   * Get the FBE type
+   * @this {!StructOptional}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return StructOptional.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!StructOptional}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 111
   }
 }
 
@@ -11150,6 +11186,24 @@ class StructNested extends StructOptional {
   static fromObject (other) {
     return new StructNested().copy(other)
   }
+
+  /**
+   * Get the FBE type
+   * @this {!StructNested}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return StructNested.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!StructNested}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 112
+  }
 }
 
 exports.StructNested = StructNested
@@ -12671,6 +12725,24 @@ class StructBytes {
   static fromObject (other) {
     return new StructBytes().copy(other)
   }
+
+  /**
+   * Get the FBE type
+   * @this {!StructBytes}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return StructBytes.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!StructBytes}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 120
+  }
 }
 
 exports.StructBytes = StructBytes
@@ -13897,6 +13969,24 @@ class StructArray {
    */
   static fromObject (other) {
     return new StructArray().copy(other)
+  }
+
+  /**
+   * Get the FBE type
+   * @this {!StructArray}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return StructArray.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!StructArray}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 125
   }
 }
 
@@ -15521,6 +15611,24 @@ class StructVector {
   static fromObject (other) {
     return new StructVector().copy(other)
   }
+
+  /**
+   * Get the FBE type
+   * @this {!StructVector}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return StructVector.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!StructVector}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 130
+  }
 }
 
 exports.StructVector = StructVector
@@ -17144,6 +17252,24 @@ class StructList {
   static fromObject (other) {
     return new StructList().copy(other)
   }
+
+  /**
+   * Get the FBE type
+   * @this {!StructList}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return StructList.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!StructList}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 131
+  }
 }
 
 exports.StructList = StructList
@@ -18547,6 +18673,24 @@ class StructSet {
   static fromObject (other) {
     return new StructSet().copy(other)
   }
+
+  /**
+   * Get the FBE type
+   * @this {!StructSet}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return StructSet.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!StructSet}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 132
+  }
 }
 
 exports.StructSet = StructSet
@@ -19881,6 +20025,24 @@ class StructMap {
    */
   static fromObject (other) {
     return new StructMap().copy(other)
+  }
+
+  /**
+   * Get the FBE type
+   * @this {!StructMap}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return StructMap.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!StructMap}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 140
   }
 }
 
@@ -21609,6 +21771,24 @@ class StructHash {
   static fromObject (other) {
     return new StructHash().copy(other)
   }
+
+  /**
+   * Get the FBE type
+   * @this {!StructHash}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return StructHash.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!StructHash}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 141
+  }
 }
 
 exports.StructHash = StructHash
@@ -22968,6 +23148,24 @@ class StructHashEx {
   static fromObject (other) {
     return new StructHashEx().copy(other)
   }
+
+  /**
+   * Get the FBE type
+   * @this {!StructHashEx}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return StructHashEx.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!StructHashEx}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 142
+  }
 }
 
 exports.StructHashEx = StructHashEx
@@ -23788,6 +23986,24 @@ class StructEmpty {
   static fromObject (other) {
     return new StructEmpty().copy(other)
   }
+
+  /**
+   * Get the FBE type
+   * @this {!StructEmpty}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return StructEmpty.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!StructEmpty}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 143
+  }
 }
 
 exports.StructEmpty = StructEmpty
@@ -24535,40 +24751,40 @@ class Sender extends fbe.Sender {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof StructSimple) {
+    if ((value instanceof StructSimple) && (value.fbeType === this.StructSimpleModel.fbeType)) {
       return this.send_StructSimple(value)
     }
-    if (value instanceof StructOptional) {
+    if ((value instanceof StructOptional) && (value.fbeType === this.StructOptionalModel.fbeType)) {
       return this.send_StructOptional(value)
     }
-    if (value instanceof StructNested) {
+    if ((value instanceof StructNested) && (value.fbeType === this.StructNestedModel.fbeType)) {
       return this.send_StructNested(value)
     }
-    if (value instanceof StructBytes) {
+    if ((value instanceof StructBytes) && (value.fbeType === this.StructBytesModel.fbeType)) {
       return this.send_StructBytes(value)
     }
-    if (value instanceof StructArray) {
+    if ((value instanceof StructArray) && (value.fbeType === this.StructArrayModel.fbeType)) {
       return this.send_StructArray(value)
     }
-    if (value instanceof StructVector) {
+    if ((value instanceof StructVector) && (value.fbeType === this.StructVectorModel.fbeType)) {
       return this.send_StructVector(value)
     }
-    if (value instanceof StructList) {
+    if ((value instanceof StructList) && (value.fbeType === this.StructListModel.fbeType)) {
       return this.send_StructList(value)
     }
-    if (value instanceof StructSet) {
+    if ((value instanceof StructSet) && (value.fbeType === this.StructSetModel.fbeType)) {
       return this.send_StructSet(value)
     }
-    if (value instanceof StructMap) {
+    if ((value instanceof StructMap) && (value.fbeType === this.StructMapModel.fbeType)) {
       return this.send_StructMap(value)
     }
-    if (value instanceof StructHash) {
+    if ((value instanceof StructHash) && (value.fbeType === this.StructHashModel.fbeType)) {
       return this.send_StructHash(value)
     }
-    if (value instanceof StructHashEx) {
+    if ((value instanceof StructHashEx) && (value.fbeType === this.StructHashExModel.fbeType)) {
       return this.send_StructHashEx(value)
     }
-    if (value instanceof StructEmpty) {
+    if ((value instanceof StructEmpty) && (value.fbeType === this.StructEmptyModel.fbeType)) {
       return this.send_StructEmpty(value)
     }
     let result = 0
@@ -25817,40 +26033,40 @@ class Client extends fbe.Client {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof StructSimple) {
+    if ((value instanceof StructSimple) && (value.fbeType === this.StructSimpleSenderModel.fbeType)) {
       return this.send_StructSimple(value)
     }
-    if (value instanceof StructOptional) {
+    if ((value instanceof StructOptional) && (value.fbeType === this.StructOptionalSenderModel.fbeType)) {
       return this.send_StructOptional(value)
     }
-    if (value instanceof StructNested) {
+    if ((value instanceof StructNested) && (value.fbeType === this.StructNestedSenderModel.fbeType)) {
       return this.send_StructNested(value)
     }
-    if (value instanceof StructBytes) {
+    if ((value instanceof StructBytes) && (value.fbeType === this.StructBytesSenderModel.fbeType)) {
       return this.send_StructBytes(value)
     }
-    if (value instanceof StructArray) {
+    if ((value instanceof StructArray) && (value.fbeType === this.StructArraySenderModel.fbeType)) {
       return this.send_StructArray(value)
     }
-    if (value instanceof StructVector) {
+    if ((value instanceof StructVector) && (value.fbeType === this.StructVectorSenderModel.fbeType)) {
       return this.send_StructVector(value)
     }
-    if (value instanceof StructList) {
+    if ((value instanceof StructList) && (value.fbeType === this.StructListSenderModel.fbeType)) {
       return this.send_StructList(value)
     }
-    if (value instanceof StructSet) {
+    if ((value instanceof StructSet) && (value.fbeType === this.StructSetSenderModel.fbeType)) {
       return this.send_StructSet(value)
     }
-    if (value instanceof StructMap) {
+    if ((value instanceof StructMap) && (value.fbeType === this.StructMapSenderModel.fbeType)) {
       return this.send_StructMap(value)
     }
-    if (value instanceof StructHash) {
+    if ((value instanceof StructHash) && (value.fbeType === this.StructHashSenderModel.fbeType)) {
       return this.send_StructHash(value)
     }
-    if (value instanceof StructHashEx) {
+    if ((value instanceof StructHashEx) && (value.fbeType === this.StructHashExSenderModel.fbeType)) {
       return this.send_StructHashEx(value)
     }
-    if (value instanceof StructEmpty) {
+    if ((value instanceof StructEmpty) && (value.fbeType === this.StructEmptySenderModel.fbeType)) {
       return this.send_StructEmpty(value)
     }
     let result = 0
@@ -26733,40 +26949,40 @@ class FinalSender extends fbe.Sender {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof StructSimple) {
+    if ((value instanceof StructSimple) && (value.fbeType === this.StructSimpleModel.fbeType)) {
       return this.send_StructSimple(value)
     }
-    if (value instanceof StructOptional) {
+    if ((value instanceof StructOptional) && (value.fbeType === this.StructOptionalModel.fbeType)) {
       return this.send_StructOptional(value)
     }
-    if (value instanceof StructNested) {
+    if ((value instanceof StructNested) && (value.fbeType === this.StructNestedModel.fbeType)) {
       return this.send_StructNested(value)
     }
-    if (value instanceof StructBytes) {
+    if ((value instanceof StructBytes) && (value.fbeType === this.StructBytesModel.fbeType)) {
       return this.send_StructBytes(value)
     }
-    if (value instanceof StructArray) {
+    if ((value instanceof StructArray) && (value.fbeType === this.StructArrayModel.fbeType)) {
       return this.send_StructArray(value)
     }
-    if (value instanceof StructVector) {
+    if ((value instanceof StructVector) && (value.fbeType === this.StructVectorModel.fbeType)) {
       return this.send_StructVector(value)
     }
-    if (value instanceof StructList) {
+    if ((value instanceof StructList) && (value.fbeType === this.StructListModel.fbeType)) {
       return this.send_StructList(value)
     }
-    if (value instanceof StructSet) {
+    if ((value instanceof StructSet) && (value.fbeType === this.StructSetModel.fbeType)) {
       return this.send_StructSet(value)
     }
-    if (value instanceof StructMap) {
+    if ((value instanceof StructMap) && (value.fbeType === this.StructMapModel.fbeType)) {
       return this.send_StructMap(value)
     }
-    if (value instanceof StructHash) {
+    if ((value instanceof StructHash) && (value.fbeType === this.StructHashModel.fbeType)) {
       return this.send_StructHash(value)
     }
-    if (value instanceof StructHashEx) {
+    if ((value instanceof StructHashEx) && (value.fbeType === this.StructHashExModel.fbeType)) {
       return this.send_StructHashEx(value)
     }
-    if (value instanceof StructEmpty) {
+    if ((value instanceof StructEmpty) && (value.fbeType === this.StructEmptyModel.fbeType)) {
       return this.send_StructEmpty(value)
     }
     let result = 0
@@ -27643,40 +27859,40 @@ class FinalClient extends fbe.Client {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof StructSimple) {
+    if ((value instanceof StructSimple) && (value.fbeType === this.StructSimpleSenderModel.fbeType)) {
       return this.send_StructSimple(value)
     }
-    if (value instanceof StructOptional) {
+    if ((value instanceof StructOptional) && (value.fbeType === this.StructOptionalSenderModel.fbeType)) {
       return this.send_StructOptional(value)
     }
-    if (value instanceof StructNested) {
+    if ((value instanceof StructNested) && (value.fbeType === this.StructNestedSenderModel.fbeType)) {
       return this.send_StructNested(value)
     }
-    if (value instanceof StructBytes) {
+    if ((value instanceof StructBytes) && (value.fbeType === this.StructBytesSenderModel.fbeType)) {
       return this.send_StructBytes(value)
     }
-    if (value instanceof StructArray) {
+    if ((value instanceof StructArray) && (value.fbeType === this.StructArraySenderModel.fbeType)) {
       return this.send_StructArray(value)
     }
-    if (value instanceof StructVector) {
+    if ((value instanceof StructVector) && (value.fbeType === this.StructVectorSenderModel.fbeType)) {
       return this.send_StructVector(value)
     }
-    if (value instanceof StructList) {
+    if ((value instanceof StructList) && (value.fbeType === this.StructListSenderModel.fbeType)) {
       return this.send_StructList(value)
     }
-    if (value instanceof StructSet) {
+    if ((value instanceof StructSet) && (value.fbeType === this.StructSetSenderModel.fbeType)) {
       return this.send_StructSet(value)
     }
-    if (value instanceof StructMap) {
+    if ((value instanceof StructMap) && (value.fbeType === this.StructMapSenderModel.fbeType)) {
       return this.send_StructMap(value)
     }
-    if (value instanceof StructHash) {
+    if ((value instanceof StructHash) && (value.fbeType === this.StructHashSenderModel.fbeType)) {
       return this.send_StructHash(value)
     }
-    if (value instanceof StructHashEx) {
+    if ((value instanceof StructHashEx) && (value.fbeType === this.StructHashExSenderModel.fbeType)) {
       return this.send_StructHashEx(value)
     }
-    if (value instanceof StructEmpty) {
+    if ((value instanceof StructEmpty) && (value.fbeType === this.StructEmptySenderModel.fbeType)) {
       return this.send_StructEmpty(value)
     }
     let result = 0
