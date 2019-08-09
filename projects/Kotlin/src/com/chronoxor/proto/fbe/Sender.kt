@@ -15,12 +15,18 @@ open class Sender : com.chronoxor.fbe.Sender
     val OrderModel: OrderModel
     val BalanceModel: BalanceModel
     val AccountModel: AccountModel
+    val OrderMessageModel: OrderMessageModel
+    val BalanceMessageModel: BalanceMessageModel
+    val AccountMessageModel: AccountMessageModel
 
     constructor() : super(false)
     {
         OrderModel = OrderModel(buffer)
         BalanceModel = BalanceModel(buffer)
         AccountModel = AccountModel(buffer)
+        OrderMessageModel = OrderMessageModel(buffer)
+        BalanceMessageModel = BalanceMessageModel(buffer)
+        AccountMessageModel = AccountMessageModel(buffer)
     }
 
     constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer, false)
@@ -28,6 +34,9 @@ open class Sender : com.chronoxor.fbe.Sender
         OrderModel = OrderModel(buffer)
         BalanceModel = BalanceModel(buffer)
         AccountModel = AccountModel(buffer)
+        OrderMessageModel = OrderMessageModel(buffer)
+        BalanceMessageModel = BalanceMessageModel(buffer)
+        AccountMessageModel = AccountMessageModel(buffer)
     }
 
     @Suppress("JoinDeclarationAndAssignment")
@@ -38,6 +47,9 @@ open class Sender : com.chronoxor.fbe.Sender
             is com.chronoxor.proto.Order -> if (obj.fbeType == OrderModel.fbeType) return send(obj)
             is com.chronoxor.proto.Balance -> if (obj.fbeType == BalanceModel.fbeType) return send(obj)
             is com.chronoxor.proto.Account -> if (obj.fbeType == AccountModel.fbeType) return send(obj)
+            is com.chronoxor.proto.OrderMessage -> if (obj.fbeType == OrderMessageModel.fbeType) return send(obj)
+            is com.chronoxor.proto.BalanceMessage -> if (obj.fbeType == BalanceMessageModel.fbeType) return send(obj)
+            is com.chronoxor.proto.AccountMessage -> if (obj.fbeType == AccountMessageModel.fbeType) return send(obj)
         }
 
         return 0
@@ -83,6 +95,57 @@ open class Sender : com.chronoxor.fbe.Sender
         val serialized = AccountModel.serialize(value)
         assert(serialized > 0) { "com.chronoxor.proto.Account serialization failed!" }
         assert(AccountModel.verify()) { "com.chronoxor.proto.Account validation failed!" }
+
+        // Log the value
+        if (logging)
+        {
+            val message = value.toString()
+            onSendLog(message)
+        }
+
+        // Send the serialized value
+        return sendSerialized(serialized)
+    }
+    fun send(value: com.chronoxor.proto.OrderMessage): Long
+    {
+        // Serialize the value into the FBE stream
+        val serialized = OrderMessageModel.serialize(value)
+        assert(serialized > 0) { "com.chronoxor.proto.OrderMessage serialization failed!" }
+        assert(OrderMessageModel.verify()) { "com.chronoxor.proto.OrderMessage validation failed!" }
+
+        // Log the value
+        if (logging)
+        {
+            val message = value.toString()
+            onSendLog(message)
+        }
+
+        // Send the serialized value
+        return sendSerialized(serialized)
+    }
+    fun send(value: com.chronoxor.proto.BalanceMessage): Long
+    {
+        // Serialize the value into the FBE stream
+        val serialized = BalanceMessageModel.serialize(value)
+        assert(serialized > 0) { "com.chronoxor.proto.BalanceMessage serialization failed!" }
+        assert(BalanceMessageModel.verify()) { "com.chronoxor.proto.BalanceMessage validation failed!" }
+
+        // Log the value
+        if (logging)
+        {
+            val message = value.toString()
+            onSendLog(message)
+        }
+
+        // Send the serialized value
+        return sendSerialized(serialized)
+    }
+    fun send(value: com.chronoxor.proto.AccountMessage): Long
+    {
+        // Serialize the value into the FBE stream
+        val serialized = AccountMessageModel.serialize(value)
+        assert(serialized > 0) { "com.chronoxor.proto.AccountMessage serialization failed!" }
+        assert(AccountMessageModel.verify()) { "com.chronoxor.proto.AccountMessage validation failed!" }
 
         // Log the value
         if (logging)

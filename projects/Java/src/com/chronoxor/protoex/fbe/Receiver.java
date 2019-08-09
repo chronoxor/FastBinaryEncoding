@@ -15,11 +15,17 @@ public class Receiver extends com.chronoxor.fbe.Receiver
     private final com.chronoxor.protoex.Order OrderValue;
     private final com.chronoxor.protoex.Balance BalanceValue;
     private final com.chronoxor.protoex.Account AccountValue;
+    private final com.chronoxor.protoex.OrderMessage OrderMessageValue;
+    private final com.chronoxor.protoex.BalanceMessage BalanceMessageValue;
+    private final com.chronoxor.protoex.AccountMessage AccountMessageValue;
 
     // Receiver models accessors
     private final OrderModel OrderModel;
     private final BalanceModel BalanceModel;
     private final AccountModel AccountModel;
+    private final OrderMessageModel OrderMessageModel;
+    private final BalanceMessageModel BalanceMessageModel;
+    private final AccountMessageModel AccountMessageModel;
 
     public Receiver()
     {
@@ -31,6 +37,12 @@ public class Receiver extends com.chronoxor.fbe.Receiver
         BalanceModel = new BalanceModel();
         AccountValue = new com.chronoxor.protoex.Account();
         AccountModel = new AccountModel();
+        OrderMessageValue = new com.chronoxor.protoex.OrderMessage();
+        OrderMessageModel = new OrderMessageModel();
+        BalanceMessageValue = new com.chronoxor.protoex.BalanceMessage();
+        BalanceMessageModel = new BalanceMessageModel();
+        AccountMessageValue = new com.chronoxor.protoex.AccountMessage();
+        AccountMessageModel = new AccountMessageModel();
     }
     public Receiver(com.chronoxor.fbe.Buffer buffer)
     {
@@ -42,12 +54,21 @@ public class Receiver extends com.chronoxor.fbe.Receiver
         BalanceModel = new BalanceModel();
         AccountValue = new com.chronoxor.protoex.Account();
         AccountModel = new AccountModel();
+        OrderMessageValue = new com.chronoxor.protoex.OrderMessage();
+        OrderMessageModel = new OrderMessageModel();
+        BalanceMessageValue = new com.chronoxor.protoex.BalanceMessage();
+        BalanceMessageModel = new BalanceMessageModel();
+        AccountMessageValue = new com.chronoxor.protoex.AccountMessage();
+        AccountMessageModel = new AccountMessageModel();
     }
 
     // Receive handlers
     protected void onReceive(com.chronoxor.protoex.Order value) {}
     protected void onReceive(com.chronoxor.protoex.Balance value) {}
     protected void onReceive(com.chronoxor.protoex.Account value) {}
+    protected void onReceive(com.chronoxor.protoex.OrderMessage value) {}
+    protected void onReceive(com.chronoxor.protoex.BalanceMessage value) {}
+    protected void onReceive(com.chronoxor.protoex.AccountMessage value) {}
 
     @Override
     public boolean onReceive(long type, byte[] buffer, long offset, long size)
@@ -109,6 +130,63 @@ public class Receiver extends com.chronoxor.fbe.Receiver
 
                 // Call receive handler with deserialized value
                 onReceive(AccountValue);
+                return true;
+            }
+            case (int)com.chronoxor.protoex.fbe.OrderMessageModel.fbeTypeConst:
+            {
+                // Deserialize the value from the FBE stream
+                OrderMessageModel.attach(buffer, offset);
+                assert OrderMessageModel.verify() : "protoex.OrderMessage validation failed!";
+                long deserialized = OrderMessageModel.deserialize(OrderMessageValue);
+                assert (deserialized > 0) : "protoex.OrderMessage deserialization failed!";
+
+                // Log the value
+                if (getLogging())
+                {
+                    String message = OrderMessageValue.toString();
+                    onReceiveLog(message);
+                }
+
+                // Call receive handler with deserialized value
+                onReceive(OrderMessageValue);
+                return true;
+            }
+            case (int)com.chronoxor.protoex.fbe.BalanceMessageModel.fbeTypeConst:
+            {
+                // Deserialize the value from the FBE stream
+                BalanceMessageModel.attach(buffer, offset);
+                assert BalanceMessageModel.verify() : "protoex.BalanceMessage validation failed!";
+                long deserialized = BalanceMessageModel.deserialize(BalanceMessageValue);
+                assert (deserialized > 0) : "protoex.BalanceMessage deserialization failed!";
+
+                // Log the value
+                if (getLogging())
+                {
+                    String message = BalanceMessageValue.toString();
+                    onReceiveLog(message);
+                }
+
+                // Call receive handler with deserialized value
+                onReceive(BalanceMessageValue);
+                return true;
+            }
+            case (int)com.chronoxor.protoex.fbe.AccountMessageModel.fbeTypeConst:
+            {
+                // Deserialize the value from the FBE stream
+                AccountMessageModel.attach(buffer, offset);
+                assert AccountMessageModel.verify() : "protoex.AccountMessage validation failed!";
+                long deserialized = AccountMessageModel.deserialize(AccountMessageValue);
+                assert (deserialized > 0) : "protoex.AccountMessage deserialization failed!";
+
+                // Log the value
+                if (getLogging())
+                {
+                    String message = AccountMessageValue.toString();
+                    onReceiveLog(message);
+                }
+
+                // Call receive handler with deserialized value
+                onReceive(AccountMessageValue);
                 return true;
             }
         }

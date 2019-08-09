@@ -25,9 +25,9 @@ public:
     bool check() const { return _order && _balance && _account; }
 
 protected:
-    void onReceive(const protoex::Order& value) override { _order = true; }
-    void onReceive(const protoex::Balance& value) override { _balance = true; }
-    void onReceive(const protoex::Account& value) override { _account = true; }
+    void onReceive(const protoex::OrderMessage& value) override { _order = true; }
+    void onReceive(const protoex::BalanceMessage& value) override { _balance = true; }
+    void onReceive(const protoex::AccountMessage& value) override { _account = true; }
 
 private:
     bool _order;
@@ -40,18 +40,18 @@ bool SendAndReceiveFinal(size_t index1, size_t index2)
     MyFinalSender sender;
 
     // Create and send a new order
-    protoex::Order order = { 1, "EURUSD", protoex::OrderSide::buy, protoex::OrderType::market, 1.23456, 1000.0, 0.0, 0.0 };
+    protoex::OrderMessage order({ protoex::Order({ 1, "EURUSD", protoex::OrderSide::buy, protoex::OrderType::market, 1.23456, 1000.0, 0.0, 0.0 }) });
     sender.send(order);
 
     // Create and send a new balance wallet
-    protoex::Balance balance = { proto::Balance("USD", 1000.0), 100.0 };
+    protoex::BalanceMessage balance({ protoex::Balance({ "USD", 1000.0 }, 100.0) });
     sender.send(balance);
 
     // Create and send a new account with some orders
-    protoex::Account account = { 1, "Test", protoex::StateEx::good, { proto::Balance("USD", 1000.0), 100.0 }, std::make_optional<protoex::Balance>({ proto::Balance("EUR", 100.0), 10.0 }), {} };
-    account.orders.emplace_back(1, "EURUSD", protoex::OrderSide::buy, protoex::OrderType::market, 1.23456, 1000.0, 0.0, 0.0);
-    account.orders.emplace_back(2, "EURUSD", protoex::OrderSide::sell, protoex::OrderType::limit, 1.0, 100.0, 0.0, 0.0);
-    account.orders.emplace_back(3, "EURUSD", protoex::OrderSide::buy, protoex::OrderType::stop, 1.5, 10.0, 0.0, 0.0);
+    protoex::AccountMessage account({ protoex::Account({ 1, "Test", protoex::StateEx::good, { proto::Balance("USD", 1000.0), 100.0 }, std::make_optional<protoex::Balance>({ proto::Balance("EUR", 100.0), 10.0 }), {} }) });
+    account.body.orders.emplace_back(1, "EURUSD", protoex::OrderSide::buy, protoex::OrderType::market, 1.23456, 1000.0, 0.0, 0.0);
+    account.body.orders.emplace_back(2, "EURUSD", protoex::OrderSide::sell, protoex::OrderType::limit, 1.0, 100.0, 0.0, 0.0);
+    account.body.orders.emplace_back(3, "EURUSD", protoex::OrderSide::buy, protoex::OrderType::stop, 1.5, 10.0, 0.0, 0.0);
     sender.send(account);
 
     MyFinalReceiver receiver;

@@ -14,19 +14,19 @@ var _ = fbe.Version
 // Fast Binary Encoding proto final receiver
 type FinalReceiver struct {
     *fbe.Receiver
-    orderValue *Order
-    orderModel *OrderFinalModel
-    balanceValue *Balance
-    balanceModel *BalanceFinalModel
-    accountValue *Account
-    accountModel *AccountFinalModel
+    orderMessageValue *OrderMessage
+    orderMessageModel *OrderMessageFinalModel
+    balanceMessageValue *BalanceMessage
+    balanceMessageModel *BalanceMessageFinalModel
+    accountMessageValue *AccountMessage
+    accountMessageModel *AccountMessageFinalModel
 
-    // Receive Order handler
-    HandlerOnReceiveOrder OnReceiveOrder
-    // Receive Balance handler
-    HandlerOnReceiveBalance OnReceiveBalance
-    // Receive Account handler
-    HandlerOnReceiveAccount OnReceiveAccount
+    // Receive OrderMessage handler
+    HandlerOnReceiveOrderMessage OnReceiveOrderMessage
+    // Receive BalanceMessage handler
+    HandlerOnReceiveBalanceMessage OnReceiveBalanceMessage
+    // Receive AccountMessage handler
+    HandlerOnReceiveAccountMessage OnReceiveAccountMessage
 }
 
 // Create a new proto final receiver with an empty buffer
@@ -38,62 +38,65 @@ func NewFinalReceiver() *FinalReceiver {
 func NewFinalReceiverWithBuffer(buffer *fbe.Buffer) *FinalReceiver {
     receiver := &FinalReceiver{
         fbe.NewReceiver(buffer, true),
-        NewOrder(),
-        NewOrderFinalModel(buffer),
-        NewBalance(),
-        NewBalanceFinalModel(buffer),
-        NewAccount(),
-        NewAccountFinalModel(buffer),
+        NewOrderMessage(),
+        NewOrderMessageFinalModel(buffer),
+        NewBalanceMessage(),
+        NewBalanceMessageFinalModel(buffer),
+        NewAccountMessage(),
+        NewAccountMessageFinalModel(buffer),
+        nil,
+        nil,
+        nil,
         nil,
         nil,
         nil,
     }
     receiver.SetupHandlerOnReceive(receiver)
-    receiver.SetupHandlerOnReceiveOrderFunc(func(value *Order) {})
-    receiver.SetupHandlerOnReceiveBalanceFunc(func(value *Balance) {})
-    receiver.SetupHandlerOnReceiveAccountFunc(func(value *Account) {})
+    receiver.SetupHandlerOnReceiveOrderMessageFunc(func(value *OrderMessage) {})
+    receiver.SetupHandlerOnReceiveBalanceMessageFunc(func(value *BalanceMessage) {})
+    receiver.SetupHandlerOnReceiveAccountMessageFunc(func(value *AccountMessage) {})
     return receiver
 }
 
 // Setup handlers
 func (r *FinalReceiver) SetupHandlers(handlers interface{}) {
     r.Receiver.SetupHandlers(handlers)
-    if handler, ok := handlers.(OnReceiveOrder); ok {
-        r.SetupHandlerOnReceiveOrder(handler)
+    if handler, ok := handlers.(OnReceiveOrderMessage); ok {
+        r.SetupHandlerOnReceiveOrderMessage(handler)
     }
-    if handler, ok := handlers.(OnReceiveBalance); ok {
-        r.SetupHandlerOnReceiveBalance(handler)
+    if handler, ok := handlers.(OnReceiveBalanceMessage); ok {
+        r.SetupHandlerOnReceiveBalanceMessage(handler)
     }
-    if handler, ok := handlers.(OnReceiveAccount); ok {
-        r.SetupHandlerOnReceiveAccount(handler)
+    if handler, ok := handlers.(OnReceiveAccountMessage); ok {
+        r.SetupHandlerOnReceiveAccountMessage(handler)
     }
 }
 
-// Setup receive Order handler
-func (r *FinalReceiver) SetupHandlerOnReceiveOrder(handler OnReceiveOrder) { r.HandlerOnReceiveOrder = handler }
-// Setup receive Order handler function
-func (r *FinalReceiver) SetupHandlerOnReceiveOrderFunc(function func(value *Order)) { r.HandlerOnReceiveOrder = OnReceiveOrderFunc(function) }
-// Setup receive Balance handler
-func (r *FinalReceiver) SetupHandlerOnReceiveBalance(handler OnReceiveBalance) { r.HandlerOnReceiveBalance = handler }
-// Setup receive Balance handler function
-func (r *FinalReceiver) SetupHandlerOnReceiveBalanceFunc(function func(value *Balance)) { r.HandlerOnReceiveBalance = OnReceiveBalanceFunc(function) }
-// Setup receive Account handler
-func (r *FinalReceiver) SetupHandlerOnReceiveAccount(handler OnReceiveAccount) { r.HandlerOnReceiveAccount = handler }
-// Setup receive Account handler function
-func (r *FinalReceiver) SetupHandlerOnReceiveAccountFunc(function func(value *Account)) { r.HandlerOnReceiveAccount = OnReceiveAccountFunc(function) }
+// Setup receive OrderMessage handler
+func (r *FinalReceiver) SetupHandlerOnReceiveOrderMessage(handler OnReceiveOrderMessage) { r.HandlerOnReceiveOrderMessage = handler }
+// Setup receive OrderMessage handler function
+func (r *FinalReceiver) SetupHandlerOnReceiveOrderMessageFunc(function func(value *OrderMessage)) { r.HandlerOnReceiveOrderMessage = OnReceiveOrderMessageFunc(function) }
+// Setup receive BalanceMessage handler
+func (r *FinalReceiver) SetupHandlerOnReceiveBalanceMessage(handler OnReceiveBalanceMessage) { r.HandlerOnReceiveBalanceMessage = handler }
+// Setup receive BalanceMessage handler function
+func (r *FinalReceiver) SetupHandlerOnReceiveBalanceMessageFunc(function func(value *BalanceMessage)) { r.HandlerOnReceiveBalanceMessage = OnReceiveBalanceMessageFunc(function) }
+// Setup receive AccountMessage handler
+func (r *FinalReceiver) SetupHandlerOnReceiveAccountMessage(handler OnReceiveAccountMessage) { r.HandlerOnReceiveAccountMessage = handler }
+// Setup receive AccountMessage handler function
+func (r *FinalReceiver) SetupHandlerOnReceiveAccountMessageFunc(function func(value *AccountMessage)) { r.HandlerOnReceiveAccountMessage = OnReceiveAccountMessageFunc(function) }
 
 // Receive message handler
 func (r *FinalReceiver) OnReceive(fbeType int, buffer []byte) (bool, error) {
     switch fbeType {
-    case r.orderModel.FBEType():
+    case r.orderMessageModel.FBEType():
         // Deserialize the value from the FBE stream
-        r.orderModel.Buffer().Attach(buffer)
-        if !r.orderModel.Verify() {
-            return false, errors.New("proto.Order validation failed")
+        r.orderMessageModel.Buffer().Attach(buffer)
+        if !r.orderMessageModel.Verify() {
+            return false, errors.New("proto.OrderMessage validation failed")
         }
-        deserialized, err := r.orderModel.DeserializeValue(r.orderValue)
+        deserialized, err := r.orderMessageModel.DeserializeValue(r.orderMessageValue)
         if deserialized <= 0 {
-            return false, errors.New("proto.Order deserialization failed")
+            return false, errors.New("proto.OrderMessage deserialization failed")
         }
         if err != nil {
             return false, err
@@ -101,22 +104,22 @@ func (r *FinalReceiver) OnReceive(fbeType int, buffer []byte) (bool, error) {
 
         // Log the value
         if r.Logging() {
-            message := r.orderValue.String()
+            message := r.orderMessageValue.String()
             r.HandlerOnReceiveLog.OnReceiveLog(message)
         }
 
         // Call receive handler with deserialized value
-        r.HandlerOnReceiveOrder.OnReceiveOrder(r.orderValue)
+        r.HandlerOnReceiveOrderMessage.OnReceiveOrderMessage(r.orderMessageValue)
         return true, nil
-    case r.balanceModel.FBEType():
+    case r.balanceMessageModel.FBEType():
         // Deserialize the value from the FBE stream
-        r.balanceModel.Buffer().Attach(buffer)
-        if !r.balanceModel.Verify() {
-            return false, errors.New("proto.Balance validation failed")
+        r.balanceMessageModel.Buffer().Attach(buffer)
+        if !r.balanceMessageModel.Verify() {
+            return false, errors.New("proto.BalanceMessage validation failed")
         }
-        deserialized, err := r.balanceModel.DeserializeValue(r.balanceValue)
+        deserialized, err := r.balanceMessageModel.DeserializeValue(r.balanceMessageValue)
         if deserialized <= 0 {
-            return false, errors.New("proto.Balance deserialization failed")
+            return false, errors.New("proto.BalanceMessage deserialization failed")
         }
         if err != nil {
             return false, err
@@ -124,22 +127,22 @@ func (r *FinalReceiver) OnReceive(fbeType int, buffer []byte) (bool, error) {
 
         // Log the value
         if r.Logging() {
-            message := r.balanceValue.String()
+            message := r.balanceMessageValue.String()
             r.HandlerOnReceiveLog.OnReceiveLog(message)
         }
 
         // Call receive handler with deserialized value
-        r.HandlerOnReceiveBalance.OnReceiveBalance(r.balanceValue)
+        r.HandlerOnReceiveBalanceMessage.OnReceiveBalanceMessage(r.balanceMessageValue)
         return true, nil
-    case r.accountModel.FBEType():
+    case r.accountMessageModel.FBEType():
         // Deserialize the value from the FBE stream
-        r.accountModel.Buffer().Attach(buffer)
-        if !r.accountModel.Verify() {
-            return false, errors.New("proto.Account validation failed")
+        r.accountMessageModel.Buffer().Attach(buffer)
+        if !r.accountMessageModel.Verify() {
+            return false, errors.New("proto.AccountMessage validation failed")
         }
-        deserialized, err := r.accountModel.DeserializeValue(r.accountValue)
+        deserialized, err := r.accountMessageModel.DeserializeValue(r.accountMessageValue)
         if deserialized <= 0 {
-            return false, errors.New("proto.Account deserialization failed")
+            return false, errors.New("proto.AccountMessage deserialization failed")
         }
         if err != nil {
             return false, err
@@ -147,12 +150,12 @@ func (r *FinalReceiver) OnReceive(fbeType int, buffer []byte) (bool, error) {
 
         // Log the value
         if r.Logging() {
-            message := r.accountValue.String()
+            message := r.accountMessageValue.String()
             r.HandlerOnReceiveLog.OnReceiveLog(message)
         }
 
         // Call receive handler with deserialized value
-        r.HandlerOnReceiveAccount.OnReceiveAccount(r.accountValue)
+        r.HandlerOnReceiveAccountMessage.OnReceiveAccountMessage(r.accountMessageValue)
         return true, nil
     }
 

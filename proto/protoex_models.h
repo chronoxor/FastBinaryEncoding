@@ -1955,3 +1955,1404 @@ private:
 
 } // namespace protoex
 } // namespace FBE
+
+namespace FBE {
+
+// Fast Binary Encoding ::protoex::OrderMessage field model
+template <class TBuffer>
+class FieldModel<TBuffer, ::protoex::OrderMessage>
+{
+public:
+    FieldModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
+        , body(buffer, 4 + 4)
+    {}
+
+    // Get the field offset
+    size_t fbe_offset() const noexcept { return _offset; }
+    // Get the field size
+    size_t fbe_size() const noexcept { return 4; }
+    // Get the field body size
+    size_t fbe_body() const noexcept
+    {
+        size_t fbe_result = 4 + 4
+            + body.fbe_size()
+            ;
+        return fbe_result;
+    }
+    // Get the field extra size
+    size_t fbe_extra() const noexcept
+    {
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return 0;
+
+        uint32_t fbe_struct_offset = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset()));
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + 4) > _buffer.size()))
+            return 0;
+
+        _buffer.shift(fbe_struct_offset);
+
+        size_t fbe_result = fbe_body()
+            + body.fbe_extra()
+            ;
+
+        _buffer.unshift(fbe_struct_offset);
+
+        return fbe_result;
+    }
+    // Get the field type
+    static constexpr size_t fbe_type() noexcept { return 11; }
+
+    // Shift the current field offset
+    void fbe_shift(size_t size) noexcept { _offset += size; }
+    // Unshift the current field offset
+    void fbe_unshift(size_t size) noexcept { _offset -= size; }
+
+    // Check if the struct value is valid
+    bool verify(bool fbe_verify_type = true) const noexcept
+    {
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return true;
+
+        uint32_t fbe_struct_offset = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset()));
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + 4 + 4) > _buffer.size()))
+            return false;
+
+        uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));
+        if (fbe_struct_size < (4 + 4))
+            return false;
+
+        uint32_t fbe_struct_type = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset + 4));
+        if (fbe_verify_type && (fbe_struct_type != fbe_type()))
+            return false;
+
+        _buffer.shift(fbe_struct_offset);
+        bool fbe_result = verify_fields(fbe_struct_size);
+        _buffer.unshift(fbe_struct_offset);
+        return fbe_result;
+    }
+
+    // Check if the struct fields are valid
+    bool verify_fields(size_t fbe_struct_size) const noexcept
+    {
+        size_t fbe_current_size = 4 + 4;
+
+        if ((fbe_current_size + body.fbe_size()) > fbe_struct_size)
+            return true;
+        if (!body.verify())
+            return false;
+        fbe_current_size += body.fbe_size();
+
+        return true;
+    }
+
+    // Get the struct value (begin phase)
+    size_t get_begin() const noexcept
+    {
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return 0;
+
+        uint32_t fbe_struct_offset = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset()));
+        assert(((fbe_struct_offset > 0) && ((_buffer.offset() + fbe_struct_offset + 4 + 4) <= _buffer.size())) && "Model is broken!");
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + 4 + 4) > _buffer.size()))
+            return 0;
+
+        uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));
+        assert((fbe_struct_size >= (4 + 4)) && "Model is broken!");
+        if (fbe_struct_size < (4 + 4))
+            return 0;
+
+        _buffer.shift(fbe_struct_offset);
+        return fbe_struct_offset;
+    }
+
+    // Get the struct value (end phase)
+    void get_end(size_t fbe_begin) const noexcept
+    {
+        _buffer.unshift(fbe_begin);
+    }
+
+    // Get the struct value
+    void get(::protoex::OrderMessage& fbe_value) const noexcept
+    {
+        size_t fbe_begin = get_begin();
+        if (fbe_begin == 0)
+            return;
+
+        uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset()));
+        get_fields(fbe_value, fbe_struct_size);
+        get_end(fbe_begin);
+    }
+
+    // Get the struct fields values
+    void get_fields(::protoex::OrderMessage& fbe_value, size_t fbe_struct_size) const noexcept
+    {
+        size_t fbe_current_size = 4 + 4;
+
+        if ((fbe_current_size + body.fbe_size()) <= fbe_struct_size)
+            body.get(fbe_value.body);
+        else
+            fbe_value.body = ::protoex::Order();
+        fbe_current_size += body.fbe_size();
+    }
+
+    // Set the struct value (begin phase)
+    size_t set_begin()
+    {
+        assert(((_buffer.offset() + fbe_offset() + fbe_size()) <= _buffer.size()) && "Model is broken!");
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return 0;
+
+        uint32_t fbe_struct_size = (uint32_t)fbe_body();
+        uint32_t fbe_struct_offset = (uint32_t)(_buffer.allocate(fbe_struct_size) - _buffer.offset());
+        assert(((fbe_struct_offset > 0) && ((_buffer.offset() + fbe_struct_offset + fbe_struct_size) <= _buffer.size())) && "Model is broken!");
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + fbe_struct_size) > _buffer.size()))
+            return 0;
+
+        *((uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset())) = fbe_struct_offset;
+        *((uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset)) = fbe_struct_size;
+        *((uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset + 4)) = (uint32_t)fbe_type();
+
+        _buffer.shift(fbe_struct_offset);
+        return fbe_struct_offset;
+    }
+
+    // Set the struct value (end phase)
+    void set_end(size_t fbe_begin)
+    {
+        _buffer.unshift(fbe_begin);
+    }
+
+    // Set the struct value
+    void set(const ::protoex::OrderMessage& fbe_value) noexcept
+    {
+        size_t fbe_begin = set_begin();
+        if (fbe_begin == 0)
+            return;
+
+        set_fields(fbe_value);
+        set_end(fbe_begin);
+    }
+
+    // Set the struct fields values
+    void set_fields(const ::protoex::OrderMessage& fbe_value) noexcept
+    {
+        body.set(fbe_value.body);
+    }
+
+private:
+    TBuffer& _buffer;
+    size_t _offset;
+
+public:
+    FieldModel<TBuffer, ::protoex::Order> body;
+};
+
+} // namespace FBE
+
+namespace FBE {
+namespace protoex {
+
+// Fast Binary Encoding OrderMessage model
+template <class TBuffer>
+class OrderMessageModel : public FBE::Model<TBuffer>
+{
+public:
+    OrderMessageModel() : model(this->buffer(), 4) {}
+    OrderMessageModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), model(this->buffer(), 4) {}
+
+    // Get the model size
+    size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
+    // Get the model type
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::protoex::OrderMessage>::fbe_type(); }
+
+    // Check if the struct value is valid
+    bool verify()
+    {
+        if ((this->buffer().offset() + model.fbe_offset() - 4) > this->buffer().size())
+            return false;
+
+        uint32_t fbe_full_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + model.fbe_offset() - 4));
+        if (fbe_full_size < model.fbe_size())
+            return false;
+
+        return model.verify();
+    }
+
+    // Create a new model (begin phase)
+    size_t create_begin()
+    {
+        size_t fbe_begin = this->buffer().allocate(4 + model.fbe_size());
+        return fbe_begin;
+    }
+
+    // Create a new model (end phase)
+    size_t create_end(size_t fbe_begin)
+    {
+        size_t fbe_end = this->buffer().size();
+        uint32_t fbe_full_size = (uint32_t)(fbe_end - fbe_begin);
+        *((uint32_t*)(this->buffer().data() + this->buffer().offset() + model.fbe_offset() - 4)) = fbe_full_size;
+        return fbe_full_size;
+    }
+
+    // Serialize the struct value
+    size_t serialize(const ::protoex::OrderMessage& value)
+    {
+        size_t fbe_begin = create_begin();
+        model.set(value);
+        size_t fbe_full_size = create_end(fbe_begin);
+        return fbe_full_size;
+    }
+
+    // Deserialize the struct value
+    size_t deserialize(::protoex::OrderMessage& value) const noexcept
+    {
+        if ((this->buffer().offset() + model.fbe_offset() - 4) > this->buffer().size())
+            return 0;
+
+        uint32_t fbe_full_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + model.fbe_offset() - 4));
+        assert((fbe_full_size >= model.fbe_size()) && "Model is broken!");
+        if (fbe_full_size < model.fbe_size())
+            return 0;
+
+        model.get(value);
+        return fbe_full_size;
+    }
+
+    // Move to the next struct value
+    void next(size_t prev) noexcept
+    {
+        model.fbe_shift(prev);
+    }
+
+public:
+    FieldModel<TBuffer, ::protoex::OrderMessage> model;
+};
+
+} // namespace protoex
+} // namespace FBE
+
+namespace FBE {
+
+// Fast Binary Encoding ::protoex::OrderMessage final model
+template <class TBuffer>
+class FinalModel<TBuffer, ::protoex::OrderMessage>
+{
+public:
+    FinalModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
+        , body(buffer, 0)
+    {}
+
+    // Get the allocation size
+    size_t fbe_allocation_size(const ::protoex::OrderMessage& fbe_value) const noexcept
+    {
+        size_t fbe_result = 0
+            + body.fbe_allocation_size(fbe_value.body)
+            ;
+        return fbe_result;
+    }
+
+    // Get the final offset
+    size_t fbe_offset() const noexcept { return _offset; }
+    // Set the final offset
+    size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
+    // Get the final type
+    static constexpr size_t fbe_type() noexcept { return 11; }
+
+    // Shift the current final offset
+    void fbe_shift(size_t size) noexcept { _offset += size; }
+    // Unshift the current final offset
+    void fbe_unshift(size_t size) noexcept { _offset -= size; }
+
+    // Check if the struct value is valid
+    size_t verify() const noexcept
+    {
+        _buffer.shift(fbe_offset());
+        size_t fbe_result = verify_fields();
+        _buffer.unshift(fbe_offset());
+        return fbe_result;
+    }
+
+    // Check if the struct fields are valid
+    size_t verify_fields() const noexcept
+    {
+        size_t fbe_current_offset = 0;
+        size_t fbe_field_size;
+
+        body.fbe_offset(fbe_current_offset);
+        fbe_field_size = body.verify();
+        if (fbe_field_size == std::numeric_limits<std::size_t>::max())
+            return std::numeric_limits<std::size_t>::max();
+        fbe_current_offset += fbe_field_size;
+
+        return fbe_current_offset;
+    }
+
+    // Get the struct value
+    size_t get(::protoex::OrderMessage& fbe_value) const noexcept
+    {
+        _buffer.shift(fbe_offset());
+        size_t fbe_result = get_fields(fbe_value);
+        _buffer.unshift(fbe_offset());
+        return fbe_result;
+    }
+
+    // Get the struct fields values
+    size_t get_fields(::protoex::OrderMessage& fbe_value) const noexcept
+    {
+        size_t fbe_current_offset = 0;
+        size_t fbe_current_size = 0;
+        size_t fbe_field_size;
+
+        body.fbe_offset(fbe_current_offset);
+        fbe_field_size = body.get(fbe_value.body);
+        fbe_current_offset += fbe_field_size;
+        fbe_current_size += fbe_field_size;
+
+        return fbe_current_size;
+    }
+
+    // Set the struct value
+    size_t set(const ::protoex::OrderMessage& fbe_value) noexcept
+    {
+        _buffer.shift(fbe_offset());
+        size_t fbe_result = set_fields(fbe_value);
+        _buffer.unshift(fbe_offset());
+        return fbe_result;
+    }
+
+    // Set the struct fields values
+    size_t set_fields(const ::protoex::OrderMessage& fbe_value) noexcept
+    {
+        size_t fbe_current_offset = 0;
+        size_t fbe_current_size = 0;
+        size_t fbe_field_size;
+
+        body.fbe_offset(fbe_current_offset);
+        fbe_field_size = body.set(fbe_value.body);
+        fbe_current_offset += fbe_field_size;
+        fbe_current_size += fbe_field_size;
+
+        return fbe_current_size;
+    }
+
+private:
+    TBuffer& _buffer;
+    mutable size_t _offset;
+
+public:
+    FinalModel<TBuffer, ::protoex::Order> body;
+};
+
+} // namespace FBE
+
+namespace FBE {
+namespace protoex {
+
+// Fast Binary Encoding OrderMessage final model
+template <class TBuffer>
+class OrderMessageFinalModel : public FBE::Model<TBuffer>
+{
+public:
+    OrderMessageFinalModel() : _model(this->buffer(), 8) {}
+    OrderMessageFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
+
+    // Get the model type
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::protoex::OrderMessage>::fbe_type(); }
+
+    // Check if the struct value is valid
+    bool verify()
+    {
+        if ((this->buffer().offset() + _model.fbe_offset()) > this->buffer().size())
+            return false;
+
+        size_t fbe_struct_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 8));
+        size_t fbe_struct_type = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 4));
+        if ((fbe_struct_size == 0) || (fbe_struct_type != fbe_type()))
+            return false;
+
+        return ((8 + _model.verify()) == fbe_struct_size);
+    }
+
+    // Serialize the struct value
+    size_t serialize(const ::protoex::OrderMessage& value)
+    {
+        size_t fbe_initial_size = this->buffer().size();
+
+        uint32_t fbe_struct_type = (uint32_t)fbe_type();
+        uint32_t fbe_struct_size = (uint32_t)(8 + _model.fbe_allocation_size(value));
+        uint32_t fbe_struct_offset = (uint32_t)(this->buffer().allocate(fbe_struct_size) - this->buffer().offset());
+        assert(((this->buffer().offset() + fbe_struct_offset + fbe_struct_size) <= this->buffer().size()) && "Model is broken!");
+        if ((this->buffer().offset() + fbe_struct_offset + fbe_struct_size) > this->buffer().size())
+            return 0;
+
+        fbe_struct_size = (uint32_t)(8 + _model.set(value));
+        this->buffer().resize(fbe_initial_size + fbe_struct_size);
+
+        *((uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 8)) = fbe_struct_size;
+        *((uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 4)) = fbe_struct_type;
+
+        return fbe_struct_size;
+    }
+
+    // Deserialize the struct value
+    size_t deserialize(::protoex::OrderMessage& value) const noexcept
+    {
+        assert(((this->buffer().offset() + _model.fbe_offset()) <= this->buffer().size()) && "Model is broken!");
+        if ((this->buffer().offset() + _model.fbe_offset()) > this->buffer().size())
+            return 0;
+
+        size_t fbe_struct_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 8));
+        size_t fbe_struct_type = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 4));
+        assert(((fbe_struct_size > 0) && (fbe_struct_type == fbe_type())) && "Model is broken!");
+        if ((fbe_struct_size == 0) || (fbe_struct_type != fbe_type()))
+            return 8;
+
+        return 8 + _model.get(value);
+    }
+
+    // Move to the next struct value
+    void next(size_t prev) noexcept
+    {
+        _model.fbe_shift(prev);
+    }
+
+private:
+    FinalModel<TBuffer, ::protoex::OrderMessage> _model;
+};
+
+} // namespace protoex
+} // namespace FBE
+
+namespace FBE {
+
+// Fast Binary Encoding ::protoex::BalanceMessage field model
+template <class TBuffer>
+class FieldModel<TBuffer, ::protoex::BalanceMessage>
+{
+public:
+    FieldModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
+        , body(buffer, 4 + 4)
+    {}
+
+    // Get the field offset
+    size_t fbe_offset() const noexcept { return _offset; }
+    // Get the field size
+    size_t fbe_size() const noexcept { return 4; }
+    // Get the field body size
+    size_t fbe_body() const noexcept
+    {
+        size_t fbe_result = 4 + 4
+            + body.fbe_size()
+            ;
+        return fbe_result;
+    }
+    // Get the field extra size
+    size_t fbe_extra() const noexcept
+    {
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return 0;
+
+        uint32_t fbe_struct_offset = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset()));
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + 4) > _buffer.size()))
+            return 0;
+
+        _buffer.shift(fbe_struct_offset);
+
+        size_t fbe_result = fbe_body()
+            + body.fbe_extra()
+            ;
+
+        _buffer.unshift(fbe_struct_offset);
+
+        return fbe_result;
+    }
+    // Get the field type
+    static constexpr size_t fbe_type() noexcept { return 12; }
+
+    // Shift the current field offset
+    void fbe_shift(size_t size) noexcept { _offset += size; }
+    // Unshift the current field offset
+    void fbe_unshift(size_t size) noexcept { _offset -= size; }
+
+    // Check if the struct value is valid
+    bool verify(bool fbe_verify_type = true) const noexcept
+    {
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return true;
+
+        uint32_t fbe_struct_offset = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset()));
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + 4 + 4) > _buffer.size()))
+            return false;
+
+        uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));
+        if (fbe_struct_size < (4 + 4))
+            return false;
+
+        uint32_t fbe_struct_type = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset + 4));
+        if (fbe_verify_type && (fbe_struct_type != fbe_type()))
+            return false;
+
+        _buffer.shift(fbe_struct_offset);
+        bool fbe_result = verify_fields(fbe_struct_size);
+        _buffer.unshift(fbe_struct_offset);
+        return fbe_result;
+    }
+
+    // Check if the struct fields are valid
+    bool verify_fields(size_t fbe_struct_size) const noexcept
+    {
+        size_t fbe_current_size = 4 + 4;
+
+        if ((fbe_current_size + body.fbe_size()) > fbe_struct_size)
+            return true;
+        if (!body.verify())
+            return false;
+        fbe_current_size += body.fbe_size();
+
+        return true;
+    }
+
+    // Get the struct value (begin phase)
+    size_t get_begin() const noexcept
+    {
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return 0;
+
+        uint32_t fbe_struct_offset = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset()));
+        assert(((fbe_struct_offset > 0) && ((_buffer.offset() + fbe_struct_offset + 4 + 4) <= _buffer.size())) && "Model is broken!");
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + 4 + 4) > _buffer.size()))
+            return 0;
+
+        uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));
+        assert((fbe_struct_size >= (4 + 4)) && "Model is broken!");
+        if (fbe_struct_size < (4 + 4))
+            return 0;
+
+        _buffer.shift(fbe_struct_offset);
+        return fbe_struct_offset;
+    }
+
+    // Get the struct value (end phase)
+    void get_end(size_t fbe_begin) const noexcept
+    {
+        _buffer.unshift(fbe_begin);
+    }
+
+    // Get the struct value
+    void get(::protoex::BalanceMessage& fbe_value) const noexcept
+    {
+        size_t fbe_begin = get_begin();
+        if (fbe_begin == 0)
+            return;
+
+        uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset()));
+        get_fields(fbe_value, fbe_struct_size);
+        get_end(fbe_begin);
+    }
+
+    // Get the struct fields values
+    void get_fields(::protoex::BalanceMessage& fbe_value, size_t fbe_struct_size) const noexcept
+    {
+        size_t fbe_current_size = 4 + 4;
+
+        if ((fbe_current_size + body.fbe_size()) <= fbe_struct_size)
+            body.get(fbe_value.body);
+        else
+            fbe_value.body = ::protoex::Balance();
+        fbe_current_size += body.fbe_size();
+    }
+
+    // Set the struct value (begin phase)
+    size_t set_begin()
+    {
+        assert(((_buffer.offset() + fbe_offset() + fbe_size()) <= _buffer.size()) && "Model is broken!");
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return 0;
+
+        uint32_t fbe_struct_size = (uint32_t)fbe_body();
+        uint32_t fbe_struct_offset = (uint32_t)(_buffer.allocate(fbe_struct_size) - _buffer.offset());
+        assert(((fbe_struct_offset > 0) && ((_buffer.offset() + fbe_struct_offset + fbe_struct_size) <= _buffer.size())) && "Model is broken!");
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + fbe_struct_size) > _buffer.size()))
+            return 0;
+
+        *((uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset())) = fbe_struct_offset;
+        *((uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset)) = fbe_struct_size;
+        *((uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset + 4)) = (uint32_t)fbe_type();
+
+        _buffer.shift(fbe_struct_offset);
+        return fbe_struct_offset;
+    }
+
+    // Set the struct value (end phase)
+    void set_end(size_t fbe_begin)
+    {
+        _buffer.unshift(fbe_begin);
+    }
+
+    // Set the struct value
+    void set(const ::protoex::BalanceMessage& fbe_value) noexcept
+    {
+        size_t fbe_begin = set_begin();
+        if (fbe_begin == 0)
+            return;
+
+        set_fields(fbe_value);
+        set_end(fbe_begin);
+    }
+
+    // Set the struct fields values
+    void set_fields(const ::protoex::BalanceMessage& fbe_value) noexcept
+    {
+        body.set(fbe_value.body);
+    }
+
+private:
+    TBuffer& _buffer;
+    size_t _offset;
+
+public:
+    FieldModel<TBuffer, ::protoex::Balance> body;
+};
+
+} // namespace FBE
+
+namespace FBE {
+namespace protoex {
+
+// Fast Binary Encoding BalanceMessage model
+template <class TBuffer>
+class BalanceMessageModel : public FBE::Model<TBuffer>
+{
+public:
+    BalanceMessageModel() : model(this->buffer(), 4) {}
+    BalanceMessageModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), model(this->buffer(), 4) {}
+
+    // Get the model size
+    size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
+    // Get the model type
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::protoex::BalanceMessage>::fbe_type(); }
+
+    // Check if the struct value is valid
+    bool verify()
+    {
+        if ((this->buffer().offset() + model.fbe_offset() - 4) > this->buffer().size())
+            return false;
+
+        uint32_t fbe_full_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + model.fbe_offset() - 4));
+        if (fbe_full_size < model.fbe_size())
+            return false;
+
+        return model.verify();
+    }
+
+    // Create a new model (begin phase)
+    size_t create_begin()
+    {
+        size_t fbe_begin = this->buffer().allocate(4 + model.fbe_size());
+        return fbe_begin;
+    }
+
+    // Create a new model (end phase)
+    size_t create_end(size_t fbe_begin)
+    {
+        size_t fbe_end = this->buffer().size();
+        uint32_t fbe_full_size = (uint32_t)(fbe_end - fbe_begin);
+        *((uint32_t*)(this->buffer().data() + this->buffer().offset() + model.fbe_offset() - 4)) = fbe_full_size;
+        return fbe_full_size;
+    }
+
+    // Serialize the struct value
+    size_t serialize(const ::protoex::BalanceMessage& value)
+    {
+        size_t fbe_begin = create_begin();
+        model.set(value);
+        size_t fbe_full_size = create_end(fbe_begin);
+        return fbe_full_size;
+    }
+
+    // Deserialize the struct value
+    size_t deserialize(::protoex::BalanceMessage& value) const noexcept
+    {
+        if ((this->buffer().offset() + model.fbe_offset() - 4) > this->buffer().size())
+            return 0;
+
+        uint32_t fbe_full_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + model.fbe_offset() - 4));
+        assert((fbe_full_size >= model.fbe_size()) && "Model is broken!");
+        if (fbe_full_size < model.fbe_size())
+            return 0;
+
+        model.get(value);
+        return fbe_full_size;
+    }
+
+    // Move to the next struct value
+    void next(size_t prev) noexcept
+    {
+        model.fbe_shift(prev);
+    }
+
+public:
+    FieldModel<TBuffer, ::protoex::BalanceMessage> model;
+};
+
+} // namespace protoex
+} // namespace FBE
+
+namespace FBE {
+
+// Fast Binary Encoding ::protoex::BalanceMessage final model
+template <class TBuffer>
+class FinalModel<TBuffer, ::protoex::BalanceMessage>
+{
+public:
+    FinalModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
+        , body(buffer, 0)
+    {}
+
+    // Get the allocation size
+    size_t fbe_allocation_size(const ::protoex::BalanceMessage& fbe_value) const noexcept
+    {
+        size_t fbe_result = 0
+            + body.fbe_allocation_size(fbe_value.body)
+            ;
+        return fbe_result;
+    }
+
+    // Get the final offset
+    size_t fbe_offset() const noexcept { return _offset; }
+    // Set the final offset
+    size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
+    // Get the final type
+    static constexpr size_t fbe_type() noexcept { return 12; }
+
+    // Shift the current final offset
+    void fbe_shift(size_t size) noexcept { _offset += size; }
+    // Unshift the current final offset
+    void fbe_unshift(size_t size) noexcept { _offset -= size; }
+
+    // Check if the struct value is valid
+    size_t verify() const noexcept
+    {
+        _buffer.shift(fbe_offset());
+        size_t fbe_result = verify_fields();
+        _buffer.unshift(fbe_offset());
+        return fbe_result;
+    }
+
+    // Check if the struct fields are valid
+    size_t verify_fields() const noexcept
+    {
+        size_t fbe_current_offset = 0;
+        size_t fbe_field_size;
+
+        body.fbe_offset(fbe_current_offset);
+        fbe_field_size = body.verify();
+        if (fbe_field_size == std::numeric_limits<std::size_t>::max())
+            return std::numeric_limits<std::size_t>::max();
+        fbe_current_offset += fbe_field_size;
+
+        return fbe_current_offset;
+    }
+
+    // Get the struct value
+    size_t get(::protoex::BalanceMessage& fbe_value) const noexcept
+    {
+        _buffer.shift(fbe_offset());
+        size_t fbe_result = get_fields(fbe_value);
+        _buffer.unshift(fbe_offset());
+        return fbe_result;
+    }
+
+    // Get the struct fields values
+    size_t get_fields(::protoex::BalanceMessage& fbe_value) const noexcept
+    {
+        size_t fbe_current_offset = 0;
+        size_t fbe_current_size = 0;
+        size_t fbe_field_size;
+
+        body.fbe_offset(fbe_current_offset);
+        fbe_field_size = body.get(fbe_value.body);
+        fbe_current_offset += fbe_field_size;
+        fbe_current_size += fbe_field_size;
+
+        return fbe_current_size;
+    }
+
+    // Set the struct value
+    size_t set(const ::protoex::BalanceMessage& fbe_value) noexcept
+    {
+        _buffer.shift(fbe_offset());
+        size_t fbe_result = set_fields(fbe_value);
+        _buffer.unshift(fbe_offset());
+        return fbe_result;
+    }
+
+    // Set the struct fields values
+    size_t set_fields(const ::protoex::BalanceMessage& fbe_value) noexcept
+    {
+        size_t fbe_current_offset = 0;
+        size_t fbe_current_size = 0;
+        size_t fbe_field_size;
+
+        body.fbe_offset(fbe_current_offset);
+        fbe_field_size = body.set(fbe_value.body);
+        fbe_current_offset += fbe_field_size;
+        fbe_current_size += fbe_field_size;
+
+        return fbe_current_size;
+    }
+
+private:
+    TBuffer& _buffer;
+    mutable size_t _offset;
+
+public:
+    FinalModel<TBuffer, ::protoex::Balance> body;
+};
+
+} // namespace FBE
+
+namespace FBE {
+namespace protoex {
+
+// Fast Binary Encoding BalanceMessage final model
+template <class TBuffer>
+class BalanceMessageFinalModel : public FBE::Model<TBuffer>
+{
+public:
+    BalanceMessageFinalModel() : _model(this->buffer(), 8) {}
+    BalanceMessageFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
+
+    // Get the model type
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::protoex::BalanceMessage>::fbe_type(); }
+
+    // Check if the struct value is valid
+    bool verify()
+    {
+        if ((this->buffer().offset() + _model.fbe_offset()) > this->buffer().size())
+            return false;
+
+        size_t fbe_struct_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 8));
+        size_t fbe_struct_type = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 4));
+        if ((fbe_struct_size == 0) || (fbe_struct_type != fbe_type()))
+            return false;
+
+        return ((8 + _model.verify()) == fbe_struct_size);
+    }
+
+    // Serialize the struct value
+    size_t serialize(const ::protoex::BalanceMessage& value)
+    {
+        size_t fbe_initial_size = this->buffer().size();
+
+        uint32_t fbe_struct_type = (uint32_t)fbe_type();
+        uint32_t fbe_struct_size = (uint32_t)(8 + _model.fbe_allocation_size(value));
+        uint32_t fbe_struct_offset = (uint32_t)(this->buffer().allocate(fbe_struct_size) - this->buffer().offset());
+        assert(((this->buffer().offset() + fbe_struct_offset + fbe_struct_size) <= this->buffer().size()) && "Model is broken!");
+        if ((this->buffer().offset() + fbe_struct_offset + fbe_struct_size) > this->buffer().size())
+            return 0;
+
+        fbe_struct_size = (uint32_t)(8 + _model.set(value));
+        this->buffer().resize(fbe_initial_size + fbe_struct_size);
+
+        *((uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 8)) = fbe_struct_size;
+        *((uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 4)) = fbe_struct_type;
+
+        return fbe_struct_size;
+    }
+
+    // Deserialize the struct value
+    size_t deserialize(::protoex::BalanceMessage& value) const noexcept
+    {
+        assert(((this->buffer().offset() + _model.fbe_offset()) <= this->buffer().size()) && "Model is broken!");
+        if ((this->buffer().offset() + _model.fbe_offset()) > this->buffer().size())
+            return 0;
+
+        size_t fbe_struct_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 8));
+        size_t fbe_struct_type = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 4));
+        assert(((fbe_struct_size > 0) && (fbe_struct_type == fbe_type())) && "Model is broken!");
+        if ((fbe_struct_size == 0) || (fbe_struct_type != fbe_type()))
+            return 8;
+
+        return 8 + _model.get(value);
+    }
+
+    // Move to the next struct value
+    void next(size_t prev) noexcept
+    {
+        _model.fbe_shift(prev);
+    }
+
+private:
+    FinalModel<TBuffer, ::protoex::BalanceMessage> _model;
+};
+
+} // namespace protoex
+} // namespace FBE
+
+namespace FBE {
+
+// Fast Binary Encoding ::protoex::AccountMessage field model
+template <class TBuffer>
+class FieldModel<TBuffer, ::protoex::AccountMessage>
+{
+public:
+    FieldModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
+        , body(buffer, 4 + 4)
+    {}
+
+    // Get the field offset
+    size_t fbe_offset() const noexcept { return _offset; }
+    // Get the field size
+    size_t fbe_size() const noexcept { return 4; }
+    // Get the field body size
+    size_t fbe_body() const noexcept
+    {
+        size_t fbe_result = 4 + 4
+            + body.fbe_size()
+            ;
+        return fbe_result;
+    }
+    // Get the field extra size
+    size_t fbe_extra() const noexcept
+    {
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return 0;
+
+        uint32_t fbe_struct_offset = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset()));
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + 4) > _buffer.size()))
+            return 0;
+
+        _buffer.shift(fbe_struct_offset);
+
+        size_t fbe_result = fbe_body()
+            + body.fbe_extra()
+            ;
+
+        _buffer.unshift(fbe_struct_offset);
+
+        return fbe_result;
+    }
+    // Get the field type
+    static constexpr size_t fbe_type() noexcept { return 13; }
+
+    // Shift the current field offset
+    void fbe_shift(size_t size) noexcept { _offset += size; }
+    // Unshift the current field offset
+    void fbe_unshift(size_t size) noexcept { _offset -= size; }
+
+    // Check if the struct value is valid
+    bool verify(bool fbe_verify_type = true) const noexcept
+    {
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return true;
+
+        uint32_t fbe_struct_offset = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset()));
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + 4 + 4) > _buffer.size()))
+            return false;
+
+        uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));
+        if (fbe_struct_size < (4 + 4))
+            return false;
+
+        uint32_t fbe_struct_type = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset + 4));
+        if (fbe_verify_type && (fbe_struct_type != fbe_type()))
+            return false;
+
+        _buffer.shift(fbe_struct_offset);
+        bool fbe_result = verify_fields(fbe_struct_size);
+        _buffer.unshift(fbe_struct_offset);
+        return fbe_result;
+    }
+
+    // Check if the struct fields are valid
+    bool verify_fields(size_t fbe_struct_size) const noexcept
+    {
+        size_t fbe_current_size = 4 + 4;
+
+        if ((fbe_current_size + body.fbe_size()) > fbe_struct_size)
+            return true;
+        if (!body.verify())
+            return false;
+        fbe_current_size += body.fbe_size();
+
+        return true;
+    }
+
+    // Get the struct value (begin phase)
+    size_t get_begin() const noexcept
+    {
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return 0;
+
+        uint32_t fbe_struct_offset = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset()));
+        assert(((fbe_struct_offset > 0) && ((_buffer.offset() + fbe_struct_offset + 4 + 4) <= _buffer.size())) && "Model is broken!");
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + 4 + 4) > _buffer.size()))
+            return 0;
+
+        uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));
+        assert((fbe_struct_size >= (4 + 4)) && "Model is broken!");
+        if (fbe_struct_size < (4 + 4))
+            return 0;
+
+        _buffer.shift(fbe_struct_offset);
+        return fbe_struct_offset;
+    }
+
+    // Get the struct value (end phase)
+    void get_end(size_t fbe_begin) const noexcept
+    {
+        _buffer.unshift(fbe_begin);
+    }
+
+    // Get the struct value
+    void get(::protoex::AccountMessage& fbe_value) const noexcept
+    {
+        size_t fbe_begin = get_begin();
+        if (fbe_begin == 0)
+            return;
+
+        uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset()));
+        get_fields(fbe_value, fbe_struct_size);
+        get_end(fbe_begin);
+    }
+
+    // Get the struct fields values
+    void get_fields(::protoex::AccountMessage& fbe_value, size_t fbe_struct_size) const noexcept
+    {
+        size_t fbe_current_size = 4 + 4;
+
+        if ((fbe_current_size + body.fbe_size()) <= fbe_struct_size)
+            body.get(fbe_value.body);
+        else
+            fbe_value.body = ::protoex::Account();
+        fbe_current_size += body.fbe_size();
+    }
+
+    // Set the struct value (begin phase)
+    size_t set_begin()
+    {
+        assert(((_buffer.offset() + fbe_offset() + fbe_size()) <= _buffer.size()) && "Model is broken!");
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return 0;
+
+        uint32_t fbe_struct_size = (uint32_t)fbe_body();
+        uint32_t fbe_struct_offset = (uint32_t)(_buffer.allocate(fbe_struct_size) - _buffer.offset());
+        assert(((fbe_struct_offset > 0) && ((_buffer.offset() + fbe_struct_offset + fbe_struct_size) <= _buffer.size())) && "Model is broken!");
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + fbe_struct_size) > _buffer.size()))
+            return 0;
+
+        *((uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset())) = fbe_struct_offset;
+        *((uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset)) = fbe_struct_size;
+        *((uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset + 4)) = (uint32_t)fbe_type();
+
+        _buffer.shift(fbe_struct_offset);
+        return fbe_struct_offset;
+    }
+
+    // Set the struct value (end phase)
+    void set_end(size_t fbe_begin)
+    {
+        _buffer.unshift(fbe_begin);
+    }
+
+    // Set the struct value
+    void set(const ::protoex::AccountMessage& fbe_value) noexcept
+    {
+        size_t fbe_begin = set_begin();
+        if (fbe_begin == 0)
+            return;
+
+        set_fields(fbe_value);
+        set_end(fbe_begin);
+    }
+
+    // Set the struct fields values
+    void set_fields(const ::protoex::AccountMessage& fbe_value) noexcept
+    {
+        body.set(fbe_value.body);
+    }
+
+private:
+    TBuffer& _buffer;
+    size_t _offset;
+
+public:
+    FieldModel<TBuffer, ::protoex::Account> body;
+};
+
+} // namespace FBE
+
+namespace FBE {
+namespace protoex {
+
+// Fast Binary Encoding AccountMessage model
+template <class TBuffer>
+class AccountMessageModel : public FBE::Model<TBuffer>
+{
+public:
+    AccountMessageModel() : model(this->buffer(), 4) {}
+    AccountMessageModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), model(this->buffer(), 4) {}
+
+    // Get the model size
+    size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
+    // Get the model type
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::protoex::AccountMessage>::fbe_type(); }
+
+    // Check if the struct value is valid
+    bool verify()
+    {
+        if ((this->buffer().offset() + model.fbe_offset() - 4) > this->buffer().size())
+            return false;
+
+        uint32_t fbe_full_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + model.fbe_offset() - 4));
+        if (fbe_full_size < model.fbe_size())
+            return false;
+
+        return model.verify();
+    }
+
+    // Create a new model (begin phase)
+    size_t create_begin()
+    {
+        size_t fbe_begin = this->buffer().allocate(4 + model.fbe_size());
+        return fbe_begin;
+    }
+
+    // Create a new model (end phase)
+    size_t create_end(size_t fbe_begin)
+    {
+        size_t fbe_end = this->buffer().size();
+        uint32_t fbe_full_size = (uint32_t)(fbe_end - fbe_begin);
+        *((uint32_t*)(this->buffer().data() + this->buffer().offset() + model.fbe_offset() - 4)) = fbe_full_size;
+        return fbe_full_size;
+    }
+
+    // Serialize the struct value
+    size_t serialize(const ::protoex::AccountMessage& value)
+    {
+        size_t fbe_begin = create_begin();
+        model.set(value);
+        size_t fbe_full_size = create_end(fbe_begin);
+        return fbe_full_size;
+    }
+
+    // Deserialize the struct value
+    size_t deserialize(::protoex::AccountMessage& value) const noexcept
+    {
+        if ((this->buffer().offset() + model.fbe_offset() - 4) > this->buffer().size())
+            return 0;
+
+        uint32_t fbe_full_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + model.fbe_offset() - 4));
+        assert((fbe_full_size >= model.fbe_size()) && "Model is broken!");
+        if (fbe_full_size < model.fbe_size())
+            return 0;
+
+        model.get(value);
+        return fbe_full_size;
+    }
+
+    // Move to the next struct value
+    void next(size_t prev) noexcept
+    {
+        model.fbe_shift(prev);
+    }
+
+public:
+    FieldModel<TBuffer, ::protoex::AccountMessage> model;
+};
+
+} // namespace protoex
+} // namespace FBE
+
+namespace FBE {
+
+// Fast Binary Encoding ::protoex::AccountMessage final model
+template <class TBuffer>
+class FinalModel<TBuffer, ::protoex::AccountMessage>
+{
+public:
+    FinalModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
+        , body(buffer, 0)
+    {}
+
+    // Get the allocation size
+    size_t fbe_allocation_size(const ::protoex::AccountMessage& fbe_value) const noexcept
+    {
+        size_t fbe_result = 0
+            + body.fbe_allocation_size(fbe_value.body)
+            ;
+        return fbe_result;
+    }
+
+    // Get the final offset
+    size_t fbe_offset() const noexcept { return _offset; }
+    // Set the final offset
+    size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
+    // Get the final type
+    static constexpr size_t fbe_type() noexcept { return 13; }
+
+    // Shift the current final offset
+    void fbe_shift(size_t size) noexcept { _offset += size; }
+    // Unshift the current final offset
+    void fbe_unshift(size_t size) noexcept { _offset -= size; }
+
+    // Check if the struct value is valid
+    size_t verify() const noexcept
+    {
+        _buffer.shift(fbe_offset());
+        size_t fbe_result = verify_fields();
+        _buffer.unshift(fbe_offset());
+        return fbe_result;
+    }
+
+    // Check if the struct fields are valid
+    size_t verify_fields() const noexcept
+    {
+        size_t fbe_current_offset = 0;
+        size_t fbe_field_size;
+
+        body.fbe_offset(fbe_current_offset);
+        fbe_field_size = body.verify();
+        if (fbe_field_size == std::numeric_limits<std::size_t>::max())
+            return std::numeric_limits<std::size_t>::max();
+        fbe_current_offset += fbe_field_size;
+
+        return fbe_current_offset;
+    }
+
+    // Get the struct value
+    size_t get(::protoex::AccountMessage& fbe_value) const noexcept
+    {
+        _buffer.shift(fbe_offset());
+        size_t fbe_result = get_fields(fbe_value);
+        _buffer.unshift(fbe_offset());
+        return fbe_result;
+    }
+
+    // Get the struct fields values
+    size_t get_fields(::protoex::AccountMessage& fbe_value) const noexcept
+    {
+        size_t fbe_current_offset = 0;
+        size_t fbe_current_size = 0;
+        size_t fbe_field_size;
+
+        body.fbe_offset(fbe_current_offset);
+        fbe_field_size = body.get(fbe_value.body);
+        fbe_current_offset += fbe_field_size;
+        fbe_current_size += fbe_field_size;
+
+        return fbe_current_size;
+    }
+
+    // Set the struct value
+    size_t set(const ::protoex::AccountMessage& fbe_value) noexcept
+    {
+        _buffer.shift(fbe_offset());
+        size_t fbe_result = set_fields(fbe_value);
+        _buffer.unshift(fbe_offset());
+        return fbe_result;
+    }
+
+    // Set the struct fields values
+    size_t set_fields(const ::protoex::AccountMessage& fbe_value) noexcept
+    {
+        size_t fbe_current_offset = 0;
+        size_t fbe_current_size = 0;
+        size_t fbe_field_size;
+
+        body.fbe_offset(fbe_current_offset);
+        fbe_field_size = body.set(fbe_value.body);
+        fbe_current_offset += fbe_field_size;
+        fbe_current_size += fbe_field_size;
+
+        return fbe_current_size;
+    }
+
+private:
+    TBuffer& _buffer;
+    mutable size_t _offset;
+
+public:
+    FinalModel<TBuffer, ::protoex::Account> body;
+};
+
+} // namespace FBE
+
+namespace FBE {
+namespace protoex {
+
+// Fast Binary Encoding AccountMessage final model
+template <class TBuffer>
+class AccountMessageFinalModel : public FBE::Model<TBuffer>
+{
+public:
+    AccountMessageFinalModel() : _model(this->buffer(), 8) {}
+    AccountMessageFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
+
+    // Get the model type
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::protoex::AccountMessage>::fbe_type(); }
+
+    // Check if the struct value is valid
+    bool verify()
+    {
+        if ((this->buffer().offset() + _model.fbe_offset()) > this->buffer().size())
+            return false;
+
+        size_t fbe_struct_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 8));
+        size_t fbe_struct_type = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 4));
+        if ((fbe_struct_size == 0) || (fbe_struct_type != fbe_type()))
+            return false;
+
+        return ((8 + _model.verify()) == fbe_struct_size);
+    }
+
+    // Serialize the struct value
+    size_t serialize(const ::protoex::AccountMessage& value)
+    {
+        size_t fbe_initial_size = this->buffer().size();
+
+        uint32_t fbe_struct_type = (uint32_t)fbe_type();
+        uint32_t fbe_struct_size = (uint32_t)(8 + _model.fbe_allocation_size(value));
+        uint32_t fbe_struct_offset = (uint32_t)(this->buffer().allocate(fbe_struct_size) - this->buffer().offset());
+        assert(((this->buffer().offset() + fbe_struct_offset + fbe_struct_size) <= this->buffer().size()) && "Model is broken!");
+        if ((this->buffer().offset() + fbe_struct_offset + fbe_struct_size) > this->buffer().size())
+            return 0;
+
+        fbe_struct_size = (uint32_t)(8 + _model.set(value));
+        this->buffer().resize(fbe_initial_size + fbe_struct_size);
+
+        *((uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 8)) = fbe_struct_size;
+        *((uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 4)) = fbe_struct_type;
+
+        return fbe_struct_size;
+    }
+
+    // Deserialize the struct value
+    size_t deserialize(::protoex::AccountMessage& value) const noexcept
+    {
+        assert(((this->buffer().offset() + _model.fbe_offset()) <= this->buffer().size()) && "Model is broken!");
+        if ((this->buffer().offset() + _model.fbe_offset()) > this->buffer().size())
+            return 0;
+
+        size_t fbe_struct_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 8));
+        size_t fbe_struct_type = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 4));
+        assert(((fbe_struct_size > 0) && (fbe_struct_type == fbe_type())) && "Model is broken!");
+        if ((fbe_struct_size == 0) || (fbe_struct_type != fbe_type()))
+            return 8;
+
+        return 8 + _model.get(value);
+    }
+
+    // Move to the next struct value
+    void next(size_t prev) noexcept
+    {
+        _model.fbe_shift(prev);
+    }
+
+private:
+    FinalModel<TBuffer, ::protoex::AccountMessage> _model;
+};
+
+} // namespace protoex
+} // namespace FBE

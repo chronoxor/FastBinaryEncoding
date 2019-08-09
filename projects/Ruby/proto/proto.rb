@@ -3022,6 +3022,1716 @@ module Proto
     end
   end
 
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class OrderMessage
+    include Comparable
+
+    attr_accessor :body
+
+    def initialize(body = Order.new)
+      @body = body
+    end
+
+    def initialize_copy(other)
+      @body = other.body
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
+      self
+    end
+
+    # Struct deep clone
+    def clone
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
+    end
+
+    # Struct compare operators
+    def <=>(other)
+      return nil unless other.is_a?(OrderMessage)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    # Struct equals
+    def eql?(other)
+      self == other
+    end
+
+    # Struct keys
+    def key
+      result = []
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    # Struct hash code
+    def hash
+      key.hash
+    end
+
+    # Get struct string value
+    def to_s
+      result = ''
+      result << 'OrderMessage('
+      result << 'body='
+      if !@body.nil?
+        result << @body.to_s
+      else
+        result << 'null'
+      end
+      result << ')'
+      result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = OrderMessageModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = OrderMessageModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
+    end
+
+    # Get struct JSON value
+    def to_json
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'body'
+      value = (body.nil? ? nil : body.__to_json_map__)
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = OrderMessage.new
+      value = json.fetch('body', nil)
+      result.body = (value.nil? ? nil : Order.__from_json_map__(value))
+      result
+    end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 1
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelOrderMessage < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_body = FieldModelOrder.new(self.buffer, 4 + 4)
+    end
+
+    def body
+      @_body
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4 \
+        + body.fbe_size \
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body \
+        + body.fbe_extra \
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 1
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + body.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless body.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += body.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = OrderMessage.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + body.fbe_size) <= fbe_struct_size
+        fbe_value.body = body.get
+      else
+        fbe_value.body = Order.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += body.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      body.set(fbe_value.body)
+    end
+  end
+
+  # Fast Binary Encoding OrderMessage model
+  class OrderMessageModel < FBE::Model
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelOrderMessage.new(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelOrderMessage::TYPE
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = OrderMessage.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [OrderMessage.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [OrderMessage.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelOrderMessage < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_body = FinalModelOrder.new(self.buffer, 0)
+    end
+
+    def body
+      @_body
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0 \
+        + body.fbe_allocation_size(fbe_value.body) \
+    end
+
+    # Get the final type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 1
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      body.fbe_offset = fbe_current_offset
+      fbe_field_size = body.verify
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = OrderMessage.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      body.fbe_offset = fbe_current_offset
+      fbe_result = body.get
+      fbe_value.body = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      body.fbe_offset = fbe_current_offset
+      fbe_field_size = body.set(fbe_value.body)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding OrderMessage final model
+  class OrderMessageFinalModel < FBE::Model
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelOrderMessage.new(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelOrderMessage::TYPE
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = OrderMessage.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [OrderMessage.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [OrderMessage.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class BalanceMessage
+    include Comparable
+
+    attr_accessor :body
+
+    def initialize(body = Balance.new)
+      @body = body
+    end
+
+    def initialize_copy(other)
+      @body = other.body
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
+      self
+    end
+
+    # Struct deep clone
+    def clone
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
+    end
+
+    # Struct compare operators
+    def <=>(other)
+      return nil unless other.is_a?(BalanceMessage)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    # Struct equals
+    def eql?(other)
+      self == other
+    end
+
+    # Struct keys
+    def key
+      result = []
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    # Struct hash code
+    def hash
+      key.hash
+    end
+
+    # Get struct string value
+    def to_s
+      result = ''
+      result << 'BalanceMessage('
+      result << 'body='
+      if !@body.nil?
+        result << @body.to_s
+      else
+        result << 'null'
+      end
+      result << ')'
+      result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = BalanceMessageModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = BalanceMessageModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
+    end
+
+    # Get struct JSON value
+    def to_json
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'body'
+      value = (body.nil? ? nil : body.__to_json_map__)
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = BalanceMessage.new
+      value = json.fetch('body', nil)
+      result.body = (value.nil? ? nil : Balance.__from_json_map__(value))
+      result
+    end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 2
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelBalanceMessage < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_body = FieldModelBalance.new(self.buffer, 4 + 4)
+    end
+
+    def body
+      @_body
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4 \
+        + body.fbe_size \
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body \
+        + body.fbe_extra \
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 2
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + body.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless body.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += body.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = BalanceMessage.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + body.fbe_size) <= fbe_struct_size
+        fbe_value.body = body.get
+      else
+        fbe_value.body = Balance.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += body.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      body.set(fbe_value.body)
+    end
+  end
+
+  # Fast Binary Encoding BalanceMessage model
+  class BalanceMessageModel < FBE::Model
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelBalanceMessage.new(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelBalanceMessage::TYPE
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = BalanceMessage.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [BalanceMessage.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [BalanceMessage.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelBalanceMessage < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_body = FinalModelBalance.new(self.buffer, 0)
+    end
+
+    def body
+      @_body
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0 \
+        + body.fbe_allocation_size(fbe_value.body) \
+    end
+
+    # Get the final type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 2
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      body.fbe_offset = fbe_current_offset
+      fbe_field_size = body.verify
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = BalanceMessage.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      body.fbe_offset = fbe_current_offset
+      fbe_result = body.get
+      fbe_value.body = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      body.fbe_offset = fbe_current_offset
+      fbe_field_size = body.set(fbe_value.body)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding BalanceMessage final model
+  class BalanceMessageFinalModel < FBE::Model
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelBalanceMessage.new(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelBalanceMessage::TYPE
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = BalanceMessage.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [BalanceMessage.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [BalanceMessage.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class AccountMessage
+    include Comparable
+
+    attr_accessor :body
+
+    def initialize(body = Account.new)
+      @body = body
+    end
+
+    def initialize_copy(other)
+      @body = other.body
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
+      self
+    end
+
+    # Struct deep clone
+    def clone
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
+    end
+
+    # Struct compare operators
+    def <=>(other)
+      return nil unless other.is_a?(AccountMessage)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    # Struct equals
+    def eql?(other)
+      self == other
+    end
+
+    # Struct keys
+    def key
+      result = []
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    # Struct hash code
+    def hash
+      key.hash
+    end
+
+    # Get struct string value
+    def to_s
+      result = ''
+      result << 'AccountMessage('
+      result << 'body='
+      if !@body.nil?
+        result << @body.to_s
+      else
+        result << 'null'
+      end
+      result << ')'
+      result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = AccountMessageModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = AccountMessageModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
+    end
+
+    # Get struct JSON value
+    def to_json
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'body'
+      value = (body.nil? ? nil : body.__to_json_map__)
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = AccountMessage.new
+      value = json.fetch('body', nil)
+      result.body = (value.nil? ? nil : Account.__from_json_map__(value))
+      result
+    end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 3
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelAccountMessage < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_body = FieldModelAccount.new(self.buffer, 4 + 4)
+    end
+
+    def body
+      @_body
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4 \
+        + body.fbe_size \
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body \
+        + body.fbe_extra \
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 3
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + body.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless body.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += body.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = AccountMessage.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + body.fbe_size) <= fbe_struct_size
+        fbe_value.body = body.get
+      else
+        fbe_value.body = Account.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += body.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      body.set(fbe_value.body)
+    end
+  end
+
+  # Fast Binary Encoding AccountMessage model
+  class AccountMessageModel < FBE::Model
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelAccountMessage.new(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelAccountMessage::TYPE
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = AccountMessage.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [AccountMessage.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [AccountMessage.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelAccountMessage < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_body = FinalModelAccount.new(self.buffer, 0)
+    end
+
+    def body
+      @_body
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0 \
+        + body.fbe_allocation_size(fbe_value.body) \
+    end
+
+    # Get the final type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 3
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      body.fbe_offset = fbe_current_offset
+      fbe_field_size = body.verify
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = AccountMessage.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      body.fbe_offset = fbe_current_offset
+      fbe_result = body.get
+      fbe_value.body = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      body.fbe_offset = fbe_current_offset
+      fbe_field_size = body.set(fbe_value.body)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding AccountMessage final model
+  class AccountMessageFinalModel < FBE::Model
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelAccountMessage.new(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelAccountMessage::TYPE
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = AccountMessage.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [AccountMessage.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [AccountMessage.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
   # Fast Binary Encoding Proto protocol version
   class ProtocolVersion
     # Protocol major version
@@ -3038,6 +4748,9 @@ module Proto
       @_order_model = OrderModel.new(self.buffer)
       @_balance_model = BalanceModel.new(self.buffer)
       @_account_model = AccountModel.new(self.buffer)
+      @_ordermessage_model = OrderMessageModel.new(self.buffer)
+      @_balancemessage_model = BalanceMessageModel.new(self.buffer)
+      @_accountmessage_model = AccountMessageModel.new(self.buffer)
     end
 
     # Sender models accessors
@@ -3054,6 +4767,18 @@ module Proto
       @_account_model
     end
 
+    def ordermessage_model
+      @_ordermessage_model
+    end
+
+    def balancemessage_model
+      @_balancemessage_model
+    end
+
+    def accountmessage_model
+      @_accountmessage_model
+    end
+
     # Send methods
 
     def send(value)
@@ -3065,6 +4790,15 @@ module Proto
       end
       if value.is_a?(Account) && (value.fbe_type == account_model.fbe_type)
         return send_account(value)
+      end
+      if value.is_a?(OrderMessage) && (value.fbe_type == ordermessage_model.fbe_type)
+        return send_ordermessage(value)
+      end
+      if value.is_a?(BalanceMessage) && (value.fbe_type == balancemessage_model.fbe_type)
+        return send_balancemessage(value)
+      end
+      if value.is_a?(AccountMessage) && (value.fbe_type == accountmessage_model.fbe_type)
+        return send_accountmessage(value)
       end
       0
     end
@@ -3117,6 +4851,54 @@ module Proto
       send_serialized(serialized)
     end
 
+    def send_ordermessage(value)
+      # Serialize the value into the FBE stream
+      serialized = ordermessage_model.serialize(value)
+      raise RuntimeError, "Proto.OrderMessage serialization failed!" if serialized <= 0
+      raise RuntimeError, "Proto.OrderMessage validation failed!" unless ordermessage_model.verify
+
+      # Log the value
+      if logging?
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_balancemessage(value)
+      # Serialize the value into the FBE stream
+      serialized = balancemessage_model.serialize(value)
+      raise RuntimeError, "Proto.BalanceMessage serialization failed!" if serialized <= 0
+      raise RuntimeError, "Proto.BalanceMessage validation failed!" unless balancemessage_model.verify
+
+      # Log the value
+      if logging?
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_accountmessage(value)
+      # Serialize the value into the FBE stream
+      serialized = accountmessage_model.serialize(value)
+      raise RuntimeError, "Proto.AccountMessage serialization failed!" if serialized <= 0
+      raise RuntimeError, "Proto.AccountMessage validation failed!" unless accountmessage_model.verify
+
+      # Log the value
+      if logging?
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
     protected
 
     # Send message handler
@@ -3136,6 +4918,12 @@ module Proto
       @_balance_model = BalanceModel.new
       @_account_value = Account.new
       @_account_model = AccountModel.new
+      @_ordermessage_value = OrderMessage.new
+      @_ordermessage_model = OrderMessageModel.new
+      @_balancemessage_value = BalanceMessage.new
+      @_balancemessage_model = BalanceMessageModel.new
+      @_accountmessage_value = AccountMessage.new
+      @_accountmessage_model = AccountMessageModel.new
     end
 
     protected
@@ -3152,6 +4940,18 @@ module Proto
 
     # noinspection RubyUnusedLocalVariable
     def on_receive_account(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_ordermessage(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_balancemessage(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_accountmessage(value)
     end
 
     public
@@ -3218,6 +5018,66 @@ module Proto
         # Call receive handler with deserialized value
         on_receive_account(@_account_value)
         true
+      when OrderMessageModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_ordermessage_model.attach_buffer(buffer, offset)
+        unless @_ordermessage_model.verify
+          return false
+        end
+        _, deserialized = @_ordermessage_model.deserialize(@_ordermessage_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging?
+          message = @_ordermessage_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_ordermessage(@_ordermessage_value)
+        true
+      when BalanceMessageModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_balancemessage_model.attach_buffer(buffer, offset)
+        unless @_balancemessage_model.verify
+          return false
+        end
+        _, deserialized = @_balancemessage_model.deserialize(@_balancemessage_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging?
+          message = @_balancemessage_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_balancemessage(@_balancemessage_value)
+        true
+      when AccountMessageModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_accountmessage_model.attach_buffer(buffer, offset)
+        unless @_accountmessage_model.verify
+          return false
+        end
+        _, deserialized = @_accountmessage_model.deserialize(@_accountmessage_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging?
+          message = @_accountmessage_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_accountmessage(@_accountmessage_value)
+        true
       else
         # Do nothing here...
       end
@@ -3234,6 +5094,9 @@ module Proto
       @_order_model = OrderModel.new
       @_balance_model = BalanceModel.new
       @_account_model = AccountModel.new
+      @_ordermessage_model = OrderMessageModel.new
+      @_balancemessage_model = BalanceMessageModel.new
+      @_accountmessage_model = AccountMessageModel.new
     end
 
     protected
@@ -3250,6 +5113,18 @@ module Proto
 
     # noinspection RubyUnusedLocalVariable
     def on_proxy_account(model, type, buffer, offset, size)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_proxy_ordermessage(model, type, buffer, offset, size)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_proxy_balancemessage(model, type, buffer, offset, size)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_proxy_accountmessage(model, type, buffer, offset, size)
     end
 
     public
@@ -3301,6 +5176,51 @@ module Proto
         on_proxy_account(@_account_model, type, buffer, offset, size)
         @_account_model.model.get_end(fbe_begin)
         true
+      when OrderMessageModel::TYPE
+        # Attach the FBE stream to the proxy model
+        @_ordermessage_model.attach_buffer(buffer, offset)
+        unless @_ordermessage_model.verify
+          return false
+        end
+
+        fbe_begin = @_ordermessage_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
+        # Call proxy handler
+        on_proxy_ordermessage(@_ordermessage_model, type, buffer, offset, size)
+        @_ordermessage_model.model.get_end(fbe_begin)
+        true
+      when BalanceMessageModel::TYPE
+        # Attach the FBE stream to the proxy model
+        @_balancemessage_model.attach_buffer(buffer, offset)
+        unless @_balancemessage_model.verify
+          return false
+        end
+
+        fbe_begin = @_balancemessage_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
+        # Call proxy handler
+        on_proxy_balancemessage(@_balancemessage_model, type, buffer, offset, size)
+        @_balancemessage_model.model.get_end(fbe_begin)
+        true
+      when AccountMessageModel::TYPE
+        # Attach the FBE stream to the proxy model
+        @_accountmessage_model.attach_buffer(buffer, offset)
+        unless @_accountmessage_model.verify
+          return false
+        end
+
+        fbe_begin = @_accountmessage_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
+        # Call proxy handler
+        on_proxy_accountmessage(@_accountmessage_model, type, buffer, offset, size)
+        @_accountmessage_model.model.get_end(fbe_begin)
+        true
       else
         # Do nothing here...
       end
@@ -3317,6 +5237,9 @@ module Proto
       @_order_model = OrderFinalModel.new(self.buffer)
       @_balance_model = BalanceFinalModel.new(self.buffer)
       @_account_model = AccountFinalModel.new(self.buffer)
+      @_ordermessage_model = OrderMessageFinalModel.new(self.buffer)
+      @_balancemessage_model = BalanceMessageFinalModel.new(self.buffer)
+      @_accountmessage_model = AccountMessageFinalModel.new(self.buffer)
     end
 
     # Sender models accessors
@@ -3333,6 +5256,18 @@ module Proto
       @_account_model
     end
 
+    def ordermessage_model
+      @_ordermessage_model
+    end
+
+    def balancemessage_model
+      @_balancemessage_model
+    end
+
+    def accountmessage_model
+      @_accountmessage_model
+    end
+
     # Send methods
 
     def send(value)
@@ -3344,6 +5279,15 @@ module Proto
       end
       if value.is_a?(Account) && (value.fbe_type == account_model.fbe_type)
         return send_account(value)
+      end
+      if value.is_a?(OrderMessage) && (value.fbe_type == ordermessage_model.fbe_type)
+        return send_ordermessage(value)
+      end
+      if value.is_a?(BalanceMessage) && (value.fbe_type == balancemessage_model.fbe_type)
+        return send_balancemessage(value)
+      end
+      if value.is_a?(AccountMessage) && (value.fbe_type == accountmessage_model.fbe_type)
+        return send_accountmessage(value)
       end
       0
     end
@@ -3396,6 +5340,54 @@ module Proto
       send_serialized(serialized)
     end
 
+    def send_ordermessage(value)
+      # Serialize the value into the FBE stream
+      serialized = ordermessage_model.serialize(value)
+      raise RuntimeError, "Proto.OrderMessage serialization failed!" if serialized <= 0
+      raise RuntimeError, "Proto.OrderMessage validation failed!" unless ordermessage_model.verify
+
+      # Log the value
+      if logging?
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_balancemessage(value)
+      # Serialize the value into the FBE stream
+      serialized = balancemessage_model.serialize(value)
+      raise RuntimeError, "Proto.BalanceMessage serialization failed!" if serialized <= 0
+      raise RuntimeError, "Proto.BalanceMessage validation failed!" unless balancemessage_model.verify
+
+      # Log the value
+      if logging?
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_accountmessage(value)
+      # Serialize the value into the FBE stream
+      serialized = accountmessage_model.serialize(value)
+      raise RuntimeError, "Proto.AccountMessage serialization failed!" if serialized <= 0
+      raise RuntimeError, "Proto.AccountMessage validation failed!" unless accountmessage_model.verify
+
+      # Log the value
+      if logging?
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
     protected
 
     # Send message handler
@@ -3415,6 +5407,12 @@ module Proto
       @_balance_model = BalanceFinalModel.new
       @_account_value = Account.new
       @_account_model = AccountFinalModel.new
+      @_ordermessage_value = OrderMessage.new
+      @_ordermessage_model = OrderMessageFinalModel.new
+      @_balancemessage_value = BalanceMessage.new
+      @_balancemessage_model = BalanceMessageFinalModel.new
+      @_accountmessage_value = AccountMessage.new
+      @_accountmessage_model = AccountMessageFinalModel.new
     end
 
     protected
@@ -3431,6 +5429,18 @@ module Proto
 
     # noinspection RubyUnusedLocalVariable
     def on_receive_account(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_ordermessage(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_balancemessage(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_accountmessage(value)
     end
 
     public
@@ -3496,6 +5506,66 @@ module Proto
 
         # Call receive handler with deserialized value
         on_receive_account(@_account_value)
+        true
+      when OrderMessageFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_ordermessage_model.attach_buffer(buffer, offset)
+        unless @_ordermessage_model.verify
+          return false
+        end
+        _, deserialized = @_ordermessage_model.deserialize(@_ordermessage_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging?
+          message = @_ordermessage_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_ordermessage(@_ordermessage_value)
+        true
+      when BalanceMessageFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_balancemessage_model.attach_buffer(buffer, offset)
+        unless @_balancemessage_model.verify
+          return false
+        end
+        _, deserialized = @_balancemessage_model.deserialize(@_balancemessage_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging?
+          message = @_balancemessage_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_balancemessage(@_balancemessage_value)
+        true
+      when AccountMessageFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_accountmessage_model.attach_buffer(buffer, offset)
+        unless @_accountmessage_model.verify
+          return false
+        end
+        _, deserialized = @_accountmessage_model.deserialize(@_accountmessage_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging?
+          message = @_accountmessage_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_accountmessage(@_accountmessage_value)
         true
       else
         # Do nothing here...

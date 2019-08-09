@@ -11,24 +11,10 @@ import "../fbe"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 
-// Proxy Enums interface
-type OnProxyEnums interface {
-    OnProxyEnums(model *EnumsModel, fbeType int, buffer []byte)
-}
-
-// Proxy Enums function
-type OnProxyEnumsFunc func(model *EnumsModel, fbeType int, buffer []byte)
-func (f OnProxyEnumsFunc) OnProxyEnums(model *EnumsModel, fbeType int, buffer []byte) {
-    f(model, fbeType, buffer)
-}
-
 // Fast Binary Encoding enums proxy
 type Proxy struct {
     *fbe.Receiver
-    enumsModel *EnumsModel
 
-    // Proxy Enums handler
-    HandlerOnProxyEnums OnProxyEnums
 }
 
 // Create a new enums proxy with an empty buffer
@@ -40,45 +26,20 @@ func NewProxy() *Proxy {
 func NewProxyWithBuffer(buffer *fbe.Buffer) *Proxy {
     proxy := &Proxy{
         fbe.NewReceiver(buffer, false),
-        NewEnumsModel(buffer),
-        nil,
     }
     proxy.SetupHandlerOnReceive(proxy)
-    proxy.SetupHandlerOnProxyEnumsFunc(func(model *EnumsModel, fbeType int, buffer []byte) {})
     return proxy
 }
 
 // Setup handlers
 func (p *Proxy) SetupHandlers(handlers interface{}) {
     p.Receiver.SetupHandlers(handlers)
-    if handler, ok := handlers.(OnProxyEnums); ok {
-        p.SetupHandlerOnProxyEnums(handler)
-    }
 }
 
-// Setup proxy Enums handler
-func (p *Proxy) SetupHandlerOnProxyEnums(handler OnProxyEnums) { p.HandlerOnProxyEnums = handler }
-// Setup proxy Enums handler function
-func (p *Proxy) SetupHandlerOnProxyEnumsFunc(function func(model *EnumsModel, fbeType int, buffer []byte)) { p.HandlerOnProxyEnums = OnProxyEnumsFunc(function) }
 
 // Receive message handler
 func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
     switch fbeType {
-    case p.enumsModel.FBEType():
-        // Attach the FBE stream to the proxy model
-        p.enumsModel.Buffer().Attach(buffer)
-        if !p.enumsModel.Verify() {
-            return false, errors.New("enums.Enums validation failed")
-        }
-
-        fbeBegin, err := p.enumsModel.model.GetBegin()
-        if fbeBegin == 0 {
-            return false, err
-        }
-        // Call proxy handler
-        p.HandlerOnProxyEnums.OnProxyEnums(p.enumsModel, fbeType, buffer)
-        p.enumsModel.model.GetEnd(fbeBegin)
-        return true, nil
     }
 
     return false, nil

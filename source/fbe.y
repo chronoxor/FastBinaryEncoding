@@ -15,6 +15,7 @@ int yyerror(const std::string& msg);
 %union
 {
     int token;
+    bool boolean;
     std::string* string;
     FBE::Package* package;
     FBE::Import* import;
@@ -40,7 +41,7 @@ int yyerror(const std::string& msg);
 }
 
 // Define our terminal symbols (tokens)
-%token <token>  PDOMAIN PACKAGE OFFSET IMPORT VERSION ENUM FLAGS STRUCT BASE ID KEY HIDDEN DEPRECATED REQ RES REJ
+%token <token>  PDOMAIN PACKAGE OFFSET IMPORT VERSION ENUM FLAGS STRUCT MESSAGE BASE ID KEY HIDDEN DEPRECATED REQ RES REJ
 %token <string> BOOL BYTE BYTES CHAR WCHAR INT8 UINT8 INT16 UINT16 INT32 UINT32 INT64 UINT64 FLOAT DOUBLE DECIMAL STRING USTRING TIMESTAMP UUID
 %token <string> CONST_TRUE CONST_FALSE CONST_NULL CONST_EPOCH CONST_UTC CONST_UUID0 CONST_UUID1 CONST_UUID4 CONST_CHAR CONST_INT CONST_FLOAT CONST_STRING
 %token <string> IDENTIFIER
@@ -66,6 +67,7 @@ int yyerror(const std::string& msg);
 %type <flags_value> flags_value
 %type <flags_const> flags_const
 %type <struct_type> struct
+%type <boolean> struct_type
 %type <struct_request> struct_request
 %type <struct_response> struct_response
 %type <struct_rejects> struct_rejects
@@ -229,14 +231,18 @@ struct_reject
     ;
 
 struct
-    : attributes STRUCT name '{' struct_body '}'                                            { $$ = new FBE::StructType(0, false); $$->attributes.reset($1); $$->name.reset($3); $$->body.reset($5); }
-    | attributes STRUCT name ':' type_name '{' struct_body '}'                              { $$ = new FBE::StructType(0, false); $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($5); $$->body.reset($7); }
-    | attributes STRUCT name '(' '+' CONST_INT ')' '{' struct_body '}'                      { $$ = new FBE::StructType(std::stoi(*$6), false); delete $6; $$->attributes.reset($1); $$->name.reset($3); $$->body.reset($9); }
-    | attributes STRUCT name '(' '+' CONST_INT ')' ':' type_name '{' struct_body '}'        { $$ = new FBE::StructType(std::stoi(*$6), false); delete $6; $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($9); $$->body.reset($11); }
-    | attributes STRUCT name '(' BASE ')' ':' type_name '{' struct_body '}'                 { $$ = new FBE::StructType(0, true); $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($8); $$->body.reset($10); }
-    | attributes STRUCT name '(' CONST_INT ')' '{' struct_body '}'                          { $$ = new FBE::StructType(std::stoi(*$5), true); delete $5; $$->attributes.reset($1); $$->name.reset($3); $$->body.reset($8); }
-    | attributes STRUCT name '(' CONST_INT ')' ':' type_name '{' struct_body '}'            { $$ = new FBE::StructType(std::stoi(*$5), true); delete $5; $$->attributes.reset($1); $$->name.reset($3); $$->base.reset($8); $$->body.reset($10); }
+    : attributes struct_type name '{' struct_body '}'                                       { $$ = new FBE::StructType(0, false); $$->attributes.reset($1); $$->message = $2; $$->name.reset($3); $$->body.reset($5); }
+    | attributes struct_type name ':' type_name '{' struct_body '}'                         { $$ = new FBE::StructType(0, false); $$->attributes.reset($1); $$->message = $2; $$->name.reset($3); $$->base.reset($5); $$->body.reset($7); }
+    | attributes struct_type name '(' '+' CONST_INT ')' '{' struct_body '}'                 { $$ = new FBE::StructType(std::stoi(*$6), false); delete $6; $$->attributes.reset($1); $$->message = $2; $$->name.reset($3); $$->body.reset($9); }
+    | attributes struct_type name '(' '+' CONST_INT ')' ':' type_name '{' struct_body '}'   { $$ = new FBE::StructType(std::stoi(*$6), false); delete $6; $$->attributes.reset($1); $$->message = $2; $$->name.reset($3); $$->base.reset($9); $$->body.reset($11); }
+    | attributes struct_type name '(' BASE ')' ':' type_name '{' struct_body '}'            { $$ = new FBE::StructType(0, true); $$->attributes.reset($1); $$->message = $2; $$->name.reset($3); $$->base.reset($8); $$->body.reset($10); }
+    | attributes struct_type name '(' CONST_INT ')' '{' struct_body '}'                     { $$ = new FBE::StructType(std::stoi(*$5), true); delete $5; $$->attributes.reset($1); $$->message = $2; $$->name.reset($3); $$->body.reset($8); }
+    | attributes struct_type name '(' CONST_INT ')' ':' type_name '{' struct_body '}'       { $$ = new FBE::StructType(std::stoi(*$5), true); delete $5; $$->attributes.reset($1); $$->message = $2; $$->name.reset($3); $$->base.reset($8); $$->body.reset($10); }
     ;
+
+struct_type
+    : STRUCT                                                                                { $$ = false; }
+    | MESSAGE                                                                               { $$ = true; }
 
 struct_body
     :                                                                                       { $$ = new FBE::StructBody(); }

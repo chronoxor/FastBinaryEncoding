@@ -18,6 +18,9 @@ open class Sender : com.chronoxor.fbe.Sender
     val OrderModel: OrderModel
     val BalanceModel: BalanceModel
     val AccountModel: AccountModel
+    val OrderMessageModel: OrderMessageModel
+    val BalanceMessageModel: BalanceMessageModel
+    val AccountMessageModel: AccountMessageModel
 
     constructor() : super(false)
     {
@@ -25,6 +28,9 @@ open class Sender : com.chronoxor.fbe.Sender
         OrderModel = OrderModel(buffer)
         BalanceModel = BalanceModel(buffer)
         AccountModel = AccountModel(buffer)
+        OrderMessageModel = OrderMessageModel(buffer)
+        BalanceMessageModel = BalanceMessageModel(buffer)
+        AccountMessageModel = AccountMessageModel(buffer)
     }
 
     constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer, false)
@@ -33,6 +39,9 @@ open class Sender : com.chronoxor.fbe.Sender
         OrderModel = OrderModel(buffer)
         BalanceModel = BalanceModel(buffer)
         AccountModel = AccountModel(buffer)
+        OrderMessageModel = OrderMessageModel(buffer)
+        BalanceMessageModel = BalanceMessageModel(buffer)
+        AccountMessageModel = AccountMessageModel(buffer)
     }
 
     @Suppress("JoinDeclarationAndAssignment")
@@ -43,6 +52,9 @@ open class Sender : com.chronoxor.fbe.Sender
             is com.chronoxor.protoex.Order -> if (obj.fbeType == OrderModel.fbeType) return send(obj)
             is com.chronoxor.protoex.Balance -> if (obj.fbeType == BalanceModel.fbeType) return send(obj)
             is com.chronoxor.protoex.Account -> if (obj.fbeType == AccountModel.fbeType) return send(obj)
+            is com.chronoxor.protoex.OrderMessage -> if (obj.fbeType == OrderMessageModel.fbeType) return send(obj)
+            is com.chronoxor.protoex.BalanceMessage -> if (obj.fbeType == BalanceMessageModel.fbeType) return send(obj)
+            is com.chronoxor.protoex.AccountMessage -> if (obj.fbeType == AccountMessageModel.fbeType) return send(obj)
         }
 
         // Try to send using imported senders
@@ -95,6 +107,57 @@ open class Sender : com.chronoxor.fbe.Sender
         val serialized = AccountModel.serialize(value)
         assert(serialized > 0) { "com.chronoxor.protoex.Account serialization failed!" }
         assert(AccountModel.verify()) { "com.chronoxor.protoex.Account validation failed!" }
+
+        // Log the value
+        if (logging)
+        {
+            val message = value.toString()
+            onSendLog(message)
+        }
+
+        // Send the serialized value
+        return sendSerialized(serialized)
+    }
+    fun send(value: com.chronoxor.protoex.OrderMessage): Long
+    {
+        // Serialize the value into the FBE stream
+        val serialized = OrderMessageModel.serialize(value)
+        assert(serialized > 0) { "com.chronoxor.protoex.OrderMessage serialization failed!" }
+        assert(OrderMessageModel.verify()) { "com.chronoxor.protoex.OrderMessage validation failed!" }
+
+        // Log the value
+        if (logging)
+        {
+            val message = value.toString()
+            onSendLog(message)
+        }
+
+        // Send the serialized value
+        return sendSerialized(serialized)
+    }
+    fun send(value: com.chronoxor.protoex.BalanceMessage): Long
+    {
+        // Serialize the value into the FBE stream
+        val serialized = BalanceMessageModel.serialize(value)
+        assert(serialized > 0) { "com.chronoxor.protoex.BalanceMessage serialization failed!" }
+        assert(BalanceMessageModel.verify()) { "com.chronoxor.protoex.BalanceMessage validation failed!" }
+
+        // Log the value
+        if (logging)
+        {
+            val message = value.toString()
+            onSendLog(message)
+        }
+
+        // Send the serialized value
+        return sendSerialized(serialized)
+    }
+    fun send(value: com.chronoxor.protoex.AccountMessage): Long
+    {
+        // Serialize the value into the FBE stream
+        val serialized = AccountMessageModel.serialize(value)
+        assert(serialized > 0) { "com.chronoxor.protoex.AccountMessage serialization failed!" }
+        assert(AccountMessageModel.verify()) { "com.chronoxor.protoex.AccountMessage validation failed!" }
 
         // Log the value
         if (logging)
