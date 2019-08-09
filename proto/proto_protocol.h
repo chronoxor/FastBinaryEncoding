@@ -198,6 +198,7 @@ protected:
                 onReceive(AccountMessageValue);
                 return true;
             }
+            default: break;
         }
 
         return false;
@@ -287,6 +288,7 @@ protected:
                 AccountMessageModel.model.get_end(fbe_begin);
                 return true;
             }
+            default: break;
         }
 
         return false;
@@ -536,6 +538,7 @@ protected:
                 onReceive(AccountMessageValue);
                 return true;
             }
+            default: break;
         }
 
         return false;

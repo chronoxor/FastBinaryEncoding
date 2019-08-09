@@ -1605,7 +1605,6 @@ void GeneratorGo::GenerateFBEFieldModelOptional(const std::shared_ptr<Package>& 
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -1808,7 +1807,6 @@ void GeneratorGo::GenerateFBEFieldModelArray(const std::shared_ptr<Package>& p, 
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -1967,7 +1965,6 @@ void GeneratorGo::GenerateFBEFieldModelVector(const std::shared_ptr<Package>& p,
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -2198,7 +2195,6 @@ void GeneratorGo::GenerateFBEFieldModelSet(const std::shared_ptr<Package>& p, co
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -2428,7 +2424,6 @@ void GeneratorGo::GenerateFBEFieldModelMap(const std::shared_ptr<Package>& p, co
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -3414,7 +3409,6 @@ void GeneratorGo::GenerateFBEFinalModelOptional(const std::shared_ptr<Package>& 
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -3566,7 +3560,6 @@ void GeneratorGo::GenerateFBEFinalModelArray(const std::shared_ptr<Package>& p, 
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -3721,7 +3714,6 @@ void GeneratorGo::GenerateFBEFinalModelVector(const std::shared_ptr<Package>& p,
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -3867,7 +3859,6 @@ void GeneratorGo::GenerateFBEFinalModelSet(const std::shared_ptr<Package>& p, co
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -4012,7 +4003,6 @@ void GeneratorGo::GenerateFBEFinalModelMap(const std::shared_ptr<Package>& p, co
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -4758,6 +4748,7 @@ func min(a, b int) int {
 void GeneratorGo::GenerateImports(const std::shared_ptr<Package>& p)
 {
     // Generate fbe import
+    WriteLineIndent("import \"errors\"");
     WriteLineIndent("import \"../fbe\"");
 
     // Generate packages import
@@ -4768,6 +4759,7 @@ void GeneratorGo::GenerateImports(const std::shared_ptr<Package>& p)
     // Generate workaround for Go unused imports issue
     WriteLine();
     WriteLineIndent("// Workaround for Go unused imports issue");
+    WriteLineIndent("var _ = errors.New");
     WriteLineIndent("var _ = fbe.Version");
     if (p->import)
         for (const auto& import : p->import->imports)
@@ -6059,7 +6051,6 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
@@ -6514,7 +6505,6 @@ void GeneratorGo::GenerateStructModel(const std::shared_ptr<Package>& p, const s
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     // Generate struct model type
@@ -6998,7 +6988,6 @@ void GeneratorGo::GenerateStructModelFinal(const std::shared_ptr<Package>& p, co
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     // Generate struct model final type
@@ -7204,7 +7193,6 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     // Generate sender type
@@ -7296,6 +7284,11 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
                 Indent(-1);
             }
         }
+        WriteLineIndent("default:");
+        Indent(1);
+        WriteLineIndent("_ = value");
+        WriteLineIndent("break");
+        Indent(-1);
         WriteLineIndent("}");
         if (p->import)
         {
@@ -7379,7 +7372,6 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     // Generate receiver interfaces
@@ -7472,7 +7464,8 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
             }
         }
         for (size_t i = 0; i < p->body->structs.size(); ++i)
-            WriteLineIndent("nil,");
+            if (p->body->structs[i]->message)
+                WriteLineIndent("nil,");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -7592,6 +7585,11 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
                 Indent(-1);
             }
         }
+        WriteLineIndent("default:");
+        Indent(1);
+        WriteLineIndent("_ = fbeType");
+        WriteLineIndent("break");
+        Indent(-1);
         WriteLineIndent("}");
     }
     if (p->import)
@@ -7639,7 +7637,6 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     // Generate proxy interfaces
@@ -7838,6 +7835,11 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
                 Indent(-1);
             }
         }
+        WriteLineIndent("default:");
+        Indent(1);
+        WriteLineIndent("_ = fbeType");
+        WriteLineIndent("break");
+        Indent(-1);
         WriteLineIndent("}");
     }
     if (p->import)

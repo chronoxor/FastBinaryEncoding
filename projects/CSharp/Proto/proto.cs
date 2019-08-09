@@ -4901,6 +4901,7 @@ namespace proto {
                     OnReceive(AccountMessageValue);
                     return true;
                 }
+                default: break;
             }
 
             return false;
@@ -4985,6 +4986,7 @@ namespace proto {
                     AccountMessageModel.model.GetEnd(fbeBegin);
                     return true;
                 }
+                default: break;
             }
 
             return false;
@@ -5178,6 +5180,7 @@ namespace proto {
                     OnReceive(AccountMessageValue);
                     return true;
                 }
+                default: break;
             }
 
             return false;

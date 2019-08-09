@@ -205,6 +205,7 @@ protected:
                 onReceive(AccountMessageValue);
                 return true;
             }
+            default: break;
         }
 
         if (proto::Receiver<TBuffer>::onReceive(type, data, size))
@@ -298,6 +299,7 @@ protected:
                 AccountMessageModel.model.get_end(fbe_begin);
                 return true;
             }
+            default: break;
         }
 
         if (proto::Proxy<TBuffer>::onReceive(type, data, size))
@@ -559,6 +561,7 @@ protected:
                 onReceive(AccountMessageValue);
                 return true;
             }
+            default: break;
         }
 
         if (proto::FinalReceiver<TBuffer>::onReceive(type, data, size))

@@ -5,9 +5,11 @@
 
 package enums
 
+import "errors"
 import "../fbe"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 
 // EnumByte enum key

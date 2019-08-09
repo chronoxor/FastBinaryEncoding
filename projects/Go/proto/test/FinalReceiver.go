@@ -10,6 +10,7 @@ import "../fbe"
 import "../proto"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 var _ = proto.Version
 
@@ -30,18 +31,6 @@ func NewFinalReceiverWithBuffer(buffer *fbe.Buffer) *FinalReceiver {
     receiver := &FinalReceiver{
         fbe.NewReceiver(buffer, true),
         proto.NewFinalReceiverWithBuffer(buffer),
-        nil,
-        nil,
-        nil,
-        nil,
-        nil,
-        nil,
-        nil,
-        nil,
-        nil,
-        nil,
-        nil,
-        nil,
     }
     receiver.SetupHandlerOnReceive(receiver)
     return receiver
@@ -64,6 +53,9 @@ func (r *FinalReceiver) SetupHandlers(handlers interface{}) {
 // Receive message handler
 func (r *FinalReceiver) OnReceive(fbeType int, buffer []byte) (bool, error) {
     switch fbeType {
+    default:
+        _ = fbeType
+        break
     }
 
     if r.protoReceiver != nil {

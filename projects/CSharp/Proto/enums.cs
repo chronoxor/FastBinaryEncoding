@@ -5806,6 +5806,7 @@ namespace enums {
         {
             switch (type)
             {
+                default: break;
             }
 
             return false;
@@ -5836,6 +5837,7 @@ namespace enums {
         {
             switch (type)
             {
+                default: break;
             }
 
             return false;
@@ -5891,6 +5893,7 @@ namespace enums {
         {
             switch (type)
             {
+                default: break;
             }
 
             return false;

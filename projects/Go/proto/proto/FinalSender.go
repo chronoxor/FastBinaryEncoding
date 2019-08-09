@@ -9,6 +9,7 @@ import "errors"
 import "../fbe"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 
 // Fast Binary Encoding proto final sender
@@ -56,6 +57,9 @@ func (s *FinalSender) Send(value interface{}) (int, error) {
         if value.FBEType() == s.accountMessageModel.FBEType() {
             return s.SendAccountMessage(value)
         }
+    default:
+        _ = value
+        break
     }
     return 0, nil
 }

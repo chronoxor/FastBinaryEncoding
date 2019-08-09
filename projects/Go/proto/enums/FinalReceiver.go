@@ -9,6 +9,7 @@ import "errors"
 import "../fbe"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 
 // Fast Binary Encoding enums final receiver
@@ -26,7 +27,6 @@ func NewFinalReceiver() *FinalReceiver {
 func NewFinalReceiverWithBuffer(buffer *fbe.Buffer) *FinalReceiver {
     receiver := &FinalReceiver{
         fbe.NewReceiver(buffer, true),
-        nil,
     }
     receiver.SetupHandlerOnReceive(receiver)
     return receiver
@@ -41,6 +41,9 @@ func (r *FinalReceiver) SetupHandlers(handlers interface{}) {
 // Receive message handler
 func (r *FinalReceiver) OnReceive(fbeType int, buffer []byte) (bool, error) {
     switch fbeType {
+    default:
+        _ = fbeType
+        break
     }
 
     return false, nil

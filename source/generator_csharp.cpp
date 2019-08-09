@@ -6410,6 +6410,7 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
                 WriteLineIndent("}");
             }
         }
+        WriteLineIndent("default: break;");
         Indent(-1);
         WriteLineIndent("}");
     }
@@ -6563,6 +6564,7 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
                 WriteLineIndent("}");
             }
         }
+        WriteLineIndent("default: break;");
         Indent(-1);
         WriteLineIndent("}");
     }

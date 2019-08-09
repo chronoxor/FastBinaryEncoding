@@ -78,6 +78,7 @@ protected:
     {
         switch (type)
         {
+            default: break;
         }
 
         return false;
@@ -116,6 +117,7 @@ protected:
     {
         switch (type)
         {
+            default: break;
         }
 
         return false;
@@ -226,6 +228,7 @@ protected:
     {
         switch (type)
         {
+            default: break;
         }
 
         return false;

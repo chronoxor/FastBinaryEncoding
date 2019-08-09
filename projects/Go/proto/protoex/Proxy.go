@@ -10,6 +10,7 @@ import "../fbe"
 import "../proto"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 var _ = proto.Version
 
@@ -169,6 +170,9 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         p.HandlerOnProxyAccountMessage.OnProxyAccountMessage(p.accountMessageModel, fbeType, buffer)
         p.accountMessageModel.model.GetEnd(fbeBegin)
         return true, nil
+    default:
+        _ = fbeType
+        break
     }
 
     if p.protoProxy != nil {

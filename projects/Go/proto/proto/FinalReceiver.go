@@ -9,6 +9,7 @@ import "errors"
 import "../fbe"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 
 // Fast Binary Encoding proto final receiver
@@ -44,9 +45,6 @@ func NewFinalReceiverWithBuffer(buffer *fbe.Buffer) *FinalReceiver {
         NewBalanceMessageFinalModel(buffer),
         NewAccountMessage(),
         NewAccountMessageFinalModel(buffer),
-        nil,
-        nil,
-        nil,
         nil,
         nil,
         nil,
@@ -157,6 +155,9 @@ func (r *FinalReceiver) OnReceive(fbeType int, buffer []byte) (bool, error) {
         // Call receive handler with deserialized value
         r.HandlerOnReceiveAccountMessage.OnReceiveAccountMessage(r.accountMessageValue)
         return true, nil
+    default:
+        _ = fbeType
+        break
     }
 
     return false, nil

@@ -85,6 +85,7 @@ protected:
     {
         switch (type)
         {
+            default: break;
         }
 
         if (proto::Receiver<TBuffer>::onReceive(type, data, size))
@@ -127,6 +128,7 @@ protected:
     {
         switch (type)
         {
+            default: break;
         }
 
         if (proto::Proxy<TBuffer>::onReceive(type, data, size))
@@ -249,6 +251,7 @@ protected:
     {
         switch (type)
         {
+            default: break;
         }
 
         if (proto::FinalReceiver<TBuffer>::onReceive(type, data, size))

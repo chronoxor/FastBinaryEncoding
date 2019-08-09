@@ -18,9 +18,9 @@ namespace SendReceive
 
     public class MyReceiver : FBE.proto.Receiver
     {
-        protected override void OnReceive(proto.Order value) {}
-        protected override void OnReceive(proto.Balance value) {}
-        protected override void OnReceive(proto.Account value) {}
+        protected override void OnReceive(proto.OrderMessage value) {}
+        protected override void OnReceive(proto.BalanceMessage value) {}
+        protected override void OnReceive(proto.AccountMessage value) {}
 
         protected override void OnReceiveLog(string message)
         {
@@ -38,11 +38,11 @@ namespace SendReceive
 
             // Create and send a new order
             var order = new proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0);
-            sender.Send(order);
+            sender.Send(new proto.OrderMessage(order));
 
             // Create and send a new balance wallet
             var balance = new proto.Balance("USD", 1000.0);
-            sender.Send(balance);
+            sender.Send(new proto.BalanceMessage(balance));
 
             // Create and send a new account with some orders
             var account = proto.Account.Default;
@@ -55,7 +55,7 @@ namespace SendReceive
             account.orders.Add(new proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0));
             account.orders.Add(new proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0));
             account.orders.Add(new proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0));
-            sender.Send(account);
+            sender.Send(new proto.AccountMessage(account));
 
             var receiver = new MyReceiver { Logging = true };
 

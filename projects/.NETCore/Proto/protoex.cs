@@ -5015,6 +5015,7 @@ namespace protoex {
                     OnReceive(AccountMessageValue);
                     return true;
                 }
+                default: break;
             }
 
             if ((protoReceiver != null) && protoReceiver.OnReceive(type, buffer, offset, size))
@@ -5107,6 +5108,7 @@ namespace protoex {
                     AccountMessageModel.model.GetEnd(fbeBegin);
                     return true;
                 }
+                default: break;
             }
 
             if ((protoProxy != null) && protoProxy.OnReceive(type, buffer, offset, size))
@@ -5313,6 +5315,7 @@ namespace protoex {
                     OnReceive(AccountMessageValue);
                     return true;
                 }
+                default: break;
             }
 
             if ((protoReceiver != null) && protoReceiver.OnReceive(type, buffer, offset, size))

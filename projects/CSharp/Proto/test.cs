@@ -16266,6 +16266,7 @@ namespace test {
         {
             switch (type)
             {
+                default: break;
             }
 
             if ((protoReceiver != null) && protoReceiver.OnReceive(type, buffer, offset, size))
@@ -16304,6 +16305,7 @@ namespace test {
         {
             switch (type)
             {
+                default: break;
             }
 
             if ((protoProxy != null) && protoProxy.OnReceive(type, buffer, offset, size))
@@ -16372,6 +16374,7 @@ namespace test {
         {
             switch (type)
             {
+                default: break;
             }
 
             if ((protoReceiver != null) && protoReceiver.OnReceive(type, buffer, offset, size))

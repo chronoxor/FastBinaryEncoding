@@ -9,6 +9,7 @@ import "errors"
 import "../fbe"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 
 // Fast Binary Encoding enums sender
@@ -35,6 +36,9 @@ func NewSenderWithBuffer(buffer *fbe.Buffer) *Sender {
 
 func (s *Sender) Send(value interface{}) (int, error) {
     switch value := value.(type) {
+    default:
+        _ = value
+        break
     }
     return 0, nil
 }

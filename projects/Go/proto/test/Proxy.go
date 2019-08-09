@@ -10,6 +10,7 @@ import "../fbe"
 import "../proto"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 var _ = proto.Version
 
@@ -52,6 +53,9 @@ func (p *Proxy) SetupHandlers(handlers interface{}) {
 // Receive message handler
 func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
     switch fbeType {
+    default:
+        _ = fbeType
+        break
     }
 
     if p.protoProxy != nil {

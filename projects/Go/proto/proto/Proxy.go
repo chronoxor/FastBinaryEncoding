@@ -9,6 +9,7 @@ import "errors"
 import "../fbe"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 
 // Proxy OrderMessage interface
@@ -157,6 +158,9 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         p.HandlerOnProxyAccountMessage.OnProxyAccountMessage(p.accountMessageModel, fbeType, buffer)
         p.accountMessageModel.model.GetEnd(fbeBegin)
         return true, nil
+    default:
+        _ = fbeType
+        break
     }
 
     return false, nil

@@ -9,6 +9,7 @@ import "errors"
 import "../fbe"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 
 // Fast Binary Encoding enums proxy
@@ -40,6 +41,9 @@ func (p *Proxy) SetupHandlers(handlers interface{}) {
 // Receive message handler
 func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
     switch fbeType {
+    default:
+        _ = fbeType
+        break
     }
 
     return false, nil
