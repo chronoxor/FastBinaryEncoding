@@ -21,8 +21,8 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel(domain, "fbe");
     GenerateFBEFieldModel(domain, "fbe", "Boolean", "Bool", "", "1", "false");
     GenerateFBEFieldModel(domain, "fbe", "Byte", "UInt8", "", "1", "0");
-    GenerateFBEFieldModel(domain, "fbe", "Char", "CChar", "", "1", "0");
-    GenerateFBEFieldModel(domain, "fbe", "WChar", "Int32", "", "4", "0");
+    GenerateFBEFieldModel(domain, "fbe", "Char", "Character", ".utf8.map{ UInt8($$0) }[0]", "1", "Character(\"0\")");
+    GenerateFBEFieldModel(domain, "fbe", "WChar", "Character", ".utf8.map{ UInt32($$0) }[0]", "4", "Character(\"0\")");
     GenerateFBEFieldModel(domain, "fbe", "Int8", "Int8", "", "1", "0");
     GenerateFBEFieldModel(domain, "fbe", "UInt8", "UInt8", "", "1", "0");
     GenerateFBEFieldModel(domain, "fbe", "Int16", "Int16", "", "2", "0");
@@ -45,8 +45,8 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel(domain, "fbe");
         GenerateFBEFinalModel(domain, "fbe", "Boolean", "Bool", "", "1", "false");
         GenerateFBEFinalModel(domain, "fbe", "Byte", "UInt8", "", "1", "0");
-        GenerateFBEFinalModel(domain, "fbe", "Char", "CChar", "", "1", "0");
-        GenerateFBEFinalModel(domain, "fbe", "WChar", "Int32", "", "4", "0");
+        GenerateFBEFinalModel(domain, "fbe", "Char", "Character", ".utf8.map{ UInt8($$0) }[0]", "1", "Character(\"0\")");
+        GenerateFBEFinalModel(domain, "fbe", "WChar", "Character", ".utf8.map{ UInt8($$0) }[0]", "4", "Character(\"0\")");
         GenerateFBEFinalModel(domain, "fbe", "Int8", "Int8", "", "1", "0");
         GenerateFBEFinalModel(domain, "fbe", "UInt8", "UInt8", "", "1", "0");
         GenerateFBEFinalModel(domain, "fbe", "Int16", "Int16", "", "2", "0");
@@ -387,12 +387,12 @@ void GeneratorSwift::GenerateFBEBuffer(const std::string& domain, const std::str
               return buffer[index]
           }
 
-          class func readChar(buffer: Data, offset: Int) -> CChar {
-              return Buffer.readInt8(buffer: buffer, offset: offset)
+          class func readChar(buffer: Data, offset: Int) -> Character {
+              return Character(UnicodeScalar(Buffer.readUInt8(buffer: buffer, offset: offset)))
           }
 
-          class func readWChar(buffer: Data, offset: Int) -> Int32 {
-              return Buffer.readInt32(buffer: buffer, offset: offset)
+          class func readWChar(buffer: Data, offset: Int) -> Character {
+            return Character(UnicodeScalar(Buffer.readUInt32(buffer: buffer, offset: offset))!)
           }
 
           class func readInt8(buffer: Data, offset: Int) -> Int8 {
@@ -407,8 +407,8 @@ void GeneratorSwift::GenerateFBEBuffer(const std::string& domain, const std::str
 
           class func readInt16(buffer: Data, offset: Int) -> Int16 {
               let index = offset
-              return Int16(((buffer[index + 0] & 0xFF) << 0) |
-                           ((buffer[index + 1] & 0xFF) << 8))
+              return Int16(((Int16(buffer[index + 0]) & 0xFF) << 0) |
+                           ((Int16(buffer[index + 1]) & 0xFF) << 8))
           }
 
           class func readUInt16(buffer: Data, offset: Int) -> UInt16 {
@@ -520,8 +520,8 @@ void GeneratorSwift::GenerateFBEBuffer(const std::string& domain, const std::str
           }
 
           class func write(buffer: inout Data, offset: Int, value: Int16) {
-              buffer[offset + 0] = Data.Element(value >> 0)
-              buffer[offset + 1] = Data.Element(value >> 8)
+              buffer[offset + 0] = NSNumber(value: value >> 0).uint8Value
+              buffer[offset + 1] = NSNumber(value: value >> 8).uint8Value
           }
 
           class func write(buffer: inout Data, offset: Int, value: UInt16) {
@@ -742,8 +742,8 @@ extension FieldModel {
     // Buffer I/O methods
     func readBoolean(offset: Int) -> Bool { return Buffer.readBoolean(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readByte(offset: Int) -> Data.Element { return Buffer.readByte(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readChar(offset: Int) -> CChar { return Buffer.readChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readWChar(offset: Int) -> Int32 { return Buffer.readWChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
+    func readChar(offset: Int) -> Character { return Buffer.readChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
+    func readWChar(offset: Int) -> Character { return Buffer.readWChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readInt8(offset: Int) -> Int8 { return Buffer.readInt8(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readUInt8(offset: Int) -> UInt8 { return Buffer.readUInt8(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readInt16(offset: Int) -> Int16 { return Buffer.readInt16(buffer: _buffer.data, offset: _buffer.offset + offset) }
@@ -833,7 +833,7 @@ class FieldModel_NAME_: FieldModel {
             return
         }
 
-        write(offset: fbeOffset, value: value)
+        write(offset: fbeOffset, value: value_BASE_)
     }
 }
 )CODE";
@@ -841,10 +841,10 @@ class FieldModel_NAME_: FieldModel {
     // Prepare code template
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
-    code = std::regex_replace(code, std::regex("_BASE_"), base);
     code = std::regex_replace(code, std::regex("_SIZE_"), size);
     code = std::regex_replace(code, std::regex("_DEFAULTS_"), defaults);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
+    code = std::regex_replace(code, std::regex("_BASE_"), base);
 
     Write(code);
 
@@ -2270,8 +2270,8 @@ extension FinalModel {
     // Buffer I/O methods
     func readBoolean(offset: Int) -> Bool { return Buffer.readBoolean(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readByte(offset: Int) -> Data.Element { return Buffer.readByte(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readChar(offset: Int) -> CChar { return Buffer.readChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readWChar(offset: Int) -> Int32 { return Buffer.readWChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
+    func readChar(offset: Int) -> Character { return Buffer.readChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
+    func readWChar(offset: Int) -> Character { return Buffer.readWChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readInt8(offset: Int) -> Int8 { return Buffer.readInt8(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readUInt8(offset: Int) -> UInt8 { return Buffer.readUInt8(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readInt16(offset: Int) -> Int16 { return Buffer.readInt16(buffer: _buffer.data, offset: _buffer.offset + offset) }
@@ -2904,10 +2904,10 @@ class FinalModelOptional_NAME_: FinalModel {
             return Int.max
         }
 
-        _buffer.shift(offset: fbeOffset)
+        _buffer.shift(offset: fbeOffset + 1)
         let fbeResult = value.verify()
-        _buffer.unshift(offset: fbeOffset)
-        return fbeResult
+        _buffer.unshift(offset: fbeOffset + 1)
+        return 1 + fbeResult
     }
 
     func get(size: inout Size) -> _TYPE_ {
@@ -3233,7 +3233,7 @@ class FinalModelVector_NAME_: FinalModel {
     func get(values: inout Array<_TYPE_>) -> Int {
         values.removeAll()
 
-        assert(_buffer.offset + fbeOffset + 4 > _buffer.size, "Model is broken!")
+        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
             return 0
         }
@@ -3248,7 +3248,7 @@ class FinalModelVector_NAME_: FinalModel {
         var size: Int = 4
         var offset = Size()
         _model.fbeOffset = fbeOffset + 4
-        for _ in [0...fbeVectorSize] {
+        for _ in 1...fbeVectorSize {
             offset.value = 0
             let value = _model.get(size: &offset)
             values.append(value)
@@ -3259,7 +3259,7 @@ class FinalModelVector_NAME_: FinalModel {
     }
 
     func set(value values: Array<_TYPE_>) throws -> Int {
-        assert(_buffer.offset + fbeOffset + 4 > _buffer.size, "Model is broken!")
+        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
             return 0
         }
@@ -4699,22 +4699,36 @@ void GeneratorSwift::GenerateEnum(const std::shared_ptr<Package>& p, const std::
 
     // Generate enum body
     WriteLine();
-    WriteLineIndent("enum " + enum_name + ": " + enum_mapping_type + " {");
+    WriteLineIndent("enum " + enum_name + " {");
     Indent(1);
+    WriteLineIndent("typealias RawValue = " + enum_mapping_type);
+    if (e->body)
+    {
+        for (const auto& value : e->body->values)
+        {
+            WriteIndent("case " + *value->name);
+            WriteLine();
+        }
+        WriteLine();
+    }
+
     if (e->body)
     {
         int index = 0;
-        std::string last = ConvertEnumConstant(enum_type, enum_type, "0", false);
+        std::string last = ConvertEnumConstant(enum_type, enum_type, (enum_type == "char"  ? "\"0\"" : "0"), false);
+        WriteLineIndent("var rawValue: RawValue {");
+        Indent(1);
+        WriteLineIndent("switch self {");
         for (const auto& value : e->body->values)
         {
-            WriteIndent("case " + *value->name + " = ");
+            WriteIndent("case ." + *value->name + ": return ");
             if (value->value)
             {
                 if (value->value->constant && !value->value->constant->empty())
                 {
                     index = 0;
                     last = ConvertEnumConstant(enum_type, enum_type, *value->value->constant, false);
-                    Write(last);//Write(last + " + " + std::to_string(index++));
+                    Write(last + " + " + std::to_string(index++));
                 }
                 else if (value->value->reference && !value->value->reference->empty())
                 {
@@ -4724,31 +4738,35 @@ void GeneratorSwift::GenerateEnum(const std::shared_ptr<Package>& p, const std::
                 }
             }
             else
-                Write(std::to_string(index++));
+                Write(last + " + " + std::to_string(index++));
             WriteLine();
         }
+        WriteLineIndent("}");
+        Indent(-1);
+        WriteLineIndent("}");
         WriteLine();
     }
 
     // Generate enum constructors
     WriteLine();
     if ((enum_type == "char") || (enum_type == "wchar"))
-    WriteLineIndent("init(value: Char) { self = StateEnum(rawValue: NSNumber(value: value)" + enum_to + ")! }");
+        WriteLineIndent("init(value: Character) { self = " + enum_name + "(rawValue: NSNumber(value: Int(String(value))!)" + enum_to + " ) }");
     if (IsUnsignedType(enum_type))
     {
-        WriteLineIndent("init(value: UInt8) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
-        WriteLineIndent("init(value: UInt16) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
-        WriteLineIndent("init(value: UInt32) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
-        WriteLineIndent("init(value: UInt64) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
+        WriteLineIndent("init(value: UInt8) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ") }");
+        WriteLineIndent("init(value: UInt16) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ") }");
+        WriteLineIndent("init(value: UInt32) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ") }");
+        WriteLineIndent("init(value: UInt64) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ") }");
     }
     else
     {
-      WriteLineIndent("init(value: Int8) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
-      WriteLineIndent("init(value: Int16) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
-      WriteLineIndent("init(value: Int32) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
-      WriteLineIndent("init(value: Int64) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ")! }");
+      WriteLineIndent("init(value: Int8) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ") }");
+      WriteLineIndent("init(value: Int16) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ") }");
+      WriteLineIndent("init(value: Int32) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ") }");
+      WriteLineIndent("init(value: Int64) { self = " + enum_name + "(rawValue: NSNumber(value: value)" + enum_to + ") }");
     }
-    WriteLineIndent("init(value: " + enum_name + ") { self = " + enum_name + "(rawValue: value.rawValue)! }");
+    WriteLineIndent("init(value: " + enum_name + ") { self = " + enum_name + "(rawValue: value.rawValue) }");
+    WriteLineIndent("init(rawValue: " + enum_mapping_type + ") { self = Self.mapValue(value: rawValue)! }");
 
     // Generate enum description method
     WriteLine();
@@ -4892,7 +4910,7 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
     WriteLineIndent("return false");
     WriteLineIndent("}");
     Indent(-1);
-    WriteLineIndent("return lhsValue == rhsValue");
+    WriteLineIndent("return lhsValue.rawValue == rhsValue.rawValue");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5028,7 +5046,7 @@ void GeneratorSwift::GenerateFlags(const std::shared_ptr<Package>& p, const std:
     WriteLine();
     WriteLineIndent("init(rawValue: " + flags_mapping_type + ") { self.rawValue = rawValue }");
     if ((flags_type == "char") || (flags_type == "wchar"))
-        WriteLineIndent("init(value: Char) { self.rawValue = NSNumber(value: value)" + flags_to + " }");
+        WriteLineIndent("init(value: Char) { self.rawValue = value" + flags_to + " }");
     if (IsUnsignedType(flags_type))
     {
         WriteLineIndent("init(value: UInt8) { self.rawValue = NSNumber(value: value)" + flags_to + " }");
@@ -5069,7 +5087,7 @@ void GeneratorSwift::GenerateFlags(const std::shared_ptr<Package>& p, const std:
     WriteLineIndent("static let noneSet: " + flags_name + " = []");
     WriteLineIndent("var currentSet: " + flags_name + " {");
     Indent(1);
-    WriteLineIndent("var result = StateEnum.noneSet");
+    WriteLineIndent("var result = " + flags_name + ".noneSet");
     if (f->body)
     {
         for (const auto& value : f->body->values)
@@ -5769,14 +5787,15 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
         }
     }
     WriteLine();
-    WriteLineIndent("fbeBody = (4 + 4");
+    WriteLineIndent("var fbeBody = (4 + 4)");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ parent.fbeBody - 4 - 4");
+        WriteLineIndent("fbeBody += parent.fbeBody - 4 - 4");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("+ " + *field->name + ".fbeSize");
-    WriteLineIndent(")");
+            WriteLineIndent("fbeBody += " + *field->name + ".fbeSize");
+    //WriteLineIndent(")");
+    WriteLineIndent("self.fbeBody = fbeBody");
     Indent(-1);
     Indent(-1);
     WriteLineIndent("}");
@@ -5807,14 +5826,15 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
         }
     }
     WriteLine();
-    WriteLineIndent("fbeBody = (4 + 4");
+    WriteLineIndent("var fbeBody = (4 + 4)");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ parent.fbeBody - 4 - 4");
+        WriteLineIndent("fbeBody += parent.fbeBody - 4 - 4");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("+ " + *field->name + ".fbeSize");
-    WriteLineIndent(")");
+            WriteLineIndent("fbeBody += " + *field->name + ".fbeSize");
+    //WriteLineIndent(")");
+    WriteLineIndent("self.fbeBody = fbeBody");
     Indent(-1);
     Indent(-1);
     WriteLineIndent("}");
@@ -7743,9 +7763,9 @@ std::string GeneratorSwift::ConvertEnumBase(const std::string& type)
     if (type == "byte")
         return "UInt8";
     else if (type == "char")
-        return "Int8";
+        return "UInt8";
     else if (type == "wchar")
-        return "Int32";
+        return "UInt32";
     else if (type == "int8")
         return "Int8";
     else if (type == "uint8")
@@ -7772,9 +7792,9 @@ std::string GeneratorSwift::ConvertEnumType(const std::string& type)
     if (type == "byte")
         return "UInt8";
     else if (type == "char")
-        return "Int8";
+        return "UInt8";
     else if (type == "wchar")
-        return "Int32";
+        return "UInt32";
     else if (type == "int8")
         return "Int8";
     else if (type == "uint8")
@@ -7859,9 +7879,9 @@ std::string GeneratorSwift::ConvertEnumRead(const std::string& type)
     if (type == "byte")
         return "readByte";
     else if (type == "char")
-        return "readInt8";
+        return "readUInt8";
     else if (type == "wchar")
-        return "readInt32";
+        return "readUInt32";
     else if (type == "int8")
         return "readInt8";
     else if (type == "uint8")
@@ -7902,9 +7922,9 @@ std::string GeneratorSwift::ConvertEnumTo(const std::string& type)
     if (type == "byte")
         return ".uint8Value";
     else if (type == "char")
-        return ".int8Value";
+        return ".uint8Value";
     else if (type == "wchar")
-        return ".int32Value";
+        return ".uint32Value";
     else if (type == "int8")
         return ".int8Value";
     else if (type == "uint8")
@@ -7967,12 +7987,13 @@ std::string GeneratorSwift::ConvertEnumConstant(const std::string& base, const s
             bool first = true;
             for (const auto& it : flags)
             {
-                result += std::string(first ? "" : " | ") + "" + CppCommon::StringUtils::ToTrim(it) + ".rawValue";
+                result += std::string(first ? "" : " | ") + "Self." + CppCommon::StringUtils::ToTrim(it) + ".rawValue";
                 first = false;
             }
         }
     }
 
+    result = std::regex_replace(result, std::regex("'"), "\"");
     return ConvertEnumConstantPrefix(type) + result + ConvertEnumConstantSuffix(type);
 }
 
@@ -7983,12 +8004,14 @@ std::string GeneratorSwift::ConvertEnumConstantPrefix(const std::string& type)
 
 std::string GeneratorSwift::ConvertEnumConstantSuffix(const std::string& type)
 {
+    if ((type == "char"))
+        return ".utf8.map{ UInt8($0) }[0]";
     if ((type == "uint8") || (type == "uint16") || (type == "uint32"))
-        return "u";
+        return "";
     if (type == "int64")
-        return "L";
+        return "";
     if (type == "uint64")
-        return "uL";
+        return "";
 
     return "";
 }
@@ -8038,7 +8061,7 @@ std::string GeneratorSwift::ConvertTypeName(const std::string& domain, const std
     else if (type == "bytes")
         return "ByteArray" + opt;
     else if (type == "char")
-        return "Char" + opt;
+        return "Character" + opt;
     else if (type == "wchar")
         return "Char" + opt;
     else if (type == "int8")
@@ -8178,7 +8201,7 @@ std::string GeneratorSwift::ConvertTypeFieldType(const std::string& domain, cons
     else if (type == "bytes")
         return "ByteArray" + opt;
     else if (type == "char")
-        return "Char" + opt;
+        return "Character" + opt;
     else if (type == "wchar")
         return "Char" + opt;
     else if (type == "int8")
@@ -8377,7 +8400,7 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
         }
         else
         {
-            result = result;
+            //result = result;
         }
     }
 
@@ -8401,13 +8424,13 @@ std::string GeneratorSwift::ConvertConstantSuffix(const std::string& type)
     if ((type == "char") || (type == "wchar"))
         return ".toChar()";
     if ((type == "uint8") || (type == "uint16") || (type == "uint32"))
-        return "u";
+        return "";
     if (type == "int64")
-        return "L";
+        return "";
     if (type == "uint64")
-        return "uL";
+        return "";
     if (type == "float")
-        return "f";
+        return "";
 
     if ((type == "decimal") || (type == "uuid"))
         return ")";
@@ -8436,7 +8459,7 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
     else if (type == "int32")
         return "0";
     else if (type == "uint32")
-        return "0u";
+        return "0";
     else if (type == "int64")
         return "0";
     else if (type == "uint64")

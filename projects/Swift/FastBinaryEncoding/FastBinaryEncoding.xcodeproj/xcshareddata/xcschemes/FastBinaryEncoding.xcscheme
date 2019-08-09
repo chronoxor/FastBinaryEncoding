@@ -39,12 +39,6 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "EnumsTest/testSerializationEnums()">
-               </Test>
-               <Test
-                  Identifier = "EnumsTest/testSerializationFinalEnums()">
-               </Test>
-               <Test
                   Identifier = "SendReceiveFinalTest/testExample()">
                </Test>
                <Test
