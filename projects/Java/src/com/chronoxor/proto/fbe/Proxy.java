@@ -9,9 +9,6 @@ package com.chronoxor.proto.fbe;
 public class Proxy extends com.chronoxor.fbe.Receiver
 {
     // Proxy models accessors
-    private final OrderModel OrderModel;
-    private final BalanceModel BalanceModel;
-    private final AccountModel AccountModel;
     private final OrderMessageModel OrderMessageModel;
     private final BalanceMessageModel BalanceMessageModel;
     private final AccountMessageModel AccountMessageModel;
@@ -19,9 +16,6 @@ public class Proxy extends com.chronoxor.fbe.Receiver
     public Proxy()
     {
         super(false);
-        OrderModel = new OrderModel();
-        BalanceModel = new BalanceModel();
-        AccountModel = new AccountModel();
         OrderMessageModel = new OrderMessageModel();
         BalanceMessageModel = new BalanceMessageModel();
         AccountMessageModel = new AccountMessageModel();
@@ -29,18 +23,12 @@ public class Proxy extends com.chronoxor.fbe.Receiver
     public Proxy(com.chronoxor.fbe.Buffer buffer)
     {
         super(buffer, false);
-        OrderModel = new OrderModel();
-        BalanceModel = new BalanceModel();
-        AccountModel = new AccountModel();
         OrderMessageModel = new OrderMessageModel();
         BalanceMessageModel = new BalanceMessageModel();
         AccountMessageModel = new AccountMessageModel();
     }
 
     // Proxy handlers
-    protected void onProxy(OrderModel model, long type, byte[] buffer, long offset, long size) {}
-    protected void onProxy(BalanceModel model, long type, byte[] buffer, long offset, long size) {}
-    protected void onProxy(AccountModel model, long type, byte[] buffer, long offset, long size) {}
     protected void onProxy(OrderMessageModel model, long type, byte[] buffer, long offset, long size) {}
     protected void onProxy(BalanceMessageModel model, long type, byte[] buffer, long offset, long size) {}
     protected void onProxy(AccountMessageModel model, long type, byte[] buffer, long offset, long size) {}
@@ -50,48 +38,6 @@ public class Proxy extends com.chronoxor.fbe.Receiver
     {
         switch ((int)type)
         {
-            case (int)com.chronoxor.proto.fbe.OrderModel.fbeTypeConst:
-            {
-                // Attach the FBE stream to the proxy model
-                OrderModel.attach(buffer, offset);
-                assert OrderModel.verify() : "proto.Order validation failed!";
-
-                long fbeBegin = OrderModel.model.getBegin();
-                if (fbeBegin == 0)
-                    return false;
-                // Call proxy handler
-                onProxy(OrderModel, type, buffer, offset, size);
-                OrderModel.model.getEnd(fbeBegin);
-                return true;
-            }
-            case (int)com.chronoxor.proto.fbe.BalanceModel.fbeTypeConst:
-            {
-                // Attach the FBE stream to the proxy model
-                BalanceModel.attach(buffer, offset);
-                assert BalanceModel.verify() : "proto.Balance validation failed!";
-
-                long fbeBegin = BalanceModel.model.getBegin();
-                if (fbeBegin == 0)
-                    return false;
-                // Call proxy handler
-                onProxy(BalanceModel, type, buffer, offset, size);
-                BalanceModel.model.getEnd(fbeBegin);
-                return true;
-            }
-            case (int)com.chronoxor.proto.fbe.AccountModel.fbeTypeConst:
-            {
-                // Attach the FBE stream to the proxy model
-                AccountModel.attach(buffer, offset);
-                assert AccountModel.verify() : "proto.Account validation failed!";
-
-                long fbeBegin = AccountModel.model.getBegin();
-                if (fbeBegin == 0)
-                    return false;
-                // Call proxy handler
-                onProxy(AccountModel, type, buffer, offset, size);
-                AccountModel.model.getEnd(fbeBegin);
-                return true;
-            }
             case (int)com.chronoxor.proto.fbe.OrderMessageModel.fbeTypeConst:
             {
                 // Attach the FBE stream to the proxy model
@@ -134,6 +80,7 @@ public class Proxy extends com.chronoxor.fbe.Receiver
                 AccountMessageModel.model.getEnd(fbeBegin);
                 return true;
             }
+            default: break;
         }
 
         return false;

@@ -12,56 +12,26 @@ package com.chronoxor.enums.fbe
 open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
 {
     // Client sender models accessors
-    val EnumsSenderModel: EnumsFinalModel
 
     // Client receiver values accessors
-    private val EnumsReceiverValue: com.chronoxor.enums.Enums
 
     // Client receiver models accessors
-    private val EnumsReceiverModel: EnumsFinalModel
 
     constructor() : super(true)
     {
-        EnumsSenderModel = EnumsFinalModel(sendBuffer)
-        EnumsReceiverValue = com.chronoxor.enums.Enums()
-        EnumsReceiverModel = EnumsFinalModel()
     }
 
     constructor(sendBuffer: com.chronoxor.fbe.Buffer, receiveBuffer: com.chronoxor.fbe.Buffer) : super(sendBuffer, receiveBuffer, true)
     {
-        EnumsSenderModel = EnumsFinalModel(sendBuffer)
-        EnumsReceiverValue = com.chronoxor.enums.Enums()
-        EnumsReceiverModel = EnumsFinalModel()
     }
 
-    @Suppress("JoinDeclarationAndAssignment")
+    @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
     fun send(obj: Any): Long
     {
-        when (obj)
-        {
-            is com.chronoxor.enums.Enums -> if (obj.fbeType == EnumsSenderModel.fbeType) return send(obj)
-        }
 
         return 0
     }
 
-    fun send(value: com.chronoxor.enums.Enums): Long
-    {
-        // Serialize the value into the FBE stream
-        val serialized = EnumsSenderModel.serialize(value)
-        assert(serialized > 0) { "com.chronoxor.enums.Enums serialization failed!" }
-        assert(EnumsSenderModel.verify()) { "com.chronoxor.enums.Enums validation failed!" }
-
-        // Log the value
-        if (logging)
-        {
-            val message = value.toString()
-            onSendLog(message)
-        }
-
-        // Send the serialized value
-        return sendSerialized(serialized)
-    }
 
     // Send message handler
     override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException("com.chronoxor.enums.fbe.Client.onSend() not implemented!") }
@@ -72,28 +42,6 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
 
     open fun onReceiveListener(listener: FinalReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
-        when (type)
-        {
-            com.chronoxor.enums.fbe.EnumsFinalModel.fbeTypeConst ->
-            {
-                // Deserialize the value from the FBE stream
-                EnumsReceiverModel.attach(buffer, offset)
-                assert(EnumsReceiverModel.verify()) { "com.chronoxor.enums.Enums validation failed!" }
-                val deserialized = EnumsReceiverModel.deserialize(EnumsReceiverValue)
-                assert(deserialized > 0) { "com.chronoxor.enums.Enums deserialization failed!" }
-
-                // Log the value
-                if (logging)
-                {
-                    val message = EnumsReceiverValue.toString()
-                    onReceiveLog(message)
-                }
-
-                // Call receive handler with deserialized value
-                listener.onReceive(EnumsReceiverValue)
-                return true
-            }
-        }
 
         return false
     }

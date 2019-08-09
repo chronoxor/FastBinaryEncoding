@@ -6778,7 +6778,8 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     {
         WriteLineIndent("// Sender models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("val " + *s->name + "Model: " + *s->name + model);
+            if (s->message)
+                WriteLineIndent("val " + *s->name + "Model: " + *s->name + model);
         WriteLine();
     }
 
@@ -6794,7 +6795,8 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = " + *s->name + model + "(buffer)");
+            if (s->message)
+                WriteLineIndent(*s->name + "Model = " + *s->name + model + "(buffer)");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -6810,26 +6812,35 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = " + *s->name + model + "(buffer)");
+            if (s->message)
+                WriteLineIndent(*s->name + "Model = " + *s->name + model + "(buffer)");
     }
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
 
+    bool messages = false;
+    for (const auto& s : p->body->structs)
+        if (s->message)
+            messages = true;
+
     // Generate generic sender method
-    WriteLineIndent("@Suppress(\"JoinDeclarationAndAssignment\")");
+    WriteLineIndent("@Suppress(\"JoinDeclarationAndAssignment\", \"UNUSED_PARAMETER\")");
     WriteLineIndent("fun send(obj: Any): Long");
     WriteLineIndent("{");
     Indent(1);
-    if (p->body)
+    if (p->body && messages)
     {
         WriteLineIndent("when (obj)");
         WriteLineIndent("{");
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent("is " + struct_name + " -> if (obj.fbeType == " + *s->name + "Model.fbeType) return send(obj)");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent("is " + struct_name + " -> if (obj.fbeType == " + *s->name + "Model.fbeType) return send(obj)");
+            }
         }
         Indent(-1);
         WriteLineIndent("}");
@@ -6860,28 +6871,31 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent("fun send(value: " + struct_name + "): Long");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("// Serialize the value into the FBE stream");
-            WriteLineIndent("val serialized = " + *s->name + "Model.serialize(value)");
-            WriteLineIndent("assert(serialized > 0) { \"" + struct_name + " serialization failed!\" }");
-            WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + struct_name + " validation failed!\" }");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (logging)");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("val message = value.toString()");
-            WriteLineIndent("onSendLog(message)");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Send the serialized value");
-            WriteLineIndent("return sendSerialized(serialized)");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent("fun send(value: " + struct_name + "): Long");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Serialize the value into the FBE stream");
+                WriteLineIndent("val serialized = " + *s->name + "Model.serialize(value)");
+                WriteLineIndent("assert(serialized > 0) { \"" + struct_name + " serialization failed!\" }");
+                WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + struct_name + " validation failed!\" }");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (logging)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("val message = value.toString()");
+                WriteLineIndent("onSendLog(message)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Send the serialized value");
+                WriteLineIndent("return sendSerialized(serialized)");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
 
@@ -6949,13 +6963,17 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         WriteLineIndent("// Receiver values accessors");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent("private val " + *s->name + "Value: " + struct_name);
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent("private val " + *s->name + "Value: " + struct_name);
+            }
         }
         WriteLine();
         WriteLineIndent("// Receiver models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("private val " + *s->name + "Model: " + *s->name + model);
+            if (s->message)
+                WriteLineIndent("private val " + *s->name + "Model: " + *s->name + model);
         WriteLine();
     }
 
@@ -6972,9 +6990,12 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent(*s->name + "Value = " + struct_name + "()");
-            WriteLineIndent(*s->name + "Model = " + *s->name + model + "()");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent(*s->name + "Value = " + struct_name + "()");
+                WriteLineIndent(*s->name + "Model = " + *s->name + model + "()");
+            }
         }
     }
     Indent(-1);
@@ -6992,14 +7013,22 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent(*s->name + "Value = " + struct_name + "()");
-            WriteLineIndent(*s->name + "Model = " + *s->name + model + "()");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent(*s->name + "Value = " + struct_name + "()");
+                WriteLineIndent(*s->name + "Model = " + *s->name + model + "()");
+            }
         }
     }
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
+
+    bool messages = false;
+    for (const auto& s : p->body->structs)
+        if (s->message)
+            messages = true;
 
     // Generate receiver message handler
     WriteLineIndent("override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
@@ -7012,36 +7041,39 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     WriteLineIndent("open fun onReceiveListener(listener: " + listener + ", type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
     WriteLineIndent("{");
     Indent(1);
-    if (p->body)
+    if (p->body && messages)
     {
         WriteLineIndent("when (type)");
         WriteLineIndent("{");
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent(domain + package + ".fbe." + *s->name + model + ".fbeTypeConst ->");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("// Deserialize the value from the FBE stream");
-            WriteLineIndent(*s->name + "Model.attach(buffer, offset)");
-            WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
-            WriteLineIndent("val deserialized = " + *s->name + "Model.deserialize(" + *s->name + "Value)");
-            WriteLineIndent("assert(deserialized > 0) { \"" + domain + *p->name + "." + *s->name + " deserialization failed!\" }");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (logging)");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("val message = " + *s->name + "Value.toString()");
-            WriteLineIndent("onReceiveLog(message)");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Call receive handler with deserialized value");
-            WriteLineIndent("listener.onReceive(" + *s->name + "Value)");
-            WriteLineIndent("return true");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLineIndent(domain + package + ".fbe." + *s->name + model + ".fbeTypeConst ->");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Deserialize the value from the FBE stream");
+                WriteLineIndent(*s->name + "Model.attach(buffer, offset)");
+                WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
+                WriteLineIndent("val deserialized = " + *s->name + "Model.deserialize(" + *s->name + "Value)");
+                WriteLineIndent("assert(deserialized > 0) { \"" + domain + *p->name + "." + *s->name + " deserialization failed!\" }");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (logging)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("val message = " + *s->name + "Value.toString()");
+                WriteLineIndent("onReceiveLog(message)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Call receive handler with deserialized value");
+                WriteLineIndent("listener.onReceive(" + *s->name + "Value)");
+                WriteLineIndent("return true");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
         Indent(-1);
         WriteLineIndent("}");
@@ -7119,8 +7151,11 @@ void GeneratorKotlin::GenerateReceiverListener(const std::shared_ptr<Package>& p
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent("fun onReceive(value: " + struct_name + ") {}");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent("fun onReceive(value: " + struct_name + ") {}");
+            }
         }
     }
 
@@ -7182,7 +7217,8 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     {
         WriteLineIndent("// Proxy models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("private val " + *s->name + "Model: " + *s->name + model);
+            if (s->message)
+                WriteLineIndent("private val " + *s->name + "Model: " + *s->name + model);
         WriteLine();
     }
 
@@ -7198,7 +7234,8 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = " + *s->name + model + "()");
+            if (s->message)
+                WriteLineIndent(*s->name + "Model = " + *s->name + model + "()");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -7214,11 +7251,17 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = " + *s->name + model + "()");
+            if (s->message)
+                WriteLineIndent(*s->name + "Model = " + *s->name + model + "()");
     }
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
+
+    bool messages = false;
+    for (const auto& s : p->body->structs)
+        if (s->message)
+            messages = true;
 
     // Generate proxy message handler
     WriteLineIndent("override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
@@ -7231,31 +7274,34 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("open fun onReceiveListener(listener: " + listener + ", type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
     WriteLineIndent("{");
     Indent(1);
-    if (p->body)
+    if (p->body && messages)
     {
         WriteLineIndent("when (type)");
         WriteLineIndent("{");
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent(domain + package + ".fbe." + *s->name + model + ".fbeTypeConst ->");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("// Attach the FBE stream to the proxy model");
-            WriteLineIndent(*s->name + "Model.attach(buffer, offset)");
-            WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
-            WriteLine();
-            WriteLineIndent("val fbeBegin = " + *s->name + "Model.model.getBegin()");
-            WriteLineIndent("if (fbeBegin == 0L)");
-            Indent(1);
-            WriteLineIndent("return false");
-            Indent(-1);
-            WriteLineIndent("// Call proxy handler");
-            WriteLineIndent("listener.onProxy(" + *s->name + "Model, type, buffer, offset, size)");
-            WriteLineIndent(*s->name + "Model.model.getEnd(fbeBegin)");
-            WriteLineIndent("return true");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLineIndent(domain + package + ".fbe." + *s->name + model + ".fbeTypeConst ->");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Attach the FBE stream to the proxy model");
+                WriteLineIndent(*s->name + "Model.attach(buffer, offset)");
+                WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
+                WriteLine();
+                WriteLineIndent("val fbeBegin = " + *s->name + "Model.model.getBegin()");
+                WriteLineIndent("if (fbeBegin == 0L)");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("// Call proxy handler");
+                WriteLineIndent("listener.onProxy(" + *s->name + "Model, type, buffer, offset, size)");
+                WriteLineIndent(*s->name + "Model.model.getEnd(fbeBegin)");
+                WriteLineIndent("return true");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
         Indent(-1);
         WriteLineIndent("}");
@@ -7334,8 +7380,11 @@ void GeneratorKotlin::GenerateProxyListener(const std::shared_ptr<Package>& p, b
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_model = *s->name + model;
-            WriteLineIndent("fun onProxy(model: " + struct_model + ", type: Long, buffer: ByteArray, offset: Long, size: Long) {}");
+            if (s->message)
+            {
+                std::string struct_model = *s->name + model;
+                WriteLineIndent("fun onProxy(model: " + struct_model + ", type: Long, buffer: ByteArray, offset: Long, size: Long) {}");
+            }
         }
     }
 
@@ -7406,7 +7455,8 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     {
         WriteLineIndent("// Client sender models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("val " + *s->name + "SenderModel: " + *s->name + model);
+            if (s->message)
+                WriteLineIndent("val " + *s->name + "SenderModel: " + *s->name + model);
         WriteLine();
     }
 
@@ -7416,13 +7466,17 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("// Client receiver values accessors");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent("private val " + *s->name + "ReceiverValue: " + struct_name);
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent("private val " + *s->name + "ReceiverValue: " + struct_name);
+            }
         }
         WriteLine();
         WriteLineIndent("// Client receiver models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("private val " + *s->name + "ReceiverModel: " + *s->name + model);
+            if (s->message)
+                WriteLineIndent("private val " + *s->name + "ReceiverModel: " + *s->name + model);
         WriteLine();
     }
 
@@ -7442,10 +7496,13 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent(*s->name + "SenderModel = " + *s->name + model + "(sendBuffer)");
-            WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + "()");
-            WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent(*s->name + "SenderModel = " + *s->name + model + "(sendBuffer)");
+                WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + "()");
+                WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
+            }
         }
     }
     Indent(-1);
@@ -7466,30 +7523,41 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent(*s->name + "SenderModel = " + *s->name + model + "(sendBuffer)");
-            WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + "()");
-            WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent(*s->name + "SenderModel = " + *s->name + model + "(sendBuffer)");
+                WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + "()");
+                WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
+            }
         }
     }
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
 
+    bool messages = false;
+    for (const auto& s : p->body->structs)
+        if (s->message)
+            messages = true;
+
     // Generate generic client send method
-    WriteLineIndent("@Suppress(\"JoinDeclarationAndAssignment\")");
+    WriteLineIndent("@Suppress(\"JoinDeclarationAndAssignment\", \"UNUSED_PARAMETER\")");
     WriteLineIndent("fun send(obj: Any): Long");
     WriteLineIndent("{");
     Indent(1);
-    if (p->body)
+    if (p->body && messages)
     {
         WriteLineIndent("when (obj)");
         WriteLineIndent("{");
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent("is " + struct_name + " -> if (obj.fbeType == " + *s->name + "SenderModel.fbeType) return send(obj)");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent("is " + struct_name + " -> if (obj.fbeType == " + *s->name + "SenderModel.fbeType) return send(obj)");
+            }
         }
         Indent(-1);
         WriteLineIndent("}");
@@ -7520,28 +7588,31 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent("fun send(value: " + struct_name + "): Long");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("// Serialize the value into the FBE stream");
-            WriteLineIndent("val serialized = " + *s->name + "SenderModel.serialize(value)");
-            WriteLineIndent("assert(serialized > 0) { \"" + struct_name + " serialization failed!\" }");
-            WriteLineIndent("assert(" + *s->name + "SenderModel.verify()) { \"" + struct_name + " validation failed!\" }");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (logging)");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("val message = value.toString()");
-            WriteLineIndent("onSendLog(message)");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Send the serialized value");
-            WriteLineIndent("return sendSerialized(serialized)");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent("fun send(value: " + struct_name + "): Long");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Serialize the value into the FBE stream");
+                WriteLineIndent("val serialized = " + *s->name + "SenderModel.serialize(value)");
+                WriteLineIndent("assert(serialized > 0) { \"" + struct_name + " serialization failed!\" }");
+                WriteLineIndent("assert(" + *s->name + "SenderModel.verify()) { \"" + struct_name + " validation failed!\" }");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (logging)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("val message = value.toString()");
+                WriteLineIndent("onSendLog(message)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Send the serialized value");
+                WriteLineIndent("return sendSerialized(serialized)");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
 
@@ -7561,36 +7632,39 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("open fun onReceiveListener(listener: " + listener + ", type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
     WriteLineIndent("{");
     Indent(1);
-    if (p->body)
+    if (p->body && messages)
     {
         WriteLineIndent("when (type)");
         WriteLineIndent("{");
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent(domain + package + ".fbe." + *s->name + model + ".fbeTypeConst ->");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("// Deserialize the value from the FBE stream");
-            WriteLineIndent(*s->name + "ReceiverModel.attach(buffer, offset)");
-            WriteLineIndent("assert(" + *s->name + "ReceiverModel.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
-            WriteLineIndent("val deserialized = " + *s->name + "ReceiverModel.deserialize(" + *s->name + "ReceiverValue)");
-            WriteLineIndent("assert(deserialized > 0) { \"" + domain + *p->name + "." + *s->name + " deserialization failed!\" }");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (logging)");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("val message = " + *s->name + "ReceiverValue.toString()");
-            WriteLineIndent("onReceiveLog(message)");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Call receive handler with deserialized value");
-            WriteLineIndent("listener.onReceive(" + *s->name + "ReceiverValue)");
-            WriteLineIndent("return true");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLineIndent(domain + package + ".fbe." + *s->name + model + ".fbeTypeConst ->");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Deserialize the value from the FBE stream");
+                WriteLineIndent(*s->name + "ReceiverModel.attach(buffer, offset)");
+                WriteLineIndent("assert(" + *s->name + "ReceiverModel.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
+                WriteLineIndent("val deserialized = " + *s->name + "ReceiverModel.deserialize(" + *s->name + "ReceiverValue)");
+                WriteLineIndent("assert(deserialized > 0) { \"" + domain + *p->name + "." + *s->name + " deserialization failed!\" }");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (logging)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("val message = " + *s->name + "ReceiverValue.toString()");
+                WriteLineIndent("onReceiveLog(message)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Call receive handler with deserialized value");
+                WriteLineIndent("listener.onReceive(" + *s->name + "ReceiverValue)");
+                WriteLineIndent("return true");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
         Indent(-1);
         WriteLineIndent("}");

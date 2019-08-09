@@ -10,16 +10,4 @@ package com.chronoxor.test.fbe
 // Fast Binary Encoding com.chronoxor.test receiver listener
 interface ReceiverListener : com.chronoxor.proto.fbe.ReceiverListener
 {
-    fun onReceive(value: com.chronoxor.test.StructSimple) {}
-    fun onReceive(value: com.chronoxor.test.StructOptional) {}
-    fun onReceive(value: com.chronoxor.test.StructNested) {}
-    fun onReceive(value: com.chronoxor.test.StructBytes) {}
-    fun onReceive(value: com.chronoxor.test.StructArray) {}
-    fun onReceive(value: com.chronoxor.test.StructVector) {}
-    fun onReceive(value: com.chronoxor.test.StructList) {}
-    fun onReceive(value: com.chronoxor.test.StructSet) {}
-    fun onReceive(value: com.chronoxor.test.StructMap) {}
-    fun onReceive(value: com.chronoxor.test.StructHash) {}
-    fun onReceive(value: com.chronoxor.test.StructHashEx) {}
-    fun onReceive(value: com.chronoxor.test.StructEmpty) {}
 }

@@ -11,16 +11,4 @@ package com.chronoxor.test.fbe
 interface ProxyListener : com.chronoxor.proto.fbe.ProxyListener
 
 {
-    fun onProxy(model: StructSimpleModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    fun onProxy(model: StructOptionalModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    fun onProxy(model: StructNestedModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    fun onProxy(model: StructBytesModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    fun onProxy(model: StructArrayModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    fun onProxy(model: StructVectorModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    fun onProxy(model: StructListModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    fun onProxy(model: StructSetModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    fun onProxy(model: StructMapModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    fun onProxy(model: StructHashModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    fun onProxy(model: StructHashExModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    fun onProxy(model: StructEmptyModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
 }

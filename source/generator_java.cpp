@@ -6537,7 +6537,8 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     {
         WriteLineIndent("// Sender models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("public final " + *s->name + model + " " + *s->name + "Model;");
+            if (s->message)
+                WriteLineIndent("public final " + *s->name + model + " " + *s->name + "Model;");
         WriteLine();
     }
 
@@ -6554,7 +6555,8 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "(getBuffer());");
+            if (s->message)
+                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "(getBuffer());");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -6570,7 +6572,8 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "(getBuffer());");
+            if (s->message)
+                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "(getBuffer());");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -6584,17 +6587,20 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent("if (obj instanceof " + struct_name + ")");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent(struct_name + " value = (" + struct_name + ")obj;");
-            WriteLineIndent("if (value.fbeType() == " + *s->name + "Model.fbeType())");
-            Indent(1);
-            WriteLineIndent("return send(value);");
-            Indent(-1);
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent("if (obj instanceof " + struct_name + ")");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent(struct_name + " value = (" + struct_name + ")obj;");
+                WriteLineIndent("if (value.fbeType() == " + *s->name + "Model.fbeType())");
+                Indent(1);
+                WriteLineIndent("return send(value);");
+                Indent(-1);
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
     WriteLine();
@@ -6622,28 +6628,31 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent("public long send(" + struct_name + " value)");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("// Serialize the value into the FBE stream");
-            WriteLineIndent("long serialized = " + *s->name + "Model.serialize(value);");
-            WriteLineIndent("assert (serialized > 0) : \"" + struct_name + " serialization failed!\";");
-            WriteLineIndent("assert " + *s->name + "Model.verify() : \"" + struct_name + " validation failed!\";");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (getLogging())");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("String message = value.toString();");
-            WriteLineIndent("onSendLog(message);");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Send the serialized value");
-            WriteLineIndent("return sendSerialized(serialized);");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent("public long send(" + struct_name + " value)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Serialize the value into the FBE stream");
+                WriteLineIndent("long serialized = " + *s->name + "Model.serialize(value);");
+                WriteLineIndent("assert (serialized > 0) : \"" + struct_name + " serialization failed!\";");
+                WriteLineIndent("assert " + *s->name + "Model.verify() : \"" + struct_name + " validation failed!\";");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (getLogging())");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("String message = value.toString();");
+                WriteLineIndent("onSendLog(message);");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Send the serialized value");
+                WriteLineIndent("return sendSerialized(serialized);");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
 
@@ -6710,13 +6719,17 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("// Receiver values accessors");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent("private final " + struct_name + " " + *s->name + "Value;");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent("private final " + struct_name + " " + *s->name + "Value;");
+            }
         }
         WriteLine();
         WriteLineIndent("// Receiver models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("private final " + *s->name + model + " " + *s->name + "Model;");
+            if (s->message)
+                WriteLineIndent("private final " + *s->name + model + " " + *s->name + "Model;");
         WriteLine();
     }
 
@@ -6734,9 +6747,12 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent(*s->name + "Value = new " + struct_name + "();");
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent(*s->name + "Value = new " + struct_name + "();");
+                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+            }
         }
     }
     Indent(-1);
@@ -6754,9 +6770,12 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent(*s->name + "Value = new " + struct_name + "();");
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent(*s->name + "Value = new " + struct_name + "();");
+                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+            }
         }
     }
     Indent(-1);
@@ -6769,8 +6788,11 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("// Receive handlers");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + *p->name + "." + *s->name;
-            WriteLineIndent("protected void onReceive(" + struct_name + " value) {}");
+            if (s->message)
+            {
+                std::string struct_name = domain + *p->name + "." + *s->name;
+                WriteLineIndent("protected void onReceive(" + struct_name + " value) {}");
+            }
         }
         WriteLine();
     }
@@ -6787,30 +6809,34 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case (int)" + domain + package + ".fbe." + *s->name + model + ".fbeTypeConst:");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("// Deserialize the value from the FBE stream");
-            WriteLineIndent(*s->name + "Model.attach(buffer, offset);");
-            WriteLineIndent("assert " + *s->name + "Model.verify() : \"" + *p->name + "." + *s->name + " validation failed!\";");
-            WriteLineIndent("long deserialized = " + *s->name + "Model.deserialize(" + *s->name + "Value);");
-            WriteLineIndent("assert (deserialized > 0) : \"" + *p->name + "." + *s->name + " deserialization failed!\";");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (getLogging())");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("String message = " + *s->name + "Value.toString();");
-            WriteLineIndent("onReceiveLog(message);");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Call receive handler with deserialized value");
-            WriteLineIndent("onReceive(" + *s->name + "Value);");
-            WriteLineIndent("return true;");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLineIndent("case (int)" + domain + package + ".fbe." + *s->name + model + ".fbeTypeConst:");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Deserialize the value from the FBE stream");
+                WriteLineIndent(*s->name + "Model.attach(buffer, offset);");
+                WriteLineIndent("assert " + *s->name + "Model.verify() : \"" + *p->name + "." + *s->name + " validation failed!\";");
+                WriteLineIndent("long deserialized = " + *s->name + "Model.deserialize(" + *s->name + "Value);");
+                WriteLineIndent("assert (deserialized > 0) : \"" + *p->name + "." + *s->name + " deserialization failed!\";");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (getLogging())");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("String message = " + *s->name + "Value.toString();");
+                WriteLineIndent("onReceiveLog(message);");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Call receive handler with deserialized value");
+                WriteLineIndent("onReceive(" + *s->name + "Value);");
+                WriteLineIndent("return true;");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
+        WriteLineIndent("default: break;");
         Indent(-1);
         WriteLineIndent("}");
     }
@@ -6886,7 +6912,8 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
     {
         WriteLineIndent("// Proxy models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("private final " + *s->name + model + " " + *s->name + "Model;");
+            if (s->message)
+                WriteLineIndent("private final " + *s->name + model + " " + *s->name + "Model;");
         WriteLine();
     }
 
@@ -6903,7 +6930,8 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+            if (s->message)
+                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -6919,7 +6947,8 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+            if (s->message)
+                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -6931,8 +6960,11 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
         WriteLineIndent("// Proxy handlers");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_model = *s->name + model;
-            WriteLineIndent("protected void onProxy(" + struct_model + " model, long type, byte[] buffer, long offset, long size) {}");
+            if (s->message)
+            {
+                std::string struct_model = *s->name + model;
+                WriteLineIndent("protected void onProxy(" + struct_model + " model, long type, byte[] buffer, long offset, long size) {}");
+            }
         }
         WriteLine();
     }
@@ -6949,25 +6981,29 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case (int)" + domain + package + ".fbe." + *s->name + model + ".fbeTypeConst:");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("// Attach the FBE stream to the proxy model");
-            WriteLineIndent(*s->name + "Model.attach(buffer, offset);");
-            WriteLineIndent("assert " + *s->name + "Model.verify() : \"" + *p->name + "." + *s->name + " validation failed!\";");
-            WriteLine();
-            WriteLineIndent("long fbeBegin = " + *s->name + "Model.model.getBegin();");
-            WriteLineIndent("if (fbeBegin == 0)");
-            Indent(1);
-            WriteLineIndent("return false;");
-            Indent(-1);
-            WriteLineIndent("// Call proxy handler");
-            WriteLineIndent("onProxy(" + *s->name + "Model, type, buffer, offset, size);");
-            WriteLineIndent(*s->name + "Model.model.getEnd(fbeBegin);");
-            WriteLineIndent("return true;");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLineIndent("case (int)" + domain + package + ".fbe." + *s->name + model + ".fbeTypeConst:");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Attach the FBE stream to the proxy model");
+                WriteLineIndent(*s->name + "Model.attach(buffer, offset);");
+                WriteLineIndent("assert " + *s->name + "Model.verify() : \"" + *p->name + "." + *s->name + " validation failed!\";");
+                WriteLine();
+                WriteLineIndent("long fbeBegin = " + *s->name + "Model.model.getBegin();");
+                WriteLineIndent("if (fbeBegin == 0)");
+                Indent(1);
+                WriteLineIndent("return false;");
+                Indent(-1);
+                WriteLineIndent("// Call proxy handler");
+                WriteLineIndent("onProxy(" + *s->name + "Model, type, buffer, offset, size);");
+                WriteLineIndent(*s->name + "Model.model.getEnd(fbeBegin);");
+                WriteLineIndent("return true;");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
+        WriteLineIndent("default: break;");
         Indent(-1);
         WriteLineIndent("}");
     }

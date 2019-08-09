@@ -12,18 +12,12 @@ package com.chronoxor.proto.fbe
 open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
 {
     // Proxy models accessors
-    private val OrderModel: OrderModel
-    private val BalanceModel: BalanceModel
-    private val AccountModel: AccountModel
     private val OrderMessageModel: OrderMessageModel
     private val BalanceMessageModel: BalanceMessageModel
     private val AccountMessageModel: AccountMessageModel
 
     constructor() : super(false)
     {
-        OrderModel = OrderModel()
-        BalanceModel = BalanceModel()
-        AccountModel = AccountModel()
         OrderMessageModel = OrderMessageModel()
         BalanceMessageModel = BalanceMessageModel()
         AccountMessageModel = AccountMessageModel()
@@ -31,9 +25,6 @@ open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
 
     constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer, false)
     {
-        OrderModel = OrderModel()
-        BalanceModel = BalanceModel()
-        AccountModel = AccountModel()
         OrderMessageModel = OrderMessageModel()
         BalanceMessageModel = BalanceMessageModel()
         AccountMessageModel = AccountMessageModel()
@@ -48,48 +39,6 @@ open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
     {
         when (type)
         {
-            com.chronoxor.proto.fbe.OrderModel.fbeTypeConst ->
-            {
-                // Attach the FBE stream to the proxy model
-                OrderModel.attach(buffer, offset)
-                assert(OrderModel.verify()) { "com.chronoxor.proto.Order validation failed!" }
-
-                val fbeBegin = OrderModel.model.getBegin()
-                if (fbeBegin == 0L)
-                    return false
-                // Call proxy handler
-                listener.onProxy(OrderModel, type, buffer, offset, size)
-                OrderModel.model.getEnd(fbeBegin)
-                return true
-            }
-            com.chronoxor.proto.fbe.BalanceModel.fbeTypeConst ->
-            {
-                // Attach the FBE stream to the proxy model
-                BalanceModel.attach(buffer, offset)
-                assert(BalanceModel.verify()) { "com.chronoxor.proto.Balance validation failed!" }
-
-                val fbeBegin = BalanceModel.model.getBegin()
-                if (fbeBegin == 0L)
-                    return false
-                // Call proxy handler
-                listener.onProxy(BalanceModel, type, buffer, offset, size)
-                BalanceModel.model.getEnd(fbeBegin)
-                return true
-            }
-            com.chronoxor.proto.fbe.AccountModel.fbeTypeConst ->
-            {
-                // Attach the FBE stream to the proxy model
-                AccountModel.attach(buffer, offset)
-                assert(AccountModel.verify()) { "com.chronoxor.proto.Account validation failed!" }
-
-                val fbeBegin = AccountModel.model.getBegin()
-                if (fbeBegin == 0L)
-                    return false
-                // Call proxy handler
-                listener.onProxy(AccountModel, type, buffer, offset, size)
-                AccountModel.model.getEnd(fbeBegin)
-                return true
-            }
             com.chronoxor.proto.fbe.OrderMessageModel.fbeTypeConst ->
             {
                 // Attach the FBE stream to the proxy model

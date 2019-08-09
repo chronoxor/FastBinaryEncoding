@@ -26,11 +26,11 @@ class MyFinalReceiver extends FinalReceiver
     public boolean check() { return _order && _balance && _account; }
 
     @Override
-    protected void onReceive(Order value) { _order = true; }
+    protected void onReceive(OrderMessage value) { _order = true; }
     @Override
-    protected void onReceive(Balance value) { _balance = true; }
+    protected void onReceive(BalanceMessage value) { _balance = true; }
     @Override
-    protected void onReceive(Account value) { _account = true; }
+    protected void onReceive(AccountMessage value) { _account = true; }
 }
 
 public class TestSendReceiveFinal
@@ -41,18 +41,18 @@ public class TestSendReceiveFinal
 
         // Create and send a new order
         var order = new Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0, 0.0, 0.0);
-        sender.send(order);
+        sender.send(new OrderMessage(order));
 
         // Create and send a new balance wallet
         var balance = new Balance(new com.chronoxor.proto.Balance("USD", 1000.0), 100.0);
-        sender.send(balance);
+        sender.send(new BalanceMessage(balance));
 
         // Create and send a new account with some orders
         var account = new Account(1, "Test", StateEx.good, new Balance(new com.chronoxor.proto.Balance("USD", 1000.0), 100.0), new Balance(new com.chronoxor.proto.Balance("EUR", 100.0), 10.0), new ArrayList<Order>());
         account.orders.add(new Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0, 0.0, 0.0));
         account.orders.add(new Order(2, "EURUSD", OrderSide.sell, OrderType.limit, 1.0, 100.0, 0.0, 0.0));
         account.orders.add(new Order(3, "EURUSD", OrderSide.buy, OrderType.stop, 1.5, 10.0, 0.0, 0.0));
-        sender.send(account);
+        sender.send(new AccountMessage(account));
 
         var receiver = new MyFinalReceiver();
 

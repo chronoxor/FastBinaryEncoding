@@ -9,51 +9,26 @@ package com.chronoxor.enums.fbe;
 public class FinalReceiver extends com.chronoxor.fbe.Receiver
 {
     // Receiver values accessors
-    private final com.chronoxor.enums.Enums EnumsValue;
 
     // Receiver models accessors
-    private final EnumsFinalModel EnumsModel;
 
     public FinalReceiver()
     {
         super(true);
-        EnumsValue = new com.chronoxor.enums.Enums();
-        EnumsModel = new EnumsFinalModel();
     }
     public FinalReceiver(com.chronoxor.fbe.Buffer buffer)
     {
         super(buffer, true);
-        EnumsValue = new com.chronoxor.enums.Enums();
-        EnumsModel = new EnumsFinalModel();
     }
 
     // Receive handlers
-    protected void onReceive(com.chronoxor.enums.Enums value) {}
 
     @Override
     public boolean onReceive(long type, byte[] buffer, long offset, long size)
     {
         switch ((int)type)
         {
-            case (int)com.chronoxor.enums.fbe.EnumsFinalModel.fbeTypeConst:
-            {
-                // Deserialize the value from the FBE stream
-                EnumsModel.attach(buffer, offset);
-                assert EnumsModel.verify() : "enums.Enums validation failed!";
-                long deserialized = EnumsModel.deserialize(EnumsValue);
-                assert (deserialized > 0) : "enums.Enums deserialization failed!";
-
-                // Log the value
-                if (getLogging())
-                {
-                    String message = EnumsValue.toString();
-                    onReceiveLog(message);
-                }
-
-                // Call receive handler with deserialized value
-                onReceive(EnumsValue);
-                return true;
-            }
+            default: break;
         }
 
         return false;

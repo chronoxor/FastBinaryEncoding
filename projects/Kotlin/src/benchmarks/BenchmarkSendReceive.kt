@@ -49,9 +49,9 @@ internal class MyReceiver : com.chronoxor.proto.fbe.Receiver()
     var logSize: Long = 0
         private set
 
-    override fun onReceive(value: com.chronoxor.proto.Order) {}
-    override fun onReceive(value: com.chronoxor.proto.Balance) {}
-    override fun onReceive(value: com.chronoxor.proto.Account) {}
+    override fun onReceive(value: com.chronoxor.proto.OrderMessage) {}
+    override fun onReceive(value: com.chronoxor.proto.BalanceMessage) {}
+    override fun onReceive(value: com.chronoxor.proto.AccountMessage) {}
 
     override fun onReceiveLog(message: String)
     {
@@ -63,7 +63,7 @@ internal class MyReceiver : com.chronoxor.proto.fbe.Receiver()
 class BenchmarkSendReceive
 {
     @Suppress("JoinDeclarationAndAssignment")
-    private val _account: com.chronoxor.proto.Account
+    private val _account: com.chronoxor.proto.AccountMessage
     private val _sender1: MySender1
     private val _sender2: MySender2
     private val _receiver: MyReceiver
@@ -71,10 +71,10 @@ class BenchmarkSendReceive
     init
     {
         // Create a new account with some orders
-        _account = com.chronoxor.proto.Account(1, "Test", com.chronoxor.proto.State.good, com.chronoxor.proto.Balance("USD", 1000.0), com.chronoxor.proto.Balance("EUR", 100.0), ArrayList())
-        _account.orders.add(com.chronoxor.proto.Order(1, "EURUSD", com.chronoxor.proto.OrderSide.buy, com.chronoxor.proto.OrderType.market, 1.23456, 1000.0))
-        _account.orders.add(com.chronoxor.proto.Order(2, "EURUSD", com.chronoxor.proto.OrderSide.sell, com.chronoxor.proto.OrderType.limit, 1.0, 100.0))
-        _account.orders.add(com.chronoxor.proto.Order(3, "EURUSD", com.chronoxor.proto.OrderSide.buy, com.chronoxor.proto.OrderType.stop, 1.5, 10.0))
+        _account = com.chronoxor.proto.AccountMessage(com.chronoxor.proto.Account(1, "Test", com.chronoxor.proto.State.good, com.chronoxor.proto.Balance("USD", 1000.0), com.chronoxor.proto.Balance("EUR", 100.0), ArrayList()))
+        _account.body.orders.add(com.chronoxor.proto.Order(1, "EURUSD", com.chronoxor.proto.OrderSide.buy, com.chronoxor.proto.OrderType.market, 1.23456, 1000.0))
+        _account.body.orders.add(com.chronoxor.proto.Order(2, "EURUSD", com.chronoxor.proto.OrderSide.sell, com.chronoxor.proto.OrderType.limit, 1.0, 100.0))
+        _account.body.orders.add(com.chronoxor.proto.Order(3, "EURUSD", com.chronoxor.proto.OrderSide.buy, com.chronoxor.proto.OrderType.stop, 1.5, 10.0))
 
         _sender1 = MySender1()
         _sender1.send(_account)

@@ -15,9 +15,6 @@ open class Sender : com.chronoxor.fbe.Sender
     val protoSender: com.chronoxor.proto.fbe.Sender
 
     // Sender models accessors
-    val OrderModel: OrderModel
-    val BalanceModel: BalanceModel
-    val AccountModel: AccountModel
     val OrderMessageModel: OrderMessageModel
     val BalanceMessageModel: BalanceMessageModel
     val AccountMessageModel: AccountMessageModel
@@ -25,9 +22,6 @@ open class Sender : com.chronoxor.fbe.Sender
     constructor() : super(false)
     {
         protoSender = com.chronoxor.proto.fbe.Sender(buffer)
-        OrderModel = OrderModel(buffer)
-        BalanceModel = BalanceModel(buffer)
-        AccountModel = AccountModel(buffer)
         OrderMessageModel = OrderMessageModel(buffer)
         BalanceMessageModel = BalanceMessageModel(buffer)
         AccountMessageModel = AccountMessageModel(buffer)
@@ -36,22 +30,16 @@ open class Sender : com.chronoxor.fbe.Sender
     constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer, false)
     {
         protoSender = com.chronoxor.proto.fbe.Sender(buffer)
-        OrderModel = OrderModel(buffer)
-        BalanceModel = BalanceModel(buffer)
-        AccountModel = AccountModel(buffer)
         OrderMessageModel = OrderMessageModel(buffer)
         BalanceMessageModel = BalanceMessageModel(buffer)
         AccountMessageModel = AccountMessageModel(buffer)
     }
 
-    @Suppress("JoinDeclarationAndAssignment")
+    @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
     fun send(obj: Any): Long
     {
         when (obj)
         {
-            is com.chronoxor.protoex.Order -> if (obj.fbeType == OrderModel.fbeType) return send(obj)
-            is com.chronoxor.protoex.Balance -> if (obj.fbeType == BalanceModel.fbeType) return send(obj)
-            is com.chronoxor.protoex.Account -> if (obj.fbeType == AccountModel.fbeType) return send(obj)
             is com.chronoxor.protoex.OrderMessage -> if (obj.fbeType == OrderMessageModel.fbeType) return send(obj)
             is com.chronoxor.protoex.BalanceMessage -> if (obj.fbeType == BalanceMessageModel.fbeType) return send(obj)
             is com.chronoxor.protoex.AccountMessage -> if (obj.fbeType == AccountMessageModel.fbeType) return send(obj)
@@ -67,57 +55,6 @@ open class Sender : com.chronoxor.fbe.Sender
         return 0
     }
 
-    fun send(value: com.chronoxor.protoex.Order): Long
-    {
-        // Serialize the value into the FBE stream
-        val serialized = OrderModel.serialize(value)
-        assert(serialized > 0) { "com.chronoxor.protoex.Order serialization failed!" }
-        assert(OrderModel.verify()) { "com.chronoxor.protoex.Order validation failed!" }
-
-        // Log the value
-        if (logging)
-        {
-            val message = value.toString()
-            onSendLog(message)
-        }
-
-        // Send the serialized value
-        return sendSerialized(serialized)
-    }
-    fun send(value: com.chronoxor.protoex.Balance): Long
-    {
-        // Serialize the value into the FBE stream
-        val serialized = BalanceModel.serialize(value)
-        assert(serialized > 0) { "com.chronoxor.protoex.Balance serialization failed!" }
-        assert(BalanceModel.verify()) { "com.chronoxor.protoex.Balance validation failed!" }
-
-        // Log the value
-        if (logging)
-        {
-            val message = value.toString()
-            onSendLog(message)
-        }
-
-        // Send the serialized value
-        return sendSerialized(serialized)
-    }
-    fun send(value: com.chronoxor.protoex.Account): Long
-    {
-        // Serialize the value into the FBE stream
-        val serialized = AccountModel.serialize(value)
-        assert(serialized > 0) { "com.chronoxor.protoex.Account serialization failed!" }
-        assert(AccountModel.verify()) { "com.chronoxor.protoex.Account validation failed!" }
-
-        // Log the value
-        if (logging)
-        {
-            val message = value.toString()
-            onSendLog(message)
-        }
-
-        // Send the serialized value
-        return sendSerialized(serialized)
-    }
     fun send(value: com.chronoxor.protoex.OrderMessage): Long
     {
         // Serialize the value into the FBE stream

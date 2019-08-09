@@ -9,17 +9,11 @@ package com.chronoxor.proto.fbe;
 public class FinalReceiver extends com.chronoxor.fbe.Receiver
 {
     // Receiver values accessors
-    private final com.chronoxor.proto.Order OrderValue;
-    private final com.chronoxor.proto.Balance BalanceValue;
-    private final com.chronoxor.proto.Account AccountValue;
     private final com.chronoxor.proto.OrderMessage OrderMessageValue;
     private final com.chronoxor.proto.BalanceMessage BalanceMessageValue;
     private final com.chronoxor.proto.AccountMessage AccountMessageValue;
 
     // Receiver models accessors
-    private final OrderFinalModel OrderModel;
-    private final BalanceFinalModel BalanceModel;
-    private final AccountFinalModel AccountModel;
     private final OrderMessageFinalModel OrderMessageModel;
     private final BalanceMessageFinalModel BalanceMessageModel;
     private final AccountMessageFinalModel AccountMessageModel;
@@ -27,12 +21,6 @@ public class FinalReceiver extends com.chronoxor.fbe.Receiver
     public FinalReceiver()
     {
         super(true);
-        OrderValue = new com.chronoxor.proto.Order();
-        OrderModel = new OrderFinalModel();
-        BalanceValue = new com.chronoxor.proto.Balance();
-        BalanceModel = new BalanceFinalModel();
-        AccountValue = new com.chronoxor.proto.Account();
-        AccountModel = new AccountFinalModel();
         OrderMessageValue = new com.chronoxor.proto.OrderMessage();
         OrderMessageModel = new OrderMessageFinalModel();
         BalanceMessageValue = new com.chronoxor.proto.BalanceMessage();
@@ -43,12 +31,6 @@ public class FinalReceiver extends com.chronoxor.fbe.Receiver
     public FinalReceiver(com.chronoxor.fbe.Buffer buffer)
     {
         super(buffer, true);
-        OrderValue = new com.chronoxor.proto.Order();
-        OrderModel = new OrderFinalModel();
-        BalanceValue = new com.chronoxor.proto.Balance();
-        BalanceModel = new BalanceFinalModel();
-        AccountValue = new com.chronoxor.proto.Account();
-        AccountModel = new AccountFinalModel();
         OrderMessageValue = new com.chronoxor.proto.OrderMessage();
         OrderMessageModel = new OrderMessageFinalModel();
         BalanceMessageValue = new com.chronoxor.proto.BalanceMessage();
@@ -58,9 +40,6 @@ public class FinalReceiver extends com.chronoxor.fbe.Receiver
     }
 
     // Receive handlers
-    protected void onReceive(com.chronoxor.proto.Order value) {}
-    protected void onReceive(com.chronoxor.proto.Balance value) {}
-    protected void onReceive(com.chronoxor.proto.Account value) {}
     protected void onReceive(com.chronoxor.proto.OrderMessage value) {}
     protected void onReceive(com.chronoxor.proto.BalanceMessage value) {}
     protected void onReceive(com.chronoxor.proto.AccountMessage value) {}
@@ -70,63 +49,6 @@ public class FinalReceiver extends com.chronoxor.fbe.Receiver
     {
         switch ((int)type)
         {
-            case (int)com.chronoxor.proto.fbe.OrderFinalModel.fbeTypeConst:
-            {
-                // Deserialize the value from the FBE stream
-                OrderModel.attach(buffer, offset);
-                assert OrderModel.verify() : "proto.Order validation failed!";
-                long deserialized = OrderModel.deserialize(OrderValue);
-                assert (deserialized > 0) : "proto.Order deserialization failed!";
-
-                // Log the value
-                if (getLogging())
-                {
-                    String message = OrderValue.toString();
-                    onReceiveLog(message);
-                }
-
-                // Call receive handler with deserialized value
-                onReceive(OrderValue);
-                return true;
-            }
-            case (int)com.chronoxor.proto.fbe.BalanceFinalModel.fbeTypeConst:
-            {
-                // Deserialize the value from the FBE stream
-                BalanceModel.attach(buffer, offset);
-                assert BalanceModel.verify() : "proto.Balance validation failed!";
-                long deserialized = BalanceModel.deserialize(BalanceValue);
-                assert (deserialized > 0) : "proto.Balance deserialization failed!";
-
-                // Log the value
-                if (getLogging())
-                {
-                    String message = BalanceValue.toString();
-                    onReceiveLog(message);
-                }
-
-                // Call receive handler with deserialized value
-                onReceive(BalanceValue);
-                return true;
-            }
-            case (int)com.chronoxor.proto.fbe.AccountFinalModel.fbeTypeConst:
-            {
-                // Deserialize the value from the FBE stream
-                AccountModel.attach(buffer, offset);
-                assert AccountModel.verify() : "proto.Account validation failed!";
-                long deserialized = AccountModel.deserialize(AccountValue);
-                assert (deserialized > 0) : "proto.Account deserialization failed!";
-
-                // Log the value
-                if (getLogging())
-                {
-                    String message = AccountValue.toString();
-                    onReceiveLog(message);
-                }
-
-                // Call receive handler with deserialized value
-                onReceive(AccountValue);
-                return true;
-            }
             case (int)com.chronoxor.proto.fbe.OrderMessageFinalModel.fbeTypeConst:
             {
                 // Deserialize the value from the FBE stream
@@ -184,6 +106,7 @@ public class FinalReceiver extends com.chronoxor.fbe.Receiver
                 onReceive(AccountMessageValue);
                 return true;
             }
+            default: break;
         }
 
         return false;

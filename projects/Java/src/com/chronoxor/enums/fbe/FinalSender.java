@@ -9,48 +9,22 @@ package com.chronoxor.enums.fbe;
 public class FinalSender extends com.chronoxor.fbe.Sender
 {
     // Sender models accessors
-    public final EnumsFinalModel EnumsModel;
 
     public FinalSender()
     {
         super(true);
-        EnumsModel = new EnumsFinalModel(getBuffer());
     }
     public FinalSender(com.chronoxor.fbe.Buffer buffer)
     {
         super(buffer, true);
-        EnumsModel = new EnumsFinalModel(getBuffer());
     }
 
     public long send(Object obj)
     {
-        if (obj instanceof com.chronoxor.enums.Enums)
-        {
-            com.chronoxor.enums.Enums value = (com.chronoxor.enums.Enums)obj;
-            if (value.fbeType() == EnumsModel.fbeType())
-                return send(value);
-        }
 
         return 0;
     }
 
-    public long send(com.chronoxor.enums.Enums value)
-    {
-        // Serialize the value into the FBE stream
-        long serialized = EnumsModel.serialize(value);
-        assert (serialized > 0) : "com.chronoxor.enums.Enums serialization failed!";
-        assert EnumsModel.verify() : "com.chronoxor.enums.Enums validation failed!";
-
-        // Log the value
-        if (getLogging())
-        {
-            String message = value.toString();
-            onSendLog(message);
-        }
-
-        // Send the serialized value
-        return sendSerialized(serialized);
-    }
 
     // Send message handler
     @Override
