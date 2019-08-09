@@ -16,9 +16,9 @@ class MySender extends proto.Sender {
 }
 
 class MyReceiver extends proto.Receiver {
-  onReceive_Order (value) {} // eslint-disable-line
-  onReceive_Balance (value) {} // eslint-disable-line
-  onReceive_Account (value) {} // eslint-disable-line
+  onReceive_OrderMessage (value) {} // eslint-disable-line
+  onReceive_BalanceMessage (value) {} // eslint-disable-line
+  onReceive_AccountMessage (value) {} // eslint-disable-line
 
   onReceiveLog (message) {
     console.log(`onReceive: ${message}`)
@@ -32,18 +32,18 @@ sender.logging = true
 
 // Create and send a new order
 let order = new proto.Order(1, 'EURUSD', proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0)
-sender.send(order)
+sender.send(new proto.OrderMessage(order))
 
 // Create and send a new balance wallet
 let balance = new proto.Balance('USD', 1000.0)
-sender.send(balance)
+sender.send(new proto.BalanceMessage(balance))
 
 // Create and send a new account with some orders
 let account = new proto.Account(1, 'Test', proto.State.good, new proto.Balance('USD', 1000.0), new proto.Balance('EUR', 100.0))
 account.orders.push(new proto.Order(1, 'EURUSD', proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))
 account.orders.push(new proto.Order(2, 'EURUSD', proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0))
 account.orders.push(new proto.Order(3, 'EURUSD', proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0))
-sender.send(account)
+sender.send(new proto.AccountMessage(account))
 
 let receiver = new MyReceiver()
 

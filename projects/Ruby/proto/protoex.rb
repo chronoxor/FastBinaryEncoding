@@ -4901,9 +4901,6 @@ module Protoex
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer, false)
       @_proto_sender = Proto::Sender.new(self.buffer)
-      @_order_model = OrderModel.new(self.buffer)
-      @_balance_model = BalanceModel.new(self.buffer)
-      @_account_model = AccountModel.new(self.buffer)
       @_ordermessage_model = OrderMessageModel.new(self.buffer)
       @_balancemessage_model = BalanceMessageModel.new(self.buffer)
       @_accountmessage_model = AccountMessageModel.new(self.buffer)
@@ -4916,18 +4913,6 @@ module Protoex
     end
 
     # Sender models accessors
-
-    def order_model
-      @_order_model
-    end
-
-    def balance_model
-      @_balance_model
-    end
-
-    def account_model
-      @_account_model
-    end
 
     def ordermessage_model
       @_ordermessage_model
@@ -4944,15 +4929,6 @@ module Protoex
     # Send methods
 
     def send(value)
-      if value.is_a?(Order) && (value.fbe_type == order_model.fbe_type)
-        return send_order(value)
-      end
-      if value.is_a?(Balance) && (value.fbe_type == balance_model.fbe_type)
-        return send_balance(value)
-      end
-      if value.is_a?(Account) && (value.fbe_type == account_model.fbe_type)
-        return send_account(value)
-      end
       if value.is_a?(OrderMessage) && (value.fbe_type == ordermessage_model.fbe_type)
         return send_ordermessage(value)
       end
@@ -4967,54 +4943,6 @@ module Protoex
         return result
       end
       0
-    end
-
-    def send_order(value)
-      # Serialize the value into the FBE stream
-      serialized = order_model.serialize(value)
-      raise RuntimeError, "Protoex.Order serialization failed!" if serialized <= 0
-      raise RuntimeError, "Protoex.Order validation failed!" unless order_model.verify
-
-      # Log the value
-      if logging?
-        message = value.to_s
-        on_send_log(message)
-      end
-
-      # Send the serialized value
-      send_serialized(serialized)
-    end
-
-    def send_balance(value)
-      # Serialize the value into the FBE stream
-      serialized = balance_model.serialize(value)
-      raise RuntimeError, "Protoex.Balance serialization failed!" if serialized <= 0
-      raise RuntimeError, "Protoex.Balance validation failed!" unless balance_model.verify
-
-      # Log the value
-      if logging?
-        message = value.to_s
-        on_send_log(message)
-      end
-
-      # Send the serialized value
-      send_serialized(serialized)
-    end
-
-    def send_account(value)
-      # Serialize the value into the FBE stream
-      serialized = account_model.serialize(value)
-      raise RuntimeError, "Protoex.Account serialization failed!" if serialized <= 0
-      raise RuntimeError, "Protoex.Account validation failed!" unless account_model.verify
-
-      # Log the value
-      if logging?
-        message = value.to_s
-        on_send_log(message)
-      end
-
-      # Send the serialized value
-      send_serialized(serialized)
     end
 
     def send_ordermessage(value)
@@ -5079,12 +5007,6 @@ module Protoex
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer, false)
       @_proto_receiver = Proto::Receiver.new(self.buffer)
-      @_order_value = Order.new
-      @_order_model = OrderModel.new
-      @_balance_value = Balance.new
-      @_balance_model = BalanceModel.new
-      @_account_value = Account.new
-      @_account_model = AccountModel.new
       @_ordermessage_value = OrderMessage.new
       @_ordermessage_model = OrderMessageModel.new
       @_balancemessage_value = BalanceMessage.new
@@ -5108,18 +5030,6 @@ module Protoex
     # Receive handlers
 
     # noinspection RubyUnusedLocalVariable
-    def on_receive_order(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_balance(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_account(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
     def on_receive_ordermessage(value)
     end
 
@@ -5135,66 +5045,6 @@ module Protoex
 
     def on_receive(type, buffer, offset, size)
       case type
-      when OrderModel::TYPE
-        # Deserialize the value from the FBE stream
-        @_order_model.attach_buffer(buffer, offset)
-        unless @_order_model.verify
-          return false
-        end
-        _, deserialized = @_order_model.deserialize(@_order_value)
-        if deserialized <= 0
-          return false
-        end
-
-        # Log the value
-        if logging?
-          message = @_order_value.to_s
-          on_receive_log(message)
-        end
-
-        # Call receive handler with deserialized value
-        on_receive_order(@_order_value)
-        true
-      when BalanceModel::TYPE
-        # Deserialize the value from the FBE stream
-        @_balance_model.attach_buffer(buffer, offset)
-        unless @_balance_model.verify
-          return false
-        end
-        _, deserialized = @_balance_model.deserialize(@_balance_value)
-        if deserialized <= 0
-          return false
-        end
-
-        # Log the value
-        if logging?
-          message = @_balance_value.to_s
-          on_receive_log(message)
-        end
-
-        # Call receive handler with deserialized value
-        on_receive_balance(@_balance_value)
-        true
-      when AccountModel::TYPE
-        # Deserialize the value from the FBE stream
-        @_account_model.attach_buffer(buffer, offset)
-        unless @_account_model.verify
-          return false
-        end
-        _, deserialized = @_account_model.deserialize(@_account_value)
-        if deserialized <= 0
-          return false
-        end
-
-        # Log the value
-        if logging?
-          message = @_account_value.to_s
-          on_receive_log(message)
-        end
-
-        # Call receive handler with deserialized value
-        on_receive_account(@_account_value)
-        true
       when OrderMessageModel::TYPE
         # Deserialize the value from the FBE stream
         @_ordermessage_model.attach_buffer(buffer, offset)
@@ -5273,9 +5123,6 @@ module Protoex
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer, false)
       @_proto_proxy = Proto::Proxy.new(self.buffer)
-      @_order_model = OrderModel.new
-      @_balance_model = BalanceModel.new
-      @_account_model = AccountModel.new
       @_ordermessage_model = OrderMessageModel.new
       @_balancemessage_model = BalanceMessageModel.new
       @_accountmessage_model = AccountMessageModel.new
@@ -5296,18 +5143,6 @@ module Protoex
     # Receive handlers
 
     # noinspection RubyUnusedLocalVariable
-    def on_proxy_order(model, type, buffer, offset, size)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_balance(model, type, buffer, offset, size)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_account(model, type, buffer, offset, size)
-    end
-
-    # noinspection RubyUnusedLocalVariable
     def on_proxy_ordermessage(model, type, buffer, offset, size)
     end
 
@@ -5323,51 +5158,6 @@ module Protoex
 
     def on_receive(type, buffer, offset, size)
       case type
-      when OrderModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_order_model.attach_buffer(buffer, offset)
-        unless @_order_model.verify
-          return false
-        end
-
-        fbe_begin = @_order_model.model.get_begin
-        if fbe_begin == 0
-          return false
-        end
-        # Call proxy handler
-        on_proxy_order(@_order_model, type, buffer, offset, size)
-        @_order_model.model.get_end(fbe_begin)
-        true
-      when BalanceModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_balance_model.attach_buffer(buffer, offset)
-        unless @_balance_model.verify
-          return false
-        end
-
-        fbe_begin = @_balance_model.model.get_begin
-        if fbe_begin == 0
-          return false
-        end
-        # Call proxy handler
-        on_proxy_balance(@_balance_model, type, buffer, offset, size)
-        @_balance_model.model.get_end(fbe_begin)
-        true
-      when AccountModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_account_model.attach_buffer(buffer, offset)
-        unless @_account_model.verify
-          return false
-        end
-
-        fbe_begin = @_account_model.model.get_begin
-        if fbe_begin == 0
-          return false
-        end
-        # Call proxy handler
-        on_proxy_account(@_account_model, type, buffer, offset, size)
-        @_account_model.model.get_end(fbe_begin)
-        true
       when OrderMessageModel::TYPE
         # Attach the FBE stream to the proxy model
         @_ordermessage_model.attach_buffer(buffer, offset)
@@ -5431,9 +5221,6 @@ module Protoex
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer, true)
       @_proto_sender = Proto::FinalSender.new(self.buffer)
-      @_order_model = OrderFinalModel.new(self.buffer)
-      @_balance_model = BalanceFinalModel.new(self.buffer)
-      @_account_model = AccountFinalModel.new(self.buffer)
       @_ordermessage_model = OrderMessageFinalModel.new(self.buffer)
       @_balancemessage_model = BalanceMessageFinalModel.new(self.buffer)
       @_accountmessage_model = AccountMessageFinalModel.new(self.buffer)
@@ -5446,18 +5233,6 @@ module Protoex
     end
 
     # Sender models accessors
-
-    def order_model
-      @_order_model
-    end
-
-    def balance_model
-      @_balance_model
-    end
-
-    def account_model
-      @_account_model
-    end
 
     def ordermessage_model
       @_ordermessage_model
@@ -5474,15 +5249,6 @@ module Protoex
     # Send methods
 
     def send(value)
-      if value.is_a?(Order) && (value.fbe_type == order_model.fbe_type)
-        return send_order(value)
-      end
-      if value.is_a?(Balance) && (value.fbe_type == balance_model.fbe_type)
-        return send_balance(value)
-      end
-      if value.is_a?(Account) && (value.fbe_type == account_model.fbe_type)
-        return send_account(value)
-      end
       if value.is_a?(OrderMessage) && (value.fbe_type == ordermessage_model.fbe_type)
         return send_ordermessage(value)
       end
@@ -5497,54 +5263,6 @@ module Protoex
         return result
       end
       0
-    end
-
-    def send_order(value)
-      # Serialize the value into the FBE stream
-      serialized = order_model.serialize(value)
-      raise RuntimeError, "Protoex.Order serialization failed!" if serialized <= 0
-      raise RuntimeError, "Protoex.Order validation failed!" unless order_model.verify
-
-      # Log the value
-      if logging?
-        message = value.to_s
-        on_send_log(message)
-      end
-
-      # Send the serialized value
-      send_serialized(serialized)
-    end
-
-    def send_balance(value)
-      # Serialize the value into the FBE stream
-      serialized = balance_model.serialize(value)
-      raise RuntimeError, "Protoex.Balance serialization failed!" if serialized <= 0
-      raise RuntimeError, "Protoex.Balance validation failed!" unless balance_model.verify
-
-      # Log the value
-      if logging?
-        message = value.to_s
-        on_send_log(message)
-      end
-
-      # Send the serialized value
-      send_serialized(serialized)
-    end
-
-    def send_account(value)
-      # Serialize the value into the FBE stream
-      serialized = account_model.serialize(value)
-      raise RuntimeError, "Protoex.Account serialization failed!" if serialized <= 0
-      raise RuntimeError, "Protoex.Account validation failed!" unless account_model.verify
-
-      # Log the value
-      if logging?
-        message = value.to_s
-        on_send_log(message)
-      end
-
-      # Send the serialized value
-      send_serialized(serialized)
     end
 
     def send_ordermessage(value)
@@ -5609,12 +5327,6 @@ module Protoex
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer, true)
       @_proto_receiver = Proto::FinalReceiver.new(self.buffer)
-      @_order_value = Order.new
-      @_order_model = OrderFinalModel.new
-      @_balance_value = Balance.new
-      @_balance_model = BalanceFinalModel.new
-      @_account_value = Account.new
-      @_account_model = AccountFinalModel.new
       @_ordermessage_value = OrderMessage.new
       @_ordermessage_model = OrderMessageFinalModel.new
       @_balancemessage_value = BalanceMessage.new
@@ -5638,18 +5350,6 @@ module Protoex
     # Receive handlers
 
     # noinspection RubyUnusedLocalVariable
-    def on_receive_order(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_balance(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_account(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
     def on_receive_ordermessage(value)
     end
 
@@ -5665,66 +5365,6 @@ module Protoex
 
     def on_receive(type, buffer, offset, size)
       case type
-      when OrderFinalModel::TYPE
-        # Deserialize the value from the FBE stream
-        @_order_model.attach_buffer(buffer, offset)
-        unless @_order_model.verify
-          return false
-        end
-        _, deserialized = @_order_model.deserialize(@_order_value)
-        if deserialized <= 0
-          return false
-        end
-
-        # Log the value
-        if logging?
-          message = @_order_value.to_s
-          on_receive_log(message)
-        end
-
-        # Call receive handler with deserialized value
-        on_receive_order(@_order_value)
-        true
-      when BalanceFinalModel::TYPE
-        # Deserialize the value from the FBE stream
-        @_balance_model.attach_buffer(buffer, offset)
-        unless @_balance_model.verify
-          return false
-        end
-        _, deserialized = @_balance_model.deserialize(@_balance_value)
-        if deserialized <= 0
-          return false
-        end
-
-        # Log the value
-        if logging?
-          message = @_balance_value.to_s
-          on_receive_log(message)
-        end
-
-        # Call receive handler with deserialized value
-        on_receive_balance(@_balance_value)
-        true
-      when AccountFinalModel::TYPE
-        # Deserialize the value from the FBE stream
-        @_account_model.attach_buffer(buffer, offset)
-        unless @_account_model.verify
-          return false
-        end
-        _, deserialized = @_account_model.deserialize(@_account_value)
-        if deserialized <= 0
-          return false
-        end
-
-        # Log the value
-        if logging?
-          message = @_account_value.to_s
-          on_receive_log(message)
-        end
-
-        # Call receive handler with deserialized value
-        on_receive_account(@_account_value)
-        true
       when OrderMessageFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_ordermessage_model.attach_buffer(buffer, offset)

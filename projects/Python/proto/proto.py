@@ -3865,30 +3865,15 @@ class ProtocolVersion(object):
 
 # Fast Binary Encoding proto sender
 class Sender(fbe.Sender):
-    __slots__ = "_order_model", "_balance_model", "_account_model", "_ordermessage_model", "_balancemessage_model", "_accountmessage_model", 
+    __slots__ = "_ordermessage_model", "_balancemessage_model", "_accountmessage_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
-        self._order_model = OrderModel(self.buffer)
-        self._balance_model = BalanceModel(self.buffer)
-        self._account_model = AccountModel(self.buffer)
         self._ordermessage_model = OrderMessageModel(self.buffer)
         self._balancemessage_model = BalanceMessageModel(self.buffer)
         self._accountmessage_model = AccountMessageModel(self.buffer)
 
     # Sender models accessors
-
-    @property
-    def order_model(self):
-        return self._order_model
-
-    @property
-    def balance_model(self):
-        return self._balance_model
-
-    @property
-    def account_model(self):
-        return self._account_model
 
     @property
     def ordermessage_model(self):
@@ -3905,12 +3890,6 @@ class Sender(fbe.Sender):
     # Send methods
 
     def send(self, value):
-        if isinstance(value, Order) and (value.fbe_type == self.order_model.fbe_type):
-            return self.send_order(value)
-        if isinstance(value, Balance) and (value.fbe_type == self.balance_model.fbe_type):
-            return self.send_balance(value)
-        if isinstance(value, Account) and (value.fbe_type == self.account_model.fbe_type):
-            return self.send_account(value)
         if isinstance(value, OrderMessage) and (value.fbe_type == self.ordermessage_model.fbe_type):
             return self.send_ordermessage(value)
         if isinstance(value, BalanceMessage) and (value.fbe_type == self.balancemessage_model.fbe_type):
@@ -3918,48 +3897,6 @@ class Sender(fbe.Sender):
         if isinstance(value, AccountMessage) and (value.fbe_type == self.accountmessage_model.fbe_type):
             return self.send_accountmessage(value)
         return 0
-
-    def send_order(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.order_model.serialize(value)
-        assert (serialized > 0), "proto.Order serialization failed!"
-        assert self.order_model.verify(), "proto.Order validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_balance(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.balance_model.serialize(value)
-        assert (serialized > 0), "proto.Balance serialization failed!"
-        assert self.balance_model.verify(), "proto.Balance validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_account(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.account_model.serialize(value)
-        assert (serialized > 0), "proto.Account serialization failed!"
-        assert self.account_model.verify(), "proto.Account validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
 
     def send_ordermessage(self, value):
         # Serialize the value into the FBE stream
@@ -4010,16 +3947,10 @@ class Sender(fbe.Sender):
 
 # Fast Binary Encoding proto receiver
 class Receiver(fbe.Receiver):
-    __slots__ = "_order_value", "_order_model", "_balance_value", "_balance_model", "_account_value", "_account_model", "_ordermessage_value", "_ordermessage_model", "_balancemessage_value", "_balancemessage_model", "_accountmessage_value", "_accountmessage_model", 
+    __slots__ = "_ordermessage_value", "_ordermessage_model", "_balancemessage_value", "_balancemessage_model", "_accountmessage_value", "_accountmessage_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
-        self._order_value = Order()
-        self._order_model = OrderModel()
-        self._balance_value = Balance()
-        self._balance_model = BalanceModel()
-        self._account_value = Account()
-        self._account_model = AccountModel()
         self._ordermessage_value = OrderMessage()
         self._ordermessage_model = OrderMessageModel()
         self._balancemessage_value = BalanceMessage()
@@ -4028,15 +3959,6 @@ class Receiver(fbe.Receiver):
         self._accountmessage_model = AccountMessageModel()
 
     # Receive handlers
-
-    def on_receive_order(self, value):
-        pass
-
-    def on_receive_balance(self, value):
-        pass
-
-    def on_receive_account(self, value):
-        pass
 
     def on_receive_ordermessage(self, value):
         pass
@@ -4048,54 +3970,6 @@ class Receiver(fbe.Receiver):
         pass
 
     def on_receive(self, type, buffer, offset, size):
-
-        if type == OrderModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._order_model.attach_buffer(buffer, offset)
-            assert self._order_model.verify(), "proto.Order validation failed!"
-            (_, deserialized) = self._order_model.deserialize(self._order_value)
-            assert (deserialized > 0), "proto.Order deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._order_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_order(self._order_value)
-            return True
-
-        if type == BalanceModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._balance_model.attach_buffer(buffer, offset)
-            assert self._balance_model.verify(), "proto.Balance validation failed!"
-            (_, deserialized) = self._balance_model.deserialize(self._balance_value)
-            assert (deserialized > 0), "proto.Balance deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._balance_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_balance(self._balance_value)
-            return True
-
-        if type == AccountModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._account_model.attach_buffer(buffer, offset)
-            assert self._account_model.verify(), "proto.Account validation failed!"
-            (_, deserialized) = self._account_model.deserialize(self._account_value)
-            assert (deserialized > 0), "proto.Account deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._account_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_account(self._account_value)
-            return True
 
         if type == OrderMessageModel.TYPE:
             # Deserialize the value from the FBE stream
@@ -4150,27 +4024,15 @@ class Receiver(fbe.Receiver):
 
 # Fast Binary Encoding proto proxy
 class Proxy(fbe.Receiver):
-    __slots__ = "_order_model", "_balance_model", "_account_model", "_ordermessage_model", "_balancemessage_model", "_accountmessage_model", 
+    __slots__ = "_ordermessage_model", "_balancemessage_model", "_accountmessage_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
-        self._order_model = OrderModel()
-        self._balance_model = BalanceModel()
-        self._account_model = AccountModel()
         self._ordermessage_model = OrderMessageModel()
         self._balancemessage_model = BalanceMessageModel()
         self._accountmessage_model = AccountMessageModel()
 
     # Receive handlers
-
-    def on_proxy_order(self, model, type, buffer, offset, size):
-        pass
-
-    def on_proxy_balance(self, model, type, buffer, offset, size):
-        pass
-
-    def on_proxy_account(self, model, type, buffer, offset, size):
-        pass
 
     def on_proxy_ordermessage(self, model, type, buffer, offset, size):
         pass
@@ -4182,45 +4044,6 @@ class Proxy(fbe.Receiver):
         pass
 
     def on_receive(self, type, buffer, offset, size):
-
-        if type == OrderModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._order_model.attach_buffer(buffer, offset)
-            assert self._order_model.verify(), "proto.Order validation failed!"
-
-            fbe_begin = self._order_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_order(self._order_model, type, buffer, offset, size)
-            self._order_model.model.get_end(fbe_begin)
-            return True
-
-        if type == BalanceModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._balance_model.attach_buffer(buffer, offset)
-            assert self._balance_model.verify(), "proto.Balance validation failed!"
-
-            fbe_begin = self._balance_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_balance(self._balance_model, type, buffer, offset, size)
-            self._balance_model.model.get_end(fbe_begin)
-            return True
-
-        if type == AccountModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._account_model.attach_buffer(buffer, offset)
-            assert self._account_model.verify(), "proto.Account validation failed!"
-
-            fbe_begin = self._account_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_account(self._account_model, type, buffer, offset, size)
-            self._account_model.model.get_end(fbe_begin)
-            return True
 
         if type == OrderMessageModel.TYPE:
             # Attach the FBE stream to the proxy model
@@ -4266,30 +4089,15 @@ class Proxy(fbe.Receiver):
 
 # Fast Binary Encoding proto final sender
 class FinalSender(fbe.Sender):
-    __slots__ = "_order_model", "_balance_model", "_account_model", "_ordermessage_model", "_balancemessage_model", "_accountmessage_model", 
+    __slots__ = "_ordermessage_model", "_balancemessage_model", "_accountmessage_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, True)
-        self._order_model = OrderFinalModel(self.buffer)
-        self._balance_model = BalanceFinalModel(self.buffer)
-        self._account_model = AccountFinalModel(self.buffer)
         self._ordermessage_model = OrderMessageFinalModel(self.buffer)
         self._balancemessage_model = BalanceMessageFinalModel(self.buffer)
         self._accountmessage_model = AccountMessageFinalModel(self.buffer)
 
     # Sender models accessors
-
-    @property
-    def order_model(self):
-        return self._order_model
-
-    @property
-    def balance_model(self):
-        return self._balance_model
-
-    @property
-    def account_model(self):
-        return self._account_model
 
     @property
     def ordermessage_model(self):
@@ -4306,12 +4114,6 @@ class FinalSender(fbe.Sender):
     # Send methods
 
     def send(self, value):
-        if isinstance(value, Order) and (value.fbe_type == self.order_model.fbe_type):
-            return self.send_order(value)
-        if isinstance(value, Balance) and (value.fbe_type == self.balance_model.fbe_type):
-            return self.send_balance(value)
-        if isinstance(value, Account) and (value.fbe_type == self.account_model.fbe_type):
-            return self.send_account(value)
         if isinstance(value, OrderMessage) and (value.fbe_type == self.ordermessage_model.fbe_type):
             return self.send_ordermessage(value)
         if isinstance(value, BalanceMessage) and (value.fbe_type == self.balancemessage_model.fbe_type):
@@ -4319,48 +4121,6 @@ class FinalSender(fbe.Sender):
         if isinstance(value, AccountMessage) and (value.fbe_type == self.accountmessage_model.fbe_type):
             return self.send_accountmessage(value)
         return 0
-
-    def send_order(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.order_model.serialize(value)
-        assert (serialized > 0), "proto.Order serialization failed!"
-        assert self.order_model.verify(), "proto.Order validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_balance(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.balance_model.serialize(value)
-        assert (serialized > 0), "proto.Balance serialization failed!"
-        assert self.balance_model.verify(), "proto.Balance validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_account(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.account_model.serialize(value)
-        assert (serialized > 0), "proto.Account serialization failed!"
-        assert self.account_model.verify(), "proto.Account validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
 
     def send_ordermessage(self, value):
         # Serialize the value into the FBE stream
@@ -4411,16 +4171,10 @@ class FinalSender(fbe.Sender):
 
 # Fast Binary Encoding proto final receiver
 class FinalReceiver(fbe.Receiver):
-    __slots__ = "_order_value", "_order_model", "_balance_value", "_balance_model", "_account_value", "_account_model", "_ordermessage_value", "_ordermessage_model", "_balancemessage_value", "_balancemessage_model", "_accountmessage_value", "_accountmessage_model", 
+    __slots__ = "_ordermessage_value", "_ordermessage_model", "_balancemessage_value", "_balancemessage_model", "_accountmessage_value", "_accountmessage_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, True)
-        self._order_value = Order()
-        self._order_model = OrderFinalModel()
-        self._balance_value = Balance()
-        self._balance_model = BalanceFinalModel()
-        self._account_value = Account()
-        self._account_model = AccountFinalModel()
         self._ordermessage_value = OrderMessage()
         self._ordermessage_model = OrderMessageFinalModel()
         self._balancemessage_value = BalanceMessage()
@@ -4429,15 +4183,6 @@ class FinalReceiver(fbe.Receiver):
         self._accountmessage_model = AccountMessageFinalModel()
 
     # Receive handlers
-
-    def on_receive_order(self, value):
-        pass
-
-    def on_receive_balance(self, value):
-        pass
-
-    def on_receive_account(self, value):
-        pass
 
     def on_receive_ordermessage(self, value):
         pass
@@ -4449,54 +4194,6 @@ class FinalReceiver(fbe.Receiver):
         pass
 
     def on_receive(self, type, buffer, offset, size):
-
-        if type == OrderFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._order_model.attach_buffer(buffer, offset)
-            assert self._order_model.verify(), "proto.Order validation failed!"
-            (_, deserialized) = self._order_model.deserialize(self._order_value)
-            assert (deserialized > 0), "proto.Order deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._order_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_order(self._order_value)
-            return True
-
-        if type == BalanceFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._balance_model.attach_buffer(buffer, offset)
-            assert self._balance_model.verify(), "proto.Balance validation failed!"
-            (_, deserialized) = self._balance_model.deserialize(self._balance_value)
-            assert (deserialized > 0), "proto.Balance deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._balance_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_balance(self._balance_value)
-            return True
-
-        if type == AccountFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._account_model.attach_buffer(buffer, offset)
-            assert self._account_model.verify(), "proto.Account validation failed!"
-            (_, deserialized) = self._account_model.deserialize(self._account_value)
-            assert (deserialized > 0), "proto.Account deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._account_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_account(self._account_value)
-            return True
 
         if type == OrderMessageFinalModel.TYPE:
             # Deserialize the value from the FBE stream

@@ -7688,21 +7688,11 @@ class Sender extends fbe.Sender {
    */
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, false)
-    this._EnumsModel = new EnumsModel(this.buffer)
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
   }
 
   // Sender models accessors
-
-  /**
-   * Get Enums model
-   * @this {!Sender}
-   * @returns {!EnumsModel} Enums model
-   */
-  get EnumsModel () {
-    return this._EnumsModel
-  }
 
   // Send methods
 
@@ -7713,31 +7703,7 @@ class Sender extends fbe.Sender {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if ((value instanceof Enums) && (value.fbeType === this.EnumsModel.fbeType)) {
-      return this.send_Enums(value)
-    }
     return 0
-  }
-
-  /**
-   * Send Enums value
-   * @this {!Sender}
-   * @param {!Enums} value Enums value to send
-   * @returns {!number} Sent bytes
-   */
-  send_Enums (value) { // eslint-disable-line
-    // Serialize the value into the FBE stream
-    let serialized = this.EnumsModel.serialize(value)
-    console.assert((serialized > 0), 'enums.Enums serialization failed!')
-    console.assert(this.EnumsModel.verify(), 'enums.Enums validation failed!')
-
-    // Log the value
-    if (this.logging) {
-      this.onSendLog(value.toString())
-    }
-
-    // Send the serialized value
-    return this.sendSerialized(serialized)
   }
 
   /**
@@ -7785,19 +7751,10 @@ class Receiver extends fbe.Receiver {
    */
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, false)
-    this._EnumsValue = new Enums()
-    this._EnumsModel = new EnumsModel()
     this.onReceiveLogHandler = this.onReceiveLog
   }
 
   // Receive handlers
-
-  /**
-   * Enums receive handler
-   * @this {!Receiver}
-   * @param {!Enums} value Enums received value
-   */
-  onReceive_Enums (value) {}  // eslint-disable-line
 
   /**
    * enums receive message handler
@@ -7810,22 +7767,7 @@ class Receiver extends fbe.Receiver {
    */
   onReceive (type, buffer, offset, size) {
     switch (type) {
-      case EnumsModel.fbeType: {
-        // Deserialize the value from the FBE stream
-        this._EnumsModel.attachBuffer(buffer, offset)
-        console.assert(this._EnumsModel.verify(), 'enums.Enums validation failed!')
-        let deserialized = this._EnumsModel.deserialize(this._EnumsValue)
-        console.assert((deserialized.size > 0), 'enums.Enums deserialization failed!')
-
-        // Log the value
-        if (this.logging) {
-          this.onReceiveLog(this._EnumsValue.toString())
-        }
-
-        // Call receive handler with deserialized value
-        this.onReceive_Enums(this._EnumsValue)
-        return true
-      }
+      default: break
     }
     return false
   }
@@ -7853,21 +7795,9 @@ class Proxy extends fbe.Receiver {
    */
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, false)
-    this._EnumsModel = new EnumsModel()
   }
 
   // Proxy handlers
-
-  /**
-   * Enums proxy handler
-   * @this {!Proxy}
-   * @param {!Enums} model Enums model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_Enums (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
    * enums receive message handler
@@ -7880,20 +7810,7 @@ class Proxy extends fbe.Receiver {
    */
   onReceive (type, buffer, offset, size) {
     switch (type) {
-      case EnumsModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._EnumsModel.attachBuffer(buffer, offset)
-        console.assert(this._EnumsModel.verify(), 'enums.Enums validation failed!')
-
-        let fbeBegin = this._EnumsModel.model.getBegin()
-        if (fbeBegin === 0) {
-          return false
-        }
-        // Call proxy handler
-        this.onProxy_Enums(this._EnumsModel, type, buffer, offset, size)
-        this._EnumsModel.model.getEnd(fbeBegin)
-        return true
-      }
+      default: break
     }
     return false
   }
@@ -7913,9 +7830,6 @@ class Client extends fbe.Client {
    */
   constructor (sendBuffer = new fbe.WriteBuffer(), receiveBuffer = new fbe.WriteBuffer()) {
     super(sendBuffer, receiveBuffer, false)
-    this._EnumsSenderModel = new EnumsModel(this.sendBuffer)
-    this._EnumsReceiverValue = new Enums()
-    this._EnumsReceiverModel = new EnumsModel()
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
     this.onReceiveLogHandler = this.onReceiveLog
@@ -7925,15 +7839,6 @@ class Client extends fbe.Client {
   }
 
   // Sender models accessors
-
-  /**
-   * Get Enums model
-   * @this {!Client}
-   * @returns {!EnumsModel} Enums sender model
-   */
-  get EnumsSenderModel () {
-    return this._EnumsSenderModel
-  }
 
   // Reset and watchdog methods
 
@@ -7964,31 +7869,7 @@ class Client extends fbe.Client {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if ((value instanceof Enums) && (value.fbeType === this.EnumsSenderModel.fbeType)) {
-      return this.send_Enums(value)
-    }
     return 0
-  }
-
-  /**
-   * Send Enums value
-   * @this {!Client}
-   * @param {!Enums} value Enums value to send
-   * @returns {!number} Sent bytes
-   */
-  send_Enums (value) { // eslint-disable-line
-    // Serialize the value into the FBE stream
-    let serialized = this.EnumsSenderModel.serialize(value)
-    console.assert((serialized > 0), 'enums.Enums serialization failed!')
-    console.assert(this.EnumsSenderModel.verify(), 'enums.Enums validation failed!')
-
-    // Log the value
-    if (this.logging) {
-      this.onSendLog(value.toString())
-    }
-
-    // Send the serialized value
-    return this.sendSerialized(serialized)
   }
 
   /**
@@ -8025,13 +7906,6 @@ class Client extends fbe.Client {
   // Receive handlers
 
   /**
-   * Enums receive handler
-   * @this {!Client}
-   * @param {!Enums} value Enums received value
-   */
-  onReceive_Enums (value) {}  // eslint-disable-line
-
-  /**
    * enums receive message handler
    * @this {!Client}
    * @param {!number} type Message type
@@ -8042,22 +7916,7 @@ class Client extends fbe.Client {
    */
   onReceive (type, buffer, offset, size) {
     switch (type) {
-      case EnumsModel.fbeType: {
-        // Deserialize the value from the FBE stream
-        this._EnumsReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._EnumsReceiverModel.verify(), 'enums.Enums validation failed!')
-        let deserialized = this._EnumsReceiverModel.deserialize(this._EnumsReceiverValue)
-        console.assert((deserialized.size > 0), 'enums.Enums deserialization failed!')
-
-        // Log the value
-        if (this.logging) {
-          this.onReceiveLog(this._EnumsReceiverValue.toString())
-        }
-
-        // Call receive handler with deserialized value
-        this.onReceive_Enums(this._EnumsReceiverValue)
-        return true
-      }
+      default: break
     }
     return false
   }
@@ -8186,21 +8045,11 @@ class FinalSender extends fbe.Sender {
    */
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, true)
-    this._EnumsModel = new EnumsFinalModel(this.buffer)
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
   }
 
   // Sender models accessors
-
-  /**
-   * Get Enums model
-   * @this {!FinalSender}
-   * @returns {!EnumsModel} Enums model
-   */
-  get EnumsModel () {
-    return this._EnumsModel
-  }
 
   // Send methods
 
@@ -8211,31 +8060,7 @@ class FinalSender extends fbe.Sender {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if ((value instanceof Enums) && (value.fbeType === this.EnumsModel.fbeType)) {
-      return this.send_Enums(value)
-    }
     return 0
-  }
-
-  /**
-   * Send Enums value
-   * @this {!FinalSender}
-   * @param {!Enums} value Enums value to send
-   * @returns {!number} Sent bytes
-   */
-  send_Enums (value) { // eslint-disable-line
-    // Serialize the value into the FBE stream
-    let serialized = this.EnumsModel.serialize(value)
-    console.assert((serialized > 0), 'enums.Enums serialization failed!')
-    console.assert(this.EnumsModel.verify(), 'enums.Enums validation failed!')
-
-    // Log the value
-    if (this.logging) {
-      this.onSendLog(value.toString())
-    }
-
-    // Send the serialized value
-    return this.sendSerialized(serialized)
   }
 
   /**
@@ -8283,19 +8108,10 @@ class FinalReceiver extends fbe.Receiver {
    */
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, true)
-    this._EnumsValue = new Enums()
-    this._EnumsModel = new EnumsFinalModel()
     this.onReceiveLogHandler = this.onReceiveLog
   }
 
   // Receive handlers
-
-  /**
-   * Enums receive handler
-   * @this {!FinalReceiver}
-   * @param {!Enums} value Enums received value
-   */
-  onReceive_Enums (value) {}  // eslint-disable-line
 
   /**
    * enums receive message handler
@@ -8308,22 +8124,7 @@ class FinalReceiver extends fbe.Receiver {
    */
   onReceive (type, buffer, offset, size) {
     switch (type) {
-      case EnumsFinalModel.fbeType: {
-        // Deserialize the value from the FBE stream
-        this._EnumsModel.attachBuffer(buffer, offset)
-        console.assert(this._EnumsModel.verify(), 'enums.Enums validation failed!')
-        let deserialized = this._EnumsModel.deserialize(this._EnumsValue)
-        console.assert((deserialized.size > 0), 'enums.Enums deserialization failed!')
-
-        // Log the value
-        if (this.logging) {
-          this.onReceiveLog(this._EnumsValue.toString())
-        }
-
-        // Call receive handler with deserialized value
-        this.onReceive_Enums(this._EnumsValue)
-        return true
-      }
+      default: break
     }
     return false
   }
@@ -8352,9 +8153,6 @@ class FinalClient extends fbe.Client {
    */
   constructor (sendBuffer = new fbe.WriteBuffer(), receiveBuffer = new fbe.WriteBuffer()) {
     super(sendBuffer, receiveBuffer, true)
-    this._EnumsSenderModel = new EnumsFinalModel(this.sendBuffer)
-    this._EnumsReceiverValue = new Enums()
-    this._EnumsReceiverModel = new EnumsFinalModel()
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
     this.onReceiveLogHandler = this.onReceiveLog
@@ -8364,15 +8162,6 @@ class FinalClient extends fbe.Client {
   }
 
   // Sender models accessors
-
-  /**
-   * Get Enums model
-   * @this {!FinalClient}
-   * @returns {!EnumsModel} Enums sender model
-   */
-  get EnumsSenderModel () {
-    return this._EnumsSenderModel
-  }
 
   // Reset and watchdog methods
 
@@ -8403,31 +8192,7 @@ class FinalClient extends fbe.Client {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if ((value instanceof Enums) && (value.fbeType === this.EnumsSenderModel.fbeType)) {
-      return this.send_Enums(value)
-    }
     return 0
-  }
-
-  /**
-   * Send Enums value
-   * @this {!FinalClient}
-   * @param {!Enums} value Enums value to send
-   * @returns {!number} Sent bytes
-   */
-  send_Enums (value) { // eslint-disable-line
-    // Serialize the value into the FBE stream
-    let serialized = this.EnumsSenderModel.serialize(value)
-    console.assert((serialized > 0), 'enums.Enums serialization failed!')
-    console.assert(this.EnumsSenderModel.verify(), 'enums.Enums validation failed!')
-
-    // Log the value
-    if (this.logging) {
-      this.onSendLog(value.toString())
-    }
-
-    // Send the serialized value
-    return this.sendSerialized(serialized)
   }
 
   /**
@@ -8464,13 +8229,6 @@ class FinalClient extends fbe.Client {
   // Receive handlers
 
   /**
-   * Enums receive handler
-   * @this {!FinalClient}
-   * @param {!Enums} value Enums received value
-   */
-  onReceive_Enums (value) {}  // eslint-disable-line
-
-  /**
    * enums receive message handler
    * @this {!FinalClient}
    * @param {!number} type Message type
@@ -8481,22 +8239,7 @@ class FinalClient extends fbe.Client {
    */
   onReceive (type, buffer, offset, size) {
     switch (type) {
-      case EnumsFinalModel.fbeType: {
-        // Deserialize the value from the FBE stream
-        this._EnumsReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._EnumsReceiverModel.verify(), 'enums.Enums validation failed!')
-        let deserialized = this._EnumsReceiverModel.deserialize(this._EnumsReceiverValue)
-        console.assert((deserialized.size > 0), 'enums.Enums deserialization failed!')
-
-        // Log the value
-        if (this.logging) {
-          this.onReceiveLog(this._EnumsReceiverValue.toString())
-        }
-
-        // Call receive handler with deserialized value
-        this.onReceive_Enums(this._EnumsReceiverValue)
-        return true
-      }
+      default: break
     }
     return false
   }

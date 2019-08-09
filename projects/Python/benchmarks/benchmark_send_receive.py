@@ -59,13 +59,13 @@ class MyReceiver(proto.Receiver):
     def log_size(self):
         return self._log_size
 
-    def on_receive_order(self, value):
+    def on_receive_ordermessage(self, value):
         pass
 
-    def on_receive_balance(self, value):
+    def on_receive_balancemessage(self, value):
         pass
 
-    def on_receive_account(self, value):
+    def on_receive_accountmessage(self, value):
         pass
 
     def on_receive_log(self, message):
@@ -76,10 +76,10 @@ class BenchmarkSendReceive(object):
 
     def __init__(self):
         # Create a new account with some orders
-        self.account = proto.Account(1, "Test", proto.State.good, proto.Balance("USD", 1000.0), proto.Balance("EUR", 100.0))
-        self.account.orders.append(proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))
-        self.account.orders.append(proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0))
-        self.account.orders.append(proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0))
+        self.account = proto.AccountMessage(proto.Account(1, "Test", proto.State.good, proto.Balance("USD", 1000.0), proto.Balance("EUR", 100.0)))
+        self.account.body.orders.append(proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))
+        self.account.body.orders.append(proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0))
+        self.account.body.orders.append(proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0))
 
         self.sender1 = MySender1()
         self.sender1.send(self.account)

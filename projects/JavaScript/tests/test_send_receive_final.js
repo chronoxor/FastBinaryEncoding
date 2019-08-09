@@ -27,11 +27,11 @@ class MyFinalReceiver extends protoex.FinalReceiver {
   }
 
   // noinspection JSUnusedLocalSymbols
-  onReceive_Order (value) { this._order = true } // eslint-disable-line
+  onReceive_OrderMessage (value) { this._order = true } // eslint-disable-line
   // noinspection JSUnusedLocalSymbols
-  onReceive_Balance (value) { this._balance = true } // eslint-disable-line
+  onReceive_BalanceMessage (value) { this._balance = true } // eslint-disable-line
   // noinspection JSUnusedLocalSymbols
-  onReceive_Account (value) { this._account = true } // eslint-disable-line
+  onReceive_AccountMessage (value) { this._account = true } // eslint-disable-line
 }
 
 function sendAndReceiveFinal (index1, index2) {
@@ -39,18 +39,18 @@ function sendAndReceiveFinal (index1, index2) {
 
   // Create and send a new order
   let order = new protoex.Order(1, 'EURUSD', protoex.OrderSide.buy, protoex.OrderType.market, 1.23456, 1000.0, 100.0)
-  sender.send(order)
+  sender.send(new protoex.OrderMessage(order))
 
   // Create and send a new balance wallet
   let balance = new protoex.Balance(new proto.Balance('USD', 1000.0), 100.0)
-  sender.send(balance)
+  sender.send(new protoex.BalanceMessage(balance))
 
   // Create and send a new account with some orders
   let account = new protoex.Account(1, 'Test', protoex.StateEx.good, new protoex.Balance(new proto.Balance('USD', 1000.0), 100.0), new protoex.Balance(new proto.Balance('EUR', 100.0), 10.0))
   account.orders.push(new protoex.Order(1, 'EURUSD', protoex.OrderSide.buy, protoex.OrderType.market, 1.23456, 1000.0, 0.0, 0.0))
   account.orders.push(new protoex.Order(2, 'EURUSD', protoex.OrderSide.sell, protoex.OrderType.limit, 1.0, 100.0, 0.0, 0.0))
   account.orders.push(new protoex.Order(3, 'EURUSD', protoex.OrderSide.buy, protoex.OrderType.stop, 1.5, 10.0, 0.0, 0.0))
-  sender.send(account)
+  sender.send(new protoex.AccountMessage(account))
 
   let receiver = new MyFinalReceiver()
 
