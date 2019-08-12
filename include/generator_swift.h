@@ -126,6 +126,7 @@ std::string CreatePackagePath(const std::string& domain, const std::string& pack
     std::string ConvertPrimitiveTypeName(const std::string& type);
     std::string ConvertTypeName(const std::string& domain, const std::string& package, const std::string& type, bool optional);
     std::string ConvertTypeName(const std::string& domain, const std::string& package, const StructField& field, bool typeless);
+    std::string ConvertTypeImport(const std::string& type);
     std::string ConvertBaseFieldName(const std::string& domain, const std::string& type, bool final);
     std::string ConvertTypeFieldName(const std::string& type);
     std::string ConvertTypeFieldType(const std::string& domain, const std::string& type, bool optional);

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,39 +16,13 @@
 		5521616A22F812E9009773A3 /* SendReceiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5521616922F812E9009773A3 /* SendReceiveTests.swift */; };
 		552162B022F848A9009773A3 /* SendReceiveFinalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552162AF22F848A9009773A3 /* SendReceiveFinalTest.swift */; };
 		552162C122F95AA0009773A3 /* EnumsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552162C022F95AA0009773A3 /* EnumsTest.swift */; };
-		55407CFA22FDA717002215B3 /* StateExEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9022FDA717002215B3 /* StateExEnum.swift */; };
-		55407CFB22FDA717002215B3 /* OrderSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9122FDA717002215B3 /* OrderSide.swift */; };
-		55407CFC22FDA717002215B3 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9222FDA717002215B3 /* Order.swift */; };
-		55407CFD22FDA717002215B3 /* FieldModelOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9422FDA717002215B3 /* FieldModelOrder.swift */; };
-		55407CFE22FDA717002215B3 /* BalanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9522FDA717002215B3 /* BalanceModel.swift */; };
-		55407CFF22FDA717002215B3 /* FinalModelOrderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9622FDA717002215B3 /* FinalModelOrderType.swift */; };
-		55407D0022FDA717002215B3 /* FinalModelOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9722FDA717002215B3 /* FinalModelOrder.swift */; };
-		55407D0122FDA717002215B3 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9822FDA717002215B3 /* AccountModel.swift */; };
-		55407D0222FDA717002215B3 /* FieldModelStateEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9922FDA717002215B3 /* FieldModelStateEx.swift */; };
-		55407D0322FDA717002215B3 /* FieldModelBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9A22FDA717002215B3 /* FieldModelBalance.swift */; };
-		55407D0422FDA717002215B3 /* FinalModelAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9B22FDA717002215B3 /* FinalModelAccount.swift */; };
-		55407D0522FDA717002215B3 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9C22FDA717002215B3 /* OrderModel.swift */; };
-		55407D0622FDA717002215B3 /* FieldModelOrderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9D22FDA717002215B3 /* FieldModelOrderType.swift */; };
-		55407D0722FDA717002215B3 /* OrderFinalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9E22FDA717002215B3 /* OrderFinalModel.swift */; };
-		55407D0822FDA717002215B3 /* FinalModelOptionalBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407C9F22FDA717002215B3 /* FinalModelOptionalBalance.swift */; };
-		55407D0922FDA717002215B3 /* BalanceFinalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CA022FDA717002215B3 /* BalanceFinalModel.swift */; };
-		55407D0A22FDA717002215B3 /* FieldModelOptionalBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CA122FDA717002215B3 /* FieldModelOptionalBalance.swift */; };
-		55407D0B22FDA717002215B3 /* FinalModelOrderSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CA222FDA717002215B3 /* FinalModelOrderSide.swift */; };
-		55407D0C22FDA717002215B3 /* FinalModelBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CA322FDA717002215B3 /* FinalModelBalance.swift */; };
-		55407D0D22FDA717002215B3 /* FieldModelVectorOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CA422FDA717002215B3 /* FieldModelVectorOrder.swift */; };
-		55407D0E22FDA717002215B3 /* FinalModelStateEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CA522FDA717002215B3 /* FinalModelStateEx.swift */; };
-		55407D0F22FDA717002215B3 /* AccountFinalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CA622FDA717002215B3 /* AccountFinalModel.swift */; };
-		55407D1022FDA717002215B3 /* FieldModelAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CA722FDA717002215B3 /* FieldModelAccount.swift */; };
-		55407D1122FDA717002215B3 /* FinalModelVectorOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CA822FDA717002215B3 /* FinalModelVectorOrder.swift */; };
-		55407D1222FDA717002215B3 /* FieldModelOrderSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CA922FDA717002215B3 /* FieldModelOrderSide.swift */; };
-		55407D1322FDA717002215B3 /* StateEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CAA22FDA717002215B3 /* StateEx.swift */; };
-		55407D1422FDA717002215B3 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CAB22FDA717002215B3 /* Balance.swift */; };
-		55407D1522FDA717002215B3 /* OrderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CAC22FDA717002215B3 /* OrderType.swift */; };
-		55407D1622FDA717002215B3 /* OrderTypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CAD22FDA717002215B3 /* OrderTypeEnum.swift */; };
-		55407D1722FDA717002215B3 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CAE22FDA717002215B3 /* Account.swift */; };
-		55407D1822FDA717002215B3 /* OrderSideEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55407CAF22FDA717002215B3 /* OrderSideEnum.swift */; };
-		55407FB722FDB7DC002215B3 /* proto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55407FB622FDB7DC002215B3 /* proto.framework */; };
-		55407FBA22FDB7EB002215B3 /* proto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55407FB822FDB7DE002215B3 /* proto.framework */; };
+		5530B19223018A9000FCCB6E /* ExTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530B19123018A9000FCCB6E /* ExTest.swift */; };
+		5530B19723018D7900FCCB6E /* proto in Frameworks */ = {isa = PBXBuildFile; productRef = 5530B19623018D7900FCCB6E /* proto */; };
+		5530B19923018D7E00FCCB6E /* proto in Frameworks */ = {isa = PBXBuildFile; productRef = 5530B19823018D7E00FCCB6E /* proto */; };
+		555FDC6C23019942004DB537 /* protoex in Frameworks */ = {isa = PBXBuildFile; productRef = 555FDC6B23019942004DB537 /* protoex */; };
+		555FDC6E23019947004DB537 /* protoex in Frameworks */ = {isa = PBXBuildFile; productRef = 555FDC6D23019947004DB537 /* protoex */; };
+		556FAADB2301A4FC00A8B936 /* enums in Frameworks */ = {isa = PBXBuildFile; productRef = 556FAADA2301A4FC00A8B936 /* enums */; };
+		556FAADD2301A50100A8B936 /* enums in Frameworks */ = {isa = PBXBuildFile; productRef = 556FAADC2301A50100A8B936 /* enums */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,39 +49,10 @@
 		5521616B22F812E9009773A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		552162AF22F848A9009773A3 /* SendReceiveFinalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendReceiveFinalTest.swift; sourceTree = "<group>"; };
 		552162C022F95AA0009773A3 /* EnumsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumsTest.swift; sourceTree = "<group>"; };
-		55407C9022FDA717002215B3 /* StateExEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateExEnum.swift; sourceTree = "<group>"; };
-		55407C9122FDA717002215B3 /* OrderSide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderSide.swift; sourceTree = "<group>"; };
-		55407C9222FDA717002215B3 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
-		55407C9422FDA717002215B3 /* FieldModelOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldModelOrder.swift; sourceTree = "<group>"; };
-		55407C9522FDA717002215B3 /* BalanceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceModel.swift; sourceTree = "<group>"; };
-		55407C9622FDA717002215B3 /* FinalModelOrderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalModelOrderType.swift; sourceTree = "<group>"; };
-		55407C9722FDA717002215B3 /* FinalModelOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalModelOrder.swift; sourceTree = "<group>"; };
-		55407C9822FDA717002215B3 /* AccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
-		55407C9922FDA717002215B3 /* FieldModelStateEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldModelStateEx.swift; sourceTree = "<group>"; };
-		55407C9A22FDA717002215B3 /* FieldModelBalance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldModelBalance.swift; sourceTree = "<group>"; };
-		55407C9B22FDA717002215B3 /* FinalModelAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalModelAccount.swift; sourceTree = "<group>"; };
-		55407C9C22FDA717002215B3 /* OrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
-		55407C9D22FDA717002215B3 /* FieldModelOrderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldModelOrderType.swift; sourceTree = "<group>"; };
-		55407C9E22FDA717002215B3 /* OrderFinalModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderFinalModel.swift; sourceTree = "<group>"; };
-		55407C9F22FDA717002215B3 /* FinalModelOptionalBalance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalModelOptionalBalance.swift; sourceTree = "<group>"; };
-		55407CA022FDA717002215B3 /* BalanceFinalModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceFinalModel.swift; sourceTree = "<group>"; };
-		55407CA122FDA717002215B3 /* FieldModelOptionalBalance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldModelOptionalBalance.swift; sourceTree = "<group>"; };
-		55407CA222FDA717002215B3 /* FinalModelOrderSide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalModelOrderSide.swift; sourceTree = "<group>"; };
-		55407CA322FDA717002215B3 /* FinalModelBalance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalModelBalance.swift; sourceTree = "<group>"; };
-		55407CA422FDA717002215B3 /* FieldModelVectorOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldModelVectorOrder.swift; sourceTree = "<group>"; };
-		55407CA522FDA717002215B3 /* FinalModelStateEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalModelStateEx.swift; sourceTree = "<group>"; };
-		55407CA622FDA717002215B3 /* AccountFinalModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountFinalModel.swift; sourceTree = "<group>"; };
-		55407CA722FDA717002215B3 /* FieldModelAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldModelAccount.swift; sourceTree = "<group>"; };
-		55407CA822FDA717002215B3 /* FinalModelVectorOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalModelVectorOrder.swift; sourceTree = "<group>"; };
-		55407CA922FDA717002215B3 /* FieldModelOrderSide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldModelOrderSide.swift; sourceTree = "<group>"; };
-		55407CAA22FDA717002215B3 /* StateEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateEx.swift; sourceTree = "<group>"; };
-		55407CAB22FDA717002215B3 /* Balance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
-		55407CAC22FDA717002215B3 /* OrderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderType.swift; sourceTree = "<group>"; };
-		55407CAD22FDA717002215B3 /* OrderTypeEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderTypeEnum.swift; sourceTree = "<group>"; };
-		55407CAE22FDA717002215B3 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
-		55407CAF22FDA717002215B3 /* OrderSideEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderSideEnum.swift; sourceTree = "<group>"; };
-		55407FB622FDB7DC002215B3 /* proto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = proto.framework; path = "../../../../../../../Library/Developer/Xcode/DerivedData/proto-cfvuqgwrldasnxaemwqiinunswxn/Build/Products/Debug-iphonesimulator/proto.framework"; sourceTree = "<group>"; };
-		55407FB822FDB7DE002215B3 /* proto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = proto.framework; sourceTree = "<group>"; };
+		5530B19123018A9000FCCB6E /* ExTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExTest.swift; sourceTree = "<group>"; };
+		5530B19523018D7000FCCB6E /* proto */ = {isa = PBXFileReference; lastKnownFileType = folder; name = proto; path = ../../../bin/com/chronoxor/proto; sourceTree = "<group>"; };
+		555FDC6A23019922004DB537 /* protoex */ = {isa = PBXFileReference; lastKnownFileType = folder; name = protoex; path = ../../../bin/com/chronoxor/protoex; sourceTree = "<group>"; };
+		556FAAD92301A4F400A8B936 /* enums */ = {isa = PBXFileReference; lastKnownFileType = folder; name = enums; path = ../../../bin/com/chronoxor/enums; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +60,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55407FBA22FDB7EB002215B3 /* proto.framework in Frameworks */,
+				556FAADB2301A4FC00A8B936 /* enums in Frameworks */,
+				555FDC6E23019947004DB537 /* protoex in Frameworks */,
+				5530B19723018D7900FCCB6E /* proto in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +70,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55407FB722FDB7DC002215B3 /* proto.framework in Frameworks */,
+				556FAADD2301A50100A8B936 /* enums in Frameworks */,
+				555FDC6C23019942004DB537 /* protoex in Frameworks */,
+				5530B19923018D7E00FCCB6E /* proto in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +82,9 @@
 		5521614822F812E8009773A3 = {
 			isa = PBXGroup;
 			children = (
+				556FAAD92301A4F400A8B936 /* enums */,
+				555FDC6A23019922004DB537 /* protoex */,
+				5530B19523018D7000FCCB6E /* proto */,
 				5521615322F812E8009773A3 /* FastBinaryEncoding */,
 				5521616822F812E9009773A3 /* FastBinaryEncodingTests */,
 				5521615222F812E8009773A3 /* Products */,
@@ -152,7 +104,6 @@
 		5521615322F812E8009773A3 /* FastBinaryEncoding */ = {
 			isa = PBXGroup;
 			children = (
-				55407C6C22FDA716002215B3 /* com */,
 				5521615422F812E8009773A3 /* AppDelegate.swift */,
 				5521615622F812E8009773A3 /* ViewController.swift */,
 				5521615822F812E8009773A3 /* Main.storyboard */,
@@ -170,79 +121,15 @@
 				552162C022F95AA0009773A3 /* EnumsTest.swift */,
 				5521616922F812E9009773A3 /* SendReceiveTests.swift */,
 				552162AF22F848A9009773A3 /* SendReceiveFinalTest.swift */,
-				55407FB622FDB7DC002215B3 /* proto.framework */,
 				5521616B22F812E9009773A3 /* Info.plist */,
+				5530B19123018A9000FCCB6E /* ExTest.swift */,
 			);
 			path = FastBinaryEncodingTests;
-			sourceTree = "<group>";
-		};
-		55407C6C22FDA716002215B3 /* com */ = {
-			isa = PBXGroup;
-			children = (
-				55407C6D22FDA716002215B3 /* chronoxor */,
-			);
-			name = com;
-			path = ../../../../bin/com;
-			sourceTree = "<group>";
-		};
-		55407C6D22FDA716002215B3 /* chronoxor */ = {
-			isa = PBXGroup;
-			children = (
-				55407C8F22FDA717002215B3 /* protoex */,
-			);
-			path = chronoxor;
-			sourceTree = "<group>";
-		};
-		55407C8F22FDA717002215B3 /* protoex */ = {
-			isa = PBXGroup;
-			children = (
-				55407C9022FDA717002215B3 /* StateExEnum.swift */,
-				55407C9122FDA717002215B3 /* OrderSide.swift */,
-				55407C9222FDA717002215B3 /* Order.swift */,
-				55407C9322FDA717002215B3 /* fbe */,
-				55407CAA22FDA717002215B3 /* StateEx.swift */,
-				55407CAB22FDA717002215B3 /* Balance.swift */,
-				55407CAC22FDA717002215B3 /* OrderType.swift */,
-				55407CAD22FDA717002215B3 /* OrderTypeEnum.swift */,
-				55407CAE22FDA717002215B3 /* Account.swift */,
-				55407CAF22FDA717002215B3 /* OrderSideEnum.swift */,
-			);
-			path = protoex;
-			sourceTree = "<group>";
-		};
-		55407C9322FDA717002215B3 /* fbe */ = {
-			isa = PBXGroup;
-			children = (
-				55407C9422FDA717002215B3 /* FieldModelOrder.swift */,
-				55407C9522FDA717002215B3 /* BalanceModel.swift */,
-				55407C9622FDA717002215B3 /* FinalModelOrderType.swift */,
-				55407C9722FDA717002215B3 /* FinalModelOrder.swift */,
-				55407C9822FDA717002215B3 /* AccountModel.swift */,
-				55407C9922FDA717002215B3 /* FieldModelStateEx.swift */,
-				55407C9A22FDA717002215B3 /* FieldModelBalance.swift */,
-				55407C9B22FDA717002215B3 /* FinalModelAccount.swift */,
-				55407C9C22FDA717002215B3 /* OrderModel.swift */,
-				55407C9D22FDA717002215B3 /* FieldModelOrderType.swift */,
-				55407C9E22FDA717002215B3 /* OrderFinalModel.swift */,
-				55407C9F22FDA717002215B3 /* FinalModelOptionalBalance.swift */,
-				55407CA022FDA717002215B3 /* BalanceFinalModel.swift */,
-				55407CA122FDA717002215B3 /* FieldModelOptionalBalance.swift */,
-				55407CA222FDA717002215B3 /* FinalModelOrderSide.swift */,
-				55407CA322FDA717002215B3 /* FinalModelBalance.swift */,
-				55407CA422FDA717002215B3 /* FieldModelVectorOrder.swift */,
-				55407CA522FDA717002215B3 /* FinalModelStateEx.swift */,
-				55407CA622FDA717002215B3 /* AccountFinalModel.swift */,
-				55407CA722FDA717002215B3 /* FieldModelAccount.swift */,
-				55407CA822FDA717002215B3 /* FinalModelVectorOrder.swift */,
-				55407CA922FDA717002215B3 /* FieldModelOrderSide.swift */,
-			);
-			path = fbe;
 			sourceTree = "<group>";
 		};
 		55407FB922FDB7EB002215B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				55407FB822FDB7DE002215B3 /* proto.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -264,6 +151,9 @@
 			);
 			name = FastBinaryEncoding;
 			packageProductDependencies = (
+				5530B19623018D7900FCCB6E /* proto */,
+				555FDC6D23019947004DB537 /* protoex */,
+				556FAADA2301A4FC00A8B936 /* enums */,
 			);
 			productName = FastBinaryEncoding;
 			productReference = 5521615122F812E8009773A3 /* FastBinaryEncoding.app */;
@@ -283,6 +173,11 @@
 				5521616722F812E9009773A3 /* PBXTargetDependency */,
 			);
 			name = FastBinaryEncodingTests;
+			packageProductDependencies = (
+				5530B19823018D7E00FCCB6E /* proto */,
+				555FDC6B23019942004DB537 /* protoex */,
+				556FAADC2301A50100A8B936 /* enums */,
+			);
 			productName = FastBinaryEncodingTests;
 			productReference = 5521616522F812E9009773A3 /* FastBinaryEncodingTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -352,39 +247,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55407D1522FDA717002215B3 /* OrderType.swift in Sources */,
-				55407D0822FDA717002215B3 /* FinalModelOptionalBalance.swift in Sources */,
-				55407D1822FDA717002215B3 /* OrderSideEnum.swift in Sources */,
-				55407D0722FDA717002215B3 /* OrderFinalModel.swift in Sources */,
-				55407D0122FDA717002215B3 /* AccountModel.swift in Sources */,
-				55407D0922FDA717002215B3 /* BalanceFinalModel.swift in Sources */,
-				55407D0422FDA717002215B3 /* FinalModelAccount.swift in Sources */,
 				5521615722F812E8009773A3 /* ViewController.swift in Sources */,
-				55407D1222FDA717002215B3 /* FieldModelOrderSide.swift in Sources */,
-				55407D0222FDA717002215B3 /* FieldModelStateEx.swift in Sources */,
-				55407D1322FDA717002215B3 /* StateEx.swift in Sources */,
-				55407CFB22FDA717002215B3 /* OrderSide.swift in Sources */,
-				55407CFE22FDA717002215B3 /* BalanceModel.swift in Sources */,
-				55407D0022FDA717002215B3 /* FinalModelOrder.swift in Sources */,
-				55407D0C22FDA717002215B3 /* FinalModelBalance.swift in Sources */,
-				55407D0A22FDA717002215B3 /* FieldModelOptionalBalance.swift in Sources */,
-				55407D0F22FDA717002215B3 /* AccountFinalModel.swift in Sources */,
-				55407CFF22FDA717002215B3 /* FinalModelOrderType.swift in Sources */,
-				55407CFA22FDA717002215B3 /* StateExEnum.swift in Sources */,
-				55407D0622FDA717002215B3 /* FieldModelOrderType.swift in Sources */,
-				55407CFD22FDA717002215B3 /* FieldModelOrder.swift in Sources */,
-				55407D1122FDA717002215B3 /* FinalModelVectorOrder.swift in Sources */,
-				55407D1622FDA717002215B3 /* OrderTypeEnum.swift in Sources */,
-				55407D1722FDA717002215B3 /* Account.swift in Sources */,
-				55407D0E22FDA717002215B3 /* FinalModelStateEx.swift in Sources */,
-				55407D1422FDA717002215B3 /* Balance.swift in Sources */,
-				55407D0D22FDA717002215B3 /* FieldModelVectorOrder.swift in Sources */,
-				55407D1022FDA717002215B3 /* FieldModelAccount.swift in Sources */,
-				55407D0322FDA717002215B3 /* FieldModelBalance.swift in Sources */,
-				55407D0522FDA717002215B3 /* OrderModel.swift in Sources */,
-				55407CFC22FDA717002215B3 /* Order.swift in Sources */,
 				5521615522F812E8009773A3 /* AppDelegate.swift in Sources */,
-				55407D0B22FDA717002215B3 /* FinalModelOrderSide.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +258,7 @@
 			files = (
 				42D0AB1F22FC5F6700A77702 /* Serialization.swift in Sources */,
 				552162C122F95AA0009773A3 /* EnumsTest.swift in Sources */,
+				5530B19223018A9000FCCB6E /* ExTest.swift in Sources */,
 				5521616A22F812E9009773A3 /* SendReceiveTests.swift in Sources */,
 				552162B022F848A9009773A3 /* SendReceiveFinalTest.swift in Sources */,
 			);
@@ -480,7 +345,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -535,7 +400,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -555,7 +420,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FastBinaryEncoding/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -577,7 +442,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FastBinaryEncoding/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -660,6 +525,33 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5530B19623018D7900FCCB6E /* proto */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = proto;
+		};
+		5530B19823018D7E00FCCB6E /* proto */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = proto;
+		};
+		555FDC6B23019942004DB537 /* protoex */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = protoex;
+		};
+		555FDC6D23019947004DB537 /* protoex */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = protoex;
+		};
+		556FAADA2301A4FC00A8B936 /* enums */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = enums;
+		};
+		556FAADC2301A50100A8B936 /* enums */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = enums;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5521614922F812E8009773A3 /* Project object */;
 }
