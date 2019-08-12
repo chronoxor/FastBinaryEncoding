@@ -7,6 +7,7 @@
 */
 
 #include "generator_swift.h"
+#include <iostream>
 
 namespace FBE {
 
@@ -15,6 +16,7 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
     std::string domain = (package->domain && !package->domain->empty()) ? (*package->domain + ".") : "";
 
     GenerateFBEPackage(domain, "fbe");
+
     //GenerateFBEUUIDGenerator(domain, "fbe");
     GenerateFBEBuffer(domain, "fbe");
     GenerateFBEModel(domain, "fbe");
@@ -33,7 +35,7 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel(domain, "fbe", "UInt64", "UInt64", "", "8", "0");
     GenerateFBEFieldModel(domain, "fbe", "Float", "Float", "", "4", "0.0");
     GenerateFBEFieldModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
-    GenerateFBEFieldModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
+    //GenerateFBEFieldModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
     //GenerateFBEFieldModelDecimal(domain, "fbe");
     GenerateFBEFieldModelDate(domain, "fbe");
     //GenerateFBEFieldModelTimestamp(domain, "fbe");
@@ -114,10 +116,56 @@ void GeneratorSwift::GenerateImports(const std::shared_ptr<Package>& p)
 
 void GeneratorSwift::GenerateFBEPackage(const std::string& domain, const std::string& package)
 {
-    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
+
+  CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
+
+  // Create FBE package path
+  CppCommon::Directory::CreateTree(path);
+
+    CppCommon::Path packagePath = CppCommon::Path(_output) / CreateSwiftPackagePath(domain, package);
 
     // Create FBE package path
-    CppCommon::Directory::CreateTree(path);
+    CppCommon::Directory::CreateTree(packagePath);
+
+    // Open the file
+    CppCommon::Path file = packagePath / "Package.swift";
+    Open(file);
+
+    // Generate headers
+  //  GenerateHeader("fbe");
+
+    std::string code = R"CODE(// swift-tools-version:5.1
+
+import PackageDescription
+
+let package = Package(
+    name: "fbe",
+    products: [
+        // Products define the executables and libraries produced by a package, and make them visible to other packages.
+        .library(
+            name: "fbe",
+            targets: ["fbe"]),
+    ],
+    dependencies: [
+        // Dependencies declare other packages that this package depends on.
+    ],
+    targets: [
+        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
+        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
+        .target(
+            name: "fbe",
+            dependencies: []),
+    ]
+)
+)CODE";
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
 }
 
 void GeneratorSwift::GenerateFBEUUIDGenerator(const std::string& domain, const std::string& package)
@@ -4632,6 +4680,83 @@ void GeneratorSwift::GeneratePackage(const std::shared_ptr<Package>& p)
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
+
+    CppCommon::Path packagePath = CppCommon::Path(_output) / CreateSwiftPackagePath(domain, *p->name);
+
+    // Create FBE package path
+    CppCommon::Directory::CreateTree(packagePath);
+
+    // Open the file
+    CppCommon::Path file = packagePath / "Package.swift";
+    Open(file);
+
+    // Generate headers
+  //  GenerateHeader("fbe");
+
+    std::string code = R"CODE(// swift-tools-version:5.1
+
+import PackageDescription
+
+let package = Package(
+    name: "_NAME_",
+    products: [
+        // Products define the executables and libraries produced by a package, and make them visible to other packages.
+        .library(
+            name: "_NAME_",
+            targets: ["_NAME_"]),
+    ],
+    dependencies: [
+        // Dependencies declare other packages that this package depends on.
+        .package(path: "../fbe")
+        _DEPENDENCIES_RES_
+    ],
+    targets: [
+        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
+        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
+        .target(
+            name: "_NAME_",
+            dependencies: ["fbe", _DEPENDENCIES_]),
+    ]
+)
+)CODE";
+//.package(path: "../proto2")
+
+
+
+    std::string dependenciesRes = "";
+    if (p->import) {
+    for (const auto& import : p->import->imports) {
+        dependenciesRes = dependenciesRes + std::string(".package(path: \"../") + std::string(*import) + std::string("\")\n ");
+    }
+  }
+
+    std::string dependencies = "";
+    if (p->import) {
+    for (const auto& import : p->import->imports) {
+        dependencies = dependencies + std::string("\"") + std::string(*import) + std::string("\", ");
+    }
+  }
+
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("_NAME_"), *p->name);
+    code = std::regex_replace(code, std::regex("_DEPENDENCIES_RES_"), dependenciesRes);
+    code = std::regex_replace(code, std::regex("_DEPENDENCIES_"), dependencies);
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+
+    std::cout << "\n";
+    std::cout << domain;
+    std::cout << "\n";
+    std::cout << *p->name;
+
+
     // Generate namespace
     if (p->body)
     {
@@ -7751,11 +7876,20 @@ bool GeneratorSwift::IsUnsignedType(const std::string& type)
     return ((type == "byte") || (type == "uint8") || (type == "uint16") || (type == "uint32") || (type == "uint64"));
 }
 
-std::string GeneratorSwift::CreatePackagePath(const std::string& domain, const std::string& package)
+std::string GeneratorSwift::CreateSwiftPackagePath(const std::string& domain, const std::string& package)
 {
+
     std::string result = domain;
     CppCommon::StringUtils::ReplaceAll(result, ".", std::string(1, CppCommon::Path::separator()));
     return result + CppCommon::Path::separator() + package;
+}
+
+std::string GeneratorSwift::CreatePackagePath(const std::string& domain, const std::string& package)
+{
+
+    std::string result = domain;
+    CppCommon::StringUtils::ReplaceAll(result, ".", std::string(1, CppCommon::Path::separator()));
+    return result + package + CppCommon::Path::separator() + "Source" + CppCommon::Path::separator() + package;
 }
 
 std::string GeneratorSwift::ConvertEnumBase(const std::string& type)
