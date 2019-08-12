@@ -23,6 +23,7 @@
 		555FDC6E23019947004DB537 /* protoex in Frameworks */ = {isa = PBXBuildFile; productRef = 555FDC6D23019947004DB537 /* protoex */; };
 		556FAADB2301A4FC00A8B936 /* enums in Frameworks */ = {isa = PBXBuildFile; productRef = 556FAADA2301A4FC00A8B936 /* enums */; };
 		556FAADD2301A50100A8B936 /* enums in Frameworks */ = {isa = PBXBuildFile; productRef = 556FAADC2301A50100A8B936 /* enums */; };
+		556FAADF2301AAEC00A8B936 /* BenchmarkSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556FAADE2301AAEC00A8B936 /* BenchmarkSerialization.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		5530B19523018D7000FCCB6E /* proto */ = {isa = PBXFileReference; lastKnownFileType = folder; name = proto; path = ../../../bin/com/chronoxor/proto; sourceTree = "<group>"; };
 		555FDC6A23019922004DB537 /* protoex */ = {isa = PBXFileReference; lastKnownFileType = folder; name = protoex; path = ../../../bin/com/chronoxor/protoex; sourceTree = "<group>"; };
 		556FAAD92301A4F400A8B936 /* enums */ = {isa = PBXFileReference; lastKnownFileType = folder; name = enums; path = ../../../bin/com/chronoxor/enums; sourceTree = "<group>"; };
+		556FAADE2301AAEC00A8B936 /* BenchmarkSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkSerialization.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				552162AF22F848A9009773A3 /* SendReceiveFinalTest.swift */,
 				5521616B22F812E9009773A3 /* Info.plist */,
 				5530B19123018A9000FCCB6E /* ExTest.swift */,
+				556FAADE2301AAEC00A8B936 /* BenchmarkSerialization.swift */,
 			);
 			path = FastBinaryEncodingTests;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			files = (
 				42D0AB1F22FC5F6700A77702 /* Serialization.swift in Sources */,
 				552162C122F95AA0009773A3 /* EnumsTest.swift in Sources */,
+				556FAADF2301AAEC00A8B936 /* BenchmarkSerialization.swift in Sources */,
 				5530B19223018A9000FCCB6E /* ExTest.swift in Sources */,
 				5521616A22F812E9009773A3 /* SendReceiveTests.swift in Sources */,
 				552162B022F848A9009773A3 /* SendReceiveFinalTest.swift in Sources */,
