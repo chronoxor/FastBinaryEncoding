@@ -31,6 +31,7 @@ class BenchmarkSerialization: XCTestCase {
         _writer = proto.AccountModel()
         _reader = proto.AccountModel()
         
+        print(try? _account.toJson())
         
         // Serialize the account to the FBE stream
         try! _writer.serialize(value: _account)

@@ -17,13 +17,12 @@
 		552162B022F848A9009773A3 /* SendReceiveFinalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552162AF22F848A9009773A3 /* SendReceiveFinalTest.swift */; };
 		552162C122F95AA0009773A3 /* EnumsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552162C022F95AA0009773A3 /* EnumsTest.swift */; };
 		5530B19223018A9000FCCB6E /* ExTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530B19123018A9000FCCB6E /* ExTest.swift */; };
-		5530B19723018D7900FCCB6E /* proto in Frameworks */ = {isa = PBXBuildFile; productRef = 5530B19623018D7900FCCB6E /* proto */; };
-		5530B19923018D7E00FCCB6E /* proto in Frameworks */ = {isa = PBXBuildFile; productRef = 5530B19823018D7E00FCCB6E /* proto */; };
-		555FDC6C23019942004DB537 /* protoex in Frameworks */ = {isa = PBXBuildFile; productRef = 555FDC6B23019942004DB537 /* protoex */; };
-		555FDC6E23019947004DB537 /* protoex in Frameworks */ = {isa = PBXBuildFile; productRef = 555FDC6D23019947004DB537 /* protoex */; };
-		556FAADB2301A4FC00A8B936 /* enums in Frameworks */ = {isa = PBXBuildFile; productRef = 556FAADA2301A4FC00A8B936 /* enums */; };
-		556FAADD2301A50100A8B936 /* enums in Frameworks */ = {isa = PBXBuildFile; productRef = 556FAADC2301A50100A8B936 /* enums */; };
+		5559810D2301C30D008443F9 /* DecimalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559810C2301C30D008443F9 /* DecimalTest.swift */; };
 		556FAADF2301AAEC00A8B936 /* BenchmarkSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556FAADE2301AAEC00A8B936 /* BenchmarkSerialization.swift */; };
+		5577A36D2301C4E900AC5973 /* proto in Frameworks */ = {isa = PBXBuildFile; productRef = 5577A36C2301C4E900AC5973 /* proto */; };
+		5577A36F2301C4EB00AC5973 /* fbe in Frameworks */ = {isa = PBXBuildFile; productRef = 5577A36E2301C4EB00AC5973 /* fbe */; };
+		5577A3712301C4EF00AC5973 /* fbe in Frameworks */ = {isa = PBXBuildFile; productRef = 5577A3702301C4EF00AC5973 /* fbe */; };
+		5577A3732301C4F200AC5973 /* proto in Frameworks */ = {isa = PBXBuildFile; productRef = 5577A3722301C4F200AC5973 /* proto */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,10 +50,10 @@
 		552162AF22F848A9009773A3 /* SendReceiveFinalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendReceiveFinalTest.swift; sourceTree = "<group>"; };
 		552162C022F95AA0009773A3 /* EnumsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumsTest.swift; sourceTree = "<group>"; };
 		5530B19123018A9000FCCB6E /* ExTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExTest.swift; sourceTree = "<group>"; };
-		5530B19523018D7000FCCB6E /* proto */ = {isa = PBXFileReference; lastKnownFileType = folder; name = proto; path = ../../../bin/com/chronoxor/proto; sourceTree = "<group>"; };
-		555FDC6A23019922004DB537 /* protoex */ = {isa = PBXFileReference; lastKnownFileType = folder; name = protoex; path = ../../../bin/com/chronoxor/protoex; sourceTree = "<group>"; };
-		556FAAD92301A4F400A8B936 /* enums */ = {isa = PBXFileReference; lastKnownFileType = folder; name = enums; path = ../../../bin/com/chronoxor/enums; sourceTree = "<group>"; };
+		5559810C2301C30D008443F9 /* DecimalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalTest.swift; sourceTree = "<group>"; };
 		556FAADE2301AAEC00A8B936 /* BenchmarkSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkSerialization.swift; sourceTree = "<group>"; };
+		5577A36A2301C4DB00AC5973 /* fbe */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fbe; path = ../../../bin/com/chronoxor/fbe; sourceTree = "<group>"; };
+		5577A36B2301C4E100AC5973 /* proto */ = {isa = PBXFileReference; lastKnownFileType = folder; name = proto; path = ../../../bin/com/chronoxor/proto; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,9 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				556FAADB2301A4FC00A8B936 /* enums in Frameworks */,
-				555FDC6E23019947004DB537 /* protoex in Frameworks */,
-				5530B19723018D7900FCCB6E /* proto in Frameworks */,
+				5577A3712301C4EF00AC5973 /* fbe in Frameworks */,
+				5577A3732301C4F200AC5973 /* proto in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,9 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				556FAADD2301A50100A8B936 /* enums in Frameworks */,
-				555FDC6C23019942004DB537 /* protoex in Frameworks */,
-				5530B19923018D7E00FCCB6E /* proto in Frameworks */,
+				5577A36F2301C4EB00AC5973 /* fbe in Frameworks */,
+				5577A36D2301C4E900AC5973 /* proto in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,9 +81,8 @@
 		5521614822F812E8009773A3 = {
 			isa = PBXGroup;
 			children = (
-				556FAAD92301A4F400A8B936 /* enums */,
-				555FDC6A23019922004DB537 /* protoex */,
-				5530B19523018D7000FCCB6E /* proto */,
+				5577A36B2301C4E100AC5973 /* proto */,
+				5577A36A2301C4DB00AC5973 /* fbe */,
 				5521615322F812E8009773A3 /* FastBinaryEncoding */,
 				5521616822F812E9009773A3 /* FastBinaryEncodingTests */,
 				5521615222F812E8009773A3 /* Products */,
@@ -126,6 +122,7 @@
 				5521616B22F812E9009773A3 /* Info.plist */,
 				5530B19123018A9000FCCB6E /* ExTest.swift */,
 				556FAADE2301AAEC00A8B936 /* BenchmarkSerialization.swift */,
+				5559810C2301C30D008443F9 /* DecimalTest.swift */,
 			);
 			path = FastBinaryEncodingTests;
 			sourceTree = "<group>";
@@ -154,9 +151,8 @@
 			);
 			name = FastBinaryEncoding;
 			packageProductDependencies = (
-				5530B19623018D7900FCCB6E /* proto */,
-				555FDC6D23019947004DB537 /* protoex */,
-				556FAADA2301A4FC00A8B936 /* enums */,
+				5577A3702301C4EF00AC5973 /* fbe */,
+				5577A3722301C4F200AC5973 /* proto */,
 			);
 			productName = FastBinaryEncoding;
 			productReference = 5521615122F812E8009773A3 /* FastBinaryEncoding.app */;
@@ -177,9 +173,8 @@
 			);
 			name = FastBinaryEncodingTests;
 			packageProductDependencies = (
-				5530B19823018D7E00FCCB6E /* proto */,
-				555FDC6B23019942004DB537 /* protoex */,
-				556FAADC2301A50100A8B936 /* enums */,
+				5577A36C2301C4E900AC5973 /* proto */,
+				5577A36E2301C4EB00AC5973 /* fbe */,
 			);
 			productName = FastBinaryEncodingTests;
 			productReference = 5521616522F812E9009773A3 /* FastBinaryEncodingTests.xctest */;
@@ -262,6 +257,7 @@
 				42D0AB1F22FC5F6700A77702 /* Serialization.swift in Sources */,
 				552162C122F95AA0009773A3 /* EnumsTest.swift in Sources */,
 				556FAADF2301AAEC00A8B936 /* BenchmarkSerialization.swift in Sources */,
+				5559810D2301C30D008443F9 /* DecimalTest.swift in Sources */,
 				5530B19223018A9000FCCB6E /* ExTest.swift in Sources */,
 				5521616A22F812E9009773A3 /* SendReceiveTests.swift in Sources */,
 				552162B022F848A9009773A3 /* SendReceiveFinalTest.swift in Sources */,
@@ -531,29 +527,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5530B19623018D7900FCCB6E /* proto */ = {
+		5577A36C2301C4E900AC5973 /* proto */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = proto;
 		};
-		5530B19823018D7E00FCCB6E /* proto */ = {
+		5577A36E2301C4EB00AC5973 /* fbe */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = fbe;
+		};
+		5577A3702301C4EF00AC5973 /* fbe */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = fbe;
+		};
+		5577A3722301C4F200AC5973 /* proto */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = proto;
-		};
-		555FDC6B23019942004DB537 /* protoex */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = protoex;
-		};
-		555FDC6D23019947004DB537 /* protoex */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = protoex;
-		};
-		556FAADA2301A4FC00A8B936 /* enums */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = enums;
-		};
-		556FAADC2301A50100A8B936 /* enums */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = enums;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
