@@ -35,10 +35,10 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel(domain, "fbe", "UInt64", "UInt64", "", "8", "0");
     GenerateFBEFieldModel(domain, "fbe", "Float", "Float", "", "4", "0.0");
     GenerateFBEFieldModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
-    //GenerateFBEFieldModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
+    GenerateFBEFieldModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
     GenerateFBEFieldModelDecimal(domain, "fbe");
     GenerateFBEFieldModelDate(domain, "fbe");
-    //GenerateFBEFieldModelTimestamp(domain, "fbe");
+    GenerateFBEFieldModelTimestamp(domain, "fbe");
     GenerateFBEFieldModelBytes(domain, "fbe");
     GenerateFBEFieldModelString(domain, "fbe");
     if (Final())
@@ -1093,38 +1093,45 @@ void GeneratorSwift::GenerateFBEFieldModelTimestamp(const std::string& domain, c
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
-    CppCommon::Path file = path / "FieldModelTimestamp.kt";
+    CppCommon::Path file = path / "FieldModelTimestamp.swift";
     Open(file);
 
     // Generate headers
     GenerateHeader("fbe");
+    GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
 // Fast Binary Encoding timestamp field model
-class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
-{
-    // Field size
-    override val fbeSize: Long = 8
+public class FieldModelTimestamp: FieldModel {
+    public var _buffer = Buffer()
+       public var _offset: Int = 0
 
-    // Get the timestamp value
-    fun get(defaults: java.time.Instant = java.time.Instant.EPOCH): java.time.Instant
-    {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
+       // Field size
+       public let fbeSize: Int = 8
+
+       public required init() {
+           _buffer = Buffer()
+           _offset = 0
+       }
+
+    public func get(defaults: TimeInterval = Date().timeIntervalSince1970) -> TimeInterval {
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             return defaults
+        }
 
-        val nanoseconds = readInt64(fbeOffset)
-        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
+        let nanoseconds = readFloat(offset: fbeOffset)
+        return TimeInterval(nanoseconds / 1000000000)
     }
 
-    // Set the timestamp value
-    fun set(value: java.time.Instant)
-    {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
+    public func set(value: TimeInterval) {
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             return
+        }
 
-        val nanoseconds = value.epochSecond * 1000000000 + value.nano
-        write(fbeOffset, nanoseconds.toULong())
+        let nanoseconds = value * 1000000000
+        write(offset: fbeOffset, value: UInt64(nanoseconds))
     }
 }
 )CODE";
@@ -1582,148 +1589,136 @@ void GeneratorSwift::GenerateFBEFieldModelArray(const std::string& domain, const
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FieldModelArray" + name + ".kt");
+    CppCommon::Path file = path / ("FieldModelArray" + name + ".swift");
     Open(file);
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(domain, package + ".fbe");
+    GenerateImports("", "fbe");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array field model
-class FieldModelArray_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long, val size: Long) : _DOMAIN_fbe.FieldModel(buffer, offset)
-{
-    private val _model = _MODEL_(buffer, offset)
+class FieldModelArray_NAME_: FieldModel {
+    private let _model: _MODEL_
+
+    var _buffer: Buffer
+    var _offset: Int
+    var size: Int
 
     // Field size
-    override val fbeSize: Long = size * _model.fbeSize
+    var fbeSize: Int {
+        return size * _model.fbeSize
+    }
 
     // Field extra size
-    override val fbeExtra: Long = 0
+    var fbeExtra: Int = 0
 
-    // Get the array offset
-    val offset: Long get() = 0
+    // Get the vector offset
+    var offset: Int = 0
 
-    // Array index operator
-    fun getItem(index: Long): _MODEL_
-    {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
-        assert(index < size) { "Index is out of bounds!" }
+    required init() {
+        let buffer = Buffer()
+        let offset = 0
 
-        _model.fbeOffset = fbeOffset
-        _model.fbeShift(index * _model.fbeSize)
+        _buffer = buffer
+        _offset = offset
+        self.size = 0
+
+        _model = _MODEL_(buffer: buffer, offset: offset)
+    }
+
+    required init(buffer: Buffer, offset: Int, size: Int) {
+        _buffer = buffer
+        _offset = offset
+        self.size =  size
+
+        _model = _MODEL_(buffer: buffer, offset: offset)
+    }
+
+    // Vector index operator
+    func getItem(index: Int) -> _MODEL_ {
+        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
+        assert(index < size, "Model is broken!")
+
+        _model.fbeOffset = fbeOffset + 4
+        _model.fbeShift(size: index * _model.fbeSize)
         return _model
     }
 
-    // Check if the array is valid
-    override fun verify(): Boolean
-    {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
+    func verify() -> Bool {
+       if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return false
+        }
 
         _model.fbeOffset = fbeOffset
         var i = size
-        while (i-- > 0)
-        {
-            if (!_model.verify())
-                return false
-            _model.fbeShift(_model.fbeSize)
+        while (i > 0) {
+            if !_model.verify() { return false }
+            _model.fbeShift(size: _model.fbeSize)
+            i -= 1
         }
 
         return true
     }
 
-    // Get the array
-    fun get(): _ARRAY_
-    {
-        val values = _INIT_
-
-        val fbeModel = getItem(0)
-        for (i in 0 until size)
-        {
-            values[i.toInt()] = fbeModel.get()
-            fbeModel.fbeShift(fbeModel.fbeSize)
+    func get() -> _ARRAY_ {
+        var values = _ARRAY_()
+        let fbeModel = getItem(index: 0)
+        for _ in 0..<size {
+            values.append(fbeModel.get())
+            fbeModel.fbeShift(size: fbeModel.fbeSize)
         }
+
         return values
     }
 
-    // Get the array
-    fun get(values: _ARRAY_)
-    {
-        val fbeModel = getItem(0)
-        var i: Long = 0
-        while ((i < values.size) && (i < size))
-        {
-            values[i.toInt()] = fbeModel.get()
-            fbeModel.fbeShift(fbeModel.fbeSize)
-            i++
+    func get(values: inout _ARRAY_) {
+        values.removeAll()
+
+        let fbeVectorSize = size
+        if fbeVectorSize == 0 {
+            return
         }
-    }
 
-    // Get the array as java.util.ArrayList
-    fun get(values: java.util.ArrayList<_TYPE_>)
-    {
-        values.clear()
-        values.ensureCapacity(size.toInt())
+        //values.ensureCapacity(fbeVectorSize.toInt())
 
-        val fbeModel = getItem(0)
+        let fbeModel = getItem(index: 0)
         var i = size
-        while (i-- > 0)
-        {
-            val value = fbeModel.get()
-            values.add(value)
-            fbeModel.fbeShift(fbeModel.fbeSize)
+        while (i > 0) {
+            let value = fbeModel.get()
+            values.append(value)
+            fbeModel.fbeShift(size: fbeModel.fbeSize)
+            i -= 1
         }
     }
 
-    // Set the array
-    fun set(values: _ARRAY_)
-    {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
+    func set(value values: _ARRAY_) throws {
+        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
+        if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return
-
-        val fbeModel = getItem(0)
-        var i: Long = 0
-        while ((i < values.size) && (i < size))
-        {
-            fbeModel.set(values[i.toInt()])
-            fbeModel.fbeShift(fbeModel.fbeSize)
-            i++
         }
-    }
 
-    // Set the array as java.util.ArrayList
-    fun set(values: java.util.ArrayList<_TYPE_>)
-    {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return
-
-        val fbeModel = getItem(0)
-        var i: Long = 0
-        while ((i < values.size) && (i < size))
-        {
-            fbeModel.set(values[i.toInt()])
-            fbeModel.fbeShift(fbeModel.fbeSize)
-            i++
+        let fbeModel = getItem(index: 0)
+        for value in values {
+            try fbeModel.set(value: value)
+            fbeModel.fbeShift(size: fbeModel.fbeSize)
         }
     }
 }
 )CODE";
 
-    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
+    std::string type_name = type;
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type_name + ">");
+
     if (optional)
-        code = std::regex_replace(code, std::regex("_INIT_"), "arrayOfNulls<" + type_name + ">(size.toInt())");
+        code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type_name + "?>");
     else
-        code = std::regex_replace(code, std::regex("_INIT_"), "Array(size.toInt()) { " + ConvertDefault(domain, package, base) + " }");
+        code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type_name + ">");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -1939,7 +1934,7 @@ void GeneratorSwift::GenerateFBEFieldModelMap(const std::string& domain, const s
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FieldModelMap" + key_name + value_name + ".kt");
+    CppCommon::Path file = path / ("FieldModelMap" + key_name + value_name + ".swift");
     Open(file);
 
     // Generate headers
@@ -1948,208 +1943,183 @@ void GeneratorSwift::GenerateFBEFieldModelMap(const std::string& domain, const s
 
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map field model
-class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.FieldModel(buffer, offset)
-{
-    private val _modelKey = _KEY_MODEL_(buffer, offset)
-    private val _modelValue = _VALUE_MODEL_(buffer, offset)
+class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
+    private let _modelKey: _KEY_MODEL_
+    private let _modelValue: _VALUE_MODEL_
+
+    var _buffer: Buffer
+    var _offset: Int
 
     // Field size
-    override val fbeSize: Long = 4
+    let fbeSize: Int = 4
 
-    // Field extra size
-    override val fbeExtra: Long get()
-    {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
+    var fbeExtra: Int {
+        if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return 0
+        }
 
-        val fbeMapOffset = readUInt32(fbeOffset).toLong()
-        if ((fbeMapOffset == 0L) || ((_buffer.offset + fbeMapOffset + 4) > _buffer.size))
+        let fbeMapOffset = Int(readUInt32(offset: fbeOffset))
+        if (fbeMapOffset == 0) || ((_buffer.offset + fbeMapOffset + 4) > _buffer.size) {
             return 0
+        }
 
-        val fbeMapSize = readUInt32(fbeMapOffset).toLong()
+        let fbeMapSize = Int(readUInt32(offset: fbeMapOffset))
 
-        var fbeResult: Long = 4
+        var fbeResult: Int = 4
         _modelKey.fbeOffset = fbeMapOffset + 4
         _modelValue.fbeOffset = fbeMapOffset + 4 + _modelKey.fbeSize
         var i = fbeMapSize
-        while (i-- > 0)
-        {
+        while (i > 0) {
             fbeResult += _modelKey.fbeSize + _modelKey.fbeExtra
-            _modelKey.fbeShift(_modelKey.fbeSize + _modelValue.fbeSize)
-
+            _modelKey.fbeShift(size: _modelKey.fbeSize)
             fbeResult += _modelValue.fbeSize + _modelValue.fbeExtra
-            _modelValue.fbeShift(_modelKey.fbeSize + _modelValue.fbeSize)
+            _modelValue.fbeShift(size: _modelValue.fbeSize)
+            i -= 1
         }
         return fbeResult
     }
 
-    // Get the map offset
-    val offset: Long get()
-    {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return 0
+    required init() {
+        let buffer = Buffer()
+        let offset = 0
 
-        return readUInt32(fbeOffset).toLong()
+        _buffer = buffer
+        _offset = offset
+
+        _modelKey = _KEY_MODEL_(buffer: buffer, offset: offset)
+        _modelValue = _VALUE_MODEL_(buffer: buffer, offset: offset)
     }
 
-    // Get the map size
-    val size: Long get()
-    {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return 0
+    required init(buffer: Buffer, offset: Int) {
+        _buffer = buffer
+        _offset = offset
 
-        val fbeMapOffset = readUInt32(fbeOffset).toLong()
-        if ((fbeMapOffset == 0L) || ((_buffer.offset + fbeMapOffset + 4) > _buffer.size))
-            return 0
-
-        return readUInt32(fbeMapOffset).toLong()
+        _modelKey = FieldModelOrder(buffer: buffer, offset: offset)
+        _modelValue = FieldModelOrder(buffer: buffer, offset: offset)
     }
 
-    // Map index operator
-    fun getItem(index: Long): Pair<_KEY_MODEL_, _VALUE_MODEL_>
-    {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+    // Get the vector offset
+    var offset: Int {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
+              return 0
+        }
 
-        val fbeMapOffset = readUInt32(fbeOffset).toLong()
-        assert((fbeMapOffset > 0) && ((_buffer.offset + fbeMapOffset + 4) <= _buffer.size)) { "Model is broken!" }
+        return Int(readUInt32(offset: fbeOffset))
+    }
 
-        val fbeMapSize = readUInt32(fbeMapOffset).toLong()
-        assert(index < fbeMapSize) { "Index is out of bounds!" }
+    // Get the vector offset
+    var size: Int {
+        if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            return 0
+        }
+
+        let fbeMapOffset = Int(readUInt32(offset: fbeOffset))
+        if (fbeMapOffset == 0) || ((_buffer.offset + fbeMapOffset + 4) > _buffer.size) {
+            return 0
+        }
+
+        return Int(readUInt32(offset: fbeMapOffset))
+    }
+
+    // Vector index operator
+    func getItem(index: Int) -> (_KEY_MODEL_, _VALUE_MODEL_) {
+        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
+
+        let fbeMapOffset = Int(readUInt32(offset: fbeOffset))
+        assert((fbeMapOffset > 0) && ((_buffer.offset + fbeMapOffset + 4) <= _buffer.size), "Model is broken!")
+
+        let fbeMapSize = Int(readUInt32(offset: fbeMapOffset))
+        assert(index < fbeMapSize, "Index is out of bounds!")
 
         _modelKey.fbeOffset = fbeMapOffset + 4
         _modelValue.fbeOffset = fbeMapOffset + 4 + _modelKey.fbeSize
-        _modelKey.fbeShift(index * (_modelKey.fbeSize + _modelValue.fbeSize))
-        _modelValue.fbeShift(index * (_modelKey.fbeSize + _modelValue.fbeSize))
-        return Pair(_modelKey, _modelValue)
+        _modelKey.fbeShift(size: index * (_modelKey.fbeSize + _modelValue.fbeSize))
+        _modelValue.fbeShift(size: index * (_modelKey.fbeSize + _modelValue.fbeSize))
+        return (_modelKey, _modelValue)
     }
 
-    // Resize the map and get its first model
-    fun resize(size: Long): Pair<_KEY_MODEL_, _VALUE_MODEL_>
-    {
-        val fbeMapSize = size * (_modelKey.fbeSize + _modelValue.fbeSize)
-        val fbeMapOffset = _buffer.allocate(4 + fbeMapSize) - _buffer.offset
-        assert((fbeMapOffset > 0) && ((_buffer.offset + fbeMapOffset + 4) <= _buffer.size)) { "Model is broken!" }
+    func resize(size: Int) throws -> (_KEY_MODEL_, _VALUE_MODEL_) {
+        let fbeMapSize = size * (_modelKey.fbeSize + _modelValue.fbeSize)
+        let fbeMapOffset = try _buffer.allocate(size: 4 + fbeMapSize) - _buffer.offset
+        assert((fbeMapOffset > 0) && ((_buffer.offset + fbeMapOffset + 4) <= _buffer.size), "Model is broken!")
 
-        write(fbeOffset, fbeMapOffset.toUInt())
-        write(fbeMapOffset, size.toUInt())
-        write(fbeMapOffset + 4, 0.toByte(), fbeMapSize)
+        write(offset: fbeOffset, value: UInt32(fbeMapOffset))
+        write(offset: fbeMapOffset, value: UInt32(size))
+        write(offset: fbeMapOffset + 4, value: UInt8.zero, valueCount: fbeMapSize)
 
-        _modelKey.fbeOffset = fbeMapOffset + 4
-        _modelValue.fbeOffset = fbeMapOffset + 4 + _modelKey.fbeSize
-        return Pair(_modelKey, _modelValue)
+        return (_modelKey, _modelValue)
     }
 
-    // Check if the map is valid
-    override fun verify(): Boolean
-    {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
+    func verify() -> Bool {
+       if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return true
+        }
 
-        val fbeMapOffset = readUInt32(fbeOffset).toLong()
-        if (fbeMapOffset == 0L)
+        let fbeMapOffset = Int(readUInt32(offset: fbeOffset))
+        if (fbeMapOffset == 0) {
             return true
+        }
 
-        if ((_buffer.offset + fbeMapOffset + 4) > _buffer.size)
+        if _buffer.offset + fbeMapOffset + 4 > _buffer.size {
             return false
+        }
 
-        val fbeMapSize = readUInt32(fbeMapOffset).toLong()
-
+        let fbeMapSize = Int(readUInt32(offset: fbeMapOffset))
         _modelKey.fbeOffset = fbeMapOffset + 4
         _modelValue.fbeOffset = fbeMapOffset + 4 + _modelKey.fbeSize
         var i = fbeMapSize
-        while (i-- > 0)
-        {
-            if (!_modelKey.verify())
-                return false
-            _modelKey.fbeShift(_modelKey.fbeSize + _modelValue.fbeSize)
-            if (!_modelValue.verify())
-                return false
-            _modelValue.fbeShift(_modelKey.fbeSize + _modelValue.fbeSize)
+        while (i > 0) {
+            if !_modelKey.verify() { return false }
+            _modelKey.fbeShift(size: _modelKey.fbeSize)
+            if !_modelValue.verify() { return false }
+            _modelValue.fbeShift(size: _modelValue.fbeSize)
+            i -= 1
         }
 
         return true
     }
 
-    // Get the map as java.util.TreeMap
-    fun get(values: java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_>)
-    {
-        values.clear()
+    func get(values: inout Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) {
+        values.removeAll()
 
-        val fbeMapSize = size
-        if (fbeMapSize == 0L)
+        let fbeMapSize = size
+        if fbeMapSize == 0 {
             return
+        }
 
-        val fbeModel = getItem(0)
+        //values.ensureCapacity(fbeVectorSize.toInt())
+
+        let fbeModel = getItem(index: 0)
         var i = fbeMapSize
-        while (i-- > 0)
-        {
-            val key = fbeModel.first.get()
-            val value = fbeModel.second.get()
-            values[key] = value
-            fbeModel.first.fbeShift(fbeModel.first.fbeSize + fbeModel.second.fbeSize)
-            fbeModel.second.fbeShift(fbeModel.first.fbeSize + fbeModel.second.fbeSize)
+        while (i > 0) {
+            let key = fbeModel.0.get()
+            let value = fbeModel.1.get()
+            values.set
+            fbeModel.0.fbeShift(size: fbeModel.0.fbeSize + fbeModel.1.fbeSize)
+            fbeModel.1.fbeShift(size: fbeModel.0.fbeSize + fbeModel.1.fbeSize)
+            i -= 1
         }
     }
 
-    // Get the map as java.util.HashMap
-    fun get(values: java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_>)
-    {
-        values.clear()
-
-        val fbeMapSize = size
-        if (fbeMapSize == 0L)
+    func set(value values: Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) throws {
+        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
+        if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return
-
-        val fbeModel = getItem(0)
-        var i = fbeMapSize
-        while (i-- > 0)
-        {
-            val key = fbeModel.first.get()
-            val value = fbeModel.second.get()
-            values[key] = value
-            fbeModel.first.fbeShift(fbeModel.first.fbeSize + fbeModel.second.fbeSize)
-            fbeModel.second.fbeShift(fbeModel.first.fbeSize + fbeModel.second.fbeSize)
         }
-    }
 
-    // Set the map as java.util.TreeMap
-    fun set(values: java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_>)
-    {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return
-
-        val fbeModel = resize(values.size.toLong())
-        for ((key, value1) in values)
-        {
-            fbeModel.first.set(key)
-            fbeModel.first.fbeShift(fbeModel.first.fbeSize + fbeModel.second.fbeSize)
-            fbeModel.second.set(value1)
-            fbeModel.second.fbeShift(fbeModel.first.fbeSize + fbeModel.second.fbeSize)
-        }
-    }
-
-    // Set the map as java.util.HashMap
-    fun set(values: java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_>)
-    {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return
-
-        val fbeModel = resize(values.size.toLong())
-        for ((key, value1) in values)
-        {
-            fbeModel.first.set(key)
-            fbeModel.first.fbeShift(fbeModel.first.fbeSize + fbeModel.second.fbeSize)
-            fbeModel.second.set(value1)
-            fbeModel.second.fbeShift(fbeModel.first.fbeSize + fbeModel.second.fbeSize)
+        let fbeModel = try resize(size: values.count)
+        for (key, value) in values {
+            try fbeModel.0.set(value: key)
+            fbeModel.0.fbeShift(size: fbeModel.0.fbeSize + fbeModel.1.fbeSize)
+            try fbeModel.1.set(value: key)
+            fbeModel.1.fbeShift(size: fbeModel.0.fbeSize + fbeModel.1.fbeSize)
         }
     }
 }
 )CODE";
 
-    std::string key_type_name = IsPackageType(key_type) ? key_type : (domain + package + "." + key_type);
-    std::string value_type_name = IsPackageType(value_type) ? value_type : (domain + package + "." + value_type);
+    std::string key_type_name = key_type;
+    std::string value_type_name = value_type;
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
@@ -2668,52 +2638,61 @@ void GeneratorSwift::GenerateFBEFinalModelTimestamp(const std::string& domain, c
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
-    CppCommon::Path file = path / "FinalModelTimestamp.kt";
+    CppCommon::Path file = path / "FinalModelTimestamp.swift";
     Open(file);
 
     // Generate headers
     GenerateHeader("fbe");
+    GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
 // Fast Binary Encoding timestamp final model
-class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
-{
+public class FinalModelTimestamp: FinalModel {
+    public var _buffer = Buffer()
+    public var _offset: Int = 0
+
+    public init(buffer: Buffer, offset: Int) {
+        _buffer = buffer
+        _offset = offset
+    }
+
     // Get the allocation size
-    @Suppress("UNUSED_PARAMETER")
-    fun fbeAllocationSize(value: java.time.Instant): Long = fbeSize
+    public func fbeAllocationSize(value: Double) -> Int {
+        return fbeSize
+    }
 
-    // Final size
-    override val fbeSize: Long = 8
+    // Field size
+    public let fbeSize: Int = 8
 
-    // Check if the timestamp value is valid
-    override fun verify(): Long
-    {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return Long.MAX_VALUE
+
+    // Check if the value is valid
+    public func verify() -> Int {
+        if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            return Int.max
+        }
 
         return fbeSize
     }
 
-    // Get the timestamp value
-    fun get(size: Size): java.time.Instant
-    {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return java.time.Instant.EPOCH
+    // Get the value
+    public func get(size: inout Size) -> TimeInterval {
+        if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            return Date().timeIntervalSince1970
+        }
 
         size.value = fbeSize
-        val nanoseconds = readInt64(fbeOffset)
-        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
+        let nanoseconds = readFloat(offset: fbeOffset)
+        return TimeInterval(nanoseconds / 1000000000)
     }
 
-    // Set the timestamp value
-    fun set(value: java.time.Instant): Long
-    {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
+    // Set the value
+    public func set(value: Double) -> Int {
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
+        if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return 0
+        }
 
-        val nanoseconds = value.epochSecond * 1000000000 + value.nano
-        write(fbeOffset, nanoseconds.toULong())
+        write(offset: fbeOffset, value: value)
         return fbeSize
     }
 }
@@ -3048,189 +3027,131 @@ void GeneratorSwift::GenerateFBEFinalModelArray(const std::string& domain, const
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FinalModelArray" + name + ".kt");
+    CppCommon::Path file = path / ("FinalModelArray" + name + ".swift");
     Open(file);
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports("", "fbe");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array final model
-class FinalModelArray_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long, private val _size: Long) : _DOMAIN_fbe.FinalModel(buffer, offset)
-{
-    private val _model = _MODEL_(buffer, offset)
+class FinalModelArray_NAME_: FinalModel {
+    var _buffer: Buffer = Buffer()
+    var _offset: Int = 0
+    var _size: Int = 0
+
+    private var _model: _MODEL_
+
+    init(buffer: Buffer, offset: Int, size: Int) {
+        _buffer = buffer
+        _offset = offset
+        _size = size
+
+        _model = _MODEL_(buffer: buffer, offset: offset)
+    }
 
     // Get the allocation size
-    fun fbeAllocationSize(value values: _ARRAY_): Long
-    {
-        var size: Long = 0
-        var i: Long = 0
-        while ((i < values.size) && (i < _size))
-        {
-            size += _model.fbeAllocationSize(values[i.toInt()])
-            i++
+    func fbeAllocationSize(value values: _ARRAY_) -> Int {
+        var size: Int = 0
+        for value in values {
+            size += _model.fbeAllocationSize(value: value)
         }
-        return size
-    }
-    fun fbeAllocationSize(value values: java.util.ArrayList<_TYPE_>): Long
-    {
-        var size: Long = 0
-        var i: Long = 0
-        while ((i < values.size) && (i < _size))
-        {
-            size += _model.fbeAllocationSize(values[i.toInt()])
-            i++
-        }
+
         return size
     }
 
-    // Check if the array is valid
-    override fun verify(): Long
-    {
-        if ((_buffer.offset + fbeOffset) > _buffer.size)
-            return Long.MAX_VALUE
+    // Check if the vector is valid
+    func verify() -> Int {
+        if _buffer.offset + fbeOffset > _buffer.size {
+            return Int.max
+        }
 
-        var size: Long = 0
+        var size: Int = 0
         _model.fbeOffset = fbeOffset
         var i = _size
-        while (i-- > 0)
-        {
-            val offset = _model.verify()
-            if (offset == Long.MAX_VALUE)
-                return Long.MAX_VALUE
-            _model.fbeShift(offset)
+        while (i > 0) {
+            let offset = _model.verify()
+            if offset == Int.max { return Int.max }
+            _model.fbeShift(size: offset)
             size += offset
+            i -= 1
         }
         return size
     }
 
-    // Get the array
-    fun get(size: _DOMAIN_fbe.Size): _ARRAY_
-    {
-        val values = _INIT_
+    func get(size: inout Size) -> _ARRAY_ {
+        var values = _ARRAY_()
 
-        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset) > _buffer.size)
-        {
+        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
+        if _buffer.offset + fbeOffset > _buffer.size {
             size.value = 0
             return values
         }
 
         size.value = 0
-        val offset = _DOMAIN_fbe.Size()
+        var offset = Size()
         _model.fbeOffset = fbeOffset
-        for (i in 0 until _size)
-        {
+        for _ in 0..._size {
             offset.value = 0
-            values[i.toInt()] = _model.get(offset)
-            _model.fbeShift(offset.value)
+            let value = _model.get(size: &offset)
+            values.append(value)
+            _model.fbeShift(size: offset.value)
             size.value += offset.value
         }
         return values
     }
 
-    // Get the array
-    fun get(values: _ARRAY_): Long
-    {
-        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset) > _buffer.size)
-            return 0
+    func get(values: inout _ARRAY_) -> Int {
+        values.removeAll()
 
-        var size: Long = 0
-        val offset = _DOMAIN_fbe.Size()
-        _model.fbeOffset = fbeOffset
-        var i: Long = 0
-        while ((i < values.size) && (i < _size))
-        {
-            offset.value = 0
-            values[i.toInt()] = _model.get(offset)
-            _model.fbeShift(offset.value)
-            size += offset.value
-            i++
+        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
+        if _buffer.offset + fbeOffset > _buffer.size {
+            return 0
         }
-        return size
-    }
 
-    // Get the array as java.util.ArrayList
-    fun get(values: java.util.ArrayList<_TYPE_>): Long
-    {
-        values.clear()
-
-        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset) > _buffer.size)
-            return 0
-
-        values.ensureCapacity(_size.toInt())
-
-        var size: Long = 0
-        val offset = _DOMAIN_fbe.Size()
+        var size: Int = 0
+        var offset = Size()
         _model.fbeOffset = fbeOffset
-        var i = _size
-        while (i-- > 0)
-        {
+        for _ in 1..._size {
             offset.value = 0
-            val value = _model.get(offset)
-            values.add(value)
-            _model.fbeShift(offset.value)
+            let value = _model.get(size: &offset)
+            values.append(value)
+            _model.fbeShift(size: offset.value)
             size += offset.value
         }
         return size
     }
 
-    // Set the array
-    fun set(values: _ARRAY_): Long
-    {
-        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset) > _buffer.size)
+    func set(value values: _ARRAY_) throws -> Int {
+        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
+        if _buffer.offset + fbeOffset > _buffer.size {
             return 0
-
-        var size: Long = 0
-        _model.fbeOffset = fbeOffset
-        var i: Long = 0
-        while ((i < values.size) && (i < _size))
-        {
-            val offset = _model.set(values[i.toInt()])
-            _model.fbeShift(offset)
-            size += offset
-            i++
         }
-        return size
-    }
 
-    // Set the array as java.util.ArrayList
-    fun set(values: java.util.ArrayList<_TYPE_>): Long
-    {
-        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset) > _buffer.size)
-            return 0
-
-        var size: Long = 0
+        var size: Int = 0
         _model.fbeOffset = fbeOffset
-        var i: Long = 0
-        while ((i < values.size) && (i < _size))
-        {
-            val offset = _model.set(values[i.toInt()])
-            _model.fbeShift(offset)
+        for value in values {
+            let offset = try _model.set(value: value)
+            _model.fbeShift(size: offset)
             size += offset
-            i++
         }
         return size
     }
 }
 )CODE";
 
-    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
+    std::string type_name = type;
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type_name + ">");
     if (optional)
-        code = std::regex_replace(code, std::regex("_INIT_"), "arrayOfNulls<" + type_name + ">(_size.toInt())");
+      code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type_name + "?>");
     else
-        code = std::regex_replace(code, std::regex("_INIT_"), "Array(_size.toInt()) { " + ConvertDefault(domain, package, base) + " }");
+      code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type_name + ">");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -3377,7 +3298,7 @@ void GeneratorSwift::GenerateFBEFinalModelMap(const std::string& domain, const s
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FinalModelMap" + key_name + value_name + ".kt");
+    CppCommon::Path file = path / ("FinalModelMap" + key_name + value_name + ".swift");
     Open(file);
 
     // Generate headers
@@ -3385,179 +3306,111 @@ void GeneratorSwift::GenerateFBEFinalModelMap(const std::string& domain, const s
 
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map final model
-class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.FinalModel(buffer, offset)
-{
-    private val _modelKey = _KEY_MODEL_(buffer, offset)
-    private val _modelValue = _VALUE_MODEL_(buffer, offset)
+class FinalModelMap_KEY_NAME__VALUE_NAME_: FinalModel {
+    var _buffer: Buffer = Buffer()
+    var _offset: Int = 0
+
+    private var _modelKey: _KEY_MODEL_
+    private var _modelValue: _VALUE_MODEL_
+
+    init(buffer: Buffer, offset: Int) {
+        _buffer = buffer
+        _offset = offset
+
+        _modelKey = FinalModelOrder(buffer: buffer, offset: offset)
+        _modelValue = FinalModelOrder(buffer: buffer, offset: offset)
+    }
 
     // Get the allocation size
-    fun fbeAllocationSize(value values: java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
-    {
-        var size: Long = 4
-        for ((key, value1) in values)
-        {
-            size += _modelKey.fbeAllocationSize(key)
-            size += _modelValue.fbeAllocationSize(value1)
+    func fbeAllocationSize(value values: Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) -> Int {
+        var size: Int = 4
+        for (key, value) in values {
+            size += _modelKey.fbeAllocationSize(value: key)
+            size += _modelValue.fbeAllocationSize(value: value)
         }
-        return size
-    }
-    fun fbeAllocationSize(value values: java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
-    {
-        var size: Long = 4
-        for ((key, value1) in values)
-        {
-            size += _modelKey.fbeAllocationSize(key)
-            size += _modelValue.fbeAllocationSize(value1)
-        }
+
         return size
     }
 
-    // Check if the map is valid
-    override fun verify(): Long
-    {
-        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
-            return Long.MAX_VALUE
+    // Check if the vector is valid
+    func verify() -> Int {
+        if _buffer.offset + fbeOffset + 4 > _buffer.size {
+            return Int.max
+        }
 
-        val fbeMapSize = readUInt32(fbeOffset).toLong()
+        let fbeMapSize = Int(readUInt32(offset: fbeOffset))
 
-        var size: Long = 4
+        var size: Int = 4
         _modelKey.fbeOffset = fbeOffset + 4
         _modelValue.fbeOffset = fbeOffset + 4
         var i = fbeMapSize
-        while (i-- > 0)
-        {
-            val offsetKey = _modelKey.verify()
-            if (offsetKey == Long.MAX_VALUE)
-                return Long.MAX_VALUE
-            _modelKey.fbeShift(offsetKey)
-            _modelValue.fbeShift(offsetKey)
+        while (i > 0) {
+            let offsetKey = _modelKey.verify()
+            if offsetKey == Int.max { return Int.max }
+            _modelKey.fbeShift(size: offsetKey)
+            _modelValue.fbeShift(size: offsetKey)
             size += offsetKey
-            val offsetValue = _modelValue.verify()
-            if (offsetValue == Long.MAX_VALUE)
-                return Long.MAX_VALUE
-            _modelKey.fbeShift(offsetValue)
-            _modelValue.fbeShift(offsetValue)
+            let offsetValue = _modelValue.verify()
+            if offsetValue == Int.max { return Int.max }
+            _modelKey.fbeShift(size: offsetValue)
+            _modelValue.fbeShift(size: offsetValue)
             size += offsetValue
+            i -= 1
         }
         return size
     }
 
-    // Get the map as java.util.TreeMap
-    fun get(values: java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
-    {
-        values.clear()
+    func get(values: inout Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) -> Int {
+        values.removeAll()
 
-        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
+        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
+        if _buffer.offset + fbeOffset + 4 > _buffer.size {
             return 0
+        }
 
-        val fbeMapSize = readUInt32(fbeOffset).toLong()
-        if (fbeMapSize == 0L)
+        let fbeMapSize = Int(readUInt32(offset: fbeOffset))
+        if fbeMapSize == 0 {
             return 4
+        }
 
-        var size: Long = 4
-        val offset = _DOMAIN_fbe.Size()
+        var size: Int = 4
+        var offset = Size()
         _modelKey.fbeOffset = fbeOffset + 4
         _modelValue.fbeOffset = fbeOffset + 4
-        var i = fbeMapSize
-        while (i-- > 0)
-        {
+        for _ in 1...fbeMapSize {
             offset.value = 0
-            val key = _modelKey.get(offset)
-            _modelKey.fbeShift(offset.value)
-            _modelValue.fbeShift(offset.value)
+            let key = _modelKey.get(size: &offset)
+            _modelKey.fbeShift(size: offset.value)
+            _modelValue.fbeShift(size: offset.value)
             size += offset.value
             offset.value = 0
-            val value = _modelValue.get(offset)
-            _modelKey.fbeShift(offset.value)
-            _modelValue.fbeShift(offset.value)
+            let value = _modelValue.get(size: &offset)
+            _modelKey.fbeShift(size: offset.value)
+            _modelValue.fbeShift(size: offset.value)
             size += offset.value
             values[key] = value
         }
         return size
     }
 
-    // Get the map as java.util.HashMap
-    fun get(values: java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
-    {
-        values.clear()
-
-        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
+    func set(value values: Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) throws -> Int {
+        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
+        if _buffer.offset + fbeOffset + 4 > _buffer.size {
             return 0
-
-        val fbeMapSize = readUInt32(fbeOffset).toLong()
-        if (fbeMapSize == 0L)
-            return 4
-
-        var size: Long = 4
-        val offset = _DOMAIN_fbe.Size()
-        _modelKey.fbeOffset = fbeOffset + 4
-        _modelValue.fbeOffset = fbeOffset + 4
-        var i = fbeMapSize
-        while (i-- > 0)
-        {
-            offset.value = 0
-            val key = _modelKey.get(offset)
-            _modelKey.fbeShift(offset.value)
-            _modelValue.fbeShift(offset.value)
-            size += offset.value
-            offset.value = 0
-            val value = _modelValue.get(offset)
-            _modelKey.fbeShift(offset.value)
-            _modelValue.fbeShift(offset.value)
-            size += offset.value
-
-            values[key] = value
         }
-        return size
-    }
 
-    // Set the map as java.util.TreeMap
-    fun set(values: java.util.TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
-    {
-        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
-            return 0
+        write(offset: fbeOffset, value: UInt32(values.count))
 
-        write(fbeOffset, values.size.toUInt())
-
-        var size: Long = 4
+        var size: Int = 4
         _modelKey.fbeOffset = fbeOffset + 4
         _modelValue.fbeOffset = fbeOffset + 4
-        for ((key, value1) in values)
-        {
-            val offsetKey = _modelKey.set(key)
-            _modelKey.fbeShift(offsetKey)
-            _modelValue.fbeShift(offsetKey)
-            val offsetValue = _modelValue.set(value1)
-            _modelKey.fbeShift(offsetValue)
-            _modelValue.fbeShift(offsetValue)
-            size += offsetKey + offsetValue
-        }
-        return size
-    }
-
-    // Set the map as java.util.HashMap
-    fun set(values: java.util.HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
-    {
-        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
-        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
-            return 0
-
-        write(fbeOffset, values.size.toUInt())
-
-        var size: Long = 4
-        _modelKey.fbeOffset = fbeOffset + 4
-        _modelValue.fbeOffset = fbeOffset + 4
-        for ((key, value1) in values)
-        {
-            val offsetKey = _modelKey.set(key)
-            _modelKey.fbeShift(offsetKey)
-            _modelValue.fbeShift(offsetKey)
-            val offsetValue = _modelValue.set(value1)
-            _modelKey.fbeShift(offsetValue)
-            _modelValue.fbeShift(offsetValue)
+        for (key, value) in values {
+            let offsetKey = try _modelKey.set(value: value)
+            _modelKey.fbeShift(size: offsetKey)
+            _modelValue.fbeShift(size: offsetKey)
+            let offsetValue = try _model.set(value: value)
+            _modelKey.fbeShift(size: offsetValue)
+            _modelValue.fbeShift(size: offsetValue)
             size += offsetKey + offsetValue
         }
         return size
@@ -3565,8 +3418,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Lo
 }
 )CODE";
 
-    std::string key_type_name = IsPackageType(key_type) ? key_type : (domain + package + "." + key_type);
-    std::string value_type_name = IsPackageType(value_type) ? value_type : (domain + package + "." + value_type);
+    std::string key_type_name = key_type;
+    std::string value_type_name = value_type;
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
@@ -6677,7 +6530,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
           WriteLineIndent("parent = " + ConvertBaseFieldName(domain, *s->base, true) + "(buffer: buffer, offset: 0)");
     if (s->body)
       for (const auto& field : s->body->fields)
-          WriteLineIndent(*field->name + " = " + ConvertTypeFieldDeclaration(domain, *field, true) + "(buffer: buffer, offset: 0)");
+          WriteLineIndent(*field->name + " = " + ConvertTypeFieldInitialization(domain, *field, "0", true));
     Indent(-1);
     WriteLineIndent("}");
 
@@ -8624,7 +8477,7 @@ std::string GeneratorSwift::ConvertTypeFieldInitialization(const std::string& do
     std::string modelType = final ? "Final" : "Field";
 
     if (field.array)
-        return modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer: buffer, offset: " + offset + ", " + std::to_string(field.N) + ")";
+        return modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer: buffer, offset: " + offset + ", size: " + std::to_string(field.N) + ")";
     else if (field.vector || field.list || field.set)
         return modelType + "ModelVector" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer: buffer, offset: " + offset + ")";
     else if (field.map || field.hash)
@@ -8837,9 +8690,9 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
 
     if (field.array)
         if (field.optional)
-            return "arrayOfNulls<" + ConvertTypeName(domain, package, *field.type, field.optional) + ">(" + std::to_string(field.N) + ")";
+            return "Array()";
         else
-            return "Array(" + std::to_string(field.N) + ") { " + ConvertDefault(domain, package, *field.type) + " }";
+            return "Array()";
     else if (field.vector || field.list || field.set || field.map || field.hash)
         return ConvertTypeName(domain, package, field, true) + "()";
     else if (field.optional)
