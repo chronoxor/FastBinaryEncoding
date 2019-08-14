@@ -20,15 +20,25 @@ class DecimalTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
+    func testDecimal() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        //XCTAssertEqual(verifyDecimal(low: 0x00000000, mid: 0x00000000, high: 0x00000000, negative: false, scale: 0x00000000), Decimal.zero)
-//        XCTAssertEqual(verifyDecimal(low: 0x00000001, mid: 0x00000000, high: 0x00000000, negative: false, scale: 0x00000000), Decimal(integerLiteral: 1))
-//        XCTAssertEqual(verifyDecimal(low: 0x107A4000, mid: 0x00005AF3, high: 0x00000000, negative: false, scale: 0x00000000), Decimal(integerLiteral: 100000000000000))
-        XCTAssertEqual(verifyDecimal(low: 0x10000000, mid: 0x3E250261, high: 0x204FCE5E, negative: false, scale: UInt8(0x000E0000 >> 16)), Decimal.init(string: "100000000000000.00000000000000"))
-        XCTAssertEqual(verifyDecimal(low: 0x10000000, mid: 0x3E250261, high: 0x204FCE5E, negative: false, scale: 0x00000000), Decimal(string: "10000000000000000000000000000"))
+        XCTAssertEqual(verifyDecimal(low: 0x00000000, mid: 0x00000000, high: 0x00000000, negative: false, scale: 0x00000000, espected: Decimal.zero), Decimal.zero)
+        XCTAssertEqual(verifyDecimal(low: 0x00000001, mid: 0x00000000, high: 0x00000000, negative: false, scale: 0x00000000, espected: Decimal(integerLiteral: 1)), Decimal(integerLiteral: 1))
+        XCTAssertEqual(verifyDecimal(low: 0x107A4000, mid: 0x00005AF3, high: 0x00000000, negative: false, scale: 0x00000000, espected: Decimal(integerLiteral: 100000000000000)), Decimal(integerLiteral: 100000000000000))
+        XCTAssertEqual(verifyDecimal(low: 0x10000000, mid: 0x3E250261, high: 0x204FCE5E, negative: false, scale: UInt8(0x000E0000 >> 16), espected: Decimal(string: "100000000000000.00000000000000")!), Decimal(string: "100000000000000.00000000000000"))
+        XCTAssertEqual(verifyDecimal(low: 0x10000000, mid: 0x3E250261, high: 0x204FCE5E, negative: false, scale: UInt8(0x00000000), espected: Decimal(string: "10000000000000000000000000000")!), Decimal(string: "10000000000000000000000000000"))
+        XCTAssertEqual(verifyDecimal(low: 0x10000000, mid: 0x3E250261, high: 0x204FCE5E, negative: false, scale: UInt8(0x001C0000 >> 16), espected: Decimal(string: "1.0000000000000000000000000000")!), Decimal(string: "1.0000000000000000000000000000"))
+        XCTAssertEqual(verifyDecimal(low: 0x075BCD15, mid: 0x00000000, high: 0x00000000, negative: false, scale: UInt8(0x00000000), espected: Decimal(string: "123456789")!), Decimal(string: "123456789")!)
+        XCTAssertEqual(verifyDecimal(low: 0x075BCD15, mid: 0x00000000, high: 0x00000000, negative: false, scale: UInt8(0x00090000 >> 16), espected: Decimal(string: "0.123456789")!), Decimal(string: "0.123456789")!)
+        XCTAssertEqual(verifyDecimal(low: 0x075BCD15, mid: 0x00000000, high: 0x00000000, negative: false, scale: UInt8(0x00120000 >> 16), espected: Decimal(string: "0.000000000123456789")!), Decimal(string: "0.000000000123456789")!)
+        XCTAssertEqual(verifyDecimal(low: 0x075BCD15, mid: 0x00000000, high: 0x00000000, negative: false, scale: UInt8(0x001B0000 >> 16), espected: Decimal(string: "0.000000000000000000123456789")!), Decimal(string: "0.000000000000000000123456789")!)
+        XCTAssertEqual(verifyDecimal(low: -0x1, mid: 0x00000000, high: 0x00000000, negative: false, scale: UInt8(0x00000000), espected: Decimal(string: "4294967295")!), Decimal(string: "4294967295")!)
+        XCTAssertEqual(verifyDecimal(low: -0x1, mid: -0x1, high: 0x00000000, negative: false, scale: UInt8(0x00000000), espected: Decimal(string: "18446744073709551615")!), Decimal(string: "18446744073709551615")!)
+        XCTAssertEqual(verifyDecimal(low: -0x1, mid: -0x1, high: -0x1, negative: false, scale: UInt8(0x00000000), espected: Decimal(string: "79228162514264337593543950335")!), Decimal(string: "79228162514264337593543950335")!)
+        XCTAssertEqual(verifyDecimal(low: -0x1, mid: -0x1, high: -0x1, negative: true, scale: UInt8(0x00000000), espected: Decimal(string: "-79228162514264337593543950335")!), Decimal(string: "-79228162514264337593543950335")!)
+        XCTAssertEqual(verifyDecimal(low: -0x1, mid: -0x1, high: -0x1, negative: true, scale: UInt8(0x001C0000 >> 16), espected: Decimal(string: "-7.9228162514264337593543950335")!), Decimal(string: "-7.9228162514264337593543950335")!)
     }
 
     func testPerformanceExample() {
@@ -38,39 +48,46 @@ class DecimalTest: XCTestCase {
         }
     }
     
-    func verifyDecimal(low: Int32, mid: Int32, high: Int32, negative: Bool, scale: UInt8) -> Decimal {
-//        let flags = negative ? ((Int32(scale) >> 16) | Int32(80000000)) : (Int32(scale) >> 16)
-//
-//        var buffer = Data(count: 16)
-//
-//        Buffer.write(buffer: &buffer, offset: 0, value: low)
-//        Buffer.write(buffer: &buffer, offset: 4, value: mid)
-//        Buffer.write(buffer: &buffer, offset: 8, value: high)
-//        Buffer.write(buffer: &buffer, offset: 12, value: flags)
-//
-//        let model = FieldModelDecimal(buffer: Buffer(buffer: buffer), offset: 0)
-//        let value1 = model.get()
-//        model.set(value: value1)
-//        if ((Buffer.readInt32(buffer: buffer, offset: 0) != low) ||
-//            (Buffer.readInt32(buffer: buffer, offset: 4) != mid) ||
-//            (Buffer.readInt32(buffer: buffer, offset: 8) != high) ||
-//            (Buffer.readInt32(buffer: buffer, offset: 12) != flags)) {
-            return Decimal.leastNonzeroMagnitude
-//        }
-//
-//        let finalModel = FinalModelDecimal(Buffer(buffer), 0)
-//        let size = Size()
-//        let value2 = finalModel.get(size)
-//        finalModel.set(value2)
-//        if ((Buffer.readInt32(buffer, 0) != low) ||
-//            (Buffer.readInt32(buffer, 4) != mid) ||
-//            (Buffer.readInt32(buffer, 8) != high) ||
-//            (Buffer.readInt32(buffer, 12) != flags) ||
-//            (size.value != 16) || (value1.compareTo(value2) != 0)) {
-//            return Decimal.leastNonzeroMagnitude
-//        }
+    func verifyDecimal(low: Int32, mid: Int32, high: Int32, negative: Bool, scale: UInt8, espected: Decimal) -> Decimal {
+        let flags = negative ? ((UInt32(scale) << 16) | 0x80000000) : (UInt32(scale) << 16)
 
-//        return value1
+        var buffer = Data(count: 16)
+        
+        Buffer.write(buffer: &buffer, offset: 0, value: low)
+        Buffer.write(buffer: &buffer, offset: 4, value: mid)
+        Buffer.write(buffer: &buffer, offset: 8, value: high)
+        Buffer.write(buffer: &buffer, offset: 12, value: flags)
+
+        let model = FieldModelDecimal(buffer: Buffer(buffer: buffer), offset: 0)
+        var value1 = model.get()
+
+        model.set(value: espected)
+        model.set(value: model.get())
+
+        model.set(value: espected)
+        if (Buffer.readInt32(buffer: buffer, offset: 0) != low) ||
+            (Buffer.readInt32(buffer: buffer, offset: 4) != mid) ||
+            (Buffer.readInt32(buffer: buffer, offset: 8) != high) ||
+            (Buffer.readUInt32(buffer: buffer, offset: 12) != flags) {
+            return Decimal.nan
+        }
+        
+        value1 = model.get()
+
+
+        let finalModel = FinalModelDecimal(buffer: Buffer(buffer: buffer), offset: 0)
+        var size = Size()
+        let value2 = finalModel.get(size: &size)
+        finalModel.set(value: value2)
+        if ((Buffer.readInt32(buffer: buffer, offset: 0) != low) ||
+            (Buffer.readInt32(buffer: buffer, offset: 4) != mid) ||
+            (Buffer.readInt32(buffer: buffer, offset: 8) != high) ||
+            (Buffer.readUInt32(buffer: buffer, offset: 12) != flags) ||
+            (size.value != 16) || value1 != value2) {
+            return Decimal.leastNonzeroMagnitude
+        }
+
+        return value1
     }
 
 }
