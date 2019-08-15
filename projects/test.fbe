@@ -127,7 +127,7 @@ struct StructOptional : StructSimple
 {
     bool? f100;
     bool? f101 = true;
-    bool? f102 = null;            
+    bool? f102 = null;
     byte? f103;
     byte? f104 = max;
     byte? f105 = null;

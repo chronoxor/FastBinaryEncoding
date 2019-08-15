@@ -17,7 +17,7 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
 
     GenerateFBEPackage(domain, "fbe");
 
-    //GenerateFBEUUIDGenerator(domain, "fbe");
+    GenerateFBEUUIDGenerator(domain, "fbe");
     GenerateFBEBuffer(domain, "fbe");
     GenerateFBEModel(domain, "fbe");
     GenerateFBEFieldModel(domain, "fbe");
@@ -35,7 +35,7 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel(domain, "fbe", "UInt64", "UInt64", "", "8", "0");
     GenerateFBEFieldModel(domain, "fbe", "Float", "Float", "", "4", "0.0");
     GenerateFBEFieldModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
-    GenerateFBEFieldModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
+    GenerateFBEFieldModel(domain, "fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
     GenerateFBEFieldModelDecimal(domain, "fbe");
     GenerateFBEFieldModelDate(domain, "fbe");
     GenerateFBEFieldModelTimestamp(domain, "fbe");
@@ -59,7 +59,7 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel(domain, "fbe", "UInt64", "UInt64", "", "8", "0");
         GenerateFBEFinalModel(domain, "fbe", "Float", "Float", "", "4", "0.0");
         GenerateFBEFinalModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
-        //GenerateFBEFinalModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
+        GenerateFBEFinalModel(domain, "fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
         GenerateFBEFinalModelDecimal(domain, "fbe");
         GenerateFBEFinalModelDate(domain, "fbe");
         GenerateFBEFinalModelTimestamp(domain, "fbe");
@@ -173,82 +173,38 @@ void GeneratorSwift::GenerateFBEUUIDGenerator(const std::string& domain, const s
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
-    CppCommon::Path file = path / "UUIDGenerator.kt";
+    CppCommon::Path file = path / "UUIDGenerator.swift";
     Open(file);
 
     // Generate headers
     GenerateHeader("fbe");
+    GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
 // Fast Binary Encoding UUID generator
-object UUIDGenerator
-{
-    // Gregorian epoch
-    private const val GregorianEpoch = 0xFFFFF4E2F964AC00uL
-
-    // Kotlin constants workaround
-    private val Sign = java.lang.Long.parseUnsignedLong("8000000000000000", 16)
-    private val Low = java.lang.Long.parseUnsignedLong("00000000FFFFFFFF", 16)
-    private val Mid = java.lang.Long.parseUnsignedLong("0000FFFF00000000", 16)
-    private val High = java.lang.Long.parseUnsignedLong("FFFF000000000000", 16)
-
-    // Lock and random generator
-    private val lock = Object()
-    private val generator = java.util.Random()
-
-    // Node & clock sequence bytes
-    private val node = makeNode()
-    private var nodeAndClockSequence = makeNodeAndClockSequence()
-
-    // Last UUID generated timestamp
-    private var last = GregorianEpoch
-
-    private fun makeNode(): ULong = generator.nextLong().toULong() or 0x0000010000000000uL
-
-    private fun makeNodeAndClockSequence(): ULong
-    {
-        val clock = generator.nextLong().toULong()
-
-        var lsb: ULong = 0u
-        // Variant (2 bits)
-        lsb = lsb or 0x8000000000000000uL
-        // Clock sequence (14 bits)
-        lsb = lsb or ((clock and 0x0000000000003FFFuL) shl 48)
-        // 6 bytes
-        lsb = lsb or node
-        return lsb
-    }
+public struct UUIDGenerator {
 
     // Generate nil UUID0 (all bits set to zero)
-    fun nil(): java.util.UUID = java.util.UUID(0, 0)
+    public static func `nil`() -> UUID {
+        return UUID(uuidString: "00000000-0000-0000-0000-000000000000")!
+    }
 
     // Generate sequential UUID1 (time based version)
-    fun sequential(): java.util.UUID
-    {
-        val now = System.currentTimeMillis().toULong()
-
-        // Generate new clock sequence bytes to get rid of UUID duplicates
-        synchronized(lock)
-        {
-            if (now <= last)
-                nodeAndClockSequence = makeNodeAndClockSequence()
-            last = now
+    public static func sequential() -> UUID {
+        var uuid: uuid_t = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+        withUnsafeMutablePointer(to: &uuid) {
+            $0.withMemoryRebound(to: UInt8.self, capacity: 16) {
+                uuid_generate_time($0)
+            }
         }
 
-        val nanosSince = (now - GregorianEpoch) * 10000u
-
-        var msb = 0uL
-        msb = msb or (0x00000000FFFFFFFFuL and nanosSince).shl(32)
-        msb = msb or (0x0000FFFF00000000uL and nanosSince).shr(16)
-        msb = msb or (0xFFFF000000000000uL and nanosSince).shr(48)
-        // Sets the version to 1
-        msb = msb or 0x0000000000001000uL
-
-        return java.util.UUID(msb.toLong(), nodeAndClockSequence.toLong())
+        return UUID(uuid: uuid)
     }
 
     // Generate random UUID4 (randomly or pseudo-randomly generated version)
-    fun random(): java.util.UUID = java.util.UUID.randomUUID()
+    public static func random() -> UUID {
+        return UUID()
+    }
 }
 )CODE";
 
@@ -846,6 +802,7 @@ void GeneratorSwift::GenerateFBEFieldModel(const std::string& domain, const std:
 
     // Generate headers
     GenerateHeader("fbe");
+    GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _TYPE_ field model
@@ -2355,7 +2312,7 @@ void GeneratorSwift::GenerateFBEFinalModel(const std::string& domain, const std:
 
     // Generate headers
     GenerateHeader("fbe");
-    GenerateImports("", "fbe");
+    GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _TYPE_ final model
@@ -5737,12 +5694,11 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                 Indent(1);
                 WriteLineIndent("var first = true");
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\").append(" + *field->name + ".size" + ").append(\"]<{\")");
-                WriteLineIndent("for (item in " + *field->name + ".entries)");
-                WriteLineIndent("{");
+                WriteLineIndent("for (key, value) in " + *field->name + " {");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamValue(*field->key, "item.key", false, true, false));
+                WriteLineIndent(ConvertOutputStreamValue(*field->key, "key", false, true, false));
                 WriteLineIndent("sb.append(\"->\")");
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.value", field->optional, false, true));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "value", field->optional, false, true));
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5757,12 +5713,11 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                 Indent(1);
                 WriteLineIndent("var first = true");
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\").append(" + *field->name + ".size" + ").append(\"][{\")");
-                WriteLineIndent("for (item in " + *field->name + ".entries)");
-                WriteLineIndent("{");
+                WriteLineIndent("for (key, value) in " + *field->name + " {");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamValue(*field->key, "item.key", false, true, false));
+                WriteLineIndent(ConvertOutputStreamValue(*field->key, "key", false, true, false));
                 WriteLineIndent("sb.append(\"->\")");
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.value", field->optional, false, true));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "value", field->optional, false, true));
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -8267,7 +8222,7 @@ std::string GeneratorSwift::ConvertTypeName(const std::string& domain, const std
     else if (type == "timestamp")
         return ((Version() < 8) ? "java.util.Date" : "java.time.Instant") + opt;
     else if (type == "uuid")
-        return "java.util.UUID" + opt;
+        return "UUID" + opt;
 
     std::string ns = "";
     std::string t = type;
@@ -8293,11 +8248,11 @@ std::string GeneratorSwift::ConvertTypeName(const std::string& domain, const std
     else if (field.list)
         return "Array" + (typeless ? "" : ("<" + ConvertTypeName(domain, package, *field.type, field.optional) + ">"));
     else if (field.set)
-        return "java.util.HashSet" + (typeless ? "" : ("<" + ConvertTypeName(domain, package, *field.key, field.optional) + ">"));
+        return "Array" + (typeless ? "" : ("<" + ConvertTypeName(domain, package, *field.key, field.optional) + ">"));
     else if (field.map)
-        return "java.util.TreeMap" + (typeless ? "" : ("<" + ConvertTypeName(domain, package, *field.key, false) + ", " + ConvertTypeName(domain, package, *field.type, field.optional) +">"));
+        return "Dictionary" + (typeless ? "" : ("<" + ConvertTypeName(domain, package, *field.key, false) + ", " + ConvertTypeName(domain, package, *field.type, field.optional) +">"));
     else if (field.hash)
-        return "java.util.HashMap" + (typeless ? "" : ("<" + ConvertTypeName(domain, package, *field.key, false) + ", " + ConvertTypeName(domain, package, *field.type, field.optional) +">"));
+        return "Dictionary" + (typeless ? "" : ("<" + ConvertTypeName(domain, package, *field.key, false) + ", " + ConvertTypeName(domain, package, *field.type, field.optional) +">"));
 
     return ConvertTypeName(domain, package, *field.type, field.optional);
 }
@@ -8393,33 +8348,33 @@ std::string GeneratorSwift::ConvertTypeFieldType(const std::string& domain, cons
     else if (type == "char")
         return "Character" + opt;
     else if (type == "wchar")
-        return "Char" + opt;
+        return "Character" + opt;
     else if (type == "int8")
-        return "Byte" + opt;
+        return "Int8" + opt;
     else if (type == "uint8")
-        return "UByte" + opt;
+        return "UInt8" + opt;
     else if (type == "int16")
-        return "Short" + opt;
+        return "Int16" + opt;
     else if (type == "uint16")
-        return "UShort" + opt;
+        return "UInt16" + opt;
     else if (type == "int32")
-        return "Int" + opt;
+        return "Int32" + opt;
     else if (type == "uint32")
-        return "UInt" + opt;
+        return "UInt32" + opt;
     else if (type == "int64")
-        return "Long" + opt;
+        return "Int64" + opt;
     else if (type == "uint64")
-        return "ULong" + opt;
+        return "UInt64" + opt;
     else if (type == "float")
         return "Float" + opt;
     else if (type == "double")
         return "Double" + opt;
     else if (type == "decimal")
-        return "java.math.BigDecimal" + opt;
+        return "Decimal" + opt;
     else if (type == "string")
         return "String" + opt;
     else if (type == "timestamp")
-        return ((Version() < 8) ? "java.util.Date" : "java.time.Instant") + opt;
+        return ((Version() < 8) ? "java.util.Date" : "TimeInterval") + opt;
     else if (type == "uuid")
         return "java.util.UUID" + opt;
 
@@ -8558,15 +8513,15 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
         return "";
     }
     else if (value == "epoch")
-        return ((Version() < 8) ? "java.util.Date(0)" : "java.time.Instant.EPOCH");
+        return ((Version() < 8) ? "java.util.Date(0)" : "0");
     else if (value == "utc")
-        return ((Version() < 8) ? "java.util.Date(System.currentTimeMillis())" : "java.time.Instant.now()");
+        return ((Version() < 8) ? "java.util.Date(System.currentTimeMillis())" : "Date().timeIntervalSince1970");
     else if (value == "uuid0")
-        return domain + "fbe.UUIDGenerator.nil()";
+        return "UUIDGenerator.nil()";
     else if (value == "uuid1")
-        return domain + "fbe.UUIDGenerator.sequential()";
+        return  "UUIDGenerator.sequential()";
     else if (value == "uuid4")
-        return domain + "fbe.UUIDGenerator.random()";
+        return "UUIDGenerator.random()";
 
     std::string result = value;
 
@@ -8594,6 +8549,7 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
         }
     }
 
+    result = std::regex_replace(result, std::regex("'"), "\"");
     return ConvertConstantPrefix(type) + result + ConvertConstantSuffix(type);
 }
 
@@ -8659,11 +8615,11 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
     else if (type == "double")
         return "0.0";
     else if (type == "decimal")
-        return "java.math.BigDecimal.valueOf(0L)";
+        return "Decimal.zero";
     else if (type == "string")
         return "\"\"";
     else if (type == "timestamp")
-        return ((Version() < 8) ? "java.util.Date(0)" : "java.time.Instant.EPOCH");
+        return ((Version() < 8) ? "java.util.Date(0)" : "0");
     else if (type == "uuid")
         return domain + "fbe.UUIDGenerator.nil()";
 
@@ -8679,6 +8635,8 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
     }
     else if (!package.empty())
         ns = domain + package + ".";
+
+
 
     return t + "()";
 }
@@ -8726,7 +8684,7 @@ std::string GeneratorSwift::ConvertOutputStreamValue(const std::string& type, co
     std::string comma = separate ? ".append(first ? \"\" : \",\"); sb" : "";
 
     if (optional)
-        return "" + name + " != nil ? sb" + comma + ConvertOutputStreamType(type, name, nullable) + " : sb" + comma + ".append(\"null\")";
+        return "" + name + " != nil ? { sb" + comma + ConvertOutputStreamType(type, name, nullable) + " } : { sb" + comma + ".append(\"null\") }";
     else
         return "sb" + comma + ConvertOutputStreamType(type, name, false);
 }

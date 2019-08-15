@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4254FBF92304793400BB1335 /* test in Frameworks */ = {isa = PBXBuildFile; productRef = 4254FBF82304793400BB1335 /* test */; };
+		4289100C2304763000AE7BF9 /* fbe in Frameworks */ = {isa = PBXBuildFile; productRef = 4289100B2304763000AE7BF9 /* fbe */; };
+		4289100E2304764000AE7BF9 /* proto in Frameworks */ = {isa = PBXBuildFile; productRef = 4289100D2304764000AE7BF9 /* proto */; };
 		42D0AB1F22FC5F6700A77702 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0AB1E22FC5F6700A77702 /* Serialization.swift */; };
 		5521615522F812E8009773A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5521615422F812E8009773A3 /* AppDelegate.swift */; };
 		5521615722F812E8009773A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5521615622F812E8009773A3 /* ViewController.swift */; };
@@ -21,8 +24,6 @@
 		556FAADF2301AAEC00A8B936 /* BenchmarkSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556FAADE2301AAEC00A8B936 /* BenchmarkSerialization.swift */; };
 		5577A36D2301C4E900AC5973 /* proto in Frameworks */ = {isa = PBXBuildFile; productRef = 5577A36C2301C4E900AC5973 /* proto */; };
 		5577A36F2301C4EB00AC5973 /* fbe in Frameworks */ = {isa = PBXBuildFile; productRef = 5577A36E2301C4EB00AC5973 /* fbe */; };
-		5577A3712301C4EF00AC5973 /* fbe in Frameworks */ = {isa = PBXBuildFile; productRef = 5577A3702301C4EF00AC5973 /* fbe */; };
-		5577A3732301C4F200AC5973 /* proto in Frameworks */ = {isa = PBXBuildFile; productRef = 5577A3722301C4F200AC5973 /* proto */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4254FBF7230478DE00BB1335 /* test */ = {isa = PBXFileReference; lastKnownFileType = folder; name = test; path = ../../../bin/com/chronoxor/test; sourceTree = "<group>"; };
+		42890FAE2304753E00AE7BF9 /* fbe */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fbe; path = ../../../bin/com/chronoxor/fbe; sourceTree = "<group>"; };
+		42890FAF2304753E00AE7BF9 /* proto */ = {isa = PBXFileReference; lastKnownFileType = folder; name = proto; path = ../../../bin/com/chronoxor/proto; sourceTree = "<group>"; };
 		42D0AB1E22FC5F6700A77702 /* Serialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
 		5521615122F812E8009773A3 /* FastBinaryEncoding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FastBinaryEncoding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5521615422F812E8009773A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -52,8 +56,6 @@
 		5530B19123018A9000FCCB6E /* ExTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExTest.swift; sourceTree = "<group>"; };
 		5559810C2301C30D008443F9 /* DecimalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalTest.swift; sourceTree = "<group>"; };
 		556FAADE2301AAEC00A8B936 /* BenchmarkSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkSerialization.swift; sourceTree = "<group>"; };
-		5577A36A2301C4DB00AC5973 /* fbe */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fbe; path = ../../../bin/com/chronoxor/fbe; sourceTree = "<group>"; };
-		5577A36B2301C4E100AC5973 /* proto */ = {isa = PBXFileReference; lastKnownFileType = folder; name = proto; path = ../../../bin/com/chronoxor/proto; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +63,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5577A3712301C4EF00AC5973 /* fbe in Frameworks */,
-				5577A3732301C4F200AC5973 /* proto in Frameworks */,
+				4289100C2304763000AE7BF9 /* fbe in Frameworks */,
+				4289100E2304764000AE7BF9 /* proto in Frameworks */,
+				4254FBF92304793400BB1335 /* test in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,8 +84,9 @@
 		5521614822F812E8009773A3 = {
 			isa = PBXGroup;
 			children = (
-				5577A36B2301C4E100AC5973 /* proto */,
-				5577A36A2301C4DB00AC5973 /* fbe */,
+				4254FBF7230478DE00BB1335 /* test */,
+				42890FAE2304753E00AE7BF9 /* fbe */,
+				42890FAF2304753E00AE7BF9 /* proto */,
 				5521615322F812E8009773A3 /* FastBinaryEncoding */,
 				5521616822F812E9009773A3 /* FastBinaryEncodingTests */,
 				5521615222F812E8009773A3 /* Products */,
@@ -151,8 +155,9 @@
 			);
 			name = FastBinaryEncoding;
 			packageProductDependencies = (
-				5577A3702301C4EF00AC5973 /* fbe */,
-				5577A3722301C4F200AC5973 /* proto */,
+				4289100B2304763000AE7BF9 /* fbe */,
+				4289100D2304764000AE7BF9 /* proto */,
+				4254FBF82304793400BB1335 /* test */,
 			);
 			productName = FastBinaryEncoding;
 			productReference = 5521615122F812E8009773A3 /* FastBinaryEncoding.app */;
@@ -527,6 +532,18 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4254FBF82304793400BB1335 /* test */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = test;
+		};
+		4289100B2304763000AE7BF9 /* fbe */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = fbe;
+		};
+		4289100D2304764000AE7BF9 /* proto */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = proto;
+		};
 		5577A36C2301C4E900AC5973 /* proto */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = proto;
@@ -534,14 +551,6 @@
 		5577A36E2301C4EB00AC5973 /* fbe */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = fbe;
-		};
-		5577A3702301C4EF00AC5973 /* fbe */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = fbe;
-		};
-		5577A3722301C4F200AC5973 /* proto */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = proto;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
