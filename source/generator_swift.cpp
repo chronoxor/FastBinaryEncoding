@@ -24,7 +24,7 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel(domain, "fbe", "Boolean", "Bool", "", "1", "false");
     GenerateFBEFieldModel(domain, "fbe", "Byte", "UInt8", "", "1", "0");
     GenerateFBEFieldModel(domain, "fbe", "Char", "Character", ".utf8.map{ UInt8($$0) }[0]", "1", "Character(\"0\")");
-    GenerateFBEFieldModel(domain, "fbe", "WChar", "Character", ".utf8.map{ UInt32($$0) }[0]", "4", "Character(\"0\")");
+    GenerateFBEFieldModel(domain, "fbe", "WChar", "Character", ".utf16.map{ UInt32($$0) }[0]", "4", "Character(\"0\")");
     GenerateFBEFieldModel(domain, "fbe", "Int8", "Int8", "", "1", "0");
     GenerateFBEFieldModel(domain, "fbe", "UInt8", "UInt8", "", "1", "0");
     GenerateFBEFieldModel(domain, "fbe", "Int16", "Int16", "", "2", "0");
@@ -48,7 +48,7 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel(domain, "fbe", "Boolean", "Bool", "", "1", "false");
         GenerateFBEFinalModel(domain, "fbe", "Byte", "UInt8", "", "1", "0");
         GenerateFBEFinalModel(domain, "fbe", "Char", "Character", ".utf8.map{ UInt8($$0) }[0]", "1", "Character(\"0\")");
-        GenerateFBEFinalModel(domain, "fbe", "WChar", "Character", ".utf8.map{ UInt8($$0) }[0]", "4", "Character(\"0\")");
+        GenerateFBEFinalModel(domain, "fbe", "WChar", "Character", ".utf16.map{ UInt8($$0) }[0]", "4", "Character(\"0\")");
         GenerateFBEFinalModel(domain, "fbe", "Int8", "Int8", "", "1", "0");
         GenerateFBEFinalModel(domain, "fbe", "UInt8", "UInt8", "", "1", "0");
         GenerateFBEFinalModel(domain, "fbe", "Int16", "Int16", "", "2", "0");
@@ -101,17 +101,26 @@ void GeneratorSwift::GenerateFooter()
 
 void GeneratorSwift::GenerateImports(const std::string& domain, const std::string& package)
 {
+  std::cout << package << '\n';
+  if (package.empty()) {
+
+  } else {
     // Generate package name
     WriteLine();
     WriteLineIndent("import " + domain + package);
+  }
+
 }
 
 void GeneratorSwift::GenerateImports(const std::shared_ptr<Package>& p)
 {
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
 
-    // Generate common import
-    GenerateImports(domain, *p->name);
+    if (p->import) {
+      for (const auto& i : p->import->imports) {
+        GenerateImports("", *i);
+      }
+    }
 }
 
 void GeneratorSwift::GenerateFBEPackage(const std::string& domain, const std::string& package)
@@ -506,7 +515,22 @@ public extension Buffer {
     }
 
     class func readUUID(buffer: Data, offset: Int) -> UUID {
-        return UUID(uuidString: String(bytes: buffer, encoding:.utf8) ?? "??")!
+        var output = ""
+
+        for (index, byte) in readBytes(buffer: buffer, offset: offset, size: 16).reversed().enumerated() {
+            let nextCharacter = String(byte, radix: 16, uppercase: true)
+            if nextCharacter.count == 2 {
+                output += nextCharacter
+            } else {
+                output += "0" + nextCharacter
+            }
+
+            if [3, 5, 7, 9].contains(index) {
+                output += "-"
+            }
+        }
+
+        return UUID(uuidString: output) ?? UUID()
     }
 
     class func write(buffer: inout Data, offset: Int, value: Bool) {
@@ -589,10 +613,16 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Data, offset: Int, value: Data) {
+        if value.isEmpty {
+            return
+        }
         buffer[offset...offset + value.count - 1] = value[0...value.count - 1]
     }
 
     class func write(buffer: inout Data, offset: Int, value: Data, valueOffset: Int, valueSize: Int) {
+        if valueSize == 0 {
+            return
+        }
         buffer[offset...] = value[valueOffset...valueOffset + valueSize]
     }
 
@@ -603,7 +633,7 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Data, offset: Int, value: UUID) {
-        //Buffer.writeBE(buffer: &buffer, offset: offset, value: value.uuidString)
+        Buffer.write(buffer: &buffer, offset: offset, value: Data(withUnsafeBytes(of: value.uuid, { Data($0) }).reversed()))
     }
 }
 )CODE";
@@ -740,7 +770,7 @@ public extension FieldModel {
     func fbeUnshift(size: Int) { _offset -= size }
 
     // Check if the value is valid
-    func verify() -> Bool {
+    public func verify() -> Bool {
         return true
     }
 
@@ -902,9 +932,9 @@ public class FieldModelDecimal: FieldModel {
         let sign: FloatingPointSign = negative ? .minus : .plus
 
 
-        var result = Decimal(readUInt32(offset: 8)) * lowScaleField
-        result = result + (Decimal(readUInt32(offset: 4)) * midScaleField)
-        result = result + Decimal(readUInt32(offset: 0))
+        var result = Decimal(readUInt32(offset: fbeOffset + 8)) * lowScaleField
+        result = result + (Decimal(readUInt32(offset: fbeOffset + 4)) * midScaleField)
+        result = result + Decimal(readUInt32(offset: fbeOffset + 0))
         result = Decimal.init(sign: sign, exponent: Int(-Int32(scale)), significand: result)
 
         return result
@@ -998,20 +1028,20 @@ void GeneratorSwift::GenerateFBEFieldModelDate(const std::string& domain, const 
 
     std::string code = R"CODE(
 // Fast Binary Encoding date field model
-class FieldModelDate: FieldModel {
-    var _buffer = Buffer()
-    var _offset: Int = 0
+public class FieldModelDate: FieldModel {
+    public var _buffer = Buffer()
+    public var _offset: Int = 0
 
     // Field size
-    let fbeSize: Int = 8
+    public let fbeSize: Int = 8
 
-    required init() {
+    public required init() {
         _buffer = Buffer()
         _offset = 0
     }
 
     // Get the value
-    func get(defaults: Date = Date(timeIntervalSince1970: 0)) -> Date {
+    public func get(defaults: Date = Date(timeIntervalSince1970: 0)) -> Date {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             return defaults
         }
@@ -1021,7 +1051,7 @@ class FieldModelDate: FieldModel {
     }
 
     // Set the value
-    func set(value: Date) {
+    public func set(value: Date) {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             return
@@ -1077,8 +1107,8 @@ public class FieldModelTimestamp: FieldModel {
             return defaults
         }
 
-        let nanoseconds = readFloat(offset: fbeOffset)
-        return TimeInterval(nanoseconds / 1000000000)
+        let nanoseconds = TimeInterval(readInt64(offset: fbeOffset))
+        return nanoseconds / 1000000000
     }
 
     public func set(value: TimeInterval) {
@@ -1110,7 +1140,7 @@ void GeneratorSwift::GenerateFBEFieldModelBytes(const std::string& domain, const
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
-    CppCommon::Path file = path / "FieldModelBytes.swift";
+    CppCommon::Path file = path / "FieldModelData.swift";
     Open(file);
 
     // Generate headers
@@ -1119,20 +1149,20 @@ void GeneratorSwift::GenerateFBEFieldModelBytes(const std::string& domain, const
 
     std::string code = R"CODE(
 // Fast Binary Encoding bytes field model
-class FieldModelBytes: FieldModel {
-    var _buffer = Buffer()
-    var _offset: Int = 0
+public class FieldModelData: FieldModel {
+    public var _buffer = Buffer()
+    public var _offset: Int = 0
 
     // Field size
-    let fbeSize: Int = 4
+    public let fbeSize: Int = 4
 
-    required init() {
+    public required init() {
         _buffer = Buffer()
         _offset = 0
     }
 
     // Field extra size
-    var fbeExtra: Int {
+    public var fbeExtra: Int {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return 0
         }
@@ -1146,7 +1176,7 @@ class FieldModelBytes: FieldModel {
         return 4 + fbeBytesSize
     }
 
-    func verify() -> Bool {
+    public func verify() -> Bool {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return true
         }
@@ -1169,7 +1199,7 @@ class FieldModelBytes: FieldModel {
     }
 
     // Get the value
-    func get(defaults: Data = Data(count: 0)) -> Data {
+    public func get(defaults: Data = Data(count: 0)) -> Data {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
@@ -1194,7 +1224,7 @@ class FieldModelBytes: FieldModel {
     }
 
     // Set the value
-    func set(value: Data) throws {
+    public func set(value: Data) throws {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return
@@ -1353,8 +1383,9 @@ public class FieldModelString: FieldModel {
     Close();
 }
 
-void GeneratorSwift::GenerateFBEFieldModelOptional(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorSwift::GenerateFBEFieldModelOptional(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model)
 {
+    std::string package = *p->name;
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
@@ -1366,22 +1397,24 @@ void GeneratorSwift::GenerateFBEFieldModelOptional(const std::string& domain, co
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports("", "Foundation");
     GenerateImports("", "fbe");
+    GenerateImports(p);
 
     std::string code = R"CODE(
 // Fast Binary Encoding optional _NAME_ field model
-class FieldModelOptional_NAME_: FieldModel {
+public class FieldModelOptional_NAME_: FieldModel {
 
-    var _buffer: Buffer
-    var _offset: Int
+    public var _buffer: Buffer
+    public var _offset: Int
 
     // Field size
-    let fbeSize: Int = 1 + 4
+    public let fbeSize: Int = 1 + 4
 
     // Base field model value
-    let value: _MODEL_
+    public let value: _MODEL_
 
-    var fbeExtra: Int {
+    public var fbeExtra: Int {
         if (!hasValue()) {
             return 0
         }
@@ -1397,24 +1430,24 @@ class FieldModelOptional_NAME_: FieldModel {
         return fbeResult
     }
 
-    required init() {
+    public required init() {
         let buffer = Buffer()
         let offset = 0
 
         _buffer = buffer
         _offset = offset
 
-        value = FieldModel_NAME_(buffer: buffer, offset: 0)
+        value = _MODEL_(buffer: buffer, offset: 0)
     }
 
-    required init(buffer: Buffer, offset: Int) {
+    public required init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        value = FieldModel_NAME_(buffer: buffer, offset: 0)
+        value = _MODEL_(buffer: buffer, offset: 0)
     }
 
-    func hasValue() -> Bool {
+    public func hasValue() -> Bool {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return false
         }
@@ -1423,7 +1456,7 @@ class FieldModelOptional_NAME_: FieldModel {
         return fbeHasValue != 0
     }
 
-    func verify() -> Bool {
+    public func verify() -> Bool {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return true
         }
@@ -1465,7 +1498,7 @@ class FieldModelOptional_NAME_: FieldModel {
         _buffer.unshift(offset: fbeBegin)
     }
 
-    func get(defaults: _TYPE_ = nil) -> _TYPE_ {
+    public func get(defaults: _TYPE_ = nil) -> _TYPE_ {
         let fbeBegin = getBegin()
         if fbeBegin == 0 {
             return defaults
@@ -1508,7 +1541,7 @@ class FieldModelOptional_NAME_: FieldModel {
       }
 
       // Set the optional value
-      func set(value optional: _TYPE_) throws {
+      public func set(value optional: _TYPE_) throws {
         let fbeBegin = try setBegin(hasValue: optional != nil)
         if fbeBegin == 0 {
             return
@@ -1538,8 +1571,9 @@ class FieldModelOptional_NAME_: FieldModel {
     Close();
 }
 
-void GeneratorSwift::GenerateFBEFieldModelArray(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
+void GeneratorSwift::GenerateFBEFieldModelArray(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
 {
+    std::string package = *p->name;
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
@@ -1551,7 +1585,9 @@ void GeneratorSwift::GenerateFBEFieldModelArray(const std::string& domain, const
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports("", "Foundation");
     GenerateImports("", "fbe");
+    GenerateImports(p);
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array field model
@@ -1593,7 +1629,7 @@ class FieldModelArray_NAME_: FieldModel {
     }
 
     // Vector index operator
-    func getItem(index: Int) -> _MODEL_ {
+    public func getItem(index: Int) -> _MODEL_ {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         assert(index < size, "Model is broken!")
 
@@ -1602,7 +1638,7 @@ class FieldModelArray_NAME_: FieldModel {
         return _model
     }
 
-    func verify() -> Bool {
+    public func verify() -> Bool {
        if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return false
         }
@@ -1618,7 +1654,7 @@ class FieldModelArray_NAME_: FieldModel {
         return true
     }
 
-    func get() -> _ARRAY_ {
+    public func get() -> _ARRAY_ {
         var values = _ARRAY_()
         let fbeModel = getItem(index: 0)
         for _ in 0..<size {
@@ -1629,7 +1665,7 @@ class FieldModelArray_NAME_: FieldModel {
         return values
     }
 
-    func get(values: inout _ARRAY_) {
+    public func get(values: inout _ARRAY_) {
         values.removeAll()
 
         let fbeVectorSize = size
@@ -1649,7 +1685,7 @@ class FieldModelArray_NAME_: FieldModel {
         }
     }
 
-    func set(value values: _ARRAY_) throws {
+    public func set(value values: _ARRAY_) throws {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return
@@ -1664,7 +1700,7 @@ class FieldModelArray_NAME_: FieldModel {
 }
 )CODE";
 
-    std::string type_name = type;
+    std::string type_name = IsPackageType(type) ? type : (package + "." + type);
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
@@ -1673,7 +1709,7 @@ class FieldModelArray_NAME_: FieldModel {
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
 
     if (optional)
-        code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type_name + "?>");
+        code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type_name + ">");
     else
         code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type_name + ">");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
@@ -1687,8 +1723,9 @@ class FieldModelArray_NAME_: FieldModel {
     Close();
 }
 
-void GeneratorSwift::GenerateFBEFieldModelVector(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorSwift::GenerateFBEFieldModelVector(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model)
 {
+    std::string package = *p->name;
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
@@ -1700,7 +1737,9 @@ void GeneratorSwift::GenerateFBEFieldModelVector(const std::string& domain, cons
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports("", "Foundation");
     GenerateImports("", "fbe");
+    GenerateImports(p);
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ vector field model
@@ -1777,7 +1816,7 @@ class FieldModelVector_NAME_: FieldModel {
     }
 
     // Vector index operator
-    func getItem(index: Int) -> _MODEL_ {
+    public func getItem(index: Int) -> _MODEL_ {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
 
         let fbeVectorOffset = Int(readUInt32(offset: fbeOffset))
@@ -1804,7 +1843,7 @@ class FieldModelVector_NAME_: FieldModel {
         return _model
     }
 
-    func verify() -> Bool {
+    public func verify() -> Bool {
        if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return true
         }
@@ -1830,7 +1869,7 @@ class FieldModelVector_NAME_: FieldModel {
         return true
     }
 
-    func get(values: inout Array<_TYPE_>) {
+    public func get(values: inout Array<_TYPE_>) {
         values.removeAll()
 
         let fbeVectorSize = size
@@ -1850,7 +1889,7 @@ class FieldModelVector_NAME_: FieldModel {
         }
     }
 
-    func set(value values: Array<_TYPE_>) throws {
+    public func set(value values: Array<_TYPE_>) throws {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return
@@ -1865,7 +1904,7 @@ class FieldModelVector_NAME_: FieldModel {
 }
 )CODE";
 
-    std::string type_name = type;
+    std::string type_name = IsPackageType(type) ? type : (package + "." + type);
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
@@ -1883,8 +1922,9 @@ class FieldModelVector_NAME_: FieldModel {
     Close();
 }
 
-void GeneratorSwift::GenerateFBEFieldModelMap(const std::string& domain, const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
+void GeneratorSwift::GenerateFBEFieldModelMap(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
 {
+    std::string package = *p->name;
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
@@ -1896,7 +1936,11 @@ void GeneratorSwift::GenerateFBEFieldModelMap(const std::string& domain, const s
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(domain, package + ".fbe");
+    GenerateImports("", "Foundation");
+    GenerateImports("", "fbe");
+    GenerateImports(p);    GenerateImports("", "Foundation");
+        GenerateImports("", "fbe");
+        GenerateImports(p);
 
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map field model
@@ -1951,8 +1995,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
         _buffer = buffer
         _offset = offset
 
-        _modelKey = FieldModelOrder(buffer: buffer, offset: offset)
-        _modelValue = FieldModelOrder(buffer: buffer, offset: offset)
+        _modelKey = _KEY_MODEL_(buffer: buffer, offset: offset)
+        _modelValue = _VALUE_MODEL_(buffer: buffer, offset: offset)
     }
 
     // Get the vector offset
@@ -1979,7 +2023,7 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
     }
 
     // Vector index operator
-    func getItem(index: Int) -> (_KEY_MODEL_, _VALUE_MODEL_) {
+    public func getItem(index: Int) -> (_KEY_MODEL_, _VALUE_MODEL_) {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
 
         let fbeMapOffset = Int(readUInt32(offset: fbeOffset))
@@ -2007,7 +2051,7 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
         return (_modelKey, _modelValue)
     }
 
-    func verify() -> Bool {
+    public func verify() -> Bool {
        if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return true
         }
@@ -2036,7 +2080,7 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
         return true
     }
 
-    func get(values: inout Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) {
+    public func get(values: inout Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) {
         values.removeAll()
 
         let fbeMapSize = size
@@ -2051,14 +2095,14 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
         while (i > 0) {
             let key = fbeModel.0.get()
             let value = fbeModel.1.get()
-            values.set
+            values[key] = value
             fbeModel.0.fbeShift(size: fbeModel.0.fbeSize + fbeModel.1.fbeSize)
             fbeModel.1.fbeShift(size: fbeModel.0.fbeSize + fbeModel.1.fbeSize)
             i -= 1
         }
     }
 
-    func set(value values: Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) throws {
+    public func set(value values: Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) throws {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return
@@ -2068,15 +2112,15 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
         for (key, value) in values {
             try fbeModel.0.set(value: key)
             fbeModel.0.fbeShift(size: fbeModel.0.fbeSize + fbeModel.1.fbeSize)
-            try fbeModel.1.set(value: key)
+            try fbeModel.1.set(value: value)
             fbeModel.1.fbeShift(size: fbeModel.0.fbeSize + fbeModel.1.fbeSize)
         }
     }
 }
 )CODE";
 
-    std::string key_type_name = key_type;
-    std::string value_type_name = value_type;
+  std::string key_type_name = IsPackageType(key_type) ? key_type : (package + "." + key_type);
+  std::string value_type_name = IsPackageType(value_type) ? value_type : (package + "." + value_type);
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
@@ -2114,20 +2158,20 @@ void GeneratorSwift::GenerateFBEFieldModelEnumFlags(const std::string& domain, c
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ field model
-class FieldModel_NAME_: FieldModel {
+public class FieldModel_NAME_: FieldModel {
 
-    var _buffer: Buffer = Buffer()
-    var _offset: Int = 0
+    public var _buffer: Buffer = Buffer()
+    public var _offset: Int = 0
 
-    var fbeSize: Int = _SIZE_
+    public var fbeSize: Int = _SIZE_
 
-    required init() {
+    public required init() {
         _buffer = Buffer()
         _offset = 0
     }
 
     // Get the value
-    func get(defaults: _NAME_ = _NAME_()) -> _NAME_ {
+    public func get(defaults: _NAME_ = _NAME_()) -> _NAME_ {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return defaults
         }
@@ -2136,7 +2180,7 @@ class FieldModel_NAME_: FieldModel {
     }
 
     // Set the value
-    func set(value: _NAME_) {
+    public func set(value: _NAME_) {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             return
@@ -2250,7 +2294,7 @@ public extension FinalModel {
     func fbeUnshift(size: Int) { _offset -= size }
 
     // Check if the value is valid
-    func verify() -> Bool {
+    public func verify() -> Bool {
         return true
     }
 
@@ -2409,7 +2453,7 @@ public class FinalModelDecimal: FinalModel {
     }
 
 
-    public func fbeAllocationSize(value: Date) -> Int {
+    public func fbeAllocationSize(value: Decimal) -> Int {
         return fbeSize
     }
 
@@ -2534,18 +2578,18 @@ void GeneratorSwift::GenerateFBEFinalModelDate(const std::string& domain, const 
 
     std::string code = R"CODE(
 // Fast Binary Encoding date final model
-class FinalModelDate: FinalModel {
-    var _buffer = Buffer()
-    var _offset: Int = 0
+public class FinalModelDate: FinalModel {
+    public var _buffer = Buffer()
+    public var _offset: Int = 0
 
-    func fbeAllocationSize(value: Date) -> Int {
+    public func fbeAllocationSize(value: Date) -> Int {
         return fbeSize
     }
 
     // Field size
-    let fbeSize: Int = 8
+    public let fbeSize: Int = 8
 
-    func verify() -> Int {
+    public func verify() -> Int {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return Int.max
         }
@@ -2554,7 +2598,7 @@ class FinalModelDate: FinalModel {
     }
 
     // Get the value
-    func get(size: inout Size) -> Date {
+    public func get(size: inout Size) -> Date {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             return Date(timeIntervalSince1970: 0)
         }
@@ -2565,7 +2609,7 @@ class FinalModelDate: FinalModel {
     }
 
     // Set the value
-    func set(value: Date) -> Int {
+    public func set(value: Date) -> Int {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             return 0
@@ -2672,7 +2716,7 @@ void GeneratorSwift::GenerateFBEFinalModelBytes(const std::string& domain, const
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
-    CppCommon::Path file = path / "FinalModelBytes.swift";
+    CppCommon::Path file = path / "FinalModelData.swift";
     Open(file);
 
     // Generate headers
@@ -2681,15 +2725,20 @@ void GeneratorSwift::GenerateFBEFinalModelBytes(const std::string& domain, const
 
     std::string code = R"CODE(
 // Fast Binary Encoding bytes final model
-class FinalModelBytes: FinalModel {
-    var _buffer = Buffer()
-    var _offset: Int = 0
+public class FinalModelData: FinalModel {
+    public var _buffer = Buffer()
+    public var _offset: Int = 0
 
-    func fbeAllocationSize(value: Data) -> Int {
+    public init(buffer: Buffer, offset: Int) {
+        _buffer = buffer
+        _offset = offset
+    }
+
+    public func fbeAllocationSize(value: Data) -> Int {
         return 4 + value.count
     }
 
-    func verify() -> Int {
+    public func verify() -> Int {
         if (_buffer.offset + fbeOffset) + 4 > _buffer.size {
             return Int.max
         }
@@ -2703,7 +2752,7 @@ class FinalModelBytes: FinalModel {
     }
 
     // Get the value
-    func get(size: Size) -> Data {
+    public func get(size: inout Size) -> Data {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             size.value = 0
             return Data()
@@ -2722,7 +2771,7 @@ class FinalModelBytes: FinalModel {
     }
 
     // Set the value
-    func set(value: Data) throws -> Int {
+    public func set(value: Data) throws -> Int {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size, "Model is broken!")
         if (_buffer.offset + fbeOffset + 4) > _buffer.size {
             return 0
@@ -2846,8 +2895,9 @@ public class FinalModelString: FinalModel {
     Close();
 }
 
-void GeneratorSwift::GenerateFBEFinalModelOptional(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorSwift::GenerateFBEFinalModelOptional(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model)
 {
+    std::string package = *p->name;
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
@@ -2859,7 +2909,9 @@ void GeneratorSwift::GenerateFBEFinalModelOptional(const std::string& domain, co
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports("", "Foundation");
     GenerateImports("", "fbe");
+    GenerateImports(p);
 
     std::string code = R"CODE(
 // Fast Binary Encoding optional _NAME_ final model
@@ -2902,7 +2954,7 @@ class FinalModelOptional_NAME_: FinalModel {
         return fbeHasValue != 0
     }
 
-    func verify() -> Int {
+    public func verify() -> Int {
         if _buffer.offset + fbeOffset + 1 > _buffer.size {
             return Int.max
         }
@@ -2918,7 +2970,7 @@ class FinalModelOptional_NAME_: FinalModel {
         return 1 + fbeResult
     }
 
-    func get(size: inout Size) -> _TYPE_ {
+    public func get(size: inout Size) -> _TYPE_ {
         assert(_buffer.offset + fbeOffset + 1 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 1 > _buffer.size {
             size.value = 0
@@ -2938,7 +2990,7 @@ class FinalModelOptional_NAME_: FinalModel {
     }
 
     // Set the optional value
-    func set(value optional: _TYPE_) throws -> Int {
+    public func set(value optional: _TYPE_) throws -> Int {
        assert(_buffer.offset + fbeOffset + 1 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 1 > _buffer.size {
             return 0
@@ -2976,8 +3028,9 @@ class FinalModelOptional_NAME_: FinalModel {
     Close();
 }
 
-void GeneratorSwift::GenerateFBEFinalModelArray(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
+void GeneratorSwift::GenerateFBEFinalModelArray(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
 {
+    std::string package = *p->name;
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
@@ -2989,7 +3042,9 @@ void GeneratorSwift::GenerateFBEFinalModelArray(const std::string& domain, const
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports("", "Foundation");
     GenerateImports("", "fbe");
+    GenerateImports(p);
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array final model
@@ -3019,7 +3074,7 @@ class FinalModelArray_NAME_: FinalModel {
     }
 
     // Check if the vector is valid
-    func verify() -> Int {
+    public func verify() -> Int {
         if _buffer.offset + fbeOffset > _buffer.size {
             return Int.max
         }
@@ -3037,7 +3092,7 @@ class FinalModelArray_NAME_: FinalModel {
         return size
     }
 
-    func get(size: inout Size) -> _ARRAY_ {
+    public func get(size: inout Size) -> _ARRAY_ {
         var values = _ARRAY_()
 
         assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
@@ -3059,7 +3114,7 @@ class FinalModelArray_NAME_: FinalModel {
         return values
     }
 
-    func get(values: inout _ARRAY_) -> Int {
+    public func get(values: inout _ARRAY_) -> Int {
         values.removeAll()
 
         assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
@@ -3080,7 +3135,7 @@ class FinalModelArray_NAME_: FinalModel {
         return size
     }
 
-    func set(value values: _ARRAY_) throws -> Int {
+    public func set(value values: _ARRAY_) throws -> Int {
         assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset > _buffer.size {
             return 0
@@ -3106,7 +3161,7 @@ class FinalModelArray_NAME_: FinalModel {
     code = std::regex_replace(code, std::regex("_TYPE_"), type_name);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
     if (optional)
-      code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type_name + "?>");
+      code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type_name + ">");
     else
       code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type_name + ">");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
@@ -3120,8 +3175,9 @@ class FinalModelArray_NAME_: FinalModel {
     Close();
 }
 
-void GeneratorSwift::GenerateFBEFinalModelVector(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorSwift::GenerateFBEFinalModelVector(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model)
 {
+    std::string package = *p->name;
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
@@ -3133,7 +3189,9 @@ void GeneratorSwift::GenerateFBEFinalModelVector(const std::string& domain, cons
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports("", "Foundation");
     GenerateImports("", "fbe");
+    GenerateImports(p);
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ vector final model
@@ -3161,7 +3219,7 @@ class FinalModelVector_NAME_: FinalModel {
     }
 
     // Check if the vector is valid
-    func verify() -> Int {
+    public func verify() -> Int {
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
             return Int.max
         }
@@ -3181,7 +3239,7 @@ class FinalModelVector_NAME_: FinalModel {
         return size
     }
 
-    func get(values: inout Array<_TYPE_>) -> Int {
+    public func get(values: inout Array<_TYPE_>) -> Int {
         values.removeAll()
 
         assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
@@ -3209,7 +3267,7 @@ class FinalModelVector_NAME_: FinalModel {
         return size
     }
 
-    func set(value values: Array<_TYPE_>) throws -> Int {
+    public func set(value values: Array<_TYPE_>) throws -> Int {
         assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
             return 0
@@ -3229,7 +3287,7 @@ class FinalModelVector_NAME_: FinalModel {
 }
 )CODE";
 
-    std::string type_name = type;
+    std::string type_name = IsPackageType(type) ? type : (package + "." + type);
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
@@ -3247,8 +3305,9 @@ class FinalModelVector_NAME_: FinalModel {
     Close();
 }
 
-void GeneratorSwift::GenerateFBEFinalModelMap(const std::string& domain, const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
+void GeneratorSwift::GenerateFBEFinalModelMap(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
 {
+    std::string package = *p->name;
     CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
 
     // Create package path
@@ -3260,6 +3319,9 @@ void GeneratorSwift::GenerateFBEFinalModelMap(const std::string& domain, const s
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports("", "Foundation");
+    GenerateImports("", "fbe");
+    GenerateImports(p);
 
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map final model
@@ -3274,8 +3336,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_: FinalModel {
         _buffer = buffer
         _offset = offset
 
-        _modelKey = FinalModelOrder(buffer: buffer, offset: offset)
-        _modelValue = FinalModelOrder(buffer: buffer, offset: offset)
+        _modelKey = _KEY_MODEL_(buffer: buffer, offset: offset)
+        _modelValue = _VALUE_MODEL_(buffer: buffer, offset: offset)
     }
 
     // Get the allocation size
@@ -3290,7 +3352,7 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_: FinalModel {
     }
 
     // Check if the vector is valid
-    func verify() -> Int {
+    public func verify() -> Int {
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
             return Int.max
         }
@@ -3317,7 +3379,7 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_: FinalModel {
         return size
     }
 
-    func get(values: inout Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) -> Int {
+    public func get(values: inout Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) -> Int {
         values.removeAll()
 
         assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
@@ -3350,7 +3412,7 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_: FinalModel {
         return size
     }
 
-    func set(value values: Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) throws -> Int {
+    public func set(value values: Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) throws -> Int {
         assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
             return 0
@@ -3362,10 +3424,10 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_: FinalModel {
         _modelKey.fbeOffset = fbeOffset + 4
         _modelValue.fbeOffset = fbeOffset + 4
         for (key, value) in values {
-            let offsetKey = try _modelKey.set(value: value)
+            let offsetKey = try _modelKey.set(value: key)
             _modelKey.fbeShift(size: offsetKey)
             _modelValue.fbeShift(size: offsetKey)
-            let offsetValue = try _model.set(value: value)
+            let offsetValue = try _modelValue.set(value: value)
             _modelKey.fbeShift(size: offsetValue)
             _modelValue.fbeShift(size: offsetValue)
             size += offsetKey + offsetValue
@@ -3375,8 +3437,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_: FinalModel {
 }
 )CODE";
 
-    std::string key_type_name = key_type;
-    std::string value_type_name = value_type;
+  std::string key_type_name = IsPackageType(key_type) ? key_type : (package + "." + key_type);
+  std::string value_type_name = IsPackageType(value_type) ? value_type : (package + "." + value_type);
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
@@ -3414,23 +3476,23 @@ void GeneratorSwift::GenerateFBEFinalModelEnumFlags(const std::string& domain, c
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ final model
-class FinalModel_NAME_: FinalModel {
+public class FinalModel_NAME_: FinalModel {
 
-    var _buffer: Buffer
-    var _offset: Int
+    public var _buffer: Buffer
+    public var _offset: Int
 
     // Final size
-    let fbeSize: Int = _SIZE_
+    public let fbeSize: Int = _SIZE_
 
-    init(buffer: Buffer = Buffer(), offset: Int = 0) {
+    public init(buffer: Buffer = Buffer(), offset: Int = 0) {
         _buffer = buffer
         _offset = offset
     }
 
     // Get the allocation size
-    func fbeAllocationSize(value: _NAME_) -> Int { fbeSize }
+    public func fbeAllocationSize(value: _NAME_) -> Int { fbeSize }
 
-    func verify() -> Int  {
+    public func verify() -> Int  {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return Int.max
         }
@@ -3439,7 +3501,7 @@ class FinalModel_NAME_: FinalModel {
     }
 
     // Get the value
-    func get(size: inout Size) -> _NAME_ {
+    public func get(size: inout Size) -> _NAME_ {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return _NAME_()
         }
@@ -3449,7 +3511,7 @@ class FinalModel_NAME_: FinalModel {
     }
 
     // Set the value
-    func set(value: _NAME_) -> Int {
+    public func set(value: _NAME_) -> Int {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return 0
@@ -4476,30 +4538,30 @@ void GeneratorSwift::GenerateContainers(const std::shared_ptr<Package>& p, bool 
                     if (field->array)
                     {
                         if (final)
-                            GenerateFBEFinalModelArray(domain, *p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), *field->type, field->optional, ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
+                            GenerateFBEFinalModelArray(domain, p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), *field->type, field->optional, ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                         else
-                            GenerateFBEFieldModelArray(domain, *p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), *field->type, field->optional, ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
+                            GenerateFBEFieldModelArray(domain, p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), *field->type, field->optional, ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                     }
                     if (field->vector || field->list || field->set)
                     {
                         if (final)
-                            GenerateFBEFinalModelVector(domain, *p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
+                            GenerateFBEFinalModelVector(domain, p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                         else
-                            GenerateFBEFieldModelVector(domain, *p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
+                            GenerateFBEFieldModelVector(domain, p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                     }
                     if (field->map || field->hash)
                     {
                         if (final)
-                            GenerateFBEFinalModelMap(domain, *p->name, ConvertTypeFieldName(*field->key), ConvertTypeFieldType(domain, *field->key, false), ConvertTypeFieldDeclaration(domain, *field->key, false, final), (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
+                            GenerateFBEFinalModelMap(domain, p, ConvertTypeFieldName(*field->key), ConvertTypeFieldType(domain, *field->key, false), ConvertTypeFieldDeclaration(domain, *field->key, false, final), (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                         else
-                            GenerateFBEFieldModelMap(domain, *p->name, ConvertTypeFieldName(*field->key), ConvertTypeFieldType(domain, *field->key, false), ConvertTypeFieldDeclaration(domain, *field->key, false, final), (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
+                            GenerateFBEFieldModelMap(domain, p, ConvertTypeFieldName(*field->key), ConvertTypeFieldType(domain, *field->key, false), ConvertTypeFieldDeclaration(domain, *field->key, false, final), (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                     }
                     if (field->optional)
                     {
                         if (final)
-                            GenerateFBEFinalModelOptional(domain, *p->name, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, false, final));
+                            GenerateFBEFinalModelOptional(domain, p, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, false, final));
                         else
-                            GenerateFBEFieldModelOptional(domain, *p->name, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, false, final));
+                            GenerateFBEFieldModelOptional(domain, p, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, false, final));
                     }
                 }
             }
@@ -4814,7 +4876,7 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
 
     // Generate enum class body
     WriteLine();
-    WriteLineIndent("public class " + enum_name + " : Comparable {");
+    WriteLineIndent("public class " + enum_name + " : Comparable, Hashable, Codable {");
     Indent(1);
     WriteLineIndent("typealias RawValue = " + enum_base_type);
 
@@ -4840,10 +4902,10 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
     WriteLineIndent("public init(value: " + enum_name + ") { setEnum(value: value) }");
 
     WriteLine();
-    WriteLineIndent("public required convenience init(from decoder: Decoder) throws {");
+    WriteLineIndent("public required init(from decoder: Decoder) throws {");
     Indent(1);
     WriteLineIndent("let container = try decoder.singleValueContainer()");
-    WriteLineIndent("self.init(value: try container.decode(RawValue.self))");
+    WriteLineIndent("setEnum(value: try container.decode(RawValue.self))");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4885,11 +4947,9 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
 
     // Generate enum class hashCode() method
     WriteLine();
-    WriteLineIndent("public func hashCode() -> Int {");
+    WriteLineIndent("public func hash(into hasher: inout Hasher) {");
     Indent(1);
-    WriteLineIndent("var hash = 17");
-    WriteLineIndent("hash = hash * 31 + (value?.hashValue ?? 0)");
-    WriteLineIndent("return hash");
+    WriteLineIndent("hasher.combine(value?.rawValue ?? 0)");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4901,13 +4961,7 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
     Indent(-1);
     WriteLineIndent("}");
 
-    Indent(-1);
-    WriteLineIndent("}");
-
-    WriteLine();
-    WriteLineIndent("extension " + enum_name + ": Codable {");
-    Indent(1);
-    WriteLineIndent("public func encode(to encoder: Encoder) throws {");
+    WriteLineIndent("open func encode(to encoder: Encoder) throws {");
     Indent(1);
     WriteLineIndent("var container = encoder.singleValueContainer()");
     WriteLineIndent("try container.encode(raw)");
@@ -5202,7 +5256,7 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
 
     // Generate flags class body
     WriteLine();
-    WriteLineIndent("public class " + flags_name + ": Comparable {");
+    WriteLineIndent("public class " + flags_name + ": Comparable, Hashable, Codable {");
     Indent(1);
     WriteLineIndent("typealias RawValue = " + flags_base_type);
     if (f->body)
@@ -5217,7 +5271,7 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
         // Generate flags class fromSet() method
         WriteLineIndent("public static func fromSet(set: " + flags_type_name + ") -> " + flags_name + " {");
         Indent(1);
-        WriteLineIndent("var result = " + ConvertEnumConstant(flags_type, flags_type, "0", false));
+        WriteLineIndent("var result = NSNumber(value: " + ConvertEnumConstant(flags_type, flags_type, "0", false) + ")" + flags_int);
         if (f->body)
         {
             for (const auto& value : f->body->values)
@@ -5251,10 +5305,10 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
     WriteLineIndent("public init(value: " + flags_name + ") { setEnum(value: value) }");
 
     WriteLine();
-    WriteLineIndent("public required convenience init(from decoder: Decoder) throws {");
+    WriteLineIndent("public required init(from decoder: Decoder) throws {");
     Indent(1);
     WriteLineIndent("let container = try decoder.singleValueContainer()");
-    WriteLineIndent("self.init(value: try container.decode(RawValue.self))");
+    WriteLineIndent("setEnum(value: try container.decode(RawValue.self))");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5310,11 +5364,9 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
 
     // Generate flags class hashCode() method
     WriteLine();
-    WriteLineIndent("public func hashCode() -> Int {");
+    WriteLineIndent("public func hash(into hasher: inout Hasher) {");
     Indent(1);
-    WriteLineIndent("var hash = " + ConvertEnumConstant(flags_type, flags_type, "17", false));
-    WriteLineIndent("hash = hash * " + ConvertEnumConstant(flags_type, flags_type, "31", false) + " + NSNumber(value: raw)" + flags_int);
-    WriteLineIndent("return Int(hash)");
+    WriteLineIndent("hasher.combine(raw)");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5340,13 +5392,7 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
     Indent(-1);
     WriteLineIndent("}");
 
-    Indent(-1);
-    WriteLineIndent("}");
-
-    WriteLine();
-    WriteLineIndent("extension " + flags_name + ": Codable {");
-    Indent(1);
-    WriteLineIndent("public func encode(to encoder: Encoder) throws {");
+    WriteLineIndent("open func encode(to encoder: Encoder) throws {");
     Indent(1);
     WriteLineIndent("var container = encoder.singleValueContainer()");
     WriteLineIndent("try container.encode(raw)");
@@ -5446,9 +5492,8 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     // Generate struct header
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "Foundation");
-    if (s->base && !s->base->empty())
-        GenerateImports("", ConvertTypeImport(*s->base));
-
+    GenerateImports("", "fbe");
+    GenerateImports(p);
 
 
     // Generate struct begin
@@ -5457,7 +5502,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     if (s->base && !s->base->empty())
         Write(": " + ConvertTypeName(domain, "", *s->base, false));
     else
-        Write(": Comparable");
+        Write(": Comparable, Hashable, Codable");
     WriteLineIndent(" {");
     Indent(1);
 
@@ -5520,18 +5565,28 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
 
     // Generate struct json constructor
     WriteLine();
-    WriteLineIndent("public required convenience init(from decoder: Decoder) throws {");
+    WriteLineIndent("public required init(from decoder: Decoder) throws {");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("super.init(from: decoder)");
-    else
-        WriteLineIndent("self.init()");
+        WriteLineIndent("try super.init(from: decoder)");
 
     WriteLineIndent("let container = try decoder.container(keyedBy: CodingKeys.self)");
     if (s->body) {
         for (const auto& field : s->body->fields) {
-            WriteLineIndent(*field->name + " = try container.decode(" + ConvertTypeName(domain, "", *field, false) + ".self, forKey: ." + *field->name + ")");
-          }
+            if ((*field->type == "char") || (*field->type == "wchar")) {
+                std::string valueType = (*field->type == "char") ? "UInt8" : "UInt32";
+                std::string valueOpt = (*field->type == "char") ? "" : "!";
+                if (field->optional) {
+                    WriteLineIndent("let " + *field->name + "Value: " + valueType + "? = try container.decode(" + valueType + "?.self, forKey: ." + *field->name + ")");
+                    WriteLineIndent(*field->name + " = " + *field->name + "Value != nil ? Character(UnicodeScalar(" + *field->name + "Value!)" + valueOpt + ") : nil");
+                } else {
+                    WriteLineIndent("let " + *field->name + "Value: " + valueType + " = try container.decode(" + valueType + ".self, forKey: ." + *field->name + ")");
+                    WriteLineIndent(*field->name + " = Character(UnicodeScalar(" + *field->name + "Value)" + valueOpt + ")");
+                }
+            } else {
+              WriteLineIndent(*field->name + " = try container.decode(" + ConvertTypeName(domain, "", *field, false) + ".self, forKey: ." + *field->name + ")");
+            }
+        }
     }
 
     Indent(-1);
@@ -5598,20 +5653,18 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     // Generate struct hashCode() method
     WriteLine();
     if (s->base && !s->base->empty())
-        WriteLineIndent("open override func hashCode() -> Int {");
+        WriteLineIndent("open override func hash(into hasher: inout Hasher) {");
     else
-        WriteLineIndent("open func hashCode() -> Int {");
+        WriteLineIndent("open func hash(into hasher: inout Hasher) {");
     Indent(1);
-    WriteLineIndent("var hash = 17");
     if (s->base && !s->base->empty())
-        WriteLineIndent("hash = hash * 31 + super.hashCode()");
+        WriteLineIndent("super.hash(into: &hasher)");
     if (s->body)
     {
         for (const auto& field : s->body->fields)
             if (field->keys)
-                WriteLineIndent("hash = hash * 31 + " + *field->name + ".hashValue");
+                WriteLineIndent("hasher.combine(" + *field->name + ")");
     }
-    WriteLineIndent("return hash");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5659,7 +5712,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("var first = true");
-                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\").append(" + *field->name + ".size" + ").append(\"]<\")");
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\"); sb.append(\"\\(" + *field->name + ".count)\"" + "); sb.append(\"]<\")");
                 WriteLineIndent("for item in " + *field->name + " {");
                 Indent(1);
                 WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true, false));
@@ -5676,7 +5729,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("var first = true");
-                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\").append(" + *field->name + ".size" + ").append(\"]{\")");
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\"); sb.append(\"\\(" + *field->name + ".count)\"" + "); sb.append(\"]{\")");
                 WriteLineIndent("for item in " + *field->name + " {");
                 Indent(1);
                 WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true, false));
@@ -5693,7 +5746,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("var first = true");
-                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\").append(" + *field->name + ".size" + ").append(\"]<{\")");
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\"); sb.append(" + *field->name + ".count.description); sb.append(\"]<{\")");
                 WriteLineIndent("for (key, value) in " + *field->name + " {");
                 Indent(1);
                 WriteLineIndent(ConvertOutputStreamValue(*field->key, "key", false, true, false));
@@ -5712,7 +5765,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("var first = true");
-                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\").append(" + *field->name + ".size" + ").append(\"][{\")");
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\"); sb.append(" + *field->name + ".count.description); sb.append(\"][{\")");
                 WriteLineIndent("for (key, value) in " + *field->name + " {");
                 Indent(1);
                 WriteLineIndent(ConvertOutputStreamValue(*field->key, "key", false, true, false));
@@ -5749,45 +5802,57 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
         WriteLineIndent("}");
     }
 
-    // Generate struct end
-    Indent(-1);
-    WriteLineIndent("}");
-
-    WriteLine();
-    WriteLineIndent("extension " + *s->name + ": Codable {");
-    Indent(1);
-    WriteLineIndent("enum CodingKeys: String, CodingKey {");
+    WriteLineIndent("private enum CodingKeys: String, CodingKey {");
     Indent(1);
     if (s->body && !s->body->fields.empty())
     {
         for (const auto& field : s->body->fields)
             WriteLineIndent("case " + *field->name);
+    } else {
+        WriteLineIndent("case empty");
     }
     Indent(-1);
     WriteLineIndent("}");
 
     WriteLine();
-    WriteLineIndent("public func encode(to encoder: Encoder) throws {");
+    if (s->base && !s->base->empty())
+        WriteLineIndent("open override func encode(to encoder: Encoder) throws {");
+    else
+        WriteLineIndent("open func encode(to encoder: Encoder) throws {");
     Indent(1);
+    if (s->base && !s->base->empty())
+        WriteLineIndent("try super.encode(to: encoder)");
     WriteLineIndent("var container = encoder.container(keyedBy: CodingKeys.self)");
     if (s->body && !s->body->fields.empty())
     {
         for (const auto& field : s->body->fields) {
-          WriteLineIndent("try container.encode(" + *field->name + ", forKey: ." + *field->name + ")");
+          if ((*field->type == "char") || (*field->type == "wchar")) {
+              std::string valueType = (*field->type == "char") ? "UInt8" : "UInt32";
+              std::string opt = (field->optional) ? "?" : "";
+              WriteLineIndent("try container.encode(" + *field->name + opt + ".utf8.map{ " + valueType + "($0) }[0], forKey: ." + *field->name + ")");
+          } else {
+              WriteLineIndent("try container.encode(" + *field->name + ", forKey: ." + *field->name + ")");
+          }
         }
     }
     Indent(-1);
     WriteLineIndent("}");
 
     WriteLine();
-    WriteLineIndent("public func toJson() throws -> String {");
+    if (s->base && !s->base->empty())
+        WriteLineIndent("open override func toJson() throws -> String {");
+    else
+        WriteLineIndent("open func toJson() throws -> String {");
     Indent(1);
     WriteLineIndent("return String(data: try JSONEncoder().encode(self), encoding: .utf8)!");
     Indent(-1);
     WriteLineIndent("}");
 
     WriteLine();
-    WriteLineIndent("public class func fromJson(_ json: String) -> " + *s->name + " {");
+    if (s->base && !s->base->empty())
+        WriteLineIndent("open override class func fromJson(_ json: String) -> " + *s->name + " {");
+    else
+        WriteLineIndent("open class func fromJson(_ json: String) -> " + *s->name + " {");
     Indent(1);
     WriteLineIndent("return try! JSONDecoder().decode(" + *s->name + ".self, from: json.data(using: .utf8)!)");
     Indent(-1);
@@ -5831,9 +5896,9 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports("", "Foundation");
     GenerateImports("", "fbe");
-    if (s->base && !s->base->empty())
-        GenerateImports("", ConvertTypeImport(*s->base));
+    GenerateImports(p);
     // Generate struct field model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " field model");
@@ -5970,14 +6035,13 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLine();
     WriteLineIndent("_buffer.shift(offset: fbeStructOffset)");
     WriteLine();
-    WriteLineIndent("let fbeResult = (fbeBody");
+    WriteLineIndent("var fbeResult = fbeBody");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ parent.fbeExtra");
+        WriteLineIndent("fbeResult += parent.fbeExtra");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("+ " + *field->name + ".fbeExtra");
-    WriteLineIndent(")");
+            WriteLineIndent("fbeResult += " + *field->name + ".fbeExtra");
     Indent(-1);
     WriteLine();
     WriteLineIndent("_buffer.unshift(offset: fbeStructOffset)");
@@ -6124,7 +6188,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     // Generate struct field model get() methods
     WriteLine();
     WriteLineIndent("// Get the struct value");
-    WriteLineIndent("func get() -> " + struct_name + " {");
+    WriteLineIndent("public func get() -> " + struct_name + " {");
     Indent(1);
     WriteLineIndent("var fbeValue = " + struct_name+ "()");
     WriteLineIndent("return get(fbeValue: &fbeValue)");
@@ -6132,7 +6196,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLineIndent("}");
 
     WriteLine();
-    WriteLineIndent("func get(fbeValue: inout " + struct_name + ") -> " + struct_name + " {");
+    WriteLineIndent("public func get(fbeValue: inout " + struct_name + ") -> " + struct_name + " {");
     Indent(1);
     WriteLineIndent("let fbeBegin = getBegin()");
     WriteLineIndent("if (fbeBegin == 0) {");
@@ -6227,7 +6291,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     // Generate struct field model setEnd() method
     WriteLine();
     WriteLineIndent("// Set the struct value (end phase)");
-    WriteLineIndent("func setEnd(fbeBegin: Int) {");
+    WriteLineIndent("public func setEnd(fbeBegin: Int) {");
     Indent(1);
     WriteLineIndent("_buffer.unshift(offset: fbeBegin)");
     Indent(-1);
@@ -6236,7 +6300,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     // Generate struct field model set() method
     WriteLine();
     WriteLineIndent("// Set the struct value");
-    WriteLineIndent("func set(value fbeValue: " + struct_name + ") throws {");
+    WriteLineIndent("public func set(value fbeValue: " + struct_name + ") throws {");
     Indent(1);
     WriteLineIndent("let fbeBegin = try setBegin()");
     WriteLineIndent("if fbeBegin == 0 {");
@@ -6303,7 +6367,7 @@ void GeneratorSwift::GenerateStructModel(const std::shared_ptr<Package>& p, cons
     Indent(1);
 
     // Generate struct model accessor
-    WriteLineIndent("let model: FieldModel" + *s->name);
+    WriteLineIndent("public let model: FieldModel" + *s->name);
 
     // Generate struct model init(buffer: Buffer) method
     WriteLine();
@@ -6443,8 +6507,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "fbe");
-    if (s->base && !s->base->empty())
-        GenerateImports("", ConvertTypeImport(*s->base));
+    GenerateImports(p);
 
     // Generate struct final model begin
     WriteLine();
@@ -7844,16 +7907,16 @@ bool GeneratorSwift::IsPackageType(const std::string& type)
     if (IsKnownType(type) || IsImportedType(type))
         return true;
 
-    return ((type == "Boolean") || (type == "Boolean?") ||
-            (type == "Byte") || (type == "Byte?") || (type == "ByteArray") || (type == "ByteArray?") ||
-            (type == "Char") || (type == "Char?") ||
-            (type == "Byte") || (type == "Byte?") || (type == "UByte") || (type == "UByte?") ||
-            (type == "Short") || (type == "Short?") || (type == "UShort") || (type == "UShort?") ||
-            (type == "Int") || (type == "Int?") || (type == "UInt") || (type == "UInt?") ||
-            (type == "Long") || (type == "Long?") || (type == "ULong") || (type == "ULong?") ||
+    return ((type == "Bool") || (type == "Bool?") ||
+            (type == "UInt8") || (type == "UInt8?") || (type == "Data") || (type == "Data?") ||
+            (type == "Character") || (type == "Character?") ||
+            (type == "Int8") || (type == "Int8?") || (type == "UInt8") || (type == "UInt8?") ||
+            (type == "Int16") || (type == "Int16?") || (type == "UInt16") || (type == "UInt16?") ||
+            (type == "Int32") || (type == "Int32?") || (type == "UInt32") || (type == "UInt32?") ||
+            (type == "Int64") || (type == "Int64?") || (type == "UInt64") || (type == "UInt64?") ||
             (type == "Float") || (type == "Float?") || (type == "Double") || (type == "Double?") ||
-            (type == "java.math.BigDecimal") || (type == "java.math.BigDecimal?") || (type == "java.math.BigInteger") || (type == "java.math.BigInteger?") ||
-            (type == "String") || (type == "String?") || (type == "java.util.Date") || (type == "java.util.Date?") || (type == "java.time.Instant") || (type == "java.time.Instant?") || (type == "java.util.UUID") || (type == "java.util.UUID?"));
+            (type == "Decimal") || (type == "Decimal?") ||
+            (type == "String") || (type == "String?") || (type == "Date") || (type == "Date?") || (type == "TimeInterval") || (type == "TimeInterval?") || (type == "UUID") || (type == "UUID?"));
 }
 
 bool GeneratorSwift::IsPrimitiveType(const std::string& type, bool optional)
@@ -8150,29 +8213,29 @@ std::string GeneratorSwift::ConvertEnumConstantSuffix(const std::string& type)
 std::string GeneratorSwift::ConvertPrimitiveTypeName(const std::string& type)
 {
     if (type == "bool")
-        return "Boolean";
+        return "Bool";
     else if (type == "byte")
-        return "Byte";
+        return "UInt8";
     else if (type == "char")
         return "Character";
     else if (type == "wchar")
         return "Character";
     else if (type == "int8")
-        return "Byte";
+        return "Int8";
     else if (type == "uint8")
-        return "UByte";
+        return "UInt8";
     else if (type == "int16")
-        return "Short";
+        return "Int16";
     else if (type == "uint16")
-        return "UShort";
+        return "UInt16";
     else if (type == "int32")
         return "Int32";
     else if (type == "uint32")
-        return "UInt";
+        return "UInt32";
     else if (type == "int64")
-        return "Long";
+        return "Int64";
     else if (type == "uint64")
-        return "ULong";
+        return "UInt64";
     else if (type == "float")
         return "Float";
     else if (type == "double")
@@ -8186,41 +8249,41 @@ std::string GeneratorSwift::ConvertTypeName(const std::string& domain, const std
     std::string opt = optional ? "?" : "";
 
     if (type == "bool")
-        return "Boolean" + opt;
+        return "Bool" + opt;
     else if (type == "byte")
-        return "Byte" + opt;
+        return "UInt8" + opt;
     else if (type == "bytes")
-        return "ByteArray" + opt;
+        return "Data" + opt;
     else if (type == "char")
         return "Character" + opt;
     else if (type == "wchar")
-        return "Char" + opt;
+        return "Character" + opt;
     else if (type == "int8")
-        return "Byte" + opt;
+        return "Int8" + opt;
     else if (type == "uint8")
-        return "UByte" + opt;
+        return "UInt8" + opt;
     else if (type == "int16")
-        return "Short" + opt;
+        return "Int16" + opt;
     else if (type == "uint16")
-        return "UShort" + opt;
+        return "UInt16" + opt;
     else if (type == "int32")
         return "Int32" + opt;
     else if (type == "uint32")
-        return "UInt" + opt;
+        return "UInt32" + opt;
     else if (type == "int64")
-        return "Long" + opt;
+        return "Int64" + opt;
     else if (type == "uint64")
-        return "ULong" + opt;
+        return "UInt64" + opt;
     else if (type == "float")
         return "Float" + opt;
     else if (type == "double")
         return "Double" + opt;
     else if (type == "decimal")
-        return "java.math.BigDecimal" + opt;
+        return "Decimal" + opt;
     else if (type == "string")
         return "String" + opt;
     else if (type == "timestamp")
-        return ((Version() < 8) ? "java.util.Date" : "java.time.Instant") + opt;
+        return ((Version() < 8) ? "java.util.Date" : "TimeInterval") + opt;
     else if (type == "uuid")
         return "UUID" + opt;
 
@@ -8267,7 +8330,7 @@ std::string GeneratorSwift::ConvertTypeImport(const std::string& type)
       ns.assign(type, 0, pos);
   }
   else if (!type.empty())
-      ns = type;
+      ns = "";
 
   return ns;
 }
@@ -8294,9 +8357,9 @@ std::string GeneratorSwift::ConvertTypeFieldName(const std::string& type)
     if (type == "bool")
         return "Boolean";
     else if (type == "byte")
-        return "Byte";
+        return "UInt8";
     else if (type == "bytes")
-        return "Bytes";
+        return "Data";
     else if (type == "char")
         return "Char";
     else if (type == "wchar")
@@ -8340,11 +8403,11 @@ std::string GeneratorSwift::ConvertTypeFieldType(const std::string& domain, cons
     std::string opt = optional ? "?" : "";
 
     if (type == "bool")
-        return "Boolean" + opt;
+        return "Bool" + opt;
     else if (type == "byte")
-        return "Byte" + opt;
+        return "UInt8" + opt;
     else if (type == "bytes")
-        return "ByteArray" + opt;
+        return "Data" + opt;
     else if (type == "char")
         return "Character" + opt;
     else if (type == "wchar")
@@ -8376,7 +8439,7 @@ std::string GeneratorSwift::ConvertTypeFieldType(const std::string& domain, cons
     else if (type == "timestamp")
         return ((Version() < 8) ? "java.util.Date" : "TimeInterval") + opt;
     else if (type == "uuid")
-        return "java.util.UUID" + opt;
+        return "UUID" + opt;
 
     std::string ns = "";
     std::string t = type;
@@ -8469,21 +8532,21 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
         if (type == "byte")
             return ConvertConstantPrefix(type) + "0" + ConvertConstantSuffix(type);
         else if (type == "int8")
-            return "Byte.MIN_VALUE";
+            return "Int8.min";
         else if (type == "uint8")
-            return "UByte.MIN_VALUE";
+            return "UInt8.min";
         else if (type == "int16")
-            return "Short.MIN_VALUE";
+            return "Int16.min";
         else if (type == "uint16")
-            return "UShort.MIN_VALUE";
+            return "UInt16.min";
         else if (type == "int32")
-            return "Int.MIN_VALUE";
+            return "Int32.min";
         else if (type == "uint32")
-            return "UInt.MIN_VALUE";
+            return "UInt32.min";
         else if (type == "int64")
-            return "Long.MIN_VALUE";
+            return "Int64.min";
         else if (type == "uint64")
-            return "ULong.MIN_VALUE";
+            return "UInt64.min";
 
         yyerror("Unsupported type " + type + " for 'min' constant");
         return "";
@@ -8493,21 +8556,21 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
         if (type == "byte")
             return ConvertConstantPrefix(type) + "0xFF" + ConvertConstantSuffix(type);
         else if (type == "int8")
-            return "Byte.MAX_VALUE";
+            return "Int8.max";
         else if (type == "uint8")
-            return "UByte.MAX_VALUE";
+            return "UInt8.max";
         else if (type == "int16")
-            return "Short.MAX_VALUE";
+            return "Int16.max";
         else if (type == "uint16")
-            return "UShort.MAX_VALUE";
+            return "UInt16.max";
         else if (type == "int32")
-            return "Int.MAX_VALUE";
+            return "Int32.max";
         else if (type == "uint32")
-            return "UInt.MAX_VALUE";
+            return "UInt32.max";
         else if (type == "int64")
-            return "Long.MAX_VALUE";
+            return "Int64.max";
         else if (type == "uint64")
-            return "ULong.MAX_VALUE";
+            return "UInt64.max";
 
         yyerror("Unsupported type " + type + " for 'max' constant");
         return "";
@@ -8517,11 +8580,11 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
     else if (value == "utc")
         return ((Version() < 8) ? "java.util.Date(System.currentTimeMillis())" : "Date().timeIntervalSince1970");
     else if (value == "uuid0")
-        return "UUIDGenerator.nil()";
+        return "fbe.UUIDGenerator.nil()";
     else if (value == "uuid1")
-        return  "UUIDGenerator.sequential()";
+        return  "fbe.UUIDGenerator.sequential()";
     else if (value == "uuid4")
-        return "UUIDGenerator.random()";
+        return "fbe.UUIDGenerator.random()";
 
     std::string result = value;
 
@@ -8556,9 +8619,12 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
 std::string GeneratorSwift::ConvertConstantPrefix(const std::string& type)
 {
     if (type == "decimal")
-        return "java.math.BigDecimal.valueOf(";
+        return "Decimal(";
     if (type == "uuid")
-        return "java.util.UUID.fromString(";
+        return "UUID(uuidString: ";
+    if (type == "wchar")
+        return "Character(UnicodeScalar(";
+
 
     return "";
 }
@@ -8566,9 +8632,9 @@ std::string GeneratorSwift::ConvertConstantPrefix(const std::string& type)
 std::string GeneratorSwift::ConvertConstantSuffix(const std::string& type)
 {
     if (type == "byte")
-        return ".toByte()";
-    if ((type == "char") || (type == "wchar"))
-        return ".toChar()";
+        return "";
+    if ((type == "char"))
+        return "";
     if ((type == "uint8") || (type == "uint16") || (type == "uint32"))
         return "";
     if (type == "int64")
@@ -8578,7 +8644,11 @@ std::string GeneratorSwift::ConvertConstantSuffix(const std::string& type)
     if (type == "float")
         return "";
 
-    if ((type == "decimal") || (type == "uuid"))
+    if (type == "wchar")
+        return ")!)";
+    if (type == "uuid")
+        return ")!";
+    if (type == "decimal")
         return ")";
 
     return "";
@@ -8593,7 +8663,7 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
     else if (type == "bytes")
         return "Data()";
     else if ((type == "char") || (type == "wchar"))
-        return "0";
+        return "\"0\"";
     else if (type == "int8")
         return "0";
     else if (type == "uint8")
@@ -8621,7 +8691,7 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
     else if (type == "timestamp")
         return ((Version() < 8) ? "java.util.Date(0)" : "0");
     else if (type == "uuid")
-        return domain + "fbe.UUIDGenerator.nil()";
+        return "fbe.UUIDGenerator.nil()";
 
     std::string ns = "";
     std::string t = type;
@@ -8668,13 +8738,15 @@ std::string GeneratorSwift::ConvertOutputStreamType(const std::string& type, con
     if (type == "bool")
         return ".append(" + name + opt + " ? \"true\" : \"false\")";
     else if (type == "bytes")
-        return ".append(\"bytes[\"); sd.append(" + name + opt + ".size); sd.append(\"]\")";
+        return ".append(\"bytes[\"); sb.append(\"\\(" + name + opt + ".count)\"); sb.append(\"]\")";
     else if ((type == "char") || (type == "wchar"))
-        return ".append(\"'\"); sd.append(" + name + opt + "); sd.append(\"'\")";
-    else if ((type == "string") || (type == "uuid"))
+        return ".append(\"'\"); sb.append(" + name + opt + "); sb.append(\"'\")";
+    else if (type == "string")
         return ".append(\"\\\"\"); sb.append(" + name + opt + "); sb.append(\"\\\"\")";
+    else if (type == "uuid")
+        return ".append(\"\\\"\"); sb.append(" + name + opt + ".uuidString); sb.append(\"\\\"\")";
     else if (type == "timestamp")
-        return ((Version() < 8) ? "; sd.append(" + name + opt + ".time * 1000000)" : "; sd.append(" + name + opt + ".epochSecond * 1000000000 + " + name + opt + ".nano)");
+        return ((Version() < 8) ? ".append(" + name + opt + ".time * 1000000)" : ".append(\"\\(" + name + opt + " * 1000000000)\")");
     else
         return ".append(" + name + opt + ".description)";
 }
@@ -8684,7 +8756,7 @@ std::string GeneratorSwift::ConvertOutputStreamValue(const std::string& type, co
     std::string comma = separate ? ".append(first ? \"\" : \",\"); sb" : "";
 
     if (optional)
-        return "" + name + " != nil ? { sb" + comma + ConvertOutputStreamType(type, name, nullable) + " } : { sb" + comma + ".append(\"null\") }";
+        return " if let " + name + " = " + name + " { sb" + comma + ConvertOutputStreamType(type, name, false) + " } else { sb" + comma + ".append(\"null\") }";
     else
         return "sb" + comma + ConvertOutputStreamType(type, name, false);
 }

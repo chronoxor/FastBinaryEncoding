@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4254FBF92304793400BB1335 /* test in Frameworks */ = {isa = PBXBuildFile; productRef = 4254FBF82304793400BB1335 /* test */; };
 		4289100C2304763000AE7BF9 /* fbe in Frameworks */ = {isa = PBXBuildFile; productRef = 4289100B2304763000AE7BF9 /* fbe */; };
 		4289100E2304764000AE7BF9 /* proto in Frameworks */ = {isa = PBXBuildFile; productRef = 4289100D2304764000AE7BF9 /* proto */; };
 		42D0AB1F22FC5F6700A77702 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0AB1E22FC5F6700A77702 /* Serialization.swift */; };
@@ -19,6 +18,12 @@
 		5521616A22F812E9009773A3 /* SendReceiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5521616922F812E9009773A3 /* SendReceiveTests.swift */; };
 		552162B022F848A9009773A3 /* SendReceiveFinalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552162AF22F848A9009773A3 /* SendReceiveFinalTest.swift */; };
 		552162C122F95AA0009773A3 /* EnumsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552162C022F95AA0009773A3 /* EnumsTest.swift */; };
+		552E8D5E23057F9100274192 /* protoex in Frameworks */ = {isa = PBXBuildFile; productRef = 552E8D5D23057F9100274192 /* protoex */; };
+		552E8D6023057FAB00274192 /* test in Frameworks */ = {isa = PBXBuildFile; productRef = 552E8D5F23057FAB00274192 /* test */; };
+		552E8D6223057FAE00274192 /* protoex in Frameworks */ = {isa = PBXBuildFile; productRef = 552E8D6123057FAE00274192 /* protoex */; };
+		552E8D652305800900274192 /* enums in Frameworks */ = {isa = PBXBuildFile; productRef = 552E8D642305800900274192 /* enums */; };
+		552E8D672305800D00274192 /* enums in Frameworks */ = {isa = PBXBuildFile; productRef = 552E8D662305800D00274192 /* enums */; };
+		552E8D692305801100274192 /* test in Frameworks */ = {isa = PBXBuildFile; productRef = 552E8D682305801100274192 /* test */; };
 		5530B19223018A9000FCCB6E /* ExTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530B19123018A9000FCCB6E /* ExTest.swift */; };
 		5559810D2301C30D008443F9 /* DecimalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559810C2301C30D008443F9 /* DecimalTest.swift */; };
 		556FAADF2301AAEC00A8B936 /* BenchmarkSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556FAADE2301AAEC00A8B936 /* BenchmarkSerialization.swift */; };
@@ -53,6 +58,8 @@
 		5521616B22F812E9009773A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		552162AF22F848A9009773A3 /* SendReceiveFinalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendReceiveFinalTest.swift; sourceTree = "<group>"; };
 		552162C022F95AA0009773A3 /* EnumsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumsTest.swift; sourceTree = "<group>"; };
+		552E8D5C23057F7E00274192 /* protoex */ = {isa = PBXFileReference; lastKnownFileType = folder; name = protoex; path = ../../../bin/com/chronoxor/protoex; sourceTree = "<group>"; };
+		552E8D632305800400274192 /* enums */ = {isa = PBXFileReference; lastKnownFileType = folder; name = enums; path = ../../../bin/com/chronoxor/enums; sourceTree = "<group>"; };
 		5530B19123018A9000FCCB6E /* ExTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExTest.swift; sourceTree = "<group>"; };
 		5559810C2301C30D008443F9 /* DecimalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalTest.swift; sourceTree = "<group>"; };
 		556FAADE2301AAEC00A8B936 /* BenchmarkSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkSerialization.swift; sourceTree = "<group>"; };
@@ -63,9 +70,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				552E8D5E23057F9100274192 /* protoex in Frameworks */,
+				552E8D692305801100274192 /* test in Frameworks */,
+				552E8D672305800D00274192 /* enums in Frameworks */,
 				4289100C2304763000AE7BF9 /* fbe in Frameworks */,
 				4289100E2304764000AE7BF9 /* proto in Frameworks */,
-				4254FBF92304793400BB1335 /* test in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,8 +82,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				552E8D6223057FAE00274192 /* protoex in Frameworks */,
+				552E8D652305800900274192 /* enums in Frameworks */,
 				5577A36F2301C4EB00AC5973 /* fbe in Frameworks */,
 				5577A36D2301C4E900AC5973 /* proto in Frameworks */,
+				552E8D6023057FAB00274192 /* test in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +96,8 @@
 		5521614822F812E8009773A3 = {
 			isa = PBXGroup;
 			children = (
+				552E8D632305800400274192 /* enums */,
+				552E8D5C23057F7E00274192 /* protoex */,
 				4254FBF7230478DE00BB1335 /* test */,
 				42890FAE2304753E00AE7BF9 /* fbe */,
 				42890FAF2304753E00AE7BF9 /* proto */,
@@ -157,7 +171,9 @@
 			packageProductDependencies = (
 				4289100B2304763000AE7BF9 /* fbe */,
 				4289100D2304764000AE7BF9 /* proto */,
-				4254FBF82304793400BB1335 /* test */,
+				552E8D5D23057F9100274192 /* protoex */,
+				552E8D662305800D00274192 /* enums */,
+				552E8D682305801100274192 /* test */,
 			);
 			productName = FastBinaryEncoding;
 			productReference = 5521615122F812E8009773A3 /* FastBinaryEncoding.app */;
@@ -180,6 +196,9 @@
 			packageProductDependencies = (
 				5577A36C2301C4E900AC5973 /* proto */,
 				5577A36E2301C4EB00AC5973 /* fbe */,
+				552E8D5F23057FAB00274192 /* test */,
+				552E8D6123057FAE00274192 /* protoex */,
+				552E8D642305800900274192 /* enums */,
 			);
 			productName = FastBinaryEncodingTests;
 			productReference = 5521616522F812E9009773A3 /* FastBinaryEncodingTests.xctest */;
@@ -532,10 +551,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4254FBF82304793400BB1335 /* test */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = test;
-		};
 		4289100B2304763000AE7BF9 /* fbe */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = fbe;
@@ -543,6 +558,30 @@
 		4289100D2304764000AE7BF9 /* proto */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = proto;
+		};
+		552E8D5D23057F9100274192 /* protoex */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = protoex;
+		};
+		552E8D5F23057FAB00274192 /* test */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = test;
+		};
+		552E8D6123057FAE00274192 /* protoex */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = protoex;
+		};
+		552E8D642305800900274192 /* enums */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = enums;
+		};
+		552E8D662305800D00274192 /* enums */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = enums;
+		};
+		552E8D682305801100274192 /* test */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = test;
 		};
 		5577A36C2301C4E900AC5973 /* proto */ = {
 			isa = XCSwiftPackageProductDependency;
