@@ -10,13 +10,11 @@ package com.chronoxor.proto
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class OrderMessage : Comparable<Any?>
 {
-    var body: Order = Order()
+    var body: Order
 
     @Transient open var fbeType: Long = 1
 
-    constructor()
-
-    constructor(body: Order)
+    constructor(body: Order = Order())
     {
         this.body = body
     }

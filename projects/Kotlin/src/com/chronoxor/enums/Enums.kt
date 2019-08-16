@@ -10,78 +10,76 @@ package com.chronoxor.enums
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class Enums : Comparable<Any?>
 {
-    var byte0: EnumByte = EnumByte.ENUM_VALUE_0
-    var byte1: EnumByte = EnumByte.ENUM_VALUE_1
-    var byte2: EnumByte = EnumByte.ENUM_VALUE_2
-    var byte3: EnumByte = EnumByte.ENUM_VALUE_3
-    var byte4: EnumByte = EnumByte.ENUM_VALUE_4
-    var byte5: EnumByte = EnumByte.ENUM_VALUE_5
-    var char0: EnumChar = EnumChar.ENUM_VALUE_0
-    var char1: EnumChar = EnumChar.ENUM_VALUE_1
-    var char2: EnumChar = EnumChar.ENUM_VALUE_2
-    var char3: EnumChar = EnumChar.ENUM_VALUE_3
-    var char4: EnumChar = EnumChar.ENUM_VALUE_4
-    var char5: EnumChar = EnumChar.ENUM_VALUE_5
-    var wchar0: EnumWChar = EnumWChar.ENUM_VALUE_0
-    var wchar1: EnumWChar = EnumWChar.ENUM_VALUE_1
-    var wchar2: EnumWChar = EnumWChar.ENUM_VALUE_2
-    var wchar3: EnumWChar = EnumWChar.ENUM_VALUE_3
-    var wchar4: EnumWChar = EnumWChar.ENUM_VALUE_4
-    var wchar5: EnumWChar = EnumWChar.ENUM_VALUE_5
-    var int8b0: EnumInt8 = EnumInt8.ENUM_VALUE_0
-    var int8b1: EnumInt8 = EnumInt8.ENUM_VALUE_1
-    var int8b2: EnumInt8 = EnumInt8.ENUM_VALUE_2
-    var int8b3: EnumInt8 = EnumInt8.ENUM_VALUE_3
-    var int8b4: EnumInt8 = EnumInt8.ENUM_VALUE_4
-    var int8b5: EnumInt8 = EnumInt8.ENUM_VALUE_5
-    var uint8b0: EnumUInt8 = EnumUInt8.ENUM_VALUE_0
-    var uint8b1: EnumUInt8 = EnumUInt8.ENUM_VALUE_1
-    var uint8b2: EnumUInt8 = EnumUInt8.ENUM_VALUE_2
-    var uint8b3: EnumUInt8 = EnumUInt8.ENUM_VALUE_3
-    var uint8b4: EnumUInt8 = EnumUInt8.ENUM_VALUE_4
-    var uint8b5: EnumUInt8 = EnumUInt8.ENUM_VALUE_5
-    var int16b0: EnumInt16 = EnumInt16.ENUM_VALUE_0
-    var int16b1: EnumInt16 = EnumInt16.ENUM_VALUE_1
-    var int16b2: EnumInt16 = EnumInt16.ENUM_VALUE_2
-    var int16b3: EnumInt16 = EnumInt16.ENUM_VALUE_3
-    var int16b4: EnumInt16 = EnumInt16.ENUM_VALUE_4
-    var int16b5: EnumInt16 = EnumInt16.ENUM_VALUE_5
-    var uint16b0: EnumUInt16 = EnumUInt16.ENUM_VALUE_0
-    var uint16b1: EnumUInt16 = EnumUInt16.ENUM_VALUE_1
-    var uint16b2: EnumUInt16 = EnumUInt16.ENUM_VALUE_2
-    var uint16b3: EnumUInt16 = EnumUInt16.ENUM_VALUE_3
-    var uint16b4: EnumUInt16 = EnumUInt16.ENUM_VALUE_4
-    var uint16b5: EnumUInt16 = EnumUInt16.ENUM_VALUE_5
-    var int32b0: EnumInt32 = EnumInt32.ENUM_VALUE_0
-    var int32b1: EnumInt32 = EnumInt32.ENUM_VALUE_1
-    var int32b2: EnumInt32 = EnumInt32.ENUM_VALUE_2
-    var int32b3: EnumInt32 = EnumInt32.ENUM_VALUE_3
-    var int32b4: EnumInt32 = EnumInt32.ENUM_VALUE_4
-    var int32b5: EnumInt32 = EnumInt32.ENUM_VALUE_5
-    var uint32b0: EnumUInt32 = EnumUInt32.ENUM_VALUE_0
-    var uint32b1: EnumUInt32 = EnumUInt32.ENUM_VALUE_1
-    var uint32b2: EnumUInt32 = EnumUInt32.ENUM_VALUE_2
-    var uint32b3: EnumUInt32 = EnumUInt32.ENUM_VALUE_3
-    var uint32b4: EnumUInt32 = EnumUInt32.ENUM_VALUE_4
-    var uint32b5: EnumUInt32 = EnumUInt32.ENUM_VALUE_5
-    var int64b0: EnumInt64 = EnumInt64.ENUM_VALUE_0
-    var int64b1: EnumInt64 = EnumInt64.ENUM_VALUE_1
-    var int64b2: EnumInt64 = EnumInt64.ENUM_VALUE_2
-    var int64b3: EnumInt64 = EnumInt64.ENUM_VALUE_3
-    var int64b4: EnumInt64 = EnumInt64.ENUM_VALUE_4
-    var int64b5: EnumInt64 = EnumInt64.ENUM_VALUE_5
-    var uint64b0: EnumUInt64 = EnumUInt64.ENUM_VALUE_0
-    var uint64b1: EnumUInt64 = EnumUInt64.ENUM_VALUE_1
-    var uint64b2: EnumUInt64 = EnumUInt64.ENUM_VALUE_2
-    var uint64b3: EnumUInt64 = EnumUInt64.ENUM_VALUE_3
-    var uint64b4: EnumUInt64 = EnumUInt64.ENUM_VALUE_4
-    var uint64b5: EnumUInt64 = EnumUInt64.ENUM_VALUE_5
+    var byte0: EnumByte
+    var byte1: EnumByte
+    var byte2: EnumByte
+    var byte3: EnumByte
+    var byte4: EnumByte
+    var byte5: EnumByte
+    var char0: EnumChar
+    var char1: EnumChar
+    var char2: EnumChar
+    var char3: EnumChar
+    var char4: EnumChar
+    var char5: EnumChar
+    var wchar0: EnumWChar
+    var wchar1: EnumWChar
+    var wchar2: EnumWChar
+    var wchar3: EnumWChar
+    var wchar4: EnumWChar
+    var wchar5: EnumWChar
+    var int8b0: EnumInt8
+    var int8b1: EnumInt8
+    var int8b2: EnumInt8
+    var int8b3: EnumInt8
+    var int8b4: EnumInt8
+    var int8b5: EnumInt8
+    var uint8b0: EnumUInt8
+    var uint8b1: EnumUInt8
+    var uint8b2: EnumUInt8
+    var uint8b3: EnumUInt8
+    var uint8b4: EnumUInt8
+    var uint8b5: EnumUInt8
+    var int16b0: EnumInt16
+    var int16b1: EnumInt16
+    var int16b2: EnumInt16
+    var int16b3: EnumInt16
+    var int16b4: EnumInt16
+    var int16b5: EnumInt16
+    var uint16b0: EnumUInt16
+    var uint16b1: EnumUInt16
+    var uint16b2: EnumUInt16
+    var uint16b3: EnumUInt16
+    var uint16b4: EnumUInt16
+    var uint16b5: EnumUInt16
+    var int32b0: EnumInt32
+    var int32b1: EnumInt32
+    var int32b2: EnumInt32
+    var int32b3: EnumInt32
+    var int32b4: EnumInt32
+    var int32b5: EnumInt32
+    var uint32b0: EnumUInt32
+    var uint32b1: EnumUInt32
+    var uint32b2: EnumUInt32
+    var uint32b3: EnumUInt32
+    var uint32b4: EnumUInt32
+    var uint32b5: EnumUInt32
+    var int64b0: EnumInt64
+    var int64b1: EnumInt64
+    var int64b2: EnumInt64
+    var int64b3: EnumInt64
+    var int64b4: EnumInt64
+    var int64b5: EnumInt64
+    var uint64b0: EnumUInt64
+    var uint64b1: EnumUInt64
+    var uint64b2: EnumUInt64
+    var uint64b3: EnumUInt64
+    var uint64b4: EnumUInt64
+    var uint64b5: EnumUInt64
 
     @Transient open var fbeType: Long = 1
 
-    constructor()
-
-    constructor(byte0: EnumByte, byte1: EnumByte, byte2: EnumByte, byte3: EnumByte, byte4: EnumByte, byte5: EnumByte, char0: EnumChar, char1: EnumChar, char2: EnumChar, char3: EnumChar, char4: EnumChar, char5: EnumChar, wchar0: EnumWChar, wchar1: EnumWChar, wchar2: EnumWChar, wchar3: EnumWChar, wchar4: EnumWChar, wchar5: EnumWChar, int8b0: EnumInt8, int8b1: EnumInt8, int8b2: EnumInt8, int8b3: EnumInt8, int8b4: EnumInt8, int8b5: EnumInt8, uint8b0: EnumUInt8, uint8b1: EnumUInt8, uint8b2: EnumUInt8, uint8b3: EnumUInt8, uint8b4: EnumUInt8, uint8b5: EnumUInt8, int16b0: EnumInt16, int16b1: EnumInt16, int16b2: EnumInt16, int16b3: EnumInt16, int16b4: EnumInt16, int16b5: EnumInt16, uint16b0: EnumUInt16, uint16b1: EnumUInt16, uint16b2: EnumUInt16, uint16b3: EnumUInt16, uint16b4: EnumUInt16, uint16b5: EnumUInt16, int32b0: EnumInt32, int32b1: EnumInt32, int32b2: EnumInt32, int32b3: EnumInt32, int32b4: EnumInt32, int32b5: EnumInt32, uint32b0: EnumUInt32, uint32b1: EnumUInt32, uint32b2: EnumUInt32, uint32b3: EnumUInt32, uint32b4: EnumUInt32, uint32b5: EnumUInt32, int64b0: EnumInt64, int64b1: EnumInt64, int64b2: EnumInt64, int64b3: EnumInt64, int64b4: EnumInt64, int64b5: EnumInt64, uint64b0: EnumUInt64, uint64b1: EnumUInt64, uint64b2: EnumUInt64, uint64b3: EnumUInt64, uint64b4: EnumUInt64, uint64b5: EnumUInt64)
+    constructor(byte0: EnumByte = EnumByte.ENUM_VALUE_0, byte1: EnumByte = EnumByte.ENUM_VALUE_1, byte2: EnumByte = EnumByte.ENUM_VALUE_2, byte3: EnumByte = EnumByte.ENUM_VALUE_3, byte4: EnumByte = EnumByte.ENUM_VALUE_4, byte5: EnumByte = EnumByte.ENUM_VALUE_5, char0: EnumChar = EnumChar.ENUM_VALUE_0, char1: EnumChar = EnumChar.ENUM_VALUE_1, char2: EnumChar = EnumChar.ENUM_VALUE_2, char3: EnumChar = EnumChar.ENUM_VALUE_3, char4: EnumChar = EnumChar.ENUM_VALUE_4, char5: EnumChar = EnumChar.ENUM_VALUE_5, wchar0: EnumWChar = EnumWChar.ENUM_VALUE_0, wchar1: EnumWChar = EnumWChar.ENUM_VALUE_1, wchar2: EnumWChar = EnumWChar.ENUM_VALUE_2, wchar3: EnumWChar = EnumWChar.ENUM_VALUE_3, wchar4: EnumWChar = EnumWChar.ENUM_VALUE_4, wchar5: EnumWChar = EnumWChar.ENUM_VALUE_5, int8b0: EnumInt8 = EnumInt8.ENUM_VALUE_0, int8b1: EnumInt8 = EnumInt8.ENUM_VALUE_1, int8b2: EnumInt8 = EnumInt8.ENUM_VALUE_2, int8b3: EnumInt8 = EnumInt8.ENUM_VALUE_3, int8b4: EnumInt8 = EnumInt8.ENUM_VALUE_4, int8b5: EnumInt8 = EnumInt8.ENUM_VALUE_5, uint8b0: EnumUInt8 = EnumUInt8.ENUM_VALUE_0, uint8b1: EnumUInt8 = EnumUInt8.ENUM_VALUE_1, uint8b2: EnumUInt8 = EnumUInt8.ENUM_VALUE_2, uint8b3: EnumUInt8 = EnumUInt8.ENUM_VALUE_3, uint8b4: EnumUInt8 = EnumUInt8.ENUM_VALUE_4, uint8b5: EnumUInt8 = EnumUInt8.ENUM_VALUE_5, int16b0: EnumInt16 = EnumInt16.ENUM_VALUE_0, int16b1: EnumInt16 = EnumInt16.ENUM_VALUE_1, int16b2: EnumInt16 = EnumInt16.ENUM_VALUE_2, int16b3: EnumInt16 = EnumInt16.ENUM_VALUE_3, int16b4: EnumInt16 = EnumInt16.ENUM_VALUE_4, int16b5: EnumInt16 = EnumInt16.ENUM_VALUE_5, uint16b0: EnumUInt16 = EnumUInt16.ENUM_VALUE_0, uint16b1: EnumUInt16 = EnumUInt16.ENUM_VALUE_1, uint16b2: EnumUInt16 = EnumUInt16.ENUM_VALUE_2, uint16b3: EnumUInt16 = EnumUInt16.ENUM_VALUE_3, uint16b4: EnumUInt16 = EnumUInt16.ENUM_VALUE_4, uint16b5: EnumUInt16 = EnumUInt16.ENUM_VALUE_5, int32b0: EnumInt32 = EnumInt32.ENUM_VALUE_0, int32b1: EnumInt32 = EnumInt32.ENUM_VALUE_1, int32b2: EnumInt32 = EnumInt32.ENUM_VALUE_2, int32b3: EnumInt32 = EnumInt32.ENUM_VALUE_3, int32b4: EnumInt32 = EnumInt32.ENUM_VALUE_4, int32b5: EnumInt32 = EnumInt32.ENUM_VALUE_5, uint32b0: EnumUInt32 = EnumUInt32.ENUM_VALUE_0, uint32b1: EnumUInt32 = EnumUInt32.ENUM_VALUE_1, uint32b2: EnumUInt32 = EnumUInt32.ENUM_VALUE_2, uint32b3: EnumUInt32 = EnumUInt32.ENUM_VALUE_3, uint32b4: EnumUInt32 = EnumUInt32.ENUM_VALUE_4, uint32b5: EnumUInt32 = EnumUInt32.ENUM_VALUE_5, int64b0: EnumInt64 = EnumInt64.ENUM_VALUE_0, int64b1: EnumInt64 = EnumInt64.ENUM_VALUE_1, int64b2: EnumInt64 = EnumInt64.ENUM_VALUE_2, int64b3: EnumInt64 = EnumInt64.ENUM_VALUE_3, int64b4: EnumInt64 = EnumInt64.ENUM_VALUE_4, int64b5: EnumInt64 = EnumInt64.ENUM_VALUE_5, uint64b0: EnumUInt64 = EnumUInt64.ENUM_VALUE_0, uint64b1: EnumUInt64 = EnumUInt64.ENUM_VALUE_1, uint64b2: EnumUInt64 = EnumUInt64.ENUM_VALUE_2, uint64b3: EnumUInt64 = EnumUInt64.ENUM_VALUE_3, uint64b4: EnumUInt64 = EnumUInt64.ENUM_VALUE_4, uint64b5: EnumUInt64 = EnumUInt64.ENUM_VALUE_5)
     {
         this.byte0 = byte0
         this.byte1 = byte1

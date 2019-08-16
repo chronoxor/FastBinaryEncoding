@@ -10,78 +10,76 @@ package com.chronoxor.test
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructOptional : StructSimple
 {
-    var f100: Boolean? = null
-    var f101: Boolean? = true
-    var f102: Boolean? = null
-    var f103: Byte? = null
-    var f104: Byte? = 0xFF.toByte()
-    var f105: Byte? = null
-    var f106: Char? = null
-    var f107: Char? = '!'.toChar()
-    var f108: Char? = null
-    var f109: Char? = null
-    var f110: Char? = 0x0444.toChar()
-    var f111: Char? = null
-    var f112: Byte? = null
-    var f113: Byte? = Byte.MAX_VALUE
-    var f114: Byte? = null
-    var f115: UByte? = null
-    var f116: UByte? = UByte.MAX_VALUE
-    var f117: UByte? = null
-    var f118: Short? = null
-    var f119: Short? = Short.MAX_VALUE
-    var f120: Short? = null
-    var f121: UShort? = null
-    var f122: UShort? = UShort.MAX_VALUE
-    var f123: UShort? = null
-    var f124: Int? = null
-    var f125: Int? = Int.MAX_VALUE
-    var f126: Int? = null
-    var f127: UInt? = null
-    var f128: UInt? = UInt.MAX_VALUE
-    var f129: UInt? = null
-    var f130: Long? = null
-    var f131: Long? = Long.MAX_VALUE
-    var f132: Long? = null
-    var f133: ULong? = null
-    var f134: ULong? = ULong.MAX_VALUE
-    var f135: ULong? = null
-    var f136: Float? = null
-    var f137: Float? = 123.456f
-    var f138: Float? = null
-    var f139: Double? = null
-    var f140: Double? = -123.456e+123
-    var f141: Double? = null
-    var f142: java.math.BigDecimal? = null
-    var f143: java.math.BigDecimal? = java.math.BigDecimal.valueOf(123456.123456)
-    var f144: java.math.BigDecimal? = null
-    var f145: String? = null
-    var f146: String? = "Initial string!"
-    var f147: String? = null
-    var f148: java.time.Instant? = null
-    var f149: java.time.Instant? = java.time.Instant.now()
-    var f150: java.time.Instant? = null
-    var f151: java.util.UUID? = null
-    var f152: java.util.UUID? = java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000")
-    var f153: java.util.UUID? = null
-    var f154: com.chronoxor.proto.OrderSide? = null
-    var f155: com.chronoxor.proto.OrderSide? = null
-    var f156: com.chronoxor.proto.OrderType? = null
-    var f157: com.chronoxor.proto.OrderType? = null
-    var f158: com.chronoxor.proto.Order? = null
-    var f159: com.chronoxor.proto.Order? = null
-    var f160: com.chronoxor.proto.Balance? = null
-    var f161: com.chronoxor.proto.Balance? = null
-    var f162: com.chronoxor.proto.State? = null
-    var f163: com.chronoxor.proto.State? = null
-    var f164: com.chronoxor.proto.Account? = null
-    var f165: com.chronoxor.proto.Account? = null
+    var f100: Boolean?
+    var f101: Boolean?
+    var f102: Boolean?
+    var f103: Byte?
+    var f104: Byte?
+    var f105: Byte?
+    var f106: Char?
+    var f107: Char?
+    var f108: Char?
+    var f109: Char?
+    var f110: Char?
+    var f111: Char?
+    var f112: Byte?
+    var f113: Byte?
+    var f114: Byte?
+    var f115: UByte?
+    var f116: UByte?
+    var f117: UByte?
+    var f118: Short?
+    var f119: Short?
+    var f120: Short?
+    var f121: UShort?
+    var f122: UShort?
+    var f123: UShort?
+    var f124: Int?
+    var f125: Int?
+    var f126: Int?
+    var f127: UInt?
+    var f128: UInt?
+    var f129: UInt?
+    var f130: Long?
+    var f131: Long?
+    var f132: Long?
+    var f133: ULong?
+    var f134: ULong?
+    var f135: ULong?
+    var f136: Float?
+    var f137: Float?
+    var f138: Float?
+    var f139: Double?
+    var f140: Double?
+    var f141: Double?
+    var f142: java.math.BigDecimal?
+    var f143: java.math.BigDecimal?
+    var f144: java.math.BigDecimal?
+    var f145: String?
+    var f146: String?
+    var f147: String?
+    var f148: java.time.Instant?
+    var f149: java.time.Instant?
+    var f150: java.time.Instant?
+    var f151: java.util.UUID?
+    var f152: java.util.UUID?
+    var f153: java.util.UUID?
+    var f154: com.chronoxor.proto.OrderSide?
+    var f155: com.chronoxor.proto.OrderSide?
+    var f156: com.chronoxor.proto.OrderType?
+    var f157: com.chronoxor.proto.OrderType?
+    var f158: com.chronoxor.proto.Order?
+    var f159: com.chronoxor.proto.Order?
+    var f160: com.chronoxor.proto.Balance?
+    var f161: com.chronoxor.proto.Balance?
+    var f162: com.chronoxor.proto.State?
+    var f163: com.chronoxor.proto.State?
+    var f164: com.chronoxor.proto.Account?
+    var f165: com.chronoxor.proto.Account?
 
     @Transient override var fbeType: Long = 111
 
-    constructor()
-
-    constructor(parent: StructSimple, f100: Boolean?, f101: Boolean?, f102: Boolean?, f103: Byte?, f104: Byte?, f105: Byte?, f106: Char?, f107: Char?, f108: Char?, f109: Char?, f110: Char?, f111: Char?, f112: Byte?, f113: Byte?, f114: Byte?, f115: UByte?, f116: UByte?, f117: UByte?, f118: Short?, f119: Short?, f120: Short?, f121: UShort?, f122: UShort?, f123: UShort?, f124: Int?, f125: Int?, f126: Int?, f127: UInt?, f128: UInt?, f129: UInt?, f130: Long?, f131: Long?, f132: Long?, f133: ULong?, f134: ULong?, f135: ULong?, f136: Float?, f137: Float?, f138: Float?, f139: Double?, f140: Double?, f141: Double?, f142: java.math.BigDecimal?, f143: java.math.BigDecimal?, f144: java.math.BigDecimal?, f145: String?, f146: String?, f147: String?, f148: java.time.Instant?, f149: java.time.Instant?, f150: java.time.Instant?, f151: java.util.UUID?, f152: java.util.UUID?, f153: java.util.UUID?, f154: com.chronoxor.proto.OrderSide?, f155: com.chronoxor.proto.OrderSide?, f156: com.chronoxor.proto.OrderType?, f157: com.chronoxor.proto.OrderType?, f158: com.chronoxor.proto.Order?, f159: com.chronoxor.proto.Order?, f160: com.chronoxor.proto.Balance?, f161: com.chronoxor.proto.Balance?, f162: com.chronoxor.proto.State?, f163: com.chronoxor.proto.State?, f164: com.chronoxor.proto.Account?, f165: com.chronoxor.proto.Account?): super(parent)
+    constructor(parent: StructSimple = StructSimple(), f100: Boolean? = null, f101: Boolean? = true, f102: Boolean? = null, f103: Byte? = null, f104: Byte? = 0xFF.toByte(), f105: Byte? = null, f106: Char? = null, f107: Char? = '!'.toChar(), f108: Char? = null, f109: Char? = null, f110: Char? = 0x0444.toChar(), f111: Char? = null, f112: Byte? = null, f113: Byte? = Byte.MAX_VALUE, f114: Byte? = null, f115: UByte? = null, f116: UByte? = UByte.MAX_VALUE, f117: UByte? = null, f118: Short? = null, f119: Short? = Short.MAX_VALUE, f120: Short? = null, f121: UShort? = null, f122: UShort? = UShort.MAX_VALUE, f123: UShort? = null, f124: Int? = null, f125: Int? = Int.MAX_VALUE, f126: Int? = null, f127: UInt? = null, f128: UInt? = UInt.MAX_VALUE, f129: UInt? = null, f130: Long? = null, f131: Long? = Long.MAX_VALUE, f132: Long? = null, f133: ULong? = null, f134: ULong? = ULong.MAX_VALUE, f135: ULong? = null, f136: Float? = null, f137: Float? = 123.456f, f138: Float? = null, f139: Double? = null, f140: Double? = -123.456e+123, f141: Double? = null, f142: java.math.BigDecimal? = null, f143: java.math.BigDecimal? = java.math.BigDecimal.valueOf(123456.123456), f144: java.math.BigDecimal? = null, f145: String? = null, f146: String? = "Initial string!", f147: String? = null, f148: java.time.Instant? = null, f149: java.time.Instant? = java.time.Instant.now(), f150: java.time.Instant? = null, f151: java.util.UUID? = null, f152: java.util.UUID? = java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000"), f153: java.util.UUID? = null, f154: com.chronoxor.proto.OrderSide? = null, f155: com.chronoxor.proto.OrderSide? = null, f156: com.chronoxor.proto.OrderType? = null, f157: com.chronoxor.proto.OrderType? = null, f158: com.chronoxor.proto.Order? = null, f159: com.chronoxor.proto.Order? = null, f160: com.chronoxor.proto.Balance? = null, f161: com.chronoxor.proto.Balance? = null, f162: com.chronoxor.proto.State? = null, f163: com.chronoxor.proto.State? = null, f164: com.chronoxor.proto.Account? = null, f165: com.chronoxor.proto.Account? = null): super(parent)
     {
         this.f100 = f100
         this.f101 = f101

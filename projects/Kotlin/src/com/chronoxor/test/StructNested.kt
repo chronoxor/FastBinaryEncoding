@@ -10,24 +10,22 @@ package com.chronoxor.test
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructNested : StructOptional
 {
-    var f1000: EnumSimple = EnumSimple()
-    var f1001: EnumSimple? = null
-    var f1002: EnumTyped = EnumTyped.ENUM_VALUE_2
-    var f1003: EnumTyped? = null
-    var f1004: FlagsSimple = FlagsSimple()
-    var f1005: FlagsSimple? = null
-    var f1006: FlagsTyped = FlagsTyped.fromSet(java.util.EnumSet.of(FlagsTyped.FLAG_VALUE_2.value, FlagsTyped.FLAG_VALUE_4.value, FlagsTyped.FLAG_VALUE_6.value))
-    var f1007: FlagsTyped? = null
-    var f1008: StructSimple = StructSimple()
-    var f1009: StructSimple? = null
-    var f1010: StructOptional = StructOptional()
-    var f1011: StructOptional? = null
+    var f1000: EnumSimple
+    var f1001: EnumSimple?
+    var f1002: EnumTyped
+    var f1003: EnumTyped?
+    var f1004: FlagsSimple
+    var f1005: FlagsSimple?
+    var f1006: FlagsTyped
+    var f1007: FlagsTyped?
+    var f1008: StructSimple
+    var f1009: StructSimple?
+    var f1010: StructOptional
+    var f1011: StructOptional?
 
     @Transient override var fbeType: Long = 112
 
-    constructor()
-
-    constructor(parent: StructOptional, f1000: EnumSimple, f1001: EnumSimple?, f1002: EnumTyped, f1003: EnumTyped?, f1004: FlagsSimple, f1005: FlagsSimple?, f1006: FlagsTyped, f1007: FlagsTyped?, f1008: StructSimple, f1009: StructSimple?, f1010: StructOptional, f1011: StructOptional?): super(parent)
+    constructor(parent: StructOptional = StructOptional(), f1000: EnumSimple = EnumSimple(), f1001: EnumSimple? = null, f1002: EnumTyped = EnumTyped.ENUM_VALUE_2, f1003: EnumTyped? = null, f1004: FlagsSimple = FlagsSimple(), f1005: FlagsSimple? = null, f1006: FlagsTyped = FlagsTyped.fromSet(java.util.EnumSet.of(FlagsTyped.FLAG_VALUE_2.value, FlagsTyped.FLAG_VALUE_4.value, FlagsTyped.FLAG_VALUE_6.value)), f1007: FlagsTyped? = null, f1008: StructSimple = StructSimple(), f1009: StructSimple? = null, f1010: StructOptional = StructOptional(), f1011: StructOptional? = null): super(parent)
     {
         this.f1000 = f1000
         this.f1001 = f1001

@@ -10,22 +10,20 @@ package com.chronoxor.test
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructHash : Comparable<Any?>
 {
-    var f1: java.util.HashMap<String, Byte> = java.util.HashMap()
-    var f2: java.util.HashMap<String, Byte?> = java.util.HashMap()
-    var f3: java.util.HashMap<String, ByteArray> = java.util.HashMap()
-    var f4: java.util.HashMap<String, ByteArray?> = java.util.HashMap()
-    var f5: java.util.HashMap<String, EnumSimple> = java.util.HashMap()
-    var f6: java.util.HashMap<String, EnumSimple?> = java.util.HashMap()
-    var f7: java.util.HashMap<String, FlagsSimple> = java.util.HashMap()
-    var f8: java.util.HashMap<String, FlagsSimple?> = java.util.HashMap()
-    var f9: java.util.HashMap<String, StructSimple> = java.util.HashMap()
-    var f10: java.util.HashMap<String, StructSimple?> = java.util.HashMap()
+    var f1: java.util.HashMap<String, Byte>
+    var f2: java.util.HashMap<String, Byte?>
+    var f3: java.util.HashMap<String, ByteArray>
+    var f4: java.util.HashMap<String, ByteArray?>
+    var f5: java.util.HashMap<String, EnumSimple>
+    var f6: java.util.HashMap<String, EnumSimple?>
+    var f7: java.util.HashMap<String, FlagsSimple>
+    var f8: java.util.HashMap<String, FlagsSimple?>
+    var f9: java.util.HashMap<String, StructSimple>
+    var f10: java.util.HashMap<String, StructSimple?>
 
     @Transient open var fbeType: Long = 141
 
-    constructor()
-
-    constructor(f1: java.util.HashMap<String, Byte>, f2: java.util.HashMap<String, Byte?>, f3: java.util.HashMap<String, ByteArray>, f4: java.util.HashMap<String, ByteArray?>, f5: java.util.HashMap<String, EnumSimple>, f6: java.util.HashMap<String, EnumSimple?>, f7: java.util.HashMap<String, FlagsSimple>, f8: java.util.HashMap<String, FlagsSimple?>, f9: java.util.HashMap<String, StructSimple>, f10: java.util.HashMap<String, StructSimple?>)
+    constructor(f1: java.util.HashMap<String, Byte> = java.util.HashMap(), f2: java.util.HashMap<String, Byte?> = java.util.HashMap(), f3: java.util.HashMap<String, ByteArray> = java.util.HashMap(), f4: java.util.HashMap<String, ByteArray?> = java.util.HashMap(), f5: java.util.HashMap<String, EnumSimple> = java.util.HashMap(), f6: java.util.HashMap<String, EnumSimple?> = java.util.HashMap(), f7: java.util.HashMap<String, FlagsSimple> = java.util.HashMap(), f8: java.util.HashMap<String, FlagsSimple?> = java.util.HashMap(), f9: java.util.HashMap<String, StructSimple> = java.util.HashMap(), f10: java.util.HashMap<String, StructSimple?> = java.util.HashMap())
     {
         this.f1 = f1
         this.f2 = f2

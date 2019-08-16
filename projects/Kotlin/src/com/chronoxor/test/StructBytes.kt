@@ -10,15 +10,13 @@ package com.chronoxor.test
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructBytes : Comparable<Any?>
 {
-    var f1: ByteArray = ByteArray(0)
-    var f2: ByteArray? = null
-    var f3: ByteArray? = null
+    var f1: ByteArray
+    var f2: ByteArray?
+    var f3: ByteArray?
 
     @Transient open var fbeType: Long = 120
 
-    constructor()
-
-    constructor(f1: ByteArray, f2: ByteArray?, f3: ByteArray?)
+    constructor(f1: ByteArray = ByteArray(0), f2: ByteArray? = null, f3: ByteArray? = null)
     {
         this.f1 = f1
         this.f2 = f2

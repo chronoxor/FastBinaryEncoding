@@ -10,22 +10,20 @@ package com.chronoxor.test
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructList : Comparable<Any?>
 {
-    var f1: java.util.LinkedList<Byte> = java.util.LinkedList()
-    var f2: java.util.LinkedList<Byte?> = java.util.LinkedList()
-    var f3: java.util.LinkedList<ByteArray> = java.util.LinkedList()
-    var f4: java.util.LinkedList<ByteArray?> = java.util.LinkedList()
-    var f5: java.util.LinkedList<EnumSimple> = java.util.LinkedList()
-    var f6: java.util.LinkedList<EnumSimple?> = java.util.LinkedList()
-    var f7: java.util.LinkedList<FlagsSimple> = java.util.LinkedList()
-    var f8: java.util.LinkedList<FlagsSimple?> = java.util.LinkedList()
-    var f9: java.util.LinkedList<StructSimple> = java.util.LinkedList()
-    var f10: java.util.LinkedList<StructSimple?> = java.util.LinkedList()
+    var f1: java.util.LinkedList<Byte>
+    var f2: java.util.LinkedList<Byte?>
+    var f3: java.util.LinkedList<ByteArray>
+    var f4: java.util.LinkedList<ByteArray?>
+    var f5: java.util.LinkedList<EnumSimple>
+    var f6: java.util.LinkedList<EnumSimple?>
+    var f7: java.util.LinkedList<FlagsSimple>
+    var f8: java.util.LinkedList<FlagsSimple?>
+    var f9: java.util.LinkedList<StructSimple>
+    var f10: java.util.LinkedList<StructSimple?>
 
     @Transient open var fbeType: Long = 131
 
-    constructor()
-
-    constructor(f1: java.util.LinkedList<Byte>, f2: java.util.LinkedList<Byte?>, f3: java.util.LinkedList<ByteArray>, f4: java.util.LinkedList<ByteArray?>, f5: java.util.LinkedList<EnumSimple>, f6: java.util.LinkedList<EnumSimple?>, f7: java.util.LinkedList<FlagsSimple>, f8: java.util.LinkedList<FlagsSimple?>, f9: java.util.LinkedList<StructSimple>, f10: java.util.LinkedList<StructSimple?>)
+    constructor(f1: java.util.LinkedList<Byte> = java.util.LinkedList(), f2: java.util.LinkedList<Byte?> = java.util.LinkedList(), f3: java.util.LinkedList<ByteArray> = java.util.LinkedList(), f4: java.util.LinkedList<ByteArray?> = java.util.LinkedList(), f5: java.util.LinkedList<EnumSimple> = java.util.LinkedList(), f6: java.util.LinkedList<EnumSimple?> = java.util.LinkedList(), f7: java.util.LinkedList<FlagsSimple> = java.util.LinkedList(), f8: java.util.LinkedList<FlagsSimple?> = java.util.LinkedList(), f9: java.util.LinkedList<StructSimple> = java.util.LinkedList(), f10: java.util.LinkedList<StructSimple?> = java.util.LinkedList())
     {
         this.f1 = f1
         this.f2 = f2

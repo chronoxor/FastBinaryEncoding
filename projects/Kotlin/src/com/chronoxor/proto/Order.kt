@@ -10,18 +10,16 @@ package com.chronoxor.proto
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class Order : Comparable<Any?>
 {
-    var id: Int = 0
-    var symbol: String = ""
-    var side: OrderSide = OrderSide()
-    var type: OrderType = OrderType()
-    var price: Double = 0.0
-    var volume: Double = 0.0
+    var id: Int
+    var symbol: String
+    var side: OrderSide
+    var type: OrderType
+    var price: Double
+    var volume: Double
 
     @Transient open var fbeType: Long = 1
 
-    constructor()
-
-    constructor(id: Int, symbol: String, side: OrderSide, type: OrderType, price: Double, volume: Double)
+    constructor(id: Int = 0, symbol: String = "", side: OrderSide = OrderSide(), type: OrderType = OrderType(), price: Double = 0.0, volume: Double = 0.0)
     {
         this.id = id
         this.symbol = symbol

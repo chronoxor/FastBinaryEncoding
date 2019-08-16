@@ -10,13 +10,11 @@ package com.chronoxor.protoex
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class Balance : com.chronoxor.proto.Balance
 {
-    var locked: Double = 0.0
+    var locked: Double
 
     @Transient override var fbeType: Long = com.chronoxor.proto.Balance.fbeTypeConst
 
-    constructor()
-
-    constructor(parent: com.chronoxor.proto.Balance, locked: Double): super(parent)
+    constructor(parent: com.chronoxor.proto.Balance = com.chronoxor.proto.Balance(), locked: Double = 0.0): super(parent)
     {
         this.locked = locked
     }

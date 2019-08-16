@@ -5413,7 +5413,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     if (s->body && !s->body->fields.empty())
     {
         for (const auto& field : s->body->fields)
-            WriteLineIndent("var " + *field->name + ": " + ConvertTypeName(domain, "", *field, false) + " = " + ConvertDefault(domain, "", *field));
+            WriteLineIndent("var " + *field->name + ": " + ConvertTypeName(domain, "", *field, false));
         WriteLine();
     }
 
@@ -5426,8 +5426,11 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
         WriteLineIndent("@Transient open var fbeType: Long = " + std::to_string(s->type));
 
     // Generate struct default constructor
-    WriteLine();
-    WriteLineIndent("constructor()");
+    if ((!s->base || s->base->empty()) && (!s->body || s->body->fields.empty()))
+    {
+        WriteLine();
+        WriteLineIndent("constructor()");
+    }
 
     // Generate struct initialization constructor
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
@@ -5437,14 +5440,14 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
         WriteIndent("constructor(");
         if (s->base && !s->base->empty())
         {
-            Write("parent: " + ConvertTypeName(domain, "", *s->base, false));
+            Write("parent: " + ConvertTypeName(domain, "", *s->base, false) + " = " + ConvertTypeName(domain, "", *s->base, false) + "()");
             first = false;
         }
         if (s->body)
         {
             for (const auto& field : s->body->fields)
             {
-                Write(std::string(first ? "" : ", ") + *field->name + ": " + ConvertTypeName(domain, "", *field, false));
+                Write(std::string(first ? "" : ", ") + *field->name + ": " + ConvertTypeName(domain, "", *field, false) + " = " + ConvertDefault(domain, "", *field));
                 first = false;
             }
         }

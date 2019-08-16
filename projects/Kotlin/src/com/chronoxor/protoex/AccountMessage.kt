@@ -10,13 +10,11 @@ package com.chronoxor.protoex
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class AccountMessage : Comparable<Any?>
 {
-    var body: Account = Account()
+    var body: Account
 
     @Transient open var fbeType: Long = 13
 
-    constructor()
-
-    constructor(body: Account)
+    constructor(body: Account = Account())
     {
         this.body = body
     }

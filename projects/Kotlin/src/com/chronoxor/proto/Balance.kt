@@ -10,14 +10,12 @@ package com.chronoxor.proto
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class Balance : Comparable<Any?>
 {
-    var currency: String = ""
-    var amount: Double = 0.0
+    var currency: String
+    var amount: Double
 
     @Transient open var fbeType: Long = 2
 
-    constructor()
-
-    constructor(currency: String, amount: Double)
+    constructor(currency: String = "", amount: Double = 0.0)
     {
         this.currency = currency
         this.amount = amount
