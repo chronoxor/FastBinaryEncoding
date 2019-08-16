@@ -17,7 +17,7 @@ class BenchmarkSerialization: XCTestCase {
     
     override class var defaultPerformanceMetrics: [XCTPerformanceMetric] {
         return [.wallClockTime,
-                XCTPerformanceMetric(rawValue: "com.apple.XCTPerformanceMetric_TransientHeapAllocationsKilobytes"),
+                XCTPerformanceMetric(rawValue: "com.apple.XCTPerformanceMetric_TotalHeapAllocationsKilobytes"),
                 XCTPerformanceMetric(rawValue: "com.apple.XCTPerformanceMetric_PersistentVMAllocations"),
         ]
     }

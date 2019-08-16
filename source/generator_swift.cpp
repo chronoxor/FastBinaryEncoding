@@ -506,7 +506,7 @@ public extension Buffer {
 
     class func readBytes(buffer: Data, offset: Int, size: Int) -> Data {
         var result = Data(capacity: size)
-        result[0...] = buffer[offset...offset + size]
+        result[0...] = buffer[offset..<offset + size]
         return result
     }
 
@@ -627,7 +627,7 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Data, offset: Int, value: Data.Element, valueCount: Int) {
-        for i in 0...valueCount {
+        for i in 0..<valueCount {
             buffer[offset + i] = value
         }
     }
@@ -1633,7 +1633,7 @@ class FieldModelArray_NAME_: FieldModel {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         assert(index < size, "Model is broken!")
 
-        _model.fbeOffset = fbeOffset + 4
+        _model.fbeOffset = fbeOffset
         _model.fbeShift(size: index * _model.fbeSize)
         return _model
     }
@@ -2048,6 +2048,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
         write(offset: fbeMapOffset, value: UInt32(size))
         write(offset: fbeMapOffset + 4, value: UInt8.zero, valueCount: fbeMapSize)
 
+        _modelKey.fbeOffset = fbeMapOffset + 4
+        _modelValue.fbeOffset = fbeMapOffset + 4 + _modelKey.fbeSize
         return (_modelKey, _modelValue)
     }
 
@@ -2071,9 +2073,9 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
         var i = fbeMapSize
         while (i > 0) {
             if !_modelKey.verify() { return false }
-            _modelKey.fbeShift(size: _modelKey.fbeSize)
+            _modelKey.fbeShift(size: _modelKey.fbeSize + _modelValue.fbeSize)
             if !_modelValue.verify() { return false }
-            _modelValue.fbeShift(size: _modelValue.fbeSize)
+            _modelValue.fbeShift(size: _modelKey.fbeSize + _modelValue.fbeSize)
             i -= 1
         }
 
@@ -5640,7 +5642,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
         {
             if (field->keys)
             {
-                WriteLineIndent("if !(lhs." + *field->name + " < rhs." + *field->name + ") { return false }");
+                WriteLineIndent("if !(lhs." + *field->name + " == rhs." + *field->name + ") { return false }");
 
             }
         }
@@ -6052,7 +6054,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
 
     WriteLine();
     WriteLineIndent("// Field type");
-    WriteLineIndent("var fbeType: Int = fbeTypeConst");
+    WriteLineIndent("public var fbeType: Int = fbeTypeConst");
     if (s->base && !s->base->empty() && (s->type == 0))
         WriteLineIndent("public static let fbeTypeConst: Int = " + ConvertBaseFieldName(domain, *s->base, false) + ".fbeTypeConst");
     else
@@ -6530,7 +6532,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
 
     WriteLine();
     WriteLineIndent("// Field type");
-    WriteLineIndent("var fbeType: Int = fbeTypeConst");
+    WriteLineIndent("public var fbeType: Int = fbeTypeConst");
     WriteLine();
     if (s->base && !s->base->empty() && (s->type == 0))
         WriteLineIndent("public static let fbeTypeConst: Int = " + ConvertBaseFieldName(domain, *s->base, true) + ".fbeTypeConst");
