@@ -113,7 +113,7 @@ class TestSerialization: XCTestCase {
         XCTAssertEqual(struct2.f2, true)
         XCTAssertEqual(struct2.f3, 0)
         XCTAssertEqual(struct2.f4, 0xFF)
-        XCTAssertEqual(struct2.f5, "0")
+        XCTAssertEqual(struct2.f5, "\0")
         XCTAssertEqual(struct2.f6, "!")
         XCTAssertEqual(struct2.f7, "0")
         XCTAssertEqual(struct2.f8, Character(UnicodeScalar(0x0444)!))
@@ -138,7 +138,7 @@ class TestSerialization: XCTestCase {
         XCTAssertEqual(struct2.f27, 0.0)
         XCTAssertTrue(abs(struct2.f28 - -123.567e+123) < 1e+123)
         XCTAssertEqual(struct2.f29, Decimal.zero)
-        XCTAssertEqual(struct2.f30, Decimal(123456.123456))
+        XCTAssertEqual(struct2.f30, Decimal(string: "123456.123456") ?? .nan)
         XCTAssertEqual(struct2.f31, "")
         XCTAssertEqual(struct2.f32, "Initial string!")
         XCTAssertTrue(struct2.f33 == 0)
@@ -225,7 +225,7 @@ class TestSerialization: XCTestCase {
         XCTAssertEqual(struct2.f2, true)
         XCTAssertEqual(struct2.f3, 0)
         XCTAssertEqual(struct2.f4, 0xFF)
-        XCTAssertEqual(struct2.f5, "0")
+        XCTAssertEqual(struct2.f5, "\0")
         XCTAssertEqual(struct2.f6, "!")
         XCTAssertEqual(struct2.f7, "0")
         XCTAssertEqual(struct2.f8, Character(UnicodeScalar(0x0444)!))
@@ -250,7 +250,7 @@ class TestSerialization: XCTestCase {
         XCTAssertEqual(struct2.f27, 0.0)
         XCTAssertTrue(abs(struct2.f28 - -123.567e+123) < 1e+123)
         XCTAssertEqual(struct2.f29, Decimal(0))
-        XCTAssertEqual(struct2.f30, Decimal(123456.123456))
+        XCTAssertEqual(struct2.f30, Decimal(string: "123456.123456") ?? .nan)
         XCTAssertEqual(struct2.f31, "")
         XCTAssertEqual(struct2.f32, "Initial string!")
         XCTAssertTrue(struct2.f33 == 0)
@@ -317,7 +317,7 @@ class TestSerialization: XCTestCase {
         XCTAssertEqual(struct2.f141, nil)
         XCTAssertEqual(struct2.f142, nil)
         XCTAssertNotEqual(struct2.f143, nil)
-        XCTAssertEqual(struct2.f143, Decimal(123456.123456))
+        XCTAssertEqual(struct2.f143, Decimal(string: "123456.123456") ?? .nan)
         XCTAssertEqual(struct2.f144, nil)
         XCTAssertEqual(struct2.f145, nil)
         XCTAssertNotEqual(struct2.f146, nil)
@@ -481,7 +481,7 @@ class TestSerialization: XCTestCase {
         XCTAssertEqual(struct2.f2, true)
         XCTAssertEqual(struct2.f3, 0)
         XCTAssertEqual(struct2.f4, 0xFF)
-        XCTAssertEqual(struct2.f5, "0")
+        XCTAssertEqual(struct2.f5, "\0")
         XCTAssertEqual(struct2.f6, "!")
         XCTAssertEqual(struct2.f7, "0")
         XCTAssertEqual(struct2.f8, Character(UnicodeScalar(0x0444)!))
@@ -506,7 +506,7 @@ class TestSerialization: XCTestCase {
         XCTAssertEqual(struct2.f27, 0.0)
         XCTAssertTrue(abs(struct2.f28 - -123.567e+123) < 1e+123)
         XCTAssertEqual(struct2.f29, Decimal(0))
-        XCTAssertEqual(struct2.f30, Decimal(123456.123456))
+        XCTAssertEqual(struct2.f30, Decimal(string: "123456.123456") ?? .nan)
         XCTAssertEqual(struct2.f31, "")
         XCTAssertEqual(struct2.f32, "Initial string!")
         XCTAssertTrue(struct2.f33 == 0)
@@ -574,7 +574,7 @@ class TestSerialization: XCTestCase {
         XCTAssertEqual(struct2.f141, nil)
         XCTAssertEqual(struct2.f142, nil)
         XCTAssertNotEqual(struct2.f143, nil)
-        XCTAssertEqual(struct2.f143, Decimal(123456.123456))
+        XCTAssertEqual(struct2.f143, Decimal(string: "123456.123456") ?? .nan)
         XCTAssertEqual(struct2.f144, nil)
         XCTAssertEqual(struct2.f145, nil)
         XCTAssertNotEqual(struct2.f146, nil)
@@ -1297,7 +1297,10 @@ class TestSerialization: XCTestCase {
         XCTAssertEqual(struct2.f10["20"]!, nil)
     }
     
-    func serializationStructHashExtended() {
+    func testSerializationStructHashExtended() {
+        var struct11 = StructSimple()
+        struct11 = StructOptional()
+        
         // Create a new struct
         let struct1 = StructHashEx()
         let s1 = StructSimple()
@@ -1307,7 +1310,7 @@ class TestSerialization: XCTestCase {
         s2.id = 65
         struct1.f1[s2] = StructNested()
         struct1.f2[s1] = StructNested()
-        struct1.f2[s2] = nil
+        struct1.f2.updateValue(nil, forKey: s2)
         
         // Serialize the struct to the FBE stream
         let writer = StructHashExModel()
@@ -1339,51 +1342,6 @@ class TestSerialization: XCTestCase {
         XCTAssertEqual(struct2.f1[s2]!.f1002, EnumTyped.ENUM_VALUE_2)
         XCTAssertEqual(struct2.f2.count, 2)
         XCTAssertEqual(struct2.f2[s1]!!.f1002, EnumTyped.ENUM_VALUE_2)
-        XCTAssertEqual(struct2.f2[s2], nil)
-    }
-    
-    func testSerializationJsonDomain() {
-        // Define a source JSON string
-        var json = "{\"id\":1,\"name\":\"Test\",\"state\":6,\"wallet\":{\"currency\":\"USD\",\"amount\":1000.0},\"asset\":{\"currency\":\"EUR\",\"amount\":100.0},\"orders\":[{\"id\":1,\"symbol\":\"EURUSD\",\"side\":0,\"type\":0,\"price\":1.23456,\"volume\":1000.0},{\"id\":2,\"symbol\":\"EURUSD\",\"side\":1,\"type\":1,\"price\":1.0,\"volume\":100.0},{\"id\":3,\"symbol\":\"EURUSD\",\"side\":0,\"type\":2,\"price\":1.5,\"volume\":10.0}]}"
-        
-        // Create a new account from the source JSON string
-        let account1 = Account.fromJson(json)
-        
-        // Serialize the account to the JSON string
-        json = try! account1.toJson()
-        
-        // Check the serialized JSON size
-        XCTAssertTrue(!json.isEmpty)
-        
-        // Deserialize the account from the JSON string
-        let account2 = Account.fromJson(json)
-        
-        XCTAssertEqual(account2.id, 1)
-        XCTAssertEqual(account2.name, "Test")
-        XCTAssertTrue(account2.state.hasFlags(flags: State.good))
-        XCTAssertEqual(account2.wallet.currency, "USD")
-        XCTAssertEqual(account2.wallet.amount, 1000.0)
-        XCTAssertNotEqual(account2.asset, nil)
-        XCTAssertEqual(account2.asset!.currency, "EUR")
-        XCTAssertEqual(account2.asset!.amount, 100.0)
-        XCTAssertEqual(account2.orders.count, 3)
-        XCTAssertEqual(account2.orders[0].id, 1)
-        XCTAssertEqual(account2.orders[0].symbol, "EURUSD")
-        XCTAssertEqual(account2.orders[0].side, OrderSide.buy)
-        XCTAssertEqual(account2.orders[0].type, OrderType.market)
-        XCTAssertEqual(account2.orders[0].price, 1.23456)
-        XCTAssertEqual(account2.orders[0].volume, 1000.0)
-        XCTAssertEqual(account2.orders[1].id, 2)
-        XCTAssertEqual(account2.orders[1].symbol, "EURUSD")
-        XCTAssertEqual(account2.orders[1].side, OrderSide.sell)
-        XCTAssertEqual(account2.orders[1].type, OrderType.limit)
-        XCTAssertEqual(account2.orders[1].price, 1.0)
-        XCTAssertEqual(account2.orders[1].volume, 100.0)
-        XCTAssertEqual(account2.orders[2].id, 3)
-        XCTAssertEqual(account2.orders[2].symbol, "EURUSD")
-        XCTAssertEqual(account2.orders[2].side, OrderSide.buy)
-        XCTAssertEqual(account2.orders[2].type, OrderType.stop)
-        XCTAssertEqual(account2.orders[2].price, 1.5)
-        XCTAssertEqual(account2.orders[2].volume, 10.0)
+        XCTAssertEqual(struct2.f2[s2]!, nil)
     }
 }

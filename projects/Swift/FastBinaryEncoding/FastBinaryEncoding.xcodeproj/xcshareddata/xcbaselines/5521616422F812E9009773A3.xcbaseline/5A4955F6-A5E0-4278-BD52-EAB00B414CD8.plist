@@ -17,6 +17,19 @@
 				</dict>
 			</dict>
 		</dict>
+		<key>BenchmarkSerializationFinal</key>
+		<dict>
+			<key>testPerformanceDeserialize()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>7.409e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Aug 16, 2019 at 3:39:22 PM</string>
+				</dict>
+			</dict>
+		</dict>
 	</dict>
 </dict>
 </plist>

@@ -596,38 +596,6 @@
             endingLineNumber = "38"
             landmarkName = "init()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "443A494C-8D5C-4E81-8C83-A5654D629ADD - 9df0f602ba160a44"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "proto.FieldModelBalance.init() -&gt; proto.FieldModelBalance"
-                  moduleName = "FastBinaryEncoding"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/proto/Source/proto/fbe/FieldModelBalance.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "642">
-               </Location>
-               <Location
-                  uuid = "443A494C-8D5C-4E81-8C83-A5654D629ADD - cd7b1e3ed4a6502c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "proto.FieldModelBalance.init() -&gt; proto.FieldModelBalance"
-                  moduleName = "FastBinaryEncodingTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/proto/Source/proto/fbe/FieldModelBalance.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "642">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -644,38 +612,6 @@
             endingLineNumber = "88"
             landmarkName = "==(_:_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "16FDAC2F-E42D-42DA-A921-34EBB05A9E48 - 4415fb8b25c75784"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static protoex.StateEx.&lt; infix(protoex.StateEx, protoex.StateEx) -&gt; Swift.Bool"
-                  moduleName = "FastBinaryEncoding"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/protoex/Source/protoex/StateEx.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "90"
-                  endingLineNumber = "90"
-                  offsetFromSymbolStart = "46">
-               </Location>
-               <Location
-                  uuid = "16FDAC2F-E42D-42DA-A921-34EBB05A9E48 - 149e13b74b770dec"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static protoex.StateEx.&lt; infix(protoex.StateEx, protoex.StateEx) -&gt; Swift.Bool"
-                  moduleName = "FastBinaryEncodingTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/protoex/Source/protoex/StateEx.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "90"
-                  endingLineNumber = "90"
-                  offsetFromSymbolStart = "46">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -692,38 +628,6 @@
             endingLineNumber = "84"
             landmarkName = "&lt;(_:_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "59C5C0CE-0E94-4BD5-9B3D-8D8B30DC8AB5 - f6e1575148af36a8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "protoex.StateEx.allSet.getter : protoex.StateExEnum"
-                  moduleName = "FastBinaryEncoding"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/protoex/Source/protoex/StateEx.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "20">
-               </Location>
-               <Location
-                  uuid = "59C5C0CE-0E94-4BD5-9B3D-8D8B30DC8AB5 - a66abf6d261f6cc0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "protoex.StateEx.allSet.getter : protoex.StateExEnum"
-                  moduleName = "FastBinaryEncodingTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/protoex/Source/protoex/StateEx.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -738,40 +642,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "50"
             endingLineNumber = "50"
-            landmarkName = "verify()"
+            landmarkName = "hasValue()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "942F6622-5120-4C75-A5FC-B5EA5DA7013D - 57cd08b2f5403513"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "protoex.FinalModelOptionalBalance.hasValue() -&gt; Swift.Bool"
-                  moduleName = "FastBinaryEncoding"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/protoex/Source/protoex/fbe/FinalModelOptionalBalance.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "467">
-               </Location>
-               <Location
-                  uuid = "942F6622-5120-4C75-A5FC-B5EA5DA7013D - 746e08e9bf06f7b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "protoex.FinalModelOptionalBalance.hasValue() -&gt; Swift.Bool"
-                  moduleName = "FastBinaryEncodingTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/protoex/Source/protoex/fbe/FinalModelOptionalBalance.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "467">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -788,38 +660,6 @@
             endingLineNumber = "92"
             landmarkName = "set(value:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C28B7562-9772-44D6-89BB-E843ED5F2731 - f4bf8994198b0aaf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "protoex.FinalModelOptionalBalance.set(value: Swift.Optional&lt;protoex.Balance&gt;) throws -&gt; Swift.Int"
-                  moduleName = "FastBinaryEncoding"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/protoex/Source/protoex/fbe/FinalModelOptionalBalance.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "742">
-               </Location>
-               <Location
-                  uuid = "C28B7562-9772-44D6-89BB-E843ED5F2731 - a43461a8773b50c7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "protoex.FinalModelOptionalBalance.set(value: Swift.Optional&lt;protoex.Balance&gt;) throws -&gt; Swift.Int"
-                  moduleName = "FastBinaryEncodingTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/protoex/Source/protoex/fbe/FinalModelOptionalBalance.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "742">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -834,40 +674,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "86"
             endingLineNumber = "86"
-            landmarkName = "set(value:)"
+            landmarkName = "get(size:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "02687EE6-2444-405F-9F28-31EA5DC19816 - 5d078607a8436071"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "protoex.FinalModelOptionalBalance.get(size: inout fbe.Size) -&gt; Swift.Optional&lt;protoex.Balance&gt;"
-                  moduleName = "FastBinaryEncoding"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/protoex/Source/protoex/fbe/FinalModelOptionalBalance.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
-                  offsetFromSymbolStart = "1315">
-               </Location>
-               <Location
-                  uuid = "02687EE6-2444-405F-9F28-31EA5DC19816 - d8c6e3bc6f33a19"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "protoex.FinalModelOptionalBalance.get(size: inout fbe.Size) -&gt; Swift.Optional&lt;protoex.Balance&gt;"
-                  moduleName = "FastBinaryEncodingTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/protoex/Source/protoex/fbe/FinalModelOptionalBalance.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
-                  offsetFromSymbolStart = "1315">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -900,44 +708,60 @@
             endingLineNumber = "36"
             landmarkName = "verify()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "23496D26-4420-445D-91F3-DFEF53288F1D - 75f8c1f25e1c3959"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "test.StructNestedFinalModel.verify() -&gt; Swift.Bool"
-                  moduleName = "FastBinaryEncoding"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/test/Source/test/fbe/StructNestedFinalModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "1142">
-               </Location>
-               <Location
-                  uuid = "23496D26-4420-445D-91F3-DFEF53288F1D - 257329ce30ac6331"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "test.StructNestedFinalModel.verify() -&gt; Swift.Bool"
-                  moduleName = "FastBinaryEncodingTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/test/Source/test/fbe/StructNestedFinalModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "1142">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C51AC13D-90D5-417D-8BF1-AF4A5D64CBF8"
+            uuid = "C243701E-C5E2-474B-8010-064BEE7B5C01"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../bin/com/chronoxor/test/Source/test/fbe/FinalModelStructList.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "verifyFields()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF12A962-43FC-42D1-B870-3C140BB460E4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../bin/com/chronoxor/test/Source/test/fbe/FinalModelVectorOptionalUInt8.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "verify()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "28CB4F31-3CDD-4F57-8E3D-217A499EAF6B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../bin/com/chronoxor/test/Source/test/fbe/FinalModelOptionalUInt8.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "verify()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A9571F7E-89C0-430B-B3B9-EEE09A5C5453"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -948,38 +772,214 @@
             endingLineNumber = "36"
             landmarkName = "verify()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7EA5846A-F13E-4A2C-A697-9CE51F13988E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../bin/com/chronoxor/test/Source/test/fbe/FinalModelStructList.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "verifyFields()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "094C908F-3992-4F3B-9F6E-77738AAAED12"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../bin/com/chronoxor/fbe/Source/fbe/FinalModelDecimal.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "set(value:)"
+            landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "C51AC13D-90D5-417D-8BF1-AF4A5D64CBF8 - d4517450fbada078"
-                  shouldBeEnabled = "Yes"
+                  uuid = "094C908F-3992-4F3B-9F6E-77738AAAED12 - d05b6ff227f6866a"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "test.StructListFinalModel.verify() -&gt; Swift.Bool"
+                  symbolName = "fbe.FinalModelDecimal.set(value: __C.NSDecimal) -&gt; Swift.Int"
                   moduleName = "FastBinaryEncoding"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/test/Source/test/fbe/StructListFinalModel.swift"
+                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/fbe/Source/fbe/FinalModelDecimal.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "1142">
+                  startingLineNumber = "117"
+                  endingLineNumber = "117"
+                  offsetFromSymbolStart = "4647">
                </Location>
                <Location
-                  uuid = "C51AC13D-90D5-417D-8BF1-AF4A5D64CBF8 - 84da9c6c951dfa10"
-                  shouldBeEnabled = "Yes"
+                  uuid = "094C908F-3992-4F3B-9F6E-77738AAAED12 - 80d087ce4946dc02"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "test.StructListFinalModel.verify() -&gt; Swift.Bool"
+                  symbolName = "fbe.FinalModelDecimal.set(value: __C.NSDecimal) -&gt; Swift.Int"
                   moduleName = "FastBinaryEncodingTests"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/test/Source/test/fbe/StructListFinalModel.swift"
+                  urlString = "file:///Users/andrey/Documents/work/FastBinaryEncoding/bin/com/chronoxor/fbe/Source/fbe/FinalModelDecimal.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "1142">
+                  startingLineNumber = "117"
+                  endingLineNumber = "117"
+                  offsetFromSymbolStart = "4647">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A282EC71-6771-4400-BC6E-F329B3F4E574"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../bin/com/chronoxor/fbe/Source/fbe/FinalModelDecimal.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "get(size:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B66A34EF-56BF-4861-BCB3-0229C0A1CB8D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../bin/com/chronoxor/fbe/Source/fbe/FinalModelDecimal.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "get(size:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "22B7BD95-47E0-4EA5-9336-CFDB9D46AEE5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FastBinaryEncodingTests/TestSerializationJson.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "testSerializationJsonStructSimple()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8AC3764D-E938-4EE3-B9E5-CD8BB8F1D4AC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../bin/com/chronoxor/test/Source/test/StructSimple.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "init(from:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "53C18B66-DAC7-4E54-A2E2-8D6A57DD51D4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../bin/com/chronoxor/test/Source/test/StructSimple.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "369"
+            endingLineNumber = "369"
+            landmarkName = "encode(to:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6E4AC395-C266-4F97-A5E0-FC1491FFBD45"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FastBinaryEncodingTests/TestSerializationJson.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "testSerializationJsonStructSimple()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "56D31636-CC94-454D-B799-E61189C71329"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../bin/com/chronoxor/test/Source/test/StructMap.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "init(from:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BFFB87F7-41FC-4FC3-AACE-67E395993DE8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FastBinaryEncodingTests/TestSerializationJson.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "937"
+            endingLineNumber = "937"
+            landmarkName = "testSerializationJsonStructMap()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "277BAF96-4702-46E1-BF1D-54F5CE33B6EB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FastBinaryEncoding/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

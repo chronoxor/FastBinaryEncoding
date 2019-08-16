@@ -1,5 +1,5 @@
 //
-//  ExTest.swift
+//  TestExtending.swift
 //  FastBinaryEncodingTests
 //
 //  Created by Andrey on 8/12/19.
@@ -11,16 +11,7 @@ import XCTest
 import protoex
 import proto
 
-class ExTest: XCTestCase {
-
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
+class TestExtending: XCTestCase {
     func testExtendingOldNew() {
        // Create a new account with some orders
         let account1 = proto.Account(id: 1, name: "Test", state: proto.State.good, wallet: proto.Balance(currency: "USD", amount: 1000.0), asset: proto.Balance(currency: "EUR", amount: 100.0), orders: [])
@@ -156,12 +147,4 @@ class ExTest: XCTestCase {
         XCTAssertEqual(account2.orders[2].price, 1.5)
         XCTAssertEqual(account2.orders[2].volume, 10.0)
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }

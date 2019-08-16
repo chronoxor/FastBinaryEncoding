@@ -1,5 +1,5 @@
 //
-//  EnumsTest.swift
+//  TestEnums.swift
 //  FastBinaryEncodingTests
 //
 //  Created by Andrey on 8/6/19.
@@ -12,7 +12,7 @@ import XCTest
 @testable import FastBinaryEncoding
 import enums
 
-class EnumsTest: XCTestCase {
+class TestEnums: XCTestCase {
     
     func testSerializationEnums() {
         let enums1 = Enums()

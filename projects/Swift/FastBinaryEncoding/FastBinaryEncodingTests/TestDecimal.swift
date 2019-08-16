@@ -1,5 +1,5 @@
 //
-//  DecimalTest.swift
+//  TestDecimal.swift
 //  FastBinaryEncodingTests
 //
 //  Created by Andrey on 8/12/19.
@@ -10,7 +10,7 @@ import XCTest
 import proto
 import fbe
 
-class DecimalTest: XCTestCase {
+class TestDecimal: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -48,7 +48,7 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel(domain, "fbe", "Boolean", "Bool", "", "1", "false");
         GenerateFBEFinalModel(domain, "fbe", "Byte", "UInt8", "", "1", "0");
         GenerateFBEFinalModel(domain, "fbe", "Char", "Character", ".utf8.map{ UInt8($$0) }[0]", "1", "Character(\"0\")");
-        GenerateFBEFinalModel(domain, "fbe", "WChar", "Character", ".utf16.map{ UInt8($$0) }[0]", "4", "Character(\"0\")");
+        GenerateFBEFinalModel(domain, "fbe", "WChar", "Character", ".utf16.map{ UInt32($$0) }[0]", "4", "Character(\"0\")");
         GenerateFBEFinalModel(domain, "fbe", "Int8", "Int8", "", "1", "0");
         GenerateFBEFinalModel(domain, "fbe", "UInt8", "UInt8", "", "1", "0");
         GenerateFBEFinalModel(domain, "fbe", "Int16", "Int16", "", "2", "0");
@@ -2482,9 +2482,9 @@ public class FinalModelDecimal: FinalModel {
         let sign: FloatingPointSign = negative ? .minus : .plus
 
 
-        var result = Decimal(readUInt32(offset: 8)) * lowScaleField
-        result = result + (Decimal(readUInt32(offset: 4)) * midScaleField)
-        result = result + Decimal(readUInt32(offset: 0))
+        var result = Decimal(readUInt32(offset: fbeOffset + 8)) * lowScaleField
+        result = result + (Decimal(readUInt32(offset: fbeOffset + 4)) * midScaleField)
+        result = result + Decimal(readUInt32(offset: fbeOffset + 0))
         result = Decimal.init(sign: sign, exponent: Int(-Int32(scale)), significand: result)
 
         size.value = fbeSize
@@ -2684,7 +2684,7 @@ public class FinalModelTimestamp: FinalModel {
         }
 
         size.value = fbeSize
-        let nanoseconds = readFloat(offset: fbeOffset)
+        let nanoseconds = TimeInterval(readInt64(offset: fbeOffset))
         return TimeInterval(nanoseconds / 1000000000)
     }
 
@@ -2695,7 +2695,8 @@ public class FinalModelTimestamp: FinalModel {
             return 0
         }
 
-        write(offset: fbeOffset, value: value)
+        let nanoseconds = value * 1000000000
+        write(offset: fbeOffset, value: UInt64(nanoseconds))
         return fbeSize
     }
 }
@@ -2963,7 +2964,7 @@ class FinalModelOptional_NAME_: FinalModel {
 
         let fbeHasValue = Int(readInt8(offset: fbeOffset))
         if fbeHasValue == 0 {
-            return Int.max
+            return 1
         }
 
         _buffer.shift(offset: fbeOffset + 1)
@@ -5575,15 +5576,22 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     WriteLineIndent("let container = try decoder.container(keyedBy: CodingKeys.self)");
     if (s->body) {
         for (const auto& field : s->body->fields) {
-            if ((*field->type == "char") || (*field->type == "wchar")) {
+            if (*field->type == "decimal") {
+                if (field->optional) {
+                    WriteLineIndent("let " + *field->name + "RawValue = try container.decode(String?.self, forKey: ." + *field->name + ")");
+                    WriteLineIndent(*field->name + " = " + *field->name + "RawValue != nil ? Decimal(string: " + *field->name + "RawValue!) ?? .nan : nil");
+                } else {
+                    WriteLineIndent(*field->name + " = Decimal(string: try container.decode(String.self, forKey: ." + *field->name + ")) ?? .nan");
+                }
+            } else if ((*field->type == "char") || (*field->type == "wchar")) {
                 std::string valueType = (*field->type == "char") ? "UInt8" : "UInt32";
                 std::string valueOpt = (*field->type == "char") ? "" : "!";
                 if (field->optional) {
-                    WriteLineIndent("let " + *field->name + "Value: " + valueType + "? = try container.decode(" + valueType + "?.self, forKey: ." + *field->name + ")");
-                    WriteLineIndent(*field->name + " = " + *field->name + "Value != nil ? Character(UnicodeScalar(" + *field->name + "Value!)" + valueOpt + ") : nil");
+                    WriteLineIndent("let " + *field->name + "RawValue: " + valueType + "? = try container.decode(" + valueType + "?.self, forKey: ." + *field->name + ")");
+                    WriteLineIndent(*field->name + " = " + *field->name + "RawValue != nil ? Character(UnicodeScalar(" + *field->name + "RawValue!)" + valueOpt + ") : nil");
                 } else {
-                    WriteLineIndent("let " + *field->name + "Value: " + valueType + " = try container.decode(" + valueType + ".self, forKey: ." + *field->name + ")");
-                    WriteLineIndent(*field->name + " = Character(UnicodeScalar(" + *field->name + "Value)" + valueOpt + ")");
+                    WriteLineIndent("let " + *field->name + "RawValue: " + valueType + " = try container.decode(" + valueType + ".self, forKey: ." + *field->name + ")");
+                    WriteLineIndent(*field->name + " = Character(UnicodeScalar(" + *field->name + "RawValue)" + valueOpt + ")");
                 }
             } else {
               WriteLineIndent(*field->name + " = try container.decode(" + ConvertTypeName(domain, "", *field, false) + ".self, forKey: ." + *field->name + ")");
@@ -5828,10 +5836,14 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     if (s->body && !s->body->fields.empty())
     {
         for (const auto& field : s->body->fields) {
-          if ((*field->type == "char") || (*field->type == "wchar")) {
-              std::string valueType = (*field->type == "char") ? "UInt8" : "UInt32";
+          if (*field->type == "decimal") {
+            std::string opt = (field->optional) ? "?" : "";
+            WriteLineIndent("try container.encode(" + *field->name + opt + ".description, forKey: ." + *field->name + ")");
+          } else if ((*field->type == "char") || (*field->type == "wchar")) {
+            std::string valueType = (*field->type == "char") ? "UInt8" : "UInt32";
+            std::string utfType = (*field->type == "char") ? "utf8" : "utf16";
               std::string opt = (field->optional) ? "?" : "";
-              WriteLineIndent("try container.encode(" + *field->name + opt + ".utf8.map{ " + valueType + "($0) }[0], forKey: ." + *field->name + ")");
+              WriteLineIndent("try container.encode(" + *field->name + opt + "." + utfType + ".map{ " + valueType + "($0) }[0], forKey: ." + *field->name + ")");
           } else {
               WriteLineIndent("try container.encode(" + *field->name + ", forKey: ." + *field->name + ")");
           }
@@ -8621,7 +8633,7 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
 std::string GeneratorSwift::ConvertConstantPrefix(const std::string& type)
 {
     if (type == "decimal")
-        return "Decimal(";
+        return "Decimal(string: \"";
     if (type == "uuid")
         return "UUID(uuidString: ";
     if (type == "wchar")
@@ -8651,7 +8663,7 @@ std::string GeneratorSwift::ConvertConstantSuffix(const std::string& type)
     if (type == "uuid")
         return ")!";
     if (type == "decimal")
-        return ")";
+        return "\")!";
 
     return "";
 }

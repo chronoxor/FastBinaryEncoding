@@ -44,15 +44,6 @@
                <Test
                   Identifier = "SendReceiveTests/testExample()">
                </Test>
-               <Test
-                  Identifier = "TestSerializationFinal/testSerializationStructArray()">
-               </Test>
-               <Test
-                  Identifier = "TestSerializationFinal/testSerializationStructBytes()">
-               </Test>
-               <Test
-                  Identifier = "TestSerializationFinal/testSerializationStructHash()">
-               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>
