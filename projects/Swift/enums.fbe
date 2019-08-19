@@ -1,0 +1,211 @@
+/*
+   Enums protocol
+*/
+
+// Domain declaration
+domain com.chronoxor
+
+// Package declaration
+package enums
+
+// Byte enum declaration
+enum EnumByte : byte
+{
+    ENUM_VALUE_0;
+    ENUM_VALUE_1 = 0;
+    ENUM_VALUE_2;
+    ENUM_VALUE_3 = 254;
+    ENUM_VALUE_4;
+    ENUM_VALUE_5 = ENUM_VALUE_3;
+}
+
+// Char enum declaration
+enum EnumChar : char
+{
+    ENUM_VALUE_0;
+    ENUM_VALUE_1 = '1';
+    ENUM_VALUE_2;
+    ENUM_VALUE_3 = '3';
+    ENUM_VALUE_4;
+    ENUM_VALUE_5 = ENUM_VALUE_3;
+}
+
+// WChar enum declaration
+enum EnumWChar : wchar
+{
+    ENUM_VALUE_0;
+    ENUM_VALUE_1 = 0x0444;
+    ENUM_VALUE_2;
+    ENUM_VALUE_3 = 0x0555;
+    ENUM_VALUE_4;
+    ENUM_VALUE_5 = ENUM_VALUE_3;
+}
+
+// Int8 enum declaration
+enum EnumInt8 : int8
+{
+    ENUM_VALUE_0;
+    ENUM_VALUE_1 = -128;
+    ENUM_VALUE_2;
+    ENUM_VALUE_3 = 126;
+    ENUM_VALUE_4;
+    ENUM_VALUE_5 = ENUM_VALUE_3;
+}
+
+// UInt8 enum declaration
+enum EnumUInt8 : uint8
+{
+    ENUM_VALUE_0;
+    ENUM_VALUE_1 = 0;
+    ENUM_VALUE_2;
+    ENUM_VALUE_3 = 254;
+    ENUM_VALUE_4;
+    ENUM_VALUE_5 = ENUM_VALUE_3;
+}
+
+// Int16 enum declaration
+enum EnumInt16 : int16
+{
+    ENUM_VALUE_0;
+    ENUM_VALUE_1 = -32768;
+    ENUM_VALUE_2;
+    ENUM_VALUE_3 = 32766;
+    ENUM_VALUE_4;
+    ENUM_VALUE_5 = ENUM_VALUE_3;
+}
+
+// UInt16 enum declaration
+enum EnumUInt16 : uint16
+{
+    ENUM_VALUE_0;
+    ENUM_VALUE_1 = 0;
+    ENUM_VALUE_2;
+    ENUM_VALUE_3 = 65534;
+    ENUM_VALUE_4;
+    ENUM_VALUE_5 = ENUM_VALUE_3;
+}
+
+// Int32 enum declaration
+enum EnumInt32 : int32
+{
+    ENUM_VALUE_0;
+    ENUM_VALUE_1 = -2147483648;
+    ENUM_VALUE_2;
+    ENUM_VALUE_3 = 2147483646;
+    ENUM_VALUE_4;
+    ENUM_VALUE_5 = ENUM_VALUE_3;
+}
+
+// UInt32 enum declaration
+enum EnumUInt32 : uint32
+{
+    ENUM_VALUE_0;
+    ENUM_VALUE_1 = 0;
+    ENUM_VALUE_2;
+    ENUM_VALUE_3 = 0xFFFFFFFE;
+    ENUM_VALUE_4;
+    ENUM_VALUE_5 = ENUM_VALUE_3;
+}
+
+// Int64 enum declaration
+enum EnumInt64 : int64
+{
+    ENUM_VALUE_0;
+    ENUM_VALUE_1 = -9223372036854775807;
+    ENUM_VALUE_2;
+    ENUM_VALUE_3 = 9223372036854775806;
+    ENUM_VALUE_4;
+    ENUM_VALUE_5 = ENUM_VALUE_3;
+}
+
+// UInt64 enum declaration
+enum EnumUInt64 : uint64
+{
+    ENUM_VALUE_0;
+    ENUM_VALUE_1 = 0;
+    ENUM_VALUE_2;
+    ENUM_VALUE_3 = 0xFFFFFFFFFFFFFFFE;
+    ENUM_VALUE_4;
+    ENUM_VALUE_5 = ENUM_VALUE_3;
+}
+
+// Enums struct
+struct Enums
+{
+    EnumByte byte0 = EnumByte.ENUM_VALUE_0;
+    EnumByte byte1 = EnumByte.ENUM_VALUE_1;
+    EnumByte byte2 = EnumByte.ENUM_VALUE_2;
+    EnumByte byte3 = EnumByte.ENUM_VALUE_3;
+    EnumByte byte4 = EnumByte.ENUM_VALUE_4;
+    EnumByte byte5 = EnumByte.ENUM_VALUE_5;
+
+    EnumChar char0 = EnumChar.ENUM_VALUE_0;
+    EnumChar char1 = EnumChar.ENUM_VALUE_1;
+    EnumChar char2 = EnumChar.ENUM_VALUE_2;
+    EnumChar char3 = EnumChar.ENUM_VALUE_3;
+    EnumChar char4 = EnumChar.ENUM_VALUE_4;
+    EnumChar char5 = EnumChar.ENUM_VALUE_5;
+
+    EnumWChar wchar0 = EnumWChar.ENUM_VALUE_0;
+    EnumWChar wchar1 = EnumWChar.ENUM_VALUE_1;
+    EnumWChar wchar2 = EnumWChar.ENUM_VALUE_2;
+    EnumWChar wchar3 = EnumWChar.ENUM_VALUE_3;
+    EnumWChar wchar4 = EnumWChar.ENUM_VALUE_4;
+    EnumWChar wchar5 = EnumWChar.ENUM_VALUE_5;
+
+    EnumInt8 int8b0 = EnumInt8.ENUM_VALUE_0;
+    EnumInt8 int8b1 = EnumInt8.ENUM_VALUE_1;
+    EnumInt8 int8b2 = EnumInt8.ENUM_VALUE_2;
+    EnumInt8 int8b3 = EnumInt8.ENUM_VALUE_3;
+    EnumInt8 int8b4 = EnumInt8.ENUM_VALUE_4;
+    EnumInt8 int8b5 = EnumInt8.ENUM_VALUE_5;
+
+    EnumUInt8 uint8b0 = EnumUInt8.ENUM_VALUE_0;
+    EnumUInt8 uint8b1 = EnumUInt8.ENUM_VALUE_1;
+    EnumUInt8 uint8b2 = EnumUInt8.ENUM_VALUE_2;
+    EnumUInt8 uint8b3 = EnumUInt8.ENUM_VALUE_3;
+    EnumUInt8 uint8b4 = EnumUInt8.ENUM_VALUE_4;
+    EnumUInt8 uint8b5 = EnumUInt8.ENUM_VALUE_5;
+
+    EnumInt16 int16b0 = EnumInt16.ENUM_VALUE_0;
+    EnumInt16 int16b1 = EnumInt16.ENUM_VALUE_1;
+    EnumInt16 int16b2 = EnumInt16.ENUM_VALUE_2;
+    EnumInt16 int16b3 = EnumInt16.ENUM_VALUE_3;
+    EnumInt16 int16b4 = EnumInt16.ENUM_VALUE_4;
+    EnumInt16 int16b5 = EnumInt16.ENUM_VALUE_5;
+
+    EnumUInt16 uint16b0 = EnumUInt16.ENUM_VALUE_0;
+    EnumUInt16 uint16b1 = EnumUInt16.ENUM_VALUE_1;
+    EnumUInt16 uint16b2 = EnumUInt16.ENUM_VALUE_2;
+    EnumUInt16 uint16b3 = EnumUInt16.ENUM_VALUE_3;
+    EnumUInt16 uint16b4 = EnumUInt16.ENUM_VALUE_4;
+    EnumUInt16 uint16b5 = EnumUInt16.ENUM_VALUE_5;
+
+    EnumInt32 int32b0 = EnumInt32.ENUM_VALUE_0;
+    EnumInt32 int32b1 = EnumInt32.ENUM_VALUE_1;
+    EnumInt32 int32b2 = EnumInt32.ENUM_VALUE_2;
+    EnumInt32 int32b3 = EnumInt32.ENUM_VALUE_3;
+    EnumInt32 int32b4 = EnumInt32.ENUM_VALUE_4;
+    EnumInt32 int32b5 = EnumInt32.ENUM_VALUE_5;
+
+    EnumUInt32 uint32b0 = EnumUInt32.ENUM_VALUE_0;
+    EnumUInt32 uint32b1 = EnumUInt32.ENUM_VALUE_1;
+    EnumUInt32 uint32b2 = EnumUInt32.ENUM_VALUE_2;
+    EnumUInt32 uint32b3 = EnumUInt32.ENUM_VALUE_3;
+    EnumUInt32 uint32b4 = EnumUInt32.ENUM_VALUE_4;
+    EnumUInt32 uint32b5 = EnumUInt32.ENUM_VALUE_5;
+
+    EnumInt64 int64b0 = EnumInt64.ENUM_VALUE_0;
+    EnumInt64 int64b1 = EnumInt64.ENUM_VALUE_1;
+    EnumInt64 int64b2 = EnumInt64.ENUM_VALUE_2;
+    EnumInt64 int64b3 = EnumInt64.ENUM_VALUE_3;
+    EnumInt64 int64b4 = EnumInt64.ENUM_VALUE_4;
+    EnumInt64 int64b5 = EnumInt64.ENUM_VALUE_5;
+
+    EnumUInt64 uint64b0 = EnumUInt64.ENUM_VALUE_0;
+    EnumUInt64 uint64b1 = EnumUInt64.ENUM_VALUE_1;
+    EnumUInt64 uint64b2 = EnumUInt64.ENUM_VALUE_2;
+    EnumUInt64 uint64b3 = EnumUInt64.ENUM_VALUE_3;
+    EnumUInt64 uint64b4 = EnumUInt64.ENUM_VALUE_4;
+    EnumUInt64 uint64b5 = EnumUInt64.ENUM_VALUE_5;
+}

@@ -1,32 +1,26 @@
+//
+//  BenchmarkSerializationFinal.swift
+//  FastBinaryEncodingTests
+//
+//  Created by Andrey on 8/16/19.
+//  Copyright © 2019 Andrey. All rights reserved.
+//
+
 import XCTest
 import proto
-@testable import MyLibrary
 
-final class MyLibraryTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(MyLibrary().text, "Hello, World!")
-    }
-
-    static var allTests = [
-        ("testExample", testExample),
-    ]
-}
-
-final class BenchmarkSerializationFinal: XCTestCase {
+class BenchmarkSerializationFinal: XCTestCase {
     
     private static var _account: proto.Account!
     private static var _writer: proto.AccountFinalModel!
     private static var _reader: proto.AccountFinalModel!
     
-//    override class var defaultPerformanceMetrics: [XCTPerformanceMetric] {
-//        return [.wallClockTime,
-//                XCTPerformanceMetric(rawValue: "com.apple.XCTPerformanceMetric_TotalHeapAllocationsKilobytes"),
-//                XCTPerformanceMetric(rawValue: "com.apple.XCTPerformanceMetric_PersistentVMAllocations"),
-//        ]
-//    }
+    override class var defaultPerformanceMetrics: [XCTPerformanceMetric] {
+        return [.wallClockTime,
+                XCTPerformanceMetric(rawValue: "com.apple.XCTPerformanceMetric_TotalHeapAllocationsKilobytes"),
+                XCTPerformanceMetric(rawValue: "com.apple.XCTPerformanceMetric_PersistentVMAllocations"),
+        ]
+    }
     
     override class func setUp() {
         super.setUp()
@@ -54,11 +48,10 @@ final class BenchmarkSerializationFinal: XCTestCase {
     }
     
     func testPerformanceVerify() {
-       // self.measure {
+        self.measure {
             // Verify the account
-                print("")
             _ = BenchmarkSerializationFinal._writer.verify()
-       // }
+        }
     }
     
     func testPerformanceSerialize() {

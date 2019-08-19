@@ -1,0 +1,317 @@
+/*
+   Test protocol
+*/
+
+// Domain declaration
+domain com.chronoxor
+
+// Package declaration
+package test offset 100
+
+// Protocol version
+version 123.456
+
+// Package imports
+import proto
+
+// Simple enum declaration
+enum EnumSimple
+{
+    ENUM_VALUE_0;
+    ENUM_VALUE_1 = 1;
+    ENUM_VALUE_2;
+    ENUM_VALUE_3 = 3;
+    ENUM_VALUE_4 = 0x4;
+    ENUM_VALUE_5 = ENUM_VALUE_3;
+}
+
+// Typed enum declaration
+enum EnumTyped : char
+{
+    ENUM_VALUE_0;
+    ENUM_VALUE_1 = '1';
+    ENUM_VALUE_2;
+    ENUM_VALUE_3 = '3';
+    ENUM_VALUE_4;
+    ENUM_VALUE_5 = ENUM_VALUE_3;
+}
+
+// Empty enum declaration
+enum EnumEmpty
+{
+}
+
+// Simple flags declaration
+flags FlagsSimple
+{
+    FLAG_VALUE_0 = 0x0;
+    FLAG_VALUE_1 = 0x1;
+    FLAG_VALUE_2 = 0x2;
+    FLAG_VALUE_3 = 0x4;
+    FLAG_VALUE_4 = FLAG_VALUE_3;
+    FLAG_VALUE_5 = FLAG_VALUE_1 | FLAG_VALUE_3;
+}
+
+// Typed flags declaration
+flags FlagsTyped : uint64
+{
+    FLAG_VALUE_0 = 0x00;
+    FLAG_VALUE_1 = 0x01;
+    FLAG_VALUE_2 = 0x02;
+    FLAG_VALUE_3 = 0x04;
+    FLAG_VALUE_4 = 0x08;
+    FLAG_VALUE_5 = 0x10;
+    FLAG_VALUE_6 = 0x20;
+    FLAG_VALUE_7 = 0x40;
+    FLAG_VALUE_8 = FLAG_VALUE_7;
+    FLAG_VALUE_9 = FLAG_VALUE_2 | FLAG_VALUE_4 | FLAG_VALUE_6;
+}
+
+// Empty flags declaration
+flags FlagsEmpty
+{
+}
+
+// Simple struct declaration
+struct StructSimple(+10)
+{
+    [key] int32 id;
+    bool f1;
+    bool f2 = true;
+    byte f3;
+    byte f4 = max;
+    char f5;
+    char f6 = '!';
+    wchar f7;
+    wchar f8 = 0x0444;
+    int8 f9;
+    int8 f10 = max;
+    uint8 f11 = min;
+    uint8 f12 = max;
+    int16 f13;
+    int16 f14 = max;
+    uint16 f15 = min;
+    uint16 f16 = max;
+    int32 f17;
+    int32 f18 = max;
+    uint32 f19 = min;
+    uint32 f20 = max;
+    int64 f21;
+    int64 f22 = max;
+    uint64 f23 = min;
+    uint64 f24 = max;
+    float f25;
+    float f26 = 123.456;
+    double f27;
+    double f28 = -123.456e+123;
+    decimal f29;
+    decimal f30 = 123456.123456;
+    string f31;
+    string f32 = "Initial string!";
+    timestamp f33;
+    timestamp f34 = epoch;
+    timestamp f35 = utc;
+    uuid f36;
+    uuid f37 = uuid1;
+    uuid f38 = "123e4567-e89b-12d3-a456-426655440000";
+    proto.OrderSide f39;
+    proto.OrderType f40;
+    proto.Order f41;
+    proto.Balance f42;
+    proto.State f43;
+    proto.Account f44;
+}
+
+// Optional struct declaration
+struct StructOptional : StructSimple
+{
+    bool? f100;
+    bool? f101 = true;
+    bool? f102 = null;
+    byte? f103;
+    byte? f104 = max;
+    byte? f105 = null;
+    char? f106;
+    char? f107 = '!';
+    char? f108 = null;
+    wchar? f109;
+    wchar? f110 = 0x0444;
+    wchar? f111 = null;
+    int8? f112;
+    int8? f113 = max;
+    int8? f114 = null;
+    uint8? f115;
+    uint8? f116 = max;
+    uint8? f117 = null;
+    int16? f118;
+    int16? f119 = max;
+    int16? f120 = null;
+    uint16? f121;
+    uint16? f122 = max;
+    uint16? f123 = null;
+    int32? f124;
+    int32? f125 = max;
+    int32? f126 = null;
+    uint32? f127;
+    uint32? f128 = max;
+    uint32? f129 = null;
+    int64? f130;
+    int64? f131 = max;
+    int64? f132 = null;
+    uint64? f133;
+    uint64? f134 = max;
+    uint64? f135 = null;
+    float? f136;
+    float? f137 = 123.456;
+    float? f138 = null;
+    double? f139;
+    double? f140 = -123.456e+123;
+    double? f141 = null;
+    decimal? f142;
+    decimal? f143 = 123456.123456;
+    decimal? f144 = null;
+    string? f145;
+    string? f146 = "Initial string!";
+    string? f147 = null;
+    timestamp? f148;
+    timestamp? f149 = utc;
+    timestamp? f150 = null;
+    uuid? f151;
+    uuid? f152 = "123e4567-e89b-12d3-a456-426655440000";
+    uuid? f153 = null;
+    proto.OrderSide? f154;
+    proto.OrderSide? f155 = null;
+    proto.OrderType? f156;
+    proto.OrderType? f157 = null;
+    proto.Order? f158;
+    proto.Order? f159 = null;
+    proto.Balance? f160;
+    proto.Balance? f161 = null;
+    proto.State? f162;
+    proto.State? f163 = null;
+    proto.Account? f164;
+    proto.Account? f165 = null;
+}
+
+// Nested struct declaration
+struct StructNested : StructOptional
+{
+    EnumSimple f1000;
+    EnumSimple? f1001;
+    EnumTyped f1002 = EnumTyped.ENUM_VALUE_2;
+    EnumTyped? f1003 = null;
+
+    FlagsSimple f1004;
+    FlagsSimple? f1005;
+    FlagsTyped f1006 = FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6;
+    FlagsTyped? f1007 = null;
+
+    StructSimple f1008;
+    StructSimple? f1009;
+    StructOptional f1010;
+    StructOptional? f1011 = null;
+}
+
+// Bytes declaration
+struct StructBytes(+20)
+{
+    bytes f1;
+    bytes? f2;
+    bytes? f3 = null;
+}
+
+// Array declaration
+struct StructArray(+25)
+{
+    byte[2] f1;
+    byte?[2] f2;
+    bytes[2] f3;
+    bytes?[2] f4;
+    EnumSimple[2] f5;
+    EnumSimple?[2] f6;
+    FlagsSimple[2] f7;
+    FlagsSimple?[2] f8;
+    StructSimple[2] f9;
+    StructSimple?[2] f10;
+}
+
+// Vector declaration
+struct StructVector(+30)
+{
+    byte[] f1;
+    byte?[] f2;
+    bytes[] f3;
+    bytes?[] f4;
+    EnumSimple[] f5;
+    EnumSimple?[] f6;
+    FlagsSimple[] f7;
+    FlagsSimple?[] f8;
+    StructSimple[] f9;
+    StructSimple?[] f10;
+}
+
+// List declaration
+struct StructList
+{
+    byte() f1;
+    byte?() f2;
+    bytes() f3;
+    bytes?() f4;
+    EnumSimple() f5;
+    EnumSimple?() f6;
+    FlagsSimple() f7;
+    FlagsSimple?() f8;
+    StructSimple() f9;
+    StructSimple?() f10;
+}
+
+// Set declaration
+struct StructSet
+{
+    byte! f1;
+    EnumSimple! f2;
+    FlagsSimple! f3;
+    StructSimple! f4;
+}
+
+// Map declaration
+struct StructMap(+40)
+{
+    byte<int32> f1;
+    byte?<int32> f2;
+    bytes<int32> f3;
+    bytes?<int32> f4;
+    EnumSimple<int32> f5;
+    EnumSimple?<int32> f6;
+    FlagsSimple<int32> f7;
+    FlagsSimple?<int32> f8;
+    StructSimple<int32> f9;
+    StructSimple?<int32> f10;
+}
+
+// Hash declaration
+struct StructHash
+{
+    byte{string} f1;
+    byte?{string} f2;
+    bytes{string} f3;
+    bytes?{string} f4;
+    EnumSimple{string} f5;
+    EnumSimple?{string} f6;
+    FlagsSimple{string} f7;
+    FlagsSimple?{string} f8;
+    StructSimple{string} f9;
+    StructSimple?{string} f10;
+}
+
+// Extended hash declaration
+struct StructHashEx
+{
+    StructNested{StructSimple} f1;
+    StructNested?{StructSimple} f2;
+}
+
+// Empty struct declaration
+struct StructEmpty
+{
+}
