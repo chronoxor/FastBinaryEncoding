@@ -45,7 +45,7 @@ public extension FinalModel {
     func fbeUnshift(size: Int) { _offset -= size }
 
     // Check if the value is valid
-    public func verify() -> Bool {
+    func verify() -> Bool {
         return true
     }
 
@@ -62,7 +62,7 @@ public extension FinalModel {
     func readUInt32(offset: Int) -> UInt32 { return Buffer.readUInt32(buffer: _buffer, offset: _buffer.offset + offset) }
     func readInt64(offset: Int) -> Int64 { return Buffer.readInt64(buffer: _buffer, offset: _buffer.offset + offset) }
     func readUInt64(offset: Int) -> UInt64 { return Buffer.readUInt64(buffer: _buffer, offset: _buffer.offset + offset) }
-    func readFloat(offset: Int) -> Float { return Buffer.readFloat(buffer: _buffer.data, offset: _buffer.offset + offset) }
+    func readFloat(offset: Int) -> Float { return Buffer.readFloat(buffer: _buffer, offset: _buffer.offset + offset) }
     func readDouble(offset: Int) -> Double { return Buffer.readDouble(buffer: _buffer, offset: _buffer.offset + offset) }
     func readBytes(offset: Int, size: Int) -> Data { return Buffer.readBytes(buffer: _buffer.data, offset: _buffer.offset + offset, size: size) }
     func readString(offset: Int, size: Int) -> String { return Buffer.readString(buffer: _buffer, offset: _buffer.offset + offset, size: size) }
@@ -83,11 +83,4 @@ public extension FinalModel {
     func write(offset: Int, value: Data, valueOffset: Int, valueSize: Int) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value, valueOffset: valueOffset, valueSize: valueSize) }
     func write(offset: Int, value: Data.Element, valueCount: Int) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value, valueCount: valueCount) }
     func write(offset: Int, value: UUID) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-}
-
-
-public extension FinalModel {
-    func my_asset(_ bl: Bool, _ msg: String) {
-
-    }
 }

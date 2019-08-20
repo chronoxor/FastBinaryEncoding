@@ -67,8 +67,8 @@ class FinalModelOptionalUInt16: FinalModel {
     }
 
     public func get(size: inout Size) -> UInt16? {
-        assert(_buffer.offset + fbeOffset + 1 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 1 > _buffer.size {
+            assertionFailure("Model is broken!")
             size.value = 0
             return nil
         }
@@ -87,8 +87,8 @@ class FinalModelOptionalUInt16: FinalModel {
 
     // Set the optional value
     public func set(value optional: UInt16?) throws -> Int {
-       assert(_buffer.offset + fbeOffset + 1 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 1 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 

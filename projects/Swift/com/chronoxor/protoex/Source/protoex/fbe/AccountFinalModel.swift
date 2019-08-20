@@ -43,8 +43,8 @@ public class AccountFinalModel: Model {
         let fbeStructType = fbeType
         var fbeStructSize = 8 + _model.fbeAllocationSize(value: value)
         let fbeStructOffset = try buffer.allocate(size: fbeStructSize) - buffer.offset
-        assert(buffer.offset + fbeStructOffset + fbeStructSize <= buffer.size, "Model is broken!")
         if ((buffer.offset + fbeStructOffset + fbeStructSize) > buffer.size) {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -63,15 +63,15 @@ public class AccountFinalModel: Model {
     public func deserialize(value: inout Account) -> Int {
         var valueRef = value
 
-        assert(buffer.offset + _model.fbeOffset <= buffer.size, "Model is broken!")
         if ((buffer.offset + _model.fbeOffset) > buffer.size) {
+            assertionFailure("Model is broken!")
             return 0
         }
 
         let fbeStructSize = Int32(readUInt32(offset: _model.fbeOffset - 8))
         let fbeStructType = Int32(readUInt32(offset: _model.fbeOffset - 4))
-        assert((fbeStructSize > 0) && (fbeStructType == fbeType), "Model is broken!")
         if (fbeStructSize <= 0) || (fbeStructType != fbeType) {
+            assertionFailure("Model is broken!")
             return 8
         }
 

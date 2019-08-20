@@ -68,8 +68,8 @@ class FinalModelMapStringOptionalData: FinalModel {
     public func get(values: inout Dictionary<String, Data?>) -> Int {
         values.removeAll()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -99,8 +99,8 @@ class FinalModelMapStringOptionalData: FinalModel {
     }
 
     public func set(value values: Dictionary<String, Data?>) throws -> Int {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 

@@ -27,8 +27,8 @@ class FinalModelVectorData: FinalModel {
     // Get the allocation size
     func fbeAllocationSize(value values: Array<Data>) -> Int {
         var size: Int = 4
-        for value in values {
-            size += _model.fbeAllocationSize(value: value)
+        for i in 0..<values.count {
+            size += _model.fbeAllocationSize(value: values[i])
         }
 
         return size
@@ -58,8 +58,8 @@ class FinalModelVectorData: FinalModel {
     public func get(values: inout Array<Data>) -> Int {
         values.removeAll()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -84,8 +84,8 @@ class FinalModelVectorData: FinalModel {
     }
 
     public func set(value values: Array<Data>) throws -> Int {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -93,8 +93,8 @@ class FinalModelVectorData: FinalModel {
 
         var size: Int = 4
         _model.fbeOffset = fbeOffset + 4
-        for value in values {
-            let offset = try _model.set(value: value)
+        for i in 0..<values.count {
+            let offset = try _model.set(value: values[i])
             _model.fbeShift(size: offset)
             size += offset
         }

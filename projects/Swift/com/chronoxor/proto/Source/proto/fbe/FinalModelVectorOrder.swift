@@ -57,6 +57,7 @@ class FinalModelVectorOrder: FinalModel {
         values.removeAll()
 
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -70,20 +71,19 @@ class FinalModelVectorOrder: FinalModel {
         var size: Int = 4
         var offset = Size()
         _model.fbeOffset = fbeOffset + 4
-        var i = fbeVectorSize
-        while (i > 0) {
+        for _ in 1...fbeVectorSize {
             offset.value = 0
             let value = _model.get(size: &offset)
             values.append(value)
             _model.fbeShift(size: offset.value)
             size += offset.value
-            i -= 1
         }
         return size
     }
 
     public func set(value values: Array<proto.Order>) throws -> Int {
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 

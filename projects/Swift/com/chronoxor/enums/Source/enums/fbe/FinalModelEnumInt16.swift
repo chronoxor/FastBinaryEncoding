@@ -43,8 +43,8 @@ public class FinalModelEnumInt16: FinalModel {
 
     // Set the value
     public func set(value: EnumInt16) -> Int {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 

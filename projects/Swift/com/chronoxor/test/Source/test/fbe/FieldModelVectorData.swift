@@ -158,14 +158,14 @@ class FieldModelVectorData: FieldModel {
     }
 
     public func set(value values: Array<Data>) throws {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return
         }
 
         let fbeModel = try resize(size: values.count)
-        for value in values {
-            try fbeModel.set(value: value)
+        for i in 0..<values.count {
+            try fbeModel.set(value: values[i])
             fbeModel.fbeShift(size: fbeModel.fbeSize)
         }
     }

@@ -66,8 +66,8 @@ public class StructBytesModel: Model {
         }
 
         let fbeFullSize = Int(readUInt32(offset: model.fbeOffset - 4))
-        assert(fbeFullSize >= model.fbeSize, "Model is broken!")
         if (fbeFullSize < model.fbeSize) {
+            assertionFailure("Model is broken!")
             valueRef = StructBytes()
             return 0
         }

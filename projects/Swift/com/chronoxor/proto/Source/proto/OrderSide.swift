@@ -26,7 +26,7 @@ public class OrderSide : Comparable, Hashable, Codable {
     }
     public func setDefault() { setEnum(value: NSNumber(value: 0).uint8Value) }
 
-    public func setEnum(value: UInt8) { self.value = OrderSideEnum(value: value) }
+    public func setEnum(value: UInt8) { self.value = OrderSideEnum.mapValue(value: value) }
     public func setEnum(value: OrderSideEnum) { self.value = value }
     public func setEnum(value: OrderSide) { self.value = value.value }
 

@@ -39,10 +39,3 @@ open class Model {
     public func readUInt32(offset: Int) -> UInt { return UInt(Buffer.readUInt32(buffer: buffer, offset: buffer.offset + offset)) }
     public func write(offset: Int, value: UInt32) { Buffer.write(buffer: &buffer, offset: buffer.offset + offset, value: value) }
 }
-
-
-public extension Model {
-    func my_asset(_ bl: Bool, _ msg: String) {
-
-    }
-}

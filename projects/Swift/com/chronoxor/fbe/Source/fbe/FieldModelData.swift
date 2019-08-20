@@ -68,11 +68,13 @@ public class FieldModelData: FieldModel {
         }
 
         if (_buffer.offset + fbeBytesOffset + 4) > _buffer.size {
+            assertionFailure("Model is broken!")
             return defaults
         }
 
         let fbeBytesSize = Int(readUInt32(offset: fbeBytesOffset))
         if (_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.size {
+            assertionFailure("Model is broken!")
             return defaults
         }
 
@@ -82,12 +84,14 @@ public class FieldModelData: FieldModel {
     // Set the value
     public func set(value: Data) throws {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
+            assertionFailure("Model is broken!")
             return
         }
 
         let fbeBytesSize = value.count
         let fbeBytesOffset = try _buffer.allocate(size: 4 + fbeBytesSize) - _buffer.offset
         if (fbeBytesOffset <= 0) || ((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return
         }
 

@@ -109,21 +109,11 @@ public struct StateEnum: OptionSet {
         ]
     }
 
-    static let mapping: Dictionary<UInt8, StateEnum> = [StateEnum.unknown.rawValue: .unknown,
-                                                        StateEnum.invalid.rawValue: .invalid,
-                                                        StateEnum.initialized.rawValue: .initialized,
-                                                        StateEnum.calculated.rawValue: .calculated,
-                                                        StateEnum.broken.rawValue: .broken,
-                                                        StateEnum.good.rawValue: .good,
-                                                        StateEnum.bad.rawValue: .bad,
-    ]
-
-
     public static func mapValue(value: RawValue) -> StateEnum? {
-//        var mapping = Dictionary<RawValue, StateEnum>()
-//        for value in values() {
-//            mapping[value.rawValue] = value
-//        }
-        return .bad
+        var mapping = Dictionary<RawValue, StateEnum>()
+        for value in values() {
+            mapping[value.rawValue] = value
+        }
+        return mapping[value]
     }
 }

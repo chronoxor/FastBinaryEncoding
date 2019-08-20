@@ -45,13 +45,11 @@ public enum OrderTypeEnum {
         ]
     }
 
-    static let mapping: Dictionary<UInt8, OrderTypeEnum> = [0: .market, 1: .limit, 2: .stop]
-
     static func mapValue(value: UInt8) -> OrderTypeEnum? {
-//        var mapping = Dictionary<UInt8, OrderTypeEnum>()
-//        for value in values() {
-//            mapping[value.rawValue] = value
-//        }
-        return .market//mapping[value]
+        var mapping = Dictionary<UInt8, OrderTypeEnum>()
+        for value in values() {
+            mapping[value.rawValue] = value
+        }
+        return mapping[value]
     }
 }

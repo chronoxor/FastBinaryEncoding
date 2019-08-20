@@ -58,7 +58,7 @@ public class State: Comparable, Hashable, Codable {
 
     public func setDefaults() { setEnum(value: 0) }
 
-    public func setEnum(value: UInt8) { self.raw = value; self.value = StateEnum(value: value) }
+    public func setEnum(value: UInt8) { self.raw = value; self.value = StateEnum.mapValue(value: value) }
     public func setEnum(value: StateEnum) { self.raw = value.rawValue; self.value = value }
     public func setEnum(value: State) { self.raw = value.raw; self.value = value.value }
 

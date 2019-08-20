@@ -58,8 +58,8 @@ class FinalModelArrayUInt8: FinalModel {
     public func get(size: inout Size) -> Array<UInt8> {
         var values = Array<UInt8>()
 
-        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset > _buffer.size {
+            assertionFailure("Model is broken!")
             size.value = 0
             return values
         }
@@ -80,8 +80,8 @@ class FinalModelArrayUInt8: FinalModel {
     public func get(values: inout Array<UInt8>) -> Int {
         values.removeAll()
 
-        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -99,8 +99,8 @@ class FinalModelArrayUInt8: FinalModel {
     }
 
     public func set(value values: Array<UInt8>) throws -> Int {
-        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 

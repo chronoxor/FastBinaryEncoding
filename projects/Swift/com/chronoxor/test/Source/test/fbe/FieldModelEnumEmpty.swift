@@ -30,8 +30,8 @@ public class FieldModelEnumEmpty: FieldModel {
 
     // Set the value
     public func set(value: EnumEmpty) {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return
         }
 

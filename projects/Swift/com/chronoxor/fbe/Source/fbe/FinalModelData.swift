@@ -41,8 +41,8 @@ public class FinalModelData: FinalModel {
         }
 
         let fbeBytesSize = Int(readUInt32(offset: fbeOffset))
-        if ((_buffer.offset + fbeOffset + 4 + fbeBytesSize) > _buffer.size)
-        {
+        if ((_buffer.offset + fbeOffset + 4 + fbeBytesSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             size.value = 4
             return Data()
         }
@@ -54,11 +54,13 @@ public class FinalModelData: FinalModel {
     // Set the value
     public func set(value: Data) throws -> Int {
         if (_buffer.offset + fbeOffset + 4) > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
         let fbeBytesSize = value.count
         if _buffer.offset + fbeOffset + 4 + fbeBytesSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return 4
         }
 

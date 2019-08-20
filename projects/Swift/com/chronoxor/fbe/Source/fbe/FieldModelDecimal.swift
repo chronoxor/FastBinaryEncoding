@@ -45,6 +45,7 @@ public class FieldModelDecimal: FieldModel {
     // Set the value
     public func set(value: Decimal) {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return
         }
 

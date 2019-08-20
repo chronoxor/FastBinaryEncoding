@@ -68,8 +68,8 @@ class FinalModelMapInt32UInt8: FinalModel {
     public func get(values: inout Dictionary<Int32, UInt8>) -> Int {
         values.removeAll()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -99,8 +99,8 @@ class FinalModelMapInt32UInt8: FinalModel {
     }
 
     public func set(value values: Dictionary<Int32, UInt8>) throws -> Int {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 

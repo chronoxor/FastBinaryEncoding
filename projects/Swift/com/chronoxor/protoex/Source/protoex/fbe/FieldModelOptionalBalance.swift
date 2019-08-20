@@ -92,8 +92,8 @@ public class FieldModelOptionalBalance: FieldModel {
         }
 
         let fbeOptionalOffset = Int(readUInt32(offset: fbeOffset + 1))
-        assert(fbeOptionalOffset > 0, "Model is broken!")
         if fbeOptionalOffset <= 0 {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -119,8 +119,8 @@ public class FieldModelOptionalBalance: FieldModel {
 
     // Set the optional value (begin phase)
     func setBegin(hasValue: Bool) throws -> Int {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -132,8 +132,8 @@ public class FieldModelOptionalBalance: FieldModel {
 
         let fbeOptionalSize = value.fbeSize
         let fbeOptionalOffset = try _buffer.allocate(size: fbeOptionalSize) - _buffer.offset
-        assert((fbeOptionalOffset > 0) && ((_buffer.offset + fbeOptionalOffset + fbeOptionalSize) <= _buffer.size), "Model is broken!")
         if (fbeOptionalOffset <= 0) || ((_buffer.offset + fbeOptionalOffset + fbeOptionalSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return 0
         }
 

@@ -242,14 +242,27 @@ void GeneratorSwift::GenerateFBEBuffer(const std::string& domain, const std::str
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
-  public class Buffer {
+public class Buffer {
 
     // Is the buffer empty?
     var empty: Bool {
         return size == 0
     }
     // Get bytes memory buffer
-    /* private(set) */ var data = Data()
+    var data = Data() {
+        didSet {
+            self.data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
+                if let baseAddress = body.baseAddress, body.count > 0 {
+                    p = baseAddress.assumingMemoryBound(to: UInt8.self)
+                } else {
+                    assertionFailure()
+                }
+            }
+        }
+    }
+
+    var p: UnsafeMutablePointer<UInt8>!
+
     // Get bytes memory buffer capacity
     var capacity: Int {
         return data.count
@@ -303,7 +316,6 @@ void GeneratorSwift::GenerateFBEBuffer(const std::string& domain, const std::str
 
     // Allocate memory in the current buffer and return offset to the allocated memory block
     public func allocate(size: Int) throws -> Int {
-        assert(size >= 0)
 
         if size < 0 {
             throw NSException(name: .invalidArgumentException, reason: "Invalid allocation size!") as! Error
@@ -312,7 +324,7 @@ void GeneratorSwift::GenerateFBEBuffer(const std::string& domain, const std::str
         let offset = self.size
 
         // Calculate a new buffer size
-        let total = self.size + size
+        let total = Int(self.size + size)
 
         if total <= data.count {
             self.size = total
@@ -320,17 +332,21 @@ void GeneratorSwift::GenerateFBEBuffer(const std::string& domain, const std::str
         }
 
         var data = Data(count: max(total, 2 * self.size))
-        data.insert(contentsOf: self.data, at: 0)
-        //data[0...] = self.data[0...self.size]
+        //data.insert(contentsOf: self.data, at: 0)
+        data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
+            if let baseAddress = body.baseAddress, body.count > 0 {
+                let pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
+                self.data.copyBytes(to: pointer, count: self.data.count)
+            }
+        }
         self.data = data
-        self.size = total
+        self.size = self.size + size
 
         return offset
     }
 
     // Remove some memory of the given size from the current buffer
     public func remove(offset: Int, size: Int) throws {
-        assert(offset + size <= self.size)
         if (offset + size > self.size) {
             throw NSException(name: .invalidArgumentException, reason: "Invalid offset & size!") as! Error
         }
@@ -350,7 +366,6 @@ void GeneratorSwift::GenerateFBEBuffer(const std::string& domain, const std::str
 
     // Reserve memory of the given capacity in the current buffer
     public func reserve(capacity: Int) throws {
-        assert(capacity >= 0, "Invalid reserve capacity!")
         if capacity < 0 {
             throw NSException(name: .invalidArgumentException, reason: "Invalid reserve capacity!") as! Error
         }
@@ -403,12 +418,17 @@ public extension Buffer {
     }
 
     class func readWChar(buffer: Data, offset: Int) -> Character {
-        return Character(UnicodeScalar(Buffer.readUInt32(buffer: buffer, offset: offset))!)
+        return "\0"
+        //return Character(UnicodeScalar(Buffer.readUInt32(buffer: buffer, offset: offset))!)
     }
 
-    class func readInt8(buffer: Data, offset: Int) -> Int8 {
-        let index = offset
-        return NSNumber(value: buffer[index]).int8Value
+    class func readInt8(buffer: Buffer, offset: Int) -> Int8 {
+        var i: Int8 = 0
+        withUnsafeMutablePointer(to: &i) { ip -> Void in
+            let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
+            dest.initialize(from: buffer.p.advanced(by: offset), count: 1)
+        }
+        return Int8(littleEndian: i)
     }
 
     class func readUInt8(buffer: Data, offset: Int) -> UInt8 {
@@ -416,66 +436,58 @@ public extension Buffer {
         return buffer[index]
     }
 
-    class func readInt16(buffer: Data, offset: Int) -> Int16 {
-        let index = offset
-        return Int16(((Int16(buffer[index + 0]) & 0xFF) << 0) |
-            ((Int16(buffer[index + 1]) & 0xFF) << 8))
+    class func readInt16(buffer: Buffer, offset: Int) -> Int16 {
+        var i: Int16 = 0
+        withUnsafeMutablePointer(to: &i) { ip -> Void in
+            let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
+            dest.initialize(from: buffer.p.advanced(by: offset), count: 2)
+        }
+        return Int16(littleEndian: i)
     }
 
-    class func readUInt16(buffer: Data, offset: Int) -> UInt16 {
-        let index = offset
-        return UInt16(((UInt16(buffer[index + 0]) & UInt16(0xFF)) << 0) |
-            ((UInt16(buffer[index + 1]) & UInt16(0xFF)) << 8))
+    class func readUInt16(buffer: Buffer, offset: Int) -> UInt16 {
+        var i: UInt16 = 0
+        withUnsafeMutablePointer(to: &i) { ip -> Void in
+            let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
+            dest.initialize(from: buffer.p.advanced(by: offset), count: 2)
+        }
+        return UInt16(littleEndian: i)
     }
 
-    class func readInt32(buffer: Data, offset: Int) -> Int32 {
-        let index = offset
-        return Int32(((Int32(buffer[index + 0]) & 0xFF) <<  0) |
-            ((Int32(buffer[index + 1]) & 0xFF) <<  8) |
-            ((Int32(buffer[index + 2]) & 0xFF) << 16) |
-            ((Int32(buffer[index + 3]) & 0xFF) << 24))
+    class func readInt32(buffer: Buffer, offset: Int) -> Int32 {
+        var i: Int32 = 0
+        withUnsafeMutablePointer(to: &i) { ip -> Void in
+            let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
+            dest.initialize(from: buffer.p.advanced(by: offset), count: 4)
+        }
+        return Int32(littleEndian: i)
     }
 
-    class func readUInt32(buffer: Data, offset: Int) -> UInt32 {
-        let index = offset
-        let firstPart = ((UInt32(buffer[index + 0]) & UInt32(0xFF)) <<  0) |
-            ((UInt32(buffer[index + 1]) & UInt32(0xFF)) <<  8)
-
-        let secondPart = ((UInt32(buffer[index + 2]) & UInt32(0xFF)) <<  16) |
-            ((UInt32(buffer[index + 3]) & UInt32(0xFF)) << 24)
-        return UInt32(firstPart | secondPart)
+    class func readUInt32(buffer: Buffer, offset: Int) -> UInt32 {
+        var i: UInt32 = 0
+        withUnsafeMutablePointer(to: &i) { ip -> Void in
+            let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
+            dest.initialize(from: buffer.p.advanced(by: offset), count: 4)
+        }
+        return UInt32(littleEndian: i)
     }
 
-    class func readInt64(buffer: Data, offset: Int) -> Int64 {
-        let index = offset
-        let fPart = ((Int64(buffer[index + 0]) & 0xFF) <<  0) |
-            ((Int64(buffer[index + 1]) & 0xFF) <<  8) |
-            ((Int64(buffer[index + 2]) & 0xFF) <<  16)
-
-        let sPart = ((Int64(buffer[index + 3]) & 0xFF) <<  24) |
-            ((Int64(buffer[index + 4]) & 0xFF) <<  32) |
-            ((Int64(buffer[index + 5]) & 0xFF) <<  40)
-
-        let tPart = ((Int64(buffer[index + 6]) & 0xFF) <<  48) |
-            ((Int64(buffer[index + 7]) & 0xFF) <<  56)
-
-        return Int64(fPart | sPart | tPart)
+    class func readInt64(buffer: Buffer, offset: Int) -> Int64 {
+        var i: Int64 = 0
+        withUnsafeMutablePointer(to: &i) { ip -> Void in
+            let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
+            dest.initialize(from: buffer.p.advanced(by: offset), count: 8)
+        }
+        return Int64(littleEndian: i)
     }
 
-    class func readUInt64(buffer: Data, offset: Int) -> UInt64 {
-        let index = offset
-        let fPart = ((UInt64(buffer[index + 0]) & UInt64(0xFF)) <<  0) |
-            ((UInt64(buffer[index + 1]) & UInt64(0xFF)) <<  8) |
-            ((UInt64(buffer[index + 2]) & UInt64(0xFF)) <<  16)
-
-        let sPart = ((UInt64(buffer[index + 3]) & UInt64(0xFF)) <<  24) |
-            ((UInt64(buffer[index + 4]) & UInt64(0xFF)) <<  32) |
-            ((UInt64(buffer[index + 5]) & UInt64(0xFF)) <<  40)
-
-        let tPart = ((UInt64(buffer[index + 6]) & UInt64(0xFF)) <<  48) |
-            ((UInt64(buffer[index + 7]) & UInt64(0xFF)) <<  56)
-
-        return UInt64(fPart | sPart | tPart)
+    class func readUInt64(buffer: Buffer, offset: Int) -> UInt64 {
+        var i: UInt64 = 0
+        withUnsafeMutablePointer(to: &i) { ip -> Void in
+            let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
+            dest.initialize(from: buffer.p.advanced(by: offset), count: 8)
+        }
+        return UInt64(littleEndian: i)
     }
 
     class func readInt64BE(buffer: Data, offset: Int) -> UInt64 {
@@ -494,24 +506,50 @@ public extension Buffer {
         return UInt64(fPart | sPart | tPart)
     }
 
-    class func readFloat(buffer: Data, offset: Int) -> Float {
+    class func readFloat(buffer: Buffer, offset: Int) -> Float {
         let bits = readUInt32(buffer: buffer, offset: offset)
         return Float(bitPattern: bits)
     }
 
-    class func readDouble(buffer: Data, offset: Int) -> Double {
+    class func readDouble(buffer: Buffer, offset: Int) -> Double {
         let bits = readUInt64(buffer: buffer, offset: offset)
         return Double(bitPattern: bits)
     }
 
     class func readBytes(buffer: Data, offset: Int, size: Int) -> Data {
         var result = Data(capacity: size)
-        result[0...] = buffer[offset..<offset + size]
+        result[0...] = buffer[offset..<(offset + size)]
         return result
     }
 
-    class func readString(buffer: Data, offset: Int, size: Int) -> String {
-        return String(bytes: buffer.subdata(in: offset..<offset+size), encoding:.utf8) ?? "??"
+    class func readString(buffer: Buffer, offset: Int, size: Int) -> String {
+        return utf8ToString(bytes: buffer.p.advanced(by: offset), count: size)!    }
+
+    class func utf8ToString(bytes: UnsafePointer<UInt8>, count: Int) -> String? {
+        if count == 0 {
+            return String()
+        }
+        let codeUnits = UnsafeBufferPointer<UInt8>(start: bytes, count: count)
+        let sourceEncoding = Unicode.UTF8.self
+
+        // Verify that the UTF-8 is valid.
+        //        var p = sourceEncoding.ForwardParser()
+        //        var i = codeUnits.makeIterator()
+        //        Loop:
+        //            while true {
+        //                switch p.parseScalar(from: &i) {
+        //                case .valid(_):
+        //                    break
+        //                case .error:
+        //                    return nil
+        //                case .emptyInput:
+        //                    break Loop
+        //                }
+        //        }
+
+        // This initializer is fast but does not reject broken
+        // UTF-8 (which is why we validate the UTF-8 above).
+        return String(decoding: codeUnits, as: sourceEncoding)
     }
 
     class func readUUID(buffer: Data, offset: Int) -> UUID {
@@ -533,81 +571,106 @@ public extension Buffer {
         return UUID(uuidString: output) ?? UUID()
     }
 
-    class func write(buffer: inout Data, offset: Int, value: Bool) {
-        buffer[offset] = value ? 1 : 0
+    class func write(buffer: inout Buffer, offset: Int, value: Bool) {
+        buffer.data[offset] = value ? 1 : 0
     }
 
-    class func write(buffer: inout Data, offset: Int, value: Int8) {
-        buffer[offset] = UInt8(truncating: NSNumber(value: value))
+    class func write(buffer: inout Buffer, offset: Int, value: Int8) {
+        let pointer = buffer.p.advanced(by: offset)
+
+        var v = value.littleEndian
+        let n = MemoryLayout<Int8>.size
+        memcpy(pointer, &v, n)
     }
 
-    class func write(buffer: inout Data, offset: Int, value: Data.Element) {
-        buffer[offset] = value
+    class func write(buffer: inout Buffer, offset: Int, value: UInt8) {
+        let pointer = buffer.p.advanced(by: offset)
+
+        var v = value.littleEndian
+        let n = MemoryLayout<UInt8>.size
+        memcpy(pointer, &v, n)
     }
 
-    class func write(buffer: inout Data, offset: Int, value: Int16) {
-        buffer[offset + 0] = NSNumber(value: value >> 0).uint8Value
-        buffer[offset + 1] = NSNumber(value: value >> 8).uint8Value
+    class func write(buffer: inout Buffer, offset: Int, value: Int16) {
+        let pointer = buffer.p.advanced(by: offset)
+
+        var v = value.littleEndian
+        let n = MemoryLayout<Int16>.size
+        memcpy(pointer, &v, n)
     }
 
-    class func write(buffer: inout Data, offset: Int, value: UInt16) {
-        buffer[offset + 0] = NSNumber(value: value >> 0).uint8Value
-        buffer[offset + 1] = NSNumber(value: value >> 8).uint8Value
+    class func write(buffer: inout Buffer, offset: Int, value: UInt16) {
+        let pointer = buffer.p.advanced(by: offset)
+
+        var v = value.littleEndian
+        let n = MemoryLayout<UInt16>.size
+        memcpy(pointer, &v, n)
     }
 
-    class func write(buffer: inout Data, offset: Int, value: Int32) {
-        buffer[offset + 0] = NSNumber(value: value >>  0).uint8Value
-        buffer[offset + 1] = NSNumber(value: value >>  8).uint8Value
-        buffer[offset + 2] = NSNumber(value: value >> 16).uint8Value
-        buffer[offset + 3] = NSNumber(value: value >> 24).uint8Value
+    class func write(buffer: inout Buffer, offset: Int, value: Int32) {
+        let pointer = buffer.p.advanced(by: offset)
+
+        var v = value.littleEndian
+        let n = MemoryLayout<Int32>.size
+        memcpy(pointer, &v, n)
     }
 
-    class func write(buffer: inout Data, offset: Int, value: UInt32) {
-        buffer[offset + 0] = NSNumber(value: value >>  0).uint8Value
-        buffer[offset + 1] = NSNumber(value: value >>  8).uint8Value
-        buffer[offset + 2] = NSNumber(value: value >> 16).uint8Value
-        buffer[offset + 3] = NSNumber(value: value >> 24).uint8Value
+    class func write(buffer: inout Buffer, offset: Int, value: UInt32) {
+        let pointer = buffer.p.advanced(by: offset)
+
+        var v = value.littleEndian
+        let n = MemoryLayout<UInt32>.size
+        memcpy(pointer, &v, n)
     }
 
-    class func write(buffer: inout Data, offset: Int, value: Int64) {
-        buffer[offset + 0] = Data.Element(truncating: NSNumber(value: value >>  0))
-        buffer[offset + 1] = Data.Element(truncating: NSNumber(value: value >>  8))
-        buffer[offset + 2] = Data.Element(truncating: NSNumber(value: value >> 16))
-        buffer[offset + 3] = Data.Element(truncating: NSNumber(value: value >> 24))
-        buffer[offset + 4] = Data.Element(truncating: NSNumber(value: value >> 32))
-        buffer[offset + 5] = Data.Element(truncating: NSNumber(value: value >> 40))
-        buffer[offset + 6] = Data.Element(truncating: NSNumber(value: value >> 48))
-        buffer[offset + 7] = Data.Element(truncating: NSNumber(value: value >> 56))
+    class func write(buffer: inout Buffer, offset: Int, value: Int64) {
+        let pointer = buffer.p.advanced(by: offset)
+
+        var v = value.littleEndian
+        let n = MemoryLayout<Int64>.size
+        memcpy(pointer, &v, n)
     }
 
-    class func write(buffer: inout Data, offset: Int, value: UInt64) {
-        buffer[offset + 0] = Data.Element(truncating: NSNumber(value: value >>  0))
-        buffer[offset + 1] = Data.Element(truncating: NSNumber(value: value >>  8))
-        buffer[offset + 2] = Data.Element(truncating: NSNumber(value: value >> 16))
-        buffer[offset + 3] = Data.Element(truncating: NSNumber(value: value >> 24))
-        buffer[offset + 4] = Data.Element(truncating: NSNumber(value: value >> 32))
-        buffer[offset + 5] = Data.Element(truncating: NSNumber(value: value >> 40))
-        buffer[offset + 6] = Data.Element(truncating: NSNumber(value: value >> 48))
-        buffer[offset + 7] = Data.Element(truncating: NSNumber(value: value >> 56))
+    class func write(buffer: inout Buffer, offset: Int, value: UInt64) {
+        let pointer = buffer.p.advanced(by: offset)
+
+        var v = value.littleEndian
+        let n = MemoryLayout<UInt64>.size
+        memcpy(pointer, &v, n)
+    }
+
+    class func write(buffer: inout Buffer, offset: Int, value: String) {
+        var pointer = buffer.p.advanced(by: offset)
+
+        var v = UInt32(value.count).littleEndian
+        let n = MemoryLayout<UInt32>.size
+        memcpy(pointer, &v, n)
+        pointer = pointer.advanced(by: n)
+
+        for b in value.utf8 {
+            pointer.pointee = b
+            pointer = pointer.successor()
+        }
     }
 
     private class func writeBE(buffer: inout Data, offset: Int, value: UInt64) {
-        buffer[offset + 0] = Data.Element(value >> 56)
-        buffer[offset + 1] = Data.Element(value >> 48)
-        buffer[offset + 2] = Data.Element(value >> 40)
-        buffer[offset + 3] = Data.Element(value >> 32)
-        buffer[offset + 4] = Data.Element(value >> 24)
-        buffer[offset + 5] = Data.Element(value >> 16)
-        buffer[offset + 6] = Data.Element(value >>  8)
-        buffer[offset + 7] = Data.Element(value >>  0)
+        let index = offset
+        buffer[index + 0] = Data.Element(value >> 56)
+        buffer[index + 1] = Data.Element(value >> 48)
+        buffer[index + 2] = Data.Element(value >> 40)
+        buffer[index + 3] = Data.Element(value >> 32)
+        buffer[index + 4] = Data.Element(value >> 24)
+        buffer[index + 5] = Data.Element(value >> 16)
+        buffer[index + 6] = Data.Element(value >>  8)
+        buffer[index + 7] = Data.Element(value >>  0)
     }
 
-    class func write(buffer: inout Data, offset: Int, value: Float) {
+    class func write(buffer: inout Buffer, offset: Int, value: Float) {
         let bits = value.bitPattern
         Buffer.write(buffer: &buffer, offset: offset, value: bits)
     }
 
-    class func write(buffer: inout Data, offset: Int, value: Double) {
+    class func write(buffer: inout Buffer, offset: Int, value: Double) {
         let bits = value.bitPattern
         Buffer.write(buffer: &buffer, offset: offset, value: bits)
     }
@@ -616,19 +679,26 @@ public extension Buffer {
         if value.isEmpty {
             return
         }
-        buffer[offset...offset + value.count - 1] = value[0...value.count - 1]
+        buffer[offset...(offset + value.count - 1)] = value[0...value.count - 1]
     }
 
     class func write(buffer: inout Data, offset: Int, value: Data, valueOffset: Int, valueSize: Int) {
         if valueSize == 0 {
             return
         }
-        buffer[offset...] = value[valueOffset...valueOffset + valueSize]
+        buffer[offset...] = value[valueOffset...(valueOffset + valueSize)]
     }
 
-    class func write(buffer: inout Data, offset: Int, value: Data.Element, valueCount: Int) {
-        for i in 0..<valueCount {
-            buffer[offset + i] = value
+    class func write(buffer: inout Buffer, offset: Int, value: UInt8, valueCount: Int) {
+        var pointer = buffer.p.advanced(by: offset)
+
+        var v = value.littleEndian
+        let n = MemoryLayout<UInt8>.size
+
+        for _ in 0..<valueCount {
+
+            memcpy(pointer, &v, n)
+            pointer = pointer.successor()
         }
     }
 
@@ -770,7 +840,7 @@ public extension FieldModel {
     func fbeUnshift(size: Int) { _offset -= size }
 
     // Check if the value is valid
-    public func verify() -> Bool {
+    func verify() -> Bool {
         return true
     }
 
@@ -779,33 +849,34 @@ public extension FieldModel {
     func readByte(offset: Int) -> Data.Element { return Buffer.readByte(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readChar(offset: Int) -> Character { return Buffer.readChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readWChar(offset: Int) -> Character { return Buffer.readWChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readInt8(offset: Int) -> Int8 { return Buffer.readInt8(buffer: _buffer.data, offset: _buffer.offset + offset) }
+    func readInt8(offset: Int) -> Int8 { return Buffer.readInt8(buffer: _buffer, offset: _buffer.offset + offset) }
     func readUInt8(offset: Int) -> UInt8 { return Buffer.readUInt8(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readInt16(offset: Int) -> Int16 { return Buffer.readInt16(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readUInt16(offset: Int) -> UInt16 { return Buffer.readUInt16(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readInt32(offset: Int) -> Int32 { return Buffer.readInt32(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readUInt32(offset: Int) -> UInt32 { return Buffer.readUInt32(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readInt64(offset: Int) -> Int64 { return Buffer.readInt64(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readUInt64(offset: Int) -> UInt64 { return Buffer.readUInt64(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readFloat(offset: Int) -> Float { return Buffer.readFloat(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readDouble(offset: Int) -> Double { return Buffer.readDouble(buffer: _buffer.data, offset: _buffer.offset + offset) }
+    func readInt16(offset: Int) -> Int16 { return Buffer.readInt16(buffer: _buffer, offset: _buffer.offset + offset) }
+    func readUInt16(offset: Int) -> UInt16 { return Buffer.readUInt16(buffer: _buffer, offset: _buffer.offset + offset) }
+    func readInt32(offset: Int) -> Int32 { return Buffer.readInt32(buffer: _buffer, offset: _buffer.offset + offset) }
+    func readUInt32(offset: Int) -> UInt32 { return Buffer.readUInt32(buffer: _buffer, offset: _buffer.offset + offset) }
+    func readInt64(offset: Int) -> Int64 { return Buffer.readInt64(buffer: _buffer, offset: _buffer.offset + offset) }
+    func readUInt64(offset: Int) -> UInt64 { return Buffer.readUInt64(buffer: _buffer, offset: _buffer.offset + offset) }
+    func readFloat(offset: Int) -> Float { return Buffer.readFloat(buffer: _buffer, offset: _buffer.offset + offset) }
+    func readDouble(offset: Int) -> Double { return Buffer.readDouble(buffer: _buffer, offset: _buffer.offset + offset) }
     func readBytes(offset: Int, size: Int) -> Data { return Buffer.readBytes(buffer: _buffer.data, offset: _buffer.offset + offset, size: size) }
-    func readString(offset: Int, size: Int) -> String { return Buffer.readString(buffer: _buffer.data, offset: _buffer.offset + offset, size: size) }
+    func readString(offset: Int, size: Int) -> String { return Buffer.readString(buffer: _buffer, offset: _buffer.offset + offset, size: size) }
     func readUUID(offset: Int) -> UUID { return Buffer.readUUID(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func write(offset: Int, value: Bool) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: Int8) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: UInt8) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: Int16) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: UInt16) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: Int32) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: UInt32) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: Int64) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: UInt64) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: Float) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: Double) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: Bool) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: Int8) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: UInt8) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: Int16) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: UInt16) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: Int32) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: UInt32) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: Int64) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: UInt64) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: String) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: Float) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: Double) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
     func write(offset: Int, value: Data) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
     func write(offset: Int, value: Data, valueOffset: Int, valueSize: Int) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value, valueOffset: valueOffset, valueSize: valueSize) }
-    func write(offset: Int, value: Data.Element, valueCount: Int) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value, valueCount: valueCount) }
+    func write(offset: Int, value: Data.Element, valueCount: Int) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value, valueCount: valueCount) }
     func write(offset: Int, value: UUID) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
 }
 )CODE";
@@ -864,8 +935,8 @@ public class FieldModel_NAME_: FieldModel {
 
     // Set the value
     public func set(value: _TYPE_) {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
+            assertionFailure("Model is broken!")
             return
         }
 
@@ -942,8 +1013,8 @@ public class FieldModelDecimal: FieldModel {
 
     // Set the value
     public func set(value: Decimal) {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return
         }
 
@@ -1052,8 +1123,8 @@ public class FieldModelDate: FieldModel {
 
     // Set the value
     public func set(value: Date) {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return
         }
 
@@ -1102,8 +1173,8 @@ public class FieldModelTimestamp: FieldModel {
        }
 
     public func get(defaults: TimeInterval = Date().timeIntervalSince1970) -> TimeInterval {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return defaults
         }
 
@@ -1112,8 +1183,8 @@ public class FieldModelTimestamp: FieldModel {
     }
 
     public func set(value: TimeInterval) {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return
         }
 
@@ -1209,14 +1280,14 @@ public class FieldModelData: FieldModel {
             return defaults
         }
 
-        assert((_buffer.offset + fbeBytesOffset + 4) <= _buffer.size, "Model is broken!")
         if (_buffer.offset + fbeBytesOffset + 4) > _buffer.size {
+            assertionFailure("Model is broken!")
             return defaults
         }
 
         let fbeBytesSize = Int(readUInt32(offset: fbeBytesOffset))
-        assert((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) <= _buffer.size, "Model is broken!")
         if (_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.size {
+            assertionFailure("Model is broken!")
             return defaults
         }
 
@@ -1225,15 +1296,15 @@ public class FieldModelData: FieldModel {
 
     // Set the value
     public func set(value: Data) throws {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
+            assertionFailure("Model is broken!")
             return
         }
 
         let fbeBytesSize = value.count
         let fbeBytesOffset = try _buffer.allocate(size: 4 + fbeBytesSize) - _buffer.offset
-        assert((fbeBytesOffset > 0) && ((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) <= _buffer.size), "Model is broken!")
         if (fbeBytesOffset <= 0) || ((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return
         }
 
@@ -1334,13 +1405,11 @@ public class FieldModelString: FieldModel {
             return defaults
         }
 
-        assert((_buffer.offset + fbeStringOffset + 4) <= _buffer.size, "Model is broken!")
         if (_buffer.offset + fbeStringOffset + 4) > _buffer.size {
             return defaults
         }
 
         let fbeStringSize = Int(readUInt32(offset: fbeStringOffset))
-        assert((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) <= _buffer.size, "Model is broken!")
         if (_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size {
             return defaults
         }
@@ -1350,23 +1419,18 @@ public class FieldModelString: FieldModel {
 
     // Set the value
     public func set(value: String) throws {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             return
         }
 
-        let bytes = value.data(using: .utf8)!
-
-        let fbeStringSize = bytes.count
+        let fbeStringSize = value.count
         let fbeStringOffset = try _buffer.allocate(size: 4 + fbeStringSize) - _buffer.offset
-        assert(((fbeStringOffset > 0) && ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) <= _buffer.size)), "Model is broken!")
         if ((fbeStringOffset <= 0) || ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size)) {
             return
         }
 
         write(offset: fbeOffset, value: UInt32(fbeStringOffset))
-        write(offset: fbeStringOffset, value: UInt32(fbeStringSize))
-        write(offset: fbeStringOffset + 4, value: bytes)
+        write(offset: fbeStringOffset, value: value)
     }
 }
 )CODE";
@@ -1484,8 +1548,8 @@ public class FieldModelOptional_NAME_: FieldModel {
         }
 
         let fbeOptionalOffset = Int(readUInt32(offset: fbeOffset + 1))
-        assert(fbeOptionalOffset > 0, "Model is broken!")
         if fbeOptionalOffset <= 0 {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -1511,8 +1575,8 @@ public class FieldModelOptional_NAME_: FieldModel {
 
     // Set the optional value (begin phase)
     func setBegin(hasValue: Bool) throws -> Int {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -1524,8 +1588,8 @@ public class FieldModelOptional_NAME_: FieldModel {
 
         let fbeOptionalSize = value.fbeSize
         let fbeOptionalOffset = try _buffer.allocate(size: fbeOptionalSize) - _buffer.offset
-        assert((fbeOptionalOffset > 0) && ((_buffer.offset + fbeOptionalOffset + fbeOptionalSize) <= _buffer.size), "Model is broken!")
         if (fbeOptionalOffset <= 0) || ((_buffer.offset + fbeOptionalOffset + fbeOptionalSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -1686,8 +1750,8 @@ class FieldModelArray_NAME_: FieldModel {
     }
 
     public func set(value values: _ARRAY_) throws {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return
         }
 
@@ -1890,14 +1954,14 @@ class FieldModelVector_NAME_: FieldModel {
     }
 
     public func set(value values: Array<_TYPE_>) throws {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return
         }
 
         let fbeModel = try resize(size: values.count)
-        for value in values {
-            try fbeModel.set(value: value)
+        for i in 0..<values.count {
+            try fbeModel.set(value: values[i])
             fbeModel.fbeShift(size: fbeModel.fbeSize)
         }
     }
@@ -2105,8 +2169,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
     }
 
     public func set(value values: Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) throws {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return
         }
 
@@ -2183,8 +2247,8 @@ public class FieldModel_NAME_: FieldModel {
 
     // Set the value
     public func set(value: _NAME_) {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return
         }
 
@@ -2296,7 +2360,7 @@ public extension FinalModel {
     func fbeUnshift(size: Int) { _offset -= size }
 
     // Check if the value is valid
-    public func verify() -> Bool {
+    func verify() -> Bool {
         return true
     }
 
@@ -2305,33 +2369,34 @@ public extension FinalModel {
     func readByte(offset: Int) -> Data.Element { return Buffer.readByte(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readChar(offset: Int) -> Character { return Buffer.readChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readWChar(offset: Int) -> Character { return Buffer.readWChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readInt8(offset: Int) -> Int8 { return Buffer.readInt8(buffer: _buffer.data, offset: _buffer.offset + offset) }
+    func readInt8(offset: Int) -> Int8 { return Buffer.readInt8(buffer: _buffer, offset: _buffer.offset + offset) }
     func readUInt8(offset: Int) -> UInt8 { return Buffer.readUInt8(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readInt16(offset: Int) -> Int16 { return Buffer.readInt16(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readUInt16(offset: Int) -> UInt16 { return Buffer.readUInt16(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readInt32(offset: Int) -> Int32 { return Buffer.readInt32(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readUInt32(offset: Int) -> UInt32 { return Buffer.readUInt32(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readInt64(offset: Int) -> Int64 { return Buffer.readInt64(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readUInt64(offset: Int) -> UInt64 { return Buffer.readUInt64(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readFloat(offset: Int) -> Float { return Buffer.readFloat(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readDouble(offset: Int) -> Double { return Buffer.readDouble(buffer: _buffer.data, offset: _buffer.offset + offset) }
+    func readInt16(offset: Int) -> Int16 { return Buffer.readInt16(buffer: _buffer, offset: _buffer.offset + offset) }
+    func readUInt16(offset: Int) -> UInt16 { return Buffer.readUInt16(buffer: _buffer, offset: _buffer.offset + offset) }
+    func readInt32(offset: Int) -> Int32 { return Buffer.readInt32(buffer: _buffer, offset: _buffer.offset + offset) }
+    func readUInt32(offset: Int) -> UInt32 { return Buffer.readUInt32(buffer: _buffer, offset: _buffer.offset + offset) }
+    func readInt64(offset: Int) -> Int64 { return Buffer.readInt64(buffer: _buffer, offset: _buffer.offset + offset) }
+    func readUInt64(offset: Int) -> UInt64 { return Buffer.readUInt64(buffer: _buffer, offset: _buffer.offset + offset) }
+    func readFloat(offset: Int) -> Float { return Buffer.readFloat(buffer: _buffer, offset: _buffer.offset + offset) }
+    func readDouble(offset: Int) -> Double { return Buffer.readDouble(buffer: _buffer, offset: _buffer.offset + offset) }
     func readBytes(offset: Int, size: Int) -> Data { return Buffer.readBytes(buffer: _buffer.data, offset: _buffer.offset + offset, size: size) }
-    func readString(offset: Int, size: Int) -> String { return Buffer.readString(buffer: _buffer.data, offset: _buffer.offset + offset, size: size) }
+    func readString(offset: Int, size: Int) -> String { return Buffer.readString(buffer: _buffer, offset: _buffer.offset + offset, size: size) }
     func readUUID(offset: Int) -> UUID { return Buffer.readUUID(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func write(offset: Int, value: Bool) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: Int8) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: UInt8) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: Int16) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: UInt16) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: Int32) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: UInt32) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: Int64) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: UInt64) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: Float) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
-    func write(offset: Int, value: Double) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: Bool) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: Int8) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: UInt8) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: Int16) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: UInt16) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: Int32) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: UInt32) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: Int64) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: UInt64) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: String) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: Float) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
+    func write(offset: Int, value: Double) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value) }
     func write(offset: Int, value: Data) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
     func write(offset: Int, value: Data, valueOffset: Int, valueSize: Int) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value, valueOffset: valueOffset, valueSize: valueSize) }
-    func write(offset: Int, value: Data.Element, valueCount: Int) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value, valueCount: valueCount) }
+    func write(offset: Int, value: Data.Element, valueCount: Int) { Buffer.write(buffer: &_buffer, offset: _buffer.offset + offset, value: value, valueCount: valueCount) }
     func write(offset: Int, value: UUID) { Buffer.write(buffer: &_buffer.data, offset: _buffer.offset + offset, value: value) }
 }
 )CODE";
@@ -2400,8 +2465,8 @@ public class FinalModel_NAME_: FinalModel {
 
     // Set the value
     public func set(value: _TYPE_) -> Int {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -2494,8 +2559,8 @@ public class FinalModelDecimal: FinalModel {
 
     // Set the value
     public func set(value: Decimal) -> Int {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -2612,8 +2677,8 @@ public class FinalModelDate: FinalModel {
 
     // Set the value
     public func set(value: Date) -> Int {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -2690,8 +2755,8 @@ public class FinalModelTimestamp: FinalModel {
 
     // Set the value
     public func set(value: Double) -> Int {
-        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -2762,9 +2827,8 @@ public class FinalModelData: FinalModel {
         }
 
         let fbeBytesSize = Int(readUInt32(offset: fbeOffset))
-        assert((_buffer.offset + fbeOffset + 4 + fbeBytesSize) <= _buffer.size, "Model is broken!")
-        if ((_buffer.offset + fbeOffset + 4 + fbeBytesSize) > _buffer.size)
-        {
+        if ((_buffer.offset + fbeOffset + 4 + fbeBytesSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             size.value = 4
             return Data()
         }
@@ -2775,14 +2839,14 @@ public class FinalModelData: FinalModel {
 
     // Set the value
     public func set(value: Data) throws -> Int {
-        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size, "Model is broken!")
         if (_buffer.offset + fbeOffset + 4) > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
         let fbeBytesSize = value.count
-        assert(_buffer.offset + fbeOffset + 4 + fbeBytesSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 + fbeBytesSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return 4
         }
 
@@ -2853,7 +2917,6 @@ public class FinalModelString: FinalModel {
         }
 
         let fbeStringSize = Int(readUInt32(offset: fbeOffset))
-        assert((_buffer.offset + fbeOffset + 4 + fbeStringSize) <= _buffer.size,"Model is broken!")
         if ((_buffer.offset + fbeOffset + 4 + fbeStringSize) > _buffer.size)
         {
             size.value = 4
@@ -2866,21 +2929,16 @@ public class FinalModelString: FinalModel {
 
     // Set the value
     public func set(value: String) -> Int {
-        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size) {
             return 0
         }
 
-        let bytes = value.data(using: .utf8)!
-
-        let fbeStringSize = bytes.count
-        assert((_buffer.offset + fbeOffset + 4 + fbeStringSize) <= _buffer.size, "Model is broken!")
+        let fbeStringSize = value.count
         if ((_buffer.offset + fbeOffset + 4 + fbeStringSize) > _buffer.size) {
             return 4
         }
 
-        write(offset: fbeOffset, value: UInt32(fbeStringSize))
-        write(offset: fbeOffset + 4, value: bytes)
+        write(offset: fbeOffset, value: value)
         return 4 + fbeStringSize
     }
 }
@@ -2974,8 +3032,8 @@ class FinalModelOptional_NAME_: FinalModel {
     }
 
     public func get(size: inout Size) -> _TYPE_ {
-        assert(_buffer.offset + fbeOffset + 1 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 1 > _buffer.size {
+            assertionFailure("Model is broken!")
             size.value = 0
             return nil
         }
@@ -2994,8 +3052,8 @@ class FinalModelOptional_NAME_: FinalModel {
 
     // Set the optional value
     public func set(value optional: _TYPE_) throws -> Int {
-       assert(_buffer.offset + fbeOffset + 1 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 1 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -3098,8 +3156,8 @@ class FinalModelArray_NAME_: FinalModel {
     public func get(size: inout Size) -> _ARRAY_ {
         var values = _ARRAY_()
 
-        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset > _buffer.size {
+            assertionFailure("Model is broken!")
             size.value = 0
             return values
         }
@@ -3120,8 +3178,8 @@ class FinalModelArray_NAME_: FinalModel {
     public func get(values: inout _ARRAY_) -> Int {
         values.removeAll()
 
-        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -3139,8 +3197,8 @@ class FinalModelArray_NAME_: FinalModel {
     }
 
     public func set(value values: _ARRAY_) throws -> Int {
-        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -3214,8 +3272,8 @@ class FinalModelVector_NAME_: FinalModel {
     // Get the allocation size
     func fbeAllocationSize(value values: Array<_TYPE_>) -> Int {
         var size: Int = 4
-        for value in values {
-            size += _model.fbeAllocationSize(value: value)
+        for i in 0..<values.count {
+            size += _model.fbeAllocationSize(value: values[i])
         }
 
         return size
@@ -3245,8 +3303,8 @@ class FinalModelVector_NAME_: FinalModel {
     public func get(values: inout Array<_TYPE_>) -> Int {
         values.removeAll()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -3271,8 +3329,8 @@ class FinalModelVector_NAME_: FinalModel {
     }
 
     public func set(value values: Array<_TYPE_>) throws -> Int {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -3280,8 +3338,8 @@ class FinalModelVector_NAME_: FinalModel {
 
         var size: Int = 4
         _model.fbeOffset = fbeOffset + 4
-        for value in values {
-            let offset = try _model.set(value: value)
+        for i in 0..<values.count {
+            let offset = try _model.set(value: values[i])
             _model.fbeShift(size: offset)
             size += offset
         }
@@ -3385,8 +3443,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_: FinalModel {
     public func get(values: inout Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) -> Int {
         values.removeAll()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -3416,8 +3474,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_: FinalModel {
     }
 
     public func set(value values: Dictionary<_KEY_TYPE_, _VALUE_TYPE_>) throws -> Int {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 4 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -3515,8 +3573,8 @@ public class FinalModel_NAME_: FinalModel {
 
     // Set the value
     public func set(value: _NAME_) -> Int {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -3593,8 +3651,8 @@ extension SenderProtocol {
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!
     func sendSerialized(serialized: Int) throws -> Int {
-        assert(serialized > 0, "Invalid size of the serialized buffer!")
         if (serialized <= 0) {
+            assertionFailure("Invalid size of the serialized buffer!")
             return 0
         }
 
@@ -6170,17 +6228,17 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("let fbeStructOffset = Int(readUInt32(offset: fbeOffset))");
-    WriteLineIndent("assert((fbeStructOffset > 0) && ((_buffer.offset + fbeStructOffset + 4 + 4) <= _buffer.size), \"Model is broken!\")");
     WriteLineIndent("if ((fbeStructOffset == 0) || ((_buffer.offset + fbeStructOffset + 4 + 4) > _buffer.size)) {");
     Indent(1);
+    WriteLineIndent("assertionFailure(\"Model is broken!\")");
     WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("let fbeStructSize = Int(readUInt32(offset: fbeStructOffset))");
-    WriteLineIndent("assert(fbeStructSize >= 4 + 4, \"Model is broken!\")");
     WriteLineIndent("if fbeStructSize < 4 + 4 {");
     Indent(1);
+    WriteLineIndent("assertionFailure(\"Model is broken!\")");
     WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
@@ -6277,18 +6335,18 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLineIndent("// Set the struct value (begin phase)");
     WriteLineIndent("func setBegin() throws -> Int {");
     Indent(1);
-    WriteLineIndent("assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, \"Model is broken!\")");
     WriteLineIndent("if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {");
     Indent(1);
+    WriteLineIndent("assertionFailure(\"Model is broken!\")");
     WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("let fbeStructSize = fbeBody");
     WriteLineIndent("let fbeStructOffset = try _buffer.allocate(size: fbeStructSize) - _buffer.offset");
-    WriteLineIndent("assert((fbeStructOffset > 0) && ((_buffer.offset + fbeStructOffset + fbeStructSize) <= _buffer.size), \"Model is broken!\")");
     WriteLineIndent("if (fbeStructOffset <= 0) || ((_buffer.offset + fbeStructOffset + fbeStructSize) > _buffer.size) {");
     Indent(1);
+    WriteLineIndent("assertionFailure(\"Model is broken!\")");
     WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
@@ -6470,9 +6528,9 @@ void GeneratorSwift::GenerateStructModel(const std::shared_ptr<Package>& p, cons
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("let fbeFullSize = Int(readUInt32(offset: model.fbeOffset - 4))");
-    WriteLineIndent("assert(fbeFullSize >= model.fbeSize, \"Model is broken!\")");
     WriteLineIndent("if (fbeFullSize < model.fbeSize) {");
     Indent(1);
+    WriteLineIndent("assertionFailure(\"Model is broken!\")");
     WriteLineIndent("valueRef = " + struct_name + "()");
     WriteLineIndent("return 0");
     Indent(-1);
@@ -6838,9 +6896,9 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
     WriteLineIndent("let fbeStructType = fbeType");
     WriteLineIndent("var fbeStructSize = 8 + _model.fbeAllocationSize(value: value)");
     WriteLineIndent("let fbeStructOffset = try buffer.allocate(size: fbeStructSize) - buffer.offset");
-    WriteLineIndent("assert(buffer.offset + fbeStructOffset + fbeStructSize <= buffer.size, \"Model is broken!\")");
     WriteLineIndent("if ((buffer.offset + fbeStructOffset + fbeStructSize) > buffer.size) {");
     Indent(1);
+    WriteLineIndent("assertionFailure(\"Model is broken!\")");
     WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
@@ -6864,18 +6922,18 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
     Indent(1);
     WriteLineIndent("var valueRef = value");
     WriteLine();
-    WriteLineIndent("assert(buffer.offset + _model.fbeOffset <= buffer.size, \"Model is broken!\")");
     WriteLineIndent("if ((buffer.offset + _model.fbeOffset) > buffer.size) {");
     Indent(1);
+    WriteLineIndent("assertionFailure(\"Model is broken!\")");
     WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("let fbeStructSize = Int32(readUInt32(offset: _model.fbeOffset - 8))");
     WriteLineIndent("let fbeStructType = Int32(readUInt32(offset: _model.fbeOffset - 4))");
-    WriteLineIndent("assert((fbeStructSize > 0) && (fbeStructType == fbeType), \"Model is broken!\")");
     WriteLineIndent("if (fbeStructSize <= 0) || (fbeStructType != fbeType) {");
     Indent(1);
+    WriteLineIndent("assertionFailure(\"Model is broken!\")");
     WriteLineIndent("return 8");
     Indent(-1);
     WriteLineIndent("}");
@@ -7079,7 +7137,7 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent("// Serialize the value into the FBE stream");
             WriteLineIndent("val serialized = " + *s->name + "Model.serialize(value)");
             WriteLineIndent("assert(serialized > 0) { \"" + struct_name + " serialization failed!\" }");
-            WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + struct_name + " validation failed!\" }");
+            WriteLineIndent("assertionFailure(" + *s->name + "Model.verify()) { \"" + struct_name + " validation failed!\" }");
             WriteLine();
             WriteLineIndent("// Log the value");
             WriteLineIndent("if (logging)");
@@ -7236,7 +7294,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");
             WriteLineIndent(*s->name + "Model.attach(buffer, offset)");
-            WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
+            WriteLineIndent("assertionFailure(" + *s->name + "Model.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
             WriteLineIndent("val deserialized = " + *s->name + "Model.deserialize(" + *s->name + "Value)");
             WriteLineIndent("assert(deserialized > 0) { \"" + domain + *p->name + "." + *s->name + " deserialization failed!\" }");
             WriteLine();
@@ -7455,7 +7513,7 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
             Indent(1);
             WriteLineIndent("// Attach the FBE stream to the proxy model");
             WriteLineIndent(*s->name + "Model.attach(buffer, offset)");
-            WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
+            WriteLineIndent("assertionFailure(" + *s->name + "Model.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
             WriteLine();
             WriteLineIndent("val fbeBegin = " + *s->name + "Model.model.getBegin()");
             WriteLineIndent("if (fbeBegin == 0L)");
@@ -7739,7 +7797,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent("// Serialize the value into the FBE stream");
             WriteLineIndent("val serialized = " + *s->name + "SenderModel.serialize(value)");
             WriteLineIndent("assert(serialized > 0) { \"" + struct_name + " serialization failed!\" }");
-            WriteLineIndent("assert(" + *s->name + "SenderModel.verify()) { \"" + struct_name + " validation failed!\" }");
+            WriteLineIndent("assertionFailure(" + *s->name + "SenderModel.verify()) { \"" + struct_name + " validation failed!\" }");
             WriteLine();
             WriteLineIndent("// Log the value");
             WriteLineIndent("if (logging)");
@@ -7785,7 +7843,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");
             WriteLineIndent(*s->name + "ReceiverModel.attach(buffer, offset)");
-            WriteLineIndent("assert(" + *s->name + "ReceiverModel.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
+            WriteLineIndent("assertionFailure(" + *s->name + "ReceiverModel.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
             WriteLineIndent("val deserialized = " + *s->name + "ReceiverModel.deserialize(" + *s->name + "ReceiverValue)");
             WriteLineIndent("assert(deserialized > 0) { \"" + domain + *p->name + "." + *s->name + " deserialization failed!\" }");
             WriteLine();

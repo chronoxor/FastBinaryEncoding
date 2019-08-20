@@ -67,6 +67,7 @@ public class BalanceModel: Model {
 
         let fbeFullSize = Int(readUInt32(offset: model.fbeOffset - 4))
         if (fbeFullSize < model.fbeSize) {
+            assertionFailure("Model is broken!")
             valueRef = Balance()
             return 0
         }

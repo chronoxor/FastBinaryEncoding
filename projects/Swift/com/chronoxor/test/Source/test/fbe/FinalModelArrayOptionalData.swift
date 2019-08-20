@@ -58,8 +58,8 @@ class FinalModelArrayOptionalData: FinalModel {
     public func get(size: inout Size) -> Array<Data?> {
         var values = Array<Data?>()
 
-        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset > _buffer.size {
+            assertionFailure("Model is broken!")
             size.value = 0
             return values
         }
@@ -80,8 +80,8 @@ class FinalModelArrayOptionalData: FinalModel {
     public func get(values: inout Array<Data?>) -> Int {
         values.removeAll()
 
-        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -99,8 +99,8 @@ class FinalModelArrayOptionalData: FinalModel {
     }
 
     public func set(value values: Array<Data?>) throws -> Int {
-        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 

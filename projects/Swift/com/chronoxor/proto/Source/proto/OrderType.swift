@@ -27,7 +27,7 @@ public class OrderType : Comparable, Hashable, Codable {
     }
     public func setDefault() { setEnum(value: NSNumber(value: 0).uint8Value) }
 
-    public func setEnum(value: UInt8) { self.value = OrderTypeEnum(value: value) }
+    public func setEnum(value: UInt8) { self.value = OrderTypeEnum.mapValue(value: value) }
     public func setEnum(value: OrderTypeEnum) { self.value = value }
     public func setEnum(value: OrderType) { self.value = value.value }
 

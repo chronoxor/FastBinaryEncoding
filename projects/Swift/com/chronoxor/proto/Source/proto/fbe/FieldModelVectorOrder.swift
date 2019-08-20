@@ -83,10 +83,13 @@ class FieldModelVectorOrder: FieldModel {
 
     // Vector index operator
     public func getItem(index: Int) -> FieldModelOrder {
+        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
 
         let fbeVectorOffset = Int(readUInt32(offset: fbeOffset))
+        assert((fbeVectorOffset > 0) && ((_buffer.offset + fbeVectorOffset + 4) <= _buffer.size), "Model is broken!")
 
         let fbeVectorSize = Int(readUInt32(offset: fbeVectorOffset))
+        assert(index < fbeVectorSize, "Index is out of bounds!")
 
         _model.fbeOffset = fbeVectorOffset + 4
         _model.fbeShift(size: index * _model.fbeSize)
@@ -96,6 +99,7 @@ class FieldModelVectorOrder: FieldModel {
     func resize(size: Int) throws -> FieldModelOrder {
         let fbeVectorSize = size * _model.fbeSize
         let fbeVectorOffset = try _buffer.allocate(size: 4 + fbeVectorSize) - _buffer.offset
+        assert((fbeVectorOffset > 0) && ((_buffer.offset + fbeVectorOffset + 4) <= _buffer.size), "Model is broken!")
 
         write(offset: fbeOffset, value: UInt32(fbeVectorOffset))
         write(offset: fbeVectorOffset, value: UInt32(size))
@@ -153,6 +157,7 @@ class FieldModelVectorOrder: FieldModel {
 
     public func set(value values: Array<proto.Order>) throws {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return
         }
 

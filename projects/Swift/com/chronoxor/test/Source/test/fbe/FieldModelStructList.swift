@@ -251,14 +251,14 @@ public class FieldModelStructList: FieldModel {
         }
 
         let fbeStructOffset = Int(readUInt32(offset: fbeOffset))
-        assert((fbeStructOffset > 0) && ((_buffer.offset + fbeStructOffset + 4 + 4) <= _buffer.size), "Model is broken!")
         if ((fbeStructOffset == 0) || ((_buffer.offset + fbeStructOffset + 4 + 4) > _buffer.size)) {
+            assertionFailure("Model is broken!")
             return 0
         }
 
         let fbeStructSize = Int(readUInt32(offset: fbeStructOffset))
-        assert(fbeStructSize >= 4 + 4, "Model is broken!")
         if fbeStructSize < 4 + 4 {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -366,15 +366,15 @@ public class FieldModelStructList: FieldModel {
 
     // Set the struct value (begin phase)
     func setBegin() throws -> Int {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return 0
         }
 
         let fbeStructSize = fbeBody
         let fbeStructOffset = try _buffer.allocate(size: fbeStructSize) - _buffer.offset
-        assert((fbeStructOffset > 0) && ((_buffer.offset + fbeStructOffset + fbeStructSize) <= _buffer.size), "Model is broken!")
         if (fbeStructOffset <= 0) || ((_buffer.offset + fbeStructOffset + fbeStructSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return 0
         }
 

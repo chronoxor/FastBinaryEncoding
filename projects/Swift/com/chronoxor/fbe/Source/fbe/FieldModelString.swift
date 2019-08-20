@@ -88,8 +88,6 @@ public class FieldModelString: FieldModel {
             return
         }
 
-        //let bytes = value.data(using: .utf8)!
-
         let fbeStringSize = value.count
         let fbeStringOffset = try _buffer.allocate(size: 4 + fbeStringSize) - _buffer.offset
         if ((fbeStringOffset <= 0) || ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size)) {
@@ -98,8 +96,5 @@ public class FieldModelString: FieldModel {
 
         write(offset: fbeOffset, value: UInt32(fbeStringOffset))
         write(offset: fbeStringOffset, value: value)
-//
-//        write(offset: fbeStringOffset, value: UInt32(fbeStringSize))
-//        write(offset: fbeStringOffset + 4, value: bytes)
     }
 }

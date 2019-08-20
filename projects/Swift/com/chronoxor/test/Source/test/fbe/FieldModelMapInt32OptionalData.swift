@@ -178,8 +178,8 @@ class FieldModelMapInt32OptionalData: FieldModel {
     }
 
     public func set(value values: Dictionary<Int32, Data?>) throws {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return
         }
 

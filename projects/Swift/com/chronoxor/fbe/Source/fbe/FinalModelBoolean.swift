@@ -46,6 +46,7 @@ public class FinalModelBoolean: FinalModel {
     // Set the value
     public func set(value: Bool) -> Int {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+            assertionFailure("Model is broken!")
             return 0
         }
 

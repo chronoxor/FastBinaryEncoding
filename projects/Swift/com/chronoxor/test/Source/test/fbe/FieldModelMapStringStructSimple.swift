@@ -178,8 +178,8 @@ class FieldModelMapStringStructSimple: FieldModel {
     }
 
     public func set(value values: Dictionary<String, test.StructSimple>) throws {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return
         }
 

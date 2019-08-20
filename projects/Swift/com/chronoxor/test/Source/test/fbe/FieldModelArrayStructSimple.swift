@@ -106,8 +106,8 @@ class FieldModelArrayStructSimple: FieldModel {
     }
 
     public func set(value values: Array<test.StructSimple>) throws {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return
         }
 

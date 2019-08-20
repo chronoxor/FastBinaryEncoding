@@ -36,6 +36,7 @@ public class FieldModelInt16: FieldModel {
     // Set the value
     public func set(value: Int16) {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
+            assertionFailure("Model is broken!")
             return
         }
 

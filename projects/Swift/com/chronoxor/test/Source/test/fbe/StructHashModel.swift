@@ -66,8 +66,8 @@ public class StructHashModel: Model {
         }
 
         let fbeFullSize = Int(readUInt32(offset: model.fbeOffset - 4))
-        assert(fbeFullSize >= model.fbeSize, "Model is broken!")
         if (fbeFullSize < model.fbeSize) {
+            assertionFailure("Model is broken!")
             valueRef = StructHash()
             return 0
         }

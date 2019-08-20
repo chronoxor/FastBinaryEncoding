@@ -58,8 +58,8 @@ class FinalModelArrayEnumSimple: FinalModel {
     public func get(size: inout Size) -> Array<EnumSimple> {
         var values = Array<EnumSimple>()
 
-        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset > _buffer.size {
+            assertionFailure("Model is broken!")
             size.value = 0
             return values
         }
@@ -80,8 +80,8 @@ class FinalModelArrayEnumSimple: FinalModel {
     public func get(values: inout Array<EnumSimple>) -> Int {
         values.removeAll()
 
-        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 
@@ -99,8 +99,8 @@ class FinalModelArrayEnumSimple: FinalModel {
     }
 
     public func set(value values: Array<EnumSimple>) throws -> Int {
-        assert(_buffer.offset + fbeOffset <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 

@@ -6,32 +6,6 @@
 
 import Foundation
 
-extension Data {
-
-    init<T>(fromArray values: [T]) {
-        self = values.withUnsafeBytes { Data($0) }
-    }
-
-    func toArray<T>(type: T.Type) -> [T] where T: ExpressibleByIntegerLiteral {
-        var array = Array<T>(repeating: 0, count: self.count/MemoryLayout<T>.stride)
-        _ = array.withUnsafeMutableBytes { copyBytes(to: $0) }
-        return array
-    }
-}
-
-
-extension Int {
-    var uint32: UInt32 {
-        return UInt32(self)
-    }
-}
-
-extension UInt32 {
-    var int: Int {
-        return Int(self)
-    }
-}
-
 public class Buffer {
 
     // Is the buffer empty?
@@ -39,7 +13,6 @@ public class Buffer {
         return size == 0
     }
     // Get bytes memory buffer
-    /* private(set) */
     var data = Data() {
         didSet {
             self.data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
@@ -51,7 +24,7 @@ public class Buffer {
             }
         }
     }
-    
+
     var p: UnsafeMutablePointer<UInt8>!
 
     // Get bytes memory buffer capacity
@@ -62,7 +35,7 @@ public class Buffer {
     public private(set) var size: Int = 0
     // Get bytes memory buffer offset
     public private(set) var offset: Int = 0
-    
+
     // Initialize a new expandable buffer with zero capacity
     public init() {}
     // Initialize a new expandable buffer with the given capacity
@@ -217,8 +190,7 @@ public extension Buffer {
         var i: Int8 = 0
         withUnsafeMutablePointer(to: &i) { ip -> Void in
             let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            let src = UnsafeRawPointer(buffer.p.advanced(by: offset)).assumingMemoryBound(to: UInt8.self)
-            dest.initialize(from: src, count: 1)
+            dest.initialize(from: buffer.p.advanced(by: offset), count: 1)
         }
         return Int8(littleEndian: i)
     }
@@ -232,8 +204,7 @@ public extension Buffer {
         var i: Int16 = 0
         withUnsafeMutablePointer(to: &i) { ip -> Void in
             let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            let src = UnsafeRawPointer(buffer.p.advanced(by: offset)).assumingMemoryBound(to: UInt8.self)
-            dest.initialize(from: src, count: 2)
+            dest.initialize(from: buffer.p.advanced(by: offset), count: 2)
         }
         return Int16(littleEndian: i)
     }
@@ -242,8 +213,7 @@ public extension Buffer {
         var i: UInt16 = 0
         withUnsafeMutablePointer(to: &i) { ip -> Void in
             let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            let src = UnsafeRawPointer(buffer.p.advanced(by: offset)).assumingMemoryBound(to: UInt8.self)
-            dest.initialize(from: src, count: 2)
+            dest.initialize(from: buffer.p.advanced(by: offset), count: 2)
         }
         return UInt16(littleEndian: i)
     }
@@ -252,58 +222,25 @@ public extension Buffer {
         var i: Int32 = 0
         withUnsafeMutablePointer(to: &i) { ip -> Void in
             let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            let src = UnsafeRawPointer(buffer.p.advanced(by: offset)).assumingMemoryBound(to: UInt8.self)
-            dest.initialize(from: src, count: 4)
+            dest.initialize(from: buffer.p.advanced(by: offset), count: 4)
         }
         return Int32(littleEndian: i)
-
-        //return buffer[index..<(index + 4)].withUnsafeBytes { $0.pointee }
-        //return buffer[index..<(index + 4)].toArray(type: Int32.self).first!
-//
-//        var value: Int32 = 0
-//        _ = withUnsafeMutableBytes(of: &value, { buffer[index..<(index + 4)].copyBytes(to: $0)} )
-//        return value
-//
-//        return buffer[index..<(index + 4)].withUnsafeBytes { $0.load(as: Int32.self) }
-//
-//        return  ((Int32(buffer[index + 0]) & 0xFF) <<  0) |
-//            ((Int32(buffer[index + 1]) & 0xFF) <<  8) |
-//            ((Int32(buffer[index + 2]) & 0xFF) << 16) |
-//            ((Int32(buffer[index + 3]) & 0xFF) << 24)
     }
 
     class func readUInt32(buffer: Buffer, offset: Int) -> UInt32 {
-        
         var i: UInt32 = 0
         withUnsafeMutablePointer(to: &i) { ip -> Void in
             let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            let src = UnsafeRawPointer(buffer.p.advanced(by: offset)).assumingMemoryBound(to: UInt8.self)
-            dest.initialize(from: src, count: 4)
+            dest.initialize(from: buffer.p.advanced(by: offset), count: 4)
         }
         return UInt32(littleEndian: i)
-        
-
-        //return buffer[index..<(index + 4)].withUnsafeBytes { $0.pointee }
-        //return buffer[index..<(index + 4)].toArray(type: UInt32.self).first!
-
-//        var value: UInt32 = 0
-//        _ = withUnsafeMutableBytes(of: &value, { buffer[index..<(index + 4)].copyBytes(to: $0)} )
-//        return value
-//
-//        return buffer[index..<(index + 4)].withUnsafeBytes { $0.load(as: UInt32.self) }
-//
-//        return ((UInt32(buffer[index + 0]) & (0xFF)) <<  0) |
-//            ((UInt32(buffer[index + 1]) & (0xFF)) <<  8) |
-//            ((UInt32(buffer[index + 2]) & (0xFF)) <<  16) |
-//            ((UInt32(buffer[index + 3]) & (0xFF)) << 24)
     }
 
     class func readInt64(buffer: Buffer, offset: Int) -> Int64 {
         var i: Int64 = 0
         withUnsafeMutablePointer(to: &i) { ip -> Void in
             let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            let src = UnsafeRawPointer(buffer.p.advanced(by: offset)).assumingMemoryBound(to: UInt8.self)
-            dest.initialize(from: src, count: 8)
+            dest.initialize(from: buffer.p.advanced(by: offset), count: 8)
         }
         return Int64(littleEndian: i)
     }
@@ -312,8 +249,7 @@ public extension Buffer {
         var i: UInt64 = 0
         withUnsafeMutablePointer(to: &i) { ip -> Void in
             let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            let src = UnsafeRawPointer(buffer.p.advanced(by: offset)).assumingMemoryBound(to: UInt8.self)
-            dest.initialize(from: src, count: 8)
+            dest.initialize(from: buffer.p.advanced(by: offset), count: 8)
         }
         return UInt64(littleEndian: i)
     }
@@ -334,10 +270,9 @@ public extension Buffer {
         return UInt64(fPart | sPart | tPart)
     }
 
-    class func readFloat(buffer: Data, offset: Int) -> Float {
-        return 0
-        //let bits = readUInt32(buffer: buffer, offset: offset)
-       // return Float(bitPattern: bits)
+    class func readFloat(buffer: Buffer, offset: Int) -> Float {
+        let bits = readUInt32(buffer: buffer, offset: offset)
+        return Float(bitPattern: bits)
     }
 
     class func readDouble(buffer: Buffer, offset: Int) -> Double {
@@ -352,33 +287,30 @@ public extension Buffer {
     }
 
     class func readString(buffer: Buffer, offset: Int, size: Int) -> String {
-        return utf8ToString(bytes: buffer.p.advanced(by: offset), count: size)!
-       // return String(decoding: buffer[offset..<(offset+size)], as: Unicode.UTF8.self)
-        //return String(bytes: buffer[offset..<(offset+size)], encoding:.utf8) ?? "??"
-    }
-    
+        return utf8ToString(bytes: buffer.p.advanced(by: offset), count: size)!    }
+
     class func utf8ToString(bytes: UnsafePointer<UInt8>, count: Int) -> String? {
         if count == 0 {
             return String()
         }
         let codeUnits = UnsafeBufferPointer<UInt8>(start: bytes, count: count)
         let sourceEncoding = Unicode.UTF8.self
-        
+
         // Verify that the UTF-8 is valid.
-//        var p = sourceEncoding.ForwardParser()
-//        var i = codeUnits.makeIterator()
-//        Loop:
-//            while true {
-//                switch p.parseScalar(from: &i) {
-//                case .valid(_):
-//                    break
-//                case .error:
-//                    return nil
-//                case .emptyInput:
-//                    break Loop
-//                }
-//        }
-        
+        //        var p = sourceEncoding.ForwardParser()
+        //        var i = codeUnits.makeIterator()
+        //        Loop:
+        //            while true {
+        //                switch p.parseScalar(from: &i) {
+        //                case .valid(_):
+        //                    break
+        //                case .error:
+        //                    return nil
+        //                case .emptyInput:
+        //                    break Loop
+        //                }
+        //        }
+
         // This initializer is fast but does not reject broken
         // UTF-8 (which is why we validate the UTF-8 above).
         return String(decoding: codeUnits, as: sourceEncoding)
@@ -408,178 +340,81 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Int8) {
-//        buffer.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-//            if let baseAddress = body.baseAddress, body.count > 0 {
-//                var pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
-                let pointer = buffer.p.advanced(by: offset)
+        let pointer = buffer.p.advanced(by: offset)
 
-                var v = value.littleEndian
-                let n = MemoryLayout<Int8>.size
-                memcpy(pointer, &v, n)
-
-//            }
-//        }
-
-//        buffer[offset] = UInt8(truncating: NSNumber(value: value))
+        var v = value.littleEndian
+        let n = MemoryLayout<Int8>.size
+        memcpy(pointer, &v, n)
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt8) {
-//        buffer.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-//            if let baseAddress = body.baseAddress, body.count > 0 {
-//                var pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
-                let pointer = buffer.p.advanced(by: offset)
+        let pointer = buffer.p.advanced(by: offset)
 
-                var v = value.littleEndian
-                let n = MemoryLayout<UInt8>.size
-                memcpy(pointer, &v, n)
-
-//            }
-//        }
-
-//        buffer[offset] = value
+        var v = value.littleEndian
+        let n = MemoryLayout<UInt8>.size
+        memcpy(pointer, &v, n)
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Int16) {
-//        buffer.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-//            if let baseAddress = body.baseAddress, body.count > 0 {
-//                var pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
-                let pointer = buffer.p.advanced(by: offset)
+        let pointer = buffer.p.advanced(by: offset)
 
-                var v = value.littleEndian
-                let n = MemoryLayout<Int16>.size
-                memcpy(pointer, &v, n)
-
-//            }
-//        }
-//
-//        let index = offset
-//        buffer[index + 0] = NSNumber(value: value >> 0).uint8Value
-//        buffer[index + 1] = NSNumber(value: value >> 8).uint8Value
+        var v = value.littleEndian
+        let n = MemoryLayout<Int16>.size
+        memcpy(pointer, &v, n)
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt16) {
-//        buffer.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-//            if let baseAddress = body.baseAddress, body.count > 0 {
-//                var pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
-                let pointer = buffer.p.advanced(by: offset)
+        let pointer = buffer.p.advanced(by: offset)
 
-                var v = value.littleEndian
-                let n = MemoryLayout<UInt16>.size
-                memcpy(pointer, &v, n)
-
-//            }
-//        }
-//
-//        let index = offset
-//        buffer[index + 0] = NSNumber(value: value >> 0).uint8Value
-//        buffer[index + 1] = NSNumber(value: value >> 8).uint8Value
+        var v = value.littleEndian
+        let n = MemoryLayout<UInt16>.size
+        memcpy(pointer, &v, n)
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Int32) {
-//        buffer.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-//            if let baseAddress = body.baseAddress, body.count > 0 {
-//                var pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
-                let pointer = buffer.p.advanced(by: offset)
+        let pointer = buffer.p.advanced(by: offset)
 
-                var v = value.littleEndian
-                let n = MemoryLayout<Int32>.size
-                memcpy(pointer, &v, n)
-
-//            }
-//        }
-//
-//        let index = offset
-//        buffer[index + 0] = NSNumber(value: value >>  0).uint8Value
-//        buffer[index + 1] = NSNumber(value: value >>  8).uint8Value
-//        buffer[index + 2] = NSNumber(value: value >> 16).uint8Value
-//        buffer[index + 3] = NSNumber(value: value >> 24).uint8Value
+        var v = value.littleEndian
+        let n = MemoryLayout<Int32>.size
+        memcpy(pointer, &v, n)
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt32) {
-//        buffer.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-//            if let baseAddress = body.baseAddress, body.count > 0 {
-//                var pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
-                let pointer = buffer.p.advanced(by: offset)
+        let pointer = buffer.p.advanced(by: offset)
 
-                var v = value.littleEndian
-                let n = MemoryLayout<UInt32>.size
-                memcpy(pointer, &v, n)
-//
-//            }
-//        }
-//
-//        let index = offset
-//        buffer[index + 0] = NSNumber(value: value >>  0).uint8Value
-//        buffer[index + 1] = NSNumber(value: value >>  8).uint8Value
-//        buffer[index + 2] = NSNumber(value: value >> 16).uint8Value
-//        buffer[index + 3] = NSNumber(value: value >> 24).uint8Value
+        var v = value.littleEndian
+        let n = MemoryLayout<UInt32>.size
+        memcpy(pointer, &v, n)
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Int64) {
-//        buffer.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-//            if let baseAddress = body.baseAddress, body.count > 0 {
-//                var pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
-                let pointer = buffer.p.advanced(by: offset)
+        let pointer = buffer.p.advanced(by: offset)
 
-                var v = value.littleEndian
-                let n = MemoryLayout<Int64>.size
-                memcpy(pointer, &v, n)
-//            }
-//        }
-////
-//        let index = offset
-//        buffer[index + 0] = Data.Element(truncating: NSNumber(value: value >>  0))
-//        buffer[index + 1] = Data.Element(truncating: NSNumber(value: value >>  8))
-//        buffer[index + 2] = Data.Element(truncating: NSNumber(value: value >> 16))
-//        buffer[index + 3] = Data.Element(truncating: NSNumber(value: value >> 24))
-//        buffer[index + 4] = Data.Element(truncating: NSNumber(value: value >> 32))
-//        buffer[index + 5] = Data.Element(truncating: NSNumber(value: value >> 40))
-//        buffer[index + 6] = Data.Element(truncating: NSNumber(value: value >> 48))
-//        buffer[index + 7] = Data.Element(truncating: NSNumber(value: value >> 56))
+        var v = value.littleEndian
+        let n = MemoryLayout<Int64>.size
+        memcpy(pointer, &v, n)
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt64) {
-//        buffer.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-//            if let baseAddress = body.baseAddress, body.count > 0 {
-//                var pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
-                let pointer = buffer.p.advanced(by: offset)
+        let pointer = buffer.p.advanced(by: offset)
 
-                var v = value.littleEndian
-                let n = MemoryLayout<UInt64>.size
-                memcpy(pointer, &v, n)
-
-//            }
-//        }
-//
-//        let index = offset
-//        buffer[index + 0] = Data.Element(truncating: NSNumber(value: value >>  0))
-//        buffer[index + 1] = Data.Element(truncating: NSNumber(value: value >>  8))
-//        buffer[index + 2] = Data.Element(truncating: NSNumber(value: value >> 16))
-//        buffer[index + 3] = Data.Element(truncating: NSNumber(value: value >> 24))
-//        buffer[index + 4] = Data.Element(truncating: NSNumber(value: value >> 32))
-//        buffer[index + 5] = Data.Element(truncating: NSNumber(value: value >> 40))
-//        buffer[index + 6] = Data.Element(truncating: NSNumber(value: value >> 48))
-//        buffer[index + 7] = Data.Element(truncating: NSNumber(value: value >> 56))
+        var v = value.littleEndian
+        let n = MemoryLayout<UInt64>.size
+        memcpy(pointer, &v, n)
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: String) {
-//        buffer.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-//            if let baseAddress = body.baseAddress, body.count > 0 {
-//                var pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
-                var pointer = buffer.p.advanced(by: offset)
+        var pointer = buffer.p.advanced(by: offset)
 
-                var v = UInt32(value.count).littleEndian
-                let n = MemoryLayout<UInt32>.size
-                memcpy(pointer, &v, n)
-                pointer = pointer.advanced(by: n)
+        var v = UInt32(value.count).littleEndian
+        let n = MemoryLayout<UInt32>.size
+        memcpy(pointer, &v, n)
+        pointer = pointer.advanced(by: n)
 
-                for b in value.utf8 {
-                    pointer.pointee = b
-                    pointer = pointer.successor()
-                }
-//            }
-//        }
-
+        for b in value.utf8 {
+            pointer.pointee = b
+            pointer = pointer.successor()
+        }
     }
 
     private class func writeBE(buffer: inout Data, offset: Int, value: UInt64) {
@@ -619,21 +454,16 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt8, valueCount: Int) {
-//        buffer.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-//            if let baseAddress = body.baseAddress, body.count > 0 {
-//                var pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
-                var pointer = buffer.p.advanced(by: offset)
+        var pointer = buffer.p.advanced(by: offset)
 
-                var v = value.littleEndian
-                let n = MemoryLayout<UInt8>.size
+        var v = value.littleEndian
+        let n = MemoryLayout<UInt8>.size
 
-                for _ in 0..<valueCount {
+        for _ in 0..<valueCount {
 
-                    memcpy(pointer, &v, n)
-                    pointer = pointer.successor()
-                }
-//            }
-//        }
+            memcpy(pointer, &v, n)
+            pointer = pointer.successor()
+        }
     }
 
     class func write(buffer: inout Data, offset: Int, value: UUID) {

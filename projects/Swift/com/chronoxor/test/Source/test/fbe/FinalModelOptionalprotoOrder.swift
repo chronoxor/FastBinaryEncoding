@@ -67,8 +67,8 @@ class FinalModelOptionalprotoOrder: FinalModel {
     }
 
     public func get(size: inout Size) -> Order? {
-        assert(_buffer.offset + fbeOffset + 1 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 1 > _buffer.size {
+            assertionFailure("Model is broken!")
             size.value = 0
             return nil
         }
@@ -87,8 +87,8 @@ class FinalModelOptionalprotoOrder: FinalModel {
 
     // Set the optional value
     public func set(value optional: Order?) throws -> Int {
-       assert(_buffer.offset + fbeOffset + 1 <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + 1 > _buffer.size {
+            assertionFailure("Model is broken!")
             return 0
         }
 

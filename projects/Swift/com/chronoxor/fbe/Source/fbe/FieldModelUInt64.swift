@@ -36,6 +36,7 @@ public class FieldModelUInt64: FieldModel {
     // Set the value
     public func set(value: UInt64) {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
+            assertionFailure("Model is broken!")
             return
         }
 

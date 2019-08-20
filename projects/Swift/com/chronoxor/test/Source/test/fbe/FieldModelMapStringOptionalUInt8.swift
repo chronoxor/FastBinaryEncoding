@@ -178,8 +178,8 @@ class FieldModelMapStringOptionalUInt8: FieldModel {
     }
 
     public func set(value values: Dictionary<String, UInt8?>) throws {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
+            assertionFailure("Model is broken!")
             return
         }
 
