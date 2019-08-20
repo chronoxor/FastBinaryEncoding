@@ -7176,17 +7176,17 @@ namespace test {
         public static StructNested Default => new StructNested
         {
             parent = StructOptional.Default
-            , f1000 = EnumSimple.Default
+            , f1000 = global::test.EnumSimple.Default
             , f1001 = null
             , f1002 = EnumTyped.ENUM_VALUE_2
             , f1003 = null
-            , f1004 = FlagsSimple.Default
+            , f1004 = global::test.FlagsSimple.Default
             , f1005 = null
             , f1006 = FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6
             , f1007 = null
-            , f1008 = StructSimple.Default
+            , f1008 = global::test.StructSimple.Default
             , f1009 = null
-            , f1010 = StructOptional.Default
+            , f1010 = global::test.StructOptional.Default
             , f1011 = null
         };
 
@@ -7575,7 +7575,7 @@ namespace test {
             if ((fbeCurrentSize + f1000.FBESize) <= fbeStructSize)
                 f1000.Get(out fbeValue.f1000);
             else
-                fbeValue.f1000 = EnumSimple.Default;
+                fbeValue.f1000 = global::test.EnumSimple.Default;
             fbeCurrentSize += f1000.FBESize;
 
             if ((fbeCurrentSize + f1001.FBESize) <= fbeStructSize)
@@ -7599,7 +7599,7 @@ namespace test {
             if ((fbeCurrentSize + f1004.FBESize) <= fbeStructSize)
                 f1004.Get(out fbeValue.f1004);
             else
-                fbeValue.f1004 = FlagsSimple.Default;
+                fbeValue.f1004 = global::test.FlagsSimple.Default;
             fbeCurrentSize += f1004.FBESize;
 
             if ((fbeCurrentSize + f1005.FBESize) <= fbeStructSize)
@@ -7623,7 +7623,7 @@ namespace test {
             if ((fbeCurrentSize + f1008.FBESize) <= fbeStructSize)
                 f1008.Get(out fbeValue.f1008);
             else
-                fbeValue.f1008 = StructSimple.Default;
+                fbeValue.f1008 = global::test.StructSimple.Default;
             fbeCurrentSize += f1008.FBESize;
 
             if ((fbeCurrentSize + f1009.FBESize) <= fbeStructSize)
@@ -7635,7 +7635,7 @@ namespace test {
             if ((fbeCurrentSize + f1010.FBESize) <= fbeStructSize)
                 f1010.Get(out fbeValue.f1010);
             else
-                fbeValue.f1010 = StructOptional.Default;
+                fbeValue.f1010 = global::test.StructOptional.Default;
             fbeCurrentSize += f1010.FBESize;
 
             if ((fbeCurrentSize + f1011.FBESize) <= fbeStructSize)

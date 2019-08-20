@@ -808,8 +808,8 @@ namespace protoex {
         {
             id = (int)0
             , symbol = ""
-            , side = OrderSide.Default
-            , type = OrderType.Default
+            , side = global::protoex.OrderSide.Default
+            , type = global::protoex.OrderType.Default
             , price = (double)0.0D
             , volume = (double)0.0D
             , tp = (double)10.0D
@@ -1146,13 +1146,13 @@ namespace protoex {
             if ((fbeCurrentSize + side.FBESize) <= fbeStructSize)
                 side.Get(out fbeValue.side);
             else
-                fbeValue.side = OrderSide.Default;
+                fbeValue.side = global::protoex.OrderSide.Default;
             fbeCurrentSize += side.FBESize;
 
             if ((fbeCurrentSize + type.FBESize) <= fbeStructSize)
                 type.Get(out fbeValue.type);
             else
-                fbeValue.type = OrderType.Default;
+                fbeValue.type = global::protoex.OrderType.Default;
             fbeCurrentSize += type.FBESize;
 
             if ((fbeCurrentSize + price.FBESize) <= fbeStructSize)
@@ -2305,7 +2305,7 @@ namespace protoex {
             id = (int)0
             , name = ""
             , state = StateEx.initialized | StateEx.bad | StateEx.sad
-            , wallet = Balance.Default
+            , wallet = global::protoex.Balance.Default
             , asset = null
             , orders = new List<Order>()
         };
@@ -2636,7 +2636,7 @@ namespace protoex {
             if ((fbeCurrentSize + wallet.FBESize) <= fbeStructSize)
                 wallet.Get(out fbeValue.wallet);
             else
-                fbeValue.wallet = Balance.Default;
+                fbeValue.wallet = global::protoex.Balance.Default;
             fbeCurrentSize += wallet.FBESize;
 
             if ((fbeCurrentSize + asset.FBESize) <= fbeStructSize)
@@ -3097,7 +3097,7 @@ namespace protoex {
 
         public static OrderMessage Default => new OrderMessage
         {
-            body = Order.Default
+            body = global::protoex.Order.Default
         };
 
         public OrderMessage(Order body)
@@ -3323,7 +3323,7 @@ namespace protoex {
             if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
                 body.Get(out fbeValue.body);
             else
-                fbeValue.body = Order.Default;
+                fbeValue.body = global::protoex.Order.Default;
             fbeCurrentSize += body.FBESize;
         }
 
@@ -3672,7 +3672,7 @@ namespace protoex {
 
         public static BalanceMessage Default => new BalanceMessage
         {
-            body = Balance.Default
+            body = global::protoex.Balance.Default
         };
 
         public BalanceMessage(Balance body)
@@ -3898,7 +3898,7 @@ namespace protoex {
             if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
                 body.Get(out fbeValue.body);
             else
-                fbeValue.body = Balance.Default;
+                fbeValue.body = global::protoex.Balance.Default;
             fbeCurrentSize += body.FBESize;
         }
 
@@ -4247,7 +4247,7 @@ namespace protoex {
 
         public static AccountMessage Default => new AccountMessage
         {
-            body = Account.Default
+            body = global::protoex.Account.Default
         };
 
         public AccountMessage(Account body)
@@ -4473,7 +4473,7 @@ namespace protoex {
             if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
                 body.Get(out fbeValue.body);
             else
-                fbeValue.body = Account.Default;
+                fbeValue.body = global::protoex.Account.Default;
             fbeCurrentSize += body.FBESize;
         }
 

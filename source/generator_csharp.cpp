@@ -7064,9 +7064,34 @@ std::string GeneratorCSharp::ConvertConstant(const std::string& type, const std:
     else if (value == "uuid2")
         return "FBE.UuidGenerator.Random()";
 
-    std::string ns = (CppCommon::StringUtils::CountAll(value, ".") > 1) ? "global::" : "";
+    std::string result = value;
 
-    return ns + ConvertConstantPrefix(type) + value + ConvertConstantSuffix(type);
+    if (!IsKnownType(type))
+    {
+        // Fill flags values
+        std::vector<std::string> flags = CppCommon::StringUtils::Split(value, '|', true);
+
+        // Generate flags combination
+        if (flags.size() > 1)
+        {
+            result = "";
+            bool first = true;
+            for (const auto& it : flags)
+            {
+                std::string flag = CppCommon::StringUtils::ToTrim(it);
+                std::string ns = (CppCommon::StringUtils::CountAll(flag, ".") > 1) ? "global::" : "";
+                result += (first ? "" : " | ") + ns + flag;
+                first = false;
+            }
+        }
+        else
+        {
+            std::string ns = (CppCommon::StringUtils::CountAll(result, ".") > 1) ? "global::" : "";
+            result = ns + result;
+        }
+    }
+
+    return ConvertConstantPrefix(type) + result + ConvertConstantSuffix(type);
 }
 
 std::string GeneratorCSharp::ConvertConstantPrefix(const std::string& type)

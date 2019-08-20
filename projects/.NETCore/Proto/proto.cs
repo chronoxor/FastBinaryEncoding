@@ -788,8 +788,8 @@ namespace proto {
         {
             id = (int)0
             , symbol = ""
-            , side = OrderSide.Default
-            , type = OrderType.Default
+            , side = global::proto.OrderSide.Default
+            , type = global::proto.OrderType.Default
             , price = (double)0.0D
             , volume = (double)0.0D
         };
@@ -1100,13 +1100,13 @@ namespace proto {
             if ((fbeCurrentSize + side.FBESize) <= fbeStructSize)
                 side.Get(out fbeValue.side);
             else
-                fbeValue.side = OrderSide.Default;
+                fbeValue.side = global::proto.OrderSide.Default;
             fbeCurrentSize += side.FBESize;
 
             if ((fbeCurrentSize + type.FBESize) <= fbeStructSize)
                 type.Get(out fbeValue.type);
             else
-                fbeValue.type = OrderType.Default;
+                fbeValue.type = global::proto.OrderType.Default;
             fbeCurrentSize += type.FBESize;
 
             if ((fbeCurrentSize + price.FBESize) <= fbeStructSize)
@@ -2201,7 +2201,7 @@ namespace proto {
             id = (int)0
             , name = ""
             , state = State.initialized | State.bad
-            , wallet = Balance.Default
+            , wallet = global::proto.Balance.Default
             , asset = null
             , orders = new List<Order>()
         };
@@ -2532,7 +2532,7 @@ namespace proto {
             if ((fbeCurrentSize + wallet.FBESize) <= fbeStructSize)
                 wallet.Get(out fbeValue.wallet);
             else
-                fbeValue.wallet = Balance.Default;
+                fbeValue.wallet = global::proto.Balance.Default;
             fbeCurrentSize += wallet.FBESize;
 
             if ((fbeCurrentSize + asset.FBESize) <= fbeStructSize)
@@ -2993,7 +2993,7 @@ namespace proto {
 
         public static OrderMessage Default => new OrderMessage
         {
-            body = Order.Default
+            body = global::proto.Order.Default
         };
 
         public OrderMessage(Order body)
@@ -3219,7 +3219,7 @@ namespace proto {
             if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
                 body.Get(out fbeValue.body);
             else
-                fbeValue.body = Order.Default;
+                fbeValue.body = global::proto.Order.Default;
             fbeCurrentSize += body.FBESize;
         }
 
@@ -3568,7 +3568,7 @@ namespace proto {
 
         public static BalanceMessage Default => new BalanceMessage
         {
-            body = Balance.Default
+            body = global::proto.Balance.Default
         };
 
         public BalanceMessage(Balance body)
@@ -3794,7 +3794,7 @@ namespace proto {
             if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
                 body.Get(out fbeValue.body);
             else
-                fbeValue.body = Balance.Default;
+                fbeValue.body = global::proto.Balance.Default;
             fbeCurrentSize += body.FBESize;
         }
 
@@ -4143,7 +4143,7 @@ namespace proto {
 
         public static AccountMessage Default => new AccountMessage
         {
-            body = Account.Default
+            body = global::proto.Account.Default
         };
 
         public AccountMessage(Account body)
@@ -4369,7 +4369,7 @@ namespace proto {
             if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
                 body.Get(out fbeValue.body);
             else
-                fbeValue.body = Account.Default;
+                fbeValue.body = global::proto.Account.Default;
             fbeCurrentSize += body.FBESize;
         }
 
