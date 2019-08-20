@@ -821,7 +821,7 @@ public class FieldModelStructSimple: FieldModel {
         if fbeCurrentSize + f5.fbeSize <= fbeStructSize {
             fbeValue.f5 = f5.get()
         } else {
-            fbeValue.f5 = "0"
+            fbeValue.f5 = "\0"
         }
         fbeCurrentSize += f5.fbeSize
 
@@ -835,7 +835,7 @@ public class FieldModelStructSimple: FieldModel {
         if fbeCurrentSize + f7.fbeSize <= fbeStructSize {
             fbeValue.f7 = f7.get()
         } else {
-            fbeValue.f7 = "0"
+            fbeValue.f7 = Character(UnicodeScalar(0)!)
         }
         fbeCurrentSize += f7.fbeSize
 

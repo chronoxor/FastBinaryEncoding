@@ -6,8 +6,6 @@
 
 import Foundation
 
-import Marshal
-
 public class State: Comparable, Hashable, Codable {
     typealias RawValue = UInt8
     public static let unknown = State(value: .unknown)

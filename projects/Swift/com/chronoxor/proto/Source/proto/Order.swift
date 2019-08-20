@@ -8,8 +8,6 @@ import Foundation
 
 import fbe
 
-import Marshal
-
 open class Order: Comparable, Hashable, Codable {
     public var id: Int32 = 0
     public var symbol: String = ""
@@ -46,16 +44,6 @@ open class Order: Comparable, Hashable, Codable {
         type = try container.decode(OrderType.self, forKey: .type)
         price = try container.decode(Double.self, forKey: .price)
         volume = try container.decode(Double.self, forKey: .volume)
-    }
-    
-    public required init(object: MarshaledObject) throws {
-        id = try object.value(for: CodingKeys.id.rawValue)
-        symbol = try object.value(for: CodingKeys.symbol.rawValue)
-        side = OrderSide(value: try! object.value(for: CodingKeys.side.rawValue) ?? 0)
-        type = OrderType(value: try! object.value(for: CodingKeys.type.rawValue) ?? 0)
-        //type = try object.value(for: CodingKeys.type.rawValue)
-        price = try object.value(for: CodingKeys.price.rawValue)
-        volume = try object.value(for: CodingKeys.volume.rawValue)
     }
 
     open func clone() throws -> Order {
@@ -124,18 +112,3 @@ open class Order: Comparable, Hashable, Codable {
         return try! JSONDecoder().decode(Order.self, from: json.data(using: .utf8)!)
     }
 }
-
-extension Order: Marshaling, Unmarshaling {
-    
-    public func marshaled() -> [String: Any] {
-        return [
-            CodingKeys.id.rawValue: id,
-            CodingKeys.symbol.rawValue: symbol,
-            CodingKeys.side.rawValue: side.raw,
-            CodingKeys.type.rawValue: type.raw,
-            CodingKeys.price.rawValue: price,
-            CodingKeys.volume.rawValue: volume,
-        ]
-    }
-}
-

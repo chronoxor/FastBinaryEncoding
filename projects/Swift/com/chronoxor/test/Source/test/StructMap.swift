@@ -52,16 +52,16 @@ open class StructMap: Comparable, Hashable, Codable {
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        f1 = try container.decode(Dictionary<Int32, UInt8>.self, forKey: .f1)
-        f2 = try container.decode(Dictionary<Int32, UInt8?>.self, forKey: .f2)
-        f3 = try container.decode(Dictionary<Int32, Data>.self, forKey: .f3)
-        f4 = try container.decode(Dictionary<Int32, Data?>.self, forKey: .f4)
-        f5 = try container.decode(Dictionary<Int32, EnumSimple>.self, forKey: .f5)
-        f6 = try container.decode(Dictionary<Int32, EnumSimple?>.self, forKey: .f6)
-        f7 = try container.decode(Dictionary<Int32, FlagsSimple>.self, forKey: .f7)
-        f8 = try container.decode(Dictionary<Int32, FlagsSimple?>.self, forKey: .f8)
-        f9 = try container.decode(Dictionary<Int32, StructSimple>.self, forKey: .f9)
-        f10 = try container.decode(Dictionary<Int32, StructSimple?>.self, forKey: .f10)
+        f1 = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, UInt8>.self, forKey: .f1)).map { (Int32($0) ?? 0, $1) })
+        f2 = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, UInt8?>.self, forKey: .f2)).map { (Int32($0) ?? 0, $1) })
+        f3 = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, Data>.self, forKey: .f3)).map { (Int32($0) ?? 0, $1) })
+        f4 = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, Data?>.self, forKey: .f4)).map { (Int32($0) ?? 0, $1) })
+        f5 = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, EnumSimple>.self, forKey: .f5)).map { (Int32($0) ?? 0, $1) })
+        f6 = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, EnumSimple?>.self, forKey: .f6)).map { (Int32($0) ?? 0, $1) })
+        f7 = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, FlagsSimple>.self, forKey: .f7)).map { (Int32($0) ?? 0, $1) })
+        f8 = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, FlagsSimple?>.self, forKey: .f8)).map { (Int32($0) ?? 0, $1) })
+        f9 = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, StructSimple>.self, forKey: .f9)).map { (Int32($0) ?? 0, $1) })
+        f10 = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, StructSimple?>.self, forKey: .f10)).map { (Int32($0) ?? 0, $1) })
     }
 
     open func clone() throws -> StructMap {
@@ -229,16 +229,16 @@ open class StructMap: Comparable, Hashable, Codable {
 
     open func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(f1, forKey: .f1)
-        try container.encode(f2, forKey: .f2)
-        try container.encode(f3, forKey: .f3)
-        try container.encode(f4, forKey: .f4)
-        try container.encode(f5, forKey: .f5)
-        try container.encode(f6, forKey: .f6)
-        try container.encode(f7, forKey: .f7)
-        try container.encode(f8, forKey: .f8)
-        try container.encode(f9, forKey: .f9)
-        try container.encode(f10, forKey: .f10)
+        try container.encode(Dictionary(uniqueKeysWithValues: f1.map { ($0.description, $1) }), forKey: .f1)
+        try container.encode(Dictionary(uniqueKeysWithValues: f2.map { ($0.description, $1) }), forKey: .f2)
+        try container.encode(Dictionary(uniqueKeysWithValues: f3.map { ($0.description, $1) }), forKey: .f3)
+        try container.encode(Dictionary(uniqueKeysWithValues: f4.map { ($0.description, $1) }), forKey: .f4)
+        try container.encode(Dictionary(uniqueKeysWithValues: f5.map { ($0.description, $1) }), forKey: .f5)
+        try container.encode(Dictionary(uniqueKeysWithValues: f6.map { ($0.description, $1) }), forKey: .f6)
+        try container.encode(Dictionary(uniqueKeysWithValues: f7.map { ($0.description, $1) }), forKey: .f7)
+        try container.encode(Dictionary(uniqueKeysWithValues: f8.map { ($0.description, $1) }), forKey: .f8)
+        try container.encode(Dictionary(uniqueKeysWithValues: f9.map { ($0.description, $1) }), forKey: .f9)
+        try container.encode(Dictionary(uniqueKeysWithValues: f10.map { ($0.description, $1) }), forKey: .f10)
     }
 
     open func toJson() throws -> String {

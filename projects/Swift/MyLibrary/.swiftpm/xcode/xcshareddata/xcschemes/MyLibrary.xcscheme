@@ -51,11 +51,6 @@
                BlueprintName = "MyLibraryTests"
                ReferencedContainer = "container:">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "TestSerializationJson/testSerializationJsonStructMap()">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

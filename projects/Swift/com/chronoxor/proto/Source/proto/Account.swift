@@ -8,8 +8,6 @@ import Foundation
 
 import fbe
 
-import Marshal
-
 open class Account: Comparable, Hashable, Codable {
     public var id: Int32 = 0
     public var name: String = ""
@@ -46,15 +44,6 @@ open class Account: Comparable, Hashable, Codable {
         wallet = try container.decode(Balance.self, forKey: .wallet)
         asset = try container.decode(Balance?.self, forKey: .asset)
         orders = try container.decode(Array<Order>.self, forKey: .orders)
-    }
-    
-    public required init(object: MarshaledObject) throws {
-        id = try object.value(for: CodingKeys.id.rawValue)
-        name = try object.value(for: CodingKeys.name.rawValue)
-        state = State(value: try! object.value(for: CodingKeys.state.rawValue) as UInt8)
-        wallet = try object.value(for: CodingKeys.wallet.rawValue)
-        asset = try object.value(for: CodingKeys.asset.rawValue)
-        orders = try object.value(for: CodingKeys.orders.rawValue)
     }
 
     open func clone() throws -> Account {
@@ -125,38 +114,10 @@ open class Account: Comparable, Hashable, Codable {
     }
 
     open func toJson() throws -> String {
-        if let theJSONData = try?  JSONSerialization.data(
-            withJSONObject: self.marshaled(),
-            options: .prettyPrinted
-            ),
-            let theJSONText = String(data: theJSONData,
-                                     encoding: String.Encoding.ascii) {
-            return theJSONText
-            //print("JSON string = \n\(theJSONText)")
-        }
-        
-        return ""
-        //return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
+        return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
     open class func fromJson(_ json: String) -> Account {
-        let data = json.data(using: .utf8)!
-        let json = (try! JSONSerialization.jsonObject(with: data, options: [])) as! Dictionary<String, Any>
-        return try! Account(object: json)
-        //return try! JSONDecoder().decode(Account.self, from: json.data(using: .utf8)!)
-    }
-}
-
-extension Account: Marshaling, Unmarshaling {
-
-    public func marshaled() -> [String: Any] {
-        return [
-            CodingKeys.id.rawValue: id,
-            CodingKeys.name.rawValue: name,
-            CodingKeys.state.rawValue: state.raw,
-            CodingKeys.wallet.rawValue: wallet.marshaled(),
-            CodingKeys.asset.rawValue: asset?.marshaled() ?? "null",
-            CodingKeys.orders.rawValue: orders.map { $0.marshaled() },
-        ]
+        return try! JSONDecoder().decode(Account.self, from: json.data(using: .utf8)!)
     }
 }

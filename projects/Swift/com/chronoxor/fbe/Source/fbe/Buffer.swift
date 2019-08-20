@@ -181,9 +181,8 @@ public extension Buffer {
         return Character(UnicodeScalar(Buffer.readUInt8(buffer: buffer, offset: offset)))
     }
 
-    class func readWChar(buffer: Data, offset: Int) -> Character {
-        return "\0"
-        //return Character(UnicodeScalar(Buffer.readUInt32(buffer: buffer, offset: offset))!)
+    class func readWChar(buffer: Buffer, offset: Int) -> Character {
+        return Character(UnicodeScalar(Buffer.readUInt32(buffer: buffer, offset: offset))!)
     }
 
     class func readInt8(buffer: Buffer, offset: Int) -> Int8 {

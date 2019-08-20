@@ -16,9 +16,9 @@ open class StructSimple: Comparable, Hashable, Codable {
     public var f2: Bool = true
     public var f3: UInt8 = 0
     public var f4: UInt8 = 0xFF
-    public var f5: Character = "0"
+    public var f5: Character = "\0"
     public var f6: Character = "!"
-    public var f7: Character = "0"
+    public var f7: Character = Character(UnicodeScalar(0)!)
     public var f8: Character = Character(UnicodeScalar(0x0444)!)
     public var f9: Int8 = 0
     public var f10: Int8 = Int8.max

@@ -417,9 +417,8 @@ public extension Buffer {
         return Character(UnicodeScalar(Buffer.readUInt8(buffer: buffer, offset: offset)))
     }
 
-    class func readWChar(buffer: Data, offset: Int) -> Character {
-        return "\0"
-        //return Character(UnicodeScalar(Buffer.readUInt32(buffer: buffer, offset: offset))!)
+    class func readWChar(buffer: Buffer, offset: Int) -> Character {
+        return Character(UnicodeScalar(Buffer.readUInt32(buffer: buffer, offset: offset))!)
     }
 
     class func readInt8(buffer: Buffer, offset: Int) -> Int8 {
@@ -763,8 +762,8 @@ open class Model {
     public func unshift(offset: Int) { buffer.unshift(offset: offset) }
 
     // Buffer I/O methods
-    public func readUInt32(offset: Int) -> UInt { return UInt(Buffer.readUInt32(buffer: buffer.data, offset: buffer.offset + offset)) }
-    public func write(offset: Int, value: UInt32) { Buffer.write(buffer: &buffer.data, offset: buffer.offset + offset, value: value) }
+    public func readUInt32(offset: Int) -> UInt { return UInt(Buffer.readUInt32(buffer: buffer, offset: buffer.offset + offset)) }
+    public func write(offset: Int, value: UInt32) { Buffer.write(buffer: &buffer, offset: buffer.offset + offset, value: value) }
 }
 )CODE";
 
@@ -848,7 +847,7 @@ public extension FieldModel {
     func readBoolean(offset: Int) -> Bool { return Buffer.readBoolean(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readByte(offset: Int) -> Data.Element { return Buffer.readByte(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readChar(offset: Int) -> Character { return Buffer.readChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readWChar(offset: Int) -> Character { return Buffer.readWChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
+    func readWChar(offset: Int) -> Character { return Buffer.readWChar(buffer: _buffer, offset: _buffer.offset + offset) }
     func readInt8(offset: Int) -> Int8 { return Buffer.readInt8(buffer: _buffer, offset: _buffer.offset + offset) }
     func readUInt8(offset: Int) -> UInt8 { return Buffer.readUInt8(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readInt16(offset: Int) -> Int16 { return Buffer.readInt16(buffer: _buffer, offset: _buffer.offset + offset) }
@@ -2368,7 +2367,7 @@ public extension FinalModel {
     func readBoolean(offset: Int) -> Bool { return Buffer.readBoolean(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readByte(offset: Int) -> Data.Element { return Buffer.readByte(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readChar(offset: Int) -> Character { return Buffer.readChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
-    func readWChar(offset: Int) -> Character { return Buffer.readWChar(buffer: _buffer.data, offset: _buffer.offset + offset) }
+    func readWChar(offset: Int) -> Character { return Buffer.readWChar(buffer: _buffer, offset: _buffer.offset + offset) }
     func readInt8(offset: Int) -> Int8 { return Buffer.readInt8(buffer: _buffer, offset: _buffer.offset + offset) }
     func readUInt8(offset: Int) -> UInt8 { return Buffer.readUInt8(buffer: _buffer.data, offset: _buffer.offset + offset) }
     func readInt16(offset: Int) -> Int16 { return Buffer.readInt16(buffer: _buffer, offset: _buffer.offset + offset) }
@@ -5634,7 +5633,9 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     WriteLineIndent("let container = try decoder.container(keyedBy: CodingKeys.self)");
     if (s->body) {
         for (const auto& field : s->body->fields) {
-            if (*field->type == "decimal") {
+            if (field->map && *field->key != "string") {
+                WriteLineIndent(*field->name + " = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, " + ConvertTypeName(domain, "", *field->type, field->optional) + ">.self, forKey: ." + *field->name + ")).map { (" + ConvertTypeName(domain, "", *field->key, false) + "($0) ?? 0, $1) })");
+            } else if (*field->type == "decimal") {
                 if (field->optional) {
                     WriteLineIndent("let " + *field->name + "RawValue = try container.decode(String?.self, forKey: ." + *field->name + ")");
                     WriteLineIndent(*field->name + " = " + *field->name + "RawValue != nil ? Decimal(string: " + *field->name + "RawValue!) ?? .nan : nil");
@@ -5894,7 +5895,9 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     if (s->body && !s->body->fields.empty())
     {
         for (const auto& field : s->body->fields) {
-          if (*field->type == "decimal") {
+          if (field->map && *field->key != "string") {
+            WriteLineIndent("try container.encode(Dictionary(uniqueKeysWithValues: " + *field->name + ".map { ($0.description, $1) }), forKey: ." + *field->name + ")");
+          } else if (*field->type == "decimal") {
             std::string opt = (field->optional) ? "?" : "";
             WriteLineIndent("try container.encode(" + *field->name + opt + ".description, forKey: ." + *field->name + ")");
           } else if ((*field->type == "char") || (*field->type == "wchar")) {
@@ -8705,8 +8708,6 @@ std::string GeneratorSwift::ConvertConstantSuffix(const std::string& type)
 {
     if (type == "byte")
         return "";
-    if ((type == "char"))
-        return "";
     if ((type == "uint8") || (type == "uint16") || (type == "uint32"))
         return "";
     if (type == "int64")
@@ -8734,8 +8735,10 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
         return "0";
     else if (type == "bytes")
         return "Data()";
-    else if ((type == "char") || (type == "wchar"))
-        return "\"0\"";
+    else if (type == "char")
+        return "\"\\0\"";
+    else if (type == "wchar")
+        return "Character(UnicodeScalar(0)!)";
     else if (type == "int8")
         return "0";
     else if (type == "uint8")

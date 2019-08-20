@@ -10,6 +10,10 @@ import XCTest
 import proto
 import test
 
+extension Dictionary: Codable {
+    
+}
+
 class TestSerializationJson: XCTestCase {
     
     func testSerializationJsonDomain() {
@@ -909,36 +913,7 @@ class TestSerializationJson: XCTestCase {
         XCTAssertTrue(struct2.f4.contains(s2))
     }
     
-    class Temp: Codable {
-        var f1: Dictionary<Int32, UInt8> = Dictionary()
-        
-        private enum CodingKeys: String, CodingKey {
-            case f1
-        }
-        
-        init() { }
-        
-        public required init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            f1 = try container.decode(Dictionary<Int32, UInt8>.self, forKey: .f1)
-        }
-
-        open func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(f1, forKey: .f1)
-        }
-    }
-    
     func testSerializationJsonStructMap() {
-        let tmp = Temp()
-        tmp.f1[10] = 48
-        let jsonTmp = String(data: try! JSONEncoder().encode(tmp), encoding: .utf8)!
-        
-        print(jsonTmp)
-        
-        
-        
-        
         var json = "{\"f1\":{\"10\":48,\"20\":65},\"f2\":{\"10\":97,\"20\":null},\"f3\":{\"10\":\"MDAw\",\"20\":\"QUFB\"},\"f4\":{\"10\":\"YWFh\",\"20\":null},\"f5\":{\"10\":1,\"20\":2},\"f6\":{\"10\":1,\"20\":null},\"f7\":{\"10\":3,\"20\":7},\"f8\":{\"10\":3,\"20\":null},\"f9\":{\"10\":{\"id\":48,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146345803483000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"a549215e-f0a7-11e8-90f6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},\"20\":{\"id\":65,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146345804184000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"a54942ce-f0a7-11e8-90f6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}},\"f10\":{\"10\":{\"id\":48,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146345803483000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"a549215e-f0a7-11e8-90f6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},\"20\":null}}"
         // Create a new struct from the source JSON string
         let struct1 = StructMap.fromJson(json)
