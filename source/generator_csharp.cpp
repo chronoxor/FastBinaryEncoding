@@ -4770,7 +4770,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLineIndent(std::string(first ? "" : ", ") + *field->name + " = " + ConvertDefault(*field));
+            WriteLineIndent(std::string(first ? "" : ", ") + *field->name + " = " + ConvertDefault(*p->name, *field));
             first = false;
         }
     }
@@ -5498,7 +5498,7 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::shared_ptr<Package>& p
                 if (field->vector || field->list || field->set || field->map || field->hash)
                     WriteLineIndent("fbeValue." + *field->name + ".Clear();");
                 else
-                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field) + ";");
+                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*p->name, *field) + ";");
                 Indent(-1);
                 WriteLineIndent("fbeCurrentSize += " + *field->name + ".FBESize;");
             }
@@ -7064,7 +7064,7 @@ std::string GeneratorCSharp::ConvertConstant(const std::string& type, const std:
     else if (value == "uuid2")
         return "FBE.UuidGenerator.Random()";
 
-    std::string ns = (CppCommon::StringUtils::CountAll(type, ".") > 1) ? "global::" : "";
+    std::string ns = (CppCommon::StringUtils::CountAll(value, ".") > 1) ? "global::" : "";
 
     return ns + ConvertConstantPrefix(type) + value + ConvertConstantSuffix(type);
 }
@@ -7153,7 +7153,7 @@ std::string GeneratorCSharp::ConvertDefault(const std::string& type)
     return "new " + type + "()";
 }
 
-std::string GeneratorCSharp::ConvertDefault(const StructField& field)
+std::string GeneratorCSharp::ConvertDefault(const std::string& package, const StructField& field)
 {
     if (field.value)
         return ConvertConstant(*field.type, *field.value, field.optional);
@@ -7165,7 +7165,10 @@ std::string GeneratorCSharp::ConvertDefault(const StructField& field)
     else if (field.optional)
         return "null";
     else if (!IsKnownType(*field.type))
-        return ConvertTypeName(field) + ".Default";
+    {
+        std::string ns = CppCommon::StringUtils::Contains(*field.type, '.') ? "" : ("global::" + package + ".");
+        return ns + ConvertTypeName(field) + ".Default";
+    }
 
     return ConvertDefault(*field.type);
 }

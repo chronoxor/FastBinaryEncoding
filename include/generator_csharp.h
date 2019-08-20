@@ -104,7 +104,7 @@ private:
     std::string ConvertConstantPrefix(const std::string& type);
     std::string ConvertConstantSuffix(const std::string& type);
     std::string ConvertDefault(const std::string& type);
-    std::string ConvertDefault(const StructField& field);
+    std::string ConvertDefault(const std::string& package, const StructField& field);
 
     std::string ConvertOutputStreamType(const std::string& type, const std::string& name, bool optional);
     std::string ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate);
