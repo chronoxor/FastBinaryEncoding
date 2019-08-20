@@ -7064,7 +7064,9 @@ std::string GeneratorCSharp::ConvertConstant(const std::string& type, const std:
     else if (value == "uuid2")
         return "FBE.UuidGenerator.Random()";
 
-    return ConvertConstantPrefix(type) + value + ConvertConstantSuffix(type);
+    std::string ns = (CppCommon::StringUtils::CountAll(type, ".") > 1) ? "global::" : "";
+
+    return ns + ConvertConstantPrefix(type) + value + ConvertConstantSuffix(type);
 }
 
 std::string GeneratorCSharp::ConvertConstantPrefix(const std::string& type)
