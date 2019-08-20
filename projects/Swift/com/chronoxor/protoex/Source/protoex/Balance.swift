@@ -10,6 +10,8 @@ import fbe
 
 import proto
 
+import Marshal
+
 open class Balance: proto.Balance {
     public var locked: Double = 0.0
 
@@ -30,7 +32,11 @@ open class Balance: proto.Balance {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         locked = try container.decode(Double.self, forKey: .locked)
     }
-
+    
+    required public init(object: MarshaledObject) throws {
+        fatalError("init(object:) has not been implemented")
+    }
+    
     open override func clone() throws -> Balance {
         // Serialize the struct to the FBE stream
         let writer = BalanceModel()

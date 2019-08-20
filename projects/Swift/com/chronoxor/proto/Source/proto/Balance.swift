@@ -8,6 +8,8 @@ import Foundation
 
 import fbe
 
+import Marshal
+
 open class Balance: Comparable, Hashable, Codable {
     public var currency: String = ""
     public var amount: Double = 0.0
@@ -28,6 +30,11 @@ open class Balance: Comparable, Hashable, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         currency = try container.decode(String.self, forKey: .currency)
         amount = try container.decode(Double.self, forKey: .amount)
+    }
+    
+    public required init(object: MarshaledObject) throws {
+        currency = try object.value(for: CodingKeys.currency.rawValue)
+        amount = try object.value(for: CodingKeys.amount.rawValue)
     }
 
     open func clone() throws -> Balance {
@@ -82,5 +89,15 @@ open class Balance: Comparable, Hashable, Codable {
 
     open class func fromJson(_ json: String) -> Balance {
         return try! JSONDecoder().decode(Balance.self, from: json.data(using: .utf8)!)
+    }
+}
+
+extension Balance: Marshaling, Unmarshaling {
+    
+    public func marshaled() -> [String: Any] {
+        return [
+            CodingKeys.currency.rawValue: currency,
+            CodingKeys.amount.rawValue: amount,
+        ]
     }
 }

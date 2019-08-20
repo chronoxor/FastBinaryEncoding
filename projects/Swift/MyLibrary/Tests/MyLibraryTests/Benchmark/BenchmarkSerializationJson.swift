@@ -8,6 +8,7 @@
 
 import XCTest
 import proto
+import Marshal
 
 class BenchmarkSerializationJson: XCTestCase {
     
@@ -40,17 +41,55 @@ class BenchmarkSerializationJson: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testPerformanceSerialize() {
+    func testPerformanceSerializeJSONEncoder() {
         self.measure {
-            // Serialize the account to the JSON string
-            BenchmarkSerializationJson._json = try! BenchmarkSerializationJson._account.toJson()
+            for _ in 0...1000 {
+                // Serialize the account to the JSON string
+                _ = try! JSONEncoder().encode(BenchmarkSerializationJson._account)
+                //BenchmarkSerializationJson._json = try! BenchmarkSerializationJson._account.toJson()
+            }
         }
     }
     
-    func testPerformanceDeserialize() {
+    func testPerformanceSerializeMarshal() {
         self.measure {
-            // Deserialize the account from the JSON string
-            BenchmarkSerializationJson._account = Account.fromJson(BenchmarkSerializationJson._json)
+            for _ in 0...1000 {
+                // Serialize the account to the JSON string
+                let dict = BenchmarkSerializationJson._account.marshaled()
+                if let theJSONData = try?  JSONSerialization.data(
+                    withJSONObject: dict,
+                    options: .prettyPrinted
+                    ),
+                    let _ = String(data: theJSONData,
+                                   encoding: String.Encoding.ascii) {
+                }
+                //BenchmarkSerializationJson._json = try! BenchmarkSerializationJson._account.toJson()
+            }
+        }
+    }
+    
+    func testPerformanceDeserializeJSONDecoder() {
+        let data = BenchmarkSerializationJson._json.data(using: .utf8)!
+        self.measure {
+            for _ in 0...1000 {
+                // Deserialize the account from the JSON string
+                let _ = try! JSONDecoder().decode(Account.self, from: data)
+            }
+        }
+    }
+    
+    func testPerformanceDeserializeMarshal() {
+        let data = BenchmarkSerializationJson._json.data(using: .utf8)!
+        let json = (try! JSONSerialization.jsonObject(with: data, options: [])) as! Dictionary<String, Any>
+
+        self.measure {
+            for _ in 0...1000 {
+                // Deserialize the account from the JSON string
+                let tmp = try! Account(object: json)
+                print(tmp)
+                
+                //BenchmarkSerializationJson._account = Account.fromJson(BenchmarkSerializationJson._json)
+            }
         }
     }
 }

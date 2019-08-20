@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Marshal",
+        "repositoryURL": "https://github.com/utahiosmac/Marshal.git",
+        "state": {
+          "branch": null,
+          "revision": "bbd811be9b78352e74970d1c2c652e87c83ce51b",
+          "version": "1.2.8"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
