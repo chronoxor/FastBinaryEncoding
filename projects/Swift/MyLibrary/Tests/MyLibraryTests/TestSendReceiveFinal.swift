@@ -1,21 +1,22 @@
 //
-//  File.swift
-//  
+//  SendReceiveTest.swift
+//  FastBinaryEncodingTests
 //
-//  Created by Andrey on 8/21/19.
+//  Created by Andrey on 8/5/19.
+//  Copyright © 2019 Andrey. All rights reserved.
 //
 
-import proto
 import XCTest
+import proto
 
-class MySender: Sender {
+class MyFinalSender: FinalSender {
     override func onSend(buffer: Data, offset: Int, size: Int) throws -> Int {
         // Send nothing...
         return 0
     }
 }
 
-class MyReceiver: proto.Receiver {
+class MyFinalReceiver: FinalReceiver {
     private var _order: Bool = false
     private var _balance: Bool = false
     private var _account: Bool = false
@@ -37,8 +38,7 @@ class MyReceiver: proto.Receiver {
     }
 }
 
-class SendReceiveTests: XCTestCase {
-    
+class SendReceiveFinalTest: XCTestCase {
     func testSendAndReceive() {
         for i in 0...99 {
             for j in 0...99 {
@@ -48,7 +48,7 @@ class SendReceiveTests: XCTestCase {
     }
     
     func sendAndReceive(i: Int, j: Int) -> Bool {
-        let sender = MySender()
+        let sender = MyFinalSender()
         
         // Create and send a new order
         let order = Order(id: 1, symbol: "EURUSD", side: OrderSide.buy, type: OrderType.market, price: 1.23456, volume: 1000.0)
@@ -65,7 +65,7 @@ class SendReceiveTests: XCTestCase {
         account.orders.append(Order(id: 3, symbol: "EURUSD", side: OrderSide.buy, type: OrderType.stop, price: 1.5, volume: 10.0))
         _ = try? sender.send(value: account)
         
-        let receiver = MyReceiver()
+        let receiver = MyFinalReceiver()
         // Receive data from the sender
         let index1 = i % sender.buffer.size
         var index2 = j % sender.buffer.size
