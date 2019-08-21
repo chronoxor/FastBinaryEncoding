@@ -15,17 +15,32 @@ public class Buffer {
     // Get bytes memory buffer
     var data = Data() {
         didSet {
-            self.data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-                if let baseAddress = body.baseAddress, body.count > 0 {
-                    p = baseAddress.assumingMemoryBound(to: UInt8.self)
-                } else {
-                    assertionFailure()
-                }
-            }
+//            data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
+//                if let baseAddress = body.baseAddress, body.count > 0 {
+//                    p = baseAddress.assumingMemoryBound(to: UInt8.self)
+//                } else {
+//                    assertionFailure()
+//                }
+//            }
         }
     }
 
     var p: UnsafeMutablePointer<UInt8>!
+    {
+        self.data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
+            return body.baseAddress!.assumingMemoryBound(to: UInt8.self)
+        }
+    }
+    
+    func withDataPointer(offset: Int = 0, block: (UnsafeMutablePointer<UInt8>) -> Void) {
+        self.data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
+            if let baseAddress = body.baseAddress, body.count > 0 {
+                block(baseAddress.assumingMemoryBound(to: UInt8.self).advanced(by: offset))
+            } else {
+                assertionFailure()
+            }
+        }
+    }
 
     // Get bytes memory buffer capacity
     var capacity: Int {
@@ -189,7 +204,9 @@ public extension Buffer {
         var i: Int8 = 0
         withUnsafeMutablePointer(to: &i) { ip -> Void in
             let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            dest.initialize(from: buffer.p.advanced(by: offset), count: 1)
+            buffer.withDataPointer {
+                dest.initialize(from: $0.advanced(by: offset), count: 1)
+            }
         }
         return Int8(littleEndian: i)
     }
@@ -203,7 +220,9 @@ public extension Buffer {
         var i: Int16 = 0
         withUnsafeMutablePointer(to: &i) { ip -> Void in
             let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            dest.initialize(from: buffer.p.advanced(by: offset), count: 2)
+            buffer.withDataPointer(offset: offset) {
+                dest.initialize(from: $0, count: 2)
+            }
         }
         return Int16(littleEndian: i)
     }
@@ -212,7 +231,9 @@ public extension Buffer {
         var i: UInt16 = 0
         withUnsafeMutablePointer(to: &i) { ip -> Void in
             let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            dest.initialize(from: buffer.p.advanced(by: offset), count: 2)
+            buffer.withDataPointer(offset: offset) {
+                dest.initialize(from: $0, count: 2)
+            }
         }
         return UInt16(littleEndian: i)
     }
@@ -221,7 +242,9 @@ public extension Buffer {
         var i: Int32 = 0
         withUnsafeMutablePointer(to: &i) { ip -> Void in
             let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            dest.initialize(from: buffer.p.advanced(by: offset), count: 4)
+            buffer.withDataPointer(offset: offset) {
+                dest.initialize(from: $0, count: 4)
+            }
         }
         return Int32(littleEndian: i)
     }
@@ -230,7 +253,9 @@ public extension Buffer {
         var i: UInt32 = 0
         withUnsafeMutablePointer(to: &i) { ip -> Void in
             let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            dest.initialize(from: buffer.p.advanced(by: offset), count: 4)
+            buffer.withDataPointer(offset: offset) {
+                dest.initialize(from: $0, count: 4)
+            }
         }
         return UInt32(littleEndian: i)
     }
@@ -239,7 +264,9 @@ public extension Buffer {
         var i: Int64 = 0
         withUnsafeMutablePointer(to: &i) { ip -> Void in
             let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            dest.initialize(from: buffer.p.advanced(by: offset), count: 8)
+            buffer.withDataPointer(offset: offset) {
+                dest.initialize(from: $0, count: 8)
+            }
         }
         return Int64(littleEndian: i)
     }
@@ -248,7 +275,9 @@ public extension Buffer {
         var i: UInt64 = 0
         withUnsafeMutablePointer(to: &i) { ip -> Void in
             let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            dest.initialize(from: buffer.p.advanced(by: offset), count: 8)
+            buffer.withDataPointer(offset: offset) {
+                dest.initialize(from: $0, count: 8)
+            }
         }
         return UInt64(littleEndian: i)
     }
@@ -286,7 +315,12 @@ public extension Buffer {
     }
 
     class func readString(buffer: Buffer, offset: Int, size: Int) -> String {
-        return utf8ToString(bytes: buffer.p.advanced(by: offset), count: size)!    }
+        var value = ""
+        buffer.withDataPointer(offset: offset) {
+            value = utf8ToString(bytes: $0, count: size)!
+        }
+        return value
+    }
 
     class func utf8ToString(bytes: UnsafePointer<UInt8>, count: Int) -> String? {
         if count == 0 {
@@ -339,80 +373,81 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Int8) {
-        let pointer = buffer.p.advanced(by: offset)
-
-        var v = value.littleEndian
-        let n = MemoryLayout<Int8>.size
-        memcpy(pointer, &v, n)
+        buffer.withDataPointer(offset: offset) {
+            var v = value.littleEndian
+            let n = MemoryLayout<UInt8>.size
+            memcpy($0, &v, n)
+        }
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt8) {
-        let pointer = buffer.p.advanced(by: offset)
-
-        var v = value.littleEndian
-        let n = MemoryLayout<UInt8>.size
-        memcpy(pointer, &v, n)
+        buffer.withDataPointer(offset: offset) {
+            var v = value.littleEndian
+            let n = MemoryLayout<UInt8>.size
+            memcpy($0, &v, n)
+        }
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Int16) {
-        let pointer = buffer.p.advanced(by: offset)
-
-        var v = value.littleEndian
-        let n = MemoryLayout<Int16>.size
-        memcpy(pointer, &v, n)
+        buffer.withDataPointer(offset: offset) {
+            var v = value.littleEndian
+            let n = MemoryLayout<Int16>.size
+            memcpy($0, &v, n)
+        }
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt16) {
-        let pointer = buffer.p.advanced(by: offset)
-
-        var v = value.littleEndian
-        let n = MemoryLayout<UInt16>.size
-        memcpy(pointer, &v, n)
+        buffer.withDataPointer(offset: offset) {
+            var v = value.littleEndian
+            let n = MemoryLayout<UInt16>.size
+            memcpy($0, &v, n)
+        }
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Int32) {
-        let pointer = buffer.p.advanced(by: offset)
-
-        var v = value.littleEndian
-        let n = MemoryLayout<Int32>.size
-        memcpy(pointer, &v, n)
+        buffer.withDataPointer(offset: offset) {
+            var v = value.littleEndian
+            let n = MemoryLayout<Int32>.size
+            memcpy($0, &v, n)
+        }
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt32) {
-        let pointer = buffer.p.advanced(by: offset)
-
-        var v = value.littleEndian
-        let n = MemoryLayout<UInt32>.size
-        memcpy(pointer, &v, n)
+        buffer.withDataPointer(offset: offset) {
+            var v = value.littleEndian
+            let n = MemoryLayout<UInt32>.size
+            memcpy($0, &v, n)
+        }
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Int64) {
-        let pointer = buffer.p.advanced(by: offset)
-
-        var v = value.littleEndian
-        let n = MemoryLayout<Int64>.size
-        memcpy(pointer, &v, n)
+        buffer.withDataPointer(offset: offset) {
+            var v = value.littleEndian
+            let n = MemoryLayout<Int64>.size
+            memcpy($0, &v, n)
+        }
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt64) {
-        let pointer = buffer.p.advanced(by: offset)
-
-        var v = value.littleEndian
-        let n = MemoryLayout<UInt64>.size
-        memcpy(pointer, &v, n)
+        buffer.withDataPointer(offset: offset) {
+            var v = value.littleEndian
+            let n = MemoryLayout<UInt64>.size
+            memcpy($0, &v, n)
+        }
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: String) {
-        var pointer = buffer.p.advanced(by: offset)
-
-        var v = UInt32(value.count).littleEndian
-        let n = MemoryLayout<UInt32>.size
-        memcpy(pointer, &v, n)
-        pointer = pointer.advanced(by: n)
-
-        for b in value.utf8 {
-            pointer.pointee = b
-            pointer = pointer.successor()
+        buffer.withDataPointer(offset: offset) {
+            var pointer = $0
+            var v = UInt32(value.count).littleEndian
+            let n = MemoryLayout<UInt32>.size
+            memcpy(pointer, &v, n)
+            pointer = pointer.advanced(by: n)
+            
+            for b in value.utf8 {
+                pointer.pointee = b
+                pointer = pointer.successor()
+            }
         }
     }
 
@@ -445,11 +480,16 @@ public extension Buffer {
         buffer[offset...(offset + value.count - 1)] = value[0...value.count - 1]
     }
 
-    class func write(buffer: inout Data, offset: Int, value: Data, valueOffset: Int, valueSize: Int) {
+    class func write(buffer: inout Buffer, offset: Int, value: Data, valueOffset: Int, valueSize: Int) {
         if valueSize == 0 {
             return
         }
-        buffer[offset...] = value[valueOffset...(valueOffset + valueSize)]
+        
+        let values = Array(value[valueOffset..<(valueOffset + valueSize)])
+        for i in 0..<values.count {
+            Buffer.write(buffer: &buffer, offset: offset + i, value: values[i])
+        }
+        //buffer[offset...] = value[valueOffset...(valueOffset + valueSize)]
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt8, valueCount: Int) {

@@ -8,7 +8,6 @@
 
 import XCTest
 import proto
-import Marshal
 
 class BenchmarkSerializationJson: XCTestCase {
     
