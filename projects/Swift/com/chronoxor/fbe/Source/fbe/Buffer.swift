@@ -14,25 +14,7 @@ public class Buffer {
     }
     // Get bytes memory buffer
     var data = Data()
-//    {
-//        didSet {
-//            data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-//                if let baseAddress = body.baseAddress, body.count > 0 {
-//                    p = baseAddress.assumingMemoryBound(to: UInt8.self)
-//                } else {
-//                    assertionFailure()
-//                }
-//            }
-//        }
-//    }
 
-//    var p: UnsafeMutablePointer<UInt8>!
-//    {
-//        self.data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-//            return body.baseAddress!.assumingMemoryBound(to: UInt8.self)
-//        }
-//    }
-//    
     func withDataPointer(offset: Int = 0, block: (UnsafeMutablePointer<UInt8>) -> Void) {
        // block(self.p)
         self.data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
@@ -445,7 +427,7 @@ public extension Buffer {
             let n = MemoryLayout<UInt32>.size
             memcpy(pointer, &v, n)
             pointer = pointer.advanced(by: n)
-            
+
             for b in value.utf8 {
                 pointer.pointee = b
                 pointer = pointer.successor()
@@ -486,23 +468,23 @@ public extension Buffer {
         if valueSize == 0 {
             return
         }
-        
+
         let values = Array(value[valueOffset..<(valueOffset + valueSize)])
         for i in 0..<values.count {
             Buffer.write(buffer: &buffer, offset: offset + i, value: values[i])
         }
         //buffer[offset...] = value[valueOffset...(valueOffset + valueSize)]
     }
-    
+
     class func write(buffer: inout Buffer, offset: Int, value: UInt8, valueCount: Int) {
         buffer.withDataPointer(offset: offset) {
             var pointer = $0
-            
+
             var v = value.littleEndian
             let n = MemoryLayout<UInt8>.size
-            
+
             for _ in 0..<valueCount {
-                
+
                 memcpy(pointer, &v, n)
                 pointer = pointer.successor()
             }
