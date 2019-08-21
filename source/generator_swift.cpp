@@ -7723,6 +7723,7 @@ std::string GeneratorSwift::CreateSwiftPackagePath(const std::string& domain, co
 {
 
     std::string result = domain;
+    CppCommon::StringUtils::ReplaceAll(result, "com.", "");
     CppCommon::StringUtils::ReplaceAll(result, ".", std::string(1, CppCommon::Path::separator()));
     return result + CppCommon::Path::separator() + package;
 }
@@ -7731,6 +7732,7 @@ std::string GeneratorSwift::CreatePackagePath(const std::string& domain, const s
 {
 
     std::string result = domain;
+    CppCommon::StringUtils::ReplaceAll(result, "com.", "");
     CppCommon::StringUtils::ReplaceAll(result, ".", std::string(1, CppCommon::Path::separator()));
     return result + package + CppCommon::Path::separator() + "Source" + CppCommon::Path::separator() + package;
 }
