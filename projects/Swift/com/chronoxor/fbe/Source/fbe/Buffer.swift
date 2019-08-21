@@ -13,8 +13,9 @@ public class Buffer {
         return size == 0
     }
     // Get bytes memory buffer
-    var data = Data() {
-        didSet {
+    var data = Data()
+//    {
+//        didSet {
 //            data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
 //                if let baseAddress = body.baseAddress, body.count > 0 {
 //                    p = baseAddress.assumingMemoryBound(to: UInt8.self)
@@ -22,17 +23,18 @@ public class Buffer {
 //                    assertionFailure()
 //                }
 //            }
-        }
-    }
+//        }
+//    }
 
-    var p: UnsafeMutablePointer<UInt8>!
-    {
-        self.data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-            return body.baseAddress!.assumingMemoryBound(to: UInt8.self)
-        }
-    }
-    
+//    var p: UnsafeMutablePointer<UInt8>!
+//    {
+//        self.data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
+//            return body.baseAddress!.assumingMemoryBound(to: UInt8.self)
+//        }
+//    }
+//    
     func withDataPointer(offset: Int = 0, block: (UnsafeMutablePointer<UInt8>) -> Void) {
+       // block(self.p)
         self.data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
             if let baseAddress = body.baseAddress, body.count > 0 {
                 block(baseAddress.assumingMemoryBound(to: UInt8.self).advanced(by: offset))
@@ -491,17 +493,19 @@ public extension Buffer {
         }
         //buffer[offset...] = value[valueOffset...(valueOffset + valueSize)]
     }
-
+    
     class func write(buffer: inout Buffer, offset: Int, value: UInt8, valueCount: Int) {
-        var pointer = buffer.p.advanced(by: offset)
-
-        var v = value.littleEndian
-        let n = MemoryLayout<UInt8>.size
-
-        for _ in 0..<valueCount {
-
-            memcpy(pointer, &v, n)
-            pointer = pointer.successor()
+        buffer.withDataPointer(offset: offset) {
+            var pointer = $0
+            
+            var v = value.littleEndian
+            let n = MemoryLayout<UInt8>.size
+            
+            for _ in 0..<valueCount {
+                
+                memcpy(pointer, &v, n)
+                pointer = pointer.successor()
+            }
         }
     }
 
