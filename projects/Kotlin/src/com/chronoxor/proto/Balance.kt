@@ -10,12 +10,12 @@ package com.chronoxor.proto
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class Balance : Comparable<Any?>
 {
-    var currency: String = ""
-    var amount: Double = 0.0
+    var currency: String
+    var amount: Double
 
-    constructor()
+    @Transient open var fbeType: Long = 2
 
-    constructor(currency: String, amount: Double)
+    constructor(currency: String = "", amount: Double = 0.0)
     {
         this.currency = currency
         this.amount = amount
@@ -94,8 +94,10 @@ open class Balance : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.proto.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 2
         fun fromJson(json: String): Balance = com.chronoxor.proto.fbe.Json.engine.fromJson(json, Balance::class.java)
     }
 }

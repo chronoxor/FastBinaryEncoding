@@ -16,6 +16,9 @@ public class Order implements Comparable<Object>
     public double tp = (double)10.0d;
     public double sl = (double)-10.0d;
 
+    public static final long fbeTypeConst = 1;
+    public long fbeType() { return fbeTypeConst; }
+
     public Order() {}
 
     public Order(int id, String symbol, OrderSide side, OrderType type, double price, double volume, double tp, double sl)

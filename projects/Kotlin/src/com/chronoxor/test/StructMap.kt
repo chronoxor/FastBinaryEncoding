@@ -10,20 +10,20 @@ package com.chronoxor.test
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructMap : Comparable<Any?>
 {
-    var f1: java.util.TreeMap<Int, Byte> = java.util.TreeMap()
-    var f2: java.util.TreeMap<Int, Byte?> = java.util.TreeMap()
-    var f3: java.util.TreeMap<Int, ByteArray> = java.util.TreeMap()
-    var f4: java.util.TreeMap<Int, ByteArray?> = java.util.TreeMap()
-    var f5: java.util.TreeMap<Int, EnumSimple> = java.util.TreeMap()
-    var f6: java.util.TreeMap<Int, EnumSimple?> = java.util.TreeMap()
-    var f7: java.util.TreeMap<Int, FlagsSimple> = java.util.TreeMap()
-    var f8: java.util.TreeMap<Int, FlagsSimple?> = java.util.TreeMap()
-    var f9: java.util.TreeMap<Int, StructSimple> = java.util.TreeMap()
-    var f10: java.util.TreeMap<Int, StructSimple?> = java.util.TreeMap()
+    var f1: java.util.TreeMap<Int, Byte>
+    var f2: java.util.TreeMap<Int, Byte?>
+    var f3: java.util.TreeMap<Int, ByteArray>
+    var f4: java.util.TreeMap<Int, ByteArray?>
+    var f5: java.util.TreeMap<Int, EnumSimple>
+    var f6: java.util.TreeMap<Int, EnumSimple?>
+    var f7: java.util.TreeMap<Int, FlagsSimple>
+    var f8: java.util.TreeMap<Int, FlagsSimple?>
+    var f9: java.util.TreeMap<Int, StructSimple>
+    var f10: java.util.TreeMap<Int, StructSimple?>
 
-    constructor()
+    @Transient open var fbeType: Long = 140
 
-    constructor(f1: java.util.TreeMap<Int, Byte>, f2: java.util.TreeMap<Int, Byte?>, f3: java.util.TreeMap<Int, ByteArray>, f4: java.util.TreeMap<Int, ByteArray?>, f5: java.util.TreeMap<Int, EnumSimple>, f6: java.util.TreeMap<Int, EnumSimple?>, f7: java.util.TreeMap<Int, FlagsSimple>, f8: java.util.TreeMap<Int, FlagsSimple?>, f9: java.util.TreeMap<Int, StructSimple>, f10: java.util.TreeMap<Int, StructSimple?>)
+    constructor(f1: java.util.TreeMap<Int, Byte> = java.util.TreeMap(), f2: java.util.TreeMap<Int, Byte?> = java.util.TreeMap(), f3: java.util.TreeMap<Int, ByteArray> = java.util.TreeMap(), f4: java.util.TreeMap<Int, ByteArray?> = java.util.TreeMap(), f5: java.util.TreeMap<Int, EnumSimple> = java.util.TreeMap(), f6: java.util.TreeMap<Int, EnumSimple?> = java.util.TreeMap(), f7: java.util.TreeMap<Int, FlagsSimple> = java.util.TreeMap(), f8: java.util.TreeMap<Int, FlagsSimple?> = java.util.TreeMap(), f9: java.util.TreeMap<Int, StructSimple> = java.util.TreeMap(), f10: java.util.TreeMap<Int, StructSimple?> = java.util.TreeMap())
     {
         this.f1 = f1
         this.f2 = f2
@@ -250,8 +250,10 @@ open class StructMap : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 140
         fun fromJson(json: String): StructMap = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructMap::class.java)
     }
 }

@@ -12,33 +12,33 @@ package com.chronoxor.proto.fbe
 open class Receiver : com.chronoxor.fbe.Receiver, ReceiverListener
 {
     // Receiver values accessors
-    private val OrderValue: com.chronoxor.proto.Order
-    private val BalanceValue: com.chronoxor.proto.Balance
-    private val AccountValue: com.chronoxor.proto.Account
+    private val OrderMessageValue: com.chronoxor.proto.OrderMessage
+    private val BalanceMessageValue: com.chronoxor.proto.BalanceMessage
+    private val AccountMessageValue: com.chronoxor.proto.AccountMessage
 
     // Receiver models accessors
-    private val OrderModel: OrderModel
-    private val BalanceModel: BalanceModel
-    private val AccountModel: AccountModel
+    private val OrderMessageModel: OrderMessageModel
+    private val BalanceMessageModel: BalanceMessageModel
+    private val AccountMessageModel: AccountMessageModel
 
     constructor() : super(false)
     {
-        OrderValue = com.chronoxor.proto.Order()
-        OrderModel = OrderModel()
-        BalanceValue = com.chronoxor.proto.Balance()
-        BalanceModel = BalanceModel()
-        AccountValue = com.chronoxor.proto.Account()
-        AccountModel = AccountModel()
+        OrderMessageValue = com.chronoxor.proto.OrderMessage()
+        OrderMessageModel = OrderMessageModel()
+        BalanceMessageValue = com.chronoxor.proto.BalanceMessage()
+        BalanceMessageModel = BalanceMessageModel()
+        AccountMessageValue = com.chronoxor.proto.AccountMessage()
+        AccountMessageModel = AccountMessageModel()
     }
 
     constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer, false)
     {
-        OrderValue = com.chronoxor.proto.Order()
-        OrderModel = OrderModel()
-        BalanceValue = com.chronoxor.proto.Balance()
-        BalanceModel = BalanceModel()
-        AccountValue = com.chronoxor.proto.Account()
-        AccountModel = AccountModel()
+        OrderMessageValue = com.chronoxor.proto.OrderMessage()
+        OrderMessageModel = OrderMessageModel()
+        BalanceMessageValue = com.chronoxor.proto.BalanceMessage()
+        BalanceMessageModel = BalanceMessageModel()
+        AccountMessageValue = com.chronoxor.proto.AccountMessage()
+        AccountMessageModel = AccountMessageModel()
     }
 
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
@@ -50,61 +50,61 @@ open class Receiver : com.chronoxor.fbe.Receiver, ReceiverListener
     {
         when (type)
         {
-            com.chronoxor.proto.fbe.OrderModel.fbeTypeConst ->
+            com.chronoxor.proto.fbe.OrderMessageModel.fbeTypeConst ->
             {
                 // Deserialize the value from the FBE stream
-                OrderModel.attach(buffer, offset)
-                assert(OrderModel.verify()) { "com.chronoxor.proto.Order validation failed!" }
-                val deserialized = OrderModel.deserialize(OrderValue)
-                assert(deserialized > 0) { "com.chronoxor.proto.Order deserialization failed!" }
+                OrderMessageModel.attach(buffer, offset)
+                assert(OrderMessageModel.verify()) { "com.chronoxor.proto.OrderMessage validation failed!" }
+                val deserialized = OrderMessageModel.deserialize(OrderMessageValue)
+                assert(deserialized > 0) { "com.chronoxor.proto.OrderMessage deserialization failed!" }
 
                 // Log the value
                 if (logging)
                 {
-                    val message = OrderValue.toString()
+                    val message = OrderMessageValue.toString()
                     onReceiveLog(message)
                 }
 
                 // Call receive handler with deserialized value
-                listener.onReceive(OrderValue)
+                listener.onReceive(OrderMessageValue)
                 return true
             }
-            com.chronoxor.proto.fbe.BalanceModel.fbeTypeConst ->
+            com.chronoxor.proto.fbe.BalanceMessageModel.fbeTypeConst ->
             {
                 // Deserialize the value from the FBE stream
-                BalanceModel.attach(buffer, offset)
-                assert(BalanceModel.verify()) { "com.chronoxor.proto.Balance validation failed!" }
-                val deserialized = BalanceModel.deserialize(BalanceValue)
-                assert(deserialized > 0) { "com.chronoxor.proto.Balance deserialization failed!" }
+                BalanceMessageModel.attach(buffer, offset)
+                assert(BalanceMessageModel.verify()) { "com.chronoxor.proto.BalanceMessage validation failed!" }
+                val deserialized = BalanceMessageModel.deserialize(BalanceMessageValue)
+                assert(deserialized > 0) { "com.chronoxor.proto.BalanceMessage deserialization failed!" }
 
                 // Log the value
                 if (logging)
                 {
-                    val message = BalanceValue.toString()
+                    val message = BalanceMessageValue.toString()
                     onReceiveLog(message)
                 }
 
                 // Call receive handler with deserialized value
-                listener.onReceive(BalanceValue)
+                listener.onReceive(BalanceMessageValue)
                 return true
             }
-            com.chronoxor.proto.fbe.AccountModel.fbeTypeConst ->
+            com.chronoxor.proto.fbe.AccountMessageModel.fbeTypeConst ->
             {
                 // Deserialize the value from the FBE stream
-                AccountModel.attach(buffer, offset)
-                assert(AccountModel.verify()) { "com.chronoxor.proto.Account validation failed!" }
-                val deserialized = AccountModel.deserialize(AccountValue)
-                assert(deserialized > 0) { "com.chronoxor.proto.Account deserialization failed!" }
+                AccountMessageModel.attach(buffer, offset)
+                assert(AccountMessageModel.verify()) { "com.chronoxor.proto.AccountMessage validation failed!" }
+                val deserialized = AccountMessageModel.deserialize(AccountMessageValue)
+                assert(deserialized > 0) { "com.chronoxor.proto.AccountMessage deserialization failed!" }
 
                 // Log the value
                 if (logging)
                 {
-                    val message = AccountValue.toString()
+                    val message = AccountMessageValue.toString()
                     onReceiveLog(message)
                 }
 
                 // Call receive handler with deserialized value
-                listener.onReceive(AccountValue)
+                listener.onReceive(AccountMessageValue)
                 return true
             }
         }

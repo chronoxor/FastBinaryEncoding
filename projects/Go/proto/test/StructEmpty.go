@@ -8,10 +8,12 @@ package test
 import "fmt"
 import "strconv"
 import "strings"
+import "errors"
 import "../fbe"
 import "../proto"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 var _ = proto.Version
 
@@ -84,6 +86,9 @@ func (s *StructEmpty) Key() StructEmptyKey {
 func (s *StructEmpty) Optional() *StructEmpty {
     return s
 }
+
+// Get the FBE type
+func (s *StructEmpty) FBEType() int { return 143 }
 
 // Convert struct to string
 func (s *StructEmpty) String() string {

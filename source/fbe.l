@@ -46,6 +46,7 @@ int yyerror(const std::string& msg);
 "enum"                  { yycount(); return yytoken(ENUM); }
 "flags"                 { yycount(); return yytoken(FLAGS); }
 "struct"                { yycount(); return yytoken(STRUCT); }
+"message"               { yycount(); return yytoken(MESSAGE); }
 "base"                  { yycount(); return yytoken(BASE); }
 "[id]"                  { yycount(); return yytoken(ID); }
 "[key]"                 { yycount(); return yytoken(KEY); }

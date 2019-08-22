@@ -927,6 +927,24 @@ class Order {
   static fromObject (other) {
     return new Order().copy(other)
   }
+
+  /**
+   * Get the FBE type
+   * @this {!Order}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return Order.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!Order}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 1
+  }
 }
 
 exports.Order = Order
@@ -2125,6 +2143,24 @@ class Balance extends proto.Balance {
   static fromObject (other) {
     return new Balance().copy(other)
   }
+
+  /**
+   * Get the FBE type
+   * @this {!Balance}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return Balance.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!Balance}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return proto.Balance.fbeType
+  }
 }
 
 exports.Balance = Balance
@@ -3042,6 +3078,24 @@ class Account {
    */
   static fromObject (other) {
     return new Account().copy(other)
+  }
+
+  /**
+   * Get the FBE type
+   * @this {!Account}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return Account.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!Account}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 3
   }
 }
 
@@ -4005,6 +4059,2403 @@ class AccountFinalModel extends fbe.Model {
 
 exports.AccountFinalModel = AccountFinalModel
 
+/**
+ * OrderMessage struct
+ */
+class OrderMessage {
+  /**
+   * Initialize struct
+   * @param {!Order=} body
+   * @constructor
+   */
+  constructor (argbody = new Order()) {
+    this.body = argbody
+  }
+
+  /**
+   * Copy struct (shallow copy)
+   * @this {!OrderMessage}
+   * @param {!OrderMessage} other Other struct
+   * @returns {!OrderMessage} This struct
+   */
+  copy (other) {
+    if (other.body != null) {
+      this.body = Order.fromObject(other.body)
+    } else {
+      this.body = undefined
+    }
+    return this
+  }
+
+  /**
+   * Clone struct (deep clone)
+   * @this {!OrderMessage}
+   * @returns {!OrderMessage} Cloned struct
+   */
+  clone () {
+    // Serialize the struct to the FBE stream
+    let writer = new OrderMessageModel(new fbe.WriteBuffer())
+    writer.serialize(this)
+
+    // Deserialize the struct from the FBE stream
+    let reader = new OrderMessageModel(new fbe.ReadBuffer())
+    reader.attachBuffer(writer.buffer)
+    return reader.deserialize().value
+  }
+
+  /**
+   * Is this struct equal to other one?
+   * @this {!OrderMessage}
+   * @param {!OrderMessage} other Other struct
+   * @returns {boolean} Equal result
+   */
+  eq (other) {
+    if (!(other instanceof OrderMessage)) {
+      throw new TypeError('Instance of OrderMessage is required!')
+    }
+    return true
+  }
+
+  /**
+   * Convert struct to string
+   * @this {!OrderMessage}
+   * @returns {!string} Struct value string
+   */
+  toString () {
+    let result = ''
+    result += 'OrderMessage('
+    result += 'body='
+    result += this.body.toString()
+    result += ')'
+    return result
+  }
+
+  /**
+   * Inspect struct
+   * @this {!OrderMessage}
+   * @returns {!string} Struct value string
+   */
+  [util.inspect.custom] () {
+    return this.toString()
+  }
+
+  /**
+   * Convert struct to JSON
+   * @this {!OrderMessage}
+   * @returns {!object} Struct value for JSON
+   */
+  toJSON () {
+    return {
+      body: ((this.body != null) ? this.body : null)
+    }
+  }
+
+  /**
+   * Convert JSON to struct
+   * @param {!string} json JSON string
+   * @returns {!object} Struct value for JSON
+   */
+  static fromJSON (json) {
+    return OrderMessage.fromObject(JSON.parse(json))
+  }
+
+  /**
+   * Create struct from object value
+   * @param {!OrderMessage} other Object value
+   * @returns {!OrderMessage} Created struct
+   */
+  static fromObject (other) {
+    return new OrderMessage().copy(other)
+  }
+
+  /**
+   * Get the FBE type
+   * @this {!OrderMessage}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return OrderMessage.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!OrderMessage}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 11
+  }
+}
+
+exports.OrderMessage = OrderMessage
+
+/**
+ * Fast Binary Encoding OrderMessage field model
+ */
+class FieldModelOrderMessage extends fbe.FieldModel {
+  /**
+   * Initialize field model with the given buffer and offset
+   * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Buffer
+   * @param {!number} offset Offset
+   * @constructor
+   */
+  constructor (buffer, offset) {
+    super(buffer, offset)
+    this._body = new FieldModelOrder(buffer, 4 + 4)
+  }
+
+  /**
+   * Get the body field model
+   * @this {!FieldModelOrderMessage}
+   * @returns {!FieldModelOrder} body field model
+   */
+  get body () {
+    return this._body
+  }
+
+  /**
+   * Get the field size
+   * @this {!FieldModelOrderMessage}
+   * @returns {!number} Field size
+   */
+  get fbeSize () {
+    return 4
+  }
+
+  /**
+   * Get the field body size
+   * @this {!FieldModelOrderMessage}
+   * @returns {!number} Field body size
+   */
+  get fbeBody () {
+    return 4 + 4 + this.body.fbeSize
+  }
+
+  /**
+   * Get the field extra size
+   * @this {!FieldModelOrderMessage}
+   * @returns {!number} Field extra size
+   */
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return 0
+    }
+
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
+    if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
+      return 0
+    }
+
+    this._buffer.shift(fbeStructOffset)
+
+    let fbeResult = this.fbeBody + this.body.fbeExtra
+
+    this._buffer.unshift(fbeStructOffset)
+
+    return fbeResult
+  }
+
+  /**
+   * Get the field type
+   * @this {!FieldModelOrderMessage}
+   * @returns {!number} Field type
+   */
+  get fbeType () {
+    return FieldModelOrderMessage.fbeType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelOrderMessage}
+   * @returns {!number} Field type
+   */
+  static get fbeType () {
+    return 11
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!FieldModelOrderMessage}
+   * @param {!boolean} fbeVerifyType Verify model type flag, defaults is true
+   * @returns {!boolean} Field model valid state
+   */
+  verify (fbeVerifyType = true) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return true
+    }
+
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
+    if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
+      return false
+    }
+
+    let fbeStructSize = this.readUInt32(fbeStructOffset)
+    if (fbeStructSize < (4 + 4)) {
+      return false
+    }
+
+    let fbeStructType = this.readUInt32(fbeStructOffset + 4)
+    if (fbeVerifyType && (fbeStructType !== this.fbeType)) {
+      return false
+    }
+
+    this._buffer.shift(fbeStructOffset)
+    let fbeResult = this.verifyFields(fbeStructSize)
+    this._buffer.unshift(fbeStructOffset)
+    return fbeResult
+  }
+
+  /**
+   * Check if the struct fields are valid
+   * @this {!FieldModelOrderMessage}
+   * @param {!number} fbeStructSize FBE struct size
+   * @returns {!boolean} Field model valid state
+   */
+  verifyFields (fbeStructSize) {
+    let fbeCurrentSize = 4 + 4
+
+    if ((fbeCurrentSize + this.body.fbeSize) > fbeStructSize) {
+      return true
+    }
+    if (!this.body.verify()) {
+      return false
+    }
+    // noinspection JSUnusedAssignment
+    fbeCurrentSize += this.body.fbeSize
+
+    return true
+  }
+
+  /**
+   * Get the struct value (begin phase)
+   * @this {!FieldModelOrderMessage}
+   * @returns {!number} Field model begin offset
+   */
+  getBegin () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return 0
+    }
+
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
+    console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
+    if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
+      return 0
+    }
+
+    let fbeStructSize = this.readUInt32(fbeStructOffset)
+    console.assert((fbeStructSize >= (4 + 4)), 'Model is broken!')
+    if (fbeStructSize < (4 + 4)) {
+      return 0
+    }
+
+    this._buffer.shift(fbeStructOffset)
+    return fbeStructOffset
+  }
+
+  /**
+   * Get the struct value (end phase)
+   * @this {!FieldModelOrderMessage}
+   * @param {!number} fbeBegin Field model begin offset
+   */
+  getEnd (fbeBegin) {
+    this._buffer.unshift(fbeBegin)
+  }
+
+  /**
+   * Get the struct value
+   * @this {!FieldModelOrderMessage}
+   * @param {!OrderMessage} fbeValue Default value, defaults is new OrderMessage()
+   * @returns {!OrderMessage} OrderMessage value
+   */
+  get (fbeValue = new OrderMessage()) {
+    let fbeBegin = this.getBegin()
+    if (fbeBegin === 0) {
+      return fbeValue
+    }
+
+    let fbeStructSize = this.readUInt32(0)
+    this.getFields(fbeValue, fbeStructSize)
+    this.getEnd(fbeBegin)
+    return fbeValue
+  }
+
+  /**
+   * Get the struct fields values
+   * @this {!FieldModelOrderMessage}
+   * @param {!OrderMessage} fbeValue OrderMessage value
+   * @param {!number} fbeStructSize Struct size
+   */
+  getFields (fbeValue, fbeStructSize) {
+    let fbeCurrentSize = 4 + 4
+
+    if ((fbeCurrentSize + this.body.fbeSize) <= fbeStructSize) {
+      fbeValue.body = this.body.get()
+    } else {
+      fbeValue.body = new Order()
+    }
+    // noinspection JSUnusedAssignment
+    fbeCurrentSize += this.body.fbeSize
+  }
+
+  /**
+   * Set the struct value (begin phase)
+   * @this {!FieldModelOrderMessage}
+   * @returns {!number} Field model begin offset
+   */
+  setBegin () {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return 0
+    }
+
+    let fbeStructSize = this.fbeBody
+    let fbeStructOffset = this._buffer.allocate(fbeStructSize) - this._buffer.offset
+    console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + fbeStructSize) <= this._buffer.size), 'Model is broken!')
+    if ((fbeStructOffset <= 0) || ((this._buffer.offset + fbeStructOffset + fbeStructSize) > this._buffer.size)) {
+      return 0
+    }
+
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
+    this.writeUInt32(fbeStructOffset, fbeStructSize)
+    this.writeUInt32(fbeStructOffset + 4, this.fbeType)
+
+    this._buffer.shift(fbeStructOffset)
+    return fbeStructOffset
+  }
+
+  /**
+   * Set the struct value (end phase)
+   * @this {!FieldModelOrderMessage}
+   * @param {!number} fbeBegin Field model begin offset
+   */
+  setEnd (fbeBegin) {
+    this._buffer.unshift(fbeBegin)
+  }
+
+  /**
+   * Set the struct value
+   * @this {!FieldModelOrderMessage}
+   * @param {!OrderMessage} fbeValue OrderMessage value
+   */
+  set (fbeValue) {
+    let fbeBegin = this.setBegin()
+    if (fbeBegin === 0) {
+      return
+    }
+
+    this.setFields(fbeValue)
+    this.setEnd(fbeBegin)
+  }
+
+  /**
+   * Set the struct fields values
+   * @this {!FieldModelOrderMessage}
+   * @param {OrderMessage} fbeValue OrderMessage value
+   */
+  setFields (fbeValue) {
+    this.body.set(fbeValue.body)
+  }
+}
+
+exports.FieldModelOrderMessage = FieldModelOrderMessage
+
+/**
+ * Fast Binary Encoding OrderMessage model
+ */
+class OrderMessageModel extends fbe.Model {
+  /**
+   * Initialize model with the given buffer
+   * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Read/Write buffer, defaults is new fbe.WriteBuffer()
+   * @constructor
+   */
+  constructor (buffer = new fbe.WriteBuffer()) {
+    super(buffer)
+    this._model = new FieldModelOrderMessage(this.buffer, 4)
+  }
+
+  /**
+   * Get the OrderMessage model
+   * @this {!OrderMessageModel}
+   * @returns {!FieldModelOrderMessage} model OrderMessage model
+   */
+  get model () {
+    return this._model
+  }
+
+  /**
+   * Get the model size
+   * @this {!OrderMessageModel}
+   * @returns {!number} Model size
+   */
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
+  }
+
+  /**
+   * Get the model type
+   * @this {!OrderMessageModel}
+   * @returns {!number} Model type
+   */
+  get fbeType () {
+    return OrderMessageModel.fbeType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!OrderMessageModel}
+   * @returns {!number} Model type
+   */
+  static get fbeType () {
+    return FieldModelOrderMessage.fbeType
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!OrderMessageModel}
+   * @returns {!boolean} Model valid state
+   */
+  verify () {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
+      return false
+    }
+
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
+      return false
+    }
+
+    return this.model.verify()
+  }
+
+  /**
+   * Create a new model (begin phase)
+   * @this {!OrderMessageModel}
+   * @returns {!number} Model begin offset
+   */
+  createBegin () {
+    return this.buffer.allocate(4 + this.model.fbeSize)
+  }
+
+  /**
+   * Create a new model (end phase)
+   * @this {!OrderMessageModel}
+   * @param {!number} fbeBegin Model begin offset
+   */
+  createEnd (fbeBegin) {
+    let fbeEnd = this.buffer.size
+    let fbeFullSize = fbeEnd - fbeBegin
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
+    return fbeFullSize
+  }
+
+  /**
+   * Serialize the struct value
+   * @this {!OrderMessageModel}
+   * @param {!OrderMessage} value OrderMessage value
+   * @return {!number} Model begin offset
+   */
+  serialize (value) {
+    let fbeBegin = this.createBegin()
+    this.model.set(value)
+    return this.createEnd(fbeBegin)
+  }
+
+  /**
+   * Deserialize the struct value
+   * @this {!OrderMessageModel}
+   * @param {!OrderMessage} value OrderMessage value, defaults is new OrderMessage()
+   * @return {!object} Deserialized OrderMessage value and its size
+   */
+  deserialize (value = new OrderMessage()) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
+      return { value: new OrderMessage(), size: 0 }
+    }
+
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
+      return { value: new OrderMessage(), size: 0 }
+    }
+
+    this.model.get(value)
+    return { value: value, size: fbeFullSize }
+  }
+
+  /**
+   * Move to the next struct value
+   * @this {!OrderMessageModel}
+   * @param {!number} prev Previous OrderMessage model size
+   */
+  next (prev) {
+    this.model.fbeShift(prev)
+  }
+}
+
+exports.OrderMessageModel = OrderMessageModel
+
+/**
+ * Fast Binary Encoding OrderMessage final model
+ */
+class FinalModelOrderMessage extends fbe.FinalModel {
+  /**
+   * Initialize final model with the given buffer and offset
+   * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Buffer
+   * @param {!number} offset Offset
+   * @constructor
+   */
+  constructor (buffer, offset) {
+    super(buffer, offset)
+    this._body = new FinalModelOrder(buffer, 0)
+  }
+
+  /**
+   * Get the body final model
+   * @this {!FinalModelOrderMessage}
+   * @returns {!FinalModelOrder} body final model
+   */
+  get body () {
+    return this._body
+  }
+
+  /**
+   * Get the allocation size
+   * @this {!FinalModelOrderMessage}
+   * @param {!OrderMessage} fbeValue OrderMessage value
+   * @returns {!number} Allocation size
+   */
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.body.fbeAllocationSize(fbeValue.body)
+  }
+
+  /**
+   * Get the final type
+   * @this {!FinalModelOrderMessage}
+   * @returns {!number} Final type
+   */
+  get fbeType () {
+    return FinalModelOrderMessage.fbeType
+  }
+
+  /**
+   * Get the final type (static)
+   * @this {!FinalModelOrderMessage}
+   * @returns {!number} Final type
+   */
+  static get fbeType () {
+    return 11
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!FinalModelOrderMessage}
+   * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
+   */
+  verify () {
+    this._buffer.shift(this.fbeOffset)
+    let fbeResult = this.verifyFields()
+    this._buffer.unshift(this.fbeOffset)
+    return fbeResult
+  }
+
+  /**
+   * Check if the struct fields are valid
+   * @this {!FinalModelOrderMessage}
+   * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
+   */
+  verifyFields () {
+    let fbeCurrentOffset = 0
+    let fbeFieldSize
+
+    this.body.fbeOffset = fbeCurrentOffset
+    fbeFieldSize = this.body.verify()
+    if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
+      return Number.MAX_SAFE_INTEGER
+    }
+    fbeCurrentOffset += fbeFieldSize
+
+    return fbeCurrentOffset
+  }
+
+  /**
+   * Get the struct value
+   * @this {!FinalModelOrderMessage}
+   * @param {!OrderMessage} fbeValue OrderMessage value, defaults is new OrderMessage()
+   * @returns {!object} Result struct value and its size
+   */
+  get (fbeValue = new OrderMessage()) {
+    this._buffer.shift(this.fbeOffset)
+    let fbeSize = this.getFields(fbeValue)
+    this._buffer.unshift(this.fbeOffset)
+    return { value: fbeValue, size: fbeSize }
+  }
+
+  /**
+   * Get the struct fields values
+   * @this {!FinalModelOrderMessage}
+   * @param {!OrderMessage} fbeValue OrderMessage value
+   * @returns {!number} Struct size
+   */
+  getFields (fbeValue) {
+    let fbeCurrentOffset = 0
+    let fbeCurrentSize = 0
+    let fbeResult
+
+    this.body.fbeOffset = fbeCurrentOffset
+    fbeResult = this.body.get()
+    fbeValue.body = fbeResult.value
+    // noinspection JSUnusedAssignment
+    fbeCurrentOffset += fbeResult.size
+    fbeCurrentSize += fbeResult.size
+
+    return fbeCurrentSize
+  }
+
+  /**
+   * Set the struct value
+   * @this {!FinalModelOrderMessage}
+   * @param {!OrderMessage} fbeValue OrderMessage value
+   * @returns {!number} Final model size
+   */
+  set (fbeValue) {
+    this._buffer.shift(this.fbeOffset)
+    let fbeSize = this.setFields(fbeValue)
+    this._buffer.unshift(this.fbeOffset)
+    return fbeSize
+  }
+
+  /**
+   * Set the struct fields values
+   * @this {!FinalModelOrderMessage}
+   * @param {OrderMessage} fbeValue OrderMessage value
+   * @returns {!number} Final model size
+   */
+  setFields (fbeValue) {
+    let fbeCurrentOffset = 0
+    let fbeCurrentSize = 0
+    let fbeFieldSize
+
+    this.body.fbeOffset = fbeCurrentOffset
+    fbeFieldSize = this.body.set(fbeValue.body)
+    // noinspection JSUnusedAssignment
+    fbeCurrentOffset += fbeFieldSize
+    fbeCurrentSize += fbeFieldSize
+
+    return fbeCurrentSize
+  }
+}
+
+exports.FinalModelOrderMessage = FinalModelOrderMessage
+
+/**
+ * Fast Binary Encoding OrderMessage final model
+ */
+class OrderMessageFinalModel extends fbe.Model {
+  /**
+   * Initialize final model with the given buffer
+   * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Read/Write buffer, defaults is new fbe.WriteBuffer()
+   * @constructor
+   */
+  constructor (buffer = new fbe.WriteBuffer()) {
+    super(buffer)
+    this._model = new FinalModelOrderMessage(this.buffer, 8)
+  }
+
+  /**
+   * Get the model type
+   * @this {!OrderMessageFinalModel}
+   * @returns {!number} Model type
+   */
+  get fbeType () {
+    return OrderMessageFinalModel.fbeType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!OrderMessageFinalModel}
+   * @returns {!number} Model type
+   */
+  static get fbeType () {
+    return FinalModelOrderMessage.fbeType
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!OrderMessageFinalModel}
+   * @returns {!boolean} Model valid state
+   */
+  verify () {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
+      return false
+    }
+
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
+      return false
+    }
+
+    return ((8 + this._model.verify()) === fbeStructSize)
+  }
+
+  /**
+   * Serialize the struct value
+   * @this {!OrderMessageFinalModel}
+   * @param {!OrderMessage} value OrderMessage value
+   * @return {!number} Struct size
+   */
+  serialize (value) {
+    let fbeInitialSize = this.buffer.size
+
+    let fbeStructType = this.fbeType
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
+    let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
+    console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
+      return 0
+    }
+
+    fbeStructSize = 8 + this._model.set(value)
+    this.buffer.resize(fbeInitialSize + fbeStructSize)
+
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
+
+    return fbeStructSize
+  }
+
+  /**
+   * Deserialize the struct value
+   * @this {!OrderMessageFinalModel}
+   * @param {!OrderMessage} value OrderMessage value, defaults is new OrderMessage()
+   * @return {!object} Deserialized OrderMessage value and its size
+   */
+  deserialize (value = new OrderMessage()) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
+      return { value: new OrderMessage(), size: 0 }
+    }
+
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
+    console.assert(((fbeStructSize > 0) && (fbeStructType === this.fbeType)), 'Model is broken!')
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
+      return { value: new OrderMessage(), size: 8 }
+    }
+
+    let fbeResult = this._model.get(value)
+    return { value: fbeResult.value, size: (8 + fbeResult.size) }
+  }
+
+  /**
+   * Move to the next struct value
+   * @this {!OrderMessageFinalModel}
+   * @param {!number} prev Previous OrderMessage model size
+   */
+  next (prev) {
+    this._model.fbeShift(prev)
+  }
+}
+
+exports.OrderMessageFinalModel = OrderMessageFinalModel
+
+/**
+ * BalanceMessage struct
+ */
+class BalanceMessage {
+  /**
+   * Initialize struct
+   * @param {!Balance=} body
+   * @constructor
+   */
+  constructor (argbody = new Balance()) {
+    this.body = argbody
+  }
+
+  /**
+   * Copy struct (shallow copy)
+   * @this {!BalanceMessage}
+   * @param {!BalanceMessage} other Other struct
+   * @returns {!BalanceMessage} This struct
+   */
+  copy (other) {
+    if (other.body != null) {
+      this.body = Balance.fromObject(other.body)
+    } else {
+      this.body = undefined
+    }
+    return this
+  }
+
+  /**
+   * Clone struct (deep clone)
+   * @this {!BalanceMessage}
+   * @returns {!BalanceMessage} Cloned struct
+   */
+  clone () {
+    // Serialize the struct to the FBE stream
+    let writer = new BalanceMessageModel(new fbe.WriteBuffer())
+    writer.serialize(this)
+
+    // Deserialize the struct from the FBE stream
+    let reader = new BalanceMessageModel(new fbe.ReadBuffer())
+    reader.attachBuffer(writer.buffer)
+    return reader.deserialize().value
+  }
+
+  /**
+   * Is this struct equal to other one?
+   * @this {!BalanceMessage}
+   * @param {!BalanceMessage} other Other struct
+   * @returns {boolean} Equal result
+   */
+  eq (other) {
+    if (!(other instanceof BalanceMessage)) {
+      throw new TypeError('Instance of BalanceMessage is required!')
+    }
+    return true
+  }
+
+  /**
+   * Convert struct to string
+   * @this {!BalanceMessage}
+   * @returns {!string} Struct value string
+   */
+  toString () {
+    let result = ''
+    result += 'BalanceMessage('
+    result += 'body='
+    result += this.body.toString()
+    result += ')'
+    return result
+  }
+
+  /**
+   * Inspect struct
+   * @this {!BalanceMessage}
+   * @returns {!string} Struct value string
+   */
+  [util.inspect.custom] () {
+    return this.toString()
+  }
+
+  /**
+   * Convert struct to JSON
+   * @this {!BalanceMessage}
+   * @returns {!object} Struct value for JSON
+   */
+  toJSON () {
+    return {
+      body: ((this.body != null) ? this.body : null)
+    }
+  }
+
+  /**
+   * Convert JSON to struct
+   * @param {!string} json JSON string
+   * @returns {!object} Struct value for JSON
+   */
+  static fromJSON (json) {
+    return BalanceMessage.fromObject(JSON.parse(json))
+  }
+
+  /**
+   * Create struct from object value
+   * @param {!BalanceMessage} other Object value
+   * @returns {!BalanceMessage} Created struct
+   */
+  static fromObject (other) {
+    return new BalanceMessage().copy(other)
+  }
+
+  /**
+   * Get the FBE type
+   * @this {!BalanceMessage}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return BalanceMessage.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!BalanceMessage}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 12
+  }
+}
+
+exports.BalanceMessage = BalanceMessage
+
+/**
+ * Fast Binary Encoding BalanceMessage field model
+ */
+class FieldModelBalanceMessage extends fbe.FieldModel {
+  /**
+   * Initialize field model with the given buffer and offset
+   * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Buffer
+   * @param {!number} offset Offset
+   * @constructor
+   */
+  constructor (buffer, offset) {
+    super(buffer, offset)
+    this._body = new FieldModelBalance(buffer, 4 + 4)
+  }
+
+  /**
+   * Get the body field model
+   * @this {!FieldModelBalanceMessage}
+   * @returns {!FieldModelBalance} body field model
+   */
+  get body () {
+    return this._body
+  }
+
+  /**
+   * Get the field size
+   * @this {!FieldModelBalanceMessage}
+   * @returns {!number} Field size
+   */
+  get fbeSize () {
+    return 4
+  }
+
+  /**
+   * Get the field body size
+   * @this {!FieldModelBalanceMessage}
+   * @returns {!number} Field body size
+   */
+  get fbeBody () {
+    return 4 + 4 + this.body.fbeSize
+  }
+
+  /**
+   * Get the field extra size
+   * @this {!FieldModelBalanceMessage}
+   * @returns {!number} Field extra size
+   */
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return 0
+    }
+
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
+    if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
+      return 0
+    }
+
+    this._buffer.shift(fbeStructOffset)
+
+    let fbeResult = this.fbeBody + this.body.fbeExtra
+
+    this._buffer.unshift(fbeStructOffset)
+
+    return fbeResult
+  }
+
+  /**
+   * Get the field type
+   * @this {!FieldModelBalanceMessage}
+   * @returns {!number} Field type
+   */
+  get fbeType () {
+    return FieldModelBalanceMessage.fbeType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelBalanceMessage}
+   * @returns {!number} Field type
+   */
+  static get fbeType () {
+    return 12
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!FieldModelBalanceMessage}
+   * @param {!boolean} fbeVerifyType Verify model type flag, defaults is true
+   * @returns {!boolean} Field model valid state
+   */
+  verify (fbeVerifyType = true) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return true
+    }
+
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
+    if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
+      return false
+    }
+
+    let fbeStructSize = this.readUInt32(fbeStructOffset)
+    if (fbeStructSize < (4 + 4)) {
+      return false
+    }
+
+    let fbeStructType = this.readUInt32(fbeStructOffset + 4)
+    if (fbeVerifyType && (fbeStructType !== this.fbeType)) {
+      return false
+    }
+
+    this._buffer.shift(fbeStructOffset)
+    let fbeResult = this.verifyFields(fbeStructSize)
+    this._buffer.unshift(fbeStructOffset)
+    return fbeResult
+  }
+
+  /**
+   * Check if the struct fields are valid
+   * @this {!FieldModelBalanceMessage}
+   * @param {!number} fbeStructSize FBE struct size
+   * @returns {!boolean} Field model valid state
+   */
+  verifyFields (fbeStructSize) {
+    let fbeCurrentSize = 4 + 4
+
+    if ((fbeCurrentSize + this.body.fbeSize) > fbeStructSize) {
+      return true
+    }
+    if (!this.body.verify()) {
+      return false
+    }
+    // noinspection JSUnusedAssignment
+    fbeCurrentSize += this.body.fbeSize
+
+    return true
+  }
+
+  /**
+   * Get the struct value (begin phase)
+   * @this {!FieldModelBalanceMessage}
+   * @returns {!number} Field model begin offset
+   */
+  getBegin () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return 0
+    }
+
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
+    console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
+    if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
+      return 0
+    }
+
+    let fbeStructSize = this.readUInt32(fbeStructOffset)
+    console.assert((fbeStructSize >= (4 + 4)), 'Model is broken!')
+    if (fbeStructSize < (4 + 4)) {
+      return 0
+    }
+
+    this._buffer.shift(fbeStructOffset)
+    return fbeStructOffset
+  }
+
+  /**
+   * Get the struct value (end phase)
+   * @this {!FieldModelBalanceMessage}
+   * @param {!number} fbeBegin Field model begin offset
+   */
+  getEnd (fbeBegin) {
+    this._buffer.unshift(fbeBegin)
+  }
+
+  /**
+   * Get the struct value
+   * @this {!FieldModelBalanceMessage}
+   * @param {!BalanceMessage} fbeValue Default value, defaults is new BalanceMessage()
+   * @returns {!BalanceMessage} BalanceMessage value
+   */
+  get (fbeValue = new BalanceMessage()) {
+    let fbeBegin = this.getBegin()
+    if (fbeBegin === 0) {
+      return fbeValue
+    }
+
+    let fbeStructSize = this.readUInt32(0)
+    this.getFields(fbeValue, fbeStructSize)
+    this.getEnd(fbeBegin)
+    return fbeValue
+  }
+
+  /**
+   * Get the struct fields values
+   * @this {!FieldModelBalanceMessage}
+   * @param {!BalanceMessage} fbeValue BalanceMessage value
+   * @param {!number} fbeStructSize Struct size
+   */
+  getFields (fbeValue, fbeStructSize) {
+    let fbeCurrentSize = 4 + 4
+
+    if ((fbeCurrentSize + this.body.fbeSize) <= fbeStructSize) {
+      fbeValue.body = this.body.get()
+    } else {
+      fbeValue.body = new Balance()
+    }
+    // noinspection JSUnusedAssignment
+    fbeCurrentSize += this.body.fbeSize
+  }
+
+  /**
+   * Set the struct value (begin phase)
+   * @this {!FieldModelBalanceMessage}
+   * @returns {!number} Field model begin offset
+   */
+  setBegin () {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return 0
+    }
+
+    let fbeStructSize = this.fbeBody
+    let fbeStructOffset = this._buffer.allocate(fbeStructSize) - this._buffer.offset
+    console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + fbeStructSize) <= this._buffer.size), 'Model is broken!')
+    if ((fbeStructOffset <= 0) || ((this._buffer.offset + fbeStructOffset + fbeStructSize) > this._buffer.size)) {
+      return 0
+    }
+
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
+    this.writeUInt32(fbeStructOffset, fbeStructSize)
+    this.writeUInt32(fbeStructOffset + 4, this.fbeType)
+
+    this._buffer.shift(fbeStructOffset)
+    return fbeStructOffset
+  }
+
+  /**
+   * Set the struct value (end phase)
+   * @this {!FieldModelBalanceMessage}
+   * @param {!number} fbeBegin Field model begin offset
+   */
+  setEnd (fbeBegin) {
+    this._buffer.unshift(fbeBegin)
+  }
+
+  /**
+   * Set the struct value
+   * @this {!FieldModelBalanceMessage}
+   * @param {!BalanceMessage} fbeValue BalanceMessage value
+   */
+  set (fbeValue) {
+    let fbeBegin = this.setBegin()
+    if (fbeBegin === 0) {
+      return
+    }
+
+    this.setFields(fbeValue)
+    this.setEnd(fbeBegin)
+  }
+
+  /**
+   * Set the struct fields values
+   * @this {!FieldModelBalanceMessage}
+   * @param {BalanceMessage} fbeValue BalanceMessage value
+   */
+  setFields (fbeValue) {
+    this.body.set(fbeValue.body)
+  }
+}
+
+exports.FieldModelBalanceMessage = FieldModelBalanceMessage
+
+/**
+ * Fast Binary Encoding BalanceMessage model
+ */
+class BalanceMessageModel extends fbe.Model {
+  /**
+   * Initialize model with the given buffer
+   * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Read/Write buffer, defaults is new fbe.WriteBuffer()
+   * @constructor
+   */
+  constructor (buffer = new fbe.WriteBuffer()) {
+    super(buffer)
+    this._model = new FieldModelBalanceMessage(this.buffer, 4)
+  }
+
+  /**
+   * Get the BalanceMessage model
+   * @this {!BalanceMessageModel}
+   * @returns {!FieldModelBalanceMessage} model BalanceMessage model
+   */
+  get model () {
+    return this._model
+  }
+
+  /**
+   * Get the model size
+   * @this {!BalanceMessageModel}
+   * @returns {!number} Model size
+   */
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
+  }
+
+  /**
+   * Get the model type
+   * @this {!BalanceMessageModel}
+   * @returns {!number} Model type
+   */
+  get fbeType () {
+    return BalanceMessageModel.fbeType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!BalanceMessageModel}
+   * @returns {!number} Model type
+   */
+  static get fbeType () {
+    return FieldModelBalanceMessage.fbeType
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!BalanceMessageModel}
+   * @returns {!boolean} Model valid state
+   */
+  verify () {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
+      return false
+    }
+
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
+      return false
+    }
+
+    return this.model.verify()
+  }
+
+  /**
+   * Create a new model (begin phase)
+   * @this {!BalanceMessageModel}
+   * @returns {!number} Model begin offset
+   */
+  createBegin () {
+    return this.buffer.allocate(4 + this.model.fbeSize)
+  }
+
+  /**
+   * Create a new model (end phase)
+   * @this {!BalanceMessageModel}
+   * @param {!number} fbeBegin Model begin offset
+   */
+  createEnd (fbeBegin) {
+    let fbeEnd = this.buffer.size
+    let fbeFullSize = fbeEnd - fbeBegin
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
+    return fbeFullSize
+  }
+
+  /**
+   * Serialize the struct value
+   * @this {!BalanceMessageModel}
+   * @param {!BalanceMessage} value BalanceMessage value
+   * @return {!number} Model begin offset
+   */
+  serialize (value) {
+    let fbeBegin = this.createBegin()
+    this.model.set(value)
+    return this.createEnd(fbeBegin)
+  }
+
+  /**
+   * Deserialize the struct value
+   * @this {!BalanceMessageModel}
+   * @param {!BalanceMessage} value BalanceMessage value, defaults is new BalanceMessage()
+   * @return {!object} Deserialized BalanceMessage value and its size
+   */
+  deserialize (value = new BalanceMessage()) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
+      return { value: new BalanceMessage(), size: 0 }
+    }
+
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
+      return { value: new BalanceMessage(), size: 0 }
+    }
+
+    this.model.get(value)
+    return { value: value, size: fbeFullSize }
+  }
+
+  /**
+   * Move to the next struct value
+   * @this {!BalanceMessageModel}
+   * @param {!number} prev Previous BalanceMessage model size
+   */
+  next (prev) {
+    this.model.fbeShift(prev)
+  }
+}
+
+exports.BalanceMessageModel = BalanceMessageModel
+
+/**
+ * Fast Binary Encoding BalanceMessage final model
+ */
+class FinalModelBalanceMessage extends fbe.FinalModel {
+  /**
+   * Initialize final model with the given buffer and offset
+   * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Buffer
+   * @param {!number} offset Offset
+   * @constructor
+   */
+  constructor (buffer, offset) {
+    super(buffer, offset)
+    this._body = new FinalModelBalance(buffer, 0)
+  }
+
+  /**
+   * Get the body final model
+   * @this {!FinalModelBalanceMessage}
+   * @returns {!FinalModelBalance} body final model
+   */
+  get body () {
+    return this._body
+  }
+
+  /**
+   * Get the allocation size
+   * @this {!FinalModelBalanceMessage}
+   * @param {!BalanceMessage} fbeValue BalanceMessage value
+   * @returns {!number} Allocation size
+   */
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.body.fbeAllocationSize(fbeValue.body)
+  }
+
+  /**
+   * Get the final type
+   * @this {!FinalModelBalanceMessage}
+   * @returns {!number} Final type
+   */
+  get fbeType () {
+    return FinalModelBalanceMessage.fbeType
+  }
+
+  /**
+   * Get the final type (static)
+   * @this {!FinalModelBalanceMessage}
+   * @returns {!number} Final type
+   */
+  static get fbeType () {
+    return 12
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!FinalModelBalanceMessage}
+   * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
+   */
+  verify () {
+    this._buffer.shift(this.fbeOffset)
+    let fbeResult = this.verifyFields()
+    this._buffer.unshift(this.fbeOffset)
+    return fbeResult
+  }
+
+  /**
+   * Check if the struct fields are valid
+   * @this {!FinalModelBalanceMessage}
+   * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
+   */
+  verifyFields () {
+    let fbeCurrentOffset = 0
+    let fbeFieldSize
+
+    this.body.fbeOffset = fbeCurrentOffset
+    fbeFieldSize = this.body.verify()
+    if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
+      return Number.MAX_SAFE_INTEGER
+    }
+    fbeCurrentOffset += fbeFieldSize
+
+    return fbeCurrentOffset
+  }
+
+  /**
+   * Get the struct value
+   * @this {!FinalModelBalanceMessage}
+   * @param {!BalanceMessage} fbeValue BalanceMessage value, defaults is new BalanceMessage()
+   * @returns {!object} Result struct value and its size
+   */
+  get (fbeValue = new BalanceMessage()) {
+    this._buffer.shift(this.fbeOffset)
+    let fbeSize = this.getFields(fbeValue)
+    this._buffer.unshift(this.fbeOffset)
+    return { value: fbeValue, size: fbeSize }
+  }
+
+  /**
+   * Get the struct fields values
+   * @this {!FinalModelBalanceMessage}
+   * @param {!BalanceMessage} fbeValue BalanceMessage value
+   * @returns {!number} Struct size
+   */
+  getFields (fbeValue) {
+    let fbeCurrentOffset = 0
+    let fbeCurrentSize = 0
+    let fbeResult
+
+    this.body.fbeOffset = fbeCurrentOffset
+    fbeResult = this.body.get()
+    fbeValue.body = fbeResult.value
+    // noinspection JSUnusedAssignment
+    fbeCurrentOffset += fbeResult.size
+    fbeCurrentSize += fbeResult.size
+
+    return fbeCurrentSize
+  }
+
+  /**
+   * Set the struct value
+   * @this {!FinalModelBalanceMessage}
+   * @param {!BalanceMessage} fbeValue BalanceMessage value
+   * @returns {!number} Final model size
+   */
+  set (fbeValue) {
+    this._buffer.shift(this.fbeOffset)
+    let fbeSize = this.setFields(fbeValue)
+    this._buffer.unshift(this.fbeOffset)
+    return fbeSize
+  }
+
+  /**
+   * Set the struct fields values
+   * @this {!FinalModelBalanceMessage}
+   * @param {BalanceMessage} fbeValue BalanceMessage value
+   * @returns {!number} Final model size
+   */
+  setFields (fbeValue) {
+    let fbeCurrentOffset = 0
+    let fbeCurrentSize = 0
+    let fbeFieldSize
+
+    this.body.fbeOffset = fbeCurrentOffset
+    fbeFieldSize = this.body.set(fbeValue.body)
+    // noinspection JSUnusedAssignment
+    fbeCurrentOffset += fbeFieldSize
+    fbeCurrentSize += fbeFieldSize
+
+    return fbeCurrentSize
+  }
+}
+
+exports.FinalModelBalanceMessage = FinalModelBalanceMessage
+
+/**
+ * Fast Binary Encoding BalanceMessage final model
+ */
+class BalanceMessageFinalModel extends fbe.Model {
+  /**
+   * Initialize final model with the given buffer
+   * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Read/Write buffer, defaults is new fbe.WriteBuffer()
+   * @constructor
+   */
+  constructor (buffer = new fbe.WriteBuffer()) {
+    super(buffer)
+    this._model = new FinalModelBalanceMessage(this.buffer, 8)
+  }
+
+  /**
+   * Get the model type
+   * @this {!BalanceMessageFinalModel}
+   * @returns {!number} Model type
+   */
+  get fbeType () {
+    return BalanceMessageFinalModel.fbeType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!BalanceMessageFinalModel}
+   * @returns {!number} Model type
+   */
+  static get fbeType () {
+    return FinalModelBalanceMessage.fbeType
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!BalanceMessageFinalModel}
+   * @returns {!boolean} Model valid state
+   */
+  verify () {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
+      return false
+    }
+
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
+      return false
+    }
+
+    return ((8 + this._model.verify()) === fbeStructSize)
+  }
+
+  /**
+   * Serialize the struct value
+   * @this {!BalanceMessageFinalModel}
+   * @param {!BalanceMessage} value BalanceMessage value
+   * @return {!number} Struct size
+   */
+  serialize (value) {
+    let fbeInitialSize = this.buffer.size
+
+    let fbeStructType = this.fbeType
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
+    let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
+    console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
+      return 0
+    }
+
+    fbeStructSize = 8 + this._model.set(value)
+    this.buffer.resize(fbeInitialSize + fbeStructSize)
+
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
+
+    return fbeStructSize
+  }
+
+  /**
+   * Deserialize the struct value
+   * @this {!BalanceMessageFinalModel}
+   * @param {!BalanceMessage} value BalanceMessage value, defaults is new BalanceMessage()
+   * @return {!object} Deserialized BalanceMessage value and its size
+   */
+  deserialize (value = new BalanceMessage()) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
+      return { value: new BalanceMessage(), size: 0 }
+    }
+
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
+    console.assert(((fbeStructSize > 0) && (fbeStructType === this.fbeType)), 'Model is broken!')
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
+      return { value: new BalanceMessage(), size: 8 }
+    }
+
+    let fbeResult = this._model.get(value)
+    return { value: fbeResult.value, size: (8 + fbeResult.size) }
+  }
+
+  /**
+   * Move to the next struct value
+   * @this {!BalanceMessageFinalModel}
+   * @param {!number} prev Previous BalanceMessage model size
+   */
+  next (prev) {
+    this._model.fbeShift(prev)
+  }
+}
+
+exports.BalanceMessageFinalModel = BalanceMessageFinalModel
+
+/**
+ * AccountMessage struct
+ */
+class AccountMessage {
+  /**
+   * Initialize struct
+   * @param {!Account=} body
+   * @constructor
+   */
+  constructor (argbody = new Account()) {
+    this.body = argbody
+  }
+
+  /**
+   * Copy struct (shallow copy)
+   * @this {!AccountMessage}
+   * @param {!AccountMessage} other Other struct
+   * @returns {!AccountMessage} This struct
+   */
+  copy (other) {
+    if (other.body != null) {
+      this.body = Account.fromObject(other.body)
+    } else {
+      this.body = undefined
+    }
+    return this
+  }
+
+  /**
+   * Clone struct (deep clone)
+   * @this {!AccountMessage}
+   * @returns {!AccountMessage} Cloned struct
+   */
+  clone () {
+    // Serialize the struct to the FBE stream
+    let writer = new AccountMessageModel(new fbe.WriteBuffer())
+    writer.serialize(this)
+
+    // Deserialize the struct from the FBE stream
+    let reader = new AccountMessageModel(new fbe.ReadBuffer())
+    reader.attachBuffer(writer.buffer)
+    return reader.deserialize().value
+  }
+
+  /**
+   * Is this struct equal to other one?
+   * @this {!AccountMessage}
+   * @param {!AccountMessage} other Other struct
+   * @returns {boolean} Equal result
+   */
+  eq (other) {
+    if (!(other instanceof AccountMessage)) {
+      throw new TypeError('Instance of AccountMessage is required!')
+    }
+    return true
+  }
+
+  /**
+   * Convert struct to string
+   * @this {!AccountMessage}
+   * @returns {!string} Struct value string
+   */
+  toString () {
+    let result = ''
+    result += 'AccountMessage('
+    result += 'body='
+    result += this.body.toString()
+    result += ')'
+    return result
+  }
+
+  /**
+   * Inspect struct
+   * @this {!AccountMessage}
+   * @returns {!string} Struct value string
+   */
+  [util.inspect.custom] () {
+    return this.toString()
+  }
+
+  /**
+   * Convert struct to JSON
+   * @this {!AccountMessage}
+   * @returns {!object} Struct value for JSON
+   */
+  toJSON () {
+    return {
+      body: ((this.body != null) ? this.body : null)
+    }
+  }
+
+  /**
+   * Convert JSON to struct
+   * @param {!string} json JSON string
+   * @returns {!object} Struct value for JSON
+   */
+  static fromJSON (json) {
+    return AccountMessage.fromObject(JSON.parse(json))
+  }
+
+  /**
+   * Create struct from object value
+   * @param {!AccountMessage} other Object value
+   * @returns {!AccountMessage} Created struct
+   */
+  static fromObject (other) {
+    return new AccountMessage().copy(other)
+  }
+
+  /**
+   * Get the FBE type
+   * @this {!AccountMessage}
+   * @returns {!number} FBE type
+   */
+  get fbeType () {
+    return AccountMessage.fbeType
+  }
+
+  /**
+   * Get the FBE type (static)
+   * @this {!AccountMessage}
+   * @returns {!number} FBE type
+   */
+  static get fbeType () {
+    return 13
+  }
+}
+
+exports.AccountMessage = AccountMessage
+
+/**
+ * Fast Binary Encoding AccountMessage field model
+ */
+class FieldModelAccountMessage extends fbe.FieldModel {
+  /**
+   * Initialize field model with the given buffer and offset
+   * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Buffer
+   * @param {!number} offset Offset
+   * @constructor
+   */
+  constructor (buffer, offset) {
+    super(buffer, offset)
+    this._body = new FieldModelAccount(buffer, 4 + 4)
+  }
+
+  /**
+   * Get the body field model
+   * @this {!FieldModelAccountMessage}
+   * @returns {!FieldModelAccount} body field model
+   */
+  get body () {
+    return this._body
+  }
+
+  /**
+   * Get the field size
+   * @this {!FieldModelAccountMessage}
+   * @returns {!number} Field size
+   */
+  get fbeSize () {
+    return 4
+  }
+
+  /**
+   * Get the field body size
+   * @this {!FieldModelAccountMessage}
+   * @returns {!number} Field body size
+   */
+  get fbeBody () {
+    return 4 + 4 + this.body.fbeSize
+  }
+
+  /**
+   * Get the field extra size
+   * @this {!FieldModelAccountMessage}
+   * @returns {!number} Field extra size
+   */
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return 0
+    }
+
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
+    if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
+      return 0
+    }
+
+    this._buffer.shift(fbeStructOffset)
+
+    let fbeResult = this.fbeBody + this.body.fbeExtra
+
+    this._buffer.unshift(fbeStructOffset)
+
+    return fbeResult
+  }
+
+  /**
+   * Get the field type
+   * @this {!FieldModelAccountMessage}
+   * @returns {!number} Field type
+   */
+  get fbeType () {
+    return FieldModelAccountMessage.fbeType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelAccountMessage}
+   * @returns {!number} Field type
+   */
+  static get fbeType () {
+    return 13
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!FieldModelAccountMessage}
+   * @param {!boolean} fbeVerifyType Verify model type flag, defaults is true
+   * @returns {!boolean} Field model valid state
+   */
+  verify (fbeVerifyType = true) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return true
+    }
+
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
+    if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
+      return false
+    }
+
+    let fbeStructSize = this.readUInt32(fbeStructOffset)
+    if (fbeStructSize < (4 + 4)) {
+      return false
+    }
+
+    let fbeStructType = this.readUInt32(fbeStructOffset + 4)
+    if (fbeVerifyType && (fbeStructType !== this.fbeType)) {
+      return false
+    }
+
+    this._buffer.shift(fbeStructOffset)
+    let fbeResult = this.verifyFields(fbeStructSize)
+    this._buffer.unshift(fbeStructOffset)
+    return fbeResult
+  }
+
+  /**
+   * Check if the struct fields are valid
+   * @this {!FieldModelAccountMessage}
+   * @param {!number} fbeStructSize FBE struct size
+   * @returns {!boolean} Field model valid state
+   */
+  verifyFields (fbeStructSize) {
+    let fbeCurrentSize = 4 + 4
+
+    if ((fbeCurrentSize + this.body.fbeSize) > fbeStructSize) {
+      return true
+    }
+    if (!this.body.verify()) {
+      return false
+    }
+    // noinspection JSUnusedAssignment
+    fbeCurrentSize += this.body.fbeSize
+
+    return true
+  }
+
+  /**
+   * Get the struct value (begin phase)
+   * @this {!FieldModelAccountMessage}
+   * @returns {!number} Field model begin offset
+   */
+  getBegin () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return 0
+    }
+
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
+    console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
+    if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
+      return 0
+    }
+
+    let fbeStructSize = this.readUInt32(fbeStructOffset)
+    console.assert((fbeStructSize >= (4 + 4)), 'Model is broken!')
+    if (fbeStructSize < (4 + 4)) {
+      return 0
+    }
+
+    this._buffer.shift(fbeStructOffset)
+    return fbeStructOffset
+  }
+
+  /**
+   * Get the struct value (end phase)
+   * @this {!FieldModelAccountMessage}
+   * @param {!number} fbeBegin Field model begin offset
+   */
+  getEnd (fbeBegin) {
+    this._buffer.unshift(fbeBegin)
+  }
+
+  /**
+   * Get the struct value
+   * @this {!FieldModelAccountMessage}
+   * @param {!AccountMessage} fbeValue Default value, defaults is new AccountMessage()
+   * @returns {!AccountMessage} AccountMessage value
+   */
+  get (fbeValue = new AccountMessage()) {
+    let fbeBegin = this.getBegin()
+    if (fbeBegin === 0) {
+      return fbeValue
+    }
+
+    let fbeStructSize = this.readUInt32(0)
+    this.getFields(fbeValue, fbeStructSize)
+    this.getEnd(fbeBegin)
+    return fbeValue
+  }
+
+  /**
+   * Get the struct fields values
+   * @this {!FieldModelAccountMessage}
+   * @param {!AccountMessage} fbeValue AccountMessage value
+   * @param {!number} fbeStructSize Struct size
+   */
+  getFields (fbeValue, fbeStructSize) {
+    let fbeCurrentSize = 4 + 4
+
+    if ((fbeCurrentSize + this.body.fbeSize) <= fbeStructSize) {
+      fbeValue.body = this.body.get()
+    } else {
+      fbeValue.body = new Account()
+    }
+    // noinspection JSUnusedAssignment
+    fbeCurrentSize += this.body.fbeSize
+  }
+
+  /**
+   * Set the struct value (begin phase)
+   * @this {!FieldModelAccountMessage}
+   * @returns {!number} Field model begin offset
+   */
+  setBegin () {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return 0
+    }
+
+    let fbeStructSize = this.fbeBody
+    let fbeStructOffset = this._buffer.allocate(fbeStructSize) - this._buffer.offset
+    console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + fbeStructSize) <= this._buffer.size), 'Model is broken!')
+    if ((fbeStructOffset <= 0) || ((this._buffer.offset + fbeStructOffset + fbeStructSize) > this._buffer.size)) {
+      return 0
+    }
+
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
+    this.writeUInt32(fbeStructOffset, fbeStructSize)
+    this.writeUInt32(fbeStructOffset + 4, this.fbeType)
+
+    this._buffer.shift(fbeStructOffset)
+    return fbeStructOffset
+  }
+
+  /**
+   * Set the struct value (end phase)
+   * @this {!FieldModelAccountMessage}
+   * @param {!number} fbeBegin Field model begin offset
+   */
+  setEnd (fbeBegin) {
+    this._buffer.unshift(fbeBegin)
+  }
+
+  /**
+   * Set the struct value
+   * @this {!FieldModelAccountMessage}
+   * @param {!AccountMessage} fbeValue AccountMessage value
+   */
+  set (fbeValue) {
+    let fbeBegin = this.setBegin()
+    if (fbeBegin === 0) {
+      return
+    }
+
+    this.setFields(fbeValue)
+    this.setEnd(fbeBegin)
+  }
+
+  /**
+   * Set the struct fields values
+   * @this {!FieldModelAccountMessage}
+   * @param {AccountMessage} fbeValue AccountMessage value
+   */
+  setFields (fbeValue) {
+    this.body.set(fbeValue.body)
+  }
+}
+
+exports.FieldModelAccountMessage = FieldModelAccountMessage
+
+/**
+ * Fast Binary Encoding AccountMessage model
+ */
+class AccountMessageModel extends fbe.Model {
+  /**
+   * Initialize model with the given buffer
+   * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Read/Write buffer, defaults is new fbe.WriteBuffer()
+   * @constructor
+   */
+  constructor (buffer = new fbe.WriteBuffer()) {
+    super(buffer)
+    this._model = new FieldModelAccountMessage(this.buffer, 4)
+  }
+
+  /**
+   * Get the AccountMessage model
+   * @this {!AccountMessageModel}
+   * @returns {!FieldModelAccountMessage} model AccountMessage model
+   */
+  get model () {
+    return this._model
+  }
+
+  /**
+   * Get the model size
+   * @this {!AccountMessageModel}
+   * @returns {!number} Model size
+   */
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
+  }
+
+  /**
+   * Get the model type
+   * @this {!AccountMessageModel}
+   * @returns {!number} Model type
+   */
+  get fbeType () {
+    return AccountMessageModel.fbeType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!AccountMessageModel}
+   * @returns {!number} Model type
+   */
+  static get fbeType () {
+    return FieldModelAccountMessage.fbeType
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!AccountMessageModel}
+   * @returns {!boolean} Model valid state
+   */
+  verify () {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
+      return false
+    }
+
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
+      return false
+    }
+
+    return this.model.verify()
+  }
+
+  /**
+   * Create a new model (begin phase)
+   * @this {!AccountMessageModel}
+   * @returns {!number} Model begin offset
+   */
+  createBegin () {
+    return this.buffer.allocate(4 + this.model.fbeSize)
+  }
+
+  /**
+   * Create a new model (end phase)
+   * @this {!AccountMessageModel}
+   * @param {!number} fbeBegin Model begin offset
+   */
+  createEnd (fbeBegin) {
+    let fbeEnd = this.buffer.size
+    let fbeFullSize = fbeEnd - fbeBegin
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
+    return fbeFullSize
+  }
+
+  /**
+   * Serialize the struct value
+   * @this {!AccountMessageModel}
+   * @param {!AccountMessage} value AccountMessage value
+   * @return {!number} Model begin offset
+   */
+  serialize (value) {
+    let fbeBegin = this.createBegin()
+    this.model.set(value)
+    return this.createEnd(fbeBegin)
+  }
+
+  /**
+   * Deserialize the struct value
+   * @this {!AccountMessageModel}
+   * @param {!AccountMessage} value AccountMessage value, defaults is new AccountMessage()
+   * @return {!object} Deserialized AccountMessage value and its size
+   */
+  deserialize (value = new AccountMessage()) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
+      return { value: new AccountMessage(), size: 0 }
+    }
+
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
+      return { value: new AccountMessage(), size: 0 }
+    }
+
+    this.model.get(value)
+    return { value: value, size: fbeFullSize }
+  }
+
+  /**
+   * Move to the next struct value
+   * @this {!AccountMessageModel}
+   * @param {!number} prev Previous AccountMessage model size
+   */
+  next (prev) {
+    this.model.fbeShift(prev)
+  }
+}
+
+exports.AccountMessageModel = AccountMessageModel
+
+/**
+ * Fast Binary Encoding AccountMessage final model
+ */
+class FinalModelAccountMessage extends fbe.FinalModel {
+  /**
+   * Initialize final model with the given buffer and offset
+   * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Buffer
+   * @param {!number} offset Offset
+   * @constructor
+   */
+  constructor (buffer, offset) {
+    super(buffer, offset)
+    this._body = new FinalModelAccount(buffer, 0)
+  }
+
+  /**
+   * Get the body final model
+   * @this {!FinalModelAccountMessage}
+   * @returns {!FinalModelAccount} body final model
+   */
+  get body () {
+    return this._body
+  }
+
+  /**
+   * Get the allocation size
+   * @this {!FinalModelAccountMessage}
+   * @param {!AccountMessage} fbeValue AccountMessage value
+   * @returns {!number} Allocation size
+   */
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.body.fbeAllocationSize(fbeValue.body)
+  }
+
+  /**
+   * Get the final type
+   * @this {!FinalModelAccountMessage}
+   * @returns {!number} Final type
+   */
+  get fbeType () {
+    return FinalModelAccountMessage.fbeType
+  }
+
+  /**
+   * Get the final type (static)
+   * @this {!FinalModelAccountMessage}
+   * @returns {!number} Final type
+   */
+  static get fbeType () {
+    return 13
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!FinalModelAccountMessage}
+   * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
+   */
+  verify () {
+    this._buffer.shift(this.fbeOffset)
+    let fbeResult = this.verifyFields()
+    this._buffer.unshift(this.fbeOffset)
+    return fbeResult
+  }
+
+  /**
+   * Check if the struct fields are valid
+   * @this {!FinalModelAccountMessage}
+   * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
+   */
+  verifyFields () {
+    let fbeCurrentOffset = 0
+    let fbeFieldSize
+
+    this.body.fbeOffset = fbeCurrentOffset
+    fbeFieldSize = this.body.verify()
+    if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
+      return Number.MAX_SAFE_INTEGER
+    }
+    fbeCurrentOffset += fbeFieldSize
+
+    return fbeCurrentOffset
+  }
+
+  /**
+   * Get the struct value
+   * @this {!FinalModelAccountMessage}
+   * @param {!AccountMessage} fbeValue AccountMessage value, defaults is new AccountMessage()
+   * @returns {!object} Result struct value and its size
+   */
+  get (fbeValue = new AccountMessage()) {
+    this._buffer.shift(this.fbeOffset)
+    let fbeSize = this.getFields(fbeValue)
+    this._buffer.unshift(this.fbeOffset)
+    return { value: fbeValue, size: fbeSize }
+  }
+
+  /**
+   * Get the struct fields values
+   * @this {!FinalModelAccountMessage}
+   * @param {!AccountMessage} fbeValue AccountMessage value
+   * @returns {!number} Struct size
+   */
+  getFields (fbeValue) {
+    let fbeCurrentOffset = 0
+    let fbeCurrentSize = 0
+    let fbeResult
+
+    this.body.fbeOffset = fbeCurrentOffset
+    fbeResult = this.body.get()
+    fbeValue.body = fbeResult.value
+    // noinspection JSUnusedAssignment
+    fbeCurrentOffset += fbeResult.size
+    fbeCurrentSize += fbeResult.size
+
+    return fbeCurrentSize
+  }
+
+  /**
+   * Set the struct value
+   * @this {!FinalModelAccountMessage}
+   * @param {!AccountMessage} fbeValue AccountMessage value
+   * @returns {!number} Final model size
+   */
+  set (fbeValue) {
+    this._buffer.shift(this.fbeOffset)
+    let fbeSize = this.setFields(fbeValue)
+    this._buffer.unshift(this.fbeOffset)
+    return fbeSize
+  }
+
+  /**
+   * Set the struct fields values
+   * @this {!FinalModelAccountMessage}
+   * @param {AccountMessage} fbeValue AccountMessage value
+   * @returns {!number} Final model size
+   */
+  setFields (fbeValue) {
+    let fbeCurrentOffset = 0
+    let fbeCurrentSize = 0
+    let fbeFieldSize
+
+    this.body.fbeOffset = fbeCurrentOffset
+    fbeFieldSize = this.body.set(fbeValue.body)
+    // noinspection JSUnusedAssignment
+    fbeCurrentOffset += fbeFieldSize
+    fbeCurrentSize += fbeFieldSize
+
+    return fbeCurrentSize
+  }
+}
+
+exports.FinalModelAccountMessage = FinalModelAccountMessage
+
+/**
+ * Fast Binary Encoding AccountMessage final model
+ */
+class AccountMessageFinalModel extends fbe.Model {
+  /**
+   * Initialize final model with the given buffer
+   * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Read/Write buffer, defaults is new fbe.WriteBuffer()
+   * @constructor
+   */
+  constructor (buffer = new fbe.WriteBuffer()) {
+    super(buffer)
+    this._model = new FinalModelAccountMessage(this.buffer, 8)
+  }
+
+  /**
+   * Get the model type
+   * @this {!AccountMessageFinalModel}
+   * @returns {!number} Model type
+   */
+  get fbeType () {
+    return AccountMessageFinalModel.fbeType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!AccountMessageFinalModel}
+   * @returns {!number} Model type
+   */
+  static get fbeType () {
+    return FinalModelAccountMessage.fbeType
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!AccountMessageFinalModel}
+   * @returns {!boolean} Model valid state
+   */
+  verify () {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
+      return false
+    }
+
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
+      return false
+    }
+
+    return ((8 + this._model.verify()) === fbeStructSize)
+  }
+
+  /**
+   * Serialize the struct value
+   * @this {!AccountMessageFinalModel}
+   * @param {!AccountMessage} value AccountMessage value
+   * @return {!number} Struct size
+   */
+  serialize (value) {
+    let fbeInitialSize = this.buffer.size
+
+    let fbeStructType = this.fbeType
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
+    let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
+    console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
+      return 0
+    }
+
+    fbeStructSize = 8 + this._model.set(value)
+    this.buffer.resize(fbeInitialSize + fbeStructSize)
+
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
+
+    return fbeStructSize
+  }
+
+  /**
+   * Deserialize the struct value
+   * @this {!AccountMessageFinalModel}
+   * @param {!AccountMessage} value AccountMessage value, defaults is new AccountMessage()
+   * @return {!object} Deserialized AccountMessage value and its size
+   */
+  deserialize (value = new AccountMessage()) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
+      return { value: new AccountMessage(), size: 0 }
+    }
+
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
+    console.assert(((fbeStructSize > 0) && (fbeStructType === this.fbeType)), 'Model is broken!')
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
+      return { value: new AccountMessage(), size: 8 }
+    }
+
+    let fbeResult = this._model.get(value)
+    return { value: fbeResult.value, size: (8 + fbeResult.size) }
+  }
+
+  /**
+   * Move to the next struct value
+   * @this {!AccountMessageFinalModel}
+   * @param {!number} prev Previous AccountMessage model size
+   */
+  next (prev) {
+    this._model.fbeShift(prev)
+  }
+}
+
+exports.AccountMessageFinalModel = AccountMessageFinalModel
+
 // Protocol major version
 const ProtocolVersionMajor = 0
 // Protocol minor version
@@ -4025,9 +6476,9 @@ class Sender extends fbe.Sender {
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, false)
     this._protoSender = new proto.Sender(this.buffer)
-    this._OrderModel = new OrderModel(this.buffer)
-    this._BalanceModel = new BalanceModel(this.buffer)
-    this._AccountModel = new AccountModel(this.buffer)
+    this._OrderMessageModel = new OrderMessageModel(this.buffer)
+    this._BalanceMessageModel = new BalanceMessageModel(this.buffer)
+    this._AccountMessageModel = new AccountMessageModel(this.buffer)
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
   }
@@ -4046,30 +6497,30 @@ class Sender extends fbe.Sender {
   // Sender models accessors
 
   /**
-   * Get Order model
+   * Get OrderMessage model
    * @this {!Sender}
-   * @returns {!OrderModel} Order model
+   * @returns {!OrderMessageModel} OrderMessage model
    */
-  get OrderModel () {
-    return this._OrderModel
+  get OrderMessageModel () {
+    return this._OrderMessageModel
   }
 
   /**
-   * Get Balance model
+   * Get BalanceMessage model
    * @this {!Sender}
-   * @returns {!BalanceModel} Balance model
+   * @returns {!BalanceMessageModel} BalanceMessage model
    */
-  get BalanceModel () {
-    return this._BalanceModel
+  get BalanceMessageModel () {
+    return this._BalanceMessageModel
   }
 
   /**
-   * Get Account model
+   * Get AccountMessage model
    * @this {!Sender}
-   * @returns {!AccountModel} Account model
+   * @returns {!AccountMessageModel} AccountMessage model
    */
-  get AccountModel () {
-    return this._AccountModel
+  get AccountMessageModel () {
+    return this._AccountMessageModel
   }
 
   // Send methods
@@ -4081,14 +6532,14 @@ class Sender extends fbe.Sender {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof Order) {
-      return this.send_Order(value)
+    if ((value instanceof OrderMessage) && (value.fbeType === this.OrderMessageModel.fbeType)) {
+      return this.send_OrderMessage(value)
     }
-    if (value instanceof Balance) {
-      return this.send_Balance(value)
+    if ((value instanceof BalanceMessage) && (value.fbeType === this.BalanceMessageModel.fbeType)) {
+      return this.send_BalanceMessage(value)
     }
-    if (value instanceof Account) {
-      return this.send_Account(value)
+    if ((value instanceof AccountMessage) && (value.fbeType === this.AccountMessageModel.fbeType)) {
+      return this.send_AccountMessage(value)
     }
     let result = 0
     result = this._protoSender.send(value)
@@ -4099,16 +6550,16 @@ class Sender extends fbe.Sender {
   }
 
   /**
-   * Send Order value
+   * Send OrderMessage value
    * @this {!Sender}
-   * @param {!Order} value Order value to send
+   * @param {!OrderMessage} value OrderMessage value to send
    * @returns {!number} Sent bytes
    */
-  send_Order (value) { // eslint-disable-line
+  send_OrderMessage (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.OrderModel.serialize(value)
-    console.assert((serialized > 0), 'protoex.Order serialization failed!')
-    console.assert(this.OrderModel.verify(), 'protoex.Order validation failed!')
+    let serialized = this.OrderMessageModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.OrderMessage serialization failed!')
+    console.assert(this.OrderMessageModel.verify(), 'protoex.OrderMessage validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -4120,16 +6571,16 @@ class Sender extends fbe.Sender {
   }
 
   /**
-   * Send Balance value
+   * Send BalanceMessage value
    * @this {!Sender}
-   * @param {!Balance} value Balance value to send
+   * @param {!BalanceMessage} value BalanceMessage value to send
    * @returns {!number} Sent bytes
    */
-  send_Balance (value) { // eslint-disable-line
+  send_BalanceMessage (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.BalanceModel.serialize(value)
-    console.assert((serialized > 0), 'protoex.Balance serialization failed!')
-    console.assert(this.BalanceModel.verify(), 'protoex.Balance validation failed!')
+    let serialized = this.BalanceMessageModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.BalanceMessage serialization failed!')
+    console.assert(this.BalanceMessageModel.verify(), 'protoex.BalanceMessage validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -4141,16 +6592,16 @@ class Sender extends fbe.Sender {
   }
 
   /**
-   * Send Account value
+   * Send AccountMessage value
    * @this {!Sender}
-   * @param {!Account} value Account value to send
+   * @param {!AccountMessage} value AccountMessage value to send
    * @returns {!number} Sent bytes
    */
-  send_Account (value) { // eslint-disable-line
+  send_AccountMessage (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.AccountModel.serialize(value)
-    console.assert((serialized > 0), 'protoex.Account serialization failed!')
-    console.assert(this.AccountModel.verify(), 'protoex.Account validation failed!')
+    let serialized = this.AccountMessageModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.AccountMessage serialization failed!')
+    console.assert(this.AccountMessageModel.verify(), 'protoex.AccountMessage validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -4209,12 +6660,12 @@ class Receiver extends fbe.Receiver {
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, false)
     this._protoReceiver = new proto.Receiver(this.buffer)
-    this._OrderValue = new Order()
-    this._OrderModel = new OrderModel()
-    this._BalanceValue = new Balance()
-    this._BalanceModel = new BalanceModel()
-    this._AccountValue = new Account()
-    this._AccountModel = new AccountModel()
+    this._OrderMessageValue = new OrderMessage()
+    this._OrderMessageModel = new OrderMessageModel()
+    this._BalanceMessageValue = new BalanceMessage()
+    this._BalanceMessageModel = new BalanceMessageModel()
+    this._AccountMessageValue = new AccountMessage()
+    this._AccountMessageModel = new AccountMessageModel()
     this.onReceiveLogHandler = this.onReceiveLog
   }
 
@@ -4241,25 +6692,25 @@ class Receiver extends fbe.Receiver {
   // Receive handlers
 
   /**
-   * Order receive handler
+   * OrderMessage receive handler
    * @this {!Receiver}
-   * @param {!Order} value Order received value
+   * @param {!OrderMessage} value OrderMessage received value
    */
-  onReceive_Order (value) {}  // eslint-disable-line
+  onReceive_OrderMessage (value) {}  // eslint-disable-line
 
   /**
-   * Balance receive handler
+   * BalanceMessage receive handler
    * @this {!Receiver}
-   * @param {!Balance} value Balance received value
+   * @param {!BalanceMessage} value BalanceMessage received value
    */
-  onReceive_Balance (value) {}  // eslint-disable-line
+  onReceive_BalanceMessage (value) {}  // eslint-disable-line
 
   /**
-   * Account receive handler
+   * AccountMessage receive handler
    * @this {!Receiver}
-   * @param {!Account} value Account received value
+   * @param {!AccountMessage} value AccountMessage received value
    */
-  onReceive_Account (value) {}  // eslint-disable-line
+  onReceive_AccountMessage (value) {}  // eslint-disable-line
 
   /**
    * protoex receive message handler
@@ -4272,54 +6723,55 @@ class Receiver extends fbe.Receiver {
    */
   onReceive (type, buffer, offset, size) {
     switch (type) {
-      case OrderModel.fbeType: {
+      case OrderMessageModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._OrderModel.attachBuffer(buffer, offset)
-        console.assert(this._OrderModel.verify(), 'protoex.Order validation failed!')
-        let deserialized = this._OrderModel.deserialize(this._OrderValue)
-        console.assert((deserialized.size > 0), 'protoex.Order deserialization failed!')
+        this._OrderMessageModel.attachBuffer(buffer, offset)
+        console.assert(this._OrderMessageModel.verify(), 'protoex.OrderMessage validation failed!')
+        let deserialized = this._OrderMessageModel.deserialize(this._OrderMessageValue)
+        console.assert((deserialized.size > 0), 'protoex.OrderMessage deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._OrderValue.toString())
+          this.onReceiveLog(this._OrderMessageValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_Order(this._OrderValue)
+        this.onReceive_OrderMessage(this._OrderMessageValue)
         return true
       }
-      case BalanceModel.fbeType: {
+      case BalanceMessageModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._BalanceModel.attachBuffer(buffer, offset)
-        console.assert(this._BalanceModel.verify(), 'protoex.Balance validation failed!')
-        let deserialized = this._BalanceModel.deserialize(this._BalanceValue)
-        console.assert((deserialized.size > 0), 'protoex.Balance deserialization failed!')
+        this._BalanceMessageModel.attachBuffer(buffer, offset)
+        console.assert(this._BalanceMessageModel.verify(), 'protoex.BalanceMessage validation failed!')
+        let deserialized = this._BalanceMessageModel.deserialize(this._BalanceMessageValue)
+        console.assert((deserialized.size > 0), 'protoex.BalanceMessage deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._BalanceValue.toString())
+          this.onReceiveLog(this._BalanceMessageValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_Balance(this._BalanceValue)
+        this.onReceive_BalanceMessage(this._BalanceMessageValue)
         return true
       }
-      case AccountModel.fbeType: {
+      case AccountMessageModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._AccountModel.attachBuffer(buffer, offset)
-        console.assert(this._AccountModel.verify(), 'protoex.Account validation failed!')
-        let deserialized = this._AccountModel.deserialize(this._AccountValue)
-        console.assert((deserialized.size > 0), 'protoex.Account deserialization failed!')
+        this._AccountMessageModel.attachBuffer(buffer, offset)
+        console.assert(this._AccountMessageModel.verify(), 'protoex.AccountMessage validation failed!')
+        let deserialized = this._AccountMessageModel.deserialize(this._AccountMessageValue)
+        console.assert((deserialized.size > 0), 'protoex.AccountMessage deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._AccountValue.toString())
+          this.onReceiveLog(this._AccountMessageValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_Account(this._AccountValue)
+        this.onReceive_AccountMessage(this._AccountMessageValue)
         return true
       }
+      default: break
     }
 
     // noinspection RedundantIfStatementJS
@@ -4355,9 +6807,9 @@ class Proxy extends fbe.Receiver {
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, false)
     this._protoProxy = new proto.Proxy(this.buffer)
-    this._OrderModel = new OrderModel()
-    this._BalanceModel = new BalanceModel()
-    this._AccountModel = new AccountModel()
+    this._OrderMessageModel = new OrderMessageModel()
+    this._BalanceMessageModel = new BalanceMessageModel()
+    this._AccountMessageModel = new AccountMessageModel()
   }
 
   // Imported proxy
@@ -4383,37 +6835,37 @@ class Proxy extends fbe.Receiver {
   // Proxy handlers
 
   /**
-   * Order proxy handler
+   * OrderMessage proxy handler
    * @this {!Proxy}
-   * @param {!Order} model Order model
+   * @param {!OrderMessage} model OrderMessage model
    * @param {!number} type Message type
    * @param {!Uint8Array} buffer Buffer to send
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_Order (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_OrderMessage (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
-   * Balance proxy handler
+   * BalanceMessage proxy handler
    * @this {!Proxy}
-   * @param {!Balance} model Balance model
+   * @param {!BalanceMessage} model BalanceMessage model
    * @param {!number} type Message type
    * @param {!Uint8Array} buffer Buffer to send
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_Balance (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_BalanceMessage (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
-   * Account proxy handler
+   * AccountMessage proxy handler
    * @this {!Proxy}
-   * @param {!Account} model Account model
+   * @param {!AccountMessage} model AccountMessage model
    * @param {!number} type Message type
    * @param {!Uint8Array} buffer Buffer to send
    * @param {!number} offset Buffer offset
    * @param {!number} size Buffer size
    */
-  onProxy_Account (model, type, buffer, offset, size) {}  // eslint-disable-line
+  onProxy_AccountMessage (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
    * protoex receive message handler
@@ -4426,48 +6878,49 @@ class Proxy extends fbe.Receiver {
    */
   onReceive (type, buffer, offset, size) {
     switch (type) {
-      case OrderModel.fbeType: {
+      case OrderMessageModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._OrderModel.attachBuffer(buffer, offset)
-        console.assert(this._OrderModel.verify(), 'protoex.Order validation failed!')
+        this._OrderMessageModel.attachBuffer(buffer, offset)
+        console.assert(this._OrderMessageModel.verify(), 'protoex.OrderMessage validation failed!')
 
-        let fbeBegin = this._OrderModel.model.getBegin()
+        let fbeBegin = this._OrderMessageModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_Order(this._OrderModel, type, buffer, offset, size)
-        this._OrderModel.model.getEnd(fbeBegin)
+        this.onProxy_OrderMessage(this._OrderMessageModel, type, buffer, offset, size)
+        this._OrderMessageModel.model.getEnd(fbeBegin)
         return true
       }
-      case BalanceModel.fbeType: {
+      case BalanceMessageModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._BalanceModel.attachBuffer(buffer, offset)
-        console.assert(this._BalanceModel.verify(), 'protoex.Balance validation failed!')
+        this._BalanceMessageModel.attachBuffer(buffer, offset)
+        console.assert(this._BalanceMessageModel.verify(), 'protoex.BalanceMessage validation failed!')
 
-        let fbeBegin = this._BalanceModel.model.getBegin()
+        let fbeBegin = this._BalanceMessageModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_Balance(this._BalanceModel, type, buffer, offset, size)
-        this._BalanceModel.model.getEnd(fbeBegin)
+        this.onProxy_BalanceMessage(this._BalanceMessageModel, type, buffer, offset, size)
+        this._BalanceMessageModel.model.getEnd(fbeBegin)
         return true
       }
-      case AccountModel.fbeType: {
+      case AccountMessageModel.fbeType: {
         // Attach the FBE stream to the proxy model
-        this._AccountModel.attachBuffer(buffer, offset)
-        console.assert(this._AccountModel.verify(), 'protoex.Account validation failed!')
+        this._AccountMessageModel.attachBuffer(buffer, offset)
+        console.assert(this._AccountMessageModel.verify(), 'protoex.AccountMessage validation failed!')
 
-        let fbeBegin = this._AccountModel.model.getBegin()
+        let fbeBegin = this._AccountMessageModel.model.getBegin()
         if (fbeBegin === 0) {
           return false
         }
         // Call proxy handler
-        this.onProxy_Account(this._AccountModel, type, buffer, offset, size)
-        this._AccountModel.model.getEnd(fbeBegin)
+        this.onProxy_AccountMessage(this._AccountMessageModel, type, buffer, offset, size)
+        this._AccountMessageModel.model.getEnd(fbeBegin)
         return true
       }
+      default: break
     }
 
     // noinspection RedundantIfStatementJS
@@ -4494,15 +6947,15 @@ class Client extends fbe.Client {
   constructor (sendBuffer = new fbe.WriteBuffer(), receiveBuffer = new fbe.WriteBuffer()) {
     super(sendBuffer, receiveBuffer, false)
     this._protoClient = new proto.Client(this.sendBuffer, this.receiveBuffer)
-    this._OrderSenderModel = new OrderModel(this.sendBuffer)
-    this._OrderReceiverValue = new Order()
-    this._OrderReceiverModel = new OrderModel()
-    this._BalanceSenderModel = new BalanceModel(this.sendBuffer)
-    this._BalanceReceiverValue = new Balance()
-    this._BalanceReceiverModel = new BalanceModel()
-    this._AccountSenderModel = new AccountModel(this.sendBuffer)
-    this._AccountReceiverValue = new Account()
-    this._AccountReceiverModel = new AccountModel()
+    this._OrderMessageSenderModel = new OrderMessageModel(this.sendBuffer)
+    this._OrderMessageReceiverValue = new OrderMessage()
+    this._OrderMessageReceiverModel = new OrderMessageModel()
+    this._BalanceMessageSenderModel = new BalanceMessageModel(this.sendBuffer)
+    this._BalanceMessageReceiverValue = new BalanceMessage()
+    this._BalanceMessageReceiverModel = new BalanceMessageModel()
+    this._AccountMessageSenderModel = new AccountMessageModel(this.sendBuffer)
+    this._AccountMessageReceiverValue = new AccountMessage()
+    this._AccountMessageReceiverModel = new AccountMessageModel()
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
     this.onReceiveLogHandler = this.onReceiveLog
@@ -4525,30 +6978,30 @@ class Client extends fbe.Client {
   // Sender models accessors
 
   /**
-   * Get Order model
+   * Get OrderMessage model
    * @this {!Client}
-   * @returns {!OrderModel} Order sender model
+   * @returns {!OrderMessageModel} OrderMessage sender model
    */
-  get OrderSenderModel () {
-    return this._OrderSenderModel
+  get OrderMessageSenderModel () {
+    return this._OrderMessageSenderModel
   }
 
   /**
-   * Get Balance model
+   * Get BalanceMessage model
    * @this {!Client}
-   * @returns {!BalanceModel} Balance sender model
+   * @returns {!BalanceMessageModel} BalanceMessage sender model
    */
-  get BalanceSenderModel () {
-    return this._BalanceSenderModel
+  get BalanceMessageSenderModel () {
+    return this._BalanceMessageSenderModel
   }
 
   /**
-   * Get Account model
+   * Get AccountMessage model
    * @this {!Client}
-   * @returns {!AccountModel} Account sender model
+   * @returns {!AccountMessageModel} AccountMessage sender model
    */
-  get AccountSenderModel () {
-    return this._AccountSenderModel
+  get AccountMessageSenderModel () {
+    return this._AccountMessageSenderModel
   }
 
   // Reset and watchdog methods
@@ -4580,14 +7033,14 @@ class Client extends fbe.Client {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof Order) {
-      return this.send_Order(value)
+    if ((value instanceof OrderMessage) && (value.fbeType === this.OrderMessageSenderModel.fbeType)) {
+      return this.send_OrderMessage(value)
     }
-    if (value instanceof Balance) {
-      return this.send_Balance(value)
+    if ((value instanceof BalanceMessage) && (value.fbeType === this.BalanceMessageSenderModel.fbeType)) {
+      return this.send_BalanceMessage(value)
     }
-    if (value instanceof Account) {
-      return this.send_Account(value)
+    if ((value instanceof AccountMessage) && (value.fbeType === this.AccountMessageSenderModel.fbeType)) {
+      return this.send_AccountMessage(value)
     }
     let result = 0
     result = this._protoClient.send(value)
@@ -4598,16 +7051,16 @@ class Client extends fbe.Client {
   }
 
   /**
-   * Send Order value
+   * Send OrderMessage value
    * @this {!Client}
-   * @param {!Order} value Order value to send
+   * @param {!OrderMessage} value OrderMessage value to send
    * @returns {!number} Sent bytes
    */
-  send_Order (value) { // eslint-disable-line
+  send_OrderMessage (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.OrderSenderModel.serialize(value)
-    console.assert((serialized > 0), 'protoex.Order serialization failed!')
-    console.assert(this.OrderSenderModel.verify(), 'protoex.Order validation failed!')
+    let serialized = this.OrderMessageSenderModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.OrderMessage serialization failed!')
+    console.assert(this.OrderMessageSenderModel.verify(), 'protoex.OrderMessage validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -4619,16 +7072,16 @@ class Client extends fbe.Client {
   }
 
   /**
-   * Send Balance value
+   * Send BalanceMessage value
    * @this {!Client}
-   * @param {!Balance} value Balance value to send
+   * @param {!BalanceMessage} value BalanceMessage value to send
    * @returns {!number} Sent bytes
    */
-  send_Balance (value) { // eslint-disable-line
+  send_BalanceMessage (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.BalanceSenderModel.serialize(value)
-    console.assert((serialized > 0), 'protoex.Balance serialization failed!')
-    console.assert(this.BalanceSenderModel.verify(), 'protoex.Balance validation failed!')
+    let serialized = this.BalanceMessageSenderModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.BalanceMessage serialization failed!')
+    console.assert(this.BalanceMessageSenderModel.verify(), 'protoex.BalanceMessage validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -4640,16 +7093,16 @@ class Client extends fbe.Client {
   }
 
   /**
-   * Send Account value
+   * Send AccountMessage value
    * @this {!Client}
-   * @param {!Account} value Account value to send
+   * @param {!AccountMessage} value AccountMessage value to send
    * @returns {!number} Sent bytes
    */
-  send_Account (value) { // eslint-disable-line
+  send_AccountMessage (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.AccountSenderModel.serialize(value)
-    console.assert((serialized > 0), 'protoex.Account serialization failed!')
-    console.assert(this.AccountSenderModel.verify(), 'protoex.Account validation failed!')
+    let serialized = this.AccountMessageSenderModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.AccountMessage serialization failed!')
+    console.assert(this.AccountMessageSenderModel.verify(), 'protoex.AccountMessage validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -4696,25 +7149,25 @@ class Client extends fbe.Client {
   // Receive handlers
 
   /**
-   * Order receive handler
+   * OrderMessage receive handler
    * @this {!Client}
-   * @param {!Order} value Order received value
+   * @param {!OrderMessage} value OrderMessage received value
    */
-  onReceive_Order (value) {}  // eslint-disable-line
+  onReceive_OrderMessage (value) {}  // eslint-disable-line
 
   /**
-   * Balance receive handler
+   * BalanceMessage receive handler
    * @this {!Client}
-   * @param {!Balance} value Balance received value
+   * @param {!BalanceMessage} value BalanceMessage received value
    */
-  onReceive_Balance (value) {}  // eslint-disable-line
+  onReceive_BalanceMessage (value) {}  // eslint-disable-line
 
   /**
-   * Account receive handler
+   * AccountMessage receive handler
    * @this {!Client}
-   * @param {!Account} value Account received value
+   * @param {!AccountMessage} value AccountMessage received value
    */
-  onReceive_Account (value) {}  // eslint-disable-line
+  onReceive_AccountMessage (value) {}  // eslint-disable-line
 
   /**
    * protoex receive message handler
@@ -4727,54 +7180,55 @@ class Client extends fbe.Client {
    */
   onReceive (type, buffer, offset, size) {
     switch (type) {
-      case OrderModel.fbeType: {
+      case OrderMessageModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._OrderReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._OrderReceiverModel.verify(), 'protoex.Order validation failed!')
-        let deserialized = this._OrderReceiverModel.deserialize(this._OrderReceiverValue)
-        console.assert((deserialized.size > 0), 'protoex.Order deserialization failed!')
+        this._OrderMessageReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._OrderMessageReceiverModel.verify(), 'protoex.OrderMessage validation failed!')
+        let deserialized = this._OrderMessageReceiverModel.deserialize(this._OrderMessageReceiverValue)
+        console.assert((deserialized.size > 0), 'protoex.OrderMessage deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._OrderReceiverValue.toString())
+          this.onReceiveLog(this._OrderMessageReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_Order(this._OrderReceiverValue)
+        this.onReceive_OrderMessage(this._OrderMessageReceiverValue)
         return true
       }
-      case BalanceModel.fbeType: {
+      case BalanceMessageModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._BalanceReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._BalanceReceiverModel.verify(), 'protoex.Balance validation failed!')
-        let deserialized = this._BalanceReceiverModel.deserialize(this._BalanceReceiverValue)
-        console.assert((deserialized.size > 0), 'protoex.Balance deserialization failed!')
+        this._BalanceMessageReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._BalanceMessageReceiverModel.verify(), 'protoex.BalanceMessage validation failed!')
+        let deserialized = this._BalanceMessageReceiverModel.deserialize(this._BalanceMessageReceiverValue)
+        console.assert((deserialized.size > 0), 'protoex.BalanceMessage deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._BalanceReceiverValue.toString())
+          this.onReceiveLog(this._BalanceMessageReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_Balance(this._BalanceReceiverValue)
+        this.onReceive_BalanceMessage(this._BalanceMessageReceiverValue)
         return true
       }
-      case AccountModel.fbeType: {
+      case AccountMessageModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._AccountReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._AccountReceiverModel.verify(), 'protoex.Account validation failed!')
-        let deserialized = this._AccountReceiverModel.deserialize(this._AccountReceiverValue)
-        console.assert((deserialized.size > 0), 'protoex.Account deserialization failed!')
+        this._AccountMessageReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._AccountMessageReceiverModel.verify(), 'protoex.AccountMessage validation failed!')
+        let deserialized = this._AccountMessageReceiverModel.deserialize(this._AccountMessageReceiverValue)
+        console.assert((deserialized.size > 0), 'protoex.AccountMessage deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._AccountReceiverValue.toString())
+          this.onReceiveLog(this._AccountMessageReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_Account(this._AccountReceiverValue)
+        this.onReceive_AccountMessage(this._AccountMessageReceiverValue)
         return true
       }
+      default: break
     }
 
     // noinspection RedundantIfStatementJS
@@ -4927,9 +7381,9 @@ class FinalSender extends fbe.Sender {
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, true)
     this._protoSender = new proto.FinalSender(this.buffer)
-    this._OrderModel = new OrderFinalModel(this.buffer)
-    this._BalanceModel = new BalanceFinalModel(this.buffer)
-    this._AccountModel = new AccountFinalModel(this.buffer)
+    this._OrderMessageModel = new OrderMessageFinalModel(this.buffer)
+    this._BalanceMessageModel = new BalanceMessageFinalModel(this.buffer)
+    this._AccountMessageModel = new AccountMessageFinalModel(this.buffer)
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
   }
@@ -4948,30 +7402,30 @@ class FinalSender extends fbe.Sender {
   // Sender models accessors
 
   /**
-   * Get Order model
+   * Get OrderMessage model
    * @this {!FinalSender}
-   * @returns {!OrderModel} Order model
+   * @returns {!OrderMessageModel} OrderMessage model
    */
-  get OrderModel () {
-    return this._OrderModel
+  get OrderMessageModel () {
+    return this._OrderMessageModel
   }
 
   /**
-   * Get Balance model
+   * Get BalanceMessage model
    * @this {!FinalSender}
-   * @returns {!BalanceModel} Balance model
+   * @returns {!BalanceMessageModel} BalanceMessage model
    */
-  get BalanceModel () {
-    return this._BalanceModel
+  get BalanceMessageModel () {
+    return this._BalanceMessageModel
   }
 
   /**
-   * Get Account model
+   * Get AccountMessage model
    * @this {!FinalSender}
-   * @returns {!AccountModel} Account model
+   * @returns {!AccountMessageModel} AccountMessage model
    */
-  get AccountModel () {
-    return this._AccountModel
+  get AccountMessageModel () {
+    return this._AccountMessageModel
   }
 
   // Send methods
@@ -4983,14 +7437,14 @@ class FinalSender extends fbe.Sender {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof Order) {
-      return this.send_Order(value)
+    if ((value instanceof OrderMessage) && (value.fbeType === this.OrderMessageModel.fbeType)) {
+      return this.send_OrderMessage(value)
     }
-    if (value instanceof Balance) {
-      return this.send_Balance(value)
+    if ((value instanceof BalanceMessage) && (value.fbeType === this.BalanceMessageModel.fbeType)) {
+      return this.send_BalanceMessage(value)
     }
-    if (value instanceof Account) {
-      return this.send_Account(value)
+    if ((value instanceof AccountMessage) && (value.fbeType === this.AccountMessageModel.fbeType)) {
+      return this.send_AccountMessage(value)
     }
     let result = 0
     result = this._protoSender.send(value)
@@ -5001,16 +7455,16 @@ class FinalSender extends fbe.Sender {
   }
 
   /**
-   * Send Order value
+   * Send OrderMessage value
    * @this {!FinalSender}
-   * @param {!Order} value Order value to send
+   * @param {!OrderMessage} value OrderMessage value to send
    * @returns {!number} Sent bytes
    */
-  send_Order (value) { // eslint-disable-line
+  send_OrderMessage (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.OrderModel.serialize(value)
-    console.assert((serialized > 0), 'protoex.Order serialization failed!')
-    console.assert(this.OrderModel.verify(), 'protoex.Order validation failed!')
+    let serialized = this.OrderMessageModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.OrderMessage serialization failed!')
+    console.assert(this.OrderMessageModel.verify(), 'protoex.OrderMessage validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -5022,16 +7476,16 @@ class FinalSender extends fbe.Sender {
   }
 
   /**
-   * Send Balance value
+   * Send BalanceMessage value
    * @this {!FinalSender}
-   * @param {!Balance} value Balance value to send
+   * @param {!BalanceMessage} value BalanceMessage value to send
    * @returns {!number} Sent bytes
    */
-  send_Balance (value) { // eslint-disable-line
+  send_BalanceMessage (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.BalanceModel.serialize(value)
-    console.assert((serialized > 0), 'protoex.Balance serialization failed!')
-    console.assert(this.BalanceModel.verify(), 'protoex.Balance validation failed!')
+    let serialized = this.BalanceMessageModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.BalanceMessage serialization failed!')
+    console.assert(this.BalanceMessageModel.verify(), 'protoex.BalanceMessage validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -5043,16 +7497,16 @@ class FinalSender extends fbe.Sender {
   }
 
   /**
-   * Send Account value
+   * Send AccountMessage value
    * @this {!FinalSender}
-   * @param {!Account} value Account value to send
+   * @param {!AccountMessage} value AccountMessage value to send
    * @returns {!number} Sent bytes
    */
-  send_Account (value) { // eslint-disable-line
+  send_AccountMessage (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.AccountModel.serialize(value)
-    console.assert((serialized > 0), 'protoex.Account serialization failed!')
-    console.assert(this.AccountModel.verify(), 'protoex.Account validation failed!')
+    let serialized = this.AccountMessageModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.AccountMessage serialization failed!')
+    console.assert(this.AccountMessageModel.verify(), 'protoex.AccountMessage validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -5111,12 +7565,12 @@ class FinalReceiver extends fbe.Receiver {
   constructor (buffer = new fbe.WriteBuffer()) {
     super(buffer, true)
     this._protoReceiver = new proto.FinalReceiver(this.buffer)
-    this._OrderValue = new Order()
-    this._OrderModel = new OrderFinalModel()
-    this._BalanceValue = new Balance()
-    this._BalanceModel = new BalanceFinalModel()
-    this._AccountValue = new Account()
-    this._AccountModel = new AccountFinalModel()
+    this._OrderMessageValue = new OrderMessage()
+    this._OrderMessageModel = new OrderMessageFinalModel()
+    this._BalanceMessageValue = new BalanceMessage()
+    this._BalanceMessageModel = new BalanceMessageFinalModel()
+    this._AccountMessageValue = new AccountMessage()
+    this._AccountMessageModel = new AccountMessageFinalModel()
     this.onReceiveLogHandler = this.onReceiveLog
   }
 
@@ -5143,25 +7597,25 @@ class FinalReceiver extends fbe.Receiver {
   // Receive handlers
 
   /**
-   * Order receive handler
+   * OrderMessage receive handler
    * @this {!FinalReceiver}
-   * @param {!Order} value Order received value
+   * @param {!OrderMessage} value OrderMessage received value
    */
-  onReceive_Order (value) {}  // eslint-disable-line
+  onReceive_OrderMessage (value) {}  // eslint-disable-line
 
   /**
-   * Balance receive handler
+   * BalanceMessage receive handler
    * @this {!FinalReceiver}
-   * @param {!Balance} value Balance received value
+   * @param {!BalanceMessage} value BalanceMessage received value
    */
-  onReceive_Balance (value) {}  // eslint-disable-line
+  onReceive_BalanceMessage (value) {}  // eslint-disable-line
 
   /**
-   * Account receive handler
+   * AccountMessage receive handler
    * @this {!FinalReceiver}
-   * @param {!Account} value Account received value
+   * @param {!AccountMessage} value AccountMessage received value
    */
-  onReceive_Account (value) {}  // eslint-disable-line
+  onReceive_AccountMessage (value) {}  // eslint-disable-line
 
   /**
    * protoex receive message handler
@@ -5174,54 +7628,55 @@ class FinalReceiver extends fbe.Receiver {
    */
   onReceive (type, buffer, offset, size) {
     switch (type) {
-      case OrderFinalModel.fbeType: {
+      case OrderMessageFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._OrderModel.attachBuffer(buffer, offset)
-        console.assert(this._OrderModel.verify(), 'protoex.Order validation failed!')
-        let deserialized = this._OrderModel.deserialize(this._OrderValue)
-        console.assert((deserialized.size > 0), 'protoex.Order deserialization failed!')
+        this._OrderMessageModel.attachBuffer(buffer, offset)
+        console.assert(this._OrderMessageModel.verify(), 'protoex.OrderMessage validation failed!')
+        let deserialized = this._OrderMessageModel.deserialize(this._OrderMessageValue)
+        console.assert((deserialized.size > 0), 'protoex.OrderMessage deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._OrderValue.toString())
+          this.onReceiveLog(this._OrderMessageValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_Order(this._OrderValue)
+        this.onReceive_OrderMessage(this._OrderMessageValue)
         return true
       }
-      case BalanceFinalModel.fbeType: {
+      case BalanceMessageFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._BalanceModel.attachBuffer(buffer, offset)
-        console.assert(this._BalanceModel.verify(), 'protoex.Balance validation failed!')
-        let deserialized = this._BalanceModel.deserialize(this._BalanceValue)
-        console.assert((deserialized.size > 0), 'protoex.Balance deserialization failed!')
+        this._BalanceMessageModel.attachBuffer(buffer, offset)
+        console.assert(this._BalanceMessageModel.verify(), 'protoex.BalanceMessage validation failed!')
+        let deserialized = this._BalanceMessageModel.deserialize(this._BalanceMessageValue)
+        console.assert((deserialized.size > 0), 'protoex.BalanceMessage deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._BalanceValue.toString())
+          this.onReceiveLog(this._BalanceMessageValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_Balance(this._BalanceValue)
+        this.onReceive_BalanceMessage(this._BalanceMessageValue)
         return true
       }
-      case AccountFinalModel.fbeType: {
+      case AccountMessageFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._AccountModel.attachBuffer(buffer, offset)
-        console.assert(this._AccountModel.verify(), 'protoex.Account validation failed!')
-        let deserialized = this._AccountModel.deserialize(this._AccountValue)
-        console.assert((deserialized.size > 0), 'protoex.Account deserialization failed!')
+        this._AccountMessageModel.attachBuffer(buffer, offset)
+        console.assert(this._AccountMessageModel.verify(), 'protoex.AccountMessage validation failed!')
+        let deserialized = this._AccountMessageModel.deserialize(this._AccountMessageValue)
+        console.assert((deserialized.size > 0), 'protoex.AccountMessage deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._AccountValue.toString())
+          this.onReceiveLog(this._AccountMessageValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_Account(this._AccountValue)
+        this.onReceive_AccountMessage(this._AccountMessageValue)
         return true
       }
+      default: break
     }
 
     // noinspection RedundantIfStatementJS
@@ -5258,15 +7713,15 @@ class FinalClient extends fbe.Client {
   constructor (sendBuffer = new fbe.WriteBuffer(), receiveBuffer = new fbe.WriteBuffer()) {
     super(sendBuffer, receiveBuffer, true)
     this._protoClient = new proto.FinalClient(this.sendBuffer, this.receiveBuffer)
-    this._OrderSenderModel = new OrderFinalModel(this.sendBuffer)
-    this._OrderReceiverValue = new Order()
-    this._OrderReceiverModel = new OrderFinalModel()
-    this._BalanceSenderModel = new BalanceFinalModel(this.sendBuffer)
-    this._BalanceReceiverValue = new Balance()
-    this._BalanceReceiverModel = new BalanceFinalModel()
-    this._AccountSenderModel = new AccountFinalModel(this.sendBuffer)
-    this._AccountReceiverValue = new Account()
-    this._AccountReceiverModel = new AccountFinalModel()
+    this._OrderMessageSenderModel = new OrderMessageFinalModel(this.sendBuffer)
+    this._OrderMessageReceiverValue = new OrderMessage()
+    this._OrderMessageReceiverModel = new OrderMessageFinalModel()
+    this._BalanceMessageSenderModel = new BalanceMessageFinalModel(this.sendBuffer)
+    this._BalanceMessageReceiverValue = new BalanceMessage()
+    this._BalanceMessageReceiverModel = new BalanceMessageFinalModel()
+    this._AccountMessageSenderModel = new AccountMessageFinalModel(this.sendBuffer)
+    this._AccountMessageReceiverValue = new AccountMessage()
+    this._AccountMessageReceiverModel = new AccountMessageFinalModel()
     this.onSendHandler = this.onSend
     this.onSendLogHandler = this.onSendLog
     this.onReceiveLogHandler = this.onReceiveLog
@@ -5289,30 +7744,30 @@ class FinalClient extends fbe.Client {
   // Sender models accessors
 
   /**
-   * Get Order model
+   * Get OrderMessage model
    * @this {!FinalClient}
-   * @returns {!OrderModel} Order sender model
+   * @returns {!OrderMessageModel} OrderMessage sender model
    */
-  get OrderSenderModel () {
-    return this._OrderSenderModel
+  get OrderMessageSenderModel () {
+    return this._OrderMessageSenderModel
   }
 
   /**
-   * Get Balance model
+   * Get BalanceMessage model
    * @this {!FinalClient}
-   * @returns {!BalanceModel} Balance sender model
+   * @returns {!BalanceMessageModel} BalanceMessage sender model
    */
-  get BalanceSenderModel () {
-    return this._BalanceSenderModel
+  get BalanceMessageSenderModel () {
+    return this._BalanceMessageSenderModel
   }
 
   /**
-   * Get Account model
+   * Get AccountMessage model
    * @this {!FinalClient}
-   * @returns {!AccountModel} Account sender model
+   * @returns {!AccountMessageModel} AccountMessage sender model
    */
-  get AccountSenderModel () {
-    return this._AccountSenderModel
+  get AccountMessageSenderModel () {
+    return this._AccountMessageSenderModel
   }
 
   // Reset and watchdog methods
@@ -5344,14 +7799,14 @@ class FinalClient extends fbe.Client {
    * @returns {!number} Sent bytes
    */
   send (value) {
-    if (value instanceof Order) {
-      return this.send_Order(value)
+    if ((value instanceof OrderMessage) && (value.fbeType === this.OrderMessageSenderModel.fbeType)) {
+      return this.send_OrderMessage(value)
     }
-    if (value instanceof Balance) {
-      return this.send_Balance(value)
+    if ((value instanceof BalanceMessage) && (value.fbeType === this.BalanceMessageSenderModel.fbeType)) {
+      return this.send_BalanceMessage(value)
     }
-    if (value instanceof Account) {
-      return this.send_Account(value)
+    if ((value instanceof AccountMessage) && (value.fbeType === this.AccountMessageSenderModel.fbeType)) {
+      return this.send_AccountMessage(value)
     }
     let result = 0
     result = this._protoClient.send(value)
@@ -5362,16 +7817,16 @@ class FinalClient extends fbe.Client {
   }
 
   /**
-   * Send Order value
+   * Send OrderMessage value
    * @this {!FinalClient}
-   * @param {!Order} value Order value to send
+   * @param {!OrderMessage} value OrderMessage value to send
    * @returns {!number} Sent bytes
    */
-  send_Order (value) { // eslint-disable-line
+  send_OrderMessage (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.OrderSenderModel.serialize(value)
-    console.assert((serialized > 0), 'protoex.Order serialization failed!')
-    console.assert(this.OrderSenderModel.verify(), 'protoex.Order validation failed!')
+    let serialized = this.OrderMessageSenderModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.OrderMessage serialization failed!')
+    console.assert(this.OrderMessageSenderModel.verify(), 'protoex.OrderMessage validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -5383,16 +7838,16 @@ class FinalClient extends fbe.Client {
   }
 
   /**
-   * Send Balance value
+   * Send BalanceMessage value
    * @this {!FinalClient}
-   * @param {!Balance} value Balance value to send
+   * @param {!BalanceMessage} value BalanceMessage value to send
    * @returns {!number} Sent bytes
    */
-  send_Balance (value) { // eslint-disable-line
+  send_BalanceMessage (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.BalanceSenderModel.serialize(value)
-    console.assert((serialized > 0), 'protoex.Balance serialization failed!')
-    console.assert(this.BalanceSenderModel.verify(), 'protoex.Balance validation failed!')
+    let serialized = this.BalanceMessageSenderModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.BalanceMessage serialization failed!')
+    console.assert(this.BalanceMessageSenderModel.verify(), 'protoex.BalanceMessage validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -5404,16 +7859,16 @@ class FinalClient extends fbe.Client {
   }
 
   /**
-   * Send Account value
+   * Send AccountMessage value
    * @this {!FinalClient}
-   * @param {!Account} value Account value to send
+   * @param {!AccountMessage} value AccountMessage value to send
    * @returns {!number} Sent bytes
    */
-  send_Account (value) { // eslint-disable-line
+  send_AccountMessage (value) { // eslint-disable-line
     // Serialize the value into the FBE stream
-    let serialized = this.AccountSenderModel.serialize(value)
-    console.assert((serialized > 0), 'protoex.Account serialization failed!')
-    console.assert(this.AccountSenderModel.verify(), 'protoex.Account validation failed!')
+    let serialized = this.AccountMessageSenderModel.serialize(value)
+    console.assert((serialized > 0), 'protoex.AccountMessage serialization failed!')
+    console.assert(this.AccountMessageSenderModel.verify(), 'protoex.AccountMessage validation failed!')
 
     // Log the value
     if (this.logging) {
@@ -5460,25 +7915,25 @@ class FinalClient extends fbe.Client {
   // Receive handlers
 
   /**
-   * Order receive handler
+   * OrderMessage receive handler
    * @this {!FinalClient}
-   * @param {!Order} value Order received value
+   * @param {!OrderMessage} value OrderMessage received value
    */
-  onReceive_Order (value) {}  // eslint-disable-line
+  onReceive_OrderMessage (value) {}  // eslint-disable-line
 
   /**
-   * Balance receive handler
+   * BalanceMessage receive handler
    * @this {!FinalClient}
-   * @param {!Balance} value Balance received value
+   * @param {!BalanceMessage} value BalanceMessage received value
    */
-  onReceive_Balance (value) {}  // eslint-disable-line
+  onReceive_BalanceMessage (value) {}  // eslint-disable-line
 
   /**
-   * Account receive handler
+   * AccountMessage receive handler
    * @this {!FinalClient}
-   * @param {!Account} value Account received value
+   * @param {!AccountMessage} value AccountMessage received value
    */
-  onReceive_Account (value) {}  // eslint-disable-line
+  onReceive_AccountMessage (value) {}  // eslint-disable-line
 
   /**
    * protoex receive message handler
@@ -5491,54 +7946,55 @@ class FinalClient extends fbe.Client {
    */
   onReceive (type, buffer, offset, size) {
     switch (type) {
-      case OrderFinalModel.fbeType: {
+      case OrderMessageFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._OrderReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._OrderReceiverModel.verify(), 'protoex.Order validation failed!')
-        let deserialized = this._OrderReceiverModel.deserialize(this._OrderReceiverValue)
-        console.assert((deserialized.size > 0), 'protoex.Order deserialization failed!')
+        this._OrderMessageReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._OrderMessageReceiverModel.verify(), 'protoex.OrderMessage validation failed!')
+        let deserialized = this._OrderMessageReceiverModel.deserialize(this._OrderMessageReceiverValue)
+        console.assert((deserialized.size > 0), 'protoex.OrderMessage deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._OrderReceiverValue.toString())
+          this.onReceiveLog(this._OrderMessageReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_Order(this._OrderReceiverValue)
+        this.onReceive_OrderMessage(this._OrderMessageReceiverValue)
         return true
       }
-      case BalanceFinalModel.fbeType: {
+      case BalanceMessageFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._BalanceReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._BalanceReceiverModel.verify(), 'protoex.Balance validation failed!')
-        let deserialized = this._BalanceReceiverModel.deserialize(this._BalanceReceiverValue)
-        console.assert((deserialized.size > 0), 'protoex.Balance deserialization failed!')
+        this._BalanceMessageReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._BalanceMessageReceiverModel.verify(), 'protoex.BalanceMessage validation failed!')
+        let deserialized = this._BalanceMessageReceiverModel.deserialize(this._BalanceMessageReceiverValue)
+        console.assert((deserialized.size > 0), 'protoex.BalanceMessage deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._BalanceReceiverValue.toString())
+          this.onReceiveLog(this._BalanceMessageReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_Balance(this._BalanceReceiverValue)
+        this.onReceive_BalanceMessage(this._BalanceMessageReceiverValue)
         return true
       }
-      case AccountFinalModel.fbeType: {
+      case AccountMessageFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
-        this._AccountReceiverModel.attachBuffer(buffer, offset)
-        console.assert(this._AccountReceiverModel.verify(), 'protoex.Account validation failed!')
-        let deserialized = this._AccountReceiverModel.deserialize(this._AccountReceiverValue)
-        console.assert((deserialized.size > 0), 'protoex.Account deserialization failed!')
+        this._AccountMessageReceiverModel.attachBuffer(buffer, offset)
+        console.assert(this._AccountMessageReceiverModel.verify(), 'protoex.AccountMessage validation failed!')
+        let deserialized = this._AccountMessageReceiverModel.deserialize(this._AccountMessageReceiverValue)
+        console.assert((deserialized.size > 0), 'protoex.AccountMessage deserialization failed!')
 
         // Log the value
         if (this.logging) {
-          this.onReceiveLog(this._AccountReceiverValue.toString())
+          this.onReceiveLog(this._AccountMessageReceiverValue.toString())
         }
 
         // Call receive handler with deserialized value
-        this.onReceive_Account(this._AccountReceiverValue)
+        this.onReceive_AccountMessage(this._AccountMessageReceiverValue)
         return true
       }
+      default: break
     }
 
     // noinspection RedundantIfStatementJS

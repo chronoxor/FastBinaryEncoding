@@ -9,52 +9,55 @@ package com.chronoxor.proto.fbe;
 public class FinalSender extends com.chronoxor.fbe.Sender
 {
     // Sender models accessors
-    public final OrderFinalModel OrderModel;
-    public final BalanceFinalModel BalanceModel;
-    public final AccountFinalModel AccountModel;
+    public final OrderMessageFinalModel OrderMessageModel;
+    public final BalanceMessageFinalModel BalanceMessageModel;
+    public final AccountMessageFinalModel AccountMessageModel;
 
     public FinalSender()
     {
         super(true);
-        OrderModel = new OrderFinalModel(getBuffer());
-        BalanceModel = new BalanceFinalModel(getBuffer());
-        AccountModel = new AccountFinalModel(getBuffer());
+        OrderMessageModel = new OrderMessageFinalModel(getBuffer());
+        BalanceMessageModel = new BalanceMessageFinalModel(getBuffer());
+        AccountMessageModel = new AccountMessageFinalModel(getBuffer());
     }
     public FinalSender(com.chronoxor.fbe.Buffer buffer)
     {
         super(buffer, true);
-        OrderModel = new OrderFinalModel(getBuffer());
-        BalanceModel = new BalanceFinalModel(getBuffer());
-        AccountModel = new AccountFinalModel(getBuffer());
+        OrderMessageModel = new OrderMessageFinalModel(getBuffer());
+        BalanceMessageModel = new BalanceMessageFinalModel(getBuffer());
+        AccountMessageModel = new AccountMessageFinalModel(getBuffer());
     }
 
     public long send(Object obj)
     {
-        if (obj instanceof com.chronoxor.proto.Order)
+        if (obj instanceof com.chronoxor.proto.OrderMessage)
         {
-            com.chronoxor.proto.Order value = (com.chronoxor.proto.Order)obj;
-            return send(value);
+            com.chronoxor.proto.OrderMessage value = (com.chronoxor.proto.OrderMessage)obj;
+            if (value.fbeType() == OrderMessageModel.fbeType())
+                return send(value);
         }
-        if (obj instanceof com.chronoxor.proto.Balance)
+        if (obj instanceof com.chronoxor.proto.BalanceMessage)
         {
-            com.chronoxor.proto.Balance value = (com.chronoxor.proto.Balance)obj;
-            return send(value);
+            com.chronoxor.proto.BalanceMessage value = (com.chronoxor.proto.BalanceMessage)obj;
+            if (value.fbeType() == BalanceMessageModel.fbeType())
+                return send(value);
         }
-        if (obj instanceof com.chronoxor.proto.Account)
+        if (obj instanceof com.chronoxor.proto.AccountMessage)
         {
-            com.chronoxor.proto.Account value = (com.chronoxor.proto.Account)obj;
-            return send(value);
+            com.chronoxor.proto.AccountMessage value = (com.chronoxor.proto.AccountMessage)obj;
+            if (value.fbeType() == AccountMessageModel.fbeType())
+                return send(value);
         }
 
         return 0;
     }
 
-    public long send(com.chronoxor.proto.Order value)
+    public long send(com.chronoxor.proto.OrderMessage value)
     {
         // Serialize the value into the FBE stream
-        long serialized = OrderModel.serialize(value);
-        assert (serialized > 0) : "com.chronoxor.proto.Order serialization failed!";
-        assert OrderModel.verify() : "com.chronoxor.proto.Order validation failed!";
+        long serialized = OrderMessageModel.serialize(value);
+        assert (serialized > 0) : "com.chronoxor.proto.OrderMessage serialization failed!";
+        assert OrderMessageModel.verify() : "com.chronoxor.proto.OrderMessage validation failed!";
 
         // Log the value
         if (getLogging())
@@ -66,12 +69,12 @@ public class FinalSender extends com.chronoxor.fbe.Sender
         // Send the serialized value
         return sendSerialized(serialized);
     }
-    public long send(com.chronoxor.proto.Balance value)
+    public long send(com.chronoxor.proto.BalanceMessage value)
     {
         // Serialize the value into the FBE stream
-        long serialized = BalanceModel.serialize(value);
-        assert (serialized > 0) : "com.chronoxor.proto.Balance serialization failed!";
-        assert BalanceModel.verify() : "com.chronoxor.proto.Balance validation failed!";
+        long serialized = BalanceMessageModel.serialize(value);
+        assert (serialized > 0) : "com.chronoxor.proto.BalanceMessage serialization failed!";
+        assert BalanceMessageModel.verify() : "com.chronoxor.proto.BalanceMessage validation failed!";
 
         // Log the value
         if (getLogging())
@@ -83,12 +86,12 @@ public class FinalSender extends com.chronoxor.fbe.Sender
         // Send the serialized value
         return sendSerialized(serialized);
     }
-    public long send(com.chronoxor.proto.Account value)
+    public long send(com.chronoxor.proto.AccountMessage value)
     {
         // Serialize the value into the FBE stream
-        long serialized = AccountModel.serialize(value);
-        assert (serialized > 0) : "com.chronoxor.proto.Account serialization failed!";
-        assert AccountModel.verify() : "com.chronoxor.proto.Account validation failed!";
+        long serialized = AccountMessageModel.serialize(value);
+        assert (serialized > 0) : "com.chronoxor.proto.AccountMessage serialization failed!";
+        assert AccountMessageModel.verify() : "com.chronoxor.proto.AccountMessage validation failed!";
 
         // Log the value
         if (getLogging())

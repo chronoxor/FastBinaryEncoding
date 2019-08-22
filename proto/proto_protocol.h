@@ -39,9 +39,9 @@ class Sender : public virtual FBE::Sender<TBuffer>
 {
 public:
     Sender()
-        : OrderModel(this->_buffer)
-        , BalanceModel(this->_buffer)
-        , AccountModel(this->_buffer)
+        : OrderMessageModel(this->_buffer)
+        , BalanceMessageModel(this->_buffer)
+        , AccountMessageModel(this->_buffer)
     {}
     Sender(const Sender&) = default;
     Sender(Sender&&) noexcept = default;
@@ -50,12 +50,12 @@ public:
     Sender& operator=(const Sender&) = default;
     Sender& operator=(Sender&&) noexcept = default;
 
-    size_t send(const ::proto::Order& value)
+    size_t send(const ::proto::OrderMessage& value)
     {
         // Serialize the value into the FBE stream
-        size_t serialized = OrderModel.serialize(value);
-        assert((serialized > 0) && "proto::Order serialization failed!");
-        assert(OrderModel.verify() && "proto::Order validation failed!");
+        size_t serialized = OrderMessageModel.serialize(value);
+        assert((serialized > 0) && "proto::OrderMessage serialization failed!");
+        assert(OrderMessageModel.verify() && "proto::OrderMessage validation failed!");
 
         // Log the value
         if (this->_logging)
@@ -68,12 +68,12 @@ public:
         return this->send_serialized(serialized);
     }
 
-    size_t send(const ::proto::Balance& value)
+    size_t send(const ::proto::BalanceMessage& value)
     {
         // Serialize the value into the FBE stream
-        size_t serialized = BalanceModel.serialize(value);
-        assert((serialized > 0) && "proto::Balance serialization failed!");
-        assert(BalanceModel.verify() && "proto::Balance validation failed!");
+        size_t serialized = BalanceMessageModel.serialize(value);
+        assert((serialized > 0) && "proto::BalanceMessage serialization failed!");
+        assert(BalanceMessageModel.verify() && "proto::BalanceMessage validation failed!");
 
         // Log the value
         if (this->_logging)
@@ -86,12 +86,12 @@ public:
         return this->send_serialized(serialized);
     }
 
-    size_t send(const ::proto::Account& value)
+    size_t send(const ::proto::AccountMessage& value)
     {
         // Serialize the value into the FBE stream
-        size_t serialized = AccountModel.serialize(value);
-        assert((serialized > 0) && "proto::Account serialization failed!");
-        assert(AccountModel.verify() && "proto::Account validation failed!");
+        size_t serialized = AccountMessageModel.serialize(value);
+        assert((serialized > 0) && "proto::AccountMessage serialization failed!");
+        assert(AccountMessageModel.verify() && "proto::AccountMessage validation failed!");
 
         // Log the value
         if (this->_logging)
@@ -106,9 +106,9 @@ public:
 
 public:
     // Sender models accessors
-    FBE::proto::OrderModel<TBuffer> OrderModel;
-    FBE::proto::BalanceModel<TBuffer> BalanceModel;
-    FBE::proto::AccountModel<TBuffer> AccountModel;
+    FBE::proto::OrderMessageModel<TBuffer> OrderMessageModel;
+    FBE::proto::BalanceMessageModel<TBuffer> BalanceMessageModel;
+    FBE::proto::AccountMessageModel<TBuffer> AccountMessageModel;
 };
 
 } // namespace proto
@@ -132,72 +132,73 @@ public:
 
 protected:
     // Receive handlers
-    virtual void onReceive(const ::proto::Order& value) {}
-    virtual void onReceive(const ::proto::Balance& value) {}
-    virtual void onReceive(const ::proto::Account& value) {}
+    virtual void onReceive(const ::proto::OrderMessage& value) {}
+    virtual void onReceive(const ::proto::BalanceMessage& value) {}
+    virtual void onReceive(const ::proto::AccountMessage& value) {}
 
     // Receive message handler
     bool onReceive(size_t type, const void* data, size_t size) override
     {
         switch (type)
         {
-            case FBE::proto::OrderModel<ReadBuffer>::fbe_type():
+            case FBE::proto::OrderMessageModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
-                OrderModel.attach(data, size);
-                assert(OrderModel.verify() && "proto::Order validation failed!");
-                [[maybe_unused]] size_t deserialized = OrderModel.deserialize(OrderValue);
-                assert((deserialized > 0) && "proto::Order deserialization failed!");
+                OrderMessageModel.attach(data, size);
+                assert(OrderMessageModel.verify() && "proto::OrderMessage validation failed!");
+                [[maybe_unused]] size_t deserialized = OrderMessageModel.deserialize(OrderMessageValue);
+                assert((deserialized > 0) && "proto::OrderMessage deserialization failed!");
 
                 // Log the value
                 if (this->_logging)
                 {
-                    std::string message = OrderValue.string();
+                    std::string message = OrderMessageValue.string();
                     this->onReceiveLog(message);
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(OrderValue);
+                onReceive(OrderMessageValue);
                 return true;
             }
-            case FBE::proto::BalanceModel<ReadBuffer>::fbe_type():
+            case FBE::proto::BalanceMessageModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
-                BalanceModel.attach(data, size);
-                assert(BalanceModel.verify() && "proto::Balance validation failed!");
-                [[maybe_unused]] size_t deserialized = BalanceModel.deserialize(BalanceValue);
-                assert((deserialized > 0) && "proto::Balance deserialization failed!");
+                BalanceMessageModel.attach(data, size);
+                assert(BalanceMessageModel.verify() && "proto::BalanceMessage validation failed!");
+                [[maybe_unused]] size_t deserialized = BalanceMessageModel.deserialize(BalanceMessageValue);
+                assert((deserialized > 0) && "proto::BalanceMessage deserialization failed!");
 
                 // Log the value
                 if (this->_logging)
                 {
-                    std::string message = BalanceValue.string();
+                    std::string message = BalanceMessageValue.string();
                     this->onReceiveLog(message);
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(BalanceValue);
+                onReceive(BalanceMessageValue);
                 return true;
             }
-            case FBE::proto::AccountModel<ReadBuffer>::fbe_type():
+            case FBE::proto::AccountMessageModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
-                AccountModel.attach(data, size);
-                assert(AccountModel.verify() && "proto::Account validation failed!");
-                [[maybe_unused]] size_t deserialized = AccountModel.deserialize(AccountValue);
-                assert((deserialized > 0) && "proto::Account deserialization failed!");
+                AccountMessageModel.attach(data, size);
+                assert(AccountMessageModel.verify() && "proto::AccountMessage validation failed!");
+                [[maybe_unused]] size_t deserialized = AccountMessageModel.deserialize(AccountMessageValue);
+                assert((deserialized > 0) && "proto::AccountMessage deserialization failed!");
 
                 // Log the value
                 if (this->_logging)
                 {
-                    std::string message = AccountValue.string();
+                    std::string message = AccountMessageValue.string();
                     this->onReceiveLog(message);
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(AccountValue);
+                onReceive(AccountMessageValue);
                 return true;
             }
+            default: break;
         }
 
         return false;
@@ -205,14 +206,14 @@ protected:
 
 private:
     // Receiver values accessors
-    ::proto::Order OrderValue;
-    ::proto::Balance BalanceValue;
-    ::proto::Account AccountValue;
+    ::proto::OrderMessage OrderMessageValue;
+    ::proto::BalanceMessage BalanceMessageValue;
+    ::proto::AccountMessage AccountMessageValue;
 
     // Receiver models accessors
-    FBE::proto::OrderModel<ReadBuffer> OrderModel;
-    FBE::proto::BalanceModel<ReadBuffer> BalanceModel;
-    FBE::proto::AccountModel<ReadBuffer> AccountModel;
+    FBE::proto::OrderMessageModel<ReadBuffer> OrderMessageModel;
+    FBE::proto::BalanceMessageModel<ReadBuffer> BalanceMessageModel;
+    FBE::proto::AccountMessageModel<ReadBuffer> AccountMessageModel;
 };
 
 } // namespace proto
@@ -236,57 +237,58 @@ public:
 
 protected:
     // Proxy handlers
-    virtual void onProxy(FBE::proto::OrderModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::proto::BalanceModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::proto::AccountModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
+    virtual void onProxy(FBE::proto::OrderMessageModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
+    virtual void onProxy(FBE::proto::BalanceMessageModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
+    virtual void onProxy(FBE::proto::AccountMessageModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
 
     // Receive message handler
     bool onReceive(size_t type, const void* data, size_t size) override
     {
         switch (type)
         {
-            case FBE::proto::OrderModel<ReadBuffer>::fbe_type():
+            case FBE::proto::OrderMessageModel<ReadBuffer>::fbe_type():
             {
                 // Attach the FBE stream to the proxy model
-                OrderModel.attach(data, size);
-                assert(OrderModel.verify() && "proto::Order validation failed!");
+                OrderMessageModel.attach(data, size);
+                assert(OrderMessageModel.verify() && "proto::OrderMessage validation failed!");
 
-                size_t fbe_begin = OrderModel.model.get_begin();
+                size_t fbe_begin = OrderMessageModel.model.get_begin();
                 if (fbe_begin == 0)
                     return false;
                 // Call proxy handler
-                onProxy(OrderModel, type, data, size);
-                OrderModel.model.get_end(fbe_begin);
+                onProxy(OrderMessageModel, type, data, size);
+                OrderMessageModel.model.get_end(fbe_begin);
                 return true;
             }
-            case FBE::proto::BalanceModel<ReadBuffer>::fbe_type():
+            case FBE::proto::BalanceMessageModel<ReadBuffer>::fbe_type():
             {
                 // Attach the FBE stream to the proxy model
-                BalanceModel.attach(data, size);
-                assert(BalanceModel.verify() && "proto::Balance validation failed!");
+                BalanceMessageModel.attach(data, size);
+                assert(BalanceMessageModel.verify() && "proto::BalanceMessage validation failed!");
 
-                size_t fbe_begin = BalanceModel.model.get_begin();
+                size_t fbe_begin = BalanceMessageModel.model.get_begin();
                 if (fbe_begin == 0)
                     return false;
                 // Call proxy handler
-                onProxy(BalanceModel, type, data, size);
-                BalanceModel.model.get_end(fbe_begin);
+                onProxy(BalanceMessageModel, type, data, size);
+                BalanceMessageModel.model.get_end(fbe_begin);
                 return true;
             }
-            case FBE::proto::AccountModel<ReadBuffer>::fbe_type():
+            case FBE::proto::AccountMessageModel<ReadBuffer>::fbe_type():
             {
                 // Attach the FBE stream to the proxy model
-                AccountModel.attach(data, size);
-                assert(AccountModel.verify() && "proto::Account validation failed!");
+                AccountMessageModel.attach(data, size);
+                assert(AccountMessageModel.verify() && "proto::AccountMessage validation failed!");
 
-                size_t fbe_begin = AccountModel.model.get_begin();
+                size_t fbe_begin = AccountMessageModel.model.get_begin();
                 if (fbe_begin == 0)
                     return false;
                 // Call proxy handler
-                onProxy(AccountModel, type, data, size);
-                AccountModel.model.get_end(fbe_begin);
+                onProxy(AccountMessageModel, type, data, size);
+                AccountMessageModel.model.get_end(fbe_begin);
                 return true;
             }
+            default: break;
         }
 
         return false;
@@ -294,9 +296,9 @@ protected:
 
 private:
     // Proxy models accessors
-    FBE::proto::OrderModel<ReadBuffer> OrderModel;
-    FBE::proto::BalanceModel<ReadBuffer> BalanceModel;
-    FBE::proto::AccountModel<ReadBuffer> AccountModel;
+    FBE::proto::OrderMessageModel<ReadBuffer> OrderMessageModel;
+    FBE::proto::BalanceMessageModel<ReadBuffer> BalanceMessageModel;
+    FBE::proto::AccountMessageModel<ReadBuffer> AccountMessageModel;
 };
 
 } // namespace proto
@@ -336,21 +338,21 @@ protected:
     std::mutex _lock;
     uint64_t _timestamp{0};
 
-    virtual bool onReceiveResponse(const ::proto::Order& response) { return false; }
-    virtual bool onReceiveResponse(const ::proto::Balance& response) { return false; }
-    virtual bool onReceiveResponse(const ::proto::Account& response) { return false; }
+    virtual bool onReceiveResponse(const ::proto::OrderMessage& response) { return false; }
+    virtual bool onReceiveResponse(const ::proto::BalanceMessage& response) { return false; }
+    virtual bool onReceiveResponse(const ::proto::AccountMessage& response) { return false; }
 
-    virtual bool onReceiveReject(const ::proto::Order& reject) { return false; }
-    virtual bool onReceiveReject(const ::proto::Balance& reject) { return false; }
-    virtual bool onReceiveReject(const ::proto::Account& reject) { return false; }
+    virtual bool onReceiveReject(const ::proto::OrderMessage& reject) { return false; }
+    virtual bool onReceiveReject(const ::proto::BalanceMessage& reject) { return false; }
+    virtual bool onReceiveReject(const ::proto::AccountMessage& reject) { return false; }
 
-    virtual void onReceiveNotify(const ::proto::Order& notify) {}
-    virtual void onReceiveNotify(const ::proto::Balance& notify) {}
-    virtual void onReceiveNotify(const ::proto::Account& notify) {}
+    virtual void onReceiveNotify(const ::proto::OrderMessage& notify) {}
+    virtual void onReceiveNotify(const ::proto::BalanceMessage& notify) {}
+    virtual void onReceiveNotify(const ::proto::AccountMessage& notify) {}
 
-    virtual void onReceive(const ::proto::Order& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
-    virtual void onReceive(const ::proto::Balance& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
-    virtual void onReceive(const ::proto::Account& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::proto::OrderMessage& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::proto::BalanceMessage& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::proto::AccountMessage& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
 
     // Reset client requests
     virtual void reset_requests()
@@ -377,9 +379,9 @@ class FinalSender : public virtual FBE::Sender<TBuffer>
 {
 public:
     FinalSender()
-        : OrderModel(this->_buffer)
-        , BalanceModel(this->_buffer)
-        , AccountModel(this->_buffer)
+        : OrderMessageModel(this->_buffer)
+        , BalanceMessageModel(this->_buffer)
+        , AccountMessageModel(this->_buffer)
     { this->final(true); }
     FinalSender(const FinalSender&) = default;
     FinalSender(FinalSender&&) noexcept = default;
@@ -388,12 +390,12 @@ public:
     FinalSender& operator=(const FinalSender&) = default;
     FinalSender& operator=(FinalSender&&) noexcept = default;
 
-    size_t send(const ::proto::Order& value)
+    size_t send(const ::proto::OrderMessage& value)
     {
         // Serialize the value into the FBE stream
-        size_t serialized = OrderModel.serialize(value);
-        assert((serialized > 0) && "proto::Order serialization failed!");
-        assert(OrderModel.verify() && "proto::Order validation failed!");
+        size_t serialized = OrderMessageModel.serialize(value);
+        assert((serialized > 0) && "proto::OrderMessage serialization failed!");
+        assert(OrderMessageModel.verify() && "proto::OrderMessage validation failed!");
 
         // Log the value
         if (this->_logging)
@@ -406,12 +408,12 @@ public:
         return this->send_serialized(serialized);
     }
 
-    size_t send(const ::proto::Balance& value)
+    size_t send(const ::proto::BalanceMessage& value)
     {
         // Serialize the value into the FBE stream
-        size_t serialized = BalanceModel.serialize(value);
-        assert((serialized > 0) && "proto::Balance serialization failed!");
-        assert(BalanceModel.verify() && "proto::Balance validation failed!");
+        size_t serialized = BalanceMessageModel.serialize(value);
+        assert((serialized > 0) && "proto::BalanceMessage serialization failed!");
+        assert(BalanceMessageModel.verify() && "proto::BalanceMessage validation failed!");
 
         // Log the value
         if (this->_logging)
@@ -424,12 +426,12 @@ public:
         return this->send_serialized(serialized);
     }
 
-    size_t send(const ::proto::Account& value)
+    size_t send(const ::proto::AccountMessage& value)
     {
         // Serialize the value into the FBE stream
-        size_t serialized = AccountModel.serialize(value);
-        assert((serialized > 0) && "proto::Account serialization failed!");
-        assert(AccountModel.verify() && "proto::Account validation failed!");
+        size_t serialized = AccountMessageModel.serialize(value);
+        assert((serialized > 0) && "proto::AccountMessage serialization failed!");
+        assert(AccountMessageModel.verify() && "proto::AccountMessage validation failed!");
 
         // Log the value
         if (this->_logging)
@@ -444,9 +446,9 @@ public:
 
 public:
     // Sender models accessors
-    FBE::proto::OrderFinalModel<TBuffer> OrderModel;
-    FBE::proto::BalanceFinalModel<TBuffer> BalanceModel;
-    FBE::proto::AccountFinalModel<TBuffer> AccountModel;
+    FBE::proto::OrderMessageFinalModel<TBuffer> OrderMessageModel;
+    FBE::proto::BalanceMessageFinalModel<TBuffer> BalanceMessageModel;
+    FBE::proto::AccountMessageFinalModel<TBuffer> AccountMessageModel;
 };
 
 } // namespace proto
@@ -470,72 +472,73 @@ public:
 
 protected:
     // Receive handlers
-    virtual void onReceive(const ::proto::Order& value) {}
-    virtual void onReceive(const ::proto::Balance& value) {}
-    virtual void onReceive(const ::proto::Account& value) {}
+    virtual void onReceive(const ::proto::OrderMessage& value) {}
+    virtual void onReceive(const ::proto::BalanceMessage& value) {}
+    virtual void onReceive(const ::proto::AccountMessage& value) {}
 
     // Receive message handler
     bool onReceive(size_t type, const void* data, size_t size) override
     {
         switch (type)
         {
-            case FBE::proto::OrderFinalModel<ReadBuffer>::fbe_type():
+            case FBE::proto::OrderMessageFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
-                OrderModel.attach(data, size);
-                assert(OrderModel.verify() && "proto::Order validation failed!");
-                [[maybe_unused]] size_t deserialized = OrderModel.deserialize(OrderValue);
-                assert((deserialized > 0) && "proto::Order deserialization failed!");
+                OrderMessageModel.attach(data, size);
+                assert(OrderMessageModel.verify() && "proto::OrderMessage validation failed!");
+                [[maybe_unused]] size_t deserialized = OrderMessageModel.deserialize(OrderMessageValue);
+                assert((deserialized > 0) && "proto::OrderMessage deserialization failed!");
 
                 // Log the value
                 if (this->_logging)
                 {
-                    std::string message = OrderValue.string();
+                    std::string message = OrderMessageValue.string();
                     this->onReceiveLog(message);
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(OrderValue);
+                onReceive(OrderMessageValue);
                 return true;
             }
-            case FBE::proto::BalanceFinalModel<ReadBuffer>::fbe_type():
+            case FBE::proto::BalanceMessageFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
-                BalanceModel.attach(data, size);
-                assert(BalanceModel.verify() && "proto::Balance validation failed!");
-                [[maybe_unused]] size_t deserialized = BalanceModel.deserialize(BalanceValue);
-                assert((deserialized > 0) && "proto::Balance deserialization failed!");
+                BalanceMessageModel.attach(data, size);
+                assert(BalanceMessageModel.verify() && "proto::BalanceMessage validation failed!");
+                [[maybe_unused]] size_t deserialized = BalanceMessageModel.deserialize(BalanceMessageValue);
+                assert((deserialized > 0) && "proto::BalanceMessage deserialization failed!");
 
                 // Log the value
                 if (this->_logging)
                 {
-                    std::string message = BalanceValue.string();
+                    std::string message = BalanceMessageValue.string();
                     this->onReceiveLog(message);
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(BalanceValue);
+                onReceive(BalanceMessageValue);
                 return true;
             }
-            case FBE::proto::AccountFinalModel<ReadBuffer>::fbe_type():
+            case FBE::proto::AccountMessageFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
-                AccountModel.attach(data, size);
-                assert(AccountModel.verify() && "proto::Account validation failed!");
-                [[maybe_unused]] size_t deserialized = AccountModel.deserialize(AccountValue);
-                assert((deserialized > 0) && "proto::Account deserialization failed!");
+                AccountMessageModel.attach(data, size);
+                assert(AccountMessageModel.verify() && "proto::AccountMessage validation failed!");
+                [[maybe_unused]] size_t deserialized = AccountMessageModel.deserialize(AccountMessageValue);
+                assert((deserialized > 0) && "proto::AccountMessage deserialization failed!");
 
                 // Log the value
                 if (this->_logging)
                 {
-                    std::string message = AccountValue.string();
+                    std::string message = AccountMessageValue.string();
                     this->onReceiveLog(message);
                 }
 
                 // Call receive handler with deserialized value
-                onReceive(AccountValue);
+                onReceive(AccountMessageValue);
                 return true;
             }
+            default: break;
         }
 
         return false;
@@ -543,14 +546,14 @@ protected:
 
 private:
     // Receiver values accessors
-    ::proto::Order OrderValue;
-    ::proto::Balance BalanceValue;
-    ::proto::Account AccountValue;
+    ::proto::OrderMessage OrderMessageValue;
+    ::proto::BalanceMessage BalanceMessageValue;
+    ::proto::AccountMessage AccountMessageValue;
 
     // Receiver models accessors
-    FBE::proto::OrderFinalModel<ReadBuffer> OrderModel;
-    FBE::proto::BalanceFinalModel<ReadBuffer> BalanceModel;
-    FBE::proto::AccountFinalModel<ReadBuffer> AccountModel;
+    FBE::proto::OrderMessageFinalModel<ReadBuffer> OrderMessageModel;
+    FBE::proto::BalanceMessageFinalModel<ReadBuffer> BalanceMessageModel;
+    FBE::proto::AccountMessageFinalModel<ReadBuffer> AccountMessageModel;
 };
 
 } // namespace proto
@@ -590,21 +593,21 @@ protected:
     std::mutex _lock;
     uint64_t _timestamp{0};
 
-    virtual bool onReceiveResponse(const ::proto::Order& response) { return false; }
-    virtual bool onReceiveResponse(const ::proto::Balance& response) { return false; }
-    virtual bool onReceiveResponse(const ::proto::Account& response) { return false; }
+    virtual bool onReceiveResponse(const ::proto::OrderMessage& response) { return false; }
+    virtual bool onReceiveResponse(const ::proto::BalanceMessage& response) { return false; }
+    virtual bool onReceiveResponse(const ::proto::AccountMessage& response) { return false; }
 
-    virtual bool onReceiveReject(const ::proto::Order& reject) { return false; }
-    virtual bool onReceiveReject(const ::proto::Balance& reject) { return false; }
-    virtual bool onReceiveReject(const ::proto::Account& reject) { return false; }
+    virtual bool onReceiveReject(const ::proto::OrderMessage& reject) { return false; }
+    virtual bool onReceiveReject(const ::proto::BalanceMessage& reject) { return false; }
+    virtual bool onReceiveReject(const ::proto::AccountMessage& reject) { return false; }
 
-    virtual void onReceiveNotify(const ::proto::Order& notify) {}
-    virtual void onReceiveNotify(const ::proto::Balance& notify) {}
-    virtual void onReceiveNotify(const ::proto::Account& notify) {}
+    virtual void onReceiveNotify(const ::proto::OrderMessage& notify) {}
+    virtual void onReceiveNotify(const ::proto::BalanceMessage& notify) {}
+    virtual void onReceiveNotify(const ::proto::AccountMessage& notify) {}
 
-    virtual void onReceive(const ::proto::Order& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
-    virtual void onReceive(const ::proto::Balance& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
-    virtual void onReceive(const ::proto::Account& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::proto::OrderMessage& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::proto::BalanceMessage& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
+    virtual void onReceive(const ::proto::AccountMessage& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
 
     // Reset client requests
     virtual void reset_requests()

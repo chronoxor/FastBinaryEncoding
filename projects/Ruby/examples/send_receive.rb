@@ -12,13 +12,13 @@ class MySender < Proto::Sender
 end
 
 class MyReceiver < Proto::Receiver
-  def on_receive_order(value)
+  def on_receive_ordermessage(value)
   end
 
-  def on_receive_balance(value)
+  def on_receive_balancemessage(value)
   end
 
-  def on_receive_account(value)
+  def on_receive_accountmessage(value)
   end
 
   def on_receive_log(message)
@@ -33,18 +33,18 @@ sender.logging = true
 
 # Create and send a new order
 order = Proto::Order.new(1, 'EURUSD', Proto::OrderSide.buy, Proto::OrderType.market, 1.23456, 1000.0)
-sender.send(order)
+sender.send(Proto::OrderMessage.new(order))
 
 # Create and send a new balance wallet
 balance = Proto::Balance.new('USD', 1000.0)
-sender.send(balance)
+sender.send(Proto::BalanceMessage.new(balance))
 
 # Create and send a new account with some orders
 account = Proto::Account.new(1, 'Test', Proto::State.good, Proto::Balance.new('USD', 1000.0), Proto::Balance.new('EUR', 100.0))
 account.orders.push(Proto::Order.new(1, 'EURUSD', Proto::OrderSide.buy, Proto::OrderType.market, 1.23456, 1000.0))
 account.orders.push(Proto::Order.new(2, 'EURUSD', Proto::OrderSide.sell, Proto::OrderType.limit, 1.0, 100.0))
 account.orders.push(Proto::Order.new(3, 'EURUSD', Proto::OrderSide.buy, Proto::OrderType.stop, 1.5, 10.0))
-sender.send(account)
+sender.send(Proto::AccountMessage.new(account))
 
 receiver = MyReceiver.new
 

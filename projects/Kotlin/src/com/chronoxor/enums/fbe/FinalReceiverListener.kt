@@ -10,5 +10,4 @@ package com.chronoxor.enums.fbe
 // Fast Binary Encoding com.chronoxor.enums final receiver listener
 interface FinalReceiverListener
 {
-    fun onReceive(value: com.chronoxor.enums.Enums) {}
 }

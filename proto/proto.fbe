@@ -63,3 +63,21 @@ struct Account(3)
     Balance? asset;
     Order[] orders;
 }
+
+// Order message declaration
+message OrderMessage
+{
+    Order body;	
+}
+
+// Balance message declaration
+message BalanceMessage
+{
+    Balance body;	
+}
+
+// Account message declaration
+message AccountMessage
+{
+    Account body;	
+}

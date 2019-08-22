@@ -10,12 +10,12 @@ package com.chronoxor.test
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructHashEx : Comparable<Any?>
 {
-    var f1: java.util.HashMap<StructSimple, StructNested> = java.util.HashMap()
-    var f2: java.util.HashMap<StructSimple, StructNested?> = java.util.HashMap()
+    var f1: java.util.HashMap<StructSimple, StructNested>
+    var f2: java.util.HashMap<StructSimple, StructNested?>
 
-    constructor()
+    @Transient open var fbeType: Long = 142
 
-    constructor(f1: java.util.HashMap<StructSimple, StructNested>, f2: java.util.HashMap<StructSimple, StructNested?>)
+    constructor(f1: java.util.HashMap<StructSimple, StructNested> = java.util.HashMap(), f2: java.util.HashMap<StructSimple, StructNested?> = java.util.HashMap())
     {
         this.f1 = f1
         this.f2 = f2
@@ -114,8 +114,10 @@ open class StructHashEx : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 142
         fun fromJson(json: String): StructHashEx = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructHashEx::class.java)
     }
 }

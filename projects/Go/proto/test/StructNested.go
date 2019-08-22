@@ -8,10 +8,12 @@ package test
 import "fmt"
 import "strconv"
 import "strings"
+import "errors"
 import "../fbe"
 import "../proto"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 var _ = proto.Version
 
@@ -113,6 +115,9 @@ func (s *StructNested) Key() StructNestedKey {
 func (s *StructNested) Optional() *StructNested {
     return s
 }
+
+// Get the FBE type
+func (s *StructNested) FBEType() int { return 112 }
 
 // Convert struct to string
 func (s *StructNested) String() string {

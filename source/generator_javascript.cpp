@@ -9984,6 +9984,33 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
     Indent(-1);
     WriteLineIndent("}");
 
+    // Generate struct FBE type property
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Get the FBE type");
+    WriteLineIndent(" * @this {!" + *s->name + "}");
+    WriteLineIndent(" * @returns {!number} FBE type");
+    WriteLineIndent(" */");
+    WriteLineIndent("get fbeType () {");
+    Indent(1);
+    WriteLineIndent("return " + *s->name + ".fbeType");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Get the FBE type (static)");
+    WriteLineIndent(" * @this {!" + *s->name + "}");
+    WriteLineIndent(" * @returns {!number} FBE type");
+    WriteLineIndent(" */");
+    WriteLineIndent("static get fbeType () {");
+    Indent(1);
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("return " + ConvertTypeName(*s->base, false) + ".fbeType");
+    else
+        WriteLineIndent("return " + std::to_string(s->type));
+    Indent(-1);
+    WriteLineIndent("}");
+
     // Generate struct end
     Indent(-1);
     WriteLineIndent("}");
@@ -11207,7 +11234,8 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent("this._" + *s->name + "Model = new " + *s->name + "" + model + "(this.buffer)");
+            if (s->message)
+                WriteLineIndent("this._" + *s->name + "Model = new " + *s->name + "" + model + "(this.buffer)");
     }
     WriteLineIndent("this.onSendHandler = this.onSend");
     WriteLineIndent("this.onSendLogHandler = this.onSendLog");
@@ -11242,17 +11270,20 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
         WriteLineIndent("// Sender models accessors");
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("/**");
-            WriteLineIndent(" * Get " + *s->name + " model");
-            WriteLineIndent(" * @this {!" + sender + "}");
-            WriteLineIndent(" * @returns {!" + *s->name + "Model} " + *s->name + " model");
-            WriteLineIndent(" */");
-            WriteLineIndent("get " + *s->name + "Model () {");
-            Indent(1);
-            WriteLineIndent("return this._" + *s->name + "Model");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("/**");
+                WriteLineIndent(" * Get " + *s->name + " model");
+                WriteLineIndent(" * @this {!" + sender + "}");
+                WriteLineIndent(" * @returns {!" + *s->name + "Model} " + *s->name + " model");
+                WriteLineIndent(" */");
+                WriteLineIndent("get " + *s->name + "Model () {");
+                Indent(1);
+                WriteLineIndent("return this._" + *s->name + "Model");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
 
@@ -11272,11 +11303,14 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("if (value instanceof " + *s->name + ") {");
-            Indent(1);
-            WriteLineIndent("return this.send_" + *s->name + "(value)");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLineIndent("if ((value instanceof " + *s->name + ") && (value.fbeType === this." + *s->name + "Model.fbeType)) {");
+                Indent(1);
+                WriteLineIndent("return this.send_" + *s->name + "(value)");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
     if (p->import)
@@ -11299,31 +11333,34 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("/**");
-            WriteLineIndent(" * Send " + *s->name + " value");
-            WriteLineIndent(" * @this {!" + sender + "}");
-            WriteLineIndent(" * @param {!" + *s->name + "} value " + *s->name + " value to send");
-            WriteLineIndent(" * @returns {!number} Sent bytes");
-            WriteLineIndent(" */");
-            WriteLineIndent("send_" + *s->name + " (value) { // eslint-disable-line");
-            Indent(1);
-            WriteLineIndent("// Serialize the value into the FBE stream");
-            WriteLineIndent("let serialized = this." + *s->name + "Model.serialize(value)");
-            WriteLineIndent("console.assert((serialized > 0), '" + *p->name + "." + *s->name + " serialization failed!')");
-            WriteLineIndent("console.assert(this." + *s->name + "Model.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (this.logging) {");
-            Indent(1);
-            WriteLineIndent("this.onSendLog(value.toString())");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Send the serialized value");
-            WriteLineIndent("return this.sendSerialized(serialized)");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("/**");
+                WriteLineIndent(" * Send " + *s->name + " value");
+                WriteLineIndent(" * @this {!" + sender + "}");
+                WriteLineIndent(" * @param {!" + *s->name + "} value " + *s->name + " value to send");
+                WriteLineIndent(" * @returns {!number} Sent bytes");
+                WriteLineIndent(" */");
+                WriteLineIndent("send_" + *s->name + " (value) { // eslint-disable-line");
+                Indent(1);
+                WriteLineIndent("// Serialize the value into the FBE stream");
+                WriteLineIndent("let serialized = this." + *s->name + "Model.serialize(value)");
+                WriteLineIndent("console.assert((serialized > 0), '" + *p->name + "." + *s->name + " serialization failed!')");
+                WriteLineIndent("console.assert(this." + *s->name + "Model.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (this.logging) {");
+                Indent(1);
+                WriteLineIndent("this.onSendLog(value.toString())");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Send the serialized value");
+                WriteLineIndent("return this.sendSerialized(serialized)");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
 
@@ -11423,8 +11460,11 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("this._" + *s->name + "Value = new " + *s->name + "()");
-            WriteLineIndent("this._" + *s->name + "Model = new " + *s->name + model + "()");
+            if (s->message)
+            {
+                WriteLineIndent("this._" + *s->name + "Value = new " + *s->name + "()");
+                WriteLineIndent("this._" + *s->name + "Model = new " + *s->name + model + "()");
+            }
         }
     }
     WriteLineIndent("this.onReceiveLogHandler = this.onReceiveLog");
@@ -11470,13 +11510,16 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
         WriteLineIndent("// Receive handlers");
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("/**");
-            WriteLineIndent(" * " + *s->name + " receive handler");
-            WriteLineIndent(" * @this {!" + receiver + "}");
-            WriteLineIndent(" * @param {!" + *s->name + "} value " + *s->name + " received value");
-            WriteLineIndent(" */");
-            WriteLineIndent("onReceive_" + *s->name + " (value) {}  // eslint-disable-line");
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("/**");
+                WriteLineIndent(" * " + *s->name + " receive handler");
+                WriteLineIndent(" * @this {!" + receiver + "}");
+                WriteLineIndent(" * @param {!" + *s->name + "} value " + *s->name + " received value");
+                WriteLineIndent(" */");
+                WriteLineIndent("onReceive_" + *s->name + " (value) {}  // eslint-disable-line");
+            }
         }
         WriteLine();
     }
@@ -11499,27 +11542,31 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case " + *s->name + model + ".fbeType: {");
-            Indent(1);
-            WriteLineIndent("// Deserialize the value from the FBE stream");
-            WriteLineIndent("this._" + *s->name + "Model.attachBuffer(buffer, offset)");
-            WriteLineIndent("console.assert(this._" + *s->name + "Model.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
-            WriteLineIndent("let deserialized = this._" + *s->name + "Model.deserialize(this._" + *s->name + "Value)");
-            WriteLineIndent("console.assert((deserialized.size > 0), '" + *p->name + "." + *s->name + " deserialization failed!')");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (this.logging) {");
-            Indent(1);
-            WriteLineIndent("this.onReceiveLog(this._" + *s->name + "Value.toString())");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Call receive handler with deserialized value");
-            WriteLineIndent("this.onReceive_" + *s->name + "(this._" + *s->name + "Value)");
-            WriteLineIndent("return true");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLineIndent("case " + *s->name + model + ".fbeType: {");
+                Indent(1);
+                WriteLineIndent("// Deserialize the value from the FBE stream");
+                WriteLineIndent("this._" + *s->name + "Model.attachBuffer(buffer, offset)");
+                WriteLineIndent("console.assert(this._" + *s->name + "Model.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
+                WriteLineIndent("let deserialized = this._" + *s->name + "Model.deserialize(this._" + *s->name + "Value)");
+                WriteLineIndent("console.assert((deserialized.size > 0), '" + *p->name + "." + *s->name + " deserialization failed!')");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (this.logging) {");
+                Indent(1);
+                WriteLineIndent("this.onReceiveLog(this._" + *s->name + "Value.toString())");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Call receive handler with deserialized value");
+                WriteLineIndent("this.onReceive_" + *s->name + "(this._" + *s->name + "Value)");
+                WriteLineIndent("return true");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
+        WriteLineIndent("default: break");
         Indent(-1);
         WriteLineIndent("}");
     }
@@ -11601,7 +11648,8 @@ void GeneratorJavaScript::GenerateProxy(const std::shared_ptr<Package>& p, bool 
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent("this._" + *s->name + "Model = new " + *s->name + model + "()");
+            if (s->message)
+                WriteLineIndent("this._" + *s->name + "Model = new " + *s->name + model + "()");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -11645,17 +11693,20 @@ void GeneratorJavaScript::GenerateProxy(const std::shared_ptr<Package>& p, bool 
         WriteLineIndent("// Proxy handlers");
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("/**");
-            WriteLineIndent(" * " + *s->name + " proxy handler");
-            WriteLineIndent(" * @this {!" + proxy + "}");
-            WriteLineIndent(" * @param {!" + *s->name + "} model " + *s->name + " model");
-            WriteLineIndent(" * @param {!number} type Message type");
-            WriteLineIndent(" * @param {!Uint8Array} buffer Buffer to send");
-            WriteLineIndent(" * @param {!number} offset Buffer offset");
-            WriteLineIndent(" * @param {!number} size Buffer size");
-            WriteLineIndent(" */");
-            WriteLineIndent("onProxy_" + *s->name + " (model, type, buffer, offset, size) {}  // eslint-disable-line");
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("/**");
+                WriteLineIndent(" * " + *s->name + " proxy handler");
+                WriteLineIndent(" * @this {!" + proxy + "}");
+                WriteLineIndent(" * @param {!" + *s->name + "} model " + *s->name + " model");
+                WriteLineIndent(" * @param {!number} type Message type");
+                WriteLineIndent(" * @param {!Uint8Array} buffer Buffer to send");
+                WriteLineIndent(" * @param {!number} offset Buffer offset");
+                WriteLineIndent(" * @param {!number} size Buffer size");
+                WriteLineIndent(" */");
+                WriteLineIndent("onProxy_" + *s->name + " (model, type, buffer, offset, size) {}  // eslint-disable-line");
+            }
         }
         WriteLine();
     }
@@ -11678,25 +11729,29 @@ void GeneratorJavaScript::GenerateProxy(const std::shared_ptr<Package>& p, bool 
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case " + *s->name + model + ".fbeType: {");
-            Indent(1);
-            WriteLineIndent("// Attach the FBE stream to the proxy model");
-            WriteLineIndent("this._" + *s->name + "Model.attachBuffer(buffer, offset)");
-            WriteLineIndent("console.assert(this._" + *s->name + "Model.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
-            WriteLine();
-            WriteLineIndent("let fbeBegin = this._" + *s->name + "Model.model.getBegin()");
-            WriteLineIndent("if (fbeBegin === 0) {");
-            Indent(1);
-            WriteLineIndent("return false");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLineIndent("// Call proxy handler");
-            WriteLineIndent("this.onProxy_" + *s->name + "(this._" + *s->name + "Model, type, buffer, offset, size)");
-            WriteLineIndent("this._" + *s->name + "Model.model.getEnd(fbeBegin)");
-            WriteLineIndent("return true");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLineIndent("case " + *s->name + model + ".fbeType: {");
+                Indent(1);
+                WriteLineIndent("// Attach the FBE stream to the proxy model");
+                WriteLineIndent("this._" + *s->name + "Model.attachBuffer(buffer, offset)");
+                WriteLineIndent("console.assert(this._" + *s->name + "Model.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
+                WriteLine();
+                WriteLineIndent("let fbeBegin = this._" + *s->name + "Model.model.getBegin()");
+                WriteLineIndent("if (fbeBegin === 0) {");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("// Call proxy handler");
+                WriteLineIndent("this.onProxy_" + *s->name + "(this._" + *s->name + "Model, type, buffer, offset, size)");
+                WriteLineIndent("this._" + *s->name + "Model.model.getEnd(fbeBegin)");
+                WriteLineIndent("return true");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
+        WriteLineIndent("default: break");
         Indent(-1);
         WriteLineIndent("}");
     }
@@ -11762,9 +11817,12 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("this._" + *s->name + "SenderModel = new " + *s->name + "" + model + "(this.sendBuffer)");
-            WriteLineIndent("this._" + *s->name + "ReceiverValue = new " + *s->name + "()");
-            WriteLineIndent("this._" + *s->name + "ReceiverModel = new " + *s->name + model + "()");
+            if (s->message)
+            {
+                WriteLineIndent("this._" + *s->name + "SenderModel = new " + *s->name + "" + model + "(this.sendBuffer)");
+                WriteLineIndent("this._" + *s->name + "ReceiverValue = new " + *s->name + "()");
+                WriteLineIndent("this._" + *s->name + "ReceiverModel = new " + *s->name + model + "()");
+            }
         }
     }
     WriteLineIndent("this.onSendHandler = this.onSend");
@@ -11804,17 +11862,20 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
         WriteLineIndent("// Sender models accessors");
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("/**");
-            WriteLineIndent(" * Get " + *s->name + " model");
-            WriteLineIndent(" * @this {!" + client + "}");
-            WriteLineIndent(" * @returns {!" + *s->name + "Model} " + *s->name + " sender model");
-            WriteLineIndent(" */");
-            WriteLineIndent("get " + *s->name + "SenderModel () {");
-            Indent(1);
-            WriteLineIndent("return this._" + *s->name + "SenderModel");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("/**");
+                WriteLineIndent(" * Get " + *s->name + " model");
+                WriteLineIndent(" * @this {!" + client + "}");
+                WriteLineIndent(" * @returns {!" + *s->name + "Model} " + *s->name + " sender model");
+                WriteLineIndent(" */");
+                WriteLineIndent("get " + *s->name + "SenderModel () {");
+                Indent(1);
+                WriteLineIndent("return this._" + *s->name + "SenderModel");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
 
@@ -11860,11 +11921,14 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("if (value instanceof " + *s->name + ") {");
-            Indent(1);
-            WriteLineIndent("return this.send_" + *s->name + "(value)");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLineIndent("if ((value instanceof " + *s->name + ") && (value.fbeType === this." + *s->name + "SenderModel.fbeType)) {");
+                Indent(1);
+                WriteLineIndent("return this.send_" + *s->name + "(value)");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
     if (p->import)
@@ -11887,31 +11951,34 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("/**");
-            WriteLineIndent(" * Send " + *s->name + " value");
-            WriteLineIndent(" * @this {!" + client + "}");
-            WriteLineIndent(" * @param {!" + *s->name + "} value " + *s->name + " value to send");
-            WriteLineIndent(" * @returns {!number} Sent bytes");
-            WriteLineIndent(" */");
-            WriteLineIndent("send_" + *s->name + " (value) { // eslint-disable-line");
-            Indent(1);
-            WriteLineIndent("// Serialize the value into the FBE stream");
-            WriteLineIndent("let serialized = this." + *s->name + "SenderModel.serialize(value)");
-            WriteLineIndent("console.assert((serialized > 0), '" + *p->name + "." + *s->name + " serialization failed!')");
-            WriteLineIndent("console.assert(this." + *s->name + "SenderModel.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (this.logging) {");
-            Indent(1);
-            WriteLineIndent("this.onSendLog(value.toString())");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Send the serialized value");
-            WriteLineIndent("return this.sendSerialized(serialized)");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("/**");
+                WriteLineIndent(" * Send " + *s->name + " value");
+                WriteLineIndent(" * @this {!" + client + "}");
+                WriteLineIndent(" * @param {!" + *s->name + "} value " + *s->name + " value to send");
+                WriteLineIndent(" * @returns {!number} Sent bytes");
+                WriteLineIndent(" */");
+                WriteLineIndent("send_" + *s->name + " (value) { // eslint-disable-line");
+                Indent(1);
+                WriteLineIndent("// Serialize the value into the FBE stream");
+                WriteLineIndent("let serialized = this." + *s->name + "SenderModel.serialize(value)");
+                WriteLineIndent("console.assert((serialized > 0), '" + *p->name + "." + *s->name + " serialization failed!')");
+                WriteLineIndent("console.assert(this." + *s->name + "SenderModel.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (this.logging) {");
+                Indent(1);
+                WriteLineIndent("this.onSendLog(value.toString())");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Send the serialized value");
+                WriteLineIndent("return this.sendSerialized(serialized)");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
 
@@ -11975,13 +12042,16 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
         WriteLineIndent("// Receive handlers");
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("/**");
-            WriteLineIndent(" * " + *s->name + " receive handler");
-            WriteLineIndent(" * @this {!" + client + "}");
-            WriteLineIndent(" * @param {!" + *s->name + "} value " + *s->name + " received value");
-            WriteLineIndent(" */");
-            WriteLineIndent("onReceive_" + *s->name + " (value) {}  // eslint-disable-line");
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("/**");
+                WriteLineIndent(" * " + *s->name + " receive handler");
+                WriteLineIndent(" * @this {!" + client + "}");
+                WriteLineIndent(" * @param {!" + *s->name + "} value " + *s->name + " received value");
+                WriteLineIndent(" */");
+                WriteLineIndent("onReceive_" + *s->name + " (value) {}  // eslint-disable-line");
+            }
         }
         WriteLine();
     }
@@ -12004,27 +12074,31 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case " + *s->name + model + ".fbeType: {");
-            Indent(1);
-            WriteLineIndent("// Deserialize the value from the FBE stream");
-            WriteLineIndent("this._" + *s->name + "ReceiverModel.attachBuffer(buffer, offset)");
-            WriteLineIndent("console.assert(this._" + *s->name + "ReceiverModel.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
-            WriteLineIndent("let deserialized = this._" + *s->name + "ReceiverModel.deserialize(this._" + *s->name + "ReceiverValue)");
-            WriteLineIndent("console.assert((deserialized.size > 0), '" + *p->name + "." + *s->name + " deserialization failed!')");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (this.logging) {");
-            Indent(1);
-            WriteLineIndent("this.onReceiveLog(this._" + *s->name + "ReceiverValue.toString())");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Call receive handler with deserialized value");
-            WriteLineIndent("this.onReceive_" + *s->name + "(this._" + *s->name + "ReceiverValue)");
-            WriteLineIndent("return true");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLineIndent("case " + *s->name + model + ".fbeType: {");
+                Indent(1);
+                WriteLineIndent("// Deserialize the value from the FBE stream");
+                WriteLineIndent("this._" + *s->name + "ReceiverModel.attachBuffer(buffer, offset)");
+                WriteLineIndent("console.assert(this._" + *s->name + "ReceiverModel.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
+                WriteLineIndent("let deserialized = this._" + *s->name + "ReceiverModel.deserialize(this._" + *s->name + "ReceiverValue)");
+                WriteLineIndent("console.assert((deserialized.size > 0), '" + *p->name + "." + *s->name + " deserialization failed!')");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (this.logging) {");
+                Indent(1);
+                WriteLineIndent("this.onReceiveLog(this._" + *s->name + "ReceiverValue.toString())");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Call receive handler with deserialized value");
+                WriteLineIndent("this.onReceive_" + *s->name + "(this._" + *s->name + "ReceiverValue)");
+                WriteLineIndent("return true");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
+        WriteLineIndent("default: break");
         Indent(-1);
         WriteLineIndent("}");
     }

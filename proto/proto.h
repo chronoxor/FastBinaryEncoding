@@ -225,6 +225,8 @@ struct Order
     double price;
     double volume;
 
+    size_t fbe_type() const noexcept { return 1; }
+
     Order()
         : id((int32_t)0ll)
         , symbol()
@@ -388,6 +390,8 @@ struct Balance
     std::string currency;
     double amount;
 
+    size_t fbe_type() const noexcept { return 2; }
+
     Balance()
         : currency()
         , amount((double)0.0)
@@ -526,6 +530,8 @@ struct Account
     ::proto::Balance wallet;
     std::optional<::proto::Balance> asset;
     std::vector<::proto::Order> orders;
+
+    size_t fbe_type() const noexcept { return 3; }
 
     Account()
         : id((int32_t)0ll)
@@ -684,6 +690,378 @@ struct ValueReader<TJson, ::proto::Account>
         result &= FBE::JSON::from_json(json, value.wallet, "wallet");
         result &= FBE::JSON::from_json(json, value.asset, "asset");
         result &= FBE::JSON::from_json(json, value.orders, "orders");
+        return result;
+    }
+};
+
+} // namespace JSON
+
+} // namespace FBE
+
+namespace proto {
+
+struct OrderMessage
+{
+    ::proto::Order body;
+
+    size_t fbe_type() const noexcept { return 1; }
+
+    OrderMessage()
+        : body()
+    {}
+    explicit OrderMessage(const ::proto::Order& arg_body)
+        : body(arg_body)
+    {}
+    OrderMessage(const OrderMessage& other) = default;
+    OrderMessage(OrderMessage&& other) = default;
+    ~OrderMessage() = default;
+
+    OrderMessage& operator=(const OrderMessage& other) = default;
+    OrderMessage& operator=(OrderMessage&& other) = default;
+
+    bool operator==(const OrderMessage& other) const noexcept
+    {
+        return (
+            true
+            );
+    }
+    bool operator!=(const OrderMessage& other) const noexcept { return !operator==(other); }
+    bool operator<(const OrderMessage& other) const noexcept
+    {
+        return false;
+    }
+    bool operator<=(const OrderMessage& other) const noexcept { return operator<(other) || operator==(other); }
+    bool operator>(const OrderMessage& other) const noexcept { return !operator<=(other); }
+    bool operator>=(const OrderMessage& other) const noexcept { return !operator<(other); }
+
+    std::string string() const
+    {
+        std::stringstream ss;
+        ss << *this;
+        return ss.str();
+    }
+
+    template <class TOutputStream>
+    friend TOutputStream& operator<<(TOutputStream& stream, const OrderMessage& value);
+
+    void swap(OrderMessage& other) noexcept
+    {
+        using std::swap;
+        swap(body, other.body);
+    }
+
+    friend void swap(OrderMessage& value1, OrderMessage& value2) noexcept
+    {
+        value1.swap(value2);
+    }
+};
+
+template <class TOutputStream>
+inline TOutputStream& operator<<(TOutputStream& stream, const OrderMessage& value)
+{
+    stream << "OrderMessage(";
+    stream << "body="; stream << value.body;
+    stream << ")";
+    return stream;
+}
+
+} // namespace proto
+
+namespace std {
+
+template<>
+struct hash<proto::OrderMessage>
+{
+    typedef proto::OrderMessage argument_type;
+    typedef size_t result_type;
+
+    result_type operator () (const argument_type& value) const
+    {
+        result_type result = 17;
+        return result;
+    }
+};
+
+} // namespace std
+
+namespace FBE {
+
+namespace JSON {
+
+template <class TWriter>
+struct ValueWriter<TWriter, ::proto::OrderMessage>
+{
+    static bool to_json(TWriter& writer, const ::proto::OrderMessage& value, bool scope = true)
+    {
+        if (scope)
+            if (!writer.StartObject())
+                return false;
+        if (!FBE::JSON::to_json_key(writer, "body") || !FBE::JSON::to_json(writer, value.body, true))
+            return false;
+        if (scope)
+            if (!writer.EndObject())
+                return false;
+        return true;
+    }
+};
+
+template <class TJson>
+struct ValueReader<TJson, ::proto::OrderMessage>
+{
+    static bool from_json(const TJson& json, ::proto::OrderMessage& value, const char* key = nullptr)
+    {
+        if (key != nullptr)
+            return FBE::JSON::from_json_child(json, value, key);
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.body, "body");
+        return result;
+    }
+};
+
+} // namespace JSON
+
+} // namespace FBE
+
+namespace proto {
+
+struct BalanceMessage
+{
+    ::proto::Balance body;
+
+    size_t fbe_type() const noexcept { return 2; }
+
+    BalanceMessage()
+        : body()
+    {}
+    explicit BalanceMessage(const ::proto::Balance& arg_body)
+        : body(arg_body)
+    {}
+    BalanceMessage(const BalanceMessage& other) = default;
+    BalanceMessage(BalanceMessage&& other) = default;
+    ~BalanceMessage() = default;
+
+    BalanceMessage& operator=(const BalanceMessage& other) = default;
+    BalanceMessage& operator=(BalanceMessage&& other) = default;
+
+    bool operator==(const BalanceMessage& other) const noexcept
+    {
+        return (
+            true
+            );
+    }
+    bool operator!=(const BalanceMessage& other) const noexcept { return !operator==(other); }
+    bool operator<(const BalanceMessage& other) const noexcept
+    {
+        return false;
+    }
+    bool operator<=(const BalanceMessage& other) const noexcept { return operator<(other) || operator==(other); }
+    bool operator>(const BalanceMessage& other) const noexcept { return !operator<=(other); }
+    bool operator>=(const BalanceMessage& other) const noexcept { return !operator<(other); }
+
+    std::string string() const
+    {
+        std::stringstream ss;
+        ss << *this;
+        return ss.str();
+    }
+
+    template <class TOutputStream>
+    friend TOutputStream& operator<<(TOutputStream& stream, const BalanceMessage& value);
+
+    void swap(BalanceMessage& other) noexcept
+    {
+        using std::swap;
+        swap(body, other.body);
+    }
+
+    friend void swap(BalanceMessage& value1, BalanceMessage& value2) noexcept
+    {
+        value1.swap(value2);
+    }
+};
+
+template <class TOutputStream>
+inline TOutputStream& operator<<(TOutputStream& stream, const BalanceMessage& value)
+{
+    stream << "BalanceMessage(";
+    stream << "body="; stream << value.body;
+    stream << ")";
+    return stream;
+}
+
+} // namespace proto
+
+namespace std {
+
+template<>
+struct hash<proto::BalanceMessage>
+{
+    typedef proto::BalanceMessage argument_type;
+    typedef size_t result_type;
+
+    result_type operator () (const argument_type& value) const
+    {
+        result_type result = 17;
+        return result;
+    }
+};
+
+} // namespace std
+
+namespace FBE {
+
+namespace JSON {
+
+template <class TWriter>
+struct ValueWriter<TWriter, ::proto::BalanceMessage>
+{
+    static bool to_json(TWriter& writer, const ::proto::BalanceMessage& value, bool scope = true)
+    {
+        if (scope)
+            if (!writer.StartObject())
+                return false;
+        if (!FBE::JSON::to_json_key(writer, "body") || !FBE::JSON::to_json(writer, value.body, true))
+            return false;
+        if (scope)
+            if (!writer.EndObject())
+                return false;
+        return true;
+    }
+};
+
+template <class TJson>
+struct ValueReader<TJson, ::proto::BalanceMessage>
+{
+    static bool from_json(const TJson& json, ::proto::BalanceMessage& value, const char* key = nullptr)
+    {
+        if (key != nullptr)
+            return FBE::JSON::from_json_child(json, value, key);
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.body, "body");
+        return result;
+    }
+};
+
+} // namespace JSON
+
+} // namespace FBE
+
+namespace proto {
+
+struct AccountMessage
+{
+    ::proto::Account body;
+
+    size_t fbe_type() const noexcept { return 3; }
+
+    AccountMessage()
+        : body()
+    {}
+    explicit AccountMessage(const ::proto::Account& arg_body)
+        : body(arg_body)
+    {}
+    AccountMessage(const AccountMessage& other) = default;
+    AccountMessage(AccountMessage&& other) = default;
+    ~AccountMessage() = default;
+
+    AccountMessage& operator=(const AccountMessage& other) = default;
+    AccountMessage& operator=(AccountMessage&& other) = default;
+
+    bool operator==(const AccountMessage& other) const noexcept
+    {
+        return (
+            true
+            );
+    }
+    bool operator!=(const AccountMessage& other) const noexcept { return !operator==(other); }
+    bool operator<(const AccountMessage& other) const noexcept
+    {
+        return false;
+    }
+    bool operator<=(const AccountMessage& other) const noexcept { return operator<(other) || operator==(other); }
+    bool operator>(const AccountMessage& other) const noexcept { return !operator<=(other); }
+    bool operator>=(const AccountMessage& other) const noexcept { return !operator<(other); }
+
+    std::string string() const
+    {
+        std::stringstream ss;
+        ss << *this;
+        return ss.str();
+    }
+
+    template <class TOutputStream>
+    friend TOutputStream& operator<<(TOutputStream& stream, const AccountMessage& value);
+
+    void swap(AccountMessage& other) noexcept
+    {
+        using std::swap;
+        swap(body, other.body);
+    }
+
+    friend void swap(AccountMessage& value1, AccountMessage& value2) noexcept
+    {
+        value1.swap(value2);
+    }
+};
+
+template <class TOutputStream>
+inline TOutputStream& operator<<(TOutputStream& stream, const AccountMessage& value)
+{
+    stream << "AccountMessage(";
+    stream << "body="; stream << value.body;
+    stream << ")";
+    return stream;
+}
+
+} // namespace proto
+
+namespace std {
+
+template<>
+struct hash<proto::AccountMessage>
+{
+    typedef proto::AccountMessage argument_type;
+    typedef size_t result_type;
+
+    result_type operator () (const argument_type& value) const
+    {
+        result_type result = 17;
+        return result;
+    }
+};
+
+} // namespace std
+
+namespace FBE {
+
+namespace JSON {
+
+template <class TWriter>
+struct ValueWriter<TWriter, ::proto::AccountMessage>
+{
+    static bool to_json(TWriter& writer, const ::proto::AccountMessage& value, bool scope = true)
+    {
+        if (scope)
+            if (!writer.StartObject())
+                return false;
+        if (!FBE::JSON::to_json_key(writer, "body") || !FBE::JSON::to_json(writer, value.body, true))
+            return false;
+        if (scope)
+            if (!writer.EndObject())
+                return false;
+        return true;
+    }
+};
+
+template <class TJson>
+struct ValueReader<TJson, ::proto::AccountMessage>
+{
+    static bool from_json(const TJson& json, ::proto::AccountMessage& value, const char* key = nullptr)
+    {
+        if (key != nullptr)
+            return FBE::JSON::from_json_child(json, value, key);
+        bool result = true;
+        result &= FBE::JSON::from_json(json, value.body, "body");
         return result;
     }
 };

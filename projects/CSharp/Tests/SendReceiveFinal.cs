@@ -20,9 +20,9 @@ namespace Tests
 
         public bool Check() { return _order && _balance && _account; }
 
-        protected override void OnReceive(protoex.Order value) { _order = true; }
-        protected override void OnReceive(protoex.Balance value) { _balance = true; }
-        protected override void OnReceive(protoex.Account value) { _account = true; }
+        protected override void OnReceive(protoex.OrderMessage value) { _order = true; }
+        protected override void OnReceive(protoex.BalanceMessage value) { _balance = true; }
+        protected override void OnReceive(protoex.AccountMessage value) { _account = true; }
     }
 
     [TestFixture]
@@ -34,11 +34,11 @@ namespace Tests
 
             // Create and send a new order
             var order = new protoex.Order(1, "EURUSD", protoex.OrderSide.buy, protoex.OrderType.market, 1.23456, 1000.0, 0.0, 0.0);
-            sender.Send(order);
+            sender.Send(new protoex.OrderMessage(order));
 
             // Create and send a new balance wallet
             var balance = new protoex.Balance(new proto.Balance("USD", 1000.0), 100.0);
-            sender.Send(balance);
+            sender.Send(new protoex.BalanceMessage(balance));
 
             // Create and send a new account with some orders
             var account = protoex.Account.Default;
@@ -51,7 +51,7 @@ namespace Tests
             account.orders.Add(new protoex.Order(1, "EURUSD", protoex.OrderSide.buy, protoex.OrderType.market, 1.23456, 1000.0, 0.0, 0.0));
             account.orders.Add(new protoex.Order(2, "EURUSD", protoex.OrderSide.sell, protoex.OrderType.limit, 1.0, 100.0, 0.0, 0.0));
             account.orders.Add(new protoex.Order(3, "EURUSD", protoex.OrderSide.buy, protoex.OrderType.stop, 1.5, 10.0, 0.0, 0.0));
-            sender.Send(account);
+            sender.Send(new protoex.AccountMessage(account));
 
             var receiver = new MyFinalReceiver();
 

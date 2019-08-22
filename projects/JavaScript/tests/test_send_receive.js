@@ -26,11 +26,11 @@ class MyReceiver extends proto.Receiver {
   }
 
   // noinspection JSUnusedLocalSymbols
-  onReceive_Order (value) { this._order = true } // eslint-disable-line
+  onReceive_OrderMessage (value) { this._order = true } // eslint-disable-line
   // noinspection JSUnusedLocalSymbols
-  onReceive_Balance (value) { this._balance = true } // eslint-disable-line
+  onReceive_BalanceMessage (value) { this._balance = true } // eslint-disable-line
   // noinspection JSUnusedLocalSymbols
-  onReceive_Account (value) { this._account = true } // eslint-disable-line
+  onReceive_AccountMessage (value) { this._account = true } // eslint-disable-line
 }
 
 function sendAndReceive (index1, index2) {
@@ -38,18 +38,18 @@ function sendAndReceive (index1, index2) {
 
   // Create and send a new order
   let order = new proto.Order(1, 'EURUSD', proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0)
-  sender.send(order)
+  sender.send(new proto.OrderMessage(order))
 
   // Create and send a new balance wallet
   let balance = new proto.Balance('USD', 1000.0)
-  sender.send(balance)
+  sender.send(new proto.BalanceMessage(balance))
 
   // Create and send a new account with some orders
   let account = new proto.Account(1, 'Test', proto.State.good, new proto.Balance('USD', 1000.0), new proto.Balance('EUR', 100.0))
   account.orders.push(new proto.Order(1, 'EURUSD', proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))
   account.orders.push(new proto.Order(2, 'EURUSD', proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0))
   account.orders.push(new proto.Order(3, 'EURUSD', proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0))
-  sender.send(account)
+  sender.send(new proto.AccountMessage(account))
 
   let receiver = new MyReceiver()
 
@@ -64,8 +64,8 @@ function sendAndReceive (index1, index2) {
 }
 
 test('Send & Receive', function (t) {
-  for (let i = 0; i < 1000; i++) {
-    for (let j = 0; j < 1000; j++) {
+  for (let i = 0; i < 100; i++) {
+    for (let j = 0; j < 100; j++) {
       t.true(sendAndReceive(i, j))
     }
   }

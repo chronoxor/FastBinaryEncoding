@@ -776,12 +776,20 @@ namespace proto {
         public double price;
         public double volume;
 
+        public const long FBETypeConst = 1;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static Order Default => new Order
         {
             id = (int)0
             , symbol = ""
-            , side = OrderSide.Default
-            , type = OrderType.Default
+            , side = global::proto.OrderSide.Default
+            , type = global::proto.OrderType.Default
             , price = (double)0.0D
             , volume = (double)0.0D
         };
@@ -1092,13 +1100,13 @@ namespace proto {
             if ((fbeCurrentSize + side.FBESize) <= fbeStructSize)
                 side.Get(out fbeValue.side);
             else
-                fbeValue.side = OrderSide.Default;
+                fbeValue.side = global::proto.OrderSide.Default;
             fbeCurrentSize += side.FBESize;
 
             if ((fbeCurrentSize + type.FBESize) <= fbeStructSize)
                 type.Get(out fbeValue.type);
             else
-                fbeValue.type = OrderType.Default;
+                fbeValue.type = global::proto.OrderType.Default;
             fbeCurrentSize += type.FBESize;
 
             if ((fbeCurrentSize + price.FBESize) <= fbeStructSize)
@@ -1549,6 +1557,14 @@ namespace proto {
     {
         public string currency;
         public double amount;
+
+        public const long FBETypeConst = 2;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
 
         public static Balance Default => new Balance
         {
@@ -2172,12 +2188,20 @@ namespace proto {
         public Balance? asset;
         public List<Order> orders;
 
+        public const long FBETypeConst = 3;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static Account Default => new Account
         {
             id = (int)0
             , name = ""
             , state = State.initialized | State.bad
-            , wallet = Balance.Default
+            , wallet = global::proto.Balance.Default
             , asset = null
             , orders = new List<Order>()
         };
@@ -2508,7 +2532,7 @@ namespace proto {
             if ((fbeCurrentSize + wallet.FBESize) <= fbeStructSize)
                 wallet.Get(out fbeValue.wallet);
             else
-                fbeValue.wallet = Balance.Default;
+                fbeValue.wallet = global::proto.Balance.Default;
             fbeCurrentSize += wallet.FBESize;
 
             if ((fbeCurrentSize + asset.FBESize) <= fbeStructSize)
@@ -2953,6 +2977,1731 @@ namespace proto {
 } // namespace proto
 } // namespace FBE
 
+namespace proto {
+
+    public struct OrderMessage : IComparable, IComparable<OrderMessage>, IEquatable<OrderMessage>
+    {
+        public Order body;
+
+        public const long FBETypeConst = 1;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
+        public static OrderMessage Default => new OrderMessage
+        {
+            body = global::proto.Order.Default
+        };
+
+        public OrderMessage(Order body)
+        {
+            this.body = body;
+        }
+
+        public OrderMessage Clone()
+        {
+            // Serialize the struct to the FBE stream
+            var writer = new FBE.proto.OrderMessageModel();
+            writer.Serialize(this);
+
+            // Deserialize the struct from the FBE stream
+            var reader = new FBE.proto.OrderMessageModel();
+            reader.Attach(writer.Buffer);
+            reader.Deserialize(out var result);
+            return result;
+        }
+
+        public int CompareTo(object other)
+        {
+            int result = 0;
+            return result;
+        }
+
+        public int CompareTo(OrderMessage other)
+        {
+            int result = 0;
+            return result;
+        }
+
+        public override bool Equals(object other)
+        {
+            if (!(other is OrderMessage))
+                return false;
+            return true;
+        }
+
+        public bool Equals(OrderMessage other)
+        {
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 17;
+            return hash;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append("OrderMessage(");
+            sb.Append("body="); sb.Append(body);
+            sb.Append(")");
+            return sb.ToString();
+        }
+
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static OrderMessage FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<OrderMessage>(json);
+            return result;
+        }
+
+        public static FBE.FieldModelValueType<OrderMessage> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelOrderMessage(buffer, offset); }
+    }
+
+} // namespace proto
+
+namespace FBE {
+namespace proto {
+
+    using global::proto;
+
+    // Fast Binary Encoding OrderMessage field model
+    public class FieldModelOrderMessage : FieldModelValueType<OrderMessage>
+    {
+        public readonly FieldModelOrder body;
+
+        public FieldModelOrderMessage(Buffer buffer, long offset) : base(buffer, offset)
+        {
+            body = new FieldModelOrder(buffer, 4 + 4);
+        }
+
+        // Get the field size
+        public override long FBESize => 4;
+        // Get the field body size
+        public long FBEBody
+        {
+            get
+            {
+                long fbeResult = 4 + 4
+                    + body.FBESize
+                    ;
+                return fbeResult;
+            }
+        }
+        // Get the field extra size
+        public override long FBEExtra
+        {
+            get
+            {
+                if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                    return 0;
+
+                uint fbeStructOffset = ReadUInt32(FBEOffset);
+                if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + 4) > _buffer.Size))
+                    return 0;
+
+                _buffer.Shift(fbeStructOffset);
+
+                long fbeResult = FBEBody
+                    + body.FBEExtra
+                    ;
+
+                _buffer.Unshift(fbeStructOffset);
+
+                return fbeResult;
+            }
+        }
+        // Get the field type
+        public const long FBETypeConst = 1;
+        public long FBEType => FBETypeConst;
+
+        // Clone the field model
+        public override FieldModelValueType<OrderMessage> Clone() { return new FieldModelOrderMessage(_buffer, _offset); }
+
+        // Check if the struct value is valid
+        public override bool Verify() { return Verify(true); }
+        public bool Verify(bool fbeVerifyType)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return true;
+
+            uint fbeStructOffset = ReadUInt32(FBEOffset);
+            if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + 4 + 4) > _buffer.Size))
+                return false;
+
+            uint fbeStructSize = ReadUInt32(fbeStructOffset);
+            if (fbeStructSize < (4 + 4))
+                return false;
+
+            uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
+            if (fbeVerifyType && (fbeStructType != FBEType))
+                return false;
+
+            _buffer.Shift(fbeStructOffset);
+            bool fbeResult = VerifyFields(fbeStructSize);
+            _buffer.Unshift(fbeStructOffset);
+            return fbeResult;
+        }
+
+        // Check if the struct fields are valid
+        public bool VerifyFields(long fbeStructSize)
+        {
+            long fbeCurrentSize = 4 + 4;
+
+            if ((fbeCurrentSize + body.FBESize) > fbeStructSize)
+                return true;
+            if (!body.Verify())
+                return false;
+            fbeCurrentSize += body.FBESize;
+
+            return true;
+        }
+
+        // Get the struct value (begin phase)
+        public long GetBegin()
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return 0;
+
+            uint fbeStructOffset = ReadUInt32(FBEOffset);
+            Debug.Assert(((fbeStructOffset > 0) && ((_buffer.Offset + fbeStructOffset + 4 + 4) <= _buffer.Size)), "Model is broken!");
+            if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + 4 + 4) > _buffer.Size))
+                return 0;
+
+            uint fbeStructSize = ReadUInt32(fbeStructOffset);
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
+                return 0;
+
+            _buffer.Shift(fbeStructOffset);
+            return fbeStructOffset;
+        }
+
+        // Get the struct value (end phase)
+        public void GetEnd(long fbeBegin)
+        {
+            _buffer.Unshift(fbeBegin);
+        }
+
+        // Get the struct value
+        public override void Get(out OrderMessage fbeValue) { Get(out fbeValue, OrderMessage.Default); }
+        public override void Get(out OrderMessage fbeValue, OrderMessage defaults)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = defaults;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
+
+        // Get the struct fields values
+        public void GetFields(out OrderMessage fbeValue, long fbeStructSize)
+        {
+            long fbeCurrentSize = 4 + 4;
+
+            fbeValue = OrderMessage.Default;
+
+            if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
+                body.Get(out fbeValue.body);
+            else
+                fbeValue.body = global::proto.Order.Default;
+            fbeCurrentSize += body.FBESize;
+        }
+
+        // Set the struct value (begin phase)
+        public long SetBegin()
+        {
+            Debug.Assert(((_buffer.Offset + FBEOffset + FBESize) <= _buffer.Size), "Model is broken!");
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return 0;
+
+            uint fbeStructSize = (uint)FBEBody;
+            uint fbeStructOffset = (uint)(_buffer.Allocate(fbeStructSize) - _buffer.Offset);
+            Debug.Assert(((fbeStructOffset > 0) && ((_buffer.Offset + fbeStructOffset + fbeStructSize) <= _buffer.Size)), "Model is broken!");
+            if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + fbeStructSize) > _buffer.Size))
+                return 0;
+
+            Write(FBEOffset, fbeStructOffset);
+            Write(fbeStructOffset, fbeStructSize);
+            Write(fbeStructOffset + 4, (uint)FBEType);
+
+            _buffer.Shift(fbeStructOffset);
+            return fbeStructOffset;
+        }
+
+        // Set the struct value (end phase)
+        public void SetEnd(long fbeBegin)
+        {
+            _buffer.Unshift(fbeBegin);
+        }
+
+        // Set the struct value
+        public override void Set(OrderMessage fbeValue)
+        {
+            long fbeBegin = SetBegin();
+            if (fbeBegin == 0)
+                return;
+
+            SetFields(fbeValue);
+            SetEnd(fbeBegin);
+        }
+
+        // Set the struct fields values
+        public void SetFields(OrderMessage fbeValue)
+        {
+            body.Set(fbeValue.body);
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
+    using global::proto;
+
+    // Fast Binary Encoding OrderMessage model
+    public class OrderMessageModel : Model
+    {
+        public readonly FieldModelOrderMessage model;
+
+        public OrderMessageModel() { model = new FieldModelOrderMessage(Buffer, 4); }
+        public OrderMessageModel(Buffer buffer) : base(buffer) { model = new FieldModelOrderMessage(Buffer, 4); }
+
+        // Get the model size
+        public long FBESize => model.FBESize + model.FBEExtra;
+        // Get the model type
+        public const long FBETypeConst = FieldModelOrderMessage.FBETypeConst;
+        public long FBEType => FBETypeConst;
+
+        // Check if the struct value is valid
+        public bool Verify()
+        {
+            if ((Buffer.Offset + model.FBEOffset - 4) > Buffer.Size)
+                return false;
+
+            uint fbeFullSize = ReadUInt32(model.FBEOffset - 4);
+            if (fbeFullSize < model.FBESize)
+                return false;
+
+            return model.Verify();
+        }
+
+        // Create a new model (begin phase)
+        public long CreateBegin()
+        {
+            long fbeBegin = Buffer.Allocate(4 + model.FBESize);
+            return fbeBegin;
+        }
+
+        // Create a new model (end phase)
+        public long CreateEnd(long fbeBegin)
+        {
+            long fbeEnd = Buffer.Size;
+            uint fbeFullSize = (uint)(fbeEnd - fbeBegin);
+            Write(model.FBEOffset - 4, fbeFullSize);
+            return fbeFullSize;
+        }
+
+        // Serialize the struct value
+        public long Serialize(OrderMessage value)
+        {
+            long fbeBegin = CreateBegin();
+            model.Set(value);
+            long fbeFullSize = CreateEnd(fbeBegin);
+            return fbeFullSize;
+        }
+
+        // Deserialize the struct value
+        public long Deserialize(out OrderMessage value)
+        {
+            if ((Buffer.Offset + model.FBEOffset - 4) > Buffer.Size)
+            {
+                value = OrderMessage.Default;
+                return 0;
+            }
+
+            uint fbeFullSize = ReadUInt32(model.FBEOffset - 4);
+            Debug.Assert((fbeFullSize >= model.FBESize), "Model is broken!");
+            if (fbeFullSize < model.FBESize)
+            {
+                value = OrderMessage.Default;
+                return 0;
+            }
+
+            model.Get(out value);
+            return fbeFullSize;
+        }
+
+        // Move to the next struct value
+        public void Next(long prev)
+        {
+            model.FBEShift(prev);
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
+    using global::proto;
+
+    // Fast Binary Encoding OrderMessage final model
+    public class FinalModelOrderMessage : FinalModelValueType<OrderMessage>
+    {
+        public readonly FinalModelOrder body;
+
+        public FinalModelOrderMessage(Buffer buffer, long offset) : base(buffer, offset)
+        {
+            body = new FinalModelOrder(buffer, 0);
+        }
+
+        // Get the allocation size
+        public override long FBEAllocationSize(OrderMessage fbeValue)
+        {
+            long fbeResult = 0
+                + body.FBEAllocationSize(fbeValue.body)
+                ;
+            return fbeResult;
+        }
+
+        // Get the final type
+        public const long FBETypeConst = 1;
+        public long FBEType => FBETypeConst;
+
+        // Clone the final model
+        public override FinalModelValueType<OrderMessage> Clone() { return new FinalModelOrderMessage(_buffer, _offset); }
+
+        // Check if the struct value is valid
+        public override long Verify()
+        {
+            _buffer.Shift(FBEOffset);
+            long fbeResult = VerifyFields();
+            _buffer.Unshift(FBEOffset);
+            return fbeResult;
+        }
+
+        // Check if the struct fields are valid
+        public long VerifyFields()
+        {
+            long fbeCurrentOffset = 0;
+            long fbeFieldSize;
+
+            body.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = body.Verify();
+            if (fbeFieldSize == long.MaxValue)
+                return long.MaxValue;
+            fbeCurrentOffset += fbeFieldSize;
+
+            return fbeCurrentOffset;
+        }
+
+        // Get the struct value
+        public override long Get(out OrderMessage fbeValue)
+        {
+            _buffer.Shift(FBEOffset);
+            long fbeSize = GetFields(out fbeValue);
+            _buffer.Unshift(FBEOffset);
+            return fbeSize;
+        }
+
+        // Get the struct fields values
+        public long GetFields(out OrderMessage fbeValue)
+        {
+            long fbeCurrentOffset = 0;
+            long fbeCurrentSize = 0;
+            long fbeFieldSize;
+
+            fbeValue = OrderMessage.Default;
+
+            body.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = body.Get(out fbeValue.body);
+            fbeCurrentOffset += fbeFieldSize;
+            fbeCurrentSize += fbeFieldSize;
+
+            return fbeCurrentSize;
+        }
+
+        // Set the struct value
+        public override long Set(OrderMessage fbeValue)
+        {
+            _buffer.Shift(FBEOffset);
+            long fbeResult = SetFields(fbeValue);
+            _buffer.Unshift(FBEOffset);
+            return fbeResult;
+        }
+
+        // Set the struct fields values
+        public long SetFields(OrderMessage fbeValue)
+        {
+            long fbeCurrentOffset = 0;
+            long fbeCurrentSize = 0;
+            long fbeFieldSize;
+
+            body.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = body.Set(fbeValue.body);
+            fbeCurrentOffset += fbeFieldSize;
+            fbeCurrentSize += fbeFieldSize;
+
+            return fbeCurrentSize;
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
+    using global::proto;
+
+    // Fast Binary Encoding OrderMessage final model
+    public class OrderMessageFinalModel : Model
+    {
+        private readonly FinalModelOrderMessage _model;
+
+        public OrderMessageFinalModel() { _model = new FinalModelOrderMessage(Buffer, 8); }
+        public OrderMessageFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelOrderMessage(Buffer, 8); }
+
+        // Get the model type
+        public const long FBETypeConst = FinalModelOrderMessage.FBETypeConst;
+        public long FBEType => FBETypeConst;
+
+        // Check if the struct value is valid
+        public bool Verify()
+        {
+            if ((Buffer.Offset + _model.FBEOffset) > Buffer.Size)
+                return false;
+
+            long fbeStructSize = ReadUInt32(_model.FBEOffset - 8);
+            long fbeStructType = ReadUInt32(_model.FBEOffset - 4);
+            if ((fbeStructSize <= 0) || (fbeStructType != FBEType))
+                return false;
+
+            return ((8 + _model.Verify()) == fbeStructSize);
+        }
+
+        // Serialize the struct value
+        public long Serialize(OrderMessage value)
+        {
+            long fbeInitialSize = Buffer.Size;
+
+            uint fbeStructType = (uint)FBEType;
+            uint fbeStructSize = (uint)(8 + _model.FBEAllocationSize(value));
+            uint fbeStructOffset = (uint)(Buffer.Allocate(fbeStructSize) - Buffer.Offset);
+            Debug.Assert(((Buffer.Offset + fbeStructOffset + fbeStructSize) <= Buffer.Size), "Model is broken!");
+            if ((Buffer.Offset + fbeStructOffset + fbeStructSize) > Buffer.Size)
+                return 0;
+
+            fbeStructSize = (uint)(8 + _model.Set(value));
+            Buffer.Resize(fbeInitialSize + fbeStructSize);
+
+            Write(_model.FBEOffset - 8, fbeStructSize);
+            Write(_model.FBEOffset - 4, fbeStructType);
+
+            return fbeStructSize;
+        }
+
+        // Deserialize the struct value
+        public long Deserialize(out OrderMessage value)
+        {
+            Debug.Assert(((Buffer.Offset + _model.FBEOffset) <= Buffer.Size), "Model is broken!");
+            if ((Buffer.Offset + _model.FBEOffset) > Buffer.Size)
+            {
+                value = OrderMessage.Default;
+                return 0;
+            }
+
+            long fbeStructSize = ReadUInt32(_model.FBEOffset - 8);
+            long fbeStructType = ReadUInt32(_model.FBEOffset - 4);
+            Debug.Assert(((fbeStructSize > 0) && (fbeStructType == FBEType)), "Model is broken!");
+            if ((fbeStructSize <= 0) || (fbeStructType != FBEType))
+            {
+                value = OrderMessage.Default;
+                return 8;
+            }
+
+            return 8 + _model.Get(out value);
+        }
+
+        // Move to the next struct value
+        public void Next(long prev)
+        {
+            _model.FBEShift(prev);
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace proto {
+
+    public struct BalanceMessage : IComparable, IComparable<BalanceMessage>, IEquatable<BalanceMessage>
+    {
+        public Balance body;
+
+        public const long FBETypeConst = 2;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
+        public static BalanceMessage Default => new BalanceMessage
+        {
+            body = global::proto.Balance.Default
+        };
+
+        public BalanceMessage(Balance body)
+        {
+            this.body = body;
+        }
+
+        public BalanceMessage Clone()
+        {
+            // Serialize the struct to the FBE stream
+            var writer = new FBE.proto.BalanceMessageModel();
+            writer.Serialize(this);
+
+            // Deserialize the struct from the FBE stream
+            var reader = new FBE.proto.BalanceMessageModel();
+            reader.Attach(writer.Buffer);
+            reader.Deserialize(out var result);
+            return result;
+        }
+
+        public int CompareTo(object other)
+        {
+            int result = 0;
+            return result;
+        }
+
+        public int CompareTo(BalanceMessage other)
+        {
+            int result = 0;
+            return result;
+        }
+
+        public override bool Equals(object other)
+        {
+            if (!(other is BalanceMessage))
+                return false;
+            return true;
+        }
+
+        public bool Equals(BalanceMessage other)
+        {
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 17;
+            return hash;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append("BalanceMessage(");
+            sb.Append("body="); sb.Append(body);
+            sb.Append(")");
+            return sb.ToString();
+        }
+
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static BalanceMessage FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<BalanceMessage>(json);
+            return result;
+        }
+
+        public static FBE.FieldModelValueType<BalanceMessage> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelBalanceMessage(buffer, offset); }
+    }
+
+} // namespace proto
+
+namespace FBE {
+namespace proto {
+
+    using global::proto;
+
+    // Fast Binary Encoding BalanceMessage field model
+    public class FieldModelBalanceMessage : FieldModelValueType<BalanceMessage>
+    {
+        public readonly FieldModelBalance body;
+
+        public FieldModelBalanceMessage(Buffer buffer, long offset) : base(buffer, offset)
+        {
+            body = new FieldModelBalance(buffer, 4 + 4);
+        }
+
+        // Get the field size
+        public override long FBESize => 4;
+        // Get the field body size
+        public long FBEBody
+        {
+            get
+            {
+                long fbeResult = 4 + 4
+                    + body.FBESize
+                    ;
+                return fbeResult;
+            }
+        }
+        // Get the field extra size
+        public override long FBEExtra
+        {
+            get
+            {
+                if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                    return 0;
+
+                uint fbeStructOffset = ReadUInt32(FBEOffset);
+                if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + 4) > _buffer.Size))
+                    return 0;
+
+                _buffer.Shift(fbeStructOffset);
+
+                long fbeResult = FBEBody
+                    + body.FBEExtra
+                    ;
+
+                _buffer.Unshift(fbeStructOffset);
+
+                return fbeResult;
+            }
+        }
+        // Get the field type
+        public const long FBETypeConst = 2;
+        public long FBEType => FBETypeConst;
+
+        // Clone the field model
+        public override FieldModelValueType<BalanceMessage> Clone() { return new FieldModelBalanceMessage(_buffer, _offset); }
+
+        // Check if the struct value is valid
+        public override bool Verify() { return Verify(true); }
+        public bool Verify(bool fbeVerifyType)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return true;
+
+            uint fbeStructOffset = ReadUInt32(FBEOffset);
+            if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + 4 + 4) > _buffer.Size))
+                return false;
+
+            uint fbeStructSize = ReadUInt32(fbeStructOffset);
+            if (fbeStructSize < (4 + 4))
+                return false;
+
+            uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
+            if (fbeVerifyType && (fbeStructType != FBEType))
+                return false;
+
+            _buffer.Shift(fbeStructOffset);
+            bool fbeResult = VerifyFields(fbeStructSize);
+            _buffer.Unshift(fbeStructOffset);
+            return fbeResult;
+        }
+
+        // Check if the struct fields are valid
+        public bool VerifyFields(long fbeStructSize)
+        {
+            long fbeCurrentSize = 4 + 4;
+
+            if ((fbeCurrentSize + body.FBESize) > fbeStructSize)
+                return true;
+            if (!body.Verify())
+                return false;
+            fbeCurrentSize += body.FBESize;
+
+            return true;
+        }
+
+        // Get the struct value (begin phase)
+        public long GetBegin()
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return 0;
+
+            uint fbeStructOffset = ReadUInt32(FBEOffset);
+            Debug.Assert(((fbeStructOffset > 0) && ((_buffer.Offset + fbeStructOffset + 4 + 4) <= _buffer.Size)), "Model is broken!");
+            if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + 4 + 4) > _buffer.Size))
+                return 0;
+
+            uint fbeStructSize = ReadUInt32(fbeStructOffset);
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
+                return 0;
+
+            _buffer.Shift(fbeStructOffset);
+            return fbeStructOffset;
+        }
+
+        // Get the struct value (end phase)
+        public void GetEnd(long fbeBegin)
+        {
+            _buffer.Unshift(fbeBegin);
+        }
+
+        // Get the struct value
+        public override void Get(out BalanceMessage fbeValue) { Get(out fbeValue, BalanceMessage.Default); }
+        public override void Get(out BalanceMessage fbeValue, BalanceMessage defaults)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = defaults;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
+
+        // Get the struct fields values
+        public void GetFields(out BalanceMessage fbeValue, long fbeStructSize)
+        {
+            long fbeCurrentSize = 4 + 4;
+
+            fbeValue = BalanceMessage.Default;
+
+            if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
+                body.Get(out fbeValue.body);
+            else
+                fbeValue.body = global::proto.Balance.Default;
+            fbeCurrentSize += body.FBESize;
+        }
+
+        // Set the struct value (begin phase)
+        public long SetBegin()
+        {
+            Debug.Assert(((_buffer.Offset + FBEOffset + FBESize) <= _buffer.Size), "Model is broken!");
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return 0;
+
+            uint fbeStructSize = (uint)FBEBody;
+            uint fbeStructOffset = (uint)(_buffer.Allocate(fbeStructSize) - _buffer.Offset);
+            Debug.Assert(((fbeStructOffset > 0) && ((_buffer.Offset + fbeStructOffset + fbeStructSize) <= _buffer.Size)), "Model is broken!");
+            if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + fbeStructSize) > _buffer.Size))
+                return 0;
+
+            Write(FBEOffset, fbeStructOffset);
+            Write(fbeStructOffset, fbeStructSize);
+            Write(fbeStructOffset + 4, (uint)FBEType);
+
+            _buffer.Shift(fbeStructOffset);
+            return fbeStructOffset;
+        }
+
+        // Set the struct value (end phase)
+        public void SetEnd(long fbeBegin)
+        {
+            _buffer.Unshift(fbeBegin);
+        }
+
+        // Set the struct value
+        public override void Set(BalanceMessage fbeValue)
+        {
+            long fbeBegin = SetBegin();
+            if (fbeBegin == 0)
+                return;
+
+            SetFields(fbeValue);
+            SetEnd(fbeBegin);
+        }
+
+        // Set the struct fields values
+        public void SetFields(BalanceMessage fbeValue)
+        {
+            body.Set(fbeValue.body);
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
+    using global::proto;
+
+    // Fast Binary Encoding BalanceMessage model
+    public class BalanceMessageModel : Model
+    {
+        public readonly FieldModelBalanceMessage model;
+
+        public BalanceMessageModel() { model = new FieldModelBalanceMessage(Buffer, 4); }
+        public BalanceMessageModel(Buffer buffer) : base(buffer) { model = new FieldModelBalanceMessage(Buffer, 4); }
+
+        // Get the model size
+        public long FBESize => model.FBESize + model.FBEExtra;
+        // Get the model type
+        public const long FBETypeConst = FieldModelBalanceMessage.FBETypeConst;
+        public long FBEType => FBETypeConst;
+
+        // Check if the struct value is valid
+        public bool Verify()
+        {
+            if ((Buffer.Offset + model.FBEOffset - 4) > Buffer.Size)
+                return false;
+
+            uint fbeFullSize = ReadUInt32(model.FBEOffset - 4);
+            if (fbeFullSize < model.FBESize)
+                return false;
+
+            return model.Verify();
+        }
+
+        // Create a new model (begin phase)
+        public long CreateBegin()
+        {
+            long fbeBegin = Buffer.Allocate(4 + model.FBESize);
+            return fbeBegin;
+        }
+
+        // Create a new model (end phase)
+        public long CreateEnd(long fbeBegin)
+        {
+            long fbeEnd = Buffer.Size;
+            uint fbeFullSize = (uint)(fbeEnd - fbeBegin);
+            Write(model.FBEOffset - 4, fbeFullSize);
+            return fbeFullSize;
+        }
+
+        // Serialize the struct value
+        public long Serialize(BalanceMessage value)
+        {
+            long fbeBegin = CreateBegin();
+            model.Set(value);
+            long fbeFullSize = CreateEnd(fbeBegin);
+            return fbeFullSize;
+        }
+
+        // Deserialize the struct value
+        public long Deserialize(out BalanceMessage value)
+        {
+            if ((Buffer.Offset + model.FBEOffset - 4) > Buffer.Size)
+            {
+                value = BalanceMessage.Default;
+                return 0;
+            }
+
+            uint fbeFullSize = ReadUInt32(model.FBEOffset - 4);
+            Debug.Assert((fbeFullSize >= model.FBESize), "Model is broken!");
+            if (fbeFullSize < model.FBESize)
+            {
+                value = BalanceMessage.Default;
+                return 0;
+            }
+
+            model.Get(out value);
+            return fbeFullSize;
+        }
+
+        // Move to the next struct value
+        public void Next(long prev)
+        {
+            model.FBEShift(prev);
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
+    using global::proto;
+
+    // Fast Binary Encoding BalanceMessage final model
+    public class FinalModelBalanceMessage : FinalModelValueType<BalanceMessage>
+    {
+        public readonly FinalModelBalance body;
+
+        public FinalModelBalanceMessage(Buffer buffer, long offset) : base(buffer, offset)
+        {
+            body = new FinalModelBalance(buffer, 0);
+        }
+
+        // Get the allocation size
+        public override long FBEAllocationSize(BalanceMessage fbeValue)
+        {
+            long fbeResult = 0
+                + body.FBEAllocationSize(fbeValue.body)
+                ;
+            return fbeResult;
+        }
+
+        // Get the final type
+        public const long FBETypeConst = 2;
+        public long FBEType => FBETypeConst;
+
+        // Clone the final model
+        public override FinalModelValueType<BalanceMessage> Clone() { return new FinalModelBalanceMessage(_buffer, _offset); }
+
+        // Check if the struct value is valid
+        public override long Verify()
+        {
+            _buffer.Shift(FBEOffset);
+            long fbeResult = VerifyFields();
+            _buffer.Unshift(FBEOffset);
+            return fbeResult;
+        }
+
+        // Check if the struct fields are valid
+        public long VerifyFields()
+        {
+            long fbeCurrentOffset = 0;
+            long fbeFieldSize;
+
+            body.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = body.Verify();
+            if (fbeFieldSize == long.MaxValue)
+                return long.MaxValue;
+            fbeCurrentOffset += fbeFieldSize;
+
+            return fbeCurrentOffset;
+        }
+
+        // Get the struct value
+        public override long Get(out BalanceMessage fbeValue)
+        {
+            _buffer.Shift(FBEOffset);
+            long fbeSize = GetFields(out fbeValue);
+            _buffer.Unshift(FBEOffset);
+            return fbeSize;
+        }
+
+        // Get the struct fields values
+        public long GetFields(out BalanceMessage fbeValue)
+        {
+            long fbeCurrentOffset = 0;
+            long fbeCurrentSize = 0;
+            long fbeFieldSize;
+
+            fbeValue = BalanceMessage.Default;
+
+            body.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = body.Get(out fbeValue.body);
+            fbeCurrentOffset += fbeFieldSize;
+            fbeCurrentSize += fbeFieldSize;
+
+            return fbeCurrentSize;
+        }
+
+        // Set the struct value
+        public override long Set(BalanceMessage fbeValue)
+        {
+            _buffer.Shift(FBEOffset);
+            long fbeResult = SetFields(fbeValue);
+            _buffer.Unshift(FBEOffset);
+            return fbeResult;
+        }
+
+        // Set the struct fields values
+        public long SetFields(BalanceMessage fbeValue)
+        {
+            long fbeCurrentOffset = 0;
+            long fbeCurrentSize = 0;
+            long fbeFieldSize;
+
+            body.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = body.Set(fbeValue.body);
+            fbeCurrentOffset += fbeFieldSize;
+            fbeCurrentSize += fbeFieldSize;
+
+            return fbeCurrentSize;
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
+    using global::proto;
+
+    // Fast Binary Encoding BalanceMessage final model
+    public class BalanceMessageFinalModel : Model
+    {
+        private readonly FinalModelBalanceMessage _model;
+
+        public BalanceMessageFinalModel() { _model = new FinalModelBalanceMessage(Buffer, 8); }
+        public BalanceMessageFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelBalanceMessage(Buffer, 8); }
+
+        // Get the model type
+        public const long FBETypeConst = FinalModelBalanceMessage.FBETypeConst;
+        public long FBEType => FBETypeConst;
+
+        // Check if the struct value is valid
+        public bool Verify()
+        {
+            if ((Buffer.Offset + _model.FBEOffset) > Buffer.Size)
+                return false;
+
+            long fbeStructSize = ReadUInt32(_model.FBEOffset - 8);
+            long fbeStructType = ReadUInt32(_model.FBEOffset - 4);
+            if ((fbeStructSize <= 0) || (fbeStructType != FBEType))
+                return false;
+
+            return ((8 + _model.Verify()) == fbeStructSize);
+        }
+
+        // Serialize the struct value
+        public long Serialize(BalanceMessage value)
+        {
+            long fbeInitialSize = Buffer.Size;
+
+            uint fbeStructType = (uint)FBEType;
+            uint fbeStructSize = (uint)(8 + _model.FBEAllocationSize(value));
+            uint fbeStructOffset = (uint)(Buffer.Allocate(fbeStructSize) - Buffer.Offset);
+            Debug.Assert(((Buffer.Offset + fbeStructOffset + fbeStructSize) <= Buffer.Size), "Model is broken!");
+            if ((Buffer.Offset + fbeStructOffset + fbeStructSize) > Buffer.Size)
+                return 0;
+
+            fbeStructSize = (uint)(8 + _model.Set(value));
+            Buffer.Resize(fbeInitialSize + fbeStructSize);
+
+            Write(_model.FBEOffset - 8, fbeStructSize);
+            Write(_model.FBEOffset - 4, fbeStructType);
+
+            return fbeStructSize;
+        }
+
+        // Deserialize the struct value
+        public long Deserialize(out BalanceMessage value)
+        {
+            Debug.Assert(((Buffer.Offset + _model.FBEOffset) <= Buffer.Size), "Model is broken!");
+            if ((Buffer.Offset + _model.FBEOffset) > Buffer.Size)
+            {
+                value = BalanceMessage.Default;
+                return 0;
+            }
+
+            long fbeStructSize = ReadUInt32(_model.FBEOffset - 8);
+            long fbeStructType = ReadUInt32(_model.FBEOffset - 4);
+            Debug.Assert(((fbeStructSize > 0) && (fbeStructType == FBEType)), "Model is broken!");
+            if ((fbeStructSize <= 0) || (fbeStructType != FBEType))
+            {
+                value = BalanceMessage.Default;
+                return 8;
+            }
+
+            return 8 + _model.Get(out value);
+        }
+
+        // Move to the next struct value
+        public void Next(long prev)
+        {
+            _model.FBEShift(prev);
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace proto {
+
+    public struct AccountMessage : IComparable, IComparable<AccountMessage>, IEquatable<AccountMessage>
+    {
+        public Account body;
+
+        public const long FBETypeConst = 3;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
+        public static AccountMessage Default => new AccountMessage
+        {
+            body = global::proto.Account.Default
+        };
+
+        public AccountMessage(Account body)
+        {
+            this.body = body;
+        }
+
+        public AccountMessage Clone()
+        {
+            // Serialize the struct to the FBE stream
+            var writer = new FBE.proto.AccountMessageModel();
+            writer.Serialize(this);
+
+            // Deserialize the struct from the FBE stream
+            var reader = new FBE.proto.AccountMessageModel();
+            reader.Attach(writer.Buffer);
+            reader.Deserialize(out var result);
+            return result;
+        }
+
+        public int CompareTo(object other)
+        {
+            int result = 0;
+            return result;
+        }
+
+        public int CompareTo(AccountMessage other)
+        {
+            int result = 0;
+            return result;
+        }
+
+        public override bool Equals(object other)
+        {
+            if (!(other is AccountMessage))
+                return false;
+            return true;
+        }
+
+        public bool Equals(AccountMessage other)
+        {
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 17;
+            return hash;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append("AccountMessage(");
+            sb.Append("body="); sb.Append(body);
+            sb.Append(")");
+            return sb.ToString();
+        }
+
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static AccountMessage FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<AccountMessage>(json);
+            return result;
+        }
+
+        public static FBE.FieldModelValueType<AccountMessage> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelAccountMessage(buffer, offset); }
+    }
+
+} // namespace proto
+
+namespace FBE {
+namespace proto {
+
+    using global::proto;
+
+    // Fast Binary Encoding AccountMessage field model
+    public class FieldModelAccountMessage : FieldModelValueType<AccountMessage>
+    {
+        public readonly FieldModelAccount body;
+
+        public FieldModelAccountMessage(Buffer buffer, long offset) : base(buffer, offset)
+        {
+            body = new FieldModelAccount(buffer, 4 + 4);
+        }
+
+        // Get the field size
+        public override long FBESize => 4;
+        // Get the field body size
+        public long FBEBody
+        {
+            get
+            {
+                long fbeResult = 4 + 4
+                    + body.FBESize
+                    ;
+                return fbeResult;
+            }
+        }
+        // Get the field extra size
+        public override long FBEExtra
+        {
+            get
+            {
+                if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                    return 0;
+
+                uint fbeStructOffset = ReadUInt32(FBEOffset);
+                if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + 4) > _buffer.Size))
+                    return 0;
+
+                _buffer.Shift(fbeStructOffset);
+
+                long fbeResult = FBEBody
+                    + body.FBEExtra
+                    ;
+
+                _buffer.Unshift(fbeStructOffset);
+
+                return fbeResult;
+            }
+        }
+        // Get the field type
+        public const long FBETypeConst = 3;
+        public long FBEType => FBETypeConst;
+
+        // Clone the field model
+        public override FieldModelValueType<AccountMessage> Clone() { return new FieldModelAccountMessage(_buffer, _offset); }
+
+        // Check if the struct value is valid
+        public override bool Verify() { return Verify(true); }
+        public bool Verify(bool fbeVerifyType)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return true;
+
+            uint fbeStructOffset = ReadUInt32(FBEOffset);
+            if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + 4 + 4) > _buffer.Size))
+                return false;
+
+            uint fbeStructSize = ReadUInt32(fbeStructOffset);
+            if (fbeStructSize < (4 + 4))
+                return false;
+
+            uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
+            if (fbeVerifyType && (fbeStructType != FBEType))
+                return false;
+
+            _buffer.Shift(fbeStructOffset);
+            bool fbeResult = VerifyFields(fbeStructSize);
+            _buffer.Unshift(fbeStructOffset);
+            return fbeResult;
+        }
+
+        // Check if the struct fields are valid
+        public bool VerifyFields(long fbeStructSize)
+        {
+            long fbeCurrentSize = 4 + 4;
+
+            if ((fbeCurrentSize + body.FBESize) > fbeStructSize)
+                return true;
+            if (!body.Verify())
+                return false;
+            fbeCurrentSize += body.FBESize;
+
+            return true;
+        }
+
+        // Get the struct value (begin phase)
+        public long GetBegin()
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return 0;
+
+            uint fbeStructOffset = ReadUInt32(FBEOffset);
+            Debug.Assert(((fbeStructOffset > 0) && ((_buffer.Offset + fbeStructOffset + 4 + 4) <= _buffer.Size)), "Model is broken!");
+            if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + 4 + 4) > _buffer.Size))
+                return 0;
+
+            uint fbeStructSize = ReadUInt32(fbeStructOffset);
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
+                return 0;
+
+            _buffer.Shift(fbeStructOffset);
+            return fbeStructOffset;
+        }
+
+        // Get the struct value (end phase)
+        public void GetEnd(long fbeBegin)
+        {
+            _buffer.Unshift(fbeBegin);
+        }
+
+        // Get the struct value
+        public override void Get(out AccountMessage fbeValue) { Get(out fbeValue, AccountMessage.Default); }
+        public override void Get(out AccountMessage fbeValue, AccountMessage defaults)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = defaults;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
+
+        // Get the struct fields values
+        public void GetFields(out AccountMessage fbeValue, long fbeStructSize)
+        {
+            long fbeCurrentSize = 4 + 4;
+
+            fbeValue = AccountMessage.Default;
+
+            if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
+                body.Get(out fbeValue.body);
+            else
+                fbeValue.body = global::proto.Account.Default;
+            fbeCurrentSize += body.FBESize;
+        }
+
+        // Set the struct value (begin phase)
+        public long SetBegin()
+        {
+            Debug.Assert(((_buffer.Offset + FBEOffset + FBESize) <= _buffer.Size), "Model is broken!");
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return 0;
+
+            uint fbeStructSize = (uint)FBEBody;
+            uint fbeStructOffset = (uint)(_buffer.Allocate(fbeStructSize) - _buffer.Offset);
+            Debug.Assert(((fbeStructOffset > 0) && ((_buffer.Offset + fbeStructOffset + fbeStructSize) <= _buffer.Size)), "Model is broken!");
+            if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + fbeStructSize) > _buffer.Size))
+                return 0;
+
+            Write(FBEOffset, fbeStructOffset);
+            Write(fbeStructOffset, fbeStructSize);
+            Write(fbeStructOffset + 4, (uint)FBEType);
+
+            _buffer.Shift(fbeStructOffset);
+            return fbeStructOffset;
+        }
+
+        // Set the struct value (end phase)
+        public void SetEnd(long fbeBegin)
+        {
+            _buffer.Unshift(fbeBegin);
+        }
+
+        // Set the struct value
+        public override void Set(AccountMessage fbeValue)
+        {
+            long fbeBegin = SetBegin();
+            if (fbeBegin == 0)
+                return;
+
+            SetFields(fbeValue);
+            SetEnd(fbeBegin);
+        }
+
+        // Set the struct fields values
+        public void SetFields(AccountMessage fbeValue)
+        {
+            body.Set(fbeValue.body);
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
+    using global::proto;
+
+    // Fast Binary Encoding AccountMessage model
+    public class AccountMessageModel : Model
+    {
+        public readonly FieldModelAccountMessage model;
+
+        public AccountMessageModel() { model = new FieldModelAccountMessage(Buffer, 4); }
+        public AccountMessageModel(Buffer buffer) : base(buffer) { model = new FieldModelAccountMessage(Buffer, 4); }
+
+        // Get the model size
+        public long FBESize => model.FBESize + model.FBEExtra;
+        // Get the model type
+        public const long FBETypeConst = FieldModelAccountMessage.FBETypeConst;
+        public long FBEType => FBETypeConst;
+
+        // Check if the struct value is valid
+        public bool Verify()
+        {
+            if ((Buffer.Offset + model.FBEOffset - 4) > Buffer.Size)
+                return false;
+
+            uint fbeFullSize = ReadUInt32(model.FBEOffset - 4);
+            if (fbeFullSize < model.FBESize)
+                return false;
+
+            return model.Verify();
+        }
+
+        // Create a new model (begin phase)
+        public long CreateBegin()
+        {
+            long fbeBegin = Buffer.Allocate(4 + model.FBESize);
+            return fbeBegin;
+        }
+
+        // Create a new model (end phase)
+        public long CreateEnd(long fbeBegin)
+        {
+            long fbeEnd = Buffer.Size;
+            uint fbeFullSize = (uint)(fbeEnd - fbeBegin);
+            Write(model.FBEOffset - 4, fbeFullSize);
+            return fbeFullSize;
+        }
+
+        // Serialize the struct value
+        public long Serialize(AccountMessage value)
+        {
+            long fbeBegin = CreateBegin();
+            model.Set(value);
+            long fbeFullSize = CreateEnd(fbeBegin);
+            return fbeFullSize;
+        }
+
+        // Deserialize the struct value
+        public long Deserialize(out AccountMessage value)
+        {
+            if ((Buffer.Offset + model.FBEOffset - 4) > Buffer.Size)
+            {
+                value = AccountMessage.Default;
+                return 0;
+            }
+
+            uint fbeFullSize = ReadUInt32(model.FBEOffset - 4);
+            Debug.Assert((fbeFullSize >= model.FBESize), "Model is broken!");
+            if (fbeFullSize < model.FBESize)
+            {
+                value = AccountMessage.Default;
+                return 0;
+            }
+
+            model.Get(out value);
+            return fbeFullSize;
+        }
+
+        // Move to the next struct value
+        public void Next(long prev)
+        {
+            model.FBEShift(prev);
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
+    using global::proto;
+
+    // Fast Binary Encoding AccountMessage final model
+    public class FinalModelAccountMessage : FinalModelValueType<AccountMessage>
+    {
+        public readonly FinalModelAccount body;
+
+        public FinalModelAccountMessage(Buffer buffer, long offset) : base(buffer, offset)
+        {
+            body = new FinalModelAccount(buffer, 0);
+        }
+
+        // Get the allocation size
+        public override long FBEAllocationSize(AccountMessage fbeValue)
+        {
+            long fbeResult = 0
+                + body.FBEAllocationSize(fbeValue.body)
+                ;
+            return fbeResult;
+        }
+
+        // Get the final type
+        public const long FBETypeConst = 3;
+        public long FBEType => FBETypeConst;
+
+        // Clone the final model
+        public override FinalModelValueType<AccountMessage> Clone() { return new FinalModelAccountMessage(_buffer, _offset); }
+
+        // Check if the struct value is valid
+        public override long Verify()
+        {
+            _buffer.Shift(FBEOffset);
+            long fbeResult = VerifyFields();
+            _buffer.Unshift(FBEOffset);
+            return fbeResult;
+        }
+
+        // Check if the struct fields are valid
+        public long VerifyFields()
+        {
+            long fbeCurrentOffset = 0;
+            long fbeFieldSize;
+
+            body.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = body.Verify();
+            if (fbeFieldSize == long.MaxValue)
+                return long.MaxValue;
+            fbeCurrentOffset += fbeFieldSize;
+
+            return fbeCurrentOffset;
+        }
+
+        // Get the struct value
+        public override long Get(out AccountMessage fbeValue)
+        {
+            _buffer.Shift(FBEOffset);
+            long fbeSize = GetFields(out fbeValue);
+            _buffer.Unshift(FBEOffset);
+            return fbeSize;
+        }
+
+        // Get the struct fields values
+        public long GetFields(out AccountMessage fbeValue)
+        {
+            long fbeCurrentOffset = 0;
+            long fbeCurrentSize = 0;
+            long fbeFieldSize;
+
+            fbeValue = AccountMessage.Default;
+
+            body.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = body.Get(out fbeValue.body);
+            fbeCurrentOffset += fbeFieldSize;
+            fbeCurrentSize += fbeFieldSize;
+
+            return fbeCurrentSize;
+        }
+
+        // Set the struct value
+        public override long Set(AccountMessage fbeValue)
+        {
+            _buffer.Shift(FBEOffset);
+            long fbeResult = SetFields(fbeValue);
+            _buffer.Unshift(FBEOffset);
+            return fbeResult;
+        }
+
+        // Set the struct fields values
+        public long SetFields(AccountMessage fbeValue)
+        {
+            long fbeCurrentOffset = 0;
+            long fbeCurrentSize = 0;
+            long fbeFieldSize;
+
+            body.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = body.Set(fbeValue.body);
+            fbeCurrentOffset += fbeFieldSize;
+            fbeCurrentSize += fbeFieldSize;
+
+            return fbeCurrentSize;
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
+    using global::proto;
+
+    // Fast Binary Encoding AccountMessage final model
+    public class AccountMessageFinalModel : Model
+    {
+        private readonly FinalModelAccountMessage _model;
+
+        public AccountMessageFinalModel() { _model = new FinalModelAccountMessage(Buffer, 8); }
+        public AccountMessageFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelAccountMessage(Buffer, 8); }
+
+        // Get the model type
+        public const long FBETypeConst = FinalModelAccountMessage.FBETypeConst;
+        public long FBEType => FBETypeConst;
+
+        // Check if the struct value is valid
+        public bool Verify()
+        {
+            if ((Buffer.Offset + _model.FBEOffset) > Buffer.Size)
+                return false;
+
+            long fbeStructSize = ReadUInt32(_model.FBEOffset - 8);
+            long fbeStructType = ReadUInt32(_model.FBEOffset - 4);
+            if ((fbeStructSize <= 0) || (fbeStructType != FBEType))
+                return false;
+
+            return ((8 + _model.Verify()) == fbeStructSize);
+        }
+
+        // Serialize the struct value
+        public long Serialize(AccountMessage value)
+        {
+            long fbeInitialSize = Buffer.Size;
+
+            uint fbeStructType = (uint)FBEType;
+            uint fbeStructSize = (uint)(8 + _model.FBEAllocationSize(value));
+            uint fbeStructOffset = (uint)(Buffer.Allocate(fbeStructSize) - Buffer.Offset);
+            Debug.Assert(((Buffer.Offset + fbeStructOffset + fbeStructSize) <= Buffer.Size), "Model is broken!");
+            if ((Buffer.Offset + fbeStructOffset + fbeStructSize) > Buffer.Size)
+                return 0;
+
+            fbeStructSize = (uint)(8 + _model.Set(value));
+            Buffer.Resize(fbeInitialSize + fbeStructSize);
+
+            Write(_model.FBEOffset - 8, fbeStructSize);
+            Write(_model.FBEOffset - 4, fbeStructType);
+
+            return fbeStructSize;
+        }
+
+        // Deserialize the struct value
+        public long Deserialize(out AccountMessage value)
+        {
+            Debug.Assert(((Buffer.Offset + _model.FBEOffset) <= Buffer.Size), "Model is broken!");
+            if ((Buffer.Offset + _model.FBEOffset) > Buffer.Size)
+            {
+                value = AccountMessage.Default;
+                return 0;
+            }
+
+            long fbeStructSize = ReadUInt32(_model.FBEOffset - 8);
+            long fbeStructType = ReadUInt32(_model.FBEOffset - 4);
+            Debug.Assert(((fbeStructSize > 0) && (fbeStructType == FBEType)), "Model is broken!");
+            if ((fbeStructSize <= 0) || (fbeStructType != FBEType))
+            {
+                value = AccountMessage.Default;
+                return 8;
+            }
+
+            return 8 + _model.Get(out value);
+        }
+
+        // Move to the next struct value
+        public void Next(long prev)
+        {
+            _model.FBEShift(prev);
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
 namespace FBE {
 namespace proto {
 
@@ -2975,29 +4724,29 @@ namespace proto {
     public class Sender : FBE.Sender
     {
         // Sender models accessors
-        public readonly OrderModel OrderModel;
-        public readonly BalanceModel BalanceModel;
-        public readonly AccountModel AccountModel;
+        public readonly OrderMessageModel OrderMessageModel;
+        public readonly BalanceMessageModel BalanceMessageModel;
+        public readonly AccountMessageModel AccountMessageModel;
 
         public Sender() : base(false)
         {
-            OrderModel = new OrderModel(Buffer);
-            BalanceModel = new BalanceModel(Buffer);
-            AccountModel = new AccountModel(Buffer);
+            OrderMessageModel = new OrderMessageModel(Buffer);
+            BalanceMessageModel = new BalanceMessageModel(Buffer);
+            AccountMessageModel = new AccountMessageModel(Buffer);
         }
         public Sender(Buffer buffer) : base(buffer, false)
         {
-            OrderModel = new OrderModel(Buffer);
-            BalanceModel = new BalanceModel(Buffer);
-            AccountModel = new AccountModel(Buffer);
+            OrderMessageModel = new OrderMessageModel(Buffer);
+            BalanceMessageModel = new BalanceMessageModel(Buffer);
+            AccountMessageModel = new AccountMessageModel(Buffer);
         }
 
-        public long Send(global::proto.Order value)
+        public long Send(global::proto.OrderMessage value)
         {
             // Serialize the value into the FBE stream
-            long serialized = OrderModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.Order serialization failed!");
-            Debug.Assert(OrderModel.Verify(), "proto.Order validation failed!");
+            long serialized = OrderMessageModel.Serialize(value);
+            Debug.Assert((serialized > 0), "proto.OrderMessage serialization failed!");
+            Debug.Assert(OrderMessageModel.Verify(), "proto.OrderMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -3009,12 +4758,12 @@ namespace proto {
             // Send the serialized value
             return SendSerialized(serialized);
         }
-        public long Send(global::proto.Balance value)
+        public long Send(global::proto.BalanceMessage value)
         {
             // Serialize the value into the FBE stream
-            long serialized = BalanceModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.Balance serialization failed!");
-            Debug.Assert(BalanceModel.Verify(), "proto.Balance validation failed!");
+            long serialized = BalanceMessageModel.Serialize(value);
+            Debug.Assert((serialized > 0), "proto.BalanceMessage serialization failed!");
+            Debug.Assert(BalanceMessageModel.Verify(), "proto.BalanceMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -3026,12 +4775,12 @@ namespace proto {
             // Send the serialized value
             return SendSerialized(serialized);
         }
-        public long Send(global::proto.Account value)
+        public long Send(global::proto.AccountMessage value)
         {
             // Serialize the value into the FBE stream
-            long serialized = AccountModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.Account serialization failed!");
-            Debug.Assert(AccountModel.Verify(), "proto.Account validation failed!");
+            long serialized = AccountMessageModel.Serialize(value);
+            Debug.Assert((serialized > 0), "proto.AccountMessage serialization failed!");
+            Debug.Assert(AccountMessageModel.Verify(), "proto.AccountMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -3058,100 +4807,101 @@ namespace proto {
     public class Receiver : FBE.Receiver
     {
         // Receiver values accessors
-        private global::proto.Order OrderValue;
-        private global::proto.Balance BalanceValue;
-        private global::proto.Account AccountValue;
+        private global::proto.OrderMessage OrderMessageValue;
+        private global::proto.BalanceMessage BalanceMessageValue;
+        private global::proto.AccountMessage AccountMessageValue;
 
         // Receiver models accessors
-        private readonly OrderModel OrderModel;
-        private readonly BalanceModel BalanceModel;
-        private readonly AccountModel AccountModel;
+        private readonly OrderMessageModel OrderMessageModel;
+        private readonly BalanceMessageModel BalanceMessageModel;
+        private readonly AccountMessageModel AccountMessageModel;
 
         public Receiver() : base(false)
         {
-            OrderValue = global::proto.Order.Default;
-            OrderModel = new OrderModel();
-            BalanceValue = global::proto.Balance.Default;
-            BalanceModel = new BalanceModel();
-            AccountValue = global::proto.Account.Default;
-            AccountModel = new AccountModel();
+            OrderMessageValue = global::proto.OrderMessage.Default;
+            OrderMessageModel = new OrderMessageModel();
+            BalanceMessageValue = global::proto.BalanceMessage.Default;
+            BalanceMessageModel = new BalanceMessageModel();
+            AccountMessageValue = global::proto.AccountMessage.Default;
+            AccountMessageModel = new AccountMessageModel();
         }
         public Receiver(Buffer buffer) : base(buffer, false)
         {
-            OrderValue = global::proto.Order.Default;
-            OrderModel = new OrderModel();
-            BalanceValue = global::proto.Balance.Default;
-            BalanceModel = new BalanceModel();
-            AccountValue = global::proto.Account.Default;
-            AccountModel = new AccountModel();
+            OrderMessageValue = global::proto.OrderMessage.Default;
+            OrderMessageModel = new OrderMessageModel();
+            BalanceMessageValue = global::proto.BalanceMessage.Default;
+            BalanceMessageModel = new BalanceMessageModel();
+            AccountMessageValue = global::proto.AccountMessage.Default;
+            AccountMessageModel = new AccountMessageModel();
         }
 
         // Receive handlers
-        protected virtual void OnReceive(global::proto.Order value) {}
-        protected virtual void OnReceive(global::proto.Balance value) {}
-        protected virtual void OnReceive(global::proto.Account value) {}
+        protected virtual void OnReceive(global::proto.OrderMessage value) {}
+        protected virtual void OnReceive(global::proto.BalanceMessage value) {}
+        protected virtual void OnReceive(global::proto.AccountMessage value) {}
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
-                case OrderModel.FBETypeConst:
+                case OrderMessageModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
-                    OrderModel.Attach(buffer, offset);
-                    Debug.Assert(OrderModel.Verify(), "proto.Order validation failed!");
-                    long deserialized = OrderModel.Deserialize(out OrderValue);
-                    Debug.Assert((deserialized > 0), "proto.Order deserialization failed!");
+                    OrderMessageModel.Attach(buffer, offset);
+                    Debug.Assert(OrderMessageModel.Verify(), "proto.OrderMessage validation failed!");
+                    long deserialized = OrderMessageModel.Deserialize(out OrderMessageValue);
+                    Debug.Assert((deserialized > 0), "proto.OrderMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
                     {
-                        string message = OrderValue.ToString();
+                        string message = OrderMessageValue.ToString();
                         OnReceiveLog(message);
                     }
 
                     // Call receive handler with deserialized value
-                    OnReceive(OrderValue);
+                    OnReceive(OrderMessageValue);
                     return true;
                 }
-                case BalanceModel.FBETypeConst:
+                case BalanceMessageModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
-                    BalanceModel.Attach(buffer, offset);
-                    Debug.Assert(BalanceModel.Verify(), "proto.Balance validation failed!");
-                    long deserialized = BalanceModel.Deserialize(out BalanceValue);
-                    Debug.Assert((deserialized > 0), "proto.Balance deserialization failed!");
+                    BalanceMessageModel.Attach(buffer, offset);
+                    Debug.Assert(BalanceMessageModel.Verify(), "proto.BalanceMessage validation failed!");
+                    long deserialized = BalanceMessageModel.Deserialize(out BalanceMessageValue);
+                    Debug.Assert((deserialized > 0), "proto.BalanceMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
                     {
-                        string message = BalanceValue.ToString();
+                        string message = BalanceMessageValue.ToString();
                         OnReceiveLog(message);
                     }
 
                     // Call receive handler with deserialized value
-                    OnReceive(BalanceValue);
+                    OnReceive(BalanceMessageValue);
                     return true;
                 }
-                case AccountModel.FBETypeConst:
+                case AccountMessageModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
-                    AccountModel.Attach(buffer, offset);
-                    Debug.Assert(AccountModel.Verify(), "proto.Account validation failed!");
-                    long deserialized = AccountModel.Deserialize(out AccountValue);
-                    Debug.Assert((deserialized > 0), "proto.Account deserialization failed!");
+                    AccountMessageModel.Attach(buffer, offset);
+                    Debug.Assert(AccountMessageModel.Verify(), "proto.AccountMessage validation failed!");
+                    long deserialized = AccountMessageModel.Deserialize(out AccountMessageValue);
+                    Debug.Assert((deserialized > 0), "proto.AccountMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
                     {
-                        string message = AccountValue.ToString();
+                        string message = AccountMessageValue.ToString();
                         OnReceiveLog(message);
                     }
 
                     // Call receive handler with deserialized value
-                    OnReceive(AccountValue);
+                    OnReceive(AccountMessageValue);
                     return true;
                 }
+                default: break;
             }
 
             return false;
@@ -3168,74 +4918,75 @@ namespace proto {
     public class Proxy : FBE.Receiver
     {
         // Proxy models accessors
-        private readonly OrderModel OrderModel;
-        private readonly BalanceModel BalanceModel;
-        private readonly AccountModel AccountModel;
+        private readonly OrderMessageModel OrderMessageModel;
+        private readonly BalanceMessageModel BalanceMessageModel;
+        private readonly AccountMessageModel AccountMessageModel;
 
         public Proxy() : base(false)
         {
-            OrderModel = new OrderModel();
-            BalanceModel = new BalanceModel();
-            AccountModel = new AccountModel();
+            OrderMessageModel = new OrderMessageModel();
+            BalanceMessageModel = new BalanceMessageModel();
+            AccountMessageModel = new AccountMessageModel();
         }
         public Proxy(Buffer buffer) : base(buffer, false)
         {
-            OrderModel = new OrderModel();
-            BalanceModel = new BalanceModel();
-            AccountModel = new AccountModel();
+            OrderMessageModel = new OrderMessageModel();
+            BalanceMessageModel = new BalanceMessageModel();
+            AccountMessageModel = new AccountMessageModel();
         }
 
         // Proxy handlers
-        protected virtual void OnProxy(OrderModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(BalanceModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(AccountModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(OrderMessageModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(BalanceMessageModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(AccountMessageModel model, long type, byte[] buffer, long offset, long size) {}
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
-                case OrderModel.FBETypeConst:
+                case OrderMessageModel.FBETypeConst:
                 {
                     // Attach the FBE stream to the proxy model
-                    OrderModel.Attach(buffer, offset);
-                    Debug.Assert(OrderModel.Verify(), "proto.Order validation failed!");
+                    OrderMessageModel.Attach(buffer, offset);
+                    Debug.Assert(OrderMessageModel.Verify(), "proto.OrderMessage validation failed!");
 
-                    long fbeBegin = OrderModel.model.GetBegin();
+                    long fbeBegin = OrderMessageModel.model.GetBegin();
                     if (fbeBegin == 0)
                         return false;
                     // Call proxy handler
-                    OnProxy(OrderModel, type, buffer, offset, size);
-                    OrderModel.model.GetEnd(fbeBegin);
+                    OnProxy(OrderMessageModel, type, buffer, offset, size);
+                    OrderMessageModel.model.GetEnd(fbeBegin);
                     return true;
                 }
-                case BalanceModel.FBETypeConst:
+                case BalanceMessageModel.FBETypeConst:
                 {
                     // Attach the FBE stream to the proxy model
-                    BalanceModel.Attach(buffer, offset);
-                    Debug.Assert(BalanceModel.Verify(), "proto.Balance validation failed!");
+                    BalanceMessageModel.Attach(buffer, offset);
+                    Debug.Assert(BalanceMessageModel.Verify(), "proto.BalanceMessage validation failed!");
 
-                    long fbeBegin = BalanceModel.model.GetBegin();
+                    long fbeBegin = BalanceMessageModel.model.GetBegin();
                     if (fbeBegin == 0)
                         return false;
                     // Call proxy handler
-                    OnProxy(BalanceModel, type, buffer, offset, size);
-                    BalanceModel.model.GetEnd(fbeBegin);
+                    OnProxy(BalanceMessageModel, type, buffer, offset, size);
+                    BalanceMessageModel.model.GetEnd(fbeBegin);
                     return true;
                 }
-                case AccountModel.FBETypeConst:
+                case AccountMessageModel.FBETypeConst:
                 {
                     // Attach the FBE stream to the proxy model
-                    AccountModel.Attach(buffer, offset);
-                    Debug.Assert(AccountModel.Verify(), "proto.Account validation failed!");
+                    AccountMessageModel.Attach(buffer, offset);
+                    Debug.Assert(AccountMessageModel.Verify(), "proto.AccountMessage validation failed!");
 
-                    long fbeBegin = AccountModel.model.GetBegin();
+                    long fbeBegin = AccountMessageModel.model.GetBegin();
                     if (fbeBegin == 0)
                         return false;
                     // Call proxy handler
-                    OnProxy(AccountModel, type, buffer, offset, size);
-                    AccountModel.model.GetEnd(fbeBegin);
+                    OnProxy(AccountMessageModel, type, buffer, offset, size);
+                    AccountMessageModel.model.GetEnd(fbeBegin);
                     return true;
                 }
+                default: break;
             }
 
             return false;
@@ -3252,29 +5003,29 @@ namespace proto {
     public class FinalSender : FBE.Sender
     {
         // Sender models accessors
-        public readonly OrderFinalModel OrderModel;
-        public readonly BalanceFinalModel BalanceModel;
-        public readonly AccountFinalModel AccountModel;
+        public readonly OrderMessageFinalModel OrderMessageModel;
+        public readonly BalanceMessageFinalModel BalanceMessageModel;
+        public readonly AccountMessageFinalModel AccountMessageModel;
 
         public FinalSender() : base(true)
         {
-            OrderModel = new OrderFinalModel(Buffer);
-            BalanceModel = new BalanceFinalModel(Buffer);
-            AccountModel = new AccountFinalModel(Buffer);
+            OrderMessageModel = new OrderMessageFinalModel(Buffer);
+            BalanceMessageModel = new BalanceMessageFinalModel(Buffer);
+            AccountMessageModel = new AccountMessageFinalModel(Buffer);
         }
         public FinalSender(Buffer buffer) : base(buffer, true)
         {
-            OrderModel = new OrderFinalModel(Buffer);
-            BalanceModel = new BalanceFinalModel(Buffer);
-            AccountModel = new AccountFinalModel(Buffer);
+            OrderMessageModel = new OrderMessageFinalModel(Buffer);
+            BalanceMessageModel = new BalanceMessageFinalModel(Buffer);
+            AccountMessageModel = new AccountMessageFinalModel(Buffer);
         }
 
-        public long Send(global::proto.Order value)
+        public long Send(global::proto.OrderMessage value)
         {
             // Serialize the value into the FBE stream
-            long serialized = OrderModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.Order serialization failed!");
-            Debug.Assert(OrderModel.Verify(), "proto.Order validation failed!");
+            long serialized = OrderMessageModel.Serialize(value);
+            Debug.Assert((serialized > 0), "proto.OrderMessage serialization failed!");
+            Debug.Assert(OrderMessageModel.Verify(), "proto.OrderMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -3286,12 +5037,12 @@ namespace proto {
             // Send the serialized value
             return SendSerialized(serialized);
         }
-        public long Send(global::proto.Balance value)
+        public long Send(global::proto.BalanceMessage value)
         {
             // Serialize the value into the FBE stream
-            long serialized = BalanceModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.Balance serialization failed!");
-            Debug.Assert(BalanceModel.Verify(), "proto.Balance validation failed!");
+            long serialized = BalanceMessageModel.Serialize(value);
+            Debug.Assert((serialized > 0), "proto.BalanceMessage serialization failed!");
+            Debug.Assert(BalanceMessageModel.Verify(), "proto.BalanceMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -3303,12 +5054,12 @@ namespace proto {
             // Send the serialized value
             return SendSerialized(serialized);
         }
-        public long Send(global::proto.Account value)
+        public long Send(global::proto.AccountMessage value)
         {
             // Serialize the value into the FBE stream
-            long serialized = AccountModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.Account serialization failed!");
-            Debug.Assert(AccountModel.Verify(), "proto.Account validation failed!");
+            long serialized = AccountMessageModel.Serialize(value);
+            Debug.Assert((serialized > 0), "proto.AccountMessage serialization failed!");
+            Debug.Assert(AccountMessageModel.Verify(), "proto.AccountMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -3335,100 +5086,101 @@ namespace proto {
     public class FinalReceiver : FBE.Receiver
     {
         // Receiver values accessors
-        private global::proto.Order OrderValue;
-        private global::proto.Balance BalanceValue;
-        private global::proto.Account AccountValue;
+        private global::proto.OrderMessage OrderMessageValue;
+        private global::proto.BalanceMessage BalanceMessageValue;
+        private global::proto.AccountMessage AccountMessageValue;
 
         // Receiver models accessors
-        private readonly OrderFinalModel OrderModel;
-        private readonly BalanceFinalModel BalanceModel;
-        private readonly AccountFinalModel AccountModel;
+        private readonly OrderMessageFinalModel OrderMessageModel;
+        private readonly BalanceMessageFinalModel BalanceMessageModel;
+        private readonly AccountMessageFinalModel AccountMessageModel;
 
         public FinalReceiver() : base(true)
         {
-            OrderValue = global::proto.Order.Default;
-            OrderModel = new OrderFinalModel();
-            BalanceValue = global::proto.Balance.Default;
-            BalanceModel = new BalanceFinalModel();
-            AccountValue = global::proto.Account.Default;
-            AccountModel = new AccountFinalModel();
+            OrderMessageValue = global::proto.OrderMessage.Default;
+            OrderMessageModel = new OrderMessageFinalModel();
+            BalanceMessageValue = global::proto.BalanceMessage.Default;
+            BalanceMessageModel = new BalanceMessageFinalModel();
+            AccountMessageValue = global::proto.AccountMessage.Default;
+            AccountMessageModel = new AccountMessageFinalModel();
         }
         public FinalReceiver(Buffer buffer) : base(buffer, true)
         {
-            OrderValue = global::proto.Order.Default;
-            OrderModel = new OrderFinalModel();
-            BalanceValue = global::proto.Balance.Default;
-            BalanceModel = new BalanceFinalModel();
-            AccountValue = global::proto.Account.Default;
-            AccountModel = new AccountFinalModel();
+            OrderMessageValue = global::proto.OrderMessage.Default;
+            OrderMessageModel = new OrderMessageFinalModel();
+            BalanceMessageValue = global::proto.BalanceMessage.Default;
+            BalanceMessageModel = new BalanceMessageFinalModel();
+            AccountMessageValue = global::proto.AccountMessage.Default;
+            AccountMessageModel = new AccountMessageFinalModel();
         }
 
         // Receive handlers
-        protected virtual void OnReceive(global::proto.Order value) {}
-        protected virtual void OnReceive(global::proto.Balance value) {}
-        protected virtual void OnReceive(global::proto.Account value) {}
+        protected virtual void OnReceive(global::proto.OrderMessage value) {}
+        protected virtual void OnReceive(global::proto.BalanceMessage value) {}
+        protected virtual void OnReceive(global::proto.AccountMessage value) {}
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
-                case OrderFinalModel.FBETypeConst:
+                case OrderMessageFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
-                    OrderModel.Attach(buffer, offset);
-                    Debug.Assert(OrderModel.Verify(), "proto.Order validation failed!");
-                    long deserialized = OrderModel.Deserialize(out OrderValue);
-                    Debug.Assert((deserialized > 0), "proto.Order deserialization failed!");
+                    OrderMessageModel.Attach(buffer, offset);
+                    Debug.Assert(OrderMessageModel.Verify(), "proto.OrderMessage validation failed!");
+                    long deserialized = OrderMessageModel.Deserialize(out OrderMessageValue);
+                    Debug.Assert((deserialized > 0), "proto.OrderMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
                     {
-                        string message = OrderValue.ToString();
+                        string message = OrderMessageValue.ToString();
                         OnReceiveLog(message);
                     }
 
                     // Call receive handler with deserialized value
-                    OnReceive(OrderValue);
+                    OnReceive(OrderMessageValue);
                     return true;
                 }
-                case BalanceFinalModel.FBETypeConst:
+                case BalanceMessageFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
-                    BalanceModel.Attach(buffer, offset);
-                    Debug.Assert(BalanceModel.Verify(), "proto.Balance validation failed!");
-                    long deserialized = BalanceModel.Deserialize(out BalanceValue);
-                    Debug.Assert((deserialized > 0), "proto.Balance deserialization failed!");
+                    BalanceMessageModel.Attach(buffer, offset);
+                    Debug.Assert(BalanceMessageModel.Verify(), "proto.BalanceMessage validation failed!");
+                    long deserialized = BalanceMessageModel.Deserialize(out BalanceMessageValue);
+                    Debug.Assert((deserialized > 0), "proto.BalanceMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
                     {
-                        string message = BalanceValue.ToString();
+                        string message = BalanceMessageValue.ToString();
                         OnReceiveLog(message);
                     }
 
                     // Call receive handler with deserialized value
-                    OnReceive(BalanceValue);
+                    OnReceive(BalanceMessageValue);
                     return true;
                 }
-                case AccountFinalModel.FBETypeConst:
+                case AccountMessageFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
-                    AccountModel.Attach(buffer, offset);
-                    Debug.Assert(AccountModel.Verify(), "proto.Account validation failed!");
-                    long deserialized = AccountModel.Deserialize(out AccountValue);
-                    Debug.Assert((deserialized > 0), "proto.Account deserialization failed!");
+                    AccountMessageModel.Attach(buffer, offset);
+                    Debug.Assert(AccountMessageModel.Verify(), "proto.AccountMessage validation failed!");
+                    long deserialized = AccountMessageModel.Deserialize(out AccountMessageValue);
+                    Debug.Assert((deserialized > 0), "proto.AccountMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
                     {
-                        string message = AccountValue.ToString();
+                        string message = AccountMessageValue.ToString();
                         OnReceiveLog(message);
                     }
 
                     // Call receive handler with deserialized value
-                    OnReceive(AccountValue);
+                    OnReceive(AccountMessageValue);
                     return true;
                 }
+                default: break;
             }
 
             return false;

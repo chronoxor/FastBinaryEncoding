@@ -1142,6 +1142,13 @@ class StructSimple(object):
             None if "f44" not in fields else proto.Account.__from_json__(fields["f44"]),
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 110
+
 
 class FieldModelStructSimple(fbe.FieldModel):
     __slots__ = "_id", "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", "_f11", "_f12", "_f13", "_f14", "_f15", "_f16", "_f17", "_f18", "_f19", "_f20", "_f21", "_f22", "_f23", "_f24", "_f25", "_f26", "_f27", "_f28", "_f29", "_f30", "_f31", "_f32", "_f33", "_f34", "_f35", "_f36", "_f37", "_f38", "_f39", "_f40", "_f41", "_f42", "_f43", "_f44", 
@@ -2203,10 +2210,12 @@ class StructSimpleModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -4110,6 +4119,13 @@ class StructOptional(StructSimple):
             None if "f165" not in fields else proto.Account.__from_json__(fields["f165"]),
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 111
+
 
 class FieldModelStructOptional(fbe.FieldModel):
     __slots__ = "_parent", "_f100", "_f101", "_f102", "_f103", "_f104", "_f105", "_f106", "_f107", "_f108", "_f109", "_f110", "_f111", "_f112", "_f113", "_f114", "_f115", "_f116", "_f117", "_f118", "_f119", "_f120", "_f121", "_f122", "_f123", "_f124", "_f125", "_f126", "_f127", "_f128", "_f129", "_f130", "_f131", "_f132", "_f133", "_f134", "_f135", "_f136", "_f137", "_f138", "_f139", "_f140", "_f141", "_f142", "_f143", "_f144", "_f145", "_f146", "_f147", "_f148", "_f149", "_f150", "_f151", "_f152", "_f153", "_f154", "_f155", "_f156", "_f157", "_f158", "_f159", "_f160", "_f161", "_f162", "_f163", "_f164", "_f165", 
@@ -5609,10 +5625,12 @@ class StructOptionalModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -7525,6 +7543,13 @@ class StructNested(StructOptional):
             None if "f1011" not in fields else StructOptional.__from_json__(fields["f1011"]),
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 112
+
 
 class FieldModelStructNested(fbe.FieldModel):
     __slots__ = "_parent", "_f1000", "_f1001", "_f1002", "_f1003", "_f1004", "_f1005", "_f1006", "_f1007", "_f1008", "_f1009", "_f1010", "_f1011", 
@@ -7944,10 +7969,12 @@ class StructNestedModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -8535,6 +8562,13 @@ class StructBytes(object):
             None if "f3" not in fields else None if fields["f3"] is None else base64.b64decode(fields["f3"].encode('ascii')),
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 120
+
 
 class FieldModelStructBytes(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", 
@@ -8756,10 +8790,12 @@ class StructBytesModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -9283,6 +9319,13 @@ class StructArray(object):
             None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 125
+
 
 class FieldModelStructArray(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
@@ -9644,10 +9687,12 @@ class StructArrayModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -10322,6 +10367,13 @@ class StructVector(object):
             None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 130
+
 
 class FieldModelStructVector(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
@@ -10683,10 +10735,12 @@ class StructVectorModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -11361,6 +11415,13 @@ class StructList(object):
             None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 131
+
 
 class FieldModelStructList(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
@@ -11722,10 +11783,12 @@ class StructListModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -12274,6 +12337,13 @@ class StructSet(object):
             None if "f4" not in fields else {StructSimple.__from_json__(value) for value in fields["f4"]},
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 132
+
 
 class FieldModelStructSet(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", 
@@ -12515,10 +12585,12 @@ class StructSetModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -13075,6 +13147,13 @@ class StructMap(object):
             None if "f10" not in fields else {key: StructSimple.__from_json__(value) for key, value in fields["f10"].items()},
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 140
+
 
 class FieldModelStructMap(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
@@ -13436,10 +13515,12 @@ class StructMapModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -14168,6 +14249,13 @@ class StructHash(object):
             None if "f10" not in fields else {key: StructSimple.__from_json__(value) for key, value in fields["f10"].items()},
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 141
+
 
 class FieldModelStructHash(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
@@ -14529,10 +14617,12 @@ class StructHashModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -15054,6 +15144,13 @@ class StructHashEx(object):
             None if "f2" not in fields else {StructSimple.__from_json__(key): StructNested.__from_json__(value) for key, value in fields["f2"].items()},
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 142
+
 
 class FieldModelStructHashEx(fbe.FieldModel):
     __slots__ = "_f1", "_f2", 
@@ -15255,10 +15352,12 @@ class StructHashExModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -15562,6 +15661,13 @@ class StructEmpty(object):
         return StructEmpty(
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 143
+
 
 class FieldModelStructEmpty(fbe.FieldModel):
     def __init__(self, buffer, offset):
@@ -15720,10 +15826,12 @@ class StructEmptyModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -15915,23 +16023,11 @@ class ProtocolVersion(object):
 
 # Fast Binary Encoding test sender
 class Sender(fbe.Sender):
-    __slots__ = "_proto_sender", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", "_structempty_model", 
+    __slots__ = "_proto_sender", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
         self._proto_sender = proto.Sender(self.buffer)
-        self._structsimple_model = StructSimpleModel(self.buffer)
-        self._structoptional_model = StructOptionalModel(self.buffer)
-        self._structnested_model = StructNestedModel(self.buffer)
-        self._structbytes_model = StructBytesModel(self.buffer)
-        self._structarray_model = StructArrayModel(self.buffer)
-        self._structvector_model = StructVectorModel(self.buffer)
-        self._structlist_model = StructListModel(self.buffer)
-        self._structset_model = StructSetModel(self.buffer)
-        self._structmap_model = StructMapModel(self.buffer)
-        self._structhash_model = StructHashModel(self.buffer)
-        self._structhashex_model = StructHashExModel(self.buffer)
-        self._structempty_model = StructEmptyModel(self.buffer)
 
     # Imported senders
 
@@ -15941,253 +16037,13 @@ class Sender(fbe.Sender):
 
     # Sender models accessors
 
-    @property
-    def structsimple_model(self):
-        return self._structsimple_model
-
-    @property
-    def structoptional_model(self):
-        return self._structoptional_model
-
-    @property
-    def structnested_model(self):
-        return self._structnested_model
-
-    @property
-    def structbytes_model(self):
-        return self._structbytes_model
-
-    @property
-    def structarray_model(self):
-        return self._structarray_model
-
-    @property
-    def structvector_model(self):
-        return self._structvector_model
-
-    @property
-    def structlist_model(self):
-        return self._structlist_model
-
-    @property
-    def structset_model(self):
-        return self._structset_model
-
-    @property
-    def structmap_model(self):
-        return self._structmap_model
-
-    @property
-    def structhash_model(self):
-        return self._structhash_model
-
-    @property
-    def structhashex_model(self):
-        return self._structhashex_model
-
-    @property
-    def structempty_model(self):
-        return self._structempty_model
-
     # Send methods
 
     def send(self, value):
-        if isinstance(value, StructSimple):
-            return self.send_structsimple(value)
-        if isinstance(value, StructOptional):
-            return self.send_structoptional(value)
-        if isinstance(value, StructNested):
-            return self.send_structnested(value)
-        if isinstance(value, StructBytes):
-            return self.send_structbytes(value)
-        if isinstance(value, StructArray):
-            return self.send_structarray(value)
-        if isinstance(value, StructVector):
-            return self.send_structvector(value)
-        if isinstance(value, StructList):
-            return self.send_structlist(value)
-        if isinstance(value, StructSet):
-            return self.send_structset(value)
-        if isinstance(value, StructMap):
-            return self.send_structmap(value)
-        if isinstance(value, StructHash):
-            return self.send_structhash(value)
-        if isinstance(value, StructHashEx):
-            return self.send_structhashex(value)
-        if isinstance(value, StructEmpty):
-            return self.send_structempty(value)
         result = self._proto_sender.send(value)
         if result > 0:
             return result
         return 0
-
-    def send_structsimple(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structsimple_model.serialize(value)
-        assert (serialized > 0), "test.StructSimple serialization failed!"
-        assert self.structsimple_model.verify(), "test.StructSimple validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structoptional(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structoptional_model.serialize(value)
-        assert (serialized > 0), "test.StructOptional serialization failed!"
-        assert self.structoptional_model.verify(), "test.StructOptional validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structnested(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structnested_model.serialize(value)
-        assert (serialized > 0), "test.StructNested serialization failed!"
-        assert self.structnested_model.verify(), "test.StructNested validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structbytes(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structbytes_model.serialize(value)
-        assert (serialized > 0), "test.StructBytes serialization failed!"
-        assert self.structbytes_model.verify(), "test.StructBytes validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structarray(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structarray_model.serialize(value)
-        assert (serialized > 0), "test.StructArray serialization failed!"
-        assert self.structarray_model.verify(), "test.StructArray validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structvector(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structvector_model.serialize(value)
-        assert (serialized > 0), "test.StructVector serialization failed!"
-        assert self.structvector_model.verify(), "test.StructVector validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structlist(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structlist_model.serialize(value)
-        assert (serialized > 0), "test.StructList serialization failed!"
-        assert self.structlist_model.verify(), "test.StructList validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structset(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structset_model.serialize(value)
-        assert (serialized > 0), "test.StructSet serialization failed!"
-        assert self.structset_model.verify(), "test.StructSet validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structmap(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structmap_model.serialize(value)
-        assert (serialized > 0), "test.StructMap serialization failed!"
-        assert self.structmap_model.verify(), "test.StructMap validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structhash(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structhash_model.serialize(value)
-        assert (serialized > 0), "test.StructHash serialization failed!"
-        assert self.structhash_model.verify(), "test.StructHash validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structhashex(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structhashex_model.serialize(value)
-        assert (serialized > 0), "test.StructHashEx serialization failed!"
-        assert self.structhashex_model.verify(), "test.StructHashEx validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structempty(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structempty_model.serialize(value)
-        assert (serialized > 0), "test.StructEmpty serialization failed!"
-        assert self.structempty_model.verify(), "test.StructEmpty validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
 
     # Send message handler
     def on_send(self, buffer, offset, size):
@@ -16196,35 +16052,11 @@ class Sender(fbe.Sender):
 
 # Fast Binary Encoding test receiver
 class Receiver(fbe.Receiver):
-    __slots__ = "_proto_receiver", "_structsimple_value", "_structsimple_model", "_structoptional_value", "_structoptional_model", "_structnested_value", "_structnested_model", "_structbytes_value", "_structbytes_model", "_structarray_value", "_structarray_model", "_structvector_value", "_structvector_model", "_structlist_value", "_structlist_model", "_structset_value", "_structset_model", "_structmap_value", "_structmap_model", "_structhash_value", "_structhash_model", "_structhashex_value", "_structhashex_model", "_structempty_value", "_structempty_model", 
+    __slots__ = "_proto_receiver", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
         self._proto_receiver = proto.Receiver(self.buffer)
-        self._structsimple_value = StructSimple()
-        self._structsimple_model = StructSimpleModel()
-        self._structoptional_value = StructOptional()
-        self._structoptional_model = StructOptionalModel()
-        self._structnested_value = StructNested()
-        self._structnested_model = StructNestedModel()
-        self._structbytes_value = StructBytes()
-        self._structbytes_model = StructBytesModel()
-        self._structarray_value = StructArray()
-        self._structarray_model = StructArrayModel()
-        self._structvector_value = StructVector()
-        self._structvector_model = StructVectorModel()
-        self._structlist_value = StructList()
-        self._structlist_model = StructListModel()
-        self._structset_value = StructSet()
-        self._structset_model = StructSetModel()
-        self._structmap_value = StructMap()
-        self._structmap_model = StructMapModel()
-        self._structhash_value = StructHash()
-        self._structhash_model = StructHashModel()
-        self._structhashex_value = StructHashEx()
-        self._structhashex_model = StructHashExModel()
-        self._structempty_value = StructEmpty()
-        self._structempty_model = StructEmptyModel()
 
     # Imported receivers
 
@@ -16238,235 +16070,7 @@ class Receiver(fbe.Receiver):
 
     # Receive handlers
 
-    def on_receive_structsimple(self, value):
-        pass
-
-    def on_receive_structoptional(self, value):
-        pass
-
-    def on_receive_structnested(self, value):
-        pass
-
-    def on_receive_structbytes(self, value):
-        pass
-
-    def on_receive_structarray(self, value):
-        pass
-
-    def on_receive_structvector(self, value):
-        pass
-
-    def on_receive_structlist(self, value):
-        pass
-
-    def on_receive_structset(self, value):
-        pass
-
-    def on_receive_structmap(self, value):
-        pass
-
-    def on_receive_structhash(self, value):
-        pass
-
-    def on_receive_structhashex(self, value):
-        pass
-
-    def on_receive_structempty(self, value):
-        pass
-
     def on_receive(self, type, buffer, offset, size):
-
-        if type == StructSimpleModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structsimple_model.attach_buffer(buffer, offset)
-            assert self._structsimple_model.verify(), "test.StructSimple validation failed!"
-            (_, deserialized) = self._structsimple_model.deserialize(self._structsimple_value)
-            assert (deserialized > 0), "test.StructSimple deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structsimple_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structsimple(self._structsimple_value)
-            return True
-
-        if type == StructOptionalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structoptional_model.attach_buffer(buffer, offset)
-            assert self._structoptional_model.verify(), "test.StructOptional validation failed!"
-            (_, deserialized) = self._structoptional_model.deserialize(self._structoptional_value)
-            assert (deserialized > 0), "test.StructOptional deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structoptional_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structoptional(self._structoptional_value)
-            return True
-
-        if type == StructNestedModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structnested_model.attach_buffer(buffer, offset)
-            assert self._structnested_model.verify(), "test.StructNested validation failed!"
-            (_, deserialized) = self._structnested_model.deserialize(self._structnested_value)
-            assert (deserialized > 0), "test.StructNested deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structnested_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structnested(self._structnested_value)
-            return True
-
-        if type == StructBytesModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structbytes_model.attach_buffer(buffer, offset)
-            assert self._structbytes_model.verify(), "test.StructBytes validation failed!"
-            (_, deserialized) = self._structbytes_model.deserialize(self._structbytes_value)
-            assert (deserialized > 0), "test.StructBytes deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structbytes_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structbytes(self._structbytes_value)
-            return True
-
-        if type == StructArrayModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structarray_model.attach_buffer(buffer, offset)
-            assert self._structarray_model.verify(), "test.StructArray validation failed!"
-            (_, deserialized) = self._structarray_model.deserialize(self._structarray_value)
-            assert (deserialized > 0), "test.StructArray deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structarray_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structarray(self._structarray_value)
-            return True
-
-        if type == StructVectorModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structvector_model.attach_buffer(buffer, offset)
-            assert self._structvector_model.verify(), "test.StructVector validation failed!"
-            (_, deserialized) = self._structvector_model.deserialize(self._structvector_value)
-            assert (deserialized > 0), "test.StructVector deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structvector_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structvector(self._structvector_value)
-            return True
-
-        if type == StructListModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structlist_model.attach_buffer(buffer, offset)
-            assert self._structlist_model.verify(), "test.StructList validation failed!"
-            (_, deserialized) = self._structlist_model.deserialize(self._structlist_value)
-            assert (deserialized > 0), "test.StructList deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structlist_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structlist(self._structlist_value)
-            return True
-
-        if type == StructSetModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structset_model.attach_buffer(buffer, offset)
-            assert self._structset_model.verify(), "test.StructSet validation failed!"
-            (_, deserialized) = self._structset_model.deserialize(self._structset_value)
-            assert (deserialized > 0), "test.StructSet deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structset_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structset(self._structset_value)
-            return True
-
-        if type == StructMapModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structmap_model.attach_buffer(buffer, offset)
-            assert self._structmap_model.verify(), "test.StructMap validation failed!"
-            (_, deserialized) = self._structmap_model.deserialize(self._structmap_value)
-            assert (deserialized > 0), "test.StructMap deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structmap_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structmap(self._structmap_value)
-            return True
-
-        if type == StructHashModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structhash_model.attach_buffer(buffer, offset)
-            assert self._structhash_model.verify(), "test.StructHash validation failed!"
-            (_, deserialized) = self._structhash_model.deserialize(self._structhash_value)
-            assert (deserialized > 0), "test.StructHash deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structhash_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structhash(self._structhash_value)
-            return True
-
-        if type == StructHashExModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structhashex_model.attach_buffer(buffer, offset)
-            assert self._structhashex_model.verify(), "test.StructHashEx validation failed!"
-            (_, deserialized) = self._structhashex_model.deserialize(self._structhashex_value)
-            assert (deserialized > 0), "test.StructHashEx deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structhashex_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structhashex(self._structhashex_value)
-            return True
-
-        if type == StructEmptyModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structempty_model.attach_buffer(buffer, offset)
-            assert self._structempty_model.verify(), "test.StructEmpty validation failed!"
-            (_, deserialized) = self._structempty_model.deserialize(self._structempty_value)
-            assert (deserialized > 0), "test.StructEmpty deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structempty_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structempty(self._structempty_value)
-            return True
 
         if (self.proto_receiver is not None) and self.proto_receiver.on_receive(type, buffer, offset, size):
             return True
@@ -16476,23 +16080,11 @@ class Receiver(fbe.Receiver):
 
 # Fast Binary Encoding test proxy
 class Proxy(fbe.Receiver):
-    __slots__ = "_proto_proxy", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", "_structempty_model", 
+    __slots__ = "_proto_proxy", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
         self._proto_proxy = proto.Proxy(self.buffer)
-        self._structsimple_model = StructSimpleModel()
-        self._structoptional_model = StructOptionalModel()
-        self._structnested_model = StructNestedModel()
-        self._structbytes_model = StructBytesModel()
-        self._structarray_model = StructArrayModel()
-        self._structvector_model = StructVectorModel()
-        self._structlist_model = StructListModel()
-        self._structset_model = StructSetModel()
-        self._structmap_model = StructMapModel()
-        self._structhash_model = StructHashModel()
-        self._structhashex_model = StructHashExModel()
-        self._structempty_model = StructEmptyModel()
 
     # Imported proxy
 
@@ -16506,199 +16098,7 @@ class Proxy(fbe.Receiver):
 
     # Receive handlers
 
-    def on_proxy_structsimple(self, model, type, buffer, offset, size):
-        pass
-
-    def on_proxy_structoptional(self, model, type, buffer, offset, size):
-        pass
-
-    def on_proxy_structnested(self, model, type, buffer, offset, size):
-        pass
-
-    def on_proxy_structbytes(self, model, type, buffer, offset, size):
-        pass
-
-    def on_proxy_structarray(self, model, type, buffer, offset, size):
-        pass
-
-    def on_proxy_structvector(self, model, type, buffer, offset, size):
-        pass
-
-    def on_proxy_structlist(self, model, type, buffer, offset, size):
-        pass
-
-    def on_proxy_structset(self, model, type, buffer, offset, size):
-        pass
-
-    def on_proxy_structmap(self, model, type, buffer, offset, size):
-        pass
-
-    def on_proxy_structhash(self, model, type, buffer, offset, size):
-        pass
-
-    def on_proxy_structhashex(self, model, type, buffer, offset, size):
-        pass
-
-    def on_proxy_structempty(self, model, type, buffer, offset, size):
-        pass
-
     def on_receive(self, type, buffer, offset, size):
-
-        if type == StructSimpleModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._structsimple_model.attach_buffer(buffer, offset)
-            assert self._structsimple_model.verify(), "test.StructSimple validation failed!"
-
-            fbe_begin = self._structsimple_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_structsimple(self._structsimple_model, type, buffer, offset, size)
-            self._structsimple_model.model.get_end(fbe_begin)
-            return True
-
-        if type == StructOptionalModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._structoptional_model.attach_buffer(buffer, offset)
-            assert self._structoptional_model.verify(), "test.StructOptional validation failed!"
-
-            fbe_begin = self._structoptional_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_structoptional(self._structoptional_model, type, buffer, offset, size)
-            self._structoptional_model.model.get_end(fbe_begin)
-            return True
-
-        if type == StructNestedModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._structnested_model.attach_buffer(buffer, offset)
-            assert self._structnested_model.verify(), "test.StructNested validation failed!"
-
-            fbe_begin = self._structnested_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_structnested(self._structnested_model, type, buffer, offset, size)
-            self._structnested_model.model.get_end(fbe_begin)
-            return True
-
-        if type == StructBytesModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._structbytes_model.attach_buffer(buffer, offset)
-            assert self._structbytes_model.verify(), "test.StructBytes validation failed!"
-
-            fbe_begin = self._structbytes_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_structbytes(self._structbytes_model, type, buffer, offset, size)
-            self._structbytes_model.model.get_end(fbe_begin)
-            return True
-
-        if type == StructArrayModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._structarray_model.attach_buffer(buffer, offset)
-            assert self._structarray_model.verify(), "test.StructArray validation failed!"
-
-            fbe_begin = self._structarray_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_structarray(self._structarray_model, type, buffer, offset, size)
-            self._structarray_model.model.get_end(fbe_begin)
-            return True
-
-        if type == StructVectorModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._structvector_model.attach_buffer(buffer, offset)
-            assert self._structvector_model.verify(), "test.StructVector validation failed!"
-
-            fbe_begin = self._structvector_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_structvector(self._structvector_model, type, buffer, offset, size)
-            self._structvector_model.model.get_end(fbe_begin)
-            return True
-
-        if type == StructListModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._structlist_model.attach_buffer(buffer, offset)
-            assert self._structlist_model.verify(), "test.StructList validation failed!"
-
-            fbe_begin = self._structlist_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_structlist(self._structlist_model, type, buffer, offset, size)
-            self._structlist_model.model.get_end(fbe_begin)
-            return True
-
-        if type == StructSetModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._structset_model.attach_buffer(buffer, offset)
-            assert self._structset_model.verify(), "test.StructSet validation failed!"
-
-            fbe_begin = self._structset_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_structset(self._structset_model, type, buffer, offset, size)
-            self._structset_model.model.get_end(fbe_begin)
-            return True
-
-        if type == StructMapModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._structmap_model.attach_buffer(buffer, offset)
-            assert self._structmap_model.verify(), "test.StructMap validation failed!"
-
-            fbe_begin = self._structmap_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_structmap(self._structmap_model, type, buffer, offset, size)
-            self._structmap_model.model.get_end(fbe_begin)
-            return True
-
-        if type == StructHashModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._structhash_model.attach_buffer(buffer, offset)
-            assert self._structhash_model.verify(), "test.StructHash validation failed!"
-
-            fbe_begin = self._structhash_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_structhash(self._structhash_model, type, buffer, offset, size)
-            self._structhash_model.model.get_end(fbe_begin)
-            return True
-
-        if type == StructHashExModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._structhashex_model.attach_buffer(buffer, offset)
-            assert self._structhashex_model.verify(), "test.StructHashEx validation failed!"
-
-            fbe_begin = self._structhashex_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_structhashex(self._structhashex_model, type, buffer, offset, size)
-            self._structhashex_model.model.get_end(fbe_begin)
-            return True
-
-        if type == StructEmptyModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._structempty_model.attach_buffer(buffer, offset)
-            assert self._structempty_model.verify(), "test.StructEmpty validation failed!"
-
-            fbe_begin = self._structempty_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_structempty(self._structempty_model, type, buffer, offset, size)
-            self._structempty_model.model.get_end(fbe_begin)
-            return True
 
         if (self.proto_proxy is not None) and self.proto_proxy.on_receive(type, buffer, offset, size):
             return True
@@ -16708,23 +16108,11 @@ class Proxy(fbe.Receiver):
 
 # Fast Binary Encoding test final sender
 class FinalSender(fbe.Sender):
-    __slots__ = "_proto_sender", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", "_structempty_model", 
+    __slots__ = "_proto_sender", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, True)
         self._proto_sender = proto.FinalSender(self.buffer)
-        self._structsimple_model = StructSimpleFinalModel(self.buffer)
-        self._structoptional_model = StructOptionalFinalModel(self.buffer)
-        self._structnested_model = StructNestedFinalModel(self.buffer)
-        self._structbytes_model = StructBytesFinalModel(self.buffer)
-        self._structarray_model = StructArrayFinalModel(self.buffer)
-        self._structvector_model = StructVectorFinalModel(self.buffer)
-        self._structlist_model = StructListFinalModel(self.buffer)
-        self._structset_model = StructSetFinalModel(self.buffer)
-        self._structmap_model = StructMapFinalModel(self.buffer)
-        self._structhash_model = StructHashFinalModel(self.buffer)
-        self._structhashex_model = StructHashExFinalModel(self.buffer)
-        self._structempty_model = StructEmptyFinalModel(self.buffer)
 
     # Imported senders
 
@@ -16734,253 +16122,13 @@ class FinalSender(fbe.Sender):
 
     # Sender models accessors
 
-    @property
-    def structsimple_model(self):
-        return self._structsimple_model
-
-    @property
-    def structoptional_model(self):
-        return self._structoptional_model
-
-    @property
-    def structnested_model(self):
-        return self._structnested_model
-
-    @property
-    def structbytes_model(self):
-        return self._structbytes_model
-
-    @property
-    def structarray_model(self):
-        return self._structarray_model
-
-    @property
-    def structvector_model(self):
-        return self._structvector_model
-
-    @property
-    def structlist_model(self):
-        return self._structlist_model
-
-    @property
-    def structset_model(self):
-        return self._structset_model
-
-    @property
-    def structmap_model(self):
-        return self._structmap_model
-
-    @property
-    def structhash_model(self):
-        return self._structhash_model
-
-    @property
-    def structhashex_model(self):
-        return self._structhashex_model
-
-    @property
-    def structempty_model(self):
-        return self._structempty_model
-
     # Send methods
 
     def send(self, value):
-        if isinstance(value, StructSimple):
-            return self.send_structsimple(value)
-        if isinstance(value, StructOptional):
-            return self.send_structoptional(value)
-        if isinstance(value, StructNested):
-            return self.send_structnested(value)
-        if isinstance(value, StructBytes):
-            return self.send_structbytes(value)
-        if isinstance(value, StructArray):
-            return self.send_structarray(value)
-        if isinstance(value, StructVector):
-            return self.send_structvector(value)
-        if isinstance(value, StructList):
-            return self.send_structlist(value)
-        if isinstance(value, StructSet):
-            return self.send_structset(value)
-        if isinstance(value, StructMap):
-            return self.send_structmap(value)
-        if isinstance(value, StructHash):
-            return self.send_structhash(value)
-        if isinstance(value, StructHashEx):
-            return self.send_structhashex(value)
-        if isinstance(value, StructEmpty):
-            return self.send_structempty(value)
         result = self._proto_sender.send(value)
         if result > 0:
             return result
         return 0
-
-    def send_structsimple(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structsimple_model.serialize(value)
-        assert (serialized > 0), "test.StructSimple serialization failed!"
-        assert self.structsimple_model.verify(), "test.StructSimple validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structoptional(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structoptional_model.serialize(value)
-        assert (serialized > 0), "test.StructOptional serialization failed!"
-        assert self.structoptional_model.verify(), "test.StructOptional validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structnested(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structnested_model.serialize(value)
-        assert (serialized > 0), "test.StructNested serialization failed!"
-        assert self.structnested_model.verify(), "test.StructNested validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structbytes(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structbytes_model.serialize(value)
-        assert (serialized > 0), "test.StructBytes serialization failed!"
-        assert self.structbytes_model.verify(), "test.StructBytes validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structarray(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structarray_model.serialize(value)
-        assert (serialized > 0), "test.StructArray serialization failed!"
-        assert self.structarray_model.verify(), "test.StructArray validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structvector(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structvector_model.serialize(value)
-        assert (serialized > 0), "test.StructVector serialization failed!"
-        assert self.structvector_model.verify(), "test.StructVector validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structlist(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structlist_model.serialize(value)
-        assert (serialized > 0), "test.StructList serialization failed!"
-        assert self.structlist_model.verify(), "test.StructList validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structset(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structset_model.serialize(value)
-        assert (serialized > 0), "test.StructSet serialization failed!"
-        assert self.structset_model.verify(), "test.StructSet validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structmap(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structmap_model.serialize(value)
-        assert (serialized > 0), "test.StructMap serialization failed!"
-        assert self.structmap_model.verify(), "test.StructMap validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structhash(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structhash_model.serialize(value)
-        assert (serialized > 0), "test.StructHash serialization failed!"
-        assert self.structhash_model.verify(), "test.StructHash validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structhashex(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structhashex_model.serialize(value)
-        assert (serialized > 0), "test.StructHashEx serialization failed!"
-        assert self.structhashex_model.verify(), "test.StructHashEx validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
-
-    def send_structempty(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.structempty_model.serialize(value)
-        assert (serialized > 0), "test.StructEmpty serialization failed!"
-        assert self.structempty_model.verify(), "test.StructEmpty validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
 
     # Send message handler
     def on_send(self, buffer, offset, size):
@@ -16989,35 +16137,11 @@ class FinalSender(fbe.Sender):
 
 # Fast Binary Encoding test final receiver
 class FinalReceiver(fbe.Receiver):
-    __slots__ = "_proto_receiver", "_structsimple_value", "_structsimple_model", "_structoptional_value", "_structoptional_model", "_structnested_value", "_structnested_model", "_structbytes_value", "_structbytes_model", "_structarray_value", "_structarray_model", "_structvector_value", "_structvector_model", "_structlist_value", "_structlist_model", "_structset_value", "_structset_model", "_structmap_value", "_structmap_model", "_structhash_value", "_structhash_model", "_structhashex_value", "_structhashex_model", "_structempty_value", "_structempty_model", 
+    __slots__ = "_proto_receiver", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, True)
         self._proto_receiver = proto.FinalReceiver(self.buffer)
-        self._structsimple_value = StructSimple()
-        self._structsimple_model = StructSimpleFinalModel()
-        self._structoptional_value = StructOptional()
-        self._structoptional_model = StructOptionalFinalModel()
-        self._structnested_value = StructNested()
-        self._structnested_model = StructNestedFinalModel()
-        self._structbytes_value = StructBytes()
-        self._structbytes_model = StructBytesFinalModel()
-        self._structarray_value = StructArray()
-        self._structarray_model = StructArrayFinalModel()
-        self._structvector_value = StructVector()
-        self._structvector_model = StructVectorFinalModel()
-        self._structlist_value = StructList()
-        self._structlist_model = StructListFinalModel()
-        self._structset_value = StructSet()
-        self._structset_model = StructSetFinalModel()
-        self._structmap_value = StructMap()
-        self._structmap_model = StructMapFinalModel()
-        self._structhash_value = StructHash()
-        self._structhash_model = StructHashFinalModel()
-        self._structhashex_value = StructHashEx()
-        self._structhashex_model = StructHashExFinalModel()
-        self._structempty_value = StructEmpty()
-        self._structempty_model = StructEmptyFinalModel()
 
     # Imported receivers
 
@@ -17031,235 +16155,7 @@ class FinalReceiver(fbe.Receiver):
 
     # Receive handlers
 
-    def on_receive_structsimple(self, value):
-        pass
-
-    def on_receive_structoptional(self, value):
-        pass
-
-    def on_receive_structnested(self, value):
-        pass
-
-    def on_receive_structbytes(self, value):
-        pass
-
-    def on_receive_structarray(self, value):
-        pass
-
-    def on_receive_structvector(self, value):
-        pass
-
-    def on_receive_structlist(self, value):
-        pass
-
-    def on_receive_structset(self, value):
-        pass
-
-    def on_receive_structmap(self, value):
-        pass
-
-    def on_receive_structhash(self, value):
-        pass
-
-    def on_receive_structhashex(self, value):
-        pass
-
-    def on_receive_structempty(self, value):
-        pass
-
     def on_receive(self, type, buffer, offset, size):
-
-        if type == StructSimpleFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structsimple_model.attach_buffer(buffer, offset)
-            assert self._structsimple_model.verify(), "test.StructSimple validation failed!"
-            (_, deserialized) = self._structsimple_model.deserialize(self._structsimple_value)
-            assert (deserialized > 0), "test.StructSimple deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structsimple_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structsimple(self._structsimple_value)
-            return True
-
-        if type == StructOptionalFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structoptional_model.attach_buffer(buffer, offset)
-            assert self._structoptional_model.verify(), "test.StructOptional validation failed!"
-            (_, deserialized) = self._structoptional_model.deserialize(self._structoptional_value)
-            assert (deserialized > 0), "test.StructOptional deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structoptional_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structoptional(self._structoptional_value)
-            return True
-
-        if type == StructNestedFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structnested_model.attach_buffer(buffer, offset)
-            assert self._structnested_model.verify(), "test.StructNested validation failed!"
-            (_, deserialized) = self._structnested_model.deserialize(self._structnested_value)
-            assert (deserialized > 0), "test.StructNested deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structnested_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structnested(self._structnested_value)
-            return True
-
-        if type == StructBytesFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structbytes_model.attach_buffer(buffer, offset)
-            assert self._structbytes_model.verify(), "test.StructBytes validation failed!"
-            (_, deserialized) = self._structbytes_model.deserialize(self._structbytes_value)
-            assert (deserialized > 0), "test.StructBytes deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structbytes_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structbytes(self._structbytes_value)
-            return True
-
-        if type == StructArrayFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structarray_model.attach_buffer(buffer, offset)
-            assert self._structarray_model.verify(), "test.StructArray validation failed!"
-            (_, deserialized) = self._structarray_model.deserialize(self._structarray_value)
-            assert (deserialized > 0), "test.StructArray deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structarray_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structarray(self._structarray_value)
-            return True
-
-        if type == StructVectorFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structvector_model.attach_buffer(buffer, offset)
-            assert self._structvector_model.verify(), "test.StructVector validation failed!"
-            (_, deserialized) = self._structvector_model.deserialize(self._structvector_value)
-            assert (deserialized > 0), "test.StructVector deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structvector_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structvector(self._structvector_value)
-            return True
-
-        if type == StructListFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structlist_model.attach_buffer(buffer, offset)
-            assert self._structlist_model.verify(), "test.StructList validation failed!"
-            (_, deserialized) = self._structlist_model.deserialize(self._structlist_value)
-            assert (deserialized > 0), "test.StructList deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structlist_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structlist(self._structlist_value)
-            return True
-
-        if type == StructSetFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structset_model.attach_buffer(buffer, offset)
-            assert self._structset_model.verify(), "test.StructSet validation failed!"
-            (_, deserialized) = self._structset_model.deserialize(self._structset_value)
-            assert (deserialized > 0), "test.StructSet deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structset_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structset(self._structset_value)
-            return True
-
-        if type == StructMapFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structmap_model.attach_buffer(buffer, offset)
-            assert self._structmap_model.verify(), "test.StructMap validation failed!"
-            (_, deserialized) = self._structmap_model.deserialize(self._structmap_value)
-            assert (deserialized > 0), "test.StructMap deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structmap_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structmap(self._structmap_value)
-            return True
-
-        if type == StructHashFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structhash_model.attach_buffer(buffer, offset)
-            assert self._structhash_model.verify(), "test.StructHash validation failed!"
-            (_, deserialized) = self._structhash_model.deserialize(self._structhash_value)
-            assert (deserialized > 0), "test.StructHash deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structhash_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structhash(self._structhash_value)
-            return True
-
-        if type == StructHashExFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structhashex_model.attach_buffer(buffer, offset)
-            assert self._structhashex_model.verify(), "test.StructHashEx validation failed!"
-            (_, deserialized) = self._structhashex_model.deserialize(self._structhashex_value)
-            assert (deserialized > 0), "test.StructHashEx deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structhashex_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structhashex(self._structhashex_value)
-            return True
-
-        if type == StructEmptyFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._structempty_model.attach_buffer(buffer, offset)
-            assert self._structempty_model.verify(), "test.StructEmpty validation failed!"
-            (_, deserialized) = self._structempty_model.deserialize(self._structempty_value)
-            assert (deserialized > 0), "test.StructEmpty deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._structempty_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_structempty(self._structempty_value)
-            return True
 
         if (self.proto_receiver is not None) and self.proto_receiver.on_receive(type, buffer, offset, size):
             return True

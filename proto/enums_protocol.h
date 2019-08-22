@@ -39,7 +39,6 @@ class Sender : public virtual FBE::Sender<TBuffer>
 {
 public:
     Sender()
-        : EnumsModel(this->_buffer)
     {}
     Sender(const Sender&) = default;
     Sender(Sender&&) noexcept = default;
@@ -48,27 +47,8 @@ public:
     Sender& operator=(const Sender&) = default;
     Sender& operator=(Sender&&) noexcept = default;
 
-    size_t send(const ::enums::Enums& value)
-    {
-        // Serialize the value into the FBE stream
-        size_t serialized = EnumsModel.serialize(value);
-        assert((serialized > 0) && "enums::Enums serialization failed!");
-        assert(EnumsModel.verify() && "enums::Enums validation failed!");
-
-        // Log the value
-        if (this->_logging)
-        {
-            std::string message = value.string();
-            this->onSendLog(message);
-        }
-
-        // Send the serialized value
-        return this->send_serialized(serialized);
-    }
-
 public:
     // Sender models accessors
-    FBE::enums::EnumsModel<TBuffer> EnumsModel;
 };
 
 } // namespace enums
@@ -92,32 +72,13 @@ public:
 
 protected:
     // Receive handlers
-    virtual void onReceive(const ::enums::Enums& value) {}
 
     // Receive message handler
     bool onReceive(size_t type, const void* data, size_t size) override
     {
         switch (type)
         {
-            case FBE::enums::EnumsModel<ReadBuffer>::fbe_type():
-            {
-                // Deserialize the value from the FBE stream
-                EnumsModel.attach(data, size);
-                assert(EnumsModel.verify() && "enums::Enums validation failed!");
-                [[maybe_unused]] size_t deserialized = EnumsModel.deserialize(EnumsValue);
-                assert((deserialized > 0) && "enums::Enums deserialization failed!");
-
-                // Log the value
-                if (this->_logging)
-                {
-                    std::string message = EnumsValue.string();
-                    this->onReceiveLog(message);
-                }
-
-                // Call receive handler with deserialized value
-                onReceive(EnumsValue);
-                return true;
-            }
+            default: break;
         }
 
         return false;
@@ -125,10 +86,8 @@ protected:
 
 private:
     // Receiver values accessors
-    ::enums::Enums EnumsValue;
 
     // Receiver models accessors
-    FBE::enums::EnumsModel<ReadBuffer> EnumsModel;
 };
 
 } // namespace enums
@@ -152,27 +111,13 @@ public:
 
 protected:
     // Proxy handlers
-    virtual void onProxy(FBE::enums::EnumsModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
 
     // Receive message handler
     bool onReceive(size_t type, const void* data, size_t size) override
     {
         switch (type)
         {
-            case FBE::enums::EnumsModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                EnumsModel.attach(data, size);
-                assert(EnumsModel.verify() && "enums::Enums validation failed!");
-
-                size_t fbe_begin = EnumsModel.model.get_begin();
-                if (fbe_begin == 0)
-                    return false;
-                // Call proxy handler
-                onProxy(EnumsModel, type, data, size);
-                EnumsModel.model.get_end(fbe_begin);
-                return true;
-            }
+            default: break;
         }
 
         return false;
@@ -180,7 +125,6 @@ protected:
 
 private:
     // Proxy models accessors
-    FBE::enums::EnumsModel<ReadBuffer> EnumsModel;
 };
 
 } // namespace enums
@@ -220,14 +164,6 @@ protected:
     std::mutex _lock;
     uint64_t _timestamp{0};
 
-    virtual bool onReceiveResponse(const ::enums::Enums& response) { return false; }
-
-    virtual bool onReceiveReject(const ::enums::Enums& reject) { return false; }
-
-    virtual void onReceiveNotify(const ::enums::Enums& notify) {}
-
-    virtual void onReceive(const ::enums::Enums& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
-
     // Reset client requests
     virtual void reset_requests()
     {
@@ -253,7 +189,6 @@ class FinalSender : public virtual FBE::Sender<TBuffer>
 {
 public:
     FinalSender()
-        : EnumsModel(this->_buffer)
     { this->final(true); }
     FinalSender(const FinalSender&) = default;
     FinalSender(FinalSender&&) noexcept = default;
@@ -262,27 +197,8 @@ public:
     FinalSender& operator=(const FinalSender&) = default;
     FinalSender& operator=(FinalSender&&) noexcept = default;
 
-    size_t send(const ::enums::Enums& value)
-    {
-        // Serialize the value into the FBE stream
-        size_t serialized = EnumsModel.serialize(value);
-        assert((serialized > 0) && "enums::Enums serialization failed!");
-        assert(EnumsModel.verify() && "enums::Enums validation failed!");
-
-        // Log the value
-        if (this->_logging)
-        {
-            std::string message = value.string();
-            this->onSendLog(message);
-        }
-
-        // Send the serialized value
-        return this->send_serialized(serialized);
-    }
-
 public:
     // Sender models accessors
-    FBE::enums::EnumsFinalModel<TBuffer> EnumsModel;
 };
 
 } // namespace enums
@@ -306,32 +222,13 @@ public:
 
 protected:
     // Receive handlers
-    virtual void onReceive(const ::enums::Enums& value) {}
 
     // Receive message handler
     bool onReceive(size_t type, const void* data, size_t size) override
     {
         switch (type)
         {
-            case FBE::enums::EnumsFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Deserialize the value from the FBE stream
-                EnumsModel.attach(data, size);
-                assert(EnumsModel.verify() && "enums::Enums validation failed!");
-                [[maybe_unused]] size_t deserialized = EnumsModel.deserialize(EnumsValue);
-                assert((deserialized > 0) && "enums::Enums deserialization failed!");
-
-                // Log the value
-                if (this->_logging)
-                {
-                    std::string message = EnumsValue.string();
-                    this->onReceiveLog(message);
-                }
-
-                // Call receive handler with deserialized value
-                onReceive(EnumsValue);
-                return true;
-            }
+            default: break;
         }
 
         return false;
@@ -339,10 +236,8 @@ protected:
 
 private:
     // Receiver values accessors
-    ::enums::Enums EnumsValue;
 
     // Receiver models accessors
-    FBE::enums::EnumsFinalModel<ReadBuffer> EnumsModel;
 };
 
 } // namespace enums
@@ -381,14 +276,6 @@ public:
 protected:
     std::mutex _lock;
     uint64_t _timestamp{0};
-
-    virtual bool onReceiveResponse(const ::enums::Enums& response) { return false; }
-
-    virtual bool onReceiveReject(const ::enums::Enums& reject) { return false; }
-
-    virtual void onReceiveNotify(const ::enums::Enums& notify) {}
-
-    virtual void onReceive(const ::enums::Enums& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }
 
     // Reset client requests
     virtual void reset_requests()

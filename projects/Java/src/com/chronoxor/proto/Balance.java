@@ -10,6 +10,9 @@ public class Balance implements Comparable<Object>
     public String currency = "";
     public double amount = (double)0.0d;
 
+    public static final long fbeTypeConst = 2;
+    public long fbeType() { return fbeTypeConst; }
+
     public Balance() {}
 
     public Balance(String currency, double amount)

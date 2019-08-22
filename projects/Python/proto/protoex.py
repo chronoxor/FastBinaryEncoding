@@ -519,6 +519,13 @@ class Order(object):
             None if "sl" not in fields else fields["sl"],
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 1
+
 
 class FieldModelOrder(fbe.FieldModel):
     __slots__ = "_id", "_symbol", "_side", "_type", "_price", "_volume", "_tp", "_sl", 
@@ -840,10 +847,12 @@ class OrderModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -1308,6 +1317,13 @@ class Balance(proto.Balance):
             None if "locked" not in fields else fields["locked"],
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = proto.Balance.TYPE
+
 
 class FieldModelBalance(fbe.FieldModel):
     __slots__ = "_parent", "_locked", 
@@ -1507,10 +1523,12 @@ class BalanceModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -1877,6 +1895,13 @@ class Account(object):
             None if "orders" not in fields else [Order.__from_json__(value) for value in fields["orders"]],
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 3
+
 
 class FieldModelAccount(fbe.FieldModel):
     __slots__ = "_id", "_name", "_state", "_wallet", "_asset", "_orders", 
@@ -2158,10 +2183,12 @@ class AccountModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -2490,6 +2517,1461 @@ class AccountFinalModel(fbe.Model):
         self._model.fbe_shift(prev)
 
 
+@functools.total_ordering
+class OrderMessage(object):
+    __slots__ = "body", 
+
+    def __init__(self, body=None):
+        if body is None:
+            body = Order()
+        self.body = body
+
+    # Struct shallow copy
+    def copy(self, other):
+        self.body = other.body
+        return self
+
+    # Struct deep clone
+    def clone(self):
+        # Serialize the struct to the FBE stream
+        writer = OrderMessageModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = OrderMessageModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
+
+    def __eq__(self, other):
+        if not isinstance(self, other.__class__):
+            return NotImplemented
+        return True
+
+    def __lt__(self, other):
+        if not isinstance(self, other.__class__):
+            return NotImplemented
+        return False
+
+    @property
+    def __key__(self):
+        return ()
+
+    def __hash__(self):
+        return hash(self.__key__)
+
+    def __format__(self, format_spec):
+        return self.__str__()
+
+    def __str__(self):
+        sb = list()
+        sb.append("OrderMessage(")
+        sb.append("body=")
+        sb.append(str(self.body))
+        sb.append(")")
+        return "".join(sb)
+
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
+    def __to_json__(self):
+        result = dict()
+        result.update(dict(
+            body=self.body, 
+        ))
+        return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return OrderMessage.__from_json__(json.loads(document))
+
+    @staticmethod
+    def __from_json__(fields):
+        if fields is None:
+            return None
+        return OrderMessage(
+            None if "body" not in fields else Order.__from_json__(fields["body"]),
+        )
+
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 11
+
+
+class FieldModelOrderMessage(fbe.FieldModel):
+    __slots__ = "_body", 
+
+    def __init__(self, buffer, offset):
+        super().__init__(buffer, offset)
+        self._body = FieldModelOrder(buffer, 4 + 4)
+
+    @property
+    def body(self):
+        return self._body
+
+    # Get the field size
+    @property
+    def fbe_size(self):
+        return 4
+
+    # Get the field body size
+    @property
+    def fbe_body(self):
+        fbe_result = 4 + 4 \
+            + self.body.fbe_size \
+
+        return fbe_result
+
+    # Get the field extra size
+    @property
+    def fbe_extra(self):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return 0
+
+        fbe_struct_offset = self.read_uint32(self.fbe_offset)
+        if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4) > self._buffer.size):
+            return 0
+
+        self._buffer.shift(fbe_struct_offset)
+
+        fbe_result = self.fbe_body \
+            + self.body.fbe_extra \
+
+        self._buffer.unshift(fbe_struct_offset)
+
+        return fbe_result
+
+    # Get the field type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 11
+
+    # Check if the struct value is valid
+    def verify(self, fbe_verify_type=True):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return True
+
+        fbe_struct_offset = self.read_uint32(self.fbe_offset)
+        if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4 + 4) > self._buffer.size):
+            return False
+
+        fbe_struct_size = self.read_uint32(fbe_struct_offset)
+        if fbe_struct_size < (4 + 4):
+            return False
+
+        fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
+        if fbe_verify_type and (fbe_struct_type != self.fbe_type):
+            return False
+
+        self._buffer.shift(fbe_struct_offset)
+        fbe_result = self.verify_fields(fbe_struct_size)
+        self._buffer.unshift(fbe_struct_offset)
+        return fbe_result
+
+    # Check if the struct fields are valid
+    def verify_fields(self, fbe_struct_size):
+        fbe_current_size = 4 + 4
+
+        if (fbe_current_size + self.body.fbe_size) > fbe_struct_size:
+            return True
+        if not self.body.verify():
+            return False
+        fbe_current_size += self.body.fbe_size
+
+        return True
+
+    # Get the struct value (begin phase)
+    def get_begin(self):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return 0
+
+        fbe_struct_offset = self.read_uint32(self.fbe_offset)
+        assert (fbe_struct_offset > 0) and ((self._buffer.offset + fbe_struct_offset + 4 + 4) <= self._buffer.size), "Model is broken!"
+        if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4 + 4) > self._buffer.size):
+            return 0
+
+        fbe_struct_size = self.read_uint32(fbe_struct_offset)
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
+            return 0
+
+        self._buffer.shift(fbe_struct_offset)
+        return fbe_struct_offset
+
+    # Get the struct value (end phase)
+    def get_end(self, fbe_begin):
+        self._buffer.unshift(fbe_begin)
+
+    # Get the struct value
+    def get(self, fbe_value=None):
+        if fbe_value is None:
+            fbe_value = OrderMessage()
+
+        fbe_begin = self.get_begin()
+        if fbe_begin == 0:
+            return fbe_value
+
+        fbe_struct_size = self.read_uint32(0)
+        self.get_fields(fbe_value, fbe_struct_size)
+        self.get_end(fbe_begin)
+        return fbe_value
+
+    # Get the struct fields values
+    def get_fields(self, fbe_value, fbe_struct_size):
+        fbe_current_size = 4 + 4
+
+        if (fbe_current_size + self.body.fbe_size) <= fbe_struct_size:
+            fbe_value.body = self.body.get()
+        else:
+            fbe_value.body = Order()
+        fbe_current_size += self.body.fbe_size
+
+    # Set the struct value (begin phase)
+    def set_begin(self):
+        assert (self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size, "Model is broken!"
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return 0
+
+        fbe_struct_size = self.fbe_body
+        fbe_struct_offset = self._buffer.allocate(fbe_struct_size) - self._buffer.offset
+        assert (fbe_struct_offset > 0) and ((self._buffer.offset + fbe_struct_offset + fbe_struct_size) <= self._buffer.size), "Model is broken!"
+        if (fbe_struct_offset <= 0) or ((self._buffer.offset + fbe_struct_offset + fbe_struct_size) > self._buffer.size):
+            return 0
+
+        self.write_uint32(self.fbe_offset, fbe_struct_offset)
+        self.write_uint32(fbe_struct_offset, fbe_struct_size)
+        self.write_uint32(fbe_struct_offset + 4, self.fbe_type)
+
+        self._buffer.shift(fbe_struct_offset)
+        return fbe_struct_offset
+
+    # Set the struct value (end phase)
+    def set_end(self, fbe_begin):
+        self._buffer.unshift(fbe_begin)
+
+    # Set the struct value
+    def set(self, fbe_value):
+        fbe_begin = self.set_begin()
+        if fbe_begin == 0:
+            return
+
+        self.set_fields(fbe_value)
+        self.set_end(fbe_begin)
+
+    # Set the struct fields values
+    def set_fields(self, fbe_value):
+        self.body.set(fbe_value.body)
+
+
+# Fast Binary Encoding OrderMessage model
+class OrderMessageModel(fbe.Model):
+    __slots__ = "_model",
+
+    def __init__(self, buffer=None):
+        super().__init__(buffer)
+        self._model = FieldModelOrderMessage(self.buffer, 4)
+
+    @property
+    def model(self):
+        return self._model
+
+    # Get the model size
+    @property
+    def fbe_size(self):
+        return self._model.fbe_size + self._model.fbe_extra
+
+    # Get the model type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = FieldModelOrderMessage.TYPE
+
+    # Check if the struct value is valid
+    def verify(self):
+        if (self.buffer.offset + self._model.fbe_offset - 4) > self.buffer.size:
+            return False
+
+        fbe_full_size = self.read_uint32(self._model.fbe_offset - 4)
+        if fbe_full_size < self._model.fbe_size:
+            return False
+
+        return self._model.verify()
+
+    # Create a new model (begin phase)
+    def create_begin(self):
+        fbe_begin = self.buffer.allocate(4 + self._model.fbe_size)
+        return fbe_begin
+
+    # Create a new model (end phase)
+    def create_end(self, fbe_begin):
+        fbe_end = self.buffer.size
+        fbe_full_size = fbe_end - fbe_begin
+        self.write_uint32(self._model.fbe_offset - 4, fbe_full_size)
+        return fbe_full_size
+
+    # Serialize the struct value
+    def serialize(self, value):
+        fbe_begin = self.create_begin()
+        self._model.set(value)
+        fbe_full_size = self.create_end(fbe_begin)
+        return fbe_full_size
+
+    # Deserialize the struct value
+    def deserialize(self, value=None):
+        if value is None:
+            value = OrderMessage()
+
+        if (self.buffer.offset + self._model.fbe_offset - 4) > self.buffer.size:
+            value = OrderMessage()
+            return value, 0
+
+        fbe_full_size = self.read_uint32(self._model.fbe_offset - 4)
+        assert (fbe_full_size >= self._model.fbe_size), "Model is broken!"
+        if fbe_full_size < self._model.fbe_size:
+            value = OrderMessage()
+            return value, 0
+
+        self._model.get(value)
+        return value, fbe_full_size
+
+    # Move to the next struct value
+    def next(self, prev):
+        self._model.fbe_shift(prev)
+
+
+class FinalModelOrderMessage(fbe.FinalModel):
+    __slots__ = "_body", 
+
+    def __init__(self, buffer, offset):
+        super().__init__(buffer, offset)
+        self._body = FinalModelOrder(buffer, 0)
+
+    @property
+    def body(self):
+        return self._body
+
+    # Get the allocation size
+    def fbe_allocation_size(self, fbe_value):
+        fbe_result = 0 \
+            + self.body.fbe_allocation_size(fbe_value.body) \
+
+        return fbe_result
+
+    # Get the final type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 11
+
+    # Check if the struct value is valid
+    def verify(self):
+        self._buffer.shift(self.fbe_offset)
+        fbe_result = self.verify_fields()
+        self._buffer.unshift(self.fbe_offset)
+        return fbe_result
+
+    # Check if the struct fields are valid
+    def verify_fields(self):
+        fbe_current_offset = 0
+
+        self.body.fbe_offset = fbe_current_offset
+        fbe_field_size = self.body.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        return fbe_current_offset
+
+    # Get the struct value
+    def get(self, fbe_value=None):
+        if fbe_value is None:
+            fbe_value = OrderMessage()
+
+        self._buffer.shift(self.fbe_offset)
+        fbe_size = self.get_fields(fbe_value)
+        self._buffer.unshift(self.fbe_offset)
+        return fbe_value, fbe_size
+
+    # Get the struct fields values
+    def get_fields(self, fbe_value):
+        fbe_current_offset = 0
+        fbe_current_size = 0
+
+        self.body.fbe_offset = fbe_current_offset
+        fbe_result = self.body.get()
+        fbe_value.body = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        return fbe_current_size
+
+    # Set the struct value
+    def set(self, fbe_value):
+        self._buffer.shift(self.fbe_offset)
+        fbe_size = self.set_fields(fbe_value)
+        self._buffer.unshift(self.fbe_offset)
+        return fbe_size
+
+    # Set the struct fields values
+    def set_fields(self, fbe_value):
+        fbe_current_offset = 0
+        fbe_current_size = 0
+
+        self.body.fbe_offset = fbe_current_offset
+        fbe_field_size = self.body.set(fbe_value.body)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        return fbe_current_size
+
+
+# Fast Binary Encoding OrderMessage final model
+class OrderMessageFinalModel(fbe.Model):
+    __slots__ = "_model",
+
+    def __init__(self, buffer=None):
+        super().__init__(buffer)
+        self._model = FinalModelOrderMessage(self.buffer, 8)
+
+    # Get the model type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = FinalModelOrderMessage.TYPE
+
+    # Check if the struct value is valid
+    def verify(self):
+        if (self.buffer.offset + self._model.fbe_offset) > self.buffer.size:
+            return False
+
+        fbe_struct_size = self.read_uint32(self._model.fbe_offset - 8)
+        fbe_struct_type = self.read_uint32(self._model.fbe_offset - 4)
+        if (fbe_struct_size <= 0) or (fbe_struct_type != self.fbe_type):
+            return False
+
+        return (8 + self._model.verify()) == fbe_struct_size
+
+    # Serialize the struct value
+    def serialize(self, value):
+        fbe_initial_size = self.buffer.size
+
+        fbe_struct_type = self.fbe_type
+        fbe_struct_size = 8 + self._model.fbe_allocation_size(value)
+        fbe_struct_offset = self.buffer.allocate(fbe_struct_size) - self.buffer.offset
+        assert ((self.buffer.offset + fbe_struct_offset + fbe_struct_size) <= self.buffer.size), "Model is broken!"
+        if (self.buffer.offset + fbe_struct_offset + fbe_struct_size) > self.buffer.size:
+            return 0
+
+        fbe_struct_size = 8 + self._model.set(value)
+        self.buffer.resize(fbe_initial_size + fbe_struct_size)
+
+        self.write_uint32(self._model.fbe_offset - 8, fbe_struct_size)
+        self.write_uint32(self._model.fbe_offset - 4, fbe_struct_type)
+
+        return fbe_struct_size
+
+    # Deserialize the struct value
+    def deserialize(self, value=None):
+        if value is None:
+            value = OrderMessage()
+
+        assert ((self.buffer.offset + self._model.fbe_offset) <= self.buffer.size), "Model is broken!"
+        if (self.buffer.offset + self._model.fbe_offset) > self.buffer.size:
+            return OrderMessage(), 0
+
+        fbe_struct_size = self.read_uint32(self._model.fbe_offset - 8)
+        fbe_struct_type = self.read_uint32(self._model.fbe_offset - 4)
+        assert ((fbe_struct_size > 0) and (fbe_struct_type == self.fbe_type)), "Model is broken!"
+        if (fbe_struct_size <= 0) or (fbe_struct_type != self.fbe_type):
+            return OrderMessage(), 8
+
+        fbe_result = self._model.get(value)
+        return fbe_result[0], (8 + fbe_result[1])
+
+    # Move to the next struct value
+    def next(self, prev):
+        self._model.fbe_shift(prev)
+
+
+@functools.total_ordering
+class BalanceMessage(object):
+    __slots__ = "body", 
+
+    def __init__(self, body=None):
+        if body is None:
+            body = Balance()
+        self.body = body
+
+    # Struct shallow copy
+    def copy(self, other):
+        self.body = other.body
+        return self
+
+    # Struct deep clone
+    def clone(self):
+        # Serialize the struct to the FBE stream
+        writer = BalanceMessageModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = BalanceMessageModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
+
+    def __eq__(self, other):
+        if not isinstance(self, other.__class__):
+            return NotImplemented
+        return True
+
+    def __lt__(self, other):
+        if not isinstance(self, other.__class__):
+            return NotImplemented
+        return False
+
+    @property
+    def __key__(self):
+        return ()
+
+    def __hash__(self):
+        return hash(self.__key__)
+
+    def __format__(self, format_spec):
+        return self.__str__()
+
+    def __str__(self):
+        sb = list()
+        sb.append("BalanceMessage(")
+        sb.append("body=")
+        sb.append(str(self.body))
+        sb.append(")")
+        return "".join(sb)
+
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
+    def __to_json__(self):
+        result = dict()
+        result.update(dict(
+            body=self.body, 
+        ))
+        return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return BalanceMessage.__from_json__(json.loads(document))
+
+    @staticmethod
+    def __from_json__(fields):
+        if fields is None:
+            return None
+        return BalanceMessage(
+            None if "body" not in fields else Balance.__from_json__(fields["body"]),
+        )
+
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 12
+
+
+class FieldModelBalanceMessage(fbe.FieldModel):
+    __slots__ = "_body", 
+
+    def __init__(self, buffer, offset):
+        super().__init__(buffer, offset)
+        self._body = FieldModelBalance(buffer, 4 + 4)
+
+    @property
+    def body(self):
+        return self._body
+
+    # Get the field size
+    @property
+    def fbe_size(self):
+        return 4
+
+    # Get the field body size
+    @property
+    def fbe_body(self):
+        fbe_result = 4 + 4 \
+            + self.body.fbe_size \
+
+        return fbe_result
+
+    # Get the field extra size
+    @property
+    def fbe_extra(self):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return 0
+
+        fbe_struct_offset = self.read_uint32(self.fbe_offset)
+        if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4) > self._buffer.size):
+            return 0
+
+        self._buffer.shift(fbe_struct_offset)
+
+        fbe_result = self.fbe_body \
+            + self.body.fbe_extra \
+
+        self._buffer.unshift(fbe_struct_offset)
+
+        return fbe_result
+
+    # Get the field type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 12
+
+    # Check if the struct value is valid
+    def verify(self, fbe_verify_type=True):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return True
+
+        fbe_struct_offset = self.read_uint32(self.fbe_offset)
+        if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4 + 4) > self._buffer.size):
+            return False
+
+        fbe_struct_size = self.read_uint32(fbe_struct_offset)
+        if fbe_struct_size < (4 + 4):
+            return False
+
+        fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
+        if fbe_verify_type and (fbe_struct_type != self.fbe_type):
+            return False
+
+        self._buffer.shift(fbe_struct_offset)
+        fbe_result = self.verify_fields(fbe_struct_size)
+        self._buffer.unshift(fbe_struct_offset)
+        return fbe_result
+
+    # Check if the struct fields are valid
+    def verify_fields(self, fbe_struct_size):
+        fbe_current_size = 4 + 4
+
+        if (fbe_current_size + self.body.fbe_size) > fbe_struct_size:
+            return True
+        if not self.body.verify():
+            return False
+        fbe_current_size += self.body.fbe_size
+
+        return True
+
+    # Get the struct value (begin phase)
+    def get_begin(self):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return 0
+
+        fbe_struct_offset = self.read_uint32(self.fbe_offset)
+        assert (fbe_struct_offset > 0) and ((self._buffer.offset + fbe_struct_offset + 4 + 4) <= self._buffer.size), "Model is broken!"
+        if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4 + 4) > self._buffer.size):
+            return 0
+
+        fbe_struct_size = self.read_uint32(fbe_struct_offset)
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
+            return 0
+
+        self._buffer.shift(fbe_struct_offset)
+        return fbe_struct_offset
+
+    # Get the struct value (end phase)
+    def get_end(self, fbe_begin):
+        self._buffer.unshift(fbe_begin)
+
+    # Get the struct value
+    def get(self, fbe_value=None):
+        if fbe_value is None:
+            fbe_value = BalanceMessage()
+
+        fbe_begin = self.get_begin()
+        if fbe_begin == 0:
+            return fbe_value
+
+        fbe_struct_size = self.read_uint32(0)
+        self.get_fields(fbe_value, fbe_struct_size)
+        self.get_end(fbe_begin)
+        return fbe_value
+
+    # Get the struct fields values
+    def get_fields(self, fbe_value, fbe_struct_size):
+        fbe_current_size = 4 + 4
+
+        if (fbe_current_size + self.body.fbe_size) <= fbe_struct_size:
+            fbe_value.body = self.body.get()
+        else:
+            fbe_value.body = Balance()
+        fbe_current_size += self.body.fbe_size
+
+    # Set the struct value (begin phase)
+    def set_begin(self):
+        assert (self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size, "Model is broken!"
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return 0
+
+        fbe_struct_size = self.fbe_body
+        fbe_struct_offset = self._buffer.allocate(fbe_struct_size) - self._buffer.offset
+        assert (fbe_struct_offset > 0) and ((self._buffer.offset + fbe_struct_offset + fbe_struct_size) <= self._buffer.size), "Model is broken!"
+        if (fbe_struct_offset <= 0) or ((self._buffer.offset + fbe_struct_offset + fbe_struct_size) > self._buffer.size):
+            return 0
+
+        self.write_uint32(self.fbe_offset, fbe_struct_offset)
+        self.write_uint32(fbe_struct_offset, fbe_struct_size)
+        self.write_uint32(fbe_struct_offset + 4, self.fbe_type)
+
+        self._buffer.shift(fbe_struct_offset)
+        return fbe_struct_offset
+
+    # Set the struct value (end phase)
+    def set_end(self, fbe_begin):
+        self._buffer.unshift(fbe_begin)
+
+    # Set the struct value
+    def set(self, fbe_value):
+        fbe_begin = self.set_begin()
+        if fbe_begin == 0:
+            return
+
+        self.set_fields(fbe_value)
+        self.set_end(fbe_begin)
+
+    # Set the struct fields values
+    def set_fields(self, fbe_value):
+        self.body.set(fbe_value.body)
+
+
+# Fast Binary Encoding BalanceMessage model
+class BalanceMessageModel(fbe.Model):
+    __slots__ = "_model",
+
+    def __init__(self, buffer=None):
+        super().__init__(buffer)
+        self._model = FieldModelBalanceMessage(self.buffer, 4)
+
+    @property
+    def model(self):
+        return self._model
+
+    # Get the model size
+    @property
+    def fbe_size(self):
+        return self._model.fbe_size + self._model.fbe_extra
+
+    # Get the model type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = FieldModelBalanceMessage.TYPE
+
+    # Check if the struct value is valid
+    def verify(self):
+        if (self.buffer.offset + self._model.fbe_offset - 4) > self.buffer.size:
+            return False
+
+        fbe_full_size = self.read_uint32(self._model.fbe_offset - 4)
+        if fbe_full_size < self._model.fbe_size:
+            return False
+
+        return self._model.verify()
+
+    # Create a new model (begin phase)
+    def create_begin(self):
+        fbe_begin = self.buffer.allocate(4 + self._model.fbe_size)
+        return fbe_begin
+
+    # Create a new model (end phase)
+    def create_end(self, fbe_begin):
+        fbe_end = self.buffer.size
+        fbe_full_size = fbe_end - fbe_begin
+        self.write_uint32(self._model.fbe_offset - 4, fbe_full_size)
+        return fbe_full_size
+
+    # Serialize the struct value
+    def serialize(self, value):
+        fbe_begin = self.create_begin()
+        self._model.set(value)
+        fbe_full_size = self.create_end(fbe_begin)
+        return fbe_full_size
+
+    # Deserialize the struct value
+    def deserialize(self, value=None):
+        if value is None:
+            value = BalanceMessage()
+
+        if (self.buffer.offset + self._model.fbe_offset - 4) > self.buffer.size:
+            value = BalanceMessage()
+            return value, 0
+
+        fbe_full_size = self.read_uint32(self._model.fbe_offset - 4)
+        assert (fbe_full_size >= self._model.fbe_size), "Model is broken!"
+        if fbe_full_size < self._model.fbe_size:
+            value = BalanceMessage()
+            return value, 0
+
+        self._model.get(value)
+        return value, fbe_full_size
+
+    # Move to the next struct value
+    def next(self, prev):
+        self._model.fbe_shift(prev)
+
+
+class FinalModelBalanceMessage(fbe.FinalModel):
+    __slots__ = "_body", 
+
+    def __init__(self, buffer, offset):
+        super().__init__(buffer, offset)
+        self._body = FinalModelBalance(buffer, 0)
+
+    @property
+    def body(self):
+        return self._body
+
+    # Get the allocation size
+    def fbe_allocation_size(self, fbe_value):
+        fbe_result = 0 \
+            + self.body.fbe_allocation_size(fbe_value.body) \
+
+        return fbe_result
+
+    # Get the final type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 12
+
+    # Check if the struct value is valid
+    def verify(self):
+        self._buffer.shift(self.fbe_offset)
+        fbe_result = self.verify_fields()
+        self._buffer.unshift(self.fbe_offset)
+        return fbe_result
+
+    # Check if the struct fields are valid
+    def verify_fields(self):
+        fbe_current_offset = 0
+
+        self.body.fbe_offset = fbe_current_offset
+        fbe_field_size = self.body.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        return fbe_current_offset
+
+    # Get the struct value
+    def get(self, fbe_value=None):
+        if fbe_value is None:
+            fbe_value = BalanceMessage()
+
+        self._buffer.shift(self.fbe_offset)
+        fbe_size = self.get_fields(fbe_value)
+        self._buffer.unshift(self.fbe_offset)
+        return fbe_value, fbe_size
+
+    # Get the struct fields values
+    def get_fields(self, fbe_value):
+        fbe_current_offset = 0
+        fbe_current_size = 0
+
+        self.body.fbe_offset = fbe_current_offset
+        fbe_result = self.body.get()
+        fbe_value.body = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        return fbe_current_size
+
+    # Set the struct value
+    def set(self, fbe_value):
+        self._buffer.shift(self.fbe_offset)
+        fbe_size = self.set_fields(fbe_value)
+        self._buffer.unshift(self.fbe_offset)
+        return fbe_size
+
+    # Set the struct fields values
+    def set_fields(self, fbe_value):
+        fbe_current_offset = 0
+        fbe_current_size = 0
+
+        self.body.fbe_offset = fbe_current_offset
+        fbe_field_size = self.body.set(fbe_value.body)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        return fbe_current_size
+
+
+# Fast Binary Encoding BalanceMessage final model
+class BalanceMessageFinalModel(fbe.Model):
+    __slots__ = "_model",
+
+    def __init__(self, buffer=None):
+        super().__init__(buffer)
+        self._model = FinalModelBalanceMessage(self.buffer, 8)
+
+    # Get the model type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = FinalModelBalanceMessage.TYPE
+
+    # Check if the struct value is valid
+    def verify(self):
+        if (self.buffer.offset + self._model.fbe_offset) > self.buffer.size:
+            return False
+
+        fbe_struct_size = self.read_uint32(self._model.fbe_offset - 8)
+        fbe_struct_type = self.read_uint32(self._model.fbe_offset - 4)
+        if (fbe_struct_size <= 0) or (fbe_struct_type != self.fbe_type):
+            return False
+
+        return (8 + self._model.verify()) == fbe_struct_size
+
+    # Serialize the struct value
+    def serialize(self, value):
+        fbe_initial_size = self.buffer.size
+
+        fbe_struct_type = self.fbe_type
+        fbe_struct_size = 8 + self._model.fbe_allocation_size(value)
+        fbe_struct_offset = self.buffer.allocate(fbe_struct_size) - self.buffer.offset
+        assert ((self.buffer.offset + fbe_struct_offset + fbe_struct_size) <= self.buffer.size), "Model is broken!"
+        if (self.buffer.offset + fbe_struct_offset + fbe_struct_size) > self.buffer.size:
+            return 0
+
+        fbe_struct_size = 8 + self._model.set(value)
+        self.buffer.resize(fbe_initial_size + fbe_struct_size)
+
+        self.write_uint32(self._model.fbe_offset - 8, fbe_struct_size)
+        self.write_uint32(self._model.fbe_offset - 4, fbe_struct_type)
+
+        return fbe_struct_size
+
+    # Deserialize the struct value
+    def deserialize(self, value=None):
+        if value is None:
+            value = BalanceMessage()
+
+        assert ((self.buffer.offset + self._model.fbe_offset) <= self.buffer.size), "Model is broken!"
+        if (self.buffer.offset + self._model.fbe_offset) > self.buffer.size:
+            return BalanceMessage(), 0
+
+        fbe_struct_size = self.read_uint32(self._model.fbe_offset - 8)
+        fbe_struct_type = self.read_uint32(self._model.fbe_offset - 4)
+        assert ((fbe_struct_size > 0) and (fbe_struct_type == self.fbe_type)), "Model is broken!"
+        if (fbe_struct_size <= 0) or (fbe_struct_type != self.fbe_type):
+            return BalanceMessage(), 8
+
+        fbe_result = self._model.get(value)
+        return fbe_result[0], (8 + fbe_result[1])
+
+    # Move to the next struct value
+    def next(self, prev):
+        self._model.fbe_shift(prev)
+
+
+@functools.total_ordering
+class AccountMessage(object):
+    __slots__ = "body", 
+
+    def __init__(self, body=None):
+        if body is None:
+            body = Account()
+        self.body = body
+
+    # Struct shallow copy
+    def copy(self, other):
+        self.body = other.body
+        return self
+
+    # Struct deep clone
+    def clone(self):
+        # Serialize the struct to the FBE stream
+        writer = AccountMessageModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = AccountMessageModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
+
+    def __eq__(self, other):
+        if not isinstance(self, other.__class__):
+            return NotImplemented
+        return True
+
+    def __lt__(self, other):
+        if not isinstance(self, other.__class__):
+            return NotImplemented
+        return False
+
+    @property
+    def __key__(self):
+        return ()
+
+    def __hash__(self):
+        return hash(self.__key__)
+
+    def __format__(self, format_spec):
+        return self.__str__()
+
+    def __str__(self):
+        sb = list()
+        sb.append("AccountMessage(")
+        sb.append("body=")
+        sb.append(str(self.body))
+        sb.append(")")
+        return "".join(sb)
+
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
+    def __to_json__(self):
+        result = dict()
+        result.update(dict(
+            body=self.body, 
+        ))
+        return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return AccountMessage.__from_json__(json.loads(document))
+
+    @staticmethod
+    def __from_json__(fields):
+        if fields is None:
+            return None
+        return AccountMessage(
+            None if "body" not in fields else Account.__from_json__(fields["body"]),
+        )
+
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 13
+
+
+class FieldModelAccountMessage(fbe.FieldModel):
+    __slots__ = "_body", 
+
+    def __init__(self, buffer, offset):
+        super().__init__(buffer, offset)
+        self._body = FieldModelAccount(buffer, 4 + 4)
+
+    @property
+    def body(self):
+        return self._body
+
+    # Get the field size
+    @property
+    def fbe_size(self):
+        return 4
+
+    # Get the field body size
+    @property
+    def fbe_body(self):
+        fbe_result = 4 + 4 \
+            + self.body.fbe_size \
+
+        return fbe_result
+
+    # Get the field extra size
+    @property
+    def fbe_extra(self):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return 0
+
+        fbe_struct_offset = self.read_uint32(self.fbe_offset)
+        if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4) > self._buffer.size):
+            return 0
+
+        self._buffer.shift(fbe_struct_offset)
+
+        fbe_result = self.fbe_body \
+            + self.body.fbe_extra \
+
+        self._buffer.unshift(fbe_struct_offset)
+
+        return fbe_result
+
+    # Get the field type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 13
+
+    # Check if the struct value is valid
+    def verify(self, fbe_verify_type=True):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return True
+
+        fbe_struct_offset = self.read_uint32(self.fbe_offset)
+        if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4 + 4) > self._buffer.size):
+            return False
+
+        fbe_struct_size = self.read_uint32(fbe_struct_offset)
+        if fbe_struct_size < (4 + 4):
+            return False
+
+        fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
+        if fbe_verify_type and (fbe_struct_type != self.fbe_type):
+            return False
+
+        self._buffer.shift(fbe_struct_offset)
+        fbe_result = self.verify_fields(fbe_struct_size)
+        self._buffer.unshift(fbe_struct_offset)
+        return fbe_result
+
+    # Check if the struct fields are valid
+    def verify_fields(self, fbe_struct_size):
+        fbe_current_size = 4 + 4
+
+        if (fbe_current_size + self.body.fbe_size) > fbe_struct_size:
+            return True
+        if not self.body.verify():
+            return False
+        fbe_current_size += self.body.fbe_size
+
+        return True
+
+    # Get the struct value (begin phase)
+    def get_begin(self):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return 0
+
+        fbe_struct_offset = self.read_uint32(self.fbe_offset)
+        assert (fbe_struct_offset > 0) and ((self._buffer.offset + fbe_struct_offset + 4 + 4) <= self._buffer.size), "Model is broken!"
+        if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4 + 4) > self._buffer.size):
+            return 0
+
+        fbe_struct_size = self.read_uint32(fbe_struct_offset)
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
+            return 0
+
+        self._buffer.shift(fbe_struct_offset)
+        return fbe_struct_offset
+
+    # Get the struct value (end phase)
+    def get_end(self, fbe_begin):
+        self._buffer.unshift(fbe_begin)
+
+    # Get the struct value
+    def get(self, fbe_value=None):
+        if fbe_value is None:
+            fbe_value = AccountMessage()
+
+        fbe_begin = self.get_begin()
+        if fbe_begin == 0:
+            return fbe_value
+
+        fbe_struct_size = self.read_uint32(0)
+        self.get_fields(fbe_value, fbe_struct_size)
+        self.get_end(fbe_begin)
+        return fbe_value
+
+    # Get the struct fields values
+    def get_fields(self, fbe_value, fbe_struct_size):
+        fbe_current_size = 4 + 4
+
+        if (fbe_current_size + self.body.fbe_size) <= fbe_struct_size:
+            fbe_value.body = self.body.get()
+        else:
+            fbe_value.body = Account()
+        fbe_current_size += self.body.fbe_size
+
+    # Set the struct value (begin phase)
+    def set_begin(self):
+        assert (self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size, "Model is broken!"
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return 0
+
+        fbe_struct_size = self.fbe_body
+        fbe_struct_offset = self._buffer.allocate(fbe_struct_size) - self._buffer.offset
+        assert (fbe_struct_offset > 0) and ((self._buffer.offset + fbe_struct_offset + fbe_struct_size) <= self._buffer.size), "Model is broken!"
+        if (fbe_struct_offset <= 0) or ((self._buffer.offset + fbe_struct_offset + fbe_struct_size) > self._buffer.size):
+            return 0
+
+        self.write_uint32(self.fbe_offset, fbe_struct_offset)
+        self.write_uint32(fbe_struct_offset, fbe_struct_size)
+        self.write_uint32(fbe_struct_offset + 4, self.fbe_type)
+
+        self._buffer.shift(fbe_struct_offset)
+        return fbe_struct_offset
+
+    # Set the struct value (end phase)
+    def set_end(self, fbe_begin):
+        self._buffer.unshift(fbe_begin)
+
+    # Set the struct value
+    def set(self, fbe_value):
+        fbe_begin = self.set_begin()
+        if fbe_begin == 0:
+            return
+
+        self.set_fields(fbe_value)
+        self.set_end(fbe_begin)
+
+    # Set the struct fields values
+    def set_fields(self, fbe_value):
+        self.body.set(fbe_value.body)
+
+
+# Fast Binary Encoding AccountMessage model
+class AccountMessageModel(fbe.Model):
+    __slots__ = "_model",
+
+    def __init__(self, buffer=None):
+        super().__init__(buffer)
+        self._model = FieldModelAccountMessage(self.buffer, 4)
+
+    @property
+    def model(self):
+        return self._model
+
+    # Get the model size
+    @property
+    def fbe_size(self):
+        return self._model.fbe_size + self._model.fbe_extra
+
+    # Get the model type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = FieldModelAccountMessage.TYPE
+
+    # Check if the struct value is valid
+    def verify(self):
+        if (self.buffer.offset + self._model.fbe_offset - 4) > self.buffer.size:
+            return False
+
+        fbe_full_size = self.read_uint32(self._model.fbe_offset - 4)
+        if fbe_full_size < self._model.fbe_size:
+            return False
+
+        return self._model.verify()
+
+    # Create a new model (begin phase)
+    def create_begin(self):
+        fbe_begin = self.buffer.allocate(4 + self._model.fbe_size)
+        return fbe_begin
+
+    # Create a new model (end phase)
+    def create_end(self, fbe_begin):
+        fbe_end = self.buffer.size
+        fbe_full_size = fbe_end - fbe_begin
+        self.write_uint32(self._model.fbe_offset - 4, fbe_full_size)
+        return fbe_full_size
+
+    # Serialize the struct value
+    def serialize(self, value):
+        fbe_begin = self.create_begin()
+        self._model.set(value)
+        fbe_full_size = self.create_end(fbe_begin)
+        return fbe_full_size
+
+    # Deserialize the struct value
+    def deserialize(self, value=None):
+        if value is None:
+            value = AccountMessage()
+
+        if (self.buffer.offset + self._model.fbe_offset - 4) > self.buffer.size:
+            value = AccountMessage()
+            return value, 0
+
+        fbe_full_size = self.read_uint32(self._model.fbe_offset - 4)
+        assert (fbe_full_size >= self._model.fbe_size), "Model is broken!"
+        if fbe_full_size < self._model.fbe_size:
+            value = AccountMessage()
+            return value, 0
+
+        self._model.get(value)
+        return value, fbe_full_size
+
+    # Move to the next struct value
+    def next(self, prev):
+        self._model.fbe_shift(prev)
+
+
+class FinalModelAccountMessage(fbe.FinalModel):
+    __slots__ = "_body", 
+
+    def __init__(self, buffer, offset):
+        super().__init__(buffer, offset)
+        self._body = FinalModelAccount(buffer, 0)
+
+    @property
+    def body(self):
+        return self._body
+
+    # Get the allocation size
+    def fbe_allocation_size(self, fbe_value):
+        fbe_result = 0 \
+            + self.body.fbe_allocation_size(fbe_value.body) \
+
+        return fbe_result
+
+    # Get the final type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 13
+
+    # Check if the struct value is valid
+    def verify(self):
+        self._buffer.shift(self.fbe_offset)
+        fbe_result = self.verify_fields()
+        self._buffer.unshift(self.fbe_offset)
+        return fbe_result
+
+    # Check if the struct fields are valid
+    def verify_fields(self):
+        fbe_current_offset = 0
+
+        self.body.fbe_offset = fbe_current_offset
+        fbe_field_size = self.body.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        return fbe_current_offset
+
+    # Get the struct value
+    def get(self, fbe_value=None):
+        if fbe_value is None:
+            fbe_value = AccountMessage()
+
+        self._buffer.shift(self.fbe_offset)
+        fbe_size = self.get_fields(fbe_value)
+        self._buffer.unshift(self.fbe_offset)
+        return fbe_value, fbe_size
+
+    # Get the struct fields values
+    def get_fields(self, fbe_value):
+        fbe_current_offset = 0
+        fbe_current_size = 0
+
+        self.body.fbe_offset = fbe_current_offset
+        fbe_result = self.body.get()
+        fbe_value.body = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        return fbe_current_size
+
+    # Set the struct value
+    def set(self, fbe_value):
+        self._buffer.shift(self.fbe_offset)
+        fbe_size = self.set_fields(fbe_value)
+        self._buffer.unshift(self.fbe_offset)
+        return fbe_size
+
+    # Set the struct fields values
+    def set_fields(self, fbe_value):
+        fbe_current_offset = 0
+        fbe_current_size = 0
+
+        self.body.fbe_offset = fbe_current_offset
+        fbe_field_size = self.body.set(fbe_value.body)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        return fbe_current_size
+
+
+# Fast Binary Encoding AccountMessage final model
+class AccountMessageFinalModel(fbe.Model):
+    __slots__ = "_model",
+
+    def __init__(self, buffer=None):
+        super().__init__(buffer)
+        self._model = FinalModelAccountMessage(self.buffer, 8)
+
+    # Get the model type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = FinalModelAccountMessage.TYPE
+
+    # Check if the struct value is valid
+    def verify(self):
+        if (self.buffer.offset + self._model.fbe_offset) > self.buffer.size:
+            return False
+
+        fbe_struct_size = self.read_uint32(self._model.fbe_offset - 8)
+        fbe_struct_type = self.read_uint32(self._model.fbe_offset - 4)
+        if (fbe_struct_size <= 0) or (fbe_struct_type != self.fbe_type):
+            return False
+
+        return (8 + self._model.verify()) == fbe_struct_size
+
+    # Serialize the struct value
+    def serialize(self, value):
+        fbe_initial_size = self.buffer.size
+
+        fbe_struct_type = self.fbe_type
+        fbe_struct_size = 8 + self._model.fbe_allocation_size(value)
+        fbe_struct_offset = self.buffer.allocate(fbe_struct_size) - self.buffer.offset
+        assert ((self.buffer.offset + fbe_struct_offset + fbe_struct_size) <= self.buffer.size), "Model is broken!"
+        if (self.buffer.offset + fbe_struct_offset + fbe_struct_size) > self.buffer.size:
+            return 0
+
+        fbe_struct_size = 8 + self._model.set(value)
+        self.buffer.resize(fbe_initial_size + fbe_struct_size)
+
+        self.write_uint32(self._model.fbe_offset - 8, fbe_struct_size)
+        self.write_uint32(self._model.fbe_offset - 4, fbe_struct_type)
+
+        return fbe_struct_size
+
+    # Deserialize the struct value
+    def deserialize(self, value=None):
+        if value is None:
+            value = AccountMessage()
+
+        assert ((self.buffer.offset + self._model.fbe_offset) <= self.buffer.size), "Model is broken!"
+        if (self.buffer.offset + self._model.fbe_offset) > self.buffer.size:
+            return AccountMessage(), 0
+
+        fbe_struct_size = self.read_uint32(self._model.fbe_offset - 8)
+        fbe_struct_type = self.read_uint32(self._model.fbe_offset - 4)
+        assert ((fbe_struct_size > 0) and (fbe_struct_type == self.fbe_type)), "Model is broken!"
+        if (fbe_struct_size <= 0) or (fbe_struct_type != self.fbe_type):
+            return AccountMessage(), 8
+
+        fbe_result = self._model.get(value)
+        return fbe_result[0], (8 + fbe_result[1])
+
+    # Move to the next struct value
+    def next(self, prev):
+        self._model.fbe_shift(prev)
+
+
 # Fast Binary Encoding protoex protocol version
 class ProtocolVersion(object):
     # Protocol major version
@@ -2500,14 +3982,14 @@ class ProtocolVersion(object):
 
 # Fast Binary Encoding protoex sender
 class Sender(fbe.Sender):
-    __slots__ = "_proto_sender", "_order_model", "_balance_model", "_account_model", 
+    __slots__ = "_proto_sender", "_ordermessage_model", "_balancemessage_model", "_accountmessage_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
         self._proto_sender = proto.Sender(self.buffer)
-        self._order_model = OrderModel(self.buffer)
-        self._balance_model = BalanceModel(self.buffer)
-        self._account_model = AccountModel(self.buffer)
+        self._ordermessage_model = OrderMessageModel(self.buffer)
+        self._balancemessage_model = BalanceMessageModel(self.buffer)
+        self._accountmessage_model = AccountMessageModel(self.buffer)
 
     # Imported senders
 
@@ -2518,36 +4000,36 @@ class Sender(fbe.Sender):
     # Sender models accessors
 
     @property
-    def order_model(self):
-        return self._order_model
+    def ordermessage_model(self):
+        return self._ordermessage_model
 
     @property
-    def balance_model(self):
-        return self._balance_model
+    def balancemessage_model(self):
+        return self._balancemessage_model
 
     @property
-    def account_model(self):
-        return self._account_model
+    def accountmessage_model(self):
+        return self._accountmessage_model
 
     # Send methods
 
     def send(self, value):
-        if isinstance(value, Order):
-            return self.send_order(value)
-        if isinstance(value, Balance):
-            return self.send_balance(value)
-        if isinstance(value, Account):
-            return self.send_account(value)
+        if isinstance(value, OrderMessage) and (value.fbe_type == self.ordermessage_model.fbe_type):
+            return self.send_ordermessage(value)
+        if isinstance(value, BalanceMessage) and (value.fbe_type == self.balancemessage_model.fbe_type):
+            return self.send_balancemessage(value)
+        if isinstance(value, AccountMessage) and (value.fbe_type == self.accountmessage_model.fbe_type):
+            return self.send_accountmessage(value)
         result = self._proto_sender.send(value)
         if result > 0:
             return result
         return 0
 
-    def send_order(self, value):
+    def send_ordermessage(self, value):
         # Serialize the value into the FBE stream
-        serialized = self.order_model.serialize(value)
-        assert (serialized > 0), "protoex.Order serialization failed!"
-        assert self.order_model.verify(), "protoex.Order validation failed!"
+        serialized = self.ordermessage_model.serialize(value)
+        assert (serialized > 0), "protoex.OrderMessage serialization failed!"
+        assert self.ordermessage_model.verify(), "protoex.OrderMessage validation failed!"
 
         # Log the value
         if self.logging:
@@ -2557,11 +4039,11 @@ class Sender(fbe.Sender):
         # Send the serialized value
         return self.send_serialized(serialized)
 
-    def send_balance(self, value):
+    def send_balancemessage(self, value):
         # Serialize the value into the FBE stream
-        serialized = self.balance_model.serialize(value)
-        assert (serialized > 0), "protoex.Balance serialization failed!"
-        assert self.balance_model.verify(), "protoex.Balance validation failed!"
+        serialized = self.balancemessage_model.serialize(value)
+        assert (serialized > 0), "protoex.BalanceMessage serialization failed!"
+        assert self.balancemessage_model.verify(), "protoex.BalanceMessage validation failed!"
 
         # Log the value
         if self.logging:
@@ -2571,11 +4053,11 @@ class Sender(fbe.Sender):
         # Send the serialized value
         return self.send_serialized(serialized)
 
-    def send_account(self, value):
+    def send_accountmessage(self, value):
         # Serialize the value into the FBE stream
-        serialized = self.account_model.serialize(value)
-        assert (serialized > 0), "protoex.Account serialization failed!"
-        assert self.account_model.verify(), "protoex.Account validation failed!"
+        serialized = self.accountmessage_model.serialize(value)
+        assert (serialized > 0), "protoex.AccountMessage serialization failed!"
+        assert self.accountmessage_model.verify(), "protoex.AccountMessage validation failed!"
 
         # Log the value
         if self.logging:
@@ -2592,17 +4074,17 @@ class Sender(fbe.Sender):
 
 # Fast Binary Encoding protoex receiver
 class Receiver(fbe.Receiver):
-    __slots__ = "_proto_receiver", "_order_value", "_order_model", "_balance_value", "_balance_model", "_account_value", "_account_model", 
+    __slots__ = "_proto_receiver", "_ordermessage_value", "_ordermessage_model", "_balancemessage_value", "_balancemessage_model", "_accountmessage_value", "_accountmessage_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
         self._proto_receiver = proto.Receiver(self.buffer)
-        self._order_value = Order()
-        self._order_model = OrderModel()
-        self._balance_value = Balance()
-        self._balance_model = BalanceModel()
-        self._account_value = Account()
-        self._account_model = AccountModel()
+        self._ordermessage_value = OrderMessage()
+        self._ordermessage_model = OrderMessageModel()
+        self._balancemessage_value = BalanceMessage()
+        self._balancemessage_model = BalanceMessageModel()
+        self._accountmessage_value = AccountMessage()
+        self._accountmessage_model = AccountMessageModel()
 
     # Imported receivers
 
@@ -2616,63 +4098,63 @@ class Receiver(fbe.Receiver):
 
     # Receive handlers
 
-    def on_receive_order(self, value):
+    def on_receive_ordermessage(self, value):
         pass
 
-    def on_receive_balance(self, value):
+    def on_receive_balancemessage(self, value):
         pass
 
-    def on_receive_account(self, value):
+    def on_receive_accountmessage(self, value):
         pass
 
     def on_receive(self, type, buffer, offset, size):
 
-        if type == OrderModel.TYPE:
+        if type == OrderMessageModel.TYPE:
             # Deserialize the value from the FBE stream
-            self._order_model.attach_buffer(buffer, offset)
-            assert self._order_model.verify(), "protoex.Order validation failed!"
-            (_, deserialized) = self._order_model.deserialize(self._order_value)
-            assert (deserialized > 0), "protoex.Order deserialization failed!"
+            self._ordermessage_model.attach_buffer(buffer, offset)
+            assert self._ordermessage_model.verify(), "protoex.OrderMessage validation failed!"
+            (_, deserialized) = self._ordermessage_model.deserialize(self._ordermessage_value)
+            assert (deserialized > 0), "protoex.OrderMessage deserialization failed!"
 
             # Log the value
             if self.logging:
-                message = str(self._order_value)
+                message = str(self._ordermessage_value)
                 self.on_receive_log(message)
 
             # Call receive handler with deserialized value
-            self.on_receive_order(self._order_value)
+            self.on_receive_ordermessage(self._ordermessage_value)
             return True
 
-        if type == BalanceModel.TYPE:
+        if type == BalanceMessageModel.TYPE:
             # Deserialize the value from the FBE stream
-            self._balance_model.attach_buffer(buffer, offset)
-            assert self._balance_model.verify(), "protoex.Balance validation failed!"
-            (_, deserialized) = self._balance_model.deserialize(self._balance_value)
-            assert (deserialized > 0), "protoex.Balance deserialization failed!"
+            self._balancemessage_model.attach_buffer(buffer, offset)
+            assert self._balancemessage_model.verify(), "protoex.BalanceMessage validation failed!"
+            (_, deserialized) = self._balancemessage_model.deserialize(self._balancemessage_value)
+            assert (deserialized > 0), "protoex.BalanceMessage deserialization failed!"
 
             # Log the value
             if self.logging:
-                message = str(self._balance_value)
+                message = str(self._balancemessage_value)
                 self.on_receive_log(message)
 
             # Call receive handler with deserialized value
-            self.on_receive_balance(self._balance_value)
+            self.on_receive_balancemessage(self._balancemessage_value)
             return True
 
-        if type == AccountModel.TYPE:
+        if type == AccountMessageModel.TYPE:
             # Deserialize the value from the FBE stream
-            self._account_model.attach_buffer(buffer, offset)
-            assert self._account_model.verify(), "protoex.Account validation failed!"
-            (_, deserialized) = self._account_model.deserialize(self._account_value)
-            assert (deserialized > 0), "protoex.Account deserialization failed!"
+            self._accountmessage_model.attach_buffer(buffer, offset)
+            assert self._accountmessage_model.verify(), "protoex.AccountMessage validation failed!"
+            (_, deserialized) = self._accountmessage_model.deserialize(self._accountmessage_value)
+            assert (deserialized > 0), "protoex.AccountMessage deserialization failed!"
 
             # Log the value
             if self.logging:
-                message = str(self._account_value)
+                message = str(self._accountmessage_value)
                 self.on_receive_log(message)
 
             # Call receive handler with deserialized value
-            self.on_receive_account(self._account_value)
+            self.on_receive_accountmessage(self._accountmessage_value)
             return True
 
         if (self.proto_receiver is not None) and self.proto_receiver.on_receive(type, buffer, offset, size):
@@ -2683,14 +4165,14 @@ class Receiver(fbe.Receiver):
 
 # Fast Binary Encoding protoex proxy
 class Proxy(fbe.Receiver):
-    __slots__ = "_proto_proxy", "_order_model", "_balance_model", "_account_model", 
+    __slots__ = "_proto_proxy", "_ordermessage_model", "_balancemessage_model", "_accountmessage_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
         self._proto_proxy = proto.Proxy(self.buffer)
-        self._order_model = OrderModel()
-        self._balance_model = BalanceModel()
-        self._account_model = AccountModel()
+        self._ordermessage_model = OrderMessageModel()
+        self._balancemessage_model = BalanceMessageModel()
+        self._accountmessage_model = AccountMessageModel()
 
     # Imported proxy
 
@@ -2704,54 +4186,54 @@ class Proxy(fbe.Receiver):
 
     # Receive handlers
 
-    def on_proxy_order(self, model, type, buffer, offset, size):
+    def on_proxy_ordermessage(self, model, type, buffer, offset, size):
         pass
 
-    def on_proxy_balance(self, model, type, buffer, offset, size):
+    def on_proxy_balancemessage(self, model, type, buffer, offset, size):
         pass
 
-    def on_proxy_account(self, model, type, buffer, offset, size):
+    def on_proxy_accountmessage(self, model, type, buffer, offset, size):
         pass
 
     def on_receive(self, type, buffer, offset, size):
 
-        if type == OrderModel.TYPE:
+        if type == OrderMessageModel.TYPE:
             # Attach the FBE stream to the proxy model
-            self._order_model.attach_buffer(buffer, offset)
-            assert self._order_model.verify(), "protoex.Order validation failed!"
+            self._ordermessage_model.attach_buffer(buffer, offset)
+            assert self._ordermessage_model.verify(), "protoex.OrderMessage validation failed!"
 
-            fbe_begin = self._order_model.model.get_begin()
+            fbe_begin = self._ordermessage_model.model.get_begin()
             if fbe_begin == 0:
                 return False
             # Call proxy handler
-            self.on_proxy_order(self._order_model, type, buffer, offset, size)
-            self._order_model.model.get_end(fbe_begin)
+            self.on_proxy_ordermessage(self._ordermessage_model, type, buffer, offset, size)
+            self._ordermessage_model.model.get_end(fbe_begin)
             return True
 
-        if type == BalanceModel.TYPE:
+        if type == BalanceMessageModel.TYPE:
             # Attach the FBE stream to the proxy model
-            self._balance_model.attach_buffer(buffer, offset)
-            assert self._balance_model.verify(), "protoex.Balance validation failed!"
+            self._balancemessage_model.attach_buffer(buffer, offset)
+            assert self._balancemessage_model.verify(), "protoex.BalanceMessage validation failed!"
 
-            fbe_begin = self._balance_model.model.get_begin()
+            fbe_begin = self._balancemessage_model.model.get_begin()
             if fbe_begin == 0:
                 return False
             # Call proxy handler
-            self.on_proxy_balance(self._balance_model, type, buffer, offset, size)
-            self._balance_model.model.get_end(fbe_begin)
+            self.on_proxy_balancemessage(self._balancemessage_model, type, buffer, offset, size)
+            self._balancemessage_model.model.get_end(fbe_begin)
             return True
 
-        if type == AccountModel.TYPE:
+        if type == AccountMessageModel.TYPE:
             # Attach the FBE stream to the proxy model
-            self._account_model.attach_buffer(buffer, offset)
-            assert self._account_model.verify(), "protoex.Account validation failed!"
+            self._accountmessage_model.attach_buffer(buffer, offset)
+            assert self._accountmessage_model.verify(), "protoex.AccountMessage validation failed!"
 
-            fbe_begin = self._account_model.model.get_begin()
+            fbe_begin = self._accountmessage_model.model.get_begin()
             if fbe_begin == 0:
                 return False
             # Call proxy handler
-            self.on_proxy_account(self._account_model, type, buffer, offset, size)
-            self._account_model.model.get_end(fbe_begin)
+            self.on_proxy_accountmessage(self._accountmessage_model, type, buffer, offset, size)
+            self._accountmessage_model.model.get_end(fbe_begin)
             return True
 
         if (self.proto_proxy is not None) and self.proto_proxy.on_receive(type, buffer, offset, size):
@@ -2762,14 +4244,14 @@ class Proxy(fbe.Receiver):
 
 # Fast Binary Encoding protoex final sender
 class FinalSender(fbe.Sender):
-    __slots__ = "_proto_sender", "_order_model", "_balance_model", "_account_model", 
+    __slots__ = "_proto_sender", "_ordermessage_model", "_balancemessage_model", "_accountmessage_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, True)
         self._proto_sender = proto.FinalSender(self.buffer)
-        self._order_model = OrderFinalModel(self.buffer)
-        self._balance_model = BalanceFinalModel(self.buffer)
-        self._account_model = AccountFinalModel(self.buffer)
+        self._ordermessage_model = OrderMessageFinalModel(self.buffer)
+        self._balancemessage_model = BalanceMessageFinalModel(self.buffer)
+        self._accountmessage_model = AccountMessageFinalModel(self.buffer)
 
     # Imported senders
 
@@ -2780,36 +4262,36 @@ class FinalSender(fbe.Sender):
     # Sender models accessors
 
     @property
-    def order_model(self):
-        return self._order_model
+    def ordermessage_model(self):
+        return self._ordermessage_model
 
     @property
-    def balance_model(self):
-        return self._balance_model
+    def balancemessage_model(self):
+        return self._balancemessage_model
 
     @property
-    def account_model(self):
-        return self._account_model
+    def accountmessage_model(self):
+        return self._accountmessage_model
 
     # Send methods
 
     def send(self, value):
-        if isinstance(value, Order):
-            return self.send_order(value)
-        if isinstance(value, Balance):
-            return self.send_balance(value)
-        if isinstance(value, Account):
-            return self.send_account(value)
+        if isinstance(value, OrderMessage) and (value.fbe_type == self.ordermessage_model.fbe_type):
+            return self.send_ordermessage(value)
+        if isinstance(value, BalanceMessage) and (value.fbe_type == self.balancemessage_model.fbe_type):
+            return self.send_balancemessage(value)
+        if isinstance(value, AccountMessage) and (value.fbe_type == self.accountmessage_model.fbe_type):
+            return self.send_accountmessage(value)
         result = self._proto_sender.send(value)
         if result > 0:
             return result
         return 0
 
-    def send_order(self, value):
+    def send_ordermessage(self, value):
         # Serialize the value into the FBE stream
-        serialized = self.order_model.serialize(value)
-        assert (serialized > 0), "protoex.Order serialization failed!"
-        assert self.order_model.verify(), "protoex.Order validation failed!"
+        serialized = self.ordermessage_model.serialize(value)
+        assert (serialized > 0), "protoex.OrderMessage serialization failed!"
+        assert self.ordermessage_model.verify(), "protoex.OrderMessage validation failed!"
 
         # Log the value
         if self.logging:
@@ -2819,11 +4301,11 @@ class FinalSender(fbe.Sender):
         # Send the serialized value
         return self.send_serialized(serialized)
 
-    def send_balance(self, value):
+    def send_balancemessage(self, value):
         # Serialize the value into the FBE stream
-        serialized = self.balance_model.serialize(value)
-        assert (serialized > 0), "protoex.Balance serialization failed!"
-        assert self.balance_model.verify(), "protoex.Balance validation failed!"
+        serialized = self.balancemessage_model.serialize(value)
+        assert (serialized > 0), "protoex.BalanceMessage serialization failed!"
+        assert self.balancemessage_model.verify(), "protoex.BalanceMessage validation failed!"
 
         # Log the value
         if self.logging:
@@ -2833,11 +4315,11 @@ class FinalSender(fbe.Sender):
         # Send the serialized value
         return self.send_serialized(serialized)
 
-    def send_account(self, value):
+    def send_accountmessage(self, value):
         # Serialize the value into the FBE stream
-        serialized = self.account_model.serialize(value)
-        assert (serialized > 0), "protoex.Account serialization failed!"
-        assert self.account_model.verify(), "protoex.Account validation failed!"
+        serialized = self.accountmessage_model.serialize(value)
+        assert (serialized > 0), "protoex.AccountMessage serialization failed!"
+        assert self.accountmessage_model.verify(), "protoex.AccountMessage validation failed!"
 
         # Log the value
         if self.logging:
@@ -2854,17 +4336,17 @@ class FinalSender(fbe.Sender):
 
 # Fast Binary Encoding protoex final receiver
 class FinalReceiver(fbe.Receiver):
-    __slots__ = "_proto_receiver", "_order_value", "_order_model", "_balance_value", "_balance_model", "_account_value", "_account_model", 
+    __slots__ = "_proto_receiver", "_ordermessage_value", "_ordermessage_model", "_balancemessage_value", "_balancemessage_model", "_accountmessage_value", "_accountmessage_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, True)
         self._proto_receiver = proto.FinalReceiver(self.buffer)
-        self._order_value = Order()
-        self._order_model = OrderFinalModel()
-        self._balance_value = Balance()
-        self._balance_model = BalanceFinalModel()
-        self._account_value = Account()
-        self._account_model = AccountFinalModel()
+        self._ordermessage_value = OrderMessage()
+        self._ordermessage_model = OrderMessageFinalModel()
+        self._balancemessage_value = BalanceMessage()
+        self._balancemessage_model = BalanceMessageFinalModel()
+        self._accountmessage_value = AccountMessage()
+        self._accountmessage_model = AccountMessageFinalModel()
 
     # Imported receivers
 
@@ -2878,63 +4360,63 @@ class FinalReceiver(fbe.Receiver):
 
     # Receive handlers
 
-    def on_receive_order(self, value):
+    def on_receive_ordermessage(self, value):
         pass
 
-    def on_receive_balance(self, value):
+    def on_receive_balancemessage(self, value):
         pass
 
-    def on_receive_account(self, value):
+    def on_receive_accountmessage(self, value):
         pass
 
     def on_receive(self, type, buffer, offset, size):
 
-        if type == OrderFinalModel.TYPE:
+        if type == OrderMessageFinalModel.TYPE:
             # Deserialize the value from the FBE stream
-            self._order_model.attach_buffer(buffer, offset)
-            assert self._order_model.verify(), "protoex.Order validation failed!"
-            (_, deserialized) = self._order_model.deserialize(self._order_value)
-            assert (deserialized > 0), "protoex.Order deserialization failed!"
+            self._ordermessage_model.attach_buffer(buffer, offset)
+            assert self._ordermessage_model.verify(), "protoex.OrderMessage validation failed!"
+            (_, deserialized) = self._ordermessage_model.deserialize(self._ordermessage_value)
+            assert (deserialized > 0), "protoex.OrderMessage deserialization failed!"
 
             # Log the value
             if self.logging:
-                message = str(self._order_value)
+                message = str(self._ordermessage_value)
                 self.on_receive_log(message)
 
             # Call receive handler with deserialized value
-            self.on_receive_order(self._order_value)
+            self.on_receive_ordermessage(self._ordermessage_value)
             return True
 
-        if type == BalanceFinalModel.TYPE:
+        if type == BalanceMessageFinalModel.TYPE:
             # Deserialize the value from the FBE stream
-            self._balance_model.attach_buffer(buffer, offset)
-            assert self._balance_model.verify(), "protoex.Balance validation failed!"
-            (_, deserialized) = self._balance_model.deserialize(self._balance_value)
-            assert (deserialized > 0), "protoex.Balance deserialization failed!"
+            self._balancemessage_model.attach_buffer(buffer, offset)
+            assert self._balancemessage_model.verify(), "protoex.BalanceMessage validation failed!"
+            (_, deserialized) = self._balancemessage_model.deserialize(self._balancemessage_value)
+            assert (deserialized > 0), "protoex.BalanceMessage deserialization failed!"
 
             # Log the value
             if self.logging:
-                message = str(self._balance_value)
+                message = str(self._balancemessage_value)
                 self.on_receive_log(message)
 
             # Call receive handler with deserialized value
-            self.on_receive_balance(self._balance_value)
+            self.on_receive_balancemessage(self._balancemessage_value)
             return True
 
-        if type == AccountFinalModel.TYPE:
+        if type == AccountMessageFinalModel.TYPE:
             # Deserialize the value from the FBE stream
-            self._account_model.attach_buffer(buffer, offset)
-            assert self._account_model.verify(), "protoex.Account validation failed!"
-            (_, deserialized) = self._account_model.deserialize(self._account_value)
-            assert (deserialized > 0), "protoex.Account deserialization failed!"
+            self._accountmessage_model.attach_buffer(buffer, offset)
+            assert self._accountmessage_model.verify(), "protoex.AccountMessage validation failed!"
+            (_, deserialized) = self._accountmessage_model.deserialize(self._accountmessage_value)
+            assert (deserialized > 0), "protoex.AccountMessage deserialization failed!"
 
             # Log the value
             if self.logging:
-                message = str(self._account_value)
+                message = str(self._accountmessage_value)
                 self.on_receive_log(message)
 
             # Call receive handler with deserialized value
-            self.on_receive_account(self._account_value)
+            self.on_receive_accountmessage(self._accountmessage_value)
             return True
 
         if (self.proto_receiver is not None) and self.proto_receiver.on_receive(type, buffer, offset, size):

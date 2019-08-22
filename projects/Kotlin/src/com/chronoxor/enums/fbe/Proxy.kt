@@ -12,16 +12,13 @@ package com.chronoxor.enums.fbe
 open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
 {
     // Proxy models accessors
-    private val EnumsModel: EnumsModel
 
     constructor() : super(false)
     {
-        EnumsModel = EnumsModel()
     }
 
     constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer, false)
     {
-        EnumsModel = EnumsModel()
     }
 
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
@@ -31,23 +28,6 @@ open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
 
     open fun onReceiveListener(listener: ProxyListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
-        when (type)
-        {
-            com.chronoxor.enums.fbe.EnumsModel.fbeTypeConst ->
-            {
-                // Attach the FBE stream to the proxy model
-                EnumsModel.attach(buffer, offset)
-                assert(EnumsModel.verify()) { "com.chronoxor.enums.Enums validation failed!" }
-
-                val fbeBegin = EnumsModel.model.getBegin()
-                if (fbeBegin == 0L)
-                    return false
-                // Call proxy handler
-                listener.onProxy(EnumsModel, type, buffer, offset, size)
-                EnumsModel.model.getEnd(fbeBegin)
-                return true
-            }
-        }
 
         return false
     }

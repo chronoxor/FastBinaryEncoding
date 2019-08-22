@@ -9,27 +9,13 @@ import "errors"
 import "../fbe"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
-
-// Receive Enums interface
-type OnReceiveEnums interface {
-    OnReceiveEnums(value *Enums)
-}
-
-// Receive Enums function
-type OnReceiveEnumsFunc func(value *Enums)
-func (f OnReceiveEnumsFunc) OnReceiveEnums(value *Enums) {
-    f(value)
-}
 
 // Fast Binary Encoding enums receiver
 type Receiver struct {
     *fbe.Receiver
-    enumsValue *Enums
-    enumsModel *EnumsModel
 
-    // Receive Enums handler
-    HandlerOnReceiveEnums OnReceiveEnums
 }
 
 // Create a new enums receiver with an empty buffer
@@ -41,54 +27,23 @@ func NewReceiver() *Receiver {
 func NewReceiverWithBuffer(buffer *fbe.Buffer) *Receiver {
     receiver := &Receiver{
         fbe.NewReceiver(buffer, false),
-        NewEnums(),
-        NewEnumsModel(buffer),
-        nil,
     }
     receiver.SetupHandlerOnReceive(receiver)
-    receiver.SetupHandlerOnReceiveEnumsFunc(func(value *Enums) {})
     return receiver
 }
 
 // Setup handlers
 func (r *Receiver) SetupHandlers(handlers interface{}) {
     r.Receiver.SetupHandlers(handlers)
-    if handler, ok := handlers.(OnReceiveEnums); ok {
-        r.SetupHandlerOnReceiveEnums(handler)
-    }
 }
 
-// Setup receive Enums handler
-func (r *Receiver) SetupHandlerOnReceiveEnums(handler OnReceiveEnums) { r.HandlerOnReceiveEnums = handler }
-// Setup receive Enums handler function
-func (r *Receiver) SetupHandlerOnReceiveEnumsFunc(function func(value *Enums)) { r.HandlerOnReceiveEnums = OnReceiveEnumsFunc(function) }
 
 // Receive message handler
 func (r *Receiver) OnReceive(fbeType int, buffer []byte) (bool, error) {
     switch fbeType {
-    case r.enumsModel.FBEType():
-        // Deserialize the value from the FBE stream
-        r.enumsModel.Buffer().Attach(buffer)
-        if !r.enumsModel.Verify() {
-            return false, errors.New("enums.Enums validation failed")
-        }
-        deserialized, err := r.enumsModel.DeserializeValue(r.enumsValue)
-        if deserialized <= 0 {
-            return false, errors.New("enums.Enums deserialization failed")
-        }
-        if err != nil {
-            return false, err
-        }
-
-        // Log the value
-        if r.Logging() {
-            message := r.enumsValue.String()
-            r.HandlerOnReceiveLog.OnReceiveLog(message)
-        }
-
-        // Call receive handler with deserialized value
-        r.HandlerOnReceiveEnums.OnReceiveEnums(r.enumsValue)
-        return true, nil
+    default:
+        _ = fbeType
+        break
     }
 
     return false, nil

@@ -66,9 +66,9 @@ class MyReceiver extends proto.Receiver {
     return this._log_size
   }
 
-  onReceive_Order (value) {} // eslint-disable-line
-  onReceive_Balance (value) {} // eslint-disable-line
-  onReceive_Account (value) {} // eslint-disable-line
+  onReceive_OrderMessage (value) {} // eslint-disable-line
+  onReceive_BalanceMessage (value) {} // eslint-disable-line
+  onReceive_AccountMessage (value) {} // eslint-disable-line
 
   onReceiveLog (message) {
     this._log_size += message.length
@@ -79,10 +79,10 @@ const suite = new benchmark.Suite('Send & Receive')
 
 suite.on('start', function () {
   // Create a new account with some orders
-  this.account = new proto.Account(1, 'Test', proto.State.good, new proto.Balance('USD', 1000.0), new proto.Balance('EUR', 100.0))
-  this.account.orders.push(new proto.Order(1, 'EURUSD', proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))
-  this.account.orders.push(new proto.Order(2, 'EURUSD', proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0))
-  this.account.orders.push(new proto.Order(3, 'EURUSD', proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0))
+  this.account = new proto.AccountMessage(new proto.Account(1, 'Test', proto.State.good, new proto.Balance('USD', 1000.0), new proto.Balance('EUR', 100.0)))
+  this.account.body.orders.push(new proto.Order(1, 'EURUSD', proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))
+  this.account.body.orders.push(new proto.Order(2, 'EURUSD', proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0))
+  this.account.body.orders.push(new proto.Order(3, 'EURUSD', proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0))
 
   this.sender1 = new MySender1()
   this.sender1.send(this.account)

@@ -18,6 +18,9 @@ public class StructHash implements Comparable<Object>
     public java.util.HashMap<String, StructSimple> f9 = new java.util.HashMap<String, StructSimple>();
     public java.util.HashMap<String, StructSimple> f10 = new java.util.HashMap<String, StructSimple>();
 
+    public static final long fbeTypeConst = 141;
+    public long fbeType() { return fbeTypeConst; }
+
     public StructHash() {}
 
     public StructHash(java.util.HashMap<String, Byte> f1, java.util.HashMap<String, Byte> f2, java.util.HashMap<String, java.nio.ByteBuffer> f3, java.util.HashMap<String, java.nio.ByteBuffer> f4, java.util.HashMap<String, EnumSimple> f5, java.util.HashMap<String, EnumSimple> f6, java.util.HashMap<String, FlagsSimple> f7, java.util.HashMap<String, FlagsSimple> f8, java.util.HashMap<String, StructSimple> f9, java.util.HashMap<String, StructSimple> f10)

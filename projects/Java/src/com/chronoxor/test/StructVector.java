@@ -18,6 +18,9 @@ public class StructVector implements Comparable<Object>
     public java.util.ArrayList<StructSimple> f9 = new java.util.ArrayList<StructSimple>();
     public java.util.ArrayList<StructSimple> f10 = new java.util.ArrayList<StructSimple>();
 
+    public static final long fbeTypeConst = 130;
+    public long fbeType() { return fbeTypeConst; }
+
     public StructVector() {}
 
     public StructVector(java.util.ArrayList<Byte> f1, java.util.ArrayList<Byte> f2, java.util.ArrayList<java.nio.ByteBuffer> f3, java.util.ArrayList<java.nio.ByteBuffer> f4, java.util.ArrayList<EnumSimple> f5, java.util.ArrayList<EnumSimple> f6, java.util.ArrayList<FlagsSimple> f7, java.util.ArrayList<FlagsSimple> f8, java.util.ArrayList<StructSimple> f9, java.util.ArrayList<StructSimple> f10)

@@ -9,41 +9,24 @@ package com.chronoxor.enums.fbe;
 public class Proxy extends com.chronoxor.fbe.Receiver
 {
     // Proxy models accessors
-    private final EnumsModel EnumsModel;
 
     public Proxy()
     {
         super(false);
-        EnumsModel = new EnumsModel();
     }
     public Proxy(com.chronoxor.fbe.Buffer buffer)
     {
         super(buffer, false);
-        EnumsModel = new EnumsModel();
     }
 
     // Proxy handlers
-    protected void onProxy(EnumsModel model, long type, byte[] buffer, long offset, long size) {}
 
     @Override
     public boolean onReceive(long type, byte[] buffer, long offset, long size)
     {
         switch ((int)type)
         {
-            case (int)com.chronoxor.enums.fbe.EnumsModel.fbeTypeConst:
-            {
-                // Attach the FBE stream to the proxy model
-                EnumsModel.attach(buffer, offset);
-                assert EnumsModel.verify() : "enums.Enums validation failed!";
-
-                long fbeBegin = EnumsModel.model.getBegin();
-                if (fbeBegin == 0)
-                    return false;
-                // Call proxy handler
-                onProxy(EnumsModel, type, buffer, offset, size);
-                EnumsModel.model.getEnd(fbeBegin);
-                return true;
-            }
+            default: break;
         }
 
         return false;

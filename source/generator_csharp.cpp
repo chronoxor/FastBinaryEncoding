@@ -4739,6 +4739,22 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
         for (const auto& field : s->body->fields)
             WriteLineIndent("public " + ConvertTypeName(*field) + " " + *field->name + ";");
 
+    // Generate struct FBE type property
+    WriteLine();
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("public const long FBETypeConst = " + ConvertTypeName(*s->base, false) + ".FBETypeConst;");
+    else
+        WriteLineIndent("public const long FBETypeConst = " + std::to_string(s->type) + ";");
+    if (JSON())
+    {
+        WriteLineIndent("#if UTF8JSON");
+        WriteLineIndent("[IgnoreDataMember]");
+        WriteLineIndent("#else");
+        WriteLineIndent("[JsonIgnore]");
+        WriteLineIndent("#endif");
+    }
+    WriteLineIndent("public long FBEType => FBETypeConst;");
+
     // Generate struct initialization property
     WriteLine();
     WriteLineIndent("public static " + *s->name + " Default => new " + *s->name);
@@ -4754,7 +4770,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLineIndent(std::string(first ? "" : ", ") + *field->name + " = " + ConvertDefault(*field));
+            WriteLineIndent(std::string(first ? "" : ", ") + *field->name + " = " + ConvertDefault(*p->name, *field));
             first = false;
         }
     }
@@ -5482,7 +5498,7 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::shared_ptr<Package>& p
                 if (field->vector || field->list || field->set || field->map || field->hash)
                     WriteLineIndent("fbeValue." + *field->name + ".Clear();");
                 else
-                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field) + ";");
+                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*p->name, *field) + ";");
                 Indent(-1);
                 WriteLineIndent("fbeCurrentSize += " + *field->name + ".FBESize;");
             }
@@ -6155,7 +6171,8 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     {
         WriteLineIndent("// Sender models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("public readonly " + *s->name + model + " " + *s->name + "Model;");
+            if (s->message)
+                WriteLineIndent("public readonly " + *s->name + model + " " + *s->name + "Model;");
         WriteLine();
     }
 
@@ -6171,7 +6188,8 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "(Buffer);");
+            if (s->message)
+                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "(Buffer);");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -6186,7 +6204,8 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "(Buffer);");
+            if (s->message)
+                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "(Buffer);");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -6197,28 +6216,31 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = "global::" + *p->name + "." + *s->name;
-            WriteLineIndent("public long Send(" + struct_name + " value)");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("// Serialize the value into the FBE stream");
-            WriteLineIndent("long serialized = " + *s->name + "Model.Serialize(value);");
-            WriteLineIndent("Debug.Assert((serialized > 0), \"" + *p->name + "." + *s->name + " serialization failed!\");");
-            WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (Logging)");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("string message = value.ToString();");
-            WriteLineIndent("OnSendLog(message);");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Send the serialized value");
-            WriteLineIndent("return SendSerialized(serialized);");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                WriteLineIndent("public long Send(" + struct_name + " value)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Serialize the value into the FBE stream");
+                WriteLineIndent("long serialized = " + *s->name + "Model.Serialize(value);");
+                WriteLineIndent("Debug.Assert((serialized > 0), \"" + *p->name + "." + *s->name + " serialization failed!\");");
+                WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (Logging)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("string message = value.ToString();");
+                WriteLineIndent("OnSendLog(message);");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Send the serialized value");
+                WriteLineIndent("return SendSerialized(serialized);");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
 
@@ -6274,13 +6296,17 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         WriteLineIndent("// Receiver values accessors");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = "global::" + *p->name + "." + *s->name;
-            WriteLineIndent("private " + struct_name + " " + *s->name + "Value;");
+            if (s->message)
+            {
+                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                WriteLineIndent("private " + struct_name + " " + *s->name + "Value;");
+            }
         }
         WriteLine();
         WriteLineIndent("// Receiver models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("private readonly " + *s->name + model + " " + *s->name + "Model;");
+            if (s->message)
+                WriteLineIndent("private readonly " + *s->name + model + " " + *s->name + "Model;");
         WriteLine();
     }
 
@@ -6297,9 +6323,12 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = "global::" + *p->name + "." + *s->name;
-            WriteLineIndent(*s->name + "Value = " + struct_name + ".Default;");
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+            if (s->message)
+            {
+                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                WriteLineIndent(*s->name + "Value = " + struct_name + ".Default;");
+                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+            }
         }
     }
     Indent(-1);
@@ -6316,9 +6345,12 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = "global::" + *p->name + "." + *s->name;
-            WriteLineIndent(*s->name + "Value = " + struct_name + ".Default;");
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+            if (s->message)
+            {
+                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                WriteLineIndent(*s->name + "Value = " + struct_name + ".Default;");
+                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+            }
         }
     }
     Indent(-1);
@@ -6331,8 +6363,11 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         WriteLineIndent("// Receive handlers");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = "global::" + *p->name + "." + *s->name;
-            WriteLineIndent("protected virtual void OnReceive(" + struct_name + " value) {}");
+            if (s->message)
+            {
+                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                WriteLineIndent("protected virtual void OnReceive(" + struct_name + " value) {}");
+            }
         }
         WriteLine();
     }
@@ -6348,30 +6383,34 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case " + *s->name + model + ".FBETypeConst:");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("// Deserialize the value from the FBE stream");
-            WriteLineIndent(*s->name + "Model.Attach(buffer, offset);");
-            WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
-            WriteLineIndent("long deserialized = " + *s->name + "Model.Deserialize(out " + *s->name + "Value);");
-            WriteLineIndent("Debug.Assert((deserialized > 0), \"" + *p->name + "." + *s->name + " deserialization failed!\");");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (Logging)");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("string message = " + *s->name + "Value.ToString();");
-            WriteLineIndent("OnReceiveLog(message);");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Call receive handler with deserialized value");
-            WriteLineIndent("OnReceive(" + *s->name + "Value);");
-            WriteLineIndent("return true;");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLineIndent("case " + *s->name + model + ".FBETypeConst:");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Deserialize the value from the FBE stream");
+                WriteLineIndent(*s->name + "Model.Attach(buffer, offset);");
+                WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
+                WriteLineIndent("long deserialized = " + *s->name + "Model.Deserialize(out " + *s->name + "Value);");
+                WriteLineIndent("Debug.Assert((deserialized > 0), \"" + *p->name + "." + *s->name + " deserialization failed!\");");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (Logging)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("string message = " + *s->name + "Value.ToString();");
+                WriteLineIndent("OnReceiveLog(message);");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Call receive handler with deserialized value");
+                WriteLineIndent("OnReceive(" + *s->name + "Value);");
+                WriteLineIndent("return true;");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
+        WriteLineIndent("default: break;");
         Indent(-1);
         WriteLineIndent("}");
     }
@@ -6437,7 +6476,8 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     {
         WriteLineIndent("// Proxy models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("private readonly " + *s->name + model + " " + *s->name + "Model;");
+            if (s->message)
+                WriteLineIndent("private readonly " + *s->name + model + " " + *s->name + "Model;");
         WriteLine();
     }
 
@@ -6453,7 +6493,8 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+            if (s->message)
+                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -6468,7 +6509,8 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+            if (s->message)
+                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -6480,8 +6522,11 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("// Proxy handlers");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_model = *s->name + model;
-            WriteLineIndent("protected virtual void OnProxy(" + struct_model + " model, long type, byte[] buffer, long offset, long size) {}");
+            if (s->message)
+            {
+                std::string struct_model = *s->name + model;
+                WriteLineIndent("protected virtual void OnProxy(" + struct_model + " model, long type, byte[] buffer, long offset, long size) {}");
+            }
         }
         WriteLine();
     }
@@ -6497,25 +6542,29 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case " + *s->name + model + ".FBETypeConst:");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("// Attach the FBE stream to the proxy model");
-            WriteLineIndent(*s->name + "Model.Attach(buffer, offset);");
-            WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
-            WriteLine();
-            WriteLineIndent("long fbeBegin = " + *s->name + "Model.model.GetBegin();");
-            WriteLineIndent("if (fbeBegin == 0)");
-            Indent(1);
-            WriteLineIndent("return false;");
-            Indent(-1);
-            WriteLineIndent("// Call proxy handler");
-            WriteLineIndent("OnProxy(" + *s->name + "Model, type, buffer, offset, size);");
-            WriteLineIndent(*s->name + "Model.model.GetEnd(fbeBegin);");
-            WriteLineIndent("return true;");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLineIndent("case " + *s->name + model + ".FBETypeConst:");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Attach the FBE stream to the proxy model");
+                WriteLineIndent(*s->name + "Model.Attach(buffer, offset);");
+                WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
+                WriteLine();
+                WriteLineIndent("long fbeBegin = " + *s->name + "Model.model.GetBegin();");
+                WriteLineIndent("if (fbeBegin == 0)");
+                Indent(1);
+                WriteLineIndent("return false;");
+                Indent(-1);
+                WriteLineIndent("// Call proxy handler");
+                WriteLineIndent("OnProxy(" + *s->name + "Model, type, buffer, offset, size);");
+                WriteLineIndent(*s->name + "Model.model.GetEnd(fbeBegin);");
+                WriteLineIndent("return true;");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
+        WriteLineIndent("default: break;");
         Indent(-1);
         WriteLineIndent("}");
     }
@@ -7015,7 +7064,34 @@ std::string GeneratorCSharp::ConvertConstant(const std::string& type, const std:
     else if (value == "uuid2")
         return "FBE.UuidGenerator.Random()";
 
-    return ConvertConstantPrefix(type) + value + ConvertConstantSuffix(type);
+    std::string result = value;
+
+    if (!IsKnownType(type))
+    {
+        // Fill flags values
+        std::vector<std::string> flags = CppCommon::StringUtils::Split(value, '|', true);
+
+        // Generate flags combination
+        if (flags.size() > 1)
+        {
+            result = "";
+            bool first = true;
+            for (const auto& it : flags)
+            {
+                std::string flag = CppCommon::StringUtils::ToTrim(it);
+                std::string ns = (CppCommon::StringUtils::CountAll(flag, ".") > 1) ? "global::" : "";
+                result += (first ? "" : " | ") + ns + flag;
+                first = false;
+            }
+        }
+        else
+        {
+            std::string ns = (CppCommon::StringUtils::CountAll(result, ".") > 1) ? "global::" : "";
+            result = ns + result;
+        }
+    }
+
+    return ConvertConstantPrefix(type) + result + ConvertConstantSuffix(type);
 }
 
 std::string GeneratorCSharp::ConvertConstantPrefix(const std::string& type)
@@ -7102,7 +7178,7 @@ std::string GeneratorCSharp::ConvertDefault(const std::string& type)
     return "new " + type + "()";
 }
 
-std::string GeneratorCSharp::ConvertDefault(const StructField& field)
+std::string GeneratorCSharp::ConvertDefault(const std::string& package, const StructField& field)
 {
     if (field.value)
         return ConvertConstant(*field.type, *field.value, field.optional);
@@ -7114,7 +7190,10 @@ std::string GeneratorCSharp::ConvertDefault(const StructField& field)
     else if (field.optional)
         return "null";
     else if (!IsKnownType(*field.type))
-        return ConvertTypeName(field) + ".Default";
+    {
+        std::string ns = CppCommon::StringUtils::Contains(*field.type, '.') ? "" : ("global::" + package + ".");
+        return ns + ConvertTypeName(field) + ".Default";
+    }
 
     return ConvertDefault(*field.type);
 }

@@ -3698,6 +3698,22 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
         Indent(-1);
     }
 
+    // Generate struct FBE type property
+    WriteLine();
+    WriteLineIndent("# Get the FBE type");
+    WriteLineIndent("@property");
+    WriteLineIndent("def fbe_type(self):");
+    Indent(1);
+    WriteLineIndent("return self.TYPE");
+    Indent(-1);
+
+    // Generate struct FBE type
+    WriteLine();
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("TYPE = " + base_type + ".TYPE");
+    else
+        WriteLineIndent("TYPE = " + std::to_string(s->type));
+
     // Generate struct end
     Indent(-1);
 
@@ -4132,12 +4148,14 @@ void GeneratorPython::GenerateStructModel(const std::shared_ptr<StructType>& s)
     // Generate struct model FBE properties
     WriteLine();
     WriteLineIndent("# Get the model size");
+    WriteLineIndent("@property");
     WriteLineIndent("def fbe_size(self):");
     Indent(1);
     WriteLineIndent("return self._model.fbe_size + self._model.fbe_extra");
     Indent(-1);
     WriteLine();
     WriteLineIndent("# Get the model type");
+    WriteLineIndent("@property");
     WriteLineIndent("def fbe_type(self):");
     Indent(1);
     WriteLineIndent("return self.TYPE");
@@ -4629,22 +4647,31 @@ void GeneratorPython::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("class " + sender + "(fbe.Sender):");
     Indent(1);
 
+    bool messages = false;
+    for (const auto& s : p->body->structs)
+        if (s->message)
+            messages = true;
+
     // Generate sender __slots__
-    WriteIndent("__slots__ = ");
-    if (p->import)
+    if (p->import || messages)
     {
-        for (const auto& import : p->import->imports)
-            Write("\"_" + CppCommon::StringUtils::ToLower(*import) + "_sender\", ");
+        WriteIndent("__slots__ = ");
+        if (p->import)
+        {
+            for (const auto& import : p->import->imports)
+                Write("\"_" + CppCommon::StringUtils::ToLower(*import) + "_sender\", ");
+        }
+        if (p->body)
+        {
+            for (const auto& s : p->body->structs)
+                if (s->message)
+                    Write("\"_" + CppCommon::StringUtils::ToLower(*s->name) + "_model\", ");
+        }
+        WriteLine();
+        WriteLine();
     }
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-            Write("\"_" + CppCommon::StringUtils::ToLower(*s->name) + "_model\", ");
-    }
-    WriteLine();
 
     // Generate sender constructor
-    WriteLine();
     WriteLineIndent("def __init__(self, buffer=None):");
     Indent(1);
     WriteLineIndent("super().__init__(buffer, " + std::string(final ? "True" : "False") + ")");
@@ -4656,7 +4683,8 @@ void GeneratorPython::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + *s->name + model + "(self.buffer)");
+            if (s->message)
+                WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + *s->name + model + "(self.buffer)");
     }
     Indent(-1);
 
@@ -4683,12 +4711,15 @@ void GeneratorPython::GenerateSender(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("# Sender models accessors");
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("@property");
-            WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*s->name) + "_model(self):");
-            Indent(1);
-            WriteLineIndent("return self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model");
-            Indent(-1);
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("@property");
+                WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*s->name) + "_model(self):");
+                Indent(1);
+                WriteLineIndent("return self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model");
+                Indent(-1);
+            }
         }
     }
 
@@ -4702,10 +4733,13 @@ void GeneratorPython::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("if isinstance(value, " + *s->name + "):");
-            Indent(1);
-            WriteLineIndent("return self.send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
-            Indent(-1);
+            if (s->message)
+            {
+                WriteLineIndent("if isinstance(value, " + *s->name + ") and (value.fbe_type == self." + CppCommon::StringUtils::ToLower(*s->name) + "_model.fbe_type):");
+                Indent(1);
+                WriteLineIndent("return self.send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
+                Indent(-1);
+            }
         }
     }
     if (p->import)
@@ -4725,24 +4759,27 @@ void GeneratorPython::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("def send_" + CppCommon::StringUtils::ToLower(*s->name) + "(self, value):");
-            Indent(1);
-            WriteLineIndent("# Serialize the value into the FBE stream");
-            WriteLineIndent("serialized = self." + CppCommon::StringUtils::ToLower(*s->name) + "_model.serialize(value)");
-            WriteLineIndent("assert (serialized > 0), \"" + *p->name + "." + *s->name + " serialization failed!\"");
-            WriteLineIndent("assert self." + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\"");
-            WriteLine();
-            WriteLineIndent("# Log the value");
-            WriteLineIndent("if self.logging:");
-            Indent(1);
-            WriteLineIndent("message = str(value)");
-            WriteLineIndent("self.on_send_log(message)");
-            Indent(-1);
-            WriteLine();
-            WriteLineIndent("# Send the serialized value");
-            WriteLineIndent("return self.send_serialized(serialized)");
-            Indent(-1);
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("def send_" + CppCommon::StringUtils::ToLower(*s->name) + "(self, value):");
+                Indent(1);
+                WriteLineIndent("# Serialize the value into the FBE stream");
+                WriteLineIndent("serialized = self." + CppCommon::StringUtils::ToLower(*s->name) + "_model.serialize(value)");
+                WriteLineIndent("assert (serialized > 0), \"" + *p->name + "." + *s->name + " serialization failed!\"");
+                WriteLineIndent("assert self." + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\"");
+                WriteLine();
+                WriteLineIndent("# Log the value");
+                WriteLineIndent("if self.logging:");
+                Indent(1);
+                WriteLineIndent("message = str(value)");
+                WriteLineIndent("self.on_send_log(message)");
+                Indent(-1);
+                WriteLine();
+                WriteLineIndent("# Send the serialized value");
+                WriteLineIndent("return self.send_serialized(serialized)");
+                Indent(-1);
+            }
         }
     }
 
@@ -4773,25 +4810,36 @@ void GeneratorPython::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     WriteLineIndent("class " + receiver + "(fbe.Receiver):");
     Indent(1);
 
+    bool messages = false;
+    for (const auto& s : p->body->structs)
+        if (s->message)
+            messages = true;
+
     // Generate receiver __slots__
-    WriteIndent("__slots__ = ");
-    if (p->import)
+    if (p->import || messages)
     {
-        for (const auto& import : p->import->imports)
-            Write("\"_" + CppCommon::StringUtils::ToLower(*import) + "_receiver\", ");
-    }
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
+        WriteIndent("__slots__ = ");
+        if (p->import)
         {
-            Write("\"_" + CppCommon::StringUtils::ToLower(*s->name) + "_value\", ");
-            Write("\"_" + CppCommon::StringUtils::ToLower(*s->name) + "_model\", ");
+            for (const auto& import : p->import->imports)
+                Write("\"_" + CppCommon::StringUtils::ToLower(*import) + "_receiver\", ");
         }
+        if (p->body)
+        {
+            for (const auto& s : p->body->structs)
+            {
+                if (s->message)
+                {
+                    Write("\"_" + CppCommon::StringUtils::ToLower(*s->name) + "_value\", ");
+                    Write("\"_" + CppCommon::StringUtils::ToLower(*s->name) + "_model\", ");
+                }
+            }
+        }
+        WriteLine();
+        WriteLine();
     }
-    WriteLine();
 
     // Generate receiver constructor
-    WriteLine();
     WriteLineIndent("def __init__(self, buffer=None):");
     Indent(1);
     WriteLineIndent("super().__init__(buffer, " + std::string(final ? "True" : "False") + ")");
@@ -4804,8 +4852,11 @@ void GeneratorPython::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_value = " + *s->name + "()");
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + *s->name + model + "()");
+            if (s->message)
+            {
+                WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_value = " + *s->name + "()");
+                WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + *s->name + model + "()");
+            }
         }
     }
     Indent(-1);
@@ -4839,11 +4890,14 @@ void GeneratorPython::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         WriteLineIndent("# Receive handlers");
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("def on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(self, value):");
-            Indent(1);
-            WriteLineIndent("pass");
-            Indent(-1);
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("def on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(self, value):");
+                Indent(1);
+                WriteLineIndent("pass");
+                Indent(-1);
+            }
         }
         WriteLine();
     }
@@ -4855,26 +4909,29 @@ void GeneratorPython::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("if type == " + *s->name + model + ".TYPE:");
-            Indent(1);
-            WriteLineIndent("# Deserialize the value from the FBE stream");
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
-            WriteLineIndent("assert self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\"");
-            WriteLineIndent("(_, deserialized) = self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.deserialize(self._" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
-            WriteLineIndent("assert (deserialized > 0), \"" + *p->name + "." + *s->name + " deserialization failed!\"");
-            WriteLine();
-            WriteLineIndent("# Log the value");
-            WriteLineIndent("if self.logging:");
-            Indent(1);
-            WriteLineIndent("message = str(self._" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
-            WriteLineIndent("self.on_receive_log(message)");
-            Indent(-1);
-            WriteLine();
-            WriteLineIndent("# Call receive handler with deserialized value");
-            WriteLineIndent("self.on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(self._" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
-            WriteLineIndent("return True");
-            Indent(-1);
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("if type == " + *s->name + model + ".TYPE:");
+                Indent(1);
+                WriteLineIndent("# Deserialize the value from the FBE stream");
+                WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
+                WriteLineIndent("assert self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\"");
+                WriteLineIndent("(_, deserialized) = self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.deserialize(self._" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
+                WriteLineIndent("assert (deserialized > 0), \"" + *p->name + "." + *s->name + " deserialization failed!\"");
+                WriteLine();
+                WriteLineIndent("# Log the value");
+                WriteLineIndent("if self.logging:");
+                Indent(1);
+                WriteLineIndent("message = str(self._" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
+                WriteLineIndent("self.on_receive_log(message)");
+                Indent(-1);
+                WriteLine();
+                WriteLineIndent("# Call receive handler with deserialized value");
+                WriteLineIndent("self.on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(self._" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
+                WriteLineIndent("return True");
+                Indent(-1);
+            }
         }
     }
     if (p->import)
@@ -4911,22 +4968,31 @@ void GeneratorPython::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("class " + proxy + "(fbe.Receiver):");
     Indent(1);
 
+    bool messages = false;
+    for (const auto& s : p->body->structs)
+        if (s->message)
+            messages = true;
+
     // Generate proxy __slots__
-    WriteIndent("__slots__ = ");
-    if (p->import)
+    if (p->import || messages)
     {
-        for (const auto& import : p->import->imports)
-            Write("\"_" + CppCommon::StringUtils::ToLower(*import) + "_proxy\", ");
+        WriteIndent("__slots__ = ");
+        if (p->import)
+        {
+            for (const auto& import : p->import->imports)
+                Write("\"_" + CppCommon::StringUtils::ToLower(*import) + "_proxy\", ");
+        }
+        if (p->body)
+        {
+            for (const auto& s : p->body->structs)
+                if (s->message)
+                    Write("\"_" + CppCommon::StringUtils::ToLower(*s->name) + "_model\", ");
+        }
+        WriteLine();
+        WriteLine();
     }
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-            Write("\"_" + CppCommon::StringUtils::ToLower(*s->name) + "_model\", ");
-    }
-    WriteLine();
 
     // Generate proxy constructor
-    WriteLine();
     WriteLineIndent("def __init__(self, buffer=None):");
     Indent(1);
     WriteLineIndent("super().__init__(buffer, " + std::string(final ? "True" : "False") + ")");
@@ -4938,7 +5004,8 @@ void GeneratorPython::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + *s->name + model + "()");
+            if (s->message)
+                WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + *s->name + model + "()");
     }
     Indent(-1);
 
@@ -4971,11 +5038,14 @@ void GeneratorPython::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("# Receive handlers");
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("def on_proxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(self, model, type, buffer, offset, size):");
-            Indent(1);
-            WriteLineIndent("pass");
-            Indent(-1);
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("def on_proxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(self, model, type, buffer, offset, size):");
+                Indent(1);
+                WriteLineIndent("pass");
+                Indent(-1);
+            }
         }
         WriteLine();
     }
@@ -4987,23 +5057,26 @@ void GeneratorPython::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("if type == " + *s->name + model + ".TYPE:");
-            Indent(1);
-            WriteLineIndent("# Attach the FBE stream to the proxy model");
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
-            WriteLineIndent("assert self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\"");
-            WriteLine();
-            WriteLineIndent("fbe_begin = self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.model.get_begin()");
-            WriteLineIndent("if fbe_begin == 0:");
-            Indent(1);
-            WriteLineIndent("return False");
-            Indent(-1);
-            WriteLineIndent("# Call proxy handler");
-            WriteLineIndent("self.on_proxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model, type, buffer, offset, size)");
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.model.get_end(fbe_begin)");
-            WriteLineIndent("return True");
-            Indent(-1);
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("if type == " + *s->name + model + ".TYPE:");
+                Indent(1);
+                WriteLineIndent("# Attach the FBE stream to the proxy model");
+                WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
+                WriteLineIndent("assert self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\"");
+                WriteLine();
+                WriteLineIndent("fbe_begin = self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.model.get_begin()");
+                WriteLineIndent("if fbe_begin == 0:");
+                Indent(1);
+                WriteLineIndent("return False");
+                Indent(-1);
+                WriteLineIndent("# Call proxy handler");
+                WriteLineIndent("self.on_proxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model, type, buffer, offset, size)");
+                WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.model.get_end(fbe_begin)");
+                WriteLineIndent("return True");
+                Indent(-1);
+            }
         }
     }
     if (p->import)

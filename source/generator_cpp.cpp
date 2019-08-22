@@ -575,10 +575,10 @@ public:
     Flags& operator=(Flags&&) noexcept = default;
 
     // Is any flag set?
-    explicit operator bool() const noexcept { return (_value != 0); }
+    explicit operator bool() const noexcept { return isset(); }
 
     // Is no flag set?
-    bool operator!() const noexcept { return (_value == 0); }
+    bool operator!() const noexcept { return !isset(); }
 
     // Reverse all flags
     Flags operator~() const noexcept { return Flags(~_value); }
@@ -607,6 +607,13 @@ public:
 
     // Convert to the enum value
     operator TEnum() const noexcept { return (TEnum)_value; }
+
+    //! Is any flag set?
+    bool isset() const noexcept { return (_value != 0); }
+    //! Is the given flag set?
+    bool isset(type value) const noexcept { return (_value & value) != 0; }
+    //! Is the given flag set?
+    bool isset(TEnum value) const noexcept { return (_value & (type)value) != 0; }
 
     // Get the enum value
     TEnum value() const noexcept { return (TEnum)_value; }
@@ -6365,7 +6372,8 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
         std::string response = *s->response->response;
         CppCommon::StringUtils::ReplaceAll(response, ".", "::");
         WriteLineIndent("typedef " + response + " Response;");
-        WriteLine();
+        if (s->body && !s->body->fields.empty())
+            WriteLine();
     }
 
     // Generate struct body
@@ -6379,6 +6387,13 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
             WriteLine(ConvertTypeName(*p->name, *field) + " " + *field->name + ";");
         }
     }
+
+    // Generate struct FBE type property
+    WriteLine();
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("size_t fbe_type() const noexcept { return " + ConvertTypeName(*p->name, *s->base, false) + "::fbe_type(); }");
+    else
+        WriteLineIndent("size_t fbe_type() const noexcept { return " + std::to_string(s->type) + "; }");
 
     // Generate struct default constructor
     bool first = true;
@@ -7995,8 +8010,11 @@ void GeneratorCpp::GenerateSender(const std::shared_ptr<Package>& p, bool final)
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent((first ? ": " : ", ") + *s->name + "" + "Model(this->_buffer)");
-            first = false;
+            if (s->message)
+            {
+                WriteLineIndent((first ? ": " : ", ") + *s->name + "" + "Model(this->_buffer)");
+                first = false;
+            }
         }
         Indent(-1);
     }
@@ -8024,29 +8042,32 @@ void GeneratorCpp::GenerateSender(const std::shared_ptr<Package>& p, bool final)
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = "::" + *p->name + "::" + *s->name;
-            WriteLine();
-            WriteLineIndent("size_t send(const " + struct_name + "& value)");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("// Serialize the value into the FBE stream");
-            WriteLineIndent("size_t serialized = " + *s->name + "Model.serialize(value);");
-            WriteLineIndent("assert((serialized > 0) && \"" + *p->name + "::" + *s->name + " serialization failed!\");");
-            WriteLineIndent("assert(" + *s->name + "Model.verify() && \"" + *p->name + "::" + *s->name + " validation failed!\");");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (this->_logging)");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("std::string message = value.string();");
-            WriteLineIndent("this->onSendLog(message);");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Send the serialized value");
-            WriteLineIndent("return this->send_serialized(serialized);");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                std::string struct_name = "::" + *p->name + "::" + *s->name;
+                WriteLine();
+                WriteLineIndent("size_t send(const " + struct_name + "& value)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Serialize the value into the FBE stream");
+                WriteLineIndent("size_t serialized = " + *s->name + "Model.serialize(value);");
+                WriteLineIndent("assert((serialized > 0) && \"" + *p->name + "::" + *s->name + " serialization failed!\");");
+                WriteLineIndent("assert(" + *s->name + "Model.verify() && \"" + *p->name + "::" + *s->name + " validation failed!\");");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (this->_logging)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("std::string message = value.string();");
+                WriteLineIndent("this->onSendLog(message);");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Send the serialized value");
+                WriteLineIndent("return this->send_serialized(serialized);");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
 
@@ -8059,7 +8080,8 @@ void GeneratorCpp::GenerateSender(const std::shared_ptr<Package>& p, bool final)
         Indent(1);
         WriteLineIndent("// Sender models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("FBE::" + *p->name + "::" + *s->name + model + "<TBuffer> " + *s->name + "Model;");
+            if (s->message)
+                WriteLineIndent("FBE::" + *p->name + "::" + *s->name + model + "<TBuffer> " + *s->name + "Model;");
     }
 
     // Generate sender end
@@ -8122,8 +8144,11 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("// Receive handlers");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = "::" + *p->name + "::" + *s->name;
-            WriteLineIndent("virtual void onReceive(const " + struct_name + "& value) {}");
+            if (s->message)
+            {
+                std::string struct_name = "::" + *p->name + "::" + *s->name;
+                WriteLineIndent("virtual void onReceive(const " + struct_name + "& value) {}");
+            }
         }
     }
 
@@ -8140,31 +8165,35 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = "::" + *p->name + "::" + *s->name;
-            WriteLineIndent("case FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer>::fbe_type():");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("// Deserialize the value from the FBE stream");
-            WriteLineIndent(*s->name + "Model.attach(data, size);");
-            WriteLineIndent("assert(" + *s->name + "Model.verify() && \"" + *p->name + "::" + *s->name + " validation failed!\");");
-            WriteLineIndent("[[maybe_unused]] size_t deserialized = " + *s->name + "Model.deserialize(" + *s->name + "Value);");
-            WriteLineIndent("assert((deserialized > 0) && \"" + *p->name + "::" + *s->name + " deserialization failed!\");");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (this->_logging)");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("std::string message = " + *s->name + "Value.string();");
-            WriteLineIndent("this->onReceiveLog(message);");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Call receive handler with deserialized value");
-            WriteLineIndent("onReceive(" + *s->name + "Value);");
-            WriteLineIndent("return true;");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                std::string struct_name = "::" + *p->name + "::" + *s->name;
+                WriteLineIndent("case FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer>::fbe_type():");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Deserialize the value from the FBE stream");
+                WriteLineIndent(*s->name + "Model.attach(data, size);");
+                WriteLineIndent("assert(" + *s->name + "Model.verify() && \"" + *p->name + "::" + *s->name + " validation failed!\");");
+                WriteLineIndent("[[maybe_unused]] size_t deserialized = " + *s->name + "Model.deserialize(" + *s->name + "Value);");
+                WriteLineIndent("assert((deserialized > 0) && \"" + *p->name + "::" + *s->name + " deserialization failed!\");");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (this->_logging)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("std::string message = " + *s->name + "Value.string();");
+                WriteLineIndent("this->onReceiveLog(message);");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Call receive handler with deserialized value");
+                WriteLineIndent("onReceive(" + *s->name + "Value);");
+                WriteLineIndent("return true;");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
+        WriteLineIndent("default: break;");
         Indent(-1);
         WriteLineIndent("}");
     }
@@ -8194,13 +8223,17 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("// Receiver values accessors");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = "::" + *p->name + "::" + *s->name;
-            WriteLineIndent(struct_name + " " + *s->name + "Value;");
+            if (s->message)
+            {
+                std::string struct_name = "::" + *p->name + "::" + *s->name;
+                WriteLineIndent(struct_name + " " + *s->name + "Value;");
+            }
         }
         WriteLine();
         WriteLineIndent("// Receiver models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer> " + *s->name + "Model;");
+            if (s->message)
+                WriteLineIndent("FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer> " + *s->name + "Model;");
     }
 
     // Generate receiver end
@@ -8263,8 +8296,11 @@ void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
         WriteLineIndent("// Proxy handlers");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_model = "FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer>";
-            WriteLineIndent("virtual void onProxy(" + struct_model + "& model, size_t type, const void* data, size_t size) {}");
+            if (s->message)
+            {
+                std::string struct_model = "FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer>";
+                WriteLineIndent("virtual void onProxy(" + struct_model + "& model, size_t type, const void* data, size_t size) {}");
+            }
         }
     }
 
@@ -8281,26 +8317,30 @@ void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = "::" + *p->name + "::" + *s->name;
-            WriteLineIndent("case FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer>::fbe_type():");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("// Attach the FBE stream to the proxy model");
-            WriteLineIndent(*s->name + "Model.attach(data, size);");
-            WriteLineIndent("assert(" + *s->name + "Model.verify() && \"" + *p->name + "::" + *s->name + " validation failed!\");");
-            WriteLine();
-            WriteLineIndent("size_t fbe_begin = " + *s->name + "Model.model.get_begin();");
-            WriteLineIndent("if (fbe_begin == 0)");
-            Indent(1);
-            WriteLineIndent("return false;");
-            Indent(-1);
-            WriteLineIndent("// Call proxy handler");
-            WriteLineIndent("onProxy(" + *s->name + "Model, type, data, size);");
-            WriteLineIndent(*s->name + "Model.model.get_end(fbe_begin);");
-            WriteLineIndent("return true;");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                std::string struct_name = "::" + *p->name + "::" + *s->name;
+                WriteLineIndent("case FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer>::fbe_type():");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Attach the FBE stream to the proxy model");
+                WriteLineIndent(*s->name + "Model.attach(data, size);");
+                WriteLineIndent("assert(" + *s->name + "Model.verify() && \"" + *p->name + "::" + *s->name + " validation failed!\");");
+                WriteLine();
+                WriteLineIndent("size_t fbe_begin = " + *s->name + "Model.model.get_begin();");
+                WriteLineIndent("if (fbe_begin == 0)");
+                Indent(1);
+                WriteLineIndent("return false;");
+                Indent(-1);
+                WriteLineIndent("// Call proxy handler");
+                WriteLineIndent("onProxy(" + *s->name + "Model, type, data, size);");
+                WriteLineIndent(*s->name + "Model.model.get_end(fbe_begin);");
+                WriteLineIndent("return true;");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
+        WriteLineIndent("default: break;");
         Indent(-1);
         WriteLineIndent("}");
     }
@@ -8329,7 +8369,8 @@ void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
         Indent(1);
         WriteLineIndent("// Proxy models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer> " + *s->name + "Model;");
+            if (s->message)
+                WriteLineIndent("FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer> " + *s->name + "Model;");
     }
 
     // Generate proxy end
@@ -8429,7 +8470,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     {
         for (const auto& s : p->body->structs)
         {
-            if (s->request)
+            if (s->message && s->request)
             {
                 std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
 
@@ -8450,7 +8491,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     {
         for (const auto& s : p->body->structs)
         {
-            if (s->request)
+            if (s->message && s->request)
             {
                 std::string request_name = "::" + *p->name + "::" + *s->name;
                 std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
@@ -8550,7 +8591,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             WriteLine();
             for (const auto& s : p->body->structs)
             {
-                if (s->response)
+                if (s->message && s->response)
                 {
                     std::string struct_response_name = ConvertTypeName(*p->name, *s->response->response, false);
                     std::string struct_response_field = *s->response->response;
@@ -8590,13 +8631,16 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         std::set<std::string> cache;
         for (const auto& s : p->body->structs)
         {
-            std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
-            std::string struct_response_field = *s->name;
-            if ((responses.find(*s->name) == responses.end()) && (cache.find(struct_response_name) == cache.end()))
+            if (s->message)
             {
-                WriteLineIndent("virtual bool onReceiveResponse(const " + struct_response_name + "& response) { return false; }");
-                cache.insert(struct_response_name);
-                found = true;
+                std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_response_field = *s->name;
+                if ((responses.find(*s->name) == responses.end()) && (cache.find(struct_response_name) == cache.end()))
+                {
+                    WriteLineIndent("virtual bool onReceiveResponse(const " + struct_response_name + "& response) { return false; }");
+                    cache.insert(struct_response_name);
+                    found = true;
+                }
             }
         }
         if (found)
@@ -8654,7 +8698,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             WriteLine();
             for (const auto& s : p->body->structs)
             {
-                if (s->response && s->rejects)
+                if (s->message && s->response && s->rejects)
                 {
                     for (const auto& r : s->rejects->rejects)
                     {
@@ -8701,12 +8745,15 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         std::set<std::string> cache;
         for (const auto& s : p->body->structs)
         {
-            std::string struct_reject_name = ConvertTypeName(*p->name, *s->name, false);
-            if ((rejects.find(*s->name) == rejects.end()) && (cache.find(struct_reject_name) == cache.end()))
+            if (s->message)
             {
-                WriteLineIndent("virtual bool onReceiveReject(const " + struct_reject_name + "& reject) { return false; }");
-                cache.insert(struct_reject_name);
-                found = true;
+                std::string struct_reject_name = ConvertTypeName(*p->name, *s->name, false);
+                if ((rejects.find(*s->name) == rejects.end()) && (cache.find(struct_reject_name) == cache.end()))
+                {
+                    WriteLineIndent("virtual bool onReceiveReject(const " + struct_reject_name + "& reject) { return false; }");
+                    cache.insert(struct_reject_name);
+                    found = true;
+                }
             }
         }
         if (found)
@@ -8720,13 +8767,16 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         std::set<std::string> cache;
         for (const auto& s : p->body->structs)
         {
-            std::string struct_notify_name = ConvertTypeName(*p->name, *s->name, false);
-            std::string struct_notify_field = *s->name;
-            if (cache.find(struct_notify_name) == cache.end())
+            if (s->message)
             {
-                WriteLineIndent("virtual void onReceiveNotify(const " + struct_notify_name + "& notify) {}");
-                cache.insert(struct_notify_name);
-                found = true;
+                std::string struct_notify_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_notify_field = *s->name;
+                if (cache.find(struct_notify_name) == cache.end())
+                {
+                    WriteLineIndent("virtual void onReceiveNotify(const " + struct_notify_name + "& notify) {}");
+                    cache.insert(struct_notify_name);
+                    found = true;
+                }
             }
         }
         if (found)
@@ -8740,13 +8790,16 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         std::set<std::string> cache;
         for (const auto& s : p->body->structs)
         {
-            std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
-            std::string struct_response_field = *s->name;
-            if (cache.find(struct_response_name) == cache.end())
+            if (s->message)
             {
-                WriteLineIndent("virtual void onReceive(const " + struct_response_name + "& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }");
-                cache.insert(struct_response_name);
-                found = true;
+                std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_response_field = *s->name;
+                if (cache.find(struct_response_name) == cache.end())
+                {
+                    WriteLineIndent("virtual void onReceive(const " + struct_response_name + "& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }");
+                    cache.insert(struct_response_name);
+                    found = true;
+                }
             }
         }
         if (found)

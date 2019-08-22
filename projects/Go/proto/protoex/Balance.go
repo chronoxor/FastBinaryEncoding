@@ -8,10 +8,12 @@ package protoex
 import "fmt"
 import "strconv"
 import "strings"
+import "errors"
 import "../fbe"
 import "../proto"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 var _ = proto.Version
 
@@ -91,6 +93,9 @@ func (s *Balance) Key() BalanceKey {
 func (s *Balance) Optional() *Balance {
     return s
 }
+
+// Get the FBE type
+func (s *Balance) FBEType() int { return s.Balance.FBEType() }
 
 // Convert struct to string
 func (s *Balance) String() string {

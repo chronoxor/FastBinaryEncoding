@@ -2935,6 +2935,13 @@ module Enums
       result.uint64b5 = (value.nil? ? nil : EnumUInt64.__from_json_map__(value))
       result
     end
+
+    # Get the FBE type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 1
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -6715,38 +6722,14 @@ module Enums
   class Sender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer, false)
-      @_enums_model = EnumsModel.new(self.buffer)
     end
 
     # Sender models accessors
 
-    def enums_model
-      @_enums_model
-    end
-
     # Send methods
 
     def send(value)
-      if value.is_a?(Enums)
-        return send_enums(value)
-      end
       0
-    end
-
-    def send_enums(value)
-      # Serialize the value into the FBE stream
-      serialized = enums_model.serialize(value)
-      raise RuntimeError, "Enums.Enums serialization failed!" if serialized <= 0
-      raise RuntimeError, "Enums.Enums validation failed!" unless enums_model.verify
-
-      # Log the value
-      if logging?
-        message = value.to_s
-        on_send_log(message)
-      end
-
-      # Send the serialized value
-      send_serialized(serialized)
     end
 
     protected
@@ -6762,45 +6745,15 @@ module Enums
   class Receiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer, false)
-      @_enums_value = Enums.new
-      @_enums_model = EnumsModel.new
     end
 
     protected
 
     # Receive handlers
 
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_enums(value)
-    end
-
     public
 
     def on_receive(type, buffer, offset, size)
-      case type
-      when EnumsModel::TYPE
-        # Deserialize the value from the FBE stream
-        @_enums_model.attach_buffer(buffer, offset)
-        unless @_enums_model.verify
-          return false
-        end
-        _, deserialized = @_enums_model.deserialize(@_enums_value)
-        if deserialized <= 0
-          return false
-        end
-
-        # Log the value
-        if logging?
-          message = @_enums_value.to_s
-          on_receive_log(message)
-        end
-
-        # Call receive handler with deserialized value
-        on_receive_enums(@_enums_value)
-        true
-      else
-        # Do nothing here...
-      end
 
       false
     end
@@ -6811,39 +6764,15 @@ module Enums
   class Proxy < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer, false)
-      @_enums_model = EnumsModel.new
     end
 
     protected
 
     # Receive handlers
 
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_enums(model, type, buffer, offset, size)
-    end
-
     public
 
     def on_receive(type, buffer, offset, size)
-      case type
-      when EnumsModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_enums_model.attach_buffer(buffer, offset)
-        unless @_enums_model.verify
-          return false
-        end
-
-        fbe_begin = @_enums_model.model.get_begin
-        if fbe_begin == 0
-          return false
-        end
-        # Call proxy handler
-        on_proxy_enums(@_enums_model, type, buffer, offset, size)
-        @_enums_model.model.get_end(fbe_begin)
-        true
-      else
-        # Do nothing here...
-      end
 
       false
     end
@@ -6854,38 +6783,14 @@ module Enums
   class FinalSender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer, true)
-      @_enums_model = EnumsFinalModel.new(self.buffer)
     end
 
     # Sender models accessors
 
-    def enums_model
-      @_enums_model
-    end
-
     # Send methods
 
     def send(value)
-      if value.is_a?(Enums)
-        return send_enums(value)
-      end
       0
-    end
-
-    def send_enums(value)
-      # Serialize the value into the FBE stream
-      serialized = enums_model.serialize(value)
-      raise RuntimeError, "Enums.Enums serialization failed!" if serialized <= 0
-      raise RuntimeError, "Enums.Enums validation failed!" unless enums_model.verify
-
-      # Log the value
-      if logging?
-        message = value.to_s
-        on_send_log(message)
-      end
-
-      # Send the serialized value
-      send_serialized(serialized)
     end
 
     protected
@@ -6901,45 +6806,15 @@ module Enums
   class FinalReceiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer, true)
-      @_enums_value = Enums.new
-      @_enums_model = EnumsFinalModel.new
     end
 
     protected
 
     # Receive handlers
 
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_enums(value)
-    end
-
     public
 
     def on_receive(type, buffer, offset, size)
-      case type
-      when EnumsFinalModel::TYPE
-        # Deserialize the value from the FBE stream
-        @_enums_model.attach_buffer(buffer, offset)
-        unless @_enums_model.verify
-          return false
-        end
-        _, deserialized = @_enums_model.deserialize(@_enums_value)
-        if deserialized <= 0
-          return false
-        end
-
-        # Log the value
-        if logging?
-          message = @_enums_value.to_s
-          on_receive_log(message)
-        end
-
-        # Call receive handler with deserialized value
-        on_receive_enums(@_enums_value)
-        true
-      else
-        # Do nothing here...
-      end
 
       false
     end

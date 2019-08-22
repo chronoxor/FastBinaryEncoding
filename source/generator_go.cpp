@@ -1605,7 +1605,6 @@ void GeneratorGo::GenerateFBEFieldModelOptional(const std::shared_ptr<Package>& 
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -1808,7 +1807,6 @@ void GeneratorGo::GenerateFBEFieldModelArray(const std::shared_ptr<Package>& p, 
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -1967,7 +1965,6 @@ void GeneratorGo::GenerateFBEFieldModelVector(const std::shared_ptr<Package>& p,
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -2198,7 +2195,6 @@ void GeneratorGo::GenerateFBEFieldModelSet(const std::shared_ptr<Package>& p, co
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -2428,7 +2424,6 @@ void GeneratorGo::GenerateFBEFieldModelMap(const std::shared_ptr<Package>& p, co
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -3414,7 +3409,6 @@ void GeneratorGo::GenerateFBEFinalModelOptional(const std::shared_ptr<Package>& 
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -3566,7 +3560,6 @@ void GeneratorGo::GenerateFBEFinalModelArray(const std::shared_ptr<Package>& p, 
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -3721,7 +3714,6 @@ void GeneratorGo::GenerateFBEFinalModelVector(const std::shared_ptr<Package>& p,
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -3867,7 +3859,6 @@ void GeneratorGo::GenerateFBEFinalModelSet(const std::shared_ptr<Package>& p, co
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -4012,7 +4003,6 @@ void GeneratorGo::GenerateFBEFinalModelMap(const std::shared_ptr<Package>& p, co
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -4758,6 +4748,7 @@ func min(a, b int) int {
 void GeneratorGo::GenerateImports(const std::shared_ptr<Package>& p)
 {
     // Generate fbe import
+    WriteLineIndent("import \"errors\"");
     WriteLineIndent("import \"../fbe\"");
 
     // Generate packages import
@@ -4768,6 +4759,7 @@ void GeneratorGo::GenerateImports(const std::shared_ptr<Package>& p)
     // Generate workaround for Go unused imports issue
     WriteLine();
     WriteLineIndent("// Workaround for Go unused imports issue");
+    WriteLineIndent("var _ = errors.New");
     WriteLineIndent("var _ = fbe.Version");
     if (p->import)
         for (const auto& import : p->import->imports)
@@ -5618,6 +5610,14 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     Indent(-1);
     WriteLineIndent("}");
 
+    // Generate struct FBE type property
+    WriteLine();
+    WriteLineIndent("// Get the FBE type");
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("func (s *" + struct_name + ") FBEType() int { return s." + ConvertBaseName(base_type) + ".FBEType() }");
+    else
+        WriteLineIndent("func (s *" + struct_name + ") FBEType() int { return " + std::to_string(s->type) + " }");
+
     // Generate struct String() method
     WriteLine();
     WriteLineIndent("// Convert struct to string");
@@ -6051,7 +6051,6 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
@@ -6506,7 +6505,6 @@ void GeneratorGo::GenerateStructModel(const std::shared_ptr<Package>& p, const s
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     // Generate struct model type
@@ -6990,7 +6988,6 @@ void GeneratorGo::GenerateStructModelFinal(const std::shared_ptr<Package>& p, co
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     // Generate struct model final type
@@ -7196,7 +7193,6 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     // Generate sender type
@@ -7211,7 +7207,8 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
             for (const auto& import : p->import->imports)
                 WriteLineIndent(ConvertToLower(*import) + "Sender *" + *import + (final ? ".Final" : ".") + "Sender");
         for (const auto& s : p->body->structs)
-            WriteLineIndent(ConvertToLower(*s->name) + "Model *" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model");
+            if (s->message)
+                WriteLineIndent(ConvertToLower(*s->name) + "Model *" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -7237,7 +7234,8 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
             for (const auto& import : p->import->imports)
                 WriteLineIndent(*import + ".New" + (final ? "Final" : "") + "SenderWithBuffer(buffer),");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("New" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model(buffer),");
+            if (s->message)
+                WriteLineIndent("New" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model(buffer),");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -7260,7 +7258,8 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
     WriteLine();
     if (p->body)
         for (const auto& s : p->body->structs)
-            WriteLineIndent("func (s *" + sender_name + ") " + ConvertToUpper(*s->name) + "Model" + "() *" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model" + " { return s." + ConvertToLower(*s->name) + "Model" + " }");
+            if (s->message)
+                WriteLineIndent("func (s *" + sender_name + ") " + ConvertToUpper(*s->name) + "Model" + "() *" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model" + " { return s." + ConvertToLower(*s->name) + "Model" + " }");
 
     // Generate sender methods
     WriteLine();
@@ -7273,11 +7272,23 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
         WriteLineIndent("switch value := value.(type) {");
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case *" + ConvertToUpper(*s->name) + ":");
-            Indent(1);
-            WriteLineIndent("return s.Send" + ConvertToUpper(*s->name) + "(value)");
-            Indent(-1);
+            if (s->message)
+            {
+                WriteLineIndent("case *" + ConvertToUpper(*s->name) + ":");
+                Indent(1);
+                WriteLineIndent("if value.FBEType() == s." + ConvertToLower(*s->name) + "Model.FBEType() {");
+                Indent(1);
+                WriteLineIndent("return s.Send" + ConvertToUpper(*s->name) + "(value)");
+                Indent(-1);
+                WriteLineIndent("}");
+                Indent(-1);
+            }
         }
+        WriteLineIndent("default:");
+        Indent(1);
+        WriteLineIndent("_ = value");
+        WriteLineIndent("break");
+        Indent(-1);
         WriteLineIndent("}");
         if (p->import)
         {
@@ -7298,39 +7309,42 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("func (s *" + sender_name + ") Send" + ConvertToUpper(*s->name) + "(value *" + ConvertToUpper(*s->name) + ") (int, error) {");
-            Indent(1);
-            WriteLineIndent("// Serialize the value into the FBE stream");
-            WriteLineIndent("serialized, err := s." + ConvertToLower(*s->name) + "Model.Serialize(value)");
-            WriteLineIndent("if serialized <= 0 {");
-            Indent(1);
-            WriteLineIndent("return 0, errors.New(\"" + *p->name + "." + *s->name + " serialization failed\")");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLineIndent("if err != nil {");
-            Indent(1);
-            WriteLineIndent("return 0, err");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLineIndent("if !s." + ConvertToLower(*s->name) + "Model.Verify() {");
-            Indent(1);
-            WriteLineIndent("return 0, errors.New(\"" + *p->name + "." + *s->name + " validation failed\")");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if s.Logging() {");
-            Indent(1);
-            WriteLineIndent("message := value.String()");
-            WriteLineIndent("s.HandlerOnSendLog.OnSendLog(message)");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Send the serialized value");
-            WriteLineIndent("return s.SendSerialized(serialized)");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("func (s *" + sender_name + ") Send" + ConvertToUpper(*s->name) + "(value *" + ConvertToUpper(*s->name) + ") (int, error) {");
+                Indent(1);
+                WriteLineIndent("// Serialize the value into the FBE stream");
+                WriteLineIndent("serialized, err := s." + ConvertToLower(*s->name) + "Model.Serialize(value)");
+                WriteLineIndent("if serialized <= 0 {");
+                Indent(1);
+                WriteLineIndent("return 0, errors.New(\"" + *p->name + "." + *s->name + " serialization failed\")");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("if err != nil {");
+                Indent(1);
+                WriteLineIndent("return 0, err");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("if !s." + ConvertToLower(*s->name) + "Model.Verify() {");
+                Indent(1);
+                WriteLineIndent("return 0, errors.New(\"" + *p->name + "." + *s->name + " validation failed\")");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if s.Logging() {");
+                Indent(1);
+                WriteLineIndent("message := value.String()");
+                WriteLineIndent("s.HandlerOnSendLog.OnSendLog(message)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Send the serialized value");
+                WriteLineIndent("return s.SendSerialized(serialized)");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
 
@@ -7358,7 +7372,6 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     // Generate receiver interfaces
@@ -7366,22 +7379,25 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = ConvertToUpper(*s->name);
-            WriteLine();
-            WriteLineIndent("// Receive " + *s->name + " interface");
-            WriteLineIndent("type OnReceive" + struct_name + " interface {");
-            Indent(1);
-            WriteLineIndent("OnReceive" + struct_name + "(value *" + struct_name + ")");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Receive " + *s->name + " function");
-            WriteLineIndent("type OnReceive" + struct_name + "Func func(value *" + struct_name + ")");
-            WriteLineIndent("func (f OnReceive" + struct_name + "Func) OnReceive" + struct_name + "(value *" + struct_name + ") {");
-            Indent(1);
-            WriteLineIndent("f(value)");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                std::string struct_name = ConvertToUpper(*s->name);
+                WriteLine();
+                WriteLineIndent("// Receive " + *s->name + " interface");
+                WriteLineIndent("type OnReceive" + struct_name + " interface {");
+                Indent(1);
+                WriteLineIndent("OnReceive" + struct_name + "(value *" + struct_name + ")");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Receive " + *s->name + " function");
+                WriteLineIndent("type OnReceive" + struct_name + "Func func(value *" + struct_name + ")");
+                WriteLineIndent("func (f OnReceive" + struct_name + "Func) OnReceive" + struct_name + "(value *" + struct_name + ") {");
+                Indent(1);
+                WriteLineIndent("f(value)");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
 
@@ -7398,16 +7414,22 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent(ConvertToLower(*s->name) + "Value *" + ConvertToUpper(*s->name));
-            WriteLineIndent(ConvertToLower(*s->name) + "Model *" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model");
+            if (s->message)
+            {
+                WriteLineIndent(ConvertToLower(*s->name) + "Value *" + ConvertToUpper(*s->name));
+                WriteLineIndent(ConvertToLower(*s->name) + "Model *" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model");
+            }
         }
 
         WriteLine();
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = ConvertToUpper(*s->name);
-            WriteLineIndent("// Receive " + *s->name + " handler");
-            WriteLineIndent("HandlerOnReceive" + struct_name + " OnReceive" + struct_name);
+            if (s->message)
+            {
+                std::string struct_name = ConvertToUpper(*s->name);
+                WriteLineIndent("// Receive " + *s->name + " handler");
+                WriteLineIndent("HandlerOnReceive" + struct_name + " OnReceive" + struct_name);
+            }
         }
     }
     Indent(-1);
@@ -7435,17 +7457,22 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("New" + ConvertToUpper(*s->name) + "(),");
-            WriteLineIndent("New" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model(buffer),");
+            if (s->message)
+            {
+                WriteLineIndent("New" + ConvertToUpper(*s->name) + "(),");
+                WriteLineIndent("New" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model(buffer),");
+            }
         }
         for (size_t i = 0; i < p->body->structs.size(); ++i)
-            WriteLineIndent("nil,");
+            if (p->body->structs[i]->message)
+                WriteLineIndent("nil,");
     }
     Indent(-1);
     WriteLineIndent("}");
     WriteLineIndent("receiver.SetupHandlerOnReceive(receiver)");
     for (const auto& s : p->body->structs)
-        WriteLineIndent("receiver.SetupHandlerOnReceive" + ConvertToUpper(*s->name) + "Func(func(value *" + ConvertToUpper(*s->name) + ") {})");
+        if (s->message)
+            WriteLineIndent("receiver.SetupHandlerOnReceive" + ConvertToUpper(*s->name) + "Func(func(value *" + ConvertToUpper(*s->name) + ") {})");
     WriteLineIndent("return receiver");
     Indent(-1);
     WriteLineIndent("}");
@@ -7478,12 +7505,15 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = ConvertToUpper(*s->name);
-            WriteLineIndent("if handler, ok := handlers.(OnReceive" + struct_name + "); ok {");
-            Indent(1);
-            WriteLineIndent("r.SetupHandlerOnReceive" + struct_name + "(handler)");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                std::string struct_name = ConvertToUpper(*s->name);
+                WriteLineIndent("if handler, ok := handlers.(OnReceive" + struct_name + "); ok {");
+                Indent(1);
+                WriteLineIndent("r.SetupHandlerOnReceive" + struct_name + "(handler)");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
     Indent(-1);
@@ -7493,11 +7523,14 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
         WriteLine();
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = ConvertToUpper(*s->name);
-            WriteLineIndent("// Setup receive " + *s->name + " handler");
-            WriteLineIndent("func (r *" + receiver_name + ") SetupHandlerOnReceive" + struct_name + "(handler OnReceive" + struct_name + ") { r.HandlerOnReceive" + struct_name + " = handler }");
-            WriteLineIndent("// Setup receive " + *s->name + " handler function");
-            WriteLineIndent("func (r *" + receiver_name + ") SetupHandlerOnReceive" + struct_name + "Func(function func(value *" + struct_name + ")) { r.HandlerOnReceive" + struct_name + " = OnReceive" + struct_name + "Func(function) }");
+            if (s->message)
+            {
+                std::string struct_name = ConvertToUpper(*s->name);
+                WriteLineIndent("// Setup receive " + *s->name + " handler");
+                WriteLineIndent("func (r *" + receiver_name + ") SetupHandlerOnReceive" + struct_name + "(handler OnReceive" + struct_name + ") { r.HandlerOnReceive" + struct_name + " = handler }");
+                WriteLineIndent("// Setup receive " + *s->name + " handler function");
+                WriteLineIndent("func (r *" + receiver_name + ") SetupHandlerOnReceive" + struct_name + "Func(function func(value *" + struct_name + ")) { r.HandlerOnReceive" + struct_name + " = OnReceive" + struct_name + "Func(function) }");
+            }
         }
     }
 
@@ -7512,43 +7545,51 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
         WriteLineIndent("switch fbeType {");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = ConvertToUpper(*s->name);
-            std::string struct_model = ConvertToLower(*s->name) + "Model";
-            std::string struct_value = ConvertToLower(*s->name) + "Value";
-            WriteLineIndent("case r." + struct_model + ".FBEType():");
-            Indent(1);
-            WriteLineIndent("// Deserialize the value from the FBE stream");
-            WriteLineIndent("r." + struct_model + ".Buffer().Attach(buffer)");
-            WriteLineIndent("if !r." + struct_model + ".Verify() {");
-            Indent(1);
-            WriteLineIndent("return false, errors.New(\"" + *p->name + "." + *s->name + " validation failed\")");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLineIndent("deserialized, err := r." + struct_model + ".DeserializeValue(r." + struct_value + ")");
-            WriteLineIndent("if deserialized <= 0 {");
-            Indent(1);
-            WriteLineIndent("return false, errors.New(\"" + *p->name + "." + *s->name + " deserialization failed\")");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLineIndent("if err != nil {");
-            Indent(1);
-            WriteLineIndent("return false, err");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if r.Logging() {");
-            Indent(1);
-            WriteLineIndent("message := r." + struct_value + ".String()");
-            WriteLineIndent("r.HandlerOnReceiveLog.OnReceiveLog(message)");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Call receive handler with deserialized value");
-            WriteLineIndent("r.HandlerOnReceive" + struct_name + ".OnReceive" + struct_name + "(r." + struct_value + ")");
-            WriteLineIndent("return true, nil");
-            Indent(-1);
+            if (s->message)
+            {
+                std::string struct_name = ConvertToUpper(*s->name);
+                std::string struct_model = ConvertToLower(*s->name) + "Model";
+                std::string struct_value = ConvertToLower(*s->name) + "Value";
+                WriteLineIndent("case r." + struct_model + ".FBEType():");
+                Indent(1);
+                WriteLineIndent("// Deserialize the value from the FBE stream");
+                WriteLineIndent("r." + struct_model + ".Buffer().Attach(buffer)");
+                WriteLineIndent("if !r." + struct_model + ".Verify() {");
+                Indent(1);
+                WriteLineIndent("return false, errors.New(\"" + *p->name + "." + *s->name + " validation failed\")");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("deserialized, err := r." + struct_model + ".DeserializeValue(r." + struct_value + ")");
+                WriteLineIndent("if deserialized <= 0 {");
+                Indent(1);
+                WriteLineIndent("return false, errors.New(\"" + *p->name + "." + *s->name + " deserialization failed\")");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("if err != nil {");
+                Indent(1);
+                WriteLineIndent("return false, err");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if r.Logging() {");
+                Indent(1);
+                WriteLineIndent("message := r." + struct_value + ".String()");
+                WriteLineIndent("r.HandlerOnReceiveLog.OnReceiveLog(message)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Call receive handler with deserialized value");
+                WriteLineIndent("r.HandlerOnReceive" + struct_name + ".OnReceive" + struct_name + "(r." + struct_value + ")");
+                WriteLineIndent("return true, nil");
+                Indent(-1);
+            }
         }
+        WriteLineIndent("default:");
+        Indent(1);
+        WriteLineIndent("_ = fbeType");
+        WriteLineIndent("break");
+        Indent(-1);
         WriteLineIndent("}");
     }
     if (p->import)
@@ -7596,7 +7637,6 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"errors\"");
     GenerateImports(p);
 
     // Generate proxy interfaces
@@ -7604,23 +7644,26 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = ConvertToUpper(*s->name);
-            std::string struct_model = ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model";
-            WriteLine();
-            WriteLineIndent("// Proxy " + *s->name + " interface");
-            WriteLineIndent("type OnProxy" + std::string(final ? "Final" : "") + struct_name + " interface {");
-            Indent(1);
-            WriteLineIndent("OnProxy" + struct_name + "(model *" + struct_model + ", fbeType int, buffer []byte)");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Proxy " + *s->name + " function");
-            WriteLineIndent("type OnProxy" + std::string(final ? "Final" : "") + struct_name + "Func func(model *" + struct_model + ", fbeType int, buffer []byte)");
-            WriteLineIndent("func (f OnProxy" + std::string(final ? "Final" : "") + struct_name + "Func) OnProxy" + struct_name + "(model *" + struct_model + ", fbeType int, buffer []byte) {");
-            Indent(1);
-            WriteLineIndent("f(model, fbeType, buffer)");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                std::string struct_name = ConvertToUpper(*s->name);
+                std::string struct_model = ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model";
+                WriteLine();
+                WriteLineIndent("// Proxy " + *s->name + " interface");
+                WriteLineIndent("type OnProxy" + std::string(final ? "Final" : "") + struct_name + " interface {");
+                Indent(1);
+                WriteLineIndent("OnProxy" + struct_name + "(model *" + struct_model + ", fbeType int, buffer []byte)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Proxy " + *s->name + " function");
+                WriteLineIndent("type OnProxy" + std::string(final ? "Final" : "") + struct_name + "Func func(model *" + struct_model + ", fbeType int, buffer []byte)");
+                WriteLineIndent("func (f OnProxy" + std::string(final ? "Final" : "") + struct_name + "Func) OnProxy" + struct_name + "(model *" + struct_model + ", fbeType int, buffer []byte) {");
+                Indent(1);
+                WriteLineIndent("f(model, fbeType, buffer)");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
 
@@ -7636,15 +7679,19 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(ConvertToLower(*s->name) + "Model *" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model");
+            if (s->message)
+                WriteLineIndent(ConvertToLower(*s->name) + "Model *" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model");
 
         WriteLine();
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = ConvertToUpper(*s->name);
+            if (s->message)
+            {
+                std::string struct_name = ConvertToUpper(*s->name);
 
-            WriteLineIndent("// Proxy " + *s->name + " handler");
-            WriteLineIndent("HandlerOnProxy" + struct_name + " OnProxy" + std::string(final ? "Final" : "") + struct_name);
+                WriteLineIndent("// Proxy " + *s->name + " handler");
+                WriteLineIndent("HandlerOnProxy" + struct_name + " OnProxy" + std::string(final ? "Final" : "") + struct_name);
+            }
         }
     }
     Indent(-1);
@@ -7671,17 +7718,22 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent("New" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model(buffer),");
+            if (s->message)
+                WriteLineIndent("New" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model(buffer),");
         for (size_t i = 0; i < p->body->structs.size(); ++i)
-            WriteLineIndent("nil,");
+            if (p->body->structs[i]->message)
+                WriteLineIndent("nil,");
     }
     Indent(-1);
     WriteLineIndent("}");
     WriteLineIndent("proxy.SetupHandlerOnReceive(proxy)");
     for (const auto& s : p->body->structs)
     {
-        std::string struct_model = ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model";
-        WriteLineIndent("proxy.SetupHandlerOnProxy" + ConvertToUpper(*s->name) + "Func(func(model *" + struct_model + ", fbeType int, buffer []byte) {})");
+        if (s->message)
+        {
+            std::string struct_model = ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model";
+            WriteLineIndent("proxy.SetupHandlerOnProxy" + ConvertToUpper(*s->name) + "Func(func(model *" + struct_model + ", fbeType int, buffer []byte) {})");
+        }
     }
     WriteLineIndent("return proxy");
     Indent(-1);
@@ -7715,12 +7767,15 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = ConvertToUpper(*s->name);
-            WriteLineIndent("if handler, ok := handlers.(OnProxy" + std::string(final ? "Final" : "") + struct_name + "); ok {");
-            Indent(1);
-            WriteLineIndent("p.SetupHandlerOnProxy" + struct_name + "(handler)");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                std::string struct_name = ConvertToUpper(*s->name);
+                WriteLineIndent("if handler, ok := handlers.(OnProxy" + std::string(final ? "Final" : "") + struct_name + "); ok {");
+                Indent(1);
+                WriteLineIndent("p.SetupHandlerOnProxy" + struct_name + "(handler)");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
     Indent(-1);
@@ -7730,12 +7785,15 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
         WriteLine();
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = ConvertToUpper(*s->name);
-            std::string struct_model = ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model";
-            WriteLineIndent("// Setup proxy " + *s->name + " handler");
-            WriteLineIndent("func (p *" + proxy_name + ") SetupHandlerOnProxy" + struct_name + "(handler OnProxy" + std::string(final ? "Final" : "") + struct_name + ") { p.HandlerOnProxy" + struct_name + " = handler }");
-            WriteLineIndent("// Setup proxy " + *s->name + " handler function");
-            WriteLineIndent("func (p *" + proxy_name + ") SetupHandlerOnProxy" + struct_name + "Func(function func(model *" + struct_model + ", fbeType int, buffer []byte)) { p.HandlerOnProxy" + struct_name + " = OnProxy" + std::string(final ? "Final" : "") + struct_name + "Func(function) }");
+            if (s->message)
+            {
+                std::string struct_name = ConvertToUpper(*s->name);
+                std::string struct_model = ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model";
+                WriteLineIndent("// Setup proxy " + *s->name + " handler");
+                WriteLineIndent("func (p *" + proxy_name + ") SetupHandlerOnProxy" + struct_name + "(handler OnProxy" + std::string(final ? "Final" : "") + struct_name + ") { p.HandlerOnProxy" + struct_name + " = handler }");
+                WriteLineIndent("// Setup proxy " + *s->name + " handler function");
+                WriteLineIndent("func (p *" + proxy_name + ") SetupHandlerOnProxy" + struct_name + "Func(function func(model *" + struct_model + ", fbeType int, buffer []byte)) { p.HandlerOnProxy" + struct_name + " = OnProxy" + std::string(final ? "Final" : "") + struct_name + "Func(function) }");
+            }
         }
     }
 
@@ -7750,30 +7808,38 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
         WriteLineIndent("switch fbeType {");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = ConvertToUpper(*s->name);
-            std::string struct_model = ConvertToLower(*s->name) + "Model";
-            WriteLineIndent("case p." + struct_model + ".FBEType():");
-            Indent(1);
-            WriteLineIndent("// Attach the FBE stream to the proxy model");
-            WriteLineIndent("p." + struct_model + ".Buffer().Attach(buffer)");
-            WriteLineIndent("if !p." + struct_model + ".Verify() {");
-            Indent(1);
-            WriteLineIndent("return false, errors.New(\"" + *p->name + "." + *s->name + " validation failed\")");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("fbeBegin, err := p." + struct_model + ".model.GetBegin()");
-            WriteLineIndent("if fbeBegin == 0 {");
-            Indent(1);
-            WriteLineIndent("return false, err");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLineIndent("// Call proxy handler");
-            WriteLineIndent("p.HandlerOnProxy" + struct_name + ".OnProxy" + struct_name + "(p." + struct_model + ", fbeType, buffer)");
-            WriteLineIndent("p." + struct_model + ".model.GetEnd(fbeBegin)");
-            WriteLineIndent("return true, nil");
-            Indent(-1);
+            if (s->message)
+            {
+                std::string struct_name = ConvertToUpper(*s->name);
+                std::string struct_model = ConvertToLower(*s->name) + "Model";
+                WriteLineIndent("case p." + struct_model + ".FBEType():");
+                Indent(1);
+                WriteLineIndent("// Attach the FBE stream to the proxy model");
+                WriteLineIndent("p." + struct_model + ".Buffer().Attach(buffer)");
+                WriteLineIndent("if !p." + struct_model + ".Verify() {");
+                Indent(1);
+                WriteLineIndent("return false, errors.New(\"" + *p->name + "." + *s->name + " validation failed\")");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("fbeBegin, err := p." + struct_model + ".model.GetBegin()");
+                WriteLineIndent("if fbeBegin == 0 {");
+                Indent(1);
+                WriteLineIndent("return false, err");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("// Call proxy handler");
+                WriteLineIndent("p.HandlerOnProxy" + struct_name + ".OnProxy" + struct_name + "(p." + struct_model + ", fbeType, buffer)");
+                WriteLineIndent("p." + struct_model + ".model.GetEnd(fbeBegin)");
+                WriteLineIndent("return true, nil");
+                Indent(-1);
+            }
         }
+        WriteLineIndent("default:");
+        Indent(1);
+        WriteLineIndent("_ = fbeType");
+        WriteLineIndent("break");
+        Indent(-1);
         WriteLineIndent("}");
     }
     if (p->import)

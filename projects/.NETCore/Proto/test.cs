@@ -1614,6 +1614,14 @@ namespace test {
         public global::proto.State f43;
         public global::proto.Account f44;
 
+        public const long FBETypeConst = 110;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructSimple Default => new StructSimple
         {
             id = (int)0
@@ -3978,6 +3986,14 @@ namespace test {
         public global::proto.State? f163;
         public global::proto.Account? f164;
         public global::proto.Account? f165;
+
+        public const long FBETypeConst = 111;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
 
         public static StructOptional Default => new StructOptional
         {
@@ -7149,20 +7165,28 @@ namespace test {
         public StructOptional f1010;
         public StructOptional? f1011;
 
+        public const long FBETypeConst = 112;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructNested Default => new StructNested
         {
             parent = StructOptional.Default
-            , f1000 = EnumSimple.Default
+            , f1000 = global::test.EnumSimple.Default
             , f1001 = null
             , f1002 = EnumTyped.ENUM_VALUE_2
             , f1003 = null
-            , f1004 = FlagsSimple.Default
+            , f1004 = global::test.FlagsSimple.Default
             , f1005 = null
             , f1006 = FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6
             , f1007 = null
-            , f1008 = StructSimple.Default
+            , f1008 = global::test.StructSimple.Default
             , f1009 = null
-            , f1010 = StructOptional.Default
+            , f1010 = global::test.StructOptional.Default
             , f1011 = null
         };
 
@@ -7551,7 +7575,7 @@ namespace test {
             if ((fbeCurrentSize + f1000.FBESize) <= fbeStructSize)
                 f1000.Get(out fbeValue.f1000);
             else
-                fbeValue.f1000 = EnumSimple.Default;
+                fbeValue.f1000 = global::test.EnumSimple.Default;
             fbeCurrentSize += f1000.FBESize;
 
             if ((fbeCurrentSize + f1001.FBESize) <= fbeStructSize)
@@ -7575,7 +7599,7 @@ namespace test {
             if ((fbeCurrentSize + f1004.FBESize) <= fbeStructSize)
                 f1004.Get(out fbeValue.f1004);
             else
-                fbeValue.f1004 = FlagsSimple.Default;
+                fbeValue.f1004 = global::test.FlagsSimple.Default;
             fbeCurrentSize += f1004.FBESize;
 
             if ((fbeCurrentSize + f1005.FBESize) <= fbeStructSize)
@@ -7599,7 +7623,7 @@ namespace test {
             if ((fbeCurrentSize + f1008.FBESize) <= fbeStructSize)
                 f1008.Get(out fbeValue.f1008);
             else
-                fbeValue.f1008 = StructSimple.Default;
+                fbeValue.f1008 = global::test.StructSimple.Default;
             fbeCurrentSize += f1008.FBESize;
 
             if ((fbeCurrentSize + f1009.FBESize) <= fbeStructSize)
@@ -7611,7 +7635,7 @@ namespace test {
             if ((fbeCurrentSize + f1010.FBESize) <= fbeStructSize)
                 f1010.Get(out fbeValue.f1010);
             else
-                fbeValue.f1010 = StructOptional.Default;
+                fbeValue.f1010 = global::test.StructOptional.Default;
             fbeCurrentSize += f1010.FBESize;
 
             if ((fbeCurrentSize + f1011.FBESize) <= fbeStructSize)
@@ -8197,6 +8221,14 @@ namespace test {
         public MemoryStream f1;
         public MemoryStream f2;
         public MemoryStream f3;
+
+        public const long FBETypeConst = 120;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
 
         public static StructBytes Default => new StructBytes
         {
@@ -8851,6 +8883,14 @@ namespace test {
         public FlagsSimple?[] f8;
         public StructSimple[] f9;
         public StructSimple?[] f10;
+
+        public const long FBETypeConst = 125;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
 
         public static StructArray Default => new StructArray
         {
@@ -9919,6 +9959,14 @@ namespace test {
         public List<StructSimple> f9;
         public List<StructSimple?> f10;
 
+        public const long FBETypeConst = 130;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructVector Default => new StructVector
         {
             f1 = new List<byte>()
@@ -10986,6 +11034,14 @@ namespace test {
         public LinkedList<StructSimple> f9;
         public LinkedList<StructSimple?> f10;
 
+        public const long FBETypeConst = 131;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructList Default => new StructList
         {
             f1 = new LinkedList<byte>()
@@ -12047,6 +12103,14 @@ namespace test {
         public HashSet<FlagsSimple> f3;
         public HashSet<StructSimple> f4;
 
+        public const long FBETypeConst = 132;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructSet Default => new StructSet
         {
             f1 = new HashSet<byte>()
@@ -12795,6 +12859,14 @@ namespace test {
         public SortedDictionary<int, FlagsSimple?> f8;
         public SortedDictionary<int, StructSimple> f9;
         public SortedDictionary<int, StructSimple?> f10;
+
+        public const long FBETypeConst = 140;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
 
         public static StructMap Default => new StructMap
         {
@@ -13883,6 +13955,14 @@ namespace test {
         public Dictionary<string, StructSimple> f9;
         public Dictionary<string, StructSimple?> f10;
 
+        public const long FBETypeConst = 141;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructHash Default => new StructHash
         {
             f1 = new Dictionary<string, byte>()
@@ -14962,6 +15042,14 @@ namespace test {
         public Dictionary<StructSimple, StructNested> f1;
         public Dictionary<StructSimple, StructNested?> f2;
 
+        public const long FBETypeConst = 142;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructHashEx Default => new StructHashEx
         {
             f1 = new Dictionary<StructSimple, StructNested>()
@@ -15599,6 +15687,14 @@ namespace test {
     public struct StructEmpty : IComparable, IComparable<StructEmpty>, IEquatable<StructEmpty>
     {
 
+        public const long FBETypeConst = 143;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static StructEmpty Default => new StructEmpty
         {
         };
@@ -16124,256 +16220,16 @@ namespace test {
         public readonly proto.Sender protoSender;
 
         // Sender models accessors
-        public readonly StructSimpleModel StructSimpleModel;
-        public readonly StructOptionalModel StructOptionalModel;
-        public readonly StructNestedModel StructNestedModel;
-        public readonly StructBytesModel StructBytesModel;
-        public readonly StructArrayModel StructArrayModel;
-        public readonly StructVectorModel StructVectorModel;
-        public readonly StructListModel StructListModel;
-        public readonly StructSetModel StructSetModel;
-        public readonly StructMapModel StructMapModel;
-        public readonly StructHashModel StructHashModel;
-        public readonly StructHashExModel StructHashExModel;
-        public readonly StructEmptyModel StructEmptyModel;
 
         public Sender() : base(false)
         {
             protoSender = new proto.Sender(Buffer);
-            StructSimpleModel = new StructSimpleModel(Buffer);
-            StructOptionalModel = new StructOptionalModel(Buffer);
-            StructNestedModel = new StructNestedModel(Buffer);
-            StructBytesModel = new StructBytesModel(Buffer);
-            StructArrayModel = new StructArrayModel(Buffer);
-            StructVectorModel = new StructVectorModel(Buffer);
-            StructListModel = new StructListModel(Buffer);
-            StructSetModel = new StructSetModel(Buffer);
-            StructMapModel = new StructMapModel(Buffer);
-            StructHashModel = new StructHashModel(Buffer);
-            StructHashExModel = new StructHashExModel(Buffer);
-            StructEmptyModel = new StructEmptyModel(Buffer);
         }
         public Sender(Buffer buffer) : base(buffer, false)
         {
             protoSender = new proto.Sender(Buffer);
-            StructSimpleModel = new StructSimpleModel(Buffer);
-            StructOptionalModel = new StructOptionalModel(Buffer);
-            StructNestedModel = new StructNestedModel(Buffer);
-            StructBytesModel = new StructBytesModel(Buffer);
-            StructArrayModel = new StructArrayModel(Buffer);
-            StructVectorModel = new StructVectorModel(Buffer);
-            StructListModel = new StructListModel(Buffer);
-            StructSetModel = new StructSetModel(Buffer);
-            StructMapModel = new StructMapModel(Buffer);
-            StructHashModel = new StructHashModel(Buffer);
-            StructHashExModel = new StructHashExModel(Buffer);
-            StructEmptyModel = new StructEmptyModel(Buffer);
         }
 
-        public long Send(global::test.StructSimple value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructSimpleModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructSimple serialization failed!");
-            Debug.Assert(StructSimpleModel.Verify(), "test.StructSimple validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructOptional value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructOptionalModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructOptional serialization failed!");
-            Debug.Assert(StructOptionalModel.Verify(), "test.StructOptional validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructNested value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructNestedModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructNested serialization failed!");
-            Debug.Assert(StructNestedModel.Verify(), "test.StructNested validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructBytes value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructBytesModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructBytes serialization failed!");
-            Debug.Assert(StructBytesModel.Verify(), "test.StructBytes validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructArray value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructArrayModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructArray serialization failed!");
-            Debug.Assert(StructArrayModel.Verify(), "test.StructArray validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructVector value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructVectorModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructVector serialization failed!");
-            Debug.Assert(StructVectorModel.Verify(), "test.StructVector validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructList value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructListModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructList serialization failed!");
-            Debug.Assert(StructListModel.Verify(), "test.StructList validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructSet value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructSetModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructSet serialization failed!");
-            Debug.Assert(StructSetModel.Verify(), "test.StructSet validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructMap value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructMapModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructMap serialization failed!");
-            Debug.Assert(StructMapModel.Verify(), "test.StructMap validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructHash value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructHashModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructHash serialization failed!");
-            Debug.Assert(StructHashModel.Verify(), "test.StructHash validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructHashEx value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructHashExModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructHashEx serialization failed!");
-            Debug.Assert(StructHashExModel.Verify(), "test.StructHashEx validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructEmpty value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructEmptyModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructEmpty serialization failed!");
-            Debug.Assert(StructEmptyModel.Verify(), "test.StructEmpty validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
 
         // Send message handler
         protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.test.Sender.OnSend() not implemented!"); }
@@ -16392,336 +16248,25 @@ namespace test {
         public proto.Receiver protoReceiver;
 
         // Receiver values accessors
-        private global::test.StructSimple StructSimpleValue;
-        private global::test.StructOptional StructOptionalValue;
-        private global::test.StructNested StructNestedValue;
-        private global::test.StructBytes StructBytesValue;
-        private global::test.StructArray StructArrayValue;
-        private global::test.StructVector StructVectorValue;
-        private global::test.StructList StructListValue;
-        private global::test.StructSet StructSetValue;
-        private global::test.StructMap StructMapValue;
-        private global::test.StructHash StructHashValue;
-        private global::test.StructHashEx StructHashExValue;
-        private global::test.StructEmpty StructEmptyValue;
 
         // Receiver models accessors
-        private readonly StructSimpleModel StructSimpleModel;
-        private readonly StructOptionalModel StructOptionalModel;
-        private readonly StructNestedModel StructNestedModel;
-        private readonly StructBytesModel StructBytesModel;
-        private readonly StructArrayModel StructArrayModel;
-        private readonly StructVectorModel StructVectorModel;
-        private readonly StructListModel StructListModel;
-        private readonly StructSetModel StructSetModel;
-        private readonly StructMapModel StructMapModel;
-        private readonly StructHashModel StructHashModel;
-        private readonly StructHashExModel StructHashExModel;
-        private readonly StructEmptyModel StructEmptyModel;
 
         public Receiver() : base(false)
         {
             protoReceiver = new proto.Receiver(Buffer);
-            StructSimpleValue = global::test.StructSimple.Default;
-            StructSimpleModel = new StructSimpleModel();
-            StructOptionalValue = global::test.StructOptional.Default;
-            StructOptionalModel = new StructOptionalModel();
-            StructNestedValue = global::test.StructNested.Default;
-            StructNestedModel = new StructNestedModel();
-            StructBytesValue = global::test.StructBytes.Default;
-            StructBytesModel = new StructBytesModel();
-            StructArrayValue = global::test.StructArray.Default;
-            StructArrayModel = new StructArrayModel();
-            StructVectorValue = global::test.StructVector.Default;
-            StructVectorModel = new StructVectorModel();
-            StructListValue = global::test.StructList.Default;
-            StructListModel = new StructListModel();
-            StructSetValue = global::test.StructSet.Default;
-            StructSetModel = new StructSetModel();
-            StructMapValue = global::test.StructMap.Default;
-            StructMapModel = new StructMapModel();
-            StructHashValue = global::test.StructHash.Default;
-            StructHashModel = new StructHashModel();
-            StructHashExValue = global::test.StructHashEx.Default;
-            StructHashExModel = new StructHashExModel();
-            StructEmptyValue = global::test.StructEmpty.Default;
-            StructEmptyModel = new StructEmptyModel();
         }
         public Receiver(Buffer buffer) : base(buffer, false)
         {
             protoReceiver = new proto.Receiver(Buffer);
-            StructSimpleValue = global::test.StructSimple.Default;
-            StructSimpleModel = new StructSimpleModel();
-            StructOptionalValue = global::test.StructOptional.Default;
-            StructOptionalModel = new StructOptionalModel();
-            StructNestedValue = global::test.StructNested.Default;
-            StructNestedModel = new StructNestedModel();
-            StructBytesValue = global::test.StructBytes.Default;
-            StructBytesModel = new StructBytesModel();
-            StructArrayValue = global::test.StructArray.Default;
-            StructArrayModel = new StructArrayModel();
-            StructVectorValue = global::test.StructVector.Default;
-            StructVectorModel = new StructVectorModel();
-            StructListValue = global::test.StructList.Default;
-            StructListModel = new StructListModel();
-            StructSetValue = global::test.StructSet.Default;
-            StructSetModel = new StructSetModel();
-            StructMapValue = global::test.StructMap.Default;
-            StructMapModel = new StructMapModel();
-            StructHashValue = global::test.StructHash.Default;
-            StructHashModel = new StructHashModel();
-            StructHashExValue = global::test.StructHashEx.Default;
-            StructHashExModel = new StructHashExModel();
-            StructEmptyValue = global::test.StructEmpty.Default;
-            StructEmptyModel = new StructEmptyModel();
         }
 
         // Receive handlers
-        protected virtual void OnReceive(global::test.StructSimple value) {}
-        protected virtual void OnReceive(global::test.StructOptional value) {}
-        protected virtual void OnReceive(global::test.StructNested value) {}
-        protected virtual void OnReceive(global::test.StructBytes value) {}
-        protected virtual void OnReceive(global::test.StructArray value) {}
-        protected virtual void OnReceive(global::test.StructVector value) {}
-        protected virtual void OnReceive(global::test.StructList value) {}
-        protected virtual void OnReceive(global::test.StructSet value) {}
-        protected virtual void OnReceive(global::test.StructMap value) {}
-        protected virtual void OnReceive(global::test.StructHash value) {}
-        protected virtual void OnReceive(global::test.StructHashEx value) {}
-        protected virtual void OnReceive(global::test.StructEmpty value) {}
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
-                case StructSimpleModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructSimpleModel.Attach(buffer, offset);
-                    Debug.Assert(StructSimpleModel.Verify(), "test.StructSimple validation failed!");
-                    long deserialized = StructSimpleModel.Deserialize(out StructSimpleValue);
-                    Debug.Assert((deserialized > 0), "test.StructSimple deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructSimpleValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructSimpleValue);
-                    return true;
-                }
-                case StructOptionalModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructOptionalModel.Attach(buffer, offset);
-                    Debug.Assert(StructOptionalModel.Verify(), "test.StructOptional validation failed!");
-                    long deserialized = StructOptionalModel.Deserialize(out StructOptionalValue);
-                    Debug.Assert((deserialized > 0), "test.StructOptional deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructOptionalValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructOptionalValue);
-                    return true;
-                }
-                case StructNestedModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructNestedModel.Attach(buffer, offset);
-                    Debug.Assert(StructNestedModel.Verify(), "test.StructNested validation failed!");
-                    long deserialized = StructNestedModel.Deserialize(out StructNestedValue);
-                    Debug.Assert((deserialized > 0), "test.StructNested deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructNestedValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructNestedValue);
-                    return true;
-                }
-                case StructBytesModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructBytesModel.Attach(buffer, offset);
-                    Debug.Assert(StructBytesModel.Verify(), "test.StructBytes validation failed!");
-                    long deserialized = StructBytesModel.Deserialize(out StructBytesValue);
-                    Debug.Assert((deserialized > 0), "test.StructBytes deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructBytesValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructBytesValue);
-                    return true;
-                }
-                case StructArrayModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructArrayModel.Attach(buffer, offset);
-                    Debug.Assert(StructArrayModel.Verify(), "test.StructArray validation failed!");
-                    long deserialized = StructArrayModel.Deserialize(out StructArrayValue);
-                    Debug.Assert((deserialized > 0), "test.StructArray deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructArrayValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructArrayValue);
-                    return true;
-                }
-                case StructVectorModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructVectorModel.Attach(buffer, offset);
-                    Debug.Assert(StructVectorModel.Verify(), "test.StructVector validation failed!");
-                    long deserialized = StructVectorModel.Deserialize(out StructVectorValue);
-                    Debug.Assert((deserialized > 0), "test.StructVector deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructVectorValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructVectorValue);
-                    return true;
-                }
-                case StructListModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructListModel.Attach(buffer, offset);
-                    Debug.Assert(StructListModel.Verify(), "test.StructList validation failed!");
-                    long deserialized = StructListModel.Deserialize(out StructListValue);
-                    Debug.Assert((deserialized > 0), "test.StructList deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructListValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructListValue);
-                    return true;
-                }
-                case StructSetModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructSetModel.Attach(buffer, offset);
-                    Debug.Assert(StructSetModel.Verify(), "test.StructSet validation failed!");
-                    long deserialized = StructSetModel.Deserialize(out StructSetValue);
-                    Debug.Assert((deserialized > 0), "test.StructSet deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructSetValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructSetValue);
-                    return true;
-                }
-                case StructMapModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructMapModel.Attach(buffer, offset);
-                    Debug.Assert(StructMapModel.Verify(), "test.StructMap validation failed!");
-                    long deserialized = StructMapModel.Deserialize(out StructMapValue);
-                    Debug.Assert((deserialized > 0), "test.StructMap deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructMapValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructMapValue);
-                    return true;
-                }
-                case StructHashModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructHashModel.Attach(buffer, offset);
-                    Debug.Assert(StructHashModel.Verify(), "test.StructHash validation failed!");
-                    long deserialized = StructHashModel.Deserialize(out StructHashValue);
-                    Debug.Assert((deserialized > 0), "test.StructHash deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructHashValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructHashValue);
-                    return true;
-                }
-                case StructHashExModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructHashExModel.Attach(buffer, offset);
-                    Debug.Assert(StructHashExModel.Verify(), "test.StructHashEx validation failed!");
-                    long deserialized = StructHashExModel.Deserialize(out StructHashExValue);
-                    Debug.Assert((deserialized > 0), "test.StructHashEx deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructHashExValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructHashExValue);
-                    return true;
-                }
-                case StructEmptyModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructEmptyModel.Attach(buffer, offset);
-                    Debug.Assert(StructEmptyModel.Verify(), "test.StructEmpty validation failed!");
-                    long deserialized = StructEmptyModel.Deserialize(out StructEmptyValue);
-                    Debug.Assert((deserialized > 0), "test.StructEmpty deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructEmptyValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructEmptyValue);
-                    return true;
-                }
+                default: break;
             }
 
             if ((protoReceiver != null) && protoReceiver.OnReceive(type, buffer, offset, size))
@@ -16744,238 +16289,23 @@ namespace test {
         public proto.Proxy protoProxy;
 
         // Proxy models accessors
-        private readonly StructSimpleModel StructSimpleModel;
-        private readonly StructOptionalModel StructOptionalModel;
-        private readonly StructNestedModel StructNestedModel;
-        private readonly StructBytesModel StructBytesModel;
-        private readonly StructArrayModel StructArrayModel;
-        private readonly StructVectorModel StructVectorModel;
-        private readonly StructListModel StructListModel;
-        private readonly StructSetModel StructSetModel;
-        private readonly StructMapModel StructMapModel;
-        private readonly StructHashModel StructHashModel;
-        private readonly StructHashExModel StructHashExModel;
-        private readonly StructEmptyModel StructEmptyModel;
 
         public Proxy() : base(false)
         {
             protoProxy = new proto.Proxy(Buffer);
-            StructSimpleModel = new StructSimpleModel();
-            StructOptionalModel = new StructOptionalModel();
-            StructNestedModel = new StructNestedModel();
-            StructBytesModel = new StructBytesModel();
-            StructArrayModel = new StructArrayModel();
-            StructVectorModel = new StructVectorModel();
-            StructListModel = new StructListModel();
-            StructSetModel = new StructSetModel();
-            StructMapModel = new StructMapModel();
-            StructHashModel = new StructHashModel();
-            StructHashExModel = new StructHashExModel();
-            StructEmptyModel = new StructEmptyModel();
         }
         public Proxy(Buffer buffer) : base(buffer, false)
         {
             protoProxy = new proto.Proxy(Buffer);
-            StructSimpleModel = new StructSimpleModel();
-            StructOptionalModel = new StructOptionalModel();
-            StructNestedModel = new StructNestedModel();
-            StructBytesModel = new StructBytesModel();
-            StructArrayModel = new StructArrayModel();
-            StructVectorModel = new StructVectorModel();
-            StructListModel = new StructListModel();
-            StructSetModel = new StructSetModel();
-            StructMapModel = new StructMapModel();
-            StructHashModel = new StructHashModel();
-            StructHashExModel = new StructHashExModel();
-            StructEmptyModel = new StructEmptyModel();
         }
 
         // Proxy handlers
-        protected virtual void OnProxy(StructSimpleModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(StructOptionalModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(StructNestedModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(StructBytesModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(StructArrayModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(StructVectorModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(StructListModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(StructSetModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(StructMapModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(StructHashModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(StructHashExModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(StructEmptyModel model, long type, byte[] buffer, long offset, long size) {}
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
-                case StructSimpleModel.FBETypeConst:
-                {
-                    // Attach the FBE stream to the proxy model
-                    StructSimpleModel.Attach(buffer, offset);
-                    Debug.Assert(StructSimpleModel.Verify(), "test.StructSimple validation failed!");
-
-                    long fbeBegin = StructSimpleModel.model.GetBegin();
-                    if (fbeBegin == 0)
-                        return false;
-                    // Call proxy handler
-                    OnProxy(StructSimpleModel, type, buffer, offset, size);
-                    StructSimpleModel.model.GetEnd(fbeBegin);
-                    return true;
-                }
-                case StructOptionalModel.FBETypeConst:
-                {
-                    // Attach the FBE stream to the proxy model
-                    StructOptionalModel.Attach(buffer, offset);
-                    Debug.Assert(StructOptionalModel.Verify(), "test.StructOptional validation failed!");
-
-                    long fbeBegin = StructOptionalModel.model.GetBegin();
-                    if (fbeBegin == 0)
-                        return false;
-                    // Call proxy handler
-                    OnProxy(StructOptionalModel, type, buffer, offset, size);
-                    StructOptionalModel.model.GetEnd(fbeBegin);
-                    return true;
-                }
-                case StructNestedModel.FBETypeConst:
-                {
-                    // Attach the FBE stream to the proxy model
-                    StructNestedModel.Attach(buffer, offset);
-                    Debug.Assert(StructNestedModel.Verify(), "test.StructNested validation failed!");
-
-                    long fbeBegin = StructNestedModel.model.GetBegin();
-                    if (fbeBegin == 0)
-                        return false;
-                    // Call proxy handler
-                    OnProxy(StructNestedModel, type, buffer, offset, size);
-                    StructNestedModel.model.GetEnd(fbeBegin);
-                    return true;
-                }
-                case StructBytesModel.FBETypeConst:
-                {
-                    // Attach the FBE stream to the proxy model
-                    StructBytesModel.Attach(buffer, offset);
-                    Debug.Assert(StructBytesModel.Verify(), "test.StructBytes validation failed!");
-
-                    long fbeBegin = StructBytesModel.model.GetBegin();
-                    if (fbeBegin == 0)
-                        return false;
-                    // Call proxy handler
-                    OnProxy(StructBytesModel, type, buffer, offset, size);
-                    StructBytesModel.model.GetEnd(fbeBegin);
-                    return true;
-                }
-                case StructArrayModel.FBETypeConst:
-                {
-                    // Attach the FBE stream to the proxy model
-                    StructArrayModel.Attach(buffer, offset);
-                    Debug.Assert(StructArrayModel.Verify(), "test.StructArray validation failed!");
-
-                    long fbeBegin = StructArrayModel.model.GetBegin();
-                    if (fbeBegin == 0)
-                        return false;
-                    // Call proxy handler
-                    OnProxy(StructArrayModel, type, buffer, offset, size);
-                    StructArrayModel.model.GetEnd(fbeBegin);
-                    return true;
-                }
-                case StructVectorModel.FBETypeConst:
-                {
-                    // Attach the FBE stream to the proxy model
-                    StructVectorModel.Attach(buffer, offset);
-                    Debug.Assert(StructVectorModel.Verify(), "test.StructVector validation failed!");
-
-                    long fbeBegin = StructVectorModel.model.GetBegin();
-                    if (fbeBegin == 0)
-                        return false;
-                    // Call proxy handler
-                    OnProxy(StructVectorModel, type, buffer, offset, size);
-                    StructVectorModel.model.GetEnd(fbeBegin);
-                    return true;
-                }
-                case StructListModel.FBETypeConst:
-                {
-                    // Attach the FBE stream to the proxy model
-                    StructListModel.Attach(buffer, offset);
-                    Debug.Assert(StructListModel.Verify(), "test.StructList validation failed!");
-
-                    long fbeBegin = StructListModel.model.GetBegin();
-                    if (fbeBegin == 0)
-                        return false;
-                    // Call proxy handler
-                    OnProxy(StructListModel, type, buffer, offset, size);
-                    StructListModel.model.GetEnd(fbeBegin);
-                    return true;
-                }
-                case StructSetModel.FBETypeConst:
-                {
-                    // Attach the FBE stream to the proxy model
-                    StructSetModel.Attach(buffer, offset);
-                    Debug.Assert(StructSetModel.Verify(), "test.StructSet validation failed!");
-
-                    long fbeBegin = StructSetModel.model.GetBegin();
-                    if (fbeBegin == 0)
-                        return false;
-                    // Call proxy handler
-                    OnProxy(StructSetModel, type, buffer, offset, size);
-                    StructSetModel.model.GetEnd(fbeBegin);
-                    return true;
-                }
-                case StructMapModel.FBETypeConst:
-                {
-                    // Attach the FBE stream to the proxy model
-                    StructMapModel.Attach(buffer, offset);
-                    Debug.Assert(StructMapModel.Verify(), "test.StructMap validation failed!");
-
-                    long fbeBegin = StructMapModel.model.GetBegin();
-                    if (fbeBegin == 0)
-                        return false;
-                    // Call proxy handler
-                    OnProxy(StructMapModel, type, buffer, offset, size);
-                    StructMapModel.model.GetEnd(fbeBegin);
-                    return true;
-                }
-                case StructHashModel.FBETypeConst:
-                {
-                    // Attach the FBE stream to the proxy model
-                    StructHashModel.Attach(buffer, offset);
-                    Debug.Assert(StructHashModel.Verify(), "test.StructHash validation failed!");
-
-                    long fbeBegin = StructHashModel.model.GetBegin();
-                    if (fbeBegin == 0)
-                        return false;
-                    // Call proxy handler
-                    OnProxy(StructHashModel, type, buffer, offset, size);
-                    StructHashModel.model.GetEnd(fbeBegin);
-                    return true;
-                }
-                case StructHashExModel.FBETypeConst:
-                {
-                    // Attach the FBE stream to the proxy model
-                    StructHashExModel.Attach(buffer, offset);
-                    Debug.Assert(StructHashExModel.Verify(), "test.StructHashEx validation failed!");
-
-                    long fbeBegin = StructHashExModel.model.GetBegin();
-                    if (fbeBegin == 0)
-                        return false;
-                    // Call proxy handler
-                    OnProxy(StructHashExModel, type, buffer, offset, size);
-                    StructHashExModel.model.GetEnd(fbeBegin);
-                    return true;
-                }
-                case StructEmptyModel.FBETypeConst:
-                {
-                    // Attach the FBE stream to the proxy model
-                    StructEmptyModel.Attach(buffer, offset);
-                    Debug.Assert(StructEmptyModel.Verify(), "test.StructEmpty validation failed!");
-
-                    long fbeBegin = StructEmptyModel.model.GetBegin();
-                    if (fbeBegin == 0)
-                        return false;
-                    // Call proxy handler
-                    OnProxy(StructEmptyModel, type, buffer, offset, size);
-                    StructEmptyModel.model.GetEnd(fbeBegin);
-                    return true;
-                }
+                default: break;
             }
 
             if ((protoProxy != null) && protoProxy.OnReceive(type, buffer, offset, size))
@@ -16998,256 +16328,16 @@ namespace test {
         public readonly proto.FinalSender protoSender;
 
         // Sender models accessors
-        public readonly StructSimpleFinalModel StructSimpleModel;
-        public readonly StructOptionalFinalModel StructOptionalModel;
-        public readonly StructNestedFinalModel StructNestedModel;
-        public readonly StructBytesFinalModel StructBytesModel;
-        public readonly StructArrayFinalModel StructArrayModel;
-        public readonly StructVectorFinalModel StructVectorModel;
-        public readonly StructListFinalModel StructListModel;
-        public readonly StructSetFinalModel StructSetModel;
-        public readonly StructMapFinalModel StructMapModel;
-        public readonly StructHashFinalModel StructHashModel;
-        public readonly StructHashExFinalModel StructHashExModel;
-        public readonly StructEmptyFinalModel StructEmptyModel;
 
         public FinalSender() : base(true)
         {
             protoSender = new proto.FinalSender(Buffer);
-            StructSimpleModel = new StructSimpleFinalModel(Buffer);
-            StructOptionalModel = new StructOptionalFinalModel(Buffer);
-            StructNestedModel = new StructNestedFinalModel(Buffer);
-            StructBytesModel = new StructBytesFinalModel(Buffer);
-            StructArrayModel = new StructArrayFinalModel(Buffer);
-            StructVectorModel = new StructVectorFinalModel(Buffer);
-            StructListModel = new StructListFinalModel(Buffer);
-            StructSetModel = new StructSetFinalModel(Buffer);
-            StructMapModel = new StructMapFinalModel(Buffer);
-            StructHashModel = new StructHashFinalModel(Buffer);
-            StructHashExModel = new StructHashExFinalModel(Buffer);
-            StructEmptyModel = new StructEmptyFinalModel(Buffer);
         }
         public FinalSender(Buffer buffer) : base(buffer, true)
         {
             protoSender = new proto.FinalSender(Buffer);
-            StructSimpleModel = new StructSimpleFinalModel(Buffer);
-            StructOptionalModel = new StructOptionalFinalModel(Buffer);
-            StructNestedModel = new StructNestedFinalModel(Buffer);
-            StructBytesModel = new StructBytesFinalModel(Buffer);
-            StructArrayModel = new StructArrayFinalModel(Buffer);
-            StructVectorModel = new StructVectorFinalModel(Buffer);
-            StructListModel = new StructListFinalModel(Buffer);
-            StructSetModel = new StructSetFinalModel(Buffer);
-            StructMapModel = new StructMapFinalModel(Buffer);
-            StructHashModel = new StructHashFinalModel(Buffer);
-            StructHashExModel = new StructHashExFinalModel(Buffer);
-            StructEmptyModel = new StructEmptyFinalModel(Buffer);
         }
 
-        public long Send(global::test.StructSimple value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructSimpleModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructSimple serialization failed!");
-            Debug.Assert(StructSimpleModel.Verify(), "test.StructSimple validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructOptional value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructOptionalModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructOptional serialization failed!");
-            Debug.Assert(StructOptionalModel.Verify(), "test.StructOptional validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructNested value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructNestedModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructNested serialization failed!");
-            Debug.Assert(StructNestedModel.Verify(), "test.StructNested validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructBytes value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructBytesModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructBytes serialization failed!");
-            Debug.Assert(StructBytesModel.Verify(), "test.StructBytes validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructArray value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructArrayModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructArray serialization failed!");
-            Debug.Assert(StructArrayModel.Verify(), "test.StructArray validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructVector value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructVectorModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructVector serialization failed!");
-            Debug.Assert(StructVectorModel.Verify(), "test.StructVector validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructList value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructListModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructList serialization failed!");
-            Debug.Assert(StructListModel.Verify(), "test.StructList validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructSet value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructSetModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructSet serialization failed!");
-            Debug.Assert(StructSetModel.Verify(), "test.StructSet validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructMap value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructMapModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructMap serialization failed!");
-            Debug.Assert(StructMapModel.Verify(), "test.StructMap validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructHash value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructHashModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructHash serialization failed!");
-            Debug.Assert(StructHashModel.Verify(), "test.StructHash validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructHashEx value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructHashExModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructHashEx serialization failed!");
-            Debug.Assert(StructHashExModel.Verify(), "test.StructHashEx validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
-        public long Send(global::test.StructEmpty value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = StructEmptyModel.Serialize(value);
-            Debug.Assert((serialized > 0), "test.StructEmpty serialization failed!");
-            Debug.Assert(StructEmptyModel.Verify(), "test.StructEmpty validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
 
         // Send message handler
         protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.test.Sender.OnSend() not implemented!"); }
@@ -17266,336 +16356,25 @@ namespace test {
         public proto.FinalReceiver protoReceiver;
 
         // Receiver values accessors
-        private global::test.StructSimple StructSimpleValue;
-        private global::test.StructOptional StructOptionalValue;
-        private global::test.StructNested StructNestedValue;
-        private global::test.StructBytes StructBytesValue;
-        private global::test.StructArray StructArrayValue;
-        private global::test.StructVector StructVectorValue;
-        private global::test.StructList StructListValue;
-        private global::test.StructSet StructSetValue;
-        private global::test.StructMap StructMapValue;
-        private global::test.StructHash StructHashValue;
-        private global::test.StructHashEx StructHashExValue;
-        private global::test.StructEmpty StructEmptyValue;
 
         // Receiver models accessors
-        private readonly StructSimpleFinalModel StructSimpleModel;
-        private readonly StructOptionalFinalModel StructOptionalModel;
-        private readonly StructNestedFinalModel StructNestedModel;
-        private readonly StructBytesFinalModel StructBytesModel;
-        private readonly StructArrayFinalModel StructArrayModel;
-        private readonly StructVectorFinalModel StructVectorModel;
-        private readonly StructListFinalModel StructListModel;
-        private readonly StructSetFinalModel StructSetModel;
-        private readonly StructMapFinalModel StructMapModel;
-        private readonly StructHashFinalModel StructHashModel;
-        private readonly StructHashExFinalModel StructHashExModel;
-        private readonly StructEmptyFinalModel StructEmptyModel;
 
         public FinalReceiver() : base(true)
         {
             protoReceiver = new proto.FinalReceiver(Buffer);
-            StructSimpleValue = global::test.StructSimple.Default;
-            StructSimpleModel = new StructSimpleFinalModel();
-            StructOptionalValue = global::test.StructOptional.Default;
-            StructOptionalModel = new StructOptionalFinalModel();
-            StructNestedValue = global::test.StructNested.Default;
-            StructNestedModel = new StructNestedFinalModel();
-            StructBytesValue = global::test.StructBytes.Default;
-            StructBytesModel = new StructBytesFinalModel();
-            StructArrayValue = global::test.StructArray.Default;
-            StructArrayModel = new StructArrayFinalModel();
-            StructVectorValue = global::test.StructVector.Default;
-            StructVectorModel = new StructVectorFinalModel();
-            StructListValue = global::test.StructList.Default;
-            StructListModel = new StructListFinalModel();
-            StructSetValue = global::test.StructSet.Default;
-            StructSetModel = new StructSetFinalModel();
-            StructMapValue = global::test.StructMap.Default;
-            StructMapModel = new StructMapFinalModel();
-            StructHashValue = global::test.StructHash.Default;
-            StructHashModel = new StructHashFinalModel();
-            StructHashExValue = global::test.StructHashEx.Default;
-            StructHashExModel = new StructHashExFinalModel();
-            StructEmptyValue = global::test.StructEmpty.Default;
-            StructEmptyModel = new StructEmptyFinalModel();
         }
         public FinalReceiver(Buffer buffer) : base(buffer, true)
         {
             protoReceiver = new proto.FinalReceiver(Buffer);
-            StructSimpleValue = global::test.StructSimple.Default;
-            StructSimpleModel = new StructSimpleFinalModel();
-            StructOptionalValue = global::test.StructOptional.Default;
-            StructOptionalModel = new StructOptionalFinalModel();
-            StructNestedValue = global::test.StructNested.Default;
-            StructNestedModel = new StructNestedFinalModel();
-            StructBytesValue = global::test.StructBytes.Default;
-            StructBytesModel = new StructBytesFinalModel();
-            StructArrayValue = global::test.StructArray.Default;
-            StructArrayModel = new StructArrayFinalModel();
-            StructVectorValue = global::test.StructVector.Default;
-            StructVectorModel = new StructVectorFinalModel();
-            StructListValue = global::test.StructList.Default;
-            StructListModel = new StructListFinalModel();
-            StructSetValue = global::test.StructSet.Default;
-            StructSetModel = new StructSetFinalModel();
-            StructMapValue = global::test.StructMap.Default;
-            StructMapModel = new StructMapFinalModel();
-            StructHashValue = global::test.StructHash.Default;
-            StructHashModel = new StructHashFinalModel();
-            StructHashExValue = global::test.StructHashEx.Default;
-            StructHashExModel = new StructHashExFinalModel();
-            StructEmptyValue = global::test.StructEmpty.Default;
-            StructEmptyModel = new StructEmptyFinalModel();
         }
 
         // Receive handlers
-        protected virtual void OnReceive(global::test.StructSimple value) {}
-        protected virtual void OnReceive(global::test.StructOptional value) {}
-        protected virtual void OnReceive(global::test.StructNested value) {}
-        protected virtual void OnReceive(global::test.StructBytes value) {}
-        protected virtual void OnReceive(global::test.StructArray value) {}
-        protected virtual void OnReceive(global::test.StructVector value) {}
-        protected virtual void OnReceive(global::test.StructList value) {}
-        protected virtual void OnReceive(global::test.StructSet value) {}
-        protected virtual void OnReceive(global::test.StructMap value) {}
-        protected virtual void OnReceive(global::test.StructHash value) {}
-        protected virtual void OnReceive(global::test.StructHashEx value) {}
-        protected virtual void OnReceive(global::test.StructEmpty value) {}
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
-                case StructSimpleFinalModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructSimpleModel.Attach(buffer, offset);
-                    Debug.Assert(StructSimpleModel.Verify(), "test.StructSimple validation failed!");
-                    long deserialized = StructSimpleModel.Deserialize(out StructSimpleValue);
-                    Debug.Assert((deserialized > 0), "test.StructSimple deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructSimpleValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructSimpleValue);
-                    return true;
-                }
-                case StructOptionalFinalModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructOptionalModel.Attach(buffer, offset);
-                    Debug.Assert(StructOptionalModel.Verify(), "test.StructOptional validation failed!");
-                    long deserialized = StructOptionalModel.Deserialize(out StructOptionalValue);
-                    Debug.Assert((deserialized > 0), "test.StructOptional deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructOptionalValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructOptionalValue);
-                    return true;
-                }
-                case StructNestedFinalModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructNestedModel.Attach(buffer, offset);
-                    Debug.Assert(StructNestedModel.Verify(), "test.StructNested validation failed!");
-                    long deserialized = StructNestedModel.Deserialize(out StructNestedValue);
-                    Debug.Assert((deserialized > 0), "test.StructNested deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructNestedValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructNestedValue);
-                    return true;
-                }
-                case StructBytesFinalModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructBytesModel.Attach(buffer, offset);
-                    Debug.Assert(StructBytesModel.Verify(), "test.StructBytes validation failed!");
-                    long deserialized = StructBytesModel.Deserialize(out StructBytesValue);
-                    Debug.Assert((deserialized > 0), "test.StructBytes deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructBytesValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructBytesValue);
-                    return true;
-                }
-                case StructArrayFinalModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructArrayModel.Attach(buffer, offset);
-                    Debug.Assert(StructArrayModel.Verify(), "test.StructArray validation failed!");
-                    long deserialized = StructArrayModel.Deserialize(out StructArrayValue);
-                    Debug.Assert((deserialized > 0), "test.StructArray deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructArrayValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructArrayValue);
-                    return true;
-                }
-                case StructVectorFinalModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructVectorModel.Attach(buffer, offset);
-                    Debug.Assert(StructVectorModel.Verify(), "test.StructVector validation failed!");
-                    long deserialized = StructVectorModel.Deserialize(out StructVectorValue);
-                    Debug.Assert((deserialized > 0), "test.StructVector deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructVectorValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructVectorValue);
-                    return true;
-                }
-                case StructListFinalModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructListModel.Attach(buffer, offset);
-                    Debug.Assert(StructListModel.Verify(), "test.StructList validation failed!");
-                    long deserialized = StructListModel.Deserialize(out StructListValue);
-                    Debug.Assert((deserialized > 0), "test.StructList deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructListValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructListValue);
-                    return true;
-                }
-                case StructSetFinalModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructSetModel.Attach(buffer, offset);
-                    Debug.Assert(StructSetModel.Verify(), "test.StructSet validation failed!");
-                    long deserialized = StructSetModel.Deserialize(out StructSetValue);
-                    Debug.Assert((deserialized > 0), "test.StructSet deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructSetValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructSetValue);
-                    return true;
-                }
-                case StructMapFinalModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructMapModel.Attach(buffer, offset);
-                    Debug.Assert(StructMapModel.Verify(), "test.StructMap validation failed!");
-                    long deserialized = StructMapModel.Deserialize(out StructMapValue);
-                    Debug.Assert((deserialized > 0), "test.StructMap deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructMapValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructMapValue);
-                    return true;
-                }
-                case StructHashFinalModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructHashModel.Attach(buffer, offset);
-                    Debug.Assert(StructHashModel.Verify(), "test.StructHash validation failed!");
-                    long deserialized = StructHashModel.Deserialize(out StructHashValue);
-                    Debug.Assert((deserialized > 0), "test.StructHash deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructHashValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructHashValue);
-                    return true;
-                }
-                case StructHashExFinalModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructHashExModel.Attach(buffer, offset);
-                    Debug.Assert(StructHashExModel.Verify(), "test.StructHashEx validation failed!");
-                    long deserialized = StructHashExModel.Deserialize(out StructHashExValue);
-                    Debug.Assert((deserialized > 0), "test.StructHashEx deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructHashExValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructHashExValue);
-                    return true;
-                }
-                case StructEmptyFinalModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    StructEmptyModel.Attach(buffer, offset);
-                    Debug.Assert(StructEmptyModel.Verify(), "test.StructEmpty validation failed!");
-                    long deserialized = StructEmptyModel.Deserialize(out StructEmptyValue);
-                    Debug.Assert((deserialized > 0), "test.StructEmpty deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = StructEmptyValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(StructEmptyValue);
-                    return true;
-                }
+                default: break;
             }
 
             if ((protoReceiver != null) && protoReceiver.OnReceive(type, buffer, offset, size))

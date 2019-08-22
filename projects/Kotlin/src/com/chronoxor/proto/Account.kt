@@ -10,16 +10,16 @@ package com.chronoxor.proto
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class Account : Comparable<Any?>
 {
-    var id: Int = 0
-    var name: String = ""
-    var state: State = State.fromSet(java.util.EnumSet.of(State.initialized.value, State.bad.value))
-    var wallet: Balance = Balance()
-    var asset: Balance? = null
-    var orders: java.util.ArrayList<Order> = java.util.ArrayList()
+    var id: Int
+    var name: String
+    var state: State
+    var wallet: Balance
+    var asset: Balance?
+    var orders: java.util.ArrayList<Order>
 
-    constructor()
+    @Transient open var fbeType: Long = 3
 
-    constructor(id: Int, name: String, state: State, wallet: Balance, asset: Balance?, orders: java.util.ArrayList<Order>)
+    constructor(id: Int = 0, name: String = "", state: State = State.fromSet(java.util.EnumSet.of(State.initialized.value, State.bad.value)), wallet: Balance = Balance(), asset: Balance? = null, orders: java.util.ArrayList<Order> = java.util.ArrayList())
     {
         this.id = id
         this.name = name
@@ -121,8 +121,10 @@ open class Account : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.proto.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 3
         fun fromJson(json: String): Account = com.chronoxor.proto.fbe.Json.engine.fromJson(json, Account::class.java)
     }
 }

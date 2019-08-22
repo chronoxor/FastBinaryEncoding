@@ -10,55 +10,55 @@ package com.chronoxor.test
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructSimple : Comparable<Any?>
 {
-    var id: Int = 0
-    var f1: Boolean = false
-    var f2: Boolean = true
-    var f3: Byte = 0.toByte()
-    var f4: Byte = 0xFF.toByte()
-    var f5: Char = '\u0000'
-    var f6: Char = '!'.toChar()
-    var f7: Char = '\u0000'
-    var f8: Char = 0x0444.toChar()
-    var f9: Byte = 0.toByte()
-    var f10: Byte = Byte.MAX_VALUE
-    var f11: UByte = UByte.MIN_VALUE
-    var f12: UByte = UByte.MAX_VALUE
-    var f13: Short = 0.toShort()
-    var f14: Short = Short.MAX_VALUE
-    var f15: UShort = UShort.MIN_VALUE
-    var f16: UShort = UShort.MAX_VALUE
-    var f17: Int = 0
-    var f18: Int = Int.MAX_VALUE
-    var f19: UInt = UInt.MIN_VALUE
-    var f20: UInt = UInt.MAX_VALUE
-    var f21: Long = 0L
-    var f22: Long = Long.MAX_VALUE
-    var f23: ULong = ULong.MIN_VALUE
-    var f24: ULong = ULong.MAX_VALUE
-    var f25: Float = 0.0f
-    var f26: Float = 123.456f
-    var f27: Double = 0.0
-    var f28: Double = -123.456e+123
-    var f29: java.math.BigDecimal = java.math.BigDecimal.valueOf(0L)
-    var f30: java.math.BigDecimal = java.math.BigDecimal.valueOf(123456.123456)
-    var f31: String = ""
-    var f32: String = "Initial string!"
-    var f33: java.time.Instant = java.time.Instant.EPOCH
-    var f34: java.time.Instant = java.time.Instant.EPOCH
-    var f35: java.time.Instant = java.time.Instant.now()
-    var f36: java.util.UUID = com.chronoxor.fbe.UUIDGenerator.nil()
-    var f37: java.util.UUID = com.chronoxor.fbe.UUIDGenerator.sequential()
-    var f38: java.util.UUID = java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000")
-    var f39: com.chronoxor.proto.OrderSide = com.chronoxor.proto.OrderSide()
-    var f40: com.chronoxor.proto.OrderType = com.chronoxor.proto.OrderType()
-    var f41: com.chronoxor.proto.Order = com.chronoxor.proto.Order()
-    var f42: com.chronoxor.proto.Balance = com.chronoxor.proto.Balance()
-    var f43: com.chronoxor.proto.State = com.chronoxor.proto.State()
-    var f44: com.chronoxor.proto.Account = com.chronoxor.proto.Account()
+    var id: Int
+    var f1: Boolean
+    var f2: Boolean
+    var f3: Byte
+    var f4: Byte
+    var f5: Char
+    var f6: Char
+    var f7: Char
+    var f8: Char
+    var f9: Byte
+    var f10: Byte
+    var f11: UByte
+    var f12: UByte
+    var f13: Short
+    var f14: Short
+    var f15: UShort
+    var f16: UShort
+    var f17: Int
+    var f18: Int
+    var f19: UInt
+    var f20: UInt
+    var f21: Long
+    var f22: Long
+    var f23: ULong
+    var f24: ULong
+    var f25: Float
+    var f26: Float
+    var f27: Double
+    var f28: Double
+    var f29: java.math.BigDecimal
+    var f30: java.math.BigDecimal
+    var f31: String
+    var f32: String
+    var f33: java.time.Instant
+    var f34: java.time.Instant
+    var f35: java.time.Instant
+    var f36: java.util.UUID
+    var f37: java.util.UUID
+    var f38: java.util.UUID
+    var f39: com.chronoxor.proto.OrderSide
+    var f40: com.chronoxor.proto.OrderType
+    var f41: com.chronoxor.proto.Order
+    var f42: com.chronoxor.proto.Balance
+    var f43: com.chronoxor.proto.State
+    var f44: com.chronoxor.proto.Account
 
-    constructor()
+    @Transient open var fbeType: Long = 110
 
-    constructor(id: Int, f1: Boolean, f2: Boolean, f3: Byte, f4: Byte, f5: Char, f6: Char, f7: Char, f8: Char, f9: Byte, f10: Byte, f11: UByte, f12: UByte, f13: Short, f14: Short, f15: UShort, f16: UShort, f17: Int, f18: Int, f19: UInt, f20: UInt, f21: Long, f22: Long, f23: ULong, f24: ULong, f25: Float, f26: Float, f27: Double, f28: Double, f29: java.math.BigDecimal, f30: java.math.BigDecimal, f31: String, f32: String, f33: java.time.Instant, f34: java.time.Instant, f35: java.time.Instant, f36: java.util.UUID, f37: java.util.UUID, f38: java.util.UUID, f39: com.chronoxor.proto.OrderSide, f40: com.chronoxor.proto.OrderType, f41: com.chronoxor.proto.Order, f42: com.chronoxor.proto.Balance, f43: com.chronoxor.proto.State, f44: com.chronoxor.proto.Account)
+    constructor(id: Int = 0, f1: Boolean = false, f2: Boolean = true, f3: Byte = 0.toByte(), f4: Byte = 0xFF.toByte(), f5: Char = '\u0000', f6: Char = '!'.toChar(), f7: Char = '\u0000', f8: Char = 0x0444.toChar(), f9: Byte = 0.toByte(), f10: Byte = Byte.MAX_VALUE, f11: UByte = UByte.MIN_VALUE, f12: UByte = UByte.MAX_VALUE, f13: Short = 0.toShort(), f14: Short = Short.MAX_VALUE, f15: UShort = UShort.MIN_VALUE, f16: UShort = UShort.MAX_VALUE, f17: Int = 0, f18: Int = Int.MAX_VALUE, f19: UInt = UInt.MIN_VALUE, f20: UInt = UInt.MAX_VALUE, f21: Long = 0L, f22: Long = Long.MAX_VALUE, f23: ULong = ULong.MIN_VALUE, f24: ULong = ULong.MAX_VALUE, f25: Float = 0.0f, f26: Float = 123.456f, f27: Double = 0.0, f28: Double = -123.456e+123, f29: java.math.BigDecimal = java.math.BigDecimal.valueOf(0L), f30: java.math.BigDecimal = java.math.BigDecimal.valueOf(123456.123456), f31: String = "", f32: String = "Initial string!", f33: java.time.Instant = java.time.Instant.EPOCH, f34: java.time.Instant = java.time.Instant.EPOCH, f35: java.time.Instant = java.time.Instant.now(), f36: java.util.UUID = com.chronoxor.fbe.UUIDGenerator.nil(), f37: java.util.UUID = com.chronoxor.fbe.UUIDGenerator.sequential(), f38: java.util.UUID = java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000"), f39: com.chronoxor.proto.OrderSide = com.chronoxor.proto.OrderSide(), f40: com.chronoxor.proto.OrderType = com.chronoxor.proto.OrderType(), f41: com.chronoxor.proto.Order = com.chronoxor.proto.Order(), f42: com.chronoxor.proto.Balance = com.chronoxor.proto.Balance(), f43: com.chronoxor.proto.State = com.chronoxor.proto.State(), f44: com.chronoxor.proto.Account = com.chronoxor.proto.Account())
     {
         this.id = id
         this.f1 = f1
@@ -266,8 +266,10 @@ open class StructSimple : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 110
         fun fromJson(json: String): StructSimple = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructSimple::class.java)
     }
 }

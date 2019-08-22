@@ -12,21 +12,15 @@ package com.chronoxor.enums.fbe
 open class Receiver : com.chronoxor.fbe.Receiver, ReceiverListener
 {
     // Receiver values accessors
-    private val EnumsValue: com.chronoxor.enums.Enums
 
     // Receiver models accessors
-    private val EnumsModel: EnumsModel
 
     constructor() : super(false)
     {
-        EnumsValue = com.chronoxor.enums.Enums()
-        EnumsModel = EnumsModel()
     }
 
     constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer, false)
     {
-        EnumsValue = com.chronoxor.enums.Enums()
-        EnumsModel = EnumsModel()
     }
 
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
@@ -36,28 +30,6 @@ open class Receiver : com.chronoxor.fbe.Receiver, ReceiverListener
 
     open fun onReceiveListener(listener: ReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
-        when (type)
-        {
-            com.chronoxor.enums.fbe.EnumsModel.fbeTypeConst ->
-            {
-                // Deserialize the value from the FBE stream
-                EnumsModel.attach(buffer, offset)
-                assert(EnumsModel.verify()) { "com.chronoxor.enums.Enums validation failed!" }
-                val deserialized = EnumsModel.deserialize(EnumsValue)
-                assert(deserialized > 0) { "com.chronoxor.enums.Enums deserialization failed!" }
-
-                // Log the value
-                if (logging)
-                {
-                    val message = EnumsValue.toString()
-                    onReceiveLog(message)
-                }
-
-                // Call receive handler with deserialized value
-                listener.onReceive(EnumsValue)
-                return true
-            }
-        }
 
         return false
     }

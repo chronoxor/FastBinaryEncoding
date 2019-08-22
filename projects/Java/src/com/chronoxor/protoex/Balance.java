@@ -9,6 +9,9 @@ public class Balance extends com.chronoxor.proto.Balance
 {
     public double locked = (double)0.0d;
 
+    public static final long fbeTypeConst = com.chronoxor.proto.Balance.fbeTypeConst;
+    public long fbeType() { return fbeTypeConst; }
+
     public Balance() {}
 
     public Balance(com.chronoxor.proto.Balance parent, double locked)

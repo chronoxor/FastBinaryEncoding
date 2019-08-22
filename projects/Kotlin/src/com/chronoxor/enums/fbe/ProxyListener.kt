@@ -10,5 +10,4 @@ package com.chronoxor.enums.fbe
 // Fast Binary Encoding com.chronoxor.enums proxy listener
 interface ProxyListener
 {
-    fun onProxy(model: EnumsModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
 }

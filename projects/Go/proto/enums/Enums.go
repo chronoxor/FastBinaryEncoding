@@ -8,9 +8,11 @@ package enums
 import "fmt"
 import "strconv"
 import "strings"
+import "errors"
 import "../fbe"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 
 // Workaround for Go unused imports issue
@@ -214,6 +216,9 @@ func (s *Enums) Key() EnumsKey {
 func (s *Enums) Optional() *Enums {
     return s
 }
+
+// Get the FBE type
+func (s *Enums) FBEType() int { return 1 }
 
 // Convert struct to string
 func (s *Enums) String() string {

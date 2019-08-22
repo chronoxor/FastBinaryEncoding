@@ -10,14 +10,14 @@ package com.chronoxor.test
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructSet : Comparable<Any?>
 {
-    var f1: java.util.HashSet<Byte> = java.util.HashSet()
-    var f2: java.util.HashSet<EnumSimple> = java.util.HashSet()
-    var f3: java.util.HashSet<FlagsSimple> = java.util.HashSet()
-    var f4: java.util.HashSet<StructSimple> = java.util.HashSet()
+    var f1: java.util.HashSet<Byte>
+    var f2: java.util.HashSet<EnumSimple>
+    var f3: java.util.HashSet<FlagsSimple>
+    var f4: java.util.HashSet<StructSimple>
 
-    constructor()
+    @Transient open var fbeType: Long = 132
 
-    constructor(f1: java.util.HashSet<Byte>, f2: java.util.HashSet<EnumSimple>, f3: java.util.HashSet<FlagsSimple>, f4: java.util.HashSet<StructSimple>)
+    constructor(f1: java.util.HashSet<Byte> = java.util.HashSet(), f2: java.util.HashSet<EnumSimple> = java.util.HashSet(), f3: java.util.HashSet<FlagsSimple> = java.util.HashSet(), f4: java.util.HashSet<StructSimple> = java.util.HashSet())
     {
         this.f1 = f1
         this.f2 = f2
@@ -140,8 +140,10 @@ open class StructSet : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 132
         fun fromJson(json: String): StructSet = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructSet::class.java)
     }
 }

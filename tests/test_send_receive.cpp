@@ -25,9 +25,9 @@ public:
     bool check() const { return _order && _balance && _account; }
 
 protected:
-    void onReceive(const proto::Order& value) override { _order = true; }
-    void onReceive(const proto::Balance& value) override { _balance = true; }
-    void onReceive(const proto::Account& value) override { _account = true; }
+    void onReceive(const proto::OrderMessage& value) override { _order = true; }
+    void onReceive(const proto::BalanceMessage& value) override { _balance = true; }
+    void onReceive(const proto::AccountMessage& value) override { _account = true; }
 
 private:
     bool _order;
@@ -40,18 +40,18 @@ bool SendAndReceive(size_t index1, size_t index2)
     MySender sender;
 
     // Create and send a new order
-    proto::Order order = { 1, "EURUSD", proto::OrderSide::buy, proto::OrderType::market, 1.23456, 1000.0 };
+    proto::OrderMessage order({ proto::Order({ 1, "EURUSD", proto::OrderSide::buy, proto::OrderType::market, 1.23456, 1000.0 }) });
     sender.send(order);
 
     // Create and send a new balance wallet
-    proto::Balance balance = { "USD", 1000.0 };
+    proto::BalanceMessage balance({ proto::Balance({ "USD", 1000.0 }) });
     sender.send(balance);
 
     // Create and send a new account with some orders
-    proto::Account account = { 1, "Test", proto::State::good, { "USD", 1000.0 }, std::make_optional<proto::Balance>({ "EUR", 100.0 }), {} };
-    account.orders.emplace_back(1, "EURUSD", proto::OrderSide::buy, proto::OrderType::market, 1.23456, 1000.0);
-    account.orders.emplace_back(2, "EURUSD", proto::OrderSide::sell, proto::OrderType::limit, 1.0, 100.0);
-    account.orders.emplace_back(3, "EURUSD", proto::OrderSide::buy, proto::OrderType::stop, 1.5, 10.0);
+    proto::AccountMessage account({ proto::Account({ 1, "Test", proto::State::good, { "USD", 1000.0 }, std::make_optional<proto::Balance>({ "EUR", 100.0 }), {} }) });
+    account.body.orders.emplace_back(1, "EURUSD", proto::OrderSide::buy, proto::OrderType::market, 1.23456, 1000.0);
+    account.body.orders.emplace_back(2, "EURUSD", proto::OrderSide::sell, proto::OrderType::limit, 1.0, 100.0);
+    account.body.orders.emplace_back(3, "EURUSD", proto::OrderSide::buy, proto::OrderType::stop, 1.5, 10.0);
     sender.send(account);
 
     MyReceiver receiver;

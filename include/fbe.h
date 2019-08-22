@@ -151,6 +151,7 @@ struct StructType
     bool fixed;
     bool id{false};
     bool keys{false};
+    bool message{false};
     std::shared_ptr<Attributes> attributes;
     std::shared_ptr<std::string> name;
     std::shared_ptr<std::string> base;

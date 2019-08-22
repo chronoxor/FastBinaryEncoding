@@ -10,20 +10,20 @@ package com.chronoxor.test
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructArray : Comparable<Any?>
 {
-    var f1: Array<Byte> = Array(2) { 0.toByte() }
-    var f2: Array<Byte?> = arrayOfNulls<Byte?>(2)
-    var f3: Array<ByteArray> = Array(2) { ByteArray(0) }
-    var f4: Array<ByteArray?> = arrayOfNulls<ByteArray?>(2)
-    var f5: Array<EnumSimple> = Array(2) { EnumSimple() }
-    var f6: Array<EnumSimple?> = arrayOfNulls<EnumSimple?>(2)
-    var f7: Array<FlagsSimple> = Array(2) { FlagsSimple() }
-    var f8: Array<FlagsSimple?> = arrayOfNulls<FlagsSimple?>(2)
-    var f9: Array<StructSimple> = Array(2) { StructSimple() }
-    var f10: Array<StructSimple?> = arrayOfNulls<StructSimple?>(2)
+    var f1: Array<Byte>
+    var f2: Array<Byte?>
+    var f3: Array<ByteArray>
+    var f4: Array<ByteArray?>
+    var f5: Array<EnumSimple>
+    var f6: Array<EnumSimple?>
+    var f7: Array<FlagsSimple>
+    var f8: Array<FlagsSimple?>
+    var f9: Array<StructSimple>
+    var f10: Array<StructSimple?>
 
-    constructor()
+    @Transient open var fbeType: Long = 125
 
-    constructor(f1: Array<Byte>, f2: Array<Byte?>, f3: Array<ByteArray>, f4: Array<ByteArray?>, f5: Array<EnumSimple>, f6: Array<EnumSimple?>, f7: Array<FlagsSimple>, f8: Array<FlagsSimple?>, f9: Array<StructSimple>, f10: Array<StructSimple?>)
+    constructor(f1: Array<Byte> = Array(2) { 0.toByte() }, f2: Array<Byte?> = arrayOfNulls<Byte?>(2), f3: Array<ByteArray> = Array(2) { ByteArray(0) }, f4: Array<ByteArray?> = arrayOfNulls<ByteArray?>(2), f5: Array<EnumSimple> = Array(2) { EnumSimple() }, f6: Array<EnumSimple?> = arrayOfNulls<EnumSimple?>(2), f7: Array<FlagsSimple> = Array(2) { FlagsSimple() }, f8: Array<FlagsSimple?> = arrayOfNulls<FlagsSimple?>(2), f9: Array<StructSimple> = Array(2) { StructSimple() }, f10: Array<StructSimple?> = arrayOfNulls<StructSimple?>(2))
     {
         this.f1 = f1
         this.f2 = f2
@@ -230,8 +230,10 @@ open class StructArray : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.test.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 125
         fun fromJson(json: String): StructArray = com.chronoxor.test.fbe.Json.engine.fromJson(json, StructArray::class.java)
     }
 }

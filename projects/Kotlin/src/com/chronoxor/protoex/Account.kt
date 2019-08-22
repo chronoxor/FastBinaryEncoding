@@ -10,16 +10,16 @@ package com.chronoxor.protoex
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class Account : Comparable<Any?>
 {
-    var id: Int = 0
-    var name: String = ""
-    var state: StateEx = StateEx.fromSet(java.util.EnumSet.of(StateEx.initialized.value, StateEx.bad.value, StateEx.sad.value))
-    var wallet: Balance = Balance()
-    var asset: Balance? = null
-    var orders: java.util.ArrayList<Order> = java.util.ArrayList()
+    var id: Int
+    var name: String
+    var state: StateEx
+    var wallet: Balance
+    var asset: Balance?
+    var orders: java.util.ArrayList<Order>
 
-    constructor()
+    @Transient open var fbeType: Long = 3
 
-    constructor(id: Int, name: String, state: StateEx, wallet: Balance, asset: Balance?, orders: java.util.ArrayList<Order>)
+    constructor(id: Int = 0, name: String = "", state: StateEx = StateEx.fromSet(java.util.EnumSet.of(StateEx.initialized.value, StateEx.bad.value, StateEx.sad.value)), wallet: Balance = Balance(), asset: Balance? = null, orders: java.util.ArrayList<Order> = java.util.ArrayList())
     {
         this.id = id
         this.name = name
@@ -121,8 +121,10 @@ open class Account : Comparable<Any?>
     }
 
     open fun toJson(): String = com.chronoxor.protoex.fbe.Json.engine.toJson(this)
+
     companion object
     {
+        const val fbeTypeConst: Long = 3
         fun fromJson(json: String): Account = com.chronoxor.protoex.fbe.Json.engine.fromJson(json, Account::class.java)
     }
 }

@@ -1667,6 +1667,13 @@ class Enums(object):
             None if "uint64b5" not in fields else EnumUInt64.__from_json__(fields["uint64b5"]),
         )
 
+    # Get the FBE type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 1
+
 
 class FieldModelEnums(fbe.FieldModel):
     __slots__ = "_byte0", "_byte1", "_byte2", "_byte3", "_byte4", "_byte5", "_char0", "_char1", "_char2", "_char3", "_char4", "_char5", "_wchar0", "_wchar1", "_wchar2", "_wchar3", "_wchar4", "_wchar5", "_int8b0", "_int8b1", "_int8b2", "_int8b3", "_int8b4", "_int8b5", "_uint8b0", "_uint8b1", "_uint8b2", "_uint8b3", "_uint8b4", "_uint8b5", "_int16b0", "_int16b1", "_int16b2", "_int16b3", "_int16b4", "_int16b5", "_uint16b0", "_uint16b1", "_uint16b2", "_uint16b3", "_uint16b4", "_uint16b5", "_int32b0", "_int32b1", "_int32b2", "_int32b3", "_int32b4", "_int32b5", "_uint32b0", "_uint32b1", "_uint32b2", "_uint32b3", "_uint32b4", "_uint32b5", "_int64b0", "_int64b1", "_int64b2", "_int64b3", "_int64b4", "_int64b5", "_uint64b0", "_uint64b1", "_uint64b2", "_uint64b3", "_uint64b4", "_uint64b5", 
@@ -3148,10 +3155,12 @@ class EnumsModel(fbe.Model):
         return self._model
 
     # Get the model size
+    @property
     def fbe_size(self):
         return self._model.fbe_size + self._model.fbe_extra
 
     # Get the model type
+    @property
     def fbe_type(self):
         return self.TYPE
 
@@ -4871,38 +4880,15 @@ class ProtocolVersion(object):
 
 # Fast Binary Encoding enums sender
 class Sender(fbe.Sender):
-    __slots__ = "_enums_model", 
-
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
-        self._enums_model = EnumsModel(self.buffer)
 
     # Sender models accessors
-
-    @property
-    def enums_model(self):
-        return self._enums_model
 
     # Send methods
 
     def send(self, value):
-        if isinstance(value, Enums):
-            return self.send_enums(value)
         return 0
-
-    def send_enums(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.enums_model.serialize(value)
-        assert (serialized > 0), "enums.Enums serialization failed!"
-        assert self.enums_model.verify(), "enums.Enums validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
 
     # Send message handler
     def on_send(self, buffer, offset, size):
@@ -4911,104 +4897,39 @@ class Sender(fbe.Sender):
 
 # Fast Binary Encoding enums receiver
 class Receiver(fbe.Receiver):
-    __slots__ = "_enums_value", "_enums_model", 
-
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
-        self._enums_value = Enums()
-        self._enums_model = EnumsModel()
 
     # Receive handlers
 
-    def on_receive_enums(self, value):
-        pass
-
     def on_receive(self, type, buffer, offset, size):
-
-        if type == EnumsModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._enums_model.attach_buffer(buffer, offset)
-            assert self._enums_model.verify(), "enums.Enums validation failed!"
-            (_, deserialized) = self._enums_model.deserialize(self._enums_value)
-            assert (deserialized > 0), "enums.Enums deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._enums_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_enums(self._enums_value)
-            return True
 
         return False
 
 
 # Fast Binary Encoding enums proxy
 class Proxy(fbe.Receiver):
-    __slots__ = "_enums_model", 
-
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
-        self._enums_model = EnumsModel()
 
     # Receive handlers
 
-    def on_proxy_enums(self, model, type, buffer, offset, size):
-        pass
-
     def on_receive(self, type, buffer, offset, size):
-
-        if type == EnumsModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._enums_model.attach_buffer(buffer, offset)
-            assert self._enums_model.verify(), "enums.Enums validation failed!"
-
-            fbe_begin = self._enums_model.model.get_begin()
-            if fbe_begin == 0:
-                return False
-            # Call proxy handler
-            self.on_proxy_enums(self._enums_model, type, buffer, offset, size)
-            self._enums_model.model.get_end(fbe_begin)
-            return True
 
         return False
 
 
 # Fast Binary Encoding enums final sender
 class FinalSender(fbe.Sender):
-    __slots__ = "_enums_model", 
-
     def __init__(self, buffer=None):
         super().__init__(buffer, True)
-        self._enums_model = EnumsFinalModel(self.buffer)
 
     # Sender models accessors
-
-    @property
-    def enums_model(self):
-        return self._enums_model
 
     # Send methods
 
     def send(self, value):
-        if isinstance(value, Enums):
-            return self.send_enums(value)
         return 0
-
-    def send_enums(self, value):
-        # Serialize the value into the FBE stream
-        serialized = self.enums_model.serialize(value)
-        assert (serialized > 0), "enums.Enums serialization failed!"
-        assert self.enums_model.verify(), "enums.Enums validation failed!"
-
-        # Log the value
-        if self.logging:
-            message = str(value)
-            self.on_send_log(message)
-
-        # Send the serialized value
-        return self.send_serialized(serialized)
 
     # Send message handler
     def on_send(self, buffer, offset, size):
@@ -5017,34 +4938,11 @@ class FinalSender(fbe.Sender):
 
 # Fast Binary Encoding enums final receiver
 class FinalReceiver(fbe.Receiver):
-    __slots__ = "_enums_value", "_enums_model", 
-
     def __init__(self, buffer=None):
         super().__init__(buffer, True)
-        self._enums_value = Enums()
-        self._enums_model = EnumsFinalModel()
 
     # Receive handlers
 
-    def on_receive_enums(self, value):
-        pass
-
     def on_receive(self, type, buffer, offset, size):
-
-        if type == EnumsFinalModel.TYPE:
-            # Deserialize the value from the FBE stream
-            self._enums_model.attach_buffer(buffer, offset)
-            assert self._enums_model.verify(), "enums.Enums validation failed!"
-            (_, deserialized) = self._enums_model.deserialize(self._enums_value)
-            assert (deserialized > 0), "enums.Enums deserialization failed!"
-
-            # Log the value
-            if self.logging:
-                message = str(self._enums_value)
-                self.on_receive_log(message)
-
-            # Call receive handler with deserialized value
-            self.on_receive_enums(self._enums_value)
-            return True
 
         return False

@@ -4455,6 +4455,22 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
         WriteLineIndent("end");
     }
 
+    // Generate struct FBE type property
+    WriteLine();
+    WriteLineIndent("# Get the FBE type");
+    WriteLineIndent("def fbe_type");
+    Indent(1);
+    WriteLineIndent("TYPE");
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate struct FBE type
+    WriteLine();
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("TYPE = " + base_type + "::TYPE");
+    else
+        WriteLineIndent("TYPE = " + std::to_string(s->type));
+
     // Generate struct end
     Indent(-1);
     WriteLineIndent("end");
@@ -5442,7 +5458,8 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + ConvertTitle(*s->name) + model + ".new(self.buffer)");
+            if (s->message)
+                WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + ConvertTitle(*s->name) + model + ".new(self.buffer)");
     }
     Indent(-1);
     WriteLineIndent("end");
@@ -5470,12 +5487,15 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
         WriteLineIndent("# Sender models accessors");
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*s->name) + "_model");
-            Indent(1);
-            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model");
-            Indent(-1);
-            WriteLineIndent("end");
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*s->name) + "_model");
+                Indent(1);
+                WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model");
+                Indent(-1);
+                WriteLineIndent("end");
+            }
         }
     }
 
@@ -5489,11 +5509,14 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("if value.is_a?(" + ConvertTitle(*s->name) + ")");
-            Indent(1);
-            WriteLineIndent("return send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
-            Indent(-1);
-            WriteLineIndent("end");
+            if (s->message)
+            {
+                WriteLineIndent("if value.is_a?(" + ConvertTitle(*s->name) + ") && (value.fbe_type == " + CppCommon::StringUtils::ToLower(*s->name) + "_model.fbe_type)");
+                Indent(1);
+                WriteLineIndent("return send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
+                Indent(-1);
+                WriteLineIndent("end");
+            }
         }
     }
     if (p->import)
@@ -5515,26 +5538,29 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("def send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
-            Indent(1);
-            WriteLineIndent("# Serialize the value into the FBE stream");
-            WriteLineIndent("serialized = " + CppCommon::StringUtils::ToLower(*s->name) + "_model.serialize(value)");
-            WriteLineIndent("raise RuntimeError, \"" + package + "." + ConvertTitle(*s->name) + " serialization failed!\" if serialized <= 0");
-            WriteLineIndent("raise RuntimeError, \"" + package + "." + ConvertTitle(*s->name) + " validation failed!\" unless " + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify");
-            WriteLine();
-            WriteLineIndent("# Log the value");
-            WriteLineIndent("if logging?");
-            Indent(1);
-            WriteLineIndent("message = value.to_s");
-            WriteLineIndent("on_send_log(message)");
-            Indent(-1);
-            WriteLineIndent("end");
-            WriteLine();
-            WriteLineIndent("# Send the serialized value");
-            WriteLineIndent("send_serialized(serialized)");
-            Indent(-1);
-            WriteLineIndent("end");
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("def send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
+                Indent(1);
+                WriteLineIndent("# Serialize the value into the FBE stream");
+                WriteLineIndent("serialized = " + CppCommon::StringUtils::ToLower(*s->name) + "_model.serialize(value)");
+                WriteLineIndent("raise RuntimeError, \"" + package + "." + ConvertTitle(*s->name) + " serialization failed!\" if serialized <= 0");
+                WriteLineIndent("raise RuntimeError, \"" + package + "." + ConvertTitle(*s->name) + " validation failed!\" unless " + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify");
+                WriteLine();
+                WriteLineIndent("# Log the value");
+                WriteLineIndent("if logging?");
+                Indent(1);
+                WriteLineIndent("message = value.to_s");
+                WriteLineIndent("on_send_log(message)");
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLine();
+                WriteLineIndent("# Send the serialized value");
+                WriteLineIndent("send_serialized(serialized)");
+                Indent(-1);
+                WriteLineIndent("end");
+            }
         }
     }
 
@@ -5583,8 +5609,11 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value = " + ConvertTitle(*s->name) + ".new");
-            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + ConvertTitle(*s->name) + model + ".new");
+            if (s->message)
+            {
+                WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value = " + ConvertTitle(*s->name) + ".new");
+                WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + ConvertTitle(*s->name) + model + ".new");
+            }
         }
     }
     Indent(-1);
@@ -5622,53 +5651,64 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("# Receive handlers");
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("# noinspection RubyUnusedLocalVariable");
-            WriteLineIndent("def on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
-            WriteLineIndent("end");
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+                WriteLineIndent("def on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
+                WriteLineIndent("end");
+            }
         }
     }
 
     WriteLine();
     WriteLineIndent("public");
 
+    bool messages = false;
+    for (const auto& s : p->body->structs)
+        if (s->message)
+            messages = true;
+
     // Generate receiver message handler
     WriteLine();
     WriteLineIndent("def on_receive(type, buffer, offset, size)");
     Indent(1);
-    if (p->body)
+    if (p->body && messages)
     {
         WriteLineIndent("case type");
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("when " + ConvertTitle(*s->name) + model + "::TYPE");
-            Indent(1);
-            WriteLineIndent("# Deserialize the value from the FBE stream");
-            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
-            WriteLineIndent("unless @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify");
-            Indent(1);
-            WriteLineIndent("return false");
-            Indent(-1);
-            WriteLineIndent("end");
-            WriteLineIndent("_, deserialized = @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.deserialize(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
-            WriteLineIndent("if deserialized <= 0");
-            Indent(1);
-            WriteLineIndent("return false");
-            Indent(-1);
-            WriteLineIndent("end");
-            WriteLine();
-            WriteLineIndent("# Log the value");
-            WriteLineIndent("if logging?");
-            Indent(1);
-            WriteLineIndent("message = @_" + CppCommon::StringUtils::ToLower(*s->name) + "_value.to_s");
-            WriteLineIndent("on_receive_log(message)");
-            Indent(-1);
-            WriteLineIndent("end");
-            WriteLine();
-            WriteLineIndent("# Call receive handler with deserialized value");
-            WriteLineIndent("on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
-            WriteLineIndent("true");
-            Indent(-1);
+            if (s->message)
+            {
+                WriteLineIndent("when " + ConvertTitle(*s->name) + model + "::TYPE");
+                Indent(1);
+                WriteLineIndent("# Deserialize the value from the FBE stream");
+                WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
+                WriteLineIndent("unless @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLineIndent("_, deserialized = @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.deserialize(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
+                WriteLineIndent("if deserialized <= 0");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLine();
+                WriteLineIndent("# Log the value");
+                WriteLineIndent("if logging?");
+                Indent(1);
+                WriteLineIndent("message = @_" + CppCommon::StringUtils::ToLower(*s->name) + "_value.to_s");
+                WriteLineIndent("on_receive_log(message)");
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLine();
+                WriteLineIndent("# Call receive handler with deserialized value");
+                WriteLineIndent("on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
+                WriteLineIndent("true");
+                Indent(-1);
+            }
         }
         WriteLineIndent("else");
         Indent(1);
@@ -5726,7 +5766,8 @@ void GeneratorRuby::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + ConvertTitle(*s->name) + model + ".new");
+            if (s->message)
+                WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + ConvertTitle(*s->name) + model + ".new");
     }
     Indent(-1);
     WriteLineIndent("end");
@@ -5763,46 +5804,57 @@ void GeneratorRuby::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
         WriteLineIndent("# Receive handlers");
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("# noinspection RubyUnusedLocalVariable");
-            WriteLineIndent("def on_proxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(model, type, buffer, offset, size)");
-            WriteLineIndent("end");
+            if (s->message)
+            {
+                WriteLine();
+                WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+                WriteLineIndent("def on_proxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(model, type, buffer, offset, size)");
+                WriteLineIndent("end");
+            }
         }
     }
 
     WriteLine();
     WriteLineIndent("public");
 
+    bool messages = false;
+    for (const auto& s : p->body->structs)
+        if (s->message)
+            messages = true;
+
     // Generate proxy message handler
     WriteLine();
     WriteLineIndent("def on_receive(type, buffer, offset, size)");
     Indent(1);
-    if (p->body)
+    if (p->body && messages)
     {
         WriteLineIndent("case type");
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("when " + ConvertTitle(*s->name) + model + "::TYPE");
-            Indent(1);
-            WriteLineIndent("# Attach the FBE stream to the proxy model");
-            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
-            WriteLineIndent("unless @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify");
-            Indent(1);
-            WriteLineIndent("return false");
-            Indent(-1);
-            WriteLineIndent("end");
-            WriteLine();
-            WriteLineIndent("fbe_begin = @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.model.get_begin");
-            WriteLineIndent("if fbe_begin == 0");
-            Indent(1);
-            WriteLineIndent("return false");
-            Indent(-1);
-            WriteLineIndent("end");
-            WriteLineIndent("# Call proxy handler");
-            WriteLineIndent("on_proxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model, type, buffer, offset, size)");
-            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.model.get_end(fbe_begin)");
-            WriteLineIndent("true");
-            Indent(-1);
+            if (s->message)
+            {
+                WriteLineIndent("when " + ConvertTitle(*s->name) + model + "::TYPE");
+                Indent(1);
+                WriteLineIndent("# Attach the FBE stream to the proxy model");
+                WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
+                WriteLineIndent("unless @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLine();
+                WriteLineIndent("fbe_begin = @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.model.get_begin");
+                WriteLineIndent("if fbe_begin == 0");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLineIndent("# Call proxy handler");
+                WriteLineIndent("on_proxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model, type, buffer, offset, size)");
+                WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.model.get_end(fbe_begin)");
+                WriteLineIndent("true");
+                Indent(-1);
+            }
         }
         WriteLineIndent("else");
         Indent(1);

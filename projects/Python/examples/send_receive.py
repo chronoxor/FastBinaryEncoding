@@ -14,13 +14,13 @@ class MySender(proto.Sender):
 
 class MyReceiver(proto.Receiver):
 
-    def on_receive_order(self, value):
+    def on_receive_ordermessage(self, value):
         pass
 
-    def on_receive_balance(self, value):
+    def on_receive_balancemessage(self, value):
         pass
 
-    def on_receive_account(self, value):
+    def on_receive_accountmessage(self, value):
         pass
 
     def on_receive_log(self, message):
@@ -35,18 +35,18 @@ def main():
 
     # Create and send a new order
     order = proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0)
-    sender.send(order)
+    sender.send(proto.OrderMessage(order))
 
     # Create and send a new balance wallet
     balance = proto.Balance("USD", 1000.0)
-    sender.send(balance)
+    sender.send(proto.BalanceMessage(balance))
 
     # Create and send a new account with some orders
     account = proto.Account(1, "Test", proto.State.good, proto.Balance("USD", 1000.0), proto.Balance("EUR", 100.0))
     account.orders.append(proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))
     account.orders.append(proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0))
     account.orders.append(proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0))
-    sender.send(account)
+    sender.send(proto.AccountMessage(account))
 
     receiver = MyReceiver()
 

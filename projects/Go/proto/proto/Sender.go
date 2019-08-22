@@ -9,14 +9,15 @@ import "errors"
 import "../fbe"
 
 // Workaround for Go unused imports issue
+var _ = errors.New
 var _ = fbe.Version
 
 // Fast Binary Encoding proto sender
 type Sender struct {
     *fbe.Sender
-    orderModel *OrderModel
-    balanceModel *BalanceModel
-    accountModel *AccountModel
+    orderMessageModel *OrderMessageModel
+    balanceMessageModel *BalanceMessageModel
+    accountMessageModel *AccountMessageModel
 }
 
 // Create a new proto sender with an empty buffer
@@ -28,43 +29,52 @@ func NewSender() *Sender {
 func NewSenderWithBuffer(buffer *fbe.Buffer) *Sender {
     return &Sender{
         fbe.NewSender(buffer, false),
-        NewOrderModel(buffer),
-        NewBalanceModel(buffer),
-        NewAccountModel(buffer),
+        NewOrderMessageModel(buffer),
+        NewBalanceMessageModel(buffer),
+        NewAccountMessageModel(buffer),
     }
 }
 
 // Sender models accessors
 
-func (s *Sender) OrderModel() *OrderModel { return s.orderModel }
-func (s *Sender) BalanceModel() *BalanceModel { return s.balanceModel }
-func (s *Sender) AccountModel() *AccountModel { return s.accountModel }
+func (s *Sender) OrderMessageModel() *OrderMessageModel { return s.orderMessageModel }
+func (s *Sender) BalanceMessageModel() *BalanceMessageModel { return s.balanceMessageModel }
+func (s *Sender) AccountMessageModel() *AccountMessageModel { return s.accountMessageModel }
 
 // Send methods
 
 func (s *Sender) Send(value interface{}) (int, error) {
     switch value := value.(type) {
-    case *Order:
-        return s.SendOrder(value)
-    case *Balance:
-        return s.SendBalance(value)
-    case *Account:
-        return s.SendAccount(value)
+    case *OrderMessage:
+        if value.FBEType() == s.orderMessageModel.FBEType() {
+            return s.SendOrderMessage(value)
+        }
+    case *BalanceMessage:
+        if value.FBEType() == s.balanceMessageModel.FBEType() {
+            return s.SendBalanceMessage(value)
+        }
+    case *AccountMessage:
+        if value.FBEType() == s.accountMessageModel.FBEType() {
+            return s.SendAccountMessage(value)
+        }
+    default:
+        _ = value
+        break
     }
     return 0, nil
 }
 
-func (s *Sender) SendOrder(value *Order) (int, error) {
+func (s *Sender) SendOrderMessage(value *OrderMessage) (int, error) {
     // Serialize the value into the FBE stream
-    serialized, err := s.orderModel.Serialize(value)
+    serialized, err := s.orderMessageModel.Serialize(value)
     if serialized <= 0 {
-        return 0, errors.New("proto.Order serialization failed")
+        return 0, errors.New("proto.OrderMessage serialization failed")
     }
     if err != nil {
         return 0, err
     }
-    if !s.orderModel.Verify() {
-        return 0, errors.New("proto.Order validation failed")
+    if !s.orderMessageModel.Verify() {
+        return 0, errors.New("proto.OrderMessage validation failed")
     }
 
     // Log the value
@@ -77,17 +87,17 @@ func (s *Sender) SendOrder(value *Order) (int, error) {
     return s.SendSerialized(serialized)
 }
 
-func (s *Sender) SendBalance(value *Balance) (int, error) {
+func (s *Sender) SendBalanceMessage(value *BalanceMessage) (int, error) {
     // Serialize the value into the FBE stream
-    serialized, err := s.balanceModel.Serialize(value)
+    serialized, err := s.balanceMessageModel.Serialize(value)
     if serialized <= 0 {
-        return 0, errors.New("proto.Balance serialization failed")
+        return 0, errors.New("proto.BalanceMessage serialization failed")
     }
     if err != nil {
         return 0, err
     }
-    if !s.balanceModel.Verify() {
-        return 0, errors.New("proto.Balance validation failed")
+    if !s.balanceMessageModel.Verify() {
+        return 0, errors.New("proto.BalanceMessage validation failed")
     }
 
     // Log the value
@@ -100,17 +110,17 @@ func (s *Sender) SendBalance(value *Balance) (int, error) {
     return s.SendSerialized(serialized)
 }
 
-func (s *Sender) SendAccount(value *Account) (int, error) {
+func (s *Sender) SendAccountMessage(value *AccountMessage) (int, error) {
     // Serialize the value into the FBE stream
-    serialized, err := s.accountModel.Serialize(value)
+    serialized, err := s.accountMessageModel.Serialize(value)
     if serialized <= 0 {
-        return 0, errors.New("proto.Account serialization failed")
+        return 0, errors.New("proto.AccountMessage serialization failed")
     }
     if err != nil {
         return 0, err
     }
-    if !s.accountModel.Verify() {
-        return 0, errors.New("proto.Account validation failed")
+    if !s.accountMessageModel.Verify() {
+        return 0, errors.New("proto.AccountMessage validation failed")
     }
 
     // Log the value

@@ -434,10 +434,10 @@ public:
     Flags& operator=(Flags&&) noexcept = default;
 
     // Is any flag set?
-    explicit operator bool() const noexcept { return (_value != 0); }
+    explicit operator bool() const noexcept { return isset(); }
 
     // Is no flag set?
-    bool operator!() const noexcept { return (_value == 0); }
+    bool operator!() const noexcept { return !isset(); }
 
     // Reverse all flags
     Flags operator~() const noexcept { return Flags(~_value); }
@@ -466,6 +466,13 @@ public:
 
     // Convert to the enum value
     operator TEnum() const noexcept { return (TEnum)_value; }
+
+    //! Is any flag set?
+    bool isset() const noexcept { return (_value != 0); }
+    //! Is the given flag set?
+    bool isset(type value) const noexcept { return (_value & value) != 0; }
+    //! Is the given flag set?
+    bool isset(TEnum value) const noexcept { return (_value & (type)value) != 0; }
 
     // Get the enum value
     TEnum value() const noexcept { return (TEnum)_value; }

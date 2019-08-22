@@ -21,15 +21,15 @@ class MyFinalReceiver < Protoex::FinalReceiver
     @_order && @_balance && @_account
   end
 
-  def on_receive_order(value)
+  def on_receive_ordermessage(value)
     @_order = true
   end
 
-  def on_receive_balance(value)
+  def on_receive_balancemessage(value)
     @_balance = true
   end
 
-  def on_receive_account(value)
+  def on_receive_accountmessage(value)
     @_account = true
   end
 end
@@ -40,18 +40,18 @@ class TestSendReceiveFinal < Test::Unit::TestCase
 
     # Create and send a new order
     order = Protoex::Order.new(1, 'EURUSD', Protoex::OrderSide.buy, Protoex::OrderType.market, 1.23456, 1000.0, 0.0, 0.0)
-    sender.send(order)
+    sender.send(Protoex::OrderMessage.new(order))
 
     # Create and send a new balance wallet
     balance = Protoex::Balance.new(Proto::Balance.new('USD', 1000.0), 100.0)
-    sender.send(balance)
+    sender.send(Protoex::BalanceMessage.new(balance))
 
     # Create and send a new account with some orders
     account = Protoex::Account.new(1, 'Test', Protoex::StateEx.good, Protoex::Balance.new(Proto::Balance.new('USD', 1000.0), 100.0), Protoex::Balance.new(Proto::Balance.new('EUR', 100.0), 10.0))
     account.orders.push(Protoex::Order.new(1, 'EURUSD', Protoex::OrderSide.buy, Protoex::OrderType.market, 1.23456, 1000.0, 0.0, 0.0))
     account.orders.push(Protoex::Order.new(2, 'EURUSD', Protoex::OrderSide.sell, Protoex::OrderType.limit, 1.0, 100.0, 0.0, 0.0))
     account.orders.push(Protoex::Order.new(3, 'EURUSD', Protoex::OrderSide.buy, Protoex::OrderType.stop, 1.5, 10.0, 0.0, 0.0))
-    sender.send(account)
+    sender.send(Protoex::AccountMessage.new(account))
 
     receiver = MyFinalReceiver.new
 
@@ -66,8 +66,8 @@ class TestSendReceiveFinal < Test::Unit::TestCase
   end
 
   def test_send_and_receive_final
-    1000.times do |i|
-      1000.times do |j|
+    100.times do |i|
+      100.times do |j|
         assert_true(send_and_receive_final(i, j))
       end
     end

@@ -53,6 +53,9 @@ public class StructSimple implements Comparable<Object>
     public com.chronoxor.proto.State f43 = new com.chronoxor.proto.State();
     public com.chronoxor.proto.Account f44 = new com.chronoxor.proto.Account();
 
+    public static final long fbeTypeConst = 110;
+    public long fbeType() { return fbeTypeConst; }
+
     public StructSimple() {}
 
     public StructSimple(int id, boolean f1, boolean f2, byte f3, byte f4, char f5, char f6, char f7, char f8, byte f9, byte f10, byte f11, byte f12, short f13, short f14, short f15, short f16, int f17, int f18, int f19, int f20, long f21, long f22, long f23, long f24, float f25, float f26, double f27, double f28, java.math.BigDecimal f29, java.math.BigDecimal f30, String f31, String f32, java.time.Instant f33, java.time.Instant f34, java.time.Instant f35, java.util.UUID f36, java.util.UUID f37, java.util.UUID f38, com.chronoxor.proto.OrderSide f39, com.chronoxor.proto.OrderType f40, com.chronoxor.proto.Order f41, com.chronoxor.proto.Balance f42, com.chronoxor.proto.State f43, com.chronoxor.proto.Account f44)

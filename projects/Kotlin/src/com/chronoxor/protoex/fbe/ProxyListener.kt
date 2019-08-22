@@ -11,7 +11,7 @@ package com.chronoxor.protoex.fbe
 interface ProxyListener : com.chronoxor.proto.fbe.ProxyListener
 
 {
-    fun onProxy(model: OrderModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    fun onProxy(model: BalanceModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
-    fun onProxy(model: AccountModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
+    fun onProxy(model: OrderMessageModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
+    fun onProxy(model: BalanceMessageModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
+    fun onProxy(model: AccountMessageModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
 }

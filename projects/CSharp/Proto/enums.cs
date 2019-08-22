@@ -2641,6 +2641,14 @@ namespace enums {
         public EnumUInt64 uint64b4;
         public EnumUInt64 uint64b5;
 
+        public const long FBETypeConst = 1;
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
+        public long FBEType => FBETypeConst;
+
         public static Enums Default => new Enums
         {
             byte0 = EnumByte.ENUM_VALUE_0
@@ -5759,34 +5767,14 @@ namespace enums {
     public class Sender : FBE.Sender
     {
         // Sender models accessors
-        public readonly EnumsModel EnumsModel;
 
         public Sender() : base(false)
         {
-            EnumsModel = new EnumsModel(Buffer);
         }
         public Sender(Buffer buffer) : base(buffer, false)
         {
-            EnumsModel = new EnumsModel(Buffer);
         }
 
-        public long Send(global::enums.Enums value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = EnumsModel.Serialize(value);
-            Debug.Assert((serialized > 0), "enums.Enums serialization failed!");
-            Debug.Assert(EnumsModel.Verify(), "enums.Enums validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
 
         // Send message handler
         protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.enums.Sender.OnSend() not implemented!"); }
@@ -5802,48 +5790,23 @@ namespace enums {
     public class Receiver : FBE.Receiver
     {
         // Receiver values accessors
-        private global::enums.Enums EnumsValue;
 
         // Receiver models accessors
-        private readonly EnumsModel EnumsModel;
 
         public Receiver() : base(false)
         {
-            EnumsValue = global::enums.Enums.Default;
-            EnumsModel = new EnumsModel();
         }
         public Receiver(Buffer buffer) : base(buffer, false)
         {
-            EnumsValue = global::enums.Enums.Default;
-            EnumsModel = new EnumsModel();
         }
 
         // Receive handlers
-        protected virtual void OnReceive(global::enums.Enums value) {}
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
-                case EnumsModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    EnumsModel.Attach(buffer, offset);
-                    Debug.Assert(EnumsModel.Verify(), "enums.Enums validation failed!");
-                    long deserialized = EnumsModel.Deserialize(out EnumsValue);
-                    Debug.Assert((deserialized > 0), "enums.Enums deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = EnumsValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(EnumsValue);
-                    return true;
-                }
+                default: break;
             }
 
             return false;
@@ -5860,38 +5823,21 @@ namespace enums {
     public class Proxy : FBE.Receiver
     {
         // Proxy models accessors
-        private readonly EnumsModel EnumsModel;
 
         public Proxy() : base(false)
         {
-            EnumsModel = new EnumsModel();
         }
         public Proxy(Buffer buffer) : base(buffer, false)
         {
-            EnumsModel = new EnumsModel();
         }
 
         // Proxy handlers
-        protected virtual void OnProxy(EnumsModel model, long type, byte[] buffer, long offset, long size) {}
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
-                case EnumsModel.FBETypeConst:
-                {
-                    // Attach the FBE stream to the proxy model
-                    EnumsModel.Attach(buffer, offset);
-                    Debug.Assert(EnumsModel.Verify(), "enums.Enums validation failed!");
-
-                    long fbeBegin = EnumsModel.model.GetBegin();
-                    if (fbeBegin == 0)
-                        return false;
-                    // Call proxy handler
-                    OnProxy(EnumsModel, type, buffer, offset, size);
-                    EnumsModel.model.GetEnd(fbeBegin);
-                    return true;
-                }
+                default: break;
             }
 
             return false;
@@ -5908,34 +5854,14 @@ namespace enums {
     public class FinalSender : FBE.Sender
     {
         // Sender models accessors
-        public readonly EnumsFinalModel EnumsModel;
 
         public FinalSender() : base(true)
         {
-            EnumsModel = new EnumsFinalModel(Buffer);
         }
         public FinalSender(Buffer buffer) : base(buffer, true)
         {
-            EnumsModel = new EnumsFinalModel(Buffer);
         }
 
-        public long Send(global::enums.Enums value)
-        {
-            // Serialize the value into the FBE stream
-            long serialized = EnumsModel.Serialize(value);
-            Debug.Assert((serialized > 0), "enums.Enums serialization failed!");
-            Debug.Assert(EnumsModel.Verify(), "enums.Enums validation failed!");
-
-            // Log the value
-            if (Logging)
-            {
-                string message = value.ToString();
-                OnSendLog(message);
-            }
-
-            // Send the serialized value
-            return SendSerialized(serialized);
-        }
 
         // Send message handler
         protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.enums.Sender.OnSend() not implemented!"); }
@@ -5951,48 +5877,23 @@ namespace enums {
     public class FinalReceiver : FBE.Receiver
     {
         // Receiver values accessors
-        private global::enums.Enums EnumsValue;
 
         // Receiver models accessors
-        private readonly EnumsFinalModel EnumsModel;
 
         public FinalReceiver() : base(true)
         {
-            EnumsValue = global::enums.Enums.Default;
-            EnumsModel = new EnumsFinalModel();
         }
         public FinalReceiver(Buffer buffer) : base(buffer, true)
         {
-            EnumsValue = global::enums.Enums.Default;
-            EnumsModel = new EnumsFinalModel();
         }
 
         // Receive handlers
-        protected virtual void OnReceive(global::enums.Enums value) {}
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
-                case EnumsFinalModel.FBETypeConst:
-                {
-                    // Deserialize the value from the FBE stream
-                    EnumsModel.Attach(buffer, offset);
-                    Debug.Assert(EnumsModel.Verify(), "enums.Enums validation failed!");
-                    long deserialized = EnumsModel.Deserialize(out EnumsValue);
-                    Debug.Assert((deserialized > 0), "enums.Enums deserialization failed!");
-
-                    // Log the value
-                    if (Logging)
-                    {
-                        string message = EnumsValue.ToString();
-                        OnReceiveLog(message);
-                    }
-
-                    // Call receive handler with deserialized value
-                    OnReceive(EnumsValue);
-                    return true;
-                }
+                default: break;
             }
 
             return false;
