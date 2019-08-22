@@ -50,9 +50,10 @@ open class FinalSender : fbe.SenderProtocol {
 
         // Try to send using imported senders
         var result: Int = 0
-        result = protoSender.send(obj: obj)
-        if (result > 0)
+        result = try protoSender.send(obj: obj)
+        if result > 0 {
             return result
+            }
 
         return 0
     }

@@ -11,9 +11,9 @@ import fbe
 import proto
 
 // Fast Binary Encoding com.chronoxor.protoex receiver
-open class Receiver : fbe.ReceiverProtocol, ReceiverListener {
+open class Receiver : ReceiverListener, fbe.ReceiverProtocol {
     // Imported receivers
-    let protoReceiver: proto.Receiver? = nil
+    let protoReceiver: proto.Receiver?
 
     // Receiver values accessors
     private var OrderValue: protoex.Order
@@ -29,7 +29,7 @@ open class Receiver : fbe.ReceiverProtocol, ReceiverListener {
     public var logging: Bool = false
     public var final: Bool = false
 
-    public init() {
+    public override init() {
         protoReceiver = proto.Receiver(buffer: buffer)
         OrderValue = protoex.Order()
         OrderModel = protoex.OrderModel()
@@ -37,17 +37,19 @@ open class Receiver : fbe.ReceiverProtocol, ReceiverListener {
         BalanceModel = protoex.BalanceModel()
         AccountValue = protoex.Account()
         AccountModel = protoex.AccountModel()
+        super.init()
         build(final: false)
     }
 
     public init(buffer: fbe.Buffer) {
-        protoReceiver = proto.Receiver(buffer)
+        protoReceiver = proto.Receiver(buffer: buffer)
         OrderValue = protoex.Order()
         OrderModel = protoex.OrderModel()
         BalanceValue = protoex.Balance()
         BalanceModel = protoex.BalanceModel()
         AccountValue = protoex.Account()
         AccountModel = protoex.AccountModel()
+        super.init()
         build(with: buffer, final: false)
     }
 
@@ -111,14 +113,10 @@ open class Receiver : fbe.ReceiverProtocol, ReceiverListener {
         default: break
         }
 
-        if let protoReceiver == protoReceiver, protoReceiver.onReceiveListener(listener, type, buffer, offset, size) {
+        if let protoReceiver = protoReceiver, protoReceiver.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {
             return true
         }
 
         return false
     }
-
-        open func onReceive(value: protoex.Order) { }
-        open func onReceive(value: protoex.Balance) { }
-        open func onReceive(value: protoex.Account) { }
-    }
+}

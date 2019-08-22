@@ -11,7 +11,7 @@ import com.chronoxor.test.fbe
 open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
 {
     // Imported proxy
-    var protoProxy: com.chronoxor.proto.fbe.Proxy? = null
+    var protoProxy: com.chronoxor.proto.fbe.Proxy?
 
     // Proxy models accessors
     private val StructSimpleModel: StructSimpleModel

@@ -7,8 +7,9 @@
 import fbe
 
 // Fast Binary Encoding proto receiver listener
-public protocol ReceiverListener{
-    func onReceive(value: proto.Order)
-    func onReceive(value: proto.Balance)
-    func onReceive(value: proto.Account)
+open class ReceiverListener {
+    public init() { }
+    open func onReceive(value: proto.Order) { }
+    open func onReceive(value: proto.Balance) { }
+    open func onReceive(value: proto.Account) { }
 }

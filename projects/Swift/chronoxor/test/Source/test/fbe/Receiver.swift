@@ -11,9 +11,9 @@ import fbe
 import proto
 
 // Fast Binary Encoding com.chronoxor.test receiver
-open class Receiver : fbe.ReceiverProtocol, ReceiverListener {
+open class Receiver : ReceiverListener, fbe.ReceiverProtocol {
     // Imported receivers
-    let protoReceiver: proto.Receiver? = nil
+    let protoReceiver: proto.Receiver?
 
     // Receiver values accessors
     private var StructSimpleValue: test.StructSimple
@@ -47,7 +47,7 @@ open class Receiver : fbe.ReceiverProtocol, ReceiverListener {
     public var logging: Bool = false
     public var final: Bool = false
 
-    public init() {
+    public override init() {
         protoReceiver = proto.Receiver(buffer: buffer)
         StructSimpleValue = test.StructSimple()
         StructSimpleModel = test.StructSimpleModel()
@@ -73,11 +73,12 @@ open class Receiver : fbe.ReceiverProtocol, ReceiverListener {
         StructHashExModel = test.StructHashExModel()
         StructEmptyValue = test.StructEmpty()
         StructEmptyModel = test.StructEmptyModel()
+        super.init()
         build(final: false)
     }
 
     public init(buffer: fbe.Buffer) {
-        protoReceiver = proto.Receiver(buffer)
+        protoReceiver = proto.Receiver(buffer: buffer)
         StructSimpleValue = test.StructSimple()
         StructSimpleModel = test.StructSimpleModel()
         StructOptionalValue = test.StructOptional()
@@ -102,6 +103,7 @@ open class Receiver : fbe.ReceiverProtocol, ReceiverListener {
         StructHashExModel = test.StructHashExModel()
         StructEmptyValue = test.StructEmpty()
         StructEmptyModel = test.StructEmptyModel()
+        super.init()
         build(with: buffer, final: false)
     }
 
@@ -318,23 +320,10 @@ open class Receiver : fbe.ReceiverProtocol, ReceiverListener {
         default: break
         }
 
-        if let protoReceiver == protoReceiver, protoReceiver.onReceiveListener(listener, type, buffer, offset, size) {
+        if let protoReceiver = protoReceiver, protoReceiver.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {
             return true
         }
 
         return false
     }
-
-        open func onReceive(value: test.StructSimple) { }
-        open func onReceive(value: test.StructOptional) { }
-        open func onReceive(value: test.StructNested) { }
-        open func onReceive(value: test.StructBytes) { }
-        open func onReceive(value: test.StructArray) { }
-        open func onReceive(value: test.StructVector) { }
-        open func onReceive(value: test.StructList) { }
-        open func onReceive(value: test.StructSet) { }
-        open func onReceive(value: test.StructMap) { }
-        open func onReceive(value: test.StructHash) { }
-        open func onReceive(value: test.StructHashEx) { }
-        open func onReceive(value: test.StructEmpty) { }
-    }
+}

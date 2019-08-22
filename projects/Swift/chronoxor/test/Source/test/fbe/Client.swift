@@ -11,12 +11,12 @@ import fbe
 import proto
 
 // Fast Binary Encoding test client
-open class Client : fbe.ClientProtocol, ReceiverListener {
+open class Client : ReceiverListener, fbe.ClientProtocol {
     // Imported senders
     let protoSender: proto.Client
 
     // Imported receivers
-    let protoReceiver: proto.Client? = null
+    let protoReceiver: proto.Client?
 
     // Client sender models accessors
     let StructSimpleSenderModel: StructSimpleModel
@@ -65,7 +65,7 @@ open class Client : fbe.ClientProtocol, ReceiverListener {
     public var logging: Bool = false
     public var final: Bool = false
 
-    public init() {
+    public override init() {
         protoSender = proto.Client(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
         protoReceiver = proto.Client(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
         StructSimpleSenderModel = StructSimpleModel(buffer: sendBuffer)
@@ -104,6 +104,7 @@ open class Client : fbe.ClientProtocol, ReceiverListener {
         StructEmptySenderModel = StructEmptyModel(buffer: sendBuffer)
         StructEmptyReceiverValue = test.StructEmpty()
         StructEmptyReceiverModel = StructEmptyModel()
+        super.init()
         build(with: false)
     }
 
@@ -146,6 +147,7 @@ open class Client : fbe.ClientProtocol, ReceiverListener {
         StructEmptySenderModel = StructEmptyModel(buffer: sendBuffer)
         StructEmptyReceiverValue = test.StructEmpty()
         StructEmptyReceiverModel = StructEmptyModel()
+        super.init()
         build(with: sendBuffer, receiveBuffer: receiveBuffer, final: false)
     }
 
@@ -168,7 +170,7 @@ open class Client : fbe.ClientProtocol, ReceiverListener {
 
         // Try to send using imported clients
         var result: Int = 0
-        result = protoSender.send(obj: obj)
+        result = try protoSender.send(obj: obj)
         if result > 0 { return result }
 
         return 0
@@ -558,23 +560,10 @@ open class Client : fbe.ClientProtocol, ReceiverListener {
         default: break
         }
 
-        if let protoReceiver == protoReceiver, protoReceiver.onReceiveListener(listener, type, buffer, offset, size) {
+        if let protoReceiver = protoReceiver, protoReceiver.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {
             return true
         }
 
         return false
     }
-
-    open func onReceive(value: test.StructSimple) { }
-    open func onReceive(value: test.StructOptional) { }
-    open func onReceive(value: test.StructNested) { }
-    open func onReceive(value: test.StructBytes) { }
-    open func onReceive(value: test.StructArray) { }
-    open func onReceive(value: test.StructVector) { }
-    open func onReceive(value: test.StructList) { }
-    open func onReceive(value: test.StructSet) { }
-    open func onReceive(value: test.StructMap) { }
-    open func onReceive(value: test.StructHash) { }
-    open func onReceive(value: test.StructHashEx) { }
-    open func onReceive(value: test.StructEmpty) { }
 }

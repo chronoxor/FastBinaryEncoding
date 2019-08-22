@@ -9,18 +9,18 @@ import fbe
 import proto
 
 // Fast Binary Encoding test receiver listener
-public protocol ReceiverListener : proto.ReceiverListener
+open class ReceiverListener : proto.ReceiverListener
 {
-    func onReceive(value: test.StructSimple)
-    func onReceive(value: test.StructOptional)
-    func onReceive(value: test.StructNested)
-    func onReceive(value: test.StructBytes)
-    func onReceive(value: test.StructArray)
-    func onReceive(value: test.StructVector)
-    func onReceive(value: test.StructList)
-    func onReceive(value: test.StructSet)
-    func onReceive(value: test.StructMap)
-    func onReceive(value: test.StructHash)
-    func onReceive(value: test.StructHashEx)
-    func onReceive(value: test.StructEmpty)
+    open func onReceive(value: test.StructSimple) { }
+    open func onReceive(value: test.StructOptional) { }
+    open func onReceive(value: test.StructNested) { }
+    open func onReceive(value: test.StructBytes) { }
+    open func onReceive(value: test.StructArray) { }
+    open func onReceive(value: test.StructVector) { }
+    open func onReceive(value: test.StructList) { }
+    open func onReceive(value: test.StructSet) { }
+    open func onReceive(value: test.StructMap) { }
+    open func onReceive(value: test.StructHash) { }
+    open func onReceive(value: test.StructHashEx) { }
+    open func onReceive(value: test.StructEmpty) { }
 }

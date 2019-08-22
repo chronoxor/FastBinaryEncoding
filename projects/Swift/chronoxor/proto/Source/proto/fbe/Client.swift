@@ -9,7 +9,7 @@ import Foundation
 import fbe
 
 // Fast Binary Encoding proto client
-open class Client : fbe.ClientProtocol, ReceiverListener {
+open class Client : ReceiverListener, fbe.ClientProtocol {
     // Client sender models accessors
     let OrderSenderModel: OrderModel
     let BalanceSenderModel: BalanceModel
@@ -30,7 +30,7 @@ open class Client : fbe.ClientProtocol, ReceiverListener {
     public var logging: Bool = false
     public var final: Bool = false
 
-    public init() {
+    public override init() {
         OrderSenderModel = OrderModel(buffer: sendBuffer)
         OrderReceiverValue = proto.Order()
         OrderReceiverModel = OrderModel()
@@ -40,6 +40,7 @@ open class Client : fbe.ClientProtocol, ReceiverListener {
         AccountSenderModel = AccountModel(buffer: sendBuffer)
         AccountReceiverValue = proto.Account()
         AccountReceiverModel = AccountModel()
+        super.init()
         build(with: false)
     }
 
@@ -53,6 +54,7 @@ open class Client : fbe.ClientProtocol, ReceiverListener {
         AccountSenderModel = AccountModel(buffer: sendBuffer)
         AccountReceiverValue = proto.Account()
         AccountReceiverModel = AccountModel()
+        super.init()
         build(with: sendBuffer, receiveBuffer: receiveBuffer, final: false)
     }
 
@@ -174,8 +176,4 @@ open class Client : fbe.ClientProtocol, ReceiverListener {
 
         return false
     }
-
-    open func onReceive(value: proto.Order) { }
-    open func onReceive(value: proto.Balance) { }
-    open func onReceive(value: proto.Account) { }
 }

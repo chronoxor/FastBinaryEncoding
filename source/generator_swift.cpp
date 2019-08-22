@@ -6845,10 +6845,11 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("var result: Int = 0");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("result = " + *import + "Sender.send(obj: obj)");
-            WriteLineIndent("if (result > 0)");
+            WriteLineIndent("result = try " + *import + "Sender.send(obj: obj)");
+            WriteLineIndent("if result > 0 {");
             Indent(1);
             WriteLineIndent("return result");
+            WriteLineIndent("}");
             Indent(-1);
         }
         WriteLine();
@@ -6932,7 +6933,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final receiver");
     else
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " receiver");
-    WriteLineIndent("open class " + receiver + " : " + "fbe.ReceiverProtocol, " + listener + " {");
+    WriteLineIndent("open class " + receiver + " : "  + listener +  ", fbe.ReceiverProtocol {");
     Indent(1);
 
     // Generate imported receivers accessors
@@ -6940,7 +6941,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
     {
         WriteLineIndent("// Imported receivers");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("let " + *import + "Receiver: " + *import + "." + receiver + "? = nil");
+            WriteLineIndent("let " + *import + "Receiver: " + *import + "." + receiver + "?");
         WriteLine();
     }
 
@@ -6970,7 +6971,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
     WriteLine();
 
     // Generate receiver constructors
-    WriteLineIndent("public init() {");
+    WriteLineIndent("public override init() {");
     Indent(1);
     if (p->import)
     {
@@ -6986,16 +6987,18 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
             WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
         }
     }
+    WriteLineIndent("super.init()");
     WriteLineIndent("build(final: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
+
     WriteLineIndent("public init(buffer: fbe.Buffer) {");
     Indent(1);
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Receiver = " + *import + "." + receiver + "(buffer)");
+            WriteLineIndent(*import + "Receiver = " + *import + "." + receiver + "(buffer: buffer)");
     }
     if (p->body)
     {
@@ -7006,6 +7009,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
             WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
         }
     }
+    WriteLineIndent("super.init()");
     WriteLineIndent("build(with: buffer, final: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
     WriteLineIndent("}");
@@ -7055,7 +7059,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if let " + *import + "Receiver == " + *import + "Receiver, " + *import + "Receiver.onReceiveListener(listener, type, buffer, offset, size) {");
+            WriteLineIndent("if let " + *import + "Receiver = " + *import + "Receiver, " + *import + "Receiver.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
@@ -7066,17 +7070,6 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
     WriteLineIndent("return false");
     Indent(-1);
     WriteLineIndent("}");
-
-    WriteLine();
-    Indent(1);
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-        {
-            std::string struct_name = *p->name + "." + *s->name;
-            WriteLineIndent("open func onReceive(value: " + struct_name + ") { }");
-        }
-    }
 
     // Generate receiver end
     Indent(-1);
@@ -7116,7 +7109,7 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver listener");
     else
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver listener");
-    WriteIndent("public protocol " + listener);
+    WriteIndent("open class " + listener);
     if (p->import)
     {
         bool first = true;
@@ -7127,9 +7120,13 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
             first = false;
         }
     }
-    WriteIndent("{");
+    WriteIndent(" {");
     WriteLine();
     Indent(1);
+
+    if (!p->import) {
+      WriteLineIndent("public init() { }");
+    }
 
     // Generate receiver listener handlers
     if (p->body)
@@ -7137,7 +7134,7 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = *p->name + "." + *s->name;
-            WriteLineIndent("func onReceive(value: " + struct_name + ")");
+            WriteLineIndent("open func onReceive(value: " + struct_name + ") { }");
         }
     }
 
@@ -7189,7 +7186,7 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     {
         WriteLineIndent("// Imported proxy");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("var " + *import + "Proxy: " + domain + *import + ".fbe." + proxy + "? = null");
+            WriteLineIndent("var " + *import + "Proxy: " + domain + *import + ".fbe." + proxy + "?");
         WriteLine();
     }
 
@@ -7416,7 +7413,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " final client");
     else
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " client");
-    WriteLineIndent("open class " + client + " : " + "fbe.ClientProtocol, " + listener + " {");
+    WriteLineIndent("open class " + client + " : " + listener + ", fbe.ClientProtocol {");
     Indent(1);
 
     // Generate imported senders accessors
@@ -7433,7 +7430,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     {
         WriteLineIndent("// Imported receivers");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("let " + *import + "Receiver: " + *import + "." + client + "? = null");
+            WriteLineIndent("let " + *import + "Receiver: " + *import + "." + client + "?");
         WriteLine();
     }
 
@@ -7469,7 +7466,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     WriteLine();
 
     // Generate client constructors
-    WriteLineIndent("public init() {");
+    WriteLineIndent("public override init() {");
     Indent(1);
     if (p->import)
     {
@@ -7489,6 +7486,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
         }
     }
+    WriteLineIndent("super.init()");
     WriteLineIndent("build(with: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
     WriteLineIndent("}");
@@ -7513,6 +7511,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
         }
     }
+    WriteLineIndent("super.init()");
     WriteLineIndent("build(with: sendBuffer, receiveBuffer: receiveBuffer, final: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
     WriteLineIndent("}");
@@ -7541,7 +7540,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("var result: Int = 0");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("result = " + *import + "Sender.send(obj: obj)");
+            WriteLineIndent("result = try " + *import + "Sender.send(obj: obj)");
             WriteLineIndent("if result > 0 { return result }");
         }
         WriteLine();
@@ -7627,7 +7626,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-          WriteLineIndent("if let " + *import + "Receiver == " + *import + "Receiver, " + *import + "Receiver.onReceiveListener(listener, type, buffer, offset, size) {");
+          WriteLineIndent("if let " + *import + "Receiver = " + *import + "Receiver, " + *import + "Receiver.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
@@ -7638,16 +7637,6 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("return false");
     Indent(-1);
     WriteLineIndent("}");
-
-    WriteLine();
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-        {
-            std::string struct_name = *p->name + "." + *s->name;
-            WriteLineIndent("open func onReceive(value: " + struct_name + ") { }");
-        }
-    }
 
     // Generate client end
     Indent(-1);

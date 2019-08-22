@@ -11,12 +11,12 @@ import fbe
 import proto
 
 // Fast Binary Encoding protoex final client
-open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
+open class FinalClient : FinalReceiverListener, fbe.ClientProtocol {
     // Imported senders
     let protoSender: proto.FinalClient
 
     // Imported receivers
-    let protoReceiver: proto.FinalClient? = null
+    let protoReceiver: proto.FinalClient?
 
     // Client sender models accessors
     let OrderSenderModel: OrderFinalModel
@@ -38,7 +38,7 @@ open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
     public var logging: Bool = false
     public var final: Bool = false
 
-    public init() {
+    public override init() {
         protoSender = proto.FinalClient(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
         protoReceiver = proto.FinalClient(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
         OrderSenderModel = OrderFinalModel(buffer: sendBuffer)
@@ -50,6 +50,7 @@ open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
         AccountSenderModel = AccountFinalModel(buffer: sendBuffer)
         AccountReceiverValue = protoex.Account()
         AccountReceiverModel = AccountFinalModel()
+        super.init()
         build(with: true)
     }
 
@@ -65,6 +66,7 @@ open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
         AccountSenderModel = AccountFinalModel(buffer: sendBuffer)
         AccountReceiverValue = protoex.Account()
         AccountReceiverModel = AccountFinalModel()
+        super.init()
         build(with: sendBuffer, receiveBuffer: receiveBuffer, final: true)
     }
 
@@ -78,7 +80,7 @@ open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
 
         // Try to send using imported clients
         var result: Int = 0
-        result = protoSender.send(obj: obj)
+        result = try protoSender.send(obj: obj)
         if result > 0 { return result }
 
         return 0
@@ -189,14 +191,10 @@ open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
         default: break
         }
 
-        if let protoReceiver == protoReceiver, protoReceiver.onReceiveListener(listener, type, buffer, offset, size) {
+        if let protoReceiver = protoReceiver, protoReceiver.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {
             return true
         }
 
         return false
     }
-
-    open func onReceive(value: protoex.Order) { }
-    open func onReceive(value: protoex.Balance) { }
-    open func onReceive(value: protoex.Account) { }
 }

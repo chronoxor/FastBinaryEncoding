@@ -11,12 +11,12 @@ import fbe
 import proto
 
 // Fast Binary Encoding test final client
-open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
+open class FinalClient : FinalReceiverListener, fbe.ClientProtocol {
     // Imported senders
     let protoSender: proto.FinalClient
 
     // Imported receivers
-    let protoReceiver: proto.FinalClient? = null
+    let protoReceiver: proto.FinalClient?
 
     // Client sender models accessors
     let StructSimpleSenderModel: StructSimpleFinalModel
@@ -65,7 +65,7 @@ open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
     public var logging: Bool = false
     public var final: Bool = false
 
-    public init() {
+    public override init() {
         protoSender = proto.FinalClient(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
         protoReceiver = proto.FinalClient(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
         StructSimpleSenderModel = StructSimpleFinalModel(buffer: sendBuffer)
@@ -104,6 +104,7 @@ open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
         StructEmptySenderModel = StructEmptyFinalModel(buffer: sendBuffer)
         StructEmptyReceiverValue = test.StructEmpty()
         StructEmptyReceiverModel = StructEmptyFinalModel()
+        super.init()
         build(with: true)
     }
 
@@ -146,6 +147,7 @@ open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
         StructEmptySenderModel = StructEmptyFinalModel(buffer: sendBuffer)
         StructEmptyReceiverValue = test.StructEmpty()
         StructEmptyReceiverModel = StructEmptyFinalModel()
+        super.init()
         build(with: sendBuffer, receiveBuffer: receiveBuffer, final: true)
     }
 
@@ -168,7 +170,7 @@ open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
 
         // Try to send using imported clients
         var result: Int = 0
-        result = protoSender.send(obj: obj)
+        result = try protoSender.send(obj: obj)
         if result > 0 { return result }
 
         return 0
@@ -558,23 +560,10 @@ open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
         default: break
         }
 
-        if let protoReceiver == protoReceiver, protoReceiver.onReceiveListener(listener, type, buffer, offset, size) {
+        if let protoReceiver = protoReceiver, protoReceiver.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {
             return true
         }
 
         return false
     }
-
-    open func onReceive(value: test.StructSimple) { }
-    open func onReceive(value: test.StructOptional) { }
-    open func onReceive(value: test.StructNested) { }
-    open func onReceive(value: test.StructBytes) { }
-    open func onReceive(value: test.StructArray) { }
-    open func onReceive(value: test.StructVector) { }
-    open func onReceive(value: test.StructList) { }
-    open func onReceive(value: test.StructSet) { }
-    open func onReceive(value: test.StructMap) { }
-    open func onReceive(value: test.StructHash) { }
-    open func onReceive(value: test.StructHashEx) { }
-    open func onReceive(value: test.StructEmpty) { }
 }
