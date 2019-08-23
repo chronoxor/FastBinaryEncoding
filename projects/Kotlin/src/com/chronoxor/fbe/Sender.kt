@@ -9,7 +9,7 @@ package com.chronoxor.fbe
 
 // Fast Binary Encoding base sender
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class Sender
+abstract class Sender : SenderListener
 {
     // Get the bytes buffer
     var buffer: Buffer = Buffer()
@@ -46,8 +46,4 @@ abstract class Sender
 
     // Send message handler
     protected abstract fun onSend(buffer: ByteArray, offset: Long, size: Long): Long
-
-    // Send log message handler
-    @Suppress("UNUSED_PARAMETER")
-    protected open fun onSendLog(message: String) {}
 }

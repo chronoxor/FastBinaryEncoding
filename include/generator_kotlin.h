@@ -77,8 +77,11 @@ private:
     void GenerateFBEFinalModelMap(const std::string& domain, const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model);
     void GenerateFBEFinalModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type);
     void GenerateFBESender(const std::string& domain, const std::string& package);
+    void GenerateFBESenderListener(const std::string& domain, const std::string& package);
     void GenerateFBEReceiver(const std::string& domain, const std::string& package);
+    void GenerateFBEReceiverListener(const std::string& domain, const std::string& package);
     void GenerateFBEClient(const std::string& domain, const std::string& package);
+    void GenerateFBEClientListener(const std::string& domain, const std::string& package);
     void GenerateFBEJson(const std::string& domain, const std::string& package);
 
     void GenerateContainers(const std::shared_ptr<Package>& p, bool final);
@@ -96,11 +99,13 @@ private:
     void GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s);
     void GenerateProtocolVersion(const std::shared_ptr<Package>& p);
     void GenerateSender(const std::shared_ptr<Package>& p, bool final);
+    void GenerateSenderListener(const std::shared_ptr<Package>& p, bool final);
     void GenerateReceiver(const std::shared_ptr<Package>& p, bool final);
     void GenerateReceiverListener(const std::shared_ptr<Package>& p, bool final);
     void GenerateProxy(const std::shared_ptr<Package>& p, bool final);
     void GenerateProxyListener(const std::shared_ptr<Package>& p, bool final);
     void GenerateClient(const std::shared_ptr<Package>& p, bool final);
+    void GenerateClientListener(const std::shared_ptr<Package>& p, bool final);
     void GenerateJson(const std::shared_ptr<Package>& p);
 
     bool IsKnownType(const std::string& type);

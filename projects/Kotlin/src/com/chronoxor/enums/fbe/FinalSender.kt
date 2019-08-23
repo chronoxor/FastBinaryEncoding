@@ -9,7 +9,7 @@ package com.chronoxor.enums.fbe
 
 // Fast Binary Encoding com.chronoxor.enums final sender
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
-open class FinalSender : com.chronoxor.fbe.Sender
+open class FinalSender : com.chronoxor.fbe.Sender, FinalSenderListener
 {
     // Sender models accessors
 
@@ -21,8 +21,13 @@ open class FinalSender : com.chronoxor.fbe.Sender
     {
     }
 
-    @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
     fun send(obj: Any): Long
+    {
+        return sendListener(this, obj)
+    }
+
+    @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
+    fun sendListener(listener: FinalSenderListener, obj: Any): Long
     {
 
         return 0

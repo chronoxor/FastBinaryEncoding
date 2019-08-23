@@ -9,7 +9,7 @@ package com.chronoxor.enums.fbe
 
 // Fast Binary Encoding com.chronoxor.enums final client
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
-open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
+open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
 {
     // Client sender models accessors
 
@@ -25,8 +25,13 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
     {
     }
 
-    @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
     fun send(obj: Any): Long
+    {
+        return sendListener(this, obj)
+    }
+
+    @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
+    fun sendListener(listener: FinalClientListener, obj: Any): Long
     {
 
         return 0
@@ -35,12 +40,13 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
 
     // Send message handler
     override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException("com.chronoxor.enums.fbe.Client.onSend() not implemented!") }
+
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         return onReceiveListener(this, type, buffer, offset, size)
     }
 
-    open fun onReceiveListener(listener: FinalReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    open fun onReceiveListener(listener: FinalClientListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
 
         return false

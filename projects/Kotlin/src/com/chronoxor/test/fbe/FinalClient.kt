@@ -9,7 +9,7 @@ package com.chronoxor.test.fbe
 
 // Fast Binary Encoding com.chronoxor.test final client
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
-open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
+open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
 {
     // Imported senders
     val protoSender: com.chronoxor.proto.fbe.FinalClient
@@ -35,14 +35,19 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
         protoReceiver = com.chronoxor.proto.fbe.FinalClient(sendBuffer, receiveBuffer)
     }
 
-    @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
     fun send(obj: Any): Long
+    {
+        return sendListener(this, obj)
+    }
+
+    @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
+    fun sendListener(listener: FinalClientListener, obj: Any): Long
     {
 
         // Try to send using imported clients
         @Suppress("CanBeVal")
         var result: Long
-        result = protoSender.send(obj)
+        result = protoSender.sendListener(listener, obj)
         if (result > 0)
             return result
 
@@ -52,12 +57,13 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
 
     // Send message handler
     override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException("com.chronoxor.test.fbe.Client.onSend() not implemented!") }
+
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         return onReceiveListener(this, type, buffer, offset, size)
     }
 
-    open fun onReceiveListener(listener: FinalReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    open fun onReceiveListener(listener: FinalClientListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
 
         if ((protoReceiver != null) && protoReceiver!!.onReceiveListener(listener, type, buffer, offset, size))

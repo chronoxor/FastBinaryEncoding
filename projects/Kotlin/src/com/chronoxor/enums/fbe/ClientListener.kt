@@ -7,7 +7,7 @@
 
 package com.chronoxor.enums.fbe
 
-// Fast Binary Encoding com.chronoxor.enums receiver listener
-interface ReceiverListener : com.chronoxor.fbe.ReceiverListener
+// Fast Binary Encoding com.chronoxor.enums client listener
+interface ClientListener : com.chronoxor.fbe.ClientListener, SenderListener, ReceiverListener
 {
 }

@@ -67,8 +67,11 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
     if (Proto())
     {
         GenerateFBESender(domain, "fbe");
+        GenerateFBESenderListener(domain, "fbe");
         GenerateFBEReceiver(domain, "fbe");
+        GenerateFBEReceiverListener(domain, "fbe");
         GenerateFBEClient(domain, "fbe");
+        GenerateFBEClientListener(domain, "fbe");
     }
     if (JSON())
         GenerateFBEJson(domain, "fbe");
@@ -3597,7 +3600,7 @@ void GeneratorKotlin::GenerateFBESender(const std::string& domain, const std::st
     std::string code = R"CODE(
 // Fast Binary Encoding base sender
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class Sender
+abstract class Sender : SenderListener
 {
     // Get the bytes buffer
     var buffer: Buffer = Buffer()
@@ -3634,10 +3637,39 @@ abstract class Sender
 
     // Send message handler
     protected abstract fun onSend(buffer: ByteArray, offset: Long, size: Long): Long
+}
+)CODE";
 
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorKotlin::GenerateFBESenderListener(const std::string& domain, const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
+
+    // Open the file
+    CppCommon::Path file = path / "SenderListener.kt";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+    GenerateImports(domain, package);
+
+    std::string code = R"CODE(
+// Fast Binary Encoding base sender listener
+interface SenderListener
+{
     // Send log message handler
-    @Suppress("UNUSED_PARAMETER")
-    protected open fun onSendLog(message: String) {}
+    fun onSendLog(message: String) {}
 }
 )CODE";
 
@@ -3668,7 +3700,7 @@ void GeneratorKotlin::GenerateFBEReceiver(const std::string& domain, const std::
     std::string code = R"CODE(
 // Fast Binary Encoding base receiver
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class Receiver
+abstract class Receiver : ReceiverListener
 {
     // Get the bytes buffer
     var buffer: Buffer = Buffer()
@@ -3934,10 +3966,39 @@ abstract class Receiver
 
     // Receive message handler
     abstract fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+}
+)CODE";
 
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorKotlin::GenerateFBEReceiverListener(const std::string& domain, const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
+
+    // Open the file
+    CppCommon::Path file = path / "ReceiverListener.kt";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+    GenerateImports(domain, package);
+
+    std::string code = R"CODE(
+// Fast Binary Encoding base receiver listener
+interface ReceiverListener
+{
     // Receive log message handler
-    @Suppress("UNUSED_PARAMETER")
-    protected open fun onReceiveLog(message: String) {}
+    fun onReceiveLog(message: String) {}
 }
 )CODE";
 
@@ -3968,7 +4029,7 @@ void GeneratorKotlin::GenerateFBEClient(const std::string& domain, const std::st
     std::string code = R"CODE(
 // Fast Binary Encoding base client
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class Client
+abstract class Client : ClientListener
 {
     // Get the send bytes buffer
     var sendBuffer: Buffer = Buffer()
@@ -4008,10 +4069,6 @@ abstract class Client
 
     // Send message handler
     protected abstract fun onSend(buffer: ByteArray, offset: Long, size: Long): Long
-
-    // Send log message handler
-    @Suppress("UNUSED_PARAMETER")
-    protected open fun onSendLog(message: String) {}
 
     // Receive data
     fun receive(buffer: Buffer) { receive(buffer.data, 0, buffer.size) }
@@ -4262,10 +4319,37 @@ abstract class Client
 
     // Receive message handler
     abstract fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+}
+)CODE";
 
-    // Receive log message handler
-    @Suppress("UNUSED_PARAMETER")
-    protected open fun onReceiveLog(message: String) {}
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorKotlin::GenerateFBEClientListener(const std::string& domain, const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
+
+    // Open the file
+    CppCommon::Path file = path / "ClientListener.kt";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+    GenerateImports(domain, package);
+
+    std::string code = R"CODE(
+// Fast Binary Encoding base client listener
+interface ClientListener : SenderListener, ReceiverListener
+{
 }
 )CODE";
 
@@ -4588,17 +4672,21 @@ void GeneratorKotlin::GeneratePackage(const std::shared_ptr<Package>& p)
 
         // Generate sender & receiver
         GenerateSender(p, false);
+        GenerateSenderListener(p, false);
         GenerateReceiver(p, false);
         GenerateReceiverListener(p, false);
         GenerateProxy(p, false);
         GenerateProxyListener(p, false);
         GenerateClient(p, false);
+        GenerateClientListener(p, false);
         if (Final())
         {
             GenerateSender(p, true);
+            GenerateSenderListener(p, true);
             GenerateReceiver(p, true);
             GenerateReceiverListener(p, true);
             GenerateClient(p, true);
+            GenerateClientListener(p, true);
         }
     }
 
@@ -6745,6 +6833,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
+    std::string listener = (final ? "FinalSenderListener" : "SenderListener");
     std::string sender = (final ? "FinalSender" : "Sender");
     std::string model = (final ? "FinalModel" : "Model");
 
@@ -6763,7 +6852,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     else
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " sender");
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"PropertyName\")");
-    WriteLineIndent("open class " + sender + " : " + domain + "fbe.Sender");
+    WriteLineIndent("open class " + sender + " : " + domain + "fbe.Sender, " + listener);
     WriteLineIndent("{");
     Indent(1);
 
@@ -6828,8 +6917,15 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
             messages = true;
 
     // Generate generic sender method
-    WriteLineIndent("@Suppress(\"JoinDeclarationAndAssignment\", \"UNUSED_PARAMETER\")");
     WriteLineIndent("fun send(obj: Any): Long");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("return sendListener(this, obj)");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("@Suppress(\"JoinDeclarationAndAssignment\", \"UNUSED_PARAMETER\")");
+    WriteLineIndent("fun sendListener(listener: " + listener + ", obj: Any): Long");
     WriteLineIndent("{");
     Indent(1);
     if (p->body && messages)
@@ -6842,7 +6938,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
             if (s->message)
             {
                 std::string struct_name = domain + *p->name + "." + *s->name;
-                WriteLineIndent("is " + struct_name + " -> if (obj.fbeType == " + *s->name + "Model.fbeType) return send(obj)");
+                WriteLineIndent("is " + struct_name + " -> if (obj.fbeType == " + *s->name + "Model.fbeType) return sendListener(listener, obj)");
             }
         }
         Indent(-1);
@@ -6856,7 +6952,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("var result: Long");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("result = " + *import + "Sender.send(obj)");
+            WriteLineIndent("result = " + *import + "Sender.sendListener(listener, obj)");
             WriteLineIndent("if (result > 0)");
             Indent(1);
             WriteLineIndent("return result");
@@ -6880,6 +6976,13 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
                 WriteLineIndent("fun send(value: " + struct_name + "): Long");
                 WriteLineIndent("{");
                 Indent(1);
+                WriteLineIndent("return sendListener(this, value)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("fun sendListener(listener: " + listener + ", value: " + struct_name + "): Long");
+                WriteLineIndent("{");
+                Indent(1);
                 WriteLineIndent("// Serialize the value into the FBE stream");
                 WriteLineIndent("val serialized = " + *s->name + "Model.serialize(value)");
                 WriteLineIndent("assert(serialized > 0) { \"" + struct_name + " serialization failed!\" }");
@@ -6890,7 +6993,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("val message = value.toString()");
-                WriteLineIndent("onSendLog(message)");
+                WriteLineIndent("listener.onSendLog(message)");
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLine();
@@ -6908,6 +7011,60 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException(\"" + domain + *p->name + ".fbe.Sender.onSend() not implemented!\") }");
 
     // Generate sender end
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorKotlin::GenerateSenderListener(const std::shared_ptr<Package>& p, bool final)
+{
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    std::string package = *p->name;
+
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+
+    // Create package path
+    CppCommon::Directory::CreateTree(path);
+
+    std::string listener = (final ? "FinalSenderListener" : "SenderListener");
+
+    // Open the file
+    CppCommon::Path file = path / (listener + ".kt");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports(domain, package + ".fbe");
+
+    // Generate sender listener begin
+    WriteLine();
+    if (final)
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final sender listener");
+    else
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " sender listener");
+    WriteIndent("interface " + listener);
+    if (p->import)
+    {
+        bool first = true;
+        WriteIndent(" : ");
+        for (const auto& import : p->import->imports)
+        {
+            WriteIndent((first ? "" : ", ") + domain + *import + ".fbe." + listener);
+            first = false;
+        }
+    }
+    else
+        WriteIndent(" : " + domain + "fbe.SenderListener");
+    WriteLine();
+    WriteLineIndent("{");
+    Indent(1);
+
+    // Generate sender listener end
     Indent(-1);
     WriteLineIndent("}");
 
@@ -7145,6 +7302,8 @@ void GeneratorKotlin::GenerateReceiverListener(const std::shared_ptr<Package>& p
             first = false;
         }
     }
+    else
+        WriteIndent(" : " + domain + "fbe.ReceiverListener");
     WriteLine();
     WriteLineIndent("{");
     Indent(1);
@@ -7374,6 +7533,8 @@ void GeneratorKotlin::GenerateProxyListener(const std::shared_ptr<Package>& p, b
             first = false;
         }
     }
+    else
+        WriteIndent(" : " + domain + "fbe.ReceiverListener");
     WriteLine();
     WriteLineIndent("{");
     Indent(1);
@@ -7412,7 +7573,7 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    std::string listener = (final ? "FinalReceiverListener" : "ReceiverListener");
+    std::string listener = (final ? "FinalClientListener" : "ClientListener");
     std::string client = (final ? "FinalClient" : "Client");
     std::string model = (final ? "FinalModel" : "Model");
 
@@ -7545,8 +7706,15 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             messages = true;
 
     // Generate generic client send method
-    WriteLineIndent("@Suppress(\"JoinDeclarationAndAssignment\", \"UNUSED_PARAMETER\")");
     WriteLineIndent("fun send(obj: Any): Long");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("return sendListener(this, obj)");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("@Suppress(\"JoinDeclarationAndAssignment\", \"UNUSED_PARAMETER\")");
+    WriteLineIndent("fun sendListener(listener: " + listener + ", obj: Any): Long");
     WriteLineIndent("{");
     Indent(1);
     if (p->body && messages)
@@ -7559,7 +7727,7 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             if (s->message)
             {
                 std::string struct_name = domain + *p->name + "." + *s->name;
-                WriteLineIndent("is " + struct_name + " -> if (obj.fbeType == " + *s->name + "SenderModel.fbeType) return send(obj)");
+                WriteLineIndent("is " + struct_name + " -> if (obj.fbeType == " + *s->name + "SenderModel.fbeType) return sendListener(listener, obj)");
             }
         }
         Indent(-1);
@@ -7573,7 +7741,7 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("var result: Long");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("result = " + *import + "Sender.send(obj)");
+            WriteLineIndent("result = " + *import + "Sender.sendListener(listener, obj)");
             WriteLineIndent("if (result > 0)");
             Indent(1);
             WriteLineIndent("return result");
@@ -7597,6 +7765,13 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 WriteLineIndent("fun send(value: " + struct_name + "): Long");
                 WriteLineIndent("{");
                 Indent(1);
+                WriteLineIndent("return sendListener(this, value)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("fun sendListener(listener: " + listener + ", value: " + struct_name + "): Long");
+                WriteLineIndent("{");
+                Indent(1);
                 WriteLineIndent("// Serialize the value into the FBE stream");
                 WriteLineIndent("val serialized = " + *s->name + "SenderModel.serialize(value)");
                 WriteLineIndent("assert(serialized > 0) { \"" + struct_name + " serialization failed!\" }");
@@ -7607,7 +7782,7 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("val message = value.toString()");
-                WriteLineIndent("onSendLog(message)");
+                WriteLineIndent("listener.onSendLog(message)");
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLine();
@@ -7623,6 +7798,8 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     WriteLine();
     WriteLineIndent("// Send message handler");
     WriteLineIndent("override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException(\"" + domain + *p->name + ".fbe.Client.onSend() not implemented!\") }");
+
+    WriteLine();
 
     // Generate client receive message handler
     WriteLineIndent("override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
@@ -7689,6 +7866,63 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("}");
 
     // Generate client end
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorKotlin::GenerateClientListener(const std::shared_ptr<Package>& p, bool final)
+{
+    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    std::string package = *p->name;
+
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+
+    // Create package path
+    CppCommon::Directory::CreateTree(path);
+
+    std::string listener = (final ? "FinalClientListener" : "ClientListener");
+    std::string sender = (final ? "FinalSenderListener" : "SenderListener");
+    std::string receiver = (final ? "FinalReceiverListener" : "ReceiverListener");
+
+    // Open the file
+    CppCommon::Path file = path / (listener + ".kt");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports(domain, package + ".fbe");
+
+    // Generate client listener begin
+    WriteLine();
+    if (final)
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final client listener");
+    else
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " client listener");
+    WriteIndent("interface " + listener);
+    if (p->import)
+    {
+        bool first = true;
+        WriteIndent(" : ");
+        for (const auto& import : p->import->imports)
+        {
+            WriteIndent((first ? "" : ", ") + domain + *import + ".fbe." + listener);
+            first = false;
+        }
+    }
+    else
+        WriteIndent(" : " + domain + "fbe.ClientListener");
+    WriteIndent(", " + sender + ", " + receiver);
+    WriteLine();
+    WriteLineIndent("{");
+    Indent(1);
+
+    // Generate client listener end
     Indent(-1);
     WriteLineIndent("}");
 
