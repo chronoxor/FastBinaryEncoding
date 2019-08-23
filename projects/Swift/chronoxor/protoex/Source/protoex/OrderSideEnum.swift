@@ -20,7 +20,6 @@ public enum OrderSideEnum {
         }
     }
 
-
     init(value: UInt8) { self = OrderSideEnum(rawValue: NSNumber(value: value).uint8Value) }
     init(value: UInt16) { self = OrderSideEnum(rawValue: NSNumber(value: value).uint8Value) }
     init(value: UInt32) { self = OrderSideEnum(rawValue: NSNumber(value: value).uint8Value) }
@@ -33,7 +32,6 @@ public enum OrderSideEnum {
         case .buy: return "buy"
         case .sell: return "sell"
         case .tell: return "tell"
-        default: return "<unknown>"
         }
     }
 

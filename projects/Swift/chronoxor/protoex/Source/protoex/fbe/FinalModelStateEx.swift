@@ -42,7 +42,7 @@ public class FinalModelStateEx: FinalModel {
     }
 
     // Set the value
-    public func set(value: StateEx) -> Int {
+    public func set(value: StateEx) throws -> Int {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             assertionFailure("Model is broken!")
             return 0

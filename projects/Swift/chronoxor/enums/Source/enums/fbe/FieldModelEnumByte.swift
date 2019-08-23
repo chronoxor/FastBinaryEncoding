@@ -29,7 +29,7 @@ public class FieldModelEnumByte: FieldModel {
     }
 
     // Set the value
-    public func set(value: EnumByte) {
+    public func set(value: EnumByte) throws {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             assertionFailure("Model is broken!")
             return

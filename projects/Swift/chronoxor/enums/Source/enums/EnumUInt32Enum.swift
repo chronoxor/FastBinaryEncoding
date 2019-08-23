@@ -26,7 +26,6 @@ public enum EnumUInt32Enum {
         }
     }
 
-
     init(value: UInt8) { self = EnumUInt32Enum(rawValue: NSNumber(value: value).uint32Value) }
     init(value: UInt16) { self = EnumUInt32Enum(rawValue: NSNumber(value: value).uint32Value) }
     init(value: UInt32) { self = EnumUInt32Enum(rawValue: NSNumber(value: value).uint32Value) }
@@ -42,7 +41,6 @@ public enum EnumUInt32Enum {
         case .ENUM_VALUE_3: return "ENUM_VALUE_3"
         case .ENUM_VALUE_4: return "ENUM_VALUE_4"
         case .ENUM_VALUE_5: return "ENUM_VALUE_5"
-        default: return "<unknown>"
         }
     }
 

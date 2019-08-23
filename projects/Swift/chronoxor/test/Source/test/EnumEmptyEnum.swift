@@ -14,7 +14,6 @@ public enum EnumEmptyEnum {
         }
     }
 
-
     init(value: Int8) { self = EnumEmptyEnum(rawValue: NSNumber(value: value).int32Value) }
     init(value: Int16) { self = EnumEmptyEnum(rawValue: NSNumber(value: value).int32Value) }
     init(value: Int32) { self = EnumEmptyEnum(rawValue: NSNumber(value: value).int32Value) }
@@ -24,7 +23,6 @@ public enum EnumEmptyEnum {
 
     var description: String {
         switch self {
-        default: return "<unknown>"
         }
     }
 

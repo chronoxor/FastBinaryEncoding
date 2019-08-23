@@ -51,7 +51,7 @@ public class FinalModelString: FinalModel {
     }
 
     // Set the value
-    public func set(value: String) -> Int {
+    public func set(value: String) throws -> Int {
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size) {
             return 0
         }

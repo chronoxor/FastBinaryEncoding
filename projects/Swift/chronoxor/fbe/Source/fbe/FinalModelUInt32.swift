@@ -44,7 +44,7 @@ public class FinalModelUInt32: FinalModel {
     }
 
     // Set the value
-    public func set(value: UInt32) -> Int {
+    public func set(value: UInt32) throws -> Int {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             assertionFailure("Model is broken!")
             return 0

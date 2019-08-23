@@ -964,7 +964,7 @@ public class FieldModel_NAME_: FieldModel {
     }
 
     // Set the value
-    public func set(value: _TYPE_) {
+    public func set(value: _TYPE_) throws {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return
@@ -1042,7 +1042,7 @@ public class FieldModelDecimal: FieldModel {
     }
 
     // Set the value
-    public func set(value: Decimal) {
+    public func set(value: Decimal) throws {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             assertionFailure("Model is broken!")
             return
@@ -1056,13 +1056,6 @@ public class FieldModelDecimal: FieldModel {
             // Issue during normalize decimal number
             write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
         }
-
-//        let bitLength = valueRef._length
-//        if valueRef.exponent {
-//            // Value scale exceeds .NET Decimal limit of [0, 28]
-//            write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
-//            return
-//        }
 
         // Get scale
          let scale = UInt8(abs(valueRef.exponent))
@@ -1152,7 +1145,7 @@ public class FieldModelDate: FieldModel {
     }
 
     // Set the value
-    public func set(value: Date) {
+    public func set(value: Date) throws {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             assertionFailure("Model is broken!")
             return
@@ -1212,7 +1205,7 @@ public class FieldModelTimestamp: FieldModel {
         return nanoseconds / 1000000000
     }
 
-    public func set(value: TimeInterval) {
+    public func set(value: TimeInterval) throws {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             assertionFailure("Model is broken!")
             return
@@ -2277,7 +2270,7 @@ public class FieldModel_NAME_: FieldModel {
     }
 
     // Set the value
-    public func set(value: _NAME_) {
+    public func set(value: _NAME_) throws {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             assertionFailure("Model is broken!")
             return
@@ -2495,7 +2488,7 @@ public class FinalModel_NAME_: FinalModel {
     }
 
     // Set the value
-    public func set(value: _TYPE_) -> Int {
+    public func set(value: _TYPE_) throws -> Int {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             assertionFailure("Model is broken!")
             return 0
@@ -2589,7 +2582,7 @@ public class FinalModelDecimal: FinalModel {
     }
 
     // Set the value
-    public func set(value: Decimal) -> Int {
+    public func set(value: Decimal) throws -> Int {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             assertionFailure("Model is broken!")
             return 0
@@ -2707,7 +2700,7 @@ public class FinalModelDate: FinalModel {
     }
 
     // Set the value
-    public func set(value: Date) -> Int {
+    public func set(value: Date) throws -> Int {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             assertionFailure("Model is broken!")
             return 0
@@ -2785,7 +2778,7 @@ public class FinalModelTimestamp: FinalModel {
     }
 
     // Set the value
-    public func set(value: Double) -> Int {
+    public func set(value: Double) throws -> Int {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             assertionFailure("Model is broken!")
             return 0
@@ -2959,7 +2952,7 @@ public class FinalModelString: FinalModel {
     }
 
     // Set the value
-    public func set(value: String) -> Int {
+    public func set(value: String) throws -> Int {
         if ((_buffer.offset + fbeOffset + 4) > _buffer.size) {
             return 0
         }
@@ -3603,7 +3596,7 @@ public class FinalModel_NAME_: FinalModel {
     }
 
     // Set the value
-    public func set(value: _NAME_) -> Int {
+    public func set(value: _NAME_) throws -> Int {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             assertionFailure("Model is broken!")
             return 0
@@ -4661,7 +4654,6 @@ void GeneratorSwift::GenerateEnum(const std::shared_ptr<Package>& p, const std::
     }
 
     // Generate enum constructors
-    WriteLine();
     if ((enum_type == "char") || (enum_type == "wchar"))
         WriteLineIndent("init(value: Character) { self = " + enum_name + "(rawValue: NSNumber(value: Int(String(value))!)" + enum_to + " ) }");
     if (IsUnsignedType(enum_type))
@@ -4691,7 +4683,6 @@ void GeneratorSwift::GenerateEnum(const std::shared_ptr<Package>& p, const std::
         for (const auto& value : e->body->values)
             WriteLineIndent("case ." + *value->name + ":" + " return \"" + *value->name + "\"");
     }
-    WriteLineIndent("default: return \"<unknown>\"");
     WriteLineIndent("}");
     Indent(-1);
     WriteLineIndent("}");

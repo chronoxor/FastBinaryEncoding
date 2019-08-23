@@ -42,7 +42,7 @@ public class FinalModelEnumUInt8: FinalModel {
     }
 
     // Set the value
-    public func set(value: EnumUInt8) -> Int {
+    public func set(value: EnumUInt8) throws -> Int {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             assertionFailure("Model is broken!")
             return 0

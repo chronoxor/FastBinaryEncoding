@@ -26,7 +26,6 @@ public enum EnumCharEnum {
         }
     }
 
-
     init(value: Character) { self = EnumCharEnum(rawValue: NSNumber(value: Int(String(value))!).uint8Value ) }
     init(value: Int8) { self = EnumCharEnum(rawValue: NSNumber(value: value).uint8Value) }
     init(value: Int16) { self = EnumCharEnum(rawValue: NSNumber(value: value).uint8Value) }
@@ -43,7 +42,6 @@ public enum EnumCharEnum {
         case .ENUM_VALUE_3: return "ENUM_VALUE_3"
         case .ENUM_VALUE_4: return "ENUM_VALUE_4"
         case .ENUM_VALUE_5: return "ENUM_VALUE_5"
-        default: return "<unknown>"
         }
     }
 

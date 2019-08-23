@@ -14,7 +14,7 @@ public class FinalModelBalance: FinalModel {
     public var _offset: Int
 
     let parent: proto.FinalModelBalance
-    let locked: FinalModelDouble
+    let locked: fbe.FinalModelDouble
 
     // Field type
     public var fbeType: Int = fbeTypeConst

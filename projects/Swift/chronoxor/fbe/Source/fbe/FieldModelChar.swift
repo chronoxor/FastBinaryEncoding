@@ -34,7 +34,7 @@ public class FieldModelChar: FieldModel {
     }
 
     // Set the value
-    public func set(value: Character) {
+    public func set(value: Character) throws {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return

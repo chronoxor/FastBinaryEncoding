@@ -34,7 +34,7 @@ public class FieldModelInt8: FieldModel {
     }
 
     // Set the value
-    public func set(value: Int8) {
+    public func set(value: Int8) throws {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return

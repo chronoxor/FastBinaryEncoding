@@ -54,7 +54,7 @@ public class Buffer {
 
     // Attach memory buffer methods
     public func attach(capacity: Int) {
-        data = Data(count: capacity)
+        data = Data(capacity: capacity)
         size = 0
         offset = 0
     }

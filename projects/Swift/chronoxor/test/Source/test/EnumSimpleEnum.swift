@@ -26,7 +26,6 @@ public enum EnumSimpleEnum {
         }
     }
 
-
     init(value: Int8) { self = EnumSimpleEnum(rawValue: NSNumber(value: value).int32Value) }
     init(value: Int16) { self = EnumSimpleEnum(rawValue: NSNumber(value: value).int32Value) }
     init(value: Int32) { self = EnumSimpleEnum(rawValue: NSNumber(value: value).int32Value) }
@@ -42,7 +41,6 @@ public enum EnumSimpleEnum {
         case .ENUM_VALUE_3: return "ENUM_VALUE_3"
         case .ENUM_VALUE_4: return "ENUM_VALUE_4"
         case .ENUM_VALUE_5: return "ENUM_VALUE_5"
-        default: return "<unknown>"
         }
     }
 

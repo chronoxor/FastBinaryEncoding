@@ -9,7 +9,7 @@ import Foundation
 import fbe
 
 // Fast Binary Encoding com.chronoxor.enums final receiver
-open class FinalReceiver : fbe.ReceiverProtocol, FinalReceiverListener {
+open class FinalReceiver : fbe.ReceiverProtocol {
     // Receiver values accessors
     private var EnumsValue: enums.Enums
 
@@ -33,7 +33,7 @@ open class FinalReceiver : fbe.ReceiverProtocol, FinalReceiverListener {
     }
 
     public func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self, type: type, buffer: buffer, offset: offset, size: size)
+        return onReceiveListener(listener: self as! FinalReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: FinalReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
@@ -60,6 +60,4 @@ open class FinalReceiver : fbe.ReceiverProtocol, FinalReceiverListener {
 
         return false
     }
-
-        open func onReceive(value: enums.Enums) { }
-    }
+}

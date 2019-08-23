@@ -11,33 +11,28 @@ import fbe
 import proto
 
 // Fast Binary Encoding com.chronoxor.protoex final receiver
-open class FinalReceiver : FinalReceiverListener, fbe.ReceiverProtocol {
+open class FinalReceiver : fbe.ReceiverProtocol {
     // Imported receivers
     let protoReceiver: proto.FinalReceiver?
 
     // Receiver values accessors
     private var OrderValue: protoex.Order
     private var BalanceValue: protoex.Balance
-    private var AccountValue: protoex.Account
 
     // Receiver models accessors
     private var OrderModel: OrderFinalModel
     private var BalanceModel: BalanceFinalModel
-    private var AccountModel: AccountFinalModel
 
     public var buffer: Buffer = Buffer()
     public var logging: Bool = false
     public var final: Bool = false
 
-    public override init() {
+    public init() {
         protoReceiver = proto.FinalReceiver(buffer: buffer)
         OrderValue = protoex.Order()
         OrderModel = protoex.OrderFinalModel()
         BalanceValue = protoex.Balance()
         BalanceModel = protoex.BalanceFinalModel()
-        AccountValue = protoex.Account()
-        AccountModel = protoex.AccountFinalModel()
-        super.init()
         build(final: true)
     }
 
@@ -47,14 +42,11 @@ open class FinalReceiver : FinalReceiverListener, fbe.ReceiverProtocol {
         OrderModel = protoex.OrderFinalModel()
         BalanceValue = protoex.Balance()
         BalanceModel = protoex.BalanceFinalModel()
-        AccountValue = protoex.Account()
-        AccountModel = protoex.AccountFinalModel()
-        super.init()
         build(with: buffer, final: true)
     }
 
     public func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self, type: type, buffer: buffer, offset: offset, size: size)
+        return onReceiveListener(listener: self as! FinalReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: FinalReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
@@ -92,23 +84,6 @@ open class FinalReceiver : FinalReceiverListener, fbe.ReceiverProtocol {
 
             // Call receive handler with deserialized value
             listener.onReceive(value: BalanceValue)
-            return true
-        case protoex.AccountFinalModel.fbeTypeConst:
-            // Deserialize the value from the FBE stream
-            AccountModel.attach(buffer: buffer, offset: offset)
-            assert(AccountModel.verify(), "protoex.Account validation failed!")
-            let deserialized = AccountModel.deserialize(value: &AccountValue)
-            assert(deserialized > 0, "protoex.Account deserialization failed!")
-
-            // Log the value
-            if (logging)
-            {
-                let message = AccountValue.description
-                onReceiveLog(message: message)
-            }
-
-            // Call receive handler with deserialized value
-            listener.onReceive(value: AccountValue)
             return true
         default: break
         }

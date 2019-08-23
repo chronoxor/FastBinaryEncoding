@@ -34,7 +34,7 @@ public class FieldModelBoolean: FieldModel {
     }
 
     // Set the value
-    public func set(value: Bool) {
+    public func set(value: Bool) throws {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return

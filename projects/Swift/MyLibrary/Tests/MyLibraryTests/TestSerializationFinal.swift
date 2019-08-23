@@ -191,8 +191,6 @@ class TestSerializationFinal: XCTestCase {
     }
     
     func testSerializationStructOptional() {
-        let struct11 = StructSimple()
-
         // Create a new struct
         let struct1 = test.StructOptional()
         
@@ -444,9 +442,6 @@ class TestSerializationFinal: XCTestCase {
     }
     
     func testSerializationStructNested() {
-        var struct11 = StructSimple()
-        struct11 = StructOptional()
-        
         // Create a new struct
         let struct1 = StructNested()
         
@@ -1280,9 +1275,6 @@ class TestSerializationFinal: XCTestCase {
     }
     
     func testSerializationStructHashExtended() {
-        var struct11 = StructSimple()
-        struct11 = StructOptional()
-        
         // Create a new struct
         let struct1 = StructHashEx()
         let s1 = StructSimple()

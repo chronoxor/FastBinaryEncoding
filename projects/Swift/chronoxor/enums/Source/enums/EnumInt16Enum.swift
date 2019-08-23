@@ -26,7 +26,6 @@ public enum EnumInt16Enum {
         }
     }
 
-
     init(value: Int8) { self = EnumInt16Enum(rawValue: NSNumber(value: value).int16Value) }
     init(value: Int16) { self = EnumInt16Enum(rawValue: NSNumber(value: value).int16Value) }
     init(value: Int32) { self = EnumInt16Enum(rawValue: NSNumber(value: value).int16Value) }
@@ -42,7 +41,6 @@ public enum EnumInt16Enum {
         case .ENUM_VALUE_3: return "ENUM_VALUE_3"
         case .ENUM_VALUE_4: return "ENUM_VALUE_4"
         case .ENUM_VALUE_5: return "ENUM_VALUE_5"
-        default: return "<unknown>"
         }
     }
 

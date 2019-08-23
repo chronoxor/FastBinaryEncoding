@@ -29,7 +29,7 @@ public class FieldModelTimestamp: FieldModel {
         return nanoseconds / 1000000000
     }
 
-    public func set(value: TimeInterval) {
+    public func set(value: TimeInterval) throws {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
             assertionFailure("Model is broken!")
             return

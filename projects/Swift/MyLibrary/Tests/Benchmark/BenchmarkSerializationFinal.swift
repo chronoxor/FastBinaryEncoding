@@ -46,7 +46,9 @@ class BenchmarkSerializationFinal: XCTestCase {
     func testPerformanceVerify() {
         self.measure {
             // Verify the account
-            _ = BenchmarkSerializationFinal._writer.verify()
+            for _ in 0...999 {
+                _ = BenchmarkSerializationFinal._writer.verify()
+            }
         }
     }
     

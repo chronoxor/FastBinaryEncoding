@@ -34,7 +34,7 @@ public class FieldModelFloat: FieldModel {
     }
 
     // Set the value
-    public func set(value: Float) {
+    public func set(value: Float) throws {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return

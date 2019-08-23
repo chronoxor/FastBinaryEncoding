@@ -20,7 +20,6 @@ public enum OrderTypeEnum {
         }
     }
 
-
     init(value: UInt8) { self = OrderTypeEnum(rawValue: NSNumber(value: value).uint8Value) }
     init(value: UInt16) { self = OrderTypeEnum(rawValue: NSNumber(value: value).uint8Value) }
     init(value: UInt32) { self = OrderTypeEnum(rawValue: NSNumber(value: value).uint8Value) }
@@ -33,7 +32,6 @@ public enum OrderTypeEnum {
         case .market: return "market"
         case .limit: return "limit"
         case .stop: return "stop"
-        default: return "<unknown>"
         }
     }
 

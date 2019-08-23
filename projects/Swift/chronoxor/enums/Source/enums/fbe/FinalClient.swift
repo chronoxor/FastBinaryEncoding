@@ -9,7 +9,7 @@ import Foundation
 import fbe
 
 // Fast Binary Encoding enums final client
-open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
+open class FinalClient : fbe.ClientProtocol {
     // Client sender models accessors
     let EnumsSenderModel: EnumsFinalModel
 
@@ -66,7 +66,7 @@ open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
     // Send message handler
     open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }
     open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self, type: type, buffer: buffer, offset: offset, size: size)
+        return onReceiveListener(listener: self as! FinalReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: FinalReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
@@ -92,6 +92,4 @@ open class FinalClient : fbe.ClientProtocol, FinalReceiverListener {
 
         return false
     }
-
-    open func onReceive(value: enums.Enums) { }
 }

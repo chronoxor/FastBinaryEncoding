@@ -9,9 +9,12 @@ import fbe
 import proto
 
 // Fast Binary Encoding protoex final receiver listener
-open class FinalReceiverListener : proto.FinalReceiverListener
-{
-    open func onReceive(value: protoex.Order) { }
-    open func onReceive(value: protoex.Balance) { }
-    open func onReceive(value: protoex.Account) { }
+public protocol FinalReceiverListener : proto.FinalReceiverListener
+ {
+    func onReceive(value: protoex.Order)
+    func onReceive(value: protoex.Balance)
+}
+public extension FinalReceiverListener {
+    func onReceive(value: protoex.Order) { }
+    func onReceive(value: protoex.Balance) { }
 }

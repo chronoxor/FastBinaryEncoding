@@ -11,7 +11,7 @@ class TestDecimal: XCTestCase {
     func testDecimal() {
         XCTAssertEqual(verifyDecimal(low: 0x00000000, mid: 0x00000000, high: 0x00000000, negative: false, scale: 0x00000000), Decimal.zero)
         XCTAssertEqual(verifyDecimal(low: 0x00000001, mid: 0x00000000, high: 0x00000000, negative: false, scale: 0x00000000), Decimal(integerLiteral: 1))
-        XCTAssertEqual(verifyDecimal(low: 0x107A4000, mid: 0x00005AF3, high: 0x00000000, negative: false, scale: 0x00000000), Decimal(integerLiteral: 100000000000000))
+        XCTAssertEqual(verifyDecimal(low: 0x107A4000, mid: 0x00005AF3, high: 0x00000000, negative: false, scale: 0x00000000), Decimal(string: "100000000000000"))
         XCTAssertEqual(verifyDecimal(low: 0x10000000, mid: 0x3E250261, high: 0x204FCE5E, negative: false, scale: UInt8(0x000E0000 >> 16)), Decimal(string: "100000000000000.00000000000000"))
         XCTAssertEqual(verifyDecimal(low: 0x10000000, mid: 0x3E250261, high: 0x204FCE5E, negative: false, scale: UInt8(0x00000000)), Decimal(string: "10000000000000000000000000000"))
         XCTAssertEqual(verifyDecimal(low: 0x10000000, mid: 0x3E250261, high: 0x204FCE5E, negative: false, scale: UInt8(0x001C0000 >> 16)), Decimal(string: "1.0000000000000000000000000000"))
@@ -40,7 +40,7 @@ class TestDecimal: XCTestCase {
         let model = FieldModelDecimal(buffer: buffer, offset: 0)
         let value1 = model.get()
 
-        model.set(value: value1)
+        try! model.set(value: value1)
         if (Buffer.readUInt32(buffer: buffer, offset: 0) != low) ||
             (Buffer.readUInt32(buffer: buffer, offset: 4) != mid) ||
             (Buffer.readUInt32(buffer: buffer, offset: 8) != high) ||
@@ -51,7 +51,7 @@ class TestDecimal: XCTestCase {
         let finalModel = FinalModelDecimal(buffer: buffer, offset: 0)
         var size = Size()
         let value2 = finalModel.get(size: &size)
-        _ = finalModel.set(value: value2)
+        _ = try! finalModel.set(value: value2)
         if
             (Buffer.readUInt32(buffer: buffer, offset: 0) != low) ||
             (Buffer.readUInt32(buffer: buffer, offset: 4) != mid) ||
