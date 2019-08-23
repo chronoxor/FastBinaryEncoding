@@ -1,22 +1,18 @@
 //
 //  SendReceiveTest.swift
-//  FastBinaryEncodingTests
-//
-//  Created by Andrey on 8/5/19.
-//  Copyright © 2019 Andrey. All rights reserved.
 //
 
 import XCTest
 import proto
 
-class MyFinalSender: FinalSender {
+fileprivate class MyFinalSender: FinalSender {
     override func onSend(buffer: Data, offset: Int, size: Int) throws -> Int {
         // Send nothing...
         return 0
     }
 }
 
-class MyFinalReceiver: FinalReceiver {
+fileprivate class MyFinalReceiver: FinalReceiver, proto.FinalReceiverListener {
     private var _order: Bool = false
     private var _balance: Bool = false
     private var _account: Bool = false
@@ -25,20 +21,21 @@ class MyFinalReceiver: FinalReceiver {
         return  _order && _balance && _account
     }
     
-    override func onReceive(value: proto.Order) {
+    func onReceive(value: proto.Order) {
         _order = true
     }
     
-    override func onReceive(value: proto.Balance) {
+    func onReceive(value: proto.Balance) {
         _balance = true
     }
     
-    override func onReceive(value: proto.Account) {
+    func onReceive(value: proto.Account) {
         _account = true
     }
 }
 
-class SendReceiveFinalTest: XCTestCase {
+class TestSendReceiveFinal: XCTestCase {
+    
     func testSendAndReceive() {
         for i in 0...99 {
             for j in 0...99 {

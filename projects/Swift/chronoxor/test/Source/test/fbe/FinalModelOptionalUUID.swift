@@ -17,7 +17,7 @@ class FinalModelOptionalUUID: FinalModel {
     var _offset: Int
 
     // Base field model value
-    let value: FinalModelUUID
+    let value: fbe.FinalModelUUID
 
     required init() {
         let buffer = Buffer()
@@ -26,14 +26,14 @@ class FinalModelOptionalUUID: FinalModel {
         _buffer = buffer
         _offset = offset
 
-        value = FinalModelUUID(buffer: buffer, offset: offset)
+        value = fbe.FinalModelUUID(buffer: buffer, offset: offset)
     }
 
     required init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        value = FinalModelUUID(buffer: buffer, offset: offset)
+        value = fbe.FinalModelUUID(buffer: buffer, offset: offset)
     }
 
     func fbeAllocationSize(value optional: UUID?) -> Int {

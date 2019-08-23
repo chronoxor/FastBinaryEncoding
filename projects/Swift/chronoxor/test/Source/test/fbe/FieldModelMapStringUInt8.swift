@@ -18,8 +18,8 @@ import proto
 
 // Fast Binary Encoding String->UInt8 map field model
 class FieldModelMapStringUInt8: FieldModel {
-    private let _modelKey: FieldModelString
-    private let _modelValue: FieldModelUInt8
+    private let _modelKey: fbe.FieldModelString
+    private let _modelValue: fbe.FieldModelUInt8
 
     var _buffer: Buffer
     var _offset: Int
@@ -60,16 +60,16 @@ class FieldModelMapStringUInt8: FieldModel {
         _buffer = buffer
         _offset = offset
 
-        _modelKey = FieldModelString(buffer: buffer, offset: offset)
-        _modelValue = FieldModelUInt8(buffer: buffer, offset: offset)
+        _modelKey = fbe.FieldModelString(buffer: buffer, offset: offset)
+        _modelValue = fbe.FieldModelUInt8(buffer: buffer, offset: offset)
     }
 
     required init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        _modelKey = FieldModelString(buffer: buffer, offset: offset)
-        _modelValue = FieldModelUInt8(buffer: buffer, offset: offset)
+        _modelKey = fbe.FieldModelString(buffer: buffer, offset: offset)
+        _modelValue = fbe.FieldModelUInt8(buffer: buffer, offset: offset)
     }
 
     // Get the vector offset
@@ -96,7 +96,7 @@ class FieldModelMapStringUInt8: FieldModel {
     }
 
     // Vector index operator
-    public func getItem(index: Int) -> (FieldModelString, FieldModelUInt8) {
+    public func getItem(index: Int) -> (fbe.FieldModelString, fbe.FieldModelUInt8) {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
 
         let fbeMapOffset = Int(readUInt32(offset: fbeOffset))
@@ -112,7 +112,7 @@ class FieldModelMapStringUInt8: FieldModel {
         return (_modelKey, _modelValue)
     }
 
-    func resize(size: Int) throws -> (FieldModelString, FieldModelUInt8) {
+    func resize(size: Int) throws -> (fbe.FieldModelString, fbe.FieldModelUInt8) {
         let fbeMapSize = size * (_modelKey.fbeSize + _modelValue.fbeSize)
         let fbeMapOffset = try _buffer.allocate(size: 4 + fbeMapSize) - _buffer.offset
         assert((fbeMapOffset > 0) && ((_buffer.offset + fbeMapOffset + 4) <= _buffer.size), "Model is broken!")

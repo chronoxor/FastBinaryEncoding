@@ -20,7 +20,7 @@ public class FieldModelOptionalTimestamp: FieldModel {
     public let fbeSize: Int = 1 + 4
 
     // Base field model value
-    public let value: FieldModelTimestamp
+    public let value: fbe.FieldModelTimestamp
 
     public var fbeExtra: Int {
         if (!hasValue()) {
@@ -45,14 +45,14 @@ public class FieldModelOptionalTimestamp: FieldModel {
         _buffer = buffer
         _offset = offset
 
-        value = FieldModelTimestamp(buffer: buffer, offset: 0)
+        value = fbe.FieldModelTimestamp(buffer: buffer, offset: 0)
     }
 
     public required init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        value = FieldModelTimestamp(buffer: buffer, offset: 0)
+        value = fbe.FieldModelTimestamp(buffer: buffer, offset: 0)
     }
 
     public func hasValue() -> Bool {

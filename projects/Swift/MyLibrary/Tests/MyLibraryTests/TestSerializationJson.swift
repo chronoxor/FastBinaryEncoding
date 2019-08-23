@@ -1,18 +1,10 @@
 //
 //  TestSerializationJson.swift
-//  FastBinaryEncodingTests
-//
-//  Created by Andrey on 8/16/19.
-//  Copyright © 2019 Andrey. All rights reserved.
 //
 
 import XCTest
 import proto
 import test
-
-extension Dictionary: Codable {
-    
-}
 
 class TestSerializationJson: XCTestCase {
     

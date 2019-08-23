@@ -1,9 +1,5 @@
 //
 //  TestSerializationFinal.swift
-//  FastBinaryEncodingTests
-//
-//  Created by Andrey on 8/16/19.
-//  Copyright © 2019 Andrey. All rights reserved.
 //
 
 import XCTest

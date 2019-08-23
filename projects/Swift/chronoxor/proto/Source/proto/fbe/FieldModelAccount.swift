@@ -14,8 +14,8 @@ public class FieldModelAccount: FieldModel {
     public var _buffer: Buffer
     public var _offset: Int
 
-    let id: FieldModelInt32
-    let name: FieldModelString
+    let id: fbe.FieldModelInt32
+    let name: fbe.FieldModelString
     let state: FieldModelState
     let wallet: FieldModelBalance
     let asset: FieldModelOptionalBalance

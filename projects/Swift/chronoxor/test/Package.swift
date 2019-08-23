@@ -13,7 +13,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(path: "../fbe"),
-        .package(path: "../proto")
+        .package(path: "../proto"),
  
     ],
     targets: [

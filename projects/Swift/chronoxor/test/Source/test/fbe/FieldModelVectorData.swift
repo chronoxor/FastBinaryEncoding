@@ -12,7 +12,7 @@ import proto
 
 // Fast Binary Encoding Data vector field model
 class FieldModelVectorData: FieldModel {
-    private let _model: FieldModelData
+    private let _model: fbe.FieldModelData
 
     var _buffer: Buffer
     var _offset: Int
@@ -50,14 +50,14 @@ class FieldModelVectorData: FieldModel {
         _buffer = buffer
         _offset = offset
 
-        _model = FieldModelData(buffer: buffer, offset: offset)
+        _model = fbe.FieldModelData(buffer: buffer, offset: offset)
     }
 
     required init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        _model = FieldModelData(buffer: buffer, offset: offset)
+        _model = fbe.FieldModelData(buffer: buffer, offset: offset)
     }
 
     // Get the vector offset
@@ -84,7 +84,7 @@ class FieldModelVectorData: FieldModel {
     }
 
     // Vector index operator
-    public func getItem(index: Int) -> FieldModelData {
+    public func getItem(index: Int) -> fbe.FieldModelData {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
 
         let fbeVectorOffset = Int(readUInt32(offset: fbeOffset))
@@ -98,7 +98,7 @@ class FieldModelVectorData: FieldModel {
         return _model
     }
 
-    func resize(size: Int) throws -> FieldModelData {
+    func resize(size: Int) throws -> fbe.FieldModelData {
         let fbeVectorSize = size * _model.fbeSize
         let fbeVectorOffset = try _buffer.allocate(size: 4 + fbeVectorSize) - _buffer.offset
         assert((fbeVectorOffset > 0) && ((_buffer.offset + fbeVectorOffset + 4) <= _buffer.size), "Model is broken!")

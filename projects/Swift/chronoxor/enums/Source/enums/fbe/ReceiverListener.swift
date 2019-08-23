@@ -7,6 +7,9 @@
 import fbe
 
 // Fast Binary Encoding enums receiver listener
-public protocol ReceiverListener{
+public protocol ReceiverListener {
     func onReceive(value: enums.Enums)
+}
+public extension ReceiverListener {
+    func onReceive(value: enums.Enums) { }
 }

@@ -14,12 +14,12 @@ public class FieldModelOrder: FieldModel {
     public var _buffer: Buffer
     public var _offset: Int
 
-    let id: FieldModelInt32
-    let symbol: FieldModelString
+    let id: fbe.FieldModelInt32
+    let symbol: fbe.FieldModelString
     let side: FieldModelOrderSide
     let type: FieldModelOrderType
-    let price: FieldModelDouble
-    let volume: FieldModelDouble
+    let price: fbe.FieldModelDouble
+    let volume: fbe.FieldModelDouble
 
     // Field size
     public let fbeSize: Int = 4

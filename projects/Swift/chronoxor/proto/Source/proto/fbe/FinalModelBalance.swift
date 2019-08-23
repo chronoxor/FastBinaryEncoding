@@ -11,8 +11,8 @@ public class FinalModelBalance: FinalModel {
     public var _buffer: Buffer
     public var _offset: Int
 
-    let currency: FinalModelString
-    let amount: FinalModelDouble
+    let currency: fbe.FinalModelString
+    let amount: fbe.FinalModelDouble
 
     // Field type
     public var fbeType: Int = fbeTypeConst

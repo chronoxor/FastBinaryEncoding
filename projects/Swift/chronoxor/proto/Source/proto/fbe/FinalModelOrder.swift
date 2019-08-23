@@ -11,12 +11,12 @@ public class FinalModelOrder: FinalModel {
     public var _buffer: Buffer
     public var _offset: Int
 
-    let id: FinalModelInt32
-    let symbol: FinalModelString
+    let id: fbe.FinalModelInt32
+    let symbol: fbe.FinalModelString
     let side: FinalModelOrderSide
     let type: FinalModelOrderType
-    let price: FinalModelDouble
-    let volume: FinalModelDouble
+    let price: fbe.FinalModelDouble
+    let volume: fbe.FinalModelDouble
 
     // Field type
     public var fbeType: Int = fbeTypeConst

@@ -9,7 +9,7 @@ import Foundation
 import fbe
 
 // Fast Binary Encoding proto client
-open class Client : ReceiverListener, fbe.ClientProtocol {
+open class Client : fbe.ClientProtocol {
     // Client sender models accessors
     let OrderSenderModel: OrderModel
     let BalanceSenderModel: BalanceModel
@@ -30,7 +30,7 @@ open class Client : ReceiverListener, fbe.ClientProtocol {
     public var logging: Bool = false
     public var final: Bool = false
 
-    public override init() {
+    public init() {
         OrderSenderModel = OrderModel(buffer: sendBuffer)
         OrderReceiverValue = proto.Order()
         OrderReceiverModel = OrderModel()
@@ -40,7 +40,6 @@ open class Client : ReceiverListener, fbe.ClientProtocol {
         AccountSenderModel = AccountModel(buffer: sendBuffer)
         AccountReceiverValue = proto.Account()
         AccountReceiverModel = AccountModel()
-        super.init()
         build(with: false)
     }
 
@@ -54,7 +53,6 @@ open class Client : ReceiverListener, fbe.ClientProtocol {
         AccountSenderModel = AccountModel(buffer: sendBuffer)
         AccountReceiverValue = proto.Account()
         AccountReceiverModel = AccountModel()
-        super.init()
         build(with: sendBuffer, receiveBuffer: receiveBuffer, final: false)
     }
 
@@ -118,7 +116,7 @@ open class Client : ReceiverListener, fbe.ClientProtocol {
     // Send message handler
     open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }
     open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self, type: type, buffer: buffer, offset: offset, size: size)
+        return onReceiveListener(listener: self as! ReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: ReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {

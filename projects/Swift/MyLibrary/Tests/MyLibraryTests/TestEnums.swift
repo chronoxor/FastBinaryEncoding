@@ -1,9 +1,5 @@
 //
 //  TestEnums.swift
-//  FastBinaryEncodingTests
-//
-//  Created by Andrey on 8/6/19.
-//  Copyright © 2019 Andrey. All rights reserved.
 //
 
 import Foundation
@@ -18,12 +14,12 @@ class TestEnums: XCTestCase {
         
         // Serialize enums to the FBE stream
         let writer = EnumsModel()
-        //XCTAssertEqual(writer.model.fbeOffset, 4)
+        XCTAssertEqual(writer.model.fbeOffset, 4)
         let serialized = try? writer.serialize(value: enums1)
         XCTAssertEqual(serialized, writer.buffer.size)
         XCTAssertTrue(writer.verify())
         writer.next(prev: serialized!)
-        //XCTAssertEqual(writer.model.fbeOffset, 4 + writer.buffer.size)
+        XCTAssertEqual(writer.model.fbeOffset, 4 + writer.buffer.size)
         
         // Check the serialized FBE size
         XCTAssertEqual(writer.buffer.size, 232)
@@ -31,13 +27,13 @@ class TestEnums: XCTestCase {
         // Deserialize enums from the FBE stream
         var enums2 = Enums()
         let reader = EnumsModel()
-        //XCTAssertEqual(reader.model.fbeOffset, 4)
+        XCTAssertEqual(reader.model.fbeOffset, 4)
         reader.attach(buffer: writer.buffer)
         XCTAssertTrue(reader.verify())
         let deserialized = reader.deserialize(value: &enums2)
         XCTAssertEqual(deserialized, reader.buffer.size)
         reader.next(prev: deserialized)
-        //XCTAssertEqual(reader.model.fbeOffset, 4 + reader.buffer.size)
+        XCTAssertEqual(reader.model.fbeOffset, 4 + reader.buffer.size)
         
         XCTAssertEqual(enums2.byte0, EnumByte.ENUM_VALUE_0)
         XCTAssertEqual(enums2.byte1, EnumByte.ENUM_VALUE_1)

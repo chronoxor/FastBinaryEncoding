@@ -17,7 +17,7 @@ public class FieldModelBalance: FieldModel {
     public var _offset: Int
 
     let parent: proto.FieldModelBalance
-    let locked: FieldModelDouble
+    let locked: fbe.FieldModelDouble
 
     // Field size
     public let fbeSize: Int = 4

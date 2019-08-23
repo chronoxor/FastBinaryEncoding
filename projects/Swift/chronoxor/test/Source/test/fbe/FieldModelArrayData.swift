@@ -12,7 +12,7 @@ import proto
 
 // Fast Binary Encoding Data array field model
 class FieldModelArrayData: FieldModel {
-    private let _model: FieldModelData
+    private let _model: fbe.FieldModelData
 
     var _buffer: Buffer
     var _offset: Int
@@ -37,7 +37,7 @@ class FieldModelArrayData: FieldModel {
         _offset = offset
         self.size = 0
 
-        _model = FieldModelData(buffer: buffer, offset: offset)
+        _model = fbe.FieldModelData(buffer: buffer, offset: offset)
     }
 
     required init(buffer: Buffer, offset: Int, size: Int) {
@@ -45,11 +45,11 @@ class FieldModelArrayData: FieldModel {
         _offset = offset
         self.size =  size
 
-        _model = FieldModelData(buffer: buffer, offset: offset)
+        _model = fbe.FieldModelData(buffer: buffer, offset: offset)
     }
 
     // Vector index operator
-    public func getItem(index: Int) -> FieldModelData {
+    public func getItem(index: Int) -> fbe.FieldModelData {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         assert(index < size, "Model is broken!")
 

@@ -16,7 +16,7 @@ public class FieldModelStructBytes: FieldModel {
     public var _buffer: Buffer
     public var _offset: Int
 
-    let f1: FieldModelData
+    let f1: fbe.FieldModelData
     let f2: FieldModelOptionalData
     let f3: FieldModelOptionalData
 

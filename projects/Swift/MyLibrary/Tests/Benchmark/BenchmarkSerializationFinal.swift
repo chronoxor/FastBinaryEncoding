@@ -1,9 +1,5 @@
 //
 //  BenchmarkSerializationFinal.swift
-//  FastBinaryEncodingTests
-//
-//  Created by Andrey on 8/16/19.
-//  Copyright © 2019 Andrey. All rights reserved.
 //
 
 import XCTest
@@ -57,18 +53,20 @@ class BenchmarkSerializationFinal: XCTestCase {
     func testPerformanceSerialize() {
         self.measure {
             // Reset FBE stream
-            BenchmarkSerializationFinal._writer.reset()
-            // Serialize the account to the FBE stream
-            _ = try! BenchmarkSerializationFinal._writer.serialize(value: BenchmarkSerializationFinal._account)
+            for _ in 0...999 {
+                BenchmarkSerializationFinal._writer.reset()
+                // Serialize the account to the FBE stream
+                _ = try! BenchmarkSerializationFinal._writer.serialize(value: BenchmarkSerializationFinal._account)
+            }
         }
     }
     
     func testPerformanceDeserialize() {
         self.measure {
             // Deserialize the account from the FBE stream
-            //for _ in 0...100 {
-            _ = BenchmarkSerializationFinal._reader.deserialize(value: &BenchmarkSerializationFinal._account)
-            //}
+            for _ in 0...999 {
+                _ = BenchmarkSerializationFinal._reader.deserialize(value: &BenchmarkSerializationFinal._account)
+            }
         }
     }
 }

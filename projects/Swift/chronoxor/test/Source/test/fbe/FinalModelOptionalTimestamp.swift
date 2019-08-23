@@ -17,7 +17,7 @@ class FinalModelOptionalTimestamp: FinalModel {
     var _offset: Int
 
     // Base field model value
-    let value: FinalModelTimestamp
+    let value: fbe.FinalModelTimestamp
 
     required init() {
         let buffer = Buffer()
@@ -26,14 +26,14 @@ class FinalModelOptionalTimestamp: FinalModel {
         _buffer = buffer
         _offset = offset
 
-        value = FinalModelTimestamp(buffer: buffer, offset: offset)
+        value = fbe.FinalModelTimestamp(buffer: buffer, offset: offset)
     }
 
     required init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        value = FinalModelTimestamp(buffer: buffer, offset: offset)
+        value = fbe.FinalModelTimestamp(buffer: buffer, offset: offset)
     }
 
     func fbeAllocationSize(value optional: TimeInterval?) -> Int {

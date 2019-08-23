@@ -17,7 +17,7 @@ class FinalModelOptionalDecimal: FinalModel {
     var _offset: Int
 
     // Base field model value
-    let value: FinalModelDecimal
+    let value: fbe.FinalModelDecimal
 
     required init() {
         let buffer = Buffer()
@@ -26,14 +26,14 @@ class FinalModelOptionalDecimal: FinalModel {
         _buffer = buffer
         _offset = offset
 
-        value = FinalModelDecimal(buffer: buffer, offset: offset)
+        value = fbe.FinalModelDecimal(buffer: buffer, offset: offset)
     }
 
     required init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        value = FinalModelDecimal(buffer: buffer, offset: offset)
+        value = fbe.FinalModelDecimal(buffer: buffer, offset: offset)
     }
 
     func fbeAllocationSize(value optional: Decimal?) -> Int {

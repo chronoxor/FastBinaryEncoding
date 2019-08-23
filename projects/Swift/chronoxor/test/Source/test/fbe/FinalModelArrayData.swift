@@ -16,14 +16,14 @@ class FinalModelArrayData: FinalModel {
     var _offset: Int = 0
     var _size: Int = 0
 
-    private var _model: FinalModelData
+    private var _model: fbe.FinalModelData
 
     init(buffer: Buffer, offset: Int, size: Int) {
         _buffer = buffer
         _offset = offset
         _size = size
 
-        _model = FinalModelData(buffer: buffer, offset: offset)
+        _model = fbe.FinalModelData(buffer: buffer, offset: offset)
     }
 
     // Get the allocation size

@@ -1,0 +1,1723 @@
+/*
+   Manager protocol
+*/
+
+// Domain declaration
+domain com.finstek.proto
+
+// Package declaration
+package manager offset 5000
+
+// Protocol version
+version 0.4
+
+// Package imports
+import core
+import config
+import history
+import storage
+import client
+
+// Ping module request
+[request]
+[response(PongModuleResponse)]
+[reject(*core.Reject, PingModuleReject)]
+message PingModuleRequest : client.PingRequest
+{
+    // Ping module name
+    string Module;
+}
+
+// Pong module response
+message PongModuleResponse : client.PongResponse
+{
+    // Ping host name
+    string Host;
+    // Ping module name
+    string Module;
+}
+
+// Ping module reject
+message PingModuleReject : core.Reject
+{
+    // Ping host name
+    string Host;
+    // Ping module name
+    string Module;
+}
+
+// Validate account password request
+[request]
+[response(ValidateAccountPasswordResponse)]
+[reject(*core.Reject)]
+message ValidateAccountPasswordRequest : core.Request
+{
+    // Account Id
+    uuid? AccountId;
+    // Account login
+    uint64? AccountLogin;
+
+    // Password 
+    [hidden]
+    string Password;
+    // One-time-password token (optional)
+    [hidden]
+    string? OTPToken;
+}
+
+// Validate account password response
+message ValidateAccountPasswordResponse : core.Response
+{
+    // Account Id
+    uuid AccountId;
+    // Account login
+    uint64 AccountLogin;
+    
+    // Is the password valid?
+    bool IsValidPassword;
+    // Is the one-time-password token valid?
+    bool? IsValidOTPToken;
+}
+
+// Validate manager password request
+[request]
+[response(ValidateManagerPasswordResponse)]
+[reject(*core.Reject)]
+message ValidateManagerPasswordRequest : core.Request
+{
+    // Manager Id
+    uuid? ManagerId;
+    // Manager login
+    uint64? ManagerLogin;
+
+    // Password 
+    [hidden]
+    string Password;
+    // One-time-password token (optional)
+    [hidden]
+    string? OTPToken;
+}
+
+// Validate manager password response
+message ValidateManagerPasswordResponse : core.Response
+{
+    // Manager Id
+    uuid ManagerId;
+    // Manager login
+    uint64 ManagerLogin;
+    
+    // Is the password valid?
+    bool IsValidPassword;
+    // Is the one-time-password token valid?
+    bool? IsValidOTPToken;
+}
+
+// Manager session info request
+[request]
+[response(ManagerSessionInfoResponse)]
+[reject(*core.Reject)]
+message ManagerSessionInfoRequest : core.Request
+{
+}
+
+// Manager session info response
+message ManagerSessionInfoResponse : core.Response
+{
+    // Manager session info
+    core.ManagerSessionInfo SessionInfo;
+}
+
+// Online sessions request
+[request]
+[response(OnlineSessionsResponse)]
+[reject(*core.Reject)]
+message OnlineSessionsRequest : core.Request
+{
+}
+
+// Online sessions response
+message OnlineSessionsResponse : core.Response
+{
+    // Online sessions
+    core.SessionInfo[] OnlineSessions;
+}
+
+// Drop session request
+[request]
+[response(DropSessionResponse)]
+[reject(*core.Reject)]
+message DropSessionRequest : core.Request
+{
+    // Drop session Id
+    uuid? DropSessionId;
+    // Drop session login
+    uint64? DropSessionLogin;
+}
+
+// Drop session response
+message DropSessionResponse : core.Response
+{
+    // Dropped sessions
+    core.SessionInfo[] DroppedSessions;
+}
+
+// Configuration version request
+[request]
+[response(ConfigVersionResponse)]
+[reject(*core.Reject)]
+message ConfigVersionRequest : core.Request
+{
+}
+
+// Configuration version response
+message ConfigVersionResponse : core.Response
+{
+    // Configuration actual version as a timestamp
+    timestamp ActualVersion;
+}
+
+// Configuration export request
+[request]
+[response(ConfigExportResponse)]
+[reject(*core.Reject)]
+message ConfigExportRequest : core.Request
+{
+    // Configuration keys separated by semicolons
+    string Keys;
+}
+
+// Configuration export response
+message ConfigExportResponse : core.Response
+{
+    // Configuration actual version as a timestamp
+    timestamp ActualVersion;
+
+    // Configuration keys separated by semicolons
+    string Keys;
+    // Configuration content
+    string Content;
+}
+
+// Configuration import request
+[request]
+[response(ConfigImportResponse)]
+[reject(*core.Reject)]
+message ConfigImportRequest : core.Request
+{
+    // Configuration content
+    string Content;
+}
+
+// Configuration import response
+message ConfigImportResponse : core.Response
+{
+    // Configuration actual version as a timestamp
+    timestamp ActualVersion;
+
+    // Configuration changes
+    config.ConfigChange[] Changes;
+}
+
+// Configuration validate request
+[request]
+[response(ConfigValidateResponse)]
+[reject(*core.Reject)]
+message ConfigValidateRequest : core.Request
+{
+}
+
+// Configuration validate response
+message ConfigValidateResponse : core.Response
+{
+    // Configuration actual version as a timestamp
+    timestamp ActualVersion;
+
+    // Is configuration valid?
+    bool IsValid;
+    // Configuration errors
+    string[] Errors;
+}
+
+// Configuration refresh request
+[request]
+[response(ConfigRefreshResponse)]
+[reject(*core.Reject)]
+message ConfigRefreshRequest : core.Request
+{
+}
+
+// Configuration refresh response
+message ConfigRefreshResponse : core.Response
+{
+    // Configuration actual version as a timestamp
+    timestamp ActualVersion;
+}
+
+// Configuration history request
+[request]
+[response(ConfigHistoryResponse)]
+[reject(*core.Reject)]
+message ConfigHistoryRequest : core.Request
+{
+    // Limit the number of history records (default is top 100 history records)
+    uint32 Count = 100;
+}
+
+// Configuration history response
+message ConfigHistoryResponse : core.Response
+{
+    // Configuration actual version as a timestamp
+    timestamp ActualVersion;
+
+    // Configuration history records
+    config.ConfigHistory[] History;
+}
+
+// Configuration rollback request
+[request]
+[response(ConfigRollbackResponse)]
+[reject(*core.Reject)]
+message ConfigRollbackRequest : core.Request
+{
+    // History record Id
+    string HistoryId;
+}
+
+// Configuration rollback response
+message ConfigRollbackResponse : core.Response
+{
+    // Configuration actual version as a timestamp
+    timestamp ActualVersion;
+
+    // Restored configuration history record or null if failed
+    config.ConfigHistory? History;
+}
+
+// History version request
+[request]
+[response(HistoryVersionResponse)]
+[reject(*core.Reject)]
+message HistoryVersionRequest : core.Request
+{
+}
+
+// History version response
+message HistoryVersionResponse : core.Response
+{
+    // History version
+    uint64 Version;
+}
+
+// Storage version request
+[request]
+[response(StorageVersionResponse)]
+[reject(*core.Reject)]
+message StorageVersionRequest : core.Request
+{
+}
+
+// Storage version response
+message StorageVersionResponse : core.Response
+{
+    // Storage database
+    string Database;
+    // Storage version
+    uint64 Version;
+}
+
+// Host get request
+[request]
+[response(HostGetResponse)]
+[reject(*core.Reject)]
+message HostGetRequest : core.Request
+{
+    // Host Id
+    uuid? HostId;
+    // Host name
+    string? HostName;
+}
+
+// Host get response
+message HostGetResponse : core.Response
+{
+    // Host
+    core.Host Host;
+}
+
+// Hosts get all request
+[request]
+[response(HostsGetAllResponse)]
+[reject(*core.Reject)]
+message HostsGetAllRequest : core.Request
+{
+}
+
+// Hosts get all response
+message HostsGetAllResponse : core.Response
+{
+    // Hosts
+    core.Host[] Hosts;
+}
+
+// Host create request
+[request]
+[response(HostCreateResponse)]
+[reject(*core.Reject)]
+message HostCreateRequest : core.Request
+{
+    // Host sort order
+    uint32 SortOrder;
+
+    // Host name
+    string Name;
+    // Host comment
+    string Comment;
+    // Host description
+    string Description;
+    // Host address
+    string Address;
+
+    // Is host enabled?
+    bool IsEnabled;
+
+    // Host settings
+    string{string} Settings;
+}
+
+// Host create response
+message HostCreateResponse : core.Response
+{
+    // Created host
+    core.Host Host;
+}
+
+// Host modify request
+[request]
+[response(HostModifyResponse)]
+[reject(*core.Reject)]
+message HostModifyRequest : core.Request
+{
+    // Host Id
+    uuid? HostId;
+    // Host name
+    string? HostName;
+
+    // New host sort order
+    uint32? NewSortOrder;
+
+    // New host name
+    string? NewName;
+    // New host comment
+    string? NewComment;
+    // New host description
+    string? NewDescription;
+    // New host address
+    string? NewAddress;
+
+    // New host enabled flag
+    bool? NewIsEnabled;
+
+    // New host settings
+    string{string} SettingsToModify;
+    string! SettingsToDelete;
+}
+
+// Host modify response
+message HostModifyResponse : core.Response
+{
+    // Previous host
+    core.Host Previous;
+    // Modified host
+    core.Host Modified;
+}
+
+// Host delete request
+[request]
+[response(HostDeleteResponse)]
+[reject(*core.Reject)]
+message HostDeleteRequest : core.Request
+{
+    // Host Id
+    uuid? HostId;
+    // Host name
+    string? HostName;
+}
+
+// Host delete response
+message HostDeleteResponse : core.Response
+{
+    // Deleted host
+    core.Host Deleted;
+}
+
+// Host update notification
+message HostUpdateNotify : client.ConfigUpdateNotify
+{
+    // Update type
+    core.UpdateType UpdateType;
+    // Host previous value
+    core.Host Previous;
+    // Host current value
+    core.Host Current;
+}
+
+// Module get request
+[request]
+[response(ModuleGetResponse)]
+[reject(*core.Reject)]
+message ModuleGetRequest : core.Request
+{
+    // Module Id
+    uuid? ModuleId;
+    // Module name
+    string? ModuleName;
+}
+
+// Module get response
+message ModuleGetResponse : core.Response
+{
+    // Module
+    core.Module Module;
+}
+
+// Modules get all request
+[request]
+[response(ModulesGetAllResponse)]
+[reject(*core.Reject)]
+message ModulesGetAllRequest : core.Request
+{
+}
+
+// Modules get all response
+message ModulesGetAllResponse : core.Response
+{
+    // Modules
+    core.Module[] Modules;
+}
+
+// Module create request
+[request]
+[response(ModuleCreateResponse)]
+[reject(*core.Reject)]
+message ModuleCreateRequest : core.Request
+{
+    // Module sort order
+    uint32 SortOrder;
+
+    // Module host Id
+    uuid? HostId;
+    // Module host name
+    string? HostName;
+
+    // Module name
+    string Name;
+    // Module comment
+    string Comment;
+    // Module description
+    string Description;
+
+    // Module type
+    core.ModuleType ModuleType;
+
+    // Is module enabled?
+    bool IsEnabled;
+
+    // Module settings
+    string{string} Settings;
+}
+
+// Module create response
+message ModuleCreateResponse : core.Response
+{
+    // Created module
+    core.Module Module;
+}
+
+// Module modify request
+[request]
+[response(ModuleModifyResponse)]
+[reject(*core.Reject)]
+message ModuleModifyRequest : core.Request
+{
+    // Module Id
+    uuid? ModuleId;
+    // Module name
+    string? ModuleName;
+    
+    // New module sort order
+    uint32? NewSortOrder;
+
+    // New module host Id
+    uuid? NewHostId;
+    // New module host name
+    string? NewHostName;
+
+    // New module name
+    string? NewName;
+    // New module comment
+    string? NewComment;
+    // New module description
+    string? NewDescription;
+
+    // New module type
+    core.ModuleType? NewModuleType;
+
+    // New module enabled flag
+    bool? NewIsEnabled;
+
+    // New module settings
+    string{string} SettingsToModify;
+    string! SettingsToDelete;
+}
+
+// Module modify response
+message ModuleModifyResponse : core.Response
+{
+    // Previous module
+    core.Module Previous;
+    // Modified module
+    core.Module Modified;
+}
+
+// Module delete request
+[request]
+[response(ModuleDeleteResponse)]
+[reject(*core.Reject)]
+message ModuleDeleteRequest : core.Request
+{
+    // Module Id
+    uuid? ModuleId;
+    // Module name
+    string? ModuleName;
+}
+
+// Module delete response
+message ModuleDeleteResponse : core.Response
+{
+    // Deleted module
+    core.Module Deleted;
+}
+
+// Module update notification
+message ModuleUpdateNotify : client.ConfigUpdateNotify
+{
+    // Update type
+    core.UpdateType UpdateType;
+    // Module previous value
+    core.Module Previous;
+    // Module current value
+    core.Module Current;
+}
+
+// Time zone create request
+[request]
+[response(TimezoneCreateResponse)]
+[reject(*core.Reject)]
+message TimezoneCreateRequest : core.Request
+{
+    // Time zone sort order
+    uint32 SortOrder;
+
+    // Time zone name
+    string Name;
+    // Time zone comment
+    string Comment;
+
+    // Time zone local time offset
+    int64 Offset;
+    // Daylight saving time offset
+    int64 Daylight;
+}
+
+// Time zone create response
+message TimezoneCreateResponse : core.Response
+{
+    // Created time zone
+    core.Timezone Timezone;
+}
+
+// Time zone modify request
+[request]
+[response(TimezoneModifyResponse)]
+[reject(*core.Reject)]
+message TimezoneModifyRequest : core.Request
+{
+    // Time zone Id
+    uuid? TimezoneId;
+    // Time zone name
+    string? TimezoneName;
+
+    // New time zone sort order
+    uint32? NewSortOrder;
+
+    // New time zone name
+    string? NewName;
+    // New time zone comment
+    string? NewComment;
+
+    // New time zone local time offset
+    int64? NewOffset;
+    // New daylight saving time offset
+    int64? NewDaylight;
+}
+
+// Time zone modify response
+message TimezoneModifyResponse : core.Response
+{
+    // Previous time zone
+    core.Timezone Previous;
+    // Modified time zone
+    core.Timezone Modified;
+}
+
+// Time zone delete request
+[request]
+[response(TimezoneDeleteResponse)]
+[reject(*core.Reject)]
+message TimezoneDeleteRequest : core.Request
+{
+    // Time zone Id
+    uuid? TimezoneId;
+    // Time zone name
+    string? TimezoneName;
+}
+
+// Time zone delete response
+message TimezoneDeleteResponse : core.Response
+{
+    // Deleted time zone
+    core.Timezone Deleted;
+}
+
+// Currency group create request
+[request]
+[response(CurrencyGroupCreateResponse)]
+[reject(*core.Reject)]
+message CurrencyGroupCreateRequest : core.Request
+{
+    // Currency group sort order
+    uint32 SortOrder;
+
+    // Currency group name
+    string Name;
+    // Currency group comment
+    string Comment;
+    // Currency group description
+    string Description;
+}
+
+// Currency group create response
+message CurrencyGroupCreateResponse : core.Response
+{
+    // Created currency group
+    core.CurrencyGroup CurrencyGroup;
+}
+
+// Currency group modify request
+[request]
+[response(CurrencyGroupModifyResponse)]
+[reject(*core.Reject)]
+message CurrencyGroupModifyRequest : core.Request
+{
+    // Currency group Id
+    uuid? CurrencyGroupId;
+    // Currency group name
+    string? CurrencyGroupName;
+
+    // New currency group sort order
+    uint32? NewSortOrder;
+
+    // New currency group name
+    string? NewName;
+    // New currency comment
+    string? NewComment;
+    // New currency description
+    string? NewDescription;
+}
+
+// Currency group modify response
+message CurrencyGroupModifyResponse : core.Response
+{
+    // Previous currency group
+    core.CurrencyGroup Previous;
+    // Modified currency group
+    core.CurrencyGroup Modified;
+}
+
+// Currency group delete request
+[request]
+[response(CurrencyGroupDeleteResponse)]
+[reject(*core.Reject)]
+message CurrencyGroupDeleteRequest : core.Request
+{
+    // Currency group Id
+    uuid? CurrencyGroupId;
+    // Currency group name
+    string? CurrencyGroupName;
+}
+
+// Currency group delete response
+message CurrencyGroupDeleteResponse : core.Response
+{
+    // Deleted currency group
+    core.CurrencyGroup Deleted;
+}
+
+// Currency create request
+[request]
+[response(CurrencyCreateResponse)]
+[reject(*core.Reject)]
+message CurrencyCreateRequest : core.Request
+{
+    // Currency sort order
+    uint32 SortOrder;
+
+    // Currency group Id
+    uuid? CurrencyGroupId;
+    // Currency group name
+    string? CurrencyGroupName;
+
+    // Currency name
+    string Name;
+    // Currency comment
+    string Comment;
+    // Currency description
+    string Description;
+
+    // Currency precision
+    uint8 Precision;
+}
+
+// Currency create response
+message CurrencyCreateResponse : core.Response
+{
+    // Created currency
+    core.Currency Currency;
+}
+
+// Currency modify request
+[request]
+[response(CurrencyModifyResponse)]
+[reject(*core.Reject)]
+message CurrencyModifyRequest : core.Request
+{
+    // Currency Id
+    uuid? CurrencyId;
+    // Currency name
+    string? CurrencyName;
+
+    // New currency sort order
+    uint32? NewSortOrder;
+
+    // New currency group Id
+    uuid? NewCurrencyGroupId;
+    // New currency group name
+    string? NewCurrencyGroupName;
+
+    // New currency name
+    string? NewName;
+    // New currency comment
+    string? NewComment;
+    // New currency description
+    string? NewDescription;
+
+    // New currency precision
+    uint8? NewPrecision;
+}
+
+// Currency modify response
+message CurrencyModifyResponse : core.Response
+{
+    // Previous currency
+    core.Currency Previous;
+    // Modified currency
+    core.Currency Modified;
+}
+
+// Currency delete request
+[request]
+[response(CurrencyDeleteResponse)]
+[reject(*core.Reject)]
+message CurrencyDeleteRequest : core.Request
+{
+    // Currency Id
+    uuid? CurrencyId;
+    // Currency name
+    string? CurrencyName;
+}
+
+// Currency delete response
+message CurrencyDeleteResponse : core.Response
+{
+    // Deleted currency
+    core.Currency Deleted;
+}
+
+// Symbol group get request
+[request]
+[response(SymbolGroupGetResponse)]
+[reject(*core.Reject)]
+message SymbolGroupGetRequest : core.Request
+{
+    // Symbol group Id
+    uuid? SymbolGroupId;
+    // Symbol group name
+    string? SymbolGroupName;
+}
+
+// Symbol group get response
+message SymbolGroupGetResponse : core.Response
+{
+    // Symbol group
+    core.SymbolGroup SymbolGroup;
+}
+
+// Symbol groups get all request
+[request]
+[response(SymbolGroupsGetAllResponse)]
+[reject(*core.Reject)]
+message SymbolGroupsGetAllRequest : core.Request
+{
+}
+
+// Symbol groups get all response
+message SymbolGroupsGetAllResponse : core.Response
+{
+    // Symbol groups
+    core.SymbolGroup[] SymbolGroups;
+}
+
+// Symbol group create request
+[request]
+[response(SymbolGroupCreateResponse)]
+[reject(*core.Reject)]
+message SymbolGroupCreateRequest : core.Request
+{
+    // Symbol group sort order
+    uint32 SortOrder;
+
+    // Symbol group name
+    string Name;
+    // Symbol group comment
+    string Comment;
+    // Symbol group description
+    string Description;
+    
+    // Symbol group color in ARGB format (default is white)
+    uint32 Color = 0xFFFFFFFF;
+
+    // Is trade allowed?
+    bool IsTradeAllowed = false;
+}
+
+// Symbol group create response
+message SymbolGroupCreateResponse : core.Response
+{
+    // Created symbol group
+    core.SymbolGroup SymbolGroup;
+}
+
+// Symbol group modify request
+[request]
+[response(SymbolGroupModifyResponse)]
+[reject(*core.Reject)]
+message SymbolGroupModifyRequest : core.Request
+{
+    // Symbol group Id
+    uuid? SymbolGroupId;
+    // Symbol group name
+    string? SymbolGroupName;
+
+    // New symbol group sort order
+    uint32? NewSortOrder;
+
+    // New symbol group name
+    string? NewName;
+    // New symbol group comment
+    string? NewComment;
+    // New symbol group description
+    string? NewDescription;
+    
+    // New symbol group color in ARGB format 
+    uint32? NewColor;
+
+    // New trade allowed flag
+    bool? NewIsTradeAllowed;
+}
+
+// Symbol group modify response
+message SymbolGroupModifyResponse : core.Response
+{
+    // Previous symbol group
+    core.SymbolGroup Previous;
+    // Modified symbol group
+    core.SymbolGroup Modified;
+}
+
+// Symbol group delete request
+[request]
+[response(SymbolGroupDeleteResponse)]
+[reject(*core.Reject)]
+message SymbolGroupDeleteRequest : core.Request
+{
+    // Symbol group Id
+    uuid? SymbolGroupId;
+    // Symbol group name
+    string? SymbolGroupName;
+}
+
+// Symbol group delete response
+message SymbolGroupDeleteResponse : core.Response
+{
+    // Deleted symbol group
+    core.SymbolGroup Deleted;
+}
+
+// Symbol group update notification
+message SymbolGroupUpdateNotify : client.ConfigUpdateNotify
+{
+    // Update type
+    core.UpdateType UpdateType;
+    // Symbol group previous value
+    core.SymbolGroup Previous;
+    // Symbol group current value
+    core.SymbolGroup Current;
+}
+
+// Symbol create request
+[request]
+[response(SymbolCreateResponse)]
+[reject(*core.Reject)]
+message SymbolCreateRequest : core.Request
+{
+    // Symbol sort order
+    uint32 SortOrder;
+
+    // Symbol group Id
+    uuid? SymbolGroupId;
+    // Symbol group name
+    string? SymbolGroupName;
+
+    // Symbol name
+    string Name;
+    // Symbol comment
+    string Comment;
+    // Symbol description
+    string Description;
+    
+    // Symbol alias for clients
+    string Alias;
+    // Symbol quotes source
+    string Source;
+
+    // Symbol precision
+    uint8 Precision;
+
+    // Symbol magin currency Id (optional)
+    uuid? MarginCurrencyId;
+    // Symbol magin currency name (optional)
+    string? MarginCurrencyName;
+    // Symbol magin currency precision (optional)
+    uint8? MarginCurrencyPrecision;
+
+    // Symbol profit currency Id (optional)
+    uuid? ProfitCurrencyId;
+    // Symbol profit currency name (optional)
+    string? ProfitCurrencyName;
+    // Symbol profit currency precision (optional)
+    uint8? ProfitCurrencyPrecision;
+
+    // Symbol color in ARGB format (inherited from symbol group by default)
+    uint32? Color;
+
+    // Is trade allowed? (inherited from symbol group by default)
+    bool? IsTradeAllowed;
+}
+
+// Symbol create response
+message SymbolCreateResponse : core.Response
+{
+    // Created symbol
+    core.Symbol Symbol;
+}
+
+// Symbol modify request
+[request]
+[response(SymbolModifyResponse)]
+[reject(*core.Reject)]
+message SymbolModifyRequest : core.Request
+{
+    // Symbol Id
+    uuid? SymbolId;
+    // Symbol name
+    string? SymbolName;
+
+    // New symbol sort order
+    uint32? NewSortOrder;
+
+    // New symbol group Id
+    uuid? NewSymbolGroupId;
+    // New symbol group name
+    string? NewSymbolGroupName;
+
+    // New symbol name
+    string? NewName;
+    // New symbol comment
+    string? NewComment;
+    // New symbol description
+    string? NewDescription;
+    
+    // New symbol alias for clients
+    string? NewAlias;
+    // New symbol quotes source
+    string? NewSource;
+
+    // New symbol precision
+    uint8? NewPrecision;
+
+    // New symbol magin currency Id (optional)
+    uuid? NewMarginCurrencyId;
+    // New symbol magin currency name (optional)
+    string? NewMarginCurrencyName;
+    // New symbol magin currency precision (optional)
+    uint8? NewMarginCurrencyPrecision;
+
+    // New symbol profit currency Id (optional)
+    uuid? NewProfitCurrencyId;
+    // New symbol profit currency name (optional)
+    string? NewProfitCurrencyName;
+    // New symbol profit currency precision (optional)
+    uint8? NewProfitCurrencyPrecision;
+
+    // New symbol color in ARGB format (inherited from symbol group by default)
+    uint32? NewColor;
+
+    // New trade allowed flag
+    bool? NewIsTradeAllowed;
+}
+
+// Symbol modify response
+message SymbolModifyResponse : core.Response
+{
+    // Previous symbol
+    core.Symbol Previous;
+    // Modified symbol
+    core.Symbol Modified;
+}
+
+// Symbol delete request
+[request]
+[response(SymbolDeleteResponse)]
+[reject(*core.Reject)]
+message SymbolDeleteRequest : core.Request
+{
+    // Symbol Id
+    uuid? SymbolId;
+    // Symbol name
+    string? SymbolName;
+}
+
+// Symbol delete response
+message SymbolDeleteResponse : core.Response
+{
+    // Deleted symbol
+    core.Symbol Deleted;
+}
+
+// Manager group get request
+[request]
+[response(ManagerGroupGetResponse)]
+[reject(*core.Reject)]
+message ManagerGroupGetRequest : core.Request
+{
+    // Manager group Id
+    uuid? ManagerGroupId;
+    // Manager group name
+    string? ManagerGroupName;
+}
+
+// Manager group get response
+message ManagerGroupGetResponse : core.Response
+{
+    // Manager group
+    core.ManagerGroup ManagerGroup;
+}
+
+// Manager groups get all request
+[request]
+[response(ManagerGroupsGetAllResponse)]
+[reject(*core.Reject)]
+message ManagerGroupsGetAllRequest : core.Request
+{
+}
+
+// Manager groups get all response
+message ManagerGroupsGetAllResponse : core.Response
+{
+    // Manager groups
+    core.ManagerGroup[] ManagerGroups;
+}
+
+// Manager group create request
+[request]
+[response(ManagerGroupCreateResponse)]
+[reject(*core.Reject)]
+message ManagerGroupCreateRequest : core.Request
+{
+    // Manager group sort order
+    uint32 SortOrder;
+
+    // Manager group name
+    string Name;
+    // Manager group comment
+    string Comment;
+    // Manager group description
+    string Description;
+
+    // Is manager group enabled?
+    bool IsEnabled = true;
+    // Is manager group one-time-password enabled?
+    bool IsOTPEnabled = false;
+
+    // Manager rights
+    core.ManagerRights Rights = core.ManagerRights.None;
+    // Manager account rights
+    core.ManagerAccountRights{string} AccountRights;
+    // Manager symbol rights
+    core.ManagerSymbolRights{string} SymbolRights;
+    
+    // Manager login range offset
+    uint64 LoginRangeOffset;
+    // Manager login range size
+    uint64 LoginRangeSize;
+}
+
+// Manager group create response
+message ManagerGroupCreateResponse : core.Response
+{
+    // Created manager group
+    core.ManagerGroup ManagerGroup;
+}
+
+// Manager group modify request
+[request]
+[response(ManagerGroupModifyResponse)]
+[reject(*core.Reject)]
+message ManagerGroupModifyRequest : core.Request
+{
+    // Manager group Id
+    uuid? ManagerGroupId;
+    // Manager group name
+    string? ManagerGroupName;
+
+    // New manager group sort order
+    uint32? NewSortOrder;
+
+    // New manager group name
+    string? NewName;
+    // New manager comment
+    string? NewComment;
+    // New manager description
+    string? NewDescription;
+
+    // New manager group enabled flag
+    bool? NewIsEnabled;
+    // New manager group one-time-password enabled flag
+    bool? NewIsOTPEnabled;
+
+    // New manager rights
+    core.ManagerRights? NewRights;
+    // New manager account rights
+    core.ManagerAccountRights{string} AccountRightsToModify;
+    string! AccountRightsToDelete;
+    // New manager symbol rights
+    core.ManagerSymbolRights{string} SymbolRightsToModify;
+    string! SymbolRightsToDelete;
+    
+    // New manager login range offset
+    uint64? NewLoginRangeOffset;
+    // New manager login range size
+    uint64? NewLoginRangeSize;
+}
+
+// Manager group modify response
+message ManagerGroupModifyResponse : core.Response
+{
+    // Previous manager group
+    core.ManagerGroup Previous;
+    // Modified manager group
+    core.ManagerGroup Modified;
+}
+
+// Manager group delete request
+[request]
+[response(ManagerGroupDeleteResponse)]
+[reject(*core.Reject)]
+message ManagerGroupDeleteRequest : core.Request
+{
+    // Manager group Id
+    uuid? ManagerGroupId;
+    // Manager group name
+    string? ManagerGroupName;
+}
+
+// Manager group delete response
+message ManagerGroupDeleteResponse : core.Response
+{
+    // Deleted manager group
+    core.ManagerGroup Deleted;
+}
+
+// Manager group update notification
+message ManagerGroupUpdateNotify : client.ConfigUpdateNotify
+{
+    // Update type
+    core.UpdateType UpdateType;
+    // Manager group previous value
+    core.ManagerGroup Previous;
+    // Manager group current value
+    core.ManagerGroup Current;
+}
+
+// Manager get request
+[request]
+[response(ManagerGetResponse)]
+[reject(*core.Reject)]
+message ManagerGetRequest : core.Request
+{
+    // Manager Id
+    uuid? ManagerId;
+    // Manager login
+    uint64? ManagerLogin;
+}
+
+// Manager get response
+message ManagerGetResponse : core.Response
+{
+    // Manager
+    core.Manager Manager;
+}
+
+// Managers get all request
+[request]
+[response(ManagersGetAllResponse)]
+[reject(*core.Reject)]
+message ManagersGetAllRequest : core.Request
+{
+}
+
+// Managers get all response
+message ManagersGetAllResponse : core.Response
+{
+    // Managers
+    core.Manager[] Managers;
+}
+
+// Manager create request
+[request]
+[response(ManagerCreateResponse)]
+[reject(*core.Reject)]
+message ManagerCreateRequest : core.Request
+{
+    // Manager sort order
+    uint32 SortOrder;
+
+    // Manager group Id
+    uuid? ManagerGroupId;
+    // Manager group name
+    string? ManagerGroupName;
+    
+    // Manager login
+    uint64? Login;
+
+    // Manager name
+    string Name;
+    // Manager comment
+    string Comment;
+    // Manager description
+    string Description;
+    // Manager email
+    string Email;
+
+    // Is manager enabled? (inherited from the manager group by default)
+    bool? IsEnabled;
+    // Is manager one-time-password enabled? (inherited from the manager group by default)
+    bool? IsOTPEnabled;
+
+    // Manager allow & deny rights
+    core.ManagerRights AllowRights = core.ManagerRights.None;
+    core.ManagerRights DenyRights = core.ManagerRights.None;
+    // Manager allow & deny account rights
+    core.ManagerAccountRights{string} AllowAccountRights;
+    core.ManagerAccountRights{string} DenyAccountRights;
+    // Manager allow & deny symbol rights
+    core.ManagerSymbolRights{string} AllowSymbolRights;
+    core.ManagerSymbolRights{string} DenySymbolRights;
+
+    // Manager password (optional)
+    [hidden]
+    string? Password;
+}
+
+// Manager create response
+message ManagerCreateResponse : core.Response
+{
+    // Created manager
+    core.Manager Manager;
+
+    // Created manager password
+    [hidden]
+    string Password;
+    // Created one-time-password secret (optional)
+    [hidden]
+    string? OTPSecret;
+}
+
+// Manager modify request
+[request]
+[response(ManagerModifyResponse)]
+[reject(*core.Reject)]
+message ManagerModifyRequest : core.Request
+{
+    // Manager Id
+    uuid? ManagerId;
+    // Manager login
+    uint64? ManagerLogin;
+
+    // New manager sort order
+    uint32? NewSortOrder;
+
+    // New manager group Id
+    uuid? NewManagerGroupId;
+    // New manager group name
+    string? NewManagerGroupName;
+    
+    // New manager login
+    uint64? NewLogin;
+
+    // New manager name
+    string? NewName;
+    // New manager comment
+    string? NewComment;
+    // New manager description
+    string? NewDescription;
+    // New manager email
+    string? NewEmail;
+
+    // New manager enabled flag (inherited from the manager group by default)
+    bool? NewIsEnabled;
+    // New manager one-time-password enabled flag (inherited from the manager group by default)
+    bool? NewIsOTPEnabled;
+
+    // New manager allow & deny rights
+    core.ManagerRights? NewAllowRights;
+    core.ManagerRights? NewDenyRights;
+    // New manager allow & deny account rights
+    core.ManagerAccountRights{string} AllowAccountRightsToModify;
+    string! AllowAccountRightsToDelete;
+    core.ManagerAccountRights{string} DenyAccountRightsToModify;
+    string! DenyAccountRightsToDelete;
+    // New manager allow & deny symbol rights
+    core.ManagerSymbolRights{string} AllowSymbolRightsToModify;
+    string! AllowSymbolRightsToDelete;
+    core.ManagerSymbolRights{string} DenySymbolRightsToModify;
+    string! DenySymbolRightsToDelete;
+
+    // New manager password
+    [hidden]
+    string? NewPassword;
+}
+
+// Manager modify response
+message ManagerModifyResponse : core.Response
+{
+    // Previous manager
+    core.Manager Previous;
+    // Modified manager
+    core.Manager Modified;
+
+    // Modified manager password
+    [hidden]
+    string? Password;
+    // Modified one-time-password secret
+    [hidden]
+    string? OTPSecret;
+}
+
+// Manager delete request
+[request]
+[response(ManagerDeleteResponse)]
+[reject(*core.Reject)]
+message ManagerDeleteRequest : core.Request
+{
+    // Manager Id
+    uuid? ManagerId;
+    // Manager login
+    uint64? ManagerLogin;
+}
+
+// Manager delete response
+message ManagerDeleteResponse : core.Response
+{
+    // Deleted manager
+    core.Manager Deleted;
+}
+
+// Manager update notification
+message ManagerUpdateNotify : client.ConfigUpdateNotify
+{
+    // Update type
+    core.UpdateType UpdateType;
+    // Manager previous value
+    core.Manager Previous;
+    // Manager current value
+    core.Manager Current;
+}
+
+// Platform create request
+[request]
+[response(PlatformCreateResponse)]
+[reject(*core.Reject)]
+message PlatformCreateRequest : core.Request
+{
+    // Platform sort order
+    uint32 SortOrder;
+
+    // Platform name
+    string Name;
+    // Platform comment
+    string Comment;
+    // Platform description
+    string Description;
+    // Platform company name
+    string Company;
+    // Platform address
+    string Address;
+
+    // Platform time zone Id
+    uuid? TimezoneId;
+    // Platform time zone name
+    string? TimezoneName;
+}
+
+// Platform create response
+message PlatformCreateResponse : core.Response
+{
+    // Created platform
+    core.Platform Platform;
+}
+
+// Platform modify request
+[request]
+[response(PlatformModifyResponse)]
+[reject(*core.Reject)]
+message PlatformModifyRequest : core.Request
+{
+    // Platform Id
+    uuid? PlatformId;
+    // Platform name
+    string? PlatformName;
+
+    // New platform sort order
+    uint32? NewSortOrder;
+
+    // New platform name
+    string? NewName;
+    // New platform comment
+    string? NewComment;
+    // New platform description
+    string? NewDescription;
+    // New platform company name
+    string? NewCompany;
+    // New platform address
+    string? NewAddress;
+
+    // New platform time zone Id
+    uuid? NewTimezoneId;
+    // New platform time zone name
+    string? NewTimezoneName;
+
+}
+
+// Platform modify response
+message PlatformModifyResponse : core.Response
+{
+    // Previous platform
+    core.Platform Previous;
+    // Modified platform
+    core.Platform Modified;
+}
+
+// Platform delete request
+[request]
+[response(PlatformDeleteResponse)]
+[reject(*core.Reject)]
+message PlatformDeleteRequest : core.Request
+{
+    // Platform Id
+    uuid? PlatformId;
+    // Platform name
+    string? PlatformName;
+}
+
+// Platform delete response
+message PlatformDeleteResponse : core.Response
+{
+    // Deleted platform
+    core.Platform Deleted;
+}
+
+// Account group get request
+[request]
+[response(AccountGroupGetResponse)]
+[reject(*core.Reject)]
+message AccountGroupGetRequest : core.Request
+{
+    // Account group Id
+    uuid? AccountGroupId;
+    // Account group name
+    string? AccountGroupName;
+}
+
+// Account group get response
+message AccountGroupGetResponse : core.Response
+{
+    // Account group
+    core.AccountGroup AccountGroup;
+}
+
+// Account groups get all request
+[request]
+[response(AccountGroupsGetAllResponse)]
+[reject(*core.Reject)]
+message AccountGroupsGetAllRequest : core.Request
+{
+}
+
+// Account groups get all response
+message AccountGroupsGetAllResponse : core.Response
+{
+    // Account groups
+    core.AccountGroup[] AccountGroups;
+}
+
+// Account group create request
+[request]
+[response(AccountGroupCreateResponse)]
+[reject(*core.Reject)]
+message AccountGroupCreateRequest : core.Request
+{
+    // Account group sort order
+    uint32 SortOrder;
+    
+    // Platform Id
+    uuid? PlatformId;
+    // Platform name
+    string? PlatformName;
+
+    // Account group name
+    string Name;
+    // Account group comment
+    string Comment;
+    // Account group description
+    string Description;
+
+    // Is account group enabled?
+    bool IsEnabled = true;
+    // Is account group one-time-password enabled?
+    bool IsOTPEnabled = false;
+    
+    // Account login range offset
+    uint64 LoginRangeOffset;
+    // Account login range size
+    uint64 LoginRangeSize;
+
+    // Accounting type
+    AccountingType AccountingType;
+}
+
+// Account group create response
+message AccountGroupCreateResponse : core.Response
+{
+    // Created account group
+    core.AccountGroup AccountGroup;
+}
+
+// Account group modify request
+[request]
+[response(AccountGroupModifyResponse)]
+[reject(*core.Reject)]
+message AccountGroupModifyRequest : core.Request
+{
+    // Account group Id
+    uuid? AccountGroupId;
+    // Account group name
+    string? AccountGroupName;
+
+    // New account group sort order
+    uint32? NewSortOrder;
+    
+    // New platform Id
+    uuid? NewPlatformId;
+    // New platform name
+    string? NewPlatformName;
+
+    // New account group name
+    string? NewName;
+    // New account comment
+    string? NewComment;
+    // New account description
+    string? NewDescription;
+
+    // New account group enabled flag
+    bool? NewIsEnabled;
+    // New account group one-time-password enabled flag
+    bool? NewIsOTPEnabled;
+    
+    // New account login range offset
+    uint64? NewLoginRangeOffset;
+    // New account login range size
+    uint64? NewLoginRangeSize;
+
+    // New accounting type
+    AccountingType? NewAccountingType;
+}
+
+// Account group modify response
+message AccountGroupModifyResponse : core.Response
+{
+    // Previous account group
+    core.AccountGroup Previous;
+    // Modified account group
+    core.AccountGroup Modified;
+}
+
+// Account group delete request
+[request]
+[response(AccountGroupDeleteResponse)]
+[reject(*core.Reject)]
+message AccountGroupDeleteRequest : core.Request
+{
+    // Account group Id
+    uuid? AccountGroupId;
+    // Account group name
+    string? AccountGroupName;
+}
+
+// Account group delete response
+message AccountGroupDeleteResponse : core.Response
+{
+    // Deleted account group
+    core.AccountGroup Deleted;
+}
+
+// Account group update notification
+message AccountGroupUpdateNotify : client.ConfigUpdateNotify
+{
+    // Update type
+    core.UpdateType UpdateType;
+    // Account group previous value
+    core.AccountGroup Previous;
+    // Account group current value
+    core.AccountGroup Current;
+}

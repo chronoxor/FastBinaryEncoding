@@ -11,7 +11,7 @@ import fbe
 import proto
 
 // Fast Binary Encoding com.chronoxor.test receiver
-open class Receiver : ReceiverListener, fbe.ReceiverProtocol {
+open class Receiver : fbe.ReceiverProtocol {
     // Imported receivers
     let protoReceiver: proto.Receiver?
 
@@ -47,7 +47,7 @@ open class Receiver : ReceiverListener, fbe.ReceiverProtocol {
     public var logging: Bool = false
     public var final: Bool = false
 
-    public override init() {
+    public init() {
         protoReceiver = proto.Receiver(buffer: buffer)
         StructSimpleValue = test.StructSimple()
         StructSimpleModel = test.StructSimpleModel()
@@ -73,7 +73,6 @@ open class Receiver : ReceiverListener, fbe.ReceiverProtocol {
         StructHashExModel = test.StructHashExModel()
         StructEmptyValue = test.StructEmpty()
         StructEmptyModel = test.StructEmptyModel()
-        super.init()
         build(final: false)
     }
 
@@ -103,12 +102,11 @@ open class Receiver : ReceiverListener, fbe.ReceiverProtocol {
         StructHashExModel = test.StructHashExModel()
         StructEmptyValue = test.StructEmpty()
         StructEmptyModel = test.StructEmptyModel()
-        super.init()
         build(with: buffer, final: false)
     }
 
     public func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self, type: type, buffer: buffer, offset: offset, size: size)
+        return onReceiveListener(listener: self as! ReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: ReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {

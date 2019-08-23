@@ -15,14 +15,14 @@ class FinalModelMapStringOptionalFlagsSimple: FinalModel {
     var _buffer: Buffer = Buffer()
     var _offset: Int = 0
 
-    private var _modelKey: FinalModelString
+    private var _modelKey: fbe.FinalModelString
     private var _modelValue: FinalModelOptionalFlagsSimple
 
     init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        _modelKey = FinalModelString(buffer: buffer, offset: offset)
+        _modelKey = fbe.FinalModelString(buffer: buffer, offset: offset)
         _modelValue = FinalModelOptionalFlagsSimple(buffer: buffer, offset: offset)
     }
 

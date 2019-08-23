@@ -11,7 +11,7 @@ import fbe
 import proto
 
 // Fast Binary Encoding test client
-open class Client : ReceiverListener, fbe.ClientProtocol {
+open class Client : fbe.ClientProtocol {
     // Imported senders
     let protoSender: proto.Client
 
@@ -65,7 +65,7 @@ open class Client : ReceiverListener, fbe.ClientProtocol {
     public var logging: Bool = false
     public var final: Bool = false
 
-    public override init() {
+    public init() {
         protoSender = proto.Client(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
         protoReceiver = proto.Client(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
         StructSimpleSenderModel = StructSimpleModel(buffer: sendBuffer)
@@ -104,7 +104,6 @@ open class Client : ReceiverListener, fbe.ClientProtocol {
         StructEmptySenderModel = StructEmptyModel(buffer: sendBuffer)
         StructEmptyReceiverValue = test.StructEmpty()
         StructEmptyReceiverModel = StructEmptyModel()
-        super.init()
         build(with: false)
     }
 
@@ -147,7 +146,6 @@ open class Client : ReceiverListener, fbe.ClientProtocol {
         StructEmptySenderModel = StructEmptyModel(buffer: sendBuffer)
         StructEmptyReceiverValue = test.StructEmpty()
         StructEmptyReceiverModel = StructEmptyModel()
-        super.init()
         build(with: sendBuffer, receiveBuffer: receiveBuffer, final: false)
     }
 
@@ -360,7 +358,7 @@ open class Client : ReceiverListener, fbe.ClientProtocol {
     // Send message handler
     open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }
     open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self, type: type, buffer: buffer, offset: offset, size: size)
+        return onReceiveListener(listener: self as! ReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: ReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {

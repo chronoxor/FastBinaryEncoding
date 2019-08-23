@@ -18,7 +18,6 @@ open class Sender : fbe.SenderProtocol {
     // Sender models accessors
     private let OrderModel: OrderModel
     private let BalanceModel: BalanceModel
-    private let AccountModel: AccountModel
 
     public var buffer: Buffer = Buffer()
     public var logging: Bool = false
@@ -28,7 +27,6 @@ open class Sender : fbe.SenderProtocol {
         protoSender = proto.Sender(buffer: buffer)
         OrderModel = protoex.OrderModel(buffer: buffer)
         BalanceModel = protoex.BalanceModel(buffer: buffer)
-        AccountModel = protoex.AccountModel(buffer: buffer)
         build(with: false)
     }
 
@@ -36,7 +34,6 @@ open class Sender : fbe.SenderProtocol {
         protoSender = proto.Sender(buffer: buffer)
         OrderModel = protoex.OrderModel(buffer: buffer)
         BalanceModel = protoex.BalanceModel(buffer: buffer)
-        AccountModel = protoex.AccountModel(buffer: buffer)
         build(with: buffer, final: false)
     }
 
@@ -44,7 +41,6 @@ open class Sender : fbe.SenderProtocol {
         switch obj {
             case is protoex.Order: return try send(value: obj as! protoex.Order)
             case is protoex.Balance: return try send(value: obj as! protoex.Balance)
-            case is protoex.Account: return try send(value: obj as! protoex.Account)
             default: break
         }
 
@@ -78,21 +74,6 @@ open class Sender : fbe.SenderProtocol {
         let serialized = try BalanceModel.serialize(value: value)
         assert(serialized > 0, "protoex.Balance serialization failed!")
         assert(BalanceModel.verify(), "protoex.Balance validation failed!")
-
-        // Log the value
-        if logging {
-            let message = value.description
-            onSendLog(message: message)
-        }
-
-        // Send the serialized value
-        return try sendSerialized(serialized: serialized)
-    }
-    public func send(value: protoex.Account) throws -> Int {
-        // Serialize the value into the FBE stream
-        let serialized = try AccountModel.serialize(value: value)
-        assert(serialized > 0, "protoex.Account serialization failed!")
-        assert(AccountModel.verify(), "protoex.Account validation failed!")
 
         // Log the value
         if logging {

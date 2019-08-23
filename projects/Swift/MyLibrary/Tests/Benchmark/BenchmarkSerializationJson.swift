@@ -1,9 +1,5 @@
 //
 //  BenchmarkSerializationJson.swift
-//  FastBinaryEncodingTests
-//
-//  Created by Andrey on 8/16/19.
-//  Copyright © 2019 Andrey. All rights reserved.
 //
 
 import XCTest
@@ -42,7 +38,7 @@ class BenchmarkSerializationJson: XCTestCase {
 
     func testPerformanceSerializeJSONEncoder() {
         self.measure {
-            for _ in 0...1000 {
+            for _ in 0...999 {
                 // Serialize the account to the JSON string
                 _ = try! BenchmarkSerializationJson._account.toJson()
             }
@@ -51,9 +47,9 @@ class BenchmarkSerializationJson: XCTestCase {
     
     func testPerformanceDeserializeJSONDecoder() {
         self.measure {
-            for _ in 0...1000 {
+            for _ in 0...999 {
                 // Deserialize the account from the JSON string
-                Account.fromJson(BenchmarkSerializationJson._json)
+                _ = Account.fromJson(BenchmarkSerializationJson._json)
             }
         }
     }

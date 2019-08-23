@@ -11,17 +11,17 @@ import fbe
 import proto
 
 open class StructNested: StructOptional {
-    public var f1000: EnumSimple = EnumSimple()
+    public var f1000: EnumSimple = test.EnumSimple()
     public var f1001: EnumSimple? = nil
     public var f1002: EnumTyped = EnumTyped.ENUM_VALUE_2
     public var f1003: EnumTyped? = nil
-    public var f1004: FlagsSimple = FlagsSimple()
+    public var f1004: FlagsSimple = test.FlagsSimple()
     public var f1005: FlagsSimple? = nil
     public var f1006: FlagsTyped = FlagsTyped.fromSet(set: [FlagsTyped.FLAG_VALUE_2.value!, FlagsTyped.FLAG_VALUE_4.value!, FlagsTyped.FLAG_VALUE_6.value!])
     public var f1007: FlagsTyped? = nil
-    public var f1008: StructSimple = StructSimple()
+    public var f1008: StructSimple = test.StructSimple()
     public var f1009: StructSimple? = nil
-    public var f1010: StructOptional = StructOptional()
+    public var f1010: StructOptional = test.StructOptional()
     public var f1011: StructOptional? = nil
 
     public override init() { super.init() }
@@ -61,18 +61,18 @@ open class StructNested: StructOptional {
     public required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        f1000 = try container.decode(EnumSimple.self, forKey: .f1000)
-        f1001 = try container.decode(EnumSimple?.self, forKey: .f1001)
-        f1002 = try container.decode(EnumTyped.self, forKey: .f1002)
-        f1003 = try container.decode(EnumTyped?.self, forKey: .f1003)
-        f1004 = try container.decode(FlagsSimple.self, forKey: .f1004)
-        f1005 = try container.decode(FlagsSimple?.self, forKey: .f1005)
-        f1006 = try container.decode(FlagsTyped.self, forKey: .f1006)
-        f1007 = try container.decode(FlagsTyped?.self, forKey: .f1007)
-        f1008 = try container.decode(StructSimple.self, forKey: .f1008)
-        f1009 = try container.decode(StructSimple?.self, forKey: .f1009)
-        f1010 = try container.decode(StructOptional.self, forKey: .f1010)
-        f1011 = try container.decode(StructOptional?.self, forKey: .f1011)
+        f1000 = try container.decode(test.EnumSimple.self, forKey: .f1000)
+        f1001 = try container.decode(test.EnumSimple?.self, forKey: .f1001)
+        f1002 = try container.decode(test.EnumTyped.self, forKey: .f1002)
+        f1003 = try container.decode(test.EnumTyped?.self, forKey: .f1003)
+        f1004 = try container.decode(test.FlagsSimple.self, forKey: .f1004)
+        f1005 = try container.decode(test.FlagsSimple?.self, forKey: .f1005)
+        f1006 = try container.decode(test.FlagsTyped.self, forKey: .f1006)
+        f1007 = try container.decode(test.FlagsTyped?.self, forKey: .f1007)
+        f1008 = try container.decode(test.StructSimple.self, forKey: .f1008)
+        f1009 = try container.decode(test.StructSimple?.self, forKey: .f1009)
+        f1010 = try container.decode(test.StructOptional.self, forKey: .f1010)
+        f1011 = try container.decode(test.StructOptional?.self, forKey: .f1011)
     }
 
     open override func clone() throws -> StructNested {

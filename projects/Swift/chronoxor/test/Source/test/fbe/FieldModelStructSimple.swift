@@ -16,45 +16,45 @@ public class FieldModelStructSimple: FieldModel {
     public var _buffer: Buffer
     public var _offset: Int
 
-    let id: FieldModelInt32
-    let f1: FieldModelBoolean
-    let f2: FieldModelBoolean
-    let f3: FieldModelUInt8
-    let f4: FieldModelUInt8
-    let f5: FieldModelChar
-    let f6: FieldModelChar
-    let f7: FieldModelWChar
-    let f8: FieldModelWChar
-    let f9: FieldModelInt8
-    let f10: FieldModelInt8
-    let f11: FieldModelUInt8
-    let f12: FieldModelUInt8
-    let f13: FieldModelInt16
-    let f14: FieldModelInt16
-    let f15: FieldModelUInt16
-    let f16: FieldModelUInt16
-    let f17: FieldModelInt32
-    let f18: FieldModelInt32
-    let f19: FieldModelUInt32
-    let f20: FieldModelUInt32
-    let f21: FieldModelInt64
-    let f22: FieldModelInt64
-    let f23: FieldModelUInt64
-    let f24: FieldModelUInt64
-    let f25: FieldModelFloat
-    let f26: FieldModelFloat
-    let f27: FieldModelDouble
-    let f28: FieldModelDouble
-    let f29: FieldModelDecimal
-    let f30: FieldModelDecimal
-    let f31: FieldModelString
-    let f32: FieldModelString
-    let f33: FieldModelTimestamp
-    let f34: FieldModelTimestamp
-    let f35: FieldModelTimestamp
-    let f36: FieldModelUUID
-    let f37: FieldModelUUID
-    let f38: FieldModelUUID
+    let id: fbe.FieldModelInt32
+    let f1: fbe.FieldModelBoolean
+    let f2: fbe.FieldModelBoolean
+    let f3: fbe.FieldModelUInt8
+    let f4: fbe.FieldModelUInt8
+    let f5: fbe.FieldModelChar
+    let f6: fbe.FieldModelChar
+    let f7: fbe.FieldModelWChar
+    let f8: fbe.FieldModelWChar
+    let f9: fbe.FieldModelInt8
+    let f10: fbe.FieldModelInt8
+    let f11: fbe.FieldModelUInt8
+    let f12: fbe.FieldModelUInt8
+    let f13: fbe.FieldModelInt16
+    let f14: fbe.FieldModelInt16
+    let f15: fbe.FieldModelUInt16
+    let f16: fbe.FieldModelUInt16
+    let f17: fbe.FieldModelInt32
+    let f18: fbe.FieldModelInt32
+    let f19: fbe.FieldModelUInt32
+    let f20: fbe.FieldModelUInt32
+    let f21: fbe.FieldModelInt64
+    let f22: fbe.FieldModelInt64
+    let f23: fbe.FieldModelUInt64
+    let f24: fbe.FieldModelUInt64
+    let f25: fbe.FieldModelFloat
+    let f26: fbe.FieldModelFloat
+    let f27: fbe.FieldModelDouble
+    let f28: fbe.FieldModelDouble
+    let f29: fbe.FieldModelDecimal
+    let f30: fbe.FieldModelDecimal
+    let f31: fbe.FieldModelString
+    let f32: fbe.FieldModelString
+    let f33: fbe.FieldModelTimestamp
+    let f34: fbe.FieldModelTimestamp
+    let f35: fbe.FieldModelTimestamp
+    let f36: fbe.FieldModelUUID
+    let f37: fbe.FieldModelUUID
+    let f38: fbe.FieldModelUUID
     let f39: proto.FieldModelOrderSide
     let f40: proto.FieldModelOrderType
     let f41: proto.FieldModelOrder
@@ -1059,42 +1059,42 @@ public class FieldModelStructSimple: FieldModel {
         if fbeCurrentSize + f39.fbeSize <= fbeStructSize {
             fbeValue.f39 = f39.get()
         } else {
-            fbeValue.f39 = OrderSide()
+            fbeValue.f39 = proto.OrderSide()
         }
         fbeCurrentSize += f39.fbeSize
 
         if fbeCurrentSize + f40.fbeSize <= fbeStructSize {
             fbeValue.f40 = f40.get()
         } else {
-            fbeValue.f40 = OrderType()
+            fbeValue.f40 = proto.OrderType()
         }
         fbeCurrentSize += f40.fbeSize
 
         if fbeCurrentSize + f41.fbeSize <= fbeStructSize {
             fbeValue.f41 = f41.get()
         } else {
-            fbeValue.f41 = Order()
+            fbeValue.f41 = proto.Order()
         }
         fbeCurrentSize += f41.fbeSize
 
         if fbeCurrentSize + f42.fbeSize <= fbeStructSize {
             fbeValue.f42 = f42.get()
         } else {
-            fbeValue.f42 = Balance()
+            fbeValue.f42 = proto.Balance()
         }
         fbeCurrentSize += f42.fbeSize
 
         if fbeCurrentSize + f43.fbeSize <= fbeStructSize {
             fbeValue.f43 = f43.get()
         } else {
-            fbeValue.f43 = State()
+            fbeValue.f43 = proto.State()
         }
         fbeCurrentSize += f43.fbeSize
 
         if fbeCurrentSize + f44.fbeSize <= fbeStructSize {
             fbeValue.f44 = f44.get()
         } else {
-            fbeValue.f44 = Account()
+            fbeValue.f44 = proto.Account()
         }
         fbeCurrentSize += f44.fbeSize
     }

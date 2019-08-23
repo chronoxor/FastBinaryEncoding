@@ -11,8 +11,8 @@ public class FinalModelAccount: FinalModel {
     public var _buffer: Buffer
     public var _offset: Int
 
-    let id: FinalModelInt32
-    let name: FinalModelString
+    let id: fbe.FinalModelInt32
+    let name: fbe.FinalModelString
     let state: FinalModelState
     let wallet: FinalModelBalance
     let asset: FinalModelOptionalBalance

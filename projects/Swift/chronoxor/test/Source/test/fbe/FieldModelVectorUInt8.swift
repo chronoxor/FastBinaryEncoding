@@ -12,7 +12,7 @@ import proto
 
 // Fast Binary Encoding UInt8 vector field model
 class FieldModelVectorUInt8: FieldModel {
-    private let _model: FieldModelUInt8
+    private let _model: fbe.FieldModelUInt8
 
     var _buffer: Buffer
     var _offset: Int
@@ -50,14 +50,14 @@ class FieldModelVectorUInt8: FieldModel {
         _buffer = buffer
         _offset = offset
 
-        _model = FieldModelUInt8(buffer: buffer, offset: offset)
+        _model = fbe.FieldModelUInt8(buffer: buffer, offset: offset)
     }
 
     required init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        _model = FieldModelUInt8(buffer: buffer, offset: offset)
+        _model = fbe.FieldModelUInt8(buffer: buffer, offset: offset)
     }
 
     // Get the vector offset
@@ -84,7 +84,7 @@ class FieldModelVectorUInt8: FieldModel {
     }
 
     // Vector index operator
-    public func getItem(index: Int) -> FieldModelUInt8 {
+    public func getItem(index: Int) -> fbe.FieldModelUInt8 {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
 
         let fbeVectorOffset = Int(readUInt32(offset: fbeOffset))
@@ -98,7 +98,7 @@ class FieldModelVectorUInt8: FieldModel {
         return _model
     }
 
-    func resize(size: Int) throws -> FieldModelUInt8 {
+    func resize(size: Int) throws -> fbe.FieldModelUInt8 {
         let fbeVectorSize = size * _model.fbeSize
         let fbeVectorOffset = try _buffer.allocate(size: 4 + fbeVectorSize) - _buffer.offset
         assert((fbeVectorOffset > 0) && ((_buffer.offset + fbeVectorOffset + 4) <= _buffer.size), "Model is broken!")

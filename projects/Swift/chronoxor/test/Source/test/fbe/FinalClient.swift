@@ -11,7 +11,7 @@ import fbe
 import proto
 
 // Fast Binary Encoding test final client
-open class FinalClient : FinalReceiverListener, fbe.ClientProtocol {
+open class FinalClient : fbe.ClientProtocol {
     // Imported senders
     let protoSender: proto.FinalClient
 
@@ -65,7 +65,7 @@ open class FinalClient : FinalReceiverListener, fbe.ClientProtocol {
     public var logging: Bool = false
     public var final: Bool = false
 
-    public override init() {
+    public init() {
         protoSender = proto.FinalClient(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
         protoReceiver = proto.FinalClient(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
         StructSimpleSenderModel = StructSimpleFinalModel(buffer: sendBuffer)
@@ -104,7 +104,6 @@ open class FinalClient : FinalReceiverListener, fbe.ClientProtocol {
         StructEmptySenderModel = StructEmptyFinalModel(buffer: sendBuffer)
         StructEmptyReceiverValue = test.StructEmpty()
         StructEmptyReceiverModel = StructEmptyFinalModel()
-        super.init()
         build(with: true)
     }
 
@@ -147,7 +146,6 @@ open class FinalClient : FinalReceiverListener, fbe.ClientProtocol {
         StructEmptySenderModel = StructEmptyFinalModel(buffer: sendBuffer)
         StructEmptyReceiverValue = test.StructEmpty()
         StructEmptyReceiverModel = StructEmptyFinalModel()
-        super.init()
         build(with: sendBuffer, receiveBuffer: receiveBuffer, final: true)
     }
 
@@ -360,7 +358,7 @@ open class FinalClient : FinalReceiverListener, fbe.ClientProtocol {
     // Send message handler
     open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }
     open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self, type: type, buffer: buffer, offset: offset, size: size)
+        return onReceiveListener(listener: self as! FinalReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: FinalReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {

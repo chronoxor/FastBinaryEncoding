@@ -12,7 +12,7 @@ import proto
 
 // Fast Binary Encoding UInt8 array field model
 class FieldModelArrayUInt8: FieldModel {
-    private let _model: FieldModelUInt8
+    private let _model: fbe.FieldModelUInt8
 
     var _buffer: Buffer
     var _offset: Int
@@ -37,7 +37,7 @@ class FieldModelArrayUInt8: FieldModel {
         _offset = offset
         self.size = 0
 
-        _model = FieldModelUInt8(buffer: buffer, offset: offset)
+        _model = fbe.FieldModelUInt8(buffer: buffer, offset: offset)
     }
 
     required init(buffer: Buffer, offset: Int, size: Int) {
@@ -45,11 +45,11 @@ class FieldModelArrayUInt8: FieldModel {
         _offset = offset
         self.size =  size
 
-        _model = FieldModelUInt8(buffer: buffer, offset: offset)
+        _model = fbe.FieldModelUInt8(buffer: buffer, offset: offset)
     }
 
     // Vector index operator
-    public func getItem(index: Int) -> FieldModelUInt8 {
+    public func getItem(index: Int) -> fbe.FieldModelUInt8 {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
         assert(index < size, "Model is broken!")
 

@@ -1,9 +1,5 @@
-
-//  TestSerialization.swift
-//  FastBinaryEncodingTests
 //
-//  Created by Andrew Zbranevich on 8/8/19.
-//  Copyright © 2019 Andrey. All rights reserved.
+//  TestSerialization.swift
 //
 
 import XCTest
@@ -11,14 +7,6 @@ import proto
 import test
 
 class TestSerialization: XCTestCase {
-    
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
     
     func testSerializationDomain() {
         // Create a new account with some orders
@@ -191,8 +179,6 @@ class TestSerialization: XCTestCase {
     
     func testSerializationStructOptional() {
         // Create a new struct
-        let struct11 = StructSimple()
-        
         let struct1 = test.StructOptional()
         
         // Serialize the struct to the FBE stream
@@ -445,9 +431,6 @@ class TestSerialization: XCTestCase {
     }
     
     func testSerializationStructNested() {
-        var struct11 = StructSimple()
-        struct11 = StructOptional()
-        
         // Create a new struct
         let struct1 = StructNested()
         
@@ -1297,9 +1280,6 @@ class TestSerialization: XCTestCase {
     }
     
     func testSerializationStructHashExtended() {
-        var struct11 = StructSimple()
-        struct11 = StructOptional()
-        
         // Create a new struct
         let struct1 = StructHashEx()
         let s1 = StructSimple()

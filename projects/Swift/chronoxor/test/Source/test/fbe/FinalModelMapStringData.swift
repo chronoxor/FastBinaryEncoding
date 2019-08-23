@@ -15,15 +15,15 @@ class FinalModelMapStringData: FinalModel {
     var _buffer: Buffer = Buffer()
     var _offset: Int = 0
 
-    private var _modelKey: FinalModelString
-    private var _modelValue: FinalModelData
+    private var _modelKey: fbe.FinalModelString
+    private var _modelValue: fbe.FinalModelData
 
     init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        _modelKey = FinalModelString(buffer: buffer, offset: offset)
-        _modelValue = FinalModelData(buffer: buffer, offset: offset)
+        _modelKey = fbe.FinalModelString(buffer: buffer, offset: offset)
+        _modelValue = fbe.FinalModelData(buffer: buffer, offset: offset)
     }
 
     // Get the allocation size

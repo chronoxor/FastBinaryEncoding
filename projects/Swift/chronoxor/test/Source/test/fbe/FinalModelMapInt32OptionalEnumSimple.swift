@@ -15,14 +15,14 @@ class FinalModelMapInt32OptionalEnumSimple: FinalModel {
     var _buffer: Buffer = Buffer()
     var _offset: Int = 0
 
-    private var _modelKey: FinalModelInt32
+    private var _modelKey: fbe.FinalModelInt32
     private var _modelValue: FinalModelOptionalEnumSimple
 
     init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        _modelKey = FinalModelInt32(buffer: buffer, offset: offset)
+        _modelKey = fbe.FinalModelInt32(buffer: buffer, offset: offset)
         _modelValue = FinalModelOptionalEnumSimple(buffer: buffer, offset: offset)
     }
 

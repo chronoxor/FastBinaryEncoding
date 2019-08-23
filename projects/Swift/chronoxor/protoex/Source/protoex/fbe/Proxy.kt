@@ -16,14 +16,12 @@ open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
     // Proxy models accessors
     private val OrderModel: OrderModel
     private val BalanceModel: BalanceModel
-    private val AccountModel: AccountModel
 
     constructor() : super(false)
     {
         protoProxy = com.chronoxor.proto.fbe.Proxy(buffer)
         OrderModel = OrderModel()
         BalanceModel = BalanceModel()
-        AccountModel = AccountModel()
     }
 
     constructor(buffer: com.chronoxor.fbe.Buffer) : super(buffer, false)
@@ -31,7 +29,6 @@ open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
         protoProxy = com.chronoxor.proto.fbe.Proxy(buffer)
         OrderModel = OrderModel()
         BalanceModel = BalanceModel()
-        AccountModel = AccountModel()
     }
 
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
@@ -69,20 +66,6 @@ open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
                 // Call proxy handler
                 listener.onProxy(BalanceModel, type, buffer, offset, size)
                 BalanceModel.model.getEnd(fbeBegin)
-                return true
-            }
-            com.chronoxor.protoex.fbe.AccountModel.fbeTypeConst ->
-            {
-                // Attach the FBE stream to the proxy model
-                AccountModel.attach((buffer: buffer, offset: offset)
-                assertionFailure(AccountModel.verify()) { "com.chronoxor.protoex.Account validation failed!" }
-
-                val fbeBegin = AccountModel.model.getBegin()
-                if (fbeBegin == 0L)
-                    return false
-                // Call proxy handler
-                listener.onProxy(AccountModel, type, buffer, offset, size)
-                AccountModel.model.getEnd(fbeBegin)
                 return true
             }
         }

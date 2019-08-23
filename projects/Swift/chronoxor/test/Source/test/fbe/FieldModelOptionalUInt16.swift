@@ -20,7 +20,7 @@ public class FieldModelOptionalUInt16: FieldModel {
     public let fbeSize: Int = 1 + 4
 
     // Base field model value
-    public let value: FieldModelUInt16
+    public let value: fbe.FieldModelUInt16
 
     public var fbeExtra: Int {
         if (!hasValue()) {
@@ -45,14 +45,14 @@ public class FieldModelOptionalUInt16: FieldModel {
         _buffer = buffer
         _offset = offset
 
-        value = FieldModelUInt16(buffer: buffer, offset: 0)
+        value = fbe.FieldModelUInt16(buffer: buffer, offset: 0)
     }
 
     public required init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        value = FieldModelUInt16(buffer: buffer, offset: 0)
+        value = fbe.FieldModelUInt16(buffer: buffer, offset: 0)
     }
 
     public func hasValue() -> Bool {

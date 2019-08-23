@@ -18,7 +18,7 @@ import proto
 
 // Fast Binary Encoding Int32->OptionalStructSimple map field model
 class FieldModelMapInt32OptionalStructSimple: FieldModel {
-    private let _modelKey: FieldModelInt32
+    private let _modelKey: fbe.FieldModelInt32
     private let _modelValue: FieldModelOptionalStructSimple
 
     var _buffer: Buffer
@@ -60,7 +60,7 @@ class FieldModelMapInt32OptionalStructSimple: FieldModel {
         _buffer = buffer
         _offset = offset
 
-        _modelKey = FieldModelInt32(buffer: buffer, offset: offset)
+        _modelKey = fbe.FieldModelInt32(buffer: buffer, offset: offset)
         _modelValue = FieldModelOptionalStructSimple(buffer: buffer, offset: offset)
     }
 
@@ -68,7 +68,7 @@ class FieldModelMapInt32OptionalStructSimple: FieldModel {
         _buffer = buffer
         _offset = offset
 
-        _modelKey = FieldModelInt32(buffer: buffer, offset: offset)
+        _modelKey = fbe.FieldModelInt32(buffer: buffer, offset: offset)
         _modelValue = FieldModelOptionalStructSimple(buffer: buffer, offset: offset)
     }
 
@@ -96,7 +96,7 @@ class FieldModelMapInt32OptionalStructSimple: FieldModel {
     }
 
     // Vector index operator
-    public func getItem(index: Int) -> (FieldModelInt32, FieldModelOptionalStructSimple) {
+    public func getItem(index: Int) -> (fbe.FieldModelInt32, FieldModelOptionalStructSimple) {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
 
         let fbeMapOffset = Int(readUInt32(offset: fbeOffset))
@@ -112,7 +112,7 @@ class FieldModelMapInt32OptionalStructSimple: FieldModel {
         return (_modelKey, _modelValue)
     }
 
-    func resize(size: Int) throws -> (FieldModelInt32, FieldModelOptionalStructSimple) {
+    func resize(size: Int) throws -> (fbe.FieldModelInt32, FieldModelOptionalStructSimple) {
         let fbeMapSize = size * (_modelKey.fbeSize + _modelValue.fbeSize)
         let fbeMapOffset = try _buffer.allocate(size: 4 + fbeMapSize) - _buffer.offset
         assert((fbeMapOffset > 0) && ((_buffer.offset + fbeMapOffset + 4) <= _buffer.size), "Model is broken!")

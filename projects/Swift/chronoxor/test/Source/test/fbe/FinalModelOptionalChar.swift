@@ -17,7 +17,7 @@ class FinalModelOptionalChar: FinalModel {
     var _offset: Int
 
     // Base field model value
-    let value: FinalModelChar
+    let value: fbe.FinalModelChar
 
     required init() {
         let buffer = Buffer()
@@ -26,14 +26,14 @@ class FinalModelOptionalChar: FinalModel {
         _buffer = buffer
         _offset = offset
 
-        value = FinalModelChar(buffer: buffer, offset: offset)
+        value = fbe.FinalModelChar(buffer: buffer, offset: offset)
     }
 
     required init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        value = FinalModelChar(buffer: buffer, offset: offset)
+        value = fbe.FinalModelChar(buffer: buffer, offset: offset)
     }
 
     func fbeAllocationSize(value optional: Character?) -> Int {

@@ -13,7 +13,7 @@ public class FinalModelStructBytes: FinalModel {
     public var _buffer: Buffer
     public var _offset: Int
 
-    let f1: FinalModelData
+    let f1: fbe.FinalModelData
     let f2: FinalModelOptionalData
     let f3: FinalModelOptionalData
 

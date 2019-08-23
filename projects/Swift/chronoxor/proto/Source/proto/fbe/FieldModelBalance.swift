@@ -14,8 +14,8 @@ public class FieldModelBalance: FieldModel {
     public var _buffer: Buffer
     public var _offset: Int
 
-    let currency: FieldModelString
-    let amount: FieldModelDouble
+    let currency: fbe.FieldModelString
+    let amount: fbe.FieldModelDouble
 
     // Field size
     public let fbeSize: Int = 4

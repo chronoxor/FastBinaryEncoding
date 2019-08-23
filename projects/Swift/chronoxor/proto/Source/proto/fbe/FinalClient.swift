@@ -9,7 +9,7 @@ import Foundation
 import fbe
 
 // Fast Binary Encoding proto final client
-open class FinalClient : FinalReceiverListener, fbe.ClientProtocol {
+open class FinalClient : fbe.ClientProtocol {
     // Client sender models accessors
     let OrderSenderModel: OrderFinalModel
     let BalanceSenderModel: BalanceFinalModel
@@ -30,7 +30,7 @@ open class FinalClient : FinalReceiverListener, fbe.ClientProtocol {
     public var logging: Bool = false
     public var final: Bool = false
 
-    public override init() {
+    public init() {
         OrderSenderModel = OrderFinalModel(buffer: sendBuffer)
         OrderReceiverValue = proto.Order()
         OrderReceiverModel = OrderFinalModel()
@@ -40,7 +40,6 @@ open class FinalClient : FinalReceiverListener, fbe.ClientProtocol {
         AccountSenderModel = AccountFinalModel(buffer: sendBuffer)
         AccountReceiverValue = proto.Account()
         AccountReceiverModel = AccountFinalModel()
-        super.init()
         build(with: true)
     }
 
@@ -54,7 +53,6 @@ open class FinalClient : FinalReceiverListener, fbe.ClientProtocol {
         AccountSenderModel = AccountFinalModel(buffer: sendBuffer)
         AccountReceiverValue = proto.Account()
         AccountReceiverModel = AccountFinalModel()
-        super.init()
         build(with: sendBuffer, receiveBuffer: receiveBuffer, final: true)
     }
 
@@ -118,7 +116,7 @@ open class FinalClient : FinalReceiverListener, fbe.ClientProtocol {
     // Send message handler
     open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }
     open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self, type: type, buffer: buffer, offset: offset, size: size)
+        return onReceiveListener(listener: self as! FinalReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: FinalReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {

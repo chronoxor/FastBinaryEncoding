@@ -17,7 +17,7 @@ class FinalModelOptionalDouble: FinalModel {
     var _offset: Int
 
     // Base field model value
-    let value: FinalModelDouble
+    let value: fbe.FinalModelDouble
 
     required init() {
         let buffer = Buffer()
@@ -26,14 +26,14 @@ class FinalModelOptionalDouble: FinalModel {
         _buffer = buffer
         _offset = offset
 
-        value = FinalModelDouble(buffer: buffer, offset: offset)
+        value = fbe.FinalModelDouble(buffer: buffer, offset: offset)
     }
 
     required init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        value = FinalModelDouble(buffer: buffer, offset: offset)
+        value = fbe.FinalModelDouble(buffer: buffer, offset: offset)
     }
 
     func fbeAllocationSize(value optional: Double?) -> Int {

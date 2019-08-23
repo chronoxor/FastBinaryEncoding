@@ -35,9 +35,9 @@ open class StructSet: Comparable, Hashable, Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         f1 = try container.decode(Array<UInt8>.self, forKey: .f1)
-        f2 = try container.decode(Array<EnumSimple>.self, forKey: .f2)
-        f3 = try container.decode(Array<FlagsSimple>.self, forKey: .f3)
-        f4 = try container.decode(Array<StructSimple>.self, forKey: .f4)
+        f2 = try container.decode(Array<test.EnumSimple>.self, forKey: .f2)
+        f3 = try container.decode(Array<test.FlagsSimple>.self, forKey: .f3)
+        f4 = try container.decode(Array<test.StructSimple>.self, forKey: .f4)
     }
 
     open func clone() throws -> StructSet {

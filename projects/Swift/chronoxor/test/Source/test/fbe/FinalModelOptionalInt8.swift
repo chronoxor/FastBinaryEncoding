@@ -17,7 +17,7 @@ class FinalModelOptionalInt8: FinalModel {
     var _offset: Int
 
     // Base field model value
-    let value: FinalModelInt8
+    let value: fbe.FinalModelInt8
 
     required init() {
         let buffer = Buffer()
@@ -26,14 +26,14 @@ class FinalModelOptionalInt8: FinalModel {
         _buffer = buffer
         _offset = offset
 
-        value = FinalModelInt8(buffer: buffer, offset: offset)
+        value = fbe.FinalModelInt8(buffer: buffer, offset: offset)
     }
 
     required init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        value = FinalModelInt8(buffer: buffer, offset: offset)
+        value = fbe.FinalModelInt8(buffer: buffer, offset: offset)
     }
 
     func fbeAllocationSize(value optional: Int8?) -> Int {

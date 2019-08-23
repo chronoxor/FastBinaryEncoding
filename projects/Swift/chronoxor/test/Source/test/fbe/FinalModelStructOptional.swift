@@ -68,18 +68,18 @@ public class FinalModelStructOptional: FinalModel {
     let f151: FinalModelOptionalUUID
     let f152: FinalModelOptionalUUID
     let f153: FinalModelOptionalUUID
-    let f154: FinalModelOptionalprotoOrderSide
-    let f155: FinalModelOptionalprotoOrderSide
-    let f156: FinalModelOptionalprotoOrderType
-    let f157: FinalModelOptionalprotoOrderType
-    let f158: FinalModelOptionalprotoOrder
-    let f159: FinalModelOptionalprotoOrder
-    let f160: FinalModelOptionalprotoBalance
-    let f161: FinalModelOptionalprotoBalance
-    let f162: FinalModelOptionalprotoState
-    let f163: FinalModelOptionalprotoState
-    let f164: FinalModelOptionalprotoAccount
-    let f165: FinalModelOptionalprotoAccount
+    let f154: FinalModelOptionalOrderSide
+    let f155: FinalModelOptionalOrderSide
+    let f156: FinalModelOptionalOrderType
+    let f157: FinalModelOptionalOrderType
+    let f158: FinalModelOptionalOrder
+    let f159: FinalModelOptionalOrder
+    let f160: FinalModelOptionalBalance
+    let f161: FinalModelOptionalBalance
+    let f162: FinalModelOptionalState
+    let f163: FinalModelOptionalState
+    let f164: FinalModelOptionalAccount
+    let f165: FinalModelOptionalAccount
 
     // Field type
     public var fbeType: Int = fbeTypeConst
@@ -145,18 +145,18 @@ public class FinalModelStructOptional: FinalModel {
         f151 = FinalModelOptionalUUID(buffer: buffer, offset: 0)
         f152 = FinalModelOptionalUUID(buffer: buffer, offset: 0)
         f153 = FinalModelOptionalUUID(buffer: buffer, offset: 0)
-        f154 = FinalModelOptionalprotoOrderSide(buffer: buffer, offset: 0)
-        f155 = FinalModelOptionalprotoOrderSide(buffer: buffer, offset: 0)
-        f156 = FinalModelOptionalprotoOrderType(buffer: buffer, offset: 0)
-        f157 = FinalModelOptionalprotoOrderType(buffer: buffer, offset: 0)
-        f158 = FinalModelOptionalprotoOrder(buffer: buffer, offset: 0)
-        f159 = FinalModelOptionalprotoOrder(buffer: buffer, offset: 0)
-        f160 = FinalModelOptionalprotoBalance(buffer: buffer, offset: 0)
-        f161 = FinalModelOptionalprotoBalance(buffer: buffer, offset: 0)
-        f162 = FinalModelOptionalprotoState(buffer: buffer, offset: 0)
-        f163 = FinalModelOptionalprotoState(buffer: buffer, offset: 0)
-        f164 = FinalModelOptionalprotoAccount(buffer: buffer, offset: 0)
-        f165 = FinalModelOptionalprotoAccount(buffer: buffer, offset: 0)
+        f154 = FinalModelOptionalOrderSide(buffer: buffer, offset: 0)
+        f155 = FinalModelOptionalOrderSide(buffer: buffer, offset: 0)
+        f156 = FinalModelOptionalOrderType(buffer: buffer, offset: 0)
+        f157 = FinalModelOptionalOrderType(buffer: buffer, offset: 0)
+        f158 = FinalModelOptionalOrder(buffer: buffer, offset: 0)
+        f159 = FinalModelOptionalOrder(buffer: buffer, offset: 0)
+        f160 = FinalModelOptionalBalance(buffer: buffer, offset: 0)
+        f161 = FinalModelOptionalBalance(buffer: buffer, offset: 0)
+        f162 = FinalModelOptionalState(buffer: buffer, offset: 0)
+        f163 = FinalModelOptionalState(buffer: buffer, offset: 0)
+        f164 = FinalModelOptionalAccount(buffer: buffer, offset: 0)
+        f165 = FinalModelOptionalAccount(buffer: buffer, offset: 0)
     }
 
     // Get the allocation size

@@ -13,8 +13,8 @@ import proto
 open class Order: Comparable, Hashable, Codable {
     public var id: Int32 = 0
     public var symbol: String = ""
-    public var side: OrderSide = OrderSide()
-    public var type: OrderType = OrderType()
+    public var side: OrderSide = protoex.OrderSide()
+    public var type: OrderType = protoex.OrderType()
     public var price: Double = 0.0
     public var volume: Double = 0.0
     public var tp: Double = 10.0
@@ -48,8 +48,8 @@ open class Order: Comparable, Hashable, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int32.self, forKey: .id)
         symbol = try container.decode(String.self, forKey: .symbol)
-        side = try container.decode(OrderSide.self, forKey: .side)
-        type = try container.decode(OrderType.self, forKey: .type)
+        side = try container.decode(protoex.OrderSide.self, forKey: .side)
+        type = try container.decode(protoex.OrderType.self, forKey: .type)
         price = try container.decode(Double.self, forKey: .price)
         volume = try container.decode(Double.self, forKey: .volume)
         tp = try container.decode(Double.self, forKey: .tp)

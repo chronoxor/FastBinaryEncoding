@@ -17,7 +17,7 @@ class FinalModelOptionalBoolean: FinalModel {
     var _offset: Int
 
     // Base field model value
-    let value: FinalModelBoolean
+    let value: fbe.FinalModelBoolean
 
     required init() {
         let buffer = Buffer()
@@ -26,14 +26,14 @@ class FinalModelOptionalBoolean: FinalModel {
         _buffer = buffer
         _offset = offset
 
-        value = FinalModelBoolean(buffer: buffer, offset: offset)
+        value = fbe.FinalModelBoolean(buffer: buffer, offset: offset)
     }
 
     required init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        value = FinalModelBoolean(buffer: buffer, offset: offset)
+        value = fbe.FinalModelBoolean(buffer: buffer, offset: offset)
     }
 
     func fbeAllocationSize(value optional: Bool?) -> Int {

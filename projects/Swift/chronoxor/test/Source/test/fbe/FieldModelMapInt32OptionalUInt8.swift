@@ -18,7 +18,7 @@ import proto
 
 // Fast Binary Encoding Int32->OptionalUInt8 map field model
 class FieldModelMapInt32OptionalUInt8: FieldModel {
-    private let _modelKey: FieldModelInt32
+    private let _modelKey: fbe.FieldModelInt32
     private let _modelValue: FieldModelOptionalUInt8
 
     var _buffer: Buffer
@@ -60,7 +60,7 @@ class FieldModelMapInt32OptionalUInt8: FieldModel {
         _buffer = buffer
         _offset = offset
 
-        _modelKey = FieldModelInt32(buffer: buffer, offset: offset)
+        _modelKey = fbe.FieldModelInt32(buffer: buffer, offset: offset)
         _modelValue = FieldModelOptionalUInt8(buffer: buffer, offset: offset)
     }
 
@@ -68,7 +68,7 @@ class FieldModelMapInt32OptionalUInt8: FieldModel {
         _buffer = buffer
         _offset = offset
 
-        _modelKey = FieldModelInt32(buffer: buffer, offset: offset)
+        _modelKey = fbe.FieldModelInt32(buffer: buffer, offset: offset)
         _modelValue = FieldModelOptionalUInt8(buffer: buffer, offset: offset)
     }
 
@@ -96,7 +96,7 @@ class FieldModelMapInt32OptionalUInt8: FieldModel {
     }
 
     // Vector index operator
-    public func getItem(index: Int) -> (FieldModelInt32, FieldModelOptionalUInt8) {
+    public func getItem(index: Int) -> (fbe.FieldModelInt32, FieldModelOptionalUInt8) {
         assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size, "Model is broken!")
 
         let fbeMapOffset = Int(readUInt32(offset: fbeOffset))
@@ -112,7 +112,7 @@ class FieldModelMapInt32OptionalUInt8: FieldModel {
         return (_modelKey, _modelValue)
     }
 
-    func resize(size: Int) throws -> (FieldModelInt32, FieldModelOptionalUInt8) {
+    func resize(size: Int) throws -> (fbe.FieldModelInt32, FieldModelOptionalUInt8) {
         let fbeMapSize = size * (_modelKey.fbeSize + _modelValue.fbeSize)
         let fbeMapOffset = try _buffer.allocate(size: 4 + fbeMapSize) - _buffer.offset
         assert((fbeMapOffset > 0) && ((_buffer.offset + fbeMapOffset + 4) <= _buffer.size), "Model is broken!")

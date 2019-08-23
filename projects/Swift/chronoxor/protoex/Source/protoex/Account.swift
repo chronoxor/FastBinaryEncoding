@@ -14,7 +14,7 @@ open class Account: Comparable, Hashable, Codable {
     public var id: Int32 = 0
     public var name: String = ""
     public var state: StateEx = StateEx.fromSet(set: [StateEx.initialized.value!, StateEx.bad.value!, StateEx.sad.value!])
-    public var wallet: Balance = Balance()
+    public var wallet: Balance = protoex.Balance()
     public var asset: Balance? = nil
     public var orders: Array<Order> = Array()
 
@@ -42,10 +42,10 @@ open class Account: Comparable, Hashable, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int32.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
-        state = try container.decode(StateEx.self, forKey: .state)
-        wallet = try container.decode(Balance.self, forKey: .wallet)
-        asset = try container.decode(Balance?.self, forKey: .asset)
-        orders = try container.decode(Array<Order>.self, forKey: .orders)
+        state = try container.decode(protoex.StateEx.self, forKey: .state)
+        wallet = try container.decode(protoex.Balance.self, forKey: .wallet)
+        asset = try container.decode(protoex.Balance?.self, forKey: .asset)
+        orders = try container.decode(Array<protoex.Order>.self, forKey: .orders)
     }
 
     open func clone() throws -> Account {

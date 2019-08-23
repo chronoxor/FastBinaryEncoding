@@ -28,8 +28,8 @@ open class StructHashEx: Comparable, Hashable, Codable {
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        f1 = try container.decode(Dictionary<StructSimple, StructNested>.self, forKey: .f1)
-        f2 = try container.decode(Dictionary<StructSimple, StructNested?>.self, forKey: .f2)
+        f1 = try container.decode(Dictionary<test.StructSimple, test.StructNested>.self, forKey: .f1)
+        f2 = try container.decode(Dictionary<test.StructSimple, test.StructNested?>.self, forKey: .f2)
     }
 
     open func clone() throws -> StructHashEx {

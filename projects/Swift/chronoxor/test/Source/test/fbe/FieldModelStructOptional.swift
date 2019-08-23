@@ -71,18 +71,18 @@ public class FieldModelStructOptional: FieldModel {
     let f151: FieldModelOptionalUUID
     let f152: FieldModelOptionalUUID
     let f153: FieldModelOptionalUUID
-    let f154: FieldModelOptionalprotoOrderSide
-    let f155: FieldModelOptionalprotoOrderSide
-    let f156: FieldModelOptionalprotoOrderType
-    let f157: FieldModelOptionalprotoOrderType
-    let f158: FieldModelOptionalprotoOrder
-    let f159: FieldModelOptionalprotoOrder
-    let f160: FieldModelOptionalprotoBalance
-    let f161: FieldModelOptionalprotoBalance
-    let f162: FieldModelOptionalprotoState
-    let f163: FieldModelOptionalprotoState
-    let f164: FieldModelOptionalprotoAccount
-    let f165: FieldModelOptionalprotoAccount
+    let f154: FieldModelOptionalOrderSide
+    let f155: FieldModelOptionalOrderSide
+    let f156: FieldModelOptionalOrderType
+    let f157: FieldModelOptionalOrderType
+    let f158: FieldModelOptionalOrder
+    let f159: FieldModelOptionalOrder
+    let f160: FieldModelOptionalBalance
+    let f161: FieldModelOptionalBalance
+    let f162: FieldModelOptionalState
+    let f163: FieldModelOptionalState
+    let f164: FieldModelOptionalAccount
+    let f165: FieldModelOptionalAccount
 
     // Field size
     public let fbeSize: Int = 4
@@ -153,18 +153,18 @@ public class FieldModelStructOptional: FieldModel {
         f151 = FieldModelOptionalUUID(buffer: buffer, offset: f150.fbeOffset + f150.fbeSize)
         f152 = FieldModelOptionalUUID(buffer: buffer, offset: f151.fbeOffset + f151.fbeSize)
         f153 = FieldModelOptionalUUID(buffer: buffer, offset: f152.fbeOffset + f152.fbeSize)
-        f154 = FieldModelOptionalprotoOrderSide(buffer: buffer, offset: f153.fbeOffset + f153.fbeSize)
-        f155 = FieldModelOptionalprotoOrderSide(buffer: buffer, offset: f154.fbeOffset + f154.fbeSize)
-        f156 = FieldModelOptionalprotoOrderType(buffer: buffer, offset: f155.fbeOffset + f155.fbeSize)
-        f157 = FieldModelOptionalprotoOrderType(buffer: buffer, offset: f156.fbeOffset + f156.fbeSize)
-        f158 = FieldModelOptionalprotoOrder(buffer: buffer, offset: f157.fbeOffset + f157.fbeSize)
-        f159 = FieldModelOptionalprotoOrder(buffer: buffer, offset: f158.fbeOffset + f158.fbeSize)
-        f160 = FieldModelOptionalprotoBalance(buffer: buffer, offset: f159.fbeOffset + f159.fbeSize)
-        f161 = FieldModelOptionalprotoBalance(buffer: buffer, offset: f160.fbeOffset + f160.fbeSize)
-        f162 = FieldModelOptionalprotoState(buffer: buffer, offset: f161.fbeOffset + f161.fbeSize)
-        f163 = FieldModelOptionalprotoState(buffer: buffer, offset: f162.fbeOffset + f162.fbeSize)
-        f164 = FieldModelOptionalprotoAccount(buffer: buffer, offset: f163.fbeOffset + f163.fbeSize)
-        f165 = FieldModelOptionalprotoAccount(buffer: buffer, offset: f164.fbeOffset + f164.fbeSize)
+        f154 = FieldModelOptionalOrderSide(buffer: buffer, offset: f153.fbeOffset + f153.fbeSize)
+        f155 = FieldModelOptionalOrderSide(buffer: buffer, offset: f154.fbeOffset + f154.fbeSize)
+        f156 = FieldModelOptionalOrderType(buffer: buffer, offset: f155.fbeOffset + f155.fbeSize)
+        f157 = FieldModelOptionalOrderType(buffer: buffer, offset: f156.fbeOffset + f156.fbeSize)
+        f158 = FieldModelOptionalOrder(buffer: buffer, offset: f157.fbeOffset + f157.fbeSize)
+        f159 = FieldModelOptionalOrder(buffer: buffer, offset: f158.fbeOffset + f158.fbeSize)
+        f160 = FieldModelOptionalBalance(buffer: buffer, offset: f159.fbeOffset + f159.fbeSize)
+        f161 = FieldModelOptionalBalance(buffer: buffer, offset: f160.fbeOffset + f160.fbeSize)
+        f162 = FieldModelOptionalState(buffer: buffer, offset: f161.fbeOffset + f161.fbeSize)
+        f163 = FieldModelOptionalState(buffer: buffer, offset: f162.fbeOffset + f162.fbeSize)
+        f164 = FieldModelOptionalAccount(buffer: buffer, offset: f163.fbeOffset + f163.fbeSize)
+        f165 = FieldModelOptionalAccount(buffer: buffer, offset: f164.fbeOffset + f164.fbeSize)
 
         var fbeBody = (4 + 4)
             fbeBody += parent.fbeBody - 4 - 4
@@ -297,18 +297,18 @@ public class FieldModelStructOptional: FieldModel {
         f151 = FieldModelOptionalUUID(buffer: buffer, offset: f150.fbeOffset + f150.fbeSize)
         f152 = FieldModelOptionalUUID(buffer: buffer, offset: f151.fbeOffset + f151.fbeSize)
         f153 = FieldModelOptionalUUID(buffer: buffer, offset: f152.fbeOffset + f152.fbeSize)
-        f154 = FieldModelOptionalprotoOrderSide(buffer: buffer, offset: f153.fbeOffset + f153.fbeSize)
-        f155 = FieldModelOptionalprotoOrderSide(buffer: buffer, offset: f154.fbeOffset + f154.fbeSize)
-        f156 = FieldModelOptionalprotoOrderType(buffer: buffer, offset: f155.fbeOffset + f155.fbeSize)
-        f157 = FieldModelOptionalprotoOrderType(buffer: buffer, offset: f156.fbeOffset + f156.fbeSize)
-        f158 = FieldModelOptionalprotoOrder(buffer: buffer, offset: f157.fbeOffset + f157.fbeSize)
-        f159 = FieldModelOptionalprotoOrder(buffer: buffer, offset: f158.fbeOffset + f158.fbeSize)
-        f160 = FieldModelOptionalprotoBalance(buffer: buffer, offset: f159.fbeOffset + f159.fbeSize)
-        f161 = FieldModelOptionalprotoBalance(buffer: buffer, offset: f160.fbeOffset + f160.fbeSize)
-        f162 = FieldModelOptionalprotoState(buffer: buffer, offset: f161.fbeOffset + f161.fbeSize)
-        f163 = FieldModelOptionalprotoState(buffer: buffer, offset: f162.fbeOffset + f162.fbeSize)
-        f164 = FieldModelOptionalprotoAccount(buffer: buffer, offset: f163.fbeOffset + f163.fbeSize)
-        f165 = FieldModelOptionalprotoAccount(buffer: buffer, offset: f164.fbeOffset + f164.fbeSize)
+        f154 = FieldModelOptionalOrderSide(buffer: buffer, offset: f153.fbeOffset + f153.fbeSize)
+        f155 = FieldModelOptionalOrderSide(buffer: buffer, offset: f154.fbeOffset + f154.fbeSize)
+        f156 = FieldModelOptionalOrderType(buffer: buffer, offset: f155.fbeOffset + f155.fbeSize)
+        f157 = FieldModelOptionalOrderType(buffer: buffer, offset: f156.fbeOffset + f156.fbeSize)
+        f158 = FieldModelOptionalOrder(buffer: buffer, offset: f157.fbeOffset + f157.fbeSize)
+        f159 = FieldModelOptionalOrder(buffer: buffer, offset: f158.fbeOffset + f158.fbeSize)
+        f160 = FieldModelOptionalBalance(buffer: buffer, offset: f159.fbeOffset + f159.fbeSize)
+        f161 = FieldModelOptionalBalance(buffer: buffer, offset: f160.fbeOffset + f160.fbeSize)
+        f162 = FieldModelOptionalState(buffer: buffer, offset: f161.fbeOffset + f161.fbeSize)
+        f163 = FieldModelOptionalState(buffer: buffer, offset: f162.fbeOffset + f162.fbeSize)
+        f164 = FieldModelOptionalAccount(buffer: buffer, offset: f163.fbeOffset + f163.fbeSize)
+        f165 = FieldModelOptionalAccount(buffer: buffer, offset: f164.fbeOffset + f164.fbeSize)
 
         var fbeBody = (4 + 4)
             fbeBody += parent.fbeBody - 4 - 4

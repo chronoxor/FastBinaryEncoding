@@ -60,14 +60,3 @@ flags StateEx : byte
     good = initialized | calculated;
     bad = unknown | invalid | broken;
 }
-
-// Extended account declaration
-struct Account(3)
-{
-    [key] int32 id;
-    string name;
-    StateEx state = StateEx.initialized | StateEx.bad | StateEx.sad;
-    Balance wallet;
-    Balance? asset;
-    Order[] orders;
-}

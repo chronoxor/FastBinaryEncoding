@@ -9,7 +9,7 @@ import Foundation
 import fbe
 
 // Fast Binary Encoding com.chronoxor.proto receiver
-open class Receiver : ReceiverListener, fbe.ReceiverProtocol {
+open class Receiver : fbe.ReceiverProtocol {
     // Receiver values accessors
     private var OrderValue: proto.Order
     private var BalanceValue: proto.Balance
@@ -24,14 +24,13 @@ open class Receiver : ReceiverListener, fbe.ReceiverProtocol {
     public var logging: Bool = false
     public var final: Bool = false
 
-    public override init() {
+    public init() {
         OrderValue = proto.Order()
         OrderModel = proto.OrderModel()
         BalanceValue = proto.Balance()
         BalanceModel = proto.BalanceModel()
         AccountValue = proto.Account()
         AccountModel = proto.AccountModel()
-        super.init()
         build(final: false)
     }
 
@@ -42,12 +41,11 @@ open class Receiver : ReceiverListener, fbe.ReceiverProtocol {
         BalanceModel = proto.BalanceModel()
         AccountValue = proto.Account()
         AccountModel = proto.AccountModel()
-        super.init()
         build(with: buffer, final: false)
     }
 
     public func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self, type: type, buffer: buffer, offset: offset, size: size)
+        return onReceiveListener(listener: self as! ReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: ReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {

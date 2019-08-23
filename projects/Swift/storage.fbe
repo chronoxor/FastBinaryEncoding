@@ -1,0 +1,192 @@
+/*
+   Storage protocol
+*/
+
+// Domain declaration
+domain com.finstek.proto
+
+// Package declaration
+package storage offset 3000
+
+// Protocol version
+version 0.4
+
+// Package imports
+import core
+
+// Storage version request
+[request]
+[response(StorageVersionResponse)]
+[reject(*core.Reject)]
+message StorageVersionRequest : core.Request
+{
+}
+
+// Storage version response
+message StorageVersionResponse : core.Response
+{
+    // Storage database
+    string Database;
+    // Storage version
+    uint64 Version;
+}
+
+// Account get request
+[request]
+[response(AccountGetResponse)]
+[reject(*core.Reject)]
+message AccountGetRequest : core.Request
+{
+    // Account Id
+    uuid? AccountId;
+    // Account login
+    uint64? AccountLogin;
+}
+
+// Account get response
+message AccountGetResponse : core.Response
+{
+    // Account
+    core.Account Account;
+}
+
+// Accounts get all request
+[request]
+[response(AccountsGetAllResponse)]
+[reject(*core.Reject)]
+message AccountsGetAllRequest : core.Request
+{
+}
+
+// Accounts get all response
+message AccountsGetAllResponse : core.Response
+{
+    // Accounts
+    core.Account[] Accounts;
+}
+
+// Account create request
+[request]
+[response(AccountCreateResponse)]
+[reject(*core.Reject)]
+message AccountCreateRequest : core.Request
+{
+    // Account group Id
+    uuid? AccountGroupId;
+    // Account group name
+    string? AccountGroupName;
+    
+    // Account login
+    uint64? Login;
+
+    // Account name
+    string Name;
+    // Account comment
+    string Comment;
+    // Account description
+    string Description;
+    // Account email
+    string Email;
+
+    // Is account enabled? (inherited from the account group by default)
+    bool? IsEnabled;
+    // Is account one-time-password enabled? (inherited from the account group by default)
+    bool? IsOTPEnabled;
+
+    // Account password (optional)
+    [hidden]
+    string? Password;
+
+    // Accounting type (inherited from the account group by default)
+    AccountingType? AccountingType;
+}
+
+// Account create response
+message AccountCreateResponse : core.Response
+{
+    // Created account
+    core.Account Account;
+
+    // Created account password
+    [hidden]
+    string Password;
+    // Created one-time-password secret (optional)
+    [hidden]
+    string? OTPSecret;
+}
+
+// Account modify request
+[request]
+[response(AccountModifyResponse)]
+[reject(*core.Reject)]
+message AccountModifyRequest : core.Request
+{
+    // Account Id
+    uuid? AccountId;
+    // Account login
+    uint64? AccountLogin;
+
+    // New account group Id
+    uuid? NewAccountGroupId;
+    // New account group name
+    string? NewAccountGroupName;
+    
+    // New account login
+    uint64? NewLogin;
+
+    // New account name
+    string? NewName;
+    // New account comment
+    string? NewComment;
+    // New account description
+    string? NewDescription;
+    // New account email
+    string? NewEmail;
+
+    // New account enabled flag (inherited from the account group by default)
+    bool? NewIsEnabled;
+    // New account one-time-password enabled flag (inherited from the account group by default)
+    bool? NewIsOTPEnabled;
+
+    // New account password
+    [hidden]
+    string? NewPassword;
+
+    // New accounting type (inherited from the account group by default)
+    AccountingType? NewAccountingType;
+}
+
+// Account modify response
+message AccountModifyResponse : core.Response
+{
+    // Previous account
+    core.Account Previous;
+    // Modified account
+    core.Account Modified;
+
+    // Modified account password
+    [hidden]
+    string? Password;
+    // Modified one-time-password secret
+    [hidden]
+    string? OTPSecret;
+}
+
+// Account delete request
+[request]
+[response(AccountDeleteResponse)]
+[reject(*core.Reject)]
+message AccountDeleteRequest : core.Request
+{
+    // Account Id
+    uuid? AccountId;
+    // Account login
+    uint64? AccountLogin;
+}
+
+// Account delete response
+message AccountDeleteResponse : core.Response
+{
+    // Deleted account
+    core.Account Deleted;
+}

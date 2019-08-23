@@ -1,0 +1,707 @@
+/*
+   Core protocol
+*/
+
+// Domain declaration
+domain com.finstek.proto
+
+// Package declaration
+package core
+
+// Protocol version
+version 0.4
+
+// Message type
+enum MessageType
+{
+    CLIENT;
+    MANAGER;
+    SYSTEM;
+}
+
+// Message declaration
+message Message
+{
+    // Message Id
+    uuid [id] = uuid1;
+
+    // Message type
+    MessageType Type;
+
+    // Client Id
+    uuid ClientId;
+    // Access Id
+    uuid AccessId;
+    // Session Id
+    uuid SessionId;
+}
+
+// Request declaration
+message Request : Message
+{
+}
+
+// Response declaration
+message Response : Message
+{
+}
+
+// Reject code
+enum RejectCode
+{
+    UNKNOWN = 0;
+    SUCCESS;
+    TIMEOUT;
+    THROTTLING;
+
+    INVALID_KEY = 1000;
+    INVALID_VALUE;
+    INVALID_LOGIN;
+    INVALID_PASSWORD;
+    INVALID_OTP_TOKEN;
+    INVALID_AUTH_TOKEN;
+    INVALID_PROTOCOL;
+    INVALID_REQUEST;
+    INVALID_RESPONSE;
+    INVALID_SERIALIZATION;
+    INVALID_DESERIALIZATION;
+    INVALID_SESSION;
+
+    SECURITY_NOT_ALLOWED = 2000;
+    SECURITY_NOT_AUTHENICATED;
+    SECURITY_NOT_AUTHORIZED;
+    SECURITY_WEAK_PASSWORD;
+
+    CONFIG_NOT_AVAILABLE = 3000;
+    CONFIG_INVALID_KEY;
+    CONFIG_INVALID_VALUE;
+    CONFIG_REFRESH_FAILED;
+    CONFIG_HISTORY_FAILED;
+    CONFIG_ROLLBACK_FAILED;
+    CONFIG_STORAGE_NOT_AVAILABLE;
+    CONFIG_STORAGE_NOT_STARTED;
+    CONFIG_STORAGE_NOT_SUPPORTED;
+    CONFIG_VERSION_CONFLICT;
+
+    HISTORY_NOT_AVAILABLE = 4000;
+    HISTORY_NOT_STARTED;
+    HISTORY_NOT_SUPPORTED;
+    HISTORY_VERSION_CONFLICT;
+
+    STORAGE_NOT_AVAILABLE = 5000;
+    STORAGE_NOT_STARTED;
+    STORAGE_NOT_SUPPORTED;
+    STORAGE_VERSION_CONFLICT;
+    STORAGE_INSERT_FAILED;
+    STORAGE_UPDATE_FAILED;
+    STORAGE_DELETE_FAILED;
+  
+    HOST_DUPLICATE = 10000;
+    HOST_NOT_FOUND;
+    HOST_IS_DISABLED;
+    HOST_IS_USED;
+    
+    MODULE_DUPLICATE = 10100;
+    MODULE_NOT_FOUND;
+    MODULE_IS_DISABLED;
+    MODULE_IS_USED;
+
+    TIMEZONE_DUPLICATE = 10200;
+    TIMEZONE_NOT_FOUND;
+    TIMEZONE_IS_DISABLED;
+    TIMEZONE_IS_USED;
+
+    CURRENCY_GROUP_DUPLICATE = 10300;
+    CURRENCY_GROUP_NOT_FOUND;
+    CURRENCY_GROUP_IS_DISABLED;
+    CURRENCY_GROUP_IS_USED;
+
+    CURRENCY_DUPLICATE = 10400;
+    CURRENCY_NOT_FOUND;
+    CURRENCY_IS_DISABLED;
+    CURRENCY_IS_USED;
+    
+    SYMBOL_GROUP_DUPLICATE = 10500;
+    SYMBOL_GROUP_NOT_FOUND;
+    SYMBOL_GROUP_IS_DISABLED;
+    SYMBOL_GROUP_IS_USED;
+
+    SYMBOL_DUPLICATE = 10600;
+    SYMBOL_NOT_FOUND;
+    SYMBOL_IS_DISABLED;
+    SYMBOL_IS_USED;
+    
+    MANAGER_GROUP_DUPLICATE = 10700;
+    MANAGER_GROUP_NOT_FOUND;
+    MANAGER_GROUP_IS_DISABLED;
+    MANAGER_GROUP_IS_USED;
+
+    MANAGER_DUPLICATE = 10800;
+    MANAGER_NOT_FOUND;
+    MANAGER_IS_DISABLED;
+    MANAGER_IS_USED;
+    MANAGER_LOGIN_OUT_OF_RANGE;
+    MANAGER_LOGIN_RANGE_EXHAUSTED;
+    MANAGER_LOGIN_RANGE_OVERLAPPED;
+
+    PLATFORM_DUPLICATE = 10900;
+    PLATFORM_NOT_FOUND;
+    PLATFORM_IS_DISABLED;
+    PLATFORM_IS_USED;
+    
+    ACCOUNT_GROUP_DUPLICATE = 11000;
+    ACCOUNT_GROUP_NOT_FOUND;
+    ACCOUNT_GROUP_IS_DISABLED;
+    ACCOUNT_GROUP_IS_USED;
+    
+    ACCOUNT_DUPLICATE = 11100;
+    ACCOUNT_NOT_FOUND;
+    ACCOUNT_IS_DISABLED;
+    ACCOUNT_IS_USED;
+    ACCOUNT_LOGIN_OUT_OF_RANGE;
+    ACCOUNT_LOGIN_RANGE_EXHAUSTED;
+    ACCOUNT_LOGIN_RANGE_OVERLAPPED;
+}
+
+// Reject declaration
+message Reject : Message
+{
+    // Reject code
+    RejectCode Code;
+    // Reject reason
+    string Reason;
+}
+
+// Authentication type
+enum AuthenticationType
+{
+    PBKDF2;
+    BCRYPT;
+    SCRYPT;
+    ARGON2;
+}
+
+// Protocol type
+enum ProtocolType
+{
+    UNKNOWN;
+    CLIENT;
+    MANAGER;
+    PUBLIC;
+}
+
+// Transport type
+enum TransportType
+{
+    UNKNOWN;
+    TCP;
+    SSL;
+    UDP;
+    WS;
+    WSS;
+    HTTP;
+    HTTPS;
+}
+
+// Update type
+enum UpdateType
+{
+    INSERT;
+    UPDATE;
+    DELETE;
+}
+
+// Host declaration
+struct Host
+{
+    // Host Id
+    uuid [id] = uuid1;
+
+    // Host sort order
+    uint32 SortOrder;
+
+    // Host name
+    string Name;
+    // Host comment
+    string Comment;
+    // Host description
+    string Description;
+    // Host address
+    string Address;
+
+    // Is host enabled?
+    bool IsEnabled;
+
+    // Host settings
+    string{string} Settings;
+}
+
+// Module type
+enum ModuleType
+{
+    ConfigServer;
+    AccessServer;
+    FeedServer;
+    TradeServer;
+    HistoryServer;
+    StorageServer;
+}
+
+// Module declaration
+struct Module
+{
+    // Module Id
+    uuid [id] = uuid1;
+
+    // Module sort order
+    uint32 SortOrder;
+
+    // Host Id
+    uuid HostId;
+
+    // Module name
+    string Name;
+    // Module comment
+    string Comment;
+    // Module description
+    string Description;
+
+    // Module type
+    ModuleType ModuleType;
+
+    // Is module enabled?
+    bool IsEnabled;
+
+    // Module settings
+    string{string} Settings;
+}
+
+// Time zone declaration
+struct Timezone
+{
+    // Time zone Id
+    uuid [id] = uuid1;
+
+    // Time zone sort order
+    uint32 SortOrder;
+
+    // Time zone name
+    string Name;
+    // Time zone comment
+    string Comment;
+
+    // Time zone local time offset (in nanoseconds)
+    int64 Offset;
+    // Daylight saving time offset (in nanoseconds)
+    int64 Daylight;
+}
+
+// Currency group declaration
+struct CurrencyGroup
+{
+    // Currency group Id
+    uuid [id] = uuid1;
+
+    // Currency group sort order
+    uint32 SortOrder;
+
+    // Currency group name
+    string Name;
+    // Currency group comment
+    string Comment;
+    // Currency group description
+    string Description;
+}
+
+// Currency declaration
+struct Currency
+{
+    // Currency Id
+    uuid [id] = uuid1;
+
+    // Currency sort order
+    uint32 SortOrder;
+
+    // Currency group Id
+    uuid CurrencyGroupId;
+
+    // Currency name
+    string Name;
+    // Currency comment
+    string Comment;
+    // Currency description
+    string Description;
+
+    // Currency precision
+    uint8 Precision;
+}
+
+// Symbol group declaration
+struct SymbolGroup
+{
+    // Symbol group Id
+    uuid [id] = uuid1;
+
+    // Symbol group sort order
+    uint32 SortOrder;
+
+    // Symbol group name
+    string Name;
+    // Symbol group comment
+    string Comment;
+    // Symbol group description
+    string Description;
+
+    // Symbol group color in ARGB format
+    uint32 Color;
+
+    // Is trade allowed?
+    bool IsTradeAllowed;
+}
+
+// Symbol declaration
+struct Symbol
+{
+    // Symbol Id
+    uuid [id] = uuid1;
+
+    // Symbol sort order
+    uint32 SortOrder;
+
+    // Symbol group Id
+    uuid SymbolGroupId;
+
+    // Symbol name
+    string Name;
+    // Symbol comment
+    string Comment;
+    // Symbol description
+    string Description;
+
+    // Symbol alias for clients
+    string Alias;
+    // Symbol quotes source
+    string Source;
+
+    // Symbol precision
+    uint8 Precision;
+
+    // Symbol magin currency Id (optional)
+    uuid? MarginCurrencyId;
+    // Symbol magin currency precision (optional)
+    uint8? MarginCurrencyPrecision;
+
+    // Symbol profit currency Id (optional)
+    uuid? ProfitCurrencyId;
+    // Symbol profit currency precision (optional)
+    uint8? ProfitCurrencyPrecision;
+
+    // Symbol color in ARGB format (inherited from the symbol group by default)
+    uint32? Color;
+
+    // Is trade allowed? (inherited from the symbol group by default)
+    bool? IsTradeAllowed;
+}
+
+// Manager rights declaration
+flags ManagerRights : uint64
+{
+    None                = 0x0000000000000000;
+
+    Admin               = 0x0000000000000001;
+    Dealer              = 0x0000000000000004;
+                        
+    SendEmail           = 0x0000000000000010;
+    SendSms             = 0x0000000000000020;
+                        
+    SeeLogs             = 0x0000000000000100;
+    SeeJournal 	        = 0x0000000000000200;
+    SeeMonitoring       = 0x0000000000000400;
+    SeeCluster          = 0x0000000000000800;
+
+    ManageCluster       = 0x0000000000001000;
+    ManageCurrencies    = 0x0000000000002000;
+    ManageSymbols       = 0x0000000000004000;
+    ManageManagers      = 0x0000000000008000;
+    ManagePlatforms     = 0x0000000000010000;
+    ManageAccounts      = 0x0000000000020000;
+
+    DropSessions        = 0x0000000000100000;
+
+    Full                = 0xFFFFFFFFFFFFFFFF;
+}
+
+// Manager account rights declaration
+flags ManagerAccountRights : uint64
+{
+    None                = 0x0000000000000000;
+
+    ModifyGroup         = 0x0000000000000010;
+
+    CreateAccount       = 0x0000000000000100;
+    ModifyAccount       = 0x0000000000000200;
+    DeleteAccount       = 0x0000000000000400;
+    ArchiveAccount      = 0x0000000000000800;
+    
+    CreateOrders        = 0x0000000000001000;
+    ModifyOrders        = 0x0000000000002000;
+    DeleteOrders        = 0x0000000000004000;
+
+    Credit              = 0x0000000000010000;
+    Deposit             = 0x0000000000020000;
+    Transfer            = 0x0000000000040000;
+
+    ModifyTradeHistory  = 0x0000000000100000;
+
+    Full                = 0xFFFFFFFFFFFFFFFF;
+}
+
+// Manager symbol rights declaration
+flags ManagerSymbolRights : uint64
+{
+    None                = 0x0000000000000000;
+
+    ModifyGroup         = 0x0000000000000010;
+
+    CreateSymbol        = 0x0000000000000100;
+    ModifySymbol        = 0x0000000000000200;
+    DeleteSymbol        = 0x0000000000000400;
+
+    ModifyQuoteHistory  = 0x0000000000001000;
+
+    SendTicks           = 0x0000000000010000;
+
+    Full                = 0xFFFFFFFFFFFFFFFF;
+}
+
+// Manager group declaration
+struct ManagerGroup
+{
+    // Manager group Id
+    uuid [id] = uuid1;
+
+    // Manager group sort order
+    uint32 SortOrder;
+
+    // Manager group name
+    string Name;
+    // Manager group comment
+    string Comment;
+    // Manager group description
+    string Description;
+
+    // Is manager group enabled?
+    bool IsEnabled;
+    // Is manager group one-time-password enabled?
+    bool IsOTPEnabled;
+
+    // Manager rights
+    ManagerRights Rights;
+    // Manager account rights
+    ManagerAccountRights{string} AccountRights;
+    // Manager symbol rights
+    ManagerSymbolRights{string} SymbolRights;
+
+    // Manager login range offset
+    uint64 LoginRangeOffset;
+    // Manager login range size
+    uint64 LoginRangeSize;
+}
+
+// Manager declaration
+struct Manager
+{
+    // Manager Id
+    uuid [id] = uuid1;
+
+    // Manager sort order
+    uint32 SortOrder;
+
+    // Manager group Id
+    uuid ManagerGroupId;
+
+    // Manager login
+    uint64 Login;
+
+    // Manager name
+    string Name;
+    // Manager comment
+    string Comment;
+    // Manager description
+    string Description;
+    // Manager email
+    string Email;
+
+    // Is manager enabled? (inherited from the manager group by default)
+    bool? IsEnabled;
+    // Is manager one-time-password enabled? (inherited from the manager group by default)
+    bool? IsOTPEnabled;
+
+    // Manager allow & deny rights (inherited from the manager group by default)
+    ManagerRights AllowRights;
+    ManagerRights DenyRights;
+    // Manager allow & deny account rights (inherited from the manager group by default)
+    ManagerAccountRights{string} AllowAccountRights;
+    ManagerAccountRights{string} DenyAccountRights;
+    // Manager allow & deny symbol rights (inherited from the manager group by default)
+    ManagerSymbolRights{string} AllowSymbolRights;
+    ManagerSymbolRights{string} DenySymbolRights;
+
+    // Authentication type
+    AuthenticationType AuthenticationType;
+    // Authentication digest
+    [hidden]
+    string AuthenticationDigest;
+
+    // One-time-password digest
+    [hidden]
+    string? OTPDigest;
+}
+
+// Platform declaration
+struct Platform
+{
+    // Platform Id
+    uuid [id] = uuid1;
+
+    // Platform sort order
+    uint32 SortOrder;
+
+    // Platform name
+    string Name;
+    // Platform comment
+    string Comment;
+    // Platform description
+    string Description;
+    // Platform company name
+    string Company;
+    // Platform address
+    string Address;
+
+    // Platform time zone Id
+    uuid TimezoneId;
+}
+
+// Accounting type
+enum AccountingType
+{
+    GROSS;
+    NET;
+    EXCHANGE;
+}
+
+// Account group declaration
+struct AccountGroup
+{
+    // Account group Id
+    uuid [id] = uuid1;
+
+    // Account group sort order
+    uint32 SortOrder;
+    
+    // Platform Id
+    uuid PlatformId;
+
+    // Account group name
+    string Name;
+    // Account group comment
+    string Comment;
+    // Account group description
+    string Description;
+
+    // Is account group enabled?
+    bool IsEnabled;
+    // Is account group one-time-password enabled?
+    bool IsOTPEnabled;
+
+    // Account login range offset
+    uint64 LoginRangeOffset;
+    // Account login range size
+    uint64 LoginRangeSize;
+
+    // Accounting type
+    AccountingType AccountingType;
+}
+
+// Account declaration
+struct Account
+{
+    // Account Id
+    uuid [id] = uuid1;
+
+    // Account group Id
+    uuid AccountGroupId;
+
+    // Account login
+    uint64 Login;
+
+    // Account name
+    string Name;
+    // Account comment
+    string Comment;
+    // Account description
+    string Description;
+    // Account email
+    string Email;
+
+    // Is account enabled? (inherited from the account group by default)
+    bool? IsEnabled;
+    // Is account one-time-password enabled? (inherited from the account group by default)
+    bool? IsOTPEnabled;
+
+    // Authentication type
+    AuthenticationType AuthenticationType;
+    // Authentication digest
+    [hidden]
+    string AuthenticationDigest;
+
+    // One-time-password digest
+    [hidden]
+    string? OTPDigest;
+
+    // Accounting type (inherited from the account group by default)
+    AccountingType? AccountingType;
+}
+
+// Session information declaration
+struct SessionInfo
+{
+    // Session Id
+    uuid SessionId;
+
+    // Session account/manager Id
+    uuid Id;
+    // Session account/manager login
+    uint64 Login;
+
+    // Session protocol type
+    ProtocolType ProtocolType;
+    // Session transport type
+    TransportType TransportType;
+
+    // Session client IP address
+    string ClientAddress;
+    // Session client port
+    uint16 ClientPort;
+
+    // Session protocol version (major)
+    uint16 ProtocolVersionMajor;
+    // Session protocol version (minor)
+    uint16 ProtocolVersionMinor;
+
+    // Session created timestamp
+    timestamp Created;
+}
+
+// Manager session information declaration
+struct ManagerSessionInfo : SessionInfo
+{
+    // Manager rights
+    ManagerRights Rights;
+    // Manager platform rights
+    ManagerAccountRights{uuid} PlatformRights;
+    // Manager account group rights
+    ManagerAccountRights{uuid} AccountGroupRights;
+    // Manager symbol group rights
+    ManagerSymbolRights{uuid} SymbolGroupRights;
+}

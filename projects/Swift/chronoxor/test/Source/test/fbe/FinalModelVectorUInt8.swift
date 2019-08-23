@@ -15,13 +15,13 @@ class FinalModelVectorUInt8: FinalModel {
     var _buffer: Buffer = Buffer()
     var _offset: Int = 0
 
-    private var _model: FinalModelUInt8
+    private var _model: fbe.FinalModelUInt8
 
     init(buffer: Buffer, offset: Int) {
         _buffer = buffer
         _offset = offset
 
-        _model = FinalModelUInt8(buffer: buffer, offset: offset)
+        _model = fbe.FinalModelUInt8(buffer: buffer, offset: offset)
     }
 
     // Get the allocation size

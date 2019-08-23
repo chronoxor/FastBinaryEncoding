@@ -12,7 +12,7 @@ open class Account: Comparable, Hashable, Codable {
     public var id: Int32 = 0
     public var name: String = ""
     public var state: State = State.fromSet(set: [State.initialized.value!, State.bad.value!])
-    public var wallet: Balance = Balance()
+    public var wallet: Balance = proto.Balance()
     public var asset: Balance? = nil
     public var orders: Array<Order> = Array()
 
@@ -40,10 +40,10 @@ open class Account: Comparable, Hashable, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int32.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
-        state = try container.decode(State.self, forKey: .state)
-        wallet = try container.decode(Balance.self, forKey: .wallet)
-        asset = try container.decode(Balance?.self, forKey: .asset)
-        orders = try container.decode(Array<Order>.self, forKey: .orders)
+        state = try container.decode(proto.State.self, forKey: .state)
+        wallet = try container.decode(proto.Balance.self, forKey: .wallet)
+        asset = try container.decode(proto.Balance?.self, forKey: .asset)
+        orders = try container.decode(Array<proto.Order>.self, forKey: .orders)
     }
 
     open func clone() throws -> Account {

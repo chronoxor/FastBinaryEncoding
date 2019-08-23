@@ -56,12 +56,12 @@ open class StructHash: Comparable, Hashable, Codable {
         f2 = try container.decode(Dictionary<String, UInt8?>.self, forKey: .f2)
         f3 = try container.decode(Dictionary<String, Data>.self, forKey: .f3)
         f4 = try container.decode(Dictionary<String, Data?>.self, forKey: .f4)
-        f5 = try container.decode(Dictionary<String, EnumSimple>.self, forKey: .f5)
-        f6 = try container.decode(Dictionary<String, EnumSimple?>.self, forKey: .f6)
-        f7 = try container.decode(Dictionary<String, FlagsSimple>.self, forKey: .f7)
-        f8 = try container.decode(Dictionary<String, FlagsSimple?>.self, forKey: .f8)
-        f9 = try container.decode(Dictionary<String, StructSimple>.self, forKey: .f9)
-        f10 = try container.decode(Dictionary<String, StructSimple?>.self, forKey: .f10)
+        f5 = try container.decode(Dictionary<String, test.EnumSimple>.self, forKey: .f5)
+        f6 = try container.decode(Dictionary<String, test.EnumSimple?>.self, forKey: .f6)
+        f7 = try container.decode(Dictionary<String, test.FlagsSimple>.self, forKey: .f7)
+        f8 = try container.decode(Dictionary<String, test.FlagsSimple?>.self, forKey: .f8)
+        f9 = try container.decode(Dictionary<String, test.StructSimple>.self, forKey: .f9)
+        f10 = try container.decode(Dictionary<String, test.StructSimple?>.self, forKey: .f10)
     }
 
     open func clone() throws -> StructHash {

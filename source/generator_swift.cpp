@@ -101,7 +101,6 @@ void GeneratorSwift::GenerateFooter()
 
 void GeneratorSwift::GenerateImports(const std::string& domain, const std::string& package)
 {
-  std::cout << package << '\n';
   if (package.empty()) {
 
   } else {
@@ -213,6 +212,12 @@ public struct UUIDGenerator {
     // Generate random UUID4 (randomly or pseudo-randomly generated version)
     public static func random() -> UUID {
         return UUID()
+    }
+}
+
+extension UUID: Comparable {
+    public static func < (lhs: UUID, rhs: UUID) -> Bool {
+        return lhs.hashValue < rhs.hashValue
     }
 }
 )CODE";
@@ -1994,6 +1999,7 @@ class FieldModelVector_NAME_: FieldModel {
 )CODE";
 
     std::string type_name = IsPackageType(type) ? type : (package + "." + type);
+    std::cout << type << '\n';
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
@@ -4122,11 +4128,11 @@ public extension ClientProtocol {
 
     // Receive data
     func receive(buffer: inout Data ) throws {
-        var buffer = Buffer(buffer: buffer)
-        try receive(buffer: &buffer, offset: 0, size: buffer.data.count)
+        let buffer = Buffer(buffer: buffer)
+        try receive(buffer: buffer, offset: 0, size: buffer.data.count)
     }
 
-    func receive(buffer: inout Buffer , offset: Int, size: Int) throws {
+    func receive(buffer: Buffer , offset: Int, size: Int) throws {
         assert((offset + size) <= buffer.data.count, "Invalid offset & size!")
 
         if (offset + size) > buffer.data.count {
@@ -4433,8 +4439,12 @@ void GeneratorSwift::GenerateContainers(const std::shared_ptr<Package>& p, bool 
                     {
                         if (final)
                             GenerateFBEFinalModelVector(domain, p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
-                        else
-                            GenerateFBEFieldModelVector(domain, p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
+                        else {
+                          std::cout << "GenerateFBEFieldModelVector 1: " <<  *field->type << '\n';
+                          std::cout << "GenerateFBEFieldModelVector 2: " <<  ConvertTypeFieldName(*field->type) << '\n';
+                          GenerateFBEFieldModelVector(domain, p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
+
+                        }
                     }
                     if (field->map || field->hash)
                     {
@@ -4510,7 +4520,7 @@ let package = Package(
     std::string dependenciesRes = "";
     if (p->import) {
     for (const auto& import : p->import->imports) {
-        dependenciesRes = dependenciesRes + std::string(".package(path: \"../") + std::string(*import) + std::string("\")\n ");
+        dependenciesRes = dependenciesRes + std::string(".package(path: \"../") + std::string(*import) + std::string("\"),\n ");
     }
   }
 
@@ -4534,12 +4544,6 @@ let package = Package(
 
     // Close the file
     Close();
-
-    std::cout << "\n";
-    std::cout << domain;
-    std::cout << "\n";
-    std::cout << *p->name;
-
 
     // Generate namespace
     if (p->body)
@@ -5294,8 +5298,11 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     // Generate struct body
     if (s->body && !s->body->fields.empty())
     {
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("public var " + *field->name + ": " + ConvertTypeName(domain, "", *field, false) + " = " + ConvertDefault(domain, "", *field));
+        for (const auto& field : s->body->fields) {
+            std::string fieldName = (*field->name == "Type") ? ("`Type`") : *field->name;
+            WriteLineIndent("public var " + fieldName + ": " + ConvertTypeName(domain, "", *field, false) + " = " + ConvertDefault(domain, *p->name, *field));
+        }
+
         WriteLine();
     }
 
@@ -5378,7 +5385,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                     WriteLineIndent(*field->name + " = Character(UnicodeScalar(" + *field->name + "RawValue)" + valueOpt + ")");
                 }
             } else {
-              WriteLineIndent(*field->name + " = try container.decode(" + ConvertTypeName(domain, "", *field, false) + ".self, forKey: ." + *field->name + ")");
+              WriteLineIndent(*field->name + " = try container.decode(" + ConvertTypeName(domain, *p->name, *field, false) + ".self, forKey: ." + *field->name + ")");
             }
         }
     }
@@ -5600,8 +5607,10 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     Indent(1);
     if (s->body && !s->body->fields.empty())
     {
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("case " + *field->name);
+        for (const auto& field : s->body->fields) {
+          std::string fieldName = (*field->name == "Type") ? ("`Type`") : *field->name;
+          WriteLineIndent("case " + fieldName);
+        }
     } else {
         WriteLineIndent("case empty");
     }
@@ -5720,7 +5729,8 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLineIndent("let " + *field->name + ": " + ConvertTypeFieldDeclaration(domain, *field, false));
+            std::string fieldName = (*field->name == "Type") ? ("`Type`") : *field->name;
+            WriteLineIndent("let " + fieldName + ": " + ConvertTypeFieldDeclaration(domain, *field, false));
         }
     }
 
@@ -6933,7 +6943,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final receiver");
     else
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " receiver");
-    WriteLineIndent("open class " + receiver + " : "  + listener +  ", fbe.ReceiverProtocol {");
+    WriteLineIndent("open class " + receiver + " : "  + "fbe.ReceiverProtocol {");
     Indent(1);
 
     // Generate imported receivers accessors
@@ -6971,7 +6981,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
     WriteLine();
 
     // Generate receiver constructors
-    WriteLineIndent("public override init() {");
+    WriteLineIndent("public init() {");
     Indent(1);
     if (p->import)
     {
@@ -6987,7 +6997,6 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
             WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
         }
     }
-    WriteLineIndent("super.init()");
     WriteLineIndent("build(final: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
     WriteLineIndent("}");
@@ -7009,7 +7018,6 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
             WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
         }
     }
-    WriteLineIndent("super.init()");
     WriteLineIndent("build(with: buffer, final: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
     WriteLineIndent("}");
@@ -7018,7 +7026,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
     // Generate receiver message handler
     WriteLineIndent("public func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {");
     Indent(1);
-    WriteLineIndent("return onReceiveListener(listener: self, type: type, buffer: buffer, offset: offset, size: size)");
+    WriteLineIndent("return onReceiveListener(listener: self as! " + listener + ", type: type, buffer: buffer, offset: offset, size: size)");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
@@ -7109,7 +7117,7 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver listener");
     else
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver listener");
-    WriteIndent("open class " + listener);
+    WriteIndent("public protocol " + listener);
     if (p->import)
     {
         bool first = true;
@@ -7123,24 +7131,34 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
     WriteIndent(" {");
     WriteLine();
     Indent(1);
-
-    if (!p->import) {
-      WriteLineIndent("public init() { }");
-    }
-
     // Generate receiver listener handlers
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = *p->name + "." + *s->name;
-            WriteLineIndent("open func onReceive(value: " + struct_name + ") { }");
+            WriteLineIndent("func onReceive(value: " + struct_name + ")");
         }
     }
 
     // Generate receiver listener end
     Indent(-1);
     WriteLineIndent("}");
+
+    WriteLineIndent("public extension " + listener + " {");
+    Indent(1);
+    // Generate default receiver listener handlers
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = *p->name + "." + *s->name;
+            WriteLineIndent("func onReceive(value: " + struct_name + ") { }");
+        }
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+
     // Generate footer
     GenerateFooter();
 
@@ -7163,22 +7181,22 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     std::string model = (final ? "FinalModel" : "Model");
 
     // Open the file
-    CppCommon::Path file = path / (proxy + ".kt");
+    CppCommon::Path file = path / (proxy + ".swift");
     Open(file);
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(domain, package + ".fbe");
+    GenerateImports("", "Foundation");
+    GenerateImports("", "fbe");
+    GenerateImports(p);
 
     // Generate proxy begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final proxy");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final proxy");
     else
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " proxy");
-    WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"PrivatePropertyName\", \"UNUSED_PARAMETER\")");
-    WriteLineIndent("open class " + proxy + " : " + domain + "fbe.Receiver, " + listener);
-    WriteLineIndent("{");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " proxy");
+    WriteLineIndent("open class " + proxy + " : " + "fbe.ReceiverProtocol {");
     Indent(1);
 
     // Generate imported proxy accessors
@@ -7186,7 +7204,7 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     {
         WriteLineIndent("// Imported proxy");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("var " + *import + "Proxy: " + domain + *import + ".fbe." + proxy + "?");
+            WriteLineIndent("let " + *import + "Proxy: " + *import + "." + proxy + "?");
         WriteLine();
     }
 
@@ -7195,82 +7213,87 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     {
         WriteLineIndent("// Proxy models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("private val " + *s->name + "Model: " + *s->name + model);
+            WriteLineIndent("private let " + *s->name + "Model: " + *s->name + model);
         WriteLine();
     }
 
+    WriteLineIndent("public var buffer: Buffer = Buffer()");
+    WriteLineIndent("public var logging: Bool = false");
+    WriteLineIndent("public var final: Bool = false");
+    WriteLine();
+
     // Generate proxy constructors
-    WriteLineIndent("constructor() : super(" + std::string(final ? "true" : "false") + ")");
-    WriteLineIndent("{");
+    WriteLineIndent("public init() {");
     Indent(1);
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Proxy = " + domain + *import + ".fbe." + proxy + "(buffer)");
+            WriteLineIndent(*import + "Proxy = " + *import + "." + proxy + "(buffer: buffer)");
     }
     if (p->body)
     {
-        for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = " + *s->name + model + "()");
+        for (const auto& s : p->body->structs) {
+          std::string struct_name = *p->name + "." + *s->name;
+          WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
+        }
     }
+    WriteLineIndent("build(final: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("constructor(buffer: " + domain + "fbe.Buffer) : super(buffer, " + std::string(final ? "true" : "false") + ")");
-    WriteLineIndent("{");
+    WriteLineIndent("public init(buffer: fbe.Buffer) {");
     Indent(1);
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Proxy = " + domain + *import + ".fbe." + proxy + "(buffer)");
+            WriteLineIndent(*import + "Proxy = " + *import + "." + proxy + "(buffer: buffer)");
     }
     if (p->body)
     {
-        for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = " + *s->name + model + "()");
+        for (const auto& s : p->body->structs) {
+            std::string struct_name = *p->name + "." + *s->name;
+            WriteLineIndent(*s->name + "Model = " + struct_name+ model + "()");
+        }
+
     }
+    WriteLineIndent("build(with: buffer, final: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
 
     // Generate proxy message handler
-    WriteLineIndent("override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
-    WriteLineIndent("{");
+    WriteLineIndent("open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {");
     Indent(1);
-    WriteLineIndent("return onReceiveListener(this, type, buffer, offset, size)");
+    WriteLineIndent("return onReceiveListener(listener: self as! " + listener + ", type: type, buffer: buffer, offset: offset, size: size)");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("open fun onReceiveListener(listener: " + listener + ", type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
-    WriteLineIndent("{");
+    WriteLineIndent("open func onReceiveListener(listener: " + listener + ", type: Int, buffer: Data, offset: Int, size: Int) -> Bool {");
     Indent(1);
     if (p->body)
     {
-        WriteLineIndent("when (type)");
-        WriteLineIndent("{");
-        Indent(1);
+        WriteLineIndent("switch type {");
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent(domain + package + ".fbe." + *s->name + model + ".fbeTypeConst ->");
-            WriteLineIndent("{");
+            WriteLineIndent("case " + package + "." + *s->name + model + ".fbeTypeConst:");
             Indent(1);
             WriteLineIndent("// Attach the FBE stream to the proxy model");
-            WriteLineIndent(*s->name + "Model.attach((buffer: buffer, offset: offset)");
-            WriteLineIndent("assertionFailure(" + *s->name + "Model.verify()) { \"" + domain + *p->name + "." + *s->name + " validation failed!\" }");
+            WriteLineIndent(*s->name + "Model.attach(buffer: buffer, offset: offset)");
+            WriteLineIndent("assert(" + *s->name + "Model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\")");
             WriteLine();
-            WriteLineIndent("val fbeBegin = " + *s->name + "Model.model.getBegin()");
-            WriteLineIndent("if (fbeBegin == 0L)");
+            WriteLineIndent("let fbeBegin = " + *s->name + "Model.model.getBegin()");
+            WriteLineIndent("if fbeBegin == 0 {");
             Indent(1);
             WriteLineIndent("return false");
             Indent(-1);
+            WriteLineIndent("}");
             WriteLineIndent("// Call proxy handler");
-            WriteLineIndent("listener.onProxy(" + *s->name + "Model, type, buffer, offset, size)");
-            WriteLineIndent(*s->name + "Model.model.getEnd(fbeBegin)");
+            WriteLineIndent("listener.onProxy(model: " + *s->name + "Model, type: type, buffer: buffer, offset: offset, size: size)");
+            WriteLineIndent(*s->name + "Model.model.getEnd(fbeBegin: fbeBegin)");
             WriteLineIndent("return true");
             Indent(-1);
-            WriteLineIndent("}");
         }
-        Indent(-1);
+        WriteLineIndent("default: break");
         WriteLineIndent("}");
     }
     if (p->import)
@@ -7278,10 +7301,11 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if ((" + *import + "Proxy != null) && " + *import + "Proxy!!.onReceiveListener(listener, type, buffer, offset, size))");
+            WriteLineIndent("if let " + *import + "Proxy = " + *import + "Proxy, " + *import + "Proxy.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
+            WriteLineIndent("}");
         }
     }
     WriteLine();
@@ -7413,7 +7437,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " final client");
     else
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " client");
-    WriteLineIndent("open class " + client + " : " + listener + ", fbe.ClientProtocol {");
+    WriteLineIndent("open class " + client + " : fbe.ClientProtocol {");
     Indent(1);
 
     // Generate imported senders accessors
@@ -7466,7 +7490,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     WriteLine();
 
     // Generate client constructors
-    WriteLineIndent("public override init() {");
+    WriteLineIndent("public init() {");
     Indent(1);
     if (p->import)
     {
@@ -7486,7 +7510,6 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
         }
     }
-    WriteLineIndent("super.init()");
     WriteLineIndent("build(with: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
     WriteLineIndent("}");
@@ -7511,7 +7534,6 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
         }
     }
-    WriteLineIndent("super.init()");
     WriteLineIndent("build(with: sendBuffer, receiveBuffer: receiveBuffer, final: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
     WriteLineIndent("}");
@@ -7586,7 +7608,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     // Generate client receive message handler
     WriteLineIndent("open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {");
     Indent(1);
-    WriteLineIndent("return onReceiveListener(listener: self, type: type, buffer: buffer, offset: offset, size: size)");
+    WriteLineIndent("return onReceiveListener(listener: self as! " + listener + ", type: type, buffer: buffer, offset: offset, size: size)");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
@@ -8167,7 +8189,16 @@ std::string GeneratorSwift::ConvertTypeFieldName(const std::string& type)
     else if (type == "uuid")
         return "UUID";
 
-    std::string result = type;
+        std::string result = type;
+
+        size_t pos = type.find_last_of('.');
+        if (pos != std::string::npos)
+        {
+            result.assign(type, pos + 1, type.size() - pos);
+
+          }
+
+
     CppCommon::StringUtils::ReplaceAll(result, ".", "");
     return result;
 }
@@ -8225,7 +8256,7 @@ std::string GeneratorSwift::ConvertTypeFieldType(const std::string& domain, cons
         t.assign(type, pos + 1, type.size() - pos);
     }
 
-    return t + opt;
+    return ns + t + opt;
 }
 
 std::string GeneratorSwift::ConvertTypeFieldDeclaration(const std::string& domain, const std::string& type, bool optional, bool final)
@@ -8243,7 +8274,7 @@ std::string GeneratorSwift::ConvertTypeFieldDeclaration(const std::string& domai
         t.assign(type, pos + 1, type.size() - pos);
     }
     else
-        ns = "";
+        ns = (IsKnownType(type) && !optional) ? ("fbe.") : "";
 
     return ns + modelType + "Model" + opt + ConvertTypeFieldName(t);
 }
@@ -8474,15 +8505,14 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
     if (pos != std::string::npos)
     {
         ns.assign(type, 0, pos + 1);
-        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
     else if (!package.empty())
-        ns = domain + package + ".";
+        ns = package + ".";
 
 
 
-    return t + "()";
+    return ns + t + "()";
 }
 
 std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std::string& package, const StructField& field)

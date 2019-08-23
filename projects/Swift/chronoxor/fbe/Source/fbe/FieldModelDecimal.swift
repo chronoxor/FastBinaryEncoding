@@ -58,13 +58,6 @@ public class FieldModelDecimal: FieldModel {
             write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
         }
 
-//        let bitLength = valueRef._length
-//        if valueRef.exponent {
-//            // Value scale exceeds .NET Decimal limit of [0, 28]
-//            write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
-//            return
-//        }
-
         // Get scale
          let scale = UInt8(abs(valueRef.exponent))
          if scale < 0 || scale > 28 {
