@@ -13,67 +13,67 @@ namespace FBE {
 
 void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
 {
-    std::string domain = (package->domain && !package->domain->empty()) ? (*package->domain + ".") : "";
+    std::string domain = ConvertDomain(package);
 
-    GenerateFBEPackage(domain, "fbe");
+    GenerateFBEPackage(domain, "Fbe");
 
-    GenerateFBEUUIDGenerator(domain, "fbe");
-    GenerateFBEBuffer(domain, "fbe");
-    GenerateFBEModel(domain, "fbe");
-    GenerateFBEFieldModel(domain, "fbe");
-    GenerateFBEFieldModel(domain, "fbe", "Boolean", "Bool", "", "1", "false");
-    GenerateFBEFieldModel(domain, "fbe", "Byte", "UInt8", "", "1", "0");
-    GenerateFBEFieldModel(domain, "fbe", "Char", "Character", ".utf8.map{ UInt8($$0) }[0]", "1", "Character(\"0\")");
-    GenerateFBEFieldModel(domain, "fbe", "WChar", "Character", ".utf16.map{ UInt32($$0) }[0]", "4", "Character(\"0\")");
-    GenerateFBEFieldModel(domain, "fbe", "Int8", "Int8", "", "1", "0");
-    GenerateFBEFieldModel(domain, "fbe", "UInt8", "UInt8", "", "1", "0");
-    GenerateFBEFieldModel(domain, "fbe", "Int16", "Int16", "", "2", "0");
-    GenerateFBEFieldModel(domain, "fbe", "UInt16", "UInt16", "", "2", "0");
-    GenerateFBEFieldModel(domain, "fbe", "Int32", "Int32", "", "4", "0");
-    GenerateFBEFieldModel(domain, "fbe", "UInt32", "UInt32", "", "4", "0");
-    GenerateFBEFieldModel(domain, "fbe", "Int64", "Int64", "", "8", "0");
-    GenerateFBEFieldModel(domain, "fbe", "UInt64", "UInt64", "", "8", "0");
-    GenerateFBEFieldModel(domain, "fbe", "Float", "Float", "", "4", "0.0");
-    GenerateFBEFieldModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
-    GenerateFBEFieldModel(domain, "fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
-    GenerateFBEFieldModelDecimal(domain, "fbe");
-    GenerateFBEFieldModelDate(domain, "fbe");
-    GenerateFBEFieldModelTimestamp(domain, "fbe");
-    GenerateFBEFieldModelBytes(domain, "fbe");
-    GenerateFBEFieldModelString(domain, "fbe");
+    GenerateFBEUUIDGenerator(domain, "Fbe");
+    GenerateFBEBuffer(domain, "Fbe");
+    GenerateFBEModel(domain, "Fbe");
+    GenerateFBEFieldModel(domain, "Fbe");
+    GenerateFBEFieldModel(domain, "Fbe", "Boolean", "Bool", "", "1", "false");
+    GenerateFBEFieldModel(domain, "Fbe", "Byte", "UInt8", "", "1", "0");
+    GenerateFBEFieldModel(domain, "Fbe", "Char", "Character", ".utf8.map{ UInt8($$0) }[0]", "1", "Character(\"0\")");
+    GenerateFBEFieldModel(domain, "Fbe", "WChar", "Character", ".utf16.map{ UInt32($$0) }[0]", "4", "Character(\"0\")");
+    GenerateFBEFieldModel(domain, "Fbe", "Int8", "Int8", "", "1", "0");
+    GenerateFBEFieldModel(domain, "Fbe", "UInt8", "UInt8", "", "1", "0");
+    GenerateFBEFieldModel(domain, "Fbe", "Int16", "Int16", "", "2", "0");
+    GenerateFBEFieldModel(domain, "Fbe", "UInt16", "UInt16", "", "2", "0");
+    GenerateFBEFieldModel(domain, "Fbe", "Int32", "Int32", "", "4", "0");
+    GenerateFBEFieldModel(domain, "Fbe", "UInt32", "UInt32", "", "4", "0");
+    GenerateFBEFieldModel(domain, "Fbe", "Int64", "Int64", "", "8", "0");
+    GenerateFBEFieldModel(domain, "Fbe", "UInt64", "UInt64", "", "8", "0");
+    GenerateFBEFieldModel(domain, "Fbe", "Float", "Float", "", "4", "0.0");
+    GenerateFBEFieldModel(domain, "Fbe", "Double", "Double", "", "8", "0.0");
+    GenerateFBEFieldModel(domain, "Fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
+    GenerateFBEFieldModelDecimal(domain, "Fbe");
+    GenerateFBEFieldModelDate(domain, "Fbe");
+    GenerateFBEFieldModelTimestamp(domain, "Fbe");
+    GenerateFBEFieldModelBytes(domain, "Fbe");
+    GenerateFBEFieldModelString(domain, "Fbe");
     if (Final())
     {
-        GenerateFBESize(domain, "fbe");
-        GenerateFBEFinalModel(domain, "fbe");
-        GenerateFBEFinalModel(domain, "fbe", "Boolean", "Bool", "", "1", "false");
-        GenerateFBEFinalModel(domain, "fbe", "Byte", "UInt8", "", "1", "0");
-        GenerateFBEFinalModel(domain, "fbe", "Char", "Character", ".utf8.map{ UInt8($$0) }[0]", "1", "Character(\"0\")");
-        GenerateFBEFinalModel(domain, "fbe", "WChar", "Character", ".utf16.map{ UInt32($$0) }[0]", "4", "Character(\"0\")");
-        GenerateFBEFinalModel(domain, "fbe", "Int8", "Int8", "", "1", "0");
-        GenerateFBEFinalModel(domain, "fbe", "UInt8", "UInt8", "", "1", "0");
-        GenerateFBEFinalModel(domain, "fbe", "Int16", "Int16", "", "2", "0");
-        GenerateFBEFinalModel(domain, "fbe", "UInt16", "UInt16", "", "2", "0");
-        GenerateFBEFinalModel(domain, "fbe", "Int32", "Int32", "", "4", "0");
-        GenerateFBEFinalModel(domain, "fbe", "UInt32", "UInt32", "", "4", "0");
-        GenerateFBEFinalModel(domain, "fbe", "Int64", "Int64", "", "8", "0");
-        GenerateFBEFinalModel(domain, "fbe", "UInt64", "UInt64", "", "8", "0");
-        GenerateFBEFinalModel(domain, "fbe", "Float", "Float", "", "4", "0.0");
-        GenerateFBEFinalModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
-        GenerateFBEFinalModel(domain, "fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
-        GenerateFBEFinalModelDecimal(domain, "fbe");
-        GenerateFBEFinalModelDate(domain, "fbe");
-        GenerateFBEFinalModelTimestamp(domain, "fbe");
-        GenerateFBEFinalModelBytes(domain, "fbe");
-        GenerateFBEFinalModelString(domain, "fbe");
+        GenerateFBESize(domain, "Fbe");
+        GenerateFBEFinalModel(domain, "Fbe");
+        GenerateFBEFinalModel(domain, "Fbe", "Boolean", "Bool", "", "1", "false");
+        GenerateFBEFinalModel(domain, "Fbe", "Byte", "UInt8", "", "1", "0");
+        GenerateFBEFinalModel(domain, "Fbe", "Char", "Character", ".utf8.map{ UInt8($$0) }[0]", "1", "Character(\"0\")");
+        GenerateFBEFinalModel(domain, "Fbe", "WChar", "Character", ".utf16.map{ UInt32($$0) }[0]", "4", "Character(\"0\")");
+        GenerateFBEFinalModel(domain, "Fbe", "Int8", "Int8", "", "1", "0");
+        GenerateFBEFinalModel(domain, "Fbe", "UInt8", "UInt8", "", "1", "0");
+        GenerateFBEFinalModel(domain, "Fbe", "Int16", "Int16", "", "2", "0");
+        GenerateFBEFinalModel(domain, "Fbe", "UInt16", "UInt16", "", "2", "0");
+        GenerateFBEFinalModel(domain, "Fbe", "Int32", "Int32", "", "4", "0");
+        GenerateFBEFinalModel(domain, "Fbe", "UInt32", "UInt32", "", "4", "0");
+        GenerateFBEFinalModel(domain, "Fbe", "Int64", "Int64", "", "8", "0");
+        GenerateFBEFinalModel(domain, "Fbe", "UInt64", "UInt64", "", "8", "0");
+        GenerateFBEFinalModel(domain, "Fbe", "Float", "Float", "", "4", "0.0");
+        GenerateFBEFinalModel(domain, "Fbe", "Double", "Double", "", "8", "0.0");
+        GenerateFBEFinalModel(domain, "Fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
+        GenerateFBEFinalModelDecimal(domain, "Fbe");
+        GenerateFBEFinalModelDate(domain, "Fbe");
+        GenerateFBEFinalModelTimestamp(domain, "Fbe");
+        GenerateFBEFinalModelBytes(domain, "Fbe");
+        GenerateFBEFinalModelString(domain, "Fbe");
     }
     if (Proto())
     {
-        GenerateFBESender(domain, "fbe");
-        GenerateFBEReceiver(domain, "fbe");
-        GenerateFBEClient(domain, "fbe");
+        GenerateFBESender(domain, "Fbe");
+        GenerateFBEReceiver(domain, "Fbe");
+        GenerateFBEClient(domain, "Fbe");
     }
     // if (JSON())
-    //     GenerateFBEJson(domain, "fbe");
+    //     GenerateFBEJson(domain, "Fbe");
 
     GeneratePackage(package);
 }
@@ -101,23 +101,20 @@ void GeneratorSwift::GenerateFooter()
 
 void GeneratorSwift::GenerateImports(const std::string& domain, const std::string& package)
 {
-  if (package.empty()) {
-
-  } else {
+  if (!package.empty())
+  {
     // Generate package name
-    WriteLine();
     WriteLineIndent("import " + domain + package);
   }
-
 }
 
 void GeneratorSwift::GenerateImports(const std::shared_ptr<Package>& p)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    std::string domain = ConvertDomain(p);
 
     if (p->import) {
       for (const auto& i : p->import->imports) {
-        GenerateImports("", *i);
+        GenerateImports(domain, ConvertPackageName(*i));
       }
     }
 }
@@ -140,19 +137,19 @@ void GeneratorSwift::GenerateFBEPackage(const std::string& domain, const std::st
     Open(file);
 
     // Generate headers
-  //  GenerateHeader("fbe");
+  //  GenerateHeader("Fbe");
 
     std::string code = R"CODE(// swift-tools-version:5.1
 
 import PackageDescription
 
 let package = Package(
-    name: "fbe",
+    name: "_DOMAIN_",
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
-            name: "fbe",
-            targets: ["fbe"]),
+            name: "_DOMAIN_",
+            targets: ["_DOMAIN_"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -161,11 +158,14 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
-            name: "fbe",
+            name: "_DOMAIN_",
             dependencies: []),
     ]
 )
 )CODE";
+
+code = std::regex_replace(code, std::regex("_DOMAIN_"), domain + "Fbe");
+
 
     Write(code);
 
@@ -185,7 +185,7 @@ void GeneratorSwift::GenerateFBEUUIDGenerator(const std::string& domain, const s
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -243,7 +243,7 @@ void GeneratorSwift::GenerateFBEBuffer(const std::string& domain, const std::str
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -759,7 +759,7 @@ void GeneratorSwift::GenerateFBEModel(const std::string& domain, const std::stri
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -819,7 +819,7 @@ void GeneratorSwift::GenerateFBEFieldModel(const std::string& domain, const std:
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -932,7 +932,7 @@ void GeneratorSwift::GenerateFBEFieldModel(const std::string& domain, const std:
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -1001,7 +1001,7 @@ void GeneratorSwift::GenerateFBEFieldModelDecimal(const std::string& domain, con
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -1117,7 +1117,7 @@ void GeneratorSwift::GenerateFBEFieldModelDate(const std::string& domain, const 
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -1178,7 +1178,7 @@ void GeneratorSwift::GenerateFBEFieldModelTimestamp(const std::string& domain, c
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -1238,7 +1238,7 @@ void GeneratorSwift::GenerateFBEFieldModelBytes(const std::string& domain, const
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -1359,7 +1359,7 @@ void GeneratorSwift::GenerateFBEFieldModelString(const std::string& domain, cons
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
 
     std::string code = R"CODE(
 // Fast Binary Encoding string field model
@@ -1472,8 +1472,8 @@ public class FieldModelString: FieldModel {
 
 void GeneratorSwift::GenerateFBEFieldModelOptional(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model)
 {
-    std::string package = *p->name;
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    std::string package = ConvertPackage(p);
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -1485,7 +1485,7 @@ void GeneratorSwift::GenerateFBEFieldModelOptional(const std::string& domain, co
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "Foundation");
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -1660,8 +1660,8 @@ public class FieldModelOptional_NAME_: FieldModel {
 
 void GeneratorSwift::GenerateFBEFieldModelArray(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
 {
-    std::string package = *p->name;
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    std::string package = ConvertPackage(p);
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -1673,7 +1673,7 @@ void GeneratorSwift::GenerateFBEFieldModelArray(const std::string& domain, const
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "Foundation");
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -1787,7 +1787,7 @@ class FieldModelArray_NAME_: FieldModel {
 }
 )CODE";
 
-    std::string type_name = IsPackageType(type) ? type : (package + "." + type);
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
@@ -1812,8 +1812,8 @@ class FieldModelArray_NAME_: FieldModel {
 
 void GeneratorSwift::GenerateFBEFieldModelVector(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model)
 {
-    std::string package = *p->name;
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    std::string package = ConvertPackage(p);
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -1825,7 +1825,7 @@ void GeneratorSwift::GenerateFBEFieldModelVector(const std::string& domain, cons
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "Foundation");
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -1991,8 +1991,7 @@ class FieldModelVector_NAME_: FieldModel {
 }
 )CODE";
 
-    std::string type_name = IsPackageType(type) ? type : (package + "." + type);
-    std::cout << type << '\n';
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
@@ -2012,8 +2011,8 @@ class FieldModelVector_NAME_: FieldModel {
 
 void GeneratorSwift::GenerateFBEFieldModelMap(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
 {
-    std::string package = *p->name;
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    std::string package = ConvertPackage(p);
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -2025,10 +2024,8 @@ void GeneratorSwift::GenerateFBEFieldModelMap(const std::string& domain, const s
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "Foundation");
-    GenerateImports("", "fbe");
-    GenerateImports(p);    GenerateImports("", "Foundation");
-        GenerateImports("", "fbe");
-        GenerateImports(p);
+    GenerateImports(domain, "Fbe");
+    GenerateImports(p);
 
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map field model
@@ -2209,8 +2206,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
 }
 )CODE";
 
-  std::string key_type_name = IsPackageType(key_type) ? key_type : (package + "." + key_type);
-  std::string value_type_name = IsPackageType(value_type) ? value_type : (package + "." + value_type);
+  std::string key_type_name = IsPackageType(key_type) ? key_type : (domain + package + "." + key_type);
+  std::string value_type_name = IsPackageType(value_type) ? value_type : (domain + package + "." + value_type);
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
@@ -2233,7 +2230,7 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
 
 void GeneratorSwift::GenerateFBEFieldModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -2244,7 +2241,7 @@ void GeneratorSwift::GenerateFBEFieldModelEnumFlags(const std::string& domain, c
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ field model
@@ -2307,7 +2304,7 @@ void GeneratorSwift::GenerateFBESize(const std::string& domain, const std::strin
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
 
     std::string code = R"CODE(
 // Fast Binary Encoding size
@@ -2341,7 +2338,7 @@ void GeneratorSwift::GenerateFBEFinalModel(const std::string& domain, const std:
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -2446,7 +2443,7 @@ void GeneratorSwift::GenerateFBEFinalModel(const std::string& domain, const std:
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -2526,7 +2523,7 @@ void GeneratorSwift::GenerateFBEFinalModelDecimal(const std::string& domain, con
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -2664,7 +2661,7 @@ void GeneratorSwift::GenerateFBEFinalModelDate(const std::string& domain, const 
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -2734,7 +2731,7 @@ void GeneratorSwift::GenerateFBEFinalModelTimestamp(const std::string& domain, c
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -2812,7 +2809,7 @@ void GeneratorSwift::GenerateFBEFinalModelBytes(const std::string& domain, const
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -2902,7 +2899,7 @@ void GeneratorSwift::GenerateFBEFinalModelString(const std::string& domain, cons
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
 
     std::string code = R"CODE(
 // Fast Binary Encoding string final model
@@ -2982,8 +2979,8 @@ public class FinalModelString: FinalModel {
 
 void GeneratorSwift::GenerateFBEFinalModelOptional(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model)
 {
-    std::string package = *p->name;
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    std::string package = ConvertPackage(p);
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -2995,7 +2992,7 @@ void GeneratorSwift::GenerateFBEFinalModelOptional(const std::string& domain, co
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "Foundation");
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -3115,8 +3112,8 @@ class FinalModelOptional_NAME_: FinalModel {
 
 void GeneratorSwift::GenerateFBEFinalModelArray(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
 {
-    std::string package = *p->name;
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    std::string package = ConvertPackage(p);
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -3128,7 +3125,7 @@ void GeneratorSwift::GenerateFBEFinalModelArray(const std::string& domain, const
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "Foundation");
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -3262,8 +3259,8 @@ class FinalModelArray_NAME_: FinalModel {
 
 void GeneratorSwift::GenerateFBEFinalModelVector(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model)
 {
-    std::string package = *p->name;
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    std::string package = ConvertPackage(p);
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -3275,7 +3272,7 @@ void GeneratorSwift::GenerateFBEFinalModelVector(const std::string& domain, cons
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "Foundation");
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -3372,7 +3369,7 @@ class FinalModelVector_NAME_: FinalModel {
 }
 )CODE";
 
-    std::string type_name = IsPackageType(type) ? type : (package + "." + type);
+    std::string type_name = IsPackageType(type) ? type : (domain + package + "." + type);
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
@@ -3392,8 +3389,8 @@ class FinalModelVector_NAME_: FinalModel {
 
 void GeneratorSwift::GenerateFBEFinalModelMap(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
 {
-    std::string package = *p->name;
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    std::string package = ConvertPackage(p);
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -3405,7 +3402,7 @@ void GeneratorSwift::GenerateFBEFinalModelMap(const std::string& domain, const s
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "Foundation");
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports(p);
 
     std::string code = R"CODE(
@@ -3522,8 +3519,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_: FinalModel {
 }
 )CODE";
 
-  std::string key_type_name = IsPackageType(key_type) ? key_type : (package + "." + key_type);
-  std::string value_type_name = IsPackageType(value_type) ? value_type : (package + "." + value_type);
+  std::string key_type_name = IsPackageType(key_type) ? key_type : (domain + package + "." + key_type);
+  std::string value_type_name = IsPackageType(value_type) ? value_type : (domain + package + "." + value_type);
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_DOMAIN_"), domain);
@@ -3546,7 +3543,7 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_: FinalModel {
 
 void GeneratorSwift::GenerateFBEFinalModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type)
 {
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -3557,7 +3554,7 @@ void GeneratorSwift::GenerateFBEFinalModelEnumFlags(const std::string& domain, c
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ final model
@@ -3634,7 +3631,7 @@ void GeneratorSwift::GenerateFBESender(const std::string& domain, const std::str
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -3717,7 +3714,7 @@ void GeneratorSwift::GenerateFBEReceiver(const std::string& domain, const std::s
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -4049,7 +4046,7 @@ void GeneratorSwift::GenerateFBEClient(const std::string& domain, const std::str
     Open(file);
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -4405,8 +4402,9 @@ void GeneratorSwift::GenerateFBEJson(const std::string& domain, const std::strin
 
 void GeneratorSwift::GenerateContainers(const std::shared_ptr<Package>& p, bool final)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
-    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, *p->name);
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -4433,10 +4431,7 @@ void GeneratorSwift::GenerateContainers(const std::shared_ptr<Package>& p, bool 
                         if (final)
                             GenerateFBEFinalModelVector(domain, p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
                         else {
-                          std::cout << "GenerateFBEFieldModelVector 1: " <<  *field->type << '\n';
-                          std::cout << "GenerateFBEFieldModelVector 2: " <<  ConvertTypeFieldName(*field->type) << '\n';
                           GenerateFBEFieldModelVector(domain, p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(domain, *field->type, field->optional), ConvertTypeFieldDeclaration(domain, *field->type, field->optional, final));
-
                         }
                     }
                     if (field->map || field->hash)
@@ -4461,14 +4456,14 @@ void GeneratorSwift::GenerateContainers(const std::shared_ptr<Package>& p, bool 
 
 void GeneratorSwift::GeneratePackage(const std::shared_ptr<Package>& p)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
-    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, *p->name);
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-
-    CppCommon::Path packagePath = CppCommon::Path(_output) / CreateSwiftPackagePath(domain, *p->name);
+    CppCommon::Path packagePath = CppCommon::Path(_output) / CreateSwiftPackagePath(domain, package);
 
     // Create FBE package path
     CppCommon::Directory::CreateTree(packagePath);
@@ -4478,7 +4473,7 @@ void GeneratorSwift::GeneratePackage(const std::shared_ptr<Package>& p)
     Open(file);
 
     // Generate headers
-  //  GenerateHeader("fbe");
+  //  GenerateHeader("Fbe");
 
     std::string code = R"CODE(// swift-tools-version:5.1
 
@@ -4494,7 +4489,6 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(path: "../fbe"),
         _DEPENDENCIES_RES_
     ],
     targets: [
@@ -4502,7 +4496,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "_NAME_",
-            dependencies: ["fbe", _DEPENDENCIES_]),
+            dependencies: [_DEPENDENCIES_]),
     ]
 )
 )CODE";
@@ -4510,23 +4504,23 @@ let package = Package(
 
 
 
-    std::string dependenciesRes = "";
+    std::string dependenciesRes = std::string(".package(path: \"../") + "Fbe" + std::string("\"),\n ");
     if (p->import) {
     for (const auto& import : p->import->imports) {
-        dependenciesRes = dependenciesRes + std::string(".package(path: \"../") + std::string(*import) + std::string("\"),\n ");
+        dependenciesRes = dependenciesRes + std::string(".package(path: \"../") + ConvertPackageName(*import) + std::string("\"),\n ");
     }
   }
 
-    std::string dependencies = "";
+    std::string dependencies = std::string("\"") + domain + "Fbe" + std::string("\", ");
     if (p->import) {
     for (const auto& import : p->import->imports) {
-        dependencies = dependencies + std::string("\"") + std::string(*import) + std::string("\", ");
+        dependencies = dependencies + std::string("\"") + domain + ConvertPackageName(*import) + std::string("\", ");
     }
   }
 
 
     // Prepare code template
-    code = std::regex_replace(code, std::regex("_NAME_"), *p->name);
+    code = std::regex_replace(code, std::regex("_NAME_"), domain + package);
     code = std::regex_replace(code, std::regex("_DEPENDENCIES_RES_"), dependenciesRes);
     code = std::regex_replace(code, std::regex("_DEPENDENCIES_"), dependencies);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
@@ -4729,14 +4723,15 @@ void GeneratorSwift::GenerateEnum(const std::shared_ptr<Package>& p, const std::
     if (JSON())
         GenerateEnumJson(p, e);
 
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
 
     // Generate enum field model
-    GenerateFBEFieldModelEnumFlags(domain, *p->name, *e->name, enum_type);
+    GenerateFBEFieldModelEnumFlags(domain, package, *e->name, enum_type);
 
     // Generate enum final model
     if (Final())
-        GenerateFBEFinalModelEnumFlags(domain, *p->name, *e->name, enum_type);
+        GenerateFBEFinalModelEnumFlags(domain, package, *e->name, enum_type);
 }
 
 void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path)
@@ -5058,14 +5053,15 @@ void GeneratorSwift::GenerateFlags(const std::shared_ptr<Package>& p, const std:
     if (JSON())
         GenerateFlagsJson(p, f);
 
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
 
     // Generate flags field model
-    GenerateFBEFieldModelEnumFlags(domain, *p->name, *f->name, flags_type);
+    GenerateFBEFieldModelEnumFlags(domain, package, *f->name, flags_type);
 
     // Generate flags final model
     if (Final())
-        GenerateFBEFinalModelEnumFlags(domain, *p->name, *f->name, flags_type);
+        GenerateFBEFinalModelEnumFlags(domain, package, *f->name, flags_type);
 }
 
 void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path)
@@ -5262,7 +5258,8 @@ void GeneratorSwift::GenerateFlagsJson(const std::shared_ptr<Package>& p, const 
 
 void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
     bool first;
 
     // Open the output file
@@ -5272,7 +5269,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     // Generate struct header
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "Foundation");
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports(p);
 
 
@@ -5280,7 +5277,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     WriteLine();
     WriteIndent("open class " + *s->name);
     if (s->base && !s->base->empty())
-        Write(": " + ConvertTypeName(domain, "", *s->base, false));
+        Write(": " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false));
     else
         Write(": Comparable, Hashable, Codable");
     WriteLineIndent(" {");
@@ -5291,7 +5288,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     {
         for (const auto& field : s->body->fields) {
             std::string fieldName = (*field->name == "Type") ? ("`Type`") : *field->name;
-            WriteLineIndent("public var " + fieldName + ": " + ConvertTypeName(domain, "", *field, false) + " = " + ConvertDefault(domain, *p->name, *field));
+            WriteLineIndent("public var " + fieldName + ": " + ConvertTypeName(domain, "", *field, false) + " = " + ConvertDefault(domain, package, *field));
         }
 
         WriteLine();
@@ -5310,7 +5307,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
         WriteIndent("public init(");
         if (s->base && !s->base->empty())
         {
-            Write("parent: " + ConvertTypeName(domain, "", *s->base, false));
+            Write("parent: " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false));
             first = false;
         }
         if (s->body)
@@ -5376,7 +5373,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                     WriteLineIndent(*field->name + " = Character(UnicodeScalar(" + *field->name + "RawValue)" + valueOpt + ")");
                 }
             } else {
-              WriteLineIndent(*field->name + " = try container.decode(" + ConvertTypeName(domain, *p->name, *field, false) + ".self, forKey: ." + *field->name + ")");
+              WriteLineIndent(*field->name + " = try container.decode(" + ConvertTypeName(domain, package, *field, false) + ".self, forKey: ." + *field->name + ")");
             }
         }
     }
@@ -5584,12 +5581,12 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     if (JSON())
     {
         WriteLine();
-        WriteIndent(std::string((s->base && !s->base->empty()) ? "override" : "open") + " fun toJson(): String = " + domain + *p->name + ".fbe.Json.engine.toJson(this)");
+        WriteIndent(std::string((s->base && !s->base->empty()) ? "override" : "open") + " fun toJson(): String = " + domain + package + ".fbe.Json.engine.toJson(this)");
         WriteLine();
         WriteLineIndent("companion object");
         WriteLineIndent("{");
         Indent(1);
-        WriteLineIndent("fun fromJson(json: String): " + *s->name + " = " + domain + *p->name + ".fbe.Json.engine.fromJson(json, " + *s->name + "::class.java)");
+        WriteLineIndent("fun fromJson(json: String): " + *s->name + " = " + domain + package + ".fbe.Json.engine.fromJson(json, " + *s->name + "::class.java)");
         Indent(-1);
         WriteLineIndent("}");
     }
@@ -5681,11 +5678,11 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
 
 void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
-    std::string package = *p->name;
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
     std::string struct_name = *s->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -5697,7 +5694,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "Foundation");
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports(p);
     // Generate struct field model begin
     WriteLine();
@@ -5714,7 +5711,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLine();
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("let parent: " + ConvertBaseFieldName(domain, *s->base, false));
+        WriteLineIndent("let parent: " + ConvertBaseFieldName(domain, ConvertPackageName(*s->base), false));
     }
     if (s->body)
     {
@@ -5750,7 +5747,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     std::string prev_size("4");
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("parent = " + ConvertBaseFieldName(domain, *s->base, false) + "(buffer: buffer, offset: " + prev_offset + " + " + prev_size + ")");
+        WriteLineIndent("parent = " + ConvertBaseFieldName(domain, ConvertPackageName(*s->base), false) + "(buffer: buffer, offset: " + prev_offset + " + " + prev_size + ")");
         prev_offset = "parent.fbeOffset";
         prev_size = "parent.fbeBody - 4 - 4";
     }
@@ -5790,7 +5787,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     prev_size = "4";
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("parent = " + ConvertBaseFieldName(domain, *s->base, false) + "(buffer: buffer, offset: " + prev_offset + " + " + prev_size + ")");
+        WriteLineIndent("parent = " + ConvertBaseFieldName(domain, ConvertPackageName(*s->base), false) + "(buffer: buffer, offset: " + prev_offset + " + " + prev_size + ")");
         prev_offset = "parent.fbeOffset";
         prev_size = "parent.fbeBody - 4 - 4";
     }
@@ -5855,7 +5852,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLineIndent("// Field type");
     WriteLineIndent("public var fbeType: Int = fbeTypeConst");
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("public static let fbeTypeConst: Int = " + ConvertBaseFieldName(domain, *s->base, false) + ".fbeTypeConst");
+        WriteLineIndent("public static let fbeTypeConst: Int = " + ConvertBaseFieldName(domain, ConvertPackageName(*s->base), false) + ".fbeTypeConst");
     else
         WriteLineIndent("public static let fbeTypeConst: Int = " + std::to_string(s->type));
 
@@ -6026,7 +6023,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
             WriteLine();
             WriteLineIndent("if fbeCurrentSize + parent.fbeBody - 4 - 4 <= fbeStructSize {");
             Indent(1);
-            WriteLineIndent("var fbeValueBase = fbeValue as " + ConvertTypeName(domain, "", *s->base, false));
+            WriteLineIndent("var fbeValueBase = fbeValue as " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false));
             WriteLineIndent("parent.getFields(fbeValue: &fbeValueBase, fbeStructSize: fbeStructSize)");
             Indent(-1);
             WriteLineIndent("}");
@@ -6144,11 +6141,11 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
 
 void GeneratorSwift::GenerateStructModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
-    std::string package = *p->name;
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
     std::string struct_name = *s->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6159,7 +6156,7 @@ void GeneratorSwift::GenerateStructModel(const std::shared_ptr<Package>& p, cons
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
 
     // Generate struct model begin
     WriteLine();
@@ -6292,11 +6289,11 @@ void GeneratorSwift::GenerateStructModel(const std::shared_ptr<Package>& p, cons
 
 void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
-    std::string package = *p->name;
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
     std::string struct_name = *s->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6307,7 +6304,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports(p);
 
     // Generate struct final model begin
@@ -6323,7 +6320,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
 
     // Generate struct final model accessors
     if (s->base && !s->base->empty())
-        WriteLineIndent("let parent: " + ConvertBaseFieldName(domain, *s->base, true));
+        WriteLineIndent("let parent: " + ConvertBaseFieldName(domain, ConvertPackageName(*s->base), true));
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("let " + *field->name + ": " + ConvertTypeFieldDeclaration(domain, *field, true));
@@ -6334,7 +6331,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
     WriteLineIndent("public var fbeType: Int = fbeTypeConst");
     WriteLine();
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("public static let fbeTypeConst: Int = " + ConvertBaseFieldName(domain, *s->base, true) + ".fbeTypeConst");
+        WriteLineIndent("public static let fbeTypeConst: Int = " + ConvertBaseFieldName(domain, ConvertPackageName(*s->base), true) + ".fbeTypeConst");
     else
         WriteLineIndent("public static let fbeTypeConst: Int = " + std::to_string(s->type));
 
@@ -6346,7 +6343,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
     WriteLineIndent("_offset = offset");
     WriteLine();
     if (s->base && !s->base->empty())
-          WriteLineIndent("parent = " + ConvertBaseFieldName(domain, *s->base, true) + "(buffer: buffer, offset: 0)");
+          WriteLineIndent("parent = " + ConvertBaseFieldName(domain, ConvertPackageName(*s->base), true) + "(buffer: buffer, offset: 0)");
     if (s->body)
       for (const auto& field : s->body->fields)
           WriteLineIndent(*field->name + " = " + ConvertTypeFieldInitialization(domain, *field, "0", true));
@@ -6460,7 +6457,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
         {
             WriteLine();
             WriteLineIndent("parent.fbeOffset = fbeCurrentOffset");
-            WriteLineIndent("var fbeValueBase = fbeValue as " + ConvertTypeName(domain, "", *s->base, false));
+            WriteLineIndent("var fbeValueBase = fbeValue as " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false));
             WriteLineIndent("fbeFieldSize.value = parent.getFields(fbeValue: &fbeValueBase)");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize.value");
@@ -6549,11 +6546,11 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
 
 void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
-    std::string package = *p->name;
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
     std::string struct_name = *s->name;
 
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6564,7 +6561,7 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
 
     // Generate struct model final begin
     WriteLine();
@@ -6695,10 +6692,10 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
 
 void GeneratorSwift::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
-    std::string package = *p->name;
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
 
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6712,7 +6709,7 @@ void GeneratorSwift::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
 
     // Generate protocol version class
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " protocol version");
+    WriteLineIndent("// Fast Binary Encoding " + domain + package + " protocol version");
     WriteLineIndent("struct ProtocolVersion {");
     Indent(1);
     WriteLineIndent("// Protocol major version");
@@ -6731,10 +6728,10 @@ void GeneratorSwift::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
 
 void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool final)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
-    std::string package = *p->name;
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
 
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6748,17 +6745,17 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports("", "Foundation");
     GenerateImports(p);
 
     // Generate sender begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final sender");
+        WriteLineIndent("// Fast Binary Encoding " + domain + package + " final sender");
     else
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " sender");
-    WriteLineIndent("open class " + sender + " : " + "fbe.SenderProtocol { ");
+        WriteLineIndent("// Fast Binary Encoding " + domain + package + " sender");
+    WriteLineIndent("open class " + sender + " : " + domain + "Fbe.SenderProtocol { ");
     Indent(1);
 
     // Generate imported senders accessors
@@ -6766,7 +6763,7 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     {
         WriteLineIndent("// Imported senders");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("let " + *import + "Sender: " + *import + "." + sender);
+            WriteLineIndent("let " + ConvertPackageName(*import) + "Sender: " + domain + ConvertPackageName(*import) + "." + sender);
         WriteLine();
     }
 
@@ -6790,12 +6787,12 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Sender = " + *import + "." + sender + "(buffer: buffer)");
+            WriteLineIndent(ConvertPackageName(*import) + "Sender = " + domain + ConvertPackageName(*import) + "." + sender + "(buffer: buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs) {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent(*s->name + "Model = " + struct_name + model + "(buffer: buffer)");
           }
     }
@@ -6803,17 +6800,17 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("public init(buffer: fbe.Buffer) {");
+    WriteLineIndent("public init(buffer: " + domain + "Fbe.Buffer) {");
     Indent(1);
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Sender = " + *import + "." + sender + "(buffer: buffer)");
+            WriteLineIndent(ConvertPackageName(*import) + "Sender = " + domain + ConvertPackageName(*import) + "." + sender + "(buffer: buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs) {
-          std::string struct_name = *p->name + "." + *s->name;
+          std::string struct_name = domain + package + "." + *s->name;
           WriteLineIndent(*s->name + "Model = " + struct_name + model + "(buffer: buffer)");
         }
 
@@ -6832,7 +6829,7 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent("case is " + struct_name + ": return try send(value: obj as! " + struct_name + ")");
         }
         WriteLineIndent("default: break");
@@ -6846,7 +6843,7 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("var result: Int = 0");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("result = try " + *import + "Sender.send(obj: obj)");
+            WriteLineIndent("result = try " + ConvertPackageName(*import) + "Sender.send(obj: obj)");
             WriteLineIndent("if result > 0 {");
             Indent(1);
             WriteLineIndent("return result");
@@ -6865,7 +6862,7 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent("public func send(value: " + struct_name + ") throws -> Int {");
             Indent(1);
             WriteLineIndent("// Serialize the value into the FBE stream");
@@ -6906,10 +6903,10 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
 
 void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool final)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
-    std::string package = *p->name;
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
 
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -6925,16 +6922,16 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "Foundation");
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports(p);
 
     // Generate receiver begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final receiver");
+        WriteLineIndent("// Fast Binary Encoding " + domain + package + " final receiver");
     else
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " receiver");
-    WriteLineIndent("open class " + receiver + " : "  + "fbe.ReceiverProtocol {");
+        WriteLineIndent("// Fast Binary Encoding " + domain + package + " receiver");
+    WriteLineIndent("open class " + receiver + " : " + domain +  "Fbe.ReceiverProtocol {");
     Indent(1);
 
     // Generate imported receivers accessors
@@ -6942,7 +6939,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
     {
         WriteLineIndent("// Imported receivers");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("let " + *import + "Receiver: " + *import + "." + receiver + "?");
+            WriteLineIndent("let " + ConvertPackageName(*import) + "Receiver: " + domain + ConvertPackageName(*import) + "." + receiver + "?");
         WriteLine();
     }
 
@@ -6952,13 +6949,13 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
         WriteLineIndent("// Receiver values accessors");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent("private var " + *s->name + "Value: " + struct_name);
         }
         WriteLine();
         WriteLineIndent("// Receiver models accessors");
         for (const auto& s : p->body->structs) {
-          std::string struct_name = *p->name + "." + *s->name;
+          std::string struct_name = domain + package + "." + *s->name;
           WriteLineIndent("private var " + *s->name + "Model: " + *s->name + model);
         }
 
@@ -6977,13 +6974,13 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Receiver = " + *import + "." + receiver + "(buffer: buffer)");
+            WriteLineIndent(ConvertPackageName(*import) + "Receiver = " + domain + ConvertPackageName(*import) + "." + receiver + "(buffer: buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent(*s->name + "Value = " + struct_name + "()");
             WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
         }
@@ -6993,18 +6990,18 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
     WriteLineIndent("}");
     WriteLine();
 
-    WriteLineIndent("public init(buffer: fbe.Buffer) {");
+    WriteLineIndent("public init(buffer: " + domain + "Fbe.Buffer) {");
     Indent(1);
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Receiver = " + *import + "." + receiver + "(buffer: buffer)");
+            WriteLineIndent(ConvertPackageName(*import) + "Receiver = " + domain + ConvertPackageName(*import) + "." + receiver + "(buffer: buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent(*s->name + "Value = " + struct_name + "()");
             WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
         }
@@ -7028,13 +7025,13 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
         WriteLineIndent("switch type {");
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case " + package + "." + *s->name + model + ".fbeTypeConst:");
+            WriteLineIndent("case " + domain + package + "." + *s->name + model + ".fbeTypeConst:");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");
             WriteLineIndent(*s->name + "Model.attach(buffer: buffer, offset: offset)");
-            WriteLineIndent("assert(" + *s->name + "Model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\")");
+            WriteLineIndent("assert(" + *s->name + "Model.verify(), \"" + package + "." + *s->name + " validation failed!\")");
             WriteLineIndent("let deserialized = " + *s->name + "Model.deserialize(value: &" + *s->name + "Value)");
-            WriteLineIndent("assert(deserialized > 0, \"" + *p->name + "." + *s->name + " deserialization failed!\")");
+            WriteLineIndent("assert(deserialized > 0, \"" + package + "." + *s->name + " deserialization failed!\")");
             WriteLine();
             WriteLineIndent("// Log the value");
             WriteLineIndent("if (logging)");
@@ -7058,7 +7055,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if let " + *import + "Receiver = " + *import + "Receiver, " + *import + "Receiver.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {");
+            WriteLineIndent("if let " + ConvertPackageName(*import) + "Receiver = " + ConvertPackageName(*import) + "Receiver, " + ConvertPackageName(*import) + "Receiver.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
@@ -7083,10 +7080,10 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
 
 void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p, bool final)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
-    std::string package = *p->name;
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
 
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -7099,15 +7096,15 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports(p);
 
     // Generate receiver listener begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver listener");
+        WriteLineIndent("// Fast Binary Encoding " + package + " final receiver listener");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver listener");
+        WriteLineIndent("// Fast Binary Encoding " + package + " receiver listener");
     WriteIndent("public protocol " + listener);
     if (p->import)
     {
@@ -7115,7 +7112,7 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
         WriteIndent(" : ");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent((first ? "" : ", ") + *import + "." + listener);
+            WriteLineIndent((first ? "" : ", ") + domain + ConvertPackageName(*import) + "." + listener);
             first = false;
         }
     }
@@ -7127,7 +7124,7 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent("func onReceive(value: " + struct_name + ")");
         }
     }
@@ -7143,7 +7140,7 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent("func onReceive(value: " + struct_name + ") { }");
         }
     }
@@ -7159,10 +7156,10 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
 
 void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
-    std::string package = *p->name;
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
 
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -7178,16 +7175,16 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "Foundation");
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports(p);
 
     // Generate proxy begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final proxy");
+        WriteLineIndent("// Fast Binary Encoding " + package + " final proxy");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " proxy");
-    WriteLineIndent("open class " + proxy + " : " + "fbe.ReceiverProtocol {");
+        WriteLineIndent("// Fast Binary Encoding " + package + " proxy");
+    WriteLineIndent("open class " + proxy + " : " + domain + "Fbe.ReceiverProtocol {");
     Indent(1);
 
     // Generate imported proxy accessors
@@ -7195,7 +7192,7 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     {
         WriteLineIndent("// Imported proxy");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("let " + *import + "Proxy: " + *import + "." + proxy + "?");
+            WriteLineIndent("let " + ConvertPackageName(*import) + "Proxy: " + domain + ConvertPackageName(*import) + "." + proxy + "?");
         WriteLine();
     }
 
@@ -7219,12 +7216,12 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Proxy = " + *import + "." + proxy + "(buffer: buffer)");
+            WriteLineIndent(ConvertPackageName(*import) + "Proxy = " + domain + ConvertPackageName(*import) + "." + proxy + "(buffer: buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs) {
-          std::string struct_name = *p->name + "." + *s->name;
+          std::string struct_name = domain + package + "." + *s->name;
           WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
         }
     }
@@ -7232,17 +7229,17 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("public init(buffer: fbe.Buffer) {");
+    WriteLineIndent("public init(buffer: " + domain + "Fbe.Buffer) {");
     Indent(1);
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Proxy = " + *import + "." + proxy + "(buffer: buffer)");
+            WriteLineIndent(ConvertPackageName(*import) + "Proxy = " + domain + ConvertPackageName(*import) + "." + proxy + "(buffer: buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs) {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent(*s->name + "Model = " + struct_name+ model + "()");
         }
 
@@ -7266,11 +7263,11 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
         WriteLineIndent("switch type {");
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case " + package + "." + *s->name + model + ".fbeTypeConst:");
+            WriteLineIndent("case " + domain + package + "." + *s->name + model + ".fbeTypeConst:");
             Indent(1);
             WriteLineIndent("// Attach the FBE stream to the proxy model");
             WriteLineIndent(*s->name + "Model.attach(buffer: buffer, offset: offset)");
-            WriteLineIndent("assert(" + *s->name + "Model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\")");
+            WriteLineIndent("assert(" + *s->name + "Model.verify(), \"" + package + "." + *s->name + " validation failed!\")");
             WriteLine();
             WriteLineIndent("let fbeBegin = " + *s->name + "Model.model.getBegin()");
             WriteLineIndent("if fbeBegin == 0 {");
@@ -7292,7 +7289,7 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if let " + *import + "Proxy = " + *import + "Proxy, " + *import + "Proxy.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {");
+            WriteLineIndent("if let " + ConvertPackageName(*import) + "Proxy = " + ConvertPackageName(*import) + "Proxy, " + ConvertPackageName(*import) + "Proxy.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
@@ -7317,10 +7314,10 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
 
 void GeneratorSwift::GenerateProxyListener(const std::shared_ptr<Package>& p, bool final)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
-    std::string package = *p->name;
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
 
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -7334,16 +7331,16 @@ void GeneratorSwift::GenerateProxyListener(const std::shared_ptr<Package>& p, bo
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports("", "Foundation");
     GenerateImports(p);
 
     // Generate proxy listener begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final proxy listener");
+        WriteLineIndent("// Fast Binary Encoding " + domain + package + " final proxy listener");
     else
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " proxy listener");
+        WriteLineIndent("// Fast Binary Encoding " + domain + package + " proxy listener");
     WriteIndent("public protocol " + listener);
     if (p->import)
     {
@@ -7351,7 +7348,7 @@ void GeneratorSwift::GenerateProxyListener(const std::shared_ptr<Package>& p, bo
         WriteIndent(" : ");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent((first ? "" : ", ") + *import + "." + listener);
+            WriteLineIndent((first ? "" : ", ") + domain + ConvertPackageName(*import) + "." + listener);
             first = false;
         }
     }
@@ -7400,10 +7397,10 @@ void GeneratorSwift::GenerateProxyListener(const std::shared_ptr<Package>& p, bo
 
 void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool final)
 {
-    std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
-    std::string package = *p->name;
+    std::string domain = ConvertDomain(p);
+    std::string package = ConvertPackage(p);
 
-    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "fbe";
+    CppCommon::Path path = (CppCommon::Path(_output) / CreatePackagePath(domain, package)) / "Fbe";
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
@@ -7419,16 +7416,16 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
     GenerateImports("", "Foundation");
-    GenerateImports("", "fbe");
+    GenerateImports(domain, "Fbe");
     GenerateImports(p);
 
     // Generate client begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final client");
+        WriteLineIndent("// Fast Binary Encoding " + package + " final client");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " client");
-    WriteLineIndent("open class " + client + " : fbe.ClientProtocol {");
+        WriteLineIndent("// Fast Binary Encoding " + package + " client");
+    WriteLineIndent("open class " + client + " : " + domain + "Fbe.ClientProtocol {");
     Indent(1);
 
     // Generate imported senders accessors
@@ -7436,7 +7433,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     {
         WriteLineIndent("// Imported senders");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("let " + *import + "Sender: " + *import + "." + client);
+            WriteLineIndent("let " + ConvertPackageName(*import) + "Sender: " + domain + ConvertPackageName(*import) + "." + client);
         WriteLine();
     }
 
@@ -7445,7 +7442,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     {
         WriteLineIndent("// Imported receivers");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("let " + *import + "Receiver: " + *import + "." + client + "?");
+            WriteLineIndent("let " + ConvertPackageName(*import) + "Receiver: " + domain + ConvertPackageName(*import) + "." + client + "?");
         WriteLine();
     }
 
@@ -7464,7 +7461,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("// Client receiver values accessors");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent("private var " + *s->name + "ReceiverValue: " + struct_name);
         }
         WriteLine();
@@ -7487,15 +7484,15 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     {
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent(*import + "Sender = " + *import + "." + client + "(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)");
-            WriteLineIndent(*import + "Receiver = " + *import + "." + client + "(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)");
+            WriteLineIndent(ConvertPackageName(*import) + "Sender = " + domain + ConvertPackageName(*import) + "." + client + "(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)");
+            WriteLineIndent(ConvertPackageName(*import) + "Receiver = " + domain + ConvertPackageName(*import) + "." + client + "(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)");
         }
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent(*s->name + "SenderModel = " + *s->name + model + "(buffer: sendBuffer)");
             WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + "()");
             WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
@@ -7505,21 +7502,21 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("public init(sendBuffer: fbe.Buffer, receiveBuffer: fbe.Buffer) {");
+    WriteLineIndent("public init(sendBuffer: " + domain + "Fbe.Buffer, receiveBuffer: " + domain + "Fbe.Buffer) {");
     Indent(1);
     if (p->import)
     {
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent(*import + "Sender = " + *import + "." + client + "(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)");
-            WriteLineIndent(*import + "Receiver = " + *import + "." + client + "(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)");
+            WriteLineIndent(ConvertPackageName(*import) + "Sender = " + domain + ConvertPackageName(*import) + "." + client + "(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)");
+            WriteLineIndent(ConvertPackageName(*import) + "Receiver = " + domain + ConvertPackageName(*import) + "." + client + "(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)");
         }
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent(*s->name + "SenderModel = " + *s->name + model + "(buffer: sendBuffer)");
             WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + "()");
             WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
@@ -7539,7 +7536,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent("case is " + struct_name + ": return try send(value: obj as! " + struct_name + ")");
         }
         WriteLineIndent("default: break");
@@ -7553,7 +7550,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("var result: Int = 0");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("result = try " + *import + "Sender.send(obj: obj)");
+            WriteLineIndent("result = try " + ConvertPackageName(*import) + "Sender.send(obj: obj)");
             WriteLineIndent("if result > 0 { return result }");
         }
         WriteLine();
@@ -7568,7 +7565,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = *p->name + "." + *s->name;
+            std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent("public func send(value: " + struct_name + ") throws -> Int {");
             Indent(1);
             WriteLineIndent("// Serialize the value into the FBE stream");
@@ -7610,13 +7607,13 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("switch type {");
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case " + package + "." + *s->name + model + ".fbeTypeConst:");
+            WriteLineIndent("case " + domain + package + "." + *s->name + model + ".fbeTypeConst:");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");
             WriteLineIndent(*s->name + "ReceiverModel.attach(buffer: buffer, offset: offset)");
-            WriteLineIndent("assert(" + *s->name + "ReceiverModel.verify(), \"" + *p->name + "." + *s->name + " validation failed!\")");
+            WriteLineIndent("assert(" + *s->name + "ReceiverModel.verify(), \"" + package + "." + *s->name + " validation failed!\")");
             WriteLineIndent("let deserialized = " + *s->name + "ReceiverModel.deserialize(value: &" + *s->name + "ReceiverValue)");
-            WriteLineIndent("assert(deserialized > 0, \"" + *p->name + "." + *s->name + " deserialization failed!\")");
+            WriteLineIndent("assert(deserialized > 0, \"" + package + "." + *s->name + " deserialization failed!\")");
             WriteLine();
             WriteLineIndent("// Log the value");
             WriteLineIndent("if logging {");
@@ -7639,7 +7636,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-          WriteLineIndent("if let " + *import + "Receiver = " + *import + "Receiver, " + *import + "Receiver.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {");
+          WriteLineIndent("if let " + ConvertPackageName(*import) + "Receiver = " + ConvertPackageName(*import) + "Receiver, " + ConvertPackageName(*import) + "Receiver.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
@@ -7725,8 +7722,9 @@ std::string GeneratorSwift::CreateSwiftPackagePath(const std::string& domain, co
 {
 
     std::string result = domain;
-    CppCommon::StringUtils::ReplaceAll(result, "com.", "");
     CppCommon::StringUtils::ReplaceAll(result, ".", std::string(1, CppCommon::Path::separator()));
+
+
     return result + CppCommon::Path::separator() + package;
 }
 
@@ -7734,9 +7732,8 @@ std::string GeneratorSwift::CreatePackagePath(const std::string& domain, const s
 {
 
     std::string result = domain;
-    CppCommon::StringUtils::ReplaceAll(result, "com.", "");
     CppCommon::StringUtils::ReplaceAll(result, ".", std::string(1, CppCommon::Path::separator()));
-    return result + package + CppCommon::Path::separator() + "Source" + CppCommon::Path::separator() + package;
+    return result + CppCommon::Path::separator() + package + CppCommon::Path::separator() + "Source" + CppCommon::Path::separator() + result + package;
 }
 
 std::string GeneratorSwift::ConvertEnumBase(const std::string& type)
@@ -8081,10 +8078,12 @@ std::string GeneratorSwift::ConvertTypeName(const std::string& domain, const std
     if (pos != std::string::npos)
     {
         ns.assign(type, 0, pos + 1);
+        ns[0] = toupper(ns[0]);
+        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
     else if (!package.empty())
-        ns = package + ".";
+        ns = domain + package + ".";
 
     return ns + t + opt;
 }
@@ -8133,6 +8132,8 @@ std::string GeneratorSwift::ConvertBaseFieldName(const std::string& domain, cons
     if (pos != std::string::npos)
     {
         ns.assign(type, 0, pos + 1);
+        ns[0] = toupper(ns[0]);
+        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
 
@@ -8244,6 +8245,8 @@ std::string GeneratorSwift::ConvertTypeFieldType(const std::string& domain, cons
     if (pos != std::string::npos)
     {
         ns.assign(type, 0, pos + 1);
+        ns[0] = toupper(ns[0]);
+        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
 
@@ -8262,10 +8265,12 @@ std::string GeneratorSwift::ConvertTypeFieldDeclaration(const std::string& domai
     if (pos != std::string::npos)
     {
         ns.assign(type, 0, pos + 1);
+        ns[0] = toupper(ns[0]);
+        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
     else
-        ns = (IsKnownType(type) && !optional) ? ("fbe.") : "";
+        ns = (IsKnownType(type) && !optional) ? (domain + "Fbe.") : "";
 
     return ns + modelType + "Model" + opt + ConvertTypeFieldName(t);
 }
@@ -8307,6 +8312,8 @@ std::string GeneratorSwift::ConvertTypeFieldInitialization(const std::string& do
     if (pos != std::string::npos)
     {
         ns.assign(type, 0, pos + 1);
+        ns[0] = toupper(ns[0]);
+        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
     else
@@ -8376,11 +8383,11 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
     else if (value == "utc")
         return ((Version() < 8) ? "java.util.Date(System.currentTimeMillis())" : "Date().timeIntervalSince1970");
     else if (value == "uuid0")
-        return "fbe.UUIDGenerator.nil()";
+        return domain + "Fbe.UUIDGenerator.nil()";
     else if (value == "uuid1")
-        return  "fbe.UUIDGenerator.sequential()";
+        return domain +  "Fbe.UUIDGenerator.sequential()";
     else if (value == "uuid4")
-        return "fbe.UUIDGenerator.random()";
+        return domain + "Fbe.UUIDGenerator.random()";
 
     std::string result = value;
 
@@ -8404,7 +8411,14 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
         }
         else
         {
-            //result = result;
+          size_t pos = result.find_last_of('.');
+          if (pos != std::string::npos)
+          {
+              if (CppCommon::StringUtils::CountAll(result, ".") > 1)
+                  result = domain + result;
+              else
+                  result = (package.empty() ? "" : (domain + package + ".")) + result;
+          }
         }
     }
 
@@ -8487,7 +8501,7 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
     else if (type == "timestamp")
         return ((Version() < 8) ? "java.util.Date(0)" : "0");
     else if (type == "uuid")
-        return "fbe.UUIDGenerator.nil()";
+        return domain + "Fbe.UUIDGenerator.nil()";
 
     std::string ns = "";
     std::string t = type;
@@ -8496,12 +8510,12 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
     if (pos != std::string::npos)
     {
         ns.assign(type, 0, pos + 1);
+        ns[0] = toupper(ns[0]);
+        ns = domain + ns;
         t.assign(type, pos + 1, type.size() - pos);
     }
     else if (!package.empty())
-        ns = package + ".";
-
-
+        ns = domain + package + ".";
 
     return ns + t + "()";
 }
@@ -8556,4 +8570,32 @@ std::string GeneratorSwift::ConvertOutputStreamValue(const std::string& type, co
         return "sb" + comma + ConvertOutputStreamType(type, name, false);
 }
 
+std::string GeneratorSwift::ConvertDomain(const std::shared_ptr<Package>& package)
+{
+    std::string domain = (package->domain && !package->domain->empty()) ? (*package->domain + ".") : "";
+    CppCommon::StringUtils::ReplaceAll(domain, "com.", "");
+    domain[0] = toupper(domain[0]);
+    size_t pos = domain.find_last_of('.');
+    while(pos != std::string::npos) {
+        domain[pos + 1] = toupper(domain[pos + 1]);
+        domain.erase(pos, 1);
+        pos = domain.find_last_of('.');
+    }
+
+    return domain;
+}
+
+std::string GeneratorSwift::ConvertPackage(const std::shared_ptr<Package>& package)
+{
+    std::string packageName = *package->name;
+    packageName[0] = toupper(packageName[0]);
+    return packageName;
+}
+
+std::string GeneratorSwift::ConvertPackageName(const std::string& package)
+{
+    std::string packageName = package;
+    packageName[0] = toupper(packageName[0]);
+    return packageName;
+}
 } // namespace FBE

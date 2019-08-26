@@ -3,7 +3,7 @@
 //
 
 import XCTest
-@testable import test
+@testable import ChronoxorTest
 
 class ExamplePrint: XCTestCase {
     func testPrint() {

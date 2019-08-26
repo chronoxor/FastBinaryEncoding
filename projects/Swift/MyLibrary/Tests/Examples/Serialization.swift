@@ -3,7 +3,7 @@
 //
 
 import XCTest
-import proto
+import ChronoxorProto
 
 class Serialization: XCTestCase {
     func testSerialization() {

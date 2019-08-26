@@ -3,11 +3,11 @@
 //
 
 import XCTest
-import proto
+import ChronoxorProto
 
 class BenchmarkSerializationJson: XCTestCase {
     
-    private static var _account: proto.Account!
+    private static var _account: ChronoxorProto.Account!
     private static var _json: String!
     
     override class var defaultPerformanceMetrics: [XCTPerformanceMetric] {
@@ -20,10 +20,10 @@ class BenchmarkSerializationJson: XCTestCase {
     override class func setUp() {
         super.setUp()
         
-        _account = proto.Account(id: 1, name: "Test", state: proto.State.good, wallet: proto.Balance(currency: "USD", amount: 1000.0), asset: proto.Balance(currency: "EUR", amount: 100.0), orders: [])
-        _account.orders.append(proto.Order(id: 1, symbol: "EURUSD", side: proto.OrderSide.buy, type: proto.OrderType.market, price: 1.23456, volume: 1000.0))
-        _account.orders.append(proto.Order(id: 2, symbol: "EURUSD", side: proto.OrderSide.sell, type: proto.OrderType.limit, price: 1.0, volume: 100.0))
-        _account.orders.append(proto.Order(id: 3, symbol: "EURUSD", side: proto.OrderSide.buy, type: proto.OrderType.stop, price: 1.5, volume: 10.0))
+        _account = ChronoxorProto.Account(id: 1, name: "Test", state: ChronoxorProto.State.good, wallet: ChronoxorProto.Balance(currency: "USD", amount: 1000.0), asset: ChronoxorProto.Balance(currency: "EUR", amount: 100.0), orders: [])
+        _account.orders.append(ChronoxorProto.Order(id: 1, symbol: "EURUSD", side: ChronoxorProto.OrderSide.buy, type: ChronoxorProto.OrderType.market, price: 1.23456, volume: 1000.0))
+        _account.orders.append(ChronoxorProto.Order(id: 2, symbol: "EURUSD", side: ChronoxorProto.OrderSide.sell, type: ChronoxorProto.OrderType.limit, price: 1.0, volume: 100.0))
+        _account.orders.append(ChronoxorProto.Order(id: 3, symbol: "EURUSD", side: ChronoxorProto.OrderSide.buy, type: ChronoxorProto.OrderType.stop, price: 1.5, volume: 10.0))
         
         // Serialize the account to the JSON string
         _json = try! BenchmarkSerializationJson._account.toJson()

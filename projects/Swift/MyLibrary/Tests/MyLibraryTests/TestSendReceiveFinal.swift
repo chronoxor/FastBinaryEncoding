@@ -3,7 +3,7 @@
 //
 
 import XCTest
-import proto
+import ChronoxorProto
 
 fileprivate class MyFinalSender: FinalSender {
     override func onSend(buffer: Data, offset: Int, size: Int) throws -> Int {
@@ -12,7 +12,7 @@ fileprivate class MyFinalSender: FinalSender {
     }
 }
 
-fileprivate class MyFinalReceiver: FinalReceiver, proto.FinalReceiverListener {
+fileprivate class MyFinalReceiver: FinalReceiver, ChronoxorProto.FinalReceiverListener {
     private var _order: Bool = false
     private var _balance: Bool = false
     private var _account: Bool = false
@@ -21,15 +21,15 @@ fileprivate class MyFinalReceiver: FinalReceiver, proto.FinalReceiverListener {
         return  _order && _balance && _account
     }
     
-    func onReceive(value: proto.Order) {
+    func onReceive(value: ChronoxorProto.Order) {
         _order = true
     }
     
-    func onReceive(value: proto.Balance) {
+    func onReceive(value: ChronoxorProto.Balance) {
         _balance = true
     }
     
-    func onReceive(value: proto.Account) {
+    func onReceive(value: ChronoxorProto.Account) {
         _account = true
     }
 }

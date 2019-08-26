@@ -3,7 +3,7 @@
 //
 
 import XCTest
-@testable import proto
+@testable import ChronoxorProto
 
 class TestCreate: XCTestCase {
     

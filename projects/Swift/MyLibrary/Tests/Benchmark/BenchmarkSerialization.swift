@@ -3,24 +3,24 @@
 //
 
 import XCTest
-import proto
+import ChronoxorProto
 
 class BenchmarkSerialization: XCTestCase {
     
-    private static var _account: proto.Account!
-    private static var _writer: proto.AccountModel!
-    private static var _reader: proto.AccountModel!
+    private static var _account: Account!
+    private static var _writer: AccountModel!
+    private static var _reader: AccountModel!
     
     override class func setUp() {
         super.setUp()
         
-        _account = proto.Account(id: 1, name: "Test", state: .bad, wallet: proto.Balance(currency: "USD", amount: 1000.0), asset: proto.Balance(currency: "EUR", amount: 100.0), orders: [])
-        _account.orders.append(proto.Order(id: 1, symbol: "EURUSD", side: proto.OrderSide.buy, type: proto.OrderType.market, price: 1.23456, volume: 1000.0))
-        _account.orders.append(proto.Order(id: 2, symbol: "EURUSD", side: proto.OrderSide.sell, type: proto.OrderType.limit, price: 1.0, volume: 100.0))
-        _account.orders.append(proto.Order(id: 3, symbol: "EURUSD", side: proto.OrderSide.buy, type: proto.OrderType.stop, price: 1.5, volume: 10.0))
+        _account = ChronoxorProto.Account(id: 1, name: "Test", state: .bad, wallet: ChronoxorProto.Balance(currency: "USD", amount: 1000.0), asset: ChronoxorProto.Balance(currency: "EUR", amount: 100.0), orders: [])
+        _account.orders.append(ChronoxorProto.Order(id: 1, symbol: "EURUSD", side: ChronoxorProto.OrderSide.buy, type: OrderType.market, price: 1.23456, volume: 1000.0))
+        _account.orders.append(ChronoxorProto.Order(id: 2, symbol: "EURUSD", side: ChronoxorProto.OrderSide.sell, type: OrderType.limit, price: 1.0, volume: 100.0))
+        _account.orders.append(ChronoxorProto.Order(id: 3, symbol: "EURUSD", side: ChronoxorProto.OrderSide.buy, type: OrderType.stop, price: 1.5, volume: 10.0))
         
-        _writer = proto.AccountModel()
-        _reader = proto.AccountModel()
+        _writer = ChronoxorProto.AccountModel()
+        _reader = ChronoxorProto.AccountModel()
         
         // Serialize the account to the FBE stream
         _ = try! _writer.serialize(value: _account)

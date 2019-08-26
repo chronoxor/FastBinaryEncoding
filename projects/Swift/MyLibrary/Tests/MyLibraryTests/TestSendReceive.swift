@@ -2,18 +2,18 @@
 //  TestsSendReceive.swift
 //
 
-import protoex
-import proto
 import XCTest
+import ChronoxorProto
+import ChronoxorProtoex
 
-class MySender: protoex.Sender {
+class MySender: ChronoxorProtoex.Sender {
     override func onSend(buffer: Data, offset: Int, size: Int) throws -> Int {
         // Send nothing...
         return 0
     }
 }
 
-class MyReceiver: protoex.Receiver, protoex.ReceiverListener {
+class MyReceiver: ChronoxorProtoex.Receiver, ChronoxorProtoex.ReceiverListener {
     private var _order: Bool = false
     private var _balance: Bool = false
     private var _account: Bool = false
@@ -24,15 +24,15 @@ class MyReceiver: protoex.Receiver, protoex.ReceiverListener {
         return  _order && _balance && _account
     }
     
-    func onReceive(value: protoex.Order) {
+    func onReceive(value: ChronoxorProtoex.Order) {
         _order = true
     }
     
-    func onReceive(value: protoex.Balance) {
+    func onReceive(value: ChronoxorProtoex.Balance) {
         _balance = true
     }
     
-    func onReceive(value: proto.Account) {
+    func onReceive(value: ChronoxorProtoex.Account) {
         _account = true
     }
     
@@ -41,7 +41,7 @@ class MyReceiver: protoex.Receiver, protoex.ReceiverListener {
     }
 }
 
-class MyClient: protoex.Client, protoex.ReceiverListener {
+class MyClient: ChronoxorProtoex.Client, ChronoxorProtoex.ReceiverListener {
     private var _order: Bool = false
     private var _balance: Bool = false
     private var _account: Bool = false
@@ -50,15 +50,15 @@ class MyClient: protoex.Client, protoex.ReceiverListener {
         return  _order && _balance && _account
     }
 
-    func onReceive(value: protoex.Order) {
+    func onReceive(value: ChronoxorProtoex.Order) {
         _order = true
     }
     
-    func onReceive(value: protoex.Balance) {
+    func onReceive(value: ChronoxorProtoex.Balance) {
         _balance = true
     }
     
-    func onReceive(value: proto.Account) {
+    func onReceive(value: ChronoxorProtoex.Account) {
         _account = true
     }
     

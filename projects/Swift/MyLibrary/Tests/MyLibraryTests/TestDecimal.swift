@@ -3,8 +3,8 @@
 //
 
 import XCTest
-import proto
-import fbe
+import ChronoxorFbe
+import ChronoxorProto
 
 class TestDecimal: XCTestCase {
 

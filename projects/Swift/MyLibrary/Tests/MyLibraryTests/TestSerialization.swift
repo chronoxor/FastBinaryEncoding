@@ -3,8 +3,8 @@
 //
 
 import XCTest
-import proto
-import test
+import ChronoxorProto
+import ChronoxorTest
 
 class TestSerialization: XCTestCase {
     
@@ -179,7 +179,7 @@ class TestSerialization: XCTestCase {
     
     func testSerializationStructOptional() {
         // Create a new struct
-        let struct1 = test.StructOptional()
+        let struct1 = ChronoxorTest.StructOptional()
         
         // Serialize the struct to the FBE stream
         let writer = StructOptionalModel()

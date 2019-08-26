@@ -3,8 +3,8 @@
 //
 
 import XCTest
-import proto
-import test
+import ChronoxorProto
+import ChronoxorTest
 
 class TestSerializationJson: XCTestCase {
     

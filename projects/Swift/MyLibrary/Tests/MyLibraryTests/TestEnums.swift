@@ -3,9 +3,8 @@
 //
 
 import Foundation
-
 import XCTest
-import enums
+import ChronoxorEnums
 
 class TestEnums: XCTestCase {
     

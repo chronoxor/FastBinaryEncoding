@@ -3,7 +3,7 @@
 //
 
 import XCTest
-import test
+import ChronoxorTest
 
 class PrintJson: XCTestCase {
     func testPrintJson() {

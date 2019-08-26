@@ -141,6 +141,9 @@ std::string CreatePackagePath(const std::string& domain, const std::string& pack
 
     std::string ConvertOutputStreamType(const std::string& type, const std::string& name, bool optional);
     std::string ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate, bool nullable);
+    std::string ConvertDomain(const std::shared_ptr<Package>& package);
+    std::string ConvertPackage(const std::shared_ptr<Package>& package);
+    std::string ConvertPackageName(const std::string& package);
 };
 
 } // namespace FBE

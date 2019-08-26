@@ -3,9 +3,9 @@
 //
 
 import XCTest
-import proto
+import ChronoxorProto
 
-fileprivate class MySender: proto.Sender {
+fileprivate class MySender: ChronoxorProto.Sender {
     override func onSend(buffer: Data, offset: Int, size: Int) throws -> Int {
         // Send nothing...
         return 0
@@ -16,7 +16,7 @@ fileprivate class MySender: proto.Sender {
     }
 }
 
-fileprivate class MyReceiver: proto.Receiver, proto.ReceiverListener {
+fileprivate class MyReceiver: ChronoxorProto.Receiver, ChronoxorProto.ReceiverListener {
     func onReceiveLog(message: String) {
         print("onReceive: " + message)
     }
