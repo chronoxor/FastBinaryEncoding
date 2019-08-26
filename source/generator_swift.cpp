@@ -1,8 +1,10 @@
 /*!
-    \file generator_kotlin.cpp
-    \brief Fast binary encoding Kotlin generator implementation
-    \author Ivan Shynkarenka
-    \date 03.10.2018
+    \file generator_swift.cpp
+    \brief Fast binary encoding Swift generator implementation
+    \author Andrey Zbranevich
+    \ Based on original Fast binary encoding generator design by
+    \ Ivan Shynkarenka
+    \date 01.08.2019
     \copyright MIT License
 */
 
@@ -70,10 +72,9 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
     {
         GenerateFBESender(domain, "Fbe");
         GenerateFBEReceiver(domain, "Fbe");
+        GenerateFBEReceiverListener(domain, "Fbe");
         GenerateFBEClient(domain, "Fbe");
     }
-    // if (JSON())
-    //     GenerateFBEJson(domain, "Fbe");
 
     GeneratePackage(package);
 }
@@ -112,20 +113,17 @@ void GeneratorSwift::GenerateImports(const std::shared_ptr<Package>& p)
 {
     std::string domain = ConvertDomain(p);
 
-    if (p->import) {
-      for (const auto& i : p->import->imports) {
-        GenerateImports(domain, ConvertPackageName(*i));
-      }
-    }
+    if (p->import)
+        for (const auto& i : p->import->imports)
+            GenerateImports(domain, ConvertPackageName(*i));
 }
 
 void GeneratorSwift::GenerateFBEPackage(const std::string& domain, const std::string& package)
 {
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-  CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
-
-  // Create FBE package path
-  CppCommon::Directory::CreateTree(path);
+    // Create FBE package path
+    CppCommon::Directory::CreateTree(path);
 
     CppCommon::Path packagePath = CppCommon::Path(_output) / CreateSwiftPackagePath(domain, package);
 
@@ -137,7 +135,7 @@ void GeneratorSwift::GenerateFBEPackage(const std::string& domain, const std::st
     Open(file);
 
     // Generate headers
-  //  GenerateHeader("Fbe");
+    //  GenerateHeader("Fbe");
 
     std::string code = R"CODE(// swift-tools-version:5.1
 
@@ -164,8 +162,7 @@ let package = Package(
 )
 )CODE";
 
-code = std::regex_replace(code, std::regex("_DOMAIN_"), domain + "Fbe");
-
+    code = std::regex_replace(code, std::regex("_DOMAIN_"), domain + "Fbe");
 
     Write(code);
 
@@ -3650,9 +3647,6 @@ public protocol SenderProtocol: class {
 
     // Send message handler
     func onSend(buffer: Data, offset: Int, size: Int) throws -> Int
-
-    // Send log message handler
-    func onSendLog(message: String)
 }
 
 public extension SenderProtocol {
@@ -3685,10 +3679,6 @@ public extension SenderProtocol {
         let sent = try onSend(buffer: buffer.data, offset: 0, size: buffer.size)
         try _ = buffer.remove(offset: 0, size: sent)
         return sent
-    }
-
-    func onSendLog(message: String) {
-
     }
 }
 )CODE";
@@ -3732,9 +3722,6 @@ public protocol ReceiverProtocol: class {
 
     // Receive message handler
     func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool
-
-    // Receive log message handler
-    func onReceiveLog(message: String)
 }
 
 public extension ReceiverProtocol {
@@ -4020,8 +4007,6 @@ public extension ReceiverProtocol {
             size1 = self.buffer.size
         }
     }
-
-    func onReceiveLog(message: String) { }
 }
 )CODE";
 
@@ -4035,6 +4020,45 @@ public extension ReceiverProtocol {
 
     // Close the file
     Close();
+}
+
+void GeneratorSwift::GenerateFBEReceiverListener(const std::string& domain, const std::string& package) {
+  CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
+
+  // Open the file
+  CppCommon::Path file = path / "LogListener.swift";
+  Open(file);
+
+  // Generate headers
+  GenerateHeader("Fbe");
+  GenerateImports("", "Foundation");
+
+  std::string code = R"CODE(
+// Fast Binary Encoding log listener
+public protocol LogListener: class {
+
+    // Receive log message handler
+    func onReceiveLog(message: String)
+    // Send log message handler
+    func onSendLog(message: String)
+}
+
+public extension LogListener {
+    func onReceiveLog(message: String) { }
+    func onSendLog(message: String) { }
+}
+)CODE";
+
+  // Prepare code template
+  code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+  Write(code);
+
+  // Generate footer
+  GenerateFooter();
+
+  // Close the file
+  Close();
 }
 
 void GeneratorSwift::GenerateFBEClient(const std::string& domain, const std::string& package)
@@ -4067,15 +4091,9 @@ public protocol ClientProtocol: class {
 
     // Send message handler
     func onSend(buffer: Data, offset: Int, size: Int) throws -> Int
-    // Send log message handler
-    func onSendLog(message: String)
 
     // Receive message handler
     func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool
-
-    // Receive log message handler
-    func onReceiveLog(message: String)
-
 }
 
 public extension ClientProtocol {
@@ -4113,8 +4131,6 @@ public extension ClientProtocol {
         try sendBuffer.remove(offset: 0, size: sent)
         return sent
     }
-
-    func onSendLog(message: String) { }
 
     // Receive data
     func receive(buffer: inout Data ) throws {
@@ -4378,8 +4394,6 @@ public extension ClientProtocol {
             size1 = self.receiveBuffer.size
         }
     }
-
-    func onReceiveLog(message: String) { }
 }
 )CODE";
 
@@ -4393,11 +4407,6 @@ public extension ClientProtocol {
 
     // Close the file
     Close();
-}
-
-void GeneratorSwift::GenerateFBEJson(const std::string& domain, const std::string& package)
-{
-
 }
 
 void GeneratorSwift::GenerateContainers(const std::shared_ptr<Package>& p, bool final)
@@ -4476,6 +4485,7 @@ void GeneratorSwift::GeneratePackage(const std::shared_ptr<Package>& p)
   //  GenerateHeader("Fbe");
 
     std::string code = R"CODE(// swift-tools-version:5.1
+// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
@@ -4500,24 +4510,18 @@ let package = Package(
     ]
 )
 )CODE";
-//.package(path: "../proto2")
-
-
 
     std::string dependenciesRes = std::string(".package(path: \"../") + "Fbe" + std::string("\"),\n ");
-    if (p->import) {
-    for (const auto& import : p->import->imports) {
-        dependenciesRes = dependenciesRes + std::string(".package(path: \"../") + ConvertPackageName(*import) + std::string("\"),\n ");
-    }
-  }
+    if (p->import)
+        for (const auto& import : p->import->imports)
+            dependenciesRes = dependenciesRes + std::string("       .package(path: \"../") + ConvertPackageName(*import) + std::string("\"),\n ");
 
-    std::string dependencies = std::string("\"") + domain + "Fbe" + std::string("\", ");
-    if (p->import) {
-    for (const auto& import : p->import->imports) {
-        dependencies = dependencies + std::string("\"") + domain + ConvertPackageName(*import) + std::string("\", ");
-    }
-  }
 
+
+    std::string dependencies = std::string("\"") + domain + "Fbe" + std::string("\",");
+    if (p->import)
+        for (const auto& import : p->import->imports)
+            dependencies = dependencies + std::string(" \"") + domain + ConvertPackageName(*import) + std::string("\",");
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_NAME_"), domain + package);
@@ -4719,10 +4723,6 @@ void GeneratorSwift::GenerateEnum(const std::shared_ptr<Package>& p, const std::
     // Generate enum wrapper class
     GenerateEnumClass(p, e, path);
 
-    // Generate enum JSON adapter
-    if (JSON())
-        GenerateEnumJson(p, e);
-
     std::string domain = ConvertDomain(p);
     std::string package = ConvertPackage(p);
 
@@ -4867,11 +4867,6 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
 
     // Close the output file
     Close();
-}
-
-void GeneratorSwift::GenerateEnumJson(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)
-{
-
 }
 
 void GeneratorSwift::GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path)
@@ -5048,10 +5043,6 @@ void GeneratorSwift::GenerateFlags(const std::shared_ptr<Package>& p, const std:
 
     // Generate flags wrapper class
     GenerateFlagsClass(p, f, path);
-
-    // Generate flags JSON adapter
-    if (JSON())
-        GenerateFlagsJson(p, f);
 
     std::string domain = ConvertDomain(p);
     std::string package = ConvertPackage(p);
@@ -5286,7 +5277,8 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     // Generate struct body
     if (s->body && !s->body->fields.empty())
     {
-        for (const auto& field : s->body->fields) {
+        for (const auto& field : s->body->fields)
+        {
             std::string fieldName = (*field->name == "Type") ? ("`Type`") : *field->name;
             WriteLineIndent("public var " + fieldName + ": " + ConvertTypeName(domain, "", *field, false) + " = " + ConvertDefault(domain, package, *field));
         }
@@ -5351,30 +5343,35 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
         WriteLineIndent("try super.init(from: decoder)");
 
     WriteLineIndent("let container = try decoder.container(keyedBy: CodingKeys.self)");
-    if (s->body) {
-        for (const auto& field : s->body->fields) {
-            if (field->map && *field->key != "string") {
+    if (s->body)
+    {
+        for (const auto& field : s->body->fields)
+        {
+            if (field->map && *field->key != "string")
+            {
                 WriteLineIndent(*field->name + " = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, " + ConvertTypeName(domain, "", *field->type, field->optional) + ">.self, forKey: ." + *field->name + ")).map { (" + ConvertTypeName(domain, "", *field->key, false) + "($0) ?? 0, $1) })");
-            } else if (*field->type == "decimal") {
-                if (field->optional) {
+            } else if (*field->type == "decimal")
+            {
+                if (field->optional)
+                {
                     WriteLineIndent("let " + *field->name + "RawValue = try container.decode(String?.self, forKey: ." + *field->name + ")");
                     WriteLineIndent(*field->name + " = " + *field->name + "RawValue != nil ? Decimal(string: " + *field->name + "RawValue!) ?? .nan : nil");
-                } else {
+                } else
                     WriteLineIndent(*field->name + " = Decimal(string: try container.decode(String.self, forKey: ." + *field->name + ")) ?? .nan");
-                }
-            } else if ((*field->type == "char") || (*field->type == "wchar")) {
+            } else if ((*field->type == "char") || (*field->type == "wchar"))
+            {
                 std::string valueType = (*field->type == "char") ? "UInt8" : "UInt32";
                 std::string valueOpt = (*field->type == "char") ? "" : "!";
-                if (field->optional) {
+                if (field->optional)
+                {
                     WriteLineIndent("let " + *field->name + "RawValue: " + valueType + "? = try container.decode(" + valueType + "?.self, forKey: ." + *field->name + ")");
                     WriteLineIndent(*field->name + " = " + *field->name + "RawValue != nil ? Character(UnicodeScalar(" + *field->name + "RawValue!)" + valueOpt + ") : nil");
                 } else {
                     WriteLineIndent("let " + *field->name + "RawValue: " + valueType + " = try container.decode(" + valueType + ".self, forKey: ." + *field->name + ")");
                     WriteLineIndent(*field->name + " = Character(UnicodeScalar(" + *field->name + "RawValue)" + valueOpt + ")");
                 }
-            } else {
+            } else
               WriteLineIndent(*field->name + " = try container.decode(" + ConvertTypeName(domain, package, *field, false) + ".self, forKey: ." + *field->name + ")");
-            }
         }
     }
 
@@ -5580,80 +5577,71 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     // Generate struct JSON methods
     if (JSON())
     {
-        WriteLine();
-        WriteIndent(std::string((s->base && !s->base->empty()) ? "override" : "open") + " fun toJson(): String = " + domain + package + ".fbe.Json.engine.toJson(this)");
-        WriteLine();
-        WriteLineIndent("companion object");
-        WriteLineIndent("{");
+        WriteLineIndent("private enum CodingKeys: String, CodingKey {");
         Indent(1);
-        WriteLineIndent("fun fromJson(json: String): " + *s->name + " = " + domain + package + ".fbe.Json.engine.fromJson(json, " + *s->name + "::class.java)");
+        if (s->body && !s->body->fields.empty())
+            for (const auto& field : s->body->fields)
+            {
+              std::string fieldName = (*field->name == "Type") ? ("`Type`") : *field->name;
+              WriteLineIndent("case " + fieldName);
+            }
+        else
+            WriteLineIndent("case empty");
+        Indent(-1);
+        WriteLineIndent("}");
+
+        WriteLine();
+        if (s->base && !s->base->empty())
+            WriteLineIndent("open override func encode(to encoder: Encoder) throws {");
+        else
+            WriteLineIndent("open func encode(to encoder: Encoder) throws {");
+        Indent(1);
+        if (s->base && !s->base->empty())
+            WriteLineIndent("try super.encode(to: encoder)");
+        WriteLineIndent("var container = encoder.container(keyedBy: CodingKeys.self)");
+        if (s->body && !s->body->fields.empty())
+        {
+            for (const auto& field : s->body->fields)
+                if (field->map && *field->key != "string")
+                {
+                    WriteLineIndent("try container.encode(Dictionary(uniqueKeysWithValues: " + *field->name + ".map { ($0.description, $1) }), forKey: ." + *field->name + ")");
+                } else if (*field->type == "decimal")
+                {
+                    std::string opt = (field->optional) ? "?" : "";
+                    WriteLineIndent("try container.encode(" + *field->name + opt + ".description, forKey: ." + *field->name + ")");
+                } else if ((*field->type == "char") || (*field->type == "wchar"))
+                {
+                    std::string valueType = (*field->type == "char") ? "UInt8" : "UInt32";
+                    std::string utfType = (*field->type == "char") ? "utf8" : "utf16";
+                    std::string opt = (field->optional) ? "?" : "";
+                    WriteLineIndent("try container.encode(" + *field->name + opt + "." + utfType + ".map{ " + valueType + "($0) }[0], forKey: ." + *field->name + ")");
+                } else
+                    WriteLineIndent("try container.encode(" + *field->name + ", forKey: ." + *field->name + ")");
+        }
+        Indent(-1);
+        WriteLineIndent("}");
+
+        WriteLine();
+        if (s->base && !s->base->empty())
+            WriteLineIndent("open override func toJson() throws -> String {");
+        else
+            WriteLineIndent("open func toJson() throws -> String {");
+        Indent(1);
+        WriteLineIndent("return String(data: try JSONEncoder().encode(self), encoding: .utf8)!");
+        Indent(-1);
+        WriteLineIndent("}");
+
+        WriteLine();
+        if (s->base && !s->base->empty())
+            WriteLineIndent("open override class func fromJson(_ json: String) -> " + *s->name + " {");
+        else
+            WriteLineIndent("open class func fromJson(_ json: String) -> " + *s->name + " {");
+        Indent(1);
+        WriteLineIndent("return try! JSONDecoder().decode(" + *s->name + ".self, from: json.data(using: .utf8)!)");
         Indent(-1);
         WriteLineIndent("}");
     }
 
-    WriteLineIndent("private enum CodingKeys: String, CodingKey {");
-    Indent(1);
-    if (s->body && !s->body->fields.empty())
-    {
-        for (const auto& field : s->body->fields) {
-          std::string fieldName = (*field->name == "Type") ? ("`Type`") : *field->name;
-          WriteLineIndent("case " + fieldName);
-        }
-    } else {
-        WriteLineIndent("case empty");
-    }
-    Indent(-1);
-    WriteLineIndent("}");
-
-    WriteLine();
-    if (s->base && !s->base->empty())
-        WriteLineIndent("open override func encode(to encoder: Encoder) throws {");
-    else
-        WriteLineIndent("open func encode(to encoder: Encoder) throws {");
-    Indent(1);
-    if (s->base && !s->base->empty())
-        WriteLineIndent("try super.encode(to: encoder)");
-    WriteLineIndent("var container = encoder.container(keyedBy: CodingKeys.self)");
-    if (s->body && !s->body->fields.empty())
-    {
-        for (const auto& field : s->body->fields) {
-          if (field->map && *field->key != "string") {
-            WriteLineIndent("try container.encode(Dictionary(uniqueKeysWithValues: " + *field->name + ".map { ($0.description, $1) }), forKey: ." + *field->name + ")");
-          } else if (*field->type == "decimal") {
-            std::string opt = (field->optional) ? "?" : "";
-            WriteLineIndent("try container.encode(" + *field->name + opt + ".description, forKey: ." + *field->name + ")");
-          } else if ((*field->type == "char") || (*field->type == "wchar")) {
-            std::string valueType = (*field->type == "char") ? "UInt8" : "UInt32";
-            std::string utfType = (*field->type == "char") ? "utf8" : "utf16";
-              std::string opt = (field->optional) ? "?" : "";
-              WriteLineIndent("try container.encode(" + *field->name + opt + "." + utfType + ".map{ " + valueType + "($0) }[0], forKey: ." + *field->name + ")");
-          } else {
-              WriteLineIndent("try container.encode(" + *field->name + ", forKey: ." + *field->name + ")");
-          }
-        }
-    }
-    Indent(-1);
-    WriteLineIndent("}");
-
-    WriteLine();
-    if (s->base && !s->base->empty())
-        WriteLineIndent("open override func toJson() throws -> String {");
-    else
-        WriteLineIndent("open func toJson() throws -> String {");
-    Indent(1);
-    WriteLineIndent("return String(data: try JSONEncoder().encode(self), encoding: .utf8)!");
-    Indent(-1);
-    WriteLineIndent("}");
-
-    WriteLine();
-    if (s->base && !s->base->empty())
-        WriteLineIndent("open override class func fromJson(_ json: String) -> " + *s->name + " {");
-    else
-        WriteLineIndent("open class func fromJson(_ json: String) -> " + *s->name + " {");
-    Indent(1);
-    WriteLineIndent("return try! JSONDecoder().decode(" + *s->name + ".self, from: json.data(using: .utf8)!)");
-    Indent(-1);
-    WriteLineIndent("}");
 
     Indent(-1);
     WriteLineIndent("}");
@@ -5761,16 +5749,20 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
         }
     }
     WriteLine();
-    WriteLineIndent("var fbeBody = (4 + 4)");
+
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
+        WriteLineIndent("var fbeBody = (4 + 4)");
+    else
+        WriteLineIndent("let fbeBody = (4 + 4)");
+
     Indent(1);
     if (s->base && !s->base->empty())
         WriteLineIndent("fbeBody += parent.fbeBody - 4 - 4");
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("fbeBody += " + *field->name + ".fbeSize");
-    //WriteLineIndent(")");
-    WriteLineIndent("self.fbeBody = fbeBody");
     Indent(-1);
+    WriteLineIndent("self.fbeBody = fbeBody");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5801,16 +5793,18 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
         }
     }
     WriteLine();
-    WriteLineIndent("var fbeBody = (4 + 4)");
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
+        WriteLineIndent("var fbeBody = (4 + 4)");
+    else
+        WriteLineIndent("let fbeBody = (4 + 4)");
     Indent(1);
     if (s->base && !s->base->empty())
         WriteLineIndent("fbeBody += parent.fbeBody - 4 - 4");
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("fbeBody += " + *field->name + ".fbeSize");
-    //WriteLineIndent(")");
-    WriteLineIndent("self.fbeBody = fbeBody");
     Indent(-1);
+    WriteLineIndent("self.fbeBody = fbeBody");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5833,7 +5827,11 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLine();
     WriteLineIndent("_buffer.shift(offset: fbeStructOffset)");
     WriteLine();
-    WriteLineIndent("var fbeResult = fbeBody");
+
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
+        WriteLineIndent("var fbeResult = fbeBody");
+    else
+        WriteLineIndent("let fbeResult = fbeBody");
     Indent(1);
     if (s->base && !s->base->empty())
         WriteLineIndent("fbeResult += parent.fbeExtra");
@@ -6453,6 +6451,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
         WriteLineIndent("var fbeCurrentOffset: Int = 0");
         WriteLineIndent("var fbeCurrentSize: Int = 0");
         WriteLineIndent("var fbeFieldSize = Size()");
+
         if (s->base && !s->base->empty())
         {
             WriteLine();
@@ -6790,12 +6789,11 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent(ConvertPackageName(*import) + "Sender = " + domain + ConvertPackageName(*import) + "." + sender + "(buffer: buffer)");
     }
     if (p->body)
-    {
-        for (const auto& s : p->body->structs) {
+        for (const auto& s : p->body->structs)
+        {
             std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent(*s->name + "Model = " + struct_name + model + "(buffer: buffer)");
-          }
-    }
+        }
     WriteLineIndent("build(with: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
     WriteLineIndent("}");
@@ -6809,9 +6807,10 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     }
     if (p->body)
     {
-        for (const auto& s : p->body->structs) {
-          std::string struct_name = domain + package + "." + *s->name;
-          WriteLineIndent(*s->name + "Model = " + struct_name + model + "(buffer: buffer)");
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = domain + package + "." + *s->name;
+            WriteLineIndent(*s->name + "Model = " + struct_name + model + "(buffer: buffer)");
         }
 
     }
@@ -6820,8 +6819,15 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("}");
     WriteLine();
 
-    // Generate generic sender method
     WriteLineIndent("public func send(obj: Any) throws -> Int {");
+    Indent(1);
+    WriteLineIndent("return try send(obj: obj, listener: self as! "+ domain + "Fbe.LogListener)");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+
+    // Generate generic sender method
+    WriteLineIndent("public func send(obj: Any, listener: " + domain + "Fbe.LogListener) throws -> Int {");
     Indent(1);
     if (p->body)
     {
@@ -6830,7 +6836,7 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent("case is " + struct_name + ": return try send(value: obj as! " + struct_name + ")");
+            WriteLineIndent("case is " + struct_name + ": return try send(value: obj as! " + struct_name + ", listener: listener)");
         }
         WriteLineIndent("default: break");
         Indent(-1);
@@ -6843,7 +6849,7 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("var result: Int = 0");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("result = try " + ConvertPackageName(*import) + "Sender.send(obj: obj)");
+            WriteLineIndent("result = try " + ConvertPackageName(*import) + "Sender.send(obj: obj, listener: listener)");
             WriteLineIndent("if result > 0 {");
             Indent(1);
             WriteLineIndent("return result");
@@ -6865,6 +6871,12 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
             std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent("public func send(value: " + struct_name + ") throws -> Int {");
             Indent(1);
+            WriteLineIndent("return try send(value: value, listener: self as! "+ domain + "Fbe.LogListener)");
+            Indent(-1);
+            WriteLineIndent("}");
+
+            WriteLineIndent("public func send(value: " + struct_name + ", listener: " + domain + "Fbe.LogListener) throws -> Int {");
+            Indent(1);
             WriteLineIndent("// Serialize the value into the FBE stream");
             WriteLineIndent("let serialized = try " + *s->name + "Model.serialize(value: value)");
             WriteLineIndent("assert(serialized > 0, \"" + struct_name + " serialization failed!\")");
@@ -6874,7 +6886,7 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent("if logging {");
             Indent(1);
             WriteLineIndent("let message = value.description");
-            WriteLineIndent("onSendLog(message: message)");
+            WriteLineIndent("listener.onSendLog(message: message)");
             Indent(-1);
             WriteLineIndent("}");
             WriteLine();
@@ -6954,9 +6966,10 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
         }
         WriteLine();
         WriteLineIndent("// Receiver models accessors");
-        for (const auto& s : p->body->structs) {
-          std::string struct_name = domain + package + "." + *s->name;
-          WriteLineIndent("private var " + *s->name + "Model: " + *s->name + model);
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = domain + package + "." + *s->name;
+            WriteLineIndent("private var " + *s->name + "Model: " + *s->name + model);
         }
 
         WriteLine();
@@ -7038,7 +7051,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
             WriteLineIndent("{");
             Indent(1);
             WriteLineIndent("let message = " + *s->name + "Value.description");
-            WriteLineIndent("onReceiveLog(message: message)");
+            WriteLineIndent("listener.onReceiveLog(message: message)");
             Indent(-1);
             WriteLineIndent("}");
             WriteLine();
@@ -7115,7 +7128,8 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
             WriteLineIndent((first ? "" : ", ") + domain + ConvertPackageName(*import) + "." + listener);
             first = false;
         }
-    }
+    } else
+        WriteIndent(" : " + domain + "Fbe.LogListener");
     WriteIndent(" {");
     WriteLine();
     Indent(1);
@@ -7220,9 +7234,10 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     }
     if (p->body)
     {
-        for (const auto& s : p->body->structs) {
-          std::string struct_name = domain + package + "." + *s->name;
-          WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = domain + package + "." + *s->name;
+            WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
         }
     }
     WriteLineIndent("build(final: " + std::string(final ? "true" : "false") + ")");
@@ -7238,9 +7253,10 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     }
     if (p->body)
     {
-        for (const auto& s : p->body->structs) {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent(*s->name + "Model = " + struct_name+ model + "()");
+        for (const auto& s : p->body->structs)
+        {
+              std::string struct_name = domain + package + "." + *s->name;
+              WriteLineIndent(*s->name + "Model = " + struct_name+ model + "()");
         }
 
     }
@@ -7527,8 +7543,16 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("}");
     WriteLine();
 
-    // Generate generic client send method
+
     WriteLineIndent("public func send(obj: Any) throws -> Int {");
+    Indent(1);
+    WriteLineIndent("return try send(obj: obj, listener: self as! "+ domain + "Fbe.LogListener)");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+
+    // Generate generic client send method
+    WriteLineIndent("public func send(obj: Any, listener: " + domain + "Fbe.LogListener) throws -> Int {");
     Indent(1);
     if (p->body)
     {
@@ -7537,7 +7561,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent("case is " + struct_name + ": return try send(value: obj as! " + struct_name + ")");
+            WriteLineIndent("case is " + struct_name + ": return try send(value: obj as! " + struct_name + ", listener: listener)");
         }
         WriteLineIndent("default: break");
         Indent(-1);
@@ -7550,7 +7574,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("var result: Int = 0");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("result = try " + ConvertPackageName(*import) + "Sender.send(obj: obj)");
+            WriteLineIndent("result = try " + ConvertPackageName(*import) + "Sender.send(obj: obj, listener: listener)");
             WriteLineIndent("if result > 0 { return result }");
         }
         WriteLine();
@@ -7568,6 +7592,12 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
             std::string struct_name = domain + package + "." + *s->name;
             WriteLineIndent("public func send(value: " + struct_name + ") throws -> Int {");
             Indent(1);
+            WriteLineIndent("return try send(value: value, listener: self as! "+ domain + "Fbe.LogListener)");
+            Indent(-1);
+            WriteLineIndent("}");
+
+            WriteLineIndent("public func send(value: " + struct_name + ", listener: " + domain + "Fbe.LogListener) throws -> Int {");
+            Indent(1);
             WriteLineIndent("// Serialize the value into the FBE stream");
             WriteLineIndent("let serialized = try " + *s->name + "SenderModel.serialize(value: value)");
             WriteLineIndent("assert(serialized > 0, \"" + struct_name + " serialization failed!\")");
@@ -7577,7 +7607,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent("if logging {");
             Indent(1);
             WriteLineIndent("let message = value.description");
-            WriteLineIndent("onSendLog(message: message)");
+            WriteLineIndent("listener.onSendLog(message: message)");
             Indent(-1);
             WriteLineIndent("}");
             WriteLine();
@@ -7619,7 +7649,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent("if logging {");
             Indent(1);
             WriteLineIndent("let message = " + *s->name + "ReceiverValue.description");
-            WriteLineIndent("onReceiveLog(message: message)");
+            WriteLineIndent("listener.onReceiveLog(message: message)");
             Indent(-1);
             WriteLineIndent("}");
             WriteLine();
@@ -8067,7 +8097,7 @@ std::string GeneratorSwift::ConvertTypeName(const std::string& domain, const std
     else if (type == "string")
         return "String" + opt;
     else if (type == "timestamp")
-        return ((Version() < 8) ? "java.util.Date" : "TimeInterval") + opt;
+        return "TimeInterval" + opt;
     else if (type == "uuid")
         return "UUID" + opt;
 
@@ -8234,7 +8264,7 @@ std::string GeneratorSwift::ConvertTypeFieldType(const std::string& domain, cons
     else if (type == "string")
         return "String" + opt;
     else if (type == "timestamp")
-        return ((Version() < 8) ? "java.util.Date" : "TimeInterval") + opt;
+        return "TimeInterval" + opt;
     else if (type == "uuid")
         return "UUID" + opt;
 
@@ -8379,9 +8409,9 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
         return "";
     }
     else if (value == "epoch")
-        return ((Version() < 8) ? "java.util.Date(0)" : "0");
+        return "0";
     else if (value == "utc")
-        return ((Version() < 8) ? "java.util.Date(System.currentTimeMillis())" : "Date().timeIntervalSince1970");
+        return "Date().timeIntervalSince1970";
     else if (value == "uuid0")
         return domain + "Fbe.UUIDGenerator.nil()";
     else if (value == "uuid1")
@@ -8499,7 +8529,7 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
     else if (type == "string")
         return "\"\"";
     else if (type == "timestamp")
-        return ((Version() < 8) ? "java.util.Date(0)" : "0");
+        return "0";
     else if (type == "uuid")
         return domain + "Fbe.UUIDGenerator.nil()";
 
@@ -8555,7 +8585,7 @@ std::string GeneratorSwift::ConvertOutputStreamType(const std::string& type, con
     else if (type == "uuid")
         return ".append(\"\\\"\"); sb.append(" + name + opt + ".uuidString); sb.append(\"\\\"\")";
     else if (type == "timestamp")
-        return ((Version() < 8) ? ".append(" + name + opt + ".time * 1000000)" : ".append(\"\\(" + name + opt + " * 1000000000)\")");
+        return ".append(\"\\(" + name + opt + " * 1000000000)\")";
     else
         return ".append(" + name + opt + ".description)";
 }
@@ -8576,7 +8606,8 @@ std::string GeneratorSwift::ConvertDomain(const std::shared_ptr<Package>& packag
     CppCommon::StringUtils::ReplaceAll(domain, "com.", "");
     domain[0] = toupper(domain[0]);
     size_t pos = domain.find_last_of('.');
-    while(pos != std::string::npos) {
+    while(pos != std::string::npos)
+    {
         domain[pos + 1] = toupper(domain[pos + 1]);
         domain.erase(pos, 1);
         pos = domain.find_last_of('.');

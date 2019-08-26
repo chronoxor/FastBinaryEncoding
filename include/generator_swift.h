@@ -1,8 +1,10 @@
 /*!
     \file generator_swift.h
     \brief Fast binary encoding Kotlin generator definition
-    \author Ivan Shynkarenka
-    \date 03.10.2018
+    \author Andrey Zbranevich
+    \ Based on original Fast binary encoding generator design by
+    \ Ivan Shynkarenka
+    \date 01.08.2019
     \copyright MIT License
 */
 
@@ -78,14 +80,13 @@ private:
     void GenerateFBEFinalModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type);
     void GenerateFBESender(const std::string& domain, const std::string& package);
     void GenerateFBEReceiver(const std::string& domain, const std::string& package);
+    void GenerateFBEReceiverListener(const std::string& domain, const std::string& package);
     void GenerateFBEClient(const std::string& domain, const std::string& package);
-    void GenerateFBEJson(const std::string& domain, const std::string& package);
 
     void GenerateContainers(const std::shared_ptr<Package>& p, bool final);
     void GeneratePackage(const std::shared_ptr<Package>& p);
     void GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path);
     void GenerateEnumClass(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path);
-    void GenerateEnumJson(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e);
     void GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& e, const CppCommon::Path& path);
     void GenerateFlagsClass(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& e, const CppCommon::Path& path);
     void GenerateFlagsJson(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& e);
@@ -109,8 +110,8 @@ private:
     bool IsPrimitiveType(const std::string& type, bool optional);
     bool IsUnsignedType(const std::string& type);
 
-std::string CreateSwiftPackagePath(const std::string& domain, const std::string& package);
-std::string CreatePackagePath(const std::string& domain, const std::string& package);
+    std::string CreateSwiftPackagePath(const std::string& domain, const std::string& package);
+    std::string CreatePackagePath(const std::string& domain, const std::string& package);
 
     std::string ConvertEnumBase(const std::string& type);
     std::string ConvertEnumType(const std::string& type);

@@ -3,7 +3,7 @@
 */
 
 // Domain declaration
-domain com.chronoxor.wow
+domain com.chronoxor
 
 // Package declaration
 package proto

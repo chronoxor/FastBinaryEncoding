@@ -69,7 +69,7 @@ public class FieldModelStructNested: FieldModel {
             fbeBody += f1009.fbeSize
             fbeBody += f1010.fbeSize
             fbeBody += f1011.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // 
@@ -105,7 +105,7 @@ public class FieldModelStructNested: FieldModel {
             fbeBody += f1009.fbeSize
             fbeBody += f1010.fbeSize
             fbeBody += f1011.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // Field extra size

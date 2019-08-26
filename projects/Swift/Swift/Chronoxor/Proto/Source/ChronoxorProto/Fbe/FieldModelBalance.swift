@@ -35,7 +35,7 @@ public class FieldModelBalance: FieldModel {
         var fbeBody = (4 + 4)
             fbeBody += currency.fbeSize
             fbeBody += amount.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // 
@@ -49,7 +49,7 @@ public class FieldModelBalance: FieldModel {
         var fbeBody = (4 + 4)
             fbeBody += currency.fbeSize
             fbeBody += amount.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // Field extra size

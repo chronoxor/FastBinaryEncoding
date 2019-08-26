@@ -20,9 +20,6 @@ public protocol SenderProtocol: class {
 
     // Send message handler
     func onSend(buffer: Data, offset: Int, size: Int) throws -> Int
-
-    // Send log message handler
-    func onSendLog(message: String)
 }
 
 public extension SenderProtocol {
@@ -55,9 +52,5 @@ public extension SenderProtocol {
         let sent = try onSend(buffer: buffer.data, offset: 0, size: buffer.size)
         try _ = buffer.remove(offset: 0, size: sent)
         return sent
-    }
-
-    func onSendLog(message: String) {
-
     }
 }

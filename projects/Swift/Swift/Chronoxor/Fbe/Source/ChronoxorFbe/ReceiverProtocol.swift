@@ -19,9 +19,6 @@ public protocol ReceiverProtocol: class {
 
     // Receive message handler
     func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool
-
-    // Receive log message handler
-    func onReceiveLog(message: String)
 }
 
 public extension ReceiverProtocol {
@@ -307,6 +304,4 @@ public extension ReceiverProtocol {
             size1 = self.buffer.size
         }
     }
-
-    func onReceiveLog(message: String) { }
 }

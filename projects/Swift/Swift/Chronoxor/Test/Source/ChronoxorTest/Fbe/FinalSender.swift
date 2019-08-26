@@ -65,25 +65,29 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
     }
 
     public func send(obj: Any) throws -> Int {
+        return try send(obj: obj, listener: self as! ChronoxorFbe.LogListener)
+    }
+
+    public func send(obj: Any, listener: ChronoxorFbe.LogListener) throws -> Int {
         switch obj {
-            case is ChronoxorTest.StructSimple: return try send(value: obj as! ChronoxorTest.StructSimple)
-            case is ChronoxorTest.StructOptional: return try send(value: obj as! ChronoxorTest.StructOptional)
-            case is ChronoxorTest.StructNested: return try send(value: obj as! ChronoxorTest.StructNested)
-            case is ChronoxorTest.StructBytes: return try send(value: obj as! ChronoxorTest.StructBytes)
-            case is ChronoxorTest.StructArray: return try send(value: obj as! ChronoxorTest.StructArray)
-            case is ChronoxorTest.StructVector: return try send(value: obj as! ChronoxorTest.StructVector)
-            case is ChronoxorTest.StructList: return try send(value: obj as! ChronoxorTest.StructList)
-            case is ChronoxorTest.StructSet: return try send(value: obj as! ChronoxorTest.StructSet)
-            case is ChronoxorTest.StructMap: return try send(value: obj as! ChronoxorTest.StructMap)
-            case is ChronoxorTest.StructHash: return try send(value: obj as! ChronoxorTest.StructHash)
-            case is ChronoxorTest.StructHashEx: return try send(value: obj as! ChronoxorTest.StructHashEx)
-            case is ChronoxorTest.StructEmpty: return try send(value: obj as! ChronoxorTest.StructEmpty)
+            case is ChronoxorTest.StructSimple: return try send(value: obj as! ChronoxorTest.StructSimple, listener: listener)
+            case is ChronoxorTest.StructOptional: return try send(value: obj as! ChronoxorTest.StructOptional, listener: listener)
+            case is ChronoxorTest.StructNested: return try send(value: obj as! ChronoxorTest.StructNested, listener: listener)
+            case is ChronoxorTest.StructBytes: return try send(value: obj as! ChronoxorTest.StructBytes, listener: listener)
+            case is ChronoxorTest.StructArray: return try send(value: obj as! ChronoxorTest.StructArray, listener: listener)
+            case is ChronoxorTest.StructVector: return try send(value: obj as! ChronoxorTest.StructVector, listener: listener)
+            case is ChronoxorTest.StructList: return try send(value: obj as! ChronoxorTest.StructList, listener: listener)
+            case is ChronoxorTest.StructSet: return try send(value: obj as! ChronoxorTest.StructSet, listener: listener)
+            case is ChronoxorTest.StructMap: return try send(value: obj as! ChronoxorTest.StructMap, listener: listener)
+            case is ChronoxorTest.StructHash: return try send(value: obj as! ChronoxorTest.StructHash, listener: listener)
+            case is ChronoxorTest.StructHashEx: return try send(value: obj as! ChronoxorTest.StructHashEx, listener: listener)
+            case is ChronoxorTest.StructEmpty: return try send(value: obj as! ChronoxorTest.StructEmpty, listener: listener)
             default: break
         }
 
         // Try to send using imported senders
         var result: Int = 0
-        result = try ProtoSender.send(obj: obj)
+        result = try ProtoSender.send(obj: obj, listener: listener)
         if result > 0 {
             return result
             }
@@ -92,6 +96,9 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
     }
 
     public func send(value: ChronoxorTest.StructSimple) throws -> Int {
+        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+    }
+    public func send(value: ChronoxorTest.StructSimple, listener: ChronoxorFbe.LogListener) throws -> Int {
         // Serialize the value into the FBE stream
         let serialized = try StructSimpleModel.serialize(value: value)
         assert(serialized > 0, "ChronoxorTest.StructSimple serialization failed!")
@@ -100,13 +107,16 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
         // Log the value
         if logging {
             let message = value.description
-            onSendLog(message: message)
+            listener.onSendLog(message: message)
         }
 
         // Send the serialized value
         return try sendSerialized(serialized: serialized)
     }
     public func send(value: ChronoxorTest.StructOptional) throws -> Int {
+        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+    }
+    public func send(value: ChronoxorTest.StructOptional, listener: ChronoxorFbe.LogListener) throws -> Int {
         // Serialize the value into the FBE stream
         let serialized = try StructOptionalModel.serialize(value: value)
         assert(serialized > 0, "ChronoxorTest.StructOptional serialization failed!")
@@ -115,13 +125,16 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
         // Log the value
         if logging {
             let message = value.description
-            onSendLog(message: message)
+            listener.onSendLog(message: message)
         }
 
         // Send the serialized value
         return try sendSerialized(serialized: serialized)
     }
     public func send(value: ChronoxorTest.StructNested) throws -> Int {
+        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+    }
+    public func send(value: ChronoxorTest.StructNested, listener: ChronoxorFbe.LogListener) throws -> Int {
         // Serialize the value into the FBE stream
         let serialized = try StructNestedModel.serialize(value: value)
         assert(serialized > 0, "ChronoxorTest.StructNested serialization failed!")
@@ -130,13 +143,16 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
         // Log the value
         if logging {
             let message = value.description
-            onSendLog(message: message)
+            listener.onSendLog(message: message)
         }
 
         // Send the serialized value
         return try sendSerialized(serialized: serialized)
     }
     public func send(value: ChronoxorTest.StructBytes) throws -> Int {
+        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+    }
+    public func send(value: ChronoxorTest.StructBytes, listener: ChronoxorFbe.LogListener) throws -> Int {
         // Serialize the value into the FBE stream
         let serialized = try StructBytesModel.serialize(value: value)
         assert(serialized > 0, "ChronoxorTest.StructBytes serialization failed!")
@@ -145,13 +161,16 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
         // Log the value
         if logging {
             let message = value.description
-            onSendLog(message: message)
+            listener.onSendLog(message: message)
         }
 
         // Send the serialized value
         return try sendSerialized(serialized: serialized)
     }
     public func send(value: ChronoxorTest.StructArray) throws -> Int {
+        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+    }
+    public func send(value: ChronoxorTest.StructArray, listener: ChronoxorFbe.LogListener) throws -> Int {
         // Serialize the value into the FBE stream
         let serialized = try StructArrayModel.serialize(value: value)
         assert(serialized > 0, "ChronoxorTest.StructArray serialization failed!")
@@ -160,13 +179,16 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
         // Log the value
         if logging {
             let message = value.description
-            onSendLog(message: message)
+            listener.onSendLog(message: message)
         }
 
         // Send the serialized value
         return try sendSerialized(serialized: serialized)
     }
     public func send(value: ChronoxorTest.StructVector) throws -> Int {
+        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+    }
+    public func send(value: ChronoxorTest.StructVector, listener: ChronoxorFbe.LogListener) throws -> Int {
         // Serialize the value into the FBE stream
         let serialized = try StructVectorModel.serialize(value: value)
         assert(serialized > 0, "ChronoxorTest.StructVector serialization failed!")
@@ -175,13 +197,16 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
         // Log the value
         if logging {
             let message = value.description
-            onSendLog(message: message)
+            listener.onSendLog(message: message)
         }
 
         // Send the serialized value
         return try sendSerialized(serialized: serialized)
     }
     public func send(value: ChronoxorTest.StructList) throws -> Int {
+        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+    }
+    public func send(value: ChronoxorTest.StructList, listener: ChronoxorFbe.LogListener) throws -> Int {
         // Serialize the value into the FBE stream
         let serialized = try StructListModel.serialize(value: value)
         assert(serialized > 0, "ChronoxorTest.StructList serialization failed!")
@@ -190,13 +215,16 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
         // Log the value
         if logging {
             let message = value.description
-            onSendLog(message: message)
+            listener.onSendLog(message: message)
         }
 
         // Send the serialized value
         return try sendSerialized(serialized: serialized)
     }
     public func send(value: ChronoxorTest.StructSet) throws -> Int {
+        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+    }
+    public func send(value: ChronoxorTest.StructSet, listener: ChronoxorFbe.LogListener) throws -> Int {
         // Serialize the value into the FBE stream
         let serialized = try StructSetModel.serialize(value: value)
         assert(serialized > 0, "ChronoxorTest.StructSet serialization failed!")
@@ -205,13 +233,16 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
         // Log the value
         if logging {
             let message = value.description
-            onSendLog(message: message)
+            listener.onSendLog(message: message)
         }
 
         // Send the serialized value
         return try sendSerialized(serialized: serialized)
     }
     public func send(value: ChronoxorTest.StructMap) throws -> Int {
+        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+    }
+    public func send(value: ChronoxorTest.StructMap, listener: ChronoxorFbe.LogListener) throws -> Int {
         // Serialize the value into the FBE stream
         let serialized = try StructMapModel.serialize(value: value)
         assert(serialized > 0, "ChronoxorTest.StructMap serialization failed!")
@@ -220,13 +251,16 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
         // Log the value
         if logging {
             let message = value.description
-            onSendLog(message: message)
+            listener.onSendLog(message: message)
         }
 
         // Send the serialized value
         return try sendSerialized(serialized: serialized)
     }
     public func send(value: ChronoxorTest.StructHash) throws -> Int {
+        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+    }
+    public func send(value: ChronoxorTest.StructHash, listener: ChronoxorFbe.LogListener) throws -> Int {
         // Serialize the value into the FBE stream
         let serialized = try StructHashModel.serialize(value: value)
         assert(serialized > 0, "ChronoxorTest.StructHash serialization failed!")
@@ -235,13 +269,16 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
         // Log the value
         if logging {
             let message = value.description
-            onSendLog(message: message)
+            listener.onSendLog(message: message)
         }
 
         // Send the serialized value
         return try sendSerialized(serialized: serialized)
     }
     public func send(value: ChronoxorTest.StructHashEx) throws -> Int {
+        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+    }
+    public func send(value: ChronoxorTest.StructHashEx, listener: ChronoxorFbe.LogListener) throws -> Int {
         // Serialize the value into the FBE stream
         let serialized = try StructHashExModel.serialize(value: value)
         assert(serialized > 0, "ChronoxorTest.StructHashEx serialization failed!")
@@ -250,13 +287,16 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
         // Log the value
         if logging {
             let message = value.description
-            onSendLog(message: message)
+            listener.onSendLog(message: message)
         }
 
         // Send the serialized value
         return try sendSerialized(serialized: serialized)
     }
     public func send(value: ChronoxorTest.StructEmpty) throws -> Int {
+        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+    }
+    public func send(value: ChronoxorTest.StructEmpty, listener: ChronoxorFbe.LogListener) throws -> Int {
         // Serialize the value into the FBE stream
         let serialized = try StructEmptyModel.serialize(value: value)
         assert(serialized > 0, "ChronoxorTest.StructEmpty serialization failed!")
@@ -265,7 +305,7 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
         // Log the value
         if logging {
             let message = value.description
-            onSendLog(message: message)
+            listener.onSendLog(message: message)
         }
 
         // Send the serialized value

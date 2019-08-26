@@ -39,7 +39,7 @@ public class FieldModelStructBytes: FieldModel {
             fbeBody += f1.fbeSize
             fbeBody += f2.fbeSize
             fbeBody += f3.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // 
@@ -55,7 +55,7 @@ public class FieldModelStructBytes: FieldModel {
             fbeBody += f1.fbeSize
             fbeBody += f2.fbeSize
             fbeBody += f3.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // Field extra size

@@ -6,7 +6,7 @@
 import ChronoxorFbe
 
 // Fast Binary Encoding Proto receiver listener
-public protocol ReceiverListener {
+public protocol ReceiverListener : ChronoxorFbe.LogListener {
     func onReceive(value: ChronoxorProto.Order)
     func onReceive(value: ChronoxorProto.Balance)
     func onReceive(value: ChronoxorProto.Account)

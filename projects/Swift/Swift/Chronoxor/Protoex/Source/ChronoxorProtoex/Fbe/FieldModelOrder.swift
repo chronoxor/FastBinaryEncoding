@@ -54,7 +54,7 @@ public class FieldModelOrder: FieldModel {
             fbeBody += volume.fbeSize
             fbeBody += tp.fbeSize
             fbeBody += sl.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // 
@@ -80,7 +80,7 @@ public class FieldModelOrder: FieldModel {
             fbeBody += volume.fbeSize
             fbeBody += tp.fbeSize
             fbeBody += sl.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // Field extra size

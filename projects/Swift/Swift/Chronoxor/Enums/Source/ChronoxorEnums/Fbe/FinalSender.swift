@@ -26,8 +26,12 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
     }
 
     public func send(obj: Any) throws -> Int {
+        return try send(obj: obj, listener: self as! ChronoxorFbe.LogListener)
+    }
+
+    public func send(obj: Any, listener: ChronoxorFbe.LogListener) throws -> Int {
         switch obj {
-            case is ChronoxorEnums.Enums: return try send(value: obj as! ChronoxorEnums.Enums)
+            case is ChronoxorEnums.Enums: return try send(value: obj as! ChronoxorEnums.Enums, listener: listener)
             default: break
         }
 
@@ -35,6 +39,9 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
     }
 
     public func send(value: ChronoxorEnums.Enums) throws -> Int {
+        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+    }
+    public func send(value: ChronoxorEnums.Enums, listener: ChronoxorFbe.LogListener) throws -> Int {
         // Serialize the value into the FBE stream
         let serialized = try EnumsModel.serialize(value: value)
         assert(serialized > 0, "ChronoxorEnums.Enums serialization failed!")
@@ -43,7 +50,7 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
         // Log the value
         if logging {
             let message = value.description
-            onSendLog(message: message)
+            listener.onSendLog(message: message)
         }
 
         // Send the serialized value

@@ -47,7 +47,7 @@ public class FieldModelOrder: FieldModel {
             fbeBody += type.fbeSize
             fbeBody += price.fbeSize
             fbeBody += volume.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // 
@@ -69,7 +69,7 @@ public class FieldModelOrder: FieldModel {
             fbeBody += type.fbeSize
             fbeBody += price.fbeSize
             fbeBody += volume.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // Field extra size

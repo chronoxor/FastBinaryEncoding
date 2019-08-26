@@ -83,7 +83,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = OrderValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -100,7 +100,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = BalanceValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -117,7 +117,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = AccountValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -134,7 +134,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = OrderMessageValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -151,7 +151,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = BalanceMessageValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -168,7 +168,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = AccountMessageValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value

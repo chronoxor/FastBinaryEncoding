@@ -119,7 +119,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = StructSimpleValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -136,7 +136,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = StructOptionalValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -153,7 +153,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = StructNestedValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -170,7 +170,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = StructBytesValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -187,7 +187,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = StructArrayValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -204,7 +204,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = StructVectorValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -221,7 +221,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = StructListValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -238,7 +238,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = StructSetValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -255,7 +255,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = StructMapValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -272,7 +272,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = StructHashValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -289,7 +289,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = StructHashExValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -306,7 +306,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = StructEmptyValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value

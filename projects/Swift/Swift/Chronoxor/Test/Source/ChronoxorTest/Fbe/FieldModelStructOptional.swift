@@ -231,7 +231,7 @@ public class FieldModelStructOptional: FieldModel {
             fbeBody += f163.fbeSize
             fbeBody += f164.fbeSize
             fbeBody += f165.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // 
@@ -375,7 +375,7 @@ public class FieldModelStructOptional: FieldModel {
             fbeBody += f163.fbeSize
             fbeBody += f164.fbeSize
             fbeBody += f165.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // Field extra size

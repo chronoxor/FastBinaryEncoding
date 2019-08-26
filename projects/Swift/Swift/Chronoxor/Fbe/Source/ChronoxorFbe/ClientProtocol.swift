@@ -22,15 +22,9 @@ public protocol ClientProtocol: class {
 
     // Send message handler
     func onSend(buffer: Data, offset: Int, size: Int) throws -> Int
-    // Send log message handler
-    func onSendLog(message: String)
 
     // Receive message handler
     func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool
-
-    // Receive log message handler
-    func onReceiveLog(message: String)
-
 }
 
 public extension ClientProtocol {
@@ -68,8 +62,6 @@ public extension ClientProtocol {
         try sendBuffer.remove(offset: 0, size: sent)
         return sent
     }
-
-    func onSendLog(message: String) { }
 
     // Receive data
     func receive(buffer: inout Data ) throws {
@@ -333,6 +325,4 @@ public extension ClientProtocol {
             size1 = self.receiveBuffer.size
         }
     }
-
-    func onReceiveLog(message: String) { }
 }

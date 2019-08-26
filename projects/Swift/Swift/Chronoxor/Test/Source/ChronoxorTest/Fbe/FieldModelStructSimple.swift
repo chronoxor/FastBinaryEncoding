@@ -165,7 +165,7 @@ public class FieldModelStructSimple: FieldModel {
             fbeBody += f42.fbeSize
             fbeBody += f43.fbeSize
             fbeBody += f44.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // 
@@ -265,7 +265,7 @@ public class FieldModelStructSimple: FieldModel {
             fbeBody += f42.fbeSize
             fbeBody += f43.fbeSize
             fbeBody += f44.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // Field extra size

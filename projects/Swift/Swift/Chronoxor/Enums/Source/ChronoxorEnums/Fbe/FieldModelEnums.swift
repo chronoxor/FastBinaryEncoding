@@ -227,7 +227,7 @@ public class FieldModelEnums: FieldModel {
             fbeBody += uint64b3.fbeSize
             fbeBody += uint64b4.fbeSize
             fbeBody += uint64b5.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // 
@@ -369,7 +369,7 @@ public class FieldModelEnums: FieldModel {
             fbeBody += uint64b3.fbeSize
             fbeBody += uint64b4.fbeSize
             fbeBody += uint64b5.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // Field extra size

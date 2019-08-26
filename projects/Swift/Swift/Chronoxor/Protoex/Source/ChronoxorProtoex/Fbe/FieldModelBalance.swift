@@ -36,7 +36,7 @@ public class FieldModelBalance: FieldModel {
         var fbeBody = (4 + 4)
             fbeBody += parent.fbeBody - 4 - 4
             fbeBody += locked.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // 
@@ -50,7 +50,7 @@ public class FieldModelBalance: FieldModel {
         var fbeBody = (4 + 4)
             fbeBody += parent.fbeBody - 4 - 4
             fbeBody += locked.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // Field extra size

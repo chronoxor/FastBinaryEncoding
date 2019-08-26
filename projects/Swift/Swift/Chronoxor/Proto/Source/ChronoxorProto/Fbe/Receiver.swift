@@ -59,7 +59,7 @@ open class Receiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = OrderValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -76,7 +76,7 @@ open class Receiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = BalanceValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
@@ -93,7 +93,7 @@ open class Receiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = AccountValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value

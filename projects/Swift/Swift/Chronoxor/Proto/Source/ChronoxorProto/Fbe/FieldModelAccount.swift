@@ -47,7 +47,7 @@ public class FieldModelAccount: FieldModel {
             fbeBody += wallet.fbeSize
             fbeBody += asset.fbeSize
             fbeBody += orders.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // 
@@ -69,7 +69,7 @@ public class FieldModelAccount: FieldModel {
             fbeBody += wallet.fbeSize
             fbeBody += asset.fbeSize
             fbeBody += orders.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // Field extra size

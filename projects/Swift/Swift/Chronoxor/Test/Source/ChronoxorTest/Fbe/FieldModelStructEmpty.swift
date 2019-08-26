@@ -29,8 +29,8 @@ public class FieldModelStructEmpty: FieldModel {
         _offset = offset
 
 
-        var fbeBody = (4 + 4)
-            self.fbeBody = fbeBody
+        let fbeBody = (4 + 4)
+        self.fbeBody = fbeBody
     }
 
     // 
@@ -39,8 +39,8 @@ public class FieldModelStructEmpty: FieldModel {
         _offset = offset
 
 
-        var fbeBody = (4 + 4)
-            self.fbeBody = fbeBody
+        let fbeBody = (4 + 4)
+        self.fbeBody = fbeBody
     }
 
     // Field extra size
@@ -56,7 +56,7 @@ public class FieldModelStructEmpty: FieldModel {
 
         _buffer.shift(offset: fbeStructOffset)
 
-        var fbeResult = fbeBody
+        let fbeResult = fbeBody
 
         _buffer.unshift(offset: fbeStructOffset)
 

@@ -47,7 +47,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             if (logging)
             {
                 let message = EnumsValue.description
-                onReceiveLog(message: message)
+                listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value

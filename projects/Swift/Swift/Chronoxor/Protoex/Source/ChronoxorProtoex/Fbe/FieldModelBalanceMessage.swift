@@ -33,7 +33,7 @@ public class FieldModelBalanceMessage: FieldModel {
 
         var fbeBody = (4 + 4)
             fbeBody += body.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // 
@@ -45,7 +45,7 @@ public class FieldModelBalanceMessage: FieldModel {
 
         var fbeBody = (4 + 4)
             fbeBody += body.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // Field extra size

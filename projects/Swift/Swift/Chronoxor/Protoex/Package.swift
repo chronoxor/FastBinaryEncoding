@@ -1,4 +1,5 @@
 // swift-tools-version:5.1
+// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
@@ -13,7 +14,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(path: "../Fbe"),
- .package(path: "../Proto"),
+        .package(path: "../Proto"),
  
     ],
     targets: [
@@ -21,6 +22,6 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "ChronoxorProtoex",
-            dependencies: ["ChronoxorFbe", "ChronoxorProto", ]),
+            dependencies: ["ChronoxorFbe", "ChronoxorProto",]),
     ]
 )

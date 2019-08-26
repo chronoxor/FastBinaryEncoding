@@ -60,7 +60,7 @@ public class FieldModelStructHash: FieldModel {
             fbeBody += f8.fbeSize
             fbeBody += f9.fbeSize
             fbeBody += f10.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // 
@@ -90,7 +90,7 @@ public class FieldModelStructHash: FieldModel {
             fbeBody += f8.fbeSize
             fbeBody += f9.fbeSize
             fbeBody += f10.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // Field extra size

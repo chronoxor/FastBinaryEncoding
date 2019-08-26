@@ -36,7 +36,7 @@ public class FieldModelStructHashEx: FieldModel {
         var fbeBody = (4 + 4)
             fbeBody += f1.fbeSize
             fbeBody += f2.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // 
@@ -50,7 +50,7 @@ public class FieldModelStructHashEx: FieldModel {
         var fbeBody = (4 + 4)
             fbeBody += f1.fbeSize
             fbeBody += f2.fbeSize
-            self.fbeBody = fbeBody
+        self.fbeBody = fbeBody
     }
 
     // Field extra size

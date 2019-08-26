@@ -32,6 +32,10 @@ fileprivate class MyFinalReceiver: FinalReceiver, ChronoxorProto.FinalReceiverLi
     func onReceive(value: ChronoxorProto.Account) {
         _account = true
     }
+    
+//    func onReceiveLog(message: String) {
+//        
+//    }
 }
 
 class TestSendReceiveFinal: XCTestCase {
