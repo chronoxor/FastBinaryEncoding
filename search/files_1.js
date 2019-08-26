@@ -17,5 +17,7 @@ var searchData=
   ['generator_5fpython_2ecpp',['generator_python.cpp',['../generator__python_8cpp.html',1,'']]],
   ['generator_5fpython_2eh',['generator_python.h',['../generator__python_8h.html',1,'']]],
   ['generator_5fruby_2ecpp',['generator_ruby.cpp',['../generator__ruby_8cpp.html',1,'']]],
-  ['generator_5fruby_2eh',['generator_ruby.h',['../generator__ruby_8h.html',1,'']]]
+  ['generator_5fruby_2eh',['generator_ruby.h',['../generator__ruby_8h.html',1,'']]],
+  ['generator_5fswift_2ecpp',['generator_swift.cpp',['../generator__swift_8cpp.html',1,'']]],
+  ['generator_5fswift_2eh',['generator_swift.h',['../generator__swift_8h.html',1,'']]]
 ];

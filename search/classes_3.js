@@ -8,5 +8,6 @@ var searchData=
   ['generatorjavascript',['GeneratorJavaScript',['../class_f_b_e_1_1_generator_java_script.html',1,'FBE']]],
   ['generatorkotlin',['GeneratorKotlin',['../class_f_b_e_1_1_generator_kotlin.html',1,'FBE']]],
   ['generatorpython',['GeneratorPython',['../class_f_b_e_1_1_generator_python.html',1,'FBE']]],
-  ['generatorruby',['GeneratorRuby',['../class_f_b_e_1_1_generator_ruby.html',1,'FBE']]]
+  ['generatorruby',['GeneratorRuby',['../class_f_b_e_1_1_generator_ruby.html',1,'FBE']]],
+  ['generatorswift',['GeneratorSwift',['../class_f_b_e_1_1_generator_swift.html',1,'FBE']]]
 ];
