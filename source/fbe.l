@@ -338,7 +338,7 @@ int main(int argc, char** argv)
     {
         if (!quiet) std::cout << "Generating Swift code...";
         FBE::GeneratorSwift(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
-        if (!quiet) std::cout << "Done! :)" << std::endl;
+        if (!quiet) std::cout << "Done!" << std::endl;
     }
 
     // Destroy the lexical parser
