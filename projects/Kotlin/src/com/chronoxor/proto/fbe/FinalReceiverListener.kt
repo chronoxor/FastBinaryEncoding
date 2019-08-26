@@ -8,7 +8,7 @@
 package com.chronoxor.proto.fbe
 
 // Fast Binary Encoding com.chronoxor.proto final receiver listener
-interface FinalReceiverListener
+interface FinalReceiverListener : com.chronoxor.fbe.ReceiverListener
 {
     fun onReceive(value: com.chronoxor.proto.OrderMessage) {}
     fun onReceive(value: com.chronoxor.proto.BalanceMessage) {}

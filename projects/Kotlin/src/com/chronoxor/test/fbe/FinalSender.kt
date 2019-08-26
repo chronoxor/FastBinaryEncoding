@@ -9,7 +9,7 @@ package com.chronoxor.test.fbe
 
 // Fast Binary Encoding com.chronoxor.test final sender
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
-open class FinalSender : com.chronoxor.fbe.Sender
+open class FinalSender : com.chronoxor.fbe.Sender, FinalSenderListener
 {
     // Imported senders
     val protoSender: com.chronoxor.proto.fbe.FinalSender
@@ -26,14 +26,19 @@ open class FinalSender : com.chronoxor.fbe.Sender
         protoSender = com.chronoxor.proto.fbe.FinalSender(buffer)
     }
 
-    @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
     fun send(obj: Any): Long
+    {
+        return sendListener(this, obj)
+    }
+
+    @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
+    fun sendListener(listener: FinalSenderListener, obj: Any): Long
     {
 
         // Try to send using imported senders
         @Suppress("CanBeVal")
         var result: Long
-        result = protoSender.send(obj)
+        result = protoSender.sendListener(listener, obj)
         if (result > 0)
             return result
 

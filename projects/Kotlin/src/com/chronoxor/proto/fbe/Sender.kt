@@ -9,7 +9,7 @@ package com.chronoxor.proto.fbe
 
 // Fast Binary Encoding com.chronoxor.proto sender
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
-open class Sender : com.chronoxor.fbe.Sender
+open class Sender : com.chronoxor.fbe.Sender, SenderListener
 {
     // Sender models accessors
     val OrderMessageModel: OrderMessageModel
@@ -30,20 +30,30 @@ open class Sender : com.chronoxor.fbe.Sender
         AccountMessageModel = AccountMessageModel(buffer)
     }
 
-    @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
     fun send(obj: Any): Long
+    {
+        return sendListener(this, obj)
+    }
+
+    @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
+    fun sendListener(listener: SenderListener, obj: Any): Long
     {
         when (obj)
         {
-            is com.chronoxor.proto.OrderMessage -> if (obj.fbeType == OrderMessageModel.fbeType) return send(obj)
-            is com.chronoxor.proto.BalanceMessage -> if (obj.fbeType == BalanceMessageModel.fbeType) return send(obj)
-            is com.chronoxor.proto.AccountMessage -> if (obj.fbeType == AccountMessageModel.fbeType) return send(obj)
+            is com.chronoxor.proto.OrderMessage -> if (obj.fbeType == OrderMessageModel.fbeType) return sendListener(listener, obj)
+            is com.chronoxor.proto.BalanceMessage -> if (obj.fbeType == BalanceMessageModel.fbeType) return sendListener(listener, obj)
+            is com.chronoxor.proto.AccountMessage -> if (obj.fbeType == AccountMessageModel.fbeType) return sendListener(listener, obj)
         }
 
         return 0
     }
 
     fun send(value: com.chronoxor.proto.OrderMessage): Long
+    {
+        return sendListener(this, value)
+    }
+
+    fun sendListener(listener: SenderListener, value: com.chronoxor.proto.OrderMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = OrderMessageModel.serialize(value)
@@ -54,13 +64,18 @@ open class Sender : com.chronoxor.fbe.Sender
         if (logging)
         {
             val message = value.toString()
-            onSendLog(message)
+            listener.onSendLog(message)
         }
 
         // Send the serialized value
         return sendSerialized(serialized)
     }
     fun send(value: com.chronoxor.proto.BalanceMessage): Long
+    {
+        return sendListener(this, value)
+    }
+
+    fun sendListener(listener: SenderListener, value: com.chronoxor.proto.BalanceMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = BalanceMessageModel.serialize(value)
@@ -71,13 +86,18 @@ open class Sender : com.chronoxor.fbe.Sender
         if (logging)
         {
             val message = value.toString()
-            onSendLog(message)
+            listener.onSendLog(message)
         }
 
         // Send the serialized value
         return sendSerialized(serialized)
     }
     fun send(value: com.chronoxor.proto.AccountMessage): Long
+    {
+        return sendListener(this, value)
+    }
+
+    fun sendListener(listener: SenderListener, value: com.chronoxor.proto.AccountMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = AccountMessageModel.serialize(value)
@@ -88,7 +108,7 @@ open class Sender : com.chronoxor.fbe.Sender
         if (logging)
         {
             val message = value.toString()
-            onSendLog(message)
+            listener.onSendLog(message)
         }
 
         // Send the serialized value

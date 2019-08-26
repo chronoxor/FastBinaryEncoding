@@ -8,6 +8,6 @@
 package com.chronoxor.enums.fbe
 
 // Fast Binary Encoding com.chronoxor.enums proxy listener
-interface ProxyListener
+interface ProxyListener : com.chronoxor.fbe.ReceiverListener
 {
 }

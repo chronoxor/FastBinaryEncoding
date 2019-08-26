@@ -9,7 +9,7 @@ package com.chronoxor.proto.fbe
 
 // Fast Binary Encoding com.chronoxor.proto final client
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
-open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
+open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
 {
     // Client sender models accessors
     val OrderMessageSenderModel: OrderMessageFinalModel
@@ -52,20 +52,30 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
         AccountMessageReceiverModel = AccountMessageFinalModel()
     }
 
-    @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
     fun send(obj: Any): Long
+    {
+        return sendListener(this, obj)
+    }
+
+    @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
+    fun sendListener(listener: FinalClientListener, obj: Any): Long
     {
         when (obj)
         {
-            is com.chronoxor.proto.OrderMessage -> if (obj.fbeType == OrderMessageSenderModel.fbeType) return send(obj)
-            is com.chronoxor.proto.BalanceMessage -> if (obj.fbeType == BalanceMessageSenderModel.fbeType) return send(obj)
-            is com.chronoxor.proto.AccountMessage -> if (obj.fbeType == AccountMessageSenderModel.fbeType) return send(obj)
+            is com.chronoxor.proto.OrderMessage -> if (obj.fbeType == OrderMessageSenderModel.fbeType) return sendListener(listener, obj)
+            is com.chronoxor.proto.BalanceMessage -> if (obj.fbeType == BalanceMessageSenderModel.fbeType) return sendListener(listener, obj)
+            is com.chronoxor.proto.AccountMessage -> if (obj.fbeType == AccountMessageSenderModel.fbeType) return sendListener(listener, obj)
         }
 
         return 0
     }
 
     fun send(value: com.chronoxor.proto.OrderMessage): Long
+    {
+        return sendListener(this, value)
+    }
+
+    fun sendListener(listener: FinalClientListener, value: com.chronoxor.proto.OrderMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = OrderMessageSenderModel.serialize(value)
@@ -76,13 +86,18 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
         if (logging)
         {
             val message = value.toString()
-            onSendLog(message)
+            listener.onSendLog(message)
         }
 
         // Send the serialized value
         return sendSerialized(serialized)
     }
     fun send(value: com.chronoxor.proto.BalanceMessage): Long
+    {
+        return sendListener(this, value)
+    }
+
+    fun sendListener(listener: FinalClientListener, value: com.chronoxor.proto.BalanceMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = BalanceMessageSenderModel.serialize(value)
@@ -93,13 +108,18 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
         if (logging)
         {
             val message = value.toString()
-            onSendLog(message)
+            listener.onSendLog(message)
         }
 
         // Send the serialized value
         return sendSerialized(serialized)
     }
     fun send(value: com.chronoxor.proto.AccountMessage): Long
+    {
+        return sendListener(this, value)
+    }
+
+    fun sendListener(listener: FinalClientListener, value: com.chronoxor.proto.AccountMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = AccountMessageSenderModel.serialize(value)
@@ -110,7 +130,7 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
         if (logging)
         {
             val message = value.toString()
-            onSendLog(message)
+            listener.onSendLog(message)
         }
 
         // Send the serialized value
@@ -119,12 +139,13 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalReceiverListener
 
     // Send message handler
     override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException("com.chronoxor.proto.fbe.Client.onSend() not implemented!") }
+
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         return onReceiveListener(this, type, buffer, offset, size)
     }
 
-    open fun onReceiveListener(listener: FinalReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    open fun onReceiveListener(listener: FinalClientListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         when (type)
         {

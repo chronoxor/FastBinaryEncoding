@@ -8,7 +8,7 @@
 package com.chronoxor.proto.fbe
 
 // Fast Binary Encoding com.chronoxor.proto proxy listener
-interface ProxyListener
+interface ProxyListener : com.chronoxor.fbe.ReceiverListener
 {
     fun onProxy(model: OrderMessageModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
     fun onProxy(model: BalanceMessageModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}

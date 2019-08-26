@@ -9,7 +9,7 @@ package com.chronoxor.fbe
 
 // Fast Binary Encoding base receiver
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class Receiver
+abstract class Receiver : ReceiverListener
 {
     // Get the bytes buffer
     var buffer: Buffer = Buffer()
@@ -275,8 +275,4 @@ abstract class Receiver
 
     // Receive message handler
     abstract fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
-
-    // Receive log message handler
-    @Suppress("UNUSED_PARAMETER")
-    protected open fun onReceiveLog(message: String) {}
 }

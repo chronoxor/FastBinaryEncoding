@@ -9,7 +9,7 @@ package com.chronoxor.fbe
 
 // Fast Binary Encoding base client
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class Client
+abstract class Client : ClientListener
 {
     // Get the send bytes buffer
     var sendBuffer: Buffer = Buffer()
@@ -49,10 +49,6 @@ abstract class Client
 
     // Send message handler
     protected abstract fun onSend(buffer: ByteArray, offset: Long, size: Long): Long
-
-    // Send log message handler
-    @Suppress("UNUSED_PARAMETER")
-    protected open fun onSendLog(message: String) {}
 
     // Receive data
     fun receive(buffer: Buffer) { receive(buffer.data, 0, buffer.size) }
@@ -303,8 +299,4 @@ abstract class Client
 
     // Receive message handler
     abstract fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
-
-    // Receive log message handler
-    @Suppress("UNUSED_PARAMETER")
-    protected open fun onReceiveLog(message: String) {}
 }
