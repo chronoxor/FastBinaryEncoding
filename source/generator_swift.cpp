@@ -8295,19 +8295,14 @@ std::string GeneratorSwift::ConvertTypeFieldName(const std::string& type)
     else if (type == "string")
         return "String";
     else if (type == "timestamp")
-        return ((Version() < 8) ? "Date" : "Timestamp");
+        return "Timestamp";
     else if (type == "uuid")
         return "UUID";
 
-        std::string result = type;
-
-        size_t pos = type.find_last_of('.');
-        if (pos != std::string::npos)
-        {
-            result.assign(type, pos + 1, type.size() - pos);
-
-          }
-
+    std::string result = type;
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+        result.assign(type, pos + 1, type.size() - pos);
 
     CppCommon::StringUtils::ReplaceAll(result, ".", "");
     return result;
