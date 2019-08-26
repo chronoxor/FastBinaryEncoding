@@ -4,6 +4,7 @@
 
 import XCTest
 import ChronoxorProto
+import ChronoxorFbe
 
 fileprivate class MyFinalSender: FinalSender {
     override func onSend(buffer: Data, offset: Int, size: Int) throws -> Int {
@@ -21,21 +22,17 @@ fileprivate class MyFinalReceiver: FinalReceiver, ChronoxorProto.FinalReceiverLi
         return  _order && _balance && _account
     }
     
-    func onReceive(value: ChronoxorProto.Order) {
+    func onReceive(value: ChronoxorProto.OrderMessage) {
         _order = true
     }
     
-    func onReceive(value: ChronoxorProto.Balance) {
+    func onReceive(value: ChronoxorProto.BalanceMessage) {
         _balance = true
     }
     
-    func onReceive(value: ChronoxorProto.Account) {
+    func onReceive(value: ChronoxorProto.AccountMessage) {
         _account = true
     }
-    
-//    func onReceiveLog(message: String) {
-//        
-//    }
 }
 
 class TestSendReceiveFinal: XCTestCase {
@@ -53,18 +50,18 @@ class TestSendReceiveFinal: XCTestCase {
         
         // Create and send a new order
         let order = Order(id: 1, symbol: "EURUSD", side: OrderSide.buy, type: OrderType.market, price: 1.23456, volume: 1000.0)
-        _ = try? sender.send(value: order)
+        _ = try? sender.send(value: OrderMessage(body: order))
         
         // Create and send a new balance wallet
         let balance = Balance(currency: "USD", amount: 1000.0)
-        _ = try? sender.send(value: balance)
+        _ = try? sender.send(value: BalanceMessage(body: balance))
         
         // Create and send a new account with some orders
         let account = Account(id: 1, name: "Test", state: State.good, wallet: Balance(currency: "USD", amount: 1000.0), asset: Balance(currency: "EUR", amount: 100.0), orders: [])
         account.orders.append(Order(id: 1, symbol: "EURUSD", side: OrderSide.buy, type: OrderType.market, price: 1.23456, volume: 1000.0))
         account.orders.append(Order(id: 2, symbol: "EURUSD", side: OrderSide.sell, type: OrderType.limit, price: 1.0, volume: 100.0))
         account.orders.append(Order(id: 3, symbol: "EURUSD", side: OrderSide.buy, type: OrderType.stop, price: 1.5, volume: 10.0))
-        _ = try? sender.send(value: account)
+        _ = try? sender.send(value: AccountMessage(body: account))
         
         let receiver = MyFinalReceiver()
         // Receive data from the sender

@@ -9,36 +9,36 @@ import ChronoxorFbe
 // Fast Binary Encoding ChronoxorProto final receiver
 open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
     // Receiver values accessors
-    private var OrderValue: ChronoxorProto.Order
-    private var BalanceValue: ChronoxorProto.Balance
-    private var AccountValue: ChronoxorProto.Account
+    private var OrderMessageValue: ChronoxorProto.OrderMessage
+    private var BalanceMessageValue: ChronoxorProto.BalanceMessage
+    private var AccountMessageValue: ChronoxorProto.AccountMessage
 
     // Receiver models accessors
-    private var OrderModel: OrderFinalModel
-    private var BalanceModel: BalanceFinalModel
-    private var AccountModel: AccountFinalModel
+    private var OrderMessageModel: OrderMessageFinalModel
+    private var BalanceMessageModel: BalanceMessageFinalModel
+    private var AccountMessageModel: AccountMessageFinalModel
 
     public var buffer: Buffer = Buffer()
     public var logging: Bool = false
     public var final: Bool = false
 
     public init() {
-        OrderValue = ChronoxorProto.Order()
-        OrderModel = ChronoxorProto.OrderFinalModel()
-        BalanceValue = ChronoxorProto.Balance()
-        BalanceModel = ChronoxorProto.BalanceFinalModel()
-        AccountValue = ChronoxorProto.Account()
-        AccountModel = ChronoxorProto.AccountFinalModel()
+        OrderMessageValue = ChronoxorProto.OrderMessage()
+        OrderMessageModel = ChronoxorProto.OrderMessageFinalModel()
+        BalanceMessageValue = ChronoxorProto.BalanceMessage()
+        BalanceMessageModel = ChronoxorProto.BalanceMessageFinalModel()
+        AccountMessageValue = ChronoxorProto.AccountMessage()
+        AccountMessageModel = ChronoxorProto.AccountMessageFinalModel()
         build(final: true)
     }
 
     public init(buffer: ChronoxorFbe.Buffer) {
-        OrderValue = ChronoxorProto.Order()
-        OrderModel = ChronoxorProto.OrderFinalModel()
-        BalanceValue = ChronoxorProto.Balance()
-        BalanceModel = ChronoxorProto.BalanceFinalModel()
-        AccountValue = ChronoxorProto.Account()
-        AccountModel = ChronoxorProto.AccountFinalModel()
+        OrderMessageValue = ChronoxorProto.OrderMessage()
+        OrderMessageModel = ChronoxorProto.OrderMessageFinalModel()
+        BalanceMessageValue = ChronoxorProto.BalanceMessage()
+        BalanceMessageModel = ChronoxorProto.BalanceMessageFinalModel()
+        AccountMessageValue = ChronoxorProto.AccountMessage()
+        AccountMessageModel = ChronoxorProto.AccountMessageFinalModel()
         build(with: buffer, final: true)
     }
 
@@ -48,56 +48,56 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
 
     open func onReceiveListener(listener: FinalReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
         switch type {
-        case ChronoxorProto.OrderFinalModel.fbeTypeConst:
+        case ChronoxorProto.OrderMessageFinalModel.fbeTypeConst:
             // Deserialize the value from the FBE stream
-            OrderModel.attach(buffer: buffer, offset: offset)
-            assert(OrderModel.verify(), "Proto.Order validation failed!")
-            let deserialized = OrderModel.deserialize(value: &OrderValue)
-            assert(deserialized > 0, "Proto.Order deserialization failed!")
+            OrderMessageModel.attach(buffer: buffer, offset: offset)
+            assert(OrderMessageModel.verify(), "Proto.OrderMessage validation failed!")
+            let deserialized = OrderMessageModel.deserialize(value: &OrderMessageValue)
+            assert(deserialized > 0, "Proto.OrderMessage deserialization failed!")
 
             // Log the value
             if (logging)
             {
-                let message = OrderValue.description
+                let message = OrderMessageValue.description
                 listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
-            listener.onReceive(value: OrderValue)
+            listener.onReceive(value: OrderMessageValue)
             return true
-        case ChronoxorProto.BalanceFinalModel.fbeTypeConst:
+        case ChronoxorProto.BalanceMessageFinalModel.fbeTypeConst:
             // Deserialize the value from the FBE stream
-            BalanceModel.attach(buffer: buffer, offset: offset)
-            assert(BalanceModel.verify(), "Proto.Balance validation failed!")
-            let deserialized = BalanceModel.deserialize(value: &BalanceValue)
-            assert(deserialized > 0, "Proto.Balance deserialization failed!")
+            BalanceMessageModel.attach(buffer: buffer, offset: offset)
+            assert(BalanceMessageModel.verify(), "Proto.BalanceMessage validation failed!")
+            let deserialized = BalanceMessageModel.deserialize(value: &BalanceMessageValue)
+            assert(deserialized > 0, "Proto.BalanceMessage deserialization failed!")
 
             // Log the value
             if (logging)
             {
-                let message = BalanceValue.description
+                let message = BalanceMessageValue.description
                 listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
-            listener.onReceive(value: BalanceValue)
+            listener.onReceive(value: BalanceMessageValue)
             return true
-        case ChronoxorProto.AccountFinalModel.fbeTypeConst:
+        case ChronoxorProto.AccountMessageFinalModel.fbeTypeConst:
             // Deserialize the value from the FBE stream
-            AccountModel.attach(buffer: buffer, offset: offset)
-            assert(AccountModel.verify(), "Proto.Account validation failed!")
-            let deserialized = AccountModel.deserialize(value: &AccountValue)
-            assert(deserialized > 0, "Proto.Account deserialization failed!")
+            AccountMessageModel.attach(buffer: buffer, offset: offset)
+            assert(AccountMessageModel.verify(), "Proto.AccountMessage validation failed!")
+            let deserialized = AccountMessageModel.deserialize(value: &AccountMessageValue)
+            assert(deserialized > 0, "Proto.AccountMessage deserialization failed!")
 
             // Log the value
             if (logging)
             {
-                let message = AccountValue.description
+                let message = AccountMessageValue.description
                 listener.onReceiveLog(message: message)
             }
 
             // Call receive handler with deserialized value
-            listener.onReceive(value: AccountValue)
+            listener.onReceive(value: AccountMessageValue)
             return true
         default: break
         }

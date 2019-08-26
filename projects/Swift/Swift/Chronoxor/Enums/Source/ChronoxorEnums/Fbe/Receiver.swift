@@ -9,24 +9,18 @@ import ChronoxorFbe
 // Fast Binary Encoding ChronoxorEnums receiver
 open class Receiver : ChronoxorFbe.ReceiverProtocol {
     // Receiver values accessors
-    private var EnumsValue: ChronoxorEnums.Enums
 
     // Receiver models accessors
-    private var EnumsModel: EnumsModel
 
     public var buffer: Buffer = Buffer()
     public var logging: Bool = false
     public var final: Bool = false
 
     public init() {
-        EnumsValue = ChronoxorEnums.Enums()
-        EnumsModel = ChronoxorEnums.EnumsModel()
         build(final: false)
     }
 
     public init(buffer: ChronoxorFbe.Buffer) {
-        EnumsValue = ChronoxorEnums.Enums()
-        EnumsModel = ChronoxorEnums.EnumsModel()
         build(with: buffer, final: false)
     }
 
@@ -35,26 +29,6 @@ open class Receiver : ChronoxorFbe.ReceiverProtocol {
     }
 
     open func onReceiveListener(listener: ReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        switch type {
-        case ChronoxorEnums.EnumsModel.fbeTypeConst:
-            // Deserialize the value from the FBE stream
-            EnumsModel.attach(buffer: buffer, offset: offset)
-            assert(EnumsModel.verify(), "Enums.Enums validation failed!")
-            let deserialized = EnumsModel.deserialize(value: &EnumsValue)
-            assert(deserialized > 0, "Enums.Enums deserialization failed!")
-
-            // Log the value
-            if (logging)
-            {
-                let message = EnumsValue.description
-                listener.onReceiveLog(message: message)
-            }
-
-            // Call receive handler with deserialized value
-            listener.onReceive(value: EnumsValue)
-            return true
-        default: break
-        }
 
         return false
     }

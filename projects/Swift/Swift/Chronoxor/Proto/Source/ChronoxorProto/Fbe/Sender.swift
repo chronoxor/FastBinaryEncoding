@@ -9,92 +9,97 @@ import Foundation
 // Fast Binary Encoding ChronoxorProto sender
 open class Sender : ChronoxorFbe.SenderProtocol { 
     // Sender models accessors
-    private let OrderModel: OrderModel
-    private let BalanceModel: BalanceModel
-    private let AccountModel: AccountModel
+    private let OrderMessageModel: OrderMessageModel
+    private let BalanceMessageModel: BalanceMessageModel
+    private let AccountMessageModel: AccountMessageModel
 
     public var buffer: Buffer = Buffer()
     public var logging: Bool = false
     public var final: Bool = false
 
     public init() {
-        OrderModel = ChronoxorProto.OrderModel(buffer: buffer)
-        BalanceModel = ChronoxorProto.BalanceModel(buffer: buffer)
-        AccountModel = ChronoxorProto.AccountModel(buffer: buffer)
+        OrderMessageModel = ChronoxorProto.OrderMessageModel(buffer: buffer)
+        BalanceMessageModel = ChronoxorProto.BalanceMessageModel(buffer: buffer)
+        AccountMessageModel = ChronoxorProto.AccountMessageModel(buffer: buffer)
         build(with: false)
     }
 
     public init(buffer: ChronoxorFbe.Buffer) {
-        OrderModel = ChronoxorProto.OrderModel(buffer: buffer)
-        BalanceModel = ChronoxorProto.BalanceModel(buffer: buffer)
-        AccountModel = ChronoxorProto.AccountModel(buffer: buffer)
+        OrderMessageModel = ChronoxorProto.OrderMessageModel(buffer: buffer)
+        BalanceMessageModel = ChronoxorProto.BalanceMessageModel(buffer: buffer)
+        AccountMessageModel = ChronoxorProto.AccountMessageModel(buffer: buffer)
         build(with: buffer, final: false)
     }
 
     public func send(obj: Any) throws -> Int {
-        return try send(obj: obj, listener: self as! ChronoxorFbe.LogListener)
+        return try send(obj: obj, listener: self as? ChronoxorFbe.LogListener)
     }
 
-    public func send(obj: Any, listener: ChronoxorFbe.LogListener) throws -> Int {
+    public func send(obj: Any, listener: ChronoxorFbe.LogListener?) throws -> Int {
         switch obj {
-            case is ChronoxorProto.Order: return try send(value: obj as! ChronoxorProto.Order, listener: listener)
-            case is ChronoxorProto.Balance: return try send(value: obj as! ChronoxorProto.Balance, listener: listener)
-            case is ChronoxorProto.Account: return try send(value: obj as! ChronoxorProto.Account, listener: listener)
+            case is ChronoxorProto.OrderMessage: return try send(value: obj as! ChronoxorProto.OrderMessage, listener: listener)
+            case is ChronoxorProto.BalanceMessage: return try send(value: obj as! ChronoxorProto.BalanceMessage, listener: listener)
+            case is ChronoxorProto.AccountMessage: return try send(value: obj as! ChronoxorProto.AccountMessage, listener: listener)
             default: break
         }
 
         return 0
     }
 
-    public func send(value: ChronoxorProto.Order) throws -> Int {
-        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+    public func send(value: ChronoxorProto.OrderMessage) throws -> Int {
+        return try send(value: value, listener: self as? ChronoxorFbe.LogListener)
     }
-    public func send(value: ChronoxorProto.Order, listener: ChronoxorFbe.LogListener) throws -> Int {
+
+    public func send(value: ChronoxorProto.OrderMessage, listener: ChronoxorFbe.LogListener?) throws -> Int {
         // Serialize the value into the FBE stream
-        let serialized = try OrderModel.serialize(value: value)
-        assert(serialized > 0, "ChronoxorProto.Order serialization failed!")
-        assert(OrderModel.verify(), "ChronoxorProto.Order validation failed!")
+        let serialized = try OrderMessageModel.serialize(value: value)
+        assert(serialized > 0, "ChronoxorProto.OrderMessage serialization failed!")
+        assert(OrderMessageModel.verify(), "ChronoxorProto.OrderMessage validation failed!")
 
         // Log the value
         if logging {
             let message = value.description
-            listener.onSendLog(message: message)
+            listener?.onSendLog(message: message)
         }
 
         // Send the serialized value
         return try sendSerialized(serialized: serialized)
     }
-    public func send(value: ChronoxorProto.Balance) throws -> Int {
-        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+
+    public func send(value: ChronoxorProto.BalanceMessage) throws -> Int {
+        return try send(value: value, listener: self as? ChronoxorFbe.LogListener)
     }
-    public func send(value: ChronoxorProto.Balance, listener: ChronoxorFbe.LogListener) throws -> Int {
+
+    public func send(value: ChronoxorProto.BalanceMessage, listener: ChronoxorFbe.LogListener?) throws -> Int {
         // Serialize the value into the FBE stream
-        let serialized = try BalanceModel.serialize(value: value)
-        assert(serialized > 0, "ChronoxorProto.Balance serialization failed!")
-        assert(BalanceModel.verify(), "ChronoxorProto.Balance validation failed!")
+        let serialized = try BalanceMessageModel.serialize(value: value)
+        assert(serialized > 0, "ChronoxorProto.BalanceMessage serialization failed!")
+        assert(BalanceMessageModel.verify(), "ChronoxorProto.BalanceMessage validation failed!")
 
         // Log the value
         if logging {
             let message = value.description
-            listener.onSendLog(message: message)
+            listener?.onSendLog(message: message)
         }
 
         // Send the serialized value
         return try sendSerialized(serialized: serialized)
     }
-    public func send(value: ChronoxorProto.Account) throws -> Int {
-        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
+
+    public func send(value: ChronoxorProto.AccountMessage) throws -> Int {
+        return try send(value: value, listener: self as? ChronoxorFbe.LogListener)
     }
-    public func send(value: ChronoxorProto.Account, listener: ChronoxorFbe.LogListener) throws -> Int {
+
+    public func send(value: ChronoxorProto.AccountMessage, listener: ChronoxorFbe.LogListener?) throws -> Int {
         // Serialize the value into the FBE stream
-        let serialized = try AccountModel.serialize(value: value)
-        assert(serialized > 0, "ChronoxorProto.Account serialization failed!")
-        assert(AccountModel.verify(), "ChronoxorProto.Account validation failed!")
+        let serialized = try AccountMessageModel.serialize(value: value)
+        assert(serialized > 0, "ChronoxorProto.AccountMessage serialization failed!")
+        assert(AccountMessageModel.verify(), "ChronoxorProto.AccountMessage validation failed!")
 
         // Log the value
         if logging {
             let message = value.description
-            listener.onSendLog(message: message)
+            listener?.onSendLog(message: message)
         }
 
         // Send the serialized value

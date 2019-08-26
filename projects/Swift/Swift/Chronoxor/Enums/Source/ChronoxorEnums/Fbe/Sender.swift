@@ -9,52 +9,26 @@ import Foundation
 // Fast Binary Encoding ChronoxorEnums sender
 open class Sender : ChronoxorFbe.SenderProtocol { 
     // Sender models accessors
-    private let EnumsModel: EnumsModel
 
     public var buffer: Buffer = Buffer()
     public var logging: Bool = false
     public var final: Bool = false
 
     public init() {
-        EnumsModel = ChronoxorEnums.EnumsModel(buffer: buffer)
         build(with: false)
     }
 
     public init(buffer: ChronoxorFbe.Buffer) {
-        EnumsModel = ChronoxorEnums.EnumsModel(buffer: buffer)
         build(with: buffer, final: false)
     }
 
     public func send(obj: Any) throws -> Int {
-        return try send(obj: obj, listener: self as! ChronoxorFbe.LogListener)
+        return try send(obj: obj, listener: self as? ChronoxorFbe.LogListener)
     }
 
-    public func send(obj: Any, listener: ChronoxorFbe.LogListener) throws -> Int {
-        switch obj {
-            case is ChronoxorEnums.Enums: return try send(value: obj as! ChronoxorEnums.Enums, listener: listener)
-            default: break
-        }
+    public func send(obj: Any, listener: ChronoxorFbe.LogListener?) throws -> Int {
 
         return 0
-    }
-
-    public func send(value: ChronoxorEnums.Enums) throws -> Int {
-        return try send(value: value, listener: self as! ChronoxorFbe.LogListener)
-    }
-    public func send(value: ChronoxorEnums.Enums, listener: ChronoxorFbe.LogListener) throws -> Int {
-        // Serialize the value into the FBE stream
-        let serialized = try EnumsModel.serialize(value: value)
-        assert(serialized > 0, "ChronoxorEnums.Enums serialization failed!")
-        assert(EnumsModel.verify(), "ChronoxorEnums.Enums validation failed!")
-
-        // Log the value
-        if logging {
-            let message = value.description
-            listener.onSendLog(message: message)
-        }
-
-        // Send the serialized value
-        return try sendSerialized(serialized: serialized)
     }
 
     // Send message handler

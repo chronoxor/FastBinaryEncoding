@@ -13,17 +13,11 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
     let ProtoReceiver: ChronoxorProto.FinalReceiver?
 
     // Receiver values accessors
-    private var OrderValue: ChronoxorProtoex.Order
-    private var BalanceValue: ChronoxorProtoex.Balance
-    private var AccountValue: ChronoxorProtoex.Account
     private var OrderMessageValue: ChronoxorProtoex.OrderMessage
     private var BalanceMessageValue: ChronoxorProtoex.BalanceMessage
     private var AccountMessageValue: ChronoxorProtoex.AccountMessage
 
     // Receiver models accessors
-    private var OrderModel: OrderFinalModel
-    private var BalanceModel: BalanceFinalModel
-    private var AccountModel: AccountFinalModel
     private var OrderMessageModel: OrderMessageFinalModel
     private var BalanceMessageModel: BalanceMessageFinalModel
     private var AccountMessageModel: AccountMessageFinalModel
@@ -34,12 +28,6 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
 
     public init() {
         ProtoReceiver = ChronoxorProto.FinalReceiver(buffer: buffer)
-        OrderValue = ChronoxorProtoex.Order()
-        OrderModel = ChronoxorProtoex.OrderFinalModel()
-        BalanceValue = ChronoxorProtoex.Balance()
-        BalanceModel = ChronoxorProtoex.BalanceFinalModel()
-        AccountValue = ChronoxorProtoex.Account()
-        AccountModel = ChronoxorProtoex.AccountFinalModel()
         OrderMessageValue = ChronoxorProtoex.OrderMessage()
         OrderMessageModel = ChronoxorProtoex.OrderMessageFinalModel()
         BalanceMessageValue = ChronoxorProtoex.BalanceMessage()
@@ -51,12 +39,6 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
 
     public init(buffer: ChronoxorFbe.Buffer) {
         ProtoReceiver = ChronoxorProto.FinalReceiver(buffer: buffer)
-        OrderValue = ChronoxorProtoex.Order()
-        OrderModel = ChronoxorProtoex.OrderFinalModel()
-        BalanceValue = ChronoxorProtoex.Balance()
-        BalanceModel = ChronoxorProtoex.BalanceFinalModel()
-        AccountValue = ChronoxorProtoex.Account()
-        AccountModel = ChronoxorProtoex.AccountFinalModel()
         OrderMessageValue = ChronoxorProtoex.OrderMessage()
         OrderMessageModel = ChronoxorProtoex.OrderMessageFinalModel()
         BalanceMessageValue = ChronoxorProtoex.BalanceMessage()
@@ -72,57 +54,6 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
 
     open func onReceiveListener(listener: FinalReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
         switch type {
-        case ChronoxorProtoex.OrderFinalModel.fbeTypeConst:
-            // Deserialize the value from the FBE stream
-            OrderModel.attach(buffer: buffer, offset: offset)
-            assert(OrderModel.verify(), "Protoex.Order validation failed!")
-            let deserialized = OrderModel.deserialize(value: &OrderValue)
-            assert(deserialized > 0, "Protoex.Order deserialization failed!")
-
-            // Log the value
-            if (logging)
-            {
-                let message = OrderValue.description
-                listener.onReceiveLog(message: message)
-            }
-
-            // Call receive handler with deserialized value
-            listener.onReceive(value: OrderValue)
-            return true
-        case ChronoxorProtoex.BalanceFinalModel.fbeTypeConst:
-            // Deserialize the value from the FBE stream
-            BalanceModel.attach(buffer: buffer, offset: offset)
-            assert(BalanceModel.verify(), "Protoex.Balance validation failed!")
-            let deserialized = BalanceModel.deserialize(value: &BalanceValue)
-            assert(deserialized > 0, "Protoex.Balance deserialization failed!")
-
-            // Log the value
-            if (logging)
-            {
-                let message = BalanceValue.description
-                listener.onReceiveLog(message: message)
-            }
-
-            // Call receive handler with deserialized value
-            listener.onReceive(value: BalanceValue)
-            return true
-        case ChronoxorProtoex.AccountFinalModel.fbeTypeConst:
-            // Deserialize the value from the FBE stream
-            AccountModel.attach(buffer: buffer, offset: offset)
-            assert(AccountModel.verify(), "Protoex.Account validation failed!")
-            let deserialized = AccountModel.deserialize(value: &AccountValue)
-            assert(deserialized > 0, "Protoex.Account deserialization failed!")
-
-            // Log the value
-            if (logging)
-            {
-                let message = AccountValue.description
-                listener.onReceiveLog(message: message)
-            }
-
-            // Call receive handler with deserialized value
-            listener.onReceive(value: AccountValue)
-            return true
         case ChronoxorProtoex.OrderMessageFinalModel.fbeTypeConst:
             // Deserialize the value from the FBE stream
             OrderMessageModel.attach(buffer: buffer, offset: offset)

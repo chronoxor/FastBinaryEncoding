@@ -7,12 +7,12 @@ import ChronoxorFbe
 
 // Fast Binary Encoding Proto final receiver listener
 public protocol FinalReceiverListener : ChronoxorFbe.LogListener {
-    func onReceive(value: ChronoxorProto.Order)
-    func onReceive(value: ChronoxorProto.Balance)
-    func onReceive(value: ChronoxorProto.Account)
+    func onReceive(value: ChronoxorProto.OrderMessage)
+    func onReceive(value: ChronoxorProto.BalanceMessage)
+    func onReceive(value: ChronoxorProto.AccountMessage)
 }
 public extension FinalReceiverListener {
-    func onReceive(value: ChronoxorProto.Order) { }
-    func onReceive(value: ChronoxorProto.Balance) { }
-    func onReceive(value: ChronoxorProto.Account) { }
+    func onReceive(value: ChronoxorProto.OrderMessage) { }
+    func onReceive(value: ChronoxorProto.BalanceMessage) { }
+    func onReceive(value: ChronoxorProto.AccountMessage) { }
 }

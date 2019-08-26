@@ -6771,7 +6771,8 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     {
         WriteLineIndent("// Sender models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("private let " + *s->name + "Model: " + *s->name + model);
+            if (s->message)
+                WriteLineIndent("private let " + *s->name + "Model: " + *s->name + model);
         WriteLine();
     }
 
@@ -6791,8 +6792,12 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     if (p->body)
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent(*s->name + "Model = " + struct_name + model + "(buffer: buffer)");
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLineIndent(*s->name + "Model = " + struct_name + model + "(buffer: buffer)");
+            }
+
         }
     WriteLineIndent("build(with: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
@@ -6809,8 +6814,12 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent(*s->name + "Model = " + struct_name + model + "(buffer: buffer)");
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLineIndent(*s->name + "Model = " + struct_name + model + "(buffer: buffer)");
+            }
+
         }
 
     }
@@ -6819,24 +6828,32 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("}");
     WriteLine();
 
+    bool messages = false;
+    for (const auto& s : p->body->structs)
+        if (s->message)
+            messages = true;
+
     WriteLineIndent("public func send(obj: Any) throws -> Int {");
     Indent(1);
-    WriteLineIndent("return try send(obj: obj, listener: self as! "+ domain + "Fbe.LogListener)");
+    WriteLineIndent("return try send(obj: obj, listener: self as? "+ domain + "Fbe.LogListener)");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
 
     // Generate generic sender method
-    WriteLineIndent("public func send(obj: Any, listener: " + domain + "Fbe.LogListener) throws -> Int {");
+    WriteLineIndent("public func send(obj: Any, listener: " + domain + "Fbe.LogListener?) throws -> Int {");
     Indent(1);
-    if (p->body)
+    if (p->body && messages)
     {
         WriteLineIndent("switch obj {");
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent("case is " + struct_name + ": return try send(value: obj as! " + struct_name + ", listener: listener)");
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                  WriteLineIndent("case is " + struct_name + ": return try send(value: obj as! " + struct_name + ", listener: listener)");
+            }
         }
         WriteLineIndent("default: break");
         Indent(-1);
@@ -6861,39 +6878,43 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
-    WriteLine();
 
     // Generate sender methods
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent("public func send(value: " + struct_name + ") throws -> Int {");
-            Indent(1);
-            WriteLineIndent("return try send(value: value, listener: self as! "+ domain + "Fbe.LogListener)");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLine();
+                WriteLineIndent("public func send(value: " + struct_name + ") throws -> Int {");
+                Indent(1);
+                WriteLineIndent("return try send(value: value, listener: self as? "+ domain + "Fbe.LogListener)");
+                Indent(-1);
+                WriteLineIndent("}");
 
-            WriteLineIndent("public func send(value: " + struct_name + ", listener: " + domain + "Fbe.LogListener) throws -> Int {");
-            Indent(1);
-            WriteLineIndent("// Serialize the value into the FBE stream");
-            WriteLineIndent("let serialized = try " + *s->name + "Model.serialize(value: value)");
-            WriteLineIndent("assert(serialized > 0, \"" + struct_name + " serialization failed!\")");
-            WriteLineIndent("assert(" + *s->name + "Model.verify(), \"" + struct_name + " validation failed!\")");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if logging {");
-            Indent(1);
-            WriteLineIndent("let message = value.description");
-            WriteLineIndent("listener.onSendLog(message: message)");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Send the serialized value");
-            WriteLineIndent("return try sendSerialized(serialized: serialized)");
-            Indent(-1);
-            WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("public func send(value: " + struct_name + ", listener: " + domain + "Fbe.LogListener?) throws -> Int {");
+                Indent(1);
+                WriteLineIndent("// Serialize the value into the FBE stream");
+                WriteLineIndent("let serialized = try " + *s->name + "Model.serialize(value: value)");
+                WriteLineIndent("assert(serialized > 0, \"" + struct_name + " serialization failed!\")");
+                WriteLineIndent("assert(" + *s->name + "Model.verify(), \"" + struct_name + " validation failed!\")");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if logging {");
+                Indent(1);
+                WriteLineIndent("let message = value.description");
+                WriteLineIndent("listener?.onSendLog(message: message)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Send the serialized value");
+                WriteLineIndent("return try sendSerialized(serialized: serialized)");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
 
@@ -6961,15 +6982,21 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
         WriteLineIndent("// Receiver values accessors");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent("private var " + *s->name + "Value: " + struct_name);
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLineIndent("private var " + *s->name + "Value: " + struct_name);
+            }
         }
         WriteLine();
         WriteLineIndent("// Receiver models accessors");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent("private var " + *s->name + "Model: " + *s->name + model);
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLineIndent("private var " + *s->name + "Model: " + *s->name + model);
+            }
         }
 
         WriteLine();
@@ -6993,9 +7020,12 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent(*s->name + "Value = " + struct_name + "()");
-            WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLineIndent(*s->name + "Value = " + struct_name + "()");
+                WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
+            }
         }
     }
     WriteLineIndent("build(final: " + std::string(final ? "true" : "false") + ")");
@@ -7014,15 +7044,23 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent(*s->name + "Value = " + struct_name + "()");
-            WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLineIndent(*s->name + "Value = " + struct_name + "()");
+                WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
+            }
         }
     }
     WriteLineIndent("build(with: buffer, final: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
+
+    bool messages = false;
+    for (const auto& s : p->body->structs)
+        if (s->message)
+            messages = true;
 
     // Generate receiver message handler
     WriteLineIndent("public func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {");
@@ -7033,32 +7071,35 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
     WriteLine();
     WriteLineIndent("open func onReceiveListener(listener: " + listener + ", type: Int, buffer: Data, offset: Int, size: Int) -> Bool {");
     Indent(1);
-    if (p->body)
+    if (p->body && messages)
     {
         WriteLineIndent("switch type {");
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case " + domain + package + "." + *s->name + model + ".fbeTypeConst:");
-            Indent(1);
-            WriteLineIndent("// Deserialize the value from the FBE stream");
-            WriteLineIndent(*s->name + "Model.attach(buffer: buffer, offset: offset)");
-            WriteLineIndent("assert(" + *s->name + "Model.verify(), \"" + package + "." + *s->name + " validation failed!\")");
-            WriteLineIndent("let deserialized = " + *s->name + "Model.deserialize(value: &" + *s->name + "Value)");
-            WriteLineIndent("assert(deserialized > 0, \"" + package + "." + *s->name + " deserialization failed!\")");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if (logging)");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("let message = " + *s->name + "Value.description");
-            WriteLineIndent("listener.onReceiveLog(message: message)");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Call receive handler with deserialized value");
-            WriteLineIndent("listener.onReceive(value: " + *s->name + "Value)");
-            WriteLineIndent("return true");
-            Indent(-1);
+            if (s->message)
+            {
+                WriteLineIndent("case " + domain + package + "." + *s->name + model + ".fbeTypeConst:");
+                Indent(1);
+                WriteLineIndent("// Deserialize the value from the FBE stream");
+                WriteLineIndent(*s->name + "Model.attach(buffer: buffer, offset: offset)");
+                WriteLineIndent("assert(" + *s->name + "Model.verify(), \"" + package + "." + *s->name + " validation failed!\")");
+                WriteLineIndent("let deserialized = " + *s->name + "Model.deserialize(value: &" + *s->name + "Value)");
+                WriteLineIndent("assert(deserialized > 0, \"" + package + "." + *s->name + " deserialization failed!\")");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (logging)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("let message = " + *s->name + "Value.description");
+                WriteLineIndent("listener.onReceiveLog(message: message)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Call receive handler with deserialized value");
+                WriteLineIndent("listener.onReceive(value: " + *s->name + "Value)");
+                WriteLineIndent("return true");
+                Indent(-1);
+            }
         }
         WriteLineIndent("default: break");
         WriteLineIndent("}");
@@ -7138,8 +7179,11 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent("func onReceive(value: " + struct_name + ")");
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLineIndent("func onReceive(value: " + struct_name + ")");
+            }
         }
     }
 
@@ -7154,8 +7198,11 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent("func onReceive(value: " + struct_name + ") { }");
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLineIndent("func onReceive(value: " + struct_name + ") { }");
+            }
         }
     }
     Indent(-1);
@@ -7215,7 +7262,8 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     {
         WriteLineIndent("// Proxy models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("private let " + *s->name + "Model: " + *s->name + model);
+            if (s->message)
+                WriteLineIndent("private let " + *s->name + "Model: " + *s->name + model);
         WriteLine();
     }
 
@@ -7235,10 +7283,11 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-        {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
-        }
+            if (s->message)
+            {
+              std::string struct_name = domain + package + "." + *s->name;
+              WriteLineIndent(*s->name + "Model = " + struct_name + model + "()");
+            }
     }
     WriteLineIndent("build(final: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
@@ -7254,16 +7303,21 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-        {
-              std::string struct_name = domain + package + "." + *s->name;
-              WriteLineIndent(*s->name + "Model = " + struct_name+ model + "()");
-        }
-
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLineIndent(*s->name + "Model = " + struct_name+ model + "()");
+            }
     }
     WriteLineIndent("build(with: buffer, final: " + std::string(final ? "true" : "false") + ")");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
+
+    bool messages = false;
+    for (const auto& s : p->body->structs)
+        if (s->message)
+            messages = true;
 
     // Generate proxy message handler
     WriteLineIndent("open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {");
@@ -7274,28 +7328,31 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     WriteLine();
     WriteLineIndent("open func onReceiveListener(listener: " + listener + ", type: Int, buffer: Data, offset: Int, size: Int) -> Bool {");
     Indent(1);
-    if (p->body)
+    if (p->body && messages)
     {
         WriteLineIndent("switch type {");
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case " + domain + package + "." + *s->name + model + ".fbeTypeConst:");
-            Indent(1);
-            WriteLineIndent("// Attach the FBE stream to the proxy model");
-            WriteLineIndent(*s->name + "Model.attach(buffer: buffer, offset: offset)");
-            WriteLineIndent("assert(" + *s->name + "Model.verify(), \"" + package + "." + *s->name + " validation failed!\")");
-            WriteLine();
-            WriteLineIndent("let fbeBegin = " + *s->name + "Model.model.getBegin()");
-            WriteLineIndent("if fbeBegin == 0 {");
-            Indent(1);
-            WriteLineIndent("return false");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLineIndent("// Call proxy handler");
-            WriteLineIndent("listener.onProxy(model: " + *s->name + "Model, type: type, buffer: buffer, offset: offset, size: size)");
-            WriteLineIndent(*s->name + "Model.model.getEnd(fbeBegin: fbeBegin)");
-            WriteLineIndent("return true");
-            Indent(-1);
+            if (s->message)
+            {
+                WriteLineIndent("case " + domain + package + "." + *s->name + model + ".fbeTypeConst:");
+                Indent(1);
+                WriteLineIndent("// Attach the FBE stream to the proxy model");
+                WriteLineIndent(*s->name + "Model.attach(buffer: buffer, offset: offset)");
+                WriteLineIndent("assert(" + *s->name + "Model.verify(), \"" + package + "." + *s->name + " validation failed!\")");
+                WriteLine();
+                WriteLineIndent("let fbeBegin = " + *s->name + "Model.model.getBegin()");
+                WriteLineIndent("if fbeBegin == 0 {");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("// Call proxy handler");
+                WriteLineIndent("listener.onProxy(model: " + *s->name + "Model, type: type, buffer: buffer, offset: offset, size: size)");
+                WriteLineIndent(*s->name + "Model.model.getEnd(fbeBegin: fbeBegin)");
+                WriteLineIndent("return true");
+                Indent(-1);
+            }
         }
         WriteLineIndent("default: break");
         WriteLineIndent("}");
@@ -7377,8 +7434,11 @@ void GeneratorSwift::GenerateProxyListener(const std::shared_ptr<Package>& p, bo
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_model = *s->name + model;
-            WriteLineIndent("func onProxy(model: " + struct_model + ", type: Int, buffer: Data, offset: Int, size: Int)");
+            if (s->message)
+            {
+                std::string struct_model = *s->name + model;
+                WriteLineIndent("func onProxy(model: " + struct_model + ", type: Int, buffer: Data, offset: Int, size: Int)");
+            }
         }
     }
 
@@ -7467,7 +7527,8 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     {
         WriteLineIndent("// Client sender models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("let " + *s->name + "SenderModel: " + *s->name + model);
+            if (s->message)
+                WriteLineIndent("let " + *s->name + "SenderModel: " + *s->name + model);
         WriteLine();
     }
 
@@ -7477,13 +7538,17 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("// Client receiver values accessors");
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent("private var " + *s->name + "ReceiverValue: " + struct_name);
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLineIndent("private var " + *s->name + "ReceiverValue: " + struct_name);
+            }
         }
         WriteLine();
         WriteLineIndent("// Client receiver models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("private let " + *s->name + "ReceiverModel: " + *s->name + model);
+            if (s->message)
+              WriteLineIndent("private let " + *s->name + "ReceiverModel: " + *s->name + model);
         WriteLine();
     }
 
@@ -7508,10 +7573,14 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent(*s->name + "SenderModel = " + *s->name + model + "(buffer: sendBuffer)");
-            WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + "()");
-            WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLineIndent(*s->name + "SenderModel = " + *s->name + model + "(buffer: sendBuffer)");
+                WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + "()");
+                WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
+            }
+
         }
     }
     WriteLineIndent("build(with: " + std::string(final ? "true" : "false") + ")");
@@ -7532,10 +7601,14 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent(*s->name + "SenderModel = " + *s->name + model + "(buffer: sendBuffer)");
-            WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + "()");
-            WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLineIndent(*s->name + "SenderModel = " + *s->name + model + "(buffer: sendBuffer)");
+                WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + "()");
+                WriteLineIndent(*s->name + "ReceiverModel = " + *s->name + model + "()");
+            }
+
         }
     }
     WriteLineIndent("build(with: sendBuffer, receiveBuffer: receiveBuffer, final: " + std::string(final ? "true" : "false") + ")");
@@ -7546,22 +7619,30 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
 
     WriteLineIndent("public func send(obj: Any) throws -> Int {");
     Indent(1);
-    WriteLineIndent("return try send(obj: obj, listener: self as! "+ domain + "Fbe.LogListener)");
+    WriteLineIndent("return try send(obj: obj, listener: self as? "+ domain + "Fbe.LogListener)");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
 
+    bool messages = false;
+    for (const auto& s : p->body->structs)
+        if (s->message)
+            messages = true;
+
     // Generate generic client send method
-    WriteLineIndent("public func send(obj: Any, listener: " + domain + "Fbe.LogListener) throws -> Int {");
+    WriteLineIndent("public func send(obj: Any, listener: " + domain + "Fbe.LogListener?) throws -> Int {");
     Indent(1);
-    if (p->body)
+    if (p->body && messages)
     {
         WriteLineIndent("switch obj {");
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent("case is " + struct_name + ": return try send(value: obj as! " + struct_name + ", listener: listener)");
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLineIndent("case is " + struct_name + ": return try send(value: obj as! " + struct_name + ", listener: listener)");
+            }
         }
         WriteLineIndent("default: break");
         Indent(-1);
@@ -7582,39 +7663,43 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
-    WriteLine();
 
     // Generate client send methods
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            std::string struct_name = domain + package + "." + *s->name;
-            WriteLineIndent("public func send(value: " + struct_name + ") throws -> Int {");
-            Indent(1);
-            WriteLineIndent("return try send(value: value, listener: self as! "+ domain + "Fbe.LogListener)");
-            Indent(-1);
-            WriteLineIndent("}");
+            if (s->message)
+            {
+                std::string struct_name = domain + package + "." + *s->name;
+                WriteLine();
+                WriteLineIndent("public func send(value: " + struct_name + ") throws -> Int {");
+                Indent(1);
+                WriteLineIndent("return try send(value: value, listener: self as? "+ domain + "Fbe.LogListener)");
+                Indent(-1);
+                WriteLineIndent("}");
 
-            WriteLineIndent("public func send(value: " + struct_name + ", listener: " + domain + "Fbe.LogListener) throws -> Int {");
-            Indent(1);
-            WriteLineIndent("// Serialize the value into the FBE stream");
-            WriteLineIndent("let serialized = try " + *s->name + "SenderModel.serialize(value: value)");
-            WriteLineIndent("assert(serialized > 0, \"" + struct_name + " serialization failed!\")");
-            WriteLineIndent("assert(" + *s->name + "SenderModel.verify(), \"" + struct_name + " validation failed!\")");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if logging {");
-            Indent(1);
-            WriteLineIndent("let message = value.description");
-            WriteLineIndent("listener.onSendLog(message: message)");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Send the serialized value");
-            WriteLineIndent("return try sendSerialized(serialized: serialized)");
-            Indent(-1);
-            WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("public func send(value: " + struct_name + ", listener: " + domain + "Fbe.LogListener?) throws -> Int {");
+                Indent(1);
+                WriteLineIndent("// Serialize the value into the FBE stream");
+                WriteLineIndent("let serialized = try " + *s->name + "SenderModel.serialize(value: value)");
+                WriteLineIndent("assert(serialized > 0, \"" + struct_name + " serialization failed!\")");
+                WriteLineIndent("assert(" + *s->name + "SenderModel.verify(), \"" + struct_name + " validation failed!\")");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if logging {");
+                Indent(1);
+                WriteLineIndent("let message = value.description");
+                WriteLineIndent("listener?.onSendLog(message: message)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Send the serialized value");
+                WriteLineIndent("return try sendSerialized(serialized: serialized)");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
         }
     }
 
@@ -7637,26 +7722,29 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("switch type {");
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case " + domain + package + "." + *s->name + model + ".fbeTypeConst:");
-            Indent(1);
-            WriteLineIndent("// Deserialize the value from the FBE stream");
-            WriteLineIndent(*s->name + "ReceiverModel.attach(buffer: buffer, offset: offset)");
-            WriteLineIndent("assert(" + *s->name + "ReceiverModel.verify(), \"" + package + "." + *s->name + " validation failed!\")");
-            WriteLineIndent("let deserialized = " + *s->name + "ReceiverModel.deserialize(value: &" + *s->name + "ReceiverValue)");
-            WriteLineIndent("assert(deserialized > 0, \"" + package + "." + *s->name + " deserialization failed!\")");
-            WriteLine();
-            WriteLineIndent("// Log the value");
-            WriteLineIndent("if logging {");
-            Indent(1);
-            WriteLineIndent("let message = " + *s->name + "ReceiverValue.description");
-            WriteLineIndent("listener.onReceiveLog(message: message)");
-            Indent(-1);
-            WriteLineIndent("}");
-            WriteLine();
-            WriteLineIndent("// Call receive handler with deserialized value");
-            WriteLineIndent("listener.onReceive(value: " + *s->name + "ReceiverValue)");
-            WriteLineIndent("return true");
-            Indent(-1);
+            if (s->message)
+            {
+                WriteLineIndent("case " + domain + package + "." + *s->name + model + ".fbeTypeConst:");
+                Indent(1);
+                WriteLineIndent("// Deserialize the value from the FBE stream");
+                WriteLineIndent(*s->name + "ReceiverModel.attach(buffer: buffer, offset: offset)");
+                WriteLineIndent("assert(" + *s->name + "ReceiverModel.verify(), \"" + package + "." + *s->name + " validation failed!\")");
+                WriteLineIndent("let deserialized = " + *s->name + "ReceiverModel.deserialize(value: &" + *s->name + "ReceiverValue)");
+                WriteLineIndent("assert(deserialized > 0, \"" + package + "." + *s->name + " deserialization failed!\")");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if logging {");
+                Indent(1);
+                WriteLineIndent("let message = " + *s->name + "ReceiverValue.description");
+                WriteLineIndent("listener.onReceiveLog(message: message)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Call receive handler with deserialized value");
+                WriteLineIndent("listener.onReceive(value: " + *s->name + "ReceiverValue)");
+                WriteLineIndent("return true");
+                Indent(-1);
+            }
         }
         WriteLineIndent("default: break");
         WriteLineIndent("}");

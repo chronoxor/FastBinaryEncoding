@@ -9,30 +9,6 @@ import ChronoxorProto
 // Fast Binary Encoding Test final receiver listener
 public protocol FinalReceiverListener : ChronoxorProto.FinalReceiverListener
  {
-    func onReceive(value: ChronoxorTest.StructSimple)
-    func onReceive(value: ChronoxorTest.StructOptional)
-    func onReceive(value: ChronoxorTest.StructNested)
-    func onReceive(value: ChronoxorTest.StructBytes)
-    func onReceive(value: ChronoxorTest.StructArray)
-    func onReceive(value: ChronoxorTest.StructVector)
-    func onReceive(value: ChronoxorTest.StructList)
-    func onReceive(value: ChronoxorTest.StructSet)
-    func onReceive(value: ChronoxorTest.StructMap)
-    func onReceive(value: ChronoxorTest.StructHash)
-    func onReceive(value: ChronoxorTest.StructHashEx)
-    func onReceive(value: ChronoxorTest.StructEmpty)
 }
 public extension FinalReceiverListener {
-    func onReceive(value: ChronoxorTest.StructSimple) { }
-    func onReceive(value: ChronoxorTest.StructOptional) { }
-    func onReceive(value: ChronoxorTest.StructNested) { }
-    func onReceive(value: ChronoxorTest.StructBytes) { }
-    func onReceive(value: ChronoxorTest.StructArray) { }
-    func onReceive(value: ChronoxorTest.StructVector) { }
-    func onReceive(value: ChronoxorTest.StructList) { }
-    func onReceive(value: ChronoxorTest.StructSet) { }
-    func onReceive(value: ChronoxorTest.StructMap) { }
-    func onReceive(value: ChronoxorTest.StructHash) { }
-    func onReceive(value: ChronoxorTest.StructHashEx) { }
-    func onReceive(value: ChronoxorTest.StructEmpty) { }
 }

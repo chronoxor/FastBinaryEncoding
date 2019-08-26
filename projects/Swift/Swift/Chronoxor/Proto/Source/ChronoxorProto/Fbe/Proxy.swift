@@ -9,25 +9,25 @@ import ChronoxorFbe
 // Fast Binary Encoding Proto proxy
 open class Proxy : ChronoxorFbe.ReceiverProtocol {
     // Proxy models accessors
-    private let OrderModel: OrderModel
-    private let BalanceModel: BalanceModel
-    private let AccountModel: AccountModel
+    private let OrderMessageModel: OrderMessageModel
+    private let BalanceMessageModel: BalanceMessageModel
+    private let AccountMessageModel: AccountMessageModel
 
     public var buffer: Buffer = Buffer()
     public var logging: Bool = false
     public var final: Bool = false
 
     public init() {
-        OrderModel = ChronoxorProto.OrderModel()
-        BalanceModel = ChronoxorProto.BalanceModel()
-        AccountModel = ChronoxorProto.AccountModel()
+        OrderMessageModel = ChronoxorProto.OrderMessageModel()
+        BalanceMessageModel = ChronoxorProto.BalanceMessageModel()
+        AccountMessageModel = ChronoxorProto.AccountMessageModel()
         build(final: false)
     }
 
     public init(buffer: ChronoxorFbe.Buffer) {
-        OrderModel = ChronoxorProto.OrderModel()
-        BalanceModel = ChronoxorProto.BalanceModel()
-        AccountModel = ChronoxorProto.AccountModel()
+        OrderMessageModel = ChronoxorProto.OrderMessageModel()
+        BalanceMessageModel = ChronoxorProto.BalanceMessageModel()
+        AccountMessageModel = ChronoxorProto.AccountMessageModel()
         build(with: buffer, final: false)
     }
 
@@ -37,44 +37,44 @@ open class Proxy : ChronoxorFbe.ReceiverProtocol {
 
     open func onReceiveListener(listener: ProxyListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
         switch type {
-        case ChronoxorProto.OrderModel.fbeTypeConst:
+        case ChronoxorProto.OrderMessageModel.fbeTypeConst:
             // Attach the FBE stream to the proxy model
-            OrderModel.attach(buffer: buffer, offset: offset)
-            assert(OrderModel.verify(), "Proto.Order validation failed!")
+            OrderMessageModel.attach(buffer: buffer, offset: offset)
+            assert(OrderMessageModel.verify(), "Proto.OrderMessage validation failed!")
 
-            let fbeBegin = OrderModel.model.getBegin()
+            let fbeBegin = OrderMessageModel.model.getBegin()
             if fbeBegin == 0 {
                 return false
             }
             // Call proxy handler
-            listener.onProxy(model: OrderModel, type: type, buffer: buffer, offset: offset, size: size)
-            OrderModel.model.getEnd(fbeBegin: fbeBegin)
+            listener.onProxy(model: OrderMessageModel, type: type, buffer: buffer, offset: offset, size: size)
+            OrderMessageModel.model.getEnd(fbeBegin: fbeBegin)
             return true
-        case ChronoxorProto.BalanceModel.fbeTypeConst:
+        case ChronoxorProto.BalanceMessageModel.fbeTypeConst:
             // Attach the FBE stream to the proxy model
-            BalanceModel.attach(buffer: buffer, offset: offset)
-            assert(BalanceModel.verify(), "Proto.Balance validation failed!")
+            BalanceMessageModel.attach(buffer: buffer, offset: offset)
+            assert(BalanceMessageModel.verify(), "Proto.BalanceMessage validation failed!")
 
-            let fbeBegin = BalanceModel.model.getBegin()
+            let fbeBegin = BalanceMessageModel.model.getBegin()
             if fbeBegin == 0 {
                 return false
             }
             // Call proxy handler
-            listener.onProxy(model: BalanceModel, type: type, buffer: buffer, offset: offset, size: size)
-            BalanceModel.model.getEnd(fbeBegin: fbeBegin)
+            listener.onProxy(model: BalanceMessageModel, type: type, buffer: buffer, offset: offset, size: size)
+            BalanceMessageModel.model.getEnd(fbeBegin: fbeBegin)
             return true
-        case ChronoxorProto.AccountModel.fbeTypeConst:
+        case ChronoxorProto.AccountMessageModel.fbeTypeConst:
             // Attach the FBE stream to the proxy model
-            AccountModel.attach(buffer: buffer, offset: offset)
-            assert(AccountModel.verify(), "Proto.Account validation failed!")
+            AccountMessageModel.attach(buffer: buffer, offset: offset)
+            assert(AccountMessageModel.verify(), "Proto.AccountMessage validation failed!")
 
-            let fbeBegin = AccountModel.model.getBegin()
+            let fbeBegin = AccountMessageModel.model.getBegin()
             if fbeBegin == 0 {
                 return false
             }
             // Call proxy handler
-            listener.onProxy(model: AccountModel, type: type, buffer: buffer, offset: offset, size: size)
-            AccountModel.model.getEnd(fbeBegin: fbeBegin)
+            listener.onProxy(model: AccountMessageModel, type: type, buffer: buffer, offset: offset, size: size)
+            AccountMessageModel.model.getEnd(fbeBegin: fbeBegin)
             return true
         default: break
         }

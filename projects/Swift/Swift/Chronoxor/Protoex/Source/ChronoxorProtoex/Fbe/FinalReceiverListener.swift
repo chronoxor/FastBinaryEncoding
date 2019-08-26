@@ -9,17 +9,11 @@ import ChronoxorProto
 // Fast Binary Encoding Protoex final receiver listener
 public protocol FinalReceiverListener : ChronoxorProto.FinalReceiverListener
  {
-    func onReceive(value: ChronoxorProtoex.Order)
-    func onReceive(value: ChronoxorProtoex.Balance)
-    func onReceive(value: ChronoxorProtoex.Account)
     func onReceive(value: ChronoxorProtoex.OrderMessage)
     func onReceive(value: ChronoxorProtoex.BalanceMessage)
     func onReceive(value: ChronoxorProtoex.AccountMessage)
 }
 public extension FinalReceiverListener {
-    func onReceive(value: ChronoxorProtoex.Order) { }
-    func onReceive(value: ChronoxorProtoex.Balance) { }
-    func onReceive(value: ChronoxorProtoex.Account) { }
     func onReceive(value: ChronoxorProtoex.OrderMessage) { }
     func onReceive(value: ChronoxorProtoex.BalanceMessage) { }
     func onReceive(value: ChronoxorProtoex.AccountMessage) { }

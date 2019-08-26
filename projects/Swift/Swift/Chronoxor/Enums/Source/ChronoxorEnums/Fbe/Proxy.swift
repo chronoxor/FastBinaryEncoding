@@ -9,19 +9,16 @@ import ChronoxorFbe
 // Fast Binary Encoding Enums proxy
 open class Proxy : ChronoxorFbe.ReceiverProtocol {
     // Proxy models accessors
-    private let EnumsModel: EnumsModel
 
     public var buffer: Buffer = Buffer()
     public var logging: Bool = false
     public var final: Bool = false
 
     public init() {
-        EnumsModel = ChronoxorEnums.EnumsModel()
         build(final: false)
     }
 
     public init(buffer: ChronoxorFbe.Buffer) {
-        EnumsModel = ChronoxorEnums.EnumsModel()
         build(with: buffer, final: false)
     }
 
@@ -30,22 +27,6 @@ open class Proxy : ChronoxorFbe.ReceiverProtocol {
     }
 
     open func onReceiveListener(listener: ProxyListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        switch type {
-        case ChronoxorEnums.EnumsModel.fbeTypeConst:
-            // Attach the FBE stream to the proxy model
-            EnumsModel.attach(buffer: buffer, offset: offset)
-            assert(EnumsModel.verify(), "Enums.Enums validation failed!")
-
-            let fbeBegin = EnumsModel.model.getBegin()
-            if fbeBegin == 0 {
-                return false
-            }
-            // Call proxy handler
-            listener.onProxy(model: EnumsModel, type: type, buffer: buffer, offset: offset, size: size)
-            EnumsModel.model.getEnd(fbeBegin: fbeBegin)
-            return true
-        default: break
-        }
 
         return false
     }

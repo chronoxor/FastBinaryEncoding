@@ -13,9 +13,6 @@ open class Proxy : ChronoxorFbe.ReceiverProtocol {
     let ProtoProxy: ChronoxorProto.Proxy?
 
     // Proxy models accessors
-    private let OrderModel: OrderModel
-    private let BalanceModel: BalanceModel
-    private let AccountModel: AccountModel
     private let OrderMessageModel: OrderMessageModel
     private let BalanceMessageModel: BalanceMessageModel
     private let AccountMessageModel: AccountMessageModel
@@ -26,9 +23,6 @@ open class Proxy : ChronoxorFbe.ReceiverProtocol {
 
     public init() {
         ProtoProxy = ChronoxorProto.Proxy(buffer: buffer)
-        OrderModel = ChronoxorProtoex.OrderModel()
-        BalanceModel = ChronoxorProtoex.BalanceModel()
-        AccountModel = ChronoxorProtoex.AccountModel()
         OrderMessageModel = ChronoxorProtoex.OrderMessageModel()
         BalanceMessageModel = ChronoxorProtoex.BalanceMessageModel()
         AccountMessageModel = ChronoxorProtoex.AccountMessageModel()
@@ -37,9 +31,6 @@ open class Proxy : ChronoxorFbe.ReceiverProtocol {
 
     public init(buffer: ChronoxorFbe.Buffer) {
         ProtoProxy = ChronoxorProto.Proxy(buffer: buffer)
-        OrderModel = ChronoxorProtoex.OrderModel()
-        BalanceModel = ChronoxorProtoex.BalanceModel()
-        AccountModel = ChronoxorProtoex.AccountModel()
         OrderMessageModel = ChronoxorProtoex.OrderMessageModel()
         BalanceMessageModel = ChronoxorProtoex.BalanceMessageModel()
         AccountMessageModel = ChronoxorProtoex.AccountMessageModel()
@@ -52,45 +43,6 @@ open class Proxy : ChronoxorFbe.ReceiverProtocol {
 
     open func onReceiveListener(listener: ProxyListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
         switch type {
-        case ChronoxorProtoex.OrderModel.fbeTypeConst:
-            // Attach the FBE stream to the proxy model
-            OrderModel.attach(buffer: buffer, offset: offset)
-            assert(OrderModel.verify(), "Protoex.Order validation failed!")
-
-            let fbeBegin = OrderModel.model.getBegin()
-            if fbeBegin == 0 {
-                return false
-            }
-            // Call proxy handler
-            listener.onProxy(model: OrderModel, type: type, buffer: buffer, offset: offset, size: size)
-            OrderModel.model.getEnd(fbeBegin: fbeBegin)
-            return true
-        case ChronoxorProtoex.BalanceModel.fbeTypeConst:
-            // Attach the FBE stream to the proxy model
-            BalanceModel.attach(buffer: buffer, offset: offset)
-            assert(BalanceModel.verify(), "Protoex.Balance validation failed!")
-
-            let fbeBegin = BalanceModel.model.getBegin()
-            if fbeBegin == 0 {
-                return false
-            }
-            // Call proxy handler
-            listener.onProxy(model: BalanceModel, type: type, buffer: buffer, offset: offset, size: size)
-            BalanceModel.model.getEnd(fbeBegin: fbeBegin)
-            return true
-        case ChronoxorProtoex.AccountModel.fbeTypeConst:
-            // Attach the FBE stream to the proxy model
-            AccountModel.attach(buffer: buffer, offset: offset)
-            assert(AccountModel.verify(), "Protoex.Account validation failed!")
-
-            let fbeBegin = AccountModel.model.getBegin()
-            if fbeBegin == 0 {
-                return false
-            }
-            // Call proxy handler
-            listener.onProxy(model: AccountModel, type: type, buffer: buffer, offset: offset, size: size)
-            AccountModel.model.getEnd(fbeBegin: fbeBegin)
-            return true
         case ChronoxorProtoex.OrderMessageModel.fbeTypeConst:
             // Attach the FBE stream to the proxy model
             OrderMessageModel.attach(buffer: buffer, offset: offset)

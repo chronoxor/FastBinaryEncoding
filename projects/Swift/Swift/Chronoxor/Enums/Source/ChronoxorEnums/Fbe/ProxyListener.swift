@@ -8,7 +8,6 @@ import Foundation
 
 // Fast Binary Encoding ChronoxorEnums proxy listener
 public protocol ProxyListener{
-    func onProxy(model: EnumsModel, type: Int, buffer: Data, offset: Int, size: Int)
 }
 
 public extension ProxyListener{

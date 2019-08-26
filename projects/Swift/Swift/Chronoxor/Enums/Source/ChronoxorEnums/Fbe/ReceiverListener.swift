@@ -7,8 +7,6 @@ import ChronoxorFbe
 
 // Fast Binary Encoding Enums receiver listener
 public protocol ReceiverListener : ChronoxorFbe.LogListener {
-    func onReceive(value: ChronoxorEnums.Enums)
 }
 public extension ReceiverListener {
-    func onReceive(value: ChronoxorEnums.Enums) { }
 }
