@@ -96,6 +96,7 @@ if(NOT FBEC_MODULE)
       COMMAND $<TARGET_FILE:fbec> --kotlin --final --json --proto --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/Kotlin/src
       COMMAND $<TARGET_FILE:fbec> --python --final --json --proto --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/Python/proto
       COMMAND $<TARGET_FILE:fbec> --ruby --final --json --proto --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/Ruby/proto
+      COMMAND $<TARGET_FILE:fbec> --swift --final --json --proto --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/Swift
       DEPENDS ${FBE_INPUT_FILE} COMMENT "Generating FBE proto for ${FBE_INPUT_FILE}..." VERBATIM
     )
     add_custom_target(${FBE_TARGET} DEPENDS ${FBE_OUTPUT_FILE})

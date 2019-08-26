@@ -401,7 +401,11 @@ public class Buffer {
     // Unshift the current buffer offset
     public func unshift(offset: Int) { self.offset -= offset }
 }
+)CODE";
 
+    Write(code);
+
+    code = R"CODE(
 // MARK: Buffer I/O methods
 public extension Buffer {
     class func readBoolean(buffer: Data, offset: Int) -> Bool {
