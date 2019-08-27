@@ -89,7 +89,6 @@ private:
     void GenerateEnumClass(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path);
     void GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& e, const CppCommon::Path& path);
     void GenerateFlagsClass(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& e, const CppCommon::Path& path);
-    void GenerateFlagsJson(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& e);
     void GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path);
     void GenerateStructFieldModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s);
     void GenerateStructModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s);
@@ -102,7 +101,6 @@ private:
     void GenerateProxy(const std::shared_ptr<Package>& p, bool final);
     void GenerateProxyListener(const std::shared_ptr<Package>& p, bool final);
     void GenerateClient(const std::shared_ptr<Package>& p, bool final);
-    void GenerateJson(const std::shared_ptr<Package>& p);
 
     bool IsKnownType(const std::string& type);
     bool IsImportedType(const std::string& type);
