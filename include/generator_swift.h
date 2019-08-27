@@ -110,8 +110,7 @@ private:
     bool IsPrimitiveType(const std::string& type, bool optional);
     bool IsUnsignedType(const std::string& type);
 
-    std::string CreateSwiftPackagePath(const std::string& domain, const std::string& package);
-    std::string CreatePackagePath(const std::string& domain, const std::string& package);
+    CppCommon::Path CreatePackagePath(const std::string& domain, const std::string& package);
 
     std::string ConvertEnumBase(const std::string& type);
     std::string ConvertEnumType(const std::string& type);

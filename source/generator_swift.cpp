@@ -125,7 +125,7 @@ void GeneratorSwift::GenerateFBEPackage(const std::string& domain, const std::st
     // Create FBE package path
     CppCommon::Directory::CreateTree(path);
 
-    CppCommon::Path packagePath = CppCommon::Path(_output) / CreateSwiftPackagePath(domain, package);
+    CppCommon::Path packagePath = CppCommon::Path(_output) / package;
 
     // Create FBE package path
     CppCommon::Directory::CreateTree(packagePath);
@@ -4026,7 +4026,8 @@ public extension ReceiverProtocol {
     Close();
 }
 
-void GeneratorSwift::GenerateFBEReceiverListener(const std::string& domain, const std::string& package) {
+void GeneratorSwift::GenerateFBEReceiverListener(const std::string& domain, const std::string& package)
+{
   CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
   // Open the file
@@ -4476,7 +4477,7 @@ void GeneratorSwift::GeneratePackage(const std::shared_ptr<Package>& p)
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    CppCommon::Path packagePath = CppCommon::Path(_output) / CreateSwiftPackagePath(domain, package);
+    CppCommon::Path packagePath = CppCommon::Path(_output) / package;
 
     // Create FBE package path
     CppCommon::Directory::CreateTree(packagePath);
@@ -7840,22 +7841,9 @@ bool GeneratorSwift::IsUnsignedType(const std::string& type)
     return ((type == "byte") || (type == "uint8") || (type == "uint16") || (type == "uint32") || (type == "uint64"));
 }
 
-std::string GeneratorSwift::CreateSwiftPackagePath(const std::string& domain, const std::string& package)
+CppCommon::Path GeneratorSwift::CreatePackagePath(const std::string& domain, const std::string& package)
 {
-
-    std::string result = domain;
-    CppCommon::StringUtils::ReplaceAll(result, ".", std::string(1, CppCommon::Path::separator()));
-
-
-    return result + CppCommon::Path::separator() + package;
-}
-
-std::string GeneratorSwift::CreatePackagePath(const std::string& domain, const std::string& package)
-{
-
-    std::string result = domain;
-    CppCommon::StringUtils::ReplaceAll(result, ".", std::string(1, CppCommon::Path::separator()));
-    return result + CppCommon::Path::separator() + package + CppCommon::Path::separator() + "Source" + CppCommon::Path::separator() + result + package;
+    return CppCommon::Path(package) / "Source" / (domain + package);
 }
 
 std::string GeneratorSwift::ConvertEnumBase(const std::string& type)
