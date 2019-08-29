@@ -18,7 +18,7 @@ public class EnumInt32 : Comparable, Hashable, Codable {
 
     public var raw: Int32 { return value!.rawValue }
 
-    public init() { }
+    public init() {}
     public init(value: Int32) { setEnum(value: value) }
     public init(value: EnumInt32Enum) { setEnum(value: value) }
     public init(value: EnumInt32) { setEnum(value: value) }

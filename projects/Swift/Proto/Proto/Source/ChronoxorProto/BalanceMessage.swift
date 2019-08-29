@@ -9,7 +9,7 @@ import ChronoxorFbe
 open class BalanceMessage: Comparable, Hashable, Codable {
     public var body: Balance = ChronoxorProto.Balance()
 
-    public init() { }
+    public init() {}
     public init(body: Balance) {
 
         self.body = body
@@ -36,12 +36,10 @@ open class BalanceMessage: Comparable, Hashable, Codable {
     }
 
     public static func < (lhs: BalanceMessage, rhs: BalanceMessage) -> Bool {
-
         return true
     }
 
     public static func == (lhs: BalanceMessage, rhs: BalanceMessage) -> Bool {
-
         return true
     }
 

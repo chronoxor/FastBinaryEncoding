@@ -10,7 +10,7 @@ open class Balance: Comparable, Hashable, Codable {
     public var currency: String = ""
     public var amount: Double = 0.0
 
-    public init() { }
+    public init() {}
     public init(currency: String, amount: Double) {
 
         self.currency = currency
@@ -41,13 +41,11 @@ open class Balance: Comparable, Hashable, Codable {
 
     public static func < (lhs: Balance, rhs: Balance) -> Bool {
         if !(lhs.currency < rhs.currency) { return false }
-
         return true
     }
 
     public static func == (lhs: Balance, rhs: Balance) -> Bool {
         if !(lhs.currency == rhs.currency) { return false }
-
         return true
     }
 

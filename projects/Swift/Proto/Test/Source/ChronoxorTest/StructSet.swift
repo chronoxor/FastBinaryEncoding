@@ -13,7 +13,7 @@ open class StructSet: Comparable, Hashable, Codable {
     public var f3: Array<FlagsSimple> = Array()
     public var f4: Array<StructSimple> = Array()
 
-    public init() { }
+    public init() {}
     public init(f1: Array<UInt8>, f2: Array<EnumSimple>, f3: Array<FlagsSimple>, f4: Array<StructSimple>) {
 
         self.f1 = f1
@@ -49,12 +49,10 @@ open class StructSet: Comparable, Hashable, Codable {
     }
 
     public static func < (lhs: StructSet, rhs: StructSet) -> Bool {
-
         return true
     }
 
     public static func == (lhs: StructSet, rhs: StructSet) -> Bool {
-
         return true
     }
 

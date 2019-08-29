@@ -309,12 +309,10 @@ open class StructOptional: StructSimple {
     }
 
     public static func < (lhs: StructOptional, rhs: StructOptional) -> Bool {
-
         return true
     }
 
     public static func == (lhs: StructOptional, rhs: StructOptional) -> Bool {
-
         return true
     }
 

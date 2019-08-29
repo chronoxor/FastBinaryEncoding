@@ -18,7 +18,7 @@ public class EnumChar : Comparable, Hashable, Codable {
 
     public var raw: UInt8 { return value!.rawValue }
 
-    public init() { }
+    public init() {}
     public init(value: UInt8) { setEnum(value: value) }
     public init(value: EnumCharEnum) { setEnum(value: value) }
     public init(value: EnumChar) { setEnum(value: value) }

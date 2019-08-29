@@ -8,7 +8,7 @@ import ChronoxorFbe
 import ChronoxorProto
 
 open class StructEmpty: Comparable, Hashable, Codable {
-    public init() { }
+    public init() {}
 
     public init(other: StructEmpty) {
     }
@@ -29,12 +29,10 @@ open class StructEmpty: Comparable, Hashable, Codable {
     }
 
     public static func < (lhs: StructEmpty, rhs: StructEmpty) -> Bool {
-
         return true
     }
 
     public static func == (lhs: StructEmpty, rhs: StructEmpty) -> Bool {
-
         return true
     }
 

@@ -11,5 +11,5 @@ public protocol ProxyListener{
 }
 
 public extension ProxyListener{
-    func onProxy(model: EnumsModel, type: Int, buffer: Data, offset: Int, size: Int) { }
+    func onProxy(model: EnumsModel, type: Int, buffer: Data, offset: Int, size: Int) {}
 }

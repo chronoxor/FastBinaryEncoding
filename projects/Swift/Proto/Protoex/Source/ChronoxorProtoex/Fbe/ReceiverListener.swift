@@ -14,7 +14,7 @@ public protocol ReceiverListener : ChronoxorProto.ReceiverListener
     func onReceive(value: ChronoxorProtoex.AccountMessage)
 }
 public extension ReceiverListener {
-    func onReceive(value: ChronoxorProtoex.OrderMessage) { }
-    func onReceive(value: ChronoxorProtoex.BalanceMessage) { }
-    func onReceive(value: ChronoxorProtoex.AccountMessage) { }
+    func onReceive(value: ChronoxorProtoex.OrderMessage) {}
+    func onReceive(value: ChronoxorProtoex.BalanceMessage) {}
+    func onReceive(value: ChronoxorProtoex.AccountMessage) {}
 }

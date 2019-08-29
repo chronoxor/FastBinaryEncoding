@@ -14,7 +14,7 @@ public class OrderSide : Comparable, Hashable, Codable {
 
     public var raw: UInt8 { return value!.rawValue }
 
-    public init() { }
+    public init() {}
     public init(value: UInt8) { setEnum(value: value) }
     public init(value: OrderSideEnum) { setEnum(value: value) }
     public init(value: OrderSide) { setEnum(value: value) }
