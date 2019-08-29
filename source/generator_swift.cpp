@@ -5390,10 +5390,12 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     WriteLineIndent("public static func < (lhs: " + *s->name + ", rhs: " + *s->name + ") -> Bool {");
     Indent(1);
     if (s->body)
+    {
         for (const auto& field : s->body->fields)
             if (field->keys)
                 WriteLineIndent("if !(lhs." + *field->name + " < rhs." + *field->name + ") { return false }");
-    WriteLine();
+        WriteLine();
+    }
     WriteLineIndent("return true");
     Indent(-1);
     WriteLineIndent("}");
@@ -5403,10 +5405,12 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     WriteLineIndent("public static func == (lhs: " + *s->name + ", rhs: " + *s->name + ") -> Bool {");
     Indent(1);
     if (s->body)
+    {
         for (const auto& field : s->body->fields)
             if (field->keys)
                 WriteLineIndent("if !(lhs." + *field->name + " == rhs." + *field->name + ") { return false }");
-    WriteLine();
+        WriteLine();
+    }
     WriteLineIndent("return true");
     Indent(-1);
     WriteLineIndent("}");
