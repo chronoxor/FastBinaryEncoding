@@ -14,7 +14,7 @@ open class Order: Comparable, Hashable, Codable {
     public var price: Double = 0.0
     public var volume: Double = 0.0
 
-    public init() { }
+    public init() {}
     public init(id: Int32, symbol: String, side: OrderSide, type: OrderType, price: Double, volume: Double) {
 
         self.id = id
@@ -57,13 +57,11 @@ open class Order: Comparable, Hashable, Codable {
 
     public static func < (lhs: Order, rhs: Order) -> Bool {
         if !(lhs.id < rhs.id) { return false }
-
         return true
     }
 
     public static func == (lhs: Order, rhs: Order) -> Bool {
         if !(lhs.id == rhs.id) { return false }
-
         return true
     }
 

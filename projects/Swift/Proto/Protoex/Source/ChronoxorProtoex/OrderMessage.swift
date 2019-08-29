@@ -10,7 +10,7 @@ import ChronoxorProto
 open class OrderMessage: Comparable, Hashable, Codable {
     public var body: Order = ChronoxorProtoex.Order()
 
-    public init() { }
+    public init() {}
     public init(body: Order) {
 
         self.body = body
@@ -37,12 +37,10 @@ open class OrderMessage: Comparable, Hashable, Codable {
     }
 
     public static func < (lhs: OrderMessage, rhs: OrderMessage) -> Bool {
-
         return true
     }
 
     public static func == (lhs: OrderMessage, rhs: OrderMessage) -> Bool {
-
         return true
     }
 

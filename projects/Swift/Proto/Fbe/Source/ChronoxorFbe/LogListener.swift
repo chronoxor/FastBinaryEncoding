@@ -15,6 +15,6 @@ public protocol LogListener: class {
 }
 
 public extension LogListener {
-    func onReceiveLog(message: String) { }
-    func onSendLog(message: String) { }
+    func onReceiveLog(message: String) {}
+    func onSendLog(message: String) {}
 }

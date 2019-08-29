@@ -15,7 +15,7 @@ open class Account: Comparable, Hashable, Codable {
     public var asset: Balance? = nil
     public var orders: Array<Order> = Array()
 
-    public init() { }
+    public init() {}
     public init(id: Int32, name: String, state: StateEx, wallet: Balance, asset: Balance?, orders: Array<Order>) {
 
         self.id = id
@@ -58,13 +58,11 @@ open class Account: Comparable, Hashable, Codable {
 
     public static func < (lhs: Account, rhs: Account) -> Bool {
         if !(lhs.id < rhs.id) { return false }
-
         return true
     }
 
     public static func == (lhs: Account, rhs: Account) -> Bool {
         if !(lhs.id == rhs.id) { return false }
-
         return true
     }
 

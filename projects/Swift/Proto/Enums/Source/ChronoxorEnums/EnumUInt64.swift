@@ -18,7 +18,7 @@ public class EnumUInt64 : Comparable, Hashable, Codable {
 
     public var raw: UInt64 { return value!.rawValue }
 
-    public init() { }
+    public init() {}
     public init(value: UInt64) { setEnum(value: value) }
     public init(value: EnumUInt64Enum) { setEnum(value: value) }
     public init(value: EnumUInt64) { setEnum(value: value) }

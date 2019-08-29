@@ -10,7 +10,7 @@ import ChronoxorProto
 open class AccountMessage: Comparable, Hashable, Codable {
     public var body: Account = ChronoxorProtoex.Account()
 
-    public init() { }
+    public init() {}
     public init(body: Account) {
 
         self.body = body
@@ -37,12 +37,10 @@ open class AccountMessage: Comparable, Hashable, Codable {
     }
 
     public static func < (lhs: AccountMessage, rhs: AccountMessage) -> Bool {
-
         return true
     }
 
     public static func == (lhs: AccountMessage, rhs: AccountMessage) -> Bool {
-
         return true
     }
 

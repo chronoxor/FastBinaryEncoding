@@ -40,12 +40,10 @@ open class Balance: ChronoxorProto.Balance {
     }
 
     public static func < (lhs: Balance, rhs: Balance) -> Bool {
-
         return true
     }
 
     public static func == (lhs: Balance, rhs: Balance) -> Bool {
-
         return true
     }
 

@@ -1033,7 +1033,6 @@ public class FieldModelDecimal: FieldModel {
         let scale = (flags & 0x7FFFFFFF) >> 16
         let sign: FloatingPointSign = negative ? .minus : .plus
 
-
         var result = Decimal(readUInt32(offset: fbeOffset + 8)) * lowScaleField
         result = result + (Decimal(readUInt32(offset: fbeOffset + 4)) * midScaleField)
         result = result + Decimal(readUInt32(offset: fbeOffset + 0))
@@ -1059,12 +1058,12 @@ public class FieldModelDecimal: FieldModel {
         }
 
         // Get scale
-         let scale = UInt8(abs(valueRef.exponent))
-         if scale < 0 || scale > 28 {
-             // Value scale exceeds .NET Decimal limit of [0, 28]
-             write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
-             return
-         }
+        let scale = UInt8(abs(valueRef.exponent))
+        if scale < 0 || scale > 28 {
+            // Value scale exceeds .NET Decimal limit of [0, 28]
+            write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
+            return
+        }
 
         // Get byte array
         let unscaledBytes = withUnsafeBytes(of: valueRef) {
@@ -4049,8 +4048,8 @@ public protocol LogListener: class {
 }
 
 public extension LogListener {
-    func onReceiveLog(message: String) { }
-    func onSendLog(message: String) { }
+    func onReceiveLog(message: String) {}
+    func onSendLog(message: String) {}
 }
 )CODE";
 
@@ -4772,7 +4771,7 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
     WriteLine();
 
     // Generate enum class constructors
-    WriteLineIndent("public init() { }");
+    WriteLineIndent("public init() {}");
     WriteLineIndent("public init(value: " + enum_base_type + ") { setEnum(value: value) }");
     WriteLineIndent("public init(value: " + enum_type_name + ") { setEnum(value: value) }");
     WriteLineIndent("public init(value: " + enum_name + ") { setEnum(value: value) }");
@@ -5300,7 +5299,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     if (s->base && !s->base->empty())
         WriteLineIndent("public override init() { super.init() }");
     else
-        WriteLineIndent("public init() { }");
+        WriteLineIndent("public init() {}");
 
     // Generate struct initialization constructor
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
@@ -5417,7 +5416,6 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
         for (const auto& field : s->body->fields)
             if (field->keys)
                 WriteLineIndent("if !(lhs." + *field->name + " < rhs." + *field->name + ") { return false }");
-    WriteLine();
     WriteLineIndent("return true");
     Indent(-1);
     WriteLineIndent("}");
@@ -5430,7 +5428,6 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
         for (const auto& field : s->body->fields)
             if (field->keys)
                 WriteLineIndent("if !(lhs." + *field->name + " == rhs." + *field->name + ") { return false }");
-    WriteLine();
     WriteLineIndent("return true");
     Indent(-1);
     WriteLineIndent("}");
@@ -7195,7 +7192,7 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
             if (s->message)
             {
                 std::string struct_name = domain + package + "." + *s->name;
-                WriteLineIndent("func onReceive(value: " + struct_name + ") { }");
+                WriteLineIndent("func onReceive(value: " + struct_name + ") {}");
             }
         }
     }
@@ -7450,7 +7447,7 @@ void GeneratorSwift::GenerateProxyListener(const std::shared_ptr<Package>& p, bo
         for (const auto& s : p->body->structs)
         {
             std::string struct_model = *s->name + model;
-            WriteLineIndent("func onProxy(model: " + struct_model + ", type: Int, buffer: Data, offset: Int, size: Int) { }");
+            WriteLineIndent("func onProxy(model: " + struct_model + ", type: Int, buffer: Data, offset: Int, size: Int) {}");
         }
     }
 

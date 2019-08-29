@@ -12,7 +12,7 @@ open class StructBytes: Comparable, Hashable, Codable {
     public var f2: Data? = nil
     public var f3: Data? = nil
 
-    public init() { }
+    public init() {}
     public init(f1: Data, f2: Data?, f3: Data?) {
 
         self.f1 = f1
@@ -45,12 +45,10 @@ open class StructBytes: Comparable, Hashable, Codable {
     }
 
     public static func < (lhs: StructBytes, rhs: StructBytes) -> Bool {
-
         return true
     }
 
     public static func == (lhs: StructBytes, rhs: StructBytes) -> Bool {
-
         return true
     }
 

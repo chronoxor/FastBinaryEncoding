@@ -18,7 +18,7 @@ public class EnumInt16 : Comparable, Hashable, Codable {
 
     public var raw: Int16 { return value!.rawValue }
 
-    public init() { }
+    public init() {}
     public init(value: Int16) { setEnum(value: value) }
     public init(value: EnumInt16Enum) { setEnum(value: value) }
     public init(value: EnumInt16) { setEnum(value: value) }

@@ -84,12 +84,10 @@ open class StructNested: StructOptional {
     }
 
     public static func < (lhs: StructNested, rhs: StructNested) -> Bool {
-
         return true
     }
 
     public static func == (lhs: StructNested, rhs: StructNested) -> Bool {
-
         return true
     }
 

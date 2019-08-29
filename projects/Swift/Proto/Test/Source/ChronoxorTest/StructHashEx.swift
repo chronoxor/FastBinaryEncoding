@@ -11,7 +11,7 @@ open class StructHashEx: Comparable, Hashable, Codable {
     public var f1: Dictionary<StructSimple, StructNested> = Dictionary()
     public var f2: Dictionary<StructSimple, StructNested?> = Dictionary()
 
-    public init() { }
+    public init() {}
     public init(f1: Dictionary<StructSimple, StructNested>, f2: Dictionary<StructSimple, StructNested?>) {
 
         self.f1 = f1
@@ -41,12 +41,10 @@ open class StructHashEx: Comparable, Hashable, Codable {
     }
 
     public static func < (lhs: StructHashEx, rhs: StructHashEx) -> Bool {
-
         return true
     }
 
     public static func == (lhs: StructHashEx, rhs: StructHashEx) -> Bool {
-
         return true
     }
 
