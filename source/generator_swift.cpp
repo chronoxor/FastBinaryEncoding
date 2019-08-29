@@ -348,7 +348,11 @@ public class Buffer {
             throw NSException(name: .invalidArgumentException, reason: "Invalid offset & size!") as! Error
         }
         if (size != 0) {
-            data[offset...] = data[(offset + size)...(self.size - size - offset)]
+            if self.size - size - offset != 0 {
+                data[offset...] = data[(offset + size)..<self.size]
+            } else {
+                data = data[0..<offset]
+            }
         }
         self.size -= size
         if (self.offset >= offset + size) {
@@ -4134,7 +4138,7 @@ public extension ClientProtocol {
     }
 
     // Receive data
-    func receive(buffer: inout Data ) throws {
+    func receive(buffer: Data ) throws {
         let buffer = Buffer(buffer: buffer)
         try receive(buffer: buffer, offset: 0, size: buffer.data.count)
     }
@@ -4745,7 +4749,10 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
 
     // Generate enum class body
     WriteLine();
-    WriteLineIndent("public class " + enum_name + " : Comparable, Hashable, Codable {");
+    if (JSON())
+        WriteLineIndent("public class " + enum_name + " : Comparable, Hashable, Codable {");
+    else
+        WriteLineIndent("public class " + enum_name + " : Comparable, Hashable {");
     Indent(1);
     WriteLineIndent("typealias RawValue = " + enum_base_type);
 
@@ -4769,14 +4776,17 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
     WriteLineIndent("public init(value: " + enum_base_type + ") { setEnum(value: value) }");
     WriteLineIndent("public init(value: " + enum_type_name + ") { setEnum(value: value) }");
     WriteLineIndent("public init(value: " + enum_name + ") { setEnum(value: value) }");
-
     WriteLine();
-    WriteLineIndent("public required init(from decoder: Decoder) throws {");
-    Indent(1);
-    WriteLineIndent("let container = try decoder.singleValueContainer()");
-    WriteLineIndent("setEnum(value: try container.decode(RawValue.self))");
-    Indent(-1);
-    WriteLineIndent("}");
+
+    if (JSON())
+    {
+        WriteLineIndent("public required init(from decoder: Decoder) throws {");
+        Indent(1);
+        WriteLineIndent("let container = try decoder.singleValueContainer()");
+        WriteLineIndent("setEnum(value: try container.decode(RawValue.self))");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
 
     // Generate enum class setDefault() method
     WriteLineIndent("public func setDefault() { setEnum(value: NSNumber(value: 0)" + enum_to + ") }");
@@ -4830,26 +4840,29 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
     Indent(-1);
     WriteLineIndent("}");
 
-    WriteLineIndent("open func encode(to encoder: Encoder) throws {");
-    Indent(1);
-    WriteLineIndent("var container = encoder.singleValueContainer()");
-    WriteLineIndent("try container.encode(raw)");
-    Indent(-1);
-    WriteLineIndent("}");
+    if (JSON())
+    {
+        WriteLineIndent("open func encode(to encoder: Encoder) throws {");
+        Indent(1);
+        WriteLineIndent("var container = encoder.singleValueContainer()");
+        WriteLineIndent("try container.encode(raw)");
+        Indent(-1);
+        WriteLineIndent("}");
 
-    WriteLine();
-    WriteLineIndent("public func toJson() throws -> String {");
-    Indent(1);
-    WriteLineIndent("return String(data: try JSONEncoder().encode(self), encoding: .utf8)!");
-    Indent(-1);
-    WriteLineIndent("}");
+        WriteLine();
+        WriteLineIndent("public func toJson() throws -> String {");
+        Indent(1);
+        WriteLineIndent("return String(data: try JSONEncoder().encode(self), encoding: .utf8)!");
+        Indent(-1);
+        WriteLineIndent("}");
 
-    WriteLine();
-    WriteLineIndent("public class func fromJson(_ json: String) -> " + enum_name + " {");
-    Indent(1);
-    WriteLineIndent("return try! JSONDecoder().decode(" + enum_name + ".self, from: json.data(using: .utf8)!)");
-    Indent(-1);
-    WriteLineIndent("}");
+        WriteLine();
+        WriteLineIndent("public class func fromJson(_ json: String) -> " + enum_name + " {");
+        Indent(1);
+        WriteLineIndent("return try! JSONDecoder().decode(" + enum_name + ".self, from: json.data(using: .utf8)!)");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
 
     Indent(-1);
     WriteLineIndent("}");
@@ -5067,7 +5080,10 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
 
     // Generate flags class body
     WriteLine();
-    WriteLineIndent("public class " + flags_name + ": Comparable, Hashable, Codable {");
+    if (JSON())
+        WriteLineIndent("public class " + flags_name + ": Comparable, Hashable, Codable {");
+    else
+        WriteLineIndent("public class " + flags_name + ": Comparable, Hashable {");
     Indent(1);
     WriteLineIndent("typealias RawValue = " + flags_base_type);
     if (f->body)
@@ -5115,13 +5131,16 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
     WriteLineIndent("public init(value: " + flags_type_name + ") { setEnum(value: value) }");
     WriteLineIndent("public init(value: " + flags_name + ") { setEnum(value: value) }");
 
-    WriteLine();
-    WriteLineIndent("public required init(from decoder: Decoder) throws {");
-    Indent(1);
-    WriteLineIndent("let container = try decoder.singleValueContainer()");
-    WriteLineIndent("setEnum(value: try container.decode(RawValue.self))");
-    Indent(-1);
-    WriteLineIndent("}");
+    if (JSON())
+    {
+        WriteLine();
+        WriteLineIndent("public required init(from decoder: Decoder) throws {");
+        Indent(1);
+        WriteLineIndent("let container = try decoder.singleValueContainer()");
+        WriteLineIndent("setEnum(value: try container.decode(RawValue.self))");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
 
     // Generate flags class setDefault() method
     WriteLine();
@@ -5203,26 +5222,29 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
     Indent(-1);
     WriteLineIndent("}");
 
-    WriteLineIndent("open func encode(to encoder: Encoder) throws {");
-    Indent(1);
-    WriteLineIndent("var container = encoder.singleValueContainer()");
-    WriteLineIndent("try container.encode(raw)");
-    Indent(-1);
-    WriteLineIndent("}");
+    if (JSON())
+    {
+        WriteLineIndent("open func encode(to encoder: Encoder) throws {");
+        Indent(1);
+        WriteLineIndent("var container = encoder.singleValueContainer()");
+        WriteLineIndent("try container.encode(raw)");
+        Indent(-1);
+        WriteLineIndent("}");
 
-    WriteLine();
-    WriteLineIndent("public func toJson() throws -> String {");
-    Indent(1);
-    WriteLineIndent("return String(data: try JSONEncoder().encode(self), encoding: .utf8)!");
-    Indent(-1);
-    WriteLineIndent("}");
+        WriteLine();
+        WriteLineIndent("public func toJson() throws -> String {");
+        Indent(1);
+        WriteLineIndent("return String(data: try JSONEncoder().encode(self), encoding: .utf8)!");
+        Indent(-1);
+        WriteLineIndent("}");
 
-    WriteLine();
-    WriteLineIndent("public class func fromJson(_ json: String) -> " + flags_name + " {");
-    Indent(1);
-    WriteLineIndent("return try! JSONDecoder().decode(" + flags_name + ".self, from: json.data(using: .utf8)!)");
-    Indent(-1);
-    WriteLineIndent("}");
+        WriteLine();
+        WriteLineIndent("public class func fromJson(_ json: String) -> " + flags_name + " {");
+        Indent(1);
+        WriteLineIndent("return try! JSONDecoder().decode(" + flags_name + ".self, from: json.data(using: .utf8)!)");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
 
     Indent(-1);
     WriteLineIndent("}");
@@ -5255,8 +5277,10 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     WriteIndent("open class " + *s->name);
     if (s->base && !s->base->empty())
         Write(": " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false));
-    else
+    else if (JSON())
         Write(": Comparable, Hashable, Codable");
+    else
+        Write(": Comparable, Hashable");
     WriteLineIndent(" {");
     Indent(1);
 
@@ -5322,51 +5346,50 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     WriteLineIndent("}");
 
     // Generate struct json constructor
-    WriteLine();
-    WriteLineIndent("public required init(from decoder: Decoder) throws {");
-    Indent(1);
-    if (s->base && !s->base->empty())
-        WriteLineIndent("try super.init(from: decoder)");
-
-    WriteLineIndent("let container = try decoder.container(keyedBy: CodingKeys.self)");
-    if (s->body)
+    if (JSON())
     {
-        for (const auto& field : s->body->fields)
-        {
-            if (field->map && (*field->key != "string"))
-                WriteLineIndent(*field->name + " = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, " + ConvertTypeName(domain, "", *field->type, field->optional) + ">.self, forKey: ." + *field->name + ")).map { (" + ConvertTypeName(domain, "", *field->key, false) + "($0) ?? 0, $1) })");
-            else if (*field->type == "decimal")
-            {
-                if (field->optional)
-                {
-                    WriteLineIndent("let " + *field->name + "RawValue = try container.decode(String?.self, forKey: ." + *field->name + ")");
-                    WriteLineIndent(*field->name + " = " + *field->name + "RawValue != nil ? Decimal(string: " + *field->name + "RawValue!) ?? .nan : nil");
-                }
-                else
-                    WriteLineIndent(*field->name + " = Decimal(string: try container.decode(String.self, forKey: ." + *field->name + ")) ?? .nan");
-            }
-            else if ((*field->type == "char") || (*field->type == "wchar"))
-            {
-                std::string valueType = (*field->type == "char") ? "UInt8" : "UInt32";
-                std::string valueOpt = (*field->type == "char") ? "" : "!";
-                if (field->optional)
-                {
-                    WriteLineIndent("let " + *field->name + "RawValue: " + valueType + "? = try container.decode(" + valueType + "?.self, forKey: ." + *field->name + ")");
-                    WriteLineIndent(*field->name + " = " + *field->name + "RawValue != nil ? Character(UnicodeScalar(" + *field->name + "RawValue!)" + valueOpt + ") : nil");
-                }
-                else
-                {
-                    WriteLineIndent("let " + *field->name + "RawValue: " + valueType + " = try container.decode(" + valueType + ".self, forKey: ." + *field->name + ")");
-                    WriteLineIndent(*field->name + " = Character(UnicodeScalar(" + *field->name + "RawValue)" + valueOpt + ")");
-                }
-            }
-            else
-                WriteLineIndent(*field->name + " = try container.decode(" + ConvertTypeName(domain, package, *field, false) + ".self, forKey: ." + *field->name + ")");
-        }
-    }
+        WriteLine();
+        WriteLineIndent("public required init(from decoder: Decoder) throws {");
+        Indent(1);
+        if (s->base && !s->base->empty())
+            WriteLineIndent("try super.init(from: decoder)");
 
-    Indent(-1);
+        WriteLineIndent("let container = try decoder.container(keyedBy: CodingKeys.self)");
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                if (field->map && *field->key != "string")
+                {
+                    WriteLineIndent(*field->name + " = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, " + ConvertTypeName(domain, "", *field->type, field->optional) + ">.self, forKey: ." + *field->name + ")).map { (" + ConvertTypeName(domain, "", *field->key, false) + "($0) ?? 0, $1) })");
+                } else if (*field->type == "decimal")
+                {
+                    if (field->optional)
+                    {
+                        WriteLineIndent("let " + *field->name + "RawValue = try container.decode(String?.self, forKey: ." + *field->name + ")");
+                        WriteLineIndent(*field->name + " = " + *field->name + "RawValue != nil ? Decimal(string: " + *field->name + "RawValue!) ?? .nan : nil");
+                    } else
+                        WriteLineIndent(*field->name + " = Decimal(string: try container.decode(String.self, forKey: ." + *field->name + ")) ?? .nan");
+                } else if ((*field->type == "char") || (*field->type == "wchar"))
+                {
+                    std::string valueType = (*field->type == "char") ? "UInt8" : "UInt32";
+                    std::string valueOpt = (*field->type == "char") ? "" : "!";
+                    if (field->optional)
+                    {
+                        WriteLineIndent("let " + *field->name + "RawValue: " + valueType + "? = try container.decode(" + valueType + "?.self, forKey: ." + *field->name + ")");
+                        WriteLineIndent(*field->name + " = " + *field->name + "RawValue != nil ? Character(UnicodeScalar(" + *field->name + "RawValue!)" + valueOpt + ") : nil");
+                    } else {
+                        WriteLineIndent("let " + *field->name + "RawValue: " + valueType + " = try container.decode(" + valueType + ".self, forKey: ." + *field->name + ")");
+                        WriteLineIndent(*field->name + " = Character(UnicodeScalar(" + *field->name + "RawValue)" + valueOpt + ")");
+                    }
+                } else
+                  WriteLineIndent(*field->name + " = try container.decode(" + ConvertTypeName(domain, package, *field, false) + ".self, forKey: ." + *field->name + ")");
+            }
+        }
+
+        Indent(-1);
     WriteLineIndent("}");
+    }
 
     // Generate struct clone() method
     WriteLine();

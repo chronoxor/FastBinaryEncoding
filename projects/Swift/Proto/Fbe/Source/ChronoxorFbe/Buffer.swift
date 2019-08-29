@@ -113,7 +113,11 @@ public class Buffer {
             throw NSException(name: .invalidArgumentException, reason: "Invalid offset & size!") as! Error
         }
         if (size != 0) {
-            data[offset...] = data[(offset + size)...(self.size - size - offset)]
+            if self.size - size - offset != 0 {
+                data[offset...] = data[(offset + size)..<self.size]
+            } else {
+                data = data[0..<offset]
+            }
         }
         self.size -= size
         if (self.offset >= offset + size) {

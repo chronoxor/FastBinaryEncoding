@@ -3,6 +3,7 @@
 /Packages
 /*.xcodeproj
 xcuserdata/
+.swiftpm
 Package.pins
 *.pem
 /docs
