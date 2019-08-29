@@ -1029,7 +1029,6 @@ public class FieldModelDecimal: FieldModel {
         let scale = (flags & 0x7FFFFFFF) >> 16
         let sign: FloatingPointSign = negative ? .minus : .plus
 
-
         var result = Decimal(readUInt32(offset: fbeOffset + 8)) * lowScaleField
         result = result + (Decimal(readUInt32(offset: fbeOffset + 4)) * midScaleField)
         result = result + Decimal(readUInt32(offset: fbeOffset + 0))
@@ -1055,12 +1054,12 @@ public class FieldModelDecimal: FieldModel {
         }
 
         // Get scale
-         let scale = UInt8(abs(valueRef.exponent))
-         if scale < 0 || scale > 28 {
-             // Value scale exceeds .NET Decimal limit of [0, 28]
-             write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
-             return
-         }
+        let scale = UInt8(abs(valueRef.exponent))
+        if scale < 0 || scale > 28 {
+            // Value scale exceeds .NET Decimal limit of [0, 28]
+            write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
+            return
+        }
 
         // Get byte array
         let unscaledBytes = withUnsafeBytes(of: valueRef) {
