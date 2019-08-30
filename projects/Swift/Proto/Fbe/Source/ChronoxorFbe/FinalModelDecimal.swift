@@ -42,17 +42,21 @@ public class FinalModelDecimal: FinalModel {
 
         let flags = readUInt32(offset: fbeOffset + 12)
         let negative = (flags & 0x80000000) != 0
-        let scale = (flags & 0x7FFFFFFF) >> 16
+        let scale = -Int((flags & 0x7FFFFFFF) >> 16)
         let sign: FloatingPointSign = negative ? .minus : .plus
 
 
         var result = Decimal(readUInt32(offset: fbeOffset + 8)) * lowScaleField
         result = result + (Decimal(readUInt32(offset: fbeOffset + 4)) * midScaleField)
         result = result + Decimal(readUInt32(offset: fbeOffset + 0))
-        result = Decimal.init(sign: sign, exponent: Int(-Int32(scale)), significand: result)
+        result = Decimal(sign: sign, exponent: scale, significand: result)
+
+        if result.exponent != scale {
+            var zero = Decimal(sign: sign, exponent: scale, significand: .zero)
+            NSDecimalNormalize(&result, &zero, .up)
+        }
 
         size.value = fbeSize
-
         return result
     }
 
@@ -64,20 +68,16 @@ public class FinalModelDecimal: FinalModel {
         }
 
         var valueRef = value
-        var zero = Decimal.zero
-        let error = NSDecimalNormalize(&valueRef, &zero, .up)
-
-        if (error != .noError) {
-            // Issue during normalize decimal number
-            write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
+        if (valueRef.exponent > 0) {
+            // Try to normalize decimal number for .NET Decimal format
+            var zero = Decimal.zero
+            let error = NSDecimalNormalize(&valueRef, &zero, .up)
+            if (error != .noError) {
+                // Issue during normalize decimal number
+                write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
+                return 0
+            }
         }
-
-        //        let bitLength = valueRef._length
-        //        if valueRef.exponent {
-        //            // Value scale exceeds .NET Decimal limit of [0, 28]
-        //            write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
-        //            return
-        //        }
 
         // Get scale
         let scale = UInt8(abs(valueRef.exponent))
