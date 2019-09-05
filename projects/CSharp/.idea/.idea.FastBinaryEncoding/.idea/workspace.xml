@@ -2,26 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e46b070-39ae-4a9c-ad72-9d071bc18831" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Benchmarks/Benchmarks.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Create/Create.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/Create/Create.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Print/Print.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/Print/Print.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/PrintJson/PrintJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/PrintJson/PrintJson.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SendReceive/SendReceive.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/SendReceive/SendReceive.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Serialization/Serialization.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/Serialization/Serialization.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SerializationFinal/SerializationFinal.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/SerializationFinal/SerializationFinal.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SerializationJson/SerializationJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/SerializationJson/SerializationJson.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/Proto.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Benchmarks/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Benchmarks/Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/Benchmarks.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Benchmarks/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/packages.config" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,14 +22,14 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/nunit/nunit/502a844c0b104731c7f5d57ef6d0df436d4b75af/src/NUnitFramework/framework/Internal/Reflect.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Proto/test.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/Serialization.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/SerializationFinal.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/SerializationJson.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Proto/fbe.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/SendReceive.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Proto/protoex.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Proto/fbe.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Tests/Serialization.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Tests/SerializationJson.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Proto/test.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Benchmarks/App.config" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -258,6 +242,7 @@
       <workItem from="1564356504765" duration="179000" />
       <workItem from="1567689732548" duration="159000" />
       <workItem from="1567691732094" duration="86000" />
+      <workItem from="1567694837594" duration="77000" />
     </task>
     <servers />
   </component>
