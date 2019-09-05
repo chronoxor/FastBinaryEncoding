@@ -24,12 +24,12 @@
     "url": "git+https://github.com/chronoxor/FastBinaryEncoding.git"
   },
   "dependencies": {
-    "airtap": "^2.0.3",
+    "airtap": "^2.0.4",
     "assert": "^1.4.1",
     "benchmark": "^2.1.4",
-    "npm": "^6.10.2",
+    "npm": "^6.11.3",
     "pm2": "^3.5.1",
-    "standard": "^13.1.0",
+    "standard": "^14.1.0",
     "tape": "^4.11.0"
   },
   "scripts": {

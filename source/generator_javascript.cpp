@@ -1067,7 +1067,7 @@ class Int64 {
    * @returns {!boolean}
    */
   static isInt64 (obj) {
-    return (obj && obj['__isInt64__']) === true
+    return (obj && obj.__isInt64__) === true
   }
 
   /**
@@ -1995,7 +1995,7 @@ class UInt64 {
    * @returns {boolean}
    */
   static isUInt64 (obj) {
-    return (obj && obj['__isUInt64__']) === true
+    return (obj && obj.__isUInt64__) === true
   }
 
   /**
@@ -2919,7 +2919,7 @@ class UUID {
    * @returns {!boolean}
    */
   static isUUID (obj) {
-    return (obj && obj['__isUUID__']) === true
+    return (obj && obj.__isUUID__) === true
   }
 
   /**

@@ -46,7 +46,7 @@ class UUID {
    * @returns {!boolean}
    */
   static isUUID (obj) {
-    return (obj && obj['__isUUID__']) === true
+    return (obj && obj.__isUUID__) === true
   }
 
   /**
