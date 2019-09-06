@@ -62,8 +62,7 @@ open class StructSet: Comparable, Hashable, Codable {
     open var description: String {
         var sb = String()
         sb.append("StructSet(")
-        if (true)
-        {
+        if true {
             var first = true
             sb.append("f1=["); sb.append("\(f1.count)"); sb.append("]{")
             for item in f1 {
@@ -72,8 +71,7 @@ open class StructSet: Comparable, Hashable, Codable {
             }
             sb.append("}")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f2=["); sb.append("\(f2.count)"); sb.append("]{")
             for item in f2 {
@@ -82,8 +80,7 @@ open class StructSet: Comparable, Hashable, Codable {
             }
             sb.append("}")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f3=["); sb.append("\(f3.count)"); sb.append("]{")
             for item in f3 {
@@ -92,8 +89,7 @@ open class StructSet: Comparable, Hashable, Codable {
             }
             sb.append("}")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f4=["); sb.append("\(f4.count)"); sb.append("]{")
             for item in f4 {
@@ -124,7 +120,7 @@ open class StructSet: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) -> StructSet {
-        return try! JSONDecoder().decode(StructSet.self, from: json.data(using: .utf8)!)
+    open class func fromJson(_ json: String) throws -> StructSet {
+        return try JSONDecoder().decode(StructSet.self, from: json.data(using: .utf8)!)
     }
 }

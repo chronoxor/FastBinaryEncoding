@@ -3,7 +3,6 @@
 // Source: test.fbe
 // Version: 1.3.0.0
 
-
 // Fast Binary Encoding ChronoxorTest protocol version
 struct ProtocolVersion {
     // Protocol major version

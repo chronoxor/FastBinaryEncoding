@@ -25,7 +25,7 @@ public class FieldModelUInt32: FieldModel {
 
     // Get the value
     public func get(defaults: UInt32 = 0) -> UInt32 {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 

@@ -46,7 +46,7 @@ class FinalModelMapInt32OptionalFlagsSimple: FinalModel {
         _modelKey.fbeOffset = fbeOffset + 4
         _modelValue.fbeOffset = fbeOffset + 4
         var i = fbeMapSize
-        while (i > 0) {
+        while i > 0 {
             let offsetKey = _modelKey.verify()
             if offsetKey == Int.max { return Int.max }
             _modelKey.fbeShift(size: offsetKey)

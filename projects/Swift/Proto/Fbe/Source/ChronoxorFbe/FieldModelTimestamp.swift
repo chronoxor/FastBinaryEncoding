@@ -19,7 +19,7 @@ public class FieldModelTimestamp: FieldModel {
        }
 
     public func get(defaults: TimeInterval = Date().timeIntervalSince1970) -> TimeInterval {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return defaults
         }
@@ -29,7 +29,7 @@ public class FieldModelTimestamp: FieldModel {
     }
 
     public func set(value: TimeInterval) throws {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return
         }

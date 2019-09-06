@@ -34,10 +34,10 @@ public class FlagsSimple: Comparable, Hashable, Codable {
         if set.contains(FlagsSimple.FLAG_VALUE_5.value!) {
             result = NSNumber(value: result).intValue | NSNumber(value: FlagsSimple.FLAG_VALUE_5.raw).intValue
         }
-        return FlagsSimple(value:  NSNumber(value: result).int32Value)
+        return FlagsSimple(value: NSNumber(value: result).int32Value)
     }
 
-    public private(set) var value: FlagsSimpleEnum? = FlagsSimpleEnum.values().first 
+    public private(set) var value: FlagsSimpleEnum? = FlagsSimpleEnum.values().first
 
     public private(set) var raw: Int32 = 0
 
@@ -123,7 +123,7 @@ public class FlagsSimple: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    public class func fromJson(_ json: String) -> FlagsSimple {
-        return try! JSONDecoder().decode(FlagsSimple.self, from: json.data(using: .utf8)!)
+    public class func fromJson(_ json: String) throws -> FlagsSimple {
+        return try JSONDecoder().decode(FlagsSimple.self, from: json.data(using: .utf8)!)
     }
 }

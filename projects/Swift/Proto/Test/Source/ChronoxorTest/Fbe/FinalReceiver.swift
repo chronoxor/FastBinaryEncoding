@@ -8,7 +8,7 @@ import ChronoxorFbe
 import ChronoxorProto
 
 // Fast Binary Encoding ChronoxorTest final receiver
-open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
+open class FinalReceiver: ChronoxorFbe.ReceiverProtocol {
     // Imported receivers
     let ProtoReceiver: ChronoxorProto.FinalReceiver?
 
@@ -30,8 +30,9 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
         build(with: buffer, final: true)
     }
 
-    public func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self as! FinalReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
+    open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
+        guard let listener = self as? FinalReceiverListener else { return false }
+        return onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: FinalReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {

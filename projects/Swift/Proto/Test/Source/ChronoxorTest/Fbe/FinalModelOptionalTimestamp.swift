@@ -37,7 +37,6 @@ class FinalModelOptionalTimestamp: FinalModel {
         return 1 + (optional != nil ? value.fbeAllocationSize(value: optional!) : 0)
     }
 
-
     func hasValue() -> Bool {
         if _buffer.offset + fbeOffset + 1 > _buffer.size {
             return false

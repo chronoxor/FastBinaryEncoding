@@ -8,7 +8,7 @@ import ChronoxorFbe
 import ChronoxorProto
 
 // Fast Binary Encoding Test client
-open class Client : ChronoxorFbe.ClientProtocol {
+open class Client: ChronoxorFbe.ClientProtocol {
     // Imported senders
     let ProtoSender: ChronoxorProto.Client
 
@@ -55,7 +55,8 @@ open class Client : ChronoxorFbe.ClientProtocol {
     // Send message handler
     open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }
     open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self as! ReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
+        guard let listener = self as? ReceiverListener else { return false }
+        return onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: ReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {

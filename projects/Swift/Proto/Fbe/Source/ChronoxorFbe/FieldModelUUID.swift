@@ -25,7 +25,7 @@ public class FieldModelUUID: FieldModel {
 
     // Get the value
     public func get(defaults: UUID = UUIDGenerator.nil()) -> UUID {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 

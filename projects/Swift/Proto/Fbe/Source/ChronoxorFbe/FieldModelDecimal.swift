@@ -20,7 +20,7 @@ public class FieldModelDecimal: FieldModel {
 
     // Get the value
     public func get(defaults: Decimal = Decimal.zero) -> Decimal {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 
@@ -33,8 +33,8 @@ public class FieldModelDecimal: FieldModel {
         let sign: FloatingPointSign = negative ? .minus : .plus
 
         var result = Decimal(readUInt32(offset: fbeOffset + 8)) * lowScaleField
-        result = result + (Decimal(readUInt32(offset: fbeOffset + 4)) * midScaleField)
-        result = result + Decimal(readUInt32(offset: fbeOffset + 0))
+        result += Decimal(readUInt32(offset: fbeOffset + 4)) * midScaleField
+        result += Decimal(readUInt32(offset: fbeOffset + 0))
         result = Decimal(sign: sign, exponent: scale, significand: result)
 
         if result.exponent != scale {
@@ -47,17 +47,17 @@ public class FieldModelDecimal: FieldModel {
 
     // Set the value
     public func set(value: Decimal) throws {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return
         }
 
         var valueRef = value
-        if (valueRef.exponent > 0) {
+        if valueRef.exponent > 0 {
             // Try to normalize decimal number for .NET Decimal format
             var zero = Decimal.zero
             let error = NSDecimalNormalize(&valueRef, &zero, .up)
-            if (error != .noError) {
+            if error != .noError {
                 // Issue during normalize decimal number
                 write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
                 return
@@ -87,8 +87,7 @@ public class FieldModelDecimal: FieldModel {
         }
 
         // Fill remaining bytes with zeros
-        while (index < 14)
-        {
+        while index < 14 {
             write(offset: fbeOffset + index, value: Int8.zero)
             index += 1
         }

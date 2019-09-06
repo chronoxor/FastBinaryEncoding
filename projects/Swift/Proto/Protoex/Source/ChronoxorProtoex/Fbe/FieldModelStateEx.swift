@@ -29,7 +29,7 @@ public class FieldModelStateEx: FieldModel {
 
     // Set the value
     public func set(value: StateEx) throws {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return
         }

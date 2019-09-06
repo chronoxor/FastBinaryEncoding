@@ -22,7 +22,7 @@ public class FinalModelEnumWChar: FinalModel {
     // Get the allocation size
     public func fbeAllocationSize(value: EnumWChar) -> Int { fbeSize }
 
-    public func verify() -> Int  {
+    public func verify() -> Int {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return Int.max
         }

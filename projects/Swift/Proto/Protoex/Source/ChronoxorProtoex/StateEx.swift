@@ -46,10 +46,10 @@ public class StateEx: Comparable, Hashable, Codable {
         if set.contains(StateEx.bad.value!) {
             result = NSNumber(value: result).intValue | NSNumber(value: StateEx.bad.raw).intValue
         }
-        return StateEx(value:  NSNumber(value: result).uint8Value)
+        return StateEx(value: NSNumber(value: result).uint8Value)
     }
 
-    public private(set) var value: StateExEnum? = StateExEnum.values().first 
+    public private(set) var value: StateExEnum? = StateExEnum.values().first
 
     public private(set) var raw: UInt8 = 0
 
@@ -147,7 +147,7 @@ public class StateEx: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    public class func fromJson(_ json: String) -> StateEx {
-        return try! JSONDecoder().decode(StateEx.self, from: json.data(using: .utf8)!)
+    public class func fromJson(_ json: String) throws -> StateEx {
+        return try JSONDecoder().decode(StateEx.self, from: json.data(using: .utf8)!)
     }
 }

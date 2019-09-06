@@ -8,11 +8,10 @@ import Foundation
 import ChronoxorProto
 
 // Fast Binary Encoding ChronoxorTest proxy listener
-public protocol ProxyListener : ChronoxorProto.ProxyListener
-{
+public protocol ProxyListener: ChronoxorProto.ProxyListener {
 }
 
-public extension ProxyListener{
+public extension ProxyListener {
     func onProxy(model: StructSimpleModel, type: Int, buffer: Data, offset: Int, size: Int) {}
     func onProxy(model: StructOptionalModel, type: Int, buffer: Data, offset: Int, size: Int) {}
     func onProxy(model: StructNestedModel, type: Int, buffer: Data, offset: Int, size: Int) {}

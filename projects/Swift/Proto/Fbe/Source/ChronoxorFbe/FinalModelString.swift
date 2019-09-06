@@ -34,14 +34,13 @@ public class FinalModelString: FinalModel {
 
     // Get the value
     public func get(size: inout Size) -> String {
-        if ((_buffer.offset + fbeOffset + 4) > _buffer.size) {
+        if _buffer.offset + fbeOffset + 4 > _buffer.size {
             size.value = 0
             return ""
         }
 
         let fbeStringSize = Int(readUInt32(offset: fbeOffset))
-        if ((_buffer.offset + fbeOffset + 4 + fbeStringSize) > _buffer.size)
-        {
+        if _buffer.offset + fbeOffset + 4 + fbeStringSize > _buffer.size {
             size.value = 4
             return ""
         }
@@ -52,12 +51,12 @@ public class FinalModelString: FinalModel {
 
     // Set the value
     public func set(value: String) throws -> Int {
-        if ((_buffer.offset + fbeOffset + 4) > _buffer.size) {
+        if _buffer.offset + fbeOffset + 4 > _buffer.size {
             return 0
         }
 
         let fbeStringSize = value.count
-        if ((_buffer.offset + fbeOffset + 4 + fbeStringSize) > _buffer.size) {
+        if _buffer.offset + fbeOffset + 4 + fbeStringSize > _buffer.size {
             return 4
         }
 

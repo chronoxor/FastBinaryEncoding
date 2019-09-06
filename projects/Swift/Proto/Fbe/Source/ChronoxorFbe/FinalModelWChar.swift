@@ -34,7 +34,7 @@ public class FinalModelWChar: FinalModel {
 
     // Get the value
     public func get(size: inout Size) -> Character {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return Character("0")
         }
 
@@ -44,12 +44,12 @@ public class FinalModelWChar: FinalModel {
 
     // Set the value
     public func set(value: Character) throws -> Int {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return 0
         }
 
-        write(offset: fbeOffset, value: value.utf16.map{ UInt32($0) }[0])
+        write(offset: fbeOffset, value: value.utf16.map { UInt32($0) }[0])
         return fbeSize
     }
 }

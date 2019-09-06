@@ -77,8 +77,7 @@ open class Account: Comparable, Hashable, Codable {
         sb.append(",state="); sb.append(state.description)
         sb.append(",wallet="); sb.append(wallet.description)
         sb.append(",asset=");  if let asset = asset { sb.append(asset.description) } else { sb.append("null") }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",orders=["); sb.append("\(orders.count)"); sb.append("][")
             for item in orders {
@@ -113,7 +112,7 @@ open class Account: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) -> Account {
-        return try! JSONDecoder().decode(Account.self, from: json.data(using: .utf8)!)
+    open class func fromJson(_ json: String) throws -> Account {
+        return try JSONDecoder().decode(Account.self, from: json.data(using: .utf8)!)
     }
 }

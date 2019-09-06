@@ -25,7 +25,7 @@ public class FieldModelFloat: FieldModel {
 
     // Get the value
     public func get(defaults: Float = 0.0) -> Float {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 

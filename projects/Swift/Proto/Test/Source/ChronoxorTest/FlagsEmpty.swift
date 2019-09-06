@@ -9,10 +9,10 @@ public class FlagsEmpty: Comparable, Hashable, Codable {
     typealias RawValue = Int32
     public static func fromSet(set: FlagsEmptyEnum) -> FlagsEmpty {
         var result = NSNumber(value: 0).intValue
-        return FlagsEmpty(value:  NSNumber(value: result).int32Value)
+        return FlagsEmpty(value: NSNumber(value: result).int32Value)
     }
 
-    public private(set) var value: FlagsEmptyEnum? = FlagsEmptyEnum.values().first 
+    public private(set) var value: FlagsEmptyEnum? = FlagsEmptyEnum.values().first
 
     public private(set) var raw: Int32 = 0
 
@@ -73,7 +73,7 @@ public class FlagsEmpty: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    public class func fromJson(_ json: String) -> FlagsEmpty {
-        return try! JSONDecoder().decode(FlagsEmpty.self, from: json.data(using: .utf8)!)
+    public class func fromJson(_ json: String) throws -> FlagsEmpty {
+        return try JSONDecoder().decode(FlagsEmpty.self, from: json.data(using: .utf8)!)
     }
 }

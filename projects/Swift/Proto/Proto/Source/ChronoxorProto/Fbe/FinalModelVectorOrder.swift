@@ -41,7 +41,7 @@ class FinalModelVectorOrder: FinalModel {
         var size: Int = 4
         _model.fbeOffset = fbeOffset + 4
         var i = fbeVectorSize
-        while (i > 0) {
+        while i > 0 {
             let offset = _model.verify()
             if offset == Int.max { return Int.max }
             _model.fbeShift(size: offset)

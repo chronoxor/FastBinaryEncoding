@@ -74,7 +74,7 @@ public class FieldModelAccountMessage: FieldModel {
 
     // Check if the struct value is valid
     func verify(fbeVerifyType: Bool = true) -> Bool {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return true
         }
 
@@ -84,12 +84,12 @@ public class FieldModelAccountMessage: FieldModel {
         }
 
         let fbeStructSize = Int(readUInt32(offset: fbeStructOffset))
-        if (fbeStructSize < (4 + 4)) {
+        if fbeStructSize < (4 + 4) {
             return false
         }
 
         let fbeStructType = Int(readUInt32(offset: fbeStructOffset + 4))
-        if (fbeVerifyType && (fbeStructType != fbeType))  {
+        if fbeVerifyType && (fbeStructType != fbeType) {
             return false
         }
 
@@ -121,7 +121,7 @@ public class FieldModelAccountMessage: FieldModel {
         }
 
         let fbeStructOffset = Int(readUInt32(offset: fbeOffset))
-        if ((fbeStructOffset == 0) || ((_buffer.offset + fbeStructOffset + 4 + 4) > _buffer.size)) {
+        if (fbeStructOffset == 0) || ((_buffer.offset + fbeStructOffset + 4 + 4) > _buffer.size) {
             assertionFailure("Model is broken!")
             return 0
         }
@@ -149,7 +149,7 @@ public class FieldModelAccountMessage: FieldModel {
 
     public func get(fbeValue: inout AccountMessage) -> AccountMessage {
         let fbeBegin = getBegin()
-        if (fbeBegin == 0) {
+        if fbeBegin == 0 {
             return fbeValue
         }
 
@@ -173,7 +173,7 @@ public class FieldModelAccountMessage: FieldModel {
 
     // Set the struct value (begin phase)
     func setBegin() throws -> Int {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return 0
         }

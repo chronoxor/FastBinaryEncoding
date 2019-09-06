@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class EnumInt8 : Comparable, Hashable, Codable {
+public class EnumInt8: Comparable, Hashable, Codable {
     typealias RawValue = Int8
     public static let ENUM_VALUE_0 = EnumInt8(value: EnumInt8Enum.ENUM_VALUE_0)
     public static let ENUM_VALUE_1 = EnumInt8(value: EnumInt8Enum.ENUM_VALUE_1)
@@ -63,7 +63,7 @@ public class EnumInt8 : Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    public class func fromJson(_ json: String) -> EnumInt8 {
-        return try! JSONDecoder().decode(EnumInt8.self, from: json.data(using: .utf8)!)
+    public class func fromJson(_ json: String) throws -> EnumInt8 {
+        return try JSONDecoder().decode(EnumInt8.self, from: json.data(using: .utf8)!)
     }
 }

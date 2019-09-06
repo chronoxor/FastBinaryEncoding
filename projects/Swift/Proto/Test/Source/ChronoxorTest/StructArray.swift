@@ -86,8 +86,7 @@ open class StructArray: Comparable, Hashable, Codable {
     open var description: String {
         var sb = String()
         sb.append("StructArray(")
-        if (true)
-        {
+        if true {
             var first = true
             sb.append("f1=["); sb.append("\(f1.count)"); sb.append("][")
             for item in f1 {
@@ -96,8 +95,7 @@ open class StructArray: Comparable, Hashable, Codable {
             }
             sb.append("]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f2=["); sb.append("\(f2.count)"); sb.append("][")
             for item in f2 {
@@ -106,8 +104,7 @@ open class StructArray: Comparable, Hashable, Codable {
             }
             sb.append("]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f3=["); sb.append("\(f3.count)"); sb.append("][")
             for item in f3 {
@@ -116,8 +113,7 @@ open class StructArray: Comparable, Hashable, Codable {
             }
             sb.append("]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f4=["); sb.append("\(f4.count)"); sb.append("][")
             for item in f4 {
@@ -126,8 +122,7 @@ open class StructArray: Comparable, Hashable, Codable {
             }
             sb.append("]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f5=["); sb.append("\(f5.count)"); sb.append("][")
             for item in f5 {
@@ -136,8 +131,7 @@ open class StructArray: Comparable, Hashable, Codable {
             }
             sb.append("]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f6=["); sb.append("\(f6.count)"); sb.append("][")
             for item in f6 {
@@ -146,8 +140,7 @@ open class StructArray: Comparable, Hashable, Codable {
             }
             sb.append("]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f7=["); sb.append("\(f7.count)"); sb.append("][")
             for item in f7 {
@@ -156,8 +149,7 @@ open class StructArray: Comparable, Hashable, Codable {
             }
             sb.append("]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f8=["); sb.append("\(f8.count)"); sb.append("][")
             for item in f8 {
@@ -166,8 +158,7 @@ open class StructArray: Comparable, Hashable, Codable {
             }
             sb.append("]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f9=["); sb.append("\(f9.count)"); sb.append("][")
             for item in f9 {
@@ -176,8 +167,7 @@ open class StructArray: Comparable, Hashable, Codable {
             }
             sb.append("]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f10=["); sb.append("\(f10.count)"); sb.append("][")
             for item in f10 {
@@ -220,7 +210,7 @@ open class StructArray: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) -> StructArray {
-        return try! JSONDecoder().decode(StructArray.self, from: json.data(using: .utf8)!)
+    open class func fromJson(_ json: String) throws -> StructArray {
+        return try JSONDecoder().decode(StructArray.self, from: json.data(using: .utf8)!)
     }
 }

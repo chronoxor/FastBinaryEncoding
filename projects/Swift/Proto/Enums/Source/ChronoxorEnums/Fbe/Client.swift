@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 
 // Fast Binary Encoding Enums client
-open class Client : ChronoxorFbe.ClientProtocol {
+open class Client: ChronoxorFbe.ClientProtocol {
     // Client sender models accessors
 
     // Client receiver values accessors
@@ -39,7 +39,8 @@ open class Client : ChronoxorFbe.ClientProtocol {
     // Send message handler
     open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }
     open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self as! ReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
+        guard let listener = self as? ReceiverListener else { return false }
+        return onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: ReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {

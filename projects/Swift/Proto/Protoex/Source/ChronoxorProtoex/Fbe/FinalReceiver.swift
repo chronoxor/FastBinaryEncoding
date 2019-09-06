@@ -8,7 +8,7 @@ import ChronoxorFbe
 import ChronoxorProto
 
 // Fast Binary Encoding ChronoxorProtoex final receiver
-open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
+open class FinalReceiver: ChronoxorFbe.ReceiverProtocol {
     // Imported receivers
     let ProtoReceiver: ChronoxorProto.FinalReceiver?
 
@@ -48,8 +48,9 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
         build(with: buffer, final: true)
     }
 
-    public func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self as! FinalReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
+    open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
+        guard let listener = self as? FinalReceiverListener else { return false }
+        return onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: FinalReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
@@ -62,8 +63,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             assert(deserialized > 0, "Protoex.OrderMessage deserialization failed!")
 
             // Log the value
-            if (logging)
-            {
+            if logging {
                 let message = OrderMessageValue.description
                 listener.onReceiveLog(message: message)
             }
@@ -79,8 +79,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             assert(deserialized > 0, "Protoex.BalanceMessage deserialization failed!")
 
             // Log the value
-            if (logging)
-            {
+            if logging {
                 let message = BalanceMessageValue.description
                 listener.onReceiveLog(message: message)
             }
@@ -96,8 +95,7 @@ open class FinalReceiver : ChronoxorFbe.ReceiverProtocol {
             assert(deserialized > 0, "Protoex.AccountMessage deserialization failed!")
 
             // Log the value
-            if (logging)
-            {
+            if logging {
                 let message = AccountMessageValue.description
                 listener.onReceiveLog(message: message)
             }

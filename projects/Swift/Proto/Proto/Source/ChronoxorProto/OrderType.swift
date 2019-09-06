@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class OrderType : Comparable, Hashable, Codable {
+public class OrderType: Comparable, Hashable, Codable {
     typealias RawValue = UInt8
     public static let market = OrderType(value: OrderTypeEnum.market)
     public static let limit = OrderType(value: OrderTypeEnum.limit)
@@ -60,7 +60,7 @@ public class OrderType : Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    public class func fromJson(_ json: String) -> OrderType {
-        return try! JSONDecoder().decode(OrderType.self, from: json.data(using: .utf8)!)
+    public class func fromJson(_ json: String) throws -> OrderType {
+        return try JSONDecoder().decode(OrderType.self, from: json.data(using: .utf8)!)
     }
 }

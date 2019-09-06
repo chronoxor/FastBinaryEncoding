@@ -27,7 +27,7 @@ public class FinalModelDate: FinalModel {
 
     // Get the value
     public func get(size: inout Size) -> Date {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return Date(timeIntervalSince1970: 0)
         }
 
@@ -38,7 +38,7 @@ public class FinalModelDate: FinalModel {
 
     // Set the value
     public func set(value: Date) throws -> Int {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return 0
         }

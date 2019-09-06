@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 
 // Fast Binary Encoding Proto final client
-open class FinalClient : ChronoxorFbe.ClientProtocol {
+open class FinalClient: ChronoxorFbe.ClientProtocol {
     // Client sender models accessors
     let OrderMessageSenderModel: OrderMessageFinalModel
     let BalanceMessageSenderModel: BalanceMessageFinalModel
@@ -60,10 +60,10 @@ open class FinalClient : ChronoxorFbe.ClientProtocol {
 
     public func send(obj: Any, listener: ChronoxorFbe.LogListener?) throws -> Int {
         switch obj {
-            case is ChronoxorProto.OrderMessage: return try send(value: obj as! ChronoxorProto.OrderMessage, listener: listener)
-            case is ChronoxorProto.BalanceMessage: return try send(value: obj as! ChronoxorProto.BalanceMessage, listener: listener)
-            case is ChronoxorProto.AccountMessage: return try send(value: obj as! ChronoxorProto.AccountMessage, listener: listener)
-            default: break
+        case is ChronoxorProto.OrderMessage: return try send(value: obj as! ChronoxorProto.OrderMessage, listener: listener)
+        case is ChronoxorProto.BalanceMessage: return try send(value: obj as! ChronoxorProto.BalanceMessage, listener: listener)
+        case is ChronoxorProto.AccountMessage: return try send(value: obj as! ChronoxorProto.AccountMessage, listener: listener)
+        default: break
         }
 
         return 0
@@ -132,7 +132,8 @@ open class FinalClient : ChronoxorFbe.ClientProtocol {
     // Send message handler
     open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }
     open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self as! FinalReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
+        guard let listener = self as? FinalReceiverListener else { return false }
+        return onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: FinalReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {

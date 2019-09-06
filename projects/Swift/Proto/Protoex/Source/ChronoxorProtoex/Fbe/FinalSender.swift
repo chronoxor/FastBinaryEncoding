@@ -8,7 +8,7 @@ import Foundation
 import ChronoxorProto
 
 // Fast Binary Encoding ChronoxorProtoex final sender
-open class FinalSender : ChronoxorFbe.SenderProtocol { 
+open class FinalSender: ChronoxorFbe.SenderProtocol {
     // Imported senders
     let ProtoSender: ChronoxorProto.FinalSender
 
@@ -43,10 +43,10 @@ open class FinalSender : ChronoxorFbe.SenderProtocol {
 
     public func send(obj: Any, listener: ChronoxorFbe.LogListener?) throws -> Int {
         switch obj {
-            case is ChronoxorProtoex.OrderMessage: return try send(value: obj as! ChronoxorProtoex.OrderMessage, listener: listener)
-            case is ChronoxorProtoex.BalanceMessage: return try send(value: obj as! ChronoxorProtoex.BalanceMessage, listener: listener)
-            case is ChronoxorProtoex.AccountMessage: return try send(value: obj as! ChronoxorProtoex.AccountMessage, listener: listener)
-            default: break
+        case is ChronoxorProtoex.OrderMessage: return try send(value: obj as! ChronoxorProtoex.OrderMessage, listener: listener)
+        case is ChronoxorProtoex.BalanceMessage: return try send(value: obj as! ChronoxorProtoex.BalanceMessage, listener: listener)
+        case is ChronoxorProtoex.AccountMessage: return try send(value: obj as! ChronoxorProtoex.AccountMessage, listener: listener)
+        default: break
         }
 
         // Try to send using imported senders

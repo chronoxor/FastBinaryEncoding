@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 
 // Fast Binary Encoding ChronoxorEnums receiver
-open class Receiver : ChronoxorFbe.ReceiverProtocol {
+open class Receiver: ChronoxorFbe.ReceiverProtocol {
     // Receiver values accessors
 
     // Receiver models accessors
@@ -24,8 +24,9 @@ open class Receiver : ChronoxorFbe.ReceiverProtocol {
         build(with: buffer, final: false)
     }
 
-    public func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self as! ReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
+    open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
+        guard let listener = self as? ReceiverListener else { return false }
+        return onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: ReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {

@@ -24,8 +24,8 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel(domain, "Fbe");
     GenerateFBEFieldModel(domain, "Fbe", "Boolean", "Bool", "", "1", "false");
     GenerateFBEFieldModel(domain, "Fbe", "Byte", "UInt8", "", "1", "0");
-    GenerateFBEFieldModel(domain, "Fbe", "Char", "Character", ".utf8.map{ UInt8($$0) }[0]", "1", "Character(\"0\")");
-    GenerateFBEFieldModel(domain, "Fbe", "WChar", "Character", ".utf16.map{ UInt32($$0) }[0]", "4", "Character(\"0\")");
+    GenerateFBEFieldModel(domain, "Fbe", "Char", "Character", ".utf8.map { UInt8($$0) }[0]", "1", "Character(\"0\")");
+    GenerateFBEFieldModel(domain, "Fbe", "WChar", "Character", ".utf16.map { UInt32($$0) }[0]", "4", "Character(\"0\")");
     GenerateFBEFieldModel(domain, "Fbe", "Int8", "Int8", "", "1", "0");
     GenerateFBEFieldModel(domain, "Fbe", "UInt8", "UInt8", "", "1", "0");
     GenerateFBEFieldModel(domain, "Fbe", "Int16", "Int16", "", "2", "0");
@@ -48,8 +48,8 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel(domain, "Fbe");
         GenerateFBEFinalModel(domain, "Fbe", "Boolean", "Bool", "", "1", "false");
         GenerateFBEFinalModel(domain, "Fbe", "Byte", "UInt8", "", "1", "0");
-        GenerateFBEFinalModel(domain, "Fbe", "Char", "Character", ".utf8.map{ UInt8($$0) }[0]", "1", "Character(\"0\")");
-        GenerateFBEFinalModel(domain, "Fbe", "WChar", "Character", ".utf16.map{ UInt32($$0) }[0]", "4", "Character(\"0\")");
+        GenerateFBEFinalModel(domain, "Fbe", "Char", "Character", ".utf8.map { UInt8($$0) }[0]", "1", "Character(\"0\")");
+        GenerateFBEFinalModel(domain, "Fbe", "WChar", "Character", ".utf16.map { UInt32($$0) }[0]", "4", "Character(\"0\")");
         GenerateFBEFinalModel(domain, "Fbe", "Int8", "Int8", "", "1", "0");
         GenerateFBEFinalModel(domain, "Fbe", "UInt8", "UInt8", "", "1", "0");
         GenerateFBEFinalModel(domain, "Fbe", "Int16", "Int16", "", "2", "0");
@@ -143,7 +143,7 @@ let package = Package(
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "_DOMAIN_",
-            targets: ["_DOMAIN_"]),
+            targets: ["_DOMAIN_"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -153,7 +153,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "_DOMAIN_",
-            dependencies: []),
+            dependencies: [])
     ]
 )
 )CODE";
@@ -192,7 +192,7 @@ public struct UUIDGenerator {
 
     // Generate sequential UUID1 (time based version)
     public static func sequential() -> UUID {
-        var uuid: uuid_t = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+        var uuid: uuid_t = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
         withUnsafeMutablePointer(to: &uuid) {
             $0.withMemoryRebound(to: UInt8.self, capacity: 16) {
                 uuid_generate_time($0)
@@ -337,17 +337,17 @@ public class Buffer {
             }
         }
         self.data = data
-        self.size = self.size + size
+        self.size += size
 
         return offset
     }
 
     // Remove some memory of the given size from the current buffer
     public func remove(offset: Int, size: Int) throws {
-        if (offset + size > self.size) {
+        if offset + size > self.size {
             throw NSException(name: .invalidArgumentException, reason: "Invalid offset & size!") as! Error
         }
-        if (size != 0) {
+        if size != 0 {
             if self.size - size - offset != 0 {
                 data[offset...] = data[(offset + size)..<self.size]
             } else {
@@ -355,11 +355,11 @@ public class Buffer {
             }
         }
         self.size -= size
-        if (self.offset >= offset + size) {
+        if self.offset >= offset + size {
             self.offset -= size
         } else if self.offset >= offset {
             self.offset -= self.offset - offset
-            if (self.offset > self.size) {
+            if self.offset > self.size {
                 self.offset = self.size
             }
         }
@@ -371,7 +371,7 @@ public class Buffer {
             throw NSException(name: .invalidArgumentException, reason: "Invalid reserve capacity!") as! Error
         }
 
-        if (capacity > data.count) {
+        if capacity > data.count {
             var data = Data(capacity: max(capacity, 2 * self.data.count))
             data[0...] = self.data[0...]
             self.data = data
@@ -388,7 +388,6 @@ public class Buffer {
             offset = self.size
         }
     }
-
 
     // Reset the current buffer and its offset
     public func reset() {
@@ -957,7 +956,7 @@ public class FieldModel_NAME_: FieldModel {
 
     // Get the value
     public func get(defaults: _TYPE_ = _DEFAULTS_) -> _TYPE_ {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 
@@ -1021,7 +1020,7 @@ public class FieldModelDecimal: FieldModel {
 
     // Get the value
     public func get(defaults: Decimal = Decimal.zero) -> Decimal {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 
@@ -1034,8 +1033,8 @@ public class FieldModelDecimal: FieldModel {
         let sign: FloatingPointSign = negative ? .minus : .plus
 
         var result = Decimal(readUInt32(offset: fbeOffset + 8)) * lowScaleField
-        result = result + (Decimal(readUInt32(offset: fbeOffset + 4)) * midScaleField)
-        result = result + Decimal(readUInt32(offset: fbeOffset + 0))
+        result += Decimal(readUInt32(offset: fbeOffset + 4)) * midScaleField
+        result += Decimal(readUInt32(offset: fbeOffset + 0))
         result = Decimal(sign: sign, exponent: scale, significand: result)
 
         if result.exponent != scale {
@@ -1048,17 +1047,17 @@ public class FieldModelDecimal: FieldModel {
 
     // Set the value
     public func set(value: Decimal) throws {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return
         }
 
         var valueRef = value
-        if (valueRef.exponent > 0) {
+        if valueRef.exponent > 0 {
             // Try to normalize decimal number for .NET Decimal format
             var zero = Decimal.zero
             let error = NSDecimalNormalize(&valueRef, &zero, .up)
-            if (error != .noError) {
+            if error != .noError {
                 // Issue during normalize decimal number
                 write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
                 return
@@ -1088,8 +1087,7 @@ public class FieldModelDecimal: FieldModel {
         }
 
         // Fill remaining bytes with zeros
-        while (index < 14)
-        {
+        while index < 14 {
             write(offset: fbeOffset + index, value: Int8.zero)
             index += 1
         }
@@ -1144,7 +1142,7 @@ public class FieldModelDate: FieldModel {
 
     // Get the value
     public func get(defaults: Date = Date(timeIntervalSince1970: 0)) -> Date {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 
@@ -1154,7 +1152,7 @@ public class FieldModelDate: FieldModel {
 
     // Set the value
     public func set(value: Date) throws {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return
         }
@@ -1204,7 +1202,7 @@ public class FieldModelTimestamp: FieldModel {
        }
 
     public func get(defaults: TimeInterval = Date().timeIntervalSince1970) -> TimeInterval {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return defaults
         }
@@ -1214,7 +1212,7 @@ public class FieldModelTimestamp: FieldModel {
     }
 
     public func set(value: TimeInterval) throws {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return
         }
@@ -1307,17 +1305,17 @@ public class FieldModelData: FieldModel {
         }
 
         let fbeBytesOffset = Int(readUInt32(offset: fbeOffset))
-        if (fbeBytesOffset == 0) {
+        if fbeBytesOffset == 0 {
             return defaults
         }
 
-        if (_buffer.offset + fbeBytesOffset + 4) > _buffer.size {
+        if _buffer.offset + fbeBytesOffset + 4 > _buffer.size {
             assertionFailure("Model is broken!")
             return defaults
         }
 
         let fbeBytesSize = Int(readUInt32(offset: fbeBytesOffset))
-        if (_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.size {
+        if _buffer.offset + fbeBytesOffset + 4 + fbeBytesSize > _buffer.size {
             assertionFailure("Model is broken!")
             return defaults
         }
@@ -1327,14 +1325,14 @@ public class FieldModelData: FieldModel {
 
     // Set the value
     public func set(value: Data) throws {
-        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
+        if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             assertionFailure("Model is broken!")
             return
         }
 
         let fbeBytesSize = value.count
         let fbeBytesOffset = try _buffer.allocate(size: 4 + fbeBytesSize) - _buffer.offset
-        if (fbeBytesOffset <= 0) || ((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.size) {
+        if fbeBytesOffset <= 0 || (_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return
         }
@@ -1409,16 +1407,16 @@ public class FieldModelString: FieldModel {
         }
 
         let fbeStringOffset = Int(readUInt32(offset: fbeOffset))
-        if (fbeStringOffset == 0) {
+        if fbeStringOffset == 0 {
             return true
         }
 
-        if (_buffer.offset + fbeStringOffset + 4) > _buffer.size {
+        if _buffer.offset + fbeStringOffset + 4 > _buffer.size {
             return false
         }
 
         let fbeStringSize = Int(readUInt32(offset: fbeStringOffset))
-        if ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size) {
+        if (_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size {
             return false
         }
 
@@ -1427,7 +1425,7 @@ public class FieldModelString: FieldModel {
 
     // Get the value
     public func get(defaults: String = "") -> String {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 
@@ -1450,13 +1448,13 @@ public class FieldModelString: FieldModel {
 
     // Set the value
     public func set(value: String) throws {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return
         }
 
         let fbeStringSize = value.count
         let fbeStringOffset = try _buffer.allocate(size: 4 + fbeStringSize) - _buffer.offset
-        if ((fbeStringOffset <= 0) || ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size)) {
+        if (fbeStringOffset <= 0) || ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size) {
             return
         }
 
@@ -1510,12 +1508,12 @@ public class FieldModelOptional_NAME_: FieldModel {
     public let value: _MODEL_
 
     public var fbeExtra: Int {
-        if (!hasValue()) {
+        if !hasValue() {
             return 0
         }
 
         let fbeOptionalOffset = Int(readUInt32(offset: fbeOffset + 1))
-        if ((fbeOptionalOffset == 0) || ((_buffer.offset + fbeOptionalOffset + 4) > _buffer.size)) {
+        if (fbeOptionalOffset == 0) || ((_buffer.offset + fbeOptionalOffset + 4) > _buffer.size) {
             return 0
         }
 
@@ -1562,7 +1560,7 @@ public class FieldModelOptional_NAME_: FieldModel {
         }
 
         let fbeOptionalOffset = Int(readUInt32(offset: fbeOffset + 1))
-        if (fbeOptionalOffset == 0) {
+        if fbeOptionalOffset == 0 {
             return false
         }
 
@@ -1740,7 +1738,7 @@ class FieldModelArray_NAME_: FieldModel {
 
         _model.fbeOffset = fbeOffset
         var i = size
-        while (i > 0) {
+        while i > 0 {
             if !_model.verify() { return false }
             _model.fbeShift(size: _model.fbeSize)
             i -= 1
@@ -1772,7 +1770,7 @@ class FieldModelArray_NAME_: FieldModel {
 
         let fbeModel = getItem(index: 0)
         var i = size
-        while (i > 0) {
+        while i > 0 {
             let value = fbeModel.get()
             values.append(value)
             fbeModel.fbeShift(size: fbeModel.fbeSize)
@@ -1862,7 +1860,7 @@ class FieldModelVector_NAME_: FieldModel {
         var fbeResult: Int = 4
         _model.fbeOffset = fbeVectorOffset + 4
         var i = fbeVectorSize
-        while (i > 0) {
+        while i > 0 {
             fbeResult += _model.fbeSize + _model.fbeExtra
             _model.fbeShift(size: _model.fbeSize)
             i -= 1
@@ -1944,7 +1942,7 @@ class FieldModelVector_NAME_: FieldModel {
         }
 
         let fbeVectorOffset = Int(readUInt32(offset: fbeOffset))
-        if (fbeVectorOffset == 0) {
+        if fbeVectorOffset == 0 {
             return true
         }
 
@@ -1955,7 +1953,7 @@ class FieldModelVector_NAME_: FieldModel {
         let fbeVectorSize = Int(readUInt32(offset: fbeVectorOffset))
         _model.fbeOffset = fbeVectorOffset + 4
         var i = fbeVectorSize
-        while (i > 0) {
+        while i > 0 {
             if !_model.verify() { return false }
             _model.fbeShift(size: _model.fbeSize)
             i -= 1
@@ -1976,7 +1974,7 @@ class FieldModelVector_NAME_: FieldModel {
 
         let fbeModel = getItem(index: 0)
         var i = fbeVectorSize
-        while (i > 0) {
+        while i > 0 {
             let value = fbeModel.get()
             values.append(value)
             fbeModel.fbeShift(size: fbeModel.fbeSize)
@@ -2063,7 +2061,7 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
         _modelKey.fbeOffset = fbeMapOffset + 4
         _modelValue.fbeOffset = fbeMapOffset + 4 + _modelKey.fbeSize
         var i = fbeMapSize
-        while (i > 0) {
+        while i > 0 {
             fbeResult += _modelKey.fbeSize + _modelKey.fbeExtra
             _modelKey.fbeShift(size: _modelKey.fbeSize)
             fbeResult += _modelValue.fbeSize + _modelValue.fbeExtra
@@ -2152,7 +2150,7 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
         }
 
         let fbeMapOffset = Int(readUInt32(offset: fbeOffset))
-        if (fbeMapOffset == 0) {
+        if fbeMapOffset == 0 {
             return true
         }
 
@@ -2164,7 +2162,7 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
         _modelKey.fbeOffset = fbeMapOffset + 4
         _modelValue.fbeOffset = fbeMapOffset + 4 + _modelKey.fbeSize
         var i = fbeMapSize
-        while (i > 0) {
+        while i > 0 {
             if !_modelKey.verify() { return false }
             _modelKey.fbeShift(size: _modelKey.fbeSize + _modelValue.fbeSize)
             if !_modelValue.verify() { return false }
@@ -2187,7 +2185,7 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
 
         let fbeModel = getItem(index: 0)
         var i = fbeMapSize
-        while (i > 0) {
+        while i > 0 {
             let key = fbeModel.0.get()
             let value = fbeModel.1.get()
             values[key] = value
@@ -2276,7 +2274,7 @@ public class FieldModel_NAME_: FieldModel {
 
     // Set the value
     public func set(value: _NAME_) throws {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return
         }
@@ -2484,7 +2482,7 @@ public class FinalModel_NAME_: FinalModel {
 
     // Get the value
     public func get(size: inout Size) -> _TYPE_ {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return _DEFAULTS_
         }
 
@@ -2494,7 +2492,7 @@ public class FinalModel_NAME_: FinalModel {
 
     // Set the value
     public func set(value: _TYPE_) throws -> Int {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return 0
         }
@@ -2548,7 +2546,6 @@ public class FinalModelDecimal: FinalModel {
         _offset = offset
     }
 
-
     public func fbeAllocationSize(value: Decimal) -> Int {
         return fbeSize
     }
@@ -2563,7 +2560,7 @@ public class FinalModelDecimal: FinalModel {
 
     // Get the value
     public func get(size: inout Size) -> Decimal {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return Decimal.zero
         }
 
@@ -2575,10 +2572,9 @@ public class FinalModelDecimal: FinalModel {
         let scale = -Int((flags & 0x7FFFFFFF) >> 16)
         let sign: FloatingPointSign = negative ? .minus : .plus
 
-
         var result = Decimal(readUInt32(offset: fbeOffset + 8)) * lowScaleField
-        result = result + (Decimal(readUInt32(offset: fbeOffset + 4)) * midScaleField)
-        result = result + Decimal(readUInt32(offset: fbeOffset + 0))
+        result += Decimal(readUInt32(offset: fbeOffset + 4)) * midScaleField
+        result += Decimal(readUInt32(offset: fbeOffset + 0))
         result = Decimal(sign: sign, exponent: scale, significand: result)
 
         if result.exponent != scale {
@@ -2592,17 +2588,17 @@ public class FinalModelDecimal: FinalModel {
 
     // Set the value
     public func set(value: Decimal) throws -> Int {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return 0
         }
 
         var valueRef = value
-        if (valueRef.exponent > 0) {
+        if valueRef.exponent > 0 {
             // Try to normalize decimal number for .NET Decimal format
             var zero = Decimal.zero
             let error = NSDecimalNormalize(&valueRef, &zero, .up)
-            if (error != .noError) {
+            if error != .noError {
                 // Issue during normalize decimal number
                 write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
                 return 0
@@ -2632,8 +2628,7 @@ public class FinalModelDecimal: FinalModel {
         }
 
         // Fill remaining bytes with zeros
-        while (index < 14)
-        {
+        while index < 14 {
             write(offset: fbeOffset + index, value: Int8.zero)
             index += 1
         }
@@ -2695,7 +2690,7 @@ public class FinalModelDate: FinalModel {
 
     // Get the value
     public func get(size: inout Size) -> Date {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return Date(timeIntervalSince1970: 0)
         }
 
@@ -2706,7 +2701,7 @@ public class FinalModelDate: FinalModel {
 
     // Set the value
     public func set(value: Date) throws -> Int {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return 0
         }
@@ -2856,7 +2851,7 @@ public class FinalModelData: FinalModel {
         }
 
         let fbeBytesSize = Int(readUInt32(offset: fbeOffset))
-        if ((_buffer.offset + fbeOffset + 4 + fbeBytesSize) > _buffer.size) {
+        if _buffer.offset + fbeOffset + 4 + fbeBytesSize > _buffer.size {
             assertionFailure("Model is broken!")
             size.value = 4
             return Data()
@@ -2940,14 +2935,13 @@ public class FinalModelString: FinalModel {
 
     // Get the value
     public func get(size: inout Size) -> String {
-        if ((_buffer.offset + fbeOffset + 4) > _buffer.size) {
+        if _buffer.offset + fbeOffset + 4 > _buffer.size {
             size.value = 0
             return ""
         }
 
         let fbeStringSize = Int(readUInt32(offset: fbeOffset))
-        if ((_buffer.offset + fbeOffset + 4 + fbeStringSize) > _buffer.size)
-        {
+        if _buffer.offset + fbeOffset + 4 + fbeStringSize > _buffer.size {
             size.value = 4
             return ""
         }
@@ -2958,12 +2952,12 @@ public class FinalModelString: FinalModel {
 
     // Set the value
     public func set(value: String) throws -> Int {
-        if ((_buffer.offset + fbeOffset + 4) > _buffer.size) {
+        if _buffer.offset + fbeOffset + 4 > _buffer.size {
             return 0
         }
 
         let fbeStringSize = value.count
-        if ((_buffer.offset + fbeOffset + 4 + fbeStringSize) > _buffer.size) {
+        if _buffer.offset + fbeOffset + 4 + fbeStringSize > _buffer.size {
             return 4
         }
 
@@ -3033,7 +3027,6 @@ class FinalModelOptional_NAME_: FinalModel {
     func fbeAllocationSize(value optional: _TYPE_) -> Int {
         return 1 + (optional != nil ? value.fbeAllocationSize(value: optional!) : 0)
     }
-
 
     func hasValue() -> Bool {
         if _buffer.offset + fbeOffset + 1 > _buffer.size {
@@ -3172,7 +3165,7 @@ class FinalModelArray_NAME_: FinalModel {
         var size: Int = 0
         _model.fbeOffset = fbeOffset
         var i = _size
-        while (i > 0) {
+        while i > 0 {
             let offset = _model.verify()
             if offset == Int.max { return Int.max }
             _model.fbeShift(size: offset)
@@ -3319,7 +3312,7 @@ class FinalModelVector_NAME_: FinalModel {
         var size: Int = 4
         _model.fbeOffset = fbeOffset + 4
         var i = fbeVectorSize
-        while (i > 0) {
+        while i > 0 {
             let offset = _model.verify()
             if offset == Int.max { return Int.max }
             _model.fbeShift(size: offset)
@@ -3453,7 +3446,7 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_: FinalModel {
         _modelKey.fbeOffset = fbeOffset + 4
         _modelValue.fbeOffset = fbeOffset + 4
         var i = fbeMapSize
-        while (i > 0) {
+        while i > 0 {
             let offsetKey = _modelKey.verify()
             if offsetKey == Int.max { return Int.max }
             _modelKey.fbeShift(size: offsetKey)
@@ -3582,7 +3575,7 @@ public class FinalModel_NAME_: FinalModel {
     // Get the allocation size
     public func fbeAllocationSize(value: _NAME_) -> Int { fbeSize }
 
-    public func verify() -> Int  {
+    public func verify() -> Int {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return Int.max
         }
@@ -3655,7 +3648,6 @@ public protocol SenderProtocol: class {
     // Get the final protocol flag
     var final: Bool { get set }
 
-
     // Send message handler
     func onSend(buffer: Data, offset: Int, size: Int) throws -> Int
 }
@@ -3678,7 +3670,7 @@ public extension SenderProtocol {
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!
     func sendSerialized(serialized: Int) throws -> Int {
-        if (serialized <= 0) {
+        if serialized <= 0 {
             assertionFailure("Invalid size of the serialized buffer!")
             return 0
         }
@@ -3758,11 +3750,11 @@ public extension ReceiverProtocol {
            // print("receive end: \(self.buffer.data.count)")
         }
         assert((offset + size) <= buffer.data.count, "Invalid offset & size!")
-        if ((offset + size) > buffer.data.count) {
+        if (offset + size) > buffer.data.count {
             throw NSError()
         }
 
-        if (size == 0) {
+        if size == 0 {
             return
         }
 
@@ -3775,8 +3767,7 @@ public extension ReceiverProtocol {
         var offset2: Int = 0
 
         // While receive buffer is available to handle...
-        while (offset2 < size)
-        {
+        while offset2 < size {
             var messageBuffer: Buffer? = nil
             var messageOffset: Int = 0
             var messageSize: Int = 0
@@ -3784,26 +3775,20 @@ public extension ReceiverProtocol {
             // Try to receive message size
             var messageSizeCopied = false
             var messageSizeFound = false
-            while (!messageSizeFound)
-            {
+            while !messageSizeFound {
                 // Look into the storage buffer
-                if (offset0 < size1)
-                {
+                if offset0 < size1 {
                     var count = min(size1 - offset0, 4)
-                    if (count == 4)
-                    {
+                    if count == 4 {
                         messageSizeCopied = true
                         messageSizeFound = true
                         //self.buffer.data = Data(bytes: self.buffer.p, count: self.buffer.data.count)
                         messageSize = Int(Buffer.readUInt32(buffer: self.buffer, offset: offset0))
                         offset0 += 4
                         break
-                    }
-                    else
-                    {
+                    } else {
                         // Fill remaining data from the receive buffer
-                        if (offset2 < size)
-                        {
+                        if offset2 < size {
                             count = min(size - offset2, 4 - count)
 
                             // Allocate and refresh the storage buffer
@@ -3816,26 +3801,21 @@ public extension ReceiverProtocol {
                             offset1 += count
                             offset2 += count
                             continue
-                        }
-                        else {
+                        } else {
                             break
                         }
                     }
                 }
 
                 // Look into the receive buffer
-                if (offset2 < size)
-                {
+                if offset2 < size {
                     let count = min(size - offset2, 4)
-                    if (count == 4)
-                    {
+                    if count == 4 {
                         messageSizeFound = true
                         messageSize = Int(Buffer.readUInt32(buffer: buffer, offset: offset + offset2))
                         offset2 += 4
                         break
-                    }
-                    else
-                    {
+                    } else {
                         // Allocate and refresh the storage buffer
                         try _ = self.buffer.allocate(size: count)
                         size1 += count
@@ -3847,49 +3827,41 @@ public extension ReceiverProtocol {
                         offset2 += count
                         continue
                     }
-                }
-                else {
+                } else {
                     break
                 }
             }
 
-            if (!messageSizeFound) {
+            if !messageSizeFound {
                 return
             }
 
-                // Check the message full size
+            // Check the message full size
             let minSize = {
                 return final ? 4 + 4 : 4 + 4 + 4 + 4
             }()
             assert(messageSize >= minSize, "Invalid receive data!")
-            if (messageSize < minSize) {
+            if messageSize < minSize {
                 return
             }
 
             // Try to receive message body
             var messageFound = false
-            while (!messageFound)
-            {
+            while !messageFound {
                 // Look into the storage buffer
-                if (offset0 < size1)
-                {
+                if offset0 < size1 {
                     var count = min(size1 - offset0, messageSize - 4)
-                    if (count == (messageSize - 4))
-                    {
+                    if count == (messageSize - 4) {
                         messageFound = true
                         messageBuffer = self.buffer
                         messageOffset = offset0 - 4
                         offset0 += messageSize - 4
                         break
-                    }
-                    else
-                    {
+                    } else {
                         // Fill remaining data from the receive buffer
-                        if (offset2 < size)
-                        {
+                        if offset2 < size {
                             // Copy message size into the storage buffer
-                            if (!messageSizeCopied)
-                            {
+                            if !messageSizeCopied {
                                 // Allocate and refresh the storage buffer
                                 try _ = self.buffer.allocate(size: 4)
                                 size1 += 4
@@ -3913,8 +3885,7 @@ public extension ReceiverProtocol {
                             offset1 += count
                             offset2 += count
                             continue
-                        }
-                        else {
+                        } else {
                             break
                         }
 
@@ -3922,22 +3893,17 @@ public extension ReceiverProtocol {
                 }
 
                 // Look into the receive buffer
-                if (offset2 < size)
-                {
+                if offset2 < size {
                     let count = min(size - offset2, messageSize - 4)
-                    if (!messageSizeCopied && (count == (messageSize - 4)))
-                    {
+                    if !messageSizeCopied && (count == (messageSize - 4)) {
                         messageFound = true
                         messageBuffer = buffer
                         messageOffset = offset + offset2 - 4
                         offset2 += messageSize - 4
                         break
-                    }
-                    else
-                    {
+                    } else {
                         // Copy message size into the storage buffer
-                        if (!messageSizeCopied)
-                        {
+                        if !messageSizeCopied {
                             // Allocate and refresh the storage buffer
                             try _ = self.buffer.allocate(size: 4)
                             size1 += 4
@@ -3959,17 +3925,14 @@ public extension ReceiverProtocol {
                         offset2 += count
                         continue
                     }
-                }
-                else {
+                } else {
                     break
                 }
             }
 
-            if (!messageFound)
-            {
+            if !messageFound {
                 // Copy message size into the storage buffer
-                if (!messageSizeCopied)
-                {
+                if !messageSizeCopied {
                     // Allocate and refresh the storage buffer
                     try _ = self.buffer.allocate(size: 4)
                     size1 += 4
@@ -3984,23 +3947,16 @@ public extension ReceiverProtocol {
                 return
             }
 
-            if let messageBuffer = messageBuffer
-            {
-                //@Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
+            if let messageBuffer = messageBuffer {
                 let fbeStructSize: Int
                 let fbeStructType: Int
 
                 // Read the message parameters
-                if (final)
-                {
-                    //@Suppress("UNUSED_VALUE")
+                if final {
                     fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset))
                     fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + 4))
-                }
-                else
-                {
+                } else {
                     let fbeStructOffset = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + 4))
-                    //@Suppress("UNUSED_VALUE")
                     fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset))
                     fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset + 4))
                 }
@@ -4157,7 +4113,7 @@ public extension ClientProtocol {
             throw NSException(name: .invalidArgumentException, reason: "Invalid allocation size!") as! Error
         }
 
-        if (size == 0) {
+        if size == 0 {
             return
         }
 
@@ -4170,8 +4126,7 @@ public extension ClientProtocol {
         var offset2: Int = 0
 
         // While receive buffer is available to handle...
-        while (offset2 < size)
-        {
+        while offset2 < size {
             var messageBuffer: Buffer?
             var messageOffset: Int = 0
             var messageSize: Int = 0
@@ -4179,25 +4134,19 @@ public extension ClientProtocol {
             // Try to receive message size
             var messageSizeCopied = false
             var messageSizeFound = false
-            while (!messageSizeFound)
-            {
+            while !messageSizeFound {
                 // Look into the storage buffer
-                if (offset0 < size1)
-                {
+                if offset0 < size1 {
                     var count = min(size1 - offset0, 4)
-                    if count == 4
-                    {
+                    if count == 4 {
                         messageSizeCopied = true
                         messageSizeFound = true
                         messageSize = Int(Buffer.readUInt32(buffer: self.receiveBuffer, offset: offset0))
                         offset0 += 4
                         break
-                    }
-                    else
-                    {
+                    } else {
                         // Fill remaining data from the receive buffer
-                        if (offset2 < size)
-                        {
+                        if offset2 < size {
                             count = min(size - offset2, 4 - count)
 
                             // Allocate and refresh the storage buffer
@@ -4209,26 +4158,21 @@ public extension ClientProtocol {
                             offset1 += count
                             offset2 += count
                             continue
-                        }
-                        else {
+                        } else {
                             break
                         }
                     }
                 }
 
                 // Look into the receive buffer
-                if (offset2 < size)
-                {
+                if offset2 < size {
                     let count = min(size - offset2, 4)
-                    if (count == 4)
-                    {
+                    if count == 4 {
                         messageSizeFound = true
                         messageSize = Int(Buffer.readUInt32(buffer: buffer, offset: offset + offset2))
                         offset2 += 4
                         break
-                    }
-                    else
-                    {
+                    } else {
                         // Allocate and refresh the storage buffer
                         try _ = self.receiveBuffer.allocate(size: count)
                         size1 += count
@@ -4245,44 +4189,37 @@ public extension ClientProtocol {
 
             }
 
-            if (!messageSizeFound) {
+            if !messageSizeFound {
                 return
             }
 
             // Check the message full size
             let minSize: Int = {
-                if (final) { return 4 + 4 } else { return 4 + 4 + 4 + 4 }
+                if final { return 4 + 4 } else { return 4 + 4 + 4 + 4 }
             }()
 
             assert(messageSize >= minSize, "Invalid receive data!")
-            if (messageSize < minSize) {
+            if messageSize < minSize {
                 return
             }
 
             // Try to receive message body
             var messageFound = false
-            while (!messageFound)
-            {
+            while !messageFound {
                 // Look into the storage buffer
-                if (offset0 < size1)
-                {
+                if offset0 < size1 {
                     var count = min(size1 - offset0, messageSize - 4)
-                    if (count == (messageSize - 4))
-                    {
+                    if count == (messageSize - 4) {
                         messageFound = true
                         messageBuffer = self.receiveBuffer
                         messageOffset = offset0 - 4
                         offset0 += messageSize - 4
                         break
-                    }
-                    else
-                    {
+                    } else {
                         // Fill remaining data from the receive buffer
-                        if (offset2 < size)
-                        {
+                        if offset2 < size {
                             // Copy message size into the storage buffer
-                            if (!messageSizeCopied)
-                            {
+                            if !messageSizeCopied {
                                 // Allocate and refresh the storage buffer
                                 try _ = self.receiveBuffer.allocate(size: 4)
                                 size1 += 4
@@ -4311,22 +4248,17 @@ public extension ClientProtocol {
                 }
 
                 // Look into the receive buffer
-                if (offset2 < size)
-                {
+                if offset2 < size {
                     let count = min(size - offset2, messageSize - 4)
-                    if (!messageSizeCopied && (count == (messageSize - 4)))
-                    {
+                    if !messageSizeCopied && (count == (messageSize - 4)) {
                         messageFound = true
                         messageBuffer = buffer
                         messageOffset = offset + offset2 - 4
                         offset2 += messageSize - 4
                         break
-                    }
-                    else
-                    {
+                    } else {
                         // Copy message size into the storage buffer
-                        if (!messageSizeCopied)
-                        {
+                        if !messageSizeCopied {
                             // Allocate and refresh the storage buffer
                             try _ = self.receiveBuffer.allocate(size: 4)
                             size1 += 4
@@ -4348,17 +4280,14 @@ public extension ClientProtocol {
                         offset2 += count
                         continue
                     }
-                }
-                else {
+                } else {
                     break
                 }
             }
 
-            if (!messageFound)
-            {
+            if !messageFound {
                 // Copy message size into the storage buffer
-                if (!messageSizeCopied)
-                {
+                if !messageSizeCopied {
                     // Allocate and refresh the storage buffer
                     try _ = self.receiveBuffer.allocate(size: 4)
                     size1 += 4
@@ -4372,23 +4301,16 @@ public extension ClientProtocol {
                 return
             }
 
-            if let messageBuffer = messageBuffer
-            {
-                //@Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
+            if let messageBuffer = messageBuffer {
                 let fbeStructSize: Int
                 let fbeStructType: Int
 
                 // Read the message parameters
-                if (final)
-                {
-                    //@Suppress("UNUSED_VALUE")
+                if final {
                     fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset))
                     fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + 4))
-                }
-                else
-                {
+                } else {
                     let fbeStructOffset = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + 4))
-                    //@Suppress("UNUSED_VALUE")
                     fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset))
                     fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset + 4))
                 }
@@ -4504,7 +4426,7 @@ let package = Package(
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "_NAME_",
-            targets: ["_NAME_"]),
+            targets: ["_NAME_"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -4520,15 +4442,15 @@ let package = Package(
 )
 )CODE";
 
-    std::string dependenciesRes = std::string(".package(path: \"../") + "Fbe" + std::string("\"),\n ");
+    std::string dependenciesRes = std::string(".package(path: \"../") + "Fbe" + std::string("\")");
     if (p->import)
         for (const auto& import : p->import->imports)
-            dependenciesRes = dependenciesRes + std::string("       .package(path: \"../") + ConvertPackageName(*import) + std::string("\"),\n ");
+            dependenciesRes = dependenciesRes + std::string(",\n        .package(path: \"../") + ConvertPackageName(*import) + std::string("\")");
 
-    std::string dependencies = std::string("\"") + domain + "Fbe" + std::string("\",");
+    std::string dependencies = std::string("\"") + domain + "Fbe" + std::string("\"");
     if (p->import)
         for (const auto& import : p->import->imports)
-            dependencies = dependencies + std::string(" \"") + domain + ConvertPackageName(*import) + std::string("\",");
+            dependencies = dependencies + std::string(", \"") + domain + ConvertPackageName(*import) + std::string("\"");
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_NAME_"), domain + package);
@@ -4757,9 +4679,9 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
     // Generate enum class body
     WriteLine();
     if (JSON())
-        WriteLineIndent("public class " + enum_name + " : Comparable, Hashable, Codable {");
+        WriteLineIndent("public class " + enum_name + ": Comparable, Hashable, Codable {");
     else
-        WriteLineIndent("public class " + enum_name + " : Comparable, Hashable {");
+        WriteLineIndent("public class " + enum_name + ": Comparable, Hashable {");
     Indent(1);
     WriteLineIndent("typealias RawValue = " + enum_base_type);
 
@@ -4864,9 +4786,9 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
         WriteLineIndent("}");
 
         WriteLine();
-        WriteLineIndent("public class func fromJson(_ json: String) -> " + enum_name + " {");
+        WriteLineIndent("public class func fromJson(_ json: String) throws -> " + enum_name + " {");
         Indent(1);
-        WriteLineIndent("return try! JSONDecoder().decode(" + enum_name + ".self, from: json.data(using: .utf8)!)");
+        WriteLineIndent("return try JSONDecoder().decode(" + enum_name + ".self, from: json.data(using: .utf8)!)");
         Indent(-1);
         WriteLineIndent("}");
     }
@@ -5117,7 +5039,7 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
                 WriteLineIndent("}");
             }
         }
-        WriteLineIndent("return " + flags_name + "(value:  NSNumber(value: result)" + flags_to + ")");
+        WriteLineIndent("return " + flags_name + "(value: NSNumber(value: result)" + flags_to + ")");
         Indent(-1);
         WriteLineIndent("}");
 
@@ -5125,7 +5047,7 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
     }
 
     // Generate flags class value
-    WriteLineIndent("public private(set) var value: " + flags_type_name + "?" + " = " + flags_type_name + ".values().first ");
+    WriteLineIndent("public private(set) var value: " + flags_type_name + "?" + " = " + flags_type_name + ".values().first");
     WriteLine();
 
     // Generate flags raw value
@@ -5246,9 +5168,9 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
         WriteLineIndent("}");
 
         WriteLine();
-        WriteLineIndent("public class func fromJson(_ json: String) -> " + flags_name + " {");
+        WriteLineIndent("public class func fromJson(_ json: String) throws -> " + flags_name + " {");
         Indent(1);
-        WriteLineIndent("return try! JSONDecoder().decode(" + flags_name + ".self, from: json.data(using: .utf8)!)");
+        WriteLineIndent("return try JSONDecoder().decode(" + flags_name + ".self, from: json.data(using: .utf8)!)");
         Indent(-1);
         WriteLineIndent("}");
     }
@@ -5479,8 +5401,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=***\");");
             else if (field->array || field->vector)
             {
-                WriteLineIndent("if (true)");
-                WriteLineIndent("{");
+                WriteLineIndent("if true {");
                 Indent(1);
                 WriteLineIndent("var first = true");
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\"); sb.append(\"\\(" + *field->name + ".count)\"" + "); sb.append(\"][\")");
@@ -5496,8 +5417,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
             }
             else if (field->list)
             {
-                WriteLineIndent("if (true)");
-                WriteLineIndent("{");
+                WriteLineIndent("if true {");
                 Indent(1);
                 WriteLineIndent("var first = true");
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\"); sb.append(\"\\(" + *field->name + ".count)\"" + "); sb.append(\"]<\")");
@@ -5513,8 +5433,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
             }
             else if (field->set)
             {
-                WriteLineIndent("if (true)");
-                WriteLineIndent("{");
+                WriteLineIndent("if true {");
                 Indent(1);
                 WriteLineIndent("var first = true");
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\"); sb.append(\"\\(" + *field->name + ".count)\"" + "); sb.append(\"]{\")");
@@ -5530,8 +5449,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
             }
             else if (field->map)
             {
-                WriteLineIndent("if (true)");
-                WriteLineIndent("{");
+                WriteLineIndent("if true {");
                 Indent(1);
                 WriteLineIndent("var first = true");
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\"); sb.append(" + *field->name + ".count.description); sb.append(\"]<{\")");
@@ -5549,8 +5467,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
             }
             else if (field->hash)
             {
-                WriteLineIndent("if (true)");
-                WriteLineIndent("{");
+                WriteLineIndent("if true {");
                 Indent(1);
                 WriteLineIndent("var first = true");
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\"); sb.append(" + *field->name + ".count.description); sb.append(\"][{\")");
@@ -5619,7 +5536,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                     std::string valueType = (*field->type == "char") ? "UInt8" : "UInt32";
                     std::string utfType = (*field->type == "char") ? "utf8" : "utf16";
                     std::string opt = (field->optional) ? "?" : "";
-                    WriteLineIndent("try container.encode(" + *field->name + opt + "." + utfType + ".map{ " + valueType + "($0) }[0], forKey: ." + *field->name + ")");
+                    WriteLineIndent("try container.encode(" + *field->name + opt + "." + utfType + ".map { " + valueType + "($0) }[0], forKey: ." + *field->name + ")");
                 }
                 else
                     WriteLineIndent("try container.encode(" + *field->name + ", forKey: ." + *field->name + ")");
@@ -5640,11 +5557,11 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
 
         WriteLine();
         if (s->base && !s->base->empty())
-            WriteLineIndent("open override class func fromJson(_ json: String) -> " + *s->name + " {");
+            WriteLineIndent("open override class func fromJson(_ json: String) throws -> " + *s->name + " {");
         else
-            WriteLineIndent("open class func fromJson(_ json: String) -> " + *s->name + " {");
+            WriteLineIndent("open class func fromJson(_ json: String) throws -> " + *s->name + " {");
         Indent(1);
-        WriteLineIndent("return try! JSONDecoder().decode(" + *s->name + ".self, from: json.data(using: .utf8)!)");
+        WriteLineIndent("return try JSONDecoder().decode(" + *s->name + ".self, from: json.data(using: .utf8)!)");
         Indent(-1);
         WriteLineIndent("}");
     }
@@ -5702,11 +5619,14 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLineIndent("public var _offset: Int");
 
     // Generate struct field model accessors
-    WriteLine();
     if (s->base && !s->base->empty())
-        WriteLineIndent("let parent: " + ConvertBaseFieldName(domain, ConvertPackageName(*s->base), false));
-    if (s->body)
     {
+        WriteLine();
+        WriteLineIndent("let parent: " + ConvertBaseFieldName(domain, ConvertPackageName(*s->base), false));
+    }
+    if (s->body && !s->body->fields.empty())
+    {
+        WriteLine();
         for (const auto& field : s->body->fields)
         {
             std::string fieldName = (*field->name == "Type") ? ("`Type`") : *field->name;
@@ -5732,19 +5652,20 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLine();
     WriteLineIndent("_buffer = buffer");
     WriteLineIndent("_offset = offset");
-    WriteLine();
-    // Generate struct field model accessors
 
+    // Generate struct field model accessors
     std::string prev_offset("4");
     std::string prev_size("4");
     if (s->base && !s->base->empty())
     {
+        WriteLine();
         WriteLineIndent("parent = " + ConvertBaseFieldName(domain, ConvertPackageName(*s->base), false) + "(buffer: buffer, offset: " + prev_offset + " + " + prev_size + ")");
         prev_offset = "parent.fbeOffset";
         prev_size = "parent.fbeBody - 4 - 4";
     }
-    if (s->body)
+    if (s->body && !s->body->fields.empty())
     {
+        WriteLine();
         for (const auto& field : s->body->fields)
         {
             WriteLineIndent(*field->name + " = " + ConvertTypeFieldInitialization(domain, *field, prev_offset + " + " + prev_size, false));
@@ -5863,7 +5784,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLineIndent("// Check if the struct value is valid");
     WriteLineIndent("func verify(fbeVerifyType: Bool = true) -> Bool {");
     Indent(1);
-    WriteLineIndent("if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {");
+    WriteLineIndent("if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {");
     Indent(1);
     WriteLineIndent("return true");
     Indent(-1);
@@ -5877,14 +5798,14 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("let fbeStructSize = Int(readUInt32(offset: fbeStructOffset))");
-    WriteLineIndent("if (fbeStructSize < (4 + 4)) {");
+    WriteLineIndent("if fbeStructSize < (4 + 4) {");
     Indent(1);
     WriteLineIndent("return false");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("let fbeStructType = Int(readUInt32(offset: fbeStructOffset + 4))");
-    WriteLineIndent("if (fbeVerifyType && (fbeStructType != fbeType))  {");
+    WriteLineIndent("if fbeVerifyType && (fbeStructType != fbeType) {");
     Indent(1);
     WriteLineIndent("return false");
     Indent(-1);
@@ -5956,7 +5877,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("let fbeStructOffset = Int(readUInt32(offset: fbeOffset))");
-    WriteLineIndent("if ((fbeStructOffset == 0) || ((_buffer.offset + fbeStructOffset + 4 + 4) > _buffer.size)) {");
+    WriteLineIndent("if (fbeStructOffset == 0) || ((_buffer.offset + fbeStructOffset + 4 + 4) > _buffer.size) {");
     Indent(1);
     WriteLineIndent("assertionFailure(\"Model is broken!\")");
     WriteLineIndent("return 0");
@@ -5999,7 +5920,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLineIndent("public func get(fbeValue: inout " + struct_name + ") -> " + struct_name + " {");
     Indent(1);
     WriteLineIndent("let fbeBegin = getBegin()");
-    WriteLineIndent("if (fbeBegin == 0) {");
+    WriteLineIndent("if fbeBegin == 0 {");
     Indent(1);
     WriteLineIndent("return fbeValue");
     Indent(-1);
@@ -6063,7 +5984,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     WriteLineIndent("// Set the struct value (begin phase)");
     WriteLineIndent("func setBegin() throws -> Int {");
     Indent(1);
-    WriteLineIndent("if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {");
+    WriteLineIndent("if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {");
     Indent(1);
     WriteLineIndent("assertionFailure(\"Model is broken!\")");
     WriteLineIndent("return 0");
@@ -6198,7 +6119,7 @@ void GeneratorSwift::GenerateStructModel(const std::shared_ptr<Package>& p, cons
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("let fbeFullSize = Int(readUInt32(offset: model.fbeOffset - 4))");
-    WriteLineIndent("if (fbeFullSize < model.fbeSize) {");
+    WriteLineIndent("if fbeFullSize < model.fbeSize {");
     Indent(1);
     WriteLineIndent("return false");
     Indent(-1);
@@ -6256,7 +6177,7 @@ void GeneratorSwift::GenerateStructModel(const std::shared_ptr<Package>& p, cons
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("let fbeFullSize = Int(readUInt32(offset: model.fbeOffset - 4))");
-    WriteLineIndent("if (fbeFullSize < model.fbeSize) {");
+    WriteLineIndent("if fbeFullSize < model.fbeSize {");
     Indent(1);
     WriteLineIndent("assertionFailure(\"Model is broken!\")");
     WriteLineIndent("valueRef = " + struct_name + "()");
@@ -6596,7 +6517,7 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
     WriteLineIndent("// Check if the struct value is valid");
     WriteLineIndent("public func verify() -> Bool {");
     Indent(1);
-    WriteLineIndent("if ((buffer.offset + _model.fbeOffset) > buffer.size) {");
+    WriteLineIndent("if (buffer.offset + _model.fbeOffset) > buffer.size {");
     Indent(1);
     WriteLineIndent("return false");
     Indent(-1);
@@ -6604,7 +6525,7 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
     WriteLine();
     WriteLineIndent("let fbeStructSize = Int(readUInt32(offset: _model.fbeOffset - 8))");
     WriteLineIndent("let fbeStructType = Int(readUInt32(offset: _model.fbeOffset - 4))");
-    WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType != fbeType)) {");
+    WriteLineIndent("if (fbeStructSize <= 0) || (fbeStructType != fbeType) {");
     Indent(1);
     WriteLineIndent("return false");
     Indent(-1);
@@ -6624,7 +6545,7 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
     WriteLineIndent("let fbeStructType = fbeType");
     WriteLineIndent("var fbeStructSize = 8 + _model.fbeAllocationSize(value: value)");
     WriteLineIndent("let fbeStructOffset = try buffer.allocate(size: fbeStructSize) - buffer.offset");
-    WriteLineIndent("if ((buffer.offset + fbeStructOffset + fbeStructSize) > buffer.size) {");
+    WriteLineIndent("if (buffer.offset + fbeStructOffset + fbeStructSize) > buffer.size {");
     Indent(1);
     WriteLineIndent("assertionFailure(\"Model is broken!\")");
     WriteLineIndent("return 0");
@@ -6650,7 +6571,7 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
     Indent(1);
     WriteLineIndent("var valueRef = value");
     WriteLine();
-    WriteLineIndent("if ((buffer.offset + _model.fbeOffset) > buffer.size) {");
+    WriteLineIndent("if (buffer.offset + _model.fbeOffset) > buffer.size {");
     Indent(1);
     WriteLineIndent("assertionFailure(\"Model is broken!\")");
     WriteLineIndent("return 0");
@@ -6710,7 +6631,6 @@ void GeneratorSwift::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
     GenerateHeader(CppCommon::Path(_input).filename().string());
 
     // Generate protocol version class
-    WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + domain + package + " protocol version");
     WriteLineIndent("struct ProtocolVersion {");
     Indent(1);
@@ -6757,7 +6677,7 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("// Fast Binary Encoding " + domain + package + " final sender");
     else
         WriteLineIndent("// Fast Binary Encoding " + domain + package + " sender");
-    WriteLineIndent("open class " + sender + " : " + domain + "Fbe.SenderProtocol { ");
+    WriteLineIndent("open class " + sender + ": " + domain + "Fbe.SenderProtocol {");
     Indent(1);
 
     // Generate imported senders accessors
@@ -6847,7 +6767,6 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     if (p->body && messages)
     {
         WriteLineIndent("switch obj {");
-        Indent(1);
         for (const auto& s : p->body->structs)
         {
             if (s->message)
@@ -6857,7 +6776,6 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
             }
         }
         WriteLineIndent("default: break");
-        Indent(-1);
         WriteLineIndent("}");
     }
     WriteLine();
@@ -6965,7 +6883,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
         WriteLineIndent("// Fast Binary Encoding " + domain + package + " final receiver");
     else
         WriteLineIndent("// Fast Binary Encoding " + domain + package + " receiver");
-    WriteLineIndent("open class " + receiver + " : " + domain +  "Fbe.ReceiverProtocol {");
+    WriteLineIndent("open class " + receiver + ": " + domain +  "Fbe.ReceiverProtocol {");
     Indent(1);
 
     // Generate imported receivers accessors
@@ -7060,9 +6978,10 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
             messages = true;
 
     // Generate receiver message handler
-    WriteLineIndent("public func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {");
+    WriteLineIndent("open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {");
     Indent(1);
-    WriteLineIndent("return onReceiveListener(listener: self as! " + listener + ", type: type, buffer: buffer, offset: offset, size: size)");
+    WriteLineIndent("guard let listener = self as? " + listener + " else { return false }");
+    WriteLineIndent("return onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size)");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
@@ -7084,8 +7003,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
                 WriteLineIndent("assert(deserialized > 0, \"" + package + "." + *s->name + " deserialization failed!\")");
                 WriteLine();
                 WriteLineIndent("// Log the value");
-                WriteLineIndent("if (logging)");
-                WriteLineIndent("{");
+                WriteLineIndent("if logging {");
                 Indent(1);
                 WriteLineIndent("let message = " + *s->name + "Value.description");
                 WriteLineIndent("listener.onReceiveLog(message: message)");
@@ -7160,15 +7078,15 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
     if (p->import)
     {
         bool first = true;
-        WriteIndent(" : ");
+        WriteIndent(": ");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent((first ? "" : ", ") + domain + ConvertPackageName(*import) + "." + listener);
+            WriteIndent((first ? "" : ", ") + domain + ConvertPackageName(*import) + "." + listener);
             first = false;
         }
     }
     else
-        WriteIndent(" : " + domain + "Fbe.LogListener");
+        WriteIndent(": " + domain + "Fbe.LogListener");
     WriteIndent(" {");
     WriteLine();
     Indent(1);
@@ -7189,6 +7107,7 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
     // Generate receiver listener end
     Indent(-1);
     WriteLineIndent("}");
+    WriteLine();
 
     WriteLineIndent("public extension " + listener + " {");
     Indent(1);
@@ -7244,7 +7163,7 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
         WriteLineIndent("// Fast Binary Encoding " + package + " final proxy");
     else
         WriteLineIndent("// Fast Binary Encoding " + package + " proxy");
-    WriteLineIndent("open class " + proxy + " : " + domain + "Fbe.ReceiverProtocol {");
+    WriteLineIndent("open class " + proxy + ": " + domain + "Fbe.ReceiverProtocol {");
     Indent(1);
 
     // Generate imported proxy accessors
@@ -7321,7 +7240,8 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     // Generate proxy message handler
     WriteLineIndent("open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {");
     Indent(1);
-    WriteLineIndent("return onReceiveListener(listener: self as! " + listener + ", type: type, buffer: buffer, offset: offset, size: size)");
+    WriteLineIndent("guard let listener = self as? " + listener + " else { return false }");
+    WriteLineIndent("return onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size)");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
@@ -7417,14 +7337,14 @@ void GeneratorSwift::GenerateProxyListener(const std::shared_ptr<Package>& p, bo
     if (p->import)
     {
         bool first = true;
-        WriteIndent(" : ");
+        WriteIndent(": ");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent((first ? "" : ", ") + domain + ConvertPackageName(*import) + "." + listener);
+            WriteIndent((first ? "" : ", ") + domain + ConvertPackageName(*import) + "." + listener);
             first = false;
         }
     }
-    WriteIndent("{");
+    WriteIndent(" {");
     WriteLine();
     Indent(1);
 
@@ -7446,7 +7366,7 @@ void GeneratorSwift::GenerateProxyListener(const std::shared_ptr<Package>& p, bo
     WriteLineIndent("}");
 
     WriteLine();
-    WriteLineIndent("public extension " + listener + "{");
+    WriteLineIndent("public extension " + listener + " {");
     Indent(1);
 
     // Generate proxy listener handlers
@@ -7499,7 +7419,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("// Fast Binary Encoding " + package + " final client");
     else
         WriteLineIndent("// Fast Binary Encoding " + package + " client");
-    WriteLineIndent("open class " + client + " : " + domain + "Fbe.ClientProtocol {");
+    WriteLineIndent("open class " + client + ": " + domain + "Fbe.ClientProtocol {");
     Indent(1);
 
     // Generate imported senders accessors
@@ -7632,7 +7552,6 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     if (p->body && messages)
     {
         WriteLineIndent("switch obj {");
-        Indent(1);
         for (const auto& s : p->body->structs)
         {
             if (s->message)
@@ -7642,7 +7561,6 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
             }
         }
         WriteLineIndent("default: break");
-        Indent(-1);
         WriteLineIndent("}");
     }
     WriteLine();
@@ -7708,7 +7626,8 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     // Generate client receive message handler
     WriteLineIndent("open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {");
     Indent(1);
-    WriteLineIndent("return onReceiveListener(listener: self as! " + listener + ", type: type, buffer: buffer, offset: offset, size: size)");
+    WriteLineIndent("guard let listener = self as? " + listener + " else { return false }");
+    WriteLineIndent("return onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size)");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
@@ -8080,7 +7999,7 @@ std::string GeneratorSwift::ConvertEnumConstantPrefix(const std::string& type)
 std::string GeneratorSwift::ConvertEnumConstantSuffix(const std::string& type)
 {
     if ((type == "char"))
-        return ".utf8.map{ UInt8($0) }[0]";
+        return ".utf8.map { UInt8($0) }[0]";
     if ((type == "uint8") || (type == "uint16") || (type == "uint32"))
         return "";
     if (type == "int64")

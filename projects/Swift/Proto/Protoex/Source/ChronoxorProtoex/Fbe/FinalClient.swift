@@ -8,7 +8,7 @@ import ChronoxorFbe
 import ChronoxorProto
 
 // Fast Binary Encoding Protoex final client
-open class FinalClient : ChronoxorFbe.ClientProtocol {
+open class FinalClient: ChronoxorFbe.ClientProtocol {
     // Imported senders
     let ProtoSender: ChronoxorProto.FinalClient
 
@@ -71,10 +71,10 @@ open class FinalClient : ChronoxorFbe.ClientProtocol {
 
     public func send(obj: Any, listener: ChronoxorFbe.LogListener?) throws -> Int {
         switch obj {
-            case is ChronoxorProtoex.OrderMessage: return try send(value: obj as! ChronoxorProtoex.OrderMessage, listener: listener)
-            case is ChronoxorProtoex.BalanceMessage: return try send(value: obj as! ChronoxorProtoex.BalanceMessage, listener: listener)
-            case is ChronoxorProtoex.AccountMessage: return try send(value: obj as! ChronoxorProtoex.AccountMessage, listener: listener)
-            default: break
+        case is ChronoxorProtoex.OrderMessage: return try send(value: obj as! ChronoxorProtoex.OrderMessage, listener: listener)
+        case is ChronoxorProtoex.BalanceMessage: return try send(value: obj as! ChronoxorProtoex.BalanceMessage, listener: listener)
+        case is ChronoxorProtoex.AccountMessage: return try send(value: obj as! ChronoxorProtoex.AccountMessage, listener: listener)
+        default: break
         }
 
         // Try to send using imported clients
@@ -148,7 +148,8 @@ open class FinalClient : ChronoxorFbe.ClientProtocol {
     // Send message handler
     open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }
     open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self as! FinalReceiverListener, type: type, buffer: buffer, offset: offset, size: size)
+        guard let listener = self as? FinalReceiverListener else { return false }
+        return onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: FinalReceiverListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {

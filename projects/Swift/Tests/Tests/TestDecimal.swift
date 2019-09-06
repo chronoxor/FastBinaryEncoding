@@ -25,13 +25,13 @@ class TestDecimal: XCTestCase {
         XCTAssertEqual(verifyDecimal(low: 0xFFFFFFFF, mid: 0xFFFFFFFF, high: 0xFFFFFFFF, negative: true, scale: UInt8(0x00000000)), Decimal(string: "-79228162514264337593543950335")!)
         XCTAssertEqual(verifyDecimal(low: 0xFFFFFFFF, mid: 0xFFFFFFFF, high: 0xFFFFFFFF, negative: true, scale: UInt8(0x001C0000 >> 16)), Decimal(string: "-7.9228162514264337593543950335")!)
     }
-    
+
     func verifyDecimal(low: UInt32, mid: UInt32, high: UInt32, negative: Bool, scale: UInt8) -> Decimal {
         let flags = negative ? ((UInt32(scale) << 16) | 0x80000000) : (UInt32(scale) << 16)
 
         let data = Data(count: 16)
         var buffer = Buffer(buffer: data)
-        
+
         Buffer.write(buffer: &buffer, offset: 0, value: low)
         Buffer.write(buffer: &buffer, offset: 4, value: mid)
         Buffer.write(buffer: &buffer, offset: 8, value: high)

@@ -471,12 +471,12 @@ open class StructOptional: StructSimple {
         try container.encode(f103, forKey: .f103)
         try container.encode(f104, forKey: .f104)
         try container.encode(f105, forKey: .f105)
-        try container.encode(f106?.utf8.map{ UInt8($0) }[0], forKey: .f106)
-        try container.encode(f107?.utf8.map{ UInt8($0) }[0], forKey: .f107)
-        try container.encode(f108?.utf8.map{ UInt8($0) }[0], forKey: .f108)
-        try container.encode(f109?.utf16.map{ UInt32($0) }[0], forKey: .f109)
-        try container.encode(f110?.utf16.map{ UInt32($0) }[0], forKey: .f110)
-        try container.encode(f111?.utf16.map{ UInt32($0) }[0], forKey: .f111)
+        try container.encode(f106?.utf8.map { UInt8($0) }[0], forKey: .f106)
+        try container.encode(f107?.utf8.map { UInt8($0) }[0], forKey: .f107)
+        try container.encode(f108?.utf8.map { UInt8($0) }[0], forKey: .f108)
+        try container.encode(f109?.utf16.map { UInt32($0) }[0], forKey: .f109)
+        try container.encode(f110?.utf16.map { UInt32($0) }[0], forKey: .f110)
+        try container.encode(f111?.utf16.map { UInt32($0) }[0], forKey: .f111)
         try container.encode(f112, forKey: .f112)
         try container.encode(f113, forKey: .f113)
         try container.encode(f114, forKey: .f114)
@@ -537,7 +537,7 @@ open class StructOptional: StructSimple {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open override class func fromJson(_ json: String) -> StructOptional {
-        return try! JSONDecoder().decode(StructOptional.self, from: json.data(using: .utf8)!)
+    open override class func fromJson(_ json: String) throws -> StructOptional {
+        return try JSONDecoder().decode(StructOptional.self, from: json.data(using: .utf8)!)
     }
 }

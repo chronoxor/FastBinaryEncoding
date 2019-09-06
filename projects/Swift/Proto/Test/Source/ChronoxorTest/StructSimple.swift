@@ -336,10 +336,10 @@ open class StructSimple: Comparable, Hashable, Codable {
         try container.encode(f2, forKey: .f2)
         try container.encode(f3, forKey: .f3)
         try container.encode(f4, forKey: .f4)
-        try container.encode(f5.utf8.map{ UInt8($0) }[0], forKey: .f5)
-        try container.encode(f6.utf8.map{ UInt8($0) }[0], forKey: .f6)
-        try container.encode(f7.utf16.map{ UInt32($0) }[0], forKey: .f7)
-        try container.encode(f8.utf16.map{ UInt32($0) }[0], forKey: .f8)
+        try container.encode(f5.utf8.map { UInt8($0) }[0], forKey: .f5)
+        try container.encode(f6.utf8.map { UInt8($0) }[0], forKey: .f6)
+        try container.encode(f7.utf16.map { UInt32($0) }[0], forKey: .f7)
+        try container.encode(f8.utf16.map { UInt32($0) }[0], forKey: .f8)
         try container.encode(f9, forKey: .f9)
         try container.encode(f10, forKey: .f10)
         try container.encode(f11, forKey: .f11)
@@ -382,7 +382,7 @@ open class StructSimple: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) -> StructSimple {
-        return try! JSONDecoder().decode(StructSimple.self, from: json.data(using: .utf8)!)
+    open class func fromJson(_ json: String) throws -> StructSimple {
+        return try JSONDecoder().decode(StructSimple.self, from: json.data(using: .utf8)!)
     }
 }

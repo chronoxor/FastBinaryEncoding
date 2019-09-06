@@ -67,7 +67,7 @@ open class OrderMessage: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) -> OrderMessage {
-        return try! JSONDecoder().decode(OrderMessage.self, from: json.data(using: .utf8)!)
+    open class func fromJson(_ json: String) throws -> OrderMessage {
+        return try JSONDecoder().decode(OrderMessage.self, from: json.data(using: .utf8)!)
     }
 }

@@ -25,7 +25,7 @@ public class FieldModelUInt16: FieldModel {
 
     // Get the value
     public func get(defaults: UInt16 = 0) -> UInt16 {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 

@@ -7,24 +7,24 @@ import ChronoxorProto
 import ChronoxorTest
 
 class TestSerializationFinal: XCTestCase {
-    
+
     func testSerializationDomain() {
         // Create a new account with some orders
         let account1 = Account(id: 1, name: "Test", state: State.good, wallet: Balance(currency: "USD", amount: 1000.0), asset: Balance(currency: "EUR", amount: 100.0), orders: [])
         account1.orders.append(Order(id: 1, symbol: "EURUSD", side: OrderSide.buy, type: OrderType.market, price: 1.23456, volume: 1000.0))
         account1.orders.append(Order(id: 2, symbol: "EURUSD", side: OrderSide.sell, type: OrderType.limit, price: 1.0, volume: 100.0))
         account1.orders.append(Order(id: 3, symbol: "EURUSD", side: OrderSide.buy, type: OrderType.stop, price: 1.5, volume: 10.0))
-        
+
         // Serialize the account to the FBE stream
         let writer = AccountFinalModel()
         let serialized = try! writer.serialize(value: account1)
         XCTAssertEqual(serialized, writer.buffer.size)
         XCTAssertTrue(writer.verify())
         writer.next(prev: serialized)
-        
+
         // Check the serialized FBE size
         XCTAssertEqual(writer.buffer.size, 152)
-        
+
         // Deserialize the account from the FBE stream
         var account2 = Account()
         let reader = AccountFinalModel()
@@ -33,7 +33,7 @@ class TestSerializationFinal: XCTestCase {
         let deserialized = reader.deserialize(value: &account2)
         XCTAssertEqual(deserialized, reader.buffer.size)
         reader.next(prev: deserialized)
-        
+
         XCTAssertEqual(account2.id, 1)
         XCTAssertEqual(account2.name, "Test")
         XCTAssertTrue(account2.state.hasFlags(flags: State.good))
@@ -62,11 +62,11 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(account2.orders[2].price, 1.5)
         XCTAssertEqual(account2.orders[2].volume, 10.0)
     }
-    
+
     func testSerializationStructSimple() {
         // Create a new struct
         let struct1 = StructSimple()
-        
+
         // Serialize the struct to the FBE stream
         let writer = StructSimpleFinalModel()
         XCTAssertEqual(writer.fbeType, 110)
@@ -74,21 +74,21 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(serialized, writer.buffer.size)
         XCTAssertTrue(writer.verify())
         writer.next(prev: serialized)
-        
+
         // Check the serialized FBE size
         XCTAssertEqual(writer.buffer.size, 304)
-        
+
         // Deserialize the struct from the FBE stream
         var struct2 = StructSimple()
         let reader = StructSimpleFinalModel()
         XCTAssertEqual(reader.fbeType, 110)
-        
+
         reader.attach(buffer: writer.buffer)
         XCTAssertTrue(reader.verify())
         let deserialized = reader.deserialize(value: &struct2)
         XCTAssertEqual(deserialized, reader.buffer.size)
         reader.next(prev: deserialized)
-        
+
         XCTAssertEqual(struct2.f1, false)
         XCTAssertEqual(struct2.f2, true)
         XCTAssertEqual(struct2.f3, 0)
@@ -127,7 +127,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertTrue(struct2.f36 == UUID(uuidString: "00000000-0000-0000-0000-000000000000"))
         XCTAssertTrue(struct2.f37 != UUID(uuidString: "123e4567-e89b-12d3-a456-426655440000"))
         XCTAssertTrue(struct2.f38 == UUID(uuidString: "123e4567-e89b-12d3-a456-426655440000"))
-        
+
         XCTAssertEqual(struct2.f1, struct1.f1)
         XCTAssertEqual(struct2.f2, struct1.f2)
         XCTAssertEqual(struct2.f3, struct1.f3)
@@ -169,34 +169,34 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f39, struct1.f39)
         XCTAssertEqual(struct2.f40, struct1.f40)
     }
-    
+
     func testSerializationStructOptional() {
         // Create a new struct
         let struct1 = ChronoxorTest.StructOptional()
-        
+
         // Serialize the struct to the FBE stream
         let writer = StructOptionalFinalModel()
         XCTAssertEqual(writer.fbeType, 111)
-        
+
         let serialized = try! writer.serialize(value: struct1)
         XCTAssertEqual(serialized, writer.buffer.size)
         XCTAssertTrue(writer.verify())
         writer.next(prev: serialized)
-        
+
         // Check the serialized FBE size
         XCTAssertEqual(writer.buffer.size, 478)
-        
+
         // Deserialize the struct from the FBE stream
         var struct2 = StructOptional()
         let reader = StructOptionalFinalModel()
         XCTAssertEqual(reader.fbeType, 111)
-        
+
         reader.attach(buffer: writer.buffer)
         XCTAssertTrue(reader.verify())
         let deserialized = reader.deserialize(value: &struct2)
         XCTAssertEqual(deserialized, reader.buffer.size)
         reader.next(prev: deserialized)
-        
+
         XCTAssertEqual(struct2.f1, false)
         XCTAssertEqual(struct2.f2, true)
         XCTAssertEqual(struct2.f3, 0)
@@ -235,7 +235,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertTrue(struct2.f36 == UUID(uuidString: "00000000-0000-0000-0000-000000000000"))
         XCTAssertTrue(struct2.f37 != UUID(uuidString: "00000000-0000-0000-0000-000000000000"))
         XCTAssertTrue(struct2.f38 == UUID(uuidString: "123e4567-e89b-12d3-a456-426655440000"))
-        
+
         XCTAssertEqual(struct2.f100, nil)
         XCTAssertEqual(struct2.f101!, true)
         XCTAssertEqual(struct2.f102, nil)
@@ -319,7 +319,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f163, nil)
         XCTAssertEqual(struct2.f164, nil)
         XCTAssertEqual(struct2.f165, nil)
-        
+
         XCTAssertEqual(struct2.f1, struct1.f1)
         XCTAssertEqual(struct2.f2, struct1.f2)
         XCTAssertEqual(struct2.f3, struct1.f3)
@@ -360,7 +360,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f38, struct1.f38)
         XCTAssertEqual(struct2.f39, struct1.f39)
         XCTAssertEqual(struct2.f40, struct1.f40)
-        
+
         XCTAssertEqual(struct2.f100, struct1.f100)
         XCTAssertEqual(struct2.f101, struct1.f101)
         XCTAssertEqual(struct2.f102, struct1.f102)
@@ -420,34 +420,34 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f156, struct1.f156)
         XCTAssertEqual(struct2.f157, struct1.f157)
     }
-    
+
     func testSerializationStructNested() {
         // Create a new struct
         let struct1 = StructNested()
-        
+
         // Serialize the struct to the FBE stream
         let writer = StructNestedFinalModel()
         XCTAssertEqual(writer.fbeType, 112)
-        
+
         let serialized = try! writer.serialize(value: struct1)
         XCTAssertEqual(serialized, writer.buffer.size)
         XCTAssertTrue(writer.verify())
         writer.next(prev: serialized)
-        
+
         // Check the serialized FBE size
         XCTAssertEqual(writer.buffer.size, 1267)
-        
+
         // Deserialize the struct from the FBE stream
         var struct2 = StructNested()
         let reader = StructNestedFinalModel()
         XCTAssertEqual(reader.fbeType, 112)
-        
+
         reader.attach(buffer: writer.buffer)
         XCTAssertTrue(reader.verify())
         let deserialized = reader.deserialize(value: &struct2)
         XCTAssertEqual(deserialized, reader.buffer.size)
         reader.next(prev: deserialized)
-        
+
         XCTAssertEqual(struct2.f1, false)
         XCTAssertEqual(struct2.f2, true)
         XCTAssertEqual(struct2.f3, 0)
@@ -486,7 +486,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertTrue(struct2.f36 == UUID(uuidString: "00000000-0000-0000-0000-000000000000"))
         XCTAssertTrue(struct2.f37 != UUID(uuidString: "123e4567-e89b-12d3-a456-426655440000"))
         XCTAssertTrue(struct2.f38 == UUID(uuidString: "123e4567-e89b-12d3-a456-426655440000"))
-        
+
         XCTAssertEqual(struct2.f100, nil)
         XCTAssertNotEqual(struct2.f101, nil)
         XCTAssertEqual(struct2.f101!, true)
@@ -571,7 +571,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f163, nil)
         XCTAssertEqual(struct2.f164, nil)
         XCTAssertEqual(struct2.f165, nil)
-        
+
         XCTAssertEqual(struct2.f1000, EnumSimple.ENUM_VALUE_0)
         XCTAssertEqual(struct2.f1001, nil)
         XCTAssertEqual(struct2.f1002, EnumTyped.ENUM_VALUE_2)
@@ -582,7 +582,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f1007, nil)
         XCTAssertEqual(struct2.f1009, nil)
         XCTAssertEqual(struct2.f1011, nil)
-        
+
         XCTAssertEqual(struct2.f1, struct1.f1)
         XCTAssertEqual(struct2.f2, struct1.f2)
         XCTAssertEqual(struct2.f3, struct1.f3)
@@ -623,7 +623,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f38, struct1.f38)
         XCTAssertEqual(struct2.f39, struct1.f39)
         XCTAssertEqual(struct2.f40, struct1.f40)
-        
+
         XCTAssertEqual(struct2.f100, struct1.f100)
         XCTAssertEqual(struct2.f101, struct1.f101)
         XCTAssertEqual(struct2.f102, struct1.f102)
@@ -682,7 +682,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f155, struct1.f155)
         XCTAssertEqual(struct2.f156, struct1.f156)
         XCTAssertEqual(struct2.f157, struct1.f157)
-        
+
         XCTAssertEqual(struct2.f1000, struct1.f1000)
         XCTAssertEqual(struct2.f1001, struct1.f1001)
         XCTAssertEqual(struct2.f1002, struct1.f1002)
@@ -692,36 +692,36 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f1006, struct1.f1006)
         XCTAssertEqual(struct2.f1007, struct1.f1007)
     }
-    
+
     func testSerializationStructBytes() {
         // Create a new struct
         let struct1 = StructBytes()
         struct1.f1 = "ABC".data(using: .utf8)!
         struct1.f2 = "test".data(using: .utf8)
-        
+
         // Serialize the struct to the FBE stream
         let writer = StructBytesFinalModel()
         XCTAssertEqual(writer.fbeType, 120)
-        
+
         let serialized = try! writer.serialize(value: struct1)
         XCTAssertEqual(serialized, writer.buffer.size)
         XCTAssertTrue(writer.verify())
         writer.next(prev: serialized)
-        
+
         // Check the serialized FBE size
         XCTAssertEqual(writer.buffer.size, 25)
-        
+
         // Deserialize the struct from the FBE stream
         var struct2 = StructBytes()
         let reader = StructBytesFinalModel()
         XCTAssertEqual(reader.fbeType, 120)
-        
+
         reader.attach(buffer: writer.buffer)
         XCTAssertTrue(reader.verify())
         let deserialized = reader.deserialize(value: &struct2)
         XCTAssertEqual(deserialized, reader.buffer.size)
         reader.next(prev: deserialized)
-        
+
         XCTAssertEqual(struct2.f1.count, 3)
         XCTAssertEqual(Character(UnicodeScalar(Array(struct2.f1)[0])), "A")
         XCTAssertEqual(Character(UnicodeScalar(Array(struct2.f1)[1])), "B")
@@ -734,7 +734,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(Character(UnicodeScalar(Array(struct2.f2!)[3])), "t")
         XCTAssertEqual(struct2.f3, nil)
     }
-    
+
     func testSerializationStructArray() {
         // Create a new struct
         let struct1 = StructArray()
@@ -768,30 +768,30 @@ class TestSerializationFinal: XCTestCase {
         struct1.f10 = Array(repeating: nil, count: 2)
         struct1.f10[0] = StructSimple()
         struct1.f10[1] = nil
-        
+
         // Serialize the struct to the FBE stream
         let writer = StructArrayFinalModel()
         XCTAssertEqual(writer.fbeType, 125)
-        
+
         let serialized = try! writer.serialize(value: struct1)
         XCTAssertEqual(serialized, writer.buffer.size)
         XCTAssertTrue(writer.verify())
         writer.next(prev: serialized)
-        
+
         // Check the serialized FBE size
         XCTAssertEqual(writer.buffer.size, 954)
-        
+
         // Deserialize the struct from the FBE stream
         var struct2 = StructArray()
         let reader = StructArrayFinalModel()
         XCTAssertEqual(reader.fbeType, 125)
-        
+
         reader.attach(buffer: writer.buffer)
         XCTAssertTrue(reader.verify())
         let deserialized = reader.deserialize(value: &struct2)
         XCTAssertEqual(deserialized, reader.buffer.size)
         reader.next(prev: deserialized)
-        
+
         XCTAssertEqual(struct2.f1.count, 2)
         XCTAssertEqual(struct2.f1[0], 48)
         XCTAssertEqual(struct2.f1[1], 65)
@@ -840,7 +840,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f10[0]!.f32, "Initial string!")
         XCTAssertEqual(struct2.f10[1], nil)
     }
-    
+
     func testSerializationStructVector() {
         // Create a new struct
         let struct1 = StructVector()
@@ -864,30 +864,30 @@ class TestSerializationFinal: XCTestCase {
         struct1.f9.append(StructSimple())
         struct1.f10.append(StructSimple())
         struct1.f10.append(nil)
-        
+
         // Serialize the struct to the FBE stream
         let writer = StructVectorFinalModel()
         XCTAssertEqual(writer.fbeType, 130)
-        
+
         let serialized = try! writer.serialize(value: struct1)
         XCTAssertEqual(serialized, writer.buffer.size)
         XCTAssertTrue(writer.verify())
         writer.next(prev: serialized)
-        
+
         // Check the serialized FBE size
         XCTAssertEqual(writer.buffer.size, 994)
-        
+
         // Deserialize the struct from the FBE stream
         var struct2 = StructVector()
         let reader = StructVectorFinalModel()
         XCTAssertEqual(reader.fbeType, 130)
-        
+
         reader.attach(buffer: writer.buffer)
         XCTAssertTrue(reader.verify())
         let deserialized = reader.deserialize(value: &struct2)
         XCTAssertEqual(deserialized, reader.buffer.size)
         reader.next(prev: deserialized)
-        
+
         XCTAssertEqual(struct2.f1.count, 2)
         XCTAssertEqual(struct2.f1[0], 48)
         XCTAssertEqual(struct2.f1[1], 65)
@@ -936,7 +936,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f10[0]!.f32, "Initial string!")
         XCTAssertEqual(struct2.f10[1], nil)
     }
-    
+
     func testSerializationStructList() {
         // Create a new struct
         let struct1 = StructList()
@@ -960,30 +960,30 @@ class TestSerializationFinal: XCTestCase {
         struct1.f9.append(StructSimple())
         struct1.f10.append(StructSimple())
         struct1.f10.append(nil)
-        
+
         // Serialize the struct to the FBE stream
         let writer = StructListFinalModel()
         XCTAssertEqual(writer.fbeType, 131)
-        
+
         let serialized = try! writer.serialize(value: struct1)
         XCTAssertEqual(serialized, writer.buffer.size)
         XCTAssertTrue(writer.verify())
         writer.next(prev: serialized)
-        
+
         // Check the serialized FBE size
         XCTAssertEqual(writer.buffer.size, 994)
-        
+
         // Deserialize the struct from the FBE stream
         var struct2 = StructList()
         let reader = StructListFinalModel()
         XCTAssertEqual(reader.fbeType, 131)
-        
+
         reader.attach(buffer: writer.buffer)
         XCTAssertTrue(reader.verify())
         let deserialized = reader.deserialize(value: &struct2)
         XCTAssertEqual(deserialized, reader.buffer.size)
         reader.next(prev: deserialized)
-        
+
         XCTAssertEqual(struct2.f1.count, 2)
         XCTAssertEqual(struct2.f1.first, 48)
         XCTAssertEqual(struct2.f1.last, 65)
@@ -1032,7 +1032,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f10.first!!.f32, "Initial string!")
         XCTAssertEqual(struct2.f10.last!, nil)
     }
-    
+
     func testSerializationStructSet() {
         // Create a new struct
         let struct1 = StructSet()
@@ -1049,30 +1049,30 @@ class TestSerializationFinal: XCTestCase {
         let s2 = StructSimple()
         s2.id = 65
         struct1.f4.append(s2)
-        
+
         // Serialize the struct to the FBE stream
         let writer = StructSetFinalModel()
         XCTAssertEqual(writer.fbeType, 132)
-        
+
         let serialized = try! writer.serialize(value: struct1)
         XCTAssertEqual(serialized, writer.buffer.size)
         XCTAssertTrue(writer.verify())
         writer.next(prev: serialized)
-        
+
         // Check the serialized FBE size
         XCTAssertEqual(writer.buffer.size, 635)
-        
+
         // Deserialize the struct from the FBE stream
         var struct2 = StructSet()
         let reader = StructSetFinalModel()
         XCTAssertEqual(reader.fbeType, 132)
-        
+
         reader.attach(buffer: writer.buffer)
         XCTAssertTrue(reader.verify())
         let deserialized = reader.deserialize(value: &struct2)
         XCTAssertEqual(deserialized, reader.buffer.size)
         reader.next(prev: deserialized)
-        
+
         XCTAssertEqual(struct2.f1.count, 3)
         XCTAssertTrue(struct2.f1.contains(48))
         XCTAssertTrue(struct2.f1.contains(65))
@@ -1087,7 +1087,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertTrue(struct2.f4.contains(s1))
         XCTAssertTrue(struct2.f4.contains(s2))
     }
-    
+
     func testSerializationStructMap() {
         // Create a new struct
         let struct1 = StructMap()
@@ -1115,30 +1115,30 @@ class TestSerializationFinal: XCTestCase {
         struct1.f9[20] = s2
         struct1.f10[10] = s1
         struct1.f10.updateValue(nil, forKey: 20)
-        
+
         // Serialize the struct to the FBE stream
         let writer = StructMapFinalModel()
         XCTAssertEqual(writer.fbeType, 140)
-        
+
         let serialized = try! writer.serialize(value: struct1)
         XCTAssertEqual(serialized, writer.buffer.size)
         XCTAssertTrue(writer.verify())
         writer.next(prev: serialized)
-        
+
         // Check the serialized FBE size
         XCTAssertEqual(writer.buffer.size, 1074)
-        
+
         // Deserialize the struct from the FBE stream
         var struct2 = StructMap()
         let reader = StructMapFinalModel()
         XCTAssertEqual(reader.fbeType, 140)
-        
+
         reader.attach(buffer: writer.buffer)
         XCTAssertTrue(reader.verify())
         let deserialized = reader.deserialize(value: &struct2)
         XCTAssertEqual(deserialized, reader.buffer.size)
         reader.next(prev: deserialized)
-        
+
         XCTAssertEqual(struct2.f1.count, 2)
         XCTAssertEqual(struct2.f1[10]!, 48)
         XCTAssertEqual(struct2.f1[20]!, 65)
@@ -1170,7 +1170,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f10[10]!!.id, 48)
         XCTAssertEqual(struct2.f10[20]!, nil)
     }
-    
+
     func testSerializationStructHash() {
         // Create a new struct
         let struct1 = StructHash()
@@ -1198,30 +1198,30 @@ class TestSerializationFinal: XCTestCase {
         struct1.f9["20"] = s2
         struct1.f10["10"] = s1
         struct1.f10.updateValue(nil, forKey: "20")
-        
+
         // Serialize the struct to the FBE stream
         let writer = StructHashFinalModel()
         XCTAssertEqual(writer.fbeType, 141)
-        
+
         let serialized = try! writer.serialize(value: struct1)
         XCTAssertEqual(serialized, writer.buffer.size)
         XCTAssertTrue(writer.verify())
         writer.next(prev: serialized)
-        
+
         // Check the serialized FBE size
         XCTAssertEqual(writer.buffer.size, 1114)
-        
+
         // Deserialize the struct from the FBE stream
         var struct2 = StructHash()
         let reader = StructHashFinalModel()
         XCTAssertEqual(reader.fbeType, 141)
-        
+
         reader.attach(buffer: writer.buffer)
         XCTAssertTrue(reader.verify())
         let deserialized = reader.deserialize(value: &struct2)
         XCTAssertEqual(deserialized, reader.buffer.size)
         reader.next(prev: deserialized)
-        
+
         XCTAssertEqual(struct2.f1.count, 2)
         XCTAssertEqual(struct2.f1["10"]!, 48)
         XCTAssertEqual(struct2.f1["20"]!, 65)
@@ -1253,7 +1253,7 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f10["10"]!!.id, 48)
         XCTAssertEqual(struct2.f10["20"]!, nil)
     }
-    
+
     func testSerializationStructHashExtended() {
         // Create a new struct
         let struct1 = StructHashEx()
@@ -1269,26 +1269,26 @@ class TestSerializationFinal: XCTestCase {
         // Serialize the struct to the FBE stream
         let writer = StructHashExFinalModel()
         XCTAssertEqual(writer.fbeType, 142)
-        
+
         let serialized = try! writer.serialize(value: struct1)
         XCTAssertEqual(serialized, writer.buffer.size)
         XCTAssertTrue(writer.verify())
         writer.next(prev: serialized)
-        
+
         // Check the serialized FBE size
         XCTAssertEqual(writer.buffer.size, 4979)
-        
+
         // Deserialize the struct from the FBE stream
         var struct2 = StructHashEx()
         let reader = StructHashExFinalModel()
         XCTAssertEqual(reader.fbeType, 142)
-        
+
         reader.attach(buffer: writer.buffer)
         XCTAssertTrue(reader.verify())
         let deserialized = reader.deserialize(value: &struct2)
         XCTAssertEqual(deserialized, reader.buffer.size)
         reader.next(prev: deserialized)
-        
+
         XCTAssertEqual(struct2.f1.count, 2)
         XCTAssertEqual(struct2.f1[s1]!.f1002, EnumTyped.ENUM_VALUE_2)
         XCTAssertEqual(struct2.f1[s2]!.f1002, EnumTyped.ENUM_VALUE_2)

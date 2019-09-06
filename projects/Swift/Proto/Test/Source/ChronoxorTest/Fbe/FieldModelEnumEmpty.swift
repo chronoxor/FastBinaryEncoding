@@ -29,7 +29,7 @@ public class FieldModelEnumEmpty: FieldModel {
 
     // Set the value
     public func set(value: EnumEmpty) throws {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return
         }

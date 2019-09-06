@@ -22,7 +22,7 @@ public class FinalModelEnumTyped: FinalModel {
     // Get the allocation size
     public func fbeAllocationSize(value: EnumTyped) -> Int { fbeSize }
 
-    public func verify() -> Int  {
+    public func verify() -> Int {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             return Int.max
         }

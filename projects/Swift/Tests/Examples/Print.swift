@@ -9,20 +9,20 @@ class ExamplePrint: XCTestCase {
     func testPrint() {
         print(StructSimple().description)
         print("")
-        
+
         print(StructOptional().description)
         print("")
-        
+
         print(StructNested().description)
         print("")
-        
+
         // Print bytes struct
         let structBytes = StructBytes()
         structBytes.f1 = "ABC".data(using: .utf8)!
         structBytes.f2 = "test".data(using: .utf8)!
         print(structBytes.description)
         print("")
-        
+
         // Print array struct
         let structArray = StructArray()
         structArray.f1 = Array(repeating: 0, count: 2)
@@ -57,7 +57,7 @@ class ExamplePrint: XCTestCase {
         structArray.f10[1] = nil
         print(structArray.description)
         print("")
-        
+
         // Print vector struct
         let structVector = StructVector()
         structVector.f1.append(48)
@@ -82,7 +82,7 @@ class ExamplePrint: XCTestCase {
         structVector.f10.append(nil)
         print(structVector.description)
         print("")
-        
+
         // Print list struct
         let structList = StructList()
         structList.f1.append(48)
@@ -107,7 +107,7 @@ class ExamplePrint: XCTestCase {
         structList.f10.append(nil)
         print(structList.description)
         print("")
-        
+
         // Print set struct
         let structSet = StructSet()
         structSet.f1.append(48)
@@ -125,7 +125,7 @@ class ExamplePrint: XCTestCase {
         structSet.f4.append(s2)
         print(structSet.description)
         print("")
-        
+
         // Print map struct
         let structMap = StructMap()
         structMap.f1[10] = 48
@@ -152,7 +152,7 @@ class ExamplePrint: XCTestCase {
         structMap.f10.updateValue(nil, forKey: 20)
         print(structMap.description)
         print("")
-        
+
         // Print hash struct
         let structHash = StructHash()
         structHash.f1["10"] = 48
@@ -179,7 +179,7 @@ class ExamplePrint: XCTestCase {
         structHash.f10.updateValue(nil, forKey: "20")
         print(structHash.description)
         print("")
-        
+
         // Print extended hash struct
         let structHashEx = StructHashEx()
         s1.id = 48

@@ -521,7 +521,7 @@ open class Enums: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) -> Enums {
-        return try! JSONDecoder().decode(Enums.self, from: json.data(using: .utf8)!)
+    open class func fromJson(_ json: String) throws -> Enums {
+        return try JSONDecoder().decode(Enums.self, from: json.data(using: .utf8)!)
     }
 }

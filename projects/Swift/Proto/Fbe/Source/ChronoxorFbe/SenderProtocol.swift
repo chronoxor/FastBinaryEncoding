@@ -17,7 +17,6 @@ public protocol SenderProtocol: class {
     // Get the final protocol flag
     var final: Bool { get set }
 
-
     // Send message handler
     func onSend(buffer: Data, offset: Int, size: Int) throws -> Int
 }
@@ -40,7 +39,7 @@ public extension SenderProtocol {
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!
     func sendSerialized(serialized: Int) throws -> Int {
-        if (serialized <= 0) {
+        if serialized <= 0 {
             assertionFailure("Invalid size of the serialized buffer!")
             return 0
         }

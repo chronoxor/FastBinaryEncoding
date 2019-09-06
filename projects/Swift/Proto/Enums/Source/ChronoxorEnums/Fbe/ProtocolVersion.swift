@@ -3,7 +3,6 @@
 // Source: enums.fbe
 // Version: 1.3.0.0
 
-
 // Fast Binary Encoding ChronoxorEnums protocol version
 struct ProtocolVersion {
     // Protocol major version

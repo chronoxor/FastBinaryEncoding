@@ -42,7 +42,7 @@ class FinalModelArrayOptionalStructSimple: FinalModel {
         var size: Int = 0
         _model.fbeOffset = fbeOffset
         var i = _size
-        while (i > 0) {
+        while i > 0 {
             let offset = _model.verify()
             if offset == Int.max { return Int.max }
             _model.fbeShift(size: offset)

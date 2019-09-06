@@ -150,7 +150,7 @@ open class StructNested: StructOptional {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open override class func fromJson(_ json: String) -> StructNested {
-        return try! JSONDecoder().decode(StructNested.self, from: json.data(using: .utf8)!)
+    open override class func fromJson(_ json: String) throws -> StructNested {
+        return try JSONDecoder().decode(StructNested.self, from: json.data(using: .utf8)!)
     }
 }

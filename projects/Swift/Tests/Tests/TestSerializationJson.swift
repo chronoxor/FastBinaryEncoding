@@ -7,23 +7,23 @@ import ChronoxorProto
 import ChronoxorTest
 
 class TestSerializationJson: XCTestCase {
-    
+
     func testSerializationJsonDomain() {
         // Define a source JSON string
         var json = "{\"id\":1,\"name\":\"Test\",\"state\":6,\"wallet\":{\"currency\":\"USD\",\"amount\":1000.0},\"asset\":{\"currency\":\"EUR\",\"amount\":100.0},\"orders\":[{\"id\":1,\"symbol\":\"EURUSD\",\"side\":0,\"type\":0,\"price\":1.23456,\"volume\":1000.0},{\"id\":2,\"symbol\":\"EURUSD\",\"side\":1,\"type\":1,\"price\":1.0,\"volume\":100.0},{\"id\":3,\"symbol\":\"EURUSD\",\"side\":0,\"type\":2,\"price\":1.5,\"volume\":10.0}]}"
-        
+
         // Create a new account from the source JSON string
-        let account1 = Account.fromJson(json)
-        
+        let account1 = try! Account.fromJson(json)
+
         // Serialize the account to the JSON string
         json = try! account1.toJson()
-        
+
         // Check the serialized JSON size
         XCTAssertTrue(!json.isEmpty)
-        
+
         // Deserialize the account from the JSON string
-        let account2 = Account.fromJson(json)
-        
+        let account2 = try! Account.fromJson(json)
+
         XCTAssertEqual(account2.id, 1)
         XCTAssertEqual(account2.name, "Test")
         XCTAssertTrue(account2.state.hasFlags(flags: State.good))
@@ -52,21 +52,21 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(account2.orders[2].price, 1.5)
         XCTAssertEqual(account2.orders[2].volume, 10.0)
     }
-    
+
     func testSerializationJsonStructSimple() {
         var json = "{\"id\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145597933463000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"e7854072-f0a5-11e8-8f69-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}"
         // Create a new struct from the source JSON string
-        let struct1 = StructSimple.fromJson(json)
-        
+        let struct1 = try! StructSimple.fromJson(json)
+
         // Serialize the struct to the JSON string
         json = try! struct1.toJson()
-        
+
         // Check the serialized JSON size
         XCTAssertTrue(!json.isEmpty)
-        
+
         // Deserialize the struct from the JSON string
-        let struct2 = StructSimple.fromJson(json)
-        
+        let struct2 = try! StructSimple.fromJson(json)
+
         XCTAssertEqual(struct2.f1, false)
         XCTAssertEqual(struct2.f2, true)
         XCTAssertEqual(struct2.f3, 0)
@@ -105,7 +105,7 @@ class TestSerializationJson: XCTestCase {
         XCTAssertTrue(struct2.f36 == UUID(uuidString: "00000000-0000-0000-0000-000000000000"))
         XCTAssertTrue(struct2.f37 != UUID(uuidString: "123e4567-e89b-12d3-a456-426655440000"))
         XCTAssertTrue(struct2.f38 == UUID(uuidString: "123e4567-e89b-12d3-a456-426655440000"))
-        
+
         XCTAssertEqual(struct2.f1, struct1.f1)
         XCTAssertEqual(struct2.f2, struct1.f2)
         XCTAssertEqual(struct2.f3, struct1.f3)
@@ -147,22 +147,22 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(struct2.f39, struct1.f39)
         XCTAssertEqual(struct2.f40, struct1.f40)
     }
-    
+
     func testSerializationJsonStructOptional() {
         var json = "{\"id\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145860677797000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"8420d1c6-f0a6-11e8-80fc-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]},\"f100\":null,\"f101\":true,\"f102\":null,\"f103\":null,\"f104\":255,\"f105\":null,\"f106\":null,\"f107\":33,\"f108\":null,\"f109\":null,\"f110\":1092,\"f111\":null,\"f112\":null,\"f113\":127,\"f114\":null,\"f115\":null,\"f116\":255,\"f117\":null,\"f118\":null,\"f119\":32767,\"f120\":null,\"f121\":null,\"f122\":65535,\"f123\":null,\"f124\":null,\"f125\":2147483647,\"f126\":null,\"f127\":null,\"f128\":4294967295,\"f129\":null,\"f130\":null,\"f131\":9223372036854775807,\"f132\":null,\"f133\":null,\"f134\":18446744073709551615,\"f135\":null,\"f136\":null,\"f137\":123.456,\"f138\":null,\"f139\":null,\"f140\":-1.23456e+125,\"f141\":null,\"f142\":null,\"f143\":\"123456.123456\",\"f144\":null,\"f145\":null,\"f146\":\"Initial string!\",\"f147\":null,\"f148\":null,\"f149\":1543145860678429000,\"f150\":null,\"f151\":null,\"f152\":\"123e4567-e89b-12d3-a456-426655440000\",\"f153\":null,\"f154\":null,\"f155\":null,\"f156\":null,\"f157\":null,\"f158\":null,\"f159\":null,\"f160\":null,\"f161\":null,\"f162\":null,\"f163\":null,\"f164\":null,\"f165\":null}"
-        
+
         // Create a new struct from the source JSON string
-        let struct1 = StructOptional.fromJson(json)
-        
+        let struct1 = try! StructOptional.fromJson(json)
+
         // Serialize the struct to the JSON string
         json = try! struct1.toJson()
-        
+
         // Check the serialized JSON size
         XCTAssertTrue(!json.isEmpty)
-        
+
         // Deserialize the struct from the JSON string
-        let struct2 = StructOptional.fromJson(json)
-        
+        let struct2 = try! StructOptional.fromJson(json)
+
         XCTAssertEqual(struct2.f1, false)
         XCTAssertEqual(struct2.f2, true)
         XCTAssertEqual(struct2.f3, 0)
@@ -201,7 +201,7 @@ class TestSerializationJson: XCTestCase {
         XCTAssertTrue(struct2.f36 == UUID(uuidString: "00000000-0000-0000-0000-000000000000"))
         XCTAssertTrue(struct2.f37 != UUID(uuidString: "00000000-0000-0000-0000-000000000000"))
         XCTAssertTrue(struct2.f38 == UUID(uuidString: "123e4567-e89b-12d3-a456-426655440000"))
-        
+
         XCTAssertEqual(struct2.f100, nil)
         XCTAssertEqual(struct2.f101!, true)
         XCTAssertEqual(struct2.f102, nil)
@@ -285,7 +285,7 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(struct2.f163, nil)
         XCTAssertEqual(struct2.f164, nil)
         XCTAssertEqual(struct2.f165, nil)
-        
+
         XCTAssertEqual(struct2.f1, struct1.f1)
         XCTAssertEqual(struct2.f2, struct1.f2)
         XCTAssertEqual(struct2.f3, struct1.f3)
@@ -326,7 +326,7 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(struct2.f38, struct1.f38)
         XCTAssertEqual(struct2.f39, struct1.f39)
         XCTAssertEqual(struct2.f40, struct1.f40)
-        
+
         XCTAssertEqual(struct2.f100, struct1.f100)
         XCTAssertEqual(struct2.f101, struct1.f101)
         XCTAssertEqual(struct2.f102, struct1.f102)
@@ -386,25 +386,25 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(struct2.f156, struct1.f156)
         XCTAssertEqual(struct2.f157, struct1.f157)
     }
-    
+
     func testSerializationJsonStructNested() {
         _ = StructSimple()
         _ = StructOptional()
-        
+
         var json = "{\"id\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145901646321000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"9c8c268e-f0a6-11e8-a777-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]},\"f100\":null,\"f101\":true,\"f102\":null,\"f103\":null,\"f104\":255,\"f105\":null,\"f106\":null,\"f107\":33,\"f108\":null,\"f109\":null,\"f110\":1092,\"f111\":null,\"f112\":null,\"f113\":127,\"f114\":null,\"f115\":null,\"f116\":255,\"f117\":null,\"f118\":null,\"f119\":32767,\"f120\":null,\"f121\":null,\"f122\":65535,\"f123\":null,\"f124\":null,\"f125\":2147483647,\"f126\":null,\"f127\":null,\"f128\":4294967295,\"f129\":null,\"f130\":null,\"f131\":9223372036854775807,\"f132\":null,\"f133\":null,\"f134\":18446744073709551615,\"f135\":null,\"f136\":null,\"f137\":123.456,\"f138\":null,\"f139\":null,\"f140\":-1.23456e+125,\"f141\":null,\"f142\":null,\"f143\":\"123456.123456\",\"f144\":null,\"f145\":null,\"f146\":\"Initial string!\",\"f147\":null,\"f148\":null,\"f149\":1543145901647155000,\"f150\":null,\"f151\":null,\"f152\":\"123e4567-e89b-12d3-a456-426655440000\",\"f153\":null,\"f154\":null,\"f155\":null,\"f156\":null,\"f157\":null,\"f158\":null,\"f159\":null,\"f160\":null,\"f161\":null,\"f162\":null,\"f163\":null,\"f164\":null,\"f165\":null,\"f1000\":0,\"f1001\":null,\"f1002\":50,\"f1003\":null,\"f1004\":0,\"f1005\":null,\"f1006\":42,\"f1007\":null,\"f1008\":{\"id\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145901647367000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"9c8c54c4-f0a6-11e8-a777-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},\"f1009\":null,\"f1010\":{\"id\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145901648310000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"9c8c6b76-f0a6-11e8-a777-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]},\"f100\":null,\"f101\":true,\"f102\":null,\"f103\":null,\"f104\":255,\"f105\":null,\"f106\":null,\"f107\":33,\"f108\":null,\"f109\":null,\"f110\":1092,\"f111\":null,\"f112\":null,\"f113\":127,\"f114\":null,\"f115\":null,\"f116\":255,\"f117\":null,\"f118\":null,\"f119\":32767,\"f120\":null,\"f121\":null,\"f122\":65535,\"f123\":null,\"f124\":null,\"f125\":2147483647,\"f126\":null,\"f127\":null,\"f128\":4294967295,\"f129\":null,\"f130\":null,\"f131\":9223372036854775807,\"f132\":null,\"f133\":null,\"f134\":18446744073709551615,\"f135\":null,\"f136\":null,\"f137\":123.456,\"f138\":null,\"f139\":null,\"f140\":-1.23456e+125,\"f141\":null,\"f142\":null,\"f143\":\"123456.123456\",\"f144\":null,\"f145\":null,\"f146\":\"Initial string!\",\"f147\":null,\"f148\":null,\"f149\":1543145901648871000,\"f150\":null,\"f151\":null,\"f152\":\"123e4567-e89b-12d3-a456-426655440000\",\"f153\":null,\"f154\":null,\"f155\":null,\"f156\":null,\"f157\":null,\"f158\":null,\"f159\":null,\"f160\":null,\"f161\":null,\"f162\":null,\"f163\":null,\"f164\":null,\"f165\":null},\"f1011\":null}"
-        
+
         // Create a new struct from the source JSON string
-        let struct1 = StructNested.fromJson(json)
-        
+        let struct1 = try! StructNested.fromJson(json)
+
         // Serialize the struct to the JSON string
         json = try! struct1.toJson()
-        
+
         // Check the serialized JSON size
         XCTAssertTrue(!json.isEmpty)
-        
+
         // Deserialize the struct from the JSON string
-        let struct2 = StructNested.fromJson(json)
-        
+        let struct2 = try! StructNested.fromJson(json)
+
         XCTAssertEqual(struct2.f1, false)
         XCTAssertEqual(struct2.f2, true)
         XCTAssertEqual(struct2.f3, 0)
@@ -443,7 +443,7 @@ class TestSerializationJson: XCTestCase {
         XCTAssertTrue(struct2.f36 == UUID(uuidString: "00000000-0000-0000-0000-000000000000"))
         XCTAssertTrue(struct2.f37 != UUID(uuidString: "123e4567-e89b-12d3-a456-426655440000"))
         XCTAssertTrue(struct2.f38 == UUID(uuidString: "123e4567-e89b-12d3-a456-426655440000"))
-        
+
         XCTAssertEqual(struct2.f100, nil)
         XCTAssertNotEqual(struct2.f101, nil)
         XCTAssertEqual(struct2.f101!, true)
@@ -528,7 +528,7 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(struct2.f163, nil)
         XCTAssertEqual(struct2.f164, nil)
         XCTAssertEqual(struct2.f165, nil)
-        
+
         XCTAssertEqual(struct2.f1000, EnumSimple.ENUM_VALUE_0)
         XCTAssertEqual(struct2.f1001, nil)
         XCTAssertEqual(struct2.f1002, EnumTyped.ENUM_VALUE_2)
@@ -539,7 +539,7 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(struct2.f1007, nil)
         XCTAssertEqual(struct2.f1009, nil)
         XCTAssertEqual(struct2.f1011, nil)
-        
+
         XCTAssertEqual(struct2.f1, struct1.f1)
         XCTAssertEqual(struct2.f2, struct1.f2)
         XCTAssertEqual(struct2.f3, struct1.f3)
@@ -580,7 +580,7 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(struct2.f38, struct1.f38)
         XCTAssertEqual(struct2.f39, struct1.f39)
         XCTAssertEqual(struct2.f40, struct1.f40)
-        
+
         XCTAssertEqual(struct2.f100, struct1.f100)
         XCTAssertEqual(struct2.f101, struct1.f101)
         XCTAssertEqual(struct2.f102, struct1.f102)
@@ -639,7 +639,7 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(struct2.f155, struct1.f155)
         XCTAssertEqual(struct2.f156, struct1.f156)
         XCTAssertEqual(struct2.f157, struct1.f157)
-        
+
         XCTAssertEqual(struct2.f1000, struct1.f1000)
         XCTAssertEqual(struct2.f1001, struct1.f1001)
         XCTAssertEqual(struct2.f1002, struct1.f1002)
@@ -649,22 +649,22 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(struct2.f1006, struct1.f1006)
         XCTAssertEqual(struct2.f1007, struct1.f1007)
     }
-    
+
     func testSerializationJsonStructBytes() {
         var json = "{\"f1\":\"QUJD\",\"f2\":\"dGVzdA==\",\"f3\":null}"
-        
+
         // Create a new struct from the source JSON string
-        let struct1 = StructBytes.fromJson(json)
-        
+        let struct1 = try! StructBytes.fromJson(json)
+
         // Serialize the struct to the JSON string
         json = try! struct1.toJson()
-        
+
         // Check the serialized JSON size
         XCTAssertTrue(!json.isEmpty)
-        
+
         // Deserialize the struct from the JSON string
-        let struct2 = StructBytes.fromJson(json)
-        
+        let struct2 = try! StructBytes.fromJson(json)
+
         XCTAssertEqual(struct2.f1.count, 3)
         XCTAssertEqual(Character(UnicodeScalar(Array(struct2.f1)[0])), "A")
         XCTAssertEqual(Character(UnicodeScalar(Array(struct2.f1)[1])), "B")
@@ -677,22 +677,22 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(Character(UnicodeScalar(Array(struct2.f2!)[3])), "t")
         XCTAssertEqual(struct2.f3, nil)
     }
-    
+
     func testSerializationJsonStructArray() {
         var json = "{\"f1\":[48,65],\"f2\":[97,null],\"f3\":[\"MDAw\",\"QUFB\"],\"f4\":[\"YWFh\",null],\"f5\":[1,2],\"f6\":[1,null],\"f7\":[3,7],\"f8\":[3,null],\"f9\":[{\"id\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145986060361000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"cedcad98-f0a6-11e8-9f47-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},{\"id\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145986060910000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"cedcc274-f0a6-11e8-9f47-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}],\"f10\":[{\"id\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145986061436000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"cedcd714-f0a6-11e8-9f47-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},null]}"
-        
+
         // Create a new struct from the source JSON string
-        let struct1 = StructArray.fromJson(json)
-        
+        let struct1 = try! StructArray.fromJson(json)
+
         // Serialize the struct to the JSON string
         json = try! struct1.toJson()
-        
+
         // Check the serialized JSON size
         XCTAssertTrue(!json.isEmpty)
-        
+
         // Deserialize the struct from the JSON string
-        let struct2 = StructArray.fromJson(json)
-        
+        let struct2 = try! StructArray.fromJson(json)
+
         XCTAssertEqual(struct2.f1.count, 2)
         XCTAssertEqual(struct2.f1[0], 48)
         XCTAssertEqual(struct2.f1[1], 65)
@@ -741,22 +741,22 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(struct2.f10[0]!.f32, "Initial string!")
         XCTAssertEqual(struct2.f10[1], nil)
     }
-    
+
     func testSerializationJsonStructVector() {
         var json = "{\"f1\":[48,65],\"f2\":[97,null],\"f3\":[\"MDAw\",\"QUFB\"],\"f4\":[\"YWFh\",null],\"f5\":[1,2],\"f6\":[1,null],\"f7\":[3,7],\"f8\":[3,null],\"f9\":[{\"id\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146157127964000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"34d38702-f0a7-11e8-b30e-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},{\"id\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146157128572000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"34d39c88-f0a7-11e8-b30e-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}],\"f10\":[{\"id\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146157129063000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"34d3b038-f0a7-11e8-b30e-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},null]}"
-        
+
         // Create a new struct from the source JSON string
-        let struct1 = StructVector.fromJson(json)
-        
+        let struct1 = try! StructVector.fromJson(json)
+
         // Serialize the struct to the JSON string
         json = try! struct1.toJson()
-        
+
         // Check the serialized JSON size
         XCTAssertTrue(!json.isEmpty)
-        
+
         // Deserialize the struct from the JSON string
-        let struct2 = StructVector.fromJson(json)
-        
+        let struct2 = try! StructVector.fromJson(json)
+
         XCTAssertEqual(struct2.f1.count, 2)
         XCTAssertEqual(struct2.f1[0], 48)
         XCTAssertEqual(struct2.f1[1], 65)
@@ -805,22 +805,22 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(struct2.f10[0]!.f32, "Initial string!")
         XCTAssertEqual(struct2.f10[1], nil)
     }
-    
+
     func testSerializationJsonStructList() {
         var json = "{\"f1\":[48,65],\"f2\":[97,null],\"f3\":[\"MDAw\",\"QUFB\"],\"f4\":[\"YWFh\",null],\"f5\":[1,2],\"f6\":[1,null],\"f7\":[3,7],\"f8\":[3,null],\"f9\":[{\"id\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146220253760000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"5a73e7fe-f0a7-11e8-89e6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},{\"id\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146220255725000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"5a741990-f0a7-11e8-89e6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}],\"f10\":[{\"id\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146220256802000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"5a74e4b0-f0a7-11e8-89e6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},null]}"
-        
+
         // Create a new struct from the source JSON string
-        let struct1 = StructList.fromJson(json)
-        
+        let struct1 = try! StructList.fromJson(json)
+
         // Serialize the struct to the JSON string
         json = try! struct1.toJson()
-        
+
         // Check the serialized JSON size
         XCTAssertTrue(!json.isEmpty)
-        
+
         // Deserialize the struct from the JSON string
-        let struct2 = StructList.fromJson(json)
-        
+        let struct2 = try! StructList.fromJson(json)
+
         XCTAssertEqual(struct2.f1.count, 2)
         XCTAssertEqual(struct2.f1.first, 48)
         XCTAssertEqual(struct2.f1.last, 65)
@@ -869,21 +869,21 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(struct2.f10.first!!.f32, "Initial string!")
         XCTAssertEqual(struct2.f10.last!, nil)
     }
-    
+
     func testSerializationJsonStructSet() {
         var json = "{\"f1\":[48,65,97],\"f2\":[1,2],\"f3\":[3,7],\"f4\":[{\"id\":48,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146299848353000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"89e4edd0-f0a7-11e8-9dde-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},{\"id\":65,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146299848966000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"89e503f6-f0a7-11e8-9dde-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}]}"
         // Create a new struct from the source JSON string
-        let struct1 = StructSet.fromJson(json)
-        
+        let struct1 = try! StructSet.fromJson(json)
+
         // Serialize the struct to the JSON string
         json = try! struct1.toJson()
-        
+
         // Check the serialized JSON size
         XCTAssertTrue(!json.isEmpty)
-        
+
         // Deserialize the struct from the JSON string
-        let struct2 = StructSet.fromJson(json)
-        
+        let struct2 = try! StructSet.fromJson(json)
+
         XCTAssertEqual(struct2.f1.count, 3)
         XCTAssertTrue(struct2.f1.contains(48))
         XCTAssertTrue(struct2.f1.contains(65))
@@ -902,21 +902,21 @@ class TestSerializationJson: XCTestCase {
         s2.id = 65
         XCTAssertTrue(struct2.f4.contains(s2))
     }
-    
+
     func testSerializationJsonStructMap() {
         var json = "{\"f1\":{\"10\":48,\"20\":65},\"f2\":{\"10\":97,\"20\":null},\"f3\":{\"10\":\"MDAw\",\"20\":\"QUFB\"},\"f4\":{\"10\":\"YWFh\",\"20\":null},\"f5\":{\"10\":1,\"20\":2},\"f6\":{\"10\":1,\"20\":null},\"f7\":{\"10\":3,\"20\":7},\"f8\":{\"10\":3,\"20\":null},\"f9\":{\"10\":{\"id\":48,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146345803483000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"a549215e-f0a7-11e8-90f6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},\"20\":{\"id\":65,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146345804184000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"a54942ce-f0a7-11e8-90f6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}},\"f10\":{\"10\":{\"id\":48,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146345803483000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"a549215e-f0a7-11e8-90f6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},\"20\":null}}"
         // Create a new struct from the source JSON string
-        let struct1 = StructMap.fromJson(json)
-        
+        let struct1 = try! StructMap.fromJson(json)
+
         // Serialize the struct to the JSON string
         json = try! struct1.toJson()
-        
+
         // Check the serialized JSON size
         XCTAssertTrue(!json.isEmpty)
-        
+
         // Deserialize the struct from the JSON string
-        let struct2 = StructMap.fromJson(json)
-        
+        let struct2 = try! StructMap.fromJson(json)
+
         XCTAssertEqual(struct2.f1.count, 2)
         XCTAssertEqual(struct2.f1[10]!, 48)
         XCTAssertEqual(struct2.f1[20]!, 65)
@@ -948,21 +948,21 @@ class TestSerializationJson: XCTestCase {
         XCTAssertEqual(struct2.f10[10]!!.id, 48)
         XCTAssertEqual(struct2.f10[20]!, nil)
     }
-    
+
     func testSerializationJsonStructHash() {
         var json = "{\"f1\":{\"10\":48,\"20\":65},\"f2\":{\"10\":97,\"20\":null},\"f3\":{\"10\":\"MDAw\",\"20\":\"QUFB\"},\"f4\":{\"10\":\"YWFh\",\"20\":null},\"f5\":{\"10\":1,\"20\":2},\"f6\":{\"10\":1,\"20\":null},\"f7\":{\"10\":3,\"20\":7},\"f8\":{\"10\":3,\"20\":null},\"f9\":{\"10\":{\"id\":48,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146381450913000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"ba8885d2-f0a7-11e8-81fa-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},\"20\":{\"id\":65,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146381452825000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"ba88ced4-f0a7-11e8-81fa-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}},\"f10\":{\"10\":{\"id\":48,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":255,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":255,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":65535,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":4294967295,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":18446744073709551615,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0.0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146381450913000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"ba8885d2-f0a7-11e8-81fa-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"id\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"id\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},\"20\":null}}"
         // Create a new struct from the source JSON string
-        let struct1 = StructHash.fromJson(json)
-        
+        let struct1 = try! StructHash.fromJson(json)
+
         // Serialize the struct to the JSON string
         json = try! struct1.toJson()
-        
+
         // Check the serialized JSON size
         XCTAssertTrue(!json.isEmpty)
-        
+
         // Deserialize the struct from the JSON string
-        let struct2 = StructHash.fromJson(json)
-        
+        let struct2 = try! StructHash.fromJson(json)
+
         XCTAssertEqual(struct2.f1.count, 2)
         XCTAssertEqual(struct2.f1["10"]!, 48)
         XCTAssertEqual(struct2.f1["20"]!, 65)

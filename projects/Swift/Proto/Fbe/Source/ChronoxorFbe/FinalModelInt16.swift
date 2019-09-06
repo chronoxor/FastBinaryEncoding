@@ -34,7 +34,7 @@ public class FinalModelInt16: FinalModel {
 
     // Get the value
     public func get(size: inout Size) -> Int16 {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return 0
         }
 
@@ -44,7 +44,7 @@ public class FinalModelInt16: FinalModel {
 
     // Set the value
     public func set(value: Int16) throws -> Int {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return 0
         }

@@ -34,7 +34,7 @@ class FieldModelMapInt32Data: FieldModel {
         _modelKey.fbeOffset = fbeMapOffset + 4
         _modelValue.fbeOffset = fbeMapOffset + 4 + _modelKey.fbeSize
         var i = fbeMapSize
-        while (i > 0) {
+        while i > 0 {
             fbeResult += _modelKey.fbeSize + _modelKey.fbeExtra
             _modelKey.fbeShift(size: _modelKey.fbeSize)
             fbeResult += _modelValue.fbeSize + _modelValue.fbeExtra
@@ -123,7 +123,7 @@ class FieldModelMapInt32Data: FieldModel {
         }
 
         let fbeMapOffset = Int(readUInt32(offset: fbeOffset))
-        if (fbeMapOffset == 0) {
+        if fbeMapOffset == 0 {
             return true
         }
 
@@ -135,7 +135,7 @@ class FieldModelMapInt32Data: FieldModel {
         _modelKey.fbeOffset = fbeMapOffset + 4
         _modelValue.fbeOffset = fbeMapOffset + 4 + _modelKey.fbeSize
         var i = fbeMapSize
-        while (i > 0) {
+        while i > 0 {
             if !_modelKey.verify() { return false }
             _modelKey.fbeShift(size: _modelKey.fbeSize + _modelValue.fbeSize)
             if !_modelValue.verify() { return false }
@@ -158,7 +158,7 @@ class FieldModelMapInt32Data: FieldModel {
 
         let fbeModel = getItem(index: 0)
         var i = fbeMapSize
-        while (i > 0) {
+        while i > 0 {
             let key = fbeModel.0.get()
             let value = fbeModel.1.get()
             values[key] = value

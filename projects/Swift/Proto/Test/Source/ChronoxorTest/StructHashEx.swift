@@ -54,8 +54,7 @@ open class StructHashEx: Comparable, Hashable, Codable {
     open var description: String {
         var sb = String()
         sb.append("StructHashEx(")
-        if (true)
-        {
+        if true {
             var first = true
             sb.append("f1=["); sb.append(f1.count.description); sb.append("][{")
             for (key, value) in f1 {
@@ -66,8 +65,7 @@ open class StructHashEx: Comparable, Hashable, Codable {
             }
             sb.append("}]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f2=["); sb.append(f2.count.description); sb.append("][{")
             for (key, value) in f2 {
@@ -96,7 +94,7 @@ open class StructHashEx: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) -> StructHashEx {
-        return try! JSONDecoder().decode(StructHashEx.self, from: json.data(using: .utf8)!)
+    open class func fromJson(_ json: String) throws -> StructHashEx {
+        return try JSONDecoder().decode(StructHashEx.self, from: json.data(using: .utf8)!)
     }
 }

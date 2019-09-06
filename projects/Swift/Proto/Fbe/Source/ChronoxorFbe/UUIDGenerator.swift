@@ -15,7 +15,7 @@ public struct UUIDGenerator {
 
     // Generate sequential UUID1 (time based version)
     public static func sequential() -> UUID {
-        var uuid: uuid_t = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+        var uuid: uuid_t = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
         withUnsafeMutablePointer(to: &uuid) {
             $0.withMemoryRebound(to: UInt8.self, capacity: 16) {
                 uuid_generate_time($0)

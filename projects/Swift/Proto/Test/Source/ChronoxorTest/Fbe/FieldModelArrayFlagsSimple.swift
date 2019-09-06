@@ -62,7 +62,7 @@ class FieldModelArrayFlagsSimple: FieldModel {
 
         _model.fbeOffset = fbeOffset
         var i = size
-        while (i > 0) {
+        while i > 0 {
             if !_model.verify() { return false }
             _model.fbeShift(size: _model.fbeSize)
             i -= 1
@@ -94,7 +94,7 @@ class FieldModelArrayFlagsSimple: FieldModel {
 
         let fbeModel = getItem(index: 0)
         var i = size
-        while (i > 0) {
+        while i > 0 {
             let value = fbeModel.get()
             values.append(value)
             fbeModel.fbeShift(size: fbeModel.fbeSize)

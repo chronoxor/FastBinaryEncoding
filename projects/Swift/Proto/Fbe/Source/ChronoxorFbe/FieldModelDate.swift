@@ -20,7 +20,7 @@ public class FieldModelDate: FieldModel {
 
     // Get the value
     public func get(defaults: Date = Date(timeIntervalSince1970: 0)) -> Date {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 
@@ -30,7 +30,7 @@ public class FieldModelDate: FieldModel {
 
     // Set the value
     public func set(value: Date) throws {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return
         }

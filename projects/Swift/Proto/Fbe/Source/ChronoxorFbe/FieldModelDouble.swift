@@ -25,7 +25,7 @@ public class FieldModelDouble: FieldModel {
 
     // Get the value
     public func get(defaults: Double = 0.0) -> Double {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 

@@ -6,7 +6,7 @@ import XCTest
 @testable import ChronoxorProto
 
 class TestCreate: XCTestCase {
-    
+
     func testCreateAndAccess() {
         do {
             // Create a new account using FBE model into the FBE stream
@@ -61,16 +61,16 @@ class TestCreate: XCTestCase {
             XCTAssertTrue(writer.verify())
             writer.next(prev: serialized)
             XCTAssertEqual(writer.model.fbeOffset, 4 + writer.buffer.size)
-            
+
             // Check the serialized FBE size
             XCTAssertEqual(writer.buffer.size, 252)
-            
+
             // Access the account model in the FBE stream
             let reader = AccountModel()
             XCTAssertEqual(reader.model.fbeOffset, 4)
             reader.attach(buffer: writer.buffer)
             XCTAssertTrue(reader.verify())
-            
+
             let id: Int32
             let name: String
             let state: State
@@ -78,7 +78,7 @@ class TestCreate: XCTestCase {
             let walletAmount: Double
             let assetWalletCurrency: String
             let assetWalletAmount: Double
-            
+
             accountBegin = reader.model.getBegin()
             id = reader.model.id.get()
             XCTAssertEqual(id, 1)
@@ -86,14 +86,14 @@ class TestCreate: XCTestCase {
             XCTAssertEqual(name, "Test")
             state = reader.model.state.get()
             XCTAssertTrue(state.hasFlags(flags: State.good))
-            
+
             walletBegin = reader.model.wallet.getBegin()
             walletCurrency = reader.model.wallet.currency.get()
             XCTAssertEqual(walletCurrency, "USD")
             walletAmount = reader.model.wallet.amount.get()
             XCTAssertEqual(walletAmount, 1000.0)
             reader.model.wallet.getEnd(fbeBegin: walletBegin)
-            
+
             XCTAssertTrue(reader.model.asset.hasValue())
             assetBegin = reader.model.asset.getBegin()
             assetWalletBegin = reader.model.asset.value.getBegin()
@@ -103,16 +103,16 @@ class TestCreate: XCTestCase {
             XCTAssertEqual(assetWalletAmount, 100.0)
             reader.model.asset.value.getEnd(fbeBegin: assetWalletBegin)
             reader.model.asset.getEnd(fbeBegin: assetBegin)
-            
+
             XCTAssertEqual(reader.model.orders.size, 3)
-            
+
             var orderId: Int32
             var orderSymbol: String
             var orderSide: OrderSide
             var orderType: OrderType
             var orderPrice: Double
             var orderVolume: Double
-            
+
             let o1 = reader.model.orders.getItem(index: 0)
             orderBegin = o1.getBegin()
             orderId = o1.id.get()
@@ -128,7 +128,7 @@ class TestCreate: XCTestCase {
             orderVolume = o1.volume.get()
             XCTAssertEqual(orderVolume, 1000.0)
             o1.getEnd(fbeBegin: orderBegin)
-            
+
             let o2 = reader.model.orders.getItem(index: 1)
             orderBegin = o2.getBegin()
             orderId = o2.id.get()
@@ -144,7 +144,7 @@ class TestCreate: XCTestCase {
             orderVolume = o2.volume.get()
             XCTAssertEqual(orderVolume, 100.0)
             o1.getEnd(fbeBegin: orderBegin)
-            
+
             let o3 = reader.model.orders.getItem(index: 2)
             orderBegin = o3.getBegin()
             orderId = o3.id.get()
@@ -160,10 +160,10 @@ class TestCreate: XCTestCase {
             orderVolume = o3.volume.get()
             XCTAssertEqual(orderVolume, 10.0)
             o1.getEnd(fbeBegin: orderBegin)
-            
+
             reader.model.getEnd(fbeBegin: accountBegin)
         } catch {
-            XCTFail()
+            XCTFail("catch error")
         }
     }
 }

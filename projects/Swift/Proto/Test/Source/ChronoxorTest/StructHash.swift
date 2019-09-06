@@ -86,8 +86,7 @@ open class StructHash: Comparable, Hashable, Codable {
     open var description: String {
         var sb = String()
         sb.append("StructHash(")
-        if (true)
-        {
+        if true {
             var first = true
             sb.append("f1=["); sb.append(f1.count.description); sb.append("][{")
             for (key, value) in f1 {
@@ -98,8 +97,7 @@ open class StructHash: Comparable, Hashable, Codable {
             }
             sb.append("}]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f2=["); sb.append(f2.count.description); sb.append("][{")
             for (key, value) in f2 {
@@ -110,8 +108,7 @@ open class StructHash: Comparable, Hashable, Codable {
             }
             sb.append("}]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f3=["); sb.append(f3.count.description); sb.append("][{")
             for (key, value) in f3 {
@@ -122,8 +119,7 @@ open class StructHash: Comparable, Hashable, Codable {
             }
             sb.append("}]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f4=["); sb.append(f4.count.description); sb.append("][{")
             for (key, value) in f4 {
@@ -134,8 +130,7 @@ open class StructHash: Comparable, Hashable, Codable {
             }
             sb.append("}]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f5=["); sb.append(f5.count.description); sb.append("][{")
             for (key, value) in f5 {
@@ -146,8 +141,7 @@ open class StructHash: Comparable, Hashable, Codable {
             }
             sb.append("}]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f6=["); sb.append(f6.count.description); sb.append("][{")
             for (key, value) in f6 {
@@ -158,8 +152,7 @@ open class StructHash: Comparable, Hashable, Codable {
             }
             sb.append("}]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f7=["); sb.append(f7.count.description); sb.append("][{")
             for (key, value) in f7 {
@@ -170,8 +163,7 @@ open class StructHash: Comparable, Hashable, Codable {
             }
             sb.append("}]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f8=["); sb.append(f8.count.description); sb.append("][{")
             for (key, value) in f8 {
@@ -182,8 +174,7 @@ open class StructHash: Comparable, Hashable, Codable {
             }
             sb.append("}]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f9=["); sb.append(f9.count.description); sb.append("][{")
             for (key, value) in f9 {
@@ -194,8 +185,7 @@ open class StructHash: Comparable, Hashable, Codable {
             }
             sb.append("}]")
         }
-        if (true)
-        {
+        if true {
             var first = true
             sb.append(",f10=["); sb.append(f10.count.description); sb.append("][{")
             for (key, value) in f10 {
@@ -240,7 +230,7 @@ open class StructHash: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) -> StructHash {
-        return try! JSONDecoder().decode(StructHash.self, from: json.data(using: .utf8)!)
+    open class func fromJson(_ json: String) throws -> StructHash {
+        return try JSONDecoder().decode(StructHash.self, from: json.data(using: .utf8)!)
     }
 }

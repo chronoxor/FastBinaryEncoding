@@ -25,7 +25,7 @@ public class FieldModelBoolean: FieldModel {
 
     // Get the value
     public func get(defaults: Bool = false) -> Bool {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 

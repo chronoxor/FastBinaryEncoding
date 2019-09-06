@@ -76,7 +76,7 @@ public extension ClientProtocol {
             throw NSException(name: .invalidArgumentException, reason: "Invalid allocation size!") as! Error
         }
 
-        if (size == 0) {
+        if size == 0 {
             return
         }
 
@@ -89,8 +89,7 @@ public extension ClientProtocol {
         var offset2: Int = 0
 
         // While receive buffer is available to handle...
-        while (offset2 < size)
-        {
+        while offset2 < size {
             var messageBuffer: Buffer?
             var messageOffset: Int = 0
             var messageSize: Int = 0
@@ -98,25 +97,19 @@ public extension ClientProtocol {
             // Try to receive message size
             var messageSizeCopied = false
             var messageSizeFound = false
-            while (!messageSizeFound)
-            {
+            while !messageSizeFound {
                 // Look into the storage buffer
-                if (offset0 < size1)
-                {
+                if offset0 < size1 {
                     var count = min(size1 - offset0, 4)
-                    if count == 4
-                    {
+                    if count == 4 {
                         messageSizeCopied = true
                         messageSizeFound = true
                         messageSize = Int(Buffer.readUInt32(buffer: self.receiveBuffer, offset: offset0))
                         offset0 += 4
                         break
-                    }
-                    else
-                    {
+                    } else {
                         // Fill remaining data from the receive buffer
-                        if (offset2 < size)
-                        {
+                        if offset2 < size {
                             count = min(size - offset2, 4 - count)
 
                             // Allocate and refresh the storage buffer
@@ -128,26 +121,21 @@ public extension ClientProtocol {
                             offset1 += count
                             offset2 += count
                             continue
-                        }
-                        else {
+                        } else {
                             break
                         }
                     }
                 }
 
                 // Look into the receive buffer
-                if (offset2 < size)
-                {
+                if offset2 < size {
                     let count = min(size - offset2, 4)
-                    if (count == 4)
-                    {
+                    if count == 4 {
                         messageSizeFound = true
                         messageSize = Int(Buffer.readUInt32(buffer: buffer, offset: offset + offset2))
                         offset2 += 4
                         break
-                    }
-                    else
-                    {
+                    } else {
                         // Allocate and refresh the storage buffer
                         try _ = self.receiveBuffer.allocate(size: count)
                         size1 += count
@@ -164,44 +152,37 @@ public extension ClientProtocol {
 
             }
 
-            if (!messageSizeFound) {
+            if !messageSizeFound {
                 return
             }
 
             // Check the message full size
             let minSize: Int = {
-                if (final) { return 4 + 4 } else { return 4 + 4 + 4 + 4 }
+                if final { return 4 + 4 } else { return 4 + 4 + 4 + 4 }
             }()
 
             assert(messageSize >= minSize, "Invalid receive data!")
-            if (messageSize < minSize) {
+            if messageSize < minSize {
                 return
             }
 
             // Try to receive message body
             var messageFound = false
-            while (!messageFound)
-            {
+            while !messageFound {
                 // Look into the storage buffer
-                if (offset0 < size1)
-                {
+                if offset0 < size1 {
                     var count = min(size1 - offset0, messageSize - 4)
-                    if (count == (messageSize - 4))
-                    {
+                    if count == (messageSize - 4) {
                         messageFound = true
                         messageBuffer = self.receiveBuffer
                         messageOffset = offset0 - 4
                         offset0 += messageSize - 4
                         break
-                    }
-                    else
-                    {
+                    } else {
                         // Fill remaining data from the receive buffer
-                        if (offset2 < size)
-                        {
+                        if offset2 < size {
                             // Copy message size into the storage buffer
-                            if (!messageSizeCopied)
-                            {
+                            if !messageSizeCopied {
                                 // Allocate and refresh the storage buffer
                                 try _ = self.receiveBuffer.allocate(size: 4)
                                 size1 += 4
@@ -230,22 +211,17 @@ public extension ClientProtocol {
                 }
 
                 // Look into the receive buffer
-                if (offset2 < size)
-                {
+                if offset2 < size {
                     let count = min(size - offset2, messageSize - 4)
-                    if (!messageSizeCopied && (count == (messageSize - 4)))
-                    {
+                    if !messageSizeCopied && (count == (messageSize - 4)) {
                         messageFound = true
                         messageBuffer = buffer
                         messageOffset = offset + offset2 - 4
                         offset2 += messageSize - 4
                         break
-                    }
-                    else
-                    {
+                    } else {
                         // Copy message size into the storage buffer
-                        if (!messageSizeCopied)
-                        {
+                        if !messageSizeCopied {
                             // Allocate and refresh the storage buffer
                             try _ = self.receiveBuffer.allocate(size: 4)
                             size1 += 4
@@ -267,17 +243,14 @@ public extension ClientProtocol {
                         offset2 += count
                         continue
                     }
-                }
-                else {
+                } else {
                     break
                 }
             }
 
-            if (!messageFound)
-            {
+            if !messageFound {
                 // Copy message size into the storage buffer
-                if (!messageSizeCopied)
-                {
+                if !messageSizeCopied {
                     // Allocate and refresh the storage buffer
                     try _ = self.receiveBuffer.allocate(size: 4)
                     size1 += 4
@@ -291,23 +264,16 @@ public extension ClientProtocol {
                 return
             }
 
-            if let messageBuffer = messageBuffer
-            {
-                //@Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
+            if let messageBuffer = messageBuffer {
                 let fbeStructSize: Int
                 let fbeStructType: Int
 
                 // Read the message parameters
-                if (final)
-                {
-                    //@Suppress("UNUSED_VALUE")
+                if final {
                     fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset))
                     fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + 4))
-                }
-                else
-                {
+                } else {
                     let fbeStructOffset = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + 4))
-                    //@Suppress("UNUSED_VALUE")
                     fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset))
                     fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset + 4))
                 }

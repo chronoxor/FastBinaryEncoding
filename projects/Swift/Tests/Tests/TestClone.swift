@@ -13,7 +13,7 @@ class TestClone: XCTestCase {
         account1.orders.append(Order(id: 1, symbol: "EURUSD", side: OrderSide.buy, type: OrderType.market, price: 1.23456, volume: 1000.0))
         account1.orders.append(Order(id: 2, symbol: "EURUSD", side: OrderSide.sell, type: OrderType.limit, price: 1.0, volume: 100.0))
         account1.orders.append(Order(id: 3, symbol: "EURUSD", side: OrderSide.buy, type: OrderType.stop, price: 1.5, volume: 10.0))
-        
+
         // Clone the account
         var account2: Account!
         do {
@@ -21,10 +21,10 @@ class TestClone: XCTestCase {
         } catch {
             XCTFail()
         }
-        
+
         // Clear the source account
         account1 = Account()
-        
+
         XCTAssertEqual(account2.id, 1)
         XCTAssertEqual(account2.name, "Test")
         XCTAssertTrue(account2.state.hasFlags(flags: State.good))

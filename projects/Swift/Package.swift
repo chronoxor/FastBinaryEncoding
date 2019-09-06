@@ -19,6 +19,7 @@ let package = Package(
          .package(path: "Proto/Protoex"),
          .package(path: "Proto/Test"),
          .package(path: "Proto/Enums"),
+    
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -35,6 +36,6 @@ let package = Package(
         .testTarget(
             name: "Examples",
             dependencies: ["FastBinaryEncoding"]),
-        
+    
     ]
 )

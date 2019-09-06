@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class OrderSide : Comparable, Hashable, Codable {
+public class OrderSide: Comparable, Hashable, Codable {
     typealias RawValue = UInt8
     public static let buy = OrderSide(value: OrderSideEnum.buy)
     public static let sell = OrderSide(value: OrderSideEnum.sell)
@@ -59,7 +59,7 @@ public class OrderSide : Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    public class func fromJson(_ json: String) -> OrderSide {
-        return try! JSONDecoder().decode(OrderSide.self, from: json.data(using: .utf8)!)
+    public class func fromJson(_ json: String) throws -> OrderSide {
+        return try JSONDecoder().decode(OrderSide.self, from: json.data(using: .utf8)!)
     }
 }

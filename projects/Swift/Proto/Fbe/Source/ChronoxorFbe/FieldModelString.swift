@@ -43,16 +43,16 @@ public class FieldModelString: FieldModel {
         }
 
         let fbeStringOffset = Int(readUInt32(offset: fbeOffset))
-        if (fbeStringOffset == 0) {
+        if fbeStringOffset == 0 {
             return true
         }
 
-        if (_buffer.offset + fbeStringOffset + 4) > _buffer.size {
+        if _buffer.offset + fbeStringOffset + 4 > _buffer.size {
             return false
         }
 
         let fbeStringSize = Int(readUInt32(offset: fbeStringOffset))
-        if ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size) {
+        if (_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size {
             return false
         }
 
@@ -61,7 +61,7 @@ public class FieldModelString: FieldModel {
 
     // Get the value
     public func get(defaults: String = "") -> String {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 
@@ -84,13 +84,13 @@ public class FieldModelString: FieldModel {
 
     // Set the value
     public func set(value: String) throws {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return
         }
 
         let fbeStringSize = value.count
         let fbeStringOffset = try _buffer.allocate(size: 4 + fbeStringSize) - _buffer.offset
-        if ((fbeStringOffset <= 0) || ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size)) {
+        if (fbeStringOffset <= 0) || ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size) {
             return
         }
 

@@ -1,0 +1,12 @@
+disabled_rules:
+  - identifier_name
+  - type_body_length
+  - function_body_length
+  - line_length
+  - file_length
+  - cyclomatic_complexity
+  - force_cast
+  - force_try
+  - syntactic_sugar
+  - trailing_comma
+  - redundant_optional_initialization

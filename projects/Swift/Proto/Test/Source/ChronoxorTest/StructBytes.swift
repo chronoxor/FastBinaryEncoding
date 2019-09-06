@@ -81,7 +81,7 @@ open class StructBytes: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) -> StructBytes {
-        return try! JSONDecoder().decode(StructBytes.self, from: json.data(using: .utf8)!)
+    open class func fromJson(_ json: String) throws -> StructBytes {
+        return try JSONDecoder().decode(StructBytes.self, from: json.data(using: .utf8)!)
     }
 }

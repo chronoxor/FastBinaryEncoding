@@ -67,7 +67,7 @@ open class BalanceMessage: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) -> BalanceMessage {
-        return try! JSONDecoder().decode(BalanceMessage.self, from: json.data(using: .utf8)!)
+    open class func fromJson(_ json: String) throws -> BalanceMessage {
+        return try JSONDecoder().decode(BalanceMessage.self, from: json.data(using: .utf8)!)
     }
 }

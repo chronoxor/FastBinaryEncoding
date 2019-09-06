@@ -22,13 +22,13 @@ public class StructEmptyFinalModel: Model {
 
     // Check if the struct value is valid
     public func verify() -> Bool {
-        if ((buffer.offset + _model.fbeOffset) > buffer.size) {
+        if (buffer.offset + _model.fbeOffset) > buffer.size {
             return false
         }
 
         let fbeStructSize = Int(readUInt32(offset: _model.fbeOffset - 8))
         let fbeStructType = Int(readUInt32(offset: _model.fbeOffset - 4))
-        if ((fbeStructSize <= 0) || (fbeStructType != fbeType)) {
+        if (fbeStructSize <= 0) || (fbeStructType != fbeType) {
             return false
         }
 
@@ -42,7 +42,7 @@ public class StructEmptyFinalModel: Model {
         let fbeStructType = fbeType
         var fbeStructSize = 8 + _model.fbeAllocationSize(value: value)
         let fbeStructOffset = try buffer.allocate(size: fbeStructSize) - buffer.offset
-        if ((buffer.offset + fbeStructOffset + fbeStructSize) > buffer.size) {
+        if (buffer.offset + fbeStructOffset + fbeStructSize) > buffer.size {
             assertionFailure("Model is broken!")
             return 0
         }
@@ -62,7 +62,7 @@ public class StructEmptyFinalModel: Model {
     public func deserialize(value: inout StructEmpty) -> Int {
         var valueRef = value
 
-        if ((buffer.offset + _model.fbeOffset) > buffer.size) {
+        if (buffer.offset + _model.fbeOffset) > buffer.size {
             assertionFailure("Model is broken!")
             return 0
         }

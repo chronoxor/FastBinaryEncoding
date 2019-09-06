@@ -31,7 +31,7 @@ class FieldModelVectorOrder: FieldModel {
         var fbeResult: Int = 4
         _model.fbeOffset = fbeVectorOffset + 4
         var i = fbeVectorSize
-        while (i > 0) {
+        while i > 0 {
             fbeResult += _model.fbeSize + _model.fbeExtra
             _model.fbeShift(size: _model.fbeSize)
             i -= 1
@@ -113,7 +113,7 @@ class FieldModelVectorOrder: FieldModel {
         }
 
         let fbeVectorOffset = Int(readUInt32(offset: fbeOffset))
-        if (fbeVectorOffset == 0) {
+        if fbeVectorOffset == 0 {
             return true
         }
 
@@ -124,7 +124,7 @@ class FieldModelVectorOrder: FieldModel {
         let fbeVectorSize = Int(readUInt32(offset: fbeVectorOffset))
         _model.fbeOffset = fbeVectorOffset + 4
         var i = fbeVectorSize
-        while (i > 0) {
+        while i > 0 {
             if !_model.verify() { return false }
             _model.fbeShift(size: _model.fbeSize)
             i -= 1
@@ -145,7 +145,7 @@ class FieldModelVectorOrder: FieldModel {
 
         let fbeModel = getItem(index: 0)
         var i = fbeVectorSize
-        while (i > 0) {
+        while i > 0 {
             let value = fbeModel.get()
             values.append(value)
             fbeModel.fbeShift(size: fbeModel.fbeSize)

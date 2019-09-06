@@ -66,7 +66,7 @@ open class AccountMessage: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) -> AccountMessage {
-        return try! JSONDecoder().decode(AccountMessage.self, from: json.data(using: .utf8)!)
+    open class func fromJson(_ json: String) throws -> AccountMessage {
+        return try JSONDecoder().decode(AccountMessage.self, from: json.data(using: .utf8)!)
     }
 }

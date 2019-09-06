@@ -25,7 +25,7 @@ public class FieldModelWChar: FieldModel {
 
     // Get the value
     public func get(defaults: Character = Character("0")) -> Character {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 
@@ -39,6 +39,6 @@ public class FieldModelWChar: FieldModel {
             return
         }
 
-        write(offset: fbeOffset, value: value.utf16.map{ UInt32($0) }[0])
+        write(offset: fbeOffset, value: value.utf16.map { UInt32($0) }[0])
     }
 }

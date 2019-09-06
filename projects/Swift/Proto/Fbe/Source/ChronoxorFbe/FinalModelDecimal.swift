@@ -18,7 +18,6 @@ public class FinalModelDecimal: FinalModel {
         _offset = offset
     }
 
-
     public func fbeAllocationSize(value: Decimal) -> Int {
         return fbeSize
     }
@@ -33,7 +32,7 @@ public class FinalModelDecimal: FinalModel {
 
     // Get the value
     public func get(size: inout Size) -> Decimal {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return Decimal.zero
         }
 
@@ -45,10 +44,9 @@ public class FinalModelDecimal: FinalModel {
         let scale = -Int((flags & 0x7FFFFFFF) >> 16)
         let sign: FloatingPointSign = negative ? .minus : .plus
 
-
         var result = Decimal(readUInt32(offset: fbeOffset + 8)) * lowScaleField
-        result = result + (Decimal(readUInt32(offset: fbeOffset + 4)) * midScaleField)
-        result = result + Decimal(readUInt32(offset: fbeOffset + 0))
+        result += Decimal(readUInt32(offset: fbeOffset + 4)) * midScaleField
+        result += Decimal(readUInt32(offset: fbeOffset + 0))
         result = Decimal(sign: sign, exponent: scale, significand: result)
 
         if result.exponent != scale {
@@ -62,17 +60,17 @@ public class FinalModelDecimal: FinalModel {
 
     // Set the value
     public func set(value: Decimal) throws -> Int {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return 0
         }
 
         var valueRef = value
-        if (valueRef.exponent > 0) {
+        if valueRef.exponent > 0 {
             // Try to normalize decimal number for .NET Decimal format
             var zero = Decimal.zero
             let error = NSDecimalNormalize(&valueRef, &zero, .up)
-            if (error != .noError) {
+            if error != .noError {
                 // Issue during normalize decimal number
                 write(offset: fbeOffset, value: UInt8.zero, valueCount: fbeSize)
                 return 0
@@ -102,8 +100,7 @@ public class FinalModelDecimal: FinalModel {
         }
 
         // Fill remaining bytes with zeros
-        while (index < 14)
-        {
+        while index < 14 {
             write(offset: fbeOffset + index, value: Int8.zero)
             index += 1
         }

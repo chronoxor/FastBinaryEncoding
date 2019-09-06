@@ -102,17 +102,17 @@ public class Buffer {
             }
         }
         self.data = data
-        self.size = self.size + size
+        self.size += size
 
         return offset
     }
 
     // Remove some memory of the given size from the current buffer
     public func remove(offset: Int, size: Int) throws {
-        if (offset + size > self.size) {
+        if offset + size > self.size {
             throw NSException(name: .invalidArgumentException, reason: "Invalid offset & size!") as! Error
         }
-        if (size != 0) {
+        if size != 0 {
             if self.size - size - offset != 0 {
                 data[offset...] = data[(offset + size)..<self.size]
             } else {
@@ -120,11 +120,11 @@ public class Buffer {
             }
         }
         self.size -= size
-        if (self.offset >= offset + size) {
+        if self.offset >= offset + size {
             self.offset -= size
         } else if self.offset >= offset {
             self.offset -= self.offset - offset
-            if (self.offset > self.size) {
+            if self.offset > self.size {
                 self.offset = self.size
             }
         }
@@ -136,7 +136,7 @@ public class Buffer {
             throw NSException(name: .invalidArgumentException, reason: "Invalid reserve capacity!") as! Error
         }
 
-        if (capacity > data.count) {
+        if capacity > data.count {
             var data = Data(capacity: max(capacity, 2 * self.data.count))
             data[0...] = self.data[0...]
             self.data = data
@@ -153,7 +153,6 @@ public class Buffer {
             offset = self.size
         }
     }
-
 
     // Reset the current buffer and its offset
     public func reset() {

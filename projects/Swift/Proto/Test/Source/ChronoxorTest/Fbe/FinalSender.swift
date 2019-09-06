@@ -8,7 +8,7 @@ import Foundation
 import ChronoxorProto
 
 // Fast Binary Encoding ChronoxorTest final sender
-open class FinalSender : ChronoxorFbe.SenderProtocol { 
+open class FinalSender: ChronoxorFbe.SenderProtocol {
     // Imported senders
     let ProtoSender: ChronoxorProto.FinalSender
 

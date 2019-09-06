@@ -7,8 +7,8 @@ import ChronoxorFbe
 import ChronoxorProto
 
 // Fast Binary Encoding Test receiver listener
-public protocol ReceiverListener : ChronoxorProto.ReceiverListener
- {
+public protocol ReceiverListener: ChronoxorProto.ReceiverListener {
 }
+
 public extension ReceiverListener {
 }

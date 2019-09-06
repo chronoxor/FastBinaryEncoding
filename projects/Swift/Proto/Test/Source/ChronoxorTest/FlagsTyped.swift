@@ -50,10 +50,10 @@ public class FlagsTyped: Comparable, Hashable, Codable {
         if set.contains(FlagsTyped.FLAG_VALUE_9.value!) {
             result = NSNumber(value: result).uint64Value | NSNumber(value: FlagsTyped.FLAG_VALUE_9.raw).uint64Value
         }
-        return FlagsTyped(value:  NSNumber(value: result).uint64Value)
+        return FlagsTyped(value: NSNumber(value: result).uint64Value)
     }
 
-    public private(set) var value: FlagsTypedEnum? = FlagsTypedEnum.values().first 
+    public private(set) var value: FlagsTypedEnum? = FlagsTypedEnum.values().first
 
     public private(set) var raw: UInt64 = 0
 
@@ -155,7 +155,7 @@ public class FlagsTyped: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    public class func fromJson(_ json: String) -> FlagsTyped {
-        return try! JSONDecoder().decode(FlagsTyped.self, from: json.data(using: .utf8)!)
+    public class func fromJson(_ json: String) throws -> FlagsTyped {
+        return try JSONDecoder().decode(FlagsTyped.self, from: json.data(using: .utf8)!)
     }
 }

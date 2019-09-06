@@ -25,7 +25,7 @@ public class FieldModelInt32: FieldModel {
 
     // Get the value
     public func get(defaults: Int32 = 0) -> Int32 {
-        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size) {
+        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             return defaults
         }
 

@@ -7,7 +7,7 @@ import ChronoxorFbe
 import Foundation
 
 // Fast Binary Encoding ChronoxorEnums sender
-open class Sender : ChronoxorFbe.SenderProtocol { 
+open class Sender: ChronoxorFbe.SenderProtocol {
     // Sender models accessors
 
     public var buffer: Buffer = Buffer()

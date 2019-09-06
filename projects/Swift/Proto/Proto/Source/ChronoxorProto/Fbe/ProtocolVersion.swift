@@ -3,7 +3,6 @@
 // Source: proto.fbe
 // Version: 1.3.0.0
 
-
 // Fast Binary Encoding ChronoxorProto protocol version
 struct ProtocolVersion {
     // Protocol major version

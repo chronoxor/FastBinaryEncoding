@@ -16,11 +16,11 @@ public enum EnumCharEnum {
 
     var rawValue: RawValue {
         switch self {
-        case .ENUM_VALUE_0: return "0".utf8.map{ UInt8($0) }[0] + 0
-        case .ENUM_VALUE_1: return "1".utf8.map{ UInt8($0) }[0] + 0
-        case .ENUM_VALUE_2: return "1".utf8.map{ UInt8($0) }[0] + 1
-        case .ENUM_VALUE_3: return "3".utf8.map{ UInt8($0) }[0] + 0
-        case .ENUM_VALUE_4: return "3".utf8.map{ UInt8($0) }[0] + 1
+        case .ENUM_VALUE_0: return "0".utf8.map { UInt8($0) }[0] + 0
+        case .ENUM_VALUE_1: return "1".utf8.map { UInt8($0) }[0] + 0
+        case .ENUM_VALUE_2: return "1".utf8.map { UInt8($0) }[0] + 1
+        case .ENUM_VALUE_3: return "3".utf8.map { UInt8($0) }[0] + 0
+        case .ENUM_VALUE_4: return "3".utf8.map { UInt8($0) }[0] + 1
         case .ENUM_VALUE_5: return Self.ENUM_VALUE_3.rawValue
         }
     }

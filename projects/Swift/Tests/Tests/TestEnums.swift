@@ -7,10 +7,10 @@ import XCTest
 import ChronoxorEnums
 
 class TestEnums: XCTestCase {
-    
+
     func testSerializationEnums() {
         let enums1 = Enums()
-        
+
         // Serialize enums to the FBE stream
         let writer = EnumsModel()
         XCTAssertEqual(writer.model.fbeOffset, 4)
@@ -19,10 +19,10 @@ class TestEnums: XCTestCase {
         XCTAssertTrue(writer.verify())
         writer.next(prev: serialized!)
         XCTAssertEqual(writer.model.fbeOffset, 4 + writer.buffer.size)
-        
+
         // Check the serialized FBE size
         XCTAssertEqual(writer.buffer.size, 232)
-        
+
         // Deserialize enums from the FBE stream
         var enums2 = Enums()
         let reader = EnumsModel()
@@ -33,7 +33,7 @@ class TestEnums: XCTestCase {
         XCTAssertEqual(deserialized, reader.buffer.size)
         reader.next(prev: deserialized)
         XCTAssertEqual(reader.model.fbeOffset, 4 + reader.buffer.size)
-        
+
         XCTAssertEqual(enums2.byte0, EnumByte.ENUM_VALUE_0)
         XCTAssertEqual(enums2.byte1, EnumByte.ENUM_VALUE_1)
         XCTAssertEqual(enums2.byte2, EnumByte.ENUM_VALUE_2)
@@ -111,7 +111,7 @@ class TestEnums: XCTestCase {
         XCTAssertEqual(enums2.uint64b4, EnumUInt64.ENUM_VALUE_4)
         XCTAssertEqual(enums2.uint64b5, enums1.uint64b3)
     }
-    
+
     func testSerializationFinalEnums() {
         let enums1 = Enums()
 

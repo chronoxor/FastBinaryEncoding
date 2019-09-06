@@ -57,7 +57,7 @@ open class StructEmpty: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) -> StructEmpty {
-        return try! JSONDecoder().decode(StructEmpty.self, from: json.data(using: .utf8)!)
+    open class func fromJson(_ json: String) throws -> StructEmpty {
+        return try JSONDecoder().decode(StructEmpty.self, from: json.data(using: .utf8)!)
     }
 }

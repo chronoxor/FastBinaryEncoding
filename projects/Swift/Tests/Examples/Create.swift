@@ -21,21 +21,21 @@ class ExampleCreate: XCTestCase {
         account.model.setEnd(fbeBegin: accountBegin)
         _ = account.createEnd(fbeBegin: modelBegin)
         assert(account.verify())
-        
+
         // Show the serialized FBE size
         print("FBE size: \(account.buffer.size)")
-        
+
         // Access the account using the FBE model
         let access = AccountModel()
         access.attach(buffer: account.buffer)
         assert(access.verify())
-        
+
         let id: Int32
         let name: String
         let state: State
         let walletCurrency: String
         let walletAmount: Double
-        
+
         accountBegin = access.model.getBegin()
         id = access.model.id.get()
         name = access.model.name.get()
@@ -45,7 +45,7 @@ class ExampleCreate: XCTestCase {
         walletAmount = access.model.wallet.amount.get()
         access.model.wallet.getEnd(fbeBegin: walletBegin)
         access.model.getEnd(fbeBegin: accountBegin)
-        
+
         // Show account content
         print("account.id = \(id)")
         print("account.name = \(name)")
@@ -53,7 +53,7 @@ class ExampleCreate: XCTestCase {
         print("account.wallet.currency = \(walletCurrency)")
         print("account.wallet.amount = \(walletAmount)")
     }
-    
+
     static var allTests = [
         ("testCreate", testCreate),
     ]

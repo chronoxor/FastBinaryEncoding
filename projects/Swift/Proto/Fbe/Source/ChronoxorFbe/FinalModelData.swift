@@ -40,7 +40,7 @@ public class FinalModelData: FinalModel {
         }
 
         let fbeBytesSize = Int(readUInt32(offset: fbeOffset))
-        if ((_buffer.offset + fbeOffset + 4 + fbeBytesSize) > _buffer.size) {
+        if _buffer.offset + fbeOffset + 4 + fbeBytesSize > _buffer.size {
             assertionFailure("Model is broken!")
             size.value = 4
             return Data()

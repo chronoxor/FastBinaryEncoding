@@ -8,7 +8,7 @@ import ChronoxorFbe
 import ChronoxorProto
 
 // Fast Binary Encoding Test proxy
-open class Proxy : ChronoxorFbe.ReceiverProtocol {
+open class Proxy: ChronoxorFbe.ReceiverProtocol {
     // Imported proxy
     let ProtoProxy: ChronoxorProto.Proxy?
 
@@ -29,7 +29,8 @@ open class Proxy : ChronoxorFbe.ReceiverProtocol {
     }
 
     open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
-        return onReceiveListener(listener: self as! ProxyListener, type: type, buffer: buffer, offset: offset, size: size)
+        guard let listener = self as? ProxyListener else { return false }
+        return onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size)
     }
 
     open func onReceiveListener(listener: ProxyListener, type: Int, buffer: Data, offset: Int, size: Int) -> Bool {

@@ -20,12 +20,12 @@ public class FieldModelOptionalOrder: FieldModel {
     public let value: ChronoxorProto.FieldModelOrder
 
     public var fbeExtra: Int {
-        if (!hasValue()) {
+        if !hasValue() {
             return 0
         }
 
         let fbeOptionalOffset = Int(readUInt32(offset: fbeOffset + 1))
-        if ((fbeOptionalOffset == 0) || ((_buffer.offset + fbeOptionalOffset + 4) > _buffer.size)) {
+        if (fbeOptionalOffset == 0) || ((_buffer.offset + fbeOptionalOffset + 4) > _buffer.size) {
             return 0
         }
 
@@ -72,7 +72,7 @@ public class FieldModelOptionalOrder: FieldModel {
         }
 
         let fbeOptionalOffset = Int(readUInt32(offset: fbeOffset + 1))
-        if (fbeOptionalOffset == 0) {
+        if fbeOptionalOffset == 0 {
             return false
         }
 
