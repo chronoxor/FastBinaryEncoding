@@ -35,8 +35,10 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
     GenerateFBEFieldModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
     GenerateFBEFieldModelDecimal(domain, "fbe");
-    GenerateFBEFieldModelDate(domain, "fbe");
-    GenerateFBEFieldModelTimestamp(domain, "fbe");
+    if (Version() < 8)
+        GenerateFBEFieldModelDate(domain, "fbe");
+    else
+        GenerateFBEFieldModelTimestamp(domain, "fbe");
     GenerateFBEFieldModelBytes(domain, "fbe");
     GenerateFBEFieldModelString(domain, "fbe");
     if (Final())
@@ -59,8 +61,10 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
         GenerateFBEFinalModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
         GenerateFBEFinalModelDecimal(domain, "fbe");
-        GenerateFBEFinalModelDate(domain, "fbe");
-        GenerateFBEFinalModelTimestamp(domain, "fbe");
+        if (Version() < 8)
+            GenerateFBEFinalModelDate(domain, "fbe");
+        else
+            GenerateFBEFinalModelTimestamp(domain, "fbe");
         GenerateFBEFinalModelBytes(domain, "fbe");
         GenerateFBEFinalModelString(domain, "fbe");
     }
@@ -4406,37 +4410,7 @@ internal class CharacterJson : com.google.gson.JsonSerializer<Char>, com.google.
     }
 }
 
-internal class DateJson : com.google.gson.JsonSerializer<java.util.Date>, com.google.gson.JsonDeserializer<java.util.Date>
-{
-    override fun serialize(src: java.util.Date, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
-    {
-        val nanoseconds = src.time * 1000000
-        return com.google.gson.JsonPrimitive(nanoseconds)
-    }
-
-    @Throws(com.google.gson.JsonParseException::class)
-    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.util.Date
-    {
-        val nanoseconds = json.asJsonPrimitive.asLong
-        return java.util.Date(nanoseconds / 1000000)
-    }
-}
-
-internal class InstantJson : com.google.gson.JsonSerializer<java.time.Instant>, com.google.gson.JsonDeserializer<java.time.Instant>
-{
-    override fun serialize(src: java.time.Instant, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
-    {
-        val nanoseconds = src.epochSecond * 1000000000 + src.nano
-        return com.google.gson.JsonPrimitive(nanoseconds)
-    }
-
-    @Throws(com.google.gson.JsonParseException::class)
-    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.time.Instant
-    {
-        val nanoseconds = json.asJsonPrimitive.asLong
-        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
-    }
-}
+_TIMESTAMP_CLASS_
 
 internal class BigDecimalJson : com.google.gson.JsonSerializer<java.math.BigDecimal>, com.google.gson.JsonDeserializer<java.math.BigDecimal>
 {
@@ -4558,8 +4532,7 @@ object Json
         builder.registerTypeAdapter(ByteArray::class.java, BytesJson())
         builder.registerTypeAdapter(Char::class.java, CharacterJson())
         builder.registerTypeAdapter(Character::class.java, CharacterJson())
-        builder.registerTypeAdapter(java.util.Date::class.java, DateJson())
-        builder.registerTypeAdapter(java.time.Instant::class.java, InstantJson())
+        _TIMESTAMP_REGISTER_
         builder.registerTypeAdapter(java.math.BigDecimal::class.java, BigDecimalJson())
         builder.registerTypeAdapter(java.util.UUID::class.java, UUIDJson())
         builder.registerTypeAdapter(kotlin.UByte::class.java, UByteNullableJson())
@@ -4571,7 +4544,51 @@ object Json
 }
 )CODE";
 
+    std::string timestamp_class;
+    std::string timestamp_register;
+
+    if (Version() < 8)
+    {
+        timestamp_class = R"CODE(internal class DateJson : com.google.gson.JsonSerializer<java.util.Date>, com.google.gson.JsonDeserializer<java.util.Date>
+{
+    override fun serialize(src: java.util.Date, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    {
+        val nanoseconds = src.time * 1000000
+        return com.google.gson.JsonPrimitive(nanoseconds)
+    }
+
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.util.Date
+    {
+        val nanoseconds = json.asJsonPrimitive.asLong
+        return java.util.Date(nanoseconds / 1000000)
+    }
+})CODE";
+        timestamp_register = "builder.registerTypeAdapter(java.util.Date::class.java, DateJson())";
+    }
+    else
+    {
+        timestamp_class = R"CODE(internal class InstantJson : com.google.gson.JsonSerializer<java.time.Instant>, com.google.gson.JsonDeserializer<java.time.Instant>
+{
+    override fun serialize(src: java.time.Instant, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    {
+        val nanoseconds = src.epochSecond * 1000000000 + src.nano
+        return com.google.gson.JsonPrimitive(nanoseconds)
+    }
+
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.time.Instant
+    {
+        val nanoseconds = json.asJsonPrimitive.asLong
+        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
+    }
+})CODE";
+        timestamp_register = "builder.registerTypeAdapter(java.time.Instant::class.java, InstantJson())";
+    }
+
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_TIMESTAMP_CLASS_"), timestamp_class);
+    code = std::regex_replace(code, std::regex("_TIMESTAMP_REGISTER_"), timestamp_register);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
