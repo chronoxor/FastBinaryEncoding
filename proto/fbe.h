@@ -4893,7 +4893,7 @@ struct ValueReader<TJson, float>
         value = 0.0f;
 
         // Schema validation
-        if (json.IsNull() || !json.IsFloat())
+        if (json.IsNull() || !(json.IsInt() || json.IsFloat()))
             return false;
 
         // Save the value
@@ -4910,7 +4910,7 @@ struct ValueReader<TJson, double>
         value = 0.0;
 
         // Schema validation
-        if (json.IsNull() || !json.IsDouble())
+        if (json.IsNull() || !(json.IsInt() || json.IsDouble()))
             return false;
 
         // Save the value
