@@ -7130,7 +7130,7 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     {
         WriteLineIndent("// Imported receivers");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("var " + *import + "Receiver: " + domain + *import + ".fbe." + receiver + "? = null");
+            WriteLineIndent("var " + *import + "Receiver: " + domain + *import + ".fbe." + receiver);
         WriteLine();
     }
 
@@ -7260,7 +7260,7 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if ((" + *import + "Receiver != null) && " + *import + "Receiver!!.onReceiveListener(listener, type, buffer, offset, size))");
+            WriteLineIndent("if (" + *import + "Receiver.onReceiveListener(listener, type, buffer, offset, size))");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
@@ -7387,7 +7387,7 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     {
         WriteLineIndent("// Imported proxy");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("var " + *import + "Proxy: " + domain + *import + ".fbe." + proxy + "? = null");
+            WriteLineIndent("var " + *import + "Proxy: " + domain + *import + ".fbe." + proxy);
         WriteLine();
     }
 
@@ -7490,7 +7490,7 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if ((" + *import + "Proxy != null) && " + *import + "Proxy!!.onReceiveListener(listener, type, buffer, offset, size))");
+            WriteLineIndent("if (" + *import + "Proxy.onReceiveListener(listener, type, buffer, offset, size))");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
@@ -7613,21 +7613,12 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("{");
     Indent(1);
 
-    // Generate imported senders accessors
+    // Generate imported clients accessors
     if (p->import)
     {
-        WriteLineIndent("// Imported senders");
+        WriteLineIndent("// Imported clients");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("val " + *import + "Sender: " + domain + *import + ".fbe." + client);
-        WriteLine();
-    }
-
-    // Generate imported receivers accessors
-    if (p->import)
-    {
-        WriteLineIndent("// Imported receivers");
-        for (const auto& import : p->import->imports)
-            WriteLineIndent("var " + *import + "Receiver: " + domain + *import + ".fbe." + client + "? = null");
+            WriteLineIndent("val " + *import + "Client: " + domain + *import + ".fbe." + client);
         WriteLine();
     }
 
@@ -7666,13 +7657,8 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("{");
     Indent(1);
     if (p->import)
-    {
         for (const auto& import : p->import->imports)
-        {
-            WriteLineIndent(*import + "Sender = " + domain + *import + ".fbe." + client + "(sendBuffer, receiveBuffer)");
-            WriteLineIndent(*import + "Receiver = " + domain + *import + ".fbe." + client + "(sendBuffer, receiveBuffer)");
-        }
-    }
+            WriteLineIndent(*import + "Client = " + domain + *import + ".fbe." + client + "(sendBuffer, receiveBuffer)");
     if (p->body)
     {
         for (const auto& s : p->body->structs)
@@ -7693,13 +7679,8 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("{");
     Indent(1);
     if (p->import)
-    {
         for (const auto& import : p->import->imports)
-        {
-            WriteLineIndent(*import + "Sender = " + domain + *import + ".fbe." + client + "(sendBuffer, receiveBuffer)");
-            WriteLineIndent(*import + "Receiver = " + domain + *import + ".fbe." + client + "(sendBuffer, receiveBuffer)");
-        }
-    }
+            WriteLineIndent(*import + "Client = " + domain + *import + ".fbe." + client + "(sendBuffer, receiveBuffer)");
     if (p->body)
     {
         for (const auto& s : p->body->structs)
@@ -7758,7 +7739,7 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("var result: Long");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("result = " + *import + "Sender.sendListener(listener, obj)");
+            WriteLineIndent("result = " + *import + "Client.sendListener(listener, obj)");
             WriteLineIndent("if (result > 0)");
             Indent(1);
             WriteLineIndent("return result");
@@ -7871,7 +7852,7 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if ((" + *import + "Receiver != null) && " + *import + "Receiver!!.onReceiveListener(listener, type, buffer, offset, size))");
+            WriteLineIndent("if (" + *import + "Client.onReceiveListener(listener, type, buffer, offset, size))");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);

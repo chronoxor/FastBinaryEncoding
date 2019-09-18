@@ -7094,10 +7094,8 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("{");
     Indent(1);
     if (p->import)
-    {
         for (const auto& import : p->import->imports)
             WriteLineIndent(*import + "Client = new " + *import + "." + client + "(SendBuffer, ReceiveBuffer);");
-    }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
@@ -7117,10 +7115,8 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("{");
     Indent(1);
     if (p->import)
-    {
         for (const auto& import : p->import->imports)
             WriteLineIndent(*import + "Client = new " + *import + "." + client + "(SendBuffer, ReceiveBuffer);");
-    }
     if (p->body)
     {
         for (const auto& s : p->body->structs)

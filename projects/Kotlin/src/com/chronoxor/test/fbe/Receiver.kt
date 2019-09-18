@@ -12,7 +12,7 @@ package com.chronoxor.test.fbe
 open class Receiver : com.chronoxor.fbe.Receiver, IReceiverListener
 {
     // Imported receivers
-    var protoReceiver: com.chronoxor.proto.fbe.Receiver? = null
+    var protoReceiver: com.chronoxor.proto.fbe.Receiver
 
     // Receiver values accessors
 
@@ -36,7 +36,7 @@ open class Receiver : com.chronoxor.fbe.Receiver, IReceiverListener
     open fun onReceiveListener(listener: IReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
 
-        if ((protoReceiver != null) && protoReceiver!!.onReceiveListener(listener, type, buffer, offset, size))
+        if (protoReceiver.onReceiveListener(listener, type, buffer, offset, size))
             return true
 
         return false

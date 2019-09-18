@@ -11,11 +11,8 @@ package com.chronoxor.protoex.fbe
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
 open class FinalClient : com.chronoxor.fbe.Client, IFinalClientListener
 {
-    // Imported senders
-    val protoSender: com.chronoxor.proto.fbe.FinalClient
-
-    // Imported receivers
-    var protoReceiver: com.chronoxor.proto.fbe.FinalClient? = null
+    // Imported clients
+    val protoClient: com.chronoxor.proto.fbe.FinalClient
 
     // Client sender models accessors
     val OrderMessageSenderModel: OrderMessageFinalModel
@@ -34,8 +31,7 @@ open class FinalClient : com.chronoxor.fbe.Client, IFinalClientListener
 
     constructor() : super(true)
     {
-        protoSender = com.chronoxor.proto.fbe.FinalClient(sendBuffer, receiveBuffer)
-        protoReceiver = com.chronoxor.proto.fbe.FinalClient(sendBuffer, receiveBuffer)
+        protoClient = com.chronoxor.proto.fbe.FinalClient(sendBuffer, receiveBuffer)
         OrderMessageSenderModel = OrderMessageFinalModel(sendBuffer)
         OrderMessageReceiverValue = com.chronoxor.protoex.OrderMessage()
         OrderMessageReceiverModel = OrderMessageFinalModel()
@@ -49,8 +45,7 @@ open class FinalClient : com.chronoxor.fbe.Client, IFinalClientListener
 
     constructor(sendBuffer: com.chronoxor.fbe.Buffer, receiveBuffer: com.chronoxor.fbe.Buffer) : super(sendBuffer, receiveBuffer, true)
     {
-        protoSender = com.chronoxor.proto.fbe.FinalClient(sendBuffer, receiveBuffer)
-        protoReceiver = com.chronoxor.proto.fbe.FinalClient(sendBuffer, receiveBuffer)
+        protoClient = com.chronoxor.proto.fbe.FinalClient(sendBuffer, receiveBuffer)
         OrderMessageSenderModel = OrderMessageFinalModel(sendBuffer)
         OrderMessageReceiverValue = com.chronoxor.protoex.OrderMessage()
         OrderMessageReceiverModel = OrderMessageFinalModel()
@@ -80,7 +75,7 @@ open class FinalClient : com.chronoxor.fbe.Client, IFinalClientListener
         // Try to send using imported clients
         @Suppress("CanBeVal")
         var result: Long
-        result = protoSender.sendListener(listener, obj)
+        result = protoClient.sendListener(listener, obj)
         if (result > 0)
             return result
 
@@ -225,7 +220,7 @@ open class FinalClient : com.chronoxor.fbe.Client, IFinalClientListener
             }
         }
 
-        if ((protoReceiver != null) && protoReceiver!!.onReceiveListener(listener, type, buffer, offset, size))
+        if (protoClient.onReceiveListener(listener, type, buffer, offset, size))
             return true
 
         return false

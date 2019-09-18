@@ -12,7 +12,7 @@ package com.chronoxor.protoex.fbe
 open class Proxy : com.chronoxor.fbe.Receiver, IProxyListener
 {
     // Imported proxy
-    var protoProxy: com.chronoxor.proto.fbe.Proxy? = null
+    var protoProxy: com.chronoxor.proto.fbe.Proxy
 
     // Proxy models accessors
     private val OrderMessageModel: OrderMessageModel
@@ -88,7 +88,7 @@ open class Proxy : com.chronoxor.fbe.Receiver, IProxyListener
             }
         }
 
-        if ((protoProxy != null) && protoProxy!!.onReceiveListener(listener, type, buffer, offset, size))
+        if (protoProxy.onReceiveListener(listener, type, buffer, offset, size))
             return true
 
         return false

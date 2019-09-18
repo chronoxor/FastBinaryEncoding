@@ -12,7 +12,7 @@ package com.chronoxor.test.fbe
 open class Proxy : com.chronoxor.fbe.Receiver, IProxyListener
 {
     // Imported proxy
-    var protoProxy: com.chronoxor.proto.fbe.Proxy? = null
+    var protoProxy: com.chronoxor.proto.fbe.Proxy
 
     // Proxy models accessors
 
@@ -34,7 +34,7 @@ open class Proxy : com.chronoxor.fbe.Receiver, IProxyListener
     open fun onReceiveListener(listener: IProxyListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
 
-        if ((protoProxy != null) && protoProxy!!.onReceiveListener(listener, type, buffer, offset, size))
+        if (protoProxy.onReceiveListener(listener, type, buffer, offset, size))
             return true
 
         return false

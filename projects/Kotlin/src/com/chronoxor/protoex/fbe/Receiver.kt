@@ -12,7 +12,7 @@ package com.chronoxor.protoex.fbe
 open class Receiver : com.chronoxor.fbe.Receiver, IReceiverListener
 {
     // Imported receivers
-    var protoReceiver: com.chronoxor.proto.fbe.Receiver? = null
+    var protoReceiver: com.chronoxor.proto.fbe.Receiver
 
     // Receiver values accessors
     private val OrderMessageValue: com.chronoxor.protoex.OrderMessage
@@ -114,7 +114,7 @@ open class Receiver : com.chronoxor.fbe.Receiver, IReceiverListener
             }
         }
 
-        if ((protoReceiver != null) && protoReceiver!!.onReceiveListener(listener, type, buffer, offset, size))
+        if (protoReceiver.onReceiveListener(listener, type, buffer, offset, size))
             return true
 
         return false
