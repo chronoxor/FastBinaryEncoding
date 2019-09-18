@@ -9867,6 +9867,299 @@ namespace FBE {
         internal abstract bool OnReceive(long type, byte[] buffer, long offset, long size);
     }
 
+    // Fast Binary Encoding base client listener interface
+    public interface IClientListener : ISenderListener, IReceiverListener
+    {
+    }
+
+    // Fast Binary Encoding base client
+    public abstract class Client : IClientListener
+    {
+        // Send bytes buffer
+        public Buffer SendBuffer { get; }
+        // Receive bytes buffer
+        public Buffer ReceiveBuffer { get; }
+        // Logging flag
+        public bool Logging { get; set; }
+        // Final protocol flag
+        public bool Final { get; }
+
+        protected Client(bool final) { SendBuffer = new Buffer(); ReceiveBuffer = new Buffer(); Final = final; }
+        protected Client(Buffer sendBuffer, Buffer receiveBuffer, bool final) { SendBuffer = sendBuffer; ReceiveBuffer = receiveBuffer; Final = final; }
+
+        // Reset the client buffers
+        public void Reset() { SendBuffer.Reset(); ReceiveBuffer.Reset(); }
+
+        // Send serialized buffer.
+        // Direct call of the method requires knowledge about internals of FBE models serialization.
+        // Use it with care!
+        public long SendSerialized(long serialized)
+        {
+            Debug.Assert((serialized > 0), "Invalid size of the serialized buffer!");
+            if (serialized == 0)
+                return 0;
+
+            // Shift the send buffer
+            SendBuffer.Shift(serialized);
+
+            // Send the value
+            long sent = OnSend(SendBuffer.Data, 0, SendBuffer.Size);
+            SendBuffer.Remove(0, sent);
+            return sent;
+        }
+
+        // Send message handler
+        protected abstract long OnSend(byte[] buffer, long offset, long size);
+
+        // Receive data
+        public void Receive(Buffer buffer) { Receive(buffer.Data, 0, buffer.Size); }
+        public void Receive(byte[] buffer) { Receive(buffer, 0, buffer.Length); }
+        public void Receive(byte[] buffer, long offset, long size)
+        {
+            Debug.Assert((buffer != null), "Invalid buffer!");
+            if (buffer == null)
+                throw new ArgumentException("Invalid buffer!", nameof(buffer));
+            Debug.Assert(((offset + size) <= buffer.Length), "Invalid offset & size!");
+            if ((offset + size) > buffer.Length)
+                throw new ArgumentException("Invalid offset & size!", nameof(offset));
+
+            if (size == 0)
+                return;
+
+            // Storage buffer
+            long offset0 = ReceiveBuffer.Offset;
+            long offset1 = ReceiveBuffer.Size;
+            long size1 = ReceiveBuffer.Size;
+
+            // Receive buffer
+            long offset2 = 0;
+            long size2 = size;
+
+            // While receive buffer is available to handle...
+            while (offset2 < size2)
+            {
+                byte[] messageBuffer = null;
+                long messageOffset = 0;
+                long messageSize = 0;
+
+                // Try to receive message size
+                bool messageSizeCopied = false;
+                bool messageSizeFound = false;
+                while (!messageSizeFound)
+                {
+                    // Look into the storage buffer
+                    if (offset0 < size1)
+                    {
+                        long count = Math.Min(size1 - offset0, 4);
+                        if (count == 4)
+                        {
+                            messageSizeCopied = true;
+                            messageSizeFound = true;
+                            messageSize = Buffer.ReadUInt32(ReceiveBuffer.Data, offset0);
+                            offset0 += 4;
+                            break;
+                        }
+                        else
+                        {
+                            // Fill remaining data from the receive buffer
+                            if (offset2 < size2)
+                            {
+                                count = Math.Min(size2 - offset2, 4 - count);
+
+                                // Allocate and refresh the storage buffer
+                                ReceiveBuffer.Allocate(count);
+                                size1 += count;
+
+                                Array.Copy(buffer, offset + offset2, ReceiveBuffer.Data, offset1, count);
+                                offset1 += count;
+                                offset2 += count;
+                                continue;
+                            }
+                            else
+                                break;
+                        }
+                    }
+
+                    // Look into the receive buffer
+                    if (offset2 < size2)
+                    {
+                        long count = Math.Min(size2 - offset2, 4);
+                        if (count == 4)
+                        {
+                            messageSizeFound = true;
+                            messageSize = Buffer.ReadUInt32(buffer, offset + offset2);
+                            offset2 += 4;
+                            break;
+                        }
+                        else
+                        {
+                            // Allocate and refresh the storage buffer
+                            ReceiveBuffer.Allocate(count);
+                            size1 += count;
+
+                            Array.Copy(buffer, offset + offset2, ReceiveBuffer.Data, offset1, count);
+                            offset1 += count;
+                            offset2 += count;
+                            continue;
+                        }
+                    }
+                    else
+                        break;
+                }
+
+                if (!messageSizeFound)
+                    return;
+
+                // Check the message full size
+                long minSize = Final ? (4 + 4) : (4 + 4 + 4 + 4);
+                Debug.Assert((messageSize >= minSize), "Invalid receive data!");
+                if (messageSize < minSize)
+                    return;
+
+                // Try to receive message body
+                bool messageFound = false;
+                while (!messageFound)
+                {
+                    // Look into the storage buffer
+                    if (offset0 < size1)
+                    {
+                        long count = Math.Min(size1 - offset0, messageSize - 4);
+                        if (count == (messageSize - 4))
+                        {
+                            messageFound = true;
+                            messageBuffer = ReceiveBuffer.Data;
+                            messageOffset = offset0 - 4;
+                            offset0 += messageSize - 4;
+                            break;
+                        }
+                        else
+                        {
+                            // Fill remaining data from the receive buffer
+                            if (offset2 < size2)
+                            {
+                                // Copy message size into the storage buffer
+                                if (!messageSizeCopied)
+                                {
+                                    // Allocate and refresh the storage buffer
+                                    ReceiveBuffer.Allocate(4);
+                                    size1 += 4;
+
+                                    Buffer.Write(ReceiveBuffer.Data, offset0, (uint)messageSize);
+                                    offset0 += 4;
+                                    offset1 += 4;
+
+                                    messageSizeCopied = true;
+                                }
+
+                                count = Math.Min(size2 - offset2, messageSize - 4 - count);
+
+                                // Allocate and refresh the storage buffer
+                                ReceiveBuffer.Allocate(count);
+                                size1 += count;
+
+                                Array.Copy(buffer, offset + offset2, ReceiveBuffer.Data, offset1, count);
+                                offset1 += count;
+                                offset2 += count;
+                                continue;
+                            }
+                            else
+                                break;
+                        }
+                    }
+
+                    // Look into the receive buffer
+                    if (offset2 < size2)
+                    {
+                        long count = Math.Min(size2 - offset2, messageSize - 4);
+                        if (!messageSizeCopied && (count == (messageSize - 4)))
+                        {
+                            messageFound = true;
+                            messageBuffer = buffer;
+                            messageOffset = offset + offset2 - 4;
+                            offset2 += messageSize - 4;
+                            break;
+                        }
+                        else
+                        {
+                            // Copy message size into the storage buffer
+                            if (!messageSizeCopied)
+                            {
+                                // Allocate and refresh the storage buffer
+                                ReceiveBuffer.Allocate(4);
+                                size1 += 4;
+
+                                Buffer.Write(ReceiveBuffer.Data, offset0, (uint)messageSize);
+                                offset0 += 4;
+                                offset1 += 4;
+
+                                messageSizeCopied = true;
+                            }
+
+                            // Allocate and refresh the storage buffer
+                            ReceiveBuffer.Allocate(count);
+                            size1 += count;
+
+                            Array.Copy(buffer, offset + offset2, ReceiveBuffer.Data, offset1, count);
+                            offset1 += count;
+                            offset2 += count;
+                            continue;
+                        }
+                    }
+                    else
+                        break;
+                }
+
+                if (!messageFound)
+                {
+                    // Copy message size into the storage buffer
+                    if (!messageSizeCopied)
+                    {
+                        // Allocate and refresh the storage buffer
+                        ReceiveBuffer.Allocate(4);
+                        size1 += 4;
+
+                        Buffer.Write(ReceiveBuffer.Data, offset0, (uint)messageSize);
+                        offset0 += 4;
+                        offset1 += 4;
+
+                        messageSizeCopied = true;
+                    }
+                    return;
+                }
+
+                uint fbeStructSize;
+                uint fbeStructType;
+
+                // Read the message parameters
+                if (Final)
+                {
+                    fbeStructSize = Buffer.ReadUInt32(messageBuffer, messageOffset);
+                    fbeStructType = Buffer.ReadUInt32(messageBuffer, messageOffset + 4);
+                }
+                else
+                {
+                    uint fbeStructOffset = Buffer.ReadUInt32(messageBuffer, messageOffset + 4);
+                    fbeStructSize = Buffer.ReadUInt32(messageBuffer, messageOffset + fbeStructOffset);
+                    fbeStructType = Buffer.ReadUInt32(messageBuffer, messageOffset + fbeStructOffset + 4);
+                }
+
+                // Handle the message
+                OnReceive(fbeStructType, messageBuffer, messageOffset, messageSize);
+
+                // Reset the storage buffer
+                ReceiveBuffer.Reset();
+
+                // Refresh the storage buffer
+                offset0 = ReceiveBuffer.Offset;
+                offset1 = ReceiveBuffer.Size;
+                size1 = ReceiveBuffer.Size;
+            }
+        }
+
+        // Receive message handler
+        internal abstract bool OnReceive(long type, byte[] buffer, long offset, long size);
+    }
+
 #if UTF8JSON
 
     public sealed class ByteArrayFormatter : IJsonFormatter<byte[]>

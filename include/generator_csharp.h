@@ -64,6 +64,7 @@ private:
     void GenerateFBEFinalModelMap(bool valueTypeKey, bool valueTypeValue, bool optional);
     void GenerateFBESender();
     void GenerateFBEReceiver();
+    void GenerateFBEClient();
     void GenerateFBEJson();
     void GenerateFBE(const CppCommon::Path& path);
 
@@ -83,6 +84,7 @@ private:
     void GenerateSender(const std::shared_ptr<Package>& p, bool final);
     void GenerateReceiver(const std::shared_ptr<Package>& p, bool final);
     void GenerateProxy(const std::shared_ptr<Package>& p, bool final);
+    void GenerateClient(const std::shared_ptr<Package>& p, bool final);
 
     bool IsKnownType(const std::string& type);
     bool IsReferenceType(const std::string& type);

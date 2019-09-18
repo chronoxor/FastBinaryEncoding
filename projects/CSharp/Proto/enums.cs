@@ -5865,6 +5865,48 @@ namespace enums {
 namespace FBE {
 namespace enums {
 
+    // Fast Binary Encoding enums client listener interface
+    public interface IClientListener : FBE.IClientListener, ISenderListener, IReceiverListener
+    {
+    }
+
+    // Fast Binary Encoding enums client
+    public class Client : FBE.Client, IClientListener
+    {
+        // Client sender models accessors
+
+        // Client receiver values accessors
+
+        // Receiver models accessors
+
+        public Client() : base(false)
+        {
+        }
+        public Client(Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, false)
+        {
+        }
+
+
+        // Send message handler
+        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.enums.Client.OnSend() not implemented!"); }
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IClientListener listener, long type, byte[] buffer, long offset, long size)
+        {
+            switch (type)
+            {
+                default: break;
+            }
+
+            return false;
+        }
+    }
+
+} // namespace enums
+} // namespace FBE
+
+namespace FBE {
+namespace enums {
+
     // Fast Binary Encoding enums final sender listener interface
     public interface IFinalSenderListener : FBE.ISenderListener
     {
@@ -5915,6 +5957,48 @@ namespace enums {
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
         internal bool OnReceiveListener(IFinalReceiverListener listener, long type, byte[] buffer, long offset, long size)
+        {
+            switch (type)
+            {
+                default: break;
+            }
+
+            return false;
+        }
+    }
+
+} // namespace enums
+} // namespace FBE
+
+namespace FBE {
+namespace enums {
+
+    // Fast Binary Encoding enums final client listener interface
+    public interface IFinalClientListener : FBE.IClientListener, IFinalSenderListener, IFinalReceiverListener
+    {
+    }
+
+    // Fast Binary Encoding enums final client
+    public class FinalClient : FBE.Client, IFinalClientListener
+    {
+        // Client sender models accessors
+
+        // Client receiver values accessors
+
+        // Receiver models accessors
+
+        public FinalClient() : base(true)
+        {
+        }
+        public FinalClient(Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, true)
+        {
+        }
+
+
+        // Send message handler
+        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.enums.Client.OnSend() not implemented!"); }
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IFinalClientListener listener, long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {

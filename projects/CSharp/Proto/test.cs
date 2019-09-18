@@ -16279,7 +16279,7 @@ namespace test {
                 default: break;
             }
 
-            if ((protoReceiver != null) && protoReceiver.OnReceive(type, buffer, offset, size))
+            if ((protoReceiver != null) && protoReceiver.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;
@@ -16323,7 +16323,57 @@ namespace test {
                 default: break;
             }
 
-            if ((protoProxy != null) && protoProxy.OnReceive(type, buffer, offset, size))
+            if ((protoProxy != null) && protoProxy.OnReceiveListener(listener, type, buffer, offset, size))
+                return true;
+
+            return false;
+        }
+    }
+
+} // namespace test
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
+    // Fast Binary Encoding test client listener interface
+    public interface IClientListener : FBE.proto.IClientListener, ISenderListener, IReceiverListener
+    {
+    }
+
+    // Fast Binary Encoding test client
+    public class Client : FBE.Client, IClientListener
+    {
+        // Imported clients
+        public readonly proto.Client protoClient;
+
+        // Client sender models accessors
+
+        // Client receiver values accessors
+
+        // Receiver models accessors
+
+        public Client() : base(false)
+        {
+            protoClient = new proto.Client(SendBuffer, ReceiveBuffer);
+        }
+        public Client(Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, false)
+        {
+            protoClient = new proto.Client(SendBuffer, ReceiveBuffer);
+        }
+
+
+        // Send message handler
+        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.test.Client.OnSend() not implemented!"); }
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IClientListener listener, long type, byte[] buffer, long offset, long size)
+        {
+            switch (type)
+            {
+                default: break;
+            }
+
+            if ((protoClient != null) && protoClient.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;
@@ -16402,7 +16452,57 @@ namespace test {
                 default: break;
             }
 
-            if ((protoReceiver != null) && protoReceiver.OnReceive(type, buffer, offset, size))
+            if ((protoReceiver != null) && protoReceiver.OnReceiveListener(listener, type, buffer, offset, size))
+                return true;
+
+            return false;
+        }
+    }
+
+} // namespace test
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
+    // Fast Binary Encoding test final client listener interface
+    public interface IFinalClientListener : FBE.proto.IFinalClientListener, IFinalSenderListener, IFinalReceiverListener
+    {
+    }
+
+    // Fast Binary Encoding test final client
+    public class FinalClient : FBE.Client, IFinalClientListener
+    {
+        // Imported clients
+        public readonly proto.FinalClient protoClient;
+
+        // Client sender models accessors
+
+        // Client receiver values accessors
+
+        // Receiver models accessors
+
+        public FinalClient() : base(true)
+        {
+            protoClient = new proto.FinalClient(SendBuffer, ReceiveBuffer);
+        }
+        public FinalClient(Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, true)
+        {
+            protoClient = new proto.FinalClient(SendBuffer, ReceiveBuffer);
+        }
+
+
+        // Send message handler
+        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.test.Client.OnSend() not implemented!"); }
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IFinalClientListener listener, long type, byte[] buffer, long offset, long size)
+        {
+            switch (type)
+            {
+                default: break;
+            }
+
+            if ((protoClient != null) && protoClient.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;

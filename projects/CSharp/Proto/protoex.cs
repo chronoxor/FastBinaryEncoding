@@ -5031,7 +5031,7 @@ namespace protoex {
                 default: break;
             }
 
-            if ((protoReceiver != null) && protoReceiver.OnReceive(type, buffer, offset, size))
+            if ((protoReceiver != null) && protoReceiver.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;
@@ -5129,7 +5129,195 @@ namespace protoex {
                 default: break;
             }
 
-            if ((protoProxy != null) && protoProxy.OnReceive(type, buffer, offset, size))
+            if ((protoProxy != null) && protoProxy.OnReceiveListener(listener, type, buffer, offset, size))
+                return true;
+
+            return false;
+        }
+    }
+
+} // namespace protoex
+} // namespace FBE
+
+namespace FBE {
+namespace protoex {
+
+    // Fast Binary Encoding protoex client listener interface
+    public interface IClientListener : FBE.proto.IClientListener, ISenderListener, IReceiverListener
+    {
+    }
+
+    // Fast Binary Encoding protoex client
+    public class Client : FBE.Client, IClientListener
+    {
+        // Imported clients
+        public readonly proto.Client protoClient;
+
+        // Client sender models accessors
+        public readonly OrderMessageModel OrderMessageSenderModel;
+        public readonly BalanceMessageModel BalanceMessageSenderModel;
+        public readonly AccountMessageModel AccountMessageSenderModel;
+
+        // Client receiver values accessors
+        private global::protoex.OrderMessage OrderMessageReceiverValue;
+        private global::protoex.BalanceMessage BalanceMessageReceiverValue;
+        private global::protoex.AccountMessage AccountMessageReceiverValue;
+
+        // Receiver models accessors
+        private readonly OrderMessageModel OrderMessageReceiverModel;
+        private readonly BalanceMessageModel BalanceMessageReceiverModel;
+        private readonly AccountMessageModel AccountMessageReceiverModel;
+
+        public Client() : base(false)
+        {
+            protoClient = new proto.Client(SendBuffer, ReceiveBuffer);
+            OrderMessageSenderModel = new OrderMessageModel(SendBuffer);
+            OrderMessageReceiverValue = global::protoex.OrderMessage.Default;
+            OrderMessageReceiverModel = new OrderMessageModel();
+            BalanceMessageSenderModel = new BalanceMessageModel(SendBuffer);
+            BalanceMessageReceiverValue = global::protoex.BalanceMessage.Default;
+            BalanceMessageReceiverModel = new BalanceMessageModel();
+            AccountMessageSenderModel = new AccountMessageModel(SendBuffer);
+            AccountMessageReceiverValue = global::protoex.AccountMessage.Default;
+            AccountMessageReceiverModel = new AccountMessageModel();
+        }
+        public Client(Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, false)
+        {
+            protoClient = new proto.Client(SendBuffer, ReceiveBuffer);
+            OrderMessageSenderModel = new OrderMessageModel(SendBuffer);
+            OrderMessageReceiverValue = global::protoex.OrderMessage.Default;
+            OrderMessageReceiverModel = new OrderMessageModel();
+            BalanceMessageSenderModel = new BalanceMessageModel(SendBuffer);
+            BalanceMessageReceiverValue = global::protoex.BalanceMessage.Default;
+            BalanceMessageReceiverModel = new BalanceMessageModel();
+            AccountMessageSenderModel = new AccountMessageModel(SendBuffer);
+            AccountMessageReceiverValue = global::protoex.AccountMessage.Default;
+            AccountMessageReceiverModel = new AccountMessageModel();
+        }
+
+        public long Send(global::protoex.OrderMessage value) { return SendListener(this, value); }
+        public long SendListener(IClientListener listener, global::protoex.OrderMessage value)
+        {
+            // Serialize the value into the FBE stream
+            long serialized = OrderMessageSenderModel.Serialize(value);
+            Debug.Assert((serialized > 0), "protoex.OrderMessage serialization failed!");
+            Debug.Assert(OrderMessageSenderModel.Verify(), "protoex.OrderMessage validation failed!");
+
+            // Log the value
+            if (Logging)
+            {
+                string message = value.ToString();
+                listener.OnSendLog(message);
+            }
+
+            // Send the serialized value
+            return SendSerialized(serialized);
+        }
+        public long Send(global::protoex.BalanceMessage value) { return SendListener(this, value); }
+        public long SendListener(IClientListener listener, global::protoex.BalanceMessage value)
+        {
+            // Serialize the value into the FBE stream
+            long serialized = BalanceMessageSenderModel.Serialize(value);
+            Debug.Assert((serialized > 0), "protoex.BalanceMessage serialization failed!");
+            Debug.Assert(BalanceMessageSenderModel.Verify(), "protoex.BalanceMessage validation failed!");
+
+            // Log the value
+            if (Logging)
+            {
+                string message = value.ToString();
+                listener.OnSendLog(message);
+            }
+
+            // Send the serialized value
+            return SendSerialized(serialized);
+        }
+        public long Send(global::protoex.AccountMessage value) { return SendListener(this, value); }
+        public long SendListener(IClientListener listener, global::protoex.AccountMessage value)
+        {
+            // Serialize the value into the FBE stream
+            long serialized = AccountMessageSenderModel.Serialize(value);
+            Debug.Assert((serialized > 0), "protoex.AccountMessage serialization failed!");
+            Debug.Assert(AccountMessageSenderModel.Verify(), "protoex.AccountMessage validation failed!");
+
+            // Log the value
+            if (Logging)
+            {
+                string message = value.ToString();
+                listener.OnSendLog(message);
+            }
+
+            // Send the serialized value
+            return SendSerialized(serialized);
+        }
+
+        // Send message handler
+        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.protoex.Client.OnSend() not implemented!"); }
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IClientListener listener, long type, byte[] buffer, long offset, long size)
+        {
+            switch (type)
+            {
+                case OrderMessageModel.FBETypeConst:
+                {
+                    // Deserialize the value from the FBE stream
+                    OrderMessageReceiverModel.Attach(buffer, offset);
+                    Debug.Assert(OrderMessageReceiverModel.Verify(), "protoex.OrderMessage validation failed!");
+                    long deserialized = OrderMessageReceiverModel.Deserialize(out OrderMessageReceiverValue);
+                    Debug.Assert((deserialized > 0), "protoex.OrderMessage deserialization failed!");
+
+                    // Log the value
+                    if (Logging)
+                    {
+                        string message = OrderMessageReceiverValue.ToString();
+                        listener.OnReceiveLog(message);
+                    }
+
+                    // Call receive handler with deserialized value
+                    listener.OnReceive(OrderMessageReceiverValue);
+                    return true;
+                }
+                case BalanceMessageModel.FBETypeConst:
+                {
+                    // Deserialize the value from the FBE stream
+                    BalanceMessageReceiverModel.Attach(buffer, offset);
+                    Debug.Assert(BalanceMessageReceiverModel.Verify(), "protoex.BalanceMessage validation failed!");
+                    long deserialized = BalanceMessageReceiverModel.Deserialize(out BalanceMessageReceiverValue);
+                    Debug.Assert((deserialized > 0), "protoex.BalanceMessage deserialization failed!");
+
+                    // Log the value
+                    if (Logging)
+                    {
+                        string message = BalanceMessageReceiverValue.ToString();
+                        listener.OnReceiveLog(message);
+                    }
+
+                    // Call receive handler with deserialized value
+                    listener.OnReceive(BalanceMessageReceiverValue);
+                    return true;
+                }
+                case AccountMessageModel.FBETypeConst:
+                {
+                    // Deserialize the value from the FBE stream
+                    AccountMessageReceiverModel.Attach(buffer, offset);
+                    Debug.Assert(AccountMessageReceiverModel.Verify(), "protoex.AccountMessage validation failed!");
+                    long deserialized = AccountMessageReceiverModel.Deserialize(out AccountMessageReceiverValue);
+                    Debug.Assert((deserialized > 0), "protoex.AccountMessage deserialization failed!");
+
+                    // Log the value
+                    if (Logging)
+                    {
+                        string message = AccountMessageReceiverValue.ToString();
+                        listener.OnReceiveLog(message);
+                    }
+
+                    // Call receive handler with deserialized value
+                    listener.OnReceive(AccountMessageReceiverValue);
+                    return true;
+                }
+                default: break;
+            }
+
+            if ((protoClient != null) && protoClient.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;
@@ -5349,7 +5537,195 @@ namespace protoex {
                 default: break;
             }
 
-            if ((protoReceiver != null) && protoReceiver.OnReceive(type, buffer, offset, size))
+            if ((protoReceiver != null) && protoReceiver.OnReceiveListener(listener, type, buffer, offset, size))
+                return true;
+
+            return false;
+        }
+    }
+
+} // namespace protoex
+} // namespace FBE
+
+namespace FBE {
+namespace protoex {
+
+    // Fast Binary Encoding protoex final client listener interface
+    public interface IFinalClientListener : FBE.proto.IFinalClientListener, IFinalSenderListener, IFinalReceiverListener
+    {
+    }
+
+    // Fast Binary Encoding protoex final client
+    public class FinalClient : FBE.Client, IFinalClientListener
+    {
+        // Imported clients
+        public readonly proto.FinalClient protoClient;
+
+        // Client sender models accessors
+        public readonly OrderMessageFinalModel OrderMessageSenderModel;
+        public readonly BalanceMessageFinalModel BalanceMessageSenderModel;
+        public readonly AccountMessageFinalModel AccountMessageSenderModel;
+
+        // Client receiver values accessors
+        private global::protoex.OrderMessage OrderMessageReceiverValue;
+        private global::protoex.BalanceMessage BalanceMessageReceiverValue;
+        private global::protoex.AccountMessage AccountMessageReceiverValue;
+
+        // Receiver models accessors
+        private readonly OrderMessageFinalModel OrderMessageReceiverModel;
+        private readonly BalanceMessageFinalModel BalanceMessageReceiverModel;
+        private readonly AccountMessageFinalModel AccountMessageReceiverModel;
+
+        public FinalClient() : base(true)
+        {
+            protoClient = new proto.FinalClient(SendBuffer, ReceiveBuffer);
+            OrderMessageSenderModel = new OrderMessageFinalModel(SendBuffer);
+            OrderMessageReceiverValue = global::protoex.OrderMessage.Default;
+            OrderMessageReceiverModel = new OrderMessageFinalModel();
+            BalanceMessageSenderModel = new BalanceMessageFinalModel(SendBuffer);
+            BalanceMessageReceiverValue = global::protoex.BalanceMessage.Default;
+            BalanceMessageReceiverModel = new BalanceMessageFinalModel();
+            AccountMessageSenderModel = new AccountMessageFinalModel(SendBuffer);
+            AccountMessageReceiverValue = global::protoex.AccountMessage.Default;
+            AccountMessageReceiverModel = new AccountMessageFinalModel();
+        }
+        public FinalClient(Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, true)
+        {
+            protoClient = new proto.FinalClient(SendBuffer, ReceiveBuffer);
+            OrderMessageSenderModel = new OrderMessageFinalModel(SendBuffer);
+            OrderMessageReceiverValue = global::protoex.OrderMessage.Default;
+            OrderMessageReceiverModel = new OrderMessageFinalModel();
+            BalanceMessageSenderModel = new BalanceMessageFinalModel(SendBuffer);
+            BalanceMessageReceiverValue = global::protoex.BalanceMessage.Default;
+            BalanceMessageReceiverModel = new BalanceMessageFinalModel();
+            AccountMessageSenderModel = new AccountMessageFinalModel(SendBuffer);
+            AccountMessageReceiverValue = global::protoex.AccountMessage.Default;
+            AccountMessageReceiverModel = new AccountMessageFinalModel();
+        }
+
+        public long Send(global::protoex.OrderMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalClientListener listener, global::protoex.OrderMessage value)
+        {
+            // Serialize the value into the FBE stream
+            long serialized = OrderMessageSenderModel.Serialize(value);
+            Debug.Assert((serialized > 0), "protoex.OrderMessage serialization failed!");
+            Debug.Assert(OrderMessageSenderModel.Verify(), "protoex.OrderMessage validation failed!");
+
+            // Log the value
+            if (Logging)
+            {
+                string message = value.ToString();
+                listener.OnSendLog(message);
+            }
+
+            // Send the serialized value
+            return SendSerialized(serialized);
+        }
+        public long Send(global::protoex.BalanceMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalClientListener listener, global::protoex.BalanceMessage value)
+        {
+            // Serialize the value into the FBE stream
+            long serialized = BalanceMessageSenderModel.Serialize(value);
+            Debug.Assert((serialized > 0), "protoex.BalanceMessage serialization failed!");
+            Debug.Assert(BalanceMessageSenderModel.Verify(), "protoex.BalanceMessage validation failed!");
+
+            // Log the value
+            if (Logging)
+            {
+                string message = value.ToString();
+                listener.OnSendLog(message);
+            }
+
+            // Send the serialized value
+            return SendSerialized(serialized);
+        }
+        public long Send(global::protoex.AccountMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalClientListener listener, global::protoex.AccountMessage value)
+        {
+            // Serialize the value into the FBE stream
+            long serialized = AccountMessageSenderModel.Serialize(value);
+            Debug.Assert((serialized > 0), "protoex.AccountMessage serialization failed!");
+            Debug.Assert(AccountMessageSenderModel.Verify(), "protoex.AccountMessage validation failed!");
+
+            // Log the value
+            if (Logging)
+            {
+                string message = value.ToString();
+                listener.OnSendLog(message);
+            }
+
+            // Send the serialized value
+            return SendSerialized(serialized);
+        }
+
+        // Send message handler
+        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.protoex.Client.OnSend() not implemented!"); }
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IFinalClientListener listener, long type, byte[] buffer, long offset, long size)
+        {
+            switch (type)
+            {
+                case OrderMessageFinalModel.FBETypeConst:
+                {
+                    // Deserialize the value from the FBE stream
+                    OrderMessageReceiverModel.Attach(buffer, offset);
+                    Debug.Assert(OrderMessageReceiverModel.Verify(), "protoex.OrderMessage validation failed!");
+                    long deserialized = OrderMessageReceiverModel.Deserialize(out OrderMessageReceiverValue);
+                    Debug.Assert((deserialized > 0), "protoex.OrderMessage deserialization failed!");
+
+                    // Log the value
+                    if (Logging)
+                    {
+                        string message = OrderMessageReceiverValue.ToString();
+                        listener.OnReceiveLog(message);
+                    }
+
+                    // Call receive handler with deserialized value
+                    listener.OnReceive(OrderMessageReceiverValue);
+                    return true;
+                }
+                case BalanceMessageFinalModel.FBETypeConst:
+                {
+                    // Deserialize the value from the FBE stream
+                    BalanceMessageReceiverModel.Attach(buffer, offset);
+                    Debug.Assert(BalanceMessageReceiverModel.Verify(), "protoex.BalanceMessage validation failed!");
+                    long deserialized = BalanceMessageReceiverModel.Deserialize(out BalanceMessageReceiverValue);
+                    Debug.Assert((deserialized > 0), "protoex.BalanceMessage deserialization failed!");
+
+                    // Log the value
+                    if (Logging)
+                    {
+                        string message = BalanceMessageReceiverValue.ToString();
+                        listener.OnReceiveLog(message);
+                    }
+
+                    // Call receive handler with deserialized value
+                    listener.OnReceive(BalanceMessageReceiverValue);
+                    return true;
+                }
+                case AccountMessageFinalModel.FBETypeConst:
+                {
+                    // Deserialize the value from the FBE stream
+                    AccountMessageReceiverModel.Attach(buffer, offset);
+                    Debug.Assert(AccountMessageReceiverModel.Verify(), "protoex.AccountMessage validation failed!");
+                    long deserialized = AccountMessageReceiverModel.Deserialize(out AccountMessageReceiverValue);
+                    Debug.Assert((deserialized > 0), "protoex.AccountMessage deserialization failed!");
+
+                    // Log the value
+                    if (Logging)
+                    {
+                        string message = AccountMessageReceiverValue.ToString();
+                        listener.OnReceiveLog(message);
+                    }
+
+                    // Call receive handler with deserialized value
+                    listener.OnReceive(AccountMessageReceiverValue);
+                    return true;
+                }
+                default: break;
+            }
+
+            if ((protoClient != null) && protoClient.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;

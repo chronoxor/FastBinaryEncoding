@@ -5017,6 +5017,186 @@ namespace proto {
 namespace FBE {
 namespace proto {
 
+    // Fast Binary Encoding proto client listener interface
+    public interface IClientListener : FBE.IClientListener, ISenderListener, IReceiverListener
+    {
+    }
+
+    // Fast Binary Encoding proto client
+    public class Client : FBE.Client, IClientListener
+    {
+        // Client sender models accessors
+        public readonly OrderMessageModel OrderMessageSenderModel;
+        public readonly BalanceMessageModel BalanceMessageSenderModel;
+        public readonly AccountMessageModel AccountMessageSenderModel;
+
+        // Client receiver values accessors
+        private global::proto.OrderMessage OrderMessageReceiverValue;
+        private global::proto.BalanceMessage BalanceMessageReceiverValue;
+        private global::proto.AccountMessage AccountMessageReceiverValue;
+
+        // Receiver models accessors
+        private readonly OrderMessageModel OrderMessageReceiverModel;
+        private readonly BalanceMessageModel BalanceMessageReceiverModel;
+        private readonly AccountMessageModel AccountMessageReceiverModel;
+
+        public Client() : base(false)
+        {
+            OrderMessageSenderModel = new OrderMessageModel(SendBuffer);
+            OrderMessageReceiverValue = global::proto.OrderMessage.Default;
+            OrderMessageReceiverModel = new OrderMessageModel();
+            BalanceMessageSenderModel = new BalanceMessageModel(SendBuffer);
+            BalanceMessageReceiverValue = global::proto.BalanceMessage.Default;
+            BalanceMessageReceiverModel = new BalanceMessageModel();
+            AccountMessageSenderModel = new AccountMessageModel(SendBuffer);
+            AccountMessageReceiverValue = global::proto.AccountMessage.Default;
+            AccountMessageReceiverModel = new AccountMessageModel();
+        }
+        public Client(Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, false)
+        {
+            OrderMessageSenderModel = new OrderMessageModel(SendBuffer);
+            OrderMessageReceiverValue = global::proto.OrderMessage.Default;
+            OrderMessageReceiverModel = new OrderMessageModel();
+            BalanceMessageSenderModel = new BalanceMessageModel(SendBuffer);
+            BalanceMessageReceiverValue = global::proto.BalanceMessage.Default;
+            BalanceMessageReceiverModel = new BalanceMessageModel();
+            AccountMessageSenderModel = new AccountMessageModel(SendBuffer);
+            AccountMessageReceiverValue = global::proto.AccountMessage.Default;
+            AccountMessageReceiverModel = new AccountMessageModel();
+        }
+
+        public long Send(global::proto.OrderMessage value) { return SendListener(this, value); }
+        public long SendListener(IClientListener listener, global::proto.OrderMessage value)
+        {
+            // Serialize the value into the FBE stream
+            long serialized = OrderMessageSenderModel.Serialize(value);
+            Debug.Assert((serialized > 0), "proto.OrderMessage serialization failed!");
+            Debug.Assert(OrderMessageSenderModel.Verify(), "proto.OrderMessage validation failed!");
+
+            // Log the value
+            if (Logging)
+            {
+                string message = value.ToString();
+                listener.OnSendLog(message);
+            }
+
+            // Send the serialized value
+            return SendSerialized(serialized);
+        }
+        public long Send(global::proto.BalanceMessage value) { return SendListener(this, value); }
+        public long SendListener(IClientListener listener, global::proto.BalanceMessage value)
+        {
+            // Serialize the value into the FBE stream
+            long serialized = BalanceMessageSenderModel.Serialize(value);
+            Debug.Assert((serialized > 0), "proto.BalanceMessage serialization failed!");
+            Debug.Assert(BalanceMessageSenderModel.Verify(), "proto.BalanceMessage validation failed!");
+
+            // Log the value
+            if (Logging)
+            {
+                string message = value.ToString();
+                listener.OnSendLog(message);
+            }
+
+            // Send the serialized value
+            return SendSerialized(serialized);
+        }
+        public long Send(global::proto.AccountMessage value) { return SendListener(this, value); }
+        public long SendListener(IClientListener listener, global::proto.AccountMessage value)
+        {
+            // Serialize the value into the FBE stream
+            long serialized = AccountMessageSenderModel.Serialize(value);
+            Debug.Assert((serialized > 0), "proto.AccountMessage serialization failed!");
+            Debug.Assert(AccountMessageSenderModel.Verify(), "proto.AccountMessage validation failed!");
+
+            // Log the value
+            if (Logging)
+            {
+                string message = value.ToString();
+                listener.OnSendLog(message);
+            }
+
+            // Send the serialized value
+            return SendSerialized(serialized);
+        }
+
+        // Send message handler
+        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.proto.Client.OnSend() not implemented!"); }
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IClientListener listener, long type, byte[] buffer, long offset, long size)
+        {
+            switch (type)
+            {
+                case OrderMessageModel.FBETypeConst:
+                {
+                    // Deserialize the value from the FBE stream
+                    OrderMessageReceiverModel.Attach(buffer, offset);
+                    Debug.Assert(OrderMessageReceiverModel.Verify(), "proto.OrderMessage validation failed!");
+                    long deserialized = OrderMessageReceiverModel.Deserialize(out OrderMessageReceiverValue);
+                    Debug.Assert((deserialized > 0), "proto.OrderMessage deserialization failed!");
+
+                    // Log the value
+                    if (Logging)
+                    {
+                        string message = OrderMessageReceiverValue.ToString();
+                        listener.OnReceiveLog(message);
+                    }
+
+                    // Call receive handler with deserialized value
+                    listener.OnReceive(OrderMessageReceiverValue);
+                    return true;
+                }
+                case BalanceMessageModel.FBETypeConst:
+                {
+                    // Deserialize the value from the FBE stream
+                    BalanceMessageReceiverModel.Attach(buffer, offset);
+                    Debug.Assert(BalanceMessageReceiverModel.Verify(), "proto.BalanceMessage validation failed!");
+                    long deserialized = BalanceMessageReceiverModel.Deserialize(out BalanceMessageReceiverValue);
+                    Debug.Assert((deserialized > 0), "proto.BalanceMessage deserialization failed!");
+
+                    // Log the value
+                    if (Logging)
+                    {
+                        string message = BalanceMessageReceiverValue.ToString();
+                        listener.OnReceiveLog(message);
+                    }
+
+                    // Call receive handler with deserialized value
+                    listener.OnReceive(BalanceMessageReceiverValue);
+                    return true;
+                }
+                case AccountMessageModel.FBETypeConst:
+                {
+                    // Deserialize the value from the FBE stream
+                    AccountMessageReceiverModel.Attach(buffer, offset);
+                    Debug.Assert(AccountMessageReceiverModel.Verify(), "proto.AccountMessage validation failed!");
+                    long deserialized = AccountMessageReceiverModel.Deserialize(out AccountMessageReceiverValue);
+                    Debug.Assert((deserialized > 0), "proto.AccountMessage deserialization failed!");
+
+                    // Log the value
+                    if (Logging)
+                    {
+                        string message = AccountMessageReceiverValue.ToString();
+                        listener.OnReceiveLog(message);
+                    }
+
+                    // Call receive handler with deserialized value
+                    listener.OnReceive(AccountMessageReceiverValue);
+                    return true;
+                }
+                default: break;
+            }
+
+            return false;
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
     // Fast Binary Encoding proto final sender listener interface
     public interface IFinalSenderListener : FBE.ISenderListener
     {
@@ -5209,6 +5389,186 @@ namespace proto {
 
                     // Call receive handler with deserialized value
                     listener.OnReceive(AccountMessageValue);
+                    return true;
+                }
+                default: break;
+            }
+
+            return false;
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
+    // Fast Binary Encoding proto final client listener interface
+    public interface IFinalClientListener : FBE.IClientListener, IFinalSenderListener, IFinalReceiverListener
+    {
+    }
+
+    // Fast Binary Encoding proto final client
+    public class FinalClient : FBE.Client, IFinalClientListener
+    {
+        // Client sender models accessors
+        public readonly OrderMessageFinalModel OrderMessageSenderModel;
+        public readonly BalanceMessageFinalModel BalanceMessageSenderModel;
+        public readonly AccountMessageFinalModel AccountMessageSenderModel;
+
+        // Client receiver values accessors
+        private global::proto.OrderMessage OrderMessageReceiverValue;
+        private global::proto.BalanceMessage BalanceMessageReceiverValue;
+        private global::proto.AccountMessage AccountMessageReceiverValue;
+
+        // Receiver models accessors
+        private readonly OrderMessageFinalModel OrderMessageReceiverModel;
+        private readonly BalanceMessageFinalModel BalanceMessageReceiverModel;
+        private readonly AccountMessageFinalModel AccountMessageReceiverModel;
+
+        public FinalClient() : base(true)
+        {
+            OrderMessageSenderModel = new OrderMessageFinalModel(SendBuffer);
+            OrderMessageReceiverValue = global::proto.OrderMessage.Default;
+            OrderMessageReceiverModel = new OrderMessageFinalModel();
+            BalanceMessageSenderModel = new BalanceMessageFinalModel(SendBuffer);
+            BalanceMessageReceiverValue = global::proto.BalanceMessage.Default;
+            BalanceMessageReceiverModel = new BalanceMessageFinalModel();
+            AccountMessageSenderModel = new AccountMessageFinalModel(SendBuffer);
+            AccountMessageReceiverValue = global::proto.AccountMessage.Default;
+            AccountMessageReceiverModel = new AccountMessageFinalModel();
+        }
+        public FinalClient(Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, true)
+        {
+            OrderMessageSenderModel = new OrderMessageFinalModel(SendBuffer);
+            OrderMessageReceiverValue = global::proto.OrderMessage.Default;
+            OrderMessageReceiverModel = new OrderMessageFinalModel();
+            BalanceMessageSenderModel = new BalanceMessageFinalModel(SendBuffer);
+            BalanceMessageReceiverValue = global::proto.BalanceMessage.Default;
+            BalanceMessageReceiverModel = new BalanceMessageFinalModel();
+            AccountMessageSenderModel = new AccountMessageFinalModel(SendBuffer);
+            AccountMessageReceiverValue = global::proto.AccountMessage.Default;
+            AccountMessageReceiverModel = new AccountMessageFinalModel();
+        }
+
+        public long Send(global::proto.OrderMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalClientListener listener, global::proto.OrderMessage value)
+        {
+            // Serialize the value into the FBE stream
+            long serialized = OrderMessageSenderModel.Serialize(value);
+            Debug.Assert((serialized > 0), "proto.OrderMessage serialization failed!");
+            Debug.Assert(OrderMessageSenderModel.Verify(), "proto.OrderMessage validation failed!");
+
+            // Log the value
+            if (Logging)
+            {
+                string message = value.ToString();
+                listener.OnSendLog(message);
+            }
+
+            // Send the serialized value
+            return SendSerialized(serialized);
+        }
+        public long Send(global::proto.BalanceMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalClientListener listener, global::proto.BalanceMessage value)
+        {
+            // Serialize the value into the FBE stream
+            long serialized = BalanceMessageSenderModel.Serialize(value);
+            Debug.Assert((serialized > 0), "proto.BalanceMessage serialization failed!");
+            Debug.Assert(BalanceMessageSenderModel.Verify(), "proto.BalanceMessage validation failed!");
+
+            // Log the value
+            if (Logging)
+            {
+                string message = value.ToString();
+                listener.OnSendLog(message);
+            }
+
+            // Send the serialized value
+            return SendSerialized(serialized);
+        }
+        public long Send(global::proto.AccountMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalClientListener listener, global::proto.AccountMessage value)
+        {
+            // Serialize the value into the FBE stream
+            long serialized = AccountMessageSenderModel.Serialize(value);
+            Debug.Assert((serialized > 0), "proto.AccountMessage serialization failed!");
+            Debug.Assert(AccountMessageSenderModel.Verify(), "proto.AccountMessage validation failed!");
+
+            // Log the value
+            if (Logging)
+            {
+                string message = value.ToString();
+                listener.OnSendLog(message);
+            }
+
+            // Send the serialized value
+            return SendSerialized(serialized);
+        }
+
+        // Send message handler
+        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.proto.Client.OnSend() not implemented!"); }
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IFinalClientListener listener, long type, byte[] buffer, long offset, long size)
+        {
+            switch (type)
+            {
+                case OrderMessageFinalModel.FBETypeConst:
+                {
+                    // Deserialize the value from the FBE stream
+                    OrderMessageReceiverModel.Attach(buffer, offset);
+                    Debug.Assert(OrderMessageReceiverModel.Verify(), "proto.OrderMessage validation failed!");
+                    long deserialized = OrderMessageReceiverModel.Deserialize(out OrderMessageReceiverValue);
+                    Debug.Assert((deserialized > 0), "proto.OrderMessage deserialization failed!");
+
+                    // Log the value
+                    if (Logging)
+                    {
+                        string message = OrderMessageReceiverValue.ToString();
+                        listener.OnReceiveLog(message);
+                    }
+
+                    // Call receive handler with deserialized value
+                    listener.OnReceive(OrderMessageReceiverValue);
+                    return true;
+                }
+                case BalanceMessageFinalModel.FBETypeConst:
+                {
+                    // Deserialize the value from the FBE stream
+                    BalanceMessageReceiverModel.Attach(buffer, offset);
+                    Debug.Assert(BalanceMessageReceiverModel.Verify(), "proto.BalanceMessage validation failed!");
+                    long deserialized = BalanceMessageReceiverModel.Deserialize(out BalanceMessageReceiverValue);
+                    Debug.Assert((deserialized > 0), "proto.BalanceMessage deserialization failed!");
+
+                    // Log the value
+                    if (Logging)
+                    {
+                        string message = BalanceMessageReceiverValue.ToString();
+                        listener.OnReceiveLog(message);
+                    }
+
+                    // Call receive handler with deserialized value
+                    listener.OnReceive(BalanceMessageReceiverValue);
+                    return true;
+                }
+                case AccountMessageFinalModel.FBETypeConst:
+                {
+                    // Deserialize the value from the FBE stream
+                    AccountMessageReceiverModel.Attach(buffer, offset);
+                    Debug.Assert(AccountMessageReceiverModel.Verify(), "proto.AccountMessage validation failed!");
+                    long deserialized = AccountMessageReceiverModel.Deserialize(out AccountMessageReceiverValue);
+                    Debug.Assert((deserialized > 0), "proto.AccountMessage deserialization failed!");
+
+                    // Log the value
+                    if (Logging)
+                    {
+                        string message = AccountMessageReceiverValue.ToString();
+                        listener.OnReceiveLog(message);
+                    }
+
+                    // Call receive handler with deserialized value
+                    listener.OnReceive(AccountMessageReceiverValue);
                     return true;
                 }
                 default: break;

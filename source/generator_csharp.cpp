@@ -3472,6 +3472,309 @@ void GeneratorCSharp::GenerateFBEReceiver()
     Write(code);
 }
 
+void GeneratorCSharp::GenerateFBEClient()
+{
+    std::string code = R"CODE(
+    // Fast Binary Encoding base client listener interface
+    public interface IClientListener : ISenderListener, IReceiverListener
+    {
+    }
+
+    // Fast Binary Encoding base client
+    public abstract class Client : IClientListener
+    {
+        // Send bytes buffer
+        public Buffer SendBuffer { get; }
+        // Receive bytes buffer
+        public Buffer ReceiveBuffer { get; }
+        // Logging flag
+        public bool Logging { get; set; }
+        // Final protocol flag
+        public bool Final { get; }
+
+        protected Client(bool final) { SendBuffer = new Buffer(); ReceiveBuffer = new Buffer(); Final = final; }
+        protected Client(Buffer sendBuffer, Buffer receiveBuffer, bool final) { SendBuffer = sendBuffer; ReceiveBuffer = receiveBuffer; Final = final; }
+
+        // Reset the client buffers
+        public void Reset() { SendBuffer.Reset(); ReceiveBuffer.Reset(); }
+
+        // Send serialized buffer.
+        // Direct call of the method requires knowledge about internals of FBE models serialization.
+        // Use it with care!
+        public long SendSerialized(long serialized)
+        {
+            Debug.Assert((serialized > 0), "Invalid size of the serialized buffer!");
+            if (serialized == 0)
+                return 0;
+
+            // Shift the send buffer
+            SendBuffer.Shift(serialized);
+
+            // Send the value
+            long sent = OnSend(SendBuffer.Data, 0, SendBuffer.Size);
+            SendBuffer.Remove(0, sent);
+            return sent;
+        }
+
+        // Send message handler
+        protected abstract long OnSend(byte[] buffer, long offset, long size);
+
+        // Receive data
+        public void Receive(Buffer buffer) { Receive(buffer.Data, 0, buffer.Size); }
+        public void Receive(byte[] buffer) { Receive(buffer, 0, buffer.Length); }
+        public void Receive(byte[] buffer, long offset, long size)
+        {
+            Debug.Assert((buffer != null), "Invalid buffer!");
+            if (buffer == null)
+                throw new ArgumentException("Invalid buffer!", nameof(buffer));
+            Debug.Assert(((offset + size) <= buffer.Length), "Invalid offset & size!");
+            if ((offset + size) > buffer.Length)
+                throw new ArgumentException("Invalid offset & size!", nameof(offset));
+
+            if (size == 0)
+                return;
+
+            // Storage buffer
+            long offset0 = ReceiveBuffer.Offset;
+            long offset1 = ReceiveBuffer.Size;
+            long size1 = ReceiveBuffer.Size;
+
+            // Receive buffer
+            long offset2 = 0;
+            long size2 = size;
+
+            // While receive buffer is available to handle...
+            while (offset2 < size2)
+            {
+                byte[] messageBuffer = null;
+                long messageOffset = 0;
+                long messageSize = 0;
+
+                // Try to receive message size
+                bool messageSizeCopied = false;
+                bool messageSizeFound = false;
+                while (!messageSizeFound)
+                {
+                    // Look into the storage buffer
+                    if (offset0 < size1)
+                    {
+                        long count = Math.Min(size1 - offset0, 4);
+                        if (count == 4)
+                        {
+                            messageSizeCopied = true;
+                            messageSizeFound = true;
+                            messageSize = Buffer.ReadUInt32(ReceiveBuffer.Data, offset0);
+                            offset0 += 4;
+                            break;
+                        }
+                        else
+                        {
+                            // Fill remaining data from the receive buffer
+                            if (offset2 < size2)
+                            {
+                                count = Math.Min(size2 - offset2, 4 - count);
+
+                                // Allocate and refresh the storage buffer
+                                ReceiveBuffer.Allocate(count);
+                                size1 += count;
+
+                                Array.Copy(buffer, offset + offset2, ReceiveBuffer.Data, offset1, count);
+                                offset1 += count;
+                                offset2 += count;
+                                continue;
+                            }
+                            else
+                                break;
+                        }
+                    }
+
+                    // Look into the receive buffer
+                    if (offset2 < size2)
+                    {
+                        long count = Math.Min(size2 - offset2, 4);
+                        if (count == 4)
+                        {
+                            messageSizeFound = true;
+                            messageSize = Buffer.ReadUInt32(buffer, offset + offset2);
+                            offset2 += 4;
+                            break;
+                        }
+                        else
+                        {
+                            // Allocate and refresh the storage buffer
+                            ReceiveBuffer.Allocate(count);
+                            size1 += count;
+
+                            Array.Copy(buffer, offset + offset2, ReceiveBuffer.Data, offset1, count);
+                            offset1 += count;
+                            offset2 += count;
+                            continue;
+                        }
+                    }
+                    else
+                        break;
+                }
+
+                if (!messageSizeFound)
+                    return;
+
+                // Check the message full size
+                long minSize = Final ? (4 + 4) : (4 + 4 + 4 + 4);
+                Debug.Assert((messageSize >= minSize), "Invalid receive data!");
+                if (messageSize < minSize)
+                    return;
+
+                // Try to receive message body
+                bool messageFound = false;
+                while (!messageFound)
+                {
+                    // Look into the storage buffer
+                    if (offset0 < size1)
+                    {
+                        long count = Math.Min(size1 - offset0, messageSize - 4);
+                        if (count == (messageSize - 4))
+                        {
+                            messageFound = true;
+                            messageBuffer = ReceiveBuffer.Data;
+                            messageOffset = offset0 - 4;
+                            offset0 += messageSize - 4;
+                            break;
+                        }
+                        else
+                        {
+                            // Fill remaining data from the receive buffer
+                            if (offset2 < size2)
+                            {
+                                // Copy message size into the storage buffer
+                                if (!messageSizeCopied)
+                                {
+                                    // Allocate and refresh the storage buffer
+                                    ReceiveBuffer.Allocate(4);
+                                    size1 += 4;
+
+                                    Buffer.Write(ReceiveBuffer.Data, offset0, (uint)messageSize);
+                                    offset0 += 4;
+                                    offset1 += 4;
+
+                                    messageSizeCopied = true;
+                                }
+
+                                count = Math.Min(size2 - offset2, messageSize - 4 - count);
+
+                                // Allocate and refresh the storage buffer
+                                ReceiveBuffer.Allocate(count);
+                                size1 += count;
+
+                                Array.Copy(buffer, offset + offset2, ReceiveBuffer.Data, offset1, count);
+                                offset1 += count;
+                                offset2 += count;
+                                continue;
+                            }
+                            else
+                                break;
+                        }
+                    }
+
+                    // Look into the receive buffer
+                    if (offset2 < size2)
+                    {
+                        long count = Math.Min(size2 - offset2, messageSize - 4);
+                        if (!messageSizeCopied && (count == (messageSize - 4)))
+                        {
+                            messageFound = true;
+                            messageBuffer = buffer;
+                            messageOffset = offset + offset2 - 4;
+                            offset2 += messageSize - 4;
+                            break;
+                        }
+                        else
+                        {
+                            // Copy message size into the storage buffer
+                            if (!messageSizeCopied)
+                            {
+                                // Allocate and refresh the storage buffer
+                                ReceiveBuffer.Allocate(4);
+                                size1 += 4;
+
+                                Buffer.Write(ReceiveBuffer.Data, offset0, (uint)messageSize);
+                                offset0 += 4;
+                                offset1 += 4;
+
+                                messageSizeCopied = true;
+                            }
+
+                            // Allocate and refresh the storage buffer
+                            ReceiveBuffer.Allocate(count);
+                            size1 += count;
+
+                            Array.Copy(buffer, offset + offset2, ReceiveBuffer.Data, offset1, count);
+                            offset1 += count;
+                            offset2 += count;
+                            continue;
+                        }
+                    }
+                    else
+                        break;
+                }
+
+                if (!messageFound)
+                {
+                    // Copy message size into the storage buffer
+                    if (!messageSizeCopied)
+                    {
+                        // Allocate and refresh the storage buffer
+                        ReceiveBuffer.Allocate(4);
+                        size1 += 4;
+
+                        Buffer.Write(ReceiveBuffer.Data, offset0, (uint)messageSize);
+                        offset0 += 4;
+                        offset1 += 4;
+
+                        messageSizeCopied = true;
+                    }
+                    return;
+                }
+
+                uint fbeStructSize;
+                uint fbeStructType;
+
+                // Read the message parameters
+                if (Final)
+                {
+                    fbeStructSize = Buffer.ReadUInt32(messageBuffer, messageOffset);
+                    fbeStructType = Buffer.ReadUInt32(messageBuffer, messageOffset + 4);
+                }
+                else
+                {
+                    uint fbeStructOffset = Buffer.ReadUInt32(messageBuffer, messageOffset + 4);
+                    fbeStructSize = Buffer.ReadUInt32(messageBuffer, messageOffset + fbeStructOffset);
+                    fbeStructType = Buffer.ReadUInt32(messageBuffer, messageOffset + fbeStructOffset + 4);
+                }
+
+                // Handle the message
+                OnReceive(fbeStructType, messageBuffer, messageOffset, messageSize);
+
+                // Reset the storage buffer
+                ReceiveBuffer.Reset();
+
+                // Refresh the storage buffer
+                offset0 = ReceiveBuffer.Offset;
+                offset1 = ReceiveBuffer.Size;
+                size1 = ReceiveBuffer.Size;
+            }
+        }
+
+        // Receive message handler
+        internal abstract bool OnReceive(long type, byte[] buffer, long offset, long size);
+    }
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+}
+
 void GeneratorCSharp::GenerateFBEJson()
 {
     std::string code = R"CODE(
@@ -3914,6 +4217,7 @@ void GeneratorCSharp::GenerateFBE(const CppCommon::Path& path)
     {
         GenerateFBESender();
         GenerateFBEReceiver();
+        GenerateFBEClient();
     }
     if (JSON())
         GenerateFBEJson();
@@ -3974,10 +4278,12 @@ void GeneratorCSharp::GeneratePackage(const std::shared_ptr<Package>& p)
         GenerateSender(p, false);
         GenerateReceiver(p, false);
         GenerateProxy(p, false);
+        GenerateClient(p, false);
         if (Final())
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
+            GenerateClient(p, true);
         }
     }
 
@@ -6486,7 +6792,7 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if ((" + *import + "Receiver != null) && " + *import + "Receiver.OnReceive(type, buffer, offset, size))");
+            WriteLineIndent("if ((" + *import + "Receiver != null) && " + *import + "Receiver.OnReceiveListener(listener, type, buffer, offset, size))");
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
@@ -6668,7 +6974,7 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if ((" + *import + "Proxy != null) && " + *import + "Proxy.OnReceive(type, buffer, offset, size))");
+            WriteLineIndent("if ((" + *import + "Proxy != null) && " + *import + "Proxy.OnReceiveListener(listener, type, buffer, offset, size))");
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
@@ -6680,6 +6986,257 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("}");
 
     // Generate proxy end
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate namespace end
+    Indent(-1);
+    WriteLine();
+    WriteLineIndent("} // namespace " + *p->name);
+    WriteLineIndent("} // namespace FBE");
+}
+
+void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
+{
+    // Generate namespace begin
+    WriteLine();
+    WriteLineIndent("namespace FBE {");
+    WriteLineIndent("namespace " + *p->name + " {");
+    Indent(1);
+
+    std::string sender = (final ? "FinalSender" : "Sender");
+    std::string receiver = (final ? "FinalReceiver" : "Receiver");
+    std::string client = (final ? "FinalClient" : "Client");
+    std::string model = (final ? "FinalModel" : "Model");
+    std::string listener = "I" + client + "Listener";
+    std::string sender_listener = "I" + sender + "Listener";
+    std::string receiver_listener = "I" + receiver + "Listener";
+
+    // Generate client listener begin
+    WriteLine();
+    if (final)
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final client listener interface");
+    else
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " client listener interface");
+    WriteIndent("public interface " + listener);
+    if (p->import)
+    {
+        bool first = true;
+        Write(" : ");
+        for (const auto& import : p->import->imports)
+        {
+            Write(std::string(first ? "" : ", ") + "FBE." + *import + "." + listener);
+            first = false;
+        }
+    }
+    else
+        Write(" : FBE.IClientListener");
+    Write(", " + sender_listener + ", " + receiver_listener);
+    WriteLine();
+    WriteLineIndent("{");
+    Indent(1);
+
+    // Generate client listener end
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate client begin
+    WriteLine();
+    if (final)
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final client");
+    else
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " client");
+    WriteLineIndent("public class " + client + " : FBE.Client, " + listener);
+    WriteLineIndent("{");
+    Indent(1);
+
+    // Generate imported clients accessors
+    if (p->import)
+    {
+        WriteLineIndent("// Imported clients");
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("public readonly " + *import + "." + client + " " + *import + "Client;");
+        WriteLine();
+    }
+
+    // Generate client sender models accessors
+    if (p->body)
+    {
+        WriteLineIndent("// Client sender models accessors");
+        for (const auto& s : p->body->structs)
+            if (s->message)
+                WriteLineIndent("public readonly " + *s->name + model + " " + *s->name + "SenderModel;");
+        WriteLine();
+    }
+
+    // Generate client receiver models accessors
+    if (p->body)
+    {
+        WriteLineIndent("// Client receiver values accessors");
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                WriteLineIndent("private " + struct_name + " " + *s->name + "ReceiverValue;");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("// Receiver models accessors");
+        for (const auto& s : p->body->structs)
+            if (s->message)
+                WriteLineIndent("private readonly " + *s->name + model + " " + *s->name + "ReceiverModel;");
+        WriteLine();
+    }
+
+    // Generate client constructors
+    WriteLineIndent("public " + client + "() : base(" + std::string(final ? "true" : "false") + ")");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(*import + "Client = new " + *import + "." + client + "(SendBuffer, ReceiveBuffer);");
+    }
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                WriteLineIndent(*s->name + "SenderModel = new " + *s->name + model + "(SendBuffer);");
+                WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + ".Default;");
+                WriteLineIndent(*s->name + "ReceiverModel = new " + *s->name + model + "();");
+            }
+        }
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLineIndent("public " + client + "(Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, " + std::string(final ? "true" : "false") + ")");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(*import + "Client = new " + *import + "." + client + "(SendBuffer, ReceiveBuffer);");
+    }
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                WriteLineIndent(*s->name + "SenderModel = new " + *s->name + model + "(SendBuffer);");
+                WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + ".Default;");
+                WriteLineIndent(*s->name + "ReceiverModel = new " + *s->name + model + "();");
+            }
+        }
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+
+    // Generate client methods
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                WriteLineIndent("public long Send(" + struct_name + " value) { return SendListener(this, value); }");
+                WriteLineIndent("public long SendListener(" + listener + " listener, " + struct_name + " value)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Serialize the value into the FBE stream");
+                WriteLineIndent("long serialized = " + *s->name + "SenderModel.Serialize(value);");
+                WriteLineIndent("Debug.Assert((serialized > 0), \"" + *p->name + "." + *s->name + " serialization failed!\");");
+                WriteLineIndent("Debug.Assert(" + *s->name + "SenderModel.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (Logging)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("string message = value.ToString();");
+                WriteLineIndent("listener.OnSendLog(message);");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Send the serialized value");
+                WriteLineIndent("return SendSerialized(serialized);");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+        }
+    }
+
+    // Generate client message handler
+    WriteLine();
+    WriteLineIndent("// Send message handler");
+    WriteLineIndent("protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException(\"FBE." + *p->name + ".Client.OnSend() not implemented!\"); }");
+
+    // Generate receiver message handler
+    WriteLineIndent("internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }");
+    WriteLineIndent("internal bool OnReceiveListener(" + listener + " listener, long type, byte[] buffer, long offset, long size)");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->body)
+    {
+        WriteLineIndent("switch (type)");
+        WriteLineIndent("{");
+        Indent(1);
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                WriteLineIndent("case " + *s->name + model + ".FBETypeConst:");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("// Deserialize the value from the FBE stream");
+                WriteLineIndent(*s->name + "ReceiverModel.Attach(buffer, offset);");
+                WriteLineIndent("Debug.Assert(" + *s->name + "ReceiverModel.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
+                WriteLineIndent("long deserialized = " + *s->name + "ReceiverModel.Deserialize(out " + *s->name + "ReceiverValue);");
+                WriteLineIndent("Debug.Assert((deserialized > 0), \"" + *p->name + "." + *s->name + " deserialization failed!\");");
+                WriteLine();
+                WriteLineIndent("// Log the value");
+                WriteLineIndent("if (Logging)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("string message = " + *s->name + "ReceiverValue.ToString();");
+                WriteLineIndent("listener.OnReceiveLog(message);");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLine();
+                WriteLineIndent("// Call receive handler with deserialized value");
+                WriteLineIndent("listener.OnReceive(" + *s->name + "ReceiverValue);");
+                WriteLineIndent("return true;");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+        }
+        WriteLineIndent("default: break;");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+    if (p->import)
+    {
+        WriteLine();
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("if ((" + *import + "Client != null) && " + *import + "Client.OnReceiveListener(listener, type, buffer, offset, size))");
+            Indent(1);
+            WriteLineIndent("return true;");
+            Indent(-1);
+        }
+    }
+    WriteLine();
+    WriteLineIndent("return false;");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate client end
     Indent(-1);
     WriteLineIndent("}");
 
