@@ -7422,21 +7422,12 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("open class " + client + ": " + domain + "Fbe.ClientProtocol {");
     Indent(1);
 
-    // Generate imported senders accessors
+    // Generate imported clients accessors
     if (p->import)
     {
-        WriteLineIndent("// Imported senders");
+        WriteLineIndent("// Imported clients");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("let " + ConvertPackageName(*import) + "Sender: " + domain + ConvertPackageName(*import) + "." + client);
-        WriteLine();
-    }
-
-    // Generate imported receivers accessors
-    if (p->import)
-    {
-        WriteLineIndent("// Imported receivers");
-        for (const auto& import : p->import->imports)
-            WriteLineIndent("let " + ConvertPackageName(*import) + "Receiver: " + domain + ConvertPackageName(*import) + "." + client + "?");
+            WriteLineIndent("let " + ConvertPackageName(*import) + "Client: " + domain + ConvertPackageName(*import) + "." + client);
         WriteLine();
     }
 
@@ -7480,13 +7471,8 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("public init() {");
     Indent(1);
     if (p->import)
-    {
         for (const auto& import : p->import->imports)
-        {
-            WriteLineIndent(ConvertPackageName(*import) + "Sender = " + domain + ConvertPackageName(*import) + "." + client + "(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)");
-            WriteLineIndent(ConvertPackageName(*import) + "Receiver = " + domain + ConvertPackageName(*import) + "." + client + "(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)");
-        }
-    }
+            WriteLineIndent(ConvertPackageName(*import) + "Client = " + domain + ConvertPackageName(*import) + "." + client + "(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)");
     if (p->body)
     {
         for (const auto& s : p->body->structs)
@@ -7508,13 +7494,8 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("public init(sendBuffer: " + domain + "Fbe.Buffer, receiveBuffer: " + domain + "Fbe.Buffer) {");
     Indent(1);
     if (p->import)
-    {
         for (const auto& import : p->import->imports)
-        {
-            WriteLineIndent(ConvertPackageName(*import) + "Sender = " + domain + ConvertPackageName(*import) + "." + client + "(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)");
-            WriteLineIndent(ConvertPackageName(*import) + "Receiver = " + domain + ConvertPackageName(*import) + "." + client + "(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)");
-        }
-    }
+            WriteLineIndent(ConvertPackageName(*import) + "Client = " + domain + ConvertPackageName(*import) + "." + client + "(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)");
     if (p->body)
     {
         for (const auto& s : p->body->structs)
@@ -7570,7 +7551,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("var result: Int = 0");
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("result = try " + ConvertPackageName(*import) + "Sender.send(obj: obj, listener: listener)");
+            WriteLineIndent("result = try " + ConvertPackageName(*import) + "Client.send(obj: obj, listener: listener)");
             WriteLineIndent("if result > 0 { return result }");
         }
         WriteLine();
@@ -7670,7 +7651,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if let " + ConvertPackageName(*import) + "Receiver = " + ConvertPackageName(*import) + "Receiver, " + ConvertPackageName(*import) + "Receiver.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {");
+            WriteLineIndent("if " + ConvertPackageName(*import) + "Client.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);

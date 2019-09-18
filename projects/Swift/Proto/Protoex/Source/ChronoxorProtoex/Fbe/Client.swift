@@ -9,11 +9,8 @@ import ChronoxorProto
 
 // Fast Binary Encoding Protoex client
 open class Client: ChronoxorFbe.ClientProtocol {
-    // Imported senders
-    let ProtoSender: ChronoxorProto.Client
-
-    // Imported receivers
-    let ProtoReceiver: ChronoxorProto.Client?
+    // Imported clients
+    let ProtoClient: ChronoxorProto.Client
 
     // Client sender models accessors
     let OrderMessageSenderModel: OrderMessageModel
@@ -36,8 +33,7 @@ open class Client: ChronoxorFbe.ClientProtocol {
     public var final: Bool = false
 
     public init() {
-        ProtoSender = ChronoxorProto.Client(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
-        ProtoReceiver = ChronoxorProto.Client(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
+        ProtoClient = ChronoxorProto.Client(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
         OrderMessageSenderModel = OrderMessageModel(buffer: sendBuffer)
         OrderMessageReceiverValue = ChronoxorProtoex.OrderMessage()
         OrderMessageReceiverModel = OrderMessageModel()
@@ -51,8 +47,7 @@ open class Client: ChronoxorFbe.ClientProtocol {
     }
 
     public init(sendBuffer: ChronoxorFbe.Buffer, receiveBuffer: ChronoxorFbe.Buffer) {
-        ProtoSender = ChronoxorProto.Client(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
-        ProtoReceiver = ChronoxorProto.Client(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
+        ProtoClient = ChronoxorProto.Client(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
         OrderMessageSenderModel = OrderMessageModel(buffer: sendBuffer)
         OrderMessageReceiverValue = ChronoxorProtoex.OrderMessage()
         OrderMessageReceiverModel = OrderMessageModel()
@@ -79,7 +74,7 @@ open class Client: ChronoxorFbe.ClientProtocol {
 
         // Try to send using imported clients
         var result: Int = 0
-        result = try ProtoSender.send(obj: obj, listener: listener)
+        result = try ProtoClient.send(obj: obj, listener: listener)
         if result > 0 { return result }
 
         return 0
@@ -205,7 +200,7 @@ open class Client: ChronoxorFbe.ClientProtocol {
         default: break
         }
 
-        if let ProtoReceiver = ProtoReceiver, ProtoReceiver.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {
+        if ProtoClient.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {
             return true
         }
 

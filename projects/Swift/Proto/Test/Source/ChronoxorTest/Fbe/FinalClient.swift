@@ -9,11 +9,8 @@ import ChronoxorProto
 
 // Fast Binary Encoding Test final client
 open class FinalClient: ChronoxorFbe.ClientProtocol {
-    // Imported senders
-    let ProtoSender: ChronoxorProto.FinalClient
-
-    // Imported receivers
-    let ProtoReceiver: ChronoxorProto.FinalClient?
+    // Imported clients
+    let ProtoClient: ChronoxorProto.FinalClient
 
     // Client sender models accessors
 
@@ -27,14 +24,12 @@ open class FinalClient: ChronoxorFbe.ClientProtocol {
     public var final: Bool = false
 
     public init() {
-        ProtoSender = ChronoxorProto.FinalClient(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
-        ProtoReceiver = ChronoxorProto.FinalClient(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
+        ProtoClient = ChronoxorProto.FinalClient(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
         build(with: true)
     }
 
     public init(sendBuffer: ChronoxorFbe.Buffer, receiveBuffer: ChronoxorFbe.Buffer) {
-        ProtoSender = ChronoxorProto.FinalClient(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
-        ProtoReceiver = ChronoxorProto.FinalClient(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
+        ProtoClient = ChronoxorProto.FinalClient(sendBuffer: sendBuffer, receiveBuffer: receiveBuffer)
         build(with: sendBuffer, receiveBuffer: receiveBuffer, final: true)
     }
 
@@ -46,7 +41,7 @@ open class FinalClient: ChronoxorFbe.ClientProtocol {
 
         // Try to send using imported clients
         var result: Int = 0
-        result = try ProtoSender.send(obj: obj, listener: listener)
+        result = try ProtoClient.send(obj: obj, listener: listener)
         if result > 0 { return result }
 
         return 0
@@ -64,7 +59,7 @@ open class FinalClient: ChronoxorFbe.ClientProtocol {
         default: break
         }
 
-        if let ProtoReceiver = ProtoReceiver, ProtoReceiver.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {
+        if ProtoClient.onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size) {
             return true
         }
 
