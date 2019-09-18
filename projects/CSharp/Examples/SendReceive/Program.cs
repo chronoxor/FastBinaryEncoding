@@ -2,7 +2,7 @@
 
 namespace SendReceive
 {
-    public class MySender : FBE.proto.Sender
+    public class MySender : FBE.proto.Sender, FBE.proto.ISenderListener
     {
         protected override long OnSend(byte[] buffer, long offset, long size)
         {
@@ -10,19 +10,19 @@ namespace SendReceive
             return 0;
         }
 
-        protected override void OnSendLog(string message)
+        public void OnSendLog(string message)
         {
             Console.WriteLine($"OnSend: {message}");
         }
     }
 
-    public class MyReceiver : FBE.proto.Receiver
+    public class MyReceiver : FBE.proto.Receiver, FBE.proto.IReceiverListener
     {
-        protected override void OnReceive(proto.OrderMessage value) {}
-        protected override void OnReceive(proto.BalanceMessage value) {}
-        protected override void OnReceive(proto.AccountMessage value) {}
+        public void OnReceive(proto.OrderMessage value) {}
+        public void OnReceive(proto.BalanceMessage value) {}
+        public void OnReceive(proto.AccountMessage value) {}
 
-        protected override void OnReceiveLog(string message)
+        public void OnReceiveLog(string message)
         {
             Console.WriteLine($"OnReceive: {message}");
         }

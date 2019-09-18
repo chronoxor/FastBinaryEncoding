@@ -3604,7 +3604,7 @@ void GeneratorKotlin::GenerateFBESender(const std::string& domain, const std::st
     std::string code = R"CODE(
 // Fast Binary Encoding base sender
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class Sender : SenderListener
+abstract class Sender : ISenderListener
 {
     // Get the bytes buffer
     var buffer: Buffer = Buffer()
@@ -3661,7 +3661,7 @@ void GeneratorKotlin::GenerateFBESenderListener(const std::string& domain, const
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
-    CppCommon::Path file = path / "SenderListener.kt";
+    CppCommon::Path file = path / "ISenderListener.kt";
     Open(file);
 
     // Generate headers
@@ -3669,8 +3669,8 @@ void GeneratorKotlin::GenerateFBESenderListener(const std::string& domain, const
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding base sender listener
-interface SenderListener
+// Fast Binary Encoding base sender listener interface
+interface ISenderListener
 {
     // Send log message handler
     fun onSendLog(message: String) {}
@@ -3704,7 +3704,7 @@ void GeneratorKotlin::GenerateFBEReceiver(const std::string& domain, const std::
     std::string code = R"CODE(
 // Fast Binary Encoding base receiver
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class Receiver : ReceiverListener
+abstract class Receiver : IReceiverListener
 {
     // Get the bytes buffer
     var buffer: Buffer = Buffer()
@@ -3990,7 +3990,7 @@ void GeneratorKotlin::GenerateFBEReceiverListener(const std::string& domain, con
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
-    CppCommon::Path file = path / "ReceiverListener.kt";
+    CppCommon::Path file = path / "IReceiverListener.kt";
     Open(file);
 
     // Generate headers
@@ -3998,8 +3998,8 @@ void GeneratorKotlin::GenerateFBEReceiverListener(const std::string& domain, con
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding base receiver listener
-interface ReceiverListener
+// Fast Binary Encoding base receiver listener interface
+interface IReceiverListener
 {
     // Receive log message handler
     fun onReceiveLog(message: String) {}
@@ -4033,7 +4033,7 @@ void GeneratorKotlin::GenerateFBEClient(const std::string& domain, const std::st
     std::string code = R"CODE(
 // Fast Binary Encoding base client
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class Client : ClientListener
+abstract class Client : IClientListener
 {
     // Get the send bytes buffer
     var sendBuffer: Buffer = Buffer()
@@ -4343,7 +4343,7 @@ void GeneratorKotlin::GenerateFBEClientListener(const std::string& domain, const
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
     // Open the file
-    CppCommon::Path file = path / "ClientListener.kt";
+    CppCommon::Path file = path / "IClientListener.kt";
     Open(file);
 
     // Generate headers
@@ -4351,8 +4351,8 @@ void GeneratorKotlin::GenerateFBEClientListener(const std::string& domain, const
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding base client listener
-interface ClientListener : SenderListener, ReceiverListener
+// Fast Binary Encoding base client listener interface
+interface IClientListener : ISenderListener, IReceiverListener
 {
 }
 )CODE";
@@ -6850,7 +6850,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    std::string listener = (final ? "FinalSenderListener" : "SenderListener");
+    std::string listener = (final ? "IFinalSenderListener" : "ISenderListener");
     std::string sender = (final ? "FinalSender" : "Sender");
     std::string model = (final ? "FinalModel" : "Model");
 
@@ -7048,7 +7048,7 @@ void GeneratorKotlin::GenerateSenderListener(const std::shared_ptr<Package>& p, 
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    std::string listener = (final ? "FinalSenderListener" : "SenderListener");
+    std::string listener = (final ? "IFinalSenderListener" : "ISenderListener");
 
     // Open the file
     CppCommon::Path file = path / (listener + ".kt");
@@ -7061,22 +7061,22 @@ void GeneratorKotlin::GenerateSenderListener(const std::shared_ptr<Package>& p, 
     // Generate sender listener begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final sender listener");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final sender listener interface");
     else
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " sender listener");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " sender listener interface");
     WriteIndent("interface " + listener);
     if (p->import)
     {
         bool first = true;
-        WriteIndent(" : ");
+        Write(" : ");
         for (const auto& import : p->import->imports)
         {
-            WriteIndent((first ? "" : ", ") + domain + *import + ".fbe." + listener);
+            Write((first ? "" : ", ") + domain + *import + ".fbe." + listener);
             first = false;
         }
     }
     else
-        WriteIndent(" : " + domain + "fbe.SenderListener");
+        Write(" : " + domain + "fbe.ISenderListener");
     WriteLine();
     WriteLineIndent("{");
     Indent(1);
@@ -7102,7 +7102,7 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    std::string listener = (final ? "FinalReceiverListener" : "ReceiverListener");
+    std::string listener = (final ? "IFinalReceiverListener" : "IReceiverListener");
     std::string receiver = (final ? "FinalReceiver" : "Receiver");
     std::string model = (final ? "FinalModel" : "Model");
 
@@ -7292,7 +7292,7 @@ void GeneratorKotlin::GenerateReceiverListener(const std::shared_ptr<Package>& p
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    std::string listener = (final ? "FinalReceiverListener" : "ReceiverListener");
+    std::string listener = (final ? "IFinalReceiverListener" : "IReceiverListener");
 
     // Open the file
     CppCommon::Path file = path / (listener + ".kt");
@@ -7305,22 +7305,22 @@ void GeneratorKotlin::GenerateReceiverListener(const std::shared_ptr<Package>& p
     // Generate receiver listener begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final receiver listener");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final receiver listener interface");
     else
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " receiver listener");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " receiver listener interface");
     WriteIndent("interface " + listener);
     if (p->import)
     {
         bool first = true;
-        WriteIndent(" : ");
+        Write(" : ");
         for (const auto& import : p->import->imports)
         {
-            WriteIndent((first ? "" : ", ") + domain + *import + ".fbe." + listener);
+            Write((first ? "" : ", ") + domain + *import + ".fbe." + listener);
             first = false;
         }
     }
     else
-        WriteIndent(" : " + domain + "fbe.ReceiverListener");
+        Write(" : " + domain + "fbe.IReceiverListener");
     WriteLine();
     WriteLineIndent("{");
     Indent(1);
@@ -7359,7 +7359,7 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    std::string listener = (final ? "FinalProxyListener" : "ProxyListener");
+    std::string listener = (final ? "IFinalProxyListener" : "IProxyListener");
     std::string proxy = (final ? "FinalProxy" : "Proxy");
     std::string model = (final ? "FinalModel" : "Model");
 
@@ -7522,7 +7522,7 @@ void GeneratorKotlin::GenerateProxyListener(const std::shared_ptr<Package>& p, b
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    std::string listener = (final ? "FinalProxyListener" : "ProxyListener");
+    std::string listener = (final ? "IFinalProxyListener" : "IProxyListener");
     std::string model = (final ? "FinalModel" : "Model");
 
     // Open the file
@@ -7536,9 +7536,9 @@ void GeneratorKotlin::GenerateProxyListener(const std::shared_ptr<Package>& p, b
     // Generate proxy listener begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final proxy listener");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final proxy listener interface");
     else
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " proxy listener");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " proxy listener interface");
     WriteIndent("interface " + listener);
     if (p->import)
     {
@@ -7551,7 +7551,7 @@ void GeneratorKotlin::GenerateProxyListener(const std::shared_ptr<Package>& p, b
         }
     }
     else
-        WriteIndent(" : " + domain + "fbe.ReceiverListener");
+        WriteIndent(" : " + domain + "fbe.IReceiverListener");
     WriteLine();
     WriteLineIndent("{");
     Indent(1);
@@ -7590,7 +7590,7 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    std::string listener = (final ? "FinalClientListener" : "ClientListener");
+    std::string listener = (final ? "IFinalClientListener" : "IClientListener");
     std::string client = (final ? "FinalClient" : "Client");
     std::string model = (final ? "FinalModel" : "Model");
 
@@ -7903,9 +7903,9 @@ void GeneratorKotlin::GenerateClientListener(const std::shared_ptr<Package>& p, 
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    std::string listener = (final ? "FinalClientListener" : "ClientListener");
-    std::string sender = (final ? "FinalSenderListener" : "SenderListener");
-    std::string receiver = (final ? "FinalReceiverListener" : "ReceiverListener");
+    std::string listener = (final ? "IFinalClientListener" : "IClientListener");
+    std::string sender = (final ? "IFinalSenderListener" : "ISenderListener");
+    std::string receiver = (final ? "IFinalReceiverListener" : "IReceiverListener");
 
     // Open the file
     CppCommon::Path file = path / (listener + ".kt");
@@ -7918,23 +7918,23 @@ void GeneratorKotlin::GenerateClientListener(const std::shared_ptr<Package>& p, 
     // Generate client listener begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final client listener");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final client listener interface");
     else
-        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " client listener");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " client listener interface");
     WriteIndent("interface " + listener);
     if (p->import)
     {
         bool first = true;
-        WriteIndent(" : ");
+        Write(" : ");
         for (const auto& import : p->import->imports)
         {
-            WriteIndent((first ? "" : ", ") + domain + *import + ".fbe." + listener);
+            Write((first ? "" : ", ") + domain + *import + ".fbe." + listener);
             first = false;
         }
     }
     else
-        WriteIndent(" : " + domain + "fbe.ClientListener");
-    WriteIndent(", " + sender + ", " + receiver);
+        Write(" : " + domain + "fbe.IClientListener");
+    Write(", " + sender + ", " + receiver);
     WriteLine();
     WriteLineIndent("{");
     Indent(1);

@@ -9,7 +9,7 @@ package com.chronoxor.enums.fbe
 
 // Fast Binary Encoding com.chronoxor.enums final client
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
-open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
+open class FinalClient : com.chronoxor.fbe.Client, IFinalClientListener
 {
     // Client sender models accessors
 
@@ -31,7 +31,7 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
     }
 
     @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
-    fun sendListener(listener: FinalClientListener, obj: Any): Long
+    fun sendListener(listener: IFinalClientListener, obj: Any): Long
     {
 
         return 0
@@ -46,7 +46,7 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
         return onReceiveListener(this, type, buffer, offset, size)
     }
 
-    open fun onReceiveListener(listener: FinalClientListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    open fun onReceiveListener(listener: IFinalClientListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
 
         return false

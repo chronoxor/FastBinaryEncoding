@@ -9,7 +9,7 @@ package com.chronoxor.test.fbe
 
 // Fast Binary Encoding com.chronoxor.test final client
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
-open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
+open class FinalClient : com.chronoxor.fbe.Client, IFinalClientListener
 {
     // Imported senders
     val protoSender: com.chronoxor.proto.fbe.FinalClient
@@ -41,7 +41,7 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
     }
 
     @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
-    fun sendListener(listener: FinalClientListener, obj: Any): Long
+    fun sendListener(listener: IFinalClientListener, obj: Any): Long
     {
 
         // Try to send using imported clients
@@ -63,7 +63,7 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
         return onReceiveListener(this, type, buffer, offset, size)
     }
 
-    open fun onReceiveListener(listener: FinalClientListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    open fun onReceiveListener(listener: IFinalClientListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
 
         if ((protoReceiver != null) && protoReceiver!!.onReceiveListener(listener, type, buffer, offset, size))

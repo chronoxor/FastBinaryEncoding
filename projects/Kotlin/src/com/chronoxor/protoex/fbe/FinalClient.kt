@@ -9,7 +9,7 @@ package com.chronoxor.protoex.fbe
 
 // Fast Binary Encoding com.chronoxor.protoex final client
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
-open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
+open class FinalClient : com.chronoxor.fbe.Client, IFinalClientListener
 {
     // Imported senders
     val protoSender: com.chronoxor.proto.fbe.FinalClient
@@ -68,7 +68,7 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
     }
 
     @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
-    fun sendListener(listener: FinalClientListener, obj: Any): Long
+    fun sendListener(listener: IFinalClientListener, obj: Any): Long
     {
         when (obj)
         {
@@ -92,7 +92,7 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: FinalClientListener, value: com.chronoxor.protoex.OrderMessage): Long
+    fun sendListener(listener: IFinalClientListener, value: com.chronoxor.protoex.OrderMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = OrderMessageSenderModel.serialize(value)
@@ -114,7 +114,7 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: FinalClientListener, value: com.chronoxor.protoex.BalanceMessage): Long
+    fun sendListener(listener: IFinalClientListener, value: com.chronoxor.protoex.BalanceMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = BalanceMessageSenderModel.serialize(value)
@@ -136,7 +136,7 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: FinalClientListener, value: com.chronoxor.protoex.AccountMessage): Long
+    fun sendListener(listener: IFinalClientListener, value: com.chronoxor.protoex.AccountMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = AccountMessageSenderModel.serialize(value)
@@ -162,7 +162,7 @@ open class FinalClient : com.chronoxor.fbe.Client, FinalClientListener
         return onReceiveListener(this, type, buffer, offset, size)
     }
 
-    open fun onReceiveListener(listener: FinalClientListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    open fun onReceiveListener(listener: IFinalClientListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         when (type)
         {

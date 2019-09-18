@@ -4720,8 +4720,13 @@ namespace proto {
 namespace FBE {
 namespace proto {
 
+    // Fast Binary Encoding proto sender listener interface
+    public interface ISenderListener : FBE.ISenderListener
+    {
+    }
+
     // Fast Binary Encoding proto sender
-    public class Sender : FBE.Sender
+    public class Sender : FBE.Sender, ISenderListener
     {
         // Sender models accessors
         public readonly OrderMessageModel OrderMessageModel;
@@ -4741,7 +4746,8 @@ namespace proto {
             AccountMessageModel = new AccountMessageModel(Buffer);
         }
 
-        public long Send(global::proto.OrderMessage value)
+        public long Send(global::proto.OrderMessage value) { return SendListener(this, value); }
+        public long SendListener(ISenderListener listener, global::proto.OrderMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = OrderMessageModel.Serialize(value);
@@ -4752,13 +4758,14 @@ namespace proto {
             if (Logging)
             {
                 string message = value.ToString();
-                OnSendLog(message);
+                listener.OnSendLog(message);
             }
 
             // Send the serialized value
             return SendSerialized(serialized);
         }
-        public long Send(global::proto.BalanceMessage value)
+        public long Send(global::proto.BalanceMessage value) { return SendListener(this, value); }
+        public long SendListener(ISenderListener listener, global::proto.BalanceMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = BalanceMessageModel.Serialize(value);
@@ -4769,13 +4776,14 @@ namespace proto {
             if (Logging)
             {
                 string message = value.ToString();
-                OnSendLog(message);
+                listener.OnSendLog(message);
             }
 
             // Send the serialized value
             return SendSerialized(serialized);
         }
-        public long Send(global::proto.AccountMessage value)
+        public long Send(global::proto.AccountMessage value) { return SendListener(this, value); }
+        public long SendListener(ISenderListener listener, global::proto.AccountMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = AccountMessageModel.Serialize(value);
@@ -4786,7 +4794,7 @@ namespace proto {
             if (Logging)
             {
                 string message = value.ToString();
-                OnSendLog(message);
+                listener.OnSendLog(message);
             }
 
             // Send the serialized value
@@ -4803,8 +4811,17 @@ namespace proto {
 namespace FBE {
 namespace proto {
 
+    // Fast Binary Encoding proto receiver listener interface
+    public interface IReceiverListener : FBE.IReceiverListener
+    {
+        // Receive handlers
+        void OnReceive(global::proto.OrderMessage value) {}
+        void OnReceive(global::proto.BalanceMessage value) {}
+        void OnReceive(global::proto.AccountMessage value) {}
+    }
+
     // Fast Binary Encoding proto receiver
-    public class Receiver : FBE.Receiver
+    public class Receiver : FBE.Receiver, IReceiverListener
     {
         // Receiver values accessors
         private global::proto.OrderMessage OrderMessageValue;
@@ -4835,12 +4852,8 @@ namespace proto {
             AccountMessageModel = new AccountMessageModel();
         }
 
-        // Receive handlers
-        protected virtual void OnReceive(global::proto.OrderMessage value) {}
-        protected virtual void OnReceive(global::proto.BalanceMessage value) {}
-        protected virtual void OnReceive(global::proto.AccountMessage value) {}
-
-        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IReceiverListener listener, long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
@@ -4856,11 +4869,11 @@ namespace proto {
                     if (Logging)
                     {
                         string message = OrderMessageValue.ToString();
-                        OnReceiveLog(message);
+                        listener.OnReceiveLog(message);
                     }
 
                     // Call receive handler with deserialized value
-                    OnReceive(OrderMessageValue);
+                    listener.OnReceive(OrderMessageValue);
                     return true;
                 }
                 case BalanceMessageModel.FBETypeConst:
@@ -4875,11 +4888,11 @@ namespace proto {
                     if (Logging)
                     {
                         string message = BalanceMessageValue.ToString();
-                        OnReceiveLog(message);
+                        listener.OnReceiveLog(message);
                     }
 
                     // Call receive handler with deserialized value
-                    OnReceive(BalanceMessageValue);
+                    listener.OnReceive(BalanceMessageValue);
                     return true;
                 }
                 case AccountMessageModel.FBETypeConst:
@@ -4894,11 +4907,11 @@ namespace proto {
                     if (Logging)
                     {
                         string message = AccountMessageValue.ToString();
-                        OnReceiveLog(message);
+                        listener.OnReceiveLog(message);
                     }
 
                     // Call receive handler with deserialized value
-                    OnReceive(AccountMessageValue);
+                    listener.OnReceive(AccountMessageValue);
                     return true;
                 }
                 default: break;
@@ -4914,8 +4927,17 @@ namespace proto {
 namespace FBE {
 namespace proto {
 
+    // Fast Binary Encoding proto proxy listener interface
+    public interface IProxyListener : FBE.IReceiverListener
+    {
+        // Proxy handlers
+        void OnProxy(OrderMessageModel model, long type, byte[] buffer, long offset, long size) {}
+        void OnProxy(BalanceMessageModel model, long type, byte[] buffer, long offset, long size) {}
+        void OnProxy(AccountMessageModel model, long type, byte[] buffer, long offset, long size) {}
+    }
+
     // Fast Binary Encoding proto proxy
-    public class Proxy : FBE.Receiver
+    public class Proxy : FBE.Receiver, IProxyListener
     {
         // Proxy models accessors
         private readonly OrderMessageModel OrderMessageModel;
@@ -4935,12 +4957,8 @@ namespace proto {
             AccountMessageModel = new AccountMessageModel();
         }
 
-        // Proxy handlers
-        protected virtual void OnProxy(OrderMessageModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(BalanceMessageModel model, long type, byte[] buffer, long offset, long size) {}
-        protected virtual void OnProxy(AccountMessageModel model, long type, byte[] buffer, long offset, long size) {}
-
-        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IProxyListener listener, long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
@@ -4954,7 +4972,7 @@ namespace proto {
                     if (fbeBegin == 0)
                         return false;
                     // Call proxy handler
-                    OnProxy(OrderMessageModel, type, buffer, offset, size);
+                    listener.OnProxy(OrderMessageModel, type, buffer, offset, size);
                     OrderMessageModel.model.GetEnd(fbeBegin);
                     return true;
                 }
@@ -4968,7 +4986,7 @@ namespace proto {
                     if (fbeBegin == 0)
                         return false;
                     // Call proxy handler
-                    OnProxy(BalanceMessageModel, type, buffer, offset, size);
+                    listener.OnProxy(BalanceMessageModel, type, buffer, offset, size);
                     BalanceMessageModel.model.GetEnd(fbeBegin);
                     return true;
                 }
@@ -4982,7 +5000,7 @@ namespace proto {
                     if (fbeBegin == 0)
                         return false;
                     // Call proxy handler
-                    OnProxy(AccountMessageModel, type, buffer, offset, size);
+                    listener.OnProxy(AccountMessageModel, type, buffer, offset, size);
                     AccountMessageModel.model.GetEnd(fbeBegin);
                     return true;
                 }
@@ -4999,8 +5017,13 @@ namespace proto {
 namespace FBE {
 namespace proto {
 
+    // Fast Binary Encoding proto final sender listener interface
+    public interface IFinalSenderListener : FBE.ISenderListener
+    {
+    }
+
     // Fast Binary Encoding proto final sender
-    public class FinalSender : FBE.Sender
+    public class FinalSender : FBE.Sender, IFinalSenderListener
     {
         // Sender models accessors
         public readonly OrderMessageFinalModel OrderMessageModel;
@@ -5020,7 +5043,8 @@ namespace proto {
             AccountMessageModel = new AccountMessageFinalModel(Buffer);
         }
 
-        public long Send(global::proto.OrderMessage value)
+        public long Send(global::proto.OrderMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalSenderListener listener, global::proto.OrderMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = OrderMessageModel.Serialize(value);
@@ -5031,13 +5055,14 @@ namespace proto {
             if (Logging)
             {
                 string message = value.ToString();
-                OnSendLog(message);
+                listener.OnSendLog(message);
             }
 
             // Send the serialized value
             return SendSerialized(serialized);
         }
-        public long Send(global::proto.BalanceMessage value)
+        public long Send(global::proto.BalanceMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalSenderListener listener, global::proto.BalanceMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = BalanceMessageModel.Serialize(value);
@@ -5048,13 +5073,14 @@ namespace proto {
             if (Logging)
             {
                 string message = value.ToString();
-                OnSendLog(message);
+                listener.OnSendLog(message);
             }
 
             // Send the serialized value
             return SendSerialized(serialized);
         }
-        public long Send(global::proto.AccountMessage value)
+        public long Send(global::proto.AccountMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalSenderListener listener, global::proto.AccountMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = AccountMessageModel.Serialize(value);
@@ -5065,7 +5091,7 @@ namespace proto {
             if (Logging)
             {
                 string message = value.ToString();
-                OnSendLog(message);
+                listener.OnSendLog(message);
             }
 
             // Send the serialized value
@@ -5082,8 +5108,17 @@ namespace proto {
 namespace FBE {
 namespace proto {
 
+    // Fast Binary Encoding proto final receiver listener interface
+    public interface IFinalReceiverListener : FBE.IReceiverListener
+    {
+        // Receive handlers
+        void OnReceive(global::proto.OrderMessage value) {}
+        void OnReceive(global::proto.BalanceMessage value) {}
+        void OnReceive(global::proto.AccountMessage value) {}
+    }
+
     // Fast Binary Encoding proto final receiver
-    public class FinalReceiver : FBE.Receiver
+    public class FinalReceiver : FBE.Receiver, IFinalReceiverListener
     {
         // Receiver values accessors
         private global::proto.OrderMessage OrderMessageValue;
@@ -5114,12 +5149,8 @@ namespace proto {
             AccountMessageModel = new AccountMessageFinalModel();
         }
 
-        // Receive handlers
-        protected virtual void OnReceive(global::proto.OrderMessage value) {}
-        protected virtual void OnReceive(global::proto.BalanceMessage value) {}
-        protected virtual void OnReceive(global::proto.AccountMessage value) {}
-
-        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IFinalReceiverListener listener, long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
@@ -5135,11 +5166,11 @@ namespace proto {
                     if (Logging)
                     {
                         string message = OrderMessageValue.ToString();
-                        OnReceiveLog(message);
+                        listener.OnReceiveLog(message);
                     }
 
                     // Call receive handler with deserialized value
-                    OnReceive(OrderMessageValue);
+                    listener.OnReceive(OrderMessageValue);
                     return true;
                 }
                 case BalanceMessageFinalModel.FBETypeConst:
@@ -5154,11 +5185,11 @@ namespace proto {
                     if (Logging)
                     {
                         string message = BalanceMessageValue.ToString();
-                        OnReceiveLog(message);
+                        listener.OnReceiveLog(message);
                     }
 
                     // Call receive handler with deserialized value
-                    OnReceive(BalanceMessageValue);
+                    listener.OnReceive(BalanceMessageValue);
                     return true;
                 }
                 case AccountMessageFinalModel.FBETypeConst:
@@ -5173,11 +5204,11 @@ namespace proto {
                     if (Logging)
                     {
                         string message = AccountMessageValue.ToString();
-                        OnReceiveLog(message);
+                        listener.OnReceiveLog(message);
                     }
 
                     // Call receive handler with deserialized value
-                    OnReceive(AccountMessageValue);
+                    listener.OnReceive(AccountMessageValue);
                     return true;
                 }
                 default: break;

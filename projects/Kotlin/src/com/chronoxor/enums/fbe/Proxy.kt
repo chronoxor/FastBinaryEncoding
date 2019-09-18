@@ -9,7 +9,7 @@ package com.chronoxor.enums.fbe
 
 // Fast Binary Encoding com.chronoxor.enums proxy
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
-open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
+open class Proxy : com.chronoxor.fbe.Receiver, IProxyListener
 {
     // Proxy models accessors
 
@@ -26,7 +26,7 @@ open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
         return onReceiveListener(this, type, buffer, offset, size)
     }
 
-    open fun onReceiveListener(listener: ProxyListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    open fun onReceiveListener(listener: IProxyListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
 
         return false

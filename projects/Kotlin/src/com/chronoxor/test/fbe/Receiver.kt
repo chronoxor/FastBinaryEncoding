@@ -9,7 +9,7 @@ package com.chronoxor.test.fbe
 
 // Fast Binary Encoding com.chronoxor.test receiver
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
-open class Receiver : com.chronoxor.fbe.Receiver, ReceiverListener
+open class Receiver : com.chronoxor.fbe.Receiver, IReceiverListener
 {
     // Imported receivers
     var protoReceiver: com.chronoxor.proto.fbe.Receiver? = null
@@ -33,7 +33,7 @@ open class Receiver : com.chronoxor.fbe.Receiver, ReceiverListener
         return onReceiveListener(this, type, buffer, offset, size)
     }
 
-    open fun onReceiveListener(listener: ReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    open fun onReceiveListener(listener: IReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
 
         if ((protoReceiver != null) && protoReceiver!!.onReceiveListener(listener, type, buffer, offset, size))

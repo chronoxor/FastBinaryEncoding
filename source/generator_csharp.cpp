@@ -3138,8 +3138,15 @@ void GeneratorCSharp::GenerateFBEFinalModelMap(bool valueTypeKey, bool valueType
 void GeneratorCSharp::GenerateFBESender()
 {
     std::string code = R"CODE(
+    // Fast Binary Encoding base sender listener interface
+    public interface ISenderListener
+    {
+        // Send log message handler
+        void OnSendLog(string message) {}
+    }
+
     // Fast Binary Encoding base sender
-    public abstract class Sender
+    public abstract class Sender : ISenderListener
     {
         // Bytes buffer
         public Buffer Buffer { get; }
@@ -3174,8 +3181,6 @@ void GeneratorCSharp::GenerateFBESender()
 
         // Send message handler
         protected abstract long OnSend(byte[] buffer, long offset, long size);
-        // Send log message handler
-        protected virtual void OnSendLog(string message) {}
     }
 )CODE";
 
@@ -3188,8 +3193,15 @@ void GeneratorCSharp::GenerateFBESender()
 void GeneratorCSharp::GenerateFBEReceiver()
 {
     std::string code = R"CODE(
+    // Fast Binary Encoding base receiver listener interface
+    public interface IReceiverListener
+    {
+        // Receive log message handler
+        void OnReceiveLog(string message) {}
+    }
+
     // Fast Binary Encoding base receiver
-    public abstract class Receiver
+    public abstract class Receiver : IReceiverListener
     {
         // Bytes buffer
         public Buffer Buffer { get; private set; }
@@ -3451,8 +3463,6 @@ void GeneratorCSharp::GenerateFBEReceiver()
 
         // Receive message handler
         internal abstract bool OnReceive(long type, byte[] buffer, long offset, long size);
-        // Receive log message handler
-        protected virtual void OnReceiveLog(string message) {}
     }
 )CODE";
 
@@ -6146,6 +6156,34 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
 
     std::string sender = (final ? "FinalSender" : "Sender");
     std::string model = (final ? "FinalModel" : "Model");
+    std::string listener = "I" + sender + "Listener";
+
+    // Generate sender listener begin
+    WriteLine();
+    if (final)
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender listener interface");
+    else
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender listener interface");
+    WriteIndent("public interface " + listener);
+    if (p->import)
+    {
+        bool first = true;
+        Write(" : ");
+        for (const auto& import : p->import->imports)
+        {
+            Write(std::string(first ? "" : ", ") + "FBE." + *import + "." + listener);
+            first = false;
+        }
+    }
+    else
+        Write(" : FBE.ISenderListener");
+    WriteLine();
+    WriteLineIndent("{");
+    Indent(1);
+
+    // Generate sender listener end
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate sender begin
     WriteLine();
@@ -6153,7 +6191,7 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender");
     else
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender");
-    WriteLineIndent("public class " + sender + " : FBE.Sender");
+    WriteLineIndent("public class " + sender + " : FBE.Sender, " + listener);
     WriteLineIndent("{");
     Indent(1);
 
@@ -6219,7 +6257,8 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
             if (s->message)
             {
                 std::string struct_name = "global::" + *p->name + "." + *s->name;
-                WriteLineIndent("public long Send(" + struct_name + " value)");
+                WriteLineIndent("public long Send(" + struct_name + " value) { return SendListener(this, value); }");
+                WriteLineIndent("public long SendListener(" + listener + " listener, " + struct_name + " value)");
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("// Serialize the value into the FBE stream");
@@ -6232,7 +6271,7 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("string message = value.ToString();");
-                WriteLineIndent("OnSendLog(message);");
+                WriteLineIndent("listener.OnSendLog(message);");
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLine();
@@ -6270,6 +6309,48 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
 
     std::string receiver = (final ? "FinalReceiver" : "Receiver");
     std::string model = (final ? "FinalModel" : "Model");
+    std::string listener = "I" + receiver + "Listener";
+
+    // Generate receiver listener begin
+    WriteLine();
+    if (final)
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver listener interface");
+    else
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver listener interface");
+    WriteIndent("public interface " + listener);
+    if (p->import)
+    {
+        bool first = true;
+        Write(" : ");
+        for (const auto& import : p->import->imports)
+        {
+            Write(std::string(first ? "" : ", ") + "FBE." + *import + "." + listener);
+            first = false;
+        }
+    }
+    else
+        Write(" : FBE.IReceiverListener");
+    WriteLine();
+    WriteLineIndent("{");
+    Indent(1);
+
+    // Generate receiver handlers
+    if (p->body)
+    {
+        WriteLineIndent("// Receive handlers");
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                WriteLineIndent("void OnReceive(" + struct_name + " value) {}");
+            }
+        }
+    }
+
+    // Generate receiver listener end
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate receiver begin
     WriteLine();
@@ -6277,7 +6358,7 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver");
     else
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver");
-    WriteLineIndent("public class " + receiver + " : FBE.Receiver");
+    WriteLineIndent("public class " + receiver + " : FBE.Receiver, " + listener);
     WriteLineIndent("{");
     Indent(1);
 
@@ -6357,23 +6438,9 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     WriteLineIndent("}");
     WriteLine();
 
-    // Generate receiver handlers
-    if (p->body)
-    {
-        WriteLineIndent("// Receive handlers");
-        for (const auto& s : p->body->structs)
-        {
-            if (s->message)
-            {
-                std::string struct_name = "global::" + *p->name + "." + *s->name;
-                WriteLineIndent("protected virtual void OnReceive(" + struct_name + " value) {}");
-            }
-        }
-        WriteLine();
-    }
-
     // Generate receiver message handler
-    WriteLineIndent("internal override bool OnReceive(long type, byte[] buffer, long offset, long size)");
+    WriteLineIndent("internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }");
+    WriteLineIndent("internal bool OnReceiveListener(" + listener + " listener, long type, byte[] buffer, long offset, long size)");
     WriteLineIndent("{");
     Indent(1);
     if (p->body)
@@ -6399,12 +6466,12 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("string message = " + *s->name + "Value.ToString();");
-                WriteLineIndent("OnReceiveLog(message);");
+                WriteLineIndent("listener.OnReceiveLog(message);");
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLine();
                 WriteLineIndent("// Call receive handler with deserialized value");
-                WriteLineIndent("OnReceive(" + *s->name + "Value);");
+                WriteLineIndent("listener.OnReceive(" + *s->name + "Value);");
                 WriteLineIndent("return true;");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -6451,6 +6518,48 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
 
     std::string proxy = (final ? "FinalProxy" : "Proxy");
     std::string model = (final ? "FinalModel" : "Model");
+    std::string listener = "I" + proxy + "Listener";
+
+    // Generate proxy listener begin
+    WriteLine();
+    if (final)
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final proxy listener interface");
+    else
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " proxy listener interface");
+    WriteIndent("public interface " + listener);
+    if (p->import)
+    {
+        bool first = true;
+        Write(" : ");
+        for (const auto& import : p->import->imports)
+        {
+            Write(std::string(first ? "" : ", ") + "FBE." + *import + "." + listener);
+            first = false;
+        }
+    }
+    else
+        Write(" : FBE.IReceiverListener");
+    WriteLine();
+    WriteLineIndent("{");
+    Indent(1);
+
+    // Generate proxy handlers
+    if (p->body)
+    {
+        WriteLineIndent("// Proxy handlers");
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_model = *s->name + model;
+                WriteLineIndent("void OnProxy(" + struct_model + " model, long type, byte[] buffer, long offset, long size) {}");
+            }
+        }
+    }
+
+    // Generate proxy listener end
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate proxy begin
     WriteLine();
@@ -6458,7 +6567,7 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " final proxy");
     else
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " proxy");
-    WriteLineIndent("public class " + proxy + " : FBE.Receiver");
+    WriteLineIndent("public class " + proxy + " : FBE.Receiver, " + listener);
     WriteLineIndent("{");
     Indent(1);
 
@@ -6516,23 +6625,9 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("}");
     WriteLine();
 
-    // Generate proxy handlers
-    if (p->body)
-    {
-        WriteLineIndent("// Proxy handlers");
-        for (const auto& s : p->body->structs)
-        {
-            if (s->message)
-            {
-                std::string struct_model = *s->name + model;
-                WriteLineIndent("protected virtual void OnProxy(" + struct_model + " model, long type, byte[] buffer, long offset, long size) {}");
-            }
-        }
-        WriteLine();
-    }
-
     // Generate proxy message handler
-    WriteLineIndent("internal override bool OnReceive(long type, byte[] buffer, long offset, long size)");
+    WriteLineIndent("internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }");
+    WriteLineIndent("internal bool OnReceiveListener(" + listener + " listener, long type, byte[] buffer, long offset, long size)");
     WriteLineIndent("{");
     Indent(1);
     if (p->body)
@@ -6557,7 +6652,7 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
                 WriteLineIndent("return false;");
                 Indent(-1);
                 WriteLineIndent("// Call proxy handler");
-                WriteLineIndent("OnProxy(" + *s->name + "Model, type, buffer, offset, size);");
+                WriteLineIndent("listener.OnProxy(" + *s->name + "Model, type, buffer, offset, size);");
                 WriteLineIndent(*s->name + "Model.model.GetEnd(fbeBegin);");
                 WriteLineIndent("return true;");
                 Indent(-1);

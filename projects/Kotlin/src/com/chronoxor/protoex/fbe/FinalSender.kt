@@ -9,7 +9,7 @@ package com.chronoxor.protoex.fbe
 
 // Fast Binary Encoding com.chronoxor.protoex final sender
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
-open class FinalSender : com.chronoxor.fbe.Sender, FinalSenderListener
+open class FinalSender : com.chronoxor.fbe.Sender, IFinalSenderListener
 {
     // Imported senders
     val protoSender: com.chronoxor.proto.fbe.FinalSender
@@ -41,7 +41,7 @@ open class FinalSender : com.chronoxor.fbe.Sender, FinalSenderListener
     }
 
     @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
-    fun sendListener(listener: FinalSenderListener, obj: Any): Long
+    fun sendListener(listener: IFinalSenderListener, obj: Any): Long
     {
         when (obj)
         {
@@ -65,7 +65,7 @@ open class FinalSender : com.chronoxor.fbe.Sender, FinalSenderListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: FinalSenderListener, value: com.chronoxor.protoex.OrderMessage): Long
+    fun sendListener(listener: IFinalSenderListener, value: com.chronoxor.protoex.OrderMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = OrderMessageModel.serialize(value)
@@ -87,7 +87,7 @@ open class FinalSender : com.chronoxor.fbe.Sender, FinalSenderListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: FinalSenderListener, value: com.chronoxor.protoex.BalanceMessage): Long
+    fun sendListener(listener: IFinalSenderListener, value: com.chronoxor.protoex.BalanceMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = BalanceMessageModel.serialize(value)
@@ -109,7 +109,7 @@ open class FinalSender : com.chronoxor.fbe.Sender, FinalSenderListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: FinalSenderListener, value: com.chronoxor.protoex.AccountMessage): Long
+    fun sendListener(listener: IFinalSenderListener, value: com.chronoxor.protoex.AccountMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = AccountMessageModel.serialize(value)

@@ -9,7 +9,7 @@ package com.chronoxor.fbe
 
 // Fast Binary Encoding base receiver
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class Receiver : ReceiverListener
+abstract class Receiver : IReceiverListener
 {
     // Get the bytes buffer
     var buffer: Buffer = Buffer()

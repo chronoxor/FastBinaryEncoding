@@ -9,7 +9,7 @@ package com.chronoxor.protoex.fbe
 
 // Fast Binary Encoding com.chronoxor.protoex sender
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
-open class Sender : com.chronoxor.fbe.Sender, SenderListener
+open class Sender : com.chronoxor.fbe.Sender, ISenderListener
 {
     // Imported senders
     val protoSender: com.chronoxor.proto.fbe.Sender
@@ -41,7 +41,7 @@ open class Sender : com.chronoxor.fbe.Sender, SenderListener
     }
 
     @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
-    fun sendListener(listener: SenderListener, obj: Any): Long
+    fun sendListener(listener: ISenderListener, obj: Any): Long
     {
         when (obj)
         {
@@ -65,7 +65,7 @@ open class Sender : com.chronoxor.fbe.Sender, SenderListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: SenderListener, value: com.chronoxor.protoex.OrderMessage): Long
+    fun sendListener(listener: ISenderListener, value: com.chronoxor.protoex.OrderMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = OrderMessageModel.serialize(value)
@@ -87,7 +87,7 @@ open class Sender : com.chronoxor.fbe.Sender, SenderListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: SenderListener, value: com.chronoxor.protoex.BalanceMessage): Long
+    fun sendListener(listener: ISenderListener, value: com.chronoxor.protoex.BalanceMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = BalanceMessageModel.serialize(value)
@@ -109,7 +109,7 @@ open class Sender : com.chronoxor.fbe.Sender, SenderListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: SenderListener, value: com.chronoxor.protoex.AccountMessage): Long
+    fun sendListener(listener: ISenderListener, value: com.chronoxor.protoex.AccountMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = AccountMessageModel.serialize(value)

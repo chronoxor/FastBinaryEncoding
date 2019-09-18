@@ -5763,8 +5763,13 @@ namespace enums {
 namespace FBE {
 namespace enums {
 
+    // Fast Binary Encoding enums sender listener interface
+    public interface ISenderListener : FBE.ISenderListener
+    {
+    }
+
     // Fast Binary Encoding enums sender
-    public class Sender : FBE.Sender
+    public class Sender : FBE.Sender, ISenderListener
     {
         // Sender models accessors
 
@@ -5786,8 +5791,14 @@ namespace enums {
 namespace FBE {
 namespace enums {
 
+    // Fast Binary Encoding enums receiver listener interface
+    public interface IReceiverListener : FBE.IReceiverListener
+    {
+        // Receive handlers
+    }
+
     // Fast Binary Encoding enums receiver
-    public class Receiver : FBE.Receiver
+    public class Receiver : FBE.Receiver, IReceiverListener
     {
         // Receiver values accessors
 
@@ -5800,9 +5811,8 @@ namespace enums {
         {
         }
 
-        // Receive handlers
-
-        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IReceiverListener listener, long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
@@ -5819,8 +5829,14 @@ namespace enums {
 namespace FBE {
 namespace enums {
 
+    // Fast Binary Encoding enums proxy listener interface
+    public interface IProxyListener : FBE.IReceiverListener
+    {
+        // Proxy handlers
+    }
+
     // Fast Binary Encoding enums proxy
-    public class Proxy : FBE.Receiver
+    public class Proxy : FBE.Receiver, IProxyListener
     {
         // Proxy models accessors
 
@@ -5831,9 +5847,8 @@ namespace enums {
         {
         }
 
-        // Proxy handlers
-
-        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IProxyListener listener, long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
@@ -5850,8 +5865,13 @@ namespace enums {
 namespace FBE {
 namespace enums {
 
+    // Fast Binary Encoding enums final sender listener interface
+    public interface IFinalSenderListener : FBE.ISenderListener
+    {
+    }
+
     // Fast Binary Encoding enums final sender
-    public class FinalSender : FBE.Sender
+    public class FinalSender : FBE.Sender, IFinalSenderListener
     {
         // Sender models accessors
 
@@ -5873,8 +5893,14 @@ namespace enums {
 namespace FBE {
 namespace enums {
 
+    // Fast Binary Encoding enums final receiver listener interface
+    public interface IFinalReceiverListener : FBE.IReceiverListener
+    {
+        // Receive handlers
+    }
+
     // Fast Binary Encoding enums final receiver
-    public class FinalReceiver : FBE.Receiver
+    public class FinalReceiver : FBE.Receiver, IFinalReceiverListener
     {
         // Receiver values accessors
 
@@ -5887,9 +5913,8 @@ namespace enums {
         {
         }
 
-        // Receive handlers
-
-        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IFinalReceiverListener listener, long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {

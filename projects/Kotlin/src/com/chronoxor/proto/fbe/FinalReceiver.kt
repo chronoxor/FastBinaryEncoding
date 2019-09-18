@@ -9,7 +9,7 @@ package com.chronoxor.proto.fbe
 
 // Fast Binary Encoding com.chronoxor.proto final receiver
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
-open class FinalReceiver : com.chronoxor.fbe.Receiver, FinalReceiverListener
+open class FinalReceiver : com.chronoxor.fbe.Receiver, IFinalReceiverListener
 {
     // Receiver values accessors
     private val OrderMessageValue: com.chronoxor.proto.OrderMessage
@@ -46,7 +46,7 @@ open class FinalReceiver : com.chronoxor.fbe.Receiver, FinalReceiverListener
         return onReceiveListener(this, type, buffer, offset, size)
     }
 
-    open fun onReceiveListener(listener: FinalReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    open fun onReceiveListener(listener: IFinalReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         when (type)
         {

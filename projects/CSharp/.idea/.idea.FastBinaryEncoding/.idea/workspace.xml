@@ -1,11 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2e46b070-39ae-4a9c-ad72-9d071bc18831" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Benchmarks/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/App.config" afterDir="false" />
+    <list default="true" id="edfd070c-0d53-4afa-88cb-34dff2e2435b" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_swift.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_swift.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/projectSettingsUpdater.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/Benchmarks.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/SendReceive.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/Serialization.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/SerializationFinal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/SerializationJson.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Create/Create.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Create/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Print/Print.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Print/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/PrintJson/PrintJson.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/PrintJson/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SendReceive/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SendReceive/SendReceive.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Serialization/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Serialization/Serialization.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SerializationFinal/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SerializationFinal/SerializationFinal.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SerializationJson/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SerializationJson/SerializationJson.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/FastBinaryEncoding.sln" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/Proto.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/lib/Utf8Json.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/lib/Utf8Json.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Clone.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Create.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Decimal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Enums.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Extending.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Serialization.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SerializationFinal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SerializationJson.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Tests.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Benchmarks/App.config" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Benchmarks/Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/Benchmarks.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Benchmarks/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/packages.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Benchmarks/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Benchmarks/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/SendReceive.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Benchmarks/packages.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Create/App.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Create/Create.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Create/Create.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Create/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Print/App.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Print/Print.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Print/Print.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Print/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/PrintJson/App.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/PrintJson/PrintJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/PrintJson/PrintJson.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/PrintJson/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SendReceive/App.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SendReceive/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SendReceive/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SendReceive/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SendReceive/SendReceive.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SendReceive/SendReceive.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Serialization/App.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Serialization/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/Serialization/Serialization.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Serialization/Serialization.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SerializationFinal/App.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SerializationFinal/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SerializationFinal/SerializationFinal.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SerializationFinal/SerializationFinal.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SerializationJson/App.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SerializationJson/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SerializationJson/SerializationJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SerializationJson/SerializationJson.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/SerializationJson/packages.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/Proto.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/app.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/enums.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/fbe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/lib/System.Threading.Tasks.Extensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/lib/System.ValueTuple.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/packages.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/proto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/protoex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Clone.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Clone.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Create.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Create.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Decimal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Decimal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Enums.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Extending.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Extending.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SendReceive.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SendReceiveFinal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Serialization.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/SerializationFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SerializationFinal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/SerializationJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SerializationJson.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/app.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/packages.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Client.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/ClientListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalClient.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalClientListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalReceiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalReceiverListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalSender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalSender.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalSenderListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Proxy.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/ProxyListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Receiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/ReceiverListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Sender.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/SenderListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Client.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/ClientListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Receiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/ReceiverListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Sender.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/SenderListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Client.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/ClientListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalClient.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalClientListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalReceiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalReceiverListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalSender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalSender.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalSenderListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Proxy.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/ProxyListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Receiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/ReceiverListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Sender.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/SenderListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Client.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/ClientListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalClient.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalClientListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalReceiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalReceiverListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalSender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalSender.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalSenderListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Proxy.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/ProxyListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Receiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/ReceiverListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Sender.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/SenderListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Client.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/ClientListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalClient.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalClientListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalReceiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalReceiverListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalSender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalSender.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalSenderListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Proxy.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/ProxyListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Receiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/ReceiverListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Sender.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/SenderListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Swift/Proto/Fbe/Package.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Swift/Proto/Fbe/Package.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Swift/Proto/Fbe/Source/ChronoxorFbe/Buffer.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Swift/Proto/Fbe/Source/ChronoxorFbe/Buffer.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,43 +186,48 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>json</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Proto/test.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Tests/Serialization.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Tests/SerializationFinal.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Tests/SerializationJson.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Proto/fbe.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Tests/SendReceive.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Proto/protoex.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Proto/enums.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Proto/fbe.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Proto/proto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Proto/test.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Benchmarks/Serialization.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/Serialization.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Examples/Print/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/Enums.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/SendReceiveFinal.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/SerializationJson.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Examples/PrintJson/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/SendReceive.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Benchmarks/App.config" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Tests/Serialization.cs" />
         <option value="$PROJECT_DIR$/Tests/SerializationJson.cs" />
-        <option value="$PROJECT_DIR$/Tests/SerializationFinal.cs" />
-        <option value="$PROJECT_DIR$/Proto/fbe.cs" />
+        <option value="$PROJECT_DIR$/Tests/Serialization.cs" />
+        <option value="$PROJECT_DIR$/Examples/Print/Program.cs" />
+        <option value="$PROJECT_DIR$/Proto/proto.cs" />
+        <option value="$PROJECT_DIR$/Tests/Enums.cs" />
+        <option value="$PROJECT_DIR$/Tests/SendReceive.cs" />
+        <option value="$PROJECT_DIR$/Tests/SendReceiveFinal.cs" />
         <option value="$PROJECT_DIR$/Proto/test.cs" />
       </list>
     </option>
   </component>
-  <component name="ProjectId" id="1QQ4xKqFdu7wyEWCUFsqBZZZeAS" />
+  <component name="ProjectId" id="1QQ3v5b1J9dLSXKB1kSE56ePaYp" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="RiderUnitTestingPageId" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Proto/lib/Utf8Json.dll" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -65,45 +243,27 @@
   </component>
   <component name="RunManager" selected=".NET Project.Examples\SerializationJson">
     <configuration name="Default" type="DotNetProject" factoryName=".NET Project">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/Serialization/bin/Release/Serialization.exe" />
+      <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/Serialization/bin/Release" />
+      <option name="WORKING_DIRECTORY" value="" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
-      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Examples/Serialization/Serialization.csproj" />
+      <option name="PROJECT_PATH" value="" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
-      <option name="PROJECT_KIND" value="Console" />
-      <option name="PROJECT_TFM" value=".NETFramework,Version=v4.6" />
-      <method v="2">
-        <option name="Build" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Examples\Print" type="DotNetProject" factoryName=".NET Project" temporary="true">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/Print/bin/Release/Print.exe" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/Print/bin/Release" />
-      <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <option name="USE_MONO" value="0" />
-      <option name="RUNTIME_ARGUMENTS" value="" />
-      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Examples/Print/Print.csproj" />
-      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
-      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
-      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
-      <option name="PROJECT_KIND" value="Console" />
-      <option name="PROJECT_TFM" value=".NETFramework,Version=v4.6" />
+      <option name="PROJECT_KIND" value="None" />
+      <option name="PROJECT_TFM" value="" />
       <method v="2">
         <option name="Build" enabled="true" />
       </method>
     </configuration>
     <configuration name="Examples\PrintJson" type="DotNetProject" factoryName=".NET Project" temporary="true">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/PrintJson/bin/Debug/PrintJson.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/PrintJson/bin/Debug/netcoreapp3.0/PrintJson.dll" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/PrintJson/bin/Debug" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/PrintJson/bin/Debug/netcoreapp3.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
@@ -112,16 +272,16 @@
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
-      <option name="PROJECT_KIND" value="Console" />
-      <option name="PROJECT_TFM" value=".NETFramework,Version=v4.6" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v3.0" />
       <method v="2">
         <option name="Build" enabled="true" />
       </method>
     </configuration>
     <configuration name="Examples\SendReceive" type="DotNetProject" factoryName=".NET Project" temporary="true">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/SendReceive/bin/Debug/SendReceive.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/SendReceive/bin/Debug/netcoreapp3.0/SendReceive.dll" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/SendReceive/bin/Debug" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/SendReceive/bin/Debug/netcoreapp3.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
@@ -130,16 +290,34 @@
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
-      <option name="PROJECT_KIND" value="Console" />
-      <option name="PROJECT_TFM" value=".NETFramework,Version=v4.8" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v3.0" />
+      <method v="2">
+        <option name="Build" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Examples\Serialization" type="DotNetProject" factoryName=".NET Project" temporary="true">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/Serialization/bin/Debug/netcoreapp3.0/Serialization.dll" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/Serialization/bin/Debug/netcoreapp3.0" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Examples/Serialization/Serialization.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v3.0" />
       <method v="2">
         <option name="Build" enabled="true" />
       </method>
     </configuration>
     <configuration name="Examples\SerializationFinal" type="DotNetProject" factoryName=".NET Project" temporary="true">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/SerializationFinal/bin/Debug/SerializationFinal.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/SerializationFinal/bin/Debug/netcoreapp3.0/SerializationFinal.dll" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/SerializationFinal/bin/Debug" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/SerializationFinal/bin/Debug/netcoreapp3.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
@@ -148,16 +326,16 @@
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
-      <option name="PROJECT_KIND" value="Console" />
-      <option name="PROJECT_TFM" value=".NETFramework,Version=v4.8" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v3.0" />
       <method v="2">
         <option name="Build" enabled="true" />
       </method>
     </configuration>
     <configuration name="Examples\SerializationJson" type="DotNetProject" factoryName=".NET Project" temporary="true">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/SerializationJson/bin/Debug/SerializationJson.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/SerializationJson/bin/Debug/netcoreapp3.0/SerializationJson.dll" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/SerializationJson/bin/Debug" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/SerializationJson/bin/Debug/netcoreapp3.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
@@ -166,8 +344,8 @@
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
-      <option name="PROJECT_KIND" value="Console" />
-      <option name="PROJECT_TFM" value=".NETFramework,Version=v4.8" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value=".NETCoreApp,Version=v3.0" />
       <method v="2">
         <option name="Build" enabled="true" />
       </method>
@@ -175,8 +353,8 @@
     <list>
       <item itemvalue=".NET Project.Default" />
       <item itemvalue=".NET Project.Examples\PrintJson" />
-      <item itemvalue=".NET Project.Examples\Print" />
       <item itemvalue=".NET Project.Examples\SendReceive" />
+      <item itemvalue=".NET Project.Examples\Serialization" />
       <item itemvalue=".NET Project.Examples\SerializationFinal" />
       <item itemvalue=".NET Project.Examples\SerializationJson" />
     </list>
@@ -184,9 +362,9 @@
       <list>
         <item itemvalue=".NET Project.Examples\SerializationJson" />
         <item itemvalue=".NET Project.Examples\SerializationFinal" />
+        <item itemvalue=".NET Project.Examples\Serialization" />
         <item itemvalue=".NET Project.Examples\SendReceive" />
         <item itemvalue=".NET Project.Examples\PrintJson" />
-        <item itemvalue=".NET Project.Examples\Print" />
       </list>
     </recent_temporary>
   </component>
@@ -195,54 +373,51 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2e46b070-39ae-4a9c-ad72-9d071bc18831" name="Default Changelist" comment="" />
-      <created>1538594957348</created>
+      <changelist id="edfd070c-0d53-4afa-88cb-34dff2e2435b" name="Default" comment="" />
+      <created>1538171596273</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1538594957348</updated>
-      <workItem from="1538594959625" duration="45000" />
-      <workItem from="1539975712908" duration="620000" />
-      <workItem from="1542900650278" duration="899000" />
-      <workItem from="1543192699474" duration="4329000" />
-      <workItem from="1543227824168" duration="11605000" />
-      <workItem from="1543356183911" duration="15000" />
-      <workItem from="1543356226890" duration="34000" />
-      <workItem from="1543356263623" duration="12000" />
-      <workItem from="1543356313070" duration="2433000" />
-      <workItem from="1543453963191" duration="58000" />
-      <workItem from="1543926859952" duration="198000" />
-      <workItem from="1544199241668" duration="105000" />
-      <workItem from="1545573286907" duration="38000" />
-      <workItem from="1545680776065" duration="44000" />
-      <workItem from="1550793142520" duration="33000" />
-      <workItem from="1550793185758" duration="10000" />
-      <workItem from="1551385954338" duration="30000" />
-      <workItem from="1551807691979" duration="27000" />
-      <workItem from="1551874479777" duration="20000" />
-      <workItem from="1551893796418" duration="34000" />
-      <workItem from="1551894027625" duration="20000" />
-      <workItem from="1551895584280" duration="62000" />
-      <workItem from="1552521844639" duration="29000" />
-      <workItem from="1553269499847" duration="32000" />
-      <workItem from="1553269566953" duration="25000" />
-      <workItem from="1554679108929" duration="40000" />
-      <workItem from="1554722851869" duration="226000" />
-      <workItem from="1554723129517" duration="84000" />
-      <workItem from="1556499725628" duration="255000" />
-      <workItem from="1561235872784" duration="6000" />
-      <workItem from="1561235891063" duration="712000" />
-      <workItem from="1561236720770" duration="211000" />
-      <workItem from="1561236940319" duration="918000" />
-      <workItem from="1561238747960" duration="209000" />
-      <workItem from="1562102805758" duration="26000" />
-      <workItem from="1562797931991" duration="148000" />
-      <workItem from="1563399818012" duration="30000" />
-      <workItem from="1563400151953" duration="240000" />
-      <workItem from="1563401005543" duration="82000" />
-      <workItem from="1564356504765" duration="179000" />
-      <workItem from="1567689732548" duration="159000" />
-      <workItem from="1567691732094" duration="86000" />
-      <workItem from="1567694837594" duration="77000" />
+      <updated>1538171596273</updated>
+      <workItem from="1538171599821" duration="646000" />
+      <workItem from="1538592850345" duration="40000" />
+      <workItem from="1539797978382" duration="52000" />
+      <workItem from="1539798104264" duration="1812000" />
+      <workItem from="1539848931285" duration="2771000" />
+      <workItem from="1539975676863" duration="33000" />
+      <workItem from="1542900595316" duration="52000" />
+      <workItem from="1543241770049" duration="1284000" />
+      <workItem from="1543355272275" duration="906000" />
+      <workItem from="1543356202124" duration="19000" />
+      <workItem from="1543356280908" duration="29000" />
+      <workItem from="1543453895585" duration="62000" />
+      <workItem from="1543926660292" duration="192000" />
+      <workItem from="1544198430259" duration="803000" />
+      <workItem from="1545573145873" duration="134000" />
+      <workItem from="1545679783740" duration="662000" />
+      <workItem from="1550793049129" duration="86000" />
+      <workItem from="1551385848363" duration="100000" />
+      <workItem from="1551807490762" duration="195000" />
+      <workItem from="1551892789817" duration="1002000" />
+      <workItem from="1551893985231" duration="36000" />
+      <workItem from="1551895545926" duration="36000" />
+      <workItem from="1552521531210" duration="310000" />
+      <workItem from="1553269536151" duration="28000" />
+      <workItem from="1554679030670" duration="74000" />
+      <workItem from="1554722792898" duration="54000" />
+      <workItem from="1554723081081" duration="45000" />
+      <workItem from="1556499383395" duration="338000" />
+      <workItem from="1561235756633" duration="110000" />
+      <workItem from="1561235882345" duration="5000" />
+      <workItem from="1561236608783" duration="108000" />
+      <workItem from="1562102761653" duration="41000" />
+      <workItem from="1562796672868" duration="1245000" />
+      <workItem from="1563401440427" duration="89000" />
+      <workItem from="1564356305501" duration="187000" />
+      <workItem from="1567689224401" duration="500000" />
+      <workItem from="1567691593304" duration="132000" />
+      <workItem from="1567694627894" duration="81000" />
+      <workItem from="1567694778634" duration="53000" />
+      <workItem from="1568812910194" duration="267000" />
     </task>
     <servers />
   </component>
@@ -274,45 +449,6 @@
           <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Tests/SerializationJson.cs</url>
-          <line>703</line>
-          <properties documentPath="$PROJECT_DIR$/Tests/SerializationJson.cs" initialLine="703">
-            <startOffsets>
-              <option value="50500" />
-            </startOffsets>
-            <endOffsets>
-              <option value="50546" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Tests/SerializationJson.cs</url>
-          <line>66</line>
-          <properties documentPath="$PROJECT_DIR$/Tests/SerializationJson.cs" initialLine="66">
-            <startOffsets>
-              <option value="4216" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4263" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Tests/SerializationJson.cs</url>
-          <line>409</line>
-          <properties documentPath="$PROJECT_DIR$/Tests/SerializationJson.cs" initialLine="409">
-            <startOffsets>
-              <option value="29545" />
-            </startOffsets>
-            <endOffsets>
-              <option value="29592" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

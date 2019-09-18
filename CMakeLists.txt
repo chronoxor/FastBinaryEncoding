@@ -89,7 +89,6 @@ if(NOT FBEC_MODULE)
       OUTPUT ${FBE_OUTPUT_FILE}
       COMMAND $<TARGET_FILE:fbec> --cpp --final --json --proto --input ${FBE_INPUT_FILE} --output ${FBE_OUTPUT_DIR}
       COMMAND $<TARGET_FILE:fbec> --csharp --final --json --proto --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/CSharp/Proto
-      COMMAND $<TARGET_FILE:fbec> --csharp --final --json --proto --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/.NETCore/Proto
       COMMAND $<TARGET_FILE:fbec> --go --final --json --proto --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/Go/proto
       COMMAND $<TARGET_FILE:fbec> --java --final --json --proto --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/Java/src
       COMMAND $<TARGET_FILE:fbec> --javascript --final --json --proto --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/JavaScript/proto

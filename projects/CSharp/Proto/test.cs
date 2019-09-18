@@ -16213,8 +16213,13 @@ namespace test {
 namespace FBE {
 namespace test {
 
+    // Fast Binary Encoding test sender listener interface
+    public interface ISenderListener : FBE.proto.ISenderListener
+    {
+    }
+
     // Fast Binary Encoding test sender
-    public class Sender : FBE.Sender
+    public class Sender : FBE.Sender, ISenderListener
     {
         // Imported senders
         public readonly proto.Sender protoSender;
@@ -16241,8 +16246,14 @@ namespace test {
 namespace FBE {
 namespace test {
 
+    // Fast Binary Encoding test receiver listener interface
+    public interface IReceiverListener : FBE.proto.IReceiverListener
+    {
+        // Receive handlers
+    }
+
     // Fast Binary Encoding test receiver
-    public class Receiver : FBE.Receiver
+    public class Receiver : FBE.Receiver, IReceiverListener
     {
         // Imported receivers
         public proto.Receiver protoReceiver;
@@ -16260,9 +16271,8 @@ namespace test {
             protoReceiver = new proto.Receiver(Buffer);
         }
 
-        // Receive handlers
-
-        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IReceiverListener listener, long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
@@ -16282,8 +16292,14 @@ namespace test {
 namespace FBE {
 namespace test {
 
+    // Fast Binary Encoding test proxy listener interface
+    public interface IProxyListener : FBE.proto.IProxyListener
+    {
+        // Proxy handlers
+    }
+
     // Fast Binary Encoding test proxy
-    public class Proxy : FBE.Receiver
+    public class Proxy : FBE.Receiver, IProxyListener
     {
         // Imported proxy
         public proto.Proxy protoProxy;
@@ -16299,9 +16315,8 @@ namespace test {
             protoProxy = new proto.Proxy(Buffer);
         }
 
-        // Proxy handlers
-
-        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IProxyListener listener, long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {
@@ -16321,8 +16336,13 @@ namespace test {
 namespace FBE {
 namespace test {
 
+    // Fast Binary Encoding test final sender listener interface
+    public interface IFinalSenderListener : FBE.proto.IFinalSenderListener
+    {
+    }
+
     // Fast Binary Encoding test final sender
-    public class FinalSender : FBE.Sender
+    public class FinalSender : FBE.Sender, IFinalSenderListener
     {
         // Imported senders
         public readonly proto.FinalSender protoSender;
@@ -16349,8 +16369,14 @@ namespace test {
 namespace FBE {
 namespace test {
 
+    // Fast Binary Encoding test final receiver listener interface
+    public interface IFinalReceiverListener : FBE.proto.IFinalReceiverListener
+    {
+        // Receive handlers
+    }
+
     // Fast Binary Encoding test final receiver
-    public class FinalReceiver : FBE.Receiver
+    public class FinalReceiver : FBE.Receiver, IFinalReceiverListener
     {
         // Imported receivers
         public proto.FinalReceiver protoReceiver;
@@ -16368,9 +16394,8 @@ namespace test {
             protoReceiver = new proto.FinalReceiver(Buffer);
         }
 
-        // Receive handlers
-
-        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
+        internal bool OnReceiveListener(IFinalReceiverListener listener, long type, byte[] buffer, long offset, long size)
         {
             switch (type)
             {

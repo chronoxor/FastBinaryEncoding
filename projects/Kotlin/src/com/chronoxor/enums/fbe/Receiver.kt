@@ -9,7 +9,7 @@ package com.chronoxor.enums.fbe
 
 // Fast Binary Encoding com.chronoxor.enums receiver
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
-open class Receiver : com.chronoxor.fbe.Receiver, ReceiverListener
+open class Receiver : com.chronoxor.fbe.Receiver, IReceiverListener
 {
     // Receiver values accessors
 
@@ -28,7 +28,7 @@ open class Receiver : com.chronoxor.fbe.Receiver, ReceiverListener
         return onReceiveListener(this, type, buffer, offset, size)
     }
 
-    open fun onReceiveListener(listener: ReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    open fun onReceiveListener(listener: IReceiverListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
 
         return false

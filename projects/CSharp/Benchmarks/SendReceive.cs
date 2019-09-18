@@ -1,35 +1,34 @@
 ﻿using BenchmarkDotNet.Attributes;
-using proto;
 
 namespace Benchmarks
 {
-    public class MySender1 : FBE.proto.Sender
+    public class MySender1 : FBE.proto.Sender, FBE.proto.ISenderListener
     {
         private long Size { get; set; }
         private long LogSize { get; set; }
 
         protected override long OnSend(byte[] buffer, long offset, long size) { Size += size; return size; }
-        protected override void OnSendLog(string message) { LogSize += message.Length; }
+        public void OnSendLog(string message) { LogSize += message.Length; }
     }
 
-    public class MySender2 : FBE.proto.Sender
+    public class MySender2 : FBE.proto.Sender, FBE.proto.ISenderListener
     {
         private long Size { get; set; }
         private long LogSize { get; set; }
 
         protected override long OnSend(byte[] buffer, long offset, long size) { Size += size; return 0; }
-        protected override void OnSendLog(string message) { LogSize += message.Length; }
+        public void OnSendLog(string message) { LogSize += message.Length; }
     }
 
-    public class MyReceiver : FBE.proto.Receiver
+    public class MyReceiver : FBE.proto.Receiver, FBE.proto.IReceiverListener
     {
         private long LogSize { get; set; }
 
-        protected override void OnReceive(proto.OrderMessage value) {}
-        protected override void OnReceive(proto.BalanceMessage value) {}
-        protected override void OnReceive(proto.AccountMessage value) {}
+        public void OnReceive(proto.OrderMessage value) {}
+        public void OnReceive(proto.BalanceMessage value) {}
+        public void OnReceive(proto.AccountMessage value) {}
 
-        protected override void OnReceiveLog(string message) { LogSize += message.Length; }
+        public void OnReceiveLog(string message) { LogSize += message.Length; }
     }
 
     public class SendReceive
@@ -42,7 +41,7 @@ namespace Benchmarks
         public SendReceive()
         {
             // Create a new account with some orders
-            _account = new AccountMessage(proto.Account.Default);
+            _account = new proto.AccountMessage(proto.Account.Default);
             _account.body.id = 1;
             _account.body.name = "Test";
             _account.body.state = proto.State.good;

@@ -32,17 +32,12 @@ public:
     bool Proto() const noexcept { return _proto; }
     GeneratorSwift& Proto(bool proto) noexcept { _proto = proto; return *this; }
 
-    // Java version
-    int Version() const noexcept { return _version; }
-    GeneratorSwift& Version(int v) noexcept { _version = v; return *this; }
-
     void Generate(const std::shared_ptr<Package>& package) override;
 
 private:
     bool _final{false};
     bool _json{false};
     bool _proto{false};
-    int _version{8};
 
     void GenerateHeader(const std::string& source);
     void GenerateFooter();

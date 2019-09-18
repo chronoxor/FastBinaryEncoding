@@ -1,5 +1,5 @@
 ﻿using System;
-using NUnit.Framework;
+using Xunit;
 
 namespace Tests
 {
@@ -12,7 +12,7 @@ namespace Tests
         }
     }
 
-    public class MyFinalReceiver : FBE.protoex.FinalReceiver
+    public class MyFinalReceiver : FBE.protoex.FinalReceiver, FBE.protoex.IFinalReceiverListener
     {
         private bool _order;
         private bool _balance;
@@ -20,12 +20,11 @@ namespace Tests
 
         public bool Check() { return _order && _balance && _account; }
 
-        protected override void OnReceive(protoex.OrderMessage value) { _order = true; }
-        protected override void OnReceive(protoex.BalanceMessage value) { _balance = true; }
-        protected override void OnReceive(protoex.AccountMessage value) { _account = true; }
+        public void OnReceive(protoex.OrderMessage value) { _order = true; }
+        public void OnReceive(protoex.BalanceMessage value) { _balance = true; }
+        public void OnReceive(protoex.AccountMessage value) { _account = true; }
     }
 
-    [TestFixture]
     public class SendReceiveFinal
     {
         private static bool SendAndReceiveFinal(long index1, long index2)
@@ -65,7 +64,7 @@ namespace Tests
             return receiver.Check();
         }
 
-        [TestCase(TestName = "Send & Receive (Final)")]
+        [Fact(DisplayName = "Send & Receive (Final)")]
         public void SendAndReceiveFinalTest()
         {
             for (long i = 0; i < 1000; ++i)

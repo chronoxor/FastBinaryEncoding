@@ -39,7 +39,6 @@ Typical usage workflow is the following:
 Sample projects:
 * [C++ sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/examples)
 * [C# sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/CSharp)
-* [.NET Core sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/.NETCore)
 * [Go sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Go)
 * [Java sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Java)
 * [JavaScript sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/JavaScript)
@@ -955,7 +954,6 @@ account.orders.emplace_back(3, "EURUSD", OrderSide::buy, OrderType::stop, 1.5, 1
 
 * [C++ benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/performance) results were taken using [CppBenchmark library](https://github.com/chronoxor/CppBenchmark)
 * [C# benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/CSharp/Benchmarks) results were taken using [BenchmarkDotNet library](https://benchmarkdotnet.org)
-* [.NET Core benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/.NETCore/Benchmarks) results were taken using [BenchmarkDotNet library](https://benchmarkdotnet.org)
 * [Go benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Go/benchmarks) results were taken using [testing package](https://golang.org/pkg/testing)
 * [Java benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Java/src/benchmarks) results were taken using [JMH library](http://openjdk.java.net/projects/code-tools/jmh)
 * [JavaScript benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/JavaScript/benchmarks) results were taken using [Benchmark.js library](https://benchmarkjs.com)
@@ -986,9 +984,6 @@ Serialization benchmark results:
 | C# Win64                 |    252 bytes |    1 432 665 ops/s |             698 ns |
 | C# Win64 (Final)         |    152 bytes |    1 597 444 ops/s |             626 ns |
 | C# Win64 (JSON)          |    341 bytes |      434 783 ops/s |           2 300 ns |
-| .NET Core Linux          |    252 bytes |    1 189 768 ops/s |             841 ns |
-| .NET Core Linux (Final)  |    152 bytes |    1 315 270 ops/s |             760 ns |
-| .NET Core Linux (JSON)   |    341 bytes |      366 435 ops/s |           2 729 ns |
 | Go Win64                 |    252 bytes |    2 739 726 ops/s |             365 ns |
 | Go Win64 (Final)         |    152 bytes |    2 949 852 ops/s |             339 ns |
 | Go Win64 (JSON)          |    341 bytes |      258 732 ops/s |           3 865 ns |
@@ -1028,9 +1023,6 @@ Deserialization benchmark results:
 | C# Win64                 |    252 bytes |      1 014 199 ops/s |               986 ns |
 | C# Win64 (Final)         |    152 bytes |      1 607 717 ops/s |               622 ns |
 | C# Win64 (JSON)          |    341 bytes |        258 532 ops/s |             3 868 ns |
-| .NET Core Linux          |    252 bytes |        804 052 ops/s |             1 244 ns |
-| .NET Core Linux (Final)  |    152 bytes |      1 343 544 ops/s |               744 ns |
-| .NET Core Linux (JSON)   |    341 bytes |        222 074 ops/s |             4 503 ns |
 | Go Win64                 |    252 bytes |      1 510 574 ops/s |               662 ns |
 | Go Win64 (Final)         |    152 bytes |      1 540 832 ops/s |               649 ns |
 | Go Win64 (JSON)          |    341 bytes |        251 825 ops/s |             3 971 ns |
@@ -1068,8 +1060,6 @@ Verify benchmark results:
 | C++ Win64 (Final)        |    152 bytes | 35 714 286 ops/s |       28 ns |
 | C# Win64                 |    252 bytes |  4 504 505 ops/s |      222 ns |
 | C# Win64 (Final)         |    152 bytes |  8 064 516 ops/s |      124 ns |
-| .NET Core Linux          |    252 bytes |  3 718 855 ops/s |      269 ns |
-| .NET Core Linux (Final)  |    152 bytes |  6 653 360 ops/s |      150 ns |
 | Go Win64                 |    252 bytes |  8 474 576 ops/s |      118 ns |
 | Go Win64 (Final)         |    152 bytes |  9 090 909 ops/s |      110 ns |
 | Java Win64               |    252 bytes | 11 790 374 ops/s |       85 ns |

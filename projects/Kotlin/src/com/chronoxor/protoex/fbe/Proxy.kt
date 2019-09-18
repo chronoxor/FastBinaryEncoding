@@ -9,7 +9,7 @@ package com.chronoxor.protoex.fbe
 
 // Fast Binary Encoding com.chronoxor.protoex proxy
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
-open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
+open class Proxy : com.chronoxor.fbe.Receiver, IProxyListener
 {
     // Imported proxy
     var protoProxy: com.chronoxor.proto.fbe.Proxy? = null
@@ -40,7 +40,7 @@ open class Proxy : com.chronoxor.fbe.Receiver, ProxyListener
         return onReceiveListener(this, type, buffer, offset, size)
     }
 
-    open fun onReceiveListener(listener: ProxyListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    open fun onReceiveListener(listener: IProxyListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         when (type)
         {

@@ -9550,8 +9550,15 @@ namespace FBE {
         }
     }
 
+    // Fast Binary Encoding base sender listener interface
+    public interface ISenderListener
+    {
+        // Send log message handler
+        void OnSendLog(string message) {}
+    }
+
     // Fast Binary Encoding base sender
-    public abstract class Sender
+    public abstract class Sender : ISenderListener
     {
         // Bytes buffer
         public Buffer Buffer { get; }
@@ -9586,12 +9593,17 @@ namespace FBE {
 
         // Send message handler
         protected abstract long OnSend(byte[] buffer, long offset, long size);
-        // Send log message handler
-        protected virtual void OnSendLog(string message) {}
+    }
+
+    // Fast Binary Encoding base receiver listener interface
+    public interface IReceiverListener
+    {
+        // Receive log message handler
+        void OnReceiveLog(string message) {}
     }
 
     // Fast Binary Encoding base receiver
-    public abstract class Receiver
+    public abstract class Receiver : IReceiverListener
     {
         // Bytes buffer
         public Buffer Buffer { get; private set; }
@@ -9853,8 +9865,6 @@ namespace FBE {
 
         // Receive message handler
         internal abstract bool OnReceive(long type, byte[] buffer, long offset, long size);
-        // Receive log message handler
-        protected virtual void OnReceiveLog(string message) {}
     }
 
 #if UTF8JSON

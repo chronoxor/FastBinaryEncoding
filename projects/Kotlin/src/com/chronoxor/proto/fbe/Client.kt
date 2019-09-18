@@ -9,7 +9,7 @@ package com.chronoxor.proto.fbe
 
 // Fast Binary Encoding com.chronoxor.proto client
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
-open class Client : com.chronoxor.fbe.Client, ClientListener
+open class Client : com.chronoxor.fbe.Client, IClientListener
 {
     // Client sender models accessors
     val OrderMessageSenderModel: OrderMessageModel
@@ -58,7 +58,7 @@ open class Client : com.chronoxor.fbe.Client, ClientListener
     }
 
     @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
-    fun sendListener(listener: ClientListener, obj: Any): Long
+    fun sendListener(listener: IClientListener, obj: Any): Long
     {
         when (obj)
         {
@@ -75,7 +75,7 @@ open class Client : com.chronoxor.fbe.Client, ClientListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: ClientListener, value: com.chronoxor.proto.OrderMessage): Long
+    fun sendListener(listener: IClientListener, value: com.chronoxor.proto.OrderMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = OrderMessageSenderModel.serialize(value)
@@ -97,7 +97,7 @@ open class Client : com.chronoxor.fbe.Client, ClientListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: ClientListener, value: com.chronoxor.proto.BalanceMessage): Long
+    fun sendListener(listener: IClientListener, value: com.chronoxor.proto.BalanceMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = BalanceMessageSenderModel.serialize(value)
@@ -119,7 +119,7 @@ open class Client : com.chronoxor.fbe.Client, ClientListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: ClientListener, value: com.chronoxor.proto.AccountMessage): Long
+    fun sendListener(listener: IClientListener, value: com.chronoxor.proto.AccountMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = AccountMessageSenderModel.serialize(value)
@@ -145,7 +145,7 @@ open class Client : com.chronoxor.fbe.Client, ClientListener
         return onReceiveListener(this, type, buffer, offset, size)
     }
 
-    open fun onReceiveListener(listener: ClientListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+    open fun onReceiveListener(listener: IClientListener, type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         when (type)
         {

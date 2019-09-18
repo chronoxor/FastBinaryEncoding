@@ -9,7 +9,7 @@ package com.chronoxor.proto.fbe
 
 // Fast Binary Encoding com.chronoxor.proto final sender
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
-open class FinalSender : com.chronoxor.fbe.Sender, FinalSenderListener
+open class FinalSender : com.chronoxor.fbe.Sender, IFinalSenderListener
 {
     // Sender models accessors
     val OrderMessageModel: OrderMessageFinalModel
@@ -36,7 +36,7 @@ open class FinalSender : com.chronoxor.fbe.Sender, FinalSenderListener
     }
 
     @Suppress("JoinDeclarationAndAssignment", "UNUSED_PARAMETER")
-    fun sendListener(listener: FinalSenderListener, obj: Any): Long
+    fun sendListener(listener: IFinalSenderListener, obj: Any): Long
     {
         when (obj)
         {
@@ -53,7 +53,7 @@ open class FinalSender : com.chronoxor.fbe.Sender, FinalSenderListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: FinalSenderListener, value: com.chronoxor.proto.OrderMessage): Long
+    fun sendListener(listener: IFinalSenderListener, value: com.chronoxor.proto.OrderMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = OrderMessageModel.serialize(value)
@@ -75,7 +75,7 @@ open class FinalSender : com.chronoxor.fbe.Sender, FinalSenderListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: FinalSenderListener, value: com.chronoxor.proto.BalanceMessage): Long
+    fun sendListener(listener: IFinalSenderListener, value: com.chronoxor.proto.BalanceMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = BalanceMessageModel.serialize(value)
@@ -97,7 +97,7 @@ open class FinalSender : com.chronoxor.fbe.Sender, FinalSenderListener
         return sendListener(this, value)
     }
 
-    fun sendListener(listener: FinalSenderListener, value: com.chronoxor.proto.AccountMessage): Long
+    fun sendListener(listener: IFinalSenderListener, value: com.chronoxor.proto.AccountMessage): Long
     {
         // Serialize the value into the FBE stream
         val serialized = AccountMessageModel.serialize(value)
