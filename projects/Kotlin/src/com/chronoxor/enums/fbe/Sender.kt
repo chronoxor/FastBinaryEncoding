@@ -33,7 +33,4 @@ open class Sender : com.chronoxor.fbe.Sender, ISenderListener
         return 0
     }
 
-
-    // Send message handler
-    override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException("com.chronoxor.enums.fbe.Sender.onSend() not implemented!") }
 }

@@ -3624,7 +3624,7 @@ abstract class Sender : ISenderListener
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!
-    fun sendSerialized(serialized: Long): Long
+    fun sendSerialized(listener: ISenderListener, serialized: Long): Long
     {
         assert(serialized > 0) { "Invalid size of the serialized buffer!" }
         if (serialized <= 0)
@@ -3634,13 +3634,10 @@ abstract class Sender : ISenderListener
         buffer.shift(serialized)
 
         // Send the value
-        val sent = onSend(buffer.data, 0, buffer.size)
+        val sent = listener.onSend(buffer.data, 0, buffer.size)
         buffer.remove(0, sent)
         return sent
     }
-
-    // Send message handler
-    protected abstract fun onSend(buffer: ByteArray, offset: Long, size: Long): Long
 }
 )CODE";
 
@@ -3672,6 +3669,8 @@ void GeneratorKotlin::GenerateFBESenderListener(const std::string& domain, const
 // Fast Binary Encoding base sender listener interface
 interface ISenderListener
 {
+    // Send message handler
+    fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { return size }
     // Send log message handler
     fun onSendLog(message: String) {}
 }
@@ -4056,7 +4055,7 @@ abstract class Client : IClientListener
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!
-    fun sendSerialized(serialized: Long): Long
+    fun sendSerialized(listener: ISenderListener, serialized: Long): Long
     {
         assert(serialized > 0) { "Invalid size of the serialized buffer!" }
         if (serialized <= 0)
@@ -4066,13 +4065,10 @@ abstract class Client : IClientListener
         sendBuffer.shift(serialized)
 
         // Send the value
-        val sent = onSend(sendBuffer.data, 0, sendBuffer.size)
+        val sent = listener.onSend(sendBuffer.data, 0, sendBuffer.size)
         sendBuffer.remove(0, sent)
         return sent
     }
-
-    // Send message handler
-    protected abstract fun onSend(buffer: ByteArray, offset: Long, size: Long): Long
 
     // Receive data
     fun receive(buffer: Buffer) { receive(buffer.data, 0, buffer.size) }
@@ -7015,17 +7011,12 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
                 WriteLineIndent("}");
                 WriteLine();
                 WriteLineIndent("// Send the serialized value");
-                WriteLineIndent("return sendSerialized(serialized)");
+                WriteLineIndent("return sendSerialized(listener, serialized)");
                 Indent(-1);
                 WriteLineIndent("}");
             }
         }
     }
-
-    // Generate sender message handler
-    WriteLine();
-    WriteLineIndent("// Send message handler");
-    WriteLineIndent("override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException(\"" + domain + *p->name + ".fbe.Sender.onSend() not implemented!\") }");
 
     // Generate sender end
     Indent(-1);
@@ -7785,17 +7776,12 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 WriteLineIndent("}");
                 WriteLine();
                 WriteLineIndent("// Send the serialized value");
-                WriteLineIndent("return sendSerialized(serialized)");
+                WriteLineIndent("return sendSerialized(listener, serialized)");
                 Indent(-1);
                 WriteLineIndent("}");
             }
         }
     }
-
-    // Generate client send message handler
-    WriteLine();
-    WriteLineIndent("// Send message handler");
-    WriteLineIndent("override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException(\"" + domain + *p->name + ".fbe.Client.onSend() not implemented!\") }");
 
     WriteLine();
 

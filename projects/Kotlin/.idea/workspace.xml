@@ -2,82 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/test.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/ClientListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/FinalClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/FinalClient.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/FinalClientListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/FinalReceiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/FinalReceiverListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/FinalSender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/FinalSender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/FinalSenderListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/ProxyListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/ReceiverListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/Sender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/fbe/SenderListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/ClientListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/ReceiverListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/ISenderListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/ISenderListener.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/Sender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/SenderListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/ClientListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/FinalClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/FinalClient.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/FinalClientListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/FinalReceiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/FinalReceiverListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/FinalSender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/FinalSender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/FinalSenderListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/ProxyListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/ReceiverListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/Sender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/proto/fbe/SenderListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/ClientListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/FinalClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/FinalClient.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/FinalClientListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/FinalReceiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/FinalReceiverListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/FinalSender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/FinalSender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/FinalSenderListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/ProxyListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/ReceiverListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/Sender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/protoex/fbe/SenderListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/ClientListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/FinalClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/FinalClient.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/FinalClientListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/FinalReceiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/FinalReceiverListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/FinalSender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/FinalSender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/FinalSenderListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/ProxyListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/ReceiverListener.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/Sender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/fbe/SenderListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Swift/Proto/Fbe/Package.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Swift/Proto/Fbe/Package.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Swift/Proto/Fbe/Source/ChronoxorFbe/Buffer.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Swift/Proto/Fbe/Source/ChronoxorFbe/Buffer.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -317,6 +261,7 @@
       <workItem from="1567699258391" duration="287000" />
       <workItem from="1568803656156" duration="504000" />
       <workItem from="1568804178930" duration="47000" />
+      <workItem from="1569403380942" duration="489000" />
     </task>
     <servers />
   </component>

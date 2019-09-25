@@ -50,9 +50,6 @@ open class Client : com.chronoxor.fbe.Client, IClientListener
     }
 
 
-    // Send message handler
-    override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException("com.chronoxor.test.fbe.Client.onSend() not implemented!") }
-
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
         return onReceiveListener(this, type, buffer, offset, size)

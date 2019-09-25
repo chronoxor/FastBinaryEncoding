@@ -90,7 +90,7 @@ open class FinalClient : com.chronoxor.fbe.Client, IFinalClientListener
         }
 
         // Send the serialized value
-        return sendSerialized(serialized)
+        return sendSerialized(listener, serialized)
     }
     fun send(value: com.chronoxor.proto.BalanceMessage): Long
     {
@@ -112,7 +112,7 @@ open class FinalClient : com.chronoxor.fbe.Client, IFinalClientListener
         }
 
         // Send the serialized value
-        return sendSerialized(serialized)
+        return sendSerialized(listener, serialized)
     }
     fun send(value: com.chronoxor.proto.AccountMessage): Long
     {
@@ -134,11 +134,8 @@ open class FinalClient : com.chronoxor.fbe.Client, IFinalClientListener
         }
 
         // Send the serialized value
-        return sendSerialized(serialized)
+        return sendSerialized(listener, serialized)
     }
-
-    // Send message handler
-    override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException("com.chronoxor.proto.fbe.Client.onSend() not implemented!") }
 
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {

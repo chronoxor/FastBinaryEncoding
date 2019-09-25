@@ -29,7 +29,7 @@ abstract class Sender : ISenderListener
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!
-    fun sendSerialized(serialized: Long): Long
+    fun sendSerialized(listener: ISenderListener, serialized: Long): Long
     {
         assert(serialized > 0) { "Invalid size of the serialized buffer!" }
         if (serialized <= 0)
@@ -39,11 +39,8 @@ abstract class Sender : ISenderListener
         buffer.shift(serialized)
 
         // Send the value
-        val sent = onSend(buffer.data, 0, buffer.size)
+        val sent = listener.onSend(buffer.data, 0, buffer.size)
         buffer.remove(0, sent)
         return sent
     }
-
-    // Send message handler
-    protected abstract fun onSend(buffer: ByteArray, offset: Long, size: Long): Long
 }

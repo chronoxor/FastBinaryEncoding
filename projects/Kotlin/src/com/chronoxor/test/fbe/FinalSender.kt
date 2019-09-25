@@ -45,7 +45,4 @@ open class FinalSender : com.chronoxor.fbe.Sender, IFinalSenderListener
         return 0
     }
 
-
-    // Send message handler
-    override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException("com.chronoxor.test.fbe.Sender.onSend() not implemented!") }
 }
