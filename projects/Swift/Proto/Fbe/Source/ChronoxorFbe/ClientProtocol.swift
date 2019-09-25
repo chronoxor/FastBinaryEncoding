@@ -14,14 +14,8 @@ public protocol ClientProtocol: class {
     // Get the receive bytes buffer
     var receiveBuffer: Buffer { get set }
 
-    // Enable/Disable logging
-    var logging: Bool { get set }
-
     // Get the final protocol flag
     var final: Bool { get set }
-
-    // Send message handler
-    func onSend(buffer: Data, offset: Int, size: Int) throws -> Int
 
     // Receive message handler
     func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool
@@ -47,7 +41,7 @@ public extension ClientProtocol {
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!
-    func sendSerialized(serialized: Int) throws -> Int {
+    func sendSerialized(listener: SenderListener, serialized: Int) throws -> Int {
         assert(serialized > 0, "Invalid size of the serialized buffer!")
 
         if serialized <= 0 {
@@ -58,7 +52,7 @@ public extension ClientProtocol {
         sendBuffer.shift(offset: serialized)
 
         // Send the value
-        let sent = try onSend(buffer: sendBuffer.data, offset: 0, size: sendBuffer.size)
+        let sent = try listener.onSend(buffer: sendBuffer.data, offset: 0, size: sendBuffer.size)
         try sendBuffer.remove(offset: 0, size: sent)
         return sent
     }
@@ -116,8 +110,7 @@ public extension ClientProtocol {
                             try _ = self.receiveBuffer.allocate(size: count)
                             size1 += count
 
-                            self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)...(offset + offset2) + count]
-                            //System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
+                            self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                             offset1 += count
                             offset2 += count
                             continue
@@ -140,8 +133,7 @@ public extension ClientProtocol {
                         try _ = self.receiveBuffer.allocate(size: count)
                         size1 += count
 
-                        self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)...(offset + offset2) + count]
-                        //System.arraycopy(buffer, (offset + offset2).toInt(), self.receiveBuffer.data, offset1.toInt(), count.toInt())
+                        self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                         offset1 += count
                         offset2 += count
                         continue
@@ -199,8 +191,7 @@ public extension ClientProtocol {
                             try _ = self.receiveBuffer.allocate(size: count)
                             size1 += count
 
-                            self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)...(offset + offset2) + count]
-                            // System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
+                            self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                             offset1 += count
                             offset2 += count
                             continue
@@ -237,8 +228,7 @@ public extension ClientProtocol {
                         try _ = self.receiveBuffer.allocate(size: count)
                         size1 += count
 
-                        self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)...(offset + offset2) + count]
-                        //System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
+                        self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                         offset1 += count
                         offset2 += count
                         continue

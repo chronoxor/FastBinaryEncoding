@@ -6,8 +6,10 @@ import XCTest
 import ChronoxorFbe
 import ChronoxorProto
 
-class MySender: ChronoxorProto.Sender, ChronoxorFbe.LogListener {
-    override func onSend(buffer: Data, offset: Int, size: Int) throws -> Int {
+class MySender: ChronoxorProto.Sender, ChronoxorFbe.SenderListener {
+    var logging: Bool = false
+
+    func onSend(buffer: Data, offset: Int, size: Int) throws -> Int {
         // Send nothing...
         return 0
     }
@@ -17,6 +19,8 @@ class MyReceiver: ChronoxorProto.Receiver, ChronoxorProto.ReceiverListener {
     private var _order: Bool = false
     private var _balance: Bool = false
     private var _account: Bool = false
+
+    var logging: Bool = false
 
     var check: Bool {
         return  _order && _balance && _account
@@ -35,10 +39,16 @@ class MyReceiver: ChronoxorProto.Receiver, ChronoxorProto.ReceiverListener {
     }
 }
 
-class MyClient: ChronoxorProto.Client, ChronoxorProto.ReceiverListener {
+class MyClient: ChronoxorProto.Client, ChronoxorProto.ReceiverListener, ChronoxorFbe.SenderListener  {
+    func onSend(buffer: Data, offset: Int, size: Int) throws -> Int {
+        return 0;
+    }
+
     private var _order: Bool = false
     private var _balance: Bool = false
     private var _account: Bool = false
+    
+    var logging: Bool = false
 
     var check: Bool {
         return  _order && _balance && _account

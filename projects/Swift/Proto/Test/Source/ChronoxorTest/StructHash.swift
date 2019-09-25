@@ -19,6 +19,7 @@ open class StructHash: Comparable, Hashable, Codable {
     public var f9: Dictionary<String, StructSimple> = Dictionary()
     public var f10: Dictionary<String, StructSimple?> = Dictionary()
 
+    open var fbeType: Int { 141 }
     public init() {}
     public init(f1: Dictionary<String, UInt8>, f2: Dictionary<String, UInt8?>, f3: Dictionary<String, Data>, f4: Dictionary<String, Data?>, f5: Dictionary<String, EnumSimple>, f6: Dictionary<String, EnumSimple?>, f7: Dictionary<String, FlagsSimple>, f8: Dictionary<String, FlagsSimple?>, f9: Dictionary<String, StructSimple>, f10: Dictionary<String, StructSimple?>) {
 

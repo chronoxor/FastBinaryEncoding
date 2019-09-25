@@ -14,7 +14,6 @@ open class Proxy: ChronoxorFbe.ReceiverProtocol {
     private let AccountMessageModel: AccountMessageModel
 
     public var buffer: Buffer = Buffer()
-    public var logging: Bool = false
     public var final: Bool = false
 
     public init() {

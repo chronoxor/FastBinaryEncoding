@@ -17,6 +17,7 @@ open class Order: Comparable, Hashable, Codable {
     public var tp: Double = 10.0
     public var sl: Double = -10.0
 
+    open var fbeType: Int { 1 }
     public init() {}
     public init(id: Int32, symbol: String, side: OrderSide, type: OrderType, price: Double, volume: Double, tp: Double, sl: Double) {
 

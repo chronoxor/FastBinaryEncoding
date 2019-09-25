@@ -6,7 +6,7 @@
 import ChronoxorFbe
 
 // Fast Binary Encoding Enums final receiver listener
-public protocol FinalReceiverListener: ChronoxorFbe.LogListener {
+public protocol FinalReceiverListener: ChronoxorFbe.ReceiveLogListener {
 }
 
 public extension FinalReceiverListener {

@@ -21,6 +21,7 @@ open class StructNested: StructOptional {
     public var f1010: StructOptional = ChronoxorTest.StructOptional()
     public var f1011: StructOptional? = nil
 
+    override open var fbeType: Int { 112 }
     public override init() { super.init() }
     public init(parent: StructOptional, f1000: EnumSimple, f1001: EnumSimple?, f1002: EnumTyped, f1003: EnumTyped?, f1004: FlagsSimple, f1005: FlagsSimple?, f1006: FlagsTyped, f1007: FlagsTyped?, f1008: StructSimple, f1009: StructSimple?, f1010: StructOptional, f1011: StructOptional?) {
         super.init(other: parent)

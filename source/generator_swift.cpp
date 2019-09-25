@@ -3642,14 +3642,8 @@ public protocol SenderProtocol: class {
     // Get the bytes buffer
     var buffer: Buffer { get set }
 
-    // Enable/Disable logging
-    var logging: Bool { get set }
-
     // Get the final protocol flag
     var final: Bool { get set }
-
-    // Send message handler
-    func onSend(buffer: Data, offset: Int, size: Int) throws -> Int
 }
 
 public extension SenderProtocol {
@@ -3669,7 +3663,7 @@ public extension SenderProtocol {
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!
-    func sendSerialized(serialized: Int) throws -> Int {
+    func sendSerialized(listener: SenderListener, serialized: Int) throws -> Int {
         if serialized <= 0 {
             assertionFailure("Invalid size of the serialized buffer!")
             return 0
@@ -3679,7 +3673,7 @@ public extension SenderProtocol {
         buffer.shift(offset: serialized)
 
         // Send the value
-        let sent = try onSend(buffer: buffer.data, offset: 0, size: buffer.size)
+        let sent = try listener.onSend(buffer: buffer.data, offset: 0, size: buffer.size)
         try _ = buffer.remove(offset: 0, size: sent)
         return sent
     }
@@ -3717,8 +3711,6 @@ public protocol ReceiverProtocol: class {
     // Get the bytes buffer
     var buffer: Buffer { get set }
 
-    // Enable/Disable logging
-    var logging: Bool { get set }
 
     // Get the final protocol flag
     var final: Bool { get set }
@@ -3994,7 +3986,7 @@ void GeneratorSwift::GenerateFBEReceiverListener(const std::string& domain, cons
   CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
   // Open the file
-  CppCommon::Path file = path / "LogListener.swift";
+  CppCommon::Path file = path / "Listeners.swift";
   Open(file);
 
   // Generate headers
@@ -4002,17 +3994,32 @@ void GeneratorSwift::GenerateFBEReceiverListener(const std::string& domain, cons
   GenerateImports("", "Foundation");
 
   std::string code = R"CODE(
+public protocol LogListener {
+    // Enable/Disable logging
+    var logging: Bool { get set }
+}
+
 // Fast Binary Encoding log listener
-public protocol LogListener: class {
+public protocol ReceiveLogListener: LogListener {
 
     // Receive log message handler
     func onReceiveLog(message: String)
+}
+
+public extension ReceiveLogListener {
+    func onReceiveLog(message: String) {}
+}
+
+public protocol SenderListener: LogListener {
+    // Send message handler
+    func onSend(buffer: Data, offset: Int, size: Int) throws -> Int
+
     // Send log message handler
     func onSendLog(message: String)
 }
 
-public extension LogListener {
-    func onReceiveLog(message: String) {}
+public extension SenderListener {
+    func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { return 0 }
     func onSendLog(message: String) {}
 }
 )CODE";
@@ -4051,14 +4058,8 @@ public protocol ClientProtocol: class {
     // Get the receive bytes buffer
     var receiveBuffer: Buffer { get set }
 
-    // Enable/Disable logging
-    var logging: Bool { get set }
-
     // Get the final protocol flag
     var final: Bool { get set }
-
-    // Send message handler
-    func onSend(buffer: Data, offset: Int, size: Int) throws -> Int
 
     // Receive message handler
     func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool
@@ -4084,7 +4085,7 @@ public extension ClientProtocol {
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!
-    func sendSerialized(serialized: Int) throws -> Int {
+    func sendSerialized(listener: SenderListener, serialized: Int) throws -> Int {
         assert(serialized > 0, "Invalid size of the serialized buffer!")
 
         if serialized <= 0 {
@@ -4095,7 +4096,7 @@ public extension ClientProtocol {
         sendBuffer.shift(offset: serialized)
 
         // Send the value
-        let sent = try onSend(buffer: sendBuffer.data, offset: 0, size: sendBuffer.size)
+        let sent = try listener.onSend(buffer: sendBuffer.data, offset: 0, size: sendBuffer.size)
         try sendBuffer.remove(offset: 0, size: sent)
         return sent
     }
@@ -4153,8 +4154,7 @@ public extension ClientProtocol {
                             try _ = self.receiveBuffer.allocate(size: count)
                             size1 += count
 
-                            self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)...(offset + offset2) + count]
-                            //System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
+                            self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                             offset1 += count
                             offset2 += count
                             continue
@@ -4177,8 +4177,7 @@ public extension ClientProtocol {
                         try _ = self.receiveBuffer.allocate(size: count)
                         size1 += count
 
-                        self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)...(offset + offset2) + count]
-                        //System.arraycopy(buffer, (offset + offset2).toInt(), self.receiveBuffer.data, offset1.toInt(), count.toInt())
+                        self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                         offset1 += count
                         offset2 += count
                         continue
@@ -4236,8 +4235,7 @@ public extension ClientProtocol {
                             try _ = self.receiveBuffer.allocate(size: count)
                             size1 += count
 
-                            self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)...(offset + offset2) + count]
-                            // System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
+                            self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                             offset1 += count
                             offset2 += count
                             continue
@@ -4274,8 +4272,7 @@ public extension ClientProtocol {
                         try _ = self.receiveBuffer.allocate(size: count)
                         size1 += count
 
-                        self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)...(offset + offset2) + count]
-                        //System.arraycopy(buffer, (offset + offset2).toInt(), this.receiveBuffer.data, offset1.toInt(), count.toInt())
+                        self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                         offset1 += count
                         offset2 += count
                         continue
@@ -5224,6 +5221,16 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
 
         WriteLine();
     }
+
+    // Generate struct FBE type property
+    if (s->base && !s->base->empty() && (s->type == 0))
+    {
+        // do nothing
+    }
+    else if (s->base && !s->base->empty())
+        WriteLineIndent("override open var fbeType: Int { " + std::to_string(s->type) + " }");
+    else
+        WriteLineIndent("open var fbeType: Int { " + std::to_string(s->type) + " }");
 
     // Generate struct default constructor
     if (s->base && !s->base->empty())
@@ -6700,7 +6707,6 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     }
 
     WriteLineIndent("public var buffer: Buffer = Buffer()");
-    WriteLineIndent("public var logging: Bool = false");
     WriteLineIndent("public var final: Bool = false");
     WriteLine();
 
@@ -6756,13 +6762,14 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
 
     WriteLineIndent("public func send(obj: Any) throws -> Int {");
     Indent(1);
-    WriteLineIndent("return try send(obj: obj, listener: self as? "+ domain + "Fbe.LogListener)");
+    WriteLineIndent("guard let listener = self as? " + domain + "Fbe.SenderListener else { return 0 }");
+    WriteLineIndent("return try send(obj: obj, listener: listener)");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
 
     // Generate generic sender method
-    WriteLineIndent("public func send(obj: Any, listener: " + domain + "Fbe.LogListener?) throws -> Int {");
+    WriteLineIndent("public func send(obj: Any, listener: " + domain + "Fbe.SenderListener) throws -> Int {");
     Indent(1);
     if (p->body && messages)
     {
@@ -6772,7 +6779,7 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
             if (s->message)
             {
                 std::string struct_name = domain + package + "." + *s->name;
-                WriteLineIndent("case is " + struct_name + ": return try send(value: obj as! " + struct_name + ", listener: listener)");
+                WriteLineIndent("case let obj as " + struct_name + ": if (obj.fbeType == " + *s->name + "Model.fbeType) { return try send(value: obj, listener: listener) }");
             }
         }
         WriteLineIndent("default: break");
@@ -6809,12 +6816,13 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
                 WriteLine();
                 WriteLineIndent("public func send(value: " + struct_name + ") throws -> Int {");
                 Indent(1);
-                WriteLineIndent("return try send(value: value, listener: self as? "+ domain + "Fbe.LogListener)");
+                WriteLineIndent("guard let listener = self as? " + domain + "Fbe.SenderListener else { return 0 }");
+                WriteLineIndent("return try send(value: value, listener: listener )");
                 Indent(-1);
                 WriteLineIndent("}");
 
                 WriteLine();
-                WriteLineIndent("public func send(value: " + struct_name + ", listener: " + domain + "Fbe.LogListener?) throws -> Int {");
+                WriteLineIndent("public func send(value: " + struct_name + ", listener: " + domain + "Fbe.SenderListener) throws -> Int {");
                 Indent(1);
                 WriteLineIndent("// Serialize the value into the FBE stream");
                 WriteLineIndent("let serialized = try " + *s->name + "Model.serialize(value: value)");
@@ -6822,29 +6830,28 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
                 WriteLineIndent("assert(" + *s->name + "Model.verify(), \"" + struct_name + " validation failed!\")");
                 WriteLine();
                 WriteLineIndent("// Log the value");
-                WriteLineIndent("if logging {");
+                WriteLineIndent("if listener.logging {");
                 Indent(1);
                 WriteLineIndent("let message = value.description");
-                WriteLineIndent("listener?.onSendLog(message: message)");
+                WriteLineIndent("listener.onSendLog(message: message)");
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLine();
                 WriteLineIndent("// Send the serialized value");
-                WriteLineIndent("return try sendSerialized(serialized: serialized)");
+                WriteLineIndent("return try sendSerialized(listener: listener, serialized: serialized)");
                 Indent(-1);
                 WriteLineIndent("}");
             }
         }
     }
-
-    // Generate sender message handler
-    WriteLine();
-    WriteLineIndent("// Send message handler");
-    WriteLineIndent("open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }");
-
     // Generate sender end
     Indent(-1);
     WriteLineIndent("}");
+    //
+    // WriteLineIndent("extension " + sender + ": " + domain + "Fbe.SenderListener {");
+    // WriteLineIndent("// Send message handler");
+    // WriteLineIndent("open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }");
+    // WriteLineIndent("}");
 
     // Generate footer
     GenerateFooter();
@@ -6923,7 +6930,6 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
 
 
     WriteLineIndent("public var buffer: Buffer = Buffer()");
-    WriteLineIndent("public var logging: Bool = false");
     WriteLineIndent("public var final: Bool = false");
     WriteLine();
 
@@ -7003,7 +7009,7 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
                 WriteLineIndent("assert(deserialized > 0, \"" + package + "." + *s->name + " deserialization failed!\")");
                 WriteLine();
                 WriteLineIndent("// Log the value");
-                WriteLineIndent("if logging {");
+                WriteLineIndent("if listener.logging {");
                 Indent(1);
                 WriteLineIndent("let message = " + *s->name + "Value.description");
                 WriteLineIndent("listener.onReceiveLog(message: message)");
@@ -7086,7 +7092,7 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
         }
     }
     else
-        WriteIndent(": " + domain + "Fbe.LogListener");
+        WriteIndent(": " + domain + "Fbe.ReceiveLogListener");
     WriteIndent(" {");
     WriteLine();
     Indent(1);
@@ -7186,7 +7192,6 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     }
 
     WriteLineIndent("public var buffer: Buffer = Buffer()");
-    WriteLineIndent("public var logging: Bool = false");
     WriteLineIndent("public var final: Bool = false");
     WriteLine();
 
@@ -7463,7 +7468,6 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
 
     WriteLineIndent("public var sendBuffer: Buffer = Buffer()");
     WriteLineIndent("public var receiveBuffer: Buffer = Buffer()");
-    WriteLineIndent("public var logging: Bool = false");
     WriteLineIndent("public var final: Bool = false");
     WriteLine();
 
@@ -7517,7 +7521,8 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
 
     WriteLineIndent("public func send(obj: Any) throws -> Int {");
     Indent(1);
-    WriteLineIndent("return try send(obj: obj, listener: self as? "+ domain + "Fbe.LogListener)");
+    WriteLineIndent("guard let listener = self as? " + domain + "Fbe.SenderListener else { return 0 }");
+    WriteLineIndent("return try send(obj: obj, listener: listener)");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
@@ -7528,7 +7533,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
             messages = true;
 
     // Generate generic client send method
-    WriteLineIndent("public func send(obj: Any, listener: " + domain + "Fbe.LogListener?) throws -> Int {");
+    WriteLineIndent("public func send(obj: Any, listener: " + domain + "Fbe.SenderListener) throws -> Int {");
     Indent(1);
     if (p->body && messages)
     {
@@ -7538,7 +7543,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
             if (s->message)
             {
                 std::string struct_name = domain + package + "." + *s->name;
-                WriteLineIndent("case is " + struct_name + ": return try send(value: obj as! " + struct_name + ", listener: listener)");
+                WriteLineIndent("case let obj as " + struct_name + ": if (obj.fbeType == " + *s->name + "SenderModel.fbeType) { return try send(value: obj, listener: listener) }");
             }
         }
         WriteLineIndent("default: break");
@@ -7571,12 +7576,13 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
                 WriteLine();
                 WriteLineIndent("public func send(value: " + struct_name + ") throws -> Int {");
                 Indent(1);
-                WriteLineIndent("return try send(value: value, listener: self as? "+ domain + "Fbe.LogListener)");
+                WriteLineIndent("guard let listener = self as? " + domain + "Fbe.SenderListener else { return 0 }");
+                WriteLineIndent("return try send(value: value, listener: listener )");
                 Indent(-1);
                 WriteLineIndent("}");
 
                 WriteLine();
-                WriteLineIndent("public func send(value: " + struct_name + ", listener: " + domain + "Fbe.LogListener?) throws -> Int {");
+                WriteLineIndent("public func send(value: " + struct_name + ", listener: " + domain + "Fbe.SenderListener) throws -> Int {");
                 Indent(1);
                 WriteLineIndent("// Serialize the value into the FBE stream");
                 WriteLineIndent("let serialized = try " + *s->name + "SenderModel.serialize(value: value)");
@@ -7584,25 +7590,20 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
                 WriteLineIndent("assert(" + *s->name + "SenderModel.verify(), \"" + struct_name + " validation failed!\")");
                 WriteLine();
                 WriteLineIndent("// Log the value");
-                WriteLineIndent("if logging {");
+                WriteLineIndent("if listener.logging {");
                 Indent(1);
                 WriteLineIndent("let message = value.description");
-                WriteLineIndent("listener?.onSendLog(message: message)");
+                WriteLineIndent("listener.onSendLog(message: message)");
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLine();
                 WriteLineIndent("// Send the serialized value");
-                WriteLineIndent("return try sendSerialized(serialized: serialized)");
+                WriteLineIndent("return try sendSerialized(listener: listener, serialized: serialized)");
                 Indent(-1);
                 WriteLineIndent("}");
             }
         }
     }
-
-    // Generate client send message handler
-    WriteLine();
-    WriteLineIndent("// Send message handler");
-    WriteLineIndent("open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }");
 
     // Generate client receive message handler
     WriteLineIndent("open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {");
@@ -7630,7 +7631,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
                 WriteLineIndent("assert(deserialized > 0, \"" + package + "." + *s->name + " deserialization failed!\")");
                 WriteLine();
                 WriteLineIndent("// Log the value");
-                WriteLineIndent("if logging {");
+                WriteLineIndent("if listener.logging {");
                 Indent(1);
                 WriteLineIndent("let message = " + *s->name + "ReceiverValue.description");
                 WriteLineIndent("listener.onReceiveLog(message: message)");
@@ -7666,6 +7667,11 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     // Generate client end
     Indent(-1);
     WriteLineIndent("}");
+
+    // WriteLineIndent("extension " + client + ": " + domain + "Fbe.SenderListener {");
+    // WriteLineIndent("// Send message handler");
+    // WriteLineIndent("open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }");
+    // WriteLineIndent("}");
 
     // Generate footer
     GenerateFooter();
@@ -8380,6 +8386,7 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
         return domain + "Fbe.UUIDGenerator.random()";
 
     std::string result = value;
+    result[0] = toupper(result[0]);
 
     if (!IsKnownType(type))
     {

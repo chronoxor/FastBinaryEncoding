@@ -10,6 +10,7 @@ import ChronoxorProto
 open class OrderMessage: Comparable, Hashable, Codable {
     public var body: Order = ChronoxorProtoex.Order()
 
+    open var fbeType: Int { 11 }
     public init() {}
     public init(body: Order) {
 

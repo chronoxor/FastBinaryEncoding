@@ -10,6 +10,7 @@ open class Balance: Comparable, Hashable, Codable {
     public var currency: String = ""
     public var amount: Double = 0.0
 
+    open var fbeType: Int { 2 }
     public init() {}
     public init(currency: String, amount: Double) {
 

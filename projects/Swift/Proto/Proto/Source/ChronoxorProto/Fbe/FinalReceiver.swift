@@ -19,7 +19,6 @@ open class FinalReceiver: ChronoxorFbe.ReceiverProtocol {
     private var AccountMessageModel: AccountMessageFinalModel
 
     public var buffer: Buffer = Buffer()
-    public var logging: Bool = false
     public var final: Bool = false
 
     public init() {
@@ -57,7 +56,7 @@ open class FinalReceiver: ChronoxorFbe.ReceiverProtocol {
             assert(deserialized > 0, "Proto.OrderMessage deserialization failed!")
 
             // Log the value
-            if logging {
+            if listener.logging {
                 let message = OrderMessageValue.description
                 listener.onReceiveLog(message: message)
             }
@@ -73,7 +72,7 @@ open class FinalReceiver: ChronoxorFbe.ReceiverProtocol {
             assert(deserialized > 0, "Proto.BalanceMessage deserialization failed!")
 
             // Log the value
-            if logging {
+            if listener.logging {
                 let message = BalanceMessageValue.description
                 listener.onReceiveLog(message: message)
             }
@@ -89,7 +88,7 @@ open class FinalReceiver: ChronoxorFbe.ReceiverProtocol {
             assert(deserialized > 0, "Proto.AccountMessage deserialization failed!")
 
             // Log the value
-            if logging {
+            if listener.logging {
                 let message = AccountMessageValue.description
                 listener.onReceiveLog(message: message)
             }

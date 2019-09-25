@@ -10,6 +10,7 @@ import ChronoxorProto
 open class BalanceMessage: Comparable, Hashable, Codable {
     public var body: Balance = ChronoxorProtoex.Balance()
 
+    open var fbeType: Int { 12 }
     public init() {}
     public init(body: Balance) {
 

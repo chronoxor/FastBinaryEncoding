@@ -11,6 +11,7 @@ open class StructHashEx: Comparable, Hashable, Codable {
     public var f1: Dictionary<StructSimple, StructNested> = Dictionary()
     public var f2: Dictionary<StructSimple, StructNested?> = Dictionary()
 
+    open var fbeType: Int { 142 }
     public init() {}
     public init(f1: Dictionary<StructSimple, StructNested>, f2: Dictionary<StructSimple, StructNested?>) {
 

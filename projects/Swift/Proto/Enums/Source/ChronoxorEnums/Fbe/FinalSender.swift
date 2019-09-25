@@ -11,7 +11,6 @@ open class FinalSender: ChronoxorFbe.SenderProtocol {
     // Sender models accessors
 
     public var buffer: Buffer = Buffer()
-    public var logging: Bool = false
     public var final: Bool = false
 
     public init() {
@@ -23,14 +22,12 @@ open class FinalSender: ChronoxorFbe.SenderProtocol {
     }
 
     public func send(obj: Any) throws -> Int {
-        return try send(obj: obj, listener: self as? ChronoxorFbe.LogListener)
+        guard let listener = self as? ChronoxorFbe.SenderListener else { return 0 }
+        return try send(obj: obj, listener: listener)
     }
 
-    public func send(obj: Any, listener: ChronoxorFbe.LogListener?) throws -> Int {
+    public func send(obj: Any, listener: ChronoxorFbe.SenderListener) throws -> Int {
 
         return 0
     }
-
-    // Send message handler
-    open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }
 }

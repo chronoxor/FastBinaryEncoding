@@ -6,11 +6,13 @@ import XCTest
 import ChronoxorProto
 import ChronoxorFbe
 
-fileprivate class MySender: ChronoxorProto.Sender, ChronoxorFbe.LogListener {
+fileprivate class MySender: ChronoxorProto.Sender, ChronoxorFbe.SenderListener {
     var size: Int = 0
     var logSize: Int = 0
 
-    override func onSend(buffer: Data, offset: Int, size: Int) throws -> Int {
+    var logging: Bool = false
+
+    func onSend(buffer: Data, offset: Int, size: Int) throws -> Int {
         self.size += size
         return 0
     }
@@ -22,6 +24,7 @@ fileprivate class MySender: ChronoxorProto.Sender, ChronoxorFbe.LogListener {
 
 fileprivate class MyReceiver: ChronoxorProto.Receiver, ChronoxorProto.ReceiverListener {
     var logSize: Int = 0
+    var logging: Bool = false
 
     func onSendLog(message: String) {
         logSize += message.count

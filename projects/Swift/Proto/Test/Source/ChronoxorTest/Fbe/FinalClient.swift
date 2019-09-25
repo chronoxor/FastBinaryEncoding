@@ -20,7 +20,6 @@ open class FinalClient: ChronoxorFbe.ClientProtocol {
 
     public var sendBuffer: Buffer = Buffer()
     public var receiveBuffer: Buffer = Buffer()
-    public var logging: Bool = false
     public var final: Bool = false
 
     public init() {
@@ -34,10 +33,11 @@ open class FinalClient: ChronoxorFbe.ClientProtocol {
     }
 
     public func send(obj: Any) throws -> Int {
-        return try send(obj: obj, listener: self as? ChronoxorFbe.LogListener)
+        guard let listener = self as? ChronoxorFbe.SenderListener else { return 0 }
+        return try send(obj: obj, listener: listener)
     }
 
-    public func send(obj: Any, listener: ChronoxorFbe.LogListener?) throws -> Int {
+    public func send(obj: Any, listener: ChronoxorFbe.SenderListener) throws -> Int {
 
         // Try to send using imported clients
         var result: Int = 0
@@ -46,9 +46,6 @@ open class FinalClient: ChronoxorFbe.ClientProtocol {
 
         return 0
     }
-
-    // Send message handler
-    open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }
     open func onReceive(type: Int, buffer: Data, offset: Int, size: Int) -> Bool {
         guard let listener = self as? FinalReceiverListener else { return false }
         return onReceiveListener(listener: listener, type: type, buffer: buffer, offset: offset, size: size)

@@ -6,8 +6,11 @@ import XCTest
 import ChronoxorFbe
 import ChronoxorProto
 
-fileprivate class MySender: ChronoxorProto.Sender {
-    override func onSend(buffer: Data, offset: Int, size: Int) throws -> Int {
+fileprivate class MySender: ChronoxorProto.Sender, ChronoxorFbe.SenderListener {
+    
+    var logging: Bool = true
+
+    func onSend(buffer: Data, offset: Int, size: Int) throws -> Int {
         // Send nothing...
         return 0
     }
@@ -18,6 +21,8 @@ fileprivate class MySender: ChronoxorProto.Sender {
 }
 
 fileprivate class MyReceiver: ChronoxorProto.Receiver, ChronoxorProto.ReceiverListener {
+    var logging: Bool = true
+
     func onReceiveLog(message: String) {
         print("onReceive: " + message)
     }
@@ -26,9 +31,6 @@ fileprivate class MyReceiver: ChronoxorProto.Receiver, ChronoxorProto.ReceiverLi
 class SendReceive: XCTestCase {
     func testSendReceive() {
         let sender = MySender()
-
-        // Enable logging
-        sender.logging = true
 
         // Create and send a new order
         let order = Order(id: 1, symbol: "EURUSD", side: OrderSide.buy, type: OrderType.market, price: 1.23456, volume: 1000.0)
@@ -46,9 +48,6 @@ class SendReceive: XCTestCase {
         _ = try? sender.send(value: AccountMessage(body: account))
 
         let receiver = MyReceiver()
-
-        // Enable logging
-        receiver.logging = true
 
         // Receive data from the sender
         try? receiver.receive(buffer: sender.buffer)
