@@ -9553,6 +9553,8 @@ namespace FBE {
     // Fast Binary Encoding base sender listener interface
     public interface ISenderListener
     {
+        // Send message handler
+        long OnSend(byte[] buffer, long offset, long size) { return size; }
         // Send log message handler
         void OnSendLog(string message) {}
     }
@@ -9576,7 +9578,7 @@ namespace FBE {
         // Send serialized buffer.
         // Direct call of the method requires knowledge about internals of FBE models serialization.
         // Use it with care!
-        public long SendSerialized(long serialized)
+        public long SendSerialized(ISenderListener listener, long serialized)
         {
             Debug.Assert((serialized > 0), "Invalid size of the serialized buffer!");
             if (serialized == 0)
@@ -9586,13 +9588,10 @@ namespace FBE {
             Buffer.Shift(serialized);
 
             // Send the value
-            long sent = OnSend(Buffer.Data, 0, Buffer.Size);
+            long sent = listener.OnSend(Buffer.Data, 0, Buffer.Size);
             Buffer.Remove(0, sent);
             return sent;
         }
-
-        // Send message handler
-        protected abstract long OnSend(byte[] buffer, long offset, long size);
     }
 
     // Fast Binary Encoding base receiver listener interface
@@ -9893,7 +9892,7 @@ namespace FBE {
         // Send serialized buffer.
         // Direct call of the method requires knowledge about internals of FBE models serialization.
         // Use it with care!
-        public long SendSerialized(long serialized)
+        public long SendSerialized(ISenderListener listener, long serialized)
         {
             Debug.Assert((serialized > 0), "Invalid size of the serialized buffer!");
             if (serialized == 0)
@@ -9903,13 +9902,10 @@ namespace FBE {
             SendBuffer.Shift(serialized);
 
             // Send the value
-            long sent = OnSend(SendBuffer.Data, 0, SendBuffer.Size);
+            long sent = listener.OnSend(SendBuffer.Data, 0, SendBuffer.Size);
             SendBuffer.Remove(0, sent);
             return sent;
         }
-
-        // Send message handler
-        protected abstract long OnSend(byte[] buffer, long offset, long size);
 
         // Receive data
         public void Receive(Buffer buffer) { Receive(buffer.Data, 0, buffer.Size); }

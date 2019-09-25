@@ -7,7 +7,7 @@ namespace Benchmarks
         private long Size { get; set; }
         private long LogSize { get; set; }
 
-        protected override long OnSend(byte[] buffer, long offset, long size) { Size += size; return size; }
+        public long OnSend(byte[] buffer, long offset, long size) { Size += size; return size; }
         public void OnSendLog(string message) { LogSize += message.Length; }
     }
 
@@ -16,7 +16,7 @@ namespace Benchmarks
         private long Size { get; set; }
         private long LogSize { get; set; }
 
-        protected override long OnSend(byte[] buffer, long offset, long size) { Size += size; return 0; }
+        public long OnSend(byte[] buffer, long offset, long size) { Size += size; return 0; }
         public void OnSendLog(string message) { LogSize += message.Length; }
     }
 

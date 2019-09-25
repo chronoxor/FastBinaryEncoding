@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Tests
 {
-    public class MySender : FBE.proto.Sender
+    public class MySender : FBE.proto.Sender, FBE.proto.ISenderListener
     {
-        protected override long OnSend(byte[] buffer, long offset, long size)
+        public long OnSend(byte[] buffer, long offset, long size)
         {
             // Send nothing...
             return 0;

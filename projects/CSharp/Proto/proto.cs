@@ -4762,7 +4762,7 @@ namespace proto {
             }
 
             // Send the serialized value
-            return SendSerialized(serialized);
+            return SendSerialized(listener, serialized);
         }
         public long Send(global::proto.BalanceMessage value) { return SendListener(this, value); }
         public long SendListener(ISenderListener listener, global::proto.BalanceMessage value)
@@ -4780,7 +4780,7 @@ namespace proto {
             }
 
             // Send the serialized value
-            return SendSerialized(serialized);
+            return SendSerialized(listener, serialized);
         }
         public long Send(global::proto.AccountMessage value) { return SendListener(this, value); }
         public long SendListener(ISenderListener listener, global::proto.AccountMessage value)
@@ -4798,11 +4798,8 @@ namespace proto {
             }
 
             // Send the serialized value
-            return SendSerialized(serialized);
+            return SendSerialized(listener, serialized);
         }
-
-        // Send message handler
-        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.proto.Sender.OnSend() not implemented!"); }
     }
 
 } // namespace proto
@@ -5081,7 +5078,7 @@ namespace proto {
             }
 
             // Send the serialized value
-            return SendSerialized(serialized);
+            return SendSerialized(listener, serialized);
         }
         public long Send(global::proto.BalanceMessage value) { return SendListener(this, value); }
         public long SendListener(IClientListener listener, global::proto.BalanceMessage value)
@@ -5099,7 +5096,7 @@ namespace proto {
             }
 
             // Send the serialized value
-            return SendSerialized(serialized);
+            return SendSerialized(listener, serialized);
         }
         public long Send(global::proto.AccountMessage value) { return SendListener(this, value); }
         public long SendListener(IClientListener listener, global::proto.AccountMessage value)
@@ -5117,11 +5114,9 @@ namespace proto {
             }
 
             // Send the serialized value
-            return SendSerialized(serialized);
+            return SendSerialized(listener, serialized);
         }
 
-        // Send message handler
-        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.proto.Client.OnSend() not implemented!"); }
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
         internal bool OnReceiveListener(IClientListener listener, long type, byte[] buffer, long offset, long size)
         {
@@ -5239,7 +5234,7 @@ namespace proto {
             }
 
             // Send the serialized value
-            return SendSerialized(serialized);
+            return SendSerialized(listener, serialized);
         }
         public long Send(global::proto.BalanceMessage value) { return SendListener(this, value); }
         public long SendListener(IFinalSenderListener listener, global::proto.BalanceMessage value)
@@ -5257,7 +5252,7 @@ namespace proto {
             }
 
             // Send the serialized value
-            return SendSerialized(serialized);
+            return SendSerialized(listener, serialized);
         }
         public long Send(global::proto.AccountMessage value) { return SendListener(this, value); }
         public long SendListener(IFinalSenderListener listener, global::proto.AccountMessage value)
@@ -5275,11 +5270,8 @@ namespace proto {
             }
 
             // Send the serialized value
-            return SendSerialized(serialized);
+            return SendSerialized(listener, serialized);
         }
-
-        // Send message handler
-        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.proto.Sender.OnSend() not implemented!"); }
     }
 
 } // namespace proto
@@ -5468,7 +5460,7 @@ namespace proto {
             }
 
             // Send the serialized value
-            return SendSerialized(serialized);
+            return SendSerialized(listener, serialized);
         }
         public long Send(global::proto.BalanceMessage value) { return SendListener(this, value); }
         public long SendListener(IFinalClientListener listener, global::proto.BalanceMessage value)
@@ -5486,7 +5478,7 @@ namespace proto {
             }
 
             // Send the serialized value
-            return SendSerialized(serialized);
+            return SendSerialized(listener, serialized);
         }
         public long Send(global::proto.AccountMessage value) { return SendListener(this, value); }
         public long SendListener(IFinalClientListener listener, global::proto.AccountMessage value)
@@ -5504,11 +5496,9 @@ namespace proto {
             }
 
             // Send the serialized value
-            return SendSerialized(serialized);
+            return SendSerialized(listener, serialized);
         }
 
-        // Send message handler
-        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.proto.Client.OnSend() not implemented!"); }
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
         internal bool OnReceiveListener(IFinalClientListener listener, long type, byte[] buffer, long offset, long size)
         {

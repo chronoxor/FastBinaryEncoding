@@ -3141,6 +3141,8 @@ void GeneratorCSharp::GenerateFBESender()
     // Fast Binary Encoding base sender listener interface
     public interface ISenderListener
     {
+        // Send message handler
+        long OnSend(byte[] buffer, long offset, long size) { return size; }
         // Send log message handler
         void OnSendLog(string message) {}
     }
@@ -3164,7 +3166,7 @@ void GeneratorCSharp::GenerateFBESender()
         // Send serialized buffer.
         // Direct call of the method requires knowledge about internals of FBE models serialization.
         // Use it with care!
-        public long SendSerialized(long serialized)
+        public long SendSerialized(ISenderListener listener, long serialized)
         {
             Debug.Assert((serialized > 0), "Invalid size of the serialized buffer!");
             if (serialized == 0)
@@ -3174,13 +3176,10 @@ void GeneratorCSharp::GenerateFBESender()
             Buffer.Shift(serialized);
 
             // Send the value
-            long sent = OnSend(Buffer.Data, 0, Buffer.Size);
+            long sent = listener.OnSend(Buffer.Data, 0, Buffer.Size);
             Buffer.Remove(0, sent);
             return sent;
         }
-
-        // Send message handler
-        protected abstract long OnSend(byte[] buffer, long offset, long size);
     }
 )CODE";
 
@@ -3501,7 +3500,7 @@ void GeneratorCSharp::GenerateFBEClient()
         // Send serialized buffer.
         // Direct call of the method requires knowledge about internals of FBE models serialization.
         // Use it with care!
-        public long SendSerialized(long serialized)
+        public long SendSerialized(ISenderListener listener, long serialized)
         {
             Debug.Assert((serialized > 0), "Invalid size of the serialized buffer!");
             if (serialized == 0)
@@ -3511,13 +3510,10 @@ void GeneratorCSharp::GenerateFBEClient()
             SendBuffer.Shift(serialized);
 
             // Send the value
-            long sent = OnSend(SendBuffer.Data, 0, SendBuffer.Size);
+            long sent = listener.OnSend(SendBuffer.Data, 0, SendBuffer.Size);
             SendBuffer.Remove(0, sent);
             return sent;
         }
-
-        // Send message handler
-        protected abstract long OnSend(byte[] buffer, long offset, long size);
 
         // Receive data
         public void Receive(Buffer buffer) { Receive(buffer.Data, 0, buffer.Size); }
@@ -6582,17 +6578,12 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
                 WriteLineIndent("}");
                 WriteLine();
                 WriteLineIndent("// Send the serialized value");
-                WriteLineIndent("return SendSerialized(serialized);");
+                WriteLineIndent("return SendSerialized(listener, serialized);");
                 Indent(-1);
                 WriteLineIndent("}");
             }
         }
     }
-
-    // Generate sender message handler
-    WriteLine();
-    WriteLineIndent("// Send message handler");
-    WriteLineIndent("protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException(\"FBE." + *p->name + ".Sender.OnSend() not implemented!\"); }");
 
     // Generate sender end
     Indent(-1);
@@ -7161,19 +7152,15 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 WriteLineIndent("}");
                 WriteLine();
                 WriteLineIndent("// Send the serialized value");
-                WriteLineIndent("return SendSerialized(serialized);");
+                WriteLineIndent("return SendSerialized(listener, serialized);");
                 Indent(-1);
                 WriteLineIndent("}");
             }
         }
     }
 
-    // Generate client message handler
-    WriteLine();
-    WriteLineIndent("// Send message handler");
-    WriteLineIndent("protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException(\"FBE." + *p->name + ".Client.OnSend() not implemented!\"); }");
-
     // Generate receiver message handler
+    WriteLine();
     WriteLineIndent("internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }");
     WriteLineIndent("internal bool OnReceiveListener(" + listener + " listener, long type, byte[] buffer, long offset, long size)");
     WriteLineIndent("{");

@@ -5780,9 +5780,6 @@ namespace enums {
         {
         }
 
-
-        // Send message handler
-        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.enums.Sender.OnSend() not implemented!"); }
     }
 
 } // namespace enums
@@ -5887,8 +5884,6 @@ namespace enums {
         }
 
 
-        // Send message handler
-        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.enums.Client.OnSend() not implemented!"); }
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
         internal bool OnReceiveListener(IClientListener listener, long type, byte[] buffer, long offset, long size)
         {
@@ -5924,9 +5919,6 @@ namespace enums {
         {
         }
 
-
-        // Send message handler
-        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.enums.Sender.OnSend() not implemented!"); }
     }
 
 } // namespace enums
@@ -5995,8 +5987,6 @@ namespace enums {
         }
 
 
-        // Send message handler
-        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.enums.Client.OnSend() not implemented!"); }
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
         internal bool OnReceiveListener(IFinalClientListener listener, long type, byte[] buffer, long offset, long size)
         {

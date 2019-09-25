@@ -16235,9 +16235,6 @@ namespace test {
             protoSender = new proto.Sender(Buffer);
         }
 
-
-        // Send message handler
-        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.test.Sender.OnSend() not implemented!"); }
     }
 
 } // namespace test
@@ -16363,8 +16360,6 @@ namespace test {
         }
 
 
-        // Send message handler
-        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.test.Client.OnSend() not implemented!"); }
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
         internal bool OnReceiveListener(IClientListener listener, long type, byte[] buffer, long offset, long size)
         {
@@ -16408,9 +16403,6 @@ namespace test {
             protoSender = new proto.FinalSender(Buffer);
         }
 
-
-        // Send message handler
-        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.test.Sender.OnSend() not implemented!"); }
     }
 
 } // namespace test
@@ -16492,8 +16484,6 @@ namespace test {
         }
 
 
-        // Send message handler
-        protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.test.Client.OnSend() not implemented!"); }
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
         internal bool OnReceiveListener(IFinalClientListener listener, long type, byte[] buffer, long offset, long size)
         {
