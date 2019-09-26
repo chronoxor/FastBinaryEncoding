@@ -5222,16 +5222,6 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
         WriteLine();
     }
 
-    // Generate struct FBE type property
-    if (s->base && !s->base->empty() && (s->type == 0))
-    {
-        // do nothing
-    }
-    else if (s->base && !s->base->empty())
-        WriteLineIndent("override open var fbeType: Int { " + std::to_string(s->type) + " }");
-    else
-        WriteLineIndent("open var fbeType: Int { " + std::to_string(s->type) + " }");
-
     // Generate struct default constructor
     if (s->base && !s->base->empty())
         WriteLineIndent("public override init() { super.init() }");
@@ -6773,17 +6763,21 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     Indent(1);
     if (p->body && messages)
     {
-        WriteLineIndent("switch obj {");
+        WriteLineIndent("let objType = type(of: obj)");
+        bool first = true;
         for (const auto& s : p->body->structs)
         {
             if (s->message)
             {
+                WriteIndent();
                 std::string struct_name = domain + package + "." + *s->name;
-                WriteLineIndent("case let obj as " + struct_name + ": if (obj.fbeType == " + *s->name + "Model.fbeType) { return try send(value: obj, listener: listener) }");
+                if (!first)
+                    Write("else ");
+
+                WriteLine("if objType == " + struct_name + ".self, let value = obj as? " + struct_name + " { return try send(value: value, listener: listener) }");
+                first = false;
             }
         }
-        WriteLineIndent("default: break");
-        WriteLineIndent("}");
     }
     WriteLine();
     if (p->import)
@@ -6817,7 +6811,7 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
                 WriteLineIndent("public func send(value: " + struct_name + ") throws -> Int {");
                 Indent(1);
                 WriteLineIndent("guard let listener = self as? " + domain + "Fbe.SenderListener else { return 0 }");
-                WriteLineIndent("return try send(value: value, listener: listener )");
+                WriteLineIndent("return try send(value: value, listener: listener)");
                 Indent(-1);
                 WriteLineIndent("}");
 
@@ -7537,17 +7531,21 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     Indent(1);
     if (p->body && messages)
     {
-        WriteLineIndent("switch obj {");
+        WriteLineIndent("let objType = type(of: obj)");
+        bool first = true;
         for (const auto& s : p->body->structs)
         {
             if (s->message)
             {
+                WriteIndent();
                 std::string struct_name = domain + package + "." + *s->name;
-                WriteLineIndent("case let obj as " + struct_name + ": if (obj.fbeType == " + *s->name + "SenderModel.fbeType) { return try send(value: obj, listener: listener) }");
+                if (!first)
+                    Write("else ");
+
+                WriteLine("if objType == " + struct_name + ".self, let value = obj as? " + struct_name + " { return try send(value: value, listener: listener) }");
+                first = false;
             }
         }
-        WriteLineIndent("default: break");
-        WriteLineIndent("}");
     }
     WriteLine();
     if (p->import)
@@ -7577,7 +7575,7 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
                 WriteLineIndent("public func send(value: " + struct_name + ") throws -> Int {");
                 Indent(1);
                 WriteLineIndent("guard let listener = self as? " + domain + "Fbe.SenderListener else { return 0 }");
-                WriteLineIndent("return try send(value: value, listener: listener )");
+                WriteLineIndent("return try send(value: value, listener: listener)");
                 Indent(-1);
                 WriteLineIndent("}");
 
