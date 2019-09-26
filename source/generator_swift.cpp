@@ -6764,18 +6764,12 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     if (p->body && messages)
     {
         WriteLineIndent("let objType = type(of: obj)");
-        bool first = true;
         for (const auto& s : p->body->structs)
         {
             if (s->message)
             {
-                WriteIndent();
                 std::string struct_name = domain + package + "." + *s->name;
-                if (!first)
-                    Write("else ");
-
-                WriteLine("if objType == " + struct_name + ".self, let value = obj as? " + struct_name + " { return try send(value: value, listener: listener) }");
-                first = false;
+                WriteLineIndent("if objType == " + struct_name + ".self, let value = obj as? " + struct_name + " { return try send(value: value, listener: listener) }");
             }
         }
     }
@@ -7532,18 +7526,12 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     if (p->body && messages)
     {
         WriteLineIndent("let objType = type(of: obj)");
-        bool first = true;
         for (const auto& s : p->body->structs)
         {
             if (s->message)
             {
-                WriteIndent();
                 std::string struct_name = domain + package + "." + *s->name;
-                if (!first)
-                    Write("else ");
-
-                WriteLine("if objType == " + struct_name + ".self, let value = obj as? " + struct_name + " { return try send(value: value, listener: listener) }");
-                first = false;
+                WriteLineIndent("if objType == " + struct_name + ".self, let value = obj as? " + struct_name + " { return try send(value: value, listener: listener) }");
             }
         }
     }

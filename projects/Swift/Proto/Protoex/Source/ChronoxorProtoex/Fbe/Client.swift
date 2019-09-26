@@ -65,12 +65,10 @@ open class Client: ChronoxorFbe.ClientProtocol {
     }
 
     public func send(obj: Any, listener: ChronoxorFbe.SenderListener) throws -> Int {
-        switch obj {
-        case let obj as ChronoxorProtoex.OrderMessage: if (obj.fbeType == OrderMessageSenderModel.fbeType) { return try send(value: obj, listener: listener) }
-        case let obj as ChronoxorProtoex.BalanceMessage: if (obj.fbeType == BalanceMessageSenderModel.fbeType) { return try send(value: obj, listener: listener) }
-        case let obj as ChronoxorProtoex.AccountMessage: if (obj.fbeType == AccountMessageSenderModel.fbeType) { return try send(value: obj, listener: listener) }
-        default: break
-        }
+        let objType = type(of: obj)
+        if objType == ChronoxorProtoex.OrderMessage.self, let value = obj as? ChronoxorProtoex.OrderMessage { return try send(value: value, listener: listener) }
+        if objType == ChronoxorProtoex.BalanceMessage.self, let value = obj as? ChronoxorProtoex.BalanceMessage { return try send(value: value, listener: listener) }
+        if objType == ChronoxorProtoex.AccountMessage.self, let value = obj as? ChronoxorProtoex.AccountMessage { return try send(value: value, listener: listener) }
 
         // Try to send using imported clients
         var result: Int = 0
@@ -82,7 +80,7 @@ open class Client: ChronoxorFbe.ClientProtocol {
 
     public func send(value: ChronoxorProtoex.OrderMessage) throws -> Int {
         guard let listener = self as? ChronoxorFbe.SenderListener else { return 0 }
-        return try send(value: value, listener: listener )
+        return try send(value: value, listener: listener)
     }
 
     public func send(value: ChronoxorProtoex.OrderMessage, listener: ChronoxorFbe.SenderListener) throws -> Int {
@@ -103,7 +101,7 @@ open class Client: ChronoxorFbe.ClientProtocol {
 
     public func send(value: ChronoxorProtoex.BalanceMessage) throws -> Int {
         guard let listener = self as? ChronoxorFbe.SenderListener else { return 0 }
-        return try send(value: value, listener: listener )
+        return try send(value: value, listener: listener)
     }
 
     public func send(value: ChronoxorProtoex.BalanceMessage, listener: ChronoxorFbe.SenderListener) throws -> Int {
@@ -124,7 +122,7 @@ open class Client: ChronoxorFbe.ClientProtocol {
 
     public func send(value: ChronoxorProtoex.AccountMessage) throws -> Int {
         guard let listener = self as? ChronoxorFbe.SenderListener else { return 0 }
-        return try send(value: value, listener: listener )
+        return try send(value: value, listener: listener)
     }
 
     public func send(value: ChronoxorProtoex.AccountMessage, listener: ChronoxorFbe.SenderListener) throws -> Int {

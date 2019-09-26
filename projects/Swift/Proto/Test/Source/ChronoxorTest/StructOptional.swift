@@ -75,7 +75,6 @@ open class StructOptional: StructSimple {
     public var f164: ChronoxorProto.Account? = nil
     public var f165: ChronoxorProto.Account? = nil
 
-    override open var fbeType: Int { 111 }
     public override init() { super.init() }
     public init(parent: StructSimple, f100: Bool?, f101: Bool?, f102: Bool?, f103: UInt8?, f104: UInt8?, f105: UInt8?, f106: Character?, f107: Character?, f108: Character?, f109: Character?, f110: Character?, f111: Character?, f112: Int8?, f113: Int8?, f114: Int8?, f115: UInt8?, f116: UInt8?, f117: UInt8?, f118: Int16?, f119: Int16?, f120: Int16?, f121: UInt16?, f122: UInt16?, f123: UInt16?, f124: Int32?, f125: Int32?, f126: Int32?, f127: UInt32?, f128: UInt32?, f129: UInt32?, f130: Int64?, f131: Int64?, f132: Int64?, f133: UInt64?, f134: UInt64?, f135: UInt64?, f136: Float?, f137: Float?, f138: Float?, f139: Double?, f140: Double?, f141: Double?, f142: Decimal?, f143: Decimal?, f144: Decimal?, f145: String?, f146: String?, f147: String?, f148: TimeInterval?, f149: TimeInterval?, f150: TimeInterval?, f151: UUID?, f152: UUID?, f153: UUID?, f154: ChronoxorProto.OrderSide?, f155: ChronoxorProto.OrderSide?, f156: ChronoxorProto.OrderType?, f157: ChronoxorProto.OrderType?, f158: ChronoxorProto.Order?, f159: ChronoxorProto.Order?, f160: ChronoxorProto.Balance?, f161: ChronoxorProto.Balance?, f162: ChronoxorProto.State?, f163: ChronoxorProto.State?, f164: ChronoxorProto.Account?, f165: ChronoxorProto.Account?) {
         super.init(other: parent)

@@ -19,7 +19,6 @@ open class StructMap: Comparable, Hashable, Codable {
     public var f9: Dictionary<Int32, StructSimple> = Dictionary()
     public var f10: Dictionary<Int32, StructSimple?> = Dictionary()
 
-    open var fbeType: Int { 140 }
     public init() {}
     public init(f1: Dictionary<Int32, UInt8>, f2: Dictionary<Int32, UInt8?>, f3: Dictionary<Int32, Data>, f4: Dictionary<Int32, Data?>, f5: Dictionary<Int32, EnumSimple>, f6: Dictionary<Int32, EnumSimple?>, f7: Dictionary<Int32, FlagsSimple>, f8: Dictionary<Int32, FlagsSimple?>, f9: Dictionary<Int32, StructSimple>, f10: Dictionary<Int32, StructSimple?>) {
 

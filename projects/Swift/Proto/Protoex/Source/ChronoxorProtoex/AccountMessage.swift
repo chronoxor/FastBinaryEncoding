@@ -10,7 +10,6 @@ import ChronoxorProto
 open class AccountMessage: Comparable, Hashable, Codable {
     public var body: Account = ChronoxorProtoex.Account()
 
-    open var fbeType: Int { 13 }
     public init() {}
     public init(body: Account) {
 

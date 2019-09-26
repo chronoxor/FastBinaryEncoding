@@ -13,7 +13,6 @@ open class StructSet: Comparable, Hashable, Codable {
     public var f3: Array<FlagsSimple> = Array()
     public var f4: Array<StructSimple> = Array()
 
-    open var fbeType: Int { 132 }
     public init() {}
     public init(f1: Array<UInt8>, f2: Array<EnumSimple>, f3: Array<FlagsSimple>, f4: Array<StructSimple>) {
 

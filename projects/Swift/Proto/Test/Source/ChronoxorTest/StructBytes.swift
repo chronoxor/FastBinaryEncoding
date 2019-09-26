@@ -12,7 +12,6 @@ open class StructBytes: Comparable, Hashable, Codable {
     public var f2: Data? = nil
     public var f3: Data? = nil
 
-    open var fbeType: Int { 120 }
     public init() {}
     public init(f1: Data, f2: Data?, f3: Data?) {
 

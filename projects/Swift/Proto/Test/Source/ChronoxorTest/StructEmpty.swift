@@ -8,7 +8,6 @@ import ChronoxorFbe
 import ChronoxorProto
 
 open class StructEmpty: Comparable, Hashable, Codable {
-    open var fbeType: Int { 143 }
     public init() {}
 
     public init(other: StructEmpty) {
