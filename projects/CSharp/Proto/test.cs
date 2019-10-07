@@ -11,6 +11,7 @@ using System.IO;
 using System.Numerics;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading;
 #if UTF8JSON
 using Utf8Json;
 using Utf8Json.Resolvers;
@@ -16235,6 +16236,22 @@ namespace test {
             protoSender = new proto.Sender(Buffer);
         }
 
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(ISenderListener listener, object obj)
+        {
+            switch (obj)
+            {
+                default: break;
+            }
+
+            long result;
+            result = protoSender.SendListener(listener, obj);
+            if (result > 0)
+                return result;
+
+            return 0;
+        }
+
     }
 
 } // namespace test
@@ -16276,7 +16293,7 @@ namespace test {
                 default: break;
             }
 
-            if ((protoReceiver != null) && protoReceiver.OnReceiveListener(listener, type, buffer, offset, size))
+            if (protoReceiver.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;
@@ -16320,7 +16337,7 @@ namespace test {
                 default: break;
             }
 
-            if ((protoProxy != null) && protoProxy.OnReceiveListener(listener, type, buffer, offset, size))
+            if (protoProxy.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;
@@ -16359,6 +16376,22 @@ namespace test {
             protoClient = new proto.Client(SendBuffer, ReceiveBuffer);
         }
 
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(IClientListener listener, object obj)
+        {
+            switch (obj)
+            {
+                default: break;
+            }
+
+            long result;
+            result = protoClient.SendListener(listener, obj);
+            if (result > 0)
+                return result;
+
+            return 0;
+        }
+
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
         internal bool OnReceiveListener(IClientListener listener, long type, byte[] buffer, long offset, long size)
@@ -16368,7 +16401,7 @@ namespace test {
                 default: break;
             }
 
-            if ((protoClient != null) && protoClient.OnReceiveListener(listener, type, buffer, offset, size))
+            if (protoClient.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;
@@ -16401,6 +16434,22 @@ namespace test {
         public FinalSender(Buffer buffer) : base(buffer, true)
         {
             protoSender = new proto.FinalSender(Buffer);
+        }
+
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(IFinalSenderListener listener, object obj)
+        {
+            switch (obj)
+            {
+                default: break;
+            }
+
+            long result;
+            result = protoSender.SendListener(listener, obj);
+            if (result > 0)
+                return result;
+
+            return 0;
         }
 
     }
@@ -16444,7 +16493,7 @@ namespace test {
                 default: break;
             }
 
-            if ((protoReceiver != null) && protoReceiver.OnReceiveListener(listener, type, buffer, offset, size))
+            if (protoReceiver.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;
@@ -16483,6 +16532,22 @@ namespace test {
             protoClient = new proto.FinalClient(SendBuffer, ReceiveBuffer);
         }
 
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(IFinalClientListener listener, object obj)
+        {
+            switch (obj)
+            {
+                default: break;
+            }
+
+            long result;
+            result = protoClient.SendListener(listener, obj);
+            if (result > 0)
+                return result;
+
+            return 0;
+        }
+
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
         internal bool OnReceiveListener(IFinalClientListener listener, long type, byte[] buffer, long offset, long size)
@@ -16492,7 +16557,7 @@ namespace test {
                 default: break;
             }
 
-            if ((protoClient != null) && protoClient.OnReceiveListener(listener, type, buffer, offset, size))
+            if (protoClient.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;

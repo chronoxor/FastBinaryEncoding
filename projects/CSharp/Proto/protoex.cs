@@ -11,6 +11,7 @@ using System.IO;
 using System.Numerics;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading;
 #if UTF8JSON
 using Utf8Json;
 using Utf8Json.Resolvers;
@@ -4855,6 +4856,25 @@ namespace protoex {
             AccountMessageModel = new AccountMessageModel(Buffer);
         }
 
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(ISenderListener listener, object obj)
+        {
+            switch (obj)
+            {
+                case global::protoex.OrderMessage value when value.FBEType == global::protoex.OrderMessage.FBETypeConst: return SendListener(listener, value);
+                case global::protoex.BalanceMessage value when value.FBEType == global::protoex.BalanceMessage.FBETypeConst: return SendListener(listener, value);
+                case global::protoex.AccountMessage value when value.FBEType == global::protoex.AccountMessage.FBETypeConst: return SendListener(listener, value);
+                default: break;
+            }
+
+            long result;
+            result = protoSender.SendListener(listener, obj);
+            if (result > 0)
+                return result;
+
+            return 0;
+        }
+
         public long Send(global::protoex.OrderMessage value) { return SendListener(this, value); }
         public long SendListener(ISenderListener listener, global::protoex.OrderMessage value)
         {
@@ -5028,7 +5048,7 @@ namespace protoex {
                 default: break;
             }
 
-            if ((protoReceiver != null) && protoReceiver.OnReceiveListener(listener, type, buffer, offset, size))
+            if (protoReceiver.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;
@@ -5126,7 +5146,7 @@ namespace protoex {
                 default: break;
             }
 
-            if ((protoProxy != null) && protoProxy.OnReceiveListener(listener, type, buffer, offset, size))
+            if (protoProxy.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;
@@ -5190,6 +5210,25 @@ namespace protoex {
             AccountMessageSenderModel = new AccountMessageModel(SendBuffer);
             AccountMessageReceiverValue = global::protoex.AccountMessage.Default;
             AccountMessageReceiverModel = new AccountMessageModel();
+        }
+
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(IClientListener listener, object obj)
+        {
+            switch (obj)
+            {
+                case global::protoex.OrderMessage value when value.FBEType == global::protoex.OrderMessage.FBETypeConst: return SendListener(listener, value);
+                case global::protoex.BalanceMessage value when value.FBEType == global::protoex.BalanceMessage.FBETypeConst: return SendListener(listener, value);
+                case global::protoex.AccountMessage value when value.FBEType == global::protoex.AccountMessage.FBETypeConst: return SendListener(listener, value);
+                default: break;
+            }
+
+            long result;
+            result = protoClient.SendListener(listener, obj);
+            if (result > 0)
+                return result;
+
+            return 0;
         }
 
         public long Send(global::protoex.OrderMessage value) { return SendListener(this, value); }
@@ -5312,7 +5351,7 @@ namespace protoex {
                 default: break;
             }
 
-            if ((protoClient != null) && protoClient.OnReceiveListener(listener, type, buffer, offset, size))
+            if (protoClient.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;
@@ -5354,6 +5393,25 @@ namespace protoex {
             OrderMessageModel = new OrderMessageFinalModel(Buffer);
             BalanceMessageModel = new BalanceMessageFinalModel(Buffer);
             AccountMessageModel = new AccountMessageFinalModel(Buffer);
+        }
+
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(IFinalSenderListener listener, object obj)
+        {
+            switch (obj)
+            {
+                case global::protoex.OrderMessage value when value.FBEType == global::protoex.OrderMessage.FBETypeConst: return SendListener(listener, value);
+                case global::protoex.BalanceMessage value when value.FBEType == global::protoex.BalanceMessage.FBETypeConst: return SendListener(listener, value);
+                case global::protoex.AccountMessage value when value.FBEType == global::protoex.AccountMessage.FBETypeConst: return SendListener(listener, value);
+                default: break;
+            }
+
+            long result;
+            result = protoSender.SendListener(listener, obj);
+            if (result > 0)
+                return result;
+
+            return 0;
         }
 
         public long Send(global::protoex.OrderMessage value) { return SendListener(this, value); }
@@ -5529,7 +5587,7 @@ namespace protoex {
                 default: break;
             }
 
-            if ((protoReceiver != null) && protoReceiver.OnReceiveListener(listener, type, buffer, offset, size))
+            if (protoReceiver.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;
@@ -5593,6 +5651,25 @@ namespace protoex {
             AccountMessageSenderModel = new AccountMessageFinalModel(SendBuffer);
             AccountMessageReceiverValue = global::protoex.AccountMessage.Default;
             AccountMessageReceiverModel = new AccountMessageFinalModel();
+        }
+
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(IFinalClientListener listener, object obj)
+        {
+            switch (obj)
+            {
+                case global::protoex.OrderMessage value when value.FBEType == global::protoex.OrderMessage.FBETypeConst: return SendListener(listener, value);
+                case global::protoex.BalanceMessage value when value.FBEType == global::protoex.BalanceMessage.FBETypeConst: return SendListener(listener, value);
+                case global::protoex.AccountMessage value when value.FBEType == global::protoex.AccountMessage.FBETypeConst: return SendListener(listener, value);
+                default: break;
+            }
+
+            long result;
+            result = protoClient.SendListener(listener, obj);
+            if (result > 0)
+                return result;
+
+            return 0;
         }
 
         public long Send(global::protoex.OrderMessage value) { return SendListener(this, value); }
@@ -5715,7 +5792,7 @@ namespace protoex {
                 default: break;
             }
 
-            if ((protoClient != null) && protoClient.OnReceiveListener(listener, type, buffer, offset, size))
+            if (protoClient.OnReceiveListener(listener, type, buffer, offset, size))
                 return true;
 
             return false;

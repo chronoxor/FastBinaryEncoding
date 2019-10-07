@@ -11,6 +11,7 @@ using System.IO;
 using System.Numerics;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading;
 #if UTF8JSON
 using Utf8Json;
 using Utf8Json.Resolvers;
@@ -4746,6 +4747,20 @@ namespace proto {
             AccountMessageModel = new AccountMessageModel(Buffer);
         }
 
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(ISenderListener listener, object obj)
+        {
+            switch (obj)
+            {
+                case global::proto.OrderMessage value when value.FBEType == global::proto.OrderMessage.FBETypeConst: return SendListener(listener, value);
+                case global::proto.BalanceMessage value when value.FBEType == global::proto.BalanceMessage.FBETypeConst: return SendListener(listener, value);
+                case global::proto.AccountMessage value when value.FBEType == global::proto.AccountMessage.FBETypeConst: return SendListener(listener, value);
+                default: break;
+            }
+
+            return 0;
+        }
+
         public long Send(global::proto.OrderMessage value) { return SendListener(this, value); }
         public long SendListener(ISenderListener listener, global::proto.OrderMessage value)
         {
@@ -5062,6 +5077,20 @@ namespace proto {
             AccountMessageReceiverModel = new AccountMessageModel();
         }
 
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(IClientListener listener, object obj)
+        {
+            switch (obj)
+            {
+                case global::proto.OrderMessage value when value.FBEType == global::proto.OrderMessage.FBETypeConst: return SendListener(listener, value);
+                case global::proto.BalanceMessage value when value.FBEType == global::proto.BalanceMessage.FBETypeConst: return SendListener(listener, value);
+                case global::proto.AccountMessage value when value.FBEType == global::proto.AccountMessage.FBETypeConst: return SendListener(listener, value);
+                default: break;
+            }
+
+            return 0;
+        }
+
         public long Send(global::proto.OrderMessage value) { return SendListener(this, value); }
         public long SendListener(IClientListener listener, global::proto.OrderMessage value)
         {
@@ -5216,6 +5245,20 @@ namespace proto {
             OrderMessageModel = new OrderMessageFinalModel(Buffer);
             BalanceMessageModel = new BalanceMessageFinalModel(Buffer);
             AccountMessageModel = new AccountMessageFinalModel(Buffer);
+        }
+
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(IFinalSenderListener listener, object obj)
+        {
+            switch (obj)
+            {
+                case global::proto.OrderMessage value when value.FBEType == global::proto.OrderMessage.FBETypeConst: return SendListener(listener, value);
+                case global::proto.BalanceMessage value when value.FBEType == global::proto.BalanceMessage.FBETypeConst: return SendListener(listener, value);
+                case global::proto.AccountMessage value when value.FBEType == global::proto.AccountMessage.FBETypeConst: return SendListener(listener, value);
+                default: break;
+            }
+
+            return 0;
         }
 
         public long Send(global::proto.OrderMessage value) { return SendListener(this, value); }
@@ -5442,6 +5485,20 @@ namespace proto {
             AccountMessageSenderModel = new AccountMessageFinalModel(SendBuffer);
             AccountMessageReceiverValue = global::proto.AccountMessage.Default;
             AccountMessageReceiverModel = new AccountMessageFinalModel();
+        }
+
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(IFinalClientListener listener, object obj)
+        {
+            switch (obj)
+            {
+                case global::proto.OrderMessage value when value.FBEType == global::proto.OrderMessage.FBETypeConst: return SendListener(listener, value);
+                case global::proto.BalanceMessage value when value.FBEType == global::proto.BalanceMessage.FBETypeConst: return SendListener(listener, value);
+                case global::proto.AccountMessage value when value.FBEType == global::proto.AccountMessage.FBETypeConst: return SendListener(listener, value);
+                default: break;
+            }
+
+            return 0;
         }
 
         public long Send(global::proto.OrderMessage value) { return SendListener(this, value); }

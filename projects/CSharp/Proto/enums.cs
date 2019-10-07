@@ -11,6 +11,7 @@ using System.IO;
 using System.Numerics;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading;
 #if UTF8JSON
 using Utf8Json;
 using Utf8Json.Resolvers;
@@ -5780,6 +5781,17 @@ namespace enums {
         {
         }
 
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(ISenderListener listener, object obj)
+        {
+            switch (obj)
+            {
+                default: break;
+            }
+
+            return 0;
+        }
+
     }
 
 } // namespace enums
@@ -5883,6 +5895,17 @@ namespace enums {
         {
         }
 
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(IClientListener listener, object obj)
+        {
+            switch (obj)
+            {
+                default: break;
+            }
+
+            return 0;
+        }
+
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
         internal bool OnReceiveListener(IClientListener listener, long type, byte[] buffer, long offset, long size)
@@ -5917,6 +5940,17 @@ namespace enums {
         }
         public FinalSender(Buffer buffer) : base(buffer, true)
         {
+        }
+
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(IFinalSenderListener listener, object obj)
+        {
+            switch (obj)
+            {
+                default: break;
+            }
+
+            return 0;
         }
 
     }
@@ -5984,6 +6018,17 @@ namespace enums {
         }
         public FinalClient(Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, true)
         {
+        }
+
+        public long Send(object obj) { return SendListener(this, obj); }
+        public long SendListener(IFinalClientListener listener, object obj)
+        {
+            switch (obj)
+            {
+                default: break;
+            }
+
+            return 0;
         }
 
 

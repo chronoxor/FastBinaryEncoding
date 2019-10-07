@@ -47,6 +47,7 @@ void GeneratorCSharp::GenerateImports()
     WriteLineIndent("using System.Numerics;");
     WriteLineIndent("using System.Runtime.Serialization;");
     WriteLineIndent("using System.Text;");
+    WriteLineIndent("using System.Threading;");
     if (JSON())
     {
         WriteLineIndent("#if UTF8JSON");
@@ -3491,11 +3492,43 @@ void GeneratorCSharp::GenerateFBEClient()
         // Final protocol flag
         public bool Final { get; }
 
-        protected Client(bool final) { SendBuffer = new Buffer(); ReceiveBuffer = new Buffer(); Final = final; }
-        protected Client(Buffer sendBuffer, Buffer receiveBuffer, bool final) { SendBuffer = sendBuffer; ReceiveBuffer = receiveBuffer; Final = final; }
+        // Client mutex lock
+        protected Mutex Lock { get; }
+        // Client timestamp
+        protected DateTime Timestamp { get; }
+
+        protected Client(bool final) : this(new Buffer(), new Buffer(), final) {}
+        protected Client(Buffer sendBuffer, Buffer receiveBuffer, bool final) { SendBuffer = sendBuffer; ReceiveBuffer = receiveBuffer; Final = final; Lock = new Mutex(); Timestamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); }
 
         // Reset the client buffers
-        public void Reset() { SendBuffer.Reset(); ReceiveBuffer.Reset(); }
+        public void Reset()
+        {
+            lock (Lock)
+            {
+                ResetRequests();
+            }
+        }
+
+        // Reset client requests
+        protected virtual void ResetRequests()
+        {
+            SendBuffer.Reset();
+            ReceiveBuffer.Reset();
+        }
+
+        // Watchdog for timeouts
+        public void Watchdog(ulong utc)
+        {
+            lock (Lock)
+            {
+                WatchdogRequests(utc);
+            }
+        }
+
+        // Watchdog client requests for timeouts
+        protected virtual void WatchdogRequests(ulong utc)
+        {
+        }
 
         // Send serialized buffer.
         // Direct call of the method requires knowledge about internals of FBE models serialization.
@@ -6551,7 +6584,48 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("}");
     WriteLine();
 
-    // Generate sender methods
+    // Generate send method
+    WriteLineIndent("public long Send(object obj) { return SendListener(this, obj); }");
+    WriteLineIndent("public long SendListener(" + listener + " listener, object obj)");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->body)
+    {
+        WriteLineIndent("switch (obj)");
+        WriteLineIndent("{");
+        Indent(1);
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                WriteLineIndent("case " + struct_name + " value when value.FBEType == " + struct_name + ".FBETypeConst: return SendListener(listener, value);");
+            }
+        }
+        WriteLineIndent("default: break;");
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLine();
+    }
+    if (p->import)
+    {
+        WriteLineIndent("long result;");
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("result = " + *import + "Sender.SendListener(listener, obj);");
+            WriteLineIndent("if (result > 0)");
+            Indent(1);
+            WriteLineIndent("return result;");
+            Indent(-1);
+        }
+        WriteLine();
+    }
+    WriteLineIndent("return 0;");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+
+    // Generate send methods
     if (p->body)
     {
         for (const auto& s : p->body->structs)
@@ -6777,19 +6851,19 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         WriteLineIndent("default: break;");
         Indent(-1);
         WriteLineIndent("}");
+        WriteLine();
     }
     if (p->import)
     {
-        WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if ((" + *import + "Receiver != null) && " + *import + "Receiver.OnReceiveListener(listener, type, buffer, offset, size))");
+            WriteLineIndent("if (" + *import + "Receiver.OnReceiveListener(listener, type, buffer, offset, size))");
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
         }
+        WriteLine();
     }
-    WriteLine();
     WriteLineIndent("return false;");
     Indent(-1);
     WriteLineIndent("}");
@@ -6959,19 +7033,19 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("default: break;");
         Indent(-1);
         WriteLineIndent("}");
+        WriteLine();
     }
     if (p->import)
     {
-        WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if ((" + *import + "Proxy != null) && " + *import + "Proxy.OnReceiveListener(listener, type, buffer, offset, size))");
+            WriteLineIndent("if (" + *import + "Proxy.OnReceiveListener(listener, type, buffer, offset, size))");
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
         }
+        WriteLine();
     }
-    WriteLine();
     WriteLineIndent("return false;");
     Indent(-1);
     WriteLineIndent("}");
@@ -7080,6 +7154,42 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         WriteLine();
     }
 
+    // Collect responses & rejects collections
+    std::set<std::string> responses;
+    std::map<std::string, bool> rejects;
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message && s->request)
+            {
+                std::string response_name = (s->response) ? ConvertTypeName(*s->response->response, false) : "";
+
+                if (!response_name.empty())
+                {
+                    // Update responses and rejects cache
+                    responses.insert(*s->response->response);
+                    if (s->rejects)
+                        for (const auto& reject : s->rejects->rejects)
+                            rejects[*reject.reject] = reject.global;
+                }
+            }
+        }
+    }
+
+    // Generate client requests cache fields
+    if (!responses.empty())
+    {
+        for (const auto& response : responses)
+        {
+            std::string response_name = ConvertTypeName(response, false);
+            std::string response_field = response;
+            CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+            WriteLineIndent("private Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>> _requestsById" + response_field + ";");
+            WriteLineIndent("private SortedDictionary<DateTime, Guid> _requestsByTimestamp" + response_field + ";");
+        }
+    }
+
     // Generate client constructors
     WriteLineIndent("public " + client + "() : base(" + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
@@ -7098,6 +7208,17 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + ".Default;");
                 WriteLineIndent(*s->name + "ReceiverModel = new " + *s->name + model + "();");
             }
+        }
+    }
+    if (!responses.empty())
+    {
+        for (const auto& response : responses)
+        {
+            std::string response_name = ConvertTypeName(response, false);
+            std::string response_field = response;
+            CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+            WriteLineIndent("_requestsById" + response_field + " = new Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>>();");
+            WriteLineIndent("_requestsByTimestamp" + response_field + " = new SortedDictionary<DateTime, Guid>();");
         }
     }
     Indent(-1);
@@ -7121,11 +7242,63 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             }
         }
     }
+    if (!responses.empty())
+    {
+        for (const auto& response : responses)
+        {
+            std::string response_name = ConvertTypeName(response, false);
+            std::string response_field = response;
+            CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+            WriteLineIndent("_requestsById" + response_field + " = new Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>>();");
+            WriteLineIndent("_requestsByTimestamp" + response_field + " = new SortedDictionary<DateTime, Guid>();");
+        }
+    }
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
 
-    // Generate client methods
+    // Generate client send method
+    WriteLineIndent("public long Send(object obj) { return SendListener(this, obj); }");
+    WriteLineIndent("public long SendListener(" + listener + " listener, object obj)");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->body)
+    {
+        WriteLineIndent("switch (obj)");
+        WriteLineIndent("{");
+        Indent(1);
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                WriteLineIndent("case " + struct_name + " value when value.FBEType == " + struct_name + ".FBETypeConst: return SendListener(listener, value);");
+            }
+        }
+        WriteLineIndent("default: break;");
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLine();
+    }
+    if (p->import)
+    {
+        WriteLineIndent("long result;");
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("result = " + *import + "Client.SendListener(listener, obj);");
+            WriteLineIndent("if (result > 0)");
+            Indent(1);
+            WriteLineIndent("return result;");
+            Indent(-1);
+        }
+        WriteLine();
+    }
+    WriteLineIndent("return 0;");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+
+    // Generate client send methods
     if (p->body)
     {
         for (const auto& s : p->body->structs)
@@ -7202,19 +7375,19 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("default: break;");
         Indent(-1);
         WriteLineIndent("}");
+        WriteLine();
     }
     if (p->import)
     {
-        WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if ((" + *import + "Client != null) && " + *import + "Client.OnReceiveListener(listener, type, buffer, offset, size))");
+            WriteLineIndent("if (" + *import + "Client.OnReceiveListener(listener, type, buffer, offset, size))");
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
         }
+        WriteLine();
     }
-    WriteLine();
     WriteLineIndent("return false;");
     Indent(-1);
     WriteLineIndent("}");

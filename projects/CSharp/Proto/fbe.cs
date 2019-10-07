@@ -11,6 +11,7 @@ using System.IO;
 using System.Numerics;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading;
 #if UTF8JSON
 using Utf8Json;
 using Utf8Json.Resolvers;
@@ -9883,11 +9884,43 @@ namespace FBE {
         // Final protocol flag
         public bool Final { get; }
 
-        protected Client(bool final) { SendBuffer = new Buffer(); ReceiveBuffer = new Buffer(); Final = final; }
-        protected Client(Buffer sendBuffer, Buffer receiveBuffer, bool final) { SendBuffer = sendBuffer; ReceiveBuffer = receiveBuffer; Final = final; }
+        // Client mutex lock
+        protected Mutex Lock { get; }
+        // Client timestamp
+        protected DateTime Timestamp { get; }
+
+        protected Client(bool final) : this(new Buffer(), new Buffer(), final) {}
+        protected Client(Buffer sendBuffer, Buffer receiveBuffer, bool final) { SendBuffer = sendBuffer; ReceiveBuffer = receiveBuffer; Final = final; Lock = new Mutex(); Timestamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); }
 
         // Reset the client buffers
-        public void Reset() { SendBuffer.Reset(); ReceiveBuffer.Reset(); }
+        public void Reset()
+        {
+            lock (Lock)
+            {
+                ResetRequests();
+            }
+        }
+
+        // Reset client requests
+        protected virtual void ResetRequests()
+        {
+            SendBuffer.Reset();
+            ReceiveBuffer.Reset();
+        }
+
+        // Watchdog for timeouts
+        public void Watchdog(ulong utc)
+        {
+            lock (Lock)
+            {
+                WatchdogRequests(utc);
+            }
+        }
+
+        // Watchdog client requests for timeouts
+        protected virtual void WatchdogRequests(ulong utc)
+        {
+        }
 
         // Send serialized buffer.
         // Direct call of the method requires knowledge about internals of FBE models serialization.
