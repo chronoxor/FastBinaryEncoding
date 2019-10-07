@@ -48,6 +48,7 @@ void GeneratorCSharp::GenerateImports()
     WriteLineIndent("using System.Runtime.Serialization;");
     WriteLineIndent("using System.Text;");
     WriteLineIndent("using System.Threading;");
+    WriteLineIndent("using System.Threading.Tasks;");
     if (JSON())
     {
         WriteLineIndent("#if UTF8JSON");
@@ -7147,7 +7148,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             }
         }
         WriteLine();
-        WriteLineIndent("// Receiver models accessors");
+        WriteLineIndent("// Client receiver models accessors");
         for (const auto& s : p->body->structs)
             if (s->message)
                 WriteLineIndent("private readonly " + *s->name + model + " " + *s->name + "ReceiverModel;");
@@ -7180,14 +7181,17 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     // Generate client requests cache fields
     if (!responses.empty())
     {
+        WriteLineIndent("// Client requests cache fields");
         for (const auto& response : responses)
         {
             std::string response_name = ConvertTypeName(response, false);
+            std::string response_type = "global::" + *p->name + "." + response_name;
             std::string response_field = response;
             CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
-            WriteLineIndent("private Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>> _requestsById" + response_field + ";");
+            WriteLineIndent("private Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_type + ">>> _requestsById" + response_field + ";");
             WriteLineIndent("private SortedDictionary<DateTime, Guid> _requestsByTimestamp" + response_field + ";");
         }
+        WriteLine();
     }
 
     // Generate client constructors
@@ -7215,9 +7219,10 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         for (const auto& response : responses)
         {
             std::string response_name = ConvertTypeName(response, false);
+            std::string response_type = "global::" + *p->name + "." + response_name;
             std::string response_field = response;
             CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
-            WriteLineIndent("_requestsById" + response_field + " = new Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>>();");
+            WriteLineIndent("_requestsById" + response_field + " = new Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_type + ">>>();");
             WriteLineIndent("_requestsByTimestamp" + response_field + " = new SortedDictionary<DateTime, Guid>();");
         }
     }
@@ -7247,9 +7252,10 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         for (const auto& response : responses)
         {
             std::string response_name = ConvertTypeName(response, false);
+            std::string response_type = "global::" + *p->name + "." + response_name;
             std::string response_field = response;
             CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
-            WriteLineIndent("_requestsById" + response_field + " = new Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>>();");
+            WriteLineIndent("_requestsById" + response_field + " = new Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_type + ">>>();");
             WriteLineIndent("_requestsByTimestamp" + response_field + " = new SortedDictionary<DateTime, Guid>();");
         }
     }
