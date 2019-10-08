@@ -98,6 +98,7 @@ private:
     std::string ConvertEnumConstantSuffix(const std::string& type);
     std::string ConvertBaseTypeName(const std::string& type);
     std::string ConvertTypeName(const std::string& type, bool optional);
+    std::string ConvertTypeName(const std::string& package, const std::string& type, bool optional);
     std::string ConvertTypeName(const StructField& field);
     std::string ConvertTypeFieldName(const std::string& type, bool final);
     std::string ConvertTypeFieldDeclaration(const StructField& field, bool final);

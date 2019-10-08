@@ -8635,6 +8635,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             {
                 std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
                 std::string struct_response_field = *s->name;
+
                 if ((responses.find(*s->name) == responses.end()) && (cache.find(struct_response_name) == cache.end()))
                 {
                     WriteLineIndent("virtual bool onReceiveResponse(const " + struct_response_name + "& response) { return false; }");
@@ -8794,6 +8795,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             {
                 std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
                 std::string struct_response_field = *s->name;
+
                 if (cache.find(struct_response_name) == cache.end())
                 {
                     WriteLineIndent("virtual void onReceive(const " + struct_response_name + "& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }");

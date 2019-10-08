@@ -44,6 +44,7 @@ void GeneratorCSharp::GenerateImports()
     WriteLineIndent("using System.Diagnostics;");
     WriteLineIndent("using System.Globalization;");
     WriteLineIndent("using System.IO;");
+    WriteLineIndent("using System.Linq;");
     WriteLineIndent("using System.Numerics;");
     WriteLineIndent("using System.Runtime.Serialization;");
     WriteLineIndent("using System.Text;");
@@ -3511,7 +3512,7 @@ void GeneratorCSharp::GenerateFBEClient()
         }
 
         // Reset client requests
-        protected virtual void ResetRequests()
+        internal virtual void ResetRequests()
         {
             SendBuffer.Reset();
             ReceiveBuffer.Reset();
@@ -3527,7 +3528,7 @@ void GeneratorCSharp::GenerateFBEClient()
         }
 
         // Watchdog client requests for timeouts
-        protected virtual void WatchdogRequests(ulong utc)
+        internal virtual void WatchdogRequests(ulong utc)
         {
         }
 
@@ -6728,7 +6729,7 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         {
             if (s->message)
             {
-                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
                 WriteLineIndent("void OnReceive(" + struct_name + " value) {}");
             }
         }
@@ -6765,7 +6766,7 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         {
             if (s->message)
             {
-                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
                 WriteLineIndent("private " + struct_name + " " + *s->name + "Value;");
             }
         }
@@ -6792,7 +6793,7 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         {
             if (s->message)
             {
-                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
                 WriteLineIndent(*s->name + "Value = " + struct_name + ".Default;");
                 WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
             }
@@ -6814,7 +6815,7 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         {
             if (s->message)
             {
-                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
                 WriteLineIndent(*s->name + "Value = " + struct_name + ".Default;");
                 WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
             }
@@ -7157,7 +7158,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         {
             if (s->message)
             {
-                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
                 WriteLineIndent("private " + struct_name + " " + *s->name + "ReceiverValue;");
             }
         }
@@ -7198,11 +7199,11 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("// Client requests cache fields");
         for (const auto& response : responses)
         {
-            std::string response_name = ConvertTypeName(response, false);
-            std::string response_type = "global::" + *p->name + "." + response_name;
+            std::string response_name = ConvertTypeName(*p->name, response, false);
             std::string response_field = response;
             CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
-            WriteLineIndent("private Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_type + ">>> _requestsById" + response_field + ";");
+
+            WriteLineIndent("private Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>> _requestsById" + response_field + ";");
             WriteLineIndent("private SortedDictionary<DateTime, Guid> _requestsByTimestamp" + response_field + ";");
         }
         WriteLine();
@@ -7221,7 +7222,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         {
             if (s->message)
             {
-                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
                 WriteLineIndent(*s->name + "SenderModel = new " + *s->name + model + "(SendBuffer);");
                 WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + ".Default;");
                 WriteLineIndent(*s->name + "ReceiverModel = new " + *s->name + model + "();");
@@ -7232,11 +7233,11 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     {
         for (const auto& response : responses)
         {
-            std::string response_name = ConvertTypeName(response, false);
-            std::string response_type = "global::" + *p->name + "." + response_name;
+            std::string response_name = ConvertTypeName(*p->name, response, false);
             std::string response_field = response;
             CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
-            WriteLineIndent("_requestsById" + response_field + " = new Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_type + ">>>();");
+
+            WriteLineIndent("_requestsById" + response_field + " = new Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>>();");
             WriteLineIndent("_requestsByTimestamp" + response_field + " = new SortedDictionary<DateTime, Guid>();");
         }
     }
@@ -7254,7 +7255,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         {
             if (s->message)
             {
-                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
                 WriteLineIndent(*s->name + "SenderModel = new " + *s->name + model + "(SendBuffer);");
                 WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + ".Default;");
                 WriteLineIndent(*s->name + "ReceiverModel = new " + *s->name + model + "();");
@@ -7265,11 +7266,11 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     {
         for (const auto& response : responses)
         {
-            std::string response_name = ConvertTypeName(response, false);
-            std::string response_type = "global::" + *p->name + "." + response_name;
+            std::string response_name = ConvertTypeName(*p->name, response, false);
             std::string response_field = response;
             CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
-            WriteLineIndent("_requestsById" + response_field + " = new Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_type + ">>>();");
+
+            WriteLineIndent("_requestsById" + response_field + " = new Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>>();");
             WriteLineIndent("_requestsByTimestamp" + response_field + " = new SortedDictionary<DateTime, Guid>();");
         }
     }
@@ -7283,9 +7284,8 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         {
             if (s->message && s->request)
             {
-                std::string request_name = "global::" + *p->name + "." + *s->name;
-                std::string response_name = (s->response) ? ConvertTypeName(*s->response->response, false) : "";
-                std::string response_type = "global::" + *p->name + "." + response_name;
+                std::string request_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
                 std::string response_field = (s->response) ? *s->response->response : "";
                 CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
@@ -7315,14 +7315,14 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 }
                 else
                 {
-                    WriteLineIndent("public Task<" + response_type + "> Request(" + request_name + " value, long timeout = 0)");
+                    WriteLineIndent("public Task<" + response_name + "> Request(" + request_name + " value, long timeout = 0)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("lock (Lock)");
                     WriteLineIndent("{");
                     Indent(1);
-                    WriteLineIndent("TaskCompletionSource<" + response_type + "> source = new TaskCompletionSource<" + response_type + ">();");
-                    WriteLineIndent("Task<" + response_type + "> task = source.Task;");
+                    WriteLineIndent("TaskCompletionSource<" + response_name + "> source = new TaskCompletionSource<" + response_name + ">();");
+                    WriteLineIndent("Task<" + response_name + "> task = source.Task;");
                     WriteLine();
                     WriteLineIndent("DateTime current = DateTime.UtcNow;");
                     WriteLine();
@@ -7335,7 +7335,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                     WriteLineIndent("Timestamp = (current <= Timestamp) ? new DateTime(Timestamp.Ticks + 1) : current;");
                     WriteLine();
                     WriteLineIndent("// Register the request");
-                    WriteLineIndent("_requestsById" + response_field + ".Add(value.id, new Tuple<DateTime, ulong, TaskCompletionSource<" + response_type + ">>(Timestamp, (ulong)timeout * 1000000, source));");
+                    WriteLineIndent("_requestsById" + response_field + ".Add(value.id, new Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>(Timestamp, (ulong)timeout * 1000000, source));");
                     WriteLineIndent("if (timeout > 0)");
                     Indent(1);
                     WriteLineIndent("_requestsByTimestamp" + response_field + ".Add(Timestamp, value.id);");
@@ -7372,7 +7372,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         {
             if (s->message)
             {
-                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
                 WriteLineIndent("case " + struct_name + " value when value.FBEType == " + struct_name + ".FBETypeConst: return SendListener(listener, value);");
             }
         }
@@ -7406,7 +7406,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         {
             if (s->message)
             {
-                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
                 WriteLineIndent("public long Send(" + struct_name + " value) { return SendListener(this, value); }");
                 WriteLineIndent("public long SendListener(" + listener + " listener, " + struct_name + " value)");
                 WriteLineIndent("{");
@@ -7432,6 +7432,323 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             }
         }
     }
+
+    // Generate response handlers
+    for (const auto& response : responses)
+    {
+        std::string response_name = ConvertTypeName(*p->name, response, false);
+        std::string response_field = response;
+
+        WriteLine();
+        WriteLineIndent("internal bool OnReceiveResponse(" + response_name + " response)");
+        WriteLineIndent("{");
+        Indent(1);
+        if (p->body)
+        {
+            std::set<std::string> cache;
+            WriteLineIndent("lock (Lock)");
+            WriteLineIndent("{");
+            Indent(1);
+            for (const auto& s : p->body->structs)
+            {
+                if (s->message && s->response)
+                {
+                    std::string struct_response_name = ConvertTypeName(*p->name, *s->response->response, false);
+                    std::string struct_response_field = *s->response->response;
+                    CppCommon::StringUtils::ReplaceAll(struct_response_field, ".", "");
+
+                    if ((struct_response_name == response_name) && (cache.find(struct_response_name) == cache.end()))
+                    {
+                        WriteLineIndent("if (_requestsById" + struct_response_field + ".TryGetValue(response.id, out Tuple<DateTime, ulong, TaskCompletionSource<" + struct_response_name + ">> tuple))");
+                        WriteLineIndent("{");
+                        Indent(1);
+                        WriteLineIndent("var timestamp = tuple.Item1;");
+                        WriteLineIndent("var timespan = tuple.Item2;");
+                        WriteLineIndent("var source = tuple.Item3;");
+                        WriteLineIndent("source.SetResult(response);");
+                        WriteLineIndent("_requestsById" + struct_response_field + ".Remove(response.id);");
+                        WriteLineIndent("_requestsByTimestamp" + struct_response_field + ".Remove(timestamp);");
+                        WriteLineIndent("return true;");
+                        cache.insert(struct_response_name);
+                        Indent(-1);
+                        WriteLineIndent("}");
+                        WriteLine();
+                    }
+                }
+            }
+        }
+        WriteLineIndent("return false;");
+        Indent(-1);
+        WriteLineIndent("}");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+
+    // Generate remaining response handlers
+    if (p->body)
+    {
+        bool found = false;
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_response_field = *s->name;
+
+                if ((responses.find(*s->name) == responses.end()) && (cache.find(struct_response_name) == cache.end()))
+                {
+                    if (!found)
+                        WriteLine();
+                    WriteLineIndent("internal bool OnReceiveResponse(" + struct_response_name + " response) { return false; }");
+                    cache.insert(struct_response_name);
+                    found = true;
+                }
+            }
+        }
+    }
+
+    // Generate reject handlers
+    for (const auto& reject : rejects)
+    {
+        std::string reject_name = ConvertTypeName(*p->name, reject.first, false);
+        std::string reject_field = reject.first;
+        bool global = reject.second;
+        bool imported = CppCommon::StringUtils::ReplaceAll(reject_field, ".", "");
+
+        WriteLine();
+        WriteLineIndent("internal bool OnReceiveReject(" + reject_name + " reject)");
+        WriteLineIndent("{");
+        Indent(1);
+        if (global)
+        {
+            if (p->import)
+            {
+                for (const auto& import : p->import->imports)
+                {
+                    WriteLineIndent("if (" + *import + "Client.OnReceiveReject(reject))");
+                    Indent(1);
+                    WriteLineIndent("return true;");
+                    Indent(-1);
+                }
+                WriteLine();
+            }
+        }
+        else if (imported)
+        {
+            std::string ns = "";
+            std::string t = reject.first;
+            std::string type = reject.first;
+
+            size_t pos = type.find_last_of('.');
+            if (pos != std::string::npos)
+            {
+                ns.assign(type, 0, pos);
+                t.assign(type, pos + 1, type.size() - pos);
+            }
+
+            WriteLineIndent("if (" + ns + "Client.OnReceiveReject(reject))");
+            Indent(1);
+            WriteLineIndent("return true;");
+            Indent(-1);
+            WriteLine();
+        }
+        if (p->body)
+        {
+            std::set<std::string> cache;
+            WriteLineIndent("lock (Lock)");
+            WriteLineIndent("{");
+            Indent(1);
+            WriteLine();
+            for (const auto& s : p->body->structs)
+            {
+                if (s->message && s->response && s->rejects)
+                {
+                    for (const auto& r : s->rejects->rejects)
+                    {
+                        std::string struct_response_name = ConvertTypeName(*p->name, *s->response->response, false);
+                        std::string struct_response_field = *s->response->response;
+                        CppCommon::StringUtils::ReplaceAll(struct_response_field, ".", "");
+
+                        std::string struct_reject_name = ConvertTypeName(*p->name, *r.reject, false);
+                        std::string struct_reject_field = *r.reject;
+                        CppCommon::StringUtils::ReplaceAll(struct_reject_field, ".", "");
+
+                        if ((struct_reject_name == reject_name) && (cache.find(struct_response_field) == cache.end()))
+                        {
+                            WriteLineIndent("if (_requestsById" + struct_response_field + ".TryGetValue(reject.id, out Tuple<DateTime, ulong, TaskCompletionSource<" + struct_response_name + ">> tuple" + struct_response_field + "))");
+                            WriteLineIndent("{");
+                            Indent(1);
+                            WriteLineIndent("var timestamp = tuple" + struct_response_field + ".Item1;");
+                            WriteLineIndent("var timespan = tuple" + struct_response_field + ".Item2;");
+                            WriteLineIndent("var source = tuple" + struct_response_field + ".Item3;");
+                            WriteLineIndent("source.SetException(new Exception(reject.ToString()));");
+                            WriteLineIndent("_requestsById" + struct_response_field + ".Remove(reject.id);");
+                            WriteLineIndent("_requestsByTimestamp" + struct_response_field + ".Remove(timestamp);");
+                            WriteLineIndent("return true;");
+                            cache.insert(struct_response_field);
+                            Indent(-1);
+                            WriteLineIndent("}");
+                            WriteLine();
+                        }
+                    }
+                }
+            }
+        }
+        WriteLineIndent("return false;");
+        Indent(-1);
+        WriteLineIndent("}");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+
+    // Generate remaining reject handlers
+    if (p->body)
+    {
+        bool found = false;
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_reject_name = ConvertTypeName(*p->name, *s->name, false);
+                if ((rejects.find(*s->name) == rejects.end()) && (cache.find(struct_reject_name) == cache.end()))
+                {
+                    if (!found)
+                        WriteLine();
+                    WriteLineIndent("internal bool OnReceiveReject(" + struct_reject_name + " reject) { return false; }");
+                    cache.insert(struct_reject_name);
+                    found = true;
+                }
+            }
+        }
+    }
+
+    // Generate notify handlers
+    if (p->body)
+    {
+        bool found = false;
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_notify_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_notify_field = *s->name;
+                if (cache.find(struct_notify_name) == cache.end())
+                {
+                    if (!found)
+                        WriteLine();
+                    WriteLineIndent("internal void OnReceiveNotify(" + struct_notify_name + " notify) {}");
+                    cache.insert(struct_notify_name);
+                    found = true;
+                }
+            }
+        }
+    }
+
+    // Generate receive handlers
+    if (p->body)
+    {
+        bool found = false;
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_response_field = *s->name;
+
+                if (cache.find(struct_response_name) == cache.end())
+                {
+                    if (!found)
+                        WriteLine();
+                    WriteLineIndent("internal void OnReceive(" + struct_response_name + " value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }");
+                    cache.insert(struct_response_name);
+                    found = true;
+                }
+            }
+        }
+    }
+
+    // Generate reset requests method
+    WriteLine();
+    WriteLineIndent("// Reset client requests");
+    WriteLineIndent("internal override void ResetRequests()");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("base.ResetRequests();");
+    if (p->import)
+    {
+        WriteLine();
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(*import + "Client.ResetRequests();");
+    }
+    for (const auto& response : responses)
+    {
+        std::string response_name = ConvertTypeName(*p->name, response, false);
+        std::string response_field = response;
+        CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+        WriteLine();
+        WriteLineIndent("foreach(var request in _requestsById" + response_field + ")");
+        Indent(1);
+        WriteLineIndent("request.Value.Item3.SetException(new Exception(\"Reset client!\"));");
+        Indent(-1);
+        WriteLineIndent("_requestsById" + response_field + ".Clear();");
+        WriteLineIndent("_requestsByTimestamp" + response_field + ".Clear();");
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate watchdog requests method
+    WriteLine();
+    WriteLineIndent("// Watchdog client requests for timeouts");
+    WriteLineIndent("internal override void WatchdogRequests(ulong utc)");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("base.WatchdogRequests(utc);");
+    if (p->import)
+    {
+        WriteLine();
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(*import + "Client.WatchdogRequests(utc);");
+    }
+    for (const auto& response : responses)
+    {
+        std::string response_name = ConvertTypeName(*p->name, response, false);
+        std::string response_field = response;
+        CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+        WriteLine();
+        WriteLineIndent("while (_requestsByTimestamp" + response_field + ".Count > 0)");
+        WriteLineIndent("{");
+        Indent(1);
+        WriteLineIndent("var request = _requestsByTimestamp" + response_field + ".First();");
+        WriteLineIndent("Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">> tuple;");
+        WriteLineIndent("_requestsById" + response_field + ".TryGetValue(request.Value, out tuple);");
+        WriteLineIndent("var timestamp = tuple.Item1;");
+        WriteLineIndent("var timespan = tuple.Item2;");
+        WriteLineIndent("if (((ulong)(timestamp.Ticks * 100) + timespan) <= utc)");
+        WriteLineIndent("{");
+        Indent(1);
+        WriteLineIndent("var source = tuple.Item3;");
+        WriteLineIndent("source.SetException(new Exception(\"Timeout!\"));");
+        WriteLineIndent("_requestsById" + response_field + ".Remove(request.Value);");
+        WriteLineIndent("_requestsByTimestamp" + response_field + ".Remove(timestamp);");
+        WriteLineIndent("continue;");
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLineIndent("else");
+        Indent(1);
+        WriteLineIndent("break;");
+        Indent(-1);
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLine();
+    }
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate receiver message handler
     WriteLine();
@@ -7743,6 +8060,11 @@ std::string GeneratorCSharp::ConvertTypeName(const std::string& type, bool optio
     std::string ns = CppCommon::StringUtils::Contains(type, '.') ? "global::" : "";
 
     return ns + type;
+}
+
+std::string GeneratorCSharp::ConvertTypeName(const std::string& package, const std::string& type, bool optional)
+{
+    return (CppCommon::StringUtils::Contains(type, '.') ? "" : ("global::" + package + ".")) + ConvertTypeName(type, optional);
 }
 
 std::string GeneratorCSharp::ConvertTypeName(const StructField& field)
