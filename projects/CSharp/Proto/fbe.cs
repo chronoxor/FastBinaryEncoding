@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Numerics;
 using System.Runtime.Serialization;
 using System.Text;
@@ -9903,7 +9904,7 @@ namespace FBE {
         }
 
         // Reset client requests
-        protected virtual void ResetRequests()
+        internal virtual void ResetRequests()
         {
             SendBuffer.Reset();
             ReceiveBuffer.Reset();
@@ -9919,7 +9920,7 @@ namespace FBE {
         }
 
         // Watchdog client requests for timeouts
-        protected virtual void WatchdogRequests(ulong utc)
+        internal virtual void WatchdogRequests(ulong utc)
         {
         }
 

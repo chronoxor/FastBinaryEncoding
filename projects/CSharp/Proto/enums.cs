@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Numerics;
 using System.Runtime.Serialization;
 using System.Text;
@@ -5908,6 +5909,18 @@ namespace enums {
         }
 
 
+        // Reset client requests
+        internal override void ResetRequests()
+        {
+            base.ResetRequests();
+        }
+
+        // Watchdog client requests for timeouts
+        internal override void WatchdogRequests(ulong utc)
+        {
+            base.WatchdogRequests(utc);
+        }
+
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
         internal bool OnReceiveListener(IClientListener listener, long type, byte[] buffer, long offset, long size)
         {
@@ -6032,6 +6045,18 @@ namespace enums {
             return 0;
         }
 
+
+        // Reset client requests
+        internal override void ResetRequests()
+        {
+            base.ResetRequests();
+        }
+
+        // Watchdog client requests for timeouts
+        internal override void WatchdogRequests(ulong utc)
+        {
+            base.WatchdogRequests(utc);
+        }
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
         internal bool OnReceiveListener(IFinalClientListener listener, long type, byte[] buffer, long offset, long size)

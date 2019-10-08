@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Numerics;
 using System.Runtime.Serialization;
 using System.Text;
@@ -5150,6 +5151,34 @@ namespace proto {
             return SendSerialized(listener, serialized);
         }
 
+        internal bool OnReceiveResponse(global::proto.OrderMessage response) { return false; }
+        internal bool OnReceiveResponse(global::proto.BalanceMessage response) { return false; }
+        internal bool OnReceiveResponse(global::proto.AccountMessage response) { return false; }
+
+        internal bool OnReceiveReject(global::proto.OrderMessage reject) { return false; }
+        internal bool OnReceiveReject(global::proto.BalanceMessage reject) { return false; }
+        internal bool OnReceiveReject(global::proto.AccountMessage reject) { return false; }
+
+        internal void OnReceiveNotify(global::proto.OrderMessage notify) {}
+        internal void OnReceiveNotify(global::proto.BalanceMessage notify) {}
+        internal void OnReceiveNotify(global::proto.AccountMessage notify) {}
+
+        internal void OnReceive(global::proto.OrderMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        internal void OnReceive(global::proto.BalanceMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        internal void OnReceive(global::proto.AccountMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+
+        // Reset client requests
+        internal override void ResetRequests()
+        {
+            base.ResetRequests();
+        }
+
+        // Watchdog client requests for timeouts
+        internal override void WatchdogRequests(ulong utc)
+        {
+            base.WatchdogRequests(utc);
+        }
+
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
         internal bool OnReceiveListener(IClientListener listener, long type, byte[] buffer, long offset, long size)
         {
@@ -5558,6 +5587,34 @@ namespace proto {
 
             // Send the serialized value
             return SendSerialized(listener, serialized);
+        }
+
+        internal bool OnReceiveResponse(global::proto.OrderMessage response) { return false; }
+        internal bool OnReceiveResponse(global::proto.BalanceMessage response) { return false; }
+        internal bool OnReceiveResponse(global::proto.AccountMessage response) { return false; }
+
+        internal bool OnReceiveReject(global::proto.OrderMessage reject) { return false; }
+        internal bool OnReceiveReject(global::proto.BalanceMessage reject) { return false; }
+        internal bool OnReceiveReject(global::proto.AccountMessage reject) { return false; }
+
+        internal void OnReceiveNotify(global::proto.OrderMessage notify) {}
+        internal void OnReceiveNotify(global::proto.BalanceMessage notify) {}
+        internal void OnReceiveNotify(global::proto.AccountMessage notify) {}
+
+        internal void OnReceive(global::proto.OrderMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        internal void OnReceive(global::proto.BalanceMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        internal void OnReceive(global::proto.AccountMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+
+        // Reset client requests
+        internal override void ResetRequests()
+        {
+            base.ResetRequests();
+        }
+
+        // Watchdog client requests for timeouts
+        internal override void WatchdogRequests(ulong utc)
+        {
+            base.WatchdogRequests(utc);
         }
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }

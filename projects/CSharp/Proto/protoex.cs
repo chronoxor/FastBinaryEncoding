@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Numerics;
 using System.Runtime.Serialization;
 using System.Text;
@@ -5290,6 +5291,38 @@ namespace protoex {
             return SendSerialized(listener, serialized);
         }
 
+        internal bool OnReceiveResponse(global::protoex.OrderMessage response) { return false; }
+        internal bool OnReceiveResponse(global::protoex.BalanceMessage response) { return false; }
+        internal bool OnReceiveResponse(global::protoex.AccountMessage response) { return false; }
+
+        internal bool OnReceiveReject(global::protoex.OrderMessage reject) { return false; }
+        internal bool OnReceiveReject(global::protoex.BalanceMessage reject) { return false; }
+        internal bool OnReceiveReject(global::protoex.AccountMessage reject) { return false; }
+
+        internal void OnReceiveNotify(global::protoex.OrderMessage notify) {}
+        internal void OnReceiveNotify(global::protoex.BalanceMessage notify) {}
+        internal void OnReceiveNotify(global::protoex.AccountMessage notify) {}
+
+        internal void OnReceive(global::protoex.OrderMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        internal void OnReceive(global::protoex.BalanceMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        internal void OnReceive(global::protoex.AccountMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+
+        // Reset client requests
+        internal override void ResetRequests()
+        {
+            base.ResetRequests();
+
+            protoClient.ResetRequests();
+        }
+
+        // Watchdog client requests for timeouts
+        internal override void WatchdogRequests(ulong utc)
+        {
+            base.WatchdogRequests(utc);
+
+            protoClient.WatchdogRequests(utc);
+        }
+
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
         internal bool OnReceiveListener(IClientListener listener, long type, byte[] buffer, long offset, long size)
         {
@@ -5729,6 +5762,38 @@ namespace protoex {
 
             // Send the serialized value
             return SendSerialized(listener, serialized);
+        }
+
+        internal bool OnReceiveResponse(global::protoex.OrderMessage response) { return false; }
+        internal bool OnReceiveResponse(global::protoex.BalanceMessage response) { return false; }
+        internal bool OnReceiveResponse(global::protoex.AccountMessage response) { return false; }
+
+        internal bool OnReceiveReject(global::protoex.OrderMessage reject) { return false; }
+        internal bool OnReceiveReject(global::protoex.BalanceMessage reject) { return false; }
+        internal bool OnReceiveReject(global::protoex.AccountMessage reject) { return false; }
+
+        internal void OnReceiveNotify(global::protoex.OrderMessage notify) {}
+        internal void OnReceiveNotify(global::protoex.BalanceMessage notify) {}
+        internal void OnReceiveNotify(global::protoex.AccountMessage notify) {}
+
+        internal void OnReceive(global::protoex.OrderMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        internal void OnReceive(global::protoex.BalanceMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        internal void OnReceive(global::protoex.AccountMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+
+        // Reset client requests
+        internal override void ResetRequests()
+        {
+            base.ResetRequests();
+
+            protoClient.ResetRequests();
+        }
+
+        // Watchdog client requests for timeouts
+        internal override void WatchdogRequests(ulong utc)
+        {
+            base.WatchdogRequests(utc);
+
+            protoClient.WatchdogRequests(utc);
         }
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
