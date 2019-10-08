@@ -3496,7 +3496,7 @@ void GeneratorCSharp::GenerateFBEClient()
         // Client mutex lock
         protected Mutex Lock { get; }
         // Client timestamp
-        protected DateTime Timestamp { get; }
+        protected DateTime Timestamp { get; set; }
 
         protected Client(bool final) : this(new Buffer(), new Buffer(), final) {}
         protected Client(Buffer sendBuffer, Buffer receiveBuffer, bool final) { SendBuffer = sendBuffer; ReceiveBuffer = receiveBuffer; Final = final; Lock = new Mutex(); Timestamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); }
@@ -5069,6 +5069,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     Indent(1);
 
     // Generate struct body
+    bool id = false;
     if (s->base && !s->base->empty())
     {
         if (JSON())
@@ -5080,10 +5081,23 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
             WriteLineIndent("#endif");
         }
         WriteLineIndent("public " + ConvertTypeName(*s->base, false) + " parent;");
+        if (s->message)
+        {
+            id = true;
+            WriteLineIndent("public Guid id => parent.id;");
+        }
     }
     if (s->body)
+    {
         for (const auto& field : s->body->fields)
+        {
+            if (field->id)
+                id = true;
             WriteLineIndent("public " + ConvertTypeName(*field) + " " + *field->name + ";");
+        }
+    }
+    if (s->message && !id)
+        WriteLineIndent("public Guid id => Guid.Empty;");
 
     // Generate struct FBE type property
     WriteLine();
@@ -7261,9 +7275,90 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     }
     Indent(-1);
     WriteLineIndent("}");
-    WriteLine();
+
+    // Generate request methods
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message && s->request)
+            {
+                std::string request_name = "global::" + *p->name + "." + *s->name;
+                std::string response_name = (s->response) ? ConvertTypeName(*s->response->response, false) : "";
+                std::string response_type = "global::" + *p->name + "." + response_name;
+                std::string response_field = (s->response) ? *s->response->response : "";
+                CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+                WriteLine();
+                if (response_name.empty())
+                {
+                    WriteLineIndent("public Task Request(" + request_name + " value, long timeout = 0)");
+                    WriteLineIndent("{");
+                    Indent(1);
+                    WriteLineIndent("TaskCompletionSource source = new TaskCompletionSource();");
+                    WriteLineIndent("Task task = source.Task;");
+                    WriteLine();
+                    WriteLineIndent("// Send the request message");
+                    WriteLineIndent("long serialized = Send(value);");
+                    WriteLineIndent("if (serialized > 0)");
+                    Indent(1);
+                    WriteLineIndent("source.SetResult();");
+                    Indent(-1);
+                    WriteLineIndent("else");
+                    Indent(1);
+                    WriteLineIndent("source.SetException(new Exception(\"Serialization failed!\"));");
+                    Indent(-1);
+                    WriteLine();
+                    WriteLineIndent("return task;");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                }
+                else
+                {
+                    WriteLineIndent("public Task<" + response_type + "> Request(" + request_name + " value, long timeout = 0)");
+                    WriteLineIndent("{");
+                    Indent(1);
+                    WriteLineIndent("lock (Lock)");
+                    WriteLineIndent("{");
+                    Indent(1);
+                    WriteLineIndent("TaskCompletionSource<" + response_type + "> source = new TaskCompletionSource<" + response_type + ">();");
+                    WriteLineIndent("Task<" + response_type + "> task = source.Task;");
+                    WriteLine();
+                    WriteLineIndent("DateTime current = DateTime.UtcNow;");
+                    WriteLine();
+                    WriteLineIndent("// Send the request message");
+                    WriteLineIndent("long serialized = Send(value);");
+                    WriteLineIndent("if (serialized > 0)");
+                    WriteLineIndent("{");
+                    Indent(1);
+                    WriteLineIndent("// Calculate the unique timestamp");
+                    WriteLineIndent("Timestamp = (current <= Timestamp) ? new DateTime(Timestamp.Ticks + 1) : current;");
+                    WriteLine();
+                    WriteLineIndent("// Register the request");
+                    WriteLineIndent("_requestsById" + response_field + ".Add(value.id, new Tuple<DateTime, ulong, TaskCompletionSource<" + response_type + ">>(Timestamp, (ulong)timeout * 1000000, source));");
+                    WriteLineIndent("if (timeout > 0)");
+                    Indent(1);
+                    WriteLineIndent("_requestsByTimestamp" + response_field + ".Add(Timestamp, value.id);");
+                    Indent(-1);
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("else");
+                    Indent(1);
+                    WriteLineIndent("source.SetException(new Exception(\"Serialization failed!\"));");
+                    Indent(-1);
+                    WriteLine();
+                    WriteLineIndent("return task;");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                }
+            }
+        }
+    }
 
     // Generate client send method
+    WriteLine();
     WriteLineIndent("public long Send(object obj) { return SendListener(this, obj); }");
     WriteLineIndent("public long SendListener(" + listener + " listener, object obj)");
     WriteLineIndent("{");

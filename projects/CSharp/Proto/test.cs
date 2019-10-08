@@ -12,6 +12,7 @@ using System.Numerics;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 #if UTF8JSON
 using Utf8Json;
 using Utf8Json.Resolvers;
@@ -16365,7 +16366,7 @@ namespace test {
 
         // Client receiver values accessors
 
-        // Receiver models accessors
+        // Client receiver models accessors
 
         public Client() : base(false)
         {
@@ -16521,7 +16522,7 @@ namespace test {
 
         // Client receiver values accessors
 
-        // Receiver models accessors
+        // Client receiver models accessors
 
         public FinalClient() : base(true)
         {

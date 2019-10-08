@@ -12,6 +12,7 @@ using System.Numerics;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 #if UTF8JSON
 using Utf8Json;
 using Utf8Json.Resolvers;
@@ -2983,6 +2984,7 @@ namespace proto {
     public struct OrderMessage : IComparable, IComparable<OrderMessage>, IEquatable<OrderMessage>
     {
         public Order body;
+        public Guid id => Guid.Empty;
 
         public const long FBETypeConst = 1;
         #if UTF8JSON
@@ -3558,6 +3560,7 @@ namespace proto {
     public struct BalanceMessage : IComparable, IComparable<BalanceMessage>, IEquatable<BalanceMessage>
     {
         public Balance body;
+        public Guid id => Guid.Empty;
 
         public const long FBETypeConst = 2;
         #if UTF8JSON
@@ -4133,6 +4136,7 @@ namespace proto {
     public struct AccountMessage : IComparable, IComparable<AccountMessage>, IEquatable<AccountMessage>
     {
         public Account body;
+        public Guid id => Guid.Empty;
 
         public const long FBETypeConst = 3;
         #if UTF8JSON
@@ -5047,7 +5051,7 @@ namespace proto {
         private global::proto.BalanceMessage BalanceMessageReceiverValue;
         private global::proto.AccountMessage AccountMessageReceiverValue;
 
-        // Receiver models accessors
+        // Client receiver models accessors
         private readonly OrderMessageModel OrderMessageReceiverModel;
         private readonly BalanceMessageModel BalanceMessageReceiverModel;
         private readonly AccountMessageModel AccountMessageReceiverModel;
@@ -5457,7 +5461,7 @@ namespace proto {
         private global::proto.BalanceMessage BalanceMessageReceiverValue;
         private global::proto.AccountMessage AccountMessageReceiverValue;
 
-        // Receiver models accessors
+        // Client receiver models accessors
         private readonly OrderMessageFinalModel OrderMessageReceiverModel;
         private readonly BalanceMessageFinalModel BalanceMessageReceiverModel;
         private readonly AccountMessageFinalModel AccountMessageReceiverModel;

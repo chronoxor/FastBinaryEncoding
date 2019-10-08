@@ -12160,7 +12160,7 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     WriteLineIndent("let serialized = this.send(value)");
     WriteLineIndent("if (serialized > 0) {");
     Indent(1);
-    WriteLineIndent("// Calculate unique timestamp");
+    WriteLineIndent("// Calculate the unique timestamp");
     WriteLineIndent("this._timestamp = (current <= this._timestamp) ? this._timestamp + 1 : current");
     WriteLine();
     WriteLineIndent("// Register the request");

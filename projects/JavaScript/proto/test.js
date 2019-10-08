@@ -24962,7 +24962,7 @@ class Client extends fbe.Client {
     // Send the request message
     let serialized = this.send(value)
     if (serialized > 0) {
-      // Calculate unique timestamp
+      // Calculate the unique timestamp
       this._timestamp = (current <= this._timestamp) ? this._timestamp + 1 : current
 
       // Register the request
@@ -25374,7 +25374,7 @@ class FinalClient extends fbe.Client {
     // Send the request message
     let serialized = this.send(value)
     if (serialized > 0) {
-      // Calculate unique timestamp
+      // Calculate the unique timestamp
       this._timestamp = (current <= this._timestamp) ? this._timestamp + 1 : current
 
       // Register the request

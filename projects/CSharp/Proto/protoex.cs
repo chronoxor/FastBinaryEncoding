@@ -12,6 +12,7 @@ using System.Numerics;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 #if UTF8JSON
 using Utf8Json;
 using Utf8Json.Resolvers;
@@ -3087,6 +3088,7 @@ namespace protoex {
     public struct OrderMessage : IComparable, IComparable<OrderMessage>, IEquatable<OrderMessage>
     {
         public Order body;
+        public Guid id => Guid.Empty;
 
         public const long FBETypeConst = 11;
         #if UTF8JSON
@@ -3662,6 +3664,7 @@ namespace protoex {
     public struct BalanceMessage : IComparable, IComparable<BalanceMessage>, IEquatable<BalanceMessage>
     {
         public Balance body;
+        public Guid id => Guid.Empty;
 
         public const long FBETypeConst = 12;
         #if UTF8JSON
@@ -4237,6 +4240,7 @@ namespace protoex {
     public struct AccountMessage : IComparable, IComparable<AccountMessage>, IEquatable<AccountMessage>
     {
         public Account body;
+        public Guid id => Guid.Empty;
 
         public const long FBETypeConst = 13;
         #if UTF8JSON
@@ -5180,7 +5184,7 @@ namespace protoex {
         private global::protoex.BalanceMessage BalanceMessageReceiverValue;
         private global::protoex.AccountMessage AccountMessageReceiverValue;
 
-        // Receiver models accessors
+        // Client receiver models accessors
         private readonly OrderMessageModel OrderMessageReceiverModel;
         private readonly BalanceMessageModel BalanceMessageReceiverModel;
         private readonly AccountMessageModel AccountMessageReceiverModel;
@@ -5621,7 +5625,7 @@ namespace protoex {
         private global::protoex.BalanceMessage BalanceMessageReceiverValue;
         private global::protoex.AccountMessage AccountMessageReceiverValue;
 
-        // Receiver models accessors
+        // Client receiver models accessors
         private readonly OrderMessageFinalModel OrderMessageReceiverModel;
         private readonly BalanceMessageFinalModel BalanceMessageReceiverModel;
         private readonly AccountMessageFinalModel AccountMessageReceiverModel;

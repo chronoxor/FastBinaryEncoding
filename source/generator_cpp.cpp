@@ -8486,7 +8486,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         }
     }
 
-    // Generate send() methods
+    // Generate request() methods
     if (p->body)
     {
         for (const auto& s : p->body->structs)
@@ -8539,7 +8539,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("if (serialized > 0)");
                     WriteLineIndent("{");
                     Indent(1);
-                    WriteLineIndent("// Calculate unique timestamp");
+                    WriteLineIndent("// Calculate the unique timestamp");
                     WriteLineIndent("this->_timestamp = (current <= this->_timestamp) ? this->_timestamp + 1 : current;");
                     WriteLine();
                     WriteLineIndent("// Register the request");

@@ -12,6 +12,7 @@ using System.Numerics;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 #if UTF8JSON
 using Utf8Json;
 using Utf8Json.Resolvers;
@@ -9887,7 +9888,7 @@ namespace FBE {
         // Client mutex lock
         protected Mutex Lock { get; }
         // Client timestamp
-        protected DateTime Timestamp { get; }
+        protected DateTime Timestamp { get; set; }
 
         protected Client(bool final) : this(new Buffer(), new Buffer(), final) {}
         protected Client(Buffer sendBuffer, Buffer receiveBuffer, bool final) { SendBuffer = sendBuffer; ReceiveBuffer = receiveBuffer; Final = final; Lock = new Mutex(); Timestamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); }
