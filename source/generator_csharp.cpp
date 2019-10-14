@@ -7315,7 +7315,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 }
                 else
                 {
-                    WriteLineIndent("public Task<" + response_name + "> Request(" + request_name + " value, long timeout = 0)");
+                    WriteLineIndent("public Task<" + response_name + "> Request(" + request_name + " value, TimeSpan timeout = TimeSpan.Zero)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("lock (Lock)");
@@ -7335,7 +7335,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                     WriteLineIndent("Timestamp = (current <= Timestamp) ? new DateTime(Timestamp.Ticks + 1) : current;");
                     WriteLine();
                     WriteLineIndent("// Register the request");
-                    WriteLineIndent("_requestsById" + response_field + ".Add(value.id, new Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>(Timestamp, timeout, source));");
+                    WriteLineIndent("_requestsById" + response_field + ".Add(value.id, new Tuple<DateTime, TimeSpan, TaskCompletionSource<" + response_name + ">>(Timestamp, timeout, source));");
                     WriteLineIndent("if (timeout.Ticks > 0)");
                     Indent(1);
                     WriteLineIndent("_requestsByTimestamp" + response_field + ".Add(Timestamp, value.id);");
