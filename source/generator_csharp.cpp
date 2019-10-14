@@ -3519,7 +3519,7 @@ void GeneratorCSharp::GenerateFBEClient()
         }
 
         // Watchdog for timeouts
-        public void Watchdog(ulong utc)
+        public void Watchdog(DateTime utc)
         {
             lock (Lock)
             {
@@ -3528,7 +3528,7 @@ void GeneratorCSharp::GenerateFBEClient()
         }
 
         // Watchdog client requests for timeouts
-        internal virtual void WatchdogRequests(ulong utc)
+        internal virtual void WatchdogRequests(DateTime utc)
         {
         }
 
@@ -7704,7 +7704,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     // Generate watchdog requests method
     WriteLine();
     WriteLineIndent("// Watchdog client requests for timeouts");
-    WriteLineIndent("internal override void WatchdogRequests(ulong utc)");
+    WriteLineIndent("internal override void WatchdogRequests(DateTime utc)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("base.WatchdogRequests(utc);");
@@ -7729,7 +7729,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("_requestsById" + response_field + ".TryGetValue(request.Value, out tuple);");
         WriteLineIndent("var timestamp = tuple.Item1;");
         WriteLineIndent("var timespan = tuple.Item2;");
-        WriteLineIndent("if (((ulong)(timestamp.Ticks * 100) + timespan) <= utc)");
+        WriteLineIndent("if ((timestamp + timespan) <= utc)");
         WriteLineIndent("{");
         Indent(1);
         WriteLineIndent("var source = tuple.Item3;");

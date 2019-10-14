@@ -9911,7 +9911,7 @@ namespace FBE {
         }
 
         // Watchdog for timeouts
-        public void Watchdog(ulong utc)
+        public void Watchdog(DateTime utc)
         {
             lock (Lock)
             {
@@ -9920,7 +9920,7 @@ namespace FBE {
         }
 
         // Watchdog client requests for timeouts
-        internal virtual void WatchdogRequests(ulong utc)
+        internal virtual void WatchdogRequests(DateTime utc)
         {
         }
 

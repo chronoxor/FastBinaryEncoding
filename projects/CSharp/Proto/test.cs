@@ -16404,7 +16404,7 @@ namespace test {
         }
 
         // Watchdog client requests for timeouts
-        internal override void WatchdogRequests(ulong utc)
+        internal override void WatchdogRequests(DateTime utc)
         {
             base.WatchdogRequests(utc);
 
@@ -16576,7 +16576,7 @@ namespace test {
         }
 
         // Watchdog client requests for timeouts
-        internal override void WatchdogRequests(ulong utc)
+        internal override void WatchdogRequests(DateTime utc)
         {
             base.WatchdogRequests(utc);
 

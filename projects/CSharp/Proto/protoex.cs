@@ -5316,7 +5316,7 @@ namespace protoex {
         }
 
         // Watchdog client requests for timeouts
-        internal override void WatchdogRequests(ulong utc)
+        internal override void WatchdogRequests(DateTime utc)
         {
             base.WatchdogRequests(utc);
 
@@ -5789,7 +5789,7 @@ namespace protoex {
         }
 
         // Watchdog client requests for timeouts
-        internal override void WatchdogRequests(ulong utc)
+        internal override void WatchdogRequests(DateTime utc)
         {
             base.WatchdogRequests(utc);
 
