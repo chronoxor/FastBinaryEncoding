@@ -7460,7 +7460,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
 
                     if ((struct_response_name == response_name) && (cache.find(struct_response_name) == cache.end()))
                     {
-                        WriteLineIndent("if (_requestsById" + struct_response_field + ".TryGetValue(response.id, out Tuple<DateTime, ulong, TaskCompletionSource<" + struct_response_name + ">> tuple))");
+                        WriteLineIndent("if (_requestsById" + struct_response_field + ".TryGetValue(response.id, out Tuple<DateTime, TimeSpan, TaskCompletionSource<" + struct_response_name + ">> tuple))");
                         WriteLineIndent("{");
                         Indent(1);
                         WriteLineIndent("var timestamp = tuple.Item1;");
@@ -7577,7 +7577,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
 
                         if ((struct_reject_name == reject_name) && (cache.find(struct_response_field) == cache.end()))
                         {
-                            WriteLineIndent("if (_requestsById" + struct_response_field + ".TryGetValue(reject.id, out Tuple<DateTime, ulong, TaskCompletionSource<" + struct_response_name + ">> tuple" + struct_response_field + "))");
+                            WriteLineIndent("if (_requestsById" + struct_response_field + ".TryGetValue(reject.id, out Tuple<DateTime, TimeSpan, TaskCompletionSource<" + struct_response_name + ">> tuple" + struct_response_field + "))");
                             WriteLineIndent("{");
                             Indent(1);
                             WriteLineIndent("var timestamp = tuple" + struct_response_field + ".Item1;");
