@@ -7290,9 +7290,10 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
                 WriteLine();
+                WriteLineIndent("public Task Request(" + request_name + " value) { return Request(value, TimeSpan.Zero); }");
                 if (response_name.empty())
                 {
-                    WriteLineIndent("public Task Request(" + request_name + " value, TimeSpan timeout = TimeSpan.Zero)");
+                    WriteLineIndent("public Task Request(" + request_name + " value, TimeSpan timeout)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("TaskCompletionSource source = new TaskCompletionSource();");
@@ -7315,7 +7316,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 }
                 else
                 {
-                    WriteLineIndent("public Task<" + response_name + "> Request(" + request_name + " value, TimeSpan timeout = TimeSpan.Zero)");
+                    WriteLineIndent("public Task<" + response_name + "> Request(" + request_name + " value, TimeSpan timeout)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("lock (Lock)");
