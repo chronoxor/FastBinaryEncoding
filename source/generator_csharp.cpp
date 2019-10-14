@@ -7203,7 +7203,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             std::string response_field = response;
             CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
-            WriteLineIndent("private Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>> _requestsById" + response_field + ";");
+            WriteLineIndent("private Dictionary<Guid, Tuple<DateTime, TimeSpan, TaskCompletionSource<" + response_name + ">>> _requestsById" + response_field + ";");
             WriteLineIndent("private SortedDictionary<DateTime, Guid> _requestsByTimestamp" + response_field + ";");
         }
         WriteLine();
@@ -7237,7 +7237,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             std::string response_field = response;
             CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
-            WriteLineIndent("_requestsById" + response_field + " = new Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>>();");
+            WriteLineIndent("_requestsById" + response_field + " = new Dictionary<Guid, Tuple<DateTime, TimeSpan, TaskCompletionSource<" + response_name + ">>>();");
             WriteLineIndent("_requestsByTimestamp" + response_field + " = new SortedDictionary<DateTime, Guid>();");
         }
     }
@@ -7270,7 +7270,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             std::string response_field = response;
             CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
-            WriteLineIndent("_requestsById" + response_field + " = new Dictionary<Guid, Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>>();");
+            WriteLineIndent("_requestsById" + response_field + " = new Dictionary<Guid, Tuple<DateTime, TimeSpan, TaskCompletionSource<" + response_name + ">>>();");
             WriteLineIndent("_requestsByTimestamp" + response_field + " = new SortedDictionary<DateTime, Guid>();");
         }
     }
@@ -7292,7 +7292,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 WriteLine();
                 if (response_name.empty())
                 {
-                    WriteLineIndent("public Task Request(" + request_name + " value, long timeout = 0)");
+                    WriteLineIndent("public Task Request(" + request_name + " value, TimeSpan timeout = TimeSpan.Zero)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("TaskCompletionSource source = new TaskCompletionSource();");
@@ -7335,8 +7335,8 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                     WriteLineIndent("Timestamp = (current <= Timestamp) ? new DateTime(Timestamp.Ticks + 1) : current;");
                     WriteLine();
                     WriteLineIndent("// Register the request");
-                    WriteLineIndent("_requestsById" + response_field + ".Add(value.id, new Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>(Timestamp, (ulong)timeout * 1000000, source));");
-                    WriteLineIndent("if (timeout > 0)");
+                    WriteLineIndent("_requestsById" + response_field + ".Add(value.id, new Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">>(Timestamp, timeout, source));");
+                    WriteLineIndent("if (timeout.Ticks > 0)");
                     Indent(1);
                     WriteLineIndent("_requestsByTimestamp" + response_field + ".Add(Timestamp, value.id);");
                     Indent(-1);
@@ -7725,7 +7725,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("{");
         Indent(1);
         WriteLineIndent("var request = _requestsByTimestamp" + response_field + ".First();");
-        WriteLineIndent("Tuple<DateTime, ulong, TaskCompletionSource<" + response_name + ">> tuple;");
+        WriteLineIndent("Tuple<DateTime, TimeSpan, TaskCompletionSource<" + response_name + ">> tuple;");
         WriteLineIndent("_requestsById" + response_field + ".TryGetValue(request.Value, out tuple);");
         WriteLineIndent("var timestamp = tuple.Item1;");
         WriteLineIndent("var timespan = tuple.Item2;");
