@@ -7823,6 +7823,8 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     {
         std::string response_name = response;
         std::string response_type = ConvertTypeName(*p->name, response, false);
+        CppCommon::StringUtils::ReplaceAll(response_name, ".", "");
+
         WriteLineIndent("public delegate void ReceiveResponseHandler_" + response_name + "(" + response_type + " response);");
         WriteLineIndent("public event ReceiveResponseHandler_" + response_name + " ReceivedResponse_" + response_name + " = (response) => {};");
     }
@@ -7836,6 +7838,8 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             {
                 std::string struct_response_name = *s->name;
                 std::string struct_response_type = ConvertTypeName(*p->name, *s->name, false);
+                CppCommon::StringUtils::ReplaceAll(struct_response_name, ".", "");
+
                 if ((responses.find(*s->name) == responses.end()) && (cache.find(struct_response_type) == cache.end()))
                 {
                     WriteLineIndent("public delegate void ReceiveResponseHandler_" + struct_response_name + "(" + struct_response_type + " response);");
@@ -7851,6 +7855,8 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     {
         std::string reject_name = reject.first;
         std::string reject_type = ConvertTypeName(*p->name, reject.first, false);
+        CppCommon::StringUtils::ReplaceAll(reject_name, ".", "");
+
         WriteLineIndent("public delegate void ReceiveRejectHandler_" + reject_name + "(" + reject_type + " reject);");
         WriteLineIndent("public event ReceiveRejectHandler_" + reject_name + " ReceivedReject_" + reject_name + " = (reject) => {};");
     }
@@ -7864,6 +7870,8 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             {
                 std::string struct_reject_name = *s->name;
                 std::string struct_reject_type = ConvertTypeName(*p->name, *s->name, false);
+                CppCommon::StringUtils::ReplaceAll(struct_reject_name, ".", "");
+
                 if ((rejects.find(*s->name) == rejects.end()) && (cache.find(struct_reject_type) == cache.end()))
                 {
                     WriteLineIndent("public delegate void ReceiveRejectHandler_" + struct_reject_name + "(" + struct_reject_type + " reject);");
@@ -7884,6 +7892,8 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             {
                 std::string struct_notify_name = *s->name;
                 std::string struct_notify_type = ConvertTypeName(*p->name, *s->name, false);
+                CppCommon::StringUtils::ReplaceAll(struct_notify_name, ".", "");
+
                 if (cache.find(struct_notify_type) == cache.end())
                 {
                     WriteLineIndent("public delegate void ReceiveNotifyHandler_" + struct_notify_name + "(" + struct_notify_type + " notify);");
