@@ -5393,6 +5393,25 @@ namespace protoex {
 
             return false;
         }
+
+        public delegate void ReceiveResponseHandler_OrderMessage(global::protoex.OrderMessage response);
+        public event ReceiveResponseHandler_OrderMessage ReceivedResponse_OrderMessage = (response) => {};
+        public delegate void ReceiveResponseHandler_BalanceMessage(global::protoex.BalanceMessage response);
+        public event ReceiveResponseHandler_BalanceMessage ReceivedResponse_BalanceMessage = (response) => {};
+        public delegate void ReceiveResponseHandler_AccountMessage(global::protoex.AccountMessage response);
+        public event ReceiveResponseHandler_AccountMessage ReceivedResponse_AccountMessage = (response) => {};
+        public delegate void ReceiveRejectHandler_OrderMessage(global::protoex.OrderMessage reject);
+        public event ReceiveRejectHandler_OrderMessage ReceivedReject_OrderMessage = (reject) => {};
+        public delegate void ReceiveRejectHandler_BalanceMessage(global::protoex.BalanceMessage reject);
+        public event ReceiveRejectHandler_BalanceMessage ReceivedReject_BalanceMessage = (reject) => {};
+        public delegate void ReceiveRejectHandler_AccountMessage(global::protoex.AccountMessage reject);
+        public event ReceiveRejectHandler_AccountMessage ReceivedReject_AccountMessage = (reject) => {};
+        public delegate void ReceiveNotifyHandler_OrderMessage(global::protoex.OrderMessage notify);
+        public event ReceiveNotifyHandler_OrderMessage ReceivedNotify_OrderMessage = (notify) => {};
+        public delegate void ReceiveNotifyHandler_BalanceMessage(global::protoex.BalanceMessage notify);
+        public event ReceiveNotifyHandler_BalanceMessage ReceivedNotify_BalanceMessage = (notify) => {};
+        public delegate void ReceiveNotifyHandler_AccountMessage(global::protoex.AccountMessage notify);
+        public event ReceiveNotifyHandler_AccountMessage ReceivedNotify_AccountMessage = (notify) => {};
     }
 
 } // namespace protoex
@@ -5866,6 +5885,25 @@ namespace protoex {
 
             return false;
         }
+
+        public delegate void ReceiveResponseHandler_OrderMessage(global::protoex.OrderMessage response);
+        public event ReceiveResponseHandler_OrderMessage ReceivedResponse_OrderMessage = (response) => {};
+        public delegate void ReceiveResponseHandler_BalanceMessage(global::protoex.BalanceMessage response);
+        public event ReceiveResponseHandler_BalanceMessage ReceivedResponse_BalanceMessage = (response) => {};
+        public delegate void ReceiveResponseHandler_AccountMessage(global::protoex.AccountMessage response);
+        public event ReceiveResponseHandler_AccountMessage ReceivedResponse_AccountMessage = (response) => {};
+        public delegate void ReceiveRejectHandler_OrderMessage(global::protoex.OrderMessage reject);
+        public event ReceiveRejectHandler_OrderMessage ReceivedReject_OrderMessage = (reject) => {};
+        public delegate void ReceiveRejectHandler_BalanceMessage(global::protoex.BalanceMessage reject);
+        public event ReceiveRejectHandler_BalanceMessage ReceivedReject_BalanceMessage = (reject) => {};
+        public delegate void ReceiveRejectHandler_AccountMessage(global::protoex.AccountMessage reject);
+        public event ReceiveRejectHandler_AccountMessage ReceivedReject_AccountMessage = (reject) => {};
+        public delegate void ReceiveNotifyHandler_OrderMessage(global::protoex.OrderMessage notify);
+        public event ReceiveNotifyHandler_OrderMessage ReceivedNotify_OrderMessage = (notify) => {};
+        public delegate void ReceiveNotifyHandler_BalanceMessage(global::protoex.BalanceMessage notify);
+        public event ReceiveNotifyHandler_BalanceMessage ReceivedNotify_BalanceMessage = (notify) => {};
+        public delegate void ReceiveNotifyHandler_AccountMessage(global::protoex.AccountMessage notify);
+        public event ReceiveNotifyHandler_AccountMessage ReceivedNotify_AccountMessage = (notify) => {};
     }
 
 } // namespace protoex

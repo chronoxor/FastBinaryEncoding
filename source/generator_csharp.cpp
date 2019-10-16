@@ -7636,6 +7636,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             {
                 std::string struct_notify_name = ConvertTypeName(*p->name, *s->name, false);
                 std::string struct_notify_field = *s->name;
+
                 if (cache.find(struct_notify_name) == cache.end())
                 {
                     if (!found)
@@ -7810,6 +7811,84 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("return false;");
     Indent(-1);
     WriteLineIndent("}");
+
+    WriteLine();
+
+    // Generate response events
+    for (const auto& response : responses)
+    {
+        std::string response_name = response;
+        std::string response_type = ConvertTypeName(*p->name, response, false);
+        WriteLineIndent("public delegate void ReceiveResponseHandler_" + response_name + "(" + response_type + " response);");
+        WriteLineIndent("public event ReceiveResponseHandler_" + response_name + " ReceivedResponse_" + response_name + " = (response) => {};");
+    }
+    // Generate remaining response events
+    if (p->body)
+    {
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_response_name = *s->name;
+                std::string struct_response_type = ConvertTypeName(*p->name, *s->name, false);
+                if ((responses.find(*s->name) == responses.end()) && (cache.find(struct_response_type) == cache.end()))
+                {
+                    WriteLineIndent("public delegate void ReceiveResponseHandler_" + struct_response_name + "(" + struct_response_type + " response);");
+                    WriteLineIndent("public event ReceiveResponseHandler_" + struct_response_name + " ReceivedResponse_" + struct_response_name + " = (response) => {};");
+                    cache.insert(struct_response_type);
+                }
+            }
+        }
+    }
+
+    // Generate reject events
+    for (const auto& reject : rejects)
+    {
+        std::string reject_name = reject.first;
+        std::string reject_type = ConvertTypeName(*p->name, reject.first, false);
+        WriteLineIndent("public delegate void ReceiveRejectHandler_" + reject_name + "(" + reject_type + " reject);");
+        WriteLineIndent("public event ReceiveRejectHandler_" + reject_name + " ReceivedReject_" + reject_name + " = (reject) => {};");
+    }
+    // Generate remaining reject events
+    if (p->body)
+    {
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_reject_name = *s->name;
+                std::string struct_reject_type = ConvertTypeName(*p->name, *s->name, false);
+                if ((rejects.find(*s->name) == rejects.end()) && (cache.find(struct_reject_type) == cache.end()))
+                {
+                    WriteLineIndent("public delegate void ReceiveRejectHandler_" + struct_reject_name + "(" + struct_reject_type + " reject);");
+                    WriteLineIndent("public event ReceiveRejectHandler_" + struct_reject_name + " ReceivedReject_" + struct_reject_name + " = (reject) => {};");
+                    cache.insert(struct_reject_type);
+                }
+            }
+        }
+    }
+
+    // Generate notify events
+    if (p->body)
+    {
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_notify_name = *s->name;
+                std::string struct_notify_type = ConvertTypeName(*p->name, *s->name, false);
+                if (cache.find(struct_notify_type) == cache.end())
+                {
+                    WriteLineIndent("public delegate void ReceiveNotifyHandler_" + struct_notify_name + "(" + struct_notify_type + " notify);");
+                    WriteLineIndent("public event ReceiveNotifyHandler_" + struct_notify_name + " ReceivedNotify_" + struct_notify_name + " = (notify) => {};");
+                    cache.insert(struct_notify_type);
+                }
+            }
+        }
+    }
 
     // Generate client end
     Indent(-1);
