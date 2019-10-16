@@ -7444,6 +7444,8 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("internal bool OnReceiveResponse(" + response_name + " response)");
         WriteLineIndent("{");
         Indent(1);
+        WriteLineIndent("ReceivedResponse_" + response + "?.Invoke(response);");
+        WriteLine();
         if (p->body)
         {
             std::set<std::string> cache;
@@ -7501,7 +7503,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 {
                     if (!found)
                         WriteLine();
-                    WriteLineIndent("internal bool OnReceiveResponse(" + struct_response_name + " response) { return false; }");
+                    WriteLineIndent("internal bool OnReceiveResponse(" + struct_response_name + " response) { ReceivedResponse_" + *s->name + "?.Invoke(response); return false; }");
                     cache.insert(struct_response_name);
                     found = true;
                 }
@@ -7521,6 +7523,8 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("internal bool OnReceiveReject(" + reject_name + " reject)");
         WriteLineIndent("{");
         Indent(1);
+        WriteLineIndent("ReceivedReject_" + reject.first + "?.Invoke(reject);");
+        WriteLine();
         if (global)
         {
             if (p->import)
@@ -7617,7 +7621,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 {
                     if (!found)
                         WriteLine();
-                    WriteLineIndent("internal bool OnReceiveReject(" + struct_reject_name + " reject) { return false; }");
+                    WriteLineIndent("internal bool OnReceiveReject(" + struct_reject_name + " reject) { ReceivedReject_" + *s->name + "?.Invoke(reject); return false; }");
                     cache.insert(struct_reject_name);
                     found = true;
                 }
@@ -7641,7 +7645,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 {
                     if (!found)
                         WriteLine();
-                    WriteLineIndent("internal void OnReceiveNotify(" + struct_notify_name + " notify) {}");
+                    WriteLineIndent("internal void OnReceiveNotify(" + struct_notify_name + " notify) { ReceivedNotify_" + *s->name + "?.Invoke(notify); }");
                     cache.insert(struct_notify_name);
                     found = true;
                 }
