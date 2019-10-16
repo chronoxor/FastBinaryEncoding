@@ -7284,17 +7284,18 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         {
             if (s->message && s->request)
             {
-                std::string request_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string request_name = *s->name;
+                std::string request_type = ConvertTypeName(*p->name, *s->name, false);
                 std::string response_type = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
                 std::string response_field = (s->response) ? *s->response->response : "";
                 CppCommon::StringUtils::ReplaceAll(request_name, ".", "");
                 CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
                 WriteLine();
-                WriteLineIndent("public Task Request(" + request_name + " value) { return Request(value, TimeSpan.Zero); }");
+                WriteLineIndent("public Task Request(" + request_type + " value) { return Request(value, TimeSpan.Zero); }");
                 if (response_type.empty())
                 {
-                    WriteLineIndent("public Task Request(" + request_name + " value, TimeSpan timeout)");
+                    WriteLineIndent("public Task Request(" + request_type + " value, TimeSpan timeout)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("TaskCompletionSource source = new TaskCompletionSource();");
@@ -7317,7 +7318,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 }
                 else
                 {
-                    WriteLineIndent("public Task<" + response_type + "> Request(" + request_name + " value, TimeSpan timeout)");
+                    WriteLineIndent("public Task<" + response_type + "> Request(" + request_type + " value, TimeSpan timeout)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("lock (Lock)");
