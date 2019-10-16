@@ -7292,17 +7292,19 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
                 WriteLine();
-                WriteLineIndent("public Task Request(" + request_type + " value) { return Request(value, TimeSpan.Zero); }");
                 if (response_type.empty())
                 {
-                    WriteLineIndent("public Task Request(" + request_type + " value, TimeSpan timeout)");
+                    WriteLineIndent("public Task Request(" + request_type + " value) { return RequestListener(this, value, TimeSpan.Zero); }");
+                    WriteLineIndent("public Task Request(" + request_type + " value, TimeSpan timeout) { return RequestListener(this, value, timeout); }");
+                    WriteLineIndent("public Task RequestListener(" + listener + " listener, " + request_type + " value) { return RequestListener(listener, value, TimeSpan.Zero); }");
+                    WriteLineIndent("public Task RequestListener(" + listener + " listener, " + request_type + " value, TimeSpan timeout)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("TaskCompletionSource source = new TaskCompletionSource();");
                     WriteLineIndent("Task task = source.Task;");
                     WriteLine();
                     WriteLineIndent("// Send the request message");
-                    WriteLineIndent("long serialized = Send(value);");
+                    WriteLineIndent("long serialized = SendListener(listener, value);");
                     WriteLineIndent("if (serialized > 0)");
                     Indent(1);
                     WriteLineIndent("source.SetResult();");
@@ -7318,7 +7320,10 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 }
                 else
                 {
-                    WriteLineIndent("public Task<" + response_type + "> Request(" + request_type + " value, TimeSpan timeout)");
+                    WriteLineIndent("public Task<" + response_type + "> Request(" + request_type + " value) { return RequestListener(this, value, TimeSpan.Zero); }");
+                    WriteLineIndent("public Task<" + response_type + "> Request(" + request_type + " value, TimeSpan timeout) { return RequestListener(this, value, timeout); }");
+                    WriteLineIndent("public Task<" + response_type + "> RequestListener(" + listener + " listener, " + request_type + " value) { return RequestListener(listener, value, TimeSpan.Zero); }");
+                    WriteLineIndent("public Task<" + response_type + "> RequestListener(" + listener + " listener, " + request_type + " value, TimeSpan timeout)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("lock (Lock)");
@@ -7330,7 +7335,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                     WriteLineIndent("DateTime current = DateTime.UtcNow;");
                     WriteLine();
                     WriteLineIndent("// Send the request message");
-                    WriteLineIndent("long serialized = Send(value);");
+                    WriteLineIndent("long serialized = SendListener(listener, value);");
                     WriteLineIndent("if (serialized > 0)");
                     WriteLineIndent("{");
                     Indent(1);
