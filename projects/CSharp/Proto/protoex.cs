@@ -5291,17 +5291,17 @@ namespace protoex {
             return SendSerialized(listener, serialized);
         }
 
-        internal bool OnReceiveResponse(global::protoex.OrderMessage response) { return false; }
-        internal bool OnReceiveResponse(global::protoex.BalanceMessage response) { return false; }
-        internal bool OnReceiveResponse(global::protoex.AccountMessage response) { return false; }
+        internal bool OnReceiveResponse(global::protoex.OrderMessage response) { ReceivedResponse_OrderMessage?.Invoke(response); return false; }
+        internal bool OnReceiveResponse(global::protoex.BalanceMessage response) { ReceivedResponse_BalanceMessage?.Invoke(response); return false; }
+        internal bool OnReceiveResponse(global::protoex.AccountMessage response) { ReceivedResponse_AccountMessage?.Invoke(response); return false; }
 
-        internal bool OnReceiveReject(global::protoex.OrderMessage reject) { return false; }
-        internal bool OnReceiveReject(global::protoex.BalanceMessage reject) { return false; }
-        internal bool OnReceiveReject(global::protoex.AccountMessage reject) { return false; }
+        internal bool OnReceiveReject(global::protoex.OrderMessage reject) { ReceivedReject_OrderMessage?.Invoke(reject); return false; }
+        internal bool OnReceiveReject(global::protoex.BalanceMessage reject) { ReceivedReject_BalanceMessage?.Invoke(reject); return false; }
+        internal bool OnReceiveReject(global::protoex.AccountMessage reject) { ReceivedReject_AccountMessage?.Invoke(reject); return false; }
 
-        internal void OnReceiveNotify(global::protoex.OrderMessage notify) {}
-        internal void OnReceiveNotify(global::protoex.BalanceMessage notify) {}
-        internal void OnReceiveNotify(global::protoex.AccountMessage notify) {}
+        internal void OnReceiveNotify(global::protoex.OrderMessage notify) { ReceivedNotify_OrderMessage?.Invoke(notify); }
+        internal void OnReceiveNotify(global::protoex.BalanceMessage notify) { ReceivedNotify_BalanceMessage?.Invoke(notify); }
+        internal void OnReceiveNotify(global::protoex.AccountMessage notify) { ReceivedNotify_AccountMessage?.Invoke(notify); }
 
         internal void OnReceive(global::protoex.OrderMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
         internal void OnReceive(global::protoex.BalanceMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
@@ -5783,17 +5783,17 @@ namespace protoex {
             return SendSerialized(listener, serialized);
         }
 
-        internal bool OnReceiveResponse(global::protoex.OrderMessage response) { return false; }
-        internal bool OnReceiveResponse(global::protoex.BalanceMessage response) { return false; }
-        internal bool OnReceiveResponse(global::protoex.AccountMessage response) { return false; }
+        internal bool OnReceiveResponse(global::protoex.OrderMessage response) { ReceivedResponse_OrderMessage?.Invoke(response); return false; }
+        internal bool OnReceiveResponse(global::protoex.BalanceMessage response) { ReceivedResponse_BalanceMessage?.Invoke(response); return false; }
+        internal bool OnReceiveResponse(global::protoex.AccountMessage response) { ReceivedResponse_AccountMessage?.Invoke(response); return false; }
 
-        internal bool OnReceiveReject(global::protoex.OrderMessage reject) { return false; }
-        internal bool OnReceiveReject(global::protoex.BalanceMessage reject) { return false; }
-        internal bool OnReceiveReject(global::protoex.AccountMessage reject) { return false; }
+        internal bool OnReceiveReject(global::protoex.OrderMessage reject) { ReceivedReject_OrderMessage?.Invoke(reject); return false; }
+        internal bool OnReceiveReject(global::protoex.BalanceMessage reject) { ReceivedReject_BalanceMessage?.Invoke(reject); return false; }
+        internal bool OnReceiveReject(global::protoex.AccountMessage reject) { ReceivedReject_AccountMessage?.Invoke(reject); return false; }
 
-        internal void OnReceiveNotify(global::protoex.OrderMessage notify) {}
-        internal void OnReceiveNotify(global::protoex.BalanceMessage notify) {}
-        internal void OnReceiveNotify(global::protoex.AccountMessage notify) {}
+        internal void OnReceiveNotify(global::protoex.OrderMessage notify) { ReceivedNotify_OrderMessage?.Invoke(notify); }
+        internal void OnReceiveNotify(global::protoex.BalanceMessage notify) { ReceivedNotify_BalanceMessage?.Invoke(notify); }
+        internal void OnReceiveNotify(global::protoex.AccountMessage notify) { ReceivedNotify_AccountMessage?.Invoke(notify); }
 
         internal void OnReceive(global::protoex.OrderMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
         internal void OnReceive(global::protoex.BalanceMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
