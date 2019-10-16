@@ -7449,7 +7449,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         CppCommon::StringUtils::ReplaceAll(response_name, ".", "");
 
         WriteLine();
-        WriteLineIndent("internal bool OnReceiveResponse(" + response_type + " response)");
+        WriteLineIndent("public bool OnReceiveResponse(" + response_type + " response)");
         WriteLineIndent("{");
         Indent(1);
         WriteLineIndent("ReceivedResponse_" + response_name + "?.Invoke(response);");
@@ -7512,7 +7512,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 {
                     if (!found)
                         WriteLine();
-                    WriteLineIndent("internal bool OnReceiveResponse(" + struct_response_type + " response) { ReceivedResponse_" + struct_response_name + "?.Invoke(response); return false; }");
+                    WriteLineIndent("public bool OnReceiveResponse(" + struct_response_type + " response) { ReceivedResponse_" + struct_response_name + "?.Invoke(response); return false; }");
                     cache.insert(struct_response_type);
                     found = true;
                 }
@@ -7530,7 +7530,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         CppCommon::StringUtils::ReplaceAll(reject_name, ".", "");
 
         WriteLine();
-        WriteLineIndent("internal bool OnReceiveReject(" + reject_type + " reject)");
+        WriteLineIndent("public bool OnReceiveReject(" + reject_type + " reject)");
         WriteLineIndent("{");
         Indent(1);
         WriteLineIndent("ReceivedReject_" + reject_name + "?.Invoke(reject);");
@@ -7634,7 +7634,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 {
                     if (!found)
                         WriteLine();
-                    WriteLineIndent("internal bool OnReceiveReject(" + struct_reject_type + " reject) { ReceivedReject_" + struct_reject_name + "?.Invoke(reject); return false; }");
+                    WriteLineIndent("public bool OnReceiveReject(" + struct_reject_type + " reject) { ReceivedReject_" + struct_reject_name + "?.Invoke(reject); return false; }");
                     cache.insert(struct_reject_type);
                     found = true;
                 }
@@ -7659,7 +7659,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 {
                     if (!found)
                         WriteLine();
-                    WriteLineIndent("internal void OnReceiveNotify(" + struct_notify_type + " notify) { ReceivedNotify_" + struct_notify_name + "?.Invoke(notify); }");
+                    WriteLineIndent("public void OnReceiveNotify(" + struct_notify_type + " notify) { ReceivedNotify_" + struct_notify_name + "?.Invoke(notify); }");
                     cache.insert(struct_notify_type);
                     found = true;
                 }
@@ -7684,7 +7684,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 {
                     if (!found)
                         WriteLine();
-                    WriteLineIndent("internal void OnReceive(" + struct_response_type + " value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }");
+                    WriteLineIndent("public void OnReceive(" + struct_response_type + " value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }");
                     cache.insert(struct_response_type);
                     found = true;
                 }
@@ -7766,7 +7766,6 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         Indent(-1);
         Indent(-1);
         WriteLineIndent("}");
-        WriteLine();
     }
     Indent(-1);
     WriteLineIndent("}");

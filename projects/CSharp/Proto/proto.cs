@@ -5151,21 +5151,21 @@ namespace proto {
             return SendSerialized(listener, serialized);
         }
 
-        internal bool OnReceiveResponse(global::proto.OrderMessage response) { ReceivedResponse_OrderMessage?.Invoke(response); return false; }
-        internal bool OnReceiveResponse(global::proto.BalanceMessage response) { ReceivedResponse_BalanceMessage?.Invoke(response); return false; }
-        internal bool OnReceiveResponse(global::proto.AccountMessage response) { ReceivedResponse_AccountMessage?.Invoke(response); return false; }
+        public bool OnReceiveResponse(global::proto.OrderMessage response) { ReceivedResponse_OrderMessage?.Invoke(response); return false; }
+        public bool OnReceiveResponse(global::proto.BalanceMessage response) { ReceivedResponse_BalanceMessage?.Invoke(response); return false; }
+        public bool OnReceiveResponse(global::proto.AccountMessage response) { ReceivedResponse_AccountMessage?.Invoke(response); return false; }
 
-        internal bool OnReceiveReject(global::proto.OrderMessage reject) { ReceivedReject_OrderMessage?.Invoke(reject); return false; }
-        internal bool OnReceiveReject(global::proto.BalanceMessage reject) { ReceivedReject_BalanceMessage?.Invoke(reject); return false; }
-        internal bool OnReceiveReject(global::proto.AccountMessage reject) { ReceivedReject_AccountMessage?.Invoke(reject); return false; }
+        public bool OnReceiveReject(global::proto.OrderMessage reject) { ReceivedReject_OrderMessage?.Invoke(reject); return false; }
+        public bool OnReceiveReject(global::proto.BalanceMessage reject) { ReceivedReject_BalanceMessage?.Invoke(reject); return false; }
+        public bool OnReceiveReject(global::proto.AccountMessage reject) { ReceivedReject_AccountMessage?.Invoke(reject); return false; }
 
-        internal void OnReceiveNotify(global::proto.OrderMessage notify) { ReceivedNotify_OrderMessage?.Invoke(notify); }
-        internal void OnReceiveNotify(global::proto.BalanceMessage notify) { ReceivedNotify_BalanceMessage?.Invoke(notify); }
-        internal void OnReceiveNotify(global::proto.AccountMessage notify) { ReceivedNotify_AccountMessage?.Invoke(notify); }
+        public void OnReceiveNotify(global::proto.OrderMessage notify) { ReceivedNotify_OrderMessage?.Invoke(notify); }
+        public void OnReceiveNotify(global::proto.BalanceMessage notify) { ReceivedNotify_BalanceMessage?.Invoke(notify); }
+        public void OnReceiveNotify(global::proto.AccountMessage notify) { ReceivedNotify_AccountMessage?.Invoke(notify); }
 
-        internal void OnReceive(global::proto.OrderMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
-        internal void OnReceive(global::proto.BalanceMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
-        internal void OnReceive(global::proto.AccountMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        public void OnReceive(global::proto.OrderMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        public void OnReceive(global::proto.BalanceMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        public void OnReceive(global::proto.AccountMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
 
         // Reset client requests
         internal override void ResetRequests()
@@ -5608,21 +5608,21 @@ namespace proto {
             return SendSerialized(listener, serialized);
         }
 
-        internal bool OnReceiveResponse(global::proto.OrderMessage response) { ReceivedResponse_OrderMessage?.Invoke(response); return false; }
-        internal bool OnReceiveResponse(global::proto.BalanceMessage response) { ReceivedResponse_BalanceMessage?.Invoke(response); return false; }
-        internal bool OnReceiveResponse(global::proto.AccountMessage response) { ReceivedResponse_AccountMessage?.Invoke(response); return false; }
+        public bool OnReceiveResponse(global::proto.OrderMessage response) { ReceivedResponse_OrderMessage?.Invoke(response); return false; }
+        public bool OnReceiveResponse(global::proto.BalanceMessage response) { ReceivedResponse_BalanceMessage?.Invoke(response); return false; }
+        public bool OnReceiveResponse(global::proto.AccountMessage response) { ReceivedResponse_AccountMessage?.Invoke(response); return false; }
 
-        internal bool OnReceiveReject(global::proto.OrderMessage reject) { ReceivedReject_OrderMessage?.Invoke(reject); return false; }
-        internal bool OnReceiveReject(global::proto.BalanceMessage reject) { ReceivedReject_BalanceMessage?.Invoke(reject); return false; }
-        internal bool OnReceiveReject(global::proto.AccountMessage reject) { ReceivedReject_AccountMessage?.Invoke(reject); return false; }
+        public bool OnReceiveReject(global::proto.OrderMessage reject) { ReceivedReject_OrderMessage?.Invoke(reject); return false; }
+        public bool OnReceiveReject(global::proto.BalanceMessage reject) { ReceivedReject_BalanceMessage?.Invoke(reject); return false; }
+        public bool OnReceiveReject(global::proto.AccountMessage reject) { ReceivedReject_AccountMessage?.Invoke(reject); return false; }
 
-        internal void OnReceiveNotify(global::proto.OrderMessage notify) { ReceivedNotify_OrderMessage?.Invoke(notify); }
-        internal void OnReceiveNotify(global::proto.BalanceMessage notify) { ReceivedNotify_BalanceMessage?.Invoke(notify); }
-        internal void OnReceiveNotify(global::proto.AccountMessage notify) { ReceivedNotify_AccountMessage?.Invoke(notify); }
+        public void OnReceiveNotify(global::proto.OrderMessage notify) { ReceivedNotify_OrderMessage?.Invoke(notify); }
+        public void OnReceiveNotify(global::proto.BalanceMessage notify) { ReceivedNotify_BalanceMessage?.Invoke(notify); }
+        public void OnReceiveNotify(global::proto.AccountMessage notify) { ReceivedNotify_AccountMessage?.Invoke(notify); }
 
-        internal void OnReceive(global::proto.OrderMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
-        internal void OnReceive(global::proto.BalanceMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
-        internal void OnReceive(global::proto.AccountMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        public void OnReceive(global::proto.OrderMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        public void OnReceive(global::proto.BalanceMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        public void OnReceive(global::proto.AccountMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
 
         // Reset client requests
         internal override void ResetRequests()
