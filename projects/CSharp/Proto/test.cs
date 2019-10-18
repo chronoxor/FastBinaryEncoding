@@ -133,12 +133,19 @@ namespace test {
 
         public static FBE.FieldModelValueType<EnumSimple> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelEnumSimple(buffer, offset); }
 
-        public static EnumSimple ENUM_VALUE_0 = new EnumSimple((int)0 + 0);
-        public static EnumSimple ENUM_VALUE_1 = new EnumSimple((int)1 + 0);
-        public static EnumSimple ENUM_VALUE_2 = new EnumSimple((int)1 + 1);
-        public static EnumSimple ENUM_VALUE_3 = new EnumSimple((int)3 + 0);
-        public static EnumSimple ENUM_VALUE_4 = new EnumSimple((int)0x4 + 0);
-        public static EnumSimple ENUM_VALUE_5 = new EnumSimple(ENUM_VALUE_3);
+        public const int _ENUM_VALUE_0_ = (int)0 + 0;
+        public const int _ENUM_VALUE_1_ = (int)1 + 0;
+        public const int _ENUM_VALUE_2_ = (int)1 + 1;
+        public const int _ENUM_VALUE_3_ = (int)3 + 0;
+        public const int _ENUM_VALUE_4_ = (int)0x4 + 0;
+        public const int _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
+
+        public static EnumSimple ENUM_VALUE_0 = new EnumSimple(_ENUM_VALUE_0_);
+        public static EnumSimple ENUM_VALUE_1 = new EnumSimple(_ENUM_VALUE_1_);
+        public static EnumSimple ENUM_VALUE_2 = new EnumSimple(_ENUM_VALUE_2_);
+        public static EnumSimple ENUM_VALUE_3 = new EnumSimple(_ENUM_VALUE_3_);
+        public static EnumSimple ENUM_VALUE_4 = new EnumSimple(_ENUM_VALUE_4_);
+        public static EnumSimple ENUM_VALUE_5 = new EnumSimple(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -365,12 +372,19 @@ namespace test {
 
         public static FBE.FieldModelValueType<EnumTyped> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelEnumTyped(buffer, offset); }
 
-        public static EnumTyped ENUM_VALUE_0 = new EnumTyped((byte)0 + 0);
-        public static EnumTyped ENUM_VALUE_1 = new EnumTyped((byte)'1' + 0);
-        public static EnumTyped ENUM_VALUE_2 = new EnumTyped((byte)'1' + 1);
-        public static EnumTyped ENUM_VALUE_3 = new EnumTyped((byte)'3' + 0);
-        public static EnumTyped ENUM_VALUE_4 = new EnumTyped((byte)'3' + 1);
-        public static EnumTyped ENUM_VALUE_5 = new EnumTyped(ENUM_VALUE_3);
+        public const byte _ENUM_VALUE_0_ = (byte)0 + 0;
+        public const byte _ENUM_VALUE_1_ = (byte)'1' + 0;
+        public const byte _ENUM_VALUE_2_ = (byte)'1' + 1;
+        public const byte _ENUM_VALUE_3_ = (byte)'3' + 0;
+        public const byte _ENUM_VALUE_4_ = (byte)'3' + 1;
+        public const byte _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
+
+        public static EnumTyped ENUM_VALUE_0 = new EnumTyped(_ENUM_VALUE_0_);
+        public static EnumTyped ENUM_VALUE_1 = new EnumTyped(_ENUM_VALUE_1_);
+        public static EnumTyped ENUM_VALUE_2 = new EnumTyped(_ENUM_VALUE_2_);
+        public static EnumTyped ENUM_VALUE_3 = new EnumTyped(_ENUM_VALUE_3_);
+        public static EnumTyped ENUM_VALUE_4 = new EnumTyped(_ENUM_VALUE_4_);
+        public static EnumTyped ENUM_VALUE_5 = new EnumTyped(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -596,6 +610,7 @@ namespace test {
         public static EnumEmpty Default => new EnumEmpty();
 
         public static FBE.FieldModelValueType<EnumEmpty> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelEnumEmpty(buffer, offset); }
+
 
 
         public override string ToString()
@@ -849,12 +864,19 @@ namespace test {
 
         public static FBE.FieldModelValueType<FlagsSimple> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelFlagsSimple(buffer, offset); }
 
-        public static FlagsSimple FLAG_VALUE_0 = new FlagsSimple((int)0x0);
-        public static FlagsSimple FLAG_VALUE_1 = new FlagsSimple((int)0x1);
-        public static FlagsSimple FLAG_VALUE_2 = new FlagsSimple((int)0x2);
-        public static FlagsSimple FLAG_VALUE_3 = new FlagsSimple((int)0x4);
-        public static FlagsSimple FLAG_VALUE_4 = new FlagsSimple(FLAG_VALUE_3);
-        public static FlagsSimple FLAG_VALUE_5 = new FlagsSimple(FLAG_VALUE_1 | FLAG_VALUE_3);
+        public const int _FLAG_VALUE_0_ = (int)0x0;
+        public const int _FLAG_VALUE_1_ = (int)0x1;
+        public const int _FLAG_VALUE_2_ = (int)0x2;
+        public const int _FLAG_VALUE_3_ = (int)0x4;
+        public const int _FLAG_VALUE_4_ = _FLAG_VALUE_3_;
+        public const int _FLAG_VALUE_5_ = _FLAG_VALUE_1_ | _FLAG_VALUE_3_;
+
+        public static FlagsSimple FLAG_VALUE_0 = new FlagsSimple(_FLAG_VALUE_0_);
+        public static FlagsSimple FLAG_VALUE_1 = new FlagsSimple(_FLAG_VALUE_1_);
+        public static FlagsSimple FLAG_VALUE_2 = new FlagsSimple(_FLAG_VALUE_2_);
+        public static FlagsSimple FLAG_VALUE_3 = new FlagsSimple(_FLAG_VALUE_3_);
+        public static FlagsSimple FLAG_VALUE_4 = new FlagsSimple(_FLAG_VALUE_4_);
+        public static FlagsSimple FLAG_VALUE_5 = new FlagsSimple(_FLAG_VALUE_5_);
 
         public override string ToString()
         {
@@ -1140,16 +1162,27 @@ namespace test {
 
         public static FBE.FieldModelValueType<FlagsTyped> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelFlagsTyped(buffer, offset); }
 
-        public static FlagsTyped FLAG_VALUE_0 = new FlagsTyped((ulong)0x00UL);
-        public static FlagsTyped FLAG_VALUE_1 = new FlagsTyped((ulong)0x01UL);
-        public static FlagsTyped FLAG_VALUE_2 = new FlagsTyped((ulong)0x02UL);
-        public static FlagsTyped FLAG_VALUE_3 = new FlagsTyped((ulong)0x04UL);
-        public static FlagsTyped FLAG_VALUE_4 = new FlagsTyped((ulong)0x08UL);
-        public static FlagsTyped FLAG_VALUE_5 = new FlagsTyped((ulong)0x10UL);
-        public static FlagsTyped FLAG_VALUE_6 = new FlagsTyped((ulong)0x20UL);
-        public static FlagsTyped FLAG_VALUE_7 = new FlagsTyped((ulong)0x40UL);
-        public static FlagsTyped FLAG_VALUE_8 = new FlagsTyped(FLAG_VALUE_7);
-        public static FlagsTyped FLAG_VALUE_9 = new FlagsTyped(FLAG_VALUE_2 | FLAG_VALUE_4 | FLAG_VALUE_6);
+        public const ulong _FLAG_VALUE_0_ = (ulong)0x00UL;
+        public const ulong _FLAG_VALUE_1_ = (ulong)0x01UL;
+        public const ulong _FLAG_VALUE_2_ = (ulong)0x02UL;
+        public const ulong _FLAG_VALUE_3_ = (ulong)0x04UL;
+        public const ulong _FLAG_VALUE_4_ = (ulong)0x08UL;
+        public const ulong _FLAG_VALUE_5_ = (ulong)0x10UL;
+        public const ulong _FLAG_VALUE_6_ = (ulong)0x20UL;
+        public const ulong _FLAG_VALUE_7_ = (ulong)0x40UL;
+        public const ulong _FLAG_VALUE_8_ = _FLAG_VALUE_7_;
+        public const ulong _FLAG_VALUE_9_ = _FLAG_VALUE_2_ | _FLAG_VALUE_4_ | _FLAG_VALUE_6_;
+
+        public static FlagsTyped FLAG_VALUE_0 = new FlagsTyped(_FLAG_VALUE_0_);
+        public static FlagsTyped FLAG_VALUE_1 = new FlagsTyped(_FLAG_VALUE_1_);
+        public static FlagsTyped FLAG_VALUE_2 = new FlagsTyped(_FLAG_VALUE_2_);
+        public static FlagsTyped FLAG_VALUE_3 = new FlagsTyped(_FLAG_VALUE_3_);
+        public static FlagsTyped FLAG_VALUE_4 = new FlagsTyped(_FLAG_VALUE_4_);
+        public static FlagsTyped FLAG_VALUE_5 = new FlagsTyped(_FLAG_VALUE_5_);
+        public static FlagsTyped FLAG_VALUE_6 = new FlagsTyped(_FLAG_VALUE_6_);
+        public static FlagsTyped FLAG_VALUE_7 = new FlagsTyped(_FLAG_VALUE_7_);
+        public static FlagsTyped FLAG_VALUE_8 = new FlagsTyped(_FLAG_VALUE_8_);
+        public static FlagsTyped FLAG_VALUE_9 = new FlagsTyped(_FLAG_VALUE_9_);
 
         public override string ToString()
         {
@@ -1454,6 +1487,7 @@ namespace test {
         public static FlagsEmpty Default => new FlagsEmpty();
 
         public static FBE.FieldModelValueType<FlagsEmpty> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelFlagsEmpty(buffer, offset); }
+
 
 
         public override string ToString()

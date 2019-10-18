@@ -4464,14 +4464,14 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     Write(code);
     Indent(1);
 
-    // Generate enum body
+    // Generate enum constants
     if (e->body)
     {
         int index = 0;
         std::string last = ConvertEnumConstant(enum_type, "0");
         for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
         {
-            WriteIndent("public static " + *e->name + " " + *(*it)->name + " = new " + *e->name + "(");
+            WriteIndent("public const " + enum_base_type + " _" + *(*it)->name + "_ = ");
             if ((*it)->value)
             {
                 if ((*it)->value->constant && !(*it)->value->constant->empty())
@@ -4484,13 +4484,21 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
                 {
                     index = 0;
                     last = ConvertEnumConstant("", *(*it)->value->reference);
-                    Write(last);
+                    Write("_" + last + "_");
                 }
             }
             else
                 Write(last + " + " + std::to_string(index++));
-            WriteLine(");");
+            WriteLine(";");
         }
+        WriteLine();
+    }
+
+    // Generate enum body
+    if (e->body)
+    {
+        for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
+            WriteLineIndent("public static " + *e->name + " " + *(*it)->name + " = new " + *e->name + "(_" + *(*it)->name + "_);");
         WriteLine();
     }
 
@@ -4847,7 +4855,7 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
     Write(code);
     Indent(1);
 
-    // Generate flags body
+    // Generate flags constants
     if (f->body)
     {
         for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
@@ -4855,11 +4863,20 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
             if ((*it)->value)
             {
                 if ((*it)->value->constant && !(*it)->value->constant->empty())
-                    WriteLineIndent("public static " + *f->name + " " + *(*it)->name + " = new " + *f->name + "(" + ConvertEnumConstant(flags_type, *(*it)->value->constant) + ");");
+                    WriteLineIndent("public const " + flags_base_type + " _" + *(*it)->name + "_ = " + ConvertEnumConstant(flags_type, *(*it)->value->constant) + ";");
                 else if ((*it)->value->reference && !(*it)->value->reference->empty())
-                    WriteLineIndent("public static " + *f->name + " " + *(*it)->name + " = new " + *f->name + "(" + ConvertEnumConstant("", *(*it)->value->reference) + ");");
+                    WriteLineIndent("public const " + flags_base_type + " _" + *(*it)->name + "_ = _" + ConvertEnumConstant("", *(*it)->value->reference) + "_;");
             }
         }
+        WriteLine();
+    }
+
+    // Generate flags body
+    if (f->body)
+    {
+        for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
+            if ((*it)->value)
+                WriteLineIndent("public static " + *f->name + " " + *(*it)->name + " = new " + *f->name + "(_" + *(*it)->name + "_);");
         WriteLine();
     }
 
@@ -8066,7 +8083,25 @@ std::string GeneratorCSharp::ConvertEnumTypeUtf8Json(const std::string& type)
 
 std::string GeneratorCSharp::ConvertEnumConstant(const std::string& type, const std::string& value)
 {
-    return ConvertEnumConstantPrefix(type) + value + ConvertEnumConstantSuffix(type);
+    std::string result = value;
+
+    // Fill flags values
+    std::vector<std::string> flags = CppCommon::StringUtils::Split(result, '|', true);
+
+    // Generate flags combination
+    if (flags.size() > 1)
+    {
+        result = "";
+        bool first = true;
+        for (const auto& it : flags)
+        {
+            std::string flag = CppCommon::StringUtils::ToTrim(it);
+            result += (first ? "" : "_ | _") + flag;
+            first = false;
+        }
+    }
+
+    return ConvertEnumConstantPrefix(type) + result + ConvertEnumConstantSuffix(type);
 }
 
 std::string GeneratorCSharp::ConvertEnumConstantPrefix(const std::string& type)

@@ -133,9 +133,13 @@ namespace protoex {
 
         public static FBE.FieldModelValueType<OrderSide> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelOrderSide(buffer, offset); }
 
-        public static OrderSide buy = new OrderSide((byte)0U + 0);
-        public static OrderSide sell = new OrderSide((byte)0U + 1);
-        public static OrderSide tell = new OrderSide((byte)0U + 2);
+        public const byte _buy_ = (byte)0U + 0;
+        public const byte _sell_ = (byte)0U + 1;
+        public const byte _tell_ = (byte)0U + 2;
+
+        public static OrderSide buy = new OrderSide(_buy_);
+        public static OrderSide sell = new OrderSide(_sell_);
+        public static OrderSide tell = new OrderSide(_tell_);
 
         public override string ToString()
         {
@@ -359,10 +363,15 @@ namespace protoex {
 
         public static FBE.FieldModelValueType<OrderType> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelOrderType(buffer, offset); }
 
-        public static OrderType market = new OrderType((byte)0U + 0);
-        public static OrderType limit = new OrderType((byte)0U + 1);
-        public static OrderType stop = new OrderType((byte)0U + 2);
-        public static OrderType stoplimit = new OrderType((byte)0U + 3);
+        public const byte _market_ = (byte)0U + 0;
+        public const byte _limit_ = (byte)0U + 1;
+        public const byte _stop_ = (byte)0U + 2;
+        public const byte _stoplimit_ = (byte)0U + 3;
+
+        public static OrderType market = new OrderType(_market_);
+        public static OrderType limit = new OrderType(_limit_);
+        public static OrderType stop = new OrderType(_stop_);
+        public static OrderType stoplimit = new OrderType(_stoplimit_);
 
         public override string ToString()
         {
@@ -619,15 +628,25 @@ namespace protoex {
 
         public static FBE.FieldModelValueType<StateEx> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelStateEx(buffer, offset); }
 
-        public static StateEx unknown = new StateEx((byte)0x00U);
-        public static StateEx invalid = new StateEx((byte)0x01U);
-        public static StateEx initialized = new StateEx((byte)0x02U);
-        public static StateEx calculated = new StateEx((byte)0x04U);
-        public static StateEx broken = new StateEx((byte)0x08U);
-        public static StateEx happy = new StateEx((byte)0x10U);
-        public static StateEx sad = new StateEx((byte)0x20U);
-        public static StateEx good = new StateEx(initialized | calculated);
-        public static StateEx bad = new StateEx(unknown | invalid | broken);
+        public const byte _unknown_ = (byte)0x00U;
+        public const byte _invalid_ = (byte)0x01U;
+        public const byte _initialized_ = (byte)0x02U;
+        public const byte _calculated_ = (byte)0x04U;
+        public const byte _broken_ = (byte)0x08U;
+        public const byte _happy_ = (byte)0x10U;
+        public const byte _sad_ = (byte)0x20U;
+        public const byte _good_ = _initialized_ | _calculated_;
+        public const byte _bad_ = _unknown_ | _invalid_ | _broken_;
+
+        public static StateEx unknown = new StateEx(_unknown_);
+        public static StateEx invalid = new StateEx(_invalid_);
+        public static StateEx initialized = new StateEx(_initialized_);
+        public static StateEx calculated = new StateEx(_calculated_);
+        public static StateEx broken = new StateEx(_broken_);
+        public static StateEx happy = new StateEx(_happy_);
+        public static StateEx sad = new StateEx(_sad_);
+        public static StateEx good = new StateEx(_good_);
+        public static StateEx bad = new StateEx(_bad_);
 
         public override string ToString()
         {

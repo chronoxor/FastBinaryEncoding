@@ -131,8 +131,11 @@ namespace proto {
 
         public static FBE.FieldModelValueType<OrderSide> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelOrderSide(buffer, offset); }
 
-        public static OrderSide buy = new OrderSide((byte)0U + 0);
-        public static OrderSide sell = new OrderSide((byte)0U + 1);
+        public const byte _buy_ = (byte)0U + 0;
+        public const byte _sell_ = (byte)0U + 1;
+
+        public static OrderSide buy = new OrderSide(_buy_);
+        public static OrderSide sell = new OrderSide(_sell_);
 
         public override string ToString()
         {
@@ -355,9 +358,13 @@ namespace proto {
 
         public static FBE.FieldModelValueType<OrderType> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelOrderType(buffer, offset); }
 
-        public static OrderType market = new OrderType((byte)0U + 0);
-        public static OrderType limit = new OrderType((byte)0U + 1);
-        public static OrderType stop = new OrderType((byte)0U + 2);
+        public const byte _market_ = (byte)0U + 0;
+        public const byte _limit_ = (byte)0U + 1;
+        public const byte _stop_ = (byte)0U + 2;
+
+        public static OrderType market = new OrderType(_market_);
+        public static OrderType limit = new OrderType(_limit_);
+        public static OrderType stop = new OrderType(_stop_);
 
         public override string ToString()
         {
@@ -613,13 +620,21 @@ namespace proto {
 
         public static FBE.FieldModelValueType<State> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelState(buffer, offset); }
 
-        public static State unknown = new State((byte)0x00U);
-        public static State invalid = new State((byte)0x01U);
-        public static State initialized = new State((byte)0x02U);
-        public static State calculated = new State((byte)0x04U);
-        public static State broken = new State((byte)0x08U);
-        public static State good = new State(initialized | calculated);
-        public static State bad = new State(unknown | invalid | broken);
+        public const byte _unknown_ = (byte)0x00U;
+        public const byte _invalid_ = (byte)0x01U;
+        public const byte _initialized_ = (byte)0x02U;
+        public const byte _calculated_ = (byte)0x04U;
+        public const byte _broken_ = (byte)0x08U;
+        public const byte _good_ = _initialized_ | _calculated_;
+        public const byte _bad_ = _unknown_ | _invalid_ | _broken_;
+
+        public static State unknown = new State(_unknown_);
+        public static State invalid = new State(_invalid_);
+        public static State initialized = new State(_initialized_);
+        public static State calculated = new State(_calculated_);
+        public static State broken = new State(_broken_);
+        public static State good = new State(_good_);
+        public static State bad = new State(_bad_);
 
         public override string ToString()
         {

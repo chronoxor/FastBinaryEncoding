@@ -131,12 +131,19 @@ namespace enums {
 
         public static FBE.FieldModelValueType<EnumByte> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumByte(buffer, offset); }
 
-        public static EnumByte ENUM_VALUE_0 = new EnumByte((byte)0U + 0);
-        public static EnumByte ENUM_VALUE_1 = new EnumByte((byte)0U + 0);
-        public static EnumByte ENUM_VALUE_2 = new EnumByte((byte)0U + 1);
-        public static EnumByte ENUM_VALUE_3 = new EnumByte((byte)254U + 0);
-        public static EnumByte ENUM_VALUE_4 = new EnumByte((byte)254U + 1);
-        public static EnumByte ENUM_VALUE_5 = new EnumByte(ENUM_VALUE_3);
+        public const byte _ENUM_VALUE_0_ = (byte)0U + 0;
+        public const byte _ENUM_VALUE_1_ = (byte)0U + 0;
+        public const byte _ENUM_VALUE_2_ = (byte)0U + 1;
+        public const byte _ENUM_VALUE_3_ = (byte)254U + 0;
+        public const byte _ENUM_VALUE_4_ = (byte)254U + 1;
+        public const byte _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
+
+        public static EnumByte ENUM_VALUE_0 = new EnumByte(_ENUM_VALUE_0_);
+        public static EnumByte ENUM_VALUE_1 = new EnumByte(_ENUM_VALUE_1_);
+        public static EnumByte ENUM_VALUE_2 = new EnumByte(_ENUM_VALUE_2_);
+        public static EnumByte ENUM_VALUE_3 = new EnumByte(_ENUM_VALUE_3_);
+        public static EnumByte ENUM_VALUE_4 = new EnumByte(_ENUM_VALUE_4_);
+        public static EnumByte ENUM_VALUE_5 = new EnumByte(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -363,12 +370,19 @@ namespace enums {
 
         public static FBE.FieldModelValueType<EnumChar> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumChar(buffer, offset); }
 
-        public static EnumChar ENUM_VALUE_0 = new EnumChar((byte)0 + 0);
-        public static EnumChar ENUM_VALUE_1 = new EnumChar((byte)'1' + 0);
-        public static EnumChar ENUM_VALUE_2 = new EnumChar((byte)'1' + 1);
-        public static EnumChar ENUM_VALUE_3 = new EnumChar((byte)'3' + 0);
-        public static EnumChar ENUM_VALUE_4 = new EnumChar((byte)'3' + 1);
-        public static EnumChar ENUM_VALUE_5 = new EnumChar(ENUM_VALUE_3);
+        public const byte _ENUM_VALUE_0_ = (byte)0 + 0;
+        public const byte _ENUM_VALUE_1_ = (byte)'1' + 0;
+        public const byte _ENUM_VALUE_2_ = (byte)'1' + 1;
+        public const byte _ENUM_VALUE_3_ = (byte)'3' + 0;
+        public const byte _ENUM_VALUE_4_ = (byte)'3' + 1;
+        public const byte _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
+
+        public static EnumChar ENUM_VALUE_0 = new EnumChar(_ENUM_VALUE_0_);
+        public static EnumChar ENUM_VALUE_1 = new EnumChar(_ENUM_VALUE_1_);
+        public static EnumChar ENUM_VALUE_2 = new EnumChar(_ENUM_VALUE_2_);
+        public static EnumChar ENUM_VALUE_3 = new EnumChar(_ENUM_VALUE_3_);
+        public static EnumChar ENUM_VALUE_4 = new EnumChar(_ENUM_VALUE_4_);
+        public static EnumChar ENUM_VALUE_5 = new EnumChar(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -595,12 +609,19 @@ namespace enums {
 
         public static FBE.FieldModelValueType<EnumWChar> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumWChar(buffer, offset); }
 
-        public static EnumWChar ENUM_VALUE_0 = new EnumWChar((ushort)0 + 0);
-        public static EnumWChar ENUM_VALUE_1 = new EnumWChar((ushort)0x0444 + 0);
-        public static EnumWChar ENUM_VALUE_2 = new EnumWChar((ushort)0x0444 + 1);
-        public static EnumWChar ENUM_VALUE_3 = new EnumWChar((ushort)0x0555 + 0);
-        public static EnumWChar ENUM_VALUE_4 = new EnumWChar((ushort)0x0555 + 1);
-        public static EnumWChar ENUM_VALUE_5 = new EnumWChar(ENUM_VALUE_3);
+        public const ushort _ENUM_VALUE_0_ = (ushort)0 + 0;
+        public const ushort _ENUM_VALUE_1_ = (ushort)0x0444 + 0;
+        public const ushort _ENUM_VALUE_2_ = (ushort)0x0444 + 1;
+        public const ushort _ENUM_VALUE_3_ = (ushort)0x0555 + 0;
+        public const ushort _ENUM_VALUE_4_ = (ushort)0x0555 + 1;
+        public const ushort _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
+
+        public static EnumWChar ENUM_VALUE_0 = new EnumWChar(_ENUM_VALUE_0_);
+        public static EnumWChar ENUM_VALUE_1 = new EnumWChar(_ENUM_VALUE_1_);
+        public static EnumWChar ENUM_VALUE_2 = new EnumWChar(_ENUM_VALUE_2_);
+        public static EnumWChar ENUM_VALUE_3 = new EnumWChar(_ENUM_VALUE_3_);
+        public static EnumWChar ENUM_VALUE_4 = new EnumWChar(_ENUM_VALUE_4_);
+        public static EnumWChar ENUM_VALUE_5 = new EnumWChar(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -827,12 +848,19 @@ namespace enums {
 
         public static FBE.FieldModelValueType<EnumInt8> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumInt8(buffer, offset); }
 
-        public static EnumInt8 ENUM_VALUE_0 = new EnumInt8((sbyte)0 + 0);
-        public static EnumInt8 ENUM_VALUE_1 = new EnumInt8((sbyte)-128 + 0);
-        public static EnumInt8 ENUM_VALUE_2 = new EnumInt8((sbyte)-128 + 1);
-        public static EnumInt8 ENUM_VALUE_3 = new EnumInt8((sbyte)126 + 0);
-        public static EnumInt8 ENUM_VALUE_4 = new EnumInt8((sbyte)126 + 1);
-        public static EnumInt8 ENUM_VALUE_5 = new EnumInt8(ENUM_VALUE_3);
+        public const sbyte _ENUM_VALUE_0_ = (sbyte)0 + 0;
+        public const sbyte _ENUM_VALUE_1_ = (sbyte)-128 + 0;
+        public const sbyte _ENUM_VALUE_2_ = (sbyte)-128 + 1;
+        public const sbyte _ENUM_VALUE_3_ = (sbyte)126 + 0;
+        public const sbyte _ENUM_VALUE_4_ = (sbyte)126 + 1;
+        public const sbyte _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
+
+        public static EnumInt8 ENUM_VALUE_0 = new EnumInt8(_ENUM_VALUE_0_);
+        public static EnumInt8 ENUM_VALUE_1 = new EnumInt8(_ENUM_VALUE_1_);
+        public static EnumInt8 ENUM_VALUE_2 = new EnumInt8(_ENUM_VALUE_2_);
+        public static EnumInt8 ENUM_VALUE_3 = new EnumInt8(_ENUM_VALUE_3_);
+        public static EnumInt8 ENUM_VALUE_4 = new EnumInt8(_ENUM_VALUE_4_);
+        public static EnumInt8 ENUM_VALUE_5 = new EnumInt8(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -1059,12 +1087,19 @@ namespace enums {
 
         public static FBE.FieldModelValueType<EnumUInt8> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumUInt8(buffer, offset); }
 
-        public static EnumUInt8 ENUM_VALUE_0 = new EnumUInt8((byte)0U + 0);
-        public static EnumUInt8 ENUM_VALUE_1 = new EnumUInt8((byte)0U + 0);
-        public static EnumUInt8 ENUM_VALUE_2 = new EnumUInt8((byte)0U + 1);
-        public static EnumUInt8 ENUM_VALUE_3 = new EnumUInt8((byte)254U + 0);
-        public static EnumUInt8 ENUM_VALUE_4 = new EnumUInt8((byte)254U + 1);
-        public static EnumUInt8 ENUM_VALUE_5 = new EnumUInt8(ENUM_VALUE_3);
+        public const byte _ENUM_VALUE_0_ = (byte)0U + 0;
+        public const byte _ENUM_VALUE_1_ = (byte)0U + 0;
+        public const byte _ENUM_VALUE_2_ = (byte)0U + 1;
+        public const byte _ENUM_VALUE_3_ = (byte)254U + 0;
+        public const byte _ENUM_VALUE_4_ = (byte)254U + 1;
+        public const byte _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
+
+        public static EnumUInt8 ENUM_VALUE_0 = new EnumUInt8(_ENUM_VALUE_0_);
+        public static EnumUInt8 ENUM_VALUE_1 = new EnumUInt8(_ENUM_VALUE_1_);
+        public static EnumUInt8 ENUM_VALUE_2 = new EnumUInt8(_ENUM_VALUE_2_);
+        public static EnumUInt8 ENUM_VALUE_3 = new EnumUInt8(_ENUM_VALUE_3_);
+        public static EnumUInt8 ENUM_VALUE_4 = new EnumUInt8(_ENUM_VALUE_4_);
+        public static EnumUInt8 ENUM_VALUE_5 = new EnumUInt8(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -1291,12 +1326,19 @@ namespace enums {
 
         public static FBE.FieldModelValueType<EnumInt16> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumInt16(buffer, offset); }
 
-        public static EnumInt16 ENUM_VALUE_0 = new EnumInt16((short)0 + 0);
-        public static EnumInt16 ENUM_VALUE_1 = new EnumInt16((short)-32768 + 0);
-        public static EnumInt16 ENUM_VALUE_2 = new EnumInt16((short)-32768 + 1);
-        public static EnumInt16 ENUM_VALUE_3 = new EnumInt16((short)32766 + 0);
-        public static EnumInt16 ENUM_VALUE_4 = new EnumInt16((short)32766 + 1);
-        public static EnumInt16 ENUM_VALUE_5 = new EnumInt16(ENUM_VALUE_3);
+        public const short _ENUM_VALUE_0_ = (short)0 + 0;
+        public const short _ENUM_VALUE_1_ = (short)-32768 + 0;
+        public const short _ENUM_VALUE_2_ = (short)-32768 + 1;
+        public const short _ENUM_VALUE_3_ = (short)32766 + 0;
+        public const short _ENUM_VALUE_4_ = (short)32766 + 1;
+        public const short _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
+
+        public static EnumInt16 ENUM_VALUE_0 = new EnumInt16(_ENUM_VALUE_0_);
+        public static EnumInt16 ENUM_VALUE_1 = new EnumInt16(_ENUM_VALUE_1_);
+        public static EnumInt16 ENUM_VALUE_2 = new EnumInt16(_ENUM_VALUE_2_);
+        public static EnumInt16 ENUM_VALUE_3 = new EnumInt16(_ENUM_VALUE_3_);
+        public static EnumInt16 ENUM_VALUE_4 = new EnumInt16(_ENUM_VALUE_4_);
+        public static EnumInt16 ENUM_VALUE_5 = new EnumInt16(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -1523,12 +1565,19 @@ namespace enums {
 
         public static FBE.FieldModelValueType<EnumUInt16> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumUInt16(buffer, offset); }
 
-        public static EnumUInt16 ENUM_VALUE_0 = new EnumUInt16((ushort)0U + 0);
-        public static EnumUInt16 ENUM_VALUE_1 = new EnumUInt16((ushort)0U + 0);
-        public static EnumUInt16 ENUM_VALUE_2 = new EnumUInt16((ushort)0U + 1);
-        public static EnumUInt16 ENUM_VALUE_3 = new EnumUInt16((ushort)65534U + 0);
-        public static EnumUInt16 ENUM_VALUE_4 = new EnumUInt16((ushort)65534U + 1);
-        public static EnumUInt16 ENUM_VALUE_5 = new EnumUInt16(ENUM_VALUE_3);
+        public const ushort _ENUM_VALUE_0_ = (ushort)0U + 0;
+        public const ushort _ENUM_VALUE_1_ = (ushort)0U + 0;
+        public const ushort _ENUM_VALUE_2_ = (ushort)0U + 1;
+        public const ushort _ENUM_VALUE_3_ = (ushort)65534U + 0;
+        public const ushort _ENUM_VALUE_4_ = (ushort)65534U + 1;
+        public const ushort _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
+
+        public static EnumUInt16 ENUM_VALUE_0 = new EnumUInt16(_ENUM_VALUE_0_);
+        public static EnumUInt16 ENUM_VALUE_1 = new EnumUInt16(_ENUM_VALUE_1_);
+        public static EnumUInt16 ENUM_VALUE_2 = new EnumUInt16(_ENUM_VALUE_2_);
+        public static EnumUInt16 ENUM_VALUE_3 = new EnumUInt16(_ENUM_VALUE_3_);
+        public static EnumUInt16 ENUM_VALUE_4 = new EnumUInt16(_ENUM_VALUE_4_);
+        public static EnumUInt16 ENUM_VALUE_5 = new EnumUInt16(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -1755,12 +1804,19 @@ namespace enums {
 
         public static FBE.FieldModelValueType<EnumInt32> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumInt32(buffer, offset); }
 
-        public static EnumInt32 ENUM_VALUE_0 = new EnumInt32((int)0 + 0);
-        public static EnumInt32 ENUM_VALUE_1 = new EnumInt32((int)-2147483648 + 0);
-        public static EnumInt32 ENUM_VALUE_2 = new EnumInt32((int)-2147483648 + 1);
-        public static EnumInt32 ENUM_VALUE_3 = new EnumInt32((int)2147483646 + 0);
-        public static EnumInt32 ENUM_VALUE_4 = new EnumInt32((int)2147483646 + 1);
-        public static EnumInt32 ENUM_VALUE_5 = new EnumInt32(ENUM_VALUE_3);
+        public const int _ENUM_VALUE_0_ = (int)0 + 0;
+        public const int _ENUM_VALUE_1_ = (int)-2147483648 + 0;
+        public const int _ENUM_VALUE_2_ = (int)-2147483648 + 1;
+        public const int _ENUM_VALUE_3_ = (int)2147483646 + 0;
+        public const int _ENUM_VALUE_4_ = (int)2147483646 + 1;
+        public const int _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
+
+        public static EnumInt32 ENUM_VALUE_0 = new EnumInt32(_ENUM_VALUE_0_);
+        public static EnumInt32 ENUM_VALUE_1 = new EnumInt32(_ENUM_VALUE_1_);
+        public static EnumInt32 ENUM_VALUE_2 = new EnumInt32(_ENUM_VALUE_2_);
+        public static EnumInt32 ENUM_VALUE_3 = new EnumInt32(_ENUM_VALUE_3_);
+        public static EnumInt32 ENUM_VALUE_4 = new EnumInt32(_ENUM_VALUE_4_);
+        public static EnumInt32 ENUM_VALUE_5 = new EnumInt32(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -1987,12 +2043,19 @@ namespace enums {
 
         public static FBE.FieldModelValueType<EnumUInt32> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumUInt32(buffer, offset); }
 
-        public static EnumUInt32 ENUM_VALUE_0 = new EnumUInt32((uint)0U + 0);
-        public static EnumUInt32 ENUM_VALUE_1 = new EnumUInt32((uint)0U + 0);
-        public static EnumUInt32 ENUM_VALUE_2 = new EnumUInt32((uint)0U + 1);
-        public static EnumUInt32 ENUM_VALUE_3 = new EnumUInt32((uint)0xFFFFFFFEU + 0);
-        public static EnumUInt32 ENUM_VALUE_4 = new EnumUInt32((uint)0xFFFFFFFEU + 1);
-        public static EnumUInt32 ENUM_VALUE_5 = new EnumUInt32(ENUM_VALUE_3);
+        public const uint _ENUM_VALUE_0_ = (uint)0U + 0;
+        public const uint _ENUM_VALUE_1_ = (uint)0U + 0;
+        public const uint _ENUM_VALUE_2_ = (uint)0U + 1;
+        public const uint _ENUM_VALUE_3_ = (uint)0xFFFFFFFEU + 0;
+        public const uint _ENUM_VALUE_4_ = (uint)0xFFFFFFFEU + 1;
+        public const uint _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
+
+        public static EnumUInt32 ENUM_VALUE_0 = new EnumUInt32(_ENUM_VALUE_0_);
+        public static EnumUInt32 ENUM_VALUE_1 = new EnumUInt32(_ENUM_VALUE_1_);
+        public static EnumUInt32 ENUM_VALUE_2 = new EnumUInt32(_ENUM_VALUE_2_);
+        public static EnumUInt32 ENUM_VALUE_3 = new EnumUInt32(_ENUM_VALUE_3_);
+        public static EnumUInt32 ENUM_VALUE_4 = new EnumUInt32(_ENUM_VALUE_4_);
+        public static EnumUInt32 ENUM_VALUE_5 = new EnumUInt32(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -2219,12 +2282,19 @@ namespace enums {
 
         public static FBE.FieldModelValueType<EnumInt64> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumInt64(buffer, offset); }
 
-        public static EnumInt64 ENUM_VALUE_0 = new EnumInt64((long)0L + 0);
-        public static EnumInt64 ENUM_VALUE_1 = new EnumInt64((long)-9223372036854775807L + 0);
-        public static EnumInt64 ENUM_VALUE_2 = new EnumInt64((long)-9223372036854775807L + 1);
-        public static EnumInt64 ENUM_VALUE_3 = new EnumInt64((long)9223372036854775806L + 0);
-        public static EnumInt64 ENUM_VALUE_4 = new EnumInt64((long)9223372036854775806L + 1);
-        public static EnumInt64 ENUM_VALUE_5 = new EnumInt64(ENUM_VALUE_3);
+        public const long _ENUM_VALUE_0_ = (long)0L + 0;
+        public const long _ENUM_VALUE_1_ = (long)-9223372036854775807L + 0;
+        public const long _ENUM_VALUE_2_ = (long)-9223372036854775807L + 1;
+        public const long _ENUM_VALUE_3_ = (long)9223372036854775806L + 0;
+        public const long _ENUM_VALUE_4_ = (long)9223372036854775806L + 1;
+        public const long _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
+
+        public static EnumInt64 ENUM_VALUE_0 = new EnumInt64(_ENUM_VALUE_0_);
+        public static EnumInt64 ENUM_VALUE_1 = new EnumInt64(_ENUM_VALUE_1_);
+        public static EnumInt64 ENUM_VALUE_2 = new EnumInt64(_ENUM_VALUE_2_);
+        public static EnumInt64 ENUM_VALUE_3 = new EnumInt64(_ENUM_VALUE_3_);
+        public static EnumInt64 ENUM_VALUE_4 = new EnumInt64(_ENUM_VALUE_4_);
+        public static EnumInt64 ENUM_VALUE_5 = new EnumInt64(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -2451,12 +2521,19 @@ namespace enums {
 
         public static FBE.FieldModelValueType<EnumUInt64> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumUInt64(buffer, offset); }
 
-        public static EnumUInt64 ENUM_VALUE_0 = new EnumUInt64((ulong)0UL + 0);
-        public static EnumUInt64 ENUM_VALUE_1 = new EnumUInt64((ulong)0UL + 0);
-        public static EnumUInt64 ENUM_VALUE_2 = new EnumUInt64((ulong)0UL + 1);
-        public static EnumUInt64 ENUM_VALUE_3 = new EnumUInt64((ulong)0xFFFFFFFFFFFFFFFEUL + 0);
-        public static EnumUInt64 ENUM_VALUE_4 = new EnumUInt64((ulong)0xFFFFFFFFFFFFFFFEUL + 1);
-        public static EnumUInt64 ENUM_VALUE_5 = new EnumUInt64(ENUM_VALUE_3);
+        public const ulong _ENUM_VALUE_0_ = (ulong)0UL + 0;
+        public const ulong _ENUM_VALUE_1_ = (ulong)0UL + 0;
+        public const ulong _ENUM_VALUE_2_ = (ulong)0UL + 1;
+        public const ulong _ENUM_VALUE_3_ = (ulong)0xFFFFFFFFFFFFFFFEUL + 0;
+        public const ulong _ENUM_VALUE_4_ = (ulong)0xFFFFFFFFFFFFFFFEUL + 1;
+        public const ulong _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
+
+        public static EnumUInt64 ENUM_VALUE_0 = new EnumUInt64(_ENUM_VALUE_0_);
+        public static EnumUInt64 ENUM_VALUE_1 = new EnumUInt64(_ENUM_VALUE_1_);
+        public static EnumUInt64 ENUM_VALUE_2 = new EnumUInt64(_ENUM_VALUE_2_);
+        public static EnumUInt64 ENUM_VALUE_3 = new EnumUInt64(_ENUM_VALUE_3_);
+        public static EnumUInt64 ENUM_VALUE_4 = new EnumUInt64(_ENUM_VALUE_4_);
+        public static EnumUInt64 ENUM_VALUE_5 = new EnumUInt64(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
