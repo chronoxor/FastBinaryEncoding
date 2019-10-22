@@ -36,9 +36,7 @@ namespace test {
 
         public EnumSimple Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = EnumSimple.Default;
-            result.Value = reader.ReadInt32();
-            return result;
+            return new EnumSimple(reader.ReadInt32());
         }
     }
 
@@ -62,15 +60,12 @@ namespace test {
             if (reader.Value == null)
                 return null;
 
-            var value = EnumSimple.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (int)longValue;
-                    return value;
+                    return new EnumSimple((int)longValue);
                 case BigInteger bigValue:
-                    value.Value = (int)bigValue;
-                    return value;
+                    return new EnumSimple((int)bigValue);
                 default:
                     return null;
             }
@@ -84,7 +79,7 @@ namespace test {
     {
         public int Value { get; internal set; }
 
-        private EnumSimple(int value) : this()
+        public EnumSimple(int value) : this()
         {
             Value = value;
         }
@@ -187,8 +182,7 @@ namespace test {
                 return;
             }
 
-            value = EnumSimple.Default;
-            value.Value = (int)ReadInt32(FBEOffset);
+            value = new EnumSimple((int)ReadInt32(FBEOffset));
         }
 
         // Set the value
@@ -242,8 +236,7 @@ namespace test {
                 return 0;
             }
 
-            value = EnumSimple.Default;
-            value.Value = (int)ReadInt32(FBEOffset);
+            value = new EnumSimple((int)ReadInt32(FBEOffset));
             return FBESize;
         }
 
@@ -275,9 +268,7 @@ namespace test {
 
         public EnumTyped Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = EnumTyped.Default;
-            result.Value = reader.ReadByte();
-            return result;
+            return new EnumTyped(reader.ReadByte());
         }
     }
 
@@ -301,15 +292,12 @@ namespace test {
             if (reader.Value == null)
                 return null;
 
-            var value = EnumTyped.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (byte)longValue;
-                    return value;
+                    return new EnumTyped((byte)longValue);
                 case BigInteger bigValue:
-                    value.Value = (byte)bigValue;
-                    return value;
+                    return new EnumTyped((byte)bigValue);
                 default:
                     return null;
             }
@@ -323,7 +311,7 @@ namespace test {
     {
         public byte Value { get; internal set; }
 
-        private EnumTyped(byte value) : this()
+        public EnumTyped(byte value) : this()
         {
             Value = value;
         }
@@ -426,8 +414,7 @@ namespace test {
                 return;
             }
 
-            value = EnumTyped.Default;
-            value.Value = (byte)ReadUInt8(FBEOffset);
+            value = new EnumTyped((byte)ReadUInt8(FBEOffset));
         }
 
         // Set the value
@@ -481,8 +468,7 @@ namespace test {
                 return 0;
             }
 
-            value = EnumTyped.Default;
-            value.Value = (byte)ReadUInt8(FBEOffset);
+            value = new EnumTyped((byte)ReadUInt8(FBEOffset));
             return FBESize;
         }
 
@@ -514,9 +500,7 @@ namespace test {
 
         public EnumEmpty Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = EnumEmpty.Default;
-            result.Value = reader.ReadInt32();
-            return result;
+            return new EnumEmpty(reader.ReadInt32());
         }
     }
 
@@ -540,15 +524,12 @@ namespace test {
             if (reader.Value == null)
                 return null;
 
-            var value = EnumEmpty.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (int)longValue;
-                    return value;
+                    return new EnumEmpty((int)longValue);
                 case BigInteger bigValue:
-                    value.Value = (int)bigValue;
-                    return value;
+                    return new EnumEmpty((int)bigValue);
                 default:
                     return null;
             }
@@ -562,7 +543,7 @@ namespace test {
     {
         public int Value { get; internal set; }
 
-        private EnumEmpty(int value) : this()
+        public EnumEmpty(int value) : this()
         {
             Value = value;
         }
@@ -647,8 +628,7 @@ namespace test {
                 return;
             }
 
-            value = EnumEmpty.Default;
-            value.Value = (int)ReadInt32(FBEOffset);
+            value = new EnumEmpty((int)ReadInt32(FBEOffset));
         }
 
         // Set the value
@@ -702,8 +682,7 @@ namespace test {
                 return 0;
             }
 
-            value = EnumEmpty.Default;
-            value.Value = (int)ReadInt32(FBEOffset);
+            value = new EnumEmpty((int)ReadInt32(FBEOffset));
             return FBESize;
         }
 
@@ -735,9 +714,7 @@ namespace test {
 
         public FlagsSimple Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = FlagsSimple.Default;
-            result.Value = reader.ReadInt32();
-            return result;
+            return new FlagsSimple(reader.ReadInt32());
         }
     }
 
@@ -761,15 +738,12 @@ namespace test {
             if (reader.Value == null)
                 return null;
 
-            var value = FlagsSimple.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (int)longValue;
-                    return value;
+                    return new FlagsSimple((int)longValue);
                 case BigInteger bigValue:
-                    value.Value = (int)bigValue;
-                    return value;
+                    return new FlagsSimple((int)bigValue);
                 default:
                     return null;
             }
@@ -783,7 +757,7 @@ namespace test {
     {
         public int Value { get; internal set; }
 
-        private FlagsSimple(int value) : this()
+        public FlagsSimple(int value) : this()
         {
             Value = value;
         }
@@ -945,8 +919,7 @@ namespace test {
                 return;
             }
 
-            value = FlagsSimple.Default;
-            value.Value = (int)ReadInt32(FBEOffset);
+            value = new FlagsSimple((int)ReadInt32(FBEOffset));
         }
 
         // Set the value
@@ -1000,8 +973,7 @@ namespace test {
                 return 0;
             }
 
-            value = FlagsSimple.Default;
-            value.Value = (int)ReadInt32(FBEOffset);
+            value = new FlagsSimple((int)ReadInt32(FBEOffset));
             return FBESize;
         }
 
@@ -1033,9 +1005,7 @@ namespace test {
 
         public FlagsTyped Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = FlagsTyped.Default;
-            result.Value = reader.ReadUInt64();
-            return result;
+            return new FlagsTyped(reader.ReadUInt64());
         }
     }
 
@@ -1059,15 +1029,12 @@ namespace test {
             if (reader.Value == null)
                 return null;
 
-            var value = FlagsTyped.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (ulong)longValue;
-                    return value;
+                    return new FlagsTyped((ulong)longValue);
                 case BigInteger bigValue:
-                    value.Value = (ulong)bigValue;
-                    return value;
+                    return new FlagsTyped((ulong)bigValue);
                 default:
                     return null;
             }
@@ -1081,7 +1048,7 @@ namespace test {
     {
         public ulong Value { get; internal set; }
 
-        private FlagsTyped(ulong value) : this()
+        public FlagsTyped(ulong value) : this()
         {
             Value = value;
         }
@@ -1271,8 +1238,7 @@ namespace test {
                 return;
             }
 
-            value = FlagsTyped.Default;
-            value.Value = (ulong)ReadUInt64(FBEOffset);
+            value = new FlagsTyped((ulong)ReadUInt64(FBEOffset));
         }
 
         // Set the value
@@ -1326,8 +1292,7 @@ namespace test {
                 return 0;
             }
 
-            value = FlagsTyped.Default;
-            value.Value = (ulong)ReadUInt64(FBEOffset);
+            value = new FlagsTyped((ulong)ReadUInt64(FBEOffset));
             return FBESize;
         }
 
@@ -1359,9 +1324,7 @@ namespace test {
 
         public FlagsEmpty Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = FlagsEmpty.Default;
-            result.Value = reader.ReadInt32();
-            return result;
+            return new FlagsEmpty(reader.ReadInt32());
         }
     }
 
@@ -1385,15 +1348,12 @@ namespace test {
             if (reader.Value == null)
                 return null;
 
-            var value = FlagsEmpty.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (int)longValue;
-                    return value;
+                    return new FlagsEmpty((int)longValue);
                 case BigInteger bigValue:
-                    value.Value = (int)bigValue;
-                    return value;
+                    return new FlagsEmpty((int)bigValue);
                 default:
                     return null;
             }
@@ -1407,7 +1367,7 @@ namespace test {
     {
         public int Value { get; internal set; }
 
-        private FlagsEmpty(int value) : this()
+        public FlagsEmpty(int value) : this()
         {
             Value = value;
         }
@@ -1526,8 +1486,7 @@ namespace test {
                 return;
             }
 
-            value = FlagsEmpty.Default;
-            value.Value = (int)ReadInt32(FBEOffset);
+            value = new FlagsEmpty((int)ReadInt32(FBEOffset));
         }
 
         // Set the value
@@ -1581,8 +1540,7 @@ namespace test {
                 return 0;
             }
 
-            value = FlagsEmpty.Default;
-            value.Value = (int)ReadInt32(FBEOffset);
+            value = new FlagsEmpty((int)ReadInt32(FBEOffset));
             return FBESize;
         }
 

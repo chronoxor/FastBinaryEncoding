@@ -4344,9 +4344,7 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
 
         public _ENUM_NAME_ Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = _ENUM_NAME_.Default;
-            result.Value = reader.Read_ENUM_UTF8JSON_TYPE_();
-            return result;
+            return new _ENUM_NAME_(reader.Read_ENUM_UTF8JSON_TYPE_());
         }
     }
 
@@ -4370,15 +4368,12 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
             if (reader.Value == null)
                 return null;
 
-            var value = _ENUM_NAME_.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (_ENUM_TYPE_)longValue;
-                    return value;
+                    return new _ENUM_NAME_((_ENUM_TYPE_)longValue);
                 case BigInteger bigValue:
-                    value.Value = (_ENUM_TYPE_)bigValue;
-                    return value;
+                    return new _ENUM_NAME_((_ENUM_TYPE_)bigValue);
                 default:
                     return null;
             }
@@ -4394,7 +4389,7 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     {
         public _ENUM_TYPE_ Value { get; internal set; }
 
-        private _ENUM_NAME_(_ENUM_TYPE_ value) : this()
+        public _ENUM_NAME_(_ENUM_TYPE_ value) : this()
         {
             Value = value;
         }
@@ -4565,8 +4560,7 @@ void GeneratorCSharp::GenerateEnumFieldModel(const std::shared_ptr<Package>& p, 
                 return;
             }
 
-            value = _ENUM_NAME_.Default;
-            value.Value = (_ENUM_TYPE_)_ENUM_READ_(FBEOffset);
+            value = new _ENUM_NAME_((_ENUM_TYPE_)_ENUM_READ_(FBEOffset));
         }
 
         // Set the value
@@ -4645,8 +4639,7 @@ void GeneratorCSharp::GenerateEnumFinalModel(const std::shared_ptr<Package>& p, 
                 return 0;
             }
 
-            value = _ENUM_NAME_.Default;
-            value.Value = (_ENUM_TYPE_)_ENUM_READ_(FBEOffset);
+            value = new _ENUM_NAME_((_ENUM_TYPE_)_ENUM_READ_(FBEOffset));
             return FBESize;
         }
 
@@ -4703,9 +4696,7 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
 
         public _FLAGS_NAME_ Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = _FLAGS_NAME_.Default;
-            result.Value = reader.Read_FLAGS_UTF8JSON_TYPE_();
-            return result;
+            return new _FLAGS_NAME_(reader.Read_FLAGS_UTF8JSON_TYPE_());
         }
     }
 
@@ -4729,15 +4720,12 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
             if (reader.Value == null)
                 return null;
 
-            var value = _FLAGS_NAME_.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (_FLAGS_TYPE_)longValue;
-                    return value;
+                    return new _FLAGS_NAME_((_FLAGS_TYPE_)longValue);
                 case BigInteger bigValue:
-                    value.Value = (_FLAGS_TYPE_)bigValue;
-                    return value;
+                    return new _FLAGS_NAME_((_FLAGS_TYPE_)bigValue);
                 default:
                     return null;
             }
@@ -4753,7 +4741,7 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
     {
         public _FLAGS_TYPE_ Value { get; internal set; }
 
-        private _FLAGS_NAME_(_FLAGS_TYPE_ value) : this()
+        public _FLAGS_NAME_(_FLAGS_TYPE_ value) : this()
         {
             Value = value;
         }
@@ -4953,8 +4941,7 @@ void GeneratorCSharp::GenerateFlagsFieldModel(const std::shared_ptr<Package>& p,
                 return;
             }
 
-            value = _FLAGS_NAME_.Default;
-            value.Value = (_FLAGS_TYPE_)_FLAGS_READ_(FBEOffset);
+            value = new _FLAGS_NAME_((_FLAGS_TYPE_)_FLAGS_READ_(FBEOffset));
         }
 
         // Set the value
@@ -5033,8 +5020,7 @@ void GeneratorCSharp::GenerateFlagsFinalModel(const std::shared_ptr<Package>& p,
                 return 0;
             }
 
-            value = _FLAGS_NAME_.Default;
-            value.Value = (_FLAGS_TYPE_)_FLAGS_READ_(FBEOffset);
+            value = new _FLAGS_NAME_((_FLAGS_TYPE_)_FLAGS_READ_(FBEOffset));
             return FBESize;
         }
 

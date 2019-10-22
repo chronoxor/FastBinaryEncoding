@@ -36,9 +36,7 @@ namespace protoex {
 
         public OrderSide Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = OrderSide.Default;
-            result.Value = reader.ReadByte();
-            return result;
+            return new OrderSide(reader.ReadByte());
         }
     }
 
@@ -62,15 +60,12 @@ namespace protoex {
             if (reader.Value == null)
                 return null;
 
-            var value = OrderSide.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (byte)longValue;
-                    return value;
+                    return new OrderSide((byte)longValue);
                 case BigInteger bigValue:
-                    value.Value = (byte)bigValue;
-                    return value;
+                    return new OrderSide((byte)bigValue);
                 default:
                     return null;
             }
@@ -84,7 +79,7 @@ namespace protoex {
     {
         public byte Value { get; internal set; }
 
-        private OrderSide(byte value) : this()
+        public OrderSide(byte value) : this()
         {
             Value = value;
         }
@@ -178,8 +173,7 @@ namespace protoex {
                 return;
             }
 
-            value = OrderSide.Default;
-            value.Value = (byte)ReadByte(FBEOffset);
+            value = new OrderSide((byte)ReadByte(FBEOffset));
         }
 
         // Set the value
@@ -233,8 +227,7 @@ namespace protoex {
                 return 0;
             }
 
-            value = OrderSide.Default;
-            value.Value = (byte)ReadByte(FBEOffset);
+            value = new OrderSide((byte)ReadByte(FBEOffset));
             return FBESize;
         }
 
@@ -266,9 +259,7 @@ namespace protoex {
 
         public OrderType Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = OrderType.Default;
-            result.Value = reader.ReadByte();
-            return result;
+            return new OrderType(reader.ReadByte());
         }
     }
 
@@ -292,15 +283,12 @@ namespace protoex {
             if (reader.Value == null)
                 return null;
 
-            var value = OrderType.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (byte)longValue;
-                    return value;
+                    return new OrderType((byte)longValue);
                 case BigInteger bigValue:
-                    value.Value = (byte)bigValue;
-                    return value;
+                    return new OrderType((byte)bigValue);
                 default:
                     return null;
             }
@@ -314,7 +302,7 @@ namespace protoex {
     {
         public byte Value { get; internal set; }
 
-        private OrderType(byte value) : this()
+        public OrderType(byte value) : this()
         {
             Value = value;
         }
@@ -411,8 +399,7 @@ namespace protoex {
                 return;
             }
 
-            value = OrderType.Default;
-            value.Value = (byte)ReadByte(FBEOffset);
+            value = new OrderType((byte)ReadByte(FBEOffset));
         }
 
         // Set the value
@@ -466,8 +453,7 @@ namespace protoex {
                 return 0;
             }
 
-            value = OrderType.Default;
-            value.Value = (byte)ReadByte(FBEOffset);
+            value = new OrderType((byte)ReadByte(FBEOffset));
             return FBESize;
         }
 
@@ -499,9 +485,7 @@ namespace protoex {
 
         public StateEx Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = StateEx.Default;
-            result.Value = reader.ReadByte();
-            return result;
+            return new StateEx(reader.ReadByte());
         }
     }
 
@@ -525,15 +509,12 @@ namespace protoex {
             if (reader.Value == null)
                 return null;
 
-            var value = StateEx.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (byte)longValue;
-                    return value;
+                    return new StateEx((byte)longValue);
                 case BigInteger bigValue:
-                    value.Value = (byte)bigValue;
-                    return value;
+                    return new StateEx((byte)bigValue);
                 default:
                     return null;
             }
@@ -547,7 +528,7 @@ namespace protoex {
     {
         public byte Value { get; internal set; }
 
-        private StateEx(byte value) : this()
+        public StateEx(byte value) : this()
         {
             Value = value;
         }
@@ -730,8 +711,7 @@ namespace protoex {
                 return;
             }
 
-            value = StateEx.Default;
-            value.Value = (byte)ReadByte(FBEOffset);
+            value = new StateEx((byte)ReadByte(FBEOffset));
         }
 
         // Set the value
@@ -785,8 +765,7 @@ namespace protoex {
                 return 0;
             }
 
-            value = StateEx.Default;
-            value.Value = (byte)ReadByte(FBEOffset);
+            value = new StateEx((byte)ReadByte(FBEOffset));
             return FBESize;
         }
 

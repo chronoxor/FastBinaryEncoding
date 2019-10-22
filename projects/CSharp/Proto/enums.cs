@@ -34,9 +34,7 @@ namespace enums {
 
         public EnumByte Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = EnumByte.Default;
-            result.Value = reader.ReadByte();
-            return result;
+            return new EnumByte(reader.ReadByte());
         }
     }
 
@@ -60,15 +58,12 @@ namespace enums {
             if (reader.Value == null)
                 return null;
 
-            var value = EnumByte.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (byte)longValue;
-                    return value;
+                    return new EnumByte((byte)longValue);
                 case BigInteger bigValue:
-                    value.Value = (byte)bigValue;
-                    return value;
+                    return new EnumByte((byte)bigValue);
                 default:
                     return null;
             }
@@ -82,7 +77,7 @@ namespace enums {
     {
         public byte Value { get; internal set; }
 
-        private EnumByte(byte value) : this()
+        public EnumByte(byte value) : this()
         {
             Value = value;
         }
@@ -185,8 +180,7 @@ namespace enums {
                 return;
             }
 
-            value = EnumByte.Default;
-            value.Value = (byte)ReadByte(FBEOffset);
+            value = new EnumByte((byte)ReadByte(FBEOffset));
         }
 
         // Set the value
@@ -240,8 +234,7 @@ namespace enums {
                 return 0;
             }
 
-            value = EnumByte.Default;
-            value.Value = (byte)ReadByte(FBEOffset);
+            value = new EnumByte((byte)ReadByte(FBEOffset));
             return FBESize;
         }
 
@@ -273,9 +266,7 @@ namespace enums {
 
         public EnumChar Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = EnumChar.Default;
-            result.Value = reader.ReadByte();
-            return result;
+            return new EnumChar(reader.ReadByte());
         }
     }
 
@@ -299,15 +290,12 @@ namespace enums {
             if (reader.Value == null)
                 return null;
 
-            var value = EnumChar.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (byte)longValue;
-                    return value;
+                    return new EnumChar((byte)longValue);
                 case BigInteger bigValue:
-                    value.Value = (byte)bigValue;
-                    return value;
+                    return new EnumChar((byte)bigValue);
                 default:
                     return null;
             }
@@ -321,7 +309,7 @@ namespace enums {
     {
         public byte Value { get; internal set; }
 
-        private EnumChar(byte value) : this()
+        public EnumChar(byte value) : this()
         {
             Value = value;
         }
@@ -424,8 +412,7 @@ namespace enums {
                 return;
             }
 
-            value = EnumChar.Default;
-            value.Value = (byte)ReadUInt8(FBEOffset);
+            value = new EnumChar((byte)ReadUInt8(FBEOffset));
         }
 
         // Set the value
@@ -479,8 +466,7 @@ namespace enums {
                 return 0;
             }
 
-            value = EnumChar.Default;
-            value.Value = (byte)ReadUInt8(FBEOffset);
+            value = new EnumChar((byte)ReadUInt8(FBEOffset));
             return FBESize;
         }
 
@@ -512,9 +498,7 @@ namespace enums {
 
         public EnumWChar Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = EnumWChar.Default;
-            result.Value = reader.ReadUInt16();
-            return result;
+            return new EnumWChar(reader.ReadUInt16());
         }
     }
 
@@ -538,15 +522,12 @@ namespace enums {
             if (reader.Value == null)
                 return null;
 
-            var value = EnumWChar.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (ushort)longValue;
-                    return value;
+                    return new EnumWChar((ushort)longValue);
                 case BigInteger bigValue:
-                    value.Value = (ushort)bigValue;
-                    return value;
+                    return new EnumWChar((ushort)bigValue);
                 default:
                     return null;
             }
@@ -560,7 +541,7 @@ namespace enums {
     {
         public ushort Value { get; internal set; }
 
-        private EnumWChar(ushort value) : this()
+        public EnumWChar(ushort value) : this()
         {
             Value = value;
         }
@@ -663,8 +644,7 @@ namespace enums {
                 return;
             }
 
-            value = EnumWChar.Default;
-            value.Value = (ushort)ReadUInt32(FBEOffset);
+            value = new EnumWChar((ushort)ReadUInt32(FBEOffset));
         }
 
         // Set the value
@@ -718,8 +698,7 @@ namespace enums {
                 return 0;
             }
 
-            value = EnumWChar.Default;
-            value.Value = (ushort)ReadUInt32(FBEOffset);
+            value = new EnumWChar((ushort)ReadUInt32(FBEOffset));
             return FBESize;
         }
 
@@ -751,9 +730,7 @@ namespace enums {
 
         public EnumInt8 Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = EnumInt8.Default;
-            result.Value = reader.ReadSByte();
-            return result;
+            return new EnumInt8(reader.ReadSByte());
         }
     }
 
@@ -777,15 +754,12 @@ namespace enums {
             if (reader.Value == null)
                 return null;
 
-            var value = EnumInt8.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (sbyte)longValue;
-                    return value;
+                    return new EnumInt8((sbyte)longValue);
                 case BigInteger bigValue:
-                    value.Value = (sbyte)bigValue;
-                    return value;
+                    return new EnumInt8((sbyte)bigValue);
                 default:
                     return null;
             }
@@ -799,7 +773,7 @@ namespace enums {
     {
         public sbyte Value { get; internal set; }
 
-        private EnumInt8(sbyte value) : this()
+        public EnumInt8(sbyte value) : this()
         {
             Value = value;
         }
@@ -902,8 +876,7 @@ namespace enums {
                 return;
             }
 
-            value = EnumInt8.Default;
-            value.Value = (sbyte)ReadInt8(FBEOffset);
+            value = new EnumInt8((sbyte)ReadInt8(FBEOffset));
         }
 
         // Set the value
@@ -957,8 +930,7 @@ namespace enums {
                 return 0;
             }
 
-            value = EnumInt8.Default;
-            value.Value = (sbyte)ReadInt8(FBEOffset);
+            value = new EnumInt8((sbyte)ReadInt8(FBEOffset));
             return FBESize;
         }
 
@@ -990,9 +962,7 @@ namespace enums {
 
         public EnumUInt8 Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = EnumUInt8.Default;
-            result.Value = reader.ReadByte();
-            return result;
+            return new EnumUInt8(reader.ReadByte());
         }
     }
 
@@ -1016,15 +986,12 @@ namespace enums {
             if (reader.Value == null)
                 return null;
 
-            var value = EnumUInt8.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (byte)longValue;
-                    return value;
+                    return new EnumUInt8((byte)longValue);
                 case BigInteger bigValue:
-                    value.Value = (byte)bigValue;
-                    return value;
+                    return new EnumUInt8((byte)bigValue);
                 default:
                     return null;
             }
@@ -1038,7 +1005,7 @@ namespace enums {
     {
         public byte Value { get; internal set; }
 
-        private EnumUInt8(byte value) : this()
+        public EnumUInt8(byte value) : this()
         {
             Value = value;
         }
@@ -1141,8 +1108,7 @@ namespace enums {
                 return;
             }
 
-            value = EnumUInt8.Default;
-            value.Value = (byte)ReadUInt8(FBEOffset);
+            value = new EnumUInt8((byte)ReadUInt8(FBEOffset));
         }
 
         // Set the value
@@ -1196,8 +1162,7 @@ namespace enums {
                 return 0;
             }
 
-            value = EnumUInt8.Default;
-            value.Value = (byte)ReadUInt8(FBEOffset);
+            value = new EnumUInt8((byte)ReadUInt8(FBEOffset));
             return FBESize;
         }
 
@@ -1229,9 +1194,7 @@ namespace enums {
 
         public EnumInt16 Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = EnumInt16.Default;
-            result.Value = reader.ReadInt16();
-            return result;
+            return new EnumInt16(reader.ReadInt16());
         }
     }
 
@@ -1255,15 +1218,12 @@ namespace enums {
             if (reader.Value == null)
                 return null;
 
-            var value = EnumInt16.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (short)longValue;
-                    return value;
+                    return new EnumInt16((short)longValue);
                 case BigInteger bigValue:
-                    value.Value = (short)bigValue;
-                    return value;
+                    return new EnumInt16((short)bigValue);
                 default:
                     return null;
             }
@@ -1277,7 +1237,7 @@ namespace enums {
     {
         public short Value { get; internal set; }
 
-        private EnumInt16(short value) : this()
+        public EnumInt16(short value) : this()
         {
             Value = value;
         }
@@ -1380,8 +1340,7 @@ namespace enums {
                 return;
             }
 
-            value = EnumInt16.Default;
-            value.Value = (short)ReadInt16(FBEOffset);
+            value = new EnumInt16((short)ReadInt16(FBEOffset));
         }
 
         // Set the value
@@ -1435,8 +1394,7 @@ namespace enums {
                 return 0;
             }
 
-            value = EnumInt16.Default;
-            value.Value = (short)ReadInt16(FBEOffset);
+            value = new EnumInt16((short)ReadInt16(FBEOffset));
             return FBESize;
         }
 
@@ -1468,9 +1426,7 @@ namespace enums {
 
         public EnumUInt16 Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = EnumUInt16.Default;
-            result.Value = reader.ReadUInt16();
-            return result;
+            return new EnumUInt16(reader.ReadUInt16());
         }
     }
 
@@ -1494,15 +1450,12 @@ namespace enums {
             if (reader.Value == null)
                 return null;
 
-            var value = EnumUInt16.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (ushort)longValue;
-                    return value;
+                    return new EnumUInt16((ushort)longValue);
                 case BigInteger bigValue:
-                    value.Value = (ushort)bigValue;
-                    return value;
+                    return new EnumUInt16((ushort)bigValue);
                 default:
                     return null;
             }
@@ -1516,7 +1469,7 @@ namespace enums {
     {
         public ushort Value { get; internal set; }
 
-        private EnumUInt16(ushort value) : this()
+        public EnumUInt16(ushort value) : this()
         {
             Value = value;
         }
@@ -1619,8 +1572,7 @@ namespace enums {
                 return;
             }
 
-            value = EnumUInt16.Default;
-            value.Value = (ushort)ReadUInt16(FBEOffset);
+            value = new EnumUInt16((ushort)ReadUInt16(FBEOffset));
         }
 
         // Set the value
@@ -1674,8 +1626,7 @@ namespace enums {
                 return 0;
             }
 
-            value = EnumUInt16.Default;
-            value.Value = (ushort)ReadUInt16(FBEOffset);
+            value = new EnumUInt16((ushort)ReadUInt16(FBEOffset));
             return FBESize;
         }
 
@@ -1707,9 +1658,7 @@ namespace enums {
 
         public EnumInt32 Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = EnumInt32.Default;
-            result.Value = reader.ReadInt32();
-            return result;
+            return new EnumInt32(reader.ReadInt32());
         }
     }
 
@@ -1733,15 +1682,12 @@ namespace enums {
             if (reader.Value == null)
                 return null;
 
-            var value = EnumInt32.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (int)longValue;
-                    return value;
+                    return new EnumInt32((int)longValue);
                 case BigInteger bigValue:
-                    value.Value = (int)bigValue;
-                    return value;
+                    return new EnumInt32((int)bigValue);
                 default:
                     return null;
             }
@@ -1755,7 +1701,7 @@ namespace enums {
     {
         public int Value { get; internal set; }
 
-        private EnumInt32(int value) : this()
+        public EnumInt32(int value) : this()
         {
             Value = value;
         }
@@ -1858,8 +1804,7 @@ namespace enums {
                 return;
             }
 
-            value = EnumInt32.Default;
-            value.Value = (int)ReadInt32(FBEOffset);
+            value = new EnumInt32((int)ReadInt32(FBEOffset));
         }
 
         // Set the value
@@ -1913,8 +1858,7 @@ namespace enums {
                 return 0;
             }
 
-            value = EnumInt32.Default;
-            value.Value = (int)ReadInt32(FBEOffset);
+            value = new EnumInt32((int)ReadInt32(FBEOffset));
             return FBESize;
         }
 
@@ -1946,9 +1890,7 @@ namespace enums {
 
         public EnumUInt32 Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = EnumUInt32.Default;
-            result.Value = reader.ReadUInt32();
-            return result;
+            return new EnumUInt32(reader.ReadUInt32());
         }
     }
 
@@ -1972,15 +1914,12 @@ namespace enums {
             if (reader.Value == null)
                 return null;
 
-            var value = EnumUInt32.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (uint)longValue;
-                    return value;
+                    return new EnumUInt32((uint)longValue);
                 case BigInteger bigValue:
-                    value.Value = (uint)bigValue;
-                    return value;
+                    return new EnumUInt32((uint)bigValue);
                 default:
                     return null;
             }
@@ -1994,7 +1933,7 @@ namespace enums {
     {
         public uint Value { get; internal set; }
 
-        private EnumUInt32(uint value) : this()
+        public EnumUInt32(uint value) : this()
         {
             Value = value;
         }
@@ -2097,8 +2036,7 @@ namespace enums {
                 return;
             }
 
-            value = EnumUInt32.Default;
-            value.Value = (uint)ReadUInt32(FBEOffset);
+            value = new EnumUInt32((uint)ReadUInt32(FBEOffset));
         }
 
         // Set the value
@@ -2152,8 +2090,7 @@ namespace enums {
                 return 0;
             }
 
-            value = EnumUInt32.Default;
-            value.Value = (uint)ReadUInt32(FBEOffset);
+            value = new EnumUInt32((uint)ReadUInt32(FBEOffset));
             return FBESize;
         }
 
@@ -2185,9 +2122,7 @@ namespace enums {
 
         public EnumInt64 Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = EnumInt64.Default;
-            result.Value = reader.ReadInt64();
-            return result;
+            return new EnumInt64(reader.ReadInt64());
         }
     }
 
@@ -2211,15 +2146,12 @@ namespace enums {
             if (reader.Value == null)
                 return null;
 
-            var value = EnumInt64.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (long)longValue;
-                    return value;
+                    return new EnumInt64((long)longValue);
                 case BigInteger bigValue:
-                    value.Value = (long)bigValue;
-                    return value;
+                    return new EnumInt64((long)bigValue);
                 default:
                     return null;
             }
@@ -2233,7 +2165,7 @@ namespace enums {
     {
         public long Value { get; internal set; }
 
-        private EnumInt64(long value) : this()
+        public EnumInt64(long value) : this()
         {
             Value = value;
         }
@@ -2336,8 +2268,7 @@ namespace enums {
                 return;
             }
 
-            value = EnumInt64.Default;
-            value.Value = (long)ReadInt64(FBEOffset);
+            value = new EnumInt64((long)ReadInt64(FBEOffset));
         }
 
         // Set the value
@@ -2391,8 +2322,7 @@ namespace enums {
                 return 0;
             }
 
-            value = EnumInt64.Default;
-            value.Value = (long)ReadInt64(FBEOffset);
+            value = new EnumInt64((long)ReadInt64(FBEOffset));
             return FBESize;
         }
 
@@ -2424,9 +2354,7 @@ namespace enums {
 
         public EnumUInt64 Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
         {
-            var result = EnumUInt64.Default;
-            result.Value = reader.ReadUInt64();
-            return result;
+            return new EnumUInt64(reader.ReadUInt64());
         }
     }
 
@@ -2450,15 +2378,12 @@ namespace enums {
             if (reader.Value == null)
                 return null;
 
-            var value = EnumUInt64.Default;
             switch (reader.Value)
             {
                 case long longValue:
-                    value.Value = (ulong)longValue;
-                    return value;
+                    return new EnumUInt64((ulong)longValue);
                 case BigInteger bigValue:
-                    value.Value = (ulong)bigValue;
-                    return value;
+                    return new EnumUInt64((ulong)bigValue);
                 default:
                     return null;
             }
@@ -2472,7 +2397,7 @@ namespace enums {
     {
         public ulong Value { get; internal set; }
 
-        private EnumUInt64(ulong value) : this()
+        public EnumUInt64(ulong value) : this()
         {
             Value = value;
         }
@@ -2575,8 +2500,7 @@ namespace enums {
                 return;
             }
 
-            value = EnumUInt64.Default;
-            value.Value = (ulong)ReadUInt64(FBEOffset);
+            value = new EnumUInt64((ulong)ReadUInt64(FBEOffset));
         }
 
         // Set the value
@@ -2630,8 +2554,7 @@ namespace enums {
                 return 0;
             }
 
-            value = EnumUInt64.Default;
-            value.Value = (ulong)ReadUInt64(FBEOffset);
+            value = new EnumUInt64((ulong)ReadUInt64(FBEOffset));
             return FBESize;
         }
 
