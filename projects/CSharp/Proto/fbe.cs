@@ -298,6 +298,18 @@ namespace FBE {
                    ((ulong)buffer[offset + 7] << 56);
         }
 
+        public static ulong ReadUInt64Guid(byte[] buffer, long offset)
+        {
+            return ((ulong)buffer[offset + 0] << 24)|
+                   ((ulong)buffer[offset + 1] << 16)|
+                   ((ulong)buffer[offset + 2] <<  8)|
+                   ((ulong)buffer[offset + 3] <<  0)|
+                   ((ulong)buffer[offset + 4] << 40)|
+                   ((ulong)buffer[offset + 5] << 32)|
+                   ((ulong)buffer[offset + 6] << 56)|
+                   ((ulong)buffer[offset + 7] << 48);
+        }
+
         public static float ReadFloat(byte[] buffer, long offset)
         {
             var bits = default(FloatUnion);
@@ -337,7 +349,7 @@ namespace FBE {
         public static Guid ReadUUID(byte[] buffer, long offset)
         {
             var bits = default(GuidUnion);
-            bits.ULongHigh = ReadUInt64(buffer, offset);
+            bits.ULongHigh = ReadUInt64Guid(buffer, offset);
             bits.ULongLow = ReadUInt64(buffer, offset + 8);
             return bits.GuidData;
         }
@@ -409,6 +421,18 @@ namespace FBE {
             buffer[offset + 7] = (byte)(value >> 56);
         }
 
+        public static void WriteGuid(byte[] buffer, long offset, ulong value)
+        {
+            buffer[offset + 0] = (byte)(value >> 24);
+            buffer[offset + 1] = (byte)(value >> 16);
+            buffer[offset + 2] = (byte)(value >>  8);
+            buffer[offset + 3] = (byte)(value >>  0);
+            buffer[offset + 4] = (byte)(value >> 40);
+            buffer[offset + 5] = (byte)(value >> 32);
+            buffer[offset + 6] = (byte)(value >> 56);
+            buffer[offset + 7] = (byte)(value >> 48);
+        }
+
         public static void Write(byte[] buffer, long offset, float value)
         {
             var bits = default(FloatUnion);
@@ -458,7 +482,7 @@ namespace FBE {
         {
             var bits = default(GuidUnion);
             bits.GuidData = value;
-            Write(buffer, offset, bits.ULongHigh);
+            WriteGuid(buffer, offset, bits.ULongHigh);
             Write(buffer, offset + 8, bits.ULongLow);
         }
 
