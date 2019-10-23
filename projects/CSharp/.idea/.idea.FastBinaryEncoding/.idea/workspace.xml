@@ -2,183 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="edfd070c-0d53-4afa-88cb-34dff2e2435b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../include/generator_swift.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_swift.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/projectSettingsUpdater.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/Benchmarks.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/SendReceive.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/Serialization.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/SerializationFinal.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/SerializationJson.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Create/Create.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Create/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Print/Print.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Print/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/PrintJson/PrintJson.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/PrintJson/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SendReceive/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SendReceive/SendReceive.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Serialization/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Serialization/Serialization.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SerializationFinal/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SerializationFinal/SerializationFinal.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SerializationJson/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SerializationJson/SerializationJson.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/FastBinaryEncoding.sln" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/Proto.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/lib/Utf8Json.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/lib/Utf8Json.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Clone.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Create.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Decimal.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Enums.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Extending.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Serialization.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SerializationFinal.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SerializationJson.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Tests.csproj" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Benchmarks/App.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Benchmarks/Benchmarks.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/Benchmarks.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Benchmarks/Properties/AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Benchmarks/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/SendReceive.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Benchmarks/packages.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Create/App.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Create/Create.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Create/Create.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Create/Properties/AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Print/App.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Print/Print.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Print/Print.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Print/Properties/AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/PrintJson/App.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/PrintJson/PrintJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/PrintJson/PrintJson.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/PrintJson/Properties/AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SendReceive/App.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SendReceive/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SendReceive/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SendReceive/Properties/AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SendReceive/SendReceive.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SendReceive/SendReceive.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Serialization/App.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Serialization/Properties/AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/Serialization/Serialization.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/Serialization/Serialization.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SerializationFinal/App.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SerializationFinal/Properties/AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SerializationFinal/SerializationFinal.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SerializationFinal/SerializationFinal.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SerializationJson/App.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SerializationJson/Properties/AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SerializationJson/SerializationJson.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/SerializationJson/SerializationJson.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Examples/SerializationJson/packages.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/Properties/AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/Proto.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/app.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/lib/System.Threading.Tasks.Extensions.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/lib/System.ValueTuple.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/packages.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/protoex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Clone.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Clone.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Create.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Create.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Decimal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Decimal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Extending.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Extending.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Properties/AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SendReceive.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SendReceiveFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Serialization.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/SerializationFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SerializationFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/SerializationJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SerializationJson.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/app.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/packages.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/libraries/com_google_code_gson_gson_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/libraries/com_google_code_gson_gson_Latest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/ClientListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalClient.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalClientListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalReceiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalReceiverListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalSender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalSender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/FinalSenderListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/ProxyListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/ReceiverListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/Sender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/enums/fbe/SenderListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/ClientListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/ReceiverListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/Sender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/fbe/SenderListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/ClientListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalClient.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalClientListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalReceiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalReceiverListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalSender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalSender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/FinalSenderListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/ProxyListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/ReceiverListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/Sender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/proto/fbe/SenderListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/ClientListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalClient.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalClientListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalReceiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalReceiverListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalSender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalSender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/FinalSenderListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/ProxyListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/ReceiverListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/Sender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/protoex/fbe/SenderListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Client.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/ClientListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalClient.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalClientListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalReceiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalReceiverListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalSender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalSender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FinalSenderListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/ProxyListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Receiver.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/ReceiverListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/Sender.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/SenderListener.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Swift/Proto/Fbe/Package.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Swift/Proto/Fbe/Package.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Swift/Proto/Fbe/Source/ChronoxorFbe/Buffer.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Swift/Proto/Fbe/Source/ChronoxorFbe/Buffer.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -241,7 +73,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected=".NET Project.Examples\SerializationJson">
+  <component name="RunManager" selected=".NET Project.Examples\Print">
     <configuration name="Default" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -260,15 +92,15 @@
         <option name="Build" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Examples\PrintJson" type="DotNetProject" factoryName=".NET Project" temporary="true">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/PrintJson/bin/Debug/netcoreapp3.0/PrintJson.dll" />
+    <configuration name="Examples\Print" type="DotNetProject" factoryName=".NET Project" temporary="true">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/Print/bin/Debug/netcoreapp3.0/Print.dll" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/PrintJson/bin/Debug/netcoreapp3.0" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Examples/Print/bin/Debug/netcoreapp3.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
-      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Examples/PrintJson/PrintJson.csproj" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Examples/Print/Print.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
@@ -352,19 +184,19 @@
     </configuration>
     <list>
       <item itemvalue=".NET Project.Default" />
-      <item itemvalue=".NET Project.Examples\PrintJson" />
       <item itemvalue=".NET Project.Examples\SendReceive" />
       <item itemvalue=".NET Project.Examples\Serialization" />
       <item itemvalue=".NET Project.Examples\SerializationFinal" />
       <item itemvalue=".NET Project.Examples\SerializationJson" />
+      <item itemvalue=".NET Project.Examples\Print" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue=".NET Project.Examples\Print" />
         <item itemvalue=".NET Project.Examples\SerializationJson" />
         <item itemvalue=".NET Project.Examples\SerializationFinal" />
         <item itemvalue=".NET Project.Examples\Serialization" />
         <item itemvalue=".NET Project.Examples\SendReceive" />
-        <item itemvalue=".NET Project.Examples\PrintJson" />
       </list>
     </recent_temporary>
   </component>
@@ -418,6 +250,7 @@
       <workItem from="1567694627894" duration="81000" />
       <workItem from="1567694778634" duration="53000" />
       <workItem from="1568812910194" duration="267000" />
+      <workItem from="1571846442711" duration="235000" />
     </task>
     <servers />
   </component>
