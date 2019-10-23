@@ -5,8 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/int64.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/int64.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/uuid.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/uuid.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +30,7 @@
     <property name="node.js.selected.package.standard" value="$PROJECT_DIR$/node_modules/standard" />
     <property name="nodejs_interpreter_path" value="Z:/soft/Development/NodeJS/bin/node" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -46,36 +44,50 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.serialization_json.js">
-    <configuration name="print_json.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="print_json.js" working-dir="$PROJECT_DIR$/examples">
-      <method v="2" />
-    </configuration>
-    <configuration name="send_receive.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="send_receive.js" working-dir="$PROJECT_DIR$/examples">
+  <component name="RunManager" selected="Node.js.print.js">
+    <configuration name="print.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="print.js" working-dir="$PROJECT_DIR$/examples">
       <method v="2" />
     </configuration>
     <configuration name="serialization_final.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="serialization_final.js" working-dir="$PROJECT_DIR$/examples">
       <method v="2" />
     </configuration>
-    <configuration name="serialization.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="serialization.js" working-dir="$PROJECT_DIR$/examples">
-      <method v="2" />
-    </configuration>
     <configuration name="serialization_json.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="serialization_json.js" working-dir="$PROJECT_DIR$/examples">
       <method v="2" />
     </configuration>
+    <configuration name="tests-node" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="tests-node" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="tests-standard" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="tests-standard" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Node.js.print_json.js" />
-      <item itemvalue="Node.js.send_receive.js" />
-      <item itemvalue="Node.js.serialization.js" />
       <item itemvalue="Node.js.serialization_final.js" />
       <item itemvalue="Node.js.serialization_json.js" />
+      <item itemvalue="npm.tests-standard" />
+      <item itemvalue="npm.tests-node" />
+      <item itemvalue="Node.js.print.js" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.print.js" />
+        <item itemvalue="npm.tests-node" />
+        <item itemvalue="npm.tests-standard" />
         <item itemvalue="Node.js.serialization_json.js" />
         <item itemvalue="Node.js.serialization_final.js" />
-        <item itemvalue="Node.js.serialization.js" />
-        <item itemvalue="Node.js.send_receive.js" />
-        <item itemvalue="Node.js.print_json.js" />
       </list>
     </recent_temporary>
   </component>
@@ -130,6 +142,7 @@
       <workItem from="1564358946977" duration="702000" />
       <workItem from="1564359884315" duration="1521000" />
       <workItem from="1567686155222" duration="532000" />
+      <workItem from="1571835187242" duration="201000" />
     </task>
     <servers />
   </component>
@@ -141,7 +154,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
