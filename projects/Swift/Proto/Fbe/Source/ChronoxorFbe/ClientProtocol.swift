@@ -63,7 +63,7 @@ public extension ClientProtocol {
         try receive(buffer: buffer, offset: 0, size: buffer.data.count)
     }
 
-    func receive(buffer: Buffer , offset: Int, size: Int) throws {
+    func receive(buffer: Buffer, offset: Int, size: Int) throws {
         assert((offset + size) <= buffer.data.count, "Invalid offset & size!")
 
         if (offset + size) > buffer.data.count {

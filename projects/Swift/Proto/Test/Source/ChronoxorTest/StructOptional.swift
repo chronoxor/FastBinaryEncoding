@@ -56,9 +56,9 @@ open class StructOptional: StructSimple {
     public var f145: String? = nil
     public var f146: String? = "Initial string!"
     public var f147: String? = nil
-    public var f148: TimeInterval? = nil
-    public var f149: TimeInterval? = Date().timeIntervalSince1970
-    public var f150: TimeInterval? = nil
+    public var f148: Date? = nil
+    public var f149: Date? = Date()
+    public var f150: Date? = nil
     public var f151: UUID? = nil
     public var f152: UUID? = UUID(uuidString: "123e4567-e89b-12d3-a456-426655440000")!
     public var f153: UUID? = nil
@@ -76,7 +76,7 @@ open class StructOptional: StructSimple {
     public var f165: ChronoxorProto.Account? = nil
 
     public override init() { super.init() }
-    public init(parent: StructSimple, f100: Bool?, f101: Bool?, f102: Bool?, f103: UInt8?, f104: UInt8?, f105: UInt8?, f106: Character?, f107: Character?, f108: Character?, f109: Character?, f110: Character?, f111: Character?, f112: Int8?, f113: Int8?, f114: Int8?, f115: UInt8?, f116: UInt8?, f117: UInt8?, f118: Int16?, f119: Int16?, f120: Int16?, f121: UInt16?, f122: UInt16?, f123: UInt16?, f124: Int32?, f125: Int32?, f126: Int32?, f127: UInt32?, f128: UInt32?, f129: UInt32?, f130: Int64?, f131: Int64?, f132: Int64?, f133: UInt64?, f134: UInt64?, f135: UInt64?, f136: Float?, f137: Float?, f138: Float?, f139: Double?, f140: Double?, f141: Double?, f142: Decimal?, f143: Decimal?, f144: Decimal?, f145: String?, f146: String?, f147: String?, f148: TimeInterval?, f149: TimeInterval?, f150: TimeInterval?, f151: UUID?, f152: UUID?, f153: UUID?, f154: ChronoxorProto.OrderSide?, f155: ChronoxorProto.OrderSide?, f156: ChronoxorProto.OrderType?, f157: ChronoxorProto.OrderType?, f158: ChronoxorProto.Order?, f159: ChronoxorProto.Order?, f160: ChronoxorProto.Balance?, f161: ChronoxorProto.Balance?, f162: ChronoxorProto.State?, f163: ChronoxorProto.State?, f164: ChronoxorProto.Account?, f165: ChronoxorProto.Account?) {
+    public init(parent: StructSimple, f100: Bool?, f101: Bool?, f102: Bool?, f103: UInt8?, f104: UInt8?, f105: UInt8?, f106: Character?, f107: Character?, f108: Character?, f109: Character?, f110: Character?, f111: Character?, f112: Int8?, f113: Int8?, f114: Int8?, f115: UInt8?, f116: UInt8?, f117: UInt8?, f118: Int16?, f119: Int16?, f120: Int16?, f121: UInt16?, f122: UInt16?, f123: UInt16?, f124: Int32?, f125: Int32?, f126: Int32?, f127: UInt32?, f128: UInt32?, f129: UInt32?, f130: Int64?, f131: Int64?, f132: Int64?, f133: UInt64?, f134: UInt64?, f135: UInt64?, f136: Float?, f137: Float?, f138: Float?, f139: Double?, f140: Double?, f141: Double?, f142: Decimal?, f143: Decimal?, f144: Decimal?, f145: String?, f146: String?, f147: String?, f148: Date?, f149: Date?, f150: Date?, f151: UUID?, f152: UUID?, f153: UUID?, f154: ChronoxorProto.OrderSide?, f155: ChronoxorProto.OrderSide?, f156: ChronoxorProto.OrderType?, f157: ChronoxorProto.OrderType?, f158: ChronoxorProto.Order?, f159: ChronoxorProto.Order?, f160: ChronoxorProto.Balance?, f161: ChronoxorProto.Balance?, f162: ChronoxorProto.State?, f163: ChronoxorProto.State?, f164: ChronoxorProto.Account?, f165: ChronoxorProto.Account?) {
         super.init(other: parent)
 
         self.f100 = f100
@@ -277,9 +277,9 @@ open class StructOptional: StructSimple {
         f145 = try container.decode(String?.self, forKey: .f145)
         f146 = try container.decode(String?.self, forKey: .f146)
         f147 = try container.decode(String?.self, forKey: .f147)
-        f148 = try container.decode(TimeInterval?.self, forKey: .f148)
-        f149 = try container.decode(TimeInterval?.self, forKey: .f149)
-        f150 = try container.decode(TimeInterval?.self, forKey: .f150)
+        f148 = try container.decode(Date?.self, forKey: .f148)
+        f149 = try container.decode(Date?.self, forKey: .f149)
+        f150 = try container.decode(Date?.self, forKey: .f150)
         f151 = try container.decode(UUID?.self, forKey: .f151)
         f152 = try container.decode(UUID?.self, forKey: .f152)
         f153 = try container.decode(UUID?.self, forKey: .f153)
@@ -372,9 +372,9 @@ open class StructOptional: StructSimple {
         sb.append(",f145=");  if let f145 = f145 { sb.append("\""); sb.append(f145); sb.append("\"") } else { sb.append("null") }
         sb.append(",f146=");  if let f146 = f146 { sb.append("\""); sb.append(f146); sb.append("\"") } else { sb.append("null") }
         sb.append(",f147=");  if let f147 = f147 { sb.append("\""); sb.append(f147); sb.append("\"") } else { sb.append("null") }
-        sb.append(",f148=");  if let f148 = f148 { sb.append("\(f148 * 1000000000)") } else { sb.append("null") }
-        sb.append(",f149=");  if let f149 = f149 { sb.append("\(f149 * 1000000000)") } else { sb.append("null") }
-        sb.append(",f150=");  if let f150 = f150 { sb.append("\(f150 * 1000000000)") } else { sb.append("null") }
+        sb.append(",f148=");  if let f148 = f148 { sb.append("\(f148.timeIntervalSince1970 * 1000000000)") } else { sb.append("null") }
+        sb.append(",f149=");  if let f149 = f149 { sb.append("\(f149.timeIntervalSince1970 * 1000000000)") } else { sb.append("null") }
+        sb.append(",f150=");  if let f150 = f150 { sb.append("\(f150.timeIntervalSince1970 * 1000000000)") } else { sb.append("null") }
         sb.append(",f151=");  if let f151 = f151 { sb.append("\""); sb.append(f151.uuidString); sb.append("\"") } else { sb.append("null") }
         sb.append(",f152=");  if let f152 = f152 { sb.append("\""); sb.append(f152.uuidString); sb.append("\"") } else { sb.append("null") }
         sb.append(",f153=");  if let f153 = f153 { sb.append("\""); sb.append(f153.uuidString); sb.append("\"") } else { sb.append("null") }

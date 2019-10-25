@@ -187,7 +187,7 @@ public struct UUIDGenerator {
 
     // Generate nil UUID0 (all bits set to zero)
     public static func `nil`() -> UUID {
-        return UUID(uuidString: "00000000-0000-0000-0000-000000000000")!
+        return UUID(uuid: (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
     }
 
     // Generate sequential UUID1 (time based version)
@@ -204,7 +204,14 @@ public struct UUIDGenerator {
 
     // Generate random UUID4 (randomly or pseudo-randomly generated version)
     public static func random() -> UUID {
-        return UUID()
+        var uuid: uuid_t = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        withUnsafeMutablePointer(to: &uuid) {
+            $0.withMemoryRebound(to: UInt8.self, capacity: 16) {
+                uuid_generate_random($0)
+            }
+        }
+
+        return UUID(uuid: uuid)
     }
 }
 
@@ -1099,7 +1106,6 @@ public class FieldModelDecimal: FieldModel {
         write(offset: fbeOffset + 15, value: UInt8(value.isSignMinus ? 128: 0))
     }
 }
-
 )CODE";
 
     // Prepare code template
@@ -1201,23 +1207,23 @@ public class FieldModelTimestamp: FieldModel {
            _offset = 0
        }
 
-    public func get(defaults: TimeInterval = Date().timeIntervalSince1970) -> TimeInterval {
+    public func get(defaults: Date = Date()) -> Date {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return defaults
         }
 
         let nanoseconds = TimeInterval(readInt64(offset: fbeOffset))
-        return nanoseconds / 1000000000
+        return Date(timeIntervalSince1970: nanoseconds / 1000000000)
     }
 
-    public func set(value: TimeInterval) throws {
+    public func set(value: Date) throws {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return
         }
 
-        let nanoseconds = value * 1000000000
+        let nanoseconds = value.timeIntervalSince1970 * 1000000000
         write(offset: fbeOffset, value: UInt64(nanoseconds))
     }
 }
@@ -1367,8 +1373,7 @@ void GeneratorSwift::GenerateFBEFieldModelString(const std::string& domain, cons
     // Generate headers
     GenerateHeader("Fbe");
 
-    std::string code = R"CODE(
-// Fast Binary Encoding string field model
+    std::string code = R"CODE(// Fast Binary Encoding string field model
 public class FieldModelString: FieldModel {
     public var _buffer: Buffer
     public var _offset: Int
@@ -2749,13 +2754,12 @@ public class FinalModelTimestamp: FinalModel {
     }
 
     // Get the allocation size
-    public func fbeAllocationSize(value: Double) -> Int {
+    public func fbeAllocationSize(value: Date) -> Int {
         return fbeSize
     }
 
     // Field size
     public let fbeSize: Int = 8
-
 
     // Check if the value is valid
     public func verify() -> Int {
@@ -2767,24 +2771,24 @@ public class FinalModelTimestamp: FinalModel {
     }
 
     // Get the value
-    public func get(size: inout Size) -> TimeInterval {
+    public func get(size: inout Size) -> Date {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
-            return Date().timeIntervalSince1970
+            return Date()
         }
 
         size.value = fbeSize
         let nanoseconds = TimeInterval(readInt64(offset: fbeOffset))
-        return TimeInterval(nanoseconds / 1000000000)
+        return Date(timeIntervalSince1970: nanoseconds / 1000000000)
     }
 
     // Set the value
-    public func set(value: Double) throws -> Int {
+    public func set(value: Date) throws -> Int {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             assertionFailure("Model is broken!")
             return 0
         }
 
-        let nanoseconds = value * 1000000000
+        let nanoseconds = value.timeIntervalSince1970 * 1000000000
         write(offset: fbeOffset, value: UInt64(nanoseconds))
         return fbeSize
     }
@@ -3711,7 +3715,6 @@ public protocol ReceiverProtocol: class {
     // Get the bytes buffer
     var buffer: Buffer { get set }
 
-
     // Get the final protocol flag
     var final: Bool { get set }
 
@@ -4107,7 +4110,7 @@ public extension ClientProtocol {
         try receive(buffer: buffer, offset: 0, size: buffer.data.count)
     }
 
-    func receive(buffer: Buffer , offset: Int, size: Int) throws {
+    func receive(buffer: Buffer, offset: Int, size: Int) throws {
         assert((offset + size) <= buffer.data.count, "Invalid offset & size!")
 
         if (offset + size) > buffer.data.count {
@@ -7700,7 +7703,7 @@ bool GeneratorSwift::IsPackageType(const std::string& type)
             (type == "Int64") || (type == "Int64?") || (type == "UInt64") || (type == "UInt64?") ||
             (type == "Float") || (type == "Float?") || (type == "Double") || (type == "Double?") ||
             (type == "Decimal") || (type == "Decimal?") ||
-            (type == "String") || (type == "String?") || (type == "Date") || (type == "Date?") || (type == "TimeInterval") || (type == "TimeInterval?") || (type == "UUID") || (type == "UUID?"));
+            (type == "String") || (type == "String?") || (type == "Date") || (type == "Date?") || (type == "UUID") || (type == "UUID?"));
 }
 
 bool GeneratorSwift::IsPrimitiveType(const std::string& type, bool optional)
@@ -8056,7 +8059,7 @@ std::string GeneratorSwift::ConvertTypeName(const std::string& domain, const std
     else if (type == "string")
         return "String" + opt;
     else if (type == "timestamp")
-        return "TimeInterval" + opt;
+        return "Date" + opt;
     else if (type == "uuid")
         return "UUID" + opt;
 
@@ -8216,7 +8219,7 @@ std::string GeneratorSwift::ConvertTypeFieldType(const std::string& domain, cons
     else if (type == "string")
         return "String" + opt;
     else if (type == "timestamp")
-        return "TimeInterval" + opt;
+        return "Date" + opt;
     else if (type == "uuid")
         return "UUID" + opt;
 
@@ -8361,9 +8364,9 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
         return "";
     }
     else if (value == "epoch")
-        return "0";
+        return "Date(timeIntervalSince1970: 0)";
     else if (value == "utc")
-        return "Date().timeIntervalSince1970";
+        return "Date()";
     else if (value == "uuid0")
         return domain + "Fbe.UUIDGenerator.nil()";
     else if (value == "uuid1")
@@ -8481,7 +8484,7 @@ std::string GeneratorSwift::ConvertDefault(const std::string& domain, const std:
     else if (type == "string")
         return "\"\"";
     else if (type == "timestamp")
-        return "0";
+        return "Date(timeIntervalSince1970: 0)";
     else if (type == "uuid")
         return domain + "Fbe.UUIDGenerator.nil()";
 
@@ -8534,7 +8537,7 @@ std::string GeneratorSwift::ConvertOutputStreamType(const std::string& type, con
     else if (type == "uuid")
         return ".append(\"\\\"\"); sb.append(" + name + opt + ".uuidString); sb.append(\"\\\"\")";
     else if (type == "timestamp")
-        return ".append(\"\\(" + name + opt + " * 1000000000)\")";
+        return ".append(\"\\(" + name + opt + ".timeIntervalSince1970" + " * 1000000000)\")";
     else
         return ".append(" + name + opt + ".description)";
 }

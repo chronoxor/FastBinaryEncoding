@@ -1002,6 +1002,9 @@ Serialization benchmark results:
 | Ruby Win64               |    252 bytes |       23 013 ops/s |          43 453 ns |
 | Ruby Win64 (Final)       |    152 bytes |       33 361 ops/s |          29 975 ns |
 | Ruby Win64 (JSON)        |    353 bytes |       50 842 ops/s |          19 669 ns |
+| Swift MacOS              |    252 bytes |       72 395 ops/s |          13 813 ns |
+| Swift MacOS (Final)      |    152 bytes |       95 147 ops/s |          10 510 ns |
+| Swift MacOS (JSON)       |    353 bytes |       18 534 ops/s |          53 953 ns |
 
 ## Benchmark 2: Deserialization
 Deserialization benchmark C++ code:
@@ -1041,6 +1044,9 @@ Deserialization benchmark results:
 | Ruby Win64               |    252 bytes |         24 351 ops/s |            41 066 ns |
 | Ruby Win64 (Final)       |    152 bytes |         33 555 ops/s |            29 802 ns |
 | Ruby Win64 (JSON)        |    353 bytes |         42 860 ops/s |            23 331 ns |
+| Swift MacOS              |    252 bytes |         50 842 ops/s |            25 625 ns |
+| Swift MacOS (Final)      |    152 bytes |         50 842 ops/s |            20 820 ns |
+| Swift MacOS (JSON)       |    353 bytes |         50 842 ops/s |            68 268 ns |
 
 ## Benchmark 3: Verify
 Verify benchmark C++ code:
@@ -1072,3 +1078,5 @@ Verify benchmark results:
 | Python Win64 (Final)     |    152 bytes |     23 590 ops/s |   42 391 ns |
 | Ruby Win64               |    252 bytes |     57 201 ops/s |   17 482 ns |
 | Ruby Win64 (Final)       |    152 bytes |     74 262 ops/s |   13 466 ns |
+| Swift MacOS              |    252 bytes |     50 842 ops/s |    7 177 ns |
+| Swift MacOS (Final)      |    152 bytes |     50 842 ops/s |    4 564 ns |

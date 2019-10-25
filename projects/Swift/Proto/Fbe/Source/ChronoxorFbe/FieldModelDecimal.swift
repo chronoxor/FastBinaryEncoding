@@ -99,4 +99,3 @@ public class FieldModelDecimal: FieldModel {
         write(offset: fbeOffset + 15, value: UInt8(value.isSignMinus ? 128: 0))
     }
 }
-

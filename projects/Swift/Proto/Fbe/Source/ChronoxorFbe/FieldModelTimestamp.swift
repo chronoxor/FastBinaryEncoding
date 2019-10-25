@@ -18,23 +18,23 @@ public class FieldModelTimestamp: FieldModel {
            _offset = 0
        }
 
-    public func get(defaults: TimeInterval = Date().timeIntervalSince1970) -> TimeInterval {
+    public func get(defaults: Date = Date()) -> Date {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return defaults
         }
 
         let nanoseconds = TimeInterval(readInt64(offset: fbeOffset))
-        return nanoseconds / 1000000000
+        return Date(timeIntervalSince1970: nanoseconds / 1000000000)
     }
 
-    public func set(value: TimeInterval) throws {
+    public func set(value: Date) throws {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
             assertionFailure("Model is broken!")
             return
         }
 
-        let nanoseconds = value * 1000000000
+        let nanoseconds = value.timeIntervalSince1970 * 1000000000
         write(offset: fbeOffset, value: UInt64(nanoseconds))
     }
 }

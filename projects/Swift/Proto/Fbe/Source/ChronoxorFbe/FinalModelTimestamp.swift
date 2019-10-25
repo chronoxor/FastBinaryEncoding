@@ -16,13 +16,12 @@ public class FinalModelTimestamp: FinalModel {
     }
 
     // Get the allocation size
-    public func fbeAllocationSize(value: Double) -> Int {
+    public func fbeAllocationSize(value: Date) -> Int {
         return fbeSize
     }
 
     // Field size
     public let fbeSize: Int = 8
-
 
     // Check if the value is valid
     public func verify() -> Int {
@@ -34,24 +33,24 @@ public class FinalModelTimestamp: FinalModel {
     }
 
     // Get the value
-    public func get(size: inout Size) -> TimeInterval {
+    public func get(size: inout Size) -> Date {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
-            return Date().timeIntervalSince1970
+            return Date()
         }
 
         size.value = fbeSize
         let nanoseconds = TimeInterval(readInt64(offset: fbeOffset))
-        return TimeInterval(nanoseconds / 1000000000)
+        return Date(timeIntervalSince1970: nanoseconds / 1000000000)
     }
 
     // Set the value
-    public func set(value: Double) throws -> Int {
+    public func set(value: Date) throws -> Int {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
             assertionFailure("Model is broken!")
             return 0
         }
 
-        let nanoseconds = value * 1000000000
+        let nanoseconds = value.timeIntervalSince1970 * 1000000000
         write(offset: fbeOffset, value: UInt64(nanoseconds))
         return fbeSize
     }

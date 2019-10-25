@@ -3,7 +3,6 @@
 // Source: Fbe
 // Version: 1.3.0.0
 
-
 // Fast Binary Encoding string field model
 public class FieldModelString: FieldModel {
     public var _buffer: Buffer

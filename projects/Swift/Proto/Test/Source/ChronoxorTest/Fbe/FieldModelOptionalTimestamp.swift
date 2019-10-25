@@ -103,7 +103,7 @@ public class FieldModelOptionalTimestamp: FieldModel {
         _buffer.unshift(offset: fbeBegin)
     }
 
-    public func get(defaults: TimeInterval? = nil) -> TimeInterval? {
+    public func get(defaults: Date? = nil) -> Date? {
         let fbeBegin = getBegin()
         if fbeBegin == 0 {
             return defaults
@@ -146,7 +146,7 @@ public class FieldModelOptionalTimestamp: FieldModel {
       }
 
       // Set the optional value
-      public func set(value optional: TimeInterval?) throws {
+      public func set(value optional: Date?) throws {
         let fbeBegin = try setBegin(hasValue: optional != nil)
         if fbeBegin == 0 {
             return

@@ -10,3 +10,6 @@ disabled_rules:
   - syntactic_sugar
   - trailing_comma
   - redundant_optional_initialization
+  #
+  - type_name
+  - vertical_whitespace

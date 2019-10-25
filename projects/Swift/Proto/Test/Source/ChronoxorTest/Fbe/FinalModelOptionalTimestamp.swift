@@ -33,7 +33,7 @@ class FinalModelOptionalTimestamp: FinalModel {
         value = ChronoxorFbe.FinalModelTimestamp(buffer: buffer, offset: offset)
     }
 
-    func fbeAllocationSize(value optional: TimeInterval?) -> Int {
+    func fbeAllocationSize(value optional: Date?) -> Int {
         return 1 + (optional != nil ? value.fbeAllocationSize(value: optional!) : 0)
     }
 
@@ -62,7 +62,7 @@ class FinalModelOptionalTimestamp: FinalModel {
         return 1 + fbeResult
     }
 
-    public func get(size: inout Size) -> TimeInterval? {
+    public func get(size: inout Size) -> Date? {
         if _buffer.offset + fbeOffset + 1 > _buffer.size {
             assertionFailure("Model is broken!")
             size.value = 0
@@ -82,7 +82,7 @@ class FinalModelOptionalTimestamp: FinalModel {
     }
 
     // Set the optional value
-    public func set(value optional: TimeInterval?) throws -> Int {
+    public func set(value optional: Date?) throws -> Int {
         if _buffer.offset + fbeOffset + 1 > _buffer.size {
             assertionFailure("Model is broken!")
             return 0

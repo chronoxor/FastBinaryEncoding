@@ -56,7 +56,7 @@ class BenchmarkSerialization: XCTestCase {
         self.measure {
             // Deserialize the account from the FBE stream
             for _ in 0...999 {
-                _ = BenchmarkSerialization._reader.deserialize(value: &BenchmarkSerialization._account)
+                _ = BenchmarkSerialization._reader.deserialize()
             }
         }
     }

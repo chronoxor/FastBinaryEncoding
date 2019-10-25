@@ -1014,21 +1014,21 @@ public class FieldModelStructSimple: FieldModel {
         if fbeCurrentSize + f33.fbeSize <= fbeStructSize {
             fbeValue.f33 = f33.get()
         } else {
-            fbeValue.f33 = 0
+            fbeValue.f33 = Date(timeIntervalSince1970: 0)
         }
         fbeCurrentSize += f33.fbeSize
 
         if fbeCurrentSize + f34.fbeSize <= fbeStructSize {
-            fbeValue.f34 = f34.get(defaults: 0)
+            fbeValue.f34 = f34.get(defaults: Date(timeIntervalSince1970: 0))
         } else {
-            fbeValue.f34 = 0
+            fbeValue.f34 = Date(timeIntervalSince1970: 0)
         }
         fbeCurrentSize += f34.fbeSize
 
         if fbeCurrentSize + f35.fbeSize <= fbeStructSize {
-            fbeValue.f35 = f35.get(defaults: Date().timeIntervalSince1970)
+            fbeValue.f35 = f35.get(defaults: Date())
         } else {
-            fbeValue.f35 = Date().timeIntervalSince1970
+            fbeValue.f35 = Date()
         }
         fbeCurrentSize += f35.fbeSize
 

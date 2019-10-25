@@ -10,7 +10,7 @@ public struct UUIDGenerator {
 
     // Generate nil UUID0 (all bits set to zero)
     public static func `nil`() -> UUID {
-        return UUID(uuidString: "00000000-0000-0000-0000-000000000000")!
+        return UUID(uuid: (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
     }
 
     // Generate sequential UUID1 (time based version)
@@ -27,7 +27,14 @@ public struct UUIDGenerator {
 
     // Generate random UUID4 (randomly or pseudo-randomly generated version)
     public static func random() -> UUID {
-        return UUID()
+        var uuid: uuid_t = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        withUnsafeMutablePointer(to: &uuid) {
+            $0.withMemoryRebound(to: UInt8.self, capacity: 16) {
+                uuid_generate_random($0)
+            }
+        }
+
+        return UUID(uuid: uuid)
     }
 }
 

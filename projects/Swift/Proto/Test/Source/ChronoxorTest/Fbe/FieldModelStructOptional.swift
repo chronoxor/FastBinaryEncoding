@@ -1440,9 +1440,9 @@ public class FieldModelStructOptional: FieldModel {
         fbeCurrentSize += f148.fbeSize
 
         if fbeCurrentSize + f149.fbeSize <= fbeStructSize {
-            fbeValue.f149 = f149.get(defaults: Date().timeIntervalSince1970)
+            fbeValue.f149 = f149.get(defaults: Date())
         } else {
-            fbeValue.f149 = Date().timeIntervalSince1970
+            fbeValue.f149 = Date()
         }
         fbeCurrentSize += f149.fbeSize
 

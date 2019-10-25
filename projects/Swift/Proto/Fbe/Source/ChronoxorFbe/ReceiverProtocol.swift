@@ -11,7 +11,6 @@ public protocol ReceiverProtocol: class {
     // Get the bytes buffer
     var buffer: Buffer { get set }
 
-
     // Get the final protocol flag
     var final: Bool { get set }
 
