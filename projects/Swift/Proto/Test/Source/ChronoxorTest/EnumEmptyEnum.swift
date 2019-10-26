@@ -25,16 +25,12 @@ public enum EnumEmptyEnum {
         }
     }
 
-    static func values() -> [EnumEmptyEnum] {
-        return [
-        ]
-    }
+    static let rawValuesMap: [RawValue: EnumEmptyEnum] = {
+        var value = [RawValue: EnumEmptyEnum]()
+        return value
+    }()
 
     static func mapValue(value: Int32) -> EnumEmptyEnum? {
-        var mapping = Dictionary<Int32, EnumEmptyEnum>()
-        for value in values() {
-            mapping[value.rawValue] = value
-        }
-        return mapping[value]
+        return rawValuesMap[value]
     }
 }

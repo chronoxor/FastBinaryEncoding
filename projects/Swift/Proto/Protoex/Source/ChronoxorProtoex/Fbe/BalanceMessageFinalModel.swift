@@ -60,8 +60,6 @@ public class BalanceMessageFinalModel: Model {
     public func deserialize() -> BalanceMessage { var value = BalanceMessage(); _ = deserialize(value: &value); return value }
 
     public func deserialize(value: inout BalanceMessage) -> Int {
-        var valueRef = value
-
         if (buffer.offset + _model.fbeOffset) > buffer.size {
             assertionFailure("Model is broken!")
             return 0
@@ -75,7 +73,7 @@ public class BalanceMessageFinalModel: Model {
         }
 
         var fbeSize = Size()
-        valueRef = _model.get(size: &fbeSize, fbeValue: &valueRef)
+        value = _model.get(size: &fbeSize, fbeValue: &value)
         return 8 + fbeSize.value
     }
 

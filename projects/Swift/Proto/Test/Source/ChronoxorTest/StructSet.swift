@@ -7,13 +7,14 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-open class StructSet: Comparable, Hashable, Codable {
+public struct StructSet: Comparable, Hashable, Codable {
     public var f1: Array<UInt8> = Array()
     public var f2: Array<EnumSimple> = Array()
     public var f3: Array<FlagsSimple> = Array()
     public var f4: Array<StructSimple> = Array()
 
-    public init() {}
+
+    public init() { }
     public init(f1: Array<UInt8>, f2: Array<EnumSimple>, f3: Array<FlagsSimple>, f4: Array<StructSimple>) {
 
         self.f1 = f1
@@ -29,7 +30,7 @@ open class StructSet: Comparable, Hashable, Codable {
         self.f4 = other.f4
     }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         f1 = try container.decode(Array<UInt8>.self, forKey: .f1)
         f2 = try container.decode(Array<ChronoxorTest.EnumSimple>.self, forKey: .f2)
@@ -37,7 +38,7 @@ open class StructSet: Comparable, Hashable, Codable {
         f4 = try container.decode(Array<ChronoxorTest.StructSimple>.self, forKey: .f4)
     }
 
-    open func clone() throws -> StructSet {
+    public func clone() throws -> StructSet {
         // Serialize the struct to the FBE stream
         let writer = StructSetModel()
         try _ = writer.serialize(value: self)
@@ -56,10 +57,10 @@ open class StructSet: Comparable, Hashable, Codable {
         return true
     }
 
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
     }
 
-    open var description: String {
+    public var description: String {
         var sb = String()
         sb.append("StructSet(")
         if true {
@@ -108,7 +109,7 @@ open class StructSet: Comparable, Hashable, Codable {
         case f4
     }
 
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(f1, forKey: .f1)
         try container.encode(f2, forKey: .f2)
@@ -116,11 +117,11 @@ open class StructSet: Comparable, Hashable, Codable {
         try container.encode(f4, forKey: .f4)
     }
 
-    open func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) throws -> StructSet {
+    public static func fromJson(_ json: String) throws -> StructSet {
         return try JSONDecoder().decode(StructSet.self, from: json.data(using: .utf8)!)
     }
 }

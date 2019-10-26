@@ -57,21 +57,19 @@ public class StructSimpleModel: Model {
     // Deserialize the struct value
     public func deserialize() -> StructSimple { var value = StructSimple(); _ = deserialize(value: &value); return value }
     public func deserialize(value: inout StructSimple) -> Int {
-        var valueRef = value
-
         if buffer.offset + model.fbeOffset - 4 > buffer.size {
-            valueRef = StructSimple()
+            value = StructSimple()
             return 0
         }
 
         let fbeFullSize = Int(readUInt32(offset: model.fbeOffset - 4))
         if fbeFullSize < model.fbeSize {
             assertionFailure("Model is broken!")
-            valueRef = StructSimple()
+            value = StructSimple()
             return 0
         }
 
-        valueRef = model.get(fbeValue: &valueRef)
+        value = model.get(fbeValue: &value)
         return fbeFullSize
     }
 

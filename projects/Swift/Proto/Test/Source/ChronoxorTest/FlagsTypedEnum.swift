@@ -123,26 +123,22 @@ public struct FlagsTypedEnum: OptionSet {
         return sb
     }
 
-    public static func values() -> [FlagsTypedEnum] {
-        return [
-            .FLAG_VALUE_0,
-            .FLAG_VALUE_1,
-            .FLAG_VALUE_2,
-            .FLAG_VALUE_3,
-            .FLAG_VALUE_4,
-            .FLAG_VALUE_5,
-            .FLAG_VALUE_6,
-            .FLAG_VALUE_7,
-            .FLAG_VALUE_8,
-            .FLAG_VALUE_9,
-        ]
-    }
+    static let rawValuesMap: [RawValue: FlagsTypedEnum] = {
+        var value = [RawValue: FlagsTypedEnum]()
+        value[FlagsTypedEnum.FLAG_VALUE_0.rawValue] = .FLAG_VALUE_0
+        value[FlagsTypedEnum.FLAG_VALUE_1.rawValue] = .FLAG_VALUE_1
+        value[FlagsTypedEnum.FLAG_VALUE_2.rawValue] = .FLAG_VALUE_2
+        value[FlagsTypedEnum.FLAG_VALUE_3.rawValue] = .FLAG_VALUE_3
+        value[FlagsTypedEnum.FLAG_VALUE_4.rawValue] = .FLAG_VALUE_4
+        value[FlagsTypedEnum.FLAG_VALUE_5.rawValue] = .FLAG_VALUE_5
+        value[FlagsTypedEnum.FLAG_VALUE_6.rawValue] = .FLAG_VALUE_6
+        value[FlagsTypedEnum.FLAG_VALUE_7.rawValue] = .FLAG_VALUE_7
+        value[FlagsTypedEnum.FLAG_VALUE_8.rawValue] = .FLAG_VALUE_8
+        value[FlagsTypedEnum.FLAG_VALUE_9.rawValue] = .FLAG_VALUE_9
+        return value
+    }()
 
     public static func mapValue(value: RawValue) -> FlagsTypedEnum? {
-        var mapping = Dictionary<RawValue, FlagsTypedEnum>()
-        for value in values() {
-            mapping[value.rawValue] = value
-        }
-        return mapping[value]
+        return rawValuesMap[value]
     }
 }

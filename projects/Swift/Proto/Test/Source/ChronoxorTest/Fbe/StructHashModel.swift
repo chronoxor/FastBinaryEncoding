@@ -57,21 +57,19 @@ public class StructHashModel: Model {
     // Deserialize the struct value
     public func deserialize() -> StructHash { var value = StructHash(); _ = deserialize(value: &value); return value }
     public func deserialize(value: inout StructHash) -> Int {
-        var valueRef = value
-
         if buffer.offset + model.fbeOffset - 4 > buffer.size {
-            valueRef = StructHash()
+            value = StructHash()
             return 0
         }
 
         let fbeFullSize = Int(readUInt32(offset: model.fbeOffset - 4))
         if fbeFullSize < model.fbeSize {
             assertionFailure("Model is broken!")
-            valueRef = StructHash()
+            value = StructHash()
             return 0
         }
 
-        valueRef = model.get(fbeValue: &valueRef)
+        value = model.get(fbeValue: &value)
         return fbeFullSize
     }
 

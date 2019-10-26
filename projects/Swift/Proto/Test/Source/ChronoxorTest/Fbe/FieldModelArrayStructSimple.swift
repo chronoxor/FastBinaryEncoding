@@ -90,7 +90,7 @@ class FieldModelArrayStructSimple: FieldModel {
             return
         }
 
-        //values.ensureCapacity(fbeVectorSize.toInt())
+        values.reserveCapacity(fbeVectorSize)
 
         let fbeModel = getItem(index: 0)
         var i = size

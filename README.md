@@ -28,7 +28,7 @@ Typical usage workflow is the following:
 1. [Create domain model](#create-domain-model) using base types, enums,
    flags and structs
 2. [Generate domain model](#generate-domain-model) for any supported
-   programming languages (C++, C#, Go, Java, JavaScript, Kotlin, Python, Ruby)
+   programming languages (C++, C#, Go, Java, JavaScript, Kotlin, Python, Ruby, Swift)
 3. [Build domain model](#build-domain-model) library
 4. [Serialize/Deserialize](#fbe-serialization) objects from the domain model
    in unified, fast and compact FastBinaryEncoding (FBE) format
@@ -45,6 +45,7 @@ Sample projects:
 * [Kotlin sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Kotlin)
 * [Python sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Python)
 * [Ruby sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Ruby)
+* [Swift sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Swift)
 
 # Contents
   * [Features](#features)
@@ -69,7 +70,7 @@ Sample projects:
 
 # Features
 * Cross platform (Linux, OSX, Windows)
-* [Generators for C++, C#, Go, Java, JavaScript, Kotlin, Python, Ruby](#generate-domain-model)
+* [Generators for C++, C#, Go, Java, JavaScript, Kotlin, Python, Ruby, Swift](#generate-domain-model)
 * [Fast binary encoding format](documents/FBE.md)
 * [Supported base types (byte, bool, char, wchar, int8, int16, int32, int64, float, double)](documents/FBE.md#base-types)
 * [Supported complex types (bytes, decimal, string, timestamp, uuid)](documents/FBE.md#complex-types)
@@ -252,6 +253,7 @@ Options:
   --kotlin              Generate Kotlin code
   --python              Generate Python code
   --ruby                Generate Ruby code
+  --swift               Generate Swift code
   --final               Generate Final serialization code
   --json                Generate JSON serialization code
   --proto               Generate Sender/Receiver protocol code
@@ -309,6 +311,11 @@ There are several issues and dependencies that should be mentioned:
 gem install json
 gem install uuidtools
 ```
+
+### Swift
+* Swift domain model is implemented using  uses [SwiftPM](https://github.com/apple/swift-package-manager) as its build tool;
+* JSON serialization is implemented using [Codable](https://developer.apple.com/documentation/swift/codable) protocol;
+* JSON serialization of set, map and hash types is limited to key with string type.
 
 # FBE serialization
 Fast Binary Encoding (FBE) is a fast and compact binary format of representing
@@ -960,6 +967,7 @@ account.orders.emplace_back(3, "EURUSD", OrderSide::buy, OrderType::stop, 1.5, 1
 * [Kotlin benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Kotlin/src/benchmarks) results were taken using [JMH library](http://openjdk.java.net/projects/code-tools/jmh)
 * [Python benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Python/benchmarks) results were taken using [timeit module](https://docs.python.org/3/library/timeit.html)
 * [Ruby benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Ruby/benchmarks) results were taken using [Benchmark module](http://ruby-doc.org/stdlib/libdoc/benchmark/rdoc/Benchmark.html)
+* [Swift benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Swift/Tests/Benchmark) results were taken using [XCTest framework](https://developer.apple.com/documentation/xctest/xctestcase/1496290-measure)
 
 ## Benchmark 1: Serialization
 Serialization benchmark C++ code:
@@ -1002,9 +1010,9 @@ Serialization benchmark results:
 | Ruby Win64               |    252 bytes |       23 013 ops/s |          43 453 ns |
 | Ruby Win64 (Final)       |    152 bytes |       33 361 ops/s |          29 975 ns |
 | Ruby Win64 (JSON)        |    353 bytes |       50 842 ops/s |          19 669 ns |
-| Swift MacOS              |    252 bytes |       72 395 ops/s |          13 813 ns |
-| Swift MacOS (Final)      |    152 bytes |       95 147 ops/s |          10 510 ns |
-| Swift MacOS (JSON)       |    353 bytes |       18 534 ops/s |          53 953 ns |
+| Swift macOS              |    252 bytes |       74 002 ops/s |          13 513 ns |
+| Swift macOS (Final)      |    152 bytes |      100 755 ops/s |           9 925 ns |
+| Swift macOS (JSON)       |    353 bytes |       18 534 ops/s |          53 953 ns |
 
 ## Benchmark 2: Deserialization
 Deserialization benchmark C++ code:
@@ -1044,9 +1052,9 @@ Deserialization benchmark results:
 | Ruby Win64               |    252 bytes |         24 351 ops/s |            41 066 ns |
 | Ruby Win64 (Final)       |    152 bytes |         33 555 ops/s |            29 802 ns |
 | Ruby Win64 (JSON)        |    353 bytes |         42 860 ops/s |            23 331 ns |
-| Swift MacOS              |    252 bytes |         50 842 ops/s |            25 625 ns |
-| Swift MacOS (Final)      |    152 bytes |         50 842 ops/s |            20 820 ns |
-| Swift MacOS (JSON)       |    353 bytes |         50 842 ops/s |            68 268 ns |
+| Swift macOS              |    252 bytes |         81 221 ops/s |            12 312 ns |
+| Swift macOS (Final)      |    152 bytes |         96 993 ops/s |            10 310 ns |
+| Swift macOS (JSON)       |    353 bytes |         17 077 ops/s |            58 558 ns |
 
 ## Benchmark 3: Verify
 Verify benchmark C++ code:
@@ -1078,5 +1086,5 @@ Verify benchmark results:
 | Python Win64 (Final)     |    152 bytes |     23 590 ops/s |   42 391 ns |
 | Ruby Win64               |    252 bytes |     57 201 ops/s |   17 482 ns |
 | Ruby Win64 (Final)       |    152 bytes |     74 262 ops/s |   13 466 ns |
-| Swift MacOS              |    252 bytes |     50 842 ops/s |    7 177 ns |
-| Swift MacOS (Final)      |    152 bytes |     50 842 ops/s |    4 564 ns |
+| Swift macOS              |    252 bytes |    148 010 ops/s |    6 756 ns |
+| Swift macOS (Final)      |    152 bytes |    219 106 ops/s |    4 564 ns |

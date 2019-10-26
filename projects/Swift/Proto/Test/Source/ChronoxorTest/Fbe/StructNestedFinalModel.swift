@@ -60,8 +60,6 @@ public class StructNestedFinalModel: Model {
     public func deserialize() -> StructNested { var value = StructNested(); _ = deserialize(value: &value); return value }
 
     public func deserialize(value: inout StructNested) -> Int {
-        var valueRef = value
-
         if (buffer.offset + _model.fbeOffset) > buffer.size {
             assertionFailure("Model is broken!")
             return 0
@@ -75,7 +73,7 @@ public class StructNestedFinalModel: Model {
         }
 
         var fbeSize = Size()
-        valueRef = _model.get(size: &fbeSize, fbeValue: &valueRef)
+        value = _model.get(size: &fbeSize, fbeValue: &value)
         return 8 + fbeSize.value
     }
 

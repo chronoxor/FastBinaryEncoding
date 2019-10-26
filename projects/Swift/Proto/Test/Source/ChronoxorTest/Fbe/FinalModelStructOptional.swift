@@ -160,7 +160,7 @@ public class FinalModelStructOptional: FinalModel {
     // Get the allocation size
     public func fbeAllocationSize(value fbeValue: StructOptional) -> Int {
         return 0
-            + parent.fbeAllocationSize(value: fbeValue)
+            + parent.fbeAllocationSize(value: fbeValue.parent)
             + f100.fbeAllocationSize(value: fbeValue.f100)
             + f101.fbeAllocationSize(value: fbeValue.f101)
             + f102.fbeAllocationSize(value: fbeValue.f102)
@@ -735,8 +735,7 @@ public class FinalModelStructOptional: FinalModel {
         var fbeFieldSize = Size()
 
         parent.fbeOffset = fbeCurrentOffset
-        var fbeValueBase = fbeValue as StructSimple
-        fbeFieldSize.value = parent.getFields(fbeValue: &fbeValueBase)
+        fbeFieldSize.value = parent.getFields(fbeValue: &fbeValue.parent)
         fbeCurrentOffset += fbeFieldSize.value
         fbeCurrentSize += fbeFieldSize.value
 
@@ -1088,7 +1087,7 @@ public class FinalModelStructOptional: FinalModel {
         let fbeFieldSize = Size()
 
         parent.fbeOffset = fbeCurrentOffset
-        fbeFieldSize.value = try parent.setFields(fbeValue: fbeValue)
+        fbeFieldSize.value = try parent.setFields(fbeValue: fbeValue.parent)
         fbeCurrentOffset += fbeFieldSize.value
         fbeCurrentSize += fbeFieldSize.value
 

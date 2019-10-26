@@ -43,22 +43,18 @@ public enum EnumInt8Enum {
         }
     }
 
-    static func values() -> [EnumInt8Enum] {
-        return [
-            EnumInt8Enum.ENUM_VALUE_0,
-            EnumInt8Enum.ENUM_VALUE_1,
-            EnumInt8Enum.ENUM_VALUE_2,
-            EnumInt8Enum.ENUM_VALUE_3,
-            EnumInt8Enum.ENUM_VALUE_4,
-            EnumInt8Enum.ENUM_VALUE_5,
-        ]
-    }
+    static let rawValuesMap: [RawValue: EnumInt8Enum] = {
+        var value = [RawValue: EnumInt8Enum]()
+        value[EnumInt8Enum.ENUM_VALUE_0.rawValue] = .ENUM_VALUE_0
+        value[EnumInt8Enum.ENUM_VALUE_1.rawValue] = .ENUM_VALUE_1
+        value[EnumInt8Enum.ENUM_VALUE_2.rawValue] = .ENUM_VALUE_2
+        value[EnumInt8Enum.ENUM_VALUE_3.rawValue] = .ENUM_VALUE_3
+        value[EnumInt8Enum.ENUM_VALUE_4.rawValue] = .ENUM_VALUE_4
+        value[EnumInt8Enum.ENUM_VALUE_5.rawValue] = .ENUM_VALUE_5
+        return value
+    }()
 
     static func mapValue(value: Int8) -> EnumInt8Enum? {
-        var mapping = Dictionary<Int8, EnumInt8Enum>()
-        for value in values() {
-            mapping[value.rawValue] = value
-        }
-        return mapping[value]
+        return rawValuesMap[value]
     }
 }

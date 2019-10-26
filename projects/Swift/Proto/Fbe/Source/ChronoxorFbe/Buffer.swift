@@ -336,22 +336,27 @@ public extension Buffer {
     }
 
     class func readUUID(buffer: Data, offset: Int) -> UUID {
-        var output = ""
+        let bytes = readBytes(buffer: buffer, offset: offset, size: 16)
+        let uuid: uuid_t = (
+            bytes[15],
+            bytes[14],
+            bytes[13],
+            bytes[12],
+            bytes[11],
+            bytes[10],
+            bytes[9],
+            bytes[8],
+            bytes[7],
+            bytes[6],
+            bytes[5],
+            bytes[4],
+            bytes[3],
+            bytes[2],
+            bytes[1],
+            bytes[0]
+        )
 
-        for (index, byte) in readBytes(buffer: buffer, offset: offset, size: 16).reversed().enumerated() {
-            let nextCharacter = String(byte, radix: 16, uppercase: true)
-            if nextCharacter.count == 2 {
-                output += nextCharacter
-            } else {
-                output += "0" + nextCharacter
-            }
-
-            if [3, 5, 7, 9].contains(index) {
-                output += "-"
-            }
-        }
-
-        return UUID(uuidString: output) ?? UUID()
+        return UUID(uuid: uuid)
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Bool) {

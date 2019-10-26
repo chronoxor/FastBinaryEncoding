@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-open class StructNested: StructOptional {
+public struct StructNested: Comparable, Hashable, Codable {
     public var f1000: EnumSimple = ChronoxorTest.EnumSimple()
     public var f1001: EnumSimple? = nil
     public var f1002: EnumTyped = ChronoxorTest.EnumTyped.ENUM_VALUE_2
@@ -21,9 +21,11 @@ open class StructNested: StructOptional {
     public var f1010: StructOptional = ChronoxorTest.StructOptional()
     public var f1011: StructOptional? = nil
 
-    public override init() { super.init() }
+    public var parent: StructOptional
+
+    public init() { parent = StructOptional() }
     public init(parent: StructOptional, f1000: EnumSimple, f1001: EnumSimple?, f1002: EnumTyped, f1003: EnumTyped?, f1004: FlagsSimple, f1005: FlagsSimple?, f1006: FlagsTyped, f1007: FlagsTyped?, f1008: StructSimple, f1009: StructSimple?, f1010: StructOptional, f1011: StructOptional?) {
-        super.init(other: parent)
+        self.parent = parent
 
         self.f1000 = f1000
         self.f1001 = f1001
@@ -40,7 +42,7 @@ open class StructNested: StructOptional {
     }
 
     public init(other: StructNested) {
-        super.init(other: other)
+        parent = other.parent
         self.f1000 = other.f1000
         self.f1001 = other.f1001
         self.f1002 = other.f1002
@@ -55,8 +57,8 @@ open class StructNested: StructOptional {
         self.f1011 = other.f1011
     }
 
-    public required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
+    public init(from decoder: Decoder) throws {
+        parent = try StructOptional(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
         f1000 = try container.decode(ChronoxorTest.EnumSimple.self, forKey: .f1000)
         f1001 = try container.decode(ChronoxorTest.EnumSimple?.self, forKey: .f1001)
@@ -72,7 +74,7 @@ open class StructNested: StructOptional {
         f1011 = try container.decode(ChronoxorTest.StructOptional?.self, forKey: .f1011)
     }
 
-    open override func clone() throws -> StructNested {
+    public func clone() throws -> StructNested {
         // Serialize the struct to the FBE stream
         let writer = StructNestedModel()
         try _ = writer.serialize(value: self)
@@ -91,14 +93,14 @@ open class StructNested: StructOptional {
         return true
     }
 
-    open override func hash(into hasher: inout Hasher) {
-        super.hash(into: &hasher)
+    public func hash(into hasher: inout Hasher) {
+        parent.hash(into: &hasher)
     }
 
-    open override var description: String {
+    public var description: String {
         var sb = String()
         sb.append("StructNested(")
-        sb.append(super.description)
+        sb.append(parent.description)
         sb.append(",f1000="); sb.append(f1000.description)
         sb.append(",f1001=");  if let f1001 = f1001 { sb.append(f1001.description) } else { sb.append("null") }
         sb.append(",f1002="); sb.append(f1002.description)
@@ -129,8 +131,8 @@ open class StructNested: StructOptional {
         case f1011
     }
 
-    open override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
+    public func encode(to encoder: Encoder) throws {
+        try parent.encode(to: encoder)
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(f1000, forKey: .f1000)
         try container.encode(f1001, forKey: .f1001)
@@ -146,11 +148,11 @@ open class StructNested: StructOptional {
         try container.encode(f1011, forKey: .f1011)
     }
 
-    open override func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open override class func fromJson(_ json: String) throws -> StructNested {
+    public static func fromJson(_ json: String) throws -> StructNested {
         return try JSONDecoder().decode(StructNested.self, from: json.data(using: .utf8)!)
     }
 }

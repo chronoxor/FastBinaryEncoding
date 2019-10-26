@@ -582,22 +582,27 @@ public extension Buffer {
     }
 
     class func readUUID(buffer: Data, offset: Int) -> UUID {
-        var output = ""
+        let bytes = readBytes(buffer: buffer, offset: offset, size: 16)
+        let uuid: uuid_t = (
+            bytes[15],
+            bytes[14],
+            bytes[13],
+            bytes[12],
+            bytes[11],
+            bytes[10],
+            bytes[9],
+            bytes[8],
+            bytes[7],
+            bytes[6],
+            bytes[5],
+            bytes[4],
+            bytes[3],
+            bytes[2],
+            bytes[1],
+            bytes[0]
+        )
 
-        for (index, byte) in readBytes(buffer: buffer, offset: offset, size: 16).reversed().enumerated() {
-            let nextCharacter = String(byte, radix: 16, uppercase: true)
-            if nextCharacter.count == 2 {
-                output += nextCharacter
-            } else {
-                output += "0" + nextCharacter
-            }
-
-            if [3, 5, 7, 9].contains(index) {
-                output += "-"
-            }
-        }
-
-        return UUID(uuidString: output) ?? UUID()
+        return UUID(uuid: uuid)
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Bool) {
@@ -1771,7 +1776,7 @@ class FieldModelArray_NAME_: FieldModel {
             return
         }
 
-        //values.ensureCapacity(fbeVectorSize.toInt())
+        values.reserveCapacity(fbeVectorSize)
 
         let fbeModel = getItem(index: 0)
         var i = size
@@ -1975,7 +1980,7 @@ class FieldModelVector_NAME_: FieldModel {
             return
         }
 
-        //values.ensureCapacity(fbeVectorSize.toInt())
+        values.reserveCapacity(fbeVectorSize)
 
         let fbeModel = getItem(index: 0)
         var i = fbeVectorSize
@@ -2186,7 +2191,7 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
             return
         }
 
-        //values.ensureCapacity(fbeVectorSize.toInt())
+        values.reserveCapacity(fbeMapSize)
 
         let fbeModel = getItem(index: 0)
         var i = fbeMapSize
@@ -3339,7 +3344,7 @@ class FinalModelVector_NAME_: FinalModel {
             return 4
         }
 
-        //values.ensureCapacity(fbeVectorSize.toInt())
+        values.reserveCapacity(fbeVectorSize)
 
         var size: Int = 4
         var offset = Size()
@@ -4611,28 +4616,20 @@ void GeneratorSwift::GenerateEnum(const std::shared_ptr<Package>& p, const std::
     WriteLineIndent("}");
 
     WriteLine();
-    WriteLineIndent("static func values() -> [" + enum_name + "] {");
+    WriteLineIndent("static let rawValuesMap: [RawValue: " + enum_name + "] = {");
     Indent(1);
-    WriteLineIndent("return [");
-    Indent(1);
+    WriteLineIndent("var value = [RawValue: " + enum_name + "]()");
     for (const auto& value : e->body->values)
-        WriteLineIndent(enum_name + "." + *value->name + ",");
+        WriteLineIndent("value[" + enum_name + "." + *value->name + ".rawValue] = ." + *value->name);
+    WriteLineIndent("return value");
     Indent(-1);
-    WriteLineIndent("]");
-    Indent(-1);
-    WriteLineIndent("}");
+    WriteLineIndent("}()");
 
     // Generate enum mapping
     WriteLine();
     WriteLineIndent("static func mapValue(value: " + enum_mapping_type + ") -> " + enum_name + "? {");
     Indent(1);
-    WriteLineIndent("var mapping = Dictionary<" + enum_mapping_type + ", " + enum_name + ">()");
-    WriteLineIndent("for value in values() {");
-    Indent(1);
-    WriteLineIndent("mapping[value.rawValue] = value");
-    Indent(-1);
-    WriteLineIndent("}");
-    WriteLineIndent("return mapping[value]");
+    WriteLineIndent("return rawValuesMap[value]");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4679,9 +4676,9 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
     // Generate enum class body
     WriteLine();
     if (JSON())
-        WriteLineIndent("public class " + enum_name + ": Comparable, Hashable, Codable {");
+        WriteLineIndent("public struct " + enum_name + ": Comparable, Hashable, Codable {");
     else
-        WriteLineIndent("public class " + enum_name + ": Comparable, Hashable {");
+        WriteLineIndent("public struct " + enum_name + ": Comparable, Hashable {");
     Indent(1);
     WriteLineIndent("typealias RawValue = " + enum_base_type);
 
@@ -4693,7 +4690,7 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
     }
 
     // Generate enum class value
-    WriteLineIndent("var value: " + enum_type_name + "?" + " = " + enum_type_name + ".values().first");
+    WriteLineIndent("var value: " + enum_type_name + "?");
     WriteLine();
 
     // Generate enum raw value
@@ -4701,7 +4698,7 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
     WriteLine();
 
     // Generate enum class constructors
-    WriteLineIndent("public init() {}");
+    WriteLineIndent("public init() { setDefault() }");
     WriteLineIndent("public init(value: " + enum_base_type + ") { setEnum(value: value) }");
     WriteLineIndent("public init(value: " + enum_type_name + ") { setEnum(value: value) }");
     WriteLineIndent("public init(value: " + enum_name + ") { setEnum(value: value) }");
@@ -4709,7 +4706,7 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
 
     if (JSON())
     {
-        WriteLineIndent("public required init(from decoder: Decoder) throws {");
+        WriteLineIndent("public init(from decoder: Decoder) throws {");
         Indent(1);
         WriteLineIndent("let container = try decoder.singleValueContainer()");
         WriteLineIndent("setEnum(value: try container.decode(RawValue.self))");
@@ -4718,13 +4715,13 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
     }
 
     // Generate enum class setDefault() method
-    WriteLineIndent("public func setDefault() { setEnum(value: NSNumber(value: 0)" + enum_to + ") }");
+    WriteLineIndent("public mutating func setDefault() { setEnum(value: NSNumber(value: 0)" + enum_to + ") }");
     WriteLine();
 
     // Generate enum class setEnum() methods
-    WriteLineIndent("public func setEnum(value: " + enum_base_type + ") { self.value = " + enum_type_name + ".mapValue(value: value) }");
-    WriteLineIndent("public func setEnum(value: " + enum_type_name + ") { self.value = value }");
-    WriteLineIndent("public func setEnum(value: " + enum_name + ") { self.value = value.value }");
+    WriteLineIndent("public mutating func setEnum(value: " + enum_base_type + ") { self.value = " + enum_type_name + ".mapValue(value: value) }");
+    WriteLineIndent("public mutating func setEnum(value: " + enum_type_name + ") { self.value = value }");
+    WriteLineIndent("public mutating func setEnum(value: " + enum_name + ") { self.value = value.value }");
 
     // Generate enum class compareTo() method
     WriteLine();
@@ -4771,7 +4768,7 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
 
     if (JSON())
     {
-        WriteLineIndent("open func encode(to encoder: Encoder) throws {");
+        WriteLineIndent("public func encode(to encoder: Encoder) throws {");
         Indent(1);
         WriteLineIndent("var container = encoder.singleValueContainer()");
         WriteLineIndent("try container.encode(raw)");
@@ -4786,7 +4783,7 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
         WriteLineIndent("}");
 
         WriteLine();
-        WriteLineIndent("public class func fromJson(_ json: String) throws -> " + enum_name + " {");
+        WriteLineIndent("public static func fromJson(_ json: String) throws -> " + enum_name + " {");
         Indent(1);
         WriteLineIndent("return try JSONDecoder().decode(" + enum_name + ".self, from: json.data(using: .utf8)!)");
         Indent(-1);
@@ -4933,36 +4930,28 @@ void GeneratorSwift::GenerateFlags(const std::shared_ptr<Package>& p, const std:
 
     // Generate flags values() method
     WriteLine();
-    WriteLineIndent("public static func values() -> [" + flags_name + "] {");
+    WriteLineIndent("static let rawValuesMap: [RawValue: " + flags_name + "] = {");
     Indent(1);
-    WriteLineIndent("return [");
-    Indent(1);
+    WriteLineIndent("var value = [RawValue: " + flags_name + "]()");
     if (f->body)
     {
         for (const auto& value : f->body->values)
         {
-            WriteIndent("." + *value->name + ",");
+            WriteIndent("value[" + flags_name + "." + *value->name + ".rawValue] = ." + *value->name);
             WriteLine();
         }
     }
     else
-        WriteIndent(".unknown");
+        WriteIndent("value[" +flags_name + ".unknown.rawValue] = .unknown");
+        WriteLineIndent("return value");
     Indent(-1);
-    WriteLineIndent("]");
-    Indent(-1);
-    WriteLineIndent("}");
+    WriteLineIndent("}()");
 
     // Generate flags mapValue() method
     WriteLine();
     WriteLineIndent("public static func mapValue(value: RawValue) -> " + flags_name + "? {");
     Indent(1);
-    WriteLineIndent("var mapping = Dictionary<RawValue, " + flags_name + ">()");
-    WriteLineIndent("for value in values() {");
-    Indent(1);
-    WriteLineIndent("mapping[value.rawValue] = value");
-    Indent(-1);
-    WriteLineIndent("}");
-    WriteLineIndent("return mapping[value]");
+    WriteLineIndent("return rawValuesMap[value]");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5010,9 +4999,9 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
     // Generate flags class body
     WriteLine();
     if (JSON())
-        WriteLineIndent("public class " + flags_name + ": Comparable, Hashable, Codable {");
+        WriteLineIndent("public struct " + flags_name + ": Comparable, Hashable, Codable {");
     else
-        WriteLineIndent("public class " + flags_name + ": Comparable, Hashable {");
+        WriteLineIndent("public struct " + flags_name + ": Comparable, Hashable {");
     Indent(1);
     WriteLineIndent("typealias RawValue = " + flags_base_type);
     if (f->body)
@@ -5047,7 +5036,7 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
     }
 
     // Generate flags class value
-    WriteLineIndent("public private(set) var value: " + flags_type_name + "?" + " = " + flags_type_name + ".values().first");
+    WriteLineIndent("public private(set) var value: " + flags_type_name + "?");
     WriteLine();
 
     // Generate flags raw value
@@ -5055,7 +5044,7 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
     WriteLine();
 
     // Generate flags class constructors
-    WriteLineIndent("public init() { raw = value!.rawValue }");
+    WriteLineIndent("public init() { setDefaults() }");
     WriteLineIndent("public init(value: " + flags_base_type + ") { setEnum(value: value) }");
     WriteLineIndent("public init(value: " + flags_type_name + ") { setEnum(value: value) }");
     WriteLineIndent("public init(value: " + flags_name + ") { setEnum(value: value) }");
@@ -5063,7 +5052,7 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
     if (JSON())
     {
         WriteLine();
-        WriteLineIndent("public required init(from decoder: Decoder) throws {");
+        WriteLineIndent("public init(from decoder: Decoder) throws {");
         Indent(1);
         WriteLineIndent("let container = try decoder.singleValueContainer()");
         WriteLineIndent("setEnum(value: try container.decode(RawValue.self))");
@@ -5073,13 +5062,13 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
 
     // Generate flags class setDefault() method
     WriteLine();
-    WriteLineIndent("public func setDefaults() { setEnum(value: 0) }");
+    WriteLineIndent("public mutating func setDefaults() { setEnum(value: 0) }");
     WriteLine();
 
     // Generate flags class setEnum() methods
-    WriteLineIndent("public func setEnum(value: " + flags_base_type + ") { self.raw = value; self.value = " + flags_type_name + ".mapValue(value: value) }");
-    WriteLineIndent("public func setEnum(value: " + flags_type_name + ") { self.raw = value.rawValue; self.value = value }");
-    WriteLineIndent("public func setEnum(value: " + flags_name + ") { self.raw = value.raw; self.value = value.value }");
+    WriteLineIndent("public mutating func setEnum(value: " + flags_base_type + ") { self.raw = value; self.value = " + flags_type_name + ".mapValue(value: value) }");
+    WriteLineIndent("public mutating func setEnum(value: " + flags_type_name + ") { self.raw = value.rawValue; self.value = value }");
+    WriteLineIndent("public mutating func setEnum(value: " + flags_name + ") { self.raw = value.raw; self.value = value.value }");
 
     // Generate flags class hasFlags() methods
     WriteLine();
@@ -5089,15 +5078,15 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
 
     // Generate flags class setFlags() methods
     WriteLine();
-    WriteLineIndent("public func setFlags(flags: " + flags_base_type + ") -> " + flags_name + " { setEnum(value: NSNumber(value: NSNumber(value: raw)" + flags_int + " | NSNumber(value: flags)" + flags_int + ")" + flags_to + "); return self }");
-    WriteLineIndent("public func setFlags(flags: " + flags_type_name + ") -> " + flags_name + " { _ = setFlags(flags: flags.rawValue); return self }");
-    WriteLineIndent("public func setFlags(flags: " + flags_name + ") -> " + flags_name + " { _ = setFlags(flags: flags.raw); return self }");
+    WriteLineIndent("public mutating func setFlags(flags: " + flags_base_type + ") -> " + flags_name + " { setEnum(value: NSNumber(value: NSNumber(value: raw)" + flags_int + " | NSNumber(value: flags)" + flags_int + ")" + flags_to + "); return self }");
+    WriteLineIndent("public mutating func setFlags(flags: " + flags_type_name + ") -> " + flags_name + " { _ = setFlags(flags: flags.rawValue); return self }");
+    WriteLineIndent("public mutating func setFlags(flags: " + flags_name + ") -> " + flags_name + " { _ = setFlags(flags: flags.raw); return self }");
 
     // Generate flags class removeFlags() methods
     WriteLine();
-    WriteLineIndent("public func removeFlags(flags: " + flags_base_type + ") -> " + flags_name + " { setEnum(value: NSNumber(value: NSNumber(value: raw)" + flags_int + " | NSNumber(value: flags)" + flags_int + ".byteSwapped)" + flags_to + "); return self }");
-    WriteLineIndent("public func removeFlags(flags: " + flags_type_name + ") -> " + flags_name + " { _ = removeFlags(flags: flags.rawValue); return self }");
-    WriteLineIndent("public func removeFlags(flags: " + flags_name + ") -> " + flags_name + " { _ = removeFlags(flags: flags.raw); return self }");
+    WriteLineIndent("public mutating func removeFlags(flags: " + flags_base_type + ") -> " + flags_name + " { setEnum(value: NSNumber(value: NSNumber(value: raw)" + flags_int + " | NSNumber(value: flags)" + flags_int + ".byteSwapped)" + flags_to + "); return self }");
+    WriteLineIndent("public mutating func removeFlags(flags: " + flags_type_name + ") -> " + flags_name + " { _ = removeFlags(flags: flags.rawValue); return self }");
+    WriteLineIndent("public mutating func removeFlags(flags: " + flags_name + ") -> " + flags_name + " { _ = removeFlags(flags: flags.raw); return self }");
 
     // Generate flags class getAllSet(), getNoneSet() and getCurrentSet() methods
     WriteLine();
@@ -5153,7 +5142,7 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
 
     if (JSON())
     {
-        WriteLineIndent("open func encode(to encoder: Encoder) throws {");
+        WriteLineIndent("public func encode(to encoder: Encoder) throws {");
         Indent(1);
         WriteLineIndent("var container = encoder.singleValueContainer()");
         WriteLineIndent("try container.encode(raw)");
@@ -5168,7 +5157,7 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
         WriteLineIndent("}");
 
         WriteLine();
-        WriteLineIndent("public class func fromJson(_ json: String) throws -> " + flags_name + " {");
+        WriteLineIndent("public static func fromJson(_ json: String) throws -> " + flags_name + " {");
         Indent(1);
         WriteLineIndent("return try JSONDecoder().decode(" + flags_name + ".self, from: json.data(using: .utf8)!)");
         Indent(-1);
@@ -5203,10 +5192,8 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
 
     // Generate struct begin
     WriteLine();
-    WriteIndent("open class " + *s->name);
-    if (s->base && !s->base->empty())
-        Write(": " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false));
-    else if (JSON())
+    WriteIndent("public struct " + *s->name);
+    if (JSON())
         Write(": Comparable, Hashable, Codable");
     else
         Write(": Comparable, Hashable");
@@ -5225,11 +5212,15 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
         WriteLine();
     }
 
+    if (s->base && !s->base->empty())
+        WriteLineIndent("public var parent: " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false));
+
+    WriteLine();
     // Generate struct default constructor
     if (s->base && !s->base->empty())
-        WriteLineIndent("public override init() { super.init() }");
+        WriteLineIndent("public init() { parent = " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false) + "() }");
     else
-        WriteLineIndent("public init() {}");
+        WriteLineIndent("public init() { }");
 
     // Generate struct initialization constructor
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
@@ -5253,7 +5244,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
         WriteLine();
         Indent(1);
         if (s->base && !s->base->empty())
-            WriteLineIndent("super.init(other: parent)");
+            WriteLineIndent("self.parent = parent");
         WriteLine();
         if (s->body)
             for (const auto& field : s->body->fields)
@@ -5267,7 +5258,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     WriteLineIndent("public init(other: " + *s->name + ") {");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("super.init(other: other)");
+        WriteLineIndent("parent = other.parent");
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("self." + *field->name + " = other." + *field->name);
@@ -5278,10 +5269,10 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     if (JSON())
     {
         WriteLine();
-        WriteLineIndent("public required init(from decoder: Decoder) throws {");
+        WriteLineIndent("public init(from decoder: Decoder) throws {");
         Indent(1);
         if (s->base && !s->base->empty())
-            WriteLineIndent("try super.init(from: decoder)");
+            WriteLineIndent("parent = try " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false) + "(from: decoder)");
 
         WriteLineIndent("let container = try decoder.container(keyedBy: CodingKeys.self)");
         if (s->body)
@@ -5322,10 +5313,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
 
     // Generate struct clone() method
     WriteLine();
-    if (s->base && !s->base->empty())
-        WriteLineIndent("open override func clone() throws -> " + *s->name + " {");
-    else
-        WriteLineIndent("open func clone() throws -> " + *s->name + " {");
+    WriteLineIndent("public func clone() throws -> " + *s->name + " {");
     Indent(1);
     WriteLineIndent("// Serialize the struct to the FBE stream");
     WriteLineIndent("let writer = " + *s->name + "Model()");
@@ -5364,13 +5352,10 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
 
     // Generate struct hashCode() method
     WriteLine();
-    if (s->base && !s->base->empty())
-        WriteLineIndent("open override func hash(into hasher: inout Hasher) {");
-    else
-        WriteLineIndent("open func hash(into hasher: inout Hasher) {");
+    WriteLineIndent("public func hash(into hasher: inout Hasher) {");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("super.hash(into: &hasher)");
+        WriteLineIndent("parent.hash(into: &hasher)");
     if (s->body)
         for (const auto& field : s->body->fields)
             if (field->keys)
@@ -5380,17 +5365,14 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
 
     // Generate struct description method
     WriteLine();
-    if (s->base && !s->base->empty())
-        WriteLineIndent("open override var description: String {");
-    else
-        WriteLineIndent("open var description: String {");
+    WriteLineIndent("public var description: String {");
     Indent(1);
     WriteLineIndent("var sb = String()");
     WriteLineIndent("sb.append(\"" + *s->name + "(\")");
     first = true;
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("sb.append(super.description)");
+        WriteLineIndent("sb.append(parent.description)");
         first = false;
     }
     if (s->body)
@@ -5512,13 +5494,10 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
         WriteLineIndent("}");
 
         WriteLine();
-        if (s->base && !s->base->empty())
-            WriteLineIndent("open override func encode(to encoder: Encoder) throws {");
-        else
-            WriteLineIndent("open func encode(to encoder: Encoder) throws {");
+        WriteLineIndent("public func encode(to encoder: Encoder) throws {");
         Indent(1);
         if (s->base && !s->base->empty())
-            WriteLineIndent("try super.encode(to: encoder)");
+            WriteLineIndent("try parent.encode(to: encoder)");
         WriteLineIndent("var container = encoder.container(keyedBy: CodingKeys.self)");
         if (s->body && !s->body->fields.empty())
         {
@@ -5546,20 +5525,14 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
         WriteLineIndent("}");
 
         WriteLine();
-        if (s->base && !s->base->empty())
-            WriteLineIndent("open override func toJson() throws -> String {");
-        else
-            WriteLineIndent("open func toJson() throws -> String {");
+        WriteLineIndent("public func toJson() throws -> String {");
         Indent(1);
         WriteLineIndent("return String(data: try JSONEncoder().encode(self), encoding: .utf8)!");
         Indent(-1);
         WriteLineIndent("}");
 
         WriteLine();
-        if (s->base && !s->base->empty())
-            WriteLineIndent("open override class func fromJson(_ json: String) throws -> " + *s->name + " {");
-        else
-            WriteLineIndent("open class func fromJson(_ json: String) throws -> " + *s->name + " {");
+        WriteLineIndent("public static func fromJson(_ json: String) throws -> " + *s->name + " {");
         Indent(1);
         WriteLineIndent("return try JSONDecoder().decode(" + *s->name + ".self, from: json.data(using: .utf8)!)");
         Indent(-1);
@@ -5946,8 +5919,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
             WriteLine();
             WriteLineIndent("if fbeCurrentSize + parent.fbeBody - 4 - 4 <= fbeStructSize {");
             Indent(1);
-            WriteLineIndent("var fbeValueBase = fbeValue as " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false));
-            WriteLineIndent("parent.getFields(fbeValue: &fbeValueBase, fbeStructSize: fbeStructSize)");
+            WriteLineIndent("parent.getFields(fbeValue: &fbeValue.parent, fbeStructSize: fbeStructSize)");
             Indent(-1);
             WriteLineIndent("}");
             WriteLineIndent("fbeCurrentSize += parent.fbeBody - 4 - 4");
@@ -6043,7 +6015,7 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
         if (s->base && !s->base->empty())
-            WriteLineIndent("try parent.setFields(fbeValue: fbeValue)");
+            WriteLineIndent("try parent.setFields(fbeValue: fbeValue.parent)");
         if (s->body)
             for (const auto& field : s->body->fields)
                 WriteLineIndent("try " + *field->name + ".set(value: fbeValue." + *field->name + ")");
@@ -6167,11 +6139,9 @@ void GeneratorSwift::GenerateStructModel(const std::shared_ptr<Package>& p, cons
     WriteLineIndent("public func deserialize() -> " + struct_name + " { var value = " + struct_name + "(); _ = deserialize(value: &value); return value }");
     WriteLineIndent("public func deserialize(value: inout " + struct_name + ") -> Int {");
     Indent(1);
-    WriteLineIndent("var valueRef = value");
-    WriteLine();
     WriteLineIndent("if buffer.offset + model.fbeOffset - 4 > buffer.size {");
     Indent(1);
-    WriteLineIndent("valueRef = " + struct_name + "()");
+    WriteLineIndent("value = " + struct_name + "()");
     WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
@@ -6180,12 +6150,12 @@ void GeneratorSwift::GenerateStructModel(const std::shared_ptr<Package>& p, cons
     WriteLineIndent("if fbeFullSize < model.fbeSize {");
     Indent(1);
     WriteLineIndent("assertionFailure(\"Model is broken!\")");
-    WriteLineIndent("valueRef = " + struct_name + "()");
+    WriteLineIndent("value = " + struct_name + "()");
     WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("valueRef = model.get(fbeValue: &valueRef)");
+    WriteLineIndent("value = model.get(fbeValue: &value)");
     WriteLineIndent("return fbeFullSize");
     Indent(-1);
     WriteLineIndent("}");
@@ -6280,7 +6250,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
     WriteLineIndent("return 0");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ parent.fbeAllocationSize(value: fbeValue)");
+        WriteLineIndent("+ parent.fbeAllocationSize(value: fbeValue.parent)");
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("+ " + *field->name + ".fbeAllocationSize(value: fbeValue." + *field->name + ")");
@@ -6380,8 +6350,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
         {
             WriteLine();
             WriteLineIndent("parent.fbeOffset = fbeCurrentOffset");
-            WriteLineIndent("var fbeValueBase = fbeValue as " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false));
-            WriteLineIndent("fbeFieldSize.value = parent.getFields(fbeValue: &fbeValueBase)");
+            WriteLineIndent("fbeFieldSize.value = parent.getFields(fbeValue: &fbeValue.parent)");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize.value");
         }
@@ -6433,7 +6402,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
         {
             WriteLine();
             WriteLineIndent("parent.fbeOffset = fbeCurrentOffset");
-            WriteLineIndent("fbeFieldSize.value = try parent.setFields(fbeValue: fbeValue)");
+            WriteLineIndent("fbeFieldSize.value = try parent.setFields(fbeValue: fbeValue.parent)");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize.value");
         }
@@ -6569,8 +6538,6 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
     WriteLine();
     WriteLineIndent("public func deserialize(value: inout " + struct_name + ") -> Int {");
     Indent(1);
-    WriteLineIndent("var valueRef = value");
-    WriteLine();
     WriteLineIndent("if (buffer.offset + _model.fbeOffset) > buffer.size {");
     Indent(1);
     WriteLineIndent("assertionFailure(\"Model is broken!\")");
@@ -6588,7 +6555,7 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("var fbeSize = Size()");
-    WriteLineIndent("valueRef = _model.get(size: &fbeSize, fbeValue: &valueRef)");
+    WriteLineIndent("value = _model.get(size: &fbeSize, fbeValue: &value)");
     WriteLineIndent("return 8 + fbeSize.value");
     Indent(-1);
     WriteLineIndent("}");
@@ -8393,7 +8360,7 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
                 result += (first ? "" : ", ") + flag + ".value!";
                 first = false;
             }
-            result = type + +".fromSet(set: [" + result + "])";
+            result = type + ".fromSet(set: [" + result + "])";
         }
         else
         {

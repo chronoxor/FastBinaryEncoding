@@ -43,22 +43,18 @@ public enum EnumSimpleEnum {
         }
     }
 
-    static func values() -> [EnumSimpleEnum] {
-        return [
-            EnumSimpleEnum.ENUM_VALUE_0,
-            EnumSimpleEnum.ENUM_VALUE_1,
-            EnumSimpleEnum.ENUM_VALUE_2,
-            EnumSimpleEnum.ENUM_VALUE_3,
-            EnumSimpleEnum.ENUM_VALUE_4,
-            EnumSimpleEnum.ENUM_VALUE_5,
-        ]
-    }
+    static let rawValuesMap: [RawValue: EnumSimpleEnum] = {
+        var value = [RawValue: EnumSimpleEnum]()
+        value[EnumSimpleEnum.ENUM_VALUE_0.rawValue] = .ENUM_VALUE_0
+        value[EnumSimpleEnum.ENUM_VALUE_1.rawValue] = .ENUM_VALUE_1
+        value[EnumSimpleEnum.ENUM_VALUE_2.rawValue] = .ENUM_VALUE_2
+        value[EnumSimpleEnum.ENUM_VALUE_3.rawValue] = .ENUM_VALUE_3
+        value[EnumSimpleEnum.ENUM_VALUE_4.rawValue] = .ENUM_VALUE_4
+        value[EnumSimpleEnum.ENUM_VALUE_5.rawValue] = .ENUM_VALUE_5
+        return value
+    }()
 
     static func mapValue(value: Int32) -> EnumSimpleEnum? {
-        var mapping = Dictionary<Int32, EnumSimpleEnum>()
-        for value in values() {
-            mapping[value.rawValue] = value
-        }
-        return mapping[value]
+        return rawValuesMap[value]
     }
 }

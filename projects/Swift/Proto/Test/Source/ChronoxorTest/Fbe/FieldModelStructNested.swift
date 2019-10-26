@@ -335,8 +335,7 @@ public class FieldModelStructNested: FieldModel {
         var fbeCurrentSize = 4 + 4
 
         if fbeCurrentSize + parent.fbeBody - 4 - 4 <= fbeStructSize {
-            var fbeValueBase = fbeValue as StructOptional
-            parent.getFields(fbeValue: &fbeValueBase, fbeStructSize: fbeStructSize)
+            parent.getFields(fbeValue: &fbeValue.parent, fbeStructSize: fbeStructSize)
         }
         fbeCurrentSize += parent.fbeBody - 4 - 4
 
@@ -465,7 +464,7 @@ public class FieldModelStructNested: FieldModel {
 
     // Set the struct fields values
     public func setFields(fbeValue: StructNested) throws {
-        try parent.setFields(fbeValue: fbeValue)
+        try parent.setFields(fbeValue: fbeValue.parent)
         try f1000.set(value: fbeValue.f1000)
         try f1001.set(value: fbeValue.f1001)
         try f1002.set(value: fbeValue.f1002)

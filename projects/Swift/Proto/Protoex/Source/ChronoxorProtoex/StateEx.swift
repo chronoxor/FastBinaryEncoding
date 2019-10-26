@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class StateEx: Comparable, Hashable, Codable {
+public struct StateEx: Comparable, Hashable, Codable {
     typealias RawValue = UInt8
     public static let unknown = StateEx(value: .unknown)
     public static let invalid = StateEx(value: .invalid)
@@ -49,37 +49,37 @@ public class StateEx: Comparable, Hashable, Codable {
         return StateEx(value: NSNumber(value: result).uint8Value)
     }
 
-    public private(set) var value: StateExEnum? = StateExEnum.values().first
+    public private(set) var value: StateExEnum?
 
     public private(set) var raw: UInt8 = 0
 
-    public init() { raw = value!.rawValue }
+    public init() { setDefaults() }
     public init(value: UInt8) { setEnum(value: value) }
     public init(value: StateExEnum) { setEnum(value: value) }
     public init(value: StateEx) { setEnum(value: value) }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         setEnum(value: try container.decode(RawValue.self))
     }
 
-    public func setDefaults() { setEnum(value: 0) }
+    public mutating func setDefaults() { setEnum(value: 0) }
 
-    public func setEnum(value: UInt8) { self.raw = value; self.value = StateExEnum.mapValue(value: value) }
-    public func setEnum(value: StateExEnum) { self.raw = value.rawValue; self.value = value }
-    public func setEnum(value: StateEx) { self.raw = value.raw; self.value = value.value }
+    public mutating func setEnum(value: UInt8) { self.raw = value; self.value = StateExEnum.mapValue(value: value) }
+    public mutating func setEnum(value: StateExEnum) { self.raw = value.rawValue; self.value = value }
+    public mutating func setEnum(value: StateEx) { self.raw = value.raw; self.value = value.value }
 
     public func hasFlags(flags: UInt8) -> Bool { return (NSNumber(value: raw).intValue & NSNumber(value: flags).intValue != 0) && ((NSNumber(value: raw).intValue & NSNumber(value: flags).intValue) == NSNumber(value: flags).intValue) }
     public func hasFlags(flags: StateExEnum) -> Bool { return hasFlags(flags: flags.rawValue) }
     public func hasFlags(flags: StateEx) -> Bool { return hasFlags(flags: flags.raw) }
 
-    public func setFlags(flags: UInt8) -> StateEx { setEnum(value: NSNumber(value: NSNumber(value: raw).intValue | NSNumber(value: flags).intValue).uint8Value); return self }
-    public func setFlags(flags: StateExEnum) -> StateEx { _ = setFlags(flags: flags.rawValue); return self }
-    public func setFlags(flags: StateEx) -> StateEx { _ = setFlags(flags: flags.raw); return self }
+    public mutating func setFlags(flags: UInt8) -> StateEx { setEnum(value: NSNumber(value: NSNumber(value: raw).intValue | NSNumber(value: flags).intValue).uint8Value); return self }
+    public mutating func setFlags(flags: StateExEnum) -> StateEx { _ = setFlags(flags: flags.rawValue); return self }
+    public mutating func setFlags(flags: StateEx) -> StateEx { _ = setFlags(flags: flags.raw); return self }
 
-    public func removeFlags(flags: UInt8) -> StateEx { setEnum(value: NSNumber(value: NSNumber(value: raw).intValue | NSNumber(value: flags).intValue.byteSwapped).uint8Value); return self }
-    public func removeFlags(flags: StateExEnum) -> StateEx { _ = removeFlags(flags: flags.rawValue); return self }
-    public func removeFlags(flags: StateEx) -> StateEx { _ = removeFlags(flags: flags.raw); return self }
+    public mutating func removeFlags(flags: UInt8) -> StateEx { setEnum(value: NSNumber(value: NSNumber(value: raw).intValue | NSNumber(value: flags).intValue.byteSwapped).uint8Value); return self }
+    public mutating func removeFlags(flags: StateExEnum) -> StateEx { _ = removeFlags(flags: flags.rawValue); return self }
+    public mutating func removeFlags(flags: StateEx) -> StateEx { _ = removeFlags(flags: flags.raw); return self }
 
     public var allSet: StateExEnum { return .allSet }
     public var noneSet: StateExEnum { return .noneSet }
@@ -138,7 +138,7 @@ public class StateEx: Comparable, Hashable, Codable {
         }
         return sb
     }
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(raw)
     }
@@ -147,7 +147,7 @@ public class StateEx: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    public class func fromJson(_ json: String) throws -> StateEx {
+    public static func fromJson(_ json: String) throws -> StateEx {
         return try JSONDecoder().decode(StateEx.self, from: json.data(using: .utf8)!)
     }
 }

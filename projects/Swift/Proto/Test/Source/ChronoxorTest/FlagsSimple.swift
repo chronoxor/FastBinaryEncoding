@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class FlagsSimple: Comparable, Hashable, Codable {
+public struct FlagsSimple: Comparable, Hashable, Codable {
     typealias RawValue = Int32
     public static let FLAG_VALUE_0 = FlagsSimple(value: .FLAG_VALUE_0)
     public static let FLAG_VALUE_1 = FlagsSimple(value: .FLAG_VALUE_1)
@@ -37,37 +37,37 @@ public class FlagsSimple: Comparable, Hashable, Codable {
         return FlagsSimple(value: NSNumber(value: result).int32Value)
     }
 
-    public private(set) var value: FlagsSimpleEnum? = FlagsSimpleEnum.values().first
+    public private(set) var value: FlagsSimpleEnum?
 
     public private(set) var raw: Int32 = 0
 
-    public init() { raw = value!.rawValue }
+    public init() { setDefaults() }
     public init(value: Int32) { setEnum(value: value) }
     public init(value: FlagsSimpleEnum) { setEnum(value: value) }
     public init(value: FlagsSimple) { setEnum(value: value) }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         setEnum(value: try container.decode(RawValue.self))
     }
 
-    public func setDefaults() { setEnum(value: 0) }
+    public mutating func setDefaults() { setEnum(value: 0) }
 
-    public func setEnum(value: Int32) { self.raw = value; self.value = FlagsSimpleEnum.mapValue(value: value) }
-    public func setEnum(value: FlagsSimpleEnum) { self.raw = value.rawValue; self.value = value }
-    public func setEnum(value: FlagsSimple) { self.raw = value.raw; self.value = value.value }
+    public mutating func setEnum(value: Int32) { self.raw = value; self.value = FlagsSimpleEnum.mapValue(value: value) }
+    public mutating func setEnum(value: FlagsSimpleEnum) { self.raw = value.rawValue; self.value = value }
+    public mutating func setEnum(value: FlagsSimple) { self.raw = value.raw; self.value = value.value }
 
     public func hasFlags(flags: Int32) -> Bool { return (NSNumber(value: raw).intValue & NSNumber(value: flags).intValue != 0) && ((NSNumber(value: raw).intValue & NSNumber(value: flags).intValue) == NSNumber(value: flags).intValue) }
     public func hasFlags(flags: FlagsSimpleEnum) -> Bool { return hasFlags(flags: flags.rawValue) }
     public func hasFlags(flags: FlagsSimple) -> Bool { return hasFlags(flags: flags.raw) }
 
-    public func setFlags(flags: Int32) -> FlagsSimple { setEnum(value: NSNumber(value: NSNumber(value: raw).intValue | NSNumber(value: flags).intValue).int32Value); return self }
-    public func setFlags(flags: FlagsSimpleEnum) -> FlagsSimple { _ = setFlags(flags: flags.rawValue); return self }
-    public func setFlags(flags: FlagsSimple) -> FlagsSimple { _ = setFlags(flags: flags.raw); return self }
+    public mutating func setFlags(flags: Int32) -> FlagsSimple { setEnum(value: NSNumber(value: NSNumber(value: raw).intValue | NSNumber(value: flags).intValue).int32Value); return self }
+    public mutating func setFlags(flags: FlagsSimpleEnum) -> FlagsSimple { _ = setFlags(flags: flags.rawValue); return self }
+    public mutating func setFlags(flags: FlagsSimple) -> FlagsSimple { _ = setFlags(flags: flags.raw); return self }
 
-    public func removeFlags(flags: Int32) -> FlagsSimple { setEnum(value: NSNumber(value: NSNumber(value: raw).intValue | NSNumber(value: flags).intValue.byteSwapped).int32Value); return self }
-    public func removeFlags(flags: FlagsSimpleEnum) -> FlagsSimple { _ = removeFlags(flags: flags.rawValue); return self }
-    public func removeFlags(flags: FlagsSimple) -> FlagsSimple { _ = removeFlags(flags: flags.raw); return self }
+    public mutating func removeFlags(flags: Int32) -> FlagsSimple { setEnum(value: NSNumber(value: NSNumber(value: raw).intValue | NSNumber(value: flags).intValue.byteSwapped).int32Value); return self }
+    public mutating func removeFlags(flags: FlagsSimpleEnum) -> FlagsSimple { _ = removeFlags(flags: flags.rawValue); return self }
+    public mutating func removeFlags(flags: FlagsSimple) -> FlagsSimple { _ = removeFlags(flags: flags.raw); return self }
 
     public var allSet: FlagsSimpleEnum { return .allSet }
     public var noneSet: FlagsSimpleEnum { return .noneSet }
@@ -114,7 +114,7 @@ public class FlagsSimple: Comparable, Hashable, Codable {
         }
         return sb
     }
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(raw)
     }
@@ -123,7 +123,7 @@ public class FlagsSimple: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    public class func fromJson(_ json: String) throws -> FlagsSimple {
+    public static func fromJson(_ json: String) throws -> FlagsSimple {
         return try JSONDecoder().decode(FlagsSimple.self, from: json.data(using: .utf8)!)
     }
 }

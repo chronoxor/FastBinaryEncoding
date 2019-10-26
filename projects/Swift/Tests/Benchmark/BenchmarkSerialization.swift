@@ -53,10 +53,10 @@ class BenchmarkSerialization: XCTestCase {
     }
 
     func testPerformanceDeserialize() {
-        self.measure {
+        self.measure() {
             // Deserialize the account from the FBE stream
             for _ in 0...999 {
-                _ = BenchmarkSerialization._reader.deserialize()
+                _ = BenchmarkSerialization._reader.deserialize(value: &BenchmarkSerialization._account)
             }
         }
     }

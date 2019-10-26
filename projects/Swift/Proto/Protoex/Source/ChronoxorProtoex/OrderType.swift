@@ -5,31 +5,31 @@
 
 import Foundation
 
-public class OrderType: Comparable, Hashable, Codable {
+public struct OrderType: Comparable, Hashable, Codable {
     typealias RawValue = UInt8
     public static let market = OrderType(value: OrderTypeEnum.market)
     public static let limit = OrderType(value: OrderTypeEnum.limit)
     public static let stop = OrderType(value: OrderTypeEnum.stop)
     public static let stoplimit = OrderType(value: OrderTypeEnum.stoplimit)
 
-    var value: OrderTypeEnum? = OrderTypeEnum.values().first
+    var value: OrderTypeEnum?
 
     public var raw: UInt8 { return value!.rawValue }
 
-    public init() {}
+    public init() { setDefault() }
     public init(value: UInt8) { setEnum(value: value) }
     public init(value: OrderTypeEnum) { setEnum(value: value) }
     public init(value: OrderType) { setEnum(value: value) }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         setEnum(value: try container.decode(RawValue.self))
     }
-    public func setDefault() { setEnum(value: NSNumber(value: 0).uint8Value) }
+    public mutating func setDefault() { setEnum(value: NSNumber(value: 0).uint8Value) }
 
-    public func setEnum(value: UInt8) { self.value = OrderTypeEnum.mapValue(value: value) }
-    public func setEnum(value: OrderTypeEnum) { self.value = value }
-    public func setEnum(value: OrderType) { self.value = value.value }
+    public mutating func setEnum(value: UInt8) { self.value = OrderTypeEnum.mapValue(value: value) }
+    public mutating func setEnum(value: OrderTypeEnum) { self.value = value }
+    public mutating func setEnum(value: OrderType) { self.value = value.value }
 
     public static func < (lhs: OrderType, rhs: OrderType) -> Bool {
         guard let lhsValue = lhs.value, let rhsValue = rhs.value else {
@@ -52,7 +52,7 @@ public class OrderType: Comparable, Hashable, Codable {
     public var description: String {
         return value?.description ?? "<unknown>"
     }
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(raw)
     }
@@ -61,7 +61,7 @@ public class OrderType: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    public class func fromJson(_ json: String) throws -> OrderType {
+    public static func fromJson(_ json: String) throws -> OrderType {
         return try JSONDecoder().decode(OrderType.self, from: json.data(using: .utf8)!)
     }
 }

@@ -31,18 +31,14 @@ public enum OrderSideEnum {
         }
     }
 
-    static func values() -> [OrderSideEnum] {
-        return [
-            OrderSideEnum.buy,
-            OrderSideEnum.sell,
-        ]
-    }
+    static let rawValuesMap: [RawValue: OrderSideEnum] = {
+        var value = [RawValue: OrderSideEnum]()
+        value[OrderSideEnum.buy.rawValue] = .buy
+        value[OrderSideEnum.sell.rawValue] = .sell
+        return value
+    }()
 
     static func mapValue(value: UInt8) -> OrderSideEnum? {
-        var mapping = Dictionary<UInt8, OrderSideEnum>()
-        for value in values() {
-            mapping[value.rawValue] = value
-        }
-        return mapping[value]
+        return rawValuesMap[value]
     }
 }

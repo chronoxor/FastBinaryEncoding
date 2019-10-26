@@ -32,16 +32,12 @@ public struct FlagsEmptyEnum: OptionSet {
         return sb
     }
 
-    public static func values() -> [FlagsEmptyEnum] {
-        return [
-        ]
-    }
+    static let rawValuesMap: [RawValue: FlagsEmptyEnum] = {
+        var value = [RawValue: FlagsEmptyEnum]()
+        return value
+    }()
 
     public static func mapValue(value: RawValue) -> FlagsEmptyEnum? {
-        var mapping = Dictionary<RawValue, FlagsEmptyEnum>()
-        for value in values() {
-            mapping[value.rawValue] = value
-        }
-        return mapping[value]
+        return rawValuesMap[value]
     }
 }
