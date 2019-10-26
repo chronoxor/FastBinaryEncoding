@@ -19,7 +19,6 @@ public struct StructVector: Comparable, Hashable, Codable {
     public var f9: Array<StructSimple> = Array()
     public var f10: Array<StructSimple?> = Array()
 
-
     public init() { }
     public init(f1: Array<UInt8>, f2: Array<UInt8?>, f3: Array<Data>, f4: Array<Data?>, f5: Array<EnumSimple>, f6: Array<EnumSimple?>, f7: Array<FlagsSimple>, f8: Array<FlagsSimple?>, f9: Array<StructSimple>, f10: Array<StructSimple?>) {
 

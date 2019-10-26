@@ -68,7 +68,6 @@ class MyClient: ChronoxorProto.Client, ChronoxorProto.ReceiverListener, Chronoxo
 }
 
 class TestsSendReceive: XCTestCase {
-
     func testSendAndReceive() {
         for i in 0...99 {
             for j in 0...99 {

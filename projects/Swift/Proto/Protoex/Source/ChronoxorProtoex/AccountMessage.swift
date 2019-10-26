@@ -10,7 +10,6 @@ import ChronoxorProto
 public struct AccountMessage: Comparable, Hashable, Codable {
     public var body: Account = ChronoxorProtoex.Account()
 
-
     public init() { }
     public init(body: Account) {
 

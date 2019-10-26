@@ -7,7 +7,6 @@ import ChronoxorProto
 import ChronoxorProtoex
 
 class TestExtending: XCTestCase {
-
     func testExtendingOldNew() {
         // Create a new account with some orders
         var account1 = ChronoxorProto.Account(id: 1, name: "Test", state: ChronoxorProto.State.good, wallet: ChronoxorProto.Balance(currency: "USD", amount: 1000.0), asset: ChronoxorProto.Balance(currency: "EUR", amount: 100.0), orders: [])

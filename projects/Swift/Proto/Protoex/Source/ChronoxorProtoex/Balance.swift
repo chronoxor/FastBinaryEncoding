@@ -8,9 +8,8 @@ import ChronoxorFbe
 import ChronoxorProto
 
 public struct Balance: Comparable, Hashable, Codable {
-    public var locked: Double = 0.0
-
     public var parent: ChronoxorProto.Balance
+    public var locked: Double = 0.0
 
     public init() { parent = ChronoxorProto.Balance() }
     public init(parent: ChronoxorProto.Balance, locked: Double) {

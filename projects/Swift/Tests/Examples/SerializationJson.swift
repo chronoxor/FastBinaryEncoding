@@ -5,7 +5,7 @@
 import XCTest
 import ChronoxorProto
 
-class SerializationJson: XCTestCase {
+class ExampleSerializationJson: XCTestCase {
     func testSerializationJson() {
         // Create a new account with some orders
         var account = Account(id: 1, name: "Test", state: State.good, wallet: Balance(currency: "USD", amount: 1000.0), asset: Balance(currency: "EUR", amount: 100.0), orders: [])

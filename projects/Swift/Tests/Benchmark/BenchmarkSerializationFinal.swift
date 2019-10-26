@@ -6,7 +6,6 @@ import XCTest
 import ChronoxorProto
 
 class BenchmarkSerializationFinal: XCTestCase {
-
     private static var _account: ChronoxorProto.Account!
     private static var _writer: ChronoxorProto.AccountFinalModel!
     private static var _reader: ChronoxorProto.AccountFinalModel!

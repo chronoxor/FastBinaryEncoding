@@ -6,7 +6,6 @@ import XCTest
 import ChronoxorProto
 
 class BenchmarkSerializationJson: XCTestCase {
-
     private static var _account: ChronoxorProto.Account!
     private static var _json: String!
 

@@ -7,7 +7,6 @@ import ChronoxorFbe
 import ChronoxorProto
 
 fileprivate class MySender: ChronoxorProto.Sender, ChronoxorFbe.SenderListener {
-    
     var logging: Bool = true
 
     func onSend(buffer: Data, offset: Int, size: Int) throws -> Int {
@@ -28,7 +27,7 @@ fileprivate class MyReceiver: ChronoxorProto.Receiver, ChronoxorProto.ReceiverLi
     }
 }
 
-class SendReceive: XCTestCase {
+class ExampleSendReceive: XCTestCase {
     func testSendReceive() {
         let sender = MySender()
 

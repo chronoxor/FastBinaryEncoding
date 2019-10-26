@@ -7,7 +7,6 @@ import ChronoxorProto
 import ChronoxorTest
 
 class TestSerializationFinal: XCTestCase {
-
     func testSerializationDomain() {
         // Create a new account with some orders
         var account1 = Account(id: 1, name: "Test", state: State.good, wallet: Balance(currency: "USD", amount: 1000.0), asset: Balance(currency: "EUR", amount: 100.0), orders: [])
@@ -1295,5 +1294,4 @@ class TestSerializationFinal: XCTestCase {
         XCTAssertEqual(struct2.f2[s1]!!.f1002, EnumTyped.ENUM_VALUE_2)
         XCTAssertEqual(struct2.f2[s2]!, nil)
     }
-
 }

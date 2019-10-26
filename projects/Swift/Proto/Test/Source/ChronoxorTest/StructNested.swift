@@ -8,6 +8,7 @@ import ChronoxorFbe
 import ChronoxorProto
 
 public struct StructNested: Comparable, Hashable, Codable {
+    public var parent: StructOptional
     public var f1000: EnumSimple = ChronoxorTest.EnumSimple()
     public var f1001: EnumSimple? = nil
     public var f1002: EnumTyped = ChronoxorTest.EnumTyped.ENUM_VALUE_2
@@ -20,8 +21,6 @@ public struct StructNested: Comparable, Hashable, Codable {
     public var f1009: StructSimple? = nil
     public var f1010: StructOptional = ChronoxorTest.StructOptional()
     public var f1011: StructOptional? = nil
-
-    public var parent: StructOptional
 
     public init() { parent = StructOptional() }
     public init(parent: StructOptional, f1000: EnumSimple, f1001: EnumSimple?, f1002: EnumTyped, f1003: EnumTyped?, f1004: FlagsSimple, f1005: FlagsSimple?, f1006: FlagsTyped, f1007: FlagsTyped?, f1008: StructSimple, f1009: StructSimple?, f1010: StructOptional, f1011: StructOptional?) {

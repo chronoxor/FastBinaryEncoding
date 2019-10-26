@@ -6,7 +6,6 @@ import XCTest
 @testable import ChronoxorProto
 
 class TestCreate: XCTestCase {
-
     func testCreateAndAccess() {
         do {
             // Create a new account using FBE model into the FBE stream

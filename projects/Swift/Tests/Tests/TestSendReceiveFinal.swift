@@ -40,7 +40,6 @@ fileprivate class MyFinalReceiver: FinalReceiver, ChronoxorProto.FinalReceiverLi
 }
 
 class TestSendReceiveFinal: XCTestCase {
-
     func testSendAndReceive() {
         for i in 0...99 {
             for j in 0...99 {

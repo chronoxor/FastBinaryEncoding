@@ -10,7 +10,6 @@ import ChronoxorProto
 public struct BalanceMessage: Comparable, Hashable, Codable {
     public var body: Balance = ChronoxorProtoex.Balance()
 
-
     public init() { }
     public init(body: Balance) {
 

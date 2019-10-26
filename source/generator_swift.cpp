@@ -5200,6 +5200,10 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     WriteLineIndent(" {");
     Indent(1);
 
+    // Generate parent struct
+    if (s->base && !s->base->empty())
+        WriteLineIndent("public var parent: " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false));
+
     // Generate struct body
     if (s->body && !s->body->fields.empty())
     {
@@ -5208,12 +5212,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
             std::string fieldName = (*field->name == "Type") ? ("`Type`") : *field->name;
             WriteLineIndent("public var " + fieldName + ": " + ConvertTypeName(domain, "", *field, false) + " = " + ConvertDefault(domain, package, *field));
         }
-
-        WriteLine();
     }
-
-    if (s->base && !s->base->empty())
-        WriteLineIndent("public var parent: " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false));
 
     WriteLine();
     // Generate struct default constructor

@@ -6,7 +6,6 @@ import XCTest
 import ChronoxorProto
 
 class BenchmarkSerialization: XCTestCase {
-
     private static var _account: Account!
     private static var _writer: AccountModel!
     private static var _reader: AccountModel!

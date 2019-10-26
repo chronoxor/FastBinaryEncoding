@@ -7,7 +7,6 @@ import ChronoxorFbe
 import ChronoxorProto
 
 class TestDecimal: XCTestCase {
-
     func testDecimal() {
         XCTAssertEqual(verifyDecimal(low: 0x00000000, mid: 0x00000000, high: 0x00000000, negative: false, scale: 0x00000000), Decimal.zero)
         XCTAssertEqual(verifyDecimal(low: 0x00000001, mid: 0x00000000, high: 0x00000000, negative: false, scale: 0x00000000), Decimal(integerLiteral: 1))
@@ -63,5 +62,4 @@ class TestDecimal: XCTestCase {
 
         return value2
     }
-
 }

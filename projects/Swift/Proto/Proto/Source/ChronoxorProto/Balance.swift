@@ -10,7 +10,6 @@ public struct Balance: Comparable, Hashable, Codable {
     public var currency: String = ""
     public var amount: Double = 0.0
 
-
     public init() { }
     public init(currency: String, amount: Double) {
 

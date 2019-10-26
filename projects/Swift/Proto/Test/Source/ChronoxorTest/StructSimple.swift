@@ -54,7 +54,6 @@ public struct StructSimple: Comparable, Hashable, Codable {
     public var f43: ChronoxorProto.State = ChronoxorProto.State()
     public var f44: ChronoxorProto.Account = ChronoxorProto.Account()
 
-
     public init() { }
     public init(id: Int32, f1: Bool, f2: Bool, f3: UInt8, f4: UInt8, f5: Character, f6: Character, f7: Character, f8: Character, f9: Int8, f10: Int8, f11: UInt8, f12: UInt8, f13: Int16, f14: Int16, f15: UInt16, f16: UInt16, f17: Int32, f18: Int32, f19: UInt32, f20: UInt32, f21: Int64, f22: Int64, f23: UInt64, f24: UInt64, f25: Float, f26: Float, f27: Double, f28: Double, f29: Decimal, f30: Decimal, f31: String, f32: String, f33: Date, f34: Date, f35: Date, f36: UUID, f37: UUID, f38: UUID, f39: ChronoxorProto.OrderSide, f40: ChronoxorProto.OrderType, f41: ChronoxorProto.Order, f42: ChronoxorProto.Balance, f43: ChronoxorProto.State, f44: ChronoxorProto.Account) {
 

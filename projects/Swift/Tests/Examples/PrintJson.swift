@@ -5,7 +5,7 @@
 import XCTest
 import ChronoxorTest
 
-class PrintJson: XCTestCase {
+class ExamplePrintJson: XCTestCase {
     func testPrintJson() {
         print(try! StructSimple().toJson())
         print("")

@@ -10,7 +10,6 @@ import ChronoxorProto
 public struct OrderMessage: Comparable, Hashable, Codable {
     public var body: Order = ChronoxorProtoex.Order()
 
-
     public init() { }
     public init(body: Order) {
 

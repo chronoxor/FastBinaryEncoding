@@ -53,8 +53,4 @@ class ExampleCreate: XCTestCase {
         print("account.wallet.currency = \(walletCurrency)")
         print("account.wallet.amount = \(walletAmount)")
     }
-
-    static var allTests = [
-        ("testCreate", testCreate),
-    ]
 }

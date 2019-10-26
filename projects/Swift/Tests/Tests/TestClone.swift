@@ -6,7 +6,6 @@ import XCTest
 import ChronoxorProto
 
 class TestClone: XCTestCase {
-
     func testCloneStructs() {
         // Create a new account with some orders
         var account1 = Account(id: 1, name: "Test", state: State.good, wallet: Balance(currency: "USD", amount: 1000.0), asset: Balance(currency: "EUR", amount: 100.0), orders: [])

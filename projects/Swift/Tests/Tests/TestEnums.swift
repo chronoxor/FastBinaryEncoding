@@ -7,7 +7,6 @@ import XCTest
 import ChronoxorEnums
 
 class TestEnums: XCTestCase {
-
     func testSerializationEnums() {
         let enums1 = Enums()
 
@@ -211,5 +210,4 @@ class TestEnums: XCTestCase {
         XCTAssertEqual(enums2.uint64b4, EnumUInt64.ENUM_VALUE_4)
         XCTAssertEqual(enums2.uint64b5, enums1.uint64b3)
     }
-
 }

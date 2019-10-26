@@ -14,7 +14,6 @@ public struct Order: Comparable, Hashable, Codable {
     public var price: Double = 0.0
     public var volume: Double = 0.0
 
-
     public init() { }
     public init(id: Int32, symbol: String, side: OrderSide, type: OrderType, price: Double, volume: Double) {
 

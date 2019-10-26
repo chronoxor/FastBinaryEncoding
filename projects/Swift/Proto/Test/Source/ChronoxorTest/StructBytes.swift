@@ -12,7 +12,6 @@ public struct StructBytes: Comparable, Hashable, Codable {
     public var f2: Data? = nil
     public var f3: Data? = nil
 
-
     public init() { }
     public init(f1: Data, f2: Data?, f3: Data?) {
 
