@@ -4943,7 +4943,7 @@ void GeneratorSwift::GenerateFlags(const std::shared_ptr<Package>& p, const std:
     }
     else
         WriteIndent("value[" +flags_name + ".unknown.rawValue] = .unknown");
-        WriteLineIndent("return value");
+    WriteLineIndent("return value");
     Indent(-1);
     WriteLineIndent("}()");
 
