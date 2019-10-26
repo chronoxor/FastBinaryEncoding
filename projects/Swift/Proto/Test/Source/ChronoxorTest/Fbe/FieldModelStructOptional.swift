@@ -1091,8 +1091,7 @@ public class FieldModelStructOptional: FieldModel {
         var fbeCurrentSize = 4 + 4
 
         if fbeCurrentSize + parent.fbeBody - 4 - 4 <= fbeStructSize {
-            var fbeValueBase = fbeValue as StructSimple
-            parent.getFields(fbeValue: &fbeValueBase, fbeStructSize: fbeStructSize)
+            parent.getFields(fbeValue: &fbeValue.parent, fbeStructSize: fbeStructSize)
         }
         fbeCurrentSize += parent.fbeBody - 4 - 4
 
@@ -1599,7 +1598,7 @@ public class FieldModelStructOptional: FieldModel {
 
     // Set the struct fields values
     public func setFields(fbeValue: StructOptional) throws {
-        try parent.setFields(fbeValue: fbeValue)
+        try parent.setFields(fbeValue: fbeValue.parent)
         try f100.set(value: fbeValue.f100)
         try f101.set(value: fbeValue.f101)
         try f102.set(value: fbeValue.f102)

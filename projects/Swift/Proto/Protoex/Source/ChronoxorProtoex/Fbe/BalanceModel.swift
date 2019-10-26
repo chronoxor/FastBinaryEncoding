@@ -57,21 +57,19 @@ public class BalanceModel: Model {
     // Deserialize the struct value
     public func deserialize() -> Balance { var value = Balance(); _ = deserialize(value: &value); return value }
     public func deserialize(value: inout Balance) -> Int {
-        var valueRef = value
-
         if buffer.offset + model.fbeOffset - 4 > buffer.size {
-            valueRef = Balance()
+            value = Balance()
             return 0
         }
 
         let fbeFullSize = Int(readUInt32(offset: model.fbeOffset - 4))
         if fbeFullSize < model.fbeSize {
             assertionFailure("Model is broken!")
-            valueRef = Balance()
+            value = Balance()
             return 0
         }
 
-        valueRef = model.get(fbeValue: &valueRef)
+        value = model.get(fbeValue: &value)
         return fbeFullSize
     }
 

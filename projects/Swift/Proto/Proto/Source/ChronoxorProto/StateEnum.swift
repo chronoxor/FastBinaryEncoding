@@ -96,23 +96,19 @@ public struct StateEnum: OptionSet {
         return sb
     }
 
-    public static func values() -> [StateEnum] {
-        return [
-            .unknown,
-            .invalid,
-            .initialized,
-            .calculated,
-            .broken,
-            .good,
-            .bad,
-        ]
-    }
+    static let rawValuesMap: [RawValue: StateEnum] = {
+        var value = [RawValue: StateEnum]()
+        value[StateEnum.unknown.rawValue] = .unknown
+        value[StateEnum.invalid.rawValue] = .invalid
+        value[StateEnum.initialized.rawValue] = .initialized
+        value[StateEnum.calculated.rawValue] = .calculated
+        value[StateEnum.broken.rawValue] = .broken
+        value[StateEnum.good.rawValue] = .good
+        value[StateEnum.bad.rawValue] = .bad
+        return value
+    }()
 
     public static func mapValue(value: RawValue) -> StateEnum? {
-        var mapping = Dictionary<RawValue, StateEnum>()
-        for value in values() {
-            mapping[value.rawValue] = value
-        }
-        return mapping[value]
+        return rawValuesMap[value]
     }
 }

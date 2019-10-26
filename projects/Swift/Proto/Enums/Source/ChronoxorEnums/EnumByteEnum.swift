@@ -43,22 +43,18 @@ public enum EnumByteEnum {
         }
     }
 
-    static func values() -> [EnumByteEnum] {
-        return [
-            EnumByteEnum.ENUM_VALUE_0,
-            EnumByteEnum.ENUM_VALUE_1,
-            EnumByteEnum.ENUM_VALUE_2,
-            EnumByteEnum.ENUM_VALUE_3,
-            EnumByteEnum.ENUM_VALUE_4,
-            EnumByteEnum.ENUM_VALUE_5,
-        ]
-    }
+    static let rawValuesMap: [RawValue: EnumByteEnum] = {
+        var value = [RawValue: EnumByteEnum]()
+        value[EnumByteEnum.ENUM_VALUE_0.rawValue] = .ENUM_VALUE_0
+        value[EnumByteEnum.ENUM_VALUE_1.rawValue] = .ENUM_VALUE_1
+        value[EnumByteEnum.ENUM_VALUE_2.rawValue] = .ENUM_VALUE_2
+        value[EnumByteEnum.ENUM_VALUE_3.rawValue] = .ENUM_VALUE_3
+        value[EnumByteEnum.ENUM_VALUE_4.rawValue] = .ENUM_VALUE_4
+        value[EnumByteEnum.ENUM_VALUE_5.rawValue] = .ENUM_VALUE_5
+        return value
+    }()
 
     static func mapValue(value: UInt8) -> EnumByteEnum? {
-        var mapping = Dictionary<UInt8, EnumByteEnum>()
-        for value in values() {
-            mapping[value.rawValue] = value
-        }
-        return mapping[value]
+        return rawValuesMap[value]
     }
 }

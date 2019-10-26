@@ -154,7 +154,7 @@ class FieldModelMapInt32Data: FieldModel {
             return
         }
 
-        //values.ensureCapacity(fbeVectorSize.toInt())
+        values.reserveCapacity(fbeMapSize)
 
         let fbeModel = getItem(index: 0)
         var i = fbeMapSize

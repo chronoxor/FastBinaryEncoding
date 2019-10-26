@@ -10,13 +10,6 @@ class BenchmarkSerializationJson: XCTestCase {
     private static var _account: ChronoxorProto.Account!
     private static var _json: String!
 
-    override class var defaultPerformanceMetrics: [XCTPerformanceMetric] {
-        return [.wallClockTime,
-                XCTPerformanceMetric(rawValue: "com.apple.XCTPerformanceMetric_TotalHeapAllocationsKilobytes"),
-                XCTPerformanceMetric(rawValue: "com.apple.XCTPerformanceMetric_PersistentVMAllocations"),
-        ]
-    }
-
     override class func setUp() {
         super.setUp()
 

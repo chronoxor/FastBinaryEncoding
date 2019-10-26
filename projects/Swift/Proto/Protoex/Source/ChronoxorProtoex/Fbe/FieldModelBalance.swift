@@ -181,8 +181,7 @@ public class FieldModelBalance: FieldModel {
         var fbeCurrentSize = 4 + 4
 
         if fbeCurrentSize + parent.fbeBody - 4 - 4 <= fbeStructSize {
-            var fbeValueBase = fbeValue as ChronoxorProto.Balance
-            parent.getFields(fbeValue: &fbeValueBase, fbeStructSize: fbeStructSize)
+            parent.getFields(fbeValue: &fbeValue.parent, fbeStructSize: fbeStructSize)
         }
         fbeCurrentSize += parent.fbeBody - 4 - 4
 
@@ -234,7 +233,7 @@ public class FieldModelBalance: FieldModel {
 
     // Set the struct fields values
     public func setFields(fbeValue: Balance) throws {
-        try parent.setFields(fbeValue: fbeValue)
+        try parent.setFields(fbeValue: fbeValue.parent)
         try locked.set(value: fbeValue.locked)
     }
 }

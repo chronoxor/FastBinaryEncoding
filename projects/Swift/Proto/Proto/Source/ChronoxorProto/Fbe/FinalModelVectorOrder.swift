@@ -64,7 +64,7 @@ class FinalModelVectorOrder: FinalModel {
             return 4
         }
 
-        //values.ensureCapacity(fbeVectorSize.toInt())
+        values.reserveCapacity(fbeVectorSize)
 
         var size: Int = 4
         var offset = Size()

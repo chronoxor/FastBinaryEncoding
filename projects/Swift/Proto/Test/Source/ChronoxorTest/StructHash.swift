@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-open class StructHash: Comparable, Hashable, Codable {
+public struct StructHash: Comparable, Hashable, Codable {
     public var f1: Dictionary<String, UInt8> = Dictionary()
     public var f2: Dictionary<String, UInt8?> = Dictionary()
     public var f3: Dictionary<String, Data> = Dictionary()
@@ -19,7 +19,8 @@ open class StructHash: Comparable, Hashable, Codable {
     public var f9: Dictionary<String, StructSimple> = Dictionary()
     public var f10: Dictionary<String, StructSimple?> = Dictionary()
 
-    public init() {}
+
+    public init() { }
     public init(f1: Dictionary<String, UInt8>, f2: Dictionary<String, UInt8?>, f3: Dictionary<String, Data>, f4: Dictionary<String, Data?>, f5: Dictionary<String, EnumSimple>, f6: Dictionary<String, EnumSimple?>, f7: Dictionary<String, FlagsSimple>, f8: Dictionary<String, FlagsSimple?>, f9: Dictionary<String, StructSimple>, f10: Dictionary<String, StructSimple?>) {
 
         self.f1 = f1
@@ -47,7 +48,7 @@ open class StructHash: Comparable, Hashable, Codable {
         self.f10 = other.f10
     }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         f1 = try container.decode(Dictionary<String, UInt8>.self, forKey: .f1)
         f2 = try container.decode(Dictionary<String, UInt8?>.self, forKey: .f2)
@@ -61,7 +62,7 @@ open class StructHash: Comparable, Hashable, Codable {
         f10 = try container.decode(Dictionary<String, ChronoxorTest.StructSimple?>.self, forKey: .f10)
     }
 
-    open func clone() throws -> StructHash {
+    public func clone() throws -> StructHash {
         // Serialize the struct to the FBE stream
         let writer = StructHashModel()
         try _ = writer.serialize(value: self)
@@ -80,10 +81,10 @@ open class StructHash: Comparable, Hashable, Codable {
         return true
     }
 
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
     }
 
-    open var description: String {
+    public var description: String {
         var sb = String()
         sb.append("StructHash(")
         if true {
@@ -212,7 +213,7 @@ open class StructHash: Comparable, Hashable, Codable {
         case f10
     }
 
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(f1, forKey: .f1)
         try container.encode(f2, forKey: .f2)
@@ -226,11 +227,11 @@ open class StructHash: Comparable, Hashable, Codable {
         try container.encode(f10, forKey: .f10)
     }
 
-    open func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) throws -> StructHash {
+    public static func fromJson(_ json: String) throws -> StructHash {
         return try JSONDecoder().decode(StructHash.self, from: json.data(using: .utf8)!)
     }
 }

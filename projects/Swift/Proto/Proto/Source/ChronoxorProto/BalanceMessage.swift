@@ -6,10 +6,11 @@
 import Foundation
 import ChronoxorFbe
 
-open class BalanceMessage: Comparable, Hashable, Codable {
+public struct BalanceMessage: Comparable, Hashable, Codable {
     public var body: Balance = ChronoxorProto.Balance()
 
-    public init() {}
+
+    public init() { }
     public init(body: Balance) {
 
         self.body = body
@@ -19,12 +20,12 @@ open class BalanceMessage: Comparable, Hashable, Codable {
         self.body = other.body
     }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         body = try container.decode(ChronoxorProto.Balance.self, forKey: .body)
     }
 
-    open func clone() throws -> BalanceMessage {
+    public func clone() throws -> BalanceMessage {
         // Serialize the struct to the FBE stream
         let writer = BalanceMessageModel()
         try _ = writer.serialize(value: self)
@@ -43,10 +44,10 @@ open class BalanceMessage: Comparable, Hashable, Codable {
         return true
     }
 
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
     }
 
-    open var description: String {
+    public var description: String {
         var sb = String()
         sb.append("BalanceMessage(")
         sb.append("body="); sb.append(body.description)
@@ -57,16 +58,16 @@ open class BalanceMessage: Comparable, Hashable, Codable {
         case body
     }
 
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(body, forKey: .body)
     }
 
-    open func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) throws -> BalanceMessage {
+    public static func fromJson(_ json: String) throws -> BalanceMessage {
         return try JSONDecoder().decode(BalanceMessage.self, from: json.data(using: .utf8)!)
     }
 }

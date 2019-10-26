@@ -60,8 +60,6 @@ public class StructListFinalModel: Model {
     public func deserialize() -> StructList { var value = StructList(); _ = deserialize(value: &value); return value }
 
     public func deserialize(value: inout StructList) -> Int {
-        var valueRef = value
-
         if (buffer.offset + _model.fbeOffset) > buffer.size {
             assertionFailure("Model is broken!")
             return 0
@@ -75,7 +73,7 @@ public class StructListFinalModel: Model {
         }
 
         var fbeSize = Size()
-        valueRef = _model.get(size: &fbeSize, fbeValue: &valueRef)
+        value = _model.get(size: &fbeSize, fbeValue: &value)
         return 8 + fbeSize.value
     }
 

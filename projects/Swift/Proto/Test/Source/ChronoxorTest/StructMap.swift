@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-open class StructMap: Comparable, Hashable, Codable {
+public struct StructMap: Comparable, Hashable, Codable {
     public var f1: Dictionary<Int32, UInt8> = Dictionary()
     public var f2: Dictionary<Int32, UInt8?> = Dictionary()
     public var f3: Dictionary<Int32, Data> = Dictionary()
@@ -19,7 +19,8 @@ open class StructMap: Comparable, Hashable, Codable {
     public var f9: Dictionary<Int32, StructSimple> = Dictionary()
     public var f10: Dictionary<Int32, StructSimple?> = Dictionary()
 
-    public init() {}
+
+    public init() { }
     public init(f1: Dictionary<Int32, UInt8>, f2: Dictionary<Int32, UInt8?>, f3: Dictionary<Int32, Data>, f4: Dictionary<Int32, Data?>, f5: Dictionary<Int32, EnumSimple>, f6: Dictionary<Int32, EnumSimple?>, f7: Dictionary<Int32, FlagsSimple>, f8: Dictionary<Int32, FlagsSimple?>, f9: Dictionary<Int32, StructSimple>, f10: Dictionary<Int32, StructSimple?>) {
 
         self.f1 = f1
@@ -47,7 +48,7 @@ open class StructMap: Comparable, Hashable, Codable {
         self.f10 = other.f10
     }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         f1 = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, UInt8>.self, forKey: .f1)).map { (Int32($0) ?? 0, $1) })
         f2 = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, UInt8?>.self, forKey: .f2)).map { (Int32($0) ?? 0, $1) })
@@ -61,7 +62,7 @@ open class StructMap: Comparable, Hashable, Codable {
         f10 = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, StructSimple?>.self, forKey: .f10)).map { (Int32($0) ?? 0, $1) })
     }
 
-    open func clone() throws -> StructMap {
+    public func clone() throws -> StructMap {
         // Serialize the struct to the FBE stream
         let writer = StructMapModel()
         try _ = writer.serialize(value: self)
@@ -80,10 +81,10 @@ open class StructMap: Comparable, Hashable, Codable {
         return true
     }
 
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
     }
 
-    open var description: String {
+    public var description: String {
         var sb = String()
         sb.append("StructMap(")
         if true {
@@ -212,7 +213,7 @@ open class StructMap: Comparable, Hashable, Codable {
         case f10
     }
 
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(Dictionary(uniqueKeysWithValues: f1.map { ($0.description, $1) }), forKey: .f1)
         try container.encode(Dictionary(uniqueKeysWithValues: f2.map { ($0.description, $1) }), forKey: .f2)
@@ -226,11 +227,11 @@ open class StructMap: Comparable, Hashable, Codable {
         try container.encode(Dictionary(uniqueKeysWithValues: f10.map { ($0.description, $1) }), forKey: .f10)
     }
 
-    open func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) throws -> StructMap {
+    public static func fromJson(_ json: String) throws -> StructMap {
         return try JSONDecoder().decode(StructMap.self, from: json.data(using: .utf8)!)
     }
 }

@@ -60,8 +60,6 @@ public class StructEmptyFinalModel: Model {
     public func deserialize() -> StructEmpty { var value = StructEmpty(); _ = deserialize(value: &value); return value }
 
     public func deserialize(value: inout StructEmpty) -> Int {
-        var valueRef = value
-
         if (buffer.offset + _model.fbeOffset) > buffer.size {
             assertionFailure("Model is broken!")
             return 0
@@ -75,7 +73,7 @@ public class StructEmptyFinalModel: Model {
         }
 
         var fbeSize = Size()
-        valueRef = _model.get(size: &fbeSize, fbeValue: &valueRef)
+        value = _model.get(size: &fbeSize, fbeValue: &value)
         return 8 + fbeSize.value
     }
 

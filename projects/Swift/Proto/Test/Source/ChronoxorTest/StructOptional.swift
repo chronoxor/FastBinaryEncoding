@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-open class StructOptional: StructSimple {
+public struct StructOptional: Comparable, Hashable, Codable {
     public var f100: Bool? = nil
     public var f101: Bool? = true
     public var f102: Bool? = nil
@@ -75,9 +75,11 @@ open class StructOptional: StructSimple {
     public var f164: ChronoxorProto.Account? = nil
     public var f165: ChronoxorProto.Account? = nil
 
-    public override init() { super.init() }
+    public var parent: StructSimple
+
+    public init() { parent = StructSimple() }
     public init(parent: StructSimple, f100: Bool?, f101: Bool?, f102: Bool?, f103: UInt8?, f104: UInt8?, f105: UInt8?, f106: Character?, f107: Character?, f108: Character?, f109: Character?, f110: Character?, f111: Character?, f112: Int8?, f113: Int8?, f114: Int8?, f115: UInt8?, f116: UInt8?, f117: UInt8?, f118: Int16?, f119: Int16?, f120: Int16?, f121: UInt16?, f122: UInt16?, f123: UInt16?, f124: Int32?, f125: Int32?, f126: Int32?, f127: UInt32?, f128: UInt32?, f129: UInt32?, f130: Int64?, f131: Int64?, f132: Int64?, f133: UInt64?, f134: UInt64?, f135: UInt64?, f136: Float?, f137: Float?, f138: Float?, f139: Double?, f140: Double?, f141: Double?, f142: Decimal?, f143: Decimal?, f144: Decimal?, f145: String?, f146: String?, f147: String?, f148: Date?, f149: Date?, f150: Date?, f151: UUID?, f152: UUID?, f153: UUID?, f154: ChronoxorProto.OrderSide?, f155: ChronoxorProto.OrderSide?, f156: ChronoxorProto.OrderType?, f157: ChronoxorProto.OrderType?, f158: ChronoxorProto.Order?, f159: ChronoxorProto.Order?, f160: ChronoxorProto.Balance?, f161: ChronoxorProto.Balance?, f162: ChronoxorProto.State?, f163: ChronoxorProto.State?, f164: ChronoxorProto.Account?, f165: ChronoxorProto.Account?) {
-        super.init(other: parent)
+        self.parent = parent
 
         self.f100 = f100
         self.f101 = f101
@@ -148,7 +150,7 @@ open class StructOptional: StructSimple {
     }
 
     public init(other: StructOptional) {
-        super.init(other: other)
+        parent = other.parent
         self.f100 = other.f100
         self.f101 = other.f101
         self.f102 = other.f102
@@ -217,8 +219,8 @@ open class StructOptional: StructSimple {
         self.f165 = other.f165
     }
 
-    public required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
+    public init(from decoder: Decoder) throws {
+        parent = try StructSimple(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
         f100 = try container.decode(Bool?.self, forKey: .f100)
         f101 = try container.decode(Bool?.self, forKey: .f101)
@@ -297,7 +299,7 @@ open class StructOptional: StructSimple {
         f165 = try container.decode(ChronoxorProto.Account?.self, forKey: .f165)
     }
 
-    open override func clone() throws -> StructOptional {
+    public func clone() throws -> StructOptional {
         // Serialize the struct to the FBE stream
         let writer = StructOptionalModel()
         try _ = writer.serialize(value: self)
@@ -316,14 +318,14 @@ open class StructOptional: StructSimple {
         return true
     }
 
-    open override func hash(into hasher: inout Hasher) {
-        super.hash(into: &hasher)
+    public func hash(into hasher: inout Hasher) {
+        parent.hash(into: &hasher)
     }
 
-    open override var description: String {
+    public var description: String {
         var sb = String()
         sb.append("StructOptional(")
-        sb.append(super.description)
+        sb.append(parent.description)
         sb.append(",f100=");  if let f100 = f100 { sb.append(f100 ? "true" : "false") } else { sb.append("null") }
         sb.append(",f101=");  if let f101 = f101 { sb.append(f101 ? "true" : "false") } else { sb.append("null") }
         sb.append(",f102=");  if let f102 = f102 { sb.append(f102 ? "true" : "false") } else { sb.append("null") }
@@ -462,8 +464,8 @@ open class StructOptional: StructSimple {
         case f165
     }
 
-    open override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
+    public func encode(to encoder: Encoder) throws {
+        try parent.encode(to: encoder)
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(f100, forKey: .f100)
         try container.encode(f101, forKey: .f101)
@@ -533,11 +535,11 @@ open class StructOptional: StructSimple {
         try container.encode(f165, forKey: .f165)
     }
 
-    open override func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open override class func fromJson(_ json: String) throws -> StructOptional {
+    public static func fromJson(_ json: String) throws -> StructOptional {
         return try JSONDecoder().decode(StructOptional.self, from: json.data(using: .utf8)!)
     }
 }

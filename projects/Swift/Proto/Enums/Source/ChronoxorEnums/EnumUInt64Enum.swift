@@ -43,22 +43,18 @@ public enum EnumUInt64Enum {
         }
     }
 
-    static func values() -> [EnumUInt64Enum] {
-        return [
-            EnumUInt64Enum.ENUM_VALUE_0,
-            EnumUInt64Enum.ENUM_VALUE_1,
-            EnumUInt64Enum.ENUM_VALUE_2,
-            EnumUInt64Enum.ENUM_VALUE_3,
-            EnumUInt64Enum.ENUM_VALUE_4,
-            EnumUInt64Enum.ENUM_VALUE_5,
-        ]
-    }
+    static let rawValuesMap: [RawValue: EnumUInt64Enum] = {
+        var value = [RawValue: EnumUInt64Enum]()
+        value[EnumUInt64Enum.ENUM_VALUE_0.rawValue] = .ENUM_VALUE_0
+        value[EnumUInt64Enum.ENUM_VALUE_1.rawValue] = .ENUM_VALUE_1
+        value[EnumUInt64Enum.ENUM_VALUE_2.rawValue] = .ENUM_VALUE_2
+        value[EnumUInt64Enum.ENUM_VALUE_3.rawValue] = .ENUM_VALUE_3
+        value[EnumUInt64Enum.ENUM_VALUE_4.rawValue] = .ENUM_VALUE_4
+        value[EnumUInt64Enum.ENUM_VALUE_5.rawValue] = .ENUM_VALUE_5
+        return value
+    }()
 
     static func mapValue(value: UInt64) -> EnumUInt64Enum? {
-        var mapping = Dictionary<UInt64, EnumUInt64Enum>()
-        for value in values() {
-            mapping[value.rawValue] = value
-        }
-        return mapping[value]
+        return rawValuesMap[value]
     }
 }

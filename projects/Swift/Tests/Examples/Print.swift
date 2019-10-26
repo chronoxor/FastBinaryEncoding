@@ -17,14 +17,14 @@ class ExamplePrint: XCTestCase {
         print("")
 
         // Print bytes struct
-        let structBytes = StructBytes()
+        var structBytes = StructBytes()
         structBytes.f1 = "ABC".data(using: .utf8)!
         structBytes.f2 = "test".data(using: .utf8)!
         print(structBytes.description)
         print("")
 
         // Print array struct
-        let structArray = StructArray()
+        var structArray = StructArray()
         structArray.f1 = Array(repeating: 0, count: 2)
         structArray.f1[0] = 48
         structArray.f1[1] = 65
@@ -59,7 +59,7 @@ class ExamplePrint: XCTestCase {
         print("")
 
         // Print vector struct
-        let structVector = StructVector()
+        var structVector = StructVector()
         structVector.f1.append(48)
         structVector.f1.append(65)
         structVector.f2.append(97)
@@ -84,7 +84,7 @@ class ExamplePrint: XCTestCase {
         print("")
 
         // Print list struct
-        let structList = StructList()
+        var structList = StructList()
         structList.f1.append(48)
         structList.f1.append(65)
         structList.f2.append(97)
@@ -109,7 +109,7 @@ class ExamplePrint: XCTestCase {
         print("")
 
         // Print set struct
-        let structSet = StructSet()
+        var structSet = StructSet()
         structSet.f1.append(48)
         structSet.f1.append(65)
         structSet.f1.append(97)
@@ -117,17 +117,17 @@ class ExamplePrint: XCTestCase {
         structSet.f2.append(EnumSimple.ENUM_VALUE_2)
         structSet.f3.append(FlagsSimple.fromSet(set: [FlagsSimple.FLAG_VALUE_1.value!, FlagsSimple.FLAG_VALUE_2.value!]))
         structSet.f3.append(FlagsSimple.fromSet(set: [FlagsSimple.FLAG_VALUE_1.value!, FlagsSimple.FLAG_VALUE_2.value!, FlagsSimple.FLAG_VALUE_3.value!]))
-        let s1 = StructSimple()
+        var s1 = StructSimple()
         s1.id = 48
         structSet.f4.append(s1)
-        let s2 = StructSimple()
+        var s2 = StructSimple()
         s2.id = 65
         structSet.f4.append(s2)
         print(structSet.description)
         print("")
 
         // Print map struct
-        let structMap = StructMap()
+        var structMap = StructMap()
         structMap.f1[10] = 48
         structMap.f1[20] = 65
         structMap.f2[10] = 97
@@ -154,7 +154,7 @@ class ExamplePrint: XCTestCase {
         print("")
 
         // Print hash struct
-        let structHash = StructHash()
+        var structHash = StructHash()
         structHash.f1["10"] = 48
         structHash.f1["20"] = 65
         structHash.f2["10"] = 97
@@ -181,7 +181,7 @@ class ExamplePrint: XCTestCase {
         print("")
 
         // Print extended hash struct
-        let structHashEx = StructHashEx()
+        var structHashEx = StructHashEx()
         s1.id = 48
         structHashEx.f1[s1] = StructNested()
         s2.id = 65

@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class EnumInt16: Comparable, Hashable, Codable {
+public struct EnumInt16: Comparable, Hashable, Codable {
     typealias RawValue = Int16
     public static let ENUM_VALUE_0 = EnumInt16(value: EnumInt16Enum.ENUM_VALUE_0)
     public static let ENUM_VALUE_1 = EnumInt16(value: EnumInt16Enum.ENUM_VALUE_1)
@@ -14,24 +14,24 @@ public class EnumInt16: Comparable, Hashable, Codable {
     public static let ENUM_VALUE_4 = EnumInt16(value: EnumInt16Enum.ENUM_VALUE_4)
     public static let ENUM_VALUE_5 = EnumInt16(value: EnumInt16Enum.ENUM_VALUE_5)
 
-    var value: EnumInt16Enum? = EnumInt16Enum.values().first
+    var value: EnumInt16Enum?
 
     public var raw: Int16 { return value!.rawValue }
 
-    public init() {}
+    public init() { setDefault() }
     public init(value: Int16) { setEnum(value: value) }
     public init(value: EnumInt16Enum) { setEnum(value: value) }
     public init(value: EnumInt16) { setEnum(value: value) }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         setEnum(value: try container.decode(RawValue.self))
     }
-    public func setDefault() { setEnum(value: NSNumber(value: 0).int16Value) }
+    public mutating func setDefault() { setEnum(value: NSNumber(value: 0).int16Value) }
 
-    public func setEnum(value: Int16) { self.value = EnumInt16Enum.mapValue(value: value) }
-    public func setEnum(value: EnumInt16Enum) { self.value = value }
-    public func setEnum(value: EnumInt16) { self.value = value.value }
+    public mutating func setEnum(value: Int16) { self.value = EnumInt16Enum.mapValue(value: value) }
+    public mutating func setEnum(value: EnumInt16Enum) { self.value = value }
+    public mutating func setEnum(value: EnumInt16) { self.value = value.value }
 
     public static func < (lhs: EnumInt16, rhs: EnumInt16) -> Bool {
         guard let lhsValue = lhs.value, let rhsValue = rhs.value else {
@@ -54,7 +54,7 @@ public class EnumInt16: Comparable, Hashable, Codable {
     public var description: String {
         return value?.description ?? "<unknown>"
     }
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(raw)
     }
@@ -63,7 +63,7 @@ public class EnumInt16: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    public class func fromJson(_ json: String) throws -> EnumInt16 {
+    public static func fromJson(_ json: String) throws -> EnumInt16 {
         return try JSONDecoder().decode(EnumInt16.self, from: json.data(using: .utf8)!)
     }
 }

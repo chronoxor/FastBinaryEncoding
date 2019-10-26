@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-open class Account: Comparable, Hashable, Codable {
+public struct Account: Comparable, Hashable, Codable {
     public var id: Int32 = 0
     public var name: String = ""
     public var state: StateEx = StateEx.fromSet(set: [StateEx.initialized.value!, StateEx.bad.value!, StateEx.sad.value!])
@@ -15,7 +15,8 @@ open class Account: Comparable, Hashable, Codable {
     public var asset: Balance? = nil
     public var orders: Array<Order> = Array()
 
-    public init() {}
+
+    public init() { }
     public init(id: Int32, name: String, state: StateEx, wallet: Balance, asset: Balance?, orders: Array<Order>) {
 
         self.id = id
@@ -35,7 +36,7 @@ open class Account: Comparable, Hashable, Codable {
         self.orders = other.orders
     }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int32.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
@@ -45,7 +46,7 @@ open class Account: Comparable, Hashable, Codable {
         orders = try container.decode(Array<ChronoxorProtoex.Order>.self, forKey: .orders)
     }
 
-    open func clone() throws -> Account {
+    public func clone() throws -> Account {
         // Serialize the struct to the FBE stream
         let writer = AccountModel()
         try _ = writer.serialize(value: self)
@@ -66,11 +67,11 @@ open class Account: Comparable, Hashable, Codable {
         return true
     }
 
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 
-    open var description: String {
+    public var description: String {
         var sb = String()
         sb.append("Account(")
         sb.append("id="); sb.append(id.description)
@@ -99,7 +100,7 @@ open class Account: Comparable, Hashable, Codable {
         case orders
     }
 
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(name, forKey: .name)
@@ -109,11 +110,11 @@ open class Account: Comparable, Hashable, Codable {
         try container.encode(orders, forKey: .orders)
     }
 
-    open func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) throws -> Account {
+    public static func fromJson(_ json: String) throws -> Account {
         return try JSONDecoder().decode(Account.self, from: json.data(using: .utf8)!)
     }
 }

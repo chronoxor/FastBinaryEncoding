@@ -57,21 +57,19 @@ public class StructVectorModel: Model {
     // Deserialize the struct value
     public func deserialize() -> StructVector { var value = StructVector(); _ = deserialize(value: &value); return value }
     public func deserialize(value: inout StructVector) -> Int {
-        var valueRef = value
-
         if buffer.offset + model.fbeOffset - 4 > buffer.size {
-            valueRef = StructVector()
+            value = StructVector()
             return 0
         }
 
         let fbeFullSize = Int(readUInt32(offset: model.fbeOffset - 4))
         if fbeFullSize < model.fbeSize {
             assertionFailure("Model is broken!")
-            valueRef = StructVector()
+            value = StructVector()
             return 0
         }
 
-        valueRef = model.get(fbeValue: &valueRef)
+        value = model.get(fbeValue: &value)
         return fbeFullSize
     }
 

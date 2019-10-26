@@ -7,11 +7,12 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-open class StructHashEx: Comparable, Hashable, Codable {
+public struct StructHashEx: Comparable, Hashable, Codable {
     public var f1: Dictionary<StructSimple, StructNested> = Dictionary()
     public var f2: Dictionary<StructSimple, StructNested?> = Dictionary()
 
-    public init() {}
+
+    public init() { }
     public init(f1: Dictionary<StructSimple, StructNested>, f2: Dictionary<StructSimple, StructNested?>) {
 
         self.f1 = f1
@@ -23,13 +24,13 @@ open class StructHashEx: Comparable, Hashable, Codable {
         self.f2 = other.f2
     }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         f1 = try container.decode(Dictionary<ChronoxorTest.StructSimple, ChronoxorTest.StructNested>.self, forKey: .f1)
         f2 = try container.decode(Dictionary<ChronoxorTest.StructSimple, ChronoxorTest.StructNested?>.self, forKey: .f2)
     }
 
-    open func clone() throws -> StructHashEx {
+    public func clone() throws -> StructHashEx {
         // Serialize the struct to the FBE stream
         let writer = StructHashExModel()
         try _ = writer.serialize(value: self)
@@ -48,10 +49,10 @@ open class StructHashEx: Comparable, Hashable, Codable {
         return true
     }
 
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
     }
 
-    open var description: String {
+    public var description: String {
         var sb = String()
         sb.append("StructHashEx(")
         if true {
@@ -84,17 +85,17 @@ open class StructHashEx: Comparable, Hashable, Codable {
         case f2
     }
 
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(f1, forKey: .f1)
         try container.encode(f2, forKey: .f2)
     }
 
-    open func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) throws -> StructHashEx {
+    public static func fromJson(_ json: String) throws -> StructHashEx {
         return try JSONDecoder().decode(StructHashEx.self, from: json.data(using: .utf8)!)
     }
 }

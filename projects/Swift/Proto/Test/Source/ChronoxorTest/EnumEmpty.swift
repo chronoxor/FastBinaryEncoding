@@ -5,27 +5,27 @@
 
 import Foundation
 
-public class EnumEmpty: Comparable, Hashable, Codable {
+public struct EnumEmpty: Comparable, Hashable, Codable {
     typealias RawValue = Int32
 
-    var value: EnumEmptyEnum? = EnumEmptyEnum.values().first
+    var value: EnumEmptyEnum?
 
     public var raw: Int32 { return value!.rawValue }
 
-    public init() {}
+    public init() { setDefault() }
     public init(value: Int32) { setEnum(value: value) }
     public init(value: EnumEmptyEnum) { setEnum(value: value) }
     public init(value: EnumEmpty) { setEnum(value: value) }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         setEnum(value: try container.decode(RawValue.self))
     }
-    public func setDefault() { setEnum(value: NSNumber(value: 0).int32Value) }
+    public mutating func setDefault() { setEnum(value: NSNumber(value: 0).int32Value) }
 
-    public func setEnum(value: Int32) { self.value = EnumEmptyEnum.mapValue(value: value) }
-    public func setEnum(value: EnumEmptyEnum) { self.value = value }
-    public func setEnum(value: EnumEmpty) { self.value = value.value }
+    public mutating func setEnum(value: Int32) { self.value = EnumEmptyEnum.mapValue(value: value) }
+    public mutating func setEnum(value: EnumEmptyEnum) { self.value = value }
+    public mutating func setEnum(value: EnumEmpty) { self.value = value.value }
 
     public static func < (lhs: EnumEmpty, rhs: EnumEmpty) -> Bool {
         guard let lhsValue = lhs.value, let rhsValue = rhs.value else {
@@ -48,7 +48,7 @@ public class EnumEmpty: Comparable, Hashable, Codable {
     public var description: String {
         return value?.description ?? "<unknown>"
     }
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(raw)
     }
@@ -57,7 +57,7 @@ public class EnumEmpty: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    public class func fromJson(_ json: String) throws -> EnumEmpty {
+    public static func fromJson(_ json: String) throws -> EnumEmpty {
         return try JSONDecoder().decode(EnumEmpty.self, from: json.data(using: .utf8)!)
     }
 }

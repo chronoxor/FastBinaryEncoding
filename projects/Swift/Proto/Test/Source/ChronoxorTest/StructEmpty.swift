@@ -7,17 +7,18 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-open class StructEmpty: Comparable, Hashable, Codable {
-    public init() {}
+public struct StructEmpty: Comparable, Hashable, Codable {
+
+    public init() { }
 
     public init(other: StructEmpty) {
     }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
     }
 
-    open func clone() throws -> StructEmpty {
+    public func clone() throws -> StructEmpty {
         // Serialize the struct to the FBE stream
         let writer = StructEmptyModel()
         try _ = writer.serialize(value: self)
@@ -36,10 +37,10 @@ open class StructEmpty: Comparable, Hashable, Codable {
         return true
     }
 
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
     }
 
-    open var description: String {
+    public var description: String {
         var sb = String()
         sb.append("StructEmpty(")
         sb.append(")")
@@ -49,15 +50,15 @@ open class StructEmpty: Comparable, Hashable, Codable {
         case empty
     }
 
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
     }
 
-    open func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) throws -> StructEmpty {
+    public static func fromJson(_ json: String) throws -> StructEmpty {
         return try JSONDecoder().decode(StructEmpty.self, from: json.data(using: .utf8)!)
     }
 }

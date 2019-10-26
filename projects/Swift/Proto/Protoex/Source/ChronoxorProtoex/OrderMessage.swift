@@ -7,10 +7,11 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-open class OrderMessage: Comparable, Hashable, Codable {
+public struct OrderMessage: Comparable, Hashable, Codable {
     public var body: Order = ChronoxorProtoex.Order()
 
-    public init() {}
+
+    public init() { }
     public init(body: Order) {
 
         self.body = body
@@ -20,12 +21,12 @@ open class OrderMessage: Comparable, Hashable, Codable {
         self.body = other.body
     }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         body = try container.decode(ChronoxorProtoex.Order.self, forKey: .body)
     }
 
-    open func clone() throws -> OrderMessage {
+    public func clone() throws -> OrderMessage {
         // Serialize the struct to the FBE stream
         let writer = OrderMessageModel()
         try _ = writer.serialize(value: self)
@@ -44,10 +45,10 @@ open class OrderMessage: Comparable, Hashable, Codable {
         return true
     }
 
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
     }
 
-    open var description: String {
+    public var description: String {
         var sb = String()
         sb.append("OrderMessage(")
         sb.append("body="); sb.append(body.description)
@@ -58,16 +59,16 @@ open class OrderMessage: Comparable, Hashable, Codable {
         case body
     }
 
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(body, forKey: .body)
     }
 
-    open func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) throws -> OrderMessage {
+    public static func fromJson(_ json: String) throws -> OrderMessage {
         return try JSONDecoder().decode(OrderMessage.self, from: json.data(using: .utf8)!)
     }
 }

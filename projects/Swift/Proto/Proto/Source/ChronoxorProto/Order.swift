@@ -6,7 +6,7 @@
 import Foundation
 import ChronoxorFbe
 
-open class Order: Comparable, Hashable, Codable {
+public struct Order: Comparable, Hashable, Codable {
     public var id: Int32 = 0
     public var symbol: String = ""
     public var side: OrderSide = ChronoxorProto.OrderSide()
@@ -14,7 +14,8 @@ open class Order: Comparable, Hashable, Codable {
     public var price: Double = 0.0
     public var volume: Double = 0.0
 
-    public init() {}
+
+    public init() { }
     public init(id: Int32, symbol: String, side: OrderSide, type: OrderType, price: Double, volume: Double) {
 
         self.id = id
@@ -34,7 +35,7 @@ open class Order: Comparable, Hashable, Codable {
         self.volume = other.volume
     }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int32.self, forKey: .id)
         symbol = try container.decode(String.self, forKey: .symbol)
@@ -44,7 +45,7 @@ open class Order: Comparable, Hashable, Codable {
         volume = try container.decode(Double.self, forKey: .volume)
     }
 
-    open func clone() throws -> Order {
+    public func clone() throws -> Order {
         // Serialize the struct to the FBE stream
         let writer = OrderModel()
         try _ = writer.serialize(value: self)
@@ -65,11 +66,11 @@ open class Order: Comparable, Hashable, Codable {
         return true
     }
 
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 
-    open var description: String {
+    public var description: String {
         var sb = String()
         sb.append("Order(")
         sb.append("id="); sb.append(id.description)
@@ -90,7 +91,7 @@ open class Order: Comparable, Hashable, Codable {
         case volume
     }
 
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(symbol, forKey: .symbol)
@@ -100,11 +101,11 @@ open class Order: Comparable, Hashable, Codable {
         try container.encode(volume, forKey: .volume)
     }
 
-    open func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) throws -> Order {
+    public static func fromJson(_ json: String) throws -> Order {
         return try JSONDecoder().decode(Order.self, from: json.data(using: .utf8)!)
     }
 }

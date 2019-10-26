@@ -30,7 +30,7 @@ public class FinalModelBalance: FinalModel {
     // Get the allocation size
     public func fbeAllocationSize(value fbeValue: Balance) -> Int {
         return 0
-            + parent.fbeAllocationSize(value: fbeValue)
+            + parent.fbeAllocationSize(value: fbeValue.parent)
             + locked.fbeAllocationSize(value: fbeValue.locked)
     }
 
@@ -85,8 +85,7 @@ public class FinalModelBalance: FinalModel {
         var fbeFieldSize = Size()
 
         parent.fbeOffset = fbeCurrentOffset
-        var fbeValueBase = fbeValue as ChronoxorProto.Balance
-        fbeFieldSize.value = parent.getFields(fbeValue: &fbeValueBase)
+        fbeFieldSize.value = parent.getFields(fbeValue: &fbeValue.parent)
         fbeCurrentOffset += fbeFieldSize.value
         fbeCurrentSize += fbeFieldSize.value
 
@@ -113,7 +112,7 @@ public class FinalModelBalance: FinalModel {
         let fbeFieldSize = Size()
 
         parent.fbeOffset = fbeCurrentOffset
-        fbeFieldSize.value = try parent.setFields(fbeValue: fbeValue)
+        fbeFieldSize.value = try parent.setFields(fbeValue: fbeValue.parent)
         fbeCurrentOffset += fbeFieldSize.value
         fbeCurrentSize += fbeFieldSize.value
 

@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-open class StructVector: Comparable, Hashable, Codable {
+public struct StructVector: Comparable, Hashable, Codable {
     public var f1: Array<UInt8> = Array()
     public var f2: Array<UInt8?> = Array()
     public var f3: Array<Data> = Array()
@@ -19,7 +19,8 @@ open class StructVector: Comparable, Hashable, Codable {
     public var f9: Array<StructSimple> = Array()
     public var f10: Array<StructSimple?> = Array()
 
-    public init() {}
+
+    public init() { }
     public init(f1: Array<UInt8>, f2: Array<UInt8?>, f3: Array<Data>, f4: Array<Data?>, f5: Array<EnumSimple>, f6: Array<EnumSimple?>, f7: Array<FlagsSimple>, f8: Array<FlagsSimple?>, f9: Array<StructSimple>, f10: Array<StructSimple?>) {
 
         self.f1 = f1
@@ -47,7 +48,7 @@ open class StructVector: Comparable, Hashable, Codable {
         self.f10 = other.f10
     }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         f1 = try container.decode(Array<UInt8>.self, forKey: .f1)
         f2 = try container.decode(Array<UInt8?>.self, forKey: .f2)
@@ -61,7 +62,7 @@ open class StructVector: Comparable, Hashable, Codable {
         f10 = try container.decode(Array<ChronoxorTest.StructSimple?>.self, forKey: .f10)
     }
 
-    open func clone() throws -> StructVector {
+    public func clone() throws -> StructVector {
         // Serialize the struct to the FBE stream
         let writer = StructVectorModel()
         try _ = writer.serialize(value: self)
@@ -80,10 +81,10 @@ open class StructVector: Comparable, Hashable, Codable {
         return true
     }
 
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
     }
 
-    open var description: String {
+    public var description: String {
         var sb = String()
         sb.append("StructVector(")
         if true {
@@ -192,7 +193,7 @@ open class StructVector: Comparable, Hashable, Codable {
         case f10
     }
 
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(f1, forKey: .f1)
         try container.encode(f2, forKey: .f2)
@@ -206,11 +207,11 @@ open class StructVector: Comparable, Hashable, Codable {
         try container.encode(f10, forKey: .f10)
     }
 
-    open func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) throws -> StructVector {
+    public static func fromJson(_ json: String) throws -> StructVector {
         return try JSONDecoder().decode(StructVector.self, from: json.data(using: .utf8)!)
     }
 }

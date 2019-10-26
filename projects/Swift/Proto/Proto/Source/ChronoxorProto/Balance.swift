@@ -6,11 +6,12 @@
 import Foundation
 import ChronoxorFbe
 
-open class Balance: Comparable, Hashable, Codable {
+public struct Balance: Comparable, Hashable, Codable {
     public var currency: String = ""
     public var amount: Double = 0.0
 
-    public init() {}
+
+    public init() { }
     public init(currency: String, amount: Double) {
 
         self.currency = currency
@@ -22,13 +23,13 @@ open class Balance: Comparable, Hashable, Codable {
         self.amount = other.amount
     }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         currency = try container.decode(String.self, forKey: .currency)
         amount = try container.decode(Double.self, forKey: .amount)
     }
 
-    open func clone() throws -> Balance {
+    public func clone() throws -> Balance {
         // Serialize the struct to the FBE stream
         let writer = BalanceModel()
         try _ = writer.serialize(value: self)
@@ -49,11 +50,11 @@ open class Balance: Comparable, Hashable, Codable {
         return true
     }
 
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(currency)
     }
 
-    open var description: String {
+    public var description: String {
         var sb = String()
         sb.append("Balance(")
         sb.append("currency="); sb.append("\""); sb.append(currency); sb.append("\"")
@@ -66,17 +67,17 @@ open class Balance: Comparable, Hashable, Codable {
         case amount
     }
 
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(currency, forKey: .currency)
         try container.encode(amount, forKey: .amount)
     }
 
-    open func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) throws -> Balance {
+    public static func fromJson(_ json: String) throws -> Balance {
         return try JSONDecoder().decode(Balance.self, from: json.data(using: .utf8)!)
     }
 }

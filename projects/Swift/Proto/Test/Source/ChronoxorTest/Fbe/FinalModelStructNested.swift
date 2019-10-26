@@ -52,7 +52,7 @@ public class FinalModelStructNested: FinalModel {
     // Get the allocation size
     public func fbeAllocationSize(value fbeValue: StructNested) -> Int {
         return 0
-            + parent.fbeAllocationSize(value: fbeValue)
+            + parent.fbeAllocationSize(value: fbeValue.parent)
             + f1000.fbeAllocationSize(value: fbeValue.f1000)
             + f1001.fbeAllocationSize(value: fbeValue.f1001)
             + f1002.fbeAllocationSize(value: fbeValue.f1002)
@@ -195,8 +195,7 @@ public class FinalModelStructNested: FinalModel {
         var fbeFieldSize = Size()
 
         parent.fbeOffset = fbeCurrentOffset
-        var fbeValueBase = fbeValue as StructOptional
-        fbeFieldSize.value = parent.getFields(fbeValue: &fbeValueBase)
+        fbeFieldSize.value = parent.getFields(fbeValue: &fbeValue.parent)
         fbeCurrentOffset += fbeFieldSize.value
         fbeCurrentSize += fbeFieldSize.value
 
@@ -278,7 +277,7 @@ public class FinalModelStructNested: FinalModel {
         let fbeFieldSize = Size()
 
         parent.fbeOffset = fbeCurrentOffset
-        fbeFieldSize.value = try parent.setFields(fbeValue: fbeValue)
+        fbeFieldSize.value = try parent.setFields(fbeValue: fbeValue.parent)
         fbeCurrentOffset += fbeFieldSize.value
         fbeCurrentSize += fbeFieldSize.value
 

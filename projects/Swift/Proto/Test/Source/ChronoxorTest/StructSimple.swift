@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-open class StructSimple: Comparable, Hashable, Codable {
+public struct StructSimple: Comparable, Hashable, Codable {
     public var id: Int32 = 0
     public var f1: Bool = false
     public var f2: Bool = true
@@ -54,7 +54,8 @@ open class StructSimple: Comparable, Hashable, Codable {
     public var f43: ChronoxorProto.State = ChronoxorProto.State()
     public var f44: ChronoxorProto.Account = ChronoxorProto.Account()
 
-    public init() {}
+
+    public init() { }
     public init(id: Int32, f1: Bool, f2: Bool, f3: UInt8, f4: UInt8, f5: Character, f6: Character, f7: Character, f8: Character, f9: Int8, f10: Int8, f11: UInt8, f12: UInt8, f13: Int16, f14: Int16, f15: UInt16, f16: UInt16, f17: Int32, f18: Int32, f19: UInt32, f20: UInt32, f21: Int64, f22: Int64, f23: UInt64, f24: UInt64, f25: Float, f26: Float, f27: Double, f28: Double, f29: Decimal, f30: Decimal, f31: String, f32: String, f33: Date, f34: Date, f35: Date, f36: UUID, f37: UUID, f38: UUID, f39: ChronoxorProto.OrderSide, f40: ChronoxorProto.OrderType, f41: ChronoxorProto.Order, f42: ChronoxorProto.Balance, f43: ChronoxorProto.State, f44: ChronoxorProto.Account) {
 
         self.id = id
@@ -152,7 +153,7 @@ open class StructSimple: Comparable, Hashable, Codable {
         self.f44 = other.f44
     }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int32.self, forKey: .id)
         f1 = try container.decode(Bool.self, forKey: .f1)
@@ -205,7 +206,7 @@ open class StructSimple: Comparable, Hashable, Codable {
         f44 = try container.decode(ChronoxorProto.Account.self, forKey: .f44)
     }
 
-    open func clone() throws -> StructSimple {
+    public func clone() throws -> StructSimple {
         // Serialize the struct to the FBE stream
         let writer = StructSimpleModel()
         try _ = writer.serialize(value: self)
@@ -226,11 +227,11 @@ open class StructSimple: Comparable, Hashable, Codable {
         return true
     }
 
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 
-    open var description: String {
+    public var description: String {
         var sb = String()
         sb.append("StructSimple(")
         sb.append("id="); sb.append(id.description)
@@ -329,7 +330,7 @@ open class StructSimple: Comparable, Hashable, Codable {
         case f44
     }
 
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(f1, forKey: .f1)
@@ -378,11 +379,11 @@ open class StructSimple: Comparable, Hashable, Codable {
         try container.encode(f44, forKey: .f44)
     }
 
-    open func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) throws -> StructSimple {
+    public static func fromJson(_ json: String) throws -> StructSimple {
         return try JSONDecoder().decode(StructSimple.self, from: json.data(using: .utf8)!)
     }
 }

@@ -87,22 +87,18 @@ public struct FlagsSimpleEnum: OptionSet {
         return sb
     }
 
-    public static func values() -> [FlagsSimpleEnum] {
-        return [
-            .FLAG_VALUE_0,
-            .FLAG_VALUE_1,
-            .FLAG_VALUE_2,
-            .FLAG_VALUE_3,
-            .FLAG_VALUE_4,
-            .FLAG_VALUE_5,
-        ]
-    }
+    static let rawValuesMap: [RawValue: FlagsSimpleEnum] = {
+        var value = [RawValue: FlagsSimpleEnum]()
+        value[FlagsSimpleEnum.FLAG_VALUE_0.rawValue] = .FLAG_VALUE_0
+        value[FlagsSimpleEnum.FLAG_VALUE_1.rawValue] = .FLAG_VALUE_1
+        value[FlagsSimpleEnum.FLAG_VALUE_2.rawValue] = .FLAG_VALUE_2
+        value[FlagsSimpleEnum.FLAG_VALUE_3.rawValue] = .FLAG_VALUE_3
+        value[FlagsSimpleEnum.FLAG_VALUE_4.rawValue] = .FLAG_VALUE_4
+        value[FlagsSimpleEnum.FLAG_VALUE_5.rawValue] = .FLAG_VALUE_5
+        return value
+    }()
 
     public static func mapValue(value: RawValue) -> FlagsSimpleEnum? {
-        var mapping = Dictionary<RawValue, FlagsSimpleEnum>()
-        for value in values() {
-            mapping[value.rawValue] = value
-        }
-        return mapping[value]
+        return rawValuesMap[value]
     }
 }

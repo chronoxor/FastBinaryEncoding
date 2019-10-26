@@ -7,10 +7,11 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-open class AccountMessage: Comparable, Hashable, Codable {
+public struct AccountMessage: Comparable, Hashable, Codable {
     public var body: Account = ChronoxorProtoex.Account()
 
-    public init() {}
+
+    public init() { }
     public init(body: Account) {
 
         self.body = body
@@ -20,12 +21,12 @@ open class AccountMessage: Comparable, Hashable, Codable {
         self.body = other.body
     }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         body = try container.decode(ChronoxorProtoex.Account.self, forKey: .body)
     }
 
-    open func clone() throws -> AccountMessage {
+    public func clone() throws -> AccountMessage {
         // Serialize the struct to the FBE stream
         let writer = AccountMessageModel()
         try _ = writer.serialize(value: self)
@@ -44,10 +45,10 @@ open class AccountMessage: Comparable, Hashable, Codable {
         return true
     }
 
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
     }
 
-    open var description: String {
+    public var description: String {
         var sb = String()
         sb.append("AccountMessage(")
         sb.append("body="); sb.append(body.description)
@@ -58,16 +59,16 @@ open class AccountMessage: Comparable, Hashable, Codable {
         case body
     }
 
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(body, forKey: .body)
     }
 
-    open func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) throws -> AccountMessage {
+    public static func fromJson(_ json: String) throws -> AccountMessage {
         return try JSONDecoder().decode(AccountMessage.self, from: json.data(using: .utf8)!)
     }
 }

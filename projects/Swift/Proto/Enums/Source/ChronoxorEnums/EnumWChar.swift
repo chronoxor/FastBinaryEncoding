@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class EnumWChar: Comparable, Hashable, Codable {
+public struct EnumWChar: Comparable, Hashable, Codable {
     typealias RawValue = UInt32
     public static let ENUM_VALUE_0 = EnumWChar(value: EnumWCharEnum.ENUM_VALUE_0)
     public static let ENUM_VALUE_1 = EnumWChar(value: EnumWCharEnum.ENUM_VALUE_1)
@@ -14,24 +14,24 @@ public class EnumWChar: Comparable, Hashable, Codable {
     public static let ENUM_VALUE_4 = EnumWChar(value: EnumWCharEnum.ENUM_VALUE_4)
     public static let ENUM_VALUE_5 = EnumWChar(value: EnumWCharEnum.ENUM_VALUE_5)
 
-    var value: EnumWCharEnum? = EnumWCharEnum.values().first
+    var value: EnumWCharEnum?
 
     public var raw: UInt32 { return value!.rawValue }
 
-    public init() {}
+    public init() { setDefault() }
     public init(value: UInt32) { setEnum(value: value) }
     public init(value: EnumWCharEnum) { setEnum(value: value) }
     public init(value: EnumWChar) { setEnum(value: value) }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         setEnum(value: try container.decode(RawValue.self))
     }
-    public func setDefault() { setEnum(value: NSNumber(value: 0).uint32Value) }
+    public mutating func setDefault() { setEnum(value: NSNumber(value: 0).uint32Value) }
 
-    public func setEnum(value: UInt32) { self.value = EnumWCharEnum.mapValue(value: value) }
-    public func setEnum(value: EnumWCharEnum) { self.value = value }
-    public func setEnum(value: EnumWChar) { self.value = value.value }
+    public mutating func setEnum(value: UInt32) { self.value = EnumWCharEnum.mapValue(value: value) }
+    public mutating func setEnum(value: EnumWCharEnum) { self.value = value }
+    public mutating func setEnum(value: EnumWChar) { self.value = value.value }
 
     public static func < (lhs: EnumWChar, rhs: EnumWChar) -> Bool {
         guard let lhsValue = lhs.value, let rhsValue = rhs.value else {
@@ -54,7 +54,7 @@ public class EnumWChar: Comparable, Hashable, Codable {
     public var description: String {
         return value?.description ?? "<unknown>"
     }
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(raw)
     }
@@ -63,7 +63,7 @@ public class EnumWChar: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    public class func fromJson(_ json: String) throws -> EnumWChar {
+    public static func fromJson(_ json: String) throws -> EnumWChar {
         return try JSONDecoder().decode(EnumWChar.self, from: json.data(using: .utf8)!)
     }
 }

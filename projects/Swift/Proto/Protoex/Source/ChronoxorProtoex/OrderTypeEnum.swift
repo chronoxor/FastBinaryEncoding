@@ -37,20 +37,16 @@ public enum OrderTypeEnum {
         }
     }
 
-    static func values() -> [OrderTypeEnum] {
-        return [
-            OrderTypeEnum.market,
-            OrderTypeEnum.limit,
-            OrderTypeEnum.stop,
-            OrderTypeEnum.stoplimit,
-        ]
-    }
+    static let rawValuesMap: [RawValue: OrderTypeEnum] = {
+        var value = [RawValue: OrderTypeEnum]()
+        value[OrderTypeEnum.market.rawValue] = .market
+        value[OrderTypeEnum.limit.rawValue] = .limit
+        value[OrderTypeEnum.stop.rawValue] = .stop
+        value[OrderTypeEnum.stoplimit.rawValue] = .stoplimit
+        return value
+    }()
 
     static func mapValue(value: UInt8) -> OrderTypeEnum? {
-        var mapping = Dictionary<UInt8, OrderTypeEnum>()
-        for value in values() {
-            mapping[value.rawValue] = value
-        }
-        return mapping[value]
+        return rawValuesMap[value]
     }
 }

@@ -7,28 +7,30 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-open class Balance: ChronoxorProto.Balance {
+public struct Balance: Comparable, Hashable, Codable {
     public var locked: Double = 0.0
 
-    public override init() { super.init() }
+    public var parent: ChronoxorProto.Balance
+
+    public init() { parent = ChronoxorProto.Balance() }
     public init(parent: ChronoxorProto.Balance, locked: Double) {
-        super.init(other: parent)
+        self.parent = parent
 
         self.locked = locked
     }
 
     public init(other: Balance) {
-        super.init(other: other)
+        parent = other.parent
         self.locked = other.locked
     }
 
-    public required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
+    public init(from decoder: Decoder) throws {
+        parent = try ChronoxorProto.Balance(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
         locked = try container.decode(Double.self, forKey: .locked)
     }
 
-    open override func clone() throws -> Balance {
+    public func clone() throws -> Balance {
         // Serialize the struct to the FBE stream
         let writer = BalanceModel()
         try _ = writer.serialize(value: self)
@@ -47,14 +49,14 @@ open class Balance: ChronoxorProto.Balance {
         return true
     }
 
-    open override func hash(into hasher: inout Hasher) {
-        super.hash(into: &hasher)
+    public func hash(into hasher: inout Hasher) {
+        parent.hash(into: &hasher)
     }
 
-    open override var description: String {
+    public var description: String {
         var sb = String()
         sb.append("Balance(")
-        sb.append(super.description)
+        sb.append(parent.description)
         sb.append(",locked="); sb.append(locked.description)
         sb.append(")")
         return sb
@@ -63,17 +65,17 @@ open class Balance: ChronoxorProto.Balance {
         case locked
     }
 
-    open override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
+    public func encode(to encoder: Encoder) throws {
+        try parent.encode(to: encoder)
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(locked, forKey: .locked)
     }
 
-    open override func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open override class func fromJson(_ json: String) throws -> Balance {
+    public static func fromJson(_ json: String) throws -> Balance {
         return try JSONDecoder().decode(Balance.self, from: json.data(using: .utf8)!)
     }
 }

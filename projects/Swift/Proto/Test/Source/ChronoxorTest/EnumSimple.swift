@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class EnumSimple: Comparable, Hashable, Codable {
+public struct EnumSimple: Comparable, Hashable, Codable {
     typealias RawValue = Int32
     public static let ENUM_VALUE_0 = EnumSimple(value: EnumSimpleEnum.ENUM_VALUE_0)
     public static let ENUM_VALUE_1 = EnumSimple(value: EnumSimpleEnum.ENUM_VALUE_1)
@@ -14,24 +14,24 @@ public class EnumSimple: Comparable, Hashable, Codable {
     public static let ENUM_VALUE_4 = EnumSimple(value: EnumSimpleEnum.ENUM_VALUE_4)
     public static let ENUM_VALUE_5 = EnumSimple(value: EnumSimpleEnum.ENUM_VALUE_5)
 
-    var value: EnumSimpleEnum? = EnumSimpleEnum.values().first
+    var value: EnumSimpleEnum?
 
     public var raw: Int32 { return value!.rawValue }
 
-    public init() {}
+    public init() { setDefault() }
     public init(value: Int32) { setEnum(value: value) }
     public init(value: EnumSimpleEnum) { setEnum(value: value) }
     public init(value: EnumSimple) { setEnum(value: value) }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         setEnum(value: try container.decode(RawValue.self))
     }
-    public func setDefault() { setEnum(value: NSNumber(value: 0).int32Value) }
+    public mutating func setDefault() { setEnum(value: NSNumber(value: 0).int32Value) }
 
-    public func setEnum(value: Int32) { self.value = EnumSimpleEnum.mapValue(value: value) }
-    public func setEnum(value: EnumSimpleEnum) { self.value = value }
-    public func setEnum(value: EnumSimple) { self.value = value.value }
+    public mutating func setEnum(value: Int32) { self.value = EnumSimpleEnum.mapValue(value: value) }
+    public mutating func setEnum(value: EnumSimpleEnum) { self.value = value }
+    public mutating func setEnum(value: EnumSimple) { self.value = value.value }
 
     public static func < (lhs: EnumSimple, rhs: EnumSimple) -> Bool {
         guard let lhsValue = lhs.value, let rhsValue = rhs.value else {
@@ -54,7 +54,7 @@ public class EnumSimple: Comparable, Hashable, Codable {
     public var description: String {
         return value?.description ?? "<unknown>"
     }
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(raw)
     }
@@ -63,7 +63,7 @@ public class EnumSimple: Comparable, Hashable, Codable {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    public class func fromJson(_ json: String) throws -> EnumSimple {
+    public static func fromJson(_ json: String) throws -> EnumSimple {
         return try JSONDecoder().decode(EnumSimple.self, from: json.data(using: .utf8)!)
     }
 }

@@ -7,12 +7,13 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-open class StructBytes: Comparable, Hashable, Codable {
+public struct StructBytes: Comparable, Hashable, Codable {
     public var f1: Data = Data()
     public var f2: Data? = nil
     public var f3: Data? = nil
 
-    public init() {}
+
+    public init() { }
     public init(f1: Data, f2: Data?, f3: Data?) {
 
         self.f1 = f1
@@ -26,14 +27,14 @@ open class StructBytes: Comparable, Hashable, Codable {
         self.f3 = other.f3
     }
 
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         f1 = try container.decode(Data.self, forKey: .f1)
         f2 = try container.decode(Data?.self, forKey: .f2)
         f3 = try container.decode(Data?.self, forKey: .f3)
     }
 
-    open func clone() throws -> StructBytes {
+    public func clone() throws -> StructBytes {
         // Serialize the struct to the FBE stream
         let writer = StructBytesModel()
         try _ = writer.serialize(value: self)
@@ -52,10 +53,10 @@ open class StructBytes: Comparable, Hashable, Codable {
         return true
     }
 
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
     }
 
-    open var description: String {
+    public var description: String {
         var sb = String()
         sb.append("StructBytes(")
         sb.append("f1="); sb.append("bytes["); sb.append("\(f1.count)"); sb.append("]")
@@ -70,18 +71,18 @@ open class StructBytes: Comparable, Hashable, Codable {
         case f3
     }
 
-    open func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(f1, forKey: .f1)
         try container.encode(f2, forKey: .f2)
         try container.encode(f3, forKey: .f3)
     }
 
-    open func toJson() throws -> String {
+    public func toJson() throws -> String {
         return String(data: try JSONEncoder().encode(self), encoding: .utf8)!
     }
 
-    open class func fromJson(_ json: String) throws -> StructBytes {
+    public static func fromJson(_ json: String) throws -> StructBytes {
         return try JSONDecoder().decode(StructBytes.self, from: json.data(using: .utf8)!)
     }
 }
