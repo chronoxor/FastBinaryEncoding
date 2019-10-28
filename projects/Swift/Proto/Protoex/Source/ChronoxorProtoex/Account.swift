@@ -7,7 +7,47 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public struct Account: Comparable, Hashable, Codable {
+public protocol AccountBase: Comparable, Hashable, Codable {
+    var id: Int32 { get set }
+    var name: String { get set }
+    var state: StateEx { get set }
+    var wallet: Balance { get set }
+    var asset: Balance? { get set }
+    var orders: Array<Order> { get set }
+}
+
+public protocol AccountInheritance {
+    var parent: Account { get set }
+}
+
+extension AccountInheritance {
+    public var id: Int32 {
+        get { return parent.id }
+        set { parent.id = newValue }
+    }
+    public var name: String {
+        get { return parent.name }
+        set { parent.name = newValue }
+    }
+    public var state: StateEx {
+        get { return parent.state }
+        set { parent.state = newValue }
+    }
+    public var wallet: Balance {
+        get { return parent.wallet }
+        set { parent.wallet = newValue }
+    }
+    public var asset: Balance? {
+        get { return parent.asset }
+        set { parent.asset = newValue }
+    }
+    public var orders: Array<Order> {
+        get { return parent.orders }
+        set { parent.orders = newValue }
+    }
+}
+
+public struct Account: AccountBase {
     public var id: Int32 = 0
     public var name: String = ""
     public var state: StateEx = StateEx.fromSet(set: [StateEx.initialized.value!, StateEx.bad.value!, StateEx.sad.value!])

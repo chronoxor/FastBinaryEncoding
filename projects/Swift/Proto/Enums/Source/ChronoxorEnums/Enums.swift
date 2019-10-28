@@ -6,7 +6,347 @@
 import Foundation
 import ChronoxorFbe
 
-public struct Enums: Comparable, Hashable, Codable {
+public protocol EnumsBase: Comparable, Hashable, Codable {
+    var byte0: EnumByte { get set }
+    var byte1: EnumByte { get set }
+    var byte2: EnumByte { get set }
+    var byte3: EnumByte { get set }
+    var byte4: EnumByte { get set }
+    var byte5: EnumByte { get set }
+    var char0: EnumChar { get set }
+    var char1: EnumChar { get set }
+    var char2: EnumChar { get set }
+    var char3: EnumChar { get set }
+    var char4: EnumChar { get set }
+    var char5: EnumChar { get set }
+    var wchar0: EnumWChar { get set }
+    var wchar1: EnumWChar { get set }
+    var wchar2: EnumWChar { get set }
+    var wchar3: EnumWChar { get set }
+    var wchar4: EnumWChar { get set }
+    var wchar5: EnumWChar { get set }
+    var int8b0: EnumInt8 { get set }
+    var int8b1: EnumInt8 { get set }
+    var int8b2: EnumInt8 { get set }
+    var int8b3: EnumInt8 { get set }
+    var int8b4: EnumInt8 { get set }
+    var int8b5: EnumInt8 { get set }
+    var uint8b0: EnumUInt8 { get set }
+    var uint8b1: EnumUInt8 { get set }
+    var uint8b2: EnumUInt8 { get set }
+    var uint8b3: EnumUInt8 { get set }
+    var uint8b4: EnumUInt8 { get set }
+    var uint8b5: EnumUInt8 { get set }
+    var int16b0: EnumInt16 { get set }
+    var int16b1: EnumInt16 { get set }
+    var int16b2: EnumInt16 { get set }
+    var int16b3: EnumInt16 { get set }
+    var int16b4: EnumInt16 { get set }
+    var int16b5: EnumInt16 { get set }
+    var uint16b0: EnumUInt16 { get set }
+    var uint16b1: EnumUInt16 { get set }
+    var uint16b2: EnumUInt16 { get set }
+    var uint16b3: EnumUInt16 { get set }
+    var uint16b4: EnumUInt16 { get set }
+    var uint16b5: EnumUInt16 { get set }
+    var int32b0: EnumInt32 { get set }
+    var int32b1: EnumInt32 { get set }
+    var int32b2: EnumInt32 { get set }
+    var int32b3: EnumInt32 { get set }
+    var int32b4: EnumInt32 { get set }
+    var int32b5: EnumInt32 { get set }
+    var uint32b0: EnumUInt32 { get set }
+    var uint32b1: EnumUInt32 { get set }
+    var uint32b2: EnumUInt32 { get set }
+    var uint32b3: EnumUInt32 { get set }
+    var uint32b4: EnumUInt32 { get set }
+    var uint32b5: EnumUInt32 { get set }
+    var int64b0: EnumInt64 { get set }
+    var int64b1: EnumInt64 { get set }
+    var int64b2: EnumInt64 { get set }
+    var int64b3: EnumInt64 { get set }
+    var int64b4: EnumInt64 { get set }
+    var int64b5: EnumInt64 { get set }
+    var uint64b0: EnumUInt64 { get set }
+    var uint64b1: EnumUInt64 { get set }
+    var uint64b2: EnumUInt64 { get set }
+    var uint64b3: EnumUInt64 { get set }
+    var uint64b4: EnumUInt64 { get set }
+    var uint64b5: EnumUInt64 { get set }
+}
+
+public protocol EnumsInheritance {
+    var parent: Enums { get set }
+}
+
+extension EnumsInheritance {
+    public var byte0: EnumByte {
+        get { return parent.byte0 }
+        set { parent.byte0 = newValue }
+    }
+    public var byte1: EnumByte {
+        get { return parent.byte1 }
+        set { parent.byte1 = newValue }
+    }
+    public var byte2: EnumByte {
+        get { return parent.byte2 }
+        set { parent.byte2 = newValue }
+    }
+    public var byte3: EnumByte {
+        get { return parent.byte3 }
+        set { parent.byte3 = newValue }
+    }
+    public var byte4: EnumByte {
+        get { return parent.byte4 }
+        set { parent.byte4 = newValue }
+    }
+    public var byte5: EnumByte {
+        get { return parent.byte5 }
+        set { parent.byte5 = newValue }
+    }
+    public var char0: EnumChar {
+        get { return parent.char0 }
+        set { parent.char0 = newValue }
+    }
+    public var char1: EnumChar {
+        get { return parent.char1 }
+        set { parent.char1 = newValue }
+    }
+    public var char2: EnumChar {
+        get { return parent.char2 }
+        set { parent.char2 = newValue }
+    }
+    public var char3: EnumChar {
+        get { return parent.char3 }
+        set { parent.char3 = newValue }
+    }
+    public var char4: EnumChar {
+        get { return parent.char4 }
+        set { parent.char4 = newValue }
+    }
+    public var char5: EnumChar {
+        get { return parent.char5 }
+        set { parent.char5 = newValue }
+    }
+    public var wchar0: EnumWChar {
+        get { return parent.wchar0 }
+        set { parent.wchar0 = newValue }
+    }
+    public var wchar1: EnumWChar {
+        get { return parent.wchar1 }
+        set { parent.wchar1 = newValue }
+    }
+    public var wchar2: EnumWChar {
+        get { return parent.wchar2 }
+        set { parent.wchar2 = newValue }
+    }
+    public var wchar3: EnumWChar {
+        get { return parent.wchar3 }
+        set { parent.wchar3 = newValue }
+    }
+    public var wchar4: EnumWChar {
+        get { return parent.wchar4 }
+        set { parent.wchar4 = newValue }
+    }
+    public var wchar5: EnumWChar {
+        get { return parent.wchar5 }
+        set { parent.wchar5 = newValue }
+    }
+    public var int8b0: EnumInt8 {
+        get { return parent.int8b0 }
+        set { parent.int8b0 = newValue }
+    }
+    public var int8b1: EnumInt8 {
+        get { return parent.int8b1 }
+        set { parent.int8b1 = newValue }
+    }
+    public var int8b2: EnumInt8 {
+        get { return parent.int8b2 }
+        set { parent.int8b2 = newValue }
+    }
+    public var int8b3: EnumInt8 {
+        get { return parent.int8b3 }
+        set { parent.int8b3 = newValue }
+    }
+    public var int8b4: EnumInt8 {
+        get { return parent.int8b4 }
+        set { parent.int8b4 = newValue }
+    }
+    public var int8b5: EnumInt8 {
+        get { return parent.int8b5 }
+        set { parent.int8b5 = newValue }
+    }
+    public var uint8b0: EnumUInt8 {
+        get { return parent.uint8b0 }
+        set { parent.uint8b0 = newValue }
+    }
+    public var uint8b1: EnumUInt8 {
+        get { return parent.uint8b1 }
+        set { parent.uint8b1 = newValue }
+    }
+    public var uint8b2: EnumUInt8 {
+        get { return parent.uint8b2 }
+        set { parent.uint8b2 = newValue }
+    }
+    public var uint8b3: EnumUInt8 {
+        get { return parent.uint8b3 }
+        set { parent.uint8b3 = newValue }
+    }
+    public var uint8b4: EnumUInt8 {
+        get { return parent.uint8b4 }
+        set { parent.uint8b4 = newValue }
+    }
+    public var uint8b5: EnumUInt8 {
+        get { return parent.uint8b5 }
+        set { parent.uint8b5 = newValue }
+    }
+    public var int16b0: EnumInt16 {
+        get { return parent.int16b0 }
+        set { parent.int16b0 = newValue }
+    }
+    public var int16b1: EnumInt16 {
+        get { return parent.int16b1 }
+        set { parent.int16b1 = newValue }
+    }
+    public var int16b2: EnumInt16 {
+        get { return parent.int16b2 }
+        set { parent.int16b2 = newValue }
+    }
+    public var int16b3: EnumInt16 {
+        get { return parent.int16b3 }
+        set { parent.int16b3 = newValue }
+    }
+    public var int16b4: EnumInt16 {
+        get { return parent.int16b4 }
+        set { parent.int16b4 = newValue }
+    }
+    public var int16b5: EnumInt16 {
+        get { return parent.int16b5 }
+        set { parent.int16b5 = newValue }
+    }
+    public var uint16b0: EnumUInt16 {
+        get { return parent.uint16b0 }
+        set { parent.uint16b0 = newValue }
+    }
+    public var uint16b1: EnumUInt16 {
+        get { return parent.uint16b1 }
+        set { parent.uint16b1 = newValue }
+    }
+    public var uint16b2: EnumUInt16 {
+        get { return parent.uint16b2 }
+        set { parent.uint16b2 = newValue }
+    }
+    public var uint16b3: EnumUInt16 {
+        get { return parent.uint16b3 }
+        set { parent.uint16b3 = newValue }
+    }
+    public var uint16b4: EnumUInt16 {
+        get { return parent.uint16b4 }
+        set { parent.uint16b4 = newValue }
+    }
+    public var uint16b5: EnumUInt16 {
+        get { return parent.uint16b5 }
+        set { parent.uint16b5 = newValue }
+    }
+    public var int32b0: EnumInt32 {
+        get { return parent.int32b0 }
+        set { parent.int32b0 = newValue }
+    }
+    public var int32b1: EnumInt32 {
+        get { return parent.int32b1 }
+        set { parent.int32b1 = newValue }
+    }
+    public var int32b2: EnumInt32 {
+        get { return parent.int32b2 }
+        set { parent.int32b2 = newValue }
+    }
+    public var int32b3: EnumInt32 {
+        get { return parent.int32b3 }
+        set { parent.int32b3 = newValue }
+    }
+    public var int32b4: EnumInt32 {
+        get { return parent.int32b4 }
+        set { parent.int32b4 = newValue }
+    }
+    public var int32b5: EnumInt32 {
+        get { return parent.int32b5 }
+        set { parent.int32b5 = newValue }
+    }
+    public var uint32b0: EnumUInt32 {
+        get { return parent.uint32b0 }
+        set { parent.uint32b0 = newValue }
+    }
+    public var uint32b1: EnumUInt32 {
+        get { return parent.uint32b1 }
+        set { parent.uint32b1 = newValue }
+    }
+    public var uint32b2: EnumUInt32 {
+        get { return parent.uint32b2 }
+        set { parent.uint32b2 = newValue }
+    }
+    public var uint32b3: EnumUInt32 {
+        get { return parent.uint32b3 }
+        set { parent.uint32b3 = newValue }
+    }
+    public var uint32b4: EnumUInt32 {
+        get { return parent.uint32b4 }
+        set { parent.uint32b4 = newValue }
+    }
+    public var uint32b5: EnumUInt32 {
+        get { return parent.uint32b5 }
+        set { parent.uint32b5 = newValue }
+    }
+    public var int64b0: EnumInt64 {
+        get { return parent.int64b0 }
+        set { parent.int64b0 = newValue }
+    }
+    public var int64b1: EnumInt64 {
+        get { return parent.int64b1 }
+        set { parent.int64b1 = newValue }
+    }
+    public var int64b2: EnumInt64 {
+        get { return parent.int64b2 }
+        set { parent.int64b2 = newValue }
+    }
+    public var int64b3: EnumInt64 {
+        get { return parent.int64b3 }
+        set { parent.int64b3 = newValue }
+    }
+    public var int64b4: EnumInt64 {
+        get { return parent.int64b4 }
+        set { parent.int64b4 = newValue }
+    }
+    public var int64b5: EnumInt64 {
+        get { return parent.int64b5 }
+        set { parent.int64b5 = newValue }
+    }
+    public var uint64b0: EnumUInt64 {
+        get { return parent.uint64b0 }
+        set { parent.uint64b0 = newValue }
+    }
+    public var uint64b1: EnumUInt64 {
+        get { return parent.uint64b1 }
+        set { parent.uint64b1 = newValue }
+    }
+    public var uint64b2: EnumUInt64 {
+        get { return parent.uint64b2 }
+        set { parent.uint64b2 = newValue }
+    }
+    public var uint64b3: EnumUInt64 {
+        get { return parent.uint64b3 }
+        set { parent.uint64b3 = newValue }
+    }
+    public var uint64b4: EnumUInt64 {
+        get { return parent.uint64b4 }
+        set { parent.uint64b4 = newValue }
+    }
+    public var uint64b5: EnumUInt64 {
+        get { return parent.uint64b5 }
+        set { parent.uint64b5 = newValue }
+    }
+}
+
+public struct Enums: EnumsBase {
     public var byte0: EnumByte = ChronoxorEnums.EnumByte.ENUM_VALUE_0
     public var byte1: EnumByte = ChronoxorEnums.EnumByte.ENUM_VALUE_1
     public var byte2: EnumByte = ChronoxorEnums.EnumByte.ENUM_VALUE_2

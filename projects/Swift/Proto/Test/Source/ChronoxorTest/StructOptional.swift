@@ -7,7 +7,351 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public struct StructOptional: Comparable, Hashable, Codable {
+public protocol StructOptionalBase: StructSimpleBase {
+    var f100: Bool? { get set }
+    var f101: Bool? { get set }
+    var f102: Bool? { get set }
+    var f103: UInt8? { get set }
+    var f104: UInt8? { get set }
+    var f105: UInt8? { get set }
+    var f106: Character? { get set }
+    var f107: Character? { get set }
+    var f108: Character? { get set }
+    var f109: Character? { get set }
+    var f110: Character? { get set }
+    var f111: Character? { get set }
+    var f112: Int8? { get set }
+    var f113: Int8? { get set }
+    var f114: Int8? { get set }
+    var f115: UInt8? { get set }
+    var f116: UInt8? { get set }
+    var f117: UInt8? { get set }
+    var f118: Int16? { get set }
+    var f119: Int16? { get set }
+    var f120: Int16? { get set }
+    var f121: UInt16? { get set }
+    var f122: UInt16? { get set }
+    var f123: UInt16? { get set }
+    var f124: Int32? { get set }
+    var f125: Int32? { get set }
+    var f126: Int32? { get set }
+    var f127: UInt32? { get set }
+    var f128: UInt32? { get set }
+    var f129: UInt32? { get set }
+    var f130: Int64? { get set }
+    var f131: Int64? { get set }
+    var f132: Int64? { get set }
+    var f133: UInt64? { get set }
+    var f134: UInt64? { get set }
+    var f135: UInt64? { get set }
+    var f136: Float? { get set }
+    var f137: Float? { get set }
+    var f138: Float? { get set }
+    var f139: Double? { get set }
+    var f140: Double? { get set }
+    var f141: Double? { get set }
+    var f142: Decimal? { get set }
+    var f143: Decimal? { get set }
+    var f144: Decimal? { get set }
+    var f145: String? { get set }
+    var f146: String? { get set }
+    var f147: String? { get set }
+    var f148: Date? { get set }
+    var f149: Date? { get set }
+    var f150: Date? { get set }
+    var f151: UUID? { get set }
+    var f152: UUID? { get set }
+    var f153: UUID? { get set }
+    var f154: ChronoxorProto.OrderSide? { get set }
+    var f155: ChronoxorProto.OrderSide? { get set }
+    var f156: ChronoxorProto.OrderType? { get set }
+    var f157: ChronoxorProto.OrderType? { get set }
+    var f158: ChronoxorProto.Order? { get set }
+    var f159: ChronoxorProto.Order? { get set }
+    var f160: ChronoxorProto.Balance? { get set }
+    var f161: ChronoxorProto.Balance? { get set }
+    var f162: ChronoxorProto.State? { get set }
+    var f163: ChronoxorProto.State? { get set }
+    var f164: ChronoxorProto.Account? { get set }
+    var f165: ChronoxorProto.Account? { get set }
+}
+
+public protocol StructOptionalInheritance: StructSimpleInheritance {
+    var parent: StructOptional { get set }
+}
+
+extension StructOptionalInheritance {
+    public var parent: StructSimple {
+        get { return parent.parent }
+        set { parent.parent = newValue }
+    }
+    public var f100: Bool? {
+        get { return parent.f100 }
+        set { parent.f100 = newValue }
+    }
+    public var f101: Bool? {
+        get { return parent.f101 }
+        set { parent.f101 = newValue }
+    }
+    public var f102: Bool? {
+        get { return parent.f102 }
+        set { parent.f102 = newValue }
+    }
+    public var f103: UInt8? {
+        get { return parent.f103 }
+        set { parent.f103 = newValue }
+    }
+    public var f104: UInt8? {
+        get { return parent.f104 }
+        set { parent.f104 = newValue }
+    }
+    public var f105: UInt8? {
+        get { return parent.f105 }
+        set { parent.f105 = newValue }
+    }
+    public var f106: Character? {
+        get { return parent.f106 }
+        set { parent.f106 = newValue }
+    }
+    public var f107: Character? {
+        get { return parent.f107 }
+        set { parent.f107 = newValue }
+    }
+    public var f108: Character? {
+        get { return parent.f108 }
+        set { parent.f108 = newValue }
+    }
+    public var f109: Character? {
+        get { return parent.f109 }
+        set { parent.f109 = newValue }
+    }
+    public var f110: Character? {
+        get { return parent.f110 }
+        set { parent.f110 = newValue }
+    }
+    public var f111: Character? {
+        get { return parent.f111 }
+        set { parent.f111 = newValue }
+    }
+    public var f112: Int8? {
+        get { return parent.f112 }
+        set { parent.f112 = newValue }
+    }
+    public var f113: Int8? {
+        get { return parent.f113 }
+        set { parent.f113 = newValue }
+    }
+    public var f114: Int8? {
+        get { return parent.f114 }
+        set { parent.f114 = newValue }
+    }
+    public var f115: UInt8? {
+        get { return parent.f115 }
+        set { parent.f115 = newValue }
+    }
+    public var f116: UInt8? {
+        get { return parent.f116 }
+        set { parent.f116 = newValue }
+    }
+    public var f117: UInt8? {
+        get { return parent.f117 }
+        set { parent.f117 = newValue }
+    }
+    public var f118: Int16? {
+        get { return parent.f118 }
+        set { parent.f118 = newValue }
+    }
+    public var f119: Int16? {
+        get { return parent.f119 }
+        set { parent.f119 = newValue }
+    }
+    public var f120: Int16? {
+        get { return parent.f120 }
+        set { parent.f120 = newValue }
+    }
+    public var f121: UInt16? {
+        get { return parent.f121 }
+        set { parent.f121 = newValue }
+    }
+    public var f122: UInt16? {
+        get { return parent.f122 }
+        set { parent.f122 = newValue }
+    }
+    public var f123: UInt16? {
+        get { return parent.f123 }
+        set { parent.f123 = newValue }
+    }
+    public var f124: Int32? {
+        get { return parent.f124 }
+        set { parent.f124 = newValue }
+    }
+    public var f125: Int32? {
+        get { return parent.f125 }
+        set { parent.f125 = newValue }
+    }
+    public var f126: Int32? {
+        get { return parent.f126 }
+        set { parent.f126 = newValue }
+    }
+    public var f127: UInt32? {
+        get { return parent.f127 }
+        set { parent.f127 = newValue }
+    }
+    public var f128: UInt32? {
+        get { return parent.f128 }
+        set { parent.f128 = newValue }
+    }
+    public var f129: UInt32? {
+        get { return parent.f129 }
+        set { parent.f129 = newValue }
+    }
+    public var f130: Int64? {
+        get { return parent.f130 }
+        set { parent.f130 = newValue }
+    }
+    public var f131: Int64? {
+        get { return parent.f131 }
+        set { parent.f131 = newValue }
+    }
+    public var f132: Int64? {
+        get { return parent.f132 }
+        set { parent.f132 = newValue }
+    }
+    public var f133: UInt64? {
+        get { return parent.f133 }
+        set { parent.f133 = newValue }
+    }
+    public var f134: UInt64? {
+        get { return parent.f134 }
+        set { parent.f134 = newValue }
+    }
+    public var f135: UInt64? {
+        get { return parent.f135 }
+        set { parent.f135 = newValue }
+    }
+    public var f136: Float? {
+        get { return parent.f136 }
+        set { parent.f136 = newValue }
+    }
+    public var f137: Float? {
+        get { return parent.f137 }
+        set { parent.f137 = newValue }
+    }
+    public var f138: Float? {
+        get { return parent.f138 }
+        set { parent.f138 = newValue }
+    }
+    public var f139: Double? {
+        get { return parent.f139 }
+        set { parent.f139 = newValue }
+    }
+    public var f140: Double? {
+        get { return parent.f140 }
+        set { parent.f140 = newValue }
+    }
+    public var f141: Double? {
+        get { return parent.f141 }
+        set { parent.f141 = newValue }
+    }
+    public var f142: Decimal? {
+        get { return parent.f142 }
+        set { parent.f142 = newValue }
+    }
+    public var f143: Decimal? {
+        get { return parent.f143 }
+        set { parent.f143 = newValue }
+    }
+    public var f144: Decimal? {
+        get { return parent.f144 }
+        set { parent.f144 = newValue }
+    }
+    public var f145: String? {
+        get { return parent.f145 }
+        set { parent.f145 = newValue }
+    }
+    public var f146: String? {
+        get { return parent.f146 }
+        set { parent.f146 = newValue }
+    }
+    public var f147: String? {
+        get { return parent.f147 }
+        set { parent.f147 = newValue }
+    }
+    public var f148: Date? {
+        get { return parent.f148 }
+        set { parent.f148 = newValue }
+    }
+    public var f149: Date? {
+        get { return parent.f149 }
+        set { parent.f149 = newValue }
+    }
+    public var f150: Date? {
+        get { return parent.f150 }
+        set { parent.f150 = newValue }
+    }
+    public var f151: UUID? {
+        get { return parent.f151 }
+        set { parent.f151 = newValue }
+    }
+    public var f152: UUID? {
+        get { return parent.f152 }
+        set { parent.f152 = newValue }
+    }
+    public var f153: UUID? {
+        get { return parent.f153 }
+        set { parent.f153 = newValue }
+    }
+    public var f154: ChronoxorProto.OrderSide? {
+        get { return parent.f154 }
+        set { parent.f154 = newValue }
+    }
+    public var f155: ChronoxorProto.OrderSide? {
+        get { return parent.f155 }
+        set { parent.f155 = newValue }
+    }
+    public var f156: ChronoxorProto.OrderType? {
+        get { return parent.f156 }
+        set { parent.f156 = newValue }
+    }
+    public var f157: ChronoxorProto.OrderType? {
+        get { return parent.f157 }
+        set { parent.f157 = newValue }
+    }
+    public var f158: ChronoxorProto.Order? {
+        get { return parent.f158 }
+        set { parent.f158 = newValue }
+    }
+    public var f159: ChronoxorProto.Order? {
+        get { return parent.f159 }
+        set { parent.f159 = newValue }
+    }
+    public var f160: ChronoxorProto.Balance? {
+        get { return parent.f160 }
+        set { parent.f160 = newValue }
+    }
+    public var f161: ChronoxorProto.Balance? {
+        get { return parent.f161 }
+        set { parent.f161 = newValue }
+    }
+    public var f162: ChronoxorProto.State? {
+        get { return parent.f162 }
+        set { parent.f162 = newValue }
+    }
+    public var f163: ChronoxorProto.State? {
+        get { return parent.f163 }
+        set { parent.f163 = newValue }
+    }
+    public var f164: ChronoxorProto.Account? {
+        get { return parent.f164 }
+        set { parent.f164 = newValue }
+    }
+    public var f165: ChronoxorProto.Account? {
+        get { return parent.f165 }
+        set { parent.f165 = newValue }
+    }
+}
+
+public struct StructOptional: StructOptionalBase, StructSimpleInheritance {
     public var parent: StructSimple
     public var f100: Bool? = nil
     public var f101: Bool? = true

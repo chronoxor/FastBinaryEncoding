@@ -40,12 +40,12 @@ class TestExtending: XCTestCase {
         XCTAssertEqual(account2.id, 1)
         XCTAssertEqual(account2.name, "Test")
         XCTAssertEqual(account2.state, ChronoxorProtoex.StateEx.good)
-        XCTAssertEqual(account2.wallet.parent.currency, "USD")
-        XCTAssertEqual(account2.wallet.parent.amount, 1000.0)
+        XCTAssertEqual(account2.wallet.currency, "USD")
+        XCTAssertEqual(account2.wallet.amount, 1000.0)
         XCTAssertEqual(account2.wallet.locked, 0.0)
         XCTAssertNotEqual(account2.asset, nil)
-        XCTAssertEqual(account2.asset!.parent.currency, "EUR")
-        XCTAssertEqual(account2.asset!.parent.amount, 100.0)
+        XCTAssertEqual(account2.asset!.currency, "EUR")
+        XCTAssertEqual(account2.asset!.amount, 100.0)
         XCTAssertEqual(account2.asset!.locked, 0.0)
         XCTAssertEqual(account2.orders.count, 3)
         XCTAssertEqual(account2.orders[0].id, 1)
@@ -80,12 +80,12 @@ class TestExtending: XCTestCase {
         account1.id = 1
         account1.name = "Test"
         account1.state = ChronoxorProtoex.StateEx.fromSet(set: [ChronoxorProtoex.StateEx.good.value!, ChronoxorProtoex.StateEx.happy.value!])
-        account1.wallet.parent.currency = "USD"
-        account1.wallet.parent.amount = 1000.0
+        account1.wallet.currency = "USD"
+        account1.wallet.amount = 1000.0
         account1.wallet.locked = 123.456
         account1.asset = ChronoxorProtoex.Balance()
-        account1.asset!.parent.currency = "EUR"
-        account1.asset!.parent.amount = 100.0
+        account1.asset!.currency = "EUR"
+        account1.asset!.amount = 100.0
         account1.asset!.locked = 12.34
         account1.orders.append(ChronoxorProtoex.Order(id: 1, symbol: "EURUSD", side: ChronoxorProtoex.OrderSide.buy, type: ChronoxorProtoex.OrderType.market, price: 1.23456, volume: 1000.0, tp: 0.0, sl: 0.0))
         account1.orders.append(ChronoxorProtoex.Order(id: 2, symbol: "EURUSD", side: ChronoxorProtoex.OrderSide.sell, type: ChronoxorProtoex.OrderType.limit, price: 1.0, volume: 100.0, tp: 0.1, sl: -0.1))

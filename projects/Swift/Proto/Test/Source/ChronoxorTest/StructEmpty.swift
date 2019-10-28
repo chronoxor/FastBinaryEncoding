@@ -7,7 +7,17 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public struct StructEmpty: Comparable, Hashable, Codable {
+public protocol StructEmptyBase: Comparable, Hashable, Codable {
+}
+
+public protocol StructEmptyInheritance {
+    var parent: StructEmpty { get set }
+}
+
+extension StructEmptyInheritance {
+}
+
+public struct StructEmpty: StructEmptyBase {
 
     public init() { }
 

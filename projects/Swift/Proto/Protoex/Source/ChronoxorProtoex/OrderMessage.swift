@@ -7,7 +7,22 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public struct OrderMessage: Comparable, Hashable, Codable {
+public protocol OrderMessageBase: Comparable, Hashable, Codable {
+    var body: Order { get set }
+}
+
+public protocol OrderMessageInheritance {
+    var parent: OrderMessage { get set }
+}
+
+extension OrderMessageInheritance {
+    public var body: Order {
+        get { return parent.body }
+        set { parent.body = newValue }
+    }
+}
+
+public struct OrderMessage: OrderMessageBase {
     public var body: Order = ChronoxorProtoex.Order()
 
     public init() { }

@@ -7,7 +7,57 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public struct Order: Comparable, Hashable, Codable {
+public protocol OrderBase: Comparable, Hashable, Codable {
+    var id: Int32 { get set }
+    var symbol: String { get set }
+    var side: OrderSide { get set }
+    var type: OrderType { get set }
+    var price: Double { get set }
+    var volume: Double { get set }
+    var tp: Double { get set }
+    var sl: Double { get set }
+}
+
+public protocol OrderInheritance {
+    var parent: Order { get set }
+}
+
+extension OrderInheritance {
+    public var id: Int32 {
+        get { return parent.id }
+        set { parent.id = newValue }
+    }
+    public var symbol: String {
+        get { return parent.symbol }
+        set { parent.symbol = newValue }
+    }
+    public var side: OrderSide {
+        get { return parent.side }
+        set { parent.side = newValue }
+    }
+    public var type: OrderType {
+        get { return parent.type }
+        set { parent.type = newValue }
+    }
+    public var price: Double {
+        get { return parent.price }
+        set { parent.price = newValue }
+    }
+    public var volume: Double {
+        get { return parent.volume }
+        set { parent.volume = newValue }
+    }
+    public var tp: Double {
+        get { return parent.tp }
+        set { parent.tp = newValue }
+    }
+    public var sl: Double {
+        get { return parent.sl }
+        set { parent.sl = newValue }
+    }
+}
+
+public struct Order: OrderBase {
     public var id: Int32 = 0
     public var symbol: String = ""
     public var side: OrderSide = ChronoxorProtoex.OrderSide()
