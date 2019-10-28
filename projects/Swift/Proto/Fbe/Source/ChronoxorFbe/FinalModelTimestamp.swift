@@ -40,7 +40,7 @@ public class FinalModelTimestamp: FinalModel {
 
         size.value = fbeSize
         let nanoseconds = TimeInterval(readInt64(offset: fbeOffset))
-        return Date(timeIntervalSince1970: nanoseconds / 1000000000)
+        return Date(timeIntervalSince1970: nanoseconds / 1_000_000_000)
     }
 
     // Set the value
@@ -50,8 +50,8 @@ public class FinalModelTimestamp: FinalModel {
             return 0
         }
 
-        let nanoseconds = value.timeIntervalSince1970 * 1000000000
-        write(offset: fbeOffset, value: UInt64(nanoseconds))
+        let milliseconds = value.timeIntervalSince1970 * 1000
+        write(offset: fbeOffset, value: UInt64(milliseconds) * 1_000_000)
         return fbeSize
     }
 }

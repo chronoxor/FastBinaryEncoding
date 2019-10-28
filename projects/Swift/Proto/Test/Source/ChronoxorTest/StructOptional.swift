@@ -278,9 +278,12 @@ public struct StructOptional: Comparable, Hashable, Codable {
         f145 = try container.decode(String?.self, forKey: .f145)
         f146 = try container.decode(String?.self, forKey: .f146)
         f147 = try container.decode(String?.self, forKey: .f147)
-        f148 = try container.decode(Date?.self, forKey: .f148)
-        f149 = try container.decode(Date?.self, forKey: .f149)
-        f150 = try container.decode(Date?.self, forKey: .f150)
+        let f148RawValue = try container.decode(TimeInterval?.self, forKey: .f148)
+        f148 = f148RawValue != nil ? Date(timeIntervalSince1970: f148RawValue! / 1_000_000_000) : nil
+        let f149RawValue = try container.decode(TimeInterval?.self, forKey: .f149)
+        f149 = f149RawValue != nil ? Date(timeIntervalSince1970: f149RawValue! / 1_000_000_000) : nil
+        let f150RawValue = try container.decode(TimeInterval?.self, forKey: .f150)
+        f150 = f150RawValue != nil ? Date(timeIntervalSince1970: f150RawValue! / 1_000_000_000) : nil
         f151 = try container.decode(UUID?.self, forKey: .f151)
         f152 = try container.decode(UUID?.self, forKey: .f152)
         f153 = try container.decode(UUID?.self, forKey: .f153)
@@ -373,9 +376,9 @@ public struct StructOptional: Comparable, Hashable, Codable {
         sb.append(",f145=");  if let f145 = f145 { sb.append("\""); sb.append(f145); sb.append("\"") } else { sb.append("null") }
         sb.append(",f146=");  if let f146 = f146 { sb.append("\""); sb.append(f146); sb.append("\"") } else { sb.append("null") }
         sb.append(",f147=");  if let f147 = f147 { sb.append("\""); sb.append(f147); sb.append("\"") } else { sb.append("null") }
-        sb.append(",f148=");  if let f148 = f148 { sb.append("\(f148.timeIntervalSince1970 * 1000000000)") } else { sb.append("null") }
-        sb.append(",f149=");  if let f149 = f149 { sb.append("\(f149.timeIntervalSince1970 * 1000000000)") } else { sb.append("null") }
-        sb.append(",f150=");  if let f150 = f150 { sb.append("\(f150.timeIntervalSince1970 * 1000000000)") } else { sb.append("null") }
+        sb.append(",f148=");  if let f148 = f148 { sb.append("\(floor(f148.timeIntervalSince1970 * 1000) * 1_000_000)") } else { sb.append("null") }
+        sb.append(",f149=");  if let f149 = f149 { sb.append("\(floor(f149.timeIntervalSince1970 * 1000) * 1_000_000)") } else { sb.append("null") }
+        sb.append(",f150=");  if let f150 = f150 { sb.append("\(floor(f150.timeIntervalSince1970 * 1000) * 1_000_000)") } else { sb.append("null") }
         sb.append(",f151=");  if let f151 = f151 { sb.append("\""); sb.append(f151.uuidString); sb.append("\"") } else { sb.append("null") }
         sb.append(",f152=");  if let f152 = f152 { sb.append("\""); sb.append(f152.uuidString); sb.append("\"") } else { sb.append("null") }
         sb.append(",f153=");  if let f153 = f153 { sb.append("\""); sb.append(f153.uuidString); sb.append("\"") } else { sb.append("null") }
@@ -514,9 +517,9 @@ public struct StructOptional: Comparable, Hashable, Codable {
         try container.encode(f145, forKey: .f145)
         try container.encode(f146, forKey: .f146)
         try container.encode(f147, forKey: .f147)
-        try container.encode(f148, forKey: .f148)
-        try container.encode(f149, forKey: .f149)
-        try container.encode(f150, forKey: .f150)
+        try container.encode(f148 != nil ? floor(f148!.timeIntervalSince1970 * 1000) * 1_000_000 : nil, forKey: .f148)
+        try container.encode(f149 != nil ? floor(f149!.timeIntervalSince1970 * 1000) * 1_000_000 : nil, forKey: .f149)
+        try container.encode(f150 != nil ? floor(f150!.timeIntervalSince1970 * 1000) * 1_000_000 : nil, forKey: .f150)
         try container.encode(f151, forKey: .f151)
         try container.encode(f152, forKey: .f152)
         try container.encode(f153, forKey: .f153)
