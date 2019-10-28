@@ -25,7 +25,7 @@ public class FieldModelTimestamp: FieldModel {
         }
 
         let nanoseconds = TimeInterval(readInt64(offset: fbeOffset))
-        return Date(timeIntervalSince1970: nanoseconds / 1000000000)
+        return Date(timeIntervalSince1970: nanoseconds / 1_000_000_000)
     }
 
     public func set(value: Date) throws {
@@ -34,7 +34,7 @@ public class FieldModelTimestamp: FieldModel {
             return
         }
 
-        let nanoseconds = value.timeIntervalSince1970 * 1000000000
-        write(offset: fbeOffset, value: UInt64(nanoseconds))
+        let milliseconds = value.timeIntervalSince1970 * 1000
+        write(offset: fbeOffset, value: UInt64(milliseconds) * 1_000_000)
     }
 }

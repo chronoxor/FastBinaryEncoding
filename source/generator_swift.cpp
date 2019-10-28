@@ -1158,7 +1158,7 @@ public class FieldModelDate: FieldModel {
         }
 
         let nanoseconds = readInt64(offset: fbeOffset)
-        return Date(timeIntervalSince1970: TimeInterval(nanoseconds / 1000000))
+        return Date(timeIntervalSince1970: TimeInterval(nanoseconds / 1_000_000_000))
     }
 
     // Set the value
@@ -1168,8 +1168,8 @@ public class FieldModelDate: FieldModel {
             return
         }
 
-        let nanoseconds = value.timeIntervalSince1970 * 1000000
-        write(offset: fbeOffset, value: UInt64(nanoseconds))
+        let milliseconds = value.timeIntervalSince1970 * 1000
+        write(offset: fbeOffset, value: UInt64(milliseconds) * 1_000_000)
     }
 }
 )CODE";
@@ -1219,7 +1219,7 @@ public class FieldModelTimestamp: FieldModel {
         }
 
         let nanoseconds = TimeInterval(readInt64(offset: fbeOffset))
-        return Date(timeIntervalSince1970: nanoseconds / 1000000000)
+        return Date(timeIntervalSince1970: nanoseconds / 1_000_000_000)
     }
 
     public func set(value: Date) throws {
@@ -1228,8 +1228,8 @@ public class FieldModelTimestamp: FieldModel {
             return
         }
 
-        let nanoseconds = value.timeIntervalSince1970 * 1000000000
-        write(offset: fbeOffset, value: UInt64(nanoseconds))
+        let milliseconds = value.timeIntervalSince1970 * 1000
+        write(offset: fbeOffset, value: UInt64(milliseconds) * 1_000_000)
     }
 }
 )CODE";
@@ -2706,7 +2706,7 @@ public class FinalModelDate: FinalModel {
 
         size.value = fbeSize
         let nanoseconds = readInt64(offset: fbeOffset)
-        return Date(timeIntervalSince1970: TimeInterval(nanoseconds / 1000000))
+        return Date(timeIntervalSince1970: TimeInterval(nanoseconds / 1_000_000_000))
     }
 
     // Set the value
@@ -2716,8 +2716,8 @@ public class FinalModelDate: FinalModel {
             return 0
         }
 
-        let nanoseconds = value.timeIntervalSince1970 * 1000000
-        write(offset: fbeOffset, value: UInt64(nanoseconds))
+        let milliseconds = value.timeIntervalSince1970 * 1000
+        write(offset: fbeOffset, value: UInt64(milliseconds) * 1_000_000)
         return fbeSize
     }
 }
@@ -2783,7 +2783,7 @@ public class FinalModelTimestamp: FinalModel {
 
         size.value = fbeSize
         let nanoseconds = TimeInterval(readInt64(offset: fbeOffset))
-        return Date(timeIntervalSince1970: nanoseconds / 1000000000)
+        return Date(timeIntervalSince1970: nanoseconds / 1_000_000_000)
     }
 
     // Set the value
@@ -2793,8 +2793,8 @@ public class FinalModelTimestamp: FinalModel {
             return 0
         }
 
-        let nanoseconds = value.timeIntervalSince1970 * 1000000000
-        write(offset: fbeOffset, value: UInt64(nanoseconds))
+        let milliseconds = value.timeIntervalSince1970 * 1000
+        write(offset: fbeOffset, value: UInt64(milliseconds) * 1_000_000)
         return fbeSize
     }
 }
@@ -5279,10 +5279,15 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
         {
             for (const auto& field : s->body->fields)
             {
-                if (field->map && *field->key != "string")
+                if ((field->vector || field->list || field->set || field->map || field->hash) && *field->type == "timestamp")
+                {
+                    WriteLineIndent(*field->name + " = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, " + ConvertTypeName(domain, "", "TimeInterval", field->optional) + ">.self, forKey: ." + *field->name + ")).map { (" + ConvertTypeName(domain, "", *field->key, false) + "($0) ?? 0, Date(timeIntervalSince1970: $1 / 1_000_000_000)) })");
+                }
+                else if (field->map && *field->key != "string")
                 {
                     WriteLineIndent(*field->name + " = Dictionary(uniqueKeysWithValues: (try container.decode(Dictionary<String, " + ConvertTypeName(domain, "", *field->type, field->optional) + ">.self, forKey: ." + *field->name + ")).map { (" + ConvertTypeName(domain, "", *field->key, false) + "($0) ?? 0, $1) })");
-                } else if (*field->type == "decimal")
+                }
+                else if (*field->type == "decimal")
                 {
                     if (field->optional)
                     {
@@ -5290,7 +5295,18 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                         WriteLineIndent(*field->name + " = " + *field->name + "RawValue != nil ? Decimal(string: " + *field->name + "RawValue!) ?? .nan : nil");
                     } else
                         WriteLineIndent(*field->name + " = Decimal(string: try container.decode(String.self, forKey: ." + *field->name + ")) ?? .nan");
-                } else if ((*field->type == "char") || (*field->type == "wchar"))
+                }
+
+                else if (*field->type == "timestamp")
+                {
+                    if (field->optional)
+                    {
+                        WriteLineIndent("let " + *field->name + "RawValue = try container.decode(TimeInterval?.self, forKey: ." + *field->name + ")");
+                        WriteLineIndent(*field->name + " = " + *field->name + "RawValue != nil ? Date(timeIntervalSince1970: " + *field->name + "RawValue! / 1_000_000_000) : nil");
+                    } else
+                        WriteLineIndent(*field->name + " = Date(timeIntervalSince1970: try container.decode(TimeInterval.self, forKey: ." + *field->name + ") / 1_000_000_000)");
+                }
+                else if ((*field->type == "char") || (*field->type == "wchar"))
                 {
                     std::string valueType = (*field->type == "char") ? "UInt8" : "UInt32";
                     std::string valueOpt = (*field->type == "char") ? "" : "!";
@@ -5302,8 +5318,9 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                         WriteLineIndent("let " + *field->name + "RawValue: " + valueType + " = try container.decode(" + valueType + ".self, forKey: ." + *field->name + ")");
                         WriteLineIndent(*field->name + " = Character(UnicodeScalar(" + *field->name + "RawValue)" + valueOpt + ")");
                     }
-                } else
-                  WriteLineIndent(*field->name + " = try container.decode(" + ConvertTypeName(domain, package, *field, false) + ".self, forKey: ." + *field->name + ")");
+                }
+                else
+                    WriteLineIndent(*field->name + " = try container.decode(" + ConvertTypeName(domain, package, *field, false) + ".self, forKey: ." + *field->name + ")");
             }
         }
 
@@ -5503,7 +5520,9 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
         {
             for (const auto& field : s->body->fields)
             {
-                if (field->map && (*field->key != "string"))
+                if ((field->vector || field->list || field->set || field->map || field->hash) && *field->type == "timestamp")
+                    WriteLineIndent("try container.encode(Dictionary(uniqueKeysWithValues: " + *field->name + ".map { ($0.description, $1.timeIntervalSince1970) }), forKey: ." + *field->name + ")");
+                else if (field->map && (*field->key != "string"))
                     WriteLineIndent("try container.encode(Dictionary(uniqueKeysWithValues: " + *field->name + ".map { ($0.description, $1) }), forKey: ." + *field->name + ")");
                 else if (*field->type == "decimal")
                 {
@@ -5516,6 +5535,13 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
                     std::string utfType = (*field->type == "char") ? "utf8" : "utf16";
                     std::string opt = (field->optional) ? "?" : "";
                     WriteLineIndent("try container.encode(" + *field->name + opt + "." + utfType + ".map { " + valueType + "($0) }[0], forKey: ." + *field->name + ")");
+                }
+                else if (*field->type == "timestamp")
+                {
+                    if (field->optional)
+                        WriteLineIndent("try container.encode(" + *field->name + " != nil ? floor(" + *field->name + "!" + ".timeIntervalSince1970 * 1000) * 1_000_000 : nil" + ", forKey: ." + *field->name + ")");
+                    else
+                        WriteLineIndent("try container.encode(floor(" + *field->name + ".timeIntervalSince1970 * 1000) * 1_000_000" + ", forKey: ." + *field->name + ")");
                 }
                 else
                     WriteLineIndent("try container.encode(" + *field->name + ", forKey: ." + *field->name + ")");
@@ -8504,7 +8530,7 @@ std::string GeneratorSwift::ConvertOutputStreamType(const std::string& type, con
     else if (type == "uuid")
         return ".append(\"\\\"\"); sb.append(" + name + opt + ".uuidString); sb.append(\"\\\"\")";
     else if (type == "timestamp")
-        return ".append(\"\\(" + name + opt + ".timeIntervalSince1970" + " * 1000000000)\")";
+        return ".append(\"\\(floor(" + name + opt + ".timeIntervalSince1970 * 1000) * 1_000_000)\")";
     else
         return ".append(" + name + opt + ".description)";
 }
