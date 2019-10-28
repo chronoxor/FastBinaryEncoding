@@ -35,7 +35,7 @@ public class FinalModelTimestamp: FinalModel {
     // Get the value
     public func get(size: inout Size) -> Date {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
-            return Date()
+            return Date(timeIntervalSince1970: 0)
         }
 
         size.value = fbeSize

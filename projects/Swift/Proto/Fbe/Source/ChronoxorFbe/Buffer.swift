@@ -268,22 +268,6 @@ public extension Buffer {
         return UInt64(littleEndian: i)
     }
 
-    class func readInt64BE(buffer: Data, offset: Int) -> UInt64 {
-        let index = offset
-        let fPart = ((UInt64(buffer[index + 0]) & UInt64(0xFF)) << 56) |
-            ((UInt64(buffer[index + 1]) & UInt64(0xFF)) << 48) |
-            ((UInt64(buffer[index + 2]) & UInt64(0xFF)) << 40)
-
-        let sPart = ((UInt64(buffer[index + 3]) & UInt64(0xFF)) << 38) |
-            ((UInt64(buffer[index + 4]) & UInt64(0xFF)) << 24) |
-            ((UInt64(buffer[index + 5]) & UInt64(0xFF)) << 16)
-
-        let tPart = ((UInt64(buffer[index + 6]) & UInt64(0xFF)) <<  8) |
-            ((UInt64(buffer[index + 7]) & UInt64(0xFF)) <<  0)
-
-        return UInt64(fPart | sPart | tPart)
-    }
-
     class func readFloat(buffer: Buffer, offset: Int) -> Float {
         let bits = readUInt32(buffer: buffer, offset: offset)
         return Float(bitPattern: bits)
@@ -440,18 +424,6 @@ public extension Buffer {
                 pointer = pointer.successor()
             }
         }
-    }
-
-    private class func writeBE(buffer: inout Data, offset: Int, value: UInt64) {
-        let index = offset
-        buffer[index + 0] = Data.Element(value >> 56)
-        buffer[index + 1] = Data.Element(value >> 48)
-        buffer[index + 2] = Data.Element(value >> 40)
-        buffer[index + 3] = Data.Element(value >> 32)
-        buffer[index + 4] = Data.Element(value >> 24)
-        buffer[index + 5] = Data.Element(value >> 16)
-        buffer[index + 6] = Data.Element(value >>  8)
-        buffer[index + 7] = Data.Element(value >>  0)
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Float) {

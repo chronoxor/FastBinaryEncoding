@@ -64,7 +64,6 @@ private:
     void GenerateFBEFinalModel(const std::string& domain, const std::string& package);
     void GenerateFBEFinalModel(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults);
     void GenerateFBEFinalModelDecimal(const std::string& domain, const std::string& package);
-    void GenerateFBEFinalModelDate(const std::string& domain, const std::string& package);
     void GenerateFBEFinalModelTimestamp(const std::string& domain, const std::string& package);
     void GenerateFBEFinalModelBytes(const std::string& domain, const std::string& package);
     void GenerateFBEFinalModelString(const std::string& domain, const std::string& package);

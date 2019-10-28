@@ -18,9 +18,8 @@ public class FieldModelTimestamp: FieldModel {
            _offset = 0
        }
 
-    public func get(defaults: Date = Date()) -> Date {
+    public func get(defaults: Date = Date(timeIntervalSince1970: 0)) -> Date {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
-            assertionFailure("Model is broken!")
             return defaults
         }
 

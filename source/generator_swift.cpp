@@ -38,7 +38,6 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel(domain, "Fbe", "Double", "Double", "", "8", "0.0");
     GenerateFBEFieldModel(domain, "Fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
     GenerateFBEFieldModelDecimal(domain, "Fbe");
-    GenerateFBEFieldModelDate(domain, "Fbe");
     GenerateFBEFieldModelTimestamp(domain, "Fbe");
     GenerateFBEFieldModelBytes(domain, "Fbe");
     GenerateFBEFieldModelString(domain, "Fbe");
@@ -62,7 +61,6 @@ void GeneratorSwift::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel(domain, "Fbe", "Double", "Double", "", "8", "0.0");
         GenerateFBEFinalModel(domain, "Fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
         GenerateFBEFinalModelDecimal(domain, "Fbe");
-        GenerateFBEFinalModelDate(domain, "Fbe");
         GenerateFBEFinalModelTimestamp(domain, "Fbe");
         GenerateFBEFinalModelBytes(domain, "Fbe");
         GenerateFBEFinalModelString(domain, "Fbe");
@@ -514,22 +512,6 @@ public extension Buffer {
         return UInt64(littleEndian: i)
     }
 
-    class func readInt64BE(buffer: Data, offset: Int) -> UInt64 {
-        let index = offset
-        let fPart = ((UInt64(buffer[index + 0]) & UInt64(0xFF)) << 56) |
-            ((UInt64(buffer[index + 1]) & UInt64(0xFF)) << 48) |
-            ((UInt64(buffer[index + 2]) & UInt64(0xFF)) << 40)
-
-        let sPart = ((UInt64(buffer[index + 3]) & UInt64(0xFF)) << 38) |
-            ((UInt64(buffer[index + 4]) & UInt64(0xFF)) << 24) |
-            ((UInt64(buffer[index + 5]) & UInt64(0xFF)) << 16)
-
-        let tPart = ((UInt64(buffer[index + 6]) & UInt64(0xFF)) <<  8) |
-            ((UInt64(buffer[index + 7]) & UInt64(0xFF)) <<  0)
-
-        return UInt64(fPart | sPart | tPart)
-    }
-
     class func readFloat(buffer: Buffer, offset: Int) -> Float {
         let bits = readUInt32(buffer: buffer, offset: offset)
         return Float(bitPattern: bits)
@@ -686,18 +668,6 @@ public extension Buffer {
                 pointer = pointer.successor()
             }
         }
-    }
-
-    private class func writeBE(buffer: inout Data, offset: Int, value: UInt64) {
-        let index = offset
-        buffer[index + 0] = Data.Element(value >> 56)
-        buffer[index + 1] = Data.Element(value >> 48)
-        buffer[index + 2] = Data.Element(value >> 40)
-        buffer[index + 3] = Data.Element(value >> 32)
-        buffer[index + 4] = Data.Element(value >> 24)
-        buffer[index + 5] = Data.Element(value >> 16)
-        buffer[index + 6] = Data.Element(value >>  8)
-        buffer[index + 7] = Data.Element(value >>  0)
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Float) {
@@ -1125,67 +1095,6 @@ public class FieldModelDecimal: FieldModel {
     Close();
 }
 
-void GeneratorSwift::GenerateFBEFieldModelDate(const std::string& domain, const std::string& package)
-{
-    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
-
-    // Open the file
-    CppCommon::Path file = path / "FieldModelDate.swift";
-    Open(file);
-
-    // Generate headers
-    GenerateHeader("Fbe");
-    GenerateImports("", "Foundation");
-
-    std::string code = R"CODE(
-// Fast Binary Encoding date field model
-public class FieldModelDate: FieldModel {
-    public var _buffer = Buffer()
-    public var _offset: Int = 0
-
-    // Field size
-    public let fbeSize: Int = 8
-
-    public required init() {
-        _buffer = Buffer()
-        _offset = 0
-    }
-
-    // Get the value
-    public func get(defaults: Date = Date(timeIntervalSince1970: 0)) -> Date {
-        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
-            return defaults
-        }
-
-        let nanoseconds = readInt64(offset: fbeOffset)
-        return Date(timeIntervalSince1970: TimeInterval(nanoseconds / 1000000))
-    }
-
-    // Set the value
-    public func set(value: Date) throws {
-        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
-            assertionFailure("Model is broken!")
-            return
-        }
-
-        let nanoseconds = value.timeIntervalSince1970 * 1000000
-        write(offset: fbeOffset, value: UInt64(nanoseconds))
-    }
-}
-)CODE";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
-
-    // Generate footer
-    GenerateFooter();
-
-    // Close the file
-    Close();
-}
-
 void GeneratorSwift::GenerateFBEFieldModelTimestamp(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
@@ -1212,9 +1121,8 @@ public class FieldModelTimestamp: FieldModel {
            _offset = 0
        }
 
-    public func get(defaults: Date = Date()) -> Date {
+    public func get(defaults: Date = Date(timeIntervalSince1970: 0)) -> Date {
         if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
-            assertionFailure("Model is broken!")
             return defaults
         }
 
@@ -2665,76 +2573,6 @@ public class FinalModelDecimal: FinalModel {
     Close();
 }
 
-void GeneratorSwift::GenerateFBEFinalModelDate(const std::string& domain, const std::string& package)
-{
-    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
-
-    // Open the file
-    CppCommon::Path file = path / "FinalModelDate.swift";
-    Open(file);
-
-    // Generate headers
-    GenerateHeader("Fbe");
-    GenerateImports("", "Foundation");
-
-    std::string code = R"CODE(
-// Fast Binary Encoding date final model
-public class FinalModelDate: FinalModel {
-    public var _buffer = Buffer()
-    public var _offset: Int = 0
-
-    public func fbeAllocationSize(value: Date) -> Int {
-        return fbeSize
-    }
-
-    // Field size
-    public let fbeSize: Int = 8
-
-    public func verify() -> Int {
-        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
-            return Int.max
-        }
-
-        return fbeSize
-    }
-
-    // Get the value
-    public func get(size: inout Size) -> Date {
-        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
-            return Date(timeIntervalSince1970: 0)
-        }
-
-        size.value = fbeSize
-        let nanoseconds = readInt64(offset: fbeOffset)
-        return Date(timeIntervalSince1970: TimeInterval(nanoseconds / 1000000))
-    }
-
-    // Set the value
-    public func set(value: Date) throws -> Int {
-        if (_buffer.offset + fbeOffset + fbeSize) > _buffer.size {
-            assertionFailure("Model is broken!")
-            return 0
-        }
-
-        let nanoseconds = value.timeIntervalSince1970 * 1000000
-        write(offset: fbeOffset, value: UInt64(nanoseconds))
-        return fbeSize
-    }
-}
-)CODE";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
-
-    // Generate footer
-    GenerateFooter();
-
-    // Close the file
-    Close();
-}
-
 void GeneratorSwift::GenerateFBEFinalModelTimestamp(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
@@ -2778,7 +2616,7 @@ public class FinalModelTimestamp: FinalModel {
     // Get the value
     public func get(size: inout Size) -> Date {
         if _buffer.offset + fbeOffset + fbeSize > _buffer.size {
-            return Date()
+            return Date(timeIntervalSince1970: 0)
         }
 
         size.value = fbeSize
