@@ -5067,17 +5067,17 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     Indent(1);
     // Generate struct body
 
+    if (s->base && !s->base->empty())
+    {
+        WriteLineIndent("public var parent: " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false) + " {");
+        Indent(1);
+        WriteLineIndent("get { return parent.parent }");
+        WriteLineIndent("set { parent.parent = newValue }");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
     if (s->body && !s->body->fields.empty())
     {
-        if (s->base && !s->base->empty())
-        {
-            WriteLineIndent("public var parent: " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false) + " {");
-            Indent(1);
-            WriteLineIndent("get { return parent.parent }");
-            WriteLineIndent("set { parent.parent = newValue }");
-            Indent(-1);
-            WriteLineIndent("}");
-        }
         for (const auto& field : s->body->fields)
         {
             std::string fieldName = (*field->name == "Type") ? ("`Type`") : *field->name;
