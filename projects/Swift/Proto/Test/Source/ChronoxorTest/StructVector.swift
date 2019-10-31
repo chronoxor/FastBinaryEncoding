@@ -7,7 +7,67 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public struct StructVector: Comparable, Hashable, Codable {
+public protocol StructVectorBase: Comparable, Hashable, Codable {
+    var f1: Array<UInt8> { get set }
+    var f2: Array<UInt8?> { get set }
+    var f3: Array<Data> { get set }
+    var f4: Array<Data?> { get set }
+    var f5: Array<EnumSimple> { get set }
+    var f6: Array<EnumSimple?> { get set }
+    var f7: Array<FlagsSimple> { get set }
+    var f8: Array<FlagsSimple?> { get set }
+    var f9: Array<StructSimple> { get set }
+    var f10: Array<StructSimple?> { get set }
+}
+
+public protocol StructVectorInheritance {
+    var parent: StructVector { get set }
+}
+
+extension StructVectorInheritance {
+    public var f1: Array<UInt8> {
+        get { return parent.f1 }
+        set { parent.f1 = newValue }
+    }
+    public var f2: Array<UInt8?> {
+        get { return parent.f2 }
+        set { parent.f2 = newValue }
+    }
+    public var f3: Array<Data> {
+        get { return parent.f3 }
+        set { parent.f3 = newValue }
+    }
+    public var f4: Array<Data?> {
+        get { return parent.f4 }
+        set { parent.f4 = newValue }
+    }
+    public var f5: Array<EnumSimple> {
+        get { return parent.f5 }
+        set { parent.f5 = newValue }
+    }
+    public var f6: Array<EnumSimple?> {
+        get { return parent.f6 }
+        set { parent.f6 = newValue }
+    }
+    public var f7: Array<FlagsSimple> {
+        get { return parent.f7 }
+        set { parent.f7 = newValue }
+    }
+    public var f8: Array<FlagsSimple?> {
+        get { return parent.f8 }
+        set { parent.f8 = newValue }
+    }
+    public var f9: Array<StructSimple> {
+        get { return parent.f9 }
+        set { parent.f9 = newValue }
+    }
+    public var f10: Array<StructSimple?> {
+        get { return parent.f10 }
+        set { parent.f10 = newValue }
+    }
+}
+
+public struct StructVector: StructVectorBase {
     public var f1: Array<UInt8> = Array()
     public var f2: Array<UInt8?> = Array()
     public var f3: Array<Data> = Array()

@@ -7,7 +7,67 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public struct StructHash: Comparable, Hashable, Codable {
+public protocol StructHashBase: Comparable, Hashable, Codable {
+    var f1: Dictionary<String, UInt8> { get set }
+    var f2: Dictionary<String, UInt8?> { get set }
+    var f3: Dictionary<String, Data> { get set }
+    var f4: Dictionary<String, Data?> { get set }
+    var f5: Dictionary<String, EnumSimple> { get set }
+    var f6: Dictionary<String, EnumSimple?> { get set }
+    var f7: Dictionary<String, FlagsSimple> { get set }
+    var f8: Dictionary<String, FlagsSimple?> { get set }
+    var f9: Dictionary<String, StructSimple> { get set }
+    var f10: Dictionary<String, StructSimple?> { get set }
+}
+
+public protocol StructHashInheritance {
+    var parent: StructHash { get set }
+}
+
+extension StructHashInheritance {
+    public var f1: Dictionary<String, UInt8> {
+        get { return parent.f1 }
+        set { parent.f1 = newValue }
+    }
+    public var f2: Dictionary<String, UInt8?> {
+        get { return parent.f2 }
+        set { parent.f2 = newValue }
+    }
+    public var f3: Dictionary<String, Data> {
+        get { return parent.f3 }
+        set { parent.f3 = newValue }
+    }
+    public var f4: Dictionary<String, Data?> {
+        get { return parent.f4 }
+        set { parent.f4 = newValue }
+    }
+    public var f5: Dictionary<String, EnumSimple> {
+        get { return parent.f5 }
+        set { parent.f5 = newValue }
+    }
+    public var f6: Dictionary<String, EnumSimple?> {
+        get { return parent.f6 }
+        set { parent.f6 = newValue }
+    }
+    public var f7: Dictionary<String, FlagsSimple> {
+        get { return parent.f7 }
+        set { parent.f7 = newValue }
+    }
+    public var f8: Dictionary<String, FlagsSimple?> {
+        get { return parent.f8 }
+        set { parent.f8 = newValue }
+    }
+    public var f9: Dictionary<String, StructSimple> {
+        get { return parent.f9 }
+        set { parent.f9 = newValue }
+    }
+    public var f10: Dictionary<String, StructSimple?> {
+        get { return parent.f10 }
+        set { parent.f10 = newValue }
+    }
+}
+
+public struct StructHash: StructHashBase {
     public var f1: Dictionary<String, UInt8> = Dictionary()
     public var f2: Dictionary<String, UInt8?> = Dictionary()
     public var f3: Dictionary<String, Data> = Dictionary()

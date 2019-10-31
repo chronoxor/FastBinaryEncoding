@@ -7,7 +7,242 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public struct StructSimple: Comparable, Hashable, Codable {
+public protocol StructSimpleBase: Comparable, Hashable, Codable {
+    var id: Int32 { get set }
+    var f1: Bool { get set }
+    var f2: Bool { get set }
+    var f3: UInt8 { get set }
+    var f4: UInt8 { get set }
+    var f5: Character { get set }
+    var f6: Character { get set }
+    var f7: Character { get set }
+    var f8: Character { get set }
+    var f9: Int8 { get set }
+    var f10: Int8 { get set }
+    var f11: UInt8 { get set }
+    var f12: UInt8 { get set }
+    var f13: Int16 { get set }
+    var f14: Int16 { get set }
+    var f15: UInt16 { get set }
+    var f16: UInt16 { get set }
+    var f17: Int32 { get set }
+    var f18: Int32 { get set }
+    var f19: UInt32 { get set }
+    var f20: UInt32 { get set }
+    var f21: Int64 { get set }
+    var f22: Int64 { get set }
+    var f23: UInt64 { get set }
+    var f24: UInt64 { get set }
+    var f25: Float { get set }
+    var f26: Float { get set }
+    var f27: Double { get set }
+    var f28: Double { get set }
+    var f29: Decimal { get set }
+    var f30: Decimal { get set }
+    var f31: String { get set }
+    var f32: String { get set }
+    var f33: Date { get set }
+    var f34: Date { get set }
+    var f35: Date { get set }
+    var f36: UUID { get set }
+    var f37: UUID { get set }
+    var f38: UUID { get set }
+    var f39: ChronoxorProto.OrderSide { get set }
+    var f40: ChronoxorProto.OrderType { get set }
+    var f41: ChronoxorProto.Order { get set }
+    var f42: ChronoxorProto.Balance { get set }
+    var f43: ChronoxorProto.State { get set }
+    var f44: ChronoxorProto.Account { get set }
+}
+
+public protocol StructSimpleInheritance {
+    var parent: StructSimple { get set }
+}
+
+extension StructSimpleInheritance {
+    public var id: Int32 {
+        get { return parent.id }
+        set { parent.id = newValue }
+    }
+    public var f1: Bool {
+        get { return parent.f1 }
+        set { parent.f1 = newValue }
+    }
+    public var f2: Bool {
+        get { return parent.f2 }
+        set { parent.f2 = newValue }
+    }
+    public var f3: UInt8 {
+        get { return parent.f3 }
+        set { parent.f3 = newValue }
+    }
+    public var f4: UInt8 {
+        get { return parent.f4 }
+        set { parent.f4 = newValue }
+    }
+    public var f5: Character {
+        get { return parent.f5 }
+        set { parent.f5 = newValue }
+    }
+    public var f6: Character {
+        get { return parent.f6 }
+        set { parent.f6 = newValue }
+    }
+    public var f7: Character {
+        get { return parent.f7 }
+        set { parent.f7 = newValue }
+    }
+    public var f8: Character {
+        get { return parent.f8 }
+        set { parent.f8 = newValue }
+    }
+    public var f9: Int8 {
+        get { return parent.f9 }
+        set { parent.f9 = newValue }
+    }
+    public var f10: Int8 {
+        get { return parent.f10 }
+        set { parent.f10 = newValue }
+    }
+    public var f11: UInt8 {
+        get { return parent.f11 }
+        set { parent.f11 = newValue }
+    }
+    public var f12: UInt8 {
+        get { return parent.f12 }
+        set { parent.f12 = newValue }
+    }
+    public var f13: Int16 {
+        get { return parent.f13 }
+        set { parent.f13 = newValue }
+    }
+    public var f14: Int16 {
+        get { return parent.f14 }
+        set { parent.f14 = newValue }
+    }
+    public var f15: UInt16 {
+        get { return parent.f15 }
+        set { parent.f15 = newValue }
+    }
+    public var f16: UInt16 {
+        get { return parent.f16 }
+        set { parent.f16 = newValue }
+    }
+    public var f17: Int32 {
+        get { return parent.f17 }
+        set { parent.f17 = newValue }
+    }
+    public var f18: Int32 {
+        get { return parent.f18 }
+        set { parent.f18 = newValue }
+    }
+    public var f19: UInt32 {
+        get { return parent.f19 }
+        set { parent.f19 = newValue }
+    }
+    public var f20: UInt32 {
+        get { return parent.f20 }
+        set { parent.f20 = newValue }
+    }
+    public var f21: Int64 {
+        get { return parent.f21 }
+        set { parent.f21 = newValue }
+    }
+    public var f22: Int64 {
+        get { return parent.f22 }
+        set { parent.f22 = newValue }
+    }
+    public var f23: UInt64 {
+        get { return parent.f23 }
+        set { parent.f23 = newValue }
+    }
+    public var f24: UInt64 {
+        get { return parent.f24 }
+        set { parent.f24 = newValue }
+    }
+    public var f25: Float {
+        get { return parent.f25 }
+        set { parent.f25 = newValue }
+    }
+    public var f26: Float {
+        get { return parent.f26 }
+        set { parent.f26 = newValue }
+    }
+    public var f27: Double {
+        get { return parent.f27 }
+        set { parent.f27 = newValue }
+    }
+    public var f28: Double {
+        get { return parent.f28 }
+        set { parent.f28 = newValue }
+    }
+    public var f29: Decimal {
+        get { return parent.f29 }
+        set { parent.f29 = newValue }
+    }
+    public var f30: Decimal {
+        get { return parent.f30 }
+        set { parent.f30 = newValue }
+    }
+    public var f31: String {
+        get { return parent.f31 }
+        set { parent.f31 = newValue }
+    }
+    public var f32: String {
+        get { return parent.f32 }
+        set { parent.f32 = newValue }
+    }
+    public var f33: Date {
+        get { return parent.f33 }
+        set { parent.f33 = newValue }
+    }
+    public var f34: Date {
+        get { return parent.f34 }
+        set { parent.f34 = newValue }
+    }
+    public var f35: Date {
+        get { return parent.f35 }
+        set { parent.f35 = newValue }
+    }
+    public var f36: UUID {
+        get { return parent.f36 }
+        set { parent.f36 = newValue }
+    }
+    public var f37: UUID {
+        get { return parent.f37 }
+        set { parent.f37 = newValue }
+    }
+    public var f38: UUID {
+        get { return parent.f38 }
+        set { parent.f38 = newValue }
+    }
+    public var f39: ChronoxorProto.OrderSide {
+        get { return parent.f39 }
+        set { parent.f39 = newValue }
+    }
+    public var f40: ChronoxorProto.OrderType {
+        get { return parent.f40 }
+        set { parent.f40 = newValue }
+    }
+    public var f41: ChronoxorProto.Order {
+        get { return parent.f41 }
+        set { parent.f41 = newValue }
+    }
+    public var f42: ChronoxorProto.Balance {
+        get { return parent.f42 }
+        set { parent.f42 = newValue }
+    }
+    public var f43: ChronoxorProto.State {
+        get { return parent.f43 }
+        set { parent.f43 = newValue }
+    }
+    public var f44: ChronoxorProto.Account {
+        get { return parent.f44 }
+        set { parent.f44 = newValue }
+    }
+}
+
+public struct StructSimple: StructSimpleBase {
     public var id: Int32 = 0
     public var f1: Bool = false
     public var f2: Bool = true

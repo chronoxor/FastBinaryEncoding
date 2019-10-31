@@ -7,7 +7,37 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public struct StructSet: Comparable, Hashable, Codable {
+public protocol StructSetBase: Comparable, Hashable, Codable {
+    var f1: Array<UInt8> { get set }
+    var f2: Array<EnumSimple> { get set }
+    var f3: Array<FlagsSimple> { get set }
+    var f4: Array<StructSimple> { get set }
+}
+
+public protocol StructSetInheritance {
+    var parent: StructSet { get set }
+}
+
+extension StructSetInheritance {
+    public var f1: Array<UInt8> {
+        get { return parent.f1 }
+        set { parent.f1 = newValue }
+    }
+    public var f2: Array<EnumSimple> {
+        get { return parent.f2 }
+        set { parent.f2 = newValue }
+    }
+    public var f3: Array<FlagsSimple> {
+        get { return parent.f3 }
+        set { parent.f3 = newValue }
+    }
+    public var f4: Array<StructSimple> {
+        get { return parent.f4 }
+        set { parent.f4 = newValue }
+    }
+}
+
+public struct StructSet: StructSetBase {
     public var f1: Array<UInt8> = Array()
     public var f2: Array<EnumSimple> = Array()
     public var f3: Array<FlagsSimple> = Array()

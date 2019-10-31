@@ -7,7 +7,32 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public struct StructBytes: Comparable, Hashable, Codable {
+public protocol StructBytesBase: Comparable, Hashable, Codable {
+    var f1: Data { get set }
+    var f2: Data? { get set }
+    var f3: Data? { get set }
+}
+
+public protocol StructBytesInheritance {
+    var parent: StructBytes { get set }
+}
+
+extension StructBytesInheritance {
+    public var f1: Data {
+        get { return parent.f1 }
+        set { parent.f1 = newValue }
+    }
+    public var f2: Data? {
+        get { return parent.f2 }
+        set { parent.f2 = newValue }
+    }
+    public var f3: Data? {
+        get { return parent.f3 }
+        set { parent.f3 = newValue }
+    }
+}
+
+public struct StructBytes: StructBytesBase {
     public var f1: Data = Data()
     public var f2: Data? = nil
     public var f3: Data? = nil

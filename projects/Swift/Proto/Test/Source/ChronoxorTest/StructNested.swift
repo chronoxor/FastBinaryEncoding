@@ -7,7 +7,81 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public struct StructNested: Comparable, Hashable, Codable {
+public protocol StructNestedBase: StructOptionalBase {
+    var f1000: EnumSimple { get set }
+    var f1001: EnumSimple? { get set }
+    var f1002: EnumTyped { get set }
+    var f1003: EnumTyped? { get set }
+    var f1004: FlagsSimple { get set }
+    var f1005: FlagsSimple? { get set }
+    var f1006: FlagsTyped { get set }
+    var f1007: FlagsTyped? { get set }
+    var f1008: StructSimple { get set }
+    var f1009: StructSimple? { get set }
+    var f1010: StructOptional { get set }
+    var f1011: StructOptional? { get set }
+}
+
+public protocol StructNestedInheritance: StructOptionalInheritance {
+    var parent: StructNested { get set }
+}
+
+extension StructNestedInheritance {
+    public var parent: StructOptional {
+        get { return parent.parent }
+        set { parent.parent = newValue }
+    }
+    public var f1000: EnumSimple {
+        get { return parent.f1000 }
+        set { parent.f1000 = newValue }
+    }
+    public var f1001: EnumSimple? {
+        get { return parent.f1001 }
+        set { parent.f1001 = newValue }
+    }
+    public var f1002: EnumTyped {
+        get { return parent.f1002 }
+        set { parent.f1002 = newValue }
+    }
+    public var f1003: EnumTyped? {
+        get { return parent.f1003 }
+        set { parent.f1003 = newValue }
+    }
+    public var f1004: FlagsSimple {
+        get { return parent.f1004 }
+        set { parent.f1004 = newValue }
+    }
+    public var f1005: FlagsSimple? {
+        get { return parent.f1005 }
+        set { parent.f1005 = newValue }
+    }
+    public var f1006: FlagsTyped {
+        get { return parent.f1006 }
+        set { parent.f1006 = newValue }
+    }
+    public var f1007: FlagsTyped? {
+        get { return parent.f1007 }
+        set { parent.f1007 = newValue }
+    }
+    public var f1008: StructSimple {
+        get { return parent.f1008 }
+        set { parent.f1008 = newValue }
+    }
+    public var f1009: StructSimple? {
+        get { return parent.f1009 }
+        set { parent.f1009 = newValue }
+    }
+    public var f1010: StructOptional {
+        get { return parent.f1010 }
+        set { parent.f1010 = newValue }
+    }
+    public var f1011: StructOptional? {
+        get { return parent.f1011 }
+        set { parent.f1011 = newValue }
+    }
+}
+
+public struct StructNested: StructNestedBase, StructOptionalInheritance {
     public var parent: StructOptional
     public var f1000: EnumSimple = ChronoxorTest.EnumSimple()
     public var f1001: EnumSimple? = nil

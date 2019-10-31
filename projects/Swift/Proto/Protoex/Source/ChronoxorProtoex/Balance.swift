@@ -7,7 +7,26 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public struct Balance: Comparable, Hashable, Codable {
+public protocol BalanceBase: ChronoxorProto.BalanceBase {
+    var locked: Double { get set }
+}
+
+public protocol BalanceInheritance: ChronoxorProto.BalanceInheritance {
+    var parent: Balance { get set }
+}
+
+extension BalanceInheritance {
+    public var parent: ChronoxorProto.Balance {
+        get { return parent.parent }
+        set { parent.parent = newValue }
+    }
+    public var locked: Double {
+        get { return parent.locked }
+        set { parent.locked = newValue }
+    }
+}
+
+public struct Balance: BalanceBase, ChronoxorProto.BalanceInheritance {
     public var parent: ChronoxorProto.Balance
     public var locked: Double = 0.0
 

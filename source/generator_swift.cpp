@@ -5028,13 +5028,76 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     GenerateImports(domain, "Fbe");
     GenerateImports(p);
 
+    // Generate based protocol
+
+    WriteLine();
+    WriteIndent("public protocol " + *s->name + "Base");
+    if (s->base && !s->base->empty())
+         Write(": " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false) + "Base");
+    else if (JSON())
+         Write(": Comparable, Hashable, Codable");
+    else
+          Write(": Comparable, Hashable");
+    WriteLineIndent(" {");
+    Indent(1);
+    if (s->body && !s->body->fields.empty())
+    {
+        for (const auto& field : s->body->fields)
+        {
+            std::string fieldName = (*field->name == "Type") ? ("`Type`") : *field->name;
+            WriteLineIndent("var " + fieldName + ": " + ConvertTypeName(domain, "", *field, false) + " { get set }");
+        }
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+
+    WriteLine();
+    WriteIndent("public protocol " + *s->name + "Inheritance");
+    if (s->base && !s->base->empty())
+         Write(": " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false) + "Inheritance");
+    WriteLineIndent(" {");
+    Indent(1);
+    WriteLineIndent("var parent: " + *s->name + " { get set }");
+    Indent(-1);
+    WriteLineIndent("}");
+
+
+    WriteLine();
+    WriteLineIndent("extension " + *s->name + "Inheritance {");
+    Indent(1);
+    // Generate struct body
+
+    if (s->body && !s->body->fields.empty())
+    {
+        if (s->base && !s->base->empty())
+        {
+            WriteLineIndent("public var parent: " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false) + " {");
+            Indent(1);
+            WriteLineIndent("get { return parent.parent }");
+            WriteLineIndent("set { parent.parent = newValue }");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+        for (const auto& field : s->body->fields)
+        {
+            std::string fieldName = (*field->name == "Type") ? ("`Type`") : *field->name;
+            WriteLineIndent("public var " + fieldName + ": " + ConvertTypeName(domain, "", *field, false) + " {");
+            Indent(1);
+            WriteLineIndent("get { return parent." + fieldName + " }");
+            WriteLineIndent("set { parent." + fieldName + " = newValue }");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+
+
     // Generate struct begin
     WriteLine();
-    WriteIndent("public struct " + *s->name);
-    if (JSON())
-        Write(": Comparable, Hashable, Codable");
-    else
-        Write(": Comparable, Hashable");
+    WriteIndent("public struct " + *s->name + ": " + *s->name + "Base");
+    if (s->base && !s->base->empty())
+         Write(", " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false) + "Inheritance");
     WriteLineIndent(" {");
     Indent(1);
 

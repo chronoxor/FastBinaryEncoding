@@ -7,7 +7,27 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public struct StructHashEx: Comparable, Hashable, Codable {
+public protocol StructHashExBase: Comparable, Hashable, Codable {
+    var f1: Dictionary<StructSimple, StructNested> { get set }
+    var f2: Dictionary<StructSimple, StructNested?> { get set }
+}
+
+public protocol StructHashExInheritance {
+    var parent: StructHashEx { get set }
+}
+
+extension StructHashExInheritance {
+    public var f1: Dictionary<StructSimple, StructNested> {
+        get { return parent.f1 }
+        set { parent.f1 = newValue }
+    }
+    public var f2: Dictionary<StructSimple, StructNested?> {
+        get { return parent.f2 }
+        set { parent.f2 = newValue }
+    }
+}
+
+public struct StructHashEx: StructHashExBase {
     public var f1: Dictionary<StructSimple, StructNested> = Dictionary()
     public var f2: Dictionary<StructSimple, StructNested?> = Dictionary()
 

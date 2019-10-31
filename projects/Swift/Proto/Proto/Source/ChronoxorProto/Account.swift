@@ -6,7 +6,47 @@
 import Foundation
 import ChronoxorFbe
 
-public struct Account: Comparable, Hashable, Codable {
+public protocol AccountBase: Comparable, Hashable, Codable {
+    var id: Int32 { get set }
+    var name: String { get set }
+    var state: State { get set }
+    var wallet: Balance { get set }
+    var asset: Balance? { get set }
+    var orders: Array<Order> { get set }
+}
+
+public protocol AccountInheritance {
+    var parent: Account { get set }
+}
+
+extension AccountInheritance {
+    public var id: Int32 {
+        get { return parent.id }
+        set { parent.id = newValue }
+    }
+    public var name: String {
+        get { return parent.name }
+        set { parent.name = newValue }
+    }
+    public var state: State {
+        get { return parent.state }
+        set { parent.state = newValue }
+    }
+    public var wallet: Balance {
+        get { return parent.wallet }
+        set { parent.wallet = newValue }
+    }
+    public var asset: Balance? {
+        get { return parent.asset }
+        set { parent.asset = newValue }
+    }
+    public var orders: Array<Order> {
+        get { return parent.orders }
+        set { parent.orders = newValue }
+    }
+}
+
+public struct Account: AccountBase {
     public var id: Int32 = 0
     public var name: String = ""
     public var state: State = State.fromSet(set: [State.initialized.value!, State.bad.value!])
