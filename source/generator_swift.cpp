@@ -5034,10 +5034,6 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     WriteIndent("public protocol " + *s->name + "Base");
     if (s->base && !s->base->empty())
          Write(": " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false) + "Base");
-    else if (JSON())
-         Write(": Comparable, Hashable, Codable");
-    else
-          Write(": Comparable, Hashable");
     WriteLineIndent(" {");
     Indent(1);
     if (s->body && !s->body->fields.empty())
@@ -5098,6 +5094,10 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     WriteIndent("public struct " + *s->name + ": " + *s->name + "Base");
     if (s->base && !s->base->empty())
          Write(", " + ConvertTypeName(domain, "", ConvertPackageName(*s->base), false) + "Inheritance");
+    if (JSON())
+        Write(", Comparable, Hashable, Codable");
+    else
+        Write(", Comparable, Hashable");
     WriteLineIndent(" {");
     Indent(1);
 
