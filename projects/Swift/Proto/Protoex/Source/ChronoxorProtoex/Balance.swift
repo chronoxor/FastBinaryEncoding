@@ -26,7 +26,7 @@ extension BalanceInheritance {
     }
 }
 
-public struct Balance: BalanceBase, ChronoxorProto.BalanceInheritance {
+public struct Balance: BalanceBase, ChronoxorProto.BalanceInheritance, Comparable, Hashable, Codable {
     public var parent: ChronoxorProto.Balance
     public var locked: Double = 0.0
 

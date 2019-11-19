@@ -81,7 +81,7 @@ extension StructNestedInheritance {
     }
 }
 
-public struct StructNested: StructNestedBase, StructOptionalInheritance {
+public struct StructNested: StructNestedBase, StructOptionalInheritance, Comparable, Hashable, Codable {
     public var parent: StructOptional
     public var f1000: EnumSimple = ChronoxorTest.EnumSimple()
     public var f1001: EnumSimple? = nil

@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public protocol StructVectorBase: Comparable, Hashable, Codable {
+public protocol StructVectorBase {
     var f1: Array<UInt8> { get set }
     var f2: Array<UInt8?> { get set }
     var f3: Array<Data> { get set }
@@ -67,7 +67,7 @@ extension StructVectorInheritance {
     }
 }
 
-public struct StructVector: StructVectorBase {
+public struct StructVector: StructVectorBase, Comparable, Hashable, Codable {
     public var f1: Array<UInt8> = Array()
     public var f2: Array<UInt8?> = Array()
     public var f3: Array<Data> = Array()

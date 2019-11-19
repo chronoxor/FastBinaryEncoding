@@ -6,7 +6,7 @@
 import Foundation
 import ChronoxorFbe
 
-public protocol OrderBase: Comparable, Hashable, Codable {
+public protocol OrderBase {
     var id: Int32 { get set }
     var symbol: String { get set }
     var side: OrderSide { get set }
@@ -46,7 +46,7 @@ extension OrderInheritance {
     }
 }
 
-public struct Order: OrderBase {
+public struct Order: OrderBase, Comparable, Hashable, Codable {
     public var id: Int32 = 0
     public var symbol: String = ""
     public var side: OrderSide = ChronoxorProto.OrderSide()

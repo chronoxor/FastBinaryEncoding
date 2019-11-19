@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public protocol StructMapBase: Comparable, Hashable, Codable {
+public protocol StructMapBase {
     var f1: Dictionary<Int32, UInt8> { get set }
     var f2: Dictionary<Int32, UInt8?> { get set }
     var f3: Dictionary<Int32, Data> { get set }
@@ -67,7 +67,7 @@ extension StructMapInheritance {
     }
 }
 
-public struct StructMap: StructMapBase {
+public struct StructMap: StructMapBase, Comparable, Hashable, Codable {
     public var f1: Dictionary<Int32, UInt8> = Dictionary()
     public var f2: Dictionary<Int32, UInt8?> = Dictionary()
     public var f3: Dictionary<Int32, Data> = Dictionary()

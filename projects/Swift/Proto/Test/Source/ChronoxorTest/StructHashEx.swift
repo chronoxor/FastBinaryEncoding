@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public protocol StructHashExBase: Comparable, Hashable, Codable {
+public protocol StructHashExBase {
     var f1: Dictionary<StructSimple, StructNested> { get set }
     var f2: Dictionary<StructSimple, StructNested?> { get set }
 }
@@ -27,7 +27,7 @@ extension StructHashExInheritance {
     }
 }
 
-public struct StructHashEx: StructHashExBase {
+public struct StructHashEx: StructHashExBase, Comparable, Hashable, Codable {
     public var f1: Dictionary<StructSimple, StructNested> = Dictionary()
     public var f2: Dictionary<StructSimple, StructNested?> = Dictionary()
 

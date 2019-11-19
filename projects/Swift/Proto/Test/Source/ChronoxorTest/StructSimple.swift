@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public protocol StructSimpleBase: Comparable, Hashable, Codable {
+public protocol StructSimpleBase {
     var id: Int32 { get set }
     var f1: Bool { get set }
     var f2: Bool { get set }
@@ -242,7 +242,7 @@ extension StructSimpleInheritance {
     }
 }
 
-public struct StructSimple: StructSimpleBase {
+public struct StructSimple: StructSimpleBase, Comparable, Hashable, Codable {
     public var id: Int32 = 0
     public var f1: Bool = false
     public var f2: Bool = true

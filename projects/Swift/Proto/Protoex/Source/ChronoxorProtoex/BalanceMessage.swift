@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public protocol BalanceMessageBase: Comparable, Hashable, Codable {
+public protocol BalanceMessageBase {
     var body: Balance { get set }
 }
 
@@ -22,7 +22,7 @@ extension BalanceMessageInheritance {
     }
 }
 
-public struct BalanceMessage: BalanceMessageBase {
+public struct BalanceMessage: BalanceMessageBase, Comparable, Hashable, Codable {
     public var body: Balance = ChronoxorProtoex.Balance()
 
     public init() { }

@@ -6,7 +6,7 @@
 import Foundation
 import ChronoxorFbe
 
-public protocol EnumsBase: Comparable, Hashable, Codable {
+public protocol EnumsBase {
     var byte0: EnumByte { get set }
     var byte1: EnumByte { get set }
     var byte2: EnumByte { get set }
@@ -346,7 +346,7 @@ extension EnumsInheritance {
     }
 }
 
-public struct Enums: EnumsBase {
+public struct Enums: EnumsBase, Comparable, Hashable, Codable {
     public var byte0: EnumByte = ChronoxorEnums.EnumByte.ENUM_VALUE_0
     public var byte1: EnumByte = ChronoxorEnums.EnumByte.ENUM_VALUE_1
     public var byte2: EnumByte = ChronoxorEnums.EnumByte.ENUM_VALUE_2

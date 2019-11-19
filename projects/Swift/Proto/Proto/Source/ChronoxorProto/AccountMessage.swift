@@ -6,7 +6,7 @@
 import Foundation
 import ChronoxorFbe
 
-public protocol AccountMessageBase: Comparable, Hashable, Codable {
+public protocol AccountMessageBase {
     var body: Account { get set }
 }
 
@@ -21,7 +21,7 @@ extension AccountMessageInheritance {
     }
 }
 
-public struct AccountMessage: AccountMessageBase {
+public struct AccountMessage: AccountMessageBase, Comparable, Hashable, Codable {
     public var body: Account = ChronoxorProto.Account()
 
     public init() { }

@@ -6,7 +6,7 @@
 import Foundation
 import ChronoxorFbe
 
-public protocol BalanceBase: Comparable, Hashable, Codable {
+public protocol BalanceBase {
     var currency: String { get set }
     var amount: Double { get set }
 }
@@ -26,7 +26,7 @@ extension BalanceInheritance {
     }
 }
 
-public struct Balance: BalanceBase {
+public struct Balance: BalanceBase, Comparable, Hashable, Codable {
     public var currency: String = ""
     public var amount: Double = 0.0
 

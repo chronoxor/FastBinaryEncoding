@@ -605,6 +605,9 @@ public:
     friend bool operator>=(const uuid_t& uuid1, const uuid_t& uuid2)
     { return uuid1._data >= uuid2._data; }
 
+    //! Check if the UUID is nil UUID0 (all bits set to zero)
+    explicit operator bool() const noexcept { return *this != nil(); }
+
     //! Get the UUID data buffer
     std::array<uint8_t, 16>& data() noexcept { return _data; }
     //! Get the UUID data buffer

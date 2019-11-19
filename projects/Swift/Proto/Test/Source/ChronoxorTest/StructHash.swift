@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public protocol StructHashBase: Comparable, Hashable, Codable {
+public protocol StructHashBase {
     var f1: Dictionary<String, UInt8> { get set }
     var f2: Dictionary<String, UInt8?> { get set }
     var f3: Dictionary<String, Data> { get set }
@@ -67,7 +67,7 @@ extension StructHashInheritance {
     }
 }
 
-public struct StructHash: StructHashBase {
+public struct StructHash: StructHashBase, Comparable, Hashable, Codable {
     public var f1: Dictionary<String, UInt8> = Dictionary()
     public var f2: Dictionary<String, UInt8?> = Dictionary()
     public var f3: Dictionary<String, Data> = Dictionary()

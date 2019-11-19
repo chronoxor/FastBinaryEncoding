@@ -351,7 +351,7 @@ extension StructOptionalInheritance {
     }
 }
 
-public struct StructOptional: StructOptionalBase, StructSimpleInheritance {
+public struct StructOptional: StructOptionalBase, StructSimpleInheritance, Comparable, Hashable, Codable {
     public var parent: StructSimple
     public var f100: Bool? = nil
     public var f101: Bool? = true

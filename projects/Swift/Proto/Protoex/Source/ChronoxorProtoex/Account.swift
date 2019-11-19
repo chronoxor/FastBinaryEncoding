@@ -7,7 +7,7 @@ import Foundation
 import ChronoxorFbe
 import ChronoxorProto
 
-public protocol AccountBase: Comparable, Hashable, Codable {
+public protocol AccountBase {
     var id: Int32 { get set }
     var name: String { get set }
     var state: StateEx { get set }
@@ -47,7 +47,7 @@ extension AccountInheritance {
     }
 }
 
-public struct Account: AccountBase {
+public struct Account: AccountBase, Comparable, Hashable, Codable {
     public var id: Int32 = 0
     public var name: String = ""
     public var state: StateEx = StateEx.fromSet(set: [StateEx.initialized.value!, StateEx.bad.value!, StateEx.sad.value!])

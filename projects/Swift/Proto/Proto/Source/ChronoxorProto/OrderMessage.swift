@@ -6,7 +6,7 @@
 import Foundation
 import ChronoxorFbe
 
-public protocol OrderMessageBase: Comparable, Hashable, Codable {
+public protocol OrderMessageBase {
     var body: Order { get set }
 }
 
@@ -21,7 +21,7 @@ extension OrderMessageInheritance {
     }
 }
 
-public struct OrderMessage: OrderMessageBase {
+public struct OrderMessage: OrderMessageBase, Comparable, Hashable, Codable {
     public var body: Order = ChronoxorProto.Order()
 
     public init() { }
