@@ -22,7 +22,7 @@ void Generator::Open(const CppCommon::Path& filename)
     // Sometimes it happens that Visual Studio opens generated files on a fly to analyze.
     // It opens them with mapping into its process with CreateFileMapping/MapViewOfFile.
     // As the result files cannot be replaced or removed. Therefore we need to have some
-    // retry attempts with small delay to give a change for file to be created.
+    // retry attempts with small delay to give a change for the file to be created.
     // https://stackoverflow.com/questions/41844842/when-error-1224-error-user-mapped-file-occurs
     const int attempts = 10;
     const int sleep = 100;
