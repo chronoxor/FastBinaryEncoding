@@ -233,6 +233,8 @@ void Package::initialize()
                     }
                     if (field->keys)
                         child_s->keys = true;
+                    if (field->reseter)
+                        field->optional = true;
                     fields.push_back(field);
                     if (field->reseter)
                     {
