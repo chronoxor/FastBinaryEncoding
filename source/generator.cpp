@@ -35,7 +35,10 @@ void Generator::Open(const CppCommon::Path& filename)
         catch (const CppCommon::FileSystemException& ex)
         {
             if (ex.system_error() == 1224)
+            {
+                CppCommon::Thread::Sleep(sleep);
                 continue;
+            }
         }
         break;
     }
