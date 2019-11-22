@@ -5368,7 +5368,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     {
         for (const auto& field : s->body->fields)
         {
-            if (field->attributes->hidden)
+            if (field->attributes && field->attributes->hidden)
                 WriteLineIndent("sb.Append(\"" + std::string(first ? "" : ",") + *field->name + "=***\");");
             else if (field->array)
             {

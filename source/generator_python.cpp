@@ -3474,7 +3474,7 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
         for (const auto& field : s->body->fields)
         {
             WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=\")");
-            if (field->attributes->hidden)
+            if (field->attributes && field->attributes->hidden)
                 WriteLineIndent("sb.append(\"***\")");
             else if (field->array || field->vector)
             {

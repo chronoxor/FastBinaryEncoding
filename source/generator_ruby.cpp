@@ -4243,7 +4243,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
         for (const auto& field : s->body->fields)
         {
             WriteLineIndent("result << '" + std::string(first ? "" : ",") + *field->name + "='");
-            if (field->attributes->hidden)
+            if (field->attributes && field->attributes->hidden)
                 WriteLineIndent("result << '***'");
             else if (field->array || field->vector)
             {

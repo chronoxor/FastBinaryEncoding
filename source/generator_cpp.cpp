@@ -6385,7 +6385,7 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
         for (const auto& field : s->body->fields)
         {
             WriteIndent();
-            if (field->attributes->deprecated)
+            if (field->attributes && field->attributes->deprecated)
                 Write("[[deprecated]] ");
             WriteLine(ConvertTypeName(*p->name, *field) + " " + *field->name + ";");
         }
@@ -6633,7 +6633,7 @@ void GeneratorCpp::GenerateStructOutputStream(const std::shared_ptr<Package>& p,
         // Generate fields output stream operator calls
         for (const auto& field : s->body->fields)
         {
-            if (field->attributes->hidden)
+            if (field->attributes && field->attributes->hidden)
                 WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=***\";");
             else if (field->array)
             {
@@ -6777,7 +6777,7 @@ void GeneratorCpp::GenerateStructLoggingStream(const std::shared_ptr<Package>& p
         // Generate fields output stream operator calls
         for (const auto& field : s->body->fields)
         {
-            if (field->attributes->hidden)
+            if (field->attributes && field->attributes->hidden)
                 WriteLineIndent("record.StoreList(\"" + std::string(first ? "" : ",") + *field->name + "=***\");");
             else if (field->array)
             {

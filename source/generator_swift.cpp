@@ -5295,7 +5295,7 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     {
         for (const auto& field : s->body->fields)
         {
-            if (field->attributes->hidden)
+            if (field->attributes && field->attributes->hidden)
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=***\");");
             else if (field->array || field->vector)
             {

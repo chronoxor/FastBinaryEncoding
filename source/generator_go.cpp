@@ -5323,7 +5323,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
             if (field->keys)
             {
                 WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=\")");
-                if (field->attributes->hidden)
+                if (field->attributes && field->attributes->hidden)
                     WriteLineIndent("sb.WriteString(\"***\")");
                 else if (field->array)
                 {
@@ -5636,7 +5636,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
         for (const auto& field : s->body->fields)
         {
             WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=\")");
-            if (field->attributes->hidden)
+            if (field->attributes && field->attributes->hidden)
                 WriteLineIndent("sb.WriteString(\"***\")");
             else if (field->array)
             {
