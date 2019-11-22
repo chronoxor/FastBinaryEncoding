@@ -300,7 +300,7 @@ struct_field_optional
     ;
 
 struct_field_reseter
-    : struct_field_base '#'                                                                 { $$ = $1; $$->reseter = true; }
+    : struct_field_base '~'                                                                 { $$ = $1; $$->reseter = true; }
     ;
 
 struct_field_array
