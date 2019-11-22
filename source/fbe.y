@@ -77,6 +77,7 @@ int yyerror(const std::string& msg);
 %type <struct_field> struct_field_type
 %type <struct_field> struct_field_base
 %type <struct_field> struct_field_optional
+%type <struct_field> struct_field_reseter
 %type <struct_field> struct_field_array
 %type <struct_field> struct_field_vector
 %type <struct_field> struct_field_list
@@ -262,6 +263,7 @@ struct_field
 struct_field_type
     : struct_field_base
     | struct_field_optional
+    | struct_field_reseter
     | struct_field_array
     | struct_field_vector
     | struct_field_list
@@ -295,6 +297,10 @@ struct_field_base
 
 struct_field_optional
     : struct_field_base '?'                                                                 { $$ = $1; $$->optional = true; }
+    ;
+
+struct_field_reseter
+    : struct_field_base '#'                                                                 { $$ = $1; $$->reseter = true; }
     ;
 
 struct_field_array

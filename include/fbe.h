@@ -106,6 +106,7 @@ struct StructField
     bool id{false};
     bool keys{false};
     bool optional{false};
+    bool reseter{false};
     bool array{false};
     bool vector{false};
     bool list{false};

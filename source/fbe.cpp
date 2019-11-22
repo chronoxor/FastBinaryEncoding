@@ -221,6 +221,7 @@ void Package::initialize()
             // Find structs with id & key flags
             if (child_s->body)
             {
+                std::vector<std::shared_ptr<StructField>> fields;
                 for (const auto& field : child_s->body->fields)
                 {
                     if (field->id)
@@ -232,7 +233,16 @@ void Package::initialize()
                     }
                     if (field->keys)
                         child_s->keys = true;
+                    fields.push_back(field);
+                    if (field->reseter)
+                    {
+                        auto reseter = std::make_shared<StructField>();
+                        reseter->name = std::make_shared<std::string>(*field->name + "Reset");
+                        reseter->type = std::make_shared<std::string>("bool");
+                        fields.push_back(reseter);
+                    }
                 }
+                child_s->body->fields = fields;
             }
         }
     }
