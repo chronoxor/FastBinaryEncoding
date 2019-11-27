@@ -24,13 +24,14 @@ void Generator::Open(const CppCommon::Path& filename)
     // As the result files cannot be replaced or removed. Therefore we need to have some
     // retry attempts with small delay to give a change for the file to be created.
     // https://stackoverflow.com/questions/41844842/when-error-1224-error-user-mapped-file-occurs
-    const int attempts = 10;
+    const int attempts = 1000;
     const int sleep = 100;
     for (int attempt = 0; attempt < attempts; ++attempt)
     {
         try
         {
             _file.OpenOrCreate(false, true, true);
+            return;
         }
         catch (const CppCommon::FileSystemException& ex)
         {
@@ -39,9 +40,10 @@ void Generator::Open(const CppCommon::Path& filename)
                 CppCommon::Thread::Sleep(sleep);
                 continue;
             }
+            throw;
         }
-        break;
     }
+    throwex CppCommon::FileSystemException("Cannot generate output file!").Attach(filename);
 }
 
 void Generator::Close()
