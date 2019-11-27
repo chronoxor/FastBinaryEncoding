@@ -8,6 +8,10 @@
 
 #include "generator.h"
 
+#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+#include <windows.h>
+#endif
+
 namespace FBE {
 
 void Generator::Open(const CppCommon::Path& filename)
@@ -19,6 +23,7 @@ void Generator::Open(const CppCommon::Path& filename)
     _cursor = 0;
     _file = filename;
 
+#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
     // Sometimes it happens that Visual Studio opens generated files on a fly to analyze.
     // It opens them with mapping into its process with CreateFileMapping/MapViewOfFile.
     // As the result files cannot be replaced or removed. Therefore we need to have some
@@ -35,7 +40,7 @@ void Generator::Open(const CppCommon::Path& filename)
         }
         catch (const CppCommon::FileSystemException& ex)
         {
-            if (ex.system_error() == 1224)
+            if (ex.system_error() == ERROR_USER_MAPPED_FILE)
             {
                 CppCommon::Thread::Sleep(sleep);
                 continue;
@@ -44,6 +49,9 @@ void Generator::Open(const CppCommon::Path& filename)
         }
     }
     throwex CppCommon::FileSystemException("Cannot generate output file!").Attach(filename);
+#else
+    _file.OpenOrCreate(false, true, true);
+#endif
 }
 
 void Generator::Close()
