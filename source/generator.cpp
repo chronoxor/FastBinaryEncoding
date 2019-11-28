@@ -35,6 +35,7 @@ void Generator::Store(const CppCommon::Path& filename)
     CppCommon::Path unique = filename.parent() / CppCommon::Path::unique();
     CppCommon::File::WriteAllText(unique, _buffer);
 
+#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
     // Sometimes it happens that Visual Studio opens generated files on a fly to analyze.
     // It opens them with mapping into its process with CreateFileMapping/MapViewOfFile.
     // As the result files cannot be replaced or removed. Therefore we need to have some
@@ -61,6 +62,10 @@ void Generator::Store(const CppCommon::Path& filename)
         }
     }
     throwex CppCommon::FileSystemException("Cannot generate the output file!").Attach(filename);
+#else
+    // Rename the unique file inside a loop with retries
+    CppCommon::Path::Rename(unique, filename);
+#endif
 }
 
 } // namespace FBE
