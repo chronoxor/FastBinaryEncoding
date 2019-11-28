@@ -5673,9 +5673,9 @@ bool from_json_child(const TJson& json, T& value, const char* key)
 
 void GeneratorCpp::GenerateFBE(const CppCommon::Path& path)
 {
-    // Open the common file
-    CppCommon::Path init = path / "fbe.h";
-    Open(init);
+    // Generate the common file
+    CppCommon::Path common = path / "fbe.h";
+    WriteBegin();
 
     // Generate common header
     GenerateHeader("fbe");
@@ -5732,8 +5732,9 @@ void GeneratorCpp::GenerateFBE(const CppCommon::Path& path)
     // Generate common footer
     GenerateFooter();
 
-    // Close the common file
-    Close();
+    // Store the common file
+    WriteEnd();
+    Store(common);
 }
 
 void GeneratorCpp::GeneratePackage(const std::shared_ptr<Package>& p)
@@ -5746,9 +5747,9 @@ void GeneratorCpp::GeneratePackage(const std::shared_ptr<Package>& p)
     // Generate common files
     GenerateFBE(output);
 
-    // Open the output file
+    // Generate the output file
     output /= *p->name + ".h";
-    Open(output);
+    WriteBegin();
 
     // Generate package header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5773,8 +5774,9 @@ void GeneratorCpp::GeneratePackage(const std::shared_ptr<Package>& p)
     // Generate package footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorCpp::GeneratePackageModels(const std::shared_ptr<Package>& p)
@@ -5787,9 +5789,9 @@ void GeneratorCpp::GeneratePackageModels(const std::shared_ptr<Package>& p)
     // Generate common files
     GenerateFBE(output);
 
-    // Open the output file
+    // Generate the output file
     output /= *p->name + "_models.h";
-    Open(output);
+    WriteBegin();
 
     // Generate package header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5839,8 +5841,9 @@ void GeneratorCpp::GeneratePackageModels(const std::shared_ptr<Package>& p)
     // Generate package footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorCpp::GeneratePackageProtocol(const std::shared_ptr<Package>& p)
@@ -5853,9 +5856,9 @@ void GeneratorCpp::GeneratePackageProtocol(const std::shared_ptr<Package>& p)
     // Generate common files
     GenerateFBE(output);
 
-    // Open the output file
+    // Generate the output file
     output /= *p->name + "_protocol.h";
-    Open(output);
+    WriteBegin();
 
     // Generate package header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5879,8 +5882,9 @@ void GeneratorCpp::GeneratePackageProtocol(const std::shared_ptr<Package>& p)
     // Generate package footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorCpp::GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)

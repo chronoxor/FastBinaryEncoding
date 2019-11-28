@@ -21,24 +21,25 @@ public:
     virtual void Generate(const std::shared_ptr<Package>& package) = 0;
 
 protected:
-    CppCommon::File _file;
-    CppCommon::FileLock _lock;
+    std::string _buffer;
     std::string _input;
     std::string _output;
     int _cursor{0};
     int _indent;
     char _space;
 
-    void Open(const CppCommon::Path& filename);
+    void Indent(int count);
+
+    void WriteBegin();
     void Write(const std::string& str);
     void WriteIndent();
     void WriteIndent(const std::string& str);
     void WriteLine();
     void WriteLine(const std::string& str);
     void WriteLineIndent(const std::string& str);
-    void Close();
+    void WriteEnd();
 
-    void Indent(int count);
+    void Store(const CppCommon::Path& filename);
 
     static std::string EndLine();
 };

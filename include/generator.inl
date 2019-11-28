@@ -16,22 +16,32 @@ inline Generator::Generator(const std::string& input, const std::string& output,
 {
 }
 
+inline void Generator::Indent(int count)
+{
+    _cursor += _indent * count;
+}
+
+inline void Generator::WriteBegin()
+{
+    _buffer.clear();
+}
+
 inline void Generator::Write(const std::string& str)
 {
-    _file.Write(str);
+    _buffer.append(str);
 }
 
 inline void Generator::WriteIndent()
 {
     for (int i = 0; i < _cursor; ++i)
-        _file.Write(&_space, 1);
+        _buffer.append(1, _space);
 }
 
 inline void Generator::WriteIndent(const std::string& str)
 {
     for (int i = 0; i < _cursor; ++i)
-        _file.Write(&_space, 1);
-    _file.Write(str);
+        _buffer.append(1, _space);
+    _buffer.append(str);
 }
 
 inline void Generator::WriteLine()
@@ -51,9 +61,8 @@ inline void Generator::WriteLineIndent(const std::string& str)
     Write(EndLine());
 }
 
-inline void Generator::Indent(int count)
+inline void Generator::WriteEnd()
 {
-    _cursor += _indent * count;
 }
 
 inline std::string Generator::EndLine()

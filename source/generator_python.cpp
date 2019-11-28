@@ -40,7 +40,7 @@ void GeneratorPython::GenerateInit(const CppCommon::Path& path)
 {
     // Open the init file
     CppCommon::Path init = path / "__init__.py";
-    Open(init);
+    WriteBegin();
 
     // Generate init header
     GenerateHeader("fbe");
@@ -49,14 +49,15 @@ void GeneratorPython::GenerateInit(const CppCommon::Path& path)
     GenerateFooter();
 
     // Close the init file
-    Close();
+    WriteEnd();
+    Store(init);
 }
 
 void GeneratorPython::GenerateFBE(const CppCommon::Path& path)
 {
-    // Open the common file
-    CppCommon::Path init = path / "fbe.py";
-    Open(init);
+    // Generate the common file
+    CppCommon::Path common = path / "fbe.py";
+    WriteBegin();
 
     // Generate common header
     GenerateHeader("fbe");
@@ -178,7 +179,8 @@ def utc():
     GenerateFooter();
 
     // Close the common file
-    Close();
+    WriteEnd();
+    Store(common);
 }
 
 void GeneratorPython::GenerateFBEWriteBuffer()
@@ -2782,9 +2784,9 @@ void GeneratorPython::GeneratePackage(const std::shared_ptr<Package>& p)
     // Generate FBE file
     GenerateFBE(output);
 
-    // Open the output file
+    // Generate the output file
     output /= *p->name + ".py";
-    Open(output);
+    WriteBegin();
 
     // Generate package header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -2826,8 +2828,9 @@ void GeneratorPython::GeneratePackage(const std::shared_ptr<Package>& p)
     // Generate package footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorPython::GenerateEnum(const std::shared_ptr<EnumType>& e)

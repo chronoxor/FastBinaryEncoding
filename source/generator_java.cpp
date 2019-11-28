@@ -115,9 +115,9 @@ void GeneratorJava::GenerateFBEPair(const std::string& domain, const std::string
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Pair.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -155,17 +155,18 @@ public final class Pair<K, V>
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEUUIDGenerator(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "UUIDGenerator.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -249,17 +250,18 @@ public final class UUIDGenerator
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEBuffer(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Buffer.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -567,17 +569,18 @@ public class Buffer
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEModel(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Model.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -628,17 +631,18 @@ public class Model
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFieldModel(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModel.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -712,17 +716,18 @@ public abstract class FieldModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFieldModel(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModel" + name + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -773,17 +778,18 @@ public final class FieldModel_NAME_ extends FieldModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFieldModelDecimal(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModelDecimal.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -886,17 +892,18 @@ public final class FieldModelDecimal extends FieldModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFieldModelDate(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModelDate.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -952,17 +959,18 @@ public final class FieldModelDate extends FieldModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFieldModelTimestamp(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModelTimestamp.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -1018,17 +1026,18 @@ public final class FieldModelTimestamp extends FieldModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFieldModelBytes(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModelBytes.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -1138,17 +1147,18 @@ public final class FieldModelBytes extends FieldModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFieldModelString(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModelString.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -1260,8 +1270,9 @@ public final class FieldModelString extends FieldModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFieldModelOptional(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
@@ -1271,9 +1282,9 @@ void GeneratorJava::GenerateFBEFieldModelOptional(const std::string& domain, con
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModelOptional" + name + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -1434,8 +1445,9 @@ public final class FieldModelOptional_NAME_ extends _DOMAIN_fbe.FieldModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFieldModelArray(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model, bool bytes)
@@ -1445,9 +1457,9 @@ void GeneratorJava::GenerateFBEFieldModelArray(const std::string& domain, const 
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModelArray" + name + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -1612,8 +1624,9 @@ public final class FieldModelArray_NAME_ extends _DOMAIN_fbe.FieldModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFieldModelVector(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
@@ -1623,9 +1636,9 @@ void GeneratorJava::GenerateFBEFieldModelVector(const std::string& domain, const
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModelVector" + name + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -1892,8 +1905,9 @@ public final class FieldModelVector_NAME_ extends _DOMAIN_fbe.FieldModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFieldModelMap(const std::string& domain, const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
@@ -1903,9 +1917,9 @@ void GeneratorJava::GenerateFBEFieldModelMap(const std::string& domain, const st
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModelMap" + key_name + value_name + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -2154,8 +2168,9 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends _DOMAIN_fbe.Field
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFieldModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type)
@@ -2165,9 +2180,9 @@ void GeneratorJava::GenerateFBEFieldModelEnumFlags(const std::string& domain, co
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModel" + name + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -2218,17 +2233,18 @@ public final class FieldModel_NAME_ extends _DOMAIN_fbe.FieldModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBESize(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Size.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2254,17 +2270,18 @@ public class Size
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFinalModel(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModel.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2338,17 +2355,18 @@ public abstract class FinalModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFinalModel(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModel" + name + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2413,17 +2431,18 @@ public final class FinalModel_NAME_ extends FinalModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFinalModelDecimal(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModelDecimal.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2532,17 +2551,18 @@ public final class FinalModelDecimal extends FinalModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFinalModelDate(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModelDate.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2604,17 +2624,18 @@ public final class FinalModelDate extends FinalModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFinalModelTimestamp(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModelTimestamp.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2676,17 +2697,18 @@ public final class FinalModelTimestamp extends FinalModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFinalModelBytes(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModelBytes.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2767,17 +2789,18 @@ public final class FinalModelBytes extends FinalModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFinalModelString(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModelString.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2860,8 +2883,9 @@ public final class FinalModelString extends FinalModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFinalModelOptional(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
@@ -2871,9 +2895,9 @@ void GeneratorJava::GenerateFBEFinalModelOptional(const std::string& domain, con
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModelOptional" + name + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -2979,8 +3003,9 @@ public final class FinalModelOptional_NAME_ extends _DOMAIN_fbe.FinalModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFinalModelArray(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model, bool bytes)
@@ -2990,9 +3015,9 @@ void GeneratorJava::GenerateFBEFinalModelArray(const std::string& domain, const 
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModelArray" + name + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -3188,8 +3213,9 @@ public final class FinalModelArray_NAME_ extends _DOMAIN_fbe.FinalModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFinalModelVector(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
@@ -3199,9 +3225,9 @@ void GeneratorJava::GenerateFBEFinalModelVector(const std::string& domain, const
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModelVector" + name + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -3454,8 +3480,9 @@ public final class FinalModelVector_NAME_ extends _DOMAIN_fbe.FinalModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFinalModelMap(const std::string& domain, const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
@@ -3465,9 +3492,9 @@ void GeneratorJava::GenerateFBEFinalModelMap(const std::string& domain, const st
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModelMap" + key_name + value_name + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -3694,8 +3721,9 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends _DOMAIN_fbe.Final
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEFinalModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type)
@@ -3705,9 +3733,9 @@ void GeneratorJava::GenerateFBEFinalModelEnumFlags(const std::string& domain, co
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModel" + name + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -3772,17 +3800,18 @@ public final class FinalModel_NAME_ extends _DOMAIN_fbe.FinalModel
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBESender(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Sender.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -3846,17 +3875,18 @@ public abstract class Sender
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEReceiver(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Receiver.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -4147,17 +4177,18 @@ public abstract class Receiver
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateFBEJson(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Json.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -4296,8 +4327,9 @@ public final class Json
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateContainers(const std::shared_ptr<Package>& p, bool final)
@@ -4407,9 +4439,9 @@ void GeneratorJava::GenerateEnum(const std::shared_ptr<Package>& p, const std::s
 {
     std::string enum_name = *e->name + "Enum";
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (enum_name + ".java");
-    Open(output);
+    WriteBegin();
 
     // Generate enum header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -4509,8 +4541,9 @@ void GeneratorJava::GenerateEnum(const std::shared_ptr<Package>& p, const std::s
     // Generate enum footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 
     // Generate enum wrapper class
     GenerateEnumClass(p, e, path);
@@ -4534,9 +4567,9 @@ void GeneratorJava::GenerateEnumClass(const std::shared_ptr<Package>& p, const s
     std::string enum_name = *e->name;
     std::string enum_type_name = *e->name + "Enum";
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (enum_name + ".java");
-    Open(output);
+    WriteBegin();
 
     // Generate enum class header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -4653,8 +4686,9 @@ void GeneratorJava::GenerateEnumClass(const std::shared_ptr<Package>& p, const s
     // Generate enum class footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorJava::GenerateEnumJson(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)
@@ -4669,9 +4703,9 @@ void GeneratorJava::GenerateEnumJson(const std::shared_ptr<Package>& p, const st
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (adapter_name + ".java");
-    Open(output);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -4710,17 +4744,18 @@ void GeneratorJava::GenerateEnumJson(const std::shared_ptr<Package>& p, const st
     // Generate JSON adapter footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorJava::GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path)
 {
     std::string flags_name = *f->name + "Enum";
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (flags_name + ".java");
-    Open(output);
+    WriteBegin();
 
     // Generate flags header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -4848,8 +4883,9 @@ void GeneratorJava::GenerateFlags(const std::shared_ptr<Package>& p, const std::
     // Generate flags footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 
     // Generate flags wrapper class
     GenerateFlagsClass(p, f, path);
@@ -4873,9 +4909,9 @@ void GeneratorJava::GenerateFlagsClass(const std::shared_ptr<Package>& p, const 
     std::string flags_name = *f->name;
     std::string flags_type_name = *f->name + "Enum";
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (flags_name + ".java");
-    Open(output);
+    WriteBegin();
 
     // Generate flags class header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5049,8 +5085,9 @@ void GeneratorJava::GenerateFlagsClass(const std::shared_ptr<Package>& p, const 
     // Generate flags class footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorJava::GenerateFlagsJson(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f)
@@ -5065,9 +5102,9 @@ void GeneratorJava::GenerateFlagsJson(const std::shared_ptr<Package>& p, const s
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (adapter_name + ".java");
-    Open(output);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5107,8 +5144,9 @@ void GeneratorJava::GenerateFlagsJson(const std::shared_ptr<Package>& p, const s
     // Generate JSON adapter footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
@@ -5116,9 +5154,9 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     bool first;
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (*s->name + ".java");
-    Open(output);
+    WriteBegin();
 
     // Generate struct header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5514,8 +5552,9 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     // Generate struct footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 
     // Generate struct field models
     GenerateStructFieldModel(p, s);
@@ -5540,9 +5579,9 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModel" + *s->name + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5915,8 +5954,9 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
@@ -5930,9 +5970,9 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (*s->name + "Model.java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6066,8 +6106,9 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
@@ -6081,9 +6122,9 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModel" + *s->name + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6313,8 +6354,9 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
@@ -6328,9 +6370,9 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (*s->name + "FinalModel.java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6450,8 +6492,9 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
@@ -6464,9 +6507,9 @@ void GeneratorJava::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("ProtocolVersion.java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6488,8 +6531,9 @@ void GeneratorJava::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final)
@@ -6505,9 +6549,9 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     std::string sender = (final ? "FinalSender" : "Sender");
     std::string model = (final ? "FinalModel" : "Model");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (sender + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6669,8 +6713,9 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool final)
@@ -6686,9 +6731,9 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     std::string receiver = (final ? "FinalReceiver" : "Receiver");
     std::string model = (final ? "FinalModel" : "Model");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (receiver + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6863,8 +6908,9 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
@@ -6880,9 +6926,9 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
     std::string proxy = (final ? "FinalProxy" : "Proxy");
     std::string model = (final ? "FinalModel" : "Model");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (proxy + ".java");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7030,8 +7076,9 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
@@ -7044,9 +7091,9 @@ void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Json.java";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7106,8 +7153,9 @@ void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 bool GeneratorJava::IsKnownType(const std::string& type)

@@ -127,9 +127,9 @@ void GeneratorSwift::GenerateFBEPackage(const std::string& domain, const std::st
     // Create FBE package path
     CppCommon::Directory::CreateTree(packagePath);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = packagePath / "Package.swift";
-    Open(file);
+    WriteBegin();
 
     std::string code = R"CODE(// swift-tools-version:5.1
 
@@ -163,17 +163,18 @@ let package = Package(
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEUUIDGenerator(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "UUIDGenerator.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -228,17 +229,18 @@ extension UUID: Comparable {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEBuffer(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Buffer.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -728,17 +730,18 @@ public extension Buffer {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEModel(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Model.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -788,17 +791,18 @@ open class Model {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFieldModel(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModel.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -901,17 +905,18 @@ public extension FieldModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFieldModel(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModel" + name + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -970,17 +975,18 @@ public class FieldModel_NAME_: FieldModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFieldModelDecimal(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModelDecimal.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -1091,17 +1097,18 @@ public class FieldModelDecimal: FieldModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFieldModelTimestamp(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModelTimestamp.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -1150,17 +1157,18 @@ public class FieldModelTimestamp: FieldModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFieldModelBytes(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModelData.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -1271,17 +1279,18 @@ public class FieldModelData: FieldModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFieldModelString(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModelString.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -1390,8 +1399,9 @@ public class FieldModelString: FieldModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFieldModelOptional(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model)
@@ -1402,9 +1412,9 @@ void GeneratorSwift::GenerateFBEFieldModelOptional(const std::string& domain, co
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModelOptional" + name + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -1578,8 +1588,9 @@ public class FieldModelOptional_NAME_: FieldModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFieldModelArray(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
@@ -1590,9 +1601,9 @@ void GeneratorSwift::GenerateFBEFieldModelArray(const std::string& domain, const
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModelArray" + name + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -1730,8 +1741,9 @@ class FieldModelArray_NAME_: FieldModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFieldModelVector(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model)
@@ -1742,9 +1754,9 @@ void GeneratorSwift::GenerateFBEFieldModelVector(const std::string& domain, cons
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModelVector" + name + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -1929,8 +1941,9 @@ class FieldModelVector_NAME_: FieldModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFieldModelMap(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
@@ -1941,9 +1954,9 @@ void GeneratorSwift::GenerateFBEFieldModelMap(const std::string& domain, const s
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModelMap" + key_name + value_name + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -2148,8 +2161,9 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_: FieldModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFieldModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type)
@@ -2159,9 +2173,9 @@ void GeneratorSwift::GenerateFBEFieldModelEnumFlags(const std::string& domain, c
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModel" + name + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -2215,17 +2229,18 @@ public class FieldModel_NAME_: FieldModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBESize(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Size.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -2249,17 +2264,18 @@ public class Size {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFinalModel(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModel.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -2354,17 +2370,18 @@ public extension FinalModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFinalModel(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModel" + name + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -2434,17 +2451,18 @@ public class FinalModel_NAME_: FinalModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFinalModelDecimal(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModelDecimal.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -2569,17 +2587,18 @@ public class FinalModelDecimal: FinalModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFinalModelTimestamp(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModelTimestamp.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -2646,17 +2665,18 @@ public class FinalModelTimestamp: FinalModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFinalModelBytes(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModelData.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -2736,17 +2756,18 @@ public class FinalModelData: FinalModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFinalModelString(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModelString.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -2822,8 +2843,9 @@ public class FinalModelString: FinalModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFinalModelOptional(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model)
@@ -2834,9 +2856,9 @@ void GeneratorSwift::GenerateFBEFinalModelOptional(const std::string& domain, co
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModelOptional" + name + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -2954,8 +2976,9 @@ class FinalModelOptional_NAME_: FinalModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFinalModelArray(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
@@ -2966,9 +2989,9 @@ void GeneratorSwift::GenerateFBEFinalModelArray(const std::string& domain, const
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModelArray" + name + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -3101,8 +3124,9 @@ class FinalModelArray_NAME_: FinalModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFinalModelVector(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model)
@@ -3113,9 +3137,9 @@ void GeneratorSwift::GenerateFBEFinalModelVector(const std::string& domain, cons
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModelVector" + name + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -3231,8 +3255,9 @@ class FinalModelVector_NAME_: FinalModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFinalModelMap(const std::string& domain, const std::shared_ptr<Package>& p, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
@@ -3243,9 +3268,9 @@ void GeneratorSwift::GenerateFBEFinalModelMap(const std::string& domain, const s
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModelMap" + key_name + value_name + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -3385,8 +3410,9 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_: FinalModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEFinalModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type)
@@ -3396,9 +3422,9 @@ void GeneratorSwift::GenerateFBEFinalModelEnumFlags(const std::string& domain, c
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModel" + name + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -3466,17 +3492,18 @@ public class FinalModel_NAME_: FinalModel {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBESender(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "SenderProtocol.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -3535,17 +3562,18 @@ public extension SenderProtocol {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEReceiver(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "ReceiverProtocol.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -3823,23 +3851,24 @@ public extension ReceiverProtocol {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEReceiverListener(const std::string& domain, const std::string& package)
 {
-  CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
+    CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-  // Open the file
-  CppCommon::Path file = path / "Listeners.swift";
-  Open(file);
+    // Generate the file
+    CppCommon::Path file = path / "Listeners.swift";
+    WriteBegin();
 
-  // Generate headers
-  GenerateHeader("Fbe");
-  GenerateImports("", "Foundation");
+    // Generate headers
+    GenerateHeader("Fbe");
+    GenerateImports("", "Foundation");
 
-  std::string code = R"CODE(
+    std::string code = R"CODE(
 public protocol LogListener {
     // Enable/Disable logging
     var logging: Bool { get set }
@@ -3870,25 +3899,26 @@ public extension SenderListener {
 }
 )CODE";
 
-  // Prepare code template
-  code = std::regex_replace(code, std::regex("\n"), EndLine());
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
 
-  Write(code);
+    Write(code);
 
-  // Generate footer
-  GenerateFooter();
+    // Generate footer
+    GenerateFooter();
 
-  // Close the file
-  Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateFBEClient(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "ClientProtocol.swift";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("Fbe");
@@ -4182,8 +4212,9 @@ public extension ClientProtocol {
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateContainers(const std::shared_ptr<Package>& p, bool final)
@@ -4254,9 +4285,9 @@ void GeneratorSwift::GeneratePackage(const std::shared_ptr<Package>& p)
     // Create FBE package path
     CppCommon::Directory::CreateTree(packagePath);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = packagePath / "Package.swift";
-    Open(file);
+    WriteBegin();
 
     std::string code = R"CODE(// swift-tools-version:5.1
 // The swift-tools-version declares the minimum version of Swift required to build this package.
@@ -4305,8 +4336,9 @@ let package = Package(
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 
     // Generate namespace
     if (p->body)
@@ -4356,9 +4388,9 @@ void GeneratorSwift::GenerateEnum(const std::shared_ptr<Package>& p, const std::
 {
     std::string enum_name = *e->name + "Enum";
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (enum_name + ".swift");
-    Open(output);
+    WriteBegin();
 
     // Generate enum header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -4477,8 +4509,9 @@ void GeneratorSwift::GenerateEnum(const std::shared_ptr<Package>& p, const std::
     // Generate enum footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 
     // Generate enum wrapper class
     GenerateEnumClass(p, e, path);
@@ -4499,9 +4532,9 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
     std::string enum_name = *e->name;
     std::string enum_type_name = *e->name + "Enum";
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (enum_name + ".swift");
-    Open(output);
+    WriteBegin();
 
     // Generate enum class header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -4634,17 +4667,18 @@ void GeneratorSwift::GenerateEnumClass(const std::shared_ptr<Package>& p, const 
     // Generate enum class footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorSwift::GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path)
 {
     std::string flags_name = *f->name + "Enum";
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (flags_name + ".swift");
-    Open(output);
+    WriteBegin();
 
     // Generate flags header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -4799,8 +4833,9 @@ void GeneratorSwift::GenerateFlags(const std::shared_ptr<Package>& p, const std:
     // Generate flags footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 
     // Generate flags wrapper class
     GenerateFlagsClass(p, f, path);
@@ -4821,9 +4856,9 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
     std::string flags_name = *f->name;
     std::string flags_type_name = *f->name + "Enum";
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (flags_name + ".swift");
-    Open(output);
+    WriteBegin();
 
     // Generate flags class header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5008,8 +5043,9 @@ void GeneratorSwift::GenerateFlagsClass(const std::shared_ptr<Package>& p, const
     // Generate flags class footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
@@ -5018,9 +5054,9 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     std::string package = ConvertPackage(p);
     bool first;
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (*s->name + ".swift");
-    Open(output);
+    WriteBegin();
 
     // Generate struct header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5470,8 +5506,9 @@ void GeneratorSwift::GenerateStruct(const std::shared_ptr<Package>& p, const std
     // Generate struct footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 
     // Generate struct field models
     GenerateStructFieldModel(p, s);
@@ -5496,9 +5533,9 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModel" + *s->name + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5955,8 +5992,9 @@ void GeneratorSwift::GenerateStructFieldModel(const std::shared_ptr<Package>& p,
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateStructModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
@@ -5970,9 +6008,9 @@ void GeneratorSwift::GenerateStructModel(const std::shared_ptr<Package>& p, cons
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (*s->name + "Model.swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6101,8 +6139,9 @@ void GeneratorSwift::GenerateStructModel(const std::shared_ptr<Package>& p, cons
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
@@ -6116,9 +6155,9 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModel" + *s->name + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6357,8 +6396,9 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
@@ -6372,9 +6412,9 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (*s->name + "FinalModel.swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6501,8 +6541,9 @@ void GeneratorSwift::GenerateStructModelFinal(const std::shared_ptr<Package>& p,
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
@@ -6515,9 +6556,9 @@ void GeneratorSwift::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("ProtocolVersion.swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6536,8 +6577,9 @@ void GeneratorSwift::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool final)
@@ -6553,9 +6595,9 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     std::string sender = (final ? "FinalSender" : "Sender");
     std::string model = (final ? "FinalModel" : "Model");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (sender + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6730,17 +6772,13 @@ void GeneratorSwift::GenerateSender(const std::shared_ptr<Package>& p, bool fina
     // Generate sender end
     Indent(-1);
     WriteLineIndent("}");
-    //
-    // WriteLineIndent("extension " + sender + ": " + domain + "Fbe.SenderListener {");
-    // WriteLineIndent("// Send message handler");
-    // WriteLineIndent("open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }");
-    // WriteLineIndent("}");
 
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool final)
@@ -6757,9 +6795,9 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
     std::string receiver = (final ? "FinalReceiver" : "Receiver");
     std::string model = (final ? "FinalModel" : "Model");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (receiver + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6932,8 +6970,9 @@ void GeneratorSwift::GenerateReceiver(const std::shared_ptr<Package>& p, bool fi
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p, bool final)
@@ -6948,9 +6987,9 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
 
     std::string listener = (final ? "FinalReceiverListener" : "ReceiverListener");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (listener + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7018,8 +7057,9 @@ void GeneratorSwift::GenerateReceiverListener(const std::shared_ptr<Package>& p,
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
@@ -7036,9 +7076,9 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     std::string proxy = (final ? "FinalProxy" : "Proxy");
     std::string model = (final ? "FinalModel" : "Model");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (proxy + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7188,8 +7228,9 @@ void GeneratorSwift::GenerateProxy(const std::shared_ptr<Package>& p, bool final
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateProxyListener(const std::shared_ptr<Package>& p, bool final)
@@ -7205,9 +7246,9 @@ void GeneratorSwift::GenerateProxyListener(const std::shared_ptr<Package>& p, bo
     std::string listener = (final ? "FinalProxyListener" : "ProxyListener");
     std::string model = (final ? "FinalModel" : "Model");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (listener + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7273,8 +7314,9 @@ void GeneratorSwift::GenerateProxyListener(const std::shared_ptr<Package>& p, bo
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool final)
@@ -7291,9 +7333,9 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     std::string client = (final ? "FinalClient" : "Client");
     std::string model = (final ? "FinalModel" : "Model");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (client + ".swift");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7549,16 +7591,12 @@ void GeneratorSwift::GenerateClient(const std::shared_ptr<Package>& p, bool fina
     Indent(-1);
     WriteLineIndent("}");
 
-    // WriteLineIndent("extension " + client + ": " + domain + "Fbe.SenderListener {");
-    // WriteLineIndent("// Send message handler");
-    // WriteLineIndent("open func onSend(buffer: Data, offset: Int, size: Int) throws -> Int { throw NSError() }");
-    // WriteLineIndent("}");
-
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 bool GeneratorSwift::IsKnownType(const std::string& type)

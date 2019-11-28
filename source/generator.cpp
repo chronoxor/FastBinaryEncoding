@@ -14,16 +14,27 @@
 
 namespace FBE {
 
-void Generator::Open(const CppCommon::Path& filename)
+void Generator::Store(const CppCommon::Path& filename)
 {
-    // Take the write file-lock
-    _lock = filename + ".lock";
-    _lock.LockWrite();
+    std::string previous;
 
-    _cursor = 0;
-    _file = filename;
+    // Try to read the previous file content
+    if (filename.IsExists())
+    {
+        CppCommon::File file = filename;
+        file.Open(true, false);
+        previous = file.ReadAllText();
+        file.Close();
+    }
 
-#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+    // Compare the buffer with previous content in order to store only new content
+    if (_buffer == previous)
+        return;
+
+    // Store the buffer into unique file
+    CppCommon::Path unique = filename.parent() / CppCommon::Path::unique();
+    CppCommon::File::WriteAllText(unique, _buffer);
+
     // Sometimes it happens that Visual Studio opens generated files on a fly to analyze.
     // It opens them with mapping into its process with CreateFileMapping/MapViewOfFile.
     // As the result files cannot be replaced or removed. Therefore we need to have some
@@ -35,10 +46,11 @@ void Generator::Open(const CppCommon::Path& filename)
     {
         try
         {
-            _file.OpenOrCreate(false, true, true);
+            // Rename the unique file inside a loop with retries
+            CppCommon::Path::Rename(unique, filename);
             return;
         }
-        catch (const CppCommon::FileSystemException& ex)
+        catch (const CppCommon::FileSystemException & ex)
         {
             if (ex.system_error() == ERROR_USER_MAPPED_FILE)
             {
@@ -48,19 +60,7 @@ void Generator::Open(const CppCommon::Path& filename)
             throw;
         }
     }
-    throwex CppCommon::FileSystemException("Cannot generate output file!").Attach(filename);
-#else
-    _file.OpenOrCreate(false, true, true);
-#endif
-}
-
-void Generator::Close()
-{
-    _file.Close();
-
-    // Release the write file-lock
-    _lock.UnlockWrite();
-    _lock.Reset();
+    throwex CppCommon::FileSystemException("Cannot generate the output file!").Attach(filename);
 }
 
 } // namespace FBE

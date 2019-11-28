@@ -132,9 +132,9 @@ void GeneratorKotlin::GenerateFBEUUIDGenerator(const std::string& domain, const 
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "UUIDGenerator.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -221,17 +221,18 @@ object UUIDGenerator
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEBuffer(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Buffer.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -617,17 +618,18 @@ class Buffer
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEModel(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Model.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -677,17 +679,18 @@ open class Model
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFieldModel(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModel.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -759,17 +762,18 @@ abstract class FieldModel protected constructor(protected var _buffer: Buffer, p
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFieldModel(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModel" + name + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -816,17 +820,18 @@ class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFieldModelDecimal(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModelDecimal.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -925,17 +930,18 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFieldModelDate(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModelDate.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -979,17 +985,18 @@ class FieldModelDate(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFieldModelTimestamp(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModelTimestamp.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -1033,17 +1040,18 @@ class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFieldModelBytes(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModelBytes.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -1140,17 +1148,18 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFieldModelString(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FieldModelString.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -1249,8 +1258,9 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFieldModelOptional(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
@@ -1260,9 +1270,9 @@ void GeneratorKotlin::GenerateFBEFieldModelOptional(const std::string& domain, c
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModelOptional" + name + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -1414,8 +1424,9 @@ class FieldModelOptional_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMA
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFieldModelArray(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
@@ -1425,9 +1436,9 @@ void GeneratorKotlin::GenerateFBEFieldModelArray(const std::string& domain, cons
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModelArray" + name + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -1575,8 +1586,9 @@ class FieldModelArray_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long, val size: 
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFieldModelVector(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
@@ -1586,9 +1598,9 @@ void GeneratorKotlin::GenerateFBEFieldModelVector(const std::string& domain, con
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModelVector" + name + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -1826,8 +1838,9 @@ class FieldModelVector_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFieldModelMap(const std::string& domain, const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
@@ -1837,9 +1850,9 @@ void GeneratorKotlin::GenerateFBEFieldModelMap(const std::string& domain, const 
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModelMap" + key_name + value_name + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -2065,8 +2078,9 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Lo
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFieldModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type)
@@ -2076,9 +2090,9 @@ void GeneratorKotlin::GenerateFBEFieldModelEnumFlags(const std::string& domain, 
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModel" + name + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -2125,17 +2139,18 @@ class FieldModel_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.F
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBESize(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Size.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2161,17 +2176,18 @@ class Size
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFinalModel(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModel.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2243,17 +2259,18 @@ abstract class FinalModel protected constructor(protected var _buffer: Buffer, p
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFinalModel(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModel" + name + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2315,17 +2332,18 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFinalModelDecimal(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModelDecimal.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2439,17 +2457,18 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFinalModelDate(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModelDate.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2508,17 +2527,18 @@ class FinalModelDate(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFinalModelTimestamp(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModelTimestamp.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2577,17 +2597,18 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFinalModelBytes(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModelBytes.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2661,17 +2682,18 @@ class FinalModelBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFinalModelString(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "FinalModelString.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -2747,8 +2769,9 @@ class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFinalModelOptional(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
@@ -2758,9 +2781,9 @@ void GeneratorKotlin::GenerateFBEFinalModelOptional(const std::string& domain, c
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModelOptional" + name + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -2859,8 +2882,9 @@ class FinalModelOptional_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMA
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFinalModelArray(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
@@ -2870,9 +2894,9 @@ void GeneratorKotlin::GenerateFBEFinalModelArray(const std::string& domain, cons
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModelArray" + name + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -3062,8 +3086,9 @@ class FinalModelArray_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long, private va
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFinalModelVector(const std::string& domain, const std::string& package, const std::string& name, const std::string& type, const std::string& model)
@@ -3073,9 +3098,9 @@ void GeneratorKotlin::GenerateFBEFinalModelVector(const std::string& domain, con
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModelVector" + name + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -3291,8 +3316,9 @@ class FinalModelVector_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFinalModelMap(const std::string& domain, const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
@@ -3302,9 +3328,9 @@ void GeneratorKotlin::GenerateFBEFinalModelMap(const std::string& domain, const 
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModelMap" + key_name + value_name + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -3510,8 +3536,9 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Lo
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEFinalModelEnumFlags(const std::string& domain, const std::string& package, const std::string& name, const std::string& type)
@@ -3521,9 +3548,9 @@ void GeneratorKotlin::GenerateFBEFinalModelEnumFlags(const std::string& domain, 
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModel" + name + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -3585,17 +3612,18 @@ class FinalModel_NAME_(buffer: _DOMAIN_fbe.Buffer, offset: Long) : _DOMAIN_fbe.F
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBESender(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Sender.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -3649,17 +3677,18 @@ abstract class Sender : ISenderListener
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBESenderListener(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "ISenderListener.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -3684,17 +3713,18 @@ interface ISenderListener
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEReceiver(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Receiver.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -3980,17 +4010,18 @@ abstract class Receiver : IReceiverListener
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEReceiverListener(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "IReceiverListener.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -4013,17 +4044,18 @@ interface IReceiverListener
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEClient(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Client.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -4330,17 +4362,18 @@ abstract class Client : IClientListener
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEClientListener(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "IClientListener.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -4361,17 +4394,18 @@ interface IClientListener : ISenderListener, IReceiverListener
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateFBEJson(const std::string& domain, const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / CreatePackagePath(domain, package);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Json.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader("fbe");
@@ -4592,8 +4626,9 @@ object Json
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateContainers(const std::shared_ptr<Package>& p, bool final)
@@ -4712,9 +4747,9 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
 {
     std::string enum_name = *e->name + "Enum";
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (enum_name + ".kt");
-    Open(output);
+    WriteBegin();
 
     // Generate enum header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -4833,8 +4868,9 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     // Generate enum footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 
     // Generate enum wrapper class
     GenerateEnumClass(p, e, path);
@@ -4858,9 +4894,9 @@ void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const
     std::string enum_name = *e->name;
     std::string enum_type_name = *e->name + "Enum";
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (enum_name + ".kt");
-    Open(output);
+    WriteBegin();
 
     // Generate enum class header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -4990,8 +5026,9 @@ void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const
     // Generate enum class footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorKotlin::GenerateEnumJson(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)
@@ -5006,9 +5043,9 @@ void GeneratorKotlin::GenerateEnumJson(const std::shared_ptr<Package>& p, const 
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (adapter_name + ".kt");
-    Open(output);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5046,17 +5083,18 @@ void GeneratorKotlin::GenerateEnumJson(const std::shared_ptr<Package>& p, const 
     // Generate JSON adapter footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path)
 {
     std::string flags_name = *f->name + "Enum";
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (flags_name + ".kt");
-    Open(output);
+    WriteBegin();
 
     // Generate flags header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5206,8 +5244,9 @@ void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std
     // Generate flags footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 
     // Generate flags wrapper class
     GenerateFlagsClass(p, f, path);
@@ -5231,9 +5270,9 @@ void GeneratorKotlin::GenerateFlagsClass(const std::shared_ptr<Package>& p, cons
     std::string flags_name = *f->name;
     std::string flags_type_name = *f->name + "Enum";
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (flags_name + ".kt");
-    Open(output);
+    WriteBegin();
 
     // Generate flags class header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5423,8 +5462,9 @@ void GeneratorKotlin::GenerateFlagsClass(const std::shared_ptr<Package>& p, cons
     // Generate flags class footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorKotlin::GenerateFlagsJson(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f)
@@ -5439,9 +5479,9 @@ void GeneratorKotlin::GenerateFlagsJson(const std::shared_ptr<Package>& p, const
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (adapter_name + ".kt");
-    Open(output);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5481,8 +5521,9 @@ void GeneratorKotlin::GenerateFlagsJson(const std::shared_ptr<Package>& p, const
     // Generate JSON adapter footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
@@ -5490,9 +5531,9 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     std::string domain = (p->domain && !p->domain->empty()) ? (*p->domain + ".") : "";
     bool first;
 
-    // Open the output file
+    // Generate the output file
     CppCommon::Path output = path / (*s->name + ".kt");
-    Open(output);
+    WriteBegin();
 
     // Generate struct header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -5865,8 +5906,9 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     // Generate struct footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 
     // Generate struct field models
     GenerateStructFieldModel(p, s);
@@ -5891,9 +5933,9 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FieldModel" + *s->name + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6254,8 +6296,9 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
@@ -6269,9 +6312,9 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (*s->name + "Model.kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6412,8 +6455,9 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
@@ -6427,9 +6471,9 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("FinalModel" + *s->name + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6648,8 +6692,9 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
@@ -6663,9 +6708,9 @@ void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (*s->name + "FinalModel.kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6794,8 +6839,9 @@ void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
@@ -6808,9 +6854,9 @@ void GeneratorKotlin::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / ("ProtocolVersion.kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -6832,8 +6878,9 @@ void GeneratorKotlin::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool final)
@@ -6850,9 +6897,9 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     std::string sender = (final ? "FinalSender" : "Sender");
     std::string model = (final ? "FinalModel" : "Model");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (sender + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7025,8 +7072,9 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateSenderListener(const std::shared_ptr<Package>& p, bool final)
@@ -7041,9 +7089,9 @@ void GeneratorKotlin::GenerateSenderListener(const std::shared_ptr<Package>& p, 
 
     std::string listener = (final ? "IFinalSenderListener" : "ISenderListener");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (listener + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7079,8 +7127,9 @@ void GeneratorKotlin::GenerateSenderListener(const std::shared_ptr<Package>& p, 
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool final)
@@ -7097,9 +7146,9 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     std::string receiver = (final ? "FinalReceiver" : "Receiver");
     std::string model = (final ? "FinalModel" : "Model");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (receiver + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7269,8 +7318,9 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateReceiverListener(const std::shared_ptr<Package>& p, bool final)
@@ -7285,9 +7335,9 @@ void GeneratorKotlin::GenerateReceiverListener(const std::shared_ptr<Package>& p
 
     std::string listener = (final ? "IFinalReceiverListener" : "IReceiverListener");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (listener + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7336,8 +7386,9 @@ void GeneratorKotlin::GenerateReceiverListener(const std::shared_ptr<Package>& p
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
@@ -7354,9 +7405,9 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     std::string proxy = (final ? "FinalProxy" : "Proxy");
     std::string model = (final ? "FinalModel" : "Model");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (proxy + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7499,8 +7550,9 @@ void GeneratorKotlin::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateProxyListener(const std::shared_ptr<Package>& p, bool final)
@@ -7516,9 +7568,9 @@ void GeneratorKotlin::GenerateProxyListener(const std::shared_ptr<Package>& p, b
     std::string listener = (final ? "IFinalProxyListener" : "IProxyListener");
     std::string model = (final ? "FinalModel" : "Model");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (listener + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7567,8 +7619,9 @@ void GeneratorKotlin::GenerateProxyListener(const std::shared_ptr<Package>& p, b
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool final)
@@ -7585,9 +7638,9 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     std::string client = (final ? "FinalClient" : "Client");
     std::string model = (final ? "FinalModel" : "Model");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (client + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7856,8 +7909,9 @@ void GeneratorKotlin::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateClientListener(const std::shared_ptr<Package>& p, bool final)
@@ -7874,9 +7928,9 @@ void GeneratorKotlin::GenerateClientListener(const std::shared_ptr<Package>& p, 
     std::string sender = (final ? "IFinalSenderListener" : "ISenderListener");
     std::string receiver = (final ? "IFinalReceiverListener" : "IReceiverListener");
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / (listener + ".kt");
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7913,8 +7967,9 @@ void GeneratorKotlin::GenerateClientListener(const std::shared_ptr<Package>& p, 
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 void GeneratorKotlin::GenerateJson(const std::shared_ptr<Package>& p)
@@ -7927,9 +7982,9 @@ void GeneratorKotlin::GenerateJson(const std::shared_ptr<Package>& p)
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    // Open the file
+    // Generate the file
     CppCommon::Path file = path / "Json.kt";
-    Open(file);
+    WriteBegin();
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -7975,8 +8030,9 @@ void GeneratorKotlin::GenerateJson(const std::shared_ptr<Package>& p)
     // Generate footer
     GenerateFooter();
 
-    // Close the file
-    Close();
+    // Store the file
+    WriteEnd();
+    Store(file);
 }
 
 bool GeneratorKotlin::IsKnownType(const std::string& type)

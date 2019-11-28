@@ -4172,9 +4172,9 @@ void GeneratorCSharp::GenerateFBEJson()
 
 void GeneratorCSharp::GenerateFBE(const CppCommon::Path& path)
 {
-    // Open the common file
-    CppCommon::Path init = path / "fbe.cs";
-    Open(init);
+    // Generate the common file
+    CppCommon::Path common = path / "fbe.cs";
+    WriteBegin();
 
     // Generate common header
     GenerateHeader("fbe");
@@ -4285,8 +4285,9 @@ void GeneratorCSharp::GenerateFBE(const CppCommon::Path& path)
     // Generate common footer
     GenerateFooter();
 
-    // Close the common file
-    Close();
+    // Store the common file
+    WriteEnd();
+    Store(common);
 }
 
 void GeneratorCSharp::GeneratePackage(const std::shared_ptr<Package>& p)
@@ -4299,9 +4300,9 @@ void GeneratorCSharp::GeneratePackage(const std::shared_ptr<Package>& p)
     // Generate common file
     GenerateFBE(output);
 
-    // Open the output file
+    // Generate the output file
     output /= *p->name + ".cs";
-    Open(output);
+    WriteBegin();
 
     // Generate package header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -4345,8 +4346,9 @@ void GeneratorCSharp::GeneratePackage(const std::shared_ptr<Package>& p)
     // Generate package footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)

@@ -70,9 +70,9 @@ require 'uuidtools'
 
 void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
 {
-    // Open the common file
-    CppCommon::Path init = path / "fbe.rb";
-    Open(init);
+    // Generate the common file
+    CppCommon::Path common = path / "fbe.rb";
+    WriteBegin();
 
     // Generate common header
     GenerateHeader("fbe");
@@ -159,7 +159,8 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
     GenerateFooter();
 
     // Close the common file
-    Close();
+    WriteEnd();
+    Store(common);
 }
 
 void GeneratorRuby::GenerateFBEEnum()
@@ -3405,9 +3406,9 @@ void GeneratorRuby::GeneratePackage(const std::shared_ptr<Package>& p)
     // Generate FBE file
     GenerateFBE(output);
 
-    // Open the output file
+    // Generate the output file
     output /= *p->name + ".rb";
-    Open(output);
+    WriteBegin();
 
     // Generate package header
     GenerateHeader(CppCommon::Path(_input).filename().string());
@@ -3459,8 +3460,9 @@ void GeneratorRuby::GeneratePackage(const std::shared_ptr<Package>& p)
     // Generate package footer
     GenerateFooter();
 
-    // Close the output file
-    Close();
+    // Store the output file
+    WriteEnd();
+    Store(output);
 }
 
 void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
