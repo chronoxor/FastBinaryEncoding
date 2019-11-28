@@ -1,7 +1,6 @@
 var searchData=
 [
   ['char',['CHAR',['../fbe-parser_8cpp.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a4618cf21306b3c647741afa7ebefcab8',1,'CHAR():&#160;fbe-parser.cpp'],['../fbe-parser_8hpp.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a4618cf21306b3c647741afa7ebefcab8',1,'CHAR():&#160;fbe-parser.hpp']]],
-  ['close',['Close',['../class_f_b_e_1_1_generator.html#a7eba2593979bb7ceae114636ab0f7ee6',1,'FBE::Generator']]],
   ['const_5fchar',['CONST_CHAR',['../fbe-parser_8cpp.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a3a014f711da36e35e4a6419b68238906',1,'CONST_CHAR():&#160;fbe-parser.cpp'],['../fbe-parser_8hpp.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a3a014f711da36e35e4a6419b68238906',1,'CONST_CHAR():&#160;fbe-parser.hpp']]],
   ['const_5fepoch',['CONST_EPOCH',['../fbe-parser_8cpp.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a36f3c2327a6a6bc2352da39a432fca80',1,'CONST_EPOCH():&#160;fbe-parser.cpp'],['../fbe-parser_8hpp.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a36f3c2327a6a6bc2352da39a432fca80',1,'CONST_EPOCH():&#160;fbe-parser.hpp']]],
   ['const_5ffalse',['CONST_FALSE',['../fbe-parser_8cpp.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a27c27f930d7fc69dfefd834d2babe9d4',1,'CONST_FALSE():&#160;fbe-parser.cpp'],['../fbe-parser_8hpp.html#a15c9f7bd2f0e9686df5d9df4f3314aa9a27c27f930d7fc69dfefd834d2babe9d4',1,'CONST_FALSE():&#160;fbe-parser.hpp']]],
