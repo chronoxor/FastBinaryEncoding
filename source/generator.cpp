@@ -52,7 +52,7 @@ void Generator::Store(const CppCommon::Path& filename)
         }
         catch (const CppCommon::FileSystemException & ex)
         {
-            if (ex.system_error() == ERROR_USER_MAPPED_FILE)
+            if ((ex.system_error() == ERROR_ACCESS_DENIED) || (ex.system_error() == ERROR_USER_MAPPED_FILE))
             {
                 CppCommon::Thread::Sleep(sleep);
                 continue;
