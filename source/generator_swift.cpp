@@ -246,8 +246,7 @@ void GeneratorSwift::GenerateFBEBuffer(const std::string& domain, const std::str
     GenerateHeader("Fbe");
     GenerateImports("", "Foundation");
 
-    std::string code = R"CODE(
-public class Buffer {
+    std::string code = R"CODE(public class Buffer {
 
     // Is the buffer empty?
     var empty: Bool {
@@ -255,17 +254,6 @@ public class Buffer {
     }
     // Get bytes memory buffer
     var data = Data()
-
-    func withDataPointer(offset: Int = 0, block: (UnsafeMutablePointer<UInt8>) -> Void) {
-       // block(self.p)
-        self.data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
-            if let baseAddress = body.baseAddress, body.count > 0 {
-                block(baseAddress.assumingMemoryBound(to: UInt8.self).advanced(by: offset))
-            } else {
-                assertionFailure()
-            }
-        }
-    }
 
     // Get bytes memory buffer capacity
     var capacity: Int {
@@ -336,7 +324,6 @@ public class Buffer {
         }
 
         var data = Data(count: max(total, 2 * self.size))
-        //data.insert(contentsOf: self.data, at: 0)
         data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
             if let baseAddress = body.baseAddress, body.count > 0 {
                 let pointer = baseAddress.assumingMemoryBound(to: UInt8.self)
@@ -406,20 +393,48 @@ public class Buffer {
     public func shift(offset: Int) { self.offset += offset }
     // Unshift the current buffer offset
     public func unshift(offset: Int) { self.offset -= offset }
+
+    func withDataMutablePointer(offset: Int = 0, block: (UnsafeMutablePointer<UInt8>) -> Void) {
+        self.data.withUnsafeMutableBytes { (body: UnsafeMutableRawBufferPointer) in
+            if let baseAddress = body.baseAddress, body.count > 0 {
+                block(baseAddress.assumingMemoryBound(to: UInt8.self).advanced(by: offset))
+            } else {
+                assertionFailure()
+            }
+        }
+    }
+
+    func withUnsafeBytes(block: (UnsafeRawPointer) -> Void) {
+        self.data.withUnsafeBytes { body in
+            if let baseAddress = body.baseAddress, body.count > 0 {
+                block(baseAddress)
+            } else {
+                assertionFailure()
+            }
+        }
+    }
+
+    private func decodeByteNumber<T>(value: inout T, offset: Int, count: Int) {
+        withUnsafeMutableBytes(of: &value) { dest -> Void in
+            withUnsafeBytes { p in
+                let src = p.advanced(by: offset)
+                dest.copyMemory(from: UnsafeRawBufferPointer(start: src, count: count))
+            }
+        }
+    }
 }
 )CODE";
 
     Write(code);
 
-    code = R"CODE(
-// MARK: Buffer I/O methods
+    code = R"CODE(// MARK: Buffer I/O methods
 public extension Buffer {
     class func readBoolean(buffer: Data, offset: Int) -> Bool {
         let index = offset
         return buffer[index] != 0
     }
 
-    class func readByte(buffer: Data, offset: Int) -> Data.Element {
+    class func readByte(buffer: Data, offset: Int) -> UInt8 {
         let index = offset
         return buffer[index]
     }
@@ -434,12 +449,7 @@ public extension Buffer {
 
     class func readInt8(buffer: Buffer, offset: Int) -> Int8 {
         var i: Int8 = 0
-        withUnsafeMutablePointer(to: &i) { ip -> Void in
-            let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            buffer.withDataPointer {
-                dest.initialize(from: $0.advanced(by: offset), count: 1)
-            }
-        }
+        buffer.decodeByteNumber(value: &i, offset: offset, count: 1)
         return Int8(littleEndian: i)
     }
 
@@ -450,67 +460,37 @@ public extension Buffer {
 
     class func readInt16(buffer: Buffer, offset: Int) -> Int16 {
         var i: Int16 = 0
-        withUnsafeMutablePointer(to: &i) { ip -> Void in
-            let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            buffer.withDataPointer(offset: offset) {
-                dest.initialize(from: $0, count: 2)
-            }
-        }
+        buffer.decodeByteNumber(value: &i, offset: offset, count: 2)
         return Int16(littleEndian: i)
     }
 
     class func readUInt16(buffer: Buffer, offset: Int) -> UInt16 {
         var i: UInt16 = 0
-        withUnsafeMutablePointer(to: &i) { ip -> Void in
-            let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            buffer.withDataPointer(offset: offset) {
-                dest.initialize(from: $0, count: 2)
-            }
-        }
+        buffer.decodeByteNumber(value: &i, offset: offset, count: 2)
         return UInt16(littleEndian: i)
     }
 
     class func readInt32(buffer: Buffer, offset: Int) -> Int32 {
         var i: Int32 = 0
-        withUnsafeMutablePointer(to: &i) { ip -> Void in
-            let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            buffer.withDataPointer(offset: offset) {
-                dest.initialize(from: $0, count: 4)
-            }
-        }
+        buffer.decodeByteNumber(value: &i, offset: offset, count: 4)
         return Int32(littleEndian: i)
     }
 
     class func readUInt32(buffer: Buffer, offset: Int) -> UInt32 {
         var i: UInt32 = 0
-        withUnsafeMutablePointer(to: &i) { ip -> Void in
-            let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            buffer.withDataPointer(offset: offset) {
-                dest.initialize(from: $0, count: 4)
-            }
-        }
+        buffer.decodeByteNumber(value: &i, offset: offset, count: 4)
         return UInt32(littleEndian: i)
     }
 
     class func readInt64(buffer: Buffer, offset: Int) -> Int64 {
         var i: Int64 = 0
-        withUnsafeMutablePointer(to: &i) { ip -> Void in
-            let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            buffer.withDataPointer(offset: offset) {
-                dest.initialize(from: $0, count: 8)
-            }
-        }
+        buffer.decodeByteNumber(value: &i, offset: offset, count: 8)
         return Int64(littleEndian: i)
     }
 
     class func readUInt64(buffer: Buffer, offset: Int) -> UInt64 {
         var i: UInt64 = 0
-        withUnsafeMutablePointer(to: &i) { ip -> Void in
-            let dest = UnsafeMutableRawPointer(ip).assumingMemoryBound(to: UInt8.self)
-            buffer.withDataPointer(offset: offset) {
-                dest.initialize(from: $0, count: 8)
-            }
-        }
+        buffer.decodeByteNumber(value: &i, offset: offset, count: 8)
         return UInt64(littleEndian: i)
     }
 
@@ -520,8 +500,8 @@ public extension Buffer {
     }
 
     class func readDouble(buffer: Buffer, offset: Int) -> Double {
-        let bits = readUInt64(buffer: buffer, offset: offset)
-        return Double(bitPattern: bits)
+        let bitPattern = readUInt64(buffer: buffer, offset: offset)
+        return Double(bitPattern: bitPattern)
     }
 
     class func readBytes(buffer: Data, offset: Int, size: Int) -> Data {
@@ -532,33 +512,35 @@ public extension Buffer {
 
     class func readString(buffer: Buffer, offset: Int, size: Int) -> String {
         var value = ""
-        buffer.withDataPointer(offset: offset) {
-            value = utf8ToString(bytes: $0, count: size)!
+
+        buffer.withUnsafeBytes { p in
+            let src = p.advanced(by: offset).assumingMemoryBound(to: UInt8.self)
+            value = utf8ToString(bytes: src, count: size)
         }
         return value
     }
 
-    class func utf8ToString(bytes: UnsafePointer<UInt8>, count: Int) -> String? {
+    class func utf8ToString(bytes: UnsafePointer<UInt8>, count: Int) -> String {
         if count == 0 {
             return String()
         }
         let codeUnits = UnsafeBufferPointer<UInt8>(start: bytes, count: count)
         let sourceEncoding = Unicode.UTF8.self
 
-        // Verify that the UTF-8 is valid.
-        //        var p = sourceEncoding.ForwardParser()
-        //        var i = codeUnits.makeIterator()
-        //        Loop:
-        //            while true {
-        //                switch p.parseScalar(from: &i) {
-        //                case .valid(_):
-        //                    break
-        //                case .error:
-        //                    return nil
-        //                case .emptyInput:
-        //                    break Loop
-        //                }
-        //        }
+        //         Verify that the UTF-8 is valid.
+        var p = sourceEncoding.ForwardParser()
+        var i = codeUnits.makeIterator()
+        Loop:
+            while true {
+                switch p.parseScalar(from: &i) {
+                case .valid(_):
+                    break
+                case .error:
+                    return ""
+                case .emptyInput:
+                    break Loop
+                }
+        }
 
         // This initializer is fast but does not reject broken
         // UTF-8 (which is why we validate the UTF-8 above).
@@ -594,7 +576,7 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Int8) {
-        buffer.withDataPointer(offset: offset) {
+        buffer.withDataMutablePointer(offset: offset) {
             var v = value.littleEndian
             let n = MemoryLayout<UInt8>.size
             memcpy($0, &v, n)
@@ -602,7 +584,7 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt8) {
-        buffer.withDataPointer(offset: offset) {
+        buffer.withDataMutablePointer(offset: offset) {
             var v = value.littleEndian
             let n = MemoryLayout<UInt8>.size
             memcpy($0, &v, n)
@@ -610,7 +592,7 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Int16) {
-        buffer.withDataPointer(offset: offset) {
+        buffer.withDataMutablePointer(offset: offset) {
             var v = value.littleEndian
             let n = MemoryLayout<Int16>.size
             memcpy($0, &v, n)
@@ -618,7 +600,7 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt16) {
-        buffer.withDataPointer(offset: offset) {
+        buffer.withDataMutablePointer(offset: offset) {
             var v = value.littleEndian
             let n = MemoryLayout<UInt16>.size
             memcpy($0, &v, n)
@@ -626,7 +608,7 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Int32) {
-        buffer.withDataPointer(offset: offset) {
+        buffer.withDataMutablePointer(offset: offset) {
             var v = value.littleEndian
             let n = MemoryLayout<Int32>.size
             memcpy($0, &v, n)
@@ -634,7 +616,7 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt32) {
-        buffer.withDataPointer(offset: offset) {
+        buffer.withDataMutablePointer(offset: offset) {
             var v = value.littleEndian
             let n = MemoryLayout<UInt32>.size
             memcpy($0, &v, n)
@@ -642,7 +624,7 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: Int64) {
-        buffer.withDataPointer(offset: offset) {
+        buffer.withDataMutablePointer(offset: offset) {
             var v = value.littleEndian
             let n = MemoryLayout<Int64>.size
             memcpy($0, &v, n)
@@ -650,7 +632,7 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt64) {
-        buffer.withDataPointer(offset: offset) {
+        buffer.withDataMutablePointer(offset: offset) {
             var v = value.littleEndian
             let n = MemoryLayout<UInt64>.size
             memcpy($0, &v, n)
@@ -658,7 +640,7 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: String) {
-        buffer.withDataPointer(offset: offset) {
+        buffer.withDataMutablePointer(offset: offset) {
             var pointer = $0
             var v = UInt32(value.count).littleEndian
             let n = MemoryLayout<UInt32>.size
@@ -702,7 +684,7 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt8, valueCount: Int) {
-        buffer.withDataPointer(offset: offset) {
+        buffer.withDataMutablePointer(offset: offset) {
             var pointer = $0
 
             var v = value.littleEndian
@@ -717,7 +699,7 @@ public extension Buffer {
     }
 
     class func write(buffer: inout Data, offset: Int, value: UUID) {
-        Buffer.write(buffer: &buffer, offset: offset, value: Data(withUnsafeBytes(of: value.uuid, { Data($0) }).reversed()))
+        Buffer.write(buffer: &buffer, offset: offset, value: Data(Swift.withUnsafeBytes(of: value.uuid, { Data($0) }).reversed()))
     }
 }
 )CODE";

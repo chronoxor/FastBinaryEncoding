@@ -45,7 +45,7 @@ class BenchmarkSerializationFinal: XCTestCase {
     func testPerformanceVerify() {
         self.measure {
             // Verify the account
-            for _ in 0...999 {
+            for _ in 0...1000 {
                 _ = BenchmarkSerializationFinal._writer.verify()
             }
         }
@@ -54,7 +54,7 @@ class BenchmarkSerializationFinal: XCTestCase {
     func testPerformanceSerialize() {
         self.measure {
             // Reset FBE stream
-            for _ in 0...999 {
+            for _ in 0...1000 {
                 BenchmarkSerializationFinal._writer.reset()
                 // Serialize the account to the FBE stream
                 _ = try! BenchmarkSerializationFinal._writer.serialize(value: BenchmarkSerializationFinal._account)
@@ -65,7 +65,7 @@ class BenchmarkSerializationFinal: XCTestCase {
     func testPerformanceDeserialize() {
         self.measure {
             // Deserialize the account from the FBE stream
-            for _ in 0...999 {
+            for _ in 0...1000 {
                 _ = BenchmarkSerializationFinal._reader.deserialize(value: &BenchmarkSerializationFinal._account)
             }
         }
