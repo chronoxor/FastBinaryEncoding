@@ -6547,12 +6547,12 @@ void GeneratorSwift::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
 
     // Generate protocol version class
     WriteLineIndent("// Fast Binary Encoding " + domain + package + " protocol version");
-    WriteLineIndent("struct ProtocolVersion {");
+    WriteLineIndent("public struct ProtocolVersion {");
     Indent(1);
     WriteLineIndent("// Protocol major version");
-    WriteLineIndent("static let Major = " + std::to_string(p->version->major));
+    WriteLineIndent("public static let Major = " + std::to_string(p->version->major));
     WriteLineIndent("// Protocol minor version");
-    WriteLineIndent("static let Minor = " + std::to_string(p->version->minor));
+    WriteLineIndent("public static let Minor = " + std::to_string(p->version->minor));
     Indent(-1);
     WriteLineIndent("}");
 
