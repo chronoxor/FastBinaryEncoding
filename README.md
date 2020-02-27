@@ -109,7 +109,7 @@ pip3 install gil
 ### Setup repository
 ```shell
 git clone https://github.com/chronoxor/FastBinaryEncoding.git
-cd CppCommon
+cd FastBinaryEncoding
 gil update
 ```
 
