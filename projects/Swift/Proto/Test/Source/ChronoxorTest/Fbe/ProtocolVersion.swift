@@ -4,9 +4,9 @@
 // Version: 1.3.0.0
 
 // Fast Binary Encoding ChronoxorTest protocol version
-struct ProtocolVersion {
+public struct ProtocolVersion {
     // Protocol major version
-    static let Major = 123
+    public static let Major = 123
     // Protocol minor version
-    static let Minor = 456
+    public static let Minor = 456
 }
