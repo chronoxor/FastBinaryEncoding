@@ -110,7 +110,7 @@ public extension ClientProtocol {
                             try _ = self.receiveBuffer.allocate(size: count)
                             size1 += count
 
-                            self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
+                            self.receiveBuffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                             offset1 += count
                             offset2 += count
                             continue
@@ -133,7 +133,7 @@ public extension ClientProtocol {
                         try _ = self.receiveBuffer.allocate(size: count)
                         size1 += count
 
-                        self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
+                        self.receiveBuffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                         offset1 += count
                         offset2 += count
                         continue
@@ -150,7 +150,7 @@ public extension ClientProtocol {
 
             // Check the message full size
             let minSize: Int = {
-                if final { return 4 + 4 } else { return 4 + 4 + 4 + 4 }
+                return final ? 4 + 4 : 4 + 4 + 4 + 4
             }()
 
             assert(messageSize >= minSize, "Invalid receive data!")
@@ -191,7 +191,7 @@ public extension ClientProtocol {
                             try _ = self.receiveBuffer.allocate(size: count)
                             size1 += count
 
-                            self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
+                            self.receiveBuffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                             offset1 += count
                             offset2 += count
                             continue
@@ -228,7 +228,7 @@ public extension ClientProtocol {
                         try _ = self.receiveBuffer.allocate(size: count)
                         size1 += count
 
-                        self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
+                        self.receiveBuffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                         offset1 += count
                         offset2 += count
                         continue

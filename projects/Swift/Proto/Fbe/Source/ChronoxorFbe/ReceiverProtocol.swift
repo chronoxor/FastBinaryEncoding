@@ -73,7 +73,6 @@ public extension ReceiverProtocol {
                     if count == 4 {
                         messageSizeCopied = true
                         messageSizeFound = true
-                        //self.buffer.data = Data(bytes: self.buffer.p, count: self.buffer.data.count)
                         messageSize = Int(Buffer.readUInt32(buffer: self.buffer, offset: offset0))
                         offset0 += 4
                         break
@@ -86,9 +85,7 @@ public extension ReceiverProtocol {
                             try _ = self.buffer.allocate(size: count)
                             size1 += count
 
-                            //Buffer.write(buffer: &self.buffer, offset: offset1, value: buffer.data, valueOffset: offset + offset2, valueSize: count)
                             self.buffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
-                            //System.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                             offset1 += count
                             offset2 += count
                             continue
@@ -111,9 +108,7 @@ public extension ReceiverProtocol {
                         try _ = self.buffer.allocate(size: count)
                         size1 += count
 
-                        //Buffer.write(buffer: &self.buffer, offset: offset1, value: buffer.data, valueOffset: offset + offset2, valueSize: count)
                         self.buffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
-                        //system.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                         offset1 += count
                         offset2 += count
                         continue
@@ -170,9 +165,7 @@ public extension ReceiverProtocol {
                             try _ = self.buffer.allocate(size: count)
                             size1 += count
 
-                            //Buffer.write(buffer: &self.buffer, offset: offset1, value: buffer.data, valueOffset: offset + offset2, valueSize: count)
                             self.buffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
-                            //System.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                             offset1 += count
                             offset2 += count
                             continue
@@ -209,9 +202,7 @@ public extension ReceiverProtocol {
                         // Allocate and refresh the storage buffer
                         try _ = self.buffer.allocate(size: count)
                         size1 += count
-                        //Buffer.write(buffer: &self.buffer, offset: offset1, value: buffer.data, valueOffset: offset + offset2, valueSize: count)
                         self.buffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
-                        //System.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                         offset1 += count
                         offset2 += count
                         continue

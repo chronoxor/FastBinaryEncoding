@@ -680,7 +680,6 @@ public extension Buffer {
         for i in 0..<values.count {
             Buffer.write(buffer: &buffer, offset: offset + i, value: values[i])
         }
-        //buffer[offset...] = value[valueOffset...(valueOffset + valueSize)]
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt8, valueCount: Int) {
@@ -3630,7 +3629,6 @@ public extension ReceiverProtocol {
                     if count == 4 {
                         messageSizeCopied = true
                         messageSizeFound = true
-                        //self.buffer.data = Data(bytes: self.buffer.p, count: self.buffer.data.count)
                         messageSize = Int(Buffer.readUInt32(buffer: self.buffer, offset: offset0))
                         offset0 += 4
                         break
@@ -3643,9 +3641,7 @@ public extension ReceiverProtocol {
                             try _ = self.buffer.allocate(size: count)
                             size1 += count
 
-                            //Buffer.write(buffer: &self.buffer, offset: offset1, value: buffer.data, valueOffset: offset + offset2, valueSize: count)
                             self.buffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
-                            //System.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                             offset1 += count
                             offset2 += count
                             continue
@@ -3668,9 +3664,7 @@ public extension ReceiverProtocol {
                         try _ = self.buffer.allocate(size: count)
                         size1 += count
 
-                        //Buffer.write(buffer: &self.buffer, offset: offset1, value: buffer.data, valueOffset: offset + offset2, valueSize: count)
                         self.buffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
-                        //system.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                         offset1 += count
                         offset2 += count
                         continue
@@ -3727,9 +3721,7 @@ public extension ReceiverProtocol {
                             try _ = self.buffer.allocate(size: count)
                             size1 += count
 
-                            //Buffer.write(buffer: &self.buffer, offset: offset1, value: buffer.data, valueOffset: offset + offset2, valueSize: count)
                             self.buffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
-                            //System.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                             offset1 += count
                             offset2 += count
                             continue
@@ -3766,9 +3758,7 @@ public extension ReceiverProtocol {
                         // Allocate and refresh the storage buffer
                         try _ = self.buffer.allocate(size: count)
                         size1 += count
-                        //Buffer.write(buffer: &self.buffer, offset: offset1, value: buffer.data, valueOffset: offset + offset2, valueSize: count)
                         self.buffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
-                        //System.arraycopy(buffer, (offset + offset2), self.buffer.data, offset1, count)
                         offset1 += count
                         offset2 += count
                         continue
@@ -3960,7 +3950,7 @@ public extension ClientProtocol {
     }
 
     // Receive data
-    func receive(buffer: Data ) throws {
+    func receive(buffer: Data) throws {
         let buffer = Buffer(buffer: buffer)
         try receive(buffer: buffer, offset: 0, size: buffer.data.count)
     }
@@ -4012,7 +4002,7 @@ public extension ClientProtocol {
                             try _ = self.receiveBuffer.allocate(size: count)
                             size1 += count
 
-                            self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
+                            self.receiveBuffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                             offset1 += count
                             offset2 += count
                             continue
@@ -4035,7 +4025,7 @@ public extension ClientProtocol {
                         try _ = self.receiveBuffer.allocate(size: count)
                         size1 += count
 
-                        self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
+                        self.receiveBuffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                         offset1 += count
                         offset2 += count
                         continue
@@ -4052,7 +4042,7 @@ public extension ClientProtocol {
 
             // Check the message full size
             let minSize: Int = {
-                if final { return 4 + 4 } else { return 4 + 4 + 4 + 4 }
+                return final ? 4 + 4 : 4 + 4 + 4 + 4
             }()
 
             assert(messageSize >= minSize, "Invalid receive data!")
@@ -4093,7 +4083,7 @@ public extension ClientProtocol {
                             try _ = self.receiveBuffer.allocate(size: count)
                             size1 += count
 
-                            self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
+                            self.receiveBuffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                             offset1 += count
                             offset2 += count
                             continue
@@ -4130,7 +4120,7 @@ public extension ClientProtocol {
                         try _ = self.receiveBuffer.allocate(size: count)
                         size1 += count
 
-                        self.receiveBuffer.data[offset1...] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
+                        self.receiveBuffer.data[offset1..<offset1 + count] = buffer.data[(offset + offset2)..<(offset + offset2) + count]
                         offset1 += count
                         offset2 += count
                         continue

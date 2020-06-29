@@ -434,7 +434,6 @@ public extension Buffer {
         for i in 0..<values.count {
             Buffer.write(buffer: &buffer, offset: offset + i, value: values[i])
         }
-        //buffer[offset...] = value[valueOffset...(valueOffset + valueSize)]
     }
 
     class func write(buffer: inout Buffer, offset: Int, value: UInt8, valueCount: Int) {
