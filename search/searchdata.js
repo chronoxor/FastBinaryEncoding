@@ -8,8 +8,8 @@ var indexSectionsWithContent =
   5: "_abcdefghiklmnoprstvy",
   6: "fy",
   7: "y",
-  8: "bcdefhikmoprstuvw",
-  9: "_befirsuy"
+  8: "bcdefhikmoprstuvwy",
+  9: "befirsuy"
 };
 
 var indexSectionNames =
