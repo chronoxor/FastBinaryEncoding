@@ -58,7 +58,7 @@ public extension ClientProtocol {
     }
 
     // Receive data
-    func receive(buffer: Data ) throws {
+    func receive(buffer: Data) throws {
         let buffer = Buffer(buffer: buffer)
         try receive(buffer: buffer, offset: 0, size: buffer.data.count)
     }
