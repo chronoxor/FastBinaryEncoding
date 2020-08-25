@@ -248,21 +248,23 @@ void GeneratorSwift::GenerateFBEBuffer(const std::string& domain, const std::str
 
     std::string code = R"CODE(public class Buffer {
 
-    // Is the buffer empty?
-    var empty: Bool {
-        return size == 0
-    }
     // Get bytes memory buffer
-    var data = Data()
+    public var data = Data()
 
     // Get bytes memory buffer capacity
-    var capacity: Int {
+    public var capacity: Int {
         return data.count
     }
+    
+    // Is the buffer empty?
+    public var empty: Bool {
+        return size == 0
+    }
+    
     // Get bytes memory buffer size
-    public private(set) var size: Int = 0
+    public var size: Int = 0
     // Get bytes memory buffer offset
-    public private(set) var offset: Int = 0
+    public var offset: Int = 0
 
     // Initialize a new expandable buffer with zero capacity
     public init() {}
