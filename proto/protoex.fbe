@@ -75,17 +75,17 @@ struct Account(3)
 // Extended order message declaration
 message OrderMessage
 {
-    Order body;	
+    Order body;
 }
 
 // Extended balance message declaration
 message BalanceMessage
 {
-    Balance body;	
+    Balance body;
 }
 
 // Extended account message declaration
 message AccountMessage
 {
-    Account body;	
+    Account body;
 }
