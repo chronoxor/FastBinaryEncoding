@@ -43,7 +43,7 @@ void GeneratorJavaScript::GenerateBig(const CppCommon::Path& path)
     WriteBegin();
 
     // Generate common header
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 /* eslint-disable */
@@ -1023,7 +1023,7 @@ void GeneratorJavaScript::GenerateInt64(const CppCommon::Path& path)
     WriteBegin();
 
     // Generate common header
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 /* eslint-disable prefer-const */
@@ -2875,7 +2875,7 @@ void GeneratorJavaScript::GenerateUUID(const CppCommon::Path& path)
     WriteBegin();
 
     // Generate common header
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 /* eslint-disable prefer-const */
@@ -3202,7 +3202,7 @@ void GeneratorJavaScript::GenerateIEEE754(const CppCommon::Path& path)
     WriteBegin();
 
     // Generate common header
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 /* eslint-disable prefer-const */
@@ -3336,7 +3336,7 @@ void GeneratorJavaScript::GenerateUTF8(const CppCommon::Path& path)
     WriteBegin();
 
     // Generate common header
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 /* eslint-disable prefer-const */
@@ -3588,7 +3588,7 @@ void GeneratorJavaScript::GenerateFBE(const CppCommon::Path& path)
     WriteBegin();
 
     // Generate common header
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 /* eslint-disable prefer-const */

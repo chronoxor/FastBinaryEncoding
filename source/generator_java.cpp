@@ -120,7 +120,7 @@ void GeneratorJava::GenerateFBEPair(const std::string& domain, const std::string
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -169,7 +169,7 @@ void GeneratorJava::GenerateFBEUUIDGenerator(const std::string& domain, const st
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -264,7 +264,7 @@ void GeneratorJava::GenerateFBEBuffer(const std::string& domain, const std::stri
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -583,7 +583,7 @@ void GeneratorJava::GenerateFBEModel(const std::string& domain, const std::strin
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -645,7 +645,7 @@ void GeneratorJava::GenerateFBEFieldModel(const std::string& domain, const std::
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -730,7 +730,7 @@ void GeneratorJava::GenerateFBEFieldModel(const std::string& domain, const std::
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -792,7 +792,7 @@ void GeneratorJava::GenerateFBEFieldModelDecimal(const std::string& domain, cons
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -906,7 +906,7 @@ void GeneratorJava::GenerateFBEFieldModelDate(const std::string& domain, const s
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -973,7 +973,7 @@ void GeneratorJava::GenerateFBEFieldModelTimestamp(const std::string& domain, co
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -1040,7 +1040,7 @@ void GeneratorJava::GenerateFBEFieldModelBytes(const std::string& domain, const 
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -1161,7 +1161,7 @@ void GeneratorJava::GenerateFBEFieldModelString(const std::string& domain, const
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2247,7 +2247,7 @@ void GeneratorJava::GenerateFBESize(const std::string& domain, const std::string
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2284,7 +2284,7 @@ void GeneratorJava::GenerateFBEFinalModel(const std::string& domain, const std::
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2369,7 +2369,7 @@ void GeneratorJava::GenerateFBEFinalModel(const std::string& domain, const std::
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2445,7 +2445,7 @@ void GeneratorJava::GenerateFBEFinalModelDecimal(const std::string& domain, cons
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2565,7 +2565,7 @@ void GeneratorJava::GenerateFBEFinalModelDate(const std::string& domain, const s
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2638,7 +2638,7 @@ void GeneratorJava::GenerateFBEFinalModelTimestamp(const std::string& domain, co
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2711,7 +2711,7 @@ void GeneratorJava::GenerateFBEFinalModelBytes(const std::string& domain, const 
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2803,7 +2803,7 @@ void GeneratorJava::GenerateFBEFinalModelString(const std::string& domain, const
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -3814,7 +3814,7 @@ void GeneratorJava::GenerateFBESender(const std::string& domain, const std::stri
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -3889,7 +3889,7 @@ void GeneratorJava::GenerateFBEReceiver(const std::string& domain, const std::st
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -4191,7 +4191,7 @@ void GeneratorJava::GenerateFBEJson(const std::string& domain, const std::string
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(

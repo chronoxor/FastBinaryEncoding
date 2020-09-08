@@ -35,51 +35,6 @@ enum class OrderSide : uint8_t
     tell,
 };
 
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, OrderSide value)
-{
-    if (value == OrderSide::buy) { stream << "buy"; return stream; }
-    if (value == OrderSide::sell) { stream << "sell"; return stream; }
-    if (value == OrderSide::tell) { stream << "tell"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace protoex
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::protoex::OrderSide>
-{
-    static bool to_json(TWriter& writer, const ::protoex::OrderSide& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (uint8_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::protoex::OrderSide>
-{
-    static bool from_json(const TJson& json, ::protoex::OrderSide& value)
-    {
-        uint8_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::protoex::OrderSide)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace protoex {
-
 enum class OrderType : uint8_t
 {
     market,
@@ -87,52 +42,6 @@ enum class OrderType : uint8_t
     stop,
     stoplimit,
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, OrderType value)
-{
-    if (value == OrderType::market) { stream << "market"; return stream; }
-    if (value == OrderType::limit) { stream << "limit"; return stream; }
-    if (value == OrderType::stop) { stream << "stop"; return stream; }
-    if (value == OrderType::stoplimit) { stream << "stoplimit"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace protoex
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::protoex::OrderType>
-{
-    static bool to_json(TWriter& writer, const ::protoex::OrderType& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (uint8_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::protoex::OrderType>
-{
-    static bool from_json(const TJson& json, ::protoex::OrderType& value)
-    {
-        uint8_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::protoex::OrderType)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace protoex {
 
 enum class StateEx : uint8_t
 {
@@ -148,93 +57,6 @@ enum class StateEx : uint8_t
 };
 FBE_ENUM_FLAGS(StateEx)
 
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, StateEx value)
-{
-    bool first = true;
-    if ((value & StateEx::unknown) && ((value & StateEx::unknown) == StateEx::unknown))
-    {
-        stream << (first ? "" : "|") << "unknown";
-        first = false;
-    }
-    if ((value & StateEx::invalid) && ((value & StateEx::invalid) == StateEx::invalid))
-    {
-        stream << (first ? "" : "|") << "invalid";
-        first = false;
-    }
-    if ((value & StateEx::initialized) && ((value & StateEx::initialized) == StateEx::initialized))
-    {
-        stream << (first ? "" : "|") << "initialized";
-        first = false;
-    }
-    if ((value & StateEx::calculated) && ((value & StateEx::calculated) == StateEx::calculated))
-    {
-        stream << (first ? "" : "|") << "calculated";
-        first = false;
-    }
-    if ((value & StateEx::broken) && ((value & StateEx::broken) == StateEx::broken))
-    {
-        stream << (first ? "" : "|") << "broken";
-        first = false;
-    }
-    if ((value & StateEx::happy) && ((value & StateEx::happy) == StateEx::happy))
-    {
-        stream << (first ? "" : "|") << "happy";
-        first = false;
-    }
-    if ((value & StateEx::sad) && ((value & StateEx::sad) == StateEx::sad))
-    {
-        stream << (first ? "" : "|") << "sad";
-        first = false;
-    }
-    if ((value & StateEx::good) && ((value & StateEx::good) == StateEx::good))
-    {
-        stream << (first ? "" : "|") << "good";
-        first = false;
-    }
-    if ((value & StateEx::bad) && ((value & StateEx::bad) == StateEx::bad))
-    {
-        stream << (first ? "" : "|") << "bad";
-        first = false;
-    }
-    return stream;
-}
-
-} // namespace protoex
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::protoex::StateEx>
-{
-    static bool to_json(TWriter& writer, const ::protoex::StateEx& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (uint8_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::protoex::StateEx>
-{
-    static bool from_json(const TJson& json, ::protoex::StateEx& value)
-    {
-        uint8_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::protoex::StateEx)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace protoex {
-
 struct Order
 {
     int32_t id;
@@ -248,26 +70,8 @@ struct Order
 
     size_t fbe_type() const noexcept { return 1; }
 
-    Order()
-        : id((int32_t)0ll)
-        , symbol()
-        , side()
-        , type()
-        , price((double)0.0)
-        , volume((double)0.0)
-        , tp((double)10.0)
-        , sl((double)-10.0)
-    {}
-    Order(int32_t arg_id, const std::string& arg_symbol, const ::protoex::OrderSide& arg_side, const ::protoex::OrderType& arg_type, double arg_price, double arg_volume, double arg_tp, double arg_sl)
-        : id(arg_id)
-        , symbol(arg_symbol)
-        , side(arg_side)
-        , type(arg_type)
-        , price(arg_price)
-        , volume(arg_volume)
-        , tp(arg_tp)
-        , sl(arg_sl)
-    {}
+    Order();
+    Order(int32_t arg_id, const std::string& arg_symbol, const ::protoex::OrderSide& arg_side, const ::protoex::OrderType& arg_type, double arg_price, double arg_volume, double arg_tp, double arg_sl);
     Order(const Order& other) = default;
     Order(Order&& other) = default;
     ~Order() = default;
@@ -275,69 +79,21 @@ struct Order
     Order& operator=(const Order& other) = default;
     Order& operator=(Order&& other) = default;
 
-    bool operator==(const Order& other) const noexcept
-    {
-        return (
-            (id == other.id)
-            );
-    }
+    bool operator==(const Order& other) const noexcept;
     bool operator!=(const Order& other) const noexcept { return !operator==(other); }
-    bool operator<(const Order& other) const noexcept
-    {
-        if (id < other.id)
-            return true;
-        if (other.id < id)
-            return false;
-        return false;
-    }
+    bool operator<(const Order& other) const noexcept;
     bool operator<=(const Order& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const Order& other) const noexcept { return !operator<=(other); }
     bool operator>=(const Order& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const Order& value);
 
-    void swap(Order& other) noexcept
-    {
-        using std::swap;
-        swap(id, other.id);
-        swap(symbol, other.symbol);
-        swap(side, other.side);
-        swap(type, other.type);
-        swap(price, other.price);
-        swap(volume, other.volume);
-        swap(tp, other.tp);
-        swap(sl, other.sl);
-    }
-
-    friend void swap(Order& value1, Order& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(Order& other) noexcept;
+    friend void swap(Order& value1, Order& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const Order& value)
-{
-    stream << "Order(";
-    stream << "id="; stream << value.id;
-    stream << ",symbol="; stream << "\"" << value.symbol << "\"";
-    stream << ",side="; stream << value.side;
-    stream << ",type="; stream << value.type;
-    stream << ",price="; stream << value.price;
-    stream << ",volume="; stream << value.volume;
-    stream << ",tp="; stream << value.tp;
-    stream << ",sl="; stream << value.sl;
-    stream << ")";
-    return stream;
-}
 
 } // namespace protoex
 
@@ -349,7 +105,7 @@ struct hash<protoex::Order>
     typedef protoex::Order argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         result = result * 31 + std::hash<decltype(value.id)>()(value.id);
@@ -359,65 +115,6 @@ struct hash<protoex::Order>
 
 } // namespace std
 
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::protoex::Order>
-{
-    static bool to_json(TWriter& writer, const ::protoex::Order& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "id") || !FBE::JSON::to_json(writer, value.id, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "symbol") || !FBE::JSON::to_json(writer, value.symbol, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "side") || !FBE::JSON::to_json(writer, value.side, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "type") || !FBE::JSON::to_json(writer, value.type, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "price") || !FBE::JSON::to_json(writer, value.price, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "volume") || !FBE::JSON::to_json(writer, value.volume, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "tp") || !FBE::JSON::to_json(writer, value.tp, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "sl") || !FBE::JSON::to_json(writer, value.sl, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::protoex::Order>
-{
-    static bool from_json(const TJson& json, ::protoex::Order& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.id, "id");
-        result &= FBE::JSON::from_json(json, value.symbol, "symbol");
-        result &= FBE::JSON::from_json(json, value.side, "side");
-        result &= FBE::JSON::from_json(json, value.type, "type");
-        result &= FBE::JSON::from_json(json, value.price, "price");
-        result &= FBE::JSON::from_json(json, value.volume, "volume");
-        result &= FBE::JSON::from_json(json, value.tp, "tp");
-        result &= FBE::JSON::from_json(json, value.sl, "sl");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
 namespace protoex {
 
 struct Balance : public ::proto::Balance
@@ -426,14 +123,8 @@ struct Balance : public ::proto::Balance
 
     size_t fbe_type() const noexcept { return ::proto::Balance::fbe_type(); }
 
-    Balance()
-        : ::proto::Balance()
-        , locked((double)0.0)
-    {}
-    Balance(const ::proto::Balance& base, double arg_locked)
-        : ::proto::Balance(base)
-        , locked(arg_locked)
-    {}
+    Balance();
+    Balance(const ::proto::Balance& base, double arg_locked);
     Balance(const Balance& other) = default;
     Balance(Balance&& other) = default;
     ~Balance() = default;
@@ -441,58 +132,21 @@ struct Balance : public ::proto::Balance
     Balance& operator=(const Balance& other) = default;
     Balance& operator=(Balance&& other) = default;
 
-    bool operator==(const Balance& other) const noexcept
-    {
-        return (
-            ::proto::Balance::operator==(other)
-            && true
-            );
-    }
+    bool operator==(const Balance& other) const noexcept;
     bool operator!=(const Balance& other) const noexcept { return !operator==(other); }
-    bool operator<(const Balance& other) const noexcept
-    {
-        if (::proto::Balance::operator<(other))
-            return true;
-        if (other.::proto::Balance::operator<(*this))
-            return false;
-        return false;
-    }
+    bool operator<(const Balance& other) const noexcept;
     bool operator<=(const Balance& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const Balance& other) const noexcept { return !operator<=(other); }
     bool operator>=(const Balance& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const Balance& value);
 
-    void swap(Balance& other) noexcept
-    {
-        using std::swap;
-        ::proto::Balance::swap(other);
-        swap(locked, other.locked);
-    }
-
-    friend void swap(Balance& value1, Balance& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(Balance& other) noexcept;
+    friend void swap(Balance& value1, Balance& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const Balance& value)
-{
-    stream << "Balance(";
-    stream << (const ::proto::Balance&)value;
-    stream << ",locked="; stream << value.locked;
-    stream << ")";
-    return stream;
-}
 
 } // namespace protoex
 
@@ -504,7 +158,7 @@ struct hash<protoex::Balance>
     typedef protoex::Balance argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         result = result * 31 + std::hash<::proto::Balance>()(value);
@@ -513,47 +167,6 @@ struct hash<protoex::Balance>
 };
 
 } // namespace std
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::protoex::Balance>
-{
-    static bool to_json(TWriter& writer, const ::protoex::Balance& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json(writer, (const ::proto::Balance&)value, false))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "locked") || !FBE::JSON::to_json(writer, value.locked, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::protoex::Balance>
-{
-    static bool from_json(const TJson& json, ::protoex::Balance& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, (::proto::Balance&)value);
-        result &= FBE::JSON::from_json(json, value.locked, "locked");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
 
 namespace protoex {
 
@@ -568,22 +181,8 @@ struct Account
 
     size_t fbe_type() const noexcept { return 3; }
 
-    Account()
-        : id((int32_t)0ll)
-        , name()
-        , state(StateEx::initialized  |  StateEx::bad  |  StateEx::sad)
-        , wallet()
-        , asset()
-        , orders()
-    {}
-    Account(int32_t arg_id, const std::string& arg_name, const ::protoex::StateEx& arg_state, const ::protoex::Balance& arg_wallet, const std::optional<::protoex::Balance>& arg_asset, const std::vector<::protoex::Order>& arg_orders)
-        : id(arg_id)
-        , name(arg_name)
-        , state(arg_state)
-        , wallet(arg_wallet)
-        , asset(arg_asset)
-        , orders(arg_orders)
-    {}
+    Account();
+    Account(int32_t arg_id, const std::string& arg_name, const ::protoex::StateEx& arg_state, const ::protoex::Balance& arg_wallet, const std::optional<::protoex::Balance>& arg_asset, const std::vector<::protoex::Order>& arg_orders);
     Account(const Account& other) = default;
     Account(Account&& other) = default;
     ~Account() = default;
@@ -591,74 +190,21 @@ struct Account
     Account& operator=(const Account& other) = default;
     Account& operator=(Account&& other) = default;
 
-    bool operator==(const Account& other) const noexcept
-    {
-        return (
-            (id == other.id)
-            );
-    }
+    bool operator==(const Account& other) const noexcept;
     bool operator!=(const Account& other) const noexcept { return !operator==(other); }
-    bool operator<(const Account& other) const noexcept
-    {
-        if (id < other.id)
-            return true;
-        if (other.id < id)
-            return false;
-        return false;
-    }
+    bool operator<(const Account& other) const noexcept;
     bool operator<=(const Account& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const Account& other) const noexcept { return !operator<=(other); }
     bool operator>=(const Account& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const Account& value);
 
-    void swap(Account& other) noexcept
-    {
-        using std::swap;
-        swap(id, other.id);
-        swap(name, other.name);
-        swap(state, other.state);
-        swap(wallet, other.wallet);
-        swap(asset, other.asset);
-        swap(orders, other.orders);
-    }
-
-    friend void swap(Account& value1, Account& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(Account& other) noexcept;
+    friend void swap(Account& value1, Account& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const Account& value)
-{
-    stream << "Account(";
-    stream << "id="; stream << value.id;
-    stream << ",name="; stream << "\"" << value.name << "\"";
-    stream << ",state="; stream << value.state;
-    stream << ",wallet="; stream << value.wallet;
-    stream << ",asset="; if (value.asset) stream << *value.asset; else stream << "null";
-    {
-        bool first = true;
-        stream << ",orders=[" << value.orders.size() << "][";
-        for (const auto& it : value.orders)
-        {
-            stream << std::string(first ? "" : ",") << it;
-            first = false;
-        }
-        stream << "]";
-    }
-    stream << ")";
-    return stream;
-}
 
 } // namespace protoex
 
@@ -670,7 +216,7 @@ struct hash<protoex::Account>
     typedef protoex::Account argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         result = result * 31 + std::hash<decltype(value.id)>()(value.id);
@@ -680,59 +226,6 @@ struct hash<protoex::Account>
 
 } // namespace std
 
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::protoex::Account>
-{
-    static bool to_json(TWriter& writer, const ::protoex::Account& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "id") || !FBE::JSON::to_json(writer, value.id, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "name") || !FBE::JSON::to_json(writer, value.name, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "state") || !FBE::JSON::to_json(writer, value.state, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "wallet") || !FBE::JSON::to_json(writer, value.wallet, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "asset") || !FBE::JSON::to_json(writer, value.asset, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "orders") || !FBE::JSON::to_json(writer, value.orders, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::protoex::Account>
-{
-    static bool from_json(const TJson& json, ::protoex::Account& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.id, "id");
-        result &= FBE::JSON::from_json(json, value.name, "name");
-        result &= FBE::JSON::from_json(json, value.state, "state");
-        result &= FBE::JSON::from_json(json, value.wallet, "wallet");
-        result &= FBE::JSON::from_json(json, value.asset, "asset");
-        result &= FBE::JSON::from_json(json, value.orders, "orders");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
 namespace protoex {
 
 struct OrderMessage
@@ -741,12 +234,8 @@ struct OrderMessage
 
     size_t fbe_type() const noexcept { return 11; }
 
-    OrderMessage()
-        : body()
-    {}
-    explicit OrderMessage(const ::protoex::Order& arg_body)
-        : body(arg_body)
-    {}
+    OrderMessage();
+    explicit OrderMessage(const ::protoex::Order& arg_body);
     OrderMessage(const OrderMessage& other) = default;
     OrderMessage(OrderMessage&& other) = default;
     ~OrderMessage() = default;
@@ -754,51 +243,21 @@ struct OrderMessage
     OrderMessage& operator=(const OrderMessage& other) = default;
     OrderMessage& operator=(OrderMessage&& other) = default;
 
-    bool operator==(const OrderMessage& other) const noexcept
-    {
-        return (
-            true
-            );
-    }
+    bool operator==(const OrderMessage& other) const noexcept;
     bool operator!=(const OrderMessage& other) const noexcept { return !operator==(other); }
-    bool operator<(const OrderMessage& other) const noexcept
-    {
-        return false;
-    }
+    bool operator<(const OrderMessage& other) const noexcept;
     bool operator<=(const OrderMessage& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const OrderMessage& other) const noexcept { return !operator<=(other); }
     bool operator>=(const OrderMessage& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const OrderMessage& value);
 
-    void swap(OrderMessage& other) noexcept
-    {
-        using std::swap;
-        swap(body, other.body);
-    }
-
-    friend void swap(OrderMessage& value1, OrderMessage& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(OrderMessage& other) noexcept;
+    friend void swap(OrderMessage& value1, OrderMessage& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const OrderMessage& value)
-{
-    stream << "OrderMessage(";
-    stream << "body="; stream << value.body;
-    stream << ")";
-    return stream;
-}
 
 } // namespace protoex
 
@@ -810,7 +269,7 @@ struct hash<protoex::OrderMessage>
     typedef protoex::OrderMessage argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         return result;
@@ -818,44 +277,6 @@ struct hash<protoex::OrderMessage>
 };
 
 } // namespace std
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::protoex::OrderMessage>
-{
-    static bool to_json(TWriter& writer, const ::protoex::OrderMessage& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "body") || !FBE::JSON::to_json(writer, value.body, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::protoex::OrderMessage>
-{
-    static bool from_json(const TJson& json, ::protoex::OrderMessage& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.body, "body");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
 
 namespace protoex {
 
@@ -865,12 +286,8 @@ struct BalanceMessage
 
     size_t fbe_type() const noexcept { return 12; }
 
-    BalanceMessage()
-        : body()
-    {}
-    explicit BalanceMessage(const ::protoex::Balance& arg_body)
-        : body(arg_body)
-    {}
+    BalanceMessage();
+    explicit BalanceMessage(const ::protoex::Balance& arg_body);
     BalanceMessage(const BalanceMessage& other) = default;
     BalanceMessage(BalanceMessage&& other) = default;
     ~BalanceMessage() = default;
@@ -878,51 +295,21 @@ struct BalanceMessage
     BalanceMessage& operator=(const BalanceMessage& other) = default;
     BalanceMessage& operator=(BalanceMessage&& other) = default;
 
-    bool operator==(const BalanceMessage& other) const noexcept
-    {
-        return (
-            true
-            );
-    }
+    bool operator==(const BalanceMessage& other) const noexcept;
     bool operator!=(const BalanceMessage& other) const noexcept { return !operator==(other); }
-    bool operator<(const BalanceMessage& other) const noexcept
-    {
-        return false;
-    }
+    bool operator<(const BalanceMessage& other) const noexcept;
     bool operator<=(const BalanceMessage& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const BalanceMessage& other) const noexcept { return !operator<=(other); }
     bool operator>=(const BalanceMessage& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const BalanceMessage& value);
 
-    void swap(BalanceMessage& other) noexcept
-    {
-        using std::swap;
-        swap(body, other.body);
-    }
-
-    friend void swap(BalanceMessage& value1, BalanceMessage& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(BalanceMessage& other) noexcept;
+    friend void swap(BalanceMessage& value1, BalanceMessage& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const BalanceMessage& value)
-{
-    stream << "BalanceMessage(";
-    stream << "body="; stream << value.body;
-    stream << ")";
-    return stream;
-}
 
 } // namespace protoex
 
@@ -934,7 +321,7 @@ struct hash<protoex::BalanceMessage>
     typedef protoex::BalanceMessage argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         return result;
@@ -942,44 +329,6 @@ struct hash<protoex::BalanceMessage>
 };
 
 } // namespace std
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::protoex::BalanceMessage>
-{
-    static bool to_json(TWriter& writer, const ::protoex::BalanceMessage& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "body") || !FBE::JSON::to_json(writer, value.body, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::protoex::BalanceMessage>
-{
-    static bool from_json(const TJson& json, ::protoex::BalanceMessage& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.body, "body");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
 
 namespace protoex {
 
@@ -989,12 +338,8 @@ struct AccountMessage
 
     size_t fbe_type() const noexcept { return 13; }
 
-    AccountMessage()
-        : body()
-    {}
-    explicit AccountMessage(const ::protoex::Account& arg_body)
-        : body(arg_body)
-    {}
+    AccountMessage();
+    explicit AccountMessage(const ::protoex::Account& arg_body);
     AccountMessage(const AccountMessage& other) = default;
     AccountMessage(AccountMessage&& other) = default;
     ~AccountMessage() = default;
@@ -1002,51 +347,21 @@ struct AccountMessage
     AccountMessage& operator=(const AccountMessage& other) = default;
     AccountMessage& operator=(AccountMessage&& other) = default;
 
-    bool operator==(const AccountMessage& other) const noexcept
-    {
-        return (
-            true
-            );
-    }
+    bool operator==(const AccountMessage& other) const noexcept;
     bool operator!=(const AccountMessage& other) const noexcept { return !operator==(other); }
-    bool operator<(const AccountMessage& other) const noexcept
-    {
-        return false;
-    }
+    bool operator<(const AccountMessage& other) const noexcept;
     bool operator<=(const AccountMessage& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const AccountMessage& other) const noexcept { return !operator<=(other); }
     bool operator>=(const AccountMessage& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const AccountMessage& value);
 
-    void swap(AccountMessage& other) noexcept
-    {
-        using std::swap;
-        swap(body, other.body);
-    }
-
-    friend void swap(AccountMessage& value1, AccountMessage& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(AccountMessage& other) noexcept;
+    friend void swap(AccountMessage& value1, AccountMessage& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const AccountMessage& value)
-{
-    stream << "AccountMessage(";
-    stream << "body="; stream << value.body;
-    stream << ")";
-    return stream;
-}
 
 } // namespace protoex
 
@@ -1058,7 +373,7 @@ struct hash<protoex::AccountMessage>
     typedef protoex::AccountMessage argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         return result;
@@ -1067,40 +382,8 @@ struct hash<protoex::AccountMessage>
 
 } // namespace std
 
-namespace FBE {
+namespace protoex {
 
-namespace JSON {
+} // namespace protoex
 
-template <class TWriter>
-struct ValueWriter<TWriter, ::protoex::AccountMessage>
-{
-    static bool to_json(TWriter& writer, const ::protoex::AccountMessage& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "body") || !FBE::JSON::to_json(writer, value.body, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::protoex::AccountMessage>
-{
-    static bool from_json(const TJson& json, ::protoex::AccountMessage& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.body, "body");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
+#include "protoex.inl"

@@ -43,7 +43,7 @@ void GeneratorPython::GenerateInit(const CppCommon::Path& path)
     WriteBegin();
 
     // Generate init header
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     // Generate init footer
     GenerateFooter();
@@ -60,7 +60,7 @@ void GeneratorPython::GenerateFBE(const CppCommon::Path& path)
     WriteBegin();
 
     // Generate common header
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 import base64

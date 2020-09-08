@@ -137,7 +137,7 @@ void GeneratorKotlin::GenerateFBEUUIDGenerator(const std::string& domain, const 
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -235,7 +235,7 @@ void GeneratorKotlin::GenerateFBEBuffer(const std::string& domain, const std::st
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -632,7 +632,7 @@ void GeneratorKotlin::GenerateFBEModel(const std::string& domain, const std::str
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -693,7 +693,7 @@ void GeneratorKotlin::GenerateFBEFieldModel(const std::string& domain, const std
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -776,7 +776,7 @@ void GeneratorKotlin::GenerateFBEFieldModel(const std::string& domain, const std
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -834,7 +834,7 @@ void GeneratorKotlin::GenerateFBEFieldModelDecimal(const std::string& domain, co
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -944,7 +944,7 @@ void GeneratorKotlin::GenerateFBEFieldModelDate(const std::string& domain, const
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -999,7 +999,7 @@ void GeneratorKotlin::GenerateFBEFieldModelTimestamp(const std::string& domain, 
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -1054,7 +1054,7 @@ void GeneratorKotlin::GenerateFBEFieldModelBytes(const std::string& domain, cons
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -1162,7 +1162,7 @@ void GeneratorKotlin::GenerateFBEFieldModelString(const std::string& domain, con
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2153,7 +2153,7 @@ void GeneratorKotlin::GenerateFBESize(const std::string& domain, const std::stri
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2190,7 +2190,7 @@ void GeneratorKotlin::GenerateFBEFinalModel(const std::string& domain, const std
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2273,7 +2273,7 @@ void GeneratorKotlin::GenerateFBEFinalModel(const std::string& domain, const std
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2346,7 +2346,7 @@ void GeneratorKotlin::GenerateFBEFinalModelDecimal(const std::string& domain, co
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2471,7 +2471,7 @@ void GeneratorKotlin::GenerateFBEFinalModelDate(const std::string& domain, const
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2541,7 +2541,7 @@ void GeneratorKotlin::GenerateFBEFinalModelTimestamp(const std::string& domain, 
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2611,7 +2611,7 @@ void GeneratorKotlin::GenerateFBEFinalModelBytes(const std::string& domain, cons
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -2696,7 +2696,7 @@ void GeneratorKotlin::GenerateFBEFinalModelString(const std::string& domain, con
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -3626,7 +3626,7 @@ void GeneratorKotlin::GenerateFBESender(const std::string& domain, const std::st
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -3691,7 +3691,7 @@ void GeneratorKotlin::GenerateFBESenderListener(const std::string& domain, const
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -3727,7 +3727,7 @@ void GeneratorKotlin::GenerateFBEReceiver(const std::string& domain, const std::
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -4024,7 +4024,7 @@ void GeneratorKotlin::GenerateFBEReceiverListener(const std::string& domain, con
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -4058,7 +4058,7 @@ void GeneratorKotlin::GenerateFBEClient(const std::string& domain, const std::st
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -4376,7 +4376,7 @@ void GeneratorKotlin::GenerateFBEClientListener(const std::string& domain, const
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(
@@ -4408,7 +4408,7 @@ void GeneratorKotlin::GenerateFBEJson(const std::string& domain, const std::stri
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports(domain, package);
 
     std::string code = R"CODE(

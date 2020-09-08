@@ -4177,7 +4177,7 @@ void GeneratorCSharp::GenerateFBE(const CppCommon::Path& path)
     WriteBegin();
 
     // Generate common header
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports();
 
     // Generate namespace begin

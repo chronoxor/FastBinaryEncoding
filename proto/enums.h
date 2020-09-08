@@ -35,54 +35,6 @@ enum class EnumByte : uint8_t
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, EnumByte value)
-{
-    if (value == EnumByte::ENUM_VALUE_0) { stream << "ENUM_VALUE_0"; return stream; }
-    if (value == EnumByte::ENUM_VALUE_1) { stream << "ENUM_VALUE_1"; return stream; }
-    if (value == EnumByte::ENUM_VALUE_2) { stream << "ENUM_VALUE_2"; return stream; }
-    if (value == EnumByte::ENUM_VALUE_3) { stream << "ENUM_VALUE_3"; return stream; }
-    if (value == EnumByte::ENUM_VALUE_4) { stream << "ENUM_VALUE_4"; return stream; }
-    if (value == EnumByte::ENUM_VALUE_5) { stream << "ENUM_VALUE_5"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace enums
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::enums::EnumByte>
-{
-    static bool to_json(TWriter& writer, const ::enums::EnumByte& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (uint8_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::enums::EnumByte>
-{
-    static bool from_json(const TJson& json, ::enums::EnumByte& value)
-    {
-        uint8_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::enums::EnumByte)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace enums {
-
 enum class EnumChar : uint8_t
 {
     ENUM_VALUE_0,
@@ -92,54 +44,6 @@ enum class EnumChar : uint8_t
     ENUM_VALUE_4,
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, EnumChar value)
-{
-    if (value == EnumChar::ENUM_VALUE_0) { stream << "ENUM_VALUE_0"; return stream; }
-    if (value == EnumChar::ENUM_VALUE_1) { stream << "ENUM_VALUE_1"; return stream; }
-    if (value == EnumChar::ENUM_VALUE_2) { stream << "ENUM_VALUE_2"; return stream; }
-    if (value == EnumChar::ENUM_VALUE_3) { stream << "ENUM_VALUE_3"; return stream; }
-    if (value == EnumChar::ENUM_VALUE_4) { stream << "ENUM_VALUE_4"; return stream; }
-    if (value == EnumChar::ENUM_VALUE_5) { stream << "ENUM_VALUE_5"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace enums
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::enums::EnumChar>
-{
-    static bool to_json(TWriter& writer, const ::enums::EnumChar& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (uint8_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::enums::EnumChar>
-{
-    static bool from_json(const TJson& json, ::enums::EnumChar& value)
-    {
-        uint8_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::enums::EnumChar)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace enums {
 
 enum class EnumWChar : uint32_t
 {
@@ -151,54 +55,6 @@ enum class EnumWChar : uint32_t
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, EnumWChar value)
-{
-    if (value == EnumWChar::ENUM_VALUE_0) { stream << "ENUM_VALUE_0"; return stream; }
-    if (value == EnumWChar::ENUM_VALUE_1) { stream << "ENUM_VALUE_1"; return stream; }
-    if (value == EnumWChar::ENUM_VALUE_2) { stream << "ENUM_VALUE_2"; return stream; }
-    if (value == EnumWChar::ENUM_VALUE_3) { stream << "ENUM_VALUE_3"; return stream; }
-    if (value == EnumWChar::ENUM_VALUE_4) { stream << "ENUM_VALUE_4"; return stream; }
-    if (value == EnumWChar::ENUM_VALUE_5) { stream << "ENUM_VALUE_5"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace enums
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::enums::EnumWChar>
-{
-    static bool to_json(TWriter& writer, const ::enums::EnumWChar& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (uint32_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::enums::EnumWChar>
-{
-    static bool from_json(const TJson& json, ::enums::EnumWChar& value)
-    {
-        uint32_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::enums::EnumWChar)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace enums {
-
 enum class EnumInt8 : int8_t
 {
     ENUM_VALUE_0,
@@ -208,54 +64,6 @@ enum class EnumInt8 : int8_t
     ENUM_VALUE_4,
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, EnumInt8 value)
-{
-    if (value == EnumInt8::ENUM_VALUE_0) { stream << "ENUM_VALUE_0"; return stream; }
-    if (value == EnumInt8::ENUM_VALUE_1) { stream << "ENUM_VALUE_1"; return stream; }
-    if (value == EnumInt8::ENUM_VALUE_2) { stream << "ENUM_VALUE_2"; return stream; }
-    if (value == EnumInt8::ENUM_VALUE_3) { stream << "ENUM_VALUE_3"; return stream; }
-    if (value == EnumInt8::ENUM_VALUE_4) { stream << "ENUM_VALUE_4"; return stream; }
-    if (value == EnumInt8::ENUM_VALUE_5) { stream << "ENUM_VALUE_5"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace enums
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::enums::EnumInt8>
-{
-    static bool to_json(TWriter& writer, const ::enums::EnumInt8& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (int8_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::enums::EnumInt8>
-{
-    static bool from_json(const TJson& json, ::enums::EnumInt8& value)
-    {
-        int8_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::enums::EnumInt8)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace enums {
 
 enum class EnumUInt8 : uint8_t
 {
@@ -267,54 +75,6 @@ enum class EnumUInt8 : uint8_t
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, EnumUInt8 value)
-{
-    if (value == EnumUInt8::ENUM_VALUE_0) { stream << "ENUM_VALUE_0"; return stream; }
-    if (value == EnumUInt8::ENUM_VALUE_1) { stream << "ENUM_VALUE_1"; return stream; }
-    if (value == EnumUInt8::ENUM_VALUE_2) { stream << "ENUM_VALUE_2"; return stream; }
-    if (value == EnumUInt8::ENUM_VALUE_3) { stream << "ENUM_VALUE_3"; return stream; }
-    if (value == EnumUInt8::ENUM_VALUE_4) { stream << "ENUM_VALUE_4"; return stream; }
-    if (value == EnumUInt8::ENUM_VALUE_5) { stream << "ENUM_VALUE_5"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace enums
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::enums::EnumUInt8>
-{
-    static bool to_json(TWriter& writer, const ::enums::EnumUInt8& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (uint8_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::enums::EnumUInt8>
-{
-    static bool from_json(const TJson& json, ::enums::EnumUInt8& value)
-    {
-        uint8_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::enums::EnumUInt8)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace enums {
-
 enum class EnumInt16 : int16_t
 {
     ENUM_VALUE_0,
@@ -324,54 +84,6 @@ enum class EnumInt16 : int16_t
     ENUM_VALUE_4,
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, EnumInt16 value)
-{
-    if (value == EnumInt16::ENUM_VALUE_0) { stream << "ENUM_VALUE_0"; return stream; }
-    if (value == EnumInt16::ENUM_VALUE_1) { stream << "ENUM_VALUE_1"; return stream; }
-    if (value == EnumInt16::ENUM_VALUE_2) { stream << "ENUM_VALUE_2"; return stream; }
-    if (value == EnumInt16::ENUM_VALUE_3) { stream << "ENUM_VALUE_3"; return stream; }
-    if (value == EnumInt16::ENUM_VALUE_4) { stream << "ENUM_VALUE_4"; return stream; }
-    if (value == EnumInt16::ENUM_VALUE_5) { stream << "ENUM_VALUE_5"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace enums
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::enums::EnumInt16>
-{
-    static bool to_json(TWriter& writer, const ::enums::EnumInt16& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (int16_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::enums::EnumInt16>
-{
-    static bool from_json(const TJson& json, ::enums::EnumInt16& value)
-    {
-        int16_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::enums::EnumInt16)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace enums {
 
 enum class EnumUInt16 : uint16_t
 {
@@ -383,54 +95,6 @@ enum class EnumUInt16 : uint16_t
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, EnumUInt16 value)
-{
-    if (value == EnumUInt16::ENUM_VALUE_0) { stream << "ENUM_VALUE_0"; return stream; }
-    if (value == EnumUInt16::ENUM_VALUE_1) { stream << "ENUM_VALUE_1"; return stream; }
-    if (value == EnumUInt16::ENUM_VALUE_2) { stream << "ENUM_VALUE_2"; return stream; }
-    if (value == EnumUInt16::ENUM_VALUE_3) { stream << "ENUM_VALUE_3"; return stream; }
-    if (value == EnumUInt16::ENUM_VALUE_4) { stream << "ENUM_VALUE_4"; return stream; }
-    if (value == EnumUInt16::ENUM_VALUE_5) { stream << "ENUM_VALUE_5"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace enums
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::enums::EnumUInt16>
-{
-    static bool to_json(TWriter& writer, const ::enums::EnumUInt16& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (uint16_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::enums::EnumUInt16>
-{
-    static bool from_json(const TJson& json, ::enums::EnumUInt16& value)
-    {
-        uint16_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::enums::EnumUInt16)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace enums {
-
 enum class EnumInt32 : int32_t
 {
     ENUM_VALUE_0,
@@ -440,54 +104,6 @@ enum class EnumInt32 : int32_t
     ENUM_VALUE_4,
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, EnumInt32 value)
-{
-    if (value == EnumInt32::ENUM_VALUE_0) { stream << "ENUM_VALUE_0"; return stream; }
-    if (value == EnumInt32::ENUM_VALUE_1) { stream << "ENUM_VALUE_1"; return stream; }
-    if (value == EnumInt32::ENUM_VALUE_2) { stream << "ENUM_VALUE_2"; return stream; }
-    if (value == EnumInt32::ENUM_VALUE_3) { stream << "ENUM_VALUE_3"; return stream; }
-    if (value == EnumInt32::ENUM_VALUE_4) { stream << "ENUM_VALUE_4"; return stream; }
-    if (value == EnumInt32::ENUM_VALUE_5) { stream << "ENUM_VALUE_5"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace enums
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::enums::EnumInt32>
-{
-    static bool to_json(TWriter& writer, const ::enums::EnumInt32& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (int32_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::enums::EnumInt32>
-{
-    static bool from_json(const TJson& json, ::enums::EnumInt32& value)
-    {
-        int32_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::enums::EnumInt32)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace enums {
 
 enum class EnumUInt32 : uint32_t
 {
@@ -499,54 +115,6 @@ enum class EnumUInt32 : uint32_t
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, EnumUInt32 value)
-{
-    if (value == EnumUInt32::ENUM_VALUE_0) { stream << "ENUM_VALUE_0"; return stream; }
-    if (value == EnumUInt32::ENUM_VALUE_1) { stream << "ENUM_VALUE_1"; return stream; }
-    if (value == EnumUInt32::ENUM_VALUE_2) { stream << "ENUM_VALUE_2"; return stream; }
-    if (value == EnumUInt32::ENUM_VALUE_3) { stream << "ENUM_VALUE_3"; return stream; }
-    if (value == EnumUInt32::ENUM_VALUE_4) { stream << "ENUM_VALUE_4"; return stream; }
-    if (value == EnumUInt32::ENUM_VALUE_5) { stream << "ENUM_VALUE_5"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace enums
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::enums::EnumUInt32>
-{
-    static bool to_json(TWriter& writer, const ::enums::EnumUInt32& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (uint32_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::enums::EnumUInt32>
-{
-    static bool from_json(const TJson& json, ::enums::EnumUInt32& value)
-    {
-        uint32_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::enums::EnumUInt32)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace enums {
-
 enum class EnumInt64 : int64_t
 {
     ENUM_VALUE_0,
@@ -557,54 +125,6 @@ enum class EnumInt64 : int64_t
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, EnumInt64 value)
-{
-    if (value == EnumInt64::ENUM_VALUE_0) { stream << "ENUM_VALUE_0"; return stream; }
-    if (value == EnumInt64::ENUM_VALUE_1) { stream << "ENUM_VALUE_1"; return stream; }
-    if (value == EnumInt64::ENUM_VALUE_2) { stream << "ENUM_VALUE_2"; return stream; }
-    if (value == EnumInt64::ENUM_VALUE_3) { stream << "ENUM_VALUE_3"; return stream; }
-    if (value == EnumInt64::ENUM_VALUE_4) { stream << "ENUM_VALUE_4"; return stream; }
-    if (value == EnumInt64::ENUM_VALUE_5) { stream << "ENUM_VALUE_5"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace enums
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::enums::EnumInt64>
-{
-    static bool to_json(TWriter& writer, const ::enums::EnumInt64& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (int64_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::enums::EnumInt64>
-{
-    static bool from_json(const TJson& json, ::enums::EnumInt64& value)
-    {
-        int64_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::enums::EnumInt64)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace enums {
-
 enum class EnumUInt64 : uint64_t
 {
     ENUM_VALUE_0,
@@ -614,54 +134,6 @@ enum class EnumUInt64 : uint64_t
     ENUM_VALUE_4,
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, EnumUInt64 value)
-{
-    if (value == EnumUInt64::ENUM_VALUE_0) { stream << "ENUM_VALUE_0"; return stream; }
-    if (value == EnumUInt64::ENUM_VALUE_1) { stream << "ENUM_VALUE_1"; return stream; }
-    if (value == EnumUInt64::ENUM_VALUE_2) { stream << "ENUM_VALUE_2"; return stream; }
-    if (value == EnumUInt64::ENUM_VALUE_3) { stream << "ENUM_VALUE_3"; return stream; }
-    if (value == EnumUInt64::ENUM_VALUE_4) { stream << "ENUM_VALUE_4"; return stream; }
-    if (value == EnumUInt64::ENUM_VALUE_5) { stream << "ENUM_VALUE_5"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace enums
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::enums::EnumUInt64>
-{
-    static bool to_json(TWriter& writer, const ::enums::EnumUInt64& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (uint64_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::enums::EnumUInt64>
-{
-    static bool from_json(const TJson& json, ::enums::EnumUInt64& value)
-    {
-        uint64_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::enums::EnumUInt64)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace enums {
 
 struct Enums
 {
@@ -734,142 +206,8 @@ struct Enums
 
     size_t fbe_type() const noexcept { return 1; }
 
-    Enums()
-        : byte0(EnumByte::ENUM_VALUE_0)
-        , byte1(EnumByte::ENUM_VALUE_1)
-        , byte2(EnumByte::ENUM_VALUE_2)
-        , byte3(EnumByte::ENUM_VALUE_3)
-        , byte4(EnumByte::ENUM_VALUE_4)
-        , byte5(EnumByte::ENUM_VALUE_5)
-        , char0(EnumChar::ENUM_VALUE_0)
-        , char1(EnumChar::ENUM_VALUE_1)
-        , char2(EnumChar::ENUM_VALUE_2)
-        , char3(EnumChar::ENUM_VALUE_3)
-        , char4(EnumChar::ENUM_VALUE_4)
-        , char5(EnumChar::ENUM_VALUE_5)
-        , wchar0(EnumWChar::ENUM_VALUE_0)
-        , wchar1(EnumWChar::ENUM_VALUE_1)
-        , wchar2(EnumWChar::ENUM_VALUE_2)
-        , wchar3(EnumWChar::ENUM_VALUE_3)
-        , wchar4(EnumWChar::ENUM_VALUE_4)
-        , wchar5(EnumWChar::ENUM_VALUE_5)
-        , int8b0(EnumInt8::ENUM_VALUE_0)
-        , int8b1(EnumInt8::ENUM_VALUE_1)
-        , int8b2(EnumInt8::ENUM_VALUE_2)
-        , int8b3(EnumInt8::ENUM_VALUE_3)
-        , int8b4(EnumInt8::ENUM_VALUE_4)
-        , int8b5(EnumInt8::ENUM_VALUE_5)
-        , uint8b0(EnumUInt8::ENUM_VALUE_0)
-        , uint8b1(EnumUInt8::ENUM_VALUE_1)
-        , uint8b2(EnumUInt8::ENUM_VALUE_2)
-        , uint8b3(EnumUInt8::ENUM_VALUE_3)
-        , uint8b4(EnumUInt8::ENUM_VALUE_4)
-        , uint8b5(EnumUInt8::ENUM_VALUE_5)
-        , int16b0(EnumInt16::ENUM_VALUE_0)
-        , int16b1(EnumInt16::ENUM_VALUE_1)
-        , int16b2(EnumInt16::ENUM_VALUE_2)
-        , int16b3(EnumInt16::ENUM_VALUE_3)
-        , int16b4(EnumInt16::ENUM_VALUE_4)
-        , int16b5(EnumInt16::ENUM_VALUE_5)
-        , uint16b0(EnumUInt16::ENUM_VALUE_0)
-        , uint16b1(EnumUInt16::ENUM_VALUE_1)
-        , uint16b2(EnumUInt16::ENUM_VALUE_2)
-        , uint16b3(EnumUInt16::ENUM_VALUE_3)
-        , uint16b4(EnumUInt16::ENUM_VALUE_4)
-        , uint16b5(EnumUInt16::ENUM_VALUE_5)
-        , int32b0(EnumInt32::ENUM_VALUE_0)
-        , int32b1(EnumInt32::ENUM_VALUE_1)
-        , int32b2(EnumInt32::ENUM_VALUE_2)
-        , int32b3(EnumInt32::ENUM_VALUE_3)
-        , int32b4(EnumInt32::ENUM_VALUE_4)
-        , int32b5(EnumInt32::ENUM_VALUE_5)
-        , uint32b0(EnumUInt32::ENUM_VALUE_0)
-        , uint32b1(EnumUInt32::ENUM_VALUE_1)
-        , uint32b2(EnumUInt32::ENUM_VALUE_2)
-        , uint32b3(EnumUInt32::ENUM_VALUE_3)
-        , uint32b4(EnumUInt32::ENUM_VALUE_4)
-        , uint32b5(EnumUInt32::ENUM_VALUE_5)
-        , int64b0(EnumInt64::ENUM_VALUE_0)
-        , int64b1(EnumInt64::ENUM_VALUE_1)
-        , int64b2(EnumInt64::ENUM_VALUE_2)
-        , int64b3(EnumInt64::ENUM_VALUE_3)
-        , int64b4(EnumInt64::ENUM_VALUE_4)
-        , int64b5(EnumInt64::ENUM_VALUE_5)
-        , uint64b0(EnumUInt64::ENUM_VALUE_0)
-        , uint64b1(EnumUInt64::ENUM_VALUE_1)
-        , uint64b2(EnumUInt64::ENUM_VALUE_2)
-        , uint64b3(EnumUInt64::ENUM_VALUE_3)
-        , uint64b4(EnumUInt64::ENUM_VALUE_4)
-        , uint64b5(EnumUInt64::ENUM_VALUE_5)
-    {}
-    Enums(const ::enums::EnumByte& arg_byte0, const ::enums::EnumByte& arg_byte1, const ::enums::EnumByte& arg_byte2, const ::enums::EnumByte& arg_byte3, const ::enums::EnumByte& arg_byte4, const ::enums::EnumByte& arg_byte5, const ::enums::EnumChar& arg_char0, const ::enums::EnumChar& arg_char1, const ::enums::EnumChar& arg_char2, const ::enums::EnumChar& arg_char3, const ::enums::EnumChar& arg_char4, const ::enums::EnumChar& arg_char5, const ::enums::EnumWChar& arg_wchar0, const ::enums::EnumWChar& arg_wchar1, const ::enums::EnumWChar& arg_wchar2, const ::enums::EnumWChar& arg_wchar3, const ::enums::EnumWChar& arg_wchar4, const ::enums::EnumWChar& arg_wchar5, const ::enums::EnumInt8& arg_int8b0, const ::enums::EnumInt8& arg_int8b1, const ::enums::EnumInt8& arg_int8b2, const ::enums::EnumInt8& arg_int8b3, const ::enums::EnumInt8& arg_int8b4, const ::enums::EnumInt8& arg_int8b5, const ::enums::EnumUInt8& arg_uint8b0, const ::enums::EnumUInt8& arg_uint8b1, const ::enums::EnumUInt8& arg_uint8b2, const ::enums::EnumUInt8& arg_uint8b3, const ::enums::EnumUInt8& arg_uint8b4, const ::enums::EnumUInt8& arg_uint8b5, const ::enums::EnumInt16& arg_int16b0, const ::enums::EnumInt16& arg_int16b1, const ::enums::EnumInt16& arg_int16b2, const ::enums::EnumInt16& arg_int16b3, const ::enums::EnumInt16& arg_int16b4, const ::enums::EnumInt16& arg_int16b5, const ::enums::EnumUInt16& arg_uint16b0, const ::enums::EnumUInt16& arg_uint16b1, const ::enums::EnumUInt16& arg_uint16b2, const ::enums::EnumUInt16& arg_uint16b3, const ::enums::EnumUInt16& arg_uint16b4, const ::enums::EnumUInt16& arg_uint16b5, const ::enums::EnumInt32& arg_int32b0, const ::enums::EnumInt32& arg_int32b1, const ::enums::EnumInt32& arg_int32b2, const ::enums::EnumInt32& arg_int32b3, const ::enums::EnumInt32& arg_int32b4, const ::enums::EnumInt32& arg_int32b5, const ::enums::EnumUInt32& arg_uint32b0, const ::enums::EnumUInt32& arg_uint32b1, const ::enums::EnumUInt32& arg_uint32b2, const ::enums::EnumUInt32& arg_uint32b3, const ::enums::EnumUInt32& arg_uint32b4, const ::enums::EnumUInt32& arg_uint32b5, const ::enums::EnumInt64& arg_int64b0, const ::enums::EnumInt64& arg_int64b1, const ::enums::EnumInt64& arg_int64b2, const ::enums::EnumInt64& arg_int64b3, const ::enums::EnumInt64& arg_int64b4, const ::enums::EnumInt64& arg_int64b5, const ::enums::EnumUInt64& arg_uint64b0, const ::enums::EnumUInt64& arg_uint64b1, const ::enums::EnumUInt64& arg_uint64b2, const ::enums::EnumUInt64& arg_uint64b3, const ::enums::EnumUInt64& arg_uint64b4, const ::enums::EnumUInt64& arg_uint64b5)
-        : byte0(arg_byte0)
-        , byte1(arg_byte1)
-        , byte2(arg_byte2)
-        , byte3(arg_byte3)
-        , byte4(arg_byte4)
-        , byte5(arg_byte5)
-        , char0(arg_char0)
-        , char1(arg_char1)
-        , char2(arg_char2)
-        , char3(arg_char3)
-        , char4(arg_char4)
-        , char5(arg_char5)
-        , wchar0(arg_wchar0)
-        , wchar1(arg_wchar1)
-        , wchar2(arg_wchar2)
-        , wchar3(arg_wchar3)
-        , wchar4(arg_wchar4)
-        , wchar5(arg_wchar5)
-        , int8b0(arg_int8b0)
-        , int8b1(arg_int8b1)
-        , int8b2(arg_int8b2)
-        , int8b3(arg_int8b3)
-        , int8b4(arg_int8b4)
-        , int8b5(arg_int8b5)
-        , uint8b0(arg_uint8b0)
-        , uint8b1(arg_uint8b1)
-        , uint8b2(arg_uint8b2)
-        , uint8b3(arg_uint8b3)
-        , uint8b4(arg_uint8b4)
-        , uint8b5(arg_uint8b5)
-        , int16b0(arg_int16b0)
-        , int16b1(arg_int16b1)
-        , int16b2(arg_int16b2)
-        , int16b3(arg_int16b3)
-        , int16b4(arg_int16b4)
-        , int16b5(arg_int16b5)
-        , uint16b0(arg_uint16b0)
-        , uint16b1(arg_uint16b1)
-        , uint16b2(arg_uint16b2)
-        , uint16b3(arg_uint16b3)
-        , uint16b4(arg_uint16b4)
-        , uint16b5(arg_uint16b5)
-        , int32b0(arg_int32b0)
-        , int32b1(arg_int32b1)
-        , int32b2(arg_int32b2)
-        , int32b3(arg_int32b3)
-        , int32b4(arg_int32b4)
-        , int32b5(arg_int32b5)
-        , uint32b0(arg_uint32b0)
-        , uint32b1(arg_uint32b1)
-        , uint32b2(arg_uint32b2)
-        , uint32b3(arg_uint32b3)
-        , uint32b4(arg_uint32b4)
-        , uint32b5(arg_uint32b5)
-        , int64b0(arg_int64b0)
-        , int64b1(arg_int64b1)
-        , int64b2(arg_int64b2)
-        , int64b3(arg_int64b3)
-        , int64b4(arg_int64b4)
-        , int64b5(arg_int64b5)
-        , uint64b0(arg_uint64b0)
-        , uint64b1(arg_uint64b1)
-        , uint64b2(arg_uint64b2)
-        , uint64b3(arg_uint64b3)
-        , uint64b4(arg_uint64b4)
-        , uint64b5(arg_uint64b5)
-    {}
+    Enums();
+    Enums(const ::enums::EnumByte& arg_byte0, const ::enums::EnumByte& arg_byte1, const ::enums::EnumByte& arg_byte2, const ::enums::EnumByte& arg_byte3, const ::enums::EnumByte& arg_byte4, const ::enums::EnumByte& arg_byte5, const ::enums::EnumChar& arg_char0, const ::enums::EnumChar& arg_char1, const ::enums::EnumChar& arg_char2, const ::enums::EnumChar& arg_char3, const ::enums::EnumChar& arg_char4, const ::enums::EnumChar& arg_char5, const ::enums::EnumWChar& arg_wchar0, const ::enums::EnumWChar& arg_wchar1, const ::enums::EnumWChar& arg_wchar2, const ::enums::EnumWChar& arg_wchar3, const ::enums::EnumWChar& arg_wchar4, const ::enums::EnumWChar& arg_wchar5, const ::enums::EnumInt8& arg_int8b0, const ::enums::EnumInt8& arg_int8b1, const ::enums::EnumInt8& arg_int8b2, const ::enums::EnumInt8& arg_int8b3, const ::enums::EnumInt8& arg_int8b4, const ::enums::EnumInt8& arg_int8b5, const ::enums::EnumUInt8& arg_uint8b0, const ::enums::EnumUInt8& arg_uint8b1, const ::enums::EnumUInt8& arg_uint8b2, const ::enums::EnumUInt8& arg_uint8b3, const ::enums::EnumUInt8& arg_uint8b4, const ::enums::EnumUInt8& arg_uint8b5, const ::enums::EnumInt16& arg_int16b0, const ::enums::EnumInt16& arg_int16b1, const ::enums::EnumInt16& arg_int16b2, const ::enums::EnumInt16& arg_int16b3, const ::enums::EnumInt16& arg_int16b4, const ::enums::EnumInt16& arg_int16b5, const ::enums::EnumUInt16& arg_uint16b0, const ::enums::EnumUInt16& arg_uint16b1, const ::enums::EnumUInt16& arg_uint16b2, const ::enums::EnumUInt16& arg_uint16b3, const ::enums::EnumUInt16& arg_uint16b4, const ::enums::EnumUInt16& arg_uint16b5, const ::enums::EnumInt32& arg_int32b0, const ::enums::EnumInt32& arg_int32b1, const ::enums::EnumInt32& arg_int32b2, const ::enums::EnumInt32& arg_int32b3, const ::enums::EnumInt32& arg_int32b4, const ::enums::EnumInt32& arg_int32b5, const ::enums::EnumUInt32& arg_uint32b0, const ::enums::EnumUInt32& arg_uint32b1, const ::enums::EnumUInt32& arg_uint32b2, const ::enums::EnumUInt32& arg_uint32b3, const ::enums::EnumUInt32& arg_uint32b4, const ::enums::EnumUInt32& arg_uint32b5, const ::enums::EnumInt64& arg_int64b0, const ::enums::EnumInt64& arg_int64b1, const ::enums::EnumInt64& arg_int64b2, const ::enums::EnumInt64& arg_int64b3, const ::enums::EnumInt64& arg_int64b4, const ::enums::EnumInt64& arg_int64b5, const ::enums::EnumUInt64& arg_uint64b0, const ::enums::EnumUInt64& arg_uint64b1, const ::enums::EnumUInt64& arg_uint64b2, const ::enums::EnumUInt64& arg_uint64b3, const ::enums::EnumUInt64& arg_uint64b4, const ::enums::EnumUInt64& arg_uint64b5);
     Enums(const Enums& other) = default;
     Enums(Enums&& other) = default;
     ~Enums() = default;
@@ -877,181 +215,21 @@ struct Enums
     Enums& operator=(const Enums& other) = default;
     Enums& operator=(Enums&& other) = default;
 
-    bool operator==(const Enums& other) const noexcept
-    {
-        return (
-            true
-            );
-    }
+    bool operator==(const Enums& other) const noexcept;
     bool operator!=(const Enums& other) const noexcept { return !operator==(other); }
-    bool operator<(const Enums& other) const noexcept
-    {
-        return false;
-    }
+    bool operator<(const Enums& other) const noexcept;
     bool operator<=(const Enums& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const Enums& other) const noexcept { return !operator<=(other); }
     bool operator>=(const Enums& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const Enums& value);
 
-    void swap(Enums& other) noexcept
-    {
-        using std::swap;
-        swap(byte0, other.byte0);
-        swap(byte1, other.byte1);
-        swap(byte2, other.byte2);
-        swap(byte3, other.byte3);
-        swap(byte4, other.byte4);
-        swap(byte5, other.byte5);
-        swap(char0, other.char0);
-        swap(char1, other.char1);
-        swap(char2, other.char2);
-        swap(char3, other.char3);
-        swap(char4, other.char4);
-        swap(char5, other.char5);
-        swap(wchar0, other.wchar0);
-        swap(wchar1, other.wchar1);
-        swap(wchar2, other.wchar2);
-        swap(wchar3, other.wchar3);
-        swap(wchar4, other.wchar4);
-        swap(wchar5, other.wchar5);
-        swap(int8b0, other.int8b0);
-        swap(int8b1, other.int8b1);
-        swap(int8b2, other.int8b2);
-        swap(int8b3, other.int8b3);
-        swap(int8b4, other.int8b4);
-        swap(int8b5, other.int8b5);
-        swap(uint8b0, other.uint8b0);
-        swap(uint8b1, other.uint8b1);
-        swap(uint8b2, other.uint8b2);
-        swap(uint8b3, other.uint8b3);
-        swap(uint8b4, other.uint8b4);
-        swap(uint8b5, other.uint8b5);
-        swap(int16b0, other.int16b0);
-        swap(int16b1, other.int16b1);
-        swap(int16b2, other.int16b2);
-        swap(int16b3, other.int16b3);
-        swap(int16b4, other.int16b4);
-        swap(int16b5, other.int16b5);
-        swap(uint16b0, other.uint16b0);
-        swap(uint16b1, other.uint16b1);
-        swap(uint16b2, other.uint16b2);
-        swap(uint16b3, other.uint16b3);
-        swap(uint16b4, other.uint16b4);
-        swap(uint16b5, other.uint16b5);
-        swap(int32b0, other.int32b0);
-        swap(int32b1, other.int32b1);
-        swap(int32b2, other.int32b2);
-        swap(int32b3, other.int32b3);
-        swap(int32b4, other.int32b4);
-        swap(int32b5, other.int32b5);
-        swap(uint32b0, other.uint32b0);
-        swap(uint32b1, other.uint32b1);
-        swap(uint32b2, other.uint32b2);
-        swap(uint32b3, other.uint32b3);
-        swap(uint32b4, other.uint32b4);
-        swap(uint32b5, other.uint32b5);
-        swap(int64b0, other.int64b0);
-        swap(int64b1, other.int64b1);
-        swap(int64b2, other.int64b2);
-        swap(int64b3, other.int64b3);
-        swap(int64b4, other.int64b4);
-        swap(int64b5, other.int64b5);
-        swap(uint64b0, other.uint64b0);
-        swap(uint64b1, other.uint64b1);
-        swap(uint64b2, other.uint64b2);
-        swap(uint64b3, other.uint64b3);
-        swap(uint64b4, other.uint64b4);
-        swap(uint64b5, other.uint64b5);
-    }
-
-    friend void swap(Enums& value1, Enums& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(Enums& other) noexcept;
+    friend void swap(Enums& value1, Enums& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const Enums& value)
-{
-    stream << "Enums(";
-    stream << "byte0="; stream << value.byte0;
-    stream << ",byte1="; stream << value.byte1;
-    stream << ",byte2="; stream << value.byte2;
-    stream << ",byte3="; stream << value.byte3;
-    stream << ",byte4="; stream << value.byte4;
-    stream << ",byte5="; stream << value.byte5;
-    stream << ",char0="; stream << value.char0;
-    stream << ",char1="; stream << value.char1;
-    stream << ",char2="; stream << value.char2;
-    stream << ",char3="; stream << value.char3;
-    stream << ",char4="; stream << value.char4;
-    stream << ",char5="; stream << value.char5;
-    stream << ",wchar0="; stream << value.wchar0;
-    stream << ",wchar1="; stream << value.wchar1;
-    stream << ",wchar2="; stream << value.wchar2;
-    stream << ",wchar3="; stream << value.wchar3;
-    stream << ",wchar4="; stream << value.wchar4;
-    stream << ",wchar5="; stream << value.wchar5;
-    stream << ",int8b0="; stream << value.int8b0;
-    stream << ",int8b1="; stream << value.int8b1;
-    stream << ",int8b2="; stream << value.int8b2;
-    stream << ",int8b3="; stream << value.int8b3;
-    stream << ",int8b4="; stream << value.int8b4;
-    stream << ",int8b5="; stream << value.int8b5;
-    stream << ",uint8b0="; stream << value.uint8b0;
-    stream << ",uint8b1="; stream << value.uint8b1;
-    stream << ",uint8b2="; stream << value.uint8b2;
-    stream << ",uint8b3="; stream << value.uint8b3;
-    stream << ",uint8b4="; stream << value.uint8b4;
-    stream << ",uint8b5="; stream << value.uint8b5;
-    stream << ",int16b0="; stream << value.int16b0;
-    stream << ",int16b1="; stream << value.int16b1;
-    stream << ",int16b2="; stream << value.int16b2;
-    stream << ",int16b3="; stream << value.int16b3;
-    stream << ",int16b4="; stream << value.int16b4;
-    stream << ",int16b5="; stream << value.int16b5;
-    stream << ",uint16b0="; stream << value.uint16b0;
-    stream << ",uint16b1="; stream << value.uint16b1;
-    stream << ",uint16b2="; stream << value.uint16b2;
-    stream << ",uint16b3="; stream << value.uint16b3;
-    stream << ",uint16b4="; stream << value.uint16b4;
-    stream << ",uint16b5="; stream << value.uint16b5;
-    stream << ",int32b0="; stream << value.int32b0;
-    stream << ",int32b1="; stream << value.int32b1;
-    stream << ",int32b2="; stream << value.int32b2;
-    stream << ",int32b3="; stream << value.int32b3;
-    stream << ",int32b4="; stream << value.int32b4;
-    stream << ",int32b5="; stream << value.int32b5;
-    stream << ",uint32b0="; stream << value.uint32b0;
-    stream << ",uint32b1="; stream << value.uint32b1;
-    stream << ",uint32b2="; stream << value.uint32b2;
-    stream << ",uint32b3="; stream << value.uint32b3;
-    stream << ",uint32b4="; stream << value.uint32b4;
-    stream << ",uint32b5="; stream << value.uint32b5;
-    stream << ",int64b0="; stream << value.int64b0;
-    stream << ",int64b1="; stream << value.int64b1;
-    stream << ",int64b2="; stream << value.int64b2;
-    stream << ",int64b3="; stream << value.int64b3;
-    stream << ",int64b4="; stream << value.int64b4;
-    stream << ",int64b5="; stream << value.int64b5;
-    stream << ",uint64b0="; stream << value.uint64b0;
-    stream << ",uint64b1="; stream << value.uint64b1;
-    stream << ",uint64b2="; stream << value.uint64b2;
-    stream << ",uint64b3="; stream << value.uint64b3;
-    stream << ",uint64b4="; stream << value.uint64b4;
-    stream << ",uint64b5="; stream << value.uint64b5;
-    stream << ")";
-    return stream;
-}
 
 } // namespace enums
 
@@ -1063,7 +241,7 @@ struct hash<enums::Enums>
     typedef enums::Enums argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         return result;
@@ -1072,235 +250,8 @@ struct hash<enums::Enums>
 
 } // namespace std
 
-namespace FBE {
+namespace enums {
 
-namespace JSON {
+} // namespace enums
 
-template <class TWriter>
-struct ValueWriter<TWriter, ::enums::Enums>
-{
-    static bool to_json(TWriter& writer, const ::enums::Enums& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "byte0") || !FBE::JSON::to_json(writer, value.byte0, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "byte1") || !FBE::JSON::to_json(writer, value.byte1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "byte2") || !FBE::JSON::to_json(writer, value.byte2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "byte3") || !FBE::JSON::to_json(writer, value.byte3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "byte4") || !FBE::JSON::to_json(writer, value.byte4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "byte5") || !FBE::JSON::to_json(writer, value.byte5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "char0") || !FBE::JSON::to_json(writer, value.char0, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "char1") || !FBE::JSON::to_json(writer, value.char1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "char2") || !FBE::JSON::to_json(writer, value.char2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "char3") || !FBE::JSON::to_json(writer, value.char3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "char4") || !FBE::JSON::to_json(writer, value.char4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "char5") || !FBE::JSON::to_json(writer, value.char5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "wchar0") || !FBE::JSON::to_json(writer, value.wchar0, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "wchar1") || !FBE::JSON::to_json(writer, value.wchar1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "wchar2") || !FBE::JSON::to_json(writer, value.wchar2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "wchar3") || !FBE::JSON::to_json(writer, value.wchar3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "wchar4") || !FBE::JSON::to_json(writer, value.wchar4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "wchar5") || !FBE::JSON::to_json(writer, value.wchar5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int8b0") || !FBE::JSON::to_json(writer, value.int8b0, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int8b1") || !FBE::JSON::to_json(writer, value.int8b1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int8b2") || !FBE::JSON::to_json(writer, value.int8b2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int8b3") || !FBE::JSON::to_json(writer, value.int8b3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int8b4") || !FBE::JSON::to_json(writer, value.int8b4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int8b5") || !FBE::JSON::to_json(writer, value.int8b5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint8b0") || !FBE::JSON::to_json(writer, value.uint8b0, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint8b1") || !FBE::JSON::to_json(writer, value.uint8b1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint8b2") || !FBE::JSON::to_json(writer, value.uint8b2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint8b3") || !FBE::JSON::to_json(writer, value.uint8b3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint8b4") || !FBE::JSON::to_json(writer, value.uint8b4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint8b5") || !FBE::JSON::to_json(writer, value.uint8b5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int16b0") || !FBE::JSON::to_json(writer, value.int16b0, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int16b1") || !FBE::JSON::to_json(writer, value.int16b1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int16b2") || !FBE::JSON::to_json(writer, value.int16b2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int16b3") || !FBE::JSON::to_json(writer, value.int16b3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int16b4") || !FBE::JSON::to_json(writer, value.int16b4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int16b5") || !FBE::JSON::to_json(writer, value.int16b5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint16b0") || !FBE::JSON::to_json(writer, value.uint16b0, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint16b1") || !FBE::JSON::to_json(writer, value.uint16b1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint16b2") || !FBE::JSON::to_json(writer, value.uint16b2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint16b3") || !FBE::JSON::to_json(writer, value.uint16b3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint16b4") || !FBE::JSON::to_json(writer, value.uint16b4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint16b5") || !FBE::JSON::to_json(writer, value.uint16b5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int32b0") || !FBE::JSON::to_json(writer, value.int32b0, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int32b1") || !FBE::JSON::to_json(writer, value.int32b1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int32b2") || !FBE::JSON::to_json(writer, value.int32b2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int32b3") || !FBE::JSON::to_json(writer, value.int32b3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int32b4") || !FBE::JSON::to_json(writer, value.int32b4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int32b5") || !FBE::JSON::to_json(writer, value.int32b5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint32b0") || !FBE::JSON::to_json(writer, value.uint32b0, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint32b1") || !FBE::JSON::to_json(writer, value.uint32b1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint32b2") || !FBE::JSON::to_json(writer, value.uint32b2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint32b3") || !FBE::JSON::to_json(writer, value.uint32b3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint32b4") || !FBE::JSON::to_json(writer, value.uint32b4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint32b5") || !FBE::JSON::to_json(writer, value.uint32b5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int64b0") || !FBE::JSON::to_json(writer, value.int64b0, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int64b1") || !FBE::JSON::to_json(writer, value.int64b1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int64b2") || !FBE::JSON::to_json(writer, value.int64b2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int64b3") || !FBE::JSON::to_json(writer, value.int64b3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int64b4") || !FBE::JSON::to_json(writer, value.int64b4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "int64b5") || !FBE::JSON::to_json(writer, value.int64b5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint64b0") || !FBE::JSON::to_json(writer, value.uint64b0, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint64b1") || !FBE::JSON::to_json(writer, value.uint64b1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint64b2") || !FBE::JSON::to_json(writer, value.uint64b2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint64b3") || !FBE::JSON::to_json(writer, value.uint64b3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint64b4") || !FBE::JSON::to_json(writer, value.uint64b4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "uint64b5") || !FBE::JSON::to_json(writer, value.uint64b5, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::enums::Enums>
-{
-    static bool from_json(const TJson& json, ::enums::Enums& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.byte0, "byte0");
-        result &= FBE::JSON::from_json(json, value.byte1, "byte1");
-        result &= FBE::JSON::from_json(json, value.byte2, "byte2");
-        result &= FBE::JSON::from_json(json, value.byte3, "byte3");
-        result &= FBE::JSON::from_json(json, value.byte4, "byte4");
-        result &= FBE::JSON::from_json(json, value.byte5, "byte5");
-        result &= FBE::JSON::from_json(json, value.char0, "char0");
-        result &= FBE::JSON::from_json(json, value.char1, "char1");
-        result &= FBE::JSON::from_json(json, value.char2, "char2");
-        result &= FBE::JSON::from_json(json, value.char3, "char3");
-        result &= FBE::JSON::from_json(json, value.char4, "char4");
-        result &= FBE::JSON::from_json(json, value.char5, "char5");
-        result &= FBE::JSON::from_json(json, value.wchar0, "wchar0");
-        result &= FBE::JSON::from_json(json, value.wchar1, "wchar1");
-        result &= FBE::JSON::from_json(json, value.wchar2, "wchar2");
-        result &= FBE::JSON::from_json(json, value.wchar3, "wchar3");
-        result &= FBE::JSON::from_json(json, value.wchar4, "wchar4");
-        result &= FBE::JSON::from_json(json, value.wchar5, "wchar5");
-        result &= FBE::JSON::from_json(json, value.int8b0, "int8b0");
-        result &= FBE::JSON::from_json(json, value.int8b1, "int8b1");
-        result &= FBE::JSON::from_json(json, value.int8b2, "int8b2");
-        result &= FBE::JSON::from_json(json, value.int8b3, "int8b3");
-        result &= FBE::JSON::from_json(json, value.int8b4, "int8b4");
-        result &= FBE::JSON::from_json(json, value.int8b5, "int8b5");
-        result &= FBE::JSON::from_json(json, value.uint8b0, "uint8b0");
-        result &= FBE::JSON::from_json(json, value.uint8b1, "uint8b1");
-        result &= FBE::JSON::from_json(json, value.uint8b2, "uint8b2");
-        result &= FBE::JSON::from_json(json, value.uint8b3, "uint8b3");
-        result &= FBE::JSON::from_json(json, value.uint8b4, "uint8b4");
-        result &= FBE::JSON::from_json(json, value.uint8b5, "uint8b5");
-        result &= FBE::JSON::from_json(json, value.int16b0, "int16b0");
-        result &= FBE::JSON::from_json(json, value.int16b1, "int16b1");
-        result &= FBE::JSON::from_json(json, value.int16b2, "int16b2");
-        result &= FBE::JSON::from_json(json, value.int16b3, "int16b3");
-        result &= FBE::JSON::from_json(json, value.int16b4, "int16b4");
-        result &= FBE::JSON::from_json(json, value.int16b5, "int16b5");
-        result &= FBE::JSON::from_json(json, value.uint16b0, "uint16b0");
-        result &= FBE::JSON::from_json(json, value.uint16b1, "uint16b1");
-        result &= FBE::JSON::from_json(json, value.uint16b2, "uint16b2");
-        result &= FBE::JSON::from_json(json, value.uint16b3, "uint16b3");
-        result &= FBE::JSON::from_json(json, value.uint16b4, "uint16b4");
-        result &= FBE::JSON::from_json(json, value.uint16b5, "uint16b5");
-        result &= FBE::JSON::from_json(json, value.int32b0, "int32b0");
-        result &= FBE::JSON::from_json(json, value.int32b1, "int32b1");
-        result &= FBE::JSON::from_json(json, value.int32b2, "int32b2");
-        result &= FBE::JSON::from_json(json, value.int32b3, "int32b3");
-        result &= FBE::JSON::from_json(json, value.int32b4, "int32b4");
-        result &= FBE::JSON::from_json(json, value.int32b5, "int32b5");
-        result &= FBE::JSON::from_json(json, value.uint32b0, "uint32b0");
-        result &= FBE::JSON::from_json(json, value.uint32b1, "uint32b1");
-        result &= FBE::JSON::from_json(json, value.uint32b2, "uint32b2");
-        result &= FBE::JSON::from_json(json, value.uint32b3, "uint32b3");
-        result &= FBE::JSON::from_json(json, value.uint32b4, "uint32b4");
-        result &= FBE::JSON::from_json(json, value.uint32b5, "uint32b5");
-        result &= FBE::JSON::from_json(json, value.int64b0, "int64b0");
-        result &= FBE::JSON::from_json(json, value.int64b1, "int64b1");
-        result &= FBE::JSON::from_json(json, value.int64b2, "int64b2");
-        result &= FBE::JSON::from_json(json, value.int64b3, "int64b3");
-        result &= FBE::JSON::from_json(json, value.int64b4, "int64b4");
-        result &= FBE::JSON::from_json(json, value.int64b5, "int64b5");
-        result &= FBE::JSON::from_json(json, value.uint64b0, "uint64b0");
-        result &= FBE::JSON::from_json(json, value.uint64b1, "uint64b1");
-        result &= FBE::JSON::from_json(json, value.uint64b2, "uint64b2");
-        result &= FBE::JSON::from_json(json, value.uint64b3, "uint64b3");
-        result &= FBE::JSON::from_json(json, value.uint64b4, "uint64b4");
-        result &= FBE::JSON::from_json(json, value.uint64b5, "uint64b5");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
+#include "enums.inl"

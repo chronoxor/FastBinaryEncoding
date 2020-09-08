@@ -38,54 +38,6 @@ enum class EnumSimple
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, EnumSimple value)
-{
-    if (value == EnumSimple::ENUM_VALUE_0) { stream << "ENUM_VALUE_0"; return stream; }
-    if (value == EnumSimple::ENUM_VALUE_1) { stream << "ENUM_VALUE_1"; return stream; }
-    if (value == EnumSimple::ENUM_VALUE_2) { stream << "ENUM_VALUE_2"; return stream; }
-    if (value == EnumSimple::ENUM_VALUE_3) { stream << "ENUM_VALUE_3"; return stream; }
-    if (value == EnumSimple::ENUM_VALUE_4) { stream << "ENUM_VALUE_4"; return stream; }
-    if (value == EnumSimple::ENUM_VALUE_5) { stream << "ENUM_VALUE_5"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace test
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::EnumSimple>
-{
-    static bool to_json(TWriter& writer, const ::test::EnumSimple& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (int32_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::EnumSimple>
-{
-    static bool from_json(const TJson& json, ::test::EnumSimple& value)
-    {
-        int32_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::test::EnumSimple)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace test {
-
 enum class EnumTyped : uint8_t
 {
     ENUM_VALUE_0,
@@ -96,99 +48,9 @@ enum class EnumTyped : uint8_t
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, EnumTyped value)
-{
-    if (value == EnumTyped::ENUM_VALUE_0) { stream << "ENUM_VALUE_0"; return stream; }
-    if (value == EnumTyped::ENUM_VALUE_1) { stream << "ENUM_VALUE_1"; return stream; }
-    if (value == EnumTyped::ENUM_VALUE_2) { stream << "ENUM_VALUE_2"; return stream; }
-    if (value == EnumTyped::ENUM_VALUE_3) { stream << "ENUM_VALUE_3"; return stream; }
-    if (value == EnumTyped::ENUM_VALUE_4) { stream << "ENUM_VALUE_4"; return stream; }
-    if (value == EnumTyped::ENUM_VALUE_5) { stream << "ENUM_VALUE_5"; return stream; }
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace test
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::EnumTyped>
-{
-    static bool to_json(TWriter& writer, const ::test::EnumTyped& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (uint8_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::EnumTyped>
-{
-    static bool from_json(const TJson& json, ::test::EnumTyped& value)
-    {
-        uint8_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::test::EnumTyped)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace test {
-
 enum class EnumEmpty
 {
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, EnumEmpty value)
-{
-    stream << "<unknown>";
-    return stream;
-}
-
-} // namespace test
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::EnumEmpty>
-{
-    static bool to_json(TWriter& writer, const ::test::EnumEmpty& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (int32_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::EnumEmpty>
-{
-    static bool from_json(const TJson& json, ::test::EnumEmpty& value)
-    {
-        int32_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::test::EnumEmpty)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace test {
 
 enum class FlagsSimple
 {
@@ -200,78 +62,6 @@ enum class FlagsSimple
     FLAG_VALUE_5 = FLAG_VALUE_1  |  FLAG_VALUE_3,
 };
 FBE_ENUM_FLAGS(FlagsSimple)
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, FlagsSimple value)
-{
-    bool first = true;
-    if ((value & FlagsSimple::FLAG_VALUE_0) && ((value & FlagsSimple::FLAG_VALUE_0) == FlagsSimple::FLAG_VALUE_0))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_0";
-        first = false;
-    }
-    if ((value & FlagsSimple::FLAG_VALUE_1) && ((value & FlagsSimple::FLAG_VALUE_1) == FlagsSimple::FLAG_VALUE_1))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_1";
-        first = false;
-    }
-    if ((value & FlagsSimple::FLAG_VALUE_2) && ((value & FlagsSimple::FLAG_VALUE_2) == FlagsSimple::FLAG_VALUE_2))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_2";
-        first = false;
-    }
-    if ((value & FlagsSimple::FLAG_VALUE_3) && ((value & FlagsSimple::FLAG_VALUE_3) == FlagsSimple::FLAG_VALUE_3))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_3";
-        first = false;
-    }
-    if ((value & FlagsSimple::FLAG_VALUE_4) && ((value & FlagsSimple::FLAG_VALUE_4) == FlagsSimple::FLAG_VALUE_4))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_4";
-        first = false;
-    }
-    if ((value & FlagsSimple::FLAG_VALUE_5) && ((value & FlagsSimple::FLAG_VALUE_5) == FlagsSimple::FLAG_VALUE_5))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_5";
-        first = false;
-    }
-    return stream;
-}
-
-} // namespace test
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::FlagsSimple>
-{
-    static bool to_json(TWriter& writer, const ::test::FlagsSimple& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (int32_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::FlagsSimple>
-{
-    static bool from_json(const TJson& json, ::test::FlagsSimple& value)
-    {
-        int32_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::test::FlagsSimple)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace test {
 
 enum class FlagsTyped : uint64_t
 {
@@ -288,144 +78,10 @@ enum class FlagsTyped : uint64_t
 };
 FBE_ENUM_FLAGS(FlagsTyped)
 
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, FlagsTyped value)
-{
-    bool first = true;
-    if ((value & FlagsTyped::FLAG_VALUE_0) && ((value & FlagsTyped::FLAG_VALUE_0) == FlagsTyped::FLAG_VALUE_0))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_0";
-        first = false;
-    }
-    if ((value & FlagsTyped::FLAG_VALUE_1) && ((value & FlagsTyped::FLAG_VALUE_1) == FlagsTyped::FLAG_VALUE_1))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_1";
-        first = false;
-    }
-    if ((value & FlagsTyped::FLAG_VALUE_2) && ((value & FlagsTyped::FLAG_VALUE_2) == FlagsTyped::FLAG_VALUE_2))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_2";
-        first = false;
-    }
-    if ((value & FlagsTyped::FLAG_VALUE_3) && ((value & FlagsTyped::FLAG_VALUE_3) == FlagsTyped::FLAG_VALUE_3))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_3";
-        first = false;
-    }
-    if ((value & FlagsTyped::FLAG_VALUE_4) && ((value & FlagsTyped::FLAG_VALUE_4) == FlagsTyped::FLAG_VALUE_4))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_4";
-        first = false;
-    }
-    if ((value & FlagsTyped::FLAG_VALUE_5) && ((value & FlagsTyped::FLAG_VALUE_5) == FlagsTyped::FLAG_VALUE_5))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_5";
-        first = false;
-    }
-    if ((value & FlagsTyped::FLAG_VALUE_6) && ((value & FlagsTyped::FLAG_VALUE_6) == FlagsTyped::FLAG_VALUE_6))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_6";
-        first = false;
-    }
-    if ((value & FlagsTyped::FLAG_VALUE_7) && ((value & FlagsTyped::FLAG_VALUE_7) == FlagsTyped::FLAG_VALUE_7))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_7";
-        first = false;
-    }
-    if ((value & FlagsTyped::FLAG_VALUE_8) && ((value & FlagsTyped::FLAG_VALUE_8) == FlagsTyped::FLAG_VALUE_8))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_8";
-        first = false;
-    }
-    if ((value & FlagsTyped::FLAG_VALUE_9) && ((value & FlagsTyped::FLAG_VALUE_9) == FlagsTyped::FLAG_VALUE_9))
-    {
-        stream << (first ? "" : "|") << "FLAG_VALUE_9";
-        first = false;
-    }
-    return stream;
-}
-
-} // namespace test
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::FlagsTyped>
-{
-    static bool to_json(TWriter& writer, const ::test::FlagsTyped& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (uint64_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::FlagsTyped>
-{
-    static bool from_json(const TJson& json, ::test::FlagsTyped& value)
-    {
-        uint64_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::test::FlagsTyped)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace test {
-
 enum class FlagsEmpty
 {
 };
 FBE_ENUM_FLAGS(FlagsEmpty)
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, FlagsEmpty value)
-{
-    bool first = true;
-    return stream;
-}
-
-} // namespace test
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::FlagsEmpty>
-{
-    static bool to_json(TWriter& writer, const ::test::FlagsEmpty& value, bool scope = true)
-    {
-        return FBE::JSON::to_json(writer, (int32_t)value);
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::FlagsEmpty>
-{
-    static bool from_json(const TJson& json, ::test::FlagsEmpty& value)
-    {
-        int32_t raw;
-        if (!FBE::JSON::from_json(json, raw))
-            return false;
-
-        value = (::test::FlagsEmpty)raw;
-        return true;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
-namespace test {
 
 struct StructSimple
 {
@@ -477,100 +133,8 @@ struct StructSimple
 
     size_t fbe_type() const noexcept { return 110; }
 
-    StructSimple()
-        : id((int32_t)0ll)
-        , f1(false)
-        , f2(true)
-        , f3((uint8_t)0u)
-        , f4((uint8_t)255u)
-        , f5('\0')
-        , f6((char)'!')
-        , f7(L'\0')
-        , f8((wchar_t)0x0444)
-        , f9((int8_t)0)
-        , f10((int8_t)127)
-        , f11((uint8_t)0u)
-        , f12((uint8_t)255u)
-        , f13((int16_t)0)
-        , f14((int16_t)32767)
-        , f15((uint16_t)0u)
-        , f16((uint16_t)65535u)
-        , f17((int32_t)0ll)
-        , f18((int32_t)2147483647ll)
-        , f19((uint32_t)0ull)
-        , f20((uint32_t)4294967295ull)
-        , f21((int64_t)0ll)
-        , f22((int64_t)9223372036854775807ll)
-        , f23((uint64_t)0ull)
-        , f24((uint64_t)18446744073709551615ull)
-        , f25(0.0f)
-        , f26((float)123.456f)
-        , f27(0.0)
-        , f28((double)-123.456e+123)
-        , f29()
-        , f30(FBE::decimal_t(123456.123456))
-        , f31()
-        , f32("Initial string!")
-        , f33((uint64_t)0ull)
-        , f34(FBE::epoch())
-        , f35(FBE::utc())
-        , f36()
-        , f37(FBE::uuid_t::sequential())
-        , f38(FBE::uuid_t("123e4567-e89b-12d3-a456-426655440000"))
-        , f39()
-        , f40()
-        , f41()
-        , f42()
-        , f43()
-        , f44()
-    {}
-    StructSimple(int32_t arg_id, bool arg_f1, bool arg_f2, uint8_t arg_f3, uint8_t arg_f4, char arg_f5, char arg_f6, wchar_t arg_f7, wchar_t arg_f8, int8_t arg_f9, int8_t arg_f10, uint8_t arg_f11, uint8_t arg_f12, int16_t arg_f13, int16_t arg_f14, uint16_t arg_f15, uint16_t arg_f16, int32_t arg_f17, int32_t arg_f18, uint32_t arg_f19, uint32_t arg_f20, int64_t arg_f21, int64_t arg_f22, uint64_t arg_f23, uint64_t arg_f24, float arg_f25, float arg_f26, double arg_f27, double arg_f28, const FBE::decimal_t& arg_f29, const FBE::decimal_t& arg_f30, const std::string& arg_f31, const std::string& arg_f32, uint64_t arg_f33, uint64_t arg_f34, uint64_t arg_f35, const FBE::uuid_t& arg_f36, const FBE::uuid_t& arg_f37, const FBE::uuid_t& arg_f38, const ::proto::OrderSide& arg_f39, const ::proto::OrderType& arg_f40, const ::proto::Order& arg_f41, const ::proto::Balance& arg_f42, const ::proto::State& arg_f43, const ::proto::Account& arg_f44)
-        : id(arg_id)
-        , f1(arg_f1)
-        , f2(arg_f2)
-        , f3(arg_f3)
-        , f4(arg_f4)
-        , f5(arg_f5)
-        , f6(arg_f6)
-        , f7(arg_f7)
-        , f8(arg_f8)
-        , f9(arg_f9)
-        , f10(arg_f10)
-        , f11(arg_f11)
-        , f12(arg_f12)
-        , f13(arg_f13)
-        , f14(arg_f14)
-        , f15(arg_f15)
-        , f16(arg_f16)
-        , f17(arg_f17)
-        , f18(arg_f18)
-        , f19(arg_f19)
-        , f20(arg_f20)
-        , f21(arg_f21)
-        , f22(arg_f22)
-        , f23(arg_f23)
-        , f24(arg_f24)
-        , f25(arg_f25)
-        , f26(arg_f26)
-        , f27(arg_f27)
-        , f28(arg_f28)
-        , f29(arg_f29)
-        , f30(arg_f30)
-        , f31(arg_f31)
-        , f32(arg_f32)
-        , f33(arg_f33)
-        , f34(arg_f34)
-        , f35(arg_f35)
-        , f36(arg_f36)
-        , f37(arg_f37)
-        , f38(arg_f38)
-        , f39(arg_f39)
-        , f40(arg_f40)
-        , f41(arg_f41)
-        , f42(arg_f42)
-        , f43(arg_f43)
-        , f44(arg_f44)
-    {}
+    StructSimple();
+    StructSimple(int32_t arg_id, bool arg_f1, bool arg_f2, uint8_t arg_f3, uint8_t arg_f4, char arg_f5, char arg_f6, wchar_t arg_f7, wchar_t arg_f8, int8_t arg_f9, int8_t arg_f10, uint8_t arg_f11, uint8_t arg_f12, int16_t arg_f13, int16_t arg_f14, uint16_t arg_f15, uint16_t arg_f16, int32_t arg_f17, int32_t arg_f18, uint32_t arg_f19, uint32_t arg_f20, int64_t arg_f21, int64_t arg_f22, uint64_t arg_f23, uint64_t arg_f24, float arg_f25, float arg_f26, double arg_f27, double arg_f28, const FBE::decimal_t& arg_f29, const FBE::decimal_t& arg_f30, const std::string& arg_f31, const std::string& arg_f32, uint64_t arg_f33, uint64_t arg_f34, uint64_t arg_f35, const FBE::uuid_t& arg_f36, const FBE::uuid_t& arg_f37, const FBE::uuid_t& arg_f38, const ::proto::OrderSide& arg_f39, const ::proto::OrderType& arg_f40, const ::proto::Order& arg_f41, const ::proto::Balance& arg_f42, const ::proto::State& arg_f43, const ::proto::Account& arg_f44);
     StructSimple(const StructSimple& other) = default;
     StructSimple(StructSimple&& other) = default;
     ~StructSimple() = default;
@@ -578,143 +142,21 @@ struct StructSimple
     StructSimple& operator=(const StructSimple& other) = default;
     StructSimple& operator=(StructSimple&& other) = default;
 
-    bool operator==(const StructSimple& other) const noexcept
-    {
-        return (
-            (id == other.id)
-            );
-    }
+    bool operator==(const StructSimple& other) const noexcept;
     bool operator!=(const StructSimple& other) const noexcept { return !operator==(other); }
-    bool operator<(const StructSimple& other) const noexcept
-    {
-        if (id < other.id)
-            return true;
-        if (other.id < id)
-            return false;
-        return false;
-    }
+    bool operator<(const StructSimple& other) const noexcept;
     bool operator<=(const StructSimple& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const StructSimple& other) const noexcept { return !operator<=(other); }
     bool operator>=(const StructSimple& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const StructSimple& value);
 
-    void swap(StructSimple& other) noexcept
-    {
-        using std::swap;
-        swap(id, other.id);
-        swap(f1, other.f1);
-        swap(f2, other.f2);
-        swap(f3, other.f3);
-        swap(f4, other.f4);
-        swap(f5, other.f5);
-        swap(f6, other.f6);
-        swap(f7, other.f7);
-        swap(f8, other.f8);
-        swap(f9, other.f9);
-        swap(f10, other.f10);
-        swap(f11, other.f11);
-        swap(f12, other.f12);
-        swap(f13, other.f13);
-        swap(f14, other.f14);
-        swap(f15, other.f15);
-        swap(f16, other.f16);
-        swap(f17, other.f17);
-        swap(f18, other.f18);
-        swap(f19, other.f19);
-        swap(f20, other.f20);
-        swap(f21, other.f21);
-        swap(f22, other.f22);
-        swap(f23, other.f23);
-        swap(f24, other.f24);
-        swap(f25, other.f25);
-        swap(f26, other.f26);
-        swap(f27, other.f27);
-        swap(f28, other.f28);
-        swap(f29, other.f29);
-        swap(f30, other.f30);
-        swap(f31, other.f31);
-        swap(f32, other.f32);
-        swap(f33, other.f33);
-        swap(f34, other.f34);
-        swap(f35, other.f35);
-        swap(f36, other.f36);
-        swap(f37, other.f37);
-        swap(f38, other.f38);
-        swap(f39, other.f39);
-        swap(f40, other.f40);
-        swap(f41, other.f41);
-        swap(f42, other.f42);
-        swap(f43, other.f43);
-        swap(f44, other.f44);
-    }
-
-    friend void swap(StructSimple& value1, StructSimple& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(StructSimple& other) noexcept;
+    friend void swap(StructSimple& value1, StructSimple& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const StructSimple& value)
-{
-    stream << "StructSimple(";
-    stream << "id="; stream << value.id;
-    stream << ",f1="; stream << (value.f1 ? "true" : "false");
-    stream << ",f2="; stream << (value.f2 ? "true" : "false");
-    stream << ",f3="; stream << (int)value.f3;
-    stream << ",f4="; stream << (int)value.f4;
-    stream << ",f5="; stream << "'" << value.f5 << "'";
-    stream << ",f6="; stream << "'" << value.f6 << "'";
-    stream << ",f7="; stream << "'" << value.f7 << "'";
-    stream << ",f8="; stream << "'" << value.f8 << "'";
-    stream << ",f9="; stream << (int)value.f9;
-    stream << ",f10="; stream << (int)value.f10;
-    stream << ",f11="; stream << (int)value.f11;
-    stream << ",f12="; stream << (int)value.f12;
-    stream << ",f13="; stream << value.f13;
-    stream << ",f14="; stream << value.f14;
-    stream << ",f15="; stream << value.f15;
-    stream << ",f16="; stream << value.f16;
-    stream << ",f17="; stream << value.f17;
-    stream << ",f18="; stream << value.f18;
-    stream << ",f19="; stream << value.f19;
-    stream << ",f20="; stream << value.f20;
-    stream << ",f21="; stream << value.f21;
-    stream << ",f22="; stream << value.f22;
-    stream << ",f23="; stream << value.f23;
-    stream << ",f24="; stream << value.f24;
-    stream << ",f25="; stream << value.f25;
-    stream << ",f26="; stream << value.f26;
-    stream << ",f27="; stream << value.f27;
-    stream << ",f28="; stream << value.f28;
-    stream << ",f29="; stream << value.f29;
-    stream << ",f30="; stream << value.f30;
-    stream << ",f31="; stream << "\"" << value.f31 << "\"";
-    stream << ",f32="; stream << "\"" << value.f32 << "\"";
-    stream << ",f33="; stream << value.f33;
-    stream << ",f34="; stream << value.f34;
-    stream << ",f35="; stream << value.f35;
-    stream << ",f36="; stream << "\"" << value.f36 << "\"";
-    stream << ",f37="; stream << "\"" << value.f37 << "\"";
-    stream << ",f38="; stream << "\"" << value.f38 << "\"";
-    stream << ",f39="; stream << value.f39;
-    stream << ",f40="; stream << value.f40;
-    stream << ",f41="; stream << value.f41;
-    stream << ",f42="; stream << value.f42;
-    stream << ",f43="; stream << value.f43;
-    stream << ",f44="; stream << value.f44;
-    stream << ")";
-    return stream;
-}
 
 } // namespace test
 
@@ -726,7 +168,7 @@ struct hash<test::StructSimple>
     typedef test::StructSimple argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         result = result * 31 + std::hash<decltype(value.id)>()(value.id);
@@ -735,176 +177,6 @@ struct hash<test::StructSimple>
 };
 
 } // namespace std
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::StructSimple>
-{
-    static bool to_json(TWriter& writer, const ::test::StructSimple& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "id") || !FBE::JSON::to_json(writer, value.id, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f1") || !FBE::JSON::to_json(writer, value.f1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f2") || !FBE::JSON::to_json(writer, value.f2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f3") || !FBE::JSON::to_json(writer, value.f3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f4") || !FBE::JSON::to_json(writer, value.f4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f5") || !FBE::JSON::to_json(writer, value.f5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f6") || !FBE::JSON::to_json(writer, value.f6, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f7") || !FBE::JSON::to_json(writer, value.f7, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f8") || !FBE::JSON::to_json(writer, value.f8, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f9") || !FBE::JSON::to_json(writer, value.f9, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f10") || !FBE::JSON::to_json(writer, value.f10, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f11") || !FBE::JSON::to_json(writer, value.f11, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f12") || !FBE::JSON::to_json(writer, value.f12, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f13") || !FBE::JSON::to_json(writer, value.f13, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f14") || !FBE::JSON::to_json(writer, value.f14, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f15") || !FBE::JSON::to_json(writer, value.f15, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f16") || !FBE::JSON::to_json(writer, value.f16, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f17") || !FBE::JSON::to_json(writer, value.f17, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f18") || !FBE::JSON::to_json(writer, value.f18, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f19") || !FBE::JSON::to_json(writer, value.f19, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f20") || !FBE::JSON::to_json(writer, value.f20, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f21") || !FBE::JSON::to_json(writer, value.f21, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f22") || !FBE::JSON::to_json(writer, value.f22, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f23") || !FBE::JSON::to_json(writer, value.f23, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f24") || !FBE::JSON::to_json(writer, value.f24, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f25") || !FBE::JSON::to_json(writer, value.f25, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f26") || !FBE::JSON::to_json(writer, value.f26, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f27") || !FBE::JSON::to_json(writer, value.f27, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f28") || !FBE::JSON::to_json(writer, value.f28, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f29") || !FBE::JSON::to_json(writer, value.f29, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f30") || !FBE::JSON::to_json(writer, value.f30, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f31") || !FBE::JSON::to_json(writer, value.f31, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f32") || !FBE::JSON::to_json(writer, value.f32, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f33") || !FBE::JSON::to_json(writer, value.f33, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f34") || !FBE::JSON::to_json(writer, value.f34, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f35") || !FBE::JSON::to_json(writer, value.f35, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f36") || !FBE::JSON::to_json(writer, value.f36, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f37") || !FBE::JSON::to_json(writer, value.f37, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f38") || !FBE::JSON::to_json(writer, value.f38, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f39") || !FBE::JSON::to_json(writer, value.f39, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f40") || !FBE::JSON::to_json(writer, value.f40, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f41") || !FBE::JSON::to_json(writer, value.f41, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f42") || !FBE::JSON::to_json(writer, value.f42, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f43") || !FBE::JSON::to_json(writer, value.f43, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f44") || !FBE::JSON::to_json(writer, value.f44, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::StructSimple>
-{
-    static bool from_json(const TJson& json, ::test::StructSimple& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.id, "id");
-        result &= FBE::JSON::from_json(json, value.f1, "f1");
-        result &= FBE::JSON::from_json(json, value.f2, "f2");
-        result &= FBE::JSON::from_json(json, value.f3, "f3");
-        result &= FBE::JSON::from_json(json, value.f4, "f4");
-        result &= FBE::JSON::from_json(json, value.f5, "f5");
-        result &= FBE::JSON::from_json(json, value.f6, "f6");
-        result &= FBE::JSON::from_json(json, value.f7, "f7");
-        result &= FBE::JSON::from_json(json, value.f8, "f8");
-        result &= FBE::JSON::from_json(json, value.f9, "f9");
-        result &= FBE::JSON::from_json(json, value.f10, "f10");
-        result &= FBE::JSON::from_json(json, value.f11, "f11");
-        result &= FBE::JSON::from_json(json, value.f12, "f12");
-        result &= FBE::JSON::from_json(json, value.f13, "f13");
-        result &= FBE::JSON::from_json(json, value.f14, "f14");
-        result &= FBE::JSON::from_json(json, value.f15, "f15");
-        result &= FBE::JSON::from_json(json, value.f16, "f16");
-        result &= FBE::JSON::from_json(json, value.f17, "f17");
-        result &= FBE::JSON::from_json(json, value.f18, "f18");
-        result &= FBE::JSON::from_json(json, value.f19, "f19");
-        result &= FBE::JSON::from_json(json, value.f20, "f20");
-        result &= FBE::JSON::from_json(json, value.f21, "f21");
-        result &= FBE::JSON::from_json(json, value.f22, "f22");
-        result &= FBE::JSON::from_json(json, value.f23, "f23");
-        result &= FBE::JSON::from_json(json, value.f24, "f24");
-        result &= FBE::JSON::from_json(json, value.f25, "f25");
-        result &= FBE::JSON::from_json(json, value.f26, "f26");
-        result &= FBE::JSON::from_json(json, value.f27, "f27");
-        result &= FBE::JSON::from_json(json, value.f28, "f28");
-        result &= FBE::JSON::from_json(json, value.f29, "f29");
-        result &= FBE::JSON::from_json(json, value.f30, "f30");
-        result &= FBE::JSON::from_json(json, value.f31, "f31");
-        result &= FBE::JSON::from_json(json, value.f32, "f32");
-        result &= FBE::JSON::from_json(json, value.f33, "f33");
-        result &= FBE::JSON::from_json(json, value.f34, "f34");
-        result &= FBE::JSON::from_json(json, value.f35, "f35");
-        result &= FBE::JSON::from_json(json, value.f36, "f36");
-        result &= FBE::JSON::from_json(json, value.f37, "f37");
-        result &= FBE::JSON::from_json(json, value.f38, "f38");
-        result &= FBE::JSON::from_json(json, value.f39, "f39");
-        result &= FBE::JSON::from_json(json, value.f40, "f40");
-        result &= FBE::JSON::from_json(json, value.f41, "f41");
-        result &= FBE::JSON::from_json(json, value.f42, "f42");
-        result &= FBE::JSON::from_json(json, value.f43, "f43");
-        result &= FBE::JSON::from_json(json, value.f44, "f44");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
 
 namespace test {
 
@@ -979,144 +251,8 @@ struct StructOptional : public ::test::StructSimple
 
     size_t fbe_type() const noexcept { return 111; }
 
-    StructOptional()
-        : ::test::StructSimple()
-        , f100()
-        , f101(true)
-        , f102(std::nullopt)
-        , f103()
-        , f104((uint8_t)255u)
-        , f105(std::nullopt)
-        , f106()
-        , f107((char)'!')
-        , f108(std::nullopt)
-        , f109()
-        , f110((wchar_t)0x0444)
-        , f111(std::nullopt)
-        , f112()
-        , f113((int8_t)127)
-        , f114(std::nullopt)
-        , f115()
-        , f116((uint8_t)255u)
-        , f117(std::nullopt)
-        , f118()
-        , f119((int16_t)32767)
-        , f120(std::nullopt)
-        , f121()
-        , f122((uint16_t)65535u)
-        , f123(std::nullopt)
-        , f124()
-        , f125((int32_t)2147483647ll)
-        , f126(std::nullopt)
-        , f127()
-        , f128((uint32_t)4294967295ull)
-        , f129(std::nullopt)
-        , f130()
-        , f131((int64_t)9223372036854775807ll)
-        , f132(std::nullopt)
-        , f133()
-        , f134((uint64_t)18446744073709551615ull)
-        , f135(std::nullopt)
-        , f136()
-        , f137((float)123.456f)
-        , f138(std::nullopt)
-        , f139()
-        , f140((double)-123.456e+123)
-        , f141(std::nullopt)
-        , f142()
-        , f143(FBE::decimal_t(123456.123456))
-        , f144(std::nullopt)
-        , f145()
-        , f146("Initial string!")
-        , f147(std::nullopt)
-        , f148()
-        , f149(FBE::utc())
-        , f150(std::nullopt)
-        , f151()
-        , f152(FBE::uuid_t("123e4567-e89b-12d3-a456-426655440000"))
-        , f153(std::nullopt)
-        , f154()
-        , f155(std::nullopt)
-        , f156()
-        , f157(std::nullopt)
-        , f158()
-        , f159(std::nullopt)
-        , f160()
-        , f161(std::nullopt)
-        , f162()
-        , f163(std::nullopt)
-        , f164()
-        , f165(std::nullopt)
-    {}
-    StructOptional(const ::test::StructSimple& base, const std::optional<bool>& arg_f100, const std::optional<bool>& arg_f101, const std::optional<bool>& arg_f102, const std::optional<uint8_t>& arg_f103, const std::optional<uint8_t>& arg_f104, const std::optional<uint8_t>& arg_f105, const std::optional<char>& arg_f106, const std::optional<char>& arg_f107, const std::optional<char>& arg_f108, const std::optional<wchar_t>& arg_f109, const std::optional<wchar_t>& arg_f110, const std::optional<wchar_t>& arg_f111, const std::optional<int8_t>& arg_f112, const std::optional<int8_t>& arg_f113, const std::optional<int8_t>& arg_f114, const std::optional<uint8_t>& arg_f115, const std::optional<uint8_t>& arg_f116, const std::optional<uint8_t>& arg_f117, const std::optional<int16_t>& arg_f118, const std::optional<int16_t>& arg_f119, const std::optional<int16_t>& arg_f120, const std::optional<uint16_t>& arg_f121, const std::optional<uint16_t>& arg_f122, const std::optional<uint16_t>& arg_f123, const std::optional<int32_t>& arg_f124, const std::optional<int32_t>& arg_f125, const std::optional<int32_t>& arg_f126, const std::optional<uint32_t>& arg_f127, const std::optional<uint32_t>& arg_f128, const std::optional<uint32_t>& arg_f129, const std::optional<int64_t>& arg_f130, const std::optional<int64_t>& arg_f131, const std::optional<int64_t>& arg_f132, const std::optional<uint64_t>& arg_f133, const std::optional<uint64_t>& arg_f134, const std::optional<uint64_t>& arg_f135, const std::optional<float>& arg_f136, const std::optional<float>& arg_f137, const std::optional<float>& arg_f138, const std::optional<double>& arg_f139, const std::optional<double>& arg_f140, const std::optional<double>& arg_f141, const std::optional<FBE::decimal_t>& arg_f142, const std::optional<FBE::decimal_t>& arg_f143, const std::optional<FBE::decimal_t>& arg_f144, const std::optional<std::string>& arg_f145, const std::optional<std::string>& arg_f146, const std::optional<std::string>& arg_f147, const std::optional<uint64_t>& arg_f148, const std::optional<uint64_t>& arg_f149, const std::optional<uint64_t>& arg_f150, const std::optional<FBE::uuid_t>& arg_f151, const std::optional<FBE::uuid_t>& arg_f152, const std::optional<FBE::uuid_t>& arg_f153, const std::optional<::proto::OrderSide>& arg_f154, const std::optional<::proto::OrderSide>& arg_f155, const std::optional<::proto::OrderType>& arg_f156, const std::optional<::proto::OrderType>& arg_f157, const std::optional<::proto::Order>& arg_f158, const std::optional<::proto::Order>& arg_f159, const std::optional<::proto::Balance>& arg_f160, const std::optional<::proto::Balance>& arg_f161, const std::optional<::proto::State>& arg_f162, const std::optional<::proto::State>& arg_f163, const std::optional<::proto::Account>& arg_f164, const std::optional<::proto::Account>& arg_f165)
-        : ::test::StructSimple(base)
-        , f100(arg_f100)
-        , f101(arg_f101)
-        , f102(arg_f102)
-        , f103(arg_f103)
-        , f104(arg_f104)
-        , f105(arg_f105)
-        , f106(arg_f106)
-        , f107(arg_f107)
-        , f108(arg_f108)
-        , f109(arg_f109)
-        , f110(arg_f110)
-        , f111(arg_f111)
-        , f112(arg_f112)
-        , f113(arg_f113)
-        , f114(arg_f114)
-        , f115(arg_f115)
-        , f116(arg_f116)
-        , f117(arg_f117)
-        , f118(arg_f118)
-        , f119(arg_f119)
-        , f120(arg_f120)
-        , f121(arg_f121)
-        , f122(arg_f122)
-        , f123(arg_f123)
-        , f124(arg_f124)
-        , f125(arg_f125)
-        , f126(arg_f126)
-        , f127(arg_f127)
-        , f128(arg_f128)
-        , f129(arg_f129)
-        , f130(arg_f130)
-        , f131(arg_f131)
-        , f132(arg_f132)
-        , f133(arg_f133)
-        , f134(arg_f134)
-        , f135(arg_f135)
-        , f136(arg_f136)
-        , f137(arg_f137)
-        , f138(arg_f138)
-        , f139(arg_f139)
-        , f140(arg_f140)
-        , f141(arg_f141)
-        , f142(arg_f142)
-        , f143(arg_f143)
-        , f144(arg_f144)
-        , f145(arg_f145)
-        , f146(arg_f146)
-        , f147(arg_f147)
-        , f148(arg_f148)
-        , f149(arg_f149)
-        , f150(arg_f150)
-        , f151(arg_f151)
-        , f152(arg_f152)
-        , f153(arg_f153)
-        , f154(arg_f154)
-        , f155(arg_f155)
-        , f156(arg_f156)
-        , f157(arg_f157)
-        , f158(arg_f158)
-        , f159(arg_f159)
-        , f160(arg_f160)
-        , f161(arg_f161)
-        , f162(arg_f162)
-        , f163(arg_f163)
-        , f164(arg_f164)
-        , f165(arg_f165)
-    {}
+    StructOptional();
+    StructOptional(const ::test::StructSimple& base, const std::optional<bool>& arg_f100, const std::optional<bool>& arg_f101, const std::optional<bool>& arg_f102, const std::optional<uint8_t>& arg_f103, const std::optional<uint8_t>& arg_f104, const std::optional<uint8_t>& arg_f105, const std::optional<char>& arg_f106, const std::optional<char>& arg_f107, const std::optional<char>& arg_f108, const std::optional<wchar_t>& arg_f109, const std::optional<wchar_t>& arg_f110, const std::optional<wchar_t>& arg_f111, const std::optional<int8_t>& arg_f112, const std::optional<int8_t>& arg_f113, const std::optional<int8_t>& arg_f114, const std::optional<uint8_t>& arg_f115, const std::optional<uint8_t>& arg_f116, const std::optional<uint8_t>& arg_f117, const std::optional<int16_t>& arg_f118, const std::optional<int16_t>& arg_f119, const std::optional<int16_t>& arg_f120, const std::optional<uint16_t>& arg_f121, const std::optional<uint16_t>& arg_f122, const std::optional<uint16_t>& arg_f123, const std::optional<int32_t>& arg_f124, const std::optional<int32_t>& arg_f125, const std::optional<int32_t>& arg_f126, const std::optional<uint32_t>& arg_f127, const std::optional<uint32_t>& arg_f128, const std::optional<uint32_t>& arg_f129, const std::optional<int64_t>& arg_f130, const std::optional<int64_t>& arg_f131, const std::optional<int64_t>& arg_f132, const std::optional<uint64_t>& arg_f133, const std::optional<uint64_t>& arg_f134, const std::optional<uint64_t>& arg_f135, const std::optional<float>& arg_f136, const std::optional<float>& arg_f137, const std::optional<float>& arg_f138, const std::optional<double>& arg_f139, const std::optional<double>& arg_f140, const std::optional<double>& arg_f141, const std::optional<FBE::decimal_t>& arg_f142, const std::optional<FBE::decimal_t>& arg_f143, const std::optional<FBE::decimal_t>& arg_f144, const std::optional<std::string>& arg_f145, const std::optional<std::string>& arg_f146, const std::optional<std::string>& arg_f147, const std::optional<uint64_t>& arg_f148, const std::optional<uint64_t>& arg_f149, const std::optional<uint64_t>& arg_f150, const std::optional<FBE::uuid_t>& arg_f151, const std::optional<FBE::uuid_t>& arg_f152, const std::optional<FBE::uuid_t>& arg_f153, const std::optional<::proto::OrderSide>& arg_f154, const std::optional<::proto::OrderSide>& arg_f155, const std::optional<::proto::OrderType>& arg_f156, const std::optional<::proto::OrderType>& arg_f157, const std::optional<::proto::Order>& arg_f158, const std::optional<::proto::Order>& arg_f159, const std::optional<::proto::Balance>& arg_f160, const std::optional<::proto::Balance>& arg_f161, const std::optional<::proto::State>& arg_f162, const std::optional<::proto::State>& arg_f163, const std::optional<::proto::Account>& arg_f164, const std::optional<::proto::Account>& arg_f165);
     StructOptional(const StructOptional& other) = default;
     StructOptional(StructOptional&& other) = default;
     ~StructOptional() = default;
@@ -1124,188 +260,21 @@ struct StructOptional : public ::test::StructSimple
     StructOptional& operator=(const StructOptional& other) = default;
     StructOptional& operator=(StructOptional&& other) = default;
 
-    bool operator==(const StructOptional& other) const noexcept
-    {
-        return (
-            ::test::StructSimple::operator==(other)
-            && true
-            );
-    }
+    bool operator==(const StructOptional& other) const noexcept;
     bool operator!=(const StructOptional& other) const noexcept { return !operator==(other); }
-    bool operator<(const StructOptional& other) const noexcept
-    {
-        if (::test::StructSimple::operator<(other))
-            return true;
-        if (other.::test::StructSimple::operator<(*this))
-            return false;
-        return false;
-    }
+    bool operator<(const StructOptional& other) const noexcept;
     bool operator<=(const StructOptional& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const StructOptional& other) const noexcept { return !operator<=(other); }
     bool operator>=(const StructOptional& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const StructOptional& value);
 
-    void swap(StructOptional& other) noexcept
-    {
-        using std::swap;
-        ::test::StructSimple::swap(other);
-        swap(f100, other.f100);
-        swap(f101, other.f101);
-        swap(f102, other.f102);
-        swap(f103, other.f103);
-        swap(f104, other.f104);
-        swap(f105, other.f105);
-        swap(f106, other.f106);
-        swap(f107, other.f107);
-        swap(f108, other.f108);
-        swap(f109, other.f109);
-        swap(f110, other.f110);
-        swap(f111, other.f111);
-        swap(f112, other.f112);
-        swap(f113, other.f113);
-        swap(f114, other.f114);
-        swap(f115, other.f115);
-        swap(f116, other.f116);
-        swap(f117, other.f117);
-        swap(f118, other.f118);
-        swap(f119, other.f119);
-        swap(f120, other.f120);
-        swap(f121, other.f121);
-        swap(f122, other.f122);
-        swap(f123, other.f123);
-        swap(f124, other.f124);
-        swap(f125, other.f125);
-        swap(f126, other.f126);
-        swap(f127, other.f127);
-        swap(f128, other.f128);
-        swap(f129, other.f129);
-        swap(f130, other.f130);
-        swap(f131, other.f131);
-        swap(f132, other.f132);
-        swap(f133, other.f133);
-        swap(f134, other.f134);
-        swap(f135, other.f135);
-        swap(f136, other.f136);
-        swap(f137, other.f137);
-        swap(f138, other.f138);
-        swap(f139, other.f139);
-        swap(f140, other.f140);
-        swap(f141, other.f141);
-        swap(f142, other.f142);
-        swap(f143, other.f143);
-        swap(f144, other.f144);
-        swap(f145, other.f145);
-        swap(f146, other.f146);
-        swap(f147, other.f147);
-        swap(f148, other.f148);
-        swap(f149, other.f149);
-        swap(f150, other.f150);
-        swap(f151, other.f151);
-        swap(f152, other.f152);
-        swap(f153, other.f153);
-        swap(f154, other.f154);
-        swap(f155, other.f155);
-        swap(f156, other.f156);
-        swap(f157, other.f157);
-        swap(f158, other.f158);
-        swap(f159, other.f159);
-        swap(f160, other.f160);
-        swap(f161, other.f161);
-        swap(f162, other.f162);
-        swap(f163, other.f163);
-        swap(f164, other.f164);
-        swap(f165, other.f165);
-    }
-
-    friend void swap(StructOptional& value1, StructOptional& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(StructOptional& other) noexcept;
+    friend void swap(StructOptional& value1, StructOptional& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const StructOptional& value)
-{
-    stream << "StructOptional(";
-    stream << (const ::test::StructSimple&)value;
-    stream << ",f100="; if (value.f100) stream << (*value.f100 ? "true" : "false"); else stream << "null";
-    stream << ",f101="; if (value.f101) stream << (*value.f101 ? "true" : "false"); else stream << "null";
-    stream << ",f102="; if (value.f102) stream << (*value.f102 ? "true" : "false"); else stream << "null";
-    stream << ",f103="; if (value.f103) stream << (int)*value.f103; else stream << "null";
-    stream << ",f104="; if (value.f104) stream << (int)*value.f104; else stream << "null";
-    stream << ",f105="; if (value.f105) stream << (int)*value.f105; else stream << "null";
-    stream << ",f106="; if (value.f106) stream << "'" << *value.f106 << "'"; else stream << "null";
-    stream << ",f107="; if (value.f107) stream << "'" << *value.f107 << "'"; else stream << "null";
-    stream << ",f108="; if (value.f108) stream << "'" << *value.f108 << "'"; else stream << "null";
-    stream << ",f109="; if (value.f109) stream << "'" << *value.f109 << "'"; else stream << "null";
-    stream << ",f110="; if (value.f110) stream << "'" << *value.f110 << "'"; else stream << "null";
-    stream << ",f111="; if (value.f111) stream << "'" << *value.f111 << "'"; else stream << "null";
-    stream << ",f112="; if (value.f112) stream << (int)*value.f112; else stream << "null";
-    stream << ",f113="; if (value.f113) stream << (int)*value.f113; else stream << "null";
-    stream << ",f114="; if (value.f114) stream << (int)*value.f114; else stream << "null";
-    stream << ",f115="; if (value.f115) stream << (int)*value.f115; else stream << "null";
-    stream << ",f116="; if (value.f116) stream << (int)*value.f116; else stream << "null";
-    stream << ",f117="; if (value.f117) stream << (int)*value.f117; else stream << "null";
-    stream << ",f118="; if (value.f118) stream << *value.f118; else stream << "null";
-    stream << ",f119="; if (value.f119) stream << *value.f119; else stream << "null";
-    stream << ",f120="; if (value.f120) stream << *value.f120; else stream << "null";
-    stream << ",f121="; if (value.f121) stream << *value.f121; else stream << "null";
-    stream << ",f122="; if (value.f122) stream << *value.f122; else stream << "null";
-    stream << ",f123="; if (value.f123) stream << *value.f123; else stream << "null";
-    stream << ",f124="; if (value.f124) stream << *value.f124; else stream << "null";
-    stream << ",f125="; if (value.f125) stream << *value.f125; else stream << "null";
-    stream << ",f126="; if (value.f126) stream << *value.f126; else stream << "null";
-    stream << ",f127="; if (value.f127) stream << *value.f127; else stream << "null";
-    stream << ",f128="; if (value.f128) stream << *value.f128; else stream << "null";
-    stream << ",f129="; if (value.f129) stream << *value.f129; else stream << "null";
-    stream << ",f130="; if (value.f130) stream << *value.f130; else stream << "null";
-    stream << ",f131="; if (value.f131) stream << *value.f131; else stream << "null";
-    stream << ",f132="; if (value.f132) stream << *value.f132; else stream << "null";
-    stream << ",f133="; if (value.f133) stream << *value.f133; else stream << "null";
-    stream << ",f134="; if (value.f134) stream << *value.f134; else stream << "null";
-    stream << ",f135="; if (value.f135) stream << *value.f135; else stream << "null";
-    stream << ",f136="; if (value.f136) stream << *value.f136; else stream << "null";
-    stream << ",f137="; if (value.f137) stream << *value.f137; else stream << "null";
-    stream << ",f138="; if (value.f138) stream << *value.f138; else stream << "null";
-    stream << ",f139="; if (value.f139) stream << *value.f139; else stream << "null";
-    stream << ",f140="; if (value.f140) stream << *value.f140; else stream << "null";
-    stream << ",f141="; if (value.f141) stream << *value.f141; else stream << "null";
-    stream << ",f142="; if (value.f142) stream << *value.f142; else stream << "null";
-    stream << ",f143="; if (value.f143) stream << *value.f143; else stream << "null";
-    stream << ",f144="; if (value.f144) stream << *value.f144; else stream << "null";
-    stream << ",f145="; if (value.f145) stream << "\"" << *value.f145 << "\""; else stream << "null";
-    stream << ",f146="; if (value.f146) stream << "\"" << *value.f146 << "\""; else stream << "null";
-    stream << ",f147="; if (value.f147) stream << "\"" << *value.f147 << "\""; else stream << "null";
-    stream << ",f148="; if (value.f148) stream << *value.f148; else stream << "null";
-    stream << ",f149="; if (value.f149) stream << *value.f149; else stream << "null";
-    stream << ",f150="; if (value.f150) stream << *value.f150; else stream << "null";
-    stream << ",f151="; if (value.f151) stream << "\"" << *value.f151 << "\""; else stream << "null";
-    stream << ",f152="; if (value.f152) stream << "\"" << *value.f152 << "\""; else stream << "null";
-    stream << ",f153="; if (value.f153) stream << "\"" << *value.f153 << "\""; else stream << "null";
-    stream << ",f154="; if (value.f154) stream << *value.f154; else stream << "null";
-    stream << ",f155="; if (value.f155) stream << *value.f155; else stream << "null";
-    stream << ",f156="; if (value.f156) stream << *value.f156; else stream << "null";
-    stream << ",f157="; if (value.f157) stream << *value.f157; else stream << "null";
-    stream << ",f158="; if (value.f158) stream << *value.f158; else stream << "null";
-    stream << ",f159="; if (value.f159) stream << *value.f159; else stream << "null";
-    stream << ",f160="; if (value.f160) stream << *value.f160; else stream << "null";
-    stream << ",f161="; if (value.f161) stream << *value.f161; else stream << "null";
-    stream << ",f162="; if (value.f162) stream << *value.f162; else stream << "null";
-    stream << ",f163="; if (value.f163) stream << *value.f163; else stream << "null";
-    stream << ",f164="; if (value.f164) stream << *value.f164; else stream << "null";
-    stream << ",f165="; if (value.f165) stream << *value.f165; else stream << "null";
-    stream << ")";
-    return stream;
-}
 
 } // namespace test
 
@@ -1317,7 +286,7 @@ struct hash<test::StructOptional>
     typedef test::StructOptional argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         result = result * 31 + std::hash<::test::StructSimple>()(value);
@@ -1326,242 +295,6 @@ struct hash<test::StructOptional>
 };
 
 } // namespace std
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::StructOptional>
-{
-    static bool to_json(TWriter& writer, const ::test::StructOptional& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json(writer, (const ::test::StructSimple&)value, false))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f100") || !FBE::JSON::to_json(writer, value.f100, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f101") || !FBE::JSON::to_json(writer, value.f101, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f102") || !FBE::JSON::to_json(writer, value.f102, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f103") || !FBE::JSON::to_json(writer, value.f103, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f104") || !FBE::JSON::to_json(writer, value.f104, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f105") || !FBE::JSON::to_json(writer, value.f105, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f106") || !FBE::JSON::to_json(writer, value.f106, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f107") || !FBE::JSON::to_json(writer, value.f107, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f108") || !FBE::JSON::to_json(writer, value.f108, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f109") || !FBE::JSON::to_json(writer, value.f109, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f110") || !FBE::JSON::to_json(writer, value.f110, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f111") || !FBE::JSON::to_json(writer, value.f111, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f112") || !FBE::JSON::to_json(writer, value.f112, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f113") || !FBE::JSON::to_json(writer, value.f113, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f114") || !FBE::JSON::to_json(writer, value.f114, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f115") || !FBE::JSON::to_json(writer, value.f115, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f116") || !FBE::JSON::to_json(writer, value.f116, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f117") || !FBE::JSON::to_json(writer, value.f117, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f118") || !FBE::JSON::to_json(writer, value.f118, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f119") || !FBE::JSON::to_json(writer, value.f119, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f120") || !FBE::JSON::to_json(writer, value.f120, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f121") || !FBE::JSON::to_json(writer, value.f121, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f122") || !FBE::JSON::to_json(writer, value.f122, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f123") || !FBE::JSON::to_json(writer, value.f123, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f124") || !FBE::JSON::to_json(writer, value.f124, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f125") || !FBE::JSON::to_json(writer, value.f125, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f126") || !FBE::JSON::to_json(writer, value.f126, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f127") || !FBE::JSON::to_json(writer, value.f127, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f128") || !FBE::JSON::to_json(writer, value.f128, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f129") || !FBE::JSON::to_json(writer, value.f129, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f130") || !FBE::JSON::to_json(writer, value.f130, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f131") || !FBE::JSON::to_json(writer, value.f131, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f132") || !FBE::JSON::to_json(writer, value.f132, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f133") || !FBE::JSON::to_json(writer, value.f133, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f134") || !FBE::JSON::to_json(writer, value.f134, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f135") || !FBE::JSON::to_json(writer, value.f135, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f136") || !FBE::JSON::to_json(writer, value.f136, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f137") || !FBE::JSON::to_json(writer, value.f137, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f138") || !FBE::JSON::to_json(writer, value.f138, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f139") || !FBE::JSON::to_json(writer, value.f139, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f140") || !FBE::JSON::to_json(writer, value.f140, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f141") || !FBE::JSON::to_json(writer, value.f141, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f142") || !FBE::JSON::to_json(writer, value.f142, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f143") || !FBE::JSON::to_json(writer, value.f143, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f144") || !FBE::JSON::to_json(writer, value.f144, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f145") || !FBE::JSON::to_json(writer, value.f145, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f146") || !FBE::JSON::to_json(writer, value.f146, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f147") || !FBE::JSON::to_json(writer, value.f147, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f148") || !FBE::JSON::to_json(writer, value.f148, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f149") || !FBE::JSON::to_json(writer, value.f149, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f150") || !FBE::JSON::to_json(writer, value.f150, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f151") || !FBE::JSON::to_json(writer, value.f151, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f152") || !FBE::JSON::to_json(writer, value.f152, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f153") || !FBE::JSON::to_json(writer, value.f153, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f154") || !FBE::JSON::to_json(writer, value.f154, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f155") || !FBE::JSON::to_json(writer, value.f155, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f156") || !FBE::JSON::to_json(writer, value.f156, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f157") || !FBE::JSON::to_json(writer, value.f157, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f158") || !FBE::JSON::to_json(writer, value.f158, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f159") || !FBE::JSON::to_json(writer, value.f159, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f160") || !FBE::JSON::to_json(writer, value.f160, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f161") || !FBE::JSON::to_json(writer, value.f161, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f162") || !FBE::JSON::to_json(writer, value.f162, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f163") || !FBE::JSON::to_json(writer, value.f163, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f164") || !FBE::JSON::to_json(writer, value.f164, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f165") || !FBE::JSON::to_json(writer, value.f165, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::StructOptional>
-{
-    static bool from_json(const TJson& json, ::test::StructOptional& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, (::test::StructSimple&)value);
-        result &= FBE::JSON::from_json(json, value.f100, "f100");
-        result &= FBE::JSON::from_json(json, value.f101, "f101");
-        result &= FBE::JSON::from_json(json, value.f102, "f102");
-        result &= FBE::JSON::from_json(json, value.f103, "f103");
-        result &= FBE::JSON::from_json(json, value.f104, "f104");
-        result &= FBE::JSON::from_json(json, value.f105, "f105");
-        result &= FBE::JSON::from_json(json, value.f106, "f106");
-        result &= FBE::JSON::from_json(json, value.f107, "f107");
-        result &= FBE::JSON::from_json(json, value.f108, "f108");
-        result &= FBE::JSON::from_json(json, value.f109, "f109");
-        result &= FBE::JSON::from_json(json, value.f110, "f110");
-        result &= FBE::JSON::from_json(json, value.f111, "f111");
-        result &= FBE::JSON::from_json(json, value.f112, "f112");
-        result &= FBE::JSON::from_json(json, value.f113, "f113");
-        result &= FBE::JSON::from_json(json, value.f114, "f114");
-        result &= FBE::JSON::from_json(json, value.f115, "f115");
-        result &= FBE::JSON::from_json(json, value.f116, "f116");
-        result &= FBE::JSON::from_json(json, value.f117, "f117");
-        result &= FBE::JSON::from_json(json, value.f118, "f118");
-        result &= FBE::JSON::from_json(json, value.f119, "f119");
-        result &= FBE::JSON::from_json(json, value.f120, "f120");
-        result &= FBE::JSON::from_json(json, value.f121, "f121");
-        result &= FBE::JSON::from_json(json, value.f122, "f122");
-        result &= FBE::JSON::from_json(json, value.f123, "f123");
-        result &= FBE::JSON::from_json(json, value.f124, "f124");
-        result &= FBE::JSON::from_json(json, value.f125, "f125");
-        result &= FBE::JSON::from_json(json, value.f126, "f126");
-        result &= FBE::JSON::from_json(json, value.f127, "f127");
-        result &= FBE::JSON::from_json(json, value.f128, "f128");
-        result &= FBE::JSON::from_json(json, value.f129, "f129");
-        result &= FBE::JSON::from_json(json, value.f130, "f130");
-        result &= FBE::JSON::from_json(json, value.f131, "f131");
-        result &= FBE::JSON::from_json(json, value.f132, "f132");
-        result &= FBE::JSON::from_json(json, value.f133, "f133");
-        result &= FBE::JSON::from_json(json, value.f134, "f134");
-        result &= FBE::JSON::from_json(json, value.f135, "f135");
-        result &= FBE::JSON::from_json(json, value.f136, "f136");
-        result &= FBE::JSON::from_json(json, value.f137, "f137");
-        result &= FBE::JSON::from_json(json, value.f138, "f138");
-        result &= FBE::JSON::from_json(json, value.f139, "f139");
-        result &= FBE::JSON::from_json(json, value.f140, "f140");
-        result &= FBE::JSON::from_json(json, value.f141, "f141");
-        result &= FBE::JSON::from_json(json, value.f142, "f142");
-        result &= FBE::JSON::from_json(json, value.f143, "f143");
-        result &= FBE::JSON::from_json(json, value.f144, "f144");
-        result &= FBE::JSON::from_json(json, value.f145, "f145");
-        result &= FBE::JSON::from_json(json, value.f146, "f146");
-        result &= FBE::JSON::from_json(json, value.f147, "f147");
-        result &= FBE::JSON::from_json(json, value.f148, "f148");
-        result &= FBE::JSON::from_json(json, value.f149, "f149");
-        result &= FBE::JSON::from_json(json, value.f150, "f150");
-        result &= FBE::JSON::from_json(json, value.f151, "f151");
-        result &= FBE::JSON::from_json(json, value.f152, "f152");
-        result &= FBE::JSON::from_json(json, value.f153, "f153");
-        result &= FBE::JSON::from_json(json, value.f154, "f154");
-        result &= FBE::JSON::from_json(json, value.f155, "f155");
-        result &= FBE::JSON::from_json(json, value.f156, "f156");
-        result &= FBE::JSON::from_json(json, value.f157, "f157");
-        result &= FBE::JSON::from_json(json, value.f158, "f158");
-        result &= FBE::JSON::from_json(json, value.f159, "f159");
-        result &= FBE::JSON::from_json(json, value.f160, "f160");
-        result &= FBE::JSON::from_json(json, value.f161, "f161");
-        result &= FBE::JSON::from_json(json, value.f162, "f162");
-        result &= FBE::JSON::from_json(json, value.f163, "f163");
-        result &= FBE::JSON::from_json(json, value.f164, "f164");
-        result &= FBE::JSON::from_json(json, value.f165, "f165");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
 
 namespace test {
 
@@ -1582,36 +315,8 @@ struct StructNested : public ::test::StructOptional
 
     size_t fbe_type() const noexcept { return 112; }
 
-    StructNested()
-        : ::test::StructOptional()
-        , f1000()
-        , f1001()
-        , f1002(EnumTyped::ENUM_VALUE_2)
-        , f1003(std::nullopt)
-        , f1004()
-        , f1005()
-        , f1006(FlagsTyped::FLAG_VALUE_2  |  FlagsTyped::FLAG_VALUE_4  |  FlagsTyped::FLAG_VALUE_6)
-        , f1007(std::nullopt)
-        , f1008()
-        , f1009()
-        , f1010()
-        , f1011(std::nullopt)
-    {}
-    StructNested(const ::test::StructOptional& base, const ::test::EnumSimple& arg_f1000, const std::optional<::test::EnumSimple>& arg_f1001, const ::test::EnumTyped& arg_f1002, const std::optional<::test::EnumTyped>& arg_f1003, const ::test::FlagsSimple& arg_f1004, const std::optional<::test::FlagsSimple>& arg_f1005, const ::test::FlagsTyped& arg_f1006, const std::optional<::test::FlagsTyped>& arg_f1007, const ::test::StructSimple& arg_f1008, const std::optional<::test::StructSimple>& arg_f1009, const ::test::StructOptional& arg_f1010, const std::optional<::test::StructOptional>& arg_f1011)
-        : ::test::StructOptional(base)
-        , f1000(arg_f1000)
-        , f1001(arg_f1001)
-        , f1002(arg_f1002)
-        , f1003(arg_f1003)
-        , f1004(arg_f1004)
-        , f1005(arg_f1005)
-        , f1006(arg_f1006)
-        , f1007(arg_f1007)
-        , f1008(arg_f1008)
-        , f1009(arg_f1009)
-        , f1010(arg_f1010)
-        , f1011(arg_f1011)
-    {}
+    StructNested();
+    StructNested(const ::test::StructOptional& base, const ::test::EnumSimple& arg_f1000, const std::optional<::test::EnumSimple>& arg_f1001, const ::test::EnumTyped& arg_f1002, const std::optional<::test::EnumTyped>& arg_f1003, const ::test::FlagsSimple& arg_f1004, const std::optional<::test::FlagsSimple>& arg_f1005, const ::test::FlagsTyped& arg_f1006, const std::optional<::test::FlagsTyped>& arg_f1007, const ::test::StructSimple& arg_f1008, const std::optional<::test::StructSimple>& arg_f1009, const ::test::StructOptional& arg_f1010, const std::optional<::test::StructOptional>& arg_f1011);
     StructNested(const StructNested& other) = default;
     StructNested(StructNested&& other) = default;
     ~StructNested() = default;
@@ -1619,80 +324,21 @@ struct StructNested : public ::test::StructOptional
     StructNested& operator=(const StructNested& other) = default;
     StructNested& operator=(StructNested&& other) = default;
 
-    bool operator==(const StructNested& other) const noexcept
-    {
-        return (
-            ::test::StructOptional::operator==(other)
-            && true
-            );
-    }
+    bool operator==(const StructNested& other) const noexcept;
     bool operator!=(const StructNested& other) const noexcept { return !operator==(other); }
-    bool operator<(const StructNested& other) const noexcept
-    {
-        if (::test::StructOptional::operator<(other))
-            return true;
-        if (other.::test::StructOptional::operator<(*this))
-            return false;
-        return false;
-    }
+    bool operator<(const StructNested& other) const noexcept;
     bool operator<=(const StructNested& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const StructNested& other) const noexcept { return !operator<=(other); }
     bool operator>=(const StructNested& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const StructNested& value);
 
-    void swap(StructNested& other) noexcept
-    {
-        using std::swap;
-        ::test::StructOptional::swap(other);
-        swap(f1000, other.f1000);
-        swap(f1001, other.f1001);
-        swap(f1002, other.f1002);
-        swap(f1003, other.f1003);
-        swap(f1004, other.f1004);
-        swap(f1005, other.f1005);
-        swap(f1006, other.f1006);
-        swap(f1007, other.f1007);
-        swap(f1008, other.f1008);
-        swap(f1009, other.f1009);
-        swap(f1010, other.f1010);
-        swap(f1011, other.f1011);
-    }
-
-    friend void swap(StructNested& value1, StructNested& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(StructNested& other) noexcept;
+    friend void swap(StructNested& value1, StructNested& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const StructNested& value)
-{
-    stream << "StructNested(";
-    stream << (const ::test::StructOptional&)value;
-    stream << ",f1000="; stream << value.f1000;
-    stream << ",f1001="; if (value.f1001) stream << *value.f1001; else stream << "null";
-    stream << ",f1002="; stream << value.f1002;
-    stream << ",f1003="; if (value.f1003) stream << *value.f1003; else stream << "null";
-    stream << ",f1004="; stream << value.f1004;
-    stream << ",f1005="; if (value.f1005) stream << *value.f1005; else stream << "null";
-    stream << ",f1006="; stream << value.f1006;
-    stream << ",f1007="; if (value.f1007) stream << *value.f1007; else stream << "null";
-    stream << ",f1008="; stream << value.f1008;
-    stream << ",f1009="; if (value.f1009) stream << *value.f1009; else stream << "null";
-    stream << ",f1010="; stream << value.f1010;
-    stream << ",f1011="; if (value.f1011) stream << *value.f1011; else stream << "null";
-    stream << ")";
-    return stream;
-}
 
 } // namespace test
 
@@ -1704,7 +350,7 @@ struct hash<test::StructNested>
     typedef test::StructNested argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         result = result * 31 + std::hash<::test::StructOptional>()(value);
@@ -1713,80 +359,6 @@ struct hash<test::StructNested>
 };
 
 } // namespace std
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::StructNested>
-{
-    static bool to_json(TWriter& writer, const ::test::StructNested& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json(writer, (const ::test::StructOptional&)value, false))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f1000") || !FBE::JSON::to_json(writer, value.f1000, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f1001") || !FBE::JSON::to_json(writer, value.f1001, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f1002") || !FBE::JSON::to_json(writer, value.f1002, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f1003") || !FBE::JSON::to_json(writer, value.f1003, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f1004") || !FBE::JSON::to_json(writer, value.f1004, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f1005") || !FBE::JSON::to_json(writer, value.f1005, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f1006") || !FBE::JSON::to_json(writer, value.f1006, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f1007") || !FBE::JSON::to_json(writer, value.f1007, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f1008") || !FBE::JSON::to_json(writer, value.f1008, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f1009") || !FBE::JSON::to_json(writer, value.f1009, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f1010") || !FBE::JSON::to_json(writer, value.f1010, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f1011") || !FBE::JSON::to_json(writer, value.f1011, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::StructNested>
-{
-    static bool from_json(const TJson& json, ::test::StructNested& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, (::test::StructOptional&)value);
-        result &= FBE::JSON::from_json(json, value.f1000, "f1000");
-        result &= FBE::JSON::from_json(json, value.f1001, "f1001");
-        result &= FBE::JSON::from_json(json, value.f1002, "f1002");
-        result &= FBE::JSON::from_json(json, value.f1003, "f1003");
-        result &= FBE::JSON::from_json(json, value.f1004, "f1004");
-        result &= FBE::JSON::from_json(json, value.f1005, "f1005");
-        result &= FBE::JSON::from_json(json, value.f1006, "f1006");
-        result &= FBE::JSON::from_json(json, value.f1007, "f1007");
-        result &= FBE::JSON::from_json(json, value.f1008, "f1008");
-        result &= FBE::JSON::from_json(json, value.f1009, "f1009");
-        result &= FBE::JSON::from_json(json, value.f1010, "f1010");
-        result &= FBE::JSON::from_json(json, value.f1011, "f1011");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
 
 namespace test {
 
@@ -1798,16 +370,8 @@ struct StructBytes
 
     size_t fbe_type() const noexcept { return 120; }
 
-    StructBytes()
-        : f1()
-        , f2()
-        , f3(std::nullopt)
-    {}
-    StructBytes(const FBE::buffer_t& arg_f1, const std::optional<FBE::buffer_t>& arg_f2, const std::optional<FBE::buffer_t>& arg_f3)
-        : f1(arg_f1)
-        , f2(arg_f2)
-        , f3(arg_f3)
-    {}
+    StructBytes();
+    StructBytes(const FBE::buffer_t& arg_f1, const std::optional<FBE::buffer_t>& arg_f2, const std::optional<FBE::buffer_t>& arg_f3);
     StructBytes(const StructBytes& other) = default;
     StructBytes(StructBytes&& other) = default;
     ~StructBytes() = default;
@@ -1815,55 +379,21 @@ struct StructBytes
     StructBytes& operator=(const StructBytes& other) = default;
     StructBytes& operator=(StructBytes&& other) = default;
 
-    bool operator==(const StructBytes& other) const noexcept
-    {
-        return (
-            true
-            );
-    }
+    bool operator==(const StructBytes& other) const noexcept;
     bool operator!=(const StructBytes& other) const noexcept { return !operator==(other); }
-    bool operator<(const StructBytes& other) const noexcept
-    {
-        return false;
-    }
+    bool operator<(const StructBytes& other) const noexcept;
     bool operator<=(const StructBytes& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const StructBytes& other) const noexcept { return !operator<=(other); }
     bool operator>=(const StructBytes& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const StructBytes& value);
 
-    void swap(StructBytes& other) noexcept
-    {
-        using std::swap;
-        swap(f1, other.f1);
-        swap(f2, other.f2);
-        swap(f3, other.f3);
-    }
-
-    friend void swap(StructBytes& value1, StructBytes& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(StructBytes& other) noexcept;
+    friend void swap(StructBytes& value1, StructBytes& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const StructBytes& value)
-{
-    stream << "StructBytes(";
-    stream << "f1="; stream << "bytes[" << value.f1.size() << "]";
-    stream << ",f2="; if (value.f2) stream << "bytes[" << value.f2->size() << "]"; else stream << "null";
-    stream << ",f3="; if (value.f3) stream << "bytes[" << value.f3->size() << "]"; else stream << "null";
-    stream << ")";
-    return stream;
-}
 
 } // namespace test
 
@@ -1875,7 +405,7 @@ struct hash<test::StructBytes>
     typedef test::StructBytes argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         return result;
@@ -1883,50 +413,6 @@ struct hash<test::StructBytes>
 };
 
 } // namespace std
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::StructBytes>
-{
-    static bool to_json(TWriter& writer, const ::test::StructBytes& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "f1") || !FBE::JSON::to_json(writer, value.f1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f2") || !FBE::JSON::to_json(writer, value.f2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f3") || !FBE::JSON::to_json(writer, value.f3, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::StructBytes>
-{
-    static bool from_json(const TJson& json, ::test::StructBytes& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.f1, "f1");
-        result &= FBE::JSON::from_json(json, value.f2, "f2");
-        result &= FBE::JSON::from_json(json, value.f3, "f3");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
 
 namespace test {
 
@@ -1945,30 +431,8 @@ struct StructArray
 
     size_t fbe_type() const noexcept { return 125; }
 
-    StructArray()
-        : f1()
-        , f2()
-        , f3()
-        , f4()
-        , f5()
-        , f6()
-        , f7()
-        , f8()
-        , f9()
-        , f10()
-    {}
-    StructArray(const std::array<uint8_t, 2>& arg_f1, const std::array<std::optional<uint8_t>, 2>& arg_f2, const std::array<FBE::buffer_t, 2>& arg_f3, const std::array<std::optional<FBE::buffer_t>, 2>& arg_f4, const std::array<::test::EnumSimple, 2>& arg_f5, const std::array<std::optional<::test::EnumSimple>, 2>& arg_f6, const std::array<::test::FlagsSimple, 2>& arg_f7, const std::array<std::optional<::test::FlagsSimple>, 2>& arg_f8, const std::array<::test::StructSimple, 2>& arg_f9, const std::array<std::optional<::test::StructSimple>, 2>& arg_f10)
-        : f1(arg_f1)
-        , f2(arg_f2)
-        , f3(arg_f3)
-        , f4(arg_f4)
-        , f5(arg_f5)
-        , f6(arg_f6)
-        , f7(arg_f7)
-        , f8(arg_f8)
-        , f9(arg_f9)
-        , f10(arg_f10)
-    {}
+    StructArray();
+    StructArray(const std::array<uint8_t, 2>& arg_f1, const std::array<std::optional<uint8_t>, 2>& arg_f2, const std::array<FBE::buffer_t, 2>& arg_f3, const std::array<std::optional<FBE::buffer_t>, 2>& arg_f4, const std::array<::test::EnumSimple, 2>& arg_f5, const std::array<std::optional<::test::EnumSimple>, 2>& arg_f6, const std::array<::test::FlagsSimple, 2>& arg_f7, const std::array<std::optional<::test::FlagsSimple>, 2>& arg_f8, const std::array<::test::StructSimple, 2>& arg_f9, const std::array<std::optional<::test::StructSimple>, 2>& arg_f10);
     StructArray(const StructArray& other) = default;
     StructArray(StructArray&& other) = default;
     ~StructArray() = default;
@@ -1976,159 +440,21 @@ struct StructArray
     StructArray& operator=(const StructArray& other) = default;
     StructArray& operator=(StructArray&& other) = default;
 
-    bool operator==(const StructArray& other) const noexcept
-    {
-        return (
-            true
-            );
-    }
+    bool operator==(const StructArray& other) const noexcept;
     bool operator!=(const StructArray& other) const noexcept { return !operator==(other); }
-    bool operator<(const StructArray& other) const noexcept
-    {
-        return false;
-    }
+    bool operator<(const StructArray& other) const noexcept;
     bool operator<=(const StructArray& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const StructArray& other) const noexcept { return !operator<=(other); }
     bool operator>=(const StructArray& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const StructArray& value);
 
-    void swap(StructArray& other) noexcept
-    {
-        using std::swap;
-        swap(f1, other.f1);
-        swap(f2, other.f2);
-        swap(f3, other.f3);
-        swap(f4, other.f4);
-        swap(f5, other.f5);
-        swap(f6, other.f6);
-        swap(f7, other.f7);
-        swap(f8, other.f8);
-        swap(f9, other.f9);
-        swap(f10, other.f10);
-    }
-
-    friend void swap(StructArray& value1, StructArray& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(StructArray& other) noexcept;
+    friend void swap(StructArray& value1, StructArray& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const StructArray& value)
-{
-    stream << "StructArray(";
-    {
-        bool first = true;
-        stream << "f1=[2][";
-        for (size_t i = 0; i < 2; ++i)
-        {
-            stream << std::string(first ? "" : ",") << (int)value.f1[i];
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f2=[2][";
-        for (size_t i = 0; i < 2; ++i)
-        {
-            if (value.f2[i]) stream << std::string(first ? "" : ",") << (int)*value.f2[i]; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f3=[2][";
-        for (size_t i = 0; i < 2; ++i)
-        {
-            stream << std::string(first ? "" : ",") << "bytes[" << value.f3[i].size() << "]";
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f4=[2][";
-        for (size_t i = 0; i < 2; ++i)
-        {
-            if (value.f4[i]) stream << std::string(first ? "" : ",") << "bytes[" << value.f4[i]->size() << "]"; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f5=[2][";
-        for (size_t i = 0; i < 2; ++i)
-        {
-            stream << std::string(first ? "" : ",") << value.f5[i];
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f6=[2][";
-        for (size_t i = 0; i < 2; ++i)
-        {
-            if (value.f6[i]) stream << std::string(first ? "" : ",") << *value.f6[i]; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f7=[2][";
-        for (size_t i = 0; i < 2; ++i)
-        {
-            stream << std::string(first ? "" : ",") << value.f7[i];
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f8=[2][";
-        for (size_t i = 0; i < 2; ++i)
-        {
-            if (value.f8[i]) stream << std::string(first ? "" : ",") << *value.f8[i]; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f9=[2][";
-        for (size_t i = 0; i < 2; ++i)
-        {
-            stream << std::string(first ? "" : ",") << value.f9[i];
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f10=[2][";
-        for (size_t i = 0; i < 2; ++i)
-        {
-            if (value.f10[i]) stream << std::string(first ? "" : ",") << *value.f10[i]; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << "]";
-    }
-    stream << ")";
-    return stream;
-}
 
 } // namespace test
 
@@ -2140,7 +466,7 @@ struct hash<test::StructArray>
     typedef test::StructArray argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         return result;
@@ -2148,71 +474,6 @@ struct hash<test::StructArray>
 };
 
 } // namespace std
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::StructArray>
-{
-    static bool to_json(TWriter& writer, const ::test::StructArray& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "f1") || !FBE::JSON::to_json(writer, value.f1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f2") || !FBE::JSON::to_json(writer, value.f2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f3") || !FBE::JSON::to_json(writer, value.f3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f4") || !FBE::JSON::to_json(writer, value.f4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f5") || !FBE::JSON::to_json(writer, value.f5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f6") || !FBE::JSON::to_json(writer, value.f6, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f7") || !FBE::JSON::to_json(writer, value.f7, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f8") || !FBE::JSON::to_json(writer, value.f8, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f9") || !FBE::JSON::to_json(writer, value.f9, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f10") || !FBE::JSON::to_json(writer, value.f10, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::StructArray>
-{
-    static bool from_json(const TJson& json, ::test::StructArray& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.f1, "f1");
-        result &= FBE::JSON::from_json(json, value.f2, "f2");
-        result &= FBE::JSON::from_json(json, value.f3, "f3");
-        result &= FBE::JSON::from_json(json, value.f4, "f4");
-        result &= FBE::JSON::from_json(json, value.f5, "f5");
-        result &= FBE::JSON::from_json(json, value.f6, "f6");
-        result &= FBE::JSON::from_json(json, value.f7, "f7");
-        result &= FBE::JSON::from_json(json, value.f8, "f8");
-        result &= FBE::JSON::from_json(json, value.f9, "f9");
-        result &= FBE::JSON::from_json(json, value.f10, "f10");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
 
 namespace test {
 
@@ -2231,30 +492,8 @@ struct StructVector
 
     size_t fbe_type() const noexcept { return 130; }
 
-    StructVector()
-        : f1()
-        , f2()
-        , f3()
-        , f4()
-        , f5()
-        , f6()
-        , f7()
-        , f8()
-        , f9()
-        , f10()
-    {}
-    StructVector(const std::vector<uint8_t>& arg_f1, const std::vector<std::optional<uint8_t>>& arg_f2, const std::vector<FBE::buffer_t>& arg_f3, const std::vector<std::optional<FBE::buffer_t>>& arg_f4, const std::vector<::test::EnumSimple>& arg_f5, const std::vector<std::optional<::test::EnumSimple>>& arg_f6, const std::vector<::test::FlagsSimple>& arg_f7, const std::vector<std::optional<::test::FlagsSimple>>& arg_f8, const std::vector<::test::StructSimple>& arg_f9, const std::vector<std::optional<::test::StructSimple>>& arg_f10)
-        : f1(arg_f1)
-        , f2(arg_f2)
-        , f3(arg_f3)
-        , f4(arg_f4)
-        , f5(arg_f5)
-        , f6(arg_f6)
-        , f7(arg_f7)
-        , f8(arg_f8)
-        , f9(arg_f9)
-        , f10(arg_f10)
-    {}
+    StructVector();
+    StructVector(const std::vector<uint8_t>& arg_f1, const std::vector<std::optional<uint8_t>>& arg_f2, const std::vector<FBE::buffer_t>& arg_f3, const std::vector<std::optional<FBE::buffer_t>>& arg_f4, const std::vector<::test::EnumSimple>& arg_f5, const std::vector<std::optional<::test::EnumSimple>>& arg_f6, const std::vector<::test::FlagsSimple>& arg_f7, const std::vector<std::optional<::test::FlagsSimple>>& arg_f8, const std::vector<::test::StructSimple>& arg_f9, const std::vector<std::optional<::test::StructSimple>>& arg_f10);
     StructVector(const StructVector& other) = default;
     StructVector(StructVector&& other) = default;
     ~StructVector() = default;
@@ -2262,159 +501,21 @@ struct StructVector
     StructVector& operator=(const StructVector& other) = default;
     StructVector& operator=(StructVector&& other) = default;
 
-    bool operator==(const StructVector& other) const noexcept
-    {
-        return (
-            true
-            );
-    }
+    bool operator==(const StructVector& other) const noexcept;
     bool operator!=(const StructVector& other) const noexcept { return !operator==(other); }
-    bool operator<(const StructVector& other) const noexcept
-    {
-        return false;
-    }
+    bool operator<(const StructVector& other) const noexcept;
     bool operator<=(const StructVector& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const StructVector& other) const noexcept { return !operator<=(other); }
     bool operator>=(const StructVector& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const StructVector& value);
 
-    void swap(StructVector& other) noexcept
-    {
-        using std::swap;
-        swap(f1, other.f1);
-        swap(f2, other.f2);
-        swap(f3, other.f3);
-        swap(f4, other.f4);
-        swap(f5, other.f5);
-        swap(f6, other.f6);
-        swap(f7, other.f7);
-        swap(f8, other.f8);
-        swap(f9, other.f9);
-        swap(f10, other.f10);
-    }
-
-    friend void swap(StructVector& value1, StructVector& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(StructVector& other) noexcept;
+    friend void swap(StructVector& value1, StructVector& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const StructVector& value)
-{
-    stream << "StructVector(";
-    {
-        bool first = true;
-        stream << "f1=[" << value.f1.size() << "][";
-        for (const auto& it : value.f1)
-        {
-            stream << std::string(first ? "" : ",") << (int)it;
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f2=[" << value.f2.size() << "][";
-        for (const auto& it : value.f2)
-        {
-            if (it) stream << std::string(first ? "" : ",") << (int)*it; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f3=[" << value.f3.size() << "][";
-        for (const auto& it : value.f3)
-        {
-            stream << std::string(first ? "" : ",") << "bytes[" << it.size() << "]";
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f4=[" << value.f4.size() << "][";
-        for (const auto& it : value.f4)
-        {
-            if (it) stream << std::string(first ? "" : ",") << "bytes[" << it->size() << "]"; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f5=[" << value.f5.size() << "][";
-        for (const auto& it : value.f5)
-        {
-            stream << std::string(first ? "" : ",") << it;
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f6=[" << value.f6.size() << "][";
-        for (const auto& it : value.f6)
-        {
-            if (it) stream << std::string(first ? "" : ",") << *it; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f7=[" << value.f7.size() << "][";
-        for (const auto& it : value.f7)
-        {
-            stream << std::string(first ? "" : ",") << it;
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f8=[" << value.f8.size() << "][";
-        for (const auto& it : value.f8)
-        {
-            if (it) stream << std::string(first ? "" : ",") << *it; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f9=[" << value.f9.size() << "][";
-        for (const auto& it : value.f9)
-        {
-            stream << std::string(first ? "" : ",") << it;
-            first = false;
-        }
-        stream << "]";
-    }
-    {
-        bool first = true;
-        stream << ",f10=[" << value.f10.size() << "][";
-        for (const auto& it : value.f10)
-        {
-            if (it) stream << std::string(first ? "" : ",") << *it; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << "]";
-    }
-    stream << ")";
-    return stream;
-}
 
 } // namespace test
 
@@ -2426,7 +527,7 @@ struct hash<test::StructVector>
     typedef test::StructVector argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         return result;
@@ -2434,71 +535,6 @@ struct hash<test::StructVector>
 };
 
 } // namespace std
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::StructVector>
-{
-    static bool to_json(TWriter& writer, const ::test::StructVector& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "f1") || !FBE::JSON::to_json(writer, value.f1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f2") || !FBE::JSON::to_json(writer, value.f2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f3") || !FBE::JSON::to_json(writer, value.f3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f4") || !FBE::JSON::to_json(writer, value.f4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f5") || !FBE::JSON::to_json(writer, value.f5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f6") || !FBE::JSON::to_json(writer, value.f6, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f7") || !FBE::JSON::to_json(writer, value.f7, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f8") || !FBE::JSON::to_json(writer, value.f8, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f9") || !FBE::JSON::to_json(writer, value.f9, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f10") || !FBE::JSON::to_json(writer, value.f10, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::StructVector>
-{
-    static bool from_json(const TJson& json, ::test::StructVector& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.f1, "f1");
-        result &= FBE::JSON::from_json(json, value.f2, "f2");
-        result &= FBE::JSON::from_json(json, value.f3, "f3");
-        result &= FBE::JSON::from_json(json, value.f4, "f4");
-        result &= FBE::JSON::from_json(json, value.f5, "f5");
-        result &= FBE::JSON::from_json(json, value.f6, "f6");
-        result &= FBE::JSON::from_json(json, value.f7, "f7");
-        result &= FBE::JSON::from_json(json, value.f8, "f8");
-        result &= FBE::JSON::from_json(json, value.f9, "f9");
-        result &= FBE::JSON::from_json(json, value.f10, "f10");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
 
 namespace test {
 
@@ -2517,30 +553,8 @@ struct StructList
 
     size_t fbe_type() const noexcept { return 131; }
 
-    StructList()
-        : f1()
-        , f2()
-        , f3()
-        , f4()
-        , f5()
-        , f6()
-        , f7()
-        , f8()
-        , f9()
-        , f10()
-    {}
-    StructList(const std::list<uint8_t>& arg_f1, const std::list<std::optional<uint8_t>>& arg_f2, const std::list<FBE::buffer_t>& arg_f3, const std::list<std::optional<FBE::buffer_t>>& arg_f4, const std::list<::test::EnumSimple>& arg_f5, const std::list<std::optional<::test::EnumSimple>>& arg_f6, const std::list<::test::FlagsSimple>& arg_f7, const std::list<std::optional<::test::FlagsSimple>>& arg_f8, const std::list<::test::StructSimple>& arg_f9, const std::list<std::optional<::test::StructSimple>>& arg_f10)
-        : f1(arg_f1)
-        , f2(arg_f2)
-        , f3(arg_f3)
-        , f4(arg_f4)
-        , f5(arg_f5)
-        , f6(arg_f6)
-        , f7(arg_f7)
-        , f8(arg_f8)
-        , f9(arg_f9)
-        , f10(arg_f10)
-    {}
+    StructList();
+    StructList(const std::list<uint8_t>& arg_f1, const std::list<std::optional<uint8_t>>& arg_f2, const std::list<FBE::buffer_t>& arg_f3, const std::list<std::optional<FBE::buffer_t>>& arg_f4, const std::list<::test::EnumSimple>& arg_f5, const std::list<std::optional<::test::EnumSimple>>& arg_f6, const std::list<::test::FlagsSimple>& arg_f7, const std::list<std::optional<::test::FlagsSimple>>& arg_f8, const std::list<::test::StructSimple>& arg_f9, const std::list<std::optional<::test::StructSimple>>& arg_f10);
     StructList(const StructList& other) = default;
     StructList(StructList&& other) = default;
     ~StructList() = default;
@@ -2548,159 +562,21 @@ struct StructList
     StructList& operator=(const StructList& other) = default;
     StructList& operator=(StructList&& other) = default;
 
-    bool operator==(const StructList& other) const noexcept
-    {
-        return (
-            true
-            );
-    }
+    bool operator==(const StructList& other) const noexcept;
     bool operator!=(const StructList& other) const noexcept { return !operator==(other); }
-    bool operator<(const StructList& other) const noexcept
-    {
-        return false;
-    }
+    bool operator<(const StructList& other) const noexcept;
     bool operator<=(const StructList& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const StructList& other) const noexcept { return !operator<=(other); }
     bool operator>=(const StructList& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const StructList& value);
 
-    void swap(StructList& other) noexcept
-    {
-        using std::swap;
-        swap(f1, other.f1);
-        swap(f2, other.f2);
-        swap(f3, other.f3);
-        swap(f4, other.f4);
-        swap(f5, other.f5);
-        swap(f6, other.f6);
-        swap(f7, other.f7);
-        swap(f8, other.f8);
-        swap(f9, other.f9);
-        swap(f10, other.f10);
-    }
-
-    friend void swap(StructList& value1, StructList& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(StructList& other) noexcept;
+    friend void swap(StructList& value1, StructList& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const StructList& value)
-{
-    stream << "StructList(";
-    {
-        bool first = true;
-        stream << "f1=[" << value.f1.size()<< "]<";
-        for (const auto& it : value.f1)
-        {
-            stream << std::string(first ? "" : ",") << (int)it;
-            first = false;
-        }
-        stream << ">";
-    }
-    {
-        bool first = true;
-        stream << ",f2=[" << value.f2.size()<< "]<";
-        for (const auto& it : value.f2)
-        {
-            if (it) stream << std::string(first ? "" : ",") << (int)*it; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << ">";
-    }
-    {
-        bool first = true;
-        stream << ",f3=[" << value.f3.size()<< "]<";
-        for (const auto& it : value.f3)
-        {
-            stream << std::string(first ? "" : ",") << "bytes[" << it.size() << "]";
-            first = false;
-        }
-        stream << ">";
-    }
-    {
-        bool first = true;
-        stream << ",f4=[" << value.f4.size()<< "]<";
-        for (const auto& it : value.f4)
-        {
-            if (it) stream << std::string(first ? "" : ",") << "bytes[" << it->size() << "]"; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << ">";
-    }
-    {
-        bool first = true;
-        stream << ",f5=[" << value.f5.size()<< "]<";
-        for (const auto& it : value.f5)
-        {
-            stream << std::string(first ? "" : ",") << it;
-            first = false;
-        }
-        stream << ">";
-    }
-    {
-        bool first = true;
-        stream << ",f6=[" << value.f6.size()<< "]<";
-        for (const auto& it : value.f6)
-        {
-            if (it) stream << std::string(first ? "" : ",") << *it; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << ">";
-    }
-    {
-        bool first = true;
-        stream << ",f7=[" << value.f7.size()<< "]<";
-        for (const auto& it : value.f7)
-        {
-            stream << std::string(first ? "" : ",") << it;
-            first = false;
-        }
-        stream << ">";
-    }
-    {
-        bool first = true;
-        stream << ",f8=[" << value.f8.size()<< "]<";
-        for (const auto& it : value.f8)
-        {
-            if (it) stream << std::string(first ? "" : ",") << *it; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << ">";
-    }
-    {
-        bool first = true;
-        stream << ",f9=[" << value.f9.size()<< "]<";
-        for (const auto& it : value.f9)
-        {
-            stream << std::string(first ? "" : ",") << it;
-            first = false;
-        }
-        stream << ">";
-    }
-    {
-        bool first = true;
-        stream << ",f10=[" << value.f10.size()<< "]<";
-        for (const auto& it : value.f10)
-        {
-            if (it) stream << std::string(first ? "" : ",") << *it; else stream << std::string(first ? "" : ",") << "null";
-            first = false;
-        }
-        stream << ">";
-    }
-    stream << ")";
-    return stream;
-}
 
 } // namespace test
 
@@ -2712,7 +588,7 @@ struct hash<test::StructList>
     typedef test::StructList argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         return result;
@@ -2720,71 +596,6 @@ struct hash<test::StructList>
 };
 
 } // namespace std
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::StructList>
-{
-    static bool to_json(TWriter& writer, const ::test::StructList& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "f1") || !FBE::JSON::to_json(writer, value.f1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f2") || !FBE::JSON::to_json(writer, value.f2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f3") || !FBE::JSON::to_json(writer, value.f3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f4") || !FBE::JSON::to_json(writer, value.f4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f5") || !FBE::JSON::to_json(writer, value.f5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f6") || !FBE::JSON::to_json(writer, value.f6, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f7") || !FBE::JSON::to_json(writer, value.f7, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f8") || !FBE::JSON::to_json(writer, value.f8, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f9") || !FBE::JSON::to_json(writer, value.f9, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f10") || !FBE::JSON::to_json(writer, value.f10, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::StructList>
-{
-    static bool from_json(const TJson& json, ::test::StructList& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.f1, "f1");
-        result &= FBE::JSON::from_json(json, value.f2, "f2");
-        result &= FBE::JSON::from_json(json, value.f3, "f3");
-        result &= FBE::JSON::from_json(json, value.f4, "f4");
-        result &= FBE::JSON::from_json(json, value.f5, "f5");
-        result &= FBE::JSON::from_json(json, value.f6, "f6");
-        result &= FBE::JSON::from_json(json, value.f7, "f7");
-        result &= FBE::JSON::from_json(json, value.f8, "f8");
-        result &= FBE::JSON::from_json(json, value.f9, "f9");
-        result &= FBE::JSON::from_json(json, value.f10, "f10");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
 
 namespace test {
 
@@ -2797,18 +608,8 @@ struct StructSet
 
     size_t fbe_type() const noexcept { return 132; }
 
-    StructSet()
-        : f1()
-        , f2()
-        , f3()
-        , f4()
-    {}
-    StructSet(const std::set<uint8_t>& arg_f1, const std::set<::test::EnumSimple>& arg_f2, const std::set<::test::FlagsSimple>& arg_f3, const std::set<::test::StructSimple>& arg_f4)
-        : f1(arg_f1)
-        , f2(arg_f2)
-        , f3(arg_f3)
-        , f4(arg_f4)
-    {}
+    StructSet();
+    StructSet(const std::set<uint8_t>& arg_f1, const std::set<::test::EnumSimple>& arg_f2, const std::set<::test::FlagsSimple>& arg_f3, const std::set<::test::StructSimple>& arg_f4);
     StructSet(const StructSet& other) = default;
     StructSet(StructSet&& other) = default;
     ~StructSet() = default;
@@ -2816,93 +617,21 @@ struct StructSet
     StructSet& operator=(const StructSet& other) = default;
     StructSet& operator=(StructSet&& other) = default;
 
-    bool operator==(const StructSet& other) const noexcept
-    {
-        return (
-            true
-            );
-    }
+    bool operator==(const StructSet& other) const noexcept;
     bool operator!=(const StructSet& other) const noexcept { return !operator==(other); }
-    bool operator<(const StructSet& other) const noexcept
-    {
-        return false;
-    }
+    bool operator<(const StructSet& other) const noexcept;
     bool operator<=(const StructSet& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const StructSet& other) const noexcept { return !operator<=(other); }
     bool operator>=(const StructSet& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const StructSet& value);
 
-    void swap(StructSet& other) noexcept
-    {
-        using std::swap;
-        swap(f1, other.f1);
-        swap(f2, other.f2);
-        swap(f3, other.f3);
-        swap(f4, other.f4);
-    }
-
-    friend void swap(StructSet& value1, StructSet& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(StructSet& other) noexcept;
+    friend void swap(StructSet& value1, StructSet& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const StructSet& value)
-{
-    stream << "StructSet(";
-    {
-        bool first = true;
-        stream << "f1=[" << value.f1.size()<< "]{";
-        for (const auto& it : value.f1)
-        {
-            stream << std::string(first ? "" : ",") << (int)it;
-            first = false;
-        }
-        stream << "}";
-    }
-    {
-        bool first = true;
-        stream << ",f2=[" << value.f2.size()<< "]{";
-        for (const auto& it : value.f2)
-        {
-            stream << std::string(first ? "" : ",") << it;
-            first = false;
-        }
-        stream << "}";
-    }
-    {
-        bool first = true;
-        stream << ",f3=[" << value.f3.size()<< "]{";
-        for (const auto& it : value.f3)
-        {
-            stream << std::string(first ? "" : ",") << it;
-            first = false;
-        }
-        stream << "}";
-    }
-    {
-        bool first = true;
-        stream << ",f4=[" << value.f4.size()<< "]{";
-        for (const auto& it : value.f4)
-        {
-            stream << std::string(first ? "" : ",") << it;
-            first = false;
-        }
-        stream << "}";
-    }
-    stream << ")";
-    return stream;
-}
 
 } // namespace test
 
@@ -2914,7 +643,7 @@ struct hash<test::StructSet>
     typedef test::StructSet argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         return result;
@@ -2922,53 +651,6 @@ struct hash<test::StructSet>
 };
 
 } // namespace std
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::StructSet>
-{
-    static bool to_json(TWriter& writer, const ::test::StructSet& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "f1") || !FBE::JSON::to_json(writer, value.f1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f2") || !FBE::JSON::to_json(writer, value.f2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f3") || !FBE::JSON::to_json(writer, value.f3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f4") || !FBE::JSON::to_json(writer, value.f4, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::StructSet>
-{
-    static bool from_json(const TJson& json, ::test::StructSet& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.f1, "f1");
-        result &= FBE::JSON::from_json(json, value.f2, "f2");
-        result &= FBE::JSON::from_json(json, value.f3, "f3");
-        result &= FBE::JSON::from_json(json, value.f4, "f4");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
 
 namespace test {
 
@@ -2987,30 +669,8 @@ struct StructMap
 
     size_t fbe_type() const noexcept { return 140; }
 
-    StructMap()
-        : f1()
-        , f2()
-        , f3()
-        , f4()
-        , f5()
-        , f6()
-        , f7()
-        , f8()
-        , f9()
-        , f10()
-    {}
-    StructMap(const std::map<int32_t, uint8_t>& arg_f1, const std::map<int32_t, std::optional<uint8_t>>& arg_f2, const std::map<int32_t, FBE::buffer_t>& arg_f3, const std::map<int32_t, std::optional<FBE::buffer_t>>& arg_f4, const std::map<int32_t, ::test::EnumSimple>& arg_f5, const std::map<int32_t, std::optional<::test::EnumSimple>>& arg_f6, const std::map<int32_t, ::test::FlagsSimple>& arg_f7, const std::map<int32_t, std::optional<::test::FlagsSimple>>& arg_f8, const std::map<int32_t, ::test::StructSimple>& arg_f9, const std::map<int32_t, std::optional<::test::StructSimple>>& arg_f10)
-        : f1(arg_f1)
-        , f2(arg_f2)
-        , f3(arg_f3)
-        , f4(arg_f4)
-        , f5(arg_f5)
-        , f6(arg_f6)
-        , f7(arg_f7)
-        , f8(arg_f8)
-        , f9(arg_f9)
-        , f10(arg_f10)
-    {}
+    StructMap();
+    StructMap(const std::map<int32_t, uint8_t>& arg_f1, const std::map<int32_t, std::optional<uint8_t>>& arg_f2, const std::map<int32_t, FBE::buffer_t>& arg_f3, const std::map<int32_t, std::optional<FBE::buffer_t>>& arg_f4, const std::map<int32_t, ::test::EnumSimple>& arg_f5, const std::map<int32_t, std::optional<::test::EnumSimple>>& arg_f6, const std::map<int32_t, ::test::FlagsSimple>& arg_f7, const std::map<int32_t, std::optional<::test::FlagsSimple>>& arg_f8, const std::map<int32_t, ::test::StructSimple>& arg_f9, const std::map<int32_t, std::optional<::test::StructSimple>>& arg_f10);
     StructMap(const StructMap& other) = default;
     StructMap(StructMap&& other) = default;
     ~StructMap() = default;
@@ -3018,179 +678,21 @@ struct StructMap
     StructMap& operator=(const StructMap& other) = default;
     StructMap& operator=(StructMap&& other) = default;
 
-    bool operator==(const StructMap& other) const noexcept
-    {
-        return (
-            true
-            );
-    }
+    bool operator==(const StructMap& other) const noexcept;
     bool operator!=(const StructMap& other) const noexcept { return !operator==(other); }
-    bool operator<(const StructMap& other) const noexcept
-    {
-        return false;
-    }
+    bool operator<(const StructMap& other) const noexcept;
     bool operator<=(const StructMap& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const StructMap& other) const noexcept { return !operator<=(other); }
     bool operator>=(const StructMap& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const StructMap& value);
 
-    void swap(StructMap& other) noexcept
-    {
-        using std::swap;
-        swap(f1, other.f1);
-        swap(f2, other.f2);
-        swap(f3, other.f3);
-        swap(f4, other.f4);
-        swap(f5, other.f5);
-        swap(f6, other.f6);
-        swap(f7, other.f7);
-        swap(f8, other.f8);
-        swap(f9, other.f9);
-        swap(f10, other.f10);
-    }
-
-    friend void swap(StructMap& value1, StructMap& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(StructMap& other) noexcept;
+    friend void swap(StructMap& value1, StructMap& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const StructMap& value)
-{
-    stream << "StructMap(";
-    {
-        bool first = true;
-        stream << "f1=[" << value.f1.size()<< "]<{";
-        for (const auto& it : value.f1)
-        {
-            stream << std::string(first ? "" : ",") << it.first;
-            stream << "->";
-            stream << (int)it.second;
-            first = false;
-        }
-        stream << "}>";
-    }
-    {
-        bool first = true;
-        stream << ",f2=[" << value.f2.size()<< "]<{";
-        for (const auto& it : value.f2)
-        {
-            stream << std::string(first ? "" : ",") << it.first;
-            stream << "->";
-            if (it.second) stream << (int)*it.second; else stream << "null";
-            first = false;
-        }
-        stream << "}>";
-    }
-    {
-        bool first = true;
-        stream << ",f3=[" << value.f3.size()<< "]<{";
-        for (const auto& it : value.f3)
-        {
-            stream << std::string(first ? "" : ",") << it.first;
-            stream << "->";
-            stream << "bytes[" << it.second.size() << "]";
-            first = false;
-        }
-        stream << "}>";
-    }
-    {
-        bool first = true;
-        stream << ",f4=[" << value.f4.size()<< "]<{";
-        for (const auto& it : value.f4)
-        {
-            stream << std::string(first ? "" : ",") << it.first;
-            stream << "->";
-            if (it.second) stream << "bytes[" << it.second->size() << "]"; else stream << "null";
-            first = false;
-        }
-        stream << "}>";
-    }
-    {
-        bool first = true;
-        stream << ",f5=[" << value.f5.size()<< "]<{";
-        for (const auto& it : value.f5)
-        {
-            stream << std::string(first ? "" : ",") << it.first;
-            stream << "->";
-            stream << it.second;
-            first = false;
-        }
-        stream << "}>";
-    }
-    {
-        bool first = true;
-        stream << ",f6=[" << value.f6.size()<< "]<{";
-        for (const auto& it : value.f6)
-        {
-            stream << std::string(first ? "" : ",") << it.first;
-            stream << "->";
-            if (it.second) stream << *it.second; else stream << "null";
-            first = false;
-        }
-        stream << "}>";
-    }
-    {
-        bool first = true;
-        stream << ",f7=[" << value.f7.size()<< "]<{";
-        for (const auto& it : value.f7)
-        {
-            stream << std::string(first ? "" : ",") << it.first;
-            stream << "->";
-            stream << it.second;
-            first = false;
-        }
-        stream << "}>";
-    }
-    {
-        bool first = true;
-        stream << ",f8=[" << value.f8.size()<< "]<{";
-        for (const auto& it : value.f8)
-        {
-            stream << std::string(first ? "" : ",") << it.first;
-            stream << "->";
-            if (it.second) stream << *it.second; else stream << "null";
-            first = false;
-        }
-        stream << "}>";
-    }
-    {
-        bool first = true;
-        stream << ",f9=[" << value.f9.size()<< "]<{";
-        for (const auto& it : value.f9)
-        {
-            stream << std::string(first ? "" : ",") << it.first;
-            stream << "->";
-            stream << it.second;
-            first = false;
-        }
-        stream << "}>";
-    }
-    {
-        bool first = true;
-        stream << ",f10=[" << value.f10.size()<< "]<{";
-        for (const auto& it : value.f10)
-        {
-            stream << std::string(first ? "" : ",") << it.first;
-            stream << "->";
-            if (it.second) stream << *it.second; else stream << "null";
-            first = false;
-        }
-        stream << "}>";
-    }
-    stream << ")";
-    return stream;
-}
 
 } // namespace test
 
@@ -3202,7 +704,7 @@ struct hash<test::StructMap>
     typedef test::StructMap argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         return result;
@@ -3210,71 +712,6 @@ struct hash<test::StructMap>
 };
 
 } // namespace std
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::StructMap>
-{
-    static bool to_json(TWriter& writer, const ::test::StructMap& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "f1") || !FBE::JSON::to_json(writer, value.f1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f2") || !FBE::JSON::to_json(writer, value.f2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f3") || !FBE::JSON::to_json(writer, value.f3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f4") || !FBE::JSON::to_json(writer, value.f4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f5") || !FBE::JSON::to_json(writer, value.f5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f6") || !FBE::JSON::to_json(writer, value.f6, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f7") || !FBE::JSON::to_json(writer, value.f7, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f8") || !FBE::JSON::to_json(writer, value.f8, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f9") || !FBE::JSON::to_json(writer, value.f9, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f10") || !FBE::JSON::to_json(writer, value.f10, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::StructMap>
-{
-    static bool from_json(const TJson& json, ::test::StructMap& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.f1, "f1");
-        result &= FBE::JSON::from_json(json, value.f2, "f2");
-        result &= FBE::JSON::from_json(json, value.f3, "f3");
-        result &= FBE::JSON::from_json(json, value.f4, "f4");
-        result &= FBE::JSON::from_json(json, value.f5, "f5");
-        result &= FBE::JSON::from_json(json, value.f6, "f6");
-        result &= FBE::JSON::from_json(json, value.f7, "f7");
-        result &= FBE::JSON::from_json(json, value.f8, "f8");
-        result &= FBE::JSON::from_json(json, value.f9, "f9");
-        result &= FBE::JSON::from_json(json, value.f10, "f10");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
 
 namespace test {
 
@@ -3293,30 +730,8 @@ struct StructHash
 
     size_t fbe_type() const noexcept { return 141; }
 
-    StructHash()
-        : f1()
-        , f2()
-        , f3()
-        , f4()
-        , f5()
-        , f6()
-        , f7()
-        , f8()
-        , f9()
-        , f10()
-    {}
-    StructHash(const std::unordered_map<std::string, uint8_t>& arg_f1, const std::unordered_map<std::string, std::optional<uint8_t>>& arg_f2, const std::unordered_map<std::string, FBE::buffer_t>& arg_f3, const std::unordered_map<std::string, std::optional<FBE::buffer_t>>& arg_f4, const std::unordered_map<std::string, ::test::EnumSimple>& arg_f5, const std::unordered_map<std::string, std::optional<::test::EnumSimple>>& arg_f6, const std::unordered_map<std::string, ::test::FlagsSimple>& arg_f7, const std::unordered_map<std::string, std::optional<::test::FlagsSimple>>& arg_f8, const std::unordered_map<std::string, ::test::StructSimple>& arg_f9, const std::unordered_map<std::string, std::optional<::test::StructSimple>>& arg_f10)
-        : f1(arg_f1)
-        , f2(arg_f2)
-        , f3(arg_f3)
-        , f4(arg_f4)
-        , f5(arg_f5)
-        , f6(arg_f6)
-        , f7(arg_f7)
-        , f8(arg_f8)
-        , f9(arg_f9)
-        , f10(arg_f10)
-    {}
+    StructHash();
+    StructHash(const std::unordered_map<std::string, uint8_t>& arg_f1, const std::unordered_map<std::string, std::optional<uint8_t>>& arg_f2, const std::unordered_map<std::string, FBE::buffer_t>& arg_f3, const std::unordered_map<std::string, std::optional<FBE::buffer_t>>& arg_f4, const std::unordered_map<std::string, ::test::EnumSimple>& arg_f5, const std::unordered_map<std::string, std::optional<::test::EnumSimple>>& arg_f6, const std::unordered_map<std::string, ::test::FlagsSimple>& arg_f7, const std::unordered_map<std::string, std::optional<::test::FlagsSimple>>& arg_f8, const std::unordered_map<std::string, ::test::StructSimple>& arg_f9, const std::unordered_map<std::string, std::optional<::test::StructSimple>>& arg_f10);
     StructHash(const StructHash& other) = default;
     StructHash(StructHash&& other) = default;
     ~StructHash() = default;
@@ -3324,179 +739,21 @@ struct StructHash
     StructHash& operator=(const StructHash& other) = default;
     StructHash& operator=(StructHash&& other) = default;
 
-    bool operator==(const StructHash& other) const noexcept
-    {
-        return (
-            true
-            );
-    }
+    bool operator==(const StructHash& other) const noexcept;
     bool operator!=(const StructHash& other) const noexcept { return !operator==(other); }
-    bool operator<(const StructHash& other) const noexcept
-    {
-        return false;
-    }
+    bool operator<(const StructHash& other) const noexcept;
     bool operator<=(const StructHash& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const StructHash& other) const noexcept { return !operator<=(other); }
     bool operator>=(const StructHash& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const StructHash& value);
 
-    void swap(StructHash& other) noexcept
-    {
-        using std::swap;
-        swap(f1, other.f1);
-        swap(f2, other.f2);
-        swap(f3, other.f3);
-        swap(f4, other.f4);
-        swap(f5, other.f5);
-        swap(f6, other.f6);
-        swap(f7, other.f7);
-        swap(f8, other.f8);
-        swap(f9, other.f9);
-        swap(f10, other.f10);
-    }
-
-    friend void swap(StructHash& value1, StructHash& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(StructHash& other) noexcept;
+    friend void swap(StructHash& value1, StructHash& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const StructHash& value)
-{
-    stream << "StructHash(";
-    {
-        bool first = true;
-        stream << "f1=[" << value.f1.size()<< "][{";
-        for (const auto& it : value.f1)
-        {
-            stream << std::string(first ? "" : ",") << "\"" << it.first << "\"";
-            stream << "->";
-            stream << (int)it.second;
-            first = false;
-        }
-        stream << "}]";
-    }
-    {
-        bool first = true;
-        stream << ",f2=[" << value.f2.size()<< "][{";
-        for (const auto& it : value.f2)
-        {
-            stream << std::string(first ? "" : ",") << "\"" << it.first << "\"";
-            stream << "->";
-            if (it.second) stream << (int)*it.second; else stream << "null";
-            first = false;
-        }
-        stream << "}]";
-    }
-    {
-        bool first = true;
-        stream << ",f3=[" << value.f3.size()<< "][{";
-        for (const auto& it : value.f3)
-        {
-            stream << std::string(first ? "" : ",") << "\"" << it.first << "\"";
-            stream << "->";
-            stream << "bytes[" << it.second.size() << "]";
-            first = false;
-        }
-        stream << "}]";
-    }
-    {
-        bool first = true;
-        stream << ",f4=[" << value.f4.size()<< "][{";
-        for (const auto& it : value.f4)
-        {
-            stream << std::string(first ? "" : ",") << "\"" << it.first << "\"";
-            stream << "->";
-            if (it.second) stream << "bytes[" << it.second->size() << "]"; else stream << "null";
-            first = false;
-        }
-        stream << "}]";
-    }
-    {
-        bool first = true;
-        stream << ",f5=[" << value.f5.size()<< "][{";
-        for (const auto& it : value.f5)
-        {
-            stream << std::string(first ? "" : ",") << "\"" << it.first << "\"";
-            stream << "->";
-            stream << it.second;
-            first = false;
-        }
-        stream << "}]";
-    }
-    {
-        bool first = true;
-        stream << ",f6=[" << value.f6.size()<< "][{";
-        for (const auto& it : value.f6)
-        {
-            stream << std::string(first ? "" : ",") << "\"" << it.first << "\"";
-            stream << "->";
-            if (it.second) stream << *it.second; else stream << "null";
-            first = false;
-        }
-        stream << "}]";
-    }
-    {
-        bool first = true;
-        stream << ",f7=[" << value.f7.size()<< "][{";
-        for (const auto& it : value.f7)
-        {
-            stream << std::string(first ? "" : ",") << "\"" << it.first << "\"";
-            stream << "->";
-            stream << it.second;
-            first = false;
-        }
-        stream << "}]";
-    }
-    {
-        bool first = true;
-        stream << ",f8=[" << value.f8.size()<< "][{";
-        for (const auto& it : value.f8)
-        {
-            stream << std::string(first ? "" : ",") << "\"" << it.first << "\"";
-            stream << "->";
-            if (it.second) stream << *it.second; else stream << "null";
-            first = false;
-        }
-        stream << "}]";
-    }
-    {
-        bool first = true;
-        stream << ",f9=[" << value.f9.size()<< "][{";
-        for (const auto& it : value.f9)
-        {
-            stream << std::string(first ? "" : ",") << "\"" << it.first << "\"";
-            stream << "->";
-            stream << it.second;
-            first = false;
-        }
-        stream << "}]";
-    }
-    {
-        bool first = true;
-        stream << ",f10=[" << value.f10.size()<< "][{";
-        for (const auto& it : value.f10)
-        {
-            stream << std::string(first ? "" : ",") << "\"" << it.first << "\"";
-            stream << "->";
-            if (it.second) stream << *it.second; else stream << "null";
-            first = false;
-        }
-        stream << "}]";
-    }
-    stream << ")";
-    return stream;
-}
 
 } // namespace test
 
@@ -3508,7 +765,7 @@ struct hash<test::StructHash>
     typedef test::StructHash argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         return result;
@@ -3516,71 +773,6 @@ struct hash<test::StructHash>
 };
 
 } // namespace std
-
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::StructHash>
-{
-    static bool to_json(TWriter& writer, const ::test::StructHash& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "f1") || !FBE::JSON::to_json(writer, value.f1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f2") || !FBE::JSON::to_json(writer, value.f2, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f3") || !FBE::JSON::to_json(writer, value.f3, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f4") || !FBE::JSON::to_json(writer, value.f4, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f5") || !FBE::JSON::to_json(writer, value.f5, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f6") || !FBE::JSON::to_json(writer, value.f6, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f7") || !FBE::JSON::to_json(writer, value.f7, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f8") || !FBE::JSON::to_json(writer, value.f8, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f9") || !FBE::JSON::to_json(writer, value.f9, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f10") || !FBE::JSON::to_json(writer, value.f10, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::StructHash>
-{
-    static bool from_json(const TJson& json, ::test::StructHash& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.f1, "f1");
-        result &= FBE::JSON::from_json(json, value.f2, "f2");
-        result &= FBE::JSON::from_json(json, value.f3, "f3");
-        result &= FBE::JSON::from_json(json, value.f4, "f4");
-        result &= FBE::JSON::from_json(json, value.f5, "f5");
-        result &= FBE::JSON::from_json(json, value.f6, "f6");
-        result &= FBE::JSON::from_json(json, value.f7, "f7");
-        result &= FBE::JSON::from_json(json, value.f8, "f8");
-        result &= FBE::JSON::from_json(json, value.f9, "f9");
-        result &= FBE::JSON::from_json(json, value.f10, "f10");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
 
 namespace test {
 
@@ -3591,14 +783,8 @@ struct StructHashEx
 
     size_t fbe_type() const noexcept { return 142; }
 
-    StructHashEx()
-        : f1()
-        , f2()
-    {}
-    StructHashEx(const std::unordered_map<::test::StructSimple, ::test::StructNested>& arg_f1, const std::unordered_map<::test::StructSimple, std::optional<::test::StructNested>>& arg_f2)
-        : f1(arg_f1)
-        , f2(arg_f2)
-    {}
+    StructHashEx();
+    StructHashEx(const std::unordered_map<::test::StructSimple, ::test::StructNested>& arg_f1, const std::unordered_map<::test::StructSimple, std::optional<::test::StructNested>>& arg_f2);
     StructHashEx(const StructHashEx& other) = default;
     StructHashEx(StructHashEx&& other) = default;
     ~StructHashEx() = default;
@@ -3606,75 +792,21 @@ struct StructHashEx
     StructHashEx& operator=(const StructHashEx& other) = default;
     StructHashEx& operator=(StructHashEx&& other) = default;
 
-    bool operator==(const StructHashEx& other) const noexcept
-    {
-        return (
-            true
-            );
-    }
+    bool operator==(const StructHashEx& other) const noexcept;
     bool operator!=(const StructHashEx& other) const noexcept { return !operator==(other); }
-    bool operator<(const StructHashEx& other) const noexcept
-    {
-        return false;
-    }
+    bool operator<(const StructHashEx& other) const noexcept;
     bool operator<=(const StructHashEx& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const StructHashEx& other) const noexcept { return !operator<=(other); }
     bool operator>=(const StructHashEx& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const StructHashEx& value);
 
-    void swap(StructHashEx& other) noexcept
-    {
-        using std::swap;
-        swap(f1, other.f1);
-        swap(f2, other.f2);
-    }
-
-    friend void swap(StructHashEx& value1, StructHashEx& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(StructHashEx& other) noexcept;
+    friend void swap(StructHashEx& value1, StructHashEx& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const StructHashEx& value)
-{
-    stream << "StructHashEx(";
-    {
-        bool first = true;
-        stream << "f1=[" << value.f1.size()<< "][{";
-        for (const auto& it : value.f1)
-        {
-            stream << std::string(first ? "" : ",") << it.first;
-            stream << "->";
-            stream << it.second;
-            first = false;
-        }
-        stream << "}]";
-    }
-    {
-        bool first = true;
-        stream << ",f2=[" << value.f2.size()<< "][{";
-        for (const auto& it : value.f2)
-        {
-            stream << std::string(first ? "" : ",") << it.first;
-            stream << "->";
-            if (it.second) stream << *it.second; else stream << "null";
-            first = false;
-        }
-        stream << "}]";
-    }
-    stream << ")";
-    return stream;
-}
 
 } // namespace test
 
@@ -3686,7 +818,7 @@ struct hash<test::StructHashEx>
     typedef test::StructHashEx argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         return result;
@@ -3695,56 +827,13 @@ struct hash<test::StructHashEx>
 
 } // namespace std
 
-namespace FBE {
-
-namespace JSON {
-
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::StructHashEx>
-{
-    static bool to_json(TWriter& writer, const ::test::StructHashEx& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (!FBE::JSON::to_json_key(writer, "f1") || !FBE::JSON::to_json(writer, value.f1, true))
-            return false;
-        if (!FBE::JSON::to_json_key(writer, "f2") || !FBE::JSON::to_json(writer, value.f2, true))
-            return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::StructHashEx>
-{
-    static bool from_json(const TJson& json, ::test::StructHashEx& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        result &= FBE::JSON::from_json(json, value.f1, "f1");
-        result &= FBE::JSON::from_json(json, value.f2, "f2");
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
-
 namespace test {
 
 struct StructEmpty
 {
-
     size_t fbe_type() const noexcept { return 143; }
 
-    StructEmpty()
-    {}
+    StructEmpty();
     StructEmpty(const StructEmpty& other) = default;
     StructEmpty(StructEmpty&& other) = default;
     ~StructEmpty() = default;
@@ -3752,49 +841,21 @@ struct StructEmpty
     StructEmpty& operator=(const StructEmpty& other) = default;
     StructEmpty& operator=(StructEmpty&& other) = default;
 
-    bool operator==(const StructEmpty& other) const noexcept
-    {
-        return (
-            true
-            );
-    }
+    bool operator==(const StructEmpty& other) const noexcept;
     bool operator!=(const StructEmpty& other) const noexcept { return !operator==(other); }
-    bool operator<(const StructEmpty& other) const noexcept
-    {
-        return false;
-    }
+    bool operator<(const StructEmpty& other) const noexcept;
     bool operator<=(const StructEmpty& other) const noexcept { return operator<(other) || operator==(other); }
     bool operator>(const StructEmpty& other) const noexcept { return !operator<=(other); }
     bool operator>=(const StructEmpty& other) const noexcept { return !operator<(other); }
 
-    std::string string() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
+    std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
     template <class TOutputStream>
     friend TOutputStream& operator<<(TOutputStream& stream, const StructEmpty& value);
 
-    void swap(StructEmpty& other) noexcept
-    {
-        using std::swap;
-    }
-
-    friend void swap(StructEmpty& value1, StructEmpty& value2) noexcept
-    {
-        value1.swap(value2);
-    }
+    void swap(StructEmpty& other) noexcept;
+    friend void swap(StructEmpty& value1, StructEmpty& value2) noexcept { value1.swap(value2); }
 };
-
-template <class TOutputStream>
-inline TOutputStream& operator<<(TOutputStream& stream, const StructEmpty& value)
-{
-    stream << "StructEmpty(";
-    stream << ")";
-    return stream;
-}
 
 } // namespace test
 
@@ -3806,7 +867,7 @@ struct hash<test::StructEmpty>
     typedef test::StructEmpty argument_type;
     typedef size_t result_type;
 
-    result_type operator () (const argument_type& value) const
+    result_type operator() (const argument_type& value) const
     {
         result_type result = 17;
         return result;
@@ -3815,37 +876,8 @@ struct hash<test::StructEmpty>
 
 } // namespace std
 
-namespace FBE {
+namespace test {
 
-namespace JSON {
+} // namespace test
 
-template <class TWriter>
-struct ValueWriter<TWriter, ::test::StructEmpty>
-{
-    static bool to_json(TWriter& writer, const ::test::StructEmpty& value, bool scope = true)
-    {
-        if (scope)
-            if (!writer.StartObject())
-                return false;
-        if (scope)
-            if (!writer.EndObject())
-                return false;
-        return true;
-    }
-};
-
-template <class TJson>
-struct ValueReader<TJson, ::test::StructEmpty>
-{
-    static bool from_json(const TJson& json, ::test::StructEmpty& value, const char* key = nullptr)
-    {
-        if (key != nullptr)
-            return FBE::JSON::from_json_child(json, value, key);
-        bool result = true;
-        return result;
-    }
-};
-
-} // namespace JSON
-
-} // namespace FBE
+#include "test.inl"

@@ -75,7 +75,7 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
     WriteBegin();
 
     // Generate common header
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
     GenerateImports();
 
     // Generate module begin

@@ -177,7 +177,7 @@ void GeneratorSwift::GenerateFBEUUIDGenerator(const std::string& domain, const s
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -243,7 +243,7 @@ void GeneratorSwift::GenerateFBEBuffer(const std::string& domain, const std::str
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(public class Buffer {
@@ -727,7 +727,7 @@ void GeneratorSwift::GenerateFBEModel(const std::string& domain, const std::stri
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -788,7 +788,7 @@ void GeneratorSwift::GenerateFBEFieldModel(const std::string& domain, const std:
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -902,7 +902,7 @@ void GeneratorSwift::GenerateFBEFieldModel(const std::string& domain, const std:
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -972,7 +972,7 @@ void GeneratorSwift::GenerateFBEFieldModelDecimal(const std::string& domain, con
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -1094,7 +1094,7 @@ void GeneratorSwift::GenerateFBEFieldModelTimestamp(const std::string& domain, c
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -1154,7 +1154,7 @@ void GeneratorSwift::GenerateFBEFieldModelBytes(const std::string& domain, const
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -1276,7 +1276,7 @@ void GeneratorSwift::GenerateFBEFieldModelString(const std::string& domain, cons
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(// Fast Binary Encoding string field model
 public class FieldModelString: FieldModel {
@@ -2226,7 +2226,7 @@ void GeneratorSwift::GenerateFBESize(const std::string& domain, const std::strin
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 // Fast Binary Encoding size
@@ -2261,7 +2261,7 @@ void GeneratorSwift::GenerateFBEFinalModel(const std::string& domain, const std:
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -2367,7 +2367,7 @@ void GeneratorSwift::GenerateFBEFinalModel(const std::string& domain, const std:
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -2448,7 +2448,7 @@ void GeneratorSwift::GenerateFBEFinalModelDecimal(const std::string& domain, con
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -2584,7 +2584,7 @@ void GeneratorSwift::GenerateFBEFinalModelTimestamp(const std::string& domain, c
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -2662,7 +2662,7 @@ void GeneratorSwift::GenerateFBEFinalModelBytes(const std::string& domain, const
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -2753,7 +2753,7 @@ void GeneratorSwift::GenerateFBEFinalModelString(const std::string& domain, cons
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 // Fast Binary Encoding string final model
@@ -3489,7 +3489,7 @@ void GeneratorSwift::GenerateFBESender(const std::string& domain, const std::str
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -3559,7 +3559,7 @@ void GeneratorSwift::GenerateFBEReceiver(const std::string& domain, const std::s
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -3839,7 +3839,7 @@ void GeneratorSwift::GenerateFBEReceiverListener(const std::string& domain, cons
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(
@@ -3895,7 +3895,7 @@ void GeneratorSwift::GenerateFBEClient(const std::string& domain, const std::str
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("Fbe");
+    GenerateHeader("FBE");
     GenerateImports("", "Foundation");
 
     std::string code = R"CODE(

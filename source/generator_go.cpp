@@ -107,7 +107,7 @@ void GeneratorGo::GenerateFBEConstants(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -145,7 +145,7 @@ void GeneratorGo::GenerateFBEJson(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -178,7 +178,7 @@ void GeneratorGo::GenerateFBEOptional(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -296,7 +296,7 @@ void GeneratorGo::GenerateFBETypes(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -464,7 +464,7 @@ void GeneratorGo::GenerateFBEBuffer(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -922,7 +922,7 @@ void GeneratorGo::GenerateFBEFieldModel(const std::string& package, const std::s
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -1011,7 +1011,7 @@ void GeneratorGo::GenerateFBEFieldModelDecimal(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -1160,7 +1160,7 @@ void GeneratorGo::GenerateFBEFieldModelTimestamp(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -1245,7 +1245,7 @@ void GeneratorGo::GenerateFBEFieldModelUUID(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -1330,7 +1330,7 @@ void GeneratorGo::GenerateFBEFieldModelBytes(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -1469,7 +1469,7 @@ void GeneratorGo::GenerateFBEFieldModelString(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -1609,7 +1609,7 @@ void GeneratorGo::GenerateFBEFieldModelOptional(const std::shared_ptr<Package>& 
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     // Generate package
     WriteLine();
@@ -1812,7 +1812,7 @@ void GeneratorGo::GenerateFBEFieldModelArray(const std::shared_ptr<Package>& p, 
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     // Generate package
     WriteLine();
@@ -1971,7 +1971,7 @@ void GeneratorGo::GenerateFBEFieldModelVector(const std::shared_ptr<Package>& p,
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     // Generate package
     WriteLine();
@@ -2202,7 +2202,7 @@ void GeneratorGo::GenerateFBEFieldModelSet(const std::shared_ptr<Package>& p, co
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     // Generate package
     WriteLine();
@@ -2432,7 +2432,7 @@ void GeneratorGo::GenerateFBEFieldModelMap(const std::shared_ptr<Package>& p, co
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     // Generate package
     WriteLine();
@@ -2808,7 +2808,7 @@ void GeneratorGo::GenerateFBEFinalModel(const std::string& package, const std::s
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -2899,7 +2899,7 @@ void GeneratorGo::GenerateFBEFinalModelDecimal(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -3050,7 +3050,7 @@ void GeneratorGo::GenerateFBEFinalModelTimestamp(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -3137,7 +3137,7 @@ void GeneratorGo::GenerateFBEFinalModelUUID(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -3224,7 +3224,7 @@ void GeneratorGo::GenerateFBEFinalModelBytes(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -3324,7 +3324,7 @@ void GeneratorGo::GenerateFBEFinalModelString(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -3425,7 +3425,7 @@ void GeneratorGo::GenerateFBEFinalModelOptional(const std::shared_ptr<Package>& 
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     // Generate package
     WriteLine();
@@ -3577,7 +3577,7 @@ void GeneratorGo::GenerateFBEFinalModelArray(const std::shared_ptr<Package>& p, 
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     // Generate package
     WriteLine();
@@ -3732,7 +3732,7 @@ void GeneratorGo::GenerateFBEFinalModelVector(const std::shared_ptr<Package>& p,
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     // Generate package
     WriteLine();
@@ -3878,7 +3878,7 @@ void GeneratorGo::GenerateFBEFinalModelSet(const std::shared_ptr<Package>& p, co
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     // Generate package
     WriteLine();
@@ -4023,7 +4023,7 @@ void GeneratorGo::GenerateFBEFinalModelMap(const std::shared_ptr<Package>& p, co
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     // Generate package
     WriteLine();
@@ -4327,7 +4327,7 @@ void GeneratorGo::GenerateFBESender(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
@@ -4450,7 +4450,7 @@ void GeneratorGo::GenerateFBEReceiver(const std::string& package)
     WriteBegin();
 
     // Generate headers
-    GenerateHeader("fbe");
+    GenerateHeader("FBE");
 
     std::string code = R"CODE(
 package fbe
