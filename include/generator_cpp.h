@@ -123,7 +123,8 @@ private:
     void GeneratePackageModels_Source(const std::shared_ptr<Package>& p);
     void GeneratePackageFinalModels_Header(const std::shared_ptr<Package>& p);
     void GeneratePackageFinalModels_Source(const std::shared_ptr<Package>& p);
-    void GeneratePackageProtocol(const std::shared_ptr<Package>& p);
+    void GeneratePackageProtocol_Header(const std::shared_ptr<Package>& p, bool final);
+    void GeneratePackageProtocol_Source(const std::shared_ptr<Package>& p, bool final);
     void GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e);
     void GenerateEnumOutputStream(const std::shared_ptr<EnumType>& e);
     void GenerateEnumLoggingStream(const std::shared_ptr<EnumType>& e);
@@ -151,10 +152,14 @@ private:
     void GenerateStructModelFinal_Header(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s);
     void GenerateStructModelFinal_Source(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s);
     void GenerateProtocolVersion(const std::shared_ptr<Package>& p);
-    void GenerateSender(const std::shared_ptr<Package>& p, bool final);
-    void GenerateReceiver(const std::shared_ptr<Package>& p, bool final);
-    void GenerateProxy(const std::shared_ptr<Package>& p, bool final);
-    void GenerateClient(const std::shared_ptr<Package>& p, bool final);
+    void GenerateSender_Header(const std::shared_ptr<Package>& p, bool final);
+    void GenerateSender_Source(const std::shared_ptr<Package>& p, bool final);
+    void GenerateReceiver_Header(const std::shared_ptr<Package>& p, bool final);
+    void GenerateReceiver_Source(const std::shared_ptr<Package>& p, bool final);
+    void GenerateProxy_Header(const std::shared_ptr<Package>& p, bool final);
+    void GenerateProxy_Source(const std::shared_ptr<Package>& p, bool final);
+    void GenerateClient_Header(const std::shared_ptr<Package>& p, bool final);
+    void GenerateClient_Source(const std::shared_ptr<Package>& p, bool final);
 
     bool IsKnownType(const std::string& type);
     bool IsPrimitiveType(const std::string& type, bool optional);

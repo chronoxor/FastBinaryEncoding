@@ -54,8 +54,17 @@ void GeneratorCpp::Generate(const std::shared_ptr<Package>& package)
         GeneratePackageFinalModels_Source(package);
     }
 
-    //if (Proto())
-    //    GeneratePackageProtocol(package);
+    // Generate package protocol files
+    if (Proto())
+    {
+        GeneratePackageProtocol_Header(package, false);
+        GeneratePackageProtocol_Source(package, false);
+        if (Final())
+        {
+            GeneratePackageProtocol_Header(package, true);
+            GeneratePackageProtocol_Source(package, true);
+        }
+    }
 }
 
 void GeneratorCpp::GenerateHeader(const std::string& source)
@@ -233,7 +242,7 @@ void GeneratorCpp::GenerateImportsProtocol(const std::shared_ptr<Package>& p, bo
 {
     // Generate common imports
     WriteLine();
-    WriteLineIndent("#include \"" + *p->name + "_models.h\"");
+    WriteLineIndent("#include \"" + *p->name + (final ? "_final" : "") + "_models.h\"");
 
     // Generate packages import
     if (p->import)
@@ -6982,7 +6991,7 @@ void GeneratorCpp::GeneratePackageFinalModels_Source(const std::shared_ptr<Packa
     Store(output);
 }
 
-void GeneratorCpp::GeneratePackageProtocol(const std::shared_ptr<Package>& p)
+void GeneratorCpp::GeneratePackageProtocol_Header(const std::shared_ptr<Package>& p, bool final)
 {
     CppCommon::Path output = _output;
 
@@ -6990,27 +6999,77 @@ void GeneratorCpp::GeneratePackageProtocol(const std::shared_ptr<Package>& p)
     CppCommon::Directory::CreateTree(output);
 
     // Generate the output file
-    output /= *p->name + "_protocol.h";
+    output /= *p->name + (final ? "_final" : "") + "_protocol.h";
     WriteBegin();
 
     // Generate package protocol header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImportsProtocol(p, false);
+    GenerateImports("fbe_protocol.h");
+    GenerateImportsProtocol(p, final);
+
+    // Generate namespace begin
+    WriteLine();
+    WriteLineIndent("namespace FBE {");
+    WriteLine();
+    WriteLineIndent("namespace " + *p->name + " {");
 
     // Generate protocol version
     GenerateProtocolVersion(p);
 
     // Generate sender & receiver
-    GenerateSender(p, false);
-    GenerateReceiver(p, false);
-    GenerateProxy(p, false);
-    GenerateClient(p, false);
-    if (Final())
-    {
-        GenerateSender(p, true);
-        GenerateReceiver(p, true);
-        GenerateClient(p, true);
-    }
+    GenerateSender_Header(p, final);
+    GenerateReceiver_Header(p, final);
+    if (!final)
+        GenerateProxy_Header(p, final);
+    GenerateClient_Header(p, final);
+
+    // Generate namespace end
+    WriteLine();
+    WriteLineIndent("} // namespace " + *p->name);
+    WriteLine();
+    WriteLineIndent("} // namespace FBE");
+
+    // Generate package footer
+    GenerateFooter();
+
+    // Store the output file
+    WriteEnd();
+    Store(output);
+}
+
+void GeneratorCpp::GeneratePackageProtocol_Source(const std::shared_ptr<Package>& p, bool final)
+{
+    CppCommon::Path output = _output;
+
+    // Create package path
+    CppCommon::Directory::CreateTree(output);
+
+    // Generate the output file
+    output /= *p->name + (final ? "_final" : "") + "_protocol.cpp";
+    WriteBegin();
+
+    // Generate package protocol source
+    GenerateSource(CppCommon::Path(_input).filename().string());
+    GenerateImports(*p->name + (final ? "_final" : "") + "_protocol.h");
+
+    // Generate namespace begin
+    WriteLine();
+    WriteLineIndent("namespace FBE {");
+    WriteLine();
+    WriteLineIndent("namespace " + *p->name + " {");
+
+    // Generate sender & receiver
+    GenerateSender_Source(p, final);
+    GenerateReceiver_Source(p, final);
+    if (!final)
+        GenerateProxy_Source(p, final);
+    GenerateClient_Source(p, final);
+
+    // Generate namespace end
+    WriteLine();
+    WriteLineIndent("} // namespace " + *p->name);
+    WriteLine();
+    WriteLineIndent("} // namespace FBE");
 
     // Generate package footer
     GenerateFooter();
@@ -9086,11 +9145,6 @@ void GeneratorCpp::GenerateStructModelFinal_Source(const std::shared_ptr<Package
 
 void GeneratorCpp::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
 {
-    // Generate namespace begin
-    WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
-
     // Generate protocol version struct
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *p->name + " protocol version");
@@ -9103,20 +9157,10 @@ void GeneratorCpp::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
     WriteLineIndent("static const int minor = " + std::to_string(p->version->minor) + ";");
     Indent(-1);
     WriteLineIndent("};");
-
-    // Generate namespace end
-    WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
 }
 
-void GeneratorCpp::GenerateSender(const std::shared_ptr<Package>& p, bool final)
+void GeneratorCpp::GenerateSender_Header(const std::shared_ptr<Package>& p, bool final)
 {
-    // Generate namespace begin
-    WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
-
     std::string sender = (final ? "FinalSender" : "Sender");
     std::string model = (final ? "FinalModel" : "Model");
 
@@ -9126,13 +9170,12 @@ void GeneratorCpp::GenerateSender(const std::shared_ptr<Package>& p, bool final)
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender");
     else
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender");
-    WriteLineIndent("template <class TBuffer>");
-    WriteLineIndent("class " + sender + " : public virtual FBE::Sender<TBuffer>");
+    WriteLineIndent("class " + sender + " : public virtual FBE::Sender");
     if (p->import)
     {
         Indent(1);
         for (const auto& import : p->import->imports)
-            WriteLineIndent(", public virtual " + *import + "::" + sender + "<TBuffer>");
+            WriteLineIndent(", public virtual " + *import + "::" + sender);
         Indent(-1);
     }
     WriteLineIndent("{");
@@ -9171,8 +9214,47 @@ void GeneratorCpp::GenerateSender(const std::shared_ptr<Package>& p, bool final)
         WriteLine();
         WriteLineIndent("// Imported senders");
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "::" + sender + "<TBuffer>& " + *import + "_sender() noexcept { return *this; }");
+            WriteLineIndent(*import + "::" + sender + "& " + *import + "_sender() noexcept { return *this; }");
     }
+
+    // Generate send() methods
+    if (p->body)
+    {
+        first = true;
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_name = "::" + *p->name + "::" + *s->name;
+                if (first)
+                    WriteLine();
+                WriteLineIndent("size_t send(const " + struct_name + "& value);");
+                first = false;
+            }
+        }
+    }
+
+    // Generate sender models accessors
+    if (p->body)
+    {
+        Indent(-1);
+        WriteLine();
+        WriteLineIndent("public:");
+        Indent(1);
+        WriteLineIndent("// Sender models accessors");
+        for (const auto& s : p->body->structs)
+            if (s->message)
+                WriteLineIndent("FBE::" + *p->name + "::" + *s->name + model + " " + *s->name + "Model;");
+    }
+
+    // Generate sender end
+    Indent(-1);
+    WriteLineIndent("};");
+}
+
+void GeneratorCpp::GenerateSender_Source(const std::shared_ptr<Package>& p, bool final)
+{
+    std::string sender = (final ? "FinalSender" : "Sender");
 
     // Generate send() methods
     if (p->body)
@@ -9183,7 +9265,7 @@ void GeneratorCpp::GenerateSender(const std::shared_ptr<Package>& p, bool final)
             {
                 std::string struct_name = "::" + *p->name + "::" + *s->name;
                 WriteLine();
-                WriteLineIndent("size_t send(const " + struct_name + "& value)");
+                WriteLineIndent("size_t " + sender + "::send(const " + struct_name + "& value)");
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("// Serialize the value into the FBE stream");
@@ -9207,37 +9289,10 @@ void GeneratorCpp::GenerateSender(const std::shared_ptr<Package>& p, bool final)
             }
         }
     }
-
-    // Generate sender models accessors
-    if (p->body)
-    {
-        Indent(-1);
-        WriteLine();
-        WriteLineIndent("public:");
-        Indent(1);
-        WriteLineIndent("// Sender models accessors");
-        for (const auto& s : p->body->structs)
-            if (s->message)
-                WriteLineIndent("FBE::" + *p->name + "::" + *s->name + model + "<TBuffer> " + *s->name + "Model;");
-    }
-
-    // Generate sender end
-    Indent(-1);
-    WriteLineIndent("};");
-
-    // Generate namespace end
-    WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
 }
 
-void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool final)
+void GeneratorCpp::GenerateReceiver_Header(const std::shared_ptr<Package>& p, bool final)
 {
-    // Generate namespace begin
-    WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
-
     std::string receiver = (final ? "FinalReceiver" : "Receiver");
     std::string model = (final ? "FinalModel" : "Model");
 
@@ -9247,13 +9302,12 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver");
     else
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver");
-    WriteLineIndent("template <class TBuffer>");
-    WriteLineIndent("class " + receiver + " : public virtual FBE::Receiver<TBuffer>");
+    WriteLineIndent("class " + receiver + " : public virtual FBE::Receiver");
     if (p->import)
     {
         Indent(1);
         for (const auto& import : p->import->imports)
-            WriteLineIndent(", public virtual " + *import + "::" + receiver + "<TBuffer>");
+            WriteLineIndent(", public virtual " + *import + "::" + receiver);
         Indent(-1);
     }
     WriteLineIndent("{");
@@ -9292,7 +9346,44 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
     // Generate receiver message handler
     WriteLine();
     WriteLineIndent("// Receive message handler");
-    WriteLineIndent("bool onReceive(size_t type, const void* data, size_t size) override");
+    WriteLineIndent("bool onReceive(size_t type, const void* data, size_t size) override;");
+
+    // Generate receiver models accessors
+    if (p->body)
+    {
+        Indent(-1);
+        WriteLine();
+        WriteLineIndent("private:");
+        Indent(1);
+        WriteLineIndent("// Receiver values accessors");
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_name = "::" + *p->name + "::" + *s->name;
+                WriteLineIndent(struct_name + " " + *s->name + "Value;");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("// Receiver models accessors");
+        for (const auto& s : p->body->structs)
+            if (s->message)
+                WriteLineIndent("FBE::" + *p->name + "::" + *s->name + model + " " + *s->name + "Model;");
+    }
+
+    // Generate receiver end
+    Indent(-1);
+    WriteLineIndent("};");
+}
+
+void GeneratorCpp::GenerateReceiver_Source(const std::shared_ptr<Package>& p, bool final)
+{
+    std::string receiver = (final ? "FinalReceiver" : "Receiver");
+    std::string model = (final ? "FinalModel" : "Model");
+
+    // Generate receiver message handler
+    WriteLine();
+    WriteLineIndent("bool " + receiver + "::onReceive(size_t type, const void* data, size_t size)");
     WriteLineIndent("{");
     Indent(1);
     if (p->body)
@@ -9305,7 +9396,7 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
             if (s->message)
             {
                 std::string struct_name = "::" + *p->name + "::" + *s->name;
-                WriteLineIndent("case FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer>::fbe_type():");
+                WriteLineIndent("case FBE::" + *p->name + "::" + *s->name + model + "::fbe_type():");
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("// Deserialize the value from the FBE stream");
@@ -9339,7 +9430,7 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if (" + *import + "::" + receiver + "<TBuffer>::onReceive(type, data, size))");
+            WriteLineIndent("if (" + *import + "::" + receiver + "::onReceive(type, data, size))");
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
@@ -9349,47 +9440,10 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
     WriteLineIndent("return false;");
     Indent(-1);
     WriteLineIndent("}");
-
-    // Generate receiver models accessors
-    if (p->body)
-    {
-        Indent(-1);
-        WriteLine();
-        WriteLineIndent("private:");
-        Indent(1);
-        WriteLineIndent("// Receiver values accessors");
-        for (const auto& s : p->body->structs)
-        {
-            if (s->message)
-            {
-                std::string struct_name = "::" + *p->name + "::" + *s->name;
-                WriteLineIndent(struct_name + " " + *s->name + "Value;");
-            }
-        }
-        WriteLine();
-        WriteLineIndent("// Receiver models accessors");
-        for (const auto& s : p->body->structs)
-            if (s->message)
-                WriteLineIndent("FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer> " + *s->name + "Model;");
-    }
-
-    // Generate receiver end
-    Indent(-1);
-    WriteLineIndent("};");
-
-    // Generate namespace end
-    WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
 }
 
-void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
+void GeneratorCpp::GenerateProxy_Header(const std::shared_ptr<Package>& p, bool final)
 {
-    // Generate namespace begin
-    WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
-
     std::string proxy = (final ? "FinalProxy" : "Proxy");
     std::string model = (final ? "FinalModel" : "Model");
 
@@ -9399,13 +9453,12 @@ void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " final proxy");
     else
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " proxy");
-    WriteLineIndent("template <class TBuffer>");
-    WriteLineIndent("class " + proxy + " : public virtual FBE::Receiver<TBuffer>");
+    WriteLineIndent("class " + proxy + " : public virtual FBE::Receiver");
     if (p->import)
     {
         Indent(1);
         for (const auto& import : p->import->imports)
-            WriteLineIndent(", public virtual " + *import + "::" + proxy + "<TBuffer>");
+            WriteLineIndent(", public virtual " + *import + "::" + proxy);
         Indent(-1);
     }
     WriteLineIndent("{");
@@ -9435,7 +9488,7 @@ void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
         {
             if (s->message)
             {
-                std::string struct_model = "FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer>";
+                std::string struct_model = "FBE::" + *p->name + "::" + *s->name + model;
                 WriteLineIndent("virtual void onProxy(" + struct_model + "& model, size_t type, const void* data, size_t size) {}");
             }
         }
@@ -9444,7 +9497,34 @@ void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
     // Generate proxy message handler
     WriteLine();
     WriteLineIndent("// Receive message handler");
-    WriteLineIndent("bool onReceive(size_t type, const void* data, size_t size) override");
+    WriteLineIndent("bool onReceive(size_t type, const void* data, size_t size) override;");
+
+    // Generate proxy models accessors
+    if (p->body)
+    {
+        Indent(-1);
+        WriteLine();
+        WriteLineIndent("private:");
+        Indent(1);
+        WriteLineIndent("// Proxy models accessors");
+        for (const auto& s : p->body->structs)
+            if (s->message)
+                WriteLineIndent("FBE::" + *p->name + "::" + *s->name + model + " " + *s->name + "Model;");
+    }
+
+    // Generate proxy end
+    Indent(-1);
+    WriteLineIndent("};");
+}
+
+void GeneratorCpp::GenerateProxy_Source(const std::shared_ptr<Package>& p, bool final)
+{
+    std::string proxy = (final ? "FinalProxy" : "Proxy");
+    std::string model = (final ? "FinalModel" : "Model");
+
+    // Generate proxy message handler
+    WriteLine();
+    WriteLineIndent("bool " + proxy + "::onReceive(size_t type, const void* data, size_t size)");
     WriteLineIndent("{");
     Indent(1);
     if (p->body)
@@ -9457,7 +9537,7 @@ void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
             if (s->message)
             {
                 std::string struct_name = "::" + *p->name + "::" + *s->name;
-                WriteLineIndent("case FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer>::fbe_type():");
+                WriteLineIndent("case FBE::" + *p->name + "::" + *s->name + model + "::fbe_type():");
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("// Attach the FBE stream to the proxy model");
@@ -9486,7 +9566,7 @@ void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if (" + *import + "::" + proxy + "<TBuffer>::onReceive(type, data, size))");
+            WriteLineIndent("if (" + *import + "::" + proxy + "::onReceive(type, data, size))");
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
@@ -9496,37 +9576,10 @@ void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
     WriteLineIndent("return false;");
     Indent(-1);
     WriteLineIndent("}");
-
-    // Generate proxy models accessors
-    if (p->body)
-    {
-        Indent(-1);
-        WriteLine();
-        WriteLineIndent("private:");
-        Indent(1);
-        WriteLineIndent("// Proxy models accessors");
-        for (const auto& s : p->body->structs)
-            if (s->message)
-                WriteLineIndent("FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer> " + *s->name + "Model;");
-    }
-
-    // Generate proxy end
-    Indent(-1);
-    WriteLineIndent("};");
-
-    // Generate namespace end
-    WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
 }
 
-void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
+void GeneratorCpp::GenerateClient_Header(const std::shared_ptr<Package>& p, bool final)
 {
-    // Generate namespace begin
-    WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
-
     std::string client = (final ? "FinalClient" : "Client");
     std::string sender = (final ? "FinalSender" : "Sender");
     std::string receiver = (final ? "FinalReceiver" : "Receiver");
@@ -9537,13 +9590,12 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " final client");
     else
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " client");
-    WriteLineIndent("template <class TBuffer>");
-    WriteLineIndent("class " + client + " : public virtual " + sender + "<TBuffer>, protected virtual " + receiver + "<TBuffer>");
+    WriteLineIndent("class " + client + " : public virtual " + sender + ", protected virtual " + receiver);
     if (p->import)
     {
         Indent(1);
         for (const auto& import : p->import->imports)
-            WriteLineIndent(", public virtual " + *import + "::" + client + "<TBuffer>");
+            WriteLineIndent(", public virtual " + *import + "::" + client);
         Indent(-1);
     }
     WriteLineIndent("{");
@@ -9552,7 +9604,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     {
         Indent(1);
         for (const auto& import : p->import->imports)
-            WriteLineIndent("typedef " + *import + "::" + client + "<TBuffer> " + *import + client + ";");
+            WriteLineIndent("typedef " + *import + "::" + client + " " + *import + client + ";");
         Indent(-1);
         WriteLine();
     }
@@ -9575,30 +9627,222 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         WriteLine();
         WriteLineIndent("// Imported clients");
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "::" + client + "<TBuffer>& " + *import + "_client() noexcept { return *this; }");
+            WriteLineIndent(*import + "::" + client + "& " + *import + "_client() noexcept { return *this; }");
     }
 
     // Generate client reset method
     WriteLine();
     WriteLineIndent("// Reset client buffers");
-    WriteLineIndent("void reset()");
-    WriteLineIndent("{");
-    Indent(1);
-    WriteLineIndent("std::scoped_lock locker(this->_lock);");
-    WriteLineIndent("reset_requests();");
-    Indent(-1);
-    WriteLineIndent("}");
+    WriteLineIndent("void reset() { std::scoped_lock locker(this->_lock); reset_requests(); }");
 
     // Generate watchdog method
     WriteLine();
     WriteLineIndent("// Watchdog for timeouts");
-    WriteLineIndent("void watchdog(uint64_t utc)");
-    WriteLineIndent("{");
-    Indent(1);
-    WriteLineIndent("std::scoped_lock locker(this->_lock);");
-    WriteLineIndent("watchdog_requests(utc);");
+    WriteLineIndent("void watchdog(uint64_t utc) { std::scoped_lock locker(this->_lock); watchdog_requests(utc); }");
+
+    // Collect responses & rejects collections
+    std::set<std::string> responses;
+    std::map<std::string, bool> rejects;
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message && s->request)
+            {
+                std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
+
+                if (!response_name.empty())
+                {
+                    // Update responses and rejects cache
+                    responses.insert(*s->response->response);
+                    if (s->rejects)
+                        for (const auto& reject : s->rejects->rejects)
+                            rejects[*reject.reject] = reject.global;
+                }
+            }
+        }
+    }
+
+    // Generate request() methods
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message && s->request)
+            {
+                std::string request_name = "::" + *p->name + "::" + *s->name;
+                std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
+                std::string response_field = (s->response) ? *s->response->response : "";
+                CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+                WriteLine();
+                if (response_name.empty())
+                    WriteLineIndent("std::future<void> request(const " + request_name + "& value, size_t timeout = 0);");
+                else
+                    WriteLineIndent("std::future<" + response_name + "> request(const " + request_name + "& value, size_t timeout = 0);");
+            }
+        }
+    }
+
+    // Generate client protected fields
     Indent(-1);
-    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("protected:");
+    Indent(1);
+    if (!p->import)
+    {
+        WriteLineIndent("std::mutex _lock;");
+        WriteLineIndent("uint64_t _timestamp{0};");
+        WriteLine();
+    }
+
+    // Generate response handlers
+    for (const auto& response : responses)
+    {
+        std::string response_name = ConvertTypeName(*p->name, response, false);
+        WriteLineIndent("virtual bool onReceiveResponse(const " + response_name + "& response);");
+    }
+    if (!responses.empty())
+        WriteLine();
+
+    // Generate remaining response handlers
+    if (p->body)
+    {
+        bool found = false;
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_response_field = *s->name;
+
+                if ((responses.find(*s->name) == responses.end()) && (cache.find(struct_response_name) == cache.end()))
+                {
+                    WriteLineIndent("virtual bool onReceiveResponse(const " + struct_response_name + "& response) { return false; }");
+                    cache.insert(struct_response_name);
+                    found = true;
+                }
+            }
+        }
+        if (found)
+            WriteLine();
+    }
+
+    // Generate reject handlers
+    for (const auto& reject : rejects)
+    {
+        std::string reject_name = ConvertTypeName(*p->name, reject.first, false);
+        WriteLineIndent("virtual bool onReceiveReject(const " + reject_name + "& reject);");
+    }
+    if (!rejects.empty())
+        WriteLine();
+
+    // Generate remaining reject handlers
+    if (p->body)
+    {
+        bool found = false;
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_reject_name = ConvertTypeName(*p->name, *s->name, false);
+                if ((rejects.find(*s->name) == rejects.end()) && (cache.find(struct_reject_name) == cache.end()))
+                {
+                    WriteLineIndent("virtual bool onReceiveReject(const " + struct_reject_name + "& reject) { return false; }");
+                    cache.insert(struct_reject_name);
+                    found = true;
+                }
+            }
+        }
+        if (found)
+            WriteLine();
+    }
+
+    // Generate notify handlers
+    if (p->body)
+    {
+        bool found = false;
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_notify_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_notify_field = *s->name;
+                if (cache.find(struct_notify_name) == cache.end())
+                {
+                    WriteLineIndent("virtual void onReceiveNotify(const " + struct_notify_name + "& notify) {}");
+                    cache.insert(struct_notify_name);
+                    found = true;
+                }
+            }
+        }
+        if (found)
+            WriteLine();
+    }
+
+    // Generate receive handlers
+    if (p->body)
+    {
+        bool found = false;
+        std::set<std::string> cache;
+        for (const auto& s : p->body->structs)
+        {
+            if (s->message)
+            {
+                std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_response_field = *s->name;
+
+                if (cache.find(struct_response_name) == cache.end())
+                {
+                    WriteLineIndent("virtual void onReceive(const " + struct_response_name + "& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }");
+                    cache.insert(struct_response_name);
+                    found = true;
+                }
+            }
+        }
+        if (found)
+            WriteLine();
+    }
+
+    // Generate reset requests method
+    WriteLineIndent("// Reset client requests");
+    WriteLineIndent("virtual void reset_requests();");
+
+    // Generate watchdog requests method
+    WriteLine();
+    WriteLineIndent("// Watchdog client requests for timeouts");
+    WriteLineIndent("virtual void watchdog_requests(uint64_t utc);");
+
+    // Generate client private fields
+    if (!responses.empty())
+    {
+        Indent(-1);
+        WriteLine();
+        WriteLineIndent("private:");
+        Indent(1);
+        for (const auto& response : responses)
+        {
+            std::string response_name = ConvertTypeName(*p->name, response, false);
+            std::string response_field = response;
+            CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+            WriteLineIndent("std::unordered_map<FBE::uuid_t, std::tuple<uint64_t, uint64_t, std::promise<" + response_name + ">>> _requests_by_id_" + response_field + ";");
+            WriteLineIndent("std::map<uint64_t, FBE::uuid_t> _requests_by_timestamp_" + response_field + ";");
+        }
+    }
+
+    // Generate client end
+    Indent(-1);
+    WriteLineIndent("};");
+}
+
+void GeneratorCpp::GenerateClient_Source(const std::shared_ptr<Package>& p, bool final)
+{
+    std::string client = (final ? "FinalClient" : "Client");
+    std::string sender = (final ? "FinalSender" : "Sender");
 
     // Collect responses & rejects collections
     std::set<std::string> responses;
@@ -9638,14 +9882,14 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 WriteLine();
                 if (response_name.empty())
                 {
-                    WriteLineIndent("std::future<void> request(const " + request_name + "& value, size_t timeout = 0)");
+                    WriteLineIndent("std::future<void> " + client + "::request(const " + request_name + "& value, size_t timeout)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("std::promise<void> promise;");
                     WriteLineIndent("std::future<void> future = promise.get_future();");
                     WriteLine();
                     WriteLineIndent("// Send the request message");
-                    WriteLineIndent("size_t serialized = Sender<TBuffer>::send(value);");
+                    WriteLineIndent("size_t serialized = Sender::send(value);");
                     WriteLineIndent("if (serialized > 0)");
                     Indent(1);
                     WriteLineIndent("promise.set_value();");
@@ -9661,7 +9905,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                 }
                 else
                 {
-                    WriteLineIndent("std::future<" + response_name + "> request(const " + request_name + "& value, size_t timeout = 0)");
+                    WriteLineIndent("std::future<" + response_name + "> " + client + "::request(const " + request_name + "& value, size_t timeout)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("std::scoped_lock locker(this->_lock);");
@@ -9672,7 +9916,7 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     WriteLineIndent("uint64_t current = utc();");
                     WriteLine();
                     WriteLineIndent("// Send the request message");
-                    WriteLineIndent("size_t serialized = Sender<TBuffer>::send(value);");
+                    WriteLineIndent("size_t serialized = Sender::send(value);");
                     WriteLineIndent("if (serialized > 0)");
                     WriteLineIndent("{");
                     Indent(1);
@@ -9700,25 +9944,14 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         }
     }
 
-    // Generate client protected fields
-    Indent(-1);
-    WriteLine();
-    WriteLineIndent("protected:");
-    Indent(1);
-    if (!p->import)
-    {
-        WriteLineIndent("std::mutex _lock;");
-        WriteLineIndent("uint64_t _timestamp{0};");
-        WriteLine();
-    }
-
     // Generate response handlers
     for (const auto& response : responses)
     {
         std::string response_name = ConvertTypeName(*p->name, response, false);
         std::string response_field = response;
 
-        WriteLineIndent("virtual bool onReceiveResponse(const " + response_name + "& response)");
+        WriteLine();
+        WriteLineIndent("bool " + client + "::onReceiveResponse(const " + response_name + "& response)");
         WriteLineIndent("{");
         Indent(1);
         if (p->body)
@@ -9758,31 +9991,6 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         WriteLineIndent("return false;");
         Indent(-1);
         WriteLineIndent("}");
-        WriteLine();
-    }
-
-    // Generate remaining response handlers
-    if (p->body)
-    {
-        bool found = false;
-        std::set<std::string> cache;
-        for (const auto& s : p->body->structs)
-        {
-            if (s->message)
-            {
-                std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
-                std::string struct_response_field = *s->name;
-
-                if ((responses.find(*s->name) == responses.end()) && (cache.find(struct_response_name) == cache.end()))
-                {
-                    WriteLineIndent("virtual bool onReceiveResponse(const " + struct_response_name + "& response) { return false; }");
-                    cache.insert(struct_response_name);
-                    found = true;
-                }
-            }
-        }
-        if (found)
-            WriteLine();
     }
 
     // Generate reject handlers
@@ -9793,7 +10001,8 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         bool global = reject.second;
         bool imported = CppCommon::StringUtils::ReplaceAll(reject_field, ".", "");
 
-        WriteLineIndent("virtual bool onReceiveReject(const " + reject_name + "& reject)");
+        WriteLine();
+        WriteLineIndent("bool " + client + "::onReceiveReject(const " + reject_name + "& reject)");
         WriteLineIndent("{");
         Indent(1);
         if (global)
@@ -9873,92 +10082,22 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
         WriteLineIndent("return false;");
         Indent(-1);
         WriteLineIndent("}");
-        WriteLine();
-    }
-
-    // Generate remaining reject handlers
-    if (p->body)
-    {
-        bool found = false;
-        std::set<std::string> cache;
-        for (const auto& s : p->body->structs)
-        {
-            if (s->message)
-            {
-                std::string struct_reject_name = ConvertTypeName(*p->name, *s->name, false);
-                if ((rejects.find(*s->name) == rejects.end()) && (cache.find(struct_reject_name) == cache.end()))
-                {
-                    WriteLineIndent("virtual bool onReceiveReject(const " + struct_reject_name + "& reject) { return false; }");
-                    cache.insert(struct_reject_name);
-                    found = true;
-                }
-            }
-        }
-        if (found)
-            WriteLine();
-    }
-
-    // Generate notify handlers
-    if (p->body)
-    {
-        bool found = false;
-        std::set<std::string> cache;
-        for (const auto& s : p->body->structs)
-        {
-            if (s->message)
-            {
-                std::string struct_notify_name = ConvertTypeName(*p->name, *s->name, false);
-                std::string struct_notify_field = *s->name;
-                if (cache.find(struct_notify_name) == cache.end())
-                {
-                    WriteLineIndent("virtual void onReceiveNotify(const " + struct_notify_name + "& notify) {}");
-                    cache.insert(struct_notify_name);
-                    found = true;
-                }
-            }
-        }
-        if (found)
-            WriteLine();
-    }
-
-    // Generate receive handlers
-    if (p->body)
-    {
-        bool found = false;
-        std::set<std::string> cache;
-        for (const auto& s : p->body->structs)
-        {
-            if (s->message)
-            {
-                std::string struct_response_name = ConvertTypeName(*p->name, *s->name, false);
-                std::string struct_response_field = *s->name;
-
-                if (cache.find(struct_response_name) == cache.end())
-                {
-                    WriteLineIndent("virtual void onReceive(const " + struct_response_name + "& value) override { if (!onReceiveResponse(value) && !onReceiveReject(value)) onReceiveNotify(value); }");
-                    cache.insert(struct_response_name);
-                    found = true;
-                }
-            }
-        }
-        if (found)
-            WriteLine();
     }
 
     // Generate reset requests method
-    WriteLineIndent("// Reset client requests");
-    WriteLineIndent("virtual void reset_requests()");
+    WriteLine();
+    WriteLineIndent("void " + client + "::reset_requests()");
     WriteLineIndent("{");
     Indent(1);
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "::" + client + "<TBuffer>::reset_requests();");
+            WriteLineIndent(*import + "::" + client + "::reset_requests();");
     }
     else
     {
-        WriteLineIndent("Sender<TBuffer>::reset();");
-        WriteLineIndent("Receiver<TBuffer>::reset();");
+        WriteLineIndent("Sender::reset();");
+        WriteLineIndent("Receiver::reset();");
     }
     for (const auto& response : responses)
     {
@@ -9979,14 +10118,13 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
 
     // Generate watchdog requests method
     WriteLine();
-    WriteLineIndent("// Watchdog client requests for timeouts");
-    WriteLineIndent("virtual void watchdog_requests(uint64_t utc)");
+    WriteLineIndent("void " + client + "::watchdog_requests(uint64_t utc)");
     WriteLineIndent("{");
     Indent(1);
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "::" + client + "<TBuffer>::watchdog_requests(utc);");
+            WriteLineIndent(*import + "::" + client + "::watchdog_requests(utc);");
         WriteLine();
     }
     for (const auto& response : responses)
@@ -10024,33 +10162,6 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
     }
     Indent(-1);
     WriteLineIndent("}");
-
-    // Generate client private fields
-    if (!responses.empty())
-    {
-        Indent(-1);
-        WriteLine();
-        WriteLineIndent("private:");
-        Indent(1);
-        for (const auto& response : responses)
-        {
-            std::string response_name = ConvertTypeName(*p->name, response, false);
-            std::string response_field = response;
-            CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
-
-            WriteLineIndent("std::unordered_map<FBE::uuid_t, std::tuple<uint64_t, uint64_t, std::promise<" + response_name + ">>> _requests_by_id_" + response_field + ";");
-            WriteLineIndent("std::map<uint64_t, FBE::uuid_t> _requests_by_timestamp_" + response_field + ";");
-        }
-    }
-
-    // Generate client end
-    Indent(-1);
-    WriteLineIndent("};");
-
-    // Generate namespace end
-    WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
 }
 
 bool GeneratorCpp::IsKnownType(const std::string& type)
