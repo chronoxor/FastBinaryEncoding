@@ -3,16 +3,6 @@
 // Source: proto.fbe
 // Version: 1.3.0.0
 
-#pragma once
-
-#if defined(__clang__)
-#pragma clang system_header
-#elif defined(__GNUC__)
-#pragma GCC system_header
-#elif defined(_MSC_VER)
-#pragma system_header
-#endif
-
 #include "proto.h"
 
 namespace proto {

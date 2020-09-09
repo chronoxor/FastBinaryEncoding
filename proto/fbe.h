@@ -612,4 +612,39 @@ private:
     size_t _offset;
 };
 
+// Fast Binary Encoding base model
+class Model
+{
+public:
+    Model() : Model(nullptr) {}
+    Model(const std::shared_ptr<FBEBuffer>& buffer) { _buffer = buffer ? buffer : std::make_shared<FBEBuffer>(); }
+    Model(const Model&) = default;
+    Model(Model&&) noexcept = default;
+    ~Model() = default;
+
+    Model& operator=(const Model&) = default;
+    Model& operator=(Model&&) noexcept = default;
+
+    // Get the model buffer
+    FBEBuffer& buffer() noexcept { return *_buffer; }
+    const FBEBuffer& buffer() const noexcept { return *_buffer; }
+
+    // Attach the model buffer
+    void attach(const void* data, size_t size, size_t offset = 0) { _buffer->attach(data, size, offset); }
+    void attach(const std::vector<uint8_t>& buffer, size_t offset = 0) { _buffer->attach(buffer, offset); }
+    void attach(const FBEBuffer& buffer, size_t offset = 0) { _buffer->attach(buffer.data(), buffer.size(), offset); }
+
+    // Model buffer operations
+    size_t allocate(size_t size) { return _buffer->allocate(size); }
+    void remove(size_t offset, size_t size) { _buffer->remove(offset, size); }
+    void reserve(size_t capacity) { _buffer->reserve(capacity); }
+    void resize(size_t size) { _buffer->resize(size); }
+    void reset() { _buffer->reset(); }
+    void shift(size_t offset) { _buffer->shift(offset); }
+    void unshift(size_t offset) { _buffer->unshift(offset); }
+
+private:
+    std::shared_ptr<FBEBuffer> _buffer;
+};
+
 } // namespace FBE
