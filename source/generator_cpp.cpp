@@ -1545,6 +1545,7 @@ private:
     FBEBuffer& _buffer;
     size_t _offset;
 
+    static uint64_t extract(double a) noexcept;
     static uint64_t uint32x32(uint32_t a, uint32_t b) noexcept;
     static void uint64x64(uint64_t a, uint64_t b, uint64_t& low64, uint32_t& high32) noexcept;
 };
@@ -1559,6 +1560,13 @@ private:
 void GeneratorCpp::GenerateFBEFieldModelDecimal_Source()
 {
     std::string code = R"CODE(
+uint64_t FieldModel<decimal_t>::extract(double a) noexcept
+{
+    uint64_t result;
+    std::memcpy(&result, &a, sizeof(double));
+    return result;
+}
+
 uint64_t FieldModel<decimal_t>::uint32x32(uint32_t a, uint32_t b) noexcept
 {
     return (uint64_t)a * (uint64_t)b;
@@ -1628,7 +1636,7 @@ void FieldModel<decimal_t>::set(decimal_t value) noexcept
 
     // Get exponent value
     double dValue = (double)value;
-    int32_t iExp = (int32_t)(((uint32_t)((*(uint64_t*)&dValue) >> 52) & 0x7FFu) - DBLBIAS);
+    int32_t iExp = (int32_t)(((uint32_t)(extract(dValue) >> 52) & 0x7FFu) - DBLBIAS);
     if ((iExp < -94) || (iExp > 96))
     {
         // Value too big for .NET Decimal (exponent is limited to [-94, 96])
@@ -3363,6 +3371,7 @@ private:
     FBEBuffer& _buffer;
     mutable size_t _offset;
 
+    static uint64_t extract(double a) noexcept;
     static uint64_t uint32x32(uint32_t a, uint32_t b) noexcept;
     static void uint64x64(uint64_t a, uint64_t b, uint64_t& low64, uint32_t& high32) noexcept;
 };
@@ -3377,6 +3386,13 @@ private:
 void GeneratorCpp::GenerateFBEFinalModelDecimal_Source()
 {
     std::string code = R"CODE(
+uint64_t FinalModel<decimal_t>::extract(double a) noexcept
+{
+    uint64_t result;
+    std::memcpy(&result, &a, sizeof(double));
+    return result;
+}
+
 uint64_t FinalModel<decimal_t>::uint32x32(uint32_t a, uint32_t b) noexcept
 {
     return (uint64_t)a * (uint64_t)b;
@@ -3452,7 +3468,7 @@ size_t FinalModel<decimal_t>::set(decimal_t value) noexcept
 
     // Get exponent value
     double dValue = (double)value;
-    int32_t iExp = (int32_t)(((uint32_t)((*(uint64_t*)&dValue) >> 52) & 0x7FFu) - DBLBIAS);
+    int32_t iExp = (int32_t)(((uint32_t)(extract(dValue) >> 52) & 0x7FFu) - DBLBIAS);
     if ((iExp < -94) || (iExp > 96))
     {
         // Value too big for .NET Decimal (exponent is limited to [-94, 96])
