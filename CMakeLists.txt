@@ -104,6 +104,14 @@ if(NOT FBEC_MODULE)
     list(APPEND PROTO_FILES ${FBE_OUTPUT_FILE})
   endforeach()
 
+  # Proto FBE sources
+  file(GLOB FBE_SOURCE_FILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/proto" "proto/*.cpp")
+  foreach(FBE_SOURCE_FILE ${FBE_SOURCE_FILES})
+    set(FBE_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/proto")
+    set(FBE_OUTPUT_FILE "${FBE_OUTPUT_DIR}/${FBE_SOURCE_FILE}")
+    list(APPEND PROTO_FILES ${FBE_OUTPUT_FILE})
+  endforeach()
+
   # Examples
   file(GLOB EXAMPLE_HEADER_FILES "examples/*.h")
   file(GLOB EXAMPLE_INLINE_FILES "examples/*.inl")
