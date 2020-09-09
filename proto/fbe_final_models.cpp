@@ -3,8 +3,6 @@
 // Source: FBE
 // Version: 1.4.0.0
 
-#include "fbe_final_models.h"
-
 #if defined(__GNUC__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-variable"
@@ -14,6 +12,8 @@
 #pragma warning(disable:4100) // C4100: 'identifier' : unreferenced formal parameter
 #pragma warning(disable:4702) // C4702: unreachable code
 #endif
+
+#include "fbe_final_models.h"
 
 namespace FBE {
 

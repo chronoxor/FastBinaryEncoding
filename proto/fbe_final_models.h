@@ -13,8 +13,6 @@
 #pragma system_header
 #endif
 
-#include "fbe.h"
-
 #if defined(__GNUC__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-variable"
@@ -24,6 +22,8 @@
 #pragma warning(disable:4100) // C4100: 'identifier' : unreferenced formal parameter
 #pragma warning(disable:4702) // C4702: unreachable code
 #endif
+
+#include "fbe.h"
 
 namespace FBE {
 

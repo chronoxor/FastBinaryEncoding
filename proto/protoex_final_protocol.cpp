@@ -3,8 +3,6 @@
 // Source: protoex.fbe
 // Version: 1.4.0.0
 
-#include "protoex_final_protocol.h"
-
 #if defined(__GNUC__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-variable"
@@ -14,6 +12,8 @@
 #pragma warning(disable:4100) // C4100: 'identifier' : unreferenced formal parameter
 #pragma warning(disable:4702) // C4702: unreachable code
 #endif
+
+#include "protoex_final_protocol.h"
 
 namespace FBE {
 

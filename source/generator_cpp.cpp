@@ -6274,10 +6274,12 @@ void GeneratorCpp::GenerateFBE_Header(const CppCommon::Path& path)
 
     // Generate common header
     GenerateHeader("FBE");
-    GenerateImports();
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports();
 
     // Generate namespace begin
     WriteLine();
@@ -6318,10 +6320,12 @@ void GeneratorCpp::GenerateFBE_Source(const CppCommon::Path& path)
 
     // Generate common source
     GenerateSource("FBE");
-    GenerateImports("fbe.h");
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports("fbe.h");
 
     // Generate namespace begin
     WriteLine();
@@ -6359,10 +6363,12 @@ void GeneratorCpp::GenerateFBEModels_Header(const CppCommon::Path& path)
 
     // Generate field models header
     GenerateHeader("FBE");
-    GenerateImports("fbe.h");
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports("fbe.h");
 
     // Generate namespace begin
     WriteLine();
@@ -6443,10 +6449,12 @@ void GeneratorCpp::GenerateFBEModels_Source(const CppCommon::Path& path)
 
     // Generate field models source
     GenerateSource("FBE");
-    GenerateImports("fbe_models.h");
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports("fbe_models.h");
 
     // Generate namespace begin
     WriteLine();
@@ -6484,10 +6492,12 @@ void GeneratorCpp::GenerateFBEFinalModels_Header(const CppCommon::Path& path)
 
     // Generate final models header
     GenerateHeader("FBE");
-    GenerateImports("fbe.h");
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports("fbe.h");
 
     // Generate namespace begin
     WriteLine();
@@ -6568,10 +6578,12 @@ void GeneratorCpp::GenerateFBEFinalModels_Source(const CppCommon::Path& path)
 
     // Generate final models source
     GenerateSource("FBE");
-    GenerateImports("fbe_final_models.h");
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports("fbe_final_models.h");
 
     // Generate namespace begin
     WriteLine();
@@ -6609,10 +6621,12 @@ void GeneratorCpp::GenerateFBEProtocol_Header(const CppCommon::Path& path)
 
     // Generate protocol header
     GenerateHeader("FBE");
-    GenerateImports("fbe.h");
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports("fbe.h");
 
     // Generate namespace begin
     WriteLine();
@@ -6648,10 +6662,12 @@ void GeneratorCpp::GenerateFBEProtocol_Source(const CppCommon::Path& path)
 
     // Generate protocol source
     GenerateSource("FBE");
-    GenerateImports("fbe_protocol.h");
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports("fbe_protocol.h");
 
     // Generate namespace begin
     WriteLine();
@@ -6687,11 +6703,13 @@ void GeneratorCpp::GenerateFBEJson_Header(const CppCommon::Path& path)
 
     // Generate JSON header
     GenerateHeader("FBE");
-    GenerateImports("fbe.h");
-    GenerateImportsJson();
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports("fbe.h");
+    GenerateImportsJson();
 
     // Generate namespace begin
     WriteLine();
@@ -6728,10 +6746,12 @@ void GeneratorCpp::GeneratePackage_Header(const std::shared_ptr<Package>& p)
 
     // Generate package header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(p);
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports(p);
 
     // Generate namespace begin
     WriteLine();
@@ -6851,10 +6871,12 @@ void GeneratorCpp::GeneratePackage_Source(const std::shared_ptr<Package>& p)
 
     // Generate package source
     GenerateSource(CppCommon::Path(_input).filename().string());
-    GenerateImports(*p->name + ".h");
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports(*p->name + ".h");
 
     // Generate namespace begin
     WriteLine();
@@ -6896,10 +6918,12 @@ void GeneratorCpp::GeneratePackage_Json(const std::shared_ptr<Package>& p)
 
     // Generate package header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImportsJson(p);
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImportsJson(p);
 
     // Generate namespace begin
     WriteLine();
@@ -6953,11 +6977,13 @@ void GeneratorCpp::GeneratePackageModels_Header(const std::shared_ptr<Package>& 
 
     // Generate package models header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports("fbe_models.h");
-    GenerateImportsModels(p, false);
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports("fbe_models.h");
+    GenerateImportsModels(p, false);
 
     // Generate namespace begin
     WriteLine();
@@ -7017,10 +7043,12 @@ void GeneratorCpp::GeneratePackageModels_Source(const std::shared_ptr<Package>& 
 
     // Generate package models source
     GenerateSource(CppCommon::Path(_input).filename().string());
-    GenerateImports(*p->name + "_models.h");
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports(*p->name + "_models.h");
 
     // Generate namespace begin
     WriteLine();
@@ -7066,11 +7094,13 @@ void GeneratorCpp::GeneratePackageFinalModels_Header(const std::shared_ptr<Packa
 
     // Generate package final models header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports("fbe_final_models.h");
-    GenerateImportsModels(p, true);
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports("fbe_final_models.h");
+    GenerateImportsModels(p, true);
 
     // Generate namespace begin
     WriteLine();
@@ -7130,10 +7160,12 @@ void GeneratorCpp::GeneratePackageFinalModels_Source(const std::shared_ptr<Packa
 
     // Generate package final models source
     GenerateSource(CppCommon::Path(_input).filename().string());
-    GenerateImports(*p->name + "_final_models.h");
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports(*p->name + "_final_models.h");
 
     // Generate namespace begin
     WriteLine();
@@ -7179,11 +7211,13 @@ void GeneratorCpp::GeneratePackageProtocol_Header(const std::shared_ptr<Package>
 
     // Generate package protocol header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports("fbe_protocol.h");
-    GenerateImportsProtocol(p, final);
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports("fbe_protocol.h");
+    GenerateImportsProtocol(p, final);
 
     // Generate namespace begin
     WriteLine();
@@ -7231,10 +7265,12 @@ void GeneratorCpp::GeneratePackageProtocol_Source(const std::shared_ptr<Package>
 
     // Generate package protocol source
     GenerateSource(CppCommon::Path(_input).filename().string());
-    GenerateImports(*p->name + (final ? "_final" : "") + "_protocol.h");
 
     // Generate warnings header
     GenerateWarningsHeader();
+
+    // Generate imports
+    GenerateImports(*p->name + (final ? "_final" : "") + "_protocol.h");
 
     // Generate namespace begin
     WriteLine();
