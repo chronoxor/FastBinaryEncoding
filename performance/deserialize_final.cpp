@@ -4,13 +4,13 @@
 
 #include "benchmark/cppbenchmark.h"
 
-#include "../proto/proto_models.h"
+#include "../proto/proto_final_models.h"
 
 class FinalDeserializationFixture
 {
 protected:
-    FBE::proto::AccountFinalModel<FBE::WriteBuffer> writer;
-    FBE::proto::AccountFinalModel<FBE::ReadBuffer> reader;
+    FBE::proto::AccountFinalModel writer;
+    FBE::proto::AccountFinalModel reader;
     proto::Account deserialized;
 
     FinalDeserializationFixture()

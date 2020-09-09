@@ -5,6 +5,12 @@
 
 #include "fbe_protocol.h"
 
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable:4065) // C4065: switch statement contains 'default' but no 'case' labels
+#pragma warning(disable:4702) // C4702: unreachable code
+#endif
+
 namespace FBE {
 
 size_t Sender::send_serialized(size_t serialized)
@@ -269,3 +275,7 @@ void Receiver::receive(const void* data, size_t size)
 }
 
 } // namespace FBE
+
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif

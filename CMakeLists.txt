@@ -104,13 +104,17 @@ if(NOT FBEC_MODULE)
     list(APPEND PROTO_FILES ${FBE_OUTPUT_FILE})
   endforeach()
 
-  # Proto FBE sources
-  file(GLOB FBE_SOURCE_FILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/proto" "proto/*.cpp")
-  foreach(FBE_SOURCE_FILE ${FBE_SOURCE_FILES})
-    set(FBE_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/proto")
-    set(FBE_OUTPUT_FILE "${FBE_OUTPUT_DIR}/${FBE_SOURCE_FILE}")
-    list(APPEND PROTO_FILES ${FBE_OUTPUT_FILE})
-  endforeach()
+  # Proto library
+  file(GLOB_RECURSE PROTO_HEADER_FILES "proto/*.h")
+  file(GLOB_RECURSE PROTO_INLINE_FILES "proto/*.inl")
+  file(GLOB_RECURSE PROTO_SOURCE_FILES "proto/*.cpp")
+  set_source_files_properties(${PROTO_SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
+  add_library(proto ${PROTO_HEADER_FILES} ${PROTO_INLINE_FILES} ${PROTO_SOURCE_FILES})
+  target_include_directories(proto PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/proto")
+  target_link_libraries(proto ${LINKLIBS})
+  set_target_properties(proto PROPERTIES FOLDER libraries)
+  list(APPEND INSTALL_TARGETS proto)
+  list(APPEND LINKLIBS proto)
 
   # Examples
   file(GLOB EXAMPLE_HEADER_FILES "examples/*.h")

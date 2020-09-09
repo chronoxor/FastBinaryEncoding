@@ -4,12 +4,12 @@
 
 #include "benchmark/cppbenchmark.h"
 
-#include "../proto/proto_models.h"
+#include "../proto/proto_final_models.h"
 
 class FinalSerializationFixture
 {
 protected:
-    FBE::proto::AccountFinalModel<FBE::WriteBuffer> writer;
+    FBE::proto::AccountFinalModel writer;
     proto::Account account;
 
     FinalSerializationFixture()

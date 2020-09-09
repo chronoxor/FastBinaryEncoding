@@ -4,7 +4,7 @@
 
 #include "benchmark/cppbenchmark.h"
 
-#include "../proto/proto_models.h"
+#include "../proto/proto_json.h"
 
 class SerializationJsonFixture
 {

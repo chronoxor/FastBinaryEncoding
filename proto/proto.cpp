@@ -5,6 +5,12 @@
 
 #include "proto.h"
 
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable:4065) // C4065: switch statement contains 'default' but no 'case' labels
+#pragma warning(disable:4702) // C4702: unreachable code
+#endif
+
 namespace proto {
 
 Order::Order()
@@ -209,3 +215,7 @@ void AccountMessage::swap(AccountMessage& other) noexcept
 }
 
 } // namespace proto
+
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif

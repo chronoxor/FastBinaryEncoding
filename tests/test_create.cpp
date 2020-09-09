@@ -10,7 +10,7 @@
 TEST_CASE("Create & access", "[FBE]")
 {
     // Create a new account using FBE model into the FBE stream
-    FBE::proto::AccountModel<FBE::WriteBuffer> writer;
+    FBE::proto::AccountModel writer;
     REQUIRE(writer.model.fbe_offset() == 4);
     size_t model_begin = writer.create_begin();
     size_t account_begin = writer.model.set_begin();
@@ -66,7 +66,7 @@ TEST_CASE("Create & access", "[FBE]")
     REQUIRE(writer.buffer().size() == 252);
 
     // Access the account model in the FBE stream
-    FBE::proto::AccountModel<FBE::ReadBuffer> reader;
+    FBE::proto::AccountModel reader;
     REQUIRE(reader.model.fbe_offset() == 4);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());

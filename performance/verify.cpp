@@ -9,7 +9,7 @@
 class VerifyFixture
 {
 protected:
-    FBE::proto::AccountModel<FBE::WriteBuffer> model;
+    FBE::proto::AccountModel model;
 
     VerifyFixture()
     {

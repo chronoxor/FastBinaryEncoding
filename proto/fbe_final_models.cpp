@@ -5,6 +5,12 @@
 
 #include "fbe_final_models.h"
 
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable:4065) // C4065: switch statement contains 'default' but no 'case' labels
+#pragma warning(disable:4702) // C4702: unreachable code
+#endif
+
 namespace FBE {
 
 uint64_t FinalModel<decimal_t>::uint32x32(uint32_t a, uint32_t b) noexcept
@@ -427,3 +433,7 @@ size_t FinalModel<std::string>::set(const std::string& value)
 }
 
 } // namespace FBE
+
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif

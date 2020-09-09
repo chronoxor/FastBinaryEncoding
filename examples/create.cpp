@@ -13,7 +13,7 @@
 int main(int argc, char** argv)
 {
     // Create a new account using FBE model
-    FBE::proto::AccountModel<FBE::WriteBuffer> account;
+    FBE::proto::AccountModel account;
     size_t model_begin = account.create_begin();
     size_t account_begin = account.model.set_begin();
     account.model.id.set(1);
@@ -31,7 +31,7 @@ int main(int argc, char** argv)
     std::cout << "FBE size: " << account.buffer().size() << std::endl;
 
     // Access the account using the FBE model
-    FBE::proto::AccountModel<FBE::ReadBuffer> access;
+    FBE::proto::AccountModel access;
     access.attach(account.buffer());
     assert(access.verify());
 

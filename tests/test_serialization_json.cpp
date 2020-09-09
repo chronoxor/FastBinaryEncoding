@@ -4,8 +4,8 @@
 
 #include "test.h"
 
-#include "../proto/proto_models.h"
-#include "../proto/test_models.h"
+#include "../proto/proto_json.h"
+#include "../proto/test_json.h"
 
 TEST_CASE("Serialization (JSON): domain", "[FBE]")
 {

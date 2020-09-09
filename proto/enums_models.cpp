@@ -5,6 +5,12 @@
 
 #include "enums_models.h"
 
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable:4065) // C4065: switch statement contains 'default' but no 'case' labels
+#pragma warning(disable:4702) // C4702: unreachable code
+#endif
+
 namespace FBE {
 
 FieldModel<::enums::Enums>::FieldModel(FBEBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
@@ -1254,3 +1260,7 @@ size_t EnumsModel::deserialize(::enums::Enums& value) const noexcept
 } // namespace enums
 
 } // namespace FBE
+
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif

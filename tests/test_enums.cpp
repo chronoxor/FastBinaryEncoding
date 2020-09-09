@@ -4,14 +4,16 @@
 
 #include "test.h"
 
+#include "../proto/enums_json.h"
 #include "../proto/enums_models.h"
+#include "../proto/enums_final_models.h"
 
 TEST_CASE("Serialization: enums", "[FBE]")
 {
     enums::Enums enums1;
 
     // Serialize enums to the FBE stream
-    FBE::enums::EnumsModel<FBE::WriteBuffer> writer;
+    FBE::enums::EnumsModel writer;
     REQUIRE(writer.model.fbe_offset() == 4);
     size_t serialized = writer.serialize(enums1);
     REQUIRE(serialized == writer.buffer().size());
@@ -24,7 +26,7 @@ TEST_CASE("Serialization: enums", "[FBE]")
 
     // Deserialize enums from the FBE stream
     enums::Enums enums2;
-    FBE::enums::EnumsModel<FBE::ReadBuffer> reader;
+    FBE::enums::EnumsModel reader;
     REQUIRE(reader.model.fbe_offset() == 4);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());
@@ -116,7 +118,7 @@ TEST_CASE("Serialization (Final): enums", "[FBE]")
     enums::Enums enums1;
 
     // Serialize enums to the FBE stream
-    FBE::enums::EnumsFinalModel<FBE::WriteBuffer> writer;
+    FBE::enums::EnumsFinalModel writer;
     size_t serialized = writer.serialize(enums1);
     REQUIRE(serialized == writer.buffer().size());
     REQUIRE(writer.verify());
@@ -127,7 +129,7 @@ TEST_CASE("Serialization (Final): enums", "[FBE]")
 
     // Deserialize enums from the FBE stream
     enums::Enums enums2;
-    FBE::enums::EnumsFinalModel<FBE::ReadBuffer> reader;
+    FBE::enums::EnumsFinalModel reader;
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());
     size_t deserialized = reader.deserialize(enums2);

@@ -15,6 +15,16 @@
 
 #include "fbe.h"
 
+#define RAPIDJSON_HAS_STDSTRING 1
+#include <rapidjson/document.h>
+#include <rapidjson/prettywriter.h>
+
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable:4065) // C4065: switch statement contains 'default' but no 'case' labels
+#pragma warning(disable:4702) // C4702: unreachable code
+#endif
+
 namespace FBE {
 
 namespace JSON {
@@ -960,3 +970,7 @@ bool from_json_child(const TJson& json, T& value, const char* key)
 } // namespace JSON
 
 } // namespace FBE
+
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif

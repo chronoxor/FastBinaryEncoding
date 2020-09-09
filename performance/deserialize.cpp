@@ -9,8 +9,8 @@
 class DeserializationFixture
 {
 protected:
-    FBE::proto::AccountModel<FBE::WriteBuffer> writer;
-    FBE::proto::AccountModel<FBE::ReadBuffer> reader;
+    FBE::proto::AccountModel writer;
+    FBE::proto::AccountModel reader;
     proto::Account deserialized;
 
     DeserializationFixture()

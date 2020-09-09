@@ -5,6 +5,7 @@
 #include "test.h"
 
 #include "../proto/test_models.h"
+#include "../proto/test_final_models.h"
 
 bool Compare(FBE::decimal_t value1, double value2)
 {
@@ -21,9 +22,9 @@ FBE::decimal_t VerifyDecimal(uint32_t low, uint32_t mid, uint32_t high, bool neg
     *((uint32_t*)(data + 8)) = high;
     *((uint32_t*)(data + 12)) = flags;
 
-    FBE::ReadBuffer buffer(data, 16);
+    FBE::FBEBuffer buffer(data, 16);
 
-    FBE::FieldModel<FBE::ReadBuffer, FBE::decimal_t> model(buffer, 0);
+    FBE::FieldModel<FBE::decimal_t> model(buffer, 0);
     FBE::decimal_t value1;
     FBE::decimal_t value2;
     model.get(value1);
@@ -32,7 +33,7 @@ FBE::decimal_t VerifyDecimal(uint32_t low, uint32_t mid, uint32_t high, bool neg
     if (!Compare(value1, value2))
         throw std::logic_error("Invalid decimal serialization!");
 
-    FBE::FinalModel<FBE::ReadBuffer, FBE::decimal_t> final_model(buffer, 0);
+    FBE::FinalModel<FBE::decimal_t> final_model(buffer, 0);
     FBE::decimal_t value3;
     FBE::decimal_t value4;
     if (final_model.get(value3) != 16)

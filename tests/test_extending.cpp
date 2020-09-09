@@ -22,7 +22,7 @@ TEST_CASE("Extending: old -> new", "[FBE]")
     account1.orders.emplace_back(3, "EURUSD", proto::OrderSide::buy, proto::OrderType::stop, 1.5, 10.0);
 
     // Serialize the account to the FBE stream
-    FBE::proto::AccountModel<FBE::WriteBuffer> writer;
+    FBE::proto::AccountModel writer;
     REQUIRE(writer.model.fbe_offset() == 4);
     size_t serialized = writer.serialize(account1);
     REQUIRE(serialized == writer.buffer().size());
@@ -35,7 +35,7 @@ TEST_CASE("Extending: old -> new", "[FBE]")
 
     // Deserialize the account from the FBE stream
     protoex::Account account2;
-    FBE::protoex::AccountModel<FBE::ReadBuffer> reader;
+    FBE::protoex::AccountModel reader;
     REQUIRE(reader.model.fbe_offset() == 4);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());
@@ -100,7 +100,7 @@ TEST_CASE("Extending: new -> old", "[FBE]")
     account1.orders.emplace_back(3, "EURUSD", protoex::OrderSide::tell, protoex::OrderType::stoplimit, 1.5, 10.0, 1.1, -1.1);
 
     // Serialize the account to the FBE stream
-    FBE::protoex::AccountModel<FBE::WriteBuffer> writer;
+    FBE::protoex::AccountModel writer;
     REQUIRE(writer.model.fbe_offset() == 4);
     size_t serialized = writer.serialize(account1);
     REQUIRE(serialized == writer.buffer().size());
@@ -113,7 +113,7 @@ TEST_CASE("Extending: new -> old", "[FBE]")
 
     // Deserialize the account from the FBE stream
     proto::Account account2;
-    FBE::proto::AccountModel<FBE::ReadBuffer> reader;
+    FBE::proto::AccountModel reader;
     REQUIRE(reader.model.fbe_offset() == 4);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());

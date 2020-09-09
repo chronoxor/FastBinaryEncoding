@@ -17,6 +17,12 @@
 
 #include "enums_final_models.h"
 
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable:4065) // C4065: switch statement contains 'default' but no 'case' labels
+#pragma warning(disable:4702) // C4702: unreachable code
+#endif
+
 namespace FBE {
 
 namespace enums {
@@ -103,3 +109,7 @@ protected:
 } // namespace enums
 
 } // namespace FBE
+
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif

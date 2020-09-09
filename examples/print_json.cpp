@@ -6,7 +6,7 @@
     \copyright MIT License
 */
 
-#include "../proto/test.h"
+#include "../proto/test_json.h"
 
 #include <iostream>
 

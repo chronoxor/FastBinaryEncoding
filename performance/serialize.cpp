@@ -9,7 +9,7 @@
 class SerializationFixture
 {
 protected:
-    FBE::proto::AccountModel<FBE::WriteBuffer> writer;
+    FBE::proto::AccountModel writer;
     proto::Account account;
 
     SerializationFixture()

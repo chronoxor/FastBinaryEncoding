@@ -6,7 +6,7 @@
     \copyright MIT License
 */
 
-#include "../proto/proto_models.h"
+#include "../proto/proto_final_models.h"
 
 #include <iostream>
 
@@ -19,7 +19,7 @@ int main(int argc, char** argv)
     account.orders.emplace_back(3, "EURUSD", proto::OrderSide::buy, proto::OrderType::stop, 1.5, 10.0);
 
     // Serialize the account to the FBE stream
-    FBE::proto::AccountFinalModel<FBE::WriteBuffer> writer;
+    FBE::proto::AccountFinalModel writer;
     writer.serialize(account);
     assert(writer.verify());
 
@@ -27,7 +27,7 @@ int main(int argc, char** argv)
     std::cout << "FBE final size: " << writer.buffer().size() << std::endl;
 
     // Deserialize the account from the FBE stream
-    FBE::proto::AccountFinalModel<FBE::ReadBuffer> reader;
+    FBE::proto::AccountFinalModel reader;
     reader.attach(writer.buffer());
     assert(reader.verify());
     reader.deserialize(account);

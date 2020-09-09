@@ -4,8 +4,8 @@
 
 #include "test.h"
 
-#include "../proto/proto_models.h"
-#include "../proto/test_models.h"
+#include "../proto/proto_final_models.h"
+#include "../proto/test_final_models.h"
 
 TEST_CASE("Serialization (Final): domain", "[FBE]")
 {
@@ -16,7 +16,7 @@ TEST_CASE("Serialization (Final): domain", "[FBE]")
     account1.orders.emplace_back(3, "EURUSD", proto::OrderSide::buy, proto::OrderType::stop, 1.5, 10.0);
 
     // Serialize the account to the FBE stream
-    FBE::proto::AccountFinalModel<FBE::WriteBuffer> writer;
+    FBE::proto::AccountFinalModel writer;
     size_t serialized = writer.serialize(account1);
     REQUIRE(serialized == writer.buffer().size());
     REQUIRE(writer.verify());
@@ -27,7 +27,7 @@ TEST_CASE("Serialization (Final): domain", "[FBE]")
 
     // Deserialize the account from the FBE stream
     proto::Account account2;
-    FBE::proto::AccountFinalModel<FBE::ReadBuffer> reader;
+    FBE::proto::AccountFinalModel reader;
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());
     size_t deserialized = reader.deserialize(account2);
@@ -69,7 +69,7 @@ TEST_CASE("Serialization (Final): struct simple", "[FBE]")
     test::StructSimple struct1;
 
     // Serialize the struct to the FBE stream
-    FBE::test::StructSimpleFinalModel<FBE::WriteBuffer> writer;
+    FBE::test::StructSimpleFinalModel writer;
     REQUIRE(writer.fbe_type() == 110);
     size_t serialized = writer.serialize(struct1);
     REQUIRE(serialized == writer.buffer().size());
@@ -81,7 +81,7 @@ TEST_CASE("Serialization (Final): struct simple", "[FBE]")
 
     // Deserialize the struct from the FBE stream
     test::StructSimple struct2;
-    FBE::test::StructSimpleFinalModel<FBE::ReadBuffer> reader;
+    FBE::test::StructSimpleFinalModel reader;
     REQUIRE(reader.fbe_type() == 110);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());
@@ -176,7 +176,7 @@ TEST_CASE("Serialization (Final): struct optional", "[FBE]")
     test::StructOptional struct1;
 
     // Serialize the struct to the FBE stream
-    FBE::test::StructOptionalFinalModel<FBE::WriteBuffer> writer;
+    FBE::test::StructOptionalFinalModel writer;
     REQUIRE(writer.fbe_type() == 111);
     size_t serialized = writer.serialize(struct1);
     REQUIRE(serialized == writer.buffer().size());
@@ -188,7 +188,7 @@ TEST_CASE("Serialization (Final): struct optional", "[FBE]")
 
     // Deserialize the struct from the FBE stream
     test::StructOptional struct2;
-    FBE::test::StructOptionalFinalModel<FBE::ReadBuffer> reader;
+    FBE::test::StructOptionalFinalModel reader;
     REQUIRE(reader.fbe_type() == 111);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());
@@ -427,7 +427,7 @@ TEST_CASE("Serialization (Final): struct nested", "[FBE]")
     test::StructNested struct1;
 
     // Serialize the struct to the FBE stream
-    FBE::test::StructNestedFinalModel<FBE::WriteBuffer> writer;
+    FBE::test::StructNestedFinalModel writer;
     REQUIRE(writer.fbe_type() == 112);
     size_t serialized = writer.serialize(struct1);
     REQUIRE(serialized == writer.buffer().size());
@@ -439,7 +439,7 @@ TEST_CASE("Serialization (Final): struct nested", "[FBE]")
 
     // Deserialize the struct from the FBE stream
     test::StructNested struct2;
-    FBE::test::StructNestedFinalModel<FBE::ReadBuffer> reader;
+    FBE::test::StructNestedFinalModel reader;
     REQUIRE(reader.fbe_type() == 112);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());
@@ -704,7 +704,7 @@ TEST_CASE("Serialization (Final): struct bytes", "[FBE]")
     struct1.f2.value().assign((const uint8_t*)f2, (const uint8_t*)f2 + strlen(f2));
 
     // Serialize the struct to the FBE stream
-    FBE::test::StructBytesFinalModel<FBE::WriteBuffer> writer;
+    FBE::test::StructBytesFinalModel writer;
     REQUIRE(writer.fbe_type() == 120);
     size_t serialized = writer.serialize(struct1);
     REQUIRE(serialized == writer.buffer().size());
@@ -716,7 +716,7 @@ TEST_CASE("Serialization (Final): struct bytes", "[FBE]")
 
     // Deserialize the struct from the FBE stream
     test::StructBytes struct2;
-    FBE::test::StructBytesFinalModel<FBE::ReadBuffer> reader;
+    FBE::test::StructBytesFinalModel reader;
     REQUIRE(reader.fbe_type() == 120);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());
@@ -758,7 +758,7 @@ TEST_CASE("Serialization (Final): struct array", "[FBE]")
     struct1.f10[1] = std::nullopt;
 
     // Serialize the struct to the FBE stream
-    FBE::test::StructArrayFinalModel<FBE::WriteBuffer> writer;
+    FBE::test::StructArrayFinalModel writer;
     REQUIRE(writer.fbe_type() == 125);
     size_t serialized = writer.serialize(struct1);
     REQUIRE(serialized == writer.buffer().size());
@@ -770,7 +770,7 @@ TEST_CASE("Serialization (Final): struct array", "[FBE]")
 
     // Deserialize the struct from the FBE stream
     test::StructArray struct2;
-    FBE::test::StructArrayFinalModel<FBE::ReadBuffer> reader;
+    FBE::test::StructArrayFinalModel reader;
     REQUIRE(reader.fbe_type() == 125);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());
@@ -853,7 +853,7 @@ TEST_CASE("Serialization (Final): struct vector", "[FBE]")
     struct1.f10.emplace_back(std::nullopt);
 
     // Serialize the struct to the FBE stream
-    FBE::test::StructVectorFinalModel<FBE::WriteBuffer> writer;
+    FBE::test::StructVectorFinalModel writer;
     REQUIRE(writer.fbe_type() == 130);
     size_t serialized = writer.serialize(struct1);
     REQUIRE(serialized == writer.buffer().size());
@@ -865,7 +865,7 @@ TEST_CASE("Serialization (Final): struct vector", "[FBE]")
 
     // Deserialize the struct from the FBE stream
     test::StructVector struct2;
-    FBE::test::StructVectorFinalModel<FBE::ReadBuffer> reader;
+    FBE::test::StructVectorFinalModel reader;
     REQUIRE(reader.fbe_type() == 130);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());
@@ -948,7 +948,7 @@ TEST_CASE("Serialization (Final): struct list", "[FBE]")
     struct1.f10.emplace_back(std::nullopt);
 
     // Serialize the struct to the FBE stream
-    FBE::test::StructListFinalModel<FBE::WriteBuffer> writer;
+    FBE::test::StructListFinalModel writer;
     REQUIRE(writer.fbe_type() == 131);
     size_t serialized = writer.serialize(struct1);
     REQUIRE(serialized == writer.buffer().size());
@@ -960,7 +960,7 @@ TEST_CASE("Serialization (Final): struct list", "[FBE]")
 
     // Deserialize the struct from the FBE stream
     test::StructList struct2;
-    FBE::test::StructListFinalModel<FBE::ReadBuffer> reader;
+    FBE::test::StructListFinalModel reader;
     REQUIRE(reader.fbe_type() == 131);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());
@@ -1036,7 +1036,7 @@ TEST_CASE("Serialization (Final): struct set", "[FBE]")
     struct1.f4.emplace(s2);
 
     // Serialize the struct to the FBE stream
-    FBE::test::StructSetFinalModel<FBE::WriteBuffer> writer;
+    FBE::test::StructSetFinalModel writer;
     REQUIRE(writer.fbe_type() == 132);
     size_t serialized = writer.serialize(struct1);
     REQUIRE(serialized == writer.buffer().size());
@@ -1048,7 +1048,7 @@ TEST_CASE("Serialization (Final): struct set", "[FBE]")
 
     // Deserialize the struct from the FBE stream
     test::StructSet struct2;
-    FBE::test::StructSetFinalModel<FBE::ReadBuffer> reader;
+    FBE::test::StructSetFinalModel reader;
     REQUIRE(reader.fbe_type() == 132);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());
@@ -1101,7 +1101,7 @@ TEST_CASE("Serialization (Final): struct map", "[FBE]")
     struct1.f10.emplace(20, std::nullopt);
 
     // Serialize the struct to the FBE stream
-    FBE::test::StructMapFinalModel<FBE::WriteBuffer> writer;
+    FBE::test::StructMapFinalModel writer;
     REQUIRE(writer.fbe_type() == 140);
     size_t serialized = writer.serialize(struct1);
     REQUIRE(serialized == writer.buffer().size());
@@ -1113,7 +1113,7 @@ TEST_CASE("Serialization (Final): struct map", "[FBE]")
 
     // Deserialize the struct from the FBE stream
     test::StructMap struct2;
-    FBE::test::StructMapFinalModel<FBE::ReadBuffer> reader;
+    FBE::test::StructMapFinalModel reader;
     REQUIRE(reader.fbe_type() == 140);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());
@@ -1183,7 +1183,7 @@ TEST_CASE("Serialization (Final): struct hash", "[FBE]")
     struct1.f10.emplace("20", std::nullopt);
 
     // Serialize the struct to the FBE stream
-    FBE::test::StructHashFinalModel<FBE::WriteBuffer> writer;
+    FBE::test::StructHashFinalModel writer;
     REQUIRE(writer.fbe_type() == 141);
     size_t serialized = writer.serialize(struct1);
     REQUIRE(serialized == writer.buffer().size());
@@ -1195,7 +1195,7 @@ TEST_CASE("Serialization (Final): struct hash", "[FBE]")
 
     // Deserialize the struct from the FBE stream
     test::StructHash struct2;
-    FBE::test::StructHashFinalModel<FBE::ReadBuffer> reader;
+    FBE::test::StructHashFinalModel reader;
     REQUIRE(reader.fbe_type() == 141);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());
@@ -1249,7 +1249,7 @@ TEST_CASE("Serialization (Final): struct hash extended", "[FBE]")
     struct1.f2.emplace(s2, std::nullopt);
 
     // Serialize the struct to the FBE stream
-    FBE::test::StructHashExFinalModel<FBE::WriteBuffer> writer;
+    FBE::test::StructHashExFinalModel writer;
     REQUIRE(writer.fbe_type() == 142);
     size_t serialized = writer.serialize(struct1);
     REQUIRE(serialized == writer.buffer().size());
@@ -1261,7 +1261,7 @@ TEST_CASE("Serialization (Final): struct hash extended", "[FBE]")
 
     // Deserialize the struct from the FBE stream
     test::StructHashEx struct2;
-    FBE::test::StructHashExFinalModel<FBE::ReadBuffer> reader;
+    FBE::test::StructHashExFinalModel reader;
     REQUIRE(reader.fbe_type() == 142);
     reader.attach(writer.buffer());
     REQUIRE(reader.verify());

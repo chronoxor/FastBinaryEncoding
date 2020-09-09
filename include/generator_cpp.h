@@ -45,12 +45,16 @@ private:
     void GenerateHeader(const std::string& source);
     void GenerateInline(const std::string& source);
     void GenerateSource(const std::string& source);
+    void GenerateWarningsHeader();
+    void GenerateWarningsFooter();
     void GenerateFooter();
     void GenerateImports();
     void GenerateImports(const std::string& source);
     void GenerateImports(const std::shared_ptr<Package>& p);
     void GenerateImportsModels(const std::shared_ptr<Package>& p, bool final);
     void GenerateImportsProtocol(const std::shared_ptr<Package>& p, bool final);
+    void GenerateImportsJson();
+    void GenerateImportsJson(const std::shared_ptr<Package>& p);
     void GenerateBufferWrapper_Header();
     void GenerateBufferWrapper_Source();
     void GenerateDecimalWrapper_Header();

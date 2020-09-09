@@ -4,12 +4,12 @@
 
 #include "benchmark/cppbenchmark.h"
 
-#include "../proto/proto_models.h"
+#include "../proto/proto_final_models.h"
 
 class FinalVerifyFixture
 {
 protected:
-    FBE::proto::AccountFinalModel<FBE::WriteBuffer> model;
+    FBE::proto::AccountFinalModel model;
 
     FinalVerifyFixture()
     {
