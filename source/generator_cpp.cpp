@@ -128,14 +128,9 @@ void GeneratorCpp::GenerateSource(const std::string& source)
 void GeneratorCpp::GenerateWarningsHeader()
 {
     std::string code = R"CODE(
-#if defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-variable"
-#elif defined(_MSC_VER)
+#if defined(_MSC_VER)
 #pragma warning(push)
 #pragma warning(disable:4065) // C4065: switch statement contains 'default' but no 'case' labels
-#pragma warning(disable:4100) // C4100: 'identifier' : unreferenced formal parameter
-#pragma warning(disable:4702) // C4702: unreachable code
 #endif
 )CODE";
 
@@ -6275,9 +6270,6 @@ void GeneratorCpp::GenerateFBE_Header(const CppCommon::Path& path)
     // Generate common header
     GenerateHeader("FBE");
 
-    // Generate warnings header
-    GenerateWarningsHeader();
-
     // Generate imports
     GenerateImports();
 
@@ -6297,9 +6289,6 @@ void GeneratorCpp::GenerateFBE_Header(const CppCommon::Path& path)
     // Generate namespace end
     WriteLine();
     WriteLineIndent("} // namespace FBE");
-
-    // Generate warnings footer
-    GenerateWarningsFooter();
 
     // Generate common footer
     GenerateFooter();
@@ -6321,9 +6310,6 @@ void GeneratorCpp::GenerateFBE_Source(const CppCommon::Path& path)
     // Generate common source
     GenerateSource("FBE");
 
-    // Generate warnings header
-    GenerateWarningsHeader();
-
     // Generate imports
     GenerateImports("fbe.h");
 
@@ -6340,9 +6326,6 @@ void GeneratorCpp::GenerateFBE_Source(const CppCommon::Path& path)
     // Generate namespace end
     WriteLine();
     WriteLineIndent("} // namespace FBE");
-
-    // Generate warnings footer
-    GenerateWarningsFooter();
 
     // Generate common footer
     GenerateFooter();
@@ -6363,9 +6346,6 @@ void GeneratorCpp::GenerateFBEModels_Header(const CppCommon::Path& path)
 
     // Generate field models header
     GenerateHeader("FBE");
-
-    // Generate warnings header
-    GenerateWarningsHeader();
 
     // Generate imports
     GenerateImports("fbe.h");
@@ -6391,9 +6371,6 @@ void GeneratorCpp::GenerateFBEModels_Header(const CppCommon::Path& path)
 
     // Generate inline import
     GenerateImports("fbe_models.inl");
-
-    // Generate warnings footer
-    GenerateWarningsFooter();
 
     // Generate field models footer
     GenerateFooter();
@@ -6450,9 +6427,6 @@ void GeneratorCpp::GenerateFBEModels_Source(const CppCommon::Path& path)
     // Generate field models source
     GenerateSource("FBE");
 
-    // Generate warnings header
-    GenerateWarningsHeader();
-
     // Generate imports
     GenerateImports("fbe_models.h");
 
@@ -6469,9 +6443,6 @@ void GeneratorCpp::GenerateFBEModels_Source(const CppCommon::Path& path)
     // Generate namespace end
     WriteLine();
     WriteLineIndent("} // namespace FBE");
-
-    // Generate warnings footer
-    GenerateWarningsFooter();
 
     // Generate field models footer
     GenerateFooter();
@@ -6492,9 +6463,6 @@ void GeneratorCpp::GenerateFBEFinalModels_Header(const CppCommon::Path& path)
 
     // Generate final models header
     GenerateHeader("FBE");
-
-    // Generate warnings header
-    GenerateWarningsHeader();
 
     // Generate imports
     GenerateImports("fbe.h");
@@ -6520,9 +6488,6 @@ void GeneratorCpp::GenerateFBEFinalModels_Header(const CppCommon::Path& path)
 
     // Generate inline import
     GenerateImports("fbe_final_models.inl");
-
-    // Generate warnings footer
-    GenerateWarningsFooter();
 
     // Generate final models footer
     GenerateFooter();
@@ -6579,9 +6544,6 @@ void GeneratorCpp::GenerateFBEFinalModels_Source(const CppCommon::Path& path)
     // Generate final models source
     GenerateSource("FBE");
 
-    // Generate warnings header
-    GenerateWarningsHeader();
-
     // Generate imports
     GenerateImports("fbe_final_models.h");
 
@@ -6598,9 +6560,6 @@ void GeneratorCpp::GenerateFBEFinalModels_Source(const CppCommon::Path& path)
     // Generate namespace end
     WriteLine();
     WriteLineIndent("} // namespace FBE");
-
-    // Generate warnings footer
-    GenerateWarningsFooter();
 
     // Generate final models footer
     GenerateFooter();
@@ -6622,9 +6581,6 @@ void GeneratorCpp::GenerateFBEProtocol_Header(const CppCommon::Path& path)
     // Generate protocol header
     GenerateHeader("FBE");
 
-    // Generate warnings header
-    GenerateWarningsHeader();
-
     // Generate imports
     GenerateImports("fbe.h");
 
@@ -6639,9 +6595,6 @@ void GeneratorCpp::GenerateFBEProtocol_Header(const CppCommon::Path& path)
     // Generate namespace end
     WriteLine();
     WriteLineIndent("} // namespace FBE");
-
-    // Generate warnings footer
-    GenerateWarningsFooter();
 
     // Generate protocol footer
     GenerateFooter();
@@ -6663,9 +6616,6 @@ void GeneratorCpp::GenerateFBEProtocol_Source(const CppCommon::Path& path)
     // Generate protocol source
     GenerateSource("FBE");
 
-    // Generate warnings header
-    GenerateWarningsHeader();
-
     // Generate imports
     GenerateImports("fbe_protocol.h");
 
@@ -6680,9 +6630,6 @@ void GeneratorCpp::GenerateFBEProtocol_Source(const CppCommon::Path& path)
     // Generate namespace end
     WriteLine();
     WriteLineIndent("} // namespace FBE");
-
-    // Generate warnings footer
-    GenerateWarningsFooter();
 
     // Generate protocol footer
     GenerateFooter();
@@ -6704,9 +6651,6 @@ void GeneratorCpp::GenerateFBEJson_Header(const CppCommon::Path& path)
     // Generate JSON header
     GenerateHeader("FBE");
 
-    // Generate warnings header
-    GenerateWarningsHeader();
-
     // Generate imports
     GenerateImports("fbe.h");
     GenerateImportsJson();
@@ -6721,9 +6665,6 @@ void GeneratorCpp::GenerateFBEJson_Header(const CppCommon::Path& path)
     // Generate namespace end
     WriteLine();
     WriteLineIndent("} // namespace FBE");
-
-    // Generate warnings footer
-    GenerateWarningsFooter();
 
     // Generate JSON footer
     GenerateFooter();
@@ -6746,9 +6687,6 @@ void GeneratorCpp::GeneratePackage_Header(const std::shared_ptr<Package>& p)
 
     // Generate package header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-
-    // Generate warnings header
-    GenerateWarningsHeader();
 
     // Generate imports
     GenerateImports(p);
@@ -6779,9 +6717,6 @@ void GeneratorCpp::GeneratePackage_Header(const std::shared_ptr<Package>& p)
 
     // Generate inline import
     GenerateImports(*p->name + ".inl");
-
-    // Generate warnings footer
-    GenerateWarningsFooter();
 
     // Generate package footer
     GenerateFooter();
@@ -6872,9 +6807,6 @@ void GeneratorCpp::GeneratePackage_Source(const std::shared_ptr<Package>& p)
     // Generate package source
     GenerateSource(CppCommon::Path(_input).filename().string());
 
-    // Generate warnings header
-    GenerateWarningsHeader();
-
     // Generate imports
     GenerateImports(*p->name + ".h");
 
@@ -6893,9 +6825,6 @@ void GeneratorCpp::GeneratePackage_Source(const std::shared_ptr<Package>& p)
     // Generate namespace end
     WriteLine();
     WriteLineIndent("} // namespace " + *p->name);
-
-    // Generate warnings footer
-    GenerateWarningsFooter();
 
     // Generate package footer
     GenerateFooter();
@@ -6918,9 +6847,6 @@ void GeneratorCpp::GeneratePackage_Json(const std::shared_ptr<Package>& p)
 
     // Generate package header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-
-    // Generate warnings header
-    GenerateWarningsHeader();
 
     // Generate imports
     GenerateImportsJson(p);
@@ -6953,9 +6879,6 @@ void GeneratorCpp::GeneratePackage_Json(const std::shared_ptr<Package>& p)
     WriteLine();
     WriteLineIndent("} // namespace FBE");
 
-    // Generate warnings footer
-    GenerateWarningsFooter();
-
     // Generate package footer
     GenerateFooter();
 
@@ -6977,9 +6900,6 @@ void GeneratorCpp::GeneratePackageModels_Header(const std::shared_ptr<Package>& 
 
     // Generate package models header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-
-    // Generate warnings header
-    GenerateWarningsHeader();
 
     // Generate imports
     GenerateImports("fbe_models.h");
@@ -7019,9 +6939,6 @@ void GeneratorCpp::GeneratePackageModels_Header(const std::shared_ptr<Package>& 
     WriteLine();
     WriteLineIndent("} // namespace FBE");
 
-    // Generate warnings footer
-    GenerateWarningsFooter();
-
     // Generate package footer
     GenerateFooter();
 
@@ -7043,9 +6960,6 @@ void GeneratorCpp::GeneratePackageModels_Source(const std::shared_ptr<Package>& 
 
     // Generate package models source
     GenerateSource(CppCommon::Path(_input).filename().string());
-
-    // Generate warnings header
-    GenerateWarningsHeader();
 
     // Generate imports
     GenerateImports(*p->name + "_models.h");
@@ -7070,9 +6984,6 @@ void GeneratorCpp::GeneratePackageModels_Source(const std::shared_ptr<Package>& 
     WriteLine();
     WriteLineIndent("} // namespace FBE");
 
-    // Generate warnings footer
-    GenerateWarningsFooter();
-
     // Generate package footer
     GenerateFooter();
 
@@ -7094,9 +7005,6 @@ void GeneratorCpp::GeneratePackageFinalModels_Header(const std::shared_ptr<Packa
 
     // Generate package final models header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-
-    // Generate warnings header
-    GenerateWarningsHeader();
 
     // Generate imports
     GenerateImports("fbe_final_models.h");
@@ -7136,9 +7044,6 @@ void GeneratorCpp::GeneratePackageFinalModels_Header(const std::shared_ptr<Packa
     WriteLine();
     WriteLineIndent("} // namespace FBE");
 
-    // Generate warnings footer
-    GenerateWarningsFooter();
-
     // Generate package footer
     GenerateFooter();
 
@@ -7160,9 +7065,6 @@ void GeneratorCpp::GeneratePackageFinalModels_Source(const std::shared_ptr<Packa
 
     // Generate package final models source
     GenerateSource(CppCommon::Path(_input).filename().string());
-
-    // Generate warnings header
-    GenerateWarningsHeader();
 
     // Generate imports
     GenerateImports(*p->name + "_final_models.h");
@@ -7187,9 +7089,6 @@ void GeneratorCpp::GeneratePackageFinalModels_Source(const std::shared_ptr<Packa
     WriteLine();
     WriteLineIndent("} // namespace FBE");
 
-    // Generate warnings footer
-    GenerateWarningsFooter();
-
     // Generate package footer
     GenerateFooter();
 
@@ -7211,9 +7110,6 @@ void GeneratorCpp::GeneratePackageProtocol_Header(const std::shared_ptr<Package>
 
     // Generate package protocol header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-
-    // Generate warnings header
-    GenerateWarningsHeader();
 
     // Generate imports
     GenerateImports("fbe_protocol.h");
@@ -7240,9 +7136,6 @@ void GeneratorCpp::GeneratePackageProtocol_Header(const std::shared_ptr<Package>
     WriteLineIndent("} // namespace " + *p->name);
     WriteLine();
     WriteLineIndent("} // namespace FBE");
-
-    // Generate warnings footer
-    GenerateWarningsFooter();
 
     // Generate package footer
     GenerateFooter();

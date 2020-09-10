@@ -13,16 +13,6 @@
 #pragma system_header
 #endif
 
-#if defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-variable"
-#elif defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable:4065) // C4065: switch statement contains 'default' but no 'case' labels
-#pragma warning(disable:4100) // C4100: 'identifier' : unreferenced formal parameter
-#pragma warning(disable:4702) // C4702: unreachable code
-#endif
-
 #include "fbe.h"
 
 #define RAPIDJSON_HAS_STDSTRING 1
@@ -974,9 +964,3 @@ bool from_json_child(const TJson& json, T& value, const char* key)
 } // namespace JSON
 
 } // namespace FBE
-
-#if defined(__GNUC__)
-#pragma GCC diagnostic pop
-#elif defined(_MSC_VER)
-#pragma warning(pop)
-#endif
