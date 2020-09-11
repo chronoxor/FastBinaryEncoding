@@ -42,8 +42,6 @@ void FinalClient::watchdog_requests(uint64_t utc)
 
 } // namespace FBE
 
-#if defined(__GNUC__)
-#pragma GCC diagnostic pop
-#elif defined(_MSC_VER)
+#if defined(_MSC_VER)
 #pragma warning(pop)
 #endif
