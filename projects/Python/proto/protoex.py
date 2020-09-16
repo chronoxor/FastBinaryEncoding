@@ -3975,7 +3975,7 @@ class AccountMessageFinalModel(fbe.Model):
 # Fast Binary Encoding protoex protocol version
 class ProtocolVersion(object):
     # Protocol major version
-    Major = 0
+    Major = 1
     # Protocol minor version
     Minor = 0
 

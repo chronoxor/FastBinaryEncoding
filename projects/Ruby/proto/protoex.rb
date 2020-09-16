@@ -4890,7 +4890,7 @@ module Protoex
   # Fast Binary Encoding Protoex protocol version
   class ProtocolVersion
     # Protocol major version
-    MAJOR = 0
+    MAJOR = 1
     # Protocol minor version
     MINOR = 0
   end

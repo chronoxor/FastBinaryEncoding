@@ -4709,7 +4709,7 @@ namespace proto {
     public static class ProtocolVersion
     {
         // Protocol major version
-        public const int Major = 0;
+        public const int Major = 1;
         // Protocol minor version
         public const int Minor = 0;
     }

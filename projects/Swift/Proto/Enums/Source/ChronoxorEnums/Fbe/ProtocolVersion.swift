@@ -6,7 +6,7 @@
 // Fast Binary Encoding ChronoxorEnums protocol version
 public struct ProtocolVersion {
     // Protocol major version
-    public static let Major = 0
+    public static let Major = 1
     // Protocol minor version
     public static let Minor = 0
 }

@@ -8,6 +8,9 @@ domain com.chronoxor
 // Package declaration
 package protoex offset 10
 
+// Protocol version
+version 1.0
+
 // Package imports
 import proto
 

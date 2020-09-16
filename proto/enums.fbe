@@ -8,6 +8,9 @@ domain com.chronoxor
 // Package declaration
 package enums
 
+// Protocol version
+version 1.0
+
 // Byte enum declaration
 enum EnumByte : byte
 {

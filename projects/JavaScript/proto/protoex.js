@@ -6457,7 +6457,7 @@ class AccountMessageFinalModel extends fbe.Model {
 exports.AccountMessageFinalModel = AccountMessageFinalModel
 
 // Protocol major version
-const ProtocolVersionMajor = 0
+const ProtocolVersionMajor = 1
 // Protocol minor version
 const ProtocolVersionMinor = 0
 

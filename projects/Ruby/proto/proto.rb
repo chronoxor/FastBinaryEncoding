@@ -4735,7 +4735,7 @@ module Proto
   # Fast Binary Encoding Proto protocol version
   class ProtocolVersion
     # Protocol major version
-    MAJOR = 0
+    MAJOR = 1
     # Protocol minor version
     MINOR = 0
   end
