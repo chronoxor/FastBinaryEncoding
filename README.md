@@ -90,11 +90,13 @@ Sample projects:
 * [gcc](https://gcc.gnu.org)
 * [git](https://git-scm.com)
 * [gil](https://github.com/chronoxor/gil.git)
+* [python3](https://www.python.org)
 
 Optional:
 * [clang](https://clang.llvm.org)
 * [CLion](https://www.jetbrains.com/clion)
 * [Cygwin](https://cygwin.com)
+* [MSYS2](https://www.msys2.org)
 * [MinGW](https://mingw-w64.org/doku.php)
 * [Visual Studio](https://www.visualstudio.com)
 * [WinFlexBison](https://github.com/lexxmark/winflexbison)
@@ -128,7 +130,13 @@ cd build
 ### Windows (Cygwin)
 ```shell
 cd build
-cygwin.bat
+unix.bat
+```
+
+### Windows (MSYS2)
+```shell
+cd build
+unix.bat
 ```
 
 ### Windows (MinGW)
