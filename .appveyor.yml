@@ -16,9 +16,9 @@ only_commits:
 # Build matrix
 environment:
   matrix:
-    - type: Cygwin
-      build: C:\cygwin64\bin\bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./unix.sh"
-      command: C:\cygwin64\bin\bash -lc
+#    - type: Cygwin
+#      build: C:\cygwin64\bin\bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./unix.sh"
+#      command: C:\cygwin64\bin\bash -lc
     - type: MSYS2
       build: C:\msys64\usr\bin\bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./unix.sh"
       command: C:\msys64\usr\bin\bash -lc
