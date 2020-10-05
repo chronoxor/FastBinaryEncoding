@@ -121,7 +121,8 @@ import
     ;
 
 statements
-    : statement                                                                             { $$ = new FBE::Statements(); $$->AddStatement($1); }
+    :                                                                                       { $$ = new FBE::Statements(); }
+    | statement                                                                             { $$ = new FBE::Statements(); $$->AddStatement($1); }
     | statements statement                                                                  { $$ = $1; $$->AddStatement($2); }
     ;
 
