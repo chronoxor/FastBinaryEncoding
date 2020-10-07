@@ -29,7 +29,6 @@ include(SystemInformation)
 # External packages
 find_package(BISON)
 find_package(FLEX)
-find_package(Threads REQUIRED)
 
 # Modules
 add_subdirectory("modules")
