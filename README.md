@@ -234,7 +234,7 @@ create a generated code for required programming language.
 
 The following command will create a C++ generated code:
 ```shell
-fbec --c++ --input=proto.fbe --output=.
+fbec --cpp --input=proto.fbe --output=.
 ```
 
 All possible options for the 'fbec' compiler are the following:
