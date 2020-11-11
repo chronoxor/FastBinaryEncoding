@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28b38142-73b0-4ddb-b81e-352705299fce" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/FastBinaryEncoding.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Ruby.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,44 +72,34 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1QQ2a0nvE8cS2hlXuqGHU3bOt8d" />
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state>
-        <expanded-state>
-          <State />
-          <State>
-            <id>Ruby</id>
-          </State>
-        </expanded-state>
-        <selected-state>
-          <State>
-            <id>RubyResolve</id>
-          </State>
-        </selected-state>
-      </profile-state>
-    </entry>
-  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../soft/Development/Ruby/bin/ruby.exe" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.ruby.settings.RubyActiveModuleSdkConfigurable" />
+    <property name="settings.editor.selected.configurable" value="sshConsole" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Ruby.print">
+  <component name="RunManager" selected="Test::Unit/Shoulda/Minitest.test_serialization">
+    <configuration name="create" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+      <module name="Ruby" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/examples" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/examples/create.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+      <method v="2" />
+    </configuration>
     <configuration name="print" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
       <module name="Ruby" />
       <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
@@ -136,34 +128,6 @@
       <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
       <method v="2" />
     </configuration>
-    <configuration name="serialization_final" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
-      <module name="Ruby" />
-      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
-      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/examples" />
-      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" />
-      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/examples/serialization_final.rb" />
-      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="serialization_json" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
-      <module name="Ruby" />
-      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
-      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/examples" />
-      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" />
-      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/examples/serialization_json.rb" />
-      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
-      <method v="2" />
-    </configuration>
     <configuration name="All tests in tests: Ruby" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda/Minitest" temporary="true">
       <module name="Ruby" />
       <predefined_log_file enabled="true" id="RUBY_TESTUNIT" />
@@ -189,23 +153,49 @@
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_OPTIONS" VALUE="" />
       <method v="2" />
     </configuration>
+    <configuration name="test_serialization" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda/Minitest" temporary="true" nameIsGenerated="true">
+      <module name="Ruby" />
+      <predefined_log_file enabled="true" id="RUBY_TESTUNIT" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="JRUBY_OPTS" value="-X+O" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/tests/test_serialization.rb" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_METHOD_NAME" VALUE="" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="ZEUS" VALUE="false" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="SPRING" VALUE="false" />
+      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_OPTIONS" VALUE="" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Ruby.serialization" />
-      <item itemvalue="Ruby.serialization_final" />
-      <item itemvalue="Ruby.serialization_json" />
-      <item itemvalue="Test::Unit/Shoulda/Minitest.All tests in tests: Ruby" />
       <item itemvalue="Ruby.print" />
+      <item itemvalue="Ruby.create" />
+      <item itemvalue="Ruby.serialization" />
+      <item itemvalue="Test::Unit/Shoulda/Minitest.All tests in tests: Ruby" />
+      <item itemvalue="Test::Unit/Shoulda/Minitest.test_serialization" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Test::Unit/Shoulda/Minitest.test_serialization" />
+        <item itemvalue="Ruby.serialization" />
+        <item itemvalue="Ruby.create" />
         <item itemvalue="Ruby.print" />
         <item itemvalue="Test::Unit/Shoulda/Minitest.All tests in tests: Ruby" />
-        <item itemvalue="Ruby.serialization_json" />
-        <item itemvalue="Ruby.serialization_final" />
-        <item itemvalue="Ruby.serialization" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" RAKE_SPRING_PRE_LOADER_OPTION="false" RAILS_SPRING_PRE_LOADER_OPTION="false" />
   <component name="SvnConfiguration">
     <configuration />
@@ -254,24 +244,88 @@
       <workItem from="1564358527013" duration="264000" />
       <workItem from="1567688561198" duration="150000" />
       <workItem from="1571845493507" duration="157000" />
+      <workItem from="1605134712731" duration="1112000" />
+      <workItem from="1605136030152" duration="636000" />
+      <workItem from="1605136672786" duration="7000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1060" y="534" key="FileChooserDialogImpl" timestamp="1605135031955">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state x="1060" y="534" key="FileChooserDialogImpl/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605135031955" />
+    <state width="1340" height="328" key="GridCell.Tab.0.bottom" timestamp="1605136667208">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1340" height="328" key="GridCell.Tab.0.bottom/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605136667208" />
+    <state width="1340" height="328" key="GridCell.Tab.0.center" timestamp="1605136667208">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1340" height="328" key="GridCell.Tab.0.center/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605136667208" />
+    <state width="1340" height="328" key="GridCell.Tab.0.left" timestamp="1605136667208">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1340" height="328" key="GridCell.Tab.0.left/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605136667208" />
+    <state width="1340" height="328" key="GridCell.Tab.0.right" timestamp="1605136667208">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1340" height="328" key="GridCell.Tab.0.right/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605136667208" />
+    <state width="1340" height="328" key="GridCell.Tab.1.bottom" timestamp="1605136667208">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1340" height="328" key="GridCell.Tab.1.bottom/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605136667208" />
+    <state width="1340" height="328" key="GridCell.Tab.1.center" timestamp="1605136667208">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1340" height="328" key="GridCell.Tab.1.center/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605136667208" />
+    <state width="1340" height="328" key="GridCell.Tab.1.left" timestamp="1605136667208">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1340" height="328" key="GridCell.Tab.1.left/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605136667208" />
+    <state width="1340" height="328" key="GridCell.Tab.1.right" timestamp="1605136667208">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1340" height="328" key="GridCell.Tab.1.right/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605136667208" />
+    <state width="1340" height="328" key="GridCell.Tab.2.bottom" timestamp="1605136667209">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1340" height="328" key="GridCell.Tab.2.bottom/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605136667209" />
+    <state width="1340" height="328" key="GridCell.Tab.2.center" timestamp="1605136667208">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1340" height="328" key="GridCell.Tab.2.center/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605136667208" />
+    <state width="1340" height="328" key="GridCell.Tab.2.left" timestamp="1605136667208">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1340" height="328" key="GridCell.Tab.2.left/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605136667208" />
+    <state width="1340" height="328" key="GridCell.Tab.2.right" timestamp="1605136667208">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1340" height="328" key="GridCell.Tab.2.right/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605136667208" />
+    <state x="781" y="424" key="SettingsEditor" timestamp="1605136534420">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state x="781" y="424" key="SettingsEditor/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605136534420" />
+    <state x="828" y="508" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1605136211756">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state x="828" y="508" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605136211756" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -282,14 +336,28 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/proto/protoex.rb</url>
-          <line>3650</line>
-          <option name="timeStamp" value="12" />
+          <url>file://$PROJECT_DIR$/tests/test_serialization.rb</url>
+          <line>655</line>
+          <properties myBlockOrdinal="-1">
+            <option name="block-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/proto/protoex.rb</url>
-          <line>3670</line>
-          <option name="timeStamp" value="13" />
+          <url>file://$PROJECT_DIR$/proto/fbe.rb</url>
+          <line>718</line>
+          <properties myBlockOrdinal="-1">
+            <option name="block-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/proto/fbe.rb</url>
+          <line>791</line>
+          <properties myBlockOrdinal="-1">
+            <option name="block-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -302,42 +370,14 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding@print.rcov" NAME="print Coverage Results" MODIFIED="1571845635239" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding@serialization_json.rcov" NAME="serialization_json Coverage Results" MODIFIED="1567688675955" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding@create.rcov" NAME="create Coverage Results" MODIFIED="1567688647645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding@All_tests_in_tests__Ruby.rcov" NAME="All tests in tests: Ruby Coverage Results" MODIFIED="1567688683980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding@serialization.rcov" NAME="serialization Coverage Results" MODIFIED="1567688668671" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding@serialization_final.rcov" NAME="serialization_final Coverage Results" MODIFIED="1567688672173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding@send_receive.rcov" NAME="send_receive Coverage Results" MODIFIED="1567688664452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding@print_json.rcov" NAME="print_json Coverage Results" MODIFIED="1567688659714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-  </component>
-  <component name="debuggerHistoryManager">
-    <expressions id="watch">
-      <expression>
-        <expression-string>duration/iterations</expression-string>
-        <language-id>ruby</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>other.@uid</expression-string>
-        <language-id>ruby</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>other</expression-string>
-        <language-id>ruby</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>other.uid</expression-string>
-        <language-id>ruby</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>:buy</expression-string>
-        <language-id>ruby</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding@print_json.rcov" NAME="print_json Coverage Results" MODIFIED="1605136334979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding@print.rcov" NAME="print Coverage Results" MODIFIED="1605136483266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding@serialization_final.rcov" NAME="serialization_final Coverage Results" MODIFIED="1605136076367" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding@All_tests_in_tests__Ruby.rcov" NAME="All tests in tests: Ruby Coverage Results" MODIFIED="1605136353144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding@create.rcov" NAME="create Coverage Results" MODIFIED="1605136555300" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding@serialization_json.rcov" NAME="serialization_json Coverage Results" MODIFIED="1605136080273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding@serialization.rcov" NAME="serialization Coverage Results" MODIFIED="1605136563450" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding@test_serialization.rcov" NAME="test_serialization Coverage Results" MODIFIED="1605136580142" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding@send_receive.rcov" NAME="send_receive Coverage Results" MODIFIED="1605136068680" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
   </component>
 </project>
