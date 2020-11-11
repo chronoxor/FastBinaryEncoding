@@ -3,7 +3,7 @@
 // Source: FBE
 // Version: 1.4.0.0
 
-/* eslint-disable prefer-const */
+/* eslint-disable prefer-const,no-loss-of-precision */
 'use strict'
 
 /**

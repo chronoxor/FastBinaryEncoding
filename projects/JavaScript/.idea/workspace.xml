@@ -3,11 +3,38 @@
   <component name="ChangeListManager">
     <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/print.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/print.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/send_receive.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/send_receive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/serialization.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/serialization.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/serialization_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/serialization_final.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/serialization_json.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/serialization_json.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/ieee754.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/ieee754.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/int64.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/int64.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/protoex.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/utf8.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/utf8.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/uuid.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/uuid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_clone.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_clone.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_create.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_decimal.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_decimal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_enums.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_extending.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_extending.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_ieee754.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_ieee754.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_int64.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_int64.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_send_receive.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_send_receive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_send_receive_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_send_receive_final.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_serialization.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_serialization.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_serialization_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_serialization_final.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_serialization_json.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_serialization_json.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_utf8.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_utf8.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,9 +43,20 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="541" />
+    <option name="y" value="320" />
+    <option name="width" value="1501" />
+    <option name="height" value="871" />
+  </component>
   <component name="ProjectId" id="1QPxhUU9iaHIHAlcErckEqsxIBb" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
@@ -27,32 +65,25 @@
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.standard" value="project" />
-    <property name="node.js.selected.package.eslint" value="Y:/projects/Projects/FastBinaryEncoding/projects/JavaScript/node_modules/eslint" />
-    <property name="node.js.selected.package.standard" value="$PROJECT_DIR$/node_modules/standard" />
-    <property name="nodejs_interpreter_path" value="Z:/soft/Development/NodeJS/bin/node" />
+    <property name="node.js.selected.package.eslint" value="Y:\projects\Projects\FastBinaryEncoding\projects\JavaScript\node_modules\eslint" />
+    <property name="node.js.selected.package.standard" value="Z:\projects\Projects\FastBinaryEncoding\projects\JavaScript\node_modules\standard" />
+    <property name="nodejs_interpreter_path" value="$PROJECT_DIR$/../../../../../soft/Development/NodeJS/bin/node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.nodejs" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Node.js.print.js">
-    <configuration name="print.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="print.js" working-dir="$PROJECT_DIR$/examples">
+    <configuration name="print.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/print.js" working-dir="$PROJECT_DIR$/examples">
       <method v="2" />
     </configuration>
-    <configuration name="serialization_final.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="serialization_final.js" working-dir="$PROJECT_DIR$/examples">
-      <method v="2" />
-    </configuration>
-    <configuration name="serialization_json.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="serialization_json.js" working-dir="$PROJECT_DIR$/examples">
+    <configuration name="tests-browser" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="tests-browser" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="tests-node" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -75,23 +106,34 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="tests" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="tests" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Node.js.serialization_final.js" />
-      <item itemvalue="Node.js.serialization_json.js" />
-      <item itemvalue="Node.js.print.js" />
       <item itemvalue="npm.tests-standard" />
       <item itemvalue="npm.tests-node" />
+      <item itemvalue="npm.tests-browser" />
+      <item itemvalue="Node.js.print.js" />
+      <item itemvalue="npm.tests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.tests" />
         <item itemvalue="Node.js.print.js" />
+        <item itemvalue="npm.tests-browser" />
         <item itemvalue="npm.tests-node" />
         <item itemvalue="npm.tests-standard" />
-        <item itemvalue="Node.js.serialization_json.js" />
-        <item itemvalue="Node.js.serialization_final.js" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -145,24 +187,65 @@
       <workItem from="1567686155222" duration="532000" />
       <workItem from="1571835187242" duration="201000" />
       <workItem from="1571845896118" duration="129000" />
+      <workItem from="1605130601531" duration="5000" />
+      <workItem from="1605130896555" duration="1246000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1149" y="672" key="#ESLint" timestamp="1605131763492">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state x="1149" y="672" key="#ESLint/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605131763492" />
+    <state width="1362" height="266" key="GridCell.Tab.0.bottom" timestamp="1605132143265">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1362" height="266" key="GridCell.Tab.0.bottom/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605132143265" />
+    <state width="1362" height="266" key="GridCell.Tab.0.center" timestamp="1605132143265">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1362" height="266" key="GridCell.Tab.0.center/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605132143265" />
+    <state width="1362" height="266" key="GridCell.Tab.0.left" timestamp="1605132143265">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1362" height="266" key="GridCell.Tab.0.left/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605132143265" />
+    <state width="1362" height="266" key="GridCell.Tab.0.right" timestamp="1605132143265">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state width="1362" height="266" key="GridCell.Tab.0.right/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605132143265" />
+    <state x="781" y="424" key="SettingsEditor" timestamp="1605131191737">
+      <screen x="0" y="0" width="2560" height="1560" />
+    </state>
+    <state x="781" y="424" key="SettingsEditor/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605131191737" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
