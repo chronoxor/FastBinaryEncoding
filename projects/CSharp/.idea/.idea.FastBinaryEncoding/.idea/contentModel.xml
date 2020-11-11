@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\chron\.nuget\packages\microsoft.net.test.sdk\16.3.0\build\netcoreapp1.0" t="Include">
+    <e p="C:\Users\chronoxor\.nuget\packages\microsoft.diagnostics.tracing.traceevent\2.0.49\lib\native\amd64" t="Include">
+      <e p="KernelTraceControl.dll" t="Include" />
+      <e p="msdia140.dll" t="Include" />
+    </e>
+    <e p="C:\Users\chronoxor\.nuget\packages\microsoft.diagnostics.tracing.traceevent\2.0.49\lib\native\x86" t="Include">
+      <e p="KernelTraceControl.dll" t="Include" />
+      <e p="KernelTraceControl.Win61.dll" t="Include" />
+      <e p="msdia140.dll" t="Include" />
+    </e>
+    <e p="C:\Users\chronoxor\.nuget\packages\microsoft.diagnostics.tracing.traceevent\2.0.49\lib\netstandard1.6\Dia2Lib.dll" t="Include" />
+    <e p="C:\Users\chronoxor\.nuget\packages\microsoft.diagnostics.tracing.traceevent\2.0.49\lib\netstandard1.6\OSExtensions.dll" t="Include" />
+    <e p="C:\Users\chronoxor\.nuget\packages\microsoft.diagnostics.tracing.traceevent\2.0.49\lib\netstandard1.6\TraceReloggerLib.dll" t="Include" />
+    <e p="C:\Users\chronoxor\.nuget\packages\microsoft.net.test.sdk\16.8.0\build\netcoreapp2.1" t="Include">
       <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
     </e>
-    <e p="C:\Users\chron\.nuget\packages\microsoft.testplatform.testhost\16.3.0\build\netcoreapp2.1\x64\testhost.dll" t="Include" />
-    <e p="C:\Users\chron\.nuget\packages\microsoft.testplatform.testhost\16.3.0\build\netcoreapp2.1\x64\testhost.exe" t="Include" />
-    <e p="C:\Users\chron\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\chron\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\chron\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
-    <e p="C:\Users\chron\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\chron\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_FastBinaryEncoding.-462537843.00" t="ExcludeRecursive" />
-    <e p="Z:\Projects\Projects\FastBinaryEncoding\Projects\CSharp" t="IncludeFlat">
+    <e p="C:\Users\chronoxor\.nuget\packages\microsoft.testplatform.testhost\16.8.0\build\netcoreapp2.1\x64\testhost.dll" t="Include" />
+    <e p="C:\Users\chronoxor\.nuget\packages\microsoft.testplatform.testhost\16.8.0\build\netcoreapp2.1\x64\testhost.exe" t="Include" />
+    <e p="C:\Users\chronoxor\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\netcoreapp2.1\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\chronoxor\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\netcoreapp2.1\xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\chronoxor\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\netcoreapp2.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
+    <e p="C:\Users\chronoxor\AppData\local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\chronoxor\AppData\local\JetBrains\Rider2020.2\resharper-host\local\Transient\Rider\v202\SolutionCaches\_FastBinaryEncoding.-882054674.00" t="ExcludeRecursive" />
+    <e p="Y:\Projects\Projects\FastBinaryEncoding\Projects\CSharp" t="IncludeFlat">
       <e p="Benchmarks" t="IncludeRecursive">
         <e p="Benchmarks.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netcoreapp3.0" t="Include">
+          <e p="Release" t="Include">
+            <e p="net5.0" t="Include">
               <e p="Benchmarks.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
@@ -33,8 +45,8 @@
           <e p="bin" t="ExcludeRecursive" />
           <e p="Create.csproj" t="IncludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
-            <e p="Debug" t="Include">
-              <e p="netcoreapp3.0" t="Include">
+            <e p="Release" t="Include">
+              <e p="net5.0" t="Include">
                 <e p="Create.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
@@ -44,8 +56,8 @@
         <e p="Print" t="IncludeRecursive">
           <e p="bin" t="ExcludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
-            <e p="Debug" t="Include">
-              <e p="netcoreapp3.0" t="Include">
+            <e p="Release" t="Include">
+              <e p="net5.0" t="Include">
                 <e p="Print.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
@@ -56,8 +68,8 @@
         <e p="PrintJson" t="IncludeRecursive">
           <e p="bin" t="ExcludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
-            <e p="Debug" t="Include">
-              <e p="netcoreapp3.0" t="Include">
+            <e p="Release" t="Include">
+              <e p="net5.0" t="Include">
                 <e p="PrintJson.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
@@ -68,8 +80,8 @@
         <e p="SendReceive" t="IncludeRecursive">
           <e p="bin" t="ExcludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
-            <e p="Debug" t="Include">
-              <e p="netcoreapp3.0" t="Include">
+            <e p="Release" t="Include">
+              <e p="net5.0" t="Include">
                 <e p="SendReceive.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
@@ -80,8 +92,8 @@
         <e p="Serialization" t="IncludeRecursive">
           <e p="bin" t="ExcludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
-            <e p="Debug" t="Include">
-              <e p="netcoreapp3.0" t="Include">
+            <e p="Release" t="Include">
+              <e p="net5.0" t="Include">
                 <e p="Serialization.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
@@ -92,8 +104,8 @@
         <e p="SerializationFinal" t="IncludeRecursive">
           <e p="bin" t="ExcludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
-            <e p="Debug" t="Include">
-              <e p="netcoreapp3.0" t="Include">
+            <e p="Release" t="Include">
+              <e p="net5.0" t="Include">
                 <e p="SerializationFinal.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
@@ -104,8 +116,8 @@
         <e p="SerializationJson" t="IncludeRecursive">
           <e p="bin" t="ExcludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
-            <e p="Debug" t="Include">
-              <e p="netcoreapp3.0" t="Include">
+            <e p="Release" t="Include">
+              <e p="net5.0" t="Include">
                 <e p="SerializationJson.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
@@ -125,8 +137,8 @@
           <e p="Utf8Json.xml" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
+          <e p="Release" t="Include">
+            <e p="net5.0" t="Include">
               <e p="Proto.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
@@ -144,8 +156,8 @@
         <e p="enums.cs" t="Include" />
         <e p="Extending.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netcoreapp3.0" t="Include">
+          <e p="Release" t="Include">
+            <e p="net5.0" t="Include">
               <e p="Tests.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
