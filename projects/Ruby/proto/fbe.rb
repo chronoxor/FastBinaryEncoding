@@ -716,7 +716,7 @@ module FBE
 
     def read_timestamp(offset)
       nanoseconds = read_uint64(offset)
-      Time.at(nanoseconds / 1000000000, (nanoseconds % 1000000000) / 1000.0).utc
+      Time.at(nanoseconds / 1000000000, nanoseconds % 1000000000, :nsec).utc
     end
 
     def read_uuid(offset)
