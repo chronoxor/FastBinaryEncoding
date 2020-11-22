@@ -3837,7 +3837,6 @@ void GeneratorCSharp::GenerateFBEJson()
 {
     std::string code = R"CODE(
 #if UTF8JSON
-
     public sealed class ByteArrayFormatter : IJsonFormatter<byte[]>
     {
         public void Serialize(ref JsonWriter writer, byte[] value, IJsonFormatterResolver formatterResolver)
@@ -4029,9 +4028,7 @@ void GeneratorCSharp::GenerateFBEJson()
         public static string ToJson<T>(T value) { return Encoding.UTF8.GetString(JsonSerializer.Serialize(value)); }
         public static T FromJson<T>(string json) { return JsonSerializer.Deserialize<T>(json); }
     }
-
 #elif NEWTONSOFTJSON
-
     public class BytesConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
@@ -4163,9 +4160,7 @@ void GeneratorCSharp::GenerateFBEJson()
         public static string ToJson<T>(T value) { return JsonConvert.SerializeObject(value); }
         public static T FromJson<T>(string json) { return JsonConvert.DeserializeObject<T>(json); }
     }
-
 #else
-
     public class ByteArrayConverter : JsonConverter<byte[]>
     {
         public override void Write(Utf8JsonWriter writer, byte[] value, JsonSerializerOptions options)
@@ -4263,7 +4258,6 @@ void GeneratorCSharp::GenerateFBEJson()
         public static string ToJson<T>(T value) { return JsonSerializer.Serialize(value, DefaultOptions); }
         public static T FromJson<T>(string json) { return JsonSerializer.Deserialize<T>(json, DefaultOptions); }
     }
-
 #endif
 )CODE";
 
@@ -4463,7 +4457,6 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
 
     std::string json = R"CODE(
 #if UTF8JSON
-
     public class _ENUM_NAME_Converter : IJsonFormatter<_ENUM_NAME_>
     {
         public void Serialize(ref JsonWriter writer, _ENUM_NAME_ value, IJsonFormatterResolver jsonFormatterResolver)
@@ -4479,7 +4472,6 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
 
     [JsonFormatter(typeof(_ENUM_NAME_Converter))]
 #elif NEWTONSOFTJSON
-
     public class _ENUM_NAME_Converter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
@@ -4511,7 +4503,6 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
 
     [JsonConverter(typeof(_ENUM_NAME_Converter))]
 #else
-
     public class _ENUM_NAME_Converter : JsonConverter<_ENUM_NAME_>
     {
         public override void Write(Utf8JsonWriter writer, _ENUM_NAME_ value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
@@ -4519,8 +4510,7 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     }
 
     [JsonConverter(typeof(_ENUM_NAME_Converter))]
-#endif
-)CODE";
+#endif)CODE";
 
     std::string code = R"CODE(
     public struct _ENUM_NAME_ : IComparable, IComparable<_ENUM_NAME_>, IEquatable<_ENUM_NAME_>
@@ -4824,7 +4814,6 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
 
     std::string json = R"CODE(
 #if UTF8JSON
-
     public class _FLAGS_NAME_Converter : IJsonFormatter<_FLAGS_NAME_>
     {
         public void Serialize(ref JsonWriter writer, _FLAGS_NAME_ value, IJsonFormatterResolver jsonFormatterResolver)
@@ -4840,7 +4829,6 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
 
     [JsonFormatter(typeof(_FLAGS_NAME_Converter))]
 #elif NEWTONSOFTJSON
-
     public class _FLAGS_NAME_Converter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
@@ -4872,7 +4860,6 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
 
     [JsonConverter(typeof(_FLAGS_NAME_Converter))]
 #else
-
     public class _FLAGS_NAME_Converter : JsonConverter<_FLAGS_NAME_>
     {
         public override void Write(Utf8JsonWriter writer, _FLAGS_NAME_ value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
@@ -4880,8 +4867,7 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
     }
 
     [JsonConverter(typeof(_FLAGS_NAME_Converter))]
-#endif
-)CODE";
+#endif)CODE";
 
     std::string code = R"CODE(
     public struct _FLAGS_NAME_ : IComparable, IComparable<_FLAGS_NAME_>, IEquatable<_FLAGS_NAME_>
