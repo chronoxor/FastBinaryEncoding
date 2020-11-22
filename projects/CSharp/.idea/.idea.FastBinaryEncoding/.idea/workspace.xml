@@ -8,10 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="edfd070c-0d53-4afa-88cb-34dff2e2435b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,15 +247,15 @@
     </configuration>
     <list>
       <item itemvalue=".NET Project.Default" />
+      <item itemvalue=".NET Project.Create" />
+      <item itemvalue=".NET Project.Tests" />
+      <item itemvalue=".NET Project.Benchmarks" />
+      <item itemvalue=".NET Project.PrintJson" />
       <item itemvalue=".NET Project.Examples\SendReceive" />
       <item itemvalue=".NET Project.Examples\Serialization" />
       <item itemvalue=".NET Project.Examples\SerializationFinal" />
       <item itemvalue=".NET Project.Examples\SerializationJson" />
       <item itemvalue=".NET Project.Examples\Print" />
-      <item itemvalue=".NET Project.Create" />
-      <item itemvalue=".NET Project.Tests" />
-      <item itemvalue=".NET Project.Benchmarks" />
-      <item itemvalue=".NET Project.PrintJson" />
     </list>
     <recent_temporary>
       <list>
@@ -323,6 +320,7 @@
       <workItem from="1568812910194" duration="267000" />
       <workItem from="1571846442711" duration="235000" />
       <workItem from="1605123189474" duration="55000" />
+      <workItem from="1606082591588" duration="61000" />
     </task>
     <servers />
   </component>
