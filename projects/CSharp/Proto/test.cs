@@ -17,8 +17,11 @@ using System.Threading.Tasks;
 #if UTF8JSON
 using Utf8Json;
 using Utf8Json.Resolvers;
-#else
+#elif NEWTONSOFTJSON
 using Newtonsoft.Json;
+#else
+using System.Text.Json;
+using System.Text.Json.Serialization;
 #endif
 
 using proto;
@@ -41,7 +44,7 @@ namespace test {
     }
 
     [JsonFormatter(typeof(EnumSimpleConverter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class EnumSimpleConverter : JsonConverter
     {
@@ -70,6 +73,15 @@ namespace test {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(EnumSimpleConverter))]
+#else
+
+    public class EnumSimpleConverter : JsonConverter<EnumSimple>
+    {
+        public override void Write(Utf8JsonWriter writer, EnumSimple value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override EnumSimple Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new EnumSimple(reader.GetInt32());
     }
 
     [JsonConverter(typeof(EnumSimpleConverter))]
@@ -273,7 +285,7 @@ namespace test {
     }
 
     [JsonFormatter(typeof(EnumTypedConverter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class EnumTypedConverter : JsonConverter
     {
@@ -302,6 +314,15 @@ namespace test {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(EnumTypedConverter))]
+#else
+
+    public class EnumTypedConverter : JsonConverter<EnumTyped>
+    {
+        public override void Write(Utf8JsonWriter writer, EnumTyped value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override EnumTyped Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new EnumTyped(reader.GetByte());
     }
 
     [JsonConverter(typeof(EnumTypedConverter))]
@@ -505,7 +526,7 @@ namespace test {
     }
 
     [JsonFormatter(typeof(EnumEmptyConverter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class EnumEmptyConverter : JsonConverter
     {
@@ -534,6 +555,15 @@ namespace test {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(EnumEmptyConverter))]
+#else
+
+    public class EnumEmptyConverter : JsonConverter<EnumEmpty>
+    {
+        public override void Write(Utf8JsonWriter writer, EnumEmpty value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override EnumEmpty Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new EnumEmpty(reader.GetInt32());
     }
 
     [JsonConverter(typeof(EnumEmptyConverter))]
@@ -719,7 +749,7 @@ namespace test {
     }
 
     [JsonFormatter(typeof(FlagsSimpleConverter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class FlagsSimpleConverter : JsonConverter
     {
@@ -748,6 +778,15 @@ namespace test {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(FlagsSimpleConverter))]
+#else
+
+    public class FlagsSimpleConverter : JsonConverter<FlagsSimple>
+    {
+        public override void Write(Utf8JsonWriter writer, FlagsSimple value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override FlagsSimple Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new FlagsSimple(reader.GetInt32());
     }
 
     [JsonConverter(typeof(FlagsSimpleConverter))]
@@ -1010,7 +1049,7 @@ namespace test {
     }
 
     [JsonFormatter(typeof(FlagsTypedConverter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class FlagsTypedConverter : JsonConverter
     {
@@ -1039,6 +1078,15 @@ namespace test {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(FlagsTypedConverter))]
+#else
+
+    public class FlagsTypedConverter : JsonConverter<FlagsTyped>
+    {
+        public override void Write(Utf8JsonWriter writer, FlagsTyped value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override FlagsTyped Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new FlagsTyped(reader.GetUInt64());
     }
 
     [JsonConverter(typeof(FlagsTypedConverter))]
@@ -1329,7 +1377,7 @@ namespace test {
     }
 
     [JsonFormatter(typeof(FlagsEmptyConverter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class FlagsEmptyConverter : JsonConverter
     {
@@ -1358,6 +1406,15 @@ namespace test {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(FlagsEmptyConverter))]
+#else
+
+    public class FlagsEmptyConverter : JsonConverter<FlagsEmpty>
+    {
+        public override void Write(Utf8JsonWriter writer, FlagsEmpty value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override FlagsEmpty Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new FlagsEmpty(reader.GetInt32());
     }
 
     [JsonConverter(typeof(FlagsEmptyConverter))]

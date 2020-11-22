@@ -17,8 +17,11 @@ using System.Threading.Tasks;
 #if UTF8JSON
 using Utf8Json;
 using Utf8Json.Resolvers;
-#else
+#elif NEWTONSOFTJSON
 using Newtonsoft.Json;
+#else
+using System.Text.Json;
+using System.Text.Json.Serialization;
 #endif
 
 namespace enums {
@@ -39,7 +42,7 @@ namespace enums {
     }
 
     [JsonFormatter(typeof(EnumByteConverter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class EnumByteConverter : JsonConverter
     {
@@ -68,6 +71,15 @@ namespace enums {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(EnumByteConverter))]
+#else
+
+    public class EnumByteConverter : JsonConverter<EnumByte>
+    {
+        public override void Write(Utf8JsonWriter writer, EnumByte value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override EnumByte Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new EnumByte(reader.GetByte());
     }
 
     [JsonConverter(typeof(EnumByteConverter))]
@@ -271,7 +283,7 @@ namespace enums {
     }
 
     [JsonFormatter(typeof(EnumCharConverter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class EnumCharConverter : JsonConverter
     {
@@ -300,6 +312,15 @@ namespace enums {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(EnumCharConverter))]
+#else
+
+    public class EnumCharConverter : JsonConverter<EnumChar>
+    {
+        public override void Write(Utf8JsonWriter writer, EnumChar value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override EnumChar Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new EnumChar(reader.GetByte());
     }
 
     [JsonConverter(typeof(EnumCharConverter))]
@@ -503,7 +524,7 @@ namespace enums {
     }
 
     [JsonFormatter(typeof(EnumWCharConverter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class EnumWCharConverter : JsonConverter
     {
@@ -532,6 +553,15 @@ namespace enums {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(EnumWCharConverter))]
+#else
+
+    public class EnumWCharConverter : JsonConverter<EnumWChar>
+    {
+        public override void Write(Utf8JsonWriter writer, EnumWChar value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override EnumWChar Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new EnumWChar(reader.GetUInt16());
     }
 
     [JsonConverter(typeof(EnumWCharConverter))]
@@ -735,7 +765,7 @@ namespace enums {
     }
 
     [JsonFormatter(typeof(EnumInt8Converter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class EnumInt8Converter : JsonConverter
     {
@@ -764,6 +794,15 @@ namespace enums {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(EnumInt8Converter))]
+#else
+
+    public class EnumInt8Converter : JsonConverter<EnumInt8>
+    {
+        public override void Write(Utf8JsonWriter writer, EnumInt8 value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override EnumInt8 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new EnumInt8(reader.GetSByte());
     }
 
     [JsonConverter(typeof(EnumInt8Converter))]
@@ -967,7 +1006,7 @@ namespace enums {
     }
 
     [JsonFormatter(typeof(EnumUInt8Converter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class EnumUInt8Converter : JsonConverter
     {
@@ -996,6 +1035,15 @@ namespace enums {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(EnumUInt8Converter))]
+#else
+
+    public class EnumUInt8Converter : JsonConverter<EnumUInt8>
+    {
+        public override void Write(Utf8JsonWriter writer, EnumUInt8 value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override EnumUInt8 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new EnumUInt8(reader.GetByte());
     }
 
     [JsonConverter(typeof(EnumUInt8Converter))]
@@ -1199,7 +1247,7 @@ namespace enums {
     }
 
     [JsonFormatter(typeof(EnumInt16Converter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class EnumInt16Converter : JsonConverter
     {
@@ -1228,6 +1276,15 @@ namespace enums {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(EnumInt16Converter))]
+#else
+
+    public class EnumInt16Converter : JsonConverter<EnumInt16>
+    {
+        public override void Write(Utf8JsonWriter writer, EnumInt16 value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override EnumInt16 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new EnumInt16(reader.GetInt16());
     }
 
     [JsonConverter(typeof(EnumInt16Converter))]
@@ -1431,7 +1488,7 @@ namespace enums {
     }
 
     [JsonFormatter(typeof(EnumUInt16Converter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class EnumUInt16Converter : JsonConverter
     {
@@ -1460,6 +1517,15 @@ namespace enums {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(EnumUInt16Converter))]
+#else
+
+    public class EnumUInt16Converter : JsonConverter<EnumUInt16>
+    {
+        public override void Write(Utf8JsonWriter writer, EnumUInt16 value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override EnumUInt16 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new EnumUInt16(reader.GetUInt16());
     }
 
     [JsonConverter(typeof(EnumUInt16Converter))]
@@ -1663,7 +1729,7 @@ namespace enums {
     }
 
     [JsonFormatter(typeof(EnumInt32Converter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class EnumInt32Converter : JsonConverter
     {
@@ -1692,6 +1758,15 @@ namespace enums {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(EnumInt32Converter))]
+#else
+
+    public class EnumInt32Converter : JsonConverter<EnumInt32>
+    {
+        public override void Write(Utf8JsonWriter writer, EnumInt32 value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override EnumInt32 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new EnumInt32(reader.GetInt32());
     }
 
     [JsonConverter(typeof(EnumInt32Converter))]
@@ -1895,7 +1970,7 @@ namespace enums {
     }
 
     [JsonFormatter(typeof(EnumUInt32Converter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class EnumUInt32Converter : JsonConverter
     {
@@ -1924,6 +1999,15 @@ namespace enums {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(EnumUInt32Converter))]
+#else
+
+    public class EnumUInt32Converter : JsonConverter<EnumUInt32>
+    {
+        public override void Write(Utf8JsonWriter writer, EnumUInt32 value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override EnumUInt32 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new EnumUInt32(reader.GetUInt32());
     }
 
     [JsonConverter(typeof(EnumUInt32Converter))]
@@ -2127,7 +2211,7 @@ namespace enums {
     }
 
     [JsonFormatter(typeof(EnumInt64Converter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class EnumInt64Converter : JsonConverter
     {
@@ -2156,6 +2240,15 @@ namespace enums {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(EnumInt64Converter))]
+#else
+
+    public class EnumInt64Converter : JsonConverter<EnumInt64>
+    {
+        public override void Write(Utf8JsonWriter writer, EnumInt64 value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override EnumInt64 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new EnumInt64(reader.GetInt64());
     }
 
     [JsonConverter(typeof(EnumInt64Converter))]
@@ -2359,7 +2452,7 @@ namespace enums {
     }
 
     [JsonFormatter(typeof(EnumUInt64Converter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class EnumUInt64Converter : JsonConverter
     {
@@ -2388,6 +2481,15 @@ namespace enums {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(EnumUInt64Converter))]
+#else
+
+    public class EnumUInt64Converter : JsonConverter<EnumUInt64>
+    {
+        public override void Write(Utf8JsonWriter writer, EnumUInt64 value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override EnumUInt64 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new EnumUInt64(reader.GetUInt64());
     }
 
     [JsonConverter(typeof(EnumUInt64Converter))]

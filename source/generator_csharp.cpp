@@ -55,8 +55,11 @@ void GeneratorCSharp::GenerateImports()
         WriteLineIndent("#if UTF8JSON");
         WriteLineIndent("using Utf8Json;");
         WriteLineIndent("using Utf8Json.Resolvers;");
-        WriteLineIndent("#else");
+        WriteLineIndent("#elif NEWTONSOFTJSON");
         WriteLineIndent("using Newtonsoft.Json;");
+        WriteLineIndent("#else");
+        WriteLineIndent("using System.Text.Json;");
+        WriteLineIndent("using System.Text.Json.Serialization;");
         WriteLineIndent("#endif");
     }
 }
@@ -4027,7 +4030,7 @@ void GeneratorCSharp::GenerateFBEJson()
         public static T FromJson<T>(string json) { return JsonSerializer.Deserialize<T>(json); }
     }
 
-#else
+#elif NEWTONSOFTJSON
 
     public class BytesConverter : JsonConverter
     {
@@ -4159,6 +4162,106 @@ void GeneratorCSharp::GenerateFBEJson()
 
         public static string ToJson<T>(T value) { return JsonConvert.SerializeObject(value); }
         public static T FromJson<T>(string json) { return JsonConvert.DeserializeObject<T>(json); }
+    }
+
+#else
+
+    public class ByteArrayConverter : JsonConverter<byte[]>
+    {
+        public override void Write(Utf8JsonWriter writer, byte[] value, JsonSerializerOptions options)
+        {
+            writer.WriteStartArray();
+
+            if (value.Length != 0)
+                writer.WriteNumberValue(value[0]);
+            for (int i = 1; i < value.Length; i++)
+                writer.WriteNumberValue(value[i]);
+
+            writer.WriteEndArray();
+        }
+
+        public override byte[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            if (reader.TokenType != JsonTokenType.StartArray)
+                throw new JsonException("Expected start array token!");
+
+            var array = new byte[4];
+            var count = 0;
+            while (reader.Read())
+            {
+                if (reader.TokenType == JsonTokenType.EndArray)
+                    break;
+                count++;
+                if (array.Length < count)
+                    Array.Resize(ref array, count * 2);
+                array[count - 1] = reader.GetByte();
+            }
+
+            Array.Resize(ref array, count);
+            return array;
+        }
+    }
+
+    public class BytesConverter : JsonConverter<MemoryStream>
+    {
+        public override void Write(Utf8JsonWriter writer, MemoryStream value, JsonSerializerOptions options) => writer.WriteStringValue(System.Convert.ToBase64String(value.GetBuffer()));
+
+        public override MemoryStream Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            var buffer = System.Convert.FromBase64String(reader.GetString());
+            return new MemoryStream(buffer, 0, buffer.Length, true, true);
+        }
+    }
+
+    public class CharConverter : JsonConverter<Char>
+    {
+        public override void Write(Utf8JsonWriter writer, Char value, JsonSerializerOptions options) => writer.WriteNumberValue(value);
+        public override Char Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => (Char)reader.GetInt64();
+    }
+
+    public class DateTimeConverter : JsonConverter<DateTime>
+    {
+        private const long UnixEpoch = 621355968000000000;
+
+        public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+        {
+            ulong nanoseconds = (ulong)((value.Ticks - UnixEpoch) * 100);
+            writer.WriteNumberValue(nanoseconds);
+        }
+
+        public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            ulong ticks = reader.GetUInt64() / 100;
+            return new DateTime((long)(UnixEpoch + ticks), DateTimeKind.Utc);
+        }
+    }
+
+    public class DecimalConverter : JsonConverter<Decimal>
+    {
+        public override void Write(Utf8JsonWriter writer, Decimal value, JsonSerializerOptions options) => writer.WriteStringValue(value.ToString(CultureInfo.InvariantCulture));
+        public override Decimal Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => Decimal.Parse(reader.GetString(), CultureInfo.InvariantCulture);
+    }
+
+    // Fast Binary Encoding base JSON converter
+    public static class Json
+    {
+        private static readonly JsonSerializerOptions DefaultOptions;
+
+        static Json()
+        {
+            DefaultOptions = new JsonSerializerOptions(JsonSerializerDefaults.General)
+            {
+                IncludeFields = true
+            };
+            DefaultOptions.Converters.Add(new ByteArrayConverter());
+            DefaultOptions.Converters.Add(new BytesConverter());
+            DefaultOptions.Converters.Add(new CharConverter());
+            DefaultOptions.Converters.Add(new DateTimeConverter());
+            DefaultOptions.Converters.Add(new DecimalConverter());
+        }
+
+        public static string ToJson<T>(T value) { return JsonSerializer.Serialize(value, DefaultOptions); }
+        public static T FromJson<T>(string json) { return JsonSerializer.Deserialize<T>(json, DefaultOptions); }
     }
 
 #endif
@@ -4375,7 +4478,7 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     }
 
     [JsonFormatter(typeof(_ENUM_NAME_Converter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class _ENUM_NAME_Converter : JsonConverter
     {
@@ -4404,6 +4507,15 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(_ENUM_NAME_Converter))]
+#else
+
+    public class _ENUM_NAME_Converter : JsonConverter<_ENUM_NAME_>
+    {
+        public override void Write(Utf8JsonWriter writer, _ENUM_NAME_ value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override _ENUM_NAME_ Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new _ENUM_NAME_(reader.Get_ENUM_UTF8JSON_TYPE_());
     }
 
     [JsonConverter(typeof(_ENUM_NAME_Converter))]
@@ -4727,7 +4839,7 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
     }
 
     [JsonFormatter(typeof(_FLAGS_NAME_Converter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class _FLAGS_NAME_Converter : JsonConverter
     {
@@ -4756,6 +4868,15 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(_FLAGS_NAME_Converter))]
+#else
+
+    public class _FLAGS_NAME_Converter : JsonConverter<_FLAGS_NAME_>
+    {
+        public override void Write(Utf8JsonWriter writer, _FLAGS_NAME_ value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override _FLAGS_NAME_ Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new _FLAGS_NAME_(reader.Get_FLAGS_UTF8JSON_TYPE_());
     }
 
     [JsonConverter(typeof(_FLAGS_NAME_Converter))]

@@ -17,8 +17,11 @@ using System.Threading.Tasks;
 #if UTF8JSON
 using Utf8Json;
 using Utf8Json.Resolvers;
-#else
+#elif NEWTONSOFTJSON
 using Newtonsoft.Json;
+#else
+using System.Text.Json;
+using System.Text.Json.Serialization;
 #endif
 
 namespace proto {
@@ -39,7 +42,7 @@ namespace proto {
     }
 
     [JsonFormatter(typeof(OrderSideConverter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class OrderSideConverter : JsonConverter
     {
@@ -68,6 +71,15 @@ namespace proto {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(OrderSideConverter))]
+#else
+
+    public class OrderSideConverter : JsonConverter<OrderSide>
+    {
+        public override void Write(Utf8JsonWriter writer, OrderSide value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override OrderSide Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new OrderSide(reader.GetByte());
     }
 
     [JsonConverter(typeof(OrderSideConverter))]
@@ -259,7 +271,7 @@ namespace proto {
     }
 
     [JsonFormatter(typeof(OrderTypeConverter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class OrderTypeConverter : JsonConverter
     {
@@ -288,6 +300,15 @@ namespace proto {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(OrderTypeConverter))]
+#else
+
+    public class OrderTypeConverter : JsonConverter<OrderType>
+    {
+        public override void Write(Utf8JsonWriter writer, OrderType value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override OrderType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new OrderType(reader.GetByte());
     }
 
     [JsonConverter(typeof(OrderTypeConverter))]
@@ -482,7 +503,7 @@ namespace proto {
     }
 
     [JsonFormatter(typeof(StateConverter))]
-#else
+#elif NEWTONSOFTJSON
 
     public class StateConverter : JsonConverter
     {
@@ -511,6 +532,15 @@ namespace proto {
                     return null;
             }
         }
+    }
+
+    [JsonConverter(typeof(StateConverter))]
+#else
+
+    public class StateConverter : JsonConverter<State>
+    {
+        public override void Write(Utf8JsonWriter writer, State value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override State Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new State(reader.GetByte());
     }
 
     [JsonConverter(typeof(StateConverter))]
