@@ -3,37 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/create.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/print.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/print.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/send_receive.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/send_receive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/serialization.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/serialization.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/serialization_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/serialization_final.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/serialization_json.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/serialization_json.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/ieee754.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/ieee754.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/int64.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/int64.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/protoex.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/utf8.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/utf8.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/uuid.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/uuid.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_clone.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_clone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_create.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_create.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_decimal.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_decimal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_enums.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_extending.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_extending.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_ieee754.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_ieee754.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_int64.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_int64.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_send_receive.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_send_receive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_send_receive_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_send_receive_final.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_serialization.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_serialization.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_serialization_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_serialization_final.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_serialization_json.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_serialization_json.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_utf8.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_utf8.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,10 +88,10 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Node.js.print.js" />
       <item itemvalue="npm.tests-standard" />
       <item itemvalue="npm.tests-node" />
       <item itemvalue="npm.tests-browser" />
-      <item itemvalue="Node.js.print.js" />
       <item itemvalue="npm.tests" />
     </list>
     <recent_temporary>
@@ -189,6 +160,7 @@
       <workItem from="1571845896118" duration="129000" />
       <workItem from="1605130601531" duration="5000" />
       <workItem from="1605130896555" duration="1246000" />
+      <workItem from="1607019288983" duration="133000" />
     </task>
     <servers />
   </component>
@@ -226,26 +198,26 @@
       <screen x="0" y="0" width="2560" height="1560" />
     </state>
     <state x="1149" y="672" key="#ESLint/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605131763492" />
-    <state width="1362" height="266" key="GridCell.Tab.0.bottom" timestamp="1605132143265">
+    <state width="1362" height="266" key="GridCell.Tab.0.bottom" timestamp="1607019421589">
       <screen x="0" y="0" width="2560" height="1560" />
     </state>
-    <state width="1362" height="266" key="GridCell.Tab.0.bottom/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605132143265" />
-    <state width="1362" height="266" key="GridCell.Tab.0.center" timestamp="1605132143265">
+    <state width="1362" height="266" key="GridCell.Tab.0.bottom/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607019421589" />
+    <state width="1362" height="266" key="GridCell.Tab.0.center" timestamp="1607019421589">
       <screen x="0" y="0" width="2560" height="1560" />
     </state>
-    <state width="1362" height="266" key="GridCell.Tab.0.center/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605132143265" />
-    <state width="1362" height="266" key="GridCell.Tab.0.left" timestamp="1605132143265">
+    <state width="1362" height="266" key="GridCell.Tab.0.center/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607019421589" />
+    <state width="1362" height="266" key="GridCell.Tab.0.left" timestamp="1607019421589">
       <screen x="0" y="0" width="2560" height="1560" />
     </state>
-    <state width="1362" height="266" key="GridCell.Tab.0.left/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605132143265" />
-    <state width="1362" height="266" key="GridCell.Tab.0.right" timestamp="1605132143265">
+    <state width="1362" height="266" key="GridCell.Tab.0.left/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607019421589" />
+    <state width="1362" height="266" key="GridCell.Tab.0.right" timestamp="1607019421589">
       <screen x="0" y="0" width="2560" height="1560" />
     </state>
-    <state width="1362" height="266" key="GridCell.Tab.0.right/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605132143265" />
-    <state x="781" y="424" key="SettingsEditor" timestamp="1605131191737">
+    <state width="1362" height="266" key="GridCell.Tab.0.right/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607019421589" />
+    <state x="781" y="424" key="SettingsEditor" timestamp="1607019370736">
       <screen x="0" y="0" width="2560" height="1560" />
     </state>
-    <state x="781" y="424" key="SettingsEditor/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605131191737" />
+    <state x="781" y="424" key="SettingsEditor/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607019370736" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
