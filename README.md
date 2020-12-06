@@ -1,11 +1,11 @@
 # Fast Binary Encoding (FBE)
 
-[![Linux build status](https://img.shields.io/travis/chronoxor/FastBinaryEncoding/master.svg?label=Linux)](https://travis-ci.com/chronoxor/FastBinaryEncoding)
-[![OSX build status](https://img.shields.io/travis/chronoxor/FastBinaryEncoding/master.svg?label=OSX)](https://travis-ci.com/chronoxor/FastBinaryEncoding)
-[![Cygwin build status](https://img.shields.io/appveyor/ci/chronoxor/FastBinaryEncoding/master.svg?label=Cygwin)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
-[![MSYS2 build status](https://img.shields.io/appveyor/ci/chronoxor/FastBinaryEncoding/master.svg?label=MSYS2)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
-[![MinGW build status](https://img.shields.io/appveyor/ci/chronoxor/FastBinaryEncoding/master.svg?label=MinGW)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
-[![Windows build status](https://img.shields.io/appveyor/ci/chronoxor/FastBinaryEncoding/master.svg?label=Windows)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
+[![Linux build status](https://img.shields.io/travis/com/chronoxor/FastBinaryEncoding/master?label=Linux)](https://travis-ci.com/chronoxor/FastBinaryEncoding)
+[![OSX build status](https://img.shields.io/travis/com/chronoxor/FastBinaryEncoding/master?label=OSX)](https://travis-ci.com/chronoxor/FastBinaryEncoding)
+[![Cygwin build status](https://img.shields.io/appveyor/build/chronoxor/FastBinaryEncoding/master?label=Cygwin)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
+[![MSYS2 build status](https://img.shields.io/appveyor/build/chronoxor/FastBinaryEncoding/master?label=MSYS2)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
+[![MinGW build status](https://img.shields.io/appveyor/build/chronoxor/FastBinaryEncoding/master?label=MinGW)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
+[![Windows build status](https://img.shields.io/appveyor/build/chronoxor/FastBinaryEncoding/master?label=Windows)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
 
 Fast Binary Encoding allows to describe any domain models, business
 objects, complex data structures, client/server requests & responses
