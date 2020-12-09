@@ -9753,6 +9753,7 @@ void GeneratorCpp::GenerateClient_Header(const std::shared_ptr<Package>& p, bool
     WriteLine();
     WriteLineIndent("// Watchdog for timeouts");
     WriteLineIndent("void watchdog(uint64_t utc) { std::scoped_lock locker(this->_lock); watchdog_requests(utc); }");
+    WriteLine();
 
     // Collect responses & rejects collections
     std::set<std::string> responses;
@@ -9789,7 +9790,6 @@ void GeneratorCpp::GenerateClient_Header(const std::shared_ptr<Package>& p, bool
                 std::string response_field = (s->response) ? *s->response->response : "";
                 CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
-                WriteLine();
                 if (response_name.empty())
                     WriteLineIndent("std::future<void> request(const " + request_name + "& value, size_t timeout = 0);");
                 else
@@ -9800,7 +9800,6 @@ void GeneratorCpp::GenerateClient_Header(const std::shared_ptr<Package>& p, bool
 
     // Generate client protected fields
     Indent(-1);
-    WriteLine();
     WriteLineIndent("protected:");
     Indent(1);
     if (!p->import)
