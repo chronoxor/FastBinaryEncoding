@@ -9753,7 +9753,6 @@ void GeneratorCpp::GenerateClient_Header(const std::shared_ptr<Package>& p, bool
     WriteLine();
     WriteLineIndent("// Watchdog for timeouts");
     WriteLineIndent("void watchdog(uint64_t utc) { std::scoped_lock locker(this->_lock); watchdog_requests(utc); }");
-    WriteLine();
 
     // Collect responses & rejects collections
     std::set<std::string> responses;
@@ -9781,6 +9780,7 @@ void GeneratorCpp::GenerateClient_Header(const std::shared_ptr<Package>& p, bool
     // Generate request() methods
     if (p->body)
     {
+        WriteLine();
         for (const auto& s : p->body->structs)
         {
             if (s->message && s->request)
@@ -9800,6 +9800,7 @@ void GeneratorCpp::GenerateClient_Header(const std::shared_ptr<Package>& p, bool
 
     // Generate client protected fields
     Indent(-1);
+    WriteLine();
     WriteLineIndent("protected:");
     Indent(1);
     if (!p->import)
