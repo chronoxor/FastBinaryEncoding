@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/FastBinaryEncoding.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,14 +58,16 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin" />
   </component>
-  <component name="RunManager" selected="Kotlin.Serialization">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.&lt;default&gt;">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -114,19 +111,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="examples.Print" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" value="examples.Print" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="examples.SerializationJson" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
       <option name="VM_PARAMETERS" />
@@ -140,13 +124,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="&lt;default&gt;" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="FastBinaryEncoding" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="PACKAGE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Kotlin.Serialization" />
-        <item itemvalue="Kotlin.SerializationFinal" />
-        <item itemvalue="Kotlin.examples.SerializationJson" />
-        <item itemvalue="Kotlin.PrintJson" />
-        <item itemvalue="Kotlin.examples.Print" />
+        <item itemvalue="TestNG.&lt;default&gt;" />
       </list>
     </recent_temporary>
   </component>
@@ -258,6 +248,7 @@
       <workItem from="1571846051723" duration="190000" />
       <workItem from="1605129132358" duration="75000" />
       <workItem from="1605129275473" duration="505000" />
+      <workItem from="1607432639785" duration="200000" />
     </task>
     <servers />
   </component>
@@ -290,22 +281,22 @@
       <screen x="0" y="0" width="2560" height="1560" />
     </state>
     <state x="760" y="354" key="#Project_Structure/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605129339132" />
-    <state width="2517" height="453" key="GridCell.Tab.0.bottom" timestamp="1605129780521">
+    <state width="2517" height="453" key="GridCell.Tab.0.bottom" timestamp="1607432839348">
       <screen x="0" y="0" width="2560" height="1560" />
     </state>
-    <state width="2517" height="453" key="GridCell.Tab.0.bottom/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605129780521" />
-    <state width="2517" height="453" key="GridCell.Tab.0.center" timestamp="1605129780521">
+    <state width="2517" height="453" key="GridCell.Tab.0.bottom/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607432839348" />
+    <state width="2517" height="453" key="GridCell.Tab.0.center" timestamp="1607432839348">
       <screen x="0" y="0" width="2560" height="1560" />
     </state>
-    <state width="2517" height="453" key="GridCell.Tab.0.center/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605129780521" />
-    <state width="2517" height="453" key="GridCell.Tab.0.left" timestamp="1605129780521">
+    <state width="2517" height="453" key="GridCell.Tab.0.center/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607432839348" />
+    <state width="2517" height="453" key="GridCell.Tab.0.left" timestamp="1607432839347">
       <screen x="0" y="0" width="2560" height="1560" />
     </state>
-    <state width="2517" height="453" key="GridCell.Tab.0.left/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605129780521" />
-    <state width="2517" height="453" key="GridCell.Tab.0.right" timestamp="1605129780521">
+    <state width="2517" height="453" key="GridCell.Tab.0.left/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607432839347" />
+    <state width="2517" height="453" key="GridCell.Tab.0.right" timestamp="1607432839348">
       <screen x="0" y="0" width="2560" height="1560" />
     </state>
-    <state width="2517" height="453" key="GridCell.Tab.0.right/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605129780521" />
+    <state width="2517" height="453" key="GridCell.Tab.0.right/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607432839348" />
     <state x="760" y="354" key="SettingsEditor" timestamp="1605129288078">
       <screen x="0" y="0" width="2560" height="1560" />
     </state>
