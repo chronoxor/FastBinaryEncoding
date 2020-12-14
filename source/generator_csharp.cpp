@@ -7447,7 +7447,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                     Indent(-1);
                     WriteLineIndent("else");
                     Indent(1);
-                    WriteLineIndent("source.SetException(new Exception(\"Serialization failed!\"));");
+                    WriteLineIndent("source.SetException(new Exception(\"Send request failed!\"));");
                     Indent(-1);
                     WriteLine();
                     WriteLineIndent("return task;");
@@ -7488,7 +7488,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                     WriteLineIndent("}");
                     WriteLineIndent("else");
                     Indent(1);
-                    WriteLineIndent("source.SetException(new Exception(\"Serialization failed!\"));");
+                    WriteLineIndent("source.SetException(new Exception(\"Send request failed!\"));");
                     Indent(-1);
                     WriteLine();
                     WriteLineIndent("return task;");

@@ -10010,7 +10010,7 @@ void GeneratorCpp::GenerateClient_Source(const std::shared_ptr<Package>& p, bool
                     Indent(-1);
                     WriteLineIndent("else");
                     Indent(1);
-                    WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(\"Serialization failed!\")));");
+                    WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(\"Send request failed!\")));");
                     Indent(-1);
                     WriteLine();
                     WriteLineIndent("return future;");
@@ -10047,7 +10047,7 @@ void GeneratorCpp::GenerateClient_Source(const std::shared_ptr<Package>& p, bool
                     WriteLineIndent("}");
                     WriteLineIndent("else");
                     Indent(1);
-                    WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(\"Serialization failed!\")));");
+                    WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::runtime_error(\"Send request failed!\")));");
                     Indent(-1);
                     WriteLine();
                     WriteLineIndent("return future;");

@@ -12180,7 +12180,7 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     Indent(-1);
     WriteLineIndent("} else {");
     Indent(1);
-    WriteLineIndent("promise.reject(new Error('Serialization failed!'))");
+    WriteLineIndent("promise.reject(new Error('Send request failed!'))");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
