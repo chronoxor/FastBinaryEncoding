@@ -49,9 +49,9 @@ bison_target(parser "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe.y" "${CMAKE_CURRENT_
 add_flex_bison_dependency(lexer parser)
 
 # Compiler
-file(GLOB_RECURSE EXE_HEADER_FILES "source/*.h")
-file(GLOB_RECURSE EXE_INLINE_FILES "source/*.inl")
-file(GLOB_RECURSE EXE_SOURCE_FILES "source/*.cpp")
+file(GLOB_RECURSE EXE_HEADER_FILES "include/*.h" "source/*.h")
+file(GLOB_RECURSE EXE_INLINE_FILES "include/*.inl" "source/*.inl")
+file(GLOB_RECURSE EXE_SOURCE_FILES "include/*.cpp" "source/*.cpp")
 list(APPEND EXE_SOURCE_FILES ${FLEX_lexer_OUTPUTS})
 list(APPEND EXE_SOURCE_FILES ${BISON_parser_OUTPUTS})
 add_executable(fbec ${EXE_HEADER_FILES} ${EXE_INLINE_FILES} ${EXE_SOURCE_FILES})
