@@ -38,6 +38,12 @@ enum class EnumSimple
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
+std::ostream& operator<<(std::ostream& stream, EnumSimple value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, EnumSimple value);
+#endif
+
 enum class EnumTyped : uint8_t
 {
     ENUM_VALUE_0,
@@ -48,9 +54,21 @@ enum class EnumTyped : uint8_t
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
+std::ostream& operator<<(std::ostream& stream, EnumTyped value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, EnumTyped value);
+#endif
+
 enum class EnumEmpty
 {
 };
+
+std::ostream& operator<<(std::ostream& stream, EnumEmpty value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, EnumEmpty value);
+#endif
 
 enum class FlagsSimple
 {
@@ -61,7 +79,14 @@ enum class FlagsSimple
     FLAG_VALUE_4 = FLAG_VALUE_3,
     FLAG_VALUE_5 = FLAG_VALUE_1  |  FLAG_VALUE_3,
 };
+
 FBE_ENUM_FLAGS(FlagsSimple)
+
+std::ostream& operator<<(std::ostream& stream, FlagsSimple value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, FlagsSimple value);
+#endif
 
 enum class FlagsTyped : uint64_t
 {
@@ -76,12 +101,26 @@ enum class FlagsTyped : uint64_t
     FLAG_VALUE_8 = FLAG_VALUE_7,
     FLAG_VALUE_9 = FLAG_VALUE_2  |  FLAG_VALUE_4  |  FLAG_VALUE_6,
 };
+
 FBE_ENUM_FLAGS(FlagsTyped)
+
+std::ostream& operator<<(std::ostream& stream, FlagsTyped value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, FlagsTyped value);
+#endif
 
 enum class FlagsEmpty
 {
 };
+
 FBE_ENUM_FLAGS(FlagsEmpty)
+
+std::ostream& operator<<(std::ostream& stream, FlagsEmpty value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, FlagsEmpty value);
+#endif
 
 struct StructSimple
 {
@@ -151,8 +190,7 @@ struct StructSimple
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructSimple& value);
+    friend std::ostream& operator<<(std::ostream& stream, const StructSimple& value);
 
     void swap(StructSimple& other) noexcept;
     friend void swap(StructSimple& value1, StructSimple& value2) noexcept { value1.swap(value2); }
@@ -269,8 +307,7 @@ struct StructOptional : public ::test::StructSimple
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructOptional& value);
+    friend std::ostream& operator<<(std::ostream& stream, const StructOptional& value);
 
     void swap(StructOptional& other) noexcept;
     friend void swap(StructOptional& value1, StructOptional& value2) noexcept { value1.swap(value2); }
@@ -333,8 +370,7 @@ struct StructNested : public ::test::StructOptional
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructNested& value);
+    friend std::ostream& operator<<(std::ostream& stream, const StructNested& value);
 
     void swap(StructNested& other) noexcept;
     friend void swap(StructNested& value1, StructNested& value2) noexcept { value1.swap(value2); }
@@ -388,8 +424,7 @@ struct StructBytes
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructBytes& value);
+    friend std::ostream& operator<<(std::ostream& stream, const StructBytes& value);
 
     void swap(StructBytes& other) noexcept;
     friend void swap(StructBytes& value1, StructBytes& value2) noexcept { value1.swap(value2); }
@@ -449,8 +484,7 @@ struct StructArray
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructArray& value);
+    friend std::ostream& operator<<(std::ostream& stream, const StructArray& value);
 
     void swap(StructArray& other) noexcept;
     friend void swap(StructArray& value1, StructArray& value2) noexcept { value1.swap(value2); }
@@ -510,8 +544,7 @@ struct StructVector
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructVector& value);
+    friend std::ostream& operator<<(std::ostream& stream, const StructVector& value);
 
     void swap(StructVector& other) noexcept;
     friend void swap(StructVector& value1, StructVector& value2) noexcept { value1.swap(value2); }
@@ -571,8 +604,7 @@ struct StructList
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructList& value);
+    friend std::ostream& operator<<(std::ostream& stream, const StructList& value);
 
     void swap(StructList& other) noexcept;
     friend void swap(StructList& value1, StructList& value2) noexcept { value1.swap(value2); }
@@ -626,8 +658,7 @@ struct StructSet
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructSet& value);
+    friend std::ostream& operator<<(std::ostream& stream, const StructSet& value);
 
     void swap(StructSet& other) noexcept;
     friend void swap(StructSet& value1, StructSet& value2) noexcept { value1.swap(value2); }
@@ -687,8 +718,7 @@ struct StructMap
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructMap& value);
+    friend std::ostream& operator<<(std::ostream& stream, const StructMap& value);
 
     void swap(StructMap& other) noexcept;
     friend void swap(StructMap& value1, StructMap& value2) noexcept { value1.swap(value2); }
@@ -748,8 +778,7 @@ struct StructHash
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructHash& value);
+    friend std::ostream& operator<<(std::ostream& stream, const StructHash& value);
 
     void swap(StructHash& other) noexcept;
     friend void swap(StructHash& value1, StructHash& value2) noexcept { value1.swap(value2); }
@@ -801,8 +830,7 @@ struct StructHashEx
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructHashEx& value);
+    friend std::ostream& operator<<(std::ostream& stream, const StructHashEx& value);
 
     void swap(StructHashEx& other) noexcept;
     friend void swap(StructHashEx& value1, StructHashEx& value2) noexcept { value1.swap(value2); }
@@ -850,8 +878,7 @@ struct StructEmpty
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructEmpty& value);
+    friend std::ostream& operator<<(std::ostream& stream, const StructEmpty& value);
 
     void swap(StructEmpty& other) noexcept;
     friend void swap(StructEmpty& value1, StructEmpty& value2) noexcept { value1.swap(value2); }
@@ -879,5 +906,3 @@ struct hash<test::StructEmpty>
 namespace test {
 
 } // namespace test
-
-#include "test.inl"

@@ -4512,13 +4512,14 @@ void GeneratorJava::GenerateEnum(const std::shared_ptr<Package>& p, const std::s
     WriteLineIndent("public String toString()");
     WriteLineIndent("{");
     Indent(1);
-    if (e->body)
+    if (e->body && !e->body->values.empty())
     {
         for (const auto& value : e->body->values)
             WriteLineIndent("if (this == " + *value->name + ")" + " return \"" + *value->name + "\";");
-
+        WriteLineIndent("return \"<unknown>\";");
     }
-    WriteLineIndent("return \"<unknown>\";");
+    else
+        WriteLineIndent("return \"<empty>\";");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4846,9 +4847,9 @@ void GeneratorJava::GenerateFlags(const std::shared_ptr<Package>& p, const std::
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("var sb = new StringBuilder();");
-    WriteLineIndent("boolean first = true;");
-    if (f->body)
+    if (f->body && !f->body->values.empty())
     {
+        WriteLineIndent("boolean first = true;");
         for (const auto& value : f->body->values)
         {
             WriteLineIndent("if (hasFlags(" + *value->name + "))");

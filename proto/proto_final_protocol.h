@@ -39,11 +39,11 @@ public:
         , BalanceMessageModel(this->_buffer)
         , AccountMessageModel(this->_buffer)
     { this->final(true); }
-    FinalSender(const FinalSender&) = default;
+    FinalSender(const FinalSender&) = delete;
     FinalSender(FinalSender&&) noexcept = default;
     virtual ~FinalSender() = default;
 
-    FinalSender& operator=(const FinalSender&) = default;
+    FinalSender& operator=(const FinalSender&) = delete;
     FinalSender& operator=(FinalSender&&) noexcept = default;
 
     size_t send(const ::proto::OrderMessage& value);
@@ -62,11 +62,11 @@ class FinalReceiver : public virtual FBE::Receiver
 {
 public:
     FinalReceiver() { this->final(true); }
-    FinalReceiver(const FinalReceiver&) = default;
+    FinalReceiver(const FinalReceiver&) = delete;
     FinalReceiver(FinalReceiver&&) = default;
     virtual ~FinalReceiver() = default;
 
-    FinalReceiver& operator=(const FinalReceiver&) = default;
+    FinalReceiver& operator=(const FinalReceiver&) = delete;
     FinalReceiver& operator=(FinalReceiver&&) = default;
 
 protected:
@@ -95,11 +95,11 @@ class FinalClient : public virtual FinalSender, protected virtual FinalReceiver
 {
 public:
     FinalClient() = default;
-    FinalClient(const FinalClient&) = default;
+    FinalClient(const FinalClient&) = delete;
     FinalClient(FinalClient&&) = default;
     virtual ~FinalClient() = default;
 
-    FinalClient& operator=(const FinalClient&) = default;
+    FinalClient& operator=(const FinalClient&) = delete;
     FinalClient& operator=(FinalClient&&) = default;
 
     // Reset client buffers
@@ -107,6 +107,7 @@ public:
 
     // Watchdog for timeouts
     void watchdog(uint64_t utc) { std::scoped_lock locker(this->_lock); watchdog_requests(utc); }
+
 
 protected:
     std::mutex _lock;

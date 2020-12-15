@@ -395,7 +395,7 @@ module Test
 
       # Get enum string value
       def to_s
-        '<unknown>'
+        '<empty>'
       end
 
       # Get enum JSON value

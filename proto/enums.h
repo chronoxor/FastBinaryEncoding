@@ -35,6 +35,12 @@ enum class EnumByte : uint8_t
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
+std::ostream& operator<<(std::ostream& stream, EnumByte value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, EnumByte value);
+#endif
+
 enum class EnumChar : uint8_t
 {
     ENUM_VALUE_0,
@@ -44,6 +50,12 @@ enum class EnumChar : uint8_t
     ENUM_VALUE_4,
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
+
+std::ostream& operator<<(std::ostream& stream, EnumChar value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, EnumChar value);
+#endif
 
 enum class EnumWChar : uint32_t
 {
@@ -55,6 +67,12 @@ enum class EnumWChar : uint32_t
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
+std::ostream& operator<<(std::ostream& stream, EnumWChar value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, EnumWChar value);
+#endif
+
 enum class EnumInt8 : int8_t
 {
     ENUM_VALUE_0,
@@ -64,6 +82,12 @@ enum class EnumInt8 : int8_t
     ENUM_VALUE_4,
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
+
+std::ostream& operator<<(std::ostream& stream, EnumInt8 value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, EnumInt8 value);
+#endif
 
 enum class EnumUInt8 : uint8_t
 {
@@ -75,6 +99,12 @@ enum class EnumUInt8 : uint8_t
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
+std::ostream& operator<<(std::ostream& stream, EnumUInt8 value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, EnumUInt8 value);
+#endif
+
 enum class EnumInt16 : int16_t
 {
     ENUM_VALUE_0,
@@ -84,6 +114,12 @@ enum class EnumInt16 : int16_t
     ENUM_VALUE_4,
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
+
+std::ostream& operator<<(std::ostream& stream, EnumInt16 value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, EnumInt16 value);
+#endif
 
 enum class EnumUInt16 : uint16_t
 {
@@ -95,6 +131,12 @@ enum class EnumUInt16 : uint16_t
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
+std::ostream& operator<<(std::ostream& stream, EnumUInt16 value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, EnumUInt16 value);
+#endif
+
 enum class EnumInt32 : int32_t
 {
     ENUM_VALUE_0,
@@ -104,6 +146,12 @@ enum class EnumInt32 : int32_t
     ENUM_VALUE_4,
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
+
+std::ostream& operator<<(std::ostream& stream, EnumInt32 value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, EnumInt32 value);
+#endif
 
 enum class EnumUInt32 : uint32_t
 {
@@ -115,6 +163,12 @@ enum class EnumUInt32 : uint32_t
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
+std::ostream& operator<<(std::ostream& stream, EnumUInt32 value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, EnumUInt32 value);
+#endif
+
 enum class EnumInt64 : int64_t
 {
     ENUM_VALUE_0,
@@ -125,6 +179,12 @@ enum class EnumInt64 : int64_t
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
 
+std::ostream& operator<<(std::ostream& stream, EnumInt64 value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, EnumInt64 value);
+#endif
+
 enum class EnumUInt64 : uint64_t
 {
     ENUM_VALUE_0,
@@ -134,6 +194,12 @@ enum class EnumUInt64 : uint64_t
     ENUM_VALUE_4,
     ENUM_VALUE_5 = ENUM_VALUE_3,
 };
+
+std::ostream& operator<<(std::ostream& stream, EnumUInt64 value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, EnumUInt64 value);
+#endif
 
 struct Enums
 {
@@ -224,8 +290,7 @@ struct Enums
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const Enums& value);
+    friend std::ostream& operator<<(std::ostream& stream, const Enums& value);
 
     void swap(Enums& other) noexcept;
     friend void swap(Enums& value1, Enums& value2) noexcept { value1.swap(value2); }
@@ -253,5 +318,3 @@ struct hash<enums::Enums>
 namespace enums {
 
 } // namespace enums
-
-#include "enums.inl"

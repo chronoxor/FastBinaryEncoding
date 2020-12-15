@@ -120,7 +120,6 @@ private:
     void GenerateFBEJson_Header(const CppCommon::Path& path);
 
     void GeneratePackage_Header(const std::shared_ptr<Package>& p);
-    void GeneratePackage_Inline(const std::shared_ptr<Package>& p);
     void GeneratePackage_Source(const std::shared_ptr<Package>& p);
     void GeneratePackage_Json(const std::shared_ptr<Package>& p);
     void GeneratePackageModels_Header(const std::shared_ptr<Package>& p);

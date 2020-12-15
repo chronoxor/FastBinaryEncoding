@@ -7955,7 +7955,7 @@ class Client extends fbe.Client {
         this._requests_by_timestamp[this._timestamp] = value.id
       }
     } else {
-      promise.reject(new Error('Serialization failed!'))
+      promise.reject(new Error('Send request failed!'))
     }
 
     return promise
@@ -8278,7 +8278,7 @@ class FinalClient extends fbe.Client {
         this._requests_by_timestamp[this._timestamp] = value.id
       }
     } else {
-      promise.reject(new Error('Serialization failed!'))
+      promise.reject(new Error('Send request failed!'))
     }
 
     return promise

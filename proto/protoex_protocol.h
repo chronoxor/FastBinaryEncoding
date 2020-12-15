@@ -42,11 +42,11 @@ public:
         , BalanceMessageModel(this->_buffer)
         , AccountMessageModel(this->_buffer)
     {}
-    Sender(const Sender&) = default;
+    Sender(const Sender&) = delete;
     Sender(Sender&&) noexcept = default;
     virtual ~Sender() = default;
 
-    Sender& operator=(const Sender&) = default;
+    Sender& operator=(const Sender&) = delete;
     Sender& operator=(Sender&&) noexcept = default;
 
     // Imported senders
@@ -69,11 +69,11 @@ class Receiver : public virtual FBE::Receiver
 {
 public:
     Receiver() {}
-    Receiver(const Receiver&) = default;
+    Receiver(const Receiver&) = delete;
     Receiver(Receiver&&) = default;
     virtual ~Receiver() = default;
 
-    Receiver& operator=(const Receiver&) = default;
+    Receiver& operator=(const Receiver&) = delete;
     Receiver& operator=(Receiver&&) = default;
 
 protected:
@@ -103,11 +103,11 @@ class Proxy : public virtual FBE::Receiver
 {
 public:
     Proxy() {}
-    Proxy(const Proxy&) = default;
+    Proxy(const Proxy&) = delete;
     Proxy(Proxy&&) = default;
     virtual ~Proxy() = default;
 
-    Proxy& operator=(const Proxy&) = default;
+    Proxy& operator=(const Proxy&) = delete;
     Proxy& operator=(Proxy&&) = default;
 
 protected:
@@ -134,11 +134,11 @@ public:
     typedef proto::Client protoClient;
 
     Client() = default;
-    Client(const Client&) = default;
+    Client(const Client&) = delete;
     Client(Client&&) = default;
     virtual ~Client() = default;
 
-    Client& operator=(const Client&) = default;
+    Client& operator=(const Client&) = delete;
     Client& operator=(Client&&) = default;
 
     // Imported clients
@@ -149,6 +149,7 @@ public:
 
     // Watchdog for timeouts
     void watchdog(uint64_t utc) { std::scoped_lock locker(this->_lock); watchdog_requests(utc); }
+
 
 protected:
     virtual bool onReceiveResponse(const ::protoex::OrderMessage& response) { return false; }

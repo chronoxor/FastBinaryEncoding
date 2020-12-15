@@ -4829,12 +4829,14 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     WriteLineIndent("override fun toString(): String");
     WriteLineIndent("{");
     Indent(1);
-    if (e->body)
+    if (e->body && !e->body->values.empty())
     {
         for (const auto& value : e->body->values)
             WriteLineIndent("if (this == " + *value->name + ")" + " return \"" + *value->name + "\"");
+        WriteLineIndent("return \"<unknown>\"");
     }
-    WriteLineIndent("return \"<unknown>\"");
+    else
+        WriteLineIndent("return \"<empty>\"");
     Indent(-1);
     WriteLineIndent("}");
 

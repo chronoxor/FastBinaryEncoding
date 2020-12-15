@@ -42,11 +42,11 @@ public:
         , BalanceMessageModel(this->_buffer)
         , AccountMessageModel(this->_buffer)
     { this->final(true); }
-    FinalSender(const FinalSender&) = default;
+    FinalSender(const FinalSender&) = delete;
     FinalSender(FinalSender&&) noexcept = default;
     virtual ~FinalSender() = default;
 
-    FinalSender& operator=(const FinalSender&) = default;
+    FinalSender& operator=(const FinalSender&) = delete;
     FinalSender& operator=(FinalSender&&) noexcept = default;
 
     // Imported senders
@@ -69,11 +69,11 @@ class FinalReceiver : public virtual FBE::Receiver
 {
 public:
     FinalReceiver() { this->final(true); }
-    FinalReceiver(const FinalReceiver&) = default;
+    FinalReceiver(const FinalReceiver&) = delete;
     FinalReceiver(FinalReceiver&&) = default;
     virtual ~FinalReceiver() = default;
 
-    FinalReceiver& operator=(const FinalReceiver&) = default;
+    FinalReceiver& operator=(const FinalReceiver&) = delete;
     FinalReceiver& operator=(FinalReceiver&&) = default;
 
 protected:
@@ -105,11 +105,11 @@ public:
     typedef proto::FinalClient protoFinalClient;
 
     FinalClient() = default;
-    FinalClient(const FinalClient&) = default;
+    FinalClient(const FinalClient&) = delete;
     FinalClient(FinalClient&&) = default;
     virtual ~FinalClient() = default;
 
-    FinalClient& operator=(const FinalClient&) = default;
+    FinalClient& operator=(const FinalClient&) = delete;
     FinalClient& operator=(FinalClient&&) = default;
 
     // Imported clients
@@ -120,6 +120,7 @@ public:
 
     // Watchdog for timeouts
     void watchdog(uint64_t utc) { std::scoped_lock locker(this->_lock); watchdog_requests(utc); }
+
 
 protected:
     virtual bool onReceiveResponse(const ::protoex::OrderMessage& response) { return false; }

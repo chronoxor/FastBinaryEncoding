@@ -33,7 +33,6 @@ public enum FlagsEmptyEnum
     public String toString()
     {
         var sb = new StringBuilder();
-        boolean first = true;
         return sb.toString();
     }
 

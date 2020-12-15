@@ -35,6 +35,12 @@ enum class OrderSide : uint8_t
     tell,
 };
 
+std::ostream& operator<<(std::ostream& stream, OrderSide value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, OrderSide value);
+#endif
+
 enum class OrderType : uint8_t
 {
     market,
@@ -42,6 +48,12 @@ enum class OrderType : uint8_t
     stop,
     stoplimit,
 };
+
+std::ostream& operator<<(std::ostream& stream, OrderType value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, OrderType value);
+#endif
 
 enum class StateEx : uint8_t
 {
@@ -55,7 +67,14 @@ enum class StateEx : uint8_t
     good = initialized  |  calculated,
     bad = unknown  |  invalid  |  broken,
 };
+
 FBE_ENUM_FLAGS(StateEx)
+
+std::ostream& operator<<(std::ostream& stream, StateEx value);
+
+#if defined(LOGGING_PROTOCOL)
+CppLogging::Record& operator<<(CppLogging::Record& record, StateEx value);
+#endif
 
 struct Order
 {
@@ -88,8 +107,7 @@ struct Order
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const Order& value);
+    friend std::ostream& operator<<(std::ostream& stream, const Order& value);
 
     void swap(Order& other) noexcept;
     friend void swap(Order& value1, Order& value2) noexcept { value1.swap(value2); }
@@ -141,8 +159,7 @@ struct Balance : public ::proto::Balance
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const Balance& value);
+    friend std::ostream& operator<<(std::ostream& stream, const Balance& value);
 
     void swap(Balance& other) noexcept;
     friend void swap(Balance& value1, Balance& value2) noexcept { value1.swap(value2); }
@@ -199,8 +216,7 @@ struct Account
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const Account& value);
+    friend std::ostream& operator<<(std::ostream& stream, const Account& value);
 
     void swap(Account& other) noexcept;
     friend void swap(Account& value1, Account& value2) noexcept { value1.swap(value2); }
@@ -252,8 +268,7 @@ struct OrderMessage
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const OrderMessage& value);
+    friend std::ostream& operator<<(std::ostream& stream, const OrderMessage& value);
 
     void swap(OrderMessage& other) noexcept;
     friend void swap(OrderMessage& value1, OrderMessage& value2) noexcept { value1.swap(value2); }
@@ -304,8 +319,7 @@ struct BalanceMessage
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const BalanceMessage& value);
+    friend std::ostream& operator<<(std::ostream& stream, const BalanceMessage& value);
 
     void swap(BalanceMessage& other) noexcept;
     friend void swap(BalanceMessage& value1, BalanceMessage& value2) noexcept { value1.swap(value2); }
@@ -356,8 +370,7 @@ struct AccountMessage
 
     std::string string() const { std::stringstream ss; ss << *this; return ss.str(); }
 
-    template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const AccountMessage& value);
+    friend std::ostream& operator<<(std::ostream& stream, const AccountMessage& value);
 
     void swap(AccountMessage& other) noexcept;
     friend void swap(AccountMessage& value1, AccountMessage& value2) noexcept { value1.swap(value2); }
@@ -385,5 +398,3 @@ struct hash<protoex::AccountMessage>
 namespace protoex {
 
 } // namespace protoex
-
-#include "protoex.inl"

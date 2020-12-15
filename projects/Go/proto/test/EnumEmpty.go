@@ -53,7 +53,7 @@ func (e *EnumEmpty) Optional() *EnumEmpty {
 
 // Convert enum to string
 func (e EnumEmpty) String() string {
-    return "<unknown>"
+    return "<empty>"
 }
 
 // Convert enum to JSON

@@ -3554,7 +3554,7 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
     WriteLineIndent("# Get enum string value");
     WriteLineIndent("def to_s");
     Indent(1);
-    if (e->body)
+    if (e->body && !e->body->values.empty())
     {
         for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
         {
@@ -3564,8 +3564,10 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
             Indent(-1);
             WriteLineIndent("end");
         }
+        WriteLineIndent("'<unknown>'");
     }
-    WriteLineIndent("'<unknown>'");
+    else
+        WriteLineIndent("'<empty>'");
     Indent(-1);
     WriteLineIndent("end");
 

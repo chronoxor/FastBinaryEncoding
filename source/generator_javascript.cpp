@@ -8833,7 +8833,7 @@ void GeneratorJavaScript::GenerateEnum(const std::shared_ptr<EnumType>& e)
     WriteLineIndent(" */");
     WriteLineIndent("toString () {");
     Indent(1);
-    if (e->body)
+    if (e->body && !e->body->values.empty())
     {
         for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
         {
@@ -8843,8 +8843,10 @@ void GeneratorJavaScript::GenerateEnum(const std::shared_ptr<EnumType>& e)
             Indent(-1);
             WriteLineIndent("}");
         }
+        WriteLineIndent("return '<unknown>'");
     }
-    WriteLineIndent("return '<unknown>'");
+    else
+        WriteLineIndent("return '<empty>'");
     Indent(-1);
     WriteLineIndent("}");
 

@@ -23,7 +23,7 @@ enum class EnumEmptyEnum
 
     override fun toString(): String
     {
-        return "<unknown>"
+        return "<empty>"
     }
 
     companion object

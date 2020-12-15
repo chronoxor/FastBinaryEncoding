@@ -4449,13 +4449,15 @@ void GeneratorSwift::GenerateEnum(const std::shared_ptr<Package>& p, const std::
     WriteLine();
     WriteLineIndent("var description: String {");
     Indent(1);
-    WriteLineIndent("switch self {");
-    if (e->body)
+    if (e->body && !e->body->values.empty())
     {
+        WriteLineIndent("switch self {");
         for (const auto& value : e->body->values)
             WriteLineIndent("case ." + *value->name + ":" + " return \"" + *value->name + "\"");
+        WriteLineIndent("}");
     }
-    WriteLineIndent("}");
+    else
+        WriteLineIndent("return \"<empty>\"");
     Indent(-1);
     WriteLineIndent("}");
 

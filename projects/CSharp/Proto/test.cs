@@ -614,7 +614,7 @@ namespace test {
 
         public override string ToString()
         {
-            return "<unknown>";
+            return "<empty>";
         }
     }
 

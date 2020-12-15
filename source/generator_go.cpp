@@ -5021,7 +5021,7 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
     WriteLineIndent("// Convert enum to string");
     WriteLineIndent("func (e " + enum_name + ") String() string {");
     Indent(1);
-    if (e->body)
+    if (e->body && !e->body->values.empty())
     {
         for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
         {
@@ -5031,8 +5031,10 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
             Indent(-1);
             WriteLineIndent("}");
         }
+        WriteLineIndent("return \"<unknown>\"");
     }
-    WriteLineIndent("return \"<unknown>\"");
+    else
+        WriteLineIndent("return \"<empty>\"");
     Indent(-1);
     WriteLineIndent("}");
 

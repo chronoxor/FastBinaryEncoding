@@ -2888,7 +2888,7 @@ void GeneratorPython::GenerateEnum(const std::shared_ptr<EnumType>& e)
     WriteLine();
     WriteLineIndent("def __str__(self):");
     Indent(1);
-    if (e->body)
+    if (e->body && !e->body->values.empty())
     {
         for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
         {
@@ -2897,8 +2897,10 @@ void GeneratorPython::GenerateEnum(const std::shared_ptr<EnumType>& e)
             WriteLineIndent("return \"" + *(*it)->name + "\"");
             Indent(-1);
         }
+        WriteLineIndent("return \"<unknown>\"");
     }
-    WriteLineIndent("return \"<unknown>\"");
+    else
+        WriteLineIndent("return \"<empty>\"");
     Indent(-1);
 
     // Generate enum __format__ method
@@ -3102,9 +3104,9 @@ void GeneratorPython::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     WriteLineIndent("def __str__(self):");
     Indent(1);
     WriteLineIndent("sb = list()");
-    WriteLineIndent("first = True");
-    if (f->body)
+    if (f->body && !f->body->values.empty())
     {
+        WriteLineIndent("first = True");
         for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
         {
             WriteLineIndent("if (self.value & " + *f->name + "." + *(*it)->name + ".value) and ((self.value & " + *f->name + "." + *(*it)->name + ".value) == " + *f->name + "." + *(*it)->name + ".value):");

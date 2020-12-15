@@ -21,11 +21,11 @@ namespace FBE {
 class Sender
 {
 public:
-    Sender(const Sender&) = default;
+    Sender(const Sender&) = delete;
     Sender(Sender&&) noexcept = default;
     virtual ~Sender() = default;
 
-    Sender& operator=(const Sender&) = default;
+    Sender& operator=(const Sender&) = delete;
     Sender& operator=(Sender&&) noexcept = default;
 
     // Get the sender buffer
@@ -70,11 +70,11 @@ protected:
 class Receiver
 {
 public:
-    Receiver(const Receiver&) = default;
+    Receiver(const Receiver&) = delete;
     Receiver(Receiver&&) = default;
     virtual ~Receiver() = default;
 
-    Receiver& operator=(const Receiver&) = default;
+    Receiver& operator=(const Receiver&) = delete;
     Receiver& operator=(Receiver&&) = default;
 
     // Get the receiver buffer

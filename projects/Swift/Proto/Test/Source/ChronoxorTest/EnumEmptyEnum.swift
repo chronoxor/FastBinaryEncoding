@@ -21,8 +21,7 @@ public enum EnumEmptyEnum {
     init(rawValue: Int32) { self = Self.mapValue(value: rawValue)! }
 
     var description: String {
-        switch self {
-        }
+        return "<empty>"
     }
 
     static let rawValuesMap: [RawValue: EnumEmptyEnum] = {

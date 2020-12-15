@@ -21,7 +21,7 @@ public enum EnumEmptyEnum
     @Override
     public String toString()
     {
-        return "<unknown>";
+        return "<empty>";
     }
 
     private static final java.util.Map<Integer, EnumEmptyEnum> mapping = new java.util.HashMap<>();

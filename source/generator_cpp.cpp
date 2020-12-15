@@ -40,7 +40,6 @@ void GeneratorCpp::Generate(const std::shared_ptr<Package>& package)
 
     // Generate package files
     GeneratePackage_Header(package);
-    GeneratePackage_Inline(package);
     GeneratePackage_Source(package);
     if (JSON())
         GeneratePackage_Json(package);
@@ -4889,11 +4888,11 @@ void GeneratorCpp::GenerateFBESender_Header()
 class Sender
 {
 public:
-    Sender(const Sender&) = default;
+    Sender(const Sender&) = delete;
     Sender(Sender&&) noexcept = default;
     virtual ~Sender() = default;
 
-    Sender& operator=(const Sender&) = default;
+    Sender& operator=(const Sender&) = delete;
     Sender& operator=(Sender&&) noexcept = default;
 
     // Get the sender buffer
@@ -4973,11 +4972,11 @@ void GeneratorCpp::GenerateFBEReceiver_Header()
 class Receiver
 {
 public:
-    Receiver(const Receiver&) = default;
+    Receiver(const Receiver&) = delete;
     Receiver(Receiver&&) = default;
     virtual ~Receiver() = default;
 
-    Receiver& operator=(const Receiver&) = default;
+    Receiver& operator=(const Receiver&) = delete;
     Receiver& operator=(Receiver&&) = default;
 
     // Get the receiver buffer
@@ -6713,9 +6712,6 @@ void GeneratorCpp::GeneratePackage_Header(const std::shared_ptr<Package>& p)
     WriteLine();
     WriteLineIndent("} // namespace " + *p->name);
 
-    // Generate inline import
-    GenerateImports(*p->name + ".inl");
-
     // Generate package footer
     GenerateFooter();
 
@@ -6724,7 +6720,7 @@ void GeneratorCpp::GeneratePackage_Header(const std::shared_ptr<Package>& p)
     Store(output);
 }
 
-void GeneratorCpp::GeneratePackage_Inline(const std::shared_ptr<Package>& p)
+void GeneratorCpp::GeneratePackage_Source(const std::shared_ptr<Package>& p)
 {
     CppCommon::Path output = _output;
 
@@ -6732,11 +6728,14 @@ void GeneratorCpp::GeneratePackage_Inline(const std::shared_ptr<Package>& p)
     CppCommon::Directory::CreateTree(output);
 
     // Generate the output file
-    output /= *p->name + ".inl";
+    output /= *p->name + ".cpp";
     WriteBegin();
 
-    // Generate package inline
-    GenerateInline(CppCommon::Path(_input).filename().string());
+    // Generate package source
+    GenerateSource(CppCommon::Path(_input).filename().string());
+
+    // Generate imports
+    GenerateImports(*p->name + ".h");
 
     // Generate namespace begin
     WriteLine();
@@ -6770,6 +6769,8 @@ void GeneratorCpp::GeneratePackage_Inline(const std::shared_ptr<Package>& p)
         // Generate child structs
         for (const auto& s : p->body->structs)
         {
+            GenerateStruct_Source(p, s);
+
             // Generate struct output stream
             GenerateStructOutputStream(p, s);
 
@@ -6777,47 +6778,6 @@ void GeneratorCpp::GeneratePackage_Inline(const std::shared_ptr<Package>& p)
             if (Logging())
                 GenerateStructLoggingStream(p, s);
         }
-    }
-
-    // Generate namespace end
-    WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-
-    // Generate package footer
-    GenerateFooter();
-
-    // Store the output file
-    WriteEnd();
-    Store(output);
-}
-
-void GeneratorCpp::GeneratePackage_Source(const std::shared_ptr<Package>& p)
-{
-    CppCommon::Path output = _output;
-
-    // Create package path
-    CppCommon::Directory::CreateTree(output);
-
-    // Generate the output file
-    output /= *p->name + ".cpp";
-    WriteBegin();
-
-    // Generate package source
-    GenerateSource(CppCommon::Path(_input).filename().string());
-
-    // Generate imports
-    GenerateImports(*p->name + ".h");
-
-    // Generate namespace begin
-    WriteLine();
-    WriteLineIndent("namespace " + *p->name + " {");
-
-    // Generate namespace body
-    if (p->body)
-    {
-        // Generate child structs
-        for (const auto& s : p->body->structs)
-            GenerateStruct_Source(p, s);
     }
 
     // Generate namespace end
@@ -7228,25 +7188,35 @@ void GeneratorCpp::GenerateEnum(const std::shared_ptr<Package>& p, const std::sh
     // Generate enum end
     Indent(-1);
     WriteLineIndent("};");
+
+    // Generate enum output stream operator declaration
+    WriteLine();
+    WriteLineIndent("std::ostream& operator<<(std::ostream& stream, " + *e->name + " value);");
+
+    // Generate enum logging stream operator declaration
+    WriteLine();
+    WriteLineIndent("#if defined(LOGGING_PROTOCOL)");
+    WriteLineIndent("CppLogging::Record& operator<<(CppLogging::Record& record, " + *e->name + " value);");
+    WriteLineIndent("#endif");
 }
 
 void GeneratorCpp::GenerateEnumOutputStream(const std::shared_ptr<EnumType>& e)
 {
     // Generate enum output stream operator begin
     WriteLine();
-    WriteLineIndent("template <class TOutputStream>");
-    WriteLineIndent("inline TOutputStream& operator<<(TOutputStream& stream, " + *e->name + " value)");
+    WriteLineIndent("std::ostream& operator<<(std::ostream& stream, " + *e->name + " value)");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate enum output stream operator body
-    if (e->body)
+    if (e->body && !e->body->values.empty())
     {
         for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
-            WriteLineIndent("if (value == " + *e->name + "::" + *(*it)->name + ")" + " { stream << \"" + *(*it)->name + "\"; return stream; }");
+            WriteLineIndent("if (value == " + *e->name + "::" + *(*it)->name + ")" + " return stream << \"" + *(*it)->name + "\";");
+        WriteLineIndent("return stream << \"<unknown>\";");
     }
-    WriteLineIndent("stream << \"<unknown>\";");
-    WriteLineIndent("return stream;");
+    else
+        WriteLineIndent("return stream << \"<empty>\";");
 
     // Generate enum output stream operator end
     Indent(-1);
@@ -7258,17 +7228,19 @@ void GeneratorCpp::GenerateEnumLoggingStream(const std::shared_ptr<EnumType>& e)
     // Generate enum logging stream operator begin
     WriteLine();
     WriteLineIndent("#if defined(LOGGING_PROTOCOL)");
-    WriteLineIndent("inline CppLogging::Record& operator<<(CppLogging::Record& record, " + *e->name + " value)");
+    WriteLineIndent("CppLogging::Record& operator<<(CppLogging::Record& record, " + *e->name + " value)");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate enum logging stream operator body
-    if (e->body)
+    if (e->body && !e->body->values.empty())
     {
         for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
-            WriteLineIndent("if (value == " + *e->name + "::" + *(*it)->name + ")" + " { return record.StoreCustom(\"" + *(*it)->name + "\"); }");
+            WriteLineIndent("if (value == " + *e->name + "::" + *(*it)->name + ")" + " return record.StoreCustom(\"" + *(*it)->name + "\");");
+        WriteLineIndent("return record.StoreCustom(\"<unknown>\");");
     }
-    WriteLineIndent("return record.StoreCustom(\"<unknown>\");");
+    else
+        WriteLineIndent("return record.StoreCustom(\"<empty>\");");
 
     // Generate enum logging stream operator end
     Indent(-1);
@@ -7401,20 +7373,30 @@ void GeneratorCpp::GenerateFlags(const std::shared_ptr<Package>& p, const std::s
     // Generate flags end
     Indent(-1);
     WriteLineIndent("};");
+    WriteLine();
     WriteLineIndent("FBE_ENUM_FLAGS(" + *f->name + ")");
+
+    // Generate flags output stream operator declaration
+    WriteLine();
+    WriteLineIndent("std::ostream& operator<<(std::ostream& stream, " + *f->name + " value);");
+
+    // Generate flags logging stream operator declaration
+    WriteLine();
+    WriteLineIndent("#if defined(LOGGING_PROTOCOL)");
+    WriteLineIndent("CppLogging::Record& operator<<(CppLogging::Record& record, " + *f->name + " value);");
+    WriteLineIndent("#endif");
 }
 
 void GeneratorCpp::GenerateFlagsOutputStream(const std::shared_ptr<FlagsType>& f)
 {
     // Generate flags output stream operator begin
     WriteLine();
-    WriteLineIndent("template <class TOutputStream>");
-    WriteLineIndent("inline TOutputStream& operator<<(TOutputStream& stream, " + *f->name + " value)");
+    WriteLineIndent("std::ostream& operator<<(std::ostream& stream, " + *f->name + " value)");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate flags output stream operator body
-    if (f->body)
+    if (f->body && !f->body->values.empty())
     {
         WriteLineIndent("bool first = true;");
         for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
@@ -7440,13 +7422,13 @@ void GeneratorCpp::GenerateFlagsLoggingStream(const std::shared_ptr<FlagsType>& 
     // Generate flags logging stream operator begin
     WriteLine();
     WriteLineIndent("#if defined(LOGGING_PROTOCOL)");
-    WriteLineIndent("inline CppLogging::Record& operator<<(CppLogging::Record& record, " + *f->name + " value)");
+    WriteLineIndent("CppLogging::Record& operator<<(CppLogging::Record& record, " + *f->name + " value)");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate flags output stream operator body
     WriteLineIndent("const size_t begin = record.StoreListBegin();");
-    if (f->body)
+    if (f->body && !f->body->values.empty())
     {
         WriteLineIndent("bool first = true;");
         for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
@@ -7665,8 +7647,7 @@ void GeneratorCpp::GenerateStruct_Header(const std::shared_ptr<Package>& p, cons
 
     // Generate struct output stream operator
     WriteLine();
-    WriteLineIndent("template <class TOutputStream>");
-    WriteLineIndent("friend TOutputStream& operator<<(TOutputStream& stream, const " + *s->name + "& value);");
+    WriteLineIndent("friend std::ostream& operator<<(std::ostream& stream, const " + *s->name + "& value);");
 
     // Generate struct output stream operator
     if (Logging())
@@ -7850,8 +7831,7 @@ void GeneratorCpp::GenerateStructOutputStream(const std::shared_ptr<Package>& p,
 {
     // Generate struct output stream operator begin
     WriteLine();
-    WriteLineIndent("template <class TOutputStream>");
-    WriteLineIndent("inline TOutputStream& operator<<(TOutputStream& stream, const " + *s->name + "& value)");
+    WriteLineIndent("std::ostream& operator<<(std::ostream& stream, const " + *s->name + "& value)");
     WriteLineIndent("{");
     Indent(1);
 
@@ -7994,7 +7974,7 @@ void GeneratorCpp::GenerateStructLoggingStream(const std::shared_ptr<Package>& p
     // Generate struct logging stream operator begin
     WriteLine();
     WriteLineIndent("#if defined(LOGGING_PROTOCOL)");
-    WriteLineIndent("inline CppLogging::Record& operator<<(CppLogging::Record& record, const " + *s->name + "& value)");
+    WriteLineIndent("CppLogging::Record& operator<<(CppLogging::Record& record, const " + *s->name + "& value)");
     WriteLineIndent("{");
     Indent(1);
 
@@ -9313,13 +9293,13 @@ void GeneratorCpp::GenerateSender_Header(const std::shared_ptr<Package>& p, bool
         Indent(-1);
     }
     WriteLineIndent("{" + std::string(final ? " this->final(true); " : "") + "}");
-    WriteLineIndent(sender + "(const " + sender + "&) = default;");
+    WriteLineIndent(sender + "(const " + sender + "&) = delete;");
     WriteLineIndent(sender + "(" + sender + "&&) noexcept = default;");
     WriteLineIndent("virtual ~" + sender + "() = default;");
 
     // Generate sender operators
     WriteLine();
-    WriteLineIndent(sender + "& operator=(const " + sender + "&) = default;");
+    WriteLineIndent(sender + "& operator=(const " + sender + "&) = delete;");
     WriteLineIndent(sender + "& operator=(" + sender + "&&) noexcept = default;");
 
     // Generate imported senders accessors
@@ -9430,13 +9410,13 @@ void GeneratorCpp::GenerateReceiver_Header(const std::shared_ptr<Package>& p, bo
 
     // Generate receiver constructors
     WriteLineIndent(receiver + "() {" + std::string(final ? " this->final(true); " : "") + "}");
-    WriteLineIndent(receiver + "(const " + receiver + "&) = default;");
+    WriteLineIndent(receiver + "(const " + receiver + "&) = delete;");
     WriteLineIndent(receiver + "(" + receiver + "&&) = default;");
     WriteLineIndent("virtual ~" + receiver + "() = default;");
 
     // Generate receiver operators
     WriteLine();
-    WriteLineIndent(receiver + "& operator=(const " + receiver + "&) = default;");
+    WriteLineIndent(receiver + "& operator=(const " + receiver + "&) = delete;");
     WriteLineIndent(receiver + "& operator=(" + receiver + "&&) = default;");
 
     // Generate receiver handlers
@@ -9581,13 +9561,13 @@ void GeneratorCpp::GenerateProxy_Header(const std::shared_ptr<Package>& p, bool 
 
     // Generate proxy constructors
     WriteLineIndent(proxy + "() {" + std::string(final ? " this->final(true); " : "") + "}");
-    WriteLineIndent(proxy + "(const " + proxy + "&) = default;");
+    WriteLineIndent(proxy + "(const " + proxy + "&) = delete;");
     WriteLineIndent(proxy + "(" + proxy + "&&) = default;");
     WriteLineIndent("virtual ~" + proxy + "() = default;");
 
     // Generate proxy operators
     WriteLine();
-    WriteLineIndent(proxy + "& operator=(const " + proxy + "&) = default;");
+    WriteLineIndent(proxy + "& operator=(const " + proxy + "&) = delete;");
     WriteLineIndent(proxy + "& operator=(" + proxy + "&&) = default;");
 
     // Generate proxy handlers
@@ -9726,13 +9706,13 @@ void GeneratorCpp::GenerateClient_Header(const std::shared_ptr<Package>& p, bool
 
     // Generate client constructors
     WriteLineIndent(client + "() = default;");
-    WriteLineIndent(client + "(const " + client + "&) = default;");
+    WriteLineIndent(client + "(const " + client + "&) = delete;");
     WriteLineIndent(client + "(" + client + "&&) = default;");
     WriteLineIndent("virtual ~" + client + "() = default;");
 
     // Generate client operators
     WriteLine();
-    WriteLineIndent(client + "& operator=(const " + client + "&) = default;");
+    WriteLineIndent(client + "& operator=(const " + client + "&) = delete;");
     WriteLineIndent(client + "& operator=(" + client + "&&) = default;");
 
     // Generate imported clients accessors

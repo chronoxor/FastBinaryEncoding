@@ -240,7 +240,7 @@ class EnumEmpty(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return self.__str__()
 
     def __str__(self):
-        return "<unknown>"
+        return "<empty>"
 
     @classmethod
     def _missing_(cls, value):
@@ -673,7 +673,6 @@ class FlagsEmpty(enum.IntFlag, metaclass=fbe.DefaultEnumMeta):
 
     def __str__(self):
         sb = list()
-        first = True
         return "".join(sb)
 
     @staticmethod
