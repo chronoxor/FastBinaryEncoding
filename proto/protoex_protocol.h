@@ -43,11 +43,11 @@ public:
         , AccountMessageModel(this->_buffer)
     {}
     Sender(const Sender&) = delete;
-    Sender(Sender&&) noexcept = default;
+    Sender(Sender&&) noexcept = delete;
     virtual ~Sender() = default;
 
     Sender& operator=(const Sender&) = delete;
-    Sender& operator=(Sender&&) noexcept = default;
+    Sender& operator=(Sender&&) noexcept = delete;
 
     // Imported senders
     proto::Sender& proto_sender() noexcept { return *this; }
@@ -70,11 +70,11 @@ class Receiver : public virtual FBE::Receiver
 public:
     Receiver() {}
     Receiver(const Receiver&) = delete;
-    Receiver(Receiver&&) = default;
+    Receiver(Receiver&&) = delete;
     virtual ~Receiver() = default;
 
     Receiver& operator=(const Receiver&) = delete;
-    Receiver& operator=(Receiver&&) = default;
+    Receiver& operator=(Receiver&&) = delete;
 
 protected:
     // Receive handlers
@@ -104,11 +104,11 @@ class Proxy : public virtual FBE::Receiver
 public:
     Proxy() {}
     Proxy(const Proxy&) = delete;
-    Proxy(Proxy&&) = default;
+    Proxy(Proxy&&) = delete;
     virtual ~Proxy() = default;
 
     Proxy& operator=(const Proxy&) = delete;
-    Proxy& operator=(Proxy&&) = default;
+    Proxy& operator=(Proxy&&) = delete;
 
 protected:
     // Proxy handlers
@@ -135,11 +135,11 @@ public:
 
     Client() = default;
     Client(const Client&) = delete;
-    Client(Client&&) = default;
+    Client(Client&&) = delete;
     virtual ~Client() = default;
 
     Client& operator=(const Client&) = delete;
-    Client& operator=(Client&&) = default;
+    Client& operator=(Client&&) = delete;
 
     // Imported clients
     proto::Client& proto_client() noexcept { return *this; }

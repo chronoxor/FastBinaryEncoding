@@ -566,11 +566,11 @@ public:
     // Initialize the write buffer with the given capacity
     explicit FBEBuffer(size_t capacity) : FBEBuffer() { reserve(capacity); }
     FBEBuffer(const FBEBuffer&) = delete;
-    FBEBuffer(FBEBuffer&&) noexcept = default;
+    FBEBuffer(FBEBuffer&&) noexcept = delete;
     ~FBEBuffer() { if (_capacity > 0) std::free(_data); }
 
     FBEBuffer& operator=(const FBEBuffer&) = delete;
-    FBEBuffer& operator=(FBEBuffer&&) noexcept = default;
+    FBEBuffer& operator=(FBEBuffer&&) noexcept = delete;
 
     bool empty() const noexcept { return (_data == nullptr) || (_size == 0); }
     const uint8_t* data() const noexcept { return _data; }

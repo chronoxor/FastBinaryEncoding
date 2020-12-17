@@ -22,11 +22,11 @@ class Sender
 {
 public:
     Sender(const Sender&) = delete;
-    Sender(Sender&&) noexcept = default;
+    Sender(Sender&&) noexcept = delete;
     virtual ~Sender() = default;
 
     Sender& operator=(const Sender&) = delete;
-    Sender& operator=(Sender&&) noexcept = default;
+    Sender& operator=(Sender&&) noexcept = delete;
 
     // Get the sender buffer
     FBEBuffer& buffer() noexcept { return *_buffer; }
@@ -71,11 +71,11 @@ class Receiver
 {
 public:
     Receiver(const Receiver&) = delete;
-    Receiver(Receiver&&) = default;
+    Receiver(Receiver&&) = delete;
     virtual ~Receiver() = default;
 
     Receiver& operator=(const Receiver&) = delete;
-    Receiver& operator=(Receiver&&) = default;
+    Receiver& operator=(Receiver&&) = delete;
 
     // Get the receiver buffer
     FBEBuffer& buffer() noexcept { return *_buffer; }

@@ -37,11 +37,11 @@ public:
     FinalSender()
     { this->final(true); }
     FinalSender(const FinalSender&) = delete;
-    FinalSender(FinalSender&&) noexcept = default;
+    FinalSender(FinalSender&&) noexcept = delete;
     virtual ~FinalSender() = default;
 
     FinalSender& operator=(const FinalSender&) = delete;
-    FinalSender& operator=(FinalSender&&) noexcept = default;
+    FinalSender& operator=(FinalSender&&) noexcept = delete;
 
 public:
     // Sender models accessors
@@ -53,11 +53,11 @@ class FinalReceiver : public virtual FBE::Receiver
 public:
     FinalReceiver() { this->final(true); }
     FinalReceiver(const FinalReceiver&) = delete;
-    FinalReceiver(FinalReceiver&&) = default;
+    FinalReceiver(FinalReceiver&&) = delete;
     virtual ~FinalReceiver() = default;
 
     FinalReceiver& operator=(const FinalReceiver&) = delete;
-    FinalReceiver& operator=(FinalReceiver&&) = default;
+    FinalReceiver& operator=(FinalReceiver&&) = delete;
 
 protected:
     // Receive handlers
@@ -77,11 +77,11 @@ class FinalClient : public virtual FinalSender, protected virtual FinalReceiver
 public:
     FinalClient() = default;
     FinalClient(const FinalClient&) = delete;
-    FinalClient(FinalClient&&) = default;
+    FinalClient(FinalClient&&) = delete;
     virtual ~FinalClient() = default;
 
     FinalClient& operator=(const FinalClient&) = delete;
-    FinalClient& operator=(FinalClient&&) = default;
+    FinalClient& operator=(FinalClient&&) = delete;
 
     // Reset client buffers
     void reset() { std::scoped_lock locker(this->_lock); reset_requests(); }

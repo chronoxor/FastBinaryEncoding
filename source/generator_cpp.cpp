@@ -1165,11 +1165,11 @@ public:
     // Initialize the write buffer with the given capacity
     explicit FBEBuffer(size_t capacity) : FBEBuffer() { reserve(capacity); }
     FBEBuffer(const FBEBuffer&) = delete;
-    FBEBuffer(FBEBuffer&&) noexcept = default;
+    FBEBuffer(FBEBuffer&&) noexcept = delete;
     ~FBEBuffer() { if (_capacity > 0) std::free(_data); }
 
     FBEBuffer& operator=(const FBEBuffer&) = delete;
-    FBEBuffer& operator=(FBEBuffer&&) noexcept = default;
+    FBEBuffer& operator=(FBEBuffer&&) noexcept = delete;
 
     bool empty() const noexcept { return (_data == nullptr) || (_size == 0); }
     const uint8_t* data() const noexcept { return _data; }
@@ -4889,11 +4889,11 @@ class Sender
 {
 public:
     Sender(const Sender&) = delete;
-    Sender(Sender&&) noexcept = default;
+    Sender(Sender&&) noexcept = delete;
     virtual ~Sender() = default;
 
     Sender& operator=(const Sender&) = delete;
-    Sender& operator=(Sender&&) noexcept = default;
+    Sender& operator=(Sender&&) noexcept = delete;
 
     // Get the sender buffer
     FBEBuffer& buffer() noexcept { return *_buffer; }
@@ -4973,11 +4973,11 @@ class Receiver
 {
 public:
     Receiver(const Receiver&) = delete;
-    Receiver(Receiver&&) = default;
+    Receiver(Receiver&&) = delete;
     virtual ~Receiver() = default;
 
     Receiver& operator=(const Receiver&) = delete;
-    Receiver& operator=(Receiver&&) = default;
+    Receiver& operator=(Receiver&&) = delete;
 
     // Get the receiver buffer
     FBEBuffer& buffer() noexcept { return *_buffer; }
@@ -9294,13 +9294,13 @@ void GeneratorCpp::GenerateSender_Header(const std::shared_ptr<Package>& p, bool
     }
     WriteLineIndent("{" + std::string(final ? " this->final(true); " : "") + "}");
     WriteLineIndent(sender + "(const " + sender + "&) = delete;");
-    WriteLineIndent(sender + "(" + sender + "&&) noexcept = default;");
+    WriteLineIndent(sender + "(" + sender + "&&) noexcept = delete;");
     WriteLineIndent("virtual ~" + sender + "() = default;");
 
     // Generate sender operators
     WriteLine();
     WriteLineIndent(sender + "& operator=(const " + sender + "&) = delete;");
-    WriteLineIndent(sender + "& operator=(" + sender + "&&) noexcept = default;");
+    WriteLineIndent(sender + "& operator=(" + sender + "&&) noexcept = delete;");
 
     // Generate imported senders accessors
     if (p->import)
@@ -9411,13 +9411,13 @@ void GeneratorCpp::GenerateReceiver_Header(const std::shared_ptr<Package>& p, bo
     // Generate receiver constructors
     WriteLineIndent(receiver + "() {" + std::string(final ? " this->final(true); " : "") + "}");
     WriteLineIndent(receiver + "(const " + receiver + "&) = delete;");
-    WriteLineIndent(receiver + "(" + receiver + "&&) = default;");
+    WriteLineIndent(receiver + "(" + receiver + "&&) = delete;");
     WriteLineIndent("virtual ~" + receiver + "() = default;");
 
     // Generate receiver operators
     WriteLine();
     WriteLineIndent(receiver + "& operator=(const " + receiver + "&) = delete;");
-    WriteLineIndent(receiver + "& operator=(" + receiver + "&&) = default;");
+    WriteLineIndent(receiver + "& operator=(" + receiver + "&&) = delete;");
 
     // Generate receiver handlers
     if (p->body)
@@ -9562,13 +9562,13 @@ void GeneratorCpp::GenerateProxy_Header(const std::shared_ptr<Package>& p, bool 
     // Generate proxy constructors
     WriteLineIndent(proxy + "() {" + std::string(final ? " this->final(true); " : "") + "}");
     WriteLineIndent(proxy + "(const " + proxy + "&) = delete;");
-    WriteLineIndent(proxy + "(" + proxy + "&&) = default;");
+    WriteLineIndent(proxy + "(" + proxy + "&&) = delete;");
     WriteLineIndent("virtual ~" + proxy + "() = default;");
 
     // Generate proxy operators
     WriteLine();
     WriteLineIndent(proxy + "& operator=(const " + proxy + "&) = delete;");
-    WriteLineIndent(proxy + "& operator=(" + proxy + "&&) = default;");
+    WriteLineIndent(proxy + "& operator=(" + proxy + "&&) = delete;");
 
     // Generate proxy handlers
     if (p->body)
@@ -9707,13 +9707,13 @@ void GeneratorCpp::GenerateClient_Header(const std::shared_ptr<Package>& p, bool
     // Generate client constructors
     WriteLineIndent(client + "() = default;");
     WriteLineIndent(client + "(const " + client + "&) = delete;");
-    WriteLineIndent(client + "(" + client + "&&) = default;");
+    WriteLineIndent(client + "(" + client + "&&) = delete;");
     WriteLineIndent("virtual ~" + client + "() = default;");
 
     // Generate client operators
     WriteLine();
     WriteLineIndent(client + "& operator=(const " + client + "&) = delete;");
-    WriteLineIndent(client + "& operator=(" + client + "&&) = default;");
+    WriteLineIndent(client + "& operator=(" + client + "&&) = delete;");
 
     // Generate imported clients accessors
     if (p->import)
