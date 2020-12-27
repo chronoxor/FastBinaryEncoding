@@ -1,5 +1,6 @@
 # Fast Binary Encoding (FBE)
 
+[![Awesome C++](https://awesome.re/badge.svg)](https://github.com/fffaraz/awesome-cpp)
 [![Linux build status](https://img.shields.io/travis/com/chronoxor/FastBinaryEncoding/master?label=Linux)](https://travis-ci.com/chronoxor/FastBinaryEncoding)
 [![OSX build status](https://img.shields.io/travis/com/chronoxor/FastBinaryEncoding/master?label=OSX)](https://travis-ci.com/chronoxor/FastBinaryEncoding)
 [![Cygwin build status](https://img.shields.io/appveyor/build/chronoxor/FastBinaryEncoding/master?label=Cygwin)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
