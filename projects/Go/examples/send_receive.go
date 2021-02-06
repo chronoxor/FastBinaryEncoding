@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
-import "../proto/proto"
+import (
+	"fmt"
+
+	"../proto/proto"
+)
 
 type MySender struct {
 	*proto.Sender
@@ -32,9 +35,9 @@ func NewMyReceiver() *MyReceiver {
 	return receiver
 }
 
-func (r *MyReceiver) OnReceiveOrder(value *proto.OrderMessage) {}
-func (r *MyReceiver) OnReceiveBalance(value *proto.BalanceMessage) {}
-func (r *MyReceiver) OnReceiveAccount(value *proto.AccountMessage) {}
+func (r *MyReceiver) OnReceiveOrderMessage(value *proto.OrderMessage)     {}
+func (r *MyReceiver) OnReceiveBalanceMessage(value *proto.BalanceMessage) {}
+func (r *MyReceiver) OnReceiveAccountMessage(value *proto.AccountMessage) {}
 
 func (r *MyReceiver) OnReceiveLog(message string) {
 	fmt.Printf("onReceive: %s\n", message)
