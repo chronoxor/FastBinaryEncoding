@@ -103,7 +103,7 @@ private:
     std::string ConvertTypeFieldName(const std::string& type, bool final);
     std::string ConvertTypeFieldDeclaration(const StructField& field, bool final);
     std::string ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final);
-    std::string ConvertConstant(const std::string& type, const std::string& value, bool optional);
+    std::string ConvertConstant(const std::string& package, const std::string& type, const std::string& value, bool optional);
     std::string ConvertConstantPrefix(const std::string& type);
     std::string ConvertConstantSuffix(const std::string& type);
     std::string ConvertDefault(const std::string& type);

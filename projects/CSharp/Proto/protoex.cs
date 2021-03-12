@@ -2323,7 +2323,7 @@ namespace protoex {
         {
             id = (int)0
             , name = ""
-            , state = StateEx.initialized | StateEx.bad | StateEx.sad
+            , state = global::protoex.StateEx.initialized | global::protoex.StateEx.bad | global::protoex.StateEx.sad
             , wallet = global::protoex.Balance.Default
             , asset = null
             , orders = new List<Order>()
@@ -2647,9 +2647,9 @@ namespace protoex {
             fbeCurrentSize += name.FBESize;
 
             if ((fbeCurrentSize + state.FBESize) <= fbeStructSize)
-                state.Get(out fbeValue.state, StateEx.initialized | StateEx.bad | StateEx.sad);
+                state.Get(out fbeValue.state, global::protoex.StateEx.initialized | global::protoex.StateEx.bad | global::protoex.StateEx.sad);
             else
-                fbeValue.state = StateEx.initialized | StateEx.bad | StateEx.sad;
+                fbeValue.state = global::protoex.StateEx.initialized | global::protoex.StateEx.bad | global::protoex.StateEx.sad;
             fbeCurrentSize += state.FBESize;
 
             if ((fbeCurrentSize + wallet.FBESize) <= fbeStructSize)

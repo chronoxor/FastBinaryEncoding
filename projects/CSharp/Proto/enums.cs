@@ -2712,72 +2712,72 @@ namespace enums {
 
         public static Enums Default => new Enums
         {
-            byte0 = EnumByte.ENUM_VALUE_0
-            , byte1 = EnumByte.ENUM_VALUE_1
-            , byte2 = EnumByte.ENUM_VALUE_2
-            , byte3 = EnumByte.ENUM_VALUE_3
-            , byte4 = EnumByte.ENUM_VALUE_4
-            , byte5 = EnumByte.ENUM_VALUE_5
-            , char0 = EnumChar.ENUM_VALUE_0
-            , char1 = EnumChar.ENUM_VALUE_1
-            , char2 = EnumChar.ENUM_VALUE_2
-            , char3 = EnumChar.ENUM_VALUE_3
-            , char4 = EnumChar.ENUM_VALUE_4
-            , char5 = EnumChar.ENUM_VALUE_5
-            , wchar0 = EnumWChar.ENUM_VALUE_0
-            , wchar1 = EnumWChar.ENUM_VALUE_1
-            , wchar2 = EnumWChar.ENUM_VALUE_2
-            , wchar3 = EnumWChar.ENUM_VALUE_3
-            , wchar4 = EnumWChar.ENUM_VALUE_4
-            , wchar5 = EnumWChar.ENUM_VALUE_5
-            , int8b0 = EnumInt8.ENUM_VALUE_0
-            , int8b1 = EnumInt8.ENUM_VALUE_1
-            , int8b2 = EnumInt8.ENUM_VALUE_2
-            , int8b3 = EnumInt8.ENUM_VALUE_3
-            , int8b4 = EnumInt8.ENUM_VALUE_4
-            , int8b5 = EnumInt8.ENUM_VALUE_5
-            , uint8b0 = EnumUInt8.ENUM_VALUE_0
-            , uint8b1 = EnumUInt8.ENUM_VALUE_1
-            , uint8b2 = EnumUInt8.ENUM_VALUE_2
-            , uint8b3 = EnumUInt8.ENUM_VALUE_3
-            , uint8b4 = EnumUInt8.ENUM_VALUE_4
-            , uint8b5 = EnumUInt8.ENUM_VALUE_5
-            , int16b0 = EnumInt16.ENUM_VALUE_0
-            , int16b1 = EnumInt16.ENUM_VALUE_1
-            , int16b2 = EnumInt16.ENUM_VALUE_2
-            , int16b3 = EnumInt16.ENUM_VALUE_3
-            , int16b4 = EnumInt16.ENUM_VALUE_4
-            , int16b5 = EnumInt16.ENUM_VALUE_5
-            , uint16b0 = EnumUInt16.ENUM_VALUE_0
-            , uint16b1 = EnumUInt16.ENUM_VALUE_1
-            , uint16b2 = EnumUInt16.ENUM_VALUE_2
-            , uint16b3 = EnumUInt16.ENUM_VALUE_3
-            , uint16b4 = EnumUInt16.ENUM_VALUE_4
-            , uint16b5 = EnumUInt16.ENUM_VALUE_5
-            , int32b0 = EnumInt32.ENUM_VALUE_0
-            , int32b1 = EnumInt32.ENUM_VALUE_1
-            , int32b2 = EnumInt32.ENUM_VALUE_2
-            , int32b3 = EnumInt32.ENUM_VALUE_3
-            , int32b4 = EnumInt32.ENUM_VALUE_4
-            , int32b5 = EnumInt32.ENUM_VALUE_5
-            , uint32b0 = EnumUInt32.ENUM_VALUE_0
-            , uint32b1 = EnumUInt32.ENUM_VALUE_1
-            , uint32b2 = EnumUInt32.ENUM_VALUE_2
-            , uint32b3 = EnumUInt32.ENUM_VALUE_3
-            , uint32b4 = EnumUInt32.ENUM_VALUE_4
-            , uint32b5 = EnumUInt32.ENUM_VALUE_5
-            , int64b0 = EnumInt64.ENUM_VALUE_0
-            , int64b1 = EnumInt64.ENUM_VALUE_1
-            , int64b2 = EnumInt64.ENUM_VALUE_2
-            , int64b3 = EnumInt64.ENUM_VALUE_3
-            , int64b4 = EnumInt64.ENUM_VALUE_4
-            , int64b5 = EnumInt64.ENUM_VALUE_5
-            , uint64b0 = EnumUInt64.ENUM_VALUE_0
-            , uint64b1 = EnumUInt64.ENUM_VALUE_1
-            , uint64b2 = EnumUInt64.ENUM_VALUE_2
-            , uint64b3 = EnumUInt64.ENUM_VALUE_3
-            , uint64b4 = EnumUInt64.ENUM_VALUE_4
-            , uint64b5 = EnumUInt64.ENUM_VALUE_5
+            byte0 = global::enums.EnumByte.ENUM_VALUE_0
+            , byte1 = global::enums.EnumByte.ENUM_VALUE_1
+            , byte2 = global::enums.EnumByte.ENUM_VALUE_2
+            , byte3 = global::enums.EnumByte.ENUM_VALUE_3
+            , byte4 = global::enums.EnumByte.ENUM_VALUE_4
+            , byte5 = global::enums.EnumByte.ENUM_VALUE_5
+            , char0 = global::enums.EnumChar.ENUM_VALUE_0
+            , char1 = global::enums.EnumChar.ENUM_VALUE_1
+            , char2 = global::enums.EnumChar.ENUM_VALUE_2
+            , char3 = global::enums.EnumChar.ENUM_VALUE_3
+            , char4 = global::enums.EnumChar.ENUM_VALUE_4
+            , char5 = global::enums.EnumChar.ENUM_VALUE_5
+            , wchar0 = global::enums.EnumWChar.ENUM_VALUE_0
+            , wchar1 = global::enums.EnumWChar.ENUM_VALUE_1
+            , wchar2 = global::enums.EnumWChar.ENUM_VALUE_2
+            , wchar3 = global::enums.EnumWChar.ENUM_VALUE_3
+            , wchar4 = global::enums.EnumWChar.ENUM_VALUE_4
+            , wchar5 = global::enums.EnumWChar.ENUM_VALUE_5
+            , int8b0 = global::enums.EnumInt8.ENUM_VALUE_0
+            , int8b1 = global::enums.EnumInt8.ENUM_VALUE_1
+            , int8b2 = global::enums.EnumInt8.ENUM_VALUE_2
+            , int8b3 = global::enums.EnumInt8.ENUM_VALUE_3
+            , int8b4 = global::enums.EnumInt8.ENUM_VALUE_4
+            , int8b5 = global::enums.EnumInt8.ENUM_VALUE_5
+            , uint8b0 = global::enums.EnumUInt8.ENUM_VALUE_0
+            , uint8b1 = global::enums.EnumUInt8.ENUM_VALUE_1
+            , uint8b2 = global::enums.EnumUInt8.ENUM_VALUE_2
+            , uint8b3 = global::enums.EnumUInt8.ENUM_VALUE_3
+            , uint8b4 = global::enums.EnumUInt8.ENUM_VALUE_4
+            , uint8b5 = global::enums.EnumUInt8.ENUM_VALUE_5
+            , int16b0 = global::enums.EnumInt16.ENUM_VALUE_0
+            , int16b1 = global::enums.EnumInt16.ENUM_VALUE_1
+            , int16b2 = global::enums.EnumInt16.ENUM_VALUE_2
+            , int16b3 = global::enums.EnumInt16.ENUM_VALUE_3
+            , int16b4 = global::enums.EnumInt16.ENUM_VALUE_4
+            , int16b5 = global::enums.EnumInt16.ENUM_VALUE_5
+            , uint16b0 = global::enums.EnumUInt16.ENUM_VALUE_0
+            , uint16b1 = global::enums.EnumUInt16.ENUM_VALUE_1
+            , uint16b2 = global::enums.EnumUInt16.ENUM_VALUE_2
+            , uint16b3 = global::enums.EnumUInt16.ENUM_VALUE_3
+            , uint16b4 = global::enums.EnumUInt16.ENUM_VALUE_4
+            , uint16b5 = global::enums.EnumUInt16.ENUM_VALUE_5
+            , int32b0 = global::enums.EnumInt32.ENUM_VALUE_0
+            , int32b1 = global::enums.EnumInt32.ENUM_VALUE_1
+            , int32b2 = global::enums.EnumInt32.ENUM_VALUE_2
+            , int32b3 = global::enums.EnumInt32.ENUM_VALUE_3
+            , int32b4 = global::enums.EnumInt32.ENUM_VALUE_4
+            , int32b5 = global::enums.EnumInt32.ENUM_VALUE_5
+            , uint32b0 = global::enums.EnumUInt32.ENUM_VALUE_0
+            , uint32b1 = global::enums.EnumUInt32.ENUM_VALUE_1
+            , uint32b2 = global::enums.EnumUInt32.ENUM_VALUE_2
+            , uint32b3 = global::enums.EnumUInt32.ENUM_VALUE_3
+            , uint32b4 = global::enums.EnumUInt32.ENUM_VALUE_4
+            , uint32b5 = global::enums.EnumUInt32.ENUM_VALUE_5
+            , int64b0 = global::enums.EnumInt64.ENUM_VALUE_0
+            , int64b1 = global::enums.EnumInt64.ENUM_VALUE_1
+            , int64b2 = global::enums.EnumInt64.ENUM_VALUE_2
+            , int64b3 = global::enums.EnumInt64.ENUM_VALUE_3
+            , int64b4 = global::enums.EnumInt64.ENUM_VALUE_4
+            , int64b5 = global::enums.EnumInt64.ENUM_VALUE_5
+            , uint64b0 = global::enums.EnumUInt64.ENUM_VALUE_0
+            , uint64b1 = global::enums.EnumUInt64.ENUM_VALUE_1
+            , uint64b2 = global::enums.EnumUInt64.ENUM_VALUE_2
+            , uint64b3 = global::enums.EnumUInt64.ENUM_VALUE_3
+            , uint64b4 = global::enums.EnumUInt64.ENUM_VALUE_4
+            , uint64b5 = global::enums.EnumUInt64.ENUM_VALUE_5
         };
 
         public Enums(EnumByte byte0, EnumByte byte1, EnumByte byte2, EnumByte byte3, EnumByte byte4, EnumByte byte5, EnumChar char0, EnumChar char1, EnumChar char2, EnumChar char3, EnumChar char4, EnumChar char5, EnumWChar wchar0, EnumWChar wchar1, EnumWChar wchar2, EnumWChar wchar3, EnumWChar wchar4, EnumWChar wchar5, EnumInt8 int8b0, EnumInt8 int8b1, EnumInt8 int8b2, EnumInt8 int8b3, EnumInt8 int8b4, EnumInt8 int8b5, EnumUInt8 uint8b0, EnumUInt8 uint8b1, EnumUInt8 uint8b2, EnumUInt8 uint8b3, EnumUInt8 uint8b4, EnumUInt8 uint8b5, EnumInt16 int16b0, EnumInt16 int16b1, EnumInt16 int16b2, EnumInt16 int16b3, EnumInt16 int16b4, EnumInt16 int16b5, EnumUInt16 uint16b0, EnumUInt16 uint16b1, EnumUInt16 uint16b2, EnumUInt16 uint16b3, EnumUInt16 uint16b4, EnumUInt16 uint16b5, EnumInt32 int32b0, EnumInt32 int32b1, EnumInt32 int32b2, EnumInt32 int32b3, EnumInt32 int32b4, EnumInt32 int32b5, EnumUInt32 uint32b0, EnumUInt32 uint32b1, EnumUInt32 uint32b2, EnumUInt32 uint32b3, EnumUInt32 uint32b4, EnumUInt32 uint32b5, EnumInt64 int64b0, EnumInt64 int64b1, EnumInt64 int64b2, EnumInt64 int64b3, EnumInt64 int64b4, EnumInt64 int64b5, EnumUInt64 uint64b0, EnumUInt64 uint64b1, EnumUInt64 uint64b2, EnumUInt64 uint64b3, EnumUInt64 uint64b4, EnumUInt64 uint64b5)
@@ -3781,399 +3781,399 @@ namespace enums {
             fbeValue = Enums.Default;
 
             if ((fbeCurrentSize + byte0.FBESize) <= fbeStructSize)
-                byte0.Get(out fbeValue.byte0, EnumByte.ENUM_VALUE_0);
+                byte0.Get(out fbeValue.byte0, global::enums.EnumByte.ENUM_VALUE_0);
             else
-                fbeValue.byte0 = EnumByte.ENUM_VALUE_0;
+                fbeValue.byte0 = global::enums.EnumByte.ENUM_VALUE_0;
             fbeCurrentSize += byte0.FBESize;
 
             if ((fbeCurrentSize + byte1.FBESize) <= fbeStructSize)
-                byte1.Get(out fbeValue.byte1, EnumByte.ENUM_VALUE_1);
+                byte1.Get(out fbeValue.byte1, global::enums.EnumByte.ENUM_VALUE_1);
             else
-                fbeValue.byte1 = EnumByte.ENUM_VALUE_1;
+                fbeValue.byte1 = global::enums.EnumByte.ENUM_VALUE_1;
             fbeCurrentSize += byte1.FBESize;
 
             if ((fbeCurrentSize + byte2.FBESize) <= fbeStructSize)
-                byte2.Get(out fbeValue.byte2, EnumByte.ENUM_VALUE_2);
+                byte2.Get(out fbeValue.byte2, global::enums.EnumByte.ENUM_VALUE_2);
             else
-                fbeValue.byte2 = EnumByte.ENUM_VALUE_2;
+                fbeValue.byte2 = global::enums.EnumByte.ENUM_VALUE_2;
             fbeCurrentSize += byte2.FBESize;
 
             if ((fbeCurrentSize + byte3.FBESize) <= fbeStructSize)
-                byte3.Get(out fbeValue.byte3, EnumByte.ENUM_VALUE_3);
+                byte3.Get(out fbeValue.byte3, global::enums.EnumByte.ENUM_VALUE_3);
             else
-                fbeValue.byte3 = EnumByte.ENUM_VALUE_3;
+                fbeValue.byte3 = global::enums.EnumByte.ENUM_VALUE_3;
             fbeCurrentSize += byte3.FBESize;
 
             if ((fbeCurrentSize + byte4.FBESize) <= fbeStructSize)
-                byte4.Get(out fbeValue.byte4, EnumByte.ENUM_VALUE_4);
+                byte4.Get(out fbeValue.byte4, global::enums.EnumByte.ENUM_VALUE_4);
             else
-                fbeValue.byte4 = EnumByte.ENUM_VALUE_4;
+                fbeValue.byte4 = global::enums.EnumByte.ENUM_VALUE_4;
             fbeCurrentSize += byte4.FBESize;
 
             if ((fbeCurrentSize + byte5.FBESize) <= fbeStructSize)
-                byte5.Get(out fbeValue.byte5, EnumByte.ENUM_VALUE_5);
+                byte5.Get(out fbeValue.byte5, global::enums.EnumByte.ENUM_VALUE_5);
             else
-                fbeValue.byte5 = EnumByte.ENUM_VALUE_5;
+                fbeValue.byte5 = global::enums.EnumByte.ENUM_VALUE_5;
             fbeCurrentSize += byte5.FBESize;
 
             if ((fbeCurrentSize + char0.FBESize) <= fbeStructSize)
-                char0.Get(out fbeValue.char0, EnumChar.ENUM_VALUE_0);
+                char0.Get(out fbeValue.char0, global::enums.EnumChar.ENUM_VALUE_0);
             else
-                fbeValue.char0 = EnumChar.ENUM_VALUE_0;
+                fbeValue.char0 = global::enums.EnumChar.ENUM_VALUE_0;
             fbeCurrentSize += char0.FBESize;
 
             if ((fbeCurrentSize + char1.FBESize) <= fbeStructSize)
-                char1.Get(out fbeValue.char1, EnumChar.ENUM_VALUE_1);
+                char1.Get(out fbeValue.char1, global::enums.EnumChar.ENUM_VALUE_1);
             else
-                fbeValue.char1 = EnumChar.ENUM_VALUE_1;
+                fbeValue.char1 = global::enums.EnumChar.ENUM_VALUE_1;
             fbeCurrentSize += char1.FBESize;
 
             if ((fbeCurrentSize + char2.FBESize) <= fbeStructSize)
-                char2.Get(out fbeValue.char2, EnumChar.ENUM_VALUE_2);
+                char2.Get(out fbeValue.char2, global::enums.EnumChar.ENUM_VALUE_2);
             else
-                fbeValue.char2 = EnumChar.ENUM_VALUE_2;
+                fbeValue.char2 = global::enums.EnumChar.ENUM_VALUE_2;
             fbeCurrentSize += char2.FBESize;
 
             if ((fbeCurrentSize + char3.FBESize) <= fbeStructSize)
-                char3.Get(out fbeValue.char3, EnumChar.ENUM_VALUE_3);
+                char3.Get(out fbeValue.char3, global::enums.EnumChar.ENUM_VALUE_3);
             else
-                fbeValue.char3 = EnumChar.ENUM_VALUE_3;
+                fbeValue.char3 = global::enums.EnumChar.ENUM_VALUE_3;
             fbeCurrentSize += char3.FBESize;
 
             if ((fbeCurrentSize + char4.FBESize) <= fbeStructSize)
-                char4.Get(out fbeValue.char4, EnumChar.ENUM_VALUE_4);
+                char4.Get(out fbeValue.char4, global::enums.EnumChar.ENUM_VALUE_4);
             else
-                fbeValue.char4 = EnumChar.ENUM_VALUE_4;
+                fbeValue.char4 = global::enums.EnumChar.ENUM_VALUE_4;
             fbeCurrentSize += char4.FBESize;
 
             if ((fbeCurrentSize + char5.FBESize) <= fbeStructSize)
-                char5.Get(out fbeValue.char5, EnumChar.ENUM_VALUE_5);
+                char5.Get(out fbeValue.char5, global::enums.EnumChar.ENUM_VALUE_5);
             else
-                fbeValue.char5 = EnumChar.ENUM_VALUE_5;
+                fbeValue.char5 = global::enums.EnumChar.ENUM_VALUE_5;
             fbeCurrentSize += char5.FBESize;
 
             if ((fbeCurrentSize + wchar0.FBESize) <= fbeStructSize)
-                wchar0.Get(out fbeValue.wchar0, EnumWChar.ENUM_VALUE_0);
+                wchar0.Get(out fbeValue.wchar0, global::enums.EnumWChar.ENUM_VALUE_0);
             else
-                fbeValue.wchar0 = EnumWChar.ENUM_VALUE_0;
+                fbeValue.wchar0 = global::enums.EnumWChar.ENUM_VALUE_0;
             fbeCurrentSize += wchar0.FBESize;
 
             if ((fbeCurrentSize + wchar1.FBESize) <= fbeStructSize)
-                wchar1.Get(out fbeValue.wchar1, EnumWChar.ENUM_VALUE_1);
+                wchar1.Get(out fbeValue.wchar1, global::enums.EnumWChar.ENUM_VALUE_1);
             else
-                fbeValue.wchar1 = EnumWChar.ENUM_VALUE_1;
+                fbeValue.wchar1 = global::enums.EnumWChar.ENUM_VALUE_1;
             fbeCurrentSize += wchar1.FBESize;
 
             if ((fbeCurrentSize + wchar2.FBESize) <= fbeStructSize)
-                wchar2.Get(out fbeValue.wchar2, EnumWChar.ENUM_VALUE_2);
+                wchar2.Get(out fbeValue.wchar2, global::enums.EnumWChar.ENUM_VALUE_2);
             else
-                fbeValue.wchar2 = EnumWChar.ENUM_VALUE_2;
+                fbeValue.wchar2 = global::enums.EnumWChar.ENUM_VALUE_2;
             fbeCurrentSize += wchar2.FBESize;
 
             if ((fbeCurrentSize + wchar3.FBESize) <= fbeStructSize)
-                wchar3.Get(out fbeValue.wchar3, EnumWChar.ENUM_VALUE_3);
+                wchar3.Get(out fbeValue.wchar3, global::enums.EnumWChar.ENUM_VALUE_3);
             else
-                fbeValue.wchar3 = EnumWChar.ENUM_VALUE_3;
+                fbeValue.wchar3 = global::enums.EnumWChar.ENUM_VALUE_3;
             fbeCurrentSize += wchar3.FBESize;
 
             if ((fbeCurrentSize + wchar4.FBESize) <= fbeStructSize)
-                wchar4.Get(out fbeValue.wchar4, EnumWChar.ENUM_VALUE_4);
+                wchar4.Get(out fbeValue.wchar4, global::enums.EnumWChar.ENUM_VALUE_4);
             else
-                fbeValue.wchar4 = EnumWChar.ENUM_VALUE_4;
+                fbeValue.wchar4 = global::enums.EnumWChar.ENUM_VALUE_4;
             fbeCurrentSize += wchar4.FBESize;
 
             if ((fbeCurrentSize + wchar5.FBESize) <= fbeStructSize)
-                wchar5.Get(out fbeValue.wchar5, EnumWChar.ENUM_VALUE_5);
+                wchar5.Get(out fbeValue.wchar5, global::enums.EnumWChar.ENUM_VALUE_5);
             else
-                fbeValue.wchar5 = EnumWChar.ENUM_VALUE_5;
+                fbeValue.wchar5 = global::enums.EnumWChar.ENUM_VALUE_5;
             fbeCurrentSize += wchar5.FBESize;
 
             if ((fbeCurrentSize + int8b0.FBESize) <= fbeStructSize)
-                int8b0.Get(out fbeValue.int8b0, EnumInt8.ENUM_VALUE_0);
+                int8b0.Get(out fbeValue.int8b0, global::enums.EnumInt8.ENUM_VALUE_0);
             else
-                fbeValue.int8b0 = EnumInt8.ENUM_VALUE_0;
+                fbeValue.int8b0 = global::enums.EnumInt8.ENUM_VALUE_0;
             fbeCurrentSize += int8b0.FBESize;
 
             if ((fbeCurrentSize + int8b1.FBESize) <= fbeStructSize)
-                int8b1.Get(out fbeValue.int8b1, EnumInt8.ENUM_VALUE_1);
+                int8b1.Get(out fbeValue.int8b1, global::enums.EnumInt8.ENUM_VALUE_1);
             else
-                fbeValue.int8b1 = EnumInt8.ENUM_VALUE_1;
+                fbeValue.int8b1 = global::enums.EnumInt8.ENUM_VALUE_1;
             fbeCurrentSize += int8b1.FBESize;
 
             if ((fbeCurrentSize + int8b2.FBESize) <= fbeStructSize)
-                int8b2.Get(out fbeValue.int8b2, EnumInt8.ENUM_VALUE_2);
+                int8b2.Get(out fbeValue.int8b2, global::enums.EnumInt8.ENUM_VALUE_2);
             else
-                fbeValue.int8b2 = EnumInt8.ENUM_VALUE_2;
+                fbeValue.int8b2 = global::enums.EnumInt8.ENUM_VALUE_2;
             fbeCurrentSize += int8b2.FBESize;
 
             if ((fbeCurrentSize + int8b3.FBESize) <= fbeStructSize)
-                int8b3.Get(out fbeValue.int8b3, EnumInt8.ENUM_VALUE_3);
+                int8b3.Get(out fbeValue.int8b3, global::enums.EnumInt8.ENUM_VALUE_3);
             else
-                fbeValue.int8b3 = EnumInt8.ENUM_VALUE_3;
+                fbeValue.int8b3 = global::enums.EnumInt8.ENUM_VALUE_3;
             fbeCurrentSize += int8b3.FBESize;
 
             if ((fbeCurrentSize + int8b4.FBESize) <= fbeStructSize)
-                int8b4.Get(out fbeValue.int8b4, EnumInt8.ENUM_VALUE_4);
+                int8b4.Get(out fbeValue.int8b4, global::enums.EnumInt8.ENUM_VALUE_4);
             else
-                fbeValue.int8b4 = EnumInt8.ENUM_VALUE_4;
+                fbeValue.int8b4 = global::enums.EnumInt8.ENUM_VALUE_4;
             fbeCurrentSize += int8b4.FBESize;
 
             if ((fbeCurrentSize + int8b5.FBESize) <= fbeStructSize)
-                int8b5.Get(out fbeValue.int8b5, EnumInt8.ENUM_VALUE_5);
+                int8b5.Get(out fbeValue.int8b5, global::enums.EnumInt8.ENUM_VALUE_5);
             else
-                fbeValue.int8b5 = EnumInt8.ENUM_VALUE_5;
+                fbeValue.int8b5 = global::enums.EnumInt8.ENUM_VALUE_5;
             fbeCurrentSize += int8b5.FBESize;
 
             if ((fbeCurrentSize + uint8b0.FBESize) <= fbeStructSize)
-                uint8b0.Get(out fbeValue.uint8b0, EnumUInt8.ENUM_VALUE_0);
+                uint8b0.Get(out fbeValue.uint8b0, global::enums.EnumUInt8.ENUM_VALUE_0);
             else
-                fbeValue.uint8b0 = EnumUInt8.ENUM_VALUE_0;
+                fbeValue.uint8b0 = global::enums.EnumUInt8.ENUM_VALUE_0;
             fbeCurrentSize += uint8b0.FBESize;
 
             if ((fbeCurrentSize + uint8b1.FBESize) <= fbeStructSize)
-                uint8b1.Get(out fbeValue.uint8b1, EnumUInt8.ENUM_VALUE_1);
+                uint8b1.Get(out fbeValue.uint8b1, global::enums.EnumUInt8.ENUM_VALUE_1);
             else
-                fbeValue.uint8b1 = EnumUInt8.ENUM_VALUE_1;
+                fbeValue.uint8b1 = global::enums.EnumUInt8.ENUM_VALUE_1;
             fbeCurrentSize += uint8b1.FBESize;
 
             if ((fbeCurrentSize + uint8b2.FBESize) <= fbeStructSize)
-                uint8b2.Get(out fbeValue.uint8b2, EnumUInt8.ENUM_VALUE_2);
+                uint8b2.Get(out fbeValue.uint8b2, global::enums.EnumUInt8.ENUM_VALUE_2);
             else
-                fbeValue.uint8b2 = EnumUInt8.ENUM_VALUE_2;
+                fbeValue.uint8b2 = global::enums.EnumUInt8.ENUM_VALUE_2;
             fbeCurrentSize += uint8b2.FBESize;
 
             if ((fbeCurrentSize + uint8b3.FBESize) <= fbeStructSize)
-                uint8b3.Get(out fbeValue.uint8b3, EnumUInt8.ENUM_VALUE_3);
+                uint8b3.Get(out fbeValue.uint8b3, global::enums.EnumUInt8.ENUM_VALUE_3);
             else
-                fbeValue.uint8b3 = EnumUInt8.ENUM_VALUE_3;
+                fbeValue.uint8b3 = global::enums.EnumUInt8.ENUM_VALUE_3;
             fbeCurrentSize += uint8b3.FBESize;
 
             if ((fbeCurrentSize + uint8b4.FBESize) <= fbeStructSize)
-                uint8b4.Get(out fbeValue.uint8b4, EnumUInt8.ENUM_VALUE_4);
+                uint8b4.Get(out fbeValue.uint8b4, global::enums.EnumUInt8.ENUM_VALUE_4);
             else
-                fbeValue.uint8b4 = EnumUInt8.ENUM_VALUE_4;
+                fbeValue.uint8b4 = global::enums.EnumUInt8.ENUM_VALUE_4;
             fbeCurrentSize += uint8b4.FBESize;
 
             if ((fbeCurrentSize + uint8b5.FBESize) <= fbeStructSize)
-                uint8b5.Get(out fbeValue.uint8b5, EnumUInt8.ENUM_VALUE_5);
+                uint8b5.Get(out fbeValue.uint8b5, global::enums.EnumUInt8.ENUM_VALUE_5);
             else
-                fbeValue.uint8b5 = EnumUInt8.ENUM_VALUE_5;
+                fbeValue.uint8b5 = global::enums.EnumUInt8.ENUM_VALUE_5;
             fbeCurrentSize += uint8b5.FBESize;
 
             if ((fbeCurrentSize + int16b0.FBESize) <= fbeStructSize)
-                int16b0.Get(out fbeValue.int16b0, EnumInt16.ENUM_VALUE_0);
+                int16b0.Get(out fbeValue.int16b0, global::enums.EnumInt16.ENUM_VALUE_0);
             else
-                fbeValue.int16b0 = EnumInt16.ENUM_VALUE_0;
+                fbeValue.int16b0 = global::enums.EnumInt16.ENUM_VALUE_0;
             fbeCurrentSize += int16b0.FBESize;
 
             if ((fbeCurrentSize + int16b1.FBESize) <= fbeStructSize)
-                int16b1.Get(out fbeValue.int16b1, EnumInt16.ENUM_VALUE_1);
+                int16b1.Get(out fbeValue.int16b1, global::enums.EnumInt16.ENUM_VALUE_1);
             else
-                fbeValue.int16b1 = EnumInt16.ENUM_VALUE_1;
+                fbeValue.int16b1 = global::enums.EnumInt16.ENUM_VALUE_1;
             fbeCurrentSize += int16b1.FBESize;
 
             if ((fbeCurrentSize + int16b2.FBESize) <= fbeStructSize)
-                int16b2.Get(out fbeValue.int16b2, EnumInt16.ENUM_VALUE_2);
+                int16b2.Get(out fbeValue.int16b2, global::enums.EnumInt16.ENUM_VALUE_2);
             else
-                fbeValue.int16b2 = EnumInt16.ENUM_VALUE_2;
+                fbeValue.int16b2 = global::enums.EnumInt16.ENUM_VALUE_2;
             fbeCurrentSize += int16b2.FBESize;
 
             if ((fbeCurrentSize + int16b3.FBESize) <= fbeStructSize)
-                int16b3.Get(out fbeValue.int16b3, EnumInt16.ENUM_VALUE_3);
+                int16b3.Get(out fbeValue.int16b3, global::enums.EnumInt16.ENUM_VALUE_3);
             else
-                fbeValue.int16b3 = EnumInt16.ENUM_VALUE_3;
+                fbeValue.int16b3 = global::enums.EnumInt16.ENUM_VALUE_3;
             fbeCurrentSize += int16b3.FBESize;
 
             if ((fbeCurrentSize + int16b4.FBESize) <= fbeStructSize)
-                int16b4.Get(out fbeValue.int16b4, EnumInt16.ENUM_VALUE_4);
+                int16b4.Get(out fbeValue.int16b4, global::enums.EnumInt16.ENUM_VALUE_4);
             else
-                fbeValue.int16b4 = EnumInt16.ENUM_VALUE_4;
+                fbeValue.int16b4 = global::enums.EnumInt16.ENUM_VALUE_4;
             fbeCurrentSize += int16b4.FBESize;
 
             if ((fbeCurrentSize + int16b5.FBESize) <= fbeStructSize)
-                int16b5.Get(out fbeValue.int16b5, EnumInt16.ENUM_VALUE_5);
+                int16b5.Get(out fbeValue.int16b5, global::enums.EnumInt16.ENUM_VALUE_5);
             else
-                fbeValue.int16b5 = EnumInt16.ENUM_VALUE_5;
+                fbeValue.int16b5 = global::enums.EnumInt16.ENUM_VALUE_5;
             fbeCurrentSize += int16b5.FBESize;
 
             if ((fbeCurrentSize + uint16b0.FBESize) <= fbeStructSize)
-                uint16b0.Get(out fbeValue.uint16b0, EnumUInt16.ENUM_VALUE_0);
+                uint16b0.Get(out fbeValue.uint16b0, global::enums.EnumUInt16.ENUM_VALUE_0);
             else
-                fbeValue.uint16b0 = EnumUInt16.ENUM_VALUE_0;
+                fbeValue.uint16b0 = global::enums.EnumUInt16.ENUM_VALUE_0;
             fbeCurrentSize += uint16b0.FBESize;
 
             if ((fbeCurrentSize + uint16b1.FBESize) <= fbeStructSize)
-                uint16b1.Get(out fbeValue.uint16b1, EnumUInt16.ENUM_VALUE_1);
+                uint16b1.Get(out fbeValue.uint16b1, global::enums.EnumUInt16.ENUM_VALUE_1);
             else
-                fbeValue.uint16b1 = EnumUInt16.ENUM_VALUE_1;
+                fbeValue.uint16b1 = global::enums.EnumUInt16.ENUM_VALUE_1;
             fbeCurrentSize += uint16b1.FBESize;
 
             if ((fbeCurrentSize + uint16b2.FBESize) <= fbeStructSize)
-                uint16b2.Get(out fbeValue.uint16b2, EnumUInt16.ENUM_VALUE_2);
+                uint16b2.Get(out fbeValue.uint16b2, global::enums.EnumUInt16.ENUM_VALUE_2);
             else
-                fbeValue.uint16b2 = EnumUInt16.ENUM_VALUE_2;
+                fbeValue.uint16b2 = global::enums.EnumUInt16.ENUM_VALUE_2;
             fbeCurrentSize += uint16b2.FBESize;
 
             if ((fbeCurrentSize + uint16b3.FBESize) <= fbeStructSize)
-                uint16b3.Get(out fbeValue.uint16b3, EnumUInt16.ENUM_VALUE_3);
+                uint16b3.Get(out fbeValue.uint16b3, global::enums.EnumUInt16.ENUM_VALUE_3);
             else
-                fbeValue.uint16b3 = EnumUInt16.ENUM_VALUE_3;
+                fbeValue.uint16b3 = global::enums.EnumUInt16.ENUM_VALUE_3;
             fbeCurrentSize += uint16b3.FBESize;
 
             if ((fbeCurrentSize + uint16b4.FBESize) <= fbeStructSize)
-                uint16b4.Get(out fbeValue.uint16b4, EnumUInt16.ENUM_VALUE_4);
+                uint16b4.Get(out fbeValue.uint16b4, global::enums.EnumUInt16.ENUM_VALUE_4);
             else
-                fbeValue.uint16b4 = EnumUInt16.ENUM_VALUE_4;
+                fbeValue.uint16b4 = global::enums.EnumUInt16.ENUM_VALUE_4;
             fbeCurrentSize += uint16b4.FBESize;
 
             if ((fbeCurrentSize + uint16b5.FBESize) <= fbeStructSize)
-                uint16b5.Get(out fbeValue.uint16b5, EnumUInt16.ENUM_VALUE_5);
+                uint16b5.Get(out fbeValue.uint16b5, global::enums.EnumUInt16.ENUM_VALUE_5);
             else
-                fbeValue.uint16b5 = EnumUInt16.ENUM_VALUE_5;
+                fbeValue.uint16b5 = global::enums.EnumUInt16.ENUM_VALUE_5;
             fbeCurrentSize += uint16b5.FBESize;
 
             if ((fbeCurrentSize + int32b0.FBESize) <= fbeStructSize)
-                int32b0.Get(out fbeValue.int32b0, EnumInt32.ENUM_VALUE_0);
+                int32b0.Get(out fbeValue.int32b0, global::enums.EnumInt32.ENUM_VALUE_0);
             else
-                fbeValue.int32b0 = EnumInt32.ENUM_VALUE_0;
+                fbeValue.int32b0 = global::enums.EnumInt32.ENUM_VALUE_0;
             fbeCurrentSize += int32b0.FBESize;
 
             if ((fbeCurrentSize + int32b1.FBESize) <= fbeStructSize)
-                int32b1.Get(out fbeValue.int32b1, EnumInt32.ENUM_VALUE_1);
+                int32b1.Get(out fbeValue.int32b1, global::enums.EnumInt32.ENUM_VALUE_1);
             else
-                fbeValue.int32b1 = EnumInt32.ENUM_VALUE_1;
+                fbeValue.int32b1 = global::enums.EnumInt32.ENUM_VALUE_1;
             fbeCurrentSize += int32b1.FBESize;
 
             if ((fbeCurrentSize + int32b2.FBESize) <= fbeStructSize)
-                int32b2.Get(out fbeValue.int32b2, EnumInt32.ENUM_VALUE_2);
+                int32b2.Get(out fbeValue.int32b2, global::enums.EnumInt32.ENUM_VALUE_2);
             else
-                fbeValue.int32b2 = EnumInt32.ENUM_VALUE_2;
+                fbeValue.int32b2 = global::enums.EnumInt32.ENUM_VALUE_2;
             fbeCurrentSize += int32b2.FBESize;
 
             if ((fbeCurrentSize + int32b3.FBESize) <= fbeStructSize)
-                int32b3.Get(out fbeValue.int32b3, EnumInt32.ENUM_VALUE_3);
+                int32b3.Get(out fbeValue.int32b3, global::enums.EnumInt32.ENUM_VALUE_3);
             else
-                fbeValue.int32b3 = EnumInt32.ENUM_VALUE_3;
+                fbeValue.int32b3 = global::enums.EnumInt32.ENUM_VALUE_3;
             fbeCurrentSize += int32b3.FBESize;
 
             if ((fbeCurrentSize + int32b4.FBESize) <= fbeStructSize)
-                int32b4.Get(out fbeValue.int32b4, EnumInt32.ENUM_VALUE_4);
+                int32b4.Get(out fbeValue.int32b4, global::enums.EnumInt32.ENUM_VALUE_4);
             else
-                fbeValue.int32b4 = EnumInt32.ENUM_VALUE_4;
+                fbeValue.int32b4 = global::enums.EnumInt32.ENUM_VALUE_4;
             fbeCurrentSize += int32b4.FBESize;
 
             if ((fbeCurrentSize + int32b5.FBESize) <= fbeStructSize)
-                int32b5.Get(out fbeValue.int32b5, EnumInt32.ENUM_VALUE_5);
+                int32b5.Get(out fbeValue.int32b5, global::enums.EnumInt32.ENUM_VALUE_5);
             else
-                fbeValue.int32b5 = EnumInt32.ENUM_VALUE_5;
+                fbeValue.int32b5 = global::enums.EnumInt32.ENUM_VALUE_5;
             fbeCurrentSize += int32b5.FBESize;
 
             if ((fbeCurrentSize + uint32b0.FBESize) <= fbeStructSize)
-                uint32b0.Get(out fbeValue.uint32b0, EnumUInt32.ENUM_VALUE_0);
+                uint32b0.Get(out fbeValue.uint32b0, global::enums.EnumUInt32.ENUM_VALUE_0);
             else
-                fbeValue.uint32b0 = EnumUInt32.ENUM_VALUE_0;
+                fbeValue.uint32b0 = global::enums.EnumUInt32.ENUM_VALUE_0;
             fbeCurrentSize += uint32b0.FBESize;
 
             if ((fbeCurrentSize + uint32b1.FBESize) <= fbeStructSize)
-                uint32b1.Get(out fbeValue.uint32b1, EnumUInt32.ENUM_VALUE_1);
+                uint32b1.Get(out fbeValue.uint32b1, global::enums.EnumUInt32.ENUM_VALUE_1);
             else
-                fbeValue.uint32b1 = EnumUInt32.ENUM_VALUE_1;
+                fbeValue.uint32b1 = global::enums.EnumUInt32.ENUM_VALUE_1;
             fbeCurrentSize += uint32b1.FBESize;
 
             if ((fbeCurrentSize + uint32b2.FBESize) <= fbeStructSize)
-                uint32b2.Get(out fbeValue.uint32b2, EnumUInt32.ENUM_VALUE_2);
+                uint32b2.Get(out fbeValue.uint32b2, global::enums.EnumUInt32.ENUM_VALUE_2);
             else
-                fbeValue.uint32b2 = EnumUInt32.ENUM_VALUE_2;
+                fbeValue.uint32b2 = global::enums.EnumUInt32.ENUM_VALUE_2;
             fbeCurrentSize += uint32b2.FBESize;
 
             if ((fbeCurrentSize + uint32b3.FBESize) <= fbeStructSize)
-                uint32b3.Get(out fbeValue.uint32b3, EnumUInt32.ENUM_VALUE_3);
+                uint32b3.Get(out fbeValue.uint32b3, global::enums.EnumUInt32.ENUM_VALUE_3);
             else
-                fbeValue.uint32b3 = EnumUInt32.ENUM_VALUE_3;
+                fbeValue.uint32b3 = global::enums.EnumUInt32.ENUM_VALUE_3;
             fbeCurrentSize += uint32b3.FBESize;
 
             if ((fbeCurrentSize + uint32b4.FBESize) <= fbeStructSize)
-                uint32b4.Get(out fbeValue.uint32b4, EnumUInt32.ENUM_VALUE_4);
+                uint32b4.Get(out fbeValue.uint32b4, global::enums.EnumUInt32.ENUM_VALUE_4);
             else
-                fbeValue.uint32b4 = EnumUInt32.ENUM_VALUE_4;
+                fbeValue.uint32b4 = global::enums.EnumUInt32.ENUM_VALUE_4;
             fbeCurrentSize += uint32b4.FBESize;
 
             if ((fbeCurrentSize + uint32b5.FBESize) <= fbeStructSize)
-                uint32b5.Get(out fbeValue.uint32b5, EnumUInt32.ENUM_VALUE_5);
+                uint32b5.Get(out fbeValue.uint32b5, global::enums.EnumUInt32.ENUM_VALUE_5);
             else
-                fbeValue.uint32b5 = EnumUInt32.ENUM_VALUE_5;
+                fbeValue.uint32b5 = global::enums.EnumUInt32.ENUM_VALUE_5;
             fbeCurrentSize += uint32b5.FBESize;
 
             if ((fbeCurrentSize + int64b0.FBESize) <= fbeStructSize)
-                int64b0.Get(out fbeValue.int64b0, EnumInt64.ENUM_VALUE_0);
+                int64b0.Get(out fbeValue.int64b0, global::enums.EnumInt64.ENUM_VALUE_0);
             else
-                fbeValue.int64b0 = EnumInt64.ENUM_VALUE_0;
+                fbeValue.int64b0 = global::enums.EnumInt64.ENUM_VALUE_0;
             fbeCurrentSize += int64b0.FBESize;
 
             if ((fbeCurrentSize + int64b1.FBESize) <= fbeStructSize)
-                int64b1.Get(out fbeValue.int64b1, EnumInt64.ENUM_VALUE_1);
+                int64b1.Get(out fbeValue.int64b1, global::enums.EnumInt64.ENUM_VALUE_1);
             else
-                fbeValue.int64b1 = EnumInt64.ENUM_VALUE_1;
+                fbeValue.int64b1 = global::enums.EnumInt64.ENUM_VALUE_1;
             fbeCurrentSize += int64b1.FBESize;
 
             if ((fbeCurrentSize + int64b2.FBESize) <= fbeStructSize)
-                int64b2.Get(out fbeValue.int64b2, EnumInt64.ENUM_VALUE_2);
+                int64b2.Get(out fbeValue.int64b2, global::enums.EnumInt64.ENUM_VALUE_2);
             else
-                fbeValue.int64b2 = EnumInt64.ENUM_VALUE_2;
+                fbeValue.int64b2 = global::enums.EnumInt64.ENUM_VALUE_2;
             fbeCurrentSize += int64b2.FBESize;
 
             if ((fbeCurrentSize + int64b3.FBESize) <= fbeStructSize)
-                int64b3.Get(out fbeValue.int64b3, EnumInt64.ENUM_VALUE_3);
+                int64b3.Get(out fbeValue.int64b3, global::enums.EnumInt64.ENUM_VALUE_3);
             else
-                fbeValue.int64b3 = EnumInt64.ENUM_VALUE_3;
+                fbeValue.int64b3 = global::enums.EnumInt64.ENUM_VALUE_3;
             fbeCurrentSize += int64b3.FBESize;
 
             if ((fbeCurrentSize + int64b4.FBESize) <= fbeStructSize)
-                int64b4.Get(out fbeValue.int64b4, EnumInt64.ENUM_VALUE_4);
+                int64b4.Get(out fbeValue.int64b4, global::enums.EnumInt64.ENUM_VALUE_4);
             else
-                fbeValue.int64b4 = EnumInt64.ENUM_VALUE_4;
+                fbeValue.int64b4 = global::enums.EnumInt64.ENUM_VALUE_4;
             fbeCurrentSize += int64b4.FBESize;
 
             if ((fbeCurrentSize + int64b5.FBESize) <= fbeStructSize)
-                int64b5.Get(out fbeValue.int64b5, EnumInt64.ENUM_VALUE_5);
+                int64b5.Get(out fbeValue.int64b5, global::enums.EnumInt64.ENUM_VALUE_5);
             else
-                fbeValue.int64b5 = EnumInt64.ENUM_VALUE_5;
+                fbeValue.int64b5 = global::enums.EnumInt64.ENUM_VALUE_5;
             fbeCurrentSize += int64b5.FBESize;
 
             if ((fbeCurrentSize + uint64b0.FBESize) <= fbeStructSize)
-                uint64b0.Get(out fbeValue.uint64b0, EnumUInt64.ENUM_VALUE_0);
+                uint64b0.Get(out fbeValue.uint64b0, global::enums.EnumUInt64.ENUM_VALUE_0);
             else
-                fbeValue.uint64b0 = EnumUInt64.ENUM_VALUE_0;
+                fbeValue.uint64b0 = global::enums.EnumUInt64.ENUM_VALUE_0;
             fbeCurrentSize += uint64b0.FBESize;
 
             if ((fbeCurrentSize + uint64b1.FBESize) <= fbeStructSize)
-                uint64b1.Get(out fbeValue.uint64b1, EnumUInt64.ENUM_VALUE_1);
+                uint64b1.Get(out fbeValue.uint64b1, global::enums.EnumUInt64.ENUM_VALUE_1);
             else
-                fbeValue.uint64b1 = EnumUInt64.ENUM_VALUE_1;
+                fbeValue.uint64b1 = global::enums.EnumUInt64.ENUM_VALUE_1;
             fbeCurrentSize += uint64b1.FBESize;
 
             if ((fbeCurrentSize + uint64b2.FBESize) <= fbeStructSize)
-                uint64b2.Get(out fbeValue.uint64b2, EnumUInt64.ENUM_VALUE_2);
+                uint64b2.Get(out fbeValue.uint64b2, global::enums.EnumUInt64.ENUM_VALUE_2);
             else
-                fbeValue.uint64b2 = EnumUInt64.ENUM_VALUE_2;
+                fbeValue.uint64b2 = global::enums.EnumUInt64.ENUM_VALUE_2;
             fbeCurrentSize += uint64b2.FBESize;
 
             if ((fbeCurrentSize + uint64b3.FBESize) <= fbeStructSize)
-                uint64b3.Get(out fbeValue.uint64b3, EnumUInt64.ENUM_VALUE_3);
+                uint64b3.Get(out fbeValue.uint64b3, global::enums.EnumUInt64.ENUM_VALUE_3);
             else
-                fbeValue.uint64b3 = EnumUInt64.ENUM_VALUE_3;
+                fbeValue.uint64b3 = global::enums.EnumUInt64.ENUM_VALUE_3;
             fbeCurrentSize += uint64b3.FBESize;
 
             if ((fbeCurrentSize + uint64b4.FBESize) <= fbeStructSize)
-                uint64b4.Get(out fbeValue.uint64b4, EnumUInt64.ENUM_VALUE_4);
+                uint64b4.Get(out fbeValue.uint64b4, global::enums.EnumUInt64.ENUM_VALUE_4);
             else
-                fbeValue.uint64b4 = EnumUInt64.ENUM_VALUE_4;
+                fbeValue.uint64b4 = global::enums.EnumUInt64.ENUM_VALUE_4;
             fbeCurrentSize += uint64b4.FBESize;
 
             if ((fbeCurrentSize + uint64b5.FBESize) <= fbeStructSize)
-                uint64b5.Get(out fbeValue.uint64b5, EnumUInt64.ENUM_VALUE_5);
+                uint64b5.Get(out fbeValue.uint64b5, global::enums.EnumUInt64.ENUM_VALUE_5);
             else
-                fbeValue.uint64b5 = EnumUInt64.ENUM_VALUE_5;
+                fbeValue.uint64b5 = global::enums.EnumUInt64.ENUM_VALUE_5;
             fbeCurrentSize += uint64b5.FBESize;
         }
 

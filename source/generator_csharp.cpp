@@ -5989,7 +5989,7 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::shared_ptr<Package>& p
                 if (field->array || field->vector || field->list || field->set || field->map || field->hash)
                     WriteLineIndent(*field->name + ".Get(ref fbeValue." + *field->name + ");");
                 else
-                    WriteLineIndent(*field->name + ".Get(out fbeValue." + *field->name + (field->value ? (", " + ConvertConstant(*field->type, *field->value, field->optional)) : "") + ");");
+                    WriteLineIndent(*field->name + ".Get(out fbeValue." + *field->name + (field->value ? (", " + ConvertConstant(*p->name, *field->type, *field->value, field->optional)) : "") + ");");
                 Indent(-1);
                 WriteLineIndent("else");
                 Indent(1);
@@ -8491,7 +8491,7 @@ std::string GeneratorCSharp::ConvertTypeFieldInitialization(const StructField& f
     return "new " + ConvertTypeFieldName(*field.type, final) + "(buffer, " + offset + ")";
 }
 
-std::string GeneratorCSharp::ConvertConstant(const std::string& type, const std::string& value, bool optional)
+std::string GeneratorCSharp::ConvertConstant(const std::string& package, const std::string& type, const std::string& value, bool optional)
 {
     if (value == "true")
         return "true";
@@ -8573,14 +8573,14 @@ std::string GeneratorCSharp::ConvertConstant(const std::string& type, const std:
             for (const auto& it : flags)
             {
                 std::string flag = CppCommon::StringUtils::ToTrim(it);
-                std::string ns = (CppCommon::StringUtils::CountAll(flag, ".") > 1) ? "global::" : "";
+                std::string ns = (CppCommon::StringUtils::CountAll(flag, ".") > 1) ? "global::" : ("global::" + package + ".");
                 result += (first ? "" : " | ") + ns + flag;
                 first = false;
             }
         }
         else
         {
-            std::string ns = (CppCommon::StringUtils::CountAll(result, ".") > 1) ? "global::" : "";
+            std::string ns = (CppCommon::StringUtils::CountAll(result, ".") > 1) ? "global::" : ("global::" + package + ".");
             result = ns + result;
         }
     }
@@ -8675,7 +8675,7 @@ std::string GeneratorCSharp::ConvertDefault(const std::string& type)
 std::string GeneratorCSharp::ConvertDefault(const std::string& package, const StructField& field)
 {
     if (field.value)
-        return ConvertConstant(*field.type, *field.value, field.optional);
+        return ConvertConstant(package, *field.type, *field.value, field.optional);
 
     if (field.array)
         return "new " + ConvertTypeName(*field.type, field.optional) + "[" + std::to_string(field.N) + "]";

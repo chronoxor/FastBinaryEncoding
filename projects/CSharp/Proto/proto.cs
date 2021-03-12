@@ -2215,7 +2215,7 @@ namespace proto {
         {
             id = (int)0
             , name = ""
-            , state = State.initialized | State.bad
+            , state = global::proto.State.initialized | global::proto.State.bad
             , wallet = global::proto.Balance.Default
             , asset = null
             , orders = new List<Order>()
@@ -2539,9 +2539,9 @@ namespace proto {
             fbeCurrentSize += name.FBESize;
 
             if ((fbeCurrentSize + state.FBESize) <= fbeStructSize)
-                state.Get(out fbeValue.state, State.initialized | State.bad);
+                state.Get(out fbeValue.state, global::proto.State.initialized | global::proto.State.bad);
             else
-                fbeValue.state = State.initialized | State.bad;
+                fbeValue.state = global::proto.State.initialized | global::proto.State.bad;
             fbeCurrentSize += state.FBESize;
 
             if ((fbeCurrentSize + wallet.FBESize) <= fbeStructSize)

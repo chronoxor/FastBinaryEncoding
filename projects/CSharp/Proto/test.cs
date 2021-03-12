@@ -7206,11 +7206,11 @@ namespace test {
             parent = StructOptional.Default
             , f1000 = global::test.EnumSimple.Default
             , f1001 = null
-            , f1002 = EnumTyped.ENUM_VALUE_2
+            , f1002 = global::test.EnumTyped.ENUM_VALUE_2
             , f1003 = null
             , f1004 = global::test.FlagsSimple.Default
             , f1005 = null
-            , f1006 = FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6
+            , f1006 = global::test.FlagsTyped.FLAG_VALUE_2 | global::test.FlagsTyped.FLAG_VALUE_4 | global::test.FlagsTyped.FLAG_VALUE_6
             , f1007 = null
             , f1008 = global::test.StructSimple.Default
             , f1009 = null
@@ -7613,9 +7613,9 @@ namespace test {
             fbeCurrentSize += f1001.FBESize;
 
             if ((fbeCurrentSize + f1002.FBESize) <= fbeStructSize)
-                f1002.Get(out fbeValue.f1002, EnumTyped.ENUM_VALUE_2);
+                f1002.Get(out fbeValue.f1002, global::test.EnumTyped.ENUM_VALUE_2);
             else
-                fbeValue.f1002 = EnumTyped.ENUM_VALUE_2;
+                fbeValue.f1002 = global::test.EnumTyped.ENUM_VALUE_2;
             fbeCurrentSize += f1002.FBESize;
 
             if ((fbeCurrentSize + f1003.FBESize) <= fbeStructSize)
@@ -7637,9 +7637,9 @@ namespace test {
             fbeCurrentSize += f1005.FBESize;
 
             if ((fbeCurrentSize + f1006.FBESize) <= fbeStructSize)
-                f1006.Get(out fbeValue.f1006, FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6);
+                f1006.Get(out fbeValue.f1006, global::test.FlagsTyped.FLAG_VALUE_2 | global::test.FlagsTyped.FLAG_VALUE_4 | global::test.FlagsTyped.FLAG_VALUE_6);
             else
-                fbeValue.f1006 = FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6;
+                fbeValue.f1006 = global::test.FlagsTyped.FLAG_VALUE_2 | global::test.FlagsTyped.FLAG_VALUE_4 | global::test.FlagsTyped.FLAG_VALUE_6;
             fbeCurrentSize += f1006.FBESize;
 
             if ((fbeCurrentSize + f1007.FBESize) <= fbeStructSize)
