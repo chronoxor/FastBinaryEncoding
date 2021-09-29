@@ -7638,7 +7638,11 @@ void GeneratorCpp::GenerateStruct_Header(const std::shared_ptr<Package>& p, cons
         {
             for (const auto& field : s->body->fields)
             {
-                Write(std::string(first ? "" : ", ") + ConvertTypeNameAsArgument(*p->name, *field) + " arg_" + *field->name);
+                if (field->ptr) {
+                    Write(std::string(first ? "" : ", ") + ConvertTypeName(*p->name, *field) + " arg_" + *field->name);
+                } else {
+                    Write(std::string(first ? "" : ", ") + ConvertTypeNameAsArgument(*p->name, *field) + " arg_" + *field->name);
+                }
                 first = false;
             }
         }
