@@ -169,6 +169,7 @@ private:
 
     std::string ConvertEnumType(const std::string& type);
     std::string ConvertTypeName(const std::string& package, const std::string& type, bool optional);
+    std::string ConvertTypeNameIgnorePtr(const std::string& package, const StructField& type, bool optional);
     std::string ConvertTypeName(const std::string& package, const StructField& field);
     std::string ConvertTypeNameAsArgument(const std::string& package, const StructField& field);
     std::string ConvertConstant(const std::string& type, const std::string& value, bool optional);
