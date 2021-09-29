@@ -17,4 +17,7 @@ modules/*
 
 # Temporary
 .idea
+.cache
 temp
+compile_commands.json
+build-*/

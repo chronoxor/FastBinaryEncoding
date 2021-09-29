@@ -84,6 +84,7 @@ int yyerror(const std::string& msg);
 %type <struct_field> struct_field_set
 %type <struct_field> struct_field_map
 %type <struct_field> struct_field_hash
+%type <struct_field> struct_field_ptr
 %type <string> struct_field_value
 %type <string> type_name
 
@@ -271,6 +272,7 @@ struct_field_type
     | struct_field_set
     | struct_field_map
     | struct_field_hash
+    | struct_field_ptr
     ;
 
 struct_field_base
@@ -331,6 +333,18 @@ struct_field_map
 struct_field_hash
     : struct_field_base '{' struct_field_base '}'                                           { $$ = $1; $$->hash = true; $$->key = $3->type; delete $3; }
     | struct_field_optional '{' struct_field_base '}'                                       { $$ = $1; $$->hash = true; $$->key = $3->type; delete $3; }
+    ;
+
+struct_field_ptr
+    : struct_field_base '*'                                                                 { $$ = $1; $$->ptr = true; }
+    | struct_field_optional '*'                                                             { $$ = $1; $$->ptr = true; }
+    | struct_field_reseter '*'                                                              { $$ = $1; $$->ptr = true; }
+    | struct_field_array '*'                                                                { $$ = $1; $$->ptr = true; }
+    | struct_field_vector '*'                                                               { $$ = $1; $$->ptr = true; }
+    | struct_field_list '*'                                                                 { $$ = $1; $$->ptr = true; }
+    | struct_field_set '*'                                                                  { $$ = $1; $$->ptr = true; }
+    | struct_field_map '*'                                                                  { $$ = $1; $$->ptr = true; }
+    | struct_field_hash '*'                                                                 { $$ = $1; $$->ptr = true; }
     ;
 
 struct_field_value
