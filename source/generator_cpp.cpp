@@ -7542,6 +7542,7 @@ public:
 
 void GeneratorCpp::GenerateStruct_Header(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
+
     // Generate struct response forward declaration
     if (s->response)
     {
@@ -7551,6 +7552,19 @@ void GeneratorCpp::GenerateStruct_Header(const std::shared_ptr<Package>& p, cons
         {
             WriteLine();
             WriteLineIndent("struct " + response + ";");
+        }
+    }
+
+    // Generate struct forward declaration if has ptr field;
+    if (s->body)
+    {
+        for (const auto& field : s->body->fields)
+        {
+            if (field->ptr)
+            {
+                WriteLine();
+                WriteLineIndent("struct " + *field->type+ ";");
+            }
         }
     }
 
@@ -7572,6 +7586,7 @@ void GeneratorCpp::GenerateStruct_Header(const std::shared_ptr<Package>& p, cons
         if (s->body && !s->body->fields.empty())
             WriteLine();
     }
+
 
     // Generate struct body
     if (s->body)
