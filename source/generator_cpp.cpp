@@ -7555,6 +7555,7 @@ void GeneratorCpp::GenerateStruct_Header(const std::shared_ptr<Package>& p, cons
         }
     }
 
+    bool has_unique_ptr_member = false;
     // Generate struct forward declaration if has ptr field;
     if (s->body)
     {
@@ -7570,6 +7571,7 @@ void GeneratorCpp::GenerateStruct_Header(const std::shared_ptr<Package>& p, cons
                     WriteLineIndent("struct " + *field->type + ";");
                     unique_type_set.insert(*field->type);
                 }
+                has_unique_ptr_member = true;
             }
         }
     }
@@ -7649,8 +7651,12 @@ void GeneratorCpp::GenerateStruct_Header(const std::shared_ptr<Package>& p, cons
         WriteLine(");");
     }
 
-    // Generate struct copy/mode constructor, destructor and assign operators
-    WriteLineIndent(*s->name + "(const " + *s->name + "& other) = default;");
+    // Generate struct copy/move constructor, destructor and assign operators
+    if (!has_unique_ptr_member) {
+        WriteLineIndent(*s->name + "(const " + *s->name + "& other) = default;");
+    } else {
+        WriteLineIndent(*s->name + "(const " + *s->name + "& other);");
+       }
     WriteLineIndent(*s->name + "(" + *s->name + "&& other) = default;");
     WriteLineIndent("~" + *s->name + "() = default;");
     WriteLine();
@@ -7728,6 +7734,7 @@ void GeneratorCpp::GenerateStruct_Source(const std::shared_ptr<Package>& p, cons
     Indent(-1);
     WriteLineIndent("{}");
 
+    bool has_unique_ptr_member = false;
     // Generate struct initialization constructor
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
@@ -7744,6 +7751,7 @@ void GeneratorCpp::GenerateStruct_Source(const std::shared_ptr<Package>& p, cons
             for (const auto& field : s->body->fields)
             {
                 if (field->ptr) {
+                    has_unique_ptr_member = true;
                     Write(std::string(first ? "" : ", ") + ConvertTypeName(*p->name, *field) + " arg_" + *field->name);
                 } else {
                     Write(std::string(first ? "" : ", ") + ConvertTypeNameAsArgument(*p->name, *field) + " arg_" + *field->name);
@@ -7773,6 +7781,32 @@ void GeneratorCpp::GenerateStruct_Source(const std::shared_ptr<Package>& p, cons
         }
         Indent(-1);
         WriteLineIndent("{}");
+    }
+    // Generate struct copy constructor
+    if (has_unique_ptr_member) {
+        WriteLineIndent(*s->name + "::" + *s->name + "(const " + *s->name + "& other)");     
+        Indent(1);
+        // generate the base copy
+        first = true;
+        if (s->base && !s->base->empty())
+        {
+            WriteLineIndent(": "+ ConvertTypeName(*p->name, *s->base, false) + "(other)");
+            first = false;
+        }
+        // generate the field copy
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                if (field->ptr) {
+                    WriteLineIndent(std::string(first ? ": " : ", ") + *field->name + "(new " + ConvertTypeNameIgnorePtr(*p->name, *field, field->optional) + "(*other." + *field->name + "))");
+                } else {
+                    WriteLineIndent(std::string(first ? ": " : ", ") + *field->name + "(other." + *field->name + ")");
+                }
+                first = false;
+            }
+            WriteLineIndent("{}");
+        }
     }
 
     // Generate struct compare operators
