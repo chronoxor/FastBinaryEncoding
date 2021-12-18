@@ -71,7 +71,7 @@ Sample projects:
     * [Benchmark 3: Verify](#benchmark-3-verify)
 
 # Features
-* Cross platform (Linux, OSX, Windows)
+* Cross platform (Linux, MacOS, Windows)
 * [Generators for C++, C#, Go, Java, JavaScript, Kotlin, Python, Ruby, Swift](#generate-domain-model)
 * [Fast binary encoding format](documents/FBE.md)
 * [Supported base types (byte, bool, char, wchar, int8, int16, int32, int64, float, double)](documents/FBE.md#base-types)
@@ -86,7 +86,7 @@ Sample projects:
 
 # Requirements
 * Linux (binutils-dev uuid-dev flex bison)
-* OSX (flex bison)
+* MacOS (flex bison)
 * Windows 10
 * [cmake](https://www.cmake.org)
 * [gcc](https://gcc.gnu.org)
@@ -123,7 +123,7 @@ cd build
 ./unix.sh
 ```
 
-### OSX
+### MacOS
 ```shell
 cd build
 ./unix.sh
