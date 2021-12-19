@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: "Setup flex, bison"
+        run: brew install flex bison
+
       - name: "Setup cmake"
         run: cmake --version
 
@@ -20,6 +23,8 @@ jobs:
           gil update
 
       - name: "Build"
+        env: 
+          PATH: /usr/local/opt/flex/bin:/usr/local/opt/bison/bin:$PATH
         run: |
           cd build
           ./unix.sh
