@@ -14,6 +14,9 @@ jobs:
       - name: "Setup Visual Studio"
         uses: egor-tensin/vs-shell@v2
 
+      - name: "Setup WinFlexBison"
+        run: choco install winflexbison3
+
       - name: "Setup cmake"
         run: cmake --version
 
