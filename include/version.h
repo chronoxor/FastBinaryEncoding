@@ -12,7 +12,7 @@
 namespace FBE {
 
 // Fast binary encoding version
-const char version[] = "1.7.0.0";
+const char version[] = "1.8.0.0";
 
 } // namespace FBE
 

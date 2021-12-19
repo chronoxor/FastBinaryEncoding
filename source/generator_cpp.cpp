@@ -10576,8 +10576,10 @@ std::string GeneratorCpp::ConvertOutputStreamType(const std::string& type, const
         return "(int)" + std::string(optional ? "*" : "") + name;
     else if (type == "bytes")
         return "\"bytes[\" << " + name + std::string(optional ? "->" : ".") + "size() << \"]\"";
-    else if ((type == "char") || (type == "wchar"))
+    else if (type == "char")
         return "\"'\" << " + std::string(optional ? "*" : "") + name + " << \"'\"";
+    else if (type == "wchar")
+        return "\"'\" << (char)" + std::string(optional ? "*" : "") + name + " << \"'\"";
     else if ((type == "string") || (type == "uuid"))
         return "\"\\\"\" << " + std::string(optional ? "*" : "") + name + " << \"\\\"\"";
     else

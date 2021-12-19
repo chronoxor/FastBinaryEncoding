@@ -303,8 +303,8 @@ std::ostream& operator<<(std::ostream& stream, const StructSimple& value)
     stream << ",f4="; stream << (int)value.f4;
     stream << ",f5="; stream << "'" << value.f5 << "'";
     stream << ",f6="; stream << "'" << value.f6 << "'";
-    stream << ",f7="; stream << "'" << value.f7 << "'";
-    stream << ",f8="; stream << "'" << value.f8 << "'";
+    stream << ",f7="; stream << "'" << (char)value.f7 << "'";
+    stream << ",f8="; stream << "'" << (char)value.f8 << "'";
     stream << ",f9="; stream << (int)value.f9;
     stream << ",f10="; stream << (int)value.f10;
     stream << ",f11="; stream << (int)value.f11;
@@ -587,9 +587,9 @@ std::ostream& operator<<(std::ostream& stream, const StructOptional& value)
     stream << ",f106="; if (value.f106) stream << "'" << *value.f106 << "'"; else stream << "null";
     stream << ",f107="; if (value.f107) stream << "'" << *value.f107 << "'"; else stream << "null";
     stream << ",f108="; if (value.f108) stream << "'" << *value.f108 << "'"; else stream << "null";
-    stream << ",f109="; if (value.f109) stream << "'" << *value.f109 << "'"; else stream << "null";
-    stream << ",f110="; if (value.f110) stream << "'" << *value.f110 << "'"; else stream << "null";
-    stream << ",f111="; if (value.f111) stream << "'" << *value.f111 << "'"; else stream << "null";
+    stream << ",f109="; if (value.f109) stream << "'" << (char)*value.f109 << "'"; else stream << "null";
+    stream << ",f110="; if (value.f110) stream << "'" << (char)*value.f110 << "'"; else stream << "null";
+    stream << ",f111="; if (value.f111) stream << "'" << (char)*value.f111 << "'"; else stream << "null";
     stream << ",f112="; if (value.f112) stream << (int)*value.f112; else stream << "null";
     stream << ",f113="; if (value.f113) stream << (int)*value.f113; else stream << "null";
     stream << ",f114="; if (value.f114) stream << (int)*value.f114; else stream << "null";
