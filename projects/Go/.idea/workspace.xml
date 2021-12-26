@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,9 +20,12 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" path="Z:\soft\Development\Go" />
+  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../../soft/Development/Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="1QQIyAqhncEetOxKwup5jBZiZ9Z" />
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -49,100 +56,101 @@
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
-    <property name="configurable.Module.GOPATH.is.expanded" value="true" />
-    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
+    <property name="configurable..is.expanded" value="true" />
+    <property name="configurable.GoLibrariesConfigurable.is.expanded" value="true" />
+    <property name="go.format.on.save.advertiser.fired" value="true" />
+    <property name="go.formatter.settings.were.checked" value="true" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="go.import.settings.migrated" value="true" />
+    <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.watchers.conflict.with.on.save.actions.check.performed" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="goland.project.structure" />
+    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
-  <component name="RunManager" selected="Go Build.go build create.go">
-    <configuration name="go build create.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go Test.go test tests">
+    <configuration name="go build serialization_final.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/examples/create.go" />
       <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/examples/serialization_final.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build serialization_json.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="FastBinaryEncoding" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/examples/serialization_json.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build tests/" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="FastBinaryEncoding" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="DIRECTORY" />
+      <directory value="$PROJECT_DIR$/tests" />
       <method v="2" />
     </configuration>
     <configuration name="Tests" type="GoTestRunConfiguration" factoryName="Go Test">
       <module name="FastBinaryEncoding" />
       <working_directory value="$PROJECT_DIR$/" />
       <go_parameters value="-i" />
-      <framework value="gotest" />
       <kind value="DIRECTORY" />
       <directory value="$PROJECT_DIR$/tests" />
       <filePath value="$PROJECT_DIR$/" />
+      <framework value="gotest" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
       <module name="Go" />
       <working_directory value="$PROJECT_DIR$/" />
       <go_parameters value="-i" />
-      <framework value="gotest" />
       <kind value="DIRECTORY" />
       <directory value="$PROJECT_DIR$/tests" />
       <filePath value="$PROJECT_DIR$/" />
+      <framework value="gotest" />
       <method v="2" />
     </configuration>
-    <configuration name="clone_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="go test tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
       <working_directory value="$PROJECT_DIR$/tests" />
-      <framework value="gotest" />
-      <kind value="FILE" />
+      <kind value="DIRECTORY" />
       <directory value="$PROJECT_DIR$/tests" />
-      <filePath value="$PROJECT_DIR$/tests/clone_test.go" />
+      <filePath value="$PROJECT_DIR$/" />
+      <framework value="gotest" />
       <method v="2" />
     </configuration>
-    <configuration name="create_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="gobench benchmarks" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
-      <working_directory value="$PROJECT_DIR$/tests" />
-      <framework value="gotest" />
-      <kind value="FILE" />
-      <directory value="$PROJECT_DIR$/tests" />
-      <filePath value="$PROJECT_DIR$/tests/create_test.go" />
-      <method v="2" />
-    </configuration>
-    <configuration name="decimal_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <working_directory value="$PROJECT_DIR$/tests" />
-      <framework value="gotest" />
-      <kind value="FILE" />
-      <directory value="$PROJECT_DIR$/tests" />
-      <filePath value="$PROJECT_DIR$/tests/decimal_test.go" />
-      <method v="2" />
-    </configuration>
-    <configuration name="enums_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <working_directory value="$PROJECT_DIR$/tests" />
-      <framework value="gotest" />
-      <kind value="FILE" />
-      <directory value="$PROJECT_DIR$/tests" />
-      <filePath value="$PROJECT_DIR$/tests/enums_test.go" />
+      <working_directory value="$PROJECT_DIR$/benchmarks" />
+      <kind value="DIRECTORY" />
+      <directory value="$PROJECT_DIR$/benchmarks" />
+      <filePath value="$PROJECT_DIR$/" />
+      <framework value="gobench" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Go Build.go build create.go" />
       <item itemvalue="Go Test.Tests" />
-      <item itemvalue="Go Test.enums_test.go" />
-      <item itemvalue="Go Test.decimal_test.go" />
-      <item itemvalue="Go Test.create_test.go" />
-      <item itemvalue="Go Test.clone_test.go" />
+      <item itemvalue="Go Build.go build serialization_final.go" />
+      <item itemvalue="Go Build.go build serialization_json.go" />
+      <item itemvalue="Go Build.go build tests/" />
+      <item itemvalue="Go Test.go test tests" />
+      <item itemvalue="Go Test.gobench benchmarks" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build create.go" />
-        <item itemvalue="Go Test.clone_test.go" />
-        <item itemvalue="Go Test.create_test.go" />
-        <item itemvalue="Go Test.decimal_test.go" />
-        <item itemvalue="Go Test.enums_test.go" />
+        <item itemvalue="Go Test.go test tests" />
+        <item itemvalue="Go Test.gobench benchmarks" />
+        <item itemvalue="Go Build.go build tests/" />
+        <item itemvalue="Go Build.go build serialization_json.go" />
+        <item itemvalue="Go Build.go build serialization_final.go" />
       </list>
     </recent_temporary>
   </component>
@@ -160,29 +168,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="734" y="434" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605126939203">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state x="734" y="434" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605126939203" />
-    <state width="1340" height="266" key="GridCell.Tab.0.bottom" timestamp="1605127008860">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.bottom/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605127008860" />
-    <state width="1340" height="266" key="GridCell.Tab.0.center" timestamp="1605127008860">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.center/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605127008860" />
-    <state width="1340" height="266" key="GridCell.Tab.0.left" timestamp="1605127008860">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.left/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605127008860" />
-    <state width="1340" height="266" key="GridCell.Tab.0.right" timestamp="1605127008860">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.right/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605127008860" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

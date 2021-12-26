@@ -29,6 +29,6 @@ class FieldModelChar(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
-        write(fbeOffset, value.toByte())
+        write(fbeOffset, value.code)
     }
 }

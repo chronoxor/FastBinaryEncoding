@@ -43,7 +43,7 @@ class FinalModelChar(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        write(fbeOffset, value.toByte())
+        write(fbeOffset, value.code)
         return fbeSize
     }
 }

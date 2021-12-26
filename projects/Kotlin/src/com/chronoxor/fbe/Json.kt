@@ -25,13 +25,13 @@ internal class CharacterJson : com.google.gson.JsonSerializer<Char>, com.google.
 {
     override fun serialize(src: Char, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return com.google.gson.JsonPrimitive(src.toLong())
+        return com.google.gson.JsonPrimitive(src.code)
     }
 
     @Throws(com.google.gson.JsonParseException::class)
     override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): Char
     {
-        return json.asLong.toChar()
+        return json.asLong.toInt().toChar()
     }
 }
 

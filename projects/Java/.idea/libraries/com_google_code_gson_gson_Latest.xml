@@ -2,7 +2,7 @@
   <library name="com.google.code.gson:gson:Latest" type="repository">
     <properties maven-id="com.google.code.gson:gson:LATEST" />
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.9/gson-2.8.9.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

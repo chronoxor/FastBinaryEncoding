@@ -142,7 +142,7 @@ class Buffer
 
         fun readChar(buffer: ByteArray, offset: Long): Char
         {
-            return readInt8(buffer, offset).toChar()
+            return readInt8(buffer, offset).toInt().toChar()
         }
 
         fun readWChar(buffer: ByteArray, offset: Long): Char

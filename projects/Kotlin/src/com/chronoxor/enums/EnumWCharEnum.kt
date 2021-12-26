@@ -21,7 +21,7 @@ enum class EnumWCharEnum
     var raw: Int = 0
         private set
 
-    constructor(value: Char) { this.raw = value.toInt() }
+    constructor(value: Char) { this.raw = value.code.toInt() }
     constructor(value: Byte) { this.raw = value.toInt() }
     constructor(value: Short) { this.raw = value.toInt() }
     constructor(value: Int) { this.raw = value.toInt() }

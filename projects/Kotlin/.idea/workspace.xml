@@ -2,8 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/FastBinaryEncoding.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/FastBinaryEncoding.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/kotlinc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/libraries/com_google_code_gson_gson_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/libraries/com_google_code_gson_gson_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/EnumCharEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/enums/EnumCharEnum.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/EnumWCharEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/enums/EnumWCharEnum.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/Buffer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/Buffer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/FieldModelChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/FieldModelChar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/FieldModelWChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/FieldModelWChar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/FinalModelChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/FinalModelChar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/FinalModelWChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/FinalModelWChar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/Json.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/Json.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/EnumTypedEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/test/EnumTypedEnum.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSerialization.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerialization.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationFinal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +57,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1QQOGOgRAyQcDI3RRL3HHw7md4e" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -44,6 +72,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -56,9 +85,9 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2838785" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin" />
+    <property name="settings.editor.selected.configurable" value="project.kotlinCompiler" />
   </component>
-  <component name="RunManager" selected="TestNG.&lt;default&gt;">
+  <component name="RunManager" selected="Kotlin.SerializationJson">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -72,71 +101,48 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PrintJson" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+    <configuration name="Print" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="examples.Print" />
       <module name="FastBinaryEncoding" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PrintJson" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="examples.PrintJson" />
-      <option name="WORKING_DIRECTORY" />
+      <module name="FastBinaryEncoding" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Serialization" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
       <option name="MAIN_CLASS_NAME" value="examples.Serialization" />
-      <option name="WORKING_DIRECTORY" />
+      <module name="FastBinaryEncoding" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="SerializationFinal" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
       <option name="MAIN_CLASS_NAME" value="examples.SerializationFinal" />
-      <option name="WORKING_DIRECTORY" />
+      <module name="FastBinaryEncoding" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="examples.SerializationJson" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
+    <configuration name="SerializationJson" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="examples.SerializationJson" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="&lt;default&gt;" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="PACKAGE" />
-      <properties />
-      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.&lt;default&gt;" />
+        <item itemvalue="Kotlin.SerializationJson" />
+        <item itemvalue="Kotlin.SerializationFinal" />
+        <item itemvalue="Kotlin.Serialization" />
+        <item itemvalue="Kotlin.PrintJson" />
+        <item itemvalue="Kotlin.Print" />
       </list>
     </recent_temporary>
   </component>
@@ -249,6 +255,7 @@
       <workItem from="1605129132358" duration="75000" />
       <workItem from="1605129275473" duration="505000" />
       <workItem from="1607432639785" duration="200000" />
+      <workItem from="1640487355881" duration="2181000" />
     </task>
     <servers />
   </component>
@@ -274,32 +281,9 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="760" y="354" key="#Project_Structure" timestamp="1605129339132">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state x="760" y="354" key="#Project_Structure/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605129339132" />
-    <state width="2517" height="453" key="GridCell.Tab.0.bottom" timestamp="1607432839348">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="2517" height="453" key="GridCell.Tab.0.bottom/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607432839348" />
-    <state width="2517" height="453" key="GridCell.Tab.0.center" timestamp="1607432839348">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="2517" height="453" key="GridCell.Tab.0.center/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607432839348" />
-    <state width="2517" height="453" key="GridCell.Tab.0.left" timestamp="1607432839347">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="2517" height="453" key="GridCell.Tab.0.left/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607432839347" />
-    <state width="2517" height="453" key="GridCell.Tab.0.right" timestamp="1607432839348">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="2517" height="453" key="GridCell.Tab.0.right/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607432839348" />
-    <state x="760" y="354" key="SettingsEditor" timestamp="1605129288078">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state x="760" y="354" key="SettingsEditor/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605129288078" />
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

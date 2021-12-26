@@ -752,15 +752,15 @@ class TestSerialization
         assertEquals(reader.model.fbeOffset, 4 + reader.buffer.size)
 
         assertEquals(struct2.f1.size, 3)
-        assertEquals(struct2.f1[0], 'A'.toByte())
-        assertEquals(struct2.f1[1], 'B'.toByte())
-        assertEquals(struct2.f1[2], 'C'.toByte())
+        assertEquals(struct2.f1[0], 'A'.code.toByte())
+        assertEquals(struct2.f1[1], 'B'.code.toByte())
+        assertEquals(struct2.f1[2], 'C'.code.toByte())
         assertNotEquals(struct2.f2, null)
         assertEquals(struct2.f2!!.size, 4)
-        assertEquals(struct2.f2!![0], 't'.toByte())
-        assertEquals(struct2.f2!![1], 'e'.toByte())
-        assertEquals(struct2.f2!![2], 's'.toByte())
-        assertEquals(struct2.f2!![3], 't'.toByte())
+        assertEquals(struct2.f2!![0], 't'.code.toByte())
+        assertEquals(struct2.f2!![1], 'e'.code.toByte())
+        assertEquals(struct2.f2!![2], 's'.code.toByte())
+        assertEquals(struct2.f2!![3], 't'.code.toByte())
         assertEquals(struct2.f3, null)
     }
 

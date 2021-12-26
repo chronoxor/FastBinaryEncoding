@@ -21,8 +21,8 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel(domain, "fbe");
     GenerateFBEFieldModel(domain, "fbe", "Boolean", "Boolean", "", "1", "false");
     GenerateFBEFieldModel(domain, "fbe", "Byte", "Byte", "", "1", "0.toByte()");
-    GenerateFBEFieldModel(domain, "fbe", "Char", "Char", ".toByte()", "1", "'\\u0000'");
-    GenerateFBEFieldModel(domain, "fbe", "WChar", "Char", ".toInt()", "4", "'\\u0000'");
+    GenerateFBEFieldModel(domain, "fbe", "Char", "Char", ".code", "1", "'\\u0000'");
+    GenerateFBEFieldModel(domain, "fbe", "WChar", "Char", ".code", "4", "'\\u0000'");
     GenerateFBEFieldModel(domain, "fbe", "Int8", "Byte", "", "1", "0.toByte()");
     GenerateFBEFieldModel(domain, "fbe", "UInt8", "UByte", "", "1", "0.toUByte()");
     GenerateFBEFieldModel(domain, "fbe", "Int16", "Short", "", "2", "0.toShort()");
@@ -47,8 +47,8 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel(domain, "fbe");
         GenerateFBEFinalModel(domain, "fbe", "Boolean", "Boolean", "", "1", "false");
         GenerateFBEFinalModel(domain, "fbe", "Byte", "Byte", "", "1", "0.toByte()");
-        GenerateFBEFinalModel(domain, "fbe", "Char", "Char", ".toByte()", "1", "'\\u0000'");
-        GenerateFBEFinalModel(domain, "fbe", "WChar", "Char", ".toInt()", "4", "'\\u0000'");
+        GenerateFBEFinalModel(domain, "fbe", "Char", "Char", ".code", "1", "'\\u0000'");
+        GenerateFBEFinalModel(domain, "fbe", "WChar", "Char", ".code", "4", "'\\u0000'");
         GenerateFBEFinalModel(domain, "fbe", "Int8", "Byte", "", "1", "0.toByte()");
         GenerateFBEFinalModel(domain, "fbe", "UInt8", "UByte", "", "1", "0.toUByte()");
         GenerateFBEFinalModel(domain, "fbe", "Int16", "Short", "", "2", "0.toShort()");
@@ -374,7 +374,7 @@ class Buffer
 
         fun readChar(buffer: ByteArray, offset: Long): Char
         {
-            return readInt8(buffer, offset).toChar()
+            return readInt8(buffer, offset).toInt().toChar()
         }
 
         fun readWChar(buffer: ByteArray, offset: Long): Char
@@ -4430,13 +4430,13 @@ internal class CharacterJson : com.google.gson.JsonSerializer<Char>, com.google.
 {
     override fun serialize(src: Char, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
     {
-        return com.google.gson.JsonPrimitive(src.toLong())
+        return com.google.gson.JsonPrimitive(src.code)
     }
 
     @Throws(com.google.gson.JsonParseException::class)
     override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): Char
     {
-        return json.asLong.toChar()
+        return json.asLong.toInt().toChar()
     }
 }
 
@@ -4807,7 +4807,7 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     // Generate enum constructors
     WriteLine();
     if ((enum_type == "char") || (enum_type == "wchar"))
-        WriteLineIndent("constructor(value: Char) { this.raw = value" + enum_to + " }");
+        WriteLineIndent("constructor(value: Char) { this.raw = value.code" + enum_to + " }");
     if (IsUnsignedType(enum_type))
     {
         WriteLineIndent("constructor(value: UByte) { this.raw = value" + enum_to + " }");
@@ -5145,7 +5145,7 @@ void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std
     // Generate flags class constructors
     WriteLine();
     if ((flags_type == "char") || (flags_type == "wchar"))
-        WriteLineIndent("constructor(value: Char) { this.raw = value" + flags_to + " }");
+        WriteLineIndent("constructor(value: Char) { this.raw = value.code" + flags_to + " }");
     if (IsUnsignedType(flags_type))
     {
         WriteLineIndent("constructor(value: UByte) { this.raw = value" + flags_to + " }");

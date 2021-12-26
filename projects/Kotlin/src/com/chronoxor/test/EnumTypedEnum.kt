@@ -21,7 +21,7 @@ enum class EnumTypedEnum
     var raw: Byte = 0
         private set
 
-    constructor(value: Char) { this.raw = value.toByte() }
+    constructor(value: Char) { this.raw = value.code.toByte() }
     constructor(value: Byte) { this.raw = value.toByte() }
     constructor(value: Short) { this.raw = value.toByte() }
     constructor(value: Int) { this.raw = value.toByte() }
