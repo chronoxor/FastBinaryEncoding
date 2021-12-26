@@ -8,7 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="edfd070c-0d53-4afa-88cb-34dff2e2435b" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,13 +62,14 @@
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Proto/lib/Utf8Json.dll" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Project.Examples\Print">
+  <component name="RunManager" selected=".NET Project.Examples\SerializationJson">
     <configuration name="Benchmarks" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -259,11 +264,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue=".NET Project.Examples\Print" />
         <item itemvalue=".NET Project.Examples\SerializationJson" />
         <item itemvalue=".NET Project.Examples\SerializationFinal" />
         <item itemvalue=".NET Project.Examples\Serialization" />
         <item itemvalue=".NET Project.Examples\SendReceive" />
+        <item itemvalue=".NET Project.Examples\Print" />
       </list>
     </recent_temporary>
   </component>
@@ -321,12 +326,14 @@
       <workItem from="1571846442711" duration="235000" />
       <workItem from="1605123189474" duration="55000" />
       <workItem from="1606082591588" duration="61000" />
+      <workItem from="1640490441524" duration="161000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="Vcs.Log.Tabs.Properties">
@@ -339,28 +346,9 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1340" height="266" key="GridCell.Tab.0.bottom" timestamp="1605123244015">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.bottom/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605123244015" />
-    <state width="1340" height="266" key="GridCell.Tab.0.center" timestamp="1605123244015">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.center/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605123244015" />
-    <state width="1340" height="266" key="GridCell.Tab.0.left" timestamp="1605123244015">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.left/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605123244015" />
-    <state width="1340" height="266" key="GridCell.Tab.0.right" timestamp="1605123244015">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.right/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605123244015" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

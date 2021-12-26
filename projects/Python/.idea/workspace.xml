@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71ac408e-7cf5-4ba9-abad-487f6769318f" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -54,34 +59,13 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.serialization_json">
-    <configuration name="print_json" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/print_json.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python tests.Unittests in tests">
     <configuration name="send_receive" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -170,20 +154,35 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Unittests in tests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="FastBinaryEncoding" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.print_json" />
       <item itemvalue="Python.send_receive" />
       <item itemvalue="Python.serialization" />
       <item itemvalue="Python.serialization_final" />
       <item itemvalue="Python.serialization_json" />
+      <item itemvalue="Python tests.Unittests in tests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests in tests" />
         <item itemvalue="Python.serialization_json" />
         <item itemvalue="Python.serialization_final" />
         <item itemvalue="Python.serialization" />
         <item itemvalue="Python.send_receive" />
-        <item itemvalue="Python.print_json" />
       </list>
     </recent_temporary>
   </component>
@@ -226,6 +225,7 @@
       <workItem from="1571845690455" duration="76000" />
       <workItem from="1605133191639" duration="173000" />
       <workItem from="1605133378940" duration="17000" />
+      <workItem from="1640491181893" duration="215000" />
     </task>
     <servers />
   </component>
@@ -242,39 +242,16 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1340" height="266" key="GridCell.Tab.0.bottom" timestamp="1605133364241">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.bottom/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605133364241" />
-    <state width="1340" height="266" key="GridCell.Tab.0.center" timestamp="1605133364241">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.center/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605133364241" />
-    <state width="1340" height="266" key="GridCell.Tab.0.left" timestamp="1605133364241">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.left/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605133364241" />
-    <state width="1340" height="266" key="GridCell.Tab.0.right" timestamp="1605133364241">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.right/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605133364241" />
-    <state x="781" y="424" key="SettingsEditor" timestamp="1605133360295">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state x="781" y="424" key="SettingsEditor/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605133360295" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding$print_json.coverage" NAME="print_json Coverage Results" MODIFIED="1605133318538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding$create.coverage" NAME="create Coverage Results" MODIFIED="1605133313740" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding$serialization.coverage" NAME="serialization Coverage Results" MODIFIED="1605133325608" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1605133271454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding$send_receive.coverage" NAME="send_receive Coverage Results" MODIFIED="1605133321866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/FastBinaryEncoding$Unittests_in_test_clone_py.coverage" NAME="Unittests in test_clone.py Coverage Results" MODIFIED="1567692547730" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding$print.coverage" NAME="print Coverage Results" MODIFIED="1605133316202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding$serialization_json.coverage" NAME="serialization_json Coverage Results" MODIFIED="1605133331066" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding$serialization_final.coverage" NAME="serialization_final Coverage Results" MODIFIED="1605133328373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$serialization_final.coverage" NAME="serialization_final Coverage Results" MODIFIED="1640491335811" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$send_receive.coverage" NAME="send_receive Coverage Results" MODIFIED="1640491329890" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$print.coverage" NAME="print Coverage Results" MODIFIED="1640491323530" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1640491348287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$print_json.coverage" NAME="print_json Coverage Results" MODIFIED="1640491326866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$create.coverage" NAME="create Coverage Results" MODIFIED="1640491319488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$serialization.coverage" NAME="serialization Coverage Results" MODIFIED="1640491333082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$serialization_json.coverage" NAME="serialization_json Coverage Results" MODIFIED="1640491338543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
   </component>
 </project>

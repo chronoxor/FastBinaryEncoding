@@ -24,15 +24,17 @@
     "url": "git+https://github.com/chronoxor/FastBinaryEncoding.git"
   },
   "dependencies": {
-    "airtap": "^4.0.1",
-    "assert": "^1.4.1",
+    "airtap": "^4.0.4",
+    "assert": "^2.0.0",
     "benchmark": "^2.1.4",
-    "npm": "^6.14.9",
-    "pm2": "^4.5.0",
-    "standard": "^16.0.3",
-    "tape": "^5.0.1"
+    "npm": "^8.3.0",
+    "pm2": "^5.1.2",
+    "standard": "^16.0.4",
+    "tape": "^5.4.0"
   },
   "scripts": {
+    "audit": "npm audit fix",
+    "update": "npm i -g npm-check-updates && ncu -u && npm install",
     "tests": "npm run tests-standard && npm run tests-node && npm run tests-browser",
     "tests-browser": "airtap -- tests/*.js",
     "tests-node": "tape tests/*.js",

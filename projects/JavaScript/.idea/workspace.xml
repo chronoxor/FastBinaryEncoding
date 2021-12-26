@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/FastBinaryEncoding.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,10 +41,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../soft/Development/NodeJS/bin" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -41,64 +57,36 @@
     <property name="settings.editor.selected.configurable" value="settings.nodejs" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Node.js.print.js">
-    <configuration name="print.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/print.js" working-dir="$PROJECT_DIR$/examples">
+  <component name="RunManager" selected="Node.js.serialization_json.js">
+    <configuration name="print_json.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/print_json.js" working-dir="$PROJECT_DIR$/examples">
       <method v="2" />
     </configuration>
-    <configuration name="tests-browser" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="tests-browser" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
+    <configuration name="send_receive.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/send_receive.js" working-dir="$PROJECT_DIR$/examples">
       <method v="2" />
     </configuration>
-    <configuration name="tests-node" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="tests-node" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
+    <configuration name="serialization_final.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/serialization_final.js" working-dir="$PROJECT_DIR$/examples">
       <method v="2" />
     </configuration>
-    <configuration name="tests-standard" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="tests-standard" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
+    <configuration name="serialization.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/serialization.js" working-dir="$PROJECT_DIR$/examples">
       <method v="2" />
     </configuration>
-    <configuration name="tests" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="tests" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
+    <configuration name="serialization_json.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/serialization_json.js" working-dir="$PROJECT_DIR$/examples">
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Node.js.print.js" />
-      <item itemvalue="npm.tests-standard" />
-      <item itemvalue="npm.tests-node" />
-      <item itemvalue="npm.tests-browser" />
-      <item itemvalue="npm.tests" />
+      <item itemvalue="Node.js.print_json.js" />
+      <item itemvalue="Node.js.send_receive.js" />
+      <item itemvalue="Node.js.serialization.js" />
+      <item itemvalue="Node.js.serialization_final.js" />
+      <item itemvalue="Node.js.serialization_json.js" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.tests" />
-        <item itemvalue="Node.js.print.js" />
-        <item itemvalue="npm.tests-browser" />
-        <item itemvalue="npm.tests-node" />
-        <item itemvalue="npm.tests-standard" />
+        <item itemvalue="Node.js.serialization_json.js" />
+        <item itemvalue="Node.js.serialization_final.js" />
+        <item itemvalue="Node.js.serialization.js" />
+        <item itemvalue="Node.js.send_receive.js" />
+        <item itemvalue="Node.js.print_json.js" />
       </list>
     </recent_temporary>
   </component>
@@ -160,6 +148,7 @@
       <workItem from="1605130896555" duration="1246000" />
       <workItem from="1607019288983" duration="133000" />
       <workItem from="1607993774985" duration="87000" />
+      <workItem from="1640496812234" duration="2040000" />
     </task>
     <servers />
   </component>
@@ -190,33 +179,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="1149" y="672" key="#ESLint" timestamp="1605131763492">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state x="1149" y="672" key="#ESLint/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1605131763492" />
-    <state width="1362" height="266" key="GridCell.Tab.0.bottom" timestamp="1607993861320">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1362" height="266" key="GridCell.Tab.0.bottom/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607993861320" />
-    <state width="1362" height="266" key="GridCell.Tab.0.center" timestamp="1607993861320">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1362" height="266" key="GridCell.Tab.0.center/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607993861320" />
-    <state width="1362" height="266" key="GridCell.Tab.0.left" timestamp="1607993861320">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1362" height="266" key="GridCell.Tab.0.left/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607993861320" />
-    <state width="1362" height="266" key="GridCell.Tab.0.right" timestamp="1607993861320">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state width="1362" height="266" key="GridCell.Tab.0.right/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607993861320" />
-    <state x="781" y="424" key="SettingsEditor" timestamp="1607993858133">
-      <screen x="0" y="0" width="2560" height="1560" />
-    </state>
-    <state x="781" y="424" key="SettingsEditor/0.0.2560.1560/2560.0.2560.1560@0.0.2560.1560" timestamp="1607993858133" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -243,5 +205,9 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

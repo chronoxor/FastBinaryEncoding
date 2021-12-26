@@ -8,11 +8,11 @@
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
     </content>
-    <orderEntry type="jdk" jdkName="ruby-2.7.2-p137" jdkType="RUBY_SDK" />
+    <orderEntry type="jdk" jdkName="ruby-3.0.3-p157" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="json (v2.3.1, ruby-2.7.2-p137) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="power_assert (v1.1.7, ruby-2.7.2-p137) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="test-unit (v3.3.4, ruby-2.7.2-p137) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="uuidtools (v2.2.0, ruby-2.7.2-p137) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="json (v2.6.1, ruby-3.0.3-p157) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="power_assert (v1.2.0, ruby-3.0.3-p157) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="test-unit (v3.3.7, ruby-3.0.3-p157) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="uuidtools (v2.2.0, ruby-3.0.3-p157) [gem]" level="application" />
   </component>
 </module>
