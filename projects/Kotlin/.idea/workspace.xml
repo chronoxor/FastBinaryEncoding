@@ -2,33 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/FastBinaryEncoding.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/FastBinaryEncoding.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/kotlinc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/libraries/com_google_code_gson_gson_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/libraries/com_google_code_gson_gson_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/EnumCharEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/enums/EnumCharEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/enums/EnumWCharEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/enums/EnumWCharEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/Buffer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/Buffer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/FieldModelChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/FieldModelChar.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/FieldModelWChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/FieldModelWChar.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/FinalModelChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/FinalModelChar.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/FinalModelWChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/FinalModelWChar.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/Json.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/Json.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/test/EnumTypedEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/test/EnumTypedEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/TestSerialization.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerialization.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationFinal.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +63,7 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="project.kotlinCompiler" />
   </component>
-  <component name="RunManager" selected="Kotlin.SerializationJson">
+  <component name="RunManager" selected="TestNG.&lt;default&gt;">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -97,13 +73,6 @@
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Print" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="examples.Print" />
-      <module name="FastBinaryEncoding" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -136,13 +105,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="&lt;default&gt;" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="FastBinaryEncoding" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="PACKAGE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.&lt;default&gt;" />
         <item itemvalue="Kotlin.SerializationJson" />
         <item itemvalue="Kotlin.SerializationFinal" />
         <item itemvalue="Kotlin.Serialization" />
         <item itemvalue="Kotlin.PrintJson" />
-        <item itemvalue="Kotlin.Print" />
       </list>
     </recent_temporary>
   </component>
@@ -256,6 +235,7 @@
       <workItem from="1605129275473" duration="505000" />
       <workItem from="1607432639785" duration="200000" />
       <workItem from="1640487355881" duration="2181000" />
+      <workItem from="1641152607283" duration="39000" />
     </task>
     <servers />
   </component>

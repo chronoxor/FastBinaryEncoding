@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,14 +74,6 @@
     <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
   <component name="RunManager" selected="Go Test.go test tests">
-    <configuration name="go build serialization_final.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/examples/serialization_final.go" />
-      <method v="2" />
-    </configuration>
     <configuration name="go build serialization_json.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
       <working_directory value="$PROJECT_DIR$" />
@@ -118,6 +109,15 @@
       <framework value="gotest" />
       <method v="2" />
     </configuration>
+    <configuration name="clone_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="FastBinaryEncoding" />
+      <working_directory value="$PROJECT_DIR$/tests" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$/tests" />
+      <filePath value="$PROJECT_DIR$/tests/clone_test.go" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
     <configuration name="go test tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
       <working_directory value="$PROJECT_DIR$/tests" />
@@ -137,20 +137,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Go Test.Tests" />
-      <item itemvalue="Go Build.go build serialization_final.go" />
       <item itemvalue="Go Build.go build serialization_json.go" />
       <item itemvalue="Go Build.go build tests/" />
+      <item itemvalue="Go Test.Tests" />
       <item itemvalue="Go Test.go test tests" />
       <item itemvalue="Go Test.gobench benchmarks" />
+      <item itemvalue="Go Test.clone_test.go" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Go Test.go test tests" />
+        <item itemvalue="Go Test.clone_test.go" />
         <item itemvalue="Go Test.gobench benchmarks" />
         <item itemvalue="Go Build.go build tests/" />
         <item itemvalue="Go Build.go build serialization_json.go" />
-        <item itemvalue="Go Build.go build serialization_final.go" />
       </list>
     </recent_temporary>
   </component>
