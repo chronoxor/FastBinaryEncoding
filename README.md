@@ -10,7 +10,7 @@
 ![Windows (Cygwin)](https://github.com/chronoxor/FastBinaryEncoding/actions/workflows/build-windows-cygwin.yml/badge.svg)
 ![Windows (MinGW)](https://github.com/chronoxor/FastBinaryEncoding/actions/workflows/build-windows-mingw.yml/badge.svg)
 ![Windows (MSYS2)](https://github.com/chronoxor/FastBinaryEncoding/actions/workflows/build-windows-msys2.yml/badge.svg)
-![Windows (Visual Studio)](https://github.com/chronoxor/FastBinaryEncoding/actions/workflows/build-windows-msvc.yml/badge.svg)
+![Windows (Visual Studio)](https://github.com/chronoxor/FastBinaryEncoding/actions/workflows/build-windows-vs.yml/badge.svg)
 
 Fast Binary Encoding allows to describe any domain models, business
 objects, complex data structures, client/server requests & responses
