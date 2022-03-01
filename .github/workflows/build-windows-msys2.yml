@@ -25,6 +25,8 @@ jobs:
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-gcc
             msys2-w32api-runtime
+            flex
+            bison
 
       - name: "Setup cmake"
         run: cmake --version
