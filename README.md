@@ -89,9 +89,9 @@ Sample projects:
 * [Excellent performance](#performance-benchmarks)
 
 # Requirements
-* Linux (binutils-dev uuid-dev flex bison)
-* MacOS (flex bison)
-* Windows 10
+* Linux
+* MacOS
+* Windows
 * [cmake](https://www.cmake.org)
 * [gcc](https://gcc.gnu.org)
 * [git](https://git-scm.com)
@@ -108,6 +108,21 @@ Optional:
 * [WinFlexBison](https://github.com/lexxmark/winflexbison)
 
 # How to build?
+
+### Linux: install required packages
+```shell
+sudo apt-get install -y binutils-dev uuid-dev flex bison
+```
+
+### MacOS: install required packages
+```shell
+brew install flex bison
+```
+
+### Windows: install required packages
+```shell
+choco install winflexbison3
+```
 
 ### Install [gil (git links) tool](https://github.com/chronoxor/gil)
 ```shell
