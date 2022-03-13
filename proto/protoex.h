@@ -37,6 +37,10 @@ enum class OrderSide : uint8_t
 
 std::ostream& operator<<(std::ostream& stream, OrderSide value);
 
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<protoex::OrderSide> : ostream_formatter {}; namespace protoex {
+#endif
+
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, OrderSide value);
 #endif
@@ -50,6 +54,10 @@ enum class OrderType : uint8_t
 };
 
 std::ostream& operator<<(std::ostream& stream, OrderType value);
+
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<protoex::OrderType> : ostream_formatter {}; namespace protoex {
+#endif
 
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, OrderType value);
@@ -71,6 +79,10 @@ enum class StateEx : uint8_t
 FBE_ENUM_FLAGS(StateEx)
 
 std::ostream& operator<<(std::ostream& stream, StateEx value);
+
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<protoex::StateEx> : ostream_formatter {}; namespace protoex {
+#endif
 
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, StateEx value);
@@ -115,10 +127,12 @@ struct Order
 
 } // namespace protoex
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<protoex::Order> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<protoex::Order>
+struct std::hash<protoex::Order>
 {
     typedef protoex::Order argument_type;
     typedef size_t result_type;
@@ -130,8 +144,6 @@ struct hash<protoex::Order>
         return result;
     }
 };
-
-} // namespace std
 
 namespace protoex {
 
@@ -167,10 +179,12 @@ struct Balance : public ::proto::Balance
 
 } // namespace protoex
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<protoex::Balance> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<protoex::Balance>
+struct std::hash<protoex::Balance>
 {
     typedef protoex::Balance argument_type;
     typedef size_t result_type;
@@ -182,8 +196,6 @@ struct hash<protoex::Balance>
         return result;
     }
 };
-
-} // namespace std
 
 namespace protoex {
 
@@ -224,10 +236,12 @@ struct Account
 
 } // namespace protoex
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<protoex::Account> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<protoex::Account>
+struct std::hash<protoex::Account>
 {
     typedef protoex::Account argument_type;
     typedef size_t result_type;
@@ -239,8 +253,6 @@ struct hash<protoex::Account>
         return result;
     }
 };
-
-} // namespace std
 
 namespace protoex {
 
@@ -276,10 +288,12 @@ struct OrderMessage
 
 } // namespace protoex
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<protoex::OrderMessage> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<protoex::OrderMessage>
+struct std::hash<protoex::OrderMessage>
 {
     typedef protoex::OrderMessage argument_type;
     typedef size_t result_type;
@@ -290,8 +304,6 @@ struct hash<protoex::OrderMessage>
         return result;
     }
 };
-
-} // namespace std
 
 namespace protoex {
 
@@ -327,10 +339,12 @@ struct BalanceMessage
 
 } // namespace protoex
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<protoex::BalanceMessage> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<protoex::BalanceMessage>
+struct std::hash<protoex::BalanceMessage>
 {
     typedef protoex::BalanceMessage argument_type;
     typedef size_t result_type;
@@ -341,8 +355,6 @@ struct hash<protoex::BalanceMessage>
         return result;
     }
 };
-
-} // namespace std
 
 namespace protoex {
 
@@ -378,10 +390,12 @@ struct AccountMessage
 
 } // namespace protoex
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<protoex::AccountMessage> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<protoex::AccountMessage>
+struct std::hash<protoex::AccountMessage>
 {
     typedef protoex::AccountMessage argument_type;
     typedef size_t result_type;
@@ -392,8 +406,6 @@ struct hash<protoex::AccountMessage>
         return result;
     }
 };
-
-} // namespace std
 
 namespace protoex {
 

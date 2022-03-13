@@ -33,6 +33,10 @@ enum class OrderSide : uint8_t
 
 std::ostream& operator<<(std::ostream& stream, OrderSide value);
 
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<proto::OrderSide> : ostream_formatter {}; namespace proto {
+#endif
+
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, OrderSide value);
 #endif
@@ -45,6 +49,10 @@ enum class OrderType : uint8_t
 };
 
 std::ostream& operator<<(std::ostream& stream, OrderType value);
+
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<proto::OrderType> : ostream_formatter {}; namespace proto {
+#endif
 
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, OrderType value);
@@ -64,6 +72,10 @@ enum class State : uint8_t
 FBE_ENUM_FLAGS(State)
 
 std::ostream& operator<<(std::ostream& stream, State value);
+
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<proto::State> : ostream_formatter {}; namespace proto {
+#endif
 
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, State value);
@@ -106,10 +118,12 @@ struct Order
 
 } // namespace proto
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<proto::Order> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<proto::Order>
+struct std::hash<proto::Order>
 {
     typedef proto::Order argument_type;
     typedef size_t result_type;
@@ -121,8 +135,6 @@ struct hash<proto::Order>
         return result;
     }
 };
-
-} // namespace std
 
 namespace proto {
 
@@ -159,10 +171,12 @@ struct Balance
 
 } // namespace proto
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<proto::Balance> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<proto::Balance>
+struct std::hash<proto::Balance>
 {
     typedef proto::Balance argument_type;
     typedef size_t result_type;
@@ -174,8 +188,6 @@ struct hash<proto::Balance>
         return result;
     }
 };
-
-} // namespace std
 
 namespace proto {
 
@@ -216,10 +228,12 @@ struct Account
 
 } // namespace proto
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<proto::Account> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<proto::Account>
+struct std::hash<proto::Account>
 {
     typedef proto::Account argument_type;
     typedef size_t result_type;
@@ -231,8 +245,6 @@ struct hash<proto::Account>
         return result;
     }
 };
-
-} // namespace std
 
 namespace proto {
 
@@ -268,10 +280,12 @@ struct OrderMessage
 
 } // namespace proto
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<proto::OrderMessage> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<proto::OrderMessage>
+struct std::hash<proto::OrderMessage>
 {
     typedef proto::OrderMessage argument_type;
     typedef size_t result_type;
@@ -282,8 +296,6 @@ struct hash<proto::OrderMessage>
         return result;
     }
 };
-
-} // namespace std
 
 namespace proto {
 
@@ -319,10 +331,12 @@ struct BalanceMessage
 
 } // namespace proto
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<proto::BalanceMessage> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<proto::BalanceMessage>
+struct std::hash<proto::BalanceMessage>
 {
     typedef proto::BalanceMessage argument_type;
     typedef size_t result_type;
@@ -333,8 +347,6 @@ struct hash<proto::BalanceMessage>
         return result;
     }
 };
-
-} // namespace std
 
 namespace proto {
 
@@ -370,10 +382,12 @@ struct AccountMessage
 
 } // namespace proto
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<proto::AccountMessage> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<proto::AccountMessage>
+struct std::hash<proto::AccountMessage>
 {
     typedef proto::AccountMessage argument_type;
     typedef size_t result_type;
@@ -384,8 +398,6 @@ struct hash<proto::AccountMessage>
         return result;
     }
 };
-
-} // namespace std
 
 namespace proto {
 

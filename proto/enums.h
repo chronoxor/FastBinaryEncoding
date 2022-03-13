@@ -37,6 +37,10 @@ enum class EnumByte : uint8_t
 
 std::ostream& operator<<(std::ostream& stream, EnumByte value);
 
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<enums::EnumByte> : ostream_formatter {}; namespace enums {
+#endif
+
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, EnumByte value);
 #endif
@@ -52,6 +56,10 @@ enum class EnumChar : uint8_t
 };
 
 std::ostream& operator<<(std::ostream& stream, EnumChar value);
+
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<enums::EnumChar> : ostream_formatter {}; namespace enums {
+#endif
 
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, EnumChar value);
@@ -69,6 +77,10 @@ enum class EnumWChar : uint32_t
 
 std::ostream& operator<<(std::ostream& stream, EnumWChar value);
 
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<enums::EnumWChar> : ostream_formatter {}; namespace enums {
+#endif
+
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, EnumWChar value);
 #endif
@@ -84,6 +96,10 @@ enum class EnumInt8 : int8_t
 };
 
 std::ostream& operator<<(std::ostream& stream, EnumInt8 value);
+
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<enums::EnumInt8> : ostream_formatter {}; namespace enums {
+#endif
 
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, EnumInt8 value);
@@ -101,6 +117,10 @@ enum class EnumUInt8 : uint8_t
 
 std::ostream& operator<<(std::ostream& stream, EnumUInt8 value);
 
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<enums::EnumUInt8> : ostream_formatter {}; namespace enums {
+#endif
+
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, EnumUInt8 value);
 #endif
@@ -116,6 +136,10 @@ enum class EnumInt16 : int16_t
 };
 
 std::ostream& operator<<(std::ostream& stream, EnumInt16 value);
+
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<enums::EnumInt16> : ostream_formatter {}; namespace enums {
+#endif
 
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, EnumInt16 value);
@@ -133,6 +157,10 @@ enum class EnumUInt16 : uint16_t
 
 std::ostream& operator<<(std::ostream& stream, EnumUInt16 value);
 
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<enums::EnumUInt16> : ostream_formatter {}; namespace enums {
+#endif
+
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, EnumUInt16 value);
 #endif
@@ -148,6 +176,10 @@ enum class EnumInt32 : int32_t
 };
 
 std::ostream& operator<<(std::ostream& stream, EnumInt32 value);
+
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<enums::EnumInt32> : ostream_formatter {}; namespace enums {
+#endif
 
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, EnumInt32 value);
@@ -165,6 +197,10 @@ enum class EnumUInt32 : uint32_t
 
 std::ostream& operator<<(std::ostream& stream, EnumUInt32 value);
 
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<enums::EnumUInt32> : ostream_formatter {}; namespace enums {
+#endif
+
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, EnumUInt32 value);
 #endif
@@ -181,6 +217,10 @@ enum class EnumInt64 : int64_t
 
 std::ostream& operator<<(std::ostream& stream, EnumInt64 value);
 
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<enums::EnumInt64> : ostream_formatter {}; namespace enums {
+#endif
+
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, EnumInt64 value);
 #endif
@@ -196,6 +236,10 @@ enum class EnumUInt64 : uint64_t
 };
 
 std::ostream& operator<<(std::ostream& stream, EnumUInt64 value);
+
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<enums::EnumUInt64> : ostream_formatter {}; namespace enums {
+#endif
 
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, EnumUInt64 value);
@@ -298,10 +342,12 @@ struct Enums
 
 } // namespace enums
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<enums::Enums> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<enums::Enums>
+struct std::hash<enums::Enums>
 {
     typedef enums::Enums argument_type;
     typedef size_t result_type;
@@ -312,8 +358,6 @@ struct hash<enums::Enums>
         return result;
     }
 };
-
-} // namespace std
 
 namespace enums {
 

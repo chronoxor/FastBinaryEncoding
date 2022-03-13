@@ -40,6 +40,10 @@ enum class EnumSimple
 
 std::ostream& operator<<(std::ostream& stream, EnumSimple value);
 
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<test::EnumSimple> : ostream_formatter {}; namespace test {
+#endif
+
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, EnumSimple value);
 #endif
@@ -56,6 +60,10 @@ enum class EnumTyped : uint8_t
 
 std::ostream& operator<<(std::ostream& stream, EnumTyped value);
 
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<test::EnumTyped> : ostream_formatter {}; namespace test {
+#endif
+
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, EnumTyped value);
 #endif
@@ -65,6 +73,10 @@ enum class EnumEmpty
 };
 
 std::ostream& operator<<(std::ostream& stream, EnumEmpty value);
+
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<test::EnumEmpty> : ostream_formatter {}; namespace test {
+#endif
 
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, EnumEmpty value);
@@ -83,6 +95,10 @@ enum class FlagsSimple
 FBE_ENUM_FLAGS(FlagsSimple)
 
 std::ostream& operator<<(std::ostream& stream, FlagsSimple value);
+
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<test::FlagsSimple> : ostream_formatter {}; namespace test {
+#endif
 
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, FlagsSimple value);
@@ -106,6 +122,10 @@ FBE_ENUM_FLAGS(FlagsTyped)
 
 std::ostream& operator<<(std::ostream& stream, FlagsTyped value);
 
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<test::FlagsTyped> : ostream_formatter {}; namespace test {
+#endif
+
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, FlagsTyped value);
 #endif
@@ -117,6 +137,10 @@ enum class FlagsEmpty
 FBE_ENUM_FLAGS(FlagsEmpty)
 
 std::ostream& operator<<(std::ostream& stream, FlagsEmpty value);
+
+#if defined(FMT_VERSION)
+} template <> struct fmt::formatter<test::FlagsEmpty> : ostream_formatter {}; namespace test {
+#endif
 
 #if defined(LOGGING_PROTOCOL)
 CppLogging::Record& operator<<(CppLogging::Record& record, FlagsEmpty value);
@@ -198,10 +222,12 @@ struct StructSimple
 
 } // namespace test
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<test::StructSimple> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<test::StructSimple>
+struct std::hash<test::StructSimple>
 {
     typedef test::StructSimple argument_type;
     typedef size_t result_type;
@@ -213,8 +239,6 @@ struct hash<test::StructSimple>
         return result;
     }
 };
-
-} // namespace std
 
 namespace test {
 
@@ -315,10 +339,12 @@ struct StructOptional : public ::test::StructSimple
 
 } // namespace test
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<test::StructOptional> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<test::StructOptional>
+struct std::hash<test::StructOptional>
 {
     typedef test::StructOptional argument_type;
     typedef size_t result_type;
@@ -330,8 +356,6 @@ struct hash<test::StructOptional>
         return result;
     }
 };
-
-} // namespace std
 
 namespace test {
 
@@ -378,10 +402,12 @@ struct StructNested : public ::test::StructOptional
 
 } // namespace test
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<test::StructNested> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<test::StructNested>
+struct std::hash<test::StructNested>
 {
     typedef test::StructNested argument_type;
     typedef size_t result_type;
@@ -393,8 +419,6 @@ struct hash<test::StructNested>
         return result;
     }
 };
-
-} // namespace std
 
 namespace test {
 
@@ -432,10 +456,12 @@ struct StructBytes
 
 } // namespace test
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<test::StructBytes> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<test::StructBytes>
+struct std::hash<test::StructBytes>
 {
     typedef test::StructBytes argument_type;
     typedef size_t result_type;
@@ -446,8 +472,6 @@ struct hash<test::StructBytes>
         return result;
     }
 };
-
-} // namespace std
 
 namespace test {
 
@@ -492,10 +516,12 @@ struct StructArray
 
 } // namespace test
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<test::StructArray> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<test::StructArray>
+struct std::hash<test::StructArray>
 {
     typedef test::StructArray argument_type;
     typedef size_t result_type;
@@ -506,8 +532,6 @@ struct hash<test::StructArray>
         return result;
     }
 };
-
-} // namespace std
 
 namespace test {
 
@@ -552,10 +576,12 @@ struct StructVector
 
 } // namespace test
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<test::StructVector> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<test::StructVector>
+struct std::hash<test::StructVector>
 {
     typedef test::StructVector argument_type;
     typedef size_t result_type;
@@ -566,8 +592,6 @@ struct hash<test::StructVector>
         return result;
     }
 };
-
-} // namespace std
 
 namespace test {
 
@@ -612,10 +636,12 @@ struct StructList
 
 } // namespace test
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<test::StructList> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<test::StructList>
+struct std::hash<test::StructList>
 {
     typedef test::StructList argument_type;
     typedef size_t result_type;
@@ -626,8 +652,6 @@ struct hash<test::StructList>
         return result;
     }
 };
-
-} // namespace std
 
 namespace test {
 
@@ -666,10 +690,12 @@ struct StructSet
 
 } // namespace test
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<test::StructSet> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<test::StructSet>
+struct std::hash<test::StructSet>
 {
     typedef test::StructSet argument_type;
     typedef size_t result_type;
@@ -680,8 +706,6 @@ struct hash<test::StructSet>
         return result;
     }
 };
-
-} // namespace std
 
 namespace test {
 
@@ -726,10 +750,12 @@ struct StructMap
 
 } // namespace test
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<test::StructMap> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<test::StructMap>
+struct std::hash<test::StructMap>
 {
     typedef test::StructMap argument_type;
     typedef size_t result_type;
@@ -740,8 +766,6 @@ struct hash<test::StructMap>
         return result;
     }
 };
-
-} // namespace std
 
 namespace test {
 
@@ -786,10 +810,12 @@ struct StructHash
 
 } // namespace test
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<test::StructHash> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<test::StructHash>
+struct std::hash<test::StructHash>
 {
     typedef test::StructHash argument_type;
     typedef size_t result_type;
@@ -800,8 +826,6 @@ struct hash<test::StructHash>
         return result;
     }
 };
-
-} // namespace std
 
 namespace test {
 
@@ -838,10 +862,12 @@ struct StructHashEx
 
 } // namespace test
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<test::StructHashEx> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<test::StructHashEx>
+struct std::hash<test::StructHashEx>
 {
     typedef test::StructHashEx argument_type;
     typedef size_t result_type;
@@ -852,8 +878,6 @@ struct hash<test::StructHashEx>
         return result;
     }
 };
-
-} // namespace std
 
 namespace test {
 
@@ -886,10 +910,12 @@ struct StructEmpty
 
 } // namespace test
 
-namespace std {
+#if defined(FMT_VERSION)
+template <> struct fmt::formatter<test::StructEmpty> : ostream_formatter {};
+#endif
 
 template<>
-struct hash<test::StructEmpty>
+struct std::hash<test::StructEmpty>
 {
     typedef test::StructEmpty argument_type;
     typedef size_t result_type;
@@ -900,8 +926,6 @@ struct hash<test::StructEmpty>
         return result;
     }
 };
-
-} // namespace std
 
 namespace test {
 
