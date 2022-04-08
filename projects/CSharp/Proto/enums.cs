@@ -2893,15 +2893,8 @@ namespace enums {
             return hash;
         }
 
-        public static bool operator==(Enums lhs, Enums rhs))
-        {
-            if (lhs is null)
-                return (rhs is null);
-
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator!=(Enums lhs, Enums rhs)) => !(lhs == rhs);
+        public static bool operator==(Enums lhs, Enums rhs) => lhs.Equals(rhs);
+        public static bool operator!=(Enums lhs, Enums rhs) => !(lhs == rhs);
 
         public override string ToString()
         {

@@ -1802,15 +1802,8 @@ namespace test {
             return hash;
         }
 
-        public static bool operator==(StructSimple lhs, StructSimple rhs))
-        {
-            if (lhs is null)
-                return (rhs is null);
-
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator!=(StructSimple lhs, StructSimple rhs)) => !(lhs == rhs);
+        public static bool operator==(StructSimple lhs, StructSimple rhs) => lhs.Equals(rhs);
+        public static bool operator!=(StructSimple lhs, StructSimple rhs) => !(lhs == rhs);
 
         public override string ToString()
         {
@@ -4229,15 +4222,8 @@ namespace test {
             return hash;
         }
 
-        public static bool operator==(StructOptional lhs, StructOptional rhs))
-        {
-            if (lhs is null)
-                return (rhs is null);
-
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator!=(StructOptional lhs, StructOptional rhs)) => !(lhs == rhs);
+        public static bool operator==(StructOptional lhs, StructOptional rhs) => lhs.Equals(rhs);
+        public static bool operator!=(StructOptional lhs, StructOptional rhs) => !(lhs == rhs);
 
         public override string ToString()
         {
@@ -7309,15 +7295,8 @@ namespace test {
             return hash;
         }
 
-        public static bool operator==(StructNested lhs, StructNested rhs))
-        {
-            if (lhs is null)
-                return (rhs is null);
-
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator!=(StructNested lhs, StructNested rhs)) => !(lhs == rhs);
+        public static bool operator==(StructNested lhs, StructNested rhs) => lhs.Equals(rhs);
+        public static bool operator!=(StructNested lhs, StructNested rhs) => !(lhs == rhs);
 
         public override string ToString()
         {
@@ -8345,15 +8324,8 @@ namespace test {
             return hash;
         }
 
-        public static bool operator==(StructBytes lhs, StructBytes rhs))
-        {
-            if (lhs is null)
-                return (rhs is null);
-
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator!=(StructBytes lhs, StructBytes rhs)) => !(lhs == rhs);
+        public static bool operator==(StructBytes lhs, StructBytes rhs) => lhs.Equals(rhs);
+        public static bool operator!=(StructBytes lhs, StructBytes rhs) => !(lhs == rhs);
 
         public override string ToString()
         {
@@ -9031,15 +9003,8 @@ namespace test {
             return hash;
         }
 
-        public static bool operator==(StructArray lhs, StructArray rhs))
-        {
-            if (lhs is null)
-                return (rhs is null);
-
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator!=(StructArray lhs, StructArray rhs)) => !(lhs == rhs);
+        public static bool operator==(StructArray lhs, StructArray rhs) => lhs.Equals(rhs);
+        public static bool operator!=(StructArray lhs, StructArray rhs) => !(lhs == rhs);
 
         public override string ToString()
         {
@@ -10116,15 +10081,8 @@ namespace test {
             return hash;
         }
 
-        public static bool operator==(StructVector lhs, StructVector rhs))
-        {
-            if (lhs is null)
-                return (rhs is null);
-
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator!=(StructVector lhs, StructVector rhs)) => !(lhs == rhs);
+        public static bool operator==(StructVector lhs, StructVector rhs) => lhs.Equals(rhs);
+        public static bool operator!=(StructVector lhs, StructVector rhs) => !(lhs == rhs);
 
         public override string ToString()
         {
@@ -11201,15 +11159,8 @@ namespace test {
             return hash;
         }
 
-        public static bool operator==(StructList lhs, StructList rhs))
-        {
-            if (lhs is null)
-                return (rhs is null);
-
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator!=(StructList lhs, StructList rhs)) => !(lhs == rhs);
+        public static bool operator==(StructList lhs, StructList rhs) => lhs.Equals(rhs);
+        public static bool operator!=(StructList lhs, StructList rhs) => !(lhs == rhs);
 
         public override string ToString()
         {
@@ -12268,15 +12219,8 @@ namespace test {
             return hash;
         }
 
-        public static bool operator==(StructSet lhs, StructSet rhs))
-        {
-            if (lhs is null)
-                return (rhs is null);
-
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator!=(StructSet lhs, StructSet rhs)) => !(lhs == rhs);
+        public static bool operator==(StructSet lhs, StructSet rhs) => lhs.Equals(rhs);
+        public static bool operator!=(StructSet lhs, StructSet rhs) => !(lhs == rhs);
 
         public override string ToString()
         {
@@ -13047,15 +12991,8 @@ namespace test {
             return hash;
         }
 
-        public static bool operator==(StructMap lhs, StructMap rhs))
-        {
-            if (lhs is null)
-                return (rhs is null);
-
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator!=(StructMap lhs, StructMap rhs)) => !(lhs == rhs);
+        public static bool operator==(StructMap lhs, StructMap rhs) => lhs.Equals(rhs);
+        public static bool operator!=(StructMap lhs, StructMap rhs) => !(lhs == rhs);
 
         public override string ToString()
         {
@@ -14152,15 +14089,8 @@ namespace test {
             return hash;
         }
 
-        public static bool operator==(StructHash lhs, StructHash rhs))
-        {
-            if (lhs is null)
-                return (rhs is null);
-
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator!=(StructHash lhs, StructHash rhs)) => !(lhs == rhs);
+        public static bool operator==(StructHash lhs, StructHash rhs) => lhs.Equals(rhs);
+        public static bool operator!=(StructHash lhs, StructHash rhs) => !(lhs == rhs);
 
         public override string ToString()
         {
@@ -15233,15 +15163,8 @@ namespace test {
             return hash;
         }
 
-        public static bool operator==(StructHashEx lhs, StructHashEx rhs))
-        {
-            if (lhs is null)
-                return (rhs is null);
-
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator!=(StructHashEx lhs, StructHashEx rhs)) => !(lhs == rhs);
+        public static bool operator==(StructHashEx lhs, StructHashEx rhs) => lhs.Equals(rhs);
+        public static bool operator!=(StructHashEx lhs, StructHashEx rhs) => !(lhs == rhs);
 
         public override string ToString()
         {
@@ -15880,15 +15803,8 @@ namespace test {
             return hash;
         }
 
-        public static bool operator==(StructEmpty lhs, StructEmpty rhs))
-        {
-            if (lhs is null)
-                return (rhs is null);
-
-            return lhs.Equals(rhs);
-        }
-
-        public static bool operator!=(StructEmpty lhs, StructEmpty rhs)) => !(lhs == rhs);
+        public static bool operator==(StructEmpty lhs, StructEmpty rhs) => lhs.Equals(rhs);
+        public static bool operator!=(StructEmpty lhs, StructEmpty rhs) => !(lhs == rhs);
 
         public override string ToString()
         {
