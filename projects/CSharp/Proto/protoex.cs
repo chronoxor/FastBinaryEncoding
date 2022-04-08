@@ -901,6 +901,16 @@ namespace protoex {
             return hash;
         }
 
+        public static bool operator==(Order lhs, Order rhs))
+        {
+            if (lhs is null)
+                return (rhs is null);
+
+            return lhs.Equals(rhs);
+        }
+
+        public static bool operator!=(Order lhs, Order rhs)) => !(lhs == rhs);
+
         public override string ToString()
         {
             var sb = new StringBuilder();
@@ -1754,6 +1764,16 @@ namespace protoex {
             return hash;
         }
 
+        public static bool operator==(Balance lhs, Balance rhs))
+        {
+            if (lhs is null)
+                return (rhs is null);
+
+            return lhs.Equals(rhs);
+        }
+
+        public static bool operator!=(Balance lhs, Balance rhs)) => !(lhs == rhs);
+
         public override string ToString()
         {
             var sb = new StringBuilder();
@@ -2392,6 +2412,16 @@ namespace protoex {
             hash = hash * 31 + id.GetHashCode();
             return hash;
         }
+
+        public static bool operator==(Account lhs, Account rhs))
+        {
+            if (lhs is null)
+                return (rhs is null);
+
+            return lhs.Equals(rhs);
+        }
+
+        public static bool operator!=(Account lhs, Account rhs)) => !(lhs == rhs);
 
         public override string ToString()
         {
@@ -3168,6 +3198,16 @@ namespace protoex {
             return hash;
         }
 
+        public static bool operator==(OrderMessage lhs, OrderMessage rhs))
+        {
+            if (lhs is null)
+                return (rhs is null);
+
+            return lhs.Equals(rhs);
+        }
+
+        public static bool operator!=(OrderMessage lhs, OrderMessage rhs)) => !(lhs == rhs);
+
         public override string ToString()
         {
             var sb = new StringBuilder();
@@ -3744,6 +3784,16 @@ namespace protoex {
             return hash;
         }
 
+        public static bool operator==(BalanceMessage lhs, BalanceMessage rhs))
+        {
+            if (lhs is null)
+                return (rhs is null);
+
+            return lhs.Equals(rhs);
+        }
+
+        public static bool operator!=(BalanceMessage lhs, BalanceMessage rhs)) => !(lhs == rhs);
+
         public override string ToString()
         {
             var sb = new StringBuilder();
@@ -4319,6 +4369,16 @@ namespace protoex {
             int hash = 17;
             return hash;
         }
+
+        public static bool operator==(AccountMessage lhs, AccountMessage rhs))
+        {
+            if (lhs is null)
+                return (rhs is null);
+
+            return lhs.Equals(rhs);
+        }
+
+        public static bool operator!=(AccountMessage lhs, AccountMessage rhs)) => !(lhs == rhs);
 
         public override string ToString()
         {

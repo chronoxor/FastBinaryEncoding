@@ -5461,6 +5461,22 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     Indent(-1);
     WriteLineIndent("}");
 
+    // Generate struct operator== and operator!=
+    WriteLine();
+    WriteLineIndent("public static bool operator==(" + *s->name + " lhs, " + *s->name + " rhs))");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("if (lhs is null)");
+    Indent(1);
+    WriteLineIndent("return (rhs is null);");
+    Indent(-1);
+    WriteLine();
+    WriteLineIndent("return lhs.Equals(rhs);");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("public static bool operator!=(" + *s->name + " lhs, " + *s->name + " rhs)) => !(lhs == rhs);");
+
     // Generate struct ToString() method
     WriteLine();
     WriteLineIndent("public override string ToString()");
