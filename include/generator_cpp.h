@@ -49,6 +49,7 @@ private:
     void GenerateWarningsFooter();
     void GenerateFooter();
     void GenerateImports();
+    void GenerateImportsSource();
     void GenerateImports(const std::string& source);
     void GenerateImports(const std::shared_ptr<Package>& p);
     void GenerateImportsModels(const std::shared_ptr<Package>& p, bool final);

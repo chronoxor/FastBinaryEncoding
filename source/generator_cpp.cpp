@@ -194,7 +194,6 @@ void GeneratorCpp::GenerateImports()
 #include <uuid/uuid.h>
 #undef HOST_NOT_FOUND
 #elif defined(_WIN32) || defined(_WIN64)
-#include <windows.h>
 #undef DELETE
 #undef ERROR
 #undef HOST_NOT_FOUND
@@ -217,6 +216,27 @@ void GeneratorCpp::GenerateImports()
         WriteLineIndent("#define LOGGING_PROTOCOL 1");
         WriteLineIndent("#include <logging/logger.h>");
     }
+}
+
+void GeneratorCpp::GenerateImportsSource()
+{
+    std::string code = R"CODE(
+#if defined(_WIN32) || defined(_WIN64)
+#include <windows.h>
+#undef DELETE
+#undef ERROR
+#undef HOST_NOT_FOUND
+#undef Yield
+#undef min
+#undef max
+#undef uuid_t
+#endif
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
 }
 
 void GeneratorCpp::GenerateImports(const std::string& source)
@@ -6331,6 +6351,9 @@ void GeneratorCpp::GenerateFBE_Source(const CppCommon::Path& path)
 
     // Generate imports
     GenerateImports("fbe.h");
+
+    // Generate imports source
+    GenerateImportsSource();
 
     // Generate namespace begin
     WriteLine();

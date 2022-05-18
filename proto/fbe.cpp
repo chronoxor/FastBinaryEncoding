@@ -7,6 +7,17 @@
 
 #include "fbe.h"
 
+#if defined(_WIN32) || defined(_WIN64)
+#include <windows.h>
+#undef DELETE
+#undef ERROR
+#undef HOST_NOT_FOUND
+#undef Yield
+#undef min
+#undef max
+#undef uuid_t
+#endif
+
 namespace FBE {
 
 std::string buffer_t::base64encode() const

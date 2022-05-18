@@ -43,7 +43,6 @@
 #include <uuid/uuid.h>
 #undef HOST_NOT_FOUND
 #elif defined(_WIN32) || defined(_WIN64)
-#include <windows.h>
 #undef DELETE
 #undef ERROR
 #undef HOST_NOT_FOUND
