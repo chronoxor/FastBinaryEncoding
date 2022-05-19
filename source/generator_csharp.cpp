@@ -78,6 +78,10 @@ void GeneratorCSharp::GenerateImports(const std::string& domain, const std::shar
     // Generate common imports
     GenerateImports();
 
+    // Generate domain import
+    WriteLine();
+    WriteLineIndent("using " + domain + "FBE;");
+
     // Generate packages import
     if (p->import)
     {
@@ -4573,7 +4577,7 @@ void GeneratorCSharp::GenerateEnum(const std::string& domain, const std::shared_
 
         public static _ENUM_NAME_ Default => new _ENUM_NAME_();
 
-        public static _DOMAIN_FBE.FieldModelValueType<_ENUM_NAME_> CreateFieldModel(_DOMAIN_FBE.Buffer buffer, long offset) { return new _DOMAIN_FBE._PACKAGE_.FieldModel_ENUM_NAME_(buffer, offset); }
+        public static FBE.FieldModelValueType<_ENUM_NAME_> CreateFieldModel(_DOMAIN_FBE.Buffer buffer, long offset) { return new FBE._PACKAGE_.FieldModel_ENUM_NAME_(buffer, offset); }
 
 )CODE";
 
@@ -4678,15 +4682,15 @@ void GeneratorCSharp::GenerateEnumFieldModel(const std::string& domain, const st
     using global::_DOMAIN__PACKAGE_;
 
     // Fast Binary Encoding _ENUM_NAME_ field model
-    public class FieldModel_ENUM_NAME_ : _DOMAIN_FBE.FieldModelValueType<_ENUM_NAME_>
+    public class FieldModel_ENUM_NAME_ : FBE.FieldModelValueType<_ENUM_NAME_>
     {
-        public FieldModel_ENUM_NAME_(_DOMAIN_FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModel_ENUM_NAME_(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => _ENUM_SIZE_;
 
         // Clone the field model
-        public override _DOMAIN_FBE.FieldModelValueType<_ENUM_NAME_> Clone() { return new FieldModel_ENUM_NAME_(_buffer, _offset); }
+        public override FBE.FieldModelValueType<_ENUM_NAME_> Clone() { return new FieldModel_ENUM_NAME_(_buffer, _offset); }
 
         // Get the value
         public override void Get(out _ENUM_NAME_ value) { Get(out value, _ENUM_NAME_.Default); }
@@ -4745,9 +4749,9 @@ void GeneratorCSharp::GenerateEnumFinalModel(const std::string& domain, const st
     using global::_DOMAIN__PACKAGE_;
 
     // Fast Binary Encoding _ENUM_NAME_ final model
-    public class FinalModel_ENUM_NAME_ : _DOMAIN_FBE.FinalModelValueType<_ENUM_NAME_>
+    public class FinalModel_ENUM_NAME_ : FBE.FinalModelValueType<_ENUM_NAME_>
     {
-        public FinalModel_ENUM_NAME_(_DOMAIN_FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModel_ENUM_NAME_(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(_ENUM_NAME_ value) { return FBESize; }
@@ -4756,7 +4760,7 @@ void GeneratorCSharp::GenerateEnumFinalModel(const std::string& domain, const st
         public override long FBESize => _ENUM_SIZE_;
 
         // Clone the final model
-        public override _DOMAIN_FBE.FinalModelValueType<_ENUM_NAME_> Clone() { return new FinalModel_ENUM_NAME_(_buffer, _offset); }
+        public override FBE.FinalModelValueType<_ENUM_NAME_> Clone() { return new FinalModel_ENUM_NAME_(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -4962,7 +4966,7 @@ void GeneratorCSharp::GenerateFlags(const std::string& domain, const std::shared
 
         public static _FLAGS_NAME_ Default => new _FLAGS_NAME_();
 
-        public static _DOMAIN_FBE.FieldModelValueType<_FLAGS_NAME_> CreateFieldModel(_DOMAIN_FBE.Buffer buffer, long offset) { return new _DOMAIN_FBE._PACKAGE_.FieldModel_FLAGS_NAME_(buffer, offset); }
+        public static FBE.FieldModelValueType<_FLAGS_NAME_> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE._PACKAGE_.FieldModel_FLAGS_NAME_(buffer, offset); }
 
 )CODE";
 
@@ -5063,15 +5067,15 @@ void GeneratorCSharp::GenerateFlagsFieldModel(const std::string& domain, const s
     using global::_DOMAIN__PACKAGE_;
 
     // Fast Binary Encoding _FLAGS_NAME_ field model
-    public class FieldModel_FLAGS_NAME_ : _DOMAIN_FBE.FieldModelValueType<_FLAGS_NAME_>
+    public class FieldModel_FLAGS_NAME_ : FBE.FieldModelValueType<_FLAGS_NAME_>
     {
-        public FieldModel_FLAGS_NAME_(_DOMAIN_FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModel_FLAGS_NAME_(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => _FLAGS_SIZE_;
 
         // Clone the field model
-        public override _DOMAIN_FBE.FieldModelValueType<_FLAGS_NAME_> Clone() { return new FieldModel_FLAGS_NAME_(_buffer, _offset); }
+        public override FBE.FieldModelValueType<_FLAGS_NAME_> Clone() { return new FieldModel_FLAGS_NAME_(_buffer, _offset); }
 
         // Get the value
         public override void Get(out _FLAGS_NAME_ value) { Get(out value, _FLAGS_NAME_.Default); }
@@ -5130,9 +5134,9 @@ void GeneratorCSharp::GenerateFlagsFinalModel(const std::string& domain, const s
     using global::_DOMAIN__PACKAGE_;
 
     // Fast Binary Encoding _FLAGS_NAME_ final model
-    public class FinalModel_FLAGS_NAME_ : _DOMAIN_FBE.FinalModelValueType<_FLAGS_NAME_>
+    public class FinalModel_FLAGS_NAME_ : FBE.FinalModelValueType<_FLAGS_NAME_>
     {
-        public FinalModel_FLAGS_NAME_(_DOMAIN_FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModel_FLAGS_NAME_(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(_FLAGS_NAME_ value) { return FBESize; }
@@ -5141,7 +5145,7 @@ void GeneratorCSharp::GenerateFlagsFinalModel(const std::string& domain, const s
         public override long FBESize => _FLAGS_SIZE_;
 
         // Clone the final model
-        public override _DOMAIN_FBE.FinalModelValueType<_FLAGS_NAME_> Clone() { return new FinalModel_FLAGS_NAME_(_buffer, _offset); }
+        public override FBE.FinalModelValueType<_FLAGS_NAME_> Clone() { return new FinalModel_FLAGS_NAME_(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -5319,11 +5323,11 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("// Serialize the struct to the FBE stream");
-    WriteLineIndent("var writer = new " + domain + "FBE." + domain + *p->name + "." + *s->name + "Model();");
+    WriteLineIndent("var writer = new FBE." + *p->name + "." + *s->name + "Model();");
     WriteLineIndent("writer.Serialize(this);");
     WriteLine();
     WriteLineIndent("// Deserialize the struct from the FBE stream");
-    WriteLineIndent("var reader = new " + domain + "FBE." + domain + *p->name + "." + *s->name + "Model();");
+    WriteLineIndent("var reader = new FBE." + *p->name + "." + *s->name + "Model();");
     WriteLineIndent("reader.Attach(writer.Buffer);");
     WriteLineIndent("reader.Deserialize(out var result);");
     WriteLineIndent("return result;");
@@ -5657,7 +5661,7 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
         WriteLineIndent("public string ToJson()");
         WriteLineIndent("{");
         Indent(1);
-        WriteLineIndent("var json = " + domain + "FBE.Json.ToJson(this);");
+        WriteLineIndent("var json = FBE.Json.ToJson(this);");
         if (s->base && !s->base->empty())
         {
             WriteLineIndent("var jsonParent = parent.ToJson();");
@@ -5670,7 +5674,7 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
         WriteLineIndent("public static " + *s->name + " FromJson(string json)");
         WriteLineIndent("{");
         Indent(1);
-        WriteLineIndent("var result = " + domain + "FBE.Json.FromJson<" + *s->name + ">(json);");
+        WriteLineIndent("var result = FBE.Json.FromJson<" + *s->name + ">(json);");
         if (s->base && !s->base->empty())
             WriteLineIndent("result.parent = " + ConvertTypeName(*s->base, false) + ".FromJson(json);");
         WriteLineIndent("return result;");
@@ -5680,7 +5684,7 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
 
     // Generate struct CreateFieldModel() method
     WriteLine();
-    WriteLineIndent("public static " + domain + "FBE.FieldModelValueType<" + *s->name + "> CreateFieldModel(" + domain + "FBE.Buffer buffer, long offset) { return new " + domain + "FBE." + domain + *p->name + ".FieldModel" + *s->name + "(buffer, offset); }");
+    WriteLineIndent("public static FBE.FieldModelValueType<" + *s->name + "> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE." + *p->name + ".FieldModel" + *s->name + "(buffer, offset); }");
 
     // Generate struct end
     Indent(-1);
@@ -5717,27 +5721,27 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::string& domain, const 
     // Generate struct field model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " field model");
-    WriteLineIndent("public class FieldModel" + *s->name + " : " + domain + "FBE.FieldModelValueType<" + *s->name + ">");
+    WriteLineIndent("public class FieldModel" + *s->name + " : FBE.FieldModelValueType<" + *s->name + ">");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate struct field model accessors
     if (s->base && !s->base->empty())
-        WriteLineIndent("public readonly " + ConvertTypeFieldName(domain, *s->base, false) + " parent;");
+        WriteLineIndent("public readonly " + ConvertTypeFieldName(domain, *p->name, *s->base, false) + " parent;");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("public readonly " + ConvertTypeFieldDeclaration(domain, *field, false) + " " + *field->name + ";");
+            WriteLineIndent("public readonly " + ConvertTypeFieldDeclaration(domain, *p->name, *field, false) + " " + *field->name + ";");
 
     // Generate struct field model constructor
     WriteLine();
-    WriteLineIndent("public FieldModel" + *s->name + "(" + domain + "FBE.Buffer buffer, long offset) : base(buffer, offset)");
+    WriteLineIndent("public FieldModel" + *s->name + "(FBE.Buffer buffer, long offset) : base(buffer, offset)");
     WriteLineIndent("{");
     Indent(1);
     std::string prev_offset("4");
     std::string prev_size("4");
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("parent = new " + ConvertTypeFieldName(domain, *s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ");");
+        WriteLineIndent("parent = new " + ConvertTypeFieldName(domain, *p->name, *s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ");");
         prev_offset = "parent.FBEOffset";
         prev_size = "parent.FBEBody - 4 - 4";
     }
@@ -5745,7 +5749,7 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::string& domain, const 
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLineIndent(*field->name + " = " + ConvertTypeFieldInitialization(domain, *field, prev_offset + " + " + prev_size, false) + ";");
+            WriteLineIndent(*field->name + " = " + ConvertTypeFieldInitialization(domain, *p->name, *field, prev_offset + " + " + prev_size, false) + ";");
             prev_offset = *field->name + ".FBEOffset";
             prev_size = *field->name + ".FBESize";
         }
@@ -5817,7 +5821,7 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::string& domain, const 
     WriteLineIndent("}");
     WriteLineIndent("// Get the field type");
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("public const long FBETypeConst = " + ConvertTypeFieldName(domain, *s->base, false) + ".FBETypeConst;");
+        WriteLineIndent("public const long FBETypeConst = " + ConvertTypeFieldName(domain, *p->name, *s->base, false) + ".FBETypeConst;");
     else
         WriteLineIndent("public const long FBETypeConst = " + std::to_string(s->type) + ";");
     WriteLineIndent("public long FBEType => FBETypeConst;");
@@ -5825,7 +5829,7 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::string& domain, const 
     // Generate struct field model Clone() method
     WriteLine();
     WriteLineIndent("// Clone the field model");
-    WriteLineIndent("public override " + domain + "FBE.FieldModelValueType<" + *s->name + "> Clone() { return new FieldModel" + *s->name + "(_buffer, _offset); }");
+    WriteLineIndent("public override FBE.FieldModelValueType<" + *s->name + "> Clone() { return new FieldModel" + *s->name + "(_buffer, _offset); }");
 
     // Generate struct field model Verify() methods
     WriteLine();
@@ -6113,7 +6117,7 @@ void GeneratorCSharp::GenerateStructModel(const std::string& domain, const std::
     // Generate struct model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " model");
-    WriteLineIndent("public class " + *s->name + "Model : Model");
+    WriteLineIndent("public class " + *s->name + "Model : FBE.Model");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6123,7 +6127,7 @@ void GeneratorCSharp::GenerateStructModel(const std::string& domain, const std::
     // Generate struct model constructors
     WriteLine();
     WriteLineIndent("public " + *s->name + "Model() { model = new FieldModel" + *s->name + "(Buffer, 4); }");
-    WriteLineIndent("public " + *s->name + "Model(Buffer buffer) : base(buffer) { model = new FieldModel" + *s->name + "(Buffer, 4); }");
+    WriteLineIndent("public " + *s->name + "Model(FBE.Buffer buffer) : base(buffer) { model = new FieldModel" + *s->name + "(Buffer, 4); }");
 
     // Generate struct model FBE properties
     WriteLine();
@@ -6254,27 +6258,27 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::string& domain, const 
     // Generate struct final model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model");
-    WriteLineIndent("public class FinalModel" + *s->name + " : " + domain + "FBE.FinalModelValueType<" + *s->name + ">");
+    WriteLineIndent("public class FinalModel" + *s->name + " : FBE.FinalModelValueType<" + *s->name + ">");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate struct final model accessors
     if (s->base && !s->base->empty())
-        WriteLineIndent("public readonly " + ConvertTypeFieldName(domain, *s->base, true) + " parent;");
+        WriteLineIndent("public readonly " + ConvertTypeFieldName(domain, *p->name, *s->base, true) + " parent;");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("public readonly " + ConvertTypeFieldDeclaration(domain, *field, true) + " " + *field->name + ";");
+            WriteLineIndent("public readonly " + ConvertTypeFieldDeclaration(domain, *p->name, *field, true) + " " + *field->name + ";");
 
     // Generate struct final model constructor
     WriteLine();
-    WriteLineIndent("public FinalModel" + *s->name + "(" + domain + "FBE.Buffer buffer, long offset) : base(buffer, offset)");
+    WriteLineIndent("public FinalModel" + *s->name + "(FBE.Buffer buffer, long offset) : base(buffer, offset)");
     WriteLineIndent("{");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("parent = new " + ConvertTypeFieldName(domain, *s->base, true) + "(buffer, 0);");
+        WriteLineIndent("parent = new " + ConvertTypeFieldName(domain, *p->name, *s->base, true) + "(buffer, 0);");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent(*field->name + " = " + ConvertTypeFieldInitialization(domain, *field, "0", true) + ";");
+            WriteLineIndent(*field->name + " = " + ConvertTypeFieldInitialization(domain, *p->name, *field, "0", true) + ";");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6299,7 +6303,7 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::string& domain, const 
     WriteLine();
     WriteLineIndent("// Get the final type");
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("public const long FBETypeConst = " + ConvertTypeFieldName(domain, *s->base, true) + ".FBETypeConst;");
+        WriteLineIndent("public const long FBETypeConst = " + ConvertTypeFieldName(domain, *p->name, *s->base, true) + ".FBETypeConst;");
     else
         WriteLineIndent("public const long FBETypeConst = " + std::to_string(s->type) + ";");
     WriteLineIndent("public long FBEType => FBETypeConst;");
@@ -6307,7 +6311,7 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::string& domain, const 
     // Generate struct final model Clone() method
     WriteLine();
     WriteLineIndent("// Clone the final model");
-    WriteLineIndent("public override " + domain + "FBE.FinalModelValueType<" + *s->name + "> Clone() { return new FinalModel" + *s->name + "(_buffer, _offset); }");
+    WriteLineIndent("public override FBE.FinalModelValueType<" + *s->name + "> Clone() { return new FinalModel" + *s->name + "(_buffer, _offset); }");
 
     // Generate struct final model Verify() methods
     WriteLine();
@@ -6493,7 +6497,7 @@ void GeneratorCSharp::GenerateStructModelFinal(const std::string& domain, const 
     // Generate struct model final begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model");
-    WriteLineIndent("public class " + *s->name + "FinalModel : Model");
+    WriteLineIndent("public class " + *s->name + "FinalModel : FBE.Model");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6503,7 +6507,7 @@ void GeneratorCSharp::GenerateStructModelFinal(const std::string& domain, const 
     // Generate struct model final constructors
     WriteLine();
     WriteLineIndent("public " + *s->name + "FinalModel() { _model = new FinalModel" + *s->name + "(Buffer, 8); }");
-    WriteLineIndent("public " + *s->name + "FinalModel(" + domain + "FBE.Buffer buffer) : base(buffer) { _model = new FinalModel" + *s->name + "(Buffer, 8); }");
+    WriteLineIndent("public " + *s->name + "FinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModel" + *s->name + "(Buffer, 8); }");
 
     // Generate struct model final FBE properties
     WriteLine();
@@ -6660,12 +6664,12 @@ void GeneratorCSharp::GenerateSender(const std::string& domain, const std::share
         Write(" : ");
         for (const auto& import : p->import->imports)
         {
-            Write(std::string(first ? "" : ", ") + domain + "FBE." + *import + "." + listener);
+            Write(std::string(first ? "" : ", ") + "FBE." + *import + "." + listener);
             first = false;
         }
     }
     else
-        Write(" : " + domain + "FBE.ISenderListener");
+        Write(" : FBE.ISenderListener");
     WriteLine();
     WriteLineIndent("{");
     Indent(1);
@@ -6680,7 +6684,7 @@ void GeneratorCSharp::GenerateSender(const std::string& domain, const std::share
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final sender");
     else
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " sender");
-    WriteLineIndent("public class " + sender + " : " + domain + "FBE.Sender, " + listener);
+    WriteLineIndent("public class " + sender + " : FBE.Sender, " + listener);
     WriteLineIndent("{");
     Indent(1);
 
@@ -6720,7 +6724,7 @@ void GeneratorCSharp::GenerateSender(const std::string& domain, const std::share
     }
     Indent(-1);
     WriteLineIndent("}");
-    WriteLineIndent("public " + sender + "(" + domain + "FBE.Buffer buffer) : base(buffer, " + std::string(final ? "true" : "false") + ")");
+    WriteLineIndent("public " + sender + "(FBE.Buffer buffer) : base(buffer, " + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
     if (p->import)
@@ -6847,12 +6851,12 @@ void GeneratorCSharp::GenerateReceiver(const std::string& domain, const std::sha
         Write(" : ");
         for (const auto& import : p->import->imports)
         {
-            Write(std::string(first ? "" : ", ") + domain + "FBE." + *import + "." + listener);
+            Write(std::string(first ? "" : ", ") + "FBE." + *import + "." + listener);
             first = false;
         }
     }
     else
-        Write(" : " + domain + "FBE.IReceiverListener");
+        Write(" : FBE.IReceiverListener");
     WriteLine();
     WriteLineIndent("{");
     Indent(1);
@@ -6881,7 +6885,7 @@ void GeneratorCSharp::GenerateReceiver(const std::string& domain, const std::sha
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final receiver");
     else
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " receiver");
-    WriteLineIndent("public class " + receiver + " : " + domain + "FBE.Receiver, " + listener);
+    WriteLineIndent("public class " + receiver + " : " + "FBE.Receiver, " + listener);
     WriteLineIndent("{");
     Indent(1);
 
@@ -6937,7 +6941,7 @@ void GeneratorCSharp::GenerateReceiver(const std::string& domain, const std::sha
     }
     Indent(-1);
     WriteLineIndent("}");
-    WriteLineIndent("public " + receiver + "(" + domain + "FBE.Buffer buffer) : base(buffer, " + std::string(final ? "true" : "false") + ")");
+    WriteLineIndent("public " + receiver + "(FBE.Buffer buffer) : base(buffer, " + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
     if (p->import)
@@ -7054,12 +7058,12 @@ void GeneratorCSharp::GenerateProxy(const std::string& domain, const std::shared
         Write(" : ");
         for (const auto& import : p->import->imports)
         {
-            Write(std::string(first ? "" : ", ") + domain + "FBE." + *import + "." + listener);
+            Write(std::string(first ? "" : ", ") + "FBE." + *import + "." + listener);
             first = false;
         }
     }
     else
-        Write(" : " + domain + "FBE.IReceiverListener");
+        Write(" : FBE.IReceiverListener");
     WriteLine();
     WriteLineIndent("{");
     Indent(1);
@@ -7088,7 +7092,7 @@ void GeneratorCSharp::GenerateProxy(const std::string& domain, const std::shared
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final proxy");
     else
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " proxy");
-    WriteLineIndent("public class " + proxy + " : " + domain + "FBE.Receiver, " + listener);
+    WriteLineIndent("public class " + proxy + " : " + "FBE.Receiver, " + listener);
     WriteLineIndent("{");
     Indent(1);
 
@@ -7128,7 +7132,7 @@ void GeneratorCSharp::GenerateProxy(const std::string& domain, const std::shared
     }
     Indent(-1);
     WriteLineIndent("}");
-    WriteLineIndent("public " + proxy + "(" + domain + "FBE.Buffer buffer) : base(buffer, " + std::string(final ? "true" : "false") + ")");
+    WriteLineIndent("public " + proxy + "(FBE.Buffer buffer) : base(buffer, " + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
     if (p->import)
@@ -7238,12 +7242,12 @@ void GeneratorCSharp::GenerateClient(const std::string& domain, const std::share
         Write(" : ");
         for (const auto& import : p->import->imports)
         {
-            Write(std::string(first ? "" : ", ") + domain + "FBE." + *import + "." + listener);
+            Write(std::string(first ? "" : ", ") + "FBE." + *import + "." + listener);
             first = false;
         }
     }
     else
-        Write(" : " + domain + "FBE.IClientListener");
+        Write(" : FBE.IClientListener");
     Write(", " + sender_listener + ", " + receiver_listener);
     WriteLine();
     WriteLineIndent("{");
@@ -7259,7 +7263,7 @@ void GeneratorCSharp::GenerateClient(const std::string& domain, const std::share
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final client");
     else
         WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " client");
-    WriteLineIndent("public class " + client + " : " + domain + "FBE.Client, " + listener);
+    WriteLineIndent("public class " + client + " : " + "FBE.Client, " + listener);
     WriteLineIndent("{");
     Indent(1);
 
@@ -7375,7 +7379,7 @@ void GeneratorCSharp::GenerateClient(const std::string& domain, const std::share
     }
     Indent(-1);
     WriteLineIndent("}");
-    WriteLineIndent("public " + client + "(" + domain + "FBE.Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, " + std::string(final ? "true" : "false") + ")");
+    WriteLineIndent("public " + client + "(FBE.Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, " + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
     if (p->import)
@@ -8340,24 +8344,25 @@ std::string GeneratorCSharp::ConvertTypeName(const StructField& field)
     return ConvertTypeName(*field.type, field.optional);
 }
 
-std::string GeneratorCSharp::ConvertTypeFieldName(const std::string& domain, const std::string& type, bool final)
+std::string GeneratorCSharp::ConvertTypeFieldName(const std::string& domain, const std::string& package, const std::string& type, bool final)
 {
     std::string modelType = final ? "Final" : "Field";
 
-    std::string ns = domain + "FBE.";
+    std::string ns = domain + package + ".FBE.";
     std::string t = type;
 
     size_t pos = type.find_last_of('.');
     if (pos != std::string::npos)
     {
         ns.assign(type, 0, pos + 1);
+        ns = domain + ns + "FBE.";
         t.assign(type, pos + 1, type.size() - pos);
     }
 
     return ns + modelType + "Model" + ConvertTypeName(t, false);
 }
 
-std::string GeneratorCSharp::ConvertTypeFieldDeclaration(const std::string& domain, const StructField& field, bool final)
+std::string GeneratorCSharp::ConvertTypeFieldDeclaration(const std::string& domain, const std::string& package, const StructField& field, bool final)
 {
     std::string modelType = final ? "Final" : "Field";
 
@@ -8371,7 +8376,7 @@ std::string GeneratorCSharp::ConvertTypeFieldDeclaration(const std::string& doma
         StructField value;
         value.type = field.type;
 
-        return modelType + "ModelArray" + name + "<" + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, value, final) + ">";
+        return domain + "FBE." + modelType + "ModelArray" + name + "<" + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, package, value, final) + ">";
     }
     else if (field.vector || field.list || field.set)
     {
@@ -8383,7 +8388,7 @@ std::string GeneratorCSharp::ConvertTypeFieldDeclaration(const std::string& doma
         StructField value;
         value.type = field.type;
 
-        return modelType + "ModelVector" + name + "<" + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, value, final) + ">";
+        return domain + "FBE." + modelType + "ModelVector" + name + "<" + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, package, value, final) + ">";
     }
     else if (field.map || field.hash)
     {
@@ -8399,7 +8404,7 @@ std::string GeneratorCSharp::ConvertTypeFieldDeclaration(const std::string& doma
         StructField value;
         value.type = field.type;
 
-        return modelType + "ModelMap" + key_name + value_name + "<" + ConvertTypeName(*field.key, false) + ", " + ConvertTypeFieldDeclaration(domain, key, final) + ", " + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, value, final) + ">";
+        return domain + "FBE." + modelType + "ModelMap" + key_name + value_name + "<" + ConvertTypeName(*field.key, false) + ", " + ConvertTypeFieldDeclaration(domain, package, key, final) + ", " + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, package, value, final) + ">";
     }
     else if (field.optional)
     {
@@ -8407,18 +8412,18 @@ std::string GeneratorCSharp::ConvertTypeFieldDeclaration(const std::string& doma
         value.type = field.type;
 
         std::string name = IsReferenceType(*field.type) ? "ReferenceType" : "ValueType";
-        return modelType + "ModelOptional" + name + "<" + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, value, final) + ">";
+        return domain + "FBE." + modelType + "ModelOptional" + name + "<" + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, package, value, final) + ">";
     }
     else if (IsKnownType(*field.type))
     {
         std::string name = IsReferenceType(*field.type) ? "ReferenceType" : "ValueType";
-        return modelType + "Model" + name + "<" + ConvertTypeName(*field.type, field.optional) + ">";
+        return domain + "FBE." + modelType + "Model" + name + "<" + ConvertTypeName(*field.type, field.optional) + ">";
     }
 
-    return ConvertTypeFieldName(domain, *field.type, final);
+    return ConvertTypeFieldName(domain, package, *field.type, final);
 }
 
-std::string GeneratorCSharp::ConvertTypeFieldInitialization(const std::string& domain, const StructField& field, const std::string& offset, bool final)
+std::string GeneratorCSharp::ConvertTypeFieldInitialization(const std::string& domain, const std::string& package, const StructField& field, const std::string& offset, bool final)
 {
     std::string modelType = final ? "Final" : "Field";
 
@@ -8432,7 +8437,7 @@ std::string GeneratorCSharp::ConvertTypeFieldInitialization(const std::string& d
         StructField value;
         value.type = field.type;
 
-        return "new " + modelType + "ModelArray" + name + "<" + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, value, final) + ">(" + ConvertTypeFieldInitialization(domain, value, offset, final) + ", buffer, " + offset + ", " + std::to_string(field.N) + ")";
+        return "new " + domain + "FBE." + modelType + "ModelArray" + name + "<" + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, package, value, final) + ">(" + ConvertTypeFieldInitialization(domain, package, value, offset, final) + ", buffer, " + offset + ", " + std::to_string(field.N) + ")";
     }
     else if (field.vector || field.list || field.set)
     {
@@ -8444,7 +8449,7 @@ std::string GeneratorCSharp::ConvertTypeFieldInitialization(const std::string& d
         StructField value;
         value.type = field.type;
 
-        return "new " + modelType + "ModelVector" + name + "<" + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, value, final) + ">(" + ConvertTypeFieldInitialization(domain, value, offset, final) + ", buffer, " + offset + ")";
+        return "new " + domain + "FBE." + modelType + "ModelVector" + name + "<" + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, package, value, final) + ">(" + ConvertTypeFieldInitialization(domain, package, value, offset, final) + ", buffer, " + offset + ")";
     }
     else if (field.map || field.hash)
     {
@@ -8460,7 +8465,7 @@ std::string GeneratorCSharp::ConvertTypeFieldInitialization(const std::string& d
         StructField value;
         value.type = field.type;
 
-        return "new " + modelType + "ModelMap" + key_name + value_name + "<" + ConvertTypeName(*field.key, false) + ", " + ConvertTypeFieldDeclaration(domain, key, final) + ", " + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, value, final) + ">(" + ConvertTypeFieldInitialization(domain, key, offset, final) + ", " + ConvertTypeFieldInitialization(domain, value, offset, final) + ", buffer, " + offset + ")";
+        return "new " + domain + "FBE." + modelType + "ModelMap" + key_name + value_name + "<" + ConvertTypeName(*field.key, false) + ", " + ConvertTypeFieldDeclaration(domain, package, key, final) + ", " + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, package, value, final) + ">(" + ConvertTypeFieldInitialization(domain, package, key, offset, final) + ", " + ConvertTypeFieldInitialization(domain, package, value, offset, final) + ", buffer, " + offset + ")";
     }
     else if (field.optional)
     {
@@ -8472,15 +8477,15 @@ std::string GeneratorCSharp::ConvertTypeFieldInitialization(const std::string& d
         StructField value;
         value.type = field.type;
 
-        return "new " + modelType + "ModelOptional" + name + "<" + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, model, final) + ">(" + ConvertTypeFieldInitialization(domain, value, offset, final) + ", buffer, " + offset + ")";
+        return "new " + domain + "FBE." + modelType + "ModelOptional" + name + "<" + ConvertTypeName(*field.type, false) + ", " + ConvertTypeFieldDeclaration(domain, package, model, final) + ">(" + ConvertTypeFieldInitialization(domain, package, value, offset, final) + ", buffer, " + offset + ")";
     }
     else if (IsKnownType(*field.type))
     {
         std::string name = IsReferenceType(*field.type) ? "ReferenceType" : "ValueType";
-        return modelType + "Model" + name + "<" + ConvertTypeName(*field.type, field.optional) + ">.Create" + modelType + "Model(BaseTypes." + ConvertBaseTypeName(*field.type) + ", buffer, " + offset + ")";
+        return domain + "FBE." + modelType + "Model" + name + "<" + ConvertTypeName(*field.type, field.optional) + ">.Create" + modelType + "Model(FBE.BaseTypes." + ConvertBaseTypeName(*field.type) + ", buffer, " + offset + ")";
     }
 
-    return "new " + ConvertTypeFieldName(domain, *field.type, final) + "(buffer, " + offset + ")";
+    return "new " + ConvertTypeFieldName(domain, package, *field.type, final) + "(buffer, " + offset + ")";
 }
 
 std::string GeneratorCSharp::ConvertConstant(const std::string& domain, const std::string& package, const std::string& type, const std::string& value, bool optional)

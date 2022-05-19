@@ -31,6 +31,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 #endif
 
+using com.chronoxor.FBE;
+
 using com.chronoxor.proto;
 
 namespace com.chronoxor.test {
@@ -141,7 +143,7 @@ namespace com.chronoxor.test {
 
         public static EnumSimple Default => new EnumSimple();
 
-        public static com.chronoxor.FBE.FieldModelValueType<EnumSimple> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.test.FieldModelEnumSimple(buffer, offset); }
+        public static FBE.FieldModelValueType<EnumSimple> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelEnumSimple(buffer, offset); }
 
         public const int _ENUM_VALUE_0_ = (int)0 + 0;
         public const int _ENUM_VALUE_1_ = (int)1 + 0;
@@ -176,15 +178,15 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding EnumSimple field model
-    public class FieldModelEnumSimple : com.chronoxor.FBE.FieldModelValueType<EnumSimple>
+    public class FieldModelEnumSimple : FBE.FieldModelValueType<EnumSimple>
     {
-        public FieldModelEnumSimple(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelEnumSimple(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 4;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<EnumSimple> Clone() { return new FieldModelEnumSimple(_buffer, _offset); }
+        public override FBE.FieldModelValueType<EnumSimple> Clone() { return new FieldModelEnumSimple(_buffer, _offset); }
 
         // Get the value
         public override void Get(out EnumSimple value) { Get(out value, EnumSimple.Default); }
@@ -217,9 +219,9 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding EnumSimple final model
-    public class FinalModelEnumSimple : com.chronoxor.FBE.FinalModelValueType<EnumSimple>
+    public class FinalModelEnumSimple : FBE.FinalModelValueType<EnumSimple>
     {
-        public FinalModelEnumSimple(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelEnumSimple(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(EnumSimple value) { return FBESize; }
@@ -228,7 +230,7 @@ namespace com.chronoxor.test.FBE {
         public override long FBESize => 4;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<EnumSimple> Clone() { return new FinalModelEnumSimple(_buffer, _offset); }
+        public override FBE.FinalModelValueType<EnumSimple> Clone() { return new FinalModelEnumSimple(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -374,7 +376,7 @@ namespace com.chronoxor.test {
 
         public static EnumTyped Default => new EnumTyped();
 
-        public static com.chronoxor.FBE.FieldModelValueType<EnumTyped> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.test.FieldModelEnumTyped(buffer, offset); }
+        public static FBE.FieldModelValueType<EnumTyped> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelEnumTyped(buffer, offset); }
 
         public const byte _ENUM_VALUE_0_ = (byte)0 + 0;
         public const byte _ENUM_VALUE_1_ = (byte)'1' + 0;
@@ -409,15 +411,15 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding EnumTyped field model
-    public class FieldModelEnumTyped : com.chronoxor.FBE.FieldModelValueType<EnumTyped>
+    public class FieldModelEnumTyped : FBE.FieldModelValueType<EnumTyped>
     {
-        public FieldModelEnumTyped(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelEnumTyped(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 1;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<EnumTyped> Clone() { return new FieldModelEnumTyped(_buffer, _offset); }
+        public override FBE.FieldModelValueType<EnumTyped> Clone() { return new FieldModelEnumTyped(_buffer, _offset); }
 
         // Get the value
         public override void Get(out EnumTyped value) { Get(out value, EnumTyped.Default); }
@@ -450,9 +452,9 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding EnumTyped final model
-    public class FinalModelEnumTyped : com.chronoxor.FBE.FinalModelValueType<EnumTyped>
+    public class FinalModelEnumTyped : FBE.FinalModelValueType<EnumTyped>
     {
-        public FinalModelEnumTyped(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelEnumTyped(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(EnumTyped value) { return FBESize; }
@@ -461,7 +463,7 @@ namespace com.chronoxor.test.FBE {
         public override long FBESize => 1;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<EnumTyped> Clone() { return new FinalModelEnumTyped(_buffer, _offset); }
+        public override FBE.FinalModelValueType<EnumTyped> Clone() { return new FinalModelEnumTyped(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -607,7 +609,7 @@ namespace com.chronoxor.test {
 
         public static EnumEmpty Default => new EnumEmpty();
 
-        public static com.chronoxor.FBE.FieldModelValueType<EnumEmpty> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.test.FieldModelEnumEmpty(buffer, offset); }
+        public static FBE.FieldModelValueType<EnumEmpty> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelEnumEmpty(buffer, offset); }
 
 
 
@@ -624,15 +626,15 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding EnumEmpty field model
-    public class FieldModelEnumEmpty : com.chronoxor.FBE.FieldModelValueType<EnumEmpty>
+    public class FieldModelEnumEmpty : FBE.FieldModelValueType<EnumEmpty>
     {
-        public FieldModelEnumEmpty(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelEnumEmpty(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 4;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<EnumEmpty> Clone() { return new FieldModelEnumEmpty(_buffer, _offset); }
+        public override FBE.FieldModelValueType<EnumEmpty> Clone() { return new FieldModelEnumEmpty(_buffer, _offset); }
 
         // Get the value
         public override void Get(out EnumEmpty value) { Get(out value, EnumEmpty.Default); }
@@ -665,9 +667,9 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding EnumEmpty final model
-    public class FinalModelEnumEmpty : com.chronoxor.FBE.FinalModelValueType<EnumEmpty>
+    public class FinalModelEnumEmpty : FBE.FinalModelValueType<EnumEmpty>
     {
-        public FinalModelEnumEmpty(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelEnumEmpty(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(EnumEmpty value) { return FBESize; }
@@ -676,7 +678,7 @@ namespace com.chronoxor.test.FBE {
         public override long FBESize => 4;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<EnumEmpty> Clone() { return new FinalModelEnumEmpty(_buffer, _offset); }
+        public override FBE.FinalModelValueType<EnumEmpty> Clone() { return new FinalModelEnumEmpty(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -854,7 +856,7 @@ namespace com.chronoxor.test {
 
         public static FlagsSimple Default => new FlagsSimple();
 
-        public static com.chronoxor.FBE.FieldModelValueType<FlagsSimple> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.test.FieldModelFlagsSimple(buffer, offset); }
+        public static FBE.FieldModelValueType<FlagsSimple> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelFlagsSimple(buffer, offset); }
 
         public const int _FLAG_VALUE_0_ = (int)0x0;
         public const int _FLAG_VALUE_1_ = (int)0x1;
@@ -916,15 +918,15 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding FlagsSimple field model
-    public class FieldModelFlagsSimple : com.chronoxor.FBE.FieldModelValueType<FlagsSimple>
+    public class FieldModelFlagsSimple : FBE.FieldModelValueType<FlagsSimple>
     {
-        public FieldModelFlagsSimple(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelFlagsSimple(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 4;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<FlagsSimple> Clone() { return new FieldModelFlagsSimple(_buffer, _offset); }
+        public override FBE.FieldModelValueType<FlagsSimple> Clone() { return new FieldModelFlagsSimple(_buffer, _offset); }
 
         // Get the value
         public override void Get(out FlagsSimple value) { Get(out value, FlagsSimple.Default); }
@@ -957,9 +959,9 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding FlagsSimple final model
-    public class FinalModelFlagsSimple : com.chronoxor.FBE.FinalModelValueType<FlagsSimple>
+    public class FinalModelFlagsSimple : FBE.FinalModelValueType<FlagsSimple>
     {
-        public FinalModelFlagsSimple(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelFlagsSimple(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(FlagsSimple value) { return FBESize; }
@@ -968,7 +970,7 @@ namespace com.chronoxor.test.FBE {
         public override long FBESize => 4;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<FlagsSimple> Clone() { return new FinalModelFlagsSimple(_buffer, _offset); }
+        public override FBE.FinalModelValueType<FlagsSimple> Clone() { return new FinalModelFlagsSimple(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -1146,7 +1148,7 @@ namespace com.chronoxor.test {
 
         public static FlagsTyped Default => new FlagsTyped();
 
-        public static com.chronoxor.FBE.FieldModelValueType<FlagsTyped> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.test.FieldModelFlagsTyped(buffer, offset); }
+        public static FBE.FieldModelValueType<FlagsTyped> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelFlagsTyped(buffer, offset); }
 
         public const ulong _FLAG_VALUE_0_ = (ulong)0x00UL;
         public const ulong _FLAG_VALUE_1_ = (ulong)0x01UL;
@@ -1236,15 +1238,15 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding FlagsTyped field model
-    public class FieldModelFlagsTyped : com.chronoxor.FBE.FieldModelValueType<FlagsTyped>
+    public class FieldModelFlagsTyped : FBE.FieldModelValueType<FlagsTyped>
     {
-        public FieldModelFlagsTyped(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelFlagsTyped(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 8;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<FlagsTyped> Clone() { return new FieldModelFlagsTyped(_buffer, _offset); }
+        public override FBE.FieldModelValueType<FlagsTyped> Clone() { return new FieldModelFlagsTyped(_buffer, _offset); }
 
         // Get the value
         public override void Get(out FlagsTyped value) { Get(out value, FlagsTyped.Default); }
@@ -1277,9 +1279,9 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding FlagsTyped final model
-    public class FinalModelFlagsTyped : com.chronoxor.FBE.FinalModelValueType<FlagsTyped>
+    public class FinalModelFlagsTyped : FBE.FinalModelValueType<FlagsTyped>
     {
-        public FinalModelFlagsTyped(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelFlagsTyped(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(FlagsTyped value) { return FBESize; }
@@ -1288,7 +1290,7 @@ namespace com.chronoxor.test.FBE {
         public override long FBESize => 8;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<FlagsTyped> Clone() { return new FinalModelFlagsTyped(_buffer, _offset); }
+        public override FBE.FinalModelValueType<FlagsTyped> Clone() { return new FinalModelFlagsTyped(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -1466,7 +1468,7 @@ namespace com.chronoxor.test {
 
         public static FlagsEmpty Default => new FlagsEmpty();
 
-        public static com.chronoxor.FBE.FieldModelValueType<FlagsEmpty> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.test.FieldModelFlagsEmpty(buffer, offset); }
+        public static FBE.FieldModelValueType<FlagsEmpty> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelFlagsEmpty(buffer, offset); }
 
 
 
@@ -1485,15 +1487,15 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding FlagsEmpty field model
-    public class FieldModelFlagsEmpty : com.chronoxor.FBE.FieldModelValueType<FlagsEmpty>
+    public class FieldModelFlagsEmpty : FBE.FieldModelValueType<FlagsEmpty>
     {
-        public FieldModelFlagsEmpty(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelFlagsEmpty(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 4;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<FlagsEmpty> Clone() { return new FieldModelFlagsEmpty(_buffer, _offset); }
+        public override FBE.FieldModelValueType<FlagsEmpty> Clone() { return new FieldModelFlagsEmpty(_buffer, _offset); }
 
         // Get the value
         public override void Get(out FlagsEmpty value) { Get(out value, FlagsEmpty.Default); }
@@ -1526,9 +1528,9 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding FlagsEmpty final model
-    public class FinalModelFlagsEmpty : com.chronoxor.FBE.FinalModelValueType<FlagsEmpty>
+    public class FinalModelFlagsEmpty : FBE.FinalModelValueType<FlagsEmpty>
     {
-        public FinalModelFlagsEmpty(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelFlagsEmpty(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(FlagsEmpty value) { return FBESize; }
@@ -1537,7 +1539,7 @@ namespace com.chronoxor.test.FBE {
         public override long FBESize => 4;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<FlagsEmpty> Clone() { return new FinalModelFlagsEmpty(_buffer, _offset); }
+        public override FBE.FinalModelValueType<FlagsEmpty> Clone() { return new FinalModelFlagsEmpty(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -1734,11 +1736,11 @@ namespace com.chronoxor.test {
         public StructSimple Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new com.chronoxor.FBE.com.chronoxor.test.StructSimpleModel();
+            var writer = new FBE.test.StructSimpleModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new com.chronoxor.FBE.com.chronoxor.test.StructSimpleModel();
+            var reader = new FBE.test.StructSimpleModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -1843,17 +1845,17 @@ namespace com.chronoxor.test {
 
         public string ToJson()
         {
-            var json = com.chronoxor.FBE.Json.ToJson(this);
+            var json = FBE.Json.ToJson(this);
             return json;
         }
 
         public static StructSimple FromJson(string json)
         {
-            var result = com.chronoxor.FBE.Json.FromJson<StructSimple>(json);
+            var result = FBE.Json.FromJson<StructSimple>(json);
             return result;
         }
 
-        public static com.chronoxor.FBE.FieldModelValueType<StructSimple> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.com.chronoxor.test.FieldModelStructSimple(buffer, offset); }
+        public static FBE.FieldModelValueType<StructSimple> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructSimple(buffer, offset); }
     }
 
 } // namespace com.chronoxor.test
@@ -1863,101 +1865,101 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSimple field model
-    public class FieldModelStructSimple : com.chronoxor.FBE.FieldModelValueType<StructSimple>
+    public class FieldModelStructSimple : FBE.FieldModelValueType<StructSimple>
     {
-        public readonly FieldModelValueType<int> id;
-        public readonly FieldModelValueType<bool> f1;
-        public readonly FieldModelValueType<bool> f2;
-        public readonly FieldModelValueType<byte> f3;
-        public readonly FieldModelValueType<byte> f4;
-        public readonly FieldModelValueType<char> f5;
-        public readonly FieldModelValueType<char> f6;
-        public readonly FieldModelValueType<char> f7;
-        public readonly FieldModelValueType<char> f8;
-        public readonly FieldModelValueType<sbyte> f9;
-        public readonly FieldModelValueType<sbyte> f10;
-        public readonly FieldModelValueType<byte> f11;
-        public readonly FieldModelValueType<byte> f12;
-        public readonly FieldModelValueType<short> f13;
-        public readonly FieldModelValueType<short> f14;
-        public readonly FieldModelValueType<ushort> f15;
-        public readonly FieldModelValueType<ushort> f16;
-        public readonly FieldModelValueType<int> f17;
-        public readonly FieldModelValueType<int> f18;
-        public readonly FieldModelValueType<uint> f19;
-        public readonly FieldModelValueType<uint> f20;
-        public readonly FieldModelValueType<long> f21;
-        public readonly FieldModelValueType<long> f22;
-        public readonly FieldModelValueType<ulong> f23;
-        public readonly FieldModelValueType<ulong> f24;
-        public readonly FieldModelValueType<float> f25;
-        public readonly FieldModelValueType<float> f26;
-        public readonly FieldModelValueType<double> f27;
-        public readonly FieldModelValueType<double> f28;
-        public readonly FieldModelValueType<decimal> f29;
-        public readonly FieldModelValueType<decimal> f30;
-        public readonly FieldModelReferenceType<string> f31;
-        public readonly FieldModelReferenceType<string> f32;
-        public readonly FieldModelValueType<DateTime> f33;
-        public readonly FieldModelValueType<DateTime> f34;
-        public readonly FieldModelValueType<DateTime> f35;
-        public readonly FieldModelValueType<Guid> f36;
-        public readonly FieldModelValueType<Guid> f37;
-        public readonly FieldModelValueType<Guid> f38;
-        public readonly proto.FieldModelOrderSide f39;
-        public readonly proto.FieldModelOrderType f40;
-        public readonly proto.FieldModelOrder f41;
-        public readonly proto.FieldModelBalance f42;
-        public readonly proto.FieldModelState f43;
-        public readonly proto.FieldModelAccount f44;
+        public readonly com.chronoxor.FBE.FieldModelValueType<int> id;
+        public readonly com.chronoxor.FBE.FieldModelValueType<bool> f1;
+        public readonly com.chronoxor.FBE.FieldModelValueType<bool> f2;
+        public readonly com.chronoxor.FBE.FieldModelValueType<byte> f3;
+        public readonly com.chronoxor.FBE.FieldModelValueType<byte> f4;
+        public readonly com.chronoxor.FBE.FieldModelValueType<char> f5;
+        public readonly com.chronoxor.FBE.FieldModelValueType<char> f6;
+        public readonly com.chronoxor.FBE.FieldModelValueType<char> f7;
+        public readonly com.chronoxor.FBE.FieldModelValueType<char> f8;
+        public readonly com.chronoxor.FBE.FieldModelValueType<sbyte> f9;
+        public readonly com.chronoxor.FBE.FieldModelValueType<sbyte> f10;
+        public readonly com.chronoxor.FBE.FieldModelValueType<byte> f11;
+        public readonly com.chronoxor.FBE.FieldModelValueType<byte> f12;
+        public readonly com.chronoxor.FBE.FieldModelValueType<short> f13;
+        public readonly com.chronoxor.FBE.FieldModelValueType<short> f14;
+        public readonly com.chronoxor.FBE.FieldModelValueType<ushort> f15;
+        public readonly com.chronoxor.FBE.FieldModelValueType<ushort> f16;
+        public readonly com.chronoxor.FBE.FieldModelValueType<int> f17;
+        public readonly com.chronoxor.FBE.FieldModelValueType<int> f18;
+        public readonly com.chronoxor.FBE.FieldModelValueType<uint> f19;
+        public readonly com.chronoxor.FBE.FieldModelValueType<uint> f20;
+        public readonly com.chronoxor.FBE.FieldModelValueType<long> f21;
+        public readonly com.chronoxor.FBE.FieldModelValueType<long> f22;
+        public readonly com.chronoxor.FBE.FieldModelValueType<ulong> f23;
+        public readonly com.chronoxor.FBE.FieldModelValueType<ulong> f24;
+        public readonly com.chronoxor.FBE.FieldModelValueType<float> f25;
+        public readonly com.chronoxor.FBE.FieldModelValueType<float> f26;
+        public readonly com.chronoxor.FBE.FieldModelValueType<double> f27;
+        public readonly com.chronoxor.FBE.FieldModelValueType<double> f28;
+        public readonly com.chronoxor.FBE.FieldModelValueType<decimal> f29;
+        public readonly com.chronoxor.FBE.FieldModelValueType<decimal> f30;
+        public readonly com.chronoxor.FBE.FieldModelReferenceType<string> f31;
+        public readonly com.chronoxor.FBE.FieldModelReferenceType<string> f32;
+        public readonly com.chronoxor.FBE.FieldModelValueType<DateTime> f33;
+        public readonly com.chronoxor.FBE.FieldModelValueType<DateTime> f34;
+        public readonly com.chronoxor.FBE.FieldModelValueType<DateTime> f35;
+        public readonly com.chronoxor.FBE.FieldModelValueType<Guid> f36;
+        public readonly com.chronoxor.FBE.FieldModelValueType<Guid> f37;
+        public readonly com.chronoxor.FBE.FieldModelValueType<Guid> f38;
+        public readonly com.chronoxor.proto.FBE.FieldModelOrderSide f39;
+        public readonly com.chronoxor.proto.FBE.FieldModelOrderType f40;
+        public readonly com.chronoxor.proto.FBE.FieldModelOrder f41;
+        public readonly com.chronoxor.proto.FBE.FieldModelBalance f42;
+        public readonly com.chronoxor.proto.FBE.FieldModelState f43;
+        public readonly com.chronoxor.proto.FBE.FieldModelAccount f44;
 
-        public FieldModelStructSimple(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelStructSimple(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            id = FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, 4 + 4);
-            f1 = FieldModelValueType<bool>.CreateFieldModel(BaseTypes.BOOL, buffer, id.FBEOffset + id.FBESize);
-            f2 = FieldModelValueType<bool>.CreateFieldModel(BaseTypes.BOOL, buffer, f1.FBEOffset + f1.FBESize);
-            f3 = FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f2.FBEOffset + f2.FBESize);
-            f4 = FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f3.FBEOffset + f3.FBESize);
-            f5 = FieldModelValueType<char>.CreateFieldModel(BaseTypes.CHAR, buffer, f4.FBEOffset + f4.FBESize);
-            f6 = FieldModelValueType<char>.CreateFieldModel(BaseTypes.CHAR, buffer, f5.FBEOffset + f5.FBESize);
-            f7 = FieldModelValueType<char>.CreateFieldModel(BaseTypes.WCHAR, buffer, f6.FBEOffset + f6.FBESize);
-            f8 = FieldModelValueType<char>.CreateFieldModel(BaseTypes.WCHAR, buffer, f7.FBEOffset + f7.FBESize);
-            f9 = FieldModelValueType<sbyte>.CreateFieldModel(BaseTypes.INT8, buffer, f8.FBEOffset + f8.FBESize);
-            f10 = FieldModelValueType<sbyte>.CreateFieldModel(BaseTypes.INT8, buffer, f9.FBEOffset + f9.FBESize);
-            f11 = FieldModelValueType<byte>.CreateFieldModel(BaseTypes.UINT8, buffer, f10.FBEOffset + f10.FBESize);
-            f12 = FieldModelValueType<byte>.CreateFieldModel(BaseTypes.UINT8, buffer, f11.FBEOffset + f11.FBESize);
-            f13 = FieldModelValueType<short>.CreateFieldModel(BaseTypes.INT16, buffer, f12.FBEOffset + f12.FBESize);
-            f14 = FieldModelValueType<short>.CreateFieldModel(BaseTypes.INT16, buffer, f13.FBEOffset + f13.FBESize);
-            f15 = FieldModelValueType<ushort>.CreateFieldModel(BaseTypes.UINT16, buffer, f14.FBEOffset + f14.FBESize);
-            f16 = FieldModelValueType<ushort>.CreateFieldModel(BaseTypes.UINT16, buffer, f15.FBEOffset + f15.FBESize);
-            f17 = FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f16.FBEOffset + f16.FBESize);
-            f18 = FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f17.FBEOffset + f17.FBESize);
-            f19 = FieldModelValueType<uint>.CreateFieldModel(BaseTypes.UINT32, buffer, f18.FBEOffset + f18.FBESize);
-            f20 = FieldModelValueType<uint>.CreateFieldModel(BaseTypes.UINT32, buffer, f19.FBEOffset + f19.FBESize);
-            f21 = FieldModelValueType<long>.CreateFieldModel(BaseTypes.INT64, buffer, f20.FBEOffset + f20.FBESize);
-            f22 = FieldModelValueType<long>.CreateFieldModel(BaseTypes.INT64, buffer, f21.FBEOffset + f21.FBESize);
-            f23 = FieldModelValueType<ulong>.CreateFieldModel(BaseTypes.UINT64, buffer, f22.FBEOffset + f22.FBESize);
-            f24 = FieldModelValueType<ulong>.CreateFieldModel(BaseTypes.UINT64, buffer, f23.FBEOffset + f23.FBESize);
-            f25 = FieldModelValueType<float>.CreateFieldModel(BaseTypes.FLOAT, buffer, f24.FBEOffset + f24.FBESize);
-            f26 = FieldModelValueType<float>.CreateFieldModel(BaseTypes.FLOAT, buffer, f25.FBEOffset + f25.FBESize);
-            f27 = FieldModelValueType<double>.CreateFieldModel(BaseTypes.DOUBLE, buffer, f26.FBEOffset + f26.FBESize);
-            f28 = FieldModelValueType<double>.CreateFieldModel(BaseTypes.DOUBLE, buffer, f27.FBEOffset + f27.FBESize);
-            f29 = FieldModelValueType<decimal>.CreateFieldModel(BaseTypes.DECIMAL, buffer, f28.FBEOffset + f28.FBESize);
-            f30 = FieldModelValueType<decimal>.CreateFieldModel(BaseTypes.DECIMAL, buffer, f29.FBEOffset + f29.FBESize);
-            f31 = FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f30.FBEOffset + f30.FBESize);
-            f32 = FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f31.FBEOffset + f31.FBESize);
-            f33 = FieldModelValueType<DateTime>.CreateFieldModel(BaseTypes.TIMESTAMP, buffer, f32.FBEOffset + f32.FBESize);
-            f34 = FieldModelValueType<DateTime>.CreateFieldModel(BaseTypes.TIMESTAMP, buffer, f33.FBEOffset + f33.FBESize);
-            f35 = FieldModelValueType<DateTime>.CreateFieldModel(BaseTypes.TIMESTAMP, buffer, f34.FBEOffset + f34.FBESize);
-            f36 = FieldModelValueType<Guid>.CreateFieldModel(BaseTypes.UUID, buffer, f35.FBEOffset + f35.FBESize);
-            f37 = FieldModelValueType<Guid>.CreateFieldModel(BaseTypes.UUID, buffer, f36.FBEOffset + f36.FBESize);
-            f38 = FieldModelValueType<Guid>.CreateFieldModel(BaseTypes.UUID, buffer, f37.FBEOffset + f37.FBESize);
-            f39 = new proto.FieldModelOrderSide(buffer, f38.FBEOffset + f38.FBESize);
-            f40 = new proto.FieldModelOrderType(buffer, f39.FBEOffset + f39.FBESize);
-            f41 = new proto.FieldModelOrder(buffer, f40.FBEOffset + f40.FBESize);
-            f42 = new proto.FieldModelBalance(buffer, f41.FBEOffset + f41.FBESize);
-            f43 = new proto.FieldModelState(buffer, f42.FBEOffset + f42.FBESize);
-            f44 = new proto.FieldModelAccount(buffer, f43.FBEOffset + f43.FBESize);
+            id = com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, 4 + 4);
+            f1 = com.chronoxor.FBE.FieldModelValueType<bool>.CreateFieldModel(FBE.BaseTypes.BOOL, buffer, id.FBEOffset + id.FBESize);
+            f2 = com.chronoxor.FBE.FieldModelValueType<bool>.CreateFieldModel(FBE.BaseTypes.BOOL, buffer, f1.FBEOffset + f1.FBESize);
+            f3 = com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, f2.FBEOffset + f2.FBESize);
+            f4 = com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, f3.FBEOffset + f3.FBESize);
+            f5 = com.chronoxor.FBE.FieldModelValueType<char>.CreateFieldModel(FBE.BaseTypes.CHAR, buffer, f4.FBEOffset + f4.FBESize);
+            f6 = com.chronoxor.FBE.FieldModelValueType<char>.CreateFieldModel(FBE.BaseTypes.CHAR, buffer, f5.FBEOffset + f5.FBESize);
+            f7 = com.chronoxor.FBE.FieldModelValueType<char>.CreateFieldModel(FBE.BaseTypes.WCHAR, buffer, f6.FBEOffset + f6.FBESize);
+            f8 = com.chronoxor.FBE.FieldModelValueType<char>.CreateFieldModel(FBE.BaseTypes.WCHAR, buffer, f7.FBEOffset + f7.FBESize);
+            f9 = com.chronoxor.FBE.FieldModelValueType<sbyte>.CreateFieldModel(FBE.BaseTypes.INT8, buffer, f8.FBEOffset + f8.FBESize);
+            f10 = com.chronoxor.FBE.FieldModelValueType<sbyte>.CreateFieldModel(FBE.BaseTypes.INT8, buffer, f9.FBEOffset + f9.FBESize);
+            f11 = com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.UINT8, buffer, f10.FBEOffset + f10.FBESize);
+            f12 = com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.UINT8, buffer, f11.FBEOffset + f11.FBESize);
+            f13 = com.chronoxor.FBE.FieldModelValueType<short>.CreateFieldModel(FBE.BaseTypes.INT16, buffer, f12.FBEOffset + f12.FBESize);
+            f14 = com.chronoxor.FBE.FieldModelValueType<short>.CreateFieldModel(FBE.BaseTypes.INT16, buffer, f13.FBEOffset + f13.FBESize);
+            f15 = com.chronoxor.FBE.FieldModelValueType<ushort>.CreateFieldModel(FBE.BaseTypes.UINT16, buffer, f14.FBEOffset + f14.FBESize);
+            f16 = com.chronoxor.FBE.FieldModelValueType<ushort>.CreateFieldModel(FBE.BaseTypes.UINT16, buffer, f15.FBEOffset + f15.FBESize);
+            f17 = com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, f16.FBEOffset + f16.FBESize);
+            f18 = com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, f17.FBEOffset + f17.FBESize);
+            f19 = com.chronoxor.FBE.FieldModelValueType<uint>.CreateFieldModel(FBE.BaseTypes.UINT32, buffer, f18.FBEOffset + f18.FBESize);
+            f20 = com.chronoxor.FBE.FieldModelValueType<uint>.CreateFieldModel(FBE.BaseTypes.UINT32, buffer, f19.FBEOffset + f19.FBESize);
+            f21 = com.chronoxor.FBE.FieldModelValueType<long>.CreateFieldModel(FBE.BaseTypes.INT64, buffer, f20.FBEOffset + f20.FBESize);
+            f22 = com.chronoxor.FBE.FieldModelValueType<long>.CreateFieldModel(FBE.BaseTypes.INT64, buffer, f21.FBEOffset + f21.FBESize);
+            f23 = com.chronoxor.FBE.FieldModelValueType<ulong>.CreateFieldModel(FBE.BaseTypes.UINT64, buffer, f22.FBEOffset + f22.FBESize);
+            f24 = com.chronoxor.FBE.FieldModelValueType<ulong>.CreateFieldModel(FBE.BaseTypes.UINT64, buffer, f23.FBEOffset + f23.FBESize);
+            f25 = com.chronoxor.FBE.FieldModelValueType<float>.CreateFieldModel(FBE.BaseTypes.FLOAT, buffer, f24.FBEOffset + f24.FBESize);
+            f26 = com.chronoxor.FBE.FieldModelValueType<float>.CreateFieldModel(FBE.BaseTypes.FLOAT, buffer, f25.FBEOffset + f25.FBESize);
+            f27 = com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(FBE.BaseTypes.DOUBLE, buffer, f26.FBEOffset + f26.FBESize);
+            f28 = com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(FBE.BaseTypes.DOUBLE, buffer, f27.FBEOffset + f27.FBESize);
+            f29 = com.chronoxor.FBE.FieldModelValueType<decimal>.CreateFieldModel(FBE.BaseTypes.DECIMAL, buffer, f28.FBEOffset + f28.FBESize);
+            f30 = com.chronoxor.FBE.FieldModelValueType<decimal>.CreateFieldModel(FBE.BaseTypes.DECIMAL, buffer, f29.FBEOffset + f29.FBESize);
+            f31 = com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, f30.FBEOffset + f30.FBESize);
+            f32 = com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, f31.FBEOffset + f31.FBESize);
+            f33 = com.chronoxor.FBE.FieldModelValueType<DateTime>.CreateFieldModel(FBE.BaseTypes.TIMESTAMP, buffer, f32.FBEOffset + f32.FBESize);
+            f34 = com.chronoxor.FBE.FieldModelValueType<DateTime>.CreateFieldModel(FBE.BaseTypes.TIMESTAMP, buffer, f33.FBEOffset + f33.FBESize);
+            f35 = com.chronoxor.FBE.FieldModelValueType<DateTime>.CreateFieldModel(FBE.BaseTypes.TIMESTAMP, buffer, f34.FBEOffset + f34.FBESize);
+            f36 = com.chronoxor.FBE.FieldModelValueType<Guid>.CreateFieldModel(FBE.BaseTypes.UUID, buffer, f35.FBEOffset + f35.FBESize);
+            f37 = com.chronoxor.FBE.FieldModelValueType<Guid>.CreateFieldModel(FBE.BaseTypes.UUID, buffer, f36.FBEOffset + f36.FBESize);
+            f38 = com.chronoxor.FBE.FieldModelValueType<Guid>.CreateFieldModel(FBE.BaseTypes.UUID, buffer, f37.FBEOffset + f37.FBESize);
+            f39 = new com.chronoxor.proto.FBE.FieldModelOrderSide(buffer, f38.FBEOffset + f38.FBESize);
+            f40 = new com.chronoxor.proto.FBE.FieldModelOrderType(buffer, f39.FBEOffset + f39.FBESize);
+            f41 = new com.chronoxor.proto.FBE.FieldModelOrder(buffer, f40.FBEOffset + f40.FBESize);
+            f42 = new com.chronoxor.proto.FBE.FieldModelBalance(buffer, f41.FBEOffset + f41.FBESize);
+            f43 = new com.chronoxor.proto.FBE.FieldModelState(buffer, f42.FBEOffset + f42.FBESize);
+            f44 = new com.chronoxor.proto.FBE.FieldModelAccount(buffer, f43.FBEOffset + f43.FBESize);
         }
 
         // Get the field size
@@ -2089,7 +2091,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<StructSimple> Clone() { return new FieldModelStructSimple(_buffer, _offset); }
+        public override FBE.FieldModelValueType<StructSimple> Clone() { return new FieldModelStructSimple(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -2810,12 +2812,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSimple model
-    public class StructSimpleModel : Model
+    public class StructSimpleModel : FBE.Model
     {
         public readonly FieldModelStructSimple model;
 
         public StructSimpleModel() { model = new FieldModelStructSimple(Buffer, 4); }
-        public StructSimpleModel(Buffer buffer) : base(buffer) { model = new FieldModelStructSimple(Buffer, 4); }
+        public StructSimpleModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelStructSimple(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -2896,101 +2898,101 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSimple final model
-    public class FinalModelStructSimple : com.chronoxor.FBE.FinalModelValueType<StructSimple>
+    public class FinalModelStructSimple : FBE.FinalModelValueType<StructSimple>
     {
-        public readonly FinalModelValueType<int> id;
-        public readonly FinalModelValueType<bool> f1;
-        public readonly FinalModelValueType<bool> f2;
-        public readonly FinalModelValueType<byte> f3;
-        public readonly FinalModelValueType<byte> f4;
-        public readonly FinalModelValueType<char> f5;
-        public readonly FinalModelValueType<char> f6;
-        public readonly FinalModelValueType<char> f7;
-        public readonly FinalModelValueType<char> f8;
-        public readonly FinalModelValueType<sbyte> f9;
-        public readonly FinalModelValueType<sbyte> f10;
-        public readonly FinalModelValueType<byte> f11;
-        public readonly FinalModelValueType<byte> f12;
-        public readonly FinalModelValueType<short> f13;
-        public readonly FinalModelValueType<short> f14;
-        public readonly FinalModelValueType<ushort> f15;
-        public readonly FinalModelValueType<ushort> f16;
-        public readonly FinalModelValueType<int> f17;
-        public readonly FinalModelValueType<int> f18;
-        public readonly FinalModelValueType<uint> f19;
-        public readonly FinalModelValueType<uint> f20;
-        public readonly FinalModelValueType<long> f21;
-        public readonly FinalModelValueType<long> f22;
-        public readonly FinalModelValueType<ulong> f23;
-        public readonly FinalModelValueType<ulong> f24;
-        public readonly FinalModelValueType<float> f25;
-        public readonly FinalModelValueType<float> f26;
-        public readonly FinalModelValueType<double> f27;
-        public readonly FinalModelValueType<double> f28;
-        public readonly FinalModelValueType<decimal> f29;
-        public readonly FinalModelValueType<decimal> f30;
-        public readonly FinalModelReferenceType<string> f31;
-        public readonly FinalModelReferenceType<string> f32;
-        public readonly FinalModelValueType<DateTime> f33;
-        public readonly FinalModelValueType<DateTime> f34;
-        public readonly FinalModelValueType<DateTime> f35;
-        public readonly FinalModelValueType<Guid> f36;
-        public readonly FinalModelValueType<Guid> f37;
-        public readonly FinalModelValueType<Guid> f38;
-        public readonly proto.FinalModelOrderSide f39;
-        public readonly proto.FinalModelOrderType f40;
-        public readonly proto.FinalModelOrder f41;
-        public readonly proto.FinalModelBalance f42;
-        public readonly proto.FinalModelState f43;
-        public readonly proto.FinalModelAccount f44;
+        public readonly com.chronoxor.FBE.FinalModelValueType<int> id;
+        public readonly com.chronoxor.FBE.FinalModelValueType<bool> f1;
+        public readonly com.chronoxor.FBE.FinalModelValueType<bool> f2;
+        public readonly com.chronoxor.FBE.FinalModelValueType<byte> f3;
+        public readonly com.chronoxor.FBE.FinalModelValueType<byte> f4;
+        public readonly com.chronoxor.FBE.FinalModelValueType<char> f5;
+        public readonly com.chronoxor.FBE.FinalModelValueType<char> f6;
+        public readonly com.chronoxor.FBE.FinalModelValueType<char> f7;
+        public readonly com.chronoxor.FBE.FinalModelValueType<char> f8;
+        public readonly com.chronoxor.FBE.FinalModelValueType<sbyte> f9;
+        public readonly com.chronoxor.FBE.FinalModelValueType<sbyte> f10;
+        public readonly com.chronoxor.FBE.FinalModelValueType<byte> f11;
+        public readonly com.chronoxor.FBE.FinalModelValueType<byte> f12;
+        public readonly com.chronoxor.FBE.FinalModelValueType<short> f13;
+        public readonly com.chronoxor.FBE.FinalModelValueType<short> f14;
+        public readonly com.chronoxor.FBE.FinalModelValueType<ushort> f15;
+        public readonly com.chronoxor.FBE.FinalModelValueType<ushort> f16;
+        public readonly com.chronoxor.FBE.FinalModelValueType<int> f17;
+        public readonly com.chronoxor.FBE.FinalModelValueType<int> f18;
+        public readonly com.chronoxor.FBE.FinalModelValueType<uint> f19;
+        public readonly com.chronoxor.FBE.FinalModelValueType<uint> f20;
+        public readonly com.chronoxor.FBE.FinalModelValueType<long> f21;
+        public readonly com.chronoxor.FBE.FinalModelValueType<long> f22;
+        public readonly com.chronoxor.FBE.FinalModelValueType<ulong> f23;
+        public readonly com.chronoxor.FBE.FinalModelValueType<ulong> f24;
+        public readonly com.chronoxor.FBE.FinalModelValueType<float> f25;
+        public readonly com.chronoxor.FBE.FinalModelValueType<float> f26;
+        public readonly com.chronoxor.FBE.FinalModelValueType<double> f27;
+        public readonly com.chronoxor.FBE.FinalModelValueType<double> f28;
+        public readonly com.chronoxor.FBE.FinalModelValueType<decimal> f29;
+        public readonly com.chronoxor.FBE.FinalModelValueType<decimal> f30;
+        public readonly com.chronoxor.FBE.FinalModelReferenceType<string> f31;
+        public readonly com.chronoxor.FBE.FinalModelReferenceType<string> f32;
+        public readonly com.chronoxor.FBE.FinalModelValueType<DateTime> f33;
+        public readonly com.chronoxor.FBE.FinalModelValueType<DateTime> f34;
+        public readonly com.chronoxor.FBE.FinalModelValueType<DateTime> f35;
+        public readonly com.chronoxor.FBE.FinalModelValueType<Guid> f36;
+        public readonly com.chronoxor.FBE.FinalModelValueType<Guid> f37;
+        public readonly com.chronoxor.FBE.FinalModelValueType<Guid> f38;
+        public readonly com.chronoxor.proto.FBE.FinalModelOrderSide f39;
+        public readonly com.chronoxor.proto.FBE.FinalModelOrderType f40;
+        public readonly com.chronoxor.proto.FBE.FinalModelOrder f41;
+        public readonly com.chronoxor.proto.FBE.FinalModelBalance f42;
+        public readonly com.chronoxor.proto.FBE.FinalModelState f43;
+        public readonly com.chronoxor.proto.FBE.FinalModelAccount f44;
 
-        public FinalModelStructSimple(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelStructSimple(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            id = FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0);
-            f1 = FinalModelValueType<bool>.CreateFinalModel(BaseTypes.BOOL, buffer, 0);
-            f2 = FinalModelValueType<bool>.CreateFinalModel(BaseTypes.BOOL, buffer, 0);
-            f3 = FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0);
-            f4 = FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0);
-            f5 = FinalModelValueType<char>.CreateFinalModel(BaseTypes.CHAR, buffer, 0);
-            f6 = FinalModelValueType<char>.CreateFinalModel(BaseTypes.CHAR, buffer, 0);
-            f7 = FinalModelValueType<char>.CreateFinalModel(BaseTypes.WCHAR, buffer, 0);
-            f8 = FinalModelValueType<char>.CreateFinalModel(BaseTypes.WCHAR, buffer, 0);
-            f9 = FinalModelValueType<sbyte>.CreateFinalModel(BaseTypes.INT8, buffer, 0);
-            f10 = FinalModelValueType<sbyte>.CreateFinalModel(BaseTypes.INT8, buffer, 0);
-            f11 = FinalModelValueType<byte>.CreateFinalModel(BaseTypes.UINT8, buffer, 0);
-            f12 = FinalModelValueType<byte>.CreateFinalModel(BaseTypes.UINT8, buffer, 0);
-            f13 = FinalModelValueType<short>.CreateFinalModel(BaseTypes.INT16, buffer, 0);
-            f14 = FinalModelValueType<short>.CreateFinalModel(BaseTypes.INT16, buffer, 0);
-            f15 = FinalModelValueType<ushort>.CreateFinalModel(BaseTypes.UINT16, buffer, 0);
-            f16 = FinalModelValueType<ushort>.CreateFinalModel(BaseTypes.UINT16, buffer, 0);
-            f17 = FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0);
-            f18 = FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0);
-            f19 = FinalModelValueType<uint>.CreateFinalModel(BaseTypes.UINT32, buffer, 0);
-            f20 = FinalModelValueType<uint>.CreateFinalModel(BaseTypes.UINT32, buffer, 0);
-            f21 = FinalModelValueType<long>.CreateFinalModel(BaseTypes.INT64, buffer, 0);
-            f22 = FinalModelValueType<long>.CreateFinalModel(BaseTypes.INT64, buffer, 0);
-            f23 = FinalModelValueType<ulong>.CreateFinalModel(BaseTypes.UINT64, buffer, 0);
-            f24 = FinalModelValueType<ulong>.CreateFinalModel(BaseTypes.UINT64, buffer, 0);
-            f25 = FinalModelValueType<float>.CreateFinalModel(BaseTypes.FLOAT, buffer, 0);
-            f26 = FinalModelValueType<float>.CreateFinalModel(BaseTypes.FLOAT, buffer, 0);
-            f27 = FinalModelValueType<double>.CreateFinalModel(BaseTypes.DOUBLE, buffer, 0);
-            f28 = FinalModelValueType<double>.CreateFinalModel(BaseTypes.DOUBLE, buffer, 0);
-            f29 = FinalModelValueType<decimal>.CreateFinalModel(BaseTypes.DECIMAL, buffer, 0);
-            f30 = FinalModelValueType<decimal>.CreateFinalModel(BaseTypes.DECIMAL, buffer, 0);
-            f31 = FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0);
-            f32 = FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0);
-            f33 = FinalModelValueType<DateTime>.CreateFinalModel(BaseTypes.TIMESTAMP, buffer, 0);
-            f34 = FinalModelValueType<DateTime>.CreateFinalModel(BaseTypes.TIMESTAMP, buffer, 0);
-            f35 = FinalModelValueType<DateTime>.CreateFinalModel(BaseTypes.TIMESTAMP, buffer, 0);
-            f36 = FinalModelValueType<Guid>.CreateFinalModel(BaseTypes.UUID, buffer, 0);
-            f37 = FinalModelValueType<Guid>.CreateFinalModel(BaseTypes.UUID, buffer, 0);
-            f38 = FinalModelValueType<Guid>.CreateFinalModel(BaseTypes.UUID, buffer, 0);
-            f39 = new proto.FinalModelOrderSide(buffer, 0);
-            f40 = new proto.FinalModelOrderType(buffer, 0);
-            f41 = new proto.FinalModelOrder(buffer, 0);
-            f42 = new proto.FinalModelBalance(buffer, 0);
-            f43 = new proto.FinalModelState(buffer, 0);
-            f44 = new proto.FinalModelAccount(buffer, 0);
+            id = com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0);
+            f1 = com.chronoxor.FBE.FinalModelValueType<bool>.CreateFinalModel(FBE.BaseTypes.BOOL, buffer, 0);
+            f2 = com.chronoxor.FBE.FinalModelValueType<bool>.CreateFinalModel(FBE.BaseTypes.BOOL, buffer, 0);
+            f3 = com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0);
+            f4 = com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0);
+            f5 = com.chronoxor.FBE.FinalModelValueType<char>.CreateFinalModel(FBE.BaseTypes.CHAR, buffer, 0);
+            f6 = com.chronoxor.FBE.FinalModelValueType<char>.CreateFinalModel(FBE.BaseTypes.CHAR, buffer, 0);
+            f7 = com.chronoxor.FBE.FinalModelValueType<char>.CreateFinalModel(FBE.BaseTypes.WCHAR, buffer, 0);
+            f8 = com.chronoxor.FBE.FinalModelValueType<char>.CreateFinalModel(FBE.BaseTypes.WCHAR, buffer, 0);
+            f9 = com.chronoxor.FBE.FinalModelValueType<sbyte>.CreateFinalModel(FBE.BaseTypes.INT8, buffer, 0);
+            f10 = com.chronoxor.FBE.FinalModelValueType<sbyte>.CreateFinalModel(FBE.BaseTypes.INT8, buffer, 0);
+            f11 = com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.UINT8, buffer, 0);
+            f12 = com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.UINT8, buffer, 0);
+            f13 = com.chronoxor.FBE.FinalModelValueType<short>.CreateFinalModel(FBE.BaseTypes.INT16, buffer, 0);
+            f14 = com.chronoxor.FBE.FinalModelValueType<short>.CreateFinalModel(FBE.BaseTypes.INT16, buffer, 0);
+            f15 = com.chronoxor.FBE.FinalModelValueType<ushort>.CreateFinalModel(FBE.BaseTypes.UINT16, buffer, 0);
+            f16 = com.chronoxor.FBE.FinalModelValueType<ushort>.CreateFinalModel(FBE.BaseTypes.UINT16, buffer, 0);
+            f17 = com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0);
+            f18 = com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0);
+            f19 = com.chronoxor.FBE.FinalModelValueType<uint>.CreateFinalModel(FBE.BaseTypes.UINT32, buffer, 0);
+            f20 = com.chronoxor.FBE.FinalModelValueType<uint>.CreateFinalModel(FBE.BaseTypes.UINT32, buffer, 0);
+            f21 = com.chronoxor.FBE.FinalModelValueType<long>.CreateFinalModel(FBE.BaseTypes.INT64, buffer, 0);
+            f22 = com.chronoxor.FBE.FinalModelValueType<long>.CreateFinalModel(FBE.BaseTypes.INT64, buffer, 0);
+            f23 = com.chronoxor.FBE.FinalModelValueType<ulong>.CreateFinalModel(FBE.BaseTypes.UINT64, buffer, 0);
+            f24 = com.chronoxor.FBE.FinalModelValueType<ulong>.CreateFinalModel(FBE.BaseTypes.UINT64, buffer, 0);
+            f25 = com.chronoxor.FBE.FinalModelValueType<float>.CreateFinalModel(FBE.BaseTypes.FLOAT, buffer, 0);
+            f26 = com.chronoxor.FBE.FinalModelValueType<float>.CreateFinalModel(FBE.BaseTypes.FLOAT, buffer, 0);
+            f27 = com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(FBE.BaseTypes.DOUBLE, buffer, 0);
+            f28 = com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(FBE.BaseTypes.DOUBLE, buffer, 0);
+            f29 = com.chronoxor.FBE.FinalModelValueType<decimal>.CreateFinalModel(FBE.BaseTypes.DECIMAL, buffer, 0);
+            f30 = com.chronoxor.FBE.FinalModelValueType<decimal>.CreateFinalModel(FBE.BaseTypes.DECIMAL, buffer, 0);
+            f31 = com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0);
+            f32 = com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0);
+            f33 = com.chronoxor.FBE.FinalModelValueType<DateTime>.CreateFinalModel(FBE.BaseTypes.TIMESTAMP, buffer, 0);
+            f34 = com.chronoxor.FBE.FinalModelValueType<DateTime>.CreateFinalModel(FBE.BaseTypes.TIMESTAMP, buffer, 0);
+            f35 = com.chronoxor.FBE.FinalModelValueType<DateTime>.CreateFinalModel(FBE.BaseTypes.TIMESTAMP, buffer, 0);
+            f36 = com.chronoxor.FBE.FinalModelValueType<Guid>.CreateFinalModel(FBE.BaseTypes.UUID, buffer, 0);
+            f37 = com.chronoxor.FBE.FinalModelValueType<Guid>.CreateFinalModel(FBE.BaseTypes.UUID, buffer, 0);
+            f38 = com.chronoxor.FBE.FinalModelValueType<Guid>.CreateFinalModel(FBE.BaseTypes.UUID, buffer, 0);
+            f39 = new com.chronoxor.proto.FBE.FinalModelOrderSide(buffer, 0);
+            f40 = new com.chronoxor.proto.FBE.FinalModelOrderType(buffer, 0);
+            f41 = new com.chronoxor.proto.FBE.FinalModelOrder(buffer, 0);
+            f42 = new com.chronoxor.proto.FBE.FinalModelBalance(buffer, 0);
+            f43 = new com.chronoxor.proto.FBE.FinalModelState(buffer, 0);
+            f44 = new com.chronoxor.proto.FBE.FinalModelAccount(buffer, 0);
         }
 
         // Get the allocation size
@@ -3051,7 +3053,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<StructSimple> Clone() { return new FinalModelStructSimple(_buffer, _offset); }
+        public override FBE.FinalModelValueType<StructSimple> Clone() { return new FinalModelStructSimple(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -3839,12 +3841,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSimple final model
-    public class StructSimpleFinalModel : Model
+    public class StructSimpleFinalModel : FBE.Model
     {
         private readonly FinalModelStructSimple _model;
 
         public StructSimpleFinalModel() { _model = new FinalModelStructSimple(Buffer, 8); }
-        public StructSimpleFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructSimple(Buffer, 8); }
+        public StructSimpleFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructSimple(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelStructSimple.FBETypeConst;
@@ -4146,11 +4148,11 @@ namespace com.chronoxor.test {
         public StructOptional Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new com.chronoxor.FBE.com.chronoxor.test.StructOptionalModel();
+            var writer = new FBE.test.StructOptionalModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new com.chronoxor.FBE.com.chronoxor.test.StructOptionalModel();
+            var reader = new FBE.test.StructOptionalModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -4277,7 +4279,7 @@ namespace com.chronoxor.test {
 
         public string ToJson()
         {
-            var json = com.chronoxor.FBE.Json.ToJson(this);
+            var json = FBE.Json.ToJson(this);
             var jsonParent = parent.ToJson();
             json = json.Substring(0, json.Length - 1) + "," + jsonParent.Substring(1, jsonParent.Length - 2) + "}";
             return json;
@@ -4285,12 +4287,12 @@ namespace com.chronoxor.test {
 
         public static StructOptional FromJson(string json)
         {
-            var result = com.chronoxor.FBE.Json.FromJson<StructOptional>(json);
+            var result = FBE.Json.FromJson<StructOptional>(json);
             result.parent = StructSimple.FromJson(json);
             return result;
         }
 
-        public static com.chronoxor.FBE.FieldModelValueType<StructOptional> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.com.chronoxor.test.FieldModelStructOptional(buffer, offset); }
+        public static FBE.FieldModelValueType<StructOptional> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructOptional(buffer, offset); }
     }
 
 } // namespace com.chronoxor.test
@@ -4300,145 +4302,145 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructOptional field model
-    public class FieldModelStructOptional : com.chronoxor.FBE.FieldModelValueType<StructOptional>
+    public class FieldModelStructOptional : FBE.FieldModelValueType<StructOptional>
     {
-        public readonly com.chronoxor.FBE.FieldModelStructSimple parent;
-        public readonly FieldModelOptionalValueType<bool, FieldModelValueType<bool>> f100;
-        public readonly FieldModelOptionalValueType<bool, FieldModelValueType<bool>> f101;
-        public readonly FieldModelOptionalValueType<bool, FieldModelValueType<bool>> f102;
-        public readonly FieldModelOptionalValueType<byte, FieldModelValueType<byte>> f103;
-        public readonly FieldModelOptionalValueType<byte, FieldModelValueType<byte>> f104;
-        public readonly FieldModelOptionalValueType<byte, FieldModelValueType<byte>> f105;
-        public readonly FieldModelOptionalValueType<char, FieldModelValueType<char>> f106;
-        public readonly FieldModelOptionalValueType<char, FieldModelValueType<char>> f107;
-        public readonly FieldModelOptionalValueType<char, FieldModelValueType<char>> f108;
-        public readonly FieldModelOptionalValueType<char, FieldModelValueType<char>> f109;
-        public readonly FieldModelOptionalValueType<char, FieldModelValueType<char>> f110;
-        public readonly FieldModelOptionalValueType<char, FieldModelValueType<char>> f111;
-        public readonly FieldModelOptionalValueType<sbyte, FieldModelValueType<sbyte>> f112;
-        public readonly FieldModelOptionalValueType<sbyte, FieldModelValueType<sbyte>> f113;
-        public readonly FieldModelOptionalValueType<sbyte, FieldModelValueType<sbyte>> f114;
-        public readonly FieldModelOptionalValueType<byte, FieldModelValueType<byte>> f115;
-        public readonly FieldModelOptionalValueType<byte, FieldModelValueType<byte>> f116;
-        public readonly FieldModelOptionalValueType<byte, FieldModelValueType<byte>> f117;
-        public readonly FieldModelOptionalValueType<short, FieldModelValueType<short>> f118;
-        public readonly FieldModelOptionalValueType<short, FieldModelValueType<short>> f119;
-        public readonly FieldModelOptionalValueType<short, FieldModelValueType<short>> f120;
-        public readonly FieldModelOptionalValueType<ushort, FieldModelValueType<ushort>> f121;
-        public readonly FieldModelOptionalValueType<ushort, FieldModelValueType<ushort>> f122;
-        public readonly FieldModelOptionalValueType<ushort, FieldModelValueType<ushort>> f123;
-        public readonly FieldModelOptionalValueType<int, FieldModelValueType<int>> f124;
-        public readonly FieldModelOptionalValueType<int, FieldModelValueType<int>> f125;
-        public readonly FieldModelOptionalValueType<int, FieldModelValueType<int>> f126;
-        public readonly FieldModelOptionalValueType<uint, FieldModelValueType<uint>> f127;
-        public readonly FieldModelOptionalValueType<uint, FieldModelValueType<uint>> f128;
-        public readonly FieldModelOptionalValueType<uint, FieldModelValueType<uint>> f129;
-        public readonly FieldModelOptionalValueType<long, FieldModelValueType<long>> f130;
-        public readonly FieldModelOptionalValueType<long, FieldModelValueType<long>> f131;
-        public readonly FieldModelOptionalValueType<long, FieldModelValueType<long>> f132;
-        public readonly FieldModelOptionalValueType<ulong, FieldModelValueType<ulong>> f133;
-        public readonly FieldModelOptionalValueType<ulong, FieldModelValueType<ulong>> f134;
-        public readonly FieldModelOptionalValueType<ulong, FieldModelValueType<ulong>> f135;
-        public readonly FieldModelOptionalValueType<float, FieldModelValueType<float>> f136;
-        public readonly FieldModelOptionalValueType<float, FieldModelValueType<float>> f137;
-        public readonly FieldModelOptionalValueType<float, FieldModelValueType<float>> f138;
-        public readonly FieldModelOptionalValueType<double, FieldModelValueType<double>> f139;
-        public readonly FieldModelOptionalValueType<double, FieldModelValueType<double>> f140;
-        public readonly FieldModelOptionalValueType<double, FieldModelValueType<double>> f141;
-        public readonly FieldModelOptionalValueType<decimal, FieldModelValueType<decimal>> f142;
-        public readonly FieldModelOptionalValueType<decimal, FieldModelValueType<decimal>> f143;
-        public readonly FieldModelOptionalValueType<decimal, FieldModelValueType<decimal>> f144;
-        public readonly FieldModelOptionalReferenceType<string, FieldModelReferenceType<string>> f145;
-        public readonly FieldModelOptionalReferenceType<string, FieldModelReferenceType<string>> f146;
-        public readonly FieldModelOptionalReferenceType<string, FieldModelReferenceType<string>> f147;
-        public readonly FieldModelOptionalValueType<DateTime, FieldModelValueType<DateTime>> f148;
-        public readonly FieldModelOptionalValueType<DateTime, FieldModelValueType<DateTime>> f149;
-        public readonly FieldModelOptionalValueType<DateTime, FieldModelValueType<DateTime>> f150;
-        public readonly FieldModelOptionalValueType<Guid, FieldModelValueType<Guid>> f151;
-        public readonly FieldModelOptionalValueType<Guid, FieldModelValueType<Guid>> f152;
-        public readonly FieldModelOptionalValueType<Guid, FieldModelValueType<Guid>> f153;
-        public readonly FieldModelOptionalValueType<proto.OrderSide, proto.FieldModelOrderSide> f154;
-        public readonly FieldModelOptionalValueType<proto.OrderSide, proto.FieldModelOrderSide> f155;
-        public readonly FieldModelOptionalValueType<proto.OrderType, proto.FieldModelOrderType> f156;
-        public readonly FieldModelOptionalValueType<proto.OrderType, proto.FieldModelOrderType> f157;
-        public readonly FieldModelOptionalValueType<proto.Order, proto.FieldModelOrder> f158;
-        public readonly FieldModelOptionalValueType<proto.Order, proto.FieldModelOrder> f159;
-        public readonly FieldModelOptionalValueType<proto.Balance, proto.FieldModelBalance> f160;
-        public readonly FieldModelOptionalValueType<proto.Balance, proto.FieldModelBalance> f161;
-        public readonly FieldModelOptionalValueType<proto.State, proto.FieldModelState> f162;
-        public readonly FieldModelOptionalValueType<proto.State, proto.FieldModelState> f163;
-        public readonly FieldModelOptionalValueType<proto.Account, proto.FieldModelAccount> f164;
-        public readonly FieldModelOptionalValueType<proto.Account, proto.FieldModelAccount> f165;
+        public readonly com.chronoxor.test.FBE.FieldModelStructSimple parent;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<bool, com.chronoxor.FBE.FieldModelValueType<bool>> f100;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<bool, com.chronoxor.FBE.FieldModelValueType<bool>> f101;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<bool, com.chronoxor.FBE.FieldModelValueType<bool>> f102;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>> f103;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>> f104;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>> f105;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<char, com.chronoxor.FBE.FieldModelValueType<char>> f106;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<char, com.chronoxor.FBE.FieldModelValueType<char>> f107;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<char, com.chronoxor.FBE.FieldModelValueType<char>> f108;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<char, com.chronoxor.FBE.FieldModelValueType<char>> f109;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<char, com.chronoxor.FBE.FieldModelValueType<char>> f110;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<char, com.chronoxor.FBE.FieldModelValueType<char>> f111;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<sbyte, com.chronoxor.FBE.FieldModelValueType<sbyte>> f112;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<sbyte, com.chronoxor.FBE.FieldModelValueType<sbyte>> f113;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<sbyte, com.chronoxor.FBE.FieldModelValueType<sbyte>> f114;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>> f115;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>> f116;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>> f117;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<short, com.chronoxor.FBE.FieldModelValueType<short>> f118;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<short, com.chronoxor.FBE.FieldModelValueType<short>> f119;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<short, com.chronoxor.FBE.FieldModelValueType<short>> f120;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<ushort, com.chronoxor.FBE.FieldModelValueType<ushort>> f121;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<ushort, com.chronoxor.FBE.FieldModelValueType<ushort>> f122;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<ushort, com.chronoxor.FBE.FieldModelValueType<ushort>> f123;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<int, com.chronoxor.FBE.FieldModelValueType<int>> f124;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<int, com.chronoxor.FBE.FieldModelValueType<int>> f125;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<int, com.chronoxor.FBE.FieldModelValueType<int>> f126;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<uint, com.chronoxor.FBE.FieldModelValueType<uint>> f127;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<uint, com.chronoxor.FBE.FieldModelValueType<uint>> f128;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<uint, com.chronoxor.FBE.FieldModelValueType<uint>> f129;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<long, com.chronoxor.FBE.FieldModelValueType<long>> f130;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<long, com.chronoxor.FBE.FieldModelValueType<long>> f131;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<long, com.chronoxor.FBE.FieldModelValueType<long>> f132;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<ulong, com.chronoxor.FBE.FieldModelValueType<ulong>> f133;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<ulong, com.chronoxor.FBE.FieldModelValueType<ulong>> f134;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<ulong, com.chronoxor.FBE.FieldModelValueType<ulong>> f135;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<float, com.chronoxor.FBE.FieldModelValueType<float>> f136;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<float, com.chronoxor.FBE.FieldModelValueType<float>> f137;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<float, com.chronoxor.FBE.FieldModelValueType<float>> f138;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<double, com.chronoxor.FBE.FieldModelValueType<double>> f139;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<double, com.chronoxor.FBE.FieldModelValueType<double>> f140;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<double, com.chronoxor.FBE.FieldModelValueType<double>> f141;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<decimal, com.chronoxor.FBE.FieldModelValueType<decimal>> f142;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<decimal, com.chronoxor.FBE.FieldModelValueType<decimal>> f143;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<decimal, com.chronoxor.FBE.FieldModelValueType<decimal>> f144;
+        public readonly com.chronoxor.FBE.FieldModelOptionalReferenceType<string, com.chronoxor.FBE.FieldModelReferenceType<string>> f145;
+        public readonly com.chronoxor.FBE.FieldModelOptionalReferenceType<string, com.chronoxor.FBE.FieldModelReferenceType<string>> f146;
+        public readonly com.chronoxor.FBE.FieldModelOptionalReferenceType<string, com.chronoxor.FBE.FieldModelReferenceType<string>> f147;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<DateTime, com.chronoxor.FBE.FieldModelValueType<DateTime>> f148;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<DateTime, com.chronoxor.FBE.FieldModelValueType<DateTime>> f149;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<DateTime, com.chronoxor.FBE.FieldModelValueType<DateTime>> f150;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<Guid, com.chronoxor.FBE.FieldModelValueType<Guid>> f151;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<Guid, com.chronoxor.FBE.FieldModelValueType<Guid>> f152;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<Guid, com.chronoxor.FBE.FieldModelValueType<Guid>> f153;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<proto.OrderSide, com.chronoxor.proto.FBE.FieldModelOrderSide> f154;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<proto.OrderSide, com.chronoxor.proto.FBE.FieldModelOrderSide> f155;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<proto.OrderType, com.chronoxor.proto.FBE.FieldModelOrderType> f156;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<proto.OrderType, com.chronoxor.proto.FBE.FieldModelOrderType> f157;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<proto.Order, com.chronoxor.proto.FBE.FieldModelOrder> f158;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<proto.Order, com.chronoxor.proto.FBE.FieldModelOrder> f159;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<proto.Balance, com.chronoxor.proto.FBE.FieldModelBalance> f160;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<proto.Balance, com.chronoxor.proto.FBE.FieldModelBalance> f161;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<proto.State, com.chronoxor.proto.FBE.FieldModelState> f162;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<proto.State, com.chronoxor.proto.FBE.FieldModelState> f163;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<proto.Account, com.chronoxor.proto.FBE.FieldModelAccount> f164;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<proto.Account, com.chronoxor.proto.FBE.FieldModelAccount> f165;
 
-        public FieldModelStructOptional(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelStructOptional(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            parent = new com.chronoxor.FBE.FieldModelStructSimple(buffer, 4 + 4);
-            f100 = new FieldModelOptionalValueType<bool, FieldModelValueType<bool>>(FieldModelValueType<bool>.CreateFieldModel(BaseTypes.BOOL, buffer, parent.FBEOffset + parent.FBEBody - 4 - 4), buffer, parent.FBEOffset + parent.FBEBody - 4 - 4);
-            f101 = new FieldModelOptionalValueType<bool, FieldModelValueType<bool>>(FieldModelValueType<bool>.CreateFieldModel(BaseTypes.BOOL, buffer, f100.FBEOffset + f100.FBESize), buffer, f100.FBEOffset + f100.FBESize);
-            f102 = new FieldModelOptionalValueType<bool, FieldModelValueType<bool>>(FieldModelValueType<bool>.CreateFieldModel(BaseTypes.BOOL, buffer, f101.FBEOffset + f101.FBESize), buffer, f101.FBEOffset + f101.FBESize);
-            f103 = new FieldModelOptionalValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f102.FBEOffset + f102.FBESize), buffer, f102.FBEOffset + f102.FBESize);
-            f104 = new FieldModelOptionalValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f103.FBEOffset + f103.FBESize), buffer, f103.FBEOffset + f103.FBESize);
-            f105 = new FieldModelOptionalValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f104.FBEOffset + f104.FBESize), buffer, f104.FBEOffset + f104.FBESize);
-            f106 = new FieldModelOptionalValueType<char, FieldModelValueType<char>>(FieldModelValueType<char>.CreateFieldModel(BaseTypes.CHAR, buffer, f105.FBEOffset + f105.FBESize), buffer, f105.FBEOffset + f105.FBESize);
-            f107 = new FieldModelOptionalValueType<char, FieldModelValueType<char>>(FieldModelValueType<char>.CreateFieldModel(BaseTypes.CHAR, buffer, f106.FBEOffset + f106.FBESize), buffer, f106.FBEOffset + f106.FBESize);
-            f108 = new FieldModelOptionalValueType<char, FieldModelValueType<char>>(FieldModelValueType<char>.CreateFieldModel(BaseTypes.CHAR, buffer, f107.FBEOffset + f107.FBESize), buffer, f107.FBEOffset + f107.FBESize);
-            f109 = new FieldModelOptionalValueType<char, FieldModelValueType<char>>(FieldModelValueType<char>.CreateFieldModel(BaseTypes.WCHAR, buffer, f108.FBEOffset + f108.FBESize), buffer, f108.FBEOffset + f108.FBESize);
-            f110 = new FieldModelOptionalValueType<char, FieldModelValueType<char>>(FieldModelValueType<char>.CreateFieldModel(BaseTypes.WCHAR, buffer, f109.FBEOffset + f109.FBESize), buffer, f109.FBEOffset + f109.FBESize);
-            f111 = new FieldModelOptionalValueType<char, FieldModelValueType<char>>(FieldModelValueType<char>.CreateFieldModel(BaseTypes.WCHAR, buffer, f110.FBEOffset + f110.FBESize), buffer, f110.FBEOffset + f110.FBESize);
-            f112 = new FieldModelOptionalValueType<sbyte, FieldModelValueType<sbyte>>(FieldModelValueType<sbyte>.CreateFieldModel(BaseTypes.INT8, buffer, f111.FBEOffset + f111.FBESize), buffer, f111.FBEOffset + f111.FBESize);
-            f113 = new FieldModelOptionalValueType<sbyte, FieldModelValueType<sbyte>>(FieldModelValueType<sbyte>.CreateFieldModel(BaseTypes.INT8, buffer, f112.FBEOffset + f112.FBESize), buffer, f112.FBEOffset + f112.FBESize);
-            f114 = new FieldModelOptionalValueType<sbyte, FieldModelValueType<sbyte>>(FieldModelValueType<sbyte>.CreateFieldModel(BaseTypes.INT8, buffer, f113.FBEOffset + f113.FBESize), buffer, f113.FBEOffset + f113.FBESize);
-            f115 = new FieldModelOptionalValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.UINT8, buffer, f114.FBEOffset + f114.FBESize), buffer, f114.FBEOffset + f114.FBESize);
-            f116 = new FieldModelOptionalValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.UINT8, buffer, f115.FBEOffset + f115.FBESize), buffer, f115.FBEOffset + f115.FBESize);
-            f117 = new FieldModelOptionalValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.UINT8, buffer, f116.FBEOffset + f116.FBESize), buffer, f116.FBEOffset + f116.FBESize);
-            f118 = new FieldModelOptionalValueType<short, FieldModelValueType<short>>(FieldModelValueType<short>.CreateFieldModel(BaseTypes.INT16, buffer, f117.FBEOffset + f117.FBESize), buffer, f117.FBEOffset + f117.FBESize);
-            f119 = new FieldModelOptionalValueType<short, FieldModelValueType<short>>(FieldModelValueType<short>.CreateFieldModel(BaseTypes.INT16, buffer, f118.FBEOffset + f118.FBESize), buffer, f118.FBEOffset + f118.FBESize);
-            f120 = new FieldModelOptionalValueType<short, FieldModelValueType<short>>(FieldModelValueType<short>.CreateFieldModel(BaseTypes.INT16, buffer, f119.FBEOffset + f119.FBESize), buffer, f119.FBEOffset + f119.FBESize);
-            f121 = new FieldModelOptionalValueType<ushort, FieldModelValueType<ushort>>(FieldModelValueType<ushort>.CreateFieldModel(BaseTypes.UINT16, buffer, f120.FBEOffset + f120.FBESize), buffer, f120.FBEOffset + f120.FBESize);
-            f122 = new FieldModelOptionalValueType<ushort, FieldModelValueType<ushort>>(FieldModelValueType<ushort>.CreateFieldModel(BaseTypes.UINT16, buffer, f121.FBEOffset + f121.FBESize), buffer, f121.FBEOffset + f121.FBESize);
-            f123 = new FieldModelOptionalValueType<ushort, FieldModelValueType<ushort>>(FieldModelValueType<ushort>.CreateFieldModel(BaseTypes.UINT16, buffer, f122.FBEOffset + f122.FBESize), buffer, f122.FBEOffset + f122.FBESize);
-            f124 = new FieldModelOptionalValueType<int, FieldModelValueType<int>>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f123.FBEOffset + f123.FBESize), buffer, f123.FBEOffset + f123.FBESize);
-            f125 = new FieldModelOptionalValueType<int, FieldModelValueType<int>>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f124.FBEOffset + f124.FBESize), buffer, f124.FBEOffset + f124.FBESize);
-            f126 = new FieldModelOptionalValueType<int, FieldModelValueType<int>>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f125.FBEOffset + f125.FBESize), buffer, f125.FBEOffset + f125.FBESize);
-            f127 = new FieldModelOptionalValueType<uint, FieldModelValueType<uint>>(FieldModelValueType<uint>.CreateFieldModel(BaseTypes.UINT32, buffer, f126.FBEOffset + f126.FBESize), buffer, f126.FBEOffset + f126.FBESize);
-            f128 = new FieldModelOptionalValueType<uint, FieldModelValueType<uint>>(FieldModelValueType<uint>.CreateFieldModel(BaseTypes.UINT32, buffer, f127.FBEOffset + f127.FBESize), buffer, f127.FBEOffset + f127.FBESize);
-            f129 = new FieldModelOptionalValueType<uint, FieldModelValueType<uint>>(FieldModelValueType<uint>.CreateFieldModel(BaseTypes.UINT32, buffer, f128.FBEOffset + f128.FBESize), buffer, f128.FBEOffset + f128.FBESize);
-            f130 = new FieldModelOptionalValueType<long, FieldModelValueType<long>>(FieldModelValueType<long>.CreateFieldModel(BaseTypes.INT64, buffer, f129.FBEOffset + f129.FBESize), buffer, f129.FBEOffset + f129.FBESize);
-            f131 = new FieldModelOptionalValueType<long, FieldModelValueType<long>>(FieldModelValueType<long>.CreateFieldModel(BaseTypes.INT64, buffer, f130.FBEOffset + f130.FBESize), buffer, f130.FBEOffset + f130.FBESize);
-            f132 = new FieldModelOptionalValueType<long, FieldModelValueType<long>>(FieldModelValueType<long>.CreateFieldModel(BaseTypes.INT64, buffer, f131.FBEOffset + f131.FBESize), buffer, f131.FBEOffset + f131.FBESize);
-            f133 = new FieldModelOptionalValueType<ulong, FieldModelValueType<ulong>>(FieldModelValueType<ulong>.CreateFieldModel(BaseTypes.UINT64, buffer, f132.FBEOffset + f132.FBESize), buffer, f132.FBEOffset + f132.FBESize);
-            f134 = new FieldModelOptionalValueType<ulong, FieldModelValueType<ulong>>(FieldModelValueType<ulong>.CreateFieldModel(BaseTypes.UINT64, buffer, f133.FBEOffset + f133.FBESize), buffer, f133.FBEOffset + f133.FBESize);
-            f135 = new FieldModelOptionalValueType<ulong, FieldModelValueType<ulong>>(FieldModelValueType<ulong>.CreateFieldModel(BaseTypes.UINT64, buffer, f134.FBEOffset + f134.FBESize), buffer, f134.FBEOffset + f134.FBESize);
-            f136 = new FieldModelOptionalValueType<float, FieldModelValueType<float>>(FieldModelValueType<float>.CreateFieldModel(BaseTypes.FLOAT, buffer, f135.FBEOffset + f135.FBESize), buffer, f135.FBEOffset + f135.FBESize);
-            f137 = new FieldModelOptionalValueType<float, FieldModelValueType<float>>(FieldModelValueType<float>.CreateFieldModel(BaseTypes.FLOAT, buffer, f136.FBEOffset + f136.FBESize), buffer, f136.FBEOffset + f136.FBESize);
-            f138 = new FieldModelOptionalValueType<float, FieldModelValueType<float>>(FieldModelValueType<float>.CreateFieldModel(BaseTypes.FLOAT, buffer, f137.FBEOffset + f137.FBESize), buffer, f137.FBEOffset + f137.FBESize);
-            f139 = new FieldModelOptionalValueType<double, FieldModelValueType<double>>(FieldModelValueType<double>.CreateFieldModel(BaseTypes.DOUBLE, buffer, f138.FBEOffset + f138.FBESize), buffer, f138.FBEOffset + f138.FBESize);
-            f140 = new FieldModelOptionalValueType<double, FieldModelValueType<double>>(FieldModelValueType<double>.CreateFieldModel(BaseTypes.DOUBLE, buffer, f139.FBEOffset + f139.FBESize), buffer, f139.FBEOffset + f139.FBESize);
-            f141 = new FieldModelOptionalValueType<double, FieldModelValueType<double>>(FieldModelValueType<double>.CreateFieldModel(BaseTypes.DOUBLE, buffer, f140.FBEOffset + f140.FBESize), buffer, f140.FBEOffset + f140.FBESize);
-            f142 = new FieldModelOptionalValueType<decimal, FieldModelValueType<decimal>>(FieldModelValueType<decimal>.CreateFieldModel(BaseTypes.DECIMAL, buffer, f141.FBEOffset + f141.FBESize), buffer, f141.FBEOffset + f141.FBESize);
-            f143 = new FieldModelOptionalValueType<decimal, FieldModelValueType<decimal>>(FieldModelValueType<decimal>.CreateFieldModel(BaseTypes.DECIMAL, buffer, f142.FBEOffset + f142.FBESize), buffer, f142.FBEOffset + f142.FBESize);
-            f144 = new FieldModelOptionalValueType<decimal, FieldModelValueType<decimal>>(FieldModelValueType<decimal>.CreateFieldModel(BaseTypes.DECIMAL, buffer, f143.FBEOffset + f143.FBESize), buffer, f143.FBEOffset + f143.FBESize);
-            f145 = new FieldModelOptionalReferenceType<string, FieldModelReferenceType<string>>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f144.FBEOffset + f144.FBESize), buffer, f144.FBEOffset + f144.FBESize);
-            f146 = new FieldModelOptionalReferenceType<string, FieldModelReferenceType<string>>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f145.FBEOffset + f145.FBESize), buffer, f145.FBEOffset + f145.FBESize);
-            f147 = new FieldModelOptionalReferenceType<string, FieldModelReferenceType<string>>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f146.FBEOffset + f146.FBESize), buffer, f146.FBEOffset + f146.FBESize);
-            f148 = new FieldModelOptionalValueType<DateTime, FieldModelValueType<DateTime>>(FieldModelValueType<DateTime>.CreateFieldModel(BaseTypes.TIMESTAMP, buffer, f147.FBEOffset + f147.FBESize), buffer, f147.FBEOffset + f147.FBESize);
-            f149 = new FieldModelOptionalValueType<DateTime, FieldModelValueType<DateTime>>(FieldModelValueType<DateTime>.CreateFieldModel(BaseTypes.TIMESTAMP, buffer, f148.FBEOffset + f148.FBESize), buffer, f148.FBEOffset + f148.FBESize);
-            f150 = new FieldModelOptionalValueType<DateTime, FieldModelValueType<DateTime>>(FieldModelValueType<DateTime>.CreateFieldModel(BaseTypes.TIMESTAMP, buffer, f149.FBEOffset + f149.FBESize), buffer, f149.FBEOffset + f149.FBESize);
-            f151 = new FieldModelOptionalValueType<Guid, FieldModelValueType<Guid>>(FieldModelValueType<Guid>.CreateFieldModel(BaseTypes.UUID, buffer, f150.FBEOffset + f150.FBESize), buffer, f150.FBEOffset + f150.FBESize);
-            f152 = new FieldModelOptionalValueType<Guid, FieldModelValueType<Guid>>(FieldModelValueType<Guid>.CreateFieldModel(BaseTypes.UUID, buffer, f151.FBEOffset + f151.FBESize), buffer, f151.FBEOffset + f151.FBESize);
-            f153 = new FieldModelOptionalValueType<Guid, FieldModelValueType<Guid>>(FieldModelValueType<Guid>.CreateFieldModel(BaseTypes.UUID, buffer, f152.FBEOffset + f152.FBESize), buffer, f152.FBEOffset + f152.FBESize);
-            f154 = new FieldModelOptionalValueType<proto.OrderSide, proto.FieldModelOrderSide>(new proto.FieldModelOrderSide(buffer, f153.FBEOffset + f153.FBESize), buffer, f153.FBEOffset + f153.FBESize);
-            f155 = new FieldModelOptionalValueType<proto.OrderSide, proto.FieldModelOrderSide>(new proto.FieldModelOrderSide(buffer, f154.FBEOffset + f154.FBESize), buffer, f154.FBEOffset + f154.FBESize);
-            f156 = new FieldModelOptionalValueType<proto.OrderType, proto.FieldModelOrderType>(new proto.FieldModelOrderType(buffer, f155.FBEOffset + f155.FBESize), buffer, f155.FBEOffset + f155.FBESize);
-            f157 = new FieldModelOptionalValueType<proto.OrderType, proto.FieldModelOrderType>(new proto.FieldModelOrderType(buffer, f156.FBEOffset + f156.FBESize), buffer, f156.FBEOffset + f156.FBESize);
-            f158 = new FieldModelOptionalValueType<proto.Order, proto.FieldModelOrder>(new proto.FieldModelOrder(buffer, f157.FBEOffset + f157.FBESize), buffer, f157.FBEOffset + f157.FBESize);
-            f159 = new FieldModelOptionalValueType<proto.Order, proto.FieldModelOrder>(new proto.FieldModelOrder(buffer, f158.FBEOffset + f158.FBESize), buffer, f158.FBEOffset + f158.FBESize);
-            f160 = new FieldModelOptionalValueType<proto.Balance, proto.FieldModelBalance>(new proto.FieldModelBalance(buffer, f159.FBEOffset + f159.FBESize), buffer, f159.FBEOffset + f159.FBESize);
-            f161 = new FieldModelOptionalValueType<proto.Balance, proto.FieldModelBalance>(new proto.FieldModelBalance(buffer, f160.FBEOffset + f160.FBESize), buffer, f160.FBEOffset + f160.FBESize);
-            f162 = new FieldModelOptionalValueType<proto.State, proto.FieldModelState>(new proto.FieldModelState(buffer, f161.FBEOffset + f161.FBESize), buffer, f161.FBEOffset + f161.FBESize);
-            f163 = new FieldModelOptionalValueType<proto.State, proto.FieldModelState>(new proto.FieldModelState(buffer, f162.FBEOffset + f162.FBESize), buffer, f162.FBEOffset + f162.FBESize);
-            f164 = new FieldModelOptionalValueType<proto.Account, proto.FieldModelAccount>(new proto.FieldModelAccount(buffer, f163.FBEOffset + f163.FBESize), buffer, f163.FBEOffset + f163.FBESize);
-            f165 = new FieldModelOptionalValueType<proto.Account, proto.FieldModelAccount>(new proto.FieldModelAccount(buffer, f164.FBEOffset + f164.FBESize), buffer, f164.FBEOffset + f164.FBESize);
+            parent = new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, 4 + 4);
+            f100 = new com.chronoxor.FBE.FieldModelOptionalValueType<bool, com.chronoxor.FBE.FieldModelValueType<bool>>(com.chronoxor.FBE.FieldModelValueType<bool>.CreateFieldModel(FBE.BaseTypes.BOOL, buffer, parent.FBEOffset + parent.FBEBody - 4 - 4), buffer, parent.FBEOffset + parent.FBEBody - 4 - 4);
+            f101 = new com.chronoxor.FBE.FieldModelOptionalValueType<bool, com.chronoxor.FBE.FieldModelValueType<bool>>(com.chronoxor.FBE.FieldModelValueType<bool>.CreateFieldModel(FBE.BaseTypes.BOOL, buffer, f100.FBEOffset + f100.FBESize), buffer, f100.FBEOffset + f100.FBESize);
+            f102 = new com.chronoxor.FBE.FieldModelOptionalValueType<bool, com.chronoxor.FBE.FieldModelValueType<bool>>(com.chronoxor.FBE.FieldModelValueType<bool>.CreateFieldModel(FBE.BaseTypes.BOOL, buffer, f101.FBEOffset + f101.FBESize), buffer, f101.FBEOffset + f101.FBESize);
+            f103 = new com.chronoxor.FBE.FieldModelOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, f102.FBEOffset + f102.FBESize), buffer, f102.FBEOffset + f102.FBESize);
+            f104 = new com.chronoxor.FBE.FieldModelOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, f103.FBEOffset + f103.FBESize), buffer, f103.FBEOffset + f103.FBESize);
+            f105 = new com.chronoxor.FBE.FieldModelOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, f104.FBEOffset + f104.FBESize), buffer, f104.FBEOffset + f104.FBESize);
+            f106 = new com.chronoxor.FBE.FieldModelOptionalValueType<char, com.chronoxor.FBE.FieldModelValueType<char>>(com.chronoxor.FBE.FieldModelValueType<char>.CreateFieldModel(FBE.BaseTypes.CHAR, buffer, f105.FBEOffset + f105.FBESize), buffer, f105.FBEOffset + f105.FBESize);
+            f107 = new com.chronoxor.FBE.FieldModelOptionalValueType<char, com.chronoxor.FBE.FieldModelValueType<char>>(com.chronoxor.FBE.FieldModelValueType<char>.CreateFieldModel(FBE.BaseTypes.CHAR, buffer, f106.FBEOffset + f106.FBESize), buffer, f106.FBEOffset + f106.FBESize);
+            f108 = new com.chronoxor.FBE.FieldModelOptionalValueType<char, com.chronoxor.FBE.FieldModelValueType<char>>(com.chronoxor.FBE.FieldModelValueType<char>.CreateFieldModel(FBE.BaseTypes.CHAR, buffer, f107.FBEOffset + f107.FBESize), buffer, f107.FBEOffset + f107.FBESize);
+            f109 = new com.chronoxor.FBE.FieldModelOptionalValueType<char, com.chronoxor.FBE.FieldModelValueType<char>>(com.chronoxor.FBE.FieldModelValueType<char>.CreateFieldModel(FBE.BaseTypes.WCHAR, buffer, f108.FBEOffset + f108.FBESize), buffer, f108.FBEOffset + f108.FBESize);
+            f110 = new com.chronoxor.FBE.FieldModelOptionalValueType<char, com.chronoxor.FBE.FieldModelValueType<char>>(com.chronoxor.FBE.FieldModelValueType<char>.CreateFieldModel(FBE.BaseTypes.WCHAR, buffer, f109.FBEOffset + f109.FBESize), buffer, f109.FBEOffset + f109.FBESize);
+            f111 = new com.chronoxor.FBE.FieldModelOptionalValueType<char, com.chronoxor.FBE.FieldModelValueType<char>>(com.chronoxor.FBE.FieldModelValueType<char>.CreateFieldModel(FBE.BaseTypes.WCHAR, buffer, f110.FBEOffset + f110.FBESize), buffer, f110.FBEOffset + f110.FBESize);
+            f112 = new com.chronoxor.FBE.FieldModelOptionalValueType<sbyte, com.chronoxor.FBE.FieldModelValueType<sbyte>>(com.chronoxor.FBE.FieldModelValueType<sbyte>.CreateFieldModel(FBE.BaseTypes.INT8, buffer, f111.FBEOffset + f111.FBESize), buffer, f111.FBEOffset + f111.FBESize);
+            f113 = new com.chronoxor.FBE.FieldModelOptionalValueType<sbyte, com.chronoxor.FBE.FieldModelValueType<sbyte>>(com.chronoxor.FBE.FieldModelValueType<sbyte>.CreateFieldModel(FBE.BaseTypes.INT8, buffer, f112.FBEOffset + f112.FBESize), buffer, f112.FBEOffset + f112.FBESize);
+            f114 = new com.chronoxor.FBE.FieldModelOptionalValueType<sbyte, com.chronoxor.FBE.FieldModelValueType<sbyte>>(com.chronoxor.FBE.FieldModelValueType<sbyte>.CreateFieldModel(FBE.BaseTypes.INT8, buffer, f113.FBEOffset + f113.FBESize), buffer, f113.FBEOffset + f113.FBESize);
+            f115 = new com.chronoxor.FBE.FieldModelOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.UINT8, buffer, f114.FBEOffset + f114.FBESize), buffer, f114.FBEOffset + f114.FBESize);
+            f116 = new com.chronoxor.FBE.FieldModelOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.UINT8, buffer, f115.FBEOffset + f115.FBESize), buffer, f115.FBEOffset + f115.FBESize);
+            f117 = new com.chronoxor.FBE.FieldModelOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.UINT8, buffer, f116.FBEOffset + f116.FBESize), buffer, f116.FBEOffset + f116.FBESize);
+            f118 = new com.chronoxor.FBE.FieldModelOptionalValueType<short, com.chronoxor.FBE.FieldModelValueType<short>>(com.chronoxor.FBE.FieldModelValueType<short>.CreateFieldModel(FBE.BaseTypes.INT16, buffer, f117.FBEOffset + f117.FBESize), buffer, f117.FBEOffset + f117.FBESize);
+            f119 = new com.chronoxor.FBE.FieldModelOptionalValueType<short, com.chronoxor.FBE.FieldModelValueType<short>>(com.chronoxor.FBE.FieldModelValueType<short>.CreateFieldModel(FBE.BaseTypes.INT16, buffer, f118.FBEOffset + f118.FBESize), buffer, f118.FBEOffset + f118.FBESize);
+            f120 = new com.chronoxor.FBE.FieldModelOptionalValueType<short, com.chronoxor.FBE.FieldModelValueType<short>>(com.chronoxor.FBE.FieldModelValueType<short>.CreateFieldModel(FBE.BaseTypes.INT16, buffer, f119.FBEOffset + f119.FBESize), buffer, f119.FBEOffset + f119.FBESize);
+            f121 = new com.chronoxor.FBE.FieldModelOptionalValueType<ushort, com.chronoxor.FBE.FieldModelValueType<ushort>>(com.chronoxor.FBE.FieldModelValueType<ushort>.CreateFieldModel(FBE.BaseTypes.UINT16, buffer, f120.FBEOffset + f120.FBESize), buffer, f120.FBEOffset + f120.FBESize);
+            f122 = new com.chronoxor.FBE.FieldModelOptionalValueType<ushort, com.chronoxor.FBE.FieldModelValueType<ushort>>(com.chronoxor.FBE.FieldModelValueType<ushort>.CreateFieldModel(FBE.BaseTypes.UINT16, buffer, f121.FBEOffset + f121.FBESize), buffer, f121.FBEOffset + f121.FBESize);
+            f123 = new com.chronoxor.FBE.FieldModelOptionalValueType<ushort, com.chronoxor.FBE.FieldModelValueType<ushort>>(com.chronoxor.FBE.FieldModelValueType<ushort>.CreateFieldModel(FBE.BaseTypes.UINT16, buffer, f122.FBEOffset + f122.FBESize), buffer, f122.FBEOffset + f122.FBESize);
+            f124 = new com.chronoxor.FBE.FieldModelOptionalValueType<int, com.chronoxor.FBE.FieldModelValueType<int>>(com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, f123.FBEOffset + f123.FBESize), buffer, f123.FBEOffset + f123.FBESize);
+            f125 = new com.chronoxor.FBE.FieldModelOptionalValueType<int, com.chronoxor.FBE.FieldModelValueType<int>>(com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, f124.FBEOffset + f124.FBESize), buffer, f124.FBEOffset + f124.FBESize);
+            f126 = new com.chronoxor.FBE.FieldModelOptionalValueType<int, com.chronoxor.FBE.FieldModelValueType<int>>(com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, f125.FBEOffset + f125.FBESize), buffer, f125.FBEOffset + f125.FBESize);
+            f127 = new com.chronoxor.FBE.FieldModelOptionalValueType<uint, com.chronoxor.FBE.FieldModelValueType<uint>>(com.chronoxor.FBE.FieldModelValueType<uint>.CreateFieldModel(FBE.BaseTypes.UINT32, buffer, f126.FBEOffset + f126.FBESize), buffer, f126.FBEOffset + f126.FBESize);
+            f128 = new com.chronoxor.FBE.FieldModelOptionalValueType<uint, com.chronoxor.FBE.FieldModelValueType<uint>>(com.chronoxor.FBE.FieldModelValueType<uint>.CreateFieldModel(FBE.BaseTypes.UINT32, buffer, f127.FBEOffset + f127.FBESize), buffer, f127.FBEOffset + f127.FBESize);
+            f129 = new com.chronoxor.FBE.FieldModelOptionalValueType<uint, com.chronoxor.FBE.FieldModelValueType<uint>>(com.chronoxor.FBE.FieldModelValueType<uint>.CreateFieldModel(FBE.BaseTypes.UINT32, buffer, f128.FBEOffset + f128.FBESize), buffer, f128.FBEOffset + f128.FBESize);
+            f130 = new com.chronoxor.FBE.FieldModelOptionalValueType<long, com.chronoxor.FBE.FieldModelValueType<long>>(com.chronoxor.FBE.FieldModelValueType<long>.CreateFieldModel(FBE.BaseTypes.INT64, buffer, f129.FBEOffset + f129.FBESize), buffer, f129.FBEOffset + f129.FBESize);
+            f131 = new com.chronoxor.FBE.FieldModelOptionalValueType<long, com.chronoxor.FBE.FieldModelValueType<long>>(com.chronoxor.FBE.FieldModelValueType<long>.CreateFieldModel(FBE.BaseTypes.INT64, buffer, f130.FBEOffset + f130.FBESize), buffer, f130.FBEOffset + f130.FBESize);
+            f132 = new com.chronoxor.FBE.FieldModelOptionalValueType<long, com.chronoxor.FBE.FieldModelValueType<long>>(com.chronoxor.FBE.FieldModelValueType<long>.CreateFieldModel(FBE.BaseTypes.INT64, buffer, f131.FBEOffset + f131.FBESize), buffer, f131.FBEOffset + f131.FBESize);
+            f133 = new com.chronoxor.FBE.FieldModelOptionalValueType<ulong, com.chronoxor.FBE.FieldModelValueType<ulong>>(com.chronoxor.FBE.FieldModelValueType<ulong>.CreateFieldModel(FBE.BaseTypes.UINT64, buffer, f132.FBEOffset + f132.FBESize), buffer, f132.FBEOffset + f132.FBESize);
+            f134 = new com.chronoxor.FBE.FieldModelOptionalValueType<ulong, com.chronoxor.FBE.FieldModelValueType<ulong>>(com.chronoxor.FBE.FieldModelValueType<ulong>.CreateFieldModel(FBE.BaseTypes.UINT64, buffer, f133.FBEOffset + f133.FBESize), buffer, f133.FBEOffset + f133.FBESize);
+            f135 = new com.chronoxor.FBE.FieldModelOptionalValueType<ulong, com.chronoxor.FBE.FieldModelValueType<ulong>>(com.chronoxor.FBE.FieldModelValueType<ulong>.CreateFieldModel(FBE.BaseTypes.UINT64, buffer, f134.FBEOffset + f134.FBESize), buffer, f134.FBEOffset + f134.FBESize);
+            f136 = new com.chronoxor.FBE.FieldModelOptionalValueType<float, com.chronoxor.FBE.FieldModelValueType<float>>(com.chronoxor.FBE.FieldModelValueType<float>.CreateFieldModel(FBE.BaseTypes.FLOAT, buffer, f135.FBEOffset + f135.FBESize), buffer, f135.FBEOffset + f135.FBESize);
+            f137 = new com.chronoxor.FBE.FieldModelOptionalValueType<float, com.chronoxor.FBE.FieldModelValueType<float>>(com.chronoxor.FBE.FieldModelValueType<float>.CreateFieldModel(FBE.BaseTypes.FLOAT, buffer, f136.FBEOffset + f136.FBESize), buffer, f136.FBEOffset + f136.FBESize);
+            f138 = new com.chronoxor.FBE.FieldModelOptionalValueType<float, com.chronoxor.FBE.FieldModelValueType<float>>(com.chronoxor.FBE.FieldModelValueType<float>.CreateFieldModel(FBE.BaseTypes.FLOAT, buffer, f137.FBEOffset + f137.FBESize), buffer, f137.FBEOffset + f137.FBESize);
+            f139 = new com.chronoxor.FBE.FieldModelOptionalValueType<double, com.chronoxor.FBE.FieldModelValueType<double>>(com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(FBE.BaseTypes.DOUBLE, buffer, f138.FBEOffset + f138.FBESize), buffer, f138.FBEOffset + f138.FBESize);
+            f140 = new com.chronoxor.FBE.FieldModelOptionalValueType<double, com.chronoxor.FBE.FieldModelValueType<double>>(com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(FBE.BaseTypes.DOUBLE, buffer, f139.FBEOffset + f139.FBESize), buffer, f139.FBEOffset + f139.FBESize);
+            f141 = new com.chronoxor.FBE.FieldModelOptionalValueType<double, com.chronoxor.FBE.FieldModelValueType<double>>(com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(FBE.BaseTypes.DOUBLE, buffer, f140.FBEOffset + f140.FBESize), buffer, f140.FBEOffset + f140.FBESize);
+            f142 = new com.chronoxor.FBE.FieldModelOptionalValueType<decimal, com.chronoxor.FBE.FieldModelValueType<decimal>>(com.chronoxor.FBE.FieldModelValueType<decimal>.CreateFieldModel(FBE.BaseTypes.DECIMAL, buffer, f141.FBEOffset + f141.FBESize), buffer, f141.FBEOffset + f141.FBESize);
+            f143 = new com.chronoxor.FBE.FieldModelOptionalValueType<decimal, com.chronoxor.FBE.FieldModelValueType<decimal>>(com.chronoxor.FBE.FieldModelValueType<decimal>.CreateFieldModel(FBE.BaseTypes.DECIMAL, buffer, f142.FBEOffset + f142.FBESize), buffer, f142.FBEOffset + f142.FBESize);
+            f144 = new com.chronoxor.FBE.FieldModelOptionalValueType<decimal, com.chronoxor.FBE.FieldModelValueType<decimal>>(com.chronoxor.FBE.FieldModelValueType<decimal>.CreateFieldModel(FBE.BaseTypes.DECIMAL, buffer, f143.FBEOffset + f143.FBESize), buffer, f143.FBEOffset + f143.FBESize);
+            f145 = new com.chronoxor.FBE.FieldModelOptionalReferenceType<string, com.chronoxor.FBE.FieldModelReferenceType<string>>(com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, f144.FBEOffset + f144.FBESize), buffer, f144.FBEOffset + f144.FBESize);
+            f146 = new com.chronoxor.FBE.FieldModelOptionalReferenceType<string, com.chronoxor.FBE.FieldModelReferenceType<string>>(com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, f145.FBEOffset + f145.FBESize), buffer, f145.FBEOffset + f145.FBESize);
+            f147 = new com.chronoxor.FBE.FieldModelOptionalReferenceType<string, com.chronoxor.FBE.FieldModelReferenceType<string>>(com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, f146.FBEOffset + f146.FBESize), buffer, f146.FBEOffset + f146.FBESize);
+            f148 = new com.chronoxor.FBE.FieldModelOptionalValueType<DateTime, com.chronoxor.FBE.FieldModelValueType<DateTime>>(com.chronoxor.FBE.FieldModelValueType<DateTime>.CreateFieldModel(FBE.BaseTypes.TIMESTAMP, buffer, f147.FBEOffset + f147.FBESize), buffer, f147.FBEOffset + f147.FBESize);
+            f149 = new com.chronoxor.FBE.FieldModelOptionalValueType<DateTime, com.chronoxor.FBE.FieldModelValueType<DateTime>>(com.chronoxor.FBE.FieldModelValueType<DateTime>.CreateFieldModel(FBE.BaseTypes.TIMESTAMP, buffer, f148.FBEOffset + f148.FBESize), buffer, f148.FBEOffset + f148.FBESize);
+            f150 = new com.chronoxor.FBE.FieldModelOptionalValueType<DateTime, com.chronoxor.FBE.FieldModelValueType<DateTime>>(com.chronoxor.FBE.FieldModelValueType<DateTime>.CreateFieldModel(FBE.BaseTypes.TIMESTAMP, buffer, f149.FBEOffset + f149.FBESize), buffer, f149.FBEOffset + f149.FBESize);
+            f151 = new com.chronoxor.FBE.FieldModelOptionalValueType<Guid, com.chronoxor.FBE.FieldModelValueType<Guid>>(com.chronoxor.FBE.FieldModelValueType<Guid>.CreateFieldModel(FBE.BaseTypes.UUID, buffer, f150.FBEOffset + f150.FBESize), buffer, f150.FBEOffset + f150.FBESize);
+            f152 = new com.chronoxor.FBE.FieldModelOptionalValueType<Guid, com.chronoxor.FBE.FieldModelValueType<Guid>>(com.chronoxor.FBE.FieldModelValueType<Guid>.CreateFieldModel(FBE.BaseTypes.UUID, buffer, f151.FBEOffset + f151.FBESize), buffer, f151.FBEOffset + f151.FBESize);
+            f153 = new com.chronoxor.FBE.FieldModelOptionalValueType<Guid, com.chronoxor.FBE.FieldModelValueType<Guid>>(com.chronoxor.FBE.FieldModelValueType<Guid>.CreateFieldModel(FBE.BaseTypes.UUID, buffer, f152.FBEOffset + f152.FBESize), buffer, f152.FBEOffset + f152.FBESize);
+            f154 = new com.chronoxor.FBE.FieldModelOptionalValueType<proto.OrderSide, com.chronoxor.proto.FBE.FieldModelOrderSide>(new com.chronoxor.proto.FBE.FieldModelOrderSide(buffer, f153.FBEOffset + f153.FBESize), buffer, f153.FBEOffset + f153.FBESize);
+            f155 = new com.chronoxor.FBE.FieldModelOptionalValueType<proto.OrderSide, com.chronoxor.proto.FBE.FieldModelOrderSide>(new com.chronoxor.proto.FBE.FieldModelOrderSide(buffer, f154.FBEOffset + f154.FBESize), buffer, f154.FBEOffset + f154.FBESize);
+            f156 = new com.chronoxor.FBE.FieldModelOptionalValueType<proto.OrderType, com.chronoxor.proto.FBE.FieldModelOrderType>(new com.chronoxor.proto.FBE.FieldModelOrderType(buffer, f155.FBEOffset + f155.FBESize), buffer, f155.FBEOffset + f155.FBESize);
+            f157 = new com.chronoxor.FBE.FieldModelOptionalValueType<proto.OrderType, com.chronoxor.proto.FBE.FieldModelOrderType>(new com.chronoxor.proto.FBE.FieldModelOrderType(buffer, f156.FBEOffset + f156.FBESize), buffer, f156.FBEOffset + f156.FBESize);
+            f158 = new com.chronoxor.FBE.FieldModelOptionalValueType<proto.Order, com.chronoxor.proto.FBE.FieldModelOrder>(new com.chronoxor.proto.FBE.FieldModelOrder(buffer, f157.FBEOffset + f157.FBESize), buffer, f157.FBEOffset + f157.FBESize);
+            f159 = new com.chronoxor.FBE.FieldModelOptionalValueType<proto.Order, com.chronoxor.proto.FBE.FieldModelOrder>(new com.chronoxor.proto.FBE.FieldModelOrder(buffer, f158.FBEOffset + f158.FBESize), buffer, f158.FBEOffset + f158.FBESize);
+            f160 = new com.chronoxor.FBE.FieldModelOptionalValueType<proto.Balance, com.chronoxor.proto.FBE.FieldModelBalance>(new com.chronoxor.proto.FBE.FieldModelBalance(buffer, f159.FBEOffset + f159.FBESize), buffer, f159.FBEOffset + f159.FBESize);
+            f161 = new com.chronoxor.FBE.FieldModelOptionalValueType<proto.Balance, com.chronoxor.proto.FBE.FieldModelBalance>(new com.chronoxor.proto.FBE.FieldModelBalance(buffer, f160.FBEOffset + f160.FBESize), buffer, f160.FBEOffset + f160.FBESize);
+            f162 = new com.chronoxor.FBE.FieldModelOptionalValueType<proto.State, com.chronoxor.proto.FBE.FieldModelState>(new com.chronoxor.proto.FBE.FieldModelState(buffer, f161.FBEOffset + f161.FBESize), buffer, f161.FBEOffset + f161.FBESize);
+            f163 = new com.chronoxor.FBE.FieldModelOptionalValueType<proto.State, com.chronoxor.proto.FBE.FieldModelState>(new com.chronoxor.proto.FBE.FieldModelState(buffer, f162.FBEOffset + f162.FBESize), buffer, f162.FBEOffset + f162.FBESize);
+            f164 = new com.chronoxor.FBE.FieldModelOptionalValueType<proto.Account, com.chronoxor.proto.FBE.FieldModelAccount>(new com.chronoxor.proto.FBE.FieldModelAccount(buffer, f163.FBEOffset + f163.FBESize), buffer, f163.FBEOffset + f163.FBESize);
+            f165 = new com.chronoxor.FBE.FieldModelOptionalValueType<proto.Account, com.chronoxor.proto.FBE.FieldModelAccount>(new com.chronoxor.proto.FBE.FieldModelAccount(buffer, f164.FBEOffset + f164.FBESize), buffer, f164.FBEOffset + f164.FBESize);
         }
 
         // Get the field size
@@ -4614,7 +4616,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<StructOptional> Clone() { return new FieldModelStructOptional(_buffer, _offset); }
+        public override FBE.FieldModelValueType<StructOptional> Clone() { return new FieldModelStructOptional(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -5619,12 +5621,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructOptional model
-    public class StructOptionalModel : Model
+    public class StructOptionalModel : FBE.Model
     {
         public readonly FieldModelStructOptional model;
 
         public StructOptionalModel() { model = new FieldModelStructOptional(Buffer, 4); }
-        public StructOptionalModel(Buffer buffer) : base(buffer) { model = new FieldModelStructOptional(Buffer, 4); }
+        public StructOptionalModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelStructOptional(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -5705,145 +5707,145 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructOptional final model
-    public class FinalModelStructOptional : com.chronoxor.FBE.FinalModelValueType<StructOptional>
+    public class FinalModelStructOptional : FBE.FinalModelValueType<StructOptional>
     {
-        public readonly com.chronoxor.FBE.FinalModelStructSimple parent;
-        public readonly FinalModelOptionalValueType<bool, FinalModelValueType<bool>> f100;
-        public readonly FinalModelOptionalValueType<bool, FinalModelValueType<bool>> f101;
-        public readonly FinalModelOptionalValueType<bool, FinalModelValueType<bool>> f102;
-        public readonly FinalModelOptionalValueType<byte, FinalModelValueType<byte>> f103;
-        public readonly FinalModelOptionalValueType<byte, FinalModelValueType<byte>> f104;
-        public readonly FinalModelOptionalValueType<byte, FinalModelValueType<byte>> f105;
-        public readonly FinalModelOptionalValueType<char, FinalModelValueType<char>> f106;
-        public readonly FinalModelOptionalValueType<char, FinalModelValueType<char>> f107;
-        public readonly FinalModelOptionalValueType<char, FinalModelValueType<char>> f108;
-        public readonly FinalModelOptionalValueType<char, FinalModelValueType<char>> f109;
-        public readonly FinalModelOptionalValueType<char, FinalModelValueType<char>> f110;
-        public readonly FinalModelOptionalValueType<char, FinalModelValueType<char>> f111;
-        public readonly FinalModelOptionalValueType<sbyte, FinalModelValueType<sbyte>> f112;
-        public readonly FinalModelOptionalValueType<sbyte, FinalModelValueType<sbyte>> f113;
-        public readonly FinalModelOptionalValueType<sbyte, FinalModelValueType<sbyte>> f114;
-        public readonly FinalModelOptionalValueType<byte, FinalModelValueType<byte>> f115;
-        public readonly FinalModelOptionalValueType<byte, FinalModelValueType<byte>> f116;
-        public readonly FinalModelOptionalValueType<byte, FinalModelValueType<byte>> f117;
-        public readonly FinalModelOptionalValueType<short, FinalModelValueType<short>> f118;
-        public readonly FinalModelOptionalValueType<short, FinalModelValueType<short>> f119;
-        public readonly FinalModelOptionalValueType<short, FinalModelValueType<short>> f120;
-        public readonly FinalModelOptionalValueType<ushort, FinalModelValueType<ushort>> f121;
-        public readonly FinalModelOptionalValueType<ushort, FinalModelValueType<ushort>> f122;
-        public readonly FinalModelOptionalValueType<ushort, FinalModelValueType<ushort>> f123;
-        public readonly FinalModelOptionalValueType<int, FinalModelValueType<int>> f124;
-        public readonly FinalModelOptionalValueType<int, FinalModelValueType<int>> f125;
-        public readonly FinalModelOptionalValueType<int, FinalModelValueType<int>> f126;
-        public readonly FinalModelOptionalValueType<uint, FinalModelValueType<uint>> f127;
-        public readonly FinalModelOptionalValueType<uint, FinalModelValueType<uint>> f128;
-        public readonly FinalModelOptionalValueType<uint, FinalModelValueType<uint>> f129;
-        public readonly FinalModelOptionalValueType<long, FinalModelValueType<long>> f130;
-        public readonly FinalModelOptionalValueType<long, FinalModelValueType<long>> f131;
-        public readonly FinalModelOptionalValueType<long, FinalModelValueType<long>> f132;
-        public readonly FinalModelOptionalValueType<ulong, FinalModelValueType<ulong>> f133;
-        public readonly FinalModelOptionalValueType<ulong, FinalModelValueType<ulong>> f134;
-        public readonly FinalModelOptionalValueType<ulong, FinalModelValueType<ulong>> f135;
-        public readonly FinalModelOptionalValueType<float, FinalModelValueType<float>> f136;
-        public readonly FinalModelOptionalValueType<float, FinalModelValueType<float>> f137;
-        public readonly FinalModelOptionalValueType<float, FinalModelValueType<float>> f138;
-        public readonly FinalModelOptionalValueType<double, FinalModelValueType<double>> f139;
-        public readonly FinalModelOptionalValueType<double, FinalModelValueType<double>> f140;
-        public readonly FinalModelOptionalValueType<double, FinalModelValueType<double>> f141;
-        public readonly FinalModelOptionalValueType<decimal, FinalModelValueType<decimal>> f142;
-        public readonly FinalModelOptionalValueType<decimal, FinalModelValueType<decimal>> f143;
-        public readonly FinalModelOptionalValueType<decimal, FinalModelValueType<decimal>> f144;
-        public readonly FinalModelOptionalReferenceType<string, FinalModelReferenceType<string>> f145;
-        public readonly FinalModelOptionalReferenceType<string, FinalModelReferenceType<string>> f146;
-        public readonly FinalModelOptionalReferenceType<string, FinalModelReferenceType<string>> f147;
-        public readonly FinalModelOptionalValueType<DateTime, FinalModelValueType<DateTime>> f148;
-        public readonly FinalModelOptionalValueType<DateTime, FinalModelValueType<DateTime>> f149;
-        public readonly FinalModelOptionalValueType<DateTime, FinalModelValueType<DateTime>> f150;
-        public readonly FinalModelOptionalValueType<Guid, FinalModelValueType<Guid>> f151;
-        public readonly FinalModelOptionalValueType<Guid, FinalModelValueType<Guid>> f152;
-        public readonly FinalModelOptionalValueType<Guid, FinalModelValueType<Guid>> f153;
-        public readonly FinalModelOptionalValueType<proto.OrderSide, proto.FinalModelOrderSide> f154;
-        public readonly FinalModelOptionalValueType<proto.OrderSide, proto.FinalModelOrderSide> f155;
-        public readonly FinalModelOptionalValueType<proto.OrderType, proto.FinalModelOrderType> f156;
-        public readonly FinalModelOptionalValueType<proto.OrderType, proto.FinalModelOrderType> f157;
-        public readonly FinalModelOptionalValueType<proto.Order, proto.FinalModelOrder> f158;
-        public readonly FinalModelOptionalValueType<proto.Order, proto.FinalModelOrder> f159;
-        public readonly FinalModelOptionalValueType<proto.Balance, proto.FinalModelBalance> f160;
-        public readonly FinalModelOptionalValueType<proto.Balance, proto.FinalModelBalance> f161;
-        public readonly FinalModelOptionalValueType<proto.State, proto.FinalModelState> f162;
-        public readonly FinalModelOptionalValueType<proto.State, proto.FinalModelState> f163;
-        public readonly FinalModelOptionalValueType<proto.Account, proto.FinalModelAccount> f164;
-        public readonly FinalModelOptionalValueType<proto.Account, proto.FinalModelAccount> f165;
+        public readonly com.chronoxor.test.FBE.FinalModelStructSimple parent;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<bool, com.chronoxor.FBE.FinalModelValueType<bool>> f100;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<bool, com.chronoxor.FBE.FinalModelValueType<bool>> f101;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<bool, com.chronoxor.FBE.FinalModelValueType<bool>> f102;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>> f103;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>> f104;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>> f105;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<char, com.chronoxor.FBE.FinalModelValueType<char>> f106;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<char, com.chronoxor.FBE.FinalModelValueType<char>> f107;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<char, com.chronoxor.FBE.FinalModelValueType<char>> f108;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<char, com.chronoxor.FBE.FinalModelValueType<char>> f109;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<char, com.chronoxor.FBE.FinalModelValueType<char>> f110;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<char, com.chronoxor.FBE.FinalModelValueType<char>> f111;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<sbyte, com.chronoxor.FBE.FinalModelValueType<sbyte>> f112;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<sbyte, com.chronoxor.FBE.FinalModelValueType<sbyte>> f113;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<sbyte, com.chronoxor.FBE.FinalModelValueType<sbyte>> f114;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>> f115;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>> f116;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>> f117;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<short, com.chronoxor.FBE.FinalModelValueType<short>> f118;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<short, com.chronoxor.FBE.FinalModelValueType<short>> f119;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<short, com.chronoxor.FBE.FinalModelValueType<short>> f120;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<ushort, com.chronoxor.FBE.FinalModelValueType<ushort>> f121;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<ushort, com.chronoxor.FBE.FinalModelValueType<ushort>> f122;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<ushort, com.chronoxor.FBE.FinalModelValueType<ushort>> f123;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<int, com.chronoxor.FBE.FinalModelValueType<int>> f124;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<int, com.chronoxor.FBE.FinalModelValueType<int>> f125;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<int, com.chronoxor.FBE.FinalModelValueType<int>> f126;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<uint, com.chronoxor.FBE.FinalModelValueType<uint>> f127;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<uint, com.chronoxor.FBE.FinalModelValueType<uint>> f128;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<uint, com.chronoxor.FBE.FinalModelValueType<uint>> f129;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<long, com.chronoxor.FBE.FinalModelValueType<long>> f130;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<long, com.chronoxor.FBE.FinalModelValueType<long>> f131;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<long, com.chronoxor.FBE.FinalModelValueType<long>> f132;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<ulong, com.chronoxor.FBE.FinalModelValueType<ulong>> f133;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<ulong, com.chronoxor.FBE.FinalModelValueType<ulong>> f134;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<ulong, com.chronoxor.FBE.FinalModelValueType<ulong>> f135;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<float, com.chronoxor.FBE.FinalModelValueType<float>> f136;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<float, com.chronoxor.FBE.FinalModelValueType<float>> f137;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<float, com.chronoxor.FBE.FinalModelValueType<float>> f138;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<double, com.chronoxor.FBE.FinalModelValueType<double>> f139;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<double, com.chronoxor.FBE.FinalModelValueType<double>> f140;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<double, com.chronoxor.FBE.FinalModelValueType<double>> f141;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<decimal, com.chronoxor.FBE.FinalModelValueType<decimal>> f142;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<decimal, com.chronoxor.FBE.FinalModelValueType<decimal>> f143;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<decimal, com.chronoxor.FBE.FinalModelValueType<decimal>> f144;
+        public readonly com.chronoxor.FBE.FinalModelOptionalReferenceType<string, com.chronoxor.FBE.FinalModelReferenceType<string>> f145;
+        public readonly com.chronoxor.FBE.FinalModelOptionalReferenceType<string, com.chronoxor.FBE.FinalModelReferenceType<string>> f146;
+        public readonly com.chronoxor.FBE.FinalModelOptionalReferenceType<string, com.chronoxor.FBE.FinalModelReferenceType<string>> f147;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<DateTime, com.chronoxor.FBE.FinalModelValueType<DateTime>> f148;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<DateTime, com.chronoxor.FBE.FinalModelValueType<DateTime>> f149;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<DateTime, com.chronoxor.FBE.FinalModelValueType<DateTime>> f150;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<Guid, com.chronoxor.FBE.FinalModelValueType<Guid>> f151;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<Guid, com.chronoxor.FBE.FinalModelValueType<Guid>> f152;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<Guid, com.chronoxor.FBE.FinalModelValueType<Guid>> f153;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<proto.OrderSide, com.chronoxor.proto.FBE.FinalModelOrderSide> f154;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<proto.OrderSide, com.chronoxor.proto.FBE.FinalModelOrderSide> f155;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<proto.OrderType, com.chronoxor.proto.FBE.FinalModelOrderType> f156;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<proto.OrderType, com.chronoxor.proto.FBE.FinalModelOrderType> f157;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<proto.Order, com.chronoxor.proto.FBE.FinalModelOrder> f158;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<proto.Order, com.chronoxor.proto.FBE.FinalModelOrder> f159;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<proto.Balance, com.chronoxor.proto.FBE.FinalModelBalance> f160;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<proto.Balance, com.chronoxor.proto.FBE.FinalModelBalance> f161;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<proto.State, com.chronoxor.proto.FBE.FinalModelState> f162;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<proto.State, com.chronoxor.proto.FBE.FinalModelState> f163;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<proto.Account, com.chronoxor.proto.FBE.FinalModelAccount> f164;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<proto.Account, com.chronoxor.proto.FBE.FinalModelAccount> f165;
 
-        public FinalModelStructOptional(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelStructOptional(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            parent = new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0);
-            f100 = new FinalModelOptionalValueType<bool, FinalModelValueType<bool>>(FinalModelValueType<bool>.CreateFinalModel(BaseTypes.BOOL, buffer, 0), buffer, 0);
-            f101 = new FinalModelOptionalValueType<bool, FinalModelValueType<bool>>(FinalModelValueType<bool>.CreateFinalModel(BaseTypes.BOOL, buffer, 0), buffer, 0);
-            f102 = new FinalModelOptionalValueType<bool, FinalModelValueType<bool>>(FinalModelValueType<bool>.CreateFinalModel(BaseTypes.BOOL, buffer, 0), buffer, 0);
-            f103 = new FinalModelOptionalValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f104 = new FinalModelOptionalValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f105 = new FinalModelOptionalValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f106 = new FinalModelOptionalValueType<char, FinalModelValueType<char>>(FinalModelValueType<char>.CreateFinalModel(BaseTypes.CHAR, buffer, 0), buffer, 0);
-            f107 = new FinalModelOptionalValueType<char, FinalModelValueType<char>>(FinalModelValueType<char>.CreateFinalModel(BaseTypes.CHAR, buffer, 0), buffer, 0);
-            f108 = new FinalModelOptionalValueType<char, FinalModelValueType<char>>(FinalModelValueType<char>.CreateFinalModel(BaseTypes.CHAR, buffer, 0), buffer, 0);
-            f109 = new FinalModelOptionalValueType<char, FinalModelValueType<char>>(FinalModelValueType<char>.CreateFinalModel(BaseTypes.WCHAR, buffer, 0), buffer, 0);
-            f110 = new FinalModelOptionalValueType<char, FinalModelValueType<char>>(FinalModelValueType<char>.CreateFinalModel(BaseTypes.WCHAR, buffer, 0), buffer, 0);
-            f111 = new FinalModelOptionalValueType<char, FinalModelValueType<char>>(FinalModelValueType<char>.CreateFinalModel(BaseTypes.WCHAR, buffer, 0), buffer, 0);
-            f112 = new FinalModelOptionalValueType<sbyte, FinalModelValueType<sbyte>>(FinalModelValueType<sbyte>.CreateFinalModel(BaseTypes.INT8, buffer, 0), buffer, 0);
-            f113 = new FinalModelOptionalValueType<sbyte, FinalModelValueType<sbyte>>(FinalModelValueType<sbyte>.CreateFinalModel(BaseTypes.INT8, buffer, 0), buffer, 0);
-            f114 = new FinalModelOptionalValueType<sbyte, FinalModelValueType<sbyte>>(FinalModelValueType<sbyte>.CreateFinalModel(BaseTypes.INT8, buffer, 0), buffer, 0);
-            f115 = new FinalModelOptionalValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.UINT8, buffer, 0), buffer, 0);
-            f116 = new FinalModelOptionalValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.UINT8, buffer, 0), buffer, 0);
-            f117 = new FinalModelOptionalValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.UINT8, buffer, 0), buffer, 0);
-            f118 = new FinalModelOptionalValueType<short, FinalModelValueType<short>>(FinalModelValueType<short>.CreateFinalModel(BaseTypes.INT16, buffer, 0), buffer, 0);
-            f119 = new FinalModelOptionalValueType<short, FinalModelValueType<short>>(FinalModelValueType<short>.CreateFinalModel(BaseTypes.INT16, buffer, 0), buffer, 0);
-            f120 = new FinalModelOptionalValueType<short, FinalModelValueType<short>>(FinalModelValueType<short>.CreateFinalModel(BaseTypes.INT16, buffer, 0), buffer, 0);
-            f121 = new FinalModelOptionalValueType<ushort, FinalModelValueType<ushort>>(FinalModelValueType<ushort>.CreateFinalModel(BaseTypes.UINT16, buffer, 0), buffer, 0);
-            f122 = new FinalModelOptionalValueType<ushort, FinalModelValueType<ushort>>(FinalModelValueType<ushort>.CreateFinalModel(BaseTypes.UINT16, buffer, 0), buffer, 0);
-            f123 = new FinalModelOptionalValueType<ushort, FinalModelValueType<ushort>>(FinalModelValueType<ushort>.CreateFinalModel(BaseTypes.UINT16, buffer, 0), buffer, 0);
-            f124 = new FinalModelOptionalValueType<int, FinalModelValueType<int>>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), buffer, 0);
-            f125 = new FinalModelOptionalValueType<int, FinalModelValueType<int>>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), buffer, 0);
-            f126 = new FinalModelOptionalValueType<int, FinalModelValueType<int>>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), buffer, 0);
-            f127 = new FinalModelOptionalValueType<uint, FinalModelValueType<uint>>(FinalModelValueType<uint>.CreateFinalModel(BaseTypes.UINT32, buffer, 0), buffer, 0);
-            f128 = new FinalModelOptionalValueType<uint, FinalModelValueType<uint>>(FinalModelValueType<uint>.CreateFinalModel(BaseTypes.UINT32, buffer, 0), buffer, 0);
-            f129 = new FinalModelOptionalValueType<uint, FinalModelValueType<uint>>(FinalModelValueType<uint>.CreateFinalModel(BaseTypes.UINT32, buffer, 0), buffer, 0);
-            f130 = new FinalModelOptionalValueType<long, FinalModelValueType<long>>(FinalModelValueType<long>.CreateFinalModel(BaseTypes.INT64, buffer, 0), buffer, 0);
-            f131 = new FinalModelOptionalValueType<long, FinalModelValueType<long>>(FinalModelValueType<long>.CreateFinalModel(BaseTypes.INT64, buffer, 0), buffer, 0);
-            f132 = new FinalModelOptionalValueType<long, FinalModelValueType<long>>(FinalModelValueType<long>.CreateFinalModel(BaseTypes.INT64, buffer, 0), buffer, 0);
-            f133 = new FinalModelOptionalValueType<ulong, FinalModelValueType<ulong>>(FinalModelValueType<ulong>.CreateFinalModel(BaseTypes.UINT64, buffer, 0), buffer, 0);
-            f134 = new FinalModelOptionalValueType<ulong, FinalModelValueType<ulong>>(FinalModelValueType<ulong>.CreateFinalModel(BaseTypes.UINT64, buffer, 0), buffer, 0);
-            f135 = new FinalModelOptionalValueType<ulong, FinalModelValueType<ulong>>(FinalModelValueType<ulong>.CreateFinalModel(BaseTypes.UINT64, buffer, 0), buffer, 0);
-            f136 = new FinalModelOptionalValueType<float, FinalModelValueType<float>>(FinalModelValueType<float>.CreateFinalModel(BaseTypes.FLOAT, buffer, 0), buffer, 0);
-            f137 = new FinalModelOptionalValueType<float, FinalModelValueType<float>>(FinalModelValueType<float>.CreateFinalModel(BaseTypes.FLOAT, buffer, 0), buffer, 0);
-            f138 = new FinalModelOptionalValueType<float, FinalModelValueType<float>>(FinalModelValueType<float>.CreateFinalModel(BaseTypes.FLOAT, buffer, 0), buffer, 0);
-            f139 = new FinalModelOptionalValueType<double, FinalModelValueType<double>>(FinalModelValueType<double>.CreateFinalModel(BaseTypes.DOUBLE, buffer, 0), buffer, 0);
-            f140 = new FinalModelOptionalValueType<double, FinalModelValueType<double>>(FinalModelValueType<double>.CreateFinalModel(BaseTypes.DOUBLE, buffer, 0), buffer, 0);
-            f141 = new FinalModelOptionalValueType<double, FinalModelValueType<double>>(FinalModelValueType<double>.CreateFinalModel(BaseTypes.DOUBLE, buffer, 0), buffer, 0);
-            f142 = new FinalModelOptionalValueType<decimal, FinalModelValueType<decimal>>(FinalModelValueType<decimal>.CreateFinalModel(BaseTypes.DECIMAL, buffer, 0), buffer, 0);
-            f143 = new FinalModelOptionalValueType<decimal, FinalModelValueType<decimal>>(FinalModelValueType<decimal>.CreateFinalModel(BaseTypes.DECIMAL, buffer, 0), buffer, 0);
-            f144 = new FinalModelOptionalValueType<decimal, FinalModelValueType<decimal>>(FinalModelValueType<decimal>.CreateFinalModel(BaseTypes.DECIMAL, buffer, 0), buffer, 0);
-            f145 = new FinalModelOptionalReferenceType<string, FinalModelReferenceType<string>>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), buffer, 0);
-            f146 = new FinalModelOptionalReferenceType<string, FinalModelReferenceType<string>>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), buffer, 0);
-            f147 = new FinalModelOptionalReferenceType<string, FinalModelReferenceType<string>>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), buffer, 0);
-            f148 = new FinalModelOptionalValueType<DateTime, FinalModelValueType<DateTime>>(FinalModelValueType<DateTime>.CreateFinalModel(BaseTypes.TIMESTAMP, buffer, 0), buffer, 0);
-            f149 = new FinalModelOptionalValueType<DateTime, FinalModelValueType<DateTime>>(FinalModelValueType<DateTime>.CreateFinalModel(BaseTypes.TIMESTAMP, buffer, 0), buffer, 0);
-            f150 = new FinalModelOptionalValueType<DateTime, FinalModelValueType<DateTime>>(FinalModelValueType<DateTime>.CreateFinalModel(BaseTypes.TIMESTAMP, buffer, 0), buffer, 0);
-            f151 = new FinalModelOptionalValueType<Guid, FinalModelValueType<Guid>>(FinalModelValueType<Guid>.CreateFinalModel(BaseTypes.UUID, buffer, 0), buffer, 0);
-            f152 = new FinalModelOptionalValueType<Guid, FinalModelValueType<Guid>>(FinalModelValueType<Guid>.CreateFinalModel(BaseTypes.UUID, buffer, 0), buffer, 0);
-            f153 = new FinalModelOptionalValueType<Guid, FinalModelValueType<Guid>>(FinalModelValueType<Guid>.CreateFinalModel(BaseTypes.UUID, buffer, 0), buffer, 0);
-            f154 = new FinalModelOptionalValueType<proto.OrderSide, proto.FinalModelOrderSide>(new proto.FinalModelOrderSide(buffer, 0), buffer, 0);
-            f155 = new FinalModelOptionalValueType<proto.OrderSide, proto.FinalModelOrderSide>(new proto.FinalModelOrderSide(buffer, 0), buffer, 0);
-            f156 = new FinalModelOptionalValueType<proto.OrderType, proto.FinalModelOrderType>(new proto.FinalModelOrderType(buffer, 0), buffer, 0);
-            f157 = new FinalModelOptionalValueType<proto.OrderType, proto.FinalModelOrderType>(new proto.FinalModelOrderType(buffer, 0), buffer, 0);
-            f158 = new FinalModelOptionalValueType<proto.Order, proto.FinalModelOrder>(new proto.FinalModelOrder(buffer, 0), buffer, 0);
-            f159 = new FinalModelOptionalValueType<proto.Order, proto.FinalModelOrder>(new proto.FinalModelOrder(buffer, 0), buffer, 0);
-            f160 = new FinalModelOptionalValueType<proto.Balance, proto.FinalModelBalance>(new proto.FinalModelBalance(buffer, 0), buffer, 0);
-            f161 = new FinalModelOptionalValueType<proto.Balance, proto.FinalModelBalance>(new proto.FinalModelBalance(buffer, 0), buffer, 0);
-            f162 = new FinalModelOptionalValueType<proto.State, proto.FinalModelState>(new proto.FinalModelState(buffer, 0), buffer, 0);
-            f163 = new FinalModelOptionalValueType<proto.State, proto.FinalModelState>(new proto.FinalModelState(buffer, 0), buffer, 0);
-            f164 = new FinalModelOptionalValueType<proto.Account, proto.FinalModelAccount>(new proto.FinalModelAccount(buffer, 0), buffer, 0);
-            f165 = new FinalModelOptionalValueType<proto.Account, proto.FinalModelAccount>(new proto.FinalModelAccount(buffer, 0), buffer, 0);
+            parent = new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0);
+            f100 = new com.chronoxor.FBE.FinalModelOptionalValueType<bool, com.chronoxor.FBE.FinalModelValueType<bool>>(com.chronoxor.FBE.FinalModelValueType<bool>.CreateFinalModel(FBE.BaseTypes.BOOL, buffer, 0), buffer, 0);
+            f101 = new com.chronoxor.FBE.FinalModelOptionalValueType<bool, com.chronoxor.FBE.FinalModelValueType<bool>>(com.chronoxor.FBE.FinalModelValueType<bool>.CreateFinalModel(FBE.BaseTypes.BOOL, buffer, 0), buffer, 0);
+            f102 = new com.chronoxor.FBE.FinalModelOptionalValueType<bool, com.chronoxor.FBE.FinalModelValueType<bool>>(com.chronoxor.FBE.FinalModelValueType<bool>.CreateFinalModel(FBE.BaseTypes.BOOL, buffer, 0), buffer, 0);
+            f103 = new com.chronoxor.FBE.FinalModelOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0), buffer, 0);
+            f104 = new com.chronoxor.FBE.FinalModelOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0), buffer, 0);
+            f105 = new com.chronoxor.FBE.FinalModelOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0), buffer, 0);
+            f106 = new com.chronoxor.FBE.FinalModelOptionalValueType<char, com.chronoxor.FBE.FinalModelValueType<char>>(com.chronoxor.FBE.FinalModelValueType<char>.CreateFinalModel(FBE.BaseTypes.CHAR, buffer, 0), buffer, 0);
+            f107 = new com.chronoxor.FBE.FinalModelOptionalValueType<char, com.chronoxor.FBE.FinalModelValueType<char>>(com.chronoxor.FBE.FinalModelValueType<char>.CreateFinalModel(FBE.BaseTypes.CHAR, buffer, 0), buffer, 0);
+            f108 = new com.chronoxor.FBE.FinalModelOptionalValueType<char, com.chronoxor.FBE.FinalModelValueType<char>>(com.chronoxor.FBE.FinalModelValueType<char>.CreateFinalModel(FBE.BaseTypes.CHAR, buffer, 0), buffer, 0);
+            f109 = new com.chronoxor.FBE.FinalModelOptionalValueType<char, com.chronoxor.FBE.FinalModelValueType<char>>(com.chronoxor.FBE.FinalModelValueType<char>.CreateFinalModel(FBE.BaseTypes.WCHAR, buffer, 0), buffer, 0);
+            f110 = new com.chronoxor.FBE.FinalModelOptionalValueType<char, com.chronoxor.FBE.FinalModelValueType<char>>(com.chronoxor.FBE.FinalModelValueType<char>.CreateFinalModel(FBE.BaseTypes.WCHAR, buffer, 0), buffer, 0);
+            f111 = new com.chronoxor.FBE.FinalModelOptionalValueType<char, com.chronoxor.FBE.FinalModelValueType<char>>(com.chronoxor.FBE.FinalModelValueType<char>.CreateFinalModel(FBE.BaseTypes.WCHAR, buffer, 0), buffer, 0);
+            f112 = new com.chronoxor.FBE.FinalModelOptionalValueType<sbyte, com.chronoxor.FBE.FinalModelValueType<sbyte>>(com.chronoxor.FBE.FinalModelValueType<sbyte>.CreateFinalModel(FBE.BaseTypes.INT8, buffer, 0), buffer, 0);
+            f113 = new com.chronoxor.FBE.FinalModelOptionalValueType<sbyte, com.chronoxor.FBE.FinalModelValueType<sbyte>>(com.chronoxor.FBE.FinalModelValueType<sbyte>.CreateFinalModel(FBE.BaseTypes.INT8, buffer, 0), buffer, 0);
+            f114 = new com.chronoxor.FBE.FinalModelOptionalValueType<sbyte, com.chronoxor.FBE.FinalModelValueType<sbyte>>(com.chronoxor.FBE.FinalModelValueType<sbyte>.CreateFinalModel(FBE.BaseTypes.INT8, buffer, 0), buffer, 0);
+            f115 = new com.chronoxor.FBE.FinalModelOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.UINT8, buffer, 0), buffer, 0);
+            f116 = new com.chronoxor.FBE.FinalModelOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.UINT8, buffer, 0), buffer, 0);
+            f117 = new com.chronoxor.FBE.FinalModelOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.UINT8, buffer, 0), buffer, 0);
+            f118 = new com.chronoxor.FBE.FinalModelOptionalValueType<short, com.chronoxor.FBE.FinalModelValueType<short>>(com.chronoxor.FBE.FinalModelValueType<short>.CreateFinalModel(FBE.BaseTypes.INT16, buffer, 0), buffer, 0);
+            f119 = new com.chronoxor.FBE.FinalModelOptionalValueType<short, com.chronoxor.FBE.FinalModelValueType<short>>(com.chronoxor.FBE.FinalModelValueType<short>.CreateFinalModel(FBE.BaseTypes.INT16, buffer, 0), buffer, 0);
+            f120 = new com.chronoxor.FBE.FinalModelOptionalValueType<short, com.chronoxor.FBE.FinalModelValueType<short>>(com.chronoxor.FBE.FinalModelValueType<short>.CreateFinalModel(FBE.BaseTypes.INT16, buffer, 0), buffer, 0);
+            f121 = new com.chronoxor.FBE.FinalModelOptionalValueType<ushort, com.chronoxor.FBE.FinalModelValueType<ushort>>(com.chronoxor.FBE.FinalModelValueType<ushort>.CreateFinalModel(FBE.BaseTypes.UINT16, buffer, 0), buffer, 0);
+            f122 = new com.chronoxor.FBE.FinalModelOptionalValueType<ushort, com.chronoxor.FBE.FinalModelValueType<ushort>>(com.chronoxor.FBE.FinalModelValueType<ushort>.CreateFinalModel(FBE.BaseTypes.UINT16, buffer, 0), buffer, 0);
+            f123 = new com.chronoxor.FBE.FinalModelOptionalValueType<ushort, com.chronoxor.FBE.FinalModelValueType<ushort>>(com.chronoxor.FBE.FinalModelValueType<ushort>.CreateFinalModel(FBE.BaseTypes.UINT16, buffer, 0), buffer, 0);
+            f124 = new com.chronoxor.FBE.FinalModelOptionalValueType<int, com.chronoxor.FBE.FinalModelValueType<int>>(com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0), buffer, 0);
+            f125 = new com.chronoxor.FBE.FinalModelOptionalValueType<int, com.chronoxor.FBE.FinalModelValueType<int>>(com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0), buffer, 0);
+            f126 = new com.chronoxor.FBE.FinalModelOptionalValueType<int, com.chronoxor.FBE.FinalModelValueType<int>>(com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0), buffer, 0);
+            f127 = new com.chronoxor.FBE.FinalModelOptionalValueType<uint, com.chronoxor.FBE.FinalModelValueType<uint>>(com.chronoxor.FBE.FinalModelValueType<uint>.CreateFinalModel(FBE.BaseTypes.UINT32, buffer, 0), buffer, 0);
+            f128 = new com.chronoxor.FBE.FinalModelOptionalValueType<uint, com.chronoxor.FBE.FinalModelValueType<uint>>(com.chronoxor.FBE.FinalModelValueType<uint>.CreateFinalModel(FBE.BaseTypes.UINT32, buffer, 0), buffer, 0);
+            f129 = new com.chronoxor.FBE.FinalModelOptionalValueType<uint, com.chronoxor.FBE.FinalModelValueType<uint>>(com.chronoxor.FBE.FinalModelValueType<uint>.CreateFinalModel(FBE.BaseTypes.UINT32, buffer, 0), buffer, 0);
+            f130 = new com.chronoxor.FBE.FinalModelOptionalValueType<long, com.chronoxor.FBE.FinalModelValueType<long>>(com.chronoxor.FBE.FinalModelValueType<long>.CreateFinalModel(FBE.BaseTypes.INT64, buffer, 0), buffer, 0);
+            f131 = new com.chronoxor.FBE.FinalModelOptionalValueType<long, com.chronoxor.FBE.FinalModelValueType<long>>(com.chronoxor.FBE.FinalModelValueType<long>.CreateFinalModel(FBE.BaseTypes.INT64, buffer, 0), buffer, 0);
+            f132 = new com.chronoxor.FBE.FinalModelOptionalValueType<long, com.chronoxor.FBE.FinalModelValueType<long>>(com.chronoxor.FBE.FinalModelValueType<long>.CreateFinalModel(FBE.BaseTypes.INT64, buffer, 0), buffer, 0);
+            f133 = new com.chronoxor.FBE.FinalModelOptionalValueType<ulong, com.chronoxor.FBE.FinalModelValueType<ulong>>(com.chronoxor.FBE.FinalModelValueType<ulong>.CreateFinalModel(FBE.BaseTypes.UINT64, buffer, 0), buffer, 0);
+            f134 = new com.chronoxor.FBE.FinalModelOptionalValueType<ulong, com.chronoxor.FBE.FinalModelValueType<ulong>>(com.chronoxor.FBE.FinalModelValueType<ulong>.CreateFinalModel(FBE.BaseTypes.UINT64, buffer, 0), buffer, 0);
+            f135 = new com.chronoxor.FBE.FinalModelOptionalValueType<ulong, com.chronoxor.FBE.FinalModelValueType<ulong>>(com.chronoxor.FBE.FinalModelValueType<ulong>.CreateFinalModel(FBE.BaseTypes.UINT64, buffer, 0), buffer, 0);
+            f136 = new com.chronoxor.FBE.FinalModelOptionalValueType<float, com.chronoxor.FBE.FinalModelValueType<float>>(com.chronoxor.FBE.FinalModelValueType<float>.CreateFinalModel(FBE.BaseTypes.FLOAT, buffer, 0), buffer, 0);
+            f137 = new com.chronoxor.FBE.FinalModelOptionalValueType<float, com.chronoxor.FBE.FinalModelValueType<float>>(com.chronoxor.FBE.FinalModelValueType<float>.CreateFinalModel(FBE.BaseTypes.FLOAT, buffer, 0), buffer, 0);
+            f138 = new com.chronoxor.FBE.FinalModelOptionalValueType<float, com.chronoxor.FBE.FinalModelValueType<float>>(com.chronoxor.FBE.FinalModelValueType<float>.CreateFinalModel(FBE.BaseTypes.FLOAT, buffer, 0), buffer, 0);
+            f139 = new com.chronoxor.FBE.FinalModelOptionalValueType<double, com.chronoxor.FBE.FinalModelValueType<double>>(com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(FBE.BaseTypes.DOUBLE, buffer, 0), buffer, 0);
+            f140 = new com.chronoxor.FBE.FinalModelOptionalValueType<double, com.chronoxor.FBE.FinalModelValueType<double>>(com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(FBE.BaseTypes.DOUBLE, buffer, 0), buffer, 0);
+            f141 = new com.chronoxor.FBE.FinalModelOptionalValueType<double, com.chronoxor.FBE.FinalModelValueType<double>>(com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(FBE.BaseTypes.DOUBLE, buffer, 0), buffer, 0);
+            f142 = new com.chronoxor.FBE.FinalModelOptionalValueType<decimal, com.chronoxor.FBE.FinalModelValueType<decimal>>(com.chronoxor.FBE.FinalModelValueType<decimal>.CreateFinalModel(FBE.BaseTypes.DECIMAL, buffer, 0), buffer, 0);
+            f143 = new com.chronoxor.FBE.FinalModelOptionalValueType<decimal, com.chronoxor.FBE.FinalModelValueType<decimal>>(com.chronoxor.FBE.FinalModelValueType<decimal>.CreateFinalModel(FBE.BaseTypes.DECIMAL, buffer, 0), buffer, 0);
+            f144 = new com.chronoxor.FBE.FinalModelOptionalValueType<decimal, com.chronoxor.FBE.FinalModelValueType<decimal>>(com.chronoxor.FBE.FinalModelValueType<decimal>.CreateFinalModel(FBE.BaseTypes.DECIMAL, buffer, 0), buffer, 0);
+            f145 = new com.chronoxor.FBE.FinalModelOptionalReferenceType<string, com.chronoxor.FBE.FinalModelReferenceType<string>>(com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0), buffer, 0);
+            f146 = new com.chronoxor.FBE.FinalModelOptionalReferenceType<string, com.chronoxor.FBE.FinalModelReferenceType<string>>(com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0), buffer, 0);
+            f147 = new com.chronoxor.FBE.FinalModelOptionalReferenceType<string, com.chronoxor.FBE.FinalModelReferenceType<string>>(com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0), buffer, 0);
+            f148 = new com.chronoxor.FBE.FinalModelOptionalValueType<DateTime, com.chronoxor.FBE.FinalModelValueType<DateTime>>(com.chronoxor.FBE.FinalModelValueType<DateTime>.CreateFinalModel(FBE.BaseTypes.TIMESTAMP, buffer, 0), buffer, 0);
+            f149 = new com.chronoxor.FBE.FinalModelOptionalValueType<DateTime, com.chronoxor.FBE.FinalModelValueType<DateTime>>(com.chronoxor.FBE.FinalModelValueType<DateTime>.CreateFinalModel(FBE.BaseTypes.TIMESTAMP, buffer, 0), buffer, 0);
+            f150 = new com.chronoxor.FBE.FinalModelOptionalValueType<DateTime, com.chronoxor.FBE.FinalModelValueType<DateTime>>(com.chronoxor.FBE.FinalModelValueType<DateTime>.CreateFinalModel(FBE.BaseTypes.TIMESTAMP, buffer, 0), buffer, 0);
+            f151 = new com.chronoxor.FBE.FinalModelOptionalValueType<Guid, com.chronoxor.FBE.FinalModelValueType<Guid>>(com.chronoxor.FBE.FinalModelValueType<Guid>.CreateFinalModel(FBE.BaseTypes.UUID, buffer, 0), buffer, 0);
+            f152 = new com.chronoxor.FBE.FinalModelOptionalValueType<Guid, com.chronoxor.FBE.FinalModelValueType<Guid>>(com.chronoxor.FBE.FinalModelValueType<Guid>.CreateFinalModel(FBE.BaseTypes.UUID, buffer, 0), buffer, 0);
+            f153 = new com.chronoxor.FBE.FinalModelOptionalValueType<Guid, com.chronoxor.FBE.FinalModelValueType<Guid>>(com.chronoxor.FBE.FinalModelValueType<Guid>.CreateFinalModel(FBE.BaseTypes.UUID, buffer, 0), buffer, 0);
+            f154 = new com.chronoxor.FBE.FinalModelOptionalValueType<proto.OrderSide, com.chronoxor.proto.FBE.FinalModelOrderSide>(new com.chronoxor.proto.FBE.FinalModelOrderSide(buffer, 0), buffer, 0);
+            f155 = new com.chronoxor.FBE.FinalModelOptionalValueType<proto.OrderSide, com.chronoxor.proto.FBE.FinalModelOrderSide>(new com.chronoxor.proto.FBE.FinalModelOrderSide(buffer, 0), buffer, 0);
+            f156 = new com.chronoxor.FBE.FinalModelOptionalValueType<proto.OrderType, com.chronoxor.proto.FBE.FinalModelOrderType>(new com.chronoxor.proto.FBE.FinalModelOrderType(buffer, 0), buffer, 0);
+            f157 = new com.chronoxor.FBE.FinalModelOptionalValueType<proto.OrderType, com.chronoxor.proto.FBE.FinalModelOrderType>(new com.chronoxor.proto.FBE.FinalModelOrderType(buffer, 0), buffer, 0);
+            f158 = new com.chronoxor.FBE.FinalModelOptionalValueType<proto.Order, com.chronoxor.proto.FBE.FinalModelOrder>(new com.chronoxor.proto.FBE.FinalModelOrder(buffer, 0), buffer, 0);
+            f159 = new com.chronoxor.FBE.FinalModelOptionalValueType<proto.Order, com.chronoxor.proto.FBE.FinalModelOrder>(new com.chronoxor.proto.FBE.FinalModelOrder(buffer, 0), buffer, 0);
+            f160 = new com.chronoxor.FBE.FinalModelOptionalValueType<proto.Balance, com.chronoxor.proto.FBE.FinalModelBalance>(new com.chronoxor.proto.FBE.FinalModelBalance(buffer, 0), buffer, 0);
+            f161 = new com.chronoxor.FBE.FinalModelOptionalValueType<proto.Balance, com.chronoxor.proto.FBE.FinalModelBalance>(new com.chronoxor.proto.FBE.FinalModelBalance(buffer, 0), buffer, 0);
+            f162 = new com.chronoxor.FBE.FinalModelOptionalValueType<proto.State, com.chronoxor.proto.FBE.FinalModelState>(new com.chronoxor.proto.FBE.FinalModelState(buffer, 0), buffer, 0);
+            f163 = new com.chronoxor.FBE.FinalModelOptionalValueType<proto.State, com.chronoxor.proto.FBE.FinalModelState>(new com.chronoxor.proto.FBE.FinalModelState(buffer, 0), buffer, 0);
+            f164 = new com.chronoxor.FBE.FinalModelOptionalValueType<proto.Account, com.chronoxor.proto.FBE.FinalModelAccount>(new com.chronoxor.proto.FBE.FinalModelAccount(buffer, 0), buffer, 0);
+            f165 = new com.chronoxor.FBE.FinalModelOptionalValueType<proto.Account, com.chronoxor.proto.FBE.FinalModelAccount>(new com.chronoxor.proto.FBE.FinalModelAccount(buffer, 0), buffer, 0);
         }
 
         // Get the allocation size
@@ -5926,7 +5928,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<StructOptional> Clone() { return new FinalModelStructOptional(_buffer, _offset); }
+        public override FBE.FinalModelValueType<StructOptional> Clone() { return new FinalModelStructOptional(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -7066,12 +7068,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructOptional final model
-    public class StructOptionalFinalModel : Model
+    public class StructOptionalFinalModel : FBE.Model
     {
         private readonly FinalModelStructOptional _model;
 
         public StructOptionalFinalModel() { _model = new FinalModelStructOptional(Buffer, 8); }
-        public StructOptionalFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructOptional(Buffer, 8); }
+        public StructOptionalFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructOptional(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelStructOptional.FBETypeConst;
@@ -7211,11 +7213,11 @@ namespace com.chronoxor.test {
         public StructNested Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new com.chronoxor.FBE.com.chronoxor.test.StructNestedModel();
+            var writer = new FBE.test.StructNestedModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new com.chronoxor.FBE.com.chronoxor.test.StructNestedModel();
+            var reader = new FBE.test.StructNestedModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -7288,7 +7290,7 @@ namespace com.chronoxor.test {
 
         public string ToJson()
         {
-            var json = com.chronoxor.FBE.Json.ToJson(this);
+            var json = FBE.Json.ToJson(this);
             var jsonParent = parent.ToJson();
             json = json.Substring(0, json.Length - 1) + "," + jsonParent.Substring(1, jsonParent.Length - 2) + "}";
             return json;
@@ -7296,12 +7298,12 @@ namespace com.chronoxor.test {
 
         public static StructNested FromJson(string json)
         {
-            var result = com.chronoxor.FBE.Json.FromJson<StructNested>(json);
+            var result = FBE.Json.FromJson<StructNested>(json);
             result.parent = StructOptional.FromJson(json);
             return result;
         }
 
-        public static com.chronoxor.FBE.FieldModelValueType<StructNested> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.com.chronoxor.test.FieldModelStructNested(buffer, offset); }
+        public static FBE.FieldModelValueType<StructNested> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructNested(buffer, offset); }
     }
 
 } // namespace com.chronoxor.test
@@ -7311,37 +7313,37 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructNested field model
-    public class FieldModelStructNested : com.chronoxor.FBE.FieldModelValueType<StructNested>
+    public class FieldModelStructNested : FBE.FieldModelValueType<StructNested>
     {
-        public readonly com.chronoxor.FBE.FieldModelStructOptional parent;
-        public readonly com.chronoxor.FBE.FieldModelEnumSimple f1000;
-        public readonly FieldModelOptionalValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple> f1001;
-        public readonly com.chronoxor.FBE.FieldModelEnumTyped f1002;
-        public readonly FieldModelOptionalValueType<EnumTyped, com.chronoxor.FBE.FieldModelEnumTyped> f1003;
-        public readonly com.chronoxor.FBE.FieldModelFlagsSimple f1004;
-        public readonly FieldModelOptionalValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple> f1005;
-        public readonly com.chronoxor.FBE.FieldModelFlagsTyped f1006;
-        public readonly FieldModelOptionalValueType<FlagsTyped, com.chronoxor.FBE.FieldModelFlagsTyped> f1007;
-        public readonly com.chronoxor.FBE.FieldModelStructSimple f1008;
-        public readonly FieldModelOptionalValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple> f1009;
-        public readonly com.chronoxor.FBE.FieldModelStructOptional f1010;
-        public readonly FieldModelOptionalValueType<StructOptional, com.chronoxor.FBE.FieldModelStructOptional> f1011;
+        public readonly com.chronoxor.test.FBE.FieldModelStructOptional parent;
+        public readonly com.chronoxor.test.FBE.FieldModelEnumSimple f1000;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple> f1001;
+        public readonly com.chronoxor.test.FBE.FieldModelEnumTyped f1002;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<EnumTyped, com.chronoxor.test.FBE.FieldModelEnumTyped> f1003;
+        public readonly com.chronoxor.test.FBE.FieldModelFlagsSimple f1004;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple> f1005;
+        public readonly com.chronoxor.test.FBE.FieldModelFlagsTyped f1006;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<FlagsTyped, com.chronoxor.test.FBE.FieldModelFlagsTyped> f1007;
+        public readonly com.chronoxor.test.FBE.FieldModelStructSimple f1008;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple> f1009;
+        public readonly com.chronoxor.test.FBE.FieldModelStructOptional f1010;
+        public readonly com.chronoxor.FBE.FieldModelOptionalValueType<StructOptional, com.chronoxor.test.FBE.FieldModelStructOptional> f1011;
 
-        public FieldModelStructNested(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelStructNested(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            parent = new com.chronoxor.FBE.FieldModelStructOptional(buffer, 4 + 4);
-            f1000 = new com.chronoxor.FBE.FieldModelEnumSimple(buffer, parent.FBEOffset + parent.FBEBody - 4 - 4);
-            f1001 = new FieldModelOptionalValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple>(new com.chronoxor.FBE.FieldModelEnumSimple(buffer, f1000.FBEOffset + f1000.FBESize), buffer, f1000.FBEOffset + f1000.FBESize);
-            f1002 = new com.chronoxor.FBE.FieldModelEnumTyped(buffer, f1001.FBEOffset + f1001.FBESize);
-            f1003 = new FieldModelOptionalValueType<EnumTyped, com.chronoxor.FBE.FieldModelEnumTyped>(new com.chronoxor.FBE.FieldModelEnumTyped(buffer, f1002.FBEOffset + f1002.FBESize), buffer, f1002.FBEOffset + f1002.FBESize);
-            f1004 = new com.chronoxor.FBE.FieldModelFlagsSimple(buffer, f1003.FBEOffset + f1003.FBESize);
-            f1005 = new FieldModelOptionalValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple>(new com.chronoxor.FBE.FieldModelFlagsSimple(buffer, f1004.FBEOffset + f1004.FBESize), buffer, f1004.FBEOffset + f1004.FBESize);
-            f1006 = new com.chronoxor.FBE.FieldModelFlagsTyped(buffer, f1005.FBEOffset + f1005.FBESize);
-            f1007 = new FieldModelOptionalValueType<FlagsTyped, com.chronoxor.FBE.FieldModelFlagsTyped>(new com.chronoxor.FBE.FieldModelFlagsTyped(buffer, f1006.FBEOffset + f1006.FBESize), buffer, f1006.FBEOffset + f1006.FBESize);
-            f1008 = new com.chronoxor.FBE.FieldModelStructSimple(buffer, f1007.FBEOffset + f1007.FBESize);
-            f1009 = new FieldModelOptionalValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple>(new com.chronoxor.FBE.FieldModelStructSimple(buffer, f1008.FBEOffset + f1008.FBESize), buffer, f1008.FBEOffset + f1008.FBESize);
-            f1010 = new com.chronoxor.FBE.FieldModelStructOptional(buffer, f1009.FBEOffset + f1009.FBESize);
-            f1011 = new FieldModelOptionalValueType<StructOptional, com.chronoxor.FBE.FieldModelStructOptional>(new com.chronoxor.FBE.FieldModelStructOptional(buffer, f1010.FBEOffset + f1010.FBESize), buffer, f1010.FBEOffset + f1010.FBESize);
+            parent = new com.chronoxor.test.FBE.FieldModelStructOptional(buffer, 4 + 4);
+            f1000 = new com.chronoxor.test.FBE.FieldModelEnumSimple(buffer, parent.FBEOffset + parent.FBEBody - 4 - 4);
+            f1001 = new com.chronoxor.FBE.FieldModelOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple>(new com.chronoxor.test.FBE.FieldModelEnumSimple(buffer, f1000.FBEOffset + f1000.FBESize), buffer, f1000.FBEOffset + f1000.FBESize);
+            f1002 = new com.chronoxor.test.FBE.FieldModelEnumTyped(buffer, f1001.FBEOffset + f1001.FBESize);
+            f1003 = new com.chronoxor.FBE.FieldModelOptionalValueType<EnumTyped, com.chronoxor.test.FBE.FieldModelEnumTyped>(new com.chronoxor.test.FBE.FieldModelEnumTyped(buffer, f1002.FBEOffset + f1002.FBESize), buffer, f1002.FBEOffset + f1002.FBESize);
+            f1004 = new com.chronoxor.test.FBE.FieldModelFlagsSimple(buffer, f1003.FBEOffset + f1003.FBESize);
+            f1005 = new com.chronoxor.FBE.FieldModelOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple>(new com.chronoxor.test.FBE.FieldModelFlagsSimple(buffer, f1004.FBEOffset + f1004.FBESize), buffer, f1004.FBEOffset + f1004.FBESize);
+            f1006 = new com.chronoxor.test.FBE.FieldModelFlagsTyped(buffer, f1005.FBEOffset + f1005.FBESize);
+            f1007 = new com.chronoxor.FBE.FieldModelOptionalValueType<FlagsTyped, com.chronoxor.test.FBE.FieldModelFlagsTyped>(new com.chronoxor.test.FBE.FieldModelFlagsTyped(buffer, f1006.FBEOffset + f1006.FBESize), buffer, f1006.FBEOffset + f1006.FBESize);
+            f1008 = new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, f1007.FBEOffset + f1007.FBESize);
+            f1009 = new com.chronoxor.FBE.FieldModelOptionalValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple>(new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, f1008.FBEOffset + f1008.FBESize), buffer, f1008.FBEOffset + f1008.FBESize);
+            f1010 = new com.chronoxor.test.FBE.FieldModelStructOptional(buffer, f1009.FBEOffset + f1009.FBESize);
+            f1011 = new com.chronoxor.FBE.FieldModelOptionalValueType<StructOptional, com.chronoxor.test.FBE.FieldModelStructOptional>(new com.chronoxor.test.FBE.FieldModelStructOptional(buffer, f1010.FBEOffset + f1010.FBESize), buffer, f1010.FBEOffset + f1010.FBESize);
         }
 
         // Get the field size
@@ -7409,7 +7411,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<StructNested> Clone() { return new FieldModelStructNested(_buffer, _offset); }
+        public override FBE.FieldModelValueType<StructNested> Clone() { return new FieldModelStructNested(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -7712,12 +7714,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructNested model
-    public class StructNestedModel : Model
+    public class StructNestedModel : FBE.Model
     {
         public readonly FieldModelStructNested model;
 
         public StructNestedModel() { model = new FieldModelStructNested(Buffer, 4); }
-        public StructNestedModel(Buffer buffer) : base(buffer) { model = new FieldModelStructNested(Buffer, 4); }
+        public StructNestedModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelStructNested(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -7798,37 +7800,37 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructNested final model
-    public class FinalModelStructNested : com.chronoxor.FBE.FinalModelValueType<StructNested>
+    public class FinalModelStructNested : FBE.FinalModelValueType<StructNested>
     {
-        public readonly com.chronoxor.FBE.FinalModelStructOptional parent;
-        public readonly com.chronoxor.FBE.FinalModelEnumSimple f1000;
-        public readonly FinalModelOptionalValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple> f1001;
-        public readonly com.chronoxor.FBE.FinalModelEnumTyped f1002;
-        public readonly FinalModelOptionalValueType<EnumTyped, com.chronoxor.FBE.FinalModelEnumTyped> f1003;
-        public readonly com.chronoxor.FBE.FinalModelFlagsSimple f1004;
-        public readonly FinalModelOptionalValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple> f1005;
-        public readonly com.chronoxor.FBE.FinalModelFlagsTyped f1006;
-        public readonly FinalModelOptionalValueType<FlagsTyped, com.chronoxor.FBE.FinalModelFlagsTyped> f1007;
-        public readonly com.chronoxor.FBE.FinalModelStructSimple f1008;
-        public readonly FinalModelOptionalValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple> f1009;
-        public readonly com.chronoxor.FBE.FinalModelStructOptional f1010;
-        public readonly FinalModelOptionalValueType<StructOptional, com.chronoxor.FBE.FinalModelStructOptional> f1011;
+        public readonly com.chronoxor.test.FBE.FinalModelStructOptional parent;
+        public readonly com.chronoxor.test.FBE.FinalModelEnumSimple f1000;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple> f1001;
+        public readonly com.chronoxor.test.FBE.FinalModelEnumTyped f1002;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<EnumTyped, com.chronoxor.test.FBE.FinalModelEnumTyped> f1003;
+        public readonly com.chronoxor.test.FBE.FinalModelFlagsSimple f1004;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple> f1005;
+        public readonly com.chronoxor.test.FBE.FinalModelFlagsTyped f1006;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<FlagsTyped, com.chronoxor.test.FBE.FinalModelFlagsTyped> f1007;
+        public readonly com.chronoxor.test.FBE.FinalModelStructSimple f1008;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple> f1009;
+        public readonly com.chronoxor.test.FBE.FinalModelStructOptional f1010;
+        public readonly com.chronoxor.FBE.FinalModelOptionalValueType<StructOptional, com.chronoxor.test.FBE.FinalModelStructOptional> f1011;
 
-        public FinalModelStructNested(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelStructNested(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            parent = new com.chronoxor.FBE.FinalModelStructOptional(buffer, 0);
-            f1000 = new com.chronoxor.FBE.FinalModelEnumSimple(buffer, 0);
-            f1001 = new FinalModelOptionalValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple>(new com.chronoxor.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
-            f1002 = new com.chronoxor.FBE.FinalModelEnumTyped(buffer, 0);
-            f1003 = new FinalModelOptionalValueType<EnumTyped, com.chronoxor.FBE.FinalModelEnumTyped>(new com.chronoxor.FBE.FinalModelEnumTyped(buffer, 0), buffer, 0);
-            f1004 = new com.chronoxor.FBE.FinalModelFlagsSimple(buffer, 0);
-            f1005 = new FinalModelOptionalValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple>(new com.chronoxor.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
-            f1006 = new com.chronoxor.FBE.FinalModelFlagsTyped(buffer, 0);
-            f1007 = new FinalModelOptionalValueType<FlagsTyped, com.chronoxor.FBE.FinalModelFlagsTyped>(new com.chronoxor.FBE.FinalModelFlagsTyped(buffer, 0), buffer, 0);
-            f1008 = new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0);
-            f1009 = new FinalModelOptionalValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple>(new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
-            f1010 = new com.chronoxor.FBE.FinalModelStructOptional(buffer, 0);
-            f1011 = new FinalModelOptionalValueType<StructOptional, com.chronoxor.FBE.FinalModelStructOptional>(new com.chronoxor.FBE.FinalModelStructOptional(buffer, 0), buffer, 0);
+            parent = new com.chronoxor.test.FBE.FinalModelStructOptional(buffer, 0);
+            f1000 = new com.chronoxor.test.FBE.FinalModelEnumSimple(buffer, 0);
+            f1001 = new com.chronoxor.FBE.FinalModelOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple>(new com.chronoxor.test.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
+            f1002 = new com.chronoxor.test.FBE.FinalModelEnumTyped(buffer, 0);
+            f1003 = new com.chronoxor.FBE.FinalModelOptionalValueType<EnumTyped, com.chronoxor.test.FBE.FinalModelEnumTyped>(new com.chronoxor.test.FBE.FinalModelEnumTyped(buffer, 0), buffer, 0);
+            f1004 = new com.chronoxor.test.FBE.FinalModelFlagsSimple(buffer, 0);
+            f1005 = new com.chronoxor.FBE.FinalModelOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple>(new com.chronoxor.test.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
+            f1006 = new com.chronoxor.test.FBE.FinalModelFlagsTyped(buffer, 0);
+            f1007 = new com.chronoxor.FBE.FinalModelOptionalValueType<FlagsTyped, com.chronoxor.test.FBE.FinalModelFlagsTyped>(new com.chronoxor.test.FBE.FinalModelFlagsTyped(buffer, 0), buffer, 0);
+            f1008 = new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0);
+            f1009 = new com.chronoxor.FBE.FinalModelOptionalValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple>(new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
+            f1010 = new com.chronoxor.test.FBE.FinalModelStructOptional(buffer, 0);
+            f1011 = new com.chronoxor.FBE.FinalModelOptionalValueType<StructOptional, com.chronoxor.test.FBE.FinalModelStructOptional>(new com.chronoxor.test.FBE.FinalModelStructOptional(buffer, 0), buffer, 0);
         }
 
         // Get the allocation size
@@ -7857,7 +7859,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<StructNested> Clone() { return new FinalModelStructNested(_buffer, _offset); }
+        public override FBE.FinalModelValueType<StructNested> Clone() { return new FinalModelStructNested(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -8133,12 +8135,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructNested final model
-    public class StructNestedFinalModel : Model
+    public class StructNestedFinalModel : FBE.Model
     {
         private readonly FinalModelStructNested _model;
 
         public StructNestedFinalModel() { _model = new FinalModelStructNested(Buffer, 8); }
-        public StructNestedFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructNested(Buffer, 8); }
+        public StructNestedFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructNested(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelStructNested.FBETypeConst;
@@ -8243,11 +8245,11 @@ namespace com.chronoxor.test {
         public StructBytes Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new com.chronoxor.FBE.com.chronoxor.test.StructBytesModel();
+            var writer = new FBE.test.StructBytesModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new com.chronoxor.FBE.com.chronoxor.test.StructBytesModel();
+            var reader = new FBE.test.StructBytesModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -8299,17 +8301,17 @@ namespace com.chronoxor.test {
 
         public string ToJson()
         {
-            var json = com.chronoxor.FBE.Json.ToJson(this);
+            var json = FBE.Json.ToJson(this);
             return json;
         }
 
         public static StructBytes FromJson(string json)
         {
-            var result = com.chronoxor.FBE.Json.FromJson<StructBytes>(json);
+            var result = FBE.Json.FromJson<StructBytes>(json);
             return result;
         }
 
-        public static com.chronoxor.FBE.FieldModelValueType<StructBytes> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.com.chronoxor.test.FieldModelStructBytes(buffer, offset); }
+        public static FBE.FieldModelValueType<StructBytes> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructBytes(buffer, offset); }
     }
 
 } // namespace com.chronoxor.test
@@ -8319,17 +8321,17 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructBytes field model
-    public class FieldModelStructBytes : com.chronoxor.FBE.FieldModelValueType<StructBytes>
+    public class FieldModelStructBytes : FBE.FieldModelValueType<StructBytes>
     {
-        public readonly FieldModelReferenceType<MemoryStream> f1;
-        public readonly FieldModelOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f2;
-        public readonly FieldModelOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f3;
+        public readonly com.chronoxor.FBE.FieldModelReferenceType<MemoryStream> f1;
+        public readonly com.chronoxor.FBE.FieldModelOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>> f2;
+        public readonly com.chronoxor.FBE.FieldModelOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>> f3;
 
-        public FieldModelStructBytes(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelStructBytes(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, 4 + 4);
-            f2 = new FieldModelOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
-            f3 = new FieldModelOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
+            f1 = com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>.CreateFieldModel(FBE.BaseTypes.BYTES, buffer, 4 + 4);
+            f2 = new com.chronoxor.FBE.FieldModelOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>.CreateFieldModel(FBE.BaseTypes.BYTES, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
+            f3 = new com.chronoxor.FBE.FieldModelOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>.CreateFieldModel(FBE.BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
         }
 
         // Get the field size
@@ -8377,7 +8379,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<StructBytes> Clone() { return new FieldModelStructBytes(_buffer, _offset); }
+        public override FBE.FieldModelValueType<StructBytes> Clone() { return new FieldModelStructBytes(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -8552,12 +8554,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructBytes model
-    public class StructBytesModel : Model
+    public class StructBytesModel : FBE.Model
     {
         public readonly FieldModelStructBytes model;
 
         public StructBytesModel() { model = new FieldModelStructBytes(Buffer, 4); }
-        public StructBytesModel(Buffer buffer) : base(buffer) { model = new FieldModelStructBytes(Buffer, 4); }
+        public StructBytesModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelStructBytes(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -8638,17 +8640,17 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructBytes final model
-    public class FinalModelStructBytes : com.chronoxor.FBE.FinalModelValueType<StructBytes>
+    public class FinalModelStructBytes : FBE.FinalModelValueType<StructBytes>
     {
-        public readonly FinalModelReferenceType<MemoryStream> f1;
-        public readonly FinalModelOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f2;
-        public readonly FinalModelOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f3;
+        public readonly com.chronoxor.FBE.FinalModelReferenceType<MemoryStream> f1;
+        public readonly com.chronoxor.FBE.FinalModelOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>> f2;
+        public readonly com.chronoxor.FBE.FinalModelOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>> f3;
 
-        public FinalModelStructBytes(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelStructBytes(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0);
-            f2 = new FinalModelOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
-            f3 = new FinalModelOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f1 = com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>.CreateFinalModel(FBE.BaseTypes.BYTES, buffer, 0);
+            f2 = new com.chronoxor.FBE.FinalModelOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>.CreateFinalModel(FBE.BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f3 = new com.chronoxor.FBE.FinalModelOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>.CreateFinalModel(FBE.BaseTypes.BYTES, buffer, 0), buffer, 0);
         }
 
         // Get the allocation size
@@ -8667,7 +8669,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<StructBytes> Clone() { return new FinalModelStructBytes(_buffer, _offset); }
+        public override FBE.FinalModelValueType<StructBytes> Clone() { return new FinalModelStructBytes(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -8783,12 +8785,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructBytes final model
-    public class StructBytesFinalModel : Model
+    public class StructBytesFinalModel : FBE.Model
     {
         private readonly FinalModelStructBytes _model;
 
         public StructBytesFinalModel() { _model = new FinalModelStructBytes(Buffer, 8); }
-        public StructBytesFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructBytes(Buffer, 8); }
+        public StructBytesFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructBytes(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelStructBytes.FBETypeConst;
@@ -8914,11 +8916,11 @@ namespace com.chronoxor.test {
         public StructArray Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new com.chronoxor.FBE.com.chronoxor.test.StructArrayModel();
+            var writer = new FBE.test.StructArrayModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new com.chronoxor.FBE.com.chronoxor.test.StructArrayModel();
+            var reader = new FBE.test.StructArrayModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -9117,17 +9119,17 @@ namespace com.chronoxor.test {
 
         public string ToJson()
         {
-            var json = com.chronoxor.FBE.Json.ToJson(this);
+            var json = FBE.Json.ToJson(this);
             return json;
         }
 
         public static StructArray FromJson(string json)
         {
-            var result = com.chronoxor.FBE.Json.FromJson<StructArray>(json);
+            var result = FBE.Json.FromJson<StructArray>(json);
             return result;
         }
 
-        public static com.chronoxor.FBE.FieldModelValueType<StructArray> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.com.chronoxor.test.FieldModelStructArray(buffer, offset); }
+        public static FBE.FieldModelValueType<StructArray> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructArray(buffer, offset); }
     }
 
 } // namespace com.chronoxor.test
@@ -9137,31 +9139,31 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructArray field model
-    public class FieldModelStructArray : com.chronoxor.FBE.FieldModelValueType<StructArray>
+    public class FieldModelStructArray : FBE.FieldModelValueType<StructArray>
     {
-        public readonly FieldModelArrayValueType<byte, FieldModelValueType<byte>> f1;
-        public readonly FieldModelArrayOptionalValueType<byte, FieldModelValueType<byte>> f2;
-        public readonly FieldModelArrayReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f3;
-        public readonly FieldModelArrayOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f4;
-        public readonly FieldModelArrayValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple> f5;
-        public readonly FieldModelArrayOptionalValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple> f6;
-        public readonly FieldModelArrayValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple> f7;
-        public readonly FieldModelArrayOptionalValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple> f8;
-        public readonly FieldModelArrayValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple> f9;
-        public readonly FieldModelArrayOptionalValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple> f10;
+        public readonly com.chronoxor.FBE.FieldModelArrayValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>> f1;
+        public readonly com.chronoxor.FBE.FieldModelArrayOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>> f2;
+        public readonly com.chronoxor.FBE.FieldModelArrayReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>> f3;
+        public readonly com.chronoxor.FBE.FieldModelArrayOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>> f4;
+        public readonly com.chronoxor.FBE.FieldModelArrayValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple> f5;
+        public readonly com.chronoxor.FBE.FieldModelArrayOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple> f6;
+        public readonly com.chronoxor.FBE.FieldModelArrayValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple> f7;
+        public readonly com.chronoxor.FBE.FieldModelArrayOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple> f8;
+        public readonly com.chronoxor.FBE.FieldModelArrayValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple> f9;
+        public readonly com.chronoxor.FBE.FieldModelArrayOptionalValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple> f10;
 
-        public FieldModelStructArray(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelStructArray(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = new FieldModelArrayValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4, 2);
-            f2 = new FieldModelArrayOptionalValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize, 2);
-            f3 = new FieldModelArrayReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize, 2);
-            f4 = new FieldModelArrayOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize, 2);
-            f5 = new FieldModelArrayValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple>(new com.chronoxor.FBE.FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize, 2);
-            f6 = new FieldModelArrayOptionalValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple>(new com.chronoxor.FBE.FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize, 2);
-            f7 = new FieldModelArrayValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple>(new com.chronoxor.FBE.FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize, 2);
-            f8 = new FieldModelArrayOptionalValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple>(new com.chronoxor.FBE.FieldModelFlagsSimple(buffer, f7.FBEOffset + f7.FBESize), buffer, f7.FBEOffset + f7.FBESize, 2);
-            f9 = new FieldModelArrayValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple>(new com.chronoxor.FBE.FieldModelStructSimple(buffer, f8.FBEOffset + f8.FBESize), buffer, f8.FBEOffset + f8.FBESize, 2);
-            f10 = new FieldModelArrayOptionalValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple>(new com.chronoxor.FBE.FieldModelStructSimple(buffer, f9.FBEOffset + f9.FBESize), buffer, f9.FBEOffset + f9.FBESize, 2);
+            f1 = new com.chronoxor.FBE.FieldModelArrayValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4, 2);
+            f2 = new com.chronoxor.FBE.FieldModelArrayOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize, 2);
+            f3 = new com.chronoxor.FBE.FieldModelArrayReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>.CreateFieldModel(FBE.BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize, 2);
+            f4 = new com.chronoxor.FBE.FieldModelArrayOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>.CreateFieldModel(FBE.BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize, 2);
+            f5 = new com.chronoxor.FBE.FieldModelArrayValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple>(new com.chronoxor.test.FBE.FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize, 2);
+            f6 = new com.chronoxor.FBE.FieldModelArrayOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple>(new com.chronoxor.test.FBE.FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize, 2);
+            f7 = new com.chronoxor.FBE.FieldModelArrayValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple>(new com.chronoxor.test.FBE.FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize, 2);
+            f8 = new com.chronoxor.FBE.FieldModelArrayOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple>(new com.chronoxor.test.FBE.FieldModelFlagsSimple(buffer, f7.FBEOffset + f7.FBESize), buffer, f7.FBEOffset + f7.FBESize, 2);
+            f9 = new com.chronoxor.FBE.FieldModelArrayValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple>(new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, f8.FBEOffset + f8.FBESize), buffer, f8.FBEOffset + f8.FBESize, 2);
+            f10 = new com.chronoxor.FBE.FieldModelArrayOptionalValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple>(new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, f9.FBEOffset + f9.FBESize), buffer, f9.FBEOffset + f9.FBESize, 2);
         }
 
         // Get the field size
@@ -9223,7 +9225,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<StructArray> Clone() { return new FieldModelStructArray(_buffer, _offset); }
+        public override FBE.FieldModelValueType<StructArray> Clone() { return new FieldModelStructArray(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -9489,12 +9491,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructArray model
-    public class StructArrayModel : Model
+    public class StructArrayModel : FBE.Model
     {
         public readonly FieldModelStructArray model;
 
         public StructArrayModel() { model = new FieldModelStructArray(Buffer, 4); }
-        public StructArrayModel(Buffer buffer) : base(buffer) { model = new FieldModelStructArray(Buffer, 4); }
+        public StructArrayModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelStructArray(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -9575,31 +9577,31 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructArray final model
-    public class FinalModelStructArray : com.chronoxor.FBE.FinalModelValueType<StructArray>
+    public class FinalModelStructArray : FBE.FinalModelValueType<StructArray>
     {
-        public readonly FinalModelArrayValueType<byte, FinalModelValueType<byte>> f1;
-        public readonly FinalModelArrayOptionalValueType<byte, FinalModelValueType<byte>> f2;
-        public readonly FinalModelArrayReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f3;
-        public readonly FinalModelArrayOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f4;
-        public readonly FinalModelArrayValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple> f5;
-        public readonly FinalModelArrayOptionalValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple> f6;
-        public readonly FinalModelArrayValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple> f7;
-        public readonly FinalModelArrayOptionalValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple> f8;
-        public readonly FinalModelArrayValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple> f9;
-        public readonly FinalModelArrayOptionalValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple> f10;
+        public readonly com.chronoxor.FBE.FinalModelArrayValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>> f1;
+        public readonly com.chronoxor.FBE.FinalModelArrayOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>> f2;
+        public readonly com.chronoxor.FBE.FinalModelArrayReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>> f3;
+        public readonly com.chronoxor.FBE.FinalModelArrayOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>> f4;
+        public readonly com.chronoxor.FBE.FinalModelArrayValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple> f5;
+        public readonly com.chronoxor.FBE.FinalModelArrayOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple> f6;
+        public readonly com.chronoxor.FBE.FinalModelArrayValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple> f7;
+        public readonly com.chronoxor.FBE.FinalModelArrayOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple> f8;
+        public readonly com.chronoxor.FBE.FinalModelArrayValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple> f9;
+        public readonly com.chronoxor.FBE.FinalModelArrayOptionalValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple> f10;
 
-        public FinalModelStructArray(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelStructArray(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = new FinalModelArrayValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0, 2);
-            f2 = new FinalModelArrayOptionalValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0, 2);
-            f3 = new FinalModelArrayReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0, 2);
-            f4 = new FinalModelArrayOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0, 2);
-            f5 = new FinalModelArrayValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple>(new com.chronoxor.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0, 2);
-            f6 = new FinalModelArrayOptionalValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple>(new com.chronoxor.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0, 2);
-            f7 = new FinalModelArrayValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple>(new com.chronoxor.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0, 2);
-            f8 = new FinalModelArrayOptionalValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple>(new com.chronoxor.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0, 2);
-            f9 = new FinalModelArrayValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple>(new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0), buffer, 0, 2);
-            f10 = new FinalModelArrayOptionalValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple>(new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0), buffer, 0, 2);
+            f1 = new com.chronoxor.FBE.FinalModelArrayValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0), buffer, 0, 2);
+            f2 = new com.chronoxor.FBE.FinalModelArrayOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0), buffer, 0, 2);
+            f3 = new com.chronoxor.FBE.FinalModelArrayReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>.CreateFinalModel(FBE.BaseTypes.BYTES, buffer, 0), buffer, 0, 2);
+            f4 = new com.chronoxor.FBE.FinalModelArrayOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>.CreateFinalModel(FBE.BaseTypes.BYTES, buffer, 0), buffer, 0, 2);
+            f5 = new com.chronoxor.FBE.FinalModelArrayValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple>(new com.chronoxor.test.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0, 2);
+            f6 = new com.chronoxor.FBE.FinalModelArrayOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple>(new com.chronoxor.test.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0, 2);
+            f7 = new com.chronoxor.FBE.FinalModelArrayValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple>(new com.chronoxor.test.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0, 2);
+            f8 = new com.chronoxor.FBE.FinalModelArrayOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple>(new com.chronoxor.test.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0, 2);
+            f9 = new com.chronoxor.FBE.FinalModelArrayValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple>(new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0), buffer, 0, 2);
+            f10 = new com.chronoxor.FBE.FinalModelArrayOptionalValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple>(new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0), buffer, 0, 2);
         }
 
         // Get the allocation size
@@ -9625,7 +9627,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<StructArray> Clone() { return new FinalModelStructArray(_buffer, _offset); }
+        public override FBE.FinalModelValueType<StructArray> Clone() { return new FinalModelStructArray(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -9853,12 +9855,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructArray final model
-    public class StructArrayFinalModel : Model
+    public class StructArrayFinalModel : FBE.Model
     {
         private readonly FinalModelStructArray _model;
 
         public StructArrayFinalModel() { _model = new FinalModelStructArray(Buffer, 8); }
-        public StructArrayFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructArray(Buffer, 8); }
+        public StructArrayFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructArray(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelStructArray.FBETypeConst;
@@ -9984,11 +9986,11 @@ namespace com.chronoxor.test {
         public StructVector Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new com.chronoxor.FBE.com.chronoxor.test.StructVectorModel();
+            var writer = new FBE.test.StructVectorModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new com.chronoxor.FBE.com.chronoxor.test.StructVectorModel();
+            var reader = new FBE.test.StructVectorModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -10187,17 +10189,17 @@ namespace com.chronoxor.test {
 
         public string ToJson()
         {
-            var json = com.chronoxor.FBE.Json.ToJson(this);
+            var json = FBE.Json.ToJson(this);
             return json;
         }
 
         public static StructVector FromJson(string json)
         {
-            var result = com.chronoxor.FBE.Json.FromJson<StructVector>(json);
+            var result = FBE.Json.FromJson<StructVector>(json);
             return result;
         }
 
-        public static com.chronoxor.FBE.FieldModelValueType<StructVector> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.com.chronoxor.test.FieldModelStructVector(buffer, offset); }
+        public static FBE.FieldModelValueType<StructVector> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructVector(buffer, offset); }
     }
 
 } // namespace com.chronoxor.test
@@ -10207,31 +10209,31 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructVector field model
-    public class FieldModelStructVector : com.chronoxor.FBE.FieldModelValueType<StructVector>
+    public class FieldModelStructVector : FBE.FieldModelValueType<StructVector>
     {
-        public readonly FieldModelVectorValueType<byte, FieldModelValueType<byte>> f1;
-        public readonly FieldModelVectorOptionalValueType<byte, FieldModelValueType<byte>> f2;
-        public readonly FieldModelVectorReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f3;
-        public readonly FieldModelVectorOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f4;
-        public readonly FieldModelVectorValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple> f5;
-        public readonly FieldModelVectorOptionalValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple> f6;
-        public readonly FieldModelVectorValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple> f7;
-        public readonly FieldModelVectorOptionalValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple> f8;
-        public readonly FieldModelVectorValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple> f9;
-        public readonly FieldModelVectorOptionalValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple> f10;
+        public readonly com.chronoxor.FBE.FieldModelVectorValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>> f1;
+        public readonly com.chronoxor.FBE.FieldModelVectorOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>> f2;
+        public readonly com.chronoxor.FBE.FieldModelVectorReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>> f3;
+        public readonly com.chronoxor.FBE.FieldModelVectorOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>> f4;
+        public readonly com.chronoxor.FBE.FieldModelVectorValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple> f5;
+        public readonly com.chronoxor.FBE.FieldModelVectorOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple> f6;
+        public readonly com.chronoxor.FBE.FieldModelVectorValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple> f7;
+        public readonly com.chronoxor.FBE.FieldModelVectorOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple> f8;
+        public readonly com.chronoxor.FBE.FieldModelVectorValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple> f9;
+        public readonly com.chronoxor.FBE.FieldModelVectorOptionalValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple> f10;
 
-        public FieldModelStructVector(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelStructVector(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = new FieldModelVectorValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4);
-            f2 = new FieldModelVectorOptionalValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
-            f3 = new FieldModelVectorReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
-            f4 = new FieldModelVectorOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
-            f5 = new FieldModelVectorValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple>(new com.chronoxor.FBE.FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize);
-            f6 = new FieldModelVectorOptionalValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple>(new com.chronoxor.FBE.FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize);
-            f7 = new FieldModelVectorValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple>(new com.chronoxor.FBE.FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize);
-            f8 = new FieldModelVectorOptionalValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple>(new com.chronoxor.FBE.FieldModelFlagsSimple(buffer, f7.FBEOffset + f7.FBESize), buffer, f7.FBEOffset + f7.FBESize);
-            f9 = new FieldModelVectorValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple>(new com.chronoxor.FBE.FieldModelStructSimple(buffer, f8.FBEOffset + f8.FBESize), buffer, f8.FBEOffset + f8.FBESize);
-            f10 = new FieldModelVectorOptionalValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple>(new com.chronoxor.FBE.FieldModelStructSimple(buffer, f9.FBEOffset + f9.FBESize), buffer, f9.FBEOffset + f9.FBESize);
+            f1 = new com.chronoxor.FBE.FieldModelVectorValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4);
+            f2 = new com.chronoxor.FBE.FieldModelVectorOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
+            f3 = new com.chronoxor.FBE.FieldModelVectorReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>.CreateFieldModel(FBE.BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
+            f4 = new com.chronoxor.FBE.FieldModelVectorOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>.CreateFieldModel(FBE.BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
+            f5 = new com.chronoxor.FBE.FieldModelVectorValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple>(new com.chronoxor.test.FBE.FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize);
+            f6 = new com.chronoxor.FBE.FieldModelVectorOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple>(new com.chronoxor.test.FBE.FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize);
+            f7 = new com.chronoxor.FBE.FieldModelVectorValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple>(new com.chronoxor.test.FBE.FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize);
+            f8 = new com.chronoxor.FBE.FieldModelVectorOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple>(new com.chronoxor.test.FBE.FieldModelFlagsSimple(buffer, f7.FBEOffset + f7.FBESize), buffer, f7.FBEOffset + f7.FBESize);
+            f9 = new com.chronoxor.FBE.FieldModelVectorValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple>(new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, f8.FBEOffset + f8.FBESize), buffer, f8.FBEOffset + f8.FBESize);
+            f10 = new com.chronoxor.FBE.FieldModelVectorOptionalValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple>(new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, f9.FBEOffset + f9.FBESize), buffer, f9.FBEOffset + f9.FBESize);
         }
 
         // Get the field size
@@ -10293,7 +10295,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<StructVector> Clone() { return new FieldModelStructVector(_buffer, _offset); }
+        public override FBE.FieldModelValueType<StructVector> Clone() { return new FieldModelStructVector(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -10559,12 +10561,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructVector model
-    public class StructVectorModel : Model
+    public class StructVectorModel : FBE.Model
     {
         public readonly FieldModelStructVector model;
 
         public StructVectorModel() { model = new FieldModelStructVector(Buffer, 4); }
-        public StructVectorModel(Buffer buffer) : base(buffer) { model = new FieldModelStructVector(Buffer, 4); }
+        public StructVectorModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelStructVector(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -10645,31 +10647,31 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructVector final model
-    public class FinalModelStructVector : com.chronoxor.FBE.FinalModelValueType<StructVector>
+    public class FinalModelStructVector : FBE.FinalModelValueType<StructVector>
     {
-        public readonly FinalModelVectorValueType<byte, FinalModelValueType<byte>> f1;
-        public readonly FinalModelVectorOptionalValueType<byte, FinalModelValueType<byte>> f2;
-        public readonly FinalModelVectorReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f3;
-        public readonly FinalModelVectorOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f4;
-        public readonly FinalModelVectorValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple> f5;
-        public readonly FinalModelVectorOptionalValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple> f6;
-        public readonly FinalModelVectorValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple> f7;
-        public readonly FinalModelVectorOptionalValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple> f8;
-        public readonly FinalModelVectorValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple> f9;
-        public readonly FinalModelVectorOptionalValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple> f10;
+        public readonly com.chronoxor.FBE.FinalModelVectorValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>> f1;
+        public readonly com.chronoxor.FBE.FinalModelVectorOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>> f2;
+        public readonly com.chronoxor.FBE.FinalModelVectorReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>> f3;
+        public readonly com.chronoxor.FBE.FinalModelVectorOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>> f4;
+        public readonly com.chronoxor.FBE.FinalModelVectorValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple> f5;
+        public readonly com.chronoxor.FBE.FinalModelVectorOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple> f6;
+        public readonly com.chronoxor.FBE.FinalModelVectorValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple> f7;
+        public readonly com.chronoxor.FBE.FinalModelVectorOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple> f8;
+        public readonly com.chronoxor.FBE.FinalModelVectorValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple> f9;
+        public readonly com.chronoxor.FBE.FinalModelVectorOptionalValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple> f10;
 
-        public FinalModelStructVector(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelStructVector(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = new FinalModelVectorValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f2 = new FinalModelVectorOptionalValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f3 = new FinalModelVectorReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
-            f4 = new FinalModelVectorOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
-            f5 = new FinalModelVectorValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple>(new com.chronoxor.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
-            f6 = new FinalModelVectorOptionalValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple>(new com.chronoxor.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
-            f7 = new FinalModelVectorValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple>(new com.chronoxor.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
-            f8 = new FinalModelVectorOptionalValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple>(new com.chronoxor.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
-            f9 = new FinalModelVectorValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple>(new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
-            f10 = new FinalModelVectorOptionalValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple>(new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
+            f1 = new com.chronoxor.FBE.FinalModelVectorValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0), buffer, 0);
+            f2 = new com.chronoxor.FBE.FinalModelVectorOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0), buffer, 0);
+            f3 = new com.chronoxor.FBE.FinalModelVectorReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>.CreateFinalModel(FBE.BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f4 = new com.chronoxor.FBE.FinalModelVectorOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>.CreateFinalModel(FBE.BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f5 = new com.chronoxor.FBE.FinalModelVectorValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple>(new com.chronoxor.test.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
+            f6 = new com.chronoxor.FBE.FinalModelVectorOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple>(new com.chronoxor.test.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
+            f7 = new com.chronoxor.FBE.FinalModelVectorValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple>(new com.chronoxor.test.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
+            f8 = new com.chronoxor.FBE.FinalModelVectorOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple>(new com.chronoxor.test.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
+            f9 = new com.chronoxor.FBE.FinalModelVectorValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple>(new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
+            f10 = new com.chronoxor.FBE.FinalModelVectorOptionalValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple>(new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
         }
 
         // Get the allocation size
@@ -10695,7 +10697,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<StructVector> Clone() { return new FinalModelStructVector(_buffer, _offset); }
+        public override FBE.FinalModelValueType<StructVector> Clone() { return new FinalModelStructVector(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -10923,12 +10925,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructVector final model
-    public class StructVectorFinalModel : Model
+    public class StructVectorFinalModel : FBE.Model
     {
         private readonly FinalModelStructVector _model;
 
         public StructVectorFinalModel() { _model = new FinalModelStructVector(Buffer, 8); }
-        public StructVectorFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructVector(Buffer, 8); }
+        public StructVectorFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructVector(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelStructVector.FBETypeConst;
@@ -11054,11 +11056,11 @@ namespace com.chronoxor.test {
         public StructList Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new com.chronoxor.FBE.com.chronoxor.test.StructListModel();
+            var writer = new FBE.test.StructListModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new com.chronoxor.FBE.com.chronoxor.test.StructListModel();
+            var reader = new FBE.test.StructListModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -11257,17 +11259,17 @@ namespace com.chronoxor.test {
 
         public string ToJson()
         {
-            var json = com.chronoxor.FBE.Json.ToJson(this);
+            var json = FBE.Json.ToJson(this);
             return json;
         }
 
         public static StructList FromJson(string json)
         {
-            var result = com.chronoxor.FBE.Json.FromJson<StructList>(json);
+            var result = FBE.Json.FromJson<StructList>(json);
             return result;
         }
 
-        public static com.chronoxor.FBE.FieldModelValueType<StructList> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.com.chronoxor.test.FieldModelStructList(buffer, offset); }
+        public static FBE.FieldModelValueType<StructList> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructList(buffer, offset); }
     }
 
 } // namespace com.chronoxor.test
@@ -11277,31 +11279,31 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructList field model
-    public class FieldModelStructList : com.chronoxor.FBE.FieldModelValueType<StructList>
+    public class FieldModelStructList : FBE.FieldModelValueType<StructList>
     {
-        public readonly FieldModelVectorValueType<byte, FieldModelValueType<byte>> f1;
-        public readonly FieldModelVectorOptionalValueType<byte, FieldModelValueType<byte>> f2;
-        public readonly FieldModelVectorReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f3;
-        public readonly FieldModelVectorOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f4;
-        public readonly FieldModelVectorValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple> f5;
-        public readonly FieldModelVectorOptionalValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple> f6;
-        public readonly FieldModelVectorValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple> f7;
-        public readonly FieldModelVectorOptionalValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple> f8;
-        public readonly FieldModelVectorValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple> f9;
-        public readonly FieldModelVectorOptionalValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple> f10;
+        public readonly com.chronoxor.FBE.FieldModelVectorValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>> f1;
+        public readonly com.chronoxor.FBE.FieldModelVectorOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>> f2;
+        public readonly com.chronoxor.FBE.FieldModelVectorReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>> f3;
+        public readonly com.chronoxor.FBE.FieldModelVectorOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>> f4;
+        public readonly com.chronoxor.FBE.FieldModelVectorValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple> f5;
+        public readonly com.chronoxor.FBE.FieldModelVectorOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple> f6;
+        public readonly com.chronoxor.FBE.FieldModelVectorValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple> f7;
+        public readonly com.chronoxor.FBE.FieldModelVectorOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple> f8;
+        public readonly com.chronoxor.FBE.FieldModelVectorValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple> f9;
+        public readonly com.chronoxor.FBE.FieldModelVectorOptionalValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple> f10;
 
-        public FieldModelStructList(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelStructList(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = new FieldModelVectorValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4);
-            f2 = new FieldModelVectorOptionalValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
-            f3 = new FieldModelVectorReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
-            f4 = new FieldModelVectorOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
-            f5 = new FieldModelVectorValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple>(new com.chronoxor.FBE.FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize);
-            f6 = new FieldModelVectorOptionalValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple>(new com.chronoxor.FBE.FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize);
-            f7 = new FieldModelVectorValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple>(new com.chronoxor.FBE.FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize);
-            f8 = new FieldModelVectorOptionalValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple>(new com.chronoxor.FBE.FieldModelFlagsSimple(buffer, f7.FBEOffset + f7.FBESize), buffer, f7.FBEOffset + f7.FBESize);
-            f9 = new FieldModelVectorValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple>(new com.chronoxor.FBE.FieldModelStructSimple(buffer, f8.FBEOffset + f8.FBESize), buffer, f8.FBEOffset + f8.FBESize);
-            f10 = new FieldModelVectorOptionalValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple>(new com.chronoxor.FBE.FieldModelStructSimple(buffer, f9.FBEOffset + f9.FBESize), buffer, f9.FBEOffset + f9.FBESize);
+            f1 = new com.chronoxor.FBE.FieldModelVectorValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4);
+            f2 = new com.chronoxor.FBE.FieldModelVectorOptionalValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
+            f3 = new com.chronoxor.FBE.FieldModelVectorReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>.CreateFieldModel(FBE.BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
+            f4 = new com.chronoxor.FBE.FieldModelVectorOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>.CreateFieldModel(FBE.BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
+            f5 = new com.chronoxor.FBE.FieldModelVectorValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple>(new com.chronoxor.test.FBE.FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize);
+            f6 = new com.chronoxor.FBE.FieldModelVectorOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple>(new com.chronoxor.test.FBE.FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize);
+            f7 = new com.chronoxor.FBE.FieldModelVectorValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple>(new com.chronoxor.test.FBE.FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize);
+            f8 = new com.chronoxor.FBE.FieldModelVectorOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple>(new com.chronoxor.test.FBE.FieldModelFlagsSimple(buffer, f7.FBEOffset + f7.FBESize), buffer, f7.FBEOffset + f7.FBESize);
+            f9 = new com.chronoxor.FBE.FieldModelVectorValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple>(new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, f8.FBEOffset + f8.FBESize), buffer, f8.FBEOffset + f8.FBESize);
+            f10 = new com.chronoxor.FBE.FieldModelVectorOptionalValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple>(new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, f9.FBEOffset + f9.FBESize), buffer, f9.FBEOffset + f9.FBESize);
         }
 
         // Get the field size
@@ -11363,7 +11365,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<StructList> Clone() { return new FieldModelStructList(_buffer, _offset); }
+        public override FBE.FieldModelValueType<StructList> Clone() { return new FieldModelStructList(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -11629,12 +11631,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructList model
-    public class StructListModel : Model
+    public class StructListModel : FBE.Model
     {
         public readonly FieldModelStructList model;
 
         public StructListModel() { model = new FieldModelStructList(Buffer, 4); }
-        public StructListModel(Buffer buffer) : base(buffer) { model = new FieldModelStructList(Buffer, 4); }
+        public StructListModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelStructList(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -11715,31 +11717,31 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructList final model
-    public class FinalModelStructList : com.chronoxor.FBE.FinalModelValueType<StructList>
+    public class FinalModelStructList : FBE.FinalModelValueType<StructList>
     {
-        public readonly FinalModelVectorValueType<byte, FinalModelValueType<byte>> f1;
-        public readonly FinalModelVectorOptionalValueType<byte, FinalModelValueType<byte>> f2;
-        public readonly FinalModelVectorReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f3;
-        public readonly FinalModelVectorOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f4;
-        public readonly FinalModelVectorValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple> f5;
-        public readonly FinalModelVectorOptionalValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple> f6;
-        public readonly FinalModelVectorValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple> f7;
-        public readonly FinalModelVectorOptionalValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple> f8;
-        public readonly FinalModelVectorValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple> f9;
-        public readonly FinalModelVectorOptionalValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple> f10;
+        public readonly com.chronoxor.FBE.FinalModelVectorValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>> f1;
+        public readonly com.chronoxor.FBE.FinalModelVectorOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>> f2;
+        public readonly com.chronoxor.FBE.FinalModelVectorReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>> f3;
+        public readonly com.chronoxor.FBE.FinalModelVectorOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>> f4;
+        public readonly com.chronoxor.FBE.FinalModelVectorValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple> f5;
+        public readonly com.chronoxor.FBE.FinalModelVectorOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple> f6;
+        public readonly com.chronoxor.FBE.FinalModelVectorValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple> f7;
+        public readonly com.chronoxor.FBE.FinalModelVectorOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple> f8;
+        public readonly com.chronoxor.FBE.FinalModelVectorValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple> f9;
+        public readonly com.chronoxor.FBE.FinalModelVectorOptionalValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple> f10;
 
-        public FinalModelStructList(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelStructList(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = new FinalModelVectorValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f2 = new FinalModelVectorOptionalValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f3 = new FinalModelVectorReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
-            f4 = new FinalModelVectorOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
-            f5 = new FinalModelVectorValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple>(new com.chronoxor.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
-            f6 = new FinalModelVectorOptionalValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple>(new com.chronoxor.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
-            f7 = new FinalModelVectorValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple>(new com.chronoxor.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
-            f8 = new FinalModelVectorOptionalValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple>(new com.chronoxor.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
-            f9 = new FinalModelVectorValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple>(new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
-            f10 = new FinalModelVectorOptionalValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple>(new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
+            f1 = new com.chronoxor.FBE.FinalModelVectorValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0), buffer, 0);
+            f2 = new com.chronoxor.FBE.FinalModelVectorOptionalValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0), buffer, 0);
+            f3 = new com.chronoxor.FBE.FinalModelVectorReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>.CreateFinalModel(FBE.BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f4 = new com.chronoxor.FBE.FinalModelVectorOptionalReferenceType<MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>.CreateFinalModel(FBE.BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f5 = new com.chronoxor.FBE.FinalModelVectorValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple>(new com.chronoxor.test.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
+            f6 = new com.chronoxor.FBE.FinalModelVectorOptionalValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple>(new com.chronoxor.test.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
+            f7 = new com.chronoxor.FBE.FinalModelVectorValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple>(new com.chronoxor.test.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
+            f8 = new com.chronoxor.FBE.FinalModelVectorOptionalValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple>(new com.chronoxor.test.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
+            f9 = new com.chronoxor.FBE.FinalModelVectorValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple>(new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
+            f10 = new com.chronoxor.FBE.FinalModelVectorOptionalValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple>(new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
         }
 
         // Get the allocation size
@@ -11765,7 +11767,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<StructList> Clone() { return new FinalModelStructList(_buffer, _offset); }
+        public override FBE.FinalModelValueType<StructList> Clone() { return new FinalModelStructList(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -11993,12 +11995,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructList final model
-    public class StructListFinalModel : Model
+    public class StructListFinalModel : FBE.Model
     {
         private readonly FinalModelStructList _model;
 
         public StructListFinalModel() { _model = new FinalModelStructList(Buffer, 8); }
-        public StructListFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructList(Buffer, 8); }
+        public StructListFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructList(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelStructList.FBETypeConst;
@@ -12106,11 +12108,11 @@ namespace com.chronoxor.test {
         public StructSet Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new com.chronoxor.FBE.com.chronoxor.test.StructSetModel();
+            var writer = new FBE.test.StructSetModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new com.chronoxor.FBE.com.chronoxor.test.StructSetModel();
+            var reader = new FBE.test.StructSetModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -12219,17 +12221,17 @@ namespace com.chronoxor.test {
 
         public string ToJson()
         {
-            var json = com.chronoxor.FBE.Json.ToJson(this);
+            var json = FBE.Json.ToJson(this);
             return json;
         }
 
         public static StructSet FromJson(string json)
         {
-            var result = com.chronoxor.FBE.Json.FromJson<StructSet>(json);
+            var result = FBE.Json.FromJson<StructSet>(json);
             return result;
         }
 
-        public static com.chronoxor.FBE.FieldModelValueType<StructSet> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.com.chronoxor.test.FieldModelStructSet(buffer, offset); }
+        public static FBE.FieldModelValueType<StructSet> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructSet(buffer, offset); }
     }
 
 } // namespace com.chronoxor.test
@@ -12239,19 +12241,19 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSet field model
-    public class FieldModelStructSet : com.chronoxor.FBE.FieldModelValueType<StructSet>
+    public class FieldModelStructSet : FBE.FieldModelValueType<StructSet>
     {
-        public readonly FieldModelVectorValueType<byte, FieldModelValueType<byte>> f1;
-        public readonly FieldModelVectorValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple> f2;
-        public readonly FieldModelVectorValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple> f3;
-        public readonly FieldModelVectorValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple> f4;
+        public readonly com.chronoxor.FBE.FieldModelVectorValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>> f1;
+        public readonly com.chronoxor.FBE.FieldModelVectorValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple> f2;
+        public readonly com.chronoxor.FBE.FieldModelVectorValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple> f3;
+        public readonly com.chronoxor.FBE.FieldModelVectorValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple> f4;
 
-        public FieldModelStructSet(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelStructSet(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = new FieldModelVectorValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4);
-            f2 = new FieldModelVectorValueType<EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple>(new com.chronoxor.FBE.FieldModelEnumSimple(buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
-            f3 = new FieldModelVectorValueType<FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple>(new com.chronoxor.FBE.FieldModelFlagsSimple(buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
-            f4 = new FieldModelVectorValueType<StructSimple, com.chronoxor.FBE.FieldModelStructSimple>(new com.chronoxor.FBE.FieldModelStructSimple(buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
+            f1 = new com.chronoxor.FBE.FieldModelVectorValueType<byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4);
+            f2 = new com.chronoxor.FBE.FieldModelVectorValueType<EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple>(new com.chronoxor.test.FBE.FieldModelEnumSimple(buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
+            f3 = new com.chronoxor.FBE.FieldModelVectorValueType<FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple>(new com.chronoxor.test.FBE.FieldModelFlagsSimple(buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
+            f4 = new com.chronoxor.FBE.FieldModelVectorValueType<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple>(new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
         }
 
         // Get the field size
@@ -12301,7 +12303,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<StructSet> Clone() { return new FieldModelStructSet(_buffer, _offset); }
+        public override FBE.FieldModelValueType<StructSet> Clone() { return new FieldModelStructSet(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -12489,12 +12491,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSet model
-    public class StructSetModel : Model
+    public class StructSetModel : FBE.Model
     {
         public readonly FieldModelStructSet model;
 
         public StructSetModel() { model = new FieldModelStructSet(Buffer, 4); }
-        public StructSetModel(Buffer buffer) : base(buffer) { model = new FieldModelStructSet(Buffer, 4); }
+        public StructSetModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelStructSet(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -12575,19 +12577,19 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSet final model
-    public class FinalModelStructSet : com.chronoxor.FBE.FinalModelValueType<StructSet>
+    public class FinalModelStructSet : FBE.FinalModelValueType<StructSet>
     {
-        public readonly FinalModelVectorValueType<byte, FinalModelValueType<byte>> f1;
-        public readonly FinalModelVectorValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple> f2;
-        public readonly FinalModelVectorValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple> f3;
-        public readonly FinalModelVectorValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple> f4;
+        public readonly com.chronoxor.FBE.FinalModelVectorValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>> f1;
+        public readonly com.chronoxor.FBE.FinalModelVectorValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple> f2;
+        public readonly com.chronoxor.FBE.FinalModelVectorValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple> f3;
+        public readonly com.chronoxor.FBE.FinalModelVectorValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple> f4;
 
-        public FinalModelStructSet(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelStructSet(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = new FinalModelVectorValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f2 = new FinalModelVectorValueType<EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple>(new com.chronoxor.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
-            f3 = new FinalModelVectorValueType<FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple>(new com.chronoxor.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
-            f4 = new FinalModelVectorValueType<StructSimple, com.chronoxor.FBE.FinalModelStructSimple>(new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
+            f1 = new com.chronoxor.FBE.FinalModelVectorValueType<byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0), buffer, 0);
+            f2 = new com.chronoxor.FBE.FinalModelVectorValueType<EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple>(new com.chronoxor.test.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
+            f3 = new com.chronoxor.FBE.FinalModelVectorValueType<FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple>(new com.chronoxor.test.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
+            f4 = new com.chronoxor.FBE.FinalModelVectorValueType<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple>(new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
         }
 
         // Get the allocation size
@@ -12607,7 +12609,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<StructSet> Clone() { return new FinalModelStructSet(_buffer, _offset); }
+        public override FBE.FinalModelValueType<StructSet> Clone() { return new FinalModelStructSet(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -12739,12 +12741,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSet final model
-    public class StructSetFinalModel : Model
+    public class StructSetFinalModel : FBE.Model
     {
         private readonly FinalModelStructSet _model;
 
         public StructSetFinalModel() { _model = new FinalModelStructSet(Buffer, 8); }
-        public StructSetFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructSet(Buffer, 8); }
+        public StructSetFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructSet(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelStructSet.FBETypeConst;
@@ -12870,11 +12872,11 @@ namespace com.chronoxor.test {
         public StructMap Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new com.chronoxor.FBE.com.chronoxor.test.StructMapModel();
+            var writer = new FBE.test.StructMapModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new com.chronoxor.FBE.com.chronoxor.test.StructMapModel();
+            var reader = new FBE.test.StructMapModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -13093,17 +13095,17 @@ namespace com.chronoxor.test {
 
         public string ToJson()
         {
-            var json = com.chronoxor.FBE.Json.ToJson(this);
+            var json = FBE.Json.ToJson(this);
             return json;
         }
 
         public static StructMap FromJson(string json)
         {
-            var result = com.chronoxor.FBE.Json.FromJson<StructMap>(json);
+            var result = FBE.Json.FromJson<StructMap>(json);
             return result;
         }
 
-        public static com.chronoxor.FBE.FieldModelValueType<StructMap> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.com.chronoxor.test.FieldModelStructMap(buffer, offset); }
+        public static FBE.FieldModelValueType<StructMap> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructMap(buffer, offset); }
     }
 
 } // namespace com.chronoxor.test
@@ -13113,31 +13115,31 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructMap field model
-    public class FieldModelStructMap : com.chronoxor.FBE.FieldModelValueType<StructMap>
+    public class FieldModelStructMap : FBE.FieldModelValueType<StructMap>
     {
-        public readonly FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, byte, FieldModelValueType<byte>> f1;
-        public readonly FieldModelMapValueTypeKeyOptionalValueTypeValue<int, FieldModelValueType<int>, byte, FieldModelValueType<byte>> f2;
-        public readonly FieldModelMapValueTypeKeyReferenceTypeValue<int, FieldModelValueType<int>, MemoryStream, FieldModelReferenceType<MemoryStream>> f3;
-        public readonly FieldModelMapValueTypeKeyOptionalReferenceTypeValue<int, FieldModelValueType<int>, MemoryStream, FieldModelReferenceType<MemoryStream>> f4;
-        public readonly FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple> f5;
-        public readonly FieldModelMapValueTypeKeyOptionalValueTypeValue<int, FieldModelValueType<int>, EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple> f6;
-        public readonly FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple> f7;
-        public readonly FieldModelMapValueTypeKeyOptionalValueTypeValue<int, FieldModelValueType<int>, FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple> f8;
-        public readonly FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, StructSimple, com.chronoxor.FBE.FieldModelStructSimple> f9;
-        public readonly FieldModelMapValueTypeKeyOptionalValueTypeValue<int, FieldModelValueType<int>, StructSimple, com.chronoxor.FBE.FieldModelStructSimple> f10;
+        public readonly com.chronoxor.FBE.FieldModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, byte, com.chronoxor.FBE.FieldModelValueType<byte>> f1;
+        public readonly com.chronoxor.FBE.FieldModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, byte, com.chronoxor.FBE.FieldModelValueType<byte>> f2;
+        public readonly com.chronoxor.FBE.FieldModelMapValueTypeKeyReferenceTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>> f3;
+        public readonly com.chronoxor.FBE.FieldModelMapValueTypeKeyOptionalReferenceTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>> f4;
+        public readonly com.chronoxor.FBE.FieldModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple> f5;
+        public readonly com.chronoxor.FBE.FieldModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple> f6;
+        public readonly com.chronoxor.FBE.FieldModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple> f7;
+        public readonly com.chronoxor.FBE.FieldModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple> f8;
+        public readonly com.chronoxor.FBE.FieldModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple> f9;
+        public readonly com.chronoxor.FBE.FieldModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple> f10;
 
-        public FieldModelStructMap(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelStructMap(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = new FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, byte, FieldModelValueType<byte>>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, 4 + 4), FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4);
-            f2 = new FieldModelMapValueTypeKeyOptionalValueTypeValue<int, FieldModelValueType<int>, byte, FieldModelValueType<byte>>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f1.FBEOffset + f1.FBESize), FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
-            f3 = new FieldModelMapValueTypeKeyReferenceTypeValue<int, FieldModelValueType<int>, MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f2.FBEOffset + f2.FBESize), FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
-            f4 = new FieldModelMapValueTypeKeyOptionalReferenceTypeValue<int, FieldModelValueType<int>, MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f3.FBEOffset + f3.FBESize), FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
-            f5 = new FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f4.FBEOffset + f4.FBESize), new com.chronoxor.FBE.FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize);
-            f6 = new FieldModelMapValueTypeKeyOptionalValueTypeValue<int, FieldModelValueType<int>, EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f5.FBEOffset + f5.FBESize), new com.chronoxor.FBE.FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize);
-            f7 = new FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f6.FBEOffset + f6.FBESize), new com.chronoxor.FBE.FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize);
-            f8 = new FieldModelMapValueTypeKeyOptionalValueTypeValue<int, FieldModelValueType<int>, FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f7.FBEOffset + f7.FBESize), new com.chronoxor.FBE.FieldModelFlagsSimple(buffer, f7.FBEOffset + f7.FBESize), buffer, f7.FBEOffset + f7.FBESize);
-            f9 = new FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, StructSimple, com.chronoxor.FBE.FieldModelStructSimple>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f8.FBEOffset + f8.FBESize), new com.chronoxor.FBE.FieldModelStructSimple(buffer, f8.FBEOffset + f8.FBESize), buffer, f8.FBEOffset + f8.FBESize);
-            f10 = new FieldModelMapValueTypeKeyOptionalValueTypeValue<int, FieldModelValueType<int>, StructSimple, com.chronoxor.FBE.FieldModelStructSimple>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f9.FBEOffset + f9.FBESize), new com.chronoxor.FBE.FieldModelStructSimple(buffer, f9.FBEOffset + f9.FBESize), buffer, f9.FBEOffset + f9.FBESize);
+            f1 = new com.chronoxor.FBE.FieldModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, 4 + 4), com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4);
+            f2 = new com.chronoxor.FBE.FieldModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, f1.FBEOffset + f1.FBESize), com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
+            f3 = new com.chronoxor.FBE.FieldModelMapValueTypeKeyReferenceTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, f2.FBEOffset + f2.FBESize), com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>.CreateFieldModel(FBE.BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
+            f4 = new com.chronoxor.FBE.FieldModelMapValueTypeKeyOptionalReferenceTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, f3.FBEOffset + f3.FBESize), com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>.CreateFieldModel(FBE.BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
+            f5 = new com.chronoxor.FBE.FieldModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple>(com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, f4.FBEOffset + f4.FBESize), new com.chronoxor.test.FBE.FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize);
+            f6 = new com.chronoxor.FBE.FieldModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple>(com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, f5.FBEOffset + f5.FBESize), new com.chronoxor.test.FBE.FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize);
+            f7 = new com.chronoxor.FBE.FieldModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple>(com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, f6.FBEOffset + f6.FBESize), new com.chronoxor.test.FBE.FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize);
+            f8 = new com.chronoxor.FBE.FieldModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple>(com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, f7.FBEOffset + f7.FBESize), new com.chronoxor.test.FBE.FieldModelFlagsSimple(buffer, f7.FBEOffset + f7.FBESize), buffer, f7.FBEOffset + f7.FBESize);
+            f9 = new com.chronoxor.FBE.FieldModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple>(com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, f8.FBEOffset + f8.FBESize), new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, f8.FBEOffset + f8.FBESize), buffer, f8.FBEOffset + f8.FBESize);
+            f10 = new com.chronoxor.FBE.FieldModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FieldModelValueType<int>, StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple>(com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, f9.FBEOffset + f9.FBESize), new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, f9.FBEOffset + f9.FBESize), buffer, f9.FBEOffset + f9.FBESize);
         }
 
         // Get the field size
@@ -13199,7 +13201,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<StructMap> Clone() { return new FieldModelStructMap(_buffer, _offset); }
+        public override FBE.FieldModelValueType<StructMap> Clone() { return new FieldModelStructMap(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -13465,12 +13467,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructMap model
-    public class StructMapModel : Model
+    public class StructMapModel : FBE.Model
     {
         public readonly FieldModelStructMap model;
 
         public StructMapModel() { model = new FieldModelStructMap(Buffer, 4); }
-        public StructMapModel(Buffer buffer) : base(buffer) { model = new FieldModelStructMap(Buffer, 4); }
+        public StructMapModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelStructMap(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -13551,31 +13553,31 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructMap final model
-    public class FinalModelStructMap : com.chronoxor.FBE.FinalModelValueType<StructMap>
+    public class FinalModelStructMap : FBE.FinalModelValueType<StructMap>
     {
-        public readonly FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, byte, FinalModelValueType<byte>> f1;
-        public readonly FinalModelMapValueTypeKeyOptionalValueTypeValue<int, FinalModelValueType<int>, byte, FinalModelValueType<byte>> f2;
-        public readonly FinalModelMapValueTypeKeyReferenceTypeValue<int, FinalModelValueType<int>, MemoryStream, FinalModelReferenceType<MemoryStream>> f3;
-        public readonly FinalModelMapValueTypeKeyOptionalReferenceTypeValue<int, FinalModelValueType<int>, MemoryStream, FinalModelReferenceType<MemoryStream>> f4;
-        public readonly FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple> f5;
-        public readonly FinalModelMapValueTypeKeyOptionalValueTypeValue<int, FinalModelValueType<int>, EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple> f6;
-        public readonly FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple> f7;
-        public readonly FinalModelMapValueTypeKeyOptionalValueTypeValue<int, FinalModelValueType<int>, FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple> f8;
-        public readonly FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, StructSimple, com.chronoxor.FBE.FinalModelStructSimple> f9;
-        public readonly FinalModelMapValueTypeKeyOptionalValueTypeValue<int, FinalModelValueType<int>, StructSimple, com.chronoxor.FBE.FinalModelStructSimple> f10;
+        public readonly com.chronoxor.FBE.FinalModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, byte, com.chronoxor.FBE.FinalModelValueType<byte>> f1;
+        public readonly com.chronoxor.FBE.FinalModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, byte, com.chronoxor.FBE.FinalModelValueType<byte>> f2;
+        public readonly com.chronoxor.FBE.FinalModelMapValueTypeKeyReferenceTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>> f3;
+        public readonly com.chronoxor.FBE.FinalModelMapValueTypeKeyOptionalReferenceTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>> f4;
+        public readonly com.chronoxor.FBE.FinalModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple> f5;
+        public readonly com.chronoxor.FBE.FinalModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple> f6;
+        public readonly com.chronoxor.FBE.FinalModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple> f7;
+        public readonly com.chronoxor.FBE.FinalModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple> f8;
+        public readonly com.chronoxor.FBE.FinalModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple> f9;
+        public readonly com.chronoxor.FBE.FinalModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple> f10;
 
-        public FinalModelStructMap(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelStructMap(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = new FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, byte, FinalModelValueType<byte>>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f2 = new FinalModelMapValueTypeKeyOptionalValueTypeValue<int, FinalModelValueType<int>, byte, FinalModelValueType<byte>>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f3 = new FinalModelMapValueTypeKeyReferenceTypeValue<int, FinalModelValueType<int>, MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
-            f4 = new FinalModelMapValueTypeKeyOptionalReferenceTypeValue<int, FinalModelValueType<int>, MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
-            f5 = new FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), new com.chronoxor.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
-            f6 = new FinalModelMapValueTypeKeyOptionalValueTypeValue<int, FinalModelValueType<int>, EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), new com.chronoxor.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
-            f7 = new FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), new com.chronoxor.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
-            f8 = new FinalModelMapValueTypeKeyOptionalValueTypeValue<int, FinalModelValueType<int>, FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), new com.chronoxor.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
-            f9 = new FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, StructSimple, com.chronoxor.FBE.FinalModelStructSimple>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
-            f10 = new FinalModelMapValueTypeKeyOptionalValueTypeValue<int, FinalModelValueType<int>, StructSimple, com.chronoxor.FBE.FinalModelStructSimple>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
+            f1 = new com.chronoxor.FBE.FinalModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0), com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0), buffer, 0);
+            f2 = new com.chronoxor.FBE.FinalModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0), com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0), buffer, 0);
+            f3 = new com.chronoxor.FBE.FinalModelMapValueTypeKeyReferenceTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0), com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>.CreateFinalModel(FBE.BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f4 = new com.chronoxor.FBE.FinalModelMapValueTypeKeyOptionalReferenceTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0), com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>.CreateFinalModel(FBE.BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f5 = new com.chronoxor.FBE.FinalModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple>(com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0), new com.chronoxor.test.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
+            f6 = new com.chronoxor.FBE.FinalModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple>(com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0), new com.chronoxor.test.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
+            f7 = new com.chronoxor.FBE.FinalModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple>(com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0), new com.chronoxor.test.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
+            f8 = new com.chronoxor.FBE.FinalModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple>(com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0), new com.chronoxor.test.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
+            f9 = new com.chronoxor.FBE.FinalModelMapValueTypeKeyValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple>(com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0), new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
+            f10 = new com.chronoxor.FBE.FinalModelMapValueTypeKeyOptionalValueTypeValue<int, com.chronoxor.FBE.FinalModelValueType<int>, StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple>(com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0), new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
         }
 
         // Get the allocation size
@@ -13601,7 +13603,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<StructMap> Clone() { return new FinalModelStructMap(_buffer, _offset); }
+        public override FBE.FinalModelValueType<StructMap> Clone() { return new FinalModelStructMap(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -13829,12 +13831,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructMap final model
-    public class StructMapFinalModel : Model
+    public class StructMapFinalModel : FBE.Model
     {
         private readonly FinalModelStructMap _model;
 
         public StructMapFinalModel() { _model = new FinalModelStructMap(Buffer, 8); }
-        public StructMapFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructMap(Buffer, 8); }
+        public StructMapFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructMap(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelStructMap.FBETypeConst;
@@ -13960,11 +13962,11 @@ namespace com.chronoxor.test {
         public StructHash Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new com.chronoxor.FBE.com.chronoxor.test.StructHashModel();
+            var writer = new FBE.test.StructHashModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new com.chronoxor.FBE.com.chronoxor.test.StructHashModel();
+            var reader = new FBE.test.StructHashModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -14183,17 +14185,17 @@ namespace com.chronoxor.test {
 
         public string ToJson()
         {
-            var json = com.chronoxor.FBE.Json.ToJson(this);
+            var json = FBE.Json.ToJson(this);
             return json;
         }
 
         public static StructHash FromJson(string json)
         {
-            var result = com.chronoxor.FBE.Json.FromJson<StructHash>(json);
+            var result = FBE.Json.FromJson<StructHash>(json);
             return result;
         }
 
-        public static com.chronoxor.FBE.FieldModelValueType<StructHash> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.com.chronoxor.test.FieldModelStructHash(buffer, offset); }
+        public static FBE.FieldModelValueType<StructHash> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructHash(buffer, offset); }
     }
 
 } // namespace com.chronoxor.test
@@ -14203,31 +14205,31 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHash field model
-    public class FieldModelStructHash : com.chronoxor.FBE.FieldModelValueType<StructHash>
+    public class FieldModelStructHash : FBE.FieldModelValueType<StructHash>
     {
-        public readonly FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, byte, FieldModelValueType<byte>> f1;
-        public readonly FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, FieldModelReferenceType<string>, byte, FieldModelValueType<byte>> f2;
-        public readonly FieldModelMapReferenceTypeKeyReferenceTypeValue<string, FieldModelReferenceType<string>, MemoryStream, FieldModelReferenceType<MemoryStream>> f3;
-        public readonly FieldModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, FieldModelReferenceType<string>, MemoryStream, FieldModelReferenceType<MemoryStream>> f4;
-        public readonly FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple> f5;
-        public readonly FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, FieldModelReferenceType<string>, EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple> f6;
-        public readonly FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple> f7;
-        public readonly FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, FieldModelReferenceType<string>, FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple> f8;
-        public readonly FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, StructSimple, com.chronoxor.FBE.FieldModelStructSimple> f9;
-        public readonly FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, FieldModelReferenceType<string>, StructSimple, com.chronoxor.FBE.FieldModelStructSimple> f10;
+        public readonly com.chronoxor.FBE.FieldModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, byte, com.chronoxor.FBE.FieldModelValueType<byte>> f1;
+        public readonly com.chronoxor.FBE.FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, byte, com.chronoxor.FBE.FieldModelValueType<byte>> f2;
+        public readonly com.chronoxor.FBE.FieldModelMapReferenceTypeKeyReferenceTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>> f3;
+        public readonly com.chronoxor.FBE.FieldModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>> f4;
+        public readonly com.chronoxor.FBE.FieldModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple> f5;
+        public readonly com.chronoxor.FBE.FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple> f6;
+        public readonly com.chronoxor.FBE.FieldModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple> f7;
+        public readonly com.chronoxor.FBE.FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple> f8;
+        public readonly com.chronoxor.FBE.FieldModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple> f9;
+        public readonly com.chronoxor.FBE.FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple> f10;
 
-        public FieldModelStructHash(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelStructHash(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = new FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, byte, FieldModelValueType<byte>>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, 4 + 4), FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4);
-            f2 = new FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, FieldModelReferenceType<string>, byte, FieldModelValueType<byte>>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f1.FBEOffset + f1.FBESize), FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
-            f3 = new FieldModelMapReferenceTypeKeyReferenceTypeValue<string, FieldModelReferenceType<string>, MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f2.FBEOffset + f2.FBESize), FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
-            f4 = new FieldModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, FieldModelReferenceType<string>, MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f3.FBEOffset + f3.FBESize), FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
-            f5 = new FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f4.FBEOffset + f4.FBESize), new com.chronoxor.FBE.FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize);
-            f6 = new FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, FieldModelReferenceType<string>, EnumSimple, com.chronoxor.FBE.FieldModelEnumSimple>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f5.FBEOffset + f5.FBESize), new com.chronoxor.FBE.FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize);
-            f7 = new FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f6.FBEOffset + f6.FBESize), new com.chronoxor.FBE.FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize);
-            f8 = new FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, FieldModelReferenceType<string>, FlagsSimple, com.chronoxor.FBE.FieldModelFlagsSimple>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f7.FBEOffset + f7.FBESize), new com.chronoxor.FBE.FieldModelFlagsSimple(buffer, f7.FBEOffset + f7.FBESize), buffer, f7.FBEOffset + f7.FBESize);
-            f9 = new FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, StructSimple, com.chronoxor.FBE.FieldModelStructSimple>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f8.FBEOffset + f8.FBESize), new com.chronoxor.FBE.FieldModelStructSimple(buffer, f8.FBEOffset + f8.FBESize), buffer, f8.FBEOffset + f8.FBESize);
-            f10 = new FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, FieldModelReferenceType<string>, StructSimple, com.chronoxor.FBE.FieldModelStructSimple>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f9.FBEOffset + f9.FBESize), new com.chronoxor.FBE.FieldModelStructSimple(buffer, f9.FBEOffset + f9.FBESize), buffer, f9.FBEOffset + f9.FBESize);
+            f1 = new com.chronoxor.FBE.FieldModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, 4 + 4), com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4);
+            f2 = new com.chronoxor.FBE.FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, byte, com.chronoxor.FBE.FieldModelValueType<byte>>(com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, f1.FBEOffset + f1.FBESize), com.chronoxor.FBE.FieldModelValueType<byte>.CreateFieldModel(FBE.BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
+            f3 = new com.chronoxor.FBE.FieldModelMapReferenceTypeKeyReferenceTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, f2.FBEOffset + f2.FBESize), com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>.CreateFieldModel(FBE.BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
+            f4 = new com.chronoxor.FBE.FieldModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, MemoryStream, com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, f3.FBEOffset + f3.FBESize), com.chronoxor.FBE.FieldModelReferenceType<MemoryStream>.CreateFieldModel(FBE.BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
+            f5 = new com.chronoxor.FBE.FieldModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple>(com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, f4.FBEOffset + f4.FBESize), new com.chronoxor.test.FBE.FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize);
+            f6 = new com.chronoxor.FBE.FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, EnumSimple, com.chronoxor.test.FBE.FieldModelEnumSimple>(com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, f5.FBEOffset + f5.FBESize), new com.chronoxor.test.FBE.FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize);
+            f7 = new com.chronoxor.FBE.FieldModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple>(com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, f6.FBEOffset + f6.FBESize), new com.chronoxor.test.FBE.FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize);
+            f8 = new com.chronoxor.FBE.FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, FlagsSimple, com.chronoxor.test.FBE.FieldModelFlagsSimple>(com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, f7.FBEOffset + f7.FBESize), new com.chronoxor.test.FBE.FieldModelFlagsSimple(buffer, f7.FBEOffset + f7.FBESize), buffer, f7.FBEOffset + f7.FBESize);
+            f9 = new com.chronoxor.FBE.FieldModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple>(com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, f8.FBEOffset + f8.FBESize), new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, f8.FBEOffset + f8.FBESize), buffer, f8.FBEOffset + f8.FBESize);
+            f10 = new com.chronoxor.FBE.FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FieldModelReferenceType<string>, StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple>(com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, f9.FBEOffset + f9.FBESize), new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, f9.FBEOffset + f9.FBESize), buffer, f9.FBEOffset + f9.FBESize);
         }
 
         // Get the field size
@@ -14289,7 +14291,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<StructHash> Clone() { return new FieldModelStructHash(_buffer, _offset); }
+        public override FBE.FieldModelValueType<StructHash> Clone() { return new FieldModelStructHash(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -14555,12 +14557,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHash model
-    public class StructHashModel : Model
+    public class StructHashModel : FBE.Model
     {
         public readonly FieldModelStructHash model;
 
         public StructHashModel() { model = new FieldModelStructHash(Buffer, 4); }
-        public StructHashModel(Buffer buffer) : base(buffer) { model = new FieldModelStructHash(Buffer, 4); }
+        public StructHashModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelStructHash(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -14641,31 +14643,31 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHash final model
-    public class FinalModelStructHash : com.chronoxor.FBE.FinalModelValueType<StructHash>
+    public class FinalModelStructHash : FBE.FinalModelValueType<StructHash>
     {
-        public readonly FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, byte, FinalModelValueType<byte>> f1;
-        public readonly FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, FinalModelReferenceType<string>, byte, FinalModelValueType<byte>> f2;
-        public readonly FinalModelMapReferenceTypeKeyReferenceTypeValue<string, FinalModelReferenceType<string>, MemoryStream, FinalModelReferenceType<MemoryStream>> f3;
-        public readonly FinalModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, FinalModelReferenceType<string>, MemoryStream, FinalModelReferenceType<MemoryStream>> f4;
-        public readonly FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple> f5;
-        public readonly FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, FinalModelReferenceType<string>, EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple> f6;
-        public readonly FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple> f7;
-        public readonly FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, FinalModelReferenceType<string>, FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple> f8;
-        public readonly FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, StructSimple, com.chronoxor.FBE.FinalModelStructSimple> f9;
-        public readonly FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, FinalModelReferenceType<string>, StructSimple, com.chronoxor.FBE.FinalModelStructSimple> f10;
+        public readonly com.chronoxor.FBE.FinalModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, byte, com.chronoxor.FBE.FinalModelValueType<byte>> f1;
+        public readonly com.chronoxor.FBE.FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, byte, com.chronoxor.FBE.FinalModelValueType<byte>> f2;
+        public readonly com.chronoxor.FBE.FinalModelMapReferenceTypeKeyReferenceTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>> f3;
+        public readonly com.chronoxor.FBE.FinalModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>> f4;
+        public readonly com.chronoxor.FBE.FinalModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple> f5;
+        public readonly com.chronoxor.FBE.FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple> f6;
+        public readonly com.chronoxor.FBE.FinalModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple> f7;
+        public readonly com.chronoxor.FBE.FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple> f8;
+        public readonly com.chronoxor.FBE.FinalModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple> f9;
+        public readonly com.chronoxor.FBE.FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple> f10;
 
-        public FinalModelStructHash(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelStructHash(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = new FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, byte, FinalModelValueType<byte>>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f2 = new FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, FinalModelReferenceType<string>, byte, FinalModelValueType<byte>>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f3 = new FinalModelMapReferenceTypeKeyReferenceTypeValue<string, FinalModelReferenceType<string>, MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
-            f4 = new FinalModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, FinalModelReferenceType<string>, MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
-            f5 = new FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), new com.chronoxor.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
-            f6 = new FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, FinalModelReferenceType<string>, EnumSimple, com.chronoxor.FBE.FinalModelEnumSimple>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), new com.chronoxor.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
-            f7 = new FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), new com.chronoxor.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
-            f8 = new FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, FinalModelReferenceType<string>, FlagsSimple, com.chronoxor.FBE.FinalModelFlagsSimple>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), new com.chronoxor.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
-            f9 = new FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, StructSimple, com.chronoxor.FBE.FinalModelStructSimple>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
-            f10 = new FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, FinalModelReferenceType<string>, StructSimple, com.chronoxor.FBE.FinalModelStructSimple>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
+            f1 = new com.chronoxor.FBE.FinalModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0), com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0), buffer, 0);
+            f2 = new com.chronoxor.FBE.FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, byte, com.chronoxor.FBE.FinalModelValueType<byte>>(com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0), com.chronoxor.FBE.FinalModelValueType<byte>.CreateFinalModel(FBE.BaseTypes.BYTE, buffer, 0), buffer, 0);
+            f3 = new com.chronoxor.FBE.FinalModelMapReferenceTypeKeyReferenceTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0), com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>.CreateFinalModel(FBE.BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f4 = new com.chronoxor.FBE.FinalModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, MemoryStream, com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>>(com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0), com.chronoxor.FBE.FinalModelReferenceType<MemoryStream>.CreateFinalModel(FBE.BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f5 = new com.chronoxor.FBE.FinalModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple>(com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0), new com.chronoxor.test.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
+            f6 = new com.chronoxor.FBE.FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, EnumSimple, com.chronoxor.test.FBE.FinalModelEnumSimple>(com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0), new com.chronoxor.test.FBE.FinalModelEnumSimple(buffer, 0), buffer, 0);
+            f7 = new com.chronoxor.FBE.FinalModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple>(com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0), new com.chronoxor.test.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
+            f8 = new com.chronoxor.FBE.FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, FlagsSimple, com.chronoxor.test.FBE.FinalModelFlagsSimple>(com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0), new com.chronoxor.test.FBE.FinalModelFlagsSimple(buffer, 0), buffer, 0);
+            f9 = new com.chronoxor.FBE.FinalModelMapReferenceTypeKeyValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple>(com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0), new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
+            f10 = new com.chronoxor.FBE.FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, com.chronoxor.FBE.FinalModelReferenceType<string>, StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple>(com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0), new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0), buffer, 0);
         }
 
         // Get the allocation size
@@ -14691,7 +14693,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<StructHash> Clone() { return new FinalModelStructHash(_buffer, _offset); }
+        public override FBE.FinalModelValueType<StructHash> Clone() { return new FinalModelStructHash(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -14919,12 +14921,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHash final model
-    public class StructHashFinalModel : Model
+    public class StructHashFinalModel : FBE.Model
     {
         private readonly FinalModelStructHash _model;
 
         public StructHashFinalModel() { _model = new FinalModelStructHash(Buffer, 8); }
-        public StructHashFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructHash(Buffer, 8); }
+        public StructHashFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructHash(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelStructHash.FBETypeConst;
@@ -15026,11 +15028,11 @@ namespace com.chronoxor.test {
         public StructHashEx Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new com.chronoxor.FBE.com.chronoxor.test.StructHashExModel();
+            var writer = new FBE.test.StructHashExModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new com.chronoxor.FBE.com.chronoxor.test.StructHashExModel();
+            var reader = new FBE.test.StructHashExModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -15113,17 +15115,17 @@ namespace com.chronoxor.test {
 
         public string ToJson()
         {
-            var json = com.chronoxor.FBE.Json.ToJson(this);
+            var json = FBE.Json.ToJson(this);
             return json;
         }
 
         public static StructHashEx FromJson(string json)
         {
-            var result = com.chronoxor.FBE.Json.FromJson<StructHashEx>(json);
+            var result = FBE.Json.FromJson<StructHashEx>(json);
             return result;
         }
 
-        public static com.chronoxor.FBE.FieldModelValueType<StructHashEx> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.com.chronoxor.test.FieldModelStructHashEx(buffer, offset); }
+        public static FBE.FieldModelValueType<StructHashEx> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructHashEx(buffer, offset); }
     }
 
 } // namespace com.chronoxor.test
@@ -15133,15 +15135,15 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHashEx field model
-    public class FieldModelStructHashEx : com.chronoxor.FBE.FieldModelValueType<StructHashEx>
+    public class FieldModelStructHashEx : FBE.FieldModelValueType<StructHashEx>
     {
-        public readonly FieldModelMapValueTypeKeyValueTypeValue<StructSimple, com.chronoxor.FBE.FieldModelStructSimple, StructNested, com.chronoxor.FBE.FieldModelStructNested> f1;
-        public readonly FieldModelMapValueTypeKeyOptionalValueTypeValue<StructSimple, com.chronoxor.FBE.FieldModelStructSimple, StructNested, com.chronoxor.FBE.FieldModelStructNested> f2;
+        public readonly com.chronoxor.FBE.FieldModelMapValueTypeKeyValueTypeValue<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple, StructNested, com.chronoxor.test.FBE.FieldModelStructNested> f1;
+        public readonly com.chronoxor.FBE.FieldModelMapValueTypeKeyOptionalValueTypeValue<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple, StructNested, com.chronoxor.test.FBE.FieldModelStructNested> f2;
 
-        public FieldModelStructHashEx(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelStructHashEx(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = new FieldModelMapValueTypeKeyValueTypeValue<StructSimple, com.chronoxor.FBE.FieldModelStructSimple, StructNested, com.chronoxor.FBE.FieldModelStructNested>(new com.chronoxor.FBE.FieldModelStructSimple(buffer, 4 + 4), new com.chronoxor.FBE.FieldModelStructNested(buffer, 4 + 4), buffer, 4 + 4);
-            f2 = new FieldModelMapValueTypeKeyOptionalValueTypeValue<StructSimple, com.chronoxor.FBE.FieldModelStructSimple, StructNested, com.chronoxor.FBE.FieldModelStructNested>(new com.chronoxor.FBE.FieldModelStructSimple(buffer, f1.FBEOffset + f1.FBESize), new com.chronoxor.FBE.FieldModelStructNested(buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
+            f1 = new com.chronoxor.FBE.FieldModelMapValueTypeKeyValueTypeValue<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple, StructNested, com.chronoxor.test.FBE.FieldModelStructNested>(new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, 4 + 4), new com.chronoxor.test.FBE.FieldModelStructNested(buffer, 4 + 4), buffer, 4 + 4);
+            f2 = new com.chronoxor.FBE.FieldModelMapValueTypeKeyOptionalValueTypeValue<StructSimple, com.chronoxor.test.FBE.FieldModelStructSimple, StructNested, com.chronoxor.test.FBE.FieldModelStructNested>(new com.chronoxor.test.FBE.FieldModelStructSimple(buffer, f1.FBEOffset + f1.FBESize), new com.chronoxor.test.FBE.FieldModelStructNested(buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
         }
 
         // Get the field size
@@ -15187,7 +15189,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<StructHashEx> Clone() { return new FieldModelStructHashEx(_buffer, _offset); }
+        public override FBE.FieldModelValueType<StructHashEx> Clone() { return new FieldModelStructHashEx(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -15349,12 +15351,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHashEx model
-    public class StructHashExModel : Model
+    public class StructHashExModel : FBE.Model
     {
         public readonly FieldModelStructHashEx model;
 
         public StructHashExModel() { model = new FieldModelStructHashEx(Buffer, 4); }
-        public StructHashExModel(Buffer buffer) : base(buffer) { model = new FieldModelStructHashEx(Buffer, 4); }
+        public StructHashExModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelStructHashEx(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -15435,15 +15437,15 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHashEx final model
-    public class FinalModelStructHashEx : com.chronoxor.FBE.FinalModelValueType<StructHashEx>
+    public class FinalModelStructHashEx : FBE.FinalModelValueType<StructHashEx>
     {
-        public readonly FinalModelMapValueTypeKeyValueTypeValue<StructSimple, com.chronoxor.FBE.FinalModelStructSimple, StructNested, com.chronoxor.FBE.FinalModelStructNested> f1;
-        public readonly FinalModelMapValueTypeKeyOptionalValueTypeValue<StructSimple, com.chronoxor.FBE.FinalModelStructSimple, StructNested, com.chronoxor.FBE.FinalModelStructNested> f2;
+        public readonly com.chronoxor.FBE.FinalModelMapValueTypeKeyValueTypeValue<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple, StructNested, com.chronoxor.test.FBE.FinalModelStructNested> f1;
+        public readonly com.chronoxor.FBE.FinalModelMapValueTypeKeyOptionalValueTypeValue<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple, StructNested, com.chronoxor.test.FBE.FinalModelStructNested> f2;
 
-        public FinalModelStructHashEx(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelStructHashEx(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = new FinalModelMapValueTypeKeyValueTypeValue<StructSimple, com.chronoxor.FBE.FinalModelStructSimple, StructNested, com.chronoxor.FBE.FinalModelStructNested>(new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0), new com.chronoxor.FBE.FinalModelStructNested(buffer, 0), buffer, 0);
-            f2 = new FinalModelMapValueTypeKeyOptionalValueTypeValue<StructSimple, com.chronoxor.FBE.FinalModelStructSimple, StructNested, com.chronoxor.FBE.FinalModelStructNested>(new com.chronoxor.FBE.FinalModelStructSimple(buffer, 0), new com.chronoxor.FBE.FinalModelStructNested(buffer, 0), buffer, 0);
+            f1 = new com.chronoxor.FBE.FinalModelMapValueTypeKeyValueTypeValue<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple, StructNested, com.chronoxor.test.FBE.FinalModelStructNested>(new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0), new com.chronoxor.test.FBE.FinalModelStructNested(buffer, 0), buffer, 0);
+            f2 = new com.chronoxor.FBE.FinalModelMapValueTypeKeyOptionalValueTypeValue<StructSimple, com.chronoxor.test.FBE.FinalModelStructSimple, StructNested, com.chronoxor.test.FBE.FinalModelStructNested>(new com.chronoxor.test.FBE.FinalModelStructSimple(buffer, 0), new com.chronoxor.test.FBE.FinalModelStructNested(buffer, 0), buffer, 0);
         }
 
         // Get the allocation size
@@ -15461,7 +15463,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<StructHashEx> Clone() { return new FinalModelStructHashEx(_buffer, _offset); }
+        public override FBE.FinalModelValueType<StructHashEx> Clone() { return new FinalModelStructHashEx(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -15561,12 +15563,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHashEx final model
-    public class StructHashExFinalModel : Model
+    public class StructHashExFinalModel : FBE.Model
     {
         private readonly FinalModelStructHashEx _model;
 
         public StructHashExFinalModel() { _model = new FinalModelStructHashEx(Buffer, 8); }
-        public StructHashExFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructHashEx(Buffer, 8); }
+        public StructHashExFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructHashEx(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelStructHashEx.FBETypeConst;
@@ -15658,11 +15660,11 @@ namespace com.chronoxor.test {
         public StructEmpty Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new com.chronoxor.FBE.com.chronoxor.test.StructEmptyModel();
+            var writer = new FBE.test.StructEmptyModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new com.chronoxor.FBE.com.chronoxor.test.StructEmptyModel();
+            var reader = new FBE.test.StructEmptyModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -15711,17 +15713,17 @@ namespace com.chronoxor.test {
 
         public string ToJson()
         {
-            var json = com.chronoxor.FBE.Json.ToJson(this);
+            var json = FBE.Json.ToJson(this);
             return json;
         }
 
         public static StructEmpty FromJson(string json)
         {
-            var result = com.chronoxor.FBE.Json.FromJson<StructEmpty>(json);
+            var result = FBE.Json.FromJson<StructEmpty>(json);
             return result;
         }
 
-        public static com.chronoxor.FBE.FieldModelValueType<StructEmpty> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new com.chronoxor.FBE.com.chronoxor.test.FieldModelStructEmpty(buffer, offset); }
+        public static FBE.FieldModelValueType<StructEmpty> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructEmpty(buffer, offset); }
     }
 
 } // namespace com.chronoxor.test
@@ -15731,10 +15733,10 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructEmpty field model
-    public class FieldModelStructEmpty : com.chronoxor.FBE.FieldModelValueType<StructEmpty>
+    public class FieldModelStructEmpty : FBE.FieldModelValueType<StructEmpty>
     {
 
-        public FieldModelStructEmpty(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelStructEmpty(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
         }
 
@@ -15777,7 +15779,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<StructEmpty> Clone() { return new FieldModelStructEmpty(_buffer, _offset); }
+        public override FBE.FieldModelValueType<StructEmpty> Clone() { return new FieldModelStructEmpty(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -15908,12 +15910,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructEmpty model
-    public class StructEmptyModel : Model
+    public class StructEmptyModel : FBE.Model
     {
         public readonly FieldModelStructEmpty model;
 
         public StructEmptyModel() { model = new FieldModelStructEmpty(Buffer, 4); }
-        public StructEmptyModel(Buffer buffer) : base(buffer) { model = new FieldModelStructEmpty(Buffer, 4); }
+        public StructEmptyModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelStructEmpty(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -15994,10 +15996,10 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructEmpty final model
-    public class FinalModelStructEmpty : com.chronoxor.FBE.FinalModelValueType<StructEmpty>
+    public class FinalModelStructEmpty : FBE.FinalModelValueType<StructEmpty>
     {
 
-        public FinalModelStructEmpty(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelStructEmpty(FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
         }
 
@@ -16014,7 +16016,7 @@ namespace com.chronoxor.test.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<StructEmpty> Clone() { return new FinalModelStructEmpty(_buffer, _offset); }
+        public override FBE.FinalModelValueType<StructEmpty> Clone() { return new FinalModelStructEmpty(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -16069,12 +16071,12 @@ namespace com.chronoxor.test.FBE {
     using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructEmpty final model
-    public class StructEmptyFinalModel : Model
+    public class StructEmptyFinalModel : FBE.Model
     {
         private readonly FinalModelStructEmpty _model;
 
         public StructEmptyFinalModel() { _model = new FinalModelStructEmpty(Buffer, 8); }
-        public StructEmptyFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructEmpty(Buffer, 8); }
+        public StructEmptyFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelStructEmpty(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelStructEmpty.FBETypeConst;
@@ -16162,12 +16164,12 @@ namespace com.chronoxor.test.FBE {
 namespace com.chronoxor.test.FBE {
 
     // Fast Binary Encoding com.chronoxor.test sender listener interface
-    public interface ISenderListener : com.chronoxor.FBE.proto.ISenderListener
+    public interface ISenderListener : FBE.proto.ISenderListener
     {
     }
 
     // Fast Binary Encoding com.chronoxor.test sender
-    public class Sender : com.chronoxor.FBE.Sender, ISenderListener
+    public class Sender : FBE.Sender, ISenderListener
     {
         // Imported senders
         public readonly proto.Sender protoSender;
@@ -16178,7 +16180,7 @@ namespace com.chronoxor.test.FBE {
         {
             protoSender = new proto.Sender(Buffer);
         }
-        public Sender(com.chronoxor.FBE.Buffer buffer) : base(buffer, false)
+        public Sender(FBE.Buffer buffer) : base(buffer, false)
         {
             protoSender = new proto.Sender(Buffer);
         }
@@ -16206,13 +16208,13 @@ namespace com.chronoxor.test.FBE {
 namespace com.chronoxor.test.FBE {
 
     // Fast Binary Encoding com.chronoxor.test receiver listener interface
-    public interface IReceiverListener : com.chronoxor.FBE.proto.IReceiverListener
+    public interface IReceiverListener : FBE.proto.IReceiverListener
     {
         // Receive handlers
     }
 
     // Fast Binary Encoding com.chronoxor.test receiver
-    public class Receiver : com.chronoxor.FBE.Receiver, IReceiverListener
+    public class Receiver : FBE.Receiver, IReceiverListener
     {
         // Imported receivers
         public proto.Receiver protoReceiver;
@@ -16225,7 +16227,7 @@ namespace com.chronoxor.test.FBE {
         {
             protoReceiver = new proto.Receiver(Buffer);
         }
-        public Receiver(com.chronoxor.FBE.Buffer buffer) : base(buffer, false)
+        public Receiver(FBE.Buffer buffer) : base(buffer, false)
         {
             protoReceiver = new proto.Receiver(Buffer);
         }
@@ -16250,13 +16252,13 @@ namespace com.chronoxor.test.FBE {
 namespace com.chronoxor.test.FBE {
 
     // Fast Binary Encoding com.chronoxor.test proxy listener interface
-    public interface IProxyListener : com.chronoxor.FBE.proto.IProxyListener
+    public interface IProxyListener : FBE.proto.IProxyListener
     {
         // Proxy handlers
     }
 
     // Fast Binary Encoding com.chronoxor.test proxy
-    public class Proxy : com.chronoxor.FBE.Receiver, IProxyListener
+    public class Proxy : FBE.Receiver, IProxyListener
     {
         // Imported proxy
         public proto.Proxy protoProxy;
@@ -16267,7 +16269,7 @@ namespace com.chronoxor.test.FBE {
         {
             protoProxy = new proto.Proxy(Buffer);
         }
-        public Proxy(com.chronoxor.FBE.Buffer buffer) : base(buffer, false)
+        public Proxy(FBE.Buffer buffer) : base(buffer, false)
         {
             protoProxy = new proto.Proxy(Buffer);
         }
@@ -16292,12 +16294,12 @@ namespace com.chronoxor.test.FBE {
 namespace com.chronoxor.test.FBE {
 
     // Fast Binary Encoding com.chronoxor.test client listener interface
-    public interface IClientListener : com.chronoxor.FBE.proto.IClientListener, ISenderListener, IReceiverListener
+    public interface IClientListener : FBE.proto.IClientListener, ISenderListener, IReceiverListener
     {
     }
 
     // Fast Binary Encoding com.chronoxor.test client
-    public class Client : com.chronoxor.FBE.Client, IClientListener
+    public class Client : FBE.Client, IClientListener
     {
         // Imported clients
         public readonly proto.Client protoClient;
@@ -16312,7 +16314,7 @@ namespace com.chronoxor.test.FBE {
         {
             protoClient = new proto.Client(SendBuffer, ReceiveBuffer);
         }
-        public Client(com.chronoxor.FBE.Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, false)
+        public Client(FBE.Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, false)
         {
             protoClient = new proto.Client(SendBuffer, ReceiveBuffer);
         }
@@ -16371,12 +16373,12 @@ namespace com.chronoxor.test.FBE {
 namespace com.chronoxor.test.FBE {
 
     // Fast Binary Encoding com.chronoxor.test final sender listener interface
-    public interface IFinalSenderListener : com.chronoxor.FBE.proto.IFinalSenderListener
+    public interface IFinalSenderListener : FBE.proto.IFinalSenderListener
     {
     }
 
     // Fast Binary Encoding com.chronoxor.test final sender
-    public class FinalSender : com.chronoxor.FBE.Sender, IFinalSenderListener
+    public class FinalSender : FBE.Sender, IFinalSenderListener
     {
         // Imported senders
         public readonly proto.FinalSender protoSender;
@@ -16387,7 +16389,7 @@ namespace com.chronoxor.test.FBE {
         {
             protoSender = new proto.FinalSender(Buffer);
         }
-        public FinalSender(com.chronoxor.FBE.Buffer buffer) : base(buffer, true)
+        public FinalSender(FBE.Buffer buffer) : base(buffer, true)
         {
             protoSender = new proto.FinalSender(Buffer);
         }
@@ -16415,13 +16417,13 @@ namespace com.chronoxor.test.FBE {
 namespace com.chronoxor.test.FBE {
 
     // Fast Binary Encoding com.chronoxor.test final receiver listener interface
-    public interface IFinalReceiverListener : com.chronoxor.FBE.proto.IFinalReceiverListener
+    public interface IFinalReceiverListener : FBE.proto.IFinalReceiverListener
     {
         // Receive handlers
     }
 
     // Fast Binary Encoding com.chronoxor.test final receiver
-    public class FinalReceiver : com.chronoxor.FBE.Receiver, IFinalReceiverListener
+    public class FinalReceiver : FBE.Receiver, IFinalReceiverListener
     {
         // Imported receivers
         public proto.FinalReceiver protoReceiver;
@@ -16434,7 +16436,7 @@ namespace com.chronoxor.test.FBE {
         {
             protoReceiver = new proto.FinalReceiver(Buffer);
         }
-        public FinalReceiver(com.chronoxor.FBE.Buffer buffer) : base(buffer, true)
+        public FinalReceiver(FBE.Buffer buffer) : base(buffer, true)
         {
             protoReceiver = new proto.FinalReceiver(Buffer);
         }
@@ -16459,12 +16461,12 @@ namespace com.chronoxor.test.FBE {
 namespace com.chronoxor.test.FBE {
 
     // Fast Binary Encoding com.chronoxor.test final client listener interface
-    public interface IFinalClientListener : com.chronoxor.FBE.proto.IFinalClientListener, IFinalSenderListener, IFinalReceiverListener
+    public interface IFinalClientListener : FBE.proto.IFinalClientListener, IFinalSenderListener, IFinalReceiverListener
     {
     }
 
     // Fast Binary Encoding com.chronoxor.test final client
-    public class FinalClient : com.chronoxor.FBE.Client, IFinalClientListener
+    public class FinalClient : FBE.Client, IFinalClientListener
     {
         // Imported clients
         public readonly proto.FinalClient protoClient;
@@ -16479,7 +16481,7 @@ namespace com.chronoxor.test.FBE {
         {
             protoClient = new proto.FinalClient(SendBuffer, ReceiveBuffer);
         }
-        public FinalClient(com.chronoxor.FBE.Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, true)
+        public FinalClient(FBE.Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, true)
         {
             protoClient = new proto.FinalClient(SendBuffer, ReceiveBuffer);
         }

@@ -100,9 +100,9 @@ private:
     std::string ConvertTypeName(const std::string& type, bool optional);
     std::string ConvertTypeName(const std::string& domain, const std::string& package, const std::string& type, bool optional);
     std::string ConvertTypeName(const StructField& field);
-    std::string ConvertTypeFieldName(const std::string& domain, const std::string& type, bool final);
-    std::string ConvertTypeFieldDeclaration(const std::string& domain, const StructField& field, bool final);
-    std::string ConvertTypeFieldInitialization(const std::string& domain, const StructField& field, const std::string& offset, bool final);
+    std::string ConvertTypeFieldName(const std::string& domain, const std::string& package, const std::string& type, bool final);
+    std::string ConvertTypeFieldDeclaration(const std::string& domain, const std::string& package, const StructField& field, bool final);
+    std::string ConvertTypeFieldInitialization(const std::string& domain, const std::string& package, const StructField& field, const std::string& offset, bool final);
     std::string ConvertConstant(const std::string& domain, const std::string& package, const std::string& type, const std::string& value, bool optional);
     std::string ConvertConstantPrefix(const std::string& type);
     std::string ConvertConstantSuffix(const std::string& type);
