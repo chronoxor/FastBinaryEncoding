@@ -31,8 +31,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 #endif
 
-using com.chronoxor.FBE;
-
 using com.chronoxor.proto;
 
 namespace com.chronoxor.protoex {
@@ -143,7 +141,7 @@ namespace com.chronoxor.protoex {
 
         public static OrderSide Default => new OrderSide();
 
-        public static FBE.FieldModelValueType<OrderSide> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelOrderSide(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<OrderSide> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new protoex.FBE.FieldModelOrderSide(buffer, offset); }
 
         public const byte _buy_ = (byte)0U + 0;
         public const byte _sell_ = (byte)0U + 1;
@@ -169,15 +167,15 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding OrderSide field model
-    public class FieldModelOrderSide : FBE.FieldModelValueType<OrderSide>
+    public class FieldModelOrderSide : com.chronoxor.FBE.FieldModelValueType<OrderSide>
     {
-        public FieldModelOrderSide(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelOrderSide(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 1;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<OrderSide> Clone() { return new FieldModelOrderSide(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<OrderSide> Clone() { return new FieldModelOrderSide(_buffer, _offset); }
 
         // Get the value
         public override void Get(out OrderSide value) { Get(out value, OrderSide.Default); }
@@ -210,9 +208,9 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding OrderSide final model
-    public class FinalModelOrderSide : FBE.FinalModelValueType<OrderSide>
+    public class FinalModelOrderSide : com.chronoxor.FBE.FinalModelValueType<OrderSide>
     {
-        public FinalModelOrderSide(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelOrderSide(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(OrderSide value) { return FBESize; }
@@ -221,7 +219,7 @@ namespace com.chronoxor.protoex.FBE {
         public override long FBESize => 1;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<OrderSide> Clone() { return new FinalModelOrderSide(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<OrderSide> Clone() { return new FinalModelOrderSide(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -367,7 +365,7 @@ namespace com.chronoxor.protoex {
 
         public static OrderType Default => new OrderType();
 
-        public static FBE.FieldModelValueType<OrderType> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelOrderType(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<OrderType> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new protoex.FBE.FieldModelOrderType(buffer, offset); }
 
         public const byte _market_ = (byte)0U + 0;
         public const byte _limit_ = (byte)0U + 1;
@@ -396,15 +394,15 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding OrderType field model
-    public class FieldModelOrderType : FBE.FieldModelValueType<OrderType>
+    public class FieldModelOrderType : com.chronoxor.FBE.FieldModelValueType<OrderType>
     {
-        public FieldModelOrderType(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelOrderType(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 1;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<OrderType> Clone() { return new FieldModelOrderType(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<OrderType> Clone() { return new FieldModelOrderType(_buffer, _offset); }
 
         // Get the value
         public override void Get(out OrderType value) { Get(out value, OrderType.Default); }
@@ -437,9 +435,9 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding OrderType final model
-    public class FinalModelOrderType : FBE.FinalModelValueType<OrderType>
+    public class FinalModelOrderType : com.chronoxor.FBE.FinalModelValueType<OrderType>
     {
-        public FinalModelOrderType(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelOrderType(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(OrderType value) { return FBESize; }
@@ -448,7 +446,7 @@ namespace com.chronoxor.protoex.FBE {
         public override long FBESize => 1;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<OrderType> Clone() { return new FinalModelOrderType(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<OrderType> Clone() { return new FinalModelOrderType(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -626,7 +624,7 @@ namespace com.chronoxor.protoex {
 
         public static StateEx Default => new StateEx();
 
-        public static FBE.FieldModelValueType<StateEx> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelStateEx(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<StateEx> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new protoex.FBE.FieldModelStateEx(buffer, offset); }
 
         public const byte _unknown_ = (byte)0x00U;
         public const byte _invalid_ = (byte)0x01U;
@@ -709,15 +707,15 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding StateEx field model
-    public class FieldModelStateEx : FBE.FieldModelValueType<StateEx>
+    public class FieldModelStateEx : com.chronoxor.FBE.FieldModelValueType<StateEx>
     {
-        public FieldModelStateEx(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelStateEx(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 1;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<StateEx> Clone() { return new FieldModelStateEx(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<StateEx> Clone() { return new FieldModelStateEx(_buffer, _offset); }
 
         // Get the value
         public override void Get(out StateEx value) { Get(out value, StateEx.Default); }
@@ -750,9 +748,9 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding StateEx final model
-    public class FinalModelStateEx : FBE.FinalModelValueType<StateEx>
+    public class FinalModelStateEx : com.chronoxor.FBE.FinalModelValueType<StateEx>
     {
-        public FinalModelStateEx(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelStateEx(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(StateEx value) { return FBESize; }
@@ -761,7 +759,7 @@ namespace com.chronoxor.protoex.FBE {
         public override long FBESize => 1;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<StateEx> Clone() { return new FinalModelStateEx(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<StateEx> Clone() { return new FinalModelStateEx(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -847,11 +845,11 @@ namespace com.chronoxor.protoex {
         public Order Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.protoex.OrderModel();
+            var writer = new com.chronoxor.protoex.FBE.OrderModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.protoex.OrderModel();
+            var reader = new com.chronoxor.protoex.FBE.OrderModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -919,17 +917,17 @@ namespace com.chronoxor.protoex {
 
         public string ToJson()
         {
-            var json = FBE.Json.ToJson(this);
+            var json = com.chronoxor.FBE.Json.ToJson(this);
             return json;
         }
 
         public static Order FromJson(string json)
         {
-            var result = FBE.Json.FromJson<Order>(json);
+            var result = com.chronoxor.FBE.Json.FromJson<Order>(json);
             return result;
         }
 
-        public static FBE.FieldModelValueType<Order> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelOrder(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<Order> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new protoex.FBE.FieldModelOrder(buffer, offset); }
     }
 
 } // namespace com.chronoxor.protoex
@@ -939,7 +937,7 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding Order field model
-    public class FieldModelOrder : FBE.FieldModelValueType<Order>
+    public class FieldModelOrder : com.chronoxor.FBE.FieldModelValueType<Order>
     {
         public readonly com.chronoxor.FBE.FieldModelValueType<int> id;
         public readonly com.chronoxor.FBE.FieldModelReferenceType<string> symbol;
@@ -950,16 +948,16 @@ namespace com.chronoxor.protoex.FBE {
         public readonly com.chronoxor.FBE.FieldModelValueType<double> tp;
         public readonly com.chronoxor.FBE.FieldModelValueType<double> sl;
 
-        public FieldModelOrder(FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelOrder(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            id = com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, 4 + 4);
-            symbol = com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, id.FBEOffset + id.FBESize);
+            id = com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(com.chronoxor.FBE.BaseTypes.INT32, buffer, 4 + 4);
+            symbol = com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(com.chronoxor.FBE.BaseTypes.STRING, buffer, id.FBEOffset + id.FBESize);
             side = new com.chronoxor.protoex.FBE.FieldModelOrderSide(buffer, symbol.FBEOffset + symbol.FBESize);
             type = new com.chronoxor.protoex.FBE.FieldModelOrderType(buffer, side.FBEOffset + side.FBESize);
-            price = com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(FBE.BaseTypes.DOUBLE, buffer, type.FBEOffset + type.FBESize);
-            volume = com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(FBE.BaseTypes.DOUBLE, buffer, price.FBEOffset + price.FBESize);
-            tp = com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(FBE.BaseTypes.DOUBLE, buffer, volume.FBEOffset + volume.FBESize);
-            sl = com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(FBE.BaseTypes.DOUBLE, buffer, tp.FBEOffset + tp.FBESize);
+            price = com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(com.chronoxor.FBE.BaseTypes.DOUBLE, buffer, type.FBEOffset + type.FBESize);
+            volume = com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(com.chronoxor.FBE.BaseTypes.DOUBLE, buffer, price.FBEOffset + price.FBESize);
+            tp = com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(com.chronoxor.FBE.BaseTypes.DOUBLE, buffer, volume.FBEOffset + volume.FBESize);
+            sl = com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(com.chronoxor.FBE.BaseTypes.DOUBLE, buffer, tp.FBEOffset + tp.FBESize);
         }
 
         // Get the field size
@@ -1017,7 +1015,7 @@ namespace com.chronoxor.protoex.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<Order> Clone() { return new FieldModelOrder(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<Order> Clone() { return new FieldModelOrder(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -1257,12 +1255,12 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding Order model
-    public class OrderModel : FBE.Model
+    public class OrderModel : com.chronoxor.FBE.Model
     {
         public readonly FieldModelOrder model;
 
         public OrderModel() { model = new FieldModelOrder(Buffer, 4); }
-        public OrderModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelOrder(Buffer, 4); }
+        public OrderModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { model = new FieldModelOrder(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -1343,7 +1341,7 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding Order final model
-    public class FinalModelOrder : FBE.FinalModelValueType<Order>
+    public class FinalModelOrder : com.chronoxor.FBE.FinalModelValueType<Order>
     {
         public readonly com.chronoxor.FBE.FinalModelValueType<int> id;
         public readonly com.chronoxor.FBE.FinalModelReferenceType<string> symbol;
@@ -1354,16 +1352,16 @@ namespace com.chronoxor.protoex.FBE {
         public readonly com.chronoxor.FBE.FinalModelValueType<double> tp;
         public readonly com.chronoxor.FBE.FinalModelValueType<double> sl;
 
-        public FinalModelOrder(FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelOrder(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            id = com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0);
-            symbol = com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0);
+            id = com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(com.chronoxor.FBE.BaseTypes.INT32, buffer, 0);
+            symbol = com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(com.chronoxor.FBE.BaseTypes.STRING, buffer, 0);
             side = new com.chronoxor.protoex.FBE.FinalModelOrderSide(buffer, 0);
             type = new com.chronoxor.protoex.FBE.FinalModelOrderType(buffer, 0);
-            price = com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(FBE.BaseTypes.DOUBLE, buffer, 0);
-            volume = com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(FBE.BaseTypes.DOUBLE, buffer, 0);
-            tp = com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(FBE.BaseTypes.DOUBLE, buffer, 0);
-            sl = com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(FBE.BaseTypes.DOUBLE, buffer, 0);
+            price = com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(com.chronoxor.FBE.BaseTypes.DOUBLE, buffer, 0);
+            volume = com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(com.chronoxor.FBE.BaseTypes.DOUBLE, buffer, 0);
+            tp = com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(com.chronoxor.FBE.BaseTypes.DOUBLE, buffer, 0);
+            sl = com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(com.chronoxor.FBE.BaseTypes.DOUBLE, buffer, 0);
         }
 
         // Get the allocation size
@@ -1387,7 +1385,7 @@ namespace com.chronoxor.protoex.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<Order> Clone() { return new FinalModelOrder(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<Order> Clone() { return new FinalModelOrder(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -1583,12 +1581,12 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding Order final model
-    public class OrderFinalModel : FBE.Model
+    public class OrderFinalModel : com.chronoxor.FBE.Model
     {
         private readonly FinalModelOrder _model;
 
         public OrderFinalModel() { _model = new FinalModelOrder(Buffer, 8); }
-        public OrderFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelOrder(Buffer, 8); }
+        public OrderFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelOrder(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelOrder.FBETypeConst;
@@ -1695,11 +1693,11 @@ namespace com.chronoxor.protoex {
         public Balance Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.protoex.BalanceModel();
+            var writer = new com.chronoxor.protoex.FBE.BalanceModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.protoex.BalanceModel();
+            var reader = new com.chronoxor.protoex.FBE.BalanceModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -1761,7 +1759,7 @@ namespace com.chronoxor.protoex {
 
         public string ToJson()
         {
-            var json = FBE.Json.ToJson(this);
+            var json = com.chronoxor.FBE.Json.ToJson(this);
             var jsonParent = parent.ToJson();
             json = json.Substring(0, json.Length - 1) + "," + jsonParent.Substring(1, jsonParent.Length - 2) + "}";
             return json;
@@ -1769,12 +1767,12 @@ namespace com.chronoxor.protoex {
 
         public static Balance FromJson(string json)
         {
-            var result = FBE.Json.FromJson<Balance>(json);
+            var result = com.chronoxor.FBE.Json.FromJson<Balance>(json);
             result.parent = proto.Balance.FromJson(json);
             return result;
         }
 
-        public static FBE.FieldModelValueType<Balance> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelBalance(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<Balance> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new protoex.FBE.FieldModelBalance(buffer, offset); }
     }
 
 } // namespace com.chronoxor.protoex
@@ -1784,15 +1782,15 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding Balance field model
-    public class FieldModelBalance : FBE.FieldModelValueType<Balance>
+    public class FieldModelBalance : com.chronoxor.FBE.FieldModelValueType<Balance>
     {
         public readonly com.chronoxor.proto.FBE.FieldModelBalance parent;
         public readonly com.chronoxor.FBE.FieldModelValueType<double> locked;
 
-        public FieldModelBalance(FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelBalance(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
             parent = new com.chronoxor.proto.FBE.FieldModelBalance(buffer, 4 + 4);
-            locked = com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(FBE.BaseTypes.DOUBLE, buffer, parent.FBEOffset + parent.FBEBody - 4 - 4);
+            locked = com.chronoxor.FBE.FieldModelValueType<double>.CreateFieldModel(com.chronoxor.FBE.BaseTypes.DOUBLE, buffer, parent.FBEOffset + parent.FBEBody - 4 - 4);
         }
 
         // Get the field size
@@ -1838,7 +1836,7 @@ namespace com.chronoxor.protoex.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<Balance> Clone() { return new FieldModelBalance(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<Balance> Clone() { return new FieldModelBalance(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -1998,12 +1996,12 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding Balance model
-    public class BalanceModel : FBE.Model
+    public class BalanceModel : com.chronoxor.FBE.Model
     {
         public readonly FieldModelBalance model;
 
         public BalanceModel() { model = new FieldModelBalance(Buffer, 4); }
-        public BalanceModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelBalance(Buffer, 4); }
+        public BalanceModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { model = new FieldModelBalance(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -2084,15 +2082,15 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding Balance final model
-    public class FinalModelBalance : FBE.FinalModelValueType<Balance>
+    public class FinalModelBalance : com.chronoxor.FBE.FinalModelValueType<Balance>
     {
         public readonly com.chronoxor.proto.FBE.FinalModelBalance parent;
         public readonly com.chronoxor.FBE.FinalModelValueType<double> locked;
 
-        public FinalModelBalance(FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelBalance(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
             parent = new com.chronoxor.proto.FBE.FinalModelBalance(buffer, 0);
-            locked = com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(FBE.BaseTypes.DOUBLE, buffer, 0);
+            locked = com.chronoxor.FBE.FinalModelValueType<double>.CreateFinalModel(com.chronoxor.FBE.BaseTypes.DOUBLE, buffer, 0);
         }
 
         // Get the allocation size
@@ -2110,7 +2108,7 @@ namespace com.chronoxor.protoex.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<Balance> Clone() { return new FinalModelBalance(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<Balance> Clone() { return new FinalModelBalance(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -2210,12 +2208,12 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding Balance final model
-    public class BalanceFinalModel : FBE.Model
+    public class BalanceFinalModel : com.chronoxor.FBE.Model
     {
         private readonly FinalModelBalance _model;
 
         public BalanceFinalModel() { _model = new FinalModelBalance(Buffer, 8); }
-        public BalanceFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelBalance(Buffer, 8); }
+        public BalanceFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelBalance(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelBalance.FBETypeConst;
@@ -2329,11 +2327,11 @@ namespace com.chronoxor.protoex {
         public Account Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.protoex.AccountModel();
+            var writer = new com.chronoxor.protoex.FBE.AccountModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.protoex.AccountModel();
+            var reader = new com.chronoxor.protoex.FBE.AccountModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -2413,17 +2411,17 @@ namespace com.chronoxor.protoex {
 
         public string ToJson()
         {
-            var json = FBE.Json.ToJson(this);
+            var json = com.chronoxor.FBE.Json.ToJson(this);
             return json;
         }
 
         public static Account FromJson(string json)
         {
-            var result = FBE.Json.FromJson<Account>(json);
+            var result = com.chronoxor.FBE.Json.FromJson<Account>(json);
             return result;
         }
 
-        public static FBE.FieldModelValueType<Account> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelAccount(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<Account> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new protoex.FBE.FieldModelAccount(buffer, offset); }
     }
 
 } // namespace com.chronoxor.protoex
@@ -2433,7 +2431,7 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding Account field model
-    public class FieldModelAccount : FBE.FieldModelValueType<Account>
+    public class FieldModelAccount : com.chronoxor.FBE.FieldModelValueType<Account>
     {
         public readonly com.chronoxor.FBE.FieldModelValueType<int> id;
         public readonly com.chronoxor.FBE.FieldModelReferenceType<string> name;
@@ -2442,10 +2440,10 @@ namespace com.chronoxor.protoex.FBE {
         public readonly com.chronoxor.FBE.FieldModelOptionalValueType<Balance, com.chronoxor.protoex.FBE.FieldModelBalance> asset;
         public readonly com.chronoxor.FBE.FieldModelVectorValueType<Order, com.chronoxor.protoex.FBE.FieldModelOrder> orders;
 
-        public FieldModelAccount(FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelAccount(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            id = com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(FBE.BaseTypes.INT32, buffer, 4 + 4);
-            name = com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(FBE.BaseTypes.STRING, buffer, id.FBEOffset + id.FBESize);
+            id = com.chronoxor.FBE.FieldModelValueType<int>.CreateFieldModel(com.chronoxor.FBE.BaseTypes.INT32, buffer, 4 + 4);
+            name = com.chronoxor.FBE.FieldModelReferenceType<string>.CreateFieldModel(com.chronoxor.FBE.BaseTypes.STRING, buffer, id.FBEOffset + id.FBESize);
             state = new com.chronoxor.protoex.FBE.FieldModelStateEx(buffer, name.FBEOffset + name.FBESize);
             wallet = new com.chronoxor.protoex.FBE.FieldModelBalance(buffer, state.FBEOffset + state.FBESize);
             asset = new com.chronoxor.FBE.FieldModelOptionalValueType<Balance, com.chronoxor.protoex.FBE.FieldModelBalance>(new com.chronoxor.protoex.FBE.FieldModelBalance(buffer, wallet.FBEOffset + wallet.FBESize), buffer, wallet.FBEOffset + wallet.FBESize);
@@ -2503,7 +2501,7 @@ namespace com.chronoxor.protoex.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<Account> Clone() { return new FieldModelAccount(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<Account> Clone() { return new FieldModelAccount(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -2717,12 +2715,12 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding Account model
-    public class AccountModel : FBE.Model
+    public class AccountModel : com.chronoxor.FBE.Model
     {
         public readonly FieldModelAccount model;
 
         public AccountModel() { model = new FieldModelAccount(Buffer, 4); }
-        public AccountModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelAccount(Buffer, 4); }
+        public AccountModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { model = new FieldModelAccount(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -2803,7 +2801,7 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding Account final model
-    public class FinalModelAccount : FBE.FinalModelValueType<Account>
+    public class FinalModelAccount : com.chronoxor.FBE.FinalModelValueType<Account>
     {
         public readonly com.chronoxor.FBE.FinalModelValueType<int> id;
         public readonly com.chronoxor.FBE.FinalModelReferenceType<string> name;
@@ -2812,10 +2810,10 @@ namespace com.chronoxor.protoex.FBE {
         public readonly com.chronoxor.FBE.FinalModelOptionalValueType<Balance, com.chronoxor.protoex.FBE.FinalModelBalance> asset;
         public readonly com.chronoxor.FBE.FinalModelVectorValueType<Order, com.chronoxor.protoex.FBE.FinalModelOrder> orders;
 
-        public FinalModelAccount(FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelAccount(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
-            id = com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(FBE.BaseTypes.INT32, buffer, 0);
-            name = com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(FBE.BaseTypes.STRING, buffer, 0);
+            id = com.chronoxor.FBE.FinalModelValueType<int>.CreateFinalModel(com.chronoxor.FBE.BaseTypes.INT32, buffer, 0);
+            name = com.chronoxor.FBE.FinalModelReferenceType<string>.CreateFinalModel(com.chronoxor.FBE.BaseTypes.STRING, buffer, 0);
             state = new com.chronoxor.protoex.FBE.FinalModelStateEx(buffer, 0);
             wallet = new com.chronoxor.protoex.FBE.FinalModelBalance(buffer, 0);
             asset = new com.chronoxor.FBE.FinalModelOptionalValueType<Balance, com.chronoxor.protoex.FBE.FinalModelBalance>(new com.chronoxor.protoex.FBE.FinalModelBalance(buffer, 0), buffer, 0);
@@ -2841,7 +2839,7 @@ namespace com.chronoxor.protoex.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<Account> Clone() { return new FinalModelAccount(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<Account> Clone() { return new FinalModelAccount(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -3005,12 +3003,12 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding Account final model
-    public class AccountFinalModel : FBE.Model
+    public class AccountFinalModel : com.chronoxor.FBE.Model
     {
         private readonly FinalModelAccount _model;
 
         public AccountFinalModel() { _model = new FinalModelAccount(Buffer, 8); }
-        public AccountFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelAccount(Buffer, 8); }
+        public AccountFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelAccount(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelAccount.FBETypeConst;
@@ -3110,11 +3108,11 @@ namespace com.chronoxor.protoex {
         public OrderMessage Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.protoex.OrderMessageModel();
+            var writer = new com.chronoxor.protoex.FBE.OrderMessageModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.protoex.OrderMessageModel();
+            var reader = new com.chronoxor.protoex.FBE.OrderMessageModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -3164,17 +3162,17 @@ namespace com.chronoxor.protoex {
 
         public string ToJson()
         {
-            var json = FBE.Json.ToJson(this);
+            var json = com.chronoxor.FBE.Json.ToJson(this);
             return json;
         }
 
         public static OrderMessage FromJson(string json)
         {
-            var result = FBE.Json.FromJson<OrderMessage>(json);
+            var result = com.chronoxor.FBE.Json.FromJson<OrderMessage>(json);
             return result;
         }
 
-        public static FBE.FieldModelValueType<OrderMessage> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelOrderMessage(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<OrderMessage> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new protoex.FBE.FieldModelOrderMessage(buffer, offset); }
     }
 
 } // namespace com.chronoxor.protoex
@@ -3184,11 +3182,11 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding OrderMessage field model
-    public class FieldModelOrderMessage : FBE.FieldModelValueType<OrderMessage>
+    public class FieldModelOrderMessage : com.chronoxor.FBE.FieldModelValueType<OrderMessage>
     {
         public readonly com.chronoxor.protoex.FBE.FieldModelOrder body;
 
-        public FieldModelOrderMessage(FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelOrderMessage(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
             body = new com.chronoxor.protoex.FBE.FieldModelOrder(buffer, 4 + 4);
         }
@@ -3234,7 +3232,7 @@ namespace com.chronoxor.protoex.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<OrderMessage> Clone() { return new FieldModelOrderMessage(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<OrderMessage> Clone() { return new FieldModelOrderMessage(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -3383,12 +3381,12 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding OrderMessage model
-    public class OrderMessageModel : FBE.Model
+    public class OrderMessageModel : com.chronoxor.FBE.Model
     {
         public readonly FieldModelOrderMessage model;
 
         public OrderMessageModel() { model = new FieldModelOrderMessage(Buffer, 4); }
-        public OrderMessageModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelOrderMessage(Buffer, 4); }
+        public OrderMessageModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { model = new FieldModelOrderMessage(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -3469,11 +3467,11 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding OrderMessage final model
-    public class FinalModelOrderMessage : FBE.FinalModelValueType<OrderMessage>
+    public class FinalModelOrderMessage : com.chronoxor.FBE.FinalModelValueType<OrderMessage>
     {
         public readonly com.chronoxor.protoex.FBE.FinalModelOrder body;
 
-        public FinalModelOrderMessage(FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelOrderMessage(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
             body = new com.chronoxor.protoex.FBE.FinalModelOrder(buffer, 0);
         }
@@ -3492,7 +3490,7 @@ namespace com.chronoxor.protoex.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<OrderMessage> Clone() { return new FinalModelOrderMessage(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<OrderMessage> Clone() { return new FinalModelOrderMessage(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -3576,12 +3574,12 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding OrderMessage final model
-    public class OrderMessageFinalModel : FBE.Model
+    public class OrderMessageFinalModel : com.chronoxor.FBE.Model
     {
         private readonly FinalModelOrderMessage _model;
 
         public OrderMessageFinalModel() { _model = new FinalModelOrderMessage(Buffer, 8); }
-        public OrderMessageFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelOrderMessage(Buffer, 8); }
+        public OrderMessageFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelOrderMessage(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelOrderMessage.FBETypeConst;
@@ -3681,11 +3679,11 @@ namespace com.chronoxor.protoex {
         public BalanceMessage Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.protoex.BalanceMessageModel();
+            var writer = new com.chronoxor.protoex.FBE.BalanceMessageModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.protoex.BalanceMessageModel();
+            var reader = new com.chronoxor.protoex.FBE.BalanceMessageModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -3735,17 +3733,17 @@ namespace com.chronoxor.protoex {
 
         public string ToJson()
         {
-            var json = FBE.Json.ToJson(this);
+            var json = com.chronoxor.FBE.Json.ToJson(this);
             return json;
         }
 
         public static BalanceMessage FromJson(string json)
         {
-            var result = FBE.Json.FromJson<BalanceMessage>(json);
+            var result = com.chronoxor.FBE.Json.FromJson<BalanceMessage>(json);
             return result;
         }
 
-        public static FBE.FieldModelValueType<BalanceMessage> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelBalanceMessage(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<BalanceMessage> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new protoex.FBE.FieldModelBalanceMessage(buffer, offset); }
     }
 
 } // namespace com.chronoxor.protoex
@@ -3755,11 +3753,11 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding BalanceMessage field model
-    public class FieldModelBalanceMessage : FBE.FieldModelValueType<BalanceMessage>
+    public class FieldModelBalanceMessage : com.chronoxor.FBE.FieldModelValueType<BalanceMessage>
     {
         public readonly com.chronoxor.protoex.FBE.FieldModelBalance body;
 
-        public FieldModelBalanceMessage(FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelBalanceMessage(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
             body = new com.chronoxor.protoex.FBE.FieldModelBalance(buffer, 4 + 4);
         }
@@ -3805,7 +3803,7 @@ namespace com.chronoxor.protoex.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<BalanceMessage> Clone() { return new FieldModelBalanceMessage(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<BalanceMessage> Clone() { return new FieldModelBalanceMessage(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -3954,12 +3952,12 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding BalanceMessage model
-    public class BalanceMessageModel : FBE.Model
+    public class BalanceMessageModel : com.chronoxor.FBE.Model
     {
         public readonly FieldModelBalanceMessage model;
 
         public BalanceMessageModel() { model = new FieldModelBalanceMessage(Buffer, 4); }
-        public BalanceMessageModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelBalanceMessage(Buffer, 4); }
+        public BalanceMessageModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { model = new FieldModelBalanceMessage(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -4040,11 +4038,11 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding BalanceMessage final model
-    public class FinalModelBalanceMessage : FBE.FinalModelValueType<BalanceMessage>
+    public class FinalModelBalanceMessage : com.chronoxor.FBE.FinalModelValueType<BalanceMessage>
     {
         public readonly com.chronoxor.protoex.FBE.FinalModelBalance body;
 
-        public FinalModelBalanceMessage(FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelBalanceMessage(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
             body = new com.chronoxor.protoex.FBE.FinalModelBalance(buffer, 0);
         }
@@ -4063,7 +4061,7 @@ namespace com.chronoxor.protoex.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<BalanceMessage> Clone() { return new FinalModelBalanceMessage(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<BalanceMessage> Clone() { return new FinalModelBalanceMessage(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -4147,12 +4145,12 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding BalanceMessage final model
-    public class BalanceMessageFinalModel : FBE.Model
+    public class BalanceMessageFinalModel : com.chronoxor.FBE.Model
     {
         private readonly FinalModelBalanceMessage _model;
 
         public BalanceMessageFinalModel() { _model = new FinalModelBalanceMessage(Buffer, 8); }
-        public BalanceMessageFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelBalanceMessage(Buffer, 8); }
+        public BalanceMessageFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelBalanceMessage(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelBalanceMessage.FBETypeConst;
@@ -4252,11 +4250,11 @@ namespace com.chronoxor.protoex {
         public AccountMessage Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.protoex.AccountMessageModel();
+            var writer = new com.chronoxor.protoex.FBE.AccountMessageModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.protoex.AccountMessageModel();
+            var reader = new com.chronoxor.protoex.FBE.AccountMessageModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -4306,17 +4304,17 @@ namespace com.chronoxor.protoex {
 
         public string ToJson()
         {
-            var json = FBE.Json.ToJson(this);
+            var json = com.chronoxor.FBE.Json.ToJson(this);
             return json;
         }
 
         public static AccountMessage FromJson(string json)
         {
-            var result = FBE.Json.FromJson<AccountMessage>(json);
+            var result = com.chronoxor.FBE.Json.FromJson<AccountMessage>(json);
             return result;
         }
 
-        public static FBE.FieldModelValueType<AccountMessage> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelAccountMessage(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<AccountMessage> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new protoex.FBE.FieldModelAccountMessage(buffer, offset); }
     }
 
 } // namespace com.chronoxor.protoex
@@ -4326,11 +4324,11 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding AccountMessage field model
-    public class FieldModelAccountMessage : FBE.FieldModelValueType<AccountMessage>
+    public class FieldModelAccountMessage : com.chronoxor.FBE.FieldModelValueType<AccountMessage>
     {
         public readonly com.chronoxor.protoex.FBE.FieldModelAccount body;
 
-        public FieldModelAccountMessage(FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelAccountMessage(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
             body = new com.chronoxor.protoex.FBE.FieldModelAccount(buffer, 4 + 4);
         }
@@ -4376,7 +4374,7 @@ namespace com.chronoxor.protoex.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<AccountMessage> Clone() { return new FieldModelAccountMessage(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<AccountMessage> Clone() { return new FieldModelAccountMessage(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -4525,12 +4523,12 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding AccountMessage model
-    public class AccountMessageModel : FBE.Model
+    public class AccountMessageModel : com.chronoxor.FBE.Model
     {
         public readonly FieldModelAccountMessage model;
 
         public AccountMessageModel() { model = new FieldModelAccountMessage(Buffer, 4); }
-        public AccountMessageModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelAccountMessage(Buffer, 4); }
+        public AccountMessageModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { model = new FieldModelAccountMessage(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -4611,11 +4609,11 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding AccountMessage final model
-    public class FinalModelAccountMessage : FBE.FinalModelValueType<AccountMessage>
+    public class FinalModelAccountMessage : com.chronoxor.FBE.FinalModelValueType<AccountMessage>
     {
         public readonly com.chronoxor.protoex.FBE.FinalModelAccount body;
 
-        public FinalModelAccountMessage(FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelAccountMessage(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
             body = new com.chronoxor.protoex.FBE.FinalModelAccount(buffer, 0);
         }
@@ -4634,7 +4632,7 @@ namespace com.chronoxor.protoex.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<AccountMessage> Clone() { return new FinalModelAccountMessage(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<AccountMessage> Clone() { return new FinalModelAccountMessage(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -4718,12 +4716,12 @@ namespace com.chronoxor.protoex.FBE {
     using global::com.chronoxor.protoex;
 
     // Fast Binary Encoding AccountMessage final model
-    public class AccountMessageFinalModel : FBE.Model
+    public class AccountMessageFinalModel : com.chronoxor.FBE.Model
     {
         private readonly FinalModelAccountMessage _model;
 
         public AccountMessageFinalModel() { _model = new FinalModelAccountMessage(Buffer, 8); }
-        public AccountMessageFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelAccountMessage(Buffer, 8); }
+        public AccountMessageFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelAccountMessage(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelAccountMessage.FBETypeConst;
@@ -4811,15 +4809,15 @@ namespace com.chronoxor.protoex.FBE {
 namespace com.chronoxor.protoex.FBE {
 
     // Fast Binary Encoding com.chronoxor.protoex sender listener interface
-    public interface ISenderListener : FBE.proto.ISenderListener
+    public interface ISenderListener : com.chronoxor.proto.FBE.ISenderListener
     {
     }
 
     // Fast Binary Encoding com.chronoxor.protoex sender
-    public class Sender : FBE.Sender, ISenderListener
+    public class Sender : com.chronoxor.FBE.Sender, ISenderListener
     {
         // Imported senders
-        public readonly proto.Sender protoSender;
+        public readonly proto.FBE.Sender protoSender;
 
         // Sender models accessors
         public readonly OrderMessageModel OrderMessageModel;
@@ -4828,14 +4826,14 @@ namespace com.chronoxor.protoex.FBE {
 
         public Sender() : base(false)
         {
-            protoSender = new proto.Sender(Buffer);
+            protoSender = new proto.FBE.Sender(Buffer);
             OrderMessageModel = new OrderMessageModel(Buffer);
             BalanceMessageModel = new BalanceMessageModel(Buffer);
             AccountMessageModel = new AccountMessageModel(Buffer);
         }
-        public Sender(FBE.Buffer buffer) : base(buffer, false)
+        public Sender(com.chronoxor.FBE.Buffer buffer) : base(buffer, false)
         {
-            protoSender = new proto.Sender(Buffer);
+            protoSender = new proto.FBE.Sender(Buffer);
             OrderMessageModel = new OrderMessageModel(Buffer);
             BalanceMessageModel = new BalanceMessageModel(Buffer);
             AccountMessageModel = new AccountMessageModel(Buffer);
@@ -4921,7 +4919,7 @@ namespace com.chronoxor.protoex.FBE {
 namespace com.chronoxor.protoex.FBE {
 
     // Fast Binary Encoding com.chronoxor.protoex receiver listener interface
-    public interface IReceiverListener : FBE.proto.IReceiverListener
+    public interface IReceiverListener : com.chronoxor.proto.FBE.IReceiverListener
     {
         // Receive handlers
         void OnReceive(global::com.chronoxor.protoex.OrderMessage value) {}
@@ -4930,10 +4928,10 @@ namespace com.chronoxor.protoex.FBE {
     }
 
     // Fast Binary Encoding com.chronoxor.protoex receiver
-    public class Receiver : FBE.Receiver, IReceiverListener
+    public class Receiver : com.chronoxor.FBE.Receiver, IReceiverListener
     {
         // Imported receivers
-        public proto.Receiver protoReceiver;
+        public proto.FBE.Receiver protoReceiver;
 
         // Receiver values accessors
         private global::com.chronoxor.protoex.OrderMessage OrderMessageValue;
@@ -4947,7 +4945,7 @@ namespace com.chronoxor.protoex.FBE {
 
         public Receiver() : base(false)
         {
-            protoReceiver = new proto.Receiver(Buffer);
+            protoReceiver = new proto.FBE.Receiver(Buffer);
             OrderMessageValue = global::com.chronoxor.protoex.OrderMessage.Default;
             OrderMessageModel = new OrderMessageModel();
             BalanceMessageValue = global::com.chronoxor.protoex.BalanceMessage.Default;
@@ -4955,9 +4953,9 @@ namespace com.chronoxor.protoex.FBE {
             AccountMessageValue = global::com.chronoxor.protoex.AccountMessage.Default;
             AccountMessageModel = new AccountMessageModel();
         }
-        public Receiver(FBE.Buffer buffer) : base(buffer, false)
+        public Receiver(com.chronoxor.FBE.Buffer buffer) : base(buffer, false)
         {
-            protoReceiver = new proto.Receiver(Buffer);
+            protoReceiver = new proto.FBE.Receiver(Buffer);
             OrderMessageValue = global::com.chronoxor.protoex.OrderMessage.Default;
             OrderMessageModel = new OrderMessageModel();
             BalanceMessageValue = global::com.chronoxor.protoex.BalanceMessage.Default;
@@ -5043,7 +5041,7 @@ namespace com.chronoxor.protoex.FBE {
 namespace com.chronoxor.protoex.FBE {
 
     // Fast Binary Encoding com.chronoxor.protoex proxy listener interface
-    public interface IProxyListener : FBE.proto.IProxyListener
+    public interface IProxyListener : com.chronoxor.proto.FBE.IProxyListener
     {
         // Proxy handlers
         void OnProxy(OrderMessageModel model, long type, byte[] buffer, long offset, long size) {}
@@ -5052,10 +5050,10 @@ namespace com.chronoxor.protoex.FBE {
     }
 
     // Fast Binary Encoding com.chronoxor.protoex proxy
-    public class Proxy : FBE.Receiver, IProxyListener
+    public class Proxy : com.chronoxor.FBE.Receiver, IProxyListener
     {
         // Imported proxy
-        public proto.Proxy protoProxy;
+        public proto.FBE.Proxy protoProxy;
 
         // Proxy models accessors
         private readonly OrderMessageModel OrderMessageModel;
@@ -5064,14 +5062,14 @@ namespace com.chronoxor.protoex.FBE {
 
         public Proxy() : base(false)
         {
-            protoProxy = new proto.Proxy(Buffer);
+            protoProxy = new proto.FBE.Proxy(Buffer);
             OrderMessageModel = new OrderMessageModel();
             BalanceMessageModel = new BalanceMessageModel();
             AccountMessageModel = new AccountMessageModel();
         }
-        public Proxy(FBE.Buffer buffer) : base(buffer, false)
+        public Proxy(com.chronoxor.FBE.Buffer buffer) : base(buffer, false)
         {
-            protoProxy = new proto.Proxy(Buffer);
+            protoProxy = new proto.FBE.Proxy(Buffer);
             OrderMessageModel = new OrderMessageModel();
             BalanceMessageModel = new BalanceMessageModel();
             AccountMessageModel = new AccountMessageModel();
@@ -5139,15 +5137,15 @@ namespace com.chronoxor.protoex.FBE {
 namespace com.chronoxor.protoex.FBE {
 
     // Fast Binary Encoding com.chronoxor.protoex client listener interface
-    public interface IClientListener : FBE.proto.IClientListener, ISenderListener, IReceiverListener
+    public interface IClientListener : com.chronoxor.proto.FBE.IClientListener, ISenderListener, IReceiverListener
     {
     }
 
     // Fast Binary Encoding com.chronoxor.protoex client
-    public class Client : FBE.Client, IClientListener
+    public class Client : com.chronoxor.FBE.Client, IClientListener
     {
         // Imported clients
-        public readonly proto.Client protoClient;
+        public readonly proto.FBE.Client protoClient;
 
         // Client sender models accessors
         public readonly OrderMessageModel OrderMessageSenderModel;
@@ -5166,7 +5164,7 @@ namespace com.chronoxor.protoex.FBE {
 
         public Client() : base(false)
         {
-            protoClient = new proto.Client(SendBuffer, ReceiveBuffer);
+            protoClient = new proto.FBE.Client(SendBuffer, ReceiveBuffer);
             OrderMessageSenderModel = new OrderMessageModel(SendBuffer);
             OrderMessageReceiverValue = global::com.chronoxor.protoex.OrderMessage.Default;
             OrderMessageReceiverModel = new OrderMessageModel();
@@ -5177,9 +5175,9 @@ namespace com.chronoxor.protoex.FBE {
             AccountMessageReceiverValue = global::com.chronoxor.protoex.AccountMessage.Default;
             AccountMessageReceiverModel = new AccountMessageModel();
         }
-        public Client(FBE.Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, false)
+        public Client(com.chronoxor.FBE.Buffer sendBuffer, com.chronoxor.FBE.Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, false)
         {
-            protoClient = new proto.Client(SendBuffer, ReceiveBuffer);
+            protoClient = new proto.FBE.Client(SendBuffer, ReceiveBuffer);
             OrderMessageSenderModel = new OrderMessageModel(SendBuffer);
             OrderMessageReceiverValue = global::com.chronoxor.protoex.OrderMessage.Default;
             OrderMessageReceiverModel = new OrderMessageModel();
@@ -5393,15 +5391,15 @@ namespace com.chronoxor.protoex.FBE {
 namespace com.chronoxor.protoex.FBE {
 
     // Fast Binary Encoding com.chronoxor.protoex final sender listener interface
-    public interface IFinalSenderListener : FBE.proto.IFinalSenderListener
+    public interface IFinalSenderListener : com.chronoxor.proto.FBE.IFinalSenderListener
     {
     }
 
     // Fast Binary Encoding com.chronoxor.protoex final sender
-    public class FinalSender : FBE.Sender, IFinalSenderListener
+    public class FinalSender : com.chronoxor.FBE.Sender, IFinalSenderListener
     {
         // Imported senders
-        public readonly proto.FinalSender protoSender;
+        public readonly proto.FBE.FinalSender protoSender;
 
         // Sender models accessors
         public readonly OrderMessageFinalModel OrderMessageModel;
@@ -5410,14 +5408,14 @@ namespace com.chronoxor.protoex.FBE {
 
         public FinalSender() : base(true)
         {
-            protoSender = new proto.FinalSender(Buffer);
+            protoSender = new proto.FBE.FinalSender(Buffer);
             OrderMessageModel = new OrderMessageFinalModel(Buffer);
             BalanceMessageModel = new BalanceMessageFinalModel(Buffer);
             AccountMessageModel = new AccountMessageFinalModel(Buffer);
         }
-        public FinalSender(FBE.Buffer buffer) : base(buffer, true)
+        public FinalSender(com.chronoxor.FBE.Buffer buffer) : base(buffer, true)
         {
-            protoSender = new proto.FinalSender(Buffer);
+            protoSender = new proto.FBE.FinalSender(Buffer);
             OrderMessageModel = new OrderMessageFinalModel(Buffer);
             BalanceMessageModel = new BalanceMessageFinalModel(Buffer);
             AccountMessageModel = new AccountMessageFinalModel(Buffer);
@@ -5503,7 +5501,7 @@ namespace com.chronoxor.protoex.FBE {
 namespace com.chronoxor.protoex.FBE {
 
     // Fast Binary Encoding com.chronoxor.protoex final receiver listener interface
-    public interface IFinalReceiverListener : FBE.proto.IFinalReceiverListener
+    public interface IFinalReceiverListener : com.chronoxor.proto.FBE.IFinalReceiverListener
     {
         // Receive handlers
         void OnReceive(global::com.chronoxor.protoex.OrderMessage value) {}
@@ -5512,10 +5510,10 @@ namespace com.chronoxor.protoex.FBE {
     }
 
     // Fast Binary Encoding com.chronoxor.protoex final receiver
-    public class FinalReceiver : FBE.Receiver, IFinalReceiverListener
+    public class FinalReceiver : com.chronoxor.FBE.Receiver, IFinalReceiverListener
     {
         // Imported receivers
-        public proto.FinalReceiver protoReceiver;
+        public proto.FBE.FinalReceiver protoReceiver;
 
         // Receiver values accessors
         private global::com.chronoxor.protoex.OrderMessage OrderMessageValue;
@@ -5529,7 +5527,7 @@ namespace com.chronoxor.protoex.FBE {
 
         public FinalReceiver() : base(true)
         {
-            protoReceiver = new proto.FinalReceiver(Buffer);
+            protoReceiver = new proto.FBE.FinalReceiver(Buffer);
             OrderMessageValue = global::com.chronoxor.protoex.OrderMessage.Default;
             OrderMessageModel = new OrderMessageFinalModel();
             BalanceMessageValue = global::com.chronoxor.protoex.BalanceMessage.Default;
@@ -5537,9 +5535,9 @@ namespace com.chronoxor.protoex.FBE {
             AccountMessageValue = global::com.chronoxor.protoex.AccountMessage.Default;
             AccountMessageModel = new AccountMessageFinalModel();
         }
-        public FinalReceiver(FBE.Buffer buffer) : base(buffer, true)
+        public FinalReceiver(com.chronoxor.FBE.Buffer buffer) : base(buffer, true)
         {
-            protoReceiver = new proto.FinalReceiver(Buffer);
+            protoReceiver = new proto.FBE.FinalReceiver(Buffer);
             OrderMessageValue = global::com.chronoxor.protoex.OrderMessage.Default;
             OrderMessageModel = new OrderMessageFinalModel();
             BalanceMessageValue = global::com.chronoxor.protoex.BalanceMessage.Default;
@@ -5625,15 +5623,15 @@ namespace com.chronoxor.protoex.FBE {
 namespace com.chronoxor.protoex.FBE {
 
     // Fast Binary Encoding com.chronoxor.protoex final client listener interface
-    public interface IFinalClientListener : FBE.proto.IFinalClientListener, IFinalSenderListener, IFinalReceiverListener
+    public interface IFinalClientListener : com.chronoxor.proto.FBE.IFinalClientListener, IFinalSenderListener, IFinalReceiverListener
     {
     }
 
     // Fast Binary Encoding com.chronoxor.protoex final client
-    public class FinalClient : FBE.Client, IFinalClientListener
+    public class FinalClient : com.chronoxor.FBE.Client, IFinalClientListener
     {
         // Imported clients
-        public readonly proto.FinalClient protoClient;
+        public readonly proto.FBE.FinalClient protoClient;
 
         // Client sender models accessors
         public readonly OrderMessageFinalModel OrderMessageSenderModel;
@@ -5652,7 +5650,7 @@ namespace com.chronoxor.protoex.FBE {
 
         public FinalClient() : base(true)
         {
-            protoClient = new proto.FinalClient(SendBuffer, ReceiveBuffer);
+            protoClient = new proto.FBE.FinalClient(SendBuffer, ReceiveBuffer);
             OrderMessageSenderModel = new OrderMessageFinalModel(SendBuffer);
             OrderMessageReceiverValue = global::com.chronoxor.protoex.OrderMessage.Default;
             OrderMessageReceiverModel = new OrderMessageFinalModel();
@@ -5663,9 +5661,9 @@ namespace com.chronoxor.protoex.FBE {
             AccountMessageReceiverValue = global::com.chronoxor.protoex.AccountMessage.Default;
             AccountMessageReceiverModel = new AccountMessageFinalModel();
         }
-        public FinalClient(FBE.Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, true)
+        public FinalClient(com.chronoxor.FBE.Buffer sendBuffer, com.chronoxor.FBE.Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, true)
         {
-            protoClient = new proto.FinalClient(SendBuffer, ReceiveBuffer);
+            protoClient = new proto.FBE.FinalClient(SendBuffer, ReceiveBuffer);
             OrderMessageSenderModel = new OrderMessageFinalModel(SendBuffer);
             OrderMessageReceiverValue = global::com.chronoxor.protoex.OrderMessage.Default;
             OrderMessageReceiverModel = new OrderMessageFinalModel();

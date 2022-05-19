@@ -2,21 +2,24 @@
 
 using Xunit;
 
+using com.chronoxor.proto;
+using com.chronoxor.proto.FBE;
+
 namespace Tests
 {
-    public class Create
+    public class TestCreate
     {
         [Fact(DisplayName = "Create & access")]
         public void CreateAndAccess()
         {
             // Create a new account using FBE model into the FBE stream
-            var writer = new FBE.proto.AccountModel();
+            var writer = new AccountModel();
             Assert.True(writer.model.FBEOffset == 4);
             long modelBegin = writer.CreateBegin();
             long accountBegin = writer.model.SetBegin();
             writer.model.id.Set(1);
             writer.model.name.Set("Test");
-            writer.model.state.Set(proto.State.good);
+            writer.model.state.Set(State.good);
             long walletBegin = writer.model.wallet.SetBegin();
             writer.model.wallet.currency.Set("USD");
             writer.model.wallet.amount.Set(1000.0);
@@ -31,8 +34,8 @@ namespace Tests
             long orderBegin = order.SetBegin();
             order.id.Set(1);
             order.symbol.Set("EURUSD");
-            order.side.Set(proto.OrderSide.buy);
-            order.type.Set(proto.OrderType.market);
+            order.side.Set(OrderSide.buy);
+            order.type.Set(OrderType.market);
             order.price.Set(1.23456);
             order.volume.Set(1000.0);
             order.SetEnd(orderBegin);
@@ -40,8 +43,8 @@ namespace Tests
             orderBegin = order.SetBegin();
             order.id.Set(2);
             order.symbol.Set("EURUSD");
-            order.side.Set(proto.OrderSide.sell);
-            order.type.Set(proto.OrderType.limit);
+            order.side.Set(OrderSide.sell);
+            order.type.Set(OrderType.limit);
             order.price.Set(1.0);
             order.volume.Set(100.0);
             order.SetEnd(orderBegin);
@@ -49,8 +52,8 @@ namespace Tests
             orderBegin = order.SetBegin();
             order.id.Set(3);
             order.symbol.Set("EURUSD");
-            order.side.Set(proto.OrderSide.buy);
-            order.type.Set(proto.OrderType.stop);
+            order.side.Set(OrderSide.buy);
+            order.type.Set(OrderType.stop);
             order.price.Set(1.5);
             order.volume.Set(10.0);
             order.SetEnd(orderBegin);
@@ -66,7 +69,7 @@ namespace Tests
             Assert.True(writer.Buffer.Size == 252);
 
             // Access the account model in the FBE stream
-            var reader = new FBE.proto.AccountModel();
+            var reader = new AccountModel();
             Assert.True(reader.model.FBEOffset == 4);
             reader.Attach(writer.Buffer);
             Assert.True(reader.Verify());
@@ -77,7 +80,7 @@ namespace Tests
             reader.model.name.Get(out var name);
             Assert.True(name == "Test");
             reader.model.state.Get(out var state);
-            Assert.True(state.HasFlags(proto.State.good));
+            Assert.True(state.HasFlags(State.good));
 
             walletBegin = reader.model.wallet.GetBegin();
             reader.model.wallet.currency.Get(out var walletCurrency);
@@ -105,9 +108,9 @@ namespace Tests
             o1.symbol.Get(out var orderSymbol1);
             Assert.True(orderSymbol1 == "EURUSD");
             o1.side.Get(out var orderSide1);
-            Assert.True(orderSide1 == proto.OrderSide.buy);
+            Assert.True(orderSide1 == OrderSide.buy);
             o1.type.Get(out var orderType1);
-            Assert.True(orderType1 == proto.OrderType.market);
+            Assert.True(orderType1 == OrderType.market);
             o1.price.Get(out var orderPrice1);
             Assert.True(orderPrice1 == 1.23456);
             o1.volume.Get(out var orderVolume1);
@@ -121,9 +124,9 @@ namespace Tests
             o2.symbol.Get(out var orderSymbol2);
             Assert.True(orderSymbol2 == "EURUSD");
             o2.side.Get(out var orderSide2);
-            Assert.True(orderSide2 == proto.OrderSide.sell);
+            Assert.True(orderSide2 == OrderSide.sell);
             o2.type.Get(out var orderType2);
-            Assert.True(orderType2 == proto.OrderType.limit);
+            Assert.True(orderType2 == OrderType.limit);
             o2.price.Get(out var orderPrice2);
             Assert.True(orderPrice2 == 1.0);
             o2.volume.Get(out var orderVolume2);
@@ -137,9 +140,9 @@ namespace Tests
             o3.symbol.Get(out var orderSymbol3);
             Assert.True(orderSymbol3 == "EURUSD");
             o3.side.Get(out var orderSide3);
-            Assert.True(orderSide3 == proto.OrderSide.buy);
+            Assert.True(orderSide3 == OrderSide.buy);
             o3.type.Get(out var orderType3);
-            Assert.True(orderType3 == proto.OrderType.stop);
+            Assert.True(orderType3 == OrderType.stop);
             o3.price.Get(out var orderPrice3);
             Assert.True(orderPrice3 == 1.5);
             o3.volume.Get(out var orderVolume3);

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 
+using com.chronoxor.proto;
+using com.chronoxor.proto.FBE;
+
 namespace Create
 {
     public static class Program
@@ -8,12 +11,12 @@ namespace Create
         public static void Main()
         {
             // Create a new account using FBE model
-            var account = new FBE.proto.AccountModel();
+            var account = new AccountModel();
             long modelBegin = account.CreateBegin();
             long accountBegin = account.model.SetBegin();
             account.model.id.Set(1);
             account.model.name.Set("Test");
-            account.model.state.Set(proto.State.good);
+            account.model.state.Set(State.good);
             long walletBegin = account.model.wallet.SetBegin();
             account.model.wallet.currency.Set("USD");
             account.model.wallet.amount.Set(1000.0);
@@ -26,7 +29,7 @@ namespace Create
             Console.WriteLine($"FBE size: {account.Buffer.Size}");
 
             // Access the account using the FBE model
-            var access = new FBE.proto.AccountModel();
+            var access = new AccountModel();
             access.Attach(account.Buffer);
             Debug.Assert(access.Verify());
 

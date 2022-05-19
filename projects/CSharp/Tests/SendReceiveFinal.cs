@@ -1,9 +1,12 @@
 ﻿using System;
 using Xunit;
 
+using com.chronoxor.protoex;
+using com.chronoxor.protoex.FBE;
+
 namespace Tests
 {
-    public class MyFinalSender : FBE.protoex.FinalSender, FBE.protoex.ISenderListener
+    public class MyFinalSender : FinalSender, ISenderListener
     {
         public long OnSend(byte[] buffer, long offset, long size)
         {
@@ -12,7 +15,7 @@ namespace Tests
         }
     }
 
-    public class MyFinalReceiver : FBE.protoex.FinalReceiver, FBE.protoex.IFinalReceiverListener
+    public class MyFinalReceiver : FinalReceiver, IFinalReceiverListener
     {
         private bool _order;
         private bool _balance;
@@ -20,37 +23,37 @@ namespace Tests
 
         public bool Check() { return _order && _balance && _account; }
 
-        public void OnReceive(protoex.OrderMessage value) { _order = true; }
-        public void OnReceive(protoex.BalanceMessage value) { _balance = true; }
-        public void OnReceive(protoex.AccountMessage value) { _account = true; }
+        public void OnReceive(OrderMessage value) { _order = true; }
+        public void OnReceive(BalanceMessage value) { _balance = true; }
+        public void OnReceive(AccountMessage value) { _account = true; }
     }
 
-    public class SendReceiveFinal
+    public class TestSendReceiveFinal
     {
         private static bool SendAndReceiveFinal(long index1, long index2)
         {
             var sender = new MyFinalSender();
 
             // Create and send a new order
-            var order = new protoex.Order(1, "EURUSD", protoex.OrderSide.buy, protoex.OrderType.market, 1.23456, 1000.0, 0.0, 0.0);
-            sender.Send(new protoex.OrderMessage(order));
+            var order = new Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0, 0.0, 0.0);
+            sender.Send(new OrderMessage(order));
 
             // Create and send a new balance wallet
-            var balance = new protoex.Balance(new proto.Balance("USD", 1000.0), 100.0);
-            sender.Send(new protoex.BalanceMessage(balance));
+            var balance = new Balance(new com.chronoxor.proto.Balance("USD", 1000.0), 100.0);
+            sender.Send(new BalanceMessage(balance));
 
             // Create and send a new account with some orders
-            var account = protoex.Account.Default;
+            var account = Account.Default;
             account.id = 1;
             account.name = "Test";
-            account.state = protoex.StateEx.good;
+            account.state = StateEx.good;
             account.wallet.parent.currency = "USD";
             account.wallet.parent.amount = 1000.0;
-            account.asset = new protoex.Balance(new proto.Balance("EUR", 100.0), 100.0);
-            account.orders.Add(new protoex.Order(1, "EURUSD", protoex.OrderSide.buy, protoex.OrderType.market, 1.23456, 1000.0, 0.0, 0.0));
-            account.orders.Add(new protoex.Order(2, "EURUSD", protoex.OrderSide.sell, protoex.OrderType.limit, 1.0, 100.0, 0.0, 0.0));
-            account.orders.Add(new protoex.Order(3, "EURUSD", protoex.OrderSide.buy, protoex.OrderType.stop, 1.5, 10.0, 0.0, 0.0));
-            sender.Send(new protoex.AccountMessage(account));
+            account.asset = new Balance(new com.chronoxor.proto.Balance("EUR", 100.0), 100.0);
+            account.orders.Add(new Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0, 0.0, 0.0));
+            account.orders.Add(new Order(2, "EURUSD", OrderSide.sell, OrderType.limit, 1.0, 100.0, 0.0, 0.0));
+            account.orders.Add(new Order(3, "EURUSD", OrderSide.buy, OrderType.stop, 1.5, 10.0, 0.0, 0.0));
+            sender.Send(new AccountMessage(account));
 
             var receiver = new MyFinalReceiver();
 

@@ -2,12 +2,11 @@
 // ReSharper disable RedundantAssignment
 
 using System;
-using FBE;
 using Xunit;
 
 namespace Tests
 {
-    public class Decimal
+    public class TestDecimal
     {
         private decimal VerifyDecimal(int low, int mid, int high, bool negative, byte scale)
         {
@@ -17,13 +16,13 @@ namespace Tests
             if ((bits[0] != low) || (bits[1] != mid) || (bits[2] != high) || (negative ? (bits[3] != (int)((scale << 16) | 0x80000000)) : (bits[3] != (scale << 16))))
                 throw new Exception("Invalid decimal bits!");
 
-            var model = new FieldModelDecimal(new FBE.Buffer(new byte[16]), 0);
+            var model = new com.chronoxor.FBE.FieldModelDecimal(new com.chronoxor.FBE.Buffer(new byte[16]), 0);
             model.Set(value1);
             model.Get(out var value2);
             if (value1 != value2)
                 throw new Exception("Invalid decimal serialization!");
 
-            var final = new FinalModelDecimal(new FBE.Buffer(new byte[16]), 0);
+            var final = new com.chronoxor.FBE.FinalModelDecimal(new com.chronoxor.FBE.Buffer(new byte[16]), 0);
             final.Set(value1);
             final.Get(out var value3);
             if (value1 != value3)

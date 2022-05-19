@@ -1,5 +1,7 @@
 ﻿using System;
 
+using com.chronoxor.proto;
+
 namespace SerializationJson
 {
     public static class Program
@@ -7,16 +9,16 @@ namespace SerializationJson
         public static void Main()
         {
             // Create a new account with some orders
-            var account = proto.Account.Default;
+            var account = Account.Default;
             account.id = 1;
             account.name = "Test";
-            account.state = proto.State.good;
+            account.state = State.good;
             account.wallet.currency = "USD";
             account.wallet.amount = 1000.0;
-            account.asset = new proto.Balance("EUR", 100.0);
-            account.orders.Add(new proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0));
-            account.orders.Add(new proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0));
-            account.orders.Add(new proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0));
+            account.asset = new Balance("EUR", 100.0);
+            account.orders.Add(new Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0));
+            account.orders.Add(new Order(2, "EURUSD", OrderSide.sell, OrderType.limit, 1.0, 100.0));
+            account.orders.Add(new Order(3, "EURUSD", OrderSide.buy, OrderType.stop, 1.5, 10.0));
 
             // Serialize the account to the JSON string
             var json = account.ToJson();
@@ -26,7 +28,7 @@ namespace SerializationJson
             Console.WriteLine($"JSON size: {json.Length}");
 
             // Deserialize the account from the JSON string
-            account = proto.Account.FromJson(json);
+            account = Account.FromJson(json);
 
             // Show account content
             Console.WriteLine();

@@ -31,8 +31,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 #endif
 
-using com.chronoxor.FBE;
-
 namespace com.chronoxor.enums {
 
 #if UTF8JSON
@@ -141,7 +139,7 @@ namespace com.chronoxor.enums {
 
         public static EnumByte Default => new EnumByte();
 
-        public static FBE.FieldModelValueType<EnumByte> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumByte(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<EnumByte> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumByte(buffer, offset); }
 
         public const byte _ENUM_VALUE_0_ = (byte)0U + 0;
         public const byte _ENUM_VALUE_1_ = (byte)0U + 0;
@@ -176,15 +174,15 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumByte field model
-    public class FieldModelEnumByte : FBE.FieldModelValueType<EnumByte>
+    public class FieldModelEnumByte : com.chronoxor.FBE.FieldModelValueType<EnumByte>
     {
-        public FieldModelEnumByte(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelEnumByte(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 1;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<EnumByte> Clone() { return new FieldModelEnumByte(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<EnumByte> Clone() { return new FieldModelEnumByte(_buffer, _offset); }
 
         // Get the value
         public override void Get(out EnumByte value) { Get(out value, EnumByte.Default); }
@@ -217,9 +215,9 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumByte final model
-    public class FinalModelEnumByte : FBE.FinalModelValueType<EnumByte>
+    public class FinalModelEnumByte : com.chronoxor.FBE.FinalModelValueType<EnumByte>
     {
-        public FinalModelEnumByte(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelEnumByte(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(EnumByte value) { return FBESize; }
@@ -228,7 +226,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 1;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<EnumByte> Clone() { return new FinalModelEnumByte(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<EnumByte> Clone() { return new FinalModelEnumByte(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -374,7 +372,7 @@ namespace com.chronoxor.enums {
 
         public static EnumChar Default => new EnumChar();
 
-        public static FBE.FieldModelValueType<EnumChar> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumChar(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<EnumChar> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumChar(buffer, offset); }
 
         public const byte _ENUM_VALUE_0_ = (byte)0 + 0;
         public const byte _ENUM_VALUE_1_ = (byte)'1' + 0;
@@ -409,15 +407,15 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumChar field model
-    public class FieldModelEnumChar : FBE.FieldModelValueType<EnumChar>
+    public class FieldModelEnumChar : com.chronoxor.FBE.FieldModelValueType<EnumChar>
     {
-        public FieldModelEnumChar(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelEnumChar(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 1;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<EnumChar> Clone() { return new FieldModelEnumChar(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<EnumChar> Clone() { return new FieldModelEnumChar(_buffer, _offset); }
 
         // Get the value
         public override void Get(out EnumChar value) { Get(out value, EnumChar.Default); }
@@ -450,9 +448,9 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumChar final model
-    public class FinalModelEnumChar : FBE.FinalModelValueType<EnumChar>
+    public class FinalModelEnumChar : com.chronoxor.FBE.FinalModelValueType<EnumChar>
     {
-        public FinalModelEnumChar(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelEnumChar(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(EnumChar value) { return FBESize; }
@@ -461,7 +459,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 1;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<EnumChar> Clone() { return new FinalModelEnumChar(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<EnumChar> Clone() { return new FinalModelEnumChar(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -607,7 +605,7 @@ namespace com.chronoxor.enums {
 
         public static EnumWChar Default => new EnumWChar();
 
-        public static FBE.FieldModelValueType<EnumWChar> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumWChar(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<EnumWChar> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumWChar(buffer, offset); }
 
         public const ushort _ENUM_VALUE_0_ = (ushort)0 + 0;
         public const ushort _ENUM_VALUE_1_ = (ushort)0x0444 + 0;
@@ -642,15 +640,15 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumWChar field model
-    public class FieldModelEnumWChar : FBE.FieldModelValueType<EnumWChar>
+    public class FieldModelEnumWChar : com.chronoxor.FBE.FieldModelValueType<EnumWChar>
     {
-        public FieldModelEnumWChar(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelEnumWChar(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 4;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<EnumWChar> Clone() { return new FieldModelEnumWChar(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<EnumWChar> Clone() { return new FieldModelEnumWChar(_buffer, _offset); }
 
         // Get the value
         public override void Get(out EnumWChar value) { Get(out value, EnumWChar.Default); }
@@ -683,9 +681,9 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumWChar final model
-    public class FinalModelEnumWChar : FBE.FinalModelValueType<EnumWChar>
+    public class FinalModelEnumWChar : com.chronoxor.FBE.FinalModelValueType<EnumWChar>
     {
-        public FinalModelEnumWChar(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelEnumWChar(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(EnumWChar value) { return FBESize; }
@@ -694,7 +692,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 4;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<EnumWChar> Clone() { return new FinalModelEnumWChar(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<EnumWChar> Clone() { return new FinalModelEnumWChar(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -840,7 +838,7 @@ namespace com.chronoxor.enums {
 
         public static EnumInt8 Default => new EnumInt8();
 
-        public static FBE.FieldModelValueType<EnumInt8> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumInt8(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<EnumInt8> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumInt8(buffer, offset); }
 
         public const sbyte _ENUM_VALUE_0_ = (sbyte)0 + 0;
         public const sbyte _ENUM_VALUE_1_ = (sbyte)-128 + 0;
@@ -875,15 +873,15 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt8 field model
-    public class FieldModelEnumInt8 : FBE.FieldModelValueType<EnumInt8>
+    public class FieldModelEnumInt8 : com.chronoxor.FBE.FieldModelValueType<EnumInt8>
     {
-        public FieldModelEnumInt8(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelEnumInt8(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 1;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<EnumInt8> Clone() { return new FieldModelEnumInt8(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<EnumInt8> Clone() { return new FieldModelEnumInt8(_buffer, _offset); }
 
         // Get the value
         public override void Get(out EnumInt8 value) { Get(out value, EnumInt8.Default); }
@@ -916,9 +914,9 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt8 final model
-    public class FinalModelEnumInt8 : FBE.FinalModelValueType<EnumInt8>
+    public class FinalModelEnumInt8 : com.chronoxor.FBE.FinalModelValueType<EnumInt8>
     {
-        public FinalModelEnumInt8(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelEnumInt8(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(EnumInt8 value) { return FBESize; }
@@ -927,7 +925,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 1;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<EnumInt8> Clone() { return new FinalModelEnumInt8(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<EnumInt8> Clone() { return new FinalModelEnumInt8(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -1073,7 +1071,7 @@ namespace com.chronoxor.enums {
 
         public static EnumUInt8 Default => new EnumUInt8();
 
-        public static FBE.FieldModelValueType<EnumUInt8> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumUInt8(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<EnumUInt8> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumUInt8(buffer, offset); }
 
         public const byte _ENUM_VALUE_0_ = (byte)0U + 0;
         public const byte _ENUM_VALUE_1_ = (byte)0U + 0;
@@ -1108,15 +1106,15 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt8 field model
-    public class FieldModelEnumUInt8 : FBE.FieldModelValueType<EnumUInt8>
+    public class FieldModelEnumUInt8 : com.chronoxor.FBE.FieldModelValueType<EnumUInt8>
     {
-        public FieldModelEnumUInt8(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelEnumUInt8(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 1;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<EnumUInt8> Clone() { return new FieldModelEnumUInt8(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<EnumUInt8> Clone() { return new FieldModelEnumUInt8(_buffer, _offset); }
 
         // Get the value
         public override void Get(out EnumUInt8 value) { Get(out value, EnumUInt8.Default); }
@@ -1149,9 +1147,9 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt8 final model
-    public class FinalModelEnumUInt8 : FBE.FinalModelValueType<EnumUInt8>
+    public class FinalModelEnumUInt8 : com.chronoxor.FBE.FinalModelValueType<EnumUInt8>
     {
-        public FinalModelEnumUInt8(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelEnumUInt8(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(EnumUInt8 value) { return FBESize; }
@@ -1160,7 +1158,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 1;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<EnumUInt8> Clone() { return new FinalModelEnumUInt8(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<EnumUInt8> Clone() { return new FinalModelEnumUInt8(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -1306,7 +1304,7 @@ namespace com.chronoxor.enums {
 
         public static EnumInt16 Default => new EnumInt16();
 
-        public static FBE.FieldModelValueType<EnumInt16> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumInt16(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<EnumInt16> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumInt16(buffer, offset); }
 
         public const short _ENUM_VALUE_0_ = (short)0 + 0;
         public const short _ENUM_VALUE_1_ = (short)-32768 + 0;
@@ -1341,15 +1339,15 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt16 field model
-    public class FieldModelEnumInt16 : FBE.FieldModelValueType<EnumInt16>
+    public class FieldModelEnumInt16 : com.chronoxor.FBE.FieldModelValueType<EnumInt16>
     {
-        public FieldModelEnumInt16(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelEnumInt16(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 2;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<EnumInt16> Clone() { return new FieldModelEnumInt16(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<EnumInt16> Clone() { return new FieldModelEnumInt16(_buffer, _offset); }
 
         // Get the value
         public override void Get(out EnumInt16 value) { Get(out value, EnumInt16.Default); }
@@ -1382,9 +1380,9 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt16 final model
-    public class FinalModelEnumInt16 : FBE.FinalModelValueType<EnumInt16>
+    public class FinalModelEnumInt16 : com.chronoxor.FBE.FinalModelValueType<EnumInt16>
     {
-        public FinalModelEnumInt16(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelEnumInt16(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(EnumInt16 value) { return FBESize; }
@@ -1393,7 +1391,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 2;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<EnumInt16> Clone() { return new FinalModelEnumInt16(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<EnumInt16> Clone() { return new FinalModelEnumInt16(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -1539,7 +1537,7 @@ namespace com.chronoxor.enums {
 
         public static EnumUInt16 Default => new EnumUInt16();
 
-        public static FBE.FieldModelValueType<EnumUInt16> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumUInt16(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<EnumUInt16> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumUInt16(buffer, offset); }
 
         public const ushort _ENUM_VALUE_0_ = (ushort)0U + 0;
         public const ushort _ENUM_VALUE_1_ = (ushort)0U + 0;
@@ -1574,15 +1572,15 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt16 field model
-    public class FieldModelEnumUInt16 : FBE.FieldModelValueType<EnumUInt16>
+    public class FieldModelEnumUInt16 : com.chronoxor.FBE.FieldModelValueType<EnumUInt16>
     {
-        public FieldModelEnumUInt16(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelEnumUInt16(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 2;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<EnumUInt16> Clone() { return new FieldModelEnumUInt16(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<EnumUInt16> Clone() { return new FieldModelEnumUInt16(_buffer, _offset); }
 
         // Get the value
         public override void Get(out EnumUInt16 value) { Get(out value, EnumUInt16.Default); }
@@ -1615,9 +1613,9 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt16 final model
-    public class FinalModelEnumUInt16 : FBE.FinalModelValueType<EnumUInt16>
+    public class FinalModelEnumUInt16 : com.chronoxor.FBE.FinalModelValueType<EnumUInt16>
     {
-        public FinalModelEnumUInt16(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelEnumUInt16(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(EnumUInt16 value) { return FBESize; }
@@ -1626,7 +1624,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 2;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<EnumUInt16> Clone() { return new FinalModelEnumUInt16(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<EnumUInt16> Clone() { return new FinalModelEnumUInt16(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -1772,7 +1770,7 @@ namespace com.chronoxor.enums {
 
         public static EnumInt32 Default => new EnumInt32();
 
-        public static FBE.FieldModelValueType<EnumInt32> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumInt32(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<EnumInt32> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumInt32(buffer, offset); }
 
         public const int _ENUM_VALUE_0_ = (int)0 + 0;
         public const int _ENUM_VALUE_1_ = (int)-2147483648 + 0;
@@ -1807,15 +1805,15 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt32 field model
-    public class FieldModelEnumInt32 : FBE.FieldModelValueType<EnumInt32>
+    public class FieldModelEnumInt32 : com.chronoxor.FBE.FieldModelValueType<EnumInt32>
     {
-        public FieldModelEnumInt32(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelEnumInt32(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 4;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<EnumInt32> Clone() { return new FieldModelEnumInt32(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<EnumInt32> Clone() { return new FieldModelEnumInt32(_buffer, _offset); }
 
         // Get the value
         public override void Get(out EnumInt32 value) { Get(out value, EnumInt32.Default); }
@@ -1848,9 +1846,9 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt32 final model
-    public class FinalModelEnumInt32 : FBE.FinalModelValueType<EnumInt32>
+    public class FinalModelEnumInt32 : com.chronoxor.FBE.FinalModelValueType<EnumInt32>
     {
-        public FinalModelEnumInt32(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelEnumInt32(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(EnumInt32 value) { return FBESize; }
@@ -1859,7 +1857,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 4;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<EnumInt32> Clone() { return new FinalModelEnumInt32(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<EnumInt32> Clone() { return new FinalModelEnumInt32(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -2005,7 +2003,7 @@ namespace com.chronoxor.enums {
 
         public static EnumUInt32 Default => new EnumUInt32();
 
-        public static FBE.FieldModelValueType<EnumUInt32> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumUInt32(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<EnumUInt32> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumUInt32(buffer, offset); }
 
         public const uint _ENUM_VALUE_0_ = (uint)0U + 0;
         public const uint _ENUM_VALUE_1_ = (uint)0U + 0;
@@ -2040,15 +2038,15 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt32 field model
-    public class FieldModelEnumUInt32 : FBE.FieldModelValueType<EnumUInt32>
+    public class FieldModelEnumUInt32 : com.chronoxor.FBE.FieldModelValueType<EnumUInt32>
     {
-        public FieldModelEnumUInt32(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelEnumUInt32(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 4;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<EnumUInt32> Clone() { return new FieldModelEnumUInt32(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<EnumUInt32> Clone() { return new FieldModelEnumUInt32(_buffer, _offset); }
 
         // Get the value
         public override void Get(out EnumUInt32 value) { Get(out value, EnumUInt32.Default); }
@@ -2081,9 +2079,9 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt32 final model
-    public class FinalModelEnumUInt32 : FBE.FinalModelValueType<EnumUInt32>
+    public class FinalModelEnumUInt32 : com.chronoxor.FBE.FinalModelValueType<EnumUInt32>
     {
-        public FinalModelEnumUInt32(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelEnumUInt32(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(EnumUInt32 value) { return FBESize; }
@@ -2092,7 +2090,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 4;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<EnumUInt32> Clone() { return new FinalModelEnumUInt32(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<EnumUInt32> Clone() { return new FinalModelEnumUInt32(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -2238,7 +2236,7 @@ namespace com.chronoxor.enums {
 
         public static EnumInt64 Default => new EnumInt64();
 
-        public static FBE.FieldModelValueType<EnumInt64> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumInt64(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<EnumInt64> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumInt64(buffer, offset); }
 
         public const long _ENUM_VALUE_0_ = (long)0L + 0;
         public const long _ENUM_VALUE_1_ = (long)-9223372036854775807L + 0;
@@ -2273,15 +2271,15 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt64 field model
-    public class FieldModelEnumInt64 : FBE.FieldModelValueType<EnumInt64>
+    public class FieldModelEnumInt64 : com.chronoxor.FBE.FieldModelValueType<EnumInt64>
     {
-        public FieldModelEnumInt64(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelEnumInt64(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 8;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<EnumInt64> Clone() { return new FieldModelEnumInt64(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<EnumInt64> Clone() { return new FieldModelEnumInt64(_buffer, _offset); }
 
         // Get the value
         public override void Get(out EnumInt64 value) { Get(out value, EnumInt64.Default); }
@@ -2314,9 +2312,9 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt64 final model
-    public class FinalModelEnumInt64 : FBE.FinalModelValueType<EnumInt64>
+    public class FinalModelEnumInt64 : com.chronoxor.FBE.FinalModelValueType<EnumInt64>
     {
-        public FinalModelEnumInt64(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelEnumInt64(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(EnumInt64 value) { return FBESize; }
@@ -2325,7 +2323,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 8;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<EnumInt64> Clone() { return new FinalModelEnumInt64(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<EnumInt64> Clone() { return new FinalModelEnumInt64(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -2471,7 +2469,7 @@ namespace com.chronoxor.enums {
 
         public static EnumUInt64 Default => new EnumUInt64();
 
-        public static FBE.FieldModelValueType<EnumUInt64> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumUInt64(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<EnumUInt64> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumUInt64(buffer, offset); }
 
         public const ulong _ENUM_VALUE_0_ = (ulong)0UL + 0;
         public const ulong _ENUM_VALUE_1_ = (ulong)0UL + 0;
@@ -2506,15 +2504,15 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt64 field model
-    public class FieldModelEnumUInt64 : FBE.FieldModelValueType<EnumUInt64>
+    public class FieldModelEnumUInt64 : com.chronoxor.FBE.FieldModelValueType<EnumUInt64>
     {
-        public FieldModelEnumUInt64(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FieldModelEnumUInt64(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the field size
         public override long FBESize => 8;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<EnumUInt64> Clone() { return new FieldModelEnumUInt64(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<EnumUInt64> Clone() { return new FieldModelEnumUInt64(_buffer, _offset); }
 
         // Get the value
         public override void Get(out EnumUInt64 value) { Get(out value, EnumUInt64.Default); }
@@ -2547,9 +2545,9 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt64 final model
-    public class FinalModelEnumUInt64 : FBE.FinalModelValueType<EnumUInt64>
+    public class FinalModelEnumUInt64 : com.chronoxor.FBE.FinalModelValueType<EnumUInt64>
     {
-        public FinalModelEnumUInt64(FBE.Buffer buffer, long offset) : base(buffer, offset) {}
+        public FinalModelEnumUInt64(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
         public override long FBEAllocationSize(EnumUInt64 value) { return FBESize; }
@@ -2558,7 +2556,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 8;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<EnumUInt64> Clone() { return new FinalModelEnumUInt64(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<EnumUInt64> Clone() { return new FinalModelEnumUInt64(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -2818,11 +2816,11 @@ namespace com.chronoxor.enums {
         public Enums Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.enums.EnumsModel();
+            var writer = new com.chronoxor.enums.FBE.EnumsModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.enums.EnumsModel();
+            var reader = new com.chronoxor.enums.FBE.EnumsModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -2937,17 +2935,17 @@ namespace com.chronoxor.enums {
 
         public string ToJson()
         {
-            var json = FBE.Json.ToJson(this);
+            var json = com.chronoxor.FBE.Json.ToJson(this);
             return json;
         }
 
         public static Enums FromJson(string json)
         {
-            var result = FBE.Json.FromJson<Enums>(json);
+            var result = com.chronoxor.FBE.Json.FromJson<Enums>(json);
             return result;
         }
 
-        public static FBE.FieldModelValueType<Enums> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnums(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelValueType<Enums> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnums(buffer, offset); }
     }
 
 } // namespace com.chronoxor.enums
@@ -2957,7 +2955,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding Enums field model
-    public class FieldModelEnums : FBE.FieldModelValueType<Enums>
+    public class FieldModelEnums : com.chronoxor.FBE.FieldModelValueType<Enums>
     {
         public readonly com.chronoxor.enums.FBE.FieldModelEnumByte byte0;
         public readonly com.chronoxor.enums.FBE.FieldModelEnumByte byte1;
@@ -3026,7 +3024,7 @@ namespace com.chronoxor.enums.FBE {
         public readonly com.chronoxor.enums.FBE.FieldModelEnumUInt64 uint64b4;
         public readonly com.chronoxor.enums.FBE.FieldModelEnumUInt64 uint64b5;
 
-        public FieldModelEnums(FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FieldModelEnums(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
             byte0 = new com.chronoxor.enums.FBE.FieldModelEnumByte(buffer, 4 + 4);
             byte1 = new com.chronoxor.enums.FBE.FieldModelEnumByte(buffer, byte0.FBEOffset + byte0.FBESize);
@@ -3267,7 +3265,7 @@ namespace com.chronoxor.enums.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override FBE.FieldModelValueType<Enums> Clone() { return new FieldModelEnums(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelValueType<Enums> Clone() { return new FieldModelEnums(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -4261,12 +4259,12 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding Enums model
-    public class EnumsModel : FBE.Model
+    public class EnumsModel : com.chronoxor.FBE.Model
     {
         public readonly FieldModelEnums model;
 
         public EnumsModel() { model = new FieldModelEnums(Buffer, 4); }
-        public EnumsModel(FBE.Buffer buffer) : base(buffer) { model = new FieldModelEnums(Buffer, 4); }
+        public EnumsModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { model = new FieldModelEnums(Buffer, 4); }
 
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
@@ -4347,7 +4345,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding Enums final model
-    public class FinalModelEnums : FBE.FinalModelValueType<Enums>
+    public class FinalModelEnums : com.chronoxor.FBE.FinalModelValueType<Enums>
     {
         public readonly com.chronoxor.enums.FBE.FinalModelEnumByte byte0;
         public readonly com.chronoxor.enums.FBE.FinalModelEnumByte byte1;
@@ -4416,7 +4414,7 @@ namespace com.chronoxor.enums.FBE {
         public readonly com.chronoxor.enums.FBE.FinalModelEnumUInt64 uint64b4;
         public readonly com.chronoxor.enums.FBE.FinalModelEnumUInt64 uint64b5;
 
-        public FinalModelEnums(FBE.Buffer buffer, long offset) : base(buffer, offset)
+        public FinalModelEnums(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset)
         {
             byte0 = new com.chronoxor.enums.FBE.FinalModelEnumByte(buffer, 0);
             byte1 = new com.chronoxor.enums.FBE.FinalModelEnumByte(buffer, 0);
@@ -4565,7 +4563,7 @@ namespace com.chronoxor.enums.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override FBE.FinalModelValueType<Enums> Clone() { return new FinalModelEnums(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelValueType<Enums> Clone() { return new FinalModelEnums(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -5689,12 +5687,12 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding Enums final model
-    public class EnumsFinalModel : FBE.Model
+    public class EnumsFinalModel : com.chronoxor.FBE.Model
     {
         private readonly FinalModelEnums _model;
 
         public EnumsFinalModel() { _model = new FinalModelEnums(Buffer, 8); }
-        public EnumsFinalModel(FBE.Buffer buffer) : base(buffer) { _model = new FinalModelEnums(Buffer, 8); }
+        public EnumsFinalModel(com.chronoxor.FBE.Buffer buffer) : base(buffer) { _model = new FinalModelEnums(Buffer, 8); }
 
         // Get the model type
         public const long FBETypeConst = FinalModelEnums.FBETypeConst;
@@ -5782,19 +5780,19 @@ namespace com.chronoxor.enums.FBE {
 namespace com.chronoxor.enums.FBE {
 
     // Fast Binary Encoding com.chronoxor.enums sender listener interface
-    public interface ISenderListener : FBE.ISenderListener
+    public interface ISenderListener : com.chronoxor.FBE.ISenderListener
     {
     }
 
     // Fast Binary Encoding com.chronoxor.enums sender
-    public class Sender : FBE.Sender, ISenderListener
+    public class Sender : com.chronoxor.FBE.Sender, ISenderListener
     {
         // Sender models accessors
 
         public Sender() : base(false)
         {
         }
-        public Sender(FBE.Buffer buffer) : base(buffer, false)
+        public Sender(com.chronoxor.FBE.Buffer buffer) : base(buffer, false)
         {
         }
 
@@ -5816,13 +5814,13 @@ namespace com.chronoxor.enums.FBE {
 namespace com.chronoxor.enums.FBE {
 
     // Fast Binary Encoding com.chronoxor.enums receiver listener interface
-    public interface IReceiverListener : FBE.IReceiverListener
+    public interface IReceiverListener : com.chronoxor.FBE.IReceiverListener
     {
         // Receive handlers
     }
 
     // Fast Binary Encoding com.chronoxor.enums receiver
-    public class Receiver : FBE.Receiver, IReceiverListener
+    public class Receiver : com.chronoxor.FBE.Receiver, IReceiverListener
     {
         // Receiver values accessors
 
@@ -5831,7 +5829,7 @@ namespace com.chronoxor.enums.FBE {
         public Receiver() : base(false)
         {
         }
-        public Receiver(FBE.Buffer buffer) : base(buffer, false)
+        public Receiver(com.chronoxor.FBE.Buffer buffer) : base(buffer, false)
         {
         }
 
@@ -5852,20 +5850,20 @@ namespace com.chronoxor.enums.FBE {
 namespace com.chronoxor.enums.FBE {
 
     // Fast Binary Encoding com.chronoxor.enums proxy listener interface
-    public interface IProxyListener : FBE.IReceiverListener
+    public interface IProxyListener : com.chronoxor.FBE.IReceiverListener
     {
         // Proxy handlers
     }
 
     // Fast Binary Encoding com.chronoxor.enums proxy
-    public class Proxy : FBE.Receiver, IProxyListener
+    public class Proxy : com.chronoxor.FBE.Receiver, IProxyListener
     {
         // Proxy models accessors
 
         public Proxy() : base(false)
         {
         }
-        public Proxy(FBE.Buffer buffer) : base(buffer, false)
+        public Proxy(com.chronoxor.FBE.Buffer buffer) : base(buffer, false)
         {
         }
 
@@ -5886,12 +5884,12 @@ namespace com.chronoxor.enums.FBE {
 namespace com.chronoxor.enums.FBE {
 
     // Fast Binary Encoding com.chronoxor.enums client listener interface
-    public interface IClientListener : FBE.IClientListener, ISenderListener, IReceiverListener
+    public interface IClientListener : com.chronoxor.FBE.IClientListener, ISenderListener, IReceiverListener
     {
     }
 
     // Fast Binary Encoding com.chronoxor.enums client
-    public class Client : FBE.Client, IClientListener
+    public class Client : com.chronoxor.FBE.Client, IClientListener
     {
         // Client sender models accessors
 
@@ -5902,7 +5900,7 @@ namespace com.chronoxor.enums.FBE {
         public Client() : base(false)
         {
         }
-        public Client(FBE.Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, false)
+        public Client(com.chronoxor.FBE.Buffer sendBuffer, com.chronoxor.FBE.Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, false)
         {
         }
 
@@ -5948,19 +5946,19 @@ namespace com.chronoxor.enums.FBE {
 namespace com.chronoxor.enums.FBE {
 
     // Fast Binary Encoding com.chronoxor.enums final sender listener interface
-    public interface IFinalSenderListener : FBE.ISenderListener
+    public interface IFinalSenderListener : com.chronoxor.FBE.ISenderListener
     {
     }
 
     // Fast Binary Encoding com.chronoxor.enums final sender
-    public class FinalSender : FBE.Sender, IFinalSenderListener
+    public class FinalSender : com.chronoxor.FBE.Sender, IFinalSenderListener
     {
         // Sender models accessors
 
         public FinalSender() : base(true)
         {
         }
-        public FinalSender(FBE.Buffer buffer) : base(buffer, true)
+        public FinalSender(com.chronoxor.FBE.Buffer buffer) : base(buffer, true)
         {
         }
 
@@ -5982,13 +5980,13 @@ namespace com.chronoxor.enums.FBE {
 namespace com.chronoxor.enums.FBE {
 
     // Fast Binary Encoding com.chronoxor.enums final receiver listener interface
-    public interface IFinalReceiverListener : FBE.IReceiverListener
+    public interface IFinalReceiverListener : com.chronoxor.FBE.IReceiverListener
     {
         // Receive handlers
     }
 
     // Fast Binary Encoding com.chronoxor.enums final receiver
-    public class FinalReceiver : FBE.Receiver, IFinalReceiverListener
+    public class FinalReceiver : com.chronoxor.FBE.Receiver, IFinalReceiverListener
     {
         // Receiver values accessors
 
@@ -5997,7 +5995,7 @@ namespace com.chronoxor.enums.FBE {
         public FinalReceiver() : base(true)
         {
         }
-        public FinalReceiver(FBE.Buffer buffer) : base(buffer, true)
+        public FinalReceiver(com.chronoxor.FBE.Buffer buffer) : base(buffer, true)
         {
         }
 
@@ -6018,12 +6016,12 @@ namespace com.chronoxor.enums.FBE {
 namespace com.chronoxor.enums.FBE {
 
     // Fast Binary Encoding com.chronoxor.enums final client listener interface
-    public interface IFinalClientListener : FBE.IClientListener, IFinalSenderListener, IFinalReceiverListener
+    public interface IFinalClientListener : com.chronoxor.FBE.IClientListener, IFinalSenderListener, IFinalReceiverListener
     {
     }
 
     // Fast Binary Encoding com.chronoxor.enums final client
-    public class FinalClient : FBE.Client, IFinalClientListener
+    public class FinalClient : com.chronoxor.FBE.Client, IFinalClientListener
     {
         // Client sender models accessors
 
@@ -6034,7 +6032,7 @@ namespace com.chronoxor.enums.FBE {
         public FinalClient() : base(true)
         {
         }
-        public FinalClient(FBE.Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, true)
+        public FinalClient(com.chronoxor.FBE.Buffer sendBuffer, com.chronoxor.FBE.Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, true)
         {
         }
 

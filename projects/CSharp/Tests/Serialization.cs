@@ -8,27 +8,32 @@ using System;
 using System.IO;
 using Xunit;
 
+using com.chronoxor.proto;
+using com.chronoxor.proto.FBE;
+using com.chronoxor.test;
+using com.chronoxor.test.FBE;
+
 namespace Tests
 {
-    public class Serialization
+    public class TestSerialization
     {
         [Fact(DisplayName = "Serialization: domain")]
         public void SerializationDomain()
         {
             // Create a new account with some orders
-            var account1 = proto.Account.Default;
+            var account1 = Account.Default;
             account1.id = 1;
             account1.name = "Test";
-            account1.state = proto.State.good;
+            account1.state = State.good;
             account1.wallet.currency = "USD";
             account1.wallet.amount = 1000.0;
-            account1.asset = new proto.Balance("EUR", 100.0);
-            account1.orders.Add(new proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0));
-            account1.orders.Add(new proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0));
-            account1.orders.Add(new proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0));
+            account1.asset = new Balance("EUR", 100.0);
+            account1.orders.Add(new Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0));
+            account1.orders.Add(new Order(2, "EURUSD", OrderSide.sell, OrderType.limit, 1.0, 100.0));
+            account1.orders.Add(new Order(3, "EURUSD", OrderSide.buy, OrderType.stop, 1.5, 10.0));
 
             // Serialize the account to the FBE stream
-            var writer = new FBE.proto.AccountModel();
+            var writer = new AccountModel();
             Assert.True(writer.model.FBEOffset == 4);
             long serialized = writer.Serialize(account1);
             Assert.True(serialized == writer.Buffer.Size);
@@ -40,7 +45,7 @@ namespace Tests
             Assert.True(writer.Buffer.Size == 252);
 
             // Deserialize the account from the FBE stream
-            var reader = new FBE.proto.AccountModel();
+            var reader = new AccountModel();
             Assert.True(reader.model.FBEOffset == 4);
             reader.Attach(writer.Buffer);
             Assert.True(reader.Verify());
@@ -51,7 +56,7 @@ namespace Tests
 
             Assert.True(account2.id == 1);
             Assert.True(account2.name == "Test");
-            Assert.True(account2.state.HasFlags(proto.State.good));
+            Assert.True(account2.state.HasFlags(State.good));
             Assert.True(account2.wallet.currency == "USD");
             Assert.True(account2.wallet.amount == 1000.0);
             Assert.True(account2.asset.HasValue);
@@ -60,20 +65,20 @@ namespace Tests
             Assert.True(account2.orders.Count == 3);
             Assert.True(account2.orders[0].id == 1);
             Assert.True(account2.orders[0].symbol == "EURUSD");
-            Assert.True(account2.orders[0].side == proto.OrderSide.buy);
-            Assert.True(account2.orders[0].type == proto.OrderType.market);
+            Assert.True(account2.orders[0].side == OrderSide.buy);
+            Assert.True(account2.orders[0].type == OrderType.market);
             Assert.True(account2.orders[0].price == 1.23456);
             Assert.True(account2.orders[0].volume == 1000.0);
             Assert.True(account2.orders[1].id == 2);
             Assert.True(account2.orders[1].symbol == "EURUSD");
-            Assert.True(account2.orders[1].side == proto.OrderSide.sell);
-            Assert.True(account2.orders[1].type == proto.OrderType.limit);
+            Assert.True(account2.orders[1].side == OrderSide.sell);
+            Assert.True(account2.orders[1].type == OrderType.limit);
             Assert.True(account2.orders[1].price == 1.0);
             Assert.True(account2.orders[1].volume == 100.0);
             Assert.True(account2.orders[2].id == 3);
             Assert.True(account2.orders[2].symbol == "EURUSD");
-            Assert.True(account2.orders[2].side == proto.OrderSide.buy);
-            Assert.True(account2.orders[2].type == proto.OrderType.stop);
+            Assert.True(account2.orders[2].side == OrderSide.buy);
+            Assert.True(account2.orders[2].type == OrderType.stop);
             Assert.True(account2.orders[2].price == 1.5);
             Assert.True(account2.orders[2].volume == 10.0);
         }
@@ -82,10 +87,10 @@ namespace Tests
         public void SerializationStructSimple()
         {
             // Create a new struct
-            var struct1 = test.StructSimple.Default;
+            var struct1 = StructSimple.Default;
 
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructSimpleModel();
+            var writer = new StructSimpleModel();
             Assert.True(writer.model.FBEType == 110);
             Assert.True(writer.model.FBEOffset == 4);
             long serialized = writer.Serialize(struct1);
@@ -98,7 +103,7 @@ namespace Tests
             Assert.True(writer.Buffer.Size == 392);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructSimpleModel();
+            var reader = new StructSimpleModel();
             Assert.True(reader.model.FBEType == 110);
             Assert.True(reader.model.FBEOffset == 4);
             reader.Attach(writer.Buffer);
@@ -194,10 +199,10 @@ namespace Tests
         public void SerializationStructOptional()
         {
             // Create a new struct
-            var struct1 = test.StructOptional.Default;
+            var struct1 = StructOptional.Default;
 
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructOptionalModel();
+            var writer = new StructOptionalModel();
             Assert.True(writer.model.FBEType == 111);
             Assert.True(writer.model.FBEOffset == 4);
             long serialized = writer.Serialize(struct1);
@@ -210,7 +215,7 @@ namespace Tests
             Assert.True(writer.Buffer.Size == 834);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructOptionalModel();
+            var reader = new StructOptionalModel();
             Assert.True(reader.model.FBEType == 111);
             Assert.True(reader.model.FBEOffset == 4);
             reader.Attach(writer.Buffer);
@@ -449,10 +454,10 @@ namespace Tests
         public void SerializationStructNested()
         {
             // Create a new struct
-            var struct1 = test.StructNested.Default;
+            var struct1 = StructNested.Default;
 
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructNestedModel();
+            var writer = new StructNestedModel();
             Assert.True(writer.model.FBEType == 112);
             Assert.True(writer.model.FBEOffset == 4);
             long serialized = writer.Serialize(struct1);
@@ -465,7 +470,7 @@ namespace Tests
             Assert.True(writer.Buffer.Size == 2099);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructNestedModel();
+            var reader = new StructNestedModel();
             Assert.True(reader.model.FBEType == 112);
             Assert.True(reader.model.FBEOffset == 4);
             reader.Attach(writer.Buffer);
@@ -599,13 +604,13 @@ namespace Tests
             Assert.True(!struct2.parent.f164.HasValue);
             Assert.True(!struct2.parent.f165.HasValue);
 
-            Assert.True(struct2.f1000 == test.EnumSimple.ENUM_VALUE_0);
+            Assert.True(struct2.f1000 == EnumSimple.ENUM_VALUE_0);
             Assert.True(!struct2.f1001.HasValue);
-            Assert.True(struct2.f1002 == test.EnumTyped.ENUM_VALUE_2);
+            Assert.True(struct2.f1002 == EnumTyped.ENUM_VALUE_2);
             Assert.True(!struct2.f1003.HasValue);
-            Assert.True(struct2.f1004 == test.FlagsSimple.FLAG_VALUE_0);
+            Assert.True(struct2.f1004 == FlagsSimple.FLAG_VALUE_0);
             Assert.True(!struct2.f1005.HasValue);
-            Assert.True(struct2.f1006 == (test.FlagsTyped.FLAG_VALUE_2 | test.FlagsTyped.FLAG_VALUE_4 | test.FlagsTyped.FLAG_VALUE_6));
+            Assert.True(struct2.f1006 == (FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6));
             Assert.True(!struct2.f1007.HasValue);
             Assert.True(!struct2.f1009.HasValue);
             Assert.True(!struct2.f1011.HasValue);
@@ -724,12 +729,12 @@ namespace Tests
         public void SerializationStructBytes()
         {
             // Create a new struct
-            var struct1 = test.StructBytes.Default;
+            var struct1 = StructBytes.Default;
             struct1.f1 = new MemoryStream(new [] { (byte)'A', (byte)'B', (byte)'C' }, 0, 3, true, true);
             struct1.f2 = new MemoryStream(new[] { (byte)'t', (byte)'e', (byte)'s', (byte)'t' }, 0, 4, true, true);
 
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructBytesModel();
+            var writer = new StructBytesModel();
             Assert.True(writer.model.FBEType == 120);
             Assert.True(writer.model.FBEOffset == 4);
             long serialized = writer.Serialize(struct1);
@@ -742,7 +747,7 @@ namespace Tests
             Assert.True(writer.Buffer.Size == 49);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructBytesModel();
+            var reader = new StructBytesModel();
             Assert.True(reader.model.FBEType == 120);
             Assert.True(reader.model.FBEOffset == 4);
             reader.Attach(writer.Buffer);
@@ -769,7 +774,7 @@ namespace Tests
         public void SerializationStructArray()
         {
             // Create a new struct
-            var struct1 = test.StructArray.Default;
+            var struct1 = StructArray.Default;
             struct1.f1[0] = 48;
             struct1.f1[1] = 65;
             struct1.f2[0] = 97;
@@ -778,21 +783,21 @@ namespace Tests
             struct1.f3[1] = new MemoryStream(new[] { (byte)65, (byte)65, (byte)65 }, 0, 3, true, true);
             struct1.f4[0] = new MemoryStream(new[] { (byte)97, (byte)97, (byte)97 }, 0, 3, true, true);
             struct1.f4[1] = null;
-            struct1.f5[0] = test.EnumSimple.ENUM_VALUE_1;
-            struct1.f5[1] = test.EnumSimple.ENUM_VALUE_2;
-            struct1.f6[0] = test.EnumSimple.ENUM_VALUE_1;
+            struct1.f5[0] = EnumSimple.ENUM_VALUE_1;
+            struct1.f5[1] = EnumSimple.ENUM_VALUE_2;
+            struct1.f6[0] = EnumSimple.ENUM_VALUE_1;
             struct1.f6[1] = null;
-            struct1.f7[0] = test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2;
-            struct1.f7[1] = test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3;
-            struct1.f8[0] = test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2;
+            struct1.f7[0] = FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2;
+            struct1.f7[1] = FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2 | FlagsSimple.FLAG_VALUE_3;
+            struct1.f8[0] = FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2;
             struct1.f8[1] = null;
-            struct1.f9[0] = test.StructSimple.Default;
-            struct1.f9[1] = test.StructSimple.Default;
-            struct1.f10[0] = test.StructSimple.Default;
+            struct1.f9[0] = StructSimple.Default;
+            struct1.f9[1] = StructSimple.Default;
+            struct1.f10[0] = StructSimple.Default;
             struct1.f10[1] = null;
 
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructArrayModel();
+            var writer = new StructArrayModel();
             Assert.True(writer.model.FBEType == 125);
             Assert.True(writer.model.FBEOffset == 4);
             long serialized = writer.Serialize(struct1);
@@ -805,7 +810,7 @@ namespace Tests
             Assert.True(writer.Buffer.Size == 1290);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructArrayModel();
+            var reader = new StructArrayModel();
             Assert.True(reader.model.FBEType == 125);
             Assert.True(reader.model.FBEOffset == 4);
             reader.Attach(writer.Buffer);
@@ -838,16 +843,16 @@ namespace Tests
             Assert.True(struct2.f4[0].GetBuffer()[2] == 97);
             Assert.True(struct2.f4[1] == null);
             Assert.True(struct2.f5.Length == 2);
-            Assert.True(struct2.f5[0] == test.EnumSimple.ENUM_VALUE_1);
-            Assert.True(struct2.f5[1] == test.EnumSimple.ENUM_VALUE_2);
+            Assert.True(struct2.f5[0] == EnumSimple.ENUM_VALUE_1);
+            Assert.True(struct2.f5[1] == EnumSimple.ENUM_VALUE_2);
             Assert.True(struct2.f6.Length == 2);
-            Assert.True(struct2.f6[0] == test.EnumSimple.ENUM_VALUE_1);
+            Assert.True(struct2.f6[0] == EnumSimple.ENUM_VALUE_1);
             Assert.True(struct2.f6[1] == null);
             Assert.True(struct2.f7.Length == 2);
-            Assert.True(struct2.f7[0] == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2));
-            Assert.True(struct2.f7[1] == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3));
+            Assert.True(struct2.f7[0] == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2));
+            Assert.True(struct2.f7[1] == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2 | FlagsSimple.FLAG_VALUE_3));
             Assert.True(struct2.f8.Length == 2);
-            Assert.True(struct2.f8[0] == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2));
+            Assert.True(struct2.f8[0] == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2));
             Assert.True(struct2.f8[1] == null);
             Assert.True(struct2.f9.Length == 2);
             Assert.True(struct2.f9[0].f2 == true);
@@ -868,7 +873,7 @@ namespace Tests
         public void SerializationStructVector()
         {
             // Create a new struct
-            var struct1 = test.StructVector.Default;
+            var struct1 = StructVector.Default;
             struct1.f1.Add(48);
             struct1.f1.Add(65);
             struct1.f2.Add(97);
@@ -877,21 +882,21 @@ namespace Tests
             struct1.f3.Add(new MemoryStream(new[] { (byte)65, (byte)65, (byte)65 }, 0, 3, true, true));
             struct1.f4.Add(new MemoryStream(new[] { (byte)97, (byte)97, (byte)97 }, 0, 3, true, true));
             struct1.f4.Add(null);
-            struct1.f5.Add(test.EnumSimple.ENUM_VALUE_1);
-            struct1.f5.Add(test.EnumSimple.ENUM_VALUE_2);
-            struct1.f6.Add(test.EnumSimple.ENUM_VALUE_1);
+            struct1.f5.Add(EnumSimple.ENUM_VALUE_1);
+            struct1.f5.Add(EnumSimple.ENUM_VALUE_2);
+            struct1.f6.Add(EnumSimple.ENUM_VALUE_1);
             struct1.f6.Add(null);
-            struct1.f7.Add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f7.Add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3);
-            struct1.f8.Add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
+            struct1.f7.Add(FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2);
+            struct1.f7.Add(FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2 | FlagsSimple.FLAG_VALUE_3);
+            struct1.f8.Add(FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2);
             struct1.f8.Add(null);
-            struct1.f9.Add(test.StructSimple.Default);
-            struct1.f9.Add(test.StructSimple.Default);
-            struct1.f10.Add(test.StructSimple.Default);
+            struct1.f9.Add(StructSimple.Default);
+            struct1.f9.Add(StructSimple.Default);
+            struct1.f10.Add(StructSimple.Default);
             struct1.f10.Add(null);
 
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructVectorModel();
+            var writer = new StructVectorModel();
             Assert.True(writer.model.FBEType == 130);
             Assert.True(writer.model.FBEOffset == 4);
             long serialized = writer.Serialize(struct1);
@@ -904,7 +909,7 @@ namespace Tests
             Assert.True(writer.Buffer.Size == 1370);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructVectorModel();
+            var reader = new StructVectorModel();
             Assert.True(reader.model.FBEType == 130);
             Assert.True(reader.model.FBEOffset == 4);
             reader.Attach(writer.Buffer);
@@ -937,16 +942,16 @@ namespace Tests
             Assert.True(struct2.f4[0].GetBuffer()[2] == 97);
             Assert.True(struct2.f4[1] == null);
             Assert.True(struct2.f5.Count == 2);
-            Assert.True(struct2.f5[0] == test.EnumSimple.ENUM_VALUE_1);
-            Assert.True(struct2.f5[1] == test.EnumSimple.ENUM_VALUE_2);
+            Assert.True(struct2.f5[0] == EnumSimple.ENUM_VALUE_1);
+            Assert.True(struct2.f5[1] == EnumSimple.ENUM_VALUE_2);
             Assert.True(struct2.f6.Count == 2);
-            Assert.True(struct2.f6[0] == test.EnumSimple.ENUM_VALUE_1);
+            Assert.True(struct2.f6[0] == EnumSimple.ENUM_VALUE_1);
             Assert.True(struct2.f6[1] == null);
             Assert.True(struct2.f7.Count == 2);
-            Assert.True(struct2.f7[0] == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2));
-            Assert.True(struct2.f7[1] == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3));
+            Assert.True(struct2.f7[0] == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2));
+            Assert.True(struct2.f7[1] == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2 | FlagsSimple.FLAG_VALUE_3));
             Assert.True(struct2.f8.Count == 2);
-            Assert.True(struct2.f8[0] == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2));
+            Assert.True(struct2.f8[0] == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2));
             Assert.True(struct2.f8[1] == null);
             Assert.True(struct2.f9.Count == 2);
             Assert.True(struct2.f9[0].f2 == true);
@@ -967,7 +972,7 @@ namespace Tests
         public void SerializationStructList()
         {
             // Create a new struct
-            var struct1 = test.StructList.Default;
+            var struct1 = StructList.Default;
             struct1.f1.AddLast(48);
             struct1.f1.AddLast(65);
             struct1.f2.AddLast(97);
@@ -976,21 +981,21 @@ namespace Tests
             struct1.f3.AddLast(new MemoryStream(new[] { (byte)65, (byte)65, (byte)65 }, 0, 3, true, true));
             struct1.f4.AddLast(new MemoryStream(new[] { (byte)97, (byte)97, (byte)97 }, 0, 3, true, true));
             struct1.f4.AddLast((MemoryStream)null);
-            struct1.f5.AddLast(test.EnumSimple.ENUM_VALUE_1);
-            struct1.f5.AddLast(test.EnumSimple.ENUM_VALUE_2);
-            struct1.f6.AddLast(test.EnumSimple.ENUM_VALUE_1);
-            struct1.f6.AddLast((test.EnumSimple?)null);
-            struct1.f7.AddLast(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f7.AddLast(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3);
-            struct1.f8.AddLast(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f8.AddLast((test.FlagsSimple?)null);
-            struct1.f9.AddLast(test.StructSimple.Default);
-            struct1.f9.AddLast(test.StructSimple.Default);
-            struct1.f10.AddLast(test.StructSimple.Default);
-            struct1.f10.AddLast((test.StructSimple?)null);
+            struct1.f5.AddLast(EnumSimple.ENUM_VALUE_1);
+            struct1.f5.AddLast(EnumSimple.ENUM_VALUE_2);
+            struct1.f6.AddLast(EnumSimple.ENUM_VALUE_1);
+            struct1.f6.AddLast((EnumSimple?)null);
+            struct1.f7.AddLast(FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2);
+            struct1.f7.AddLast(FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2 | FlagsSimple.FLAG_VALUE_3);
+            struct1.f8.AddLast(FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2);
+            struct1.f8.AddLast((FlagsSimple?)null);
+            struct1.f9.AddLast(StructSimple.Default);
+            struct1.f9.AddLast(StructSimple.Default);
+            struct1.f10.AddLast(StructSimple.Default);
+            struct1.f10.AddLast((StructSimple?)null);
 
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructListModel();
+            var writer = new StructListModel();
             Assert.True(writer.model.FBEType == 131);
             Assert.True(writer.model.FBEOffset == 4);
             long serialized = writer.Serialize(struct1);
@@ -1003,7 +1008,7 @@ namespace Tests
             Assert.True(writer.Buffer.Size == 1370);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructListModel();
+            var reader = new StructListModel();
             Assert.True(reader.model.FBEType == 131);
             Assert.True(reader.model.FBEOffset == 4);
             reader.Attach(writer.Buffer);
@@ -1036,16 +1041,16 @@ namespace Tests
             Assert.True(struct2.f4.First.Value.GetBuffer()[2] == 97);
             Assert.True(struct2.f4.Last.Value == null);
             Assert.True(struct2.f5.Count == 2);
-            Assert.True(struct2.f5.First.Value == test.EnumSimple.ENUM_VALUE_1);
-            Assert.True(struct2.f5.Last.Value == test.EnumSimple.ENUM_VALUE_2);
+            Assert.True(struct2.f5.First.Value == EnumSimple.ENUM_VALUE_1);
+            Assert.True(struct2.f5.Last.Value == EnumSimple.ENUM_VALUE_2);
             Assert.True(struct2.f6.Count == 2);
-            Assert.True(struct2.f6.First.Value == test.EnumSimple.ENUM_VALUE_1);
+            Assert.True(struct2.f6.First.Value == EnumSimple.ENUM_VALUE_1);
             Assert.True(struct2.f6.Last.Value == null);
             Assert.True(struct2.f7.Count == 2);
-            Assert.True(struct2.f7.First.Value == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2));
-            Assert.True(struct2.f7.Last.Value == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3));
+            Assert.True(struct2.f7.First.Value == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2));
+            Assert.True(struct2.f7.Last.Value == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2 | FlagsSimple.FLAG_VALUE_3));
             Assert.True(struct2.f8.Count == 2);
-            Assert.True(struct2.f8.First.Value == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2));
+            Assert.True(struct2.f8.First.Value == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2));
             Assert.True(struct2.f8.Last.Value == null);
             Assert.True(struct2.f9.Count == 2);
             Assert.True(struct2.f9.First.Value.f2 == true);
@@ -1066,23 +1071,23 @@ namespace Tests
         public void SerializationStructSet()
         {
             // Create a new struct
-            var struct1 = test.StructSet.Default;
+            var struct1 = StructSet.Default;
             struct1.f1.Add(48);
             struct1.f1.Add(65);
             struct1.f1.Add(97);
-            struct1.f2.Add(test.EnumSimple.ENUM_VALUE_1);
-            struct1.f2.Add(test.EnumSimple.ENUM_VALUE_2);
-            struct1.f3.Add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f3.Add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3);
-            var s1 = test.StructSimple.Default;
+            struct1.f2.Add(EnumSimple.ENUM_VALUE_1);
+            struct1.f2.Add(EnumSimple.ENUM_VALUE_2);
+            struct1.f3.Add(FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2);
+            struct1.f3.Add(FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2 | FlagsSimple.FLAG_VALUE_3);
+            var s1 = StructSimple.Default;
             s1.id = 48;
             struct1.f4.Add(s1);
-            var s2 = test.StructSimple.Default;
+            var s2 = StructSimple.Default;
             s2.id = 65;
             struct1.f4.Add(s2);
 
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructSetModel();
+            var writer = new StructSetModel();
             Assert.True(writer.model.FBEType == 132);
             Assert.True(writer.model.FBEOffset == 4);
             long serialized = writer.Serialize(struct1);
@@ -1095,7 +1100,7 @@ namespace Tests
             Assert.True(writer.Buffer.Size == 843);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructSetModel();
+            var reader = new StructSetModel();
             Assert.True(reader.model.FBEType == 132);
             Assert.True(reader.model.FBEOffset == 4);
             reader.Attach(writer.Buffer);
@@ -1110,11 +1115,11 @@ namespace Tests
             Assert.True(struct2.f1.Contains(65));
             Assert.True(struct2.f1.Contains(97));
             Assert.True(struct2.f2.Count == 2);
-            Assert.True(struct2.f2.Contains(test.EnumSimple.ENUM_VALUE_1));
-            Assert.True(struct2.f2.Contains(test.EnumSimple.ENUM_VALUE_2));
+            Assert.True(struct2.f2.Contains(EnumSimple.ENUM_VALUE_1));
+            Assert.True(struct2.f2.Contains(EnumSimple.ENUM_VALUE_2));
             Assert.True(struct2.f3.Count == 2);
-            Assert.True(struct2.f3.Contains(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2));
-            Assert.True(struct2.f3.Contains(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3));
+            Assert.True(struct2.f3.Contains(FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2));
+            Assert.True(struct2.f3.Contains(FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2 | FlagsSimple.FLAG_VALUE_3));
             Assert.True(struct2.f4.Count == 2);
             Assert.True(struct2.f4.Contains(s1));
             Assert.True(struct2.f4.Contains(s2));
@@ -1124,7 +1129,7 @@ namespace Tests
         public void SerializationStructMap()
         {
             // Create a new struct
-            var struct1 = test.StructMap.Default;
+            var struct1 = StructMap.Default;
             struct1.f1.Add(10, 48);
             struct1.f1.Add(20, 65);
             struct1.f2.Add(10, 97);
@@ -1133,25 +1138,25 @@ namespace Tests
             struct1.f3.Add(20, new MemoryStream(new[] { (byte)65, (byte)65, (byte)65 }, 0, 3, true, true));
             struct1.f4.Add(10, new MemoryStream(new[] { (byte)97, (byte)97, (byte)97 }, 0, 3, true, true));
             struct1.f4.Add(20, null);
-            struct1.f5.Add(10, test.EnumSimple.ENUM_VALUE_1);
-            struct1.f5.Add(20, test.EnumSimple.ENUM_VALUE_2);
-            struct1.f6.Add(10, test.EnumSimple.ENUM_VALUE_1);
+            struct1.f5.Add(10, EnumSimple.ENUM_VALUE_1);
+            struct1.f5.Add(20, EnumSimple.ENUM_VALUE_2);
+            struct1.f6.Add(10, EnumSimple.ENUM_VALUE_1);
             struct1.f6.Add(20, null);
-            struct1.f7.Add(10, test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f7.Add(20, test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3);
-            struct1.f8.Add(10, test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
+            struct1.f7.Add(10, FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2);
+            struct1.f7.Add(20, FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2 | FlagsSimple.FLAG_VALUE_3);
+            struct1.f8.Add(10, FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2);
             struct1.f8.Add(20, null);
-            var s1 = test.StructSimple.Default;
+            var s1 = StructSimple.Default;
             s1.id = 48;
             struct1.f9.Add(10, s1);
-            var s2 = test.StructSimple.Default;
+            var s2 = StructSimple.Default;
             s2.id = 65;
             struct1.f9.Add(20, s2);
             struct1.f10.Add(10, s1);
             struct1.f10.Add(20, null);
 
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructMapModel();
+            var writer = new StructMapModel();
             Assert.True(writer.model.FBEType == 140);
             Assert.True(writer.model.FBEOffset == 4);
             long serialized = writer.Serialize(struct1);
@@ -1164,7 +1169,7 @@ namespace Tests
             Assert.True(writer.Buffer.Size == 1450);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructMapModel();
+            var reader = new StructMapModel();
             Assert.True(reader.model.FBEType == 140);
             Assert.True(reader.model.FBEOffset == 4);
             reader.Attach(writer.Buffer);
@@ -1187,16 +1192,16 @@ namespace Tests
             Assert.True(struct2.f4[10].Length == 3);
             Assert.True(struct2.f4[20] == null);
             Assert.True(struct2.f5.Count == 2);
-            Assert.True(struct2.f5[10] == test.EnumSimple.ENUM_VALUE_1);
-            Assert.True(struct2.f5[20] == test.EnumSimple.ENUM_VALUE_2);
+            Assert.True(struct2.f5[10] == EnumSimple.ENUM_VALUE_1);
+            Assert.True(struct2.f5[20] == EnumSimple.ENUM_VALUE_2);
             Assert.True(struct2.f6.Count == 2);
-            Assert.True(struct2.f6[10] == test.EnumSimple.ENUM_VALUE_1);
+            Assert.True(struct2.f6[10] == EnumSimple.ENUM_VALUE_1);
             Assert.True(struct2.f6[20] == null);
             Assert.True(struct2.f7.Count == 2);
-            Assert.True(struct2.f7[10] == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2));
-            Assert.True(struct2.f7[20] == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3));
+            Assert.True(struct2.f7[10] == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2));
+            Assert.True(struct2.f7[20] == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2 | FlagsSimple.FLAG_VALUE_3));
             Assert.True(struct2.f8.Count == 2);
-            Assert.True(struct2.f8[10] == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2));
+            Assert.True(struct2.f8[10] == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2));
             Assert.True(struct2.f8[20] == null);
             Assert.True(struct2.f9.Count == 2);
             Assert.True(struct2.f9[10].id == 48);
@@ -1210,7 +1215,7 @@ namespace Tests
         public void SerializationStructHash()
         {
             // Create a new struct
-            var struct1 = test.StructHash.Default;
+            var struct1 = StructHash.Default;
             struct1.f1.Add("10", 48);
             struct1.f1.Add("20", 65);
             struct1.f2.Add("10", 97);
@@ -1219,25 +1224,25 @@ namespace Tests
             struct1.f3.Add("20", new MemoryStream(new[] { (byte)65, (byte)65, (byte)65 }, 0, 3, true, true));
             struct1.f4.Add("10", new MemoryStream(new[] { (byte)97, (byte)97, (byte)97 }, 0, 3, true, true));
             struct1.f4.Add("20", null);
-            struct1.f5.Add("10", test.EnumSimple.ENUM_VALUE_1);
-            struct1.f5.Add("20", test.EnumSimple.ENUM_VALUE_2);
-            struct1.f6.Add("10", test.EnumSimple.ENUM_VALUE_1);
+            struct1.f5.Add("10", EnumSimple.ENUM_VALUE_1);
+            struct1.f5.Add("20", EnumSimple.ENUM_VALUE_2);
+            struct1.f6.Add("10", EnumSimple.ENUM_VALUE_1);
             struct1.f6.Add("20", null);
-            struct1.f7.Add("10", test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f7.Add("20", test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3);
-            struct1.f8.Add("10", test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
+            struct1.f7.Add("10", FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2);
+            struct1.f7.Add("20", FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2 | FlagsSimple.FLAG_VALUE_3);
+            struct1.f8.Add("10", FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2);
             struct1.f8.Add("20", null);
-            var s1 = test.StructSimple.Default;
+            var s1 = StructSimple.Default;
             s1.id = 48;
             struct1.f9.Add("10", s1);
-            var s2 = test.StructSimple.Default;
+            var s2 = StructSimple.Default;
             s2.id = 65;
             struct1.f9.Add("20", s2);
             struct1.f10.Add("10", s1);
             struct1.f10.Add("20", null);
 
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructHashModel();
+            var writer = new StructHashModel();
             Assert.True(writer.model.FBEType == 141);
             Assert.True(writer.model.FBEOffset == 4);
             long serialized = writer.Serialize(struct1);
@@ -1250,7 +1255,7 @@ namespace Tests
             Assert.True(writer.Buffer.Size == 1570);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructHashModel();
+            var reader = new StructHashModel();
             Assert.True(reader.model.FBEType == 141);
             Assert.True(reader.model.FBEOffset == 4);
             reader.Attach(writer.Buffer);
@@ -1273,16 +1278,16 @@ namespace Tests
             Assert.True(struct2.f4["10"].Length == 3);
             Assert.True(struct2.f4["20"] == null);
             Assert.True(struct2.f5.Count == 2);
-            Assert.True(struct2.f5["10"] == test.EnumSimple.ENUM_VALUE_1);
-            Assert.True(struct2.f5["20"] == test.EnumSimple.ENUM_VALUE_2);
+            Assert.True(struct2.f5["10"] == EnumSimple.ENUM_VALUE_1);
+            Assert.True(struct2.f5["20"] == EnumSimple.ENUM_VALUE_2);
             Assert.True(struct2.f6.Count == 2);
-            Assert.True(struct2.f6["10"] == test.EnumSimple.ENUM_VALUE_1);
+            Assert.True(struct2.f6["10"] == EnumSimple.ENUM_VALUE_1);
             Assert.True(struct2.f6["20"] == null);
             Assert.True(struct2.f7.Count == 2);
-            Assert.True(struct2.f7["10"] == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2));
-            Assert.True(struct2.f7["20"] == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3));
+            Assert.True(struct2.f7["10"] == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2));
+            Assert.True(struct2.f7["20"] == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2 | FlagsSimple.FLAG_VALUE_3));
             Assert.True(struct2.f8.Count == 2);
-            Assert.True(struct2.f8["10"] == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2));
+            Assert.True(struct2.f8["10"] == (FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2));
             Assert.True(struct2.f8["20"] == null);
             Assert.True(struct2.f9.Count == 2);
             Assert.True(struct2.f9["10"].id == 48);
@@ -1296,18 +1301,18 @@ namespace Tests
         public void SerializationStructHashExtended()
         {
             // Create a new struct
-            var struct1 = test.StructHashEx.Default;
-            var s1 = test.StructSimple.Default;
+            var struct1 = StructHashEx.Default;
+            var s1 = StructSimple.Default;
             s1.id = 48;
-            struct1.f1.Add(s1, test.StructNested.Default);
-            var s2 = test.StructSimple.Default;
+            struct1.f1.Add(s1, StructNested.Default);
+            var s2 = StructSimple.Default;
             s2.id = 65;
-            struct1.f1.Add(s2, test.StructNested.Default);
-            struct1.f2.Add(s1, test.StructNested.Default);
+            struct1.f1.Add(s2, StructNested.Default);
+            struct1.f2.Add(s1, StructNested.Default);
             struct1.f2.Add(s2, null);
 
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructHashExModel();
+            var writer = new StructHashExModel();
             Assert.True(writer.model.FBEType == 142);
             Assert.True(writer.model.FBEOffset == 4);
             long serialized = writer.Serialize(struct1);
@@ -1320,7 +1325,7 @@ namespace Tests
             Assert.True(writer.Buffer.Size == 7879);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructHashExModel();
+            var reader = new StructHashExModel();
             Assert.True(reader.model.FBEType == 142);
             Assert.True(reader.model.FBEOffset == 4);
             reader.Attach(writer.Buffer);
@@ -1331,10 +1336,10 @@ namespace Tests
             Assert.True(reader.model.FBEOffset == (4 + reader.Buffer.Size));
 
             Assert.True(struct2.f1.Count == 2);
-            Assert.True(struct2.f1[s1].f1002 == test.EnumTyped.ENUM_VALUE_2);
-            Assert.True(struct2.f1[s2].f1002 == test.EnumTyped.ENUM_VALUE_2);
+            Assert.True(struct2.f1[s1].f1002 == EnumTyped.ENUM_VALUE_2);
+            Assert.True(struct2.f1[s2].f1002 == EnumTyped.ENUM_VALUE_2);
             Assert.True(struct2.f2.Count == 2);
-            Assert.True(struct2.f2[s1].Value.f1002 == test.EnumTyped.ENUM_VALUE_2);
+            Assert.True(struct2.f2[s1].Value.f1002 == EnumTyped.ENUM_VALUE_2);
             Assert.True(struct2.f2[s2] == null);
         }
     }
