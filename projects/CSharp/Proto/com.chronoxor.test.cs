@@ -31,9 +31,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 #endif
 
-using proto;
+using com.chronoxor.proto;
 
-namespace test {
+namespace com.chronoxor.test {
 
 #if UTF8JSON
     public class EnumSimpleConverter : IJsonFormatter<EnumSimple>
@@ -141,7 +141,7 @@ namespace test {
 
         public static EnumSimple Default => new EnumSimple();
 
-        public static FBE.FieldModelValueType<EnumSimple> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelEnumSimple(buffer, offset); }
+        public static FBE.FieldModelValueType<EnumSimple> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelEnumSimple(buffer, offset); }
 
         public const int _ENUM_VALUE_0_ = (int)0 + 0;
         public const int _ENUM_VALUE_1_ = (int)1 + 0;
@@ -169,12 +169,12 @@ namespace test {
         }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding EnumSimple field model
     public class FieldModelEnumSimple : FieldModelValueType<EnumSimple>
@@ -211,13 +211,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding EnumSimple final model
     public class FinalModelEnumSimple : FinalModelValueType<EnumSimple>
@@ -267,10 +267,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
 #if UTF8JSON
     public class EnumTypedConverter : IJsonFormatter<EnumTyped>
@@ -378,7 +378,7 @@ namespace test {
 
         public static EnumTyped Default => new EnumTyped();
 
-        public static FBE.FieldModelValueType<EnumTyped> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelEnumTyped(buffer, offset); }
+        public static FBE.FieldModelValueType<EnumTyped> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelEnumTyped(buffer, offset); }
 
         public const byte _ENUM_VALUE_0_ = (byte)0 + 0;
         public const byte _ENUM_VALUE_1_ = (byte)'1' + 0;
@@ -406,12 +406,12 @@ namespace test {
         }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding EnumTyped field model
     public class FieldModelEnumTyped : FieldModelValueType<EnumTyped>
@@ -448,13 +448,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding EnumTyped final model
     public class FinalModelEnumTyped : FinalModelValueType<EnumTyped>
@@ -504,10 +504,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
 #if UTF8JSON
     public class EnumEmptyConverter : IJsonFormatter<EnumEmpty>
@@ -615,7 +615,7 @@ namespace test {
 
         public static EnumEmpty Default => new EnumEmpty();
 
-        public static FBE.FieldModelValueType<EnumEmpty> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelEnumEmpty(buffer, offset); }
+        public static FBE.FieldModelValueType<EnumEmpty> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelEnumEmpty(buffer, offset); }
 
 
 
@@ -625,12 +625,12 @@ namespace test {
         }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding EnumEmpty field model
     public class FieldModelEnumEmpty : FieldModelValueType<EnumEmpty>
@@ -667,13 +667,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding EnumEmpty final model
     public class FinalModelEnumEmpty : FinalModelValueType<EnumEmpty>
@@ -723,10 +723,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
 #if UTF8JSON
     public class FlagsSimpleConverter : IJsonFormatter<FlagsSimple>
@@ -866,7 +866,7 @@ namespace test {
 
         public static FlagsSimple Default => new FlagsSimple();
 
-        public static FBE.FieldModelValueType<FlagsSimple> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelFlagsSimple(buffer, offset); }
+        public static FBE.FieldModelValueType<FlagsSimple> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelFlagsSimple(buffer, offset); }
 
         public const int _FLAG_VALUE_0_ = (int)0x0;
         public const int _FLAG_VALUE_1_ = (int)0x1;
@@ -921,12 +921,12 @@ namespace test {
         }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding FlagsSimple field model
     public class FieldModelFlagsSimple : FieldModelValueType<FlagsSimple>
@@ -963,13 +963,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding FlagsSimple final model
     public class FinalModelFlagsSimple : FinalModelValueType<FlagsSimple>
@@ -1019,10 +1019,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
 #if UTF8JSON
     public class FlagsTypedConverter : IJsonFormatter<FlagsTyped>
@@ -1162,7 +1162,7 @@ namespace test {
 
         public static FlagsTyped Default => new FlagsTyped();
 
-        public static FBE.FieldModelValueType<FlagsTyped> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelFlagsTyped(buffer, offset); }
+        public static FBE.FieldModelValueType<FlagsTyped> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelFlagsTyped(buffer, offset); }
 
         public const ulong _FLAG_VALUE_0_ = (ulong)0x00UL;
         public const ulong _FLAG_VALUE_1_ = (ulong)0x01UL;
@@ -1245,12 +1245,12 @@ namespace test {
         }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding FlagsTyped field model
     public class FieldModelFlagsTyped : FieldModelValueType<FlagsTyped>
@@ -1287,13 +1287,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding FlagsTyped final model
     public class FinalModelFlagsTyped : FinalModelValueType<FlagsTyped>
@@ -1343,10 +1343,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
 #if UTF8JSON
     public class FlagsEmptyConverter : IJsonFormatter<FlagsEmpty>
@@ -1486,7 +1486,7 @@ namespace test {
 
         public static FlagsEmpty Default => new FlagsEmpty();
 
-        public static FBE.FieldModelValueType<FlagsEmpty> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelFlagsEmpty(buffer, offset); }
+        public static FBE.FieldModelValueType<FlagsEmpty> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelFlagsEmpty(buffer, offset); }
 
 
 
@@ -1498,12 +1498,12 @@ namespace test {
         }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding FlagsEmpty field model
     public class FieldModelFlagsEmpty : FieldModelValueType<FlagsEmpty>
@@ -1540,13 +1540,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding FlagsEmpty final model
     public class FinalModelFlagsEmpty : FinalModelValueType<FlagsEmpty>
@@ -1596,10 +1596,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
     public struct StructSimple : IComparable, IComparable<StructSimple>, IEquatable<StructSimple>
     {
@@ -1758,11 +1758,11 @@ namespace test {
         public StructSimple Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructSimpleModel();
+            var writer = new FBE.com.chronoxor.test.StructSimpleModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructSimpleModel();
+            var reader = new FBE.com.chronoxor.test.StructSimpleModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -1877,15 +1877,15 @@ namespace test {
             return result;
         }
 
-        public static FBE.FieldModelValueType<StructSimple> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructSimple(buffer, offset); }
+        public static FBE.FieldModelValueType<StructSimple> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelStructSimple(buffer, offset); }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSimple field model
     public class FieldModelStructSimple : FieldModelValueType<StructSimple>
@@ -2828,13 +2828,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSimple model
     public class StructSimpleModel : Model
@@ -2916,13 +2916,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSimple final model
     public class FinalModelStructSimple : FinalModelValueType<StructSimple>
@@ -3861,13 +3861,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSimple final model
     public class StructSimpleFinalModel : Model
@@ -3945,10 +3945,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
     public struct StructOptional : IComparable, IComparable<StructOptional>, IEquatable<StructOptional>
     {
@@ -4178,11 +4178,11 @@ namespace test {
         public StructOptional Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructOptionalModel();
+            var writer = new FBE.com.chronoxor.test.StructOptionalModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructOptionalModel();
+            var reader = new FBE.com.chronoxor.test.StructOptionalModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -4322,15 +4322,15 @@ namespace test {
             return result;
         }
 
-        public static FBE.FieldModelValueType<StructOptional> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructOptional(buffer, offset); }
+        public static FBE.FieldModelValueType<StructOptional> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelStructOptional(buffer, offset); }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructOptional field model
     public class FieldModelStructOptional : FieldModelValueType<StructOptional>
@@ -5645,13 +5645,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructOptional model
     public class StructOptionalModel : Model
@@ -5733,13 +5733,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructOptional final model
     public class FinalModelStructOptional : FinalModelValueType<StructOptional>
@@ -7096,13 +7096,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructOptional final model
     public class StructOptionalFinalModel : Model
@@ -7180,10 +7180,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
     public struct StructNested : IComparable, IComparable<StructNested>, IEquatable<StructNested>
     {
@@ -7217,17 +7217,17 @@ namespace test {
         public static StructNested Default => new StructNested
         {
             parent = StructOptional.Default
-            , f1000 = global::test.EnumSimple.Default
+            , f1000 = global::com.chronoxor.test.EnumSimple.Default
             , f1001 = null
-            , f1002 = global::test.EnumTyped.ENUM_VALUE_2
+            , f1002 = global::com.chronoxor.test.EnumTyped.ENUM_VALUE_2
             , f1003 = null
-            , f1004 = global::test.FlagsSimple.Default
+            , f1004 = global::com.chronoxor.test.FlagsSimple.Default
             , f1005 = null
-            , f1006 = global::test.FlagsTyped.FLAG_VALUE_2 | global::test.FlagsTyped.FLAG_VALUE_4 | global::test.FlagsTyped.FLAG_VALUE_6
+            , f1006 = global::com.chronoxor.test.FlagsTyped.FLAG_VALUE_2 | global::com.chronoxor.test.FlagsTyped.FLAG_VALUE_4 | global::com.chronoxor.test.FlagsTyped.FLAG_VALUE_6
             , f1007 = null
-            , f1008 = global::test.StructSimple.Default
+            , f1008 = global::com.chronoxor.test.StructSimple.Default
             , f1009 = null
-            , f1010 = global::test.StructOptional.Default
+            , f1010 = global::com.chronoxor.test.StructOptional.Default
             , f1011 = null
         };
 
@@ -7251,11 +7251,11 @@ namespace test {
         public StructNested Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructNestedModel();
+            var writer = new FBE.com.chronoxor.test.StructNestedModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructNestedModel();
+            var reader = new FBE.com.chronoxor.test.StructNestedModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -7341,15 +7341,15 @@ namespace test {
             return result;
         }
 
-        public static FBE.FieldModelValueType<StructNested> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructNested(buffer, offset); }
+        public static FBE.FieldModelValueType<StructNested> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelStructNested(buffer, offset); }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructNested field model
     public class FieldModelStructNested : FieldModelValueType<StructNested>
@@ -7619,7 +7619,7 @@ namespace test {
             if ((fbeCurrentSize + f1000.FBESize) <= fbeStructSize)
                 f1000.Get(out fbeValue.f1000);
             else
-                fbeValue.f1000 = global::test.EnumSimple.Default;
+                fbeValue.f1000 = global::com.chronoxor.test.EnumSimple.Default;
             fbeCurrentSize += f1000.FBESize;
 
             if ((fbeCurrentSize + f1001.FBESize) <= fbeStructSize)
@@ -7629,9 +7629,9 @@ namespace test {
             fbeCurrentSize += f1001.FBESize;
 
             if ((fbeCurrentSize + f1002.FBESize) <= fbeStructSize)
-                f1002.Get(out fbeValue.f1002, global::test.EnumTyped.ENUM_VALUE_2);
+                f1002.Get(out fbeValue.f1002, global::com.chronoxor.test.EnumTyped.ENUM_VALUE_2);
             else
-                fbeValue.f1002 = global::test.EnumTyped.ENUM_VALUE_2;
+                fbeValue.f1002 = global::com.chronoxor.test.EnumTyped.ENUM_VALUE_2;
             fbeCurrentSize += f1002.FBESize;
 
             if ((fbeCurrentSize + f1003.FBESize) <= fbeStructSize)
@@ -7643,7 +7643,7 @@ namespace test {
             if ((fbeCurrentSize + f1004.FBESize) <= fbeStructSize)
                 f1004.Get(out fbeValue.f1004);
             else
-                fbeValue.f1004 = global::test.FlagsSimple.Default;
+                fbeValue.f1004 = global::com.chronoxor.test.FlagsSimple.Default;
             fbeCurrentSize += f1004.FBESize;
 
             if ((fbeCurrentSize + f1005.FBESize) <= fbeStructSize)
@@ -7653,9 +7653,9 @@ namespace test {
             fbeCurrentSize += f1005.FBESize;
 
             if ((fbeCurrentSize + f1006.FBESize) <= fbeStructSize)
-                f1006.Get(out fbeValue.f1006, global::test.FlagsTyped.FLAG_VALUE_2 | global::test.FlagsTyped.FLAG_VALUE_4 | global::test.FlagsTyped.FLAG_VALUE_6);
+                f1006.Get(out fbeValue.f1006, global::com.chronoxor.test.FlagsTyped.FLAG_VALUE_2 | global::com.chronoxor.test.FlagsTyped.FLAG_VALUE_4 | global::com.chronoxor.test.FlagsTyped.FLAG_VALUE_6);
             else
-                fbeValue.f1006 = global::test.FlagsTyped.FLAG_VALUE_2 | global::test.FlagsTyped.FLAG_VALUE_4 | global::test.FlagsTyped.FLAG_VALUE_6;
+                fbeValue.f1006 = global::com.chronoxor.test.FlagsTyped.FLAG_VALUE_2 | global::com.chronoxor.test.FlagsTyped.FLAG_VALUE_4 | global::com.chronoxor.test.FlagsTyped.FLAG_VALUE_6;
             fbeCurrentSize += f1006.FBESize;
 
             if ((fbeCurrentSize + f1007.FBESize) <= fbeStructSize)
@@ -7667,7 +7667,7 @@ namespace test {
             if ((fbeCurrentSize + f1008.FBESize) <= fbeStructSize)
                 f1008.Get(out fbeValue.f1008);
             else
-                fbeValue.f1008 = global::test.StructSimple.Default;
+                fbeValue.f1008 = global::com.chronoxor.test.StructSimple.Default;
             fbeCurrentSize += f1008.FBESize;
 
             if ((fbeCurrentSize + f1009.FBESize) <= fbeStructSize)
@@ -7679,7 +7679,7 @@ namespace test {
             if ((fbeCurrentSize + f1010.FBESize) <= fbeStructSize)
                 f1010.Get(out fbeValue.f1010);
             else
-                fbeValue.f1010 = global::test.StructOptional.Default;
+                fbeValue.f1010 = global::com.chronoxor.test.StructOptional.Default;
             fbeCurrentSize += f1010.FBESize;
 
             if ((fbeCurrentSize + f1011.FBESize) <= fbeStructSize)
@@ -7746,13 +7746,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructNested model
     public class StructNestedModel : Model
@@ -7834,13 +7834,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructNested final model
     public class FinalModelStructNested : FinalModelValueType<StructNested>
@@ -8171,13 +8171,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructNested final model
     public class StructNestedFinalModel : Model
@@ -8255,10 +8255,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
     public struct StructBytes : IComparable, IComparable<StructBytes>, IEquatable<StructBytes>
     {
@@ -8291,11 +8291,11 @@ namespace test {
         public StructBytes Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructBytesModel();
+            var writer = new FBE.com.chronoxor.test.StructBytesModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructBytesModel();
+            var reader = new FBE.com.chronoxor.test.StructBytesModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -8357,15 +8357,15 @@ namespace test {
             return result;
         }
 
-        public static FBE.FieldModelValueType<StructBytes> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructBytes(buffer, offset); }
+        public static FBE.FieldModelValueType<StructBytes> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelStructBytes(buffer, offset); }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructBytes field model
     public class FieldModelStructBytes : FieldModelValueType<StructBytes>
@@ -8594,13 +8594,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructBytes model
     public class StructBytesModel : Model
@@ -8682,13 +8682,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructBytes final model
     public class FinalModelStructBytes : FinalModelValueType<StructBytes>
@@ -8829,13 +8829,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructBytes final model
     public class StructBytesFinalModel : Model
@@ -8913,10 +8913,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
     public struct StructArray : IComparable, IComparable<StructArray>, IEquatable<StructArray>
     {
@@ -8970,11 +8970,11 @@ namespace test {
         public StructArray Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructArrayModel();
+            var writer = new FBE.com.chronoxor.test.StructArrayModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructArrayModel();
+            var reader = new FBE.com.chronoxor.test.StructArrayModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -9183,15 +9183,15 @@ namespace test {
             return result;
         }
 
-        public static FBE.FieldModelValueType<StructArray> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructArray(buffer, offset); }
+        public static FBE.FieldModelValueType<StructArray> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelStructArray(buffer, offset); }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructArray field model
     public class FieldModelStructArray : FieldModelValueType<StructArray>
@@ -9539,13 +9539,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructArray model
     public class StructArrayModel : Model
@@ -9627,13 +9627,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructArray final model
     public class FinalModelStructArray : FinalModelValueType<StructArray>
@@ -9907,13 +9907,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructArray final model
     public class StructArrayFinalModel : Model
@@ -9991,10 +9991,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
     public struct StructVector : IComparable, IComparable<StructVector>, IEquatable<StructVector>
     {
@@ -10048,11 +10048,11 @@ namespace test {
         public StructVector Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructVectorModel();
+            var writer = new FBE.com.chronoxor.test.StructVectorModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructVectorModel();
+            var reader = new FBE.com.chronoxor.test.StructVectorModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -10261,15 +10261,15 @@ namespace test {
             return result;
         }
 
-        public static FBE.FieldModelValueType<StructVector> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructVector(buffer, offset); }
+        public static FBE.FieldModelValueType<StructVector> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelStructVector(buffer, offset); }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructVector field model
     public class FieldModelStructVector : FieldModelValueType<StructVector>
@@ -10617,13 +10617,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructVector model
     public class StructVectorModel : Model
@@ -10705,13 +10705,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructVector final model
     public class FinalModelStructVector : FinalModelValueType<StructVector>
@@ -10985,13 +10985,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructVector final model
     public class StructVectorFinalModel : Model
@@ -11069,10 +11069,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
     public struct StructList : IComparable, IComparable<StructList>, IEquatable<StructList>
     {
@@ -11126,11 +11126,11 @@ namespace test {
         public StructList Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructListModel();
+            var writer = new FBE.com.chronoxor.test.StructListModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructListModel();
+            var reader = new FBE.com.chronoxor.test.StructListModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -11339,15 +11339,15 @@ namespace test {
             return result;
         }
 
-        public static FBE.FieldModelValueType<StructList> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructList(buffer, offset); }
+        public static FBE.FieldModelValueType<StructList> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelStructList(buffer, offset); }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructList field model
     public class FieldModelStructList : FieldModelValueType<StructList>
@@ -11695,13 +11695,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructList model
     public class StructListModel : Model
@@ -11783,13 +11783,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructList final model
     public class FinalModelStructList : FinalModelValueType<StructList>
@@ -12063,13 +12063,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructList final model
     public class StructListFinalModel : Model
@@ -12147,10 +12147,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
     public struct StructSet : IComparable, IComparable<StructSet>, IEquatable<StructSet>
     {
@@ -12186,11 +12186,11 @@ namespace test {
         public StructSet Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructSetModel();
+            var writer = new FBE.com.chronoxor.test.StructSetModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructSetModel();
+            var reader = new FBE.com.chronoxor.test.StructSetModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -12309,15 +12309,15 @@ namespace test {
             return result;
         }
 
-        public static FBE.FieldModelValueType<StructSet> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructSet(buffer, offset); }
+        public static FBE.FieldModelValueType<StructSet> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelStructSet(buffer, offset); }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSet field model
     public class FieldModelStructSet : FieldModelValueType<StructSet>
@@ -12563,13 +12563,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSet model
     public class StructSetModel : Model
@@ -12651,13 +12651,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSet final model
     public class FinalModelStructSet : FinalModelValueType<StructSet>
@@ -12817,13 +12817,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructSet final model
     public class StructSetFinalModel : Model
@@ -12901,10 +12901,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
     public struct StructMap : IComparable, IComparable<StructMap>, IEquatable<StructMap>
     {
@@ -12958,11 +12958,11 @@ namespace test {
         public StructMap Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructMapModel();
+            var writer = new FBE.com.chronoxor.test.StructMapModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructMapModel();
+            var reader = new FBE.com.chronoxor.test.StructMapModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -13191,15 +13191,15 @@ namespace test {
             return result;
         }
 
-        public static FBE.FieldModelValueType<StructMap> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructMap(buffer, offset); }
+        public static FBE.FieldModelValueType<StructMap> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelStructMap(buffer, offset); }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructMap field model
     public class FieldModelStructMap : FieldModelValueType<StructMap>
@@ -13547,13 +13547,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructMap model
     public class StructMapModel : Model
@@ -13635,13 +13635,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructMap final model
     public class FinalModelStructMap : FinalModelValueType<StructMap>
@@ -13915,13 +13915,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructMap final model
     public class StructMapFinalModel : Model
@@ -13999,10 +13999,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
     public struct StructHash : IComparable, IComparable<StructHash>, IEquatable<StructHash>
     {
@@ -14056,11 +14056,11 @@ namespace test {
         public StructHash Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructHashModel();
+            var writer = new FBE.com.chronoxor.test.StructHashModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructHashModel();
+            var reader = new FBE.com.chronoxor.test.StructHashModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -14289,15 +14289,15 @@ namespace test {
             return result;
         }
 
-        public static FBE.FieldModelValueType<StructHash> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructHash(buffer, offset); }
+        public static FBE.FieldModelValueType<StructHash> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelStructHash(buffer, offset); }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHash field model
     public class FieldModelStructHash : FieldModelValueType<StructHash>
@@ -14645,13 +14645,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHash model
     public class StructHashModel : Model
@@ -14733,13 +14733,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHash final model
     public class FinalModelStructHash : FinalModelValueType<StructHash>
@@ -15013,13 +15013,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHash final model
     public class StructHashFinalModel : Model
@@ -15097,10 +15097,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
     public struct StructHashEx : IComparable, IComparable<StructHashEx>, IEquatable<StructHashEx>
     {
@@ -15130,11 +15130,11 @@ namespace test {
         public StructHashEx Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructHashExModel();
+            var writer = new FBE.com.chronoxor.test.StructHashExModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructHashExModel();
+            var reader = new FBE.com.chronoxor.test.StructHashExModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -15227,15 +15227,15 @@ namespace test {
             return result;
         }
 
-        public static FBE.FieldModelValueType<StructHashEx> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructHashEx(buffer, offset); }
+        public static FBE.FieldModelValueType<StructHashEx> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelStructHashEx(buffer, offset); }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHashEx field model
     public class FieldModelStructHashEx : FieldModelValueType<StructHashEx>
@@ -15447,13 +15447,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHashEx model
     public class StructHashExModel : Model
@@ -15535,13 +15535,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHashEx final model
     public class FinalModelStructHashEx : FinalModelValueType<StructHashEx>
@@ -15663,13 +15663,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructHashEx final model
     public class StructHashExFinalModel : Model
@@ -15747,10 +15747,10 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace test {
+namespace com.chronoxor.test {
 
     public struct StructEmpty : IComparable, IComparable<StructEmpty>, IEquatable<StructEmpty>
     {
@@ -15770,11 +15770,11 @@ namespace test {
         public StructEmpty Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.test.StructEmptyModel();
+            var writer = new FBE.com.chronoxor.test.StructEmptyModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.test.StructEmptyModel();
+            var reader = new FBE.com.chronoxor.test.StructEmptyModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -15833,15 +15833,15 @@ namespace test {
             return result;
         }
 
-        public static FBE.FieldModelValueType<StructEmpty> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructEmpty(buffer, offset); }
+        public static FBE.FieldModelValueType<StructEmpty> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.test.FieldModelStructEmpty(buffer, offset); }
     }
 
-} // namespace test
+} // namespace com.chronoxor.test
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructEmpty field model
     public class FieldModelStructEmpty : FieldModelValueType<StructEmpty>
@@ -16014,13 +16014,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructEmpty model
     public class StructEmptyModel : Model
@@ -16102,13 +16102,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructEmpty final model
     public class FinalModelStructEmpty : FinalModelValueType<StructEmpty>
@@ -16179,13 +16179,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    using global::test;
+    using global::com.chronoxor.test;
 
     // Fast Binary Encoding StructEmpty final model
     public class StructEmptyFinalModel : Model
@@ -16263,13 +16263,13 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    // Fast Binary Encoding test protocol version
+    // Fast Binary Encoding com.chronoxor.test protocol version
     public static class ProtocolVersion
     {
         // Protocol major version
@@ -16278,18 +16278,18 @@ namespace test {
         public const int Minor = 456;
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    // Fast Binary Encoding test sender listener interface
+    // Fast Binary Encoding com.chronoxor.test sender listener interface
     public interface ISenderListener : FBE.proto.ISenderListener
     {
     }
 
-    // Fast Binary Encoding test sender
+    // Fast Binary Encoding com.chronoxor.test sender
     public class Sender : FBE.Sender, ISenderListener
     {
         // Imported senders
@@ -16324,19 +16324,19 @@ namespace test {
 
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    // Fast Binary Encoding test receiver listener interface
+    // Fast Binary Encoding com.chronoxor.test receiver listener interface
     public interface IReceiverListener : FBE.proto.IReceiverListener
     {
         // Receive handlers
     }
 
-    // Fast Binary Encoding test receiver
+    // Fast Binary Encoding com.chronoxor.test receiver
     public class Receiver : FBE.Receiver, IReceiverListener
     {
         // Imported receivers
@@ -16370,19 +16370,19 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    // Fast Binary Encoding test proxy listener interface
+    // Fast Binary Encoding com.chronoxor.test proxy listener interface
     public interface IProxyListener : FBE.proto.IProxyListener
     {
         // Proxy handlers
     }
 
-    // Fast Binary Encoding test proxy
+    // Fast Binary Encoding com.chronoxor.test proxy
     public class Proxy : FBE.Receiver, IProxyListener
     {
         // Imported proxy
@@ -16414,18 +16414,18 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    // Fast Binary Encoding test client listener interface
+    // Fast Binary Encoding com.chronoxor.test client listener interface
     public interface IClientListener : FBE.proto.IClientListener, ISenderListener, IReceiverListener
     {
     }
 
-    // Fast Binary Encoding test client
+    // Fast Binary Encoding com.chronoxor.test client
     public class Client : FBE.Client, IClientListener
     {
         // Imported clients
@@ -16495,18 +16495,18 @@ namespace test {
 
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    // Fast Binary Encoding test final sender listener interface
+    // Fast Binary Encoding com.chronoxor.test final sender listener interface
     public interface IFinalSenderListener : FBE.proto.IFinalSenderListener
     {
     }
 
-    // Fast Binary Encoding test final sender
+    // Fast Binary Encoding com.chronoxor.test final sender
     public class FinalSender : FBE.Sender, IFinalSenderListener
     {
         // Imported senders
@@ -16541,19 +16541,19 @@ namespace test {
 
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    // Fast Binary Encoding test final receiver listener interface
+    // Fast Binary Encoding com.chronoxor.test final receiver listener interface
     public interface IFinalReceiverListener : FBE.proto.IFinalReceiverListener
     {
         // Receive handlers
     }
 
-    // Fast Binary Encoding test final receiver
+    // Fast Binary Encoding com.chronoxor.test final receiver
     public class FinalReceiver : FBE.Receiver, IFinalReceiverListener
     {
         // Imported receivers
@@ -16587,18 +16587,18 @@ namespace test {
         }
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace test {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.test {
 
-    // Fast Binary Encoding test final client listener interface
+    // Fast Binary Encoding com.chronoxor.test final client listener interface
     public interface IFinalClientListener : FBE.proto.IFinalClientListener, IFinalSenderListener, IFinalReceiverListener
     {
     }
 
-    // Fast Binary Encoding test final client
+    // Fast Binary Encoding com.chronoxor.test final client
     public class FinalClient : FBE.Client, IFinalClientListener
     {
         // Imported clients
@@ -16668,5 +16668,5 @@ namespace test {
 
     }
 
-} // namespace test
-} // namespace FBE
+} // namespace com.chronoxor.test
+} // namespace com.chronoxor.FBE

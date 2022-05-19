@@ -12,7 +12,9 @@ namespace FBE {
 
 void GeneratorCSharp::Generate(const std::shared_ptr<Package>& package)
 {
-    GeneratePackage(package);
+    std::string domain = (package->domain && !package->domain->empty()) ? (*package->domain + ".") : "";
+
+    GeneratePackage(domain, package);
 }
 
 void GeneratorCSharp::GenerateHeader(const std::string& source)
@@ -71,7 +73,7 @@ void GeneratorCSharp::GenerateImports()
     }
 }
 
-void GeneratorCSharp::GenerateImports(const std::shared_ptr<Package>& p)
+void GeneratorCSharp::GenerateImports(const std::string& domain, const std::shared_ptr<Package>& p)
 {
     // Generate common imports
     GenerateImports();
@@ -81,7 +83,7 @@ void GeneratorCSharp::GenerateImports(const std::shared_ptr<Package>& p)
     {
         WriteLine();
         for (auto import : p->import->imports)
-            WriteLineIndent("using " + *import + ";");
+            WriteLineIndent("using " + domain + *import + ";");
     }
 }
 
@@ -4274,7 +4276,7 @@ void GeneratorCSharp::GenerateFBEJson()
     Write(code);
 }
 
-void GeneratorCSharp::GenerateFBE(const CppCommon::Path& path)
+void GeneratorCSharp::GenerateFBE(const std::string& domain, const CppCommon::Path& path)
 {
     // Generate the common file
     CppCommon::Path common = path / "fbe.cs";
@@ -4286,7 +4288,7 @@ void GeneratorCSharp::GenerateFBE(const CppCommon::Path& path)
 
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace FBE {");
+    WriteLineIndent("namespace " + domain + "FBE {");
     Indent(1);
 
     // Generate common models
@@ -4384,7 +4386,7 @@ void GeneratorCSharp::GenerateFBE(const CppCommon::Path& path)
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace FBE");
+    WriteLineIndent("} // namespace " + domain + "FBE");
 
     // Generate common footer
     GenerateFooter();
@@ -4394,7 +4396,7 @@ void GeneratorCSharp::GenerateFBE(const CppCommon::Path& path)
     Store(common);
 }
 
-void GeneratorCSharp::GeneratePackage(const std::shared_ptr<Package>& p)
+void GeneratorCSharp::GeneratePackage(const std::string& domain, const std::shared_ptr<Package>& p)
 {
     CppCommon::Path output = _output;
 
@@ -4402,48 +4404,48 @@ void GeneratorCSharp::GeneratePackage(const std::shared_ptr<Package>& p)
     CppCommon::Directory::CreateTree(output);
 
     // Generate common file
-    GenerateFBE(output);
+    GenerateFBE(domain, output);
 
     // Generate the output file
-    output /= *p->name + ".cs";
+    output /= domain + *p->name + ".cs";
     WriteBegin();
 
     // Generate package header
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(p);
+    GenerateImports(domain, p);
 
     // Generate namespace body
     if (p->body)
     {
         // Generate child enums
         for (const auto& child_e : p->body->enums)
-            GenerateEnum(p, child_e);
+            GenerateEnum(domain, p, child_e);
 
         // Generate child flags
         for (const auto& child_f : p->body->flags)
-            GenerateFlags(p, child_f);
+            GenerateFlags(domain, p, child_f);
 
         // Generate child structs
         for (const auto& child_s : p->body->structs)
-            GenerateStruct(p, child_s);
+            GenerateStruct(domain, p, child_s);
     }
 
     // Generate protocol
     if (Proto())
     {
         // Generate protocol version
-        GenerateProtocolVersion(p);
+        GenerateProtocolVersion(domain, p);
 
         // Generate sender & receiver
-        GenerateSender(p, false);
-        GenerateReceiver(p, false);
-        GenerateProxy(p, false);
-        GenerateClient(p, false);
+        GenerateSender(domain, p, false);
+        GenerateReceiver(domain, p, false);
+        GenerateProxy(domain, p, false);
+        GenerateClient(domain, p, false);
         if (Final())
         {
-            GenerateSender(p, true);
-            GenerateReceiver(p, true);
-            GenerateClient(p, true);
+            GenerateSender(domain, p, true);
+            GenerateReceiver(domain, p, true);
+            GenerateClient(domain, p, true);
         }
     }
 
@@ -4455,11 +4457,11 @@ void GeneratorCSharp::GeneratePackage(const std::shared_ptr<Package>& p)
     Store(output);
 }
 
-void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)
+void GeneratorCSharp::GenerateEnum(const std::string& domain, const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     std::string json = R"CODE(
@@ -4583,7 +4585,7 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     json = std::regex_replace(json, std::regex("_ENUM_TYPE_"), enum_base_type);
     json = std::regex_replace(json, std::regex("_ENUM_UTF8JSON_TYPE_"), ConvertEnumTypeUtf8Json(enum_type));
     json = std::regex_replace(json, std::regex("\n"), EndLine());
-    code = std::regex_replace(code, std::regex("_PACKAGE_"), *p->name);
+    code = std::regex_replace(code, std::regex("_PACKAGE_"), domain + *p->name);
     code = std::regex_replace(code, std::regex("_ENUM_NAME_"), *e->name);
     code = std::regex_replace(code, std::regex("_ENUM_TYPE_"), enum_base_type);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
@@ -4654,22 +4656,22 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
+    WriteLineIndent("} // namespace " + domain + *p->name);
 
     // Generate enum field model
-    GenerateEnumFieldModel(p, e);
+    GenerateEnumFieldModel(domain, p, e);
 
     // Generate enum final model
     if (Final())
-        GenerateEnumFinalModel(p, e);
+        GenerateEnumFinalModel(domain, p, e);
 }
 
-void GeneratorCSharp::GenerateEnumFieldModel(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)
+void GeneratorCSharp::GenerateEnumFieldModel(const std::string& domain, const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + "FBE {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     std::string code = R"CODE(
@@ -4715,7 +4717,7 @@ void GeneratorCSharp::GenerateEnumFieldModel(const std::shared_ptr<Package>& p, 
     std::string enum_base_type = ConvertEnumType(enum_type);
 
     // Prepare enum model template
-    code = std::regex_replace(code, std::regex("_PACKAGE_"), *p->name);
+    code = std::regex_replace(code, std::regex("_PACKAGE_"), domain + *p->name);
     code = std::regex_replace(code, std::regex("_ENUM_NAME_"), *e->name);
     code = std::regex_replace(code, std::regex("_ENUM_TYPE_"), enum_base_type);
     code = std::regex_replace(code, std::regex("_ENUM_SIZE_"), ConvertEnumSize(enum_type));
@@ -4728,16 +4730,16 @@ void GeneratorCSharp::GenerateEnumFieldModel(const std::shared_ptr<Package>& p, 
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
+    WriteLineIndent("} // namespace " + domain + *p->name);
+    WriteLineIndent("} // namespace " + domain + "FBE");
 }
 
-void GeneratorCSharp::GenerateEnumFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)
+void GeneratorCSharp::GenerateEnumFinalModel(const std::string& domain, const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + "FBE {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     std::string code = R"CODE(
@@ -4796,7 +4798,7 @@ void GeneratorCSharp::GenerateEnumFinalModel(const std::shared_ptr<Package>& p, 
     std::string enum_base_type = ConvertEnumType(enum_type);
 
     // Prepare enum model template
-    code = std::regex_replace(code, std::regex("_PACKAGE_"), *p->name);
+    code = std::regex_replace(code, std::regex("_PACKAGE_"), domain + *p->name);
     code = std::regex_replace(code, std::regex("_ENUM_NAME_"), *e->name);
     code = std::regex_replace(code, std::regex("_ENUM_TYPE_"), enum_base_type);
     code = std::regex_replace(code, std::regex("_ENUM_SIZE_"), ConvertEnumSize(enum_type));
@@ -4809,15 +4811,15 @@ void GeneratorCSharp::GenerateEnumFinalModel(const std::shared_ptr<Package>& p, 
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
+    WriteLineIndent("} // namespace " + domain + *p->name);
+    WriteLineIndent("} // namespace " + domain + "FBE");
 }
 
-void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f)
+void GeneratorCSharp::GenerateFlags(const std::string& domain, const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     std::string json = R"CODE(
@@ -4973,7 +4975,7 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
     json = std::regex_replace(json, std::regex("_FLAGS_TYPE_"), flags_base_type);
     json = std::regex_replace(json, std::regex("_FLAGS_UTF8JSON_TYPE_"), ConvertEnumTypeUtf8Json(flags_type));
     json = std::regex_replace(json, std::regex("\n"), EndLine());
-    code = std::regex_replace(code, std::regex("_PACKAGE_"), *p->name);
+    code = std::regex_replace(code, std::regex("_PACKAGE_"), domain + *p->name);
     code = std::regex_replace(code, std::regex("_FLAGS_NAME_"), *f->name);
     code = std::regex_replace(code, std::regex("_FLAGS_TYPE_"), flags_base_type);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
@@ -5040,22 +5042,22 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
+    WriteLineIndent("} // namespace " + domain + *p->name);
 
     // Generate flags field model
-    GenerateFlagsFieldModel(p, f);
+    GenerateFlagsFieldModel(domain, p, f);
 
     // Generate flags final model
     if (Final())
-        GenerateFlagsFinalModel(p, f);
+        GenerateFlagsFinalModel(domain, p, f);
 }
 
-void GeneratorCSharp::GenerateFlagsFieldModel(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f)
+void GeneratorCSharp::GenerateFlagsFieldModel(const std::string& domain, const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + "FBE {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     std::string code = R"CODE(
@@ -5101,7 +5103,7 @@ void GeneratorCSharp::GenerateFlagsFieldModel(const std::shared_ptr<Package>& p,
     std::string flags_base_type = ConvertEnumType(flags_type);
 
     // Prepare flags model template
-    code = std::regex_replace(code, std::regex("_PACKAGE_"), *p->name);
+    code = std::regex_replace(code, std::regex("_PACKAGE_"), domain + *p->name);
     code = std::regex_replace(code, std::regex("_FLAGS_NAME_"), *f->name);
     code = std::regex_replace(code, std::regex("_FLAGS_TYPE_"), flags_base_type);
     code = std::regex_replace(code, std::regex("_FLAGS_SIZE_"), ConvertEnumSize(flags_type));
@@ -5114,16 +5116,16 @@ void GeneratorCSharp::GenerateFlagsFieldModel(const std::shared_ptr<Package>& p,
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
+    WriteLineIndent("} // namespace " + domain + *p->name);
+    WriteLineIndent("} // namespace " + domain + "FBE");
 }
 
-void GeneratorCSharp::GenerateFlagsFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f)
+void GeneratorCSharp::GenerateFlagsFinalModel(const std::string& domain, const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + "FBE {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     std::string code = R"CODE(
@@ -5182,7 +5184,7 @@ void GeneratorCSharp::GenerateFlagsFinalModel(const std::shared_ptr<Package>& p,
     std::string flags_base_type = ConvertEnumType(flags_type);
 
     // Prepare flags model template
-    code = std::regex_replace(code, std::regex("_PACKAGE_"), *p->name);
+    code = std::regex_replace(code, std::regex("_PACKAGE_"), domain + *p->name);
     code = std::regex_replace(code, std::regex("_FLAGS_NAME_"), *f->name);
     code = std::regex_replace(code, std::regex("_FLAGS_TYPE_"), flags_base_type);
     code = std::regex_replace(code, std::regex("_FLAGS_SIZE_"), ConvertEnumSize(flags_type));
@@ -5195,15 +5197,15 @@ void GeneratorCSharp::GenerateFlagsFinalModel(const std::shared_ptr<Package>& p,
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
+    WriteLineIndent("} // namespace " + domain + *p->name);
+    WriteLineIndent("} // namespace " + domain + "FBE");
 }
 
-void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
+void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     // Generate struct begin
@@ -5275,7 +5277,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLineIndent(std::string(first ? "" : ", ") + *field->name + " = " + ConvertDefault(*p->name, *field));
+            WriteLineIndent(std::string(first ? "" : ", ") + *field->name + " = " + ConvertDefault(domain, *p->name, *field));
             first = false;
         }
     }
@@ -5319,11 +5321,11 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("// Serialize the struct to the FBE stream");
-    WriteLineIndent("var writer = new FBE." + *p->name + "." + *s->name + "Model();");
+    WriteLineIndent("var writer = new FBE." + domain + *p->name + "." + *s->name + "Model();");
     WriteLineIndent("writer.Serialize(this);");
     WriteLine();
     WriteLineIndent("// Deserialize the struct from the FBE stream");
-    WriteLineIndent("var reader = new FBE." + *p->name + "." + *s->name + "Model();");
+    WriteLineIndent("var reader = new FBE." + domain + *p->name + "." + *s->name + "Model();");
     WriteLineIndent("reader.Attach(writer.Buffer);");
     WriteLineIndent("reader.Deserialize(out var result);");
     WriteLineIndent("return result;");
@@ -5680,7 +5682,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
 
     // Generate struct CreateFieldModel() method
     WriteLine();
-    WriteLineIndent("public static FBE.FieldModelValueType<" + *s->name + "> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE." + *p->name + ".FieldModel" + *s->name + "(buffer, offset); }");
+    WriteLineIndent("public static FBE.FieldModelValueType<" + *s->name + "> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE." + domain + *p->name + ".FieldModel" + *s->name + "(buffer, offset); }");
 
     // Generate struct end
     Indent(-1);
@@ -5689,31 +5691,31 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
+    WriteLineIndent("} // namespace " + domain + *p->name);
 
     // Generate struct field models
-    GenerateStructFieldModel(p, s);
-    GenerateStructModel(p, s);
+    GenerateStructFieldModel(domain, p, s);
+    GenerateStructModel(domain, p, s);
 
     // Generate struct final models
     if (Final())
     {
-        GenerateStructFinalModel(p, s);
-        GenerateStructModelFinal(p, s);
+        GenerateStructFinalModel(domain, p, s);
+        GenerateStructModelFinal(domain, p, s);
     }
 }
 
-void GeneratorCSharp::GenerateStructFieldModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
+void GeneratorCSharp::GenerateStructFieldModel(const std::string& domain, const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + "FBE {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     // Generate using package
     WriteLine();
-    WriteLineIndent("using global::" + *p->name + ";");
+    WriteLineIndent("using global::" + domain + *p->name + ";");
 
     // Generate struct field model begin
     WriteLine();
@@ -6001,14 +6003,14 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::shared_ptr<Package>& p
                 if (field->array || field->vector || field->list || field->set || field->map || field->hash)
                     WriteLineIndent(*field->name + ".Get(ref fbeValue." + *field->name + ");");
                 else
-                    WriteLineIndent(*field->name + ".Get(out fbeValue." + *field->name + (field->value ? (", " + ConvertConstant(*p->name, *field->type, *field->value, field->optional)) : "") + ");");
+                    WriteLineIndent(*field->name + ".Get(out fbeValue." + *field->name + (field->value ? (", " + ConvertConstant(domain, *p->name, *field->type, *field->value, field->optional)) : "") + ");");
                 Indent(-1);
                 WriteLineIndent("else");
                 Indent(1);
                 if (field->vector || field->list || field->set || field->map || field->hash)
                     WriteLineIndent("fbeValue." + *field->name + ".Clear();");
                 else
-                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*p->name, *field) + ";");
+                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(domain, *p->name, *field) + ";");
                 Indent(-1);
                 WriteLineIndent("fbeCurrentSize += " + *field->name + ".FBESize;");
             }
@@ -6097,21 +6099,21 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
+    WriteLineIndent("} // namespace " + domain + *p->name);
+    WriteLineIndent("} // namespace " + domain + "FBE");
 }
 
-void GeneratorCSharp::GenerateStructModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
+void GeneratorCSharp::GenerateStructModel(const std::string& domain, const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + "FBE {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     // Generate using package
     WriteLine();
-    WriteLineIndent("using global::" + *p->name + ";");
+    WriteLineIndent("using global::" + domain + *p->name + ";");
 
     // Generate struct model begin
     WriteLine();
@@ -6240,21 +6242,21 @@ void GeneratorCSharp::GenerateStructModel(const std::shared_ptr<Package>& p, con
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
+    WriteLineIndent("} // namespace " + domain + *p->name);
+    WriteLineIndent("} // namespace " + domain + "FBE");
 }
 
-void GeneratorCSharp::GenerateStructFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
+void GeneratorCSharp::GenerateStructFinalModel(const std::string& domain, const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + "FBE {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     // Generate using package
     WriteLine();
-    WriteLineIndent("using global::" + *p->name + ";");
+    WriteLineIndent("using global::" + domain + *p->name + ";");
 
     // Generate struct final model begin
     WriteLine();
@@ -6481,21 +6483,21 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
+    WriteLineIndent("} // namespace " + domain + *p->name);
+    WriteLineIndent("} // namespace " + domain + "FBE");
 }
 
-void GeneratorCSharp::GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
+void GeneratorCSharp::GenerateStructModelFinal(const std::string& domain, const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + "FBE {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     // Generate using package
     WriteLine();
-    WriteLineIndent("using global::" + *p->name + ";");
+    WriteLineIndent("using global::" + domain + *p->name + ";");
 
     // Generate struct model final begin
     WriteLine();
@@ -6614,21 +6616,21 @@ void GeneratorCSharp::GenerateStructModelFinal(const std::shared_ptr<Package>& p
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
+    WriteLineIndent("} // namespace " + domain + *p->name);
+    WriteLineIndent("} // namespace " + domain + "FBE");
 }
 
-void GeneratorCSharp::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
+void GeneratorCSharp::GenerateProtocolVersion(const std::string& domain, const std::shared_ptr<Package>& p)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + "FBE {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     // Generate protocol version class
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *p->name + " protocol version");
+    WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " protocol version");
     WriteLineIndent("public static class ProtocolVersion");
     WriteLineIndent("{");
     Indent(1);
@@ -6642,16 +6644,16 @@ void GeneratorCSharp::GenerateProtocolVersion(const std::shared_ptr<Package>& p)
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
+    WriteLineIndent("} // namespace " + domain + *p->name);
+    WriteLineIndent("} // namespace " + domain + "FBE");
 }
 
-void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool final)
+void GeneratorCSharp::GenerateSender(const std::string& domain, const std::shared_ptr<Package>& p, bool final)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + "FBE {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     std::string sender = (final ? "FinalSender" : "Sender");
@@ -6661,9 +6663,9 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     // Generate sender listener begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender listener interface");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final sender listener interface");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender listener interface");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " sender listener interface");
     WriteIndent("public interface " + listener);
     if (p->import)
     {
@@ -6688,9 +6690,9 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     // Generate sender begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final sender");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " sender");
     WriteLineIndent("public class " + sender + " : FBE.Sender, " + listener);
     WriteLineIndent("{");
     Indent(1);
@@ -6763,7 +6765,7 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
         {
             if (s->message)
             {
-                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                std::string struct_name = "global::" + domain + *p->name + "." + *s->name;
                 WriteLineIndent("case " + struct_name + " value when value.FBEType == " + struct_name + ".FBETypeConst: return SendListener(listener, value);");
             }
         }
@@ -6797,15 +6799,15 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
         {
             if (s->message)
             {
-                std::string struct_name = "global::" + *p->name + "." + *s->name;
+                std::string struct_name = "global::" + domain + *p->name + "." + *s->name;
                 WriteLineIndent("public long Send(" + struct_name + " value) { return SendListener(this, value); }");
                 WriteLineIndent("public long SendListener(" + listener + " listener, " + struct_name + " value)");
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("// Serialize the value into the FBE stream");
                 WriteLineIndent("long serialized = " + *s->name + "Model.Serialize(value);");
-                WriteLineIndent("Debug.Assert((serialized > 0), \"" + *p->name + "." + *s->name + " serialization failed!\");");
-                WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
+                WriteLineIndent("Debug.Assert((serialized > 0), \"" + domain + *p->name + "." + *s->name + " serialization failed!\");");
+                WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + domain + *p->name + "." + *s->name + " validation failed!\");");
                 WriteLine();
                 WriteLineIndent("// Log the value");
                 WriteLineIndent("if (Logging)");
@@ -6831,16 +6833,16 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
+    WriteLineIndent("} // namespace " + domain + *p->name);
+    WriteLineIndent("} // namespace " + domain + "FBE");
 }
 
-void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool final)
+void GeneratorCSharp::GenerateReceiver(const std::string& domain, const std::shared_ptr<Package>& p, bool final)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + "FBE {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     std::string receiver = (final ? "FinalReceiver" : "Receiver");
@@ -6850,9 +6852,9 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     // Generate receiver listener begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver listener interface");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final receiver listener interface");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver listener interface");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " receiver listener interface");
     WriteIndent("public interface " + listener);
     if (p->import)
     {
@@ -6878,7 +6880,7 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         {
             if (s->message)
             {
-                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
                 WriteLineIndent("void OnReceive(" + struct_name + " value) {}");
             }
         }
@@ -6891,9 +6893,9 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     // Generate receiver begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final receiver");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " receiver");
     WriteLineIndent("public class " + receiver + " : FBE.Receiver, " + listener);
     WriteLineIndent("{");
     Indent(1);
@@ -6915,7 +6917,7 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         {
             if (s->message)
             {
-                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
                 WriteLineIndent("private " + struct_name + " " + *s->name + "Value;");
             }
         }
@@ -6942,7 +6944,7 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         {
             if (s->message)
             {
-                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
                 WriteLineIndent(*s->name + "Value = " + struct_name + ".Default;");
                 WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
             }
@@ -6964,7 +6966,7 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         {
             if (s->message)
             {
-                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
                 WriteLineIndent(*s->name + "Value = " + struct_name + ".Default;");
                 WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
             }
@@ -6993,9 +6995,9 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
                 Indent(1);
                 WriteLineIndent("// Deserialize the value from the FBE stream");
                 WriteLineIndent(*s->name + "Model.Attach(buffer, offset);");
-                WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
+                WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + domain + *p->name + "." + *s->name + " validation failed!\");");
                 WriteLineIndent("long deserialized = " + *s->name + "Model.Deserialize(out " + *s->name + "Value);");
-                WriteLineIndent("Debug.Assert((deserialized > 0), \"" + *p->name + "." + *s->name + " deserialization failed!\");");
+                WriteLineIndent("Debug.Assert((deserialized > 0), \"" + domain + *p->name + "." + *s->name + " deserialization failed!\");");
                 WriteLine();
                 WriteLineIndent("// Log the value");
                 WriteLineIndent("if (Logging)");
@@ -7040,16 +7042,16 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
+    WriteLineIndent("} // namespace " + domain + *p->name);
+    WriteLineIndent("} // namespace " + domain + "FBE");
 }
 
-void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
+void GeneratorCSharp::GenerateProxy(const std::string& domain, const std::shared_ptr<Package>& p, bool final)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + "FBE {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     std::string proxy = (final ? "FinalProxy" : "Proxy");
@@ -7059,9 +7061,9 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     // Generate proxy listener begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final proxy listener interface");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final proxy listener interface");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " proxy listener interface");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " proxy listener interface");
     WriteIndent("public interface " + listener);
     if (p->import)
     {
@@ -7100,9 +7102,9 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     // Generate proxy begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final proxy");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final proxy");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " proxy");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " proxy");
     WriteLineIndent("public class " + proxy + " : FBE.Receiver, " + listener);
     WriteLineIndent("{");
     Indent(1);
@@ -7180,7 +7182,7 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
                 Indent(1);
                 WriteLineIndent("// Attach the FBE stream to the proxy model");
                 WriteLineIndent(*s->name + "Model.Attach(buffer, offset);");
-                WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
+                WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + domain + *p->name + "." + *s->name + " validation failed!\");");
                 WriteLine();
                 WriteLineIndent("long fbeBegin = " + *s->name + "Model.model.GetBegin();");
                 WriteLineIndent("if (fbeBegin == 0)");
@@ -7222,16 +7224,16 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
+    WriteLineIndent("} // namespace " + domain + *p->name);
+    WriteLineIndent("} // namespace " + domain + "FBE");
 }
 
-void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
+void GeneratorCSharp::GenerateClient(const std::string& domain, const std::shared_ptr<Package>& p, bool final)
 {
     // Generate namespace begin
     WriteLine();
-    WriteLineIndent("namespace FBE {");
-    WriteLineIndent("namespace " + *p->name + " {");
+    WriteLineIndent("namespace " + domain + "FBE {");
+    WriteLineIndent("namespace " + domain + *p->name + " {");
     Indent(1);
 
     std::string sender = (final ? "FinalSender" : "Sender");
@@ -7245,9 +7247,9 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     // Generate client listener begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final client listener interface");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final client listener interface");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " client listener interface");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " client listener interface");
     WriteIndent("public interface " + listener);
     if (p->import)
     {
@@ -7273,9 +7275,9 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     // Generate client begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final client");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " final client");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " client");
+        WriteLineIndent("// Fast Binary Encoding " + domain + *p->name + " client");
     WriteLineIndent("public class " + client + " : FBE.Client, " + listener);
     WriteLineIndent("{");
     Indent(1);
@@ -7307,7 +7309,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         {
             if (s->message)
             {
-                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
                 WriteLineIndent("private " + struct_name + " " + *s->name + "ReceiverValue;");
             }
         }
@@ -7349,7 +7351,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         for (const auto& response : responses)
         {
             std::string response_name = response;
-            std::string response_type = ConvertTypeName(*p->name, response, false);
+            std::string response_type = ConvertTypeName(domain, *p->name, response, false);
             CppCommon::StringUtils::ReplaceAll(response_name, ".", "");
 
             WriteLineIndent("private Dictionary<Guid, Tuple<DateTime, TimeSpan, TaskCompletionSource<" + response_type + ">>> _requestsById" + response_name + ";");
@@ -7371,7 +7373,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         {
             if (s->message)
             {
-                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
                 WriteLineIndent(*s->name + "SenderModel = new " + *s->name + model + "(SendBuffer);");
                 WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + ".Default;");
                 WriteLineIndent(*s->name + "ReceiverModel = new " + *s->name + model + "();");
@@ -7383,7 +7385,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         for (const auto& response : responses)
         {
             std::string response_name = response;
-            std::string response_type = ConvertTypeName(*p->name, response, false);
+            std::string response_type = ConvertTypeName(domain, *p->name, response, false);
             CppCommon::StringUtils::ReplaceAll(response_name, ".", "");
 
             WriteLineIndent("_requestsById" + response_name + " = new Dictionary<Guid, Tuple<DateTime, TimeSpan, TaskCompletionSource<" + response_type + ">>>();");
@@ -7404,7 +7406,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         {
             if (s->message)
             {
-                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
                 WriteLineIndent(*s->name + "SenderModel = new " + *s->name + model + "(SendBuffer);");
                 WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + ".Default;");
                 WriteLineIndent(*s->name + "ReceiverModel = new " + *s->name + model + "();");
@@ -7416,7 +7418,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         for (const auto& response : responses)
         {
             std::string response_name = response;
-            std::string response_type = ConvertTypeName(*p->name, response, false);
+            std::string response_type = ConvertTypeName(domain, *p->name, response, false);
             CppCommon::StringUtils::ReplaceAll(response_name, ".", "");
 
             WriteLineIndent("_requestsById" + response_name + " = new Dictionary<Guid, Tuple<DateTime, TimeSpan, TaskCompletionSource<" + response_type + ">>>();");
@@ -7434,8 +7436,8 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             if (s->message && s->request)
             {
                 std::string request_name = *s->name;
-                std::string request_type = ConvertTypeName(*p->name, *s->name, false);
-                std::string response_type = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
+                std::string request_type = ConvertTypeName(domain, *p->name, *s->name, false);
+                std::string response_type = (s->response) ? ConvertTypeName(domain, *p->name, *s->response->response, false) : "";
                 std::string response_field = (s->response) ? *s->response->response : "";
                 CppCommon::StringUtils::ReplaceAll(request_name, ".", "");
                 CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
@@ -7529,7 +7531,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         {
             if (s->message)
             {
-                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
                 WriteLineIndent("case " + struct_name + " value when value.FBEType == " + struct_name + ".FBETypeConst: return SendListener(listener, value);");
             }
         }
@@ -7563,15 +7565,15 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
         {
             if (s->message)
             {
-                std::string struct_name = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
                 WriteLineIndent("public long Send(" + struct_name + " value) { return SendListener(this, value); }");
                 WriteLineIndent("public long SendListener(" + listener + " listener, " + struct_name + " value)");
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("// Serialize the value into the FBE stream");
                 WriteLineIndent("long serialized = " + *s->name + "SenderModel.Serialize(value);");
-                WriteLineIndent("Debug.Assert((serialized > 0), \"" + *p->name + "." + *s->name + " serialization failed!\");");
-                WriteLineIndent("Debug.Assert(" + *s->name + "SenderModel.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
+                WriteLineIndent("Debug.Assert((serialized > 0), \"" + domain + *p->name + "." + *s->name + " serialization failed!\");");
+                WriteLineIndent("Debug.Assert(" + *s->name + "SenderModel.Verify(), \"" + domain + *p->name + "." + *s->name + " validation failed!\");");
                 WriteLine();
                 WriteLineIndent("// Log the value");
                 WriteLineIndent("if (Logging)");
@@ -7594,7 +7596,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     for (const auto& response : responses)
     {
         std::string response_name = response;
-        std::string response_type = ConvertTypeName(*p->name, response, false);
+        std::string response_type = ConvertTypeName(domain, *p->name, response, false);
         CppCommon::StringUtils::ReplaceAll(response_name, ".", "");
 
         WriteLine();
@@ -7614,7 +7616,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 if (s->message && s->response)
                 {
                     std::string struct_response_name = *s->response->response;
-                    std::string struct_response_type = ConvertTypeName(*p->name, *s->response->response, false);
+                    std::string struct_response_type = ConvertTypeName(domain, *p->name, *s->response->response, false);
                     CppCommon::StringUtils::ReplaceAll(struct_response_name, ".", "");
 
                     if ((struct_response_type == response_type) && (cache.find(struct_response_type) == cache.end()))
@@ -7654,7 +7656,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             if (s->message)
             {
                 std::string struct_response_name = *s->name;
-                std::string struct_response_type = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_response_type = ConvertTypeName(domain, *p->name, *s->name, false);
                 CppCommon::StringUtils::ReplaceAll(struct_response_name, ".", "");
 
                 if ((responses.find(*s->name) == responses.end()) && (cache.find(struct_response_type) == cache.end()))
@@ -7673,7 +7675,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     for (const auto& reject : rejects)
     {
         std::string reject_name = reject.first;
-        std::string reject_type = ConvertTypeName(*p->name, reject.first, false);
+        std::string reject_type = ConvertTypeName(domain, *p->name, reject.first, false);
         bool global = reject.second;
         bool imported = CppCommon::StringUtils::ReplaceAll(reject_name, ".", "");
         CppCommon::StringUtils::ReplaceAll(reject_name, ".", "");
@@ -7731,11 +7733,11 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                     for (const auto& r : s->rejects->rejects)
                     {
                         std::string struct_response_name = *s->response->response;
-                        std::string struct_response_type = ConvertTypeName(*p->name, *s->response->response, false);
+                        std::string struct_response_type = ConvertTypeName(domain, *p->name, *s->response->response, false);
                         CppCommon::StringUtils::ReplaceAll(struct_response_name, ".", "");
 
                         std::string struct_reject_name = *r.reject;
-                        std::string struct_reject_type = ConvertTypeName(*p->name, *r.reject, false);
+                        std::string struct_reject_type = ConvertTypeName(domain, *p->name, *r.reject, false);
                         CppCommon::StringUtils::ReplaceAll(struct_reject_name, ".", "");
 
                         if ((struct_reject_type == reject_type) && (cache.find(struct_response_name) == cache.end()))
@@ -7776,7 +7778,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             if (s->message)
             {
                 std::string struct_reject_name = *s->name;
-                std::string struct_reject_type = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_reject_type = ConvertTypeName(domain, *p->name, *s->name, false);
                 CppCommon::StringUtils::ReplaceAll(struct_reject_name, ".", "");
 
                 if ((rejects.find(*s->name) == rejects.end()) && (cache.find(struct_reject_type) == cache.end()))
@@ -7801,7 +7803,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             if (s->message)
             {
                 std::string struct_notify_name = *s->name;
-                std::string struct_notify_type = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_notify_type = ConvertTypeName(domain, *p->name, *s->name, false);
                 CppCommon::StringUtils::ReplaceAll(struct_notify_name, ".", "");
 
                 if (cache.find(struct_notify_type) == cache.end())
@@ -7826,7 +7828,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             if (s->message)
             {
                 std::string struct_response_name = *s->name;
-                std::string struct_response_type = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_response_type = ConvertTypeName(domain, *p->name, *s->name, false);
                 CppCommon::StringUtils::ReplaceAll(struct_response_name, ".", "");
 
                 if (cache.find(struct_response_type) == cache.end())
@@ -7857,7 +7859,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     for (const auto& response : responses)
     {
         std::string response_name = response;
-        std::string response_type = ConvertTypeName(*p->name, response, false);
+        std::string response_type = ConvertTypeName(domain, *p->name, response, false);
         CppCommon::StringUtils::ReplaceAll(response_name, ".", "");
 
         WriteLine();
@@ -7887,7 +7889,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     for (const auto& response : responses)
     {
         std::string response_name = response;
-        std::string response_type = ConvertTypeName(*p->name, response, false);
+        std::string response_type = ConvertTypeName(domain, *p->name, response, false);
         CppCommon::StringUtils::ReplaceAll(response_name, ".", "");
 
         WriteLine();
@@ -7939,9 +7941,9 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
                 Indent(1);
                 WriteLineIndent("// Deserialize the value from the FBE stream");
                 WriteLineIndent(*s->name + "ReceiverModel.Attach(buffer, offset);");
-                WriteLineIndent("Debug.Assert(" + *s->name + "ReceiverModel.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
+                WriteLineIndent("Debug.Assert(" + *s->name + "ReceiverModel.Verify(), \"" + domain + *p->name + "." + *s->name + " validation failed!\");");
                 WriteLineIndent("long deserialized = " + *s->name + "ReceiverModel.Deserialize(out " + *s->name + "ReceiverValue);");
-                WriteLineIndent("Debug.Assert((deserialized > 0), \"" + *p->name + "." + *s->name + " deserialization failed!\");");
+                WriteLineIndent("Debug.Assert((deserialized > 0), \"" + domain + *p->name + "." + *s->name + " deserialization failed!\");");
                 WriteLine();
                 WriteLineIndent("// Log the value");
                 WriteLineIndent("if (Logging)");
@@ -7985,7 +7987,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     for (const auto& response : responses)
     {
         std::string response_name = response;
-        std::string response_type = ConvertTypeName(*p->name, response, false);
+        std::string response_type = ConvertTypeName(domain, *p->name, response, false);
         CppCommon::StringUtils::ReplaceAll(response_name, ".", "");
 
         WriteLineIndent("public delegate void ReceiveResponseHandler_" + response_name + "(" + response_type + " response);");
@@ -8000,7 +8002,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             if (s->message)
             {
                 std::string struct_response_name = *s->name;
-                std::string struct_response_type = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_response_type = ConvertTypeName(domain, *p->name, *s->name, false);
                 CppCommon::StringUtils::ReplaceAll(struct_response_name, ".", "");
 
                 if ((responses.find(*s->name) == responses.end()) && (cache.find(struct_response_type) == cache.end()))
@@ -8017,7 +8019,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     for (const auto& reject : rejects)
     {
         std::string reject_name = reject.first;
-        std::string reject_type = ConvertTypeName(*p->name, reject.first, false);
+        std::string reject_type = ConvertTypeName(domain, *p->name, reject.first, false);
         CppCommon::StringUtils::ReplaceAll(reject_name, ".", "");
 
         WriteLineIndent("public delegate void ReceiveRejectHandler_" + reject_name + "(" + reject_type + " reject);");
@@ -8032,7 +8034,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             if (s->message)
             {
                 std::string struct_reject_name = *s->name;
-                std::string struct_reject_type = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_reject_type = ConvertTypeName(domain, *p->name, *s->name, false);
                 CppCommon::StringUtils::ReplaceAll(struct_reject_name, ".", "");
 
                 if ((rejects.find(*s->name) == rejects.end()) && (cache.find(struct_reject_type) == cache.end()))
@@ -8054,7 +8056,7 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
             if (s->message)
             {
                 std::string struct_notify_name = *s->name;
-                std::string struct_notify_type = ConvertTypeName(*p->name, *s->name, false);
+                std::string struct_notify_type = ConvertTypeName(domain, *p->name, *s->name, false);
                 CppCommon::StringUtils::ReplaceAll(struct_notify_name, ".", "");
 
                 if (cache.find(struct_notify_type) == cache.end())
@@ -8074,8 +8076,8 @@ void GeneratorCSharp::GenerateClient(const std::shared_ptr<Package>& p, bool fin
     // Generate namespace end
     Indent(-1);
     WriteLine();
-    WriteLineIndent("} // namespace " + *p->name);
-    WriteLineIndent("} // namespace FBE");
+    WriteLineIndent("} // namespace " + domain + *p->name);
+    WriteLineIndent("} // namespace " + domain + "FBE");
 }
 
 bool GeneratorCSharp::IsKnownType(const std::string& type)
@@ -8337,9 +8339,9 @@ std::string GeneratorCSharp::ConvertTypeName(const std::string& type, bool optio
     return ns + type;
 }
 
-std::string GeneratorCSharp::ConvertTypeName(const std::string& package, const std::string& type, bool optional)
+std::string GeneratorCSharp::ConvertTypeName(const std::string& domain, const std::string& package, const std::string& type, bool optional)
 {
-    return (CppCommon::StringUtils::Contains(type, '.') ? "" : ("global::" + package + ".")) + ConvertTypeName(type, optional);
+    return (CppCommon::StringUtils::Contains(type, '.') ? "" : ("global::" + domain + package + ".")) + ConvertTypeName(type, optional);
 }
 
 std::string GeneratorCSharp::ConvertTypeName(const StructField& field)
@@ -8503,7 +8505,7 @@ std::string GeneratorCSharp::ConvertTypeFieldInitialization(const StructField& f
     return "new " + ConvertTypeFieldName(*field.type, final) + "(buffer, " + offset + ")";
 }
 
-std::string GeneratorCSharp::ConvertConstant(const std::string& package, const std::string& type, const std::string& value, bool optional)
+std::string GeneratorCSharp::ConvertConstant(const std::string& domain, const std::string& package, const std::string& type, const std::string& value, bool optional)
 {
     if (value == "true")
         return "true";
@@ -8585,14 +8587,14 @@ std::string GeneratorCSharp::ConvertConstant(const std::string& package, const s
             for (const auto& it : flags)
             {
                 std::string flag = CppCommon::StringUtils::ToTrim(it);
-                std::string ns = (CppCommon::StringUtils::CountAll(flag, ".") > 1) ? "global::" : ("global::" + package + ".");
+                std::string ns = (CppCommon::StringUtils::CountAll(flag, ".") > 1) ? ("global::" + domain) : ("global::" + domain + package + ".");
                 result += (first ? "" : " | ") + ns + flag;
                 first = false;
             }
         }
         else
         {
-            std::string ns = (CppCommon::StringUtils::CountAll(result, ".") > 1) ? "global::" : ("global::" + package + ".");
+            std::string ns = (CppCommon::StringUtils::CountAll(result, ".") > 1) ? ("global::" + domain) : ("global::" + domain + package + ".");
             result = ns + result;
         }
     }
@@ -8684,10 +8686,10 @@ std::string GeneratorCSharp::ConvertDefault(const std::string& type)
     return "new " + type + "()";
 }
 
-std::string GeneratorCSharp::ConvertDefault(const std::string& package, const StructField& field)
+std::string GeneratorCSharp::ConvertDefault(const std::string& domain, const std::string& package, const StructField& field)
 {
     if (field.value)
-        return ConvertConstant(package, *field.type, *field.value, field.optional);
+        return ConvertConstant(domain, package, *field.type, *field.value, field.optional);
 
     if (field.array)
         return "new " + ConvertTypeName(*field.type, field.optional) + "[" + std::to_string(field.N) + "]";
@@ -8697,7 +8699,7 @@ std::string GeneratorCSharp::ConvertDefault(const std::string& package, const St
         return "null";
     else if (!IsKnownType(*field.type))
     {
-        std::string ns = CppCommon::StringUtils::Contains(*field.type, '.') ? "" : ("global::" + package + ".");
+        std::string ns = CppCommon::StringUtils::Contains(*field.type, '.') ? "" : ("global::" + domain + package + ".");
         return ns + ConvertTypeName(field) + ".Default";
     }
 

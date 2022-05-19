@@ -31,7 +31,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 #endif
 
-namespace FBE {
+namespace com.chronoxor.FBE {
 
     // Fast Binary Encoding UUID generator
     public static class UuidGenerator
@@ -10649,4 +10649,4 @@ namespace FBE {
     }
 #endif
 
-} // namespace FBE
+} // namespace com.chronoxor.FBE

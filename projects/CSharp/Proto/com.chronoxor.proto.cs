@@ -31,7 +31,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 #endif
 
-namespace proto {
+namespace com.chronoxor.proto {
 
 #if UTF8JSON
     public class OrderSideConverter : IJsonFormatter<OrderSide>
@@ -139,7 +139,7 @@ namespace proto {
 
         public static OrderSide Default => new OrderSide();
 
-        public static FBE.FieldModelValueType<OrderSide> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelOrderSide(buffer, offset); }
+        public static FBE.FieldModelValueType<OrderSide> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.proto.FieldModelOrderSide(buffer, offset); }
 
         public const byte _buy_ = (byte)0U + 0;
         public const byte _sell_ = (byte)0U + 1;
@@ -155,12 +155,12 @@ namespace proto {
         }
     }
 
-} // namespace proto
+} // namespace com.chronoxor.proto
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding OrderSide field model
     public class FieldModelOrderSide : FieldModelValueType<OrderSide>
@@ -197,13 +197,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding OrderSide final model
     public class FinalModelOrderSide : FinalModelValueType<OrderSide>
@@ -253,10 +253,10 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace proto {
+namespace com.chronoxor.proto {
 
 #if UTF8JSON
     public class OrderTypeConverter : IJsonFormatter<OrderType>
@@ -364,7 +364,7 @@ namespace proto {
 
         public static OrderType Default => new OrderType();
 
-        public static FBE.FieldModelValueType<OrderType> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelOrderType(buffer, offset); }
+        public static FBE.FieldModelValueType<OrderType> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.proto.FieldModelOrderType(buffer, offset); }
 
         public const byte _market_ = (byte)0U + 0;
         public const byte _limit_ = (byte)0U + 1;
@@ -383,12 +383,12 @@ namespace proto {
         }
     }
 
-} // namespace proto
+} // namespace com.chronoxor.proto
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding OrderType field model
     public class FieldModelOrderType : FieldModelValueType<OrderType>
@@ -425,13 +425,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding OrderType final model
     public class FinalModelOrderType : FinalModelValueType<OrderType>
@@ -481,10 +481,10 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace proto {
+namespace com.chronoxor.proto {
 
 #if UTF8JSON
     public class StateConverter : IJsonFormatter<State>
@@ -624,7 +624,7 @@ namespace proto {
 
         public static State Default => new State();
 
-        public static FBE.FieldModelValueType<State> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelState(buffer, offset); }
+        public static FBE.FieldModelValueType<State> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.proto.FieldModelState(buffer, offset); }
 
         public const byte _unknown_ = (byte)0x00U;
         public const byte _invalid_ = (byte)0x01U;
@@ -686,12 +686,12 @@ namespace proto {
         }
     }
 
-} // namespace proto
+} // namespace com.chronoxor.proto
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding State field model
     public class FieldModelState : FieldModelValueType<State>
@@ -728,13 +728,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding State final model
     public class FinalModelState : FinalModelValueType<State>
@@ -784,10 +784,10 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace proto {
+namespace com.chronoxor.proto {
 
     public struct Order : IComparable, IComparable<Order>, IEquatable<Order>
     {
@@ -810,8 +810,8 @@ namespace proto {
         {
             id = (int)0
             , symbol = ""
-            , side = global::proto.OrderSide.Default
-            , type = global::proto.OrderType.Default
+            , side = global::com.chronoxor.proto.OrderSide.Default
+            , type = global::com.chronoxor.proto.OrderType.Default
             , price = (double)0.0D
             , volume = (double)0.0D
         };
@@ -829,11 +829,11 @@ namespace proto {
         public Order Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.proto.OrderModel();
+            var writer = new FBE.com.chronoxor.proto.OrderModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.proto.OrderModel();
+            var reader = new FBE.com.chronoxor.proto.OrderModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -909,15 +909,15 @@ namespace proto {
             return result;
         }
 
-        public static FBE.FieldModelValueType<Order> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelOrder(buffer, offset); }
+        public static FBE.FieldModelValueType<Order> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.proto.FieldModelOrder(buffer, offset); }
     }
 
-} // namespace proto
+} // namespace com.chronoxor.proto
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding Order field model
     public class FieldModelOrder : FieldModelValueType<Order>
@@ -1125,13 +1125,13 @@ namespace proto {
             if ((fbeCurrentSize + side.FBESize) <= fbeStructSize)
                 side.Get(out fbeValue.side);
             else
-                fbeValue.side = global::proto.OrderSide.Default;
+                fbeValue.side = global::com.chronoxor.proto.OrderSide.Default;
             fbeCurrentSize += side.FBESize;
 
             if ((fbeCurrentSize + type.FBESize) <= fbeStructSize)
                 type.Get(out fbeValue.type);
             else
-                fbeValue.type = global::proto.OrderType.Default;
+                fbeValue.type = global::com.chronoxor.proto.OrderType.Default;
             fbeCurrentSize += type.FBESize;
 
             if ((fbeCurrentSize + price.FBESize) <= fbeStructSize)
@@ -1197,13 +1197,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding Order model
     public class OrderModel : Model
@@ -1285,13 +1285,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding Order final model
     public class FinalModelOrder : FinalModelValueType<Order>
@@ -1489,13 +1489,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding Order final model
     public class OrderFinalModel : Model
@@ -1573,10 +1573,10 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace proto {
+namespace com.chronoxor.proto {
 
     public struct Balance : IComparable, IComparable<Balance>, IEquatable<Balance>
     {
@@ -1606,11 +1606,11 @@ namespace proto {
         public Balance Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.proto.BalanceModel();
+            var writer = new FBE.com.chronoxor.proto.BalanceModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.proto.BalanceModel();
+            var reader = new FBE.com.chronoxor.proto.BalanceModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -1682,15 +1682,15 @@ namespace proto {
             return result;
         }
 
-        public static FBE.FieldModelValueType<Balance> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelBalance(buffer, offset); }
+        public static FBE.FieldModelValueType<Balance> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.proto.FieldModelBalance(buffer, offset); }
     }
 
-} // namespace proto
+} // namespace com.chronoxor.proto
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding Balance field model
     public class FieldModelBalance : FieldModelValueType<Balance>
@@ -1902,13 +1902,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding Balance model
     public class BalanceModel : Model
@@ -1990,13 +1990,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding Balance final model
     public class FinalModelBalance : FinalModelValueType<Balance>
@@ -2118,13 +2118,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding Balance final model
     public class BalanceFinalModel : Model
@@ -2202,10 +2202,10 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace proto {
+namespace com.chronoxor.proto {
 
     public struct Account : IComparable, IComparable<Account>, IEquatable<Account>
     {
@@ -2228,8 +2228,8 @@ namespace proto {
         {
             id = (int)0
             , name = ""
-            , state = global::proto.State.initialized | global::proto.State.bad
-            , wallet = global::proto.Balance.Default
+            , state = global::com.chronoxor.proto.State.initialized | global::com.chronoxor.proto.State.bad
+            , wallet = global::com.chronoxor.proto.Balance.Default
             , asset = null
             , orders = new List<Order>()
         };
@@ -2247,11 +2247,11 @@ namespace proto {
         public Account Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.proto.AccountModel();
+            var writer = new FBE.com.chronoxor.proto.AccountModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.proto.AccountModel();
+            var reader = new FBE.com.chronoxor.proto.AccountModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -2341,15 +2341,15 @@ namespace proto {
             return result;
         }
 
-        public static FBE.FieldModelValueType<Account> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelAccount(buffer, offset); }
+        public static FBE.FieldModelValueType<Account> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.proto.FieldModelAccount(buffer, offset); }
     }
 
-} // namespace proto
+} // namespace com.chronoxor.proto
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding Account field model
     public class FieldModelAccount : FieldModelValueType<Account>
@@ -2555,15 +2555,15 @@ namespace proto {
             fbeCurrentSize += name.FBESize;
 
             if ((fbeCurrentSize + state.FBESize) <= fbeStructSize)
-                state.Get(out fbeValue.state, global::proto.State.initialized | global::proto.State.bad);
+                state.Get(out fbeValue.state, global::com.chronoxor.proto.State.initialized | global::com.chronoxor.proto.State.bad);
             else
-                fbeValue.state = global::proto.State.initialized | global::proto.State.bad;
+                fbeValue.state = global::com.chronoxor.proto.State.initialized | global::com.chronoxor.proto.State.bad;
             fbeCurrentSize += state.FBESize;
 
             if ((fbeCurrentSize + wallet.FBESize) <= fbeStructSize)
                 wallet.Get(out fbeValue.wallet);
             else
-                fbeValue.wallet = global::proto.Balance.Default;
+                fbeValue.wallet = global::com.chronoxor.proto.Balance.Default;
             fbeCurrentSize += wallet.FBESize;
 
             if ((fbeCurrentSize + asset.FBESize) <= fbeStructSize)
@@ -2629,13 +2629,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding Account model
     public class AccountModel : Model
@@ -2717,13 +2717,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding Account final model
     public class FinalModelAccount : FinalModelValueType<Account>
@@ -2921,13 +2921,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding Account final model
     public class AccountFinalModel : Model
@@ -3005,10 +3005,10 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace proto {
+namespace com.chronoxor.proto {
 
     public struct OrderMessage : IComparable, IComparable<OrderMessage>, IEquatable<OrderMessage>
     {
@@ -3025,7 +3025,7 @@ namespace proto {
 
         public static OrderMessage Default => new OrderMessage
         {
-            body = global::proto.Order.Default
+            body = global::com.chronoxor.proto.Order.Default
         };
 
         public OrderMessage(Order body)
@@ -3036,11 +3036,11 @@ namespace proto {
         public OrderMessage Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.proto.OrderMessageModel();
+            var writer = new FBE.com.chronoxor.proto.OrderMessageModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.proto.OrderMessageModel();
+            var reader = new FBE.com.chronoxor.proto.OrderMessageModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -3100,15 +3100,15 @@ namespace proto {
             return result;
         }
 
-        public static FBE.FieldModelValueType<OrderMessage> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelOrderMessage(buffer, offset); }
+        public static FBE.FieldModelValueType<OrderMessage> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.proto.FieldModelOrderMessage(buffer, offset); }
     }
 
-} // namespace proto
+} // namespace com.chronoxor.proto
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding OrderMessage field model
     public class FieldModelOrderMessage : FieldModelValueType<OrderMessage>
@@ -3254,7 +3254,7 @@ namespace proto {
             if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
                 body.Get(out fbeValue.body);
             else
-                fbeValue.body = global::proto.Order.Default;
+                fbeValue.body = global::com.chronoxor.proto.Order.Default;
             fbeCurrentSize += body.FBESize;
         }
 
@@ -3303,13 +3303,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding OrderMessage model
     public class OrderMessageModel : Model
@@ -3391,13 +3391,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding OrderMessage final model
     public class FinalModelOrderMessage : FinalModelValueType<OrderMessage>
@@ -3500,13 +3500,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding OrderMessage final model
     public class OrderMessageFinalModel : Model
@@ -3584,10 +3584,10 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace proto {
+namespace com.chronoxor.proto {
 
     public struct BalanceMessage : IComparable, IComparable<BalanceMessage>, IEquatable<BalanceMessage>
     {
@@ -3604,7 +3604,7 @@ namespace proto {
 
         public static BalanceMessage Default => new BalanceMessage
         {
-            body = global::proto.Balance.Default
+            body = global::com.chronoxor.proto.Balance.Default
         };
 
         public BalanceMessage(Balance body)
@@ -3615,11 +3615,11 @@ namespace proto {
         public BalanceMessage Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.proto.BalanceMessageModel();
+            var writer = new FBE.com.chronoxor.proto.BalanceMessageModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.proto.BalanceMessageModel();
+            var reader = new FBE.com.chronoxor.proto.BalanceMessageModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -3679,15 +3679,15 @@ namespace proto {
             return result;
         }
 
-        public static FBE.FieldModelValueType<BalanceMessage> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelBalanceMessage(buffer, offset); }
+        public static FBE.FieldModelValueType<BalanceMessage> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.proto.FieldModelBalanceMessage(buffer, offset); }
     }
 
-} // namespace proto
+} // namespace com.chronoxor.proto
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding BalanceMessage field model
     public class FieldModelBalanceMessage : FieldModelValueType<BalanceMessage>
@@ -3833,7 +3833,7 @@ namespace proto {
             if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
                 body.Get(out fbeValue.body);
             else
-                fbeValue.body = global::proto.Balance.Default;
+                fbeValue.body = global::com.chronoxor.proto.Balance.Default;
             fbeCurrentSize += body.FBESize;
         }
 
@@ -3882,13 +3882,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding BalanceMessage model
     public class BalanceMessageModel : Model
@@ -3970,13 +3970,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding BalanceMessage final model
     public class FinalModelBalanceMessage : FinalModelValueType<BalanceMessage>
@@ -4079,13 +4079,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding BalanceMessage final model
     public class BalanceMessageFinalModel : Model
@@ -4163,10 +4163,10 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace proto {
+namespace com.chronoxor.proto {
 
     public struct AccountMessage : IComparable, IComparable<AccountMessage>, IEquatable<AccountMessage>
     {
@@ -4183,7 +4183,7 @@ namespace proto {
 
         public static AccountMessage Default => new AccountMessage
         {
-            body = global::proto.Account.Default
+            body = global::com.chronoxor.proto.Account.Default
         };
 
         public AccountMessage(Account body)
@@ -4194,11 +4194,11 @@ namespace proto {
         public AccountMessage Clone()
         {
             // Serialize the struct to the FBE stream
-            var writer = new FBE.proto.AccountMessageModel();
+            var writer = new FBE.com.chronoxor.proto.AccountMessageModel();
             writer.Serialize(this);
 
             // Deserialize the struct from the FBE stream
-            var reader = new FBE.proto.AccountMessageModel();
+            var reader = new FBE.com.chronoxor.proto.AccountMessageModel();
             reader.Attach(writer.Buffer);
             reader.Deserialize(out var result);
             return result;
@@ -4258,15 +4258,15 @@ namespace proto {
             return result;
         }
 
-        public static FBE.FieldModelValueType<AccountMessage> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelAccountMessage(buffer, offset); }
+        public static FBE.FieldModelValueType<AccountMessage> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.com.chronoxor.proto.FieldModelAccountMessage(buffer, offset); }
     }
 
-} // namespace proto
+} // namespace com.chronoxor.proto
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding AccountMessage field model
     public class FieldModelAccountMessage : FieldModelValueType<AccountMessage>
@@ -4412,7 +4412,7 @@ namespace proto {
             if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
                 body.Get(out fbeValue.body);
             else
-                fbeValue.body = global::proto.Account.Default;
+                fbeValue.body = global::com.chronoxor.proto.Account.Default;
             fbeCurrentSize += body.FBESize;
         }
 
@@ -4461,13 +4461,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding AccountMessage model
     public class AccountMessageModel : Model
@@ -4549,13 +4549,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding AccountMessage final model
     public class FinalModelAccountMessage : FinalModelValueType<AccountMessage>
@@ -4658,13 +4658,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    using global::proto;
+    using global::com.chronoxor.proto;
 
     // Fast Binary Encoding AccountMessage final model
     public class AccountMessageFinalModel : Model
@@ -4742,13 +4742,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    // Fast Binary Encoding proto protocol version
+    // Fast Binary Encoding com.chronoxor.proto protocol version
     public static class ProtocolVersion
     {
         // Protocol major version
@@ -4757,18 +4757,18 @@ namespace proto {
         public const int Minor = 0;
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    // Fast Binary Encoding proto sender listener interface
+    // Fast Binary Encoding com.chronoxor.proto sender listener interface
     public interface ISenderListener : FBE.ISenderListener
     {
     }
 
-    // Fast Binary Encoding proto sender
+    // Fast Binary Encoding com.chronoxor.proto sender
     public class Sender : FBE.Sender, ISenderListener
     {
         // Sender models accessors
@@ -4794,22 +4794,22 @@ namespace proto {
         {
             switch (obj)
             {
-                case global::proto.OrderMessage value when value.FBEType == global::proto.OrderMessage.FBETypeConst: return SendListener(listener, value);
-                case global::proto.BalanceMessage value when value.FBEType == global::proto.BalanceMessage.FBETypeConst: return SendListener(listener, value);
-                case global::proto.AccountMessage value when value.FBEType == global::proto.AccountMessage.FBETypeConst: return SendListener(listener, value);
+                case global::com.chronoxor.proto.OrderMessage value when value.FBEType == global::com.chronoxor.proto.OrderMessage.FBETypeConst: return SendListener(listener, value);
+                case global::com.chronoxor.proto.BalanceMessage value when value.FBEType == global::com.chronoxor.proto.BalanceMessage.FBETypeConst: return SendListener(listener, value);
+                case global::com.chronoxor.proto.AccountMessage value when value.FBEType == global::com.chronoxor.proto.AccountMessage.FBETypeConst: return SendListener(listener, value);
                 default: break;
             }
 
             return 0;
         }
 
-        public long Send(global::proto.OrderMessage value) { return SendListener(this, value); }
-        public long SendListener(ISenderListener listener, global::proto.OrderMessage value)
+        public long Send(global::com.chronoxor.proto.OrderMessage value) { return SendListener(this, value); }
+        public long SendListener(ISenderListener listener, global::com.chronoxor.proto.OrderMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = OrderMessageModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.OrderMessage serialization failed!");
-            Debug.Assert(OrderMessageModel.Verify(), "proto.OrderMessage validation failed!");
+            Debug.Assert((serialized > 0), "com.chronoxor.proto.OrderMessage serialization failed!");
+            Debug.Assert(OrderMessageModel.Verify(), "com.chronoxor.proto.OrderMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -4821,13 +4821,13 @@ namespace proto {
             // Send the serialized value
             return SendSerialized(listener, serialized);
         }
-        public long Send(global::proto.BalanceMessage value) { return SendListener(this, value); }
-        public long SendListener(ISenderListener listener, global::proto.BalanceMessage value)
+        public long Send(global::com.chronoxor.proto.BalanceMessage value) { return SendListener(this, value); }
+        public long SendListener(ISenderListener listener, global::com.chronoxor.proto.BalanceMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = BalanceMessageModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.BalanceMessage serialization failed!");
-            Debug.Assert(BalanceMessageModel.Verify(), "proto.BalanceMessage validation failed!");
+            Debug.Assert((serialized > 0), "com.chronoxor.proto.BalanceMessage serialization failed!");
+            Debug.Assert(BalanceMessageModel.Verify(), "com.chronoxor.proto.BalanceMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -4839,13 +4839,13 @@ namespace proto {
             // Send the serialized value
             return SendSerialized(listener, serialized);
         }
-        public long Send(global::proto.AccountMessage value) { return SendListener(this, value); }
-        public long SendListener(ISenderListener listener, global::proto.AccountMessage value)
+        public long Send(global::com.chronoxor.proto.AccountMessage value) { return SendListener(this, value); }
+        public long SendListener(ISenderListener listener, global::com.chronoxor.proto.AccountMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = AccountMessageModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.AccountMessage serialization failed!");
-            Debug.Assert(AccountMessageModel.Verify(), "proto.AccountMessage validation failed!");
+            Debug.Assert((serialized > 0), "com.chronoxor.proto.AccountMessage serialization failed!");
+            Debug.Assert(AccountMessageModel.Verify(), "com.chronoxor.proto.AccountMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -4859,28 +4859,28 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    // Fast Binary Encoding proto receiver listener interface
+    // Fast Binary Encoding com.chronoxor.proto receiver listener interface
     public interface IReceiverListener : FBE.IReceiverListener
     {
         // Receive handlers
-        void OnReceive(global::proto.OrderMessage value) {}
-        void OnReceive(global::proto.BalanceMessage value) {}
-        void OnReceive(global::proto.AccountMessage value) {}
+        void OnReceive(global::com.chronoxor.proto.OrderMessage value) {}
+        void OnReceive(global::com.chronoxor.proto.BalanceMessage value) {}
+        void OnReceive(global::com.chronoxor.proto.AccountMessage value) {}
     }
 
-    // Fast Binary Encoding proto receiver
+    // Fast Binary Encoding com.chronoxor.proto receiver
     public class Receiver : FBE.Receiver, IReceiverListener
     {
         // Receiver values accessors
-        private global::proto.OrderMessage OrderMessageValue;
-        private global::proto.BalanceMessage BalanceMessageValue;
-        private global::proto.AccountMessage AccountMessageValue;
+        private global::com.chronoxor.proto.OrderMessage OrderMessageValue;
+        private global::com.chronoxor.proto.BalanceMessage BalanceMessageValue;
+        private global::com.chronoxor.proto.AccountMessage AccountMessageValue;
 
         // Receiver models accessors
         private readonly OrderMessageModel OrderMessageModel;
@@ -4889,20 +4889,20 @@ namespace proto {
 
         public Receiver() : base(false)
         {
-            OrderMessageValue = global::proto.OrderMessage.Default;
+            OrderMessageValue = global::com.chronoxor.proto.OrderMessage.Default;
             OrderMessageModel = new OrderMessageModel();
-            BalanceMessageValue = global::proto.BalanceMessage.Default;
+            BalanceMessageValue = global::com.chronoxor.proto.BalanceMessage.Default;
             BalanceMessageModel = new BalanceMessageModel();
-            AccountMessageValue = global::proto.AccountMessage.Default;
+            AccountMessageValue = global::com.chronoxor.proto.AccountMessage.Default;
             AccountMessageModel = new AccountMessageModel();
         }
         public Receiver(Buffer buffer) : base(buffer, false)
         {
-            OrderMessageValue = global::proto.OrderMessage.Default;
+            OrderMessageValue = global::com.chronoxor.proto.OrderMessage.Default;
             OrderMessageModel = new OrderMessageModel();
-            BalanceMessageValue = global::proto.BalanceMessage.Default;
+            BalanceMessageValue = global::com.chronoxor.proto.BalanceMessage.Default;
             BalanceMessageModel = new BalanceMessageModel();
-            AccountMessageValue = global::proto.AccountMessage.Default;
+            AccountMessageValue = global::com.chronoxor.proto.AccountMessage.Default;
             AccountMessageModel = new AccountMessageModel();
         }
 
@@ -4915,9 +4915,9 @@ namespace proto {
                 {
                     // Deserialize the value from the FBE stream
                     OrderMessageModel.Attach(buffer, offset);
-                    Debug.Assert(OrderMessageModel.Verify(), "proto.OrderMessage validation failed!");
+                    Debug.Assert(OrderMessageModel.Verify(), "com.chronoxor.proto.OrderMessage validation failed!");
                     long deserialized = OrderMessageModel.Deserialize(out OrderMessageValue);
-                    Debug.Assert((deserialized > 0), "proto.OrderMessage deserialization failed!");
+                    Debug.Assert((deserialized > 0), "com.chronoxor.proto.OrderMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
@@ -4934,9 +4934,9 @@ namespace proto {
                 {
                     // Deserialize the value from the FBE stream
                     BalanceMessageModel.Attach(buffer, offset);
-                    Debug.Assert(BalanceMessageModel.Verify(), "proto.BalanceMessage validation failed!");
+                    Debug.Assert(BalanceMessageModel.Verify(), "com.chronoxor.proto.BalanceMessage validation failed!");
                     long deserialized = BalanceMessageModel.Deserialize(out BalanceMessageValue);
-                    Debug.Assert((deserialized > 0), "proto.BalanceMessage deserialization failed!");
+                    Debug.Assert((deserialized > 0), "com.chronoxor.proto.BalanceMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
@@ -4953,9 +4953,9 @@ namespace proto {
                 {
                     // Deserialize the value from the FBE stream
                     AccountMessageModel.Attach(buffer, offset);
-                    Debug.Assert(AccountMessageModel.Verify(), "proto.AccountMessage validation failed!");
+                    Debug.Assert(AccountMessageModel.Verify(), "com.chronoxor.proto.AccountMessage validation failed!");
                     long deserialized = AccountMessageModel.Deserialize(out AccountMessageValue);
-                    Debug.Assert((deserialized > 0), "proto.AccountMessage deserialization failed!");
+                    Debug.Assert((deserialized > 0), "com.chronoxor.proto.AccountMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
@@ -4975,13 +4975,13 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    // Fast Binary Encoding proto proxy listener interface
+    // Fast Binary Encoding com.chronoxor.proto proxy listener interface
     public interface IProxyListener : FBE.IReceiverListener
     {
         // Proxy handlers
@@ -4990,7 +4990,7 @@ namespace proto {
         void OnProxy(AccountMessageModel model, long type, byte[] buffer, long offset, long size) {}
     }
 
-    // Fast Binary Encoding proto proxy
+    // Fast Binary Encoding com.chronoxor.proto proxy
     public class Proxy : FBE.Receiver, IProxyListener
     {
         // Proxy models accessors
@@ -5020,7 +5020,7 @@ namespace proto {
                 {
                     // Attach the FBE stream to the proxy model
                     OrderMessageModel.Attach(buffer, offset);
-                    Debug.Assert(OrderMessageModel.Verify(), "proto.OrderMessage validation failed!");
+                    Debug.Assert(OrderMessageModel.Verify(), "com.chronoxor.proto.OrderMessage validation failed!");
 
                     long fbeBegin = OrderMessageModel.model.GetBegin();
                     if (fbeBegin == 0)
@@ -5034,7 +5034,7 @@ namespace proto {
                 {
                     // Attach the FBE stream to the proxy model
                     BalanceMessageModel.Attach(buffer, offset);
-                    Debug.Assert(BalanceMessageModel.Verify(), "proto.BalanceMessage validation failed!");
+                    Debug.Assert(BalanceMessageModel.Verify(), "com.chronoxor.proto.BalanceMessage validation failed!");
 
                     long fbeBegin = BalanceMessageModel.model.GetBegin();
                     if (fbeBegin == 0)
@@ -5048,7 +5048,7 @@ namespace proto {
                 {
                     // Attach the FBE stream to the proxy model
                     AccountMessageModel.Attach(buffer, offset);
-                    Debug.Assert(AccountMessageModel.Verify(), "proto.AccountMessage validation failed!");
+                    Debug.Assert(AccountMessageModel.Verify(), "com.chronoxor.proto.AccountMessage validation failed!");
 
                     long fbeBegin = AccountMessageModel.model.GetBegin();
                     if (fbeBegin == 0)
@@ -5065,18 +5065,18 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    // Fast Binary Encoding proto client listener interface
+    // Fast Binary Encoding com.chronoxor.proto client listener interface
     public interface IClientListener : FBE.IClientListener, ISenderListener, IReceiverListener
     {
     }
 
-    // Fast Binary Encoding proto client
+    // Fast Binary Encoding com.chronoxor.proto client
     public class Client : FBE.Client, IClientListener
     {
         // Client sender models accessors
@@ -5085,9 +5085,9 @@ namespace proto {
         public readonly AccountMessageModel AccountMessageSenderModel;
 
         // Client receiver values accessors
-        private global::proto.OrderMessage OrderMessageReceiverValue;
-        private global::proto.BalanceMessage BalanceMessageReceiverValue;
-        private global::proto.AccountMessage AccountMessageReceiverValue;
+        private global::com.chronoxor.proto.OrderMessage OrderMessageReceiverValue;
+        private global::com.chronoxor.proto.BalanceMessage BalanceMessageReceiverValue;
+        private global::com.chronoxor.proto.AccountMessage AccountMessageReceiverValue;
 
         // Client receiver models accessors
         private readonly OrderMessageModel OrderMessageReceiverModel;
@@ -5097,25 +5097,25 @@ namespace proto {
         public Client() : base(false)
         {
             OrderMessageSenderModel = new OrderMessageModel(SendBuffer);
-            OrderMessageReceiverValue = global::proto.OrderMessage.Default;
+            OrderMessageReceiverValue = global::com.chronoxor.proto.OrderMessage.Default;
             OrderMessageReceiverModel = new OrderMessageModel();
             BalanceMessageSenderModel = new BalanceMessageModel(SendBuffer);
-            BalanceMessageReceiverValue = global::proto.BalanceMessage.Default;
+            BalanceMessageReceiverValue = global::com.chronoxor.proto.BalanceMessage.Default;
             BalanceMessageReceiverModel = new BalanceMessageModel();
             AccountMessageSenderModel = new AccountMessageModel(SendBuffer);
-            AccountMessageReceiverValue = global::proto.AccountMessage.Default;
+            AccountMessageReceiverValue = global::com.chronoxor.proto.AccountMessage.Default;
             AccountMessageReceiverModel = new AccountMessageModel();
         }
         public Client(Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, false)
         {
             OrderMessageSenderModel = new OrderMessageModel(SendBuffer);
-            OrderMessageReceiverValue = global::proto.OrderMessage.Default;
+            OrderMessageReceiverValue = global::com.chronoxor.proto.OrderMessage.Default;
             OrderMessageReceiverModel = new OrderMessageModel();
             BalanceMessageSenderModel = new BalanceMessageModel(SendBuffer);
-            BalanceMessageReceiverValue = global::proto.BalanceMessage.Default;
+            BalanceMessageReceiverValue = global::com.chronoxor.proto.BalanceMessage.Default;
             BalanceMessageReceiverModel = new BalanceMessageModel();
             AccountMessageSenderModel = new AccountMessageModel(SendBuffer);
-            AccountMessageReceiverValue = global::proto.AccountMessage.Default;
+            AccountMessageReceiverValue = global::com.chronoxor.proto.AccountMessage.Default;
             AccountMessageReceiverModel = new AccountMessageModel();
         }
 
@@ -5124,22 +5124,22 @@ namespace proto {
         {
             switch (obj)
             {
-                case global::proto.OrderMessage value when value.FBEType == global::proto.OrderMessage.FBETypeConst: return SendListener(listener, value);
-                case global::proto.BalanceMessage value when value.FBEType == global::proto.BalanceMessage.FBETypeConst: return SendListener(listener, value);
-                case global::proto.AccountMessage value when value.FBEType == global::proto.AccountMessage.FBETypeConst: return SendListener(listener, value);
+                case global::com.chronoxor.proto.OrderMessage value when value.FBEType == global::com.chronoxor.proto.OrderMessage.FBETypeConst: return SendListener(listener, value);
+                case global::com.chronoxor.proto.BalanceMessage value when value.FBEType == global::com.chronoxor.proto.BalanceMessage.FBETypeConst: return SendListener(listener, value);
+                case global::com.chronoxor.proto.AccountMessage value when value.FBEType == global::com.chronoxor.proto.AccountMessage.FBETypeConst: return SendListener(listener, value);
                 default: break;
             }
 
             return 0;
         }
 
-        public long Send(global::proto.OrderMessage value) { return SendListener(this, value); }
-        public long SendListener(IClientListener listener, global::proto.OrderMessage value)
+        public long Send(global::com.chronoxor.proto.OrderMessage value) { return SendListener(this, value); }
+        public long SendListener(IClientListener listener, global::com.chronoxor.proto.OrderMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = OrderMessageSenderModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.OrderMessage serialization failed!");
-            Debug.Assert(OrderMessageSenderModel.Verify(), "proto.OrderMessage validation failed!");
+            Debug.Assert((serialized > 0), "com.chronoxor.proto.OrderMessage serialization failed!");
+            Debug.Assert(OrderMessageSenderModel.Verify(), "com.chronoxor.proto.OrderMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -5151,13 +5151,13 @@ namespace proto {
             // Send the serialized value
             return SendSerialized(listener, serialized);
         }
-        public long Send(global::proto.BalanceMessage value) { return SendListener(this, value); }
-        public long SendListener(IClientListener listener, global::proto.BalanceMessage value)
+        public long Send(global::com.chronoxor.proto.BalanceMessage value) { return SendListener(this, value); }
+        public long SendListener(IClientListener listener, global::com.chronoxor.proto.BalanceMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = BalanceMessageSenderModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.BalanceMessage serialization failed!");
-            Debug.Assert(BalanceMessageSenderModel.Verify(), "proto.BalanceMessage validation failed!");
+            Debug.Assert((serialized > 0), "com.chronoxor.proto.BalanceMessage serialization failed!");
+            Debug.Assert(BalanceMessageSenderModel.Verify(), "com.chronoxor.proto.BalanceMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -5169,13 +5169,13 @@ namespace proto {
             // Send the serialized value
             return SendSerialized(listener, serialized);
         }
-        public long Send(global::proto.AccountMessage value) { return SendListener(this, value); }
-        public long SendListener(IClientListener listener, global::proto.AccountMessage value)
+        public long Send(global::com.chronoxor.proto.AccountMessage value) { return SendListener(this, value); }
+        public long SendListener(IClientListener listener, global::com.chronoxor.proto.AccountMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = AccountMessageSenderModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.AccountMessage serialization failed!");
-            Debug.Assert(AccountMessageSenderModel.Verify(), "proto.AccountMessage validation failed!");
+            Debug.Assert((serialized > 0), "com.chronoxor.proto.AccountMessage serialization failed!");
+            Debug.Assert(AccountMessageSenderModel.Verify(), "com.chronoxor.proto.AccountMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -5188,21 +5188,21 @@ namespace proto {
             return SendSerialized(listener, serialized);
         }
 
-        public bool OnReceiveResponse(global::proto.OrderMessage response) { ReceivedResponse_OrderMessage?.Invoke(response); return false; }
-        public bool OnReceiveResponse(global::proto.BalanceMessage response) { ReceivedResponse_BalanceMessage?.Invoke(response); return false; }
-        public bool OnReceiveResponse(global::proto.AccountMessage response) { ReceivedResponse_AccountMessage?.Invoke(response); return false; }
+        public bool OnReceiveResponse(global::com.chronoxor.proto.OrderMessage response) { ReceivedResponse_OrderMessage?.Invoke(response); return false; }
+        public bool OnReceiveResponse(global::com.chronoxor.proto.BalanceMessage response) { ReceivedResponse_BalanceMessage?.Invoke(response); return false; }
+        public bool OnReceiveResponse(global::com.chronoxor.proto.AccountMessage response) { ReceivedResponse_AccountMessage?.Invoke(response); return false; }
 
-        public bool OnReceiveReject(global::proto.OrderMessage reject) { ReceivedReject_OrderMessage?.Invoke(reject); return false; }
-        public bool OnReceiveReject(global::proto.BalanceMessage reject) { ReceivedReject_BalanceMessage?.Invoke(reject); return false; }
-        public bool OnReceiveReject(global::proto.AccountMessage reject) { ReceivedReject_AccountMessage?.Invoke(reject); return false; }
+        public bool OnReceiveReject(global::com.chronoxor.proto.OrderMessage reject) { ReceivedReject_OrderMessage?.Invoke(reject); return false; }
+        public bool OnReceiveReject(global::com.chronoxor.proto.BalanceMessage reject) { ReceivedReject_BalanceMessage?.Invoke(reject); return false; }
+        public bool OnReceiveReject(global::com.chronoxor.proto.AccountMessage reject) { ReceivedReject_AccountMessage?.Invoke(reject); return false; }
 
-        public void OnReceiveNotify(global::proto.OrderMessage notify) { ReceivedNotify_OrderMessage?.Invoke(notify); }
-        public void OnReceiveNotify(global::proto.BalanceMessage notify) { ReceivedNotify_BalanceMessage?.Invoke(notify); }
-        public void OnReceiveNotify(global::proto.AccountMessage notify) { ReceivedNotify_AccountMessage?.Invoke(notify); }
+        public void OnReceiveNotify(global::com.chronoxor.proto.OrderMessage notify) { ReceivedNotify_OrderMessage?.Invoke(notify); }
+        public void OnReceiveNotify(global::com.chronoxor.proto.BalanceMessage notify) { ReceivedNotify_BalanceMessage?.Invoke(notify); }
+        public void OnReceiveNotify(global::com.chronoxor.proto.AccountMessage notify) { ReceivedNotify_AccountMessage?.Invoke(notify); }
 
-        public void OnReceive(global::proto.OrderMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
-        public void OnReceive(global::proto.BalanceMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
-        public void OnReceive(global::proto.AccountMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        public void OnReceive(global::com.chronoxor.proto.OrderMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        public void OnReceive(global::com.chronoxor.proto.BalanceMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        public void OnReceive(global::com.chronoxor.proto.AccountMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
 
         // Reset client requests
         internal override void ResetRequests()
@@ -5225,9 +5225,9 @@ namespace proto {
                 {
                     // Deserialize the value from the FBE stream
                     OrderMessageReceiverModel.Attach(buffer, offset);
-                    Debug.Assert(OrderMessageReceiverModel.Verify(), "proto.OrderMessage validation failed!");
+                    Debug.Assert(OrderMessageReceiverModel.Verify(), "com.chronoxor.proto.OrderMessage validation failed!");
                     long deserialized = OrderMessageReceiverModel.Deserialize(out OrderMessageReceiverValue);
-                    Debug.Assert((deserialized > 0), "proto.OrderMessage deserialization failed!");
+                    Debug.Assert((deserialized > 0), "com.chronoxor.proto.OrderMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
@@ -5244,9 +5244,9 @@ namespace proto {
                 {
                     // Deserialize the value from the FBE stream
                     BalanceMessageReceiverModel.Attach(buffer, offset);
-                    Debug.Assert(BalanceMessageReceiverModel.Verify(), "proto.BalanceMessage validation failed!");
+                    Debug.Assert(BalanceMessageReceiverModel.Verify(), "com.chronoxor.proto.BalanceMessage validation failed!");
                     long deserialized = BalanceMessageReceiverModel.Deserialize(out BalanceMessageReceiverValue);
-                    Debug.Assert((deserialized > 0), "proto.BalanceMessage deserialization failed!");
+                    Debug.Assert((deserialized > 0), "com.chronoxor.proto.BalanceMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
@@ -5263,9 +5263,9 @@ namespace proto {
                 {
                     // Deserialize the value from the FBE stream
                     AccountMessageReceiverModel.Attach(buffer, offset);
-                    Debug.Assert(AccountMessageReceiverModel.Verify(), "proto.AccountMessage validation failed!");
+                    Debug.Assert(AccountMessageReceiverModel.Verify(), "com.chronoxor.proto.AccountMessage validation failed!");
                     long deserialized = AccountMessageReceiverModel.Deserialize(out AccountMessageReceiverValue);
-                    Debug.Assert((deserialized > 0), "proto.AccountMessage deserialization failed!");
+                    Debug.Assert((deserialized > 0), "com.chronoxor.proto.AccountMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
@@ -5284,38 +5284,38 @@ namespace proto {
             return false;
         }
 
-        public delegate void ReceiveResponseHandler_OrderMessage(global::proto.OrderMessage response);
+        public delegate void ReceiveResponseHandler_OrderMessage(global::com.chronoxor.proto.OrderMessage response);
         public event ReceiveResponseHandler_OrderMessage ReceivedResponse_OrderMessage = (response) => {};
-        public delegate void ReceiveResponseHandler_BalanceMessage(global::proto.BalanceMessage response);
+        public delegate void ReceiveResponseHandler_BalanceMessage(global::com.chronoxor.proto.BalanceMessage response);
         public event ReceiveResponseHandler_BalanceMessage ReceivedResponse_BalanceMessage = (response) => {};
-        public delegate void ReceiveResponseHandler_AccountMessage(global::proto.AccountMessage response);
+        public delegate void ReceiveResponseHandler_AccountMessage(global::com.chronoxor.proto.AccountMessage response);
         public event ReceiveResponseHandler_AccountMessage ReceivedResponse_AccountMessage = (response) => {};
-        public delegate void ReceiveRejectHandler_OrderMessage(global::proto.OrderMessage reject);
+        public delegate void ReceiveRejectHandler_OrderMessage(global::com.chronoxor.proto.OrderMessage reject);
         public event ReceiveRejectHandler_OrderMessage ReceivedReject_OrderMessage = (reject) => {};
-        public delegate void ReceiveRejectHandler_BalanceMessage(global::proto.BalanceMessage reject);
+        public delegate void ReceiveRejectHandler_BalanceMessage(global::com.chronoxor.proto.BalanceMessage reject);
         public event ReceiveRejectHandler_BalanceMessage ReceivedReject_BalanceMessage = (reject) => {};
-        public delegate void ReceiveRejectHandler_AccountMessage(global::proto.AccountMessage reject);
+        public delegate void ReceiveRejectHandler_AccountMessage(global::com.chronoxor.proto.AccountMessage reject);
         public event ReceiveRejectHandler_AccountMessage ReceivedReject_AccountMessage = (reject) => {};
-        public delegate void ReceiveNotifyHandler_OrderMessage(global::proto.OrderMessage notify);
+        public delegate void ReceiveNotifyHandler_OrderMessage(global::com.chronoxor.proto.OrderMessage notify);
         public event ReceiveNotifyHandler_OrderMessage ReceivedNotify_OrderMessage = (notify) => {};
-        public delegate void ReceiveNotifyHandler_BalanceMessage(global::proto.BalanceMessage notify);
+        public delegate void ReceiveNotifyHandler_BalanceMessage(global::com.chronoxor.proto.BalanceMessage notify);
         public event ReceiveNotifyHandler_BalanceMessage ReceivedNotify_BalanceMessage = (notify) => {};
-        public delegate void ReceiveNotifyHandler_AccountMessage(global::proto.AccountMessage notify);
+        public delegate void ReceiveNotifyHandler_AccountMessage(global::com.chronoxor.proto.AccountMessage notify);
         public event ReceiveNotifyHandler_AccountMessage ReceivedNotify_AccountMessage = (notify) => {};
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    // Fast Binary Encoding proto final sender listener interface
+    // Fast Binary Encoding com.chronoxor.proto final sender listener interface
     public interface IFinalSenderListener : FBE.ISenderListener
     {
     }
 
-    // Fast Binary Encoding proto final sender
+    // Fast Binary Encoding com.chronoxor.proto final sender
     public class FinalSender : FBE.Sender, IFinalSenderListener
     {
         // Sender models accessors
@@ -5341,22 +5341,22 @@ namespace proto {
         {
             switch (obj)
             {
-                case global::proto.OrderMessage value when value.FBEType == global::proto.OrderMessage.FBETypeConst: return SendListener(listener, value);
-                case global::proto.BalanceMessage value when value.FBEType == global::proto.BalanceMessage.FBETypeConst: return SendListener(listener, value);
-                case global::proto.AccountMessage value when value.FBEType == global::proto.AccountMessage.FBETypeConst: return SendListener(listener, value);
+                case global::com.chronoxor.proto.OrderMessage value when value.FBEType == global::com.chronoxor.proto.OrderMessage.FBETypeConst: return SendListener(listener, value);
+                case global::com.chronoxor.proto.BalanceMessage value when value.FBEType == global::com.chronoxor.proto.BalanceMessage.FBETypeConst: return SendListener(listener, value);
+                case global::com.chronoxor.proto.AccountMessage value when value.FBEType == global::com.chronoxor.proto.AccountMessage.FBETypeConst: return SendListener(listener, value);
                 default: break;
             }
 
             return 0;
         }
 
-        public long Send(global::proto.OrderMessage value) { return SendListener(this, value); }
-        public long SendListener(IFinalSenderListener listener, global::proto.OrderMessage value)
+        public long Send(global::com.chronoxor.proto.OrderMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalSenderListener listener, global::com.chronoxor.proto.OrderMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = OrderMessageModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.OrderMessage serialization failed!");
-            Debug.Assert(OrderMessageModel.Verify(), "proto.OrderMessage validation failed!");
+            Debug.Assert((serialized > 0), "com.chronoxor.proto.OrderMessage serialization failed!");
+            Debug.Assert(OrderMessageModel.Verify(), "com.chronoxor.proto.OrderMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -5368,13 +5368,13 @@ namespace proto {
             // Send the serialized value
             return SendSerialized(listener, serialized);
         }
-        public long Send(global::proto.BalanceMessage value) { return SendListener(this, value); }
-        public long SendListener(IFinalSenderListener listener, global::proto.BalanceMessage value)
+        public long Send(global::com.chronoxor.proto.BalanceMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalSenderListener listener, global::com.chronoxor.proto.BalanceMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = BalanceMessageModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.BalanceMessage serialization failed!");
-            Debug.Assert(BalanceMessageModel.Verify(), "proto.BalanceMessage validation failed!");
+            Debug.Assert((serialized > 0), "com.chronoxor.proto.BalanceMessage serialization failed!");
+            Debug.Assert(BalanceMessageModel.Verify(), "com.chronoxor.proto.BalanceMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -5386,13 +5386,13 @@ namespace proto {
             // Send the serialized value
             return SendSerialized(listener, serialized);
         }
-        public long Send(global::proto.AccountMessage value) { return SendListener(this, value); }
-        public long SendListener(IFinalSenderListener listener, global::proto.AccountMessage value)
+        public long Send(global::com.chronoxor.proto.AccountMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalSenderListener listener, global::com.chronoxor.proto.AccountMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = AccountMessageModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.AccountMessage serialization failed!");
-            Debug.Assert(AccountMessageModel.Verify(), "proto.AccountMessage validation failed!");
+            Debug.Assert((serialized > 0), "com.chronoxor.proto.AccountMessage serialization failed!");
+            Debug.Assert(AccountMessageModel.Verify(), "com.chronoxor.proto.AccountMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -5406,28 +5406,28 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    // Fast Binary Encoding proto final receiver listener interface
+    // Fast Binary Encoding com.chronoxor.proto final receiver listener interface
     public interface IFinalReceiverListener : FBE.IReceiverListener
     {
         // Receive handlers
-        void OnReceive(global::proto.OrderMessage value) {}
-        void OnReceive(global::proto.BalanceMessage value) {}
-        void OnReceive(global::proto.AccountMessage value) {}
+        void OnReceive(global::com.chronoxor.proto.OrderMessage value) {}
+        void OnReceive(global::com.chronoxor.proto.BalanceMessage value) {}
+        void OnReceive(global::com.chronoxor.proto.AccountMessage value) {}
     }
 
-    // Fast Binary Encoding proto final receiver
+    // Fast Binary Encoding com.chronoxor.proto final receiver
     public class FinalReceiver : FBE.Receiver, IFinalReceiverListener
     {
         // Receiver values accessors
-        private global::proto.OrderMessage OrderMessageValue;
-        private global::proto.BalanceMessage BalanceMessageValue;
-        private global::proto.AccountMessage AccountMessageValue;
+        private global::com.chronoxor.proto.OrderMessage OrderMessageValue;
+        private global::com.chronoxor.proto.BalanceMessage BalanceMessageValue;
+        private global::com.chronoxor.proto.AccountMessage AccountMessageValue;
 
         // Receiver models accessors
         private readonly OrderMessageFinalModel OrderMessageModel;
@@ -5436,20 +5436,20 @@ namespace proto {
 
         public FinalReceiver() : base(true)
         {
-            OrderMessageValue = global::proto.OrderMessage.Default;
+            OrderMessageValue = global::com.chronoxor.proto.OrderMessage.Default;
             OrderMessageModel = new OrderMessageFinalModel();
-            BalanceMessageValue = global::proto.BalanceMessage.Default;
+            BalanceMessageValue = global::com.chronoxor.proto.BalanceMessage.Default;
             BalanceMessageModel = new BalanceMessageFinalModel();
-            AccountMessageValue = global::proto.AccountMessage.Default;
+            AccountMessageValue = global::com.chronoxor.proto.AccountMessage.Default;
             AccountMessageModel = new AccountMessageFinalModel();
         }
         public FinalReceiver(Buffer buffer) : base(buffer, true)
         {
-            OrderMessageValue = global::proto.OrderMessage.Default;
+            OrderMessageValue = global::com.chronoxor.proto.OrderMessage.Default;
             OrderMessageModel = new OrderMessageFinalModel();
-            BalanceMessageValue = global::proto.BalanceMessage.Default;
+            BalanceMessageValue = global::com.chronoxor.proto.BalanceMessage.Default;
             BalanceMessageModel = new BalanceMessageFinalModel();
-            AccountMessageValue = global::proto.AccountMessage.Default;
+            AccountMessageValue = global::com.chronoxor.proto.AccountMessage.Default;
             AccountMessageModel = new AccountMessageFinalModel();
         }
 
@@ -5462,9 +5462,9 @@ namespace proto {
                 {
                     // Deserialize the value from the FBE stream
                     OrderMessageModel.Attach(buffer, offset);
-                    Debug.Assert(OrderMessageModel.Verify(), "proto.OrderMessage validation failed!");
+                    Debug.Assert(OrderMessageModel.Verify(), "com.chronoxor.proto.OrderMessage validation failed!");
                     long deserialized = OrderMessageModel.Deserialize(out OrderMessageValue);
-                    Debug.Assert((deserialized > 0), "proto.OrderMessage deserialization failed!");
+                    Debug.Assert((deserialized > 0), "com.chronoxor.proto.OrderMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
@@ -5481,9 +5481,9 @@ namespace proto {
                 {
                     // Deserialize the value from the FBE stream
                     BalanceMessageModel.Attach(buffer, offset);
-                    Debug.Assert(BalanceMessageModel.Verify(), "proto.BalanceMessage validation failed!");
+                    Debug.Assert(BalanceMessageModel.Verify(), "com.chronoxor.proto.BalanceMessage validation failed!");
                     long deserialized = BalanceMessageModel.Deserialize(out BalanceMessageValue);
-                    Debug.Assert((deserialized > 0), "proto.BalanceMessage deserialization failed!");
+                    Debug.Assert((deserialized > 0), "com.chronoxor.proto.BalanceMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
@@ -5500,9 +5500,9 @@ namespace proto {
                 {
                     // Deserialize the value from the FBE stream
                     AccountMessageModel.Attach(buffer, offset);
-                    Debug.Assert(AccountMessageModel.Verify(), "proto.AccountMessage validation failed!");
+                    Debug.Assert(AccountMessageModel.Verify(), "com.chronoxor.proto.AccountMessage validation failed!");
                     long deserialized = AccountMessageModel.Deserialize(out AccountMessageValue);
-                    Debug.Assert((deserialized > 0), "proto.AccountMessage deserialization failed!");
+                    Debug.Assert((deserialized > 0), "com.chronoxor.proto.AccountMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
@@ -5522,18 +5522,18 @@ namespace proto {
         }
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
 
-namespace FBE {
-namespace proto {
+namespace com.chronoxor.FBE {
+namespace com.chronoxor.proto {
 
-    // Fast Binary Encoding proto final client listener interface
+    // Fast Binary Encoding com.chronoxor.proto final client listener interface
     public interface IFinalClientListener : FBE.IClientListener, IFinalSenderListener, IFinalReceiverListener
     {
     }
 
-    // Fast Binary Encoding proto final client
+    // Fast Binary Encoding com.chronoxor.proto final client
     public class FinalClient : FBE.Client, IFinalClientListener
     {
         // Client sender models accessors
@@ -5542,9 +5542,9 @@ namespace proto {
         public readonly AccountMessageFinalModel AccountMessageSenderModel;
 
         // Client receiver values accessors
-        private global::proto.OrderMessage OrderMessageReceiverValue;
-        private global::proto.BalanceMessage BalanceMessageReceiverValue;
-        private global::proto.AccountMessage AccountMessageReceiverValue;
+        private global::com.chronoxor.proto.OrderMessage OrderMessageReceiverValue;
+        private global::com.chronoxor.proto.BalanceMessage BalanceMessageReceiverValue;
+        private global::com.chronoxor.proto.AccountMessage AccountMessageReceiverValue;
 
         // Client receiver models accessors
         private readonly OrderMessageFinalModel OrderMessageReceiverModel;
@@ -5554,25 +5554,25 @@ namespace proto {
         public FinalClient() : base(true)
         {
             OrderMessageSenderModel = new OrderMessageFinalModel(SendBuffer);
-            OrderMessageReceiverValue = global::proto.OrderMessage.Default;
+            OrderMessageReceiverValue = global::com.chronoxor.proto.OrderMessage.Default;
             OrderMessageReceiverModel = new OrderMessageFinalModel();
             BalanceMessageSenderModel = new BalanceMessageFinalModel(SendBuffer);
-            BalanceMessageReceiverValue = global::proto.BalanceMessage.Default;
+            BalanceMessageReceiverValue = global::com.chronoxor.proto.BalanceMessage.Default;
             BalanceMessageReceiverModel = new BalanceMessageFinalModel();
             AccountMessageSenderModel = new AccountMessageFinalModel(SendBuffer);
-            AccountMessageReceiverValue = global::proto.AccountMessage.Default;
+            AccountMessageReceiverValue = global::com.chronoxor.proto.AccountMessage.Default;
             AccountMessageReceiverModel = new AccountMessageFinalModel();
         }
         public FinalClient(Buffer sendBuffer, Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, true)
         {
             OrderMessageSenderModel = new OrderMessageFinalModel(SendBuffer);
-            OrderMessageReceiverValue = global::proto.OrderMessage.Default;
+            OrderMessageReceiverValue = global::com.chronoxor.proto.OrderMessage.Default;
             OrderMessageReceiverModel = new OrderMessageFinalModel();
             BalanceMessageSenderModel = new BalanceMessageFinalModel(SendBuffer);
-            BalanceMessageReceiverValue = global::proto.BalanceMessage.Default;
+            BalanceMessageReceiverValue = global::com.chronoxor.proto.BalanceMessage.Default;
             BalanceMessageReceiverModel = new BalanceMessageFinalModel();
             AccountMessageSenderModel = new AccountMessageFinalModel(SendBuffer);
-            AccountMessageReceiverValue = global::proto.AccountMessage.Default;
+            AccountMessageReceiverValue = global::com.chronoxor.proto.AccountMessage.Default;
             AccountMessageReceiverModel = new AccountMessageFinalModel();
         }
 
@@ -5581,22 +5581,22 @@ namespace proto {
         {
             switch (obj)
             {
-                case global::proto.OrderMessage value when value.FBEType == global::proto.OrderMessage.FBETypeConst: return SendListener(listener, value);
-                case global::proto.BalanceMessage value when value.FBEType == global::proto.BalanceMessage.FBETypeConst: return SendListener(listener, value);
-                case global::proto.AccountMessage value when value.FBEType == global::proto.AccountMessage.FBETypeConst: return SendListener(listener, value);
+                case global::com.chronoxor.proto.OrderMessage value when value.FBEType == global::com.chronoxor.proto.OrderMessage.FBETypeConst: return SendListener(listener, value);
+                case global::com.chronoxor.proto.BalanceMessage value when value.FBEType == global::com.chronoxor.proto.BalanceMessage.FBETypeConst: return SendListener(listener, value);
+                case global::com.chronoxor.proto.AccountMessage value when value.FBEType == global::com.chronoxor.proto.AccountMessage.FBETypeConst: return SendListener(listener, value);
                 default: break;
             }
 
             return 0;
         }
 
-        public long Send(global::proto.OrderMessage value) { return SendListener(this, value); }
-        public long SendListener(IFinalClientListener listener, global::proto.OrderMessage value)
+        public long Send(global::com.chronoxor.proto.OrderMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalClientListener listener, global::com.chronoxor.proto.OrderMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = OrderMessageSenderModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.OrderMessage serialization failed!");
-            Debug.Assert(OrderMessageSenderModel.Verify(), "proto.OrderMessage validation failed!");
+            Debug.Assert((serialized > 0), "com.chronoxor.proto.OrderMessage serialization failed!");
+            Debug.Assert(OrderMessageSenderModel.Verify(), "com.chronoxor.proto.OrderMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -5608,13 +5608,13 @@ namespace proto {
             // Send the serialized value
             return SendSerialized(listener, serialized);
         }
-        public long Send(global::proto.BalanceMessage value) { return SendListener(this, value); }
-        public long SendListener(IFinalClientListener listener, global::proto.BalanceMessage value)
+        public long Send(global::com.chronoxor.proto.BalanceMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalClientListener listener, global::com.chronoxor.proto.BalanceMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = BalanceMessageSenderModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.BalanceMessage serialization failed!");
-            Debug.Assert(BalanceMessageSenderModel.Verify(), "proto.BalanceMessage validation failed!");
+            Debug.Assert((serialized > 0), "com.chronoxor.proto.BalanceMessage serialization failed!");
+            Debug.Assert(BalanceMessageSenderModel.Verify(), "com.chronoxor.proto.BalanceMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -5626,13 +5626,13 @@ namespace proto {
             // Send the serialized value
             return SendSerialized(listener, serialized);
         }
-        public long Send(global::proto.AccountMessage value) { return SendListener(this, value); }
-        public long SendListener(IFinalClientListener listener, global::proto.AccountMessage value)
+        public long Send(global::com.chronoxor.proto.AccountMessage value) { return SendListener(this, value); }
+        public long SendListener(IFinalClientListener listener, global::com.chronoxor.proto.AccountMessage value)
         {
             // Serialize the value into the FBE stream
             long serialized = AccountMessageSenderModel.Serialize(value);
-            Debug.Assert((serialized > 0), "proto.AccountMessage serialization failed!");
-            Debug.Assert(AccountMessageSenderModel.Verify(), "proto.AccountMessage validation failed!");
+            Debug.Assert((serialized > 0), "com.chronoxor.proto.AccountMessage serialization failed!");
+            Debug.Assert(AccountMessageSenderModel.Verify(), "com.chronoxor.proto.AccountMessage validation failed!");
 
             // Log the value
             if (Logging)
@@ -5645,21 +5645,21 @@ namespace proto {
             return SendSerialized(listener, serialized);
         }
 
-        public bool OnReceiveResponse(global::proto.OrderMessage response) { ReceivedResponse_OrderMessage?.Invoke(response); return false; }
-        public bool OnReceiveResponse(global::proto.BalanceMessage response) { ReceivedResponse_BalanceMessage?.Invoke(response); return false; }
-        public bool OnReceiveResponse(global::proto.AccountMessage response) { ReceivedResponse_AccountMessage?.Invoke(response); return false; }
+        public bool OnReceiveResponse(global::com.chronoxor.proto.OrderMessage response) { ReceivedResponse_OrderMessage?.Invoke(response); return false; }
+        public bool OnReceiveResponse(global::com.chronoxor.proto.BalanceMessage response) { ReceivedResponse_BalanceMessage?.Invoke(response); return false; }
+        public bool OnReceiveResponse(global::com.chronoxor.proto.AccountMessage response) { ReceivedResponse_AccountMessage?.Invoke(response); return false; }
 
-        public bool OnReceiveReject(global::proto.OrderMessage reject) { ReceivedReject_OrderMessage?.Invoke(reject); return false; }
-        public bool OnReceiveReject(global::proto.BalanceMessage reject) { ReceivedReject_BalanceMessage?.Invoke(reject); return false; }
-        public bool OnReceiveReject(global::proto.AccountMessage reject) { ReceivedReject_AccountMessage?.Invoke(reject); return false; }
+        public bool OnReceiveReject(global::com.chronoxor.proto.OrderMessage reject) { ReceivedReject_OrderMessage?.Invoke(reject); return false; }
+        public bool OnReceiveReject(global::com.chronoxor.proto.BalanceMessage reject) { ReceivedReject_BalanceMessage?.Invoke(reject); return false; }
+        public bool OnReceiveReject(global::com.chronoxor.proto.AccountMessage reject) { ReceivedReject_AccountMessage?.Invoke(reject); return false; }
 
-        public void OnReceiveNotify(global::proto.OrderMessage notify) { ReceivedNotify_OrderMessage?.Invoke(notify); }
-        public void OnReceiveNotify(global::proto.BalanceMessage notify) { ReceivedNotify_BalanceMessage?.Invoke(notify); }
-        public void OnReceiveNotify(global::proto.AccountMessage notify) { ReceivedNotify_AccountMessage?.Invoke(notify); }
+        public void OnReceiveNotify(global::com.chronoxor.proto.OrderMessage notify) { ReceivedNotify_OrderMessage?.Invoke(notify); }
+        public void OnReceiveNotify(global::com.chronoxor.proto.BalanceMessage notify) { ReceivedNotify_BalanceMessage?.Invoke(notify); }
+        public void OnReceiveNotify(global::com.chronoxor.proto.AccountMessage notify) { ReceivedNotify_AccountMessage?.Invoke(notify); }
 
-        public void OnReceive(global::proto.OrderMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
-        public void OnReceive(global::proto.BalanceMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
-        public void OnReceive(global::proto.AccountMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        public void OnReceive(global::com.chronoxor.proto.OrderMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        public void OnReceive(global::com.chronoxor.proto.BalanceMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
+        public void OnReceive(global::com.chronoxor.proto.AccountMessage value) { if (!OnReceiveResponse(value) && !OnReceiveReject(value)) OnReceiveNotify(value); }
 
         // Reset client requests
         internal override void ResetRequests()
@@ -5682,9 +5682,9 @@ namespace proto {
                 {
                     // Deserialize the value from the FBE stream
                     OrderMessageReceiverModel.Attach(buffer, offset);
-                    Debug.Assert(OrderMessageReceiverModel.Verify(), "proto.OrderMessage validation failed!");
+                    Debug.Assert(OrderMessageReceiverModel.Verify(), "com.chronoxor.proto.OrderMessage validation failed!");
                     long deserialized = OrderMessageReceiverModel.Deserialize(out OrderMessageReceiverValue);
-                    Debug.Assert((deserialized > 0), "proto.OrderMessage deserialization failed!");
+                    Debug.Assert((deserialized > 0), "com.chronoxor.proto.OrderMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
@@ -5701,9 +5701,9 @@ namespace proto {
                 {
                     // Deserialize the value from the FBE stream
                     BalanceMessageReceiverModel.Attach(buffer, offset);
-                    Debug.Assert(BalanceMessageReceiverModel.Verify(), "proto.BalanceMessage validation failed!");
+                    Debug.Assert(BalanceMessageReceiverModel.Verify(), "com.chronoxor.proto.BalanceMessage validation failed!");
                     long deserialized = BalanceMessageReceiverModel.Deserialize(out BalanceMessageReceiverValue);
-                    Debug.Assert((deserialized > 0), "proto.BalanceMessage deserialization failed!");
+                    Debug.Assert((deserialized > 0), "com.chronoxor.proto.BalanceMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
@@ -5720,9 +5720,9 @@ namespace proto {
                 {
                     // Deserialize the value from the FBE stream
                     AccountMessageReceiverModel.Attach(buffer, offset);
-                    Debug.Assert(AccountMessageReceiverModel.Verify(), "proto.AccountMessage validation failed!");
+                    Debug.Assert(AccountMessageReceiverModel.Verify(), "com.chronoxor.proto.AccountMessage validation failed!");
                     long deserialized = AccountMessageReceiverModel.Deserialize(out AccountMessageReceiverValue);
-                    Debug.Assert((deserialized > 0), "proto.AccountMessage deserialization failed!");
+                    Debug.Assert((deserialized > 0), "com.chronoxor.proto.AccountMessage deserialization failed!");
 
                     // Log the value
                     if (Logging)
@@ -5741,25 +5741,25 @@ namespace proto {
             return false;
         }
 
-        public delegate void ReceiveResponseHandler_OrderMessage(global::proto.OrderMessage response);
+        public delegate void ReceiveResponseHandler_OrderMessage(global::com.chronoxor.proto.OrderMessage response);
         public event ReceiveResponseHandler_OrderMessage ReceivedResponse_OrderMessage = (response) => {};
-        public delegate void ReceiveResponseHandler_BalanceMessage(global::proto.BalanceMessage response);
+        public delegate void ReceiveResponseHandler_BalanceMessage(global::com.chronoxor.proto.BalanceMessage response);
         public event ReceiveResponseHandler_BalanceMessage ReceivedResponse_BalanceMessage = (response) => {};
-        public delegate void ReceiveResponseHandler_AccountMessage(global::proto.AccountMessage response);
+        public delegate void ReceiveResponseHandler_AccountMessage(global::com.chronoxor.proto.AccountMessage response);
         public event ReceiveResponseHandler_AccountMessage ReceivedResponse_AccountMessage = (response) => {};
-        public delegate void ReceiveRejectHandler_OrderMessage(global::proto.OrderMessage reject);
+        public delegate void ReceiveRejectHandler_OrderMessage(global::com.chronoxor.proto.OrderMessage reject);
         public event ReceiveRejectHandler_OrderMessage ReceivedReject_OrderMessage = (reject) => {};
-        public delegate void ReceiveRejectHandler_BalanceMessage(global::proto.BalanceMessage reject);
+        public delegate void ReceiveRejectHandler_BalanceMessage(global::com.chronoxor.proto.BalanceMessage reject);
         public event ReceiveRejectHandler_BalanceMessage ReceivedReject_BalanceMessage = (reject) => {};
-        public delegate void ReceiveRejectHandler_AccountMessage(global::proto.AccountMessage reject);
+        public delegate void ReceiveRejectHandler_AccountMessage(global::com.chronoxor.proto.AccountMessage reject);
         public event ReceiveRejectHandler_AccountMessage ReceivedReject_AccountMessage = (reject) => {};
-        public delegate void ReceiveNotifyHandler_OrderMessage(global::proto.OrderMessage notify);
+        public delegate void ReceiveNotifyHandler_OrderMessage(global::com.chronoxor.proto.OrderMessage notify);
         public event ReceiveNotifyHandler_OrderMessage ReceivedNotify_OrderMessage = (notify) => {};
-        public delegate void ReceiveNotifyHandler_BalanceMessage(global::proto.BalanceMessage notify);
+        public delegate void ReceiveNotifyHandler_BalanceMessage(global::com.chronoxor.proto.BalanceMessage notify);
         public event ReceiveNotifyHandler_BalanceMessage ReceivedNotify_BalanceMessage = (notify) => {};
-        public delegate void ReceiveNotifyHandler_AccountMessage(global::proto.AccountMessage notify);
+        public delegate void ReceiveNotifyHandler_AccountMessage(global::com.chronoxor.proto.AccountMessage notify);
         public event ReceiveNotifyHandler_AccountMessage ReceivedNotify_AccountMessage = (notify) => {};
     }
 
-} // namespace proto
-} // namespace FBE
+} // namespace com.chronoxor.proto
+} // namespace com.chronoxor.FBE
