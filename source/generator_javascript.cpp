@@ -12175,10 +12175,10 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     WriteLineIndent("this._timestamp = (current <= this._timestamp) ? this._timestamp + 1 : current");
     WriteLine();
     WriteLineIndent("// Register the request");
-    WriteLineIndent("this._requests_by_id[value.id] = [this._timestamp, timeout * 1000000, promise]");
+    WriteLineIndent("this._requests_by_id.set(value.id, [this._timestamp, timeout, promise])");
     WriteLineIndent("if (timeout > 0) {");
     Indent(1);
-    WriteLineIndent("this._requests_by_timestamp[this._timestamp] = value.id");
+    WriteLineIndent("this._requests_by_timestamp.set(this._timestamp, value.id)");
     Indent(-1);
     WriteLineIndent("}");
     Indent(-1);
@@ -12311,7 +12311,7 @@ void GeneratorJavaScript::GenerateClient(const std::shared_ptr<Package>& p, bool
     }
     WriteLineIndent("for (let [, value] of this._requests_by_timestamp) {");
     Indent(1);
-    WriteLineIndent("let item = this._requests_by_id[value]");
+    WriteLineIndent("let item = this._requests_by_id.get(value)");
     WriteLineIndent("let id = value");
     WriteLineIndent("let timestamp = item[0]");
     WriteLineIndent("let timespan = item[1]");
