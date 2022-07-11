@@ -426,6 +426,8 @@
         <member name="F:Utf8Json.Resolvers.StandardResolver.AllowPrivateExcludeNullCamelCase">
             <summary>AllowPrivate:True,  ExcludeNull:True,  NameMutate:CamelCase</summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "F:Utf8Json.Resolvers.StandardResolver.AllowPrivateExcludeNullSnakeCase" -->
+        <member name="F:Utf8Json.Resolvers.StandardResolver.AllowPrivateExcludeNullSnakeCase">
+            <summary>AllowPrivate:True,  ExcludeNull:True,  NameMutate:SnakeCase</summary>
+        </member>
     </members>
 </doc>
