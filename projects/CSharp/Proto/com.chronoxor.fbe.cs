@@ -76,17 +76,20 @@ namespace com.chronoxor.FBE {
             }
 
             long ticks = (now - GregorianEpoch).Ticks;
-            byte[] guid = new byte[16];
+            Span<byte> guid = stackalloc byte[16];
             byte[] timestamp = BitConverter.GetBytes(ticks);
 
             // Copy node
-            Array.Copy(NodeBytes, 0, guid, 10, Math.Min(6, NodeBytes.Length));
+            for (int i = 0; i < Math.Min(6, NodeBytes.Length); i++)
+                guid[10 + i] = NodeBytes[i];
 
             // Copy clock sequence
-            Array.Copy(ClockSequenceBytes, 0, guid, 8, Math.Min(2, ClockSequenceBytes.Length));
+            for (int i = 0; i < Math.Min(2, ClockSequenceBytes.Length); i++)
+                guid[8 + i] = ClockSequenceBytes[i];
 
             // Copy timestamp
-            Array.Copy(timestamp, 0, guid, 0, Math.Min(8, timestamp.Length));
+            for (int i = 0; i < Math.Min(8, timestamp.Length); i++)
+                guid[i] = timestamp[i];
 
             // Set the variant
             guid[8] &= 0x3F;
