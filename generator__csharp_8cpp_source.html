@@ -1097,7 +1097,7 @@ $(function() {
 <div class="line"><a name="l01031"></a><span class="lineno"> 1031</span>&#160;<span class="stringliteral">        }</span></div>
 <div class="line"><a name="l01032"></a><span class="lineno"> 1032</span>&#160;<span class="stringliteral"></span> </div>
 <div class="line"><a name="l01033"></a><span class="lineno"> 1033</span>&#160;<span class="stringliteral">        // Get the bytes value</span></div>
-<div class="line"><a name="l01034"></a><span class="lineno"> 1034</span>&#160;<span class="stringliteral">        public override void Get(out MemoryStream value) { Get(out value, new MemoryStream(0)); }</span></div>
+<div class="line"><a name="l01034"></a><span class="lineno"> 1034</span>&#160;<span class="stringliteral">        public override void Get(out MemoryStream value) { Get(out value, new MemoryStream()); }</span></div>
 <div class="line"><a name="l01035"></a><span class="lineno"> 1035</span>&#160;<span class="stringliteral">        public override void Get(out MemoryStream value, MemoryStream defaults)</span></div>
 <div class="line"><a name="l01036"></a><span class="lineno"> 1036</span>&#160;<span class="stringliteral">        {</span></div>
 <div class="line"><a name="l01037"></a><span class="lineno"> 1037</span>&#160;<span class="stringliteral">            Debug.Assert((defaults != null), &quot;Invalid default bytes value!&quot;);</span></div>
@@ -1145,7 +1145,7 @@ $(function() {
 <div class="line"><a name="l01079"></a><span class="lineno"> 1079</span>&#160;<span class="stringliteral"></span> </div>
 <div class="line"><a name="l01080"></a><span class="lineno"> 1080</span>&#160;<span class="stringliteral">            Write(FBEOffset, fbeBytesOffset);</span></div>
 <div class="line"><a name="l01081"></a><span class="lineno"> 1081</span>&#160;<span class="stringliteral">            Write(fbeBytesOffset, fbeBytesSize);</span></div>
-<div class="line"><a name="l01082"></a><span class="lineno"> 1082</span>&#160;<span class="stringliteral">            Write(fbeBytesOffset + 4, value.GetBuffer());</span></div>
+<div class="line"><a name="l01082"></a><span class="lineno"> 1082</span>&#160;<span class="stringliteral">            Write(fbeBytesOffset + 4, value.GetBuffer(), 0, fbeBytesSize);</span></div>
 <div class="line"><a name="l01083"></a><span class="lineno"> 1083</span>&#160;<span class="stringliteral">        }</span></div>
 <div class="line"><a name="l01084"></a><span class="lineno"> 1084</span>&#160;<span class="stringliteral">    }</span></div>
 <div class="line"><a name="l01085"></a><span class="lineno"> 1085</span>&#160;<span class="stringliteral">)CODE&quot;;</span></div>
@@ -2396,7 +2396,7 @@ $(function() {
 <div class="line"><a name="l02331"></a><span class="lineno"> 2331</span>&#160;<span class="stringliteral">        // Get the bytes value</span></div>
 <div class="line"><a name="l02332"></a><span class="lineno"> 2332</span>&#160;<span class="stringliteral">        public override long Get(out MemoryStream value)</span></div>
 <div class="line"><a name="l02333"></a><span class="lineno"> 2333</span>&#160;<span class="stringliteral">        {</span></div>
-<div class="line"><a name="l02334"></a><span class="lineno"> 2334</span>&#160;<span class="stringliteral">            value = new MemoryStream(0);</span></div>
+<div class="line"><a name="l02334"></a><span class="lineno"> 2334</span>&#160;<span class="stringliteral">            value = new MemoryStream();</span></div>
 <div class="line"><a name="l02335"></a><span class="lineno"> 2335</span>&#160;<span class="stringliteral"></span> </div>
 <div class="line"><a name="l02336"></a><span class="lineno"> 2336</span>&#160;<span class="stringliteral">            Debug.Assert(((_buffer.Offset + FBEOffset + 4) &lt;= _buffer.Size), &quot;Model is broken!&quot;);</span></div>
 <div class="line"><a name="l02337"></a><span class="lineno"> 2337</span>&#160;<span class="stringliteral">            if ((_buffer.Offset + FBEOffset + 4) &gt; _buffer.Size)</span></div>
@@ -2429,7 +2429,7 @@ $(function() {
 <div class="line"><a name="l02364"></a><span class="lineno"> 2364</span>&#160;<span class="stringliteral">                return 4;</span></div>
 <div class="line"><a name="l02365"></a><span class="lineno"> 2365</span>&#160;<span class="stringliteral"></span> </div>
 <div class="line"><a name="l02366"></a><span class="lineno"> 2366</span>&#160;<span class="stringliteral">            Write(FBEOffset, fbeBytesSize);</span></div>
-<div class="line"><a name="l02367"></a><span class="lineno"> 2367</span>&#160;<span class="stringliteral">            Write(FBEOffset + 4, value.GetBuffer());</span></div>
+<div class="line"><a name="l02367"></a><span class="lineno"> 2367</span>&#160;<span class="stringliteral">            Write(FBEOffset + 4, value.GetBuffer(), 0, fbeBytesSize);</span></div>
 <div class="line"><a name="l02368"></a><span class="lineno"> 2368</span>&#160;<span class="stringliteral">            return 4 + fbeBytesSize;</span></div>
 <div class="line"><a name="l02369"></a><span class="lineno"> 2369</span>&#160;<span class="stringliteral">        }</span></div>
 <div class="line"><a name="l02370"></a><span class="lineno"> 2370</span>&#160;<span class="stringliteral">    }</span></div>
@@ -8711,7 +8711,7 @@ $(function() {
 <div class="line"><a name="l08647"></a><span class="lineno"> 8647</span>&#160;    <span class="keywordflow">if</span> (type == <span class="stringliteral">&quot;bool&quot;</span>)</div>
 <div class="line"><a name="l08648"></a><span class="lineno"> 8648</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;false&quot;</span>;</div>
 <div class="line"><a name="l08649"></a><span class="lineno"> 8649</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (type == <span class="stringliteral">&quot;bytes&quot;</span>)</div>
-<div class="line"><a name="l08650"></a><span class="lineno"> 8650</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;new MemoryStream(0)&quot;</span>;</div>
+<div class="line"><a name="l08650"></a><span class="lineno"> 8650</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;new MemoryStream()&quot;</span>;</div>
 <div class="line"><a name="l08651"></a><span class="lineno"> 8651</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((type == <span class="stringliteral">&quot;char&quot;</span>) || (type == <span class="stringliteral">&quot;wchar&quot;</span>))</div>
 <div class="line"><a name="l08652"></a><span class="lineno"> 8652</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;&#39;\\0&#39;&quot;</span>;</div>
 <div class="line"><a name="l08653"></a><span class="lineno"> 8653</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((type == <span class="stringliteral">&quot;byte&quot;</span>) || (type == <span class="stringliteral">&quot;int8&quot;</span>) || (type == <span class="stringliteral">&quot;uint8&quot;</span>) || (type == <span class="stringliteral">&quot;int16&quot;</span>) || (type == <span class="stringliteral">&quot;uint16&quot;</span>) || (type == <span class="stringliteral">&quot;int32&quot;</span>) || (type == <span class="stringliteral">&quot;uint32&quot;</span>) || (type == <span class="stringliteral">&quot;int64&quot;</span>) || (type == <span class="stringliteral">&quot;uint64&quot;</span>))</div>
