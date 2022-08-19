@@ -1427,7 +1427,7 @@ namespace com.chronoxor.FBE {
         }
 
         // Get the bytes value
-        public override void Get(out MemoryStream value) { Get(out value, new MemoryStream(0)); }
+        public override void Get(out MemoryStream value) { Get(out value, new MemoryStream()); }
         public override void Get(out MemoryStream value, MemoryStream defaults)
         {
             Debug.Assert((defaults != null), "Invalid default bytes value!");
@@ -1475,7 +1475,7 @@ namespace com.chronoxor.FBE {
 
             Write(FBEOffset, fbeBytesOffset);
             Write(fbeBytesOffset, fbeBytesSize);
-            Write(fbeBytesOffset + 4, value.GetBuffer());
+            Write(fbeBytesOffset + 4, value.GetBuffer(), 0, fbeBytesSize);
         }
     }
 
@@ -6309,7 +6309,7 @@ namespace com.chronoxor.FBE {
         // Get the bytes value
         public override long Get(out MemoryStream value)
         {
-            value = new MemoryStream(0);
+            value = new MemoryStream();
 
             Debug.Assert(((_buffer.Offset + FBEOffset + 4) <= _buffer.Size), "Model is broken!");
             if ((_buffer.Offset + FBEOffset + 4) > _buffer.Size)
@@ -6342,7 +6342,7 @@ namespace com.chronoxor.FBE {
                 return 4;
 
             Write(FBEOffset, fbeBytesSize);
-            Write(FBEOffset + 4, value.GetBuffer());
+            Write(FBEOffset + 4, value.GetBuffer(), 0, fbeBytesSize);
             return 4 + fbeBytesSize;
         }
     }

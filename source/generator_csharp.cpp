@@ -1031,7 +1031,7 @@ void GeneratorCSharp::GenerateFBEFieldModelBytes()
         }
 
         // Get the bytes value
-        public override void Get(out MemoryStream value) { Get(out value, new MemoryStream(0)); }
+        public override void Get(out MemoryStream value) { Get(out value, new MemoryStream()); }
         public override void Get(out MemoryStream value, MemoryStream defaults)
         {
             Debug.Assert((defaults != null), "Invalid default bytes value!");
@@ -1079,7 +1079,7 @@ void GeneratorCSharp::GenerateFBEFieldModelBytes()
 
             Write(FBEOffset, fbeBytesOffset);
             Write(fbeBytesOffset, fbeBytesSize);
-            Write(fbeBytesOffset + 4, value.GetBuffer());
+            Write(fbeBytesOffset + 4, value.GetBuffer(), 0, fbeBytesSize);
         }
     }
 )CODE";
@@ -2331,7 +2331,7 @@ void GeneratorCSharp::GenerateFBEFinalModelBytes()
         // Get the bytes value
         public override long Get(out MemoryStream value)
         {
-            value = new MemoryStream(0);
+            value = new MemoryStream();
 
             Debug.Assert(((_buffer.Offset + FBEOffset + 4) <= _buffer.Size), "Model is broken!");
             if ((_buffer.Offset + FBEOffset + 4) > _buffer.Size)
@@ -2364,7 +2364,7 @@ void GeneratorCSharp::GenerateFBEFinalModelBytes()
                 return 4;
 
             Write(FBEOffset, fbeBytesSize);
-            Write(FBEOffset + 4, value.GetBuffer());
+            Write(FBEOffset + 4, value.GetBuffer(), 0, fbeBytesSize);
             return 4 + fbeBytesSize;
         }
     }
@@ -8647,7 +8647,7 @@ std::string GeneratorCSharp::ConvertDefault(const std::string& domain, const std
     if (type == "bool")
         return "false";
     else if (type == "bytes")
-        return "new MemoryStream(0)";
+        return "new MemoryStream()";
     else if ((type == "char") || (type == "wchar"))
         return "'\\0'";
     else if ((type == "byte") || (type == "int8") || (type == "uint8") || (type == "int16") || (type == "uint16") || (type == "int32") || (type == "uint32") || (type == "int64") || (type == "uint64"))

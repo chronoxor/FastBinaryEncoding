@@ -8228,7 +8228,7 @@ namespace com.chronoxor.test {
 
         public static StructBytes Default => new StructBytes
         {
-            f1 = new MemoryStream(0)
+            f1 = new MemoryStream()
             , f2 = null
             , f3 = null
         };
@@ -8482,7 +8482,7 @@ namespace com.chronoxor.test.FBE {
             if ((fbeCurrentSize + f1.FBESize) <= fbeStructSize)
                 f1.Get(out fbeValue.f1);
             else
-                fbeValue.f1 = new MemoryStream(0);
+                fbeValue.f1 = new MemoryStream();
             fbeCurrentSize += f1.FBESize;
 
             if ((fbeCurrentSize + f2.FBESize) <= fbeStructSize)
