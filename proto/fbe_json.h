@@ -874,8 +874,8 @@ struct ValueReader<TJson, std::map<TKey, TValue>>
         // Collect map items
         for (auto it = json.MemberBegin(); it != json.MemberEnd(); ++it)
         {
-            TKey key;
-            TValue value;
+            TKey key = TKey();
+            TValue value = TValue();
             if (!FBE::JSON::from_json_key(it->name, key))
                 return false;
             if (!FBE::JSON::from_json(it->value, value))
@@ -900,8 +900,8 @@ struct ValueReader<TJson, std::unordered_map<TKey, TValue>>
         // Collect hash items
         for (auto it = json.MemberBegin(); it != json.MemberEnd(); ++it)
         {
-            TKey key;
-            TValue value;
+            TKey key = TKey();
+            TValue value = TValue();
             if (!FBE::JSON::from_json_key(it->name, key))
                 return false;
             if (!FBE::JSON::from_json(it->value, value))

@@ -620,8 +620,8 @@ inline void FieldModelMap<TKey, TValue>::get(std::map<TKey, TValue>& values) con
     auto fbe_model = (*this)[0];
     for (size_t i = fbe_map_size; i-- > 0;)
     {
-        TKey key;
-        TValue value;
+        TKey key = TKey();
+        TValue value = TValue();
         fbe_model.first.get(key);
         fbe_model.second.get(value);
         values.emplace(key, value);
@@ -642,8 +642,8 @@ inline void FieldModelMap<TKey, TValue>::get(std::unordered_map<TKey, TValue>& v
     auto fbe_model = (*this)[0];
     for (size_t i = fbe_map_size; i-- > 0;)
     {
-        TKey key;
-        TValue value;
+        TKey key = TKey();
+        TValue value = TValue();
         fbe_model.first.get(key);
         fbe_model.second.get(value);
         values.emplace(key, value);
