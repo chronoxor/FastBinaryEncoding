@@ -3199,8 +3199,8 @@ $(function() {
 <div class="line"><a name="l03183"></a><span class="lineno"> 3183</span>&#160;<span class="stringliteral">    auto fbe_model = (*this)[0];</span></div>
 <div class="line"><a name="l03184"></a><span class="lineno"> 3184</span>&#160;<span class="stringliteral">    for (size_t i = fbe_map_size; i-- &gt; 0;)</span></div>
 <div class="line"><a name="l03185"></a><span class="lineno"> 3185</span>&#160;<span class="stringliteral">    {</span></div>
-<div class="line"><a name="l03186"></a><span class="lineno"> 3186</span>&#160;<span class="stringliteral">        TKey key;</span></div>
-<div class="line"><a name="l03187"></a><span class="lineno"> 3187</span>&#160;<span class="stringliteral">        TValue value;</span></div>
+<div class="line"><a name="l03186"></a><span class="lineno"> 3186</span>&#160;<span class="stringliteral">        TKey key = TKey();</span></div>
+<div class="line"><a name="l03187"></a><span class="lineno"> 3187</span>&#160;<span class="stringliteral">        TValue value = TValue();</span></div>
 <div class="line"><a name="l03188"></a><span class="lineno"> 3188</span>&#160;<span class="stringliteral">        fbe_model.first.get(key);</span></div>
 <div class="line"><a name="l03189"></a><span class="lineno"> 3189</span>&#160;<span class="stringliteral">        fbe_model.second.get(value);</span></div>
 <div class="line"><a name="l03190"></a><span class="lineno"> 3190</span>&#160;<span class="stringliteral">        values.emplace(key, value);</span></div>
@@ -3221,8 +3221,8 @@ $(function() {
 <div class="line"><a name="l03205"></a><span class="lineno"> 3205</span>&#160;<span class="stringliteral">    auto fbe_model = (*this)[0];</span></div>
 <div class="line"><a name="l03206"></a><span class="lineno"> 3206</span>&#160;<span class="stringliteral">    for (size_t i = fbe_map_size; i-- &gt; 0;)</span></div>
 <div class="line"><a name="l03207"></a><span class="lineno"> 3207</span>&#160;<span class="stringliteral">    {</span></div>
-<div class="line"><a name="l03208"></a><span class="lineno"> 3208</span>&#160;<span class="stringliteral">        TKey key;</span></div>
-<div class="line"><a name="l03209"></a><span class="lineno"> 3209</span>&#160;<span class="stringliteral">        TValue value;</span></div>
+<div class="line"><a name="l03208"></a><span class="lineno"> 3208</span>&#160;<span class="stringliteral">        TKey key = TKey();</span></div>
+<div class="line"><a name="l03209"></a><span class="lineno"> 3209</span>&#160;<span class="stringliteral">        TValue value = TValue();</span></div>
 <div class="line"><a name="l03210"></a><span class="lineno"> 3210</span>&#160;<span class="stringliteral">        fbe_model.first.get(key);</span></div>
 <div class="line"><a name="l03211"></a><span class="lineno"> 3211</span>&#160;<span class="stringliteral">        fbe_model.second.get(value);</span></div>
 <div class="line"><a name="l03212"></a><span class="lineno"> 3212</span>&#160;<span class="stringliteral">        values.emplace(key, value);</span></div>
@@ -4836,8 +4836,8 @@ $(function() {
 <div class="line"><a name="l04821"></a><span class="lineno"> 4821</span>&#160;<span class="stringliteral">    FinalModel&lt;TValue&gt; fbe_model_value(_buffer, fbe_offset() + 4);</span></div>
 <div class="line"><a name="l04822"></a><span class="lineno"> 4822</span>&#160;<span class="stringliteral">    for (size_t i = fbe_map_size; i-- &gt; 0;)</span></div>
 <div class="line"><a name="l04823"></a><span class="lineno"> 4823</span>&#160;<span class="stringliteral">    {</span></div>
-<div class="line"><a name="l04824"></a><span class="lineno"> 4824</span>&#160;<span class="stringliteral">        TKey key;</span></div>
-<div class="line"><a name="l04825"></a><span class="lineno"> 4825</span>&#160;<span class="stringliteral">        TValue value;</span></div>
+<div class="line"><a name="l04824"></a><span class="lineno"> 4824</span>&#160;<span class="stringliteral">        TKey key = TKey();</span></div>
+<div class="line"><a name="l04825"></a><span class="lineno"> 4825</span>&#160;<span class="stringliteral">        TValue value = TValue();</span></div>
 <div class="line"><a name="l04826"></a><span class="lineno"> 4826</span>&#160;<span class="stringliteral">        size_t offset_key = fbe_model_key.get(key);</span></div>
 <div class="line"><a name="l04827"></a><span class="lineno"> 4827</span>&#160;<span class="stringliteral">        fbe_model_key.fbe_shift(offset_key);</span></div>
 <div class="line"><a name="l04828"></a><span class="lineno"> 4828</span>&#160;<span class="stringliteral">        fbe_model_value.fbe_shift(offset_key);</span></div>
@@ -4868,8 +4868,8 @@ $(function() {
 <div class="line"><a name="l04853"></a><span class="lineno"> 4853</span>&#160;<span class="stringliteral">    FinalModel&lt;TValue&gt; fbe_model_value(_buffer, fbe_offset() + 4);</span></div>
 <div class="line"><a name="l04854"></a><span class="lineno"> 4854</span>&#160;<span class="stringliteral">    for (size_t i = fbe_map_size; i-- &gt; 0;)</span></div>
 <div class="line"><a name="l04855"></a><span class="lineno"> 4855</span>&#160;<span class="stringliteral">    {</span></div>
-<div class="line"><a name="l04856"></a><span class="lineno"> 4856</span>&#160;<span class="stringliteral">        TKey key;</span></div>
-<div class="line"><a name="l04857"></a><span class="lineno"> 4857</span>&#160;<span class="stringliteral">        TValue value;</span></div>
+<div class="line"><a name="l04856"></a><span class="lineno"> 4856</span>&#160;<span class="stringliteral">        TKey key = TKey();</span></div>
+<div class="line"><a name="l04857"></a><span class="lineno"> 4857</span>&#160;<span class="stringliteral">        TValue value = TValue();</span></div>
 <div class="line"><a name="l04858"></a><span class="lineno"> 4858</span>&#160;<span class="stringliteral">        size_t offset_key = fbe_model_key.get(key);</span></div>
 <div class="line"><a name="l04859"></a><span class="lineno"> 4859</span>&#160;<span class="stringliteral">        fbe_model_key.fbe_shift(offset_key);</span></div>
 <div class="line"><a name="l04860"></a><span class="lineno"> 4860</span>&#160;<span class="stringliteral">        fbe_model_value.fbe_shift(offset_key);</span></div>
@@ -6199,8 +6199,8 @@ $(function() {
 <div class="line"><a name="l06184"></a><span class="lineno"> 6184</span>&#160;<span class="stringliteral">        // Collect map items</span></div>
 <div class="line"><a name="l06185"></a><span class="lineno"> 6185</span>&#160;<span class="stringliteral">        for (auto it = json.MemberBegin(); it != json.MemberEnd(); ++it)</span></div>
 <div class="line"><a name="l06186"></a><span class="lineno"> 6186</span>&#160;<span class="stringliteral">        {</span></div>
-<div class="line"><a name="l06187"></a><span class="lineno"> 6187</span>&#160;<span class="stringliteral">            TKey key;</span></div>
-<div class="line"><a name="l06188"></a><span class="lineno"> 6188</span>&#160;<span class="stringliteral">            TValue value;</span></div>
+<div class="line"><a name="l06187"></a><span class="lineno"> 6187</span>&#160;<span class="stringliteral">            TKey key = TKey();</span></div>
+<div class="line"><a name="l06188"></a><span class="lineno"> 6188</span>&#160;<span class="stringliteral">            TValue value = TValue();</span></div>
 <div class="line"><a name="l06189"></a><span class="lineno"> 6189</span>&#160;<span class="stringliteral">            if (!FBE::JSON::from_json_key(it-&gt;name, key))</span></div>
 <div class="line"><a name="l06190"></a><span class="lineno"> 6190</span>&#160;<span class="stringliteral">                return false;</span></div>
 <div class="line"><a name="l06191"></a><span class="lineno"> 6191</span>&#160;<span class="stringliteral">            if (!FBE::JSON::from_json(it-&gt;value, value))</span></div>
@@ -6225,8 +6225,8 @@ $(function() {
 <div class="line"><a name="l06210"></a><span class="lineno"> 6210</span>&#160;<span class="stringliteral">        // Collect hash items</span></div>
 <div class="line"><a name="l06211"></a><span class="lineno"> 6211</span>&#160;<span class="stringliteral">        for (auto it = json.MemberBegin(); it != json.MemberEnd(); ++it)</span></div>
 <div class="line"><a name="l06212"></a><span class="lineno"> 6212</span>&#160;<span class="stringliteral">        {</span></div>
-<div class="line"><a name="l06213"></a><span class="lineno"> 6213</span>&#160;<span class="stringliteral">            TKey key;</span></div>
-<div class="line"><a name="l06214"></a><span class="lineno"> 6214</span>&#160;<span class="stringliteral">            TValue value;</span></div>
+<div class="line"><a name="l06213"></a><span class="lineno"> 6213</span>&#160;<span class="stringliteral">            TKey key = TKey();</span></div>
+<div class="line"><a name="l06214"></a><span class="lineno"> 6214</span>&#160;<span class="stringliteral">            TValue value = TValue();</span></div>
 <div class="line"><a name="l06215"></a><span class="lineno"> 6215</span>&#160;<span class="stringliteral">            if (!FBE::JSON::from_json_key(it-&gt;name, key))</span></div>
 <div class="line"><a name="l06216"></a><span class="lineno"> 6216</span>&#160;<span class="stringliteral">                return false;</span></div>
 <div class="line"><a name="l06217"></a><span class="lineno"> 6217</span>&#160;<span class="stringliteral">            if (!FBE::JSON::from_json(it-&gt;value, value))</span></div>
