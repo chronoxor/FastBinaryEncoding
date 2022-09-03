@@ -3183,8 +3183,8 @@ inline void FieldModelMap<TKey, TValue>::get(std::map<TKey, TValue>& values) con
     auto fbe_model = (*this)[0];
     for (size_t i = fbe_map_size; i-- > 0;)
     {
-        TKey key;
-        TValue value;
+        TKey key = TKey();
+        TValue value = TValue();
         fbe_model.first.get(key);
         fbe_model.second.get(value);
         values.emplace(key, value);
@@ -3205,8 +3205,8 @@ inline void FieldModelMap<TKey, TValue>::get(std::unordered_map<TKey, TValue>& v
     auto fbe_model = (*this)[0];
     for (size_t i = fbe_map_size; i-- > 0;)
     {
-        TKey key;
-        TValue value;
+        TKey key = TKey();
+        TValue value = TValue();
         fbe_model.first.get(key);
         fbe_model.second.get(value);
         values.emplace(key, value);
@@ -4821,8 +4821,8 @@ inline size_t FinalModelMap<TKey, TValue>::get(std::map<TKey, TValue>& values) c
     FinalModel<TValue> fbe_model_value(_buffer, fbe_offset() + 4);
     for (size_t i = fbe_map_size; i-- > 0;)
     {
-        TKey key;
-        TValue value;
+        TKey key = TKey();
+        TValue value = TValue();
         size_t offset_key = fbe_model_key.get(key);
         fbe_model_key.fbe_shift(offset_key);
         fbe_model_value.fbe_shift(offset_key);
@@ -4853,8 +4853,8 @@ inline size_t FinalModelMap<TKey, TValue>::get(std::unordered_map<TKey, TValue>&
     FinalModel<TValue> fbe_model_value(_buffer, fbe_offset() + 4);
     for (size_t i = fbe_map_size; i-- > 0;)
     {
-        TKey key;
-        TValue value;
+        TKey key = TKey();
+        TValue value = TValue();
         size_t offset_key = fbe_model_key.get(key);
         fbe_model_key.fbe_shift(offset_key);
         fbe_model_value.fbe_shift(offset_key);
@@ -6184,8 +6184,8 @@ struct ValueReader<TJson, std::map<TKey, TValue>>
         // Collect map items
         for (auto it = json.MemberBegin(); it != json.MemberEnd(); ++it)
         {
-            TKey key;
-            TValue value;
+            TKey key = TKey();
+            TValue value = TValue();
             if (!FBE::JSON::from_json_key(it->name, key))
                 return false;
             if (!FBE::JSON::from_json(it->value, value))
@@ -6210,8 +6210,8 @@ struct ValueReader<TJson, std::unordered_map<TKey, TValue>>
         // Collect hash items
         for (auto it = json.MemberBegin(); it != json.MemberEnd(); ++it)
         {
-            TKey key;
-            TValue value;
+            TKey key = TKey();
+            TValue value = TValue();
             if (!FBE::JSON::from_json_key(it->name, key))
                 return false;
             if (!FBE::JSON::from_json(it->value, value))
