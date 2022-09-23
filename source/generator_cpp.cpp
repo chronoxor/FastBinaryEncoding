@@ -6277,7 +6277,7 @@ struct ChildNodeReader
             return false;
 
         // Deserialize the child object
-        return FBE::JSON::from_json(member->value.GetObj(), value);
+        return FBE::JSON::from_json(member->value.GetObject(), value);
     }
 };
 
@@ -9999,6 +9999,7 @@ void GeneratorCpp::GenerateClient_Source(const std::shared_ptr<Package>& p, bool
 {
     std::string client = (final ? "FinalClient" : "Client");
     std::string sender = (final ? "FinalSender" : "Sender");
+    std::string receiver = (final ? "FinalReceiver" : "Receiver");
 
     // Collect responses & rejects collections
     std::set<std::string> responses;
@@ -10045,7 +10046,7 @@ void GeneratorCpp::GenerateClient_Source(const std::shared_ptr<Package>& p, bool
                     WriteLineIndent("std::future<void> future = promise.get_future();");
                     WriteLine();
                     WriteLineIndent("// Send the request message");
-                    WriteLineIndent("size_t serialized = Sender::send(value);");
+                    WriteLineIndent("size_t serialized = " + sender + "::send(value);");
                     WriteLineIndent("if (serialized > 0)");
                     Indent(1);
                     WriteLineIndent("promise.set_value();");
@@ -10072,7 +10073,7 @@ void GeneratorCpp::GenerateClient_Source(const std::shared_ptr<Package>& p, bool
                     WriteLineIndent("uint64_t current = utc();");
                     WriteLine();
                     WriteLineIndent("// Send the request message");
-                    WriteLineIndent("size_t serialized = Sender::send(value);");
+                    WriteLineIndent("size_t serialized = " + sender + "::send(value);");
                     WriteLineIndent("if (serialized > 0)");
                     WriteLineIndent("{");
                     Indent(1);
@@ -10252,8 +10253,8 @@ void GeneratorCpp::GenerateClient_Source(const std::shared_ptr<Package>& p, bool
     }
     else
     {
-        WriteLineIndent("Sender::reset();");
-        WriteLineIndent("Receiver::reset();");
+        WriteLineIndent(sender + "::reset();");
+        WriteLineIndent(receiver + "::reset();");
     }
     for (const auto& response : responses)
     {
