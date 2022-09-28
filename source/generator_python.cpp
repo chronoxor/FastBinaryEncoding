@@ -3283,7 +3283,9 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
         for (const auto& field : s->body->fields)
         {
             Write(", " + *field->name + "=");
-            if (field->value)
+            if (field->value && ((*field->value == "utc") || (*field->value == "uuid1") || (*field->value == "uuid2")))
+                Write("None");
+            else if (field->value)
                 Write(ConvertConstant(*field->type, *field->value, field->optional));
             else if (field->array || field->vector || field->list || field->set || field->map || field->hash)
                 Write("None");
@@ -3306,11 +3308,14 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
     {
         for (const auto& field : s->body->fields)
         {
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash || (!field->value && !field->optional && !IsPrimitiveType(*field->type) && (*field->type != "string") && (*field->type != "timestamp")))
+            if (field->array || field->vector || field->list || field->set || field->map || field->hash || (field->value && ((*field->value == "utc") || (*field->value == "uuid1") || (*field->value == "uuid2"))) || (!field->value && !field->optional && !IsPrimitiveType(*field->type) && (*field->type != "string") && (*field->type != "timestamp")))
             {
                 WriteLineIndent("if " + *field->name + " is None:");
                 Indent(1);
-                WriteLineIndent(*field->name + " = " + ConvertDefault(*field));
+                if (field->value)
+                    WriteLineIndent(ConvertConstant(*field->type, *field->value, field->optional));
+                else
+                    WriteLineIndent(*field->name + " = " + ConvertDefault(*field));
                 Indent(-1);
             }
         }
