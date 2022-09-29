@@ -3313,7 +3313,7 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("if " + *field->name + " is None:");
                 Indent(1);
                 if (field->value)
-                    WriteLineIndent(ConvertConstant(*field->type, *field->value, field->optional));
+                    WriteLineIndent(*field->name + " = " + ConvertConstant(*field->type, *field->value, field->optional));
                 else
                     WriteLineIndent(*field->name + " = " + ConvertDefault(*field));
                 Indent(-1);
