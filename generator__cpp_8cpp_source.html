@@ -732,7 +732,7 @@ $(function() {
 <div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;<span class="stringliteral"></span> </div>
 <div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;<span class="stringliteral">} // namespace FBE</span></div>
 <div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;<span class="stringliteral">#if defined(FMT_VERSION)</span></div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;<span class="stringliteral">#if defined(FMT_VERSION) &amp;&amp; (FMT_VERSION &gt;= 90000)</span></div>
 <div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="stringliteral">template &lt;&gt;</span></div>
 <div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;<span class="stringliteral">struct fmt::formatter&lt;FBE::decimal_t&gt; : formatter&lt;std::string_view&gt;</span></div>
 <div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="stringliteral">{</span></div>
@@ -974,7 +974,7 @@ $(function() {
 <div class="line"><a name="l00957"></a><span class="lineno">  957</span>&#160;<span class="stringliteral"></span> </div>
 <div class="line"><a name="l00958"></a><span class="lineno">  958</span>&#160;<span class="stringliteral">} // namespace FBE</span></div>
 <div class="line"><a name="l00959"></a><span class="lineno">  959</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00960"></a><span class="lineno">  960</span>&#160;<span class="stringliteral">#if defined(FMT_VERSION)</span></div>
+<div class="line"><a name="l00960"></a><span class="lineno">  960</span>&#160;<span class="stringliteral">#if defined(FMT_VERSION) &amp;&amp; (FMT_VERSION &gt;= 90000)</span></div>
 <div class="line"><a name="l00961"></a><span class="lineno">  961</span>&#160;<span class="stringliteral">template &lt;&gt;</span></div>
 <div class="line"><a name="l00962"></a><span class="lineno">  962</span>&#160;<span class="stringliteral">struct fmt::formatter&lt;FBE::uuid_t&gt; : formatter&lt;std::string_view&gt;</span></div>
 <div class="line"><a name="l00963"></a><span class="lineno">  963</span>&#160;<span class="stringliteral">{</span></div>
@@ -7256,7 +7256,7 @@ $(function() {
 <div class="line"><a name="l07241"></a><span class="lineno"> 7241</span>&#160; </div>
 <div class="line"><a name="l07242"></a><span class="lineno"> 7242</span>&#160;    <span class="comment">// Generate enum formatter declaration</span></div>
 <div class="line"><a name="l07243"></a><span class="lineno"> 7243</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#a9cddebdbffb75de7aca0c6a54cad4729">WriteLine</a>();</div>
-<div class="line"><a name="l07244"></a><span class="lineno"> 7244</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#ab3b100edfa26f498801b910bbd4b49bd">WriteLineIndent</a>(<span class="stringliteral">&quot;#if defined(FMT_VERSION)&quot;</span>);</div>
+<div class="line"><a name="l07244"></a><span class="lineno"> 7244</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#ab3b100edfa26f498801b910bbd4b49bd">WriteLineIndent</a>(<span class="stringliteral">&quot;#if defined(FMT_VERSION) &amp;&amp; (FMT_VERSION &gt;= 90000)&quot;</span>);</div>
 <div class="line"><a name="l07245"></a><span class="lineno"> 7245</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#ab3b100edfa26f498801b910bbd4b49bd">WriteLineIndent</a>(<span class="stringliteral">&quot;} template &lt;&gt; struct fmt::formatter&lt;&quot;</span> + *p-&gt;name + <span class="stringliteral">&quot;::&quot;</span> + *e-&gt;name + <span class="stringliteral">&quot;&gt; : ostream_formatter {}; namespace &quot;</span> + *p-&gt;name + <span class="stringliteral">&quot; {&quot;</span>);</div>
 <div class="line"><a name="l07246"></a><span class="lineno"> 7246</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#ab3b100edfa26f498801b910bbd4b49bd">WriteLineIndent</a>(<span class="stringliteral">&quot;#endif&quot;</span>);</div>
 <div class="line"><a name="l07247"></a><span class="lineno"> 7247</span>&#160; </div>
@@ -7449,7 +7449,7 @@ $(function() {
 <div class="line"><a name="l07434"></a><span class="lineno"> 7434</span>&#160; </div>
 <div class="line"><a name="l07435"></a><span class="lineno"> 7435</span>&#160;    <span class="comment">// Generate flags formatter declaration</span></div>
 <div class="line"><a name="l07436"></a><span class="lineno"> 7436</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#a9cddebdbffb75de7aca0c6a54cad4729">WriteLine</a>();</div>
-<div class="line"><a name="l07437"></a><span class="lineno"> 7437</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#ab3b100edfa26f498801b910bbd4b49bd">WriteLineIndent</a>(<span class="stringliteral">&quot;#if defined(FMT_VERSION)&quot;</span>);</div>
+<div class="line"><a name="l07437"></a><span class="lineno"> 7437</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#ab3b100edfa26f498801b910bbd4b49bd">WriteLineIndent</a>(<span class="stringliteral">&quot;#if defined(FMT_VERSION) &amp;&amp; (FMT_VERSION &gt;= 90000)&quot;</span>);</div>
 <div class="line"><a name="l07438"></a><span class="lineno"> 7438</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#ab3b100edfa26f498801b910bbd4b49bd">WriteLineIndent</a>(<span class="stringliteral">&quot;} template &lt;&gt; struct fmt::formatter&lt;&quot;</span> + *p-&gt;name + <span class="stringliteral">&quot;::&quot;</span> + *f-&gt;name + <span class="stringliteral">&quot;&gt; : ostream_formatter {}; namespace &quot;</span> + *p-&gt;name + <span class="stringliteral">&quot; {&quot;</span>);</div>
 <div class="line"><a name="l07439"></a><span class="lineno"> 7439</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#ab3b100edfa26f498801b910bbd4b49bd">WriteLineIndent</a>(<span class="stringliteral">&quot;#endif&quot;</span>);</div>
 <div class="line"><a name="l07440"></a><span class="lineno"> 7440</span>&#160; </div>
@@ -8194,7 +8194,7 @@ $(function() {
 <div class="line"><a name="l08179"></a><span class="lineno"> 8179</span>&#160;{</div>
 <div class="line"><a name="l08180"></a><span class="lineno"> 8180</span>&#160;    <span class="comment">// Generate struct formatter</span></div>
 <div class="line"><a name="l08181"></a><span class="lineno"> 8181</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#a9cddebdbffb75de7aca0c6a54cad4729">WriteLine</a>();</div>
-<div class="line"><a name="l08182"></a><span class="lineno"> 8182</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#ab3b100edfa26f498801b910bbd4b49bd">WriteLineIndent</a>(<span class="stringliteral">&quot;#if defined(FMT_VERSION)&quot;</span>);</div>
+<div class="line"><a name="l08182"></a><span class="lineno"> 8182</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#ab3b100edfa26f498801b910bbd4b49bd">WriteLineIndent</a>(<span class="stringliteral">&quot;#if defined(FMT_VERSION) &amp;&amp; (FMT_VERSION &gt;= 90000)&quot;</span>);</div>
 <div class="line"><a name="l08183"></a><span class="lineno"> 8183</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#ab3b100edfa26f498801b910bbd4b49bd">WriteLineIndent</a>(<span class="stringliteral">&quot;template &lt;&gt; struct fmt::formatter&lt;&quot;</span> + *p-&gt;name + <span class="stringliteral">&quot;::&quot;</span> + *s-&gt;name + <span class="stringliteral">&quot;&gt; : ostream_formatter {};&quot;</span>);</div>
 <div class="line"><a name="l08184"></a><span class="lineno"> 8184</span>&#160;    <a class="code" href="class_f_b_e_1_1_generator.html#ab3b100edfa26f498801b910bbd4b49bd">WriteLineIndent</a>(<span class="stringliteral">&quot;#endif&quot;</span>);</div>
 <div class="line"><a name="l08185"></a><span class="lineno"> 8185</span>&#160;}</div>
