@@ -682,7 +682,7 @@ private:
 
 } // namespace FBE
 
-#if defined(FMT_VERSION)
+#if defined(FMT_VERSION) && (FMT_VERSION >= 90000)
 template <>
 struct fmt::formatter<FBE::decimal_t> : formatter<std::string_view>
 {
@@ -957,7 +957,7 @@ private:
 
 } // namespace FBE
 
-#if defined(FMT_VERSION)
+#if defined(FMT_VERSION) && (FMT_VERSION >= 90000)
 template <>
 struct fmt::formatter<FBE::uuid_t> : formatter<std::string_view>
 {
@@ -7241,7 +7241,7 @@ void GeneratorCpp::GenerateEnum(const std::shared_ptr<Package>& p, const std::sh
 
     // Generate enum formatter declaration
     WriteLine();
-    WriteLineIndent("#if defined(FMT_VERSION)");
+    WriteLineIndent("#if defined(FMT_VERSION) && (FMT_VERSION >= 90000)");
     WriteLineIndent("} template <> struct fmt::formatter<" + *p->name + "::" + *e->name + "> : ostream_formatter {}; namespace " + *p->name + " {");
     WriteLineIndent("#endif");
 
@@ -7434,7 +7434,7 @@ void GeneratorCpp::GenerateFlags(const std::shared_ptr<Package>& p, const std::s
 
     // Generate flags formatter declaration
     WriteLine();
-    WriteLineIndent("#if defined(FMT_VERSION)");
+    WriteLineIndent("#if defined(FMT_VERSION) && (FMT_VERSION >= 90000)");
     WriteLineIndent("} template <> struct fmt::formatter<" + *p->name + "::" + *f->name + "> : ostream_formatter {}; namespace " + *p->name + " {");
     WriteLineIndent("#endif");
 
@@ -8179,7 +8179,7 @@ void GeneratorCpp::GenerateStructFormatter(const std::shared_ptr<Package>& p, co
 {
     // Generate struct formatter
     WriteLine();
-    WriteLineIndent("#if defined(FMT_VERSION)");
+    WriteLineIndent("#if defined(FMT_VERSION) && (FMT_VERSION >= 90000)");
     WriteLineIndent("template <> struct fmt::formatter<" + *p->name + "::" + *s->name + "> : ostream_formatter {};");
     WriteLineIndent("#endif");
 }

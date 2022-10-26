@@ -299,8 +299,11 @@ There are several issues and dependencies that should be mentioned:
 * C++ has no native support for decimal type. Currently decimal type is
   emulated with a double type. FBE does not use [GMPLib](https://gmplib.org)
   because of heavy dependency in generated source code;
-* JSON serialization is implemented using [RapidJSON](http://rapidjson.org) library.
-  Therefore its headers should be available (header only library);
+* C++ formatting is supported with [{fmt}](https://fmt.dev) library of version
+  started from 9.0.0. Required include headers are `<fmt/format.h>` and
+  `<fmt/ostream.h>`;
+* JSON serialization is implemented using [RapidJSON](https://rapidjson.org)
+  library;
 
 ### C#
 * JSON serialization is implemented using [Json.NET](https://www.newtonsoft.com/json) library.
