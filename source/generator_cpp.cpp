@@ -9833,9 +9833,9 @@ void GeneratorCpp::GenerateClient_Header(const std::shared_ptr<Package>& p, bool
                 CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
 
                 if (response_name.empty())
-                    WriteLineIndent("std::future<void> request(const " + request_name + "& value, size_t timeout = 0);");
+                    WriteLineIndent("std::future<void> request(const " + request_name + "& value, uint64_t timeout = 0);");
                 else
-                    WriteLineIndent("std::future<" + response_name + "> request(const " + request_name + "& value, size_t timeout = 0);");
+                    WriteLineIndent("std::future<" + response_name + "> request(const " + request_name + "& value, uint64_t timeout = 0);");
             }
         }
     }
@@ -10039,7 +10039,7 @@ void GeneratorCpp::GenerateClient_Source(const std::shared_ptr<Package>& p, bool
                 WriteLine();
                 if (response_name.empty())
                 {
-                    WriteLineIndent("std::future<void> " + client + "::request(const " + request_name + "& value, size_t timeout)");
+                    WriteLineIndent("std::future<void> " + client + "::request(const " + request_name + "& value, uint64_t timeout)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("std::promise<void> promise;");
@@ -10062,7 +10062,7 @@ void GeneratorCpp::GenerateClient_Source(const std::shared_ptr<Package>& p, bool
                 }
                 else
                 {
-                    WriteLineIndent("std::future<" + response_name + "> " + client + "::request(const " + request_name + "& value, size_t timeout)");
+                    WriteLineIndent("std::future<" + response_name + "> " + client + "::request(const " + request_name + "& value, uint64_t timeout)");
                     WriteLineIndent("{");
                     Indent(1);
                     WriteLineIndent("std::scoped_lock locker(this->_lock);");
