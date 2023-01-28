@@ -7435,7 +7435,7 @@ void GeneratorCSharp::GenerateClient(const std::string& domain, const std::share
                     WriteLineIndent("public Task RequestListener(" + listener + " listener, " + request_type + " value, TimeSpan timeout)");
                     WriteLineIndent("{");
                     Indent(1);
-                    WriteLineIndent("TaskCompletionSource source = new TaskCompletionSource();");
+                    WriteLineIndent("var source = new TaskCompletionSource();");
                     WriteLineIndent("Task task = source.Task;");
                     WriteLine();
                     WriteLineIndent("// Send the request message");
@@ -7464,7 +7464,7 @@ void GeneratorCSharp::GenerateClient(const std::string& domain, const std::share
                     WriteLineIndent("lock (Lock)");
                     WriteLineIndent("{");
                     Indent(1);
-                    WriteLineIndent("TaskCompletionSource<" + response_type + "> source = new TaskCompletionSource<" + response_type + ">();");
+                    WriteLineIndent("var source = new TaskCompletionSource<" + response_type + ">();");
                     WriteLineIndent("Task<" + response_type + "> task = source.Task;");
                     WriteLine();
                     WriteLineIndent("DateTime current = DateTime.UtcNow;");
