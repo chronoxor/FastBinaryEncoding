@@ -192,11 +192,9 @@ void GeneratorCpp::GenerateImports()
 #if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
 #include <time.h>
 #include <uuid/uuid.h>
-#undef HOST_NOT_FOUND
 #elif defined(_WIN32) || defined(_WIN64)
 #undef DELETE
 #undef ERROR
-#undef HOST_NOT_FOUND
 #undef Yield
 #undef min
 #undef max
@@ -226,7 +224,6 @@ void GeneratorCpp::GenerateImportsSource()
 #include <rpc.h>
 #undef DELETE
 #undef ERROR
-#undef HOST_NOT_FOUND
 #undef Yield
 #undef min
 #undef max
