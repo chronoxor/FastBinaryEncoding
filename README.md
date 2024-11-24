@@ -666,7 +666,7 @@ Example below demonstrates the usage of '[key]' attribute:
 struct MyKeyStruct
 {
     [key] int32 uid;
-    [key] stirng login;
+    [key] string login;
     string name;
     string address;
 }
