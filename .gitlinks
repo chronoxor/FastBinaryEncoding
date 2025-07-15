@@ -1,6 +1,6 @@
 # Modules
 Catch2 modules/Catch2 https://github.com/catchorg/Catch2.git devel
-cpp-optparse modules/cpp-optparse https://github.com/weisslj/cpp-optparse.git main
+cpp-optparse modules/cpp-optparse https://github.com/chronoxor/cpp-optparse.git main
 CppBenchmark modules/CppBenchmark https://github.com/chronoxor/CppBenchmark.git master
 CppCommon modules/CppCommon https://github.com/chronoxor/CppCommon.git master
 rapidjson modules/rapidjson https://github.com/miloyip/rapidjson.git master
