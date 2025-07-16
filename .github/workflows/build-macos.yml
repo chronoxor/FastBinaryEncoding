@@ -19,7 +19,7 @@ jobs:
       - name: "Setup flex, bison"
         run: |
           brew install flex bison
-          echo 'export PATH="/opt/homebrew/opt/flex/bin:/opt/homebrew/opt/bison/bin:$PATH"' >> /Users/runner/.bash_profile
+          echo "/opt/homebrew/opt/flex/bin:/opt/homebrew/opt/bison/bin" >> "$GITHUB_PATH"
 
       - name: "Setup cmake"
         run: cmake --version
