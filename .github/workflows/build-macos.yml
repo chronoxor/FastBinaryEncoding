@@ -19,7 +19,6 @@ jobs:
       - name: "Setup flex, bison"
         run: |
           brew install flex bison
-          echo 'export PATH="/opt/homebrew/opt/bison/bin:$PATH"' >> ~/.zshrc
 
       - name: "Setup cmake"
         run: cmake --version
@@ -30,6 +29,8 @@ jobs:
           gil update
 
       - name: "Build"
+        env: 
+          PATH: /opt/homebrew/opt/bison/bin:/opt/homebrew/opt/bison/bin:$PATH
         run: |
           cd build
           ./unix.sh
