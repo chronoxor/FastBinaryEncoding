@@ -30,7 +30,7 @@ jobs:
 
       - name: "Build"
         env: 
-          PATH: /opt/homebrew/opt/bison/bin:/opt/homebrew/opt/bison/bin:${{ env.PATH }}
+          BISON_EXECUTABLE: /opt/homebrew/opt/bison/bin/bison
         run: |
           cd build
           ./unix.sh
