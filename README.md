@@ -666,7 +666,7 @@ Example below demonstrates the usage of '[key]' attribute:
 struct MyKeyStruct
 {
     [key] int32 uid;
-    [key] stirng login;
+    [key] string login;
     string name;
     string address;
 }
@@ -678,7 +678,7 @@ generated:
 struct MyKeyStruct
 {
     int32_t uid;
-    ::sample::stirng login;
+    ::sample::string login;
     std::string name;
     std::string address;
 
