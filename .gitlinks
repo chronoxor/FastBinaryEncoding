@@ -1,10 +1,10 @@
 # Modules
 Catch2 modules/Catch2 https://github.com/catchorg/Catch2.git devel
 cpp-optparse modules/cpp-optparse https://github.com/chronoxor/cpp-optparse.git main
-CppBenchmark modules/CppBenchmark https://github.com/chronoxor/CppBenchmark.git master
-CppCommon modules/CppCommon https://github.com/chronoxor/CppCommon.git master
+CppBenchmark modules/CppBenchmark https://github.com/chronoxor/CppBenchmark.git main
+CppCommon modules/CppCommon https://github.com/chronoxor/CppCommon.git main
 rapidjson modules/rapidjson https://github.com/miloyip/rapidjson.git master
 
 # Scripts
-build build https://github.com/chronoxor/CppBuildScripts.git master
-cmake cmake https://github.com/chronoxor/CppCMakeScripts.git master
+build build https://github.com/chronoxor/CppBuildScripts.git main
+cmake cmake https://github.com/chronoxor/CppCMakeScripts.git main
