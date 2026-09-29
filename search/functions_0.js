@@ -7,5 +7,5 @@ var searchData=
   ['addreject_4',['AddReject',['../struct_f_b_e_1_1_struct_rejects.html#a5172761722db77ec4f16aedd9629e4ca',1,'FBE::StructRejects']]],
   ['addstatement_5',['AddStatement',['../struct_f_b_e_1_1_statements.html#aa267edbe1b0b702237fe2b7762c38e9e',1,'FBE::Statements']]],
   ['addstruct_6',['AddStruct',['../struct_f_b_e_1_1_statements.html#a9c65826ba2117acd94cd70e09052e9d0',1,'FBE::Statements']]],
-  ['addvalue_7',['addvalue',['../struct_f_b_e_1_1_enum_body.html#a6e5dfd73a4a7cb509c44a085a391f087',1,'FBE::EnumBody::AddValue()'],['../struct_f_b_e_1_1_flags_body.html#a2fa3b0930898923930f1366eecbd5544',1,'FBE::FlagsBody::AddValue()']]]
+  ['addvalue_7',['AddValue',['../struct_f_b_e_1_1_enum_body.html#a6e5dfd73a4a7cb509c44a085a391f087',1,'FBE::EnumBody::AddValue()'],['../struct_f_b_e_1_1_flags_body.html#a2fa3b0930898923930f1366eecbd5544',1,'FBE::FlagsBody::AddValue()']]]
 ];
