@@ -118,6 +118,8 @@ sudo apt-get install -y binutils-dev uuid-dev flex bison
 ### MacOS: install required packages
 ```shell
 brew install flex bison
+# Homebrew bison is not available from PATH, the system one (2.3) is too old
+export PATH="$(brew --prefix bison)/bin:$PATH"
 ```
 
 ### Windows: install required packages

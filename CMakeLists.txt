@@ -28,8 +28,8 @@ include(SetPlatformFeatures)
 include(SystemInformation)
 
 # External packages
-find_package(BISON)
-find_package(FLEX)
+find_package(BISON 2.5 REQUIRED)
+find_package(FLEX 2.5 REQUIRED)
 
 # Modules
 add_subdirectory("modules")
