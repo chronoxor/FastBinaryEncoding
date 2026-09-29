@@ -1,8 +1,11 @@
 # Build
 build
 
+# Claude
+.claude/settings.local.json
+.claude/worktrees
+
 # CMake
-build
 cmake
 cmake-build-*
 
@@ -15,6 +18,10 @@ modules/*
 !modules/CMakeLists.txt
 !modules/*.cmake
 
+# Security
+.env
+
 # Temporary
 .idea
+.vscode
 temp

@@ -21,6 +21,7 @@ endif()
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 # Compiler features
+include(CodeCoverage)
 include(SetCompilerFeatures)
 include(SetCompilerWarnings)
 include(SetPlatformFeatures)
@@ -157,7 +158,7 @@ if(NOT FBEC_MODULE)
   list(APPEND INSTALL_TARGETS_PDB fbe-tests)
 
   # CTest
-  enable_testing()
+  include(CTest)
   add_test(fbe-tests fbe-tests --durations yes --order lex)
 
   # Install
