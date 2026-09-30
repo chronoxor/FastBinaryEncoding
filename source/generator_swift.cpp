@@ -216,7 +216,7 @@ public struct UUIDGenerator {
     }
 }
 
-extension UUID: Comparable {
+extension UUID: @retroactive Comparable {
     public static func < (lhs: UUID, rhs: UUID) -> Bool {
         return lhs.hashValue < rhs.hashValue
     }
@@ -795,7 +795,7 @@ void GeneratorSwift::GenerateFBEFieldModel(const std::string& domain, const std:
 
     std::string code = R"CODE(
 // Fast Binary Encoding base field model
-public protocol FieldModel: class {
+public protocol FieldModel: AnyObject {
     var _buffer: Buffer { get set }
     var _offset: Int { get set }
 
@@ -2268,7 +2268,7 @@ void GeneratorSwift::GenerateFBEFinalModel(const std::string& domain, const std:
 
     std::string code = R"CODE(
 // Fast Binary Encoding base final model
-public protocol FinalModel: class {
+public protocol FinalModel: AnyObject {
     var _buffer: Buffer { get set }
     var _offset: Int { get set }
 
@@ -3496,7 +3496,7 @@ void GeneratorSwift::GenerateFBESender(const std::string& domain, const std::str
 
     std::string code = R"CODE(
 // Fast Binary Encoding base sender
-public protocol SenderProtocol: class {
+public protocol SenderProtocol: AnyObject {
 
     // Get the bytes buffer
     var buffer: Buffer { get set }
@@ -3533,7 +3533,7 @@ public extension SenderProtocol {
 
         // Send the value
         let sent = try listener.onSend(buffer: buffer.data, offset: 0, size: buffer.size)
-        try _ = buffer.remove(offset: 0, size: sent)
+        try buffer.remove(offset: 0, size: sent)
         return sent
     }
 }
@@ -3566,7 +3566,7 @@ void GeneratorSwift::GenerateFBEReceiver(const std::string& domain, const std::s
 
     std::string code = R"CODE(
 // Fast Binary Encoding base receiver
-public protocol ReceiverProtocol: class {
+public protocol ReceiverProtocol: AnyObject {
 
     // Get the bytes buffer
     var buffer: Buffer { get set }
@@ -3802,6 +3802,7 @@ public extension ReceiverProtocol {
                     fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset))
                     fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset + 4))
                 }
+                _ = fbeStructSize // part of wire format; kept for readability
 
                 // Handle the message
                 _ = onReceive(type: fbeStructType, buffer: messageBuffer.data, offset: messageOffset, size: messageSize)
@@ -3902,7 +3903,7 @@ void GeneratorSwift::GenerateFBEClient(const std::string& domain, const std::str
 
     std::string code = R"CODE(
 // Fast Binary Encoding base client
-public protocol ClientProtocol: class {
+public protocol ClientProtocol: AnyObject {
 
     // Get the send bytes buffer
     var sendBuffer: Buffer { get set }
@@ -4163,6 +4164,7 @@ public extension ClientProtocol {
                     fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset))
                     fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset + 4))
                 }
+                _ = fbeStructSize // part of wire format; kept for readability
 
                 // Handle the message
                 _ = onReceive(type: fbeStructType, buffer: messageBuffer.data, offset: messageOffset, size: messageSize)

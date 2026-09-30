@@ -8,7 +8,7 @@
 import Foundation
 
 // Fast Binary Encoding base final model
-public protocol FinalModel: class {
+public protocol FinalModel: AnyObject {
     var _buffer: Buffer { get set }
     var _offset: Int { get set }
 
