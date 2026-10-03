@@ -95,7 +95,7 @@ public:
     void reset() noexcept { _buffer->reset(); }
 
     // Receive data
-    void receive(const void* data, size_t size);
+    bool receive(const void* data, size_t size);
 
 protected:
     // Receive message handler
