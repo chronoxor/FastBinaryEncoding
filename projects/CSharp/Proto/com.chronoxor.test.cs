@@ -798,7 +798,7 @@ namespace com.chronoxor.test {
 
         public FlagsSimple RemoveFlags(FlagsSimple flags)
         {
-            Value &= (byte)~flags.Value;
+            Value &= (int)~flags.Value;
             return this;
         }
 
@@ -839,17 +839,17 @@ namespace com.chronoxor.test {
 
         public static FlagsSimple operator&(FlagsSimple flags1, FlagsSimple flags2)
         {
-            return new FlagsSimple((byte)(flags1.Value & flags2.Value));
+            return new FlagsSimple((int)(flags1.Value & flags2.Value));
         }
 
         public static FlagsSimple operator|(FlagsSimple flags1, FlagsSimple flags2)
         {
-            return new FlagsSimple((byte)(flags1.Value | flags2.Value));
+            return new FlagsSimple((int)(flags1.Value | flags2.Value));
         }
 
         public static FlagsSimple operator^(FlagsSimple flags1, FlagsSimple flags2)
         {
-            return new FlagsSimple((byte)(flags1.Value ^ flags2.Value));
+            return new FlagsSimple((int)(flags1.Value ^ flags2.Value));
         }
 
         public static FlagsSimple Default => new FlagsSimple();
@@ -1090,7 +1090,7 @@ namespace com.chronoxor.test {
 
         public FlagsTyped RemoveFlags(FlagsTyped flags)
         {
-            Value &= (byte)~flags.Value;
+            Value &= (ulong)~flags.Value;
             return this;
         }
 
@@ -1131,17 +1131,17 @@ namespace com.chronoxor.test {
 
         public static FlagsTyped operator&(FlagsTyped flags1, FlagsTyped flags2)
         {
-            return new FlagsTyped((byte)(flags1.Value & flags2.Value));
+            return new FlagsTyped((ulong)(flags1.Value & flags2.Value));
         }
 
         public static FlagsTyped operator|(FlagsTyped flags1, FlagsTyped flags2)
         {
-            return new FlagsTyped((byte)(flags1.Value | flags2.Value));
+            return new FlagsTyped((ulong)(flags1.Value | flags2.Value));
         }
 
         public static FlagsTyped operator^(FlagsTyped flags1, FlagsTyped flags2)
         {
-            return new FlagsTyped((byte)(flags1.Value ^ flags2.Value));
+            return new FlagsTyped((ulong)(flags1.Value ^ flags2.Value));
         }
 
         public static FlagsTyped Default => new FlagsTyped();
@@ -1410,7 +1410,7 @@ namespace com.chronoxor.test {
 
         public FlagsEmpty RemoveFlags(FlagsEmpty flags)
         {
-            Value &= (byte)~flags.Value;
+            Value &= (int)~flags.Value;
             return this;
         }
 
@@ -1451,17 +1451,17 @@ namespace com.chronoxor.test {
 
         public static FlagsEmpty operator&(FlagsEmpty flags1, FlagsEmpty flags2)
         {
-            return new FlagsEmpty((byte)(flags1.Value & flags2.Value));
+            return new FlagsEmpty((int)(flags1.Value & flags2.Value));
         }
 
         public static FlagsEmpty operator|(FlagsEmpty flags1, FlagsEmpty flags2)
         {
-            return new FlagsEmpty((byte)(flags1.Value | flags2.Value));
+            return new FlagsEmpty((int)(flags1.Value | flags2.Value));
         }
 
         public static FlagsEmpty operator^(FlagsEmpty flags1, FlagsEmpty flags2)
         {
-            return new FlagsEmpty((byte)(flags1.Value ^ flags2.Value));
+            return new FlagsEmpty((int)(flags1.Value ^ flags2.Value));
         }
 
         public static FlagsEmpty Default => new FlagsEmpty();

@@ -4909,7 +4909,7 @@ void GeneratorCSharp::GenerateFlags(const std::string& domain, const std::shared
 
         public _FLAGS_NAME_ RemoveFlags(_FLAGS_NAME_ flags)
         {
-            Value &= (byte)~flags.Value;
+            Value &= (_FLAGS_TYPE_)~flags.Value;
             return this;
         }
 
@@ -4950,17 +4950,17 @@ void GeneratorCSharp::GenerateFlags(const std::string& domain, const std::shared
 
         public static _FLAGS_NAME_ operator&(_FLAGS_NAME_ flags1, _FLAGS_NAME_ flags2)
         {
-            return new _FLAGS_NAME_((byte)(flags1.Value & flags2.Value));
+            return new _FLAGS_NAME_((_FLAGS_TYPE_)(flags1.Value & flags2.Value));
         }
 
         public static _FLAGS_NAME_ operator|(_FLAGS_NAME_ flags1, _FLAGS_NAME_ flags2)
         {
-            return new _FLAGS_NAME_((byte)(flags1.Value | flags2.Value));
+            return new _FLAGS_NAME_((_FLAGS_TYPE_)(flags1.Value | flags2.Value));
         }
 
         public static _FLAGS_NAME_ operator^(_FLAGS_NAME_ flags1, _FLAGS_NAME_ flags2)
         {
-            return new _FLAGS_NAME_((byte)(flags1.Value ^ flags2.Value));
+            return new _FLAGS_NAME_((_FLAGS_TYPE_)(flags1.Value ^ flags2.Value));
         }
 
         public static _FLAGS_NAME_ Default => new _FLAGS_NAME_();
