@@ -40,7 +40,7 @@ public struct UUIDGenerator {
     }
 }
 
-extension UUID: Comparable {
+extension UUID: @retroactive Comparable {
     public static func < (lhs: UUID, rhs: UUID) -> Bool {
         return lhs.hashValue < rhs.hashValue
     }
