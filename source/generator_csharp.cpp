@@ -6696,13 +6696,21 @@ void GeneratorCSharp::GenerateSender(const std::string& domain, const std::share
         WriteLine();
     }
 
-    // Generate sender models accessors
+    // Generate sender models accessors, each model created on the first send of its message:
+    // creating all of them in the constructor makes the JIT compile every model of the protocol
+    // before the first message goes out, whichever messages the process will actually use
     if (p->body)
     {
         WriteLineIndent("// Sender models accessors");
         for (const auto& s : p->body->structs)
+        {
             if (s->message)
-                WriteLineIndent("public readonly " + *s->name + model + " " + *s->name + "Model;");
+            {
+                std::string field = "_" + ConvertToLower(*s->name) + "Model";
+                WriteLineIndent("private " + *s->name + model + " " + field + ";");
+                WriteLineIndent("public " + *s->name + model + " " + *s->name + "Model => " + field + " ?? (" + field + " = new " + *s->name + model + "(Buffer));");
+            }
+        }
         WriteLine();
     }
 
@@ -6715,12 +6723,6 @@ void GeneratorCSharp::GenerateSender(const std::string& domain, const std::share
         for (const auto& import : p->import->imports)
             WriteLineIndent(*import + "Sender = new " + *import + ".FBE." + sender + "(Buffer);");
     }
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-            if (s->message)
-                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "(Buffer);");
-    }
     Indent(-1);
     WriteLineIndent("}");
     WriteLineIndent("public " + sender + "(" + domain + "FBE.Buffer buffer) : base(buffer, " + std::string(final ? "true" : "false") + ")");
@@ -6730,12 +6732,6 @@ void GeneratorCSharp::GenerateSender(const std::string& domain, const std::share
     {
         for (const auto& import : p->import->imports)
             WriteLineIndent(*import + "Sender = new " + *import + ".FBE." + sender + "(Buffer);");
-    }
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-            if (s->message)
-                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "(Buffer);");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -6912,8 +6908,14 @@ void GeneratorCSharp::GenerateReceiver(const std::string& domain, const std::sha
         WriteLine();
         WriteLineIndent("// Receiver models accessors");
         for (const auto& s : p->body->structs)
+        {
             if (s->message)
-                WriteLineIndent("private readonly " + *s->name + model + " " + *s->name + "Model;");
+            {
+                std::string field = "_" + ConvertToLower(*s->name) + "Model";
+                WriteLineIndent("private " + *s->name + model + " " + field + ";");
+                WriteLineIndent("private " + *s->name + model + " " + *s->name + "Model => " + field + " ?? (" + field + " = new " + *s->name + model + "());");
+            }
+        }
         WriteLine();
     }
 
@@ -6926,18 +6928,6 @@ void GeneratorCSharp::GenerateReceiver(const std::string& domain, const std::sha
         for (const auto& import : p->import->imports)
             WriteLineIndent(*import + "Receiver = new " + *import + ".FBE." + receiver + "(Buffer);");
     }
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-        {
-            if (s->message)
-            {
-                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
-                WriteLineIndent(*s->name + "Value = " + struct_name + ".Default;");
-                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
-            }
-        }
-    }
     Indent(-1);
     WriteLineIndent("}");
     WriteLineIndent("public " + receiver + "(" + domain + "FBE.Buffer buffer) : base(buffer, " + std::string(final ? "true" : "false") + ")");
@@ -6947,18 +6937,6 @@ void GeneratorCSharp::GenerateReceiver(const std::string& domain, const std::sha
     {
         for (const auto& import : p->import->imports)
             WriteLineIndent(*import + "Receiver = new " + *import + ".FBE." + receiver + "(Buffer);");
-    }
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-        {
-            if (s->message)
-            {
-                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
-                WriteLineIndent(*s->name + "Value = " + struct_name + ".Default;");
-                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
-            }
-        }
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -7109,8 +7087,14 @@ void GeneratorCSharp::GenerateProxy(const std::string& domain, const std::shared
     {
         WriteLineIndent("// Proxy models accessors");
         for (const auto& s : p->body->structs)
+        {
             if (s->message)
-                WriteLineIndent("private readonly " + *s->name + model + " " + *s->name + "Model;");
+            {
+                std::string field = "_" + ConvertToLower(*s->name) + "Model";
+                WriteLineIndent("private " + *s->name + model + " " + field + ";");
+                WriteLineIndent("private " + *s->name + model + " " + *s->name + "Model => " + field + " ?? (" + field + " = new " + *s->name + model + "());");
+            }
+        }
         WriteLine();
     }
 
@@ -7123,12 +7107,6 @@ void GeneratorCSharp::GenerateProxy(const std::string& domain, const std::shared
         for (const auto& import : p->import->imports)
             WriteLineIndent(*import + "Proxy = new " + *import + ".FBE." + proxy + "(Buffer);");
     }
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-            if (s->message)
-                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
-    }
     Indent(-1);
     WriteLineIndent("}");
     WriteLineIndent("public " + proxy + "(" + domain + "FBE.Buffer buffer) : base(buffer, " + std::string(final ? "true" : "false") + ")");
@@ -7138,12 +7116,6 @@ void GeneratorCSharp::GenerateProxy(const std::string& domain, const std::shared
     {
         for (const auto& import : p->import->imports)
             WriteLineIndent(*import + "Proxy = new " + *import + ".FBE." + proxy + "(Buffer);");
-    }
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-            if (s->message)
-                WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -7280,8 +7252,14 @@ void GeneratorCSharp::GenerateClient(const std::string& domain, const std::share
     {
         WriteLineIndent("// Client sender models accessors");
         for (const auto& s : p->body->structs)
+        {
             if (s->message)
-                WriteLineIndent("public readonly " + *s->name + model + " " + *s->name + "SenderModel;");
+            {
+                std::string field = "_" + ConvertToLower(*s->name) + "SenderModel";
+                WriteLineIndent("private " + *s->name + model + " " + field + ";");
+                WriteLineIndent("public " + *s->name + model + " " + *s->name + "SenderModel => " + field + " ?? (" + field + " = new " + *s->name + model + "(SendBuffer));");
+            }
+        }
         WriteLine();
     }
 
@@ -7300,8 +7278,14 @@ void GeneratorCSharp::GenerateClient(const std::string& domain, const std::share
         WriteLine();
         WriteLineIndent("// Client receiver models accessors");
         for (const auto& s : p->body->structs)
+        {
             if (s->message)
-                WriteLineIndent("private readonly " + *s->name + model + " " + *s->name + "ReceiverModel;");
+            {
+                std::string field = "_" + ConvertToLower(*s->name) + "ReceiverModel";
+                WriteLineIndent("private " + *s->name + model + " " + field + ";");
+                WriteLineIndent("private " + *s->name + model + " " + *s->name + "ReceiverModel => " + field + " ?? (" + field + " = new " + *s->name + model + "());");
+            }
+        }
         WriteLine();
     }
 
@@ -7351,19 +7335,6 @@ void GeneratorCSharp::GenerateClient(const std::string& domain, const std::share
     if (p->import)
         for (const auto& import : p->import->imports)
             WriteLineIndent(*import + "Client = new " + *import + ".FBE." + client + "(SendBuffer, ReceiveBuffer);");
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-        {
-            if (s->message)
-            {
-                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
-                WriteLineIndent(*s->name + "SenderModel = new " + *s->name + model + "(SendBuffer);");
-                WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + ".Default;");
-                WriteLineIndent(*s->name + "ReceiverModel = new " + *s->name + model + "();");
-            }
-        }
-    }
     if (!responses.empty())
     {
         for (const auto& response : responses)
@@ -7384,19 +7355,6 @@ void GeneratorCSharp::GenerateClient(const std::string& domain, const std::share
     if (p->import)
         for (const auto& import : p->import->imports)
             WriteLineIndent(*import + "Client = new " + *import + ".FBE." + client + "(SendBuffer, ReceiveBuffer);");
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-        {
-            if (s->message)
-            {
-                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
-                WriteLineIndent(*s->name + "SenderModel = new " + *s->name + model + "(SendBuffer);");
-                WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + ".Default;");
-                WriteLineIndent(*s->name + "ReceiverModel = new " + *s->name + model + "();");
-            }
-        }
-    }
     if (!responses.empty())
     {
         for (const auto& response : responses)
@@ -8080,6 +8038,13 @@ bool GeneratorCSharp::IsKnownType(const std::string& type)
 bool GeneratorCSharp::IsReferenceType(const std::string& type)
 {
     return ((type == "bytes") || (type == "string"));
+}
+
+std::string GeneratorCSharp::ConvertToLower(const std::string& type)
+{
+    std::string result = CppCommon::StringUtils::ToTrim(type);
+    result[0] = std::tolower(result[0]);
+    return result;
 }
 
 std::string GeneratorCSharp::ConvertEnumRead(const std::string& type)

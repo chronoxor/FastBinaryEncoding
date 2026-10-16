@@ -89,6 +89,7 @@ private:
     bool IsKnownType(const std::string& type);
     bool IsReferenceType(const std::string& type);
 
+    std::string ConvertToLower(const std::string& type);
     std::string ConvertEnumRead(const std::string& type);
     std::string ConvertEnumSize(const std::string& type);
     std::string ConvertEnumType(const std::string& type);
