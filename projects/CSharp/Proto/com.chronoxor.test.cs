@@ -2421,7 +2421,19 @@ namespace com.chronoxor.test.FBE {
         }
 
         // Get the struct value
-        public override void Get(out StructSimple fbeValue) { Get(out fbeValue, StructSimple.Default); }
+        public override void Get(out StructSimple fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = StructSimple.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out StructSimple fbeValue, StructSimple defaults)
         {
             long fbeBegin = GetBegin();
@@ -2441,7 +2453,7 @@ namespace com.chronoxor.test.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = StructSimple.Default;
+            fbeValue = default(StructSimple);
 
             if ((fbeCurrentSize + id.FBESize) <= fbeStructSize)
                 id.Get(out fbeValue.id);
@@ -3357,7 +3369,7 @@ namespace com.chronoxor.test.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = StructSimple.Default;
+            fbeValue = default(StructSimple);
 
             id.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = id.Get(out fbeValue.id);
@@ -5078,7 +5090,19 @@ namespace com.chronoxor.test.FBE {
         }
 
         // Get the struct value
-        public override void Get(out StructOptional fbeValue) { Get(out fbeValue, StructOptional.Default); }
+        public override void Get(out StructOptional fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = StructOptional.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out StructOptional fbeValue, StructOptional defaults)
         {
             long fbeBegin = GetBegin();
@@ -5098,10 +5122,12 @@ namespace com.chronoxor.test.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = StructOptional.Default;
+            fbeValue = default(StructOptional);
 
             if ((fbeCurrentSize + parent.FBEBody - 4 - 4) <= fbeStructSize)
                 parent.GetFields(out fbeValue.parent, fbeStructSize);
+            else
+                fbeValue.parent = StructSimple.Default;
             fbeCurrentSize += parent.FBEBody - 4 - 4;
 
             if ((fbeCurrentSize + f100.FBESize) <= fbeStructSize)
@@ -6364,7 +6390,7 @@ namespace com.chronoxor.test.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = StructOptional.Default;
+            fbeValue = default(StructOptional);
 
             parent.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = parent.GetFields(out fbeValue.parent);
@@ -7549,7 +7575,19 @@ namespace com.chronoxor.test.FBE {
         }
 
         // Get the struct value
-        public override void Get(out StructNested fbeValue) { Get(out fbeValue, StructNested.Default); }
+        public override void Get(out StructNested fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = StructNested.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out StructNested fbeValue, StructNested defaults)
         {
             long fbeBegin = GetBegin();
@@ -7569,10 +7607,12 @@ namespace com.chronoxor.test.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = StructNested.Default;
+            fbeValue = default(StructNested);
 
             if ((fbeCurrentSize + parent.FBEBody - 4 - 4) <= fbeStructSize)
                 parent.GetFields(out fbeValue.parent, fbeStructSize);
+            else
+                fbeValue.parent = StructOptional.Default;
             fbeCurrentSize += parent.FBEBody - 4 - 4;
 
             if ((fbeCurrentSize + f1000.FBESize) <= fbeStructSize)
@@ -7971,7 +8011,7 @@ namespace com.chronoxor.test.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = StructNested.Default;
+            fbeValue = default(StructNested);
 
             parent.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = parent.GetFields(out fbeValue.parent);
@@ -8457,7 +8497,19 @@ namespace com.chronoxor.test.FBE {
         }
 
         // Get the struct value
-        public override void Get(out StructBytes fbeValue) { Get(out fbeValue, StructBytes.Default); }
+        public override void Get(out StructBytes fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = StructBytes.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out StructBytes fbeValue, StructBytes defaults)
         {
             long fbeBegin = GetBegin();
@@ -8477,7 +8529,7 @@ namespace com.chronoxor.test.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = StructBytes.Default;
+            fbeValue = default(StructBytes);
 
             if ((fbeCurrentSize + f1.FBESize) <= fbeStructSize)
                 f1.Get(out fbeValue.f1);
@@ -8721,7 +8773,7 @@ namespace com.chronoxor.test.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = StructBytes.Default;
+            fbeValue = default(StructBytes);
 
             f1.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = f1.Get(out fbeValue.f1);
@@ -9345,7 +9397,19 @@ namespace com.chronoxor.test.FBE {
         }
 
         // Get the struct value
-        public override void Get(out StructArray fbeValue) { Get(out fbeValue, StructArray.Default); }
+        public override void Get(out StructArray fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = StructArray.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out StructArray fbeValue, StructArray defaults)
         {
             long fbeBegin = GetBegin();
@@ -9365,7 +9429,7 @@ namespace com.chronoxor.test.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = StructArray.Default;
+            fbeValue = default(StructArray);
 
             if ((fbeCurrentSize + f1.FBESize) <= fbeStructSize)
                 f1.Get(ref fbeValue.f1);
@@ -9721,7 +9785,7 @@ namespace com.chronoxor.test.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = StructArray.Default;
+            fbeValue = default(StructArray);
 
             f1.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = f1.Get(out fbeValue.f1);
@@ -10415,7 +10479,19 @@ namespace com.chronoxor.test.FBE {
         }
 
         // Get the struct value
-        public override void Get(out StructVector fbeValue) { Get(out fbeValue, StructVector.Default); }
+        public override void Get(out StructVector fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = StructVector.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out StructVector fbeValue, StructVector defaults)
         {
             long fbeBegin = GetBegin();
@@ -10435,66 +10511,96 @@ namespace com.chronoxor.test.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = StructVector.Default;
+            fbeValue = default(StructVector);
 
             if ((fbeCurrentSize + f1.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f1 = new List<byte>();
                 f1.Get(ref fbeValue.f1);
+            }
             else
-                fbeValue.f1.Clear();
+                fbeValue.f1 = new List<byte>();
             fbeCurrentSize += f1.FBESize;
 
             if ((fbeCurrentSize + f2.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f2 = new List<byte?>();
                 f2.Get(ref fbeValue.f2);
+            }
             else
-                fbeValue.f2.Clear();
+                fbeValue.f2 = new List<byte?>();
             fbeCurrentSize += f2.FBESize;
 
             if ((fbeCurrentSize + f3.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f3 = new List<MemoryStream>();
                 f3.Get(ref fbeValue.f3);
+            }
             else
-                fbeValue.f3.Clear();
+                fbeValue.f3 = new List<MemoryStream>();
             fbeCurrentSize += f3.FBESize;
 
             if ((fbeCurrentSize + f4.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f4 = new List<MemoryStream>();
                 f4.Get(ref fbeValue.f4);
+            }
             else
-                fbeValue.f4.Clear();
+                fbeValue.f4 = new List<MemoryStream>();
             fbeCurrentSize += f4.FBESize;
 
             if ((fbeCurrentSize + f5.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f5 = new List<EnumSimple>();
                 f5.Get(ref fbeValue.f5);
+            }
             else
-                fbeValue.f5.Clear();
+                fbeValue.f5 = new List<EnumSimple>();
             fbeCurrentSize += f5.FBESize;
 
             if ((fbeCurrentSize + f6.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f6 = new List<EnumSimple?>();
                 f6.Get(ref fbeValue.f6);
+            }
             else
-                fbeValue.f6.Clear();
+                fbeValue.f6 = new List<EnumSimple?>();
             fbeCurrentSize += f6.FBESize;
 
             if ((fbeCurrentSize + f7.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f7 = new List<FlagsSimple>();
                 f7.Get(ref fbeValue.f7);
+            }
             else
-                fbeValue.f7.Clear();
+                fbeValue.f7 = new List<FlagsSimple>();
             fbeCurrentSize += f7.FBESize;
 
             if ((fbeCurrentSize + f8.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f8 = new List<FlagsSimple?>();
                 f8.Get(ref fbeValue.f8);
+            }
             else
-                fbeValue.f8.Clear();
+                fbeValue.f8 = new List<FlagsSimple?>();
             fbeCurrentSize += f8.FBESize;
 
             if ((fbeCurrentSize + f9.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f9 = new List<StructSimple>();
                 f9.Get(ref fbeValue.f9);
+            }
             else
-                fbeValue.f9.Clear();
+                fbeValue.f9 = new List<StructSimple>();
             fbeCurrentSize += f9.FBESize;
 
             if ((fbeCurrentSize + f10.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f10 = new List<StructSimple?>();
                 f10.Get(ref fbeValue.f10);
+            }
             else
-                fbeValue.f10.Clear();
+                fbeValue.f10 = new List<StructSimple?>();
             fbeCurrentSize += f10.FBESize;
         }
 
@@ -10791,7 +10897,7 @@ namespace com.chronoxor.test.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = StructVector.Default;
+            fbeValue = default(StructVector);
 
             f1.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = f1.Get(out fbeValue.f1);
@@ -11485,7 +11591,19 @@ namespace com.chronoxor.test.FBE {
         }
 
         // Get the struct value
-        public override void Get(out StructList fbeValue) { Get(out fbeValue, StructList.Default); }
+        public override void Get(out StructList fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = StructList.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out StructList fbeValue, StructList defaults)
         {
             long fbeBegin = GetBegin();
@@ -11505,66 +11623,96 @@ namespace com.chronoxor.test.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = StructList.Default;
+            fbeValue = default(StructList);
 
             if ((fbeCurrentSize + f1.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f1 = new LinkedList<byte>();
                 f1.Get(ref fbeValue.f1);
+            }
             else
-                fbeValue.f1.Clear();
+                fbeValue.f1 = new LinkedList<byte>();
             fbeCurrentSize += f1.FBESize;
 
             if ((fbeCurrentSize + f2.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f2 = new LinkedList<byte?>();
                 f2.Get(ref fbeValue.f2);
+            }
             else
-                fbeValue.f2.Clear();
+                fbeValue.f2 = new LinkedList<byte?>();
             fbeCurrentSize += f2.FBESize;
 
             if ((fbeCurrentSize + f3.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f3 = new LinkedList<MemoryStream>();
                 f3.Get(ref fbeValue.f3);
+            }
             else
-                fbeValue.f3.Clear();
+                fbeValue.f3 = new LinkedList<MemoryStream>();
             fbeCurrentSize += f3.FBESize;
 
             if ((fbeCurrentSize + f4.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f4 = new LinkedList<MemoryStream>();
                 f4.Get(ref fbeValue.f4);
+            }
             else
-                fbeValue.f4.Clear();
+                fbeValue.f4 = new LinkedList<MemoryStream>();
             fbeCurrentSize += f4.FBESize;
 
             if ((fbeCurrentSize + f5.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f5 = new LinkedList<EnumSimple>();
                 f5.Get(ref fbeValue.f5);
+            }
             else
-                fbeValue.f5.Clear();
+                fbeValue.f5 = new LinkedList<EnumSimple>();
             fbeCurrentSize += f5.FBESize;
 
             if ((fbeCurrentSize + f6.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f6 = new LinkedList<EnumSimple?>();
                 f6.Get(ref fbeValue.f6);
+            }
             else
-                fbeValue.f6.Clear();
+                fbeValue.f6 = new LinkedList<EnumSimple?>();
             fbeCurrentSize += f6.FBESize;
 
             if ((fbeCurrentSize + f7.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f7 = new LinkedList<FlagsSimple>();
                 f7.Get(ref fbeValue.f7);
+            }
             else
-                fbeValue.f7.Clear();
+                fbeValue.f7 = new LinkedList<FlagsSimple>();
             fbeCurrentSize += f7.FBESize;
 
             if ((fbeCurrentSize + f8.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f8 = new LinkedList<FlagsSimple?>();
                 f8.Get(ref fbeValue.f8);
+            }
             else
-                fbeValue.f8.Clear();
+                fbeValue.f8 = new LinkedList<FlagsSimple?>();
             fbeCurrentSize += f8.FBESize;
 
             if ((fbeCurrentSize + f9.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f9 = new LinkedList<StructSimple>();
                 f9.Get(ref fbeValue.f9);
+            }
             else
-                fbeValue.f9.Clear();
+                fbeValue.f9 = new LinkedList<StructSimple>();
             fbeCurrentSize += f9.FBESize;
 
             if ((fbeCurrentSize + f10.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f10 = new LinkedList<StructSimple?>();
                 f10.Get(ref fbeValue.f10);
+            }
             else
-                fbeValue.f10.Clear();
+                fbeValue.f10 = new LinkedList<StructSimple?>();
             fbeCurrentSize += f10.FBESize;
         }
 
@@ -11861,7 +12009,7 @@ namespace com.chronoxor.test.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = StructList.Default;
+            fbeValue = default(StructList);
 
             f1.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = f1.Get(out fbeValue.f1);
@@ -12387,7 +12535,19 @@ namespace com.chronoxor.test.FBE {
         }
 
         // Get the struct value
-        public override void Get(out StructSet fbeValue) { Get(out fbeValue, StructSet.Default); }
+        public override void Get(out StructSet fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = StructSet.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out StructSet fbeValue, StructSet defaults)
         {
             long fbeBegin = GetBegin();
@@ -12407,30 +12567,42 @@ namespace com.chronoxor.test.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = StructSet.Default;
+            fbeValue = default(StructSet);
 
             if ((fbeCurrentSize + f1.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f1 = new HashSet<byte>();
                 f1.Get(ref fbeValue.f1);
+            }
             else
-                fbeValue.f1.Clear();
+                fbeValue.f1 = new HashSet<byte>();
             fbeCurrentSize += f1.FBESize;
 
             if ((fbeCurrentSize + f2.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f2 = new HashSet<EnumSimple>();
                 f2.Get(ref fbeValue.f2);
+            }
             else
-                fbeValue.f2.Clear();
+                fbeValue.f2 = new HashSet<EnumSimple>();
             fbeCurrentSize += f2.FBESize;
 
             if ((fbeCurrentSize + f3.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f3 = new HashSet<FlagsSimple>();
                 f3.Get(ref fbeValue.f3);
+            }
             else
-                fbeValue.f3.Clear();
+                fbeValue.f3 = new HashSet<FlagsSimple>();
             fbeCurrentSize += f3.FBESize;
 
             if ((fbeCurrentSize + f4.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f4 = new HashSet<StructSimple>();
                 f4.Get(ref fbeValue.f4);
+            }
             else
-                fbeValue.f4.Clear();
+                fbeValue.f4 = new HashSet<StructSimple>();
             fbeCurrentSize += f4.FBESize;
         }
 
@@ -12667,7 +12839,7 @@ namespace com.chronoxor.test.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = StructSet.Default;
+            fbeValue = default(StructSet);
 
             f1.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = f1.Get(out fbeValue.f1);
@@ -13321,7 +13493,19 @@ namespace com.chronoxor.test.FBE {
         }
 
         // Get the struct value
-        public override void Get(out StructMap fbeValue) { Get(out fbeValue, StructMap.Default); }
+        public override void Get(out StructMap fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = StructMap.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out StructMap fbeValue, StructMap defaults)
         {
             long fbeBegin = GetBegin();
@@ -13341,66 +13525,96 @@ namespace com.chronoxor.test.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = StructMap.Default;
+            fbeValue = default(StructMap);
 
             if ((fbeCurrentSize + f1.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f1 = new SortedDictionary<int, byte>();
                 f1.Get(ref fbeValue.f1);
+            }
             else
-                fbeValue.f1.Clear();
+                fbeValue.f1 = new SortedDictionary<int, byte>();
             fbeCurrentSize += f1.FBESize;
 
             if ((fbeCurrentSize + f2.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f2 = new SortedDictionary<int, byte?>();
                 f2.Get(ref fbeValue.f2);
+            }
             else
-                fbeValue.f2.Clear();
+                fbeValue.f2 = new SortedDictionary<int, byte?>();
             fbeCurrentSize += f2.FBESize;
 
             if ((fbeCurrentSize + f3.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f3 = new SortedDictionary<int, MemoryStream>();
                 f3.Get(ref fbeValue.f3);
+            }
             else
-                fbeValue.f3.Clear();
+                fbeValue.f3 = new SortedDictionary<int, MemoryStream>();
             fbeCurrentSize += f3.FBESize;
 
             if ((fbeCurrentSize + f4.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f4 = new SortedDictionary<int, MemoryStream>();
                 f4.Get(ref fbeValue.f4);
+            }
             else
-                fbeValue.f4.Clear();
+                fbeValue.f4 = new SortedDictionary<int, MemoryStream>();
             fbeCurrentSize += f4.FBESize;
 
             if ((fbeCurrentSize + f5.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f5 = new SortedDictionary<int, EnumSimple>();
                 f5.Get(ref fbeValue.f5);
+            }
             else
-                fbeValue.f5.Clear();
+                fbeValue.f5 = new SortedDictionary<int, EnumSimple>();
             fbeCurrentSize += f5.FBESize;
 
             if ((fbeCurrentSize + f6.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f6 = new SortedDictionary<int, EnumSimple?>();
                 f6.Get(ref fbeValue.f6);
+            }
             else
-                fbeValue.f6.Clear();
+                fbeValue.f6 = new SortedDictionary<int, EnumSimple?>();
             fbeCurrentSize += f6.FBESize;
 
             if ((fbeCurrentSize + f7.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f7 = new SortedDictionary<int, FlagsSimple>();
                 f7.Get(ref fbeValue.f7);
+            }
             else
-                fbeValue.f7.Clear();
+                fbeValue.f7 = new SortedDictionary<int, FlagsSimple>();
             fbeCurrentSize += f7.FBESize;
 
             if ((fbeCurrentSize + f8.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f8 = new SortedDictionary<int, FlagsSimple?>();
                 f8.Get(ref fbeValue.f8);
+            }
             else
-                fbeValue.f8.Clear();
+                fbeValue.f8 = new SortedDictionary<int, FlagsSimple?>();
             fbeCurrentSize += f8.FBESize;
 
             if ((fbeCurrentSize + f9.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f9 = new SortedDictionary<int, StructSimple>();
                 f9.Get(ref fbeValue.f9);
+            }
             else
-                fbeValue.f9.Clear();
+                fbeValue.f9 = new SortedDictionary<int, StructSimple>();
             fbeCurrentSize += f9.FBESize;
 
             if ((fbeCurrentSize + f10.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f10 = new SortedDictionary<int, StructSimple?>();
                 f10.Get(ref fbeValue.f10);
+            }
             else
-                fbeValue.f10.Clear();
+                fbeValue.f10 = new SortedDictionary<int, StructSimple?>();
             fbeCurrentSize += f10.FBESize;
         }
 
@@ -13697,7 +13911,7 @@ namespace com.chronoxor.test.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = StructMap.Default;
+            fbeValue = default(StructMap);
 
             f1.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = f1.Get(out fbeValue.f1);
@@ -14411,7 +14625,19 @@ namespace com.chronoxor.test.FBE {
         }
 
         // Get the struct value
-        public override void Get(out StructHash fbeValue) { Get(out fbeValue, StructHash.Default); }
+        public override void Get(out StructHash fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = StructHash.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out StructHash fbeValue, StructHash defaults)
         {
             long fbeBegin = GetBegin();
@@ -14431,66 +14657,96 @@ namespace com.chronoxor.test.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = StructHash.Default;
+            fbeValue = default(StructHash);
 
             if ((fbeCurrentSize + f1.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f1 = new Dictionary<string, byte>();
                 f1.Get(ref fbeValue.f1);
+            }
             else
-                fbeValue.f1.Clear();
+                fbeValue.f1 = new Dictionary<string, byte>();
             fbeCurrentSize += f1.FBESize;
 
             if ((fbeCurrentSize + f2.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f2 = new Dictionary<string, byte?>();
                 f2.Get(ref fbeValue.f2);
+            }
             else
-                fbeValue.f2.Clear();
+                fbeValue.f2 = new Dictionary<string, byte?>();
             fbeCurrentSize += f2.FBESize;
 
             if ((fbeCurrentSize + f3.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f3 = new Dictionary<string, MemoryStream>();
                 f3.Get(ref fbeValue.f3);
+            }
             else
-                fbeValue.f3.Clear();
+                fbeValue.f3 = new Dictionary<string, MemoryStream>();
             fbeCurrentSize += f3.FBESize;
 
             if ((fbeCurrentSize + f4.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f4 = new Dictionary<string, MemoryStream>();
                 f4.Get(ref fbeValue.f4);
+            }
             else
-                fbeValue.f4.Clear();
+                fbeValue.f4 = new Dictionary<string, MemoryStream>();
             fbeCurrentSize += f4.FBESize;
 
             if ((fbeCurrentSize + f5.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f5 = new Dictionary<string, EnumSimple>();
                 f5.Get(ref fbeValue.f5);
+            }
             else
-                fbeValue.f5.Clear();
+                fbeValue.f5 = new Dictionary<string, EnumSimple>();
             fbeCurrentSize += f5.FBESize;
 
             if ((fbeCurrentSize + f6.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f6 = new Dictionary<string, EnumSimple?>();
                 f6.Get(ref fbeValue.f6);
+            }
             else
-                fbeValue.f6.Clear();
+                fbeValue.f6 = new Dictionary<string, EnumSimple?>();
             fbeCurrentSize += f6.FBESize;
 
             if ((fbeCurrentSize + f7.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f7 = new Dictionary<string, FlagsSimple>();
                 f7.Get(ref fbeValue.f7);
+            }
             else
-                fbeValue.f7.Clear();
+                fbeValue.f7 = new Dictionary<string, FlagsSimple>();
             fbeCurrentSize += f7.FBESize;
 
             if ((fbeCurrentSize + f8.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f8 = new Dictionary<string, FlagsSimple?>();
                 f8.Get(ref fbeValue.f8);
+            }
             else
-                fbeValue.f8.Clear();
+                fbeValue.f8 = new Dictionary<string, FlagsSimple?>();
             fbeCurrentSize += f8.FBESize;
 
             if ((fbeCurrentSize + f9.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f9 = new Dictionary<string, StructSimple>();
                 f9.Get(ref fbeValue.f9);
+            }
             else
-                fbeValue.f9.Clear();
+                fbeValue.f9 = new Dictionary<string, StructSimple>();
             fbeCurrentSize += f9.FBESize;
 
             if ((fbeCurrentSize + f10.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f10 = new Dictionary<string, StructSimple?>();
                 f10.Get(ref fbeValue.f10);
+            }
             else
-                fbeValue.f10.Clear();
+                fbeValue.f10 = new Dictionary<string, StructSimple?>();
             fbeCurrentSize += f10.FBESize;
         }
 
@@ -14787,7 +15043,7 @@ namespace com.chronoxor.test.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = StructHash.Default;
+            fbeValue = default(StructHash);
 
             f1.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = f1.Get(out fbeValue.f1);
@@ -15261,7 +15517,19 @@ namespace com.chronoxor.test.FBE {
         }
 
         // Get the struct value
-        public override void Get(out StructHashEx fbeValue) { Get(out fbeValue, StructHashEx.Default); }
+        public override void Get(out StructHashEx fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = StructHashEx.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out StructHashEx fbeValue, StructHashEx defaults)
         {
             long fbeBegin = GetBegin();
@@ -15281,18 +15549,24 @@ namespace com.chronoxor.test.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = StructHashEx.Default;
+            fbeValue = default(StructHashEx);
 
             if ((fbeCurrentSize + f1.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f1 = new Dictionary<StructSimple, StructNested>();
                 f1.Get(ref fbeValue.f1);
+            }
             else
-                fbeValue.f1.Clear();
+                fbeValue.f1 = new Dictionary<StructSimple, StructNested>();
             fbeCurrentSize += f1.FBESize;
 
             if ((fbeCurrentSize + f2.FBESize) <= fbeStructSize)
+            {
+                fbeValue.f2 = new Dictionary<StructSimple, StructNested?>();
                 f2.Get(ref fbeValue.f2);
+            }
             else
-                fbeValue.f2.Clear();
+                fbeValue.f2 = new Dictionary<StructSimple, StructNested?>();
             fbeCurrentSize += f2.FBESize;
         }
 
@@ -15509,7 +15783,7 @@ namespace com.chronoxor.test.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = StructHashEx.Default;
+            fbeValue = default(StructHashEx);
 
             f1.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = f1.Get(out fbeValue.f1);
@@ -15837,7 +16111,19 @@ namespace com.chronoxor.test.FBE {
         }
 
         // Get the struct value
-        public override void Get(out StructEmpty fbeValue) { Get(out fbeValue, StructEmpty.Default); }
+        public override void Get(out StructEmpty fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = StructEmpty.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out StructEmpty fbeValue, StructEmpty defaults)
         {
             long fbeBegin = GetBegin();

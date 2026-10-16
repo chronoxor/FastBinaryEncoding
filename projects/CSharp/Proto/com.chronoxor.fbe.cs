@@ -1951,10 +1951,6 @@ namespace com.chronoxor.FBE {
         // Get the array
         public void Get(ref T[] values)
         {
-            Debug.Assert((values != null), "Invalid values parameter!");
-            if (values == null)
-                throw new ArgumentNullException(nameof(values), "Invalid values parameter!");
-
             values = new T[_size];
 
             var fbeModel = this[0];
@@ -2084,10 +2080,6 @@ namespace com.chronoxor.FBE {
         // Get the array
         public void Get(ref T[] values)
         {
-            Debug.Assert((values != null), "Invalid values parameter!");
-            if (values == null)
-                throw new ArgumentNullException(nameof(values), "Invalid values parameter!");
-
             values = new T[_size];
 
             var fbeModel = this[0];
@@ -2217,10 +2209,6 @@ namespace com.chronoxor.FBE {
         // Get the array
         public void Get(ref T?[] values)
         {
-            Debug.Assert((values != null), "Invalid values parameter!");
-            if (values == null)
-                throw new ArgumentNullException(nameof(values), "Invalid values parameter!");
-
             values = new T?[_size];
 
             var fbeModel = this[0];
@@ -2350,10 +2338,6 @@ namespace com.chronoxor.FBE {
         // Get the array
         public void Get(ref T[] values)
         {
-            Debug.Assert((values != null), "Invalid values parameter!");
-            if (values == null)
-                throw new ArgumentNullException(nameof(values), "Invalid values parameter!");
-
             values = new T[_size];
 
             var fbeModel = this[0];

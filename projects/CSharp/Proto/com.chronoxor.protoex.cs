@@ -1125,7 +1125,19 @@ namespace com.chronoxor.protoex.FBE {
         }
 
         // Get the struct value
-        public override void Get(out Order fbeValue) { Get(out fbeValue, Order.Default); }
+        public override void Get(out Order fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = Order.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out Order fbeValue, Order defaults)
         {
             long fbeBegin = GetBegin();
@@ -1145,7 +1157,7 @@ namespace com.chronoxor.protoex.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = Order.Default;
+            fbeValue = default(Order);
 
             if ((fbeCurrentSize + id.FBESize) <= fbeStructSize)
                 id.Get(out fbeValue.id);
@@ -1469,7 +1481,7 @@ namespace com.chronoxor.protoex.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = Order.Default;
+            fbeValue = default(Order);
 
             id.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = id.Get(out fbeValue.id);
@@ -1910,7 +1922,19 @@ namespace com.chronoxor.protoex.FBE {
         }
 
         // Get the struct value
-        public override void Get(out Balance fbeValue) { Get(out fbeValue, Balance.Default); }
+        public override void Get(out Balance fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = Balance.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out Balance fbeValue, Balance defaults)
         {
             long fbeBegin = GetBegin();
@@ -1930,10 +1954,12 @@ namespace com.chronoxor.protoex.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = Balance.Default;
+            fbeValue = default(Balance);
 
             if ((fbeCurrentSize + parent.FBEBody - 4 - 4) <= fbeStructSize)
                 parent.GetFields(out fbeValue.parent, fbeStructSize);
+            else
+                fbeValue.parent = proto.Balance.Default;
             fbeCurrentSize += parent.FBEBody - 4 - 4;
 
             if ((fbeCurrentSize + locked.FBESize) <= fbeStructSize)
@@ -2156,7 +2182,7 @@ namespace com.chronoxor.protoex.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = Balance.Default;
+            fbeValue = default(Balance);
 
             parent.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = parent.GetFields(out fbeValue.parent);
@@ -2599,7 +2625,19 @@ namespace com.chronoxor.protoex.FBE {
         }
 
         // Get the struct value
-        public override void Get(out Account fbeValue) { Get(out fbeValue, Account.Default); }
+        public override void Get(out Account fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = Account.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out Account fbeValue, Account defaults)
         {
             long fbeBegin = GetBegin();
@@ -2619,7 +2657,7 @@ namespace com.chronoxor.protoex.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = Account.Default;
+            fbeValue = default(Account);
 
             if ((fbeCurrentSize + id.FBESize) <= fbeStructSize)
                 id.Get(out fbeValue.id);
@@ -2652,9 +2690,12 @@ namespace com.chronoxor.protoex.FBE {
             fbeCurrentSize += asset.FBESize;
 
             if ((fbeCurrentSize + orders.FBESize) <= fbeStructSize)
+            {
+                fbeValue.orders = new List<Order>();
                 orders.Get(ref fbeValue.orders);
+            }
             else
-                fbeValue.orders.Clear();
+                fbeValue.orders = new List<Order>();
             fbeCurrentSize += orders.FBESize;
         }
 
@@ -2911,7 +2952,7 @@ namespace com.chronoxor.protoex.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = Account.Default;
+            fbeValue = default(Account);
 
             id.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = id.Get(out fbeValue.id);
@@ -3300,7 +3341,19 @@ namespace com.chronoxor.protoex.FBE {
         }
 
         // Get the struct value
-        public override void Get(out OrderMessage fbeValue) { Get(out fbeValue, OrderMessage.Default); }
+        public override void Get(out OrderMessage fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = OrderMessage.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out OrderMessage fbeValue, OrderMessage defaults)
         {
             long fbeBegin = GetBegin();
@@ -3320,7 +3373,7 @@ namespace com.chronoxor.protoex.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = OrderMessage.Default;
+            fbeValue = default(OrderMessage);
 
             if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
                 body.Get(out fbeValue.body);
@@ -3532,7 +3585,7 @@ namespace com.chronoxor.protoex.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = OrderMessage.Default;
+            fbeValue = default(OrderMessage);
 
             body.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = body.Get(out fbeValue.body);
@@ -3871,7 +3924,19 @@ namespace com.chronoxor.protoex.FBE {
         }
 
         // Get the struct value
-        public override void Get(out BalanceMessage fbeValue) { Get(out fbeValue, BalanceMessage.Default); }
+        public override void Get(out BalanceMessage fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = BalanceMessage.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out BalanceMessage fbeValue, BalanceMessage defaults)
         {
             long fbeBegin = GetBegin();
@@ -3891,7 +3956,7 @@ namespace com.chronoxor.protoex.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = BalanceMessage.Default;
+            fbeValue = default(BalanceMessage);
 
             if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
                 body.Get(out fbeValue.body);
@@ -4103,7 +4168,7 @@ namespace com.chronoxor.protoex.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = BalanceMessage.Default;
+            fbeValue = default(BalanceMessage);
 
             body.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = body.Get(out fbeValue.body);
@@ -4442,7 +4507,19 @@ namespace com.chronoxor.protoex.FBE {
         }
 
         // Get the struct value
-        public override void Get(out AccountMessage fbeValue) { Get(out fbeValue, AccountMessage.Default); }
+        public override void Get(out AccountMessage fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = AccountMessage.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out AccountMessage fbeValue, AccountMessage defaults)
         {
             long fbeBegin = GetBegin();
@@ -4462,7 +4539,7 @@ namespace com.chronoxor.protoex.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = AccountMessage.Default;
+            fbeValue = default(AccountMessage);
 
             if ((fbeCurrentSize + body.FBESize) <= fbeStructSize)
                 body.Get(out fbeValue.body);
@@ -4674,7 +4751,7 @@ namespace com.chronoxor.protoex.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = AccountMessage.Default;
+            fbeValue = default(AccountMessage);
 
             body.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = body.Get(out fbeValue.body);
