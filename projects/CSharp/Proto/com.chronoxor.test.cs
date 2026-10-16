@@ -150,12 +150,12 @@ namespace com.chronoxor.test {
         public const int _ENUM_VALUE_4_ = (int)0x4 + 0;
         public const int _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
 
-        public static EnumSimple ENUM_VALUE_0 = new EnumSimple(_ENUM_VALUE_0_);
-        public static EnumSimple ENUM_VALUE_1 = new EnumSimple(_ENUM_VALUE_1_);
-        public static EnumSimple ENUM_VALUE_2 = new EnumSimple(_ENUM_VALUE_2_);
-        public static EnumSimple ENUM_VALUE_3 = new EnumSimple(_ENUM_VALUE_3_);
-        public static EnumSimple ENUM_VALUE_4 = new EnumSimple(_ENUM_VALUE_4_);
-        public static EnumSimple ENUM_VALUE_5 = new EnumSimple(_ENUM_VALUE_5_);
+        public static readonly EnumSimple ENUM_VALUE_0 = new EnumSimple(_ENUM_VALUE_0_);
+        public static readonly EnumSimple ENUM_VALUE_1 = new EnumSimple(_ENUM_VALUE_1_);
+        public static readonly EnumSimple ENUM_VALUE_2 = new EnumSimple(_ENUM_VALUE_2_);
+        public static readonly EnumSimple ENUM_VALUE_3 = new EnumSimple(_ENUM_VALUE_3_);
+        public static readonly EnumSimple ENUM_VALUE_4 = new EnumSimple(_ENUM_VALUE_4_);
+        public static readonly EnumSimple ENUM_VALUE_5 = new EnumSimple(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -383,12 +383,12 @@ namespace com.chronoxor.test {
         public const byte _ENUM_VALUE_4_ = (byte)'3' + 1;
         public const byte _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
 
-        public static EnumTyped ENUM_VALUE_0 = new EnumTyped(_ENUM_VALUE_0_);
-        public static EnumTyped ENUM_VALUE_1 = new EnumTyped(_ENUM_VALUE_1_);
-        public static EnumTyped ENUM_VALUE_2 = new EnumTyped(_ENUM_VALUE_2_);
-        public static EnumTyped ENUM_VALUE_3 = new EnumTyped(_ENUM_VALUE_3_);
-        public static EnumTyped ENUM_VALUE_4 = new EnumTyped(_ENUM_VALUE_4_);
-        public static EnumTyped ENUM_VALUE_5 = new EnumTyped(_ENUM_VALUE_5_);
+        public static readonly EnumTyped ENUM_VALUE_0 = new EnumTyped(_ENUM_VALUE_0_);
+        public static readonly EnumTyped ENUM_VALUE_1 = new EnumTyped(_ENUM_VALUE_1_);
+        public static readonly EnumTyped ENUM_VALUE_2 = new EnumTyped(_ENUM_VALUE_2_);
+        public static readonly EnumTyped ENUM_VALUE_3 = new EnumTyped(_ENUM_VALUE_3_);
+        public static readonly EnumTyped ENUM_VALUE_4 = new EnumTyped(_ENUM_VALUE_4_);
+        public static readonly EnumTyped ENUM_VALUE_5 = new EnumTyped(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -863,12 +863,12 @@ namespace com.chronoxor.test {
         public const int _FLAG_VALUE_4_ = _FLAG_VALUE_3_;
         public const int _FLAG_VALUE_5_ = _FLAG_VALUE_1_ | _FLAG_VALUE_3_;
 
-        public static FlagsSimple FLAG_VALUE_0 = new FlagsSimple(_FLAG_VALUE_0_);
-        public static FlagsSimple FLAG_VALUE_1 = new FlagsSimple(_FLAG_VALUE_1_);
-        public static FlagsSimple FLAG_VALUE_2 = new FlagsSimple(_FLAG_VALUE_2_);
-        public static FlagsSimple FLAG_VALUE_3 = new FlagsSimple(_FLAG_VALUE_3_);
-        public static FlagsSimple FLAG_VALUE_4 = new FlagsSimple(_FLAG_VALUE_4_);
-        public static FlagsSimple FLAG_VALUE_5 = new FlagsSimple(_FLAG_VALUE_5_);
+        public static readonly FlagsSimple FLAG_VALUE_0 = new FlagsSimple(_FLAG_VALUE_0_);
+        public static readonly FlagsSimple FLAG_VALUE_1 = new FlagsSimple(_FLAG_VALUE_1_);
+        public static readonly FlagsSimple FLAG_VALUE_2 = new FlagsSimple(_FLAG_VALUE_2_);
+        public static readonly FlagsSimple FLAG_VALUE_3 = new FlagsSimple(_FLAG_VALUE_3_);
+        public static readonly FlagsSimple FLAG_VALUE_4 = new FlagsSimple(_FLAG_VALUE_4_);
+        public static readonly FlagsSimple FLAG_VALUE_5 = new FlagsSimple(_FLAG_VALUE_5_);
 
         public override string ToString()
         {
@@ -1159,16 +1159,16 @@ namespace com.chronoxor.test {
         public const ulong _FLAG_VALUE_8_ = _FLAG_VALUE_7_;
         public const ulong _FLAG_VALUE_9_ = _FLAG_VALUE_2_ | _FLAG_VALUE_4_ | _FLAG_VALUE_6_;
 
-        public static FlagsTyped FLAG_VALUE_0 = new FlagsTyped(_FLAG_VALUE_0_);
-        public static FlagsTyped FLAG_VALUE_1 = new FlagsTyped(_FLAG_VALUE_1_);
-        public static FlagsTyped FLAG_VALUE_2 = new FlagsTyped(_FLAG_VALUE_2_);
-        public static FlagsTyped FLAG_VALUE_3 = new FlagsTyped(_FLAG_VALUE_3_);
-        public static FlagsTyped FLAG_VALUE_4 = new FlagsTyped(_FLAG_VALUE_4_);
-        public static FlagsTyped FLAG_VALUE_5 = new FlagsTyped(_FLAG_VALUE_5_);
-        public static FlagsTyped FLAG_VALUE_6 = new FlagsTyped(_FLAG_VALUE_6_);
-        public static FlagsTyped FLAG_VALUE_7 = new FlagsTyped(_FLAG_VALUE_7_);
-        public static FlagsTyped FLAG_VALUE_8 = new FlagsTyped(_FLAG_VALUE_8_);
-        public static FlagsTyped FLAG_VALUE_9 = new FlagsTyped(_FLAG_VALUE_9_);
+        public static readonly FlagsTyped FLAG_VALUE_0 = new FlagsTyped(_FLAG_VALUE_0_);
+        public static readonly FlagsTyped FLAG_VALUE_1 = new FlagsTyped(_FLAG_VALUE_1_);
+        public static readonly FlagsTyped FLAG_VALUE_2 = new FlagsTyped(_FLAG_VALUE_2_);
+        public static readonly FlagsTyped FLAG_VALUE_3 = new FlagsTyped(_FLAG_VALUE_3_);
+        public static readonly FlagsTyped FLAG_VALUE_4 = new FlagsTyped(_FLAG_VALUE_4_);
+        public static readonly FlagsTyped FLAG_VALUE_5 = new FlagsTyped(_FLAG_VALUE_5_);
+        public static readonly FlagsTyped FLAG_VALUE_6 = new FlagsTyped(_FLAG_VALUE_6_);
+        public static readonly FlagsTyped FLAG_VALUE_7 = new FlagsTyped(_FLAG_VALUE_7_);
+        public static readonly FlagsTyped FLAG_VALUE_8 = new FlagsTyped(_FLAG_VALUE_8_);
+        public static readonly FlagsTyped FLAG_VALUE_9 = new FlagsTyped(_FLAG_VALUE_9_);
 
         public override string ToString()
         {

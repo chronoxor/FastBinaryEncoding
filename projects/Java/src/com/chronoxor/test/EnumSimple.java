@@ -9,14 +9,15 @@ package com.chronoxor.test;
 
 public final class EnumSimple implements Comparable<EnumSimple>
 {
-    public static final EnumSimple ENUM_VALUE_0 = new EnumSimple(EnumSimpleEnum.ENUM_VALUE_0);
-    public static final EnumSimple ENUM_VALUE_1 = new EnumSimple(EnumSimpleEnum.ENUM_VALUE_1);
-    public static final EnumSimple ENUM_VALUE_2 = new EnumSimple(EnumSimpleEnum.ENUM_VALUE_2);
-    public static final EnumSimple ENUM_VALUE_3 = new EnumSimple(EnumSimpleEnum.ENUM_VALUE_3);
-    public static final EnumSimple ENUM_VALUE_4 = new EnumSimple(EnumSimpleEnum.ENUM_VALUE_4);
-    public static final EnumSimple ENUM_VALUE_5 = new EnumSimple(EnumSimpleEnum.ENUM_VALUE_5);
+    public static final EnumSimple ENUM_VALUE_0 = new EnumSimple(EnumSimpleEnum.ENUM_VALUE_0).asConstant();
+    public static final EnumSimple ENUM_VALUE_1 = new EnumSimple(EnumSimpleEnum.ENUM_VALUE_1).asConstant();
+    public static final EnumSimple ENUM_VALUE_2 = new EnumSimple(EnumSimpleEnum.ENUM_VALUE_2).asConstant();
+    public static final EnumSimple ENUM_VALUE_3 = new EnumSimple(EnumSimpleEnum.ENUM_VALUE_3).asConstant();
+    public static final EnumSimple ENUM_VALUE_4 = new EnumSimple(EnumSimpleEnum.ENUM_VALUE_4).asConstant();
+    public static final EnumSimple ENUM_VALUE_5 = new EnumSimple(EnumSimpleEnum.ENUM_VALUE_5).asConstant();
 
     private EnumSimpleEnum value = EnumSimpleEnum.values()[0];
+    private boolean fbeConstant;
 
     public EnumSimple() {}
     public EnumSimple(int value) { setEnum(value); }
@@ -28,9 +29,12 @@ public final class EnumSimple implements Comparable<EnumSimple>
 
     public void setDefault() { setEnum((int)0); }
 
-    public void setEnum(int value) { this.value = EnumSimpleEnum.mapValue(value); }
-    public void setEnum(EnumSimpleEnum value) { this.value = value; }
-    public void setEnum(EnumSimple value) { this.value = value.value; }
+    public void setEnum(int value) { ensureMutable(); this.value = EnumSimpleEnum.mapValue(value); }
+    public void setEnum(EnumSimpleEnum value) { ensureMutable(); this.value = value; }
+    public void setEnum(EnumSimple value) { ensureMutable(); this.value = value.value; }
+
+    private EnumSimple asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("EnumSimple constants are read-only, change a copy: new EnumSimple(EnumSimple.VALUE)"); }
 
     @Override
     public int compareTo(EnumSimple other)

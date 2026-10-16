@@ -11,6 +11,7 @@ public final class EnumEmpty implements Comparable<EnumEmpty>
 {
 
     private EnumEmptyEnum value = EnumEmptyEnum.values()[0];
+    private boolean fbeConstant;
 
     public EnumEmpty() {}
     public EnumEmpty(int value) { setEnum(value); }
@@ -22,9 +23,12 @@ public final class EnumEmpty implements Comparable<EnumEmpty>
 
     public void setDefault() { setEnum((int)0); }
 
-    public void setEnum(int value) { this.value = EnumEmptyEnum.mapValue(value); }
-    public void setEnum(EnumEmptyEnum value) { this.value = value; }
-    public void setEnum(EnumEmpty value) { this.value = value.value; }
+    public void setEnum(int value) { ensureMutable(); this.value = EnumEmptyEnum.mapValue(value); }
+    public void setEnum(EnumEmptyEnum value) { ensureMutable(); this.value = value; }
+    public void setEnum(EnumEmpty value) { ensureMutable(); this.value = value.value; }
+
+    private EnumEmpty asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("EnumEmpty constants are read-only, change a copy: new EnumEmpty(EnumEmpty.VALUE)"); }
 
     @Override
     public int compareTo(EnumEmpty other)

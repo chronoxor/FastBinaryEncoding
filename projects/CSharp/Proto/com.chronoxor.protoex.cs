@@ -147,9 +147,9 @@ namespace com.chronoxor.protoex {
         public const byte _sell_ = (byte)0U + 1;
         public const byte _tell_ = (byte)0U + 2;
 
-        public static OrderSide buy = new OrderSide(_buy_);
-        public static OrderSide sell = new OrderSide(_sell_);
-        public static OrderSide tell = new OrderSide(_tell_);
+        public static readonly OrderSide buy = new OrderSide(_buy_);
+        public static readonly OrderSide sell = new OrderSide(_sell_);
+        public static readonly OrderSide tell = new OrderSide(_tell_);
 
         public override string ToString()
         {
@@ -372,10 +372,10 @@ namespace com.chronoxor.protoex {
         public const byte _stop_ = (byte)0U + 2;
         public const byte _stoplimit_ = (byte)0U + 3;
 
-        public static OrderType market = new OrderType(_market_);
-        public static OrderType limit = new OrderType(_limit_);
-        public static OrderType stop = new OrderType(_stop_);
-        public static OrderType stoplimit = new OrderType(_stoplimit_);
+        public static readonly OrderType market = new OrderType(_market_);
+        public static readonly OrderType limit = new OrderType(_limit_);
+        public static readonly OrderType stop = new OrderType(_stop_);
+        public static readonly OrderType stoplimit = new OrderType(_stoplimit_);
 
         public override string ToString()
         {
@@ -636,15 +636,15 @@ namespace com.chronoxor.protoex {
         public const byte _good_ = _initialized_ | _calculated_;
         public const byte _bad_ = _unknown_ | _invalid_ | _broken_;
 
-        public static StateEx unknown = new StateEx(_unknown_);
-        public static StateEx invalid = new StateEx(_invalid_);
-        public static StateEx initialized = new StateEx(_initialized_);
-        public static StateEx calculated = new StateEx(_calculated_);
-        public static StateEx broken = new StateEx(_broken_);
-        public static StateEx happy = new StateEx(_happy_);
-        public static StateEx sad = new StateEx(_sad_);
-        public static StateEx good = new StateEx(_good_);
-        public static StateEx bad = new StateEx(_bad_);
+        public static readonly StateEx unknown = new StateEx(_unknown_);
+        public static readonly StateEx invalid = new StateEx(_invalid_);
+        public static readonly StateEx initialized = new StateEx(_initialized_);
+        public static readonly StateEx calculated = new StateEx(_calculated_);
+        public static readonly StateEx broken = new StateEx(_broken_);
+        public static readonly StateEx happy = new StateEx(_happy_);
+        public static readonly StateEx sad = new StateEx(_sad_);
+        public static readonly StateEx good = new StateEx(_good_);
+        public static readonly StateEx bad = new StateEx(_bad_);
 
         public override string ToString()
         {

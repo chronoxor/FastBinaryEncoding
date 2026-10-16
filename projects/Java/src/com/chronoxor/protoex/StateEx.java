@@ -9,18 +9,19 @@ package com.chronoxor.protoex;
 
 public final class StateEx implements Comparable<StateEx>
 {
-    public static final StateEx unknown = new StateEx(StateExEnum.unknown);
-    public static final StateEx invalid = new StateEx(StateExEnum.invalid);
-    public static final StateEx initialized = new StateEx(StateExEnum.initialized);
-    public static final StateEx calculated = new StateEx(StateExEnum.calculated);
-    public static final StateEx broken = new StateEx(StateExEnum.broken);
-    public static final StateEx happy = new StateEx(StateExEnum.happy);
-    public static final StateEx sad = new StateEx(StateExEnum.sad);
-    public static final StateEx good = new StateEx(StateExEnum.good);
-    public static final StateEx bad = new StateEx(StateExEnum.bad);
+    public static final StateEx unknown = new StateEx(StateExEnum.unknown).asConstant();
+    public static final StateEx invalid = new StateEx(StateExEnum.invalid).asConstant();
+    public static final StateEx initialized = new StateEx(StateExEnum.initialized).asConstant();
+    public static final StateEx calculated = new StateEx(StateExEnum.calculated).asConstant();
+    public static final StateEx broken = new StateEx(StateExEnum.broken).asConstant();
+    public static final StateEx happy = new StateEx(StateExEnum.happy).asConstant();
+    public static final StateEx sad = new StateEx(StateExEnum.sad).asConstant();
+    public static final StateEx good = new StateEx(StateExEnum.good).asConstant();
+    public static final StateEx bad = new StateEx(StateExEnum.bad).asConstant();
 
     private StateExEnum value = StateExEnum.values()[0];
     private byte flags = value.getRaw();
+    private boolean fbeConstant;
 
     public StateEx() {}
     public StateEx(byte value) { setEnum(value); }
@@ -33,10 +34,13 @@ public final class StateEx implements Comparable<StateEx>
 
     public void setDefault() { setEnum((byte)0); }
 
-    public void setEnum(byte value) { this.flags = value; this.value = StateExEnum.mapValue(value); }
-    public void setEnum(StateExEnum value) { this.value = value; this.flags = value.getRaw(); }
+    public void setEnum(byte value) { ensureMutable(); this.flags = value; this.value = StateExEnum.mapValue(value); }
+    public void setEnum(StateExEnum value) { ensureMutable(); this.value = value; this.flags = value.getRaw(); }
     public void setEnum(java.util.EnumSet<StateExEnum> value) { setEnum(StateEx.fromSet(value)); }
-    public void setEnum(StateEx value) { this.value = value.value; this.flags = value.flags; }
+    public void setEnum(StateEx value) { ensureMutable(); this.value = value.value; this.flags = value.flags; }
+
+    private StateEx asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("StateEx constants are read-only, change a copy: new StateEx(StateEx.VALUE)"); }
 
     public boolean hasFlags(byte flags) { return (((this.flags & flags) != 0) && ((this.flags & flags) == flags)); }
     public boolean hasFlags(StateExEnum flags) { return hasFlags(flags.getRaw()); }

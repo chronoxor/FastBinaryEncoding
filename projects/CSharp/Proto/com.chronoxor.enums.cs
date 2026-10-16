@@ -148,12 +148,12 @@ namespace com.chronoxor.enums {
         public const byte _ENUM_VALUE_4_ = (byte)254U + 1;
         public const byte _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
 
-        public static EnumByte ENUM_VALUE_0 = new EnumByte(_ENUM_VALUE_0_);
-        public static EnumByte ENUM_VALUE_1 = new EnumByte(_ENUM_VALUE_1_);
-        public static EnumByte ENUM_VALUE_2 = new EnumByte(_ENUM_VALUE_2_);
-        public static EnumByte ENUM_VALUE_3 = new EnumByte(_ENUM_VALUE_3_);
-        public static EnumByte ENUM_VALUE_4 = new EnumByte(_ENUM_VALUE_4_);
-        public static EnumByte ENUM_VALUE_5 = new EnumByte(_ENUM_VALUE_5_);
+        public static readonly EnumByte ENUM_VALUE_0 = new EnumByte(_ENUM_VALUE_0_);
+        public static readonly EnumByte ENUM_VALUE_1 = new EnumByte(_ENUM_VALUE_1_);
+        public static readonly EnumByte ENUM_VALUE_2 = new EnumByte(_ENUM_VALUE_2_);
+        public static readonly EnumByte ENUM_VALUE_3 = new EnumByte(_ENUM_VALUE_3_);
+        public static readonly EnumByte ENUM_VALUE_4 = new EnumByte(_ENUM_VALUE_4_);
+        public static readonly EnumByte ENUM_VALUE_5 = new EnumByte(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -381,12 +381,12 @@ namespace com.chronoxor.enums {
         public const byte _ENUM_VALUE_4_ = (byte)'3' + 1;
         public const byte _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
 
-        public static EnumChar ENUM_VALUE_0 = new EnumChar(_ENUM_VALUE_0_);
-        public static EnumChar ENUM_VALUE_1 = new EnumChar(_ENUM_VALUE_1_);
-        public static EnumChar ENUM_VALUE_2 = new EnumChar(_ENUM_VALUE_2_);
-        public static EnumChar ENUM_VALUE_3 = new EnumChar(_ENUM_VALUE_3_);
-        public static EnumChar ENUM_VALUE_4 = new EnumChar(_ENUM_VALUE_4_);
-        public static EnumChar ENUM_VALUE_5 = new EnumChar(_ENUM_VALUE_5_);
+        public static readonly EnumChar ENUM_VALUE_0 = new EnumChar(_ENUM_VALUE_0_);
+        public static readonly EnumChar ENUM_VALUE_1 = new EnumChar(_ENUM_VALUE_1_);
+        public static readonly EnumChar ENUM_VALUE_2 = new EnumChar(_ENUM_VALUE_2_);
+        public static readonly EnumChar ENUM_VALUE_3 = new EnumChar(_ENUM_VALUE_3_);
+        public static readonly EnumChar ENUM_VALUE_4 = new EnumChar(_ENUM_VALUE_4_);
+        public static readonly EnumChar ENUM_VALUE_5 = new EnumChar(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -614,12 +614,12 @@ namespace com.chronoxor.enums {
         public const ushort _ENUM_VALUE_4_ = (ushort)0x0555 + 1;
         public const ushort _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
 
-        public static EnumWChar ENUM_VALUE_0 = new EnumWChar(_ENUM_VALUE_0_);
-        public static EnumWChar ENUM_VALUE_1 = new EnumWChar(_ENUM_VALUE_1_);
-        public static EnumWChar ENUM_VALUE_2 = new EnumWChar(_ENUM_VALUE_2_);
-        public static EnumWChar ENUM_VALUE_3 = new EnumWChar(_ENUM_VALUE_3_);
-        public static EnumWChar ENUM_VALUE_4 = new EnumWChar(_ENUM_VALUE_4_);
-        public static EnumWChar ENUM_VALUE_5 = new EnumWChar(_ENUM_VALUE_5_);
+        public static readonly EnumWChar ENUM_VALUE_0 = new EnumWChar(_ENUM_VALUE_0_);
+        public static readonly EnumWChar ENUM_VALUE_1 = new EnumWChar(_ENUM_VALUE_1_);
+        public static readonly EnumWChar ENUM_VALUE_2 = new EnumWChar(_ENUM_VALUE_2_);
+        public static readonly EnumWChar ENUM_VALUE_3 = new EnumWChar(_ENUM_VALUE_3_);
+        public static readonly EnumWChar ENUM_VALUE_4 = new EnumWChar(_ENUM_VALUE_4_);
+        public static readonly EnumWChar ENUM_VALUE_5 = new EnumWChar(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -847,12 +847,12 @@ namespace com.chronoxor.enums {
         public const sbyte _ENUM_VALUE_4_ = (sbyte)126 + 1;
         public const sbyte _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
 
-        public static EnumInt8 ENUM_VALUE_0 = new EnumInt8(_ENUM_VALUE_0_);
-        public static EnumInt8 ENUM_VALUE_1 = new EnumInt8(_ENUM_VALUE_1_);
-        public static EnumInt8 ENUM_VALUE_2 = new EnumInt8(_ENUM_VALUE_2_);
-        public static EnumInt8 ENUM_VALUE_3 = new EnumInt8(_ENUM_VALUE_3_);
-        public static EnumInt8 ENUM_VALUE_4 = new EnumInt8(_ENUM_VALUE_4_);
-        public static EnumInt8 ENUM_VALUE_5 = new EnumInt8(_ENUM_VALUE_5_);
+        public static readonly EnumInt8 ENUM_VALUE_0 = new EnumInt8(_ENUM_VALUE_0_);
+        public static readonly EnumInt8 ENUM_VALUE_1 = new EnumInt8(_ENUM_VALUE_1_);
+        public static readonly EnumInt8 ENUM_VALUE_2 = new EnumInt8(_ENUM_VALUE_2_);
+        public static readonly EnumInt8 ENUM_VALUE_3 = new EnumInt8(_ENUM_VALUE_3_);
+        public static readonly EnumInt8 ENUM_VALUE_4 = new EnumInt8(_ENUM_VALUE_4_);
+        public static readonly EnumInt8 ENUM_VALUE_5 = new EnumInt8(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -1080,12 +1080,12 @@ namespace com.chronoxor.enums {
         public const byte _ENUM_VALUE_4_ = (byte)254U + 1;
         public const byte _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
 
-        public static EnumUInt8 ENUM_VALUE_0 = new EnumUInt8(_ENUM_VALUE_0_);
-        public static EnumUInt8 ENUM_VALUE_1 = new EnumUInt8(_ENUM_VALUE_1_);
-        public static EnumUInt8 ENUM_VALUE_2 = new EnumUInt8(_ENUM_VALUE_2_);
-        public static EnumUInt8 ENUM_VALUE_3 = new EnumUInt8(_ENUM_VALUE_3_);
-        public static EnumUInt8 ENUM_VALUE_4 = new EnumUInt8(_ENUM_VALUE_4_);
-        public static EnumUInt8 ENUM_VALUE_5 = new EnumUInt8(_ENUM_VALUE_5_);
+        public static readonly EnumUInt8 ENUM_VALUE_0 = new EnumUInt8(_ENUM_VALUE_0_);
+        public static readonly EnumUInt8 ENUM_VALUE_1 = new EnumUInt8(_ENUM_VALUE_1_);
+        public static readonly EnumUInt8 ENUM_VALUE_2 = new EnumUInt8(_ENUM_VALUE_2_);
+        public static readonly EnumUInt8 ENUM_VALUE_3 = new EnumUInt8(_ENUM_VALUE_3_);
+        public static readonly EnumUInt8 ENUM_VALUE_4 = new EnumUInt8(_ENUM_VALUE_4_);
+        public static readonly EnumUInt8 ENUM_VALUE_5 = new EnumUInt8(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -1313,12 +1313,12 @@ namespace com.chronoxor.enums {
         public const short _ENUM_VALUE_4_ = (short)32766 + 1;
         public const short _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
 
-        public static EnumInt16 ENUM_VALUE_0 = new EnumInt16(_ENUM_VALUE_0_);
-        public static EnumInt16 ENUM_VALUE_1 = new EnumInt16(_ENUM_VALUE_1_);
-        public static EnumInt16 ENUM_VALUE_2 = new EnumInt16(_ENUM_VALUE_2_);
-        public static EnumInt16 ENUM_VALUE_3 = new EnumInt16(_ENUM_VALUE_3_);
-        public static EnumInt16 ENUM_VALUE_4 = new EnumInt16(_ENUM_VALUE_4_);
-        public static EnumInt16 ENUM_VALUE_5 = new EnumInt16(_ENUM_VALUE_5_);
+        public static readonly EnumInt16 ENUM_VALUE_0 = new EnumInt16(_ENUM_VALUE_0_);
+        public static readonly EnumInt16 ENUM_VALUE_1 = new EnumInt16(_ENUM_VALUE_1_);
+        public static readonly EnumInt16 ENUM_VALUE_2 = new EnumInt16(_ENUM_VALUE_2_);
+        public static readonly EnumInt16 ENUM_VALUE_3 = new EnumInt16(_ENUM_VALUE_3_);
+        public static readonly EnumInt16 ENUM_VALUE_4 = new EnumInt16(_ENUM_VALUE_4_);
+        public static readonly EnumInt16 ENUM_VALUE_5 = new EnumInt16(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -1546,12 +1546,12 @@ namespace com.chronoxor.enums {
         public const ushort _ENUM_VALUE_4_ = (ushort)65534U + 1;
         public const ushort _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
 
-        public static EnumUInt16 ENUM_VALUE_0 = new EnumUInt16(_ENUM_VALUE_0_);
-        public static EnumUInt16 ENUM_VALUE_1 = new EnumUInt16(_ENUM_VALUE_1_);
-        public static EnumUInt16 ENUM_VALUE_2 = new EnumUInt16(_ENUM_VALUE_2_);
-        public static EnumUInt16 ENUM_VALUE_3 = new EnumUInt16(_ENUM_VALUE_3_);
-        public static EnumUInt16 ENUM_VALUE_4 = new EnumUInt16(_ENUM_VALUE_4_);
-        public static EnumUInt16 ENUM_VALUE_5 = new EnumUInt16(_ENUM_VALUE_5_);
+        public static readonly EnumUInt16 ENUM_VALUE_0 = new EnumUInt16(_ENUM_VALUE_0_);
+        public static readonly EnumUInt16 ENUM_VALUE_1 = new EnumUInt16(_ENUM_VALUE_1_);
+        public static readonly EnumUInt16 ENUM_VALUE_2 = new EnumUInt16(_ENUM_VALUE_2_);
+        public static readonly EnumUInt16 ENUM_VALUE_3 = new EnumUInt16(_ENUM_VALUE_3_);
+        public static readonly EnumUInt16 ENUM_VALUE_4 = new EnumUInt16(_ENUM_VALUE_4_);
+        public static readonly EnumUInt16 ENUM_VALUE_5 = new EnumUInt16(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -1779,12 +1779,12 @@ namespace com.chronoxor.enums {
         public const int _ENUM_VALUE_4_ = (int)2147483646 + 1;
         public const int _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
 
-        public static EnumInt32 ENUM_VALUE_0 = new EnumInt32(_ENUM_VALUE_0_);
-        public static EnumInt32 ENUM_VALUE_1 = new EnumInt32(_ENUM_VALUE_1_);
-        public static EnumInt32 ENUM_VALUE_2 = new EnumInt32(_ENUM_VALUE_2_);
-        public static EnumInt32 ENUM_VALUE_3 = new EnumInt32(_ENUM_VALUE_3_);
-        public static EnumInt32 ENUM_VALUE_4 = new EnumInt32(_ENUM_VALUE_4_);
-        public static EnumInt32 ENUM_VALUE_5 = new EnumInt32(_ENUM_VALUE_5_);
+        public static readonly EnumInt32 ENUM_VALUE_0 = new EnumInt32(_ENUM_VALUE_0_);
+        public static readonly EnumInt32 ENUM_VALUE_1 = new EnumInt32(_ENUM_VALUE_1_);
+        public static readonly EnumInt32 ENUM_VALUE_2 = new EnumInt32(_ENUM_VALUE_2_);
+        public static readonly EnumInt32 ENUM_VALUE_3 = new EnumInt32(_ENUM_VALUE_3_);
+        public static readonly EnumInt32 ENUM_VALUE_4 = new EnumInt32(_ENUM_VALUE_4_);
+        public static readonly EnumInt32 ENUM_VALUE_5 = new EnumInt32(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -2012,12 +2012,12 @@ namespace com.chronoxor.enums {
         public const uint _ENUM_VALUE_4_ = (uint)0xFFFFFFFEU + 1;
         public const uint _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
 
-        public static EnumUInt32 ENUM_VALUE_0 = new EnumUInt32(_ENUM_VALUE_0_);
-        public static EnumUInt32 ENUM_VALUE_1 = new EnumUInt32(_ENUM_VALUE_1_);
-        public static EnumUInt32 ENUM_VALUE_2 = new EnumUInt32(_ENUM_VALUE_2_);
-        public static EnumUInt32 ENUM_VALUE_3 = new EnumUInt32(_ENUM_VALUE_3_);
-        public static EnumUInt32 ENUM_VALUE_4 = new EnumUInt32(_ENUM_VALUE_4_);
-        public static EnumUInt32 ENUM_VALUE_5 = new EnumUInt32(_ENUM_VALUE_5_);
+        public static readonly EnumUInt32 ENUM_VALUE_0 = new EnumUInt32(_ENUM_VALUE_0_);
+        public static readonly EnumUInt32 ENUM_VALUE_1 = new EnumUInt32(_ENUM_VALUE_1_);
+        public static readonly EnumUInt32 ENUM_VALUE_2 = new EnumUInt32(_ENUM_VALUE_2_);
+        public static readonly EnumUInt32 ENUM_VALUE_3 = new EnumUInt32(_ENUM_VALUE_3_);
+        public static readonly EnumUInt32 ENUM_VALUE_4 = new EnumUInt32(_ENUM_VALUE_4_);
+        public static readonly EnumUInt32 ENUM_VALUE_5 = new EnumUInt32(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -2245,12 +2245,12 @@ namespace com.chronoxor.enums {
         public const long _ENUM_VALUE_4_ = (long)9223372036854775806L + 1;
         public const long _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
 
-        public static EnumInt64 ENUM_VALUE_0 = new EnumInt64(_ENUM_VALUE_0_);
-        public static EnumInt64 ENUM_VALUE_1 = new EnumInt64(_ENUM_VALUE_1_);
-        public static EnumInt64 ENUM_VALUE_2 = new EnumInt64(_ENUM_VALUE_2_);
-        public static EnumInt64 ENUM_VALUE_3 = new EnumInt64(_ENUM_VALUE_3_);
-        public static EnumInt64 ENUM_VALUE_4 = new EnumInt64(_ENUM_VALUE_4_);
-        public static EnumInt64 ENUM_VALUE_5 = new EnumInt64(_ENUM_VALUE_5_);
+        public static readonly EnumInt64 ENUM_VALUE_0 = new EnumInt64(_ENUM_VALUE_0_);
+        public static readonly EnumInt64 ENUM_VALUE_1 = new EnumInt64(_ENUM_VALUE_1_);
+        public static readonly EnumInt64 ENUM_VALUE_2 = new EnumInt64(_ENUM_VALUE_2_);
+        public static readonly EnumInt64 ENUM_VALUE_3 = new EnumInt64(_ENUM_VALUE_3_);
+        public static readonly EnumInt64 ENUM_VALUE_4 = new EnumInt64(_ENUM_VALUE_4_);
+        public static readonly EnumInt64 ENUM_VALUE_5 = new EnumInt64(_ENUM_VALUE_5_);
 
         public override string ToString()
         {
@@ -2478,12 +2478,12 @@ namespace com.chronoxor.enums {
         public const ulong _ENUM_VALUE_4_ = (ulong)0xFFFFFFFFFFFFFFFEUL + 1;
         public const ulong _ENUM_VALUE_5_ = _ENUM_VALUE_3_;
 
-        public static EnumUInt64 ENUM_VALUE_0 = new EnumUInt64(_ENUM_VALUE_0_);
-        public static EnumUInt64 ENUM_VALUE_1 = new EnumUInt64(_ENUM_VALUE_1_);
-        public static EnumUInt64 ENUM_VALUE_2 = new EnumUInt64(_ENUM_VALUE_2_);
-        public static EnumUInt64 ENUM_VALUE_3 = new EnumUInt64(_ENUM_VALUE_3_);
-        public static EnumUInt64 ENUM_VALUE_4 = new EnumUInt64(_ENUM_VALUE_4_);
-        public static EnumUInt64 ENUM_VALUE_5 = new EnumUInt64(_ENUM_VALUE_5_);
+        public static readonly EnumUInt64 ENUM_VALUE_0 = new EnumUInt64(_ENUM_VALUE_0_);
+        public static readonly EnumUInt64 ENUM_VALUE_1 = new EnumUInt64(_ENUM_VALUE_1_);
+        public static readonly EnumUInt64 ENUM_VALUE_2 = new EnumUInt64(_ENUM_VALUE_2_);
+        public static readonly EnumUInt64 ENUM_VALUE_3 = new EnumUInt64(_ENUM_VALUE_3_);
+        public static readonly EnumUInt64 ENUM_VALUE_4 = new EnumUInt64(_ENUM_VALUE_4_);
+        public static readonly EnumUInt64 ENUM_VALUE_5 = new EnumUInt64(_ENUM_VALUE_5_);
 
         public override string ToString()
         {

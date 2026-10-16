@@ -9,12 +9,13 @@ package com.chronoxor.protoex;
 
 public final class OrderType implements Comparable<OrderType>
 {
-    public static final OrderType market = new OrderType(OrderTypeEnum.market);
-    public static final OrderType limit = new OrderType(OrderTypeEnum.limit);
-    public static final OrderType stop = new OrderType(OrderTypeEnum.stop);
-    public static final OrderType stoplimit = new OrderType(OrderTypeEnum.stoplimit);
+    public static final OrderType market = new OrderType(OrderTypeEnum.market).asConstant();
+    public static final OrderType limit = new OrderType(OrderTypeEnum.limit).asConstant();
+    public static final OrderType stop = new OrderType(OrderTypeEnum.stop).asConstant();
+    public static final OrderType stoplimit = new OrderType(OrderTypeEnum.stoplimit).asConstant();
 
     private OrderTypeEnum value = OrderTypeEnum.values()[0];
+    private boolean fbeConstant;
 
     public OrderType() {}
     public OrderType(byte value) { setEnum(value); }
@@ -26,9 +27,12 @@ public final class OrderType implements Comparable<OrderType>
 
     public void setDefault() { setEnum((byte)0); }
 
-    public void setEnum(byte value) { this.value = OrderTypeEnum.mapValue(value); }
-    public void setEnum(OrderTypeEnum value) { this.value = value; }
-    public void setEnum(OrderType value) { this.value = value.value; }
+    public void setEnum(byte value) { ensureMutable(); this.value = OrderTypeEnum.mapValue(value); }
+    public void setEnum(OrderTypeEnum value) { ensureMutable(); this.value = value; }
+    public void setEnum(OrderType value) { ensureMutable(); this.value = value.value; }
+
+    private OrderType asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("OrderType constants are read-only, change a copy: new OrderType(OrderType.VALUE)"); }
 
     @Override
     public int compareTo(OrderType other)

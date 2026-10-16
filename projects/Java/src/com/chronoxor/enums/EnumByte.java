@@ -9,14 +9,15 @@ package com.chronoxor.enums;
 
 public final class EnumByte implements Comparable<EnumByte>
 {
-    public static final EnumByte ENUM_VALUE_0 = new EnumByte(EnumByteEnum.ENUM_VALUE_0);
-    public static final EnumByte ENUM_VALUE_1 = new EnumByte(EnumByteEnum.ENUM_VALUE_1);
-    public static final EnumByte ENUM_VALUE_2 = new EnumByte(EnumByteEnum.ENUM_VALUE_2);
-    public static final EnumByte ENUM_VALUE_3 = new EnumByte(EnumByteEnum.ENUM_VALUE_3);
-    public static final EnumByte ENUM_VALUE_4 = new EnumByte(EnumByteEnum.ENUM_VALUE_4);
-    public static final EnumByte ENUM_VALUE_5 = new EnumByte(EnumByteEnum.ENUM_VALUE_5);
+    public static final EnumByte ENUM_VALUE_0 = new EnumByte(EnumByteEnum.ENUM_VALUE_0).asConstant();
+    public static final EnumByte ENUM_VALUE_1 = new EnumByte(EnumByteEnum.ENUM_VALUE_1).asConstant();
+    public static final EnumByte ENUM_VALUE_2 = new EnumByte(EnumByteEnum.ENUM_VALUE_2).asConstant();
+    public static final EnumByte ENUM_VALUE_3 = new EnumByte(EnumByteEnum.ENUM_VALUE_3).asConstant();
+    public static final EnumByte ENUM_VALUE_4 = new EnumByte(EnumByteEnum.ENUM_VALUE_4).asConstant();
+    public static final EnumByte ENUM_VALUE_5 = new EnumByte(EnumByteEnum.ENUM_VALUE_5).asConstant();
 
     private EnumByteEnum value = EnumByteEnum.values()[0];
+    private boolean fbeConstant;
 
     public EnumByte() {}
     public EnumByte(byte value) { setEnum(value); }
@@ -28,9 +29,12 @@ public final class EnumByte implements Comparable<EnumByte>
 
     public void setDefault() { setEnum((byte)0); }
 
-    public void setEnum(byte value) { this.value = EnumByteEnum.mapValue(value); }
-    public void setEnum(EnumByteEnum value) { this.value = value; }
-    public void setEnum(EnumByte value) { this.value = value.value; }
+    public void setEnum(byte value) { ensureMutable(); this.value = EnumByteEnum.mapValue(value); }
+    public void setEnum(EnumByteEnum value) { ensureMutable(); this.value = value; }
+    public void setEnum(EnumByte value) { ensureMutable(); this.value = value.value; }
+
+    private EnumByte asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("EnumByte constants are read-only, change a copy: new EnumByte(EnumByte.VALUE)"); }
 
     @Override
     public int compareTo(EnumByte other)

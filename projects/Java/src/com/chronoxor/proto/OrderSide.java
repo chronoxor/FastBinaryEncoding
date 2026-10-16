@@ -9,10 +9,11 @@ package com.chronoxor.proto;
 
 public final class OrderSide implements Comparable<OrderSide>
 {
-    public static final OrderSide buy = new OrderSide(OrderSideEnum.buy);
-    public static final OrderSide sell = new OrderSide(OrderSideEnum.sell);
+    public static final OrderSide buy = new OrderSide(OrderSideEnum.buy).asConstant();
+    public static final OrderSide sell = new OrderSide(OrderSideEnum.sell).asConstant();
 
     private OrderSideEnum value = OrderSideEnum.values()[0];
+    private boolean fbeConstant;
 
     public OrderSide() {}
     public OrderSide(byte value) { setEnum(value); }
@@ -24,9 +25,12 @@ public final class OrderSide implements Comparable<OrderSide>
 
     public void setDefault() { setEnum((byte)0); }
 
-    public void setEnum(byte value) { this.value = OrderSideEnum.mapValue(value); }
-    public void setEnum(OrderSideEnum value) { this.value = value; }
-    public void setEnum(OrderSide value) { this.value = value.value; }
+    public void setEnum(byte value) { ensureMutable(); this.value = OrderSideEnum.mapValue(value); }
+    public void setEnum(OrderSideEnum value) { ensureMutable(); this.value = value; }
+    public void setEnum(OrderSide value) { ensureMutable(); this.value = value.value; }
+
+    private OrderSide asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("OrderSide constants are read-only, change a copy: new OrderSide(OrderSide.VALUE)"); }
 
     @Override
     public int compareTo(OrderSide other)

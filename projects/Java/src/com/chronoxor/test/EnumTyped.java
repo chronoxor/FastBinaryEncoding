@@ -9,14 +9,15 @@ package com.chronoxor.test;
 
 public final class EnumTyped implements Comparable<EnumTyped>
 {
-    public static final EnumTyped ENUM_VALUE_0 = new EnumTyped(EnumTypedEnum.ENUM_VALUE_0);
-    public static final EnumTyped ENUM_VALUE_1 = new EnumTyped(EnumTypedEnum.ENUM_VALUE_1);
-    public static final EnumTyped ENUM_VALUE_2 = new EnumTyped(EnumTypedEnum.ENUM_VALUE_2);
-    public static final EnumTyped ENUM_VALUE_3 = new EnumTyped(EnumTypedEnum.ENUM_VALUE_3);
-    public static final EnumTyped ENUM_VALUE_4 = new EnumTyped(EnumTypedEnum.ENUM_VALUE_4);
-    public static final EnumTyped ENUM_VALUE_5 = new EnumTyped(EnumTypedEnum.ENUM_VALUE_5);
+    public static final EnumTyped ENUM_VALUE_0 = new EnumTyped(EnumTypedEnum.ENUM_VALUE_0).asConstant();
+    public static final EnumTyped ENUM_VALUE_1 = new EnumTyped(EnumTypedEnum.ENUM_VALUE_1).asConstant();
+    public static final EnumTyped ENUM_VALUE_2 = new EnumTyped(EnumTypedEnum.ENUM_VALUE_2).asConstant();
+    public static final EnumTyped ENUM_VALUE_3 = new EnumTyped(EnumTypedEnum.ENUM_VALUE_3).asConstant();
+    public static final EnumTyped ENUM_VALUE_4 = new EnumTyped(EnumTypedEnum.ENUM_VALUE_4).asConstant();
+    public static final EnumTyped ENUM_VALUE_5 = new EnumTyped(EnumTypedEnum.ENUM_VALUE_5).asConstant();
 
     private EnumTypedEnum value = EnumTypedEnum.values()[0];
+    private boolean fbeConstant;
 
     public EnumTyped() {}
     public EnumTyped(byte value) { setEnum(value); }
@@ -28,9 +29,12 @@ public final class EnumTyped implements Comparable<EnumTyped>
 
     public void setDefault() { setEnum((byte)0); }
 
-    public void setEnum(byte value) { this.value = EnumTypedEnum.mapValue(value); }
-    public void setEnum(EnumTypedEnum value) { this.value = value; }
-    public void setEnum(EnumTyped value) { this.value = value.value; }
+    public void setEnum(byte value) { ensureMutable(); this.value = EnumTypedEnum.mapValue(value); }
+    public void setEnum(EnumTypedEnum value) { ensureMutable(); this.value = value; }
+    public void setEnum(EnumTyped value) { ensureMutable(); this.value = value.value; }
+
+    private EnumTyped asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("EnumTyped constants are read-only, change a copy: new EnumTyped(EnumTyped.VALUE)"); }
 
     @Override
     public int compareTo(EnumTyped other)
