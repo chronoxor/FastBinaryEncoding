@@ -4634,7 +4634,7 @@ void GeneratorCSharp::GenerateEnum(const std::string& domain, const std::shared_
     if (e->body)
     {
         for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
-            WriteLineIndent("public static " + *e->name + " " + *(*it)->name + " = new " + *e->name + "(_" + *(*it)->name + "_);");
+            WriteLineIndent("public static readonly " + *e->name + " " + *(*it)->name + " = new " + *e->name + "(_" + *(*it)->name + "_);");
         WriteLine();
     }
 
@@ -5010,7 +5010,7 @@ void GeneratorCSharp::GenerateFlags(const std::string& domain, const std::shared
     {
         for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
             if ((*it)->value)
-                WriteLineIndent("public static " + *f->name + " " + *(*it)->name + " = new " + *f->name + "(_" + *(*it)->name + "_);");
+                WriteLineIndent("public static readonly " + *f->name + " " + *(*it)->name + " = new " + *f->name + "(_" + *(*it)->name + "_);");
         WriteLine();
     }
 

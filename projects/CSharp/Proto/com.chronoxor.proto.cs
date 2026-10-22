@@ -144,8 +144,8 @@ namespace com.chronoxor.proto {
         public const byte _buy_ = (byte)0U + 0;
         public const byte _sell_ = (byte)0U + 1;
 
-        public static OrderSide buy = new OrderSide(_buy_);
-        public static OrderSide sell = new OrderSide(_sell_);
+        public static readonly OrderSide buy = new OrderSide(_buy_);
+        public static readonly OrderSide sell = new OrderSide(_sell_);
 
         public override string ToString()
         {
@@ -366,9 +366,9 @@ namespace com.chronoxor.proto {
         public const byte _limit_ = (byte)0U + 1;
         public const byte _stop_ = (byte)0U + 2;
 
-        public static OrderType market = new OrderType(_market_);
-        public static OrderType limit = new OrderType(_limit_);
-        public static OrderType stop = new OrderType(_stop_);
+        public static readonly OrderType market = new OrderType(_market_);
+        public static readonly OrderType limit = new OrderType(_limit_);
+        public static readonly OrderType stop = new OrderType(_stop_);
 
         public override string ToString()
         {
@@ -626,13 +626,13 @@ namespace com.chronoxor.proto {
         public const byte _good_ = _initialized_ | _calculated_;
         public const byte _bad_ = _unknown_ | _invalid_ | _broken_;
 
-        public static State unknown = new State(_unknown_);
-        public static State invalid = new State(_invalid_);
-        public static State initialized = new State(_initialized_);
-        public static State calculated = new State(_calculated_);
-        public static State broken = new State(_broken_);
-        public static State good = new State(_good_);
-        public static State bad = new State(_bad_);
+        public static readonly State unknown = new State(_unknown_);
+        public static readonly State invalid = new State(_invalid_);
+        public static readonly State initialized = new State(_initialized_);
+        public static readonly State calculated = new State(_calculated_);
+        public static readonly State broken = new State(_broken_);
+        public static readonly State good = new State(_good_);
+        public static readonly State bad = new State(_bad_);
 
         public override string ToString()
         {
