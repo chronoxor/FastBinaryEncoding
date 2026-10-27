@@ -4820,23 +4820,20 @@ namespace com.chronoxor.protoex.FBE {
         public readonly proto.FBE.Sender protoSender;
 
         // Sender models accessors
-        public readonly OrderMessageModel OrderMessageModel;
-        public readonly BalanceMessageModel BalanceMessageModel;
-        public readonly AccountMessageModel AccountMessageModel;
+        private OrderMessageModel _orderMessageModel;
+        public OrderMessageModel OrderMessageModel => _orderMessageModel ?? (_orderMessageModel = new OrderMessageModel(Buffer));
+        private BalanceMessageModel _balanceMessageModel;
+        public BalanceMessageModel BalanceMessageModel => _balanceMessageModel ?? (_balanceMessageModel = new BalanceMessageModel(Buffer));
+        private AccountMessageModel _accountMessageModel;
+        public AccountMessageModel AccountMessageModel => _accountMessageModel ?? (_accountMessageModel = new AccountMessageModel(Buffer));
 
         public Sender() : base(false)
         {
             protoSender = new proto.FBE.Sender(Buffer);
-            OrderMessageModel = new OrderMessageModel(Buffer);
-            BalanceMessageModel = new BalanceMessageModel(Buffer);
-            AccountMessageModel = new AccountMessageModel(Buffer);
         }
         public Sender(com.chronoxor.FBE.Buffer buffer) : base(buffer, false)
         {
             protoSender = new proto.FBE.Sender(Buffer);
-            OrderMessageModel = new OrderMessageModel(Buffer);
-            BalanceMessageModel = new BalanceMessageModel(Buffer);
-            AccountMessageModel = new AccountMessageModel(Buffer);
         }
 
         public long Send(object obj) { return SendListener(this, obj); }
@@ -4939,29 +4936,20 @@ namespace com.chronoxor.protoex.FBE {
         private global::com.chronoxor.protoex.AccountMessage AccountMessageValue;
 
         // Receiver models accessors
-        private readonly OrderMessageModel OrderMessageModel;
-        private readonly BalanceMessageModel BalanceMessageModel;
-        private readonly AccountMessageModel AccountMessageModel;
+        private OrderMessageModel _orderMessageModel;
+        private OrderMessageModel OrderMessageModel => _orderMessageModel ?? (_orderMessageModel = new OrderMessageModel());
+        private BalanceMessageModel _balanceMessageModel;
+        private BalanceMessageModel BalanceMessageModel => _balanceMessageModel ?? (_balanceMessageModel = new BalanceMessageModel());
+        private AccountMessageModel _accountMessageModel;
+        private AccountMessageModel AccountMessageModel => _accountMessageModel ?? (_accountMessageModel = new AccountMessageModel());
 
         public Receiver() : base(false)
         {
             protoReceiver = new proto.FBE.Receiver(Buffer);
-            OrderMessageValue = global::com.chronoxor.protoex.OrderMessage.Default;
-            OrderMessageModel = new OrderMessageModel();
-            BalanceMessageValue = global::com.chronoxor.protoex.BalanceMessage.Default;
-            BalanceMessageModel = new BalanceMessageModel();
-            AccountMessageValue = global::com.chronoxor.protoex.AccountMessage.Default;
-            AccountMessageModel = new AccountMessageModel();
         }
         public Receiver(com.chronoxor.FBE.Buffer buffer) : base(buffer, false)
         {
             protoReceiver = new proto.FBE.Receiver(Buffer);
-            OrderMessageValue = global::com.chronoxor.protoex.OrderMessage.Default;
-            OrderMessageModel = new OrderMessageModel();
-            BalanceMessageValue = global::com.chronoxor.protoex.BalanceMessage.Default;
-            BalanceMessageModel = new BalanceMessageModel();
-            AccountMessageValue = global::com.chronoxor.protoex.AccountMessage.Default;
-            AccountMessageModel = new AccountMessageModel();
         }
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
@@ -5056,23 +5044,20 @@ namespace com.chronoxor.protoex.FBE {
         public proto.FBE.Proxy protoProxy;
 
         // Proxy models accessors
-        private readonly OrderMessageModel OrderMessageModel;
-        private readonly BalanceMessageModel BalanceMessageModel;
-        private readonly AccountMessageModel AccountMessageModel;
+        private OrderMessageModel _orderMessageModel;
+        private OrderMessageModel OrderMessageModel => _orderMessageModel ?? (_orderMessageModel = new OrderMessageModel());
+        private BalanceMessageModel _balanceMessageModel;
+        private BalanceMessageModel BalanceMessageModel => _balanceMessageModel ?? (_balanceMessageModel = new BalanceMessageModel());
+        private AccountMessageModel _accountMessageModel;
+        private AccountMessageModel AccountMessageModel => _accountMessageModel ?? (_accountMessageModel = new AccountMessageModel());
 
         public Proxy() : base(false)
         {
             protoProxy = new proto.FBE.Proxy(Buffer);
-            OrderMessageModel = new OrderMessageModel();
-            BalanceMessageModel = new BalanceMessageModel();
-            AccountMessageModel = new AccountMessageModel();
         }
         public Proxy(com.chronoxor.FBE.Buffer buffer) : base(buffer, false)
         {
             protoProxy = new proto.FBE.Proxy(Buffer);
-            OrderMessageModel = new OrderMessageModel();
-            BalanceMessageModel = new BalanceMessageModel();
-            AccountMessageModel = new AccountMessageModel();
         }
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
@@ -5148,9 +5133,12 @@ namespace com.chronoxor.protoex.FBE {
         public readonly proto.FBE.Client protoClient;
 
         // Client sender models accessors
-        public readonly OrderMessageModel OrderMessageSenderModel;
-        public readonly BalanceMessageModel BalanceMessageSenderModel;
-        public readonly AccountMessageModel AccountMessageSenderModel;
+        private OrderMessageModel _orderMessageSenderModel;
+        public OrderMessageModel OrderMessageSenderModel => _orderMessageSenderModel ?? (_orderMessageSenderModel = new OrderMessageModel(SendBuffer));
+        private BalanceMessageModel _balanceMessageSenderModel;
+        public BalanceMessageModel BalanceMessageSenderModel => _balanceMessageSenderModel ?? (_balanceMessageSenderModel = new BalanceMessageModel(SendBuffer));
+        private AccountMessageModel _accountMessageSenderModel;
+        public AccountMessageModel AccountMessageSenderModel => _accountMessageSenderModel ?? (_accountMessageSenderModel = new AccountMessageModel(SendBuffer));
 
         // Client receiver values accessors
         private global::com.chronoxor.protoex.OrderMessage OrderMessageReceiverValue;
@@ -5158,35 +5146,20 @@ namespace com.chronoxor.protoex.FBE {
         private global::com.chronoxor.protoex.AccountMessage AccountMessageReceiverValue;
 
         // Client receiver models accessors
-        private readonly OrderMessageModel OrderMessageReceiverModel;
-        private readonly BalanceMessageModel BalanceMessageReceiverModel;
-        private readonly AccountMessageModel AccountMessageReceiverModel;
+        private OrderMessageModel _orderMessageReceiverModel;
+        private OrderMessageModel OrderMessageReceiverModel => _orderMessageReceiverModel ?? (_orderMessageReceiverModel = new OrderMessageModel());
+        private BalanceMessageModel _balanceMessageReceiverModel;
+        private BalanceMessageModel BalanceMessageReceiverModel => _balanceMessageReceiverModel ?? (_balanceMessageReceiverModel = new BalanceMessageModel());
+        private AccountMessageModel _accountMessageReceiverModel;
+        private AccountMessageModel AccountMessageReceiverModel => _accountMessageReceiverModel ?? (_accountMessageReceiverModel = new AccountMessageModel());
 
         public Client() : base(false)
         {
             protoClient = new proto.FBE.Client(SendBuffer, ReceiveBuffer);
-            OrderMessageSenderModel = new OrderMessageModel(SendBuffer);
-            OrderMessageReceiverValue = global::com.chronoxor.protoex.OrderMessage.Default;
-            OrderMessageReceiverModel = new OrderMessageModel();
-            BalanceMessageSenderModel = new BalanceMessageModel(SendBuffer);
-            BalanceMessageReceiverValue = global::com.chronoxor.protoex.BalanceMessage.Default;
-            BalanceMessageReceiverModel = new BalanceMessageModel();
-            AccountMessageSenderModel = new AccountMessageModel(SendBuffer);
-            AccountMessageReceiverValue = global::com.chronoxor.protoex.AccountMessage.Default;
-            AccountMessageReceiverModel = new AccountMessageModel();
         }
         public Client(com.chronoxor.FBE.Buffer sendBuffer, com.chronoxor.FBE.Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, false)
         {
             protoClient = new proto.FBE.Client(SendBuffer, ReceiveBuffer);
-            OrderMessageSenderModel = new OrderMessageModel(SendBuffer);
-            OrderMessageReceiverValue = global::com.chronoxor.protoex.OrderMessage.Default;
-            OrderMessageReceiverModel = new OrderMessageModel();
-            BalanceMessageSenderModel = new BalanceMessageModel(SendBuffer);
-            BalanceMessageReceiverValue = global::com.chronoxor.protoex.BalanceMessage.Default;
-            BalanceMessageReceiverModel = new BalanceMessageModel();
-            AccountMessageSenderModel = new AccountMessageModel(SendBuffer);
-            AccountMessageReceiverValue = global::com.chronoxor.protoex.AccountMessage.Default;
-            AccountMessageReceiverModel = new AccountMessageModel();
         }
 
         public long Send(object obj) { return SendListener(this, obj); }
@@ -5402,23 +5375,20 @@ namespace com.chronoxor.protoex.FBE {
         public readonly proto.FBE.FinalSender protoSender;
 
         // Sender models accessors
-        public readonly OrderMessageFinalModel OrderMessageModel;
-        public readonly BalanceMessageFinalModel BalanceMessageModel;
-        public readonly AccountMessageFinalModel AccountMessageModel;
+        private OrderMessageFinalModel _orderMessageModel;
+        public OrderMessageFinalModel OrderMessageModel => _orderMessageModel ?? (_orderMessageModel = new OrderMessageFinalModel(Buffer));
+        private BalanceMessageFinalModel _balanceMessageModel;
+        public BalanceMessageFinalModel BalanceMessageModel => _balanceMessageModel ?? (_balanceMessageModel = new BalanceMessageFinalModel(Buffer));
+        private AccountMessageFinalModel _accountMessageModel;
+        public AccountMessageFinalModel AccountMessageModel => _accountMessageModel ?? (_accountMessageModel = new AccountMessageFinalModel(Buffer));
 
         public FinalSender() : base(true)
         {
             protoSender = new proto.FBE.FinalSender(Buffer);
-            OrderMessageModel = new OrderMessageFinalModel(Buffer);
-            BalanceMessageModel = new BalanceMessageFinalModel(Buffer);
-            AccountMessageModel = new AccountMessageFinalModel(Buffer);
         }
         public FinalSender(com.chronoxor.FBE.Buffer buffer) : base(buffer, true)
         {
             protoSender = new proto.FBE.FinalSender(Buffer);
-            OrderMessageModel = new OrderMessageFinalModel(Buffer);
-            BalanceMessageModel = new BalanceMessageFinalModel(Buffer);
-            AccountMessageModel = new AccountMessageFinalModel(Buffer);
         }
 
         public long Send(object obj) { return SendListener(this, obj); }
@@ -5521,29 +5491,20 @@ namespace com.chronoxor.protoex.FBE {
         private global::com.chronoxor.protoex.AccountMessage AccountMessageValue;
 
         // Receiver models accessors
-        private readonly OrderMessageFinalModel OrderMessageModel;
-        private readonly BalanceMessageFinalModel BalanceMessageModel;
-        private readonly AccountMessageFinalModel AccountMessageModel;
+        private OrderMessageFinalModel _orderMessageModel;
+        private OrderMessageFinalModel OrderMessageModel => _orderMessageModel ?? (_orderMessageModel = new OrderMessageFinalModel());
+        private BalanceMessageFinalModel _balanceMessageModel;
+        private BalanceMessageFinalModel BalanceMessageModel => _balanceMessageModel ?? (_balanceMessageModel = new BalanceMessageFinalModel());
+        private AccountMessageFinalModel _accountMessageModel;
+        private AccountMessageFinalModel AccountMessageModel => _accountMessageModel ?? (_accountMessageModel = new AccountMessageFinalModel());
 
         public FinalReceiver() : base(true)
         {
             protoReceiver = new proto.FBE.FinalReceiver(Buffer);
-            OrderMessageValue = global::com.chronoxor.protoex.OrderMessage.Default;
-            OrderMessageModel = new OrderMessageFinalModel();
-            BalanceMessageValue = global::com.chronoxor.protoex.BalanceMessage.Default;
-            BalanceMessageModel = new BalanceMessageFinalModel();
-            AccountMessageValue = global::com.chronoxor.protoex.AccountMessage.Default;
-            AccountMessageModel = new AccountMessageFinalModel();
         }
         public FinalReceiver(com.chronoxor.FBE.Buffer buffer) : base(buffer, true)
         {
             protoReceiver = new proto.FBE.FinalReceiver(Buffer);
-            OrderMessageValue = global::com.chronoxor.protoex.OrderMessage.Default;
-            OrderMessageModel = new OrderMessageFinalModel();
-            BalanceMessageValue = global::com.chronoxor.protoex.BalanceMessage.Default;
-            BalanceMessageModel = new BalanceMessageFinalModel();
-            AccountMessageValue = global::com.chronoxor.protoex.AccountMessage.Default;
-            AccountMessageModel = new AccountMessageFinalModel();
         }
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size) { return OnReceiveListener(this, type, buffer, offset, size); }
@@ -5634,9 +5595,12 @@ namespace com.chronoxor.protoex.FBE {
         public readonly proto.FBE.FinalClient protoClient;
 
         // Client sender models accessors
-        public readonly OrderMessageFinalModel OrderMessageSenderModel;
-        public readonly BalanceMessageFinalModel BalanceMessageSenderModel;
-        public readonly AccountMessageFinalModel AccountMessageSenderModel;
+        private OrderMessageFinalModel _orderMessageSenderModel;
+        public OrderMessageFinalModel OrderMessageSenderModel => _orderMessageSenderModel ?? (_orderMessageSenderModel = new OrderMessageFinalModel(SendBuffer));
+        private BalanceMessageFinalModel _balanceMessageSenderModel;
+        public BalanceMessageFinalModel BalanceMessageSenderModel => _balanceMessageSenderModel ?? (_balanceMessageSenderModel = new BalanceMessageFinalModel(SendBuffer));
+        private AccountMessageFinalModel _accountMessageSenderModel;
+        public AccountMessageFinalModel AccountMessageSenderModel => _accountMessageSenderModel ?? (_accountMessageSenderModel = new AccountMessageFinalModel(SendBuffer));
 
         // Client receiver values accessors
         private global::com.chronoxor.protoex.OrderMessage OrderMessageReceiverValue;
@@ -5644,35 +5608,20 @@ namespace com.chronoxor.protoex.FBE {
         private global::com.chronoxor.protoex.AccountMessage AccountMessageReceiverValue;
 
         // Client receiver models accessors
-        private readonly OrderMessageFinalModel OrderMessageReceiverModel;
-        private readonly BalanceMessageFinalModel BalanceMessageReceiverModel;
-        private readonly AccountMessageFinalModel AccountMessageReceiverModel;
+        private OrderMessageFinalModel _orderMessageReceiverModel;
+        private OrderMessageFinalModel OrderMessageReceiverModel => _orderMessageReceiverModel ?? (_orderMessageReceiverModel = new OrderMessageFinalModel());
+        private BalanceMessageFinalModel _balanceMessageReceiverModel;
+        private BalanceMessageFinalModel BalanceMessageReceiverModel => _balanceMessageReceiverModel ?? (_balanceMessageReceiverModel = new BalanceMessageFinalModel());
+        private AccountMessageFinalModel _accountMessageReceiverModel;
+        private AccountMessageFinalModel AccountMessageReceiverModel => _accountMessageReceiverModel ?? (_accountMessageReceiverModel = new AccountMessageFinalModel());
 
         public FinalClient() : base(true)
         {
             protoClient = new proto.FBE.FinalClient(SendBuffer, ReceiveBuffer);
-            OrderMessageSenderModel = new OrderMessageFinalModel(SendBuffer);
-            OrderMessageReceiverValue = global::com.chronoxor.protoex.OrderMessage.Default;
-            OrderMessageReceiverModel = new OrderMessageFinalModel();
-            BalanceMessageSenderModel = new BalanceMessageFinalModel(SendBuffer);
-            BalanceMessageReceiverValue = global::com.chronoxor.protoex.BalanceMessage.Default;
-            BalanceMessageReceiverModel = new BalanceMessageFinalModel();
-            AccountMessageSenderModel = new AccountMessageFinalModel(SendBuffer);
-            AccountMessageReceiverValue = global::com.chronoxor.protoex.AccountMessage.Default;
-            AccountMessageReceiverModel = new AccountMessageFinalModel();
         }
         public FinalClient(com.chronoxor.FBE.Buffer sendBuffer, com.chronoxor.FBE.Buffer receiveBuffer) : base(sendBuffer, receiveBuffer, true)
         {
             protoClient = new proto.FBE.FinalClient(SendBuffer, ReceiveBuffer);
-            OrderMessageSenderModel = new OrderMessageFinalModel(SendBuffer);
-            OrderMessageReceiverValue = global::com.chronoxor.protoex.OrderMessage.Default;
-            OrderMessageReceiverModel = new OrderMessageFinalModel();
-            BalanceMessageSenderModel = new BalanceMessageFinalModel(SendBuffer);
-            BalanceMessageReceiverValue = global::com.chronoxor.protoex.BalanceMessage.Default;
-            BalanceMessageReceiverModel = new BalanceMessageFinalModel();
-            AccountMessageSenderModel = new AccountMessageFinalModel(SendBuffer);
-            AccountMessageReceiverValue = global::com.chronoxor.protoex.AccountMessage.Default;
-            AccountMessageReceiverModel = new AccountMessageFinalModel();
         }
 
         public long Send(object obj) { return SendListener(this, obj); }
