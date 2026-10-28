@@ -1435,10 +1435,6 @@ void GeneratorCSharp::GenerateFBEFieldModelArray(bool valueType, bool optional)
         // Get the array
         public void Get(ref _ARGS_[] values)
         {
-            Debug.Assert((values != null), "Invalid values parameter!");
-            if (values == null)
-                throw new ArgumentNullException(nameof(values), "Invalid values parameter!");
-
             values = new _ARGS_[_size];
 
             var fbeModel = this[0];
@@ -5954,7 +5950,24 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::string& domain, const 
     // Generate struct field model Get() methods
     WriteLine();
     WriteLineIndent("// Get the struct value");
-    WriteLineIndent("public override void Get(out " + *s->name + " fbeValue) { Get(out fbeValue, " + *s->name + ".Default); }");
+    // The default value is built only when it is the result, since building it allocates its collections
+    WriteLineIndent("public override void Get(out " + *s->name + " fbeValue)");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("long fbeBegin = GetBegin();");
+    WriteLineIndent("if (fbeBegin == 0)");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("fbeValue = " + *s->name + ".Default;");
+    WriteLineIndent("return;");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("uint fbeStructSize = ReadUInt32(0);");
+    WriteLineIndent("GetFields(out fbeValue, fbeStructSize);");
+    WriteLineIndent("GetEnd(fbeBegin);");
+    Indent(-1);
+    WriteLineIndent("}");
     WriteLineIndent("public override void Get(out " + *s->name + " fbeValue, " + *s->name + " defaults)");
     WriteLineIndent("{");
     Indent(1);
@@ -5981,15 +5994,21 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::string& domain, const 
     Indent(1);
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
+        // Every field is assigned below, from the stream or its default, so the value starts empty
+        // instead of from Default, whose collections would be allocated only to be replaced
         WriteLineIndent("long fbeCurrentSize = 4 + 4;");
         WriteLine();
-        WriteLineIndent("fbeValue = " + *s->name + ".Default;");
+        WriteLineIndent("fbeValue = default(" + *s->name + ");");
         if (s->base && !s->base->empty())
         {
             WriteLine();
             WriteLineIndent("if ((fbeCurrentSize + parent.FBEBody - 4 - 4) <= fbeStructSize)");
             Indent(1);
             WriteLineIndent("parent.GetFields(out fbeValue.parent, fbeStructSize);");
+            Indent(-1);
+            WriteLineIndent("else");
+            Indent(1);
+            WriteLineIndent("fbeValue.parent = " + ConvertTypeName(*s->base, false) + ".Default;");
             Indent(-1);
             WriteLineIndent("fbeCurrentSize += parent.FBEBody - 4 - 4;");
         }
@@ -6000,17 +6019,25 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::string& domain, const 
                 WriteLine();
                 WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".FBESize) <= fbeStructSize)");
                 Indent(1);
-                if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                if (field->array)
                     WriteLineIndent(*field->name + ".Get(ref fbeValue." + *field->name + ");");
+                else if (field->vector || field->list || field->set || field->map || field->hash)
+                {
+                    Indent(-1);
+                    WriteLineIndent("{");
+                    Indent(1);
+                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(domain, *p->name, *field) + ";");
+                    WriteLineIndent(*field->name + ".Get(ref fbeValue." + *field->name + ");");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    Indent(1);
+                }
                 else
                     WriteLineIndent(*field->name + ".Get(out fbeValue." + *field->name + (field->value ? (", " + ConvertConstant(domain, *p->name, *field->type, *field->value, field->optional)) : "") + ");");
                 Indent(-1);
                 WriteLineIndent("else");
                 Indent(1);
-                if (field->vector || field->list || field->set || field->map || field->hash)
-                    WriteLineIndent("fbeValue." + *field->name + ".Clear();");
-                else
-                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(domain, *p->name, *field) + ";");
+                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(domain, *p->name, *field) + ";");
                 Indent(-1);
                 WriteLineIndent("fbeCurrentSize += " + *field->name + ".FBESize;");
             }
@@ -6393,7 +6420,7 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::string& domain, const 
         WriteLineIndent("long fbeCurrentSize = 0;");
         WriteLineIndent("long fbeFieldSize;");
         WriteLine();
-        WriteLineIndent("fbeValue = " + *s->name + ".Default;");
+        WriteLineIndent("fbeValue = default(" + *s->name + ");");
         if (s->base && !s->base->empty())
         {
             WriteLine();

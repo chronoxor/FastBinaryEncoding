@@ -3723,7 +3723,19 @@ namespace com.chronoxor.enums.FBE {
         }
 
         // Get the struct value
-        public override void Get(out Enums fbeValue) { Get(out fbeValue, Enums.Default); }
+        public override void Get(out Enums fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = Enums.Default;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out Enums fbeValue, Enums defaults)
         {
             long fbeBegin = GetBegin();
@@ -3743,7 +3755,7 @@ namespace com.chronoxor.enums.FBE {
         {
             long fbeCurrentSize = 4 + 4;
 
-            fbeValue = Enums.Default;
+            fbeValue = default(Enums);
 
             if ((fbeCurrentSize + byte0.FBESize) <= fbeStructSize)
                 byte0.Get(out fbeValue.byte0, global::com.chronoxor.enums.EnumByte.ENUM_VALUE_0);
@@ -4995,7 +5007,7 @@ namespace com.chronoxor.enums.FBE {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = Enums.Default;
+            fbeValue = default(Enums);
 
             byte0.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = byte0.Get(out fbeValue.byte0);
