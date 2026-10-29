@@ -8,7 +8,7 @@
 package enums
 
 import "errors"
-import "../fbe"
+import "proto/fbe"
 
 // Fast Binary Encoding EnumUInt16 final model
 type FinalModelEnumUInt16 struct {

@@ -8,7 +8,7 @@
 package enums
 
 import "errors"
-import "../fbe"
+import "proto/fbe"
 
 // Fast Binary Encoding EnumInt32 field model
 type FieldModelEnumInt32 struct {

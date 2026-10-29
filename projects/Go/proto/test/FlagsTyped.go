@@ -9,8 +9,8 @@ package test
 
 import "strings"
 import "errors"
-import "../fbe"
-import "../proto"
+import "proto/fbe"
+import "proto/proto"
 
 // Workaround for Go unused imports issue
 var _ = errors.New

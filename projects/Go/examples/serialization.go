@@ -1,8 +1,8 @@
 package main
 
 import "fmt"
-import "../proto/fbe"
-import "../proto/proto"
+import "proto/fbe"
+import "proto/proto"
 
 func main() {
 	// Create a new account with some orders

@@ -1,7 +1,7 @@
 package benchmarks
 
 import "testing"
-import "../proto/proto"
+import "proto/proto"
 
 type MySender1 struct {
 	*proto.Sender
@@ -26,7 +26,7 @@ func (s *MySender1) OnSendLog(message string) {
 
 type MySender2 struct {
 	*proto.Sender
-	size int
+	size    int
 	logSize int
 }
 
@@ -56,7 +56,7 @@ func NewMyReceiver() *MyReceiver {
 	return receiver
 }
 
-func (r *MyReceiver) OnReceiveOrderMessage(value *proto.OrderMessage) {}
+func (r *MyReceiver) OnReceiveOrderMessage(value *proto.OrderMessage)     {}
 func (r *MyReceiver) OnReceiveBalanceMessage(value *proto.BalanceMessage) {}
 func (r *MyReceiver) OnReceiveAccountMessage(value *proto.AccountMessage) {}
 

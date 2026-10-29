@@ -1,10 +1,8 @@
 package tests
 
-import (
-	"testing"
-)
+import "testing"
 import "github.com/stretchr/testify/assert"
-import "../proto/proto"
+import "proto/proto"
 
 type MySender struct {
 	*proto.Sender
@@ -23,7 +21,7 @@ func (s *MySender) OnSend(buffer []byte) (int, error) {
 
 type MyReceiver struct {
 	*proto.Receiver
-	order bool
+	order   bool
 	balance bool
 	account bool
 }
@@ -36,7 +34,7 @@ func NewMyReceiver() *MyReceiver {
 
 func (r *MyReceiver) Check() bool { return r.order && r.balance && r.account }
 
-func (r *MyReceiver) OnReceiveOrderMessage(value *proto.OrderMessage) { r.order = true }
+func (r *MyReceiver) OnReceiveOrderMessage(value *proto.OrderMessage)     { r.order = true }
 func (r *MyReceiver) OnReceiveBalanceMessage(value *proto.BalanceMessage) { r.balance = true }
 func (r *MyReceiver) OnReceiveAccountMessage(value *proto.AccountMessage) { r.account = true }
 

@@ -8,7 +8,7 @@
 package test
 
 import "errors"
-import "../fbe"
+import "proto/fbe"
 
 // Fast Binary Encoding FlagsTyped final model
 type FinalModelFlagsTyped struct {

@@ -2,9 +2,9 @@ package tests
 
 import "testing"
 import "github.com/stretchr/testify/assert"
-import "../proto/fbe"
-import "../proto/proto"
-import "../proto/test"
+import "proto/fbe"
+import "proto/proto"
+import "proto/test"
 
 func TestSerializationFinalDomain(t *testing.T) {
 	// Create a new account with some orders
@@ -572,7 +572,7 @@ func TestSerializationFinalStructNested(t *testing.T) {
 	assert.Nil(t, struct2.F1003)
 	assert.EqualValues(t, struct2.F1004, test.FlagsSimple_FLAG_VALUE_0)
 	assert.Nil(t, struct2.F1005)
-	assert.EqualValues(t, struct2.F1006, test.FlagsTyped_FLAG_VALUE_2 | test.FlagsTyped_FLAG_VALUE_4 | test.FlagsTyped_FLAG_VALUE_6)
+	assert.EqualValues(t, struct2.F1006, test.FlagsTyped_FLAG_VALUE_2|test.FlagsTyped_FLAG_VALUE_4|test.FlagsTyped_FLAG_VALUE_6)
 	assert.Nil(t, struct2.F1007)
 	assert.Nil(t, struct2.F1009)
 	assert.Nil(t, struct2.F1011)
@@ -807,10 +807,10 @@ func TestSerializationFinalStructArray(t *testing.T) {
 	assert.EqualValues(t, *struct2.F6[0], test.EnumSimple_ENUM_VALUE_1)
 	assert.Nil(t, struct2.F6[1])
 	assert.EqualValues(t, len(struct2.F7), 2)
-	assert.EqualValues(t, struct2.F7[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
-	assert.EqualValues(t, struct2.F7[1], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
+	assert.EqualValues(t, struct2.F7[0], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2)
+	assert.EqualValues(t, struct2.F7[1], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
 	assert.EqualValues(t, len(struct2.F8), 2)
-	assert.EqualValues(t, *struct2.F8[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
+	assert.EqualValues(t, *struct2.F8[0], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2)
 	assert.Nil(t, struct2.F8[1])
 	assert.EqualValues(t, len(struct2.F9), 2)
 	assert.EqualValues(t, struct2.F9[0].F2, true)
@@ -845,8 +845,8 @@ func TestSerializationFinalStructVector(t *testing.T) {
 	vectorF6 := test.EnumSimple_ENUM_VALUE_1
 	struct1.F6 = append(struct1.F6, &vectorF6)
 	struct1.F6 = append(struct1.F6, nil)
-	struct1.F7 = append(struct1.F7, test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
-	struct1.F7 = append(struct1.F7, test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
+	struct1.F7 = append(struct1.F7, test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2)
+	struct1.F7 = append(struct1.F7, test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
 	vectorF8 := test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2
 	struct1.F8 = append(struct1.F8, &vectorF8)
 	struct1.F8 = append(struct1.F8, nil)
@@ -905,10 +905,10 @@ func TestSerializationFinalStructVector(t *testing.T) {
 	assert.EqualValues(t, *struct2.F6[0], test.EnumSimple_ENUM_VALUE_1)
 	assert.Nil(t, struct2.F6[1])
 	assert.EqualValues(t, len(struct2.F7), 2)
-	assert.EqualValues(t, struct2.F7[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
-	assert.EqualValues(t, struct2.F7[1], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
+	assert.EqualValues(t, struct2.F7[0], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2)
+	assert.EqualValues(t, struct2.F7[1], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
 	assert.EqualValues(t, len(struct2.F8), 2)
-	assert.EqualValues(t, *struct2.F8[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
+	assert.EqualValues(t, *struct2.F8[0], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2)
 	assert.Nil(t, struct2.F8[1])
 	assert.EqualValues(t, len(struct2.F9), 2)
 	assert.EqualValues(t, struct2.F9[0].F2, true)
@@ -943,8 +943,8 @@ func TestSerializationFinalStructList(t *testing.T) {
 	vectorF6 := test.EnumSimple_ENUM_VALUE_1
 	struct1.F6 = append(struct1.F6, &vectorF6)
 	struct1.F6 = append(struct1.F6, nil)
-	struct1.F7 = append(struct1.F7, test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
-	struct1.F7 = append(struct1.F7, test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
+	struct1.F7 = append(struct1.F7, test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2)
+	struct1.F7 = append(struct1.F7, test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
 	vectorF8 := test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2
 	struct1.F8 = append(struct1.F8, &vectorF8)
 	struct1.F8 = append(struct1.F8, nil)
@@ -1003,10 +1003,10 @@ func TestSerializationFinalStructList(t *testing.T) {
 	assert.EqualValues(t, *struct2.F6[0], test.EnumSimple_ENUM_VALUE_1)
 	assert.Nil(t, struct2.F6[1])
 	assert.EqualValues(t, len(struct2.F7), 2)
-	assert.EqualValues(t, struct2.F7[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
-	assert.EqualValues(t, struct2.F7[1], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
+	assert.EqualValues(t, struct2.F7[0], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2)
+	assert.EqualValues(t, struct2.F7[1], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
 	assert.EqualValues(t, len(struct2.F8), 2)
-	assert.EqualValues(t, *struct2.F8[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
+	assert.EqualValues(t, *struct2.F8[0], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2)
 	assert.Nil(t, struct2.F8[1])
 	assert.EqualValues(t, len(struct2.F9), 2)
 	assert.EqualValues(t, struct2.F9[0].F2, true)
@@ -1069,8 +1069,8 @@ func TestSerializationFinalStructSet(t *testing.T) {
 	assert.True(t, struct2.F2.Contains(test.EnumSimple_ENUM_VALUE_1))
 	assert.True(t, struct2.F2.Contains(test.EnumSimple_ENUM_VALUE_2))
 	assert.EqualValues(t, len(struct2.F3), 2)
-	assert.True(t, struct2.F3.Contains(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2))
-	assert.True(t, struct2.F3.Contains(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3))
+	assert.True(t, struct2.F3.Contains(test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2))
+	assert.True(t, struct2.F3.Contains(test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3))
 	assert.EqualValues(t, len(struct2.F4), 2)
 	s1.Id = 48
 	assert.True(t, struct2.F4.Contains(*s1))
@@ -1150,10 +1150,10 @@ func TestSerializationFinalStructMap(t *testing.T) {
 	assert.EqualValues(t, *struct2.F6[10], test.EnumSimple_ENUM_VALUE_1)
 	assert.Nil(t, struct2.F6[20])
 	assert.EqualValues(t, len(struct2.F7), 2)
-	assert.EqualValues(t, struct2.F7[10], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
-	assert.EqualValues(t, struct2.F7[20], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
+	assert.EqualValues(t, struct2.F7[10], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2)
+	assert.EqualValues(t, struct2.F7[20], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
 	assert.EqualValues(t, len(struct2.F8), 2)
-	assert.EqualValues(t, *struct2.F8[10], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
+	assert.EqualValues(t, *struct2.F8[10], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2)
 	assert.Nil(t, struct2.F8[20])
 	assert.EqualValues(t, len(struct2.F9), 2)
 	assert.EqualValues(t, struct2.F9[10].Id, 48)
@@ -1235,10 +1235,10 @@ func TestSerializationFinalStructHash(t *testing.T) {
 	assert.EqualValues(t, *struct2.F6["10"], test.EnumSimple_ENUM_VALUE_1)
 	assert.Nil(t, struct2.F6["20"])
 	assert.EqualValues(t, len(struct2.F7), 2)
-	assert.EqualValues(t, struct2.F7["10"], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
-	assert.EqualValues(t, struct2.F7["20"], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
+	assert.EqualValues(t, struct2.F7["10"], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2)
+	assert.EqualValues(t, struct2.F7["20"], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
 	assert.EqualValues(t, len(struct2.F8), 2)
-	assert.EqualValues(t, *struct2.F8["10"], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
+	assert.EqualValues(t, *struct2.F8["10"], test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2)
 	assert.Nil(t, struct2.F8["20"])
 	assert.EqualValues(t, len(struct2.F9), 2)
 	assert.EqualValues(t, struct2.F9["10"].Id, 48)
@@ -1253,12 +1253,24 @@ func TestSerializationFinalStructHashEx(t *testing.T) {
 	struct1 := test.NewStructHashEx()
 	s1 := test.NewStructSimple()
 	s1.Id = 48
-	struct1.F1[s1.Key()] = struct{Key test.StructSimple; Value test.StructNested}{*s1, *test.NewStructNested()}
+	struct1.F1[s1.Key()] = struct {
+		Key   test.StructSimple
+		Value test.StructNested
+	}{*s1, *test.NewStructNested()}
 	s2 := test.NewStructSimple()
 	s2.Id = 65
-	struct1.F1[s2.Key()] = struct{Key test.StructSimple; Value test.StructNested}{*s2, *test.NewStructNested()}
-	struct1.F2[s1.Key()] = struct{Key test.StructSimple; Value *test.StructNested}{*s1, test.NewStructNested()}
-	struct1.F2[s2.Key()] = struct{Key test.StructSimple; Value *test.StructNested}{*s2, nil}
+	struct1.F1[s2.Key()] = struct {
+		Key   test.StructSimple
+		Value test.StructNested
+	}{*s2, *test.NewStructNested()}
+	struct1.F2[s1.Key()] = struct {
+		Key   test.StructSimple
+		Value *test.StructNested
+	}{*s1, test.NewStructNested()}
+	struct1.F2[s2.Key()] = struct {
+		Key   test.StructSimple
+		Value *test.StructNested
+	}{*s2, nil}
 
 	// Serialize the struct to the FBE stream
 	writer := test.NewStructHashExFinalModel(fbe.NewEmptyBuffer())

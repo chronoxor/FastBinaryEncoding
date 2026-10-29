@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-import "../proto/proto"
+import "proto/proto"
 
 type MySender struct {
 	*proto.Sender
@@ -32,7 +32,7 @@ func NewMyReceiver() *MyReceiver {
 	return receiver
 }
 
-func (r *MyReceiver) OnReceiveOrderMessage(value *proto.OrderMessage) {}
+func (r *MyReceiver) OnReceiveOrderMessage(value *proto.OrderMessage)     {}
 func (r *MyReceiver) OnReceiveBalanceMessage(value *proto.BalanceMessage) {}
 func (r *MyReceiver) OnReceiveAccountMessage(value *proto.AccountMessage) {}
 

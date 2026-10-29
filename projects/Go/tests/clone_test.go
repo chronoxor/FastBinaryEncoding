@@ -2,7 +2,7 @@ package tests
 
 import "testing"
 import "github.com/stretchr/testify/assert"
-import "../proto/proto"
+import "proto/proto"
 
 func TestClone(t *testing.T) {
 	// Create a new account with some orders

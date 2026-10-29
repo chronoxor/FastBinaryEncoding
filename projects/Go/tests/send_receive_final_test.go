@@ -1,11 +1,9 @@
 package tests
 
-import (
-	"testing"
-)
+import "testing"
 import "github.com/stretchr/testify/assert"
-import "../proto/proto"
-import "../proto/protoex"
+import "proto/proto"
+import "proto/protoex"
 
 type MyFinalSender struct {
 	*protoex.FinalSender
@@ -24,7 +22,7 @@ func (s *MyFinalSender) OnSend(buffer []byte) (int, error) {
 
 type MyFinalReceiver struct {
 	*protoex.FinalReceiver
-	order bool
+	order   bool
 	balance bool
 	account bool
 }
@@ -37,7 +35,7 @@ func NewMyFinalReceiver() *MyFinalReceiver {
 
 func (r *MyFinalReceiver) Check() bool { return r.order && r.balance && r.account }
 
-func (r *MyFinalReceiver) OnReceiveOrderMessage(value *protoex.OrderMessage) { r.order = true }
+func (r *MyFinalReceiver) OnReceiveOrderMessage(value *protoex.OrderMessage)     { r.order = true }
 func (r *MyFinalReceiver) OnReceiveBalanceMessage(value *protoex.BalanceMessage) { r.balance = true }
 func (r *MyFinalReceiver) OnReceiveAccountMessage(value *protoex.AccountMessage) { r.account = true }
 

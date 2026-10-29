@@ -2,9 +2,9 @@ package tests
 
 import "testing"
 import "github.com/stretchr/testify/assert"
-import "../proto/fbe"
-import "../proto/proto"
-import "../proto/protoex"
+import "proto/fbe"
+import "proto/proto"
+import "proto/protoex"
 
 func TestExtendingOldNew(t *testing.T) {
 	// Create a new account with some orders
@@ -75,7 +75,7 @@ func TestExtendingOldNew(t *testing.T) {
 
 func TestExtendingNewOld(t *testing.T) {
 	// Create a new account with some orders
-	var account1 = protoex.NewAccountFromFieldValues(1, "Test", protoex.StateEx_good | protoex.StateEx_happy, protoex.Balance{Balance: &proto.Balance{Currency: "USD", Amount: 1000.0}, Locked: 123.456}, &protoex.Balance{Balance: &proto.Balance{Currency: "EUR", Amount: 100.0}, Locked: 12.34}, make([]protoex.Order, 0))
+	var account1 = protoex.NewAccountFromFieldValues(1, "Test", protoex.StateEx_good|protoex.StateEx_happy, protoex.Balance{Balance: &proto.Balance{Currency: "USD", Amount: 1000.0}, Locked: 123.456}, &protoex.Balance{Balance: &proto.Balance{Currency: "EUR", Amount: 100.0}, Locked: 12.34}, make([]protoex.Order, 0))
 	account1.Orders = append(account1.Orders, protoex.Order{Id: 1, Symbol: "EURUSD", Side: protoex.OrderSide_buy, Type: protoex.OrderType_market, Price: 1.23456, Volume: 1000.0, Tp: 0.0, Sl: 0.0})
 	account1.Orders = append(account1.Orders, protoex.Order{Id: 2, Symbol: "EURUSD", Side: protoex.OrderSide_sell, Type: protoex.OrderType_limit, Price: 1.0, Volume: 100.0, Tp: 0.1, Sl: -0.1})
 	account1.Orders = append(account1.Orders, protoex.Order{Id: 3, Symbol: "EURUSD", Side: protoex.OrderSide_tell, Type: protoex.OrderType_stoplimit, Price: 1.5, Volume: 10.0, Tp: 1.1, Sl: -1.1})

@@ -8,7 +8,7 @@
 package proto
 
 import "errors"
-import "../fbe"
+import "proto/fbe"
 
 // Fast Binary Encoding State field model
 type FieldModelState struct {

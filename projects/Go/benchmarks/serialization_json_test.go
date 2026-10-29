@@ -1,7 +1,7 @@
 package benchmarks
 
 import "testing"
-import "../proto/proto"
+import "proto/proto"
 
 func SetupBenchmarkJson() (*proto.Account, []byte) {
 	// Create a new account with some orders

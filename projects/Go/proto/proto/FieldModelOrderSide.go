@@ -8,7 +8,7 @@
 package proto
 
 import "errors"
-import "../fbe"
+import "proto/fbe"
 
 // Fast Binary Encoding OrderSide field model
 type FieldModelOrderSide struct {

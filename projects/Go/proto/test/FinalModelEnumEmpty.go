@@ -8,7 +8,7 @@
 package test
 
 import "errors"
-import "../fbe"
+import "proto/fbe"
 
 // Fast Binary Encoding EnumEmpty final model
 type FinalModelEnumEmpty struct {
