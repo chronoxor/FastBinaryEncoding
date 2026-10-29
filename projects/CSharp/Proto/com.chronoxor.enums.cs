@@ -88,16 +88,21 @@ namespace com.chronoxor.enums {
 
     [JsonConverter(typeof(EnumByteConverter))]
 #endif
-    public struct EnumByte : IComparable, IComparable<EnumByte>, IEquatable<EnumByte>
+    public class EnumByte : IComparable, IComparable<EnumByte>, IEquatable<EnumByte>
     {
         public byte Value { get; internal set; }
 
-        public EnumByte(byte value) : this()
+        public EnumByte()
+        {
+            Value = default;
+        }
+
+        public EnumByte(byte value)
         {
             Value = value;
         }
 
-        public EnumByte(EnumByte value) : this()
+        public EnumByte(EnumByte value)
         {
             Value = value.Value;
         }
@@ -114,11 +119,15 @@ namespace com.chronoxor.enums {
 
         public override bool Equals(object other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return (other is EnumByte value) && Value.Equals(value.Value);
         }
 
         public bool Equals(EnumByte other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return Value.Equals(other.Value);
         }
 
@@ -129,17 +138,25 @@ namespace com.chronoxor.enums {
 
         public static bool operator==(EnumByte value1, EnumByte value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return true;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return false;
             return value1.Value == value2.Value;
         }
 
         public static bool operator!=(EnumByte value1, EnumByte value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return false;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return true;
             return value1.Value != value2.Value;
         }
 
         public static EnumByte Default => new EnumByte();
 
-        public static com.chronoxor.FBE.FieldModelValueType<EnumByte> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumByte(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelReferenceType<EnumByte> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumByte(buffer, offset); }
 
         public const byte _ENUM_VALUE_0_ = (byte)0U + 0;
         public const byte _ENUM_VALUE_1_ = (byte)0U + 0;
@@ -174,7 +191,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumByte field model
-    public class FieldModelEnumByte : com.chronoxor.FBE.FieldModelValueType<EnumByte>
+    public class FieldModelEnumByte : com.chronoxor.FBE.FieldModelReferenceType<EnumByte>
     {
         public FieldModelEnumByte(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -182,10 +199,19 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 1;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<EnumByte> Clone() { return new FieldModelEnumByte(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelReferenceType<EnumByte> Clone() { return new FieldModelEnumByte(_buffer, _offset); }
 
         // Get the value
-        public override void Get(out EnumByte value) { Get(out value, EnumByte.Default); }
+        public override void Get(out EnumByte value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = EnumByte.Default;
+                return;
+            }
+
+            value = new EnumByte((byte)ReadByte(FBEOffset));
+        }
         public override void Get(out EnumByte value, EnumByte defaults)
         {
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -215,7 +241,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumByte final model
-    public class FinalModelEnumByte : com.chronoxor.FBE.FinalModelValueType<EnumByte>
+    public class FinalModelEnumByte : com.chronoxor.FBE.FinalModelReferenceType<EnumByte>
     {
         public FinalModelEnumByte(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -226,7 +252,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 1;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<EnumByte> Clone() { return new FinalModelEnumByte(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelReferenceType<EnumByte> Clone() { return new FinalModelEnumByte(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -321,16 +347,21 @@ namespace com.chronoxor.enums {
 
     [JsonConverter(typeof(EnumCharConverter))]
 #endif
-    public struct EnumChar : IComparable, IComparable<EnumChar>, IEquatable<EnumChar>
+    public class EnumChar : IComparable, IComparable<EnumChar>, IEquatable<EnumChar>
     {
         public byte Value { get; internal set; }
 
-        public EnumChar(byte value) : this()
+        public EnumChar()
+        {
+            Value = default;
+        }
+
+        public EnumChar(byte value)
         {
             Value = value;
         }
 
-        public EnumChar(EnumChar value) : this()
+        public EnumChar(EnumChar value)
         {
             Value = value.Value;
         }
@@ -347,11 +378,15 @@ namespace com.chronoxor.enums {
 
         public override bool Equals(object other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return (other is EnumChar value) && Value.Equals(value.Value);
         }
 
         public bool Equals(EnumChar other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return Value.Equals(other.Value);
         }
 
@@ -362,17 +397,25 @@ namespace com.chronoxor.enums {
 
         public static bool operator==(EnumChar value1, EnumChar value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return true;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return false;
             return value1.Value == value2.Value;
         }
 
         public static bool operator!=(EnumChar value1, EnumChar value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return false;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return true;
             return value1.Value != value2.Value;
         }
 
         public static EnumChar Default => new EnumChar();
 
-        public static com.chronoxor.FBE.FieldModelValueType<EnumChar> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumChar(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelReferenceType<EnumChar> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumChar(buffer, offset); }
 
         public const byte _ENUM_VALUE_0_ = (byte)0 + 0;
         public const byte _ENUM_VALUE_1_ = (byte)'1' + 0;
@@ -407,7 +450,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumChar field model
-    public class FieldModelEnumChar : com.chronoxor.FBE.FieldModelValueType<EnumChar>
+    public class FieldModelEnumChar : com.chronoxor.FBE.FieldModelReferenceType<EnumChar>
     {
         public FieldModelEnumChar(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -415,10 +458,19 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 1;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<EnumChar> Clone() { return new FieldModelEnumChar(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelReferenceType<EnumChar> Clone() { return new FieldModelEnumChar(_buffer, _offset); }
 
         // Get the value
-        public override void Get(out EnumChar value) { Get(out value, EnumChar.Default); }
+        public override void Get(out EnumChar value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = EnumChar.Default;
+                return;
+            }
+
+            value = new EnumChar((byte)ReadUInt8(FBEOffset));
+        }
         public override void Get(out EnumChar value, EnumChar defaults)
         {
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -448,7 +500,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumChar final model
-    public class FinalModelEnumChar : com.chronoxor.FBE.FinalModelValueType<EnumChar>
+    public class FinalModelEnumChar : com.chronoxor.FBE.FinalModelReferenceType<EnumChar>
     {
         public FinalModelEnumChar(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -459,7 +511,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 1;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<EnumChar> Clone() { return new FinalModelEnumChar(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelReferenceType<EnumChar> Clone() { return new FinalModelEnumChar(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -554,16 +606,21 @@ namespace com.chronoxor.enums {
 
     [JsonConverter(typeof(EnumWCharConverter))]
 #endif
-    public struct EnumWChar : IComparable, IComparable<EnumWChar>, IEquatable<EnumWChar>
+    public class EnumWChar : IComparable, IComparable<EnumWChar>, IEquatable<EnumWChar>
     {
         public ushort Value { get; internal set; }
 
-        public EnumWChar(ushort value) : this()
+        public EnumWChar()
+        {
+            Value = default;
+        }
+
+        public EnumWChar(ushort value)
         {
             Value = value;
         }
 
-        public EnumWChar(EnumWChar value) : this()
+        public EnumWChar(EnumWChar value)
         {
             Value = value.Value;
         }
@@ -580,11 +637,15 @@ namespace com.chronoxor.enums {
 
         public override bool Equals(object other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return (other is EnumWChar value) && Value.Equals(value.Value);
         }
 
         public bool Equals(EnumWChar other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return Value.Equals(other.Value);
         }
 
@@ -595,17 +656,25 @@ namespace com.chronoxor.enums {
 
         public static bool operator==(EnumWChar value1, EnumWChar value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return true;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return false;
             return value1.Value == value2.Value;
         }
 
         public static bool operator!=(EnumWChar value1, EnumWChar value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return false;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return true;
             return value1.Value != value2.Value;
         }
 
         public static EnumWChar Default => new EnumWChar();
 
-        public static com.chronoxor.FBE.FieldModelValueType<EnumWChar> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumWChar(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelReferenceType<EnumWChar> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumWChar(buffer, offset); }
 
         public const ushort _ENUM_VALUE_0_ = (ushort)0 + 0;
         public const ushort _ENUM_VALUE_1_ = (ushort)0x0444 + 0;
@@ -640,7 +709,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumWChar field model
-    public class FieldModelEnumWChar : com.chronoxor.FBE.FieldModelValueType<EnumWChar>
+    public class FieldModelEnumWChar : com.chronoxor.FBE.FieldModelReferenceType<EnumWChar>
     {
         public FieldModelEnumWChar(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -648,10 +717,19 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 4;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<EnumWChar> Clone() { return new FieldModelEnumWChar(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelReferenceType<EnumWChar> Clone() { return new FieldModelEnumWChar(_buffer, _offset); }
 
         // Get the value
-        public override void Get(out EnumWChar value) { Get(out value, EnumWChar.Default); }
+        public override void Get(out EnumWChar value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = EnumWChar.Default;
+                return;
+            }
+
+            value = new EnumWChar((ushort)ReadUInt32(FBEOffset));
+        }
         public override void Get(out EnumWChar value, EnumWChar defaults)
         {
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -681,7 +759,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumWChar final model
-    public class FinalModelEnumWChar : com.chronoxor.FBE.FinalModelValueType<EnumWChar>
+    public class FinalModelEnumWChar : com.chronoxor.FBE.FinalModelReferenceType<EnumWChar>
     {
         public FinalModelEnumWChar(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -692,7 +770,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 4;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<EnumWChar> Clone() { return new FinalModelEnumWChar(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelReferenceType<EnumWChar> Clone() { return new FinalModelEnumWChar(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -787,16 +865,21 @@ namespace com.chronoxor.enums {
 
     [JsonConverter(typeof(EnumInt8Converter))]
 #endif
-    public struct EnumInt8 : IComparable, IComparable<EnumInt8>, IEquatable<EnumInt8>
+    public class EnumInt8 : IComparable, IComparable<EnumInt8>, IEquatable<EnumInt8>
     {
         public sbyte Value { get; internal set; }
 
-        public EnumInt8(sbyte value) : this()
+        public EnumInt8()
+        {
+            Value = default;
+        }
+
+        public EnumInt8(sbyte value)
         {
             Value = value;
         }
 
-        public EnumInt8(EnumInt8 value) : this()
+        public EnumInt8(EnumInt8 value)
         {
             Value = value.Value;
         }
@@ -813,11 +896,15 @@ namespace com.chronoxor.enums {
 
         public override bool Equals(object other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return (other is EnumInt8 value) && Value.Equals(value.Value);
         }
 
         public bool Equals(EnumInt8 other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return Value.Equals(other.Value);
         }
 
@@ -828,17 +915,25 @@ namespace com.chronoxor.enums {
 
         public static bool operator==(EnumInt8 value1, EnumInt8 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return true;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return false;
             return value1.Value == value2.Value;
         }
 
         public static bool operator!=(EnumInt8 value1, EnumInt8 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return false;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return true;
             return value1.Value != value2.Value;
         }
 
         public static EnumInt8 Default => new EnumInt8();
 
-        public static com.chronoxor.FBE.FieldModelValueType<EnumInt8> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumInt8(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelReferenceType<EnumInt8> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumInt8(buffer, offset); }
 
         public const sbyte _ENUM_VALUE_0_ = (sbyte)0 + 0;
         public const sbyte _ENUM_VALUE_1_ = (sbyte)-128 + 0;
@@ -873,7 +968,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt8 field model
-    public class FieldModelEnumInt8 : com.chronoxor.FBE.FieldModelValueType<EnumInt8>
+    public class FieldModelEnumInt8 : com.chronoxor.FBE.FieldModelReferenceType<EnumInt8>
     {
         public FieldModelEnumInt8(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -881,10 +976,19 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 1;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<EnumInt8> Clone() { return new FieldModelEnumInt8(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelReferenceType<EnumInt8> Clone() { return new FieldModelEnumInt8(_buffer, _offset); }
 
         // Get the value
-        public override void Get(out EnumInt8 value) { Get(out value, EnumInt8.Default); }
+        public override void Get(out EnumInt8 value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = EnumInt8.Default;
+                return;
+            }
+
+            value = new EnumInt8((sbyte)ReadInt8(FBEOffset));
+        }
         public override void Get(out EnumInt8 value, EnumInt8 defaults)
         {
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -914,7 +1018,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt8 final model
-    public class FinalModelEnumInt8 : com.chronoxor.FBE.FinalModelValueType<EnumInt8>
+    public class FinalModelEnumInt8 : com.chronoxor.FBE.FinalModelReferenceType<EnumInt8>
     {
         public FinalModelEnumInt8(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -925,7 +1029,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 1;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<EnumInt8> Clone() { return new FinalModelEnumInt8(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelReferenceType<EnumInt8> Clone() { return new FinalModelEnumInt8(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -1020,16 +1124,21 @@ namespace com.chronoxor.enums {
 
     [JsonConverter(typeof(EnumUInt8Converter))]
 #endif
-    public struct EnumUInt8 : IComparable, IComparable<EnumUInt8>, IEquatable<EnumUInt8>
+    public class EnumUInt8 : IComparable, IComparable<EnumUInt8>, IEquatable<EnumUInt8>
     {
         public byte Value { get; internal set; }
 
-        public EnumUInt8(byte value) : this()
+        public EnumUInt8()
+        {
+            Value = default;
+        }
+
+        public EnumUInt8(byte value)
         {
             Value = value;
         }
 
-        public EnumUInt8(EnumUInt8 value) : this()
+        public EnumUInt8(EnumUInt8 value)
         {
             Value = value.Value;
         }
@@ -1046,11 +1155,15 @@ namespace com.chronoxor.enums {
 
         public override bool Equals(object other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return (other is EnumUInt8 value) && Value.Equals(value.Value);
         }
 
         public bool Equals(EnumUInt8 other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return Value.Equals(other.Value);
         }
 
@@ -1061,17 +1174,25 @@ namespace com.chronoxor.enums {
 
         public static bool operator==(EnumUInt8 value1, EnumUInt8 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return true;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return false;
             return value1.Value == value2.Value;
         }
 
         public static bool operator!=(EnumUInt8 value1, EnumUInt8 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return false;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return true;
             return value1.Value != value2.Value;
         }
 
         public static EnumUInt8 Default => new EnumUInt8();
 
-        public static com.chronoxor.FBE.FieldModelValueType<EnumUInt8> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumUInt8(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelReferenceType<EnumUInt8> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumUInt8(buffer, offset); }
 
         public const byte _ENUM_VALUE_0_ = (byte)0U + 0;
         public const byte _ENUM_VALUE_1_ = (byte)0U + 0;
@@ -1106,7 +1227,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt8 field model
-    public class FieldModelEnumUInt8 : com.chronoxor.FBE.FieldModelValueType<EnumUInt8>
+    public class FieldModelEnumUInt8 : com.chronoxor.FBE.FieldModelReferenceType<EnumUInt8>
     {
         public FieldModelEnumUInt8(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -1114,10 +1235,19 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 1;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<EnumUInt8> Clone() { return new FieldModelEnumUInt8(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelReferenceType<EnumUInt8> Clone() { return new FieldModelEnumUInt8(_buffer, _offset); }
 
         // Get the value
-        public override void Get(out EnumUInt8 value) { Get(out value, EnumUInt8.Default); }
+        public override void Get(out EnumUInt8 value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = EnumUInt8.Default;
+                return;
+            }
+
+            value = new EnumUInt8((byte)ReadUInt8(FBEOffset));
+        }
         public override void Get(out EnumUInt8 value, EnumUInt8 defaults)
         {
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -1147,7 +1277,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt8 final model
-    public class FinalModelEnumUInt8 : com.chronoxor.FBE.FinalModelValueType<EnumUInt8>
+    public class FinalModelEnumUInt8 : com.chronoxor.FBE.FinalModelReferenceType<EnumUInt8>
     {
         public FinalModelEnumUInt8(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -1158,7 +1288,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 1;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<EnumUInt8> Clone() { return new FinalModelEnumUInt8(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelReferenceType<EnumUInt8> Clone() { return new FinalModelEnumUInt8(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -1253,16 +1383,21 @@ namespace com.chronoxor.enums {
 
     [JsonConverter(typeof(EnumInt16Converter))]
 #endif
-    public struct EnumInt16 : IComparable, IComparable<EnumInt16>, IEquatable<EnumInt16>
+    public class EnumInt16 : IComparable, IComparable<EnumInt16>, IEquatable<EnumInt16>
     {
         public short Value { get; internal set; }
 
-        public EnumInt16(short value) : this()
+        public EnumInt16()
+        {
+            Value = default;
+        }
+
+        public EnumInt16(short value)
         {
             Value = value;
         }
 
-        public EnumInt16(EnumInt16 value) : this()
+        public EnumInt16(EnumInt16 value)
         {
             Value = value.Value;
         }
@@ -1279,11 +1414,15 @@ namespace com.chronoxor.enums {
 
         public override bool Equals(object other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return (other is EnumInt16 value) && Value.Equals(value.Value);
         }
 
         public bool Equals(EnumInt16 other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return Value.Equals(other.Value);
         }
 
@@ -1294,17 +1433,25 @@ namespace com.chronoxor.enums {
 
         public static bool operator==(EnumInt16 value1, EnumInt16 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return true;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return false;
             return value1.Value == value2.Value;
         }
 
         public static bool operator!=(EnumInt16 value1, EnumInt16 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return false;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return true;
             return value1.Value != value2.Value;
         }
 
         public static EnumInt16 Default => new EnumInt16();
 
-        public static com.chronoxor.FBE.FieldModelValueType<EnumInt16> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumInt16(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelReferenceType<EnumInt16> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumInt16(buffer, offset); }
 
         public const short _ENUM_VALUE_0_ = (short)0 + 0;
         public const short _ENUM_VALUE_1_ = (short)-32768 + 0;
@@ -1339,7 +1486,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt16 field model
-    public class FieldModelEnumInt16 : com.chronoxor.FBE.FieldModelValueType<EnumInt16>
+    public class FieldModelEnumInt16 : com.chronoxor.FBE.FieldModelReferenceType<EnumInt16>
     {
         public FieldModelEnumInt16(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -1347,10 +1494,19 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 2;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<EnumInt16> Clone() { return new FieldModelEnumInt16(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelReferenceType<EnumInt16> Clone() { return new FieldModelEnumInt16(_buffer, _offset); }
 
         // Get the value
-        public override void Get(out EnumInt16 value) { Get(out value, EnumInt16.Default); }
+        public override void Get(out EnumInt16 value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = EnumInt16.Default;
+                return;
+            }
+
+            value = new EnumInt16((short)ReadInt16(FBEOffset));
+        }
         public override void Get(out EnumInt16 value, EnumInt16 defaults)
         {
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -1380,7 +1536,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt16 final model
-    public class FinalModelEnumInt16 : com.chronoxor.FBE.FinalModelValueType<EnumInt16>
+    public class FinalModelEnumInt16 : com.chronoxor.FBE.FinalModelReferenceType<EnumInt16>
     {
         public FinalModelEnumInt16(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -1391,7 +1547,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 2;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<EnumInt16> Clone() { return new FinalModelEnumInt16(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelReferenceType<EnumInt16> Clone() { return new FinalModelEnumInt16(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -1486,16 +1642,21 @@ namespace com.chronoxor.enums {
 
     [JsonConverter(typeof(EnumUInt16Converter))]
 #endif
-    public struct EnumUInt16 : IComparable, IComparable<EnumUInt16>, IEquatable<EnumUInt16>
+    public class EnumUInt16 : IComparable, IComparable<EnumUInt16>, IEquatable<EnumUInt16>
     {
         public ushort Value { get; internal set; }
 
-        public EnumUInt16(ushort value) : this()
+        public EnumUInt16()
+        {
+            Value = default;
+        }
+
+        public EnumUInt16(ushort value)
         {
             Value = value;
         }
 
-        public EnumUInt16(EnumUInt16 value) : this()
+        public EnumUInt16(EnumUInt16 value)
         {
             Value = value.Value;
         }
@@ -1512,11 +1673,15 @@ namespace com.chronoxor.enums {
 
         public override bool Equals(object other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return (other is EnumUInt16 value) && Value.Equals(value.Value);
         }
 
         public bool Equals(EnumUInt16 other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return Value.Equals(other.Value);
         }
 
@@ -1527,17 +1692,25 @@ namespace com.chronoxor.enums {
 
         public static bool operator==(EnumUInt16 value1, EnumUInt16 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return true;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return false;
             return value1.Value == value2.Value;
         }
 
         public static bool operator!=(EnumUInt16 value1, EnumUInt16 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return false;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return true;
             return value1.Value != value2.Value;
         }
 
         public static EnumUInt16 Default => new EnumUInt16();
 
-        public static com.chronoxor.FBE.FieldModelValueType<EnumUInt16> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumUInt16(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelReferenceType<EnumUInt16> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumUInt16(buffer, offset); }
 
         public const ushort _ENUM_VALUE_0_ = (ushort)0U + 0;
         public const ushort _ENUM_VALUE_1_ = (ushort)0U + 0;
@@ -1572,7 +1745,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt16 field model
-    public class FieldModelEnumUInt16 : com.chronoxor.FBE.FieldModelValueType<EnumUInt16>
+    public class FieldModelEnumUInt16 : com.chronoxor.FBE.FieldModelReferenceType<EnumUInt16>
     {
         public FieldModelEnumUInt16(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -1580,10 +1753,19 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 2;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<EnumUInt16> Clone() { return new FieldModelEnumUInt16(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelReferenceType<EnumUInt16> Clone() { return new FieldModelEnumUInt16(_buffer, _offset); }
 
         // Get the value
-        public override void Get(out EnumUInt16 value) { Get(out value, EnumUInt16.Default); }
+        public override void Get(out EnumUInt16 value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = EnumUInt16.Default;
+                return;
+            }
+
+            value = new EnumUInt16((ushort)ReadUInt16(FBEOffset));
+        }
         public override void Get(out EnumUInt16 value, EnumUInt16 defaults)
         {
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -1613,7 +1795,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt16 final model
-    public class FinalModelEnumUInt16 : com.chronoxor.FBE.FinalModelValueType<EnumUInt16>
+    public class FinalModelEnumUInt16 : com.chronoxor.FBE.FinalModelReferenceType<EnumUInt16>
     {
         public FinalModelEnumUInt16(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -1624,7 +1806,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 2;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<EnumUInt16> Clone() { return new FinalModelEnumUInt16(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelReferenceType<EnumUInt16> Clone() { return new FinalModelEnumUInt16(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -1719,16 +1901,21 @@ namespace com.chronoxor.enums {
 
     [JsonConverter(typeof(EnumInt32Converter))]
 #endif
-    public struct EnumInt32 : IComparable, IComparable<EnumInt32>, IEquatable<EnumInt32>
+    public class EnumInt32 : IComparable, IComparable<EnumInt32>, IEquatable<EnumInt32>
     {
         public int Value { get; internal set; }
 
-        public EnumInt32(int value) : this()
+        public EnumInt32()
+        {
+            Value = default;
+        }
+
+        public EnumInt32(int value)
         {
             Value = value;
         }
 
-        public EnumInt32(EnumInt32 value) : this()
+        public EnumInt32(EnumInt32 value)
         {
             Value = value.Value;
         }
@@ -1745,11 +1932,15 @@ namespace com.chronoxor.enums {
 
         public override bool Equals(object other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return (other is EnumInt32 value) && Value.Equals(value.Value);
         }
 
         public bool Equals(EnumInt32 other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return Value.Equals(other.Value);
         }
 
@@ -1760,17 +1951,25 @@ namespace com.chronoxor.enums {
 
         public static bool operator==(EnumInt32 value1, EnumInt32 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return true;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return false;
             return value1.Value == value2.Value;
         }
 
         public static bool operator!=(EnumInt32 value1, EnumInt32 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return false;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return true;
             return value1.Value != value2.Value;
         }
 
         public static EnumInt32 Default => new EnumInt32();
 
-        public static com.chronoxor.FBE.FieldModelValueType<EnumInt32> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumInt32(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelReferenceType<EnumInt32> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumInt32(buffer, offset); }
 
         public const int _ENUM_VALUE_0_ = (int)0 + 0;
         public const int _ENUM_VALUE_1_ = (int)-2147483648 + 0;
@@ -1805,7 +2004,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt32 field model
-    public class FieldModelEnumInt32 : com.chronoxor.FBE.FieldModelValueType<EnumInt32>
+    public class FieldModelEnumInt32 : com.chronoxor.FBE.FieldModelReferenceType<EnumInt32>
     {
         public FieldModelEnumInt32(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -1813,10 +2012,19 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 4;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<EnumInt32> Clone() { return new FieldModelEnumInt32(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelReferenceType<EnumInt32> Clone() { return new FieldModelEnumInt32(_buffer, _offset); }
 
         // Get the value
-        public override void Get(out EnumInt32 value) { Get(out value, EnumInt32.Default); }
+        public override void Get(out EnumInt32 value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = EnumInt32.Default;
+                return;
+            }
+
+            value = new EnumInt32((int)ReadInt32(FBEOffset));
+        }
         public override void Get(out EnumInt32 value, EnumInt32 defaults)
         {
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -1846,7 +2054,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt32 final model
-    public class FinalModelEnumInt32 : com.chronoxor.FBE.FinalModelValueType<EnumInt32>
+    public class FinalModelEnumInt32 : com.chronoxor.FBE.FinalModelReferenceType<EnumInt32>
     {
         public FinalModelEnumInt32(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -1857,7 +2065,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 4;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<EnumInt32> Clone() { return new FinalModelEnumInt32(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelReferenceType<EnumInt32> Clone() { return new FinalModelEnumInt32(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -1952,16 +2160,21 @@ namespace com.chronoxor.enums {
 
     [JsonConverter(typeof(EnumUInt32Converter))]
 #endif
-    public struct EnumUInt32 : IComparable, IComparable<EnumUInt32>, IEquatable<EnumUInt32>
+    public class EnumUInt32 : IComparable, IComparable<EnumUInt32>, IEquatable<EnumUInt32>
     {
         public uint Value { get; internal set; }
 
-        public EnumUInt32(uint value) : this()
+        public EnumUInt32()
+        {
+            Value = default;
+        }
+
+        public EnumUInt32(uint value)
         {
             Value = value;
         }
 
-        public EnumUInt32(EnumUInt32 value) : this()
+        public EnumUInt32(EnumUInt32 value)
         {
             Value = value.Value;
         }
@@ -1978,11 +2191,15 @@ namespace com.chronoxor.enums {
 
         public override bool Equals(object other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return (other is EnumUInt32 value) && Value.Equals(value.Value);
         }
 
         public bool Equals(EnumUInt32 other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return Value.Equals(other.Value);
         }
 
@@ -1993,17 +2210,25 @@ namespace com.chronoxor.enums {
 
         public static bool operator==(EnumUInt32 value1, EnumUInt32 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return true;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return false;
             return value1.Value == value2.Value;
         }
 
         public static bool operator!=(EnumUInt32 value1, EnumUInt32 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return false;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return true;
             return value1.Value != value2.Value;
         }
 
         public static EnumUInt32 Default => new EnumUInt32();
 
-        public static com.chronoxor.FBE.FieldModelValueType<EnumUInt32> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumUInt32(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelReferenceType<EnumUInt32> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumUInt32(buffer, offset); }
 
         public const uint _ENUM_VALUE_0_ = (uint)0U + 0;
         public const uint _ENUM_VALUE_1_ = (uint)0U + 0;
@@ -2038,7 +2263,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt32 field model
-    public class FieldModelEnumUInt32 : com.chronoxor.FBE.FieldModelValueType<EnumUInt32>
+    public class FieldModelEnumUInt32 : com.chronoxor.FBE.FieldModelReferenceType<EnumUInt32>
     {
         public FieldModelEnumUInt32(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -2046,10 +2271,19 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 4;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<EnumUInt32> Clone() { return new FieldModelEnumUInt32(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelReferenceType<EnumUInt32> Clone() { return new FieldModelEnumUInt32(_buffer, _offset); }
 
         // Get the value
-        public override void Get(out EnumUInt32 value) { Get(out value, EnumUInt32.Default); }
+        public override void Get(out EnumUInt32 value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = EnumUInt32.Default;
+                return;
+            }
+
+            value = new EnumUInt32((uint)ReadUInt32(FBEOffset));
+        }
         public override void Get(out EnumUInt32 value, EnumUInt32 defaults)
         {
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -2079,7 +2313,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt32 final model
-    public class FinalModelEnumUInt32 : com.chronoxor.FBE.FinalModelValueType<EnumUInt32>
+    public class FinalModelEnumUInt32 : com.chronoxor.FBE.FinalModelReferenceType<EnumUInt32>
     {
         public FinalModelEnumUInt32(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -2090,7 +2324,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 4;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<EnumUInt32> Clone() { return new FinalModelEnumUInt32(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelReferenceType<EnumUInt32> Clone() { return new FinalModelEnumUInt32(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -2185,16 +2419,21 @@ namespace com.chronoxor.enums {
 
     [JsonConverter(typeof(EnumInt64Converter))]
 #endif
-    public struct EnumInt64 : IComparable, IComparable<EnumInt64>, IEquatable<EnumInt64>
+    public class EnumInt64 : IComparable, IComparable<EnumInt64>, IEquatable<EnumInt64>
     {
         public long Value { get; internal set; }
 
-        public EnumInt64(long value) : this()
+        public EnumInt64()
+        {
+            Value = default;
+        }
+
+        public EnumInt64(long value)
         {
             Value = value;
         }
 
-        public EnumInt64(EnumInt64 value) : this()
+        public EnumInt64(EnumInt64 value)
         {
             Value = value.Value;
         }
@@ -2211,11 +2450,15 @@ namespace com.chronoxor.enums {
 
         public override bool Equals(object other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return (other is EnumInt64 value) && Value.Equals(value.Value);
         }
 
         public bool Equals(EnumInt64 other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return Value.Equals(other.Value);
         }
 
@@ -2226,17 +2469,25 @@ namespace com.chronoxor.enums {
 
         public static bool operator==(EnumInt64 value1, EnumInt64 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return true;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return false;
             return value1.Value == value2.Value;
         }
 
         public static bool operator!=(EnumInt64 value1, EnumInt64 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return false;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return true;
             return value1.Value != value2.Value;
         }
 
         public static EnumInt64 Default => new EnumInt64();
 
-        public static com.chronoxor.FBE.FieldModelValueType<EnumInt64> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumInt64(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelReferenceType<EnumInt64> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumInt64(buffer, offset); }
 
         public const long _ENUM_VALUE_0_ = (long)0L + 0;
         public const long _ENUM_VALUE_1_ = (long)-9223372036854775807L + 0;
@@ -2271,7 +2522,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt64 field model
-    public class FieldModelEnumInt64 : com.chronoxor.FBE.FieldModelValueType<EnumInt64>
+    public class FieldModelEnumInt64 : com.chronoxor.FBE.FieldModelReferenceType<EnumInt64>
     {
         public FieldModelEnumInt64(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -2279,10 +2530,19 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 8;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<EnumInt64> Clone() { return new FieldModelEnumInt64(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelReferenceType<EnumInt64> Clone() { return new FieldModelEnumInt64(_buffer, _offset); }
 
         // Get the value
-        public override void Get(out EnumInt64 value) { Get(out value, EnumInt64.Default); }
+        public override void Get(out EnumInt64 value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = EnumInt64.Default;
+                return;
+            }
+
+            value = new EnumInt64((long)ReadInt64(FBEOffset));
+        }
         public override void Get(out EnumInt64 value, EnumInt64 defaults)
         {
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -2312,7 +2572,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumInt64 final model
-    public class FinalModelEnumInt64 : com.chronoxor.FBE.FinalModelValueType<EnumInt64>
+    public class FinalModelEnumInt64 : com.chronoxor.FBE.FinalModelReferenceType<EnumInt64>
     {
         public FinalModelEnumInt64(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -2323,7 +2583,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 8;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<EnumInt64> Clone() { return new FinalModelEnumInt64(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelReferenceType<EnumInt64> Clone() { return new FinalModelEnumInt64(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -2418,16 +2678,21 @@ namespace com.chronoxor.enums {
 
     [JsonConverter(typeof(EnumUInt64Converter))]
 #endif
-    public struct EnumUInt64 : IComparable, IComparable<EnumUInt64>, IEquatable<EnumUInt64>
+    public class EnumUInt64 : IComparable, IComparable<EnumUInt64>, IEquatable<EnumUInt64>
     {
         public ulong Value { get; internal set; }
 
-        public EnumUInt64(ulong value) : this()
+        public EnumUInt64()
+        {
+            Value = default;
+        }
+
+        public EnumUInt64(ulong value)
         {
             Value = value;
         }
 
-        public EnumUInt64(EnumUInt64 value) : this()
+        public EnumUInt64(EnumUInt64 value)
         {
             Value = value.Value;
         }
@@ -2444,11 +2709,15 @@ namespace com.chronoxor.enums {
 
         public override bool Equals(object other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return (other is EnumUInt64 value) && Value.Equals(value.Value);
         }
 
         public bool Equals(EnumUInt64 other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return Value.Equals(other.Value);
         }
 
@@ -2459,17 +2728,25 @@ namespace com.chronoxor.enums {
 
         public static bool operator==(EnumUInt64 value1, EnumUInt64 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return true;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return false;
             return value1.Value == value2.Value;
         }
 
         public static bool operator!=(EnumUInt64 value1, EnumUInt64 value2)
         {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return false;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return true;
             return value1.Value != value2.Value;
         }
 
         public static EnumUInt64 Default => new EnumUInt64();
 
-        public static com.chronoxor.FBE.FieldModelValueType<EnumUInt64> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumUInt64(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelReferenceType<EnumUInt64> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnumUInt64(buffer, offset); }
 
         public const ulong _ENUM_VALUE_0_ = (ulong)0UL + 0;
         public const ulong _ENUM_VALUE_1_ = (ulong)0UL + 0;
@@ -2504,7 +2781,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt64 field model
-    public class FieldModelEnumUInt64 : com.chronoxor.FBE.FieldModelValueType<EnumUInt64>
+    public class FieldModelEnumUInt64 : com.chronoxor.FBE.FieldModelReferenceType<EnumUInt64>
     {
         public FieldModelEnumUInt64(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -2512,10 +2789,19 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 8;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<EnumUInt64> Clone() { return new FieldModelEnumUInt64(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelReferenceType<EnumUInt64> Clone() { return new FieldModelEnumUInt64(_buffer, _offset); }
 
         // Get the value
-        public override void Get(out EnumUInt64 value) { Get(out value, EnumUInt64.Default); }
+        public override void Get(out EnumUInt64 value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = EnumUInt64.Default;
+                return;
+            }
+
+            value = new EnumUInt64((ulong)ReadUInt64(FBEOffset));
+        }
         public override void Get(out EnumUInt64 value, EnumUInt64 defaults)
         {
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -2545,7 +2831,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding EnumUInt64 final model
-    public class FinalModelEnumUInt64 : com.chronoxor.FBE.FinalModelValueType<EnumUInt64>
+    public class FinalModelEnumUInt64 : com.chronoxor.FBE.FinalModelReferenceType<EnumUInt64>
     {
         public FinalModelEnumUInt64(com.chronoxor.FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -2556,7 +2842,7 @@ namespace com.chronoxor.enums.FBE {
         public override long FBESize => 8;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<EnumUInt64> Clone() { return new FinalModelEnumUInt64(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelReferenceType<EnumUInt64> Clone() { return new FinalModelEnumUInt64(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -2596,7 +2882,7 @@ namespace com.chronoxor.enums.FBE {
 
 namespace com.chronoxor.enums {
 
-    public struct Enums : IComparable, IComparable<Enums>, IEquatable<Enums>
+    public class Enums : IComparable, IComparable<Enums>, IEquatable<Enums>
     {
         public EnumByte byte0;
         public EnumByte byte1;
@@ -2673,75 +2959,77 @@ namespace com.chronoxor.enums {
         #endif
         public long FBEType => FBETypeConst;
 
-        public static Enums Default => new Enums
+        public static Enums Default => new Enums();
+
+        public Enums()
         {
-            byte0 = global::com.chronoxor.enums.EnumByte.ENUM_VALUE_0
-            , byte1 = global::com.chronoxor.enums.EnumByte.ENUM_VALUE_1
-            , byte2 = global::com.chronoxor.enums.EnumByte.ENUM_VALUE_2
-            , byte3 = global::com.chronoxor.enums.EnumByte.ENUM_VALUE_3
-            , byte4 = global::com.chronoxor.enums.EnumByte.ENUM_VALUE_4
-            , byte5 = global::com.chronoxor.enums.EnumByte.ENUM_VALUE_5
-            , char0 = global::com.chronoxor.enums.EnumChar.ENUM_VALUE_0
-            , char1 = global::com.chronoxor.enums.EnumChar.ENUM_VALUE_1
-            , char2 = global::com.chronoxor.enums.EnumChar.ENUM_VALUE_2
-            , char3 = global::com.chronoxor.enums.EnumChar.ENUM_VALUE_3
-            , char4 = global::com.chronoxor.enums.EnumChar.ENUM_VALUE_4
-            , char5 = global::com.chronoxor.enums.EnumChar.ENUM_VALUE_5
-            , wchar0 = global::com.chronoxor.enums.EnumWChar.ENUM_VALUE_0
-            , wchar1 = global::com.chronoxor.enums.EnumWChar.ENUM_VALUE_1
-            , wchar2 = global::com.chronoxor.enums.EnumWChar.ENUM_VALUE_2
-            , wchar3 = global::com.chronoxor.enums.EnumWChar.ENUM_VALUE_3
-            , wchar4 = global::com.chronoxor.enums.EnumWChar.ENUM_VALUE_4
-            , wchar5 = global::com.chronoxor.enums.EnumWChar.ENUM_VALUE_5
-            , int8b0 = global::com.chronoxor.enums.EnumInt8.ENUM_VALUE_0
-            , int8b1 = global::com.chronoxor.enums.EnumInt8.ENUM_VALUE_1
-            , int8b2 = global::com.chronoxor.enums.EnumInt8.ENUM_VALUE_2
-            , int8b3 = global::com.chronoxor.enums.EnumInt8.ENUM_VALUE_3
-            , int8b4 = global::com.chronoxor.enums.EnumInt8.ENUM_VALUE_4
-            , int8b5 = global::com.chronoxor.enums.EnumInt8.ENUM_VALUE_5
-            , uint8b0 = global::com.chronoxor.enums.EnumUInt8.ENUM_VALUE_0
-            , uint8b1 = global::com.chronoxor.enums.EnumUInt8.ENUM_VALUE_1
-            , uint8b2 = global::com.chronoxor.enums.EnumUInt8.ENUM_VALUE_2
-            , uint8b3 = global::com.chronoxor.enums.EnumUInt8.ENUM_VALUE_3
-            , uint8b4 = global::com.chronoxor.enums.EnumUInt8.ENUM_VALUE_4
-            , uint8b5 = global::com.chronoxor.enums.EnumUInt8.ENUM_VALUE_5
-            , int16b0 = global::com.chronoxor.enums.EnumInt16.ENUM_VALUE_0
-            , int16b1 = global::com.chronoxor.enums.EnumInt16.ENUM_VALUE_1
-            , int16b2 = global::com.chronoxor.enums.EnumInt16.ENUM_VALUE_2
-            , int16b3 = global::com.chronoxor.enums.EnumInt16.ENUM_VALUE_3
-            , int16b4 = global::com.chronoxor.enums.EnumInt16.ENUM_VALUE_4
-            , int16b5 = global::com.chronoxor.enums.EnumInt16.ENUM_VALUE_5
-            , uint16b0 = global::com.chronoxor.enums.EnumUInt16.ENUM_VALUE_0
-            , uint16b1 = global::com.chronoxor.enums.EnumUInt16.ENUM_VALUE_1
-            , uint16b2 = global::com.chronoxor.enums.EnumUInt16.ENUM_VALUE_2
-            , uint16b3 = global::com.chronoxor.enums.EnumUInt16.ENUM_VALUE_3
-            , uint16b4 = global::com.chronoxor.enums.EnumUInt16.ENUM_VALUE_4
-            , uint16b5 = global::com.chronoxor.enums.EnumUInt16.ENUM_VALUE_5
-            , int32b0 = global::com.chronoxor.enums.EnumInt32.ENUM_VALUE_0
-            , int32b1 = global::com.chronoxor.enums.EnumInt32.ENUM_VALUE_1
-            , int32b2 = global::com.chronoxor.enums.EnumInt32.ENUM_VALUE_2
-            , int32b3 = global::com.chronoxor.enums.EnumInt32.ENUM_VALUE_3
-            , int32b4 = global::com.chronoxor.enums.EnumInt32.ENUM_VALUE_4
-            , int32b5 = global::com.chronoxor.enums.EnumInt32.ENUM_VALUE_5
-            , uint32b0 = global::com.chronoxor.enums.EnumUInt32.ENUM_VALUE_0
-            , uint32b1 = global::com.chronoxor.enums.EnumUInt32.ENUM_VALUE_1
-            , uint32b2 = global::com.chronoxor.enums.EnumUInt32.ENUM_VALUE_2
-            , uint32b3 = global::com.chronoxor.enums.EnumUInt32.ENUM_VALUE_3
-            , uint32b4 = global::com.chronoxor.enums.EnumUInt32.ENUM_VALUE_4
-            , uint32b5 = global::com.chronoxor.enums.EnumUInt32.ENUM_VALUE_5
-            , int64b0 = global::com.chronoxor.enums.EnumInt64.ENUM_VALUE_0
-            , int64b1 = global::com.chronoxor.enums.EnumInt64.ENUM_VALUE_1
-            , int64b2 = global::com.chronoxor.enums.EnumInt64.ENUM_VALUE_2
-            , int64b3 = global::com.chronoxor.enums.EnumInt64.ENUM_VALUE_3
-            , int64b4 = global::com.chronoxor.enums.EnumInt64.ENUM_VALUE_4
-            , int64b5 = global::com.chronoxor.enums.EnumInt64.ENUM_VALUE_5
-            , uint64b0 = global::com.chronoxor.enums.EnumUInt64.ENUM_VALUE_0
-            , uint64b1 = global::com.chronoxor.enums.EnumUInt64.ENUM_VALUE_1
-            , uint64b2 = global::com.chronoxor.enums.EnumUInt64.ENUM_VALUE_2
-            , uint64b3 = global::com.chronoxor.enums.EnumUInt64.ENUM_VALUE_3
-            , uint64b4 = global::com.chronoxor.enums.EnumUInt64.ENUM_VALUE_4
-            , uint64b5 = global::com.chronoxor.enums.EnumUInt64.ENUM_VALUE_5
-        };
+            this.byte0 = global::com.chronoxor.enums.EnumByte.ENUM_VALUE_0;
+            this.byte1 = global::com.chronoxor.enums.EnumByte.ENUM_VALUE_1;
+            this.byte2 = global::com.chronoxor.enums.EnumByte.ENUM_VALUE_2;
+            this.byte3 = global::com.chronoxor.enums.EnumByte.ENUM_VALUE_3;
+            this.byte4 = global::com.chronoxor.enums.EnumByte.ENUM_VALUE_4;
+            this.byte5 = global::com.chronoxor.enums.EnumByte.ENUM_VALUE_5;
+            this.char0 = global::com.chronoxor.enums.EnumChar.ENUM_VALUE_0;
+            this.char1 = global::com.chronoxor.enums.EnumChar.ENUM_VALUE_1;
+            this.char2 = global::com.chronoxor.enums.EnumChar.ENUM_VALUE_2;
+            this.char3 = global::com.chronoxor.enums.EnumChar.ENUM_VALUE_3;
+            this.char4 = global::com.chronoxor.enums.EnumChar.ENUM_VALUE_4;
+            this.char5 = global::com.chronoxor.enums.EnumChar.ENUM_VALUE_5;
+            this.wchar0 = global::com.chronoxor.enums.EnumWChar.ENUM_VALUE_0;
+            this.wchar1 = global::com.chronoxor.enums.EnumWChar.ENUM_VALUE_1;
+            this.wchar2 = global::com.chronoxor.enums.EnumWChar.ENUM_VALUE_2;
+            this.wchar3 = global::com.chronoxor.enums.EnumWChar.ENUM_VALUE_3;
+            this.wchar4 = global::com.chronoxor.enums.EnumWChar.ENUM_VALUE_4;
+            this.wchar5 = global::com.chronoxor.enums.EnumWChar.ENUM_VALUE_5;
+            this.int8b0 = global::com.chronoxor.enums.EnumInt8.ENUM_VALUE_0;
+            this.int8b1 = global::com.chronoxor.enums.EnumInt8.ENUM_VALUE_1;
+            this.int8b2 = global::com.chronoxor.enums.EnumInt8.ENUM_VALUE_2;
+            this.int8b3 = global::com.chronoxor.enums.EnumInt8.ENUM_VALUE_3;
+            this.int8b4 = global::com.chronoxor.enums.EnumInt8.ENUM_VALUE_4;
+            this.int8b5 = global::com.chronoxor.enums.EnumInt8.ENUM_VALUE_5;
+            this.uint8b0 = global::com.chronoxor.enums.EnumUInt8.ENUM_VALUE_0;
+            this.uint8b1 = global::com.chronoxor.enums.EnumUInt8.ENUM_VALUE_1;
+            this.uint8b2 = global::com.chronoxor.enums.EnumUInt8.ENUM_VALUE_2;
+            this.uint8b3 = global::com.chronoxor.enums.EnumUInt8.ENUM_VALUE_3;
+            this.uint8b4 = global::com.chronoxor.enums.EnumUInt8.ENUM_VALUE_4;
+            this.uint8b5 = global::com.chronoxor.enums.EnumUInt8.ENUM_VALUE_5;
+            this.int16b0 = global::com.chronoxor.enums.EnumInt16.ENUM_VALUE_0;
+            this.int16b1 = global::com.chronoxor.enums.EnumInt16.ENUM_VALUE_1;
+            this.int16b2 = global::com.chronoxor.enums.EnumInt16.ENUM_VALUE_2;
+            this.int16b3 = global::com.chronoxor.enums.EnumInt16.ENUM_VALUE_3;
+            this.int16b4 = global::com.chronoxor.enums.EnumInt16.ENUM_VALUE_4;
+            this.int16b5 = global::com.chronoxor.enums.EnumInt16.ENUM_VALUE_5;
+            this.uint16b0 = global::com.chronoxor.enums.EnumUInt16.ENUM_VALUE_0;
+            this.uint16b1 = global::com.chronoxor.enums.EnumUInt16.ENUM_VALUE_1;
+            this.uint16b2 = global::com.chronoxor.enums.EnumUInt16.ENUM_VALUE_2;
+            this.uint16b3 = global::com.chronoxor.enums.EnumUInt16.ENUM_VALUE_3;
+            this.uint16b4 = global::com.chronoxor.enums.EnumUInt16.ENUM_VALUE_4;
+            this.uint16b5 = global::com.chronoxor.enums.EnumUInt16.ENUM_VALUE_5;
+            this.int32b0 = global::com.chronoxor.enums.EnumInt32.ENUM_VALUE_0;
+            this.int32b1 = global::com.chronoxor.enums.EnumInt32.ENUM_VALUE_1;
+            this.int32b2 = global::com.chronoxor.enums.EnumInt32.ENUM_VALUE_2;
+            this.int32b3 = global::com.chronoxor.enums.EnumInt32.ENUM_VALUE_3;
+            this.int32b4 = global::com.chronoxor.enums.EnumInt32.ENUM_VALUE_4;
+            this.int32b5 = global::com.chronoxor.enums.EnumInt32.ENUM_VALUE_5;
+            this.uint32b0 = global::com.chronoxor.enums.EnumUInt32.ENUM_VALUE_0;
+            this.uint32b1 = global::com.chronoxor.enums.EnumUInt32.ENUM_VALUE_1;
+            this.uint32b2 = global::com.chronoxor.enums.EnumUInt32.ENUM_VALUE_2;
+            this.uint32b3 = global::com.chronoxor.enums.EnumUInt32.ENUM_VALUE_3;
+            this.uint32b4 = global::com.chronoxor.enums.EnumUInt32.ENUM_VALUE_4;
+            this.uint32b5 = global::com.chronoxor.enums.EnumUInt32.ENUM_VALUE_5;
+            this.int64b0 = global::com.chronoxor.enums.EnumInt64.ENUM_VALUE_0;
+            this.int64b1 = global::com.chronoxor.enums.EnumInt64.ENUM_VALUE_1;
+            this.int64b2 = global::com.chronoxor.enums.EnumInt64.ENUM_VALUE_2;
+            this.int64b3 = global::com.chronoxor.enums.EnumInt64.ENUM_VALUE_3;
+            this.int64b4 = global::com.chronoxor.enums.EnumInt64.ENUM_VALUE_4;
+            this.int64b5 = global::com.chronoxor.enums.EnumInt64.ENUM_VALUE_5;
+            this.uint64b0 = global::com.chronoxor.enums.EnumUInt64.ENUM_VALUE_0;
+            this.uint64b1 = global::com.chronoxor.enums.EnumUInt64.ENUM_VALUE_1;
+            this.uint64b2 = global::com.chronoxor.enums.EnumUInt64.ENUM_VALUE_2;
+            this.uint64b3 = global::com.chronoxor.enums.EnumUInt64.ENUM_VALUE_3;
+            this.uint64b4 = global::com.chronoxor.enums.EnumUInt64.ENUM_VALUE_4;
+            this.uint64b5 = global::com.chronoxor.enums.EnumUInt64.ENUM_VALUE_5;
+        }
 
         public Enums(EnumByte byte0, EnumByte byte1, EnumByte byte2, EnumByte byte3, EnumByte byte4, EnumByte byte5, EnumChar char0, EnumChar char1, EnumChar char2, EnumChar char3, EnumChar char4, EnumChar char5, EnumWChar wchar0, EnumWChar wchar1, EnumWChar wchar2, EnumWChar wchar3, EnumWChar wchar4, EnumWChar wchar5, EnumInt8 int8b0, EnumInt8 int8b1, EnumInt8 int8b2, EnumInt8 int8b3, EnumInt8 int8b4, EnumInt8 int8b5, EnumUInt8 uint8b0, EnumUInt8 uint8b1, EnumUInt8 uint8b2, EnumUInt8 uint8b3, EnumUInt8 uint8b4, EnumUInt8 uint8b5, EnumInt16 int16b0, EnumInt16 int16b1, EnumInt16 int16b2, EnumInt16 int16b3, EnumInt16 int16b4, EnumInt16 int16b5, EnumUInt16 uint16b0, EnumUInt16 uint16b1, EnumUInt16 uint16b2, EnumUInt16 uint16b3, EnumUInt16 uint16b4, EnumUInt16 uint16b5, EnumInt32 int32b0, EnumInt32 int32b1, EnumInt32 int32b2, EnumInt32 int32b3, EnumInt32 int32b4, EnumInt32 int32b5, EnumUInt32 uint32b0, EnumUInt32 uint32b1, EnumUInt32 uint32b2, EnumUInt32 uint32b3, EnumUInt32 uint32b4, EnumUInt32 uint32b5, EnumInt64 int64b0, EnumInt64 int64b1, EnumInt64 int64b2, EnumInt64 int64b3, EnumInt64 int64b4, EnumInt64 int64b5, EnumUInt64 uint64b0, EnumUInt64 uint64b1, EnumUInt64 uint64b2, EnumUInt64 uint64b3, EnumUInt64 uint64b4, EnumUInt64 uint64b5)
         {
@@ -2813,6 +3101,76 @@ namespace com.chronoxor.enums {
             this.uint64b5 = uint64b5;
         }
 
+        public Enums(Enums other)
+        {
+            this.byte0 = other.byte0;
+            this.byte1 = other.byte1;
+            this.byte2 = other.byte2;
+            this.byte3 = other.byte3;
+            this.byte4 = other.byte4;
+            this.byte5 = other.byte5;
+            this.char0 = other.char0;
+            this.char1 = other.char1;
+            this.char2 = other.char2;
+            this.char3 = other.char3;
+            this.char4 = other.char4;
+            this.char5 = other.char5;
+            this.wchar0 = other.wchar0;
+            this.wchar1 = other.wchar1;
+            this.wchar2 = other.wchar2;
+            this.wchar3 = other.wchar3;
+            this.wchar4 = other.wchar4;
+            this.wchar5 = other.wchar5;
+            this.int8b0 = other.int8b0;
+            this.int8b1 = other.int8b1;
+            this.int8b2 = other.int8b2;
+            this.int8b3 = other.int8b3;
+            this.int8b4 = other.int8b4;
+            this.int8b5 = other.int8b5;
+            this.uint8b0 = other.uint8b0;
+            this.uint8b1 = other.uint8b1;
+            this.uint8b2 = other.uint8b2;
+            this.uint8b3 = other.uint8b3;
+            this.uint8b4 = other.uint8b4;
+            this.uint8b5 = other.uint8b5;
+            this.int16b0 = other.int16b0;
+            this.int16b1 = other.int16b1;
+            this.int16b2 = other.int16b2;
+            this.int16b3 = other.int16b3;
+            this.int16b4 = other.int16b4;
+            this.int16b5 = other.int16b5;
+            this.uint16b0 = other.uint16b0;
+            this.uint16b1 = other.uint16b1;
+            this.uint16b2 = other.uint16b2;
+            this.uint16b3 = other.uint16b3;
+            this.uint16b4 = other.uint16b4;
+            this.uint16b5 = other.uint16b5;
+            this.int32b0 = other.int32b0;
+            this.int32b1 = other.int32b1;
+            this.int32b2 = other.int32b2;
+            this.int32b3 = other.int32b3;
+            this.int32b4 = other.int32b4;
+            this.int32b5 = other.int32b5;
+            this.uint32b0 = other.uint32b0;
+            this.uint32b1 = other.uint32b1;
+            this.uint32b2 = other.uint32b2;
+            this.uint32b3 = other.uint32b3;
+            this.uint32b4 = other.uint32b4;
+            this.uint32b5 = other.uint32b5;
+            this.int64b0 = other.int64b0;
+            this.int64b1 = other.int64b1;
+            this.int64b2 = other.int64b2;
+            this.int64b3 = other.int64b3;
+            this.int64b4 = other.int64b4;
+            this.int64b5 = other.int64b5;
+            this.uint64b0 = other.uint64b0;
+            this.uint64b1 = other.uint64b1;
+            this.uint64b2 = other.uint64b2;
+            this.uint64b3 = other.uint64b3;
+            this.uint64b4 = other.uint64b4;
+            this.uint64b5 = other.uint64b5;
+        }
+
         public Enums Clone()
         {
             // Serialize the struct to the FBE stream
@@ -2840,6 +3198,8 @@ namespace com.chronoxor.enums {
 
         public override bool Equals(object other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             if (!(other is Enums))
                 return false;
             return true;
@@ -2847,6 +3207,8 @@ namespace com.chronoxor.enums {
 
         public bool Equals(Enums other)
         {
+            if (Object.ReferenceEquals(other, null))
+                return false;
             return true;
         }
 
@@ -2856,8 +3218,22 @@ namespace com.chronoxor.enums {
             return hash;
         }
 
-        public static bool operator==(Enums lhs, Enums rhs) => lhs.Equals(rhs);
-        public static bool operator!=(Enums lhs, Enums rhs) => !(lhs == rhs);
+        public static bool operator==(Enums lhs, Enums rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null))
+                return true;
+            if (Object.ReferenceEquals(lhs, null) || Object.ReferenceEquals(rhs, null))
+                return false;
+            return lhs.Equals(rhs);
+        }
+        public static bool operator!=(Enums lhs, Enums rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null))
+                return false;
+            if (Object.ReferenceEquals(lhs, null) || Object.ReferenceEquals(rhs, null))
+                return true;
+            return !lhs.Equals(rhs);
+        }
 
         public override string ToString()
         {
@@ -2945,7 +3321,7 @@ namespace com.chronoxor.enums {
             return result;
         }
 
-        public static com.chronoxor.FBE.FieldModelValueType<Enums> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnums(buffer, offset); }
+        public static com.chronoxor.FBE.FieldModelReferenceType<Enums> CreateFieldModel(com.chronoxor.FBE.Buffer buffer, long offset) { return new enums.FBE.FieldModelEnums(buffer, offset); }
     }
 
 } // namespace com.chronoxor.enums
@@ -2955,7 +3331,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding Enums field model
-    public class FieldModelEnums : com.chronoxor.FBE.FieldModelValueType<Enums>
+    public class FieldModelEnums : com.chronoxor.FBE.FieldModelReferenceType<Enums>
     {
         public readonly com.chronoxor.enums.FBE.FieldModelEnumByte byte0;
         public readonly com.chronoxor.enums.FBE.FieldModelEnumByte byte1;
@@ -3265,7 +3641,7 @@ namespace com.chronoxor.enums.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the field model
-        public override com.chronoxor.FBE.FieldModelValueType<Enums> Clone() { return new FieldModelEnums(_buffer, _offset); }
+        public override com.chronoxor.FBE.FieldModelReferenceType<Enums> Clone() { return new FieldModelEnums(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override bool Verify() { return Verify(true); }
@@ -3723,7 +4099,19 @@ namespace com.chronoxor.enums.FBE {
         }
 
         // Get the struct value
-        public override void Get(out Enums fbeValue) { Get(out fbeValue, Enums.Default); }
+        public override void Get(out Enums fbeValue)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = new Enums();
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
         public override void Get(out Enums fbeValue, Enums defaults)
         {
             long fbeBegin = GetBegin();
@@ -3741,9 +4129,9 @@ namespace com.chronoxor.enums.FBE {
         // Get the struct fields values
         public void GetFields(out Enums fbeValue, long fbeStructSize)
         {
-            long fbeCurrentSize = 4 + 4;
+            fbeValue = new Enums();
 
-            fbeValue = Enums.Default;
+            long fbeCurrentSize = 4 + 4;
 
             if ((fbeCurrentSize + byte0.FBESize) <= fbeStructSize)
                 byte0.Get(out fbeValue.byte0, global::com.chronoxor.enums.EnumByte.ENUM_VALUE_0);
@@ -4315,7 +4703,7 @@ namespace com.chronoxor.enums.FBE {
         {
             if ((Buffer.Offset + model.FBEOffset - 4) > Buffer.Size)
             {
-                value = Enums.Default;
+                value = new Enums();
                 return 0;
             }
 
@@ -4323,7 +4711,7 @@ namespace com.chronoxor.enums.FBE {
             Debug.Assert((fbeFullSize >= model.FBESize), "Model is broken!");
             if (fbeFullSize < model.FBESize)
             {
-                value = Enums.Default;
+                value = new Enums();
                 return 0;
             }
 
@@ -4345,7 +4733,7 @@ namespace com.chronoxor.enums.FBE {
     using global::com.chronoxor.enums;
 
     // Fast Binary Encoding Enums final model
-    public class FinalModelEnums : com.chronoxor.FBE.FinalModelValueType<Enums>
+    public class FinalModelEnums : com.chronoxor.FBE.FinalModelReferenceType<Enums>
     {
         public readonly com.chronoxor.enums.FBE.FinalModelEnumByte byte0;
         public readonly com.chronoxor.enums.FBE.FinalModelEnumByte byte1;
@@ -4563,7 +4951,7 @@ namespace com.chronoxor.enums.FBE {
         public long FBEType => FBETypeConst;
 
         // Clone the final model
-        public override com.chronoxor.FBE.FinalModelValueType<Enums> Clone() { return new FinalModelEnums(_buffer, _offset); }
+        public override com.chronoxor.FBE.FinalModelReferenceType<Enums> Clone() { return new FinalModelEnums(_buffer, _offset); }
 
         // Check if the struct value is valid
         public override long Verify()
@@ -4991,11 +5379,12 @@ namespace com.chronoxor.enums.FBE {
         // Get the struct fields values
         public long GetFields(out Enums fbeValue)
         {
+            fbeValue = new Enums();
+
             long fbeCurrentOffset = 0;
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            fbeValue = Enums.Default;
 
             byte0.FBEOffset = fbeCurrentOffset;
             fbeFieldSize = byte0.Get(out fbeValue.byte0);
@@ -5739,7 +6128,7 @@ namespace com.chronoxor.enums.FBE {
             Debug.Assert(((Buffer.Offset + _model.FBEOffset) <= Buffer.Size), "Model is broken!");
             if ((Buffer.Offset + _model.FBEOffset) > Buffer.Size)
             {
-                value = Enums.Default;
+                value = new Enums();
                 return 0;
             }
 
@@ -5748,7 +6137,7 @@ namespace com.chronoxor.enums.FBE {
             Debug.Assert(((fbeStructSize > 0) && (fbeStructType == FBEType)), "Model is broken!");
             if ((fbeStructSize <= 0) || (fbeStructType != FBEType))
             {
-                value = Enums.Default;
+                value = new Enums();
                 return 8;
             }
 
@@ -5822,8 +6211,6 @@ namespace com.chronoxor.enums.FBE {
     // Fast Binary Encoding com.chronoxor.enums receiver
     public class Receiver : com.chronoxor.FBE.Receiver, IReceiverListener
     {
-        // Receiver values accessors
-
         // Receiver models accessors
 
         public Receiver() : base(false)
@@ -5892,8 +6279,6 @@ namespace com.chronoxor.enums.FBE {
     public class Client : com.chronoxor.FBE.Client, IClientListener
     {
         // Client sender models accessors
-
-        // Client receiver values accessors
 
         // Client receiver models accessors
 
@@ -5988,8 +6373,6 @@ namespace com.chronoxor.enums.FBE {
     // Fast Binary Encoding com.chronoxor.enums final receiver
     public class FinalReceiver : com.chronoxor.FBE.Receiver, IFinalReceiverListener
     {
-        // Receiver values accessors
-
         // Receiver models accessors
 
         public FinalReceiver() : base(true)
@@ -6024,8 +6407,6 @@ namespace com.chronoxor.enums.FBE {
     public class FinalClient : com.chronoxor.FBE.Client, IFinalClientListener
     {
         // Client sender models accessors
-
-        // Client receiver values accessors
 
         // Client receiver models accessors
 

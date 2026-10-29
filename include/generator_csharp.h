@@ -30,12 +30,17 @@ public:
     bool Proto() const noexcept { return _proto; }
     GeneratorCSharp& Proto(bool proto) noexcept { _proto = proto; return *this; }
 
+    // Value type structs code generation
+    bool Structs() const noexcept { return _structs; }
+    GeneratorCSharp& Structs(bool structs) noexcept { _structs = structs; return *this; }
+
     void Generate(const std::shared_ptr<Package>& package) override;
 
 private:
     bool _final{false};
     bool _json{false};
     bool _proto{false};
+    bool _structs{false};
 
     void GenerateHeader(const std::string& source);
     void GenerateFooter();

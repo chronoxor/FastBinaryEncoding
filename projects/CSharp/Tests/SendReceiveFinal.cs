@@ -47,8 +47,8 @@ namespace Tests
             account.id = 1;
             account.name = "Test";
             account.state = StateEx.good;
-            account.wallet.parent.currency = "USD";
-            account.wallet.parent.amount = 1000.0;
+            account.wallet.currency = "USD";
+            account.wallet.amount = 1000.0;
             account.asset = new Balance(new com.chronoxor.proto.Balance("EUR", 100.0), 100.0);
             account.orders.Add(new Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0, 0.0, 0.0));
             account.orders.Add(new Order(2, "EURUSD", OrderSide.sell, OrderType.limit, 1.0, 100.0, 0.0, 0.0));

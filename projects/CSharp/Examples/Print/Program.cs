@@ -88,15 +88,15 @@ namespace Print
             structList.f5.AddLast(EnumSimple.ENUM_VALUE_1);
             structList.f5.AddLast(EnumSimple.ENUM_VALUE_2);
             structList.f6.AddLast(EnumSimple.ENUM_VALUE_1);
-            structList.f6.AddLast((EnumSimple?)null);
+            structList.f6.AddLast((EnumSimple)null);
             structList.f7.AddLast(FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2);
             structList.f7.AddLast(FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2 | FlagsSimple.FLAG_VALUE_3);
             structList.f8.AddLast(FlagsSimple.FLAG_VALUE_1 | FlagsSimple.FLAG_VALUE_2);
-            structList.f8.AddLast((FlagsSimple?)null);
+            structList.f8.AddLast((FlagsSimple)null);
             structList.f9.AddLast(StructSimple.Default);
             structList.f9.AddLast(StructSimple.Default);
             structList.f10.AddLast(StructSimple.Default);
-            structList.f10.AddLast((StructSimple?)null);
+            structList.f10.AddLast((StructSimple)null);
             Console.WriteLine(structList);
             Console.WriteLine();
 

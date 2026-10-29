@@ -35,9 +35,9 @@ namespace Tests
             Assert.True(account2.state.HasFlags(State.good));
             Assert.True(account2.wallet.currency == "USD");
             Assert.True(account2.wallet.amount == 1000.0);
-            Assert.True(account2.asset.HasValue);
-            Assert.True(account2.asset.Value.currency == "EUR");
-            Assert.True(account2.asset.Value.amount == 100.0);
+            Assert.True(account2.asset != null);
+            Assert.True(account2.asset?.currency == "EUR");
+            Assert.True(account2.asset?.amount == 100.0);
             Assert.True(account2.orders.Count == 3);
             Assert.True(account2.orders[0].id == 1);
             Assert.True(account2.orders[0].symbol == "EURUSD");
