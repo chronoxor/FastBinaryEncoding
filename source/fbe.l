@@ -190,6 +190,7 @@ int main(int argc, char** argv)
     parser.add_option("--cpp").dest("cpp").action("store_true").set_default(0).help("Generate C++ code");
     parser.add_option("--cpp-logging").dest("cpp-logging").action("store_true").set_default(0).help("Generate C++ logging code");
     parser.add_option("--csharp").dest("csharp").action("store_true").set_default(0).help("Generate C# code");
+    parser.add_option("--csharp-structs").dest("csharp-structs").action("store_true").set_default(0).help("Generate C# code based on value type structs");
     parser.add_option("--go").dest("go").action("store_true").set_default(0).help("Generate Go code");
     parser.add_option("--java7").dest("java7").action("store_true").set_default(0).help("Generate Java code (old Java 7 for Android)");
     parser.add_option("--java").dest("java").action("store_true").set_default(0).help("Generate Java code");
@@ -222,6 +223,7 @@ int main(int argc, char** argv)
     bool cpp = options.get("cpp");
     bool cpp_logging = options.get("cpp-logging");
     bool csharp = options.get("csharp");
+    bool csharp_structs = options.get("csharp-structs");
     bool go = options.get("go");
     bool java = options.get("java");
     bool java7 = options.get("java7");
@@ -287,16 +289,16 @@ int main(int argc, char** argv)
     }
 
     // Generate the output
-    if (cpp)
+    if (cpp || cpp_logging)
     {
         if (!quiet) std::cout << "Generating C++ code...";
         FBE::GeneratorCpp(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Logging(cpp_logging).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
-    if (csharp)
+    if (csharp || csharp_structs)
     {
         if (!quiet) std::cout << "Generating C# code...";
-        FBE::GeneratorCSharp(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
+        FBE::GeneratorCSharp(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Structs(csharp_structs).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (go)

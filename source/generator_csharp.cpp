@@ -4524,7 +4524,80 @@ void GeneratorCSharp::GenerateEnum(const std::string& domain, const std::shared_
     [JsonConverter(typeof(_ENUM_NAME_Converter))]
 #endif)CODE";
 
-    std::string code = R"CODE(
+    std::string code_class = R"CODE(
+    public class _ENUM_NAME_ : IComparable, IComparable<_ENUM_NAME_>, IEquatable<_ENUM_NAME_>
+    {
+        public _ENUM_TYPE_ Value { get; internal set; }
+
+        public _ENUM_NAME_()
+        {
+            Value = default;
+        }
+
+        public _ENUM_NAME_(_ENUM_TYPE_ value)
+        {
+            Value = value;
+        }
+
+        public _ENUM_NAME_(_ENUM_NAME_ value)
+        {
+            Value = value.Value;
+        }
+
+        public int CompareTo(object other)
+        {
+            return Value.CompareTo(((_ENUM_NAME_)other).Value);
+        }
+
+        public int CompareTo(_ENUM_NAME_ other)
+        {
+            return Value.CompareTo(other.Value);
+        }
+
+        public override bool Equals(object other)
+        {
+            if (Object.ReferenceEquals(other, null))
+                return false;
+            return (other is _ENUM_NAME_ value) && Value.Equals(value.Value);
+        }
+
+        public bool Equals(_ENUM_NAME_ other)
+        {
+            if (Object.ReferenceEquals(other, null))
+                return false;
+            return Value.Equals(other.Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public static bool operator==(_ENUM_NAME_ value1, _ENUM_NAME_ value2)
+        {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return true;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return false;
+            return value1.Value == value2.Value;
+        }
+
+        public static bool operator!=(_ENUM_NAME_ value1, _ENUM_NAME_ value2)
+        {
+            if (Object.ReferenceEquals(value1, null) && Object.ReferenceEquals(value2, null))
+                return false;
+            if (Object.ReferenceEquals(value1, null) || Object.ReferenceEquals(value2, null))
+                return true;
+            return value1.Value != value2.Value;
+        }
+
+        public static _ENUM_NAME_ Default => new _ENUM_NAME_();
+
+        public static _DOMAIN_FBE.FieldModelReferenceType<_ENUM_NAME_> CreateFieldModel(_DOMAIN_FBE.Buffer buffer, long offset) { return new _PACKAGE_.FBE.FieldModel_ENUM_NAME_(buffer, offset); }
+
+)CODE";
+
+    std::string code_struct = R"CODE(
     public struct _ENUM_NAME_ : IComparable, IComparable<_ENUM_NAME_>, IEquatable<_ENUM_NAME_>
     {
         public _ENUM_TYPE_ Value { get; internal set; }
@@ -4580,6 +4653,7 @@ void GeneratorCSharp::GenerateEnum(const std::string& domain, const std::shared_
 
 )CODE";
 
+    std::string code = Structs() ? code_struct : code_class;
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
     std::string enum_base_type = ConvertEnumType(enum_type);
 
@@ -4681,7 +4755,7 @@ void GeneratorCSharp::GenerateEnumFieldModel(const std::string& domain, const st
     using global::_DOMAIN__PACKAGE_;
 
     // Fast Binary Encoding _ENUM_NAME_ field model
-    public class FieldModel_ENUM_NAME_ : _DOMAIN_FBE.FieldModelValueType<_ENUM_NAME_>
+    public class FieldModel_ENUM_NAME_ : _DOMAIN_FBE._FIELD_MODEL_TYPE_<_ENUM_NAME_>
     {
         public FieldModel_ENUM_NAME_(_DOMAIN_FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -4689,10 +4763,19 @@ void GeneratorCSharp::GenerateEnumFieldModel(const std::string& domain, const st
         public override long FBESize => _ENUM_SIZE_;
 
         // Clone the field model
-        public override _DOMAIN_FBE.FieldModelValueType<_ENUM_NAME_> Clone() { return new FieldModel_ENUM_NAME_(_buffer, _offset); }
+        public override _DOMAIN_FBE._FIELD_MODEL_TYPE_<_ENUM_NAME_> Clone() { return new FieldModel_ENUM_NAME_(_buffer, _offset); }
 
         // Get the value
-        public override void Get(out _ENUM_NAME_ value) { Get(out value, _ENUM_NAME_.Default); }
+        public override void Get(out _ENUM_NAME_ value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = _ENUM_NAME_.Default;
+                return;
+            }
+
+            value = new _ENUM_NAME_((_ENUM_TYPE_)_ENUM_READ_(FBEOffset));
+        }
         public override void Get(out _ENUM_NAME_ value, _ENUM_NAME_ defaults)
         {
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -4726,6 +4809,7 @@ void GeneratorCSharp::GenerateEnumFieldModel(const std::string& domain, const st
     code = std::regex_replace(code, std::regex("_ENUM_TYPE_"), enum_base_type);
     code = std::regex_replace(code, std::regex("_ENUM_SIZE_"), ConvertEnumSize(enum_type));
     code = std::regex_replace(code, std::regex("_ENUM_READ_"), ConvertEnumRead(enum_type));
+    code = std::regex_replace(code, std::regex("_FIELD_MODEL_TYPE_"), Structs() ? "FieldModelValueType" : "FieldModelReferenceType");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     // Generate enum model
@@ -4748,7 +4832,7 @@ void GeneratorCSharp::GenerateEnumFinalModel(const std::string& domain, const st
     using global::_DOMAIN__PACKAGE_;
 
     // Fast Binary Encoding _ENUM_NAME_ final model
-    public class FinalModel_ENUM_NAME_ : _DOMAIN_FBE.FinalModelValueType<_ENUM_NAME_>
+    public class FinalModel_ENUM_NAME_ : _DOMAIN_FBE._FINAL_MODEL_TYPE_<_ENUM_NAME_>
     {
         public FinalModel_ENUM_NAME_(_DOMAIN_FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -4759,7 +4843,7 @@ void GeneratorCSharp::GenerateEnumFinalModel(const std::string& domain, const st
         public override long FBESize => _ENUM_SIZE_;
 
         // Clone the final model
-        public override _DOMAIN_FBE.FinalModelValueType<_ENUM_NAME_> Clone() { return new FinalModel_ENUM_NAME_(_buffer, _offset); }
+        public override _DOMAIN_FBE._FINAL_MODEL_TYPE_<_ENUM_NAME_> Clone() { return new FinalModel_ENUM_NAME_(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -4806,6 +4890,7 @@ void GeneratorCSharp::GenerateEnumFinalModel(const std::string& domain, const st
     code = std::regex_replace(code, std::regex("_ENUM_TYPE_"), enum_base_type);
     code = std::regex_replace(code, std::regex("_ENUM_SIZE_"), ConvertEnumSize(enum_type));
     code = std::regex_replace(code, std::regex("_ENUM_READ_"), ConvertEnumRead(enum_type));
+    code = std::regex_replace(code, std::regex("_FINAL_MODEL_TYPE_"), Structs() ? "FinalModelValueType" : "FinalModelReferenceType");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     // Generate enum model
@@ -4881,7 +4966,112 @@ void GeneratorCSharp::GenerateFlags(const std::string& domain, const std::shared
     [JsonConverter(typeof(_FLAGS_NAME_Converter))]
 #endif)CODE";
 
-    std::string code = R"CODE(
+    std::string code_class = R"CODE(
+    public class _FLAGS_NAME_ : IComparable, IComparable<_FLAGS_NAME_>, IEquatable<_FLAGS_NAME_>
+    {
+        public _FLAGS_TYPE_ Value { get; internal set; }
+
+        public _FLAGS_NAME_()
+        {
+            Value = default;
+        }
+
+        public _FLAGS_NAME_(_FLAGS_TYPE_ value)
+        {
+            Value = value;
+        }
+
+        public _FLAGS_NAME_(_FLAGS_NAME_ value)
+        {
+            Value = value.Value;
+        }
+
+        public bool HasFlags(_FLAGS_NAME_ flags)
+        {
+            return (((Value & flags.Value) != 0) && ((Value & flags.Value) == flags.Value));
+        }
+
+        public _FLAGS_NAME_ SetFlags(_FLAGS_NAME_ flags)
+        {
+            Value |= flags.Value;
+            return this;
+        }
+
+        public _FLAGS_NAME_ RemoveFlags(_FLAGS_NAME_ flags)
+        {
+            Value &= (_FLAGS_TYPE_)~flags.Value;
+            return this;
+        }
+
+        public int CompareTo(object other)
+        {
+            return Value.CompareTo(((_FLAGS_NAME_)other).Value);
+        }
+
+        public int CompareTo(_FLAGS_NAME_ other)
+        {
+            return Value.CompareTo(other.Value);
+        }
+
+        public override bool Equals(object other)
+        {
+            if (Object.ReferenceEquals(other, null))
+                return false;
+            return (other is _FLAGS_NAME_ value) && Value.Equals(value.Value);
+        }
+
+        public bool Equals(_FLAGS_NAME_ other)
+        {
+            if (Object.ReferenceEquals(other, null))
+                return false;
+            return Value.Equals(other.Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public static bool operator==(_FLAGS_NAME_ flags1, _FLAGS_NAME_ flags2)
+        {
+            if (Object.ReferenceEquals(flags1, null) && Object.ReferenceEquals(flags2, null))
+                return true;
+            if (Object.ReferenceEquals(flags1, null) || Object.ReferenceEquals(flags2, null))
+                return false;
+            return flags1.Value == flags2.Value;
+        }
+
+        public static bool operator!=(_FLAGS_NAME_ flags1, _FLAGS_NAME_ flags2)
+        {
+            if (Object.ReferenceEquals(flags1, null) && Object.ReferenceEquals(flags2, null))
+                return false;
+            if (Object.ReferenceEquals(flags1, null) || Object.ReferenceEquals(flags2, null))
+                return true;
+            return flags1.Value != flags2.Value;
+        }
+
+        public static _FLAGS_NAME_ operator&(_FLAGS_NAME_ flags1, _FLAGS_NAME_ flags2)
+        {
+            return new _FLAGS_NAME_((_FLAGS_TYPE_)(flags1.Value & flags2.Value));
+        }
+
+        public static _FLAGS_NAME_ operator|(_FLAGS_NAME_ flags1, _FLAGS_NAME_ flags2)
+        {
+            return new _FLAGS_NAME_((_FLAGS_TYPE_)(flags1.Value | flags2.Value));
+        }
+
+        public static _FLAGS_NAME_ operator^(_FLAGS_NAME_ flags1, _FLAGS_NAME_ flags2)
+        {
+            return new _FLAGS_NAME_((_FLAGS_TYPE_)(flags1.Value ^ flags2.Value));
+        }
+
+        public static _FLAGS_NAME_ Default => new _FLAGS_NAME_();
+
+        public static _DOMAIN_FBE.FieldModelReferenceType<_FLAGS_NAME_> CreateFieldModel(_DOMAIN_FBE.Buffer buffer, long offset) { return new _PACKAGE_.FBE.FieldModel_FLAGS_NAME_(buffer, offset); }
+
+)CODE";
+
+    std::string code_struct = R"CODE(
     public struct _FLAGS_NAME_ : IComparable, IComparable<_FLAGS_NAME_>, IEquatable<_FLAGS_NAME_>
     {
         public _FLAGS_TYPE_ Value { get; internal set; }
@@ -4969,6 +5159,7 @@ void GeneratorCSharp::GenerateFlags(const std::string& domain, const std::shared
 
 )CODE";
 
+    std::string code = Structs() ? code_struct : code_class;
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
     std::string flags_base_type = ConvertEnumType(flags_type);
 
@@ -5066,7 +5257,7 @@ void GeneratorCSharp::GenerateFlagsFieldModel(const std::string& domain, const s
     using global::_DOMAIN__PACKAGE_;
 
     // Fast Binary Encoding _FLAGS_NAME_ field model
-    public class FieldModel_FLAGS_NAME_ : _DOMAIN_FBE.FieldModelValueType<_FLAGS_NAME_>
+    public class FieldModel_FLAGS_NAME_ : _DOMAIN_FBE._FIELD_MODEL_TYPE_<_FLAGS_NAME_>
     {
         public FieldModel_FLAGS_NAME_(_DOMAIN_FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -5074,10 +5265,19 @@ void GeneratorCSharp::GenerateFlagsFieldModel(const std::string& domain, const s
         public override long FBESize => _FLAGS_SIZE_;
 
         // Clone the field model
-        public override _DOMAIN_FBE.FieldModelValueType<_FLAGS_NAME_> Clone() { return new FieldModel_FLAGS_NAME_(_buffer, _offset); }
+        public override _DOMAIN_FBE._FIELD_MODEL_TYPE_<_FLAGS_NAME_> Clone() { return new FieldModel_FLAGS_NAME_(_buffer, _offset); }
 
         // Get the value
-        public override void Get(out _FLAGS_NAME_ value) { Get(out value, _FLAGS_NAME_.Default); }
+        public override void Get(out _FLAGS_NAME_ value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = _FLAGS_NAME_.Default;
+                return;
+            }
+
+            value = new _FLAGS_NAME_((_FLAGS_TYPE_)_FLAGS_READ_(FBEOffset));
+        }
         public override void Get(out _FLAGS_NAME_ value, _FLAGS_NAME_ defaults)
         {
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -5111,6 +5311,7 @@ void GeneratorCSharp::GenerateFlagsFieldModel(const std::string& domain, const s
     code = std::regex_replace(code, std::regex("_FLAGS_TYPE_"), flags_base_type);
     code = std::regex_replace(code, std::regex("_FLAGS_SIZE_"), ConvertEnumSize(flags_type));
     code = std::regex_replace(code, std::regex("_FLAGS_READ_"), ConvertEnumRead(flags_type));
+    code = std::regex_replace(code, std::regex("_FIELD_MODEL_TYPE_"), Structs() ? "FieldModelValueType" : "FieldModelReferenceType");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     // Generate flags model
@@ -5133,7 +5334,7 @@ void GeneratorCSharp::GenerateFlagsFinalModel(const std::string& domain, const s
     using global::_DOMAIN__PACKAGE_;
 
     // Fast Binary Encoding _FLAGS_NAME_ final model
-    public class FinalModel_FLAGS_NAME_ : _DOMAIN_FBE.FinalModelValueType<_FLAGS_NAME_>
+    public class FinalModel_FLAGS_NAME_ : _DOMAIN_FBE._FINAL_MODEL_TYPE_<_FLAGS_NAME_>
     {
         public FinalModel_FLAGS_NAME_(_DOMAIN_FBE.Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -5144,7 +5345,7 @@ void GeneratorCSharp::GenerateFlagsFinalModel(const std::string& domain, const s
         public override long FBESize => _FLAGS_SIZE_;
 
         // Clone the final model
-        public override _DOMAIN_FBE.FinalModelValueType<_FLAGS_NAME_> Clone() { return new FinalModel_FLAGS_NAME_(_buffer, _offset); }
+        public override _DOMAIN_FBE._FINAL_MODEL_TYPE_<_FLAGS_NAME_> Clone() { return new FinalModel_FLAGS_NAME_(_buffer, _offset); }
 
         // Check if the value is valid
         public override long Verify()
@@ -5191,6 +5392,7 @@ void GeneratorCSharp::GenerateFlagsFinalModel(const std::string& domain, const s
     code = std::regex_replace(code, std::regex("_FLAGS_TYPE_"), flags_base_type);
     code = std::regex_replace(code, std::regex("_FLAGS_SIZE_"), ConvertEnumSize(flags_type));
     code = std::regex_replace(code, std::regex("_FLAGS_READ_"), ConvertEnumRead(flags_type));
+    code = std::regex_replace(code, std::regex("_FINAL_MODEL_TYPE_"), Structs() ? "FinalModelValueType" : "FinalModelReferenceType");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     // Generate flags model
@@ -5211,14 +5413,17 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
 
     // Generate struct begin
     WriteLine();
-    WriteIndent("public struct " + *s->name + " : IComparable, IComparable<" + *s->name + ">, IEquatable<" + *s->name + ">");
+    if (Structs())
+        WriteIndent("public struct " + *s->name + " : IComparable, IComparable<" + *s->name + ">, IEquatable<" + *s->name + ">");
+    else
+        WriteIndent("public class " + *s->name + " : " + ((s->base && !s->base->empty()) ? (ConvertTypeName(*s->base, false) + ", ") : "") + "IComparable, IComparable<" + *s->name + ">, IEquatable<" + *s->name + ">");
     WriteLine();
     WriteLineIndent("{");
     Indent(1);
 
     // Generate struct body
     bool id = false;
-    if (s->base && !s->base->empty())
+    if (Structs() && s->base && !s->base->empty())
     {
         if (JSON())
         {
@@ -5250,9 +5455,9 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
     // Generate struct FBE type property
     WriteLine();
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("public const long FBETypeConst = " + ConvertTypeName(*s->base, false) + ".FBETypeConst;");
+        WriteLineIndent(std::string("public ") + (!Structs() && (s->base && !s->base->empty()) ? "new " : "") + "const long FBETypeConst = " + ConvertTypeName(*s->base, false) + ".FBETypeConst;");
     else
-        WriteLineIndent("public const long FBETypeConst = " + std::to_string(s->type) + ";");
+        WriteLineIndent(std::string("public ") + (!Structs() && (s->base && !s->base->empty()) ? "new " : "") + "const long FBETypeConst = " + std::to_string(s->type) + ";");
     if (JSON())
     {
         WriteLineIndent("#if UTF8JSON");
@@ -5261,34 +5466,36 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
         WriteLineIndent("[JsonIgnore]");
         WriteLineIndent("#endif");
     }
-    WriteLineIndent("public long FBEType => FBETypeConst;");
+    WriteLineIndent(std::string("public ") + (!Structs() && (s->base && !s->base->empty()) ? "new " : "") + "long FBEType => FBETypeConst;");
 
     // Generate struct initialization property
     WriteLine();
-    WriteLineIndent("public static " + *s->name + " Default => new " + *s->name);
+    WriteLineIndent(std::string("public ") + (!Structs() && (s->base && !s->base->empty()) ? "new " : "") + "static " + *s->name + " Default => new " + *s->name + "();");
+
+    // Generate struct default constructor
+    WriteLine();
+    WriteLineIndent("public " + *s->name + "()" + (!Structs() && (s->base && !s->base->empty()) ? " : base()" : ""));
     WriteLineIndent("{");
     Indent(1);
-    bool first = true;
-    if (s->base && !s->base->empty())
-    {
-        WriteLineIndent(std::string(first ? "" : ", ") + "parent = " + ConvertTypeName(*s->base, false) + ".Default");
-        first = false;
-    }
+    if (Structs() && s->base && !s->base->empty())
+        WriteLineIndent("this.parent = " + ConvertTypeName(*s->base, false) + ".Default;");
     if (s->body)
-    {
         for (const auto& field : s->body->fields)
-        {
-            WriteLineIndent(std::string(first ? "" : ", ") + *field->name + " = " + ConvertDefault(domain, *p->name, *field));
-            first = false;
-        }
-    }
+            WriteLineIndent("this." + *field->name + " = " + ConvertDefault(domain, *p->name, *field) + ";");
     Indent(-1);
-    WriteLineIndent("};");
+    WriteLineIndent("}");
+
+    // Generate struct copy base constructor
+    if (!Structs() && s->base && !s->base->empty())
+    {
+        WriteLine();
+        WriteLineIndent("public " + *s->name + "(" + ConvertTypeName(*s->base, false) + " parent) : base(parent) {}");
+    }
 
     // Generate struct initialization constructor
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        first = true;
+        bool first = true;
         WriteLine();
         WriteIndent("public " + *s->name + "(");
         if (s->base && !s->base->empty())
@@ -5304,10 +5511,13 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
                 first = false;
             }
         }
-        WriteLine(")");
+        if (!Structs() && s->base && !s->base->empty())
+            WriteLine(") : base(parent)");
+        else
+            WriteLine(")");
         WriteLineIndent("{");
         Indent(1);
-        if (s->base && !s->base->empty())
+        if (Structs() && s->base && !s->base->empty())
             WriteLineIndent("this.parent = parent;");
         if (s->body)
             for (const auto& field : s->body->fields)
@@ -5316,9 +5526,26 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
         WriteLineIndent("}");
     }
 
+    // Generate struct copy constructor
+    WriteLine();
+    WriteIndent("public " + *s->name + "(" + *s->name + " other)");
+    if (!Structs() && s->base && !s->base->empty())
+        WriteLine(" : base(other)");
+    else
+        WriteLine();
+    WriteLineIndent("{");
+    Indent(1);
+    if (Structs() && s->base && !s->base->empty())
+        WriteLineIndent("this.parent = other.parent.Clone();");
+    if (s->body)
+        for (const auto& field : s->body->fields)
+            WriteLineIndent("this." + *field->name + " = other." + *field->name + ";");
+    Indent(-1);
+    WriteLineIndent("}");
+
     // Generate struct Clone() method
     WriteLine();
-    WriteLineIndent("public " + *s->name + " Clone()");
+    WriteLineIndent(std::string("public ") + (!Structs() && (s->base && !s->base->empty()) ? "new " : "") + *s->name + " Clone()");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("// Serialize the struct to the FBE stream");
@@ -5335,13 +5562,13 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
 
     // Generate struct CompareTo() methods
     WriteLine();
-    WriteLineIndent("public int CompareTo(object other)");
+    WriteLineIndent(std::string("public ") + (!Structs() && (s->base && !s->base->empty()) ? "new " : "") + "int CompareTo(object other)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("int result = 0;");
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("result = parent.CompareTo(other);");
+        WriteLineIndent(std::string("result = ") + (Structs() ? "parent" : "base") + ".CompareTo(other);");
         WriteLineIndent("if (result != 0)");
         Indent(1);
         WriteLineIndent("return result;");
@@ -5371,7 +5598,7 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
     WriteLineIndent("int result = 0;");
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("result = parent.CompareTo(other);");
+        WriteLineIndent(std::string("result = ") + (Structs() ? "parent" : "base") + ".CompareTo(other);");
         WriteLineIndent("if (result != 0)");
         Indent(1);
         WriteLineIndent("return result;");
@@ -5400,13 +5627,17 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
     WriteLineIndent("public override bool Equals(object other)");
     WriteLineIndent("{");
     Indent(1);
+    WriteLineIndent("if (Object.ReferenceEquals(other, null))");
+    Indent(1);
+    WriteLineIndent("return false;");
+    Indent(-1);
     WriteLineIndent("if (!(other is " + *s->name + "))");
     Indent(1);
     WriteLineIndent("return false;");
     Indent(-1);
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("if (!parent.Equals(other))");
+        WriteLineIndent(std::string("if (!") + (Structs() ? "parent" : "base") + ".Equals(other))");
         Indent(1);
         WriteLineIndent("return false;");
         Indent(-1);
@@ -5431,9 +5662,16 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
     WriteLineIndent("public bool Equals(" + *s->name + " other)");
     WriteLineIndent("{");
     Indent(1);
+    if (!Structs())
+    {
+        WriteLineIndent("if (Object.ReferenceEquals(other, null))");
+        Indent(1);
+        WriteLineIndent("return false;");
+        Indent(-1);
+    }
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("if (!parent.Equals(other))");
+        WriteLineIndent(std::string("if (!") + (Structs() ? "parent" : "base") + ".Equals(other))");
         Indent(1);
         WriteLineIndent("return false;");
         Indent(-1);
@@ -5462,7 +5700,7 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
     Indent(1);
     WriteLineIndent("int hash = 17;");
     if (s->base && !s->base->empty())
-        WriteLineIndent("hash = hash * 31 + parent.GetHashCode();");
+        WriteLineIndent(std::string("hash = hash * 31 + ") + (Structs() ? "parent" : "base") + ".GetHashCode();");
     if (s->body)
         for (const auto& field : s->body->fields)
             if (field->keys)
@@ -5473,8 +5711,42 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
 
     // Generate struct operator== and operator!=
     WriteLine();
-    WriteLineIndent("public static bool operator==(" + *s->name + " lhs, " + *s->name + " rhs) => lhs.Equals(rhs);");
-    WriteLineIndent("public static bool operator!=(" + *s->name + " lhs, " + *s->name + " rhs) => !(lhs == rhs);");
+    if (Structs())
+    {
+        WriteLineIndent("public static bool operator==(" + *s->name + " lhs, " + *s->name + " rhs) => lhs.Equals(rhs);");
+        WriteLineIndent("public static bool operator!=(" + *s->name + " lhs, " + *s->name + " rhs) => !(lhs == rhs);");
+    }
+    else
+    {
+        WriteLineIndent("public static bool operator==(" + *s->name + " lhs, " + *s->name + " rhs)");
+        WriteLineIndent("{");
+        Indent(1);
+        WriteLineIndent("if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null))");
+        Indent(1);
+        WriteLineIndent("return true;");
+        Indent(-1);
+        WriteLineIndent("if (Object.ReferenceEquals(lhs, null) || Object.ReferenceEquals(rhs, null))");
+        Indent(1);
+        WriteLineIndent("return false;");
+        Indent(-1);
+        WriteLineIndent("return lhs.Equals(rhs);");
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLineIndent("public static bool operator!=(" + *s->name + " lhs, " + *s->name + " rhs)");
+        WriteLineIndent("{");
+        Indent(1);
+        WriteLineIndent("if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null))");
+        Indent(1);
+        WriteLineIndent("return false;");
+        Indent(-1);
+        WriteLineIndent("if (Object.ReferenceEquals(lhs, null) || Object.ReferenceEquals(rhs, null))");
+        Indent(1);
+        WriteLineIndent("return true;");
+        Indent(-1);
+        WriteLineIndent("return !lhs.Equals(rhs);");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
 
     // Generate struct ToString() method
     WriteLine();
@@ -5483,10 +5755,10 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
     Indent(1);
     WriteLineIndent("var sb = new StringBuilder();");
     WriteLineIndent("sb.Append(\"" + *s->name + "(\");");
-    first = true;
+    bool first = true;
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("sb.Append(parent.ToString());");
+        WriteLineIndent(std::string("sb.Append(") + (Structs() ? "parent" : "base") + ".ToString());");
         first = false;
     }
     if (s->body)
@@ -5657,24 +5929,24 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
     if (JSON())
     {
         WriteLine();
-        WriteLineIndent("public string ToJson()");
+        WriteLineIndent(std::string("public ") + (!Structs() && (s->base && !s->base->empty()) ? "new " : "") + "string ToJson()");
         WriteLineIndent("{");
         Indent(1);
         WriteLineIndent("var json = " + domain + "FBE.Json.ToJson(this);");
-        if (s->base && !s->base->empty())
+        if (Structs() && s->base && !s->base->empty())
         {
-            WriteLineIndent("var jsonParent = parent.ToJson();");
+            WriteLineIndent(std::string("var jsonParent = ") + (Structs() ? "parent" : "base") + ".ToJson();");
             WriteLineIndent("json = json.Substring(0, json.Length - 1) + \",\" + jsonParent.Substring(1, jsonParent.Length - 2) + \"}\";");
         }
         WriteLineIndent("return json;");
         Indent(-1);
         WriteLineIndent("}");
         WriteLine();
-        WriteLineIndent("public static " + *s->name + " FromJson(string json)");
+        WriteLineIndent(std::string("public ") + (!Structs() && (s->base && !s->base->empty()) ? "new " : "") + "static " + *s->name + " FromJson(string json)");
         WriteLineIndent("{");
         Indent(1);
         WriteLineIndent("var result = " + domain + "FBE.Json.FromJson<" + *s->name + ">(json);");
-        if (s->base && !s->base->empty())
+        if (Structs() && s->base && !s->base->empty())
             WriteLineIndent("result.parent = " + ConvertTypeName(*s->base, false) + ".FromJson(json);");
         WriteLineIndent("return result;");
         Indent(-1);
@@ -5683,7 +5955,7 @@ void GeneratorCSharp::GenerateStruct(const std::string& domain, const std::share
 
     // Generate struct CreateFieldModel() method
     WriteLine();
-    WriteLineIndent("public static " + domain + "FBE.FieldModelValueType<" + *s->name + "> CreateFieldModel(" + domain + "FBE.Buffer buffer, long offset) { return new " + *p->name + ".FBE.FieldModel" + *s->name + "(buffer, offset); }");
+    WriteLineIndent(std::string("public ") + (!Structs() && (s->base && !s->base->empty()) ? "new " : "") + "static " + domain + (Structs() ? "FBE.FieldModelValueType" : "FBE.FieldModelReferenceType") + "<" + *s->name + "> CreateFieldModel(" + domain + "FBE.Buffer buffer, long offset) { return new " + *p->name + ".FBE.FieldModel" + *s->name + "(buffer, offset); }");
 
     // Generate struct end
     Indent(-1);
@@ -5720,7 +5992,7 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::string& domain, const 
     // Generate struct field model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " field model");
-    WriteLineIndent("public class FieldModel" + *s->name + " : " + domain + "FBE.FieldModelValueType<" + *s->name + ">");
+    WriteLineIndent("public class FieldModel" + *s->name + " : " + domain + (Structs() ? "FBE.FieldModelValueType" : "FBE.FieldModelReferenceType") + "<" + *s->name + ">");
     WriteLineIndent("{");
     Indent(1);
 
@@ -5828,7 +6100,7 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::string& domain, const 
     // Generate struct field model Clone() method
     WriteLine();
     WriteLineIndent("// Clone the field model");
-    WriteLineIndent("public override " + domain + "FBE.FieldModelValueType<" + *s->name + "> Clone() { return new FieldModel" + *s->name + "(_buffer, _offset); }");
+    WriteLineIndent("public override " + domain + (Structs() ? "FBE.FieldModelValueType" : "FBE.FieldModelReferenceType") + "<" + *s->name + "> Clone() { return new FieldModel" + *s->name + "(_buffer, _offset); }");
 
     // Generate struct field model Verify() methods
     WriteLine();
@@ -5954,7 +6226,23 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::string& domain, const 
     // Generate struct field model Get() methods
     WriteLine();
     WriteLineIndent("// Get the struct value");
-    WriteLineIndent("public override void Get(out " + *s->name + " fbeValue) { Get(out fbeValue, " + *s->name + ".Default); }");
+    WriteLineIndent("public override void Get(out " + *s->name + " fbeValue)");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("long fbeBegin = GetBegin();");
+    WriteLineIndent("if (fbeBegin == 0)");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("fbeValue = " + (Structs() ? (*s->name + ".Default") : ("new " + *s->name + "()")) + ";");
+    WriteLineIndent("return;");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("uint fbeStructSize = ReadUInt32(0);");
+    WriteLineIndent("GetFields(out fbeValue, fbeStructSize);");
+    WriteLineIndent("GetEnd(fbeBegin);");
+    Indent(-1);
+    WriteLineIndent("}");
     WriteLineIndent("public override void Get(out " + *s->name + " fbeValue, " + *s->name + " defaults)");
     WriteLineIndent("{");
     Indent(1);
@@ -5982,19 +6270,32 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::string& domain, const 
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
         WriteLineIndent("long fbeCurrentSize = 4 + 4;");
-        WriteLine();
-        WriteLineIndent("fbeValue = " + *s->name + ".Default;");
         if (s->base && !s->base->empty())
         {
             WriteLine();
+            if (!Structs())
+                WriteLineIndent("var fbeParent = new " + ConvertTypeName(*s->base, false) + "();");
+            else
+                WriteLineIndent("fbeValue = " + (Structs() ? (*s->name + ".Default") : ("new " + *s->name + "()")) + ";");
+            WriteLine();
             WriteLineIndent("if ((fbeCurrentSize + parent.FBEBody - 4 - 4) <= fbeStructSize)");
             Indent(1);
-            WriteLineIndent("parent.GetFields(out fbeValue.parent, fbeStructSize);");
+            WriteLineIndent(std::string("parent.GetFields(out ") + (Structs() ? "fbeValue.parent" : "fbeParent") + ", fbeStructSize);");
             Indent(-1);
             WriteLineIndent("fbeCurrentSize += parent.FBEBody - 4 - 4;");
         }
+        else
+        {
+            WriteLine();
+            WriteLineIndent("fbeValue = " + (Structs() ? (*s->name + ".Default") : ("new " + *s->name + "()")) + ";");
+        }
         if (s->body)
         {
+            if (!Structs() && s->base && !s->base->empty())
+            {
+                WriteLine();
+                WriteLineIndent("fbeValue = new " + *s->name + "(fbeParent);");
+            }
             for (const auto& field : s->body->fields)
             {
                 WriteLine();
@@ -6016,6 +6317,8 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::string& domain, const 
             }
         }
     }
+    else
+        WriteLineIndent("fbeValue = " + (Structs() ? (*s->name + ".Default") : ("new " + *s->name + "()")) + ";");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6084,7 +6387,7 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::string& domain, const 
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
         if (s->base && !s->base->empty())
-            WriteLineIndent("parent.SetFields(fbeValue.parent);");
+            WriteLineIndent(std::string("parent.SetFields(fbeValue") + (Structs() ? ".parent" : "") + ");");
         if (s->body)
             for (const auto& field : s->body->fields)
                 WriteLineIndent(*field->name + ".Set(fbeValue." + *field->name + ");");
@@ -6203,7 +6506,7 @@ void GeneratorCSharp::GenerateStructModel(const std::string& domain, const std::
     WriteLineIndent("if ((Buffer.Offset + model.FBEOffset - 4) > Buffer.Size)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("value = " + *s->name + ".Default;");
+    WriteLineIndent("value = " + (Structs() ? (*s->name + ".Default") : ("new " + *s->name + "()")) + ";");
     WriteLineIndent("return 0;");
     Indent(-1);
     WriteLineIndent("}");
@@ -6213,7 +6516,7 @@ void GeneratorCSharp::GenerateStructModel(const std::string& domain, const std::
     WriteLineIndent("if (fbeFullSize < model.FBESize)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("value = " + *s->name + ".Default;");
+    WriteLineIndent("value = " + (Structs() ? (*s->name + ".Default") : ("new " + *s->name + "()")) + ";");
     WriteLineIndent("return 0;");
     Indent(-1);
     WriteLineIndent("}");
@@ -6257,7 +6560,7 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::string& domain, const 
     // Generate struct final model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model");
-    WriteLineIndent("public class FinalModel" + *s->name + " : " + domain + "FBE.FinalModelValueType<" + *s->name + ">");
+    WriteLineIndent("public class FinalModel" + *s->name + " : " + domain + (Structs() ? "FBE.FinalModelValueType" : "FBE.FinalModelReferenceType") + "<" + *s->name + ">");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6290,7 +6593,7 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::string& domain, const 
     WriteLineIndent("long fbeResult = 0");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ parent.FBEAllocationSize(fbeValue.parent)");
+        WriteLineIndent(std::string("+ parent.FBEAllocationSize(fbeValue") + (Structs() ? ".parent" : "") + ")");
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("+ " + *field->name + ".FBEAllocationSize(fbeValue." + *field->name + ")");
@@ -6310,7 +6613,7 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::string& domain, const 
     // Generate struct final model Clone() method
     WriteLine();
     WriteLineIndent("// Clone the final model");
-    WriteLineIndent("public override " + domain + "FBE.FinalModelValueType<" + *s->name + "> Clone() { return new FinalModel" + *s->name + "(_buffer, _offset); }");
+    WriteLineIndent("public override " + domain + (Structs() ? "FBE.FinalModelValueType" : "FBE.FinalModelReferenceType") + "<" + *s->name + "> Clone() { return new FinalModel" + *s->name + "(_buffer, _offset); }");
 
     // Generate struct final model Verify() methods
     WriteLine();
@@ -6392,18 +6695,31 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::string& domain, const 
         WriteLineIndent("long fbeCurrentOffset = 0;");
         WriteLineIndent("long fbeCurrentSize = 0;");
         WriteLineIndent("long fbeFieldSize;");
-        WriteLine();
-        WriteLineIndent("fbeValue = " + *s->name + ".Default;");
         if (s->base && !s->base->empty())
         {
             WriteLine();
+            if (!Structs())
+                WriteLineIndent("var fbeParent = new " + ConvertTypeName(*s->base, false) + "();");
+            else
+                WriteLineIndent("fbeValue = " + (Structs() ? (*s->name + ".Default") : ("new " + *s->name + "()")) + ";");
+            WriteLine();
             WriteLineIndent("parent.FBEOffset = fbeCurrentOffset;");
-            WriteLineIndent("fbeFieldSize = parent.GetFields(out fbeValue.parent);");
+            WriteLineIndent(std::string("fbeFieldSize = parent.GetFields(out ") + (Structs() ? "fbeValue.parent" : "fbeParent") + ");");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize;");
         }
+        else
+        {
+            WriteLine();
+            WriteLineIndent("fbeValue = " + (Structs() ? (*s->name + ".Default") : ("new " + *s->name + "()")) + ";");
+        }
         if (s->body)
         {
+            if (!Structs() && s->base && !s->base->empty())
+            {
+                WriteLine();
+                WriteLineIndent("fbeValue = new " + *s->name + "(fbeParent);");
+            }
             for (const auto& field : s->body->fields)
             {
                 WriteLine();
@@ -6417,7 +6733,10 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::string& domain, const 
         WriteLineIndent("return fbeCurrentSize;");
     }
     else
+    {
+        WriteLineIndent("fbeValue = " + (Structs() ? (*s->name + ".Default") : ("new " + *s->name + "()")) + ";");
         WriteLineIndent("return 0;");
+    }
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6449,7 +6768,7 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::string& domain, const 
         {
             WriteLine();
             WriteLineIndent("parent.FBEOffset = fbeCurrentOffset;");
-            WriteLineIndent("fbeFieldSize = parent.SetFields(fbeValue.parent);");
+            WriteLineIndent(std::string("fbeFieldSize = parent.SetFields(fbeValue") + (Structs() ? ".parent" : "") + ");");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize;");
         }
@@ -6573,7 +6892,7 @@ void GeneratorCSharp::GenerateStructModelFinal(const std::string& domain, const 
     WriteLineIndent("if ((Buffer.Offset + _model.FBEOffset) > Buffer.Size)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("value = " + *s->name + ".Default;");
+    WriteLineIndent("value = " + (Structs() ? (*s->name + ".Default") : ("new " + *s->name + "()")) + ";");
     WriteLineIndent("return 0;");
     Indent(-1);
     WriteLineIndent("}");
@@ -6584,7 +6903,7 @@ void GeneratorCSharp::GenerateStructModelFinal(const std::string& domain, const 
     WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType != FBEType))");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("value = " + *s->name + ".Default;");
+    WriteLineIndent("value = " + (Structs() ? (*s->name + ".Default") : ("new " + *s->name + "()")) + ";");
     WriteLineIndent("return 8;");
     Indent(-1);
     WriteLineIndent("}");
@@ -6900,16 +7219,6 @@ void GeneratorCSharp::GenerateReceiver(const std::string& domain, const std::sha
     // Generate receiver models accessors
     if (p->body)
     {
-        WriteLineIndent("// Receiver values accessors");
-        for (const auto& s : p->body->structs)
-        {
-            if (s->message)
-            {
-                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
-                WriteLineIndent("private " + struct_name + " " + *s->name + "Value;");
-            }
-        }
-        WriteLine();
         WriteLineIndent("// Receiver models accessors");
         for (const auto& s : p->body->structs)
             if (s->message)
@@ -6933,7 +7242,6 @@ void GeneratorCSharp::GenerateReceiver(const std::string& domain, const std::sha
             if (s->message)
             {
                 std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
-                WriteLineIndent(*s->name + "Value = " + struct_name + ".Default;");
                 WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
             }
         }
@@ -6955,7 +7263,6 @@ void GeneratorCSharp::GenerateReceiver(const std::string& domain, const std::sha
             if (s->message)
             {
                 std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
-                WriteLineIndent(*s->name + "Value = " + struct_name + ".Default;");
                 WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
             }
         }
@@ -6984,7 +7291,7 @@ void GeneratorCSharp::GenerateReceiver(const std::string& domain, const std::sha
                 WriteLineIndent("// Deserialize the value from the FBE stream");
                 WriteLineIndent(*s->name + "Model.Attach(buffer, offset);");
                 WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + domain + *p->name + "." + *s->name + " validation failed!\");");
-                WriteLineIndent("long deserialized = " + *s->name + "Model.Deserialize(out " + *s->name + "Value);");
+                WriteLineIndent("long deserialized = " + *s->name + "Model.Deserialize(out var " + *s->name + "Value);");
                 WriteLineIndent("Debug.Assert((deserialized > 0), \"" + domain + *p->name + "." + *s->name + " deserialization failed!\");");
                 WriteLine();
                 WriteLineIndent("// Log the value");
@@ -7288,16 +7595,6 @@ void GeneratorCSharp::GenerateClient(const std::string& domain, const std::share
     // Generate client receiver models accessors
     if (p->body)
     {
-        WriteLineIndent("// Client receiver values accessors");
-        for (const auto& s : p->body->structs)
-        {
-            if (s->message)
-            {
-                std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
-                WriteLineIndent("private " + struct_name + " " + *s->name + "ReceiverValue;");
-            }
-        }
-        WriteLine();
         WriteLineIndent("// Client receiver models accessors");
         for (const auto& s : p->body->structs)
             if (s->message)
@@ -7359,7 +7656,6 @@ void GeneratorCSharp::GenerateClient(const std::string& domain, const std::share
             {
                 std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
                 WriteLineIndent(*s->name + "SenderModel = new " + *s->name + model + "(SendBuffer);");
-                WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + ".Default;");
                 WriteLineIndent(*s->name + "ReceiverModel = new " + *s->name + model + "();");
             }
         }
@@ -7392,7 +7688,6 @@ void GeneratorCSharp::GenerateClient(const std::string& domain, const std::share
             {
                 std::string struct_name = ConvertTypeName(domain, *p->name, *s->name, false);
                 WriteLineIndent(*s->name + "SenderModel = new " + *s->name + model + "(SendBuffer);");
-                WriteLineIndent(*s->name + "ReceiverValue = " + struct_name + ".Default;");
                 WriteLineIndent(*s->name + "ReceiverModel = new " + *s->name + model + "();");
             }
         }
@@ -7926,7 +8221,7 @@ void GeneratorCSharp::GenerateClient(const std::string& domain, const std::share
                 WriteLineIndent("// Deserialize the value from the FBE stream");
                 WriteLineIndent(*s->name + "ReceiverModel.Attach(buffer, offset);");
                 WriteLineIndent("Debug.Assert(" + *s->name + "ReceiverModel.Verify(), \"" + domain + *p->name + "." + *s->name + " validation failed!\");");
-                WriteLineIndent("long deserialized = " + *s->name + "ReceiverModel.Deserialize(out " + *s->name + "ReceiverValue);");
+                WriteLineIndent("long deserialized = " + *s->name + "ReceiverModel.Deserialize(out var " + *s->name + "ReceiverValue);");
                 WriteLineIndent("Debug.Assert((deserialized > 0), \"" + domain + *p->name + "." + *s->name + " deserialization failed!\");");
                 WriteLine();
                 WriteLineIndent("// Log the value");
@@ -8079,7 +8374,7 @@ bool GeneratorCSharp::IsKnownType(const std::string& type)
 
 bool GeneratorCSharp::IsReferenceType(const std::string& type)
 {
-    return ((type == "bytes") || (type == "string"));
+    return ((type == "bytes") || (type == "string") || (!Structs() && !IsKnownType(type)));
 }
 
 std::string GeneratorCSharp::ConvertEnumRead(const std::string& type)
@@ -8275,7 +8570,7 @@ std::string GeneratorCSharp::ConvertTypeName(const std::string& type, bool optio
         if (type == "string")
             return "string";
 
-        return ConvertTypeName(type, false) + "?";
+        return ConvertTypeName(type, false) + (IsReferenceType(type) ? "" : "?");
     }
 
     if (type == "bool")
@@ -8695,7 +8990,7 @@ std::string GeneratorCSharp::ConvertDefault(const std::string& domain, const std
     else if (!IsKnownType(*field.type))
     {
         std::string ns = "global::" + domain + (CppCommon::StringUtils::Contains(*field.type, '.') ? "" : (package + "."));
-        return ns + ConvertTypeName(field) + ".Default";
+        return Structs() ? (ns + ConvertTypeName(field) + ".Default") : ("new " + ns + ConvertTypeName(field) + "()");
     }
 
     return ConvertDefault(domain, package, *field.type);
