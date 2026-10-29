@@ -5035,7 +5035,7 @@ public:
     void reset() noexcept { _buffer->reset(); }
 
     // Receive data
-    void receive(const void* data, size_t size);
+    bool receive(const void* data, size_t size);
 
 protected:
     // Receive message handler
@@ -5065,14 +5065,14 @@ protected:
 void GeneratorCpp::GenerateFBEReceiver_Source()
 {
     std::string code = R"CODE(
-void Receiver::receive(const void* data, size_t size)
+bool Receiver::receive(const void* data, size_t size)
 {
     if (size == 0)
-        return;
+        return false;
 
     assert((data != nullptr) && "Invalid buffer!");
     if (data == nullptr)
-        return;
+        return false;
 
     // Storage buffer
     uint8_t* buffer1 = _buffer->data();
@@ -5159,13 +5159,13 @@ void Receiver::receive(const void* data, size_t size)
         }
 
         if (!message_size_found)
-            return;
+            return false;
 
         // Check the message full size
         size_t min_size = _final ? (4 + 4) : (4 + 4 + 4 + 4);
         assert((message_size >= min_size) && "Invalid receive data!");
         if (message_size < min_size)
-            return;
+            return false;
 
         // Try to receive message body
         bool message_found = false;
@@ -5278,7 +5278,7 @@ void Receiver::receive(const void* data, size_t size)
 
                 message_size_copied = true;
             }
-            return;
+            return false;
         }
 
         [[maybe_unused]] uint32_t fbe_struct_size;
@@ -5298,7 +5298,8 @@ void Receiver::receive(const void* data, size_t size)
         }
 
         // Handle the message
-        onReceive(fbe_struct_type, message_buffer, message_size);
+        if (!onReceive(fbe_struct_type, message_buffer, message_size))
+            return false;
 
         // Reset the storage buffer
         _buffer->reset();
@@ -5309,6 +5310,8 @@ void Receiver::receive(const void* data, size_t size)
         offset1 = _buffer->size();
         size1 = _buffer->size();
     }
+
+    return true;
 }
 )CODE";
 
