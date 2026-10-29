@@ -9,14 +9,15 @@ package com.chronoxor.enums;
 
 public final class EnumUInt64 implements Comparable<EnumUInt64>
 {
-    public static final EnumUInt64 ENUM_VALUE_0 = new EnumUInt64(EnumUInt64Enum.ENUM_VALUE_0);
-    public static final EnumUInt64 ENUM_VALUE_1 = new EnumUInt64(EnumUInt64Enum.ENUM_VALUE_1);
-    public static final EnumUInt64 ENUM_VALUE_2 = new EnumUInt64(EnumUInt64Enum.ENUM_VALUE_2);
-    public static final EnumUInt64 ENUM_VALUE_3 = new EnumUInt64(EnumUInt64Enum.ENUM_VALUE_3);
-    public static final EnumUInt64 ENUM_VALUE_4 = new EnumUInt64(EnumUInt64Enum.ENUM_VALUE_4);
-    public static final EnumUInt64 ENUM_VALUE_5 = new EnumUInt64(EnumUInt64Enum.ENUM_VALUE_5);
+    public static final EnumUInt64 ENUM_VALUE_0 = new EnumUInt64(EnumUInt64Enum.ENUM_VALUE_0).asConstant();
+    public static final EnumUInt64 ENUM_VALUE_1 = new EnumUInt64(EnumUInt64Enum.ENUM_VALUE_1).asConstant();
+    public static final EnumUInt64 ENUM_VALUE_2 = new EnumUInt64(EnumUInt64Enum.ENUM_VALUE_2).asConstant();
+    public static final EnumUInt64 ENUM_VALUE_3 = new EnumUInt64(EnumUInt64Enum.ENUM_VALUE_3).asConstant();
+    public static final EnumUInt64 ENUM_VALUE_4 = new EnumUInt64(EnumUInt64Enum.ENUM_VALUE_4).asConstant();
+    public static final EnumUInt64 ENUM_VALUE_5 = new EnumUInt64(EnumUInt64Enum.ENUM_VALUE_5).asConstant();
 
     private EnumUInt64Enum value = EnumUInt64Enum.values()[0];
+    private boolean fbeConstant;
 
     public EnumUInt64() {}
     public EnumUInt64(long value) { setEnum(value); }
@@ -28,9 +29,12 @@ public final class EnumUInt64 implements Comparable<EnumUInt64>
 
     public void setDefault() { setEnum((long)0); }
 
-    public void setEnum(long value) { this.value = EnumUInt64Enum.mapValue(value); }
-    public void setEnum(EnumUInt64Enum value) { this.value = value; }
-    public void setEnum(EnumUInt64 value) { this.value = value.value; }
+    public void setEnum(long value) { ensureMutable(); this.value = EnumUInt64Enum.mapValue(value); }
+    public void setEnum(EnumUInt64Enum value) { ensureMutable(); this.value = value; }
+    public void setEnum(EnumUInt64 value) { ensureMutable(); this.value = value.value; }
+
+    private EnumUInt64 asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("EnumUInt64 constants are read-only, change a copy: new EnumUInt64(EnumUInt64.VALUE)"); }
 
     @Override
     public int compareTo(EnumUInt64 other)

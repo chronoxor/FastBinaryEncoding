@@ -9,14 +9,15 @@ package com.chronoxor.enums;
 
 public final class EnumChar implements Comparable<EnumChar>
 {
-    public static final EnumChar ENUM_VALUE_0 = new EnumChar(EnumCharEnum.ENUM_VALUE_0);
-    public static final EnumChar ENUM_VALUE_1 = new EnumChar(EnumCharEnum.ENUM_VALUE_1);
-    public static final EnumChar ENUM_VALUE_2 = new EnumChar(EnumCharEnum.ENUM_VALUE_2);
-    public static final EnumChar ENUM_VALUE_3 = new EnumChar(EnumCharEnum.ENUM_VALUE_3);
-    public static final EnumChar ENUM_VALUE_4 = new EnumChar(EnumCharEnum.ENUM_VALUE_4);
-    public static final EnumChar ENUM_VALUE_5 = new EnumChar(EnumCharEnum.ENUM_VALUE_5);
+    public static final EnumChar ENUM_VALUE_0 = new EnumChar(EnumCharEnum.ENUM_VALUE_0).asConstant();
+    public static final EnumChar ENUM_VALUE_1 = new EnumChar(EnumCharEnum.ENUM_VALUE_1).asConstant();
+    public static final EnumChar ENUM_VALUE_2 = new EnumChar(EnumCharEnum.ENUM_VALUE_2).asConstant();
+    public static final EnumChar ENUM_VALUE_3 = new EnumChar(EnumCharEnum.ENUM_VALUE_3).asConstant();
+    public static final EnumChar ENUM_VALUE_4 = new EnumChar(EnumCharEnum.ENUM_VALUE_4).asConstant();
+    public static final EnumChar ENUM_VALUE_5 = new EnumChar(EnumCharEnum.ENUM_VALUE_5).asConstant();
 
     private EnumCharEnum value = EnumCharEnum.values()[0];
+    private boolean fbeConstant;
 
     public EnumChar() {}
     public EnumChar(byte value) { setEnum(value); }
@@ -28,9 +29,12 @@ public final class EnumChar implements Comparable<EnumChar>
 
     public void setDefault() { setEnum((byte)0); }
 
-    public void setEnum(byte value) { this.value = EnumCharEnum.mapValue(value); }
-    public void setEnum(EnumCharEnum value) { this.value = value; }
-    public void setEnum(EnumChar value) { this.value = value.value; }
+    public void setEnum(byte value) { ensureMutable(); this.value = EnumCharEnum.mapValue(value); }
+    public void setEnum(EnumCharEnum value) { ensureMutable(); this.value = value; }
+    public void setEnum(EnumChar value) { ensureMutable(); this.value = value.value; }
+
+    private EnumChar asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("EnumChar constants are read-only, change a copy: new EnumChar(EnumChar.VALUE)"); }
 
     @Override
     public int compareTo(EnumChar other)

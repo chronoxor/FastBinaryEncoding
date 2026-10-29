@@ -9,14 +9,15 @@ package com.chronoxor.enums;
 
 public final class EnumUInt32 implements Comparable<EnumUInt32>
 {
-    public static final EnumUInt32 ENUM_VALUE_0 = new EnumUInt32(EnumUInt32Enum.ENUM_VALUE_0);
-    public static final EnumUInt32 ENUM_VALUE_1 = new EnumUInt32(EnumUInt32Enum.ENUM_VALUE_1);
-    public static final EnumUInt32 ENUM_VALUE_2 = new EnumUInt32(EnumUInt32Enum.ENUM_VALUE_2);
-    public static final EnumUInt32 ENUM_VALUE_3 = new EnumUInt32(EnumUInt32Enum.ENUM_VALUE_3);
-    public static final EnumUInt32 ENUM_VALUE_4 = new EnumUInt32(EnumUInt32Enum.ENUM_VALUE_4);
-    public static final EnumUInt32 ENUM_VALUE_5 = new EnumUInt32(EnumUInt32Enum.ENUM_VALUE_5);
+    public static final EnumUInt32 ENUM_VALUE_0 = new EnumUInt32(EnumUInt32Enum.ENUM_VALUE_0).asConstant();
+    public static final EnumUInt32 ENUM_VALUE_1 = new EnumUInt32(EnumUInt32Enum.ENUM_VALUE_1).asConstant();
+    public static final EnumUInt32 ENUM_VALUE_2 = new EnumUInt32(EnumUInt32Enum.ENUM_VALUE_2).asConstant();
+    public static final EnumUInt32 ENUM_VALUE_3 = new EnumUInt32(EnumUInt32Enum.ENUM_VALUE_3).asConstant();
+    public static final EnumUInt32 ENUM_VALUE_4 = new EnumUInt32(EnumUInt32Enum.ENUM_VALUE_4).asConstant();
+    public static final EnumUInt32 ENUM_VALUE_5 = new EnumUInt32(EnumUInt32Enum.ENUM_VALUE_5).asConstant();
 
     private EnumUInt32Enum value = EnumUInt32Enum.values()[0];
+    private boolean fbeConstant;
 
     public EnumUInt32() {}
     public EnumUInt32(int value) { setEnum(value); }
@@ -28,9 +29,12 @@ public final class EnumUInt32 implements Comparable<EnumUInt32>
 
     public void setDefault() { setEnum((int)0); }
 
-    public void setEnum(int value) { this.value = EnumUInt32Enum.mapValue(value); }
-    public void setEnum(EnumUInt32Enum value) { this.value = value; }
-    public void setEnum(EnumUInt32 value) { this.value = value.value; }
+    public void setEnum(int value) { ensureMutable(); this.value = EnumUInt32Enum.mapValue(value); }
+    public void setEnum(EnumUInt32Enum value) { ensureMutable(); this.value = value; }
+    public void setEnum(EnumUInt32 value) { ensureMutable(); this.value = value.value; }
+
+    private EnumUInt32 asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("EnumUInt32 constants are read-only, change a copy: new EnumUInt32(EnumUInt32.VALUE)"); }
 
     @Override
     public int compareTo(EnumUInt32 other)

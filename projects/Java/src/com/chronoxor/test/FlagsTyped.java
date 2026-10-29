@@ -9,19 +9,20 @@ package com.chronoxor.test;
 
 public final class FlagsTyped implements Comparable<FlagsTyped>
 {
-    public static final FlagsTyped FLAG_VALUE_0 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_0);
-    public static final FlagsTyped FLAG_VALUE_1 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_1);
-    public static final FlagsTyped FLAG_VALUE_2 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_2);
-    public static final FlagsTyped FLAG_VALUE_3 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_3);
-    public static final FlagsTyped FLAG_VALUE_4 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_4);
-    public static final FlagsTyped FLAG_VALUE_5 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_5);
-    public static final FlagsTyped FLAG_VALUE_6 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_6);
-    public static final FlagsTyped FLAG_VALUE_7 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_7);
-    public static final FlagsTyped FLAG_VALUE_8 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_8);
-    public static final FlagsTyped FLAG_VALUE_9 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_9);
+    public static final FlagsTyped FLAG_VALUE_0 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_0).asConstant();
+    public static final FlagsTyped FLAG_VALUE_1 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_1).asConstant();
+    public static final FlagsTyped FLAG_VALUE_2 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_2).asConstant();
+    public static final FlagsTyped FLAG_VALUE_3 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_3).asConstant();
+    public static final FlagsTyped FLAG_VALUE_4 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_4).asConstant();
+    public static final FlagsTyped FLAG_VALUE_5 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_5).asConstant();
+    public static final FlagsTyped FLAG_VALUE_6 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_6).asConstant();
+    public static final FlagsTyped FLAG_VALUE_7 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_7).asConstant();
+    public static final FlagsTyped FLAG_VALUE_8 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_8).asConstant();
+    public static final FlagsTyped FLAG_VALUE_9 = new FlagsTyped(FlagsTypedEnum.FLAG_VALUE_9).asConstant();
 
     private FlagsTypedEnum value = FlagsTypedEnum.values()[0];
     private long flags = value.getRaw();
+    private boolean fbeConstant;
 
     public FlagsTyped() {}
     public FlagsTyped(long value) { setEnum(value); }
@@ -34,10 +35,13 @@ public final class FlagsTyped implements Comparable<FlagsTyped>
 
     public void setDefault() { setEnum((long)0); }
 
-    public void setEnum(long value) { this.flags = value; this.value = FlagsTypedEnum.mapValue(value); }
-    public void setEnum(FlagsTypedEnum value) { this.value = value; this.flags = value.getRaw(); }
+    public void setEnum(long value) { ensureMutable(); this.flags = value; this.value = FlagsTypedEnum.mapValue(value); }
+    public void setEnum(FlagsTypedEnum value) { ensureMutable(); this.value = value; this.flags = value.getRaw(); }
     public void setEnum(java.util.EnumSet<FlagsTypedEnum> value) { setEnum(FlagsTyped.fromSet(value)); }
-    public void setEnum(FlagsTyped value) { this.value = value.value; this.flags = value.flags; }
+    public void setEnum(FlagsTyped value) { ensureMutable(); this.value = value.value; this.flags = value.flags; }
+
+    private FlagsTyped asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("FlagsTyped constants are read-only, change a copy: new FlagsTyped(FlagsTyped.VALUE)"); }
 
     public boolean hasFlags(long flags) { return (((this.flags & flags) != 0) && ((this.flags & flags) == flags)); }
     public boolean hasFlags(FlagsTypedEnum flags) { return hasFlags(flags.getRaw()); }

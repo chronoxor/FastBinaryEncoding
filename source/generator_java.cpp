@@ -4589,12 +4589,15 @@ void GeneratorJava::GenerateEnumClass(const std::shared_ptr<Package>& p, const s
     if (e->body)
     {
         for (const auto& value : e->body->values)
-            WriteLineIndent("public static final " + enum_name + " " + *value->name + " = new " + enum_name + "(" + enum_type_name + "." + *value->name + ");");
+            WriteLineIndent("public static final " + enum_name + " " + *value->name + " = new " + enum_name + "(" + enum_type_name + "." + *value->name + ").asConstant();");
         WriteLine();
     }
 
     // Generate enum class value
     WriteLineIndent("private " + enum_type_name + " value = " + enum_type_name + ".values()[0];");
+
+    // The static constants are shared by the whole process, so changing one in place would change it for every user
+    WriteLineIndent("private boolean fbeConstant;");
 
     // Generate enum class constructors
     WriteLine();
@@ -4614,9 +4617,14 @@ void GeneratorJava::GenerateEnumClass(const std::shared_ptr<Package>& p, const s
 
     // Generate enum class setEnum() methods
     WriteLine();
-    WriteLineIndent("public void setEnum(" + enum_base_type + " value) { this.value = " + enum_type_name + ".mapValue(value); }");
-    WriteLineIndent("public void setEnum(" + enum_type_name + " value) { this.value = value; }");
-    WriteLineIndent("public void setEnum(" + enum_name + " value) { this.value = value.value; }");
+    WriteLineIndent("public void setEnum(" + enum_base_type + " value) { ensureMutable(); this.value = " + enum_type_name + ".mapValue(value); }");
+    WriteLineIndent("public void setEnum(" + enum_type_name + " value) { ensureMutable(); this.value = value; }");
+    WriteLineIndent("public void setEnum(" + enum_name + " value) { ensureMutable(); this.value = value.value; }");
+
+    // Generate enum class constant guard methods
+    WriteLine();
+    WriteLineIndent("private " + enum_name + " asConstant() { fbeConstant = true; return this; }");
+    WriteLineIndent("private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException(\"" + enum_name + " constants are read-only, change a copy: new " + enum_name + "(" + enum_name + ".VALUE)\"); }");
 
     // Generate enum class compareTo() method
     WriteLine();
@@ -4931,13 +4939,16 @@ void GeneratorJava::GenerateFlagsClass(const std::shared_ptr<Package>& p, const 
     if (f->body)
     {
         for (const auto& value : f->body->values)
-            WriteLineIndent("public static final " + flags_name + " " + *value->name + " = new " + flags_name + "(" + flags_type_name + "." + *value->name + ");");
+            WriteLineIndent("public static final " + flags_name + " " + *value->name + " = new " + flags_name + "(" + flags_type_name + "." + *value->name + ").asConstant();");
         WriteLine();
     }
 
     // Generate flags class value and flags
     WriteLineIndent("private " + flags_type_name + " value = " + flags_type_name + ".values()[0];");
     WriteLineIndent("private " + flags_base_type + " flags = value.getRaw();");
+
+    // The static constants are shared by the whole process, so changing one in place would change it for every user
+    WriteLineIndent("private boolean fbeConstant;");
 
     // Generate flags class constructors
     WriteLine();
@@ -4958,10 +4969,15 @@ void GeneratorJava::GenerateFlagsClass(const std::shared_ptr<Package>& p, const 
 
     // Generate flags class setEnum() methods
     WriteLine();
-    WriteLineIndent("public void setEnum(" + flags_base_type + " value) { this.flags = value; this.value = " + flags_type_name + ".mapValue(value); }");
-    WriteLineIndent("public void setEnum(" + flags_type_name + " value) { this.value = value; this.flags = value.getRaw(); }");
+    WriteLineIndent("public void setEnum(" + flags_base_type + " value) { ensureMutable(); this.flags = value; this.value = " + flags_type_name + ".mapValue(value); }");
+    WriteLineIndent("public void setEnum(" + flags_type_name + " value) { ensureMutable(); this.value = value; this.flags = value.getRaw(); }");
     WriteLineIndent("public void setEnum(java.util.EnumSet<" + flags_type_name + "> value) { setEnum(" + flags_name + ".fromSet(value)); }");
-    WriteLineIndent("public void setEnum(" + flags_name + " value) { this.value = value.value; this.flags = value.flags; }");
+    WriteLineIndent("public void setEnum(" + flags_name + " value) { ensureMutable(); this.value = value.value; this.flags = value.flags; }");
+
+    // Generate flags class constant guard methods
+    WriteLine();
+    WriteLineIndent("private " + flags_name + " asConstant() { fbeConstant = true; return this; }");
+    WriteLineIndent("private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException(\"" + flags_name + " constants are read-only, change a copy: new " + flags_name + "(" + flags_name + ".VALUE)\"); }");
 
     // Generate flags class hasFlags() methods
     WriteLine();
@@ -7962,7 +7978,15 @@ std::string GeneratorJava::ConvertDefault(const std::string& domain, const std::
 std::string GeneratorJava::ConvertDefault(const std::string& domain, const std::string& package, const StructField& field)
 {
     if (field.value)
-        return ConvertConstant(domain, package, *field.type, *field.value, field.optional);
+    {
+        std::string value = ConvertConstant(domain, package, *field.type, *field.value, field.optional);
+
+        // Enum and flags constants are read-only, so a field defaulted to one gets a copy its owner may change
+        if (!IsKnownType(*field.type) && (value.find('(') == std::string::npos) && (value.find('.') != std::string::npos))
+            value = "new " + value.substr(0, value.find_last_of('.')) + "(" + value + ")";
+
+        return value;
+    }
 
     if (field.array)
         return "new " + ConvertTypeName(domain, package, *field.type, field.optional) + "[" + std::to_string(field.N) + "]";

@@ -9,16 +9,17 @@ package com.chronoxor.proto;
 
 public final class State implements Comparable<State>
 {
-    public static final State unknown = new State(StateEnum.unknown);
-    public static final State invalid = new State(StateEnum.invalid);
-    public static final State initialized = new State(StateEnum.initialized);
-    public static final State calculated = new State(StateEnum.calculated);
-    public static final State broken = new State(StateEnum.broken);
-    public static final State good = new State(StateEnum.good);
-    public static final State bad = new State(StateEnum.bad);
+    public static final State unknown = new State(StateEnum.unknown).asConstant();
+    public static final State invalid = new State(StateEnum.invalid).asConstant();
+    public static final State initialized = new State(StateEnum.initialized).asConstant();
+    public static final State calculated = new State(StateEnum.calculated).asConstant();
+    public static final State broken = new State(StateEnum.broken).asConstant();
+    public static final State good = new State(StateEnum.good).asConstant();
+    public static final State bad = new State(StateEnum.bad).asConstant();
 
     private StateEnum value = StateEnum.values()[0];
     private byte flags = value.getRaw();
+    private boolean fbeConstant;
 
     public State() {}
     public State(byte value) { setEnum(value); }
@@ -31,10 +32,13 @@ public final class State implements Comparable<State>
 
     public void setDefault() { setEnum((byte)0); }
 
-    public void setEnum(byte value) { this.flags = value; this.value = StateEnum.mapValue(value); }
-    public void setEnum(StateEnum value) { this.value = value; this.flags = value.getRaw(); }
+    public void setEnum(byte value) { ensureMutable(); this.flags = value; this.value = StateEnum.mapValue(value); }
+    public void setEnum(StateEnum value) { ensureMutable(); this.value = value; this.flags = value.getRaw(); }
     public void setEnum(java.util.EnumSet<StateEnum> value) { setEnum(State.fromSet(value)); }
-    public void setEnum(State value) { this.value = value.value; this.flags = value.flags; }
+    public void setEnum(State value) { ensureMutable(); this.value = value.value; this.flags = value.flags; }
+
+    private State asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("State constants are read-only, change a copy: new State(State.VALUE)"); }
 
     public boolean hasFlags(byte flags) { return (((this.flags & flags) != 0) && ((this.flags & flags) == flags)); }
     public boolean hasFlags(StateEnum flags) { return hasFlags(flags.getRaw()); }

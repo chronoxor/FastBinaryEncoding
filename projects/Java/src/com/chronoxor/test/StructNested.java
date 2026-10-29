@@ -11,7 +11,7 @@ public class StructNested extends StructOptional
 {
     public EnumSimple f1000 = new EnumSimple();
     public EnumSimple f1001 = null;
-    public EnumTyped f1002 = EnumTyped.ENUM_VALUE_2;
+    public EnumTyped f1002 = new EnumTyped(EnumTyped.ENUM_VALUE_2);
     public EnumTyped f1003 = null;
     public FlagsSimple f1004 = new FlagsSimple();
     public FlagsSimple f1005 = null;

@@ -278,7 +278,7 @@ public final class FieldModelStructNested extends com.chronoxor.fbe.FieldModel
         if ((fbeCurrentSize + f1002.fbeSize()) <= fbeStructSize)
             fbeValue.f1002 = f1002.get(com.chronoxor.test.EnumTyped.ENUM_VALUE_2);
         else
-            fbeValue.f1002 = com.chronoxor.test.EnumTyped.ENUM_VALUE_2;
+            fbeValue.f1002 = new com.chronoxor.test.EnumTyped(com.chronoxor.test.EnumTyped.ENUM_VALUE_2);
         fbeCurrentSize += f1002.fbeSize();
 
         if ((fbeCurrentSize + f1003.fbeSize()) <= fbeStructSize)

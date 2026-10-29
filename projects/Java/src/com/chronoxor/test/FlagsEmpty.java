@@ -12,6 +12,7 @@ public final class FlagsEmpty implements Comparable<FlagsEmpty>
 
     private FlagsEmptyEnum value = FlagsEmptyEnum.values()[0];
     private int flags = value.getRaw();
+    private boolean fbeConstant;
 
     public FlagsEmpty() {}
     public FlagsEmpty(int value) { setEnum(value); }
@@ -24,10 +25,13 @@ public final class FlagsEmpty implements Comparable<FlagsEmpty>
 
     public void setDefault() { setEnum((int)0); }
 
-    public void setEnum(int value) { this.flags = value; this.value = FlagsEmptyEnum.mapValue(value); }
-    public void setEnum(FlagsEmptyEnum value) { this.value = value; this.flags = value.getRaw(); }
+    public void setEnum(int value) { ensureMutable(); this.flags = value; this.value = FlagsEmptyEnum.mapValue(value); }
+    public void setEnum(FlagsEmptyEnum value) { ensureMutable(); this.value = value; this.flags = value.getRaw(); }
     public void setEnum(java.util.EnumSet<FlagsEmptyEnum> value) { setEnum(FlagsEmpty.fromSet(value)); }
-    public void setEnum(FlagsEmpty value) { this.value = value.value; this.flags = value.flags; }
+    public void setEnum(FlagsEmpty value) { ensureMutable(); this.value = value.value; this.flags = value.flags; }
+
+    private FlagsEmpty asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("FlagsEmpty constants are read-only, change a copy: new FlagsEmpty(FlagsEmpty.VALUE)"); }
 
     public boolean hasFlags(int flags) { return (((this.flags & flags) != 0) && ((this.flags & flags) == flags)); }
     public boolean hasFlags(FlagsEmptyEnum flags) { return hasFlags(flags.getRaw()); }

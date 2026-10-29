@@ -9,15 +9,16 @@ package com.chronoxor.test;
 
 public final class FlagsSimple implements Comparable<FlagsSimple>
 {
-    public static final FlagsSimple FLAG_VALUE_0 = new FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_0);
-    public static final FlagsSimple FLAG_VALUE_1 = new FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_1);
-    public static final FlagsSimple FLAG_VALUE_2 = new FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_2);
-    public static final FlagsSimple FLAG_VALUE_3 = new FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_3);
-    public static final FlagsSimple FLAG_VALUE_4 = new FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_4);
-    public static final FlagsSimple FLAG_VALUE_5 = new FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_5);
+    public static final FlagsSimple FLAG_VALUE_0 = new FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_0).asConstant();
+    public static final FlagsSimple FLAG_VALUE_1 = new FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_1).asConstant();
+    public static final FlagsSimple FLAG_VALUE_2 = new FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_2).asConstant();
+    public static final FlagsSimple FLAG_VALUE_3 = new FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_3).asConstant();
+    public static final FlagsSimple FLAG_VALUE_4 = new FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_4).asConstant();
+    public static final FlagsSimple FLAG_VALUE_5 = new FlagsSimple(FlagsSimpleEnum.FLAG_VALUE_5).asConstant();
 
     private FlagsSimpleEnum value = FlagsSimpleEnum.values()[0];
     private int flags = value.getRaw();
+    private boolean fbeConstant;
 
     public FlagsSimple() {}
     public FlagsSimple(int value) { setEnum(value); }
@@ -30,10 +31,13 @@ public final class FlagsSimple implements Comparable<FlagsSimple>
 
     public void setDefault() { setEnum((int)0); }
 
-    public void setEnum(int value) { this.flags = value; this.value = FlagsSimpleEnum.mapValue(value); }
-    public void setEnum(FlagsSimpleEnum value) { this.value = value; this.flags = value.getRaw(); }
+    public void setEnum(int value) { ensureMutable(); this.flags = value; this.value = FlagsSimpleEnum.mapValue(value); }
+    public void setEnum(FlagsSimpleEnum value) { ensureMutable(); this.value = value; this.flags = value.getRaw(); }
     public void setEnum(java.util.EnumSet<FlagsSimpleEnum> value) { setEnum(FlagsSimple.fromSet(value)); }
-    public void setEnum(FlagsSimple value) { this.value = value.value; this.flags = value.flags; }
+    public void setEnum(FlagsSimple value) { ensureMutable(); this.value = value.value; this.flags = value.flags; }
+
+    private FlagsSimple asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("FlagsSimple constants are read-only, change a copy: new FlagsSimple(FlagsSimple.VALUE)"); }
 
     public boolean hasFlags(int flags) { return (((this.flags & flags) != 0) && ((this.flags & flags) == flags)); }
     public boolean hasFlags(FlagsSimpleEnum flags) { return hasFlags(flags.getRaw()); }

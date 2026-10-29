@@ -9,14 +9,15 @@ package com.chronoxor.enums;
 
 public final class EnumUInt8 implements Comparable<EnumUInt8>
 {
-    public static final EnumUInt8 ENUM_VALUE_0 = new EnumUInt8(EnumUInt8Enum.ENUM_VALUE_0);
-    public static final EnumUInt8 ENUM_VALUE_1 = new EnumUInt8(EnumUInt8Enum.ENUM_VALUE_1);
-    public static final EnumUInt8 ENUM_VALUE_2 = new EnumUInt8(EnumUInt8Enum.ENUM_VALUE_2);
-    public static final EnumUInt8 ENUM_VALUE_3 = new EnumUInt8(EnumUInt8Enum.ENUM_VALUE_3);
-    public static final EnumUInt8 ENUM_VALUE_4 = new EnumUInt8(EnumUInt8Enum.ENUM_VALUE_4);
-    public static final EnumUInt8 ENUM_VALUE_5 = new EnumUInt8(EnumUInt8Enum.ENUM_VALUE_5);
+    public static final EnumUInt8 ENUM_VALUE_0 = new EnumUInt8(EnumUInt8Enum.ENUM_VALUE_0).asConstant();
+    public static final EnumUInt8 ENUM_VALUE_1 = new EnumUInt8(EnumUInt8Enum.ENUM_VALUE_1).asConstant();
+    public static final EnumUInt8 ENUM_VALUE_2 = new EnumUInt8(EnumUInt8Enum.ENUM_VALUE_2).asConstant();
+    public static final EnumUInt8 ENUM_VALUE_3 = new EnumUInt8(EnumUInt8Enum.ENUM_VALUE_3).asConstant();
+    public static final EnumUInt8 ENUM_VALUE_4 = new EnumUInt8(EnumUInt8Enum.ENUM_VALUE_4).asConstant();
+    public static final EnumUInt8 ENUM_VALUE_5 = new EnumUInt8(EnumUInt8Enum.ENUM_VALUE_5).asConstant();
 
     private EnumUInt8Enum value = EnumUInt8Enum.values()[0];
+    private boolean fbeConstant;
 
     public EnumUInt8() {}
     public EnumUInt8(byte value) { setEnum(value); }
@@ -28,9 +29,12 @@ public final class EnumUInt8 implements Comparable<EnumUInt8>
 
     public void setDefault() { setEnum((byte)0); }
 
-    public void setEnum(byte value) { this.value = EnumUInt8Enum.mapValue(value); }
-    public void setEnum(EnumUInt8Enum value) { this.value = value; }
-    public void setEnum(EnumUInt8 value) { this.value = value.value; }
+    public void setEnum(byte value) { ensureMutable(); this.value = EnumUInt8Enum.mapValue(value); }
+    public void setEnum(EnumUInt8Enum value) { ensureMutable(); this.value = value; }
+    public void setEnum(EnumUInt8 value) { ensureMutable(); this.value = value.value; }
+
+    private EnumUInt8 asConstant() { fbeConstant = true; return this; }
+    private void ensureMutable() { if (fbeConstant) throw new UnsupportedOperationException("EnumUInt8 constants are read-only, change a copy: new EnumUInt8(EnumUInt8.VALUE)"); }
 
     @Override
     public int compareTo(EnumUInt8 other)
