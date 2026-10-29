@@ -12,7 +12,8 @@ var searchData=
   ['structrejects_9',['StructRejects',['../struct_f_b_e_1_1_struct_rejects.html',1,'FBE']]],
   ['structrequest_10',['StructRequest',['../struct_f_b_e_1_1_struct_request.html',1,'FBE']]],
   ['structresponse_11',['StructResponse',['../struct_f_b_e_1_1_struct_response.html',1,'FBE']]],
-  ['structs_12',['structs',['../struct_f_b_e_1_1_statements.html#a3edb282ba76785797f6a99c8f15f5631',1,'FBE::Statements']]],
-  ['structtype_13',['StructType',['../struct_f_b_e_1_1_struct_type.html',1,'FBE::StructType'],['../struct_f_b_e_1_1_struct_type.html#abe2e58bd721ed0e1df3b4070445c38ec',1,'FBE::StructType::StructType(int t, bool f)']]],
-  ['stype_14',['stype',['../struct_f_b_e_1_1_struct_type.html#a054cbbeb3544e3f05fac058980a62bb6',1,'FBE::StructType']]]
+  ['structs_12',['Structs',['../class_f_b_e_1_1_generator_c_sharp.html#a2d3c812f8b32376db8ffe4a05cea7910',1,'FBE::GeneratorCSharp::Structs() const noexcept'],['../class_f_b_e_1_1_generator_c_sharp.html#ad4aaabf36118b86759c956982891e13c',1,'FBE::GeneratorCSharp::Structs(bool structs) noexcept']]],
+  ['structs_13',['structs',['../struct_f_b_e_1_1_statements.html#a3edb282ba76785797f6a99c8f15f5631',1,'FBE::Statements']]],
+  ['structtype_14',['StructType',['../struct_f_b_e_1_1_struct_type.html',1,'FBE::StructType'],['../struct_f_b_e_1_1_struct_type.html#abe2e58bd721ed0e1df3b4070445c38ec',1,'FBE::StructType::StructType(int t, bool f)']]],
+  ['stype_15',['stype',['../struct_f_b_e_1_1_struct_type.html#a054cbbeb3544e3f05fac058980a62bb6',1,'FBE::StructType']]]
 ];
