@@ -20,7 +20,7 @@ class DefaultEnumMeta(enum.EnumMeta):
 
     def __call__(cls, value=default, *args, **kwargs):
         if value is DefaultEnumMeta.default:
-            return next(iter(cls))
+            return next(iter(cls.__members__.values()))
         return super().__call__(value, *args, **kwargs)
 
 
