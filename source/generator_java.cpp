@@ -7528,7 +7528,7 @@ std::string GeneratorJava::ConvertTypeName(const std::string& domain, const std:
     else if (type == "string")
         return "String";
     else if (type == "timestamp")
-        return ((Version() < 8) ? "java.util.Date" : "java.time.Instant");
+        return "java.time.Instant";
     else if (type == "uuid")
         return "java.util.UUID";
 
@@ -7622,7 +7622,7 @@ std::string GeneratorJava::ConvertTypeFieldName(const std::string& type)
     else if (type == "string")
         return "String";
     else if (type == "timestamp")
-        return ((Version() < 8) ? "Date" : "Timestamp");
+        return "Timestamp";
     else if (type == "uuid")
         return "UUID";
 
@@ -7668,7 +7668,7 @@ std::string GeneratorJava::ConvertTypeFieldType(const std::string& domain, const
     else if (type == "string")
         return "String";
     else if (type == "timestamp")
-        return ((Version() < 8) ? "java.util.Date" : "java.time.Instant");
+        return "java.time.Instant";
     else if (type == "uuid")
         return "java.util.UUID";
 
@@ -7804,9 +7804,9 @@ std::string GeneratorJava::ConvertConstant(const std::string& domain, const std:
         return "";
     }
     else if (value == "epoch")
-        return ((Version() < 8) ? "new java.util.Date(0)" : "java.time.Instant.EPOCH");
+        return "java.time.Instant.EPOCH";
     else if (value == "utc")
-        return ((Version() < 8) ? "new java.util.Date(System.currentTimeMillis())" : "java.time.Instant.now()");
+        return "java.time.Instant.now()";
     else if (value == "uuid0")
         return domain + "fbe.UUIDGenerator.nil()";
     else if (value == "uuid1")
@@ -7939,7 +7939,7 @@ std::string GeneratorJava::ConvertDefault(const std::string& domain, const std::
     else if (type == "string")
         return "\"\"";
     else if (type == "timestamp")
-        return ((Version() < 8) ? "new java.util.Date(0)" : "java.time.Instant.EPOCH");
+        return "java.time.Instant.EPOCH";
     else if (type == "uuid")
         return domain + "fbe.UUIDGenerator.nil()";
 
@@ -7987,7 +7987,7 @@ std::string GeneratorJava::ConvertOutputStreamType(const std::string& type, cons
     else if ((type == "string") || (type == "uuid"))
         return ".append(\"\\\"\").append(" + name + ").append(\"\\\"\")";
     else if (type == "timestamp")
-        return ((Version() < 8) ? ".append(" + name + ".getTime() * 1000)" : ".append(" + name + ".getEpochSecond() * 1000000000 + " + name + ".getNano())");
+        return ".append(" + name + ".getEpochSecond() * 1000000000 + " + name + ".getNano())";
     else
         return ".append(" + name + ")";
 }

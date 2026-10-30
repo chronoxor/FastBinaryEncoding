@@ -35,10 +35,8 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
     GenerateFBEFieldModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
     GenerateFBEFieldModelDecimal(domain, "fbe");
-    if (Version() < 8)
-        GenerateFBEFieldModelDate(domain, "fbe");
-    else
-        GenerateFBEFieldModelTimestamp(domain, "fbe");
+    GenerateFBEFieldModelDate(domain, "fbe");
+    GenerateFBEFieldModelTimestamp(domain, "fbe");
     GenerateFBEFieldModelBytes(domain, "fbe");
     GenerateFBEFieldModelString(domain, "fbe");
     if (Final())
@@ -61,10 +59,8 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel(domain, "fbe", "Double", "Double", "", "8", "0.0");
         GenerateFBEFinalModel(domain, "fbe", "UUID", "java.util.UUID", "", "16", "UUIDGenerator.nil()");
         GenerateFBEFinalModelDecimal(domain, "fbe");
-        if (Version() < 8)
-            GenerateFBEFinalModelDate(domain, "fbe");
-        else
-            GenerateFBEFinalModelTimestamp(domain, "fbe");
+        GenerateFBEFinalModelDate(domain, "fbe");
+        GenerateFBEFinalModelTimestamp(domain, "fbe");
         GenerateFBEFinalModelBytes(domain, "fbe");
         GenerateFBEFinalModelString(domain, "fbe");
     }
@@ -4442,7 +4438,37 @@ internal class CharacterJson : com.google.gson.JsonSerializer<Char>, com.google.
     }
 }
 
-_TIMESTAMP_CLASS_
+internal class DateJson : com.google.gson.JsonSerializer<java.util.Date>, com.google.gson.JsonDeserializer<java.util.Date>
+{
+    override fun serialize(src: java.util.Date, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    {
+        val nanoseconds = src.time * 1000000
+        return com.google.gson.JsonPrimitive(nanoseconds)
+    }
+
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.util.Date
+    {
+        val nanoseconds = json.asJsonPrimitive.asLong
+        return java.util.Date(nanoseconds / 1000000)
+    }
+}
+
+internal class InstantJson : com.google.gson.JsonSerializer<java.time.Instant>, com.google.gson.JsonDeserializer<java.time.Instant>
+{
+    override fun serialize(src: java.time.Instant, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
+    {
+        val nanoseconds = src.epochSecond * 1000000000 + src.nano
+        return com.google.gson.JsonPrimitive(nanoseconds)
+    }
+
+    @Throws(com.google.gson.JsonParseException::class)
+    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.time.Instant
+    {
+        val nanoseconds = json.asJsonPrimitive.asLong
+        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
+    }
+}
 
 internal class BigDecimalJson : com.google.gson.JsonSerializer<java.math.BigDecimal>, com.google.gson.JsonDeserializer<java.math.BigDecimal>
 {
@@ -4564,7 +4590,8 @@ object Json
         builder.registerTypeAdapter(ByteArray::class.java, BytesJson())
         builder.registerTypeAdapter(Char::class.java, CharacterJson())
         builder.registerTypeAdapter(Character::class.java, CharacterJson())
-        _TIMESTAMP_REGISTER_
+        builder.registerTypeAdapter(java.util.Date::class.java, DateJson())
+        builder.registerTypeAdapter(java.time.Instant::class.java, InstantJson())
         builder.registerTypeAdapter(java.math.BigDecimal::class.java, BigDecimalJson())
         builder.registerTypeAdapter(java.util.UUID::class.java, UUIDJson())
         builder.registerTypeAdapter(kotlin.UByte::class.java, UByteNullableJson())
@@ -4576,51 +4603,7 @@ object Json
 }
 )CODE";
 
-    std::string timestamp_class;
-    std::string timestamp_register;
-
-    if (Version() < 8)
-    {
-        timestamp_class = R"CODE(internal class DateJson : com.google.gson.JsonSerializer<java.util.Date>, com.google.gson.JsonDeserializer<java.util.Date>
-{
-    override fun serialize(src: java.util.Date, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
-    {
-        val nanoseconds = src.time * 1000000
-        return com.google.gson.JsonPrimitive(nanoseconds)
-    }
-
-    @Throws(com.google.gson.JsonParseException::class)
-    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.util.Date
-    {
-        val nanoseconds = json.asJsonPrimitive.asLong
-        return java.util.Date(nanoseconds / 1000000)
-    }
-})CODE";
-        timestamp_register = "builder.registerTypeAdapter(java.util.Date::class.java, DateJson())";
-    }
-    else
-    {
-        timestamp_class = R"CODE(internal class InstantJson : com.google.gson.JsonSerializer<java.time.Instant>, com.google.gson.JsonDeserializer<java.time.Instant>
-{
-    override fun serialize(src: java.time.Instant, typeOfSrc: java.lang.reflect.Type, context: com.google.gson.JsonSerializationContext): com.google.gson.JsonElement
-    {
-        val nanoseconds = src.epochSecond * 1000000000 + src.nano
-        return com.google.gson.JsonPrimitive(nanoseconds)
-    }
-
-    @Throws(com.google.gson.JsonParseException::class)
-    override fun deserialize(json: com.google.gson.JsonElement, type: java.lang.reflect.Type, context: com.google.gson.JsonDeserializationContext): java.time.Instant
-    {
-        val nanoseconds = json.asJsonPrimitive.asLong
-        return java.time.Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
-    }
-})CODE";
-        timestamp_register = "builder.registerTypeAdapter(java.time.Instant::class.java, InstantJson())";
-    }
-
     // Prepare code template
-    code = std::regex_replace(code, std::regex("_TIMESTAMP_CLASS_"), timestamp_class);
-    code = std::regex_replace(code, std::regex("_TIMESTAMP_REGISTER_"), timestamp_register);
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -8428,7 +8411,7 @@ std::string GeneratorKotlin::ConvertTypeName(const std::string& domain, const st
     else if (type == "string")
         return "String" + opt;
     else if (type == "timestamp")
-        return ((Version() < 8) ? "java.util.Date" : "java.time.Instant") + opt;
+        return "java.time.Instant" + opt;
     else if (type == "uuid")
         return "java.util.UUID" + opt;
 
@@ -8522,7 +8505,7 @@ std::string GeneratorKotlin::ConvertTypeFieldName(const std::string& type)
     else if (type == "string")
         return "String";
     else if (type == "timestamp")
-        return ((Version() < 8) ? "Date" : "Timestamp");
+        return "Timestamp";
     else if (type == "uuid")
         return "UUID";
 
@@ -8570,7 +8553,7 @@ std::string GeneratorKotlin::ConvertTypeFieldType(const std::string& domain, con
     else if (type == "string")
         return "String" + opt;
     else if (type == "timestamp")
-        return ((Version() < 8) ? "java.util.Date" : "java.time.Instant") + opt;
+        return "java.time.Instant" + opt;
     else if (type == "uuid")
         return "java.util.UUID" + opt;
 
@@ -8714,9 +8697,9 @@ std::string GeneratorKotlin::ConvertConstant(const std::string& domain, const st
         return "";
     }
     else if (value == "epoch")
-        return ((Version() < 8) ? "java.util.Date(0)" : "java.time.Instant.EPOCH");
+        return "java.time.Instant.EPOCH";
     else if (value == "utc")
-        return ((Version() < 8) ? "java.util.Date(System.currentTimeMillis())" : "java.time.Instant.now()");
+        return "java.time.Instant.now()";
     else if (value == "uuid0")
         return domain + "fbe.UUIDGenerator.nil()";
     else if (value == "uuid1")
@@ -8834,7 +8817,7 @@ std::string GeneratorKotlin::ConvertDefault(const std::string& domain, const std
     else if (type == "string")
         return "\"\"";
     else if (type == "timestamp")
-        return ((Version() < 8) ? "java.util.Date(0)" : "java.time.Instant.EPOCH");
+        return "java.time.Instant.EPOCH";
     else if (type == "uuid")
         return domain + "fbe.UUIDGenerator.nil()";
 
@@ -8887,7 +8870,7 @@ std::string GeneratorKotlin::ConvertOutputStreamType(const std::string& type, co
     else if ((type == "string") || (type == "uuid"))
         return ".append(\"\\\"\").append(" + name + opt + ").append(\"\\\"\")";
     else if (type == "timestamp")
-        return ((Version() < 8) ? ".append(" + name + opt + ".time * 1000000)" : ".append(" + name + opt + ".epochSecond * 1000000000 + " + name + opt + ".nano)");
+        return ".append(" + name + opt + ".epochSecond * 1000000000 + " + name + opt + ".nano)";
     else
         return ".append(" + name + opt + ")";
 }
