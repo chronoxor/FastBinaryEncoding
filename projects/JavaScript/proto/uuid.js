@@ -136,36 +136,31 @@ class UUID {
    */
   static sequential () {
     let now = new Date().getTime()
-    let sequence = Math.floor(Math.random() * TWO_POW_14)
-    let nodeHi = Math.floor(Math.random() * TWO_POW_8)
-    let nodeMid = Math.floor(Math.random() * TWO_POW_8)
-    let nodeLow = Math.floor(Math.random() * TWO_POW_32)
-    let tick = Math.floor(Math.random() * TWO_POW_4)
-    let timestamp = 0
     let timestampRatio = 1 / 4
+    let state = UUID_SEQUENTIAL_STATE
 
-    if (now !== timestamp) {
-      if (now < timestamp) {
-        sequence++
+    if (now !== state.timestamp) {
+      if (now < state.timestamp) {
+        state.sequence++
       }
-      timestamp = now
-      tick = Math.floor(Math.random() * TWO_POW_4)
-    } else if ((Math.random() < timestampRatio) && (tick < 9984)) {
-      tick += 1 + Math.floor(Math.random() * TWO_POW_4)
+      state.timestamp = now
+      state.tick = Math.floor(Math.random() * TWO_POW_4)
+    } else if ((Math.random() < timestampRatio) && (state.tick < 9984)) {
+      state.tick += 1 + Math.floor(Math.random() * TWO_POW_4)
     } else {
-      sequence++
+      state.sequence++
     }
 
-    let ts = timestamp - Date.UTC(1582, 9, 15)
+    let ts = state.timestamp - Date.UTC(1582, 9, 15)
     let hm = ((ts / 0x100000000) * 10000) & 0xFFFFFFF
-    let tl = ((ts & 0xFFFFFFF) * 10000) % 0x100000000 + tick
+    let tl = ((ts & 0xFFFFFFF) * 10000) % 0x100000000 + state.tick
     let thav = (hm >>> 16 & 0xFFF) | 0x1000
 
-    sequence &= 0x3FFF
-    let cshar = (sequence >>> 8) | 0x80
-    let csl = sequence & 0xFF
+    state.sequence &= 0x3FFF
+    let cshar = (state.sequence >>> 8) | 0x80
+    let csl = state.sequence & 0xFF
 
-    return UUID.fromParts(tl, hm & 0xFFFF, thav, cshar, csl, nodeLow, nodeMid, nodeHi)
+    return UUID.fromParts(tl, hm & 0xFFFF, thav, cshar, csl, state.nodeLow, state.nodeMid, state.nodeHi)
   }
 
   /**
@@ -313,5 +308,15 @@ const TWO_POW_12 = 4096
 const TWO_POW_8 = 256
 const TWO_POW_6 = 64
 const TWO_POW_4 = 16
+
+// UUID1 generator state, kept between calls to produce unique values within the same timestamp
+const UUID_SEQUENTIAL_STATE = {
+  timestamp: 0,
+  sequence: Math.floor(Math.random() * TWO_POW_14),
+  tick: Math.floor(Math.random() * TWO_POW_4),
+  nodeHi: Math.floor(Math.random() * TWO_POW_8),
+  nodeMid: Math.floor(Math.random() * TWO_POW_8),
+  nodeLow: Math.floor(Math.random() * TWO_POW_32)
+}
 
 exports.UUID = UUID
