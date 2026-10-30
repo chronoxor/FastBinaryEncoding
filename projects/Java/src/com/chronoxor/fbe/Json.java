@@ -12,7 +12,10 @@ final class ByteBufferJson implements com.google.gson.JsonSerializer<java.nio.By
     @Override
     public com.google.gson.JsonElement serialize(java.nio.ByteBuffer src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
-        return new com.google.gson.JsonPrimitive(java.util.Base64.getEncoder().encodeToString(src.array()));
+        // Serialize only the remaining bytes (position..limit); duplicate keeps the source position intact
+        byte[] bytes = new byte[src.remaining()];
+        src.duplicate().get(bytes);
+        return new com.google.gson.JsonPrimitive(java.util.Base64.getEncoder().encodeToString(bytes));
     }
 
     @Override
