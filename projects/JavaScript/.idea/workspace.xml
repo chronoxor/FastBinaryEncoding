@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="" />
+    <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,6 +72,16 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="tests-browser" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="tests-browser" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="tests-node" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -89,16 +102,6 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="tests" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="tests" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="update" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -110,19 +113,19 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="npm.tests-browser" />
       <item itemvalue="npm.tests-node" />
       <item itemvalue="npm.tests-standard" />
       <item itemvalue="npm.audit" />
       <item itemvalue="npm.update" />
-      <item itemvalue="npm.tests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.tests-browser" />
         <item itemvalue="npm.tests-standard" />
         <item itemvalue="npm.tests-node" />
         <item itemvalue="npm.update" />
         <item itemvalue="npm.audit" />
-        <item itemvalue="npm.tests" />
       </list>
     </recent_temporary>
   </component>
@@ -193,7 +196,7 @@
       <workItem from="1607993774985" duration="87000" />
       <workItem from="1640496812234" duration="2040000" />
       <workItem from="1641153831656" duration="122000" />
-      <workItem from="1793398763357" duration="2393000" />
+      <workItem from="1793398763357" duration="3006000" />
     </task>
     <servers />
   </component>
