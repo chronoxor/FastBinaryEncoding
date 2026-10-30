@@ -5,24 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../CSharp-structs/Proto/com.chronoxor.fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp-structs/Proto/com.chronoxor.fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/com.chronoxor.fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/com.chronoxor.fbe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/Buffer.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/Buffer.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/FinalSender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Sender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Buffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Buffer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Json.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Json.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Pair.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Pair.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/UUIDGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/UUIDGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/Buffer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/Buffer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/UUIDGenerator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/UUIDGenerator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/fbe.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/fbe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Swift/Proto/Fbe/Source/ChronoxorFbe/Buffer.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Swift/Proto/Fbe/Source/ChronoxorFbe/Buffer.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/fbe.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/fbe.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
