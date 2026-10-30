@@ -15,16 +15,33 @@
  */
 let utf8count = function (str) {
   let bytes = 0
+
   for (let i = 0; i < str.length; i++) {
     let codePoint = str.charCodeAt(i)
-    if (codePoint < 0x80) {
-      bytes++
-    } else if ((codePoint > 0x7F) && (codePoint < 0x800)) {
-      bytes = bytes + 2
+
+    // Handle UTF-16 surrogate pairs to get the true 32-bit code point
+    if (codePoint >= 0xD800 && codePoint <= 0xDBFF && i + 1 < str.length) {
+      const lowSurrogate = str.charCodeAt(i + 1)
+      if (lowSurrogate >= 0xDC00 && lowSurrogate <= 0xDFFF) {
+        // Calculate the true code point from the surrogate pair
+        codePoint = ((codePoint - 0xD800) << 10) + (lowSurrogate - 0xDC00) + 0x10000
+        // Skip the low surrogate on the next iteration
+        i++
+      }
+    }
+
+    // Apply UTF-8 size rules based on the code point value
+    if (codePoint <= 0x7F) {
+      bytes += 1
+    } else if (codePoint <= 0x7FF) {
+      bytes += 2
+    } else if (codePoint <= 0xFFFF) {
+      bytes += 3
     } else {
-      bytes = bytes + 3
+      bytes += 4
     }
   }
+
   return bytes
 }
 

@@ -2981,11 +2981,19 @@ class UUID {
     if (str.length === 0) {
       throw new Error('Empty string!')
     }
+
     let result = new UUID()
-    str = str.replace(/[{}-]/g, '')
-    for (let i = 0; i < str.length; i++) {
-      result.data[i] = parseInt(str.substr(i * 2, 2), 16)
+
+    const hex = str.replace(/-/g, '').toLowerCase();
+    if ((hex.length !== 32) || !/^[0-9a-fA-F]+$/.test(hex)) {
+      throw new Error('Invalid UUID string format!');
     }
+
+    for (let i = 0; i < 16; i++) {
+      // Take two hex characters at a time and parse them as an integer
+      result.data[i] = parseInt(hex.substring(i * 2, i * 2 + 2), 16);
+    }
+
     return result
   }
 
@@ -3163,7 +3171,7 @@ class UUID {
     for (let i = 0; i < this.data.length; i++) {
       let diff = this.data[i] - other.data[i]
       if (diff !== 0) {
-        return diff
+        return (diff > 0) ? 1 : -1
       }
     }
     return 0
@@ -3351,16 +3359,33 @@ void GeneratorJavaScript::GenerateUTF8(const CppCommon::Path& path)
  */
 let utf8count = function (str) {
   let bytes = 0
+
   for (let i = 0; i < str.length; i++) {
     let codePoint = str.charCodeAt(i)
-    if (codePoint < 0x80) {
-      bytes++
-    } else if ((codePoint > 0x7F) && (codePoint < 0x800)) {
-      bytes = bytes + 2
+
+    // Handle UTF-16 surrogate pairs to get the true 32-bit code point
+    if (codePoint >= 0xD800 && codePoint <= 0xDBFF && i + 1 < str.length) {
+      const lowSurrogate = str.charCodeAt(i + 1)
+      if (lowSurrogate >= 0xDC00 && lowSurrogate <= 0xDFFF) {
+        // Calculate the true code point from the surrogate pair
+        codePoint = ((codePoint - 0xD800) << 10) + (lowSurrogate - 0xDC00) + 0x10000
+        // Skip the low surrogate on the next iteration
+        i++
+      }
+    }
+
+    // Apply UTF-8 size rules based on the code point value
+    if (codePoint <= 0x7F) {
+      bytes += 1
+    } else if (codePoint <= 0x7FF) {
+      bytes += 2
+    } else if (codePoint <= 0xFFFF) {
+      bytes += 3
     } else {
-      bytes = bytes + 3
+      bytes += 4
     }
   }
+
   return bytes
 }
 

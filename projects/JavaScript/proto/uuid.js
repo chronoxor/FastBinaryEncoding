@@ -106,11 +106,19 @@ class UUID {
     if (str.length === 0) {
       throw new Error('Empty string!')
     }
+
     let result = new UUID()
-    str = str.replace(/[{}-]/g, '')
-    for (let i = 0; i < str.length; i++) {
-      result.data[i] = parseInt(str.substr(i * 2, 2), 16)
+
+    const hex = str.replace(/-/g, '').toLowerCase();
+    if ((hex.length !== 32) || !/^[0-9a-fA-F]+$/.test(hex)) {
+      throw new Error('Invalid UUID string format!');
     }
+
+    for (let i = 0; i < 16; i++) {
+      // Take two hex characters at a time and parse them as an integer
+      result.data[i] = parseInt(hex.substring(i * 2, i * 2 + 2), 16);
+    }
+
     return result
   }
 
@@ -288,7 +296,7 @@ class UUID {
     for (let i = 0; i < this.data.length; i++) {
       let diff = this.data[i] - other.data[i]
       if (diff !== 0) {
-        return diff
+        return (diff > 0) ? 1 : -1
       }
     }
     return 0

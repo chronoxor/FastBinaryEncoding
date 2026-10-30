@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/utf8.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/utf8.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/uuid.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/uuid.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +34,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Node.js.create.js.executor": "Run",
+    "Node.js.print.js.executor": "Run",
+    "Node.js.print_json.js.executor": "Run",
+    "Node.js.send_receive.js.executor": "Run",
+    "Node.js.serialization.js.executor": "Run",
+    "Node.js.serialization_final.js.executor": "Run",
+    "Node.js.serialization_json.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
@@ -48,6 +55,8 @@
     "nodejs_package_manager_path": "npm",
     "npm.audit.executor": "Run",
     "npm.tests-browser.executor": "Run",
+    "npm.tests-node.executor": "Run",
+    "npm.tests-standard.executor": "Run",
     "npm.tests.executor": "Run",
     "npm.update.executor": "Run",
     "settings.editor.selected.configurable": "configurable.group.language"
@@ -153,7 +162,7 @@
       <workItem from="1607993774985" duration="87000" />
       <workItem from="1640496812234" duration="2040000" />
       <workItem from="1641153831656" duration="122000" />
-      <workItem from="1793398763357" duration="368000" />
+      <workItem from="1793398763357" duration="1324000" />
     </task>
     <servers />
   </component>
