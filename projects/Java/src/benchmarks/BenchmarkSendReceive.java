@@ -51,10 +51,10 @@ class MyReceiver extends Receiver
     protected void onReceiveLog(String message) { _logSize += message.length(); }
 }
 
-@State(Scope.Benchmark)
+@org.openjdk.jmh.annotations.State(Scope.Benchmark)
 public class BenchmarkSendReceive
 {
-    private final AccountMessage _account;
+    private AccountMessage _account;
     private final MySender1 _sender1;
     private final MySender2 _sender2;
     private final MyReceiver _receiver;
@@ -62,7 +62,7 @@ public class BenchmarkSendReceive
     public BenchmarkSendReceive()
     {
         // Create a new account with some orders
-        _account = new AccountMessage(new Account(1, "Test", State.good, new Balance("USD", 1000.0), new Balance("EUR", 100.0), new ArrayList<Order>()));
+        _account = new AccountMessage(new Account(1, "Test", com.chronoxor.proto.State.good, new Balance("USD", 1000.0), new Balance("EUR", 100.0), new ArrayList<Order>()));
         _account.body.orders.add(new Order(1, "EURUSD", OrderSide.buy, OrderType.market, 1.23456, 1000.0));
         _account.body.orders.add(new Order(2, "EURUSD", OrderSide.sell, OrderType.limit, 1.0, 100.0));
         _account.body.orders.add(new Order(3, "EURUSD", OrderSide.buy, OrderType.stop, 1.5, 10.0));

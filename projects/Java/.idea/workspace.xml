@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="baa6137f-caa3-43d0-8265-48f91212b974" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_Latest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/Json.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/Json.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +31,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Create.executor": "Run",
+    "Application.Print.executor": "Run",
+    "Application.PrintJson.executor": "Run",
+    "Application.SendReceive.executor": "Run",
+    "Application.Serialization.executor": "Run",
+    "Application.SerializationFinal.executor": "Run",
+    "Application.SerializationJson.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Repository.Attach.Annotations": "false",
@@ -55,20 +58,68 @@
     "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
   }
 }]]></component>
-  <component name="RunManager" selected="TestNG.TestClone">
-    <configuration name="TestClone" type="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.tests">
+    <configuration name="Create" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="examples.Create" />
       <module name="FastBinaryEncoding" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tests.*" />
+          <option name="PATTERN" value="examples.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.TestClone" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Print" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="examples.Print" />
+      <module name="FastBinaryEncoding" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="examples.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SendReceive" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="examples.SendReceive" />
+      <module name="FastBinaryEncoding" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="examples.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SerializationFinal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="examples.SerializationFinal" />
+      <module name="FastBinaryEncoding" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="examples.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SerializationJson" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="examples.SerializationJson" />
+      <module name="FastBinaryEncoding" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="examples.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -93,12 +144,20 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Create" />
+      <item itemvalue="Application.Print" />
+      <item itemvalue="Application.SendReceive" />
+      <item itemvalue="Application.SerializationFinal" />
+      <item itemvalue="Application.SerializationJson" />
       <item itemvalue="TestNG.tests" />
-      <item itemvalue="TestNG.TestClone" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.TestClone" />
+        <item itemvalue="Application.Create" />
+        <item itemvalue="Application.Print" />
+        <item itemvalue="Application.SendReceive" />
+        <item itemvalue="Application.SerializationJson" />
+        <item itemvalue="Application.SerializationFinal" />
       </list>
     </recent_temporary>
   </component>

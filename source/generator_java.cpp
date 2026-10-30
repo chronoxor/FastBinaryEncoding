@@ -4309,7 +4309,7 @@ public final class Json
     public static com.google.gson.GsonBuilder register(com.google.gson.GsonBuilder builder)
     {
         builder.serializeNulls();
-        builder.registerTypeAdapter(java.nio.ByteBuffer.class, new ByteBufferJson());
+        builder.registerTypeHierarchyAdapter(java.nio.ByteBuffer.class, new ByteBufferJson());
         builder.registerTypeAdapter(char.class, new CharacterJson());
         builder.registerTypeAdapter(Character.class, new CharacterJson());
         builder.registerTypeAdapter(java.util.Date.class, new DateJson());
