@@ -183,22 +183,17 @@ public final class UUIDGenerator
 
     // Lock and random generator
     private static final Object _lock = new Object();
-    private static final java.util.Random _generator = new java.util.Random();
+    private static final java.security.SecureRandom _generator = new java.security.SecureRandom();
 
-    // Node & clock sequence bytes
-    private static long _node = makeNode();
-    private static long _nodeAndClockSequence = makeNodeAndClockSequence();
+    // Node & clock sequence bytes (initialized once and never changed)
+    private static final long _nodeAndClockSequence = makeNodeAndClockSequence();
 
-    // Last UUID generated timestamp
-    private static long _last = GregorianEpoch;
-
-    private static long makeNode()
-    {
-        return _generator.nextLong() | 0x0000010000000000L;
-    }
+    // Last UUID generated timestamp (in 100-nanosecond ticks since the Gregorian epoch)
+    private static long _last = 0;
 
     private static long makeNodeAndClockSequence()
     {
+        long random = _generator.nextLong();
         long clock = _generator.nextLong();
 
         long lsb = 0;
@@ -206,8 +201,8 @@ public final class UUIDGenerator
         lsb |= 0x8000000000000000L;
         // Clock sequence (14 bits)
         lsb |= (clock & 0x0000000000003FFFL) << 48;
-        // 6 bytes
-        lsb |= _node;
+        // Node (6 bytes) with the multicast bit set, as it is random and not a real MAC address
+        lsb |= (random & 0x0000FFFFFFFFFFFFL) | 0x0000010000000000L;
         return lsb;
     }
 
@@ -217,22 +212,20 @@ public final class UUIDGenerator
     // Generate sequential UUID1 (time based version)
     public static java.util.UUID sequential()
     {
-        long now = System.currentTimeMillis();
+        long ticks = (System.currentTimeMillis() - GregorianEpoch) * 10000;
 
-        // Generate new clock sequence bytes to get rid of UUID duplicates
+        // Keep timestamps strictly increasing to get rid of UUID duplicates in the same millisecond
         synchronized(_lock)
         {
-            if (now <= _last)
-                _nodeAndClockSequence = makeNodeAndClockSequence();
-            _last = now;
+            if (ticks <= _last)
+                ticks = _last + 1;
+            _last = ticks;
         }
 
-        long nanosSince = (now - GregorianEpoch) * 10000;
-
         long msb = 0L;
-        msb |= (0x00000000FFFFFFFFL & nanosSince) << 32;
-        msb |= (0x0000FFFF00000000L & nanosSince) >>> 16;
-        msb |= (0xFFFF000000000000L & nanosSince) >>> 48;
+        msb |= (0x00000000FFFFFFFFL & ticks) << 32;
+        msb |= (0x0000FFFF00000000L & ticks) >>> 16;
+        msb |= (0xFFFF000000000000L & ticks) >>> 48;
         // Sets the version to 1
         msb |= 0x0000000000001000L;
 
