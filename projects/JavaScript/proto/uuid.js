@@ -109,14 +109,14 @@ class UUID {
 
     let result = new UUID()
 
-    const hex = str.replace(/-/g, '').toLowerCase();
+    let hex = str.replace(/[{}-]/g, '')
     if ((hex.length !== 32) || !/^[0-9a-fA-F]+$/.test(hex)) {
-      throw new Error('Invalid UUID string format!');
+      throw new Error('Invalid UUID string format!')
     }
 
     for (let i = 0; i < 16; i++) {
       // Take two hex characters at a time and parse them as an integer
-      result.data[i] = parseInt(hex.substring(i * 2, i * 2 + 2), 16);
+      result.data[i] = parseInt(hex.substring(i * 2, i * 2 + 2), 16)
     }
 
     return result
