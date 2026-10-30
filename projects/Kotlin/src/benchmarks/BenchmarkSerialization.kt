@@ -6,7 +6,7 @@ import org.openjdk.jmh.annotations.*
 import com.chronoxor.proto.*
 import com.chronoxor.proto.fbe.*
 
-@State(Scope.Benchmark)
+@org.openjdk.jmh.annotations.State(Scope.Benchmark)
 class BenchmarkSerialization
 {
     @Suppress("JoinDeclarationAndAssignment")

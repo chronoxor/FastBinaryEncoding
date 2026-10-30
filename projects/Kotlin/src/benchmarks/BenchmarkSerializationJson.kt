@@ -5,7 +5,7 @@ import org.openjdk.jmh.annotations.*
 
 import com.chronoxor.proto.*
 
-@State(Scope.Benchmark)
+@org.openjdk.jmh.annotations.State(Scope.Benchmark)
 class BenchmarkSerializationJson
 {
     private var _account: Account

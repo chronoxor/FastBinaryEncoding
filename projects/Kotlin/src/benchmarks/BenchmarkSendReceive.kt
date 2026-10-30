@@ -62,7 +62,7 @@ internal class MyReceiver : Receiver()
     }
 }
 
-@State(Scope.Benchmark)
+@org.openjdk.jmh.annotations.State(Scope.Benchmark)
 class BenchmarkSendReceive
 {
     @Suppress("JoinDeclarationAndAssignment")

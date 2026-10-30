@@ -2,9 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,34 +47,43 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="1QQOGOgRAyQcDI3RRL3HHw7md4e" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.Annotations" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566567401711" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2838785" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="project.kotlinCompiler" />
-  </component>
-  <component name="RunManager" selected="TestNG.&lt;default&gt;">
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Kotlin.Create.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.Print.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.PrintJson.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.SendReceive.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.Serialization.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.SerializationFinal.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.SerializationJson.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;TestNG.tests.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;X:/Projects/FastBinaryEncoding/projects/Kotlin&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.25862068&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.kotlinCompiler&quot;
+  }
+}</component>
+  <component name="RunManager" selected="TestNG.tests">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -79,6 +99,13 @@
     </configuration>
     <configuration name="PrintJson" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="examples.PrintJson" />
+      <module name="FastBinaryEncoding" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SendReceive" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="examples.SendReceive" />
       <module name="FastBinaryEncoding" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -101,29 +128,56 @@
     <configuration name="SerializationJson" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="examples.SerializationJson" />
       <module name="FastBinaryEncoding" />
+      <shortenClasspath name="NONE" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="&lt;default&gt;" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="tests" type="TestNG">
       <module name="FastBinaryEncoding" />
+      <shortenClasspath name="NONE" />
+      <useClassPathOnly />
+      <option name="SUITE_NAME" value="" />
       <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="GROUP_NAME" value="" />
       <option name="TEST_OBJECT" value="PACKAGE" />
+      <option name="PARAMETERS" value="" />
+      <option name="OUTPUT_DIRECTORY" value="" />
+      <option name="PROPERTIES_FILE" value="" />
       <properties />
       <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Kotlin.SendReceive" />
+      <item itemvalue="Kotlin.PrintJson" />
+      <item itemvalue="Kotlin.Serialization" />
+      <item itemvalue="Kotlin.SerializationFinal" />
+      <item itemvalue="Kotlin.SerializationJson" />
+      <item itemvalue="TestNG.tests" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.&lt;default&gt;" />
         <item itemvalue="Kotlin.SerializationJson" />
         <item itemvalue="Kotlin.SerializationFinal" />
         <item itemvalue="Kotlin.Serialization" />
+        <item itemvalue="Kotlin.SendReceive" />
         <item itemvalue="Kotlin.PrintJson" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10968.63" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10968.63" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">

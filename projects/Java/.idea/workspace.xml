@@ -5,8 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="baa6137f-caa3-43d0-8265-48f91212b974" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/Json.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/Json.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/FastBinaryEncoding.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/kotlinc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/libraries/com_google_code_gson_gson_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/libraries/com_google_code_gson_gson_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/benchmarks/BenchmarkSendReceive.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/benchmarks/BenchmarkSendReceive.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/benchmarks/BenchmarkSerialization.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/benchmarks/BenchmarkSerialization.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/benchmarks/BenchmarkSerializationFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/benchmarks/BenchmarkSerializationFinal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/benchmarks/BenchmarkSerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/benchmarks/BenchmarkSerializationJson.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,35 +36,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Create.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Print.executor&quot;: &quot;Run&quot;,
-    &quot;Application.PrintJson.executor&quot;: &quot;Run&quot;,
-    &quot;Application.SendReceive.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Serialization.executor&quot;: &quot;Run&quot;,
-    &quot;Application.SerializationFinal.executor&quot;: &quot;Run&quot;,
-    &quot;Application.SerializationJson.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;TestNG.TestClone.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.tests.executor&quot;: &quot;Run&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Create.executor": "Run",
+    "Application.Print.executor": "Run",
+    "Application.PrintJson.executor": "Run",
+    "Application.SendReceive.executor": "Run",
+    "Application.Serialization.executor": "Run",
+    "Application.SerializationFinal.executor": "Run",
+    "Application.SerializationJson.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "TestNG.TestClone.executor": "Run",
+    "TestNG.tests.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.469496",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.testRunning"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="TestNG.tests">
     <configuration name="Create" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="examples.Create" />
