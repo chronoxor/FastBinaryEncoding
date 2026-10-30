@@ -4386,7 +4386,7 @@ $(function() {
 <div class="line"><a id="l04309" name="l04309"></a><span class="lineno"> 4309</span><span class="stringliteral">    public static com.google.gson.GsonBuilder register(com.google.gson.GsonBuilder builder)</span></div>
 <div class="line"><a id="l04310" name="l04310"></a><span class="lineno"> 4310</span><span class="stringliteral">    {</span></div>
 <div class="line"><a id="l04311" name="l04311"></a><span class="lineno"> 4311</span><span class="stringliteral">        builder.serializeNulls();</span></div>
-<div class="line"><a id="l04312" name="l04312"></a><span class="lineno"> 4312</span><span class="stringliteral">        builder.registerTypeAdapter(java.nio.ByteBuffer.class, new ByteBufferJson());</span></div>
+<div class="line"><a id="l04312" name="l04312"></a><span class="lineno"> 4312</span><span class="stringliteral">        builder.registerTypeHierarchyAdapter(java.nio.ByteBuffer.class, new ByteBufferJson());</span></div>
 <div class="line"><a id="l04313" name="l04313"></a><span class="lineno"> 4313</span><span class="stringliteral">        builder.registerTypeAdapter(char.class, new CharacterJson());</span></div>
 <div class="line"><a id="l04314" name="l04314"></a><span class="lineno"> 4314</span><span class="stringliteral">        builder.registerTypeAdapter(Character.class, new CharacterJson());</span></div>
 <div class="line"><a id="l04315" name="l04315"></a><span class="lineno"> 4315</span><span class="stringliteral">        builder.registerTypeAdapter(java.util.Date.class, new DateJson());</span></div>
@@ -4789,7 +4789,7 @@ $(function() {
 <div class="line"><a id="l04712" name="l04712"></a><span class="lineno"> 4712</span> </div>
 <div class="line"><a id="l04713" name="l04713"></a><span class="lineno"> 4713</span>    <span class="comment">// Generate headers</span></div>
 <div class="line"><a id="l04714" name="l04714"></a><span class="lineno"> 4714</span>    GenerateHeader(CppCommon::Path(_input).filename().<span class="keywordtype">string</span>());</div>
-<div class="line"><a id="l04715" name="l04715"></a><span class="lineno"> 4715</span>    GenerateImports(domain, package + <span class="stringliteral">&quot;.fbe;&quot;</span>);</div>
+<div class="line"><a id="l04715" name="l04715"></a><span class="lineno"> 4715</span>    GenerateImports(domain, package + <span class="stringliteral">&quot;.fbe&quot;</span>);</div>
 <div class="line"><a id="l04716" name="l04716"></a><span class="lineno"> 4716</span> </div>
 <div class="line"><a id="l04717" name="l04717"></a><span class="lineno"> 4717</span>    std::string enum_type = (e-&gt;base &amp;&amp; !e-&gt;base-&gt;empty()) ? *e-&gt;base : <span class="stringliteral">&quot;int32&quot;</span>;</div>
 <div class="line"><a id="l04718" name="l04718"></a><span class="lineno"> 4718</span> </div>
@@ -5188,7 +5188,7 @@ $(function() {
 <div class="line"><a id="l05111" name="l05111"></a><span class="lineno"> 5111</span> </div>
 <div class="line"><a id="l05112" name="l05112"></a><span class="lineno"> 5112</span>    <span class="comment">// Generate headers</span></div>
 <div class="line"><a id="l05113" name="l05113"></a><span class="lineno"> 5113</span>    GenerateHeader(CppCommon::Path(_input).filename().<span class="keywordtype">string</span>());</div>
-<div class="line"><a id="l05114" name="l05114"></a><span class="lineno"> 5114</span>    GenerateImports(domain, package + <span class="stringliteral">&quot;.fbe;&quot;</span>);</div>
+<div class="line"><a id="l05114" name="l05114"></a><span class="lineno"> 5114</span>    GenerateImports(domain, package + <span class="stringliteral">&quot;.fbe&quot;</span>);</div>
 <div class="line"><a id="l05115" name="l05115"></a><span class="lineno"> 5115</span> </div>
 <div class="line"><a id="l05116" name="l05116"></a><span class="lineno"> 5116</span>    std::string flags_type = (f-&gt;base &amp;&amp; !f-&gt;base-&gt;empty()) ? *f-&gt;base : <span class="stringliteral">&quot;int32&quot;</span>;</div>
 <div class="line"><a id="l05117" name="l05117"></a><span class="lineno"> 5117</span> </div>
