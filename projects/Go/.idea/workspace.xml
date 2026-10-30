@@ -549,7 +549,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/chronoxor/FastBinaryEncoding/projects/Go/proto">
+  <component name="RunManager" selected="Go Test.go test tests">
     <configuration name="go build examples" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
       <working_directory value="$PROJECT_DIR$/examples" />
@@ -589,8 +589,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build github.com/chronoxor/FastBinaryEncoding/projects/Go/proto" />
         <item itemvalue="Go Test.go test tests" />
+        <item itemvalue="Go Build.go build github.com/chronoxor/FastBinaryEncoding/projects/Go/proto" />
       </list>
     </recent_temporary>
   </component>
