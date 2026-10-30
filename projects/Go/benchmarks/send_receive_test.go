@@ -91,8 +91,7 @@ func BenchmarkSend(b *testing.B) {
 	account, sender, _, _ := SetupBenchmarkSender()
 
 	// Perform the benchmark
-	b.ResetTimer()
-	for n := 0; n < b.N; n++ {
+	for b.Loop() {
 		size, _ := sender.Send(account)
 		b.SetBytes(int64(size))
 	}
@@ -108,8 +107,7 @@ func BenchmarkSendWithLogs(b *testing.B) {
 	sender.SetLogging(true)
 
 	// Perform the benchmark
-	b.ResetTimer()
-	for n := 0; n < b.N; n++ {
+	for b.Loop() {
 		size, _ := sender.Send(account)
 		b.SetBytes(int64(size))
 	}
@@ -122,8 +120,7 @@ func BenchmarkReceive(b *testing.B) {
 	_, _, sender, receiver := SetupBenchmarkSender()
 
 	// Perform the benchmark
-	b.ResetTimer()
-	for n := 0; n < b.N; n++ {
+	for b.Loop() {
 		_ = receiver.ReceiveBuffer(sender.Buffer())
 		b.SetBytes(int64(sender.Buffer().Size()))
 	}
@@ -139,8 +136,7 @@ func BenchmarkReceiveWithLogs(b *testing.B) {
 	receiver.SetLogging(true)
 
 	// Perform the benchmark
-	b.ResetTimer()
-	for n := 0; n < b.N; n++ {
+	for b.Loop() {
 		_ = receiver.ReceiveBuffer(sender.Buffer())
 		b.SetBytes(int64(sender.Buffer().Size()))
 	}

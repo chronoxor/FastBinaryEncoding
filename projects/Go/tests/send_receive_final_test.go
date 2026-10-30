@@ -1,7 +1,7 @@
 package tests
 
 import "testing"
-import "github.com/stretchr/testify/assert"
+import "github.com/stretchr/testify/require"
 import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/proto"
 import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/protoex"
 
@@ -72,9 +72,10 @@ func SendAndReceiveFinal(index1 int, index2 int) bool {
 }
 
 func TestSendAndReceiveFinal(t *testing.T) {
+	t.Parallel()
 	for i := 0; i < 1000; i++ {
 		for j := 0; j < 1000; j++ {
-			assert.True(t, SendAndReceiveFinal(i, j))
+			require.True(t, SendAndReceiveFinal(i, j))
 		}
 	}
 }

@@ -2,7 +2,7 @@ package tests
 
 import "testing"
 import "github.com/shopspring/decimal"
-import "github.com/stretchr/testify/assert"
+import "github.com/stretchr/testify/require"
 import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
 
 func VerifyDecimal(t *testing.T, low uint32, mid uint32, high uint32, negative bool, scale uint32, value string) {
@@ -26,14 +26,14 @@ func VerifyDecimal(t *testing.T, low uint32, mid uint32, high uint32, negative b
 	_ = model.Set(value1)
 	value2, _ := model.Get()
 
-	assert.True(t, value1.Equal(base) && value2.Equal(base), "Invalid decimal serialization!")
+	require.True(t, value1.Equal(base) && value2.Equal(base), "Invalid decimal serialization!")
 
 	finalModel := fbe.NewFinalModelDecimal(readBuffer, 0)
 	value3, _, _ := finalModel.Get()
 	_, _ = finalModel.Set(value3)
 	value4, _, _ := finalModel.Get()
 
-	assert.True(t, value3.Equal(base) && value4.Equal(base), "Invalid decimal final serialization!")
+	require.True(t, value3.Equal(base) && value4.Equal(base), "Invalid decimal final serialization!")
 }
 
 func TestDecimal(test *testing.T) {

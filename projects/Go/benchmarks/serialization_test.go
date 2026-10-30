@@ -42,8 +42,7 @@ func BenchmarkSerialize(b *testing.B) {
 	account, writer, _ := SetupBenchmark()
 
 	// Perform the benchmark
-	b.ResetTimer()
-	for n := 0; n < b.N; n++ {
+	for b.Loop() {
 		// Reset FBE stream
 		writer.Buffer().Reset()
 		// Serialize the account to the FBE stream
@@ -59,8 +58,7 @@ func BenchmarkDeserialize(b *testing.B) {
 	account, _, reader := SetupBenchmark()
 
 	// Perform the benchmark
-	b.ResetTimer()
-	for n := 0; n < b.N; n++ {
+	for b.Loop() {
 		// Deserialize the account from the FBE stream
 		size, _ := reader.DeserializeValue(account)
 		b.SetBytes(int64(size))
@@ -74,8 +72,7 @@ func BenchmarkVerify(b *testing.B) {
 	_, writer, _ := SetupBenchmark()
 
 	// Perform the benchmark
-	b.ResetTimer()
-	for n := 0; n < b.N; n++ {
+	for b.Loop() {
 		// Verify the account
 		_ = writer.Verify()
 		b.SetBytes(int64(writer.Buffer().Size()))

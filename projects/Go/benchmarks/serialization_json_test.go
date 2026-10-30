@@ -27,8 +27,7 @@ func BenchmarkJsonSerialize(b *testing.B) {
 	account, _ := SetupBenchmarkJson()
 
 	// Perform the benchmark
-	b.ResetTimer()
-	for n := 0; n < b.N; n++ {
+	for b.Loop() {
 		json, _ := account.JSON()
 		b.SetBytes(int64(len(json)))
 	}
@@ -41,8 +40,7 @@ func BenchmarkJsonDeserialize(b *testing.B) {
 	_, json := SetupBenchmarkJson()
 
 	// Perform the benchmark
-	b.ResetTimer()
-	for n := 0; n < b.N; n++ {
+	for b.Loop() {
 		_, _ = proto.NewAccountFromJSON(json)
 		b.SetBytes(int64(len(json)))
 	}
