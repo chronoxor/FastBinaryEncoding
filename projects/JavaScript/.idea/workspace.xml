@@ -104,8 +104,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.tests-standard" />
         <item itemvalue="npm.tests-node" />
+        <item itemvalue="npm.tests-standard" />
         <item itemvalue="npm.tests" />
         <item itemvalue="Node.js.serialization_json.js" />
         <item itemvalue="Node.js.serialization_final.js" />
@@ -179,7 +179,7 @@
       <workItem from="1607993774985" duration="87000" />
       <workItem from="1640496812234" duration="2040000" />
       <workItem from="1641153831656" duration="122000" />
-      <workItem from="1793398763357" duration="1949000" />
+      <workItem from="1793398763357" duration="2393000" />
     </task>
     <servers />
   </component>
