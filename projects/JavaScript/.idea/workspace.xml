@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +17,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5,
+  "fromUser": false
+}]]></component>
   <component name="ProjectFrameBounds">
     <option name="x" value="541" />
     <option name="y" value="320" />
@@ -27,82 +28,70 @@
     <option name="height" value="871" />
   </component>
   <component name="ProjectId" id="1QPxhUU9iaHIHAlcErckEqsxIBb" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../soft/Development/NodeJS/bin" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.standard" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.standard" value="project" />
-    <property name="node.js.selected.package.eslint" value="Y:\projects\Projects\FastBinaryEncoding\projects\JavaScript\node_modules\eslint" />
-    <property name="node.js.selected.package.standard" value="Z:\projects\Projects\FastBinaryEncoding\projects\JavaScript\node_modules\standard" />
-    <property name="nodejs_interpreter_path" value="$PROJECT_DIR$/../../../../../soft/Development/NodeJS/bin/node" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "X:/Projects/FastBinaryEncoding/projects/JavaScript",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "X:\\Projects\\FastBinaryEncoding\\projects\\JavaScript\\node_modules\\standard",
+    "nodejs_package_manager_path": "npm",
+    "npm.audit.executor": "Run",
+    "npm.tests-browser.executor": "Run",
+    "npm.tests.executor": "Run",
+    "npm.update.executor": "Run",
+    "settings.editor.selected.configurable": "configurable.group.language"
+  }
+}]]></component>
   <component name="RunManager" selected="Node.js.serialization_json.js">
+    <configuration name="print_json.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/print_json.js" working-dir="$PROJECT_DIR$/examples">
+      <method v="2" />
+    </configuration>
+    <configuration name="send_receive.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/send_receive.js" working-dir="$PROJECT_DIR$/examples">
+      <method v="2" />
+    </configuration>
     <configuration name="serialization_final.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/serialization_final.js" working-dir="$PROJECT_DIR$/examples">
+      <method v="2" />
+    </configuration>
+    <configuration name="serialization.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/serialization.js" working-dir="$PROJECT_DIR$/examples">
       <method v="2" />
     </configuration>
     <configuration name="serialization_json.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/examples/serialization_json.js" working-dir="$PROJECT_DIR$/examples">
       <method v="2" />
     </configuration>
-    <configuration name="audit" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="audit" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="tests" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="tests" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="update" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="update" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <list>
+      <item itemvalue="Node.js.print_json.js" />
+      <item itemvalue="Node.js.send_receive.js" />
+      <item itemvalue="Node.js.serialization.js" />
       <item itemvalue="Node.js.serialization_final.js" />
       <item itemvalue="Node.js.serialization_json.js" />
-      <item itemvalue="npm.audit" />
-      <item itemvalue="npm.update" />
-      <item itemvalue="npm.tests" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.tests" />
-        <item itemvalue="npm.update" />
-        <item itemvalue="npm.audit" />
         <item itemvalue="Node.js.serialization_json.js" />
         <item itemvalue="Node.js.serialization_final.js" />
+        <item itemvalue="Node.js.serialization.js" />
+        <item itemvalue="Node.js.send_receive.js" />
+        <item itemvalue="Node.js.print_json.js" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-WS-262.10968.77" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -164,6 +153,7 @@
       <workItem from="1607993774985" duration="87000" />
       <workItem from="1640496812234" duration="2040000" />
       <workItem from="1641153831656" duration="122000" />
+      <workItem from="1793398763357" duration="368000" />
     </task>
     <servers />
   </component>
@@ -171,15 +161,6 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="RECENT_FILTERS">
       <map>
         <entry key="Branch">
@@ -190,6 +171,15 @@
         <entry key="User">
           <value>
             <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
           </value>
         </entry>
       </map>
