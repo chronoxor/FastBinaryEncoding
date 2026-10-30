@@ -1,69 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
-    <option name="autoReloadType" value="ALL" />
+    <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="783b2918-92f4-46d2-9a41-0a253625844f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="baa6137f-caa3-43d0-8265-48f91212b974" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_Latest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.2\plugins\maven\lib\maven3" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectId" id="1QQN2DZUTst5ezgMx6D9aaEhLJw" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="3LPUFRFlCybD44OFSKvUjYGeWmG" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.Annotations" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1564341592694" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Kotlin" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.31074765" />
-    <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin" />
-  </component>
-  <component name="RunManager" selected="TestNG.&lt;default&gt;">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "TestNG.TestClone.executor": "Run",
+    "TestNG.tests.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
+  }
+}]]></component>
+  <component name="RunManager" selected="TestNG.TestClone">
+    <configuration name="TestClone" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="FastBinaryEncoding" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.TestClone" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -71,210 +73,55 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SendReceive" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="examples.SendReceive" />
+    <configuration name="tests" type="TestNG">
       <module name="FastBinaryEncoding" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="examples.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Serialization" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="examples.Serialization" />
-      <module name="FastBinaryEncoding" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="examples.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SerializationFinal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="examples.SerializationFinal" />
-      <module name="FastBinaryEncoding" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="examples.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SerializationJson" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="examples.SerializationJson" />
-      <module name="FastBinaryEncoding" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="examples.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="&lt;default&gt;" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
+      <shortenClasspath name="NONE" />
+      <useClassPathOnly />
+      <option name="SUITE_NAME" value="" />
       <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="GROUP_NAME" value="" />
       <option name="TEST_OBJECT" value="PACKAGE" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PARAMETERS" value="" />
+      <option name="OUTPUT_DIRECTORY" value="" />
+      <option name="PROPERTIES_FILE" value="" />
       <properties />
       <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <list>
+      <item itemvalue="TestNG.tests" />
+      <item itemvalue="TestNG.TestClone" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.&lt;default&gt;" />
-        <item itemvalue="Application.SerializationJson" />
-        <item itemvalue="Application.SerializationFinal" />
-        <item itemvalue="Application.Serialization" />
-        <item itemvalue="Application.SendReceive" />
+        <item itemvalue="TestNG.TestClone" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="SvnConfiguration">
-    <configuration />
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10968.63" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10968.63" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="783b2918-92f4-46d2-9a41-0a253625844f" name="Default" comment="" />
-      <created>1536188088037</created>
+      <changelist id="baa6137f-caa3-43d0-8265-48f91212b974" name="Changes" comment="" />
+      <created>1793355092471</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1536188088037</updated>
-      <workItem from="1536188092389" duration="1489000" />
-      <workItem from="1538171735869" duration="665000" />
-      <workItem from="1538593462842" duration="290000" />
-      <workItem from="1538593772497" duration="79000" />
-      <workItem from="1538597939406" duration="6000" />
-      <workItem from="1538601919589" duration="23000" />
-      <workItem from="1538611428249" duration="408000" />
-      <workItem from="1538614947852" duration="404000" />
-      <workItem from="1538615733238" duration="112000" />
-      <workItem from="1539205451733" duration="86000" />
-      <workItem from="1539207800246" duration="173000" />
-      <workItem from="1539208313275" duration="108000" />
-      <workItem from="1539212976524" duration="20000" />
-      <workItem from="1539213622879" duration="1232000" />
-      <workItem from="1539639628544" duration="54000" />
-      <workItem from="1539975948259" duration="38000" />
-      <workItem from="1542901052144" duration="174000" />
-      <workItem from="1543153715073" duration="5978000" />
-      <workItem from="1543162730746" duration="25000" />
-      <workItem from="1543175420660" duration="2187000" />
-      <workItem from="1543363535098" duration="1978000" />
-      <workItem from="1543451489780" duration="467000" />
-      <workItem from="1543928575065" duration="200000" />
-      <workItem from="1544195653756" duration="12000" />
-      <workItem from="1544197357915" duration="222000" />
-      <workItem from="1544197643859" duration="288000" />
-      <workItem from="1545573026834" duration="40000" />
-      <workItem from="1545574850986" duration="6000" />
-      <workItem from="1545574877408" duration="243000" />
-      <workItem from="1545575597174" duration="4000" />
-      <workItem from="1545683350497" duration="98000" />
-      <workItem from="1550790355724" duration="307000" />
-      <workItem from="1550790741963" duration="367000" />
-      <workItem from="1551544179015" duration="418000" />
-      <workItem from="1551544599852" duration="39000" />
-      <workItem from="1551802270540" duration="806000" />
-      <workItem from="1551807213097" duration="39000" />
-      <workItem from="1551874681572" duration="131000" />
-      <workItem from="1551895953960" duration="114000" />
-      <workItem from="1552521273036" duration="64000" />
-      <workItem from="1553270349258" duration="112000" />
-      <workItem from="1553281977582" duration="70000" />
-      <workItem from="1556501488162" duration="1097000" />
-      <workItem from="1559812865479" duration="6012000" />
-      <workItem from="1559819284503" duration="4807000" />
-      <workItem from="1559824100635" duration="393000" />
-      <workItem from="1559824496498" duration="741000" />
-      <workItem from="1559825318754" duration="4505000" />
-      <workItem from="1559829834492" duration="344000" />
-      <workItem from="1559834566247" duration="48000" />
-      <workItem from="1559897873060" duration="206000" />
-      <workItem from="1559898238418" duration="170000" />
-      <workItem from="1559901669782" duration="6000" />
-      <workItem from="1559930243160" duration="184000" />
-      <workItem from="1559930429736" duration="133000" />
-      <workItem from="1559931071165" duration="345000" />
-      <workItem from="1559931418735" duration="43000" />
-      <workItem from="1559931621142" duration="14413000" />
-      <workItem from="1559958737014" duration="95000" />
-      <workItem from="1560331057344" duration="2325000" />
-      <workItem from="1560348316346" duration="152000" />
-      <workItem from="1561239338850" duration="204000" />
-      <workItem from="1561239591243" duration="58000" />
-      <workItem from="1562103468079" duration="72000" />
-      <workItem from="1562800008313" duration="374000" />
-      <workItem from="1562800435925" duration="767000" />
-      <workItem from="1564341545611" duration="77000" />
-      <workItem from="1564355550407" duration="147000" />
-      <workItem from="1564355719555" duration="99000" />
-      <workItem from="1567698654857" duration="577000" />
-      <workItem from="1605127853113" duration="1174000" />
-      <workItem from="1605129212746" duration="60000" />
-      <workItem from="1607432209817" duration="334000" />
-      <workItem from="1607432561690" duration="68000" />
-      <workItem from="1640485660768" duration="102000" />
-      <workItem from="1640485780488" duration="1422000" />
-      <workItem from="1640487223713" duration="124000" />
-      <workItem from="1641152538775" duration="56000" />
+      <updated>1793355092471</updated>
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

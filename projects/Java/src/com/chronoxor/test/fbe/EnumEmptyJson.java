@@ -5,7 +5,7 @@
 // FBE version: 1.15.0.0
 //------------------------------------------------------------------------------
 
-package com.chronoxor.test.fbe;;
+package com.chronoxor.test.fbe;
 
 public final class EnumEmptyJson implements com.google.gson.JsonSerializer<com.chronoxor.test.EnumEmpty>, com.google.gson.JsonDeserializer<com.chronoxor.test.EnumEmpty>
 {

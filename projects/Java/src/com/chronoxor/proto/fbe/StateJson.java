@@ -5,7 +5,7 @@
 // FBE version: 1.15.0.0
 //------------------------------------------------------------------------------
 
-package com.chronoxor.proto.fbe;;
+package com.chronoxor.proto.fbe;
 
 public final class StateJson implements com.google.gson.JsonSerializer<com.chronoxor.proto.State>, com.google.gson.JsonDeserializer<com.chronoxor.proto.State>
 {

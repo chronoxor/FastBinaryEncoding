@@ -4712,7 +4712,7 @@ void GeneratorJava::GenerateEnumJson(const std::shared_ptr<Package>& p, const st
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(domain, package + ".fbe;");
+    GenerateImports(domain, package + ".fbe");
 
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
 
@@ -5111,7 +5111,7 @@ void GeneratorJava::GenerateFlagsJson(const std::shared_ptr<Package>& p, const s
 
     // Generate headers
     GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(domain, package + ".fbe;");
+    GenerateImports(domain, package + ".fbe");
 
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
 

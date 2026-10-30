@@ -5,7 +5,7 @@
 // FBE version: 1.15.0.0
 //------------------------------------------------------------------------------
 
-package com.chronoxor.enums.fbe;;
+package com.chronoxor.enums.fbe;
 
 public final class EnumInt16Json implements com.google.gson.JsonSerializer<com.chronoxor.enums.EnumInt16>, com.google.gson.JsonDeserializer<com.chronoxor.enums.EnumInt16>
 {

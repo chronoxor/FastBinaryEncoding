@@ -9,8 +9,5 @@
         <module name="FastBinaryEncoding" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="15">
-      <module name="FastBinaryEncoding" target="15" />
-    </bytecodeTargetLevel>
   </component>
 </project>
