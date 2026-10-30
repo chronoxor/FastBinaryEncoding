@@ -5,29 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/enums/FinalReceiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums/FinalReceiver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/enums/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums/FinalSender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/enums/Proxy.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums/Proxy.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/enums/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums/Receiver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/enums/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums/Sender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/Receiver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/Sender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/proto/FinalReceiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto/FinalReceiver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/proto/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto/FinalSender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/proto/Proxy.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto/Proxy.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/proto/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto/Receiver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/proto/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto/Sender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/protoex/FinalReceiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex/FinalReceiver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/protoex/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex/FinalSender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/protoex/Proxy.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex/Proxy.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/protoex/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex/Receiver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/protoex/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex/Sender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test/FinalReceiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/FinalReceiver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/FinalSender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test/Proxy.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/Proxy.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/Receiver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
