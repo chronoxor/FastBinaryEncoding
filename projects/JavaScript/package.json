@@ -23,7 +23,7 @@
     "type": "git",
     "url": "git+https://github.com/chronoxor/FastBinaryEncoding.git"
   },
-  "dependencies": {
+  "devDependencies": {
     "airtap": "^5.0.0",
     "assert": "^2.1.0",
     "benchmark": "^2.1.4",
