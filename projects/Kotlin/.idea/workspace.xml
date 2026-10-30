@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_core_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/org_openjdk_jmh_jmh_generator_annprocess_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp-structs/Proto/com.chronoxor.fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp-structs/Proto/com.chronoxor.fbe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/com.chronoxor.fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/com.chronoxor.fbe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/Buffer.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/Buffer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/FinalSender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Buffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Buffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Json.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Json.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Pair.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/Pair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/UUIDGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/fbe/UUIDGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationFinal.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/benchmarks/BenchmarkSerializationJson.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/Buffer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/Buffer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/chronoxor/fbe/UUIDGenerator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/chronoxor/fbe/UUIDGenerator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/proto/fbe.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/fbe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Swift/Proto/Fbe/Source/ChronoxorFbe/Buffer.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Swift/Proto/Fbe/Source/ChronoxorFbe/Buffer.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/fbe.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/fbe.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +32,18 @@
   <component name="DefaultGradleProjectSettings">
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -56,33 +75,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Kotlin.Create.executor&quot;: &quot;Run&quot;,
-    &quot;Kotlin.Print.executor&quot;: &quot;Run&quot;,
-    &quot;Kotlin.PrintJson.executor&quot;: &quot;Run&quot;,
-    &quot;Kotlin.SendReceive.executor&quot;: &quot;Run&quot;,
-    &quot;Kotlin.Serialization.executor&quot;: &quot;Run&quot;,
-    &quot;Kotlin.SerializationFinal.executor&quot;: &quot;Run&quot;,
-    &quot;Kotlin.SerializationJson.executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;TestNG.tests.executor&quot;: &quot;Run&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;X:/Projects/FastBinaryEncoding/projects/Kotlin&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.25862068&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.kotlinCompiler&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Kotlin.Create.executor": "Run",
+    "Kotlin.Print.executor": "Run",
+    "Kotlin.PrintJson.executor": "Run",
+    "Kotlin.SendReceive.executor": "Run",
+    "Kotlin.Serialization.executor": "Run",
+    "Kotlin.SerializationFinal.executor": "Run",
+    "Kotlin.SerializationJson.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "TestNG.tests.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "X:/Projects/FastBinaryEncoding/projects/Kotlin",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.25862068",
+    "settings.editor.selected.configurable": "project.kotlinCompiler"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="TestNG.tests">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">

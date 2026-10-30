@@ -277,7 +277,7 @@ class WriteBuffer extends BaseBuffer {
     if (this._offset >= (offset + size)) {
       this._offset -= size
     } else if (this._offset >= offset) {
-      this._offset -= this._offset - offset
+      this._offset = offset
       if (this._offset > this._size) {
         this._offset = this._size
       }

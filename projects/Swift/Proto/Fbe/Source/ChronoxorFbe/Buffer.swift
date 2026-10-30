@@ -114,7 +114,7 @@ public class Buffer {
         if self.offset >= offset + size {
             self.offset -= size
         } else if self.offset >= offset {
-            self.offset -= self.offset - offset
+            self.offset = offset
             if self.offset > self.size {
                 self.offset = self.size
             }

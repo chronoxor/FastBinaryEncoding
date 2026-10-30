@@ -419,7 +419,7 @@ module FBE
       if @_offset >= (offset + size)
         @_offset -= size
       elsif @_offset >= offset
-        @_offset -= @_offset - offset
+        @_offset = offset
         @_offset = @_size if @_offset > @_size
       end
     end

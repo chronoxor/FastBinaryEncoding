@@ -185,7 +185,7 @@ namespace com.chronoxor.FBE {
                 _offset -= size;
             else if (_offset >= offset)
             {
-                _offset -= _offset - offset;
+                _offset = offset;
                 if (_offset > Size)
                     _offset = Size;
             }

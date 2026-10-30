@@ -84,7 +84,7 @@ class Buffer
             this.offset -= size
         else if (this.offset >= offset)
         {
-            this.offset -= this.offset - offset
+            this.offset = offset
             if (this.offset > this.size)
                 this.offset = this.size
         }

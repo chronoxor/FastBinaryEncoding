@@ -150,7 +150,7 @@ class WriteBuffer(object):
         if self._offset >= (offset + size):
             self._offset -= size
         elif self._offset >= offset:
-            self._offset -= self._offset - offset
+            self._offset = offset
             if self._offset > self._size:
                 self._offset = self._size
 

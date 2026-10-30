@@ -379,7 +379,7 @@ void FBEBuffer::remove(size_t offset, size_t size)
         _offset -= size;
     else if (_offset >= offset)
     {
-        _offset -= _offset - offset;
+        _offset = offset;
         if (_offset > _size)
             _offset = _size;
     }
