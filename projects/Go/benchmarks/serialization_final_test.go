@@ -4,7 +4,9 @@ import "testing"
 import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
 import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/proto"
 
-func SetupBenchmarkFinal() (*proto.Account, *proto.AccountFinalModel, *proto.AccountFinalModel) {
+func SetupBenchmarkFinal(tb testing.TB) (*proto.Account, *proto.AccountFinalModel, *proto.AccountFinalModel) {
+	tb.Helper()
+
 	// Create a new account with some orders
 	var account = proto.NewAccountFromFieldValues(1, "Test", proto.State_good, proto.Balance{Currency: "USD", Amount: 1000.0}, &proto.Balance{Currency: "EUR", Amount: 100.0}, make([]proto.Order, 0))
 	account.Orders = append(account.Orders, proto.Order{Id: 1, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_market, Price: 1.23456, Volume: 1000.0})
@@ -15,20 +17,20 @@ func SetupBenchmarkFinal() (*proto.Account, *proto.AccountFinalModel, *proto.Acc
 	writer := proto.NewAccountFinalModel(fbe.NewEmptyBuffer())
 	_, err := writer.Serialize(account)
 	if err != nil {
-		panic("serialization error")
+		tb.Fatalf("serialization error: %v", err)
 	}
 	if !writer.Verify() {
-		panic("verify error")
+		tb.Fatal("verify error")
 	}
 
 	// Deserialize the account from the FBE stream
 	reader := proto.NewAccountFinalModel(writer.Buffer())
 	if ok := reader.Verify(); !ok {
-		panic("verify error")
+		tb.Fatal("verify error")
 	}
 	account, _, err = reader.Deserialize()
 	if err != nil {
-		panic("deserialization error")
+		tb.Fatalf("deserialization error: %v", err)
 	}
 
 	// Return result
@@ -39,7 +41,7 @@ func SetupBenchmarkFinal() (*proto.Account, *proto.AccountFinalModel, *proto.Acc
 func BenchmarkSerializeFinal(b *testing.B) {
 	// Setup the benchmark
 	b.ReportAllocs()
-	account, writer, _ := SetupBenchmarkFinal()
+	account, writer, _ := SetupBenchmarkFinal(b)
 
 	// Perform the benchmark
 	for b.Loop() {
@@ -55,7 +57,7 @@ func BenchmarkSerializeFinal(b *testing.B) {
 func BenchmarkDeserializeFinal(b *testing.B) {
 	// Setup the benchmark
 	b.ReportAllocs()
-	account, _, reader := SetupBenchmarkFinal()
+	account, _, reader := SetupBenchmarkFinal(b)
 
 	// Perform the benchmark
 	for b.Loop() {
@@ -69,7 +71,7 @@ func BenchmarkDeserializeFinal(b *testing.B) {
 func BenchmarkVerifyFinal(b *testing.B) {
 	// Setup the benchmark
 	b.ReportAllocs()
-	_, writer, _ := SetupBenchmarkFinal()
+	_, writer, _ := SetupBenchmarkFinal(b)
 
 	// Perform the benchmark
 	for b.Loop() {

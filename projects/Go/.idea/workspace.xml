@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/create.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/create/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/print.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/print/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/print_json.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/print_json/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/send_receive.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/send_receive/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/serialization.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/serialization/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/serialization_final.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/serialization_final/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/serialization_json.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/serialization_json/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tests.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
