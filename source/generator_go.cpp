@@ -605,7 +605,7 @@ func (b *Buffer) Remove(offset int, size int) {
     if b.offset >= (offset + size) {
         b.offset -= size
     } else if b.offset >= offset {
-        b.offset -= b.offset - offset
+        b.offset = offset
         if b.offset > b.size {
             b.offset = b.size
         }

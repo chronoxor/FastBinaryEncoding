@@ -127,18 +127,8 @@ void GeneratorJava::GenerateFBEPair(const std::string& domain, const std::string
 
     std::string code = R"CODE(
 // Fast Binary Encoding pair wrapper
-public final class Pair<K, V>
+public record Pair<K, V>(K key, V value)
 {
-    private final K key;
-    private final V value;
-
-    // Initialize the pair with given key and value
-    public Pair(K key, V value)
-    {
-        this.key = key;
-        this.value = value;
-    }
-
     // Get the pair key
     public K getKey() { return key; }
     // Get the pair value
@@ -337,7 +327,7 @@ public class Buffer
             _offset -= size;
         else if (_offset >= offset)
         {
-            _offset -= _offset - offset;
+            _offset = offset;
             if (_offset > _size)
                 _offset = _size;
         }
