@@ -64,7 +64,7 @@ func (s *Sender) Logging() bool { return s.logging }
 func (s *Sender) SetLogging(logging bool) { s.logging = logging }
 
 // Setup handlers
-func (s *Sender) SetupHandlers(handlers interface{}) {
+func (s *Sender) SetupHandlers(handlers any) {
     if handler, ok := handlers.(OnSend); ok {
         s.SetupHandlerOnSend(handler)
     }

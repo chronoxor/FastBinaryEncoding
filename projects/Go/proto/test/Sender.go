@@ -44,7 +44,7 @@ func (s *Sender) ProtoSender() *proto.Sender { return s.protoSender }
 
 // Send methods
 
-func (s *Sender) Send(value interface{}) (int, error) {
+func (s *Sender) Send(value any) (int, error) {
     switch value := value.(type) {
     default:
         _ = value

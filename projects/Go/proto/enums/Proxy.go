@@ -35,7 +35,7 @@ func NewProxyWithBuffer(buffer *fbe.Buffer) *Proxy {
 }
 
 // Setup handlers
-func (p *Proxy) SetupHandlers(handlers interface{}) {
+func (p *Proxy) SetupHandlers(handlers any) {
     p.Receiver.SetupHandlers(handlers)
 }
 

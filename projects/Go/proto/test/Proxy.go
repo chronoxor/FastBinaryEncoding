@@ -46,7 +46,7 @@ func (p *Proxy) ProtoProxy() *proto.Proxy { return p.protoProxy }
 func (p *Proxy) SetProtoProxy(proxy *proto.Proxy) { p.protoProxy = proxy }
 
 // Setup handlers
-func (p *Proxy) SetupHandlers(handlers interface{}) {
+func (p *Proxy) SetupHandlers(handlers any) {
     p.Receiver.SetupHandlers(handlers)
     p.protoProxy.SetupHandlers(handlers)
 }

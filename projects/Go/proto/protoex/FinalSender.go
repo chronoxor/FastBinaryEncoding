@@ -53,7 +53,7 @@ func (s *FinalSender) AccountMessageModel() *AccountMessageFinalModel { return s
 
 // Send methods
 
-func (s *FinalSender) Send(value interface{}) (int, error) {
+func (s *FinalSender) Send(value any) (int, error) {
     switch value := value.(type) {
     case *OrderMessage:
         if value.FBEType() == s.orderMessageModel.FBEType() {

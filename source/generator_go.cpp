@@ -4391,7 +4391,7 @@ func (s *Sender) Logging() bool { return s.logging }
 func (s *Sender) SetLogging(logging bool) { s.logging = logging }
 
 // Setup handlers
-func (s *Sender) SetupHandlers(handlers interface{}) {
+func (s *Sender) SetupHandlers(handlers any) {
     if handler, ok := handlers.(OnSend); ok {
         s.SetupHandlerOnSend(handler)
     }
@@ -4514,7 +4514,7 @@ func (r *Receiver) Logging() bool { return r.logging }
 func (r *Receiver) SetLogging(logging bool) { r.logging = logging }
 
 // Setup handlers
-func (r *Receiver) SetupHandlers(handlers interface{}) {
+func (r *Receiver) SetupHandlers(handlers any) {
     if handler, ok := handlers.(OnReceive); ok {
         r.SetupHandlerOnReceive(handler)
     }
@@ -7309,7 +7309,7 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
     WriteLine();
     WriteLineIndent("// Send methods");
     WriteLine();
-    WriteLineIndent("func (s *" + sender_name + ") Send(value interface{}) (int, error) {");
+    WriteLineIndent("func (s *" + sender_name + ") Send(value any) (int, error) {");
     Indent(1);
     if (p->body)
     {
@@ -7540,7 +7540,7 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
     // Generate receiver setup handlers
     WriteLine();
     WriteLineIndent("// Setup handlers");
-    WriteLineIndent("func (r *" + receiver_name + ") SetupHandlers(handlers interface{}) {");
+    WriteLineIndent("func (r *" + receiver_name + ") SetupHandlers(handlers any) {");
     Indent(1);
     WriteLineIndent("r.Receiver.SetupHandlers(handlers)");
     if (p->import)
@@ -7803,7 +7803,7 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
     // Generate proxy setup handlers
     WriteLine();
     WriteLineIndent("// Setup handlers");
-    WriteLineIndent("func (p *" + proxy_name + ") SetupHandlers(handlers interface{}) {");
+    WriteLineIndent("func (p *" + proxy_name + ") SetupHandlers(handlers any) {");
     Indent(1);
     WriteLineIndent("p.Receiver.SetupHandlers(handlers)");
     if (p->import)

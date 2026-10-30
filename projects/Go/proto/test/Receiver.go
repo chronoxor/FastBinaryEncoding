@@ -46,7 +46,7 @@ func (r *Receiver) ProtoReceiver() *proto.Receiver { return r.protoReceiver }
 func (r *Receiver) SetProtoReceiver(receiver *proto.Receiver) { r.protoReceiver = receiver }
 
 // Setup handlers
-func (r *Receiver) SetupHandlers(handlers interface{}) {
+func (r *Receiver) SetupHandlers(handlers any) {
     r.Receiver.SetupHandlers(handlers)
     r.protoReceiver.SetupHandlers(handlers)
 }

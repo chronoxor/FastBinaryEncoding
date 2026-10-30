@@ -45,7 +45,7 @@ func (s *Sender) AccountMessageModel() *AccountMessageModel { return s.accountMe
 
 // Send methods
 
-func (s *Sender) Send(value interface{}) (int, error) {
+func (s *Sender) Send(value any) (int, error) {
     switch value := value.(type) {
     case *OrderMessage:
         if value.FBEType() == s.orderMessageModel.FBEType() {

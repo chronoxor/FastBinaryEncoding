@@ -36,7 +36,7 @@ func NewFinalSenderWithBuffer(buffer *fbe.Buffer) *FinalSender {
 
 // Send methods
 
-func (s *FinalSender) Send(value interface{}) (int, error) {
+func (s *FinalSender) Send(value any) (int, error) {
     switch value := value.(type) {
     default:
         _ = value

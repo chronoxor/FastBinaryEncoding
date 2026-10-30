@@ -64,7 +64,7 @@ func (r *Receiver) Logging() bool { return r.logging }
 func (r *Receiver) SetLogging(logging bool) { r.logging = logging }
 
 // Setup handlers
-func (r *Receiver) SetupHandlers(handlers interface{}) {
+func (r *Receiver) SetupHandlers(handlers any) {
     if handler, ok := handlers.(OnReceive); ok {
         r.SetupHandlerOnReceive(handler)
     }

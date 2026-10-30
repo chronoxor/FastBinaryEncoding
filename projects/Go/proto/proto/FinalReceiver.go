@@ -59,7 +59,7 @@ func NewFinalReceiverWithBuffer(buffer *fbe.Buffer) *FinalReceiver {
 }
 
 // Setup handlers
-func (r *FinalReceiver) SetupHandlers(handlers interface{}) {
+func (r *FinalReceiver) SetupHandlers(handlers any) {
     r.Receiver.SetupHandlers(handlers)
     if handler, ok := handlers.(OnReceiveOrderMessage); ok {
         r.SetupHandlerOnReceiveOrderMessage(handler)

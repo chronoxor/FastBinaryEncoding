@@ -36,7 +36,7 @@ func NewSenderWithBuffer(buffer *fbe.Buffer) *Sender {
 
 // Send methods
 
-func (s *Sender) Send(value interface{}) (int, error) {
+func (s *Sender) Send(value any) (int, error) {
     switch value := value.(type) {
     default:
         _ = value
