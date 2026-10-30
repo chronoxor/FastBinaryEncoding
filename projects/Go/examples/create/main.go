@@ -1,6 +1,7 @@
 package main
 
 import "fmt"
+import "log"
 import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
 import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/proto"
 
@@ -19,7 +20,7 @@ func main() {
 	account.Model().SetEnd(accountBegin)
 	account.CreateEnd(modelBegin)
 	if ok := account.Verify(); !ok {
-		panic("verify error")
+		log.Fatal("verify error")
 	}
 
 	// Show the serialized FBE size
@@ -28,7 +29,7 @@ func main() {
 	// Access the account using the FBE model
 	access := proto.NewAccountModel(account.Buffer())
 	if ok := access.Verify(); !ok {
-		panic("verify error")
+		log.Fatal("verify error")
 	}
 
 	accountBegin, _ = access.Model().GetBegin()

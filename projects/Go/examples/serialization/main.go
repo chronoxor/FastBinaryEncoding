@@ -1,6 +1,7 @@
 package main
 
 import "fmt"
+import "log"
 import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
 import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/proto"
 
@@ -12,25 +13,25 @@ func main() {
 	account.Orders = append(account.Orders, proto.Order{Id: 3, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_stop, Price: 1.5, Volume: 10.0})
 
 	// Serialize the account to the FBE stream
-	writer := proto.NewAccountFinalModel(fbe.NewEmptyBuffer())
+	writer := proto.NewAccountModel(fbe.NewEmptyBuffer())
 	if _, err := writer.Serialize(account); err != nil {
-		panic("serialization error")
+		log.Fatalf("serialization error: %v", err)
 	}
 	if ok := writer.Verify(); !ok {
-		panic("verify error")
+		log.Fatal("verify error")
 	}
 
 	// Show the serialized FBE size
-	fmt.Printf("FBE final size: %d\n", writer.Buffer().Size())
+	fmt.Printf("FBE size: %d\n", writer.Buffer().Size())
 
 	// Deserialize the account from the FBE stream
-	reader := proto.NewAccountFinalModel(writer.Buffer())
+	reader := proto.NewAccountModel(writer.Buffer())
 	if ok := reader.Verify(); !ok {
-		panic("verify error")
+		log.Fatal("verify error")
 	}
 	account, _, err := reader.Deserialize()
 	if err != nil {
-		panic("deserialization error")
+		log.Fatalf("deserialization error: %v", err)
 	}
 
 	// Show account content
