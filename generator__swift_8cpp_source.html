@@ -431,7 +431,7 @@ $(function() {
 <div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span><span class="stringliteral">        if self.offset &gt;= offset + size {</span></div>
 <div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span><span class="stringliteral">            self.offset -= size</span></div>
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span><span class="stringliteral">        } else if self.offset &gt;= offset {</span></div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span><span class="stringliteral">            self.offset -= self.offset - offset</span></div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span><span class="stringliteral">            self.offset = offset</span></div>
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span><span class="stringliteral">            if self.offset &gt; self.size {</span></div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span><span class="stringliteral">                self.offset = self.size</span></div>
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span><span class="stringliteral">            }</span></div>
