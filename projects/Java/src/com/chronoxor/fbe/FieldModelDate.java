@@ -42,7 +42,7 @@ public final class FieldModelDate extends FieldModel
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        long nanoseconds = value.getTime() * 1000;
+        long nanoseconds = value.getTime() * 1000000;
         write(fbeOffset(), nanoseconds);
     }
 }

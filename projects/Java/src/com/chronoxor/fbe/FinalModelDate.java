@@ -47,7 +47,7 @@ public final class FinalModelDate extends FinalModel
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        long nanoseconds = value.getTime() * 1000;
+        long nanoseconds = value.getTime() * 1000000;
         write(fbeOffset(), nanoseconds);
         return fbeSize();
     }

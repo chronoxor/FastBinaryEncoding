@@ -42,7 +42,7 @@ final class DateJson implements com.google.gson.JsonSerializer<java.util.Date>, 
     @Override
     public com.google.gson.JsonElement serialize(java.util.Date src, java.lang.reflect.Type typeOfSrc, com.google.gson.JsonSerializationContext context)
     {
-        long nanoseconds = src.getTime() * 1000;
+        long nanoseconds = src.getTime() * 1000000;
         return new com.google.gson.JsonPrimitive(nanoseconds);
     }
 
