@@ -3,7 +3,7 @@ package tests
 import "testing"
 import "github.com/shopspring/decimal"
 import "github.com/stretchr/testify/assert"
-import "proto/fbe"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
 
 func VerifyDecimal(t *testing.T, low uint32, mid uint32, high uint32, negative bool, scale uint32, value string) {
 	base, _ := decimal.NewFromString(value)

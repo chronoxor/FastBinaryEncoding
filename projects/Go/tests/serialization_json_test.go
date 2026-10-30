@@ -2,9 +2,9 @@ package tests
 
 import "testing"
 import "github.com/stretchr/testify/assert"
-import "proto/fbe"
-import "proto/proto"
-import "proto/test"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/proto"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/test"
 
 func TestSerializationJsonDomain(t *testing.T) {
 	// Define a source JSON string

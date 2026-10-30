@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-import "proto/proto"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/proto"
 
 func main() {
 	// Create a new account with some orders

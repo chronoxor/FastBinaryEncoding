@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-import "proto/test"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/test"
 
 func main() {
 	json, _ := test.NewStructSimple().JSON()

@@ -1,8 +1,8 @@
 package main
 
 import "fmt"
-import "proto/fbe"
-import "proto/proto"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/proto"
 
 func main() {
 	// Create a new account using FBE model

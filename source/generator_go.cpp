@@ -2705,7 +2705,7 @@ void GeneratorGo::GenerateFBEFieldModelEnumFlags(const std::string& package, con
     // Generate imports
     WriteLine();
     WriteLineIndent("import \"errors\"");
-    WriteLineIndent("import \"proto/fbe\"");
+    WriteLineIndent("import \"" + Module() + "/fbe\"");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ field model
@@ -4216,7 +4216,7 @@ void GeneratorGo::GenerateFBEFinalModelEnumFlags(const std::string& package, con
     // Generate imports
     WriteLine();
     WriteLineIndent("import \"errors\"");
-    WriteLineIndent("import \"proto/fbe\"");
+    WriteLineIndent("import \"" + Module() + "/fbe\"");
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ final model
@@ -4783,12 +4783,12 @@ void GeneratorGo::GenerateImports(const std::shared_ptr<Package>& p)
 {
     // Generate fbe import
     WriteLineIndent("import \"errors\"");
-    WriteLineIndent("import \"proto/fbe\"");
+    WriteLineIndent("import \"" + Module() + "/fbe\"");
 
     // Generate packages import
     if (p->import)
         for (const auto& import : p->import->imports)
-            WriteLineIndent("import \"proto/" + *import + "\"");
+            WriteLineIndent("import \"" + Module() + "/" + *import + "\"");
 
     // Generate workaround for Go unused imports issue
     WriteLine();

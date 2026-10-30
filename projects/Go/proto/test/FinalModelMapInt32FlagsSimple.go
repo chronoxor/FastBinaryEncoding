@@ -8,8 +8,8 @@
 package test
 
 import "errors"
-import "proto/fbe"
-import "proto/proto"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/proto"
 
 // Workaround for Go unused imports issue
 var _ = errors.New

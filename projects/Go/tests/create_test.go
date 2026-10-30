@@ -2,8 +2,8 @@ package tests
 
 import "testing"
 import "github.com/stretchr/testify/assert"
-import "proto/fbe"
-import "proto/proto"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/proto"
 
 func TestCreate(t *testing.T) {
 	// Create a new account using FBE model into the FBE stream

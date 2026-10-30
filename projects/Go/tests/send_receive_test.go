@@ -2,7 +2,7 @@ package tests
 
 import "testing"
 import "github.com/stretchr/testify/assert"
-import "proto/proto"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/proto"
 
 type MySender struct {
 	*proto.Sender

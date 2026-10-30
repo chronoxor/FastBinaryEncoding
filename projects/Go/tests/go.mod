@@ -1,13 +1,10 @@
-module tests
+module github.com/chronoxor/FastBinaryEncoding/projects/Go/tests
 
 go 1.27.3
-
-replace proto => ../proto
 
 require (
 	github.com/shopspring/decimal v1.6.0
 	github.com/stretchr/testify v1.12.1
-	proto v1.0.0
 )
 
 require (

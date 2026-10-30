@@ -1,0 +1,8 @@
+go 1.27.3
+
+use (
+	./benchmarks
+	./examples
+	./proto
+	./tests
+)

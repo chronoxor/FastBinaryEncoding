@@ -1,8 +1,8 @@
 package benchmarks
 
 import "testing"
-import "proto/fbe"
-import "proto/proto"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/proto"
 
 func SetupBenchmarkFinal() (*proto.Account, *proto.AccountFinalModel, *proto.AccountFinalModel) {
 	// Create a new account with some orders

@@ -1,7 +1,7 @@
 package benchmarks
 
 import "testing"
-import "proto/proto"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/proto"
 
 type MySender1 struct {
 	*proto.Sender

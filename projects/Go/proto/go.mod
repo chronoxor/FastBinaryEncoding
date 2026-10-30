@@ -1,4 +1,4 @@
-module proto
+module github.com/chronoxor/FastBinaryEncoding/projects/Go/proto
 
 go 1.27.3
 

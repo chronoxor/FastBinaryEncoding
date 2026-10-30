@@ -2,8 +2,8 @@ package tests
 
 import "testing"
 import "github.com/stretchr/testify/assert"
-import "proto/proto"
-import "proto/protoex"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/proto"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/protoex"
 
 type MyFinalSender struct {
 	*protoex.FinalSender

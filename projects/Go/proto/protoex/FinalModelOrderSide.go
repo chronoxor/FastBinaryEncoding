@@ -8,7 +8,7 @@
 package protoex
 
 import "errors"
-import "proto/fbe"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
 
 // Fast Binary Encoding OrderSide final model
 type FinalModelOrderSide struct {

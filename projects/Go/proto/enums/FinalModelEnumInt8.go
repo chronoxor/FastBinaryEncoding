@@ -8,7 +8,7 @@
 package enums
 
 import "errors"
-import "proto/fbe"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
 
 // Fast Binary Encoding EnumInt8 final model
 type FinalModelEnumInt8 struct {

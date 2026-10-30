@@ -30,12 +30,17 @@ public:
     bool Proto() const noexcept { return _proto; }
     GeneratorGo& Proto(bool proto) noexcept { _proto = proto; return *this; }
 
+    // Go module path of the generated code (prefix of the generated packages imports)
+    const std::string& Module() const noexcept { return _module; }
+    GeneratorGo& Module(const std::string& module) { _module = module; return *this; }
+
     void Generate(const std::shared_ptr<Package>& package) override;
 
 private:
     bool _final{false};
     bool _json{false};
     bool _proto{false};
+    std::string _module{"proto"};
 
     void GenerateHeader(const std::string& source);
     void GenerateFooter();

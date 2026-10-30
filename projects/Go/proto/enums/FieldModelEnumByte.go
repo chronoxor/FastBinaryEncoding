@@ -8,7 +8,7 @@
 package enums
 
 import "errors"
-import "proto/fbe"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
 
 // Fast Binary Encoding EnumByte field model
 type FieldModelEnumByte struct {

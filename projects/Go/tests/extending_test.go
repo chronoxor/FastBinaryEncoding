@@ -2,9 +2,9 @@ package tests
 
 import "testing"
 import "github.com/stretchr/testify/assert"
-import "proto/fbe"
-import "proto/proto"
-import "proto/protoex"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/proto"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/protoex"
 
 func TestExtendingOldNew(t *testing.T) {
 	// Create a new account with some orders

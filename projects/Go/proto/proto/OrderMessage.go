@@ -11,7 +11,7 @@ import "fmt"
 import "strconv"
 import "strings"
 import "errors"
-import "proto/fbe"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
 
 // Workaround for Go unused imports issue
 var _ = errors.New

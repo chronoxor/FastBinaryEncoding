@@ -280,6 +280,8 @@ Options:
   --cpp-logging         Generate C++ logging code
   --csharp              Generate C# code
   --go                  Generate Go code
+  --go-module=GO_MODULE
+                        Go module path of the generated code. Default: proto
   --java                Generate Java code
   --javascript          Generate JavaScript code
   --kotlin              Generate Kotlin code

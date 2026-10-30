@@ -2,8 +2,8 @@ package tests
 
 import "testing"
 import "github.com/stretchr/testify/assert"
-import "proto/fbe"
-import "proto/enums"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/enums"
 
 func TestSerializationEnums(t *testing.T) {
 	enums1 := enums.NewEnums()

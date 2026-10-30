@@ -192,6 +192,7 @@ int main(int argc, char** argv)
     parser.add_option("--csharp").dest("csharp").action("store_true").set_default(0).help("Generate C# code");
     parser.add_option("--csharp-structs").dest("csharp-structs").action("store_true").set_default(0).help("Generate C# code based on value type structs");
     parser.add_option("--go").dest("go").action("store_true").set_default(0).help("Generate Go code");
+    parser.add_option("--go-module").dest("go-module").set_default("proto").help("Go module path of the generated code. Default: proto");
     parser.add_option("--java").dest("java").action("store_true").set_default(0).help("Generate Java code");
     parser.add_option("--javascript").dest("javascript").action("store_true").set_default(0).help("Generate JavaScript code");
     parser.add_option("--kotlin").dest("kotlin").action("store_true").set_default(0).help("Generate Kotlin code");
@@ -223,6 +224,7 @@ int main(int argc, char** argv)
     bool csharp = options.get("csharp");
     bool csharp_structs = options.get("csharp-structs");
     bool go = options.get("go");
+    std::string go_module(options.get("go-module"));
     bool java = options.get("java");
     bool javascript = options.get("javascript");
     bool kotlin = options.get("kotlin");
@@ -300,7 +302,7 @@ int main(int argc, char** argv)
     if (go)
     {
         if (!quiet) std::cout << "Generating Go code...";
-        FBE::GeneratorGo(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Generate(FBE::Package::root);
+        FBE::GeneratorGo(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Proto(proto).Module(go_module).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (java)

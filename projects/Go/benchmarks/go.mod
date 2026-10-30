@@ -1,10 +1,6 @@
-module benchmarks
+module github.com/chronoxor/FastBinaryEncoding/projects/Go/benchmarks
 
 go 1.27.3
-
-replace proto => ../proto
-
-require proto v1.0.0
 
 require (
 	github.com/google/uuid v1.6.0 // indirect

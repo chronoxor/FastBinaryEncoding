@@ -8,7 +8,7 @@
 package test
 
 import "errors"
-import "proto/fbe"
+import "github.com/chronoxor/FastBinaryEncoding/projects/Go/proto/fbe"
 
 // Fast Binary Encoding EnumTyped final model
 type FinalModelEnumTyped struct {
