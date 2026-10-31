@@ -1,0 +1,6 @@
+source 'https://rubygems.org'
+
+gem 'uuidtools'
+gem 'bigdecimal'
+gem 'base64'
+gem 'test-unit'
