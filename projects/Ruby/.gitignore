@@ -117,6 +117,9 @@ coverage.xml
 *.mo
 *.pot
 
+# Ruby stuff:
+Gemfile.lock
+
 # Django stuff:
 *.log
 local_settings.py

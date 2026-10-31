@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '>= 4.0'
+
 gem 'uuidtools'
 gem 'bigdecimal'
 gem 'base64'

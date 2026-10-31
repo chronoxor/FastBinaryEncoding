@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28b38142-73b0-4ddb-b81e-352705299fce" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Ruby.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +87,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Ruby.create.executor": "Run",
+    "Ruby.print.executor": "Run",
+    "Ruby.print_json.executor": "Run",
+    "Ruby.send_receive.executor": "Run",
+    "Ruby.serialization.executor": "Run",
+    "Ruby.serialization_final.executor": "Run",
+    "Ruby.serialization_json.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.ruby.rubocop.migration.global.runOnSaveToExternalFormatter": "true",
@@ -258,7 +265,7 @@
       <workItem from="1640495680648" duration="67000" />
       <workItem from="1641153350554" duration="40000" />
       <workItem from="1793405492121" duration="3000" />
-      <workItem from="1793405509564" duration="436000" />
+      <workItem from="1793405509564" duration="980000" />
     </task>
     <servers />
   </component>
