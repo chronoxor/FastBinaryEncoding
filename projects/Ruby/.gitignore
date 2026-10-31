@@ -118,6 +118,9 @@ coverage.xml
 *.pot
 
 # Ruby stuff:
+.bundle/
+vendor/bundle/
+*.gem
 Gemfile.lock
 
 # Django stuff:
