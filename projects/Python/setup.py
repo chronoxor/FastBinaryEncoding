@@ -6,7 +6,7 @@ setup(
     packages=['proto'],
     package_dir={'': 'proto', 'proto': 'proto'},
     py_modules=['fbe'],
-    python_requires='>=3.15',
+    python_requires='>=3.11',
     url='https://github.com/chronoxor/FastBinaryEncoding',
     license='MIT License',
     author='Ivan Shynkarenka',
