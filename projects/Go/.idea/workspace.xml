@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="" />
+    <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/proto/fbe/Types.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/Types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,56 +56,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Go Build.go build Go/.executor": "Run",
-    "Go Build.go build benchmarks.executor": "Coverage",
-    "Go Build.go build create.go.executor": "Run",
-    "Go Build.go build github.com/chronoxor/FastBinaryEncoding/projects/Go/examples/create.executor": "Run",
-    "Go Build.go build github.com/chronoxor/FastBinaryEncoding/projects/Go/proto.executor": "Run",
-    "Go Build.go build print.go.executor": "Run",
-    "Go Build.go build print_json.go.executor": "Run",
-    "Go Build.go build proto.executor": "Run",
-    "Go Build.go build send_receive.go.executor": "Run",
-    "Go Build.go build serialization.go.executor": "Run",
-    "Go Build.go build serialization_final.go.executor": "Run",
-    "Go Build.go build serialization_json.go.executor": "Run",
-    "Go Build.go build tests.executor": "Run",
-    "Go Test.TestSerializationJsonStructSimple in tests.executor": "Run",
-    "Go Test.clone_test.go.executor": "Run",
-    "Go Test.create_test.go.executor": "Run",
-    "Go Test.decimal_test.go.executor": "Run",
-    "Go Test.enums_test.go.executor": "Run",
-    "Go Test.extending_test.go.executor": "Run",
-    "Go Test.go test tests.executor": "Run",
-    "Go Test.gobench send_receive_test.go.executor": "Run",
-    "Go Test.gobench serialization_final_test.go.executor": "Run",
-    "Go Test.gobench serialization_json_test.go.executor": "Run",
-    "Go Test.gobench serialization_test.go.executor": "Run",
-    "Go Test.send_receive_final_test.go.executor": "Run",
-    "Go Test.send_receive_test.go.executor": "Run",
-    "Go Test.serialization_final_test.go.executor": "Run",
-    "Go Test.serialization_json_test.go.executor": "Run",
-    "Go Test.serialization_test.go.executor": "Run",
-    "Go Test.tests.executor": "Run",
-    "RunOnceActivity.GoLinterPluginOnboardingV2": "true",
-    "RunOnceActivity.GoLinterPluginStorageMigration": "true",
-    "RunOnceActivity.GoOptimizationToolWindowEnableInLayout.v333333": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.go.analysis.ui.options.defaults": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "C:/Users/Ivan",
-    "nodejs_package_manager_path": "npm",
-    "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "com.goide.configuration.GoLibrariesConfigurableProvider"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Go Build.go build Go/.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build benchmarks.executor&quot;: &quot;Coverage&quot;,
+    &quot;Go Build.go build create.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build github.com/chronoxor/FastBinaryEncoding/projects/Go/examples/create.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build github.com/chronoxor/FastBinaryEncoding/projects/Go/proto.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build print.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build print_json.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build proto.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build send_receive.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build serialization.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build serialization_final.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build serialization_json.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build tests.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestSerializationJsonStructSimple in tests.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.clone_test.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.create_test.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.decimal_test.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.enums_test.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.extending_test.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.go test tests.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.gobench send_receive_test.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.gobench serialization_final_test.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.gobench serialization_json_test.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.gobench serialization_test.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.send_receive_final_test.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.send_receive_test.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.serialization_final_test.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.serialization_json_test.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.serialization_test.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.tests.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.GoLinterPluginOnboardingV2&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.GoLinterPluginStorageMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.GoOptimizationToolWindowEnableInLayout.v333333&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.analysis.ui.options.defaults&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ivan&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.goide.configuration.GoLibrariesConfigurableProvider&quot;
   }
-}]]></component>
+}</component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>

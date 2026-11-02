@@ -113,3 +113,9 @@ func UUIDRandom() UUID {
     result, _ := uuid.NewRandom()
     return UUID{result}
 }
+
+// Create database UUID7 (time ordered, high locality version)
+func UUIDDatabase() UUID {
+    result, _ := uuid.NewV7()
+    return UUID{result}
+}

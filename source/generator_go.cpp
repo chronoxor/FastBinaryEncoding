@@ -409,6 +409,12 @@ func UUIDRandom() UUID {
     result, _ := uuid.NewRandom()
     return UUID{result}
 }
+
+// Create database UUID7 (time ordered, high locality version)
+func UUIDDatabase() UUID {
+    result, _ := uuid.NewV7()
+    return UUID{result}
+}
 )CODE";
 
     // Prepare code template
@@ -8503,6 +8509,8 @@ std::string GeneratorGo::ConvertConstant(const std::string& type, const std::str
         return "fbe.UUIDSequential()";
     else if (value == "uuid4")
         return "fbe.UUIDRandom()";
+    else if (value == "uuid7")
+        return "fbe.UUIDDatabase()";
 
     if ((type == "bool") || (type == "byte") || (type == "int8") || (type == "uint8") || (type == "int16") || (type == "uint16") || (type == "int32") || (type == "uint32") || (type == "int64") || (type == "uint64"))
         return type + "(" + value + ")";
