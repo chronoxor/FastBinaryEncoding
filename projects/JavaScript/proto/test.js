@@ -1540,7 +1540,7 @@ class StructSimple {
    * @param {!proto.Account=} f44
    * @constructor
    */
-  constructor (argid = 0, argf1 = false, argf2 = true, argf3 = 0, argf4 = 255, argf5 = '\0', argf6 = '!', argf7 = '\0', argf8 = String.fromCharCode(0x0444), argf9 = 0, argf10 = 127, argf11 = 0, argf12 = 255, argf13 = 0, argf14 = 32767, argf15 = 0, argf16 = 65535, argf17 = 0, argf18 = 2147483647, argf19 = 0, argf20 = 4294967295, argf21 = new Int64(0, 0), argf22 = new Int64(4294967295, 2147483647), argf23 = new UInt64(0, 0), argf24 = new UInt64(4294967295, 4294967295), argf25 = 0.0, argf26 = 123.456, argf27 = 0.0, argf28 = -123.456e+123, argf29 = new Big(0), argf30 = new Big('123456.123456'), argf31 = '', argf32 = 'Initial string!', argf33 = new Date(0), argf34 = new Date(0), argf35 = new Date(Date.now()), argf36 = new UUID(), argf37 = UUID.sequential(), argf38 = new UUID('123e4567-e89b-12d3-a456-426655440000'), argf39 = new proto.OrderSide(), argf40 = new proto.OrderType(), argf41 = new proto.Order(), argf42 = new proto.Balance(), argf43 = new proto.State(), argf44 = new proto.Account()) {
+  constructor (argid = 0, argf1 = false, argf2 = true, argf3 = 0, argf4 = 255, argf5 = '\0', argf6 = '!', argf7 = '\0', argf8 = String.fromCharCode(0x0444), argf9 = 0, argf10 = 127, argf11 = 0, argf12 = 255, argf13 = 0, argf14 = 32767, argf15 = 0, argf16 = 65535, argf17 = 0, argf18 = 2147483647, argf19 = 0, argf20 = 4294967295, argf21 = new Int64(0, 0), argf22 = new Int64(4294967295, 2147483647), argf23 = new UInt64(0, 0), argf24 = new UInt64(4294967295, 4294967295), argf25 = 0.0, argf26 = 123.456, argf27 = 0.0, argf28 = -123.456e+123, argf29 = new Big(0), argf30 = new Big('123456.123456'), argf31 = '', argf32 = 'Initial string!', argf33 = new Date(0), argf34 = new Date(0), argf35 = new Date(Date.now()), argf36 = new UUID(), argf37 = new UUID('uuid7'), argf38 = new UUID('123e4567-e89b-12d3-a456-426655440000'), argf39 = new proto.OrderSide(), argf40 = new proto.OrderType(), argf41 = new proto.Order(), argf42 = new proto.Balance(), argf43 = new proto.State(), argf44 = new proto.Account()) {
     this.id = argid
     this.f1 = argf1
     this.f2 = argf2
@@ -3461,9 +3461,9 @@ class FieldModelStructSimple extends fbe.FieldModel {
     fbeCurrentSize += this.f36.fbeSize
 
     if ((fbeCurrentSize + this.f37.fbeSize) <= fbeStructSize) {
-      fbeValue.f37 = this.f37.get(UUID.sequential())
+      fbeValue.f37 = this.f37.get(new UUID('uuid7'))
     } else {
-      fbeValue.f37 = UUID.sequential()
+      fbeValue.f37 = new UUID('uuid7')
     }
     // noinspection JSUnusedAssignment
     fbeCurrentSize += this.f37.fbeSize

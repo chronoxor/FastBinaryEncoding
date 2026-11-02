@@ -112,7 +112,7 @@ struct StructSimple(+10)
     timestamp f34 = epoch;
     timestamp f35 = utc;
     uuid f36;
-    uuid f37 = uuid1;
+    uuid f37 = uuid7;
     uuid f38 = "123e4567-e89b-12d3-a456-426655440000";
     proto.OrderSide f39;
     proto.OrderType f40;

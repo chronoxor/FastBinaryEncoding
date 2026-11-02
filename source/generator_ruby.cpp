@@ -6180,6 +6180,8 @@ std::string GeneratorRuby::ConvertConstant(const std::string& type, const std::s
         return "UUIDTools::UUID.timestamp_create";
     else if (value == "uuid4")
         return "UUIDTools::UUID.random_create";
+    else if (value == "uuid7")
+        return "UUIDTools::UUID.parse(Random.uuid_v7)";
 
     if (type == "bool")
         return value + " != 0";

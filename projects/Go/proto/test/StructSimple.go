@@ -127,7 +127,7 @@ func NewStructSimple() *StructSimple {
         F34: fbe.TimestampEpoch(),
         F35: fbe.TimestampUTC(),
         F36: fbe.UUIDNil(),
-        F37: fbe.UUIDSequential(),
+        F37: fbe.UUIDDatabase(),
         F38: fbe.UUIDFromString("123e4567-e89b-12d3-a456-426655440000"),
         F39: *proto.NewOrderSide(),
         F40: *proto.NewOrderType(),

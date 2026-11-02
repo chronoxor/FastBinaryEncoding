@@ -960,9 +960,9 @@ func (fm *FieldModelStructSimple) GetFields(fbeValue *StructSimple, fbeStructSiz
     fbeCurrentSize += fm.F36.FBESize()
 
     if (fbeCurrentSize + fm.F37.FBESize()) <= fbeStructSize {
-        fbeValue.F37, _ = fm.F37.GetDefault(fbe.UUIDSequential())
+        fbeValue.F37, _ = fm.F37.GetDefault(fbe.UUIDDatabase())
     } else {
-        fbeValue.F37 = fbe.UUIDSequential()
+        fbeValue.F37 = fbe.UUIDDatabase()
     }
     fbeCurrentSize += fm.F37.FBESize()
 

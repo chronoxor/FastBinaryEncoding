@@ -755,9 +755,9 @@ class FieldModelStructSimple(buffer: com.chronoxor.fbe.Buffer, offset: Long) : c
         fbeCurrentSize += f36.fbeSize
 
         if ((fbeCurrentSize + f37.fbeSize) <= fbeStructSize)
-            fbeValue.f37 = f37.get(com.chronoxor.fbe.UUIDGenerator.sequential())
+            fbeValue.f37 = f37.get(java.util.UUID.fromString(uuid7))
         else
-            fbeValue.f37 = com.chronoxor.fbe.UUIDGenerator.sequential()
+            fbeValue.f37 = java.util.UUID.fromString(uuid7)
         fbeCurrentSize += f37.fbeSize
 
         if ((fbeCurrentSize + f38.fbeSize) <= fbeStructSize)

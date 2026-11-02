@@ -1728,7 +1728,7 @@ namespace com.chronoxor.test {
             this.f34 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             this.f35 = DateTime.UtcNow;
             this.f36 = com.chronoxor.FBE.UuidGenerator.Nil();
-            this.f37 = com.chronoxor.FBE.UuidGenerator.Sequential();
+            this.f37 = com.chronoxor.FBE.UuidGenerator.Database();
             this.f38 = Guid.Parse("123e4567-e89b-12d3-a456-426655440000");
             this.f39 = global::com.chronoxor.proto.OrderSide.Default;
             this.f40 = global::com.chronoxor.proto.OrderType.Default;
@@ -2785,9 +2785,9 @@ namespace com.chronoxor.test.FBE {
             fbeCurrentSize += f36.FBESize;
 
             if ((fbeCurrentSize + f37.FBESize) <= fbeStructSize)
-                f37.Get(out fbeValue.f37, com.chronoxor.FBE.UuidGenerator.Sequential());
+                f37.Get(out fbeValue.f37, com.chronoxor.FBE.UuidGenerator.Database());
             else
-                fbeValue.f37 = com.chronoxor.FBE.UuidGenerator.Sequential();
+                fbeValue.f37 = com.chronoxor.FBE.UuidGenerator.Database();
             fbeCurrentSize += f37.FBESize;
 
             if ((fbeCurrentSize + f38.FBESize) <= fbeStructSize)

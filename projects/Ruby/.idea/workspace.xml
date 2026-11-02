@@ -5,8 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28b38142-73b0-4ddb-b81e-352705299fce" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp-structs/Proto/com.chronoxor.test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp-structs/Proto/com.chronoxor.test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/com.chronoxor.test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/com.chronoxor.test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/FieldModelStructSimple.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/FieldModelStructSimple.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/FinalReceiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/FinalReceiver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/FinalSender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/Proxy.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/Proxy.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/Receiver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructSimple.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructSimple.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/test/StructSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/test/StructSimple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/test/fbe/FieldModelStructSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/test/fbe/FieldModelStructSimple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/StructSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/StructSimple.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FieldModelStructSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FieldModelStructSimple.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/proto/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Swift/Proto/Test/Source/ChronoxorTest/Fbe/FieldModelStructSimple.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Swift/Proto/Test/Source/ChronoxorTest/Fbe/FieldModelStructSimple.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Swift/Proto/Test/Source/ChronoxorTest/StructSimple.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Swift/Proto/Test/Source/ChronoxorTest/StructSimple.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/test.fbe" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test.fbe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/test_models.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test_models.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +119,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "Test::Unit/Shoulda/Minitest.All tests in tests: Ruby.executor": "Run",
     "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.lang.ruby.rbs.tools.collection.workspace.sync.RbsCollectionUpdateProjectActivity#LAST_UPDATE_TIMESTAMP": "1793662670873",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "X:/Projects/FastBinaryEncoding/projects/Ruby",
     "nodejs_package_manager_path": "npm",
@@ -265,6 +287,7 @@
       <workItem from="1641153350554" duration="40000" />
       <workItem from="1793405492121" duration="3000" />
       <workItem from="1793405509564" duration="1487000" />
+      <workItem from="1793662611668" duration="656000" />
     </task>
     <servers />
   </component>

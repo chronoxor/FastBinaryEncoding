@@ -1229,7 +1229,7 @@ module Test
     attr_accessor :f43
     attr_accessor :f44
 
-    def initialize(id = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = "\0", f6 = '!', f7 = "\0", f8 = 0x0444.chr(Encoding::UTF_8), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 4294967295, f21 = 0, f22 = 9223372036854775807, f23 = 0, f24 = 18446744073709551615, f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = BigDecimal(0), f30 = BigDecimal('123456.123456'), f31 = '', f32 = "Initial string!", f33 = Time.utc(1970), f34 = Time.utc(1970), f35 = Time.now.utc, f36 = UUIDTools::UUID.parse_int(0), f37 = UUIDTools::UUID.timestamp_create, f38 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f39 = Proto::OrderSide.new, f40 = Proto::OrderType.new, f41 = Proto::Order.new, f42 = Proto::Balance.new, f43 = Proto::State.new, f44 = Proto::Account.new)
+    def initialize(id = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = "\0", f6 = '!', f7 = "\0", f8 = 0x0444.chr(Encoding::UTF_8), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 4294967295, f21 = 0, f22 = 9223372036854775807, f23 = 0, f24 = 18446744073709551615, f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = BigDecimal(0), f30 = BigDecimal('123456.123456'), f31 = '', f32 = "Initial string!", f33 = Time.utc(1970), f34 = Time.utc(1970), f35 = Time.now.utc, f36 = UUIDTools::UUID.parse_int(0), f37 = UUIDTools::UUID.parse(Random.uuid_v7), f38 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f39 = Proto::OrderSide.new, f40 = Proto::OrderType.new, f41 = Proto::Order.new, f42 = Proto::Balance.new, f43 = Proto::State.new, f44 = Proto::Account.new)
       @id = id
       @f1 = f1
       @f2 = f2
@@ -3061,9 +3061,9 @@ module Test
       fbe_current_size += f36.fbe_size
 
       if (fbe_current_size + f37.fbe_size) <= fbe_struct_size
-        fbe_value.f37 = f37.get(UUIDTools::UUID.timestamp_create)
+        fbe_value.f37 = f37.get(UUIDTools::UUID.parse(Random.uuid_v7))
       else
-        fbe_value.f37 = UUIDTools::UUID.timestamp_create
+        fbe_value.f37 = UUIDTools::UUID.parse(Random.uuid_v7)
       end
       # noinspection RubyUnusedLocalVariable
       fbe_current_size += f37.fbe_size

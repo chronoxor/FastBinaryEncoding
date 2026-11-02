@@ -735,9 +735,9 @@ void FieldModel<::test::StructSimple>::get_fields(::test::StructSimple& fbe_valu
     fbe_current_size += f36.fbe_size();
 
     if ((fbe_current_size + f37.fbe_size()) <= fbe_struct_size)
-        f37.get(fbe_value.f37, FBE::uuid_t::sequential());
+        f37.get(fbe_value.f37, FBE::uuid_t::database());
     else
-        fbe_value.f37 = FBE::uuid_t::sequential();
+        fbe_value.f37 = FBE::uuid_t::database();
     fbe_current_size += f37.fbe_size();
 
     if ((fbe_current_size + f38.fbe_size()) <= fbe_struct_size)

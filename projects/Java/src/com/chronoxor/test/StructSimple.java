@@ -46,7 +46,7 @@ public class StructSimple implements Comparable<Object>
     public java.time.Instant f34 = java.time.Instant.EPOCH;
     public java.time.Instant f35 = java.time.Instant.now();
     public java.util.UUID f36 = com.chronoxor.fbe.UUIDGenerator.nil();
-    public java.util.UUID f37 = com.chronoxor.fbe.UUIDGenerator.sequential();
+    public java.util.UUID f37 = java.util.UUID.fromString(uuid7);
     public java.util.UUID f38 = java.util.UUID.fromString("123e4567-e89b-12d3-a456-426655440000");
     public com.chronoxor.proto.OrderSide f39 = new com.chronoxor.proto.OrderSide();
     public com.chronoxor.proto.OrderType f40 = new com.chronoxor.proto.OrderType();

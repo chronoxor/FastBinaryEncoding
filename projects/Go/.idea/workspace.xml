@@ -5,8 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/proto/fbe/Types.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/Types.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp-structs/Proto/com.chronoxor.test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp-structs/Proto/com.chronoxor.test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/com.chronoxor.test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/com.chronoxor.test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/FieldModelStructSimple.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/FieldModelStructSimple.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/FinalReceiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/FinalReceiver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/FinalSender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/Proxy.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/Proxy.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/Receiver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/StructSimple.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/StructSimple.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/test/StructSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/test/StructSimple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/com/chronoxor/test/fbe/FieldModelStructSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/com/chronoxor/test/fbe/FieldModelStructSimple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/StructSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/StructSimple.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FieldModelStructSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/com/chronoxor/test/fbe/FieldModelStructSimple.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/proto/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Swift/Proto/Test/Source/ChronoxorTest/Fbe/FieldModelStructSimple.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Swift/Proto/Test/Source/ChronoxorTest/Fbe/FieldModelStructSimple.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Swift/Proto/Test/Source/ChronoxorTest/StructSimple.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Swift/Proto/Test/Source/ChronoxorTest/StructSimple.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/test.fbe" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test.fbe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/test_models.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test_models.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

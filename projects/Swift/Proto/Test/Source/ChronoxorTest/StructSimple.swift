@@ -282,7 +282,7 @@ public struct StructSimple: StructSimpleBase, Comparable, Hashable, Codable {
     public var f34: Date = Date(timeIntervalSince1970: 0)
     public var f35: Date = Date()
     public var f36: UUID = ChronoxorFbe.UUIDGenerator.nil()
-    public var f37: UUID = ChronoxorFbe.UUIDGenerator.sequential()
+    public var f37: UUID = UUID(uuidString: Uuid7)!
     public var f38: UUID = UUID(uuidString: "123e4567-e89b-12d3-a456-426655440000")!
     public var f39: ChronoxorProto.OrderSide = ChronoxorProto.OrderSide()
     public var f40: ChronoxorProto.OrderType = ChronoxorProto.OrderType()
