@@ -3283,7 +3283,7 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
         for (const auto& field : s->body->fields)
         {
             Write(", " + *field->name + "=");
-            if (field->value && ((*field->value == "utc") || (*field->value == "uuid1") || (*field->value == "uuid2")))
+            if (field->value && ((*field->value == "utc") || (*field->value == "uuid1") || (*field->value == "uuid4") || (*field->value == "uuid7")))
                 Write("None");
             else if (field->value)
                 Write(ConvertConstant(*field->type, *field->value, field->optional));
@@ -3308,7 +3308,7 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
     {
         for (const auto& field : s->body->fields)
         {
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash || (field->value && ((*field->value == "utc") || (*field->value == "uuid1") || (*field->value == "uuid2"))) || (!field->value && !field->optional && !IsPrimitiveType(*field->type) && (*field->type != "string") && (*field->type != "timestamp")))
+            if (field->array || field->vector || field->list || field->set || field->map || field->hash || (field->value && ((*field->value == "utc") || (*field->value == "uuid1") || (*field->value == "uuid4") || (*field->value == "uuid7"))) || (!field->value && !field->optional && !IsPrimitiveType(*field->type) && (*field->type != "string") && (*field->type != "timestamp")))
             {
                 WriteLineIndent("if " + *field->name + " is None:");
                 Indent(1);
@@ -5372,6 +5372,8 @@ std::string GeneratorPython::ConvertConstant(const std::string& type, const std:
         return "uuid.uuid1()";
     else if (value == "uuid4")
         return "uuid.uuid4()";
+    else if (value == "uuid7")
+        return "uuid.uuid7()";
 
     if (type == "bool")
         return "bool(" + value + ")";

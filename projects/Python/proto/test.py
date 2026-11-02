@@ -756,13 +756,15 @@ class FinalModelFlagsEmpty(fbe.FinalModel):
 class StructSimple(object):
     __slots__ = "id", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", "f11", "f12", "f13", "f14", "f15", "f16", "f17", "f18", "f19", "f20", "f21", "f22", "f23", "f24", "f25", "f26", "f27", "f28", "f29", "f30", "f31", "f32", "f33", "f34", "f35", "f36", "f37", "f38", "f39", "f40", "f41", "f42", "f43", "f44", 
 
-    def __init__(self, id=0, f1=False, f2=True, f3=0, f4=255, f5='\0', f6='!', f7='\0', f8=chr(0x0444), f9=0, f10=127, f11=0, f12=255, f13=0, f14=32767, f15=0, f16=65535, f17=0, f18=2147483647, f19=0, f20=4294967295, f21=0, f22=9223372036854775807, f23=0, f24=18446744073709551615, f25=0.0, f26=float(123.456), f27=0.0, f28=float(-123.456e+123), f29=decimal.Decimal(0), f30=decimal.Decimal("123456.123456"), f31="", f32="Initial string!", f33=fbe.epoch(), f34=fbe.epoch(), f35=None, f36=uuid.UUID(int=0), f37=uuid.UUID(uuid7), f38=uuid.UUID("123e4567-e89b-12d3-a456-426655440000"), f39=None, f40=None, f41=None, f42=None, f43=None, f44=None):
+    def __init__(self, id=0, f1=False, f2=True, f3=0, f4=255, f5='\0', f6='!', f7='\0', f8=chr(0x0444), f9=0, f10=127, f11=0, f12=255, f13=0, f14=32767, f15=0, f16=65535, f17=0, f18=2147483647, f19=0, f20=4294967295, f21=0, f22=9223372036854775807, f23=0, f24=18446744073709551615, f25=0.0, f26=float(123.456), f27=0.0, f28=float(-123.456e+123), f29=decimal.Decimal(0), f30=decimal.Decimal("123456.123456"), f31="", f32="Initial string!", f33=fbe.epoch(), f34=fbe.epoch(), f35=None, f36=uuid.UUID(int=0), f37=None, f38=uuid.UUID("123e4567-e89b-12d3-a456-426655440000"), f39=None, f40=None, f41=None, f42=None, f43=None, f44=None):
         if f29 is None:
             f29 = decimal.Decimal(0)
         if f35 is None:
             f35 = fbe.utc()
         if f36 is None:
             f36 = uuid.UUID(int=0)
+        if f37 is None:
+            f37 = uuid.uuid7()
         if f39 is None:
             f39 = proto.OrderSide()
         if f40 is None:
@@ -2072,9 +2074,9 @@ class FieldModelStructSimple(fbe.FieldModel):
         fbe_current_size += self.f36.fbe_size
 
         if (fbe_current_size + self.f37.fbe_size) <= fbe_struct_size:
-            fbe_value.f37 = self.f37.get(uuid.UUID(uuid7))
+            fbe_value.f37 = self.f37.get(uuid.uuid7())
         else:
-            fbe_value.f37 = uuid.UUID(uuid7)
+            fbe_value.f37 = uuid.uuid7()
         fbe_current_size += self.f37.fbe_size
 
         if (fbe_current_size + self.f38.fbe_size) <= fbe_struct_size:
