@@ -170,6 +170,7 @@ void GeneratorCpp::GenerateImports()
 #include <bitset>
 #include <cassert>
 #include <cmath>
+#include <chrono>
 #include <cstring>
 #include <cctype>
 #include <future>
@@ -180,6 +181,7 @@ void GeneratorCpp::GenerateImports()
 #include <memory>
 #include <mutex>
 #include <optional>
+#include <random>
 #include <set>
 #include <sstream>
 #include <stdexcept>
@@ -869,6 +871,7 @@ void GeneratorCpp::GenerateUUIDWrapper_Header()
     - Nil UUID0 (all bits set to zero)
     - Sequential UUID1 (time based version)
     - Random UUID4 (randomly or pseudo-randomly generated version)
+    - Database UUID7 (time ordered, high locality version)
 
     A UUID is simply a 128-bit value: "123e4567-e89b-12d3-a456-426655440000"
 
@@ -932,6 +935,8 @@ public:
     static uuid_t sequential();
     //! Generate random UUID4 (randomly or pseudo-randomly generated version)
     static uuid_t random();
+    //! Generate database UUID7 (time ordered, high locality version)
+    static uuid_t database();
 
     //! Output instance into the given output stream
     friend std::ostream& operator<<(std::ostream& os, const uuid_t& uuid)
@@ -1158,6 +1163,34 @@ uuid_t uuid_t::random()
     result._data[14] = uuid.Data4[6];
     result._data[15] = uuid.Data4[7];
 #endif
+    return result;
+}
+
+uuid_t uuid_t::database()
+{
+    uuid_t result;
+
+    // Generate random bytes
+    std::random_device rd;
+    std::generate(result._data.begin(), result._data.end(), std::ref(rd));
+
+    // Get the current timestamp
+    auto now = std::chrono::system_clock::now();
+    auto duration = now.time_since_epoch();
+    auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
+
+    // Update timestamp fields
+    result._data[0] = (milliseconds >> 40) & 0xFF;
+    result._data[1] = (milliseconds >> 32) & 0xFF;
+    result._data[2] = (milliseconds >> 24) & 0xFF;
+    result._data[3] = (milliseconds >> 16) & 0xFF;
+    result._data[4] = (milliseconds >>  8) & 0xFF;
+    result._data[5] = (milliseconds >>  0) & 0xFF;
+
+    // Update version and variant fields
+    result._data[6] = (result._data[6] & 0x0F) | 0x70;
+    result._data[8] = (result._data[8] & 0x3F) | 0x80;
+
     return result;
 }
 
@@ -10512,6 +10545,8 @@ std::string GeneratorCpp::ConvertConstant(const std::string& type, const std::st
         return "FBE::uuid_t::sequential()";
     else if (value == "uuid4")
         return "FBE::uuid_t::random()";
+    else if (value == "uuid7")
+        return "FBE::uuid_t::database()";
 
     if (IsKnownType(type))
         return ConvertConstantPrefix(type) + value + ConvertConstantSuffix(type);
