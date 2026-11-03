@@ -7,6 +7,9 @@
     <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/uuid.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/uuid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,10 +19,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5,
-  "fromUser": false
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectFrameBounds">
     <option name="x" value="541" />
     <option name="y" value="320" />
@@ -31,36 +34,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.create.js.executor": "Run",
-    "Node.js.print.js.executor": "Run",
-    "Node.js.print_json.js.executor": "Run",
-    "Node.js.send_receive.js.executor": "Run",
-    "Node.js.serialization.js.executor": "Run",
-    "Node.js.serialization_final.js.executor": "Run",
-    "Node.js.serialization_json.js.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "X:/Projects/FastBinaryEncoding/projects/JavaScript",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "X:\\Projects\\FastBinaryEncoding\\projects\\JavaScript\\node_modules\\standard",
-    "nodejs_package_manager_path": "npm",
-    "npm.audit.executor": "Run",
-    "npm.tests-browser.executor": "Run",
-    "npm.tests-node.executor": "Run",
-    "npm.tests-standard.executor": "Run",
-    "npm.tests.executor": "Run",
-    "npm.update.executor": "Run",
-    "settings.editor.selected.configurable": "configurable.group.language"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.create.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.print.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.print_json.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.send_receive.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.serialization.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.serialization_final.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.serialization_json.js.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;last_opened_file_path&quot;: &quot;X:/Projects/FastBinaryEncoding/projects/JavaScript&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;X:\\Projects\\FastBinaryEncoding\\projects\\JavaScript\\node_modules\\standard&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.audit.executor&quot;: &quot;Run&quot;,
+    &quot;npm.tests-browser.executor&quot;: &quot;Run&quot;,
+    &quot;npm.tests-node.executor&quot;: &quot;Run&quot;,
+    &quot;npm.tests-standard.executor&quot;: &quot;Run&quot;,
+    &quot;npm.tests.executor&quot;: &quot;Run&quot;,
+    &quot;npm.update.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.language&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="npm.tests-node">
     <configuration name="audit" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -121,11 +124,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.tests-browser" />
         <item itemvalue="npm.tests-standard" />
         <item itemvalue="npm.tests-node" />
         <item itemvalue="npm.update" />
         <item itemvalue="npm.audit" />
+        <item itemvalue="npm.tests-browser" />
       </list>
     </recent_temporary>
   </component>
@@ -197,6 +200,7 @@
       <workItem from="1640496812234" duration="2040000" />
       <workItem from="1641153831656" duration="122000" />
       <workItem from="1793398763357" duration="3006000" />
+      <workItem from="1793664463184" duration="605000" />
     </task>
     <servers />
   </component>

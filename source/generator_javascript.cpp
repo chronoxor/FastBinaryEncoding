@@ -2891,6 +2891,7 @@ void GeneratorJavaScript::GenerateUUID(const CppCommon::Path& path)
  * - Nil UUID0 (all bits set to zero)
  * - Sequential UUID1 (time based version)
  * - Random UUID4 (randomly or pseudo-randomly generated version)
+ * - Database UUID7 (time ordered, high locality version)
  *
  * A UUID is simply a 128-bit value: "123e4567-e89b-12d3-a456-426655440000"
  *
@@ -3047,6 +3048,25 @@ class UUID {
       Math.floor(Math.random() * TWO_POW_32),
       Math.floor(Math.random() * TWO_POW_16),
       0x4000 | Math.floor(Math.random() * TWO_POW_12),
+      0x80 | Math.floor(Math.random() * TWO_POW_6),
+      Math.floor(Math.random() * TWO_POW_8),
+      Math.floor(Math.random() * TWO_POW_32),
+      Math.floor(Math.random() * TWO_POW_8),
+      Math.floor(Math.random() * TWO_POW_8)
+    )
+  }
+
+  /**
+   * Generate database UUID7 (time ordered, high locality version)
+   * @returns {!UUID}
+   */
+  static database () {
+    let now = new Date().getTime()
+
+    return UUID.fromParts(
+      Math.floor(now / TWO_POW_16),
+      now % TWO_POW_16,
+      0x7000 | Math.floor(Math.random() * TWO_POW_12),
       0x80 | Math.floor(Math.random() * TWO_POW_6),
       Math.floor(Math.random() * TWO_POW_8),
       Math.floor(Math.random() * TWO_POW_32),
@@ -12667,6 +12687,8 @@ std::string GeneratorJavaScript::ConvertConstant(const std::string& type, const 
         return "UUID.sequential()";
     else if (value == "uuid4")
         return "UUID.random()";
+    else if (value == "uuid7")
+        return "UUID.database()";
     else if (value == "utc")
         return "new Date(Date.now())";
 
