@@ -16,6 +16,7 @@
 #endif
 
 #include <array>
+#include <algorithm>
 #include <bitset>
 #include <cassert>
 #include <cmath>

@@ -167,6 +167,7 @@ void GeneratorCpp::GenerateImports()
 {
     std::string code = R"CODE(
 #include <array>
+#include <algorithm>
 #include <bitset>
 #include <cassert>
 #include <cmath>
