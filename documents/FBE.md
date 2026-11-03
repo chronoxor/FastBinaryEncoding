@@ -476,6 +476,7 @@ Supported uuid types:
 * Nil UUID0 (all bits set to zero)
 * Sequential UUID1 (time based version)
 * Random UUID4 (randomly or pseudo-randomly generated version)
+* Database UUID7 (time ordered, high locality version)
 
 *Implementation of the uuid type depends on equivalent type in each
 programming language (e.g. custom uuid_t in C++, Guid in C#, UUID in
@@ -518,6 +519,7 @@ uuid properties:
   * uuid0 = Nil UUID0
   * uuid1 = Sequential UUID1
   * uuid4 = Random UUID4
+  * uuid7 = Database UUID7
 
 Examples:
 ```proto
@@ -525,7 +527,8 @@ uuid field1;
 uuid field2 = uuid0;
 uuid field3 = uuid1;
 uuid field4 = uuid4;
-uuid field5 = "123e4567-e89b-12d3-a456-426655440000";
+uuid field5 = uuid7;
+uuid field6 = "123e4567-e89b-12d3-a456-426655440000";
 ```
 
 References:
