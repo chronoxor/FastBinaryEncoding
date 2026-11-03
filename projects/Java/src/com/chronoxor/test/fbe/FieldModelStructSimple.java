@@ -802,9 +802,9 @@ public final class FieldModelStructSimple extends com.chronoxor.fbe.FieldModel
         fbeCurrentSize += f36.fbeSize();
 
         if ((fbeCurrentSize + f37.fbeSize()) <= fbeStructSize)
-            fbeValue.f37 = f37.get(java.util.UUID.fromString(uuid7));
+            fbeValue.f37 = f37.get(com.chronoxor.fbe.UUIDGenerator.database());
         else
-            fbeValue.f37 = java.util.UUID.fromString(uuid7);
+            fbeValue.f37 = com.chronoxor.fbe.UUIDGenerator.database();
         fbeCurrentSize += f37.fbeSize();
 
         if ((fbeCurrentSize + f38.fbeSize()) <= fbeStructSize)

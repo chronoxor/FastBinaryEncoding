@@ -22,8 +22,12 @@ object UUIDGenerator
     // Node & clock sequence bytes (initialized once and never changed)
     private val nodeAndClockSequence = makeNodeAndClockSequence()
 
-    // Last UUID generated timestamp (in 100-nanosecond ticks since the Gregorian epoch)
-    private var last = 0uL
+    // Last UUID1 generated timestamp (in 100-nanosecond ticks since the Gregorian epoch)
+    private var lastTicks = 0uL
+
+    // Last UUID7 generated timestamp (in milliseconds since the Unix epoch) and counter
+    private var lastMillis = 0L
+    private var lastCounter = 0
 
     private fun makeNodeAndClockSequence(): ULong
     {
@@ -51,9 +55,9 @@ object UUIDGenerator
         // Keep timestamps strictly increasing to get rid of UUID duplicates in the same millisecond
         synchronized(lock)
         {
-            if (ticks <= last)
-                ticks = last + 1u
-            last = ticks
+            if (ticks <= lastTicks)
+                ticks = lastTicks + 1u
+            lastTicks = ticks
         }
 
         var msb = 0uL
@@ -68,4 +72,40 @@ object UUIDGenerator
 
     // Generate random UUID4 (randomly or pseudo-randomly generated version)
     fun random(): java.util.UUID = java.util.UUID.randomUUID()
+
+    // Generate database UUID7 (time ordered, high locality version)
+    fun database(): java.util.UUID
+    {
+        var millis = System.currentTimeMillis()
+        val counter: Int
+
+        // Keep timestamp and counter monotonic to get ordered UUIDs in the same millisecond
+        synchronized(lock)
+        {
+            if (millis > lastMillis)
+            {
+                lastMillis = millis
+                // Start from a random value with headroom for the following increments
+                lastCounter = generator.nextInt() and 0x01FF
+            }
+            else
+            {
+                lastCounter++
+                if (lastCounter > 0x0FFF)
+                {
+                    lastMillis++
+                    lastCounter = 0
+                }
+            }
+            millis = lastMillis
+            counter = lastCounter
+        }
+
+        // Unix timestamp in milliseconds (48 bits), version 7 (4 bits), counter (12 bits)
+        val msb = (millis shl 16) or 0x7000L or counter.toLong()
+        // Variant (2 bits), random (62 bits)
+        val lsb = (generator.nextLong() and 0x3FFFFFFFFFFFFFFFL) or Long.MIN_VALUE
+
+        return java.util.UUID(msb, lsb)
+    }
 }

@@ -178,8 +178,12 @@ public final class UUIDGenerator
     // Node & clock sequence bytes (initialized once and never changed)
     private static final long _nodeAndClockSequence = makeNodeAndClockSequence();
 
-    // Last UUID generated timestamp (in 100-nanosecond ticks since the Gregorian epoch)
-    private static long _last = 0;
+    // Last UUID1 generated timestamp (in 100-nanosecond ticks since the Gregorian epoch)
+    private static long _lastTicks = 0;
+
+    // Last UUID7 generated timestamp (in milliseconds since the Unix epoch) and counter
+    private static long _lastMillis = 0;
+    private static int _lastCounter = 0;
 
     private static long makeNodeAndClockSequence()
     {
@@ -207,9 +211,9 @@ public final class UUIDGenerator
         // Keep timestamps strictly increasing to get rid of UUID duplicates in the same millisecond
         synchronized(_lock)
         {
-            if (ticks <= _last)
-                ticks = _last + 1;
-            _last = ticks;
+            if (ticks <= _lastTicks)
+                ticks = _lastTicks + 1;
+            _lastTicks = ticks;
         }
 
         long msb = 0L;
@@ -224,6 +228,42 @@ public final class UUIDGenerator
 
     // Generate random UUID4 (randomly or pseudo-randomly generated version)
     public static java.util.UUID random() { return java.util.UUID.randomUUID(); }
+
+    // Generate database UUID7 (time ordered, high locality version)
+    public static java.util.UUID database()
+    {
+        long millis = System.currentTimeMillis();
+        long counter;
+
+        // Keep timestamp and counter monotonic to get ordered UUIDs in the same millisecond
+        synchronized(_lock)
+        {
+            if (millis > _lastMillis)
+            {
+                _lastMillis = millis;
+                // Start from a random value with headroom for the following increments
+                _lastCounter = _generator.nextInt() & 0x01FF;
+            }
+            else
+            {
+                _lastCounter++;
+                if (_lastCounter > 0x0FFF)
+                {
+                    _lastMillis++;
+                    _lastCounter = 0;
+                }
+            }
+            millis = _lastMillis;
+            counter = _lastCounter;
+        }
+
+        // Unix timestamp in milliseconds (48 bits), version 7 (4 bits), counter (12 bits)
+        long msb = (millis << 16) | 0x7000L | counter;
+        // Variant (2 bits), random (62 bits)
+        long lsb = (_generator.nextLong() & 0x3FFFFFFFFFFFFFFFL) | 0x8000000000000000L;
+
+        return new java.util.UUID(msb, lsb);
+    }
 }
 )CODE";
 
@@ -7801,6 +7841,8 @@ std::string GeneratorJava::ConvertConstant(const std::string& domain, const std:
         return domain + "fbe.UUIDGenerator.sequential()";
     else if (value == "uuid4")
         return domain + "fbe.UUIDGenerator.random()";
+    else if (value == "uuid7")
+        return domain + "fbe.UUIDGenerator.database()";
 
     std::string result = value;
 
