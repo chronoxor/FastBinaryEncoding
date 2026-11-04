@@ -8,7 +8,7 @@
 import Foundation
 
 // Fast Binary Encoding base client
-public protocol ClientProtocol: class {
+public protocol ClientProtocol: AnyObject {
 
     // Get the send bytes buffer
     var sendBuffer: Buffer { get set }

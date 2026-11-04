@@ -214,6 +214,39 @@ public struct UUIDGenerator {
 
         return UUID(uuid: uuid)
     }
+
+    // Generate database UUID7 (time ordered, high locality version)
+    public static func database() -> UUID {
+        var bytes = [UInt8](repeating: 0, count: 16)
+        
+        // Generate random bytes
+        _ = SecRandomCopyBytes(kSecRandomDefault, bytes.count, &bytes)
+
+        // Get current UNIX timestamp in milliseconds
+        let timestampMs = Int64(Date().timeIntervalSince1970 * 1000)
+                       
+        // Update timestamp fields
+        bytes[0] = UInt8((timestampMs >> 40) & 0xFF)
+        bytes[1] = UInt8((timestampMs >> 32) & 0xFF)
+        bytes[2] = UInt8((timestampMs >> 24) & 0xFF)
+        bytes[3] = UInt8((timestampMs >> 16) & 0xFF)
+        bytes[4] = UInt8((timestampMs >>  8) & 0xFF)
+        bytes[5] = UInt8((timestampMs >>  0) & 0xFF)
+
+        // Update version and variant fields
+        bytes[6] = (bytes[6] & 0x0F) | 0x70 
+        bytes[8] = (bytes[8] & 0x3F) | 0x80
+        
+        // Convert the byte array into a Foundation UUID tuple
+        let tuple = (
+            bytes[0], bytes[1], bytes[2], bytes[3], 
+            bytes[4], bytes[5], bytes[6], bytes[7], 
+            bytes[8], bytes[9], bytes[10], bytes[11], 
+            bytes[12], bytes[13], bytes[14], bytes[15]
+        )
+        
+        return UUID(uuid: tuple)
+    }
 }
 
 extension UUID: Comparable {
@@ -795,7 +828,7 @@ void GeneratorSwift::GenerateFBEFieldModel(const std::string& domain, const std:
 
     std::string code = R"CODE(
 // Fast Binary Encoding base field model
-public protocol FieldModel: class {
+public protocol FieldModel: AnyObject {
     var _buffer: Buffer { get set }
     var _offset: Int { get set }
 
@@ -2268,7 +2301,7 @@ void GeneratorSwift::GenerateFBEFinalModel(const std::string& domain, const std:
 
     std::string code = R"CODE(
 // Fast Binary Encoding base final model
-public protocol FinalModel: class {
+public protocol FinalModel: AnyObject {
     var _buffer: Buffer { get set }
     var _offset: Int { get set }
 
@@ -3496,7 +3529,7 @@ void GeneratorSwift::GenerateFBESender(const std::string& domain, const std::str
 
     std::string code = R"CODE(
 // Fast Binary Encoding base sender
-public protocol SenderProtocol: class {
+public protocol SenderProtocol: AnyObject {
 
     // Get the bytes buffer
     var buffer: Buffer { get set }
@@ -3566,7 +3599,7 @@ void GeneratorSwift::GenerateFBEReceiver(const std::string& domain, const std::s
 
     std::string code = R"CODE(
 // Fast Binary Encoding base receiver
-public protocol ReceiverProtocol: class {
+public protocol ReceiverProtocol: AnyObject {
 
     // Get the bytes buffer
     var buffer: Buffer { get set }
@@ -3902,7 +3935,7 @@ void GeneratorSwift::GenerateFBEClient(const std::string& domain, const std::str
 
     std::string code = R"CODE(
 // Fast Binary Encoding base client
-public protocol ClientProtocol: class {
+public protocol ClientProtocol: AnyObject {
 
     // Get the send bytes buffer
     var sendBuffer: Buffer { get set }
@@ -8281,6 +8314,8 @@ std::string GeneratorSwift::ConvertConstant(const std::string& domain, const std
         return domain +  "Fbe.UUIDGenerator.sequential()";
     else if (value == "uuid4")
         return domain + "Fbe.UUIDGenerator.random()";
+    else if (value == "uuid7")
+        return domain + "Fbe.UUIDGenerator.database()";
 
     std::string result = value;
     result[0] = toupper(result[0]);

@@ -1042,9 +1042,9 @@ public class FieldModelStructSimple: FieldModel {
         fbeCurrentSize += f36.fbeSize
 
         if fbeCurrentSize + f37.fbeSize <= fbeStructSize {
-            fbeValue.f37 = f37.get(defaults: UUID(uuidString: Uuid7)!)
+            fbeValue.f37 = f37.get(defaults: ChronoxorFbe.UUIDGenerator.database())
         } else {
-            fbeValue.f37 = UUID(uuidString: Uuid7)!
+            fbeValue.f37 = ChronoxorFbe.UUIDGenerator.database()
         }
         fbeCurrentSize += f37.fbeSize
 

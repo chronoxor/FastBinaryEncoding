@@ -8,7 +8,7 @@
 import Foundation
 
 // Fast Binary Encoding base receiver
-public protocol ReceiverProtocol: class {
+public protocol ReceiverProtocol: AnyObject {
 
     // Get the bytes buffer
     var buffer: Buffer { get set }

@@ -1175,7 +1175,7 @@ uuid_t uuid_t::database()
     std::random_device rd;
     std::generate(result._data.begin(), result._data.end(), std::ref(rd));
 
-    // Get the current timestamp
+    // Get current UNIX timestamp in milliseconds
     auto now = std::chrono::system_clock::now();
     auto duration = now.time_since_epoch();
     auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();

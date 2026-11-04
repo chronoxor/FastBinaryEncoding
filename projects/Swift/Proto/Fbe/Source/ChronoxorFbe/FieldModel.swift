@@ -8,7 +8,7 @@
 import Foundation
 
 // Fast Binary Encoding base field model
-public protocol FieldModel: class {
+public protocol FieldModel: AnyObject {
     var _buffer: Buffer { get set }
     var _offset: Int { get set }
 
