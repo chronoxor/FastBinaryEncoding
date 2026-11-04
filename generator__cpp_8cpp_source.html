@@ -1201,7 +1201,7 @@ $(function() {
 <div class="line"><a id="l01175" name="l01175"></a><span class="lineno"> 1175</span><span class="stringliteral">    std::random_device rd;</span></div>
 <div class="line"><a id="l01176" name="l01176"></a><span class="lineno"> 1176</span><span class="stringliteral">    std::generate(result._data.begin(), result._data.end(), std::ref(rd));</span></div>
 <div class="line"><a id="l01177" name="l01177"></a><span class="lineno"> 1177</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l01178" name="l01178"></a><span class="lineno"> 1178</span><span class="stringliteral">    // Get the current timestamp</span></div>
+<div class="line"><a id="l01178" name="l01178"></a><span class="lineno"> 1178</span><span class="stringliteral">    // Get current UNIX timestamp in milliseconds</span></div>
 <div class="line"><a id="l01179" name="l01179"></a><span class="lineno"> 1179</span><span class="stringliteral">    auto now = std::chrono::system_clock::now();</span></div>
 <div class="line"><a id="l01180" name="l01180"></a><span class="lineno"> 1180</span><span class="stringliteral">    auto duration = now.time_since_epoch();</span></div>
 <div class="line"><a id="l01181" name="l01181"></a><span class="lineno"> 1181</span><span class="stringliteral">    auto milliseconds = std::chrono::duration_cast&lt;std::chrono::milliseconds&gt;(duration).count();</span></div>
