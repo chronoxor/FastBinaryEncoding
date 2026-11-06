@@ -5082,7 +5082,7 @@ $(function() {
 <div class="line"><a id="l05005" name="l05005"></a><span class="lineno"> 5005</span>    WriteLine();</div>
 <div class="line"><a id="l05006" name="l05006"></a><span class="lineno"> 5006</span>    WriteLineIndent(<span class="stringliteral">&quot;val enm = other as &quot;</span> + enum_name + <span class="stringliteral">&quot;? ?: return false&quot;</span>);</div>
 <div class="line"><a id="l05007" name="l05007"></a><span class="lineno"> 5007</span>    WriteLine();</div>
-<div class="line"><a id="l05008" name="l05008"></a><span class="lineno"> 5008</span>    WriteLineIndent(<span class="stringliteral">&quot;if (enm.value == null)&quot;</span>);</div>
+<div class="line"><a id="l05008" name="l05008"></a><span class="lineno"> 5008</span>    WriteLineIndent(<span class="stringliteral">&quot;if ((value == null) || (enm.value == null))&quot;</span>);</div>
 <div class="line"><a id="l05009" name="l05009"></a><span class="lineno"> 5009</span>    Indent(1);</div>
 <div class="line"><a id="l05010" name="l05010"></a><span class="lineno"> 5010</span>    WriteLineIndent(<span class="stringliteral">&quot;return false&quot;</span>);</div>
 <div class="line"><a id="l05011" name="l05011"></a><span class="lineno"> 5011</span>    Indent(-1);</div>
