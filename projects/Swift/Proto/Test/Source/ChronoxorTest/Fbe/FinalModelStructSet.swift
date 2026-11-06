@@ -104,7 +104,7 @@ public class FinalModelStructSet: FinalModel {
     public func getFields(fbeValue: inout StructSet) -> Int {
         var fbeCurrentOffset: Int = 0
         var fbeCurrentSize: Int = 0
-        var fbeFieldSize = Size()
+        let fbeFieldSize = Size()
 
         f1.fbeOffset = fbeCurrentOffset
         fbeFieldSize.value = f1.get(values: &fbeValue.f1)
