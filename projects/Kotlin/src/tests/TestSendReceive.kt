@@ -2,7 +2,9 @@ package tests
 
 import java.util.*
 import kotlin.math.*
-import kotlin.test.*
+import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
+import kotlin.test.assertTrue
 import org.testng.annotations.*
 
 import com.chronoxor.proto.*
