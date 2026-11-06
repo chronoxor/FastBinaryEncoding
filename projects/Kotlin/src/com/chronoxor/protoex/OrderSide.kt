@@ -55,7 +55,7 @@ class OrderSide : Comparable<OrderSide>
 
         val enm = other as OrderSide? ?: return false
 
-        if (enm.value == null)
+        if ((value == null) || (enm.value == null))
             return false
         if (value!!.raw != enm.value!!.raw)
             return false

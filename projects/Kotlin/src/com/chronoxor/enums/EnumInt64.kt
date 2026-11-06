@@ -58,7 +58,7 @@ class EnumInt64 : Comparable<EnumInt64>
 
         val enm = other as EnumInt64? ?: return false
 
-        if (enm.value == null)
+        if ((value == null) || (enm.value == null))
             return false
         if (value!!.raw != enm.value!!.raw)
             return false

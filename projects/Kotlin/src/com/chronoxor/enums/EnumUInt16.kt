@@ -58,7 +58,7 @@ class EnumUInt16 : Comparable<EnumUInt16>
 
         val enm = other as EnumUInt16? ?: return false
 
-        if (enm.value == null)
+        if ((value == null) || (enm.value == null))
             return false
         if (value!!.raw != enm.value!!.raw)
             return false

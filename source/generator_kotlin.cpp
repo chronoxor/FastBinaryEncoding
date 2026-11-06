@@ -5005,7 +5005,7 @@ void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const
     WriteLine();
     WriteLineIndent("val enm = other as " + enum_name + "? ?: return false");
     WriteLine();
-    WriteLineIndent("if (enm.value == null)");
+    WriteLineIndent("if ((value == null) || (enm.value == null))");
     Indent(1);
     WriteLineIndent("return false");
     Indent(-1);

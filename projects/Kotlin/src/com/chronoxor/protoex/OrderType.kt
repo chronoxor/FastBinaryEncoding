@@ -56,7 +56,7 @@ class OrderType : Comparable<OrderType>
 
         val enm = other as OrderType? ?: return false
 
-        if (enm.value == null)
+        if ((value == null) || (enm.value == null))
             return false
         if (value!!.raw != enm.value!!.raw)
             return false

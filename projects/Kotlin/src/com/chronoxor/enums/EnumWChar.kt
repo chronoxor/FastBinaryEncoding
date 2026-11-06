@@ -58,7 +58,7 @@ class EnumWChar : Comparable<EnumWChar>
 
         val enm = other as EnumWChar? ?: return false
 
-        if (enm.value == null)
+        if ((value == null) || (enm.value == null))
             return false
         if (value!!.raw != enm.value!!.raw)
             return false

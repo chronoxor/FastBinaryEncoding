@@ -58,7 +58,7 @@ class EnumByte : Comparable<EnumByte>
 
         val enm = other as EnumByte? ?: return false
 
-        if (enm.value == null)
+        if ((value == null) || (enm.value == null))
             return false
         if (value!!.raw != enm.value!!.raw)
             return false
