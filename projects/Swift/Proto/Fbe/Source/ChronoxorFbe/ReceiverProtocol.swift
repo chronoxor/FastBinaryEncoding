@@ -244,6 +244,7 @@ public extension ReceiverProtocol {
                     fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset))
                     fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset + 4))
                 }
+                _ = fbeStructSize // part of wire format; kept for readability
 
                 // Handle the message
                 _ = onReceive(type: fbeStructType, buffer: messageBuffer.data, offset: messageOffset, size: messageSize)

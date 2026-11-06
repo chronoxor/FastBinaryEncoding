@@ -249,7 +249,7 @@ public struct UUIDGenerator {
     }
 }
 
-extension UUID: Comparable {
+extension UUID: @retroactive Comparable {
     public static func < (lhs: UUID, rhs: UUID) -> Bool {
         return lhs.hashValue < rhs.hashValue
     }
@@ -3566,7 +3566,7 @@ public extension SenderProtocol {
 
         // Send the value
         let sent = try listener.onSend(buffer: buffer.data, offset: 0, size: buffer.size)
-        try _ = buffer.remove(offset: 0, size: sent)
+        try buffer.remove(offset: 0, size: sent)
         return sent
     }
 }
@@ -3835,6 +3835,7 @@ public extension ReceiverProtocol {
                     fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset))
                     fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset + 4))
                 }
+                _ = fbeStructSize // part of wire format; kept for readability
 
                 // Handle the message
                 _ = onReceive(type: fbeStructType, buffer: messageBuffer.data, offset: messageOffset, size: messageSize)
@@ -4196,6 +4197,7 @@ public extension ClientProtocol {
                     fbeStructSize = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset))
                     fbeStructType = Int(Buffer.readUInt32(buffer: messageBuffer, offset: messageOffset + fbeStructOffset + 4))
                 }
+                _ = fbeStructSize // part of wire format; kept for readability
 
                 // Handle the message
                 _ = onReceive(type: fbeStructType, buffer: messageBuffer.data, offset: messageOffset, size: messageSize)
