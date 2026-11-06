@@ -1228,7 +1228,7 @@ $(function() {
 <div class="line"><a id="l01153" name="l01153"></a><span class="lineno"> 1153</span><span class="stringliteral"></span> </div>
 <div class="line"><a id="l01154" name="l01154"></a><span class="lineno"> 1154</span><span class="stringliteral">        // Convert in the reference date domain (the way Date stores its value) to keep nanosecond round trip</span></div>
 <div class="line"><a id="l01155" name="l01155"></a><span class="lineno"> 1155</span><span class="stringliteral">        let nanoseconds = readInt64(offset: fbeOffset)</span></div>
-<div class="line"><a id="l01156" name="l01156"></a><span class="lineno"> 1156</span><span class="stringliteral">        let seconds = nanoseconds / 1_000_000_000 - Date.timeIntervalBetween1970AndReferenceDate</span></div>
+<div class="line"><a id="l01156" name="l01156"></a><span class="lineno"> 1156</span><span class="stringliteral">        let seconds = nanoseconds / 1_000_000_000 - 978_307_200 // Date.timeIntervalBetween1970AndReferenceDate</span></div>
 <div class="line"><a id="l01157" name="l01157"></a><span class="lineno"> 1157</span><span class="stringliteral">        let fraction = nanoseconds % 1_000_000_000</span></div>
 <div class="line"><a id="l01158" name="l01158"></a><span class="lineno"> 1158</span><span class="stringliteral">        return Date(timeIntervalSinceReferenceDate: TimeInterval(seconds) + TimeInterval(fraction) / 1_000_000_000)</span></div>
 <div class="line"><a id="l01159" name="l01159"></a><span class="lineno"> 1159</span><span class="stringliteral">    }</span></div>
@@ -1242,7 +1242,7 @@ $(function() {
 <div class="line"><a id="l01167" name="l01167"></a><span class="lineno"> 1167</span><span class="stringliteral">        // Convert in the reference date domain (the way Date stores its value) to keep nanosecond round trip</span></div>
 <div class="line"><a id="l01168" name="l01168"></a><span class="lineno"> 1168</span><span class="stringliteral">        let interval = value.timeIntervalSinceReferenceDate</span></div>
 <div class="line"><a id="l01169" name="l01169"></a><span class="lineno"> 1169</span><span class="stringliteral">        let seconds = interval.rounded(.down)</span></div>
-<div class="line"><a id="l01170" name="l01170"></a><span class="lineno"> 1170</span><span class="stringliteral">        let nanoseconds = (Int64(seconds) + Date.timeIntervalBetween1970AndReferenceDate) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())</span></div>
+<div class="line"><a id="l01170" name="l01170"></a><span class="lineno"> 1170</span><span class="stringliteral">        let nanoseconds = (Int64(seconds) + 978_307_200) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())</span></div>
 <div class="line"><a id="l01171" name="l01171"></a><span class="lineno"> 1171</span><span class="stringliteral">        write(offset: fbeOffset, value: UInt64(bitPattern: nanoseconds))</span></div>
 <div class="line"><a id="l01172" name="l01172"></a><span class="lineno"> 1172</span><span class="stringliteral">    }</span></div>
 <div class="line"><a id="l01173" name="l01173"></a><span class="lineno"> 1173</span><span class="stringliteral">}</span></div>
@@ -2740,7 +2740,7 @@ $(function() {
 <div class="line"><a id="l02665" name="l02665"></a><span class="lineno"> 2665</span><span class="stringliteral">        size.value = fbeSize</span></div>
 <div class="line"><a id="l02666" name="l02666"></a><span class="lineno"> 2666</span><span class="stringliteral">        // Convert in the reference date domain (the way Date stores its value) to keep nanosecond round trip</span></div>
 <div class="line"><a id="l02667" name="l02667"></a><span class="lineno"> 2667</span><span class="stringliteral">        let nanoseconds = readInt64(offset: fbeOffset)</span></div>
-<div class="line"><a id="l02668" name="l02668"></a><span class="lineno"> 2668</span><span class="stringliteral">        let seconds = nanoseconds / 1_000_000_000 - Date.timeIntervalBetween1970AndReferenceDate</span></div>
+<div class="line"><a id="l02668" name="l02668"></a><span class="lineno"> 2668</span><span class="stringliteral">        let seconds = nanoseconds / 1_000_000_000 - 978_307_200 // Date.timeIntervalBetween1970AndReferenceDate</span></div>
 <div class="line"><a id="l02669" name="l02669"></a><span class="lineno"> 2669</span><span class="stringliteral">        let fraction = nanoseconds % 1_000_000_000</span></div>
 <div class="line"><a id="l02670" name="l02670"></a><span class="lineno"> 2670</span><span class="stringliteral">        return Date(timeIntervalSinceReferenceDate: TimeInterval(seconds) + TimeInterval(fraction) / 1_000_000_000)</span></div>
 <div class="line"><a id="l02671" name="l02671"></a><span class="lineno"> 2671</span><span class="stringliteral">    }</span></div>
@@ -2755,7 +2755,7 @@ $(function() {
 <div class="line"><a id="l02680" name="l02680"></a><span class="lineno"> 2680</span><span class="stringliteral">        // Convert in the reference date domain (the way Date stores its value) to keep nanosecond round trip</span></div>
 <div class="line"><a id="l02681" name="l02681"></a><span class="lineno"> 2681</span><span class="stringliteral">        let interval = value.timeIntervalSinceReferenceDate</span></div>
 <div class="line"><a id="l02682" name="l02682"></a><span class="lineno"> 2682</span><span class="stringliteral">        let seconds = interval.rounded(.down)</span></div>
-<div class="line"><a id="l02683" name="l02683"></a><span class="lineno"> 2683</span><span class="stringliteral">        let nanoseconds = (Int64(seconds) + Date.timeIntervalBetween1970AndReferenceDate) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())</span></div>
+<div class="line"><a id="l02683" name="l02683"></a><span class="lineno"> 2683</span><span class="stringliteral">        let nanoseconds = (Int64(seconds) + 978_307_200) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())</span></div>
 <div class="line"><a id="l02684" name="l02684"></a><span class="lineno"> 2684</span><span class="stringliteral">        write(offset: fbeOffset, value: UInt64(bitPattern: nanoseconds))</span></div>
 <div class="line"><a id="l02685" name="l02685"></a><span class="lineno"> 2685</span><span class="stringliteral">        return fbeSize</span></div>
 <div class="line"><a id="l02686" name="l02686"></a><span class="lineno"> 2686</span><span class="stringliteral">    }</span></div>
