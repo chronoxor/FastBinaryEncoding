@@ -18,7 +18,7 @@ dependencies {
     testRuntimeOnly("org.slf4j:slf4j-nop:2.0.20")
 }
 
-// Builds with the JDK Gradle runs on (IDEA project JDK), emitting JVM 26 bytecode
+// Builds with the JDK Gradle runs on (IDEA project JDK), emitting JVM 26 bytecode (newest target Kotlin 2.4 supports)
 java {
     sourceCompatibility = JavaVersion.VERSION_26
     targetCompatibility = JavaVersion.VERSION_26
