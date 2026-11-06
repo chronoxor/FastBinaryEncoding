@@ -164,7 +164,7 @@ public class FinalModelStructArray: FinalModel {
     public func getFields(fbeValue: inout StructArray) -> Int {
         var fbeCurrentOffset: Int = 0
         var fbeCurrentSize: Int = 0
-        let fbeFieldSize = Size()
+        var fbeFieldSize = Size()
 
         f1.fbeOffset = fbeCurrentOffset
         fbeFieldSize.value = f1.get(values: &fbeValue.f1)

@@ -6331,17 +6331,7 @@ void GeneratorSwift::GenerateStructFinalModel(const std::shared_ptr<Package>& p,
     {
         WriteLineIndent("var fbeCurrentOffset: Int = 0");
         WriteLineIndent("var fbeCurrentSize: Int = 0");
-        
-        // Size is a class: the variable is required only when it is passed as an inout argument
-        bool fbeFieldSizeInout = false;
-        if (s->body)
-        {
-            for (const auto& field : s->body->fields)
-                if (!(field->array || field->vector || field->list || field->set || field->map || field->hash))
-                    fbeFieldSizeInout = true;
-        }
-        WriteLineIndent(std::string(fbeFieldSizeInout ? "var" : "let") + " fbeFieldSize = Size()");
-
+        WriteLineIndent("var fbeFieldSize = Size()");
         if (s->base && !s->base->empty())
         {
             WriteLine();
