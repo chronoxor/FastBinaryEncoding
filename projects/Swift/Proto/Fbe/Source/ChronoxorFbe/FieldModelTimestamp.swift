@@ -27,7 +27,7 @@ public class FieldModelTimestamp: FieldModel {
 
         // Convert in the reference date domain (the way Date stores its value) to keep nanosecond round trip
         let nanoseconds = readInt64(offset: fbeOffset)
-        let seconds = nanoseconds / 1_000_000_000 - 978_307_200
+        let seconds = nanoseconds / 1_000_000_000 - Date.timeIntervalBetween1970AndReferenceDate
         let fraction = nanoseconds % 1_000_000_000
         return Date(timeIntervalSinceReferenceDate: TimeInterval(seconds) + TimeInterval(fraction) / 1_000_000_000)
     }
@@ -41,7 +41,7 @@ public class FieldModelTimestamp: FieldModel {
         // Convert in the reference date domain (the way Date stores its value) to keep nanosecond round trip
         let interval = value.timeIntervalSinceReferenceDate
         let seconds = interval.rounded(.down)
-        let nanoseconds = (Int64(seconds) + 978_307_200) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())
+        let nanoseconds = (Int64(seconds) + Date.timeIntervalBetween1970AndReferenceDate) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())
         write(offset: fbeOffset, value: UInt64(bitPattern: nanoseconds))
     }
 }

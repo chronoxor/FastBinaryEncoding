@@ -218,13 +218,13 @@ public struct UUIDGenerator {
     // Generate database UUID7 (time ordered, high locality version)
     public static func database() -> UUID {
         var bytes = [UInt8](repeating: 0, count: 16)
-        
+
         // Generate random bytes
         _ = SecRandomCopyBytes(kSecRandomDefault, bytes.count, &bytes)
 
         // Get current UNIX timestamp in milliseconds
         let timestampMs = Int64(Date().timeIntervalSince1970 * 1000)
-                       
+
         // Update timestamp fields
         bytes[0] = UInt8((timestampMs >> 40) & 0xFF)
         bytes[1] = UInt8((timestampMs >> 32) & 0xFF)
@@ -234,17 +234,17 @@ public struct UUIDGenerator {
         bytes[5] = UInt8((timestampMs >>  0) & 0xFF)
 
         // Update version and variant fields
-        bytes[6] = (bytes[6] & 0x0F) | 0x70 
+        bytes[6] = (bytes[6] & 0x0F) | 0x70
         bytes[8] = (bytes[8] & 0x3F) | 0x80
-        
+
         // Convert the byte array into a Foundation UUID tuple
         let tuple = (
-            bytes[0], bytes[1], bytes[2], bytes[3], 
-            bytes[4], bytes[5], bytes[6], bytes[7], 
-            bytes[8], bytes[9], bytes[10], bytes[11], 
+            bytes[0], bytes[1], bytes[2], bytes[3],
+            bytes[4], bytes[5], bytes[6], bytes[7],
+            bytes[8], bytes[9], bytes[10], bytes[11],
             bytes[12], bytes[13], bytes[14], bytes[15]
         )
-        
+
         return UUID(uuid: tuple)
     }
 }
@@ -1153,7 +1153,7 @@ public class FieldModelTimestamp: FieldModel {
 
         // Convert in the reference date domain (the way Date stores its value) to keep nanosecond round trip
         let nanoseconds = readInt64(offset: fbeOffset)
-        let seconds = nanoseconds / 1_000_000_000 - 978_307_200
+        let seconds = nanoseconds / 1_000_000_000 - Date.timeIntervalBetween1970AndReferenceDate
         let fraction = nanoseconds % 1_000_000_000
         return Date(timeIntervalSinceReferenceDate: TimeInterval(seconds) + TimeInterval(fraction) / 1_000_000_000)
     }
@@ -1167,7 +1167,7 @@ public class FieldModelTimestamp: FieldModel {
         // Convert in the reference date domain (the way Date stores its value) to keep nanosecond round trip
         let interval = value.timeIntervalSinceReferenceDate
         let seconds = interval.rounded(.down)
-        let nanoseconds = (Int64(seconds) + 978_307_200) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())
+        let nanoseconds = (Int64(seconds) + Date.timeIntervalBetween1970AndReferenceDate) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())
         write(offset: fbeOffset, value: UInt64(bitPattern: nanoseconds))
     }
 }
@@ -2665,7 +2665,7 @@ public class FinalModelTimestamp: FinalModel {
         size.value = fbeSize
         // Convert in the reference date domain (the way Date stores its value) to keep nanosecond round trip
         let nanoseconds = readInt64(offset: fbeOffset)
-        let seconds = nanoseconds / 1_000_000_000 - 978_307_200
+        let seconds = nanoseconds / 1_000_000_000 - Date.timeIntervalBetween1970AndReferenceDate
         let fraction = nanoseconds % 1_000_000_000
         return Date(timeIntervalSinceReferenceDate: TimeInterval(seconds) + TimeInterval(fraction) / 1_000_000_000)
     }
@@ -2680,7 +2680,7 @@ public class FinalModelTimestamp: FinalModel {
         // Convert in the reference date domain (the way Date stores its value) to keep nanosecond round trip
         let interval = value.timeIntervalSinceReferenceDate
         let seconds = interval.rounded(.down)
-        let nanoseconds = (Int64(seconds) + 978_307_200) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())
+        let nanoseconds = (Int64(seconds) + Date.timeIntervalBetween1970AndReferenceDate) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())
         write(offset: fbeOffset, value: UInt64(bitPattern: nanoseconds))
         return fbeSize
     }
