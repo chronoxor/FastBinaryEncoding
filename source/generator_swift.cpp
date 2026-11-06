@@ -3578,7 +3578,7 @@ public extension SenderProtocol {
 
         // Send the value
         let sent = try listener.onSend(buffer: buffer.data, offset: 0, size: buffer.size)
-        try _ = buffer.remove(offset: 0, size: sent)
+        try buffer.remove(offset: 0, size: sent)
         return sent
     }
 }
