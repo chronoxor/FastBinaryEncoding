@@ -1151,10 +1151,11 @@ public class FieldModelTimestamp: FieldModel {
             return defaults
         }
 
+        // Convert in the reference date domain (the way Date stores its value) to keep nanosecond round trip
         let nanoseconds = readInt64(offset: fbeOffset)
-        let seconds = nanoseconds / 1_000_000_000
+        let seconds = nanoseconds / 1_000_000_000 - 978_307_200
         let fraction = nanoseconds % 1_000_000_000
-        return Date(timeIntervalSince1970: TimeInterval(seconds) + TimeInterval(fraction) / 1_000_000_000)
+        return Date(timeIntervalSinceReferenceDate: TimeInterval(seconds) + TimeInterval(fraction) / 1_000_000_000)
     }
 
     public func set(value: Date) throws {
@@ -1163,10 +1164,10 @@ public class FieldModelTimestamp: FieldModel {
             return
         }
 
-        // Split seconds and fraction to keep the maximum precision of the Date (Double) value
-        let interval = value.timeIntervalSince1970
+        // Convert in the reference date domain (the way Date stores its value) to keep nanosecond round trip
+        let interval = value.timeIntervalSinceReferenceDate
         let seconds = interval.rounded(.down)
-        let nanoseconds = Int64(seconds) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())
+        let nanoseconds = (Int64(seconds) + 978_307_200) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())
         write(offset: fbeOffset, value: UInt64(bitPattern: nanoseconds))
     }
 }
@@ -2662,10 +2663,11 @@ public class FinalModelTimestamp: FinalModel {
         }
 
         size.value = fbeSize
+        // Convert in the reference date domain (the way Date stores its value) to keep nanosecond round trip
         let nanoseconds = readInt64(offset: fbeOffset)
-        let seconds = nanoseconds / 1_000_000_000
+        let seconds = nanoseconds / 1_000_000_000 - 978_307_200
         let fraction = nanoseconds % 1_000_000_000
-        return Date(timeIntervalSince1970: TimeInterval(seconds) + TimeInterval(fraction) / 1_000_000_000)
+        return Date(timeIntervalSinceReferenceDate: TimeInterval(seconds) + TimeInterval(fraction) / 1_000_000_000)
     }
 
     // Set the value
@@ -2675,10 +2677,10 @@ public class FinalModelTimestamp: FinalModel {
             return 0
         }
 
-        // Split seconds and fraction to keep the maximum precision of the Date (Double) value
-        let interval = value.timeIntervalSince1970
+        // Convert in the reference date domain (the way Date stores its value) to keep nanosecond round trip
+        let interval = value.timeIntervalSinceReferenceDate
         let seconds = interval.rounded(.down)
-        let nanoseconds = Int64(seconds) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())
+        let nanoseconds = (Int64(seconds) + 978_307_200) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())
         write(offset: fbeOffset, value: UInt64(bitPattern: nanoseconds))
         return fbeSize
     }

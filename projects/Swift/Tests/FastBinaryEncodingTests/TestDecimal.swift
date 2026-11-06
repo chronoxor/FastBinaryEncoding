@@ -57,7 +57,7 @@ class TestDecimal: XCTestCase {
             return Decimal.nan
         }
         
-        // Final check
+        // Compare values from field model and final model
         if (value1 != value2) {
             return Decimal.nan
         }
