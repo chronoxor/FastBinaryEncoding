@@ -2,8 +2,6 @@
     \file generator_swift.cpp
     \brief Fast binary encoding Swift generator implementation
     \author Andrey Zbranevich
-    \ Based on original Fast binary encoding generator design by
-    \ Ivan Shynkarenka
     \date 01.08.2019
     \copyright MIT License
 */
@@ -133,12 +131,18 @@ void GeneratorSwift::GenerateFBEPackage(const std::string& domain, const std::st
     CppCommon::Path file = packagePath / "Package.swift";
     WriteBegin();
 
-    std::string code = R"CODE(// swift-tools-version:5.1
+    std::string code = R"CODE(// swift-tools-version:5.5
 
 import PackageDescription
 
 let package = Package(
     name: "_DOMAIN_",
+    platforms: [
+        .macOS(.v10_15),
+        .iOS(.v13),
+        .tvOS(.v13),
+        .watchOS(.v6)
+    ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
@@ -4310,13 +4314,19 @@ void GeneratorSwift::GeneratePackage(const std::shared_ptr<Package>& p)
     CppCommon::Path file = packagePath / "Package.swift";
     WriteBegin();
 
-    std::string code = R"CODE(// swift-tools-version:5.1
+    std::string code = R"CODE(// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "_NAME_",
+    platforms: [
+        .macOS(.v10_15),
+        .iOS(.v13),
+        .tvOS(.v13),
+        .watchOS(.v6)
+    ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
@@ -4342,10 +4352,10 @@ let package = Package(
         for (const auto& import : p->import->imports)
             dependenciesRes = dependenciesRes + std::string(",\n        .package(path: \"../") + ConvertPackageName(*import) + std::string("\")");
 
-    std::string dependencies = std::string("\"") + domain + "Fbe" + std::string("\"");
+    std::string dependencies = std::string(".product(name: \"") + domain + "Fbe" + std::string("\", package: \"Fbe\")");
     if (p->import)
         for (const auto& import : p->import->imports)
-            dependencies = dependencies + std::string(", \"") + domain + ConvertPackageName(*import) + std::string("\"");
+            dependencies = dependencies + std::string(", .product(name: \"") + domain + ConvertPackageName(*import) + std::string("\", package: \"") + ConvertPackageName(*import) + std::string("\")");
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_NAME_"), domain + package);
