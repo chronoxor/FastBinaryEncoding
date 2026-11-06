@@ -35,6 +35,10 @@
 # CMake
 cmake-build-*/
 
+# Gradle & Kotlin
+.gradle
+.kotlin
+
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
 
