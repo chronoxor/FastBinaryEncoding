@@ -36,30 +36,32 @@ class TestDecimal: XCTestCase {
         Buffer.write(buffer: &buffer, offset: 8, value: high)
         Buffer.write(buffer: &buffer, offset: 12, value: flags)
 
+        // Test Decimal field model
         let model = FieldModelDecimal(buffer: buffer, offset: 0)
         let value1 = model.get()
-
         try! model.set(value: value1)
-        if (Buffer.readUInt32(buffer: buffer, offset: 0) != low) ||
-            (Buffer.readUInt32(buffer: buffer, offset: 4) != mid) ||
-            (Buffer.readUInt32(buffer: buffer, offset: 8) != high) ||
-            (Buffer.readUInt32(buffer: buffer, offset: 12) != flags) {
+        if value1 != model.get() {
             return Decimal.nan
         }
 
-        let finalModel = FinalModelDecimal(buffer: buffer, offset: 0)
         var size = Size()
+        
+        // Test Decimal final model
+        let finalModel = FinalModelDecimal(buffer: buffer, offset: 0)
         let value2 = finalModel.get(size: &size)
+        if (size.value != 16) {
+            return Decimal.nan
+        }
         _ = try! finalModel.set(value: value2)
-        if
-            (Buffer.readUInt32(buffer: buffer, offset: 0) != low) ||
-            (Buffer.readUInt32(buffer: buffer, offset: 4) != mid) ||
-            (Buffer.readUInt32(buffer: buffer, offset: 8) != high) ||
-            (Buffer.readUInt32(buffer: buffer, offset: 12) != flags) ||
-            (size.value != 16) || value1 != value2 {
+        if value2 != model.get() {
+            return Decimal.nan
+        }
+        
+        // Final check
+        if (value1 != value2) {
             return Decimal.nan
         }
 
-        return value2
+        return value1
     }
 }

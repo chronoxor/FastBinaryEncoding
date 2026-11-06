@@ -41,8 +41,10 @@ public class FinalModelTimestamp: FinalModel {
         }
 
         size.value = fbeSize
-        let nanoseconds = TimeInterval(readInt64(offset: fbeOffset))
-        return Date(timeIntervalSince1970: nanoseconds / 1_000_000_000)
+        let nanoseconds = readInt64(offset: fbeOffset)
+        let seconds = nanoseconds / 1_000_000_000
+        let fraction = nanoseconds % 1_000_000_000
+        return Date(timeIntervalSince1970: TimeInterval(seconds) + TimeInterval(fraction) / 1_000_000_000)
     }
 
     // Set the value
@@ -52,8 +54,11 @@ public class FinalModelTimestamp: FinalModel {
             return 0
         }
 
-        let milliseconds = value.timeIntervalSince1970 * 1000
-        write(offset: fbeOffset, value: UInt64(milliseconds) * 1_000_000)
+        // Split seconds and fraction to keep the maximum precision of the Date (Double) value
+        let interval = value.timeIntervalSince1970
+        let seconds = interval.rounded(.down)
+        let nanoseconds = Int64(seconds) * 1_000_000_000 + Int64(((interval - seconds) * 1_000_000_000).rounded())
+        write(offset: fbeOffset, value: UInt64(bitPattern: nanoseconds))
         return fbeSize
     }
 }
