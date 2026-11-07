@@ -8,6 +8,7 @@ import PackageDescription
 
 let package = Package(
     name: "FastBinaryEncoding",
+    swiftLanguageModes: [.v5],
     platforms: [
         .macOS(.v10_15),
         .iOS(.v13),
@@ -42,7 +43,5 @@ let package = Package(
             name: "BenchmarkTests",
             dependencies: ["ChronoxorFbe", "ChronoxorProto"],
             path: "Tests/BenchmarkTests")
-    ],
-    // Generated code is not Swift 6 strict-concurrency clean yet (e.g. non-Sendable static properties)
-    swiftLanguageModes: [.v5]
+    ]
 )

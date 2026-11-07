@@ -131,12 +131,13 @@ void GeneratorSwift::GenerateFBEPackage(const std::string& domain, const std::st
     CppCommon::Path file = packagePath / "Package.swift";
     WriteBegin();
 
-    std::string code = R"CODE(// swift-tools-version:5.5
+    std::string code = R"CODE(// swift-tools-version:6.4
 
 import PackageDescription
 
 let package = Package(
     name: "_DOMAIN_",
+    swiftLanguageModes: [.v5],
     platforms: [
         .macOS(.v10_15),
         .iOS(.v13),
@@ -4314,13 +4315,14 @@ void GeneratorSwift::GeneratePackage(const std::shared_ptr<Package>& p)
     CppCommon::Path file = packagePath / "Package.swift";
     WriteBegin();
 
-    std::string code = R"CODE(// swift-tools-version:5.5
+    std::string code = R"CODE(// swift-tools-version:6.4
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "_NAME_",
+    swiftLanguageModes: [.v5],
     platforms: [
         .macOS(.v10_15),
         .iOS(.v13),

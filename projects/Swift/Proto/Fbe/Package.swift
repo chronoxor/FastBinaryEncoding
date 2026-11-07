@@ -1,9 +1,10 @@
-// swift-tools-version:5.5
+// swift-tools-version:6.4
 
 import PackageDescription
 
 let package = Package(
     name: "ChronoxorFbe",
+    swiftLanguageModes: [.v5],
     platforms: [
         .macOS(.v10_15),
         .iOS(.v13),
