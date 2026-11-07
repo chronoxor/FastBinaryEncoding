@@ -1,12 +1,45 @@
+# macOS
 .DS_Store
-/.build
+
+# Swift Package Manager
+.build/
+.swiftpm/
 /Packages
+Package.pins
+# Libraries should not pin their dependencies' versions
+Package.resolved
+.index-build/
+
+# Xcode
 /*.xcodeproj
 xcuserdata/
-.swiftpm
-Package.pins
-*.pem
-/docs
-Package.resolved
+DerivedData/
+build/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.xcodeproj/project.xcworkspace/xcuserdata/
+timeline.xctimeline
+playground.xcworkspace
+
+# CocoaPods / Carthage
 .podspecs
-DerivedData
+Pods/
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Secrets
+*.pem
+
+# Documentation output
+/docs
